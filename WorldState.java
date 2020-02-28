@@ -12,6 +12,16 @@ public class WorldState
     implements Serializable
 {
 
+    public Boolean isCheater()
+    {
+        return cheater;
+    }
+
+    public void setCheater()
+    {
+        cheater = Boolean.valueOf(true);
+    }
+
     public void setHighScore(long newScore)
     {
         highScore = newScore;
@@ -33,7 +43,7 @@ public class WorldState
             "Chosen who hate their enemies will feel greater fear for what those enemies will do.", "Chosen overwhelmed by disgust will be less receptive to pleasure.", "Chosen overwhelmed by pleasure in battle will be disgusted by that fact.", "Chosen who are in pain will be more careful to avoid getting further injured.", "Chosen who are already injured will feel more pain from being attacked again.", "Chosen who are feeling ashamed will be more careful to avoid getting exposed.", "Chosen who are exposed will feel more shame from all sources.", "The protective powers of the Chosen depend on their pure hearts, so a Chosen consumed by hate is more vulnerable in all respects.", "The more pleasure one of the Chosen feels, the deeper her trauma will be engraved in her memory.", "As the Chosen are injured, they become less able to defend themselves from other abuses.", 
             "When one Chosen is exposed and humiliated, it distracts and breaks the morale of the other Chosen on the battlefield.", "Every day, each Chosen's ANGST is increased by the trauma she hasn't successfully resolved yet.", "High ANGST makes the Chosen willing to perform sinful activities, and until it's resolved, the distraction makes them take more damage from all sources.", "Every doubling of ANGST increases the damage bonus by +1, so even a few hundred ANGST is much better than none at all.", "A Chosen's susceptibility to a damage type normally ranges from 0 to 100 based on personality.  The ANGST bonus is added to this value.", "A Chosen's susceptibility to a damage type ranges from 0 to 100 based on personality.  This base susceptibility to a trauma and to its associated circumstance normally adds up to 100, but corruption increases increases them both, potentially even over 100.", "More sinful actions produce a bit more Evil Energy, but they resolve trauma at an exponentially greater rate.", "The Chosen will only begin to use sinful methods to defend themselves if they expect to reach level 3 circumstance damage otherwise.", "Some sinful actions taken during battle will also damage their users.", "As the Chosen are corrupted, they will begin to use more sinful but also more effective versions of their abilities.", 
             "Fearful Chosen are more vulnerable when their allies are surrounded or captured.", "Disgusted Chosen are always more vulnerable, but being grossed out won't generally create a major opening on its own.", "Chosen in pain are more vulnerable for awhile, but after they get surrounded, the adrenaline allows them to shake it off until the pain reaches the next level.", "Ashamed Chosen aren't any more vulnerable to being surrounded, but their efforts to retain their modesty mean that they'll remain surrounded for longer.", "Damage which currently contributes to the opening level is displayed in purple text.  Damage which does not is displayed in black text.  Damage which is only partially contributing to the opening level is displayed in orange text.", "By using \"Regenerate\", one of the Chosen can remove a fraction of her current circumstance damage.  However, nothing done in battle can remove trauma damage that has already been dealt.", "By using \"Blast\", one of the Chosen can increase evacuation and extermination progress.  If evacuation is already complete, the progress that would be added there is wasted.", "The Chosen choose their actions in battle according to which actions would seem to be most useful at the moment and how effective they are at performing those actions.", "Taunting is more effective against self-conscious Chosen, especially those who have been humiliated in the past.", "Attacking is more effective against Chosen with low self-confidence, especially those whose pride has been broken in the past.", 
-            "Sliming is more effective against more naive Chosen, especially those who have come to associate battle with sexual pleasure.", "Threatening allies is more effective against more compassionate Chosen, especially those whose consciences aren't clean.", "It isn't possible to raise a circumstance by more than one level with a single instance of damage.  This limitation does not apply to trauma.", "Each of the actions the Chosen can perform in battle is linked with one of the four vulnerabilities.  The Chosen are better at performing actions associated with their greater vulnerabilities.", "Chosen who are surrounded or captured do not contribute to extermination progress until they escape.", "When a surrounded Chosen uses a tactic that decreases the effectiveness of Grind, Caress, Pummel, or Humiliate, the damage from that source is decreased to 3/5.  When both tactics against the source are used at once, the damage becomes 2/5."
+            "Sliming is more effective against more naive Chosen, especially those who have come to associate battle with sexual pleasure.", "Threatening allies is more effective against more compassionate Chosen, especially those whose consciences aren't clean.", "It isn't possible to raise a circumstance by more than one level with a single instance of damage.  This limitation does not apply to trauma.", "Each of the actions the Chosen can perform in battle is linked with one of the four vulnerabilities.  The Chosen are better at performing actions associated with their greater vulnerabilities.", "Chosen who are surrounded or captured do not contribute to extermination progress until they escape.", "When a surrounded Chosen uses a tactic that decreases the effectiveness of Grind, Caress, Pummel, or Humiliate, the damage from that source is decreased to 3/5.  When both tactics against the source are used at once, the damage becomes 2/5.", "The main benefit of Suppressor-class upgrades is that they ignore defensive tactics.  Against Chosen who have not yet begun to use any defensive tactics, a Commander without Suppressor-class upgrades can actually more effective."
         });
     }
 
@@ -69,77 +79,175 @@ public class WorldState
             Chosen c = getCast()[i];
             long cCorruption = 0L;
             append(t, (new StringBuilder("\n")).append(c.getMainName()).append("'s Corruption: ").toString());
-            if(c.isRuthless() && c.vStart.booleanValue())
-                if(c.getMorality() > 66)
-                {
-                    cCorruption += 0xf4240L;
-                    append(t, (new StringBuilder(String.valueOf(c.condensedFormat(0xf4240L)))).append(" (Morality)").toString());
-                } else
-                if(c.getMorality() > 33)
-                {
-                    cCorruption += 0x61a80L;
-                    append(t, (new StringBuilder(String.valueOf(c.condensedFormat(0x61a80L)))).append(" (Morality)").toString());
-                } else
-                {
-                    cCorruption += 0x30d40L;
-                    append(t, (new StringBuilder(String.valueOf(c.condensedFormat(0x30d40L)))).append(" (Morality)").toString());
-                }
-            if(c.isLustful() && c.cStart.booleanValue())
+            if((!c.isVVirg() || c.isRuthless()) && c.vStart.booleanValue())
             {
-                if(cCorruption > 0L)
-                    append(t, " + ");
-                if(c.getInnocence() > 66)
-                {
-                    cCorruption += 0xf4240L;
-                    append(t, (new StringBuilder(String.valueOf(c.condensedFormat(0xf4240L)))).append(" (Innocence)").toString());
-                } else
-                if(c.getInnocence() > 33)
-                {
-                    cCorruption += 0x61a80L;
-                    append(t, (new StringBuilder(String.valueOf(c.condensedFormat(0x61a80L)))).append(" (Innocence)").toString());
-                } else
-                {
-                    cCorruption += 0x30d40L;
-                    append(t, (new StringBuilder(String.valueOf(c.condensedFormat(0x30d40L)))).append(" (Innocence)").toString());
-                }
+                long added = 0L;
+                if(c.isRuthless())
+                    if(c.getMorality() > 66)
+                    {
+                        long amount = 0xf4240L;
+                        cCorruption += amount;
+                        added += amount;
+                    } else
+                    if(c.getMorality() > 33)
+                    {
+                        long amount = 0x61a80L;
+                        cCorruption += amount;
+                        added += amount;
+                    } else
+                    {
+                        long amount = 0x30d40L;
+                        cCorruption += amount;
+                        added += amount;
+                    }
+                if(!c.isVVirg())
+                    if(c.getMorality() > 66)
+                    {
+                        long amount = 0x5e69ec0L;
+                        cCorruption += amount;
+                        added += amount;
+                    } else
+                    if(c.getMorality() > 33)
+                    {
+                        long amount = 0x3c6cc0L;
+                        cCorruption += amount;
+                        added += amount;
+                    } else
+                    {
+                        long amount = 0x1e3660L;
+                        cCorruption += amount;
+                        added += amount;
+                    }
+                append(t, (new StringBuilder(String.valueOf(c.condensedFormat(added)))).append(" (Morality)").toString());
             }
-            if(c.isMeek() && c.aStart.booleanValue())
+            if((!c.isCVirg() || c.isLustful()) && c.cStart.booleanValue())
             {
                 if(cCorruption > 0L)
                     append(t, " + ");
-                if(c.getConfidence() > 66)
-                {
-                    cCorruption += 0xf4240L;
-                    append(t, (new StringBuilder(String.valueOf(c.condensedFormat(0xf4240L)))).append(" (Confidence)").toString());
-                } else
-                if(c.getConfidence() > 33)
-                {
-                    cCorruption += 0x61a80L;
-                    append(t, (new StringBuilder(String.valueOf(c.condensedFormat(0x61a80L)))).append(" (Confidence)").toString());
-                } else
-                {
-                    cCorruption += 0x30d40L;
-                    append(t, (new StringBuilder(String.valueOf(c.condensedFormat(0x30d40L)))).append(" (Confidence)").toString());
-                }
+                long added = 0L;
+                if(c.isLustful())
+                    if(c.getInnocence() > 66)
+                    {
+                        long amount = 0xf4240L;
+                        cCorruption += amount;
+                        added += amount;
+                    } else
+                    if(c.getInnocence() > 33)
+                    {
+                        long amount = 0x61a80L;
+                        cCorruption += amount;
+                        added += amount;
+                    } else
+                    {
+                        long amount = 0x30d40L;
+                        cCorruption += amount;
+                        added += amount;
+                    }
+                if(!c.isCVirg())
+                    if(c.getInnocence() > 66)
+                    {
+                        long amount = 0x5e69ec0L;
+                        cCorruption += amount;
+                        added += amount;
+                    } else
+                    if(c.getInnocence() > 33)
+                    {
+                        long amount = 0x25c3f80L;
+                        cCorruption += amount;
+                        added += amount;
+                    } else
+                    {
+                        long amount = 0x12e1fc0L;
+                        cCorruption += amount;
+                        added += amount;
+                    }
+                append(t, (new StringBuilder(String.valueOf(c.condensedFormat(added)))).append(" (Innocence)").toString());
             }
-            if(c.isDebased() && c.mStart.booleanValue())
+            if((!c.isAVirg() || c.isMeek()) && c.aStart.booleanValue())
             {
                 if(cCorruption > 0L)
                     append(t, " + ");
-                if(c.getDignity() > 66)
-                {
-                    cCorruption += 0xf4240L;
-                    append(t, (new StringBuilder(String.valueOf(c.condensedFormat(0xf4240L)))).append(" (Dignity)").toString());
-                } else
-                if(c.getDignity() > 33)
-                {
-                    cCorruption += 0x61a80L;
-                    append(t, (new StringBuilder(String.valueOf(c.condensedFormat(0x61a80L)))).append(" (Dignity)").toString());
-                } else
-                {
-                    cCorruption += 0x30d40L;
-                    append(t, (new StringBuilder(String.valueOf(c.condensedFormat(0x30d40L)))).append(" (Dignity)").toString());
-                }
+                long added = 0L;
+                if(c.isMeek())
+                    if(c.getConfidence() > 66)
+                    {
+                        long amount = 0xf4240L;
+                        cCorruption += amount;
+                        added += amount;
+                    } else
+                    if(c.getConfidence() > 33)
+                    {
+                        long amount = 0x61a80L;
+                        cCorruption += amount;
+                        added += amount;
+                    } else
+                    {
+                        long amount = 0x30d40L;
+                        cCorruption += amount;
+                        added += amount;
+                    }
+                if(!c.isAVirg())
+                    if(c.getConfidence() > 66)
+                    {
+                        long amount = 0x5e69ec0L;
+                        cCorruption += amount;
+                        added += amount;
+                    } else
+                    if(c.getConfidence() > 33)
+                    {
+                        long amount = 0x25c3f80L;
+                        cCorruption += amount;
+                        added += amount;
+                    } else
+                    {
+                        long amount = 0x12e1fc0L;
+                        cCorruption += amount;
+                        added += amount;
+                    }
+                append(t, (new StringBuilder(String.valueOf(c.condensedFormat(added)))).append(" (Confidence)").toString());
+            }
+            if((!c.isModest() || c.isDebased()) && c.mStart.booleanValue())
+            {
+                if(cCorruption > 0L)
+                    append(t, " + ");
+                long added = 0L;
+                if(c.isDebased())
+                    if(c.getDignity() > 66)
+                    {
+                        long amount = 0xf4240L;
+                        cCorruption += amount;
+                        added += amount;
+                    } else
+                    if(c.getDignity() > 33)
+                    {
+                        long amount = 0x61a80L;
+                        cCorruption += amount;
+                        added += amount;
+                    } else
+                    {
+                        long amount = 0x30d40L;
+                        cCorruption += amount;
+                        added += amount;
+                    }
+                if(!c.isModest())
+                    if(c.getDignity() > 66)
+                    {
+                        long amount = 0x5e69ec0L;
+                        cCorruption += amount;
+                        added += amount;
+                    } else
+                    if(c.getDignity() > 33)
+                    {
+                        long amount = 0x25c3f80L;
+                        cCorruption += amount;
+                        added += amount;
+                    } else
+                    {
+                        long amount = 0x12e1fc0L;
+                        cCorruption += amount;
+                        added += amount;
+                    }
+                append(t, (new StringBuilder(String.valueOf(c.condensedFormat(added)))).append(" (Dignity)").toString());
             }
             if(cCorruption > 0L)
                 append(t, (new StringBuilder(" = ")).append(c.condensedFormat(cCorruption)).append(" pts").toString());
@@ -158,8 +266,8 @@ public class WorldState
                 {
                     if(enmityBonus > 0L)
                         append(t, " + ");
-                    append(t, (new StringBuilder(String.valueOf(first.condensedFormat(0x4c4b40L)))).append(" (").append(getCast()[i].getMainName()).append(" vs. ").append(getCast()[j].getMainName()).append(")").toString());
-                    enmityBonus += 0x4c4b40L;
+                    append(t, (new StringBuilder(String.valueOf(first.condensedFormat(0x17d7840L)))).append(" (").append(getCast()[i].getMainName()).append(" vs. ").append(getCast()[j].getMainName()).append(")").toString());
+                    enmityBonus += 0x17d7840L;
                 }
 
         }
@@ -171,7 +279,7 @@ public class WorldState
         totalScore += enmityBonus;
         append(t, (new StringBuilder("\n\nTotal:\n\n ")).append(first.fixedFormat(angstBonus)).append(" (ANGST)\n+").append(first.fixedFormat(traumaBonus)).append(" (Trauma)\n+").append(first.fixedFormat(EEBonus)).append(" (Evil Energy)\n+").append(first.fixedFormat(corruptionBonus)).append(" (Corruption)\n").toString());
         underlineAppend(t, (new StringBuilder("+")).append(first.fixedFormat(enmityBonus)).append(" (Enmity)").toString());
-        append(t, (new StringBuilder("\n ")).append(first.fixedFormat(totalScore)).append(" pts\n\nThank you for playing this development version of Corrupted Saviors!  You may continue to play against this team, but no unique content has yet been added to the gameplay beyond this point.  ").toString());
+        append(t, (new StringBuilder("\n ")).append(first.fixedFormat(totalScore)).append(" pts\n\nThank you for playing this development version of Corrupted Saviors!  You may continue to play against this team in order to explore more of the corruption content, and a new button has been added to the shop which allows you to cheat in more Evil Energy!  ").toString());
         if(totalScore > highScore)
             highScore = totalScore;
         try
@@ -261,6 +369,11 @@ public class WorldState
         return conclusion;
     }
 
+    public void applyVersatility()
+    {
+        bodyStatus[10] = Boolean.valueOf(true);
+    }
+
     public void applyMania()
     {
         bodyStatus[6] = Boolean.valueOf(true);
@@ -290,6 +403,12 @@ public class WorldState
     public void toggleAmbush()
     {
         bodyStatus[2] = Boolean.valueOf(!bodyStatus[2].booleanValue());
+    }
+
+    public void enhanceThree()
+    {
+        evilEnergy -= 2;
+        bodyStatus[9] = Boolean.valueOf(true);
     }
 
     public void enhanceTwo()
@@ -1712,13 +1831,26 @@ public class WorldState
             value++;
         if(bodyStatus[8].booleanValue())
             value += 2;
+        if(bodyStatus[9].booleanValue())
+            value += 2;
+        if(bodyStatus[10].booleanValue())
+            value += 5;
         return value;
     }
 
     public void printCommanderSummary(JTextPane t, Chosen c)
     {
+        int suppressors = 0;
+        if(bodyStatus[3].booleanValue())
+            suppressors++;
+        if(bodyStatus[4].booleanValue())
+            suppressors++;
+        if(bodyStatus[5].booleanValue())
+            suppressors++;
+        if(bodyStatus[6].booleanValue())
+            suppressors++;
         int reportedDuration = 2;
-        if(c == null)
+        if(c == null && (techs[8].isOwned().booleanValue() || techs[9].isOwned().booleanValue() || techs[10].isOwned().booleanValue() || techs[11].isOwned().booleanValue() || techs[12].isOwned().booleanValue() || techs[13].isOwned().booleanValue() || techs[14].isOwned().booleanValue() || techs[15].isOwned().booleanValue()))
         {
             if(techs[8].isOwned().booleanValue())
             {
@@ -1746,6 +1878,20 @@ public class WorldState
                             durationCost = 1;
                     }
                     append(t, "]");
+                    if(techs[20].isOwned().booleanValue())
+                    {
+                        append(t, "[");
+                        if(bodyStatus[9].booleanValue())
+                        {
+                            append(t, "X");
+                        } else
+                        {
+                            append(t, " ");
+                            if(durationCost == 0)
+                                durationCost = 2;
+                        }
+                        append(t, "]");
+                    }
                 }
                 append(t, " Duration");
                 if(durationCost > 0)
@@ -1779,39 +1925,102 @@ public class WorldState
                     append(t, "X");
                 append(t, "] Ambush (free)\n");
             }
-            if(techs[3].isOwned().booleanValue() || techs[4].isOwned().booleanValue() || techs[5].isOwned().booleanValue() || techs[6].isOwned().booleanValue())
+            if(techs[10].isOwned().booleanValue() || techs[11].isOwned().booleanValue() || techs[12].isOwned().booleanValue() || techs[13].isOwned().booleanValue())
             {
                 append(t, "Suppressor: ");
-                if(bodyStatus[3].booleanValue())
-                    append(t, "Hunger [HATE]");
+                if(suppressors == 0)
+                    append(t, "None (free)");
                 else
-                if(bodyStatus[4].booleanValue())
-                    append(t, "Lust [PLEA]");
-                else
-                if(bodyStatus[5].booleanValue())
-                    append(t, "Anger [INJU]");
-                else
-                if(bodyStatus[6].booleanValue())
-                    append(t, "Mania [EXPO]");
-                else
-                    append(t, "None");
-                append(t, " (free)");
+                if(suppressors == 1)
+                {
+                    if(bodyStatus[3].booleanValue())
+                        append(t, "Hunger [HATE]");
+                    else
+                    if(bodyStatus[4].booleanValue())
+                        append(t, "Lust [PLEA]");
+                    else
+                    if(bodyStatus[5].booleanValue())
+                        append(t, "Anger [INJU]");
+                    else
+                    if(bodyStatus[6].booleanValue())
+                        append(t, "Mania [EXPO]");
+                    if(techs[21].isOwned().booleanValue())
+                        append(t, " (Next: 5 EE)");
+                } else
+                if(suppressors == 2)
+                {
+                    String first = "";
+                    String second = "";
+                    if(bodyStatus[3].booleanValue())
+                        first = "Hunger [HATE]";
+                    if(bodyStatus[4].booleanValue())
+                    {
+                        String status = "Lust [PLEA]";
+                        if(first.length() > 0)
+                            second = status;
+                        else
+                            first = status;
+                    }
+                    if(bodyStatus[5].booleanValue())
+                    {
+                        String status = "Anger [INJU]";
+                        if(first.length() > 0)
+                            second = status;
+                        else
+                            first = status;
+                    }
+                    if(bodyStatus[6].booleanValue())
+                        second = "Mania [EXPO]";
+                    append(t, (new StringBuilder(String.valueOf(first))).append(", ").append(second).toString());
+                }
                 append(t, "\n");
             }
             append(t, "\n");
-            if(bodyStatus[3].booleanValue())
-                append(t, "Your Commander is an oversized humanoid Demon covered with gaping mouths which allow you to speak your hateful will directly to the Chosen.  It ");
-            else
-            if(bodyStatus[4].booleanValue())
-                append(t, "Your Commander is an oversized humanoid Demon covered with various tentacles which seek out the most sensitive places on captured Chosen and force pleasure upon them.  It ");
-            else
-            if(bodyStatus[5].booleanValue())
-                append(t, "Your Commander is an oversized humanoid Demon with disproportionately large muscles which can deal grievous injuries even to the supernaturally-durable bodies of the Chosen.  It ");
-            else
-            if(bodyStatus[6].booleanValue())
-                append(t, "Your Commander is an oversized humanoid Demon with various human tools embedded in its body for the purpose of exposing the Chosen.  It ");
-            else
+            if(suppressors == 0)
                 append(t, "Your Commander is a humanoid Demon whose only exceptional feature is its ability to act as a body for your incorporeal form.  It ");
+            else
+            if(suppressors == 1)
+            {
+                if(bodyStatus[3].booleanValue())
+                    append(t, "Your Commander is an oversized humanoid Demon covered with gaping mouths which allow you to speak your hateful will directly to the Chosen.  It ");
+                else
+                if(bodyStatus[4].booleanValue())
+                    append(t, "Your Commander is an oversized humanoid Demon covered with various tentacles which seek out the most sensitive places on captured Chosen and force pleasure upon them.  It ");
+                else
+                if(bodyStatus[5].booleanValue())
+                    append(t, "Your Commander is an oversized humanoid Demon with disproportionately large muscles which can deal grievous injuries even to the supernaturally-durable bodies of the Chosen.  It ");
+                else
+                if(bodyStatus[6].booleanValue())
+                    append(t, "Your Commander is an oversized humanoid Demon with various human tools embedded in its body for the purpose of exposing the Chosen.  It ");
+            } else
+            if(suppressors == 2)
+            {
+                if(bodyStatus[3].booleanValue())
+                {
+                    append(t, "Your Commander is a giant humanoid Demon whose body is covered in gaping mouths which allow you to speak your hateful will directly to the Chosen.  ");
+                    if(bodyStatus[4].booleanValue())
+                        append(t, "Their tongues function as tentacles, capable of working their way under the Chosen's clothes and stimulating their erogenous zones.  ");
+                    else
+                    if(bodyStatus[5].booleanValue())
+                        append(t, "They're filled with razor-sharp teeth for chewing on their victims, injuring and further aggravating them.  ");
+                    else
+                    if(bodyStatus[6].booleanValue())
+                        append(t, "They drip with acidic saliva, and while this substance lacks the potency to injure the Chosen themselves, it will dissolve and weaken their clothes.  ");
+                } else
+                if(bodyStatus[4].booleanValue())
+                {
+                    append(t, "Your Commander is a giant humanoid Demon covered with various tentacles which seek out the most sensitive places on captured Chosen and force pleasure upon them.  ");
+                    if(bodyStatus[5].booleanValue())
+                        append(t, "Some are small and nimble, but others are thick and incredibly strong, capable of punching through solid brick and twisting steel beams apart.  ");
+                    else
+                    if(bodyStatus[6].booleanValue())
+                        append(t, "They secrete an acidic fluid, and while this substance lacks the potency to injure the Chosen themselves, it will dissolve and weaken their clothes.  ");
+                } else
+                {
+                    append(t, "Your Commander is a giant humanoid Demon with various human tools embedded in its body.  These tools include tanks of acid, spinning saws, chains, guns, and even flamethrowers.  They have been magically reinforced to deal significant damage to both the Chosen and their clothes.  ");
+                }
+                append(t, "The Commander ");
+            }
         } else
         {
             append(t, "Your Commander ");
@@ -1831,6 +2040,9 @@ public class WorldState
             append(t, "your target and capture her");
         else
             append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" and capture ").append(c.himHer()).toString());
+        if(bodyStatus[9].booleanValue())
+            reportedDuration += 3;
+        else
         if(bodyStatus[7].booleanValue())
             reportedDuration += 2;
         else
@@ -1861,19 +2073,48 @@ public class WorldState
         if(c == null)
             append(t, (new StringBuilder(".  It is worth ")).append(getCommanderValue()).append(" Evil Energy.  You have ").append(evilEnergy).append(" Evil Energy remaining.").toString());
         else
-        if(bodyStatus[3].booleanValue())
-            append(t, ", inflicting high levels of FEAR and HATE.");
-        else
-        if(bodyStatus[4].booleanValue())
-            append(t, ", inflicting high levels of DISG and PLEA.");
-        else
-        if(bodyStatus[5].booleanValue())
-            append(t, ", inflicting high levels of PAIN and INJU.");
-        else
-        if(bodyStatus[6].booleanValue())
-            append(t, ", inflicting high levels of SHAM and EXPO.");
-        else
+        if(suppressors == 0)
+        {
             append(t, (new StringBuilder(", giving your Thralls a chance to torment ")).append(c.himHer()).append(".").toString());
+        } else
+        {
+            int place = 0;
+            String damages[] = new String[2];
+            if(suppressors == 2)
+                damages = new String[4];
+            if(bodyStatus[3].booleanValue())
+            {
+                damages[place] = "FEAR";
+                place++;
+                damages[place] = "HATE";
+                place++;
+            }
+            if(bodyStatus[4].booleanValue())
+            {
+                damages[place] = "DISG";
+                place++;
+                damages[place] = "PLEA";
+                place++;
+            }
+            if(bodyStatus[5].booleanValue())
+            {
+                damages[place] = "PAIN";
+                place++;
+                damages[place] = "INJU";
+                place++;
+            }
+            if(bodyStatus[6].booleanValue())
+            {
+                damages[place] = "SHAM";
+                place++;
+                damages[place] = "EXPO";
+                place++;
+            }
+            if(suppressors == 2)
+                append(t, (new StringBuilder(", inflicting high levels of ")).append(damages[0]).append(", ").append(damages[1]).append(", ").append(damages[2]).append(", and ").append(damages[3]).append(".").toString());
+            else
+                append(t, (new StringBuilder(", inflicting high levels of ")).append(damages[0]).append(" and ").append(damages[1]).append(".").toString());
+        }
     }
 
     public void newCommander()
@@ -1932,12 +2173,16 @@ public class WorldState
             evacuationComplete += 20;
         if(w.getTechs()[4].isOwned().booleanValue())
             evacuationComplete += 20;
+        if(w.getTechs()[16].isOwned().booleanValue())
+            evacuationComplete += 20;
         exterminationProgress = 0;
         exterminationComplete = 100;
         if(w.getTechs()[2].isOwned().booleanValue())
             exterminationComplete += 40;
         if(w.getTechs()[5].isOwned().booleanValue())
             exterminationComplete += 60;
+        if(w.getTechs()[17].isOwned().booleanValue())
+            exterminationComplete += 100;
         exterminationMultiplier = 100;
         captureDuration = 2;
         if(bodyStatus[7].booleanValue())
@@ -2146,6 +2391,26 @@ public class WorldState
         t.setCaretPosition(t.getDocument().getLength());
     }
 
+    public void inverseAppend(JTextPane t, String s)
+    {
+        StyledDocument doc = t.getStyledDocument();
+        SimpleAttributeSet keyWord = new SimpleAttributeSet();
+        StyleConstants.setFontSize(keyWord, 16);
+        StyleConstants.setForeground(keyWord, Color.WHITE);
+        StyleConstants.setFontFamily(keyWord, "DialogInput");
+        StyleConstants.setBackground(keyWord, Color.BLACK);
+        StyleConstants.setBold(keyWord, true);
+        try
+        {
+            doc.insertString(doc.getLength(), s, keyWord);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+        t.setCaretPosition(t.getDocument().getLength());
+    }
+
     public void copyInitial(WorldState w)
     {
         day = 1;
@@ -2222,18 +2487,18 @@ public class WorldState
 
         }
 
-        statSeed[0] = 75;
+        statSeed[0] = 90;
         statSeed[1] = 50;
-        statSeed[2] = 30;
-        statSeed[3] = 40;
-        statSeed[4] = 10;
-        statSeed[5] = 30;
+        statSeed[2] = 10;
+        statSeed[3] = 30;
+        statSeed[4] = 15;
+        statSeed[5] = 70;
         statSeed[6] = 85;
-        statSeed[7] = 80;
-        statSeed[8] = 45;
-        statSeed[9] = 75;
-        statSeed[10] = 60;
-        statSeed[11] = 30;
+        statSeed[7] = 65;
+        statSeed[8] = 65;
+        statSeed[9] = 10;
+        statSeed[10] = 50;
+        statSeed[11] = 70;
         for(int i = 0; i < 3; i++)
         {
             Chosen c = new Chosen();
@@ -2373,11 +2638,61 @@ public class WorldState
 
             if(!extremeLow.booleanValue() || !extremeHigh.booleanValue() || !midValue.booleanValue())
                 goodStats = Boolean.valueOf(false);
+            Boolean pureTarget = Boolean.valueOf(false);
+            Boolean corruptTarget = Boolean.valueOf(false);
+            for(int i = 0; i < 3; i++)
+                if(determinePurity(statSeed[i * 4], statSeed[1 + i * 4], statSeed[2 + i * 4], statSeed[3 + i * 4]).booleanValue())
+                    pureTarget = Boolean.valueOf(true);
+                else
+                    corruptTarget = Boolean.valueOf(true);
+
+            if(!pureTarget.booleanValue() || !corruptTarget.booleanValue())
+                goodStats = Boolean.valueOf(false);
         }
 
         for(int i = 0; i < groupScenes.length; i++)
             groupScenes[i] = Boolean.valueOf(false);
 
+    }
+
+    public Boolean determineVVirg(int morality, int innocence, int confidence, int dignity)
+    {
+        if((morality + confidence) - innocence - 20 < 0 && morality < 34)
+            return Boolean.valueOf(false);
+        else
+            return Boolean.valueOf(true);
+    }
+
+    public Boolean determineCVirg(int morality, int innocence, int confidence, int dignity)
+    {
+        if((innocence + dignity) - morality - 20 < 0 && innocence < 34)
+            return Boolean.valueOf(false);
+        else
+            return Boolean.valueOf(true);
+    }
+
+    public Boolean determineAVirg(int morality, int innocence, int confidence, int dignity)
+    {
+        if((confidence + innocence) - dignity - 20 < 0 && confidence < 34)
+            return Boolean.valueOf(false);
+        else
+            return Boolean.valueOf(true);
+    }
+
+    public Boolean determineModest(int morality, int innocence, int confidence, int dignity)
+    {
+        if((morality + dignity) - confidence - 20 < 0 && dignity < 34)
+            return Boolean.valueOf(false);
+        else
+            return Boolean.valueOf(true);
+    }
+
+    public Boolean determinePurity(int morality, int innocence, int confidence, int dignity)
+    {
+        if(determineVVirg(morality, innocence, confidence, dignity).booleanValue() && determineCVirg(morality, innocence, confidence, dignity).booleanValue() && determineAVirg(morality, innocence, confidence, dignity).booleanValue() && determineModest(morality, innocence, confidence, dignity).booleanValue())
+            return Boolean.valueOf(true);
+        else
+            return Boolean.valueOf(false);
     }
 
     public int[] getNameSeed()
@@ -2513,7 +2828,9 @@ public class WorldState
                 }
             }
 
-        if((exterminationProgress < exterminationComplete || haltEnding.booleanValue()) && exterminationProgress >= 0)
+        if((exterminationProgress < exterminationComplete || haltEnding.booleanValue()) && getTechs()[18].isOwned().booleanValue())
+            readyToEnd = Boolean.valueOf(false);
+        if((exterminationProgress < exterminationComplete || haltEnding.booleanValue() || getTechs()[18].isOwned().booleanValue() && !readyToEnd.booleanValue()) && exterminationProgress >= 0)
         {
             append(t, (new StringBuilder("Extermination: ")).append(getExterminationStatus()).append("\n\n").toString());
             if(evacuationProgress < evacuationComplete)
@@ -2546,13 +2863,30 @@ public class WorldState
                 } else
                 if(exterminationProgress >= exterminationComplete)
                 {
-                    while(c == null) 
+                    Boolean allFree = Boolean.valueOf(true);
+                    if(getCombatants()[0].isSurrounded().booleanValue() || getCombatants()[0].isCaptured().booleanValue())
+                        allFree = Boolean.valueOf(false);
+                    else
+                    if(getCombatants()[1] != null)
+                        if(getCombatants()[1].isSurrounded().booleanValue() || getCombatants()[1].isCaptured().booleanValue())
+                            allFree = Boolean.valueOf(false);
+                        else
+                        if(getCombatants()[2] != null && (getCombatants()[2].isSurrounded().booleanValue() || getCombatants()[2].isCaptured().booleanValue()))
+                            allFree = Boolean.valueOf(false);
+                    if(allFree.booleanValue())
                     {
-                        c = getCombatants()[(int)(Math.random() * 3D)];
-                        if(c != null && (c.isSurrounded().booleanValue() || c.isCaptured().booleanValue()))
-                            c = null;
+                        readyToEnd = Boolean.valueOf(true);
+                        append(t, "The reanimated Demons are fighting their last stand!  Combat will end next turn unless one of the Chosen are surrounded or captured.\n");
+                    } else
+                    {
+                        while(c == null) 
+                        {
+                            c = getCombatants()[(int)(Math.random() * 3D)];
+                            if(c != null && (c.isSurrounded().booleanValue() || c.isCaptured().booleanValue()))
+                                c = null;
+                        }
+                        append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" can't finish clearing out the Demons due to the risk of hitting the trapped ").append(trappedChosen.getMainName()).append(" with friendly fire!\n").toString());
                     }
-                    append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" can't finish clearing out the Demons due to the risk of hitting the trapped ").append(trappedChosen.getMainName()).append(" with friendly fire!\n").toString());
                     exterminationMultiplier = (exterminationMultiplier * 3) / 2;
                 } else
                 {
@@ -2630,7 +2964,7 @@ public class WorldState
         friendship[second][first] += amount;
         remaining[first][second] -= amount;
         remaining[second][first] -= amount;
-        if(remaining[first][second] == 0)
+        if(remaining[first][second] == 0 && getRelationship(first, second) == 1)
         {
             friendship[first][second]++;
             friendship[second][first]++;
@@ -2643,10 +2977,10 @@ public class WorldState
         friction[second][first] += amount;
         remaining[first][second] -= amount;
         remaining[second][first] -= amount;
-        if(remaining[first][second] == 0)
+        if(remaining[first][second] == 0 && getRelationship(first, second) == 1)
         {
-            friction[first][second]++;
-            friction[second][first]++;
+            friendship[first][second]++;
+            friendship[second][first]++;
         }
     }
 
@@ -2706,7 +3040,7 @@ public class WorldState
         totalTaunted = 0;
         nextTip = 0;
         cast = new Chosen[3];
-        techs = new Tech[16];
+        techs = new Tech[22];
         evilEnergy = 0;
         day = 1;
         totalRounds = 1;
@@ -2727,9 +3061,11 @@ public class WorldState
         captureDuration = 2;
         capturesPossible = 0;
         arrivalTimer = new int[3];
-        bodyStatus = new Boolean[9];
+        readyToEnd = Boolean.valueOf(false);
+        bodyStatus = new Boolean[11];
         tutorial = Boolean.valueOf(false);
         onTrack = Boolean.valueOf(false);
+        cheater = Boolean.valueOf(false);
     }
 
     private static final long serialVersionUID = 4L;
@@ -2777,7 +3113,9 @@ public class WorldState
     int captureDuration;
     int capturesPossible;
     int arrivalTimer[];
+    Boolean readyToEnd;
     Boolean bodyStatus[];
     Boolean tutorial;
     Boolean onTrack;
+    Boolean cheater;
 }

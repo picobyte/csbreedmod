@@ -175,6 +175,66 @@ public class Tech
                 w.getTechs()[7], w.getTechs()[9]
             });
             description = "Develops your ability to concentrate your psychic energy on a single aspect of the human mind.  Your Commander body will be correspondingly more pure and resilient.  For +2 Evil Energy per deployment, your Commander will be able to perform a second capture (provided that the battle does not end beforehand).";
+        } else
+        if(index == 16)
+        {
+            name = "Human Collaborators";
+            prereqsRequired = 2;
+            cost = 5;
+            prereqs = (new Tech[] {
+                w.getTechs()[4], w.getTechs()[11]
+            });
+            description = "Develops your ability to make psychic contact with humans outside your hivemind.  Authority figures can be recruited to your side with the promise of Demonic powers or obedient Thralls to satisfy their every sexual fantasy.  In exchange, they will sabotage evacuation efforts.  Increases evacuation requirement from 140 to 160.";
+        } else
+        if(index == 17)
+        {
+            name = "Nursery Hives";
+            prereqsRequired = 2;
+            cost = 5;
+            prereqs = (new Tech[] {
+                w.getTechs()[5], w.getTechs()[13]
+            });
+            description = "Modifies your Demons' underground lair to contain biological equivalents of incubators and life support equipment, allowing your captured humans to constantly give birth to Demons with little risk of medical complications. Increases extermination requirement from 200 to 300.";
+        } else
+        if(index == 18)
+        {
+            name = "Vengeful Reconstitution";
+            prereqsRequired = 2;
+            cost = 5;
+            prereqs = (new Tech[] {
+                w.getTechs()[7], w.getTechs()[12]
+            });
+            description = "Broadens the range of physiological traits your Demons can have, endowing some of them with amorphous forms that allow them to eventually rebuild themselves by drawing on the resentment of the defeated.  This delays the end of battle until the usual conditions (full extermination progress and no Chosen surrounded or captured) are fulfilled for two turns in a row.";
+        } else
+        if(index == 19)
+        {
+            name = "Augmented Thralls";
+            prereqsRequired = 2;
+            cost = 5;
+            prereqs = (new Tech[] {
+                w.getTechs()[8], w.getTechs()[10]
+            });
+            description = "Greatly develops your ability to influence your Thralls' state of mind.  Their senses and predatory instincts will be enhanced, making them more effective at cornering the Chosen.  The first time each Chosen's defense level increases in each battle, it will only to 2 instead of to 3.  This means that defense levels will follow the pattern \"1, 2, 4, 6...\" instead of \"1, 3, 5, 7...\"";
+        } else
+        if(index == 20)
+        {
+            name = "Intelligence";
+            prereqsRequired = 2;
+            cost = 5;
+            prereqs = (new Tech[] {
+                w.getTechs()[9], w.getTechs()[14]
+            });
+            description = "Allows you to create Commanders capable of using a tremendous portion of your psychic capacity.  This comprehensive control will make it possible to more effectively subdue captured Chosen.  For +2 Evil Energy per deployment, your Commander's capture duration will increase by 1.";
+        } else
+        if(index == 21)
+        {
+            name = "Versatility";
+            prereqsRequired = 2;
+            cost = 5;
+            prereqs = (new Tech[] {
+                w.getTechs()[6], w.getTechs()[15]
+            });
+            description = "Develops your ability to find common ground between two different aspects of the human mind and concentrate your psychic energy there in order to manifest both aspects at once.  For +5 Evil Energy per deployment, you can bypass the usual prohibition against putting a second Suppressor-class upgrade on your Commander.";
         }
     }
 
