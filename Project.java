@@ -34,20 +34,53 @@ public class Project extends JFrame
         window.setSize(new Dimension(1300, 800));
         window.setVisible(true);
         WorldState ThisState = new WorldState();
+        String path = Project.getProtectionDomain().getCodeSource().getLocation().getPath();
+        String fileName = "";
+        for(int i = path.length() - 1; i >= 0; i--)
+            if(path.charAt(i) != '/')
+                fileName = (new StringBuilder(String.valueOf(path.charAt(i)))).append(fileName).toString();
+            else
+                i = -1;
+
+        path = path.substring(0, path.length() - fileName.length() - 1);
+        try
+        {
+            path = URLDecoder.decode(path, "UTF-8");
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+        path = path.replaceAll("file:/", "");
+        path = path.replaceAll("\\u0020", "\\ ");
+        File saveLocation = new File((new StringBuilder(String.valueOf(path))).append("\\saves.sav").toString());
+        SaveData saves = null;
+        if(saveLocation.exists())
+        {
+            ReadObject robj = new ReadObject();
+            saves = robj.deserializeSaveData((new StringBuilder(String.valueOf(path))).append("\\saves.sav").toString());
+        } else
+        {
+            saves = new SaveData();
+        }
+        SaveData saveFile = saves;
+        if(saveFile.getSaves().length > 0 && !saveFile.getSaves()[0].BACKGROUND.equals(textPane.getBackground()))
+            ThisState.toggleColors(textPane);
         IntroOne(textPane, controlPanel, window, ThisState);
     }
 
-    public void IntroOne(final JTextPane t, final JPanel p, final JFrame f, final WorldState w)
+    public static void IntroOne(final JTextPane t, final JPanel p, final JFrame f, final WorldState w)
     {
-        w.append(t, "Corrupted Saviors, Release 3: \"Defilement\"\n\nThis game contains content of an adult nature and should not be played by the underaged or by those unable to distinguish fantasy from reality.\n\n---\n\nJapan, mid-21st century.  The psychic energies of humanity have finally begun to coalesce into physical form.  The resulting beings are known as Demons.  Born from the base desires suppressed deep within the human mind, these creatures spread across the planet, leaving chaos and depravity in their wake.\n\nBut Demons do not represent the entirety of the human condition.  The hopes and determination of humanity have also risen up, gathering in the bodies of a few Chosen warriors in order to grant them the power to fight the Demons.  Although each of them was once an ordinary person, their new abilities place them at the center of the struggle for the soul of humanity.\n\nYou are a Demon Lord, the highest form of Demon, with your own mind and will, focused on the corruption of all that is good in the world.  The Chosen are the keystone of humanity's resistance to your goal, but to simply kill them would be meaningless.  Instead, shatter their notions of right and wrong, showing them the true darkness that hides within!");
+        if(!t.getBackground().equals(w.BACKGROUND))
+            w.toggleColors(t);
+        w.append(t, "Corrupted Saviors, Release 4: \"Customization\"\n\nThis game contains content of an adult nature and should not be played by the underaged or by those unable to distinguish fantasy from reality.\n\n---\n\nJapan, mid-21st century.  The psychic energies of humanity have finally begun to coalesce into physical form.  The resulting beings are known as Demons.  Born from the base desires suppressed deep within the human mind, these creatures spread across the planet, leaving chaos and depravity in their wake.\n\nBut Demons do not represent the entirety of the human condition.  The hopes and determination of humanity have also risen up, gathering in the bodies of a few Chosen warriors in order to grant them the power to fight the Demons.  Although each of them was once an ordinary person, their new abilities place them at the center of the struggle for the soul of humanity.\n\nYou are a Demon Lord, the highest form of Demon, with your own mind and will, focused on the corruption of all that is good in the world.  The Chosen are the keystone of humanity's resistance to your goal, but to simply kill them would be meaningless.  Instead, shatter their notions of right and wrong, showing them the true darkness that hides within!");
         if(w.getCast()[0] == null)
         {
             Chosen newChosen = new Chosen();
+            newChosen.setNumber(0);
             w.initialize();
-            newChosen.setName(w, w.getNameSeed());
             newChosen.generate(w);
             w.addChosen(newChosen);
-            newChosen.setNumber(0);
         }
         p.removeAll();
         JButton NewGame = new JButton("New Game");
@@ -55,10 +88,9 @@ public class Project extends JFrame
 
             public void actionPerformed(ActionEvent e)
             {
-                IntroTwo(t, p, f, w);
+                Project.IntroTwo(t, p, f, w);
             }
 
-            final Project this$0;
             private final JTextPane val$t;
             private final JPanel val$p;
             private final JFrame val$f;
@@ -66,7 +98,6 @@ public class Project extends JFrame
 
             
             {
-                this$0 = Project.this;
                 t = jtextpane;
                 p = jpanel;
                 f = jframe;
@@ -80,10 +111,9 @@ public class Project extends JFrame
 
             public void actionPerformed(ActionEvent e)
             {
-                Data(t, p, f, w, "load", 0, Boolean.valueOf(false));
+                Project.Data(t, p, f, w, "load", 0, Boolean.valueOf(false));
             }
 
-            final Project this$0;
             private final JTextPane val$t;
             private final JPanel val$p;
             private final JFrame val$f;
@@ -91,7 +121,6 @@ public class Project extends JFrame
 
             
             {
-                this$0 = Project.this;
                 t = jtextpane;
                 p = jpanel;
                 f = jframe;
@@ -100,6 +129,29 @@ public class Project extends JFrame
             }
         });
         p.add(LoadGame);
+        JButton Import = new JButton("Import");
+        Import.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                Project.Data(t, p, f, w, "import", 0, Boolean.valueOf(false));
+            }
+
+            private final JTextPane val$t;
+            private final JPanel val$p;
+            private final JFrame val$f;
+            private final WorldState val$w;
+
+            
+            {
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                w = worldstate;
+                super();
+            }
+        });
+        p.add(Import);
         JButton Tutorial = new JButton("Tutorial");
         Tutorial.addActionListener(new ActionListener() {
 
@@ -107,18 +159,20 @@ public class Project extends JFrame
             {
                 WorldState x = new WorldState();
                 x.tutorialInit();
-                BeginBattle(t, p, f, x, x.getCast()[0]);
+                if(w.FOREGROUND == Color.WHITE)
+                    x.toggleColors(t);
+                Project.BeginBattle(t, p, f, x, x.getCast()[0]);
                 x.grayAppend(t, "\n\n(Welcome to the tutorial!  This feature is intended to demonstrate some useful techniques for corrupting the Chosen.  It uses a mid-game save file with several upgrades already purchased.  When playing from the start, it makes more sense to use the first several days experimenting to find the strengths and weaknesses of the Chosen and accumulating Evil Energy before aiming to break a vulnerability.  Read the guide.txt file included with the game for a more basic overview of the mechanics.\n\nFor now, let's start by using Examine to figure out how best to deal with Miracle.)");
             }
 
-            final Project this$0;
+            private final WorldState val$w;
             private final JTextPane val$t;
             private final JPanel val$p;
             private final JFrame val$f;
 
             
             {
-                this$0 = Project.this;
+                w = worldstate;
                 t = jtextpane;
                 p = jpanel;
                 f = jframe;
@@ -126,6 +180,58 @@ public class Project extends JFrame
             }
         });
         p.add(Tutorial);
+        JButton Options = new JButton("Options");
+        Options.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                Project.OptionsMenu(t, p, f, w);
+            }
+
+            private final JTextPane val$t;
+            private final JPanel val$p;
+            private final JFrame val$f;
+            private final WorldState val$w;
+
+            
+            {
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                w = worldstate;
+                super();
+            }
+        });
+        p.add(Options);
+        JButton Customize = new JButton("Customize");
+        Customize.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                p.removeAll();
+                WorldState x = new WorldState();
+                if(w.FOREGROUND == Color.WHITE)
+                    x.toggleColors(t);
+                x.setCommentaryRead(w.getCommentaryRead());
+                x.setCommentaryWrite(w.getCommentaryWrite());
+                x.freshCustom(t, p, f);
+            }
+
+            private final JPanel val$p;
+            private final WorldState val$w;
+            private final JTextPane val$t;
+            private final JFrame val$f;
+
+            
+            {
+                p = jpanel;
+                w = worldstate;
+                t = jtextpane;
+                f = jframe;
+                super();
+            }
+        });
+        p.add(Customize);
         JButton About = new JButton("About");
         About.addActionListener(new ActionListener() {
 
@@ -134,13 +240,11 @@ public class Project extends JFrame
                 w.append(t, "\n\n---\n\nCopyright 2019-2020 by CSdev. Corrupted Saviors is licensed under the Creative Commons Attribution-ShareAlike 4.0 International License. To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/4.0/.\n\nIf you like this game, please share it and discuss it so that it can be further enjoyed and improved!  There is a good chance that the developer reads whatever forum you found it on.  Direct feedback can also be sent to corruptedsaviors@gmail.com");
             }
 
-            final Project this$0;
             private final WorldState val$w;
             private final JTextPane val$t;
 
             
             {
-                this$0 = Project.this;
                 w = worldstate;
                 t = jtextpane;
                 super();
@@ -151,7 +255,122 @@ public class Project extends JFrame
         p.repaint();
     }
 
-    public void IntroTwo(JTextPane t, JPanel p, JFrame f, WorldState w)
+    public static void OptionsMenu(final JTextPane t, final JPanel p, final JFrame f, final WorldState w)
+    {
+        p.removeAll();
+        t.setText("");
+        w.append(t, "Current background: ");
+        if(t.getBackground().equals(Color.WHITE))
+            w.append(t, "white");
+        else
+            w.append(t, "black");
+        w.append(t, "\n\nCommentary mode: ");
+        if(w.getCommentaryRead().booleanValue())
+        {
+            if(w.getCommentaryWrite().booleanValue())
+                w.append(t, "Read/Write");
+            else
+                w.append(t, "Read");
+        } else
+        if(w.getCommentaryWrite().booleanValue())
+            w.append(t, "Write");
+        else
+            w.append(t, "None");
+        JButton Invert = new JButton("Change Background");
+        Invert.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                w.toggleColors(t);
+                Project.OptionsMenu(t, p, f, w);
+            }
+
+            private final WorldState val$w;
+            private final JTextPane val$t;
+            private final JPanel val$p;
+            private final JFrame val$f;
+
+            
+            {
+                w = worldstate;
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                super();
+            }
+        });
+        p.add(Invert);
+        JButton Commentary = new JButton("Change Commentary Mode");
+        Commentary.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                if(w.getCommentaryRead().booleanValue())
+                {
+                    if(w.getCommentaryWrite().booleanValue())
+                    {
+                        w.setCommentaryWrite(Boolean.valueOf(false));
+                    } else
+                    {
+                        w.setCommentaryRead(Boolean.valueOf(false));
+                        w.setCommentaryWrite(Boolean.valueOf(true));
+                    }
+                } else
+                if(w.getCommentaryWrite().booleanValue())
+                {
+                    w.setCommentaryWrite(Boolean.valueOf(false));
+                } else
+                {
+                    w.setCommentaryRead(Boolean.valueOf(true));
+                    w.setCommentaryWrite(Boolean.valueOf(true));
+                }
+                Project.OptionsMenu(t, p, f, w);
+            }
+
+            private final WorldState val$w;
+            private final JTextPane val$t;
+            private final JPanel val$p;
+            private final JFrame val$f;
+
+            
+            {
+                w = worldstate;
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                super();
+            }
+        });
+        p.add(Commentary);
+        JButton Back = new JButton("Back");
+        Back.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                t.setText("");
+                Project.IntroOne(t, p, f, w);
+            }
+
+            private final JTextPane val$t;
+            private final JPanel val$p;
+            private final JFrame val$f;
+            private final WorldState val$w;
+
+            
+            {
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                w = worldstate;
+                super();
+            }
+        });
+        p.add(Back);
+        p.validate();
+        p.repaint();
+    }
+
+    public static void IntroTwo(JTextPane t, JPanel p, JFrame f, WorldState w)
     {
         w.append(t, "\n\n---\n\nThe peaceful everyday routine of the capital city is instantly shattered as a horde of Demons and their dominated human Thralls spills out onto the street!  Screams and alarms fill the air, chaos descending on the scene in an instant.  Already, innocents are being mobbed and dragged away towards a terrible fate.\n\nJust then, a sound like a thunderclap cuts through the panic, and a voice calls out a challenge to the Demons below!\n\n");
         w.getCast()[0].say(t, (new StringBuilder("\"")).append(w.getCast()[0].announcement()).append("\"\n\n").toString());
@@ -161,7 +380,7 @@ public class Project extends JFrame
         PickTarget(t, p, f, w);
     }
 
-    public void PickTarget(final JTextPane t, final JPanel p, final JFrame f, final WorldState w)
+    public static void PickTarget(final JTextPane t, final JPanel p, final JFrame f, final WorldState w)
     {
         Color YELLOWISH = new Color(255, 225, 125);
         Color PURPLISH = new Color(225, 125, 255);
@@ -170,126 +389,6 @@ public class Project extends JFrame
         int sodomized = 0;
         int broadcasted = 0;
         p.removeAll();
-        for(int i = 0; i < w.getCombatants().length; i++)
-            if(w.getCombatants()[i] != null)
-                if(w.getCombatants()[i].isSurrounded().booleanValue())
-                {
-                    w.orangeAppend(t, (new StringBuilder("\n")).append(w.getCombatants()[i].getMainName()).append(": ").toString());
-                    if(w.getCombatants()[i].isInseminated().booleanValue())
-                    {
-                        w.orangeAppend(t, "Inseminated");
-                        inseminated++;
-                    } else
-                    if(w.getCombatants()[i].isOrgasming().booleanValue())
-                    {
-                        w.orangeAppend(t, "Orgasming");
-                        orgasming++;
-                    } else
-                    if(w.getCombatants()[i].isSodomized().booleanValue())
-                    {
-                        w.orangeAppend(t, "Sodomized");
-                        sodomized++;
-                    } else
-                    if(w.getCombatants()[i].isBroadcasted().booleanValue())
-                    {
-                        w.orangeAppend(t, "Broadcasted");
-                        broadcasted++;
-                    } else
-                    {
-                        w.orangeAppend(t, "Surrounded");
-                    }
-                    if(w.getCombatants()[i].getSurroundDuration() > 1)
-                        w.orangeAppend(t, (new StringBuilder(" for ")).append(w.getCombatants()[i].getSurroundDuration()).append(" more turns").toString());
-                    else
-                        w.orangeAppend(t, " until next turn");
-                } else
-                if(w.getCombatants()[i].isCaptured().booleanValue())
-                {
-                    w.orangeAppend(t, (new StringBuilder("\n")).append(w.getCombatants()[i].getMainName()).append(": ").toString());
-                    if(w.getCombatants()[i].getCaptureProgression() < w.getCaptureDuration())
-                        w.orangeAppend(t, (new StringBuilder("Captured for ")).append((w.getCaptureDuration() - w.getCombatants()[i].getCaptureProgression()) + 1).append(" more turns").toString());
-                    else
-                        w.orangeAppend(t, "Captured until next turn");
-                } else
-                if(w.getCombatants()[i].surroundPossible(w).booleanValue())
-                    w.purpleAppend(t, (new StringBuilder("\n")).append(w.getCombatants()[i].getMainName()).append(": Opening Level ").append(w.getCombatants()[i].getFEAROpening(w) + w.getCombatants()[i].getPAINOpening() + w.getCombatants()[i].getDISGOpening() + w.getCombatants()[i].getSHAMOpening(w)).append(" vs. Defense Level ").append(w.getCombatants()[i].getDefenseLevel()).toString());
-                else
-                if(w.getCombatants()[i].getDefenseLevel() > 9000)
-                    w.append(t, (new StringBuilder("\n")).append(w.getCombatants()[i].getMainName()).append(": Flying Above Battlefield").toString());
-                else
-                    w.append(t, (new StringBuilder("\n")).append(w.getCombatants()[i].getMainName()).append(": Opening Level ").append(w.getCombatants()[i].getFEAROpening(w) + w.getCombatants()[i].getPAINOpening() + w.getCombatants()[i].getDISGOpening() + w.getCombatants()[i].getSHAMOpening(w)).append(" vs. Defense Level ").append(w.getCombatants()[i].getDefenseLevel()).toString());
-
-        if(w.getRallyBonus() > 0)
-            w.append(t, (new StringBuilder("\n\nMorale bonus: incoming trauma decreased by ")).append(w.getRallyBonus() / 6).append("%").toString());
-        if(w.getDistractBonus() > 0)
-            w.append(t, (new StringBuilder("\n\nThralls distracted: damage to surrounded Chosen decreased by ")).append(w.getDistractBonus() / 3).append("%").toString());
-        if(w.getCombatants()[1] == null)
-        {
-            if(w.getCast()[1] != null)
-                w.append(t, (new StringBuilder("\n\n")).append(w.getCombatants()[0].getMainName()).append(" is fighting alone!").toString());
-            PickAction(t, p, f, w, w.getCombatants()[0]);
-        } else
-        {
-            p.removeAll();
-            w.chatter(t);
-            w.append(t, "\n\nWho will you target?");
-            for(int i = 0; i < 3; i++)
-                if(w.getCombatants()[i] != null)
-                {
-                    final int thisChosen = i;
-                    JButton Target = new JButton(w.getCombatants()[i].getMainName());
-                    Target.addActionListener(new ActionListener() {
-
-                        public void actionPerformed(ActionEvent e)
-                        {
-                            w.append(t, "\n\n---");
-                            PickAction(t, p, f, w, w.getCombatants()[thisChosen]);
-                        }
-
-                        final Project this$0;
-                        private final WorldState val$w;
-                        private final JTextPane val$t;
-                        private final JPanel val$p;
-                        private final JFrame val$f;
-                        private final int val$thisChosen;
-
-            
-            {
-                this$0 = Project.this;
-                w = worldstate;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                thisChosen = i;
-                super();
-            }
-                    });
-                    if((w.getCombatants()[i].getCurrentHATE() >= 10000L || w.getCombatants()[i].getCurrentPLEA() >= 10000L || w.getCombatants()[i].getCurrentINJU() >= 10000L || w.getCombatants()[i].getCurrentEXPO() >= 10000L) && w.getCombatants()[i].isSurrounded().booleanValue() && !w.getCombatants()[i].isDefiled().booleanValue())
-                        if(w.getCombatants()[i].getCurrentHATE() >= 10000L && inseminated > 0 || w.getCombatants()[i].getCurrentPLEA() >= 10000L && orgasming > 0 || w.getCombatants()[i].getCurrentINJU() >= 10000L && sodomized > 0 || w.getCombatants()[i].getCurrentEXPO() >= 10000L && broadcasted > 0)
-                            Target.setBackground(PURPLISH);
-                        else
-                            Target.setBackground(YELLOWISH);
-                    p.add(Target);
-                }
-
-            p.validate();
-            p.repaint();
-        }
-    }
-
-    public void PickAction(final JTextPane t, final JPanel p, final JFrame f, final WorldState w, final Chosen c)
-    {
-        Color YELLOWISH = new Color(255, 225, 125);
-        Color PURPLISH = new Color(225, 125, 255);
-        int inseminated = 0;
-        int orgasming = 0;
-        int sodomized = 0;
-        int broadcasted = 0;
-        p.removeAll();
-        w.append(t, "\n\n");
-        c.printStatus(t, w);
-        if(!c.isCaptured().booleanValue() && !c.isDefiled().booleanValue())
-            w.append(t, "\n\nChoose your action.");
         final Chosen initiative[] = new Chosen[3];
         if(w.getCombatants()[2] != null)
         {
@@ -348,6 +447,259 @@ public class Project extends JFrame
         {
             initiative[0] = w.getCombatants()[0];
         }
+        for(int i = 0; i < w.getCombatants().length; i++)
+            if(w.getCombatants()[i] != null)
+                if(w.getCombatants()[i].isSurrounded().booleanValue())
+                {
+                    w.orangeAppend(t, (new StringBuilder("\n")).append(w.getCombatants()[i].getMainName()).append(": ").toString());
+                    if(w.getCombatants()[i].isInseminated().booleanValue())
+                    {
+                        w.orangeAppend(t, "Inseminated");
+                        inseminated++;
+                    } else
+                    if(w.getCombatants()[i].isOrgasming().booleanValue())
+                    {
+                        w.orangeAppend(t, "Orgasming");
+                        orgasming++;
+                    } else
+                    if(w.getCombatants()[i].isSodomized().booleanValue())
+                    {
+                        w.orangeAppend(t, "Sodomized");
+                        sodomized++;
+                    } else
+                    if(w.getCombatants()[i].isBroadcasted().booleanValue())
+                    {
+                        w.orangeAppend(t, "Broadcasted");
+                        broadcasted++;
+                    } else
+                    {
+                        w.orangeAppend(t, "Surrounded");
+                    }
+                    if(w.getCombatants()[i].getSurroundDuration() > 1)
+                        w.orangeAppend(t, (new StringBuilder(" for ")).append(w.getCombatants()[i].getSurroundDuration()).append(" more turns").toString());
+                    else
+                        w.orangeAppend(t, " until next turn");
+                } else
+                if(w.getCombatants()[i].isCaptured().booleanValue())
+                {
+                    w.orangeAppend(t, (new StringBuilder("\n")).append(w.getCombatants()[i].getMainName()).append(": ").toString());
+                    if(w.getCombatants()[i].getCaptureProgression() < w.getCaptureDuration())
+                        w.orangeAppend(t, (new StringBuilder("Captured for ")).append((w.getCaptureDuration() - w.getCombatants()[i].getCaptureProgression()) + 1).append(" more turns").toString());
+                    else
+                        w.orangeAppend(t, "Captured until next turn");
+                } else
+                if(w.getCombatants()[i].surroundPossible(w).booleanValue())
+                    w.purpleAppend(t, (new StringBuilder("\n")).append(w.getCombatants()[i].getMainName()).append(": Opening Level ").append(w.getCombatants()[i].getFEAROpening(w) + w.getCombatants()[i].getPAINOpening() + w.getCombatants()[i].getDISGOpening() + w.getCombatants()[i].getSHAMOpening(w)).append(" vs. Defense Level ").append(w.getCombatants()[i].getDefenseLevel()).toString());
+                else
+                if(w.getCombatants()[i].getDefenseLevel() > 9000)
+                    w.append(t, (new StringBuilder("\n")).append(w.getCombatants()[i].getMainName()).append(": Flying Above Battlefield").toString());
+                else
+                    w.append(t, (new StringBuilder("\n")).append(w.getCombatants()[i].getMainName()).append(": Opening Level ").append(w.getCombatants()[i].getFEAROpening(w) + w.getCombatants()[i].getPAINOpening() + w.getCombatants()[i].getDISGOpening() + w.getCombatants()[i].getSHAMOpening(w)).append(" vs. Defense Level ").append(w.getCombatants()[i].getDefenseLevel()).toString());
+
+        if(w.getRallyBonus() > 0)
+            w.append(t, (new StringBuilder("\n\nMorale bonus: incoming trauma decreased by ")).append(w.getRallyBonus() / 6).append("%").toString());
+        if(w.getDistractBonus() > 0)
+            w.append(t, (new StringBuilder("\n\nThralls distracted: damage to surrounded Chosen decreased by ")).append(w.getDistractBonus() / 3).append("%").toString());
+        if(w.getCombatants()[1] == null)
+        {
+            if(w.getCast()[1] != null)
+                w.append(t, (new StringBuilder("\n\n")).append(w.getCombatants()[0].getMainName()).append(" is fighting alone!").toString());
+            PickAction(t, p, f, w, w.getCombatants()[0], initiative);
+        } else
+        {
+            p.removeAll();
+            w.chatter(t);
+            w.append(t, "\n\nWho will you target?");
+            for(int i = 0; i < 3; i++)
+                if(w.getCombatants()[i] != null)
+                {
+                    final int thisChosen = i;
+                    JButton Target = new JButton(w.getCombatants()[i].getMainName());
+                    Target.addActionListener(new ActionListener() {
+
+                        public void actionPerformed(ActionEvent e)
+                        {
+                            w.append(t, "\n\n---");
+                            Project.PickAction(t, p, f, w, w.getCombatants()[thisChosen], initiative);
+                        }
+
+                        private final WorldState val$w;
+                        private final JTextPane val$t;
+                        private final JPanel val$p;
+                        private final JFrame val$f;
+                        private final int val$thisChosen;
+                        private final Chosen val$initiative[];
+
+            
+            {
+                w = worldstate;
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                thisChosen = i;
+                initiative = achosen;
+                super();
+            }
+                    });
+                    if((w.getCombatants()[i].getCurrentHATE() >= 10000L || w.getCombatants()[i].getCurrentPLEA() >= 10000L || w.getCombatants()[i].getCurrentINJU() >= 10000L || w.getCombatants()[i].getCurrentEXPO() >= 10000L) && w.getCombatants()[i].isSurrounded().booleanValue() && !w.getCombatants()[i].isDefiled().booleanValue())
+                        if(w.getCombatants()[i].getCurrentHATE() >= 10000L && inseminated > 0 || w.getCombatants()[i].getCurrentPLEA() >= 10000L && orgasming > 0 || w.getCombatants()[i].getCurrentINJU() >= 10000L && sodomized > 0 || w.getCombatants()[i].getCurrentEXPO() >= 10000L && broadcasted > 0)
+                            Target.setBackground(PURPLISH);
+                        else
+                            Target.setBackground(YELLOWISH);
+                    p.add(Target);
+                }
+
+            JButton Pass = new JButton("Do Nothing");
+            Pass.addActionListener(new ActionListener() {
+
+                public void actionPerformed(ActionEvent e)
+                {
+                    Project.advanceAction(p, w, 0);
+                    Project.EnemyTurn(t, p, f, w, initiative, 0);
+                }
+
+                private final JPanel val$p;
+                private final WorldState val$w;
+                private final JTextPane val$t;
+                private final JFrame val$f;
+                private final Chosen val$initiative[];
+
+            
+            {
+                p = jpanel;
+                w = worldstate;
+                t = jtextpane;
+                f = jframe;
+                initiative = achosen;
+                super();
+            }
+            });
+            Pass.setForeground(Color.GRAY);
+            p.add(Pass);
+            if(w.writePossible().booleanValue())
+                addWriteButton(p, w);
+            p.validate();
+            p.repaint();
+        }
+        w.readCommentary(t);
+    }
+
+    public static void advanceAction(JPanel p, WorldState w, int action)
+    {
+        Boolean actionMatches = Boolean.valueOf(true);
+        if(w.getActions().length > w.getCurrentAction() && w.getActions()[w.getCurrentAction()] != action)
+        {
+            actionMatches = Boolean.valueOf(false);
+            w.truncateCommentary(w.getCurrentAction());
+        }
+        if(w.writePossible().booleanValue())
+            if(w.getCurrentComment().length() > 0)
+                w.writeCommentary(w.getCurrentComment());
+            else
+            if(w.getCommentary().length <= w.getCurrentAction() || !actionMatches.booleanValue())
+            {
+                String generated = "";
+                if(action == 0)
+                {
+                    generated = "Do nothing.";
+                } else
+                {
+                    int target = (action - 1) / 14;
+                    int type = (action - 1) % 14 + 1;
+                    String targetedChosen = w.getCast()[target].getMainName();
+                    if(type == 1)
+                        generated = "Surround ";
+                    else
+                    if(type == 2)
+                        generated = "Capture ";
+                    else
+                    if(type == 3)
+                        generated = "Threaten ";
+                    else
+                    if(type == 4)
+                        generated = "Slime ";
+                    else
+                    if(type == 5)
+                        generated = "Attack ";
+                    else
+                    if(type == 6)
+                        generated = "Taunt ";
+                    else
+                    if(type == 7)
+                        generated = "Grind against ";
+                    else
+                    if(type == 8)
+                        generated = "Caress ";
+                    else
+                    if(type == 9)
+                        generated = "Pummel ";
+                    else
+                    if(type == 10)
+                        generated = "Humiliate ";
+                    else
+                    if(type == 11)
+                        generated = "Inseminate ";
+                    else
+                    if(type == 12)
+                        generated = "Force Orgasm on ";
+                    else
+                    if(type == 13)
+                        generated = "Sodomize ";
+                    else
+                    if(type == 14)
+                        generated = "Broadcast ";
+                    generated = (new StringBuilder(String.valueOf(generated))).append(targetedChosen).append(".").toString();
+                }
+                w.writeCommentary(generated);
+            }
+        w.nextAction(action);
+    }
+
+    public static void addWriteButton(JPanel p, final WorldState w)
+    {
+        JButton Comment = new JButton("Comment");
+        Comment.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                String prompt = "Enter your comment here.  Leave blank to ";
+                if(w.getCurrentComment().length() > 0)
+                    prompt = (new StringBuilder(String.valueOf(prompt))).append("keep the comment you already wrote.").toString();
+                else
+                if(w.getCommentary().length > w.getCurrentAction())
+                    prompt = (new StringBuilder(String.valueOf(prompt))).append("keep the previous playthrough's comment.").toString();
+                else
+                    prompt = (new StringBuilder(String.valueOf(prompt))).append("generate a default comment describing your action.").toString();
+                String input = JOptionPane.showInputDialog(prompt);
+                if(input != null && input.length() > 0)
+                    w.setCurrentComment(input);
+            }
+
+            private final WorldState val$w;
+
+            
+            {
+                w = worldstate;
+                super();
+            }
+        });
+        Comment.setForeground(Color.GRAY);
+        p.add(Comment);
+    }
+
+    public static void PickAction(final JTextPane t, final JPanel p, final JFrame f, final WorldState w, final Chosen c, final Chosen initiative[])
+    {
+        Color YELLOWISH = new Color(255, 225, 125);
+        Color PURPLISH = new Color(225, 125, 255);
+        int inseminated = 0;
+        int orgasming = 0;
+        int sodomized = 0;
+        int broadcasted = 0;
+        p.removeAll();
+        w.append(t, "\n\n");
+        c.printStatus(t, w);
+        if(!c.isCaptured().booleanValue() && !c.isDefiled().booleanValue())
+            w.append(t, "\n\nChoose your action.");
         for(int i = 0; i < 3; i++)
             if(w.getCombatants()[i] != null)
                 if(w.getCombatants()[i].isInseminated().booleanValue())
@@ -370,7 +722,6 @@ public class Project extends JFrame
                 c.Examine(t, p, f, w);
             }
 
-            final Project this$0;
             private final Chosen val$c;
             private final JTextPane val$t;
             private final JPanel val$p;
@@ -379,7 +730,6 @@ public class Project extends JFrame
 
             
             {
-                this$0 = Project.this;
                 c = chosen;
                 t = jtextpane;
                 p = jpanel;
@@ -417,25 +767,24 @@ public class Project extends JFrame
                     public void actionPerformed(ActionEvent e)
                     {
                         c.beginGrind();
-                        EnemyTurn(t, p, f, w, initiative, 0);
+                        Project.advanceAction(p, w, c.getNumber() * 14 + 7);
+                        Project.EnemyTurn(t, p, f, w, initiative, 0);
                     }
 
-                    final Project this$0;
                     private final Chosen val$c;
-                    private final JTextPane val$t;
                     private final JPanel val$p;
-                    private final JFrame val$f;
                     private final WorldState val$w;
+                    private final JTextPane val$t;
+                    private final JFrame val$f;
                     private final Chosen val$initiative[];
 
             
             {
-                this$0 = Project.this;
                 c = chosen;
-                t = jtextpane;
                 p = jpanel;
-                f = jframe;
                 w = worldstate;
+                t = jtextpane;
+                f = jframe;
                 initiative = achosen;
                 super();
             }
@@ -450,25 +799,24 @@ public class Project extends JFrame
                     public void actionPerformed(ActionEvent e)
                     {
                         c.beginCaress();
-                        EnemyTurn(t, p, f, w, initiative, 0);
+                        Project.advanceAction(p, w, c.getNumber() * 14 + 8);
+                        Project.EnemyTurn(t, p, f, w, initiative, 0);
                     }
 
-                    final Project this$0;
                     private final Chosen val$c;
-                    private final JTextPane val$t;
                     private final JPanel val$p;
-                    private final JFrame val$f;
                     private final WorldState val$w;
+                    private final JTextPane val$t;
+                    private final JFrame val$f;
                     private final Chosen val$initiative[];
 
             
             {
-                this$0 = Project.this;
                 c = chosen;
-                t = jtextpane;
                 p = jpanel;
-                f = jframe;
                 w = worldstate;
+                t = jtextpane;
+                f = jframe;
                 initiative = achosen;
                 super();
             }
@@ -483,25 +831,24 @@ public class Project extends JFrame
                     public void actionPerformed(ActionEvent e)
                     {
                         c.beginPummel();
-                        EnemyTurn(t, p, f, w, initiative, 0);
+                        Project.advanceAction(p, w, c.getNumber() * 14 + 9);
+                        Project.EnemyTurn(t, p, f, w, initiative, 0);
                     }
 
-                    final Project this$0;
                     private final Chosen val$c;
-                    private final JTextPane val$t;
                     private final JPanel val$p;
-                    private final JFrame val$f;
                     private final WorldState val$w;
+                    private final JTextPane val$t;
+                    private final JFrame val$f;
                     private final Chosen val$initiative[];
 
             
             {
-                this$0 = Project.this;
                 c = chosen;
-                t = jtextpane;
                 p = jpanel;
-                f = jframe;
                 w = worldstate;
+                t = jtextpane;
+                f = jframe;
                 initiative = achosen;
                 super();
             }
@@ -516,25 +863,24 @@ public class Project extends JFrame
                     public void actionPerformed(ActionEvent e)
                     {
                         c.beginHumiliate();
-                        EnemyTurn(t, p, f, w, initiative, 0);
+                        Project.advanceAction(p, w, c.getNumber() * 14 + 10);
+                        Project.EnemyTurn(t, p, f, w, initiative, 0);
                     }
 
-                    final Project this$0;
                     private final Chosen val$c;
-                    private final JTextPane val$t;
                     private final JPanel val$p;
-                    private final JFrame val$f;
                     private final WorldState val$w;
+                    private final JTextPane val$t;
+                    private final JFrame val$f;
                     private final Chosen val$initiative[];
 
             
             {
-                this$0 = Project.this;
                 c = chosen;
-                t = jtextpane;
                 p = jpanel;
-                f = jframe;
                 w = worldstate;
+                t = jtextpane;
+                f = jframe;
                 initiative = achosen;
                 super();
             }
@@ -550,25 +896,24 @@ public class Project extends JFrame
                     public void actionPerformed(ActionEvent e)
                     {
                         c.beginInseminate();
-                        EnemyTurn(t, p, f, w, initiative, 0);
+                        Project.advanceAction(p, w, c.getNumber() * 14 + 11);
+                        Project.EnemyTurn(t, p, f, w, initiative, 0);
                     }
 
-                    final Project this$0;
                     private final Chosen val$c;
-                    private final JTextPane val$t;
                     private final JPanel val$p;
-                    private final JFrame val$f;
                     private final WorldState val$w;
+                    private final JTextPane val$t;
+                    private final JFrame val$f;
                     private final Chosen val$initiative[];
 
             
             {
-                this$0 = Project.this;
                 c = chosen;
-                t = jtextpane;
                 p = jpanel;
-                f = jframe;
                 w = worldstate;
+                t = jtextpane;
+                f = jframe;
                 initiative = achosen;
                 super();
             }
@@ -588,25 +933,24 @@ public class Project extends JFrame
                     public void actionPerformed(ActionEvent e)
                     {
                         c.beginOrgasm();
-                        EnemyTurn(t, p, f, w, initiative, 0);
+                        Project.advanceAction(p, w, c.getNumber() * 14 + 12);
+                        Project.EnemyTurn(t, p, f, w, initiative, 0);
                     }
 
-                    final Project this$0;
                     private final Chosen val$c;
-                    private final JTextPane val$t;
                     private final JPanel val$p;
-                    private final JFrame val$f;
                     private final WorldState val$w;
+                    private final JTextPane val$t;
+                    private final JFrame val$f;
                     private final Chosen val$initiative[];
 
             
             {
-                this$0 = Project.this;
                 c = chosen;
-                t = jtextpane;
                 p = jpanel;
-                f = jframe;
                 w = worldstate;
+                t = jtextpane;
+                f = jframe;
                 initiative = achosen;
                 super();
             }
@@ -626,25 +970,24 @@ public class Project extends JFrame
                     public void actionPerformed(ActionEvent e)
                     {
                         c.beginSodomize();
-                        EnemyTurn(t, p, f, w, initiative, 0);
+                        Project.advanceAction(p, w, c.getNumber() * 14 + 13);
+                        Project.EnemyTurn(t, p, f, w, initiative, 0);
                     }
 
-                    final Project this$0;
                     private final Chosen val$c;
-                    private final JTextPane val$t;
                     private final JPanel val$p;
-                    private final JFrame val$f;
                     private final WorldState val$w;
+                    private final JTextPane val$t;
+                    private final JFrame val$f;
                     private final Chosen val$initiative[];
 
             
             {
-                this$0 = Project.this;
                 c = chosen;
-                t = jtextpane;
                 p = jpanel;
-                f = jframe;
                 w = worldstate;
+                t = jtextpane;
+                f = jframe;
                 initiative = achosen;
                 super();
             }
@@ -664,25 +1007,24 @@ public class Project extends JFrame
                     public void actionPerformed(ActionEvent e)
                     {
                         c.beginBroadcast();
-                        EnemyTurn(t, p, f, w, initiative, 0);
+                        Project.advanceAction(p, w, c.getNumber() * 14 + 14);
+                        Project.EnemyTurn(t, p, f, w, initiative, 0);
                     }
 
-                    final Project this$0;
                     private final Chosen val$c;
-                    private final JTextPane val$t;
                     private final JPanel val$p;
-                    private final JFrame val$f;
                     private final WorldState val$w;
+                    private final JTextPane val$t;
+                    private final JFrame val$f;
                     private final Chosen val$initiative[];
 
             
             {
-                this$0 = Project.this;
                 c = chosen;
-                t = jtextpane;
                 p = jpanel;
-                f = jframe;
                 w = worldstate;
+                t = jtextpane;
+                f = jframe;
                 initiative = achosen;
                 super();
             }
@@ -716,23 +1058,26 @@ public class Project extends JFrame
 
                         public void actionPerformed(ActionEvent e)
                         {
-                            EnemyTurn(t, p, f, w, initiative, 0);
+                            Project.advanceAction(p, w, c.getNumber() * 14 + 5);
+                            Project.EnemyTurn(t, p, f, w, initiative, 0);
                         }
 
-                        final _cls15 this$1;
-                        private final JTextPane val$t;
+                        final _cls23 this$1;
                         private final JPanel val$p;
-                        private final JFrame val$f;
                         private final WorldState val$w;
+                        private final Chosen val$c;
+                        private final JTextPane val$t;
+                        private final JFrame val$f;
                         private final Chosen val$initiative[];
 
                     
                     {
-                        this$1 = _cls15.this;
-                        t = jtextpane;
+                        this$1 = _cls23.this;
                         p = jpanel;
-                        f = jframe;
                         w = worldstate;
+                        c = chosen;
+                        t = jtextpane;
+                        f = jframe;
                         initiative = achosen;
                         super();
                     }
@@ -742,7 +1087,6 @@ public class Project extends JFrame
                     p.repaint();
                 }
 
-                final Project this$0;
                 private final Chosen val$c;
                 private final JTextPane val$t;
                 private final JPanel val$p;
@@ -750,10 +1094,8 @@ public class Project extends JFrame
                 private final WorldState val$w;
                 private final Chosen val$initiative[];
 
-
             
             {
-                this$0 = Project.this;
                 c = chosen;
                 t = jtextpane;
                 p = jpanel;
@@ -776,23 +1118,26 @@ public class Project extends JFrame
 
                         public void actionPerformed(ActionEvent e)
                         {
-                            EnemyTurn(t, p, f, w, initiative, 0);
+                            Project.advanceAction(p, w, c.getNumber() * 14 + 4);
+                            Project.EnemyTurn(t, p, f, w, initiative, 0);
                         }
 
-                        final _cls16 this$1;
-                        private final JTextPane val$t;
+                        final _cls24 this$1;
                         private final JPanel val$p;
-                        private final JFrame val$f;
                         private final WorldState val$w;
+                        private final Chosen val$c;
+                        private final JTextPane val$t;
+                        private final JFrame val$f;
                         private final Chosen val$initiative[];
 
                     
                     {
-                        this$1 = _cls16.this;
-                        t = jtextpane;
+                        this$1 = _cls24.this;
                         p = jpanel;
-                        f = jframe;
                         w = worldstate;
+                        c = chosen;
+                        t = jtextpane;
+                        f = jframe;
                         initiative = achosen;
                         super();
                     }
@@ -802,7 +1147,6 @@ public class Project extends JFrame
                     p.repaint();
                 }
 
-                final Project this$0;
                 private final Chosen val$c;
                 private final JTextPane val$t;
                 private final JPanel val$p;
@@ -810,10 +1154,8 @@ public class Project extends JFrame
                 private final WorldState val$w;
                 private final Chosen val$initiative[];
 
-
             
             {
-                this$0 = Project.this;
                 c = chosen;
                 t = jtextpane;
                 p = jpanel;
@@ -836,23 +1178,26 @@ public class Project extends JFrame
 
                         public void actionPerformed(ActionEvent e)
                         {
-                            EnemyTurn(t, p, f, w, initiative, 0);
+                            Project.advanceAction(p, w, c.getNumber() * 14 + 6);
+                            Project.EnemyTurn(t, p, f, w, initiative, 0);
                         }
 
-                        final _cls17 this$1;
-                        private final JTextPane val$t;
+                        final _cls25 this$1;
                         private final JPanel val$p;
-                        private final JFrame val$f;
                         private final WorldState val$w;
+                        private final Chosen val$c;
+                        private final JTextPane val$t;
+                        private final JFrame val$f;
                         private final Chosen val$initiative[];
 
                     
                     {
-                        this$1 = _cls17.this;
-                        t = jtextpane;
+                        this$1 = _cls25.this;
                         p = jpanel;
-                        f = jframe;
                         w = worldstate;
+                        c = chosen;
+                        t = jtextpane;
+                        f = jframe;
                         initiative = achosen;
                         super();
                     }
@@ -862,7 +1207,6 @@ public class Project extends JFrame
                     p.repaint();
                 }
 
-                final Project this$0;
                 private final Chosen val$c;
                 private final JTextPane val$t;
                 private final JPanel val$p;
@@ -870,10 +1214,8 @@ public class Project extends JFrame
                 private final WorldState val$w;
                 private final Chosen val$initiative[];
 
-
             
             {
-                this$0 = Project.this;
                 c = chosen;
                 t = jtextpane;
                 p = jpanel;
@@ -896,23 +1238,26 @@ public class Project extends JFrame
 
                         public void actionPerformed(ActionEvent e)
                         {
-                            EnemyTurn(t, p, f, w, initiative, 0);
+                            Project.advanceAction(p, w, c.getNumber() * 14 + 3);
+                            Project.EnemyTurn(t, p, f, w, initiative, 0);
                         }
 
-                        final _cls18 this$1;
-                        private final JTextPane val$t;
+                        final _cls26 this$1;
                         private final JPanel val$p;
-                        private final JFrame val$f;
                         private final WorldState val$w;
+                        private final Chosen val$c;
+                        private final JTextPane val$t;
+                        private final JFrame val$f;
                         private final Chosen val$initiative[];
 
                     
                     {
-                        this$1 = _cls18.this;
-                        t = jtextpane;
+                        this$1 = _cls26.this;
                         p = jpanel;
-                        f = jframe;
                         w = worldstate;
+                        c = chosen;
+                        t = jtextpane;
+                        f = jframe;
                         initiative = achosen;
                         super();
                     }
@@ -922,7 +1267,6 @@ public class Project extends JFrame
                     p.repaint();
                 }
 
-                final Project this$0;
                 private final Chosen val$c;
                 private final JTextPane val$t;
                 private final JPanel val$p;
@@ -930,10 +1274,8 @@ public class Project extends JFrame
                 private final WorldState val$w;
                 private final Chosen val$initiative[];
 
-
             
             {
-                this$0 = Project.this;
                 c = chosen;
                 t = jtextpane;
                 p = jpanel;
@@ -952,24 +1294,23 @@ public class Project extends JFrame
                     public void actionPerformed(ActionEvent e)
                     {
                         w.setSurroundTarget(c);
-                        EnemyTurn(t, p, f, w, initiative, 0);
+                        Project.advanceAction(p, w, c.getNumber() * 14 + 1);
+                        Project.EnemyTurn(t, p, f, w, initiative, 0);
                     }
 
-                    final Project this$0;
                     private final WorldState val$w;
                     private final Chosen val$c;
-                    private final JTextPane val$t;
                     private final JPanel val$p;
+                    private final JTextPane val$t;
                     private final JFrame val$f;
                     private final Chosen val$initiative[];
 
             
             {
-                this$0 = Project.this;
                 w = worldstate;
                 c = chosen;
-                t = jtextpane;
                 p = jpanel;
+                t = jtextpane;
                 f = jframe;
                 initiative = achosen;
                 super();
@@ -989,24 +1330,23 @@ public class Project extends JFrame
                             w.setCaptureTarget(c);
                         else
                             w.setSurroundTarget(c);
-                        EnemyTurn(t, p, f, w, initiative, 0);
+                        Project.advanceAction(p, w, c.getNumber() * 14 + 2);
+                        Project.EnemyTurn(t, p, f, w, initiative, 0);
                     }
 
-                    final Project this$0;
                     private final WorldState val$w;
                     private final Chosen val$c;
-                    private final JTextPane val$t;
                     private final JPanel val$p;
+                    private final JTextPane val$t;
                     private final JFrame val$f;
                     private final Chosen val$initiative[];
 
             
             {
-                this$0 = Project.this;
                 w = worldstate;
                 c = chosen;
-                t = jtextpane;
                 p = jpanel;
+                t = jtextpane;
                 f = jframe;
                 initiative = achosen;
                 super();
@@ -1024,10 +1364,9 @@ public class Project extends JFrame
                 public void actionPerformed(ActionEvent e)
                 {
                     w.append(t, "\n\n---\n");
-                    PickTarget(t, p, f, w);
+                    Project.PickTarget(t, p, f, w);
                 }
 
-                final Project this$0;
                 private final WorldState val$w;
                 private final JTextPane val$t;
                 private final JPanel val$p;
@@ -1035,7 +1374,6 @@ public class Project extends JFrame
 
             
             {
-                this$0 = Project.this;
                 w = worldstate;
                 t = jtextpane;
                 p = jpanel;
@@ -1044,40 +1382,43 @@ public class Project extends JFrame
             }
             });
             p.add(Back);
-        }
-        JButton Pass = new JButton("Do Nothing");
-        Pass.addActionListener(new ActionListener() {
+        } else
+        {
+            JButton Pass = new JButton("Do Nothing");
+            Pass.addActionListener(new ActionListener() {
 
-            public void actionPerformed(ActionEvent e)
-            {
-                EnemyTurn(t, p, f, w, initiative, 0);
-            }
+                public void actionPerformed(ActionEvent e)
+                {
+                    Project.advanceAction(p, w, 0);
+                    Project.EnemyTurn(t, p, f, w, initiative, 0);
+                }
 
-            final Project this$0;
-            private final JTextPane val$t;
-            private final JPanel val$p;
-            private final JFrame val$f;
-            private final WorldState val$w;
-            private final Chosen val$initiative[];
+                private final JPanel val$p;
+                private final WorldState val$w;
+                private final JTextPane val$t;
+                private final JFrame val$f;
+                private final Chosen val$initiative[];
 
             
             {
-                this$0 = Project.this;
-                t = jtextpane;
                 p = jpanel;
-                f = jframe;
                 w = worldstate;
+                t = jtextpane;
+                f = jframe;
                 initiative = achosen;
                 super();
             }
-        });
-        Pass.setForeground(Color.GRAY);
-        p.add(Pass);
+            });
+            Pass.setForeground(Color.GRAY);
+            p.add(Pass);
+        }
+        if(w.writePossible().booleanValue())
+            addWriteButton(p, w);
         p.validate();
         p.repaint();
     }
 
-    public void EnemyTurn(final JTextPane t, final JPanel p, final JFrame f, final WorldState w, final Chosen initiative[], int progress)
+    public static void EnemyTurn(final JTextPane t, final JPanel p, final JFrame f, final WorldState w, final Chosen initiative[], int progress)
     {
         w.clearBonus(progress);
         if(w.getCaptureTarget() == initiative[progress] || initiative[progress].isCaptured().booleanValue())
@@ -1103,10 +1444,9 @@ public class Project extends JFrame
 
                 public void actionPerformed(ActionEvent e)
                 {
-                    EnemyTurn(t, p, f, w, initiative, currentProgress);
+                    Project.EnemyTurn(t, p, f, w, initiative, currentProgress);
                 }
 
-                final Project this$0;
                 private final JTextPane val$t;
                 private final JPanel val$p;
                 private final JFrame val$f;
@@ -1116,7 +1456,6 @@ public class Project extends JFrame
 
             
             {
-                this$0 = Project.this;
                 t = jtextpane;
                 p = jpanel;
                 f = jframe;
@@ -1140,12 +1479,12 @@ public class Project extends JFrame
                     Boolean newChosen = Boolean.valueOf(false);
                     if(w.getCast()[1] == null)
                     {
-                        if(w.getTotalRounds() >= 17)
+                        if(w.getTotalRounds() >= 18)
                             newChosen = Boolean.valueOf(true);
                     } else
                     if(w.getCast()[2] == null && w.getTotalRounds() >= 60)
                         newChosen = Boolean.valueOf(true);
-                    if(w.evacComplete() || w.getBattleRound() < 4)
+                    if((w.evacComplete() || w.getBattleRound() < 4) && w.getTotalRounds() < 80)
                         newChosen = Boolean.valueOf(false);
                     int arrival = -1;
                     int timerStandard = 10000;
@@ -1174,13 +1513,12 @@ public class Project extends JFrame
                     {
                         p.removeAll();
                         Chosen arrivingChosen = new Chosen();
-                        arrivingChosen.setName(w, w.getNameSeed());
-                        arrivingChosen.generate(w);
-                        w.addChosen(arrivingChosen);
-                        if(arrivingChosen == w.getCast()[1])
+                        if(w.getCast()[1] == null)
                             arrivingChosen.setNumber(1);
                         else
                             arrivingChosen.setNumber(2);
+                        arrivingChosen.generate(w);
+                        w.addChosen(arrivingChosen);
                         w.addToCombat(arrivingChosen);
                         w.append(t, (new StringBuilder("As the battle rages below, an unfamiliar figure arrives on the nearby rooftops.  After watching for a moment, ")).append(arrivingChosen.heShe()).append(" makes a fateful decision.  A loud crack rings through the air, light shining from above!\n\n").toString());
                         arrivingChosen.say(t, (new StringBuilder("\"")).append(arrivingChosen.announcement()).append("\"\n\n").toString());
@@ -1205,10 +1543,10 @@ public class Project extends JFrame
                             {
                                 w.append(t, "\n\n---\n\n");
                                 w.endTurn(t);
-                                PickTarget(t, p, f, w);
+                                Project.PickTarget(t, p, f, w);
                             }
 
-                            final _cls24 this$1;
+                            final _cls32 this$1;
                             private final WorldState val$w;
                             private final JTextPane val$t;
                             private final JPanel val$p;
@@ -1216,7 +1554,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls24.this;
+                        this$1 = _cls32.this;
                         w = worldstate;
                         t = jtextpane;
                         p = jpanel;
@@ -1293,7 +1631,7 @@ public class Project extends JFrame
 
                                         public void actionPerformed(ActionEvent e)
                                         {
-                                            PostBattle(t, p, f, w);
+                                            Project.PostBattle(t, p, f, w);
                                         }
 
                                         final _cls2 this$2;
@@ -1317,7 +1655,7 @@ public class Project extends JFrame
                                     p.repaint();
                                 } else
                                 {
-                                    PickTarget(t, p, f, w);
+                                    Project.PickTarget(t, p, f, w);
                                     if(w.tutorialResponse().booleanValue())
                                         if(w.getBattleRound() == 6)
                                         {
@@ -1334,16 +1672,15 @@ public class Project extends JFrame
                                 }
                             }
 
-                            final _cls24 this$1;
+                            final _cls32 this$1;
                             private final WorldState val$w;
                             private final JTextPane val$t;
                             private final JPanel val$p;
                             private final JFrame val$f;
 
-
                     
                     {
-                        this$1 = _cls24.this;
+                        this$1 = _cls32.this;
                         w = worldstate;
                         t = jtextpane;
                         p = jpanel;
@@ -1378,10 +1715,10 @@ public class Project extends JFrame
 
                             public void actionPerformed(ActionEvent e)
                             {
-                                PostBattle(t, p, f, w);
+                                Project.PostBattle(t, p, f, w);
                             }
 
-                            final _cls24 this$1;
+                            final _cls32 this$1;
                             private final JTextPane val$t;
                             private final JPanel val$p;
                             private final JFrame val$f;
@@ -1389,7 +1726,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls24.this;
+                        this$1 = _cls32.this;
                         t = jtextpane;
                         p = jpanel;
                         f = jframe;
@@ -1402,7 +1739,7 @@ public class Project extends JFrame
                         p.repaint();
                     } else
                     {
-                        PickTarget(t, p, f, w);
+                        Project.PickTarget(t, p, f, w);
                         if(w.tutorialResponse().booleanValue())
                             if(w.getBattleRound() == 2)
                             {
@@ -1414,7 +1751,7 @@ public class Project extends JFrame
                             if(w.getBattleRound() == 3)
                             {
                                 if(w.getCast()[0].getCurrentDISG() == 140L)
-                                    w.grayAppend(t, "\n\n(Surrounding Miracle right now will only give us one turn to torment her.  In other situations, it might be a good idea to create another opening to increase the duration.  But since she's pretty vulnerable to INJU, and since we have the upgrade that increases circumstance damage, one turn should be plenty.  Surround her!)");
+                                    w.grayAppend(t, "\n\n(Surrounding Miracle right now will only give us one turn to torment her.  In other situations, it might be a good idea to create another opening to increase the duration.  But since she's pretty weak to INJU, and since we have the upgrade that increases circumstance damage, one turn should be plenty.  Surround her!)");
                                 else
                                     w.endTutorial();
                             } else
@@ -1434,14 +1771,14 @@ public class Project extends JFrame
                             } else
                             if(w.getBattleRound() == 8)
                             {
-                                if(w.getCast()[1].getCurrentPAIN() == 379L)
+                                if(w.getCast()[1].getCurrentPAIN() == 384L)
                                     w.grayAppend(t, "\n\n(And finally, let's increase the opening by one more level with Taunt on Calamity.)");
                                 else
                                     w.endTutorial();
                             } else
                             if(w.getBattleRound() == 9)
                             {
-                                if(w.getCast()[1].getCurrentSHAM() == 297L)
+                                if(w.getCast()[1].getCurrentSHAM() == 302L)
                                     w.grayAppend(t, "\n\n(Judging by the Extermination Progress and the Extermination Per Chosen, the battle will end this round if we don't do something.  Fortunately, we've built a nice opening.  Let's Surround Calamity.)");
                                 else
                                     w.endTutorial();
@@ -1497,16 +1834,13 @@ public class Project extends JFrame
                     }
                 }
 
-                final Project this$0;
                 private final WorldState val$w;
                 private final JTextPane val$t;
                 private final JPanel val$p;
                 private final JFrame val$f;
 
-
             
             {
-                this$0 = Project.this;
                 w = worldstate;
                 t = jtextpane;
                 p = jpanel;
@@ -1520,7 +1854,7 @@ public class Project extends JFrame
         }
     }
 
-    public void PostBattle(final JTextPane t, final JPanel p, final JFrame f, final WorldState w)
+    public static void PostBattle(final JTextPane t, final JPanel p, final JFrame f, final WorldState w)
     {
         Boolean justContinue = Boolean.valueOf(true);
         Boolean postScene = Boolean.valueOf(false);
@@ -1631,10 +1965,10 @@ public class Project extends JFrame
 
                             public void actionPerformed(ActionEvent e)
                             {
-                                Downtime(t, p, f, w);
+                                Project.Downtime(t, p, f, w);
                             }
 
-                            final _cls25 this$1;
+                            final _cls33 this$1;
                             private final JTextPane val$t;
                             private final JPanel val$p;
                             private final JFrame val$f;
@@ -1642,7 +1976,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls25.this;
+                        this$1 = _cls33.this;
                         t = jtextpane;
                         p = jpanel;
                         f = jframe;
@@ -1655,16 +1989,13 @@ public class Project extends JFrame
                         p.repaint();
                     }
 
-                    final Project this$0;
                     private final JPanel val$p;
                     private final WorldState val$w;
                     private final JTextPane val$t;
                     private final JFrame val$f;
 
-
             
             {
-                this$0 = Project.this;
                 p = jpanel;
                 w = worldstate;
                 t = jtextpane;
@@ -1697,10 +2028,10 @@ public class Project extends JFrame
 
                                 public void actionPerformed(ActionEvent e)
                                 {
-                                    Downtime(t, p, f, w);
+                                    Project.Downtime(t, p, f, w);
                                 }
 
-                                final _cls26 this$1;
+                                final _cls34 this$1;
                                 private final JTextPane val$t;
                                 private final JPanel val$p;
                                 private final JFrame val$f;
@@ -1708,7 +2039,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls26.this;
+                        this$1 = _cls34.this;
                         t = jtextpane;
                         p = jpanel;
                         f = jframe;
@@ -1721,16 +2052,13 @@ public class Project extends JFrame
                             p.repaint();
                         }
 
-                        final Project this$0;
                         private final JPanel val$p;
                         private final WorldState val$w;
                         private final JTextPane val$t;
                         private final JFrame val$f;
 
-
             
             {
-                this$0 = Project.this;
                 p = jpanel;
                 w = worldstate;
                 t = jtextpane;
@@ -1816,7 +2144,7 @@ public class Project extends JFrame
 
                                                 public void actionPerformed(ActionEvent e)
                                                 {
-                                                    Downtime(t, p, f, w);
+                                                    Project.Downtime(t, p, f, w);
                                                 }
 
                                                 final _cls1 this$3;
@@ -1846,7 +2174,6 @@ public class Project extends JFrame
                                         private final JTextPane val$t;
                                         private final JFrame val$f;
 
-
                         
                         {
                             this$2 = _cls1.this;
@@ -1862,7 +2189,7 @@ public class Project extends JFrame
                                     p.repaint();
                                 }
 
-                                final _cls27 this$1;
+                                final _cls35 this$1;
                                 private final JPanel val$p;
                                 private final WorldState val$w;
                                 private final JTextPane val$t;
@@ -1873,10 +2200,9 @@ public class Project extends JFrame
                                 private final Chosen val$dignified;
                                 private final JFrame val$f;
 
-
                     
                     {
-                        this$1 = _cls27.this;
+                        this$1 = _cls35.this;
                         p = jpanel;
                         w = worldstate;
                         t = jtextpane;
@@ -1894,7 +2220,6 @@ public class Project extends JFrame
                             p.repaint();
                         }
 
-                        final Project this$0;
                         private final JPanel val$p;
                         private final WorldState val$w;
                         private final JTextPane val$t;
@@ -1906,10 +2231,8 @@ public class Project extends JFrame
                         private final Chosen val$chosenThree;
                         private final JFrame val$f;
 
-
             
             {
-                this$0 = Project.this;
                 p = jpanel;
                 w = worldstate;
                 t = jtextpane;
@@ -1986,10 +2309,9 @@ public class Project extends JFrame
                 {
                     w.append(t, "\n\n---\n\n");
                     WorldState x = new WorldState();
-                    IntroOne(t, p, f, x);
+                    Project.IntroOne(t, p, f, x);
                 }
 
-                final Project this$0;
                 private final WorldState val$w;
                 private final JTextPane val$t;
                 private final JPanel val$p;
@@ -1997,7 +2319,6 @@ public class Project extends JFrame
 
             
             {
-                this$0 = Project.this;
                 w = worldstate;
                 t = jtextpane;
                 p = jpanel;
@@ -2020,10 +2341,9 @@ public class Project extends JFrame
 
                 public void actionPerformed(ActionEvent e)
                 {
-                    Downtime(t, p, f, w);
+                    Project.Downtime(t, p, f, w);
                 }
 
-                final Project this$0;
                 private final JTextPane val$t;
                 private final JPanel val$p;
                 private final JFrame val$f;
@@ -2031,7 +2351,6 @@ public class Project extends JFrame
 
             
             {
-                this$0 = Project.this;
                 t = jtextpane;
                 p = jpanel;
                 f = jframe;
@@ -2045,9 +2364,9 @@ public class Project extends JFrame
         }
     }
 
-    public void Downtime(final JTextPane t, final JPanel p, final JFrame f, final WorldState w)
+    public static void Downtime(final JTextPane t, final JPanel p, final JFrame f, final WorldState w)
     {
-        w.append(t, "\n\n---\n\n");
+        t.setText("");
         w.incrementDay();
         w.clearCommander();
         int lastChosen = 0;
@@ -2229,11 +2548,10 @@ public class Project extends JFrame
 
                             public void actionPerformed(ActionEvent e)
                             {
-                                t.setText("");
-                                Shop(t, p, f, w);
+                                Project.Shop(t, p, f, w);
                             }
 
-                            final _cls30 this$1;
+                            final _cls38 this$1;
                             private final JTextPane val$t;
                             private final JPanel val$p;
                             private final JFrame val$f;
@@ -2241,7 +2559,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls30.this;
+                        this$1 = _cls38.this;
                         t = jtextpane;
                         p = jpanel;
                         f = jframe;
@@ -2254,17 +2572,14 @@ public class Project extends JFrame
                         p.repaint();
                     }
 
-                    final Project this$0;
                     private final WorldState val$w;
                     private final JTextPane val$t;
                     private final JPanel val$p;
                     private final JFrame val$f;
                     private final int val$chosenAction[];
 
-
             
             {
-                this$0 = Project.this;
                 w = worldstate;
                 t = jtextpane;
                 p = jpanel;
@@ -2296,11 +2611,10 @@ public class Project extends JFrame
 
                         public void actionPerformed(ActionEvent e)
                         {
-                            t.setText("");
-                            Shop(t, p, f, w);
+                            Project.Shop(t, p, f, w);
                         }
 
-                        final _cls31 this$1;
+                        final _cls39 this$1;
                         private final JTextPane val$t;
                         private final JPanel val$p;
                         private final JFrame val$f;
@@ -2308,7 +2622,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls31.this;
+                        this$1 = _cls39.this;
                         t = jtextpane;
                         p = jpanel;
                         f = jframe;
@@ -2321,17 +2635,14 @@ public class Project extends JFrame
                     p.repaint();
                 }
 
-                final Project this$0;
                 private final WorldState val$w;
                 private final JTextPane val$t;
                 private final JPanel val$p;
                 private final JFrame val$f;
                 private final int val$chosenAction[];
 
-
             
             {
-                this$0 = Project.this;
                 w = worldstate;
                 t = jtextpane;
                 p = jpanel;
@@ -2362,11 +2673,10 @@ public class Project extends JFrame
 
                         public void actionPerformed(ActionEvent e)
                         {
-                            t.setText("");
-                            Shop(t, p, f, w);
+                            Project.Shop(t, p, f, w);
                         }
 
-                        final _cls32 this$1;
+                        final _cls40 this$1;
                         private final JTextPane val$t;
                         private final JPanel val$p;
                         private final JFrame val$f;
@@ -2374,7 +2684,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls32.this;
+                        this$1 = _cls40.this;
                         t = jtextpane;
                         p = jpanel;
                         f = jframe;
@@ -2387,17 +2697,14 @@ public class Project extends JFrame
                     p.repaint();
                 }
 
-                final Project this$0;
                 private final WorldState val$w;
                 private final JTextPane val$t;
                 private final JPanel val$p;
                 private final JFrame val$f;
                 private final int val$chosenAction[];
 
-
             
             {
-                this$0 = Project.this;
                 w = worldstate;
                 t = jtextpane;
                 p = jpanel;
@@ -2439,8 +2746,7 @@ public class Project extends JFrame
 
                                         public void actionPerformed(ActionEvent e)
                                         {
-                                            t.setText("");
-                                            Shop(t, p, f, w);
+                                            Project.Shop(t, p, f, w);
                                         }
 
                                         final _cls1 this$2;
@@ -2464,17 +2770,16 @@ public class Project extends JFrame
                                     p.repaint();
                                 }
 
-                                final _cls33 this$1;
+                                final _cls41 this$1;
                                 private final WorldState val$w;
                                 private final JTextPane val$t;
                                 private final JPanel val$p;
                                 private final JFrame val$f;
                                 private final int val$chosenAction[];
 
-
                     
                     {
-                        this$1 = _cls33.this;
+                        this$1 = _cls41.this;
                         w = worldstate;
                         t = jtextpane;
                         p = jpanel;
@@ -2494,11 +2799,10 @@ public class Project extends JFrame
 
                                 public void actionPerformed(ActionEvent e)
                                 {
-                                    t.setText("");
-                                    Shop(t, p, f, w);
+                                    Project.Shop(t, p, f, w);
                                 }
 
-                                final _cls33 this$1;
+                                final _cls41 this$1;
                                 private final JTextPane val$t;
                                 private final JPanel val$p;
                                 private final JFrame val$f;
@@ -2506,7 +2810,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls33.this;
+                        this$1 = _cls41.this;
                         t = jtextpane;
                         p = jpanel;
                         f = jframe;
@@ -2520,17 +2824,14 @@ public class Project extends JFrame
                         }
                     }
 
-                    final Project this$0;
                     private final WorldState val$w;
                     private final JTextPane val$t;
                     private final JPanel val$p;
                     private final JFrame val$f;
                     private final int val$chosenAction[];
 
-
             
             {
-                this$0 = Project.this;
                 w = worldstate;
                 t = jtextpane;
                 p = jpanel;
@@ -2552,11 +2853,9 @@ public class Project extends JFrame
 
                 public void actionPerformed(ActionEvent e)
                 {
-                    t.setText("");
-                    Shop(t, p, f, w);
+                    Project.Shop(t, p, f, w);
                 }
 
-                final Project this$0;
                 private final JTextPane val$t;
                 private final JPanel val$p;
                 private final JFrame val$f;
@@ -2564,7 +2863,6 @@ public class Project extends JFrame
 
             
             {
-                this$0 = Project.this;
                 t = jtextpane;
                 p = jpanel;
                 f = jframe;
@@ -2578,7 +2876,7 @@ public class Project extends JFrame
         }
     }
 
-    public void Shop(final JTextPane t, final JPanel p, final JFrame f, final WorldState w)
+    public static void Shop(final JTextPane t, final JPanel p, final JFrame f, final WorldState w)
     {
         p.removeAll();
         if(t.getText().length() > 0)
@@ -2596,7 +2894,7 @@ public class Project extends JFrame
                 {
                     if(w.isCheater().booleanValue())
                     {
-                        Cheat(t, p, f, w);
+                        Project.Cheat(t, p, f, w);
                     } else
                     {
                         p.removeAll();
@@ -2607,10 +2905,10 @@ public class Project extends JFrame
                             public void actionPerformed(ActionEvent e)
                             {
                                 w.setCheater();
-                                Cheat(t, p, f, w);
+                                Project.Cheat(t, p, f, w);
                             }
 
-                            final _cls35 this$1;
+                            final _cls43 this$1;
                             private final WorldState val$w;
                             private final JTextPane val$t;
                             private final JPanel val$p;
@@ -2618,7 +2916,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls35.this;
+                        this$1 = _cls43.this;
                         w = worldstate;
                         t = jtextpane;
                         p = jpanel;
@@ -2632,10 +2930,10 @@ public class Project extends JFrame
 
                             public void actionPerformed(ActionEvent e)
                             {
-                                Shop(t, p, f, w);
+                                Project.Shop(t, p, f, w);
                             }
 
-                            final _cls35 this$1;
+                            final _cls43 this$1;
                             private final JTextPane val$t;
                             private final JPanel val$p;
                             private final JFrame val$f;
@@ -2643,7 +2941,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls35.this;
+                        this$1 = _cls43.this;
                         t = jtextpane;
                         p = jpanel;
                         f = jframe;
@@ -2657,16 +2955,13 @@ public class Project extends JFrame
                     }
                 }
 
-                final Project this$0;
                 private final WorldState val$w;
                 private final JTextPane val$t;
                 private final JPanel val$p;
                 private final JFrame val$f;
 
-
             
             {
-                this$0 = Project.this;
                 w = worldstate;
                 t = jtextpane;
                 p = jpanel;
@@ -2711,23 +3006,24 @@ public class Project extends JFrame
                                     public void actionPerformed(ActionEvent e)
                                     {
                                         w.getTechs()[thisTech].buy(w);
-                                        Shop(t, p, f, w);
+                                        Project.advanceDowntimeAction(p, w, thisTech);
+                                        Project.Shop(t, p, f, w);
                                     }
 
-                                    final _cls36 this$1;
+                                    final _cls44 this$1;
                                     private final WorldState val$w;
                                     private final int val$thisTech;
-                                    private final JTextPane val$t;
                                     private final JPanel val$p;
+                                    private final JTextPane val$t;
                                     private final JFrame val$f;
 
                     
                     {
-                        this$1 = _cls36.this;
+                        this$1 = _cls44.this;
                         w = worldstate;
                         thisTech = i;
-                        t = jtextpane;
                         p = jpanel;
+                        t = jtextpane;
                         f = jframe;
                         super();
                     }
@@ -2738,10 +3034,10 @@ public class Project extends JFrame
 
                                     public void actionPerformed(ActionEvent e)
                                     {
-                                        Shop(t, p, f, w);
+                                        Project.Shop(t, p, f, w);
                                     }
 
-                                    final _cls36 this$1;
+                                    final _cls44 this$1;
                                     private final JTextPane val$t;
                                     private final JPanel val$p;
                                     private final JFrame val$f;
@@ -2749,7 +3045,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls36.this;
+                        this$1 = _cls44.this;
                         t = jtextpane;
                         p = jpanel;
                         f = jframe;
@@ -2762,17 +3058,14 @@ public class Project extends JFrame
                                 p.repaint();
                             }
 
-                            final Project this$0;
                             private final JPanel val$p;
                             private final WorldState val$w;
                             private final JTextPane val$t;
                             private final int val$thisTech;
                             private final JFrame val$f;
 
-
             
             {
-                this$0 = Project.this;
                 p = jpanel;
                 w = worldstate;
                 t = jtextpane;
@@ -2815,7 +3108,7 @@ public class Project extends JFrame
 
                                         public void actionPerformed(ActionEvent e)
                                         {
-                                            Shop(t, p, f, w);
+                                            Project.Shop(t, p, f, w);
                                         }
 
                                         final _cls1 this$2;
@@ -2839,17 +3132,16 @@ public class Project extends JFrame
                                     p.repaint();
                                 }
 
-                                final _cls37 this$1;
+                                final _cls45 this$1;
                                 private final JPanel val$p;
                                 private final WorldState val$w;
                                 private final JTextPane val$t;
                                 private final int val$thisChosen;
                                 private final JFrame val$f;
 
-
                     
                     {
-                        this$1 = _cls37.this;
+                        this$1 = _cls45.this;
                         p = jpanel;
                         w = worldstate;
                         t = jtextpane;
@@ -2866,10 +3158,10 @@ public class Project extends JFrame
 
                         public void actionPerformed(ActionEvent e)
                         {
-                            Shop(t, p, f, w);
+                            Project.Shop(t, p, f, w);
                         }
 
-                        final _cls37 this$1;
+                        final _cls45 this$1;
                         private final JTextPane val$t;
                         private final JPanel val$p;
                         private final JFrame val$f;
@@ -2877,7 +3169,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls37.this;
+                        this$1 = _cls45.this;
                         t = jtextpane;
                         p = jpanel;
                         f = jframe;
@@ -2890,16 +3182,13 @@ public class Project extends JFrame
                     p.repaint();
                 }
 
-                final Project this$0;
                 private final JPanel val$p;
                 private final WorldState val$w;
                 private final JTextPane val$t;
                 private final JFrame val$f;
 
-
             
             {
-                this$0 = Project.this;
                 p = jpanel;
                 w = worldstate;
                 t = jtextpane;
@@ -2916,10 +3205,9 @@ public class Project extends JFrame
 
                 public void actionPerformed(ActionEvent e)
                 {
-                    Customize(t, p, f, w);
+                    Project.Customize(t, p, f, w);
                 }
 
-                final Project this$0;
                 private final JTextPane val$t;
                 private final JPanel val$p;
                 private final JFrame val$f;
@@ -2927,7 +3215,6 @@ public class Project extends JFrame
 
             
             {
-                this$0 = Project.this;
                 t = jtextpane;
                 p = jpanel;
                 f = jframe;
@@ -2949,10 +3236,10 @@ public class Project extends JFrame
 
                     public void actionPerformed(ActionEvent e)
                     {
-                        Data(t, p, f, w, "newsave", 0, Boolean.valueOf(true));
+                        Project.Data(t, p, f, w, "newsave", 0, Boolean.valueOf(true));
                     }
 
-                    final _cls39 this$1;
+                    final _cls47 this$1;
                     private final JTextPane val$t;
                     private final JPanel val$p;
                     private final JFrame val$f;
@@ -2960,7 +3247,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls39.this;
+                        this$1 = _cls47.this;
                         t = jtextpane;
                         p = jpanel;
                         f = jframe;
@@ -2974,10 +3261,10 @@ public class Project extends JFrame
 
                     public void actionPerformed(ActionEvent e)
                     {
-                        Data(t, p, f, w, "overwrite", 0, Boolean.valueOf(true));
+                        Project.Data(t, p, f, w, "overwrite", 0, Boolean.valueOf(true));
                     }
 
-                    final _cls39 this$1;
+                    final _cls47 this$1;
                     private final JTextPane val$t;
                     private final JPanel val$p;
                     private final JFrame val$f;
@@ -2985,7 +3272,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls39.this;
+                        this$1 = _cls47.this;
                         t = jtextpane;
                         p = jpanel;
                         f = jframe;
@@ -2999,10 +3286,10 @@ public class Project extends JFrame
 
                     public void actionPerformed(ActionEvent e)
                     {
-                        Data(t, p, f, w, "load", 0, Boolean.valueOf(true));
+                        Project.Data(t, p, f, w, "load", 0, Boolean.valueOf(true));
                     }
 
-                    final _cls39 this$1;
+                    final _cls47 this$1;
                     private final JTextPane val$t;
                     private final JPanel val$p;
                     private final JFrame val$f;
@@ -3010,7 +3297,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls39.this;
+                        this$1 = _cls47.this;
                         t = jtextpane;
                         p = jpanel;
                         f = jframe;
@@ -3024,10 +3311,10 @@ public class Project extends JFrame
 
                     public void actionPerformed(ActionEvent e)
                     {
-                        Data(t, p, f, w, "delete", 0, Boolean.valueOf(true));
+                        Project.Data(t, p, f, w, "delete", 0, Boolean.valueOf(true));
                     }
 
-                    final _cls39 this$1;
+                    final _cls47 this$1;
                     private final JTextPane val$t;
                     private final JPanel val$p;
                     private final JFrame val$f;
@@ -3035,7 +3322,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls39.this;
+                        this$1 = _cls47.this;
                         t = jtextpane;
                         p = jpanel;
                         f = jframe;
@@ -3044,15 +3331,15 @@ public class Project extends JFrame
                     }
                 });
                 p.add(Delete);
-                JButton Back = new JButton("Back");
-                Back.addActionListener(new ActionListener() {
+                JButton Import = new JButton("Import");
+                Import.addActionListener(new ActionListener() {
 
                     public void actionPerformed(ActionEvent e)
                     {
-                        Shop(t, p, f, w);
+                        Project.Data(t, p, f, w, "import", 0, Boolean.valueOf(true));
                     }
 
-                    final _cls39 this$1;
+                    final _cls47 this$1;
                     private final JTextPane val$t;
                     private final JPanel val$p;
                     private final JFrame val$f;
@@ -3060,7 +3347,57 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls39.this;
+                        this$1 = _cls47.this;
+                        t = jtextpane;
+                        p = jpanel;
+                        f = jframe;
+                        w = worldstate;
+                        super();
+                    }
+                });
+                p.add(Import);
+                JButton Export = new JButton("Export");
+                Export.addActionListener(new ActionListener() {
+
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        Project.Data(t, p, f, w, "export", 0, Boolean.valueOf(true));
+                    }
+
+                    final _cls47 this$1;
+                    private final JTextPane val$t;
+                    private final JPanel val$p;
+                    private final JFrame val$f;
+                    private final WorldState val$w;
+
+                    
+                    {
+                        this$1 = _cls47.this;
+                        t = jtextpane;
+                        p = jpanel;
+                        f = jframe;
+                        w = worldstate;
+                        super();
+                    }
+                });
+                p.add(Export);
+                JButton Back = new JButton("Back");
+                Back.addActionListener(new ActionListener() {
+
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        Project.Shop(t, p, f, w);
+                    }
+
+                    final _cls47 this$1;
+                    private final JTextPane val$t;
+                    private final JPanel val$p;
+                    private final JFrame val$f;
+                    private final WorldState val$w;
+
+                    
+                    {
+                        this$1 = _cls47.this;
                         t = jtextpane;
                         p = jpanel;
                         f = jframe;
@@ -3073,16 +3410,13 @@ public class Project extends JFrame
                 p.repaint();
             }
 
-            final Project this$0;
             private final WorldState val$w;
             private final JTextPane val$t;
             private final JPanel val$p;
             private final JFrame val$f;
 
-
             
             {
-                this$0 = Project.this;
                 w = worldstate;
                 t = jtextpane;
                 p = jpanel;
@@ -3104,10 +3438,10 @@ public class Project extends JFrame
                     public void actionPerformed(ActionEvent e)
                     {
                         w.append(t, "\n\n---\n\n");
-                        IntroOne(t, p, f, new WorldState());
+                        Project.IntroOne(t, p, f, new WorldState());
                     }
 
-                    final _cls40 this$1;
+                    final _cls48 this$1;
                     private final WorldState val$w;
                     private final JTextPane val$t;
                     private final JPanel val$p;
@@ -3115,7 +3449,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls40.this;
+                        this$1 = _cls48.this;
                         w = worldstate;
                         t = jtextpane;
                         p = jpanel;
@@ -3129,10 +3463,10 @@ public class Project extends JFrame
 
                     public void actionPerformed(ActionEvent e)
                     {
-                        Shop(t, p, f, w);
+                        Project.Shop(t, p, f, w);
                     }
 
-                    final _cls40 this$1;
+                    final _cls48 this$1;
                     private final JTextPane val$t;
                     private final JPanel val$p;
                     private final JFrame val$f;
@@ -3140,7 +3474,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls40.this;
+                        this$1 = _cls48.this;
                         t = jtextpane;
                         p = jpanel;
                         f = jframe;
@@ -3153,16 +3487,13 @@ public class Project extends JFrame
                 p.repaint();
             }
 
-            final Project this$0;
             private final WorldState val$w;
             private final JTextPane val$t;
             private final JPanel val$p;
             private final JFrame val$f;
 
-
             
             {
-                this$0 = Project.this;
                 w = worldstate;
                 t = jtextpane;
                 p = jpanel;
@@ -3176,10 +3507,9 @@ public class Project extends JFrame
 
             public void actionPerformed(ActionEvent e)
             {
-                pickStartingTarget(t, p, f, w);
+                Project.pickStartingTarget(t, p, f, w);
             }
 
-            final Project this$0;
             private final JTextPane val$t;
             private final JPanel val$p;
             private final JFrame val$f;
@@ -3187,7 +3517,6 @@ public class Project extends JFrame
 
             
             {
-                this$0 = Project.this;
                 t = jtextpane;
                 p = jpanel;
                 f = jframe;
@@ -3196,11 +3525,14 @@ public class Project extends JFrame
             }
         });
         p.add(NextBattle);
+        if(w.writePossible().booleanValue())
+            addWriteButton(p, w);
         p.validate();
         p.repaint();
+        w.readCommentary(t);
     }
 
-    public void Cheat(final JTextPane t, final JPanel p, final JFrame f, final WorldState w)
+    public static void Cheat(final JTextPane t, final JPanel p, final JFrame f, final WorldState w)
     {
         p.removeAll();
         w.append(t, "\n\n---\n\nWhich cheat would you like to use?");
@@ -3210,10 +3542,9 @@ public class Project extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 w.addEnergy(100);
-                Shop(t, p, f, w);
+                Project.Shop(t, p, f, w);
             }
 
-            final Project this$0;
             private final WorldState val$w;
             private final JTextPane val$t;
             private final JPanel val$p;
@@ -3221,7 +3552,6 @@ public class Project extends JFrame
 
             
             {
-                this$0 = Project.this;
                 w = worldstate;
                 t = jtextpane;
                 p = jpanel;
@@ -3235,10 +3565,9 @@ public class Project extends JFrame
 
             public void actionPerformed(ActionEvent e)
             {
-                Shop(t, p, f, w);
+                Project.Shop(t, p, f, w);
             }
 
-            final Project this$0;
             private final JTextPane val$t;
             private final JPanel val$p;
             private final JFrame val$f;
@@ -3246,7 +3575,6 @@ public class Project extends JFrame
 
             
             {
-                this$0 = Project.this;
                 t = jtextpane;
                 p = jpanel;
                 f = jframe;
@@ -3259,7 +3587,7 @@ public class Project extends JFrame
         p.repaint();
     }
 
-    public void Data(final JTextPane t, final JPanel p, final JFrame f, final WorldState w, final String function, final int page, final Boolean toShop)
+    public static void Data(final JTextPane t, final JPanel p, final JFrame f, final WorldState w, final String function, final int page, final Boolean toShop)
     {
         String path = Project.getProtectionDomain().getCodeSource().getLocation().getPath();
         String fileName = "";
@@ -3341,10 +3669,9 @@ public class Project extends JFrame
                         saveFile.overwriteSave(w);
                         wobj.serializeSaveData(saveFile);
                         w.append(t, "  Done.");
-                        Shop(t, p, f, w);
+                        Project.Shop(t, p, f, w);
                     }
 
-                    final Project this$0;
                     private final SaveData val$saveFile;
                     private final WorldState val$w;
                     private final WriteObject val$wobj;
@@ -3354,7 +3681,6 @@ public class Project extends JFrame
 
             
             {
-                this$0 = Project.this;
                 saveFile = savedata;
                 w = worldstate;
                 wobj = writeobject;
@@ -3371,10 +3697,9 @@ public class Project extends JFrame
                     public void actionPerformed(ActionEvent e)
                     {
                         w.append(t, "  Cancelled.");
-                        Shop(t, p, f, w);
+                        Project.Shop(t, p, f, w);
                     }
 
-                    final Project this$0;
                     private final WorldState val$w;
                     private final JTextPane val$t;
                     private final JPanel val$p;
@@ -3382,7 +3707,6 @@ public class Project extends JFrame
 
             
             {
-                this$0 = Project.this;
                 w = worldstate;
                 t = jtextpane;
                 p = jpanel;
@@ -3394,6 +3718,220 @@ public class Project extends JFrame
                 p.validate();
                 p.repaint();
             }
+        } else
+        if(function.equals("export"))
+        {
+            WorldState newWorld = new WorldState();
+            newWorld.copyInitial(w);
+            Chosen newChosen = new Chosen();
+            newChosen.setNumber(0);
+            newChosen.generate(newWorld);
+            newWorld.addChosen(newChosen);
+            String newSaveName = JOptionPane.showInputDialog("What would you like to name the exported file?");
+            Boolean blankName = Boolean.valueOf(false);
+            if(newSaveName == null)
+                blankName = Boolean.valueOf(true);
+            else
+            if(newSaveName.length() == 0)
+                blankName = Boolean.valueOf(true);
+            if(blankName.booleanValue())
+            {
+                DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                Date date = new Date();
+                newSaveName = (new StringBuilder("Team of ")).append(dateFormat.format(date)).toString();
+            }
+            String editedName = "";
+            for(int i = 0; i < newSaveName.length(); i++)
+                if(newSaveName.charAt(i) == '/' || newSaveName.charAt(i) == ':')
+                    editedName = (new StringBuilder(String.valueOf(editedName))).append("-").toString();
+                else
+                    editedName = (new StringBuilder(String.valueOf(editedName))).append(newSaveName.charAt(i)).toString();
+
+            if(w.getHighScore() > 0L)
+                newWorld.setParScore(w.getHighScore());
+            if(w.getParScore() > newWorld.getParScore())
+                newWorld.setParScore(w.getParScore());
+            wobj.exportFile(newWorld, editedName);
+            w.append(t, (new StringBuilder("\n\n---\n\nDay 1 start against this team saved to '")).append(editedName).append(".par'.").toString());
+        } else
+        if(function.equals("import"))
+        {
+            p.removeAll();
+            int i = page * 4;
+            int j = 0;
+            WorldState foundWorlds[] = new WorldState[0];
+            ReadObject robj = new ReadObject();
+            foundWorlds = robj.importFiles();
+            if(foundWorlds.length == 0)
+            {
+                w.append(t, "\n\n---\n\nNo importable files found in directory.");
+            } else
+            {
+                w.append(t, "\n\n---\n\nFound the following importable files in directory.  Which would you like to import?");
+                if(page > 0)
+                {
+                    JButton LastPage = new JButton("Previous Page");
+                    LastPage.addActionListener(new ActionListener() {
+
+                        public void actionPerformed(ActionEvent e)
+                        {
+                            Project.Data(t, p, f, w, function, page - 1, toShop);
+                        }
+
+                        private final JTextPane val$t;
+                        private final JPanel val$p;
+                        private final JFrame val$f;
+                        private final WorldState val$w;
+                        private final String val$function;
+                        private final int val$page;
+                        private final Boolean val$toShop;
+
+            
+            {
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                w = worldstate;
+                function = s;
+                page = i;
+                toShop = boolean1;
+                super();
+            }
+                    });
+                    p.add(LastPage);
+                }
+                for(; i < foundWorlds.length && j < 4; j++)
+                {
+                    w.append(t, (new StringBuilder("\n\nFile ")).append(i + 1).append(": ").append(foundWorlds[i].getSaveTitle()).toString());
+                    if(foundWorlds[i].getParScore() > 0L)
+                        w.append(t, (new StringBuilder(" (Par ")).append(foundWorlds[i].getCast()[0].condensedFormat(foundWorlds[i].getParScore())).append(")").toString());
+                    final int worldSelected = i;
+                    final WorldState worldList[] = foundWorlds;
+                    JButton Access = new JButton((new StringBuilder()).append(i + 1).toString());
+                    Access.addActionListener(new ActionListener() {
+
+                        public void actionPerformed(ActionEvent e)
+                        {
+                            String path = Project.getProtectionDomain().getCodeSource().getLocation().getPath();
+                            String fileName = "";
+                            for(int i = path.length() - 1; i >= 0; i--)
+                                if(path.charAt(i) != '/')
+                                    fileName = (new StringBuilder(String.valueOf(path.charAt(i)))).append(fileName).toString();
+                                else
+                                    i = -1;
+
+                            try
+                            {
+                                path = path.substring(0, path.length() - fileName.length() - 1);
+                                path = URLDecoder.decode(path, "UTF-8");
+                                path = path.replaceAll("file:/", "");
+                                path = path.replaceAll("\\u0020", "\\ ");
+                                File saveLocation = new File((new StringBuilder(String.valueOf(path))).append("\\saves.sav").toString());
+                                SaveData saves = null;
+                                if(saveLocation.exists())
+                                {
+                                    ReadObject robj = new ReadObject();
+                                    saves = robj.deserializeSaveData((new StringBuilder(String.valueOf(path))).append("\\saves.sav").toString());
+                                } else
+                                {
+                                    saves = new SaveData();
+                                }
+                                WriteObject wobj = new WriteObject();
+                                saves.endSave(worldList[worldSelected], worldList[worldSelected].getSaveTitle());
+                                wobj.serializeSaveData(saves);
+                                w.append(t, (new StringBuilder("\n\n---\n\nImported file saved to slot ")).append(saves.getSaves().length).append(".").toString());
+                            }
+                            catch(Exception ex)
+                            {
+                                ex.printStackTrace();
+                            }
+                        }
+
+                        private final WorldState val$worldList[];
+                        private final int val$worldSelected;
+                        private final WorldState val$w;
+                        private final JTextPane val$t;
+
+            
+            {
+                worldList = aworldstate;
+                worldSelected = i;
+                w = worldstate;
+                t = jtextpane;
+                super();
+            }
+                    });
+                    p.add(Access);
+                    i++;
+                }
+
+                if(page * 4 + 4 < foundWorlds.length)
+                {
+                    JButton NextPage = new JButton("Next Page");
+                    NextPage.addActionListener(new ActionListener() {
+
+                        public void actionPerformed(ActionEvent e)
+                        {
+                            Project.Data(t, p, f, w, function, page + 1, toShop);
+                        }
+
+                        private final JTextPane val$t;
+                        private final JPanel val$p;
+                        private final JFrame val$f;
+                        private final WorldState val$w;
+                        private final String val$function;
+                        private final int val$page;
+                        private final Boolean val$toShop;
+
+            
+            {
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                w = worldstate;
+                function = s;
+                page = i;
+                toShop = boolean1;
+                super();
+            }
+                    });
+                    p.add(NextPage);
+                }
+            }
+            JButton Back = new JButton("Back");
+            Back.addActionListener(new ActionListener() {
+
+                public void actionPerformed(ActionEvent e)
+                {
+                    if(toShop.booleanValue())
+                    {
+                        Project.Shop(t, p, f, w);
+                    } else
+                    {
+                        w.append(t, "\n\n---\n\n");
+                        Project.IntroOne(t, p, f, w);
+                    }
+                }
+
+                private final Boolean val$toShop;
+                private final JTextPane val$t;
+                private final JPanel val$p;
+                private final JFrame val$f;
+                private final WorldState val$w;
+
+            
+            {
+                toShop = boolean1;
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                w = worldstate;
+                super();
+            }
+            });
+            p.add(Back);
+            p.validate();
+            p.repaint();
         } else
         {
             int i = page * 4;
@@ -3411,10 +3949,9 @@ public class Project extends JFrame
 
                     public void actionPerformed(ActionEvent e)
                     {
-                        Data(t, p, f, w, function, page - 1, toShop);
+                        Project.Data(t, p, f, w, function, page - 1, toShop);
                     }
 
-                    final Project this$0;
                     private final JTextPane val$t;
                     private final JPanel val$p;
                     private final JFrame val$f;
@@ -3425,7 +3962,6 @@ public class Project extends JFrame
 
             
             {
-                this$0 = Project.this;
                 t = jtextpane;
                 p = jpanel;
                 f = jframe;
@@ -3449,7 +3985,15 @@ public class Project extends JFrame
                 else
                     fullSaveName = (new StringBuilder(String.valueOf(fullSaveName))).append(saves.getSaves()[i].getCast()[0].getMainName()).append(", ").append(saves.getSaves()[i].getCast()[1].getMainName()).append(", and ").append(saves.getSaves()[i].getCast()[2].getMainName()).toString();
                 if(saves.getSaves()[i].getHighScore() > 0L)
-                    fullSaveName = (new StringBuilder(String.valueOf(fullSaveName))).append(" (HS ").append(saves.getSaves()[i].getCast()[0].condensedFormat(saves.getSaves()[i].getHighScore())).append(")").toString();
+                {
+                    fullSaveName = (new StringBuilder(String.valueOf(fullSaveName))).append(" (HS ").append(saves.getSaves()[i].getCast()[0].condensedFormat(saves.getSaves()[i].getHighScore())).toString();
+                    if(saves.getSaves()[i].getParScore() > 0L)
+                        fullSaveName = (new StringBuilder(String.valueOf(fullSaveName))).append(" | Par ").append(saves.getSaves()[i].getCast()[0].condensedFormat(saves.getSaves()[i].getParScore())).append(")").toString();
+                    else
+                        fullSaveName = (new StringBuilder(String.valueOf(fullSaveName))).append(")").toString();
+                } else
+                if(saves.getSaves()[i].getParScore() > 0L)
+                    fullSaveName = (new StringBuilder(String.valueOf(fullSaveName))).append(" (Par ").append(saves.getSaves()[i].getCast()[0].condensedFormat(saves.getSaves()[i].getParScore())).append(")").toString();
                 w.append(t, (new StringBuilder("\n\nSlot ")).append(i + 1).toString());
                 if(i == 0)
                     w.append(t, " (most recent)");
@@ -3475,30 +4019,38 @@ public class Project extends JFrame
 
                                     public void actionPerformed(ActionEvent e)
                                     {
+                                        WorldState savedWorld = new WorldState();
+                                        savedWorld = saveFile.getSaves()[fileSelected];
+                                        if(!savedWorld.BACKGROUND.equals(t.getBackground()))
+                                            savedWorld.toggleColors(t);
                                         wobj.serializeSaveData(saveFile);
                                         saveFile.moveToFront(fileSelected);
                                         wobj.serializeSaveData(saveFile);
+                                        saveFile.getSaves()[0].setCommentaryRead(w.getCommentaryRead());
+                                        saveFile.getSaves()[0].setCommentaryWrite(w.getCommentaryWrite());
                                         if(saveFile.getSaves()[0].getDay() == 1)
-                                            IntroTwo(t, p, f, saveFile.getSaves()[0]);
+                                            Project.IntroTwo(t, p, f, saveFile.getSaves()[0]);
                                         else
-                                            Shop(t, p, f, saveFile.getSaves()[0]);
+                                            Project.Shop(t, p, f, saveFile.getSaves()[0]);
                                     }
 
-                                    final _cls47 this$1;
-                                    private final WriteObject val$wobj;
+                                    final _cls59 this$1;
                                     private final SaveData val$saveFile;
                                     private final int val$fileSelected;
                                     private final JTextPane val$t;
+                                    private final WriteObject val$wobj;
+                                    private final WorldState val$w;
                                     private final JPanel val$p;
                                     private final JFrame val$f;
 
                     
                     {
-                        this$1 = _cls47.this;
-                        wobj = writeobject;
+                        this$1 = _cls59.this;
                         saveFile = savedata;
                         fileSelected = i;
                         t = jtextpane;
+                        wobj = writeobject;
+                        w = worldstate;
                         p = jpanel;
                         f = jframe;
                         super();
@@ -3510,10 +4062,10 @@ public class Project extends JFrame
 
                                     public void actionPerformed(ActionEvent e)
                                     {
-                                        Shop(t, p, f, w);
+                                        Project.Shop(t, p, f, w);
                                     }
 
-                                    final _cls47 this$1;
+                                    final _cls59 this$1;
                                     private final JTextPane val$t;
                                     private final JPanel val$p;
                                     private final JFrame val$f;
@@ -3521,7 +4073,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls47.this;
+                        this$1 = _cls59.this;
                         t = jtextpane;
                         p = jpanel;
                         f = jframe;
@@ -3534,9 +4086,18 @@ public class Project extends JFrame
                                 p.repaint();
                             } else
                             {
+                                WorldState savedWorld = new WorldState();
+                                savedWorld = saveFile.getSaves()[fileSelected];
+                                if(!savedWorld.BACKGROUND.equals(t.getBackground()))
+                                    savedWorld.toggleColors(t);
                                 saveFile.moveToFront(fileSelected);
                                 wobj.serializeSaveData(saveFile);
-                                Shop(t, p, f, saveFile.getSaves()[0]);
+                                savedWorld.setCommentaryRead(w.getCommentaryRead());
+                                savedWorld.setCommentaryWrite(w.getCommentaryWrite());
+                                if(savedWorld.getDay() == 1)
+                                    Project.IntroTwo(t, p, f, savedWorld);
+                                else
+                                    Project.Shop(t, p, f, savedWorld);
                             }
                         } else
                         {
@@ -3550,10 +4111,10 @@ public class Project extends JFrame
                                     saveFile.deleteSave(fileSelected);
                                     wobj.serializeSaveData(saveFile);
                                     w.append(t, "  Done.");
-                                    Shop(t, p, f, w);
+                                    Project.Shop(t, p, f, w);
                                 }
 
-                                final _cls47 this$1;
+                                final _cls59 this$1;
                                 private final SaveData val$saveFile;
                                 private final int val$fileSelected;
                                 private final WriteObject val$wobj;
@@ -3564,7 +4125,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls47.this;
+                        this$1 = _cls59.this;
                         saveFile = savedata;
                         fileSelected = i;
                         wobj = writeobject;
@@ -3582,10 +4143,10 @@ public class Project extends JFrame
                                 public void actionPerformed(ActionEvent e)
                                 {
                                     w.append(t, "  Cancelled.");
-                                    Shop(t, p, f, w);
+                                    Project.Shop(t, p, f, w);
                                 }
 
-                                final _cls47 this$1;
+                                final _cls59 this$1;
                                 private final WorldState val$w;
                                 private final JTextPane val$t;
                                 private final JPanel val$p;
@@ -3593,7 +4154,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls47.this;
+                        this$1 = _cls59.this;
                         w = worldstate;
                         t = jtextpane;
                         p = jpanel;
@@ -3607,7 +4168,6 @@ public class Project extends JFrame
                         }
                     }
 
-                    final Project this$0;
                     private final String val$function;
                     private final Boolean val$toShop;
                     private final JPanel val$p;
@@ -3619,10 +4179,8 @@ public class Project extends JFrame
                     private final WriteObject val$wobj;
                     private final JFrame val$f;
 
-
             
             {
-                this$0 = Project.this;
                 function = s;
                 toShop = boolean1;
                 p = jpanel;
@@ -3647,10 +4205,9 @@ public class Project extends JFrame
 
                     public void actionPerformed(ActionEvent e)
                     {
-                        Data(t, p, f, w, function, page + 1, toShop);
+                        Project.Data(t, p, f, w, function, page + 1, toShop);
                     }
 
-                    final Project this$0;
                     private final JTextPane val$t;
                     private final JPanel val$p;
                     private final JFrame val$f;
@@ -3661,7 +4218,6 @@ public class Project extends JFrame
 
             
             {
-                this$0 = Project.this;
                 t = jtextpane;
                 p = jpanel;
                 f = jframe;
@@ -3681,15 +4237,14 @@ public class Project extends JFrame
                 {
                     if(toShop.booleanValue())
                     {
-                        Shop(t, p, f, w);
+                        Project.Shop(t, p, f, w);
                     } else
                     {
                         w.append(t, "\n\n---\n\n");
-                        IntroOne(t, p, f, w);
+                        Project.IntroOne(t, p, f, w);
                     }
                 }
 
-                final Project this$0;
                 private final Boolean val$toShop;
                 private final JTextPane val$t;
                 private final JPanel val$p;
@@ -3698,7 +4253,6 @@ public class Project extends JFrame
 
             
             {
-                this$0 = Project.this;
                 toShop = boolean1;
                 t = jtextpane;
                 p = jpanel;
@@ -3713,7 +4267,7 @@ public class Project extends JFrame
         }
     }
 
-    public void Customize(final JTextPane t, final JPanel p, final JFrame f, final WorldState w)
+    public static void Customize(final JTextPane t, final JPanel p, final JFrame f, final WorldState w)
     {
         p.removeAll();
         w.append(t, "\n\n---\n\n");
@@ -3729,10 +4283,9 @@ public class Project extends JFrame
                     {
                         w.newCommander();
                         w.addEnergy(-1);
-                        Customize(t, p, f, w);
+                        Project.Customize(t, p, f, w);
                     }
 
-                    final Project this$0;
                     private final WorldState val$w;
                     private final JTextPane val$t;
                     private final JPanel val$p;
@@ -3740,7 +4293,6 @@ public class Project extends JFrame
 
             
             {
-                this$0 = Project.this;
                 w = worldstate;
                 t = jtextpane;
                 p = jpanel;
@@ -3755,10 +4307,9 @@ public class Project extends JFrame
 
                 public void actionPerformed(ActionEvent e)
                 {
-                    Shop(t, p, f, w);
+                    Project.Shop(t, p, f, w);
                 }
 
-                final Project this$0;
                 private final JTextPane val$t;
                 private final JPanel val$p;
                 private final JFrame val$f;
@@ -3766,7 +4317,6 @@ public class Project extends JFrame
 
             
             {
-                this$0 = Project.this;
                 t = jtextpane;
                 p = jpanel;
                 f = jframe;
@@ -3818,10 +4368,10 @@ public class Project extends JFrame
                                         w.addEnergy(-5);
                                     }
                                     w.applyHunger();
-                                    Customize(t, p, f, w);
+                                    Project.Customize(t, p, f, w);
                                 }
 
-                                final _cls52 this$1;
+                                final _cls64 this$1;
                                 private final int val$suppressorsUsedFinal;
                                 private final WorldState val$w;
                                 private final JTextPane val$t;
@@ -3830,7 +4380,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls52.this;
+                        this$1 = _cls64.this;
                         suppressorsUsedFinal = i;
                         w = worldstate;
                         t = jtextpane;
@@ -3854,10 +4404,10 @@ public class Project extends JFrame
                                         w.addEnergy(-5);
                                     }
                                     w.applyLust();
-                                    Customize(t, p, f, w);
+                                    Project.Customize(t, p, f, w);
                                 }
 
-                                final _cls52 this$1;
+                                final _cls64 this$1;
                                 private final int val$suppressorsUsedFinal;
                                 private final WorldState val$w;
                                 private final JTextPane val$t;
@@ -3866,7 +4416,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls52.this;
+                        this$1 = _cls64.this;
                         suppressorsUsedFinal = i;
                         w = worldstate;
                         t = jtextpane;
@@ -3890,10 +4440,10 @@ public class Project extends JFrame
                                         w.addEnergy(-5);
                                     }
                                     w.applyAnger();
-                                    Customize(t, p, f, w);
+                                    Project.Customize(t, p, f, w);
                                 }
 
-                                final _cls52 this$1;
+                                final _cls64 this$1;
                                 private final int val$suppressorsUsedFinal;
                                 private final WorldState val$w;
                                 private final JTextPane val$t;
@@ -3902,7 +4452,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls52.this;
+                        this$1 = _cls64.this;
                         suppressorsUsedFinal = i;
                         w = worldstate;
                         t = jtextpane;
@@ -3926,10 +4476,10 @@ public class Project extends JFrame
                                         w.addEnergy(-5);
                                     }
                                     w.applyMania();
-                                    Customize(t, p, f, w);
+                                    Project.Customize(t, p, f, w);
                                 }
 
-                                final _cls52 this$1;
+                                final _cls64 this$1;
                                 private final int val$suppressorsUsedFinal;
                                 private final WorldState val$w;
                                 private final JTextPane val$t;
@@ -3938,7 +4488,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls52.this;
+                        this$1 = _cls64.this;
                         suppressorsUsedFinal = i;
                         w = worldstate;
                         t = jtextpane;
@@ -3954,10 +4504,10 @@ public class Project extends JFrame
 
                             public void actionPerformed(ActionEvent e)
                             {
-                                Customize(t, p, f, w);
+                                Project.Customize(t, p, f, w);
                             }
 
-                            final _cls52 this$1;
+                            final _cls64 this$1;
                             private final JTextPane val$t;
                             private final JPanel val$p;
                             private final JFrame val$f;
@@ -3965,7 +4515,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls52.this;
+                        this$1 = _cls64.this;
                         t = jtextpane;
                         p = jpanel;
                         f = jframe;
@@ -3979,17 +4529,14 @@ public class Project extends JFrame
                         w.append(t, "\n\n---\n\nWhich upgrade will you apply?");
                     }
 
-                    final Project this$0;
                     private final JPanel val$p;
                     private final WorldState val$w;
                     private final JTextPane val$t;
                     private final int val$suppressorsUsedFinal;
                     private final JFrame val$f;
 
-
             
             {
-                this$0 = Project.this;
                 p = jpanel;
                 w = worldstate;
                 t = jtextpane;
@@ -4008,10 +4555,9 @@ public class Project extends JFrame
                     public void actionPerformed(ActionEvent e)
                     {
                         w.enhanceOne();
-                        Customize(t, p, f, w);
+                        Project.Customize(t, p, f, w);
                     }
 
-                    final Project this$0;
                     private final WorldState val$w;
                     private final JTextPane val$t;
                     private final JPanel val$p;
@@ -4019,7 +4565,6 @@ public class Project extends JFrame
 
             
             {
-                this$0 = Project.this;
                 w = worldstate;
                 t = jtextpane;
                 p = jpanel;
@@ -4037,10 +4582,9 @@ public class Project extends JFrame
                     public void actionPerformed(ActionEvent e)
                     {
                         w.enhanceTwo();
-                        Customize(t, p, f, w);
+                        Project.Customize(t, p, f, w);
                     }
 
-                    final Project this$0;
                     private final WorldState val$w;
                     private final JTextPane val$t;
                     private final JPanel val$p;
@@ -4048,7 +4592,6 @@ public class Project extends JFrame
 
             
             {
-                this$0 = Project.this;
                 w = worldstate;
                 t = jtextpane;
                 p = jpanel;
@@ -4066,10 +4609,9 @@ public class Project extends JFrame
                     public void actionPerformed(ActionEvent e)
                     {
                         w.enhanceThree();
-                        Customize(t, p, f, w);
+                        Project.Customize(t, p, f, w);
                     }
 
-                    final Project this$0;
                     private final WorldState val$w;
                     private final JTextPane val$t;
                     private final JPanel val$p;
@@ -4077,7 +4619,6 @@ public class Project extends JFrame
 
             
             {
-                this$0 = Project.this;
                 w = worldstate;
                 t = jtextpane;
                 p = jpanel;
@@ -4095,10 +4636,9 @@ public class Project extends JFrame
                     public void actionPerformed(ActionEvent e)
                     {
                         w.addCaptureOne();
-                        Customize(t, p, f, w);
+                        Project.Customize(t, p, f, w);
                     }
 
-                    final Project this$0;
                     private final WorldState val$w;
                     private final JTextPane val$t;
                     private final JPanel val$p;
@@ -4106,7 +4646,6 @@ public class Project extends JFrame
 
             
             {
-                this$0 = Project.this;
                 w = worldstate;
                 t = jtextpane;
                 p = jpanel;
@@ -4124,10 +4663,9 @@ public class Project extends JFrame
                     public void actionPerformed(ActionEvent e)
                     {
                         w.toggleAmbush();
-                        Customize(t, p, f, w);
+                        Project.Customize(t, p, f, w);
                     }
 
-                    final Project this$0;
                     private final WorldState val$w;
                     private final JTextPane val$t;
                     private final JPanel val$p;
@@ -4135,7 +4673,6 @@ public class Project extends JFrame
 
             
             {
-                this$0 = Project.this;
                 w = worldstate;
                 t = jtextpane;
                 p = jpanel;
@@ -4152,10 +4689,9 @@ public class Project extends JFrame
                 {
                     w.addEnergy(w.getCommanderValue());
                     w.clearCommander();
-                    Shop(t, p, f, w);
+                    Project.Shop(t, p, f, w);
                 }
 
-                final Project this$0;
                 private final WorldState val$w;
                 private final JTextPane val$t;
                 private final JPanel val$p;
@@ -4163,7 +4699,6 @@ public class Project extends JFrame
 
             
             {
-                this$0 = Project.this;
                 w = worldstate;
                 t = jtextpane;
                 p = jpanel;
@@ -4177,10 +4712,9 @@ public class Project extends JFrame
 
                 public void actionPerformed(ActionEvent e)
                 {
-                    Shop(t, p, f, w);
+                    Project.Shop(t, p, f, w);
                 }
 
-                final Project this$0;
                 private final JTextPane val$t;
                 private final JPanel val$p;
                 private final JFrame val$f;
@@ -4188,7 +4722,6 @@ public class Project extends JFrame
 
             
             {
-                this$0 = Project.this;
                 t = jtextpane;
                 p = jpanel;
                 f = jframe;
@@ -4202,7 +4735,112 @@ public class Project extends JFrame
         p.repaint();
     }
 
-    public void pickStartingTarget(final JTextPane t, final JPanel p, final JFrame f, final WorldState w)
+    public static void advanceDowntimeAction(JPanel p, WorldState w, int action)
+    {
+        Boolean actionMatches = Boolean.valueOf(true);
+        if(w.getActions().length > w.getCurrentAction() && w.getActions()[w.getCurrentAction()] != action)
+        {
+            actionMatches = Boolean.valueOf(false);
+            w.truncateCommentary(w.getCurrentAction());
+        }
+        if(w.writePossible().booleanValue())
+            if(w.getCurrentComment().length() > 0)
+                w.writeCommentary(w.getCurrentComment());
+            else
+            if(w.getCommentary().length <= w.getCurrentAction() || !actionMatches.booleanValue())
+            {
+                String generated = "";
+                if(action < w.getTechs().length)
+                {
+                    generated = (new StringBuilder("Buy ")).append(w.getTechs()[action].getName()).append(".").toString();
+                } else
+                {
+                    int index = action - w.getTechs().length;
+                    if(w.getBodyStatus()[0].booleanValue())
+                    {
+                        generated = "Buy a Commander with a ";
+                        if(w.getBodyStatus()[1].booleanValue())
+                        {
+                            if(w.getBodyStatus()[7].booleanValue())
+                            {
+                                if(w.getBodyStatus()[9].booleanValue())
+                                    generated = (new StringBuilder(String.valueOf(generated))).append("five").toString();
+                                else
+                                    generated = (new StringBuilder(String.valueOf(generated))).append("four").toString();
+                            } else
+                            {
+                                generated = (new StringBuilder(String.valueOf(generated))).append("three").toString();
+                            }
+                        } else
+                        {
+                            generated = (new StringBuilder(String.valueOf(generated))).append("two").toString();
+                        }
+                        generated = (new StringBuilder(String.valueOf(generated))).append(" turn duration").toString();
+                        if(w.getBodyStatus()[8].booleanValue())
+                            generated = (new StringBuilder(String.valueOf(generated))).append(" and an extra capture.  ").toString();
+                        else
+                            generated = (new StringBuilder(String.valueOf(generated))).append(".  ").toString();
+                        if(w.getBodyStatus()[10].booleanValue())
+                        {
+                            generated = (new StringBuilder(String.valueOf(generated))).append("Equip it with the Suppressors ").toString();
+                            Boolean first = Boolean.valueOf(false);
+                            if(w.getBodyStatus()[3].booleanValue())
+                            {
+                                generated = (new StringBuilder(String.valueOf(generated))).append("Hunger").toString();
+                                first = Boolean.valueOf(true);
+                            }
+                            if(w.getBodyStatus()[4].booleanValue())
+                            {
+                                if(first.booleanValue())
+                                    generated = (new StringBuilder(String.valueOf(generated))).append(" and ").toString();
+                                generated = (new StringBuilder(String.valueOf(generated))).append("Lust").toString();
+                                first = Boolean.valueOf(true);
+                            }
+                            if(w.getBodyStatus()[5].booleanValue())
+                            {
+                                if(first.booleanValue())
+                                    generated = (new StringBuilder(String.valueOf(generated))).append(" and ").toString();
+                                generated = (new StringBuilder(String.valueOf(generated))).append("Anger").toString();
+                                first = Boolean.valueOf(true);
+                            }
+                            if(w.getBodyStatus()[6].booleanValue())
+                                generated = (new StringBuilder(String.valueOf(generated))).append(" and Mania").toString();
+                            generated = (new StringBuilder(String.valueOf(generated))).append(".  ").toString();
+                        } else
+                        if(w.getBodyStatus()[3].booleanValue())
+                            generated = (new StringBuilder(String.valueOf(generated))).append("Equip it with the Suppressor Hunger.  ").toString();
+                        else
+                        if(w.getBodyStatus()[4].booleanValue())
+                            generated = (new StringBuilder(String.valueOf(generated))).append("Equip it with the Suppressor Lust.  ").toString();
+                        else
+                        if(w.getBodyStatus()[5].booleanValue())
+                            generated = (new StringBuilder(String.valueOf(generated))).append("Equip it with the Suppressor Anger.  ").toString();
+                        else
+                        if(w.getBodyStatus()[6].booleanValue())
+                            generated = (new StringBuilder(String.valueOf(generated))).append("Equip it with the Suppressor Mania.  ").toString();
+                        if(w.getBodyStatus()[2].booleanValue())
+                            generated = (new StringBuilder(String.valueOf(generated))).append("Turn off its ambush and send ").toString();
+                        else
+                        if(w.getTechs()[9].isOwned().booleanValue())
+                            generated = (new StringBuilder(String.valueOf(generated))).append("Leave its ambush on and send ").toString();
+                        else
+                            generated = (new StringBuilder(String.valueOf(generated))).append("Send ").toString();
+                        generated = (new StringBuilder(String.valueOf(generated))).append("it after ").append(w.getCast()[index].getMainName()).append(".").toString();
+                    } else
+                    {
+                        generated = (new StringBuilder("Target ")).append(w.getCast()[index].getMainName()).toString();
+                        if(w.getTechs()[3].isOwned().booleanValue())
+                            generated = (new StringBuilder(String.valueOf(generated))).append(" without bringing along a Commander.").toString();
+                        else
+                            generated = (new StringBuilder(String.valueOf(generated))).append(".").toString();
+                    }
+                }
+                w.writeCommentary(generated);
+            }
+        w.nextAction(action);
+    }
+
+    public static void pickStartingTarget(final JTextPane t, final JPanel p, final JFrame f, final WorldState w)
     {
         p.removeAll();
         w.append(t, "\n\n---\n\nWhich of the Chosen will you target?");
@@ -4215,10 +4853,9 @@ public class Project extends JFrame
 
                     public void actionPerformed(ActionEvent e)
                     {
-                        ConfirmBattle(t, p, f, w, w.getCast()[thisChosen]);
+                        Project.ConfirmBattle(t, p, f, w, w.getCast()[thisChosen]);
                     }
 
-                    final Project this$0;
                     private final JTextPane val$t;
                     private final JPanel val$p;
                     private final JFrame val$f;
@@ -4227,7 +4864,6 @@ public class Project extends JFrame
 
             
             {
-                this$0 = Project.this;
                 t = jtextpane;
                 p = jpanel;
                 f = jframe;
@@ -4244,10 +4880,9 @@ public class Project extends JFrame
 
             public void actionPerformed(ActionEvent e)
             {
-                Shop(t, p, f, w);
+                Project.Shop(t, p, f, w);
             }
 
-            final Project this$0;
             private final JTextPane val$t;
             private final JPanel val$p;
             private final JFrame val$f;
@@ -4255,7 +4890,6 @@ public class Project extends JFrame
 
             
             {
-                this$0 = Project.this;
                 t = jtextpane;
                 p = jpanel;
                 f = jframe;
@@ -4268,7 +4902,7 @@ public class Project extends JFrame
         p.repaint();
     }
 
-    public void ConfirmBattle(final JTextPane t, final JPanel p, final JFrame f, final WorldState w, final Chosen c)
+    public static void ConfirmBattle(final JTextPane t, final JPanel p, final JFrame f, final WorldState w, final Chosen c)
     {
         p.removeAll();
         w.append(t, "\n\n---\n\n");
@@ -4282,24 +4916,24 @@ public class Project extends JFrame
 
             public void actionPerformed(ActionEvent e)
             {
-                BeginBattle(t, p, f, w, c);
+                w.archiveCommander(w.getDay());
+                Project.advanceDowntimeAction(p, w, w.getTechs().length + c.getNumber());
+                Project.BeginBattle(t, p, f, w, c);
             }
 
-            final Project this$0;
-            private final JTextPane val$t;
-            private final JPanel val$p;
-            private final JFrame val$f;
             private final WorldState val$w;
+            private final JPanel val$p;
             private final Chosen val$c;
+            private final JTextPane val$t;
+            private final JFrame val$f;
 
             
             {
-                this$0 = Project.this;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
                 w = worldstate;
+                p = jpanel;
                 c = chosen;
+                t = jtextpane;
+                f = jframe;
                 super();
             }
         });
@@ -4309,10 +4943,9 @@ public class Project extends JFrame
 
             public void actionPerformed(ActionEvent e)
             {
-                Shop(t, p, f, w);
+                Project.Shop(t, p, f, w);
             }
 
-            final Project this$0;
             private final JTextPane val$t;
             private final JPanel val$p;
             private final JFrame val$f;
@@ -4320,7 +4953,6 @@ public class Project extends JFrame
 
             
             {
-                this$0 = Project.this;
                 t = jtextpane;
                 p = jpanel;
                 f = jframe;
@@ -4333,7 +4965,7 @@ public class Project extends JFrame
         p.repaint();
     }
 
-    public void BeginBattle(JTextPane t, JPanel p, JFrame f, WorldState w, Chosen c)
+    public static void BeginBattle(JTextPane t, JPanel p, JFrame f, WorldState w, Chosen c)
     {
         w.incrementTotalRounds();
         w.append(t, "\n\n---\n\n");

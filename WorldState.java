@@ -1,16 +1,324 @@
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.*;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.security.CodeSource;
 import java.security.ProtectionDomain;
-import javax.swing.JTextPane;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.*;
 import javax.swing.text.*;
 
 public class WorldState
     implements Serializable
 {
+
+    public void setParScore(long newScore)
+    {
+        parScore = newScore;
+    }
+
+    public long getParScore()
+    {
+        return parScore;
+    }
+
+    public void setSaveTitle(String s)
+    {
+        saveTitle = s;
+    }
+
+    public String getSaveTitle()
+    {
+        return saveTitle;
+    }
+
+    public String getCurrentComment()
+    {
+        return currentComment;
+    }
+
+    public void setCurrentComment(String s)
+    {
+        currentComment = s;
+    }
+
+    public Boolean[][] getRecordedCommanders()
+    {
+        return recordedCommanders;
+    }
+
+    public void archiveCommander(int day)
+    {
+        Boolean difference = Boolean.valueOf(false);
+        if(recordedCommanders.length < day - 1)
+        {
+            difference = Boolean.valueOf(true);
+        } else
+        {
+            for(int i = 0; i < bodyStatus.length; i++)
+                if(!bodyStatus[i].equals(recordedCommanders[day - 2][i]))
+                    difference = Boolean.valueOf(true);
+
+        }
+        if(difference.booleanValue())
+        {
+            Boolean newRecordedCommanders[][] = new Boolean[day - 1][bodyStatus.length];
+            for(int i = 0; i < day - 2; i++)
+            {
+                for(int j = 0; j < bodyStatus.length; j++)
+                    newRecordedCommanders[i][j] = recordedCommanders[i][j];
+
+            }
+
+            for(int j = 0; j < bodyStatus.length; j++)
+                newRecordedCommanders[day - 2][j] = bodyStatus[j];
+
+            recordedCommanders = newRecordedCommanders;
+            onTrack = Boolean.valueOf(false);
+        }
+    }
+
+    public void nextAction(int action)
+    {
+        Boolean newArray = Boolean.valueOf(false);
+        if(actions.length > currentAction)
+        {
+            if(action != actions[currentAction])
+            {
+                newArray = Boolean.valueOf(true);
+                onTrack = Boolean.valueOf(false);
+            }
+        } else
+        {
+            newArray = Boolean.valueOf(true);
+            onTrack = Boolean.valueOf(false);
+        }
+        if(newArray.booleanValue())
+        {
+            int newActions[] = new int[currentAction + 1];
+            for(int i = 0; i < currentAction; i++)
+                newActions[i] = actions[i];
+
+            newActions[currentAction] = action;
+            actions = newActions;
+        }
+        currentAction++;
+    }
+
+    public int getCurrentAction()
+    {
+        return currentAction;
+    }
+
+    public int[] getActions()
+    {
+        return actions;
+    }
+
+    public String[] getCommentary()
+    {
+        return commentary;
+    }
+
+    public Boolean writePossible()
+    {
+        if(currentAction <= commentary.length && commentaryWrite.booleanValue())
+            return Boolean.valueOf(true);
+        else
+            return Boolean.valueOf(false);
+    }
+
+    public void readCommentary(JTextPane t)
+    {
+        if(commentaryRead.booleanValue() && onTrack.booleanValue())
+        {
+            if(commentary.length > currentAction)
+                grayAppend(t, (new StringBuilder("\n\n")).append(commentary[currentAction]).toString());
+            else
+                onTrack = Boolean.valueOf(false);
+        } else
+        {
+            onTrack = Boolean.valueOf(false);
+        }
+    }
+
+    public void truncateCommentary(int lastAction)
+    {
+        onTrack = Boolean.valueOf(false);
+        String newCommentary[] = new String[lastAction];
+        int newActions[] = new int[lastAction];
+        for(int i = 0; i < lastAction; i++)
+            if(commentary.length > i)
+            {
+                newCommentary[i] = commentary[i];
+                newActions[i] = actions[i];
+            } else
+            {
+                i = lastAction;
+            }
+
+        commentary = newCommentary;
+    }
+
+    public void writeCommentary(String s)
+    {
+        if(commentary.length > currentAction)
+        {
+            commentary[currentAction] = s;
+        } else
+        {
+            String newCommentary[] = new String[currentAction + 1];
+            for(int i = 0; i < currentAction; i++)
+                newCommentary[i] = commentary[i];
+
+            newCommentary[currentAction] = s;
+            commentary = newCommentary;
+        }
+        currentComment = "";
+    }
+
+    public Boolean getCommentaryRead()
+    {
+        return commentaryRead;
+    }
+
+    public Boolean getCommentaryWrite()
+    {
+        return commentaryWrite;
+    }
+
+    public void setCommentaryRead(Boolean setting)
+    {
+        commentaryRead = setting;
+    }
+
+    public void setCommentaryWrite(Boolean setting)
+    {
+        commentaryWrite = setting;
+    }
+
+    public Boolean[] getCustomBooleans()
+    {
+        Boolean allBooleans[] = new Boolean[15];
+        for(int i = 0; i < 3; i++)
+        {
+            allBooleans[i] = invertVVirg[i];
+            allBooleans[i + 3] = invertCVirg[i];
+            allBooleans[i + 6] = invertAVirg[i];
+            allBooleans[i + 9] = invertModest[i];
+            allBooleans[i + 12] = gaijinStatus[i];
+        }
+
+        return allBooleans;
+    }
+
+    public void setCustomBooleans(Boolean allBooleans[])
+    {
+        for(int i = 0; i < 3; i++)
+        {
+            invertVVirg[i] = allBooleans[i];
+            invertCVirg[i] = allBooleans[i + 3];
+            invertAVirg[i] = allBooleans[i + 6];
+            invertModest[i] = allBooleans[i + 9];
+            gaijinStatus[i] = allBooleans[i + 12];
+        }
+
+    }
+
+    public String[] getCustomStrings()
+    {
+        String allStrings[] = new String[42];
+        for(int i = 0; i < 3; i++)
+        {
+            allStrings[i] = customNames[i];
+            allStrings[i + 3] = customNames[i + 3];
+            allStrings[i + 6] = customTop[i];
+            allStrings[i + 9] = customTopAccess[i];
+            allStrings[i + 12] = customBottom[i];
+            allStrings[i + 15] = customBottomAccess[i];
+            allStrings[i + 18] = customUnder[i];
+            allStrings[i + 21] = customColor[i];
+            allStrings[i + 24] = customAccessory[i];
+            allStrings[i + 27] = customWeapons[i];
+            allStrings[i + 30] = customWeaponTypes[i];
+            allStrings[i + 33] = customAliases[i];
+            allStrings[i + 36] = customTitles[i];
+            allStrings[i + 39] = customIncantations[i];
+        }
+
+        return allStrings;
+    }
+
+    public void setCustomStrings(String allStrings[])
+    {
+        for(int i = 0; i < 3; i++)
+        {
+            customNames[i] = allStrings[i];
+            customNames[i + 3] = allStrings[i + 3];
+            customTop[i] = allStrings[i + 6];
+            customTopAccess[i] = allStrings[i + 9];
+            customBottom[i] = allStrings[i + 12];
+            customBottomAccess[i] = allStrings[i + 15];
+            customUnder[i] = allStrings[i + 18];
+            customColor[i] = allStrings[i + 21];
+            customAccessory[i] = allStrings[i + 24];
+            customWeapons[i] = allStrings[i + 27];
+            customWeaponTypes[i] = allStrings[i + 30];
+            customAliases[i] = allStrings[i + 33];
+            customTitles[i] = allStrings[i + 36];
+            customIncantations[i] = allStrings[i + 39];
+        }
+
+    }
+
+    public Boolean[] getInvertVVirg()
+    {
+        return invertVVirg;
+    }
+
+    public Boolean[] getInvertCVirg()
+    {
+        return invertCVirg;
+    }
+
+    public Boolean[] getInvertAVirg()
+    {
+        return invertAVirg;
+    }
+
+    public Boolean[] getInvertModest()
+    {
+        return invertModest;
+    }
+
+    public void toggleColors(JTextPane t)
+    {
+        if(BACKGROUND.equals(Color.WHITE))
+        {
+            FOREGROUND = Color.WHITE;
+            BACKGROUND = Color.BLACK;
+            PURPLE = new Color(170, 70, 220);
+            ORANGE = new Color(240, 150, 100);
+            RED = new Color(220, 90, 90);
+            GREEN = new Color(70, 170, 70);
+            BLUE = new Color(100, 100, 255);
+        } else
+        {
+            FOREGROUND = Color.BLACK;
+            BACKGROUND = Color.WHITE;
+            PURPLE = new Color(100, 0, 150);
+            ORANGE = new Color(200, 100, 0);
+            RED = new Color(180, 0, 0);
+            GREEN = new Color(0, 110, 0);
+            BLUE = new Color(0, 0, 230);
+        }
+        t.setBackground(BACKGROUND);
+    }
 
     public Boolean isCheater()
     {
@@ -43,7 +351,7 @@ public class WorldState
             "Chosen who hate their enemies will feel greater fear for what those enemies will do.", "Chosen overwhelmed by disgust will be less receptive to pleasure.", "Chosen overwhelmed by pleasure in battle will be disgusted by that fact.", "Chosen who are in pain will be more careful to avoid getting further injured.", "Chosen who are already injured will feel more pain from being attacked again.", "Chosen who are feeling ashamed will be more careful to avoid getting exposed.", "Chosen who are exposed will feel more shame from all sources.", "The protective powers of the Chosen depend on their pure hearts, so a Chosen consumed by hate is more vulnerable in all respects.", "The more pleasure one of the Chosen feels, the deeper her trauma will be engraved in her memory.", "As the Chosen are injured, they become less able to defend themselves from other abuses.", 
             "When one Chosen is exposed and humiliated, it distracts and breaks the morale of the other Chosen on the battlefield.", "Every day, each Chosen's ANGST is increased by the trauma she hasn't successfully resolved yet.", "High ANGST makes the Chosen willing to perform sinful activities, and until it's resolved, the distraction makes them take more damage from all sources.", "Every doubling of ANGST increases the damage bonus by +1, so even a few hundred ANGST is much better than none at all.", "A Chosen's susceptibility to a damage type normally ranges from 0 to 100 based on personality.  The ANGST bonus is added to this value.", "A Chosen's susceptibility to a damage type ranges from 0 to 100 based on personality.  This base susceptibility to a trauma and to its associated circumstance normally adds up to 100, but corruption increases increases them both, potentially even over 100.", "More sinful actions produce a bit more Evil Energy, but they resolve trauma at an exponentially greater rate.", "The Chosen will only begin to use sinful methods to defend themselves if they expect to reach level 3 circumstance damage otherwise.", "Some sinful actions taken during battle will also damage their users.", "As the Chosen are corrupted, they will begin to use more sinful but also more effective versions of their abilities.", 
             "Fearful Chosen are more vulnerable when their allies are surrounded or captured.", "Disgusted Chosen are always more vulnerable, but being grossed out won't generally create a major opening on its own.", "Chosen in pain are more vulnerable for awhile, but after they get surrounded, the adrenaline allows them to shake it off until the pain reaches the next level.", "Ashamed Chosen aren't any more vulnerable to being surrounded, but their efforts to retain their modesty mean that they'll remain surrounded for longer.", "Damage which currently contributes to the opening level is displayed in purple text.  Damage which does not is displayed in black text.  Damage which is only partially contributing to the opening level is displayed in orange text.", "By using \"Regenerate\", one of the Chosen can remove a fraction of her current circumstance damage.  However, nothing done in battle can remove trauma damage that has already been dealt.", "By using \"Blast\", one of the Chosen can increase evacuation and extermination progress.  If evacuation is already complete, the progress that would be added there is wasted.", "The Chosen choose their actions in battle according to which actions would seem to be most useful at the moment and how effective they are at performing those actions.", "Taunting is more effective against self-conscious Chosen, especially those who have been humiliated in the past.", "Attacking is more effective against Chosen with low self-confidence, especially those whose pride has been broken in the past.", 
-            "Sliming is more effective against more naive Chosen, especially those who have come to associate battle with sexual pleasure.", "Threatening allies is more effective against more compassionate Chosen, especially those whose consciences aren't clean.", "It isn't possible to raise a circumstance by more than one level with a single instance of damage.  This limitation does not apply to trauma.", "Each of the actions the Chosen can perform in battle is linked with one of the four vulnerabilities.  The Chosen are better at performing actions associated with their greater vulnerabilities.", "Chosen who are surrounded or captured do not contribute to extermination progress until they escape.", "When a surrounded Chosen uses a tactic that decreases the effectiveness of Grind, Caress, Pummel, or Humiliate, the damage from that source is decreased to 3/5.  When both tactics against the source are used at once, the damage becomes 2/5.", "The main benefit of Suppressor-class upgrades is that they ignore defensive tactics.  Against Chosen who have not yet begun to use any defensive tactics, a Commander without Suppressor-class upgrades can actually more effective."
+            "Sliming is more effective against more naive Chosen, especially those who have come to associate battle with sexual pleasure.", "Threatening allies is more effective against more compassionate Chosen, especially those whose consciences aren't clean.", "It isn't possible to raise a circumstance by more than one level with a single instance of damage.  This limitation does not apply to trauma.", "Each of the actions the Chosen can perform in battle is linked with one of the four vulnerabilities.  The Chosen are better at performing actions associated with their greater vulnerabilities.", "Chosen who are surrounded or captured do not contribute to extermination progress until they escape.", "When a surrounded Chosen uses a tactic that decreases the effectiveness of Grind, Caress, Pummel, or Humiliate, the damage from that source is decreased to 3/5.  When both tactics against the source are used at once, the damage becomes 2/5.", "The main benefit of Suppressor-class upgrades is that they ignore defensive tactics.  Against Chosen who have not yet begun to use any defensive tactics, a Commander without Suppressor-class upgrades can actually more effective.", "When two of the Chosen have a hostile interaction with each other, Evil Energy is generated, especially when the interaction turns them from friends into enemies.", "Any action that deals circumstance damage also deals all four types of trauma damage, especially the one corresponding to the circumstance."
         });
     }
 
@@ -109,12 +417,12 @@ public class WorldState
                     } else
                     if(c.getMorality() > 33)
                     {
-                        long amount = 0x3c6cc0L;
+                        long amount = 0x25c3f80L;
                         cCorruption += amount;
                         added += amount;
                     } else
                     {
-                        long amount = 0x1e3660L;
+                        long amount = 0x12e1fc0L;
                         cCorruption += amount;
                         added += amount;
                     }
@@ -311,13 +619,12 @@ public class WorldState
             newWorld.copyInitial(this);
             newWorld.setHighScore(highScore);
             Chosen newChosen = new Chosen();
-            newChosen.setName(newWorld, newWorld.getNameSeed());
+            newChosen.setNumber(0);
             newChosen.generate(newWorld);
             newWorld.addChosen(newChosen);
-            newChosen.setNumber(0);
             saves.endSave(newWorld, "New Game+");
             wobj.serializeSaveData(saves);
-            append(t, (new StringBuilder("A new save file has been added in slot ")).append(saves.getSaves().length).append(" which allows you to go back and start from Day 1 against this same group of Chosen.  ").toString());
+            append(t, (new StringBuilder("A new save file has been added in slot ")).append(saves.getSaves().length).append(" which allows you to go back and start from Day 1 against this same group of Chosen.  You may also export this file from the shop menu in order to let others try to beat your score.  ").toString());
         }
         catch(Exception ex)
         {
@@ -458,7 +765,7 @@ public class WorldState
             for(; target == nextSpeaker || target == null; target = currentCombatants[(int)(Math.random() * 3D)]);
             if(target.isSurrounded().booleanValue() || target.isCaptured().booleanValue())
             {
-                if(!target.getViolence().booleanValue() && !target.getService().booleanValue() && !target.getBeg().booleanValue() && !target.getCover().booleanValue() && validLine(5).booleanValue())
+                if(!target.getViolence().booleanValue() && !target.getService().booleanValue() && !target.getBeg().booleanValue() && !target.getCover().booleanValue() && !target.isDefiled().booleanValue() && validLine(5).booleanValue())
                     nextLine = 5;
                 else
                 if(target.getViolence().booleanValue() && validLine(6).booleanValue())
@@ -472,6 +779,18 @@ public class WorldState
                 else
                 if(target.getCover().booleanValue() && validLine(9).booleanValue())
                     nextLine = 9;
+                else
+                if(target.isInseminated().booleanValue() && validLine(18).booleanValue())
+                    nextLine = 18;
+                else
+                if(target.isOrgasming().booleanValue() && validLine(19).booleanValue())
+                    nextLine = 19;
+                else
+                if(target.isSodomized().booleanValue() && validLine(20).booleanValue())
+                    nextLine = 20;
+                else
+                if(target.isBroadcasted().booleanValue() && validLine(21).booleanValue())
+                    nextLine = 21;
             } else
             if(validLine(target.getLastAction()).booleanValue())
                 nextLine = target.getLastAction();
@@ -512,7 +831,27 @@ public class WorldState
                     if(nextSpeaker.getConfidenceBreakage() < 1)
                         nextLine = lastLine;
                 } else
-                if(nextLine == 9 && nextSpeaker.getDignityBreakage() < 1)
+                if(nextLine == 9)
+                {
+                    if(nextSpeaker.getDignityBreakage() < 1)
+                        nextLine = lastLine;
+                } else
+                if(nextLine == 18)
+                {
+                    if(nextSpeaker.getMoralityBreakage() < 2)
+                        nextLine = lastLine;
+                } else
+                if(nextLine == 19)
+                {
+                    if(nextSpeaker.getInnocenceBreakage() < 2)
+                        nextLine = lastLine;
+                } else
+                if(nextLine == 20)
+                {
+                    if(nextSpeaker.getConfidenceBreakage() < 2)
+                        nextLine = lastLine;
+                } else
+                if(nextLine == 21 && nextSpeaker.getDignityBreakage() < 2)
                     nextLine = lastLine;
             } else
             if(nextLine == 1 || nextLine == 6)
@@ -540,11 +879,30 @@ public class WorldState
                     nextLine = lastLine;
             } else
             if(nextLine == 4 || nextLine == 9)
+            {
                 if(nextSpeaker.getDignityBreakage() >= target.getDignityBreakage())
                     nextLine = lastLine;
                 else
                 if(nextLine == 9 && nextSpeaker.getDignityBreakage() > 0)
                     nextLine = lastLine;
+            } else
+            if(nextLine == 18)
+            {
+                if(nextSpeaker.getMoralityBreakage() >= 2)
+                    nextLine = lastLine;
+            } else
+            if(nextLine == 19)
+            {
+                if(nextSpeaker.getInnocenceBreakage() >= 2)
+                    nextLine = lastLine;
+            } else
+            if(nextLine == 20)
+            {
+                if(nextSpeaker.getConfidenceBreakage() >= 2)
+                    nextLine = lastLine;
+            } else
+            if(nextLine == 21 && nextSpeaker.getDignityBreakage() >= 2)
+                nextLine = lastLine;
             if(!validLine(nextLine).booleanValue())
                 if(target.getHATELevel() > nextSpeaker.getHATELevel() && target.getHATELevel() >= target.getPLEALevel() && target.getHATELevel() >= target.getINJULevel() && target.getHATELevel() >= target.getEXPOLevel() && validLine(10).booleanValue())
                     nextLine = 10;
@@ -918,7 +1276,7 @@ public class WorldState
                             nextSpeaker.say(t, (new StringBuilder("I could watch ")).append(target.getMainName()).append(" all day...").toString());
                         else
                         if(nextSpeaker.getInnocence() > 33)
-                            nextSpeaker.say(t, (new StringBuilder("Ah, looks like ")).append(target.getMainName()).append(" is their next target...").toString());
+                            nextSpeaker.say(t, (new StringBuilder("The Thralls look like they'd rather go after ")).append(target.getMainName()).append(".").toString());
                         else
                             nextSpeaker.say(t, (new StringBuilder("You're far too good at that, ")).append(target.getMainName()).append("...").toString());
                     } else
@@ -1003,7 +1361,7 @@ public class WorldState
                             nextSpeaker.say(t, (new StringBuilder("There's no reason to show them any sympathy, ")).append(target.getMainName()).append(".").toString());
                     } else
                     if(nextSpeaker.getInnocence() > 66)
-                        nextSpeaker.say(t, (new StringBuilder("Fight back, ")).append(target.getMainName()).append("!  Beat them up!").toString());
+                        nextSpeaker.say(t, (new StringBuilder("Fight back, ")).append(target.getMainName()).append("!  Beat 'em up!").toString());
                     else
                     if(nextSpeaker.getInnocence() > 33)
                         nextSpeaker.say(t, (new StringBuilder("Hurt them as much as you have to, ")).append(target.getMainName()).append("!").toString());
@@ -1281,6 +1639,7 @@ public class WorldState
                         nextSpeaker.say(t, (new StringBuilder("A-Assistance would be appreciated, ")).append(target.getMainName()).append("!").toString());
                 } else
                 if(nextLine == 17)
+                {
                     if(nextSpeaker.getDignity() > 66)
                     {
                         if(nextSpeaker.getConfidence() > 66)
@@ -1308,6 +1667,125 @@ public class WorldState
                         nextSpeaker.say(t, (new StringBuilder("I need to shake this off for ")).append(target.getMainName()).append("'s sake!").toString());
                     else
                         nextSpeaker.say(t, (new StringBuilder("I-I'm so pathetic, ")).append(target.getMainName()).append("...!").toString());
+                } else
+                if(nextLine == 18)
+                {
+                    if(nextSpeaker.getMorality() > 66)
+                    {
+                        if(nextSpeaker.getInnocence() > 66)
+                            nextSpeaker.say(t, (new StringBuilder("It's alright, ")).append(target.getMainName()).append(", getting raped doesn't make you a bad person!").toString());
+                        else
+                        if(nextSpeaker.getInnocence() > 33)
+                            nextSpeaker.say(t, (new StringBuilder("You resisted as best you could, ")).append(target.getMainName()).append("...").toString());
+                        else
+                            nextSpeaker.say(t, (new StringBuilder("I hope you don't blame yourself for this, ")).append(target.getMainName()).append("...").toString());
+                    } else
+                    if(nextSpeaker.getMorality() > 33)
+                    {
+                        if(nextSpeaker.getInnocence() > 66)
+                            nextSpeaker.say(t, (new StringBuilder("Oh no, they're doing gross stuff to ")).append(target.getMainName()).append(" now...").toString());
+                        else
+                        if(nextSpeaker.getInnocence() > 33)
+                            nextSpeaker.say(t, (new StringBuilder("Damn, I couldn't stop them from raping ")).append(target.getMainName()).append("...").toString());
+                        else
+                            nextSpeaker.say(t, (new StringBuilder("Don't worry, ")).append(target.getMainName()).append(", you won't get pregnant.  Probably.").toString());
+                    } else
+                    if(nextSpeaker.getInnocence() > 66)
+                        nextSpeaker.say(t, (new StringBuilder("It can actually feel kinda nice if you don't resist, ")).append(target.getMainName()).append("...").toString());
+                    else
+                    if(nextSpeaker.getInnocence() > 33)
+                        nextSpeaker.say(t, (new StringBuilder("Just let it happen, ")).append(target.getMainName()).append(".").toString());
+                    else
+                        nextSpeaker.say(t, (new StringBuilder("I'd recommend that you stop trying to fight back, ")).append(target.getMainName()).append(".").toString());
+                } else
+                if(nextLine == 19)
+                {
+                    if(nextSpeaker.getInnocence() > 66)
+                    {
+                        if(nextSpeaker.getDignity() > 66)
+                            nextSpeaker.say(t, (new StringBuilder("Don't be embarrassed about feeling good, ")).append(target.getMainName()).append("!").toString());
+                        else
+                        if(nextSpeaker.getDignity() > 33)
+                            nextSpeaker.say(t, (new StringBuilder("Ah, they're forcing ")).append(target.getMainName()).append(" to feel good...").toString());
+                        else
+                            nextSpeaker.say(t, (new StringBuilder("Why not just let yourself feel good, ")).append(target.getMainName()).append("?").toString());
+                    } else
+                    if(nextSpeaker.getInnocence() > 33)
+                    {
+                        if(nextSpeaker.getDignity() > 66)
+                            nextSpeaker.say(t, (new StringBuilder("You don't have to force yourself not to cum, ")).append(target.getMainName()).append(".").toString());
+                        else
+                        if(nextSpeaker.getDignity() > 33)
+                            nextSpeaker.say(t, (new StringBuilder("Looks like they're forcing ")).append(target.getMainName()).append(" to cum...").toString());
+                        else
+                            nextSpeaker.say(t, (new StringBuilder("You should stop trying not to cum, ")).append(target.getMainName()).append(".").toString());
+                    } else
+                    if(nextSpeaker.getDignity() > 66)
+                        nextSpeaker.say(t, (new StringBuilder("There's no shame in feeling the physiological orgasm response, ")).append(target.getMainName()).append(".").toString());
+                    else
+                    if(nextSpeaker.getDignity() > 33)
+                        nextSpeaker.say(t, (new StringBuilder("It seems that ")).append(target.getMainName()).append(" is being forced to orgasm.").toString());
+                    else
+                        nextSpeaker.say(t, (new StringBuilder("It is less painful when you cooperate, ")).append(target.getMainName()).append(".").toString());
+                } else
+                if(nextLine == 20)
+                {
+                    if(nextSpeaker.getConfidence() > 66)
+                    {
+                        if(nextSpeaker.getDignity() > 66)
+                            nextSpeaker.say(t, (new StringBuilder("Endure it, ")).append(target.getMainName()).append(".").toString());
+                        else
+                        if(nextSpeaker.getDignity() > 33)
+                            nextSpeaker.say(t, (new StringBuilder("Hold on, ")).append(target.getMainName()).append("!").toString());
+                        else
+                            nextSpeaker.say(t, (new StringBuilder("I can't help you this time, ")).append(target.getMainName()).append(".").toString());
+                    } else
+                    if(nextSpeaker.getInnocence() > 33)
+                    {
+                        if(nextSpeaker.getDignity() > 66)
+                            nextSpeaker.say(t, (new StringBuilder("You'll be alright, ")).append(target.getMainName()).append(".").toString());
+                        else
+                        if(nextSpeaker.getDignity() > 33)
+                            nextSpeaker.say(t, (new StringBuilder("I'm on my way, ")).append(target.getMainName()).append("!").toString());
+                        else
+                            nextSpeaker.say(t, (new StringBuilder("I know what you're going through, ")).append(target.getMainName()).append("...").toString());
+                    } else
+                    if(nextSpeaker.getDignity() > 66)
+                        nextSpeaker.say(t, (new StringBuilder("I know this isn't enough to break you, ")).append(target.getMainName()).append("...").toString());
+                    else
+                    if(nextSpeaker.getDignity() > 33)
+                        nextSpeaker.say(t, (new StringBuilder("I-I'll try to help, ")).append(target.getMainName()).append("!").toString());
+                    else
+                        nextSpeaker.say(t, (new StringBuilder("I'm sorry I'm not strong enough to help, ")).append(target.getMainName()).append("...").toString());
+                } else
+                if(nextLine == 21)
+                    if(nextSpeaker.getDignity() > 66)
+                    {
+                        if(nextSpeaker.getInnocence() > 66)
+                            nextSpeaker.say(t, (new StringBuilder("I know it's embarrassing, ")).append(target.getMainName()).append(", but you'll be fine!").toString());
+                        else
+                        if(nextSpeaker.getInnocence() > 33)
+                            nextSpeaker.say(t, (new StringBuilder(String.valueOf(target.getMainName()))).append("...  I wish we could stop everyone from seeing us like this...").toString());
+                        else
+                            nextSpeaker.say(t, (new StringBuilder("It's alright, ")).append(target.getMainName()).append(", people should be less interested in watching videos of your humiliation now that videos of mine are already out there.").toString());
+                    } else
+                    if(nextSpeaker.getDignity() > 33)
+                    {
+                        if(nextSpeaker.getInnocence() > 66)
+                            nextSpeaker.say(t, (new StringBuilder("It's really embarrassing, isn't it, ")).append(target.getMainName()).append("?").toString());
+                        else
+                        if(nextSpeaker.getInnocence() > 33)
+                            nextSpeaker.say(t, (new StringBuilder("The public may mock us now, ")).append(target.getMainName()).append(", but they'll be thanking us in the end.").toString());
+                        else
+                            nextSpeaker.say(t, (new StringBuilder("I'll find a way to cheer ")).append(target.getMainName()).append(" up after we're done here...").toString());
+                    } else
+                    if(nextSpeaker.getInnocence() > 66)
+                        nextSpeaker.say(t, (new StringBuilder("There's no reason to be embarrassed, ")).append(target.getMainName()).append("!").toString());
+                    else
+                    if(nextSpeaker.getInnocence() > 33)
+                        nextSpeaker.say(t, (new StringBuilder("The public may mock us, ")).append(target.getMainName()).append(", but it changes nothing.").toString());
+                    else
+                        nextSpeaker.say(t, (new StringBuilder("Perhaps I should let them film me some more in order to draw attention from ")).append(target.getMainName()).append("'s humiliation.").toString());
             } else
             if(nextLine == 1 || nextLine == 6)
             {
@@ -1730,6 +2208,7 @@ public class WorldState
                     nextSpeaker.say(t, (new StringBuilder("I really can't rely on ")).append(target.getMainName()).append("...").toString());
             } else
             if(nextLine == 17)
+            {
                 if(nextSpeaker.getDignity() > 66)
                 {
                     if(nextSpeaker.getConfidence() > 66)
@@ -1757,6 +2236,125 @@ public class WorldState
                     nextSpeaker.say(t, (new StringBuilder("Are you smirking at me, ")).append(target.getMainName()).append("?").toString());
                 else
                     nextSpeaker.say(t, (new StringBuilder("I bet you're enjoying seeing me like this, ")).append(target.getMainName()).append("...").toString());
+            } else
+            if(nextLine == 18)
+            {
+                if(nextSpeaker.getMorality() > 66)
+                {
+                    if(nextSpeaker.getInnocence() > 66)
+                        nextSpeaker.say(t, (new StringBuilder("Why'd you let them rape you, ")).append(target.getMainName()).append("?").toString());
+                    else
+                    if(nextSpeaker.getInnocence() > 33)
+                        nextSpeaker.say(t, (new StringBuilder("How can you let them defile you so easily, ")).append(target.getMainName()).append("?").toString());
+                    else
+                        nextSpeaker.say(t, (new StringBuilder("This is what you get for giving in to hatred, ")).append(target.getMainName()).append(".").toString());
+                } else
+                if(nextSpeaker.getMorality() > 33)
+                {
+                    if(nextSpeaker.getInnocence() > 66)
+                        nextSpeaker.say(t, (new StringBuilder("Is ")).append(target.getMainName()).append(" gonna become a mommy?").toString());
+                    else
+                    if(nextSpeaker.getInnocence() > 33)
+                        nextSpeaker.say(t, (new StringBuilder("Are you seriously having sex in the middle of battle, ")).append(target.getMainName()).append("?").toString());
+                    else
+                        nextSpeaker.say(t, (new StringBuilder("You let them break your Sexual Barrier?  ")).append(target.getMainName()).append(", you idiot...").toString());
+                } else
+                if(nextSpeaker.getInnocence() > 66)
+                    nextSpeaker.say(t, (new StringBuilder("Hahah, they're doing naughty stuff with ")).append(target.getMainName()).append(".").toString());
+                else
+                if(nextSpeaker.getInnocence() > 33)
+                    nextSpeaker.say(t, (new StringBuilder("You make a good fleshlight, ")).append(target.getMainName()).append(".").toString());
+                else
+                    nextSpeaker.say(t, (new StringBuilder("This is what you get for being so weak, ")).append(target.getMainName()).append(".").toString());
+            } else
+            if(nextLine == 19)
+            {
+                if(nextSpeaker.getInnocence() > 66)
+                {
+                    if(nextSpeaker.getMorality() > 66)
+                        nextSpeaker.say(t, (new StringBuilder(String.valueOf(target.getMainName()))).append(", it's wrong to feel good from something like that!").toString());
+                    else
+                    if(nextSpeaker.getMorality() > 33)
+                        nextSpeaker.say(t, (new StringBuilder(String.valueOf(target.getMainName()))).append(" must be a huge pervert to feel good from something like that.").toString());
+                    else
+                        nextSpeaker.say(t, (new StringBuilder("Hahah, ")).append(target.getMainName()).append(", you pervert, are you actually feeling good?").toString());
+                } else
+                if(nextSpeaker.getInnocence() > 33)
+                {
+                    if(nextSpeaker.getMorality() > 66)
+                        nextSpeaker.say(t, (new StringBuilder("You're cumming, ")).append(target.getMainName()).append("?  How can you live with the shame?").toString());
+                    else
+                    if(nextSpeaker.getMorality() > 33)
+                        nextSpeaker.say(t, (new StringBuilder("I can't believe ")).append(target.getMainName()).append(" is actually cumming.").toString());
+                    else
+                        nextSpeaker.say(t, (new StringBuilder(String.valueOf(target.getMainName()))).append(", you slut, are you actually cumming?").toString());
+                } else
+                if(nextSpeaker.getMorality() > 66)
+                    nextSpeaker.say(t, (new StringBuilder(String.valueOf(target.getMainName()))).append(", do you really lack the willpower to contain your lust?").toString());
+                else
+                if(nextSpeaker.getMorality() > 33)
+                    nextSpeaker.say(t, (new StringBuilder(String.valueOf(target.getMainName()))).append(" must be very weak-willed to allow ").append(target.himHer()).append("self to orgasm here.").toString());
+                else
+                    nextSpeaker.say(t, (new StringBuilder("Oh?  Wasn't enjoying that sort of thing supposed to be 'wrong', ")).append(target.getMainName()).append("?").toString());
+            } else
+            if(nextLine == 20)
+            {
+                if(nextSpeaker.getConfidence() > 66)
+                {
+                    if(nextSpeaker.getMorality() > 66)
+                        nextSpeaker.say(t, (new StringBuilder("Sorry, ")).append(target.getMainName()).append(", but there are more deserving victims I need to save before I get around to you.").toString());
+                    else
+                    if(nextSpeaker.getMorality() > 33)
+                        nextSpeaker.say(t, (new StringBuilder("Stop screaming, ")).append(target.getMainName()).append(", it's distracting.").toString());
+                    else
+                        nextSpeaker.say(t, (new StringBuilder("Scream all you like, ")).append(target.getMainName()).append(", I'm still not going to help you.").toString());
+                } else
+                if(nextSpeaker.getConfidence() > 33)
+                {
+                    if(nextSpeaker.getMorality() > 66)
+                        nextSpeaker.say(t, (new StringBuilder("Is it really that painful, ")).append(target.getMainName()).append("?").toString());
+                    else
+                    if(nextSpeaker.getMorality() > 33)
+                        nextSpeaker.say(t, (new StringBuilder("Just be quiet, ")).append(target.getMainName()).append("...").toString());
+                    else
+                        nextSpeaker.say(t, (new StringBuilder("Heh, I might take a break from the fight to watch ")).append(target.getMainName()).append(" get what's coming to ").append(target.himHer()).append(".").toString());
+                } else
+                if(nextSpeaker.getMorality() > 66)
+                    nextSpeaker.say(t, (new StringBuilder("Come on, ")).append(target.getMainName()).append(", there are people who are suffering a lot more than you...").toString());
+                else
+                if(nextSpeaker.getMorality() > 33)
+                    nextSpeaker.say(t, (new StringBuilder("Guess ")).append(target.getMainName()).append(" wasn't so strong after all...").toString());
+                else
+                    nextSpeaker.say(t, (new StringBuilder("Maybe now ")).append(target.getMainName()).append(" will stop thinking ").append(target.heShe()).append("'s so much better than everyone else...").toString());
+            } else
+            if(nextLine == 21)
+                if(nextSpeaker.getDignity() > 66)
+                {
+                    if(nextSpeaker.getMorality() > 66)
+                        nextSpeaker.say(t, (new StringBuilder("This is what you get for not paying attention to the state of your clothes, ")).append(target.getMainName()).append("...").toString());
+                    else
+                    if(nextSpeaker.getMorality() > 33)
+                        nextSpeaker.say(t, (new StringBuilder("You're going to make the rest of us look bad by association, ")).append(target.getMainName()).append(".").toString());
+                    else
+                        nextSpeaker.say(t, (new StringBuilder("Your pathetic state only makes me look that much better, ")).append(target.getMainName()).append(".").toString());
+                } else
+                if(nextSpeaker.getDignity() > 33)
+                {
+                    if(nextSpeaker.getMorality() > 66)
+                        nextSpeaker.say(t, (new StringBuilder(String.valueOf(target.getMainName()))).append(" is going to make the people lose hope in us...").toString());
+                    else
+                    if(nextSpeaker.getMorality() > 33)
+                        nextSpeaker.say(t, (new StringBuilder("You're distracting me, ")).append(target.getMainName()).append(".").toString());
+                    else
+                        nextSpeaker.say(t, (new StringBuilder("Now everyone will see you for the failure you are, ")).append(target.getMainName()).append("!").toString());
+                } else
+                if(nextSpeaker.getMorality() > 66)
+                    nextSpeaker.say(t, (new StringBuilder("This is what you get for caring so much about your public image, ")).append(target.getMainName()).append(".").toString());
+                else
+                if(nextSpeaker.getMorality() > 33)
+                    nextSpeaker.say(t, (new StringBuilder("I thought you were the type to try harder to keep your dignity, ")).append(target.getMainName()).append(".").toString());
+                else
+                    nextSpeaker.say(t, (new StringBuilder("Hahahah, you look so pathetic, ")).append(target.getMainName()).append("!").toString());
             nextSpeaker.say(t, "\"");
         }
         lastLastLine = lastLine;
@@ -2262,7 +2860,7 @@ public class WorldState
         StyledDocument doc = t.getStyledDocument();
         SimpleAttributeSet keyWord = new SimpleAttributeSet();
         StyleConstants.setFontSize(keyWord, 16);
-        StyleConstants.setForeground(keyWord, Color.BLACK);
+        StyleConstants.setForeground(keyWord, FOREGROUND);
         StyleConstants.setFontFamily(keyWord, "DialogInput");
         StyleConstants.setBold(keyWord, true);
         try
@@ -2338,7 +2936,7 @@ public class WorldState
         StyledDocument doc = t.getStyledDocument();
         SimpleAttributeSet keyWord = new SimpleAttributeSet();
         StyleConstants.setFontSize(keyWord, 16);
-        StyleConstants.setForeground(keyWord, Color.BLACK);
+        StyleConstants.setForeground(keyWord, FOREGROUND);
         StyleConstants.setFontFamily(keyWord, "DialogInput");
         StyleConstants.setBold(keyWord, true);
         StyleConstants.setUnderline(keyWord, true);
@@ -2391,14 +2989,33 @@ public class WorldState
         t.setCaretPosition(t.getDocument().getLength());
     }
 
+    public void blueAppend(JTextPane t, String s)
+    {
+        StyledDocument doc = t.getStyledDocument();
+        SimpleAttributeSet keyWord = new SimpleAttributeSet();
+        StyleConstants.setFontSize(keyWord, 16);
+        StyleConstants.setForeground(keyWord, BLUE);
+        StyleConstants.setFontFamily(keyWord, "DialogInput");
+        StyleConstants.setBold(keyWord, true);
+        try
+        {
+            doc.insertString(doc.getLength(), s, keyWord);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+        t.setCaretPosition(t.getDocument().getLength());
+    }
+
     public void inverseAppend(JTextPane t, String s)
     {
         StyledDocument doc = t.getStyledDocument();
         SimpleAttributeSet keyWord = new SimpleAttributeSet();
         StyleConstants.setFontSize(keyWord, 16);
-        StyleConstants.setForeground(keyWord, Color.WHITE);
+        StyleConstants.setForeground(keyWord, BACKGROUND);
         StyleConstants.setFontFamily(keyWord, "DialogInput");
-        StyleConstants.setBackground(keyWord, Color.BLACK);
+        StyleConstants.setBackground(keyWord, FOREGROUND);
         StyleConstants.setBold(keyWord, true);
         try
         {
@@ -2442,6 +3059,11 @@ public class WorldState
         for(int i = 0; i < groupScenes.length; i++)
             groupScenes[i] = Boolean.valueOf(false);
 
+        setCustomStrings(w.getCustomStrings());
+        setCustomBooleans(w.getCustomBooleans());
+        recordedCommanders = w.getRecordedCommanders();
+        commentary = w.getCommentary();
+        actions = w.getActions();
     }
 
     public void tutorialInit()
@@ -2502,7 +3124,6 @@ public class WorldState
         for(int i = 0; i < 3; i++)
         {
             Chosen c = new Chosen();
-            c.setName(this, nameSeed);
             c.generate(this);
             cast[i] = c;
             c.setSomeAngst();
@@ -2557,86 +3178,7 @@ public class WorldState
             for(int i = 0; i < statSeed.length; i++)
                 statSeed[i] = (int)(Math.random() * 101D);
 
-            for(int i = 0; i < 4; i++)
-            {
-                int first = statSeed[i] / 33 + (statSeed[i] % 33 != 0 ? 1 : 0);
-                if(first < 1)
-                    first = 1;
-                else
-                if(first > 3)
-                    first = 3;
-                int second = statSeed[i + 4] / 33 + (statSeed[i + 4] % 33 != 0 ? 1 : 0);
-                if(second < 1)
-                    second = 1;
-                else
-                if(second > 3)
-                    second = 3;
-                int third = statSeed[i + 8] / 33 + (statSeed[i + 8] % 33 != 0 ? 1 : 0);
-                if(third < 1)
-                    third = 1;
-                else
-                if(third > 3)
-                    third = 3;
-                if(first == second || first == third || second == third)
-                    goodStats = Boolean.valueOf(false);
-            }
-
-            for(int i = 0; i < 4; i++)
-            {
-                int first = statSeed[i] / 25 + (statSeed[i] % 25 != 0 ? 1 : 0);
-                if(first < 1)
-                    first = 1;
-                int second = statSeed[i + 4] / 25 + (statSeed[i + 4] % 25 != 0 ? 1 : 0);
-                if(second < 1)
-                    second = 1;
-                int third = statSeed[i + 8] / 25 + (statSeed[i + 8] % 25 != 0 ? 1 : 0);
-                if(third < 1)
-                    third = 1;
-                if(first == second || first == third || second == third)
-                    goodStats = Boolean.valueOf(false);
-            }
-
-            Boolean extremeLow = Boolean.valueOf(false);
-            Boolean extremeHigh = Boolean.valueOf(false);
-            Boolean midValue = Boolean.valueOf(false);
-            for(int i = 0; i < 4; i++)
-                if(statSeed[i] > 66)
-                    extremeHigh = Boolean.valueOf(true);
-                else
-                if(statSeed[i] < 34)
-                    extremeLow = Boolean.valueOf(true);
-                else
-                    midValue = Boolean.valueOf(true);
-
-            if(!extremeLow.booleanValue() || !extremeHigh.booleanValue() || !midValue.booleanValue())
-                goodStats = Boolean.valueOf(false);
-            extremeLow = Boolean.valueOf(false);
-            extremeHigh = Boolean.valueOf(false);
-            midValue = Boolean.valueOf(false);
-            for(int i = 4; i < 8; i++)
-                if(statSeed[i] > 66)
-                    extremeHigh = Boolean.valueOf(true);
-                else
-                if(statSeed[i] < 34)
-                    extremeLow = Boolean.valueOf(true);
-                else
-                    midValue = Boolean.valueOf(true);
-
-            if(!extremeLow.booleanValue() || !extremeHigh.booleanValue() || !midValue.booleanValue())
-                goodStats = Boolean.valueOf(false);
-            extremeLow = Boolean.valueOf(false);
-            extremeHigh = Boolean.valueOf(false);
-            midValue = Boolean.valueOf(false);
-            for(int i = 8; i < 12; i++)
-                if(statSeed[i] > 66)
-                    extremeHigh = Boolean.valueOf(true);
-                else
-                if(statSeed[i] < 34)
-                    extremeLow = Boolean.valueOf(true);
-                else
-                    midValue = Boolean.valueOf(true);
-
-            if(!extremeLow.booleanValue() || !extremeHigh.booleanValue() || !midValue.booleanValue())
+            if(!legalSpread(statSeed, Boolean.valueOf(false)).booleanValue())
                 goodStats = Boolean.valueOf(false);
             Boolean pureTarget = Boolean.valueOf(false);
             Boolean corruptTarget = Boolean.valueOf(false);
@@ -2653,6 +3195,93 @@ public class WorldState
         for(int i = 0; i < groupScenes.length; i++)
             groupScenes[i] = Boolean.valueOf(false);
 
+    }
+
+    public Boolean legalSpread(int statSeed[], Boolean customized)
+    {
+        Boolean goodStats = Boolean.valueOf(true);
+        for(int i = 0; i < 4; i++)
+        {
+            int first = statSeed[i] / 33 + (statSeed[i] % 33 != 0 ? 1 : 0);
+            if(first < 1)
+                first = 1;
+            else
+            if(first > 3)
+                first = 3;
+            int second = statSeed[i + 4] / 33 + (statSeed[i + 4] % 33 != 0 ? 1 : 0);
+            if(second < 1)
+                second = 1;
+            else
+            if(second > 3)
+                second = 3;
+            int third = statSeed[i + 8] / 33 + (statSeed[i + 8] % 33 != 0 ? 1 : 0);
+            if(third < 1)
+                third = 1;
+            else
+            if(third > 3)
+                third = 3;
+            if(first == second || first == third || second == third)
+                goodStats = Boolean.valueOf(false);
+        }
+
+        for(int i = 0; i < 4 && !customized.booleanValue(); i++)
+        {
+            int first = statSeed[i] / 25 + (statSeed[i] % 25 != 0 ? 1 : 0);
+            if(first < 1)
+                first = 1;
+            int second = statSeed[i + 4] / 25 + (statSeed[i + 4] % 25 != 0 ? 1 : 0);
+            if(second < 1)
+                second = 1;
+            int third = statSeed[i + 8] / 25 + (statSeed[i + 8] % 25 != 0 ? 1 : 0);
+            if(third < 1)
+                third = 1;
+            if(first == second || first == third || second == third)
+                goodStats = Boolean.valueOf(false);
+        }
+
+        Boolean extremeLow = Boolean.valueOf(false);
+        Boolean extremeHigh = Boolean.valueOf(false);
+        Boolean midValue = Boolean.valueOf(false);
+        for(int i = 0; i < 4; i++)
+            if(statSeed[i] > 66)
+                extremeHigh = Boolean.valueOf(true);
+            else
+            if(statSeed[i] < 34)
+                extremeLow = Boolean.valueOf(true);
+            else
+                midValue = Boolean.valueOf(true);
+
+        if(!extremeLow.booleanValue() || !extremeHigh.booleanValue() || !midValue.booleanValue())
+            goodStats = Boolean.valueOf(false);
+        extremeLow = Boolean.valueOf(false);
+        extremeHigh = Boolean.valueOf(false);
+        midValue = Boolean.valueOf(false);
+        for(int i = 4; i < 8; i++)
+            if(statSeed[i] > 66)
+                extremeHigh = Boolean.valueOf(true);
+            else
+            if(statSeed[i] < 34)
+                extremeLow = Boolean.valueOf(true);
+            else
+                midValue = Boolean.valueOf(true);
+
+        if(!extremeLow.booleanValue() || !extremeHigh.booleanValue() || !midValue.booleanValue())
+            goodStats = Boolean.valueOf(false);
+        extremeLow = Boolean.valueOf(false);
+        extremeHigh = Boolean.valueOf(false);
+        midValue = Boolean.valueOf(false);
+        for(int i = 8; i < 12; i++)
+            if(statSeed[i] > 66)
+                extremeHigh = Boolean.valueOf(true);
+            else
+            if(statSeed[i] < 34)
+                extremeLow = Boolean.valueOf(true);
+            else
+                midValue = Boolean.valueOf(true);
+
+        if(!extremeLow.booleanValue() || !extremeHigh.booleanValue() || !midValue.booleanValue())
+            goodStats = Boolean.valueOf(false);
+        return goodStats;
     }
 
     public Boolean determineVVirg(int morality, int innocence, int confidence, int dignity)
@@ -2859,7 +3488,8 @@ public class WorldState
                 if(allGrabbed.booleanValue())
                 {
                     append(t, "The Demons have the Chosen at their mercy!\n");
-                    exterminationMultiplier = (exterminationMultiplier * 3) / 2;
+                    if(exterminationProgress < exterminationComplete)
+                        exterminationMultiplier = (exterminationMultiplier * 3) / 2;
                 } else
                 if(exterminationProgress >= exterminationComplete)
                 {
@@ -2887,7 +3517,8 @@ public class WorldState
                         }
                         append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" can't finish clearing out the Demons due to the risk of hitting the trapped ").append(trappedChosen.getMainName()).append(" with friendly fire!\n").toString());
                     }
-                    exterminationMultiplier = (exterminationMultiplier * 3) / 2;
+                    if(exterminationProgress < exterminationComplete)
+                        exterminationMultiplier = (exterminationMultiplier * 3) / 2;
                 } else
                 {
                     while(c == null) 
@@ -3026,12 +3657,3632 @@ public class WorldState
         onTrack = Boolean.valueOf(false);
     }
 
+    public void freshCustom(JTextPane t, JPanel p, JFrame f)
+    {
+        initializeTips();
+        for(int i = 0; i < 6; i++)
+        {
+            for(Boolean proceed = Boolean.valueOf(false); !proceed.booleanValue();)
+            {
+                nameSeed[i] = (int)(Math.random() * 26D);
+                proceed = Boolean.valueOf(true);
+                for(int j = 0; j < i; j++)
+                    if(nameSeed[i] == nameSeed[j])
+                        proceed = Boolean.valueOf(false);
+
+            }
+
+        }
+
+        for(int i = 0; i < techs.length; i++)
+        {
+            techs[i] = new Tech();
+            techs[i].initialize(i, this);
+        }
+
+        for(int i = 0; i < bodyStatus.length; i++)
+            bodyStatus[i] = Boolean.valueOf(false);
+
+        shopTutorial = "\n\nAs the Chosen are traumatized in battle, they give in to their own weakness and turn their backs on their duty.  As their trauma grows greater, so too do their transgressions.  And the greater their transgressions, the more powerful the Demons become!  Spend this Evil Energy to increase your abilities, and use those abilities to make the Chosen fall even further!";
+        groupTutorial = "\n\nThere is weakness in numbers.  A rival can become an enemy, and a friend is just a burden.  The Chosen will grow closer as they're corrupted.  Turn those feelings to your own ends and use the Chosen against each other!";
+        for(int i = 0; i < 3; i++)
+        {
+            for(int j = 0; j < 3; j++)
+            {
+                friendship[i][j] = 0;
+                friction[i][j] = 0;
+                remaining[i][j] = 0;
+            }
+
+        }
+
+        for(int i = 0; i < groupScenes.length; i++)
+            groupScenes[i] = Boolean.valueOf(false);
+
+        nameGen(t, p, f);
+    }
+
+    public void nameGen(final JTextPane t, final JPanel p, final JFrame f)
+    {
+        p.removeAll();
+        final Chosen dummy = new Chosen();
+        dummy.setNumber(0);
+        if(customNames[0] == null)
+        {
+            customNames[0] = dummy.genName(this, nameSeed)[0];
+            customNames[1] = dummy.genName(this, nameSeed)[1];
+        }
+        dummy.setNumber(1);
+        if(customNames[2] == null)
+        {
+            customNames[2] = dummy.genName(this, nameSeed)[0];
+            customNames[3] = dummy.genName(this, nameSeed)[1];
+        }
+        dummy.setNumber(2);
+        if(customNames[4] == null)
+        {
+            customNames[4] = dummy.genName(this, nameSeed)[0];
+            customNames[5] = dummy.genName(this, nameSeed)[1];
+        }
+        append(t, "\n\n---\n\nGenerating a custom team of Chosen.  Their real names are (in order of appearance):\n\n");
+        if(gaijinStatus[0].booleanValue())
+        {
+            append(t, customNames[0]);
+            if(customNames[1].length() > 0)
+                append(t, (new StringBuilder(" ")).append(customNames[1]).toString());
+        } else
+        {
+            if(customNames[1].length() > 0)
+                append(t, (new StringBuilder(String.valueOf(customNames[1]))).append(" ").toString());
+            append(t, customNames[0]);
+        }
+        append(t, "\n");
+        if(gaijinStatus[1].booleanValue())
+        {
+            append(t, customNames[2]);
+            if(customNames[3].length() > 0)
+                append(t, (new StringBuilder(" ")).append(customNames[3]).toString());
+        } else
+        {
+            if(customNames[3].length() > 0)
+                append(t, (new StringBuilder(String.valueOf(customNames[3]))).append(" ").toString());
+            append(t, customNames[2]);
+        }
+        append(t, "\n");
+        if(gaijinStatus[2].booleanValue())
+        {
+            append(t, customNames[4]);
+            if(customNames[5].length() > 0)
+                append(t, (new StringBuilder(" ")).append(customNames[5]).toString());
+        } else
+        {
+            if(customNames[5].length() > 0)
+                append(t, (new StringBuilder(String.valueOf(customNames[5]))).append(" ").toString());
+            append(t, customNames[4]);
+        }
+        append(t, "\n\nPick which one's name you'd like to change.  When you're done, either continue to the personality questionaire or allow the game to generate a random set of personalities as normal.");
+        for(int i = 0; i < 3; i++)
+        {
+            final int thisChosen = i;
+            JButton Change = new JButton(customNames[2 * i]);
+            Change.addActionListener(new ActionListener() {
+
+                public void actionPerformed(ActionEvent e)
+                {
+                    p.removeAll();
+                    String input = JOptionPane.showInputDialog((new StringBuilder("What is ")).append(dummy.hisHer()).append(" family surname?  Leave blank to have ").append(dummy.himHer()).append(" lack a surname.").toString());
+                    if(input == null)
+                        customNames[thisChosen * 2 + 1] = "";
+                    else
+                        customNames[thisChosen * 2 + 1] = input;
+                    input = JOptionPane.showInputDialog((new StringBuilder("And what name was ")).append(dummy.heShe()).append(" given at birth?  Leave blank to keep the default (").append(customNames[thisChosen * 2]).append(").").toString());
+                    if(input != null && input.length() > 0)
+                        customNames[thisChosen * 2] = input;
+                    if(customNames[thisChosen * 2 + 1].length() > 0)
+                    {
+                        append(t, (new StringBuilder("\n\n---\n\nDoes ")).append(dummy.heShe()).append(" use Eastern name order (").append(customNames[thisChosen * 2 + 1]).append(" ").append(customNames[thisChosen * 2]).append(") or Western name order (").append(customNames[thisChosen * 2]).append(" ").append(customNames[thisChosen * 2 + 1]).append(")?").toString());
+                        JButton Eastern = new JButton("Eastern");
+                        Eastern.addActionListener(new ActionListener() {
+
+                            public void actionPerformed(ActionEvent e)
+                            {
+                                gaijinStatus[thisChosen] = Boolean.valueOf(false);
+                                nameGen(t, p, f);
+                            }
+
+                            final _cls1 this$1;
+                            private final int val$thisChosen;
+                            private final JTextPane val$t;
+                            private final JPanel val$p;
+                            private final JFrame val$f;
+
+                    
+                    {
+                        this$1 = _cls1.this;
+                        thisChosen = i;
+                        t = jtextpane;
+                        p = jpanel;
+                        f = jframe;
+                        super();
+                    }
+                        });
+                        p.add(Eastern);
+                        JButton Western = new JButton("Western");
+                        Western.addActionListener(new ActionListener() {
+
+                            public void actionPerformed(ActionEvent e)
+                            {
+                                gaijinStatus[thisChosen] = Boolean.valueOf(true);
+                                nameGen(t, p, f);
+                            }
+
+                            final _cls1 this$1;
+                            private final int val$thisChosen;
+                            private final JTextPane val$t;
+                            private final JPanel val$p;
+                            private final JFrame val$f;
+
+                    
+                    {
+                        this$1 = _cls1.this;
+                        thisChosen = i;
+                        t = jtextpane;
+                        p = jpanel;
+                        f = jframe;
+                        super();
+                    }
+                        });
+                        p.add(Western);
+                        p.validate();
+                        p.repaint();
+                    } else
+                    {
+                        nameGen(t, p, f);
+                    }
+                }
+
+                final WorldState this$0;
+                private final JPanel val$p;
+                private final Chosen val$dummy;
+                private final int val$thisChosen;
+                private final JTextPane val$t;
+                private final JFrame val$f;
+
+
+            
+            {
+                this$0 = WorldState.this;
+                p = jpanel;
+                dummy = chosen;
+                thisChosen = i;
+                t = jtextpane;
+                f = jframe;
+                super();
+            }
+            });
+            p.add(Change);
+        }
+
+        JButton Continue = new JButton("Continue");
+        Continue.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                personalityGen(t, p, f, 0);
+            }
+
+            final WorldState this$0;
+            private final JTextPane val$t;
+            private final JPanel val$p;
+            private final JFrame val$f;
+
+            
+            {
+                this$0 = WorldState.this;
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                super();
+            }
+        });
+        p.add(Continue);
+        JButton Randomize = new JButton("Full Random");
+        Randomize.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                for(int i = 0; i < 24; i++)
+                    quizAnswers[i] = null;
+
+                for(Boolean goodStats = Boolean.valueOf(false); !goodStats.booleanValue();)
+                {
+                    goodStats = Boolean.valueOf(true);
+                    for(int i = 0; i < statSeed.length; i++)
+                        statSeed[i] = (int)(Math.random() * 101D);
+
+                    if(!legalSpread(statSeed, Boolean.valueOf(false)).booleanValue())
+                        goodStats = Boolean.valueOf(false);
+                    Boolean pureTarget = Boolean.valueOf(false);
+                    Boolean corruptTarget = Boolean.valueOf(false);
+                    for(int i = 0; i < 3; i++)
+                        if(determinePurity(statSeed[i * 4], statSeed[1 + i * 4], statSeed[2 + i * 4], statSeed[3 + i * 4]).booleanValue())
+                            pureTarget = Boolean.valueOf(true);
+                        else
+                            corruptTarget = Boolean.valueOf(true);
+
+                    if(!pureTarget.booleanValue() || !corruptTarget.booleanValue())
+                        goodStats = Boolean.valueOf(false);
+                }
+
+                newVulnerabilities(t, p, f);
+            }
+
+            final WorldState this$0;
+            private final JTextPane val$t;
+            private final JPanel val$p;
+            private final JFrame val$f;
+
+            
+            {
+                this$0 = WorldState.this;
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                super();
+            }
+        });
+        p.add(Randomize);
+        JButton Quit = new JButton("Quit");
+        Quit.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                p.removeAll();
+                append(t, "\n\n---\n\nReally quit?  All customization of this team will be lost.");
+                JButton ReallyQuit = new JButton("Quit");
+                ReallyQuit.addActionListener(new ActionListener() {
+
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        append(t, "\n\n---\n\n");
+                        Project.IntroOne(t, p, f, new WorldState());
+                    }
+
+                    final _cls4 this$1;
+                    private final JTextPane val$t;
+                    private final JPanel val$p;
+                    private final JFrame val$f;
+
+                    
+                    {
+                        this$1 = _cls4.this;
+                        t = jtextpane;
+                        p = jpanel;
+                        f = jframe;
+                        super();
+                    }
+                });
+                p.add(ReallyQuit);
+                JButton Back = new JButton("Cancel");
+                Back.addActionListener(new ActionListener() {
+
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        nameGen(t, p, f);
+                    }
+
+                    final _cls4 this$1;
+                    private final JTextPane val$t;
+                    private final JPanel val$p;
+                    private final JFrame val$f;
+
+                    
+                    {
+                        this$1 = _cls4.this;
+                        t = jtextpane;
+                        p = jpanel;
+                        f = jframe;
+                        super();
+                    }
+                });
+                p.add(Back);
+                p.validate();
+                p.repaint();
+            }
+
+            final WorldState this$0;
+            private final JPanel val$p;
+            private final JTextPane val$t;
+            private final JFrame val$f;
+
+
+            
+            {
+                this$0 = WorldState.this;
+                p = jpanel;
+                t = jtextpane;
+                f = jframe;
+                super();
+            }
+        });
+        p.add(Quit);
+        p.validate();
+        p.repaint();
+    }
+
+    public void personalityGen(final JTextPane t, final JPanel p, final JFrame f, final int progress)
+    {
+        p.removeAll();
+        append(t, "\n\n---\n\n");
+        for(int i = 0; i < 3; i++)
+        {
+            for(int j = 0; j < 8; j++)
+                personalityWeights[progress][i][j] = 0;
+
+        }
+
+        int questionImpact[] = new int[5];
+        if(progress == 0)
+        {
+            append(t, "This segment takes the form of a series of questions about which of the Chosen fits a given description best.  If the question doesn't have a clear answer, then select 'Pass'.\n\nThis system will try to produce a set of three contrasting personalities, so if two of them seem to share a trait, it will pick one to exhibit the trait more strongly than the other.  It isn't possible for it to generate two Chosen with the same personality.\n\nQuestion 1: Which of them has the most faith in humanity?");
+            questionImpact = (new int[] {
+                1, 1, 0, 0, 0, 0, 0, 0
+            });
+        } else
+        if(progress == 1)
+        {
+            append(t, "Question 2: Who is the first to jump into harm's way when people are in danger?");
+            questionImpact = (new int[] {
+                1, 0, 1, 0, 0, 0, 0, 0
+            });
+        } else
+        if(progress == 2)
+        {
+            append(t, "Question 3: Who puts the most effort into inspiring hope in others?");
+            questionImpact = (new int[] {
+                1, 0, 0, 1, 0, 0, 0, 0
+            });
+        } else
+        if(progress == 3)
+        {
+            append(t, "Question 4: Who is the most headstrong?");
+            questionImpact = (new int[] {
+                0, 1, 1, 0, 0, 0, 0, 0
+            });
+        } else
+        if(progress == 4)
+        {
+            append(t, "Question 5: Who tries the hardest to look cool?");
+            questionImpact = (new int[] {
+                0, 1, 0, 1, 0, 0, 0, 0
+            });
+        } else
+        if(progress == 5)
+        {
+            append(t, "Question 6: Who is the most prideful?");
+            questionImpact = (new int[] {
+                0, 0, 1, 1, 0, 0, 0, 0
+            });
+        } else
+        if(progress == 6)
+        {
+            append(t, "Question 7: Who thinks the most about what good and evil actually are?");
+            questionImpact = (new int[] {
+                1, 0, 0, 0, 0, 1, 0, 0
+            });
+        } else
+        if(progress == 7)
+        {
+            append(t, "Question 8: Who cares the most about improving herself?");
+            questionImpact = (new int[] {
+                1, 0, 0, 0, 0, 0, 1, 0
+            });
+        } else
+        if(progress == 8)
+        {
+            append(t, "Question 9: Who is the most willing to tolerate humiliation?");
+            questionImpact = (new int[] {
+                1, 0, 0, 0, 0, 0, 0, 1
+            });
+        } else
+        if(progress == 9)
+        {
+            append(t, "Question 10: Who has the weakest willpower?");
+            questionImpact = (new int[] {
+                0, 1, 0, 0, 0, 0, 1, 0
+            });
+        } else
+        if(progress == 10)
+        {
+            append(t, "Question 11: Who finds it most difficult to lie?");
+            questionImpact = (new int[] {
+                0, 1, 0, 0, 0, 0, 0, 1
+            });
+        } else
+        if(progress == 11)
+        {
+            append(t, "Question 12: Who cares the least what people think of her?");
+            questionImpact = (new int[] {
+                0, 0, 1, 0, 0, 0, 0, 1
+            });
+        } else
+        if(progress == 12)
+        {
+            append(t, "Question 13: Who is the most self-centered?");
+            questionImpact = (new int[] {
+                0, 1, 0, 0, 1, 0, 0, 0
+            });
+        } else
+        if(progress == 13)
+        {
+            append(t, "Question 14: Who is the most violent?");
+            questionImpact = (new int[] {
+                0, 0, 1, 0, 1, 0, 0, 0
+            });
+        } else
+        if(progress == 14)
+        {
+            append(t, "Question 15: Who is least likely to admit her own faults?");
+            questionImpact = (new int[] {
+                0, 0, 0, 1, 1, 0, 0, 0
+            });
+        } else
+        if(progress == 15)
+        {
+            append(t, "Question 16: Who is the best at remaining calm and rational despite distractions?");
+            questionImpact = (new int[] {
+                0, 0, 1, 0, 0, 1, 0, 0
+            });
+        } else
+        if(progress == 16)
+        {
+            append(t, "Question 17: Who is the best at reading a social situation?");
+            questionImpact = (new int[] {
+                0, 0, 0, 1, 0, 1, 0, 0
+            });
+        } else
+        if(progress == 17)
+        {
+            append(t, "Question 18: Who is the most embarrassed by sexual matters?");
+            questionImpact = (new int[] {
+                0, 0, 0, 1, 0, 0, 1, 0
+            });
+        } else
+        if(progress == 18)
+        {
+            append(t, "Question 19: Who is bothered the least when she sees other people suffer?");
+            questionImpact = (new int[] {
+                0, 0, 0, 0, 1, 1, 0, 0
+            });
+        } else
+        if(progress == 19)
+        {
+            append(t, "Question 20: Who spends the most time worrying about her own safety?");
+            questionImpact = (new int[] {
+                0, 0, 0, 0, 1, 0, 1, 0
+            });
+        } else
+        if(progress == 20)
+        {
+            append(t, "Question 21: Who says the most hurtful things?");
+            questionImpact = (new int[] {
+                0, 0, 0, 0, 1, 0, 0, 1
+            });
+        } else
+        if(progress == 21)
+        {
+            append(t, "Question 22: Who is the most pessimistic about her chances of winning?");
+            questionImpact = (new int[] {
+                0, 0, 0, 0, 0, 1, 1, 0
+            });
+        } else
+        if(progress == 22)
+        {
+            append(t, "Question 23: Who finds it most difficult to relate to regular people?");
+            questionImpact = (new int[] {
+                0, 0, 0, 0, 0, 1, 0, 1
+            });
+        } else
+        if(progress == 23)
+        {
+            append(t, "Question 24: Who is most willing to ask for help?");
+            questionImpact = (new int[] {
+                0, 0, 0, 0, 0, 0, 1, 1
+            });
+        }
+        if(quizAnswers[progress] != null)
+            append(t, (new StringBuilder("  (Previous answer: ")).append(quizAnswers[progress]).append(".)").toString());
+        for(int i = 0; i < 3; i++)
+        {
+            final int finalImpact[] = questionImpact;
+            final int thisChosen = i;
+            JButton Pick = new JButton(customNames[i * 2]);
+            Pick.addActionListener(new ActionListener() {
+
+                public void actionPerformed(ActionEvent e)
+                {
+                    personalityWeights[progress][thisChosen] = finalImpact;
+                    quizAnswers[progress] = customNames[thisChosen * 2];
+                    if(progress < 23)
+                        personalityGen(t, p, f, progress + 1);
+                    else
+                        determineStats(t, p, f);
+                }
+
+                final WorldState this$0;
+                private final int val$progress;
+                private final int val$thisChosen;
+                private final int val$finalImpact[];
+                private final JTextPane val$t;
+                private final JPanel val$p;
+                private final JFrame val$f;
+
+            
+            {
+                this$0 = WorldState.this;
+                progress = i;
+                thisChosen = j;
+                finalImpact = ai;
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                super();
+            }
+            });
+            p.add(Pick);
+        }
+
+        JButton Pass = new JButton("Pass");
+        Pass.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                quizAnswers[progress] = "pass";
+                if(progress < 23)
+                    personalityGen(t, p, f, progress + 1);
+                else
+                    determineStats(t, p, f);
+            }
+
+            final WorldState this$0;
+            private final int val$progress;
+            private final JTextPane val$t;
+            private final JPanel val$p;
+            private final JFrame val$f;
+
+            
+            {
+                this$0 = WorldState.this;
+                progress = i;
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                super();
+            }
+        });
+        p.add(Pass);
+        JButton Back = new JButton("Back");
+        Back.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                if(progress > 0)
+                    personalityGen(t, p, f, progress - 1);
+                else
+                    nameGen(t, p, f);
+            }
+
+            final WorldState this$0;
+            private final int val$progress;
+            private final JTextPane val$t;
+            private final JPanel val$p;
+            private final JFrame val$f;
+
+            
+            {
+                this$0 = WorldState.this;
+                progress = i;
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                super();
+            }
+        });
+        p.add(Back);
+        JButton Quit = new JButton("Quit");
+        Quit.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                p.removeAll();
+                append(t, "\n\n---\n\nReally quit?  All customization of this team will be lost.");
+                JButton ReallyQuit = new JButton("Quit");
+                ReallyQuit.addActionListener(new ActionListener() {
+
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        append(t, "\n\n---\n\n");
+                        Project.IntroOne(t, p, f, new WorldState());
+                    }
+
+                    final _cls8 this$1;
+                    private final JTextPane val$t;
+                    private final JPanel val$p;
+                    private final JFrame val$f;
+
+                    
+                    {
+                        this$1 = _cls8.this;
+                        t = jtextpane;
+                        p = jpanel;
+                        f = jframe;
+                        super();
+                    }
+                });
+                p.add(ReallyQuit);
+                JButton Back = new JButton("Cancel");
+                Back.addActionListener(new ActionListener() {
+
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        personalityGen(t, p, f, progress);
+                    }
+
+                    final _cls8 this$1;
+                    private final JTextPane val$t;
+                    private final JPanel val$p;
+                    private final JFrame val$f;
+                    private final int val$progress;
+
+                    
+                    {
+                        this$1 = _cls8.this;
+                        t = jtextpane;
+                        p = jpanel;
+                        f = jframe;
+                        progress = i;
+                        super();
+                    }
+                });
+                p.add(Back);
+                p.validate();
+                p.repaint();
+            }
+
+            final WorldState this$0;
+            private final JPanel val$p;
+            private final JTextPane val$t;
+            private final JFrame val$f;
+            private final int val$progress;
+
+
+            
+            {
+                this$0 = WorldState.this;
+                p = jpanel;
+                t = jtextpane;
+                f = jframe;
+                progress = i;
+                super();
+            }
+        });
+        p.add(Quit);
+        p.validate();
+        p.repaint();
+    }
+
+    public void determineStats(JTextPane t, JPanel p, JFrame f)
+    {
+        int certainties[][] = new int[3][4];
+        int ranges[][] = new int[3][4];
+        int flexibilities[][] = new int[3][4];
+        for(int i = 0; i < 3; i++)
+        {
+            for(int j = 0; j < 4; j++)
+            {
+                for(int k = 0; k < 24; k++)
+                {
+                    certainties[i][j] += personalityWeights[k][i][j] + personalityWeights[k][i][j + 4];
+                    ranges[i][j] += personalityWeights[k][i][j] - personalityWeights[k][i][j + 4];
+                }
+
+            }
+
+        }
+
+        int mostCertain[] = new int[4];
+        for(int j = 0; j < 4; j++)
+        {
+            int highestCertainty = 0;
+            for(int i = 0; i < 3; i++)
+                if(certainties[i][j] > highestCertainty)
+                {
+                    mostCertain[j] = i;
+                    highestCertainty = certainties[i][j];
+                }
+
+            int absoluteRange = ranges[mostCertain[j]][j];
+            if(absoluteRange < 0)
+                absoluteRange = -absoluteRange;
+            int margin = 0;
+            if(absoluteRange != certainties[mostCertain[j]][j])
+            {
+                int multiplier = (100 * (certainties[mostCertain[j]][j] + absoluteRange)) / (certainties[mostCertain[j]][j] - absoluteRange);
+                if((absoluteRange * multiplier) / 20 > 50)
+                {
+                    int sign = 1;
+                    if(ranges[mostCertain[j]][j] < 0)
+                        sign = -1;
+                    if(certainties[mostCertain[j]][j] == 8)
+                        margin = 40;
+                    if(certainties[mostCertain[j]][j] == 7)
+                        margin = 49;
+                    else
+                    if(certainties[mostCertain[j]][j] == 6)
+                        margin = 43;
+                    else
+                    if(certainties[mostCertain[j]][j] == 5)
+                        margin = 45;
+                    margin *= sign;
+                } else
+                {
+                    margin = (ranges[mostCertain[j]][j] * multiplier) / 20;
+                }
+            } else
+            {
+                int multiplier = 1;
+                if(ranges[mostCertain[j]][j] < 0)
+                    multiplier = -1;
+                if(certainties[mostCertain[j]][j] == 6)
+                    margin = 50;
+                else
+                if(certainties[mostCertain[j]][j] == 5)
+                    margin = 48;
+                else
+                if(certainties[mostCertain[j]][j] == 4)
+                    margin = 47;
+                else
+                if(certainties[mostCertain[j]][j] == 3)
+                    margin = 35;
+                else
+                if(certainties[mostCertain[j]][j] == 2)
+                    margin = 28;
+                else
+                if(certainties[mostCertain[j]][j] == 1)
+                    margin = 13;
+                else
+                    margin = 0;
+                margin *= multiplier;
+            }
+            int baseValue = 50 + margin;
+            statSeed[mostCertain[j] * 4 + j] = baseValue;
+            int otherValues[] = new int[2];
+            if(mostCertain[j] == 0)
+                otherValues = (new int[] {
+                    1, 2
+                });
+            else
+            if(mostCertain[j] == 1)
+                otherValues = (new int[] {
+                    0, 2
+                });
+            else
+                otherValues = (new int[] {
+                    0, 1
+                });
+            if(baseValue > 66)
+            {
+                int middle;
+                int low;
+                if(ranges[otherValues[0]][j] >= ranges[otherValues[1]][j])
+                {
+                    middle = otherValues[0];
+                    low = otherValues[1];
+                } else
+                {
+                    middle = otherValues[1];
+                    low = otherValues[0];
+                }
+                statSeed[middle * 4 + j] = 50 + ranges[middle][j] * 4;
+                if(statSeed[middle * 4 + j] > 66)
+                    statSeed[middle * 4 + j] = 66;
+                else
+                if(statSeed[middle * 4 + j] < 34)
+                    statSeed[middle * 4 + j] = 34;
+                statSeed[low * 4 + j] = 30 + ranges[low][j] * 5;
+                if(statSeed[low * 4 + j] > 33)
+                    statSeed[low * 4 + j] = 33;
+            } else
+            if(baseValue > 33)
+            {
+                int high;
+                int low;
+                if(ranges[otherValues[0]][j] >= ranges[otherValues[1]][j])
+                {
+                    high = otherValues[0];
+                    low = otherValues[1];
+                } else
+                {
+                    high = otherValues[1];
+                    low = otherValues[0];
+                }
+                statSeed[high * 4 + j] = 70 + ranges[high][j] * 5;
+                if(statSeed[high * 4 + j] < 67)
+                    statSeed[high * 4 + j] = 67;
+                statSeed[low * 4 + j] = 30 + ranges[low][j] * 5;
+                if(statSeed[low * 4 + j] > 33)
+                    statSeed[low * 4 + j] = 33;
+            } else
+            {
+                int high;
+                int middle;
+                if(ranges[otherValues[0]][j] >= ranges[otherValues[1]][j])
+                {
+                    high = otherValues[0];
+                    middle = otherValues[1];
+                } else
+                {
+                    high = otherValues[1];
+                    middle = otherValues[0];
+                }
+                statSeed[high * 4 + j] = 70 + ranges[high][j] * 5;
+                if(statSeed[high * 4 + j] < 67)
+                    statSeed[high * 4 + j] = 67;
+                statSeed[middle * 4 + j] = 50 + ranges[middle][j] * 4;
+                if(statSeed[middle * 4 + j] > 66)
+                    statSeed[middle * 4 + j] = 66;
+                else
+                if(statSeed[middle * 4 + j] < 34)
+                    statSeed[middle * 4 + j] = 34;
+            }
+            for(int i = 0; i < 3; i++)
+                if(i != mostCertain[j])
+                    flexibilities[i][j] = highestCertainty - certainties[i][j];
+
+        }
+
+        int attempts;
+        for(attempts = 0; !legalSpread(statSeed, Boolean.valueOf(true)).booleanValue() && attempts < 1000; attempts++)
+        {
+            int counts[][] = new int[3][3];
+            for(int i = 0; i < 3; i++)
+            {
+                for(int j = 0; j < 4; j++)
+                    if(statSeed[i * 4 + j] > 66)
+                        counts[i][0]++;
+                    else
+                    if(statSeed[i * 4 + j] > 33)
+                        counts[i][1]++;
+                    else
+                        counts[i][2]++;
+
+                for(int j = 0; j < 4; j++)
+                    if(flexibilities[i][j] == 0)
+                        flexibilities[i][j]++;
+
+            }
+
+            for(int m = 0; m < 3; m++)
+            {
+                int n = m + 1;
+                if(n == 3)
+                    n = 0;
+                int q = m - 1;
+                if(q < 0)
+                    q = 2;
+                Boolean tradeHigherForLower = Boolean.valueOf(false);
+                int tradeUpperRange = 0;
+                int tradeLowerRange = 1;
+                int tradeRangeIndex = -1;
+                if(counts[m][0] > 2)
+                {
+                    tradeHigherForLower = Boolean.valueOf(true);
+                    tradeUpperRange = 66;
+                    tradeLowerRange = 34;
+                    tradeRangeIndex = 1;
+                } else
+                if(counts[m][2] > 2)
+                {
+                    tradeHigherForLower = Boolean.valueOf(false);
+                    tradeUpperRange = 66;
+                    tradeLowerRange = 34;
+                    tradeRangeIndex = 1;
+                } else
+                if(counts[m][1] > 2)
+                {
+                    if(counts[m][0] == 1)
+                    {
+                        tradeHigherForLower = Boolean.valueOf(true);
+                        tradeUpperRange = 33;
+                        tradeLowerRange = 0;
+                        tradeRangeIndex = 2;
+                    } else
+                    {
+                        tradeHigherForLower = Boolean.valueOf(false);
+                        tradeUpperRange = 100;
+                        tradeLowerRange = 67;
+                        tradeRangeIndex = 0;
+                    }
+                } else
+                if(counts[m][0] == 0)
+                {
+                    tradeHigherForLower = Boolean.valueOf(false);
+                    tradeUpperRange = 100;
+                    tradeLowerRange = 67;
+                    tradeRangeIndex = 0;
+                } else
+                if(counts[m][2] == 0)
+                {
+                    tradeHigherForLower = Boolean.valueOf(true);
+                    tradeUpperRange = 33;
+                    tradeLowerRange = 0;
+                    tradeRangeIndex = 2;
+                } else
+                if(counts[m][1] == 0)
+                {
+                    int highOpportunities = 0;
+                    int lowOpportunities = 0;
+                    for(int j = 0; j < 4; j++)
+                        if(statSeed[m * 4 + j] > 66)
+                        {
+                            if(counts[n][1] > 1 && statSeed[n * 4 + j] > 33 && statSeed[n * 4 + j] < 67)
+                                highOpportunities += flexibilities[m][j] * flexibilities[n][j];
+                            if(counts[q][1] > 1 && statSeed[q * 4 + j] > 33 && statSeed[q * 4 + j] < 67)
+                                highOpportunities += flexibilities[m][j] * flexibilities[q][j];
+                        } else
+                        {
+                            if(counts[n][1] > 1 && statSeed[n * 4 + j] > 33 && statSeed[n * 4 + j] < 67)
+                                lowOpportunities += flexibilities[m][j] * flexibilities[n][j];
+                            if(counts[q][1] > 1 && statSeed[q * 4 + j] > 33 && statSeed[q * 4 + j] < 67)
+                                lowOpportunities += flexibilities[m][j] * flexibilities[q][j];
+                        }
+
+                    if(highOpportunities >= lowOpportunities)
+                        tradeHigherForLower = Boolean.valueOf(true);
+                    else
+                        tradeHigherForLower = Boolean.valueOf(false);
+                    tradeUpperRange = 66;
+                    tradeLowerRange = 34;
+                    tradeRangeIndex = 1;
+                }
+                int traded = -1;
+                int subject = 0;
+                if(tradeRangeIndex >= 0)
+                {
+                    if(counts[n][tradeRangeIndex] > counts[q][tradeRangeIndex])
+                        subject = n;
+                    else
+                    if(counts[n][tradeRangeIndex] < counts[q][tradeRangeIndex])
+                    {
+                        subject = q;
+                    } else
+                    {
+                        int highestSum = 0;
+                        for(int j = 0; j < 4; j++)
+                        {
+                            Boolean legalTrade = Boolean.valueOf(false);
+                            if(tradeHigherForLower.booleanValue())
+                            {
+                                if(tradeRangeIndex == 1)
+                                {
+                                    if(statSeed[m * 4 + j] > 66)
+                                        legalTrade = Boolean.valueOf(true);
+                                } else
+                                if(statSeed[m * 4 + j] < 67)
+                                    legalTrade = Boolean.valueOf(true);
+                            } else
+                            if(tradeRangeIndex == 0)
+                            {
+                                if(statSeed[m * 4 + j] > 33)
+                                    legalTrade = Boolean.valueOf(true);
+                            } else
+                            if(statSeed[m * 4 + j] < 34)
+                                legalTrade = Boolean.valueOf(true);
+                            if(flexibilities[m][j] + flexibilities[n][j] > highestSum && legalTrade.booleanValue() && statSeed[n * 4 + j] >= tradeLowerRange && statSeed[n * 4 + j] <= tradeUpperRange)
+                            {
+                                highestSum = flexibilities[m][j] + flexibilities[n][j];
+                                traded = j;
+                                subject = n;
+                            }
+                            if(flexibilities[m][j] + flexibilities[q][j] > highestSum && legalTrade.booleanValue() && statSeed[q * 4 + j] >= tradeLowerRange && statSeed[q * 4 + j] <= tradeUpperRange)
+                            {
+                                highestSum = flexibilities[m][j] + flexibilities[q][j];
+                                traded = j;
+                                subject = q;
+                            }
+                        }
+
+                    }
+                    if(traded < 0)
+                    {
+                        int highestSum = 0;
+                        for(int j = 0; j < 4; j++)
+                        {
+                            Boolean legalTrade = Boolean.valueOf(false);
+                            if(statSeed[subject * 4 + j] >= tradeLowerRange && statSeed[subject * 4 + j] <= tradeUpperRange)
+                                if(tradeHigherForLower.booleanValue())
+                                {
+                                    if(tradeRangeIndex == 1)
+                                    {
+                                        if(statSeed[m * 4 + j] > 66)
+                                            legalTrade = Boolean.valueOf(true);
+                                    } else
+                                    if(statSeed[m * 4 + j] < 67)
+                                        legalTrade = Boolean.valueOf(true);
+                                } else
+                                if(tradeRangeIndex == 0)
+                                {
+                                    if(statSeed[m * 4 + j] > 33)
+                                        legalTrade = Boolean.valueOf(true);
+                                } else
+                                if(statSeed[m * 4 + j] < 34)
+                                    legalTrade = Boolean.valueOf(true);
+                            if(flexibilities[m][j] + flexibilities[subject][j] > highestSum && legalTrade.booleanValue())
+                            {
+                                highestSum = flexibilities[m][j] + flexibilities[subject][j];
+                                traded = j;
+                            }
+                        }
+
+                    }
+                    if(traded >= 0)
+                        if(tradeHigherForLower.booleanValue())
+                        {
+                            statSeed[m * 4 + traded] = (tradeUpperRange + 2) - flexibilities[m][traded] * 2;
+                            statSeed[subject * 4 + traded] = tradeUpperRange + flexibilities[subject][traded] * 2;
+                        } else
+                        {
+                            statSeed[m * 4 + traded] = (tradeLowerRange - 2) + flexibilities[m][traded] * 2;
+                            statSeed[subject * 4 + traded] = tradeLowerRange - flexibilities[subject][traded] * 2;
+                        }
+                    m = 3;
+                }
+            }
+
+        }
+
+        if(attempts >= 1000)
+        {
+            append(t, "\n\n---\n\n");
+            append(t, "Generation failed.\n\n");
+            Project.IntroOne(t, p, f, new WorldState());
+        } else
+        {
+            newVulnerabilities(t, p, f);
+        }
+    }
+
+    public void newVulnerabilities(JTextPane t, JPanel p, JFrame f)
+    {
+        p.removeAll();
+        invertVVirg = (new Boolean[] {
+            Boolean.valueOf(false), Boolean.valueOf(false), Boolean.valueOf(false)
+        });
+        invertCVirg = (new Boolean[] {
+            Boolean.valueOf(false), Boolean.valueOf(false), Boolean.valueOf(false)
+        });
+        invertAVirg = (new Boolean[] {
+            Boolean.valueOf(false), Boolean.valueOf(false), Boolean.valueOf(false)
+        });
+        invertModest = (new Boolean[] {
+            Boolean.valueOf(false), Boolean.valueOf(false), Boolean.valueOf(false)
+        });
+        append(t, "\n\n---\n\nPersonalities generated.  ");
+        vulnerabilityMenu(t, p, f, Boolean.valueOf(false));
+    }
+
+    public void vulnerabilityMenu(final JTextPane t, final JPanel p, final JFrame f, final Boolean shown)
+    {
+        p.removeAll();
+        Boolean allPurities[][] = new Boolean[3][4];
+        for(int i = 0; i < 3; i++)
+        {
+            int stats[] = {
+                statSeed[i * 4], statSeed[i * 4 + 1], statSeed[i * 4 + 2], statSeed[i * 4 + 3]
+            };
+            allPurities[i][0] = Boolean.valueOf(invertVVirg[i] != determineVVirg(stats[0], stats[1], stats[2], stats[3]));
+            allPurities[i][1] = Boolean.valueOf(invertCVirg[i] != determineCVirg(stats[0], stats[1], stats[2], stats[3]));
+            allPurities[i][2] = Boolean.valueOf(invertAVirg[i] != determineAVirg(stats[0], stats[1], stats[2], stats[3]));
+            allPurities[i][3] = Boolean.valueOf(invertModest[i] != determineModest(stats[0], stats[1], stats[2], stats[3]));
+        }
+
+        append(t, "If you like, you can review the Vulnerabilities of the team you've created here, and you may determine whether they start broken or not.  The Chosen take more damage of types associated with broken Vulnerabilities, but breaking Vulnerabilities during play grants bonus Evil Energy and can cause tension within the team.");
+        if(shown.booleanValue())
+        {
+            append(t, "  Click 'Continue' once you're done.");
+            for(int i = 0; i < 3; i++)
+            {
+                append(t, (new StringBuilder("\n\n")).append(customNames[i * 2]).toString());
+                for(int j = 0; j < 4; j++)
+                {
+                    String type = "Morality";
+                    if(j == 1)
+                        type = "Innocence";
+                    else
+                    if(j == 2)
+                        type = "Confidence";
+                    else
+                    if(j == 3)
+                        type = "Dignity";
+                    if(statSeed[i * 4 + j] > 66)
+                        blueAppend(t, (new StringBuilder("\n")).append(type).append(": Core").toString());
+                    else
+                    if(statSeed[i * 4 + j] > 33)
+                        greenAppend(t, (new StringBuilder("\n")).append(type).append(": Significant").toString());
+                    else
+                        redAppend(t, (new StringBuilder("\n")).append(type).append(": Minor").toString());
+                    if(!allPurities[i][j].booleanValue())
+                        redAppend(t, " (BROKEN)");
+                }
+
+            }
+
+        } else
+        {
+            append(t, "  The Vulnerabilities are presently hidden so that players who wish to avoid being spoiled can face the team blind.  Click 'Show All' to reveal them, or click on one of the names to view and break the Vulnerabilities of that Chosen in particular.");
+            append(t, "  Click 'Continue' once you're done.");
+        }
+        for(int i = 0; i < 3; i++)
+        {
+            final int thisChosen = i;
+            JButton ThisOne = new JButton(customNames[thisChosen * 2]);
+            ThisOne.addActionListener(new ActionListener() {
+
+                public void actionPerformed(ActionEvent e)
+                {
+                    reviewVulnerabilities(t, p, f, shown, thisChosen, 0);
+                }
+
+                final WorldState this$0;
+                private final JTextPane val$t;
+                private final JPanel val$p;
+                private final JFrame val$f;
+                private final Boolean val$shown;
+                private final int val$thisChosen;
+
+            
+            {
+                this$0 = WorldState.this;
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                shown = boolean1;
+                thisChosen = i;
+                super();
+            }
+            });
+            p.add(ThisOne);
+        }
+
+        JButton ShowAll = new JButton("Show All");
+        if(shown.booleanValue())
+            ShowAll.setText("Hide All");
+        ShowAll.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                append(t, "\n\n---\n\n");
+                vulnerabilityMenu(t, p, f, Boolean.valueOf(!shown.booleanValue()));
+            }
+
+            final WorldState this$0;
+            private final JTextPane val$t;
+            private final JPanel val$p;
+            private final JFrame val$f;
+            private final Boolean val$shown;
+
+            
+            {
+                this$0 = WorldState.this;
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                shown = boolean1;
+                super();
+            }
+        });
+        p.add(ShowAll);
+        JButton Continue = new JButton("Continue");
+        Continue.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                newCosmetics(t, p, f);
+            }
+
+            final WorldState this$0;
+            private final JTextPane val$t;
+            private final JPanel val$p;
+            private final JFrame val$f;
+
+            
+            {
+                this$0 = WorldState.this;
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                super();
+            }
+        });
+        p.add(Continue);
+        JButton Back = new JButton("Back");
+        Back.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                p.removeAll();
+                final Boolean toQuiz = Boolean.valueOf(quizAnswers[23] != null);
+                append(t, "\n\n---\n\nReally go back to ");
+                if(toQuiz.booleanValue())
+                    append(t, "the personality quiz");
+                else
+                    append(t, "name settings");
+                append(t, "?  The Vulnerability adjustments set on this screen will be reset.");
+                JButton ReallyQuit = new JButton("Back");
+                ReallyQuit.addActionListener(new ActionListener() {
+
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        append(t, "\n\n---\n\n");
+                        if(toQuiz.booleanValue())
+                            personalityGen(t, p, f, 23);
+                        else
+                            nameGen(t, p, f);
+                    }
+
+                    final _cls12 this$1;
+                    private final JTextPane val$t;
+                    private final Boolean val$toQuiz;
+                    private final JPanel val$p;
+                    private final JFrame val$f;
+
+                    
+                    {
+                        this$1 = _cls12.this;
+                        t = jtextpane;
+                        toQuiz = boolean1;
+                        p = jpanel;
+                        f = jframe;
+                        super();
+                    }
+                });
+                p.add(ReallyQuit);
+                JButton Back = new JButton("Cancel");
+                Back.addActionListener(new ActionListener() {
+
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        append(t, "\n\n---\n\n");
+                        vulnerabilityMenu(t, p, f, shown);
+                    }
+
+                    final _cls12 this$1;
+                    private final JTextPane val$t;
+                    private final JPanel val$p;
+                    private final JFrame val$f;
+                    private final Boolean val$shown;
+
+                    
+                    {
+                        this$1 = _cls12.this;
+                        t = jtextpane;
+                        p = jpanel;
+                        f = jframe;
+                        shown = boolean1;
+                        super();
+                    }
+                });
+                p.add(Back);
+                p.validate();
+                p.repaint();
+            }
+
+            final WorldState this$0;
+            private final JPanel val$p;
+            private final JTextPane val$t;
+            private final JFrame val$f;
+            private final Boolean val$shown;
+
+
+            
+            {
+                this$0 = WorldState.this;
+                p = jpanel;
+                t = jtextpane;
+                f = jframe;
+                shown = boolean1;
+                super();
+            }
+        });
+        p.add(Back);
+        JButton Quit = new JButton("Quit");
+        Quit.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                p.removeAll();
+                append(t, "\n\n---\n\nReally quit?  All customization of this team will be lost.");
+                JButton ReallyQuit = new JButton("Quit");
+                ReallyQuit.addActionListener(new ActionListener() {
+
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        append(t, "\n\n---\n\n");
+                        Project.IntroOne(t, p, f, new WorldState());
+                    }
+
+                    final _cls13 this$1;
+                    private final JTextPane val$t;
+                    private final JPanel val$p;
+                    private final JFrame val$f;
+
+                    
+                    {
+                        this$1 = _cls13.this;
+                        t = jtextpane;
+                        p = jpanel;
+                        f = jframe;
+                        super();
+                    }
+                });
+                p.add(ReallyQuit);
+                JButton Back = new JButton("Cancel");
+                Back.addActionListener(new ActionListener() {
+
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        append(t, "\n\n---\n\n");
+                        vulnerabilityMenu(t, p, f, shown);
+                    }
+
+                    final _cls13 this$1;
+                    private final JTextPane val$t;
+                    private final JPanel val$p;
+                    private final JFrame val$f;
+                    private final Boolean val$shown;
+
+                    
+                    {
+                        this$1 = _cls13.this;
+                        t = jtextpane;
+                        p = jpanel;
+                        f = jframe;
+                        shown = boolean1;
+                        super();
+                    }
+                });
+                p.add(Back);
+                p.validate();
+                p.repaint();
+            }
+
+            final WorldState this$0;
+            private final JPanel val$p;
+            private final JTextPane val$t;
+            private final JFrame val$f;
+            private final Boolean val$shown;
+
+
+            
+            {
+                this$0 = WorldState.this;
+                p = jpanel;
+                t = jtextpane;
+                f = jframe;
+                shown = boolean1;
+                super();
+            }
+        });
+        p.add(Quit);
+        p.validate();
+        p.repaint();
+    }
+
+    public void reviewVulnerabilities(final JTextPane t, final JPanel p, final JFrame f, final Boolean shown, final int id, final int progress)
+    {
+        Chosen dummy = new Chosen();
+        p.removeAll();
+        append(t, "\n\n---\n\n");
+        Boolean allPurities[][] = new Boolean[3][4];
+        for(int i = 0; i < 3; i++)
+        {
+            int stats[] = {
+                statSeed[i * 4], statSeed[i * 4 + 1], statSeed[i * 4 + 2], statSeed[i * 4 + 3]
+            };
+            allPurities[i][0] = Boolean.valueOf(invertVVirg[i] != determineVVirg(stats[0], stats[1], stats[2], stats[3]));
+            allPurities[i][1] = Boolean.valueOf(invertCVirg[i] != determineCVirg(stats[0], stats[1], stats[2], stats[3]));
+            allPurities[i][2] = Boolean.valueOf(invertAVirg[i] != determineAVirg(stats[0], stats[1], stats[2], stats[3]));
+            allPurities[i][3] = Boolean.valueOf(invertModest[i] != determineModest(stats[0], stats[1], stats[2], stats[3]));
+        }
+
+        if(progress == 0)
+        {
+            if(statSeed[id * 4] > 66)
+            {
+                append(t, (new StringBuilder(String.valueOf(customNames[id * 2]))).append("'s sense of Morality is a ").toString());
+                blueAppend(t, "Core");
+                append(t, (new StringBuilder(" part of ")).append(dummy.hisHer()).append(" identity").toString());
+            } else
+            if(statSeed[id * 4] > 33)
+            {
+                append(t, (new StringBuilder(String.valueOf(customNames[id * 2]))).append("'s Morality is a ").toString());
+                greenAppend(t, "Significant");
+                append(t, (new StringBuilder(" component of ")).append(dummy.hisHer()).append(" personality").toString());
+            }
+            if(statSeed[id * 4] > 33)
+            {
+                append(t, (new StringBuilder(", so ")).append(dummy.heShe()).append(" wouldn't normally engage in 'immoral' activities like violence and promiscuity.  ").toString());
+                if(allPurities[id][0].booleanValue())
+                    append(t, (new StringBuilder("If this Vulnerability is broken, it means ")).append(dummy.heShe()).append(" has already been raped by the time the game starts.").toString());
+                else
+                    append(t, (new StringBuilder("However, ")).append(dummy.heShe()).append(" is set to have already been raped before the game starts.").toString());
+            } else
+            {
+                append(t, "Morality is only a ");
+                redAppend(t, "Minor");
+                append(t, (new StringBuilder(" concern for ")).append(customNames[id * 2]).append(", ").toString());
+                if(allPurities[id][0].booleanValue())
+                    append(t, (new StringBuilder("but ")).append(dummy.heShe()).append(" hasn't gotten around to having sex yet.  Break this Vulnerability to change that.").toString());
+                else
+                    append(t, (new StringBuilder("so ")).append(dummy.heShe()).append(" has seen no reason to avoid having sex.  Restore this Vulnerability to have ").append(dummy.himHer()).append(" start as a virgin instead.").toString());
+            }
+        } else
+        if(progress == 1)
+        {
+            if(statSeed[id * 4 + 1] > 66)
+            {
+                append(t, (new StringBuilder(String.valueOf(customNames[id * 2]))).append("'s Innocence is a ").toString());
+                blueAppend(t, "Core");
+                append(t, (new StringBuilder(" part of ")).append(dummy.hisHer()).append(" identity").toString());
+            } else
+            if(statSeed[id * 4 + 1] > 33)
+            {
+                append(t, (new StringBuilder(String.valueOf(customNames[id * 2]))).append(" has retained ").toString());
+                greenAppend(t, "Significant");
+                append(t, " Innocence regarding sexual matters");
+            }
+            if(statSeed[id * 4 + 1] > 33)
+            {
+                append(t, (new StringBuilder(", so ")).append(dummy.heShe()).append(" wouldn't normally have any idea how good it can feel to be forced to cum during battle.  ").toString());
+                if(allPurities[id][1].booleanValue())
+                    append(t, (new StringBuilder("If this Vulnerability is broken, it means ")).append(dummy.heShe()).append(" has already become addicted to this feeling.").toString());
+                else
+                    append(t, (new StringBuilder("However, ")).append(dummy.heShe()).append(" is set to have already become addicted to this feeling when the game starts.").toString());
+            } else
+            {
+                append(t, (new StringBuilder(String.valueOf(customNames[id * 2]))).append(" has retained only a ").toString());
+                redAppend(t, "Minor");
+                append(t, " amount of Innocence");
+                if(allPurities[id][1].booleanValue())
+                    append(t, (new StringBuilder(", but ")).append(dummy.heShe()).append("'s still sane enough to hold back from cumming during battle.  Break this Vulnerability to change that.").toString());
+                else
+                    append(t, (new StringBuilder(", so ")).append(dummy.heShe()).append(" happily allows ").append(dummy.himHer()).append("self to cum during battle.  Restore this Vulnerability to have ").append(dummy.himHer()).append(" start out with some restraint.").toString());
+            }
+        } else
+        if(progress == 2)
+        {
+            if(statSeed[id * 4 + 2] > 66)
+            {
+                append(t, (new StringBuilder(String.valueOf(customNames[id * 2]))).append("'s Confidence is a ").toString());
+                blueAppend(t, "Core");
+                append(t, (new StringBuilder(" part of ")).append(dummy.hisHer()).append(" identity").toString());
+            } else
+            if(statSeed[id * 4 + 2] > 33)
+            {
+                append(t, (new StringBuilder(String.valueOf(customNames[id * 2]))).append(" has a ").toString());
+                greenAppend(t, "Significant");
+                append(t, " amount of Confidence");
+            }
+            if(statSeed[id * 4 + 2] > 33)
+            {
+                append(t, (new StringBuilder(" because of ")).append(dummy.hisHer()).append(" past victories against the Demons.  ").toString());
+                if(allPurities[id][2].booleanValue())
+                    append(t, (new StringBuilder("If this Vulnerability is broken, it means ")).append(dummy.heShe()).append(" has suffered a crushing defeat and been tortured before.").toString());
+                else
+                    append(t, (new StringBuilder("However, ")).append(dummy.heShe()).append(" is set to have already had ").append(dummy.hisHer()).append(" self-image shaken by being defeated and tortured recently.").toString());
+            } else
+            {
+                append(t, (new StringBuilder(String.valueOf(customNames[id * 2]))).append(" has only a ").toString());
+                redAppend(t, "Minor");
+                append(t, " amount of Confidence left");
+                if(allPurities[id][2].booleanValue())
+                    append(t, (new StringBuilder(", but this is due purely to ")).append(dummy.hisHer()).append(" weak personality.  Break this Vulnerability to have ").append(dummy.hisHer()).append(" self-esteem damaged by a recent capture and torture.").toString());
+                else
+                    append(t, (new StringBuilder(", largely because of ")).append(dummy.hisHer()).append(" recent defeat and torture at the hands of the Demons.  Restore this Vulnerability to erase this event and let ").append(dummy.himHer()).append(" start out with at least a little bit of hope.").toString());
+            }
+        } else
+        if(progress == 3)
+        {
+            if(statSeed[id * 4 + 3] > 66)
+            {
+                append(t, (new StringBuilder(String.valueOf(customNames[id * 2]))).append("'s need for Dignity is a ").toString());
+                blueAppend(t, "Core");
+                append(t, (new StringBuilder(" part of ")).append(dummy.hisHer()).append(" identity").toString());
+            } else
+            if(statSeed[id * 4 + 3] > 33)
+            {
+                append(t, (new StringBuilder(String.valueOf(customNames[id * 2]))).append(" maintains a ").toString());
+                greenAppend(t, "Significant");
+                append(t, " amount of Dignity");
+            }
+            if(statSeed[id * 4 + 3] > 33)
+            {
+                append(t, ", wanting to be viewed as a mighty, unassailable warrior.  ");
+                if(allPurities[id][3].booleanValue())
+                    append(t, (new StringBuilder("If this Vulnerability is broken, it means ")).append(dummy.heShe()).append(" has been stripped and had ").append(dummy.hisHer()).append(" humiliation broadcast to the world.").toString());
+                else
+                    append(t, (new StringBuilder("However, ")).append(dummy.heShe()).append(" is set to have already had ").append(dummy.hisHer()).append(" public image damaged by being stripped during battle and having the footage broadcast to the world.").toString());
+            } else
+            {
+                append(t, (new StringBuilder(String.valueOf(customNames[id * 2]))).append(" has only a ").toString());
+                redAppend(t, "Minor");
+                append(t, (new StringBuilder(" interest in retaining ")).append(dummy.hisHer()).append(" dignity").toString());
+                if(allPurities[id][3].booleanValue())
+                    append(t, (new StringBuilder(", but ")).append(dummy.heShe()).append(" has managed to avoid any public humiliation so far, mostly through pure luck.  Break this Vulnerability to have footage of ").append(dummy.hisHer()).append(" defeat and stripping be broadcast to the world.").toString());
+                else
+                    append(t, (new StringBuilder(", and as a result, ")).append(dummy.heShe()).append(" hasn't managed to stop footage of ").append(dummy.hisHer()).append(" defeat and stripping from being spread across the world.  Restore this Vulnerability to make it so that ").append(dummy.heShe()).append(" hasn't yet been captured in such a shameful state.").toString());
+            }
+        }
+        JButton Toggle = new JButton("Break");
+        if(!allPurities[id][progress].booleanValue())
+            Toggle.setText("Restore");
+        Toggle.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                if(progress == 0)
+                    invertVVirg[id] = Boolean.valueOf(!invertVVirg[id].booleanValue());
+                else
+                if(progress == 1)
+                    invertCVirg[id] = Boolean.valueOf(!invertCVirg[id].booleanValue());
+                else
+                if(progress == 2)
+                    invertAVirg[id] = Boolean.valueOf(!invertAVirg[id].booleanValue());
+                else
+                if(progress == 3)
+                    invertModest[id] = Boolean.valueOf(!invertModest[id].booleanValue());
+                if(progress < 3)
+                {
+                    reviewVulnerabilities(t, p, f, shown, id, progress + 1);
+                } else
+                {
+                    append(t, "\n\n---\n\n");
+                    vulnerabilityMenu(t, p, f, shown);
+                }
+            }
+
+            final WorldState this$0;
+            private final int val$progress;
+            private final int val$id;
+            private final JTextPane val$t;
+            private final JPanel val$p;
+            private final JFrame val$f;
+            private final Boolean val$shown;
+
+            
+            {
+                this$0 = WorldState.this;
+                progress = i;
+                id = j;
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                shown = boolean1;
+                super();
+            }
+        });
+        p.add(Toggle);
+        JButton Continue = new JButton("Continue");
+        Continue.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                if(progress < 3)
+                {
+                    reviewVulnerabilities(t, p, f, shown, id, progress + 1);
+                } else
+                {
+                    append(t, "\n\n---\n\n");
+                    vulnerabilityMenu(t, p, f, shown);
+                }
+            }
+
+            final WorldState this$0;
+            private final int val$progress;
+            private final JTextPane val$t;
+            private final JPanel val$p;
+            private final JFrame val$f;
+            private final Boolean val$shown;
+            private final int val$id;
+
+            
+            {
+                this$0 = WorldState.this;
+                progress = i;
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                shown = boolean1;
+                id = j;
+                super();
+            }
+        });
+        p.add(Continue);
+        p.validate();
+        p.repaint();
+    }
+
+    public void newCosmetics(JTextPane t, JPanel p, JFrame f)
+    {
+        customTop = (new String[] {
+            "", "", ""
+        });
+        customTopAccess = (new String[] {
+            "", "", ""
+        });
+        customBottom = (new String[] {
+            "", "", ""
+        });
+        customBottomAccess = (new String[] {
+            "", "", ""
+        });
+        customUnder = (new String[] {
+            "", "", ""
+        });
+        customColor = (new String[] {
+            "", "", ""
+        });
+        customAccessory = (new String[] {
+            "", "", ""
+        });
+        customWeapons = (new String[] {
+            "", "", ""
+        });
+        customWeaponTypes = (new String[] {
+            "", "", ""
+        });
+        append(t, "\n\n---\n\n");
+        cosmeticsGen(t, p, f);
+    }
+
+    public String[] pickCosmetics(int morality, int innocence, int confidence, int dignity)
+    {
+        String cosmetics[] = new String[9];
+        String topCover = "";
+        String topAccess = "";
+        String bottomCover = "";
+        String bottomAccess = "";
+        String underType = "";
+        String color = "";
+        String accessory = "";
+        String weapon = "";
+        String customWeaponType = "";
+        if(innocence > 75)
+        {
+            if(morality > 25)
+            {
+                topCover = "bodice";
+                topAccess = "down";
+                bottomCover = "skirt";
+                bottomAccess = "up";
+            } else
+            {
+                topCover = "cloak";
+                topAccess = "up";
+                bottomCover = "cloak";
+                bottomAccess = "up";
+            }
+            if(dignity > 25)
+                underType = "panties";
+            else
+                underType = "none";
+        } else
+        if(innocence > 50)
+        {
+            if(morality > 75)
+            {
+                topCover = "robe";
+                topAccess = "into";
+                bottomCover = "robe";
+                bottomAccess = "into";
+            } else
+            if(morality > 50)
+            {
+                topCover = "blouse";
+                topAccess = "down";
+                bottomCover = "skirt";
+                bottomAccess = "up";
+            } else
+            if(morality > 25)
+            {
+                topCover = "jacket";
+                topAccess = "down";
+                bottomCover = "trousers";
+                bottomAccess = "down";
+            } else
+            {
+                topCover = "strips";
+                topAccess = "around";
+                bottomCover = "strips";
+                bottomAccess = "around";
+            }
+            if(dignity > 50)
+                underType = "panties";
+            else
+            if(dignity > 25)
+                underType = "wrap";
+            else
+                underType = "none";
+        } else
+        if(innocence > 25)
+        {
+            if(morality > 75)
+            {
+                topCover = "bodice";
+                topAccess = "cutout";
+                bottomCover = "skirt";
+                bottomAccess = "cutout";
+            } else
+            if(morality > 50)
+            {
+                topCover = "crop";
+                topAccess = "up";
+                bottomCover = "miniskirt";
+                bottomAccess = "front";
+            } else
+            if(morality > 25)
+            {
+                topCover = "bindings";
+                topAccess = "under";
+                bottomCover = "trousers";
+                bottomAccess = "down";
+            } else
+            {
+                topCover = "armor";
+                topAccess = "around";
+                bottomCover = "armor";
+                bottomAccess = "around";
+            }
+            if(dignity > 75)
+                underType = "shorts";
+            else
+            if(dignity > 50)
+                underType = "g-string";
+            else
+            if(dignity > 25)
+                underType = "straps";
+            else
+                underType = "none";
+        } else
+        {
+            if(morality > 75)
+            {
+                topCover = "leotard";
+                topAccess = "into";
+                bottomCover = "leotard";
+                bottomAccess = "into";
+            } else
+            if(morality > 50)
+            {
+                topCover = "bodysuit";
+                topAccess = "into";
+                bottomCover = "bodysuit";
+                bottomAccess = "into";
+            } else
+            if(morality > 25)
+            {
+                topCover = "shirt";
+                topAccess = "up";
+                bottomCover = "shorts";
+                bottomAccess = "down";
+            } else
+            {
+                topCover = "belts";
+                topAccess = "around";
+                bottomCover = "belts";
+                bottomAccess = "around";
+            }
+            if(dignity > 75)
+                underType = "panties";
+            else
+            if(dignity > 50)
+                underType = "panties";
+            else
+                underType = "none";
+        }
+        if(dignity > 75)
+        {
+            if(confidence > 50)
+                color = "dark";
+            else
+            if(confidence > 25)
+                color = "pastel";
+            else
+                color = "white";
+        } else
+        if(dignity > 50)
+        {
+            if(confidence > 75)
+                color = "bright";
+            else
+            if(confidence > 50)
+                color = "bright";
+            else
+            if(confidence > 25)
+                color = "pastel";
+            else
+                color = "white";
+        } else
+        if(dignity > 25)
+        {
+            if(confidence > 75)
+                color = "bright";
+            else
+            if(confidence > 50)
+                color = "bright";
+            else
+            if(confidence > 25)
+                color = "pastel";
+            else
+                color = "gray";
+        } else
+        if(confidence > 75)
+            color = "clashing";
+        else
+        if(confidence > 50)
+            color = "clashing";
+        else
+        if(confidence > 25)
+            color = "drab";
+        else
+            color = "drab";
+        if(confidence > 75)
+        {
+            if(morality > 75)
+            {
+                if(innocence > 75)
+                    accessory = "gown";
+                else
+                if(innocence > 50)
+                    accessory = "robe";
+                else
+                if(innocence > 25)
+                    accessory = "dress";
+                else
+                    accessory = "cape";
+            } else
+            if(morality > 50)
+                accessory = "skirt";
+            else
+            if(morality > 25)
+                accessory = "bands";
+            else
+            if(innocence > 75)
+                accessory = "cloak";
+            else
+            if(innocence > 50)
+                accessory = "cloth";
+            else
+                accessory = "chains";
+        } else
+        if(confidence > 50)
+        {
+            if(morality > 75)
+                accessory = "sleeves";
+            else
+            if(morality > 50)
+                accessory = "ribbons";
+            else
+            if(morality > 25)
+                accessory = "bandages";
+            else
+            if(innocence > 75)
+                accessory = "cloak";
+            else
+            if(innocence > 50)
+                accessory = "cloth";
+            else
+                accessory = "chains";
+        } else
+        if(confidence > 25)
+        {
+            if(morality > 75)
+                accessory = "holy";
+            else
+            if(morality > 50)
+                accessory = "charms";
+            else
+            if(morality > 25)
+                accessory = "belts";
+            else
+                accessory = "occult";
+        } else
+        if(morality > 75)
+            accessory = "holy";
+        else
+        if(morality > 50)
+            accessory = "jewellery";
+        else
+        if(morality > 25)
+            accessory = "armor";
+        else
+            accessory = "trophies";
+        if(dignity < 26)
+        {
+            if(morality > 75)
+                weapon = "boots";
+            else
+            if(morality > 50)
+                weapon = "gauntlets";
+            else
+            if(morality > 25)
+                weapon = "fists";
+            else
+                weapon = "claws";
+        } else
+        if(dignity < 51)
+        {
+            if(morality > 75)
+                weapon = "mace";
+            else
+            if(morality > 50)
+                weapon = "sword";
+            else
+            if(morality > 25)
+                weapon = "greatsword";
+            else
+                weapon = "scythe";
+        } else
+        if(dignity < 76)
+        {
+            if(morality > 75)
+                weapon = "shurikens";
+            else
+            if(morality > 50)
+                weapon = "revolver";
+            else
+            if(morality > 25)
+                weapon = "pistols";
+            else
+                weapon = "spirits";
+        } else
+        if(morality > 75)
+            weapon = "staff";
+        else
+        if(morality > 50)
+            weapon = "bow";
+        else
+        if(morality > 25)
+            weapon = "rifle";
+        else
+            weapon = "monster";
+        cosmetics[0] = topCover;
+        cosmetics[1] = topAccess;
+        cosmetics[2] = bottomCover;
+        cosmetics[3] = bottomAccess;
+        cosmetics[4] = underType;
+        cosmetics[5] = color;
+        cosmetics[6] = accessory;
+        cosmetics[7] = weapon;
+        cosmetics[8] = customWeaponType;
+        return cosmetics;
+    }
+
+    public void cosmeticsGen(final JTextPane t, final JPanel p, final JFrame f)
+    {
+        p.removeAll();
+        append(t, "The final step is to customize the appearances of the team.  None of the questions in this section will affect their combat performance.  Because the default appearances are connected to their personalities, players who wish to avoid spoiling themselves may wish to skip this step.  Otherwise, click on the team member to be customized.  Clicking on a team member you've already customized will reset the customization process.");
+        for(int i = 0; i < 3; i++)
+        {
+            JButton ThisOne = new JButton(customNames[i * 2]);
+            final int thisChosen = i;
+            ThisOne.addActionListener(new ActionListener() {
+
+                public void actionPerformed(ActionEvent e)
+                {
+                    String baseAesthetics[] = pickCosmetics(statSeed[thisChosen * 4], statSeed[thisChosen * 4 + 1], statSeed[thisChosen * 4 + 2], statSeed[thisChosen * 4 + 3]);
+                    aliasCustomize(t, p, f, thisChosen, baseAesthetics);
+                }
+
+                final WorldState this$0;
+                private final int val$thisChosen;
+                private final JTextPane val$t;
+                private final JPanel val$p;
+                private final JFrame val$f;
+
+            
+            {
+                this$0 = WorldState.this;
+                thisChosen = i;
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                super();
+            }
+            });
+            p.add(ThisOne);
+        }
+
+        JButton Back = new JButton("Back");
+        Back.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                p.removeAll();
+                append(t, "\n\n---\n\nReally go back to Vulnerability review?  The cosmetic traits set on this screen will be reset.");
+                JButton ReallyQuit = new JButton("Back");
+                ReallyQuit.addActionListener(new ActionListener() {
+
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        append(t, "\n\n---\n\n");
+                        vulnerabilityMenu(t, p, f, Boolean.valueOf(false));
+                    }
+
+                    final _cls17 this$1;
+                    private final JTextPane val$t;
+                    private final JPanel val$p;
+                    private final JFrame val$f;
+
+                    
+                    {
+                        this$1 = _cls17.this;
+                        t = jtextpane;
+                        p = jpanel;
+                        f = jframe;
+                        super();
+                    }
+                });
+                p.add(ReallyQuit);
+                JButton Back = new JButton("Cancel");
+                Back.addActionListener(new ActionListener() {
+
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        append(t, "\n\n---\n\n");
+                        cosmeticsGen(t, p, f);
+                    }
+
+                    final _cls17 this$1;
+                    private final JTextPane val$t;
+                    private final JPanel val$p;
+                    private final JFrame val$f;
+
+                    
+                    {
+                        this$1 = _cls17.this;
+                        t = jtextpane;
+                        p = jpanel;
+                        f = jframe;
+                        super();
+                    }
+                });
+                p.add(Back);
+                p.validate();
+                p.repaint();
+            }
+
+            final WorldState this$0;
+            private final JPanel val$p;
+            private final JTextPane val$t;
+            private final JFrame val$f;
+
+
+            
+            {
+                this$0 = WorldState.this;
+                p = jpanel;
+                t = jtextpane;
+                f = jframe;
+                super();
+            }
+        });
+        p.add(Back);
+        JButton Quit = new JButton("Quit");
+        Quit.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                p.removeAll();
+                append(t, "\n\n---\n\nReally quit?  All customization of this team will be lost.");
+                JButton ReallyQuit = new JButton("Quit");
+                ReallyQuit.addActionListener(new ActionListener() {
+
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        append(t, "\n\n---\n\n");
+                        Project.IntroOne(t, p, f, new WorldState());
+                    }
+
+                    final _cls18 this$1;
+                    private final JTextPane val$t;
+                    private final JPanel val$p;
+                    private final JFrame val$f;
+
+                    
+                    {
+                        this$1 = _cls18.this;
+                        t = jtextpane;
+                        p = jpanel;
+                        f = jframe;
+                        super();
+                    }
+                });
+                p.add(ReallyQuit);
+                JButton Back = new JButton("Cancel");
+                Back.addActionListener(new ActionListener() {
+
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        append(t, "\n\n---\n\n");
+                        cosmeticsGen(t, p, f);
+                    }
+
+                    final _cls18 this$1;
+                    private final JTextPane val$t;
+                    private final JPanel val$p;
+                    private final JFrame val$f;
+
+                    
+                    {
+                        this$1 = _cls18.this;
+                        t = jtextpane;
+                        p = jpanel;
+                        f = jframe;
+                        super();
+                    }
+                });
+                p.add(Back);
+                p.validate();
+                p.repaint();
+            }
+
+            final WorldState this$0;
+            private final JPanel val$p;
+            private final JTextPane val$t;
+            private final JFrame val$f;
+
+
+            
+            {
+                this$0 = WorldState.this;
+                p = jpanel;
+                t = jtextpane;
+                f = jframe;
+                super();
+            }
+        });
+        final WorldState w = this;
+        JButton Finish = new JButton("Finish");
+        Finish.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                p.removeAll();
+                String path = Project.getProtectionDomain().getCodeSource().getLocation().getPath();
+                String fileName = "";
+                for(int i = path.length() - 1; i >= 0; i--)
+                    if(path.charAt(i) != '/')
+                        fileName = (new StringBuilder(String.valueOf(path.charAt(i)))).append(fileName).toString();
+                    else
+                        i = -1;
+
+                path = path.substring(0, path.length() - fileName.length() - 1);
+                try
+                {
+                    path = URLDecoder.decode(path, "UTF-8");
+                }
+                catch(Exception ex)
+                {
+                    ex.printStackTrace();
+                }
+                path = path.replaceAll("file:/", "");
+                path = path.replaceAll("\\u0020", "\\ ");
+                File saveLocation = new File((new StringBuilder(String.valueOf(path))).append("\\saves.sav").toString());
+                SaveData saves = null;
+                if(saveLocation.exists())
+                {
+                    ReadObject robj = new ReadObject();
+                    saves = robj.deserializeSaveData((new StringBuilder(String.valueOf(path))).append("\\saves.sav").toString());
+                } else
+                {
+                    saves = new SaveData();
+                }
+                final WriteObject wobj = new WriteObject();
+                SaveData saveFile = saves;
+                Chosen newChosen = new Chosen();
+                newChosen.setNumber(0);
+                newChosen.generate(w);
+                w.addChosen(newChosen);
+                String newSaveName = JOptionPane.showInputDialog("What would you like to name this team?");
+                Boolean blankName = Boolean.valueOf(false);
+                if(newSaveName == null)
+                    blankName = Boolean.valueOf(true);
+                else
+                if(newSaveName.length() == 0)
+                    blankName = Boolean.valueOf(true);
+                if(blankName.booleanValue())
+                {
+                    DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                    Date date = new Date();
+                    newSaveName = (new StringBuilder("Team of ")).append(dateFormat.format(date)).toString();
+                }
+                saves.endSave(w, newSaveName);
+                wobj.serializeSaveData(saves);
+                final String displayedName = newSaveName;
+                append(t, (new StringBuilder("\n\n---\n\nA new save file has been added in slot ")).append(saves.getSaves().length).append(" which allows you to fight this team.  You may also wish to export this team to an external file for easy sharing.").toString());
+                JButton Export = new JButton("Export");
+                Export.addActionListener(new ActionListener() {
+
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        String newFileName = JOptionPane.showInputDialog((new StringBuilder("What would you like the file to be named?  Leave blank to use '")).append(displayedName).append("'.").toString());
+                        Boolean noNameProvided = Boolean.valueOf(false);
+                        if(newFileName == null)
+                            noNameProvided = Boolean.valueOf(true);
+                        else
+                        if(newFileName.length() == 0)
+                            noNameProvided = Boolean.valueOf(true);
+                        if(noNameProvided.booleanValue())
+                            newFileName = displayedName;
+                        String editedName = "";
+                        for(int i = 0; i < newFileName.length(); i++)
+                            if(newFileName.charAt(i) == '/' || newFileName.charAt(i) == ':')
+                                editedName = (new StringBuilder(String.valueOf(editedName))).append("-").toString();
+                            else
+                                editedName = (new StringBuilder(String.valueOf(editedName))).append(newFileName.charAt(i)).toString();
+
+                        wobj.exportFile(w, editedName);
+                        w.append(t, (new StringBuilder("\n\n---\n\nCustomized team saved to '")).append(editedName).append(".par'.").toString());
+                    }
+
+                    final _cls19 this$1;
+                    private final String val$displayedName;
+                    private final WriteObject val$wobj;
+                    private final WorldState val$w;
+                    private final JTextPane val$t;
+
+                    
+                    {
+                        this$1 = _cls19.this;
+                        displayedName = s;
+                        wobj = writeobject;
+                        w = worldstate;
+                        t = jtextpane;
+                        super();
+                    }
+                });
+                p.add(Export);
+                JButton Back = new JButton("Back");
+                Back.addActionListener(new ActionListener() {
+
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        append(t, "\n\n---\n\n");
+                        cosmeticsGen(t, p, f);
+                    }
+
+                    final _cls19 this$1;
+                    private final JTextPane val$t;
+                    private final JPanel val$p;
+                    private final JFrame val$f;
+
+                    
+                    {
+                        this$1 = _cls19.this;
+                        t = jtextpane;
+                        p = jpanel;
+                        f = jframe;
+                        super();
+                    }
+                });
+                p.add(Back);
+                JButton Done = new JButton("Done");
+                Done.addActionListener(new ActionListener() {
+
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        append(t, "\n\n---\n\n");
+                        Project.IntroOne(t, p, f, new WorldState());
+                    }
+
+                    final _cls19 this$1;
+                    private final JTextPane val$t;
+                    private final JPanel val$p;
+                    private final JFrame val$f;
+
+                    
+                    {
+                        this$1 = _cls19.this;
+                        t = jtextpane;
+                        p = jpanel;
+                        f = jframe;
+                        super();
+                    }
+                });
+                p.add(Done);
+                p.validate();
+                p.repaint();
+            }
+
+            final WorldState this$0;
+            private final JPanel val$p;
+            private final WorldState val$w;
+            private final JTextPane val$t;
+            private final JFrame val$f;
+
+
+            
+            {
+                this$0 = WorldState.this;
+                p = jpanel;
+                w = worldstate1;
+                t = jtextpane;
+                f = jframe;
+                super();
+            }
+        });
+        p.add(Finish);
+        p.add(Quit);
+        p.validate();
+        p.repaint();
+    }
+
+    public void aliasCustomize(final JTextPane t, final JPanel p, final JFrame f, final int i, final String baseAesthetics[])
+    {
+        p.removeAll();
+        Chosen dummy = new Chosen();
+        final String ownChoice = dummy.genMainName(statSeed[i * 4], statSeed[i * 4 + 1], statSeed[i * 4 + 2], statSeed[i * 4 + 3]);
+        append(t, (new StringBuilder("\n\n---\n\nThe first step is to decide what ")).append(dummy.heShe()).append("'ll call ").append(dummy.himHer()).append("self.  ").append(dummy.HeShe()).append(" likes the sound of '").append(ownChoice).append("', but the civilian identities of the Chosen are a matter of public record, so it wouldn't be too strange for ").append(dummy.himHer()).append(" to go by ").append(dummy.hisHer()).append(" real name.  Which should ").append(dummy.heShe()).append(" choose?").toString());
+        JButton Alias = new JButton(ownChoice);
+        Alias.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                customAliases[i] = ownChoice;
+                titleCustomize(t, p, f, i, baseAesthetics);
+            }
+
+            final WorldState this$0;
+            private final int val$i;
+            private final String val$ownChoice;
+            private final JTextPane val$t;
+            private final JPanel val$p;
+            private final JFrame val$f;
+            private final String val$baseAesthetics[];
+
+            
+            {
+                this$0 = WorldState.this;
+                i = j;
+                ownChoice = s;
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                baseAesthetics = as;
+                super();
+            }
+        });
+        p.add(Alias);
+        JButton Given = new JButton(customNames[i * 2]);
+        Given.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                customAliases[i] = customNames[i * 2];
+                titleCustomize(t, p, f, i, baseAesthetics);
+            }
+
+            final WorldState this$0;
+            private final int val$i;
+            private final JTextPane val$t;
+            private final JPanel val$p;
+            private final JFrame val$f;
+            private final String val$baseAesthetics[];
+
+            
+            {
+                this$0 = WorldState.this;
+                i = j;
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                baseAesthetics = as;
+                super();
+            }
+        });
+        p.add(Given);
+        if(customNames[i * 2 + 1].length() > 0)
+        {
+            JButton Surname = new JButton(customNames[i * 2 + 1]);
+            Given.addActionListener(new ActionListener() {
+
+                public void actionPerformed(ActionEvent e)
+                {
+                    customAliases[i] = customNames[i * 2 + 1];
+                    titleCustomize(t, p, f, i, baseAesthetics);
+                }
+
+                final WorldState this$0;
+                private final int val$i;
+                private final JTextPane val$t;
+                private final JPanel val$p;
+                private final JFrame val$f;
+                private final String val$baseAesthetics[];
+
+            
+            {
+                this$0 = WorldState.this;
+                i = j;
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                baseAesthetics = as;
+                super();
+            }
+            });
+            p.add(Surname);
+        }
+        JButton Custom = new JButton("Something else");
+        Custom.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                String input = JOptionPane.showInputDialog((new StringBuilder("Type the name to be used here.  Leave blank to use the default, '")).append(ownChoice).append("'.").toString());
+                customAliases[i] = ownChoice;
+                if(input != null && input.length() > 0)
+                    customAliases[i] = input;
+                titleCustomize(t, p, f, i, baseAesthetics);
+            }
+
+            final WorldState this$0;
+            private final String val$ownChoice;
+            private final int val$i;
+            private final JTextPane val$t;
+            private final JPanel val$p;
+            private final JFrame val$f;
+            private final String val$baseAesthetics[];
+
+            
+            {
+                this$0 = WorldState.this;
+                ownChoice = s;
+                i = j;
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                baseAesthetics = as;
+                super();
+            }
+        });
+        p.add(Custom);
+        JButton Back = new JButton("Back");
+        Back.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                append(t, "\n\n---\n\n");
+                cosmeticsGen(t, p, f);
+            }
+
+            final WorldState this$0;
+            private final JTextPane val$t;
+            private final JPanel val$p;
+            private final JFrame val$f;
+
+            
+            {
+                this$0 = WorldState.this;
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                super();
+            }
+        });
+        p.add(Back);
+        p.validate();
+        p.repaint();
+    }
+
+    public String[] getCustomAliases()
+    {
+        return customAliases;
+    }
+
+    public String[] getCustomNames()
+    {
+        return customNames;
+    }
+
+    public Boolean[] getGaijinStatus()
+    {
+        return gaijinStatus;
+    }
+
+    public void titleCustomize(final JTextPane t, final JPanel p, final JFrame f, final int i, final String baseAesthetics[])
+    {
+        p.removeAll();
+        Chosen dummy = new Chosen();
+        String ownChoice = (new StringBuilder(String.valueOf(dummy.genAdjectiveName(statSeed[i * 4 + 1], statSeed[i * 4 + 2])))).append(" ").append(dummy.genNounName(statSeed[i * 4], statSeed[i * 4 + 1])).toString();
+        append(t, (new StringBuilder("\n\n---\n\nMost Chosen also use a descriptive title that defines how they see themselves.  ")).append(customAliases[i]).append("'s first idea is to use '").append(ownChoice).append("', so that ").append(dummy.heShe()).append("'d be '").append(ownChoice).append(" ").append(customAliases[i]).append("'.  Should ").append(dummy.heShe()).append(" use something different?").toString());
+        customTitles[i] = ownChoice;
+        JButton Default = new JButton(ownChoice);
+        Default.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                incantationCustomize(t, p, f, i, baseAesthetics);
+            }
+
+            final WorldState this$0;
+            private final JTextPane val$t;
+            private final JPanel val$p;
+            private final JFrame val$f;
+            private final int val$i;
+            private final String val$baseAesthetics[];
+
+            
+            {
+                this$0 = WorldState.this;
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                i = j;
+                baseAesthetics = as;
+                super();
+            }
+        });
+        p.add(Default);
+        JButton Custom = new JButton("Something else");
+        Custom.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                String input = JOptionPane.showInputDialog((new StringBuilder("Type the title to be used here.  Leave blank to just go by '")).append(customAliases[i]).append("'.").toString());
+                if(input != null)
+                    if(input.length() > 0)
+                        customTitles[i] = input;
+                    else
+                        customTitles[i] = "none";
+                incantationCustomize(t, p, f, i, baseAesthetics);
+            }
+
+            final WorldState this$0;
+            private final int val$i;
+            private final JTextPane val$t;
+            private final JPanel val$p;
+            private final JFrame val$f;
+            private final String val$baseAesthetics[];
+
+            
+            {
+                this$0 = WorldState.this;
+                i = j;
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                baseAesthetics = as;
+                super();
+            }
+        });
+        p.add(Custom);
+        JButton Back = new JButton("Back");
+        Back.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                aliasCustomize(t, p, f, i, baseAesthetics);
+            }
+
+            final WorldState this$0;
+            private final JTextPane val$t;
+            private final JPanel val$p;
+            private final JFrame val$f;
+            private final int val$i;
+            private final String val$baseAesthetics[];
+
+            
+            {
+                this$0 = WorldState.this;
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                i = j;
+                baseAesthetics = as;
+                super();
+            }
+        });
+        p.add(Back);
+        p.validate();
+        p.repaint();
+    }
+
+    public String[] getCustomTitles()
+    {
+        return customTitles;
+    }
+
+    public void incantationCustomize(final JTextPane t, final JPanel p, final JFrame f, final int i, final String baseAesthetics[])
+    {
+        p.removeAll();
+        Chosen dummy = new Chosen();
+        append(t, (new StringBuilder("\n\n---\n\nIn order to transform from ")).append(customNames[i * 2]).append(" into ").toString());
+        if(!customTitles[i].equals("none") || !customAliases[i].equals(customNames[i * 2]))
+        {
+            if(customTitles[i].equals("none"))
+                append(t, customAliases[i]);
+            else
+                append(t, (new StringBuilder(String.valueOf(customTitles[i]))).append(" ").append(customAliases[i]).toString());
+        } else
+        {
+            append(t, (new StringBuilder(String.valueOf(dummy.hisHer()))).append(" Chosen identity").toString());
+        }
+        String ownChoice = dummy.genIncantation(statSeed[i * 4], statSeed[i * 4 + 3]);
+        append(t, (new StringBuilder(", ")).append(dummy.heShe()).append(" needs to speak an incantation of ").append(dummy.hisHer()).append(" choice.  The first that comes to ").append(dummy.hisHer()).append(" mind is '").append(ownChoice).append("'.").toString());
+        customIncantations[i] = ownChoice;
+        JButton Keep = new JButton("Keep");
+        Keep.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                topCustomize(t, p, f, i, baseAesthetics);
+            }
+
+            final WorldState this$0;
+            private final JTextPane val$t;
+            private final JPanel val$p;
+            private final JFrame val$f;
+            private final int val$i;
+            private final String val$baseAesthetics[];
+
+            
+            {
+                this$0 = WorldState.this;
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                i = j;
+                baseAesthetics = as;
+                super();
+            }
+        });
+        p.add(Keep);
+        JButton Change = new JButton("Change");
+        Change.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                String input = JOptionPane.showInputDialog("Type the new incantation here.  Leave blank to leave it unchanged.");
+                if(input != null && input.length() > 0)
+                    customIncantations[i] = input;
+                topCustomize(t, p, f, i, baseAesthetics);
+            }
+
+            final WorldState this$0;
+            private final int val$i;
+            private final JTextPane val$t;
+            private final JPanel val$p;
+            private final JFrame val$f;
+            private final String val$baseAesthetics[];
+
+            
+            {
+                this$0 = WorldState.this;
+                i = j;
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                baseAesthetics = as;
+                super();
+            }
+        });
+        p.add(Change);
+        JButton Back = new JButton("Back");
+        Back.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                titleCustomize(t, p, f, i, baseAesthetics);
+            }
+
+            final WorldState this$0;
+            private final JTextPane val$t;
+            private final JPanel val$p;
+            private final JFrame val$f;
+            private final int val$i;
+            private final String val$baseAesthetics[];
+
+            
+            {
+                this$0 = WorldState.this;
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                i = j;
+                baseAesthetics = as;
+                super();
+            }
+        });
+        p.add(Back);
+        p.validate();
+        p.repaint();
+    }
+
+    public String[] getCustomIncantations()
+    {
+        return customIncantations;
+    }
+
+    public void topCustomize(final JTextPane t, final JPanel p, final JFrame f, final int i, final String baseAesthetics[])
+    {
+        p.removeAll();
+        Chosen dummy = new Chosen();
+        String result = "";
+        result = customIncantations[i];
+        if(!customTitles[i].equals("none"))
+            result = (new StringBuilder(String.valueOf(result))).append("  ").append(customTitles[i]).toString();
+        else
+            result = (new StringBuilder(String.valueOf(result))).append(" ").toString();
+        result = (new StringBuilder(String.valueOf(result))).append(" ").append(customAliases[i]).append(", transform!").toString();
+        append(t, (new StringBuilder("\n\n---\n\n")).append(customNames[i * 2]).append("'s civilian clothes will disintegrate when ").append(dummy.heShe()).append(" says '").append(result).append("'  In their place, garments and equipment woven of psychic energy representing ").append(dummy.hisHer()).append(" true nature will materialize.  Click 'Change' to give ").append(dummy.himHer()).append(" something different, or click the button for the current item to keep it.\n\nFirst off, what does ").append(dummy.heShe()).append(" wear to cover ").append(dummy.hisHer()).append(" chest?").toString());
+        String current = baseAesthetics[0];
+        if(current.equals("strips"))
+            current = "strips of cloth";
+        else
+        if(current.equals("bindings"))
+            current = "wrapped chest bindings";
+        else
+        if(current.equals("crop"))
+            current = "crop top";
+        final String finalCurrent = current;
+        JButton Default = new JButton(current);
+        Default.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                bottomCustomize(t, p, f, i, baseAesthetics);
+            }
+
+            final WorldState this$0;
+            private final JTextPane val$t;
+            private final JPanel val$p;
+            private final JFrame val$f;
+            private final int val$i;
+            private final String val$baseAesthetics[];
+
+            
+            {
+                this$0 = WorldState.this;
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                i = j;
+                baseAesthetics = as;
+                super();
+            }
+        });
+        p.add(Default);
+        JButton Change = new JButton("Change");
+        Change.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                String input = JOptionPane.showInputDialog((new StringBuilder("Type the name of the garment here.  Leave blank to use '")).append(finalCurrent).append("'.").toString());
+                Boolean changed = Boolean.valueOf(false);
+                if(input != null && !input.equals(finalCurrent) && input.length() > 0)
+                    changed = Boolean.valueOf(true);
+                if(changed.booleanValue())
+                    topChange(t, p, f, i, baseAesthetics, input);
+                else
+                    bottomCustomize(t, p, f, i, baseAesthetics);
+            }
+
+            final WorldState this$0;
+            private final String val$finalCurrent;
+            private final JTextPane val$t;
+            private final JPanel val$p;
+            private final JFrame val$f;
+            private final int val$i;
+            private final String val$baseAesthetics[];
+
+            
+            {
+                this$0 = WorldState.this;
+                finalCurrent = s;
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                i = j;
+                baseAesthetics = as;
+                super();
+            }
+        });
+        p.add(Change);
+        JButton Back = new JButton("Back");
+        Back.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                incantationCustomize(t, p, f, i, baseAesthetics);
+            }
+
+            final WorldState this$0;
+            private final JTextPane val$t;
+            private final JPanel val$p;
+            private final JFrame val$f;
+            private final int val$i;
+            private final String val$baseAesthetics[];
+
+            
+            {
+                this$0 = WorldState.this;
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                i = j;
+                baseAesthetics = as;
+                super();
+            }
+        });
+        p.add(Back);
+        p.validate();
+        p.repaint();
+    }
+
+    public String[] getCustomTop()
+    {
+        return customTop;
+    }
+
+    public void topChange(final JTextPane t, final JPanel p, final JFrame f, final int i, final String baseAesthetics[], final String input)
+    {
+        p.removeAll();
+        Chosen dummy = new Chosen();
+        append(t, (new StringBuilder("\n\n---\n\nAnd in order to get at ")).append(dummy.hisHer()).append(" breasts, does one go up ").append(dummy.hisHer()).append(" ").append(input).append(", into ").append(dummy.hisHer()).append(" ").append(input).append(", down ").append(dummy.hisHer()).append(" ").append(input).append(", or around ").append(dummy.hisHer()).append(" ").append(input).append("?").toString());
+        for(int j = 0; j < 4; j++)
+        {
+            String method = "";
+            if(j == 0)
+                method = "up";
+            else
+            if(j == 1)
+                method = "into";
+            else
+            if(j == 2)
+                method = "down";
+            else
+            if(j == 3)
+                method = "around";
+            final String finalMethod = method;
+            JButton ThisOne = new JButton(method);
+            ThisOne.addActionListener(new ActionListener() {
+
+                public void actionPerformed(ActionEvent e)
+                {
+                    baseAesthetics[0] = input;
+                    baseAesthetics[1] = finalMethod;
+                    bottomCustomize(t, p, f, i, baseAesthetics);
+                }
+
+                final WorldState this$0;
+                private final String val$baseAesthetics[];
+                private final String val$input;
+                private final String val$finalMethod;
+                private final JTextPane val$t;
+                private final JPanel val$p;
+                private final JFrame val$f;
+                private final int val$i;
+
+            
+            {
+                this$0 = WorldState.this;
+                baseAesthetics = as;
+                input = s;
+                finalMethod = s1;
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                i = j;
+                super();
+            }
+            });
+            p.add(ThisOne);
+        }
+
+        JButton Back = new JButton("Back");
+        Back.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                topCustomize(t, p, f, i, baseAesthetics);
+            }
+
+            final WorldState this$0;
+            private final JTextPane val$t;
+            private final JPanel val$p;
+            private final JFrame val$f;
+            private final int val$i;
+            private final String val$baseAesthetics[];
+
+            
+            {
+                this$0 = WorldState.this;
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                i = j;
+                baseAesthetics = as;
+                super();
+            }
+        });
+        p.add(Back);
+        p.validate();
+        p.repaint();
+    }
+
+    public String[] getCustomTopAccess()
+    {
+        return customTopAccess;
+    }
+
+    public void bottomCustomize(final JTextPane t, final JPanel p, final JFrame f, final int i, final String baseAesthetics[])
+    {
+        p.removeAll();
+        Chosen dummy = new Chosen();
+        append(t, (new StringBuilder("\n\n---\n\nNext, what does ")).append(dummy.heShe()).append(" wear to cover ").append(dummy.hisHer()).append(" hips?").toString());
+        String current = baseAesthetics[2];
+        if(current.equals("strips"))
+            current = "strips of cloth";
+        final String finalCurrent = current;
+        JButton Default = new JButton(current);
+        Default.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                colorCustomize(t, p, f, i, baseAesthetics);
+            }
+
+            final WorldState this$0;
+            private final JTextPane val$t;
+            private final JPanel val$p;
+            private final JFrame val$f;
+            private final int val$i;
+            private final String val$baseAesthetics[];
+
+            
+            {
+                this$0 = WorldState.this;
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                i = j;
+                baseAesthetics = as;
+                super();
+            }
+        });
+        p.add(Default);
+        JButton Change = new JButton("Change");
+        Change.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                String input = JOptionPane.showInputDialog((new StringBuilder("Type the name of the garment here.  Leave blank to use '")).append(finalCurrent).append("'.").toString());
+                Boolean changed = Boolean.valueOf(false);
+                if(input != null && !input.equals(finalCurrent) && input.length() > 0)
+                    changed = Boolean.valueOf(true);
+                if(changed.booleanValue())
+                    bottomChange(t, p, f, i, baseAesthetics, input);
+                else
+                    colorCustomize(t, p, f, i, baseAesthetics);
+            }
+
+            final WorldState this$0;
+            private final String val$finalCurrent;
+            private final JTextPane val$t;
+            private final JPanel val$p;
+            private final JFrame val$f;
+            private final int val$i;
+            private final String val$baseAesthetics[];
+
+            
+            {
+                this$0 = WorldState.this;
+                finalCurrent = s;
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                i = j;
+                baseAesthetics = as;
+                super();
+            }
+        });
+        p.add(Change);
+        JButton Back = new JButton("Back");
+        Back.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                topCustomize(t, p, f, i, baseAesthetics);
+            }
+
+            final WorldState this$0;
+            private final JTextPane val$t;
+            private final JPanel val$p;
+            private final JFrame val$f;
+            private final int val$i;
+            private final String val$baseAesthetics[];
+
+            
+            {
+                this$0 = WorldState.this;
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                i = j;
+                baseAesthetics = as;
+                super();
+            }
+        });
+        p.add(Back);
+        p.validate();
+        p.repaint();
+    }
+
+    public String[] getCustomBottom()
+    {
+        return customBottom;
+    }
+
+    public void bottomChange(final JTextPane t, final JPanel p, final JFrame f, final int i, final String baseAesthetics[], final String input)
+    {
+        p.removeAll();
+        Chosen dummy = new Chosen();
+        append(t, (new StringBuilder("\n\n---\n\nAnd in order to get at ")).append(dummy.hisHer()).append(" pussy, does one go up ").append(dummy.hisHer()).append(" ").append(input).append(", into ").append(dummy.hisHer()).append(" ").append(input).append(", down ").append(dummy.hisHer()).append(" ").append(input).append(", or around ").append(dummy.hisHer()).append(" ").append(input).append("?").toString());
+        for(int j = 0; j < 4; j++)
+        {
+            String method = "";
+            if(j == 0)
+                method = "up";
+            else
+            if(j == 1)
+                method = "into";
+            else
+            if(j == 2)
+                method = "down";
+            else
+            if(j == 3)
+                method = "around";
+            final String finalMethod = method;
+            JButton ThisOne = new JButton(method);
+            ThisOne.addActionListener(new ActionListener() {
+
+                public void actionPerformed(ActionEvent e)
+                {
+                    baseAesthetics[2] = input;
+                    baseAesthetics[3] = finalMethod;
+                    colorCustomize(t, p, f, i, baseAesthetics);
+                }
+
+                final WorldState this$0;
+                private final String val$baseAesthetics[];
+                private final String val$input;
+                private final String val$finalMethod;
+                private final JTextPane val$t;
+                private final JPanel val$p;
+                private final JFrame val$f;
+                private final int val$i;
+
+            
+            {
+                this$0 = WorldState.this;
+                baseAesthetics = as;
+                input = s;
+                finalMethod = s1;
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                i = j;
+                super();
+            }
+            });
+            p.add(ThisOne);
+        }
+
+        JButton Back = new JButton("Back");
+        Back.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                bottomCustomize(t, p, f, i, baseAesthetics);
+            }
+
+            final WorldState this$0;
+            private final JTextPane val$t;
+            private final JPanel val$p;
+            private final JFrame val$f;
+            private final int val$i;
+            private final String val$baseAesthetics[];
+
+            
+            {
+                this$0 = WorldState.this;
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                i = j;
+                baseAesthetics = as;
+                super();
+            }
+        });
+        p.add(Back);
+        p.validate();
+        p.repaint();
+    }
+
+    public String[] getCustomBottomAccess()
+    {
+        return customBottomAccess;
+    }
+
+    public void colorCustomize(final JTextPane t, final JPanel p, final JFrame f, final int i, final String baseAesthetics[])
+    {
+        p.removeAll();
+        Chosen dummy = new Chosen();
+        append(t, (new StringBuilder("\n\n---\n\nWhen ")).append(dummy.heShe()).append("'s transformed, ").append(customAliases[i]).append(" is surrounded by '").append(baseAesthetics[5]).append("' light.  Is this alright?").toString());
+        JButton Keep = new JButton("Yes");
+        Keep.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                weaponCustomize(t, p, f, i, baseAesthetics);
+            }
+
+            final WorldState this$0;
+            private final JTextPane val$t;
+            private final JPanel val$p;
+            private final JFrame val$f;
+            private final int val$i;
+            private final String val$baseAesthetics[];
+
+            
+            {
+                this$0 = WorldState.this;
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                i = j;
+                baseAesthetics = as;
+                super();
+            }
+        });
+        p.add(Keep);
+        JButton Change = new JButton("Change");
+        Change.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                String input = JOptionPane.showInputDialog((new StringBuilder("Type the color description to be used.  Leave blank to use '")).append(baseAesthetics[5]).append("'.").toString());
+                if(input != null && !input.equals(baseAesthetics[5]) && input.length() > 0)
+                    baseAesthetics[5] = input;
+                weaponCustomize(t, p, f, i, baseAesthetics);
+            }
+
+            final WorldState this$0;
+            private final String val$baseAesthetics[];
+            private final JTextPane val$t;
+            private final JPanel val$p;
+            private final JFrame val$f;
+            private final int val$i;
+
+            
+            {
+                this$0 = WorldState.this;
+                baseAesthetics = as;
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                i = j;
+                super();
+            }
+        });
+        p.add(Change);
+        JButton Back = new JButton("Back");
+        Back.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                bottomCustomize(t, p, f, i, baseAesthetics);
+            }
+
+            final WorldState this$0;
+            private final JTextPane val$t;
+            private final JPanel val$p;
+            private final JFrame val$f;
+            private final int val$i;
+            private final String val$baseAesthetics[];
+
+            
+            {
+                this$0 = WorldState.this;
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                i = j;
+                baseAesthetics = as;
+                super();
+            }
+        });
+        p.add(Back);
+        p.validate();
+        p.repaint();
+    }
+
+    public String[] getCustomColor()
+    {
+        return customColor;
+    }
+
+    public String[] getCustomAccessory()
+    {
+        return customAccessory;
+    }
+
+    public void weaponCustomize(final JTextPane t, final JPanel p, final JFrame f, final int i, final String baseAesthetics[])
+    {
+        p.removeAll();
+        Chosen dummy = new Chosen();
+        append(t, (new StringBuilder("\n\n---\n\nCurrently, ")).append(customAliases[i]).append(" is set to fight using ").append(dummy.hisHer()).append(" ").append(baseAesthetics[7]).append(".  Is this okay?").toString());
+        JButton Keep = new JButton("Yes");
+        Keep.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                underwearCustomize(t, p, f, i, baseAesthetics);
+            }
+
+            final WorldState this$0;
+            private final JTextPane val$t;
+            private final JPanel val$p;
+            private final JFrame val$f;
+            private final int val$i;
+            private final String val$baseAesthetics[];
+
+            
+            {
+                this$0 = WorldState.this;
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                i = j;
+                baseAesthetics = as;
+                super();
+            }
+        });
+        p.add(Keep);
+        JButton Change = new JButton("Change");
+        Change.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                String input = JOptionPane.showInputDialog((new StringBuilder("Type the name of the weapon to be used.  Leave blank to use '")).append(baseAesthetics[7]).append("'.").toString());
+                Boolean changed = Boolean.valueOf(false);
+                if(input != null && !input.equals(baseAesthetics[7]) && input.length() > 0)
+                    changed = Boolean.valueOf(true);
+                if(changed.booleanValue())
+                    weaponChange(t, p, f, i, baseAesthetics, input);
+                else
+                    underwearCustomize(t, p, f, i, baseAesthetics);
+            }
+
+            final WorldState this$0;
+            private final String val$baseAesthetics[];
+            private final JTextPane val$t;
+            private final JPanel val$p;
+            private final JFrame val$f;
+            private final int val$i;
+
+            
+            {
+                this$0 = WorldState.this;
+                baseAesthetics = as;
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                i = j;
+                super();
+            }
+        });
+        p.add(Change);
+        JButton Back = new JButton("Back");
+        Back.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                colorCustomize(t, p, f, i, baseAesthetics);
+            }
+
+            final WorldState this$0;
+            private final JTextPane val$t;
+            private final JPanel val$p;
+            private final JFrame val$f;
+            private final int val$i;
+            private final String val$baseAesthetics[];
+
+            
+            {
+                this$0 = WorldState.this;
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                i = j;
+                baseAesthetics = as;
+                super();
+            }
+        });
+        p.add(Back);
+        p.validate();
+        p.repaint();
+    }
+
+    public String[] getCustomWeapon()
+    {
+        return customWeapons;
+    }
+
+    public void weaponChange(final JTextPane t, final JPanel p, final JFrame f, final int i, final String baseAesthetics[], final String input)
+    {
+        p.removeAll();
+        Chosen dummy = new Chosen();
+        append(t, (new StringBuilder("\n\n---\n\nDoes ")).append(customAliases[i]).append(" swing ").append(dummy.hisHer()).append(" ").append(input).append(", shoot ").append(dummy.hisHer()).append(" ").append(input).append(", command ").append(dummy.hisHer()).append(" ").append(input).append(", or is ").append(dummy.hisHer()).append(" weapon a part of ").append(dummy.himHer()).append("?").toString());
+        for(int j = 0; j < 4; j++)
+        {
+            String method = "";
+            if(j == 0)
+                method = "swing";
+            else
+            if(j == 1)
+                method = "shoot";
+            else
+            if(j == 2)
+                method = "command";
+            else
+            if(j == 3)
+                method = (new StringBuilder("part of ")).append(dummy.himHer()).toString();
+            JButton ThisOne = new JButton(method);
+            if(method.contains("part"))
+                method = "part";
+            final String finalMethod = method;
+            ThisOne.addActionListener(new ActionListener() {
+
+                public void actionPerformed(ActionEvent e)
+                {
+                    baseAesthetics[7] = input;
+                    baseAesthetics[8] = finalMethod;
+                    underwearCustomize(t, p, f, i, baseAesthetics);
+                }
+
+                final WorldState this$0;
+                private final String val$baseAesthetics[];
+                private final String val$input;
+                private final String val$finalMethod;
+                private final JTextPane val$t;
+                private final JPanel val$p;
+                private final JFrame val$f;
+                private final int val$i;
+
+            
+            {
+                this$0 = WorldState.this;
+                baseAesthetics = as;
+                input = s;
+                finalMethod = s1;
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                i = j;
+                super();
+            }
+            });
+            p.add(ThisOne);
+        }
+
+        JButton Back = new JButton("Back");
+        Back.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                weaponCustomize(t, p, f, i, baseAesthetics);
+            }
+
+            final WorldState this$0;
+            private final JTextPane val$t;
+            private final JPanel val$p;
+            private final JFrame val$f;
+            private final int val$i;
+            private final String val$baseAesthetics[];
+
+            
+            {
+                this$0 = WorldState.this;
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                i = j;
+                baseAesthetics = as;
+                super();
+            }
+        });
+        p.add(Back);
+        p.validate();
+        p.repaint();
+    }
+
+    public String[] getCustomWeaponType()
+    {
+        return customWeaponTypes;
+    }
+
+    public void underwearCustomize(final JTextPane t, final JPanel p, final JFrame f, final int i, final String baseAesthetics[])
+    {
+        p.removeAll();
+        Chosen dummy = new Chosen();
+        append(t, "\n\n---\n\nThere's one final important question.  ");
+        if(baseAesthetics[4].equals("none"))
+        {
+            append(t, (new StringBuilder(String.valueOf(customAliases[i]))).append("'s outfit doesn't currently include panties.  Should that be changed?").toString());
+            JButton Change = new JButton("Wear panties");
+            Change.addActionListener(new ActionListener() {
+
+                public void actionPerformed(ActionEvent e)
+                {
+                    baseAesthetics[4] = "panties";
+                    finalizeCustomization(t, p, f, i, baseAesthetics);
+                }
+
+                final WorldState this$0;
+                private final String val$baseAesthetics[];
+                private final JTextPane val$t;
+                private final JPanel val$p;
+                private final JFrame val$f;
+                private final int val$i;
+
+            
+            {
+                this$0 = WorldState.this;
+                baseAesthetics = as;
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                i = j;
+                super();
+            }
+            });
+            p.add(Change);
+        } else
+        {
+            append(t, (new StringBuilder("Would you prefer for ")).append(customAliases[i]).append(" to stop wearing anything under ").append(dummy.hisHer()).append(" ").append(baseAesthetics[2]).append("?").toString());
+            JButton Change = new JButton("Wear nothing");
+            Change.addActionListener(new ActionListener() {
+
+                public void actionPerformed(ActionEvent e)
+                {
+                    baseAesthetics[4] = "none";
+                    finalizeCustomization(t, p, f, i, baseAesthetics);
+                }
+
+                final WorldState this$0;
+                private final String val$baseAesthetics[];
+                private final JTextPane val$t;
+                private final JPanel val$p;
+                private final JFrame val$f;
+                private final int val$i;
+
+            
+            {
+                this$0 = WorldState.this;
+                baseAesthetics = as;
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                i = j;
+                super();
+            }
+            });
+            p.add(Change);
+        }
+        JButton Keep = new JButton("Leave it as is");
+        Keep.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                finalizeCustomization(t, p, f, i, baseAesthetics);
+            }
+
+            final WorldState this$0;
+            private final JTextPane val$t;
+            private final JPanel val$p;
+            private final JFrame val$f;
+            private final int val$i;
+            private final String val$baseAesthetics[];
+
+            
+            {
+                this$0 = WorldState.this;
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                i = j;
+                baseAesthetics = as;
+                super();
+            }
+        });
+        p.add(Keep);
+        JButton Back = new JButton("Back");
+        Back.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                weaponCustomize(t, p, f, i, baseAesthetics);
+            }
+
+            final WorldState this$0;
+            private final JTextPane val$t;
+            private final JPanel val$p;
+            private final JFrame val$f;
+            private final int val$i;
+            private final String val$baseAesthetics[];
+
+            
+            {
+                this$0 = WorldState.this;
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                i = j;
+                baseAesthetics = as;
+                super();
+            }
+        });
+        p.add(Back);
+        p.validate();
+        p.repaint();
+    }
+
+    public String[] getCustomUnder()
+    {
+        return customUnder;
+    }
+
+    public void finalizeCustomization(JTextPane t, JPanel p, JFrame f, int i, String baseAesthetics[])
+    {
+        p.removeAll();
+        String comparison[] = pickCosmetics(statSeed[i * 4], statSeed[i * 4 + 1], statSeed[i * 4 + 2], statSeed[i * 4 + 3]);
+        for(int j = 0; j < comparison.length; j++)
+            if(!comparison[j].equals(baseAesthetics[j]))
+                baseAesthetics[6] = "none";
+
+        customTop[i] = baseAesthetics[0];
+        customTopAccess[i] = baseAesthetics[1];
+        customBottom[i] = baseAesthetics[2];
+        customBottomAccess[i] = baseAesthetics[3];
+        customUnder[i] = baseAesthetics[4];
+        customColor[i] = baseAesthetics[5];
+        customAccessory[i] = baseAesthetics[6];
+        customWeapons[i] = baseAesthetics[7];
+        customWeaponTypes[i] = baseAesthetics[8];
+        append(t, (new StringBuilder("\n\n---\n\n")).append(customAliases[i]).append("'s customization is complete!\n\n").toString());
+        cosmeticsGen(t, p, f);
+    }
+
     public WorldState()
     {
         PURPLE = new Color(100, 0, 150);
         ORANGE = new Color(200, 100, 0);
         RED = new Color(180, 0, 0);
         GREEN = new Color(0, 110, 0);
+        BLUE = new Color(0, 0, 230);
+        BACKGROUND = Color.WHITE;
+        FOREGROUND = Color.BLACK;
         nameSeed = new int[6];
         statSeed = new int[12];
         totalThreatened = 0;
@@ -3044,6 +7295,9 @@ public class WorldState
         evilEnergy = 0;
         day = 1;
         totalRounds = 1;
+        highScore = 0L;
+        parScore = 0L;
+        saveTitle = "";
         friendship = new int[3][3];
         friction = new int[3][3];
         remaining = new int[3][3];
@@ -3064,8 +7318,21 @@ public class WorldState
         readyToEnd = Boolean.valueOf(false);
         bodyStatus = new Boolean[11];
         tutorial = Boolean.valueOf(false);
-        onTrack = Boolean.valueOf(false);
+        onTrack = Boolean.valueOf(true);
+        commentary = new String[0];
+        currentComment = "";
+        actions = new int[0];
+        currentAction = 0;
+        recordedCommanders = new Boolean[0][bodyStatus.length];
+        commentaryRead = Boolean.valueOf(true);
+        commentaryWrite = Boolean.valueOf(false);
         cheater = Boolean.valueOf(false);
+        customNames = new String[6];
+        customAliases = new String[3];
+        customTitles = new String[3];
+        customIncantations = new String[3];
+        personalityWeights = new int[24][3][8];
+        quizAnswers = new String[24];
     }
 
     private static final long serialVersionUID = 4L;
@@ -3073,6 +7340,9 @@ public class WorldState
     Color ORANGE;
     Color RED;
     Color GREEN;
+    Color BLUE;
+    Color BACKGROUND;
+    Color FOREGROUND;
     int nameSeed[];
     int statSeed[];
     String shopTutorial;
@@ -3089,6 +7359,8 @@ public class WorldState
     int day;
     int totalRounds;
     long highScore;
+    long parScore;
+    String saveTitle;
     int friendship[][];
     int friction[][];
     int remaining[][];
@@ -3117,5 +7389,60 @@ public class WorldState
     Boolean bodyStatus[];
     Boolean tutorial;
     Boolean onTrack;
+    String commentary[];
+    String currentComment;
+    int actions[];
+    int currentAction;
+    Boolean recordedCommanders[][];
+    Boolean commentaryRead;
+    Boolean commentaryWrite;
     Boolean cheater;
+    String customNames[];
+    String customTop[] = {
+        "", "", ""
+    };
+    String customTopAccess[] = {
+        "", "", ""
+    };
+    String customBottom[] = {
+        "", "", ""
+    };
+    String customBottomAccess[] = {
+        "", "", ""
+    };
+    String customUnder[] = {
+        "", "", ""
+    };
+    String customColor[] = {
+        "", "", ""
+    };
+    String customAccessory[] = {
+        "", "", ""
+    };
+    String customWeapons[] = {
+        "", "", ""
+    };
+    String customWeaponTypes[] = {
+        "", "", ""
+    };
+    String customAliases[];
+    String customTitles[];
+    String customIncantations[];
+    Boolean invertVVirg[] = {
+        Boolean.valueOf(false), Boolean.valueOf(false), Boolean.valueOf(false)
+    };
+    Boolean invertCVirg[] = {
+        Boolean.valueOf(false), Boolean.valueOf(false), Boolean.valueOf(false)
+    };
+    Boolean invertAVirg[] = {
+        Boolean.valueOf(false), Boolean.valueOf(false), Boolean.valueOf(false)
+    };
+    Boolean invertModest[] = {
+        Boolean.valueOf(false), Boolean.valueOf(false), Boolean.valueOf(false)
+    };
+    Boolean gaijinStatus[] = {
+        Boolean.valueOf(false), Boolean.valueOf(false), Boolean.valueOf(false)
+    };
+    int personalityWeights[][][];
+    String quizAnswers[];
 }
