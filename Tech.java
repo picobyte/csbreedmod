@@ -235,6 +235,72 @@ public class Tech
                 w.getTechs()[6], w.getTechs()[15]
             });
             description = "Develops your ability to find common ground between two different aspects of the human mind and concentrate your psychic energy there in order to manifest both aspects at once.  For +5 Evil Energy per deployment, you can bypass the usual prohibition against putting a second Suppressor-class upgrade on your Commander.";
+        } else
+        if(index == 22)
+        {
+            name = "Ambition";
+            prereqsRequired = 2;
+            cost = 10;
+            prereqs = (new Tech[] {
+                w.getTechs()[15], w.getTechs()[19]
+            });
+            description = "Deepens your connection with your Commander body, endowing it with your desire to propagate yourself across all sapient life.  Your body will be equipped with a monstrous phallus capable of penetrating and ejaculating inside the Chosen.  This is a 'Defiler'-class upgrade which is not normally compatible with other Suppressor- or Defiler-class upgrades.  It functions like the Inseminate action, including its ability to inflict Morality Break, but its improved effectiveness comes at the cost of 6 Evil Energy per deployment.";
+        } else
+        if(index == 23)
+        {
+            name = "Dominance";
+            prereqsRequired = 2;
+            cost = 10;
+            prereqs = (new Tech[] {
+                w.getTechs()[12], w.getTechs()[16]
+            });
+            description = "Deepens your connection with your Commander body, endowing it with your desire to inflict mind-breaking pleasure until all resistance is unthinkable.  Your body will be equipped with an internal chamber which pulls Chosen inside and stimulates them to climax.  This is a 'Defiler'-class upgrade which is not normally compatible with other Suppressor- or Defiler-class upgrades.  It functions like the Force Orgasm action, including its ability to inflict Innocence Break, but its improved effectiveness comes at the cost of 6 Evil Energy per deployment.";
+        } else
+        if(index == 24)
+        {
+            name = "Spite";
+            prereqsRequired = 2;
+            cost = 10;
+            prereqs = (new Tech[] {
+                w.getTechs()[14], w.getTechs()[18]
+            });
+            if(w.getGenderBalance()[2] == 0)
+                description = "Deepens your connection with your Commander body, endowing it with your desire to punish those who dare to stand in your way.  Your body will be equipped with several muscular arms which will torture and violate any Chosen they manage to get their hands on.  This is a 'Defiler'-class upgrade which is not normally compatible with other Suppressor- or Defiler-class upgrades.  It functions like the Sodomize action, including its ability to inflict Confidence Break, but its improved effectiveness comes at the cost of 6 Evil Energy per deployment.";
+            else
+            if(w.getGenderBalance()[1] == 0 && w.getGenderBalance()[3] == 0)
+                description = "Deepens your connection with your Commander body, endowing it with your desire to punish those who dare to stand in your way.  Your body will be equipped with several muscular arms which will torture and violate any Chosen they manage to get their hands on.  This is a 'Defiler'-class upgrade which is not normally compatible with other Suppressor- or Defiler-class upgrades.  It functions like the Torture action, including its ability to inflict Confidence Break, but its improved effectiveness comes at the cost of 6 Evil Energy per deployment.";
+            else
+                description = "Deepens your connection with your Commander body, endowing it with your desire to punish those who dare to stand in your way.  Your body will be equipped with several muscular arms which will torture and violate any Chosen they manage to get their hands on.  This is a 'Defiler'-class upgrade which is not normally compatible with other Suppressor- or Defiler-class upgrades.  It functions like the Sodomize/Torture action, including its ability to inflict Confidence Break, but its improved effectiveness comes at the cost of 6 Evil Energy per deployment.";
+        } else
+        if(index == 25)
+        {
+            name = "Vanity";
+            prereqsRequired = 2;
+            cost = 10;
+            prereqs = (new Tech[] {
+                w.getTechs()[11], w.getTechs()[17]
+            });
+            description = "Deepens your connection with your Commander body, endowing it with your desire to leave no doubt as to your superiority over your foes.  Your body will be equipped with electronic tendrils which can hijack communications lines and send live footage of the battle to people who otherwise wouldn't be watching.  This is a 'Defiler'-class upgrade which is not normally comptabiel with other Suppressor- or Defiler-class upgrades.  It functions like the Broadcast action, including its ability to inflict Dignity Break, but its improved effectiveness comes at the cost of 6 Evil Energy per deployment.";
+        } else
+        if(index == 26)
+        {
+            name = "Genius";
+            prereqsRequired = 2;
+            cost = 10;
+            prereqs = (new Tech[] {
+                w.getTechs()[13], w.getTechs()[20]
+            });
+            description = "Allows you to create Commanders capable of using a majority of your psychic capacity.  This optimized control will make it possible to more effectively subdue captured Chosen.  For +2 Evil Energy per deployment, your Commander's capture duration will increase by 1.";
+        } else
+        if(index == 27)
+        {
+            name = "Determination";
+            prereqsRequired = 2;
+            cost = 10;
+            prereqs = (new Tech[] {
+                w.getTechs()[10], w.getTechs()[21]
+            });
+            description = "Develops your ability to tap into the psychic energy associated with aspects of the human mind.  Your Commander body will be correspondingly more pure and resilient.  For +5 Evil Energy per deployment, your Commander will be able to perform a third capture (provided that the battle does not end beforehand).";
         }
     }
 

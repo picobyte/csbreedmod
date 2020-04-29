@@ -17,6 +17,209 @@ public class WorldState
     implements Serializable
 {
 
+    public String getSeparator()
+    {
+        return separator;
+    }
+
+    public void setSeparator(String newSeparator)
+    {
+        separator = newSeparator;
+    }
+
+    public void setEarlyCheat(Boolean value)
+    {
+        earlyCheat = value;
+    }
+
+    public Boolean getEarlyCheat()
+    {
+        return earlyCheat;
+    }
+
+    public void repairSave()
+    {
+        if(genderBalance == null)
+            genderBalance = (new int[] {
+                0, 3, 0, 0
+            });
+        if(genders == null)
+            genders = (new String[] {
+                "female", "female", "female"
+            });
+        if(separator == null)
+            separator = "---";
+        if(earlyCheat == null)
+            earlyCheat = Boolean.valueOf(false);
+    }
+
+    public void copySettings(JTextPane t, WorldState w)
+    {
+        w.repairSave();
+        if(!w.BACKGROUND.equals(BACKGROUND))
+            toggleColors(t);
+        if(w.getTextSize() != textSize)
+            switchTextSize();
+        if(w.getTextSize() != textSize)
+            switchTextSize();
+        separator = w.getSeparator();
+    }
+
+    public void copyToggles(WorldState w)
+    {
+        w.repairSave();
+        if(w.getGenderBalance() != null)
+            trackGenderBalance(w.getGenderBalance());
+        setCommentaryRead(w.getCommentaryRead());
+        setCommentaryWrite(w.getCommentaryWrite());
+        maleShift = w.getMaleShift();
+        earlyCheat = w.getEarlyCheat();
+    }
+
+    public int getMaleShift()
+    {
+        return maleShift;
+    }
+
+    public void changeMaleShift()
+    {
+        maleShift++;
+        if(maleShift == 3)
+            maleShift = 0;
+    }
+
+    public void toggleGenderRandomness()
+    {
+        if(genderBalance[0] == 0)
+        {
+            genderBalance[0] = 1;
+            if(genderBalance[1] == 0 && genderBalance[2] == 0 && genderBalance[3] == 0)
+                genderBalance[1] = 3;
+        } else
+        {
+            if(genderBalance[1] == 0 && genderBalance[2] == 0 && genderBalance[3] == 0)
+                genderBalance[1] = 3;
+            int maleThreshold = genderBalance[1];
+            int futaThreshold = genderBalance[1] + genderBalance[2];
+            int total = genderBalance[1] + genderBalance[2] + genderBalance[3];
+            genderBalance = new int[4];
+            for(int i = 1; i < 4; i++)
+            {
+                int test = (int)(Math.random() * (double)total);
+                if(test < maleThreshold)
+                    genderBalance[1] = genderBalance[1] + 1;
+                else
+                if(test < futaThreshold)
+                    genderBalance[2] = genderBalance[2] + 1;
+                else
+                    genderBalance[3] = genderBalance[3] + 1;
+            }
+
+        }
+        setGenders(genderBalance);
+    }
+
+    public void increaseGender(int index)
+    {
+        genderBalance[index] = genderBalance[index] + 1;
+        if(genderBalance[1] + genderBalance[2] + genderBalance[3] == 3 || genderBalance[0] == 1)
+            setGenders(genderBalance);
+    }
+
+    public void decreaseGender(int index)
+    {
+        genderBalance[index] = genderBalance[index] - 1;
+        if(genderBalance[1] + genderBalance[2] + genderBalance[3] == 3 || genderBalance[0] == 1)
+            setGenders(genderBalance);
+    }
+
+    public int[] getGenderBalance()
+    {
+        return genderBalance;
+    }
+
+    public void trackGenderBalance(int type[])
+    {
+        genderBalance = type;
+    }
+
+    public void setGenders(int type[])
+    {
+        genderBalance = type;
+        int dupeArray[] = new int[4];
+        for(int i = 0; i < 4; i++)
+            dupeArray[i] = type[i];
+
+        if(type[0] == 0)
+        {
+            for(int i = 0; i < 3; i++)
+            {
+                int total = dupeArray[1] + dupeArray[2] + dupeArray[3];
+                int maleIndex = dupeArray[1];
+                int futaIndex = dupeArray[1] + dupeArray[2];
+                int test = (int)(Math.random() * (double)total);
+                if(test < maleIndex)
+                {
+                    genders[i] = "female";
+                    dupeArray[1] = dupeArray[1] - 1;
+                } else
+                if(test < futaIndex)
+                {
+                    genders[i] = "male";
+                    dupeArray[2] = dupeArray[2] - 1;
+                } else
+                {
+                    genders[i] = "futanari";
+                    dupeArray[3] = dupeArray[3] - 1;
+                }
+            }
+
+        } else
+        {
+            if(genderBalance[1] == 0 && genderBalance[2] == 0 && genderBalance[3] == 0)
+                genderBalance[1] = 3;
+            int maleThreshold = genderBalance[1];
+            int futaThreshold = genderBalance[1] + genderBalance[2];
+            int total = genderBalance[1] + genderBalance[2] + genderBalance[3];
+            for(int i = 0; i < 3; i++)
+            {
+                int test = (int)(Math.random() * (double)total);
+                if(test < maleThreshold)
+                    genders[i] = "female";
+                else
+                if(test < futaThreshold)
+                    genders[i] = "male";
+                else
+                    genders[i] = "futanari";
+            }
+
+        }
+        if(cast[0] != null)
+            cast[0].setGender(genders[0]);
+    }
+
+    public String[] getGenders()
+    {
+        return genders;
+    }
+
+    public int getTextSize()
+    {
+        return textSize;
+    }
+
+    public void switchTextSize()
+    {
+        if(textSize == 16)
+            textSize = 20;
+        else
+            textSize = 16;
+        for(int i = 0; i < 3; i++)
+            if(cast[i] != null)
+                cast[i].setTextSize(textSize);
+
+    }
+
     public void setParScore(long newScore)
     {
         parScore = newScore;
@@ -94,6 +297,7 @@ public class WorldState
                 onTrack = Boolean.valueOf(false);
             }
         } else
+        if(!tutorial.booleanValue())
         {
             newArray = Boolean.valueOf(true);
             onTrack = Boolean.valueOf(false);
@@ -135,34 +339,38 @@ public class WorldState
 
     public void readCommentary(JTextPane t)
     {
-        if(commentaryRead.booleanValue() && onTrack.booleanValue())
-        {
-            if(commentary.length > currentAction)
-                grayAppend(t, (new StringBuilder("\n\n")).append(commentary[currentAction]).toString());
-            else
+        if(!tutorial.booleanValue())
+            if(commentaryRead.booleanValue() && onTrack.booleanValue())
+            {
+                if(commentary.length > currentAction)
+                    grayAppend(t, (new StringBuilder("\n\n")).append(commentary[currentAction]).toString());
+                else
+                    onTrack = Boolean.valueOf(false);
+            } else
+            {
                 onTrack = Boolean.valueOf(false);
-        } else
-        {
-            onTrack = Boolean.valueOf(false);
-        }
+            }
     }
 
     public void truncateCommentary(int lastAction)
     {
-        onTrack = Boolean.valueOf(false);
-        String newCommentary[] = new String[lastAction];
-        int newActions[] = new int[lastAction];
-        for(int i = 0; i < lastAction; i++)
-            if(commentary.length > i)
-            {
-                newCommentary[i] = commentary[i];
-                newActions[i] = actions[i];
-            } else
-            {
-                i = lastAction;
-            }
+        if(!tutorial.booleanValue())
+        {
+            onTrack = Boolean.valueOf(false);
+            String newCommentary[] = new String[lastAction];
+            int newActions[] = new int[lastAction];
+            for(int i = 0; i < lastAction; i++)
+                if(commentary.length > i)
+                {
+                    newCommentary[i] = commentary[i];
+                    newActions[i] = actions[i];
+                } else
+                {
+                    i = lastAction;
+                }
 
-        commentary = newCommentary;
+            commentary = newCommentary;
+        }
     }
 
     public void writeCommentary(String s)
@@ -330,6 +538,11 @@ public class WorldState
         cheater = Boolean.valueOf(true);
     }
 
+    public void removeCheater()
+    {
+        cheater = Boolean.valueOf(false);
+    }
+
     public void setHighScore(long newScore)
     {
         highScore = newScore;
@@ -351,7 +564,8 @@ public class WorldState
             "Chosen who hate their enemies will feel greater fear for what those enemies will do.", "Chosen overwhelmed by disgust will be less receptive to pleasure.", "Chosen overwhelmed by pleasure in battle will be disgusted by that fact.", "Chosen who are in pain will be more careful to avoid getting further injured.", "Chosen who are already injured will feel more pain from being attacked again.", "Chosen who are feeling ashamed will be more careful to avoid getting exposed.", "Chosen who are exposed will feel more shame from all sources.", "The protective powers of the Chosen depend on their pure hearts, so a Chosen consumed by hate is more vulnerable in all respects.", "The more pleasure one of the Chosen feels, the deeper her trauma will be engraved in her memory.", "As the Chosen are injured, they become less able to defend themselves from other abuses.", 
             "When one Chosen is exposed and humiliated, it distracts and breaks the morale of the other Chosen on the battlefield.", "Every day, each Chosen's ANGST is increased by the trauma she hasn't successfully resolved yet.", "High ANGST makes the Chosen willing to perform sinful activities, and until it's resolved, the distraction makes them take more damage from all sources.", "Every doubling of ANGST increases the damage bonus by +1, so even a few hundred ANGST is much better than none at all.", "A Chosen's susceptibility to a damage type normally ranges from 0 to 100 based on personality.  The ANGST bonus is added to this value.", "A Chosen's susceptibility to a damage type ranges from 0 to 100 based on personality.  This base susceptibility to a trauma and to its associated circumstance normally adds up to 100, but corruption increases increases them both, potentially even over 100.", "More sinful actions produce a bit more Evil Energy, but they resolve trauma at an exponentially greater rate.", "The Chosen will only begin to use sinful methods to defend themselves if they expect to reach level 3 circumstance damage otherwise.", "Some sinful actions taken during battle will also damage their users.", "As the Chosen are corrupted, they will begin to use more sinful but also more effective versions of their abilities.", 
             "Fearful Chosen are more vulnerable when their allies are surrounded or captured.", "Disgusted Chosen are always more vulnerable, but being grossed out won't generally create a major opening on its own.", "Chosen in pain are more vulnerable for awhile, but after they get surrounded, the adrenaline allows them to shake it off until the pain reaches the next level.", "Ashamed Chosen aren't any more vulnerable to being surrounded, but their efforts to retain their modesty mean that they'll remain surrounded for longer.", "Damage which currently contributes to the opening level is displayed in purple text.  Damage which does not is displayed in black text.  Damage which is only partially contributing to the opening level is displayed in orange text.", "By using \"Regenerate\", one of the Chosen can remove a fraction of her current circumstance damage.  However, nothing done in battle can remove trauma damage that has already been dealt.", "By using \"Blast\", one of the Chosen can increase evacuation and extermination progress.  If evacuation is already complete, the progress that would be added there is wasted.", "The Chosen choose their actions in battle according to which actions would seem to be most useful at the moment and how effective they are at performing those actions.", "Taunting is more effective against self-conscious Chosen, especially those who have been humiliated in the past.", "Attacking is more effective against Chosen with low self-confidence, especially those whose pride has been broken in the past.", 
-            "Sliming is more effective against more naive Chosen, especially those who have come to associate battle with sexual pleasure.", "Threatening allies is more effective against more compassionate Chosen, especially those whose consciences aren't clean.", "It isn't possible to raise a circumstance by more than one level with a single instance of damage.  This limitation does not apply to trauma.", "Each of the actions the Chosen can perform in battle is linked with one of the four vulnerabilities.  The Chosen are better at performing actions associated with their greater vulnerabilities.", "Chosen who are surrounded or captured do not contribute to extermination progress until they escape.", "When a surrounded Chosen uses a tactic that decreases the effectiveness of Grind, Caress, Pummel, or Humiliate, the damage from that source is decreased to 3/5.  When both tactics against the source are used at once, the damage becomes 2/5.", "The main benefit of Suppressor-class upgrades is that they ignore defensive tactics.  Against Chosen who have not yet begun to use any defensive tactics, a Commander without Suppressor-class upgrades can actually more effective.", "When two of the Chosen have a hostile interaction with each other, Evil Energy is generated, especially when the interaction turns them from friends into enemies.", "Any action that deals circumstance damage also deals all four types of trauma damage, especially the one corresponding to the circumstance."
+            "Sliming is more effective against more naive Chosen, especially those who have come to associate battle with sexual pleasure.", "Threatening allies is more effective against more compassionate Chosen, especially those whose consciences aren't clean.", "It isn't possible to raise a circumstance by more than one level with a single instance of damage.  This limitation does not apply to trauma.", "Each of the actions the Chosen can perform in battle is linked with one of the four vulnerabilities.  The Chosen are better at performing actions associated with their greater vulnerabilities.", "Chosen who are surrounded or captured do not contribute to extermination progress until they escape.", "When a surrounded Chosen uses a tactic that decreases the effectiveness of Grind, Caress, Pummel, or Humiliate, the damage from that source is decreased to 3/5.  When both tactics against the source are used at once, the damage becomes 2/5.", "The main benefit of Suppressor-class upgrades is that they ignore defensive tactics.  Against Chosen who have not yet begun to use any defensive tactics, a Commander without Suppressor-class upgrades can actually more effective.", "When two of the Chosen have a hostile interaction with each other, Evil Energy is generated, especially when the interaction turns them from friends into enemies.", "Any action that deals circumstance damage also deals all four types of trauma damage, especially the one corresponding to the circumstance.", "An action's tooltip lists its damage types in descending order of how much is dealt.", 
+            "From a gameplay perspective, there are no differences between male, female, and futanari Chosen."
         });
     }
 
@@ -364,7 +578,7 @@ public class WorldState
     public void scoreSummary(JTextPane t)
     {
         long totalScore = 0L;
-        underlineAppend(t, "Day Fifteen Score");
+        underlineAppend(t, "Day Thirty Score");
         append(t, "\n\nTotal ANGST: ");
         Chosen first = getCast()[0];
         Chosen second = getCast()[1];
@@ -375,11 +589,15 @@ public class WorldState
         long firstTrauma = getCast()[0].getTotalFEAR() + getCast()[0].getTotalDISG() + getCast()[0].getTotalPAIN() + getCast()[0].getTotalSHAM();
         long secondTrauma = getCast()[1].getTotalFEAR() + getCast()[1].getTotalDISG() + getCast()[1].getTotalPAIN() + getCast()[1].getTotalSHAM();
         long thirdTrauma = getCast()[2].getTotalFEAR() + getCast()[2].getTotalDISG() + getCast()[2].getTotalPAIN() + getCast()[2].getTotalSHAM();
-        long traumaBonus = (firstTrauma + secondTrauma + thirdTrauma) * 5L;
-        append(t, (new StringBuilder(String.valueOf(first.condensedFormat(firstTrauma)))).append(" (").append(first.getMainName()).append(") + ").append(second.condensedFormat(secondTrauma)).append(" (").append(second.getMainName()).append(") + ").append(third.condensedFormat(thirdTrauma)).append(" (").append(third.getMainName()).append(") x 5 = ").append(first.condensedFormat(traumaBonus)).append(" pts\n\nRemaining Evil Energy: ").toString());
+        long traumaBonus = (firstTrauma + secondTrauma + thirdTrauma) * 10L;
+        append(t, (new StringBuilder(String.valueOf(first.condensedFormat(firstTrauma)))).append(" (").append(first.getMainName()).append(") + ").append(second.condensedFormat(secondTrauma)).append(" (").append(second.getMainName()).append(") + ").append(third.condensedFormat(thirdTrauma)).append(" (").append(third.getMainName()).append(") x 10 = ").append(first.condensedFormat(traumaBonus)).append(" pts\n\nRemaining Evil Energy: ").toString());
         totalScore += traumaBonus;
-        long EEBonus = 0x186a0 * evilEnergy;
-        append(t, (new StringBuilder(String.valueOf(evilEnergy))).append(" x ").append(first.condensedFormat(0x186a0L)).append(" = ").append(first.condensedFormat(EEBonus)).append("\n").toString());
+        long EEMulti = 100L;
+        EEMulti *= 1000L;
+        EEMulti *= 1000L;
+        EEMulti *= 1000L;
+        long EEBonus = EEMulti * (long)evilEnergy;
+        append(t, (new StringBuilder(String.valueOf(evilEnergy))).append(" x ").append(first.condensedFormat(EEMulti)).append(" = ").append(first.condensedFormat(EEBonus)).append("\n").toString());
         totalScore += EEBonus;
         long corruptionBonus = 0L;
         for(int i = 0; i < 3; i++)
@@ -393,36 +611,54 @@ public class WorldState
                 if(c.isRuthless())
                     if(c.getMorality() > 66)
                     {
-                        long amount = 0xf4240L;
+                        long amount = 100L;
+                        amount *= 1000L;
+                        amount *= 1000L;
+                        amount *= 1000L;
                         cCorruption += amount;
                         added += amount;
                     } else
                     if(c.getMorality() > 33)
                     {
-                        long amount = 0x61a80L;
+                        long amount = 40L;
+                        amount *= 1000L;
+                        amount *= 1000L;
+                        amount *= 1000L;
                         cCorruption += amount;
                         added += amount;
                     } else
                     {
-                        long amount = 0x30d40L;
+                        long amount = 20L;
+                        amount *= 1000L;
+                        amount *= 1000L;
+                        amount *= 1000L;
                         cCorruption += amount;
                         added += amount;
                     }
                 if(!c.isVVirg())
                     if(c.getMorality() > 66)
                     {
-                        long amount = 0x5e69ec0L;
+                        long amount = 9900L;
+                        amount *= 1000L;
+                        amount *= 1000L;
+                        amount *= 1000L;
                         cCorruption += amount;
                         added += amount;
                     } else
                     if(c.getMorality() > 33)
                     {
-                        long amount = 0x25c3f80L;
+                        long amount = 3960L;
+                        amount *= 1000L;
+                        amount *= 1000L;
+                        amount *= 1000L;
                         cCorruption += amount;
                         added += amount;
                     } else
                     {
-                        long amount = 0x12e1fc0L;
+                        long amount = 1980L;
+                        amount *= 1000L;
+                        amount *= 1000L;
+                        amount *= 1000L;
                         cCorruption += amount;
                         added += amount;
                     }
@@ -436,36 +672,54 @@ public class WorldState
                 if(c.isLustful())
                     if(c.getInnocence() > 66)
                     {
-                        long amount = 0xf4240L;
+                        long amount = 100L;
+                        amount *= 1000L;
+                        amount *= 1000L;
+                        amount *= 1000L;
                         cCorruption += amount;
                         added += amount;
                     } else
                     if(c.getInnocence() > 33)
                     {
-                        long amount = 0x61a80L;
+                        long amount = 40L;
+                        amount *= 1000L;
+                        amount *= 1000L;
+                        amount *= 1000L;
                         cCorruption += amount;
                         added += amount;
                     } else
                     {
-                        long amount = 0x30d40L;
+                        long amount = 20L;
+                        amount *= 1000L;
+                        amount *= 1000L;
+                        amount *= 1000L;
                         cCorruption += amount;
                         added += amount;
                     }
                 if(!c.isCVirg())
                     if(c.getInnocence() > 66)
                     {
-                        long amount = 0x5e69ec0L;
+                        long amount = 9900L;
+                        amount *= 1000L;
+                        amount *= 1000L;
+                        amount *= 1000L;
                         cCorruption += amount;
                         added += amount;
                     } else
                     if(c.getInnocence() > 33)
                     {
-                        long amount = 0x25c3f80L;
+                        long amount = 3960L;
+                        amount *= 1000L;
+                        amount *= 1000L;
+                        amount *= 1000L;
                         cCorruption += amount;
                         added += amount;
                     } else
                     {
-                        long amount = 0x12e1fc0L;
+                        long amount = 1980L;
+                        amount *= 1000L;
+                        amount *= 1000L;
+                        amount *= 1000L;
                         cCorruption += amount;
                         added += amount;
                     }
@@ -479,36 +733,54 @@ public class WorldState
                 if(c.isMeek())
                     if(c.getConfidence() > 66)
                     {
-                        long amount = 0xf4240L;
+                        long amount = 100L;
+                        amount *= 1000L;
+                        amount *= 1000L;
+                        amount *= 1000L;
                         cCorruption += amount;
                         added += amount;
                     } else
                     if(c.getConfidence() > 33)
                     {
-                        long amount = 0x61a80L;
+                        long amount = 40L;
+                        amount *= 1000L;
+                        amount *= 1000L;
+                        amount *= 1000L;
                         cCorruption += amount;
                         added += amount;
                     } else
                     {
-                        long amount = 0x30d40L;
+                        long amount = 20L;
+                        amount *= 1000L;
+                        amount *= 1000L;
+                        amount *= 1000L;
                         cCorruption += amount;
                         added += amount;
                     }
                 if(!c.isAVirg())
                     if(c.getConfidence() > 66)
                     {
-                        long amount = 0x5e69ec0L;
+                        long amount = 9900L;
+                        amount *= 1000L;
+                        amount *= 1000L;
+                        amount *= 1000L;
                         cCorruption += amount;
                         added += amount;
                     } else
                     if(c.getConfidence() > 33)
                     {
-                        long amount = 0x25c3f80L;
+                        long amount = 3960L;
+                        amount *= 1000L;
+                        amount *= 1000L;
+                        amount *= 1000L;
                         cCorruption += amount;
                         added += amount;
                     } else
                     {
-                        long amount = 0x12e1fc0L;
+                        long amount = 1980L;
+                        amount *= 1000L;
+                        amount *= 1000L;
+                        amount *= 1000L;
                         cCorruption += amount;
                         added += amount;
                     }
@@ -522,36 +794,54 @@ public class WorldState
                 if(c.isDebased())
                     if(c.getDignity() > 66)
                     {
-                        long amount = 0xf4240L;
+                        long amount = 100L;
+                        amount *= 1000L;
+                        amount *= 1000L;
+                        amount *= 1000L;
                         cCorruption += amount;
                         added += amount;
                     } else
                     if(c.getDignity() > 33)
                     {
-                        long amount = 0x61a80L;
+                        long amount = 40L;
+                        amount *= 1000L;
+                        amount *= 1000L;
+                        amount *= 1000L;
                         cCorruption += amount;
                         added += amount;
                     } else
                     {
-                        long amount = 0x30d40L;
+                        long amount = 20L;
+                        amount *= 1000L;
+                        amount *= 1000L;
+                        amount *= 1000L;
                         cCorruption += amount;
                         added += amount;
                     }
                 if(!c.isModest())
                     if(c.getDignity() > 66)
                     {
-                        long amount = 0x5e69ec0L;
+                        long amount = 9900L;
+                        amount *= 1000L;
+                        amount *= 1000L;
+                        amount *= 1000L;
                         cCorruption += amount;
                         added += amount;
                     } else
                     if(c.getDignity() > 33)
                     {
-                        long amount = 0x25c3f80L;
+                        long amount = 3960L;
+                        amount *= 1000L;
+                        amount *= 1000L;
+                        amount *= 1000L;
                         cCorruption += amount;
                         added += amount;
                     } else
                     {
-                        long amount = 0x12e1fc0L;
+                        long amount = 1980L;
+                        amount *= 1000L;
+                        amount *= 1000L;
+                        amount *= 1000L;
                         cCorruption += amount;
                         added += amount;
                     }
@@ -574,8 +864,13 @@ public class WorldState
                 {
                     if(enmityBonus > 0L)
                         append(t, " + ");
-                    append(t, (new StringBuilder(String.valueOf(first.condensedFormat(0x17d7840L)))).append(" (").append(getCast()[i].getMainName()).append(" vs. ").append(getCast()[j].getMainName()).append(")").toString());
-                    enmityBonus += 0x17d7840L;
+                    long added = 10L;
+                    added *= 1000L;
+                    added *= 1000L;
+                    added *= 1000L;
+                    added *= 1000L;
+                    append(t, (new StringBuilder(String.valueOf(first.condensedFormat(added)))).append(" (").append(getCast()[i].getMainName()).append(" vs. ").append(getCast()[j].getMainName()).append(")").toString());
+                    enmityBonus += added;
                 }
 
         }
@@ -622,6 +917,8 @@ public class WorldState
             newChosen.setNumber(0);
             newChosen.generate(newWorld);
             newWorld.addChosen(newChosen);
+            newWorld.copySettings(t, this);
+            newWorld.copyToggles(this);
             saves.endSave(newWorld, "New Game+");
             wobj.serializeSaveData(saves);
             append(t, (new StringBuilder("A new save file has been added in slot ")).append(saves.getSaves().length).append(" which allows you to go back and start from Day 1 against this same group of Chosen.  You may also export this file from the shop menu in order to let others try to beat your score.  ").toString());
@@ -678,7 +975,32 @@ public class WorldState
 
     public void applyVersatility()
     {
+        evilEnergy -= 5;
         bodyStatus[10] = Boolean.valueOf(true);
+    }
+
+    public void applyVanity()
+    {
+        evilEnergy -= 6;
+        bodyStatus[14] = Boolean.valueOf(true);
+    }
+
+    public void applySpite()
+    {
+        evilEnergy -= 6;
+        bodyStatus[13] = Boolean.valueOf(true);
+    }
+
+    public void applyDominance()
+    {
+        evilEnergy -= 6;
+        bodyStatus[12] = Boolean.valueOf(true);
+    }
+
+    public void applyAmbition()
+    {
+        evilEnergy -= 6;
+        bodyStatus[11] = Boolean.valueOf(true);
     }
 
     public void applyMania()
@@ -707,9 +1029,21 @@ public class WorldState
         bodyStatus[8] = Boolean.valueOf(true);
     }
 
+    public void addCaptureTwo()
+    {
+        evilEnergy -= 5;
+        bodyStatus[16] = Boolean.valueOf(true);
+    }
+
     public void toggleAmbush()
     {
         bodyStatus[2] = Boolean.valueOf(!bodyStatus[2].booleanValue());
+    }
+
+    public void enhanceFour()
+    {
+        evilEnergy -= 2;
+        bodyStatus[15] = Boolean.valueOf(true);
     }
 
     public void enhanceThree()
@@ -744,7 +1078,7 @@ public class WorldState
         return capturesPossible;
     }
 
-    Boolean validLine(int test)
+    public Boolean validLine(int test)
     {
         if(test != lastLine && test != lastLastLine && test > 0)
             return Boolean.valueOf(true);
@@ -2252,8 +2586,12 @@ public class WorldState
                 if(nextSpeaker.getMorality() > 33)
                 {
                     if(nextSpeaker.getInnocence() > 66)
-                        nextSpeaker.say(t, (new StringBuilder("Is ")).append(target.getMainName()).append(" gonna become a mommy?").toString());
-                    else
+                    {
+                        if(target.getGender().equals("male"))
+                            nextSpeaker.say(t, (new StringBuilder("Silly Thralls, ")).append(target.getMainName()).append(" can't be a mommy!").toString());
+                        else
+                            nextSpeaker.say(t, (new StringBuilder("Is ")).append(target.getMainName()).append(" gonna become a mommy?").toString());
+                    } else
                     if(nextSpeaker.getInnocence() > 33)
                         nextSpeaker.say(t, (new StringBuilder("Are you seriously having sex in the middle of battle, ")).append(target.getMainName()).append("?").toString());
                     else
@@ -2433,6 +2771,12 @@ public class WorldState
             value += 2;
         if(bodyStatus[10].booleanValue())
             value += 5;
+        if(bodyStatus[11].booleanValue() || bodyStatus[12].booleanValue() || bodyStatus[13].booleanValue() || bodyStatus[14].booleanValue())
+            value += 6;
+        if(bodyStatus[15].booleanValue())
+            value += 2;
+        if(bodyStatus[16].booleanValue())
+            value += 5;
         return value;
     }
 
@@ -2447,6 +2791,9 @@ public class WorldState
             suppressors++;
         if(bodyStatus[6].booleanValue())
             suppressors++;
+        Boolean defiler = Boolean.valueOf(false);
+        if(bodyStatus[11].booleanValue() || bodyStatus[12].booleanValue() || bodyStatus[13].booleanValue() || bodyStatus[14].booleanValue())
+            defiler = Boolean.valueOf(true);
         int reportedDuration = 2;
         if(c == null && (techs[8].isOwned().booleanValue() || techs[9].isOwned().booleanValue() || techs[10].isOwned().booleanValue() || techs[11].isOwned().booleanValue() || techs[12].isOwned().booleanValue() || techs[13].isOwned().booleanValue() || techs[14].isOwned().booleanValue() || techs[15].isOwned().booleanValue()))
         {
@@ -2489,6 +2836,20 @@ public class WorldState
                                 durationCost = 2;
                         }
                         append(t, "]");
+                        if(techs[26].isOwned().booleanValue())
+                        {
+                            append(t, "[");
+                            if(bodyStatus[15].booleanValue())
+                            {
+                                append(t, "X");
+                            } else
+                            {
+                                append(t, " ");
+                                if(durationCost == 0)
+                                    durationCost = 2;
+                            }
+                            append(t, "]");
+                        }
                     }
                 }
                 append(t, " Duration");
@@ -2509,6 +2870,20 @@ public class WorldState
                     captureCost = 2;
                 }
                 append(t, "]");
+                if(techs[27].isOwned().booleanValue())
+                {
+                    append(t, "[");
+                    if(bodyStatus[16].booleanValue())
+                    {
+                        append(t, "X");
+                    } else
+                    {
+                        append(t, " ");
+                        if(captureCost == 0)
+                            captureCost = 5;
+                    }
+                    append(t, "]");
+                }
                 append(t, " Extra Captures");
                 if(captureCost > 0)
                     append(t, (new StringBuilder(" (Next: ")).append(captureCost).append(" EE)").toString());
@@ -2526,6 +2901,9 @@ public class WorldState
             if(techs[10].isOwned().booleanValue() || techs[11].isOwned().booleanValue() || techs[12].isOwned().booleanValue() || techs[13].isOwned().booleanValue())
             {
                 append(t, "Suppressor: ");
+                if(defiler.booleanValue())
+                    append(t, "(LOCKED)");
+                else
                 if(suppressors == 0)
                     append(t, "None (free)");
                 else
@@ -2573,7 +2951,42 @@ public class WorldState
                 }
                 append(t, "\n");
             }
+            if(techs[22].isOwned().booleanValue() || techs[23].isOwned().booleanValue() || techs[24].isOwned().booleanValue() || techs[25].isOwned().booleanValue())
+            {
+                append(t, "Defiler: ");
+                if(suppressors > 0)
+                    append(t, "(LOCKED)");
+                else
+                if(!defiler.booleanValue())
+                    append(t, "None (Cost: 6 EE)");
+                else
+                if(bodyStatus[11].booleanValue())
+                    append(t, "Ambition [HATE, PLEA]");
+                else
+                if(bodyStatus[12].booleanValue())
+                    append(t, "Dominance [PLEA, INJU]");
+                else
+                if(bodyStatus[13].booleanValue())
+                    append(t, "Spite [INJU, EXPO]");
+                else
+                if(bodyStatus[14].booleanValue())
+                    append(t, "Vanity [EXPO, HATE]");
+            }
             append(t, "\n");
+            if(defiler.booleanValue())
+            {
+                if(bodyStatus[11].booleanValue())
+                    append(t, "Your Commander is a huge Demon which prowls about on all fours with a foot-long flared penis slung under its massive body.  It ");
+                else
+                if(bodyStatus[12].booleanValue())
+                    append(t, "Your Commander is a huge, shambling mass which uses long tentacles to pull its prey into an internal chamber full of aphrodisiac and smaller pleasure-inducing tentacles.  It ");
+                else
+                if(bodyStatus[13].booleanValue())
+                    append(t, "Your Commander is a huge, vaguely-humanoid titan of a Demon with several extra muscular arms capable of restraining its prey and inflicting various tortures and humiliations.  It ");
+                else
+                if(bodyStatus[14].booleanValue())
+                    append(t, "Your Commander is a huge, biomechanical Demon with electrified tentacles capable of hijacking communications infrastructure and using it to show unsuspecting people footage of how it torments its prey.  It ");
+            } else
             if(suppressors == 0)
                 append(t, "Your Commander is a humanoid Demon whose only exceptional feature is its ability to act as a body for your incorporeal form.  It ");
             else
@@ -2638,6 +3051,9 @@ public class WorldState
             append(t, "your target and capture her");
         else
             append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" and capture ").append(c.himHer()).toString());
+        if(bodyStatus[15].booleanValue())
+            reportedDuration += 4;
+        else
         if(bodyStatus[9].booleanValue())
             reportedDuration += 3;
         else
@@ -2657,20 +3073,43 @@ public class WorldState
         else
         if(reportedDuration == 5)
             append(t, " for five rounds");
+        else
+        if(reportedDuration == 6)
+            append(t, " for six rounds");
         if(bodyStatus[2].booleanValue())
         {
             append(t, " once you give the order");
+            if(bodyStatus[16].booleanValue())
+                append(t, ", up to three times");
+            else
             if(bodyStatus[8].booleanValue())
                 append(t, ", up to twice");
         } else
         {
             append(t, " at the start of battle");
+            if(bodyStatus[16].booleanValue())
+                append(t, ", and then two more times whenever you give the order");
+            else
             if(bodyStatus[8].booleanValue())
                 append(t, ", and then one more time once you give the order");
         }
         if(c == null)
             append(t, (new StringBuilder(".  It is worth ")).append(getCommanderValue()).append(" Evil Energy.  You have ").append(evilEnergy).append(" Evil Energy remaining.").toString());
         else
+        if(defiler.booleanValue())
+        {
+            if(bodyStatus[11].booleanValue())
+                append(t, ", inflicting overwhelming levels of HATE and PLEA, and potentially causing Morality Break above 10k HATE.");
+            else
+            if(bodyStatus[12].booleanValue())
+                append(t, ", inflicting overwhelming levels of PLEA and INJU, and potentially causing Innocence Break above 10k PLEA.");
+            else
+            if(bodyStatus[13].booleanValue())
+                append(t, ", inflicting overwhelming levels of INJU and EXPO, and potentially causing Confidence Break above 10k INJU.");
+            else
+            if(bodyStatus[14].booleanValue())
+                append(t, ", inflicting overwhelming levels of EXPO and HATE, and potentially causing Dignity Break above 10k EXPO.");
+        } else
         if(suppressors == 0)
         {
             append(t, (new StringBuilder(", giving your Thralls a chance to torment ")).append(c.himHer()).append(".").toString());
@@ -2709,7 +3148,7 @@ public class WorldState
                 place++;
             }
             if(suppressors == 2)
-                append(t, (new StringBuilder(", inflicting high levels of ")).append(damages[0]).append(", ").append(damages[1]).append(", ").append(damages[2]).append(", and ").append(damages[3]).append(".").toString());
+                append(t, (new StringBuilder(", inflicting high levels of ")).append(damages[0]).append(", ").append(damages[2]).append(", ").append(damages[1]).append(", and ").append(damages[3]).append(".").toString());
             else
                 append(t, (new StringBuilder(", inflicting high levels of ")).append(damages[0]).append(" and ").append(damages[1]).append(".").toString());
         }
@@ -2761,6 +3200,14 @@ public class WorldState
         evilEnergy += amount;
     }
 
+    public Boolean upgradedCommander()
+    {
+        if(!bodyStatus[3].booleanValue() && !bodyStatus[4].booleanValue() && !bodyStatus[5].booleanValue() && !bodyStatus[6].booleanValue() && !bodyStatus[11].booleanValue() && !bodyStatus[12].booleanValue() && !bodyStatus[13].booleanValue() && !bodyStatus[14].booleanValue())
+            return Boolean.valueOf(false);
+        else
+            return Boolean.valueOf(true);
+    }
+
     public void newCombat(WorldState w, Chosen c[])
     {
         currentCombatants = c;
@@ -2783,6 +3230,9 @@ public class WorldState
             exterminationComplete += 100;
         exterminationMultiplier = 100;
         captureDuration = 2;
+        if(bodyStatus[15].booleanValue())
+            captureDuration = 5;
+        else
         if(bodyStatus[7].booleanValue())
             captureDuration = 4;
         else
@@ -2791,8 +3241,11 @@ public class WorldState
         else
             captureDuration = 2;
         capturesPossible = 0;
-        if(bodyStatus[2].booleanValue() || bodyStatus[3].booleanValue() || bodyStatus[4].booleanValue() || bodyStatus[5].booleanValue() || bodyStatus[6].booleanValue())
+        if(bodyStatus[2].booleanValue() || upgradedCommander().booleanValue())
             capturesPossible++;
+        if(bodyStatus[16].booleanValue())
+            capturesPossible += 2;
+        else
         if(bodyStatus[8].booleanValue())
             capturesPossible++;
         nextCapture = null;
@@ -2859,7 +3312,7 @@ public class WorldState
     {
         StyledDocument doc = t.getStyledDocument();
         SimpleAttributeSet keyWord = new SimpleAttributeSet();
-        StyleConstants.setFontSize(keyWord, 16);
+        StyleConstants.setFontSize(keyWord, textSize);
         StyleConstants.setForeground(keyWord, FOREGROUND);
         StyleConstants.setFontFamily(keyWord, "DialogInput");
         StyleConstants.setBold(keyWord, true);
@@ -2878,7 +3331,7 @@ public class WorldState
     {
         StyledDocument doc = t.getStyledDocument();
         SimpleAttributeSet keyWord = new SimpleAttributeSet();
-        StyleConstants.setFontSize(keyWord, 16);
+        StyleConstants.setFontSize(keyWord, textSize);
         StyleConstants.setForeground(keyWord, PURPLE);
         StyleConstants.setFontFamily(keyWord, "DialogInput");
         StyleConstants.setBold(keyWord, true);
@@ -2897,7 +3350,7 @@ public class WorldState
     {
         StyledDocument doc = t.getStyledDocument();
         SimpleAttributeSet keyWord = new SimpleAttributeSet();
-        StyleConstants.setFontSize(keyWord, 16);
+        StyleConstants.setFontSize(keyWord, textSize);
         StyleConstants.setForeground(keyWord, ORANGE);
         StyleConstants.setFontFamily(keyWord, "DialogInput");
         StyleConstants.setBold(keyWord, true);
@@ -2916,7 +3369,7 @@ public class WorldState
     {
         StyledDocument doc = t.getStyledDocument();
         SimpleAttributeSet keyWord = new SimpleAttributeSet();
-        StyleConstants.setFontSize(keyWord, 16);
+        StyleConstants.setFontSize(keyWord, textSize);
         StyleConstants.setForeground(keyWord, Color.GRAY);
         StyleConstants.setFontFamily(keyWord, "DialogInput");
         StyleConstants.setBold(keyWord, true);
@@ -2935,7 +3388,7 @@ public class WorldState
     {
         StyledDocument doc = t.getStyledDocument();
         SimpleAttributeSet keyWord = new SimpleAttributeSet();
-        StyleConstants.setFontSize(keyWord, 16);
+        StyleConstants.setFontSize(keyWord, textSize);
         StyleConstants.setForeground(keyWord, FOREGROUND);
         StyleConstants.setFontFamily(keyWord, "DialogInput");
         StyleConstants.setBold(keyWord, true);
@@ -2955,7 +3408,7 @@ public class WorldState
     {
         StyledDocument doc = t.getStyledDocument();
         SimpleAttributeSet keyWord = new SimpleAttributeSet();
-        StyleConstants.setFontSize(keyWord, 16);
+        StyleConstants.setFontSize(keyWord, textSize);
         StyleConstants.setForeground(keyWord, RED);
         StyleConstants.setFontFamily(keyWord, "DialogInput");
         StyleConstants.setBold(keyWord, true);
@@ -2974,7 +3427,7 @@ public class WorldState
     {
         StyledDocument doc = t.getStyledDocument();
         SimpleAttributeSet keyWord = new SimpleAttributeSet();
-        StyleConstants.setFontSize(keyWord, 16);
+        StyleConstants.setFontSize(keyWord, textSize);
         StyleConstants.setForeground(keyWord, GREEN);
         StyleConstants.setFontFamily(keyWord, "DialogInput");
         StyleConstants.setBold(keyWord, true);
@@ -2993,7 +3446,7 @@ public class WorldState
     {
         StyledDocument doc = t.getStyledDocument();
         SimpleAttributeSet keyWord = new SimpleAttributeSet();
-        StyleConstants.setFontSize(keyWord, 16);
+        StyleConstants.setFontSize(keyWord, textSize);
         StyleConstants.setForeground(keyWord, BLUE);
         StyleConstants.setFontFamily(keyWord, "DialogInput");
         StyleConstants.setBold(keyWord, true);
@@ -3012,10 +3465,30 @@ public class WorldState
     {
         StyledDocument doc = t.getStyledDocument();
         SimpleAttributeSet keyWord = new SimpleAttributeSet();
-        StyleConstants.setFontSize(keyWord, 16);
+        StyleConstants.setFontSize(keyWord, textSize);
         StyleConstants.setForeground(keyWord, BACKGROUND);
         StyleConstants.setFontFamily(keyWord, "DialogInput");
         StyleConstants.setBackground(keyWord, FOREGROUND);
+        StyleConstants.setBold(keyWord, true);
+        try
+        {
+            doc.insertString(doc.getLength(), s, keyWord);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+        t.setCaretPosition(t.getDocument().getLength());
+    }
+
+    public void tierTwoAppend(JTextPane t, String s)
+    {
+        StyledDocument doc = t.getStyledDocument();
+        SimpleAttributeSet keyWord = new SimpleAttributeSet();
+        StyleConstants.setFontSize(keyWord, textSize);
+        StyleConstants.setForeground(keyWord, BACKGROUND);
+        StyleConstants.setFontFamily(keyWord, "DialogInput");
+        StyleConstants.setBackground(keyWord, RED);
         StyleConstants.setBold(keyWord, true);
         try
         {
@@ -3033,6 +3506,7 @@ public class WorldState
         day = 1;
         initializeTips();
         nameSeed = w.getNameSeed();
+        genders = w.getGenders();
         for(int i = 0; i < techs.length; i++)
         {
             techs[i] = new Tech();
@@ -3364,16 +3838,90 @@ public class WorldState
         return evacuationProgress >= evacuationComplete;
     }
 
-    public String getEvacStatus()
+    public String getEvacStatus(Boolean bar)
     {
         int percentage = (evacuationProgress * 100) / evacuationComplete;
-        return (new StringBuilder(String.valueOf(evacuationProgress))).append("/").append(evacuationComplete).append(" (").append(percentage).append("%)").toString();
+        String result = (new StringBuilder(String.valueOf(evacuationProgress))).append("/").append(evacuationComplete).append(" (").append(percentage).append("%)").toString();
+        if(bar.booleanValue())
+        {
+            for(int charCount = result.length(); charCount < 17;)
+            {
+                charCount++;
+                result = (new StringBuilder(String.valueOf(result))).append(" ").toString();
+            }
+
+            result = (new StringBuilder(String.valueOf(result))).append("[").toString();
+            int base = 20;
+            int possible = 0;
+            for(int i = 0; i < 3; i++)
+                if(getCombatants()[i] != null && !currentCombatants[i].isSurrounded().booleanValue() && !currentCombatants[i].isCaptured().booleanValue())
+                    possible += currentCombatants[i].FEARMulti() / 12;
+
+            for(int i = 1; i < 21; i++)
+                if(evacuationProgress * 20 >= evacuationComplete * i)
+                    result = (new StringBuilder(String.valueOf(result))).append("#").toString();
+                else
+                if((evacuationProgress + base) * 20 >= evacuationComplete * i)
+                    result = (new StringBuilder(String.valueOf(result))).append("=").toString();
+                else
+                if((evacuationProgress + base + possible) * 20 >= evacuationComplete * i)
+                    result = (new StringBuilder(String.valueOf(result))).append("-").toString();
+                else
+                    result = (new StringBuilder(String.valueOf(result))).append(" ").toString();
+
+            result = (new StringBuilder(String.valueOf(result))).append("]").toString();
+        }
+        return result;
     }
 
-    public String getExterminationStatus()
+    public String getExterminationStatus(Boolean bar)
     {
         int percentage = (exterminationProgress * 100) / exterminationComplete;
-        return (new StringBuilder(String.valueOf(exterminationProgress))).append("/").append(exterminationComplete).append(" (").append(percentage).append("%)").toString();
+        String result = (new StringBuilder(String.valueOf(exterminationProgress))).append("/").append(exterminationComplete).append(" (").append(percentage).append("%)").toString();
+        if(bar.booleanValue())
+        {
+            for(int charCount = result.length(); charCount < 14;)
+            {
+                charCount++;
+                result = (new StringBuilder(String.valueOf(result))).append(" ").toString();
+            }
+
+            result = (new StringBuilder(String.valueOf(result))).append("[").toString();
+            int base = 0;
+            int possible = 0;
+            for(int i = 0; i < 3; i++)
+                if(getCombatants()[i] != null)
+                    if(!currentCombatants[i].isSurrounded().booleanValue() && !currentCombatants[i].isCaptured().booleanValue())
+                    {
+                        int usedExterminationMultiplier = exterminationMultiplier;
+                        if(evacuationProgress >= evacuationComplete)
+                            usedExterminationMultiplier = (usedExterminationMultiplier * 3) / 2;
+                        base += (exterminationPerChosen * usedExterminationMultiplier) / 100;
+                        possible += currentCombatants[i].FEARMulti() / 12;
+                    } else
+                    if(currentCombatants[i].getSurroundDuration() == 1 || currentCombatants[i].getCaptureProgression() == captureDuration)
+                    {
+                        int usedExterminationMultiplier = exterminationMultiplier;
+                        if(evacuationProgress >= evacuationComplete)
+                            usedExterminationMultiplier = (usedExterminationMultiplier * 3) / 2;
+                        base += (exterminationPerChosen * usedExterminationMultiplier) / 100;
+                    }
+
+            for(int i = 1; i < 21; i++)
+                if(exterminationProgress * 20 >= exterminationComplete * i)
+                    result = (new StringBuilder(String.valueOf(result))).append("#").toString();
+                else
+                if((exterminationProgress + base) * 20 >= exterminationComplete * i)
+                    result = (new StringBuilder(String.valueOf(result))).append("=").toString();
+                else
+                if((exterminationProgress + base + possible) * 20 >= exterminationComplete * i)
+                    result = (new StringBuilder(String.valueOf(result))).append("-").toString();
+                else
+                    result = (new StringBuilder(String.valueOf(result))).append(" ").toString();
+
+            result = (new StringBuilder(String.valueOf(result))).append("]").toString();
+        }
+        return result;
     }
 
     public void setRallyBonus(int amount, int initiative)
@@ -3440,7 +3988,7 @@ public class WorldState
             if(progressEvacuation(evacuationPerTurn))
                 append(t, "Evacuation complete!\n");
             else
-                append(t, (new StringBuilder("Evacuation: ")).append(getEvacStatus()).append("\n").toString());
+                append(t, (new StringBuilder("Evacuation: ")).append(getEvacStatus(Boolean.valueOf(true))).append("\n").toString());
         Boolean haltEnding = Boolean.valueOf(false);
         Chosen trappedChosen = null;
         for(int i = 0; i < 3; i++)
@@ -3461,7 +4009,7 @@ public class WorldState
             readyToEnd = Boolean.valueOf(false);
         if((exterminationProgress < exterminationComplete || haltEnding.booleanValue() || getTechs()[18].isOwned().booleanValue() && !readyToEnd.booleanValue()) && exterminationProgress >= 0)
         {
-            append(t, (new StringBuilder("Extermination: ")).append(getExterminationStatus()).append("\n\n").toString());
+            append(t, (new StringBuilder("Extermination: ")).append(getExterminationStatus(Boolean.valueOf(true))).append("\n\n").toString());
             if(evacuationProgress < evacuationComplete)
             {
                 append(t, "The desperate battle continues...\n");
@@ -3705,7 +4253,7 @@ public class WorldState
     public void nameGen(final JTextPane t, final JPanel p, final JFrame f)
     {
         p.removeAll();
-        final Chosen dummy = new Chosen();
+        Chosen dummy = new Chosen();
         dummy.setNumber(0);
         if(customNames[0] == null)
         {
@@ -3724,7 +4272,7 @@ public class WorldState
             customNames[4] = dummy.genName(this, nameSeed)[0];
             customNames[5] = dummy.genName(this, nameSeed)[1];
         }
-        append(t, "\n\n---\n\nGenerating a custom team of Chosen.  Their real names are (in order of appearance):\n\n");
+        append(t, (new StringBuilder("\n\n")).append(separator).append("\n\nGenerating a custom team of Chosen.  Their real names are (in order of appearance):\n\n").toString());
         if(gaijinStatus[0].booleanValue())
         {
             append(t, customNames[0]);
@@ -3736,6 +4284,8 @@ public class WorldState
                 append(t, (new StringBuilder(String.valueOf(customNames[1]))).append(" ").toString());
             append(t, customNames[0]);
         }
+        if(genderBalance[0] != 0 || genderBalance[1] != 3 && genderBalance[2] != 3 && genderBalance[3] != 3)
+            append(t, (new StringBuilder(" (")).append(genders[0]).append(")").toString());
         append(t, "\n");
         if(gaijinStatus[1].booleanValue())
         {
@@ -3748,6 +4298,8 @@ public class WorldState
                 append(t, (new StringBuilder(String.valueOf(customNames[3]))).append(" ").toString());
             append(t, customNames[2]);
         }
+        if(genderBalance[0] != 0 || genderBalance[1] != 3 && genderBalance[2] != 3 && genderBalance[3] != 3)
+            append(t, (new StringBuilder(" (")).append(genders[1]).append(")").toString());
         append(t, "\n");
         if(gaijinStatus[2].booleanValue())
         {
@@ -3760,6 +4312,8 @@ public class WorldState
                 append(t, (new StringBuilder(String.valueOf(customNames[5]))).append(" ").toString());
             append(t, customNames[4]);
         }
+        if(genderBalance[0] != 0 || genderBalance[1] != 3 && genderBalance[2] != 3 && genderBalance[3] != 3)
+            append(t, (new StringBuilder(" (")).append(genders[2]).append(")").toString());
         append(t, "\n\nPick which one's name you'd like to change.  When you're done, either continue to the personality questionaire or allow the game to generate a random set of personalities as normal.");
         for(int i = 0; i < 3; i++)
         {
@@ -3770,17 +4324,26 @@ public class WorldState
                 public void actionPerformed(ActionEvent e)
                 {
                     p.removeAll();
-                    String input = JOptionPane.showInputDialog((new StringBuilder("What is ")).append(dummy.hisHer()).append(" family surname?  Leave blank to have ").append(dummy.himHer()).append(" lack a surname.").toString());
+                    String hisHer = "her";
+                    String himHer = "her";
+                    String heShe = "she";
+                    if(genders[thisChosen].equals("male"))
+                    {
+                        hisHer = "his";
+                        himHer = "him";
+                        heShe = "he";
+                    }
+                    String input = JOptionPane.showInputDialog((new StringBuilder("What is ")).append(hisHer).append(" family surname?  Leave blank to have ").append(himHer).append(" lack a surname.").toString());
                     if(input == null)
                         customNames[thisChosen * 2 + 1] = "";
                     else
                         customNames[thisChosen * 2 + 1] = input;
-                    input = JOptionPane.showInputDialog((new StringBuilder("And what name was ")).append(dummy.heShe()).append(" given at birth?  Leave blank to keep the default (").append(customNames[thisChosen * 2]).append(").").toString());
+                    input = JOptionPane.showInputDialog((new StringBuilder("And what name was ")).append(heShe).append(" given at birth?  Leave blank to keep the current choice (").append(customNames[thisChosen * 2]).append(").").toString());
                     if(input != null && input.length() > 0)
                         customNames[thisChosen * 2] = input;
                     if(customNames[thisChosen * 2 + 1].length() > 0)
                     {
-                        append(t, (new StringBuilder("\n\n---\n\nDoes ")).append(dummy.heShe()).append(" use Eastern name order (").append(customNames[thisChosen * 2 + 1]).append(" ").append(customNames[thisChosen * 2]).append(") or Western name order (").append(customNames[thisChosen * 2]).append(" ").append(customNames[thisChosen * 2 + 1]).append(")?").toString());
+                        append(t, (new StringBuilder("\n\n")).append(separator).append("\n\nDoes ").append(heShe).append(" use Eastern name order (").append(customNames[thisChosen * 2 + 1]).append(" ").append(customNames[thisChosen * 2]).append(") or Western name order (").append(customNames[thisChosen * 2]).append(" ").append(customNames[thisChosen * 2 + 1]).append(")?").toString());
                         JButton Eastern = new JButton("Eastern");
                         Eastern.addActionListener(new ActionListener() {
 
@@ -3843,7 +4406,6 @@ public class WorldState
 
                 final WorldState this$0;
                 private final JPanel val$p;
-                private final Chosen val$dummy;
                 private final int val$thisChosen;
                 private final JTextPane val$t;
                 private final JFrame val$f;
@@ -3853,7 +4415,6 @@ public class WorldState
             {
                 this$0 = WorldState.this;
                 p = jpanel;
-                dummy = chosen;
                 thisChosen = i;
                 t = jtextpane;
                 f = jframe;
@@ -3932,24 +4493,29 @@ public class WorldState
             }
         });
         p.add(Randomize);
+        final WorldState w = this;
         JButton Quit = new JButton("Quit");
         Quit.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e)
             {
                 p.removeAll();
-                append(t, "\n\n---\n\nReally quit?  All customization of this team will be lost.");
+                append(t, (new StringBuilder("\n\n")).append(separator).append("\n\nReally quit?  All customization of this team will be lost.").toString());
                 JButton ReallyQuit = new JButton("Quit");
                 ReallyQuit.addActionListener(new ActionListener() {
 
                     public void actionPerformed(ActionEvent e)
                     {
-                        append(t, "\n\n---\n\n");
-                        Project.IntroOne(t, p, f, new WorldState());
+                        append(t, (new StringBuilder("\n\n")).append(separator).append("\n\n").toString());
+                        WorldState x = new WorldState();
+                        x.copySettings(t, w);
+                        x.copyToggles(w);
+                        Project.IntroOne(t, p, f, x);
                     }
 
                     final _cls4 this$1;
                     private final JTextPane val$t;
+                    private final WorldState val$w;
                     private final JPanel val$p;
                     private final JFrame val$f;
 
@@ -3957,6 +4523,7 @@ public class WorldState
                     {
                         this$1 = _cls4.this;
                         t = jtextpane;
+                        w = worldstate;
                         p = jpanel;
                         f = jframe;
                         super();
@@ -3993,6 +4560,7 @@ public class WorldState
             final WorldState this$0;
             private final JPanel val$p;
             private final JTextPane val$t;
+            private final WorldState val$w;
             private final JFrame val$f;
 
 
@@ -4001,6 +4569,7 @@ public class WorldState
                 this$0 = WorldState.this;
                 p = jpanel;
                 t = jtextpane;
+                w = worldstate1;
                 f = jframe;
                 super();
             }
@@ -4013,7 +4582,7 @@ public class WorldState
     public void personalityGen(final JTextPane t, final JPanel p, final JFrame f, final int progress)
     {
         p.removeAll();
-        append(t, "\n\n---\n\n");
+        append(t, (new StringBuilder("\n\n")).append(separator).append("\n\n").toString());
         for(int i = 0; i < 3; i++)
         {
             for(int j = 0; j < 8; j++)
@@ -4290,23 +4859,28 @@ public class WorldState
         });
         p.add(Back);
         JButton Quit = new JButton("Quit");
+        final WorldState w = this;
         Quit.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e)
             {
                 p.removeAll();
-                append(t, "\n\n---\n\nReally quit?  All customization of this team will be lost.");
+                append(t, (new StringBuilder("\n\n")).append(separator).append("\n\nReally quit?  All customization of this team will be lost.").toString());
                 JButton ReallyQuit = new JButton("Quit");
                 ReallyQuit.addActionListener(new ActionListener() {
 
                     public void actionPerformed(ActionEvent e)
                     {
-                        append(t, "\n\n---\n\n");
-                        Project.IntroOne(t, p, f, new WorldState());
+                        append(t, (new StringBuilder("\n\n")).append(separator).append("\n\n").toString());
+                        WorldState x = new WorldState();
+                        x.copySettings(t, w);
+                        x.copyToggles(w);
+                        Project.IntroOne(t, p, f, x);
                     }
 
                     final _cls8 this$1;
                     private final JTextPane val$t;
+                    private final WorldState val$w;
                     private final JPanel val$p;
                     private final JFrame val$f;
 
@@ -4314,6 +4888,7 @@ public class WorldState
                     {
                         this$1 = _cls8.this;
                         t = jtextpane;
+                        w = worldstate;
                         p = jpanel;
                         f = jframe;
                         super();
@@ -4352,6 +4927,7 @@ public class WorldState
             final WorldState this$0;
             private final JPanel val$p;
             private final JTextPane val$t;
+            private final WorldState val$w;
             private final JFrame val$f;
             private final int val$progress;
 
@@ -4361,6 +4937,7 @@ public class WorldState
                 this$0 = WorldState.this;
                 p = jpanel;
                 t = jtextpane;
+                w = worldstate1;
                 f = jframe;
                 progress = i;
                 super();
@@ -4743,7 +5320,7 @@ public class WorldState
 
         if(attempts >= 1000)
         {
-            append(t, "\n\n---\n\n");
+            append(t, (new StringBuilder("\n\n")).append(separator).append("\n\n").toString());
             append(t, "Generation failed.\n\n");
             Project.IntroOne(t, p, f, new WorldState());
         } else
@@ -4767,7 +5344,7 @@ public class WorldState
         invertModest = (new Boolean[] {
             Boolean.valueOf(false), Boolean.valueOf(false), Boolean.valueOf(false)
         });
-        append(t, "\n\n---\n\nPersonalities generated.  ");
+        append(t, (new StringBuilder("\n\n")).append(separator).append("\n\nPersonalities generated.  ").toString());
         vulnerabilityMenu(t, p, f, Boolean.valueOf(false));
     }
 
@@ -4861,7 +5438,7 @@ public class WorldState
 
             public void actionPerformed(ActionEvent e)
             {
-                append(t, "\n\n---\n\n");
+                append(t, (new StringBuilder("\n\n")).append(separator).append("\n\n").toString());
                 vulnerabilityMenu(t, p, f, Boolean.valueOf(!shown.booleanValue()));
             }
 
@@ -4912,7 +5489,7 @@ public class WorldState
             {
                 p.removeAll();
                 final Boolean toQuiz = Boolean.valueOf(quizAnswers[23] != null);
-                append(t, "\n\n---\n\nReally go back to ");
+                append(t, (new StringBuilder("\n\n")).append(separator).append("\n\nReally go back to ").toString());
                 if(toQuiz.booleanValue())
                     append(t, "the personality quiz");
                 else
@@ -4923,7 +5500,7 @@ public class WorldState
 
                     public void actionPerformed(ActionEvent e)
                     {
-                        append(t, "\n\n---\n\n");
+                        append(t, (new StringBuilder("\n\n")).append(separator).append("\n\n").toString());
                         if(toQuiz.booleanValue())
                             personalityGen(t, p, f, 23);
                         else
@@ -4952,7 +5529,7 @@ public class WorldState
 
                     public void actionPerformed(ActionEvent e)
                     {
-                        append(t, "\n\n---\n\n");
+                        append(t, (new StringBuilder("\n\n")).append(separator).append("\n\n").toString());
                         vulnerabilityMenu(t, p, f, shown);
                     }
 
@@ -4995,24 +5572,29 @@ public class WorldState
             }
         });
         p.add(Back);
+        final WorldState w = this;
         JButton Quit = new JButton("Quit");
         Quit.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e)
             {
                 p.removeAll();
-                append(t, "\n\n---\n\nReally quit?  All customization of this team will be lost.");
+                append(t, (new StringBuilder("\n\n")).append(separator).append("\n\nReally quit?  All customization of this team will be lost.").toString());
                 JButton ReallyQuit = new JButton("Quit");
                 ReallyQuit.addActionListener(new ActionListener() {
 
                     public void actionPerformed(ActionEvent e)
                     {
-                        append(t, "\n\n---\n\n");
-                        Project.IntroOne(t, p, f, new WorldState());
+                        append(t, (new StringBuilder("\n\n")).append(separator).append("\n\n").toString());
+                        WorldState x = new WorldState();
+                        x.copySettings(t, w);
+                        x.copyToggles(w);
+                        Project.IntroOne(t, p, f, x);
                     }
 
                     final _cls13 this$1;
                     private final JTextPane val$t;
+                    private final WorldState val$w;
                     private final JPanel val$p;
                     private final JFrame val$f;
 
@@ -5020,6 +5602,7 @@ public class WorldState
                     {
                         this$1 = _cls13.this;
                         t = jtextpane;
+                        w = worldstate;
                         p = jpanel;
                         f = jframe;
                         super();
@@ -5031,7 +5614,7 @@ public class WorldState
 
                     public void actionPerformed(ActionEvent e)
                     {
-                        append(t, "\n\n---\n\n");
+                        append(t, (new StringBuilder("\n\n")).append(separator).append("\n\n").toString());
                         vulnerabilityMenu(t, p, f, shown);
                     }
 
@@ -5059,6 +5642,7 @@ public class WorldState
             final WorldState this$0;
             private final JPanel val$p;
             private final JTextPane val$t;
+            private final WorldState val$w;
             private final JFrame val$f;
             private final Boolean val$shown;
 
@@ -5068,6 +5652,7 @@ public class WorldState
                 this$0 = WorldState.this;
                 p = jpanel;
                 t = jtextpane;
+                w = worldstate1;
                 f = jframe;
                 shown = boolean1;
                 super();
@@ -5080,9 +5665,17 @@ public class WorldState
 
     public void reviewVulnerabilities(final JTextPane t, final JPanel p, final JFrame f, final Boolean shown, final int id, final int progress)
     {
-        Chosen dummy = new Chosen();
+        String hisHer = "her";
+        String himHer = "her";
+        String heShe = "she";
+        if(genders[id].equals("male"))
+        {
+            hisHer = "his";
+            himHer = "him";
+            heShe = "he";
+        }
         p.removeAll();
-        append(t, "\n\n---\n\n");
+        append(t, (new StringBuilder("\n\n")).append(separator).append("\n\n").toString());
         Boolean allPurities[][] = new Boolean[3][4];
         for(int i = 0; i < 3; i++)
         {
@@ -5101,30 +5694,40 @@ public class WorldState
             {
                 append(t, (new StringBuilder(String.valueOf(customNames[id * 2]))).append("'s sense of Morality is a ").toString());
                 blueAppend(t, "Core");
-                append(t, (new StringBuilder(" part of ")).append(dummy.hisHer()).append(" identity").toString());
+                append(t, (new StringBuilder(" part of ")).append(hisHer).append(" identity").toString());
             } else
             if(statSeed[id * 4] > 33)
             {
                 append(t, (new StringBuilder(String.valueOf(customNames[id * 2]))).append("'s Morality is a ").toString());
                 greenAppend(t, "Significant");
-                append(t, (new StringBuilder(" component of ")).append(dummy.hisHer()).append(" personality").toString());
+                append(t, (new StringBuilder(" component of ")).append(hisHer).append(" personality").toString());
             }
             if(statSeed[id * 4] > 33)
             {
-                append(t, (new StringBuilder(", so ")).append(dummy.heShe()).append(" wouldn't normally engage in 'immoral' activities like violence and promiscuity.  ").toString());
-                if(allPurities[id][0].booleanValue())
-                    append(t, (new StringBuilder("If this Vulnerability is broken, it means ")).append(dummy.heShe()).append(" has already been raped by the time the game starts.").toString());
+                if(genders[id].equals("male"))
+                    append(t, (new StringBuilder(", so ")).append(heShe).append(" wouldn't normally engage in 'immoral' activities like violence and sex with other men.  ").toString());
                 else
-                    append(t, (new StringBuilder("However, ")).append(dummy.heShe()).append(" is set to have already been raped before the game starts.").toString());
+                    append(t, (new StringBuilder(", so ")).append(heShe).append(" wouldn't normally engage in 'immoral' activities like violence and promiscuity.  ").toString());
+                if(allPurities[id][0].booleanValue())
+                    append(t, (new StringBuilder("If this Vulnerability is broken, it means ")).append(heShe).append(" has already been raped by the time the game starts.").toString());
+                else
+                    append(t, (new StringBuilder("However, ")).append(heShe).append(" is set to have already been raped before the game starts.").toString());
             } else
             {
                 append(t, "Morality is only a ");
                 redAppend(t, "Minor");
                 append(t, (new StringBuilder(" concern for ")).append(customNames[id * 2]).append(", ").toString());
                 if(allPurities[id][0].booleanValue())
-                    append(t, (new StringBuilder("but ")).append(dummy.heShe()).append(" hasn't gotten around to having sex yet.  Break this Vulnerability to change that.").toString());
+                {
+                    if(genders[id].equals("male"))
+                        append(t, (new StringBuilder("but ")).append(heShe).append(" hasn't gotten curious enough to try having sex with other men yet.  Break this Vulnerability to change that.").toString());
+                    else
+                        append(t, (new StringBuilder("but ")).append(heShe).append(" hasn't gotten around to having sex yet.  Break this Vulnerability to change that.").toString());
+                } else
+                if(genders[id].equals("male"))
+                    append(t, (new StringBuilder("so ")).append(heShe).append(" has seen no reason to avoid having sex with other men.  Restore this Vulnerability to have ").append(himHer).append(" start as an anal virgin instead.").toString());
                 else
-                    append(t, (new StringBuilder("so ")).append(dummy.heShe()).append(" has seen no reason to avoid having sex.  Restore this Vulnerability to have ").append(dummy.himHer()).append(" start as a virgin instead.").toString());
+                    append(t, (new StringBuilder("so ")).append(heShe).append(" has seen no reason to avoid having sex.  Restore this Vulnerability to have ").append(himHer).append(" start as a virgin instead.").toString());
             }
         } else
         if(progress == 1)
@@ -5133,7 +5736,7 @@ public class WorldState
             {
                 append(t, (new StringBuilder(String.valueOf(customNames[id * 2]))).append("'s Innocence is a ").toString());
                 blueAppend(t, "Core");
-                append(t, (new StringBuilder(" part of ")).append(dummy.hisHer()).append(" identity").toString());
+                append(t, (new StringBuilder(" part of ")).append(hisHer).append(" identity").toString());
             } else
             if(statSeed[id * 4 + 1] > 33)
             {
@@ -5143,20 +5746,20 @@ public class WorldState
             }
             if(statSeed[id * 4 + 1] > 33)
             {
-                append(t, (new StringBuilder(", so ")).append(dummy.heShe()).append(" wouldn't normally have any idea how good it can feel to be forced to cum during battle.  ").toString());
+                append(t, (new StringBuilder(", so ")).append(heShe).append(" wouldn't normally have any idea how good it can feel to be forced to cum during battle.  ").toString());
                 if(allPurities[id][1].booleanValue())
-                    append(t, (new StringBuilder("If this Vulnerability is broken, it means ")).append(dummy.heShe()).append(" has already become addicted to this feeling.").toString());
+                    append(t, (new StringBuilder("If this Vulnerability is broken, it means ")).append(heShe).append(" has already become addicted to this feeling.").toString());
                 else
-                    append(t, (new StringBuilder("However, ")).append(dummy.heShe()).append(" is set to have already become addicted to this feeling when the game starts.").toString());
+                    append(t, (new StringBuilder("However, ")).append(heShe).append(" is set to have already become addicted to this feeling when the game starts.").toString());
             } else
             {
                 append(t, (new StringBuilder(String.valueOf(customNames[id * 2]))).append(" has retained only a ").toString());
                 redAppend(t, "Minor");
                 append(t, " amount of Innocence");
                 if(allPurities[id][1].booleanValue())
-                    append(t, (new StringBuilder(", but ")).append(dummy.heShe()).append("'s still sane enough to hold back from cumming during battle.  Break this Vulnerability to change that.").toString());
+                    append(t, (new StringBuilder(", but ")).append(heShe).append("'s still sane enough to hold back from cumming during battle.  Break this Vulnerability to change that.").toString());
                 else
-                    append(t, (new StringBuilder(", so ")).append(dummy.heShe()).append(" happily allows ").append(dummy.himHer()).append("self to cum during battle.  Restore this Vulnerability to have ").append(dummy.himHer()).append(" start out with some restraint.").toString());
+                    append(t, (new StringBuilder(", so ")).append(heShe).append(" happily allows ").append(himHer).append("self to cum during battle.  Restore this Vulnerability to have ").append(himHer).append(" start out with some restraint.").toString());
             }
         } else
         if(progress == 2)
@@ -5165,7 +5768,7 @@ public class WorldState
             {
                 append(t, (new StringBuilder(String.valueOf(customNames[id * 2]))).append("'s Confidence is a ").toString());
                 blueAppend(t, "Core");
-                append(t, (new StringBuilder(" part of ")).append(dummy.hisHer()).append(" identity").toString());
+                append(t, (new StringBuilder(" part of ")).append(hisHer).append(" identity").toString());
             } else
             if(statSeed[id * 4 + 2] > 33)
             {
@@ -5175,20 +5778,20 @@ public class WorldState
             }
             if(statSeed[id * 4 + 2] > 33)
             {
-                append(t, (new StringBuilder(" because of ")).append(dummy.hisHer()).append(" past victories against the Demons.  ").toString());
+                append(t, (new StringBuilder(" because of ")).append(hisHer).append(" past victories against the Demons.  ").toString());
                 if(allPurities[id][2].booleanValue())
-                    append(t, (new StringBuilder("If this Vulnerability is broken, it means ")).append(dummy.heShe()).append(" has suffered a crushing defeat and been tortured before.").toString());
+                    append(t, (new StringBuilder("If this Vulnerability is broken, it means ")).append(heShe).append(" has suffered a crushing defeat and been tortured before.").toString());
                 else
-                    append(t, (new StringBuilder("However, ")).append(dummy.heShe()).append(" is set to have already had ").append(dummy.hisHer()).append(" self-image shaken by being defeated and tortured recently.").toString());
+                    append(t, (new StringBuilder("However, ")).append(heShe).append(" is set to have already had ").append(hisHer).append(" self-image shaken by being defeated and tortured recently.").toString());
             } else
             {
                 append(t, (new StringBuilder(String.valueOf(customNames[id * 2]))).append(" has only a ").toString());
                 redAppend(t, "Minor");
                 append(t, " amount of Confidence left");
                 if(allPurities[id][2].booleanValue())
-                    append(t, (new StringBuilder(", but this is due purely to ")).append(dummy.hisHer()).append(" weak personality.  Break this Vulnerability to have ").append(dummy.hisHer()).append(" self-esteem damaged by a recent capture and torture.").toString());
+                    append(t, (new StringBuilder(", but this is due purely to ")).append(hisHer).append(" weak personality.  Break this Vulnerability to have ").append(hisHer).append(" self-esteem damaged by a recent capture and torture.").toString());
                 else
-                    append(t, (new StringBuilder(", largely because of ")).append(dummy.hisHer()).append(" recent defeat and torture at the hands of the Demons.  Restore this Vulnerability to erase this event and let ").append(dummy.himHer()).append(" start out with at least a little bit of hope.").toString());
+                    append(t, (new StringBuilder(", largely because of ")).append(hisHer).append(" recent defeat and torture at the hands of the Demons.  Restore this Vulnerability to erase this event and let ").append(himHer).append(" start out with at least a little bit of hope.").toString());
             }
         } else
         if(progress == 3)
@@ -5197,7 +5800,7 @@ public class WorldState
             {
                 append(t, (new StringBuilder(String.valueOf(customNames[id * 2]))).append("'s need for Dignity is a ").toString());
                 blueAppend(t, "Core");
-                append(t, (new StringBuilder(" part of ")).append(dummy.hisHer()).append(" identity").toString());
+                append(t, (new StringBuilder(" part of ")).append(hisHer).append(" identity").toString());
             } else
             if(statSeed[id * 4 + 3] > 33)
             {
@@ -5209,18 +5812,18 @@ public class WorldState
             {
                 append(t, ", wanting to be viewed as a mighty, unassailable warrior.  ");
                 if(allPurities[id][3].booleanValue())
-                    append(t, (new StringBuilder("If this Vulnerability is broken, it means ")).append(dummy.heShe()).append(" has been stripped and had ").append(dummy.hisHer()).append(" humiliation broadcast to the world.").toString());
+                    append(t, (new StringBuilder("If this Vulnerability is broken, it means ")).append(heShe).append(" has been stripped and had ").append(hisHer).append(" humiliation broadcast to the world.").toString());
                 else
-                    append(t, (new StringBuilder("However, ")).append(dummy.heShe()).append(" is set to have already had ").append(dummy.hisHer()).append(" public image damaged by being stripped during battle and having the footage broadcast to the world.").toString());
+                    append(t, (new StringBuilder("However, ")).append(heShe).append(" is set to have already had ").append(hisHer).append(" public image damaged by being stripped during battle and having the footage broadcast to the world.").toString());
             } else
             {
                 append(t, (new StringBuilder(String.valueOf(customNames[id * 2]))).append(" has only a ").toString());
                 redAppend(t, "Minor");
-                append(t, (new StringBuilder(" interest in retaining ")).append(dummy.hisHer()).append(" dignity").toString());
+                append(t, (new StringBuilder(" interest in retaining ")).append(hisHer).append(" dignity").toString());
                 if(allPurities[id][3].booleanValue())
-                    append(t, (new StringBuilder(", but ")).append(dummy.heShe()).append(" has managed to avoid any public humiliation so far, mostly through pure luck.  Break this Vulnerability to have footage of ").append(dummy.hisHer()).append(" defeat and stripping be broadcast to the world.").toString());
+                    append(t, (new StringBuilder(", but ")).append(heShe).append(" has managed to avoid any public humiliation so far, mostly through pure luck.  Break this Vulnerability to have footage of ").append(hisHer).append(" defeat and stripping be broadcast to the world.").toString());
                 else
-                    append(t, (new StringBuilder(", and as a result, ")).append(dummy.heShe()).append(" hasn't managed to stop footage of ").append(dummy.hisHer()).append(" defeat and stripping from being spread across the world.  Restore this Vulnerability to make it so that ").append(dummy.heShe()).append(" hasn't yet been captured in such a shameful state.").toString());
+                    append(t, (new StringBuilder(", and as a result, ")).append(heShe).append(" hasn't managed to stop footage of ").append(hisHer).append(" defeat and stripping from being spread across the world.  Restore this Vulnerability to make it so that ").append(heShe).append(" hasn't yet been captured in such a shameful state.").toString());
             }
         }
         JButton Toggle = new JButton("Break");
@@ -5246,7 +5849,7 @@ public class WorldState
                     reviewVulnerabilities(t, p, f, shown, id, progress + 1);
                 } else
                 {
-                    append(t, "\n\n---\n\n");
+                    append(t, (new StringBuilder("\n\n")).append(separator).append("\n\n").toString());
                     vulnerabilityMenu(t, p, f, shown);
                 }
             }
@@ -5282,7 +5885,7 @@ public class WorldState
                     reviewVulnerabilities(t, p, f, shown, id, progress + 1);
                 } else
                 {
-                    append(t, "\n\n---\n\n");
+                    append(t, (new StringBuilder("\n\n")).append(separator).append("\n\n").toString());
                     vulnerabilityMenu(t, p, f, shown);
                 }
             }
@@ -5341,7 +5944,7 @@ public class WorldState
         customWeaponTypes = (new String[] {
             "", "", ""
         });
-        append(t, "\n\n---\n\n");
+        append(t, (new StringBuilder("\n\n")).append(separator).append("\n\n").toString());
         cosmeticsGen(t, p, f);
     }
 
@@ -5709,13 +6312,13 @@ public class WorldState
             public void actionPerformed(ActionEvent e)
             {
                 p.removeAll();
-                append(t, "\n\n---\n\nReally go back to Vulnerability review?  The cosmetic traits set on this screen will be reset.");
+                append(t, (new StringBuilder("\n\n")).append(separator).append("\n\nReally go back to Vulnerability review?  The cosmetic traits set on this screen will be reset.").toString());
                 JButton ReallyQuit = new JButton("Back");
                 ReallyQuit.addActionListener(new ActionListener() {
 
                     public void actionPerformed(ActionEvent e)
                     {
-                        append(t, "\n\n---\n\n");
+                        append(t, (new StringBuilder("\n\n")).append(separator).append("\n\n").toString());
                         vulnerabilityMenu(t, p, f, Boolean.valueOf(false));
                     }
 
@@ -5739,7 +6342,7 @@ public class WorldState
 
                     public void actionPerformed(ActionEvent e)
                     {
-                        append(t, "\n\n---\n\n");
+                        append(t, (new StringBuilder("\n\n")).append(separator).append("\n\n").toString());
                         cosmeticsGen(t, p, f);
                     }
 
@@ -5778,24 +6381,29 @@ public class WorldState
             }
         });
         p.add(Back);
+        final WorldState w = this;
         JButton Quit = new JButton("Quit");
         Quit.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e)
             {
                 p.removeAll();
-                append(t, "\n\n---\n\nReally quit?  All customization of this team will be lost.");
+                append(t, (new StringBuilder("\n\n")).append(separator).append("\n\nReally quit?  All customization of this team will be lost.").toString());
                 JButton ReallyQuit = new JButton("Quit");
                 ReallyQuit.addActionListener(new ActionListener() {
 
                     public void actionPerformed(ActionEvent e)
                     {
-                        append(t, "\n\n---\n\n");
-                        Project.IntroOne(t, p, f, new WorldState());
+                        append(t, (new StringBuilder("\n\n")).append(separator).append("\n\n").toString());
+                        WorldState x = new WorldState();
+                        x.copySettings(t, w);
+                        x.copyToggles(w);
+                        Project.IntroOne(t, p, f, x);
                     }
 
                     final _cls18 this$1;
                     private final JTextPane val$t;
+                    private final WorldState val$w;
                     private final JPanel val$p;
                     private final JFrame val$f;
 
@@ -5803,6 +6411,7 @@ public class WorldState
                     {
                         this$1 = _cls18.this;
                         t = jtextpane;
+                        w = worldstate;
                         p = jpanel;
                         f = jframe;
                         super();
@@ -5814,7 +6423,7 @@ public class WorldState
 
                     public void actionPerformed(ActionEvent e)
                     {
-                        append(t, "\n\n---\n\n");
+                        append(t, (new StringBuilder("\n\n")).append(separator).append("\n\n").toString());
                         cosmeticsGen(t, p, f);
                     }
 
@@ -5840,6 +6449,7 @@ public class WorldState
             final WorldState this$0;
             private final JPanel val$p;
             private final JTextPane val$t;
+            private final WorldState val$w;
             private final JFrame val$f;
 
 
@@ -5848,11 +6458,11 @@ public class WorldState
                 this$0 = WorldState.this;
                 p = jpanel;
                 t = jtextpane;
+                w = worldstate1;
                 f = jframe;
                 super();
             }
         });
-        final WorldState w = this;
         JButton Finish = new JButton("Finish");
         Finish.addActionListener(new ActionListener() {
 
@@ -5890,10 +6500,13 @@ public class WorldState
                 }
                 final WriteObject wobj = new WriteObject();
                 SaveData saveFile = saves;
-                Chosen newChosen = new Chosen();
-                newChosen.setNumber(0);
-                newChosen.generate(w);
-                w.addChosen(newChosen);
+                if(w.getCast()[0] == null)
+                {
+                    Chosen newChosen = new Chosen();
+                    newChosen.setNumber(0);
+                    newChosen.generate(w);
+                    w.addChosen(newChosen);
+                }
                 String newSaveName = JOptionPane.showInputDialog("What would you like to name this team?");
                 Boolean blankName = Boolean.valueOf(false);
                 if(newSaveName == null)
@@ -5910,7 +6523,7 @@ public class WorldState
                 saves.endSave(w, newSaveName);
                 wobj.serializeSaveData(saves);
                 final String displayedName = newSaveName;
-                append(t, (new StringBuilder("\n\n---\n\nA new save file has been added in slot ")).append(saves.getSaves().length).append(" which allows you to fight this team.  You may also wish to export this team to an external file for easy sharing.").toString());
+                append(t, (new StringBuilder("\n\n")).append(separator).append("\n\nA new save file has been added in slot ").append(saves.getSaves().length).append(" which allows you to fight this team.  You may also wish to export this team to an external file for easy sharing.").toString());
                 JButton Export = new JButton("Export");
                 Export.addActionListener(new ActionListener() {
 
@@ -5933,7 +6546,7 @@ public class WorldState
                                 editedName = (new StringBuilder(String.valueOf(editedName))).append(newFileName.charAt(i)).toString();
 
                         wobj.exportFile(w, editedName);
-                        w.append(t, (new StringBuilder("\n\n---\n\nCustomized team saved to '")).append(editedName).append(".par'.").toString());
+                        w.append(t, (new StringBuilder("\n\n")).append(separator).append("\n\nCustomized team saved to '").append(editedName).append(".par'.").toString());
                     }
 
                     final _cls19 this$1;
@@ -5958,7 +6571,7 @@ public class WorldState
 
                     public void actionPerformed(ActionEvent e)
                     {
-                        append(t, "\n\n---\n\n");
+                        append(t, (new StringBuilder("\n\n")).append(separator).append("\n\n").toString());
                         cosmeticsGen(t, p, f);
                     }
 
@@ -5982,12 +6595,16 @@ public class WorldState
 
                     public void actionPerformed(ActionEvent e)
                     {
-                        append(t, "\n\n---\n\n");
-                        Project.IntroOne(t, p, f, new WorldState());
+                        append(t, (new StringBuilder("\n\n")).append(separator).append("\n\n").toString());
+                        WorldState x = new WorldState();
+                        x.copySettings(t, w);
+                        x.copyToggles(w);
+                        Project.IntroOne(t, p, f, x);
                     }
 
                     final _cls19 this$1;
                     private final JTextPane val$t;
+                    private final WorldState val$w;
                     private final JPanel val$p;
                     private final JFrame val$f;
 
@@ -5995,6 +6612,7 @@ public class WorldState
                     {
                         this$1 = _cls19.this;
                         t = jtextpane;
+                        w = worldstate;
                         p = jpanel;
                         f = jframe;
                         super();
@@ -6032,8 +6650,19 @@ public class WorldState
     {
         p.removeAll();
         Chosen dummy = new Chosen();
+        String HeShe = "She";
+        String hisHer = "her";
+        String himHer = "her";
+        String heShe = "she";
+        if(genders[i].equals("male"))
+        {
+            HeShe = "He";
+            hisHer = "his";
+            himHer = "him";
+            heShe = "he";
+        }
         final String ownChoice = dummy.genMainName(statSeed[i * 4], statSeed[i * 4 + 1], statSeed[i * 4 + 2], statSeed[i * 4 + 3]);
-        append(t, (new StringBuilder("\n\n---\n\nThe first step is to decide what ")).append(dummy.heShe()).append("'ll call ").append(dummy.himHer()).append("self.  ").append(dummy.HeShe()).append(" likes the sound of '").append(ownChoice).append("', but the civilian identities of the Chosen are a matter of public record, so it wouldn't be too strange for ").append(dummy.himHer()).append(" to go by ").append(dummy.hisHer()).append(" real name.  Which should ").append(dummy.heShe()).append(" choose?").toString());
+        append(t, (new StringBuilder("\n\n")).append(separator).append("\n\nThe first step is to decide what ").append(heShe).append("'ll call ").append(himHer).append("self.  ").append(HeShe).append(" likes the sound of '").append(ownChoice).append("', but the civilian identities of the Chosen are a matter of public record, so it wouldn't be too strange for ").append(himHer).append(" to go by ").append(hisHer).append(" real name.  Which should ").append(heShe).append(" choose?").toString());
         JButton Alias = new JButton(ownChoice);
         Alias.addActionListener(new ActionListener() {
 
@@ -6161,7 +6790,7 @@ public class WorldState
 
             public void actionPerformed(ActionEvent e)
             {
-                append(t, "\n\n---\n\n");
+                append(t, (new StringBuilder("\n\n")).append(separator).append("\n\n").toString());
                 cosmeticsGen(t, p, f);
             }
 
@@ -6203,8 +6832,17 @@ public class WorldState
     {
         p.removeAll();
         Chosen dummy = new Chosen();
+        String hisHer = "her";
+        String himHer = "her";
+        String heShe = "she";
+        if(genders[i].equals("male"))
+        {
+            hisHer = "his";
+            himHer = "him";
+            heShe = "he";
+        }
         String ownChoice = (new StringBuilder(String.valueOf(dummy.genAdjectiveName(statSeed[i * 4 + 1], statSeed[i * 4 + 2])))).append(" ").append(dummy.genNounName(statSeed[i * 4], statSeed[i * 4 + 1])).toString();
-        append(t, (new StringBuilder("\n\n---\n\nMost Chosen also use a descriptive title that defines how they see themselves.  ")).append(customAliases[i]).append("'s first idea is to use '").append(ownChoice).append("', so that ").append(dummy.heShe()).append("'d be '").append(ownChoice).append(" ").append(customAliases[i]).append("'.  Should ").append(dummy.heShe()).append(" use something different?").toString());
+        append(t, (new StringBuilder("\n\n")).append(separator).append("\n\nMost Chosen also use a descriptive title that defines how they see themselves.  ").append(customAliases[i]).append("'s first idea is to use '").append(ownChoice).append("', so that ").append(heShe).append("'d be '").append(ownChoice).append(" ").append(customAliases[i]).append("'.  Should ").append(heShe).append(" use something different?").toString());
         customTitles[i] = ownChoice;
         JButton Default = new JButton(ownChoice);
         Default.addActionListener(new ActionListener() {
@@ -6306,7 +6944,16 @@ public class WorldState
     {
         p.removeAll();
         Chosen dummy = new Chosen();
-        append(t, (new StringBuilder("\n\n---\n\nIn order to transform from ")).append(customNames[i * 2]).append(" into ").toString());
+        String hisHer = "her";
+        String himHer = "her";
+        String heShe = "she";
+        if(genders[i].equals("male"))
+        {
+            hisHer = "his";
+            himHer = "him";
+            heShe = "he";
+        }
+        append(t, (new StringBuilder("\n\n")).append(separator).append("\n\nIn order to transform from ").append(customNames[i * 2]).append(" into ").toString());
         if(!customTitles[i].equals("none") || !customAliases[i].equals(customNames[i * 2]))
         {
             if(customTitles[i].equals("none"))
@@ -6318,7 +6965,7 @@ public class WorldState
             append(t, (new StringBuilder(String.valueOf(dummy.hisHer()))).append(" Chosen identity").toString());
         }
         String ownChoice = dummy.genIncantation(statSeed[i * 4], statSeed[i * 4 + 3]);
-        append(t, (new StringBuilder(", ")).append(dummy.heShe()).append(" needs to speak an incantation of ").append(dummy.hisHer()).append(" choice.  The first that comes to ").append(dummy.hisHer()).append(" mind is '").append(ownChoice).append("'.").toString());
+        append(t, (new StringBuilder(", ")).append(heShe).append(" needs to speak an incantation of ").append(hisHer).append(" choice.  The first that comes to ").append(hisHer).append(" mind is '").append(ownChoice).append("'.").toString());
         customIncantations[i] = ownChoice;
         JButton Keep = new JButton("Keep");
         Keep.addActionListener(new ActionListener() {
@@ -6416,7 +7063,15 @@ public class WorldState
     public void topCustomize(final JTextPane t, final JPanel p, final JFrame f, final int i, final String baseAesthetics[])
     {
         p.removeAll();
-        Chosen dummy = new Chosen();
+        String hisHer = "her";
+        String himHer = "her";
+        String heShe = "she";
+        if(genders[i].equals("male"))
+        {
+            hisHer = "his";
+            himHer = "him";
+            heShe = "he";
+        }
         String result = "";
         result = customIncantations[i];
         if(!customTitles[i].equals("none"))
@@ -6424,7 +7079,7 @@ public class WorldState
         else
             result = (new StringBuilder(String.valueOf(result))).append(" ").toString();
         result = (new StringBuilder(String.valueOf(result))).append(" ").append(customAliases[i]).append(", transform!").toString();
-        append(t, (new StringBuilder("\n\n---\n\n")).append(customNames[i * 2]).append("'s civilian clothes will disintegrate when ").append(dummy.heShe()).append(" says '").append(result).append("'  In their place, garments and equipment woven of psychic energy representing ").append(dummy.hisHer()).append(" true nature will materialize.  Click 'Change' to give ").append(dummy.himHer()).append(" something different, or click the button for the current item to keep it.\n\nFirst off, what does ").append(dummy.heShe()).append(" wear to cover ").append(dummy.hisHer()).append(" chest?").toString());
+        append(t, (new StringBuilder("\n\n")).append(separator).append("\n\n").append(customNames[i * 2]).append("'s civilian clothes will disintegrate when ").append(heShe).append(" says '").append(result).append("'  In their place, garments and equipment woven of psychic energy representing ").append(hisHer).append(" true nature will materialize.  Click 'Change' to give ").append(himHer).append(" something different, or click the button for the current item to keep it.\n\nFirst off, what does ").append(heShe).append(" wear to cover ").append(hisHer).append(" chest?").toString());
         String current = baseAesthetics[0];
         if(current.equals("strips"))
             current = "strips of cloth";
@@ -6537,8 +7192,16 @@ public class WorldState
     public void topChange(final JTextPane t, final JPanel p, final JFrame f, final int i, final String baseAesthetics[], final String input)
     {
         p.removeAll();
-        Chosen dummy = new Chosen();
-        append(t, (new StringBuilder("\n\n---\n\nAnd in order to get at ")).append(dummy.hisHer()).append(" breasts, does one go up ").append(dummy.hisHer()).append(" ").append(input).append(", into ").append(dummy.hisHer()).append(" ").append(input).append(", down ").append(dummy.hisHer()).append(" ").append(input).append(", or around ").append(dummy.hisHer()).append(" ").append(input).append("?").toString());
+        String hisHer = "her";
+        String himHer = "her";
+        String heShe = "she";
+        if(genders[i].equals("male"))
+        {
+            hisHer = "his";
+            himHer = "him";
+            heShe = "he";
+        }
+        append(t, (new StringBuilder("\n\n")).append(separator).append("\n\nAnd in order to get at ").append(hisHer).append(" breasts, does one go up ").append(hisHer).append(" ").append(input).append(", into ").append(hisHer).append(" ").append(input).append(", down ").append(hisHer).append(" ").append(input).append(", or around ").append(hisHer).append(" ").append(input).append("?").toString());
         for(int j = 0; j < 4; j++)
         {
             String method = "";
@@ -6628,8 +7291,16 @@ public class WorldState
     public void bottomCustomize(final JTextPane t, final JPanel p, final JFrame f, final int i, final String baseAesthetics[])
     {
         p.removeAll();
-        Chosen dummy = new Chosen();
-        append(t, (new StringBuilder("\n\n---\n\nNext, what does ")).append(dummy.heShe()).append(" wear to cover ").append(dummy.hisHer()).append(" hips?").toString());
+        String hisHer = "her";
+        String himHer = "her";
+        String heShe = "she";
+        if(genders[i].equals("male"))
+        {
+            hisHer = "his";
+            himHer = "him";
+            heShe = "he";
+        }
+        append(t, (new StringBuilder("\n\n")).append(separator).append("\n\nNext, what does ").append(heShe).append(" wear to cover ").append(hisHer).append(" hips?").toString());
         String current = baseAesthetics[2];
         if(current.equals("strips"))
             current = "strips of cloth";
@@ -6736,8 +7407,16 @@ public class WorldState
     public void bottomChange(final JTextPane t, final JPanel p, final JFrame f, final int i, final String baseAesthetics[], final String input)
     {
         p.removeAll();
-        Chosen dummy = new Chosen();
-        append(t, (new StringBuilder("\n\n---\n\nAnd in order to get at ")).append(dummy.hisHer()).append(" pussy, does one go up ").append(dummy.hisHer()).append(" ").append(input).append(", into ").append(dummy.hisHer()).append(" ").append(input).append(", down ").append(dummy.hisHer()).append(" ").append(input).append(", or around ").append(dummy.hisHer()).append(" ").append(input).append("?").toString());
+        String hisHer = "her";
+        String himHer = "her";
+        String heShe = "she";
+        if(genders[i].equals("male"))
+        {
+            hisHer = "his";
+            himHer = "him";
+            heShe = "he";
+        }
+        append(t, (new StringBuilder("\n\n")).append(separator).append("\n\nAnd in order to get at ").append(hisHer).append(" pussy, does one go up ").append(hisHer).append(" ").append(input).append(", into ").append(hisHer).append(" ").append(input).append(", down ").append(hisHer).append(" ").append(input).append(", or around ").append(hisHer).append(" ").append(input).append("?").toString());
         for(int j = 0; j < 4; j++)
         {
             String method = "";
@@ -6827,8 +7506,16 @@ public class WorldState
     public void colorCustomize(final JTextPane t, final JPanel p, final JFrame f, final int i, final String baseAesthetics[])
     {
         p.removeAll();
-        Chosen dummy = new Chosen();
-        append(t, (new StringBuilder("\n\n---\n\nWhen ")).append(dummy.heShe()).append("'s transformed, ").append(customAliases[i]).append(" is surrounded by '").append(baseAesthetics[5]).append("' light.  Is this alright?").toString());
+        String hisHer = "her";
+        String himHer = "her";
+        String heShe = "she";
+        if(genders[i].equals("male"))
+        {
+            hisHer = "his";
+            himHer = "him";
+            heShe = "he";
+        }
+        append(t, (new StringBuilder("\n\n")).append(separator).append("\n\nWhen ").append(heShe).append("'s transformed, ").append(customAliases[i]).append(" is surrounded by '").append(baseAesthetics[5]).append("' light.  Is this alright?").toString());
         JButton Keep = new JButton("Yes");
         Keep.addActionListener(new ActionListener() {
 
@@ -6930,8 +7617,16 @@ public class WorldState
     public void weaponCustomize(final JTextPane t, final JPanel p, final JFrame f, final int i, final String baseAesthetics[])
     {
         p.removeAll();
-        Chosen dummy = new Chosen();
-        append(t, (new StringBuilder("\n\n---\n\nCurrently, ")).append(customAliases[i]).append(" is set to fight using ").append(dummy.hisHer()).append(" ").append(baseAesthetics[7]).append(".  Is this okay?").toString());
+        String hisHer = "her";
+        String himHer = "her";
+        String heShe = "she";
+        if(genders[i].equals("male"))
+        {
+            hisHer = "his";
+            himHer = "him";
+            heShe = "he";
+        }
+        append(t, (new StringBuilder("\n\n")).append(separator).append("\n\nCurrently, ").append(customAliases[i]).append(" is set to fight using ").append(hisHer).append(" ").append(baseAesthetics[7]).append(".  Is this okay?").toString());
         JButton Keep = new JButton("Yes");
         Keep.addActionListener(new ActionListener() {
 
@@ -7032,8 +7727,16 @@ public class WorldState
     public void weaponChange(final JTextPane t, final JPanel p, final JFrame f, final int i, final String baseAesthetics[], final String input)
     {
         p.removeAll();
-        Chosen dummy = new Chosen();
-        append(t, (new StringBuilder("\n\n---\n\nDoes ")).append(customAliases[i]).append(" swing ").append(dummy.hisHer()).append(" ").append(input).append(", shoot ").append(dummy.hisHer()).append(" ").append(input).append(", command ").append(dummy.hisHer()).append(" ").append(input).append(", or is ").append(dummy.hisHer()).append(" weapon a part of ").append(dummy.himHer()).append("?").toString());
+        String hisHer = "her";
+        String himHer = "her";
+        String heShe = "she";
+        if(genders[i].equals("male"))
+        {
+            hisHer = "his";
+            himHer = "him";
+            heShe = "he";
+        }
+        append(t, (new StringBuilder("\n\n")).append(separator).append("\n\nDoes ").append(customAliases[i]).append(" swing ").append(hisHer).append(" ").append(input).append(", shoot ").append(hisHer).append(" ").append(input).append(", command ").append(hisHer).append(" ").append(input).append(", or is ").append(hisHer).append(" weapon a part of ").append(himHer).append("?").toString());
         for(int j = 0; j < 4; j++)
         {
             String method = "";
@@ -7047,7 +7750,7 @@ public class WorldState
                 method = "command";
             else
             if(j == 3)
-                method = (new StringBuilder("part of ")).append(dummy.himHer()).toString();
+                method = (new StringBuilder("part of ")).append(himHer).toString();
             JButton ThisOne = new JButton(method);
             if(method.contains("part"))
                 method = "part";
@@ -7125,8 +7828,16 @@ public class WorldState
     public void underwearCustomize(final JTextPane t, final JPanel p, final JFrame f, final int i, final String baseAesthetics[])
     {
         p.removeAll();
-        Chosen dummy = new Chosen();
-        append(t, "\n\n---\n\nThere's one final important question.  ");
+        String hisHer = "her";
+        String himHer = "her";
+        String heShe = "she";
+        if(genders[i].equals("male"))
+        {
+            hisHer = "his";
+            himHer = "him";
+            heShe = "he";
+        }
+        append(t, (new StringBuilder("\n\n")).append(separator).append("\n\nThere's one final important question.  ").toString());
         if(baseAesthetics[4].equals("none"))
         {
             append(t, (new StringBuilder(String.valueOf(customAliases[i]))).append("'s outfit doesn't currently include panties.  Should that be changed?").toString());
@@ -7160,7 +7871,7 @@ public class WorldState
             p.add(Change);
         } else
         {
-            append(t, (new StringBuilder("Would you prefer for ")).append(customAliases[i]).append(" to stop wearing anything under ").append(dummy.hisHer()).append(" ").append(baseAesthetics[2]).append("?").toString());
+            append(t, (new StringBuilder("Would you prefer for ")).append(customAliases[i]).append(" to stop wearing anything under ").append(hisHer).append(" ").append(baseAesthetics[2]).append("?").toString());
             JButton Change = new JButton("Wear nothing");
             Change.addActionListener(new ActionListener() {
 
@@ -7270,12 +7981,13 @@ public class WorldState
         customAccessory[i] = baseAesthetics[6];
         customWeapons[i] = baseAesthetics[7];
         customWeaponTypes[i] = baseAesthetics[8];
-        append(t, (new StringBuilder("\n\n---\n\n")).append(customAliases[i]).append("'s customization is complete!\n\n").toString());
+        append(t, (new StringBuilder("\n\n")).append(separator).append("\n\n").append(customAliases[i]).append("'s customization is complete!\n\n").toString());
         cosmeticsGen(t, p, f);
     }
 
     public WorldState()
     {
+        textSize = 16;
         PURPLE = new Color(100, 0, 150);
         ORANGE = new Color(200, 100, 0);
         RED = new Color(180, 0, 0);
@@ -7283,15 +7995,17 @@ public class WorldState
         BLUE = new Color(0, 0, 230);
         BACKGROUND = Color.WHITE;
         FOREGROUND = Color.BLACK;
+        separator = "---";
         nameSeed = new int[6];
         statSeed = new int[12];
+        maleShift = 0;
         totalThreatened = 0;
         totalSlimed = 0;
         totalAttacked = 0;
         totalTaunted = 0;
         nextTip = 0;
         cast = new Chosen[3];
-        techs = new Tech[22];
+        techs = new Tech[28];
         evilEnergy = 0;
         day = 1;
         totalRounds = 1;
@@ -7316,7 +8030,7 @@ public class WorldState
         capturesPossible = 0;
         arrivalTimer = new int[3];
         readyToEnd = Boolean.valueOf(false);
-        bodyStatus = new Boolean[11];
+        bodyStatus = new Boolean[17];
         tutorial = Boolean.valueOf(false);
         onTrack = Boolean.valueOf(true);
         commentary = new String[0];
@@ -7327,6 +8041,7 @@ public class WorldState
         commentaryRead = Boolean.valueOf(true);
         commentaryWrite = Boolean.valueOf(false);
         cheater = Boolean.valueOf(false);
+        earlyCheat = Boolean.valueOf(false);
         customNames = new String[6];
         customAliases = new String[3];
         customTitles = new String[3];
@@ -7336,6 +8051,7 @@ public class WorldState
     }
 
     private static final long serialVersionUID = 4L;
+    int textSize;
     Color PURPLE;
     Color ORANGE;
     Color RED;
@@ -7343,8 +8059,16 @@ public class WorldState
     Color BLUE;
     Color BACKGROUND;
     Color FOREGROUND;
+    String separator;
     int nameSeed[];
     int statSeed[];
+    String genders[] = {
+        "female", "female", "female"
+    };
+    int genderBalance[] = {
+        0, 3, 0, 0
+    };
+    int maleShift;
     String shopTutorial;
     String groupTutorial;
     int totalThreatened;
@@ -7397,6 +8121,7 @@ public class WorldState
     Boolean commentaryRead;
     Boolean commentaryWrite;
     Boolean cheater;
+    Boolean earlyCheat;
     String customNames[];
     String customTop[] = {
         "", "", ""
