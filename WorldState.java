@@ -39,18 +39,56 @@ public class WorldState
 
     public void repairSave()
     {
+        Boolean adjusted = Boolean.valueOf(false);
         if(genderBalance == null)
+        {
             genderBalance = (new int[] {
                 0, 3, 0, 0
             });
+            adjusted = Boolean.valueOf(true);
+        }
         if(genders == null)
+        {
             genders = (new String[] {
                 "female", "female", "female"
             });
+            adjusted = Boolean.valueOf(true);
+        }
         if(separator == null)
             separator = "---";
         if(earlyCheat == null)
+        {
             earlyCheat = Boolean.valueOf(false);
+            adjusted = Boolean.valueOf(true);
+        }
+        for(int i = 0; i < 3; i++)
+            if(getCast()[i] != null && (getCast()[i].isUsingStrip() == null || getCast()[i].getNextAdaptation() == 0L || getCast()[i].FANTlevels == null))
+            {
+                getCast()[i].resetAdaptations();
+                adjusted = Boolean.valueOf(true);
+            }
+
+        if(resolvedBreaks == null)
+        {
+            resolvedBreaks = new int[0];
+            adjusted = Boolean.valueOf(true);
+        }
+        if(version == null)
+            adjusted = Boolean.valueOf(true);
+        else
+        if(!version.equals("7"))
+            adjusted = Boolean.valueOf(true);
+        if(adjusted.booleanValue())
+        {
+            if(day > 1)
+            {
+                cheater = Boolean.valueOf(true);
+                earlyCheat = Boolean.valueOf(true);
+            }
+            highScore = 0L;
+            parScore = 0L;
+            version = "7";
+        }
     }
 
     public void copySettings(JTextPane t, WorldState w)
@@ -62,6 +100,8 @@ public class WorldState
             switchTextSize();
         if(w.getTextSize() != textSize)
             switchTextSize();
+        maleShift = w.getMaleShift();
+        femaleShift = w.getFemaleShift();
         separator = w.getSeparator();
     }
 
@@ -72,13 +112,25 @@ public class WorldState
             trackGenderBalance(w.getGenderBalance());
         setCommentaryRead(w.getCommentaryRead());
         setCommentaryWrite(w.getCommentaryWrite());
-        maleShift = w.getMaleShift();
         earlyCheat = w.getEarlyCheat();
+    }
+
+    public int getFemaleShift()
+    {
+        return femaleShift;
     }
 
     public int getMaleShift()
     {
         return maleShift;
+    }
+
+    public void changeFemaleShift()
+    {
+        if(femaleShift == 0)
+            femaleShift = 1;
+        else
+            femaleShift = 0;
     }
 
     public void changeMaleShift()
@@ -565,7 +617,7 @@ public class WorldState
             "When one Chosen is exposed and humiliated, it distracts and breaks the morale of the other Chosen on the battlefield.", "Every day, each Chosen's ANGST is increased by the trauma she hasn't successfully resolved yet.", "High ANGST makes the Chosen willing to perform sinful activities, and until it's resolved, the distraction makes them take more damage from all sources.", "Every doubling of ANGST increases the damage bonus by +1, so even a few hundred ANGST is much better than none at all.", "A Chosen's susceptibility to a damage type normally ranges from 0 to 100 based on personality.  The ANGST bonus is added to this value.", "A Chosen's susceptibility to a damage type ranges from 0 to 100 based on personality.  This base susceptibility to a trauma and to its associated circumstance normally adds up to 100, but corruption increases increases them both, potentially even over 100.", "More sinful actions produce a bit more Evil Energy, but they resolve trauma at an exponentially greater rate.", "The Chosen will only begin to use sinful methods to defend themselves if they expect to reach level 3 circumstance damage otherwise.", "Some sinful actions taken during battle will also damage their users.", "As the Chosen are corrupted, they will begin to use more sinful but also more effective versions of their abilities.", 
             "Fearful Chosen are more vulnerable when their allies are surrounded or captured.", "Disgusted Chosen are always more vulnerable, but being grossed out won't generally create a major opening on its own.", "Chosen in pain are more vulnerable for awhile, but after they get surrounded, the adrenaline allows them to shake it off until the pain reaches the next level.", "Ashamed Chosen aren't any more vulnerable to being surrounded, but their efforts to retain their modesty mean that they'll remain surrounded for longer.", "Damage which currently contributes to the opening level is displayed in purple text.  Damage which does not is displayed in black text.  Damage which is only partially contributing to the opening level is displayed in orange text.", "By using \"Regenerate\", one of the Chosen can remove a fraction of her current circumstance damage.  However, nothing done in battle can remove trauma damage that has already been dealt.", "By using \"Blast\", one of the Chosen can increase evacuation and extermination progress.  If evacuation is already complete, the progress that would be added there is wasted.", "The Chosen choose their actions in battle according to which actions would seem to be most useful at the moment and how effective they are at performing those actions.", "Taunting is more effective against self-conscious Chosen, especially those who have been humiliated in the past.", "Attacking is more effective against Chosen with low self-confidence, especially those whose pride has been broken in the past.", 
             "Sliming is more effective against more naive Chosen, especially those who have come to associate battle with sexual pleasure.", "Threatening allies is more effective against more compassionate Chosen, especially those whose consciences aren't clean.", "It isn't possible to raise a circumstance by more than one level with a single instance of damage.  This limitation does not apply to trauma.", "Each of the actions the Chosen can perform in battle is linked with one of the four vulnerabilities.  The Chosen are better at performing actions associated with their greater vulnerabilities.", "Chosen who are surrounded or captured do not contribute to extermination progress until they escape.", "When a surrounded Chosen uses a tactic that decreases the effectiveness of Grind, Caress, Pummel, or Humiliate, the damage from that source is decreased to 3/5.  When both tactics against the source are used at once, the damage becomes 2/5.", "The main benefit of Suppressor-class upgrades is that they ignore defensive tactics.  Against Chosen who have not yet begun to use any defensive tactics, a Commander without Suppressor-class upgrades can actually more effective.", "When two of the Chosen have a hostile interaction with each other, Evil Energy is generated, especially when the interaction turns them from friends into enemies.", "Any action that deals circumstance damage also deals all four types of trauma damage, especially the one corresponding to the circumstance.", "An action's tooltip lists its damage types in descending order of how much is dealt.", 
-            "From a gameplay perspective, there are no differences between male, female, and futanari Chosen."
+            "From a gameplay perspective, there are no differences between male, female, and futanari Chosen.", "It isn't possible for one of the Chosen to use Slaughter, Fantasize, or Striptease twice in a row.", "Even when \"Slaughter\" causes a surround duration to go below 0, it will never cause a surrounded Chosen to escape on the same turn.", "Because high trauma penalizes circumstance damage, the circumstance damage reduction from \"Fantasize\" doesn't necessarily decrease circumstance damage in the long run.", "When your Commander has no extra captures remaining, the extra capture depletion from Chosen using \"Detonate\" does nothing.", "\"Striptease\" decreases damage to surrounded Chosen in the short term, but the fact that it increases the user's EXPO level means that it can increase the overall damage taken during the battle.", "Even after the critical trauma level is reached, a third-tier Vulnerability is not actually broken until the Chosen uses the unlocked move for the first time."
         });
     }
 
@@ -592,10 +644,7 @@ public class WorldState
         long traumaBonus = (firstTrauma + secondTrauma + thirdTrauma) * 10L;
         append(t, (new StringBuilder(String.valueOf(first.condensedFormat(firstTrauma)))).append(" (").append(first.getMainName()).append(") + ").append(second.condensedFormat(secondTrauma)).append(" (").append(second.getMainName()).append(") + ").append(third.condensedFormat(thirdTrauma)).append(" (").append(third.getMainName()).append(") x 10 = ").append(first.condensedFormat(traumaBonus)).append(" pts\n\nRemaining Evil Energy: ").toString());
         totalScore += traumaBonus;
-        long EEMulti = 100L;
-        EEMulti *= 1000L;
-        EEMulti *= 1000L;
-        EEMulti *= 1000L;
+        long EEMulti = 0x3b9aca00L;
         long EEBonus = EEMulti * (long)evilEnergy;
         append(t, (new StringBuilder(String.valueOf(evilEnergy))).append(" x ").append(first.condensedFormat(EEMulti)).append(" = ").append(first.condensedFormat(EEBonus)).append("\n").toString());
         totalScore += EEBonus;
@@ -605,66 +654,66 @@ public class WorldState
             Chosen c = getCast()[i];
             long cCorruption = 0L;
             append(t, (new StringBuilder("\n")).append(c.getMainName()).append("'s Corruption: ").toString());
-            if((!c.isVVirg() || c.isRuthless()) && c.vStart.booleanValue())
+            if((!c.isVVirg() || c.isRuthless()) && c.vStart.booleanValue() || c.timesSlaughtered() > 0)
             {
                 long added = 0L;
                 if(c.isRuthless())
                     if(c.getMorality() > 66)
                     {
-                        long amount = 100L;
-                        amount *= 1000L;
-                        amount *= 1000L;
-                        amount *= 1000L;
+                        long amount = 0x5f5e100L;
                         cCorruption += amount;
                         added += amount;
                     } else
                     if(c.getMorality() > 33)
                     {
-                        long amount = 40L;
-                        amount *= 1000L;
-                        amount *= 1000L;
-                        amount *= 1000L;
+                        long amount = 0x2625a00L;
                         cCorruption += amount;
                         added += amount;
                     } else
                     {
-                        long amount = 20L;
-                        amount *= 1000L;
-                        amount *= 1000L;
-                        amount *= 1000L;
+                        long amount = 0x1312d00L;
                         cCorruption += amount;
                         added += amount;
                     }
                 if(!c.isVVirg())
                     if(c.getMorality() > 66)
                     {
-                        long amount = 9900L;
-                        amount *= 1000L;
-                        amount *= 1000L;
-                        amount *= 1000L;
+                        long amount = 0x24e160300L;
                         cCorruption += amount;
                         added += amount;
                     } else
                     if(c.getMorality() > 33)
                     {
-                        long amount = 3960L;
-                        amount *= 1000L;
-                        amount *= 1000L;
-                        amount *= 1000L;
+                        long amount = 0xec08ce00L;
                         cCorruption += amount;
                         added += amount;
                     } else
                     {
-                        long amount = 1980L;
-                        amount *= 1000L;
-                        amount *= 1000L;
-                        amount *= 1000L;
+                        long amount = 0x76046700L;
+                        cCorruption += amount;
+                        added += amount;
+                    }
+                if(c.timesSlaughtered() > 0)
+                    if(c.getMorality() > 66)
+                    {
+                        long amount = 0xe680992c00L;
+                        cCorruption += amount;
+                        added += amount;
+                    } else
+                    if(c.getMorality() > 33)
+                    {
+                        long amount = 0x5c33707800L;
+                        cCorruption += amount;
+                        added += amount;
+                    } else
+                    {
+                        long amount = 0x2e19b83c00L;
                         cCorruption += amount;
                         added += amount;
                     }
                 append(t, (new StringBuilder(String.valueOf(c.condensedFormat(added)))).append(" (Morality)").toString());
             }
-            if((!c.isCVirg() || c.isLustful()) && c.cStart.booleanValue())
+            if((!c.isCVirg() || c.isLustful()) && c.cStart.booleanValue() || c.timesFantasized() > 0)
             {
                 if(cCorruption > 0L)
                     append(t, " + ");
@@ -672,60 +721,60 @@ public class WorldState
                 if(c.isLustful())
                     if(c.getInnocence() > 66)
                     {
-                        long amount = 100L;
-                        amount *= 1000L;
-                        amount *= 1000L;
-                        amount *= 1000L;
+                        long amount = 0x5f5e100L;
                         cCorruption += amount;
                         added += amount;
                     } else
                     if(c.getInnocence() > 33)
                     {
-                        long amount = 40L;
-                        amount *= 1000L;
-                        amount *= 1000L;
-                        amount *= 1000L;
+                        long amount = 0x2625a00L;
                         cCorruption += amount;
                         added += amount;
                     } else
                     {
-                        long amount = 20L;
-                        amount *= 1000L;
-                        amount *= 1000L;
-                        amount *= 1000L;
+                        long amount = 0x1312d00L;
                         cCorruption += amount;
                         added += amount;
                     }
                 if(!c.isCVirg())
                     if(c.getInnocence() > 66)
                     {
-                        long amount = 9900L;
-                        amount *= 1000L;
-                        amount *= 1000L;
-                        amount *= 1000L;
+                        long amount = 0x24e160300L;
                         cCorruption += amount;
                         added += amount;
                     } else
                     if(c.getInnocence() > 33)
                     {
-                        long amount = 3960L;
-                        amount *= 1000L;
-                        amount *= 1000L;
-                        amount *= 1000L;
+                        long amount = 0xec08ce00L;
                         cCorruption += amount;
                         added += amount;
                     } else
                     {
-                        long amount = 1980L;
-                        amount *= 1000L;
-                        amount *= 1000L;
-                        amount *= 1000L;
+                        long amount = 0x76046700L;
+                        cCorruption += amount;
+                        added += amount;
+                    }
+                if(c.timesFantasized() > 0)
+                    if(c.getInnocence() > 66)
+                    {
+                        long amount = 0xe680992c00L;
+                        cCorruption += amount;
+                        added += amount;
+                    } else
+                    if(c.getInnocence() > 33)
+                    {
+                        long amount = 0x5c33707800L;
+                        cCorruption += amount;
+                        added += amount;
+                    } else
+                    {
+                        long amount = 0x2e19b83c00L;
                         cCorruption += amount;
                         added += amount;
                     }
                 append(t, (new StringBuilder(String.valueOf(c.condensedFormat(added)))).append(" (Innocence)").toString());
             }
-            if((!c.isAVirg() || c.isMeek()) && c.aStart.booleanValue())
+            if((!c.isAVirg() || c.isMeek()) && c.aStart.booleanValue() || c.timesDetonated() > 0)
             {
                 if(cCorruption > 0L)
                     append(t, " + ");
@@ -733,60 +782,60 @@ public class WorldState
                 if(c.isMeek())
                     if(c.getConfidence() > 66)
                     {
-                        long amount = 100L;
-                        amount *= 1000L;
-                        amount *= 1000L;
-                        amount *= 1000L;
+                        long amount = 0x5f5e100L;
                         cCorruption += amount;
                         added += amount;
                     } else
                     if(c.getConfidence() > 33)
                     {
-                        long amount = 40L;
-                        amount *= 1000L;
-                        amount *= 1000L;
-                        amount *= 1000L;
+                        long amount = 0x2625a00L;
                         cCorruption += amount;
                         added += amount;
                     } else
                     {
-                        long amount = 20L;
-                        amount *= 1000L;
-                        amount *= 1000L;
-                        amount *= 1000L;
+                        long amount = 0x1312d00L;
                         cCorruption += amount;
                         added += amount;
                     }
                 if(!c.isAVirg())
                     if(c.getConfidence() > 66)
                     {
-                        long amount = 9900L;
-                        amount *= 1000L;
-                        amount *= 1000L;
-                        amount *= 1000L;
+                        long amount = 0x24e160300L;
                         cCorruption += amount;
                         added += amount;
                     } else
                     if(c.getConfidence() > 33)
                     {
-                        long amount = 3960L;
-                        amount *= 1000L;
-                        amount *= 1000L;
-                        amount *= 1000L;
+                        long amount = 0xec08ce00L;
                         cCorruption += amount;
                         added += amount;
                     } else
                     {
-                        long amount = 1980L;
-                        amount *= 1000L;
-                        amount *= 1000L;
-                        amount *= 1000L;
+                        long amount = 0x76046700L;
+                        cCorruption += amount;
+                        added += amount;
+                    }
+                if(c.timesDetonated() > 0)
+                    if(c.getConfidence() > 66)
+                    {
+                        long amount = 0xe680992c00L;
+                        cCorruption += amount;
+                        added += amount;
+                    } else
+                    if(c.getConfidence() > 33)
+                    {
+                        long amount = 0x5c33707800L;
+                        cCorruption += amount;
+                        added += amount;
+                    } else
+                    {
+                        long amount = 0x2e19b83c00L;
                         cCorruption += amount;
                         added += amount;
                     }
                 append(t, (new StringBuilder(String.valueOf(c.condensedFormat(added)))).append(" (Confidence)").toString());
             }
-            if((!c.isModest() || c.isDebased()) && c.mStart.booleanValue())
+            if((!c.isModest() || c.isDebased()) && c.mStart.booleanValue() || c.timesStripped() > 0)
             {
                 if(cCorruption > 0L)
                     append(t, " + ");
@@ -794,54 +843,54 @@ public class WorldState
                 if(c.isDebased())
                     if(c.getDignity() > 66)
                     {
-                        long amount = 100L;
-                        amount *= 1000L;
-                        amount *= 1000L;
-                        amount *= 1000L;
+                        long amount = 0x5f5e100L;
                         cCorruption += amount;
                         added += amount;
                     } else
                     if(c.getDignity() > 33)
                     {
-                        long amount = 40L;
-                        amount *= 1000L;
-                        amount *= 1000L;
-                        amount *= 1000L;
+                        long amount = 0x2625a00L;
                         cCorruption += amount;
                         added += amount;
                     } else
                     {
-                        long amount = 20L;
-                        amount *= 1000L;
-                        amount *= 1000L;
-                        amount *= 1000L;
+                        long amount = 0x1312d00L;
                         cCorruption += amount;
                         added += amount;
                     }
                 if(!c.isModest())
                     if(c.getDignity() > 66)
                     {
-                        long amount = 9900L;
-                        amount *= 1000L;
-                        amount *= 1000L;
-                        amount *= 1000L;
+                        long amount = 0x24e160300L;
                         cCorruption += amount;
                         added += amount;
                     } else
                     if(c.getDignity() > 33)
                     {
-                        long amount = 3960L;
-                        amount *= 1000L;
-                        amount *= 1000L;
-                        amount *= 1000L;
+                        long amount = 0xec08ce00L;
                         cCorruption += amount;
                         added += amount;
                     } else
                     {
-                        long amount = 1980L;
-                        amount *= 1000L;
-                        amount *= 1000L;
-                        amount *= 1000L;
+                        long amount = 0x76046700L;
+                        cCorruption += amount;
+                        added += amount;
+                    }
+                if(c.timesStripped() > 0)
+                    if(c.getDignity() > 66)
+                    {
+                        long amount = 0xe680992c00L;
+                        cCorruption += amount;
+                        added += amount;
+                    } else
+                    if(c.getDignity() > 33)
+                    {
+                        long amount = 0x5c33707800L;
+                        cCorruption += amount;
+                        added += amount;
+                    } else
+                    {
+                        long amount = 0x2e19b83c00L;
                         cCorruption += amount;
                         added += amount;
                     }
@@ -864,11 +913,9 @@ public class WorldState
                 {
                     if(enmityBonus > 0L)
                         append(t, " + ");
-                    long added = 10L;
-                    added *= 1000L;
-                    added *= 1000L;
-                    added *= 1000L;
-                    added *= 1000L;
+                    long added = 0x48c27395000L;
+                    if(getRelationship(i, j) == -4)
+                        added = 0x9184e72a000L;
                     append(t, (new StringBuilder(String.valueOf(first.condensedFormat(added)))).append(" (").append(getCast()[i].getMainName()).append(" vs. ").append(getCast()[j].getMainName()).append(")").toString());
                     enmityBonus += added;
                 }
@@ -957,10 +1004,25 @@ public class WorldState
     public void resolveBreak()
     {
         int newBreaks[] = new int[pendingBreaks.length - 1];
+        int newResolved[] = new int[resolvedBreaks.length + 1];
+        newResolved[newResolved.length - 1] = pendingBreaks[0];
         for(int i = 0; i < newBreaks.length; i++)
             newBreaks[i] = pendingBreaks[i + 1];
 
+        for(int i = 0; i < resolvedBreaks.length; i++)
+            newResolved[i] = resolvedBreaks[i];
+
         pendingBreaks = newBreaks;
+        resolvedBreaks = newResolved;
+    }
+
+    public Boolean isResolved(int index)
+    {
+        for(int i = 0; i < resolvedBreaks.length; i++)
+            if(resolvedBreaks[i] == index)
+                return Boolean.valueOf(true);
+
+        return Boolean.valueOf(false);
     }
 
     public Boolean commanderFree()
@@ -1126,7 +1188,7 @@ public class WorldState
                 if(target.isBroadcasted().booleanValue() && validLine(21).booleanValue())
                     nextLine = 21;
             } else
-            if(validLine(target.getLastAction()).booleanValue())
+            if(target.getLastAction() < 5 && validLine(target.getLastAction()).booleanValue())
                 nextLine = target.getLastAction();
             if(getRelationship(nextSpeaker.getNumber(), target.getNumber()) >= 0)
             {
@@ -2469,7 +2531,7 @@ public class WorldState
                         nextSpeaker.say(t, (new StringBuilder("You're making us look foolish, ")).append(target.getMainName()).append("!").toString());
                     else
                     if(nextSpeaker.getConfidence() > 33)
-                        nextSpeaker.say(t, (new StringBuilder("How did you manage to get your clothes torn, ")).append(target.getMainName()).append("?").toString());
+                        nextSpeaker.say(t, (new StringBuilder("How did you manage to get your clothes torn off so quickly, ")).append(target.getMainName()).append("?").toString());
                     else
                         nextSpeaker.say(t, (new StringBuilder(String.valueOf(target.getMainName()))).append(" is so careless...").toString());
                 } else
@@ -3899,7 +3961,7 @@ public class WorldState
                         base += (exterminationPerChosen * usedExterminationMultiplier) / 100;
                         possible += currentCombatants[i].FEARMulti() / 12;
                     } else
-                    if(currentCombatants[i].getSurroundDuration() == 1 || currentCombatants[i].getCaptureProgression() == captureDuration)
+                    if(currentCombatants[i].getSurroundDuration() == 1 || currentCombatants[i].getCaptureProgression() == captureDuration || currentCombatants[i].timesDetonated() > 0 && currentCombatants[i].getCaptureProgression() + currentCombatants[i].getINJULevel() + 1 >= captureDuration)
                     {
                         int usedExterminationMultiplier = exterminationMultiplier;
                         if(evacuationProgress >= evacuationComplete)
@@ -7988,6 +8050,7 @@ public class WorldState
     public WorldState()
     {
         textSize = 16;
+        version = "7";
         PURPLE = new Color(100, 0, 150);
         ORANGE = new Color(200, 100, 0);
         RED = new Color(180, 0, 0);
@@ -7999,6 +8062,7 @@ public class WorldState
         nameSeed = new int[6];
         statSeed = new int[12];
         maleShift = 0;
+        femaleShift = 0;
         totalThreatened = 0;
         totalSlimed = 0;
         totalAttacked = 0;
@@ -8020,6 +8084,7 @@ public class WorldState
         lastLine = 0;
         lastLastLine = 0;
         pendingBreaks = new int[0];
+        resolvedBreaks = new int[0];
         evacuationPerTurn = 20;
         exterminationPerChosen = 10;
         rallyBonus = new int[3];
@@ -8052,6 +8117,7 @@ public class WorldState
 
     private static final long serialVersionUID = 4L;
     int textSize;
+    String version;
     Color PURPLE;
     Color ORANGE;
     Color RED;
@@ -8069,6 +8135,7 @@ public class WorldState
         0, 3, 0, 0
     };
     int maleShift;
+    int femaleShift;
     String shopTutorial;
     String groupTutorial;
     int totalThreatened;
@@ -8093,6 +8160,7 @@ public class WorldState
     int lastLine;
     int lastLastLine;
     int pendingBreaks[];
+    int resolvedBreaks[];
     int evacuationPerTurn;
     int exterminationPerChosen;
     Chosen currentCombatants[];
