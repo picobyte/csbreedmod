@@ -301,6 +301,66 @@ public class Tech
                 w.getTechs()[10], w.getTechs()[21]
             });
             description = "Develops your ability to tap into the psychic energy associated with aspects of the human mind.  Your Commander body will be correspondingly more pure and resilient.  For +5 Evil Energy per deployment, your Commander will be able to perform a third capture (provided that the battle does not end beforehand).";
+        } else
+        if(index == 28)
+        {
+            name = "Soul Resonance";
+            prereqsRequired = 2;
+            cost = 20;
+            prereqs = (new Tech[] {
+                w.getTechs()[16], w.getTechs()[22]
+            });
+            description = "Spreads your ability to influence thoughts even beyond the Demonic hivemind.  Civilians in the area of Demonic raids will feel subconsciously motivated to resist the authorities' attempts to get them to evacuate.  Increases evacuation requirement from 160 to 200.";
+        } else
+        if(index == 29)
+        {
+            name = "Passion Release";
+            prereqsRequired = 2;
+            cost = 20;
+            prereqs = (new Tech[] {
+                w.getTechs()[17], w.getTechs()[24]
+            });
+            description = "Modifies your human captives' brains so that they become mentally fixated on the power and supremecy of the Demons - and on the suffering and defeat of those who oppose them.  Their absolute confidence in your victory will produce psychic energy far disproportionate to their numbers, rivalling the power of the worldwide public.  Increases extermination requirement from 300 to 500.";
+        } else
+        if(index == 30)
+        {
+            name = "Reality Sealing";
+            prereqsRequired = 2;
+            cost = 20;
+            prereqs = (new Tech[] {
+                w.getTechs()[18], w.getTechs()[26]
+            });
+            description = "Allows you to apply your mastery of psychic energy to directly influence the local laws of physics.  By channeling your power through your army, you can focus on creating a region where the Chosen find that reality itself conspires against them.  Until extermination is completed, the 'Do Nothing' action is replaced with 'Barrier', which increases all damage taken for the rest of the battle by 5% (compounding).";
+        } else
+        if(index == 31)
+        {
+            name = "Networked Consciousness";
+            prereqsRequired = 2;
+            cost = 20;
+            prereqs = (new Tech[] {
+                w.getTechs()[19], w.getTechs()[23]
+            });
+            description = "Dissolves the distinction between different Thralls' minds and desires.  This will allow them to display supernatural reaction time and intelligence by relying on each other's senses and neural processing power.  Whenever the Thralls Surround one of the Chosen, you will immediately be able to give those Thralls another order on the same turn.";
+        } else
+        if(index == 32)
+        {
+            name = "Transcendence";
+            prereqsRequired = 2;
+            cost = 20;
+            prereqs = (new Tech[] {
+                w.getTechs()[20], w.getTechs()[27]
+            });
+            description = "Greatly develops the depth of your control over the psychic energy associated with aspects of the human mind.  Your Commander body will be correspondingly more pure and resilient.  For +10 Evil Energy per deployment, your Commander will be able to perform a fourth capture (provided that the battle does not end beforehand).";
+        } else
+        if(index == 33)
+        {
+            name = "Synthesis";
+            prereqsRequired = 2;
+            cost = 20;
+            prereqs = (new Tech[] {
+                w.getTechs()[21], w.getTechs()[25]
+            });
+            description = "Allows you to craft complex psychic constructs which use different layers of the human mind to reinforce one another.  For +10 Evil Energy per deployment, you can put both a Suppressor-class upgrade and a Defiler-class upgrade on the same Commander.";
         }
     }
 

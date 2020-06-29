@@ -17,6 +17,51 @@ public class WorldState
     implements Serializable
 {
 
+    public long getBarrierMulti()
+    {
+        return barrierMulti;
+    }
+
+    public void increaseBarrier(JTextPane t)
+    {
+        barrierMulti = (barrierMulti * 105L) / 100L;
+        append(t, (new StringBuilder("\n\n")).append(separator).append("\n\n").toString());
+        long comparison = 10000L;
+        int previousBarriers;
+        for(previousBarriers = 0; comparison < barrierMulti; previousBarriers++)
+            comparison = (comparison * 105L) / 100L;
+
+        if(previousBarriers == 0)
+            append(t, "A faint haze, invisible to the naked eye, appears across the battlefield as you begin to exert control over reality.");
+        else
+        if(previousBarriers == 1)
+            append(t, "The haze of your influence thickens enough to become visible, lending a faint red tint to the battlefield.");
+        else
+        if(previousBarriers == 2)
+            append(t, "The red haze grows to the point that it's impossible not to notice, lending an unearthly quality to the scene.");
+        else
+        if(previousBarriers == 3)
+            append(t, "From elsewhere in the city, your region of influence is visible as a transparent red dome which pulsates with every surge of power, signaling your increasing control over the space within.");
+        else
+        if(previousBarriers == 4)
+            append(t, "The battlefield is completely sealed off from the rest of the city by the red fog, preparing it to be twisted even further by your will.");
+        else
+        if(previousBarriers == 5)
+            append(t, "A high-pitched ringing sound begins to echo across the blood-red battlefield, affecting the minds of all within and influencing their emotions.");
+        else
+        if(previousBarriers == 6)
+            append(t, "The ringing of your power grows louder, causing windows to shake and pebbles to vibrate and jump along the ground.");
+        else
+        if(previousBarriers == 7)
+            append(t, "The red air grows thick and stifling, clinging to the Chosen and slowing their movements even as it protects and supports your servants.");
+        else
+        if(previousBarriers == 8)
+            append(t, "Space begins to ripple and distort, as if flowing around unseen obstructions that exist parallel to the mundane architecture of the city.");
+        else
+            append(t, "The mind-numbing ringing digs deeper and deeper into the minds within your barrier.  For those trapped within, it feels as though countless eyes are watching from the edge of their peripheral vision.");
+        append(t, (new StringBuilder("\n\n+5% damage taken for the remainder of the battle.  (+")).append(barrierMulti / 100L - 100L).append("% total)").toString());
+    }
+
     public String getSeparator()
     {
         return separator;
@@ -71,6 +116,66 @@ public class WorldState
         if(resolvedBreaks == null)
         {
             resolvedBreaks = new int[0];
+            adjusted = Boolean.valueOf(true);
+        }
+        int techsThisVersion = 34;
+        if(techs.length < techsThisVersion)
+        {
+            Tech oldTechs[] = new Tech[techs.length];
+            for(int i = 0; i < techs.length; i++)
+                oldTechs[i] = techs[i];
+
+            techs = new Tech[techsThisVersion];
+            for(int i = 0; i < techsThisVersion; i++)
+            {
+                techs[i] = new Tech();
+                techs[i].initialize(i, this);
+                if(i < oldTechs.length && oldTechs[i].isOwned().booleanValue())
+                    techs[i].owned = Boolean.valueOf(true);
+            }
+
+            adjusted = Boolean.valueOf(true);
+        }
+        int commanderUpgradesThisVersion = 19;
+        Boolean commanderUpdate = Boolean.valueOf(false);
+        if(bodyStatus.length < commanderUpgradesThisVersion)
+            commanderUpdate = Boolean.valueOf(true);
+        else
+        if(recordedCommanders.length > 0 && recordedCommanders[0].length < commanderUpgradesThisVersion)
+            commanderUpdate = Boolean.valueOf(true);
+        if(commanderUpdate.booleanValue())
+        {
+            Boolean newUpgrades[] = new Boolean[commanderUpgradesThisVersion];
+            Boolean newRecordedCommanders[][] = new Boolean[recordedCommanders.length][commanderUpgradesThisVersion];
+            for(int i = 0; i < newUpgrades.length; i++)
+            {
+                if(i < bodyStatus.length)
+                    newUpgrades[i] = bodyStatus[i];
+                else
+                    newUpgrades[i] = Boolean.valueOf(false);
+                if(recordedCommanders.length > 0)
+                {
+                    if(i < recordedCommanders[0].length)
+                    {
+                        for(int j = 0; j < recordedCommanders.length; j++)
+                            newRecordedCommanders[j][i] = recordedCommanders[j][i];
+
+                    } else
+                    {
+                        for(int j = 0; j < recordedCommanders.length; j++)
+                            newRecordedCommanders[j][i] = Boolean.valueOf(false);
+
+                    }
+                    recordedCommanders = newRecordedCommanders;
+                }
+            }
+
+            bodyStatus = newUpgrades;
+            adjusted = Boolean.valueOf(true);
+        }
+        if(barrierMulti == 0L)
+        {
+            barrierMulti = 10000L;
             adjusted = Boolean.valueOf(true);
         }
         if(version == null)
@@ -1041,6 +1146,12 @@ public class WorldState
         bodyStatus[10] = Boolean.valueOf(true);
     }
 
+    public void applySynthesis()
+    {
+        evilEnergy -= 10;
+        bodyStatus[18] = Boolean.valueOf(true);
+    }
+
     public void applyVanity()
     {
         evilEnergy -= 6;
@@ -1095,6 +1206,12 @@ public class WorldState
     {
         evilEnergy -= 5;
         bodyStatus[16] = Boolean.valueOf(true);
+    }
+
+    public void addCaptureThree()
+    {
+        evilEnergy -= 10;
+        bodyStatus[17] = Boolean.valueOf(true);
     }
 
     public void toggleAmbush()
@@ -2793,6 +2910,11 @@ public class WorldState
         return battleRound;
     }
 
+    public void setBattleRound(int newRound)
+    {
+        battleRound = newRound;
+    }
+
     public void setCaptureTarget(Chosen target)
     {
         nextCapture = target;
@@ -2839,6 +2961,10 @@ public class WorldState
             value += 2;
         if(bodyStatus[16].booleanValue())
             value += 5;
+        if(bodyStatus[17].booleanValue())
+            value += 10;
+        if(bodyStatus[18].booleanValue())
+            value += 10;
         return value;
     }
 
@@ -2945,6 +3071,20 @@ public class WorldState
                             captureCost = 5;
                     }
                     append(t, "]");
+                    if(techs[32].isOwned().booleanValue())
+                    {
+                        append(t, "[");
+                        if(bodyStatus[17].booleanValue())
+                        {
+                            append(t, "X");
+                        } else
+                        {
+                            append(t, " ");
+                            if(captureCost == 0)
+                                captureCost = 10;
+                        }
+                        append(t, "]");
+                    }
                 }
                 append(t, " Extra Captures");
                 if(captureCost > 0)
@@ -2963,12 +3103,6 @@ public class WorldState
             if(techs[10].isOwned().booleanValue() || techs[11].isOwned().booleanValue() || techs[12].isOwned().booleanValue() || techs[13].isOwned().booleanValue())
             {
                 append(t, "Suppressor: ");
-                if(defiler.booleanValue())
-                    append(t, "(LOCKED)");
-                else
-                if(suppressors == 0)
-                    append(t, "None (free)");
-                else
                 if(suppressors == 1)
                 {
                     if(bodyStatus[3].booleanValue())
@@ -2982,7 +3116,7 @@ public class WorldState
                     else
                     if(bodyStatus[6].booleanValue())
                         append(t, "Mania [EXPO]");
-                    if(techs[21].isOwned().booleanValue())
+                    if(techs[21].isOwned().booleanValue() && !defiler.booleanValue())
                         append(t, " (Next: 5 EE)");
                 } else
                 if(suppressors == 2)
@@ -3010,15 +3144,32 @@ public class WorldState
                     if(bodyStatus[6].booleanValue())
                         second = "Mania [EXPO]";
                     append(t, (new StringBuilder(String.valueOf(first))).append(", ").append(second).toString());
+                } else
+                if(defiler.booleanValue())
+                {
+                    if(techs[33].isOwned().booleanValue())
+                        append(t, "None (Cost: 10 EE)");
+                    else
+                        append(t, "(LOCKED)");
+                } else
+                {
+                    append(t, "None (free)");
                 }
                 append(t, "\n");
             }
             if(techs[22].isOwned().booleanValue() || techs[23].isOwned().booleanValue() || techs[24].isOwned().booleanValue() || techs[25].isOwned().booleanValue())
             {
                 append(t, "Defiler: ");
-                if(suppressors > 0)
+                if(suppressors == 2)
                     append(t, "(LOCKED)");
                 else
+                if(suppressors == 1 && !defiler.booleanValue())
+                {
+                    if(techs[33].isOwned().booleanValue())
+                        append(t, "None (Cost: 16 EE)");
+                    else
+                        append(t, "(LOCKED)");
+                } else
                 if(!defiler.booleanValue())
                     append(t, "None (Cost: 6 EE)");
                 else
@@ -3035,6 +3186,62 @@ public class WorldState
                     append(t, "Vanity [EXPO, HATE]");
             }
             append(t, "\n");
+            if(bodyStatus[18].booleanValue())
+            {
+                if(bodyStatus[11].booleanValue())
+                {
+                    if(bodyStatus[3].booleanValue())
+                        append(t, "Your Commander is a huge, Sphinx-like Demon, a beast with a human face, which prowls about on all fours.  Capable of speaking to the Chosen, it taunts them in order to pollute their minds with hateful feelings so that their defenses weaken enough to let it fuck them with its foot-long flared penis.  It ");
+                    else
+                    if(bodyStatus[4].booleanValue())
+                        append(t, "Your Commander is a huge Demon which prowls about on all fours, its underside lined with tentacles that capture and stimulate the Chosen in order to prepare them to be fucked by its foot-long flared penis.  Your Commander ");
+                    else
+                    if(bodyStatus[5].booleanValue())
+                        append(t, "Your Commander is a huge Demon which prowls about on all fours.  Slung under its body is an enormous double penis, each shaft almost two feet long and covered in rough barbs which inflict as much pain as pleasure.  It ");
+                    else
+                    if(bodyStatus[6].booleanValue())
+                        append(t, "Your Commander is a huge Demon made of transparent, clothes-dissolving slime.  It pounces on Chosen and then rapes them with a huge pseudopod, its see-through nature ensuring that spectators can see every humiliating detail.  Your Commander ");
+                } else
+                if(bodyStatus[12].booleanValue())
+                {
+                    if(bodyStatus[3].booleanValue())
+                        append(t, "Your Commander is a huge, shambling mass which uses long tentacles to pull its prey into an internal chamber full of hallucinogenic aphrodisiac and smaller pleasure-inducing tentacles.  The potent fluid allows you to form a psychic link with the captives' minds, inducing hateful thoughts in order to break their Sexual Barriers.  Your Commander ");
+                    else
+                    if(bodyStatus[4].booleanValue())
+                        append(t, "Your Commander is a huge, shambling mass which uses long tentacles to pull its prey into an internal chamber full of mind-breakingly powerful aphrodisiac and advanced pleasure-inducing tentacles.  It ");
+                    else
+                    if(bodyStatus[5].booleanValue())
+                        append(t, "Your Commander is a huge, shambling mass which uses long tentacles to pull its prey into an internal chamber full of aphrodisiac and smaller tentacles shaped like various torture implements to induce mind-breaking pleasure and pain.  It ");
+                    else
+                    if(bodyStatus[6].booleanValue())
+                        append(t, "Your Commander is a huge, shambling mass made of transparent slime.  It's capable of shaping itself into powerful pseudopods in order to capture and pull the Chosen inside, and its body contains substances that dissolve clothes and induce sexual pleasure.  Your Commander ");
+                } else
+                if(bodyStatus[13].booleanValue())
+                {
+                    if(bodyStatus[3].booleanValue())
+                        append(t, "Your Commander is a huge, vaguely-humanoid titan of a Demon covered in mouths that constantly gibber madness, conveying your hateful thoughts.  Their teeth inflict painful bites, and their tongues constantly writhe in search of orifices to violate.  Your Commander ");
+                    else
+                    if(bodyStatus[4].booleanValue())
+                        append(t, "Your Commander is a huge, vaguely-humanoid titan of a Demon with countless nimble arms that are capable of restraining your prey and inflicting various humiliations and tortures in addition to more pleasurable stimualations.  It ");
+                    else
+                    if(bodyStatus[5].booleanValue())
+                        append(t, "Your Commander is a huge, vaguely-humanoid titan of a Demon with several bestial arms equipped with razor-sharp claws capable of restraining your prey and inflicting various tortures and humiliations.  It ");
+                    else
+                    if(bodyStatus[6].booleanValue())
+                        append(t, "Your Commander is a huge, vaguely-humanoid titan of a Demon with several extra muscular arms capable of restraining its prey and inflicting various tortures and humiliations.  It's aided in its task by the fact that its skin is coated in clothes-dissolving slime.  Your Commander ");
+                } else
+                if(bodyStatus[14].booleanValue())
+                    if(bodyStatus[3].booleanValue())
+                        append(t, "Your Commander is a huge, biomechanical Demon with electrified tentacles capable of hijacking communications infrastructure and using it to show unsuspecting people footage of how it torments its prey.  At the same time, it uses advanced technology to allow the audience to take part in the violation.  Your Commander ");
+                    else
+                    if(bodyStatus[4].booleanValue())
+                        append(t, "Your Commander is a huge, biomechanical Demon with electrified tentacles capable of hijacking communications infrastructure and using it to show unsuspecting people footage of how it torments its prey.  It's equipped with vibrators and other sex toys for maximum humiliation.  Your Commander ");
+                    else
+                    if(bodyStatus[5].booleanValue())
+                        append(t, "Your Commander is a huge, biomechanical Demon with electrified tentacles capable of hijacking communications infrastructure and using it to show unsuspecting people footage of how it torments its prey.  It's equipped with weapons and torture implements in order to emphasize its captives' helplessness.  Your Commander ");
+                    else
+                        append(t, "Your Commander is a huge, biomechanical Demon with electrified tentacles capable of hijacking communications infrastructure and using it to show unsuspecting people footage of how it torments its prey.  It's equipped with various clothes-destroying implements and high-quality cameras in order to prioritize exposing and humiliating its captives as efficiently as possible.  Your Commander ");
+            } else
             if(defiler.booleanValue())
             {
                 if(bodyStatus[11].booleanValue())
@@ -3141,6 +3348,9 @@ public class WorldState
         if(bodyStatus[2].booleanValue())
         {
             append(t, " once you give the order");
+            if(bodyStatus[17].booleanValue())
+                append(t, ", up to four times");
+            else
             if(bodyStatus[16].booleanValue())
                 append(t, ", up to three times");
             else
@@ -3149,6 +3359,9 @@ public class WorldState
         } else
         {
             append(t, " at the start of battle");
+            if(bodyStatus[17].booleanValue())
+                append(t, ", and then three more times whenever you give the order");
+            else
             if(bodyStatus[16].booleanValue())
                 append(t, ", and then two more times whenever you give the order");
             else
@@ -3158,6 +3371,53 @@ public class WorldState
         if(c == null)
             append(t, (new StringBuilder(".  It is worth ")).append(getCommanderValue()).append(" Evil Energy.  You have ").append(evilEnergy).append(" Evil Energy remaining.").toString());
         else
+        if(bodyStatus[18].booleanValue())
+        {
+            String damages[] = new String[3];
+            String breakType = "";
+            if(bodyStatus[3].booleanValue())
+                damages[1] = "HATE";
+            else
+            if(bodyStatus[4].booleanValue())
+                damages[1] = "PLEA";
+            else
+            if(bodyStatus[5].booleanValue())
+                damages[1] = "INJU";
+            else
+            if(bodyStatus[6].booleanValue())
+                damages[1] = "EXPO";
+            if(bodyStatus[11].booleanValue())
+            {
+                damages[0] = "HATE";
+                damages[2] = "PLEA";
+                breakType = "Morality Break above 10k HATE";
+            } else
+            if(bodyStatus[12].booleanValue())
+            {
+                damages[0] = "PLEA";
+                damages[2] = "INJU";
+                breakType = "Innocence Break above 10k PLEA";
+            } else
+            if(bodyStatus[13].booleanValue())
+            {
+                damages[0] = "INJU";
+                damages[2] = "EXPO";
+                breakType = "Confidence Break above 10k INJU";
+            } else
+            if(bodyStatus[14].booleanValue())
+            {
+                damages[0] = "EXPO";
+                damages[2] = "HATE";
+                breakType = "Dignity Break above 10k EXPO";
+            }
+            if(damages[0].equals(damages[1]))
+                append(t, (new StringBuilder(", inflicting overwhelming levels of ")).append(damages[2]).append(", even higher levels of ").append(damages[0]).append(", and potentially causing ").append(breakType).append(".").toString());
+            else
+            if(damages[2].equals(damages[1]))
+                append(t, (new StringBuilder(", inflicting overwhelming levels of ")).append(damages[2]).append(" and ").append(damages[0]).append(", and potentially causing ").append(breakType).append(".").toString());
+            else
+                append(t, (new StringBuilder(", inflicting overwhelming levels of ")).append(damages[0]).append(", ").append(damages[1]).append(", and ").append(damages[2]).append(", and potentially causing ").append(breakType).append(".").toString());
+        } else
         if(defiler.booleanValue())
         {
             if(bodyStatus[11].booleanValue())
@@ -3282,6 +3542,8 @@ public class WorldState
             evacuationComplete += 20;
         if(w.getTechs()[16].isOwned().booleanValue())
             evacuationComplete += 20;
+        if(w.getTechs()[28].isOwned().booleanValue())
+            evacuationComplete += 40;
         exterminationProgress = 0;
         exterminationComplete = 100;
         if(w.getTechs()[2].isOwned().booleanValue())
@@ -3290,9 +3552,14 @@ public class WorldState
             exterminationComplete += 60;
         if(w.getTechs()[17].isOwned().booleanValue())
             exterminationComplete += 100;
+        if(w.getTechs()[29].isOwned().booleanValue())
+            exterminationComplete += 200;
         exterminationMultiplier = 100;
         captureDuration = 2;
         if(bodyStatus[15].booleanValue())
+            captureDuration = 6;
+        else
+        if(bodyStatus[9].booleanValue())
             captureDuration = 5;
         else
         if(bodyStatus[7].booleanValue())
@@ -3305,6 +3572,9 @@ public class WorldState
         capturesPossible = 0;
         if(bodyStatus[2].booleanValue() || upgradedCommander().booleanValue())
             capturesPossible++;
+        if(bodyStatus[17].booleanValue())
+            capturesPossible += 3;
+        else
         if(bodyStatus[16].booleanValue())
             capturesPossible += 2;
         else
@@ -3312,6 +3582,7 @@ public class WorldState
             capturesPossible++;
         nextCapture = null;
         nextSurround = null;
+        barrierMulti = 10000L;
         rallyBonus = new int[3];
         distractBonus = new int[3];
         arrivalTimer = new int[3];
@@ -3996,9 +4267,9 @@ public class WorldState
         return rallyBonus[0] + rallyBonus[1] + rallyBonus[2];
     }
 
-    public void setDistractBonus(int amount, int initiative)
+    public void setDistractBonus(long amount, int initiative)
     {
-        distractBonus[initiative] = amount;
+        distractBonus[initiative] = (int)amount;
     }
 
     public int getDistractBonus()
@@ -4116,7 +4387,7 @@ public class WorldState
                     if(allFree.booleanValue())
                     {
                         readyToEnd = Boolean.valueOf(true);
-                        append(t, "The reanimated Demons are fighting their last stand!  Combat will end next turn unless one of the Chosen are surrounded or captured.\n");
+                        append(t, "The reanimated Demons are fighting their last stand!  Combat will end next turn unless one of the Chosen is surrounded or captured.\n");
                     } else
                     {
                         while(c == null) 
@@ -8069,7 +8340,7 @@ public class WorldState
         totalTaunted = 0;
         nextTip = 0;
         cast = new Chosen[3];
-        techs = new Tech[28];
+        techs = new Tech[34];
         evilEnergy = 0;
         day = 1;
         totalRounds = 1;
@@ -8095,7 +8366,8 @@ public class WorldState
         capturesPossible = 0;
         arrivalTimer = new int[3];
         readyToEnd = Boolean.valueOf(false);
-        bodyStatus = new Boolean[17];
+        barrierMulti = 10000L;
+        bodyStatus = new Boolean[19];
         tutorial = Boolean.valueOf(false);
         onTrack = Boolean.valueOf(true);
         commentary = new String[0];
@@ -8178,6 +8450,7 @@ public class WorldState
     int capturesPossible;
     int arrivalTimer[];
     Boolean readyToEnd;
+    long barrierMulti;
     Boolean bodyStatus[];
     Boolean tutorial;
     Boolean onTrack;
