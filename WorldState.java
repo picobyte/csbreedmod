@@ -17,6 +17,16 @@ public class WorldState
     implements Serializable
 {
 
+    public void toggleTickle()
+    {
+        tickleOn = Boolean.valueOf(!tickleOn.booleanValue());
+    }
+
+    public Boolean tickle()
+    {
+        return tickleOn;
+    }
+
     public long getBarrierMulti()
     {
         return barrierMulti;
@@ -178,10 +188,28 @@ public class WorldState
             barrierMulti = 10000L;
             adjusted = Boolean.valueOf(true);
         }
+        if(tickleOn == null)
+        {
+            tickleOn = Boolean.valueOf(false);
+            adjusted = Boolean.valueOf(true);
+        }
+        if(customFeet == null)
+        {
+            customFeet = (new String[] {
+                "", "", ""
+            });
+            for(int i = 0; i < 3; i++)
+                if(getCast()[i] != null)
+                {
+                    String cosmetics[] = pickCosmetics(cast[i].getMorality(), cast[i].getInnocence(), cast[i].getConfidence(), cast[i].getDignity());
+                    cast[i].feetType = cosmetics[9];
+                }
+
+        }
         if(version == null)
             adjusted = Boolean.valueOf(true);
         else
-        if(!version.equals("7"))
+        if(!version.equals("9"))
             adjusted = Boolean.valueOf(true);
         if(adjusted.booleanValue())
         {
@@ -192,7 +220,7 @@ public class WorldState
             }
             highScore = 0L;
             parScore = 0L;
-            version = "7";
+            version = "9";
         }
     }
 
@@ -208,6 +236,8 @@ public class WorldState
         maleShift = w.getMaleShift();
         femaleShift = w.getFemaleShift();
         separator = w.getSeparator();
+        if(!tickleOn.equals(w.tickle()))
+            toggleTickle();
     }
 
     public void copyToggles(WorldState w)
@@ -597,7 +627,7 @@ public class WorldState
 
     public String[] getCustomStrings()
     {
-        String allStrings[] = new String[42];
+        String allStrings[] = new String[45];
         for(int i = 0; i < 3; i++)
         {
             allStrings[i] = customNames[i];
@@ -614,6 +644,7 @@ public class WorldState
             allStrings[i + 33] = customAliases[i];
             allStrings[i + 36] = customTitles[i];
             allStrings[i + 39] = customIncantations[i];
+            allStrings[i + 42] = customFeet[i];
         }
 
         return allStrings;
@@ -637,6 +668,7 @@ public class WorldState
             customAliases[i] = allStrings[i + 33];
             customTitles[i] = allStrings[i + 36];
             customIncantations[i] = allStrings[i + 39];
+            customFeet[i] = allStrings[i + 42];
         }
 
     }
@@ -716,14 +748,25 @@ public class WorldState
             "The only randomized elements in this game are the initial personalities of the Chosen, some in-battle speech, and the order in which these tips are displayed.", "Upon completing Day 15 and getting scored, you can restart from Day 1 against the same group of Chosen in order to try for a better result.", "As long as at least one of the Chosen is surrounded or captured, the battle can't end.", "Every time one of the Chosen is surrounded or captured, her defense level goes up by 2.", "The number of rounds one of the Chosen remains surrounded is equal to her opening level at the moment she's surrounded, regardless of her defense level.", "The number of rounds one of the Chosen remains captured by your Commander depends on the Commander's upgrades, regardless of her opening level or defense level.", "When a Commander without any special abilities captures one of the Chosen, the target is surrounded by Thralls, but the duration of the surrounding is calculated as normal for a Commander capture.", "When one of the Chosen is surrounded or captured after the extermination has already reached 100%, then she cannot be surrounded or captured again for the rest of the battle.", "When one of the Chosen uses \"Rally,\" all trauma inflicted on the team is decreased by a flat percentage until her next turn.", "Only one Chosen at a time can use \"Rally.\"", 
             "When one of the Chosen uses \"Distract,\" all damage inflicted against surrounded Chosen is decreased by a flat percentage until her next turn.", "When multiple Chosen use \"Distract\" at the same time, their damage reduction percentages are added together to a maximum of 100% reduction.", "When \"Rally\" and \"Distract\" are active at once, both apply separately.  So, for example, if both are at 10%, surrounded Chosen take 90% circumstance damage and 81% trauma damage.", "Sometimes tormenting surrounded Chosen is less worthwhile than focusing on free Chosen whose circumstances are at higher levels.", "The traumas are FEAR, DISG, PAIN, and SHAM.  The circumstances are HATE, PLEA, INJU, and EXPO.", "When facing only a single Chosen, while she's captured by a Commander with a special ability, the player will have nothing useful to do each turn.", "Surrounded Chosen can only start using one countermeasure each turn.", "The first arrival of the second and third Chosen can only happen after a certain number of turns have happened during the playthrough.", "Breaking a Chosen's Major Vulnerability causes a confrontation between her and the Chosen with the corresponding Minor Vulnerability.  This confrontation will end in hostility unless the Minor Vulnerability has already been broken.", "During downtime, the Chosen prefer to perform activities that resolve their highest traumas.", 
             "During downtime, broken vulnerabilities allow the Chosen to perform more sinful activities.", "During downtime, the Chosen prefer not to perform more sinful activities unless their trauma and angst are high enough to require it.", "During downtime, Chosen who care more about right and wrong are less likely to perform more sinful activities.", "During downtime, Chosen who like each other more are more likely to perform the same activity together.", "During downtime, Chosen who like each other more benefit more from doing the same activity together.", "When two Chosen perform the same downtime activity, they resolve more trauma by doing so, even if they dislike each other.  When all three Chosen perform the same downtime activity, this effect becomes very strong.", "Chosen who are more naive are easily convinced to join other Chosen on the downtime activities they want to do.", "Chosen who are more confident will arrive to their allies' defense in battle more quickly.", "Chosen who fight at a distance are better at biding their time, resulting in fewer rounds elapsing before their allies arrive to help them.", "Chosen who like each other more arrive to each other's defense more quickly in battle.", 
-            "During downtime, the Chosen can compromise on performing activities that none of them would perform on their own.", "Selectively corrupting one of the Chosen can make her want to perform actions that her allies aren't corrupt enough to join her on.", "The first step in corrupting one of the Chosen is generally to make her use sinful techniques to protect herself while surrounded.", "When captured by a Commander with a special ability, it is not possible for the Chosen to defend themselves.", "When the Thralls are instructed to torment a surrounded Chosen, they will continue to do so on their own until she escapes.", "Once the Chosen start using sinful methods to defend themselves, surrounding them will be less effective, but it will also be possible to extract more Evil Energy from them.", "A Chosen less vulnerable to a trauma will be more vulnerable to the associated circumstance, and vice versa.", "Compassionate Chosen hate their enemies less but are more fearful for their allies.", "Cruel Chosen hate their enemies more but are less fearful for their allies.", "Innocent Chosen have less interest in sex but are more prone to getting grossed out and disgusted.", 
+            "During downtime, the Chosen can compromise on performing activities that none of them would perform on their own.", "Selectively corrupting one of the Chosen can make her want to perform actions that her allies aren't corrupt enough to join her on.", "The first step in corrupting one of the Chosen is generally to make her use sinful techniques to protect herself while surrounded.", "When captured by a Commander with a special ability, it is not possible for the Chosen to defend themselves.", "When the Thralls are instructed to torment a surrounded Chosen, they will continue to do so on their own until she escapes.", "Once the Chosen start using sinful methods to defend themselves, surrounding them will be less effective, but it will also be possible to extract more Evil Energy from them.", "A Chosen less inherently susceptible to a trauma will be more susceptible to the associated circumstance, and vice versa.", "Compassionate Chosen hate their enemies less but are more fearful for their allies.", "Cruel Chosen hate their enemies more but are less fearful for their allies.", "Innocent Chosen have less interest in sex but are more prone to getting grossed out and disgusted.", 
             "Experienced Chosen have grown more accustomed to pleasure, but they're better at ignoring disgusting things.", "Prideful Chosen refuse to flinch away from pain, but they have the willpower to ignore being injured.", "Cowardly Chosen are careful to avoid pain, but they lack the willpower to ignore their injuries.", "Self-conscious Chosen feel more shame, but they're more careful to avoid getting stripped and exposed.", "Shameless Chosen care less about being humiliated, but they don't put much effort into avoiding getting stripped and exposed.", "After the evacuation has been completed, the extermination rate begins to increase exponentially.", "There are two types of damage: trauma and circumstance.", "Trauma inflicted during battle creates openings for the Chosen to be surrounded, but it decreases the damage received in the associated circumstance.", "Circumstances multiply the damage received by the Chosen (especially in the associated trauma), but they do not directly contribute to unresolved trauma.", "Chosen driven into a panic for their allies will stop listening to the hateful things said by their enemies.", 
-            "Chosen who hate their enemies will feel greater fear for what those enemies will do.", "Chosen overwhelmed by disgust will be less receptive to pleasure.", "Chosen overwhelmed by pleasure in battle will be disgusted by that fact.", "Chosen who are in pain will be more careful to avoid getting further injured.", "Chosen who are already injured will feel more pain from being attacked again.", "Chosen who are feeling ashamed will be more careful to avoid getting exposed.", "Chosen who are exposed will feel more shame from all sources.", "The protective powers of the Chosen depend on their pure hearts, so a Chosen consumed by hate is more vulnerable in all respects.", "The more pleasure one of the Chosen feels, the deeper her trauma will be engraved in her memory.", "As the Chosen are injured, they become less able to defend themselves from other abuses.", 
+            "Chosen who hate their enemies will feel greater fear for what those enemies will do.", "Chosen overwhelmed by disgust will be less receptive to pleasure.", "Chosen overwhelmed by pleasure in battle will be disgusted by that fact.", "Chosen who are in pain will be more careful to avoid getting further injured.", "Chosen who are already injured will feel more pain from being attacked again.", "Chosen who are feeling ashamed will be more careful to avoid getting exposed.", "Chosen who are exposed will feel more shame from all sources.", "The protective powers of the Chosen depend on their pure hearts, so a Chosen consumed by hate is more vulnerable both emotionally and physically.", "The more pleasure one of the Chosen feels, the deeper her trauma will be engraved in her memory.", "As the Chosen are injured, they become less able to defend themselves from other abuses.", 
             "When one Chosen is exposed and humiliated, it distracts and breaks the morale of the other Chosen on the battlefield.", "Every day, each Chosen's ANGST is increased by the trauma she hasn't successfully resolved yet.", "High ANGST makes the Chosen willing to perform sinful activities, and until it's resolved, the distraction makes them take more damage from all sources.", "Every doubling of ANGST increases the damage bonus by +1, so even a few hundred ANGST is much better than none at all.", "A Chosen's susceptibility to a damage type normally ranges from 0 to 100 based on personality.  The ANGST bonus is added to this value.", "A Chosen's susceptibility to a damage type ranges from 0 to 100 based on personality.  This base susceptibility to a trauma and to its associated circumstance normally adds up to 100, but corruption increases increases them both, potentially even over 100.", "More sinful actions produce a bit more Evil Energy, but they resolve trauma at an exponentially greater rate.", "The Chosen will only begin to use sinful methods to defend themselves if they expect to reach level 3 circumstance damage otherwise.", "Some sinful actions taken during battle will also damage their users.", "As the Chosen are corrupted, they will begin to use more sinful but also more effective versions of their abilities.", 
-            "Fearful Chosen are more vulnerable when their allies are surrounded or captured.", "Disgusted Chosen are always more vulnerable, but being grossed out won't generally create a major opening on its own.", "Chosen in pain are more vulnerable for awhile, but after they get surrounded, the adrenaline allows them to shake it off until the pain reaches the next level.", "Ashamed Chosen aren't any more vulnerable to being surrounded, but their efforts to retain their modesty mean that they'll remain surrounded for longer.", "Damage which currently contributes to the opening level is displayed in purple text.  Damage which does not is displayed in black text.  Damage which is only partially contributing to the opening level is displayed in orange text.", "By using \"Regenerate\", one of the Chosen can remove a fraction of her current circumstance damage.  However, nothing done in battle can remove trauma damage that has already been dealt.", "By using \"Blast\", one of the Chosen can increase evacuation and extermination progress.  If evacuation is already complete, the progress that would be added there is wasted.", "The Chosen choose their actions in battle according to which actions would seem to be most useful at the moment and how effective they are at performing those actions.", "Taunting is more effective against self-conscious Chosen, especially those who have been humiliated in the past.", "Attacking is more effective against Chosen with low self-confidence, especially those whose pride has been broken in the past.", 
+            "Fearful Chosen are more vulnerable when their allies are surrounded or captured.", "Disgusted Chosen are always more vulnerable, but being grossed out won't generally create a major opening on its own.", "Chosen in pain are more vulnerable for awhile, but after they get surrounded, the adrenaline allows them to shake it off until the pain reaches the next level.", "Ashamed Chosen aren't any more vulnerable to being surrounded, but their efforts to retain their modesty mean that they'll remain surrounded for longer.", "Damage which currently contributes to the opening level is displayed in purple text.  Damage which does not is displayed in black text.  Damage which is only partially contributing to the opening level is displayed in orange text.", "By using \"Regenerate\", one of the Chosen can remove a fraction of her current circumstance damage.  However, nothing done in battle can remove trauma damage that has already been dealt.", "By using \"Blast\", one of the Chosen can increase evacuation and extermination progress.  If evacuation is already complete, the progress that would be added there is wasted.", "The Chosen choose their actions in battle according to which actions would seem to be most useful at the moment and how effective they are at performing those actions.", "Taunting is more effective against self-conscious Chosen, especially those who have been humiliated in the past.", "Attacking is more effective against Chosen who refuse to back down from a fight, especially those who feel insecure about past failures", 
             "Sliming is more effective against more naive Chosen, especially those who have come to associate battle with sexual pleasure.", "Threatening allies is more effective against more compassionate Chosen, especially those whose consciences aren't clean.", "It isn't possible to raise a circumstance by more than one level with a single instance of damage.  This limitation does not apply to trauma.", "Each of the actions the Chosen can perform in battle is linked with one of the four vulnerabilities.  The Chosen are better at performing actions associated with their greater vulnerabilities.", "Chosen who are surrounded or captured do not contribute to extermination progress until they escape.", "When a surrounded Chosen uses a tactic that decreases the effectiveness of Grind, Caress, Pummel, or Humiliate, the damage from that source is decreased to 3/5.  When both tactics against the source are used at once, the damage becomes 2/5.", "The main benefit of Suppressor-class upgrades is that they ignore defensive tactics.  Against Chosen who have not yet begun to use any defensive tactics, a Commander without Suppressor-class upgrades can actually more effective.", "When two of the Chosen have a hostile interaction with each other, Evil Energy is generated, especially when the interaction turns them from friends into enemies.", "Any action that deals circumstance damage also deals all four types of trauma damage, especially the one corresponding to the circumstance.", "An action's tooltip lists its damage types in descending order of how much is dealt.", 
-            "From a gameplay perspective, there are no differences between male, female, and futanari Chosen.", "It isn't possible for one of the Chosen to use Slaughter, Fantasize, or Striptease twice in a row.", "Even when \"Slaughter\" causes a surround duration to go below 0, it will never cause a surrounded Chosen to escape on the same turn.", "Because high trauma penalizes circumstance damage, the circumstance damage reduction from \"Fantasize\" doesn't necessarily decrease circumstance damage in the long run.", "When your Commander has no extra captures remaining, the extra capture depletion from Chosen using \"Detonate\" does nothing.", "\"Striptease\" decreases damage to surrounded Chosen in the short term, but the fact that it increases the user's EXPO level means that it can increase the overall damage taken during the battle.", "Even after the critical trauma level is reached, a third-tier Vulnerability is not actually broken until the Chosen uses the unlocked move for the first time."
+            "From a gameplay perspective, there are no differences between male, female, and futanari Chosen.", "It isn't possible for one of the Chosen to use \"Slaughter,\" \"Fantasize,\" or \"Striptease\" twice in a row.", "Even when \"Slaughter\" causes a surround duration to go below 0, it will never cause a surrounded Chosen to escape on the same turn.", "Because high trauma penalizes circumstance damage, the circumstance damage reduction from \"Fantasize\" doesn't necessarily decrease circumstance damage in the long run.", "When your Commander has no extra captures remaining, the extra capture depletion from Chosen using \"Detonate\" does nothing.", "\"Striptease\" decreases damage to surrounded Chosen in the short term, but the fact that it increases the user's EXPO level means that it can increase the overall damage taken during the battle.", "Even after the critical trauma level is reached, a third-tier Vulnerability is not actually broken until the Chosen uses the unlocked move for the first time."
         });
+        if(tickleOn.booleanValue())
+        {
+            tips[14] = "The traumas are FEAR, DISG, TICK, and SHAM.  The circumstances are HATE, PLEA, ANTI, and EXPO.";
+            tips[41] = "Prideful Chosen refuse to acknowledge that they're bothered by something as trivial as tickling, but they have the confidence to not overly dwell on anticipating what torments you have in store for them.";
+            tips[42] = "Cowardly Chosen will always try to protect themselves, even from something as trivial as tickling, but it's easier to fill them with dreadful anticipation of what torments you have in store for them.";
+            tips[53] = "Chosen flustered and distracted by tickling won't be able to spare as much thought toward anticipating what you'll do to them next.";
+            tips[54] = "Chosen who have had their anticipation built up will react that much more strongly when you finally go all-out in tickling them.";
+            tips[59] = "Because the Chosen are empowered by their own self-confidence, their anticipation of what you'll do to them will actually make them more vulnerable.";
+            tips[72] = "Chosen distracted by tickling are more vulnerable for awhile, but after they get surrounded, they'll be more focused on escape and defense until they've been tickled some more.";
+            tips[79] = "Poking is more effective against Chosen who refuse to protect themselves, especially those who feel insecure about past failures.";
+        }
     }
 
     public void printTip(JTextPane t)
@@ -2046,8 +2089,12 @@ public class WorldState
                     if(nextSpeaker.getConfidence() > 33)
                     {
                         if(nextSpeaker.getMorality() > 66)
-                            nextSpeaker.say(t, (new StringBuilder(String.valueOf(target.getMainName()))).append("...  Those wounds...").toString());
-                        else
+                        {
+                            if(tickleOn.booleanValue())
+                                nextSpeaker.say(t, (new StringBuilder(String.valueOf(target.getMainName()))).append("...  The way they're treating ").append(target.himHer()).append("...").toString());
+                            else
+                                nextSpeaker.say(t, (new StringBuilder(String.valueOf(target.getMainName()))).append("...  Those wounds...").toString());
+                        } else
                         if(nextSpeaker.getMorality() > 33)
                             nextSpeaker.say(t, (new StringBuilder("Are you alright, ")).append(target.getMainName()).append("?").toString());
                         else
@@ -2057,9 +2104,15 @@ public class WorldState
                         nextSpeaker.say(t, (new StringBuilder(String.valueOf(target.getMainName()))).append("...  I'm sorry I couldn't protect you...").toString());
                     else
                     if(nextSpeaker.getMorality() > 33)
-                        nextSpeaker.say(t, (new StringBuilder(String.valueOf(target.getMainName()))).append("!  Y-You're bleeding!").toString());
-                    else
+                    {
+                        if(tickleOn.booleanValue())
+                            nextSpeaker.say(t, (new StringBuilder(String.valueOf(target.getMainName()))).append("!  A-Are you okay?").toString());
+                        else
+                            nextSpeaker.say(t, (new StringBuilder(String.valueOf(target.getMainName()))).append("!  Y-You're bleeding!").toString());
+                    } else
+                    {
                         nextSpeaker.say(t, (new StringBuilder(String.valueOf(target.getMainName()))).append("!  I wish I were stronger...!").toString());
+                    }
                 } else
                 if(nextLine == 13)
                 {
@@ -2822,15 +2875,26 @@ public class WorldState
                         nextSpeaker.say(t, (new StringBuilder("Sorry, ")).append(target.getMainName()).append(", but there are more deserving victims I need to save before I get around to you.").toString());
                     else
                     if(nextSpeaker.getMorality() > 33)
-                        nextSpeaker.say(t, (new StringBuilder("Stop screaming, ")).append(target.getMainName()).append(", it's distracting.").toString());
+                    {
+                        if(tickleOn.booleanValue())
+                            nextSpeaker.say(t, (new StringBuilder("Stop laughing, ")).append(target.getMainName()).append(", it's distracting.").toString());
+                        else
+                            nextSpeaker.say(t, (new StringBuilder("Stop screaming, ")).append(target.getMainName()).append(", it's distracting.").toString());
+                    } else
+                    if(tickleOn.booleanValue())
+                        nextSpeaker.say(t, (new StringBuilder("Are you really so weak that tickling is enough to break you, ")).append(target.getMainName()).append("?").toString());
                     else
                         nextSpeaker.say(t, (new StringBuilder("Scream all you like, ")).append(target.getMainName()).append(", I'm still not going to help you.").toString());
                 } else
                 if(nextSpeaker.getConfidence() > 33)
                 {
                     if(nextSpeaker.getMorality() > 66)
-                        nextSpeaker.say(t, (new StringBuilder("Is it really that painful, ")).append(target.getMainName()).append("?").toString());
-                    else
+                    {
+                        if(tickleOn.booleanValue())
+                            nextSpeaker.say(t, (new StringBuilder("Is it really that hard not to laugh when we're doing something like this, ")).append(target.getMainName()).append("?").toString());
+                        else
+                            nextSpeaker.say(t, (new StringBuilder("Is it really that painful, ")).append(target.getMainName()).append("?").toString());
+                    } else
                     if(nextSpeaker.getMorality() > 33)
                         nextSpeaker.say(t, (new StringBuilder("Just be quiet, ")).append(target.getMainName()).append("...").toString());
                     else
@@ -3112,8 +3176,12 @@ public class WorldState
                         append(t, "Lust [PLEA]");
                     else
                     if(bodyStatus[5].booleanValue())
-                        append(t, "Anger [INJU]");
-                    else
+                    {
+                        if(tickleOn.booleanValue())
+                            append(t, "Anger [ANTI]");
+                        else
+                            append(t, "Anger [INJU]");
+                    } else
                     if(bodyStatus[6].booleanValue())
                         append(t, "Mania [EXPO]");
                     if(techs[21].isOwned().booleanValue() && !defiler.booleanValue())
@@ -3136,6 +3204,8 @@ public class WorldState
                     if(bodyStatus[5].booleanValue())
                     {
                         String status = "Anger [INJU]";
+                        if(tickleOn.booleanValue())
+                            status = "Anger [ANTI]";
                         if(first.length() > 0)
                             second = status;
                         else
@@ -3177,11 +3247,19 @@ public class WorldState
                     append(t, "Ambition [HATE, PLEA]");
                 else
                 if(bodyStatus[12].booleanValue())
-                    append(t, "Dominance [PLEA, INJU]");
-                else
+                {
+                    if(tickleOn.booleanValue())
+                        append(t, "Dominance [PLEA, ANTI]");
+                    else
+                        append(t, "Dominance [PLEA, INJU]");
+                } else
                 if(bodyStatus[13].booleanValue())
-                    append(t, "Spite [INJU, EXPO]");
-                else
+                {
+                    if(tickleOn.booleanValue())
+                        append(t, "Spite [ANTI, EXPO]");
+                    else
+                        append(t, "Spite [INJU, EXPO]");
+                } else
                 if(bodyStatus[14].booleanValue())
                     append(t, "Vanity [EXPO, HATE]");
             }
@@ -3197,8 +3275,12 @@ public class WorldState
                         append(t, "Your Commander is a huge Demon which prowls about on all fours, its underside lined with tentacles that capture and stimulate the Chosen in order to prepare them to be fucked by its foot-long flared penis.  Your Commander ");
                     else
                     if(bodyStatus[5].booleanValue())
-                        append(t, "Your Commander is a huge Demon which prowls about on all fours.  Slung under its body is an enormous double penis, each shaft almost two feet long and covered in rough barbs which inflict as much pain as pleasure.  It ");
-                    else
+                    {
+                        if(tickleOn.booleanValue())
+                            append(t, "Your Commander is a huge Demon which prowls about on six legs, the middle pair ending in nimble claws meant for further stimulating and tormenting captured prey.  Slung under its body is a foot-long flared penis.  Your Commander ");
+                        else
+                            append(t, "Your Commander is a huge Demon which prowls about on all fours.  Slung under its body is an enormous double penis, each shaft almost two feet long and covered in rough barbs which inflict as much pain as pleasure.  It ");
+                    } else
                     if(bodyStatus[6].booleanValue())
                         append(t, "Your Commander is a huge Demon made of transparent, clothes-dissolving slime.  It pounces on Chosen and then rapes them with a huge pseudopod, its see-through nature ensuring that spectators can see every humiliating detail.  Your Commander ");
                 } else
@@ -3211,8 +3293,12 @@ public class WorldState
                         append(t, "Your Commander is a huge, shambling mass which uses long tentacles to pull its prey into an internal chamber full of mind-breakingly powerful aphrodisiac and advanced pleasure-inducing tentacles.  It ");
                     else
                     if(bodyStatus[5].booleanValue())
-                        append(t, "Your Commander is a huge, shambling mass which uses long tentacles to pull its prey into an internal chamber full of aphrodisiac and smaller tentacles shaped like various torture implements to induce mind-breaking pleasure and pain.  It ");
-                    else
+                    {
+                        if(tickleOn.booleanValue())
+                            append(t, "Your Commander is a huge, shambling mass which uses long tentacles to pull its prey into an internal chamber full of aphrodisiac and smaller tentacles specialized to mercilessly tickle its victims even as it forces them to cum.  Your Commander ");
+                        else
+                            append(t, "Your Commander is a huge, shambling mass which uses long tentacles to pull its prey into an internal chamber full of aphrodisiac and smaller tentacles shaped like various torture implements to induce mind-breaking pleasure and pain.  It ");
+                    } else
                     if(bodyStatus[6].booleanValue())
                         append(t, "Your Commander is a huge, shambling mass made of transparent slime.  It's capable of shaping itself into powerful pseudopods in order to capture and pull the Chosen inside, and its body contains substances that dissolve clothes and induce sexual pleasure.  Your Commander ");
                 } else
@@ -3225,8 +3311,12 @@ public class WorldState
                         append(t, "Your Commander is a huge, vaguely-humanoid titan of a Demon with countless nimble arms that are capable of restraining your prey and inflicting various humiliations and tortures in addition to more pleasurable stimualations.  It ");
                     else
                     if(bodyStatus[5].booleanValue())
-                        append(t, "Your Commander is a huge, vaguely-humanoid titan of a Demon with several bestial arms equipped with razor-sharp claws capable of restraining your prey and inflicting various tortures and humiliations.  It ");
-                    else
+                    {
+                        if(tickleOn.booleanValue())
+                            append(t, "Your Commander is a huge, vaguely-humanoid titan of a Demon with countless arms and fine-pointed claws capable of precisely tickling every single vulnerable spot of its victims' bodies at once.  It ");
+                        else
+                            append(t, "Your Commander is a huge, vaguely-humanoid titan of a Demon with several bestial arms equipped with razor-sharp claws capable of restraining your prey and inflicting various tortures and humiliations.  It ");
+                    } else
                     if(bodyStatus[6].booleanValue())
                         append(t, "Your Commander is a huge, vaguely-humanoid titan of a Demon with several extra muscular arms capable of restraining its prey and inflicting various tortures and humiliations.  It's aided in its task by the fact that its skin is coated in clothes-dissolving slime.  Your Commander ");
                 } else
@@ -3238,9 +3328,15 @@ public class WorldState
                         append(t, "Your Commander is a huge, biomechanical Demon with electrified tentacles capable of hijacking communications infrastructure and using it to show unsuspecting people footage of how it torments its prey.  It's equipped with vibrators and other sex toys for maximum humiliation.  Your Commander ");
                     else
                     if(bodyStatus[5].booleanValue())
-                        append(t, "Your Commander is a huge, biomechanical Demon with electrified tentacles capable of hijacking communications infrastructure and using it to show unsuspecting people footage of how it torments its prey.  It's equipped with weapons and torture implements in order to emphasize its captives' helplessness.  Your Commander ");
-                    else
+                    {
+                        if(tickleOn.booleanValue())
+                            append(t, "Your Commander is a huge, biomechanical Demon with electrified tentacles capable of hijacking communications infrastructure and using it to show unsuspecting people footage of how it torments its prey.  It's equipped with various tickle torture implements in order to emphasize its captives' helplessness.  Your Commander ");
+                        else
+                            append(t, "Your Commander is a huge, biomechanical Demon with electrified tentacles capable of hijacking communications infrastructure and using it to show unsuspecting people footage of how it torments its prey.  It's equipped with weapons and torture implements in order to emphasize its captives' helplessness.  Your Commander ");
+                    } else
+                    {
                         append(t, "Your Commander is a huge, biomechanical Demon with electrified tentacles capable of hijacking communications infrastructure and using it to show unsuspecting people footage of how it torments its prey.  It's equipped with various clothes-destroying implements and high-quality cameras in order to prioritize exposing and humiliating its captives as efficiently as possible.  Your Commander ");
+                    }
             } else
             if(defiler.booleanValue())
             {
@@ -3268,8 +3364,12 @@ public class WorldState
                     append(t, "Your Commander is an oversized humanoid Demon covered with various tentacles which seek out the most sensitive places on captured Chosen and force pleasure upon them.  It ");
                 else
                 if(bodyStatus[5].booleanValue())
-                    append(t, "Your Commander is an oversized humanoid Demon with disproportionately large muscles which can deal grievous injuries even to the supernaturally-durable bodies of the Chosen.  It ");
-                else
+                {
+                    if(tickleOn.booleanValue())
+                        append(t, "Your Commander is an oversized humanoid Demon with disproportionately large muscles which can pin the Chosen and hold them still enough to tickle them with brutal efficiency.  It ");
+                    else
+                        append(t, "Your Commander is an oversized humanoid Demon with disproportionately large muscles which can deal grievous injuries even to the supernaturally-durable bodies of the Chosen.  It ");
+                } else
                 if(bodyStatus[6].booleanValue())
                     append(t, "Your Commander is an oversized humanoid Demon with various human tools embedded in its body for the purpose of exposing the Chosen.  It ");
             } else
@@ -3282,8 +3382,12 @@ public class WorldState
                         append(t, "Their tongues function as tentacles, capable of working their way under the Chosen's clothes and stimulating their erogenous zones.  ");
                     else
                     if(bodyStatus[5].booleanValue())
-                        append(t, "They're filled with razor-sharp teeth for chewing on their victims, injuring and further aggravating them.  ");
-                    else
+                    {
+                        if(tickleOn.booleanValue())
+                            append(t, "They drip with saliva that acts as a powerful drug, weakening and confusing their victims.  ");
+                        else
+                            append(t, "They're filled with razor-sharp teeth for chewing on their victims, injuring and further aggravating them.  ");
+                    } else
                     if(bodyStatus[6].booleanValue())
                         append(t, "They drip with acidic saliva, and while this substance lacks the potency to injure the Chosen themselves, it will dissolve and weaken their clothes.  ");
                 } else
@@ -3291,14 +3395,19 @@ public class WorldState
                 {
                     append(t, "Your Commander is a giant humanoid Demon covered with various tentacles which seek out the most sensitive places on captured Chosen and force pleasure upon them.  ");
                     if(bodyStatus[5].booleanValue())
-                        append(t, "Some are small and nimble, but others are thick and incredibly strong, capable of punching through solid brick and twisting steel beams apart.  ");
-                    else
+                    {
+                        if(tickleOn.booleanValue())
+                            append(t, "They're filled with a specialized slime which acts as a powerful drug for weakening and confusing the Chosen.  ");
+                        else
+                            append(t, "Some are small and nimble, but others are thick and incredibly strong, capable of punching through solid brick and twisting steel beams apart.  ");
+                    } else
                     if(bodyStatus[6].booleanValue())
                         append(t, "They secrete an acidic fluid, and while this substance lacks the potency to injure the Chosen themselves, it will dissolve and weaken their clothes.  ");
                 } else
-                {
+                if(tickleOn.booleanValue())
+                    append(t, "Your Commander is a giant humanoid Demon with various human tools embedded in its body.  Some are specialized for clothes removal, while the others are used to deliver a potent cocktail of psychoactive drugs which can weaken and disorient even the Chosen.  ");
+                else
                     append(t, "Your Commander is a giant humanoid Demon with various human tools embedded in its body.  These tools include tanks of acid, spinning saws, chains, guns, and even flamethrowers.  They have been magically reinforced to deal significant damage to both the Chosen and their clothes.  ");
-                }
                 append(t, "The Commander ");
             }
         } else
@@ -3382,8 +3491,12 @@ public class WorldState
                 damages[1] = "PLEA";
             else
             if(bodyStatus[5].booleanValue())
-                damages[1] = "INJU";
-            else
+            {
+                if(tickleOn.booleanValue())
+                    damages[1] = "ANTI";
+                else
+                    damages[1] = "INJU";
+            } else
             if(bodyStatus[6].booleanValue())
                 damages[1] = "EXPO";
             if(bodyStatus[11].booleanValue())
@@ -3395,14 +3508,23 @@ public class WorldState
             if(bodyStatus[12].booleanValue())
             {
                 damages[0] = "PLEA";
-                damages[2] = "INJU";
+                if(tickleOn.booleanValue())
+                    damages[2] = "ANTI";
+                else
+                    damages[2] = "INJU";
                 breakType = "Innocence Break above 10k PLEA";
             } else
             if(bodyStatus[13].booleanValue())
             {
-                damages[0] = "INJU";
+                if(tickleOn.booleanValue())
+                    damages[0] = "ANTI";
+                else
+                    damages[0] = "INJU";
                 damages[2] = "EXPO";
-                breakType = "Confidence Break above 10k INJU";
+                if(tickleOn.booleanValue())
+                    breakType = "Confidence Break above 10k ANTI";
+                else
+                    breakType = "Confidence Break above 10k INJU";
             } else
             if(bodyStatus[14].booleanValue())
             {
@@ -3424,11 +3546,19 @@ public class WorldState
                 append(t, ", inflicting overwhelming levels of HATE and PLEA, and potentially causing Morality Break above 10k HATE.");
             else
             if(bodyStatus[12].booleanValue())
-                append(t, ", inflicting overwhelming levels of PLEA and INJU, and potentially causing Innocence Break above 10k PLEA.");
-            else
+            {
+                if(tickleOn.booleanValue())
+                    append(t, ", inflicting overwhelming levels of PLEA and ANTI, and potentially causing Innocence Break above 10k PLEA.");
+                else
+                    append(t, ", inflicting overwhelming levels of PLEA and INJU, and potentially causing Innocence Break above 10k PLEA.");
+            } else
             if(bodyStatus[13].booleanValue())
-                append(t, ", inflicting overwhelming levels of INJU and EXPO, and potentially causing Confidence Break above 10k INJU.");
-            else
+            {
+                if(tickleOn.booleanValue())
+                    append(t, ", inflicting overwhelming levels of ANTI and EXPO, and potentially causing Confidence Break above 10k ANTI.");
+                else
+                    append(t, ", inflicting overwhelming levels of INJU and EXPO, and potentially causing Confidence Break above 10k INJU.");
+            } else
             if(bodyStatus[14].booleanValue())
                 append(t, ", inflicting overwhelming levels of EXPO and HATE, and potentially causing Dignity Break above 10k EXPO.");
         } else
@@ -3456,12 +3586,19 @@ public class WorldState
                 place++;
             }
             if(bodyStatus[5].booleanValue())
-            {
-                damages[place] = "PAIN";
-                place++;
-                damages[place] = "INJU";
-                place++;
-            }
+                if(tickleOn.booleanValue())
+                {
+                    damages[place] = "TICK";
+                    place++;
+                    damages[place] = "ANTI";
+                    place++;
+                } else
+                {
+                    damages[place] = "PAIN";
+                    place++;
+                    damages[place] = "INJU";
+                    place++;
+                }
             if(bodyStatus[6].booleanValue())
             {
                 damages[place] = "SHAM";
@@ -3570,7 +3707,7 @@ public class WorldState
         else
             captureDuration = 2;
         capturesPossible = 0;
-        if(bodyStatus[2].booleanValue() || upgradedCommander().booleanValue())
+        if(bodyStatus[2].booleanValue() || upgradedCommander().booleanValue() || techs[31].isOwned().booleanValue() && bodyStatus[0].booleanValue())
             capturesPossible++;
         if(bodyStatus[17].booleanValue())
             capturesPossible += 3;
@@ -6283,7 +6420,7 @@ public class WorldState
 
     public String[] pickCosmetics(int morality, int innocence, int confidence, int dignity)
     {
-        String cosmetics[] = new String[9];
+        String cosmetics[] = new String[10];
         String topCover = "";
         String topAccess = "";
         String bottomCover = "";
@@ -6293,6 +6430,7 @@ public class WorldState
         String accessory = "";
         String weapon = "";
         String customWeaponType = "";
+        String feetType = "";
         if(innocence > 75)
         {
             if(morality > 25)
@@ -6592,6 +6730,58 @@ public class WorldState
             weapon = "rifle";
         else
             weapon = "monster";
+        if(morality > 75 && dignity < 26)
+            feetType = "armored boots";
+        else
+        if(innocence > 75)
+        {
+            if(confidence > 75)
+                feetType = "none";
+            else
+            if(confidence > 50)
+                feetType = "high-heeled sandals";
+            else
+            if(confidence > 25)
+                feetType = "strappy sandals";
+            else
+                feetType = "ribbon-laced sandals";
+        } else
+        if(innocence > 50)
+        {
+            if(confidence > 75)
+                feetType = "foot wraps";
+            else
+            if(confidence > 50)
+                feetType = "high heels";
+            else
+            if(confidence > 25)
+                feetType = "sneakers";
+            else
+                feetType = "doll shoes";
+        } else
+        if(innocence > 25)
+        {
+            if(confidence > 75)
+                feetType = "combat boots";
+            else
+            if(confidence > 50)
+                feetType = "high-heeled boots";
+            else
+            if(confidence > 25)
+                feetType = "running shoes and athletic socks";
+            else
+                feetType = "loafers";
+        } else
+        if(confidence > 75)
+            feetType = "thigh-high boots";
+        else
+        if(confidence > 50)
+            feetType = "thigh-high stockings";
+        else
+        if(confidence > 25)
+            feetType = "kneesocks";
+        else
+            feetType = "lacy stockings";
         cosmetics[0] = topCover;
         cosmetics[1] = topAccess;
         cosmetics[2] = bottomCover;
@@ -6601,13 +6791,14 @@ public class WorldState
         cosmetics[6] = accessory;
         cosmetics[7] = weapon;
         cosmetics[8] = customWeaponType;
+        cosmetics[9] = feetType;
         return cosmetics;
     }
 
     public void cosmeticsGen(final JTextPane t, final JPanel p, final JFrame f)
     {
         p.removeAll();
-        append(t, "The final step is to customize the appearances of the team.  None of the questions in this section will affect their combat performance.  Because the default appearances are connected to their personalities, players who wish to avoid spoiling themselves may wish to skip this step.  Otherwise, click on the team member to be customized.  Clicking on a team member you've already customized will reset the customization process.");
+        append(t, "The final step is to customize the appearances of the team.  None of the questions in this section will affect their combat performance.  Because the default appearances are connected to their personalities, players who wish to avoid spoiling themselves may prefer to skip this step.  Otherwise, click on the team member to be customized.  Clicking on a team member you've already customized will completely reset that member's customization process.");
         for(int i = 0; i < 3; i++)
         {
             JButton ThisOne = new JButton(customNames[i * 2]);
@@ -7174,6 +7365,8 @@ public class WorldState
             himHer = "him";
             heShe = "he";
         }
+        if(genders[i].equals("male"))
+            dummy.gender = "male";
         String ownChoice = (new StringBuilder(String.valueOf(dummy.genAdjectiveName(statSeed[i * 4 + 1], statSeed[i * 4 + 2])))).append(" ").append(dummy.genNounName(statSeed[i * 4], statSeed[i * 4 + 1])).toString();
         append(t, (new StringBuilder("\n\n")).append(separator).append("\n\nMost Chosen also use a descriptive title that defines how they see themselves.  ").append(customAliases[i]).append("'s first idea is to use '").append(ownChoice).append("', so that ").append(heShe).append("'d be '").append(ownChoice).append(" ").append(customAliases[i]).append("'.  Should ").append(heShe).append(" use something different?").toString());
         customTitles[i] = ownChoice;
@@ -7643,7 +7836,7 @@ public class WorldState
 
             public void actionPerformed(ActionEvent e)
             {
-                colorCustomize(t, p, f, i, baseAesthetics);
+                feetCustomize(t, p, f, i, baseAesthetics);
             }
 
             final WorldState this$0;
@@ -7677,7 +7870,7 @@ public class WorldState
                 if(changed.booleanValue())
                     bottomChange(t, p, f, i, baseAesthetics, input);
                 else
-                    colorCustomize(t, p, f, i, baseAesthetics);
+                    feetCustomize(t, p, f, i, baseAesthetics);
             }
 
             final WorldState this$0;
@@ -7743,13 +7936,15 @@ public class WorldState
         String hisHer = "her";
         String himHer = "her";
         String heShe = "she";
+        String organ = "pussy";
         if(genders[i].equals("male"))
         {
             hisHer = "his";
             himHer = "him";
             heShe = "he";
+            organ = "penis";
         }
-        append(t, (new StringBuilder("\n\n")).append(separator).append("\n\nAnd in order to get at ").append(hisHer).append(" pussy, does one go up ").append(hisHer).append(" ").append(input).append(", into ").append(hisHer).append(" ").append(input).append(", down ").append(hisHer).append(" ").append(input).append(", or around ").append(hisHer).append(" ").append(input).append("?").toString());
+        append(t, (new StringBuilder("\n\n")).append(separator).append("\n\nAnd in order to get at ").append(hisHer).append(" ").append(organ).append(", does one go up ").append(hisHer).append(" ").append(input).append(", into ").append(hisHer).append(" ").append(input).append(", down ").append(hisHer).append(" ").append(input).append(", or around ").append(hisHer).append(" ").append(input).append("?").toString());
         for(int j = 0; j < 4; j++)
         {
             String method = "";
@@ -7772,7 +7967,7 @@ public class WorldState
                 {
                     baseAesthetics[2] = input;
                     baseAesthetics[3] = finalMethod;
-                    colorCustomize(t, p, f, i, baseAesthetics);
+                    feetCustomize(t, p, f, i, baseAesthetics);
                 }
 
                 final WorldState this$0;
@@ -7834,6 +8029,115 @@ public class WorldState
     public String[] getCustomBottomAccess()
     {
         return customBottomAccess;
+    }
+
+    public String[] getCustomFeet()
+    {
+        return customFeet;
+    }
+
+    public void feetCustomize(final JTextPane t, final JPanel p, final JFrame f, final int i, final String baseAesthetics[])
+    {
+        p.removeAll();
+        String hisHer = "her";
+        String himHer = "her";
+        String heShe = "she";
+        if(genders[i].equals("male"))
+        {
+            hisHer = "his";
+            himHer = "him";
+            heShe = "he";
+        }
+        append(t, (new StringBuilder("\n\n")).append(separator).append("\n\nWhat footwear does ").append(customAliases[i]).append("'s transformation give ").append(himHer).append("?  Enter 'none' (without the quotes) to have ").append(himHer).append(" go barefoot.").toString());
+        final String current = baseAesthetics[9];
+        JButton Default = new JButton(current);
+        Default.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                colorCustomize(t, p, f, i, baseAesthetics);
+            }
+
+            final WorldState this$0;
+            private final JTextPane val$t;
+            private final JPanel val$p;
+            private final JFrame val$f;
+            private final int val$i;
+            private final String val$baseAesthetics[];
+
+            
+            {
+                this$0 = WorldState.this;
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                i = j;
+                baseAesthetics = as;
+                super();
+            }
+        });
+        p.add(Default);
+        JButton Change = new JButton("Change");
+        Change.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                String input = JOptionPane.showInputDialog((new StringBuilder("Type the name of the garment here.  Leave blank to use '")).append(current).append("'.").toString());
+                if(input != null && !input.equals(current) && input.length() > 0)
+                    baseAesthetics[9] = input;
+                colorCustomize(t, p, f, i, baseAesthetics);
+            }
+
+            final WorldState this$0;
+            private final String val$current;
+            private final String val$baseAesthetics[];
+            private final JTextPane val$t;
+            private final JPanel val$p;
+            private final JFrame val$f;
+            private final int val$i;
+
+            
+            {
+                this$0 = WorldState.this;
+                current = s;
+                baseAesthetics = as;
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                i = j;
+                super();
+            }
+        });
+        p.add(Change);
+        JButton Back = new JButton("Back");
+        Back.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                bottomCustomize(t, p, f, i, baseAesthetics);
+            }
+
+            final WorldState this$0;
+            private final JTextPane val$t;
+            private final JPanel val$p;
+            private final JFrame val$f;
+            private final int val$i;
+            private final String val$baseAesthetics[];
+
+            
+            {
+                this$0 = WorldState.this;
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                i = j;
+                baseAesthetics = as;
+                super();
+            }
+        });
+        p.add(Back);
+        p.validate();
+        p.repaint();
     }
 
     public void colorCustomize(final JTextPane t, final JPanel p, final JFrame f, final int i, final String baseAesthetics[])
@@ -8170,6 +8474,9 @@ public class WorldState
             himHer = "him";
             heShe = "he";
         }
+        String bottomDesc = baseAesthetics[2];
+        if(baseAesthetics[2].equals("strips"))
+            bottomDesc = "strips of cloth";
         append(t, (new StringBuilder("\n\n")).append(separator).append("\n\nThere's one final important question.  ").toString());
         if(baseAesthetics[4].equals("none"))
         {
@@ -8204,7 +8511,7 @@ public class WorldState
             p.add(Change);
         } else
         {
-            append(t, (new StringBuilder("Would you prefer for ")).append(customAliases[i]).append(" to stop wearing anything under ").append(hisHer).append(" ").append(baseAesthetics[2]).append("?").toString());
+            append(t, (new StringBuilder("Would you prefer for ")).append(customAliases[i]).append(" to stop wearing anything under ").append(hisHer).append(" ").append(bottomDesc).append("?").toString());
             JButton Change = new JButton("Wear nothing");
             Change.addActionListener(new ActionListener() {
 
@@ -8314,6 +8621,7 @@ public class WorldState
         customAccessory[i] = baseAesthetics[6];
         customWeapons[i] = baseAesthetics[7];
         customWeaponTypes[i] = baseAesthetics[8];
+        customFeet[i] = baseAesthetics[9];
         append(t, (new StringBuilder("\n\n")).append(separator).append("\n\n").append(customAliases[i]).append("'s customization is complete!\n\n").toString());
         cosmeticsGen(t, p, f);
     }
@@ -8321,7 +8629,7 @@ public class WorldState
     public WorldState()
     {
         textSize = 16;
-        version = "7";
+        version = "9";
         PURPLE = new Color(100, 0, 150);
         ORANGE = new Color(200, 100, 0);
         RED = new Color(180, 0, 0);
@@ -8334,6 +8642,7 @@ public class WorldState
         statSeed = new int[12];
         maleShift = 0;
         femaleShift = 0;
+        tickleOn = Boolean.valueOf(false);
         totalThreatened = 0;
         totalSlimed = 0;
         totalAttacked = 0;
@@ -8408,6 +8717,7 @@ public class WorldState
     };
     int maleShift;
     int femaleShift;
+    Boolean tickleOn;
     String shopTutorial;
     String groupTutorial;
     int totalThreatened;
@@ -8489,6 +8799,9 @@ public class WorldState
         "", "", ""
     };
     String customWeaponTypes[] = {
+        "", "", ""
+    };
+    String customFeet[] = {
         "", "", ""
     };
     String customAliases[];
