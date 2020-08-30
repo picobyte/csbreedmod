@@ -81,7 +81,7 @@ public class Project extends JFrame
         p.getActionMap().clear();
         if(!t.getBackground().equals(w.BACKGROUND))
             w.toggleColors(t);
-        w.append(t, (new StringBuilder("Corrupted Saviors, Release 9: \"Substitution\"\n\nThis game contains content of an adult nature and should not be played by the underaged or by those unable to distinguish fantasy from reality.\n\n")).append(w.getSeparator()).append("\n\nJapan, mid-21st century.  The psychic energies of humanity have finally begun to coalesce into physical form.  The resulting beings are known as Demons.  Born from the base desires suppressed deep within the human mind, these creatures spread across the planet, leaving chaos and depravity in their wake.\n\nBut Demons do not represent the entirety of the human condition.  The hopes and determination of humanity have also risen up, gathering in the bodies of a few Chosen warriors in order to grant them the power to fight the Demons.  Although each of them was once an ordinary person, their new abilities place them at the center of the struggle for the soul of humanity.\n\nYou are a Demon Lord, the highest form of Demon, with your own mind and will, focused on the corruption of all that is good in the world.  The Chosen are the keystone of humanity's resistance to your goal, but to simply kill them would be meaningless.  Instead, shatter their notions of right and wrong, showing them the true darkness that hides within!").toString());
+        w.append(t, (new StringBuilder("Corrupted Saviors, Release 10b: \"Duplicity\"\n\nThis game contains content of an adult nature and should not be played by the underaged or by those unable to distinguish fantasy from reality.\n\n")).append(w.getSeparator()).append("\n\nJapan, mid-21st century.  The psychic energies of humanity have finally begun to coalesce into physical form.  The resulting beings are known as Demons.  Born from the base desires suppressed deep within the human mind, these creatures spread across the planet, leaving chaos and depravity in their wake.\n\nBut Demons do not represent the entirety of the human condition.  The hopes and determination of humanity have also risen up, gathering in the bodies of a few Chosen warriors in order to grant them the power to fight the Demons.  Although each of them was once an ordinary person, their new abilities place them at the center of the struggle for the soul of humanity.\n\nYou are a Demon Lord, the highest form of Demon, with your own mind and will, focused on the corruption of all that is good in the world.  The Chosen are the keystone of humanity's resistance to your goal, but to simply kill them would be meaningless.  Instead, shatter their notions of right and wrong, showing them the true darkness that hides within!").toString());
         if(w.getCast()[0] == null)
         {
             Chosen newChosen = new Chosen();
@@ -1144,19 +1144,32 @@ public class Project extends JFrame
         }
         for(int i = 0; i < w.getCombatants().length; i++)
             if(w.getCombatants()[i] != null)
+                if(w.getCombatants()[i].isInseminated().booleanValue())
+                    inseminated++;
+                else
+                if(w.getCombatants()[i].isOrgasming().booleanValue())
+                    orgasming++;
+                else
+                if(w.getCombatants()[i].isSodomized().booleanValue())
+                    sodomized++;
+                else
+                if(w.getCombatants()[i].isBroadcasted().booleanValue())
+                    broadcasted++;
+
+        for(int i = 0; i < w.getCombatants().length; i++)
+            if(w.getCombatants()[i] != null)
                 if(w.getCombatants()[i].isSurrounded().booleanValue())
                 {
                     w.orangeAppend(t, (new StringBuilder("\n")).append(w.getCombatants()[i].getMainName()).append(": ").toString());
+                    if(inseminated == 3 || orgasming == 3 || sodomized == 3 || broadcasted == 3)
+                        w.orangeAppend(t, "In Orgy");
+                    else
                     if(w.getCombatants()[i].isInseminated().booleanValue())
-                    {
                         w.orangeAppend(t, "Inseminated");
-                        inseminated++;
-                    } else
+                    else
                     if(w.getCombatants()[i].isOrgasming().booleanValue())
-                    {
                         w.orangeAppend(t, "Orgasming");
-                        orgasming++;
-                    } else
+                    else
                     if(w.getCombatants()[i].isSodomized().booleanValue())
                     {
                         if(w.tickle().booleanValue())
@@ -1166,16 +1179,11 @@ public class Project extends JFrame
                             w.orangeAppend(t, "Tortured");
                         else
                             w.orangeAppend(t, "Sodomized");
-                        sodomized++;
                     } else
                     if(w.getCombatants()[i].isBroadcasted().booleanValue())
-                    {
                         w.orangeAppend(t, "Broadcasted");
-                        broadcasted++;
-                    } else
-                    {
+                    else
                         w.orangeAppend(t, "Surrounded");
-                    }
                     if(w.getCombatants()[i].getSurroundDuration() > 1)
                         w.orangeAppend(t, (new StringBuilder(" for ")).append(w.getCombatants()[i].getSurroundDuration()).append(" more turns").toString());
                     else
@@ -2067,6 +2075,8 @@ public class Project extends JFrame
                 {
                     p.removeAll();
                     int defilers = 0;
+                    Boolean plusPossible = Boolean.valueOf(false);
+                    Boolean orgyPossible = Boolean.valueOf(false);
                     String PAINname = "PAIN";
                     String INJUname = "INJU";
                     if(w.tickle().booleanValue())
@@ -2189,11 +2199,24 @@ public class Project extends JFrame
                     }
                         };
                         if(finalInseminated > 0)
+                        {
                             Inseminate.setBackground(PURPLISH);
-                        else
+                            if(finalInseminated == 1)
+                            {
+                                Inseminate.setText("Inseminate+");
+                                plusPossible = Boolean.valueOf(true);
+                            } else
+                            {
+                                Inseminate.setText("Orgy");
+                                orgyPossible = Boolean.valueOf(true);
+                            }
+                        } else
+                        {
                             Inseminate.setBackground(YELLOWISH);
+                        }
                         Inseminate.setToolTipText((new StringBuilder("<html><center>Inflicts HATE and PLEA along with<br>FEAR, DISG, ")).append(PAINname).append(", and SHAM<br>Causes tier-2 Morality Break</center></html>").toString());
-                        p.add(Inseminate);
+                        if(finalInseminated < 2)
+                            p.add(Inseminate);
                         Inseminate.getInputMap(2).put(KeyStroke.getKeyStroke("5"), "pressed");
                         if(w.onTrack.booleanValue() && w.getActions().length > w.getCurrentAction() && w.getActions()[w.getCurrentAction()] == c.getNumber() * 14 + 11)
                             Inseminate.getInputMap(2).put(KeyStroke.getKeyStroke("SPACE"), "pressed");
@@ -2218,11 +2241,24 @@ public class Project extends JFrame
                     }
                         };
                         if(finalOrgasming > 0)
+                        {
                             ForceOrgasm.setBackground(PURPLISH);
-                        else
+                            if(finalOrgasming == 1)
+                            {
+                                ForceOrgasm.setText("Force Orgasm+");
+                                plusPossible = Boolean.valueOf(true);
+                            } else
+                            {
+                                ForceOrgasm.setText("Orgy");
+                                orgyPossible = Boolean.valueOf(true);
+                            }
+                        } else
+                        {
                             ForceOrgasm.setBackground(YELLOWISH);
+                        }
                         ForceOrgasm.setToolTipText((new StringBuilder("<html><center>Inflicts PLEA and ")).append(INJUname).append(" along with<br>DISG, ").append(PAINname).append(", SHAM, and FEAR<br>Causes tier-2 Innocence Break</center></html>").toString());
-                        p.add(ForceOrgasm);
+                        if(finalOrgasming < 2)
+                            p.add(ForceOrgasm);
                         ForceOrgasm.getInputMap(2).put(KeyStroke.getKeyStroke("6"), "pressed");
                         if(w.onTrack.booleanValue() && w.getActions().length > w.getCurrentAction() && w.getActions()[w.getCurrentAction()] == c.getNumber() * 14 + 12)
                             ForceOrgasm.getInputMap(2).put(KeyStroke.getKeyStroke("SPACE"), "pressed");
@@ -2247,11 +2283,30 @@ public class Project extends JFrame
                     }
                         };
                         if(finalSodomized > 0)
+                        {
                             Sodomize.setBackground(PURPLISH);
-                        else
+                            if(finalSodomized == 1)
+                            {
+                                if(w.tickle().booleanValue())
+                                    Sodomize.setText("Force Laughter+");
+                                else
+                                if(c.getGender().equals("male"))
+                                    Sodomize.setText("Torture+");
+                                else
+                                    Sodomize.setText("Sodomize+");
+                                plusPossible = Boolean.valueOf(true);
+                            } else
+                            {
+                                Sodomize.setText("Orgy");
+                                orgyPossible = Boolean.valueOf(true);
+                            }
+                        } else
+                        {
                             Sodomize.setBackground(YELLOWISH);
+                        }
                         Sodomize.setToolTipText((new StringBuilder("<html><center>Inflicts ")).append(INJUname).append(" and EXPO along with<br>").append(PAINname).append(", SHAM, FEAR, and DISG<br>Causes tier-2 Confidence Break</center></html>").toString());
-                        p.add(Sodomize);
+                        if(finalSodomized < 2)
+                            p.add(Sodomize);
                         Sodomize.getInputMap(2).put(KeyStroke.getKeyStroke("7"), "pressed");
                         if(w.onTrack.booleanValue() && w.getActions().length > w.getCurrentAction() && w.getActions()[w.getCurrentAction()] == c.getNumber() * 14 + 13)
                             Sodomize.getInputMap(2).put(KeyStroke.getKeyStroke("SPACE"), "pressed");
@@ -2276,22 +2331,89 @@ public class Project extends JFrame
                     }
                         };
                         if(finalBroadcasted > 0)
+                        {
                             Broadcast.setBackground(PURPLISH);
-                        else
+                            if(finalBroadcasted == 1)
+                            {
+                                Broadcast.setText("Broadcast+");
+                                plusPossible = Boolean.valueOf(true);
+                            } else
+                            {
+                                Broadcast.setText("Orgy");
+                                orgyPossible = Boolean.valueOf(true);
+                            }
+                        } else
+                        {
                             Broadcast.setBackground(YELLOWISH);
+                        }
                         Broadcast.setToolTipText((new StringBuilder("<html><center>Inflicts EXPO and HATE along with<br>SHAM, FEAR, DISG, and ")).append(PAINname).append("<br>Causes tier-2 Dignity Break</center></html>").toString());
-                        p.add(Broadcast);
+                        if(finalBroadcasted < 2)
+                            p.add(Broadcast);
                         Broadcast.getInputMap(2).put(KeyStroke.getKeyStroke("8"), "pressed");
                         if(w.onTrack.booleanValue() && w.getActions().length > w.getCurrentAction() && w.getActions()[w.getCurrentAction()] == c.getNumber() * 14 + 14)
                             Broadcast.getInputMap(2).put(KeyStroke.getKeyStroke("SPACE"), "pressed");
                         Broadcast.getActionMap().put("pressed", BroadcastAction);
                     }
                     w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\nWhat should the Thralls do after surrounding ").append(c.getMainName()).append("?").toString());
+                    if(finalInseminated == 2 || finalOrgasming == 2 || finalSodomized == 2 || finalBroadcasted == 2)
+                        defilers--;
                     if(defilers > 1)
                         w.append(t, (new StringBuilder("  ")).append(defilers).append(" defiler actions possible.").toString());
                     else
                     if(defilers == 1)
                         w.append(t, "  1 defiler action possible.");
+                    int difference = 0;
+                    orgyPossible.booleanValue();
+                    if(plusPossible.booleanValue())
+                    {
+                        int opening = c.getFEAROpening(w) + c.getDISGOpening() + c.getPAINOpening() + c.getSHAMOpening(w) + 1;
+                        for(int i = 0; i < 3; i++)
+                            if(w.getCombatants()[i] != null && w.getCombatants()[i] != c)
+                            {
+                                String defilementType = "";
+                                if(w.getCombatants()[i].isInseminated().booleanValue() && c.getHATELevel() >= 3)
+                                    defilementType = "Inseminate";
+                                else
+                                if(w.getCombatants()[i].isOrgasming().booleanValue() && c.getPLEALevel() >= 3)
+                                    defilementType = "Force Orgasm";
+                                else
+                                if(w.getCombatants()[i].isSodomized().booleanValue() && c.getINJULevel() >= 3)
+                                {
+                                    if(w.tickle().booleanValue())
+                                        defilementType = "Force Laughter";
+                                    else
+                                    if(c.getGender().equals("male"))
+                                        defilementType = "Torture";
+                                    else
+                                        defilementType = "Sodomize";
+                                } else
+                                if(w.getCombatants()[i].isBroadcasted().booleanValue() && c.getEXPOLevel() >= 3)
+                                    defilementType = "Broadcast";
+                                if(defilementType.length() > 0)
+                                {
+                                    w.append(t, (new StringBuilder("  ")).append(defilementType).append(" with ").append(w.getCombatants()[i].getMainName()).toString());
+                                    if(opening > w.getCombatants()[i].getSurroundDuration())
+                                    {
+                                        w.append(t, (new StringBuilder(" will allow ")).append(c.getMainName()).toString());
+                                        difference = opening - w.getCombatants()[i].getSurroundDuration();
+                                    } else
+                                    if(w.getCombatants()[i].getSurroundDuration() > opening)
+                                    {
+                                        w.append(t, (new StringBuilder(" will allow ")).append(w.getCombatants()[i].getMainName()).toString());
+                                        difference = w.getCombatants()[i].getSurroundDuration() - opening;
+                                    }
+                                    if(difference > 1)
+                                        w.append(t, (new StringBuilder(" to escape ")).append(difference).append(" turns early.").toString());
+                                    else
+                                    if(difference == 1)
+                                        w.append(t, " to escape 1 turn early.");
+                                    else
+                                        w.append(t, " does not allow either of them to escape early.");
+                                    difference = 0;
+                                }
+                            }
+
+                    }
                     JButton Back = new JButton("Cancel");
                     Back.addActionListener(new ActionListener() {
 
@@ -2411,6 +2533,8 @@ public class Project extends JFrame
                         INJUname = "ANTI";
                     }
                     int defilers = 0;
+                    Boolean plusPossible = Boolean.valueOf(false);
+                    Boolean orgyPossible = Boolean.valueOf(false);
                     if(!c.getGrind().booleanValue())
                     {
                         JButton Grind = new JButton(GrindAction) {
@@ -2526,11 +2650,24 @@ public class Project extends JFrame
                     }
                         };
                         if(finalInseminated > 0)
+                        {
                             Inseminate.setBackground(PURPLISH);
-                        else
+                            if(finalInseminated == 1)
+                            {
+                                Inseminate.setText("Inseminate+");
+                                plusPossible = Boolean.valueOf(true);
+                            } else
+                            {
+                                Inseminate.setText("Orgy");
+                                orgyPossible = Boolean.valueOf(true);
+                            }
+                        } else
+                        {
                             Inseminate.setBackground(YELLOWISH);
+                        }
                         Inseminate.setToolTipText((new StringBuilder("<html><center>Inflicts HATE and PLEA along with<br>FEAR, DISG, ")).append(PAINname).append(", and SHAM<br>Causes tier-2 Morality Break</center></html>").toString());
-                        p.add(Inseminate);
+                        if(finalInseminated < 2)
+                            p.add(Inseminate);
                         Inseminate.getInputMap(2).put(KeyStroke.getKeyStroke("5"), "pressed");
                         if(w.onTrack.booleanValue() && w.getActions().length > w.getCurrentAction() && w.getActions()[w.getCurrentAction()] == c.getNumber() * 14 + 11)
                             Inseminate.getInputMap(2).put(KeyStroke.getKeyStroke("SPACE"), "pressed");
@@ -2555,11 +2692,24 @@ public class Project extends JFrame
                     }
                         };
                         if(finalOrgasming > 0)
+                        {
                             ForceOrgasm.setBackground(PURPLISH);
-                        else
+                            if(finalOrgasming == 1)
+                            {
+                                ForceOrgasm.setText("Force Orgasm+");
+                                plusPossible = Boolean.valueOf(true);
+                            } else
+                            {
+                                ForceOrgasm.setText("Orgy");
+                                orgyPossible = Boolean.valueOf(true);
+                            }
+                        } else
+                        {
                             ForceOrgasm.setBackground(YELLOWISH);
+                        }
                         ForceOrgasm.setToolTipText((new StringBuilder("<html><center>Inflicts PLEA and ")).append(INJUname).append(" along with<br>DISG, ").append(PAINname).append(", SHAM, and FEAR<br>Causes tier-2 Innocence Break</center></html>").toString());
-                        p.add(ForceOrgasm);
+                        if(finalOrgasming < 2)
+                            p.add(ForceOrgasm);
                         ForceOrgasm.getInputMap(2).put(KeyStroke.getKeyStroke("6"), "pressed");
                         if(w.onTrack.booleanValue() && w.getActions().length > w.getCurrentAction() && w.getActions()[w.getCurrentAction()] == c.getNumber() * 14 + 12)
                             ForceOrgasm.getInputMap(2).put(KeyStroke.getKeyStroke("SPACE"), "pressed");
@@ -2584,11 +2734,30 @@ public class Project extends JFrame
                     }
                         };
                         if(finalSodomized > 0)
+                        {
                             Sodomize.setBackground(PURPLISH);
-                        else
+                            if(finalSodomized == 1)
+                            {
+                                if(w.tickle().booleanValue())
+                                    Sodomize.setText("Force Laughter+");
+                                else
+                                if(c.getGender().equals("male"))
+                                    Sodomize.setText("Torture+");
+                                else
+                                    Sodomize.setText("Sodomize+");
+                                plusPossible = Boolean.valueOf(true);
+                            } else
+                            {
+                                Sodomize.setText("Orgy");
+                                orgyPossible = Boolean.valueOf(true);
+                            }
+                        } else
+                        {
                             Sodomize.setBackground(YELLOWISH);
+                        }
                         Sodomize.setToolTipText((new StringBuilder("<html><center>Inflicts ")).append(INJUname).append(" and EXPO along with<br>").append(PAINname).append(", SHAM, FEAR, and DISG<br>Causes tier-2 Confidence Break</center></html>").toString());
-                        p.add(Sodomize);
+                        if(finalSodomized < 2)
+                            p.add(Sodomize);
                         Sodomize.getInputMap(2).put(KeyStroke.getKeyStroke("7"), "pressed");
                         if(w.onTrack.booleanValue() && w.getActions().length > w.getCurrentAction() && w.getActions()[w.getCurrentAction()] == c.getNumber() * 14 + 13)
                             Sodomize.getInputMap(2).put(KeyStroke.getKeyStroke("SPACE"), "pressed");
@@ -2613,22 +2782,89 @@ public class Project extends JFrame
                     }
                         };
                         if(finalBroadcasted > 0)
+                        {
                             Broadcast.setBackground(PURPLISH);
-                        else
+                            if(finalBroadcasted == 1)
+                            {
+                                Broadcast.setText("Broadcast+");
+                                plusPossible = Boolean.valueOf(true);
+                            } else
+                            {
+                                Broadcast.setText("Orgy");
+                                orgyPossible = Boolean.valueOf(true);
+                            }
+                        } else
+                        {
                             Broadcast.setBackground(YELLOWISH);
+                        }
                         Broadcast.setToolTipText((new StringBuilder("<html><center>Inflicts EXPO and HATE along with<br>SHAM, FEAR, DISG, and ")).append(PAINname).append("<br>Causes tier-2 Dignity Break</center></html>").toString());
-                        p.add(Broadcast);
+                        if(finalBroadcasted < 2)
+                            p.add(Broadcast);
                         Broadcast.getInputMap(2).put(KeyStroke.getKeyStroke("8"), "pressed");
                         if(w.onTrack.booleanValue() && w.getActions().length > w.getCurrentAction() && w.getActions()[w.getCurrentAction()] == c.getNumber() * 14 + 14)
                             Broadcast.getInputMap(2).put(KeyStroke.getKeyStroke("SPACE"), "pressed");
                         Broadcast.getActionMap().put("pressed", BroadcastAction);
                     }
                     w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\nWhat should the Thralls do after surrounding ").append(c.getMainName()).append("?").toString());
+                    if(finalInseminated == 2 || finalOrgasming == 2 || finalSodomized == 2 || finalBroadcasted == 2)
+                        defilers--;
                     if(defilers > 1)
                         w.append(t, (new StringBuilder("  ")).append(defilers).append(" defiler actions possible.").toString());
                     else
                     if(defilers == 1)
                         w.append(t, "  1 defiler action possible.");
+                    int difference = 0;
+                    orgyPossible.booleanValue();
+                    if(plusPossible.booleanValue())
+                    {
+                        int opening = w.getCaptureDuration() + 1;
+                        for(int i = 0; i < 3; i++)
+                            if(w.getCombatants()[i] != null && w.getCombatants()[i] != c)
+                            {
+                                String defilementType = "";
+                                if(w.getCombatants()[i].isInseminated().booleanValue() && c.getHATELevel() >= 3)
+                                    defilementType = "Inseminate";
+                                else
+                                if(w.getCombatants()[i].isOrgasming().booleanValue() && c.getPLEALevel() >= 3)
+                                    defilementType = "Force Orgasm";
+                                else
+                                if(w.getCombatants()[i].isSodomized().booleanValue() && c.getINJULevel() >= 3)
+                                {
+                                    if(w.tickle().booleanValue())
+                                        defilementType = "Force Laughter";
+                                    else
+                                    if(c.getGender().equals("male"))
+                                        defilementType = "Torture";
+                                    else
+                                        defilementType = "Sodomize";
+                                } else
+                                if(w.getCombatants()[i].isBroadcasted().booleanValue() && c.getEXPOLevel() >= 3)
+                                    defilementType = "Broadcast";
+                                if(defilementType.length() > 0)
+                                {
+                                    w.append(t, (new StringBuilder("  ")).append(defilementType).append(" with ").append(w.getCombatants()[i].getMainName()).toString());
+                                    if(opening > w.getCombatants()[i].getSurroundDuration())
+                                    {
+                                        w.append(t, (new StringBuilder(" will allow ")).append(c.getMainName()).toString());
+                                        difference = opening - w.getCombatants()[i].getSurroundDuration();
+                                    } else
+                                    if(w.getCombatants()[i].getSurroundDuration() > opening)
+                                    {
+                                        w.append(t, (new StringBuilder(" will allow ")).append(w.getCombatants()[i].getMainName()).toString());
+                                        difference = w.getCombatants()[i].getSurroundDuration() - opening;
+                                    }
+                                    if(difference > 1)
+                                        w.append(t, (new StringBuilder(" to escape ")).append(difference).append(" turns early.").toString());
+                                    else
+                                    if(difference == 1)
+                                        w.append(t, " to escape 1 turn early.");
+                                    else
+                                        w.append(t, " does not allow either of them to escape early.");
+                                    difference = 0;
+                                }
+                            }
+
+                    }
                     JButton Back = new JButton("Cancel");
                     Back.addActionListener(new ActionListener() {
 
@@ -2894,6 +3130,8 @@ public class Project extends JFrame
                 PAINname = "TICK";
                 INJUname = "ANTI";
             }
+            Boolean plusPossible = Boolean.valueOf(false);
+            Boolean orgyPossible = Boolean.valueOf(false);
             if(!c.getGrind().booleanValue())
             {
                 JButton Grind = new JButton(GrindAction) {
@@ -2974,11 +3212,24 @@ public class Project extends JFrame
 
                 };
                 if(inseminated > 0)
+                {
                     Inseminate.setBackground(PURPLISH);
-                else
+                    if(inseminated == 1)
+                    {
+                        Inseminate.setText("Inseminate+");
+                        plusPossible = Boolean.valueOf(true);
+                    } else
+                    {
+                        Inseminate.setText("Orgy");
+                        orgyPossible = Boolean.valueOf(true);
+                    }
+                } else
+                {
                     Inseminate.setBackground(YELLOWISH);
+                }
                 Inseminate.setToolTipText((new StringBuilder("<html><center>Inflicts HATE and PLEA along with<br>FEAR, DISG, ")).append(PAINname).append(", and SHAM<br>Causes tier-2 Morality Break</center></html>").toString());
-                p.add(Inseminate);
+                if(inseminated < 2)
+                    p.add(Inseminate);
                 Inseminate.getInputMap(2).put(KeyStroke.getKeyStroke("5"), "pressed");
                 if(w.onTrack.booleanValue() && w.getActions().length > w.getCurrentAction() && w.getActions()[w.getCurrentAction()] == c.getNumber() * 14 + 11)
                     Inseminate.getInputMap(2).put(KeyStroke.getKeyStroke("SPACE"), "pressed");
@@ -2996,11 +3247,24 @@ public class Project extends JFrame
 
                 };
                 if(orgasming > 0)
+                {
                     ForceOrgasm.setBackground(PURPLISH);
-                else
+                    if(orgasming == 1)
+                    {
+                        ForceOrgasm.setText("Force Orgasm+");
+                        plusPossible = Boolean.valueOf(true);
+                    } else
+                    {
+                        ForceOrgasm.setText("Orgy");
+                        orgyPossible = Boolean.valueOf(true);
+                    }
+                } else
+                {
                     ForceOrgasm.setBackground(YELLOWISH);
+                }
                 ForceOrgasm.setToolTipText((new StringBuilder("<html><center>Inflicts PLEA and ")).append(INJUname).append(" along with<br>DISG, ").append(PAINname).append(", SHAM, and FEAR<br>Causes tier-2 Innocence Break</center></html>").toString());
-                p.add(ForceOrgasm);
+                if(orgasming < 2)
+                    p.add(ForceOrgasm);
                 ForceOrgasm.getInputMap(2).put(KeyStroke.getKeyStroke("6"), "pressed");
                 if(w.onTrack.booleanValue() && w.getActions().length > w.getCurrentAction() && w.getActions()[w.getCurrentAction()] == c.getNumber() * 14 + 12)
                     ForceOrgasm.getInputMap(2).put(KeyStroke.getKeyStroke("SPACE"), "pressed");
@@ -3018,11 +3282,30 @@ public class Project extends JFrame
 
                 };
                 if(sodomized > 0)
+                {
                     Sodomize.setBackground(PURPLISH);
-                else
+                    if(sodomized == 1)
+                    {
+                        if(w.tickle().booleanValue())
+                            Sodomize.setText("Force Laughter+");
+                        else
+                        if(c.getGender().equals("male"))
+                            Sodomize.setText("Torture+");
+                        else
+                            Sodomize.setText("Sodomize+");
+                        plusPossible = Boolean.valueOf(true);
+                    } else
+                    {
+                        Sodomize.setText("Orgy");
+                        orgyPossible = Boolean.valueOf(true);
+                    }
+                } else
+                {
                     Sodomize.setBackground(YELLOWISH);
+                }
                 Sodomize.setToolTipText((new StringBuilder("<html><center>Inflicts ")).append(INJUname).append(" and EXPO along with<br>").append(PAINname).append(", SHAM, FEAR, and DISG<br>Causes tier-2 Confidence Break</center></html>").toString());
-                p.add(Sodomize);
+                if(sodomized < 2)
+                    p.add(Sodomize);
                 Sodomize.getInputMap(2).put(KeyStroke.getKeyStroke("7"), "pressed");
                 if(w.onTrack.booleanValue() && w.getActions().length > w.getCurrentAction() && w.getActions()[w.getCurrentAction()] == c.getNumber() * 14 + 13)
                     Sodomize.getInputMap(2).put(KeyStroke.getKeyStroke("SPACE"), "pressed");
@@ -3040,21 +3323,91 @@ public class Project extends JFrame
 
                 };
                 if(broadcasted > 0)
+                {
                     Broadcast.setBackground(PURPLISH);
-                else
+                    if(broadcasted == 1)
+                    {
+                        Broadcast.setText("Broadcast+");
+                        plusPossible = Boolean.valueOf(true);
+                    } else
+                    {
+                        Broadcast.setText("Orgy");
+                        orgyPossible = Boolean.valueOf(true);
+                    }
+                } else
+                {
                     Broadcast.setBackground(YELLOWISH);
+                }
                 Broadcast.setToolTipText((new StringBuilder("<html><center>Inflicts EXPO and HATE along with<br>SHAM, FEAR, DISG, and ")).append(PAINname).append("<br>Causes tier-2 Dignity Break</center></html>").toString());
-                p.add(Broadcast);
+                if(broadcasted < 2)
+                    p.add(Broadcast);
                 Broadcast.getInputMap(2).put(KeyStroke.getKeyStroke("8"), "pressed");
                 if(w.onTrack.booleanValue() && w.getActions().length > w.getCurrentAction() && w.getActions()[w.getCurrentAction()] == c.getNumber() * 14 + 14)
                     Broadcast.getInputMap(2).put(KeyStroke.getKeyStroke("SPACE"), "pressed");
                 Broadcast.getActionMap().put("pressed", BroadcastAction);
             }
-            if(defilers > 1)
-                w.append(t, (new StringBuilder("  ")).append(defilers).append(" defiler actions possible.").toString());
-            else
-            if(defilers == 1)
-                w.append(t, "  1 defiler action possible.");
+            if(inseminated == 2 || orgasming == 2 || sodomized == 2 || broadcasted == 2)
+                defilers--;
+            if(defilers > 0)
+            {
+                if(defilers > 1)
+                    w.append(t, (new StringBuilder("  ")).append(defilers).append(" defiler actions possible.").toString());
+                else
+                if(defilers == 1)
+                    w.append(t, "  1 defiler action possible.");
+                int difference = 0;
+                orgyPossible.booleanValue();
+                if(plusPossible.booleanValue())
+                {
+                    int opening = c.getSurroundDuration();
+                    for(int i = 0; i < 3; i++)
+                        if(w.getCombatants()[i] != null && w.getCombatants()[i] != c)
+                        {
+                            String defilementType = "";
+                            if(w.getCombatants()[i].isInseminated().booleanValue() && c.getHATELevel() >= 3)
+                                defilementType = "Inseminate";
+                            else
+                            if(w.getCombatants()[i].isOrgasming().booleanValue() && c.getPLEALevel() >= 3)
+                                defilementType = "Force Orgasm";
+                            else
+                            if(w.getCombatants()[i].isSodomized().booleanValue() && c.getINJULevel() >= 3)
+                            {
+                                if(w.tickle().booleanValue())
+                                    defilementType = "Force Laughter";
+                                else
+                                if(c.getGender().equals("male"))
+                                    defilementType = "Torture";
+                                else
+                                    defilementType = "Sodomize";
+                            } else
+                            if(w.getCombatants()[i].isBroadcasted().booleanValue() && c.getEXPOLevel() >= 3)
+                                defilementType = "Broadcast";
+                            if(defilementType.length() > 0)
+                            {
+                                w.append(t, (new StringBuilder("  ")).append(defilementType).append(" with ").append(w.getCombatants()[i].getMainName()).toString());
+                                if(opening > w.getCombatants()[i].getSurroundDuration())
+                                {
+                                    w.append(t, (new StringBuilder(" will allow ")).append(c.getMainName()).toString());
+                                    difference = opening - w.getCombatants()[i].getSurroundDuration();
+                                } else
+                                if(w.getCombatants()[i].getSurroundDuration() > opening)
+                                {
+                                    w.append(t, (new StringBuilder(" will allow ")).append(w.getCombatants()[i].getMainName()).toString());
+                                    difference = w.getCombatants()[i].getSurroundDuration() - opening;
+                                }
+                                if(difference > 1)
+                                    w.append(t, (new StringBuilder(" to escape ")).append(difference).append(" turns early.").toString());
+                                else
+                                if(difference == 1)
+                                    w.append(t, " to escape 1 turn early.");
+                                else
+                                    w.append(t, " does not allow either of them to escape early.");
+                                difference = 0;
+                            }
+                        }
+
+                }
+            }
         } else
         if(c.isCaptured().booleanValue())
         {
@@ -3413,6 +3766,53 @@ public class Project extends JFrame
             p.repaint();
         } else
         {
+            Chosen synch[] = new Chosen[0];
+            for(int i = 0; i < 3; i++)
+                if(w.getCombatants()[i] != null)
+                {
+                    int type = 0;
+                    if(w.getCombatants()[i].isInseminated().booleanValue())
+                        type = 1;
+                    else
+                    if(w.getCombatants()[i].isOrgasming().booleanValue())
+                        type = 2;
+                    else
+                    if(w.getCombatants()[i].isSodomized().booleanValue())
+                        type = 3;
+                    else
+                    if(w.getCombatants()[i].isBroadcasted().booleanValue())
+                        type = 4;
+                    if(type > 0)
+                    {
+                        for(int j = i + 1; j < 3; j++)
+                            if(w.getCombatants()[j] != null)
+                            {
+                                int otherType = 0;
+                                if(w.getCombatants()[j].isInseminated().booleanValue())
+                                    otherType = 1;
+                                else
+                                if(w.getCombatants()[j].isOrgasming().booleanValue())
+                                    otherType = 2;
+                                else
+                                if(w.getCombatants()[j].isSodomized().booleanValue())
+                                    otherType = 3;
+                                else
+                                if(w.getCombatants()[j].isBroadcasted().booleanValue())
+                                    otherType = 4;
+                                if(type == otherType)
+                                    if(synch.length == 0)
+                                        synch = (new Chosen[] {
+                                            w.getCombatants()[i], w.getCombatants()[j]
+                                        });
+                                    else
+                                        synch = w.getCombatants();
+                            }
+
+                    }
+                }
+
+            if(synch.length > 1)
+                w.synchSurroundDurations(synch);
             class _cls3ContinueButton extends AbstractAction
             {
 

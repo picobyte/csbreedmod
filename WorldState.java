@@ -17,6 +17,28 @@ public class WorldState
     implements Serializable
 {
 
+    public void synchSurroundDurations(Chosen c[])
+    {
+        int durations[] = new int[c.length];
+        for(int i = 0; i < c.length; i++)
+            if(c[i].isSurrounded().booleanValue())
+                durations[i] = c[i].getSurroundDuration();
+            else
+            if(c[i].getFEAROpening(this) + c[i].getDISGOpening() + c[i].getPAINOpening() + c[i].getSHAMOpening(this) >= c[i].getDefenseLevel())
+                durations[i] = c[i].getFEAROpening(this) + c[i].getDISGOpening() + c[i].getPAINOpening() + c[i].getSHAMOpening(this);
+            else
+                durations[i] = captureDuration + 1;
+
+        int lowest = durations[0];
+        if(c.length > 1 && durations[1] < lowest)
+            lowest = durations[1];
+        if(c.length > 2 && durations[2] < lowest)
+            lowest = durations[2];
+        for(int i = 0; i < c.length; i++)
+            c[i].setSurroundDuration(lowest);
+
+    }
+
     public void toggleTickle()
     {
         tickleOn = Boolean.valueOf(!tickleOn.booleanValue());
@@ -220,7 +242,7 @@ public class WorldState
             }
             highScore = 0L;
             parScore = 0L;
-            version = "9";
+            version = "10";
         }
     }
 
@@ -754,7 +776,7 @@ public class WorldState
             "When one Chosen is exposed and humiliated, it distracts and breaks the morale of the other Chosen on the battlefield.", "Every day, each Chosen's ANGST is increased by the trauma she hasn't successfully resolved yet.", "High ANGST makes the Chosen willing to perform sinful activities, and until it's resolved, the distraction makes them take more damage from all sources.", "Every doubling of ANGST increases the damage bonus by +1, so even a few hundred ANGST is much better than none at all.", "A Chosen's susceptibility to a damage type normally ranges from 0 to 100 based on personality.  The ANGST bonus is added to this value.", "A Chosen's susceptibility to a damage type ranges from 0 to 100 based on personality.  This base susceptibility to a trauma and to its associated circumstance normally adds up to 100, but corruption increases increases them both, potentially even over 100.", "More sinful actions produce a bit more Evil Energy, but they resolve trauma at an exponentially greater rate.", "The Chosen will only begin to use sinful methods to defend themselves if they expect to reach level 3 circumstance damage otherwise.", "Some sinful actions taken during battle will also damage their users.", "As the Chosen are corrupted, they will begin to use more sinful but also more effective versions of their abilities.", 
             "Fearful Chosen are more vulnerable when their allies are surrounded or captured.", "Disgusted Chosen are always more vulnerable, but being grossed out won't generally create a major opening on its own.", "Chosen in pain are more vulnerable for awhile, but after they get surrounded, the adrenaline allows them to shake it off until the pain reaches the next level.", "Ashamed Chosen aren't any more vulnerable to being surrounded, but their efforts to retain their modesty mean that they'll remain surrounded for longer.", "Damage which currently contributes to the opening level is displayed in purple text.  Damage which does not is displayed in black text.  Damage which is only partially contributing to the opening level is displayed in orange text.", "By using \"Regenerate\", one of the Chosen can remove a fraction of her current circumstance damage.  However, nothing done in battle can remove trauma damage that has already been dealt.", "By using \"Blast\", one of the Chosen can increase evacuation and extermination progress.  If evacuation is already complete, the progress that would be added there is wasted.", "The Chosen choose their actions in battle according to which actions would seem to be most useful at the moment and how effective they are at performing those actions.", "Taunting is more effective against self-conscious Chosen, especially those who have been humiliated in the past.", "Attacking is more effective against Chosen who refuse to back down from a fight, especially those who feel insecure about past failures", 
             "Sliming is more effective against more naive Chosen, especially those who have come to associate battle with sexual pleasure.", "Threatening allies is more effective against more compassionate Chosen, especially those whose consciences aren't clean.", "It isn't possible to raise a circumstance by more than one level with a single instance of damage.  This limitation does not apply to trauma.", "Each of the actions the Chosen can perform in battle is linked with one of the four vulnerabilities.  The Chosen are better at performing actions associated with their greater vulnerabilities.", "Chosen who are surrounded or captured do not contribute to extermination progress until they escape.", "When a surrounded Chosen uses a tactic that decreases the effectiveness of Grind, Caress, Pummel, or Humiliate, the damage from that source is decreased to 3/5.  When both tactics against the source are used at once, the damage becomes 2/5.", "The main benefit of Suppressor-class upgrades is that they ignore defensive tactics.  Against Chosen who have not yet begun to use any defensive tactics, a Commander without Suppressor-class upgrades can actually more effective.", "When two of the Chosen have a hostile interaction with each other, Evil Energy is generated, especially when the interaction turns them from friends into enemies.", "Any action that deals circumstance damage also deals all four types of trauma damage, especially the one corresponding to the circumstance.", "An action's tooltip lists its damage types in descending order of how much is dealt.", 
-            "From a gameplay perspective, there are no differences between male, female, and futanari Chosen.", "It isn't possible for one of the Chosen to use \"Slaughter,\" \"Fantasize,\" or \"Striptease\" twice in a row.", "Even when \"Slaughter\" causes a surround duration to go below 0, it will never cause a surrounded Chosen to escape on the same turn.", "Because high trauma penalizes circumstance damage, the circumstance damage reduction from \"Fantasize\" doesn't necessarily decrease circumstance damage in the long run.", "When your Commander has no extra captures remaining, the extra capture depletion from Chosen using \"Detonate\" does nothing.", "\"Striptease\" decreases damage to surrounded Chosen in the short term, but the fact that it increases the user's EXPO level means that it can increase the overall damage taken during the battle.", "Even after the critical trauma level is reached, a third-tier Vulnerability is not actually broken until the Chosen uses the unlocked move for the first time."
+            "From a gameplay perspective, there are no differences between male, female, and futanari Chosen.", "It isn't possible for one of the Chosen to use \"Slaughter,\" \"Fantasize,\" or \"Striptease\" twice in a row.", "Even when \"Slaughter\" causes a surround duration to go below 0, it will never cause a surrounded Chosen to escape on the same turn.", "Because high trauma penalizes circumstance damage, the circumstance damage reduction from \"Fantasize\" doesn't necessarily decrease circumstance damage in the long run.", "When your Commander has no extra captures remaining, the extra capture depletion from Chosen using \"Detonate\" does nothing.", "\"Striptease\" decreases damage to surrounded Chosen in the short term, but the fact that it increases the user's EXPO level means that it can increase the overall damage taken during the battle.", "Even after the critical trauma level is reached, a third-tier Vulnerability is not actually broken until the Chosen uses the unlocked move for the first time.", "When two Chosen are targeted by the same defiler action, they both take greatly increased damage, but as soon as one of them escapes, the other does too."
         });
         if(tickleOn.booleanValue())
         {
@@ -8629,7 +8651,7 @@ public class WorldState
     public WorldState()
     {
         textSize = 16;
-        version = "9";
+        version = "10";
         PURPLE = new Color(100, 0, 150);
         ORANGE = new Color(200, 100, 0);
         RED = new Color(180, 0, 0);
