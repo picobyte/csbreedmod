@@ -6,6 +6,152 @@ public class Tech
     implements Serializable
 {
 
+    public void assignTooltip(int index, WorldState w)
+    {
+        if(index == 0)
+            tooltip = "View Chosen profiles";
+        else
+        if(index == 1)
+            tooltip = "Evac req 100 -> 120";
+        else
+        if(index == 2)
+            tooltip = "Exterm req 100 -> 140";
+        else
+        if(index == 3)
+            tooltip = "Can make Commanders for 1 EE";
+        else
+        if(index == 4)
+            tooltip = "Evac req 120 -> 140";
+        else
+        if(index == 5)
+            tooltip = "Exterm req 140 -> 200";
+        else
+        if(index == 6)
+            tooltip = "+50% circumstance damage when surrounded";
+        else
+        if(index == 7)
+            tooltip = "+20% trauma with the four basic attacks";
+        else
+        if(index == 8)
+            tooltip = "+1 Commander duration for +1 EE";
+        else
+        if(index == 9)
+            tooltip = "Commanders can wait to capture";
+        else
+        if(index == 10)
+            tooltip = "Commander inflicts HATE";
+        else
+        if(index == 11)
+            tooltip = "Commander inflicts PLEA";
+        else
+        if(index == 12)
+        {
+            if(w.tickle().booleanValue())
+                tooltip = "Commander inflicts ANTI";
+            else
+                tooltip = "Commander inflicts INJU";
+        } else
+        if(index == 13)
+            tooltip = "Commander inflicts EXPO";
+        else
+        if(index == 14)
+            tooltip = "+1 Commander duration for +1 EE";
+        else
+        if(index == 15)
+            tooltip = "+1 Commander capture for +2 EE";
+        else
+        if(index == 16)
+            tooltip = "Evac req 140 -> 160";
+        else
+        if(index == 17)
+            tooltip = "Exterm req 200 -> 300";
+        else
+        if(index == 18)
+            tooltip = "Battle end delayed by 1 turn";
+        else
+        if(index == 19)
+            tooltip = "Only +1 defense level after first surround/capture";
+        else
+        if(index == 20)
+            tooltip = "+1 Commander duration for +2 EE";
+        else
+        if(index == 21)
+            tooltip = "Commander equips two Suppressors for +5 EE";
+        else
+        if(index == 22)
+            tooltip = "Inseminate-like Commander for +6 EE";
+        else
+        if(index == 23)
+            tooltip = "Force Orgasm-like Commander for +6 EE";
+        else
+        if(index == 24)
+        {
+            if(w.tickle().booleanValue())
+                tooltip = "Force Laughter-like Commander for +6 EE";
+            else
+            if(w.getGenderBalance()[2] == 0)
+                tooltip = "Sodomize-like Commander for +6 EE";
+            else
+            if(w.getGenderBalance()[1] == 0 && w.getGenderBalance()[3] == 0)
+                tooltip = "Torture-like Commander for +6 EE";
+            else
+                tooltip = "Sodomize/Torture-like Commander for +6 EE";
+        } else
+        if(index == 25)
+            tooltip = "Broadcast-like Commander for +6 EE";
+        else
+        if(index == 26)
+            tooltip = "+1 Commander duration for +2 EE";
+        else
+        if(index == 27)
+            tooltip = "+1 Commander capture for +5 EE";
+        else
+        if(index == 28)
+            tooltip = "Evac req 160 -> 200";
+        else
+        if(index == 29)
+            tooltip = "Exterm req 300 -> 500";
+        else
+        if(index == 30)
+            tooltip = "Spend turns to increase damage for rest of battle";
+        else
+        if(index == 31)
+            tooltip = "Act immediately after surrounding target";
+        else
+        if(index == 32)
+            tooltip = "+1 Commander capture for +10 EE";
+        else
+        if(index == 33)
+            tooltip = "Commander equips Suppressor and Defiler for +10 EE";
+        else
+        if(index == 34)
+            tooltip = "Commander inflicts HATE/FEAR, Total Morality Break against Slaughter users";
+        else
+        if(index == 35)
+            tooltip = "Commander inflicts PLEA/DISG, Total Innocence Break against Fantasize users";
+        else
+        if(index == 36)
+        {
+            if(w.tickle().booleanValue())
+                tooltip = "Commander inflicts ANTI/TICK, Total Confidence Break against Detonate users";
+            else
+                tooltip = "Commander inflicts INJU/PAIN, Total Confidence Break against Detonate users";
+        } else
+        if(index == 37)
+            tooltip = "Commander inflicts EXPO/SHAM, Total Dignity Break against Striptease users";
+        else
+        if(index == 38)
+            tooltip = "";
+        else
+        if(index == 39)
+            tooltip = "";
+    }
+
+    public String getTooltip()
+    {
+        return tooltip;
+    }
+
     public int getPrereqReqs()
     {
         return prereqsRequired;
@@ -361,6 +507,66 @@ public class Tech
                 w.getTechs()[21], w.getTechs()[25]
             });
             description = "Allows you to craft complex psychic constructs which use different layers of the human mind to reinforce one another.  For +10 Evil Energy per deployment, you can put both a Suppressor-class upgrade and a Defiler-class upgrade on the same Commander.";
+        } else
+        if(index == 34)
+        {
+            name = "Impregnation";
+            prereqsRequired = 2;
+            cost = 40;
+            prereqs = (new Tech[] {
+                w.getTechs()[22], w.getTechs()[29]
+            });
+            description = "";
+        } else
+        if(index == 35)
+        {
+            name = "Hypnosis";
+            prereqsRequired = 2;
+            cost = 40;
+            prereqs = (new Tech[] {
+                w.getTechs()[23], w.getTechs()[33]
+            });
+            description = "";
+        } else
+        if(index == 36)
+        {
+            name = "Drain";
+            prereqsRequired = 2;
+            cost = 40;
+            prereqs = (new Tech[] {
+                w.getTechs()[24], w.getTechs()[28]
+            });
+            description = "";
+        } else
+        if(index == 37)
+        {
+            name = "Parasitism";
+            prereqsRequired = 2;
+            cost = 40;
+            prereqs = (new Tech[] {
+                w.getTechs()[25], w.getTechs()[30]
+            });
+            description = "";
+        } else
+        if(index == 38)
+        {
+            name = "Mastery";
+            prereqsRequired = 2;
+            cost = 40;
+            prereqs = (new Tech[] {
+                w.getTechs()[26], w.getTechs()[32]
+            });
+            description = "";
+        } else
+        if(index == 39)
+        {
+            name = "Relentlessness";
+            prereqsRequired = 2;
+            cost = 40;
+            prereqs = (new Tech[] {
+                w.getTechs()[27], w.getTechs()[31]
+            });
+            description = "";
         }
     }
 
@@ -444,6 +650,7 @@ public class Tech
         cost = 1;
         name = "";
         description = "";
+        tooltip = "";
         prereqs = new Tech[0];
         owned = Boolean.valueOf(false);
     }
@@ -453,6 +660,7 @@ public class Tech
     int cost;
     String name;
     String description;
+    String tooltip;
     Tech prereqs[];
     Boolean owned;
 }

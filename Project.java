@@ -53,13 +53,13 @@ public class Project extends JFrame
             ex.printStackTrace();
         }
         path = path.replaceAll("file:/", "");
-        path = path.replaceAll("\\u0020", "\\ ");
-        File saveLocation = new File((new StringBuilder(String.valueOf(path))).append("\\saves.sav").toString());
+        path = path.replaceAll((new StringBuilder(String.valueOf(File.separator))).append("u0020").toString(), (new StringBuilder(String.valueOf(File.separator))).append(" ").toString());
+        File saveLocation = new File((new StringBuilder(String.valueOf(path))).append(File.separator).append("saves.sav").toString());
         SaveData saves = null;
         if(saveLocation.exists())
         {
             ReadObject robj = new ReadObject();
-            saves = robj.deserializeSaveData((new StringBuilder(String.valueOf(path))).append("\\saves.sav").toString());
+            saves = robj.deserializeSaveData((new StringBuilder(String.valueOf(path))).append(File.separator).append("saves.sav").toString());
         } else
         {
             saves = new SaveData();
@@ -81,7 +81,7 @@ public class Project extends JFrame
         p.getActionMap().clear();
         if(!t.getBackground().equals(w.BACKGROUND))
             w.toggleColors(t);
-        w.append(t, (new StringBuilder("Corrupted Saviors, Release 10b: \"Duplicity\"\n\nThis game contains content of an adult nature and should not be played by the underaged or by those unable to distinguish fantasy from reality.\n\n")).append(w.getSeparator()).append("\n\nJapan, mid-21st century.  The psychic energies of humanity have finally begun to coalesce into physical form.  The resulting beings are known as Demons.  Born from the base desires suppressed deep within the human mind, these creatures spread across the planet, leaving chaos and depravity in their wake.\n\nBut Demons do not represent the entirety of the human condition.  The hopes and determination of humanity have also risen up, gathering in the bodies of a few Chosen warriors in order to grant them the power to fight the Demons.  Although each of them was once an ordinary person, their new abilities place them at the center of the struggle for the soul of humanity.\n\nYou are a Demon Lord, the highest form of Demon, with your own mind and will, focused on the corruption of all that is good in the world.  The Chosen are the keystone of humanity's resistance to your goal, but to simply kill them would be meaningless.  Instead, shatter their notions of right and wrong, showing them the true darkness that hides within!").toString());
+        w.append(t, (new StringBuilder("Corrupted Saviors, Release 11b: \"Mitigation\"\n\nThis game contains content of an adult nature and should not be played by the underaged or by those unable to distinguish fantasy from reality.\n\n")).append(w.getSeparator()).append("\n\nJapan, mid-21st century.  The psychic energies of humanity have finally begun to coalesce into physical form.  The resulting beings are known as Demons.  Born from the base desires suppressed deep within the human mind, these creatures spread across the planet, leaving chaos and depravity in their wake.\n\nBut Demons do not represent the entirety of the human condition.  The hopes and determination of humanity have also risen up, gathering in the bodies of a few Chosen warriors in order to grant them the power to fight the Demons.  Although each of them was once an ordinary person, their new abilities place them at the center of the struggle for the soul of humanity.\n\nYou are a Demon Lord, the highest form of Demon, with your own mind and will, focused on the corruption of all that is good in the world.  The Chosen are the keystone of humanity's resistance to your goal, but to simply kill them would be meaningless.  Instead, shatter their notions of right and wrong, showing them the true darkness that hides within!").toString());
         if(w.getCast()[0] == null)
         {
             Chosen newChosen = new Chosen();
@@ -424,13 +424,13 @@ public class Project extends JFrame
                 ex.printStackTrace();
             }
             path = path.replaceAll("file:/", "");
-            path = path.replaceAll("\\u0020", "\\ ");
-            File saveLocation = new File((new StringBuilder(String.valueOf(path))).append("\\saves.sav").toString());
+            path = path.replaceAll((new StringBuilder(String.valueOf(File.separator))).append("u0020").toString(), (new StringBuilder(String.valueOf(File.separator))).append(" ").toString());
+            File saveLocation = new File((new StringBuilder(String.valueOf(path))).append(File.separator).append("saves.sav").toString());
             SaveData saves = null;
             if(saveLocation.exists())
             {
                 ReadObject robj = new ReadObject();
-                saves = robj.deserializeSaveData((new StringBuilder(String.valueOf(path))).append("\\saves.sav").toString());
+                saves = robj.deserializeSaveData((new StringBuilder(String.valueOf(path))).append(File.separator).append("saves.sav").toString());
             } else
             {
                 saves = new SaveData();
@@ -2215,8 +2215,12 @@ public class Project extends JFrame
                             Inseminate.setBackground(YELLOWISH);
                         }
                         Inseminate.setToolTipText((new StringBuilder("<html><center>Inflicts HATE and PLEA along with<br>FEAR, DISG, ")).append(PAINname).append(", and SHAM<br>Causes tier-2 Morality Break</center></html>").toString());
-                        if(finalInseminated < 2)
-                            p.add(Inseminate);
+                        if(finalInseminated == 1)
+                            Inseminate.setToolTipText((new StringBuilder("<html><center>Inflicts HATE, PLEA and ")).append(INJUname).append(" along with<br>FEAR, DISG, ").append(PAINname).append(", and SHAM<br>Causes tier-2 Morality Break</center></html>").toString());
+                        else
+                        if(finalInseminated == 2)
+                            Inseminate.setToolTipText("<html><center>Inflicts a high degree of all damage types</html>");
+                        p.add(Inseminate);
                         Inseminate.getInputMap(2).put(KeyStroke.getKeyStroke("5"), "pressed");
                         if(w.onTrack.booleanValue() && w.getActions().length > w.getCurrentAction() && w.getActions()[w.getCurrentAction()] == c.getNumber() * 14 + 11)
                             Inseminate.getInputMap(2).put(KeyStroke.getKeyStroke("SPACE"), "pressed");
@@ -2257,8 +2261,12 @@ public class Project extends JFrame
                             ForceOrgasm.setBackground(YELLOWISH);
                         }
                         ForceOrgasm.setToolTipText((new StringBuilder("<html><center>Inflicts PLEA and ")).append(INJUname).append(" along with<br>DISG, ").append(PAINname).append(", SHAM, and FEAR<br>Causes tier-2 Innocence Break</center></html>").toString());
-                        if(finalOrgasming < 2)
-                            p.add(ForceOrgasm);
+                        if(finalOrgasming == 1)
+                            ForceOrgasm.setToolTipText((new StringBuilder("<html><center>Inflicts PLEA,")).append(INJUname).append(", and EXPO along with<br>DISG, ").append(PAINname).append(", SHAM, and FEAR<br>Causes tier-2 Innocence Break</center></html>").toString());
+                        else
+                        if(finalOrgasming == 2)
+                            ForceOrgasm.setToolTipText("<html><center>Inflicts a high degree of all damage types</html>");
+                        p.add(ForceOrgasm);
                         ForceOrgasm.getInputMap(2).put(KeyStroke.getKeyStroke("6"), "pressed");
                         if(w.onTrack.booleanValue() && w.getActions().length > w.getCurrentAction() && w.getActions()[w.getCurrentAction()] == c.getNumber() * 14 + 12)
                             ForceOrgasm.getInputMap(2).put(KeyStroke.getKeyStroke("SPACE"), "pressed");
@@ -2305,8 +2313,12 @@ public class Project extends JFrame
                             Sodomize.setBackground(YELLOWISH);
                         }
                         Sodomize.setToolTipText((new StringBuilder("<html><center>Inflicts ")).append(INJUname).append(" and EXPO along with<br>").append(PAINname).append(", SHAM, FEAR, and DISG<br>Causes tier-2 Confidence Break</center></html>").toString());
-                        if(finalSodomized < 2)
-                            p.add(Sodomize);
+                        if(finalSodomized == 1)
+                            Sodomize.setToolTipText((new StringBuilder("<html><center>Inflicts ")).append(INJUname).append(", EXPO, and HATE along with<br>").append(PAINname).append(", SHAM, FEAR, and DISG<br>Causes tier-2 Confidence Break</center></html>").toString());
+                        else
+                        if(finalSodomized == 2)
+                            Sodomize.setToolTipText("<html><center>Inflicts a high degree of all damage types</html>");
+                        p.add(Sodomize);
                         Sodomize.getInputMap(2).put(KeyStroke.getKeyStroke("7"), "pressed");
                         if(w.onTrack.booleanValue() && w.getActions().length > w.getCurrentAction() && w.getActions()[w.getCurrentAction()] == c.getNumber() * 14 + 13)
                             Sodomize.getInputMap(2).put(KeyStroke.getKeyStroke("SPACE"), "pressed");
@@ -2347,23 +2359,60 @@ public class Project extends JFrame
                             Broadcast.setBackground(YELLOWISH);
                         }
                         Broadcast.setToolTipText((new StringBuilder("<html><center>Inflicts EXPO and HATE along with<br>SHAM, FEAR, DISG, and ")).append(PAINname).append("<br>Causes tier-2 Dignity Break</center></html>").toString());
-                        if(finalBroadcasted < 2)
-                            p.add(Broadcast);
+                        if(finalBroadcasted == 1)
+                            Broadcast.setToolTipText((new StringBuilder("<html><center>Inflicts EXPO, HATE, and PLEA along with<br>SHAM, FEAR, DISG, and ")).append(PAINname).append("<br>Causes tier-2 Dignity Break</center></html>").toString());
+                        else
+                        if(finalBroadcasted == 2)
+                            Broadcast.setToolTipText("<html><center>Inflicts a high degree of all damage types</html>");
+                        p.add(Broadcast);
                         Broadcast.getInputMap(2).put(KeyStroke.getKeyStroke("8"), "pressed");
                         if(w.onTrack.booleanValue() && w.getActions().length > w.getCurrentAction() && w.getActions()[w.getCurrentAction()] == c.getNumber() * 14 + 14)
                             Broadcast.getInputMap(2).put(KeyStroke.getKeyStroke("SPACE"), "pressed");
                         Broadcast.getActionMap().put("pressed", BroadcastAction);
                     }
                     w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\nWhat should the Thralls do after surrounding ").append(c.getMainName()).append("?").toString());
-                    if(finalInseminated == 2 || finalOrgasming == 2 || finalSodomized == 2 || finalBroadcasted == 2)
-                        defilers--;
                     if(defilers > 1)
                         w.append(t, (new StringBuilder("  ")).append(defilers).append(" defiler actions possible.").toString());
                     else
                     if(defilers == 1)
                         w.append(t, "  1 defiler action possible.");
                     int difference = 0;
-                    orgyPossible.booleanValue();
+                    if(orgyPossible.booleanValue())
+                    {
+                        String firstName = "";
+                        String secondName = "";
+                        int duration = 0;
+                        int opening = c.getFEAROpening(w) + c.getDISGOpening() + c.getPAINOpening() + c.getSHAMOpening(w) + 1;
+                        for(int i = 0; i < 3; i++)
+                            if(w.getCombatants()[i] != null && w.getCombatants()[i] != c)
+                                if(firstName.length() == 0)
+                                {
+                                    firstName = w.getCombatants()[i].getMainName();
+                                    duration = w.getCombatants()[i].getSurroundDuration();
+                                } else
+                                {
+                                    secondName = w.getCombatants()[i].getMainName();
+                                }
+
+                        w.append(t, (new StringBuilder("  Orgy with ")).append(firstName).append(" and ").append(secondName).toString());
+                        if(duration > opening)
+                        {
+                            difference = duration - opening;
+                            w.append(t, " will cause them");
+                        } else
+                        if(opening > duration)
+                        {
+                            difference = opening - duration;
+                            w.append(t, (new StringBuilder(" will allow ")).append(c.getMainName()).toString());
+                        }
+                        if(difference > 1)
+                            w.append(t, (new StringBuilder(" to escape ")).append(difference).append(" turns early.").toString());
+                        else
+                        if(difference == 1)
+                            w.append(t, " to escape 1 turn early.");
+                        else
+                            w.append(t, " does not allow any of them to escape early.");
+                    } else
                     if(plusPossible.booleanValue())
                     {
                         int opening = c.getFEAROpening(w) + c.getDISGOpening() + c.getPAINOpening() + c.getSHAMOpening(w) + 1;
@@ -2666,8 +2715,12 @@ public class Project extends JFrame
                             Inseminate.setBackground(YELLOWISH);
                         }
                         Inseminate.setToolTipText((new StringBuilder("<html><center>Inflicts HATE and PLEA along with<br>FEAR, DISG, ")).append(PAINname).append(", and SHAM<br>Causes tier-2 Morality Break</center></html>").toString());
-                        if(finalInseminated < 2)
-                            p.add(Inseminate);
+                        if(finalInseminated == 1)
+                            Inseminate.setToolTipText((new StringBuilder("<html><center>Inflicts HATE, PLEA and ")).append(INJUname).append(" along with<br>FEAR, DISG, ").append(PAINname).append(", and SHAM<br>Causes tier-2 Morality Break</center></html>").toString());
+                        else
+                        if(finalInseminated == 2)
+                            Inseminate.setToolTipText("<html><center>Inflicts a high degree of all damage types</html>");
+                        p.add(Inseminate);
                         Inseminate.getInputMap(2).put(KeyStroke.getKeyStroke("5"), "pressed");
                         if(w.onTrack.booleanValue() && w.getActions().length > w.getCurrentAction() && w.getActions()[w.getCurrentAction()] == c.getNumber() * 14 + 11)
                             Inseminate.getInputMap(2).put(KeyStroke.getKeyStroke("SPACE"), "pressed");
@@ -2708,8 +2761,12 @@ public class Project extends JFrame
                             ForceOrgasm.setBackground(YELLOWISH);
                         }
                         ForceOrgasm.setToolTipText((new StringBuilder("<html><center>Inflicts PLEA and ")).append(INJUname).append(" along with<br>DISG, ").append(PAINname).append(", SHAM, and FEAR<br>Causes tier-2 Innocence Break</center></html>").toString());
-                        if(finalOrgasming < 2)
-                            p.add(ForceOrgasm);
+                        if(finalOrgasming == 1)
+                            ForceOrgasm.setToolTipText((new StringBuilder("<html><center>Inflicts PLEA,")).append(INJUname).append(", and EXPO along with<br>DISG, ").append(PAINname).append(", SHAM, and FEAR<br>Causes tier-2 Innocence Break</center></html>").toString());
+                        else
+                        if(finalOrgasming == 2)
+                            ForceOrgasm.setToolTipText("<html><center>Inflicts a high degree of all damage types</html>");
+                        p.add(ForceOrgasm);
                         ForceOrgasm.getInputMap(2).put(KeyStroke.getKeyStroke("6"), "pressed");
                         if(w.onTrack.booleanValue() && w.getActions().length > w.getCurrentAction() && w.getActions()[w.getCurrentAction()] == c.getNumber() * 14 + 12)
                             ForceOrgasm.getInputMap(2).put(KeyStroke.getKeyStroke("SPACE"), "pressed");
@@ -2756,8 +2813,12 @@ public class Project extends JFrame
                             Sodomize.setBackground(YELLOWISH);
                         }
                         Sodomize.setToolTipText((new StringBuilder("<html><center>Inflicts ")).append(INJUname).append(" and EXPO along with<br>").append(PAINname).append(", SHAM, FEAR, and DISG<br>Causes tier-2 Confidence Break</center></html>").toString());
-                        if(finalSodomized < 2)
-                            p.add(Sodomize);
+                        if(finalSodomized == 1)
+                            Sodomize.setToolTipText((new StringBuilder("<html><center>Inflicts ")).append(INJUname).append(", EXPO, and HATE along with<br>").append(PAINname).append(", SHAM, FEAR, and DISG<br>Causes tier-2 Confidence Break</center></html>").toString());
+                        else
+                        if(finalSodomized == 2)
+                            Sodomize.setToolTipText("<html><center>Inflicts a high degree of all damage types</html>");
+                        p.add(Sodomize);
                         Sodomize.getInputMap(2).put(KeyStroke.getKeyStroke("7"), "pressed");
                         if(w.onTrack.booleanValue() && w.getActions().length > w.getCurrentAction() && w.getActions()[w.getCurrentAction()] == c.getNumber() * 14 + 13)
                             Sodomize.getInputMap(2).put(KeyStroke.getKeyStroke("SPACE"), "pressed");
@@ -2798,23 +2859,60 @@ public class Project extends JFrame
                             Broadcast.setBackground(YELLOWISH);
                         }
                         Broadcast.setToolTipText((new StringBuilder("<html><center>Inflicts EXPO and HATE along with<br>SHAM, FEAR, DISG, and ")).append(PAINname).append("<br>Causes tier-2 Dignity Break</center></html>").toString());
-                        if(finalBroadcasted < 2)
-                            p.add(Broadcast);
+                        if(finalBroadcasted == 1)
+                            Broadcast.setToolTipText((new StringBuilder("<html><center>Inflicts EXPO, HATE, and PLEA along with<br>SHAM, FEAR, DISG, and ")).append(PAINname).append("<br>Causes tier-2 Dignity Break</center></html>").toString());
+                        else
+                        if(finalBroadcasted == 2)
+                            Broadcast.setToolTipText("<html><center>Inflicts a high degree of all damage types</html>");
+                        p.add(Broadcast);
                         Broadcast.getInputMap(2).put(KeyStroke.getKeyStroke("8"), "pressed");
                         if(w.onTrack.booleanValue() && w.getActions().length > w.getCurrentAction() && w.getActions()[w.getCurrentAction()] == c.getNumber() * 14 + 14)
                             Broadcast.getInputMap(2).put(KeyStroke.getKeyStroke("SPACE"), "pressed");
                         Broadcast.getActionMap().put("pressed", BroadcastAction);
                     }
                     w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\nWhat should the Thralls do after surrounding ").append(c.getMainName()).append("?").toString());
-                    if(finalInseminated == 2 || finalOrgasming == 2 || finalSodomized == 2 || finalBroadcasted == 2)
-                        defilers--;
                     if(defilers > 1)
                         w.append(t, (new StringBuilder("  ")).append(defilers).append(" defiler actions possible.").toString());
                     else
                     if(defilers == 1)
                         w.append(t, "  1 defiler action possible.");
                     int difference = 0;
-                    orgyPossible.booleanValue();
+                    if(orgyPossible.booleanValue())
+                    {
+                        String firstName = "";
+                        String secondName = "";
+                        int duration = 0;
+                        int opening = w.getCaptureDuration() + 1;
+                        for(int i = 0; i < 3; i++)
+                            if(w.getCombatants()[i] != null && w.getCombatants()[i] != c)
+                                if(firstName.length() == 0)
+                                {
+                                    firstName = w.getCombatants()[i].getMainName();
+                                    duration = w.getCombatants()[i].getSurroundDuration();
+                                } else
+                                {
+                                    secondName = w.getCombatants()[i].getMainName();
+                                }
+
+                        w.append(t, (new StringBuilder("  Orgy with ")).append(firstName).append(" and ").append(secondName).toString());
+                        if(duration > opening)
+                        {
+                            difference = duration - opening;
+                            w.append(t, " will cause them");
+                        } else
+                        if(opening > duration)
+                        {
+                            difference = opening - duration;
+                            w.append(t, (new StringBuilder(" will allow ")).append(c.getMainName()).toString());
+                        }
+                        if(difference > 1)
+                            w.append(t, (new StringBuilder(" to escape ")).append(difference).append(" turns early.").toString());
+                        else
+                        if(difference == 1)
+                            w.append(t, " to escape 1 turn early.");
+                        else
+                            w.append(t, " does not allow any of them to escape early.");
+                    } else
                     if(plusPossible.booleanValue())
                     {
                         int opening = w.getCaptureDuration() + 1;
@@ -3228,8 +3326,12 @@ public class Project extends JFrame
                     Inseminate.setBackground(YELLOWISH);
                 }
                 Inseminate.setToolTipText((new StringBuilder("<html><center>Inflicts HATE and PLEA along with<br>FEAR, DISG, ")).append(PAINname).append(", and SHAM<br>Causes tier-2 Morality Break</center></html>").toString());
-                if(inseminated < 2)
-                    p.add(Inseminate);
+                if(inseminated == 1)
+                    Inseminate.setToolTipText((new StringBuilder("<html><center>Inflicts HATE, PLEA and ")).append(INJUname).append(" along with<br>FEAR, DISG, ").append(PAINname).append(", and SHAM<br>Causes tier-2 Morality Break</center></html>").toString());
+                else
+                if(inseminated == 2)
+                    Inseminate.setToolTipText("<html><center>Inflicts a high degree of all damage types</html>");
+                p.add(Inseminate);
                 Inseminate.getInputMap(2).put(KeyStroke.getKeyStroke("5"), "pressed");
                 if(w.onTrack.booleanValue() && w.getActions().length > w.getCurrentAction() && w.getActions()[w.getCurrentAction()] == c.getNumber() * 14 + 11)
                     Inseminate.getInputMap(2).put(KeyStroke.getKeyStroke("SPACE"), "pressed");
@@ -3263,8 +3365,12 @@ public class Project extends JFrame
                     ForceOrgasm.setBackground(YELLOWISH);
                 }
                 ForceOrgasm.setToolTipText((new StringBuilder("<html><center>Inflicts PLEA and ")).append(INJUname).append(" along with<br>DISG, ").append(PAINname).append(", SHAM, and FEAR<br>Causes tier-2 Innocence Break</center></html>").toString());
-                if(orgasming < 2)
-                    p.add(ForceOrgasm);
+                if(orgasming == 1)
+                    ForceOrgasm.setToolTipText((new StringBuilder("<html><center>Inflicts PLEA,")).append(INJUname).append(", and EXPO along with<br>DISG, ").append(PAINname).append(", SHAM, and FEAR<br>Causes tier-2 Innocence Break</center></html>").toString());
+                else
+                if(orgasming == 2)
+                    ForceOrgasm.setToolTipText("<html><center>Inflicts a high degree of all damage types</html>");
+                p.add(ForceOrgasm);
                 ForceOrgasm.getInputMap(2).put(KeyStroke.getKeyStroke("6"), "pressed");
                 if(w.onTrack.booleanValue() && w.getActions().length > w.getCurrentAction() && w.getActions()[w.getCurrentAction()] == c.getNumber() * 14 + 12)
                     ForceOrgasm.getInputMap(2).put(KeyStroke.getKeyStroke("SPACE"), "pressed");
@@ -3304,8 +3410,12 @@ public class Project extends JFrame
                     Sodomize.setBackground(YELLOWISH);
                 }
                 Sodomize.setToolTipText((new StringBuilder("<html><center>Inflicts ")).append(INJUname).append(" and EXPO along with<br>").append(PAINname).append(", SHAM, FEAR, and DISG<br>Causes tier-2 Confidence Break</center></html>").toString());
-                if(sodomized < 2)
-                    p.add(Sodomize);
+                if(sodomized == 1)
+                    Sodomize.setToolTipText((new StringBuilder("<html><center>Inflicts ")).append(INJUname).append(", EXPO, and HATE along with<br>").append(PAINname).append(", SHAM, FEAR, and DISG<br>Causes tier-2 Confidence Break</center></html>").toString());
+                else
+                if(sodomized == 2)
+                    Sodomize.setToolTipText("<html><center>Inflicts a high degree of all damage types</html>");
+                p.add(Sodomize);
                 Sodomize.getInputMap(2).put(KeyStroke.getKeyStroke("7"), "pressed");
                 if(w.onTrack.booleanValue() && w.getActions().length > w.getCurrentAction() && w.getActions()[w.getCurrentAction()] == c.getNumber() * 14 + 13)
                     Sodomize.getInputMap(2).put(KeyStroke.getKeyStroke("SPACE"), "pressed");
@@ -3339,15 +3449,17 @@ public class Project extends JFrame
                     Broadcast.setBackground(YELLOWISH);
                 }
                 Broadcast.setToolTipText((new StringBuilder("<html><center>Inflicts EXPO and HATE along with<br>SHAM, FEAR, DISG, and ")).append(PAINname).append("<br>Causes tier-2 Dignity Break</center></html>").toString());
-                if(broadcasted < 2)
-                    p.add(Broadcast);
+                if(broadcasted == 1)
+                    Broadcast.setToolTipText((new StringBuilder("<html><center>Inflicts EXPO, HATE, and PLEA along with<br>SHAM, FEAR, DISG, and ")).append(PAINname).append("<br>Causes tier-2 Dignity Break</center></html>").toString());
+                else
+                if(broadcasted == 2)
+                    Broadcast.setToolTipText("<html><center>Inflicts a high degree of all damage types</html>");
+                p.add(Broadcast);
                 Broadcast.getInputMap(2).put(KeyStroke.getKeyStroke("8"), "pressed");
                 if(w.onTrack.booleanValue() && w.getActions().length > w.getCurrentAction() && w.getActions()[w.getCurrentAction()] == c.getNumber() * 14 + 14)
                     Broadcast.getInputMap(2).put(KeyStroke.getKeyStroke("SPACE"), "pressed");
                 Broadcast.getActionMap().put("pressed", BroadcastAction);
             }
-            if(inseminated == 2 || orgasming == 2 || sodomized == 2 || broadcasted == 2)
-                defilers--;
             if(defilers > 0)
             {
                 if(defilers > 1)
@@ -3356,7 +3468,42 @@ public class Project extends JFrame
                 if(defilers == 1)
                     w.append(t, "  1 defiler action possible.");
                 int difference = 0;
-                orgyPossible.booleanValue();
+                if(orgyPossible.booleanValue())
+                {
+                    String firstName = "";
+                    String secondName = "";
+                    int duration = 0;
+                    int opening = c.getSurroundDuration();
+                    for(int i = 0; i < 3; i++)
+                        if(w.getCombatants()[i] != null && w.getCombatants()[i] != c)
+                            if(firstName.length() == 0)
+                            {
+                                firstName = w.getCombatants()[i].getMainName();
+                                duration = w.getCombatants()[i].getSurroundDuration();
+                            } else
+                            {
+                                secondName = w.getCombatants()[i].getMainName();
+                            }
+
+                    w.append(t, (new StringBuilder("  Orgy with ")).append(firstName).append(" and ").append(secondName).toString());
+                    if(duration > opening)
+                    {
+                        difference = duration - opening;
+                        w.append(t, " will cause them");
+                    } else
+                    if(opening > duration)
+                    {
+                        difference = opening - duration;
+                        w.append(t, (new StringBuilder(" will allow ")).append(c.getMainName()).toString());
+                    }
+                    if(difference > 1)
+                        w.append(t, (new StringBuilder(" to escape ")).append(difference).append(" turns early.").toString());
+                    else
+                    if(difference == 1)
+                        w.append(t, " to escape 1 turn early.");
+                    else
+                        w.append(t, " does not allow any of them to escape early.");
+                } else
                 if(plusPossible.booleanValue())
                 {
                     int opening = c.getSurroundDuration();
@@ -5792,7 +5939,15 @@ public class Project extends JFrame
                     final int thisTech = i;
                     if(w.getEvilEnergy() >= w.getTechs()[i].getCost() && ownedPrereqs >= w.getTechs()[i].getPrereqReqs())
                     {
-                        JButton Buy = new JButton(w.getTechs()[i].getName());
+                        JButton Buy = new JButton(w.getTechs()[i].getName()) {
+
+                            public Point getToolTipLocation(MouseEvent e)
+                            {
+                                return new Point(0, -30);
+                            }
+
+                        };
+                        Buy.setToolTipText(w.getTechs()[i].getTooltip());
                         Buy.addActionListener(new ActionListener() {
 
                             public void actionPerformed(ActionEvent e)
@@ -5809,7 +5964,7 @@ public class Project extends JFrame
                                         Project.Shop(t, p, f, w);
                                     }
 
-                                    final _cls66 this$1;
+                                    final _cls67 this$1;
                                     private final WorldState val$w;
                                     private final int val$thisTech;
                                     private final JPanel val$p;
@@ -5818,7 +5973,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls66.this;
+                        this$1 = _cls67.this;
                         w = worldstate;
                         thisTech = i;
                         p = jpanel;
@@ -5836,7 +5991,7 @@ public class Project extends JFrame
                                         Project.Shop(t, p, f, w);
                                     }
 
-                                    final _cls66 this$1;
+                                    final _cls67 this$1;
                                     private final JTextPane val$t;
                                     private final JPanel val$p;
                                     private final JFrame val$f;
@@ -5844,7 +5999,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls66.this;
+                        this$1 = _cls67.this;
                         t = jtextpane;
                         p = jpanel;
                         f = jframe;
@@ -5931,7 +6086,7 @@ public class Project extends JFrame
                                     p.repaint();
                                 }
 
-                                final _cls67 this$1;
+                                final _cls68 this$1;
                                 private final JPanel val$p;
                                 private final WorldState val$w;
                                 private final JTextPane val$t;
@@ -5940,7 +6095,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls67.this;
+                        this$1 = _cls68.this;
                         p = jpanel;
                         w = worldstate;
                         t = jtextpane;
@@ -5999,13 +6154,13 @@ public class Project extends JFrame
                             w.append(t, (new StringBuilder("\n")).append(totals).append(" ").append(w.getCast()[0].fixedFormat(totalFEAR)).append(" ").append(w.getCast()[0].fixedFormat(totalDISG)).append(" ").append(w.getCast()[0].fixedFormat(totalPAIN)).append(" ").append(w.getCast()[0].fixedFormat(totalSHAM)).append(" ").append(w.getCast()[0].fixedFormat(totalFEAR + totalDISG + totalPAIN + totalSHAM)).toString());
                         }
 
-                        final _cls67 this$1;
+                        final _cls68 this$1;
                         private final WorldState val$w;
                         private final JTextPane val$t;
 
                     
                     {
-                        this$1 = _cls67.this;
+                        this$1 = _cls68.this;
                         w = worldstate;
                         t = jtextpane;
                         super();
@@ -6020,7 +6175,7 @@ public class Project extends JFrame
                             Project.Shop(t, p, f, w);
                         }
 
-                        final _cls67 this$1;
+                        final _cls68 this$1;
                         private final JTextPane val$t;
                         private final JPanel val$p;
                         private final JFrame val$f;
@@ -6028,7 +6183,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls67.this;
+                        this$1 = _cls68.this;
                         t = jtextpane;
                         p = jpanel;
                         f = jframe;
@@ -6100,7 +6255,7 @@ public class Project extends JFrame
                         Project.Data(t, p, f, w, "newsave", 0, Boolean.valueOf(true));
                     }
 
-                    final _cls69 this$1;
+                    final _cls70 this$1;
                     private final JTextPane val$t;
                     private final JPanel val$p;
                     private final JFrame val$f;
@@ -6108,7 +6263,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls69.this;
+                        this$1 = _cls70.this;
                         t = jtextpane;
                         p = jpanel;
                         f = jframe;
@@ -6125,7 +6280,7 @@ public class Project extends JFrame
                         Project.Data(t, p, f, w, "overwrite", 0, Boolean.valueOf(true));
                     }
 
-                    final _cls69 this$1;
+                    final _cls70 this$1;
                     private final JTextPane val$t;
                     private final JPanel val$p;
                     private final JFrame val$f;
@@ -6133,7 +6288,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls69.this;
+                        this$1 = _cls70.this;
                         t = jtextpane;
                         p = jpanel;
                         f = jframe;
@@ -6150,7 +6305,7 @@ public class Project extends JFrame
                         Project.Data(t, p, f, w, "load", 0, Boolean.valueOf(true));
                     }
 
-                    final _cls69 this$1;
+                    final _cls70 this$1;
                     private final JTextPane val$t;
                     private final JPanel val$p;
                     private final JFrame val$f;
@@ -6158,7 +6313,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls69.this;
+                        this$1 = _cls70.this;
                         t = jtextpane;
                         p = jpanel;
                         f = jframe;
@@ -6175,7 +6330,7 @@ public class Project extends JFrame
                         Project.Data(t, p, f, w, "delete", 0, Boolean.valueOf(true));
                     }
 
-                    final _cls69 this$1;
+                    final _cls70 this$1;
                     private final JTextPane val$t;
                     private final JPanel val$p;
                     private final JFrame val$f;
@@ -6183,7 +6338,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls69.this;
+                        this$1 = _cls70.this;
                         t = jtextpane;
                         p = jpanel;
                         f = jframe;
@@ -6200,7 +6355,7 @@ public class Project extends JFrame
                         Project.Data(t, p, f, w, "import", 0, Boolean.valueOf(true));
                     }
 
-                    final _cls69 this$1;
+                    final _cls70 this$1;
                     private final JTextPane val$t;
                     private final JPanel val$p;
                     private final JFrame val$f;
@@ -6208,7 +6363,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls69.this;
+                        this$1 = _cls70.this;
                         t = jtextpane;
                         p = jpanel;
                         f = jframe;
@@ -6225,7 +6380,7 @@ public class Project extends JFrame
                         Project.Data(t, p, f, w, "export", 0, Boolean.valueOf(true));
                     }
 
-                    final _cls69 this$1;
+                    final _cls70 this$1;
                     private final JTextPane val$t;
                     private final JPanel val$p;
                     private final JFrame val$f;
@@ -6233,7 +6388,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls69.this;
+                        this$1 = _cls70.this;
                         t = jtextpane;
                         p = jpanel;
                         f = jframe;
@@ -6250,7 +6405,7 @@ public class Project extends JFrame
                         Project.Shop(t, p, f, w);
                     }
 
-                    final _cls69 this$1;
+                    final _cls70 this$1;
                     private final JTextPane val$t;
                     private final JPanel val$p;
                     private final JFrame val$f;
@@ -6258,7 +6413,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls69.this;
+                        this$1 = _cls70.this;
                         t = jtextpane;
                         p = jpanel;
                         f = jframe;
@@ -6305,7 +6460,7 @@ public class Project extends JFrame
                         Project.IntroOne(t, p, f, x);
                     }
 
-                    final _cls70 this$1;
+                    final _cls71 this$1;
                     private final WorldState val$w;
                     private final JTextPane val$t;
                     private final JPanel val$p;
@@ -6313,7 +6468,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls70.this;
+                        this$1 = _cls71.this;
                         w = worldstate;
                         t = jtextpane;
                         p = jpanel;
@@ -6330,7 +6485,7 @@ public class Project extends JFrame
                         Project.Shop(t, p, f, w);
                     }
 
-                    final _cls70 this$1;
+                    final _cls71 this$1;
                     private final JTextPane val$t;
                     private final JPanel val$p;
                     private final JFrame val$f;
@@ -6338,7 +6493,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls70.this;
+                        this$1 = _cls71.this;
                         t = jtextpane;
                         p = jpanel;
                         f = jframe;
@@ -6471,13 +6626,13 @@ public class Project extends JFrame
             ex.printStackTrace();
         }
         path = path.replaceAll("file:/", "");
-        path = path.replaceAll("\\u0020", "\\ ");
-        File saveLocation = new File((new StringBuilder(String.valueOf(path))).append("\\saves.sav").toString());
+        path = path.replaceAll((new StringBuilder(String.valueOf(File.separator))).append("u0020").toString(), (new StringBuilder(String.valueOf(File.separator))).append(" ").toString());
+        File saveLocation = new File((new StringBuilder(String.valueOf(path))).append(File.separator).append("saves.sav").toString());
         SaveData saves = null;
         if(saveLocation.exists())
         {
             ReadObject robj = new ReadObject();
-            saves = robj.deserializeSaveData((new StringBuilder(String.valueOf(path))).append("\\saves.sav").toString());
+            saves = robj.deserializeSaveData((new StringBuilder(String.valueOf(path))).append(File.separator).append("saves.sav").toString());
         } else
         {
             saves = new SaveData();
@@ -6694,13 +6849,13 @@ public class Project extends JFrame
                                 path = path.substring(0, path.length() - fileName.length() - 1);
                                 path = URLDecoder.decode(path, "UTF-8");
                                 path = path.replaceAll("file:/", "");
-                                path = path.replaceAll("\\u0020", "\\ ");
-                                File saveLocation = new File((new StringBuilder(String.valueOf(path))).append("\\saves.sav").toString());
+                                path = path.replaceAll((new StringBuilder(String.valueOf(File.separator))).append("u0020").toString(), (new StringBuilder(String.valueOf(File.separator))).append(" ").toString());
+                                File saveLocation = new File((new StringBuilder(String.valueOf(path))).append(File.separator).append("saves.sav").toString());
                                 SaveData saves = null;
                                 if(saveLocation.exists())
                                 {
                                     ReadObject robj = new ReadObject();
-                                    saves = robj.deserializeSaveData((new StringBuilder(String.valueOf(path))).append("\\saves.sav").toString());
+                                    saves = robj.deserializeSaveData((new StringBuilder(String.valueOf(path))).append(File.separator).append("saves.sav").toString());
                                 } else
                                 {
                                     saves = new SaveData();
@@ -6902,7 +7057,7 @@ public class Project extends JFrame
                                             Project.Shop(t, p, f, saveFile.getSaves()[0]);
                                     }
 
-                                    final _cls81 this$1;
+                                    final _cls82 this$1;
                                     private final SaveData val$saveFile;
                                     private final int val$fileSelected;
                                     private final WriteObject val$wobj;
@@ -6913,7 +7068,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls81.this;
+                        this$1 = _cls82.this;
                         saveFile = savedata;
                         fileSelected = i;
                         wobj = writeobject;
@@ -6933,7 +7088,7 @@ public class Project extends JFrame
                                         Project.Shop(t, p, f, w);
                                     }
 
-                                    final _cls81 this$1;
+                                    final _cls82 this$1;
                                     private final JTextPane val$t;
                                     private final JPanel val$p;
                                     private final JFrame val$f;
@@ -6941,7 +7096,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls81.this;
+                        this$1 = _cls82.this;
                         t = jtextpane;
                         p = jpanel;
                         f = jframe;
@@ -6981,7 +7136,7 @@ public class Project extends JFrame
                                     Project.Shop(t, p, f, w);
                                 }
 
-                                final _cls81 this$1;
+                                final _cls82 this$1;
                                 private final SaveData val$saveFile;
                                 private final int val$fileSelected;
                                 private final WriteObject val$wobj;
@@ -6992,7 +7147,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls81.this;
+                        this$1 = _cls82.this;
                         saveFile = savedata;
                         fileSelected = i;
                         wobj = writeobject;
@@ -7013,7 +7168,7 @@ public class Project extends JFrame
                                     Project.Shop(t, p, f, w);
                                 }
 
-                                final _cls81 this$1;
+                                final _cls82 this$1;
                                 private final WorldState val$w;
                                 private final JTextPane val$t;
                                 private final JPanel val$p;
@@ -7021,7 +7176,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls81.this;
+                        this$1 = _cls82.this;
                         w = worldstate;
                         t = jtextpane;
                         p = jpanel;
@@ -7242,7 +7397,7 @@ public class Project extends JFrame
                                     Project.Customize(t, p, f, w);
                                 }
 
-                                final _cls86 this$1;
+                                final _cls87 this$1;
                                 private final Boolean val$defilerUsed;
                                 private final WorldState val$w;
                                 private final int val$suppressorsUsedFinal;
@@ -7252,7 +7407,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls86.this;
+                        this$1 = _cls87.this;
                         defilerUsed = boolean1;
                         w = worldstate;
                         suppressorsUsedFinal = i;
@@ -7280,7 +7435,7 @@ public class Project extends JFrame
                                     Project.Customize(t, p, f, w);
                                 }
 
-                                final _cls86 this$1;
+                                final _cls87 this$1;
                                 private final Boolean val$defilerUsed;
                                 private final WorldState val$w;
                                 private final int val$suppressorsUsedFinal;
@@ -7290,7 +7445,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls86.this;
+                        this$1 = _cls87.this;
                         defilerUsed = boolean1;
                         w = worldstate;
                         suppressorsUsedFinal = i;
@@ -7318,7 +7473,7 @@ public class Project extends JFrame
                                     Project.Customize(t, p, f, w);
                                 }
 
-                                final _cls86 this$1;
+                                final _cls87 this$1;
                                 private final Boolean val$defilerUsed;
                                 private final WorldState val$w;
                                 private final int val$suppressorsUsedFinal;
@@ -7328,7 +7483,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls86.this;
+                        this$1 = _cls87.this;
                         defilerUsed = boolean1;
                         w = worldstate;
                         suppressorsUsedFinal = i;
@@ -7356,7 +7511,7 @@ public class Project extends JFrame
                                     Project.Customize(t, p, f, w);
                                 }
 
-                                final _cls86 this$1;
+                                final _cls87 this$1;
                                 private final Boolean val$defilerUsed;
                                 private final WorldState val$w;
                                 private final int val$suppressorsUsedFinal;
@@ -7366,7 +7521,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls86.this;
+                        this$1 = _cls87.this;
                         defilerUsed = boolean1;
                         w = worldstate;
                         suppressorsUsedFinal = i;
@@ -7386,7 +7541,7 @@ public class Project extends JFrame
                                 Project.Customize(t, p, f, w);
                             }
 
-                            final _cls86 this$1;
+                            final _cls87 this$1;
                             private final JTextPane val$t;
                             private final JPanel val$p;
                             private final JFrame val$f;
@@ -7394,7 +7549,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls86.this;
+                        this$1 = _cls87.this;
                         t = jtextpane;
                         p = jpanel;
                         f = jframe;
@@ -7449,7 +7604,7 @@ public class Project extends JFrame
                                     Project.Customize(t, p, f, w);
                                 }
 
-                                final _cls87 this$1;
+                                final _cls88 this$1;
                                 private final WorldState val$w;
                                 private final int val$suppressorsUsedFinal;
                                 private final JTextPane val$t;
@@ -7458,7 +7613,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls87.this;
+                        this$1 = _cls88.this;
                         w = worldstate;
                         suppressorsUsedFinal = i;
                         t = jtextpane;
@@ -7484,7 +7639,7 @@ public class Project extends JFrame
                                     Project.Customize(t, p, f, w);
                                 }
 
-                                final _cls87 this$1;
+                                final _cls88 this$1;
                                 private final WorldState val$w;
                                 private final int val$suppressorsUsedFinal;
                                 private final JTextPane val$t;
@@ -7493,7 +7648,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls87.this;
+                        this$1 = _cls88.this;
                         w = worldstate;
                         suppressorsUsedFinal = i;
                         t = jtextpane;
@@ -7519,7 +7674,7 @@ public class Project extends JFrame
                                     Project.Customize(t, p, f, w);
                                 }
 
-                                final _cls87 this$1;
+                                final _cls88 this$1;
                                 private final WorldState val$w;
                                 private final int val$suppressorsUsedFinal;
                                 private final JTextPane val$t;
@@ -7528,7 +7683,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls87.this;
+                        this$1 = _cls88.this;
                         w = worldstate;
                         suppressorsUsedFinal = i;
                         t = jtextpane;
@@ -7552,7 +7707,7 @@ public class Project extends JFrame
                                     Project.Customize(t, p, f, w);
                                 }
 
-                                final _cls87 this$1;
+                                final _cls88 this$1;
                                 private final WorldState val$w;
                                 private final int val$suppressorsUsedFinal;
                                 private final JTextPane val$t;
@@ -7561,7 +7716,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls87.this;
+                        this$1 = _cls88.this;
                         w = worldstate;
                         suppressorsUsedFinal = i;
                         t = jtextpane;
@@ -7580,7 +7735,7 @@ public class Project extends JFrame
                                 Project.Customize(t, p, f, w);
                             }
 
-                            final _cls87 this$1;
+                            final _cls88 this$1;
                             private final JTextPane val$t;
                             private final JPanel val$p;
                             private final JFrame val$f;
@@ -7588,7 +7743,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls87.this;
+                        this$1 = _cls88.this;
                         t = jtextpane;
                         p = jpanel;
                         f = jframe;
@@ -8201,7 +8356,7 @@ public class Project extends JFrame
                                 Project.BeginBattle(t, p, f, w, c);
                             }
 
-                            final _cls100 this$1;
+                            final _cls101 this$1;
                             private final WorldState val$w;
                             private final JPanel val$p;
                             private final Chosen val$c;
@@ -8211,7 +8366,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls100.this;
+                        this$1 = _cls101.this;
                         w = worldstate;
                         p = jpanel;
                         c = chosen;
@@ -8230,7 +8385,7 @@ public class Project extends JFrame
                                 Project.Shop(t, p, f, w);
                             }
 
-                            final _cls100 this$1;
+                            final _cls101 this$1;
                             private final JTextPane val$t;
                             private final JPanel val$p;
                             private final JFrame val$f;
@@ -8238,7 +8393,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls100.this;
+                        this$1 = _cls101.this;
                         t = jtextpane;
                         p = jpanel;
                         f = jframe;

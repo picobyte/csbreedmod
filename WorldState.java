@@ -17,6 +17,70 @@ public class WorldState
     implements Serializable
 {
 
+    public int[] getLastOrgyStage()
+    {
+        return lastOrgyStage;
+    }
+
+    public void rememberOrgyStage(int value)
+    {
+        lastOrgyStage[value] = orgyStage;
+    }
+
+    public void cycleOrgyStage()
+    {
+        orgyStage++;
+        if(orgyStage > 3)
+            orgyStage = 0;
+    }
+
+    public int getOrgyStage()
+    {
+        return orgyStage;
+    }
+
+    public long softClamp(long base, long change, int preApplied)
+    {
+        clampPercent = 100;
+        long nextClamp = 10L;
+        long startPower = clampStart;
+        long usedPercent = clampPercent;
+        for(; startPower > 0L; startPower--)
+            nextClamp *= 10L;
+
+        for(; preApplied > 0; preApplied--)
+            nextClamp = nextMagnitude(nextClamp);
+
+        while(base > nextClamp && nextClamp < 0xcccccccccccccccL) 
+        {
+            nextClamp = nextMagnitude(nextClamp);
+            change /= 2L;
+        }
+        while(base + change > nextClamp && nextClamp < 0xcccccccccccccccL) 
+        {
+            if(nextClamp >= 0xe8d4a51000L && usedPercent > 50L)
+                usedPercent = 50L;
+            long remainder = (base + change) - nextClamp;
+            if(remainder >= 0x147ae147ae147aeL)
+                remainder = (remainder / 100L) * usedPercent;
+            else
+                remainder = (remainder * usedPercent) / 100L;
+            change = (remainder + nextClamp) - base;
+            if(nextClamp == nextMagnitude(nextClamp))
+                nextClamp = 0x7fffffffffffffffL;
+            else
+                nextClamp = nextMagnitude(nextClamp);
+        }
+        return change;
+    }
+
+    public long nextMagnitude(long number)
+    {
+        if(number < 0xcccccccccccccccL)
+            number *= 10L;
+        return number;
+    }
+
     public void synchSurroundDurations(Chosen c[])
     {
         int durations[] = new int[c.length];
@@ -162,6 +226,7 @@ public class WorldState
             {
                 techs[i] = new Tech();
                 techs[i].initialize(i, this);
+                techs[i].assignTooltip(i, this);
                 if(i < oldTechs.length && oldTechs[i].isOwned().booleanValue())
                     techs[i].owned = Boolean.valueOf(true);
             }
@@ -228,10 +293,22 @@ public class WorldState
                 }
 
         }
+        if(lastOrgyStage == null)
+        {
+            lastOrgyStage = new int[3];
+            adjusted = Boolean.valueOf(true);
+        }
+        if(techs[0].getTooltip() == null)
+        {
+            for(int i = 0; i < techs.length; i++)
+                techs[i].assignTooltip(i, this);
+
+            adjusted = Boolean.valueOf(true);
+        }
         if(version == null)
             adjusted = Boolean.valueOf(true);
         else
-        if(!version.equals("9"))
+        if(!version.equals("11"))
             adjusted = Boolean.valueOf(true);
         if(adjusted.booleanValue())
         {
@@ -242,7 +319,7 @@ public class WorldState
             }
             highScore = 0L;
             parScore = 0L;
-            version = "10";
+            version = "11";
         }
     }
 
@@ -1115,13 +1192,13 @@ public class WorldState
             path = path.substring(0, path.length() - fileName.length() - 1);
             path = URLDecoder.decode(path, "UTF-8");
             path = path.replaceAll("file:/", "");
-            path = path.replaceAll("\\u0020", "\\ ");
-            File saveLocation = new File((new StringBuilder(String.valueOf(path))).append("\\saves.sav").toString());
+            path = path.replaceAll((new StringBuilder(String.valueOf(File.separator))).append("u0020").toString(), (new StringBuilder(String.valueOf(File.separator))).append(" ").toString());
+            File saveLocation = new File((new StringBuilder(String.valueOf(path))).append(File.separator).append("saves.sav").toString());
             SaveData saves = null;
             if(saveLocation.exists())
             {
                 ReadObject robj = new ReadObject();
-                saves = robj.deserializeSaveData((new StringBuilder(String.valueOf(path))).append("\\saves.sav").toString());
+                saves = robj.deserializeSaveData((new StringBuilder(String.valueOf(path))).append(File.separator).append("saves.sav").toString());
             } else
             {
                 saves = new SaveData();
@@ -4003,6 +4080,7 @@ public class WorldState
         {
             techs[i] = new Tech();
             techs[i].initialize(i, this);
+            techs[i].assignTooltip(i, this);
         }
 
         for(int i = 0; i < bodyStatus.length; i++)
@@ -4044,6 +4122,7 @@ public class WorldState
         {
             techs[i] = new Tech();
             techs[i].initialize(i, this);
+            techs[i].assignTooltip(i, this);
         }
 
         techs[0].buy(this);
@@ -4120,6 +4199,7 @@ public class WorldState
         {
             techs[i] = new Tech();
             techs[i].initialize(i, this);
+            techs[i].assignTooltip(i, this);
         }
 
         for(int i = 0; i < bodyStatus.length; i++)
@@ -4391,7 +4471,7 @@ public class WorldState
                         base += (exterminationPerChosen * usedExterminationMultiplier) / 100;
                         possible += currentCombatants[i].FEARMulti() / 12;
                     } else
-                    if(currentCombatants[i].getSurroundDuration() == 1 || currentCombatants[i].getCaptureProgression() == captureDuration || currentCombatants[i].timesDetonated() > 0 && currentCombatants[i].getCaptureProgression() + currentCombatants[i].getINJULevel() + 1 >= captureDuration)
+                    if(currentCombatants[i].getSurroundDuration() == 1 || currentCombatants[i].isCaptured().booleanValue() && (currentCombatants[i].getCaptureProgression() == captureDuration || currentCombatants[i].timesDetonated() > 0 && currentCombatants[i].getCaptureProgression() + currentCombatants[i].getINJULevel() + 1 >= captureDuration))
                     {
                         int usedExterminationMultiplier = exterminationMultiplier;
                         if(evacuationProgress >= evacuationComplete)
@@ -4718,6 +4798,7 @@ public class WorldState
         {
             techs[i] = new Tech();
             techs[i].initialize(i, this);
+            techs[i].assignTooltip(i, this);
         }
 
         for(int i = 0; i < bodyStatus.length; i++)
@@ -7033,13 +7114,13 @@ public class WorldState
                     ex.printStackTrace();
                 }
                 path = path.replaceAll("file:/", "");
-                path = path.replaceAll("\\u0020", "\\ ");
-                File saveLocation = new File((new StringBuilder(String.valueOf(path))).append("\\saves.sav").toString());
+                path = path.replaceAll((new StringBuilder(String.valueOf(File.separator))).append("u0020").toString(), (new StringBuilder(String.valueOf(File.separator))).append(" ").toString());
+                File saveLocation = new File((new StringBuilder(String.valueOf(path))).append(File.separator).append("saves.sav").toString());
                 SaveData saves = null;
                 if(saveLocation.exists())
                 {
                     ReadObject robj = new ReadObject();
-                    saves = robj.deserializeSaveData((new StringBuilder(String.valueOf(path))).append("\\saves.sav").toString());
+                    saves = robj.deserializeSaveData((new StringBuilder(String.valueOf(path))).append(File.separator).append("saves.sav").toString());
                 } else
                 {
                     saves = new SaveData();
@@ -8651,7 +8732,7 @@ public class WorldState
     public WorldState()
     {
         textSize = 16;
-        version = "10";
+        version = "11";
         PURPLE = new Color(100, 0, 150);
         ORANGE = new Color(200, 100, 0);
         RED = new Color(180, 0, 0);
@@ -8698,6 +8779,8 @@ public class WorldState
         arrivalTimer = new int[3];
         readyToEnd = Boolean.valueOf(false);
         barrierMulti = 10000L;
+        clampStart = 11;
+        clampPercent = 100;
         bodyStatus = new Boolean[19];
         tutorial = Boolean.valueOf(false);
         onTrack = Boolean.valueOf(true);
@@ -8716,6 +8799,8 @@ public class WorldState
         customIncantations = new String[3];
         personalityWeights = new int[24][3][8];
         quizAnswers = new String[24];
+        orgyStage = 0;
+        lastOrgyStage = new int[3];
     }
 
     private static final long serialVersionUID = 4L;
@@ -8783,6 +8868,8 @@ public class WorldState
     int arrivalTimer[];
     Boolean readyToEnd;
     long barrierMulti;
+    int clampStart;
+    int clampPercent;
     Boolean bodyStatus[];
     Boolean tutorial;
     Boolean onTrack;
@@ -8846,4 +8933,6 @@ public class WorldState
     };
     int personalityWeights[][][];
     String quizAnswers[];
+    int orgyStage;
+    int lastOrgyStage[];
 }

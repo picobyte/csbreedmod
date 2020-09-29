@@ -31,12 +31,12 @@ public class WriteObject
             path = path.substring(0, path.length() - fileName.length() - 1);
             path = URLDecoder.decode(path, "UTF-8");
             path = path.replaceAll("file:/", "");
-            path = path.replaceAll("\\u0020", "\\ ");
+            path = path.replaceAll((new StringBuilder(String.valueOf(File.separator))).append("u0020").toString(), (new StringBuilder(String.valueOf(File.separator))).append(" ").toString());
             w.setSaveTitle(saveName);
-            fout = new FileOutputStream((new StringBuilder(String.valueOf(path))).append("\\").append(saveName).append(".par").toString());
+            fout = new FileOutputStream((new StringBuilder(String.valueOf(path))).append(File.separator).append(saveName).append(".par").toString());
             oos = new ObjectOutputStream(fout);
             oos.writeObject(w);
-            break MISSING_BLOCK_LABEL_294;
+            break MISSING_BLOCK_LABEL_333;
         }
         catch(Exception ex)
         {
@@ -60,7 +60,7 @@ public class WriteObject
             {
                 e.printStackTrace();
             }
-        break MISSING_BLOCK_LABEL_332;
+        break MISSING_BLOCK_LABEL_371;
         Exception exception;
         exception;
         if(fout != null)
@@ -121,11 +121,11 @@ public class WriteObject
             path = path.substring(0, path.length() - fileName.length() - 1);
             path = URLDecoder.decode(path, "UTF-8");
             path = path.replaceAll("file:/", "");
-            path = path.replaceAll("\\u0020", "\\ ");
-            fout = new FileOutputStream((new StringBuilder(String.valueOf(path))).append("\\saves.sav").toString());
+            path = path.replaceAll((new StringBuilder(String.valueOf(File.separator))).append("u0020").toString(), (new StringBuilder(String.valueOf(File.separator))).append(" ").toString());
+            fout = new FileOutputStream((new StringBuilder(String.valueOf(path))).append(File.separator).append("saves.sav").toString());
             oos = new ObjectOutputStream(fout);
             oos.writeObject(s);
-            break MISSING_BLOCK_LABEL_273;
+            break MISSING_BLOCK_LABEL_317;
         }
         catch(Exception ex)
         {
@@ -149,7 +149,7 @@ public class WriteObject
             {
                 e.printStackTrace();
             }
-        break MISSING_BLOCK_LABEL_309;
+        break MISSING_BLOCK_LABEL_353;
         Exception exception;
         exception;
         if(fout != null)

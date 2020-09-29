@@ -22,6 +22,7 @@ public class ReadObject
         fin = null;
         ois = null;
         String path = Project.getProtectionDomain().getCodeSource().getLocation().getPath();
+        System.out.println(path);
         String fileName = "";
         for(int i = path.length() - 1; i >= 0; i--)
             if(path.charAt(i) != '/')
@@ -39,7 +40,7 @@ public class ReadObject
             ex.printStackTrace();
         }
         path = path.replaceAll("file:/", "");
-        path = path.replaceAll("\\u0020", "\\ ");
+        path = path.replaceAll((new StringBuilder(String.valueOf(File.separator))).append("u0020").toString(), (new StringBuilder(String.valueOf(File.separator))).append(" ").toString());
         File f = new File(path);
         matchingFiles = f.listFiles(new FilenameFilter() {
 
@@ -67,7 +68,7 @@ public class ReadObject
             }
 
             worlds = newWorlds;
-            break MISSING_BLOCK_LABEL_334;
+            break MISSING_BLOCK_LABEL_380;
         }
         catch(Exception ex)
         {
@@ -91,7 +92,7 @@ public class ReadObject
             {
                 e.printStackTrace();
             }
-        break MISSING_BLOCK_LABEL_370;
+        break MISSING_BLOCK_LABEL_416;
         Exception exception;
         exception;
         if(fin != null)
