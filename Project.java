@@ -81,7 +81,7 @@ public class Project extends JFrame
         p.getActionMap().clear();
         if(!t.getBackground().equals(w.BACKGROUND))
             w.toggleColors(t);
-        w.append(t, (new StringBuilder("Corrupted Saviors, Release 11b: \"Mitigation\"\n\nThis game contains content of an adult nature and should not be played by the underaged or by those unable to distinguish fantasy from reality.\n\n")).append(w.getSeparator()).append("\n\nJapan, mid-21st century.  The psychic energies of humanity have finally begun to coalesce into physical form.  The resulting beings are known as Demons.  Born from the base desires suppressed deep within the human mind, these creatures spread across the planet, leaving chaos and depravity in their wake.\n\nBut Demons do not represent the entirety of the human condition.  The hopes and determination of humanity have also risen up, gathering in the bodies of a few Chosen warriors in order to grant them the power to fight the Demons.  Although each of them was once an ordinary person, their new abilities place them at the center of the struggle for the soul of humanity.\n\nYou are a Demon Lord, the highest form of Demon, with your own mind and will, focused on the corruption of all that is good in the world.  The Chosen are the keystone of humanity's resistance to your goal, but to simply kill them would be meaningless.  Instead, shatter their notions of right and wrong, showing them the true darkness that hides within!").toString());
+        w.append(t, (new StringBuilder("Corrupted Saviors, Release 12: \"Punishment\"\n\nThis game contains content of an adult nature and should not be played by the underaged or by those unable to distinguish fantasy from reality.\n\n")).append(w.getSeparator()).append("\n\nJapan, mid-21st century.  The psychic energies of humanity have finally begun to coalesce into physical form.  The resulting beings are known as Demons.  Born from the base desires suppressed deep within the human mind, these creatures spread across the planet, leaving chaos and depravity in their wake.\n\nBut Demons do not represent the entirety of the human condition.  The hopes and determination of humanity have also risen up, gathering in the bodies of a few Chosen warriors in order to grant them the power to fight the Demons.  Although each of them was once an ordinary person, their new abilities place them at the center of the struggle for the soul of humanity.\n\nYou are a Demon Lord, the highest form of Demon, with your own mind and will, focused on the corruption of all that is good in the world.  The Chosen are the keystone of humanity's resistance to your goal, but to simply kill them would be meaningless.  Instead, shatter their notions of right and wrong, showing them the true darkness that hides within!").toString());
         if(w.getCast()[0] == null)
         {
             Chosen newChosen = new Chosen();
@@ -3641,7 +3641,7 @@ public class Project extends JFrame
                 Surround.getActionMap().put("pressed", SurroundAction);
                 p.add(Surround);
             }
-            if((!c.surroundPossible(w).booleanValue() || w.upgradedCommander().booleanValue()) && w.getCapturesPossible() > 0 && c.getDefenseLevel() < 9000 && w.commanderFree().booleanValue())
+            if((!c.surroundPossible(w).booleanValue() || w.upgradedCommander().booleanValue()) && w.getCapturesPossible() > 0 && (c.getDefenseLevel() < 9000 || w.getBodyStatus()[24].booleanValue()) && w.commanderFree().booleanValue())
             {
                 JButton Capture = new JButton(CaptureAction) {
 
@@ -3653,6 +3653,18 @@ public class Project extends JFrame
                 };
                 Capture.setBackground(PURPLISH);
                 String description = "<html><center>Constantly inflicts ";
+                if(w.getBodyStatus()[19].booleanValue())
+                    description = (new StringBuilder(String.valueOf(description))).append("HATE along with<br>FEAR, DISG, ").append(PAINname).append(", and SHAM").toString();
+                else
+                if(w.getBodyStatus()[20].booleanValue())
+                    description = (new StringBuilder(String.valueOf(description))).append("PLEA along with<br>DISG, ").append(PAINname).append(", SHAM, and FEAR").toString();
+                else
+                if(w.getBodyStatus()[21].booleanValue())
+                    description = (new StringBuilder(String.valueOf(description))).append(INJUname).append(" along with<br>").append(PAINname).append(", SHAM, FEAR, and DISG").toString();
+                else
+                if(w.getBodyStatus()[22].booleanValue())
+                    description = (new StringBuilder(String.valueOf(description))).append("EXPO along with<br>SHAM, FEAR, DISG, and ").append(PAINname).toString();
+                else
                 if(w.getBodyStatus()[18].booleanValue())
                 {
                     String damages[] = new String[3];
@@ -3789,6 +3801,17 @@ public class Project extends JFrame
                 else
                 if(w.getBodyStatus()[14].booleanValue())
                     description = (new StringBuilder(String.valueOf(description))).append("<br>Above 10k EXPO, causes tier-2 Dignity Break").toString();
+                if(w.getBodyStatus()[19].booleanValue())
+                    description = (new StringBuilder(String.valueOf(description))).append("<br>Above 1000% Impregnation effectiveness, causes Total Morality Break").toString();
+                else
+                if(w.getBodyStatus()[20].booleanValue())
+                    description = (new StringBuilder(String.valueOf(description))).append("<br>Above 1000% Hypnosis effectiveness, causes Total Innocence Break").toString();
+                else
+                if(w.getBodyStatus()[21].booleanValue())
+                    description = (new StringBuilder(String.valueOf(description))).append("<br>Above 1000% Drain effectiveness, causes Total Confidence Break").toString();
+                else
+                if(w.getBodyStatus()[22].booleanValue())
+                    description = (new StringBuilder(String.valueOf(description))).append("<br>Above 1000% Parasitism effectiveness, causes Total Dignity Break").toString();
                 description = (new StringBuilder(String.valueOf(description))).append("</center></html>").toString();
                 Capture.setToolTipText(description);
                 Capture.getInputMap(2).put(KeyStroke.getKeyStroke(67, 0), "pressed");
@@ -5246,7 +5269,7 @@ public class Project extends JFrame
         w.incrementDay();
         w.clearCommander();
         int lastChosen = 0;
-        int totalActions = 17;
+        int totalActions = 21;
         long actionWeights[][] = new long[3][totalActions];
         final int chosenAction[] = {
             -1, -1, -1
@@ -5359,6 +5382,25 @@ public class Project extends JFrame
                 actionWeights[i][16] = (sham * 1000L + fear * 500L + pain * 250L + angst * 100L) / (long)(100 + w.getCast()[i].getMorality()) - inhibition;
             else
                 actionWeights[i][16] = 0L;
+            inhibition = 0xb5e620f48000L;
+            if(divided.booleanValue())
+                inhibition /= divisor;
+            if(w.getCast()[i].isImpregnated().booleanValue())
+                actionWeights[i][17] = (fear * 2000L + pain * 1000L + sham * 500L + angst * 250L) / (long)(100 + w.getCast()[i].getMorality()) - inhibition;
+            else
+                actionWeights[i][17] = 0L;
+            if(w.getCast()[i].isHypnotized().booleanValue())
+                actionWeights[i][18] = (disg * 2000L + fear * 1000L + pain * 500L + angst * 250L) / (long)(100 + w.getCast()[i].getMorality()) - inhibition;
+            else
+                actionWeights[i][18] = 0L;
+            if(w.getCast()[i].isDrained().booleanValue())
+                actionWeights[i][19] = (pain * 2000L + sham * 1000L + disg * 500L + angst * 250L) / (long)(100 + w.getCast()[i].getMorality()) - inhibition;
+            else
+                actionWeights[i][19] = 0L;
+            if(w.getCast()[i].isParasitized().booleanValue())
+                actionWeights[i][20] = (sham * 2000L + disg * 1000L + fear * 500L + angst * 250L) / (long)(100 + w.getCast()[i].getMorality()) - inhibition;
+            else
+                actionWeights[i][20] = 0L;
             long highestWeight = 0L;
             for(int j = 0; j < actionWeights[i].length; j++)
                 if(actionWeights[i][j] > highestWeight)
@@ -7373,7 +7415,11 @@ public class Project extends JFrame
             if(w.getTechs()[22].isOwned().booleanValue() || w.getTechs()[23].isOwned().booleanValue() || w.getTechs()[24].isOwned().booleanValue() || w.getTechs()[25].isOwned().booleanValue())
                 defilerKnown = Boolean.valueOf(true);
             final int suppressorsUsedFinal = suppressorsUsed;
-            if(suppressorsKnown > 0 && suppressorsUsed == 0 && (!defilerUsed.booleanValue() || w.getTechs()[33].isOwned().booleanValue() && w.getEvilEnergy() >= 10) || suppressorsKnown > 1 && suppressorsUsed == 1 && w.getEvilEnergy() >= 5 && w.getTechs()[21].isOwned().booleanValue() && !defilerUsed.booleanValue())
+            Boolean punisherUsed = Boolean.valueOf(w.getBodyStatus()[19].booleanValue() || w.getBodyStatus()[20].booleanValue() || w.getBodyStatus()[21].booleanValue() || w.getBodyStatus()[22].booleanValue());
+            Boolean punisherKnown = Boolean.valueOf(false);
+            if(w.getTechs()[34].isOwned().booleanValue() || w.getTechs()[35].isOwned().booleanValue() || w.getTechs()[36].isOwned().booleanValue() || w.getTechs()[37].isOwned().booleanValue())
+                punisherKnown = Boolean.valueOf(true);
+            if(!punisherUsed.booleanValue() && (suppressorsKnown > 0 && suppressorsUsed == 0 && (!defilerUsed.booleanValue() || w.getTechs()[33].isOwned().booleanValue() && w.getEvilEnergy() >= 10) || suppressorsKnown > 1 && suppressorsUsed == 1 && w.getEvilEnergy() >= 5 && w.getTechs()[21].isOwned().booleanValue() && !defilerUsed.booleanValue()))
             {
                 JButton Suppressor = new JButton("Suppressor Upgrades");
                 Suppressor.addActionListener(new ActionListener() {
@@ -7583,7 +7629,7 @@ public class Project extends JFrame
                 });
                 p.add(Suppressor);
             }
-            if(defilerKnown.booleanValue() && !defilerUsed.booleanValue() && (suppressorsUsed == 0 || suppressorsUsed == 1 && w.getTechs()[33].isOwned().booleanValue() && w.getEvilEnergy() >= 16) && w.getEvilEnergy() >= 6)
+            if(!punisherUsed.booleanValue() && defilerKnown.booleanValue() && !defilerUsed.booleanValue() && (suppressorsUsed == 0 || suppressorsUsed == 1 && w.getTechs()[33].isOwned().booleanValue() && w.getEvilEnergy() >= 16) && w.getEvilEnergy() >= 6)
             {
                 JButton Defiler = new JButton("Defiler Upgrades");
                 Defiler.addActionListener(new ActionListener() {
@@ -7775,6 +7821,176 @@ public class Project extends JFrame
                 });
                 p.add(Defiler);
             }
+            if(!punisherUsed.booleanValue() && punisherKnown.booleanValue() && !defilerUsed.booleanValue() && suppressorsUsed == 0)
+            {
+                JButton Punisher = new JButton("Punisher Upgrades");
+                Punisher.addActionListener(new ActionListener() {
+
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        p.removeAll();
+                        if(w.getTechs()[34].isOwned().booleanValue())
+                        {
+                            JButton Impregnation = new JButton("Impregnation");
+                            Impregnation.addActionListener(new ActionListener() {
+
+                                public void actionPerformed(ActionEvent e)
+                                {
+                                    w.applyImpregnation();
+                                    Project.Customize(t, p, f, w);
+                                }
+
+                                final _cls89 this$1;
+                                private final WorldState val$w;
+                                private final JTextPane val$t;
+                                private final JPanel val$p;
+                                private final JFrame val$f;
+
+                    
+                    {
+                        this$1 = _cls89.this;
+                        w = worldstate;
+                        t = jtextpane;
+                        p = jpanel;
+                        f = jframe;
+                        super();
+                    }
+                            });
+                            p.add(Impregnation);
+                        }
+                        if(w.getTechs()[35].isOwned().booleanValue())
+                        {
+                            JButton Hypnosis = new JButton("Hypnosis");
+                            Hypnosis.addActionListener(new ActionListener() {
+
+                                public void actionPerformed(ActionEvent e)
+                                {
+                                    w.applyHypnosis();
+                                    Project.Customize(t, p, f, w);
+                                }
+
+                                final _cls89 this$1;
+                                private final WorldState val$w;
+                                private final JTextPane val$t;
+                                private final JPanel val$p;
+                                private final JFrame val$f;
+
+                    
+                    {
+                        this$1 = _cls89.this;
+                        w = worldstate;
+                        t = jtextpane;
+                        p = jpanel;
+                        f = jframe;
+                        super();
+                    }
+                            });
+                            p.add(Hypnosis);
+                        }
+                        if(w.getTechs()[36].isOwned().booleanValue())
+                        {
+                            JButton Drain = new JButton("Drain");
+                            Drain.addActionListener(new ActionListener() {
+
+                                public void actionPerformed(ActionEvent e)
+                                {
+                                    w.applyDrain();
+                                    Project.Customize(t, p, f, w);
+                                }
+
+                                final _cls89 this$1;
+                                private final WorldState val$w;
+                                private final JTextPane val$t;
+                                private final JPanel val$p;
+                                private final JFrame val$f;
+
+                    
+                    {
+                        this$1 = _cls89.this;
+                        w = worldstate;
+                        t = jtextpane;
+                        p = jpanel;
+                        f = jframe;
+                        super();
+                    }
+                            });
+                            p.add(Drain);
+                        }
+                        if(w.getTechs()[37].isOwned().booleanValue())
+                        {
+                            JButton Parasitism = new JButton("Parasitism");
+                            Parasitism.addActionListener(new ActionListener() {
+
+                                public void actionPerformed(ActionEvent e)
+                                {
+                                    w.applyParasitism();
+                                    Project.Customize(t, p, f, w);
+                                }
+
+                                final _cls89 this$1;
+                                private final WorldState val$w;
+                                private final JTextPane val$t;
+                                private final JPanel val$p;
+                                private final JFrame val$f;
+
+                    
+                    {
+                        this$1 = _cls89.this;
+                        w = worldstate;
+                        t = jtextpane;
+                        p = jpanel;
+                        f = jframe;
+                        super();
+                    }
+                            });
+                            p.add(Parasitism);
+                        }
+                        JButton Cancel = new JButton("Cancel");
+                        Cancel.addActionListener(new ActionListener() {
+
+                            public void actionPerformed(ActionEvent e)
+                            {
+                                Project.Customize(t, p, f, w);
+                            }
+
+                            final _cls89 this$1;
+                            private final JTextPane val$t;
+                            private final JPanel val$p;
+                            private final JFrame val$f;
+                            private final WorldState val$w;
+
+                    
+                    {
+                        this$1 = _cls89.this;
+                        t = jtextpane;
+                        p = jpanel;
+                        f = jframe;
+                        w = worldstate;
+                        super();
+                    }
+                        });
+                        p.add(Cancel);
+                        p.validate();
+                        p.repaint();
+                        w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\nWhich upgrade will you apply?").toString());
+                    }
+
+                    private final JPanel val$p;
+                    private final WorldState val$w;
+                    private final JTextPane val$t;
+                    private final JFrame val$f;
+
+            
+            {
+                p = jpanel;
+                w = worldstate;
+                t = jtextpane;
+                f = jframe;
+                super();
+            }
+                });
+                p.add(Punisher);
+            }
             if(w.getTechs()[8].isOwned().booleanValue() && !w.getBodyStatus()[1].booleanValue() && w.getEvilEnergy() >= 1)
             {
                 JButton Enhance = new JButton("Enhance Duration (1)");
@@ -7963,6 +8179,60 @@ public class Project extends JFrame
             }
                 });
                 p.add(AddCapture);
+            }
+            if(w.getTechs()[38].isOwned().booleanValue() && w.getBodyStatus()[17].booleanValue() && !w.getBodyStatus()[23].booleanValue() && w.getEvilEnergy() >= 20)
+            {
+                JButton AddCapture = new JButton("Extra Capture (4)");
+                AddCapture.addActionListener(new ActionListener() {
+
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        w.addCaptureFour();
+                        Project.Customize(t, p, f, w);
+                    }
+
+                    private final WorldState val$w;
+                    private final JTextPane val$t;
+                    private final JPanel val$p;
+                    private final JFrame val$f;
+
+            
+            {
+                w = worldstate;
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                super();
+            }
+                });
+                p.add(AddCapture);
+            }
+            if(w.getTechs()[39].isOwned().booleanValue() && !w.getBodyStatus()[24].booleanValue() && w.getEvilEnergy() >= 10)
+            {
+                JButton Flight = new JButton("Flight");
+                Flight.addActionListener(new ActionListener() {
+
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        w.applyRelentlessness();
+                        Project.Customize(t, p, f, w);
+                    }
+
+                    private final WorldState val$w;
+                    private final JTextPane val$t;
+                    private final JPanel val$p;
+                    private final JFrame val$f;
+
+            
+            {
+                w = worldstate;
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                super();
+            }
+                });
+                p.add(Flight);
             }
             if(w.getTechs()[9].isOwned().booleanValue())
             {
@@ -8356,7 +8626,7 @@ public class Project extends JFrame
                                 Project.BeginBattle(t, p, f, w, c);
                             }
 
-                            final _cls101 this$1;
+                            final _cls104 this$1;
                             private final WorldState val$w;
                             private final JPanel val$p;
                             private final Chosen val$c;
@@ -8366,7 +8636,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls101.this;
+                        this$1 = _cls104.this;
                         w = worldstate;
                         p = jpanel;
                         c = chosen;
@@ -8385,7 +8655,7 @@ public class Project extends JFrame
                                 Project.Shop(t, p, f, w);
                             }
 
-                            final _cls101 this$1;
+                            final _cls104 this$1;
                             private final JTextPane val$t;
                             private final JPanel val$p;
                             private final JFrame val$f;
@@ -8393,7 +8663,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls101.this;
+                        this$1 = _cls104.this;
                         t = jtextpane;
                         p = jpanel;
                         f = jframe;

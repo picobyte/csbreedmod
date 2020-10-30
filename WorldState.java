@@ -17,6 +17,3352 @@ public class WorldState
     implements Serializable
 {
 
+    public void Orgy(JTextPane t, JPanel p, JFrame f, Chosen c)
+    {
+        WorldState w = this;
+        String topDesc = c.topCover;
+        int morality = c.morality;
+        int innocence = c.innocence;
+        int confidence = c.confidence;
+        int dignity = c.dignity;
+        Boolean vVirg = c.vVirg;
+        Boolean cVirg = c.cVirg;
+        Boolean aVirg = c.aVirg;
+        Boolean modest = c.modest;
+        String mainName = c.getMainName();
+        String bottomCover = c.bottomCover;
+        if(topDesc.equals("crop"))
+            topDesc = "crop top";
+        else
+        if(topDesc.equals("strips"))
+            topDesc = "strips of cloth";
+        String bottomDesc = c.bottomCover;
+        String topCover = c.topCover;
+        String feetType = c.feetType;
+        String underType = c.underType;
+        String bottomAccess = c.bottomAccess;
+        if(bottomDesc.equals("strips"))
+            bottomDesc = "strips of cloth";
+        String hole = "pussy";
+        if(c.getGender().equals("male"))
+            hole = "anus";
+        String organ = "penis";
+        if(c.getGender().equals("female"))
+            organ = "clit";
+        int thisAttack = c.nextAttack[0];
+        c.nextAttack[0] = c.nextAttack[1];
+        c.nextAttack[1] = c.nextAttack[2];
+        c.nextAttack[2] = thisAttack;
+        Chosen high = null;
+        Chosen mid = null;
+        Chosen low = null;
+        for(int i = 0; i < 3; i++)
+            if(w.getCast()[i].getConfidence() > 66)
+                high = w.getCast()[i];
+            else
+            if(w.getCast()[i].getConfidence() > 33)
+                mid = w.getCast()[i];
+            else
+                low = w.getCast()[i];
+
+        int variant = w.getOrgyStage();
+        int valueCheck = 0;
+        int order = 0;
+        if(c.confidence > 66)
+            order = 0;
+        else
+        if(c.confidence > 33)
+            order = 1;
+        else
+            order = 2;
+        valueCheck = w.getLastOrgyStage()[order];
+        if(valueCheck == variant)
+        {
+            w.cycleOrgyStage();
+            variant = w.getOrgyStage();
+        }
+        for(Boolean variantFound = Boolean.valueOf(false); !variantFound.booleanValue();)
+            if((c.vVirg.booleanValue() || c.getHATELevel() < 3) && (c.cVirg.booleanValue() || c.getPLEALevel() < 3) && (c.aVirg.booleanValue() || c.getINJULevel() < 3) && (c.modest.booleanValue() || c.getEXPOLevel() < 3))
+            {
+                variant = 4;
+                variantFound = Boolean.valueOf(true);
+            } else
+            if(variant == 0 && !c.vVirg.booleanValue() && c.getHATELevel() >= 3 || variant == 1 && !c.cVirg.booleanValue() && c.getPLEALevel() >= 3 || variant == 2 && !c.aVirg.booleanValue() && c.getINJULevel() >= 3 || variant == 3 && !c.modest.booleanValue() && c.getEXPOLevel() >= 3)
+            {
+                variantFound = Boolean.valueOf(true);
+            } else
+            {
+                w.cycleOrgyStage();
+                variant = w.getOrgyStage();
+            }
+
+        Boolean solo = Boolean.valueOf(true);
+        Boolean trio = Boolean.valueOf(false);
+        Chosen partner = null;
+        Boolean hated = Boolean.valueOf(true);
+        Boolean loved = Boolean.valueOf(false);
+        Chosen lover = null;
+        for(int i = 0; i < 3; i++)
+            if(w.getCast()[i] != c)
+            {
+                if(variant == 0 && w.getCast()[i].getHATELevel() >= 3 && !w.getCast()[i].isVVirg() || variant == 1 && w.getCast()[i].getPLEALevel() >= 3 && !w.getCast()[i].isCVirg() || variant == 2 && w.getCast()[i].getINJULevel() >= 3 && !w.getCast()[i].isAVirg() || variant == 3 && w.getCast()[i].getEXPOLevel() >= 3 && !w.getCast()[i].isModest())
+                    if(partner == null)
+                    {
+                        partner = w.getCast()[i];
+                        solo = Boolean.valueOf(false);
+                    } else
+                    {
+                        trio = Boolean.valueOf(true);
+                    }
+                if(w.getRelationship(c.number, w.getCast()[i].getNumber()) >= 0)
+                    if(lover == null)
+                    {
+                        lover = w.getCast()[i];
+                        hated = Boolean.valueOf(false);
+                    } else
+                    {
+                        loved = Boolean.valueOf(true);
+                    }
+            }
+
+        if(c.confidence > 66)
+        {
+            if(variant == 0)
+            {
+                if(c.getEXPOLevel() < 3 || c.modest.booleanValue())
+                {
+                    if(dignity > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" glares indignantly at the Thralls pulling aside ").append(c.hisHer()).append(" ").append(bottomDesc).toString());
+                    else
+                    if(dignity > 33)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" struggles with all ").append(c.hisHer()).append(" strength, giving pause to the Thralls pulling aside ").append(c.hisHer()).append(" ").append(bottomDesc).toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" kicks and screams at the Thralls pulling aside ").append(c.hisHer()).append(" ").append(bottomDesc).toString());
+                } else
+                if(dignity > 66)
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" blushes bright red from anger and indignation as the Thralls bring their cameras close to ").append(c.hisHer()).append(" crotch").toString());
+                else
+                if(dignity > 33)
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" struggles with all ").append(c.hisHer()).append(" strength, giving pause to the Thralls spreading ").append(c.hisHer()).append(" legs in order to film ").append(c.hisHer()).append(" crotch").toString());
+                else
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" kicks and screams at the Thralls bringing their cameras close to ").append(c.hisHer()).append(" crotch").toString());
+                String another = "one of the Thralls ";
+                if(c.getINJULevel() < 3 || aVirg.booleanValue())
+                {
+                    if(morality > 66)
+                        w.append(t, (new StringBuilder(", eyes focused and determined.  However, ")).append(c.heShe()).append(" ").toString());
+                    else
+                    if(morality > 33)
+                        w.append(t, (new StringBuilder(", not even close to giving up.  However, ")).append(c.heShe()).append(" ").toString());
+                    else
+                        w.append(t, (new StringBuilder(", eyes full of rage and hatred.  However, ")).append(c.heShe()).append(" ").toString());
+                } else
+                if(w.tickle().booleanValue())
+                {
+                    if(morality > 66)
+                        w.append(t, (new StringBuilder(", but ")).append(c.hisHer()).append(" heroic demeanor is shattered when the Thralls start tickling ").append(c.himHer()).append(", drawing out shrieks of laughter.  ").toString());
+                    else
+                    if(morality > 33)
+                        w.append(t, (new StringBuilder(", but then the Thralls start tickling ")).append(c.himHer()).append(", causing ").append(c.himHer()).append(" to burst into helpless laughter that's very unlike ").append(c.hisHer()).append(" normal severe expression.  ").toString());
+                    else
+                        w.append(t, (new StringBuilder(", but then the Thralls start tickling ")).append(c.himHer()).append(", and ").append(c.hisHer()).append(" bloodthirsty expression melts into helpless laughter.  ").toString());
+                    w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" ").toString());
+                } else
+                if(c.getGender().equals("male"))
+                {
+                    if(morality > 66)
+                        w.append(t, (new StringBuilder(", only to start cursing and screaming openly when the Thralls start stomping on ")).append(c.hisHer()).append(" penis.  ").toString());
+                    else
+                    if(morality > 33)
+                        w.append(t, (new StringBuilder(", grunting in pain and struggling to keep ")).append(c.hisHer()).append(" cool as the Thralls viciously stomp on ").append(c.hisHer()).append(" penis.  ").toString());
+                    else
+                        w.append(t, (new StringBuilder(", shouting threats that devolve into cries of pain as the Thralls stomp on ")).append(c.hisHer()).append(" penis.  ").toString());
+                    w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" ").toString());
+                } else
+                {
+                    if(morality > 66)
+                        w.append(t, (new StringBuilder(", only to start wailing openly when one of the Thralls pushes his cock into ")).append(c.hisHer()).append(" ass.  ").toString());
+                    else
+                    if(morality > 33)
+                        w.append(t, (new StringBuilder(", grunting in pain and struggling to keep ")).append(c.hisHer()).append(" cool as ").append(c.heShe()).append(" feels one of the Thralls' cocks begin forcing its way up ").append(c.hisHer()).append(" ass.  ").toString());
+                    else
+                        w.append(t, (new StringBuilder(", shouting threats that devolve into pitiful squeals as one of the Thralls forces himself further and further up ")).append(c.hisHer()).append(" ass.  ").toString());
+                    w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" ").toString());
+                    another = "another Thrall ";
+                }
+                if(c.getPLEALevel() < 3 || cVirg.booleanValue())
+                {
+                    if(innocence > 66)
+                        w.append(t, (new StringBuilder("screams as ")).append(another).append("penetrates ").append(c.hisHer()).append(" ").append(hole).append(", vainly calling him names and trying to push him away.  ").toString());
+                    else
+                    if(innocence > 33)
+                        w.append(t, (new StringBuilder("grits ")).append(c.hisHer()).append(" teeth as ").append(c.heShe()).append(" endures ").append(another).append("fucking ").append(c.hisHer()).append(" ").append(hole).append(".  ").toString());
+                    else
+                        w.append(t, (new StringBuilder("huffs in indignation when ")).append(another).append("begins to slowly penetrate ").append(c.hisHer()).append(" ").append(hole).append(", doing ").append(c.hisHer()).append(" best to ignore the unwelcome violation and search for a way to escape.  ").toString());
+                } else
+                if(innocence > 66)
+                    w.append(t, (new StringBuilder("cums instantly when ")).append(another).append("starts fucking ").append(c.hisHer()).append(" ").append(hole).append(", too caught up in the pleasure to care about resisting anymore.  ").toString());
+                else
+                if(innocence > 33)
+                    w.append(t, (new StringBuilder("can only grit ")).append(c.hisHer()).append(" teeth against the pleasure when ").append(another).append("starts fucking ").append(c.hisHer()).append(" ").append(hole).append(", and it's not long before ").append(c.heShe()).append("'s moaning in an unwilling climax.  ").toString());
+                else
+                    w.append(t, (new StringBuilder("stifles a desperate moan when ")).append(another).append("penetrates ").append(c.hisHer()).append(" ").append(hole).append(", clinging to ").append(c.hisHer()).append(" sanity for only a few moments before the overwhelming pleasure forces ").append(c.himHer()).append(" to cum.  ").toString());
+                if(solo.booleanValue())
+                {
+                    if(mid.getHATELevel() < 3)
+                    {
+                        if(low.getHATELevel() < 3)
+                            w.append(t, (new StringBuilder("With the other Chosen's Sexual Barriers still intact, the Thralls eagerly gather around to put ")).append(mainName).append(" in ").append(c.hisHer()).append(" place.").toString());
+                        else
+                            w.append(t, (new StringBuilder("With ")).append(mid.getMainName()).append("'s Sexual Barrier still intact and ").append(low.getMainName()).append(" occupied by other tortures, the Thralls eagerly gather around to put ").append(mainName).append(" in ").append(c.hisHer()).append(" place.").toString());
+                    } else
+                    if(low.getHATELevel() < 3)
+                        w.append(t, (new StringBuilder("With ")).append(low.getMainName()).append("'s Sexual Barrier still intact and ").append(mid.getMainName()).append(" still managing to barely fend off ").append(mid.hisHer()).append(" attackers, the Thralls eagerly gather around to put ").append(mainName).append(" in ").append(c.hisHer()).append(" place.").toString());
+                    else
+                        w.append(t, (new StringBuilder("With ")).append(mid.getMainName()).append(" still managing to fend off ").append(mid.hisHer()).append(" attackers and ").append(low.getMainName()).append(" occupied by other tortures, the Thralls eagerly gather around to put ").append(mainName).append(" in ").append(c.hisHer()).append(" place.").toString());
+                } else
+                if(trio.booleanValue())
+                {
+                    if(hated.booleanValue())
+                        w.append(t, (new StringBuilder(String.valueOf(mid.getMainName()))).append(" and ").append(low.getMainName()).append(", who are also being raped by the Thralls, glare angrily at ").append(mainName).append(" - silently blaming ").append(c.himHer()).append(" for not using ").append(c.hisHer()).append(" greater strength to stop this.").toString());
+                    else
+                    if(loved.booleanValue())
+                        w.append(t, (new StringBuilder("The Thralls raping ")).append(mid.getMainName()).append(" and ").append(low.getMainName()).append(" threaten to hurt them worse unless ").append(mainName).append(" moves ").append(c.hisHer()).append(" hips on ").append(c.hisHer()).append(" own, and ").append(c.heShe()).append(" tries to focus and go along with it.").toString());
+                    else
+                        w.append(t, (new StringBuilder("The Thralls raping ")).append(mid.getMainName()).append(" and ").append(low.getMainName()).append(" threaten to hurt them worse unless ").append(mainName).append(" moves ").append(c.hisHer()).append(" hips on ").append(c.hisHer()).append(" own, and ").append(c.heShe()).append(" complies - mostly for ").append(lover.getMainName()).append("'s sake.").toString());
+                } else
+                if(loved.booleanValue() || partner == lover)
+                    w.append(t, (new StringBuilder("At the sight of ")).append(partner.getMainName()).append(" breaking under ").append(partner.hisHer()).append(" own rape, ").append(mainName).append(" challenges the Thralls to come after ").append(c.himHer()).append(" instead, taking some of the pressure off ").append(c.hisHer()).append(" friend.").toString());
+                else
+                    w.append(t, (new StringBuilder("The Thrall raping ")).append(partner.getMainName()).append(" pushes ").append(partner.hisHer()).append(" crotch against ").append(mainName).append("'s, forcing ").append(partner.getMainName()).append(" to grind against ").append(c.himHer()).append(".  The other Thralls laugh at the anger that's obvious on their faces.").toString());
+            } else
+            if(variant == 1)
+            {
+                if(c.getEXPOLevel() < 3 || modest.booleanValue())
+                {
+                    if(dignity > 66)
+                        w.append(t, (new StringBuilder("Full of indignant fury, ")).append(mainName).append(" tries to fend off the Thralls in the process of stripping ").append(c.himHer()).append(", but ").toString());
+                    else
+                    if(dignity > 33)
+                        w.append(t, (new StringBuilder("A stubborn set in ")).append(c.hisHer()).append(" jaw, ").append(mainName).append(" firmly grasps ").append(c.hisHer()).append(" ").append(bottomDesc).append(" and refuses to let the Thralls strip ").append(c.himHer()).append(", but ").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is struggling with all ").append(c.hisHer()).append(" might, not even caring how much ").append(c.heShe()).append("'s tearing ").append(c.hisHer()).append(" own ").append(bottomDesc).append(" in the process, but ").toString());
+                    w.append(t, (new StringBuilder(String.valueOf(c.heShe()))).append(" can't stop one of them from slipping under ").append(c.hisHer()).append(" clothes and ").toString());
+                } else
+                {
+                    if(dignity > 66)
+                        w.append(t, (new StringBuilder("Boiling over with rage, ")).append(mainName).append(" furiously glares and kicks at any Thralls who dare film ").append(c.hisHer()).append(" exposed body, but ").toString());
+                    else
+                    if(dignity > 33)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" grits ").append(c.hisHer()).append(" teeth and squeezes ").append(c.hisHer()).append(" thighs together, but ").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" 's bare legs kick wildly as ").append(c.heShe()).append(" tries to escape, flashing the Thralls and their cameras, but ").toString());
+                    w.append(t, (new StringBuilder(String.valueOf(c.heShe()))).append(" has no protection whatsoever from the Thrall ").toString());
+                }
+                if(c.getINJULevel() < 3 || aVirg.booleanValue())
+                {
+                    if(innocence > 66)
+                        w.append(t, (new StringBuilder("fondling ")).append(c.hisHer()).append(" ").append(organ).append(" until the pleasure makes it hard for ").append(c.himHer()).append(" to remember that ").append(c.heShe()).append("'s supposed to resist.  ").toString());
+                    else
+                    if(innocence > 33)
+                        w.append(t, (new StringBuilder("fondling ")).append(c.hisHer()).append(" ").append(organ).append(" until ").append(c.hisHer()).append(" resistance begins to weaken under the growing pleasure.  ").toString());
+                    else
+                        w.append(t, (new StringBuilder("fondling ")).append(c.hisHer()).append(" ").append(organ).append(" until it becomes difficult for ").append(c.himHer()).append(" to maintain ").append(c.hisHer()).append(" rationality.  ").toString());
+                } else
+                if(w.tickle().booleanValue())
+                {
+                    if(innocence > 66)
+                        w.append(t, (new StringBuilder("tickling ")).append(c.himHer()).append(" until ").append(c.hisHer()).append(" squirming laughter leaves ").append(c.hisHer()).append(" ").append(organ).append(" wide open to the others' fondling.  ").toString());
+                    else
+                    if(innocence > 33)
+                        w.append(t, (new StringBuilder("tickling ")).append(c.himHer()).append(" to force ").append(c.himHer()).append(" to laugh and let ").append(c.hisHer()).append(" guard down, then pulling ").append(c.hisHer()).append(" legs apart so the others can fondle ").append(c.hisHer()).append(" ").append(organ).append(".  ").toString());
+                    else
+                        w.append(t, (new StringBuilder("tickling ")).append(c.himHer()).append(" until ").append(c.hisHer()).append(" willpower finally breaks and ").append(c.heShe()).append(" starts thrashing with unwilling laughter, letting ").append(c.hisHer()).append(" guard down enough that the others can concentrate their attention on ").append(c.hisHer()).append(" ").append(organ).append(".  ").toString());
+                } else
+                if(c.getGender().equals("male"))
+                {
+                    if(innocence > 66)
+                        w.append(t, (new StringBuilder("cruelly pinching and twisting ")).append(c.hisHer()).append(" penis in a way that leaves ").append(c.himHer()).append(" too dazed and confused with combined pleasure and pain to continue fighting.  ").toString());
+                    else
+                    if(innocence > 33)
+                        w.append(t, (new StringBuilder("manhandling ")).append(c.hisHer()).append(" penis, breaking ").append(c.hisHer()).append(" will to fight with combined pleasure and pain.  ").toString());
+                    else
+                        w.append(t, (new StringBuilder("alternating between stroking ")).append(c.hisHer()).append(" penis and harshly pinching it, using the unexpected sensations to wear down ").append(c.hisHer()).append(" willpower.  ").toString());
+                } else
+                if(innocence > 66)
+                    w.append(t, (new StringBuilder("penetrating ")).append(c.hisHer()).append(" ass, the painful thrusts eventually building into a strange pleasure deep inside ").append(c.himHer()).append(".  ").toString());
+                else
+                if(innocence > 33)
+                    w.append(t, (new StringBuilder("ramming up ")).append(c.hisHer()).append(" ass, breaking ").append(c.hisHer()).append(" will to fight with the combination of pain and pleasure deep inside.  ").toString());
+                else
+                    w.append(t, (new StringBuilder("repeatedly sliding his cock in and out of ")).append(c.hisHer()).append(" asshole until ").append(c.hisHer()).append(" willpower finally breaks and ").append(c.heShe()).append(" starts groaning at the intense stimulation.  ").toString());
+                if(c.getHATELevel() < 3 || vVirg.booleanValue())
+                {
+                    if(morality > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" heroic effort to hold back only delays the inevitable for a few moments before ").append(c.heShe()).append(" cums, ").toString());
+                    else
+                    if(morality > 33)
+                        w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" limbs lose all their strength as ").append(c.heShe()).append(" cums, ").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" enraged kicking weakens as ").append(c.heShe()).append(" cums, ").toString());
+                } else
+                if(morality > 66)
+                    w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" tries to calm down and remain focused, but then another Thrall's cock pushes into ").append(c.hisHer()).append(" ").append(hole).append(", forcing ").append(c.himHer()).append(" to cum again, ").toString());
+                else
+                if(morality > 33)
+                    w.append(t, (new StringBuilder("When another Thrall's cock pushes into ")).append(c.hisHer()).append(" ").append(hole).append(", ").append(c.heShe()).append(" cums hard, ").toString());
+                else
+                    w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" bloodthirsty rage has left ").append(c.hisHer()).append(" Sexual Barrier completely broken, allowing another Thrall's cock to plunge into ").append(c.hisHer()).append(" ").append(hole).append(".  The penetration makes ").append(c.himHer()).append(" cum instantly, ").toString());
+                if(solo.booleanValue())
+                {
+                    if(hated.booleanValue())
+                        w.append(t, (new StringBuilder("moaning out loud while ")).append(mid.getMainName()).append(" and ").append(low.getMainName()).append(" look on in disappointment.").toString());
+                    else
+                    if(loved.booleanValue())
+                        w.append(t, (new StringBuilder("moaning out loud while ")).append(mid.getMainName()).append(" and ").append(low.getMainName()).append(" blush and look away.").toString());
+                    else
+                        w.append(t, (new StringBuilder("moaning ")).append(lover.getMainName()).append("'s name.").toString());
+                } else
+                if(trio.booleanValue())
+                {
+                    if(loved.booleanValue())
+                        w.append(t, (new StringBuilder("turned on even more by ")).append(mid.getMainName()).append("'s and ").append(low.getMainName()).append("'s own orgasmic moans.").toString());
+                    else
+                    if(hated.booleanValue())
+                        w.append(t, (new StringBuilder("and while ")).append(c.heShe()).append(" hates to admit it to ").append(c.himHer()).append("self, the sound of ").append(mid.getMainName()).append("'s and ").append(low.getMainName()).append("'s own moans of orgasm are turning ").append(c.himHer()).append(" on even more.").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(c.hisHer()))).append(" orgasmic moans joining those of ").append(mid.getMainName()).append(" and ").append(low.getMainName()).append(".").toString());
+                } else
+                if(loved.booleanValue() || lover == partner)
+                    w.append(t, (new StringBuilder("the sound of ")).append(c.hisHer()).append(" moans pushing ").append(partner.getMainName()).append(" over the edge into ").append(partner.hisHer()).append(" own orgasm as well.").toString());
+                else
+                    w.append(t, (new StringBuilder("moaning out loud until the Thralls force ")).append(c.hisHer()).append(" mouth against ").append(partner.getMainName()).append("'s.  The two Chosen find themselves muffling each other's orgasmic cries with an unwilling kiss.").toString());
+            } else
+            if(variant == 2)
+            {
+                if(c.getEXPOLevel() < 3 || modest.booleanValue())
+                {
+                    if(dignity > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s expression of cold rage breaks with a ").toString());
+                    else
+                    if(dignity > 33)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s determined struggles abruptly falter, and ").append(c.heShe()).append(" lets out a ").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" struggles without regard for the Thralls grabbing ").append(c.himHer()).append(" by ").append(c.hisHer()).append(" ").append(bottomDesc).append(", letting out a ").toString());
+                } else
+                if(dignity > 66)
+                    w.append(t, (new StringBuilder("Being seen in such a humiliating state has wounded ")).append(mainName).append("'s pride, and it gets even worse when ").append(c.heShe()).append("'s forced to let out a ").toString());
+                else
+                if(dignity > 33)
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" tries to ignore the cameras filming ").append(c.himHer()).append(" in ").append(c.hisHer()).append(" near-nude state, but the distraction weakens ").append(c.hisHer()).append(" usual strong will, and ").append(c.heShe()).append(" finds ").append(c.himHer()).append("self unable to keep in ").append(c.hisHer()).append(" ").toString());
+                else
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" struggles without regard for how ").append(c.hisHer()).append(" near-nudity is resulting in an erotic show for the cameras, letting out a ").toString());
+                if(w.tickle().booleanValue())
+                    w.append(t, (new StringBuilder("cry of high-pitched laughter as the Thralls tickle ")).append(c.himHer()).append(".  ").toString());
+                else
+                if(c.getGender().equals("male"))
+                    w.append(t, (new StringBuilder("cry of pain as a Thrall's boot crushes ")).append(c.hisHer()).append(" testicles.  ").toString());
+                else
+                    w.append(t, (new StringBuilder("breathless groan as the Thrall behind ")).append(c.himHer()).append(" thrusts in and out of ").append(c.hisHer()).append(" ass.  ").toString());
+                if(c.getPLEALevel() < 3 || cVirg.booleanValue())
+                {
+                    if(innocence > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s still confused about how ").append(c.heShe()).append(" can be so weak to something so simple, ").toString());
+                    else
+                    if(innocence > 33)
+                        w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" body won't obey ").append(c.hisHer()).append(" wishes, ").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" feels like ").append(c.heShe()).append(" should have acclimated to this torture by now, but it's still as effective as ever, ").toString());
+                } else
+                if(innocence > 66)
+                    w.append(t, (new StringBuilder("The strange stimulation is impossible to fight, causing ")).append(c.himHer()).append(" to cum again, ").toString());
+                else
+                if(innocence > 33)
+                    w.append(t, (new StringBuilder("Confused by the overwhelming sensations, ")).append(c.hisHer()).append(" body orgasms against ").append(c.hisHer()).append(" will, ").toString());
+                else
+                    w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" has been trying to mentally train ").append(c.himHer()).append("self to endure this sort of thing, but ").append(c.heShe()).append(" still reaches climax as quickly as ever, ").toString());
+                if(c.getHATELevel() < 3 || vVirg.booleanValue())
+                {
+                    if(morality > 66)
+                        w.append(t, (new StringBuilder("and ")).append(c.heShe()).append(" can't help but wonder whether ").append(c.heShe()).append(" was ever truly strong at all.  ").toString());
+                    else
+                    if(morality > 33)
+                        w.append(t, (new StringBuilder("leaving ")).append(c.himHer()).append(" unusually helpless.  ").toString());
+                    else
+                        w.append(t, (new StringBuilder("leaving ")).append(c.himHer()).append(" unable to even coherently word ").append(c.hisHer()).append(" threats at the surrounding Thralls.  ").toString());
+                } else
+                if(morality > 66)
+                    w.append(t, (new StringBuilder("and ")).append(c.hisHer()).append(" sense of pride and heroism is further broken down as the other Thralls take turns violating ").append(c.hisHer()).append(" ").append(hole).append(".  ").toString());
+                else
+                if(morality > 33)
+                    w.append(t, (new StringBuilder("leaving ")).append(c.himHer()).append(" completely helpless as the other Thralls take turns fucking ").append(c.hisHer()).append(" ").append(hole).append(".  ").toString());
+                else
+                    w.append(t, (new StringBuilder("leaving ")).append(c.himHer()).append(" helpless to do anything but scream in rage as another Thrall penetrates ").append(c.hisHer()).append(" ").append(hole).append(".  ").toString());
+                if(solo.booleanValue())
+                {
+                    if(loved.booleanValue())
+                        w.append(t, (new StringBuilder(String.valueOf(mid.getMainName()))).append(" and ").append(low.getMainName()).append(" are horrified and heartbroken at seeing their stronger friend abused so savagely.").toString());
+                    else
+                    if(hated.booleanValue())
+                        w.append(t, (new StringBuilder("Despite their rivalry, ")).append(mid.getMainName()).append(" and ").append(low.getMainName()).append(" are both horrified at the sight of their stronger teammate being so savagely abused.").toString());
+                    else
+                        w.append(t, (new StringBuilder("Despite their very different opinions of ")).append(c.himHer()).append(", ").append(mid.getMainName()).append(" and ").append(low.getMainName()).append(" are both horrified by the display.").toString());
+                } else
+                if(trio.booleanValue())
+                {
+                    w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" louder voice rises above ").append(mid.getMainName()).append("'s and ").append(low.getMainName()).append("'s own ").toString());
+                    if(w.tickle().booleanValue())
+                        w.append(t, "unwilling laughter.");
+                    else
+                        w.append(t, "moans of pain.");
+                } else
+                if(loved.booleanValue() || lover == partner)
+                {
+                    w.append(t, (new StringBuilder("For ")).append(partner.getMainName()).append(", who had been relying on ").append(mainName).append("'s strength, the sight saps ").append(c.hisHer()).append(" drive to resist").toString());
+                    if(w.tickle().booleanValue())
+                        w.append(t, (new StringBuilder(", causing ")).append(c.himHer()).append(" to let out ").append(c.hisHer()).append(" own unwilling laughter out as well.").toString());
+                    else
+                        w.append(t, (new StringBuilder(", causing ")).append(c.himHer()).append(" to sob softly in despair.").toString());
+                } else
+                {
+                    w.append(t, (new StringBuilder("The Thralls taunt ")).append(mainName).append(" with the fact that ").append(c.heShe()).append("'s faring no better than ").append(partner.getMainName()).append(", who's ").toString());
+                    if(w.tickle().booleanValue())
+                        w.append(t, "also caught up in unwilling laughter.");
+                    else
+                        w.append(t, "squirming uselessly and moaning in pain as well.");
+                }
+            } else
+            if(variant == 3)
+            {
+                if(c.getINJULevel() < 3 || aVirg.booleanValue())
+                {
+                    if(dignity > 66)
+                        w.append(t, (new StringBuilder("Bringing their cameras close, the Thralls demand that ")).append(mainName).append(" apologize for being such a bitch").toString());
+                    else
+                    if(dignity > 33)
+                        w.append(t, (new StringBuilder("The Thralls demand that ")).append(mainName).append(" proclaim ").append(c.himHer()).append("self a complete weakling in front of the cameras").toString());
+                    else
+                        w.append(t, (new StringBuilder("The Thralls demand that ")).append(mainName).append(" suck their cocks in order to provide a sexy show for the cameras").toString());
+                } else
+                if(w.tickle().booleanValue())
+                {
+                    if(dignity > 66)
+                        w.append(t, (new StringBuilder("The filming Thralls capture a close-up of ")).append(mainName).append("'s laughing, tear-streaked face.  They tell ").append(c.himHer()).append(" that they won't let up on the tickling unless ").append(c.heShe()).append(" apologizes for being such a bitch").toString());
+                    else
+                    if(dignity > 33)
+                        w.append(t, (new StringBuilder("The Thralls demand that ")).append(mainName).append(" acknowledge in front of the cameras that ").append(c.heShe()).append(" must be a true weakling to be so easily defeated by tickling").toString());
+                    else
+                        w.append(t, (new StringBuilder("Bringing their cameras close, the Thralls try to get ")).append(mainName).append(" to suck their cocks while ").append(c.hisHer()).append(" mouth is forced open with laughter by the tickling").toString());
+                } else
+                if(c.getGender().equals("male"))
+                {
+                    if(dignity > 66)
+                        w.append(t, (new StringBuilder("The filming Thralls capture a close-up of ")).append(mainName).append("'s grimacing, tear-streaked face.  They tell ").append(c.himHer()).append(" that they won't let up on ").append(c.hisHer()).append(" balls unless ").append(c.heShe()).append(" apologizes for tempting other guys with ").append(c.hisHer()).append(" body").toString());
+                    else
+                    if(dignity > 33)
+                        w.append(t, (new StringBuilder("The Thralls demand that ")).append(mainName).append(" acknowledge in front of the cameras that ").append(c.heShe()).append(" must be a true weakling to submit so easily to a little bit of ballbusting").toString());
+                    else
+                        w.append(t, (new StringBuilder("Bringing their cameras close, the Thralls try to get ")).append(mainName).append(" to suck their cocks while ").append(c.heShe()).append("'s distracted by the pain of ").append(c.hisHer()).append(" bruised testicles").toString());
+                } else
+                if(dignity > 66)
+                    w.append(t, (new StringBuilder("The filming Thralls capture a close-up of ")).append(mainName).append("'s cross-eyed expression as ").append(c.heShe()).append("'s fucked up the ass.  They tell ").append(c.himHer()).append(" that they won't let up on ").append(c.himHer()).append(" unless ").append(c.heShe()).append(" apologizes for being such a bitch").toString());
+                else
+                if(dignity > 33)
+                    w.append(t, (new StringBuilder("The Thralls demand that ")).append(mainName).append(" acknowledge in front of the cameras that ").append(c.heShe()).append("'s a pervert who's enjoying being fucked up the ass").toString());
+                else
+                    w.append(t, (new StringBuilder("Bringing their cameras close, the Thralls try to get ")).append(mainName).append(" to suck their cocks while ").append(c.heShe()).append("'s distracted by the cock up ").append(c.hisHer()).append(" ass").toString());
+                if(c.getPLEALevel() < 3 || cVirg.booleanValue())
+                {
+                    if(innocence > 66)
+                        w.append(t, (new StringBuilder(", but when ")).append(c.heShe()).append(" doesn't stop ").append(c.hisHer()).append(" wild attempts to punch and bite them, they ").toString());
+                    else
+                    if(innocence > 33)
+                        w.append(t, (new StringBuilder(", but when ")).append(c.heShe()).append(" just clenches ").append(c.hisHer()).append(" teeth and glares at them, they ").toString());
+                    else
+                        w.append(t, (new StringBuilder(", but when ")).append(c.heShe()).append(" coldly refuses, they ").toString());
+                } else
+                {
+                    if(innocence > 66)
+                        w.append(t, (new StringBuilder(", but ")).append(c.heShe()).append("'s too busy cumming from their fingers on ").append(c.hisHer()).append(" ").append(organ).append(" to cooperate.  ").toString());
+                    else
+                    if(innocence > 33)
+                        w.append(t, (new StringBuilder(", but ")).append(c.heShe()).append(" refuses to respond, even as their fingers tease an orgasm from ").append(c.hisHer()).append(" ").append(organ).append(".  ").toString());
+                    else
+                        w.append(t, (new StringBuilder(", but even though ")).append(c.heShe()).append("'s constantly cumming from their fingers on ").append(c.hisHer()).append(" ").append(organ).append(", ").append(c.heShe()).append(" still manages to stammer out a flat refusal.  ").toString());
+                    w.append(t, "They ");
+                }
+                if(c.getHATELevel() < 3 || vVirg.booleanValue())
+                {
+                    if(morality > 66)
+                        w.append(t, (new StringBuilder("force ")).append(c.himHer()).append(" to comply by threatening the others.  ").toString());
+                    else
+                    if(morality > 33)
+                        w.append(t, "escalate the punishment even further.  ");
+                    else
+                        w.append(t, (new StringBuilder("punish ")).append(c.himHer()).append(" by ejaculating all over ").append(c.hisHer()).append(" face and chest - from a safe distance, of course.  ").toString());
+                } else
+                if(morality > 66)
+                    w.append(t, (new StringBuilder("punish ")).append(c.himHer()).append(" by violating ").append(c.hisHer()).append(" ").append(hole).append(", telling ").append(c.himHer()).append(" to move ").append(c.hisHer()).append(" hips for them unless ").append(c.heShe()).append(" wants the others to suffer even worse treatment.  ").toString());
+                else
+                if(morality > 33)
+                    w.append(t, (new StringBuilder("punish ")).append(c.himHer()).append(" by fucking ").append(c.hisHer()).append(" ").append(hole).append(" at the same time.  ").toString());
+                else
+                    w.append(t, (new StringBuilder("punish ")).append(c.himHer()).append(" by violating ").append(c.hisHer()).append(" ").append(hole).append(" at the same time, pinning ").append(c.himHer()).append(" down so ").append(c.heShe()).append(" can't fight back.  ").toString());
+                if(solo.booleanValue())
+                {
+                    w.append(t, (new StringBuilder("The broadcasted display of weakness is not only a shock to ")).append(c.hisHer()).append(" fans, ").toString());
+                    if(loved.booleanValue())
+                        w.append(t, (new StringBuilder("but a despair-inducing sight for ")).append(mid.getMainName()).append(" and ").append(low.getMainName()).append(" as well.").toString());
+                    else
+                    if(hated.booleanValue())
+                    {
+                        w.append(t, (new StringBuilder("but to ")).append(c.hisHer()).append(" watching rivals as well.").toString());
+                    } else
+                    {
+                        w.append(t, "but a demoralizing sight for ");
+                        if(lover == mid)
+                            w.append(t, (new StringBuilder(String.valueOf(mid.getMainName()))).append(" and even ").append(low.getMainName()).append(" as well.").toString());
+                        else
+                            w.append(t, (new StringBuilder(String.valueOf(low.getMainName()))).append(" and even ").append(mid.getMainName()).append(" as well.").toString());
+                    }
+                } else
+                if(trio.booleanValue())
+                {
+                    if(loved.booleanValue())
+                        w.append(t, (new StringBuilder("Even though it means the Thralls aren't paying so much attention to ")).append(mid.getMainName()).append(" and ").append(low.getMainName()).append(", they both find it somehow even worse to watch ").append(mainName).append(" suffer.").toString());
+                    else
+                    if(hated.booleanValue())
+                        w.append(t, (new StringBuilder(String.valueOf(mid.getMainName()))).append(" and ").append(low.getMainName()).append(" can't help but feel relieved on some level that ").append(mainName).append(" is bearing the brunt of the Thralls' attention for the moment.").toString());
+                    else
+                        w.append(t, (new StringBuilder("While it means that the Thralls aren't paying so much attention to the other Chosen, ")).append(lover.getMainName()).append(" still finds this painful to watch.").toString());
+                } else
+                if(loved.booleanValue() || lover == partner)
+                    w.append(t, (new StringBuilder("While it means that the Thralls aren't paying so much attention to ")).append(partner.getMainName()).append(", ").append(partner.heShe()).append(" still finds it painful to watch.").toString());
+                else
+                    w.append(t, (new StringBuilder(String.valueOf(partner.getMainName()))).append(" can't help but be relieved that the Thralls are distracted from torturing ").append(partner.himHer()).append(".").toString());
+            }
+        } else
+        if(confidence > 33)
+        {
+            if(variant == 0)
+            {
+                if(c.getINJULevel() < 3 || aVirg.booleanValue())
+                {
+                    if(morality > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" closes ").append(c.hisHer()).append(" eyes and tries to focus as the Thralls ").toString());
+                    else
+                    if(morality > 33)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is unable to contain a yelp of surprise as the Thralls ").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" glares and desperately clenches ").append(c.hisHer()).append(" teeth as the Thralls ").toString());
+                } else
+                if(w.tickle().booleanValue())
+                {
+                    if(morality > 66)
+                        w.append(t, (new StringBuilder("Despite ")).append(c.hisHer()).append(" heroic effort, ").append(mainName).append(" still ends up laughing helplessly as the Thralls tickle ").append(c.himHer()).append(" and ").toString());
+                    else
+                    if(morality > 33)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" has no choice but to laugh openly as the Thralls tickle ").append(c.himHer()).append(" and ").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" completely fails to intimidate the Thralls, laughter leaking out as they tickle ").append(c.himHer()).append(" and ").toString());
+                } else
+                if(c.getGender().equals("male"))
+                {
+                    if(morality > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s heroic demeanor cracks as the Thralls stomp on ").append(c.hisHer()).append(" penis and ").toString());
+                    else
+                    if(morality > 33)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is unable to contain ").append(c.hisHer()).append(" cries of pain as the Thralls stomp on ").append(c.hisHer()).append(" penis and ").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s attempt to intimidate the Thralls falls apart with a pathetic cry as they stomp on ").append(c.hisHer()).append(" penis and ").toString());
+                } else
+                if(morality > 66)
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s heroic demeanor cracks as one Thrall thrusts into ").append(c.hisHer()).append(" ass while the others ").toString());
+                else
+                if(morality > 33)
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is unable to contain ").append(c.hisHer()).append(" cries of pain as one of the Thralls thrusts into ").append(c.hisHer()).append(" ass.  The others ").toString());
+                else
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s attempt to intimidate the Thralls falls apart with a pathetic cry as one of them thrusts into ").append(c.hisHer()).append(" ass.  The others ").toString());
+                if(c.getEXPOLevel() < 3 || modest.booleanValue())
+                {
+                    if(dignity > 66)
+                        w.append(t, (new StringBuilder("start trying to strip ")).append(c.himHer()).append(", ignoring ").append(c.hisHer()).append(" indignant protests.  ").toString());
+                    else
+                    if(dignity > 33)
+                        w.append(t, (new StringBuilder("force their hands under ")).append(c.hisHer()).append(" ").append(bottomDesc).append(" and try to strip ").append(c.himHer()).append(".  ").toString());
+                    else
+                        w.append(t, (new StringBuilder("grab ")).append(c.himHer()).append(" by the ").append(bottomDesc).append(", and ").append(c.hisHer()).append(" flailing efforts to escape accomplish nothing but tearing ").append(c.hisHer()).append(" clothes.  ").toString());
+                } else
+                if(dignity > 66)
+                    w.append(t, (new StringBuilder("pry apart ")).append(c.hisHer()).append(" tightly-clenched thighs to more easily film ").append(c.himHer()).append(" down there.  ").toString());
+                else
+                if(dignity > 33)
+                    w.append(t, (new StringBuilder("force ")).append(c.hisHer()).append(" bare legs apart and bring their cameras in close.  ").toString());
+                else
+                    w.append(t, (new StringBuilder("grab ")).append(c.hisHer()).append(" kicking ankles and pull them apart in order to more easily film ").append(c.himHer()).append(" down there.  ").toString());
+                if(solo.booleanValue())
+                    w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s so distracted that ").append(c.heShe()).append(" can't even defend ").append(c.himHer()).append("self when one of ").append(c.hisHer()).append(" attackers mounts ").append(c.himHer()).append(" and thrusts into ").append(c.hisHer()).append(" ").append(hole).append(".  Being taken right in front of ").append(high.getMainName()).append(" and ").append(low.getMainName()).append(", ").toString());
+                else
+                if(trio.booleanValue())
+                {
+                    w.append(t, "The three Chosen are all laid on their backs and fucked side-by-side.  ");
+                    if(loved.booleanValue())
+                    {
+                        w.append(t, (new StringBuilder(String.valueOf(high.getMainName()))).append(" grasps one of ").append(mid.getMainName()).append("'s hands and ").append(low.getMainName()).append(" takes the other as they endure their punishment together.  Grip tightening with every thrust against ").append(c.hisHer()).append(" ").toString());
+                        if(c.getGender().equals("male"))
+                            w.append(t, "bowels, ");
+                        else
+                            w.append(t, "cervix, ");
+                    } else
+                    if(hated.booleanValue())
+                        w.append(t, (new StringBuilder("Staring straight ahead and refusing to meet ")).append(high.getMainName()).append("'s and ").append(low.getMainName()).append("'s eyes, ").toString());
+                    else
+                    if(lover == high)
+                        w.append(t, (new StringBuilder("Doing ")).append(c.hisHer()).append(" best to ignore ").append(low.getMainName()).append("'s whimpering and take strength from ").append(high.getMainName()).append("'s stubborn defiance, ").toString());
+                    else
+                        w.append(t, (new StringBuilder("Taking ")).append(lover.getMainName()).append(" by the hand and murmuring reassuring words even as ").append(high.getMainName()).append(" grunts and groans next to them, ").toString());
+                } else
+                {
+                    w.append(t, (new StringBuilder(String.valueOf(partner.getMainName()))).append(" is forced down atop ").append(c.himHer()).append(" and they're both fucked at the same time.  ").toString());
+                    if(lover == partner)
+                        w.append(t, (new StringBuilder("Sharing a passionate kiss with ")).append(c.hisHer()).append(" friend, ").toString());
+                    else
+                        w.append(t, (new StringBuilder("Trying in vain to keep ")).append(partner.getMainName()).append("'s body from rubbing against ").append(c.himHer()).append(", ").toString());
+                }
+                if(c.getPLEALevel() < 3 || cVirg.booleanValue())
+                {
+                    if(innocence > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" squeals in mingled disgust and arousal as ").append(c.heShe()).append(" feels the Thrall cum inside.").toString());
+                    else
+                    if(innocence > 33)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" tells ").append(c.himHer()).append("self that ").append(c.heShe()).append(" won't lose to the pleasure.").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" ignores the building pleasure as best ").append(c.heShe()).append(" can.").toString());
+                } else
+                {
+                    if(innocence > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is soon moaning openly in orgasm, having forgot completely about escape.  ").append(c.HisHer()).append(" whole body spasms").toString());
+                    else
+                    if(innocence > 33)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" goes bright red with shame as ").append(c.heShe()).append(" feels ").append(c.himHer()).append("self start to climax").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" knows there's no way ").append(c.heShe()).append("'ll be able to stop the coming climax.  ").append(c.HisHer()).append(" body soon gives in").toString());
+                    if(c.getGender().equals("female"))
+                        w.append(t, ", squeezing down on the invading cock.");
+                    else
+                        w.append(t, (new StringBuilder(", cumming all over ")).append(c.hisHer()).append(" own chest.").toString());
+                }
+            } else
+            if(variant == 1)
+            {
+                if(c.getINJULevel() < 3 || aVirg.booleanValue())
+                {
+                    if(innocence > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is dazed and confused by the pleasure inflicted by the Thralls stroking ").append(c.hisHer()).append(" ").append(organ).toString());
+                    else
+                    if(innocence > 33)
+                        w.append(t, (new StringBuilder("The Thralls pin ")).append(mainName).append(" down and firmly stroke ").append(c.hisHer()).append(" ").append(organ).toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" tries to focus, but the pleasure of the Thralls stroking ").append(c.hisHer()).append(" ").append(organ).append(" is too strong").toString());
+                } else
+                if(w.tickle().booleanValue())
+                {
+                    if(innocence > 66)
+                        w.append(t, (new StringBuilder("The combination of the Thralls tickling ")).append(c.himHer()).append(" and stroking ").append(c.hisHer()).append(" ").append(organ).append(" has left ").append(mainName).append(" barely aware of ").append(c.hisHer()).append(" surroundings").toString());
+                    else
+                    if(innocence > 33)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is unable resist the Thralls tickling ").append(c.himHer()).append(" and stroking ").append(c.hisHer()).append(" ").append(organ).toString());
+                    else
+                        w.append(t, (new StringBuilder("The laughter brought on by the Thralls' tickling has left ")).append(mainName).append(" lightheaded and unable to focus, vulnerable to the hands stroking ").append(c.hisHer()).append(" ").append(organ).toString());
+                } else
+                if(c.getGender().equals("male"))
+                {
+                    if(innocence > 66)
+                        w.append(t, (new StringBuilder("The combination of pain and pleasure inflicted by the Thralls tormenting ")).append(c.hisHer()).append(" penis has left ").append(mainName).append(" barely aware of ").append(c.hisHer()).append(" surroundings").toString());
+                    else
+                    if(innocence > 33)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is unable to resist the Thralls alternating between stroking and stomping on ").append(c.hisHer()).append(" penis").toString());
+                    else
+                        w.append(t, (new StringBuilder("The repeated abuse to ")).append(c.hisHer()).append(" bruised penis has left ").append(mainName).append(" lightheaded and unable to focus, especially as the Thralls' hands shift to inflicting pleasure rather than pain").toString());
+                } else
+                if(innocence > 66)
+                    w.append(t, (new StringBuilder("The combination of the Thrall's cock up ")).append(c.hisHer()).append(" ass and the others' hands stroking ").append(c.hisHer()).append(" ").append(organ).append(" has left ").append(mainName).append(" barely aware of ").append(c.hisHer()).append(" surroundings").toString());
+                else
+                if(innocence > 33)
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is unable to resist the Thrall's cock thrusting up ").append(c.hisHer()).append(" ass as the others stroke ").append(c.hisHer()).append(" ").append(organ).toString());
+                else
+                    w.append(t, (new StringBuilder("The repeated thrusting of the Thrall's cock up ")).append(c.hisHer()).append(" ass has left ").append(mainName).append(" lightheaded and unable to focus, vulnerable to the hands stroking ").append(c.hisHer()).append(" ").append(organ).toString());
+                if(c.getEXPOLevel() > 3 || modest.booleanValue())
+                {
+                    if(dignity > 66)
+                        w.append(t, (new StringBuilder(", but ")).append(c.heShe()).append(" still reflexively tries to pull ").append(c.hisHer()).append(" ").append(bottomDesc).append(" back into place in order to hide ").append(c.hisHer()).append(" ").toString());
+                    else
+                    if(dignity > 33)
+                        w.append(t, (new StringBuilder(", and with ")).append(c.hisHer()).append(" ").append(bottomDesc).append(" pulled aside, there's no hiding ").append(c.hisHer()).append(" ").toString());
+                    else
+                        w.append(t, (new StringBuilder(", and with ")).append(c.hisHer()).append(" ").append(bottomDesc).append(" pulled aside, ").append(c.hisHer()).append(" reflexive kicking causes ").append(c.himHer()).append(" to completely expose ").append(c.hisHer()).append(" ").toString());
+                } else
+                if(dignity > 66)
+                    w.append(t, (new StringBuilder(", especially with the overwhelming embarrassment at the Thralls filming ")).append(c.hisHer()).append(" ").toString());
+                else
+                if(dignity > 33)
+                    w.append(t, (new StringBuilder(", and in ")).append(c.hisHer()).append(" stripped state, everyone can see ").append(c.hisHer()).append(" ").toString());
+                else
+                    w.append(t, (new StringBuilder(", and ")).append(c.heShe()).append(" can't even spare a thought to hiding ").append(c.hisHer()).append(" ").toString());
+                if(c.getGender().equals("female"))
+                    w.append(t, "dripping wet slit.  ");
+                else
+                    w.append(t, "pre-cum dripping out the tip.  ");
+                if(solo.booleanValue())
+                    w.append(t, (new StringBuilder(String.valueOf(high.getMainName()))).append(" and ").append(low.getMainName()).append(" both find it increasingly hard not to get turned on as they watch more Thralls step forward to ").toString());
+                else
+                if(trio.booleanValue())
+                {
+                    if(loved.booleanValue())
+                        w.append(t, (new StringBuilder("Using ")).append(high.getMainName()).append("'s and ").append(low.getMainName()).append("'s feelings against them, ").toString());
+                    else
+                    if(hated.booleanValue())
+                        w.append(t, (new StringBuilder("Savoring how much ")).append(high.getMainName()).append(" and ").append(low.getMainName()).append(" hate this, ").toString());
+                    else
+                    if(lover == high)
+                        w.append(t, (new StringBuilder("Taking advantage of ")).append(high.getMainName()).append("'s feelings and ").append(low.getMainName()).append("'s mental weakness, ").toString());
+                    else
+                        w.append(t, (new StringBuilder("Much to ")).append(high.getMainName()).append("'s anger and ").append(low.getMainName()).append("'s despair, ").toString());
+                    if(high.getGender().equals("female") && low.getGender().equals("female"))
+                        w.append(t, (new StringBuilder("the Thralls force them against ")).append(mainName).append("'s thighs, grinding them together until they gasp and moan in climax.  Meanwhile, more Thralls step forward to ").toString());
+                    else
+                    if(high.getGender().equals("female"))
+                        w.append(t, (new StringBuilder("the Thralls make ")).append(low.getMainName()).append(" join the Thralls attacking ").append(mainName).append(".  ").append(high.getMainName()).append(" is forced to climax as ").append(high.heShe()).append(" watches, while the Thralls (with ").append(low.getMainName()).append(") start to ").toString());
+                    else
+                    if(low.getGender().equals("female"))
+                        w.append(t, (new StringBuilder("the Thralls make ")).append(high.getMainName()).append(" join the Thralls attacking ").append(mainName).append(".  ").append(low.getMainName()).append(" is forced to climax as ").append(low.heShe()).append(" watches, while the Thralls (with ").append(high.getMainName()).append(") start to ").toString());
+                    else
+                        w.append(t, "the Thralls force them to ");
+                } else
+                if(partner.getGender().equals("female"))
+                {
+                    w.append(t, (new StringBuilder("The Thralls force ")).append(mainName).append(" and ").append(partner.getMainName()).append(" to grind their bodies together until they're both close to climax again, ").toString());
+                    if(loved.booleanValue() || lover == partner)
+                        w.append(t, "using their mutual affection to make it more difficult for them to resist");
+                    else
+                        w.append(t, "enjoying how much they obviously hate it");
+                    w.append(t, ", then the Thralls themselves join in and ");
+                } else
+                if(loved.booleanValue() || lover == partner)
+                    w.append(t, (new StringBuilder("Forcing ")).append(partner.getMainName()).append(" to join the abuse of ").append(partner.hisHer()).append(" friend, the Thralls ").toString());
+                else
+                    w.append(t, (new StringBuilder("The Thralls force ")).append(partner.getMainName()).append(" to participate in the punishment, and together they start to ").toString());
+                if(c.getHATELevel() < 3 || vVirg.booleanValue())
+                {
+                    w.append(t, (new StringBuilder("push their cocks into ")).append(mainName).append("'s mouth, ").append(c.hisHer()).append(" lips stretching to accommodate two at once.  ").toString());
+                    if(morality > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" reflexively sucks as ").append(c.heShe()).append(" climaxes, and ").append(c.hisHer()).append(" orgasmic moans drive them to cum down ").append(c.hisHer()).append(" throat.").toString());
+                    else
+                    if(morality > 33)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" reaches ").append(c.hisHer()).append(" own orgasm as ").append(c.heShe()).append(" feels their cum shoot down ").append(c.hisHer()).append(" throat.").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s indignant anger doesn't stop ").append(c.himHer()).append(" from climaxing under the continued stimulation, and ").append(c.heShe()).append(" chokes on the cum being shot down ").append(c.hisHer()).append(" throat.").toString());
+                } else
+                {
+                    w.append(t, (new StringBuilder("fuck ")).append(mainName).append("'s ").append(hole).append(" together, stretching it wide enough to hold two cocks at once.  ").toString());
+                    if(morality > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s sense of violation doesn't stop ").append(c.himHer()).append(" from climaxing under the stimulation, and the feeling of the cocks shooting their loads inside ").append(c.himHer()).append(" only enhances the shameful pleasure.").toString());
+                    else
+                    if(morality > 33)
+                        w.append(t, (new StringBuilder("The feeling of both of them shooting their loads deep inside ")).append(c.himHer()).append(" drives ").append(mainName).append(" to cum as well.").toString());
+                    else
+                        w.append(t, (new StringBuilder("The stimulation is too much to bear, and ")).append(mainName).append(" wraps ").append(c.hisHer()).append(" legs around them as they reach simultaneous orgasm together.").toString());
+                }
+            } else
+            if(variant == 2)
+            {
+                if(w.tickle().booleanValue())
+                    w.append(t, (new StringBuilder("The Thralls aren't content with just tickling ")).append(mainName).append(" and ").toString());
+                else
+                if(c.getGender().equals("male"))
+                    w.append(t, (new StringBuilder("The Thralls aren't content with just torturing ")).append(mainName).append("'s penis and ").toString());
+                else
+                    w.append(t, (new StringBuilder("Only one Thrall at a time can fit himself into ")).append(mainName).append("'s asshole, and the others aren't content with just ").toString());
+                if(c.getEXPOLevel() < 3 || modest.booleanValue())
+                {
+                    if(dignity > 66)
+                        w.append(t, (new StringBuilder("pulling off ")).append(c.hisHer()).append(" clothes, even though ").append(c.hisHer()).append(" clear embarrassment is somewhat satisfying.  ").toString());
+                    else
+                    if(dignity > 33)
+                        w.append(t, (new StringBuilder("tearing ")).append(c.hisHer()).append(" clothes off.  ").toString());
+                    else
+                        w.append(t, (new StringBuilder("stripping ")).append(c.himHer()).append(", especially with how little embarrassment ").append(c.heShe()).append("'s showing.  ").toString());
+                } else
+                if(dignity > 66)
+                    w.append(t, (new StringBuilder("enjoying ")).append(c.hisHer()).append(" obvious humiliation at being filmed in such an exposed state.  ").toString());
+                else
+                if(dignity > 33)
+                    w.append(t, (new StringBuilder("filming ")).append(c.hisHer()).append(" exposed body.  ").toString());
+                else
+                    w.append(t, (new StringBuilder("filming the places exposed by ")).append(c.hisHer()).append(" torn clothes and splayed out limbs as ").append(c.heShe()).append(" struggles wildly to escape.  ").toString());
+                if(solo.booleanValue())
+                {
+                    if(loved.booleanValue())
+                        w.append(t, (new StringBuilder("Ignoring ")).append(high.getMainName()).append("'s demands that they stop, they pull out their cocks, and ").append(low.getMainName()).append(" winces and averts ").append(low.hisHer()).append(" eyes.  ").toString());
+                    else
+                    if(hated.booleanValue())
+                        w.append(t, (new StringBuilder(String.valueOf(high.getMainName()))).append(" and ").append(low.getMainName()).append(" watch without much of a reaction as the Thralls around ").append(mainName).append(" pull out their cocks.  ").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(lover.getMainName()))).append(" raises ").append(c.hisHer()).append(" voice, trying to get the Thralls to stop, but they ignore ").append(c.himHer()).append(" and pull out their cocks.  ").toString());
+                    w.append(t, "They close in and ");
+                } else
+                if(trio.booleanValue())
+                {
+                    w.append(t, "The three Chosen are forced to kneel facing toward each other with their butts all facing outward toward the crowd");
+                    if(loved.booleanValue())
+                        w.append(t, ", whispering reassurances to each other ");
+                    else
+                    if(hated.booleanValue())
+                        w.append(t, ", glaring at each other ");
+                    else
+                        w.append(t, ", their breath hot on each other's faces ");
+                    if(high.getGender().equals("male") && low.getGender().equals("male"))
+                        w.append(t, (new StringBuilder("as the Thralls grab ")).append(high.getMainName()).append("'s and ").append(low.getMainName()).append("'s bruised penises to make them hold still while their ass cheeks are spread wide open.  ").toString());
+                    else
+                    if(high.getGender().equals("male"))
+                        w.append(t, (new StringBuilder("as ")).append(low.getMainName()).append(" whimpers with every thrust into ").append(c.hisHer()).append(" ass.  ").append(high.getMainName()).append("'s bruised penis is grabbed firmly to make ").append(c.himHer()).append(" stop struggling as they spread ").append(c.hisHer()).append(" ass cheeks wide open.  ").toString());
+                    else
+                    if(low.getGender().equals("male"))
+                        w.append(t, (new StringBuilder("as ")).append(high.getMainName()).append(" grunts and groans with every thrust into ").append(c.hisHer()).append(" ass.  ").append(low.getMainName()).append("'s bruised penis is grabbed firmly, leaving ").append(c.himHer()).append(" unable to do anything but whimper in pain as they spread ").append(c.hisHer()).append(" ass cheeks wide open.  ").toString());
+                    else
+                        w.append(t, (new StringBuilder("as ")).append(high.getMainName()).append(" and ").append(low.getMainName()).append(" endure their own anal rape.  ").toString());
+                    w.append(t, (new StringBuilder("The Thralls closest to ")).append(mainName).append(" pull out their cocks and ").toString());
+                } else
+                {
+                    w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s forced to lay atop ").append(partner.getMainName()).toString());
+                    if(loved.booleanValue() || partner == lover)
+                        w.append(t, ", who tries to say something supportive but stops with a gasp");
+                    else
+                        w.append(t, (new StringBuilder(", who winces and frowns at ")).append(c.himHer()).toString());
+                    if(partner.getGender().equals("male"))
+                    {
+                        w.append(t, (new StringBuilder(" as the position puts pressure on ")).append(partner.hisHer()).append(" ").toString());
+                        if(c.getGender().equals("male"))
+                            w.append(t, "own ");
+                        w.append(t, "bruised penis.  ");
+                    } else
+                    {
+                        w.append(t, (new StringBuilder(" as ")).append(c.heShe()).append(" endures the Thrall's cock thrusting in and out of ").append(c.hisHer()).append(" ").toString());
+                        if(!c.getGender().equals("male"))
+                            w.append(t, "own ");
+                        w.append(t, "ass.  ");
+                    }
+                    w.append(t, (new StringBuilder("Crowding around the both of them, the Thralls on ")).append(mainName).append("'s side pull out their cocks and ").toString());
+                }
+                if(c.getHATELevel() < 3 || vVirg.booleanValue())
+                {
+                    if(morality > 66)
+                        w.append(t, (new StringBuilder("grind against ")).append(c.hisHer()).append(" whole body, taunting ").append(c.himHer()).append(" all the while in an effort to awaken ").append(c.hisHer()).append(" hatred.  ").toString());
+                    else
+                    if(morality > 33)
+                        w.append(t, (new StringBuilder("grind against ")).append(c.hisHer()).append(" whole body.  ").toString());
+                    else
+                        w.append(t, (new StringBuilder("grind against ")).append(c.hisHer()).append(" whole body, careful to avoid ").append(c.hisHer()).append(" bared teeth.  ").toString());
+                    if(c.getHATELevel() < 3)
+                    {
+                        w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" Sexual Barrier prevents them from penetrating ").append(c.himHer()).append(", but the way their shafts rub against ").toString());
+                    } else
+                    {
+                        if(c.getGender().equals("male"))
+                            w.append(t, (new StringBuilder("They can't agree on who gets to teach ")).append(c.himHer()).append(" the pleasure of getting fucked like a girl").toString());
+                        else
+                            w.append(t, (new StringBuilder("They can't agree on who gets to deflower ")).append(c.himHer()).toString());
+                        w.append(t, ", but the way their jostling shafts rub against ");
+                    }
+                    if(c.getGender().equals("female"))
+                        w.append(t, (new StringBuilder(String.valueOf(c.hisHer()))).append(" clit ").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(c.hisHer()))).append(" own ").toString());
+                } else
+                if(morality > 66)
+                    w.append(t, (new StringBuilder("take turns penetrating ")).append(c.hisHer()).append(" ").append(hole).append(".  The sense of violation, as terrible as it feels, also ").toString());
+                else
+                if(morality > 33)
+                    w.append(t, (new StringBuilder("take turns fucking ")).append(c.hisHer()).append(" ").append(hole).append(".  The sensation of them cumming inside ").toString());
+                else
+                    w.append(t, (new StringBuilder("take turns riding ")).append(c.himHer()).append(", penetrating ").append(c.hisHer()).append(" ").append(hole).append(" as ").append(c.heShe()).append(" angrily tries to buck them off.  It's infuriating, but it also ").toString());
+                if(c.getPLEALevel() < 3 || cVirg.booleanValue())
+                {
+                    if(innocence > 66)
+                        w.append(t, (new StringBuilder("gives ")).append(c.himHer()).append(" a sense of butterflies in ").append(c.hisHer()).append(" belly.").toString());
+                    else
+                    if(innocence > 33)
+                        w.append(t, (new StringBuilder("starts to turn ")).append(c.himHer()).append(" on.").toString());
+                    else
+                        w.append(t, (new StringBuilder("causes a degree of sexual arousal ")).append(c.heShe()).append(" can't deny.").toString());
+                } else
+                if(innocence > 66)
+                    w.append(t, (new StringBuilder("makes ")).append(c.hisHer()).append(" mind go pure white with pulses of pleasure.").toString());
+                else
+                if(innocence > 33)
+                    w.append(t, (new StringBuilder("doesn't take long to make ")).append(c.himHer()).append(" cum.").toString());
+                else
+                    w.append(t, "causes pleasure that quickly builds to the point of orgasm.");
+            } else
+            if(variant == 3)
+            {
+                if(c.getINJULevel() < 3 || aVirg.booleanValue())
+                {
+                    if(dignity > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" struggles not to show any reaction as the Thralls ").toString());
+                    else
+                    if(dignity > 33)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" tells the Thralls to stop, attempting to put authority into ").append(c.hisHer()).append(" voice, but they continue to ").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" shouts for the Thralls to stop as they ").toString());
+                } else
+                if(w.tickle().booleanValue())
+                {
+                    if(dignity > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" struggles vainly to keep a straight face and suppress ").append(c.hisHer()).append(" laughter as the Thralls tickle ").append(c.hisHer()).append(" bare feet and ").toString());
+                    else
+                    if(dignity > 33)
+                        w.append(t, (new StringBuilder("Even as ")).append(c.heShe()).append(" laughs uncontrollably, ").append(mainName).append(" tries to tell the Thralls to leave ").append(c.himHer()).append(" alone, but they continue to tickle ").append(c.hisHer()).append(" bare feet and ").toString());
+                    else
+                        w.append(t, (new StringBuilder("Laughing uncontrollably as the Thralls tickle ")).append(c.hisHer()).append(" bare feet, ").append(mainName).append(" barely manages to tell them to stop, but they only torment ").append(c.himHer()).append(" even more, starting to ").toString());
+                } else
+                if(c.getGender().equals("male"))
+                {
+                    if(dignity > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" struggles vainly to suppress ").append(c.hisHer()).append(" moans of pain as the Thralls crush ").append(c.hisHer()).append(" testicles and ").toString());
+                    else
+                    if(dignity > 33)
+                        w.append(t, (new StringBuilder("Even as ")).append(c.heShe()).append(" moans in pain, ").append(mainName).append(" tries to tell the Thralls to leave ").append(c.himHer()).append(" alone, but they continue to crush ").append(c.hisHer()).append(" testicles as they ").toString());
+                    else
+                        w.append(t, (new StringBuilder("Squealing in pain as the Thralls crush ")).append(c.hisHer()).append(" testicles, ").append(mainName).append(" tries to tell them to stop, but they only torment ").append(c.himHer()).append(" even more, starting to ").toString());
+                } else
+                if(dignity > 66)
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" struggles vainly to suppress ").append(c.hisHer()).append(" little squeaks and moans as one of the Thralls fucks ").append(c.himHer()).append(" up the ass and the others ").toString());
+                else
+                if(dignity > 33)
+                    w.append(t, (new StringBuilder("Even as ")).append(c.heShe()).append(" moans in mingled pain and pleasure at being fucked up the ass, ").append(mainName).append(" tries to tell the Thralls to leave ").append(c.himHer()).append(" alone, but they only move on to ").toString());
+                else
+                    w.append(t, (new StringBuilder("Squealing as the Thralls fuck ")).append(c.himHer()).append(" up the ass, ").append(mainName).append(" tries to tell them to stop, but they only torment ").append(c.himHer()).append(" even more, starting to ").toString());
+                if(c.getHATELevel() < 3 || vVirg.booleanValue())
+                {
+                    if(morality > 66)
+                        w.append(t, (new StringBuilder("force ")).append(c.himHer()).append(" to suck their cocks as they tease ").append(c.hisHer()).append(" nipples and ").append(organ).append(".  ").toString());
+                    else
+                    if(morality > 33)
+                        w.append(t, (new StringBuilder("push vibrating rotors against ")).append(c.hisHer()).append(" nipples and ").append(organ).append(".  ").toString());
+                    else
+                        w.append(t, (new StringBuilder("tease ")).append(c.hisHer()).append(" nipples and ").append(organ).append(" with no regard for ").append(c.hisHer()).append(" obvious anger.  ").toString());
+                } else
+                if(morality > 66)
+                    w.append(t, (new StringBuilder("force their cocks into ")).append(c.hisHer()).append(" mouth and ").append(hole).append(" as well.  ").toString());
+                else
+                if(morality > 33)
+                    w.append(t, (new StringBuilder("penetrate ")).append(c.hisHer()).append(" ").append(hole).append(" and push vibrating rotors against ").append(c.hisHer()).append(" nipples and ").append(organ).append(" at the same time.  ").toString());
+                else
+                    w.append(t, (new StringBuilder("push their cocks into ")).append(c.hisHer()).append(" ").append(hole).append(", ignoring ").append(c.hisHer()).append(" demands that they not cum inside.  ").toString());
+                if(solo.booleanValue())
+                {
+                    w.append(t, "The Thralls push their cameras close from all angles, ");
+                    if(loved.booleanValue())
+                        w.append(t, (new StringBuilder("forcing ")).append(high.getMainName()).append(" and ").append(low.getMainName()).append(" to watch as well.  The stimulation continues until ").toString());
+                    else
+                    if(hated.booleanValue())
+                    {
+                        w.append(t, (new StringBuilder("intending to make it so that the public as well as the watching ")).append(high.getMainName()).append(" and ").append(low.getMainName()).append(" are disappointed in ").append(c.hisHer()).append(" weakness when ").append(c.heShe()).append(" ").toString());
+                    } else
+                    {
+                        w.append(t, "intending to show this to the public.  Meanwhile, ");
+                        if(lover == high)
+                            w.append(t, (new StringBuilder(String.valueOf(low.getMainName()))).append("'s disappointment and ").append(high.getMainName()).append("'s anger are obvious as the Thralls escalate the stimulation until ").toString());
+                        else
+                            w.append(t, (new StringBuilder(String.valueOf(low.getMainName()))).append("'s fear and ").append(high.getMainName()).append("'s contempt are obvious as the Thralls escalate the stimulation until ").toString());
+                    }
+                } else
+                if(trio.booleanValue())
+                {
+                    w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(", ").append(high.getMainName()).append(", and ").append(low.getMainName()).append(" are all forced together, tangling their bare limbs around each other as the pleasure escalates and the Thralls pull out their cameras to film their mutual lust.  ").toString());
+                    if(loved.booleanValue())
+                        w.append(t, (new StringBuilder("The feeling of ")).append(c.hisHer()).append(" friends' bodies trembling as they approach their own orgasms stimulates ").append(c.himHer()).append(" until ").toString());
+                    else
+                    if(hated.booleanValue())
+                        w.append(t, (new StringBuilder("The taboo pleasure of being forced to grind against ")).append(c.hisHer()).append(" rivals grows stronger and stronger until ").toString());
+                    else
+                        w.append(t, (new StringBuilder("In the midst of the orgy, ")).append(c.heShe()).append(" and ").append(lover.getMainName()).append(" can clearly feel each other approaching orgasm, and that knowledge is so stimulating that ").toString());
+                } else
+                {
+                    w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" and ").append(partner.getMainName()).append(" are pushed together, bare limbs tangled around each other's stripped bodies, ").toString());
+                    if(loved.booleanValue() || partner == lover)
+                        w.append(t, "close enough to feel each other's breath on their faces");
+                    else
+                        w.append(t, "refusing to meet each other's gaze as they deny their shared passion");
+                    w.append(t, ".  The Thralls close in with their cameras to film as ");
+                }
+                if(c.getPLEALevel() < 3 || cVirg.booleanValue())
+                {
+                    if(innocence > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" gasps and squirms against the warmth building in ").append(c.hisHer()).append(" loins.").toString());
+                    else
+                    if(innocence > 33)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is shaking with the urge to cum.").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" has to shake ").append(c.hisHer()).append(" head and take deep breaths in order to stay sane.").toString());
+                } else
+                if(innocence > 66)
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" throws ").append(c.hisHer()).append(" head back and surrenders to the urge to cum, forgetting everything else.").toString());
+                else
+                if(innocence > 33)
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" starts reflexively bucking ").append(c.hisHer()).append(" hips, turning ").append(c.hisHer()).append(" face downward in shame at cumming like this.").toString());
+                else
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" gasps and shudders, face bright red with shame at being forced to cum.").toString());
+            }
+        } else
+        if(variant == 0)
+        {
+            if(solo.booleanValue())
+            {
+                if(high.getHATELevel() < 3 && mid.getHATELevel() < 3)
+                    w.append(t, (new StringBuilder("With ")).append(high.getMainName()).append("'s and ").append(mid.getMainName()).append("'s Sexual Barriers still intact, ").toString());
+                else
+                if(high.getHATELevel() < 3)
+                    w.append(t, (new StringBuilder("With ")).append(mid.getMainName()).append(" barely fending off ").append(mid.hisHer()).append(" attackers and ").append(high.getMainName()).append("'s Sexual Barrier still intact, ").toString());
+                else
+                if(mid.getHATELevel() < 3)
+                    w.append(t, (new StringBuilder("With ")).append(high.getMainName()).append(" determinedly fending off ").append(high.hisHer()).append(" attackers and ").append(mid.getMainName()).append("'s Sexual Barrier still intact, ").toString());
+                else
+                    w.append(t, (new StringBuilder("With ")).append(high.getMainName()).append(" and ").append(mid.getMainName()).append(" fending off their attackers, ").toString());
+                w.append(t, (new StringBuilder("the Thralls focus their efforts on ")).append(mainName).append(".  Some force ").append(c.himHer()).append(" to suck their cocks while others prefer ").toString());
+            } else
+            if(trio.booleanValue())
+            {
+                if(high.getGender().equals("female") && mid.getGender().equals("female"))
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" alternates between licking ").append(high.getMainName()).append("'s and ").append(mid.getMainName()).append("'s clits as their pussies are pounded by the Thralls, ").toString());
+                else
+                if(high.getGender().equals("female"))
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" alternates between sucking ").append(mid.getMainName()).append("'s cock and licking ").append(high.getMainName()).append("'s clit as they're both fucked by the Thralls, ").toString());
+                else
+                if(mid.getGender().equals("female"))
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" alternates between sucking ").append(high.getMainName()).append("'s cock and licking ").append(mid.getMainName()).append("'s clit as they're both fucked by the Thralls, ").toString());
+                else
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" takes ").append(high.getMainName()).append("'s and ").append(mid.getMainName()).append("'s cocks into ").append(c.hisHer()).append(" mouth at once as they're both fucked from behind by the Thralls, ").toString());
+                if(loved.booleanValue())
+                    w.append(t, (new StringBuilder("deliriously trying to soothe ")).append(c.hisHer()).append(" friends' suffering.  ").toString());
+                else
+                if(hated.booleanValue())
+                    w.append(t, (new StringBuilder("forced to move ")).append(c.hisHer()).append(" head back and forth by ").append(c.hisHer()).append(" attackers' hands gripping ").append(c.hisHer()).append(" hair.  ").toString());
+                else
+                    w.append(t, (new StringBuilder("being forced against ")).append(c.hisHer()).append(" will but clearly less bothered by servicing ").append(lover.getMainName()).append(".  ").toString());
+                w.append(t, (new StringBuilder("Meanwhile, the Thralls make use of ")).append(mainName).append("'s lower body, ").toString());
+            } else
+            {
+                if(partner.getGender().equals("female"))
+                    w.append(t, (new StringBuilder("As one of the Thralls pounds ")).append(partner.getMainName()).append(", ").append(mainName).append(" licks ").append(partner.hisHer()).append(" clit").toString());
+                else
+                    w.append(t, (new StringBuilder("As one of the Thralls fucks ")).append(partner.getMainName()).append(", ").append(mainName).append(" sucks ").append(partner.hisHer()).append(" cock").toString());
+                if(loved.booleanValue() || lover == partner)
+                    w.append(t, (new StringBuilder(", obeying the Thralls' orders while also soothing ")).append(c.hisHer()).append(" friend.  ").toString());
+                else
+                    w.append(t, ".  ");
+                w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is completely distracted and defenseless when the Thralls start ").toString());
+            }
+            if(c.getINJULevel() < 3 || aVirg.booleanValue())
+            {
+                if(morality > 66)
+                    w.append(t, (new StringBuilder("violating ")).append(c.hisHer()).append(" ").append(hole).append(" as ").append(c.heShe()).append(" shudders in self-disgust.  ").toString());
+                else
+                if(morality > 33)
+                    w.append(t, (new StringBuilder("penetrating ")).append(c.hisHer()).append(" ").append(hole).append(" as ").append(c.heShe()).append(" sobs and tries to shake ").append(c.hisHer()).append(" head.  ").toString());
+                else
+                    w.append(t, (new StringBuilder("thrusting in and out of ")).append(c.hisHer()).append(" ").append(hole).append(" as ").append(c.heShe()).append(" sobs in helpless fury.  ").toString());
+            } else
+            if(w.tickle().booleanValue())
+            {
+                if(morality > 66)
+                    w.append(t, (new StringBuilder("tickling ")).append(c.himHer()).append(" and violating ").append(c.hisHer()).append(" ").append(hole).append(" at the same time.  The fact that ").append(c.heShe()).append(" can't contain ").append(c.hisHer()).append(" sobs of laughter makes ").append(c.himHer()).append(" feel like an utter failure.  ").toString());
+                else
+                if(morality > 33)
+                    w.append(t, (new StringBuilder("forcing ")).append(c.himHer()).append(" into helpless laughter so that ").append(c.hisHer()).append(" ").append(hole).append(" tightens up around their cocks.  ").toString());
+                else
+                    w.append(t, (new StringBuilder("deepening ")).append(c.hisHer()).append(" humiliation by using incessant tickling to force ").append(c.himHer()).append(" to laugh as they fuck ").append(c.hisHer()).append(" ").append(hole).append(".  ").toString());
+            } else
+            if(c.getGender().equals("male"))
+            {
+                if(morality > 66)
+                    w.append(t, (new StringBuilder("violating ")).append(c.hisHer()).append(" asshole and pinching ").append(c.hisHer()).append(" penis as ").append(c.heShe()).append(" sobs with self-disgust at ").append(c.hisHer()).append(" own weakness for letting this happen.  ").toString());
+                else
+                if(morality > 33)
+                    w.append(t, (new StringBuilder("pummeling ")).append(c.hisHer()).append(" penis so that ").append(c.hisHer()).append(" anus tightens reflexively around their cocks.  ").toString());
+                else
+                    w.append(t, (new StringBuilder("twisting ")).append(c.hisHer()).append(" penis and pounding ").append(c.hisHer()).append(" asshole until ").append(c.hisHer()).append(" resentful glare melts into pathetic tears.  ").toString());
+            } else
+            if(morality > 66)
+                w.append(t, (new StringBuilder("violating ")).append(c.hisHer()).append(" pussy and asshole in turn as ").append(c.heShe()).append(" shudders in self-disgust.  ").toString());
+            else
+            if(morality > 33)
+                w.append(t, (new StringBuilder("penetrating ")).append(c.hisHer()).append(" pussy and asshole in turn as ").append(c.heShe()).append(" sobs and shakes ").append(c.hisHer()).append(" head.  ").toString());
+            else
+                w.append(t, (new StringBuilder("thrusting in and out of ")).append(c.hisHer()).append(" pussy and asshole in turn as ").append(c.heShe()).append(" sobs in helpless fury.  ").toString());
+            if(c.getPLEALevel() < 3 || cVirg.booleanValue())
+            {
+                if(innocence > 66)
+                    w.append(t, (new StringBuilder("The feeling of the Thrall cumming inside is so awful that ")).append(mainName).append(" barely even notices the Thralls ").toString());
+                else
+                if(innocence > 33)
+                    w.append(t, (new StringBuilder("Feeling completely helpless, ")).append(mainName).append(" just goes limp in the arms of the Thralls ").toString());
+                else
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" knows ").append(c.heShe()).append(" needs to focus on escaping, but ").append(c.heShe()).append(" can't even muster the energy to struggle against the Thralls ").toString());
+            } else
+            if(innocence > 66)
+                w.append(t, (new StringBuilder("But the negative responses don't last long, as the pleasure soon builds to the point of orgasm, leaving ")).append(mainName).append(" moaning helplessly in the arms of the Thralls ").toString());
+            else
+            if(innocence > 33)
+                w.append(t, (new StringBuilder("Feeling completely helpless, ")).append(mainName).append(" almost welcomes the haze of pleasure that builds to the point of orgasm, preventing ").append(c.himHer()).append(" from even thinking about fighting against the Thralls ").toString());
+            else
+                w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" knows that ").append(c.heShe()).append(" needs to focus on escaping, but ").append(c.hisHer()).append(" body betrays ").append(c.himHer()).append(".  ").append(c.HeShe()).append(" climaxes, helpless against the Thralls ").toString());
+            String girl = "girl";
+            if(c.getGender().equals("male"))
+                girl = "boy";
+            if(c.getEXPOLevel() < 3 || modest.booleanValue())
+            {
+                if(dignity > 66)
+                    w.append(t, (new StringBuilder("tearing at ")).append(c.hisHer()).append(" ").append(bottomDesc).append(" in order to expose the shy ").append(girl).append("'s body to the world.").toString());
+                else
+                if(dignity > 33)
+                    w.append(t, (new StringBuilder("tearing at ")).append(c.hisHer()).append(" ").append(bottomDesc).append(" in hopes of humiliating ").append(c.himHer()).append(" even further.").toString());
+                else
+                    w.append(t, (new StringBuilder("pulling off ")).append(c.hisHer()).append(" ").append(bottomDesc).append(".").toString());
+            } else
+            if(dignity > 66)
+                w.append(t, (new StringBuilder("filming the shy ")).append(girl).append("'s stripped body.").toString());
+            else
+            if(dignity > 33)
+                w.append(t, (new StringBuilder("spreading ")).append(c.hisHer()).append(" legs apart in order to film the spot where ").append(c.heShe()).append("'s being penetrated.").toString());
+            else
+                w.append(t, (new StringBuilder("filming the spot between ")).append(c.hisHer()).append(" splayed-out legs.").toString());
+        } else
+        if(variant == 1)
+        {
+            if(solo.booleanValue())
+            {
+                if(loved.booleanValue())
+                    w.append(t, (new StringBuilder("Turned on by the way ")).append(high.getMainName()).append(" and ").append(mid.getMainName()).append(" are watching ").append(c.himHer()).append(", ").append(mainName).append(" hates ").append(c.himHer()).append("self for ").toString());
+                else
+                if(hated.booleanValue())
+                    w.append(t, (new StringBuilder(String.valueOf(high.getMainName()))).append(" and ").append(mid.getMainName()).append(" are obviously contemptful toward ").append(mainName).append(" for ").toString());
+                else
+                    w.append(t, (new StringBuilder("Turned on by the feeling of ")).append(lover.getMainName()).append("'s eyes on ").append(c.himHer()).append(", ").append(mainName).append(" hates ").append(c.himHer()).append("self for ").toString());
+            } else
+            if(trio.booleanValue())
+            {
+                if(loved.booleanValue())
+                    w.append(t, (new StringBuilder("The sight of ")).append(high.getMainName()).append(" and ").append(mid.getMainName()).append(" squirming and moaning in orgasm turns ").append(mainName).append(" on so much that ").append(c.heShe()).append(" has no chance to resist ").toString());
+                else
+                if(hated.booleanValue())
+                    w.append(t, (new StringBuilder("The sight of ")).append(high.getMainName()).append(" and ").append(mid.getMainName()).append(" squirming and moaning in orgasm makes ").append(mainName).append(" feel like there's nothing wrong with ").toString());
+                else
+                    w.append(t, (new StringBuilder("Feeling turned on and a little jealous as ")).append(c.heShe()).append(" watches ").append(high.getMainName()).append(" and ").append(mid.getMainName()).append(" forced to grind against each other as they reach orgasm, ").append(mainName).append(" can't resist ").toString());
+            } else
+            if(lover == partner || loved.booleanValue())
+                w.append(t, (new StringBuilder("In the press of bodies around the three Chosen, ")).append(partner.getMainName()).append("'s orgasmic spasms cause ").append(partner.himHer()).append(" to grind against ").append(mainName).append(", who is so turned on by the contact that ").append(c.heShe()).append(" has no chance to resist ").toString());
+            else
+                w.append(t, (new StringBuilder("In the press of bodies around the three Chosen, ")).append(partner.getMainName()).append("'s orgasmic spasms cause ").append(partner.himHer()).append(" to grind against ").append(mainName).append(".  Even though ").append(mainName).append(" tries to be strong, the stimulation is still too much to bear, and ").append(c.heShe()).append(" ends up ").toString());
+            if(c.getINJULevel() < 3 || aVirg.booleanValue())
+            {
+                if(innocence > 66)
+                    w.append(t, (new StringBuilder("surrendering to the pleasure of the Thralls' hands on ")).append(c.hisHer()).append(" ").append(organ).append(".  ").toString());
+                else
+                if(innocence > 33)
+                    w.append(t, (new StringBuilder("cumming for the Thralls tugging ")).append(c.hisHer()).append(" ").append(organ).append(".  ").toString());
+                else
+                    w.append(t, (new StringBuilder("reaching climax due to the Thralls' stimulation of ")).append(c.hisHer()).append(" ").append(organ).append(".  ").toString());
+            } else
+            if(w.tickle().booleanValue())
+            {
+                if(innocence > 66)
+                    w.append(t, (new StringBuilder("surrendering to the pleasure, whimpering with delirious laughter as the Thralls' tickling hands make their way to ")).append(c.hisHer()).append(" ").append(organ).append(".  ").toString());
+                else
+                if(innocence > 33)
+                    w.append(t, (new StringBuilder("cumming and laughing at the same time, helpless against the Thralls tickling ")).append(c.himHer()).append(" and tugging ").append(c.hisHer()).append(" ").append(organ).append(".  ").toString());
+                else
+                    w.append(t, (new StringBuilder("reaching climax even as ")).append(c.heShe()).append(" shakes with helpless laughter due to the Thralls' tickling and stimulation of ").append(c.hisHer()).append(" ").append(organ).append(".  ").toString());
+            } else
+            if(c.getGender().equals("male"))
+            {
+                if(innocence > 66)
+                    w.append(t, (new StringBuilder("surrendering to the mingled pleasure and pain of the Thralls' rough hands tormenting ")).append(c.hisHer()).append(" sensitive penis.  ").toString());
+                else
+                if(innocence > 33)
+                    w.append(t, (new StringBuilder("cumming and whimpering in pain at the same time, helpless against the Thralls manhandling ")).append(c.hisHer()).append(" sensitive penis.  ").toString());
+                else
+                    w.append(t, (new StringBuilder("reaching climax even as the Thralls pummel ")).append(c.hisHer()).append(" sensitive testicles.  ").toString());
+            } else
+            if(innocence > 66)
+                w.append(t, (new StringBuilder("surrendering to the mingled pleasure and pain as one of the Thralls pinches ")).append(c.hisHer()).append(" ").append(organ).append(" while another fists ").append(c.hisHer()).append(" ass.  ").toString());
+            else
+            if(innocence > 33)
+                w.append(t, (new StringBuilder("cumming and whimpering in pain at the same time, helpless against the rough handling of ")).append(c.hisHer()).append(" ").append(organ).append(" from the outside and the fist ravaging ").append(c.hisHer()).append(" ass from the inside.  ").toString());
+            else
+                w.append(t, (new StringBuilder("reaching climax as the Thralls combine stimulating ")).append(c.hisHer()).append(" ").append(organ).append(" with fisting ").append(c.hisHer()).append(" ass.  ").toString());
+            if(c.getHATELevel() < 3 || vVirg.booleanValue())
+            {
+                if(morality > 66)
+                    w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" still has the presence of mind to be disgusted by the Thralls grinding against ").append(c.himHer()).append(" in pursuit of their own orgasms, but ").append(c.heShe()).append(" feels ").append(c.heShe()).append(" deserves the degrading treatment for enjoying ").append(c.himHer()).append("self this much").toString());
+                else
+                if(morality > 33)
+                    w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" limbs feel too weak to push away the Thralls grinding against ").append(c.himHer()).append(" in pursuit of their own orgasms").toString());
+                else
+                    w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s so delirious with pleasure that ").append(c.heShe()).append(" barely notices the Thralls humping ").append(c.himHer()).append(" in pursuit of their own orgasms").toString());
+            } else
+            if(morality > 66)
+                w.append(t, (new StringBuilder("As disgusted as ")).append(c.heShe()).append(" is by the Thrall's cock plunging into ").append(c.hisHer()).append(" ").append(hole).append(" and spurting its load inside, ").append(c.heShe()).append(" feels ").append(c.heShe()).append(" deserves it for enjoying this at all").toString());
+            else
+            if(morality > 33)
+                w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" ").append(hole).append(" squeezes down on a Thrall's invading cock, and ").append(c.heShe()).append(" realizes with detached disgust that it's cumming inside ").append(c.himHer()).toString());
+            else
+                w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" tries to threaten retribution if the Thrall fucking ").append(c.hisHer()).append(" ").append(hole).append(" cums inside, but ").append(c.heShe()).append(" can't form the words.  ").append(c.HeShe()).append(" groans as ").append(c.heShe()).append(" feels the invading cock spurting inside ").append(c.himHer()).toString());
+            if(c.getEXPOLevel() < 3 || modest.booleanValue())
+            {
+                if(dignity > 66)
+                    w.append(t, (new StringBuilder(".  No matter how embarrassing it is, ")).append(c.heShe()).append(" doesn't have the willpower to stop the others from stripping ").append(c.himHer()).append(".").toString());
+                else
+                if(dignity > 33)
+                    w.append(t, (new StringBuilder(".  With ")).append(c.hisHer()).append(" mind feeling so empty, ").append(c.heShe()).append(" can't muster the effort to stop the others from stripping ").append(c.himHer()).append(".").toString());
+                else
+                    w.append(t, (new StringBuilder(".  Before ")).append(c.heShe()).append(" knows it, the others have made significant progress in stripping ").append(c.himHer()).append(".").toString());
+            } else
+            if(dignity > 66)
+                w.append(t, (new StringBuilder(".  No matter how embarrassing it is, ")).append(c.heShe()).append(" doesn't have the willpower to hide ").append(c.hisHer()).append(" stripped body from all the cameras.").toString());
+            else
+            if(dignity > 33)
+                w.append(t, (new StringBuilder(".  With ")).append(c.hisHer()).append(" mind feeling so empty, ").append(c.heShe()).append(" can't muster the effort to stop the others from filming ").append(c.hisHer()).append(" humiliating state from all angles.").toString());
+            else
+                w.append(t, (new StringBuilder(".  Before ")).append(c.heShe()).append(" knows it, dozens of cameras are being pushed up close to film ").append(c.hisHer()).append(" face and stripped body.").toString());
+        } else
+        if(variant == 2)
+        {
+            if(solo.booleanValue())
+            {
+                if(loved.booleanValue())
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" sobs for ").append(high.getMainName()).append(" and ").append(mid.getMainName()).append(" to save ").append(c.himHer()).append(", but they're both held back by their captors.  ").toString());
+                else
+                if(hated.booleanValue())
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" sobs at the helplessness of ").append(c.hisHer()).append(" situation, earning contemptful glances from ").append(high.getMainName()).append(" and ").append(mid.getMainName()).append(".  ").toString());
+                else
+                if(lover == high)
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" sobs openly for ").append(lover.getMainName()).append(" to help ").append(c.himHer()).append(", prompting ").append(mid.getMainName()).append(" to sigh with annoyance.  ").toString());
+                else
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" sobs openly for ").append(lover.getMainName()).append(" to help ").append(c.himHer()).append(", earning a contemptful glance from ").append(high.getMainName()).append(".  ").toString());
+            } else
+            if(trio.booleanValue())
+            {
+                if(!loved.booleanValue() && !hated.booleanValue())
+                    w.append(t, (new StringBuilder("Even though ")).append(lover.getMainName()).append(" is dealing with ").append(lover.hisHer()).append(" own torture, ").toString());
+                else
+                    w.append(t, "Even though they're dealing with their own torture, ");
+                if(loved.booleanValue())
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" still sobs for ").append(high.getMainName()).append(" and ").append(mid.getMainName()).append(" to help ").append(c.himHer()).append(", which only makes them feel even worse.  ").toString());
+                else
+                if(hated.booleanValue())
+                {
+                    w.append(t, (new StringBuilder(String.valueOf(high.getMainName()))).append(" and ").append(mid.getMainName()).append(" aren't sobbing pathetically like ").append(mainName).append(" is.  ").toString());
+                } else
+                {
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" still sobs for ").append(lover.hisHer()).append(" help ").toString());
+                    if(lover == high)
+                        w.append(t, (new StringBuilder("while ")).append(mid.getMainName()).append(" clenches ").append(mid.hisHer()).append(" teeth and tries to hold back ").append(mid.hisHer()).append(" voice.  ").toString());
+                    else
+                        w.append(t, (new StringBuilder("while ")).append(high.getMainName()).append(" tries to fight ").append(high.hisHer()).append(" way free.  ").toString());
+                }
+            } else
+            if(loved.booleanValue() || lover == partner)
+                w.append(t, (new StringBuilder("Even though ")).append(partner.getMainName()).append(" is dealing with ").append(partner.hisHer()).append(" own torture, ").append(mainName).append(" still sobs for ").append(partner.hisHer()).append(" help.  ").toString());
+            else
+                w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" sobs openly for someone to save ").append(c.himHer()).append(" while ").append(partner.getMainName()).append(" clenches ").append(c.hisHer()).append(" teeth and tries to hold back ").append(c.hisHer()).append(" own voice.  ").toString());
+            if(w.tickle().booleanValue())
+                w.append(t, (new StringBuilder("The Thrall's tickling is driving ")).append(mainName).append(" crazy, ").toString());
+            else
+            if(c.getGender().equals("male"))
+                w.append(t, (new StringBuilder("The pain of the Thralls crushing and twisting ")).append(mainName).append("'s testicles is driving ").append(c.himHer()).append(" crazy, ").toString());
+            else
+                w.append(t, (new StringBuilder("The repeated impacts of the Thrall fucking ")).append(c.himHer()).append(" up the ass are driving ").append(c.himHer()).append(" crazy, ").toString());
+            if(c.getHATELevel() < 3 || vVirg.booleanValue())
+            {
+                if(morality > 66)
+                    w.append(t, (new StringBuilder("and ")).append(c.heShe()).append("'s ashamed of ").append(c.himHer()).append("self for feeling pleasure from the way they tug ").append(c.hisHer()).append(" ").append(organ).append(" at the same time.  ").toString());
+                else
+                if(morality > 33)
+                    w.append(t, (new StringBuilder("and ")).append(c.heShe()).append("'s desperately trying to deny the pleasure ").append(c.heShe()).append(" feels as they tug ").append(c.hisHer()).append(" ").append(organ).append(" at the same time.  ").toString());
+                else
+                    w.append(t, (new StringBuilder("and ")).append(c.heShe()).append("'s caught between rage, embarrassment, and confused pleasure as they tug ").append(c.hisHer()).append(" ").append(organ).append(" at the same time.  ").toString());
+            } else
+            if(morality > 66)
+                w.append(t, (new StringBuilder("and it's only made worse by ")).append(c.hisHer()).append(" feelings of violated worthlessness as they take turns cumming inside ").append(c.hisHer()).append(" ").append(hole).append(" and stroking ").append(c.hisHer()).append(" ").append(organ).append(" at the same time.  ").toString());
+            else
+            if(morality > 33)
+                w.append(t, (new StringBuilder("and ")).append(c.hisHer()).append(" efforts to deny the pleasure from the Thrall tugging ").append(c.hisHer()).append(" ").append(organ).append(" fall to pieces when another penetrates ").append(c.hisHer()).append(" ").append(hole).append(" and cums inside.  ").toString());
+            else
+                w.append(t, (new StringBuilder("and even as ")).append(c.heShe()).append(" deliriously tries to threaten the Thrall penetrating ").append(c.hisHer()).append(" ").append(hole).append(", ").append(c.heShe()).append(" can't help but buck ").append(c.hisHer()).append(" hips at the same time.  ").toString());
+            if(c.getPLEALevel() < 3 || cVirg.booleanValue())
+            {
+                if(innocence > 66)
+                    w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" still manages to not completely give ").append(c.himHer()).append("self over to the feelings, focusing on ").toString());
+                else
+                if(innocence > 33)
+                    w.append(t, (new StringBuilder("It's not quite enough to make ")).append(c.himHer()).append(" cum yet, mostly because of ").toString());
+                else
+                    w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" still manages to resist the urge to climax, thanks largely to ").toString());
+            } else
+            if(innocence > 66)
+                w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" feeble willpower is completely outmatched, and ").append(c.heShe()).append(" doesn't even try to fight the waves of pleasure running through ").append(c.hisHer()).append(" body despite ").toString());
+            else
+            if(innocence > 33)
+                w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" cums quickly despite ").toString());
+            else
+                w.append(t, (new StringBuilder("Tears of humiliation leak out of ")).append(c.hisHer()).append(" eyes as ").append(c.heShe()).append("'s forced to climax, unable to stop dwelling on ").toString());
+            if(c.getEXPOLevel() < 3 || modest.booleanValue())
+            {
+                if(dignity > 66)
+                    w.append(t, (new StringBuilder(String.valueOf(c.hisHer()))).append(" horror at the fact that the Thralls are stripping ").append(c.himHer()).append(" at the same time.").toString());
+                else
+                if(dignity > 33)
+                    w.append(t, (new StringBuilder(String.valueOf(c.hisHer()))).append(" embarrassment.").toString());
+                else
+                    w.append(t, (new StringBuilder(String.valueOf(c.hisHer()))).append(" belief that enjoying this sort of thing is just wrong.").toString());
+            } else
+            if(dignity > 66)
+                w.append(t, (new StringBuilder(String.valueOf(c.hisHer()))).append(" overpowering shame at being stripped and filmed in such a humiliating state.").toString());
+            else
+            if(dignity > 33)
+                w.append(t, (new StringBuilder("the fact that so many cameras are watching ")).append(c.himHer()).append(".").toString());
+            else
+                w.append(t, (new StringBuilder(String.valueOf(c.hisHer()))).append(" belief that a true hero shouldn't be affected by little things like stripping and molestation.").toString());
+        } else
+        if(variant == 3)
+        {
+            if(solo.booleanValue())
+            {
+                w.append(t, (new StringBuilder("The Thralls order ")).append(mainName).append(" to spread ").append(c.hisHer()).append(" own ").append(hole).append(" wide open for the cameras").toString());
+                if(loved.booleanValue())
+                    w.append(t, (new StringBuilder(", ignoring ")).append(high.getMainName()).append("'s and ").append(mid.getMainName()).append("'s attempts to distract them and protect ").append(c.himHer()).append(".  ").toString());
+                else
+                if(hated.booleanValue())
+                    w.append(t, (new StringBuilder(", and since ")).append(c.heShe()).append("'s the one that allowed ").append(c.himHer()).append("self to get stripped, neither ").append(high.getMainName()).append(" nor ").append(mid.getMainName()).append(" feel much sympathy.  ").toString());
+                else
+                    w.append(t, (new StringBuilder(", ignoring ")).append(lover.getMainName()).append("'s attempts to divert their attention onto ").append(lover.himHer()).append("self.  ").toString());
+            } else
+            if(trio.booleanValue())
+            {
+                w.append(t, "The three Chosen are laid on their backs with their legs lifted up into the air in order to display their bare lower halves to the cameras");
+                if(loved.booleanValue())
+                    w.append(t, (new StringBuilder(", but ")).append(high.getMainName()).append(" and ").append(mid.getMainName()).append(" both look worried when the crowd turns its attention to their friend.  ").toString());
+                else
+                if(hated.booleanValue())
+                    w.append(t, ", obviously all angry with each other for allowing this to happen.  ");
+                else
+                    w.append(t, (new StringBuilder(", and although ")).append(lover.getMainName()).append(" tries to get the Thralls to focus on ").append(lover.himHer()).append(", they have a different target in mind.  ").toString());
+                w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is ordered to use ").append(c.hisHer()).append(" own fingers to spread ").append(c.hisHer()).append(" ").append(hole).append(".  ").toString());
+            } else
+            {
+                if(loved.booleanValue() || lover == partner)
+                    w.append(t, (new StringBuilder("Even though they've both been stripped, ")).append(partner.getMainName()).append(" tries to use ").append(partner.hisHer()).append(" body to hide ").append(mainName).append(" from the cameras, but the Thralls pull them apart.  ").toString());
+                else
+                    w.append(t, (new StringBuilder("Neither ")).append(mainName).append(" nor ").append(partner.getMainName()).append(" are happy about being forced to sit side-by-side with their legs lifted up into the air in order to expose their bare lower halves to the cameras.  ").toString());
+                w.append(t, (new StringBuilder("The Thralls order ")).append(mainName).append(" to use ").append(c.hisHer()).append(" own fingers to spread ").append(c.hisHer()).append(" ").append(hole).append(".  ").toString());
+            }
+            if(c.getINJULevel() < 3 || aVirg.booleanValue())
+            {
+                if(dignity > 66)
+                    w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" freezes up, stammering incoherently until the Thralls reach down to do it themselves.  ").toString());
+                else
+                if(dignity > 33)
+                    w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" squeezes ").append(c.hisHer()).append(" eyes shut as ").append(c.heShe()).append(" complies, face bright red.  ").toString());
+                else
+                    w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" hurriedly complies for fear of being punished.  ").toString());
+            } else
+            if(w.tickle().booleanValue())
+            {
+                if(dignity > 66)
+                    w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s already practically delirious with embarrassment at being filmed while practically naked and flailing in helpless laughter, so ").append(c.heShe()).append(" doesn't even notice the request until the Thralls reach down to do it for ").append(c.himHer()).append(".  ").toString());
+                else
+                if(dignity > 33)
+                    w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" complies as best ").append(c.heShe()).append(" can while being tickled at the same time, ").append(c.hisHer()).append(" laughter coming out mingled with whimpers of embarrassment.  ").toString());
+                else
+                    w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" complies as best ").append(c.heShe()).append(" can while being tickled at the same time, stammering apologies for not being quicker about it.  ").toString());
+            } else
+            if(c.getGender().equals("male"))
+            {
+                if(dignity > 66)
+                    w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" tries to comply, but ").append(c.hisHer()).append(" hands are shaking so much with sheer embarrassment that the Thralls have to do it for ").append(c.himHer()).append(", twisting ").append(c.hisHer()).append(" bruised testicles at the same time as punishment.  ").toString());
+                else
+                if(dignity > 33)
+                    w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" slowly complies, ").append(c.hisHer()).append(" trembling fingers carefully avoiding ").append(c.hisHer()).append(" swollen, bruised testicles.  ").toString());
+                else
+                    w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" complies without hesitation, begging the Thralls to go easier on ").append(c.hisHer()).append(" bruised testicles in return.  ").toString());
+            } else
+            if(dignity > 66)
+                w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" tries to comply, but ").append(c.hisHer()).append(" hands are shaking so badly with the embarrassment of being filmed while also being anally penetrated that ").append(c.heShe()).append(" can't do it, and the Thralls need to reach down to do it for ").append(c.himHer()).append(".  ").toString());
+            else
+            if(dignity > 33)
+                w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" complies as best ").append(c.heShe()).append(" can while being fucked up the ass at the same time, practically delirious with shame over having ").append(c.hisHer()).append(" privates seen in such a state.  ").toString());
+            else
+                w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" complies without hesitation, the cock thrusting in and out of ").append(c.hisHer()).append(" asshole making the image even more lewd.  ").toString());
+            if(c.getHATELevel() < 3 || vVirg.booleanValue())
+            {
+                if(c.getHATELevel() < 3)
+                    w.append(t, "In order to assert their dominance even more, ");
+                else
+                    w.append(t, (new StringBuilder("Because ")).append(c.hisHer()).append(" Sexual Barrier prevents them from going any further down there, ").toString());
+                w.append(t, (new StringBuilder("they force ")).append(c.himHer()).append(" to suck their cocks as well.  ").toString());
+                if(morality > 66)
+                    w.append(t, (new StringBuilder("They force ")).append(c.hisHer()).append(" compliance by threatening the others, ").toString());
+                else
+                if(morality > 33)
+                    w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" meek nature prevents ").append(c.himHer()).append(" from refusing, ").toString());
+                else
+                    w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s afraid of what will happen if ").append(c.heShe()).append(" bites down, ").toString());
+            } else
+            {
+                w.append(t, (new StringBuilder("Then, they force ")).append(c.himHer()).append(" to straddle one of the Thralls and ride his cock.  ").toString());
+                if(morality > 66)
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s ability to pleasure others is normally one of the few things ").append(c.heShe()).append(" prides ").append(c.himHer()).append("self on, ").toString());
+                else
+                if(morality > 33)
+                    w.append(t, (new StringBuilder("They order ")).append(mainName).append(" to move ").append(c.hisHer()).append(" hips, ").toString());
+                else
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" starts to move ").append(c.hisHer()).append(" hips by reflex, ").toString());
+            }
+            if(c.getPLEALevel() < 3 || cVirg.booleanValue())
+            {
+                if(innocence > 66)
+                    w.append(t, (new StringBuilder("but ")).append(c.heShe()).append("'s too scared to effectively perform.").toString());
+                else
+                if(innocence > 33)
+                    w.append(t, (new StringBuilder("and ")).append(c.heShe()).append(" does ").append(c.hisHer()).append(" best to make them cum.").toString());
+                else
+                    w.append(t, (new StringBuilder("and ")).append(c.heShe()).append(" just focuses on bringing them to orgasm as quickly as possible.").toString());
+            } else
+            if(innocence > 66)
+                w.append(t, (new StringBuilder("but with their fingers coaxing another orgasm from ")).append(c.hisHer()).append(" ").append(organ).append(", ").append(c.heShe()).append(" lacks the willpower to do anything but squirm and moan.").toString());
+            else
+            if(innocence > 33)
+                w.append(t, (new StringBuilder("but with their fingers coaxing another orgasm from ")).append(c.hisHer()).append(" ").append(organ).append(", ").append(c.heShe()).append("'s almost too distracted to perform.").toString());
+            else
+                w.append(t, (new StringBuilder("but with their fingers coaxing another orgasm from ")).append(c.hisHer()).append(" ").append(organ).append(", ").append(c.hisHer()).append(" movements are much less skillful than usual.").toString());
+        }
+        if(variant == 4)
+        {
+            Chosen otherOne = null;
+            Chosen otherTwo = null;
+            if(confidence > 66)
+            {
+                otherOne = mid;
+                otherTwo = low;
+            } else
+            if(confidence > 33)
+            {
+                otherOne = high;
+                otherTwo = low;
+            } else
+            {
+                otherOne = high;
+                otherTwo = mid;
+            }
+            if(w.getOrgyStage() == 0)
+            {
+                if((otherOne.getHATELevel() < 3 || otherOne.isVVirg()) && (otherTwo.getHATELevel() < 3 || otherTwo.isVVirg()))
+                    w.append(t, (new StringBuilder("Frustrated by ")).append(otherOne.getMainName()).append("'s and ").append(otherTwo.getMainName()).append("'s continued resistance against the attempts to penetrate them, the Thralls ").toString());
+                else
+                if(otherOne.getHATELevel() < 3 || otherOne.isVVirg())
+                    w.append(t, (new StringBuilder(String.valueOf(otherTwo.getMainName()))).append(" is hardly visible among the crowd of Thralls filling ").append(otherTwo.hisHer()).append(" every available hole with their cum.  ").append(otherOne.getMainName()).append(" is struggling hard against the attempts to do the same to ").append(c.himHer()).append(", so the other Thralls ").toString());
+                else
+                if(otherTwo.getHATELevel() < 3 || otherTwo.isVVirg())
+                    w.append(t, (new StringBuilder(String.valueOf(otherOne.getMainName()))).append(" is hardly visible among the crowd of Thralls filling ").append(otherOne.hisHer()).append(" every available hole with their cum.  There are only room for so many, though, and the others are growing bored tormenting ").append(otherTwo.getMainName()).append(", so they ").toString());
+                else
+                    w.append(t, (new StringBuilder(String.valueOf(otherOne.getMainName()))).append(" and ").append(otherTwo.getMainName()).append(" are both pinned down by the horde of Thralls frantically thrusting their cocks into every available hole.  Not content with just the two of them, the Thralls ").toString());
+                if(c.getHATELevel() < 3)
+                {
+                    w.append(t, (new StringBuilder("try to force themselves through ")).append(mainName).append("'s Sexual Barrier, but it remains intact for the moment.").toString());
+                } else
+                {
+                    w.append(t, (new StringBuilder("decide to use ")).append(mainName).append("'s ").append(hole).append(".  ").append(c.HisHer()).append(" ").toString());
+                    if(c.getGender().equals("male"))
+                        w.append(t, "anal ");
+                    w.append(t, (new StringBuilder("virginity is onlys aved by the fact that they can't agree on which of them gets to break ")).append(c.himHer()).append(" in.").toString());
+                }
+            } else
+            if(w.getOrgyStage() == 1)
+            {
+                if((otherOne.getPLEALevel() < 3 || otherOne.isCVirg()) && (otherTwo.getPLEALevel() < 3 || otherTwo.isCVirg()))
+                    w.append(t, "The Thralls press the three Chosen against each other, forcing them to reflexively hump each other as they endure their torments.  ");
+                else
+                if(otherOne.getPLEALevel() < 3 || otherOne.isCVirg())
+                    w.append(t, (new StringBuilder("Taking a break from trying to get the stubborn ")).append(otherOne.getMainName()).append(" to climax, the Thralls push ").append(mainName).append(" and ").append(otherTwo.getMainName()).append(" face-to-face, forcing them to grind against each other.  ").append(otherTwo.getMainName()).append(" moans helplessly into ").append(mainName).append("'s mouth, bucking ").append(otherTwo.hisHer()).append(" hips against ").append(c.himHer()).append(" as ").append(otherTwo.heShe()).append(" cums.  ").toString());
+                else
+                if(otherTwo.getPLEALevel() < 3 || otherTwo.isCVirg())
+                    w.append(t, (new StringBuilder("While some Thralls try to break the helpless ")).append(otherTwo.getMainName()).append(" with various sex toys, the others push ").append(mainName).append(" and ").append(otherOne.getMainName()).append(" face-to-face, forcing them to grind against each other.  ").append(otherOne.getMainName()).append("'s struggles grow erratic as ").append(otherOne.heShe()).append(" cums, bucking ").append(otherOne.hisHer()).append(" hips against ").append(mainName).append(".  ").toString());
+                else
+                    w.append(t, (new StringBuilder("Pressing various sex toys against their crotches, the Thralls make ")).append(otherOne.getMainName()).append(" and ").append(otherTwo.getMainName()).append(" cum hard, forcing their faces between ").append(mainName).append("'s legs at the same time so they're moaning against ").append(c.hisHer()).append(" ").append(organ).append(".  ").toString());
+                if(c.getPLEALevel() < 3)
+                {
+                    w.append(t, (new StringBuilder("However, ")).append(mainName).append(" is still more disgusted than turned on.").toString());
+                } else
+                {
+                    w.append(t, (new StringBuilder("For ")).append(c.hisHer()).append(" part, ").append(mainName).append(" barely holds on, ").toString());
+                    if(c.getGender().equals("female"))
+                        w.append(t, (new StringBuilder(String.valueOf(c.hisHer()))).append(" body still refusing to accept the pleasure.").toString());
+                    else
+                        w.append(t, (new StringBuilder("pre-cum dribbling out of ")).append(c.hisHer()).append(" penis.").toString());
+                }
+            } else
+            if(w.getOrgyStage() == 2)
+            {
+                Boolean allResist = Boolean.valueOf(false);
+                if((otherOne.getINJULevel() < 3 || otherOne.isAVirg()) && (otherTwo.getINJULevel() < 3 || otherTwo.isAVirg()))
+                {
+                    allResist = Boolean.valueOf(true);
+                    w.append(t, (new StringBuilder(String.valueOf(otherOne.getMainName()))).append(" and ").append(otherTwo.getMainName()).append(" barely manage to hold their voices in ").toString());
+                } else
+                if(otherOne.getINJULevel() < 3 || otherOne.isAVirg())
+                    w.append(t, (new StringBuilder("While ")).append(otherOne.getMainName()).append(" stubbornly holds on, ").append(otherTwo.getMainName()).append(" whimpers ").toString());
+                else
+                if(otherTwo.getINJULevel() < 3 || otherTwo.isAVirg())
+                    w.append(t, (new StringBuilder("While ")).append(otherTwo.getMainName()).append(" somehow holds on, ").append(otherOne.getMainName()).append(" is forced to scream ").toString());
+                else
+                    w.append(t, (new StringBuilder("Utterly defeated, ")).append(otherOne.getMainName()).append(" and ").append(otherTwo.getMainName()).append(" cry out ").toString());
+                if(w.tickle().booleanValue())
+                {
+                    if(allResist.booleanValue())
+                        w.append(t, "as they're tickled.  ");
+                    else
+                        w.append(t, "in helpless laughter at the Thralls' tickling.  ");
+                    if(c.getINJULevel() < 3)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is resisting as best ").append(c.heShe()).append(" can, but it's getting harder every moment.").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is only spared the indignity of laughing out loud by the Thrall's cock shoved down ").append(c.hisHer()).append(" throat.").toString());
+                } else
+                {
+                    if(allResist.booleanValue())
+                        w.append(t, "as the Thralls pummel them and twist their limbs.  ");
+                    else
+                        w.append(t, "in pain at the Thralls' savage abuse.  ");
+                    if(c.getGender().equals("male"))
+                        w.append(t, (new StringBuilder("For ")).append(c.hisHer()).append(" part, ").append(mainName).append(" is tightly clenching ").append(c.hisHer()).append(" thighs together to protect ").append(c.hisHer()).append(" vulnerable penis.").toString());
+                    else
+                        w.append(t, (new StringBuilder("For ")).append(c.hisHer()).append(" part, ").append(mainName).append(" is grimacing at the sensation of another Thrall trying and failing over and over again to shove a huge dildo up ").append(c.hisHer()).append(" ass.").toString());
+                }
+            } else
+            if(w.getOrgyStage() == 3)
+                if(otherOne.getEXPOLevel() < 3 || otherOne.isModest() || otherTwo.getEXPOLevel() < 3 || otherTwo.isModest())
+                    w.append(t, "Scraps of shredded clothing are flying out of the crowd of Thralls around the three Chosen, but the group is so densely-packed that no one can get clear footage of their exposed bodies.");
+                else
+                if(otherOne.getEXPOLevel() < 3 || otherOne.isModest())
+                    w.append(t, (new StringBuilder("The orgy is so densely-packed that the watching cameras can't get any good footage of the Chosen within.  Only ")).append(otherTwo.getMainName()).append(" is visible, being lifted above the crowd with ").append(otherTwo.hisHer()).append(" legs forcibly spread wide open.").toString());
+                else
+                if(otherTwo.getEXPOLevel() < 3 || otherTwo.isModest())
+                    w.append(t, (new StringBuilder("The orgy is so densely-packed that the watching cameras can't get any good footage of the Chosen within.  Only ")).append(otherOne.getMainName()).append(" is visible at the edge of the crowd, ").append(otherOne.hisHer()).append(" bare bottom and flailing legs drawing plenty of attention.").toString());
+                else
+                    w.append(t, (new StringBuilder("The orgy is so densely-packed that ")).append(mainName).append(", who's currently at its center, can't be clearly seen.  Meanwhile, ").append(otherOne.getMainName()).append(" and ").append(otherTwo.getMainName()).append(" have been pulled to the edge and forced to bend over, showing their bare bottoms to the watching cameras.").toString());
+        }
+        w.append(t, (new StringBuilder("\n\n")).append(mainName).append(":\n").toString());
+        int totalDamage[] = {
+            200, 200, 200, 200, 200, 200, 200, 200
+        };
+        Boolean penetrationBonus = Boolean.valueOf(false);
+        if(!vVirg.booleanValue() && c.getHATELevel() >= 3)
+        {
+            penetrationBonus = Boolean.valueOf(true);
+            totalDamage = c.multiplyArray(totalDamage, 20);
+        }
+        Boolean orgasmBonus = Boolean.valueOf(false);
+        if(!cVirg.booleanValue() && c.getPLEALevel() >= 3)
+        {
+            orgasmBonus = Boolean.valueOf(true);
+            totalDamage = c.multiplyArray(totalDamage, 20);
+        }
+        Boolean analBonus = Boolean.valueOf(false);
+        if(!aVirg.booleanValue() && c.getINJULevel() >= 3)
+        {
+            analBonus = Boolean.valueOf(true);
+            totalDamage = c.multiplyArray(totalDamage, 20);
+        }
+        Boolean broadcastBonus = Boolean.valueOf(false);
+        if(!modest.booleanValue() && c.getEXPOLevel() >= 3)
+        {
+            broadcastBonus = Boolean.valueOf(true);
+            totalDamage = c.multiplyArray(totalDamage, 20);
+        }
+        String firstRelation = "";
+        String secondRelation = "";
+        if(c != high)
+        {
+            String summary = "(x";
+            if(w.getRelationship(c.number, high.getNumber()) == -4)
+                summary = (new StringBuilder(String.valueOf(summary))).append("2").toString();
+            else
+                summary = (new StringBuilder(String.valueOf(summary))).append("1.").append(6 - w.getRelationship(c.number, high.getNumber())).toString();
+            summary = (new StringBuilder(String.valueOf(summary))).append(" damage due to relationship with ").append(high.getMainName()).append(")\n\n").toString();
+            totalDamage = c.multiplyArray(totalDamage, 16 - w.getRelationship(c.number, high.getNumber()));
+            firstRelation = summary;
+        }
+        if(c != mid)
+        {
+            String summary = "(x";
+            if(w.getRelationship(c.number, mid.getNumber()) == -4)
+                summary = (new StringBuilder(String.valueOf(summary))).append("2").toString();
+            else
+                summary = (new StringBuilder(String.valueOf(summary))).append("1.").append(6 - w.getRelationship(c.number, mid.getNumber())).toString();
+            summary = (new StringBuilder(String.valueOf(summary))).append(" damage due to relationship with ").append(mid.getMainName()).append(")\n\n").toString();
+            totalDamage = c.multiplyArray(totalDamage, 16 - w.getRelationship(c.number, mid.getNumber()));
+            if(c != high)
+                secondRelation = summary;
+            else
+                firstRelation = summary;
+        }
+        if(c != low)
+        {
+            String summary = "(x";
+            if(w.getRelationship(c.number, low.getNumber()) == -4)
+                summary = (new StringBuilder(String.valueOf(summary))).append("2").toString();
+            else
+                summary = (new StringBuilder(String.valueOf(summary))).append("1.").append(6 - w.getRelationship(c.number, low.getNumber())).toString();
+            summary = (new StringBuilder(String.valueOf(summary))).append(" damage due to relationship with ").append(low.getMainName()).append(")\n\n").toString();
+            totalDamage = c.multiplyArray(totalDamage, 16 - w.getRelationship(c.number, low.getNumber()));
+            secondRelation = summary;
+        }
+        int previousHATE = c.getHATELevel();
+        int previousPLEA = c.getPLEALevel();
+        int previousINJU = c.getINJULevel();
+        int previousEXPO = c.getEXPOLevel();
+        c.damage(t, w, totalDamage);
+        if(penetrationBonus.booleanValue())
+            if(c.getGender().equals("male"))
+                w.append(t, "(x2 damage due to penetration)\n\n");
+            else
+                w.append(t, "(x2 damage due to vaginal penetration)\n\n");
+        if(orgasmBonus.booleanValue())
+            w.append(t, "(x2 damage due to orgasm)\n\n");
+        if(analBonus.booleanValue())
+            if(w.tickle().booleanValue())
+                w.append(t, "(x2 damage due to forced laughter)\n\n");
+            else
+            if(c.getGender().equals("male"))
+                w.append(t, "(x2 damage due to genital torture)\n\n");
+            else
+                w.append(t, "(x2 damage due to anal penetration)\n\n");
+        if(broadcastBonus.booleanValue())
+            w.append(t, "(x2 damage due to broadcasted humiliation)\n\n");
+        w.append(t, (new StringBuilder(String.valueOf(firstRelation))).append(secondRelation).toString());
+        w.rememberOrgyStage(order);
+        w.cycleOrgyStage();
+        int priorities[] = new int[4];
+        if(c.getHATELevel() > previousHATE)
+        {
+            priorities[0]++;
+            if(c.getHATELevel() == 3 && !vVirg.booleanValue())
+                priorities[0]++;
+            w.purpleAppend(t, "HATE up!  ");
+        }
+        if(c.getPLEALevel() > previousPLEA)
+        {
+            priorities[1]++;
+            if(c.getPLEALevel() == 3 && !cVirg.booleanValue())
+                priorities[1]++;
+            w.purpleAppend(t, "PLEA up!  ");
+        }
+        if(c.getINJULevel() > previousINJU)
+        {
+            priorities[2]++;
+            if(c.getINJULevel() == 3 && !aVirg.booleanValue())
+                priorities[2]++;
+            if(w.tickle().booleanValue())
+                w.purpleAppend(t, "ANTI up!  ");
+            else
+                w.purpleAppend(t, "INJU up!  ");
+        }
+        if(c.getEXPOLevel() > previousEXPO)
+        {
+            priorities[3]++;
+            if(c.getEXPOLevel() == 3 && !modest.booleanValue())
+                priorities[3]++;
+            w.purpleAppend(t, "EXPO up!  ");
+        }
+        int highestPriority = -1;
+        if(priorities[0] > priorities[1] && priorities[0] > priorities[3] && priorities[0] > priorities[2])
+            highestPriority = 0;
+        else
+        if(priorities[2] > priorities[1] && priorities[2] > priorities[3])
+            highestPriority = 2;
+        else
+        if(priorities[1] > priorities[3])
+            highestPriority = 1;
+        else
+        if(priorities[3] > 0)
+            highestPriority = 3;
+        if(highestPriority == 3)
+        {
+            if(c.getEXPOLevel() == 1)
+            {
+                if(c.getHATELevel() < 1)
+                    w.append(t, (new StringBuilder("Despite ")).append(mainName).append("'s best efforts to keep ").append(c.himHer()).append("self covered, ").toString());
+                else
+                if(c.getHATELevel() > 1)
+                    w.append(t, (new StringBuilder("With ")).append(mainName).append("'s magical defenses decreased by ").append(c.hisHer()).append(" impure emotions, ").toString());
+                else
+                    w.append(t, (new StringBuilder("With ")).append(mainName).append("'s annoyance causing ").append(c.himHer()).append(" to become impatient and vulnerable, ").toString());
+                if(bottomCover.equals("skirt"))
+                    w.append(t, (new StringBuilder("the Thralls have managed to tear away a large section of ")).append(c.hisHer()).append(" skirt, rendering it much shorter than before.  ").toString());
+                else
+                if(bottomCover.equals("miniskirt"))
+                    w.append(t, (new StringBuilder("the Thralls have ripped open ")).append(c.hisHer()).append(" miniskirt so that ").append(c.hisHer()).append(" hip and part of ").append(c.hisHer()).append(" ass are completely exposed.  ").toString());
+                else
+                if(bottomCover.equals("robe"))
+                    w.append(t, (new StringBuilder("the Thralls have managed to tear away the bottom portion of ")).append(c.hisHer()).append(" robe so that ").append(c.hisHer()).append(" legs are exposed.  ").toString());
+                else
+                if(bottomCover.equals("cloak"))
+                    w.append(t, (new StringBuilder("the Thralls have ripped ")).append(c.hisHer()).append(" cloak almost in half, so that it barely remains in one piece.  ").toString());
+                else
+                if(bottomCover.equals("trousers"))
+                    w.append(t, (new StringBuilder("the Thralls have torn a large hole in ")).append(c.hisHer()).append(" trousers, partially exposing ").append(c.hisHer()).append(" ass.  ").toString());
+                else
+                if(bottomCover.equals("leotard"))
+                    w.append(t, (new StringBuilder("the Thralls have ripped open the side of ")).append(c.hisHer()).append(" leotard, from ").append(c.hisHer()).append(" hip up to ").append(c.hisHer()).append(" ribcage.  ").toString());
+                else
+                if(bottomCover.equals("bodysuit"))
+                    w.append(t, (new StringBuilder("the Thralls have torn a large hole in ")).append(c.hisHer()).append(" bodysuit, partially exposing ").append(c.hisHer()).append(" ass.  ").toString());
+                else
+                if(bottomCover.equals("armor"))
+                    w.append(t, (new StringBuilder("the Thralls have pulled away one of ")).append(c.hisHer()).append(" armor plates, exposing the side of ").append(c.hisHer()).append(" ass.  ").toString());
+                else
+                if(bottomCover.equals("strips"))
+                    w.append(t, (new StringBuilder("the Thralls have pulled apart enough of the strips of cloth covering ")).append(c.hisHer()).append(" lower body that part of ").append(c.hisHer()).append(" ass can be seen in the gaps between those that remain.  ").toString());
+                else
+                if(bottomCover.equals("belts"))
+                    w.append(t, (new StringBuilder("the Thralls have snapped enough of the belts around ")).append(c.hisHer()).append(" lower body that part of ").append(c.hisHer()).append(" ass can be seen in the gaps between those that remain.  ").toString());
+                else
+                if(bottomCover.equals("shorts"))
+                    w.append(t, (new StringBuilder("the Thralls have ripped ")).append(c.hisHer()).append(" shorts right down the middle, turning them into more of a skirt.  ").toString());
+                else
+                    w.append(t, (new StringBuilder("the Thralls have ripped ")).append(c.hisHer()).append(" ").append(bottomDesc).append(" all the way up to ").append(c.hisHer()).append(" hip.   ").toString());
+                if(feetType.equals("none"))
+                {
+                    if(c.getINJULevel() < 1)
+                        w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" does ").append(c.hisHer()).append(" best to squirm away and reduce the damage, but ").toString());
+                    else
+                    if(c.getINJULevel() > 1)
+                    {
+                        if(w.tickle().booleanValue())
+                            w.append(t, (new StringBuilder("Flustered and demoralized, there's nothing ")).append(c.heShe()).append(" can do to resist the stripping, and ").toString());
+                        else
+                            w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" bloodied body is in no state to resist the stripping, and ").toString());
+                    } else
+                    if(w.tickle().booleanValue())
+                        w.append(t, (new StringBuilder("The effects of exhaustion are starting to set in, slowing ")).append(c.hisHer()).append(" efforts to resist the stripping, and ").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" bruised body is in no state to resist the stripping, and ").toString());
+                    if(c.getPLEALevel() < 1)
+                        w.append(t, (new StringBuilder(String.valueOf(c.hisHer()))).append(" clothes are much less durable than ").append(c.hisHer()).append(" flesh.").toString());
+                    else
+                    if(c.getPLEALevel() > 1)
+                        w.append(t, (new StringBuilder(String.valueOf(c.heShe()))).append(" can't help but become even more turned on by the fact that ").append(c.heShe()).append("'s being stripped.").toString());
+                    else
+                        w.append(t, (new StringBuilder("the realization that ")).append(c.heShe()).append("'s showing off so much more skin than ").append(c.heShe()).append("'s comfortable with makes ").append(c.himHer()).append(" blush even more deeply.").toString());
+                } else
+                {
+                    if(c.getINJULevel() < 1)
+                        w.append(t, (new StringBuilder("Then, they pull off ")).append(c.hisHer()).append(" ").append(feetType).toString());
+                    else
+                    if(c.getINJULevel() > 1)
+                    {
+                        if(w.tickle().booleanValue())
+                            w.append(t, (new StringBuilder("Then, while ")).append(c.heShe()).append("'s surprised and flustered, they pull off ").append(c.hisHer()).append(" ").append(feetType).append(" too").toString());
+                        else
+                            w.append(t, (new StringBuilder("Bruised and bloodied as ")).append(c.heShe()).append(" is, they have no trouble pulling off ").append(c.hisHer()).append(" ").append(feetType).append(" too").toString());
+                    } else
+                    if(w.tickle().booleanValue())
+                        w.append(t, (new StringBuilder("With the effects of exhaustion starting to set in, ")).append(c.heShe()).append("'s too slow to stop them from pulling off ").append(c.hisHer()).append(" ").append(feetType).append(" as well").toString());
+                    else
+                        w.append(t, (new StringBuilder("With bruises accumulating on ")).append(c.hisHer()).append(" body, ").append(c.heShe()).append("'s too slow to stop them from pulling off ").append(c.hisHer()).append(" ").append(feetType).append(" as well").toString());
+                    if(c.getPLEALevel() < 1)
+                        w.append(t, (new StringBuilder(", leaving ")).append(c.hisHer()).append(" feet bare.").toString());
+                    else
+                    if(c.getPLEALevel() > 1)
+                        w.append(t, (new StringBuilder(", taking advantage of how turned on and distracted ")).append(c.heShe()).append(" is.").toString());
+                    else
+                        w.append(t, (new StringBuilder(", and when ")).append(c.heShe()).append(" realizes that ").append(c.hisHer()).append(" legs are completely exposed now, ").append(c.heShe()).append(" can't help but be a little turned on by the thought of what could happen next.").toString());
+                }
+            } else
+            if(c.getEXPOLevel() == 2)
+            {
+                if(topCover.equals("blouse"))
+                    w.append(t, (new StringBuilder("The Thralls have torn ")).append(mainName).append("'s blouse open down the front").toString());
+                else
+                if(topCover.equals("bodice"))
+                    w.append(t, (new StringBuilder("The Thralls have torn apart ")).append(mainName).append("'s bodice").toString());
+                else
+                if(topCover.equals("cloak"))
+                    w.append(t, (new StringBuilder("The Thralls have torn ")).append(mainName).append("'s cloak in half").toString());
+                else
+                if(topCover.equals("robe"))
+                    w.append(t, (new StringBuilder("The Thralls have ripped open ")).append(mainName).append("'s robe").toString());
+                else
+                if(topCover.equals("jacket"))
+                    w.append(t, (new StringBuilder("The Thralls have ripped away the front of ")).append(mainName).append("'s jacket").toString());
+                else
+                if(topCover.equals("shirt"))
+                    w.append(t, (new StringBuilder("The Thralls have torn ")).append(mainName).append("'s shirt down off ").append(c.hisHer()).append(" shoulder").toString());
+                else
+                if(topCover.equals("strips"))
+                    w.append(t, (new StringBuilder("The Thralls have torn apart the strips of cloth covering ")).append(mainName).append("'s chest").toString());
+                else
+                if(topCover.equals("crop"))
+                    w.append(t, (new StringBuilder("The Thralls have torn ")).append(mainName).append("'s crop top in half").toString());
+                else
+                if(topCover.equals("bindings"))
+                    w.append(t, (new StringBuilder("The Thralls have ripped ")).append(mainName).append("'s chest bindings").toString());
+                else
+                if(topCover.equals("belts"))
+                    w.append(t, (new StringBuilder("The Thralls have snapped the belts covering ")).append(mainName).append("'s chest").toString());
+                else
+                if(topCover.equals("leotard"))
+                    w.append(t, (new StringBuilder("The Thralls have ripped away the front of ")).append(mainName).append("'s leotard").toString());
+                else
+                if(topCover.equals("armor"))
+                    w.append(t, (new StringBuilder("The Thralls have broken the clasps holding ")).append(mainName).append("'s armor closed").toString());
+                else
+                if(topCover.equals("bodysuit"))
+                    w.append(t, (new StringBuilder("The Thralls have torn open the front of ")).append(mainName).append("'s bodysuit").toString());
+                else
+                if(topCover.equals(bottomCover))
+                    w.append(t, (new StringBuilder("The Thralls have torn open the top of ")).append(mainName).append("'s ").append(topDesc).toString());
+                else
+                    w.append(t, (new StringBuilder("The Thralls have torn open ")).append(mainName).append("'s ").append(topDesc).toString());
+                if(c.getINJULevel() < 2)
+                {
+                    if(c.getGender().equals("male"))
+                        w.append(t, (new StringBuilder(" so that ")).append(c.hisHer()).append(" smooth chest is exposed.  ").toString());
+                    else
+                        w.append(t, (new StringBuilder(" so that ")).append(c.heShe()).append(" needs to devote one hand to keeping everything covered.  ").toString());
+                } else
+                if(c.getINJULevel() > 2)
+                {
+                    if(aVirg.booleanValue())
+                    {
+                        if(w.tickle().booleanValue())
+                            w.append(t, (new StringBuilder(", and when they see that ")).append(c.heShe()).append("'s exhausted enough to have a hard time covering ").append(c.himHer()).append("self to compensate, they grin darkly and prepare to punish ").append(c.himHer()).append(" even more.  ").toString());
+                        else
+                            w.append(t, (new StringBuilder(", and when they see that ")).append(c.heShe()).append("'s badly-hurt enough to have a hard time covering ").append(c.himHer()).append("self to compensate, they grin darkly and prepare to punish ").append(c.himHer()).append(" even more.  ").toString());
+                    } else
+                    if(w.tickle().booleanValue())
+                        w.append(t, (new StringBuilder(", making it even easier to tickle under ")).append(c.hisHer()).append(" armpits.  ").toString());
+                    else
+                    if(c.getGender().equals("male"))
+                        w.append(t, (new StringBuilder(", allowing them to pinch and twist ")).append(c.hisHer()).append(" nipples and ").append(c.hisHer()).append(" penis at the same time.  ").toString());
+                    else
+                        w.append(t, (new StringBuilder(", allowing the Thrall fucking ")).append(c.himHer()).append(" up the ass to pinch and twist ").append(c.hisHer()).append(" nipples at the same time.  ").toString());
+                } else
+                if(c.getGender().equals("male"))
+                {
+                    if(w.tickle().booleanValue())
+                        w.append(t, (new StringBuilder(", and with how worried ")).append(c.heShe()).append(" is by the direction the battle is going, ").append(c.heShe()).append(" can't even spare the effort of covering ").append(c.hisHer()).append(" smooth chest.  ").toString());
+                    else
+                        w.append(t, (new StringBuilder(", and in ")).append(c.hisHer()).append(" injured state, ").append(c.heShe()).append(" doesn't care at all about having ").append(c.hisHer()).append(" smooth chest exposed.  ").toString());
+                } else
+                if(w.tickle().booleanValue())
+                    w.append(t, (new StringBuilder(", and there's obvious tiredness in ")).append(c.hisHer()).append(" expression as ").append(c.heShe()).append(" uses one arm to keep everything covered.  ").toString());
+                else
+                    w.append(t, (new StringBuilder(", and ")).append(c.heShe()).append(" has to use one bloodied arm to keep everything covered.  ").toString());
+                if(c.getPLEALevel() < 2)
+                    w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" frowns with exertion").toString());
+                else
+                if(c.getPLEALevel() > 2)
+                {
+                    if(cVirg.booleanValue())
+                    {
+                        if(c.getGender().equals("male"))
+                            w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" legs wobble as ").append(c.heShe()).append(" suppresses ").append(c.hisHer()).append(" arousal").toString());
+                        else
+                            w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" breasts heave as ").append(c.heShe()).append(" grunts and moans with arousal").toString());
+                    } else
+                    if(c.getGender().equals("female"))
+                        w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" juices soak ").append(c.hisHer()).append(" ").append(bottomDesc).append(" as ").append(c.heShe()).append(" endures ").append(c.hisHer()).append(" orgasm").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" spurting cock is barely contained within ").append(c.hisHer()).append(" torn ").append(bottomDesc).append(" as ").append(c.heShe()).append(" endures ").append(c.hisHer()).append(" orgasm").toString());
+                } else
+                if(c.getGender().equals("male"))
+                    w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" erection remains hidden as ").append(c.heShe()).append(" struggles with ").append(c.hisHer()).append(" arousal").toString());
+                else
+                    w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" breasts heave as ").append(c.heShe()).append(" gasps with arousal").toString());
+                if(c.getHATELevel() < 2)
+                    w.append(t, " and tries to focus.");
+                else
+                if(c.getHATELevel() > 2)
+                {
+                    if(vVirg.booleanValue())
+                        w.append(t, (new StringBuilder(", keenly aware that ")).append(c.hisHer()).append(" Sexual Barrier has broken.").toString());
+                    else
+                        w.append(t, (new StringBuilder(" and the sensation of the shaft thrusting in and out of ")).append(c.hisHer()).append(" ").append(hole).append(".").toString());
+                } else
+                {
+                    w.append(t, " and anger.");
+                }
+            } else
+            if(c.getEXPOLevel() == 3)
+            {
+                if(underType.equals("none"))
+                {
+                    if(c.getGender().equals("female"))
+                        w.append(t, (new StringBuilder("The Thralls have torn away the front of ")).append(mainName).append("'s ").append(bottomDesc).append(" so that ").append(c.hisHer()).append(" bare pussy is blatantly exposed.  ").append(c.HeShe()).append(" tries to cover ").append(c.himHer()).append("self, but they pull apart ").append(c.hisHer()).append(" ").toString());
+                    else
+                    if(c.getGender().equals("male"))
+                        w.append(t, (new StringBuilder("The Thralls have torn away the front of ")).append(mainName).append("'s ").append(bottomDesc).append(" so that ").append(c.hisHer()).append(" bare penis is blatantly exposed.  ").append(c.HeShe()).append(" tries to cover ").append(c.himHer()).append("self, but they pull apart ").append(c.hisHer()).append(" ").toString());
+                    else
+                        w.append(t, (new StringBuilder("The Thralls have torn away the front of ")).append(mainName).append("'s ").append(bottomDesc).append(" so that ").append(c.hisHer()).append(" penis and pussy are both blatantly exposed.  ").append(c.HeShe()).append(" tries to cover ").append(c.himHer()).append("self, but they pull apart ").append(c.hisHer()).append(" ").toString());
+                } else
+                {
+                    if(underType.equals("panties") || underType.equals("wrap"))
+                        w.append(t, (new StringBuilder("The Thralls have pulled ")).append(mainName).append("'s panties ").toString());
+                    else
+                    if(underType.equals("g-string"))
+                        w.append(t, (new StringBuilder("The Thralls have pulled the remains of ")).append(mainName).append("'s g-string ").toString());
+                    else
+                    if(underType.equals("shorts"))
+                        w.append(t, (new StringBuilder("The Thralls have shredded ")).append(mainName).append("'s shorts and pulled them ").toString());
+                    else
+                    if(underType.equals("straps"))
+                        w.append(t, (new StringBuilder("The Thralls have snapped ")).append(mainName).append("'s underharness and pulled the straps ").toString());
+                    if(bottomAccess.equals("front") || bottomAccess.equals("cutout") || bottomAccess.equals("into") || bottomAccess.equals("around"))
+                        w.append(t, (new StringBuilder("apart, removing them from under ")).append(c.hisHer()).append(" torn ").append(bottomDesc).append(".  Next, they forcibly spread ").append(c.hisHer()).append(" ").toString());
+                    else
+                    if(bottomAccess.equals("top"))
+                        w.append(t, (new StringBuilder("apart, stripping ")).append(c.himHer()).append(" through ").append(c.hisHer()).append(" torn ").append(bottomDesc).append(".  Next, they forcibly spread ").append(c.hisHer()).append(" ").toString());
+                    else
+                        w.append(t, (new StringBuilder("down ")).append(c.hisHer()).append(" ").toString());
+                }
+                if(c.getPLEALevel() < 3)
+                    w.append(t, "thighs.  ");
+                else
+                if(c.getPLEALevel() > 3 && cVirg.booleanValue())
+                    w.append(t, "thighs as they uncontrollably spasm with pleasure.  ");
+                else
+                if(cVirg.booleanValue())
+                {
+                    if(c.getGender().equals("female"))
+                        w.append(t, (new StringBuilder("thighs, driven wild by the way that ")).append(c.hisHer()).append(" flowing love juices signal ").append(c.hisHer()).append(" readiness for orgasm.  ").toString());
+                    else
+                        w.append(t, (new StringBuilder("thighs, driven wild by the way that ")).append(c.hisHer()).append(" erection springs free.  ").toString());
+                } else
+                if(c.getGender().equals("female"))
+                    w.append(t, (new StringBuilder("thighs, driven wild by the clear view of the juices streaming from ")).append(c.hisHer()).append(" orgasmically clenching pussy.  ").toString());
+                else
+                    w.append(t, (new StringBuilder("thighs, driven wild by the clear view of ")).append(c.hisHer()).append(" repeatedly spurting cock.  ").toString());
+                if(!modest.booleanValue())
+                    w.append(t, (new StringBuilder("Cameras flash from all directions as the spectators eagerly capture ")).append(c.hisHer()).append(" most recent humiliation.  ").toString());
+                if(c.getINJULevel() < 3)
+                    w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" struggles against them").toString());
+                else
+                if(c.getINJULevel() > 3 && aVirg.booleanValue())
+                {
+                    if(w.tickle().booleanValue())
+                        w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" spasms wildly, wasting the last of ").append(c.hisHer()).append(" energy").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" shrieks in pain as ").append(c.hisHer()).append(" shattered limbs are manhandled").toString());
+                } else
+                if(aVirg.booleanValue())
+                {
+                    if(w.tickle().booleanValue())
+                        w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" can't hold back ").append(c.hisHer()).append(" desperate moans").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" cries out in pain as ").append(c.hisHer()).append(" weakened body is prepared for even more extreme abuses").toString());
+                } else
+                if(w.tickle().booleanValue())
+                    w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" can't hold back ").append(c.hisHer()).append(" exhausted gasps of laughter as ").append(c.heShe()).append("'s tickled").toString());
+                else
+                if(c.getGender().equals("male"))
+                    w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" can't hold back ").append(c.hisHer()).append(" squeals of pain as ").append(c.heShe()).append(" feels the Thralls' boots directly on the sensitive skin of ").append(c.hisHer()).append(" penis").toString());
+                else
+                    w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" can't hold back ").append(c.hisHer()).append(" groans of intense discomfort as ").append(c.heShe()).append("'s fucked up the ass").toString());
+                if(c.getHATELevel() < 3)
+                    w.append(t, (new StringBuilder(", now protected only by the magic of ")).append(c.hisHer()).append(" Sexual Barrier.").toString());
+                else
+                if(c.getHATELevel() > 3 && vVirg.booleanValue())
+                    w.append(t, ", cursing and sobbing with rage.");
+                else
+                if(vVirg.booleanValue())
+                    w.append(t, (new StringBuilder(", completely defenseless now that ")).append(c.hisHer()).append(" Sexual Barrier has also failed.").toString());
+                else
+                    w.append(t, (new StringBuilder(", ")).append(c.hisHer()).append(" voice rising even higher as another Thrall penetrates ").append(c.hisHer()).append(" ").append(hole).append(".").toString());
+            } else
+            if(c.getEXPOLevel() == 4)
+            {
+                if(c.getPLEALevel() < 4)
+                {
+                    if(c.getGender().equals("male"))
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s chest is completely exposed, ").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s breasts are completely exposed, ").toString());
+                } else
+                if(c.getPLEALevel() > 4)
+                {
+                    if(c.getGender().equals("male"))
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s bare chest heaves with ").append(c.hisHer()).append(" uncontrollable screams of pleasure, ").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s bare breasts heave with ").append(c.hisHer()).append(" uncontrollable screams of pleasure, ").toString());
+                } else
+                if(c.getGender().equals("male"))
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s orgasmic spasms emphasize ").append(c.hisHer()).append(" bare chest and fully erect nipples, ").toString());
+                else
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s orgasmic spasms emphasize ").append(c.hisHer()).append(" bare breasts and fully erect nipples, ").toString());
+                if(bottomCover.equals("skirt"))
+                {
+                    if(c.getGender().equals("female"))
+                        w.append(t, (new StringBuilder("while the remains of the skirt flapping around ")).append(c.hisHer()).append(" hips are too short to conceal ").append(c.hisHer()).append(" pussy.  ").toString());
+                    else
+                    if(c.getGender().equals("male"))
+                        w.append(t, (new StringBuilder("while the remains of the skirt flapping around ")).append(c.hisHer()).append(" hips are too short to conceal ").append(c.hisHer()).append(" penis.  ").toString());
+                    else
+                        w.append(t, (new StringBuilder("while the remains of the skirt flapping around ")).append(c.hisHer()).append(" hips are too short to conceal ").append(c.hisHer()).append(" penis and pussy.  ").toString());
+                } else
+                if(bottomCover.equals("miniskirt"))
+                    w.append(t, (new StringBuilder("while ")).append(c.hisHer()).append(" miniskirt has been reduced to nothing more than a belt of material around ").append(c.hisHer()).append(" waist.  ").toString());
+                else
+                if(bottomCover.equals("robe"))
+                    w.append(t, (new StringBuilder("while ")).append(c.hisHer()).append(" robe has been torn to the point that it doesn't even reach past ").append(c.hisHer()).append(" waist.  ").toString());
+                else
+                if(bottomCover.equals("cloak"))
+                    w.append(t, (new StringBuilder("while ")).append(c.hisHer()).append(" cloak has been torn to the point that it doesn't even reach past ").append(c.hisHer()).append(" waist.  ").toString());
+                else
+                if(bottomCover.equals("trousers"))
+                    w.append(t, (new StringBuilder("while ")).append(c.hisHer()).append(" trousers have been shredded to the point that only a few scraps around ").append(c.hisHer()).append(" legs remain.  ").toString());
+                else
+                if(bottomCover.equals("leotard"))
+                {
+                    if(c.getGender().equals("female"))
+                        w.append(t, (new StringBuilder("while the remaining scraps of ")).append(c.hisHer()).append(" leotard clinging to ").append(c.hisHer()).append(" body provide no coverage whatsoever for ").append(c.hisHer()).append(" hips and pussy.  ").toString());
+                    else
+                    if(c.getGender().equals("male"))
+                        w.append(t, (new StringBuilder("while the remaining scraps of ")).append(c.hisHer()).append(" leotard clinging to ").append(c.hisHer()).append(" body provide no coverage whatsoever for ").append(c.hisHer()).append(" hips and penis.  ").toString());
+                    else
+                        w.append(t, (new StringBuilder("while the remaining scraps of ")).append(c.hisHer()).append(" leotard clinging to ").append(c.hisHer()).append(" body provide no coverage whatsoever for ").append(c.hisHer()).append(" penis and pussy.  ").toString());
+                } else
+                if(bottomCover.equals("bodysuit"))
+                    w.append(t, (new StringBuilder("while the torso and crotch of ")).append(c.hisHer()).append(" bodysuit have been completely torn away.  ").toString());
+                else
+                if(bottomCover.equals("armor"))
+                    w.append(t, (new StringBuilder("while the armor plates that would normally cover ")).append(c.hisHer()).append(" hips and crotch have been lost.  ").toString());
+                else
+                if(bottomCover.equals("strips"))
+                    w.append(t, (new StringBuilder("while the strips of cloth that had been covering ")).append(c.hisHer()).append(" body have been completely removed save for a few dangling ends around ").append(c.hisHer()).append(" waist.  ").toString());
+                else
+                if(bottomCover.equals("belts"))
+                    w.append(t, (new StringBuilder("while the belts that had been covering ")).append(c.hisHer()).append(" lower half have also been snapped and pulled away.  ").toString());
+                else
+                if(bottomCover.equals("shorts"))
+                {
+                    if(c.getGender().equals("female"))
+                        w.append(t, (new StringBuilder("while ")).append(c.hisHer()).append(" shorts have been torn open over ").append(c.hisHer()).append(" pussy and ass.  ").toString());
+                    else
+                    if(c.getGender().equals("male"))
+                        w.append(t, (new StringBuilder("while ")).append(c.hisHer()).append(" shorts have been torn open over ").append(c.hisHer()).append(" penis and ass.  ").toString());
+                    else
+                        w.append(t, (new StringBuilder("while ")).append(c.hisHer()).append(" shorts have been torn open over ").append(c.hisHer()).append(" pussy and penis.  ").toString());
+                } else
+                {
+                    w.append(t, (new StringBuilder("while only a few useless scraps remain of ")).append(c.hisHer()).append(" ").append(bottomDesc).append(".  ").toString());
+                }
+                if(c.getINJULevel() < 4)
+                    w.append(t, (new StringBuilder("With ")).append(c.hisHer()).append(" limbs splayed out, there's nothing ").append(c.heShe()).append(" can do to cover ").append(c.himHer()).append("self, ").toString());
+                else
+                if(c.getINJULevel() > 4)
+                {
+                    if(w.tickle().booleanValue())
+                        w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" splayed-out form, gasping for breath, makes for a pathetic sight, ").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" mortally-wounded body makes for a pathetic sight, ").toString());
+                } else
+                if(w.tickle().booleanValue())
+                    w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s too worn out to even have the coordination to cover ").append(c.himHer()).append("self, ").toString());
+                else
+                    w.append(t, (new StringBuilder("With ")).append(c.hisHer()).append(" body shattered, ").append(c.heShe()).append(" has no strength to cover ").append(c.himHer()).append(" self, ").toString());
+                if(c.getHATELevel() < 4)
+                    w.append(t, (new StringBuilder("and ")).append(c.heShe()).append(" can only wait for the humiliation to end.").toString());
+                else
+                if(c.getHATELevel() > 4)
+                    w.append(t, (new StringBuilder("and the Demonic energy erupting from ")).append(c.hisHer()).append(" body isn't opaque enough to provide any modesty.").toString());
+                else
+                    w.append(t, (new StringBuilder("and ")).append(c.hisHer()).append(" impotent screams of rage only make ").append(c.himHer()).append(" look even weaker.").toString());
+            } else
+            {
+                w.append(t, (new StringBuilder("Removing the remaining scraps of ")).append(mainName).append("'s ").append(bottomDesc).append(" is only a formality, and the Thralls focus more on forcing ").append(c.hisHer()).append(" body into embarrassing positions.").toString());
+            }
+            w.append(t, "\n\n");
+        } else
+        if(highestPriority == 1)
+        {
+            if(c.getPLEALevel() == 1)
+            {
+                if(c.getHATELevel() < 1)
+                    w.append(t, "Despite the dire situation, ");
+                else
+                if(c.getHATELevel() > 1)
+                    w.append(t, (new StringBuilder("Despite ")).append(c.hisHer()).append(" growing fury, ").toString());
+                else
+                    w.append(t, (new StringBuilder("Despite ")).append(c.hisHer()).append(" growing annoyance, ").toString());
+                if(innocence > 66)
+                    w.append(t, (new StringBuilder("the things the Thralls are doing to ")).append(mainName).append(" make ").append(c.himHer()).append(" feel nice enough to start blushing and squirming.  ").toString());
+                else
+                if(innocence > 33)
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" feels ").append(c.hisHer()).append(" face grow warm as the Thralls' stimulation starts to have an effect.  ").toString());
+                else
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" can't deny that the Thralls' sexual stimulation is starting to have an effect on ").append(c.himHer()).append(".  ").toString());
+                if(c.getEXPOLevel() < 1)
+                    w.append(t, (new StringBuilder("Their fingers are able to work their way in under ")).append(c.hisHer()).append(" clothes, and ").toString());
+                else
+                if(c.getEXPOLevel() > 1)
+                    w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" need to cover ").append(c.himHer()).append("self means ").append(c.heShe()).append(" can't ignore how exposed ").append(c.heShe()).append(" is, and ").toString());
+                else
+                    w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" can feel the way the bystanders are staring at ").append(c.hisHer()).append(" legs exposed by ").append(c.hisHer()).append(" torn ").append(bottomDesc).append(", and ").toString());
+                if(c.getINJULevel() < 1)
+                    w.append(t, (new StringBuilder("no matter how hard ")).append(c.heShe()).append(" fights, it's impossible to completely fend off the pleasure.").toString());
+                else
+                if(c.getINJULevel() > 1)
+                {
+                    if(w.tickle().booleanValue())
+                        w.append(t, (new StringBuilder(String.valueOf(c.heShe()))).append("'s far too exhausted to fend off the assault.").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(c.heShe()))).append("'s far too badly hurt to fend off the assault.").toString());
+                } else
+                if(w.tickle().booleanValue())
+                    w.append(t, (new StringBuilder(String.valueOf(c.hisHer()))).append(" growing tiredness and distraction prevent ").append(c.himHer()).append(" from fending off the assault.").toString());
+                else
+                    w.append(t, (new StringBuilder(String.valueOf(c.hisHer()))).append(" bruised limbs lack the strength to completely fend off the assault.").toString());
+            } else
+            if(c.getPLEALevel() == 2)
+            {
+                if(c.getINJULevel() < 2)
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s gasps of exertion grow thick with pleasure ").toString());
+                else
+                if(c.getINJULevel() > 2)
+                {
+                    if(aVirg.booleanValue())
+                    {
+                        if(w.tickle().booleanValue())
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" moans helplessly ").toString());
+                        else
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" cries out in pain as the Thralls manhandle ").append(c.himHer()).append(", but there's pleasure in ").append(c.hisHer()).append(" voice too ").toString());
+                    } else
+                    if(w.tickle().booleanValue())
+                        w.append(t, (new StringBuilder("The tickling, groping hands make ")).append(mainName).append(" laugh helplessly ").toString());
+                    else
+                    if(c.getGender().equals("male"))
+                        w.append(t, (new StringBuilder("The Thrall's boot grinding back and forth on ")).append(mainName).append("'s penis makes ").append(c.himHer()).append(" moan in mingled pleasure and pain ").toString());
+                    else
+                        w.append(t, (new StringBuilder("The cock thrusting into ")).append(mainName).append("'s ass makes ").append(c.himHer()).append(" moan in mingled pleasure and pain ").toString());
+                } else
+                if(w.tickle().booleanValue())
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is barely able to suppress ").append(c.hisHer()).append(" moans of pleasure ").toString());
+                else
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s grunts of pain turn into moans of pleasure ").toString());
+                if(innocence > 66)
+                    w.append(t, (new StringBuilder("as ")).append(c.heShe()).append(" struggles to understand what's happening to ").append(c.himHer()).append(".  ").toString());
+                else
+                if(innocence > 33)
+                    w.append(t, (new StringBuilder("as ")).append(c.heShe()).append(" starts to give in to the sensations assaulting ").append(c.himHer()).append(".  ").toString());
+                else
+                    w.append(t, (new StringBuilder("as ")).append(c.heShe()).append(" begins to eagerly anticipate the stimulation despite ").append(c.himHer()).append("self.  ").toString());
+                if(c.getEXPOLevel() < 2)
+                    w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" can only defend ").append(c.himHer()).append("self as best ").append(c.heShe()).append(" can").toString());
+                else
+                if(c.getEXPOLevel() > 2)
+                {
+                    if(modest.booleanValue())
+                        w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" can only desperately try to cover ").append(c.hisHer()).append(" exposed body").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" can only look back at the cameras zooming in on ").append(c.hisHer()).append(" bare crotch").toString());
+                } else
+                {
+                    w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" can only tightly clutch ").append(c.hisHer()).append(" torn ").append(topDesc).append(" to ").append(c.hisHer()).append(" chest").toString());
+                }
+                if(c.getHATELevel() < 2)
+                    w.append(t, " and try to stay calm.");
+                else
+                if(c.getHATELevel() > 2)
+                {
+                    if(vVirg.booleanValue())
+                        w.append(t, (new StringBuilder(" and try ")).append(c.hisHer()).append(" best not to think about how ").append(c.hisHer()).append(" Sexual Barrier has come undone.").toString());
+                    else
+                        w.append(t, (new StringBuilder(" and endure having ")).append(c.hisHer()).append(" ").append(organ).append(" played with as one of the Thralls thrusts into ").append(c.hisHer()).append(" ").append(hole).append(" at the same time.").toString());
+                } else
+                {
+                    w.append(t, " and glare back at them with seething hatred.");
+                }
+            } else
+            if(c.getPLEALevel() == 3)
+            {
+                if(c.getEXPOLevel() < 3)
+                    w.append(t, (new StringBuilder("As the battle rages around ")).append(mainName).toString());
+                else
+                if(c.getEXPOLevel() > 3 && modest.booleanValue())
+                    w.append(t, (new StringBuilder("With ")).append(mainName).append("'s clothes essentially stripped from ").append(c.hisHer()).append(" body").toString());
+                else
+                if(modest.booleanValue())
+                    w.append(t, (new StringBuilder("With ")).append(mainName).append("'s shredded ").append(bottomDesc).append(" and lack of panties").toString());
+                else
+                    w.append(t, (new StringBuilder("With ")).append(mainName).append(" stripped and being filmed from every angle").toString());
+                if(cVirg.booleanValue())
+                {
+                    if(innocence > 66)
+                    {
+                        if(!c.getGender().equals("female"))
+                            w.append(t, (new StringBuilder(", everyone else can see that ")).append(c.heShe()).append(" has an erection, even if ").append(mainName).append(" ").append(c.himHer()).append("self doesn't realize it.  ").toString());
+                        else
+                            w.append(t, (new StringBuilder(", everyone else can see the love juices dripping down ")).append(c.hisHer()).append(" thighs, even if ").append(mainName).append(" ").append(c.himHer()).append("self doesn't realize it.  ").toString());
+                    } else
+                    if(innocence > 33)
+                    {
+                        if(!c.getGender().equals("female"))
+                            w.append(t, (new StringBuilder(", it's obvious that ")).append(c.heShe()).append(" has an erection.  ").toString());
+                        else
+                            w.append(t, (new StringBuilder(", it's obvious that ")).append(c.hisHer()).append(" thighs are slick with ").append(c.hisHer()).append(" fluids.  ").toString());
+                    } else
+                    if(!c.getGender().equals("female"))
+                        w.append(t, (new StringBuilder(", ")).append(c.heShe()).append(" is fully aware that ").append(c.hisHer()).append(" shameful erection is visible.  ").toString());
+                    else
+                        w.append(t, (new StringBuilder(", ")).append(c.heShe()).append(" is fully aware that shameful secretions are dripping down ").append(c.hisHer()).append(" thighs.  ").toString());
+                } else
+                if(innocence > 66)
+                {
+                    if(c.getGender().equals("female"))
+                        w.append(t, (new StringBuilder(", everyone else can see that ")).append(c.heShe()).append("'s cumming hard, because ").append(c.heShe()).append("'s too delirious with pleasure to hide it.  ").toString());
+                    else
+                        w.append(t, (new StringBuilder(", everyone can see the cum spurting from ")).append(c.hisHer()).append(" penis, even if ").append(c.heShe()).append("'s too caught up in how good it feels to realize what a scene ").append(c.heShe()).append("'s making.  ").toString());
+                } else
+                if(innocence > 33)
+                {
+                    if(c.getGender().equals("female"))
+                        w.append(t, (new StringBuilder(", it's obvious that ")).append(c.heShe()).append("'s cumming.  ").toString());
+                    else
+                        w.append(t, (new StringBuilder(", ")).append(c.hisHer()).append(" spurting cock makes it obvious that ").append(c.heShe()).append("'s cumming.  ").toString());
+                } else
+                if(c.getGender().equals("female"))
+                    w.append(t, (new StringBuilder(", ")).append(c.heShe()).append("'s fully aware that the spectators will likely realize that ").append(c.heShe()).append("'s orgasming.  ").toString());
+                else
+                    w.append(t, (new StringBuilder(", ")).append(c.heShe()).append("'s fully aware that ").append(c.hisHer()).append(" spurting cock is revealing how much pleasure ").append(c.heShe()).append("'s feeling right now.  ").toString());
+                if(c.getHATELevel() < 3)
+                    w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" effort to stay focused ").toString());
+                else
+                if(c.getHATELevel() > 3 && vVirg.booleanValue())
+                    w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" shrieking rage ").toString());
+                else
+                if(vVirg.booleanValue())
+                    w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" violent anger ").toString());
+                else
+                    w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" sense of violation over the Thralls penetrating ").append(c.hisHer()).append(" ").append(hole).append(" ").toString());
+                if(c.getINJULevel() < 3)
+                    w.append(t, "isn't enough to stop the pleasure from growing stronger and stronger.");
+                else
+                if(c.getINJULevel() > 3 && aVirg.booleanValue())
+                {
+                    if(w.tickle().booleanValue())
+                        w.append(t, (new StringBuilder("is completely irrelevant in the face of ")).append(c.hisHer()).append(" extreme exhaustion.").toString());
+                    else
+                        w.append(t, "and broken bones aren't enough to drown out the pleasure.");
+                } else
+                if(aVirg.booleanValue())
+                {
+                    if(w.tickle().booleanValue())
+                        w.append(t, (new StringBuilder("isn't enough to stop ")).append(c.hisHer()).append(" breathless moans from coming out.").toString());
+                    else
+                        w.append(t, (new StringBuilder("isn't enough to stop the pain of ")).append(c.hisHer()).append(" injuries from being overwhelmed by surging pleasure.").toString());
+                } else
+                if(w.tickle().booleanValue())
+                    w.append(t, (new StringBuilder("isn't enough to stop ")).append(c.hisHer()).append(" laughter from growing whiny and desperate as the pleasure mounts.").toString());
+                else
+                if(c.getGender().equals("male"))
+                    w.append(t, (new StringBuilder("isn't enough to stop the painful crushing of ")).append(c.hisHer()).append(" penis and balls from giving ").append(c.himHer()).append(" a masochistic pleasure.").toString());
+                else
+                    w.append(t, (new StringBuilder("isn't enough to stop the cock up ")).append(c.hisHer()).append(" butt from awakening even more shameful pleasure in ").append(c.himHer()).append(".").toString());
+            } else
+            if(c.getPLEALevel() == 4)
+            {
+                if(innocence > 66)
+                {
+                    if(c.getGender().equals("female"))
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is feeling so good that it's starting to scare ").append(c.himHer()).append(", ").append(c.hisHer()).append(" body spasming against ").append(c.hisHer()).append(" will").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is feeling so good that it's starting to scare ").append(c.himHer()).append(", ").append(c.hisHer()).append(" penis dribbling a constant stream of cum").toString());
+                } else
+                if(innocence > 33)
+                {
+                    if(c.getGender().equals("female"))
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s body spasms at the overwhelming pleasure").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s penis releases a constant dribble of cum as ").append(c.heShe()).append(" spasms in overwhelming pleasure").toString());
+                } else
+                if(c.getGender().equals("female"))
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" squeezes ").append(c.hisHer()).append(" eyes shut, but ").append(c.heShe()).append(" can't ignore the way that ").append(c.hisHer()).append(" body is spasming against ").append(c.hisHer()).append(" will").toString());
+                else
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" squeezes ").append(c.hisHer()).append(" eyes shut, but ").append(c.heShe()).append(" can't ignore the way that ").append(c.hisHer()).append(" twitching penis is dribbling cum in a constant debilitating climax").toString());
+                if(c.getINJULevel() < 4)
+                    w.append(t, (new StringBuilder(", interfering with ")).append(c.hisHer()).append(" attempts to escape.  ").toString());
+                else
+                if(c.getINJULevel() > 4)
+                {
+                    if(w.tickle().booleanValue())
+                        w.append(t, (new StringBuilder(", even as ")).append(c.heShe()).append(" almost blacks out from exhaustion.  ").toString());
+                    else
+                        w.append(t, (new StringBuilder(", the sensations somehow bypassing the missing nerves from ")).append(c.hisHer()).append(" moral wounds.  ").toString());
+                } else
+                if(w.tickle().booleanValue())
+                    w.append(t, (new StringBuilder(", ")).append(c.hisHer()).append(" movements weak and uncoordinated with exhaustion.  ").toString());
+                else
+                    w.append(t, (new StringBuilder(", each movement causing a spike of pain to shoot through ")).append(c.hisHer()).append(" shattered limbs.  ").toString());
+                if(c.getHATELevel() < 4)
+                    w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" can't think about anything except orgasm").toString());
+                else
+                if(c.getHATELevel() > 4)
+                    w.append(t, (new StringBuilder("Demonic energy erupts from ")).append(c.himHer()).append(" with every movement").toString());
+                else
+                    w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" shrieks of rage contrast sharply with ").append(c.hisHer()).append(" erotic movements").toString());
+                if(c.getEXPOLevel() < 4)
+                    w.append(t, (new StringBuilder(", ")).append(c.hisHer()).append(" body gyrating on instinct.").toString());
+                else
+                if(c.getEXPOLevel() > 4)
+                    w.append(t, (new StringBuilder(", ")).append(c.hisHer()).append(" naked body gyrating on instinct.").toString());
+                else
+                    w.append(t, (new StringBuilder(", the scraps of ")).append(c.hisHer()).append(" ").append(bottomDesc).append(" framing ").append(c.hisHer()).append(" shape as ").append(c.heShe()).append(" gyrates on pure instinct.").toString());
+            } else
+            {
+                w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" screams as ").append(c.hisHer()).append(" pleasure reaches a new peak.  ").append(c.HisHer()).append(" whole body feels like one erogenous zone, and the Thralls' abuses feel far, far better than they should.").toString());
+            }
+            w.append(t, "\n\n");
+        } else
+        if(highestPriority == 2)
+        {
+            if(c.getINJULevel() == 1)
+            {
+                if(c.getEXPOLevel() < 1)
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is still trying to put on a brave face, but ").toString());
+                else
+                if(c.getEXPOLevel() > 1)
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s clothes are badly torn and ").toString());
+                else
+                if(w.tickle().booleanValue())
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s bare feet are being ruthlessly exploited by the Thralls, and ").toString());
+                else
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" has had ").append(c.hisHer()).append(" ").append(bottomDesc).append(" torn off ").append(c.hisHer()).append(" legs, and ").toString());
+                if(w.tickle().booleanValue())
+                {
+                    if(confidence > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(c.heShe()))).append("'s forced to acknowledge that the tickling is starting to affect ").append(c.himHer()).append(".  ").toString());
+                    else
+                    if(confidence > 33)
+                        w.append(t, (new StringBuilder(String.valueOf(c.hisHer()))).append(" face wears a strained expression from being forced to endure the tickling.  ").toString());
+                    else
+                        w.append(t, (new StringBuilder("the tickling has started to affect ")).append(c.himHer()).append(".  ").append(c.HeShe()).append("'s afraid of just how much worse it can get.  ").toString());
+                } else
+                if(confidence > 66)
+                    w.append(t, (new StringBuilder("the bruises covering ")).append(c.hisHer()).append(" body force ").append(c.himHer()).append(" to acknowledge that ").append(c.heShe()).append("'s getting hurt.  ").toString());
+                else
+                if(confidence > 33)
+                    w.append(t, (new StringBuilder(String.valueOf(c.hisHer()))).append(" confidence has been shaken by the bruises covering ").append(c.hisHer()).append(" body.  ").toString());
+                else
+                    w.append(t, (new StringBuilder(String.valueOf(c.heShe()))).append(" can't stifle ").append(c.hisHer()).append(" whimpers of pain nor cover the bruises across ").append(c.hisHer()).append(" body.  ").toString());
+                if(c.getHATELevel() < 1)
+                    w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s trying to remain calm and focused, but ").toString());
+                else
+                if(c.getHATELevel() > 1)
+                    w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" sense of hatred, unsuitable for one of the Chosen, has weakened ").append(c.hisHer()).append(" magical defenses, and ").toString());
+                else
+                    w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" growing annoyance has disturbed ").append(c.hisHer()).append(" mental state and weakened ").append(c.hisHer()).append(" magical defenses, and ").toString());
+                if(c.getPLEALevel() < 1)
+                    w.append(t, (new StringBuilder(String.valueOf(c.heShe()))).append(" can't hold up against this kind of abuse forever.").toString());
+                else
+                if(c.getPLEALevel() > 1)
+                    w.append(t, (new StringBuilder("the pleasure inflicted on ")).append(c.himHer()).append(" has rendered ").append(c.hisHer()).append(" nerves oversensitive and vulnerable.").toString());
+                else
+                    w.append(t, (new StringBuilder(String.valueOf(c.hisHer()))).append(" skin, flush with pleasure, feels especially sensitive.").toString());
+            } else
+            if(c.getINJULevel() == 2)
+            {
+                if(w.tickle().booleanValue())
+                {
+                    if(c.getPLEALevel() < 2)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" reels").toString());
+                    else
+                    if(c.getPLEALevel() > 2)
+                    {
+                        if(cVirg.booleanValue())
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s near-orgasmic pleasure is interrupted by a spike of unpleasant stimulation").toString());
+                        else
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s orgasm is interrupted by a spike of unpleasant stimulation").toString());
+                    } else
+                    {
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s gasping breaths of pleasure turn into a stifled squeak").toString());
+                    }
+                    if(confidence > 66)
+                        w.append(t, (new StringBuilder(" as the tickling overwhelms ")).append(c.hisHer()).append(" willpower and starts to make ").append(c.himHer()).append(" flinch and twitch.  ").toString());
+                    else
+                    if(confidence > 33)
+                        w.append(t, (new StringBuilder(" as the tickling starts to make ")).append(c.himHer()).append(" blatantly flinch and squirm.  ").toString());
+                    else
+                        w.append(t, (new StringBuilder(" as the tickling reaches the point that ")).append(c.heShe()).append(" can't help but flinch away from each touch.  ").toString());
+                    if(c.getEXPOLevel() < 2)
+                        w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" clothes are beginning to grow disheveled in the process").toString());
+                    else
+                    if(c.getEXPOLevel() > 2)
+                    {
+                        w.append(t, (new StringBuilder("The damage to ")).append(c.hisHer()).append(" clothes means that ").append(c.hisHer()).append(" reflexive movements threaten to expose everything").toString());
+                        if(!modest.booleanValue())
+                            w.append(t, " to the cameras");
+                    } else
+                    {
+                        w.append(t, (new StringBuilder("The damage to ")).append(c.hisHer()).append(" ").append(topDesc).append(" has turned ").append(c.hisHer()).append(" armpits into a target").toString());
+                    }
+                } else
+                {
+                    if(c.getPLEALevel() < 2)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" reels").toString());
+                    else
+                    if(c.getPLEALevel() > 2)
+                    {
+                        if(cVirg.booleanValue())
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s near-orgasmic pleasure is interrupted by a spike of intense pain").toString());
+                        else
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s orgasm is interrupted by a spike of intense pain").toString());
+                    } else
+                    {
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s gasping breaths of pleasure turn into cries of pain").toString());
+                    }
+                    if(confidence > 66)
+                        w.append(t, (new StringBuilder(" as ")).append(c.hisHer()).append(" previous overconfidence is punished with attacks that start to draw blood.  ").toString());
+                    else
+                    if(confidence > 33)
+                        w.append(t, " as the Thralls' attacks start to draw blood.  ");
+                    else
+                        w.append(t, (new StringBuilder(" as ")).append(c.hisHer()).append(" lack of self-confidence means that the Thralls' attacks are already starting to draw blood.  ").toString());
+                    if(c.getEXPOLevel() < 2)
+                        w.append(t, (new StringBuilder("Patches of red are beginning to spread across ")).append(c.hisHer()).append(" clothes").toString());
+                    else
+                    if(c.getEXPOLevel() > 2)
+                    {
+                        if(modest.booleanValue())
+                            w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" clothes are too damaged to hide the wounds").toString());
+                        else
+                            w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" stripped, pitiful state is captured by the watching cameras").toString());
+                    } else
+                    {
+                        w.append(t, (new StringBuilder("The ragged edges of ")).append(c.hisHer()).append(" ").append(topDesc).append(" are stained in red").toString());
+                    }
+                }
+                if(c.getHATELevel() < 2)
+                    w.append(t, (new StringBuilder(", and ")).append(c.heShe()).append("'ll only have a harder time defending ").append(c.himHer()).append("self from here.").toString());
+                else
+                if(c.getHATELevel() > 2)
+                {
+                    if(vVirg.booleanValue())
+                        w.append(t, (new StringBuilder(", and with ")).append(c.hisHer()).append(" Sexual Barrier broken, ").append(c.heShe()).append("'s especially vulnerable.").toString());
+                    else
+                        w.append(t, (new StringBuilder(", and with one of the Thralls fucking ")).append(c.hisHer()).append(" ").append(hole).append(" even as ").append(c.heShe()).append("'s tortured, ").append(c.hisHer()).append(" defeat is undeniable.").toString());
+                } else
+                {
+                    w.append(t, (new StringBuilder(", and a desire for vengeance smolders in ")).append(c.hisHer()).append(" eyes.").toString());
+                }
+            } else
+            if(c.getINJULevel() == 3)
+            {
+                if(w.tickle().booleanValue())
+                {
+                    if(aVirg.booleanValue())
+                    {
+                        if(confidence > 66)
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" has been stubbornly concealing just how much all the tickling has been affecting ").append(c.himHer()).append(", but the Thralls are starting to notice ").append(c.hisHer()).append(" inability to completely suppress ").append(c.hisHer()).append(" voice").toString());
+                        else
+                        if(confidence > 33)
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s self-confidence has been completely destroyed by the way the Thralls are toying with ").append(c.himHer()).toString());
+                        else
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s voice comes out in small whimpers every time the Thralls tickle ").append(c.himHer()).append(".  ").append(c.HeShe()).append(" knows ").append(c.heShe()).append(" isn't strong enough to resist whatever they want to make ").append(c.himHer()).append(" do").toString());
+                    } else
+                    if(confidence > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" has been stubbornly resisting the tickling so far, but now ").append(c.heShe()).append(" can't help but start laughing again").toString());
+                    else
+                    if(confidence > 33)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" has been forced to laugh again by the Thralls' tickling").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s voice comes out in whimpering giggles every time the Thralls tickle ").append(c.himHer()).append(".  ").append(c.HeShe()).append(" knows ").append(c.heShe()).append(" never had a chance").toString());
+                } else
+                if(aVirg.booleanValue())
+                {
+                    if(confidence > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" has been stubbornly concealing just how hurt ").append(c.heShe()).append(" is, but the Thralls can feel the way that ").append(c.hisHer()).append(" previously unyielding flesh is becoming soft under their fingers").toString());
+                    else
+                    if(confidence > 33)
+                        w.append(t, (new StringBuilder("As the injuries accumulate, the Thralls feel ")).append(mainName).append("'s body becoming softer and more yielding").toString());
+                    else
+                        w.append(t, (new StringBuilder("The accumulating injuries destroy ")).append(mainName).append("'s self-confidence, causing ").append(c.hisHer()).append(" body to become more and more vulnerable to further abuses.  The Thralls notice how ").append(c.hisHer()).append(" skin seems to grow softer as ").append(c.hisHer()).append(" struggles weaken").toString());
+                } else
+                if(c.getGender().equals("male"))
+                {
+                    if(confidence > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" has been trying to ignore the pain of ").append(c.hisHer()).append(" injuries, but the constant pummeling and twisting to ").append(c.hisHer()).append(" testicles finally causes ").append(c.himHer()).append(" to scream out loud").toString());
+                    else
+                    if(confidence > 33)
+                        w.append(t, (new StringBuilder("As the injuries accumulate, the Thralls take advantage of ")).append(mainName).append("'s weakening body by pummeling and twisting ").append(c.hisHer()).append(" sensitive testicles").toString());
+                    else
+                        w.append(t, (new StringBuilder("The accumulating injuries destroy ")).append(mainName).append("'s self-confidence, causing ").append(c.hisHer()).append(" sensitive testicles to become more vulnerable to the Thralls' pinching, twisting hands").toString());
+                } else
+                if(confidence > 66)
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" has been trying to ignore the pain of ").append(c.hisHer()).append(" injuries, but ").append(c.heShe()).append(" still screams out loud as one of the Thralls manages to force the tip of his cock past ").append(c.hisHer()).append(" anus").toString());
+                else
+                if(confidence > 33)
+                    w.append(t, (new StringBuilder("As the injuries accumulate, the one of the Thralls takes advantage of ")).append(mainName).append("'s weakening body by forcing his cock into ").append(c.hisHer()).append(" ass").toString());
+                else
+                    w.append(t, (new StringBuilder("The accumulating injuries destroy ")).append(mainName).append("'s self-confidence, causing ").append(c.hisHer()).append(" body to become vulnerable enough that one of the Thralls is able to force his cock into ").append(c.hisHer()).append(" ass").toString());
+                if(c.getHATELevel() < 3)
+                    w.append(t, (new StringBuilder(", and even though ")).append(c.hisHer()).append(" Sexual Barrier remains intact, there are other ways for them to enjoy ").append(c.hisHer()).append(" body.  ").toString());
+                else
+                if(c.getHATELevel() > 3 && vVirg.booleanValue())
+                    w.append(t, (new StringBuilder(", and ")).append(c.hisHer()).append(" sobs of rage do nothing to deter them from using ").append(c.himHer()).append(" as they please.  ").toString());
+                else
+                if(vVirg.booleanValue())
+                {
+                    if(w.tickle().booleanValue())
+                        w.append(t, (new StringBuilder(", and with ")).append(c.hisHer()).append(" Sexual Barrier broken, ").append(c.heShe()).append(" feels especially vulnerable.  ").toString());
+                    else
+                        w.append(t, (new StringBuilder(", and with ")).append(c.hisHer()).append(" Sexual Barrier broken, they have multiple ways they might enjoy that fact.  ").toString());
+                } else
+                {
+                    w.append(t, (new StringBuilder(", and they find it easier than ever to penetrate ")).append(c.hisHer()).append(" ").append(hole).append(".  ").toString());
+                }
+                if(c.getEXPOLevel() < 3)
+                    w.append(t, (new StringBuilder("They're tearing apart ")).append(c.hisHer()).append(" ").append(bottomDesc).append(" in the process").toString());
+                else
+                if(c.getEXPOLevel() > 3 && modest.booleanValue())
+                    w.append(t, (new StringBuilder("They aren't hindered in the slightest by ")).append(c.hisHer()).append(" shredded ").append(bottomDesc).toString());
+                else
+                if(modest.booleanValue())
+                    w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" lack of panties leaves ").append(c.himHer()).append(" especially vulnerable").toString());
+                else
+                    w.append(t, "The abuse is being filmed by countless cameras");
+                if(c.getPLEALevel() < 3)
+                    w.append(t, ".");
+                else
+                if(c.getPLEALevel() > 3 && cVirg.booleanValue())
+                    w.append(t, (new StringBuilder(", and the pleasurable spasms in ")).append(c.hisHer()).append(" body intensify as ").append(c.heShe()).append(" can't help but anticipate what they're about to do.").toString());
+                else
+                if(cVirg.booleanValue())
+                    w.append(t, (new StringBuilder(", and ")).append(c.hisHer()).append(" fluid-soaked thighs tremble with approaching orgasm.").toString());
+                else
+                    w.append(t, (new StringBuilder(", and ")).append(c.heShe()).append(" can't stop cumming as they stroke ").append(c.hisHer()).append(" ").append(organ).append(" at the same time.").toString());
+            } else
+            if(c.getINJULevel() == 4)
+            {
+                if(c.getHATELevel() < 4)
+                {
+                    if(w.tickle().booleanValue())
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" cries out helplessly").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" cries out in pain").toString());
+                } else
+                if(c.getHATELevel() > 4)
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" erupts with tendrils of Demonic energy").toString());
+                else
+                if(w.tickle().booleanValue())
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" shrieks in helpless rage").toString());
+                else
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" shrieks in rage and pain").toString());
+                if(w.tickle().booleanValue())
+                {
+                    if(confidence > 66)
+                        w.append(t, (new StringBuilder(", still thrashing wildly as ")).append(c.heShe()).append("'s tickled, but too exhausted for it to do ").append(c.himHer()).append(" any good.  ").toString());
+                    else
+                    if(confidence > 33)
+                        w.append(t, ", completely fed up with the tickling but too exhausted to actually fight it.  ");
+                    else
+                        w.append(t, (new StringBuilder(", spasming weakly as ")).append(c.heShe()).append("'s tickled, but too exhausted and demoralized to put any strength in ").append(c.hisHer()).append(" limbs.  ").toString());
+                    if(c.getPLEALevel() < 4)
+                        w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" attempts to curl up and protect ").append(c.himHer()).append("self are completely useless").toString());
+                    else
+                    if(c.getPLEALevel() > 4)
+                        w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" nerves have been corrupted to the point that even the lightest touches make ").append(c.himHer()).append(" move erratically").toString());
+                    else
+                        w.append(t, (new StringBuilder("Combined with ")).append(c.hisHer()).append(" sexual overstimulation, the attacks make ").append(c.hisHer()).append(" movements become completely uncontrolled").toString());
+                } else
+                {
+                    if(confidence > 66)
+                        w.append(t, (new StringBuilder(", struggling as much as ")).append(c.heShe()).append(" can as the Thralls mangle ").append(c.hisHer()).append(" body.  ").toString());
+                    else
+                    if(confidence > 33)
+                        w.append(t, (new StringBuilder(" as the Thralls crush ")).append(c.hisHer()).append(" body.  ").toString());
+                    else
+                        w.append(t, (new StringBuilder(", trying and failing to curl up and protect ")).append(c.himHer()).append("self as the Thralls shatter ").append(c.hisHer()).append(" body.  ").toString());
+                    if(c.getPLEALevel() < 4)
+                        w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" attempts to move only hurt ").append(c.himHer()).append(" more").toString());
+                    else
+                    if(c.getPLEALevel() > 4)
+                        w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" nerves have been corrupted to the point that the damage inflicts as much pain as pleasure, and the resulting orgasmic spasms only hurt ").append(c.himHer()).append(" more").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" body continues to spasm with the aftershocks of the pleasure already inflicted on ").append(c.himHer()).append(", and the movements only hurt ").append(c.himHer()).append(" more").toString());
+                }
+                if(c.getEXPOLevel() < 4)
+                    w.append(t, ".");
+                else
+                if(c.getEXPOLevel() > 4)
+                    w.append(t, (new StringBuilder(" and showcase ")).append(c.hisHer()).append(" exposed body for ").append(c.hisHer()).append(" abusers.").toString());
+                else
+                    w.append(t, (new StringBuilder(" and cause the remaining scraps of ")).append(c.hisHer()).append(" ").append(bottomDesc).append(" to shift so that they don't cover anything at all.").toString());
+            } else
+            if(w.tickle().booleanValue())
+                w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is completely out of breath from being forced to laugh so much, and a regular person would have passed out already.  However, ").append(c.hisHer()).append(" Chosen powers force ").append(c.himHer()).append(" to remain awake and alert, no matter how heavy ").append(c.hisHer()).append(" limbs feel or how much ").append(c.heShe()).append(" just wants to give up.").toString());
+            else
+                w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is being continually dealt wounds that ought to be fatal, but ").append(c.hisHer()).append(" Chosen powers don't permit ").append(c.himHer()).append(" to die or even pass out.  However, they do make it harder and harder for ").append(c.himHer()).append(" to defend ").append(c.himHer()).append("self.").toString());
+            w.append(t, "\n\n");
+        } else
+        if(highestPriority == 0)
+        {
+            if(c.getHATELevel() == 1)
+            {
+                if(c.getPLEALevel() < 1)
+                    w.append(t, "In contrast to the Thralls' delight, ");
+                else
+                if(c.getPLEALevel() > 1)
+                    w.append(t, (new StringBuilder("Despite (or perhaps because of) the intense pleasure that has been inflicted on ")).append(c.himHer()).append(", ").toString());
+                else
+                    w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" face turning red with combined arousal and anger, ").toString());
+                if(morality > 66)
+                    w.append(t, (new StringBuilder("some serious annoyance is hidden behind ")).append(mainName).append("'s outwardly compassionate demeanor.  ").toString());
+                else
+                if(morality > 33)
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is already getting annoyed at the situation. ").toString());
+                else
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s short temper means that ").append(c.heShe()).append("'s quickly getting annoyed at being toyed with.  ").toString());
+                if(c.getINJULevel() < 1)
+                    w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" realizes that they're deliberately provoking ").append(c.himHer()).append(", but ").append(c.heShe()).append("'s still ").toString());
+                else
+                if(c.getINJULevel() > 1)
+                {
+                    if(w.tickle().booleanValue())
+                        w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" subconsciously compensates for ").append(c.hisHer()).append(" feelings of helplessness by blaming others, and ").append(c.heShe()).append("'s ").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s bleding from various wounds, putting ").append(c.himHer()).append(" in a desperate state of mind, and ").append(c.heShe()).append("'s ").toString());
+                } else
+                if(w.tickle().booleanValue())
+                    w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s starting to get worried about how easy it seems to be for the Thralls to toy with ").append(c.himHer()).append(", and ").append(c.heShe()).append("'s ").toString());
+                else
+                    w.append(t, (new StringBuilder("The pain of ")).append(c.hisHer()).append(" bruises fuels ").append(c.hisHer()).append(" anger, and ").append(c.heShe()).append("'s ").toString());
+                if(c.getEXPOLevel() < 1)
+                    w.append(t, (new StringBuilder("losing ")).append(c.hisHer()).append(" cool.").toString());
+                else
+                if(c.getEXPOLevel() > 1)
+                    w.append(t, "flustered at being so exposed.");
+                else
+                    w.append(t, (new StringBuilder("distracted enough to forget the need to hold ")).append(c.hisHer()).append(" torn ").append(bottomDesc).append(" closed.").toString());
+            } else
+            if(c.getHATELevel() == 2)
+            {
+                if(c.getEXPOLevel() < 2)
+                    w.append(t, (new StringBuilder("As the Thralls continue to harass ")).append(mainName).append(", ").toString());
+                else
+                if(c.getEXPOLevel() > 2)
+                {
+                    if(modest.booleanValue())
+                        w.append(t, (new StringBuilder("As ")).append(mainName).append(" tries to cover ").append(c.hisHer()).append(" stripped body, ").toString());
+                    else
+                        w.append(t, (new StringBuilder("As the Thralls film ")).append(mainName).append("'s stripped body, ").toString());
+                } else
+                {
+                    w.append(t, (new StringBuilder("As ")).append(mainName).append(" struggles to hold ").append(c.hisHer()).append(" ").append(topDesc).append(" closed, ").toString());
+                }
+                if(morality > 66)
+                    w.append(t, (new StringBuilder(String.valueOf(c.heShe()))).append(" wears an angry expression, unsuitable for ").append(c.hisHer()).append(" normally kind face.  ").toString());
+                else
+                if(morality > 33)
+                    w.append(t, (new StringBuilder("resentment burns in ")).append(c.hisHer()).append(" eyes.  ").toString());
+                else
+                    w.append(t, (new StringBuilder(String.valueOf(c.hisHer()))).append(" teeth are gritted in rage.  ").toString());
+                if(c.getINJULevel() < 2)
+                    w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" composure completely lost, ").toString());
+                else
+                if(c.getINJULevel() > 2)
+                {
+                    if(aVirg.booleanValue())
+                    {
+                        if(w.tickle().booleanValue())
+                            w.append(t, "Showing obvious signs of exhaustion, ");
+                        else
+                            w.append(t, (new StringBuilder("With the pain of ")).append(c.hisHer()).append(" severe injuries, ").toString());
+                    } else
+                    if(w.tickle().booleanValue())
+                        w.append(t, (new StringBuilder("Even so, ")).append(c.heShe()).append(" still ends up squealing with laughter whenever they tickle ").append(c.himHer()).append(", and ").toString());
+                    else
+                    if(c.getGender().equals("male"))
+                        w.append(t, (new StringBuilder("Crying out in pain whenever ")).append(c.hisHer()).append(" attackers stomp on ").append(c.hisHer()).append(" testicles, ").toString());
+                    else
+                        w.append(t, (new StringBuilder("Enduring a Thrall's cock up ")).append(c.hisHer()).append(" ass, ").toString());
+                } else
+                if(w.tickle().booleanValue())
+                    w.append(t, "Reflexively flinching away from every touch, ");
+                else
+                    w.append(t, (new StringBuilder("With ")).append(c.hisHer()).append(" fight-or-flight response stimulated by the cuts covering ").append(c.hisHer()).append(" body, ").toString());
+                if(c.getPLEALevel() < 2)
+                    w.append(t, (new StringBuilder(String.valueOf(c.heShe()))).append("'s too caught up in the moment to calm down.").toString());
+                else
+                if(c.getPLEALevel() > 2)
+                {
+                    if(cVirg.booleanValue())
+                        w.append(t, (new StringBuilder("the way ")).append(c.hisHer()).append(" nerves have been overstimulated by pleasure makes it impossible for ").append(c.himHer()).append(" to shut everything out and calm down.").toString());
+                    else
+                        w.append(t, (new StringBuilder("the countless hands stroking ")).append(c.hisHer()).append(" ").append(organ).append(" still bring ").append(c.himHer()).append(" to another orgasm.").toString());
+                } else
+                {
+                    w.append(t, (new StringBuilder(String.valueOf(c.heShe()))).append(" would have a hard enough time focusing even if ").append(c.heShe()).append(" weren't also gasping for breath in the wake of the sexual stimulation.").toString());
+                }
+            } else
+            if(c.getHATELevel() == 3)
+            {
+                if(c.getINJULevel() < 3)
+                    w.append(t, (new StringBuilder("Unable to contain ")).append(c.hisHer()).append(" emotions anymore, ").toString());
+                else
+                if(c.getINJULevel() > 3 && aVirg.booleanValue())
+                {
+                    if(w.tickle().booleanValue())
+                        w.append(t, (new StringBuilder("Desperately struggling against ")).append(c.hisHer()).append(" overwhelming exhaustion, ").toString());
+                    else
+                        w.append(t, (new StringBuilder("Desperately struggling despite ")).append(c.hisHer()).append(" shattered body, ").toString());
+                } else
+                if(aVirg.booleanValue())
+                {
+                    if(w.tickle().booleanValue())
+                        w.append(t, "Gasping and moaning with exhaustion, ");
+                    else
+                        w.append(t, (new StringBuilder("Made desperate by ")).append(c.hisHer()).append(" serious wounds, ").toString());
+                } else
+                if(w.tickle().booleanValue())
+                    w.append(t, "Gasping with unwilling laughter, ");
+                else
+                if(c.getGender().equals("male"))
+                    w.append(t, (new StringBuilder("Made desperate by the pain from the Thralls stomping on ")).append(c.hisHer()).append(" testicles, ").toString());
+                else
+                    w.append(t, (new StringBuilder("Desperately struggling against the Thrall fucking ")).append(c.himHer()).append(" up the ass, ").toString());
+                if(vVirg.booleanValue())
+                {
+                    if(morality > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" lashes out, paying less mind than ").append(c.heShe()).append(" should to any innocents who might be close enough to get hurt.  ").toString());
+                    else
+                    if(morality > 33)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" lashes out indiscrimiately in ").append(c.hisHer()).append(" attempts to escape.  ").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" gives in to ").append(c.hisHer()).append(" rage and starts trying to lash out.  ").toString());
+                } else
+                if(morality > 66)
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" shudders in revulsion as one of ").append(c.hisHer()).append(" attackers manages to penetrate ").append(c.hisHer()).append(" ").append(hole).toString());
+                else
+                if(morality > 33)
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" goes stiff and freezes up briefly as one of ").append(c.hisHer()).append(" attackers manages to penetrate ").append(c.hisHer()).append(" ").append(hole).toString());
+                else
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" screams with rage as one of ").append(c.hisHer()).append(" attackers manages to penetrate ").append(c.hisHer()).append(" ").append(hole).toString());
+                if(c.getPLEALevel() < 3)
+                    w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" just wants this all to be over").toString());
+                else
+                if(c.getPLEALevel() > 3 && cVirg.booleanValue())
+                    w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" body is uncontrollably writhing in pleasure, and ").append(c.hisHer()).append(" mind has been affected too").toString());
+                else
+                if(cVirg.booleanValue())
+                    w.append(t, (new StringBuilder("The pleasure has left ")).append(c.himHer()).append(" incapable of thinking straight").toString());
+                else
+                    w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s already cumming again").toString());
+                if(c.getEXPOLevel() < 3)
+                    w.append(t, ".");
+                else
+                if(c.getEXPOLevel() > 3 && modest.booleanValue())
+                    w.append(t, (new StringBuilder(", ")).append(c.heShe()).append(" has practically forgotten just how exposed ").append(c.hisHer()).append(" body is.").toString());
+                else
+                if(modest.booleanValue())
+                    w.append(t, (new StringBuilder(", ")).append(c.heShe()).append(" can't even muster the composure to cover ").append(c.hisHer()).append(" torn ").append(bottomDesc).append(" and maintain some level of modesty.").toString());
+                else
+                    w.append(t, (new StringBuilder(", and ")).append(c.heShe()).append(" barely notices when ").append(c.hisHer()).append(" bare legs are forced wide apart for the benefit of the cameras.").toString());
+            } else
+            if(c.getHATELevel() == 4)
+            {
+                if(morality > 66)
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is torn between laughing and sobbing as ").append(c.hisHer()).append(" sanity cracks").toString());
+                else
+                if(morality > 33)
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" giggles madly as ").append(c.hisHer()).append(" sanity cracks").toString());
+                else
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" laughs with despairing abandon as ").append(c.hisHer()).append(" sanity cracks").toString());
+                if(c.getINJULevel() < 4)
+                    w.append(t, ".  ");
+                else
+                if(c.getINJULevel() > 4)
+                {
+                    if(w.tickle().booleanValue())
+                        w.append(t, ", struggling for breath.  ");
+                    else
+                        w.append(t, (new StringBuilder(", barely even acknowledging the mortal wounds covering ")).append(c.hisHer()).append(" body.  ").toString());
+                } else
+                if(w.tickle().booleanValue())
+                    w.append(t, ", twitching wildly at the slightest touch.  ");
+                else
+                    w.append(t, (new StringBuilder(", barely even acknowledging ")).append(c.hisHer()).append(" shattered body.  ").toString());
+                if(c.getPLEALevel() < 4)
+                    w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" emotions have spiraled far beyond ").append(c.hisHer()).append(" control").toString());
+                else
+                if(c.getPLEALevel() > 4)
+                    w.append(t, (new StringBuilder("The waves of pleasure rolling through ")).append(c.hisHer()).append(" overstimulated nerves burn the scene into ").append(c.hisHer()).append(" memory").toString());
+                else
+                    w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" constant spasms of pleasure make ").append(c.himHer()).append(" look completely unhinged").toString());
+                if(c.getEXPOLevel() < 4)
+                    w.append(t, ".");
+                else
+                if(c.getEXPOLevel() > 4)
+                    w.append(t, (new StringBuilder(", ")).append(c.hisHer()).append(" mind and body both stripped of all defenses.").toString());
+                else
+                    w.append(t, (new StringBuilder(", ")).append(c.hisHer()).append(" shredded ").append(bottomDesc).append(" enhancing ").append(c.hisHer()).append(" savage appearance.").toString());
+            } else
+            {
+                w.append(t, (new StringBuilder("Your provocations reach into the depths of ")).append(mainName).append("'s soul, drawing tendrils of Demonic energy out of ").append(c.hisHer()).append(" body.  ").append(c.HisHer()).append(" Chosen powers grow weaker and weaker as ").append(c.heShe()).append(" is further alienated from the virtues of humanity.").toString());
+            }
+            w.append(t, "\n\n");
+        }
+        c.say(t, "\"");
+        if(confidence > 66)
+        {
+            if(thisAttack == 0)
+            {
+                if(variant == 0)
+                {
+                    if(c.getPLEALevel() < 3 || cVirg.booleanValue())
+                        c.say(t, "Ergh, no, take it out!");
+                    else
+                        c.say(t, "Ngh, no...!  Don't make me... enjoy this...!  Aaah!");
+                } else
+                if(variant == 1)
+                {
+                    if(c.getHATELevel() < 3 || vVirg.booleanValue())
+                        c.say(t, "Need to... hold... aaah, ah, I'm-");
+                    else
+                        c.say(t, "P-Pull out or I'll- ah, ah, nnnaaah!");
+                } else
+                if(variant == 2)
+                {
+                    if(w.tickle().booleanValue())
+                    {
+                        if(c.getHATELevel() < 3 || vVirg.booleanValue())
+                            c.say(t, "Hahah, ahahah, stop, don't touch meee!");
+                        else
+                            c.say(t, "Ahahah, no, not while you're insiiide, hahahahah!");
+                    } else
+                    if(c.getHATELevel() < 3 || vVirg.booleanValue())
+                        c.say(t, "Ah!  No!  No more!");
+                    else
+                        c.say(t, "Agh!  Ow!  No, no, take it out!");
+                } else
+                if(variant == 3)
+                {
+                    if(c.getHATELevel() < 3 || vVirg.booleanValue())
+                        c.say(t, "Don't make me join in this disgusting stuff...");
+                    else
+                        c.say(t, "You'd better pull out...");
+                } else
+                if(loved.booleanValue())
+                    c.say(t, "No!  Leave them alone!");
+                else
+                if(hated.booleanValue())
+                {
+                    if(morality > 66)
+                        c.say(t, "Do not harm them!");
+                    else
+                    if(morality > 33)
+                        c.say(t, "I guess those two are relying on me to rescue them...");
+                    else
+                        c.say(t, "I do like to see those two suffer...");
+                } else
+                {
+                    c.say(t, (new StringBuilder("No!  Leave ")).append(lover.getMainName()).append(" alone!").toString());
+                }
+            } else
+            if(thisAttack == 1)
+            {
+                if(variant == 0)
+                {
+                    if(c.getINJULevel() < 3 || aVirg.booleanValue())
+                        c.say(t, "I won't... give in...!");
+                    else
+                    if(w.tickle().booleanValue())
+                        c.say(t, "Ahahah, gaaah, take it ooout, hahahahah!");
+                    else
+                    if(c.getGender().equals("male"))
+                        c.say(t, "Don't touch my- Ah!  Ow, nooo!");
+                    else
+                        c.say(t, "Agh, no, not in both at once- Gaaah!");
+                } else
+                if(variant == 1)
+                {
+                    if(c.getINJULevel() < 3 || aVirg.booleanValue())
+                        c.say(t, "D-Don't touch me theeere!");
+                    else
+                    if(w.tickle().booleanValue())
+                        c.say(t, "Ahahah, no, no, I don't want to- naaahahahah!");
+                    else
+                        c.say(t, "This... This shouldn't... feel goood...!");
+                } else
+                if(variant == 2)
+                {
+                    if(w.tickle().booleanValue())
+                    {
+                        if(c.getPLEALevel() < 3 || cVirg.booleanValue())
+                            c.say(t, "Ahah... ahah... why can't I...?");
+                        else
+                            c.say(t, "Ahahah, nooo, not while I'm- Hahahah, aaahnnn!");
+                    } else
+                    if(c.getPLEALevel() < 3 || cVirg.booleanValue())
+                        c.say(t, "Ow...  Why...  Why can't I beat this...?");
+                    else
+                        c.say(t, "I can't... fight thiiis...!");
+                } else
+                if(variant == 3)
+                {
+                    if(c.getPLEALevel() < 3 || cVirg.booleanValue())
+                        c.say(t, "I won't play along!");
+                    else
+                        c.say(t, "I won't... nnn... no, not there...!");
+                } else
+                if(loved.booleanValue())
+                    c.say(t, "They don't deserve this!");
+                else
+                if(hated.booleanValue())
+                {
+                    if(morality > 66)
+                        c.say(t, "Even if it's those two, they don't deserve this...");
+                    else
+                    if(morality > 33)
+                        c.say(t, "Well, I guess those two might deserve this...");
+                    else
+                        c.say(t, "Heh, looks like those two are having a harder time...");
+                } else
+                {
+                    c.say(t, (new StringBuilder(String.valueOf(lover.getMainName()))).append(" doesn't deserve this!").toString());
+                }
+            } else
+            if(variant == 0)
+            {
+                if(c.getEXPOLevel() < 3 || modest.booleanValue())
+                    c.say(t, "Y-You think I'll be bothered by getting stripped when you're already doing this!?");
+                else
+                    c.say(t, "What sort of freak would enjoy watching me get- Gh!  Aaah, stop!");
+            } else
+            if(variant == 1)
+            {
+                if(c.getEXPOLevel() < 3 || modest.booleanValue())
+                    c.say(t, "I won't let you- Hng!?  Ah, ah, no, stooop!");
+                else
+                    c.say(t, "Aaah, wow... hah, wh-what are you all looking at...?");
+            } else
+            if(variant == 2)
+            {
+                if(w.tickle().booleanValue())
+                {
+                    if(c.getEXPOLevel() < 3 || modest.booleanValue())
+                        c.say(t, "Hmph...  Ngah!?  Hahahahah, aaagh!");
+                    else
+                        c.say(t, "Aaahahah, no, no, not my feeet!");
+                } else
+                if(c.getEXPOLevel() < 3 || modest.booleanValue())
+                    c.say(t, "Hmph...  Ngah, ow, ow, no, not there!");
+                else
+                    c.say(t, "Guh!  Urgh, ow, ow...  Is this really... so fun to watch...?");
+            } else
+            if(variant == 3)
+            {
+                if(c.getINJULevel() < 3 || aVirg.booleanValue())
+                    c.say(t, "Ugh, leave me alone...");
+                else
+                if(w.tickle().booleanValue())
+                    c.say(t, "Hahah, ahahah, j-just stop, stop it already!  Hahahahah!");
+                else
+                    c.say(t, "Just- ow!  J-Just stop!");
+            } else
+            if(loved.booleanValue())
+                c.say(t, "Come on, focus on me instead!");
+            else
+            if(hated.booleanValue())
+            {
+                if(morality > 66)
+                    c.say(t, "If you don't break me harder, I absolutely will rescue the others.");
+                else
+                if(morality > 33)
+                    c.say(t, "You Thralls can't afford to waste your time breaking the weaklings!  Come!");
+                else
+                    c.say(t, "Come on, let me help you break the others!");
+            } else
+            {
+                c.say(t, (new StringBuilder("Come on, focus on me instead of ")).append(lover.getMainName()).append("!").toString());
+            }
+        } else
+        if(confidence > 33)
+        {
+            if(thisAttack == 0)
+            {
+                if(variant == 0)
+                {
+                    if(c.getPLEALevel() < 3 || cVirg.booleanValue())
+                        c.say(t, "Ugh, this is disgusting...");
+                    else
+                        c.say(t, "Don't want to... enjoy this- Aaah!");
+                } else
+                if(variant == 1)
+                {
+                    if(c.getHATELevel() < 3 || vVirg.booleanValue())
+                        c.say(t, "Aaah, d-don't- Mmf!  Nn nn!");
+                    else
+                        c.say(t, "Aaah, no, I'm gonna breaaak!");
+                } else
+                if(variant == 2)
+                {
+                    if(w.tickle().booleanValue())
+                    {
+                        if(c.getHATELevel() < 3 || vVirg.booleanValue())
+                            c.say(t, "Ahahah, w-wait, don't tickle me with your- Ahahahahah!");
+                        else
+                            c.say(t, "Ahahah, w-wait, don't put it- Agh!  Ahahahah!");
+                    } else
+                    if(c.getGender().equals("male"))
+                    {
+                        if(c.getHATELevel() < 3 || vVirg.booleanValue())
+                            c.say(t, "They're all... so much bigger...");
+                        else
+                            c.say(t, "It... hurts...!");
+                    } else
+                    if(c.getHATELevel() < 3 || vVirg.booleanValue())
+                        c.say(t, "They're... getting it all over me...");
+                    else
+                        c.say(t, "Urgh... They're filling me up...");
+                } else
+                if(variant == 3)
+                {
+                    if(c.getHATELevel() < 3 || vVirg.booleanValue())
+                        c.say(t, "Nn...!  Gh!");
+                    else
+                        c.say(t, "Ugh!  Not... inside...!  Mmf!");
+                } else
+                if(loved.booleanValue())
+                    c.say(t, "I don't want to see what's happening to them...");
+                else
+                if(hated.booleanValue())
+                {
+                    if(morality > 66)
+                        c.say(t, "This is awful...");
+                    else
+                    if(morality > 33)
+                        c.say(t, "I can... deal with this...");
+                    else
+                        c.say(t, "I don't care what happens to the others.");
+                } else
+                {
+                    c.say(t, (new StringBuilder("I don't want to see what's happening to ")).append(lover.getMainName()).append("...").toString());
+                }
+            } else
+            if(thisAttack == 1)
+            {
+                if(variant == 0)
+                {
+                    if(c.getINJULevel() < 3 || aVirg.booleanValue())
+                        c.say(t, "Ah!  It's going inside...!");
+                    else
+                    if(w.tickle().booleanValue())
+                        c.say(t, "Ahah!  Ahahah, no, i-it's too deep, I'm- Hahahahahah!");
+                    else
+                    if(c.getGender().equals("male"))
+                        c.say(t, "Ng... hitting that spot... from both sides...!");
+                    else
+                        c.say(t, "Ugh!  B-Both holes at once...!?");
+                } else
+                if(variant == 1)
+                {
+                    if(c.getINJULevel() < 3 || aVirg.booleanValue())
+                        c.say(t, "I can't... ah... can't resist...!");
+                    else
+                    if(w.tickle().booleanValue())
+                        c.say(t, "Ahahah, ahn, if you tickle me at the same time, I-I can't- Hahahahah, oooh!");
+                    else
+                    if(c.getGender().equals("male"))
+                        c.say(t, "Ow!  No!  If you hit me there anymore, I-I'll- Naaah, nooo!");
+                    else
+                        c.say(t, "It's... nn... hitting so deep inside...!");
+                } else
+                if(variant == 2)
+                {
+                    if(w.tickle().booleanValue())
+                    {
+                        if(c.getPLEALevel() < 3 || cVirg.booleanValue())
+                            c.say(t, "Ahah, ahahah, wh-where are you touching- Hahahahah!");
+                        else
+                            c.say(t, "Aaahahah, nn, no, I'm going to- Hahahahah, ah, ah, aaah!");
+                    } else
+                    if(c.getGender().equals("male"))
+                    {
+                        if(c.getPLEALevel() < 3 || cVirg.booleanValue())
+                            c.say(t, "It... hurts... but...!");
+                        else
+                            c.say(t, "Ow, ooow, no, it's coming ooout!");
+                    } else
+                    if(c.getPLEALevel() < 3 || cVirg.booleanValue())
+                        c.say(t, "Ugh...!  Ugh!  Deep...!");
+                    else
+                        c.say(t, "Ugh!  Ugh!  Nooo, even from my buuutt!");
+                } else
+                if(variant == 3)
+                {
+                    if(c.getPLEALevel() < 3 || cVirg.booleanValue())
+                        c.say(t, "Have to... ignore it...!");
+                    else
+                        c.say(t, "Ah!  Th-They're... watchiiing!");
+                } else
+                if(loved.booleanValue())
+                    c.say(t, "I know this is even harder for them...");
+                else
+                if(hated.booleanValue())
+                {
+                    if(morality > 66)
+                        c.say(t, "Those two must have it even worse...");
+                    else
+                    if(morality > 33)
+                        c.say(t, "I guess it's not too bad compared to what they're going through...");
+                    else
+                        c.say(t, "At least those two are suffering worse.");
+                } else
+                {
+                    c.say(t, (new StringBuilder("I know this is even harder for ")).append(lover.getMainName()).append("...").toString());
+                }
+            } else
+            if(variant == 0)
+            {
+                if(c.getEXPOLevel() < 3 || modest.booleanValue())
+                    c.say(t, "Let go of me!");
+                else
+                    c.say(t, "They can all see the spot where we're joined...");
+            } else
+            if(variant == 1)
+            {
+                if(c.getEXPOLevel() < 3 || modest.booleanValue())
+                    c.say(t, "I'm... nn... a-again...  ah, wooow!");
+                else
+                    c.say(t, "Everyone is... aaah... w-watchiiing...!");
+            } else
+            if(variant == 2)
+            {
+                if(w.tickle().booleanValue())
+                {
+                    if(c.getEXPOLevel() < 3 || modest.booleanValue())
+                        c.say(t, "Ahahah, i-if they strip me, it'll make it even easier to- Hahahahah!");
+                    else
+                        c.say(t, "Ahahah, nooo, I-I'm completely...!");
+                } else
+                if(c.getEXPOLevel() < 3 || modest.booleanValue())
+                    c.say(t, "Ergh!  Even my clothes...!");
+                else
+                    c.say(t, "Ergh!  Let... go...!");
+            } else
+            if(variant == 3)
+            {
+                if(c.getINJULevel() < 3 || aVirg.booleanValue())
+                    c.say(t, "Don't!");
+                else
+                if(w.tickle().booleanValue())
+                    c.say(t, "Ahah, ahahah, dooon't!");
+                else
+                if(c.getGender().equals("male"))
+                    c.say(t, "Ow, dooon't, aaagh!");
+                else
+                    c.say(t, "Nn!  Nn!  Stop... this...!");
+            } else
+            if(loved.booleanValue())
+                c.say(t, "I need to... become stronger... for them...!");
+            else
+            if(hated.booleanValue())
+            {
+                if(morality > 66)
+                    c.say(t, "For their sakes, too... I need to fight this...!");
+                else
+                if(morality > 33)
+                    c.say(t, "I won't let you... do what you want...!");
+                else
+                    c.say(t, "I'll... make all of you pay...!");
+            } else
+            {
+                c.say(t, (new StringBuilder("I need to... become stronger... for ")).append(lover.getMainName()).append("...!").toString());
+            }
+        } else
+        if(thisAttack == 0)
+        {
+            if(variant == 0)
+            {
+                if(c.getPLEALevel() < 3 || cVirg.booleanValue())
+                    c.say(t, "Mmf, mmf...  Mm...");
+                else
+                    c.say(t, "Mmf...  Mm!?  Nn, nn, nnn!");
+            } else
+            if(variant == 1)
+            {
+                if(c.getHATELevel() < 3 || vVirg.booleanValue())
+                    c.say(t, "They're... rubbing... aaah...!");
+                else
+                    c.say(t, "Aaahn...!  A-Ah, no... how could I enjoy something like this...?");
+            } else
+            if(variant == 2)
+            {
+                if(w.tickle().booleanValue())
+                {
+                    if(c.getHATELevel() < 3 || vVirg.booleanValue())
+                        c.say(t, "Ahahah, ahah, th-they're touching my- Nn!  Hahahah!");
+                    else
+                        c.say(t, "Ah!  Ahah!  Ahah!  It's... in...!  Ahah!");
+                } else
+                if(c.getHATELevel() < 3 || vVirg.booleanValue())
+                    c.say(t, "Nn!  So... rough...!");
+                else
+                    c.say(t, "Y-You're... ripping me in half...!");
+            } else
+            if(variant == 3)
+            {
+                if(c.getHATELevel() < 3 || vVirg.booleanValue())
+                    c.say(t, "Um... P-Please... use my mouth...  Mm...");
+                else
+                    c.say(t, "Nn... O-Okay... I'm moving...");
+            } else
+            if(loved.booleanValue())
+                c.say(t, "It's my fault that this is happening to them...");
+            else
+            if(hated.booleanValue())
+            {
+                if(morality > 66)
+                    c.say(t, "I should have tried harder to stop this from happening to them...");
+                else
+                if(morality > 33)
+                    c.say(t, "They're right about how weak I am...");
+                else
+                    c.say(t, "The others should have known better than to rely on me...");
+            } else
+            {
+                c.say(t, (new StringBuilder("It's my fault that this is happening to ")).append(lover.getMainName()).append("...").toString());
+            }
+        } else
+        if(thisAttack == 1)
+        {
+            if(variant == 0)
+            {
+                if(c.getINJULevel() < 3 || aVirg.booleanValue())
+                    c.say(t, "Mm.  Mm...");
+                else
+                if(w.tickle().booleanValue())
+                    c.say(t, "Hahahahammf!  Mm mm mm mm!");
+                else
+                    c.say(t, "Mm!  Mm!  Mm!  Mm!");
+            } else
+            if(variant == 1)
+            {
+                if(c.getINJULevel() < 3 || aVirg.booleanValue())
+                    c.say(t, "Nooo... my body is...");
+                else
+                if(w.tickle().booleanValue())
+                    c.say(t, "Ahahah, p-please, n-not while tickling me, i-it's going to make me- Aaaahahah, aaah!");
+                else
+                    c.say(t, "Ah, p-please, not so rough, it's- Ooow, nooo!");
+            } else
+            if(variant == 2)
+            {
+                if(w.tickle().booleanValue())
+                {
+                    if(c.getPLEALevel() < 3 || cVirg.booleanValue())
+                        c.say(t, "Hahah, ahahah, this shouldn't, ahah, feel good, hahahah!");
+                    else
+                        c.say(t, "Hahah, ahahah, no, I don't want to feel goood, hahahahah!");
+                } else
+                if(c.getPLEALevel() < 3 || cVirg.booleanValue())
+                    c.say(t, "Ah, please!  Please, stop trying to make me feel good!");
+                else
+                    c.say(t, "No, no, nooo, I don't want this to feel goood!");
+            } else
+            if(variant == 3)
+            {
+                if(c.getPLEALevel() < 3 || cVirg.booleanValue())
+                    c.say(t, "Please... go easy on me...");
+                else
+                    c.say(t, "Aaah, pleeease, not theeere!  Mmm!");
+            } else
+            if(loved.booleanValue())
+                c.say(t, "P-Please, I'll do anything, but leave them alone!");
+            else
+            if(hated.booleanValue())
+            {
+                if(morality > 66)
+                    c.say(t, "I feel like I should offer myself in their place...");
+                else
+                if(morality > 33)
+                    c.say(t, "There's nothing I can do to help the others...");
+                else
+                    c.say(t, "P-Please, I'll do anything, just let me go!");
+            } else
+            {
+                c.say(t, (new StringBuilder("P-Please, I'll do anything, but leave ")).append(lover.getMainName()).append(" alone!").toString());
+            }
+        } else
+        if(variant == 0)
+        {
+            if(c.getEXPOLevel() < 3 || modest.booleanValue())
+                c.say(t, "Mmf!?  Nn...");
+            else
+                c.say(t, "Nn...");
+        } else
+        if(variant == 1)
+        {
+            if(c.getEXPOLevel() < 3 || modest.booleanValue())
+                c.say(t, "Nn... I can't... do anything...");
+            else
+                c.say(t, "Aaah... th-they're seeing... how worthless I am...");
+        } else
+        if(variant == 2)
+        {
+            if(w.tickle().booleanValue())
+            {
+                if(c.getEXPOLevel() < 3 || modest.booleanValue())
+                    c.say(t, "Ahah, ahahah, th-they're going to see...!");
+                else
+                    c.say(t, "Ahahah, nooo, don't loook!");
+            } else
+            if(c.getEXPOLevel() < 3 || modest.booleanValue())
+                c.say(t, "I don't want... this...");
+            else
+                c.say(t, "I'm... completely defeated...");
+        } else
+        if(variant == 3)
+        {
+            if(c.getINJULevel() < 3 || aVirg.booleanValue())
+                c.say(t, "Ah, I-I, um, really- AH!");
+            else
+            if(w.tickle().booleanValue())
+                c.say(t, "Ahahah, hah, nnn, hahahahah, nooo!");
+            else
+                c.say(t, "I'm... I'm doing my best, so...");
+        } else
+        if(loved.booleanValue())
+            c.say(t, "A-Are you two alright!?");
+        else
+        if(hated.booleanValue())
+        {
+            if(morality > 66)
+                c.say(t, "Um, are you two doing alright...?");
+            else
+            if(morality > 33)
+                c.say(t, "I hope those two are doing alright...");
+            else
+                c.say(t, "I don't really care what happens to the others...");
+        } else
+        {
+            c.say(t, (new StringBuilder("A-Are you alright, ")).append(lover.getMainName()).append("!?").toString());
+        }
+        c.say(t, "\"");
+    }
+
     public int[] getLastOrgyStage()
     {
         return lastOrgyStage;
@@ -58,8 +3404,8 @@ public class WorldState
         }
         while(base + change > nextClamp && nextClamp < 0xcccccccccccccccL) 
         {
-            if(nextClamp >= 0xe8d4a51000L && usedPercent > 50L)
-                usedPercent = 50L;
+            if(nextClamp >= 0xe8d4a51000L && usedPercent > 20L)
+                usedPercent = 20L;
             long remainder = (base + change) - nextClamp;
             if(remainder >= 0x147ae147ae147aeL)
                 remainder = (remainder / 100L) * usedPercent;
@@ -214,7 +3560,7 @@ public class WorldState
             resolvedBreaks = new int[0];
             adjusted = Boolean.valueOf(true);
         }
-        int techsThisVersion = 34;
+        int techsThisVersion = 40;
         if(techs.length < techsThisVersion)
         {
             Tech oldTechs[] = new Tech[techs.length];
@@ -233,7 +3579,7 @@ public class WorldState
 
             adjusted = Boolean.valueOf(true);
         }
-        int commanderUpgradesThisVersion = 19;
+        int commanderUpgradesThisVersion = 25;
         Boolean commanderUpdate = Boolean.valueOf(false);
         if(bodyStatus.length < commanderUpgradesThisVersion)
             commanderUpdate = Boolean.valueOf(true);
@@ -305,10 +3651,18 @@ public class WorldState
 
             adjusted = Boolean.valueOf(true);
         }
+        if(getCast()[0].impregnated == null)
+        {
+            for(int i = 0; i < 3; i++)
+                if(getCast()[i] != null)
+                    getCast()[i].setFourthVulnerabilities();
+
+            adjusted = Boolean.valueOf(true);
+        }
         if(version == null)
             adjusted = Boolean.valueOf(true);
         else
-        if(!version.equals("11"))
+        if(!version.equals("12"))
             adjusted = Boolean.valueOf(true);
         if(adjusted.booleanValue())
         {
@@ -319,7 +3673,7 @@ public class WorldState
             }
             highScore = 0L;
             parScore = 0L;
-            version = "11";
+            version = "12";
         }
     }
 
@@ -1280,6 +4634,38 @@ public class WorldState
                 conclusion = Boolean.valueOf(false);
 
         return conclusion;
+    }
+
+    public void applyRelentlessness()
+    {
+        evilEnergy -= 10;
+        bodyStatus[24] = Boolean.valueOf(true);
+    }
+
+    public void addCaptureFour()
+    {
+        evilEnergy -= 20;
+        bodyStatus[23] = Boolean.valueOf(true);
+    }
+
+    public void applyParasitism()
+    {
+        bodyStatus[22] = Boolean.valueOf(true);
+    }
+
+    public void applyDrain()
+    {
+        bodyStatus[21] = Boolean.valueOf(true);
+    }
+
+    public void applyHypnosis()
+    {
+        bodyStatus[20] = Boolean.valueOf(true);
+    }
+
+    public void applyImpregnation()
+    {
+        bodyStatus[19] = Boolean.valueOf(true);
     }
 
     public void applyVersatility()
@@ -3128,6 +6514,10 @@ public class WorldState
             value += 10;
         if(bodyStatus[18].booleanValue())
             value += 10;
+        if(bodyStatus[23].booleanValue())
+            value += 20;
+        if(bodyStatus[24].booleanValue())
+            value += 10;
         return value;
     }
 
@@ -3145,6 +6535,9 @@ public class WorldState
         Boolean defiler = Boolean.valueOf(false);
         if(bodyStatus[11].booleanValue() || bodyStatus[12].booleanValue() || bodyStatus[13].booleanValue() || bodyStatus[14].booleanValue())
             defiler = Boolean.valueOf(true);
+        Boolean punisher = Boolean.valueOf(false);
+        if(bodyStatus[19].booleanValue() || bodyStatus[20].booleanValue() || bodyStatus[21].booleanValue() || bodyStatus[22].booleanValue())
+            punisher = Boolean.valueOf(true);
         int reportedDuration = 2;
         if(c == null && (techs[8].isOwned().booleanValue() || techs[9].isOwned().booleanValue() || techs[10].isOwned().booleanValue() || techs[11].isOwned().booleanValue() || techs[12].isOwned().booleanValue() || techs[13].isOwned().booleanValue() || techs[14].isOwned().booleanValue() || techs[15].isOwned().booleanValue()))
         {
@@ -3247,6 +6640,20 @@ public class WorldState
                                 captureCost = 10;
                         }
                         append(t, "]");
+                        if(techs[38].isOwned().booleanValue())
+                        {
+                            append(t, "[");
+                            if(bodyStatus[23].booleanValue())
+                            {
+                                append(t, "X");
+                            } else
+                            {
+                                append(t, " ");
+                                if(captureCost == 0)
+                                    captureCost = 20;
+                            }
+                            append(t, "]");
+                        }
                     }
                 }
                 append(t, " Extra Captures");
@@ -3262,6 +6669,18 @@ public class WorldState
                 else
                     append(t, "X");
                 append(t, "] Ambush (free)\n");
+            }
+            if(techs[39].isOwned().booleanValue())
+            {
+                append(t, "[");
+                if(bodyStatus[24].booleanValue())
+                    append(t, "X");
+                else
+                    append(t, " ");
+                append(t, "] Flight");
+                if(!bodyStatus[24].booleanValue())
+                    append(t, " (Cost: 10 EE)");
+                append(t, "\n");
             }
             if(techs[10].isOwned().booleanValue() || techs[11].isOwned().booleanValue() || techs[12].isOwned().booleanValue() || techs[13].isOwned().booleanValue())
             {
@@ -3321,15 +6740,16 @@ public class WorldState
                     else
                         append(t, "(LOCKED)");
                 } else
-                {
+                if(punisher.booleanValue())
+                    append(t, "(LOCKED)");
+                else
                     append(t, "None (free)");
-                }
                 append(t, "\n");
             }
             if(techs[22].isOwned().booleanValue() || techs[23].isOwned().booleanValue() || techs[24].isOwned().booleanValue() || techs[25].isOwned().booleanValue())
             {
                 append(t, "Defiler: ");
-                if(suppressors == 2)
+                if(suppressors == 2 || punisher.booleanValue())
                     append(t, "(LOCKED)");
                 else
                 if(suppressors == 1 && !defiler.booleanValue())
@@ -3361,8 +6781,47 @@ public class WorldState
                 } else
                 if(bodyStatus[14].booleanValue())
                     append(t, "Vanity [EXPO, HATE]");
+                append(t, "\n");
+            }
+            if(techs[34].isOwned().booleanValue() || techs[35].isOwned().booleanValue() || techs[36].isOwned().booleanValue() || techs[37].isOwned().booleanValue())
+            {
+                append(t, "Punisher: ");
+                if(suppressors > 0 || defiler.booleanValue())
+                    append(t, "(LOCKED)");
+                else
+                if(bodyStatus[19].booleanValue())
+                    append(t, "Impregnation [HATE]");
+                else
+                if(bodyStatus[20].booleanValue())
+                    append(t, "Hypnosis [PLEA]");
+                else
+                if(bodyStatus[21].booleanValue())
+                {
+                    append(t, "Drain ");
+                    if(tickleOn.booleanValue())
+                        append(t, "[ANTI]");
+                    else
+                        append(t, "[INJU]");
+                } else
+                if(bodyStatus[22].booleanValue())
+                    append(t, "Parasitism [EXPO]");
+                else
+                    append(t, "None (free)");
+                append(t, "\n");
             }
             append(t, "\n");
+            if(bodyStatus[19].booleanValue())
+                append(t, "Your Commander is a regular-sized humanoid Demon whose only distinguishing feature is its abnormally large genitals, capable of delivering extra-potent seed into the bodies of the Chosen.  It ");
+            else
+            if(bodyStatus[20].booleanValue())
+                append(t, "Your Commander is a large, dome-shaped, hollow Demon which can engulf the Chosen, subjecting them to hypnotic patterns and sounds in order to manipulate their mental state.  It ");
+            else
+            if(bodyStatus[21].booleanValue())
+                append(t, "Your Commander is a chaotic mass of tentacles which absorb the psychic energy of anything they come into contact with, especially if the target isn't resisting.  It ");
+            else
+            if(bodyStatus[22].booleanValue())
+                append(t, "Your Commander is a mostly-transparent cloud which drifts across the battlefield until it comes into contact with a suitable host.  After flowing into its targets, it can merge with and influence the psychic energy within them.  Your Commander ");
+            else
             if(bodyStatus[18].booleanValue())
             {
                 if(bodyStatus[11].booleanValue())
@@ -3556,6 +7015,9 @@ public class WorldState
         if(bodyStatus[2].booleanValue())
         {
             append(t, " once you give the order");
+            if(bodyStatus[23].booleanValue())
+                append(t, ", up to five times");
+            else
             if(bodyStatus[17].booleanValue())
                 append(t, ", up to four times");
             else
@@ -3564,9 +7026,13 @@ public class WorldState
             else
             if(bodyStatus[8].booleanValue())
                 append(t, ", up to twice");
+            append(t, ", even against a flying target");
         } else
         {
             append(t, " at the start of battle");
+            if(bodyStatus[23].booleanValue())
+                append(t, ", and then four more times whenever you give the order");
+            else
             if(bodyStatus[17].booleanValue())
                 append(t, ", and then three more times whenever you give the order");
             else
@@ -3575,9 +7041,29 @@ public class WorldState
             else
             if(bodyStatus[8].booleanValue())
                 append(t, ", and then one more time once you give the order");
+            if(bodyStatus[8].booleanValue())
+                append(t, ", even against a flying target");
         }
         if(c == null)
             append(t, (new StringBuilder(".  It is worth ")).append(getCommanderValue()).append(" Evil Energy.  You have ").append(evilEnergy).append(" Evil Energy remaining.").toString());
+        else
+        if(bodyStatus[19].booleanValue())
+            append(t, ", inflicting extreme levels of HATE and FEAR, and causing Total Morality Break when the target's Impregnation effectiveness is at least 1000%.");
+        else
+        if(bodyStatus[20].booleanValue())
+            append(t, ", inflicting extreme levels of PLEA and DISG, and causing Total Innocence Break when the target's Hypnosis effectiveness is at least 1000%.");
+        else
+        if(bodyStatus[21].booleanValue())
+        {
+            append(t, ", inflicting extreme levels of ");
+            if(tickleOn.booleanValue())
+                append(t, "ANTI and TICK");
+            else
+                append(t, "INJU and PAIN");
+            append(t, ", and causing Total Confidence Break when the target's Drain effectiveness is at least 1000%.");
+        } else
+        if(bodyStatus[22].booleanValue())
+            append(t, ", inflicting extreme levels of EXPO and SHAM, and causing Total Dignity Break when the target's Parasitism effectiveness is at least 1000%.");
         else
         if(bodyStatus[18].booleanValue())
         {
@@ -3760,7 +7246,7 @@ public class WorldState
 
     public Boolean upgradedCommander()
     {
-        if(!bodyStatus[3].booleanValue() && !bodyStatus[4].booleanValue() && !bodyStatus[5].booleanValue() && !bodyStatus[6].booleanValue() && !bodyStatus[11].booleanValue() && !bodyStatus[12].booleanValue() && !bodyStatus[13].booleanValue() && !bodyStatus[14].booleanValue())
+        if(!bodyStatus[3].booleanValue() && !bodyStatus[4].booleanValue() && !bodyStatus[5].booleanValue() && !bodyStatus[6].booleanValue() && !bodyStatus[11].booleanValue() && !bodyStatus[12].booleanValue() && !bodyStatus[13].booleanValue() && !bodyStatus[14].booleanValue() && !bodyStatus[19].booleanValue() && !bodyStatus[20].booleanValue() && !bodyStatus[21].booleanValue() && !bodyStatus[22].booleanValue())
             return Boolean.valueOf(false);
         else
             return Boolean.valueOf(true);
@@ -3808,6 +7294,9 @@ public class WorldState
         capturesPossible = 0;
         if(bodyStatus[2].booleanValue() || upgradedCommander().booleanValue() || techs[31].isOwned().booleanValue() && bodyStatus[0].booleanValue())
             capturesPossible++;
+        if(bodyStatus[23].booleanValue())
+            capturesPossible += 4;
+        else
         if(bodyStatus[17].booleanValue())
             capturesPossible += 3;
         else
@@ -8732,7 +12221,7 @@ public class WorldState
     public WorldState()
     {
         textSize = 16;
-        version = "11";
+        version = "12";
         PURPLE = new Color(100, 0, 150);
         ORANGE = new Color(200, 100, 0);
         RED = new Color(180, 0, 0);
@@ -8752,7 +12241,7 @@ public class WorldState
         totalTaunted = 0;
         nextTip = 0;
         cast = new Chosen[3];
-        techs = new Tech[34];
+        techs = new Tech[40];
         evilEnergy = 0;
         day = 1;
         totalRounds = 1;
@@ -8781,7 +12270,7 @@ public class WorldState
         barrierMulti = 10000L;
         clampStart = 11;
         clampPercent = 100;
-        bodyStatus = new Boolean[19];
+        bodyStatus = new Boolean[25];
         tutorial = Boolean.valueOf(false);
         onTrack = Boolean.valueOf(true);
         commentary = new String[0];
