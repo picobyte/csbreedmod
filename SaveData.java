@@ -9,6 +9,7 @@ public class SaveData
     {
         saves = new WorldState[0];
         names = new String[0];
+        harem = null;
     }
 
     public WorldState[] getSaves()
@@ -99,6 +100,8 @@ public class SaveData
         names = newNames;
     }
 
+    private static final long serialVersionUID = 0xd05cc0c71818b918L;
     WorldState saves[];
     String names[];
+    Forsaken harem[];
 }

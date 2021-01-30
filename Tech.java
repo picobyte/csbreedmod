@@ -526,7 +526,7 @@ public class Tech
             prereqs = (new Tech[] {
                 w.getTechs()[17], w.getTechs()[24]
             });
-            description = "Modifies your human captives' brains so that they become mentally fixated on the power and supremecy of the Demons - and on the suffering and defeat of those who oppose them.  Their absolute confidence in your victory will produce psychic energy far disproportionate to their numbers, rivalling the power of the worldwide public.  Increases extermination requirement from 300 to 500.";
+            description = "Modifies your human captives' brains so that they become mentally fixated on the power and supremacy of the Demons - and on the suffering and defeat of those who oppose them.  Their absolute confidence in your victory will produce psychic energy far disproportionate to their numbers, rivalling the power of the worldwide public.  Increases extermination requirement from 300 to 500.";
             break MISSING_BLOCK_LABEL_3289;
         }
         if(index == 30)
@@ -821,6 +821,8 @@ _L2:
         w.append(t, (new StringBuilder(String.valueOf(name))).append("\nCost: ").append(cost).append(" EE\nPrerequisites: ").toString());
         for(int i = 0; i < prereqs.length; i++)
         {
+            if(i == prereqs.length - 1 && prereqsRequired == 1)
+                w.grayAppend(t, "or ");
             if(prereqs[i].isOwned().booleanValue())
                 w.append(t, prereqs[i].getName());
             else

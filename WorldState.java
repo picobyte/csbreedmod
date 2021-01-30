@@ -604,6 +604,15 @@ public class WorldState
         victim.surrounded = Boolean.valueOf(false);
         victim.captured = Boolean.valueOf(false);
         readyToEnd = Boolean.valueOf(false);
+        if(killer.firstKilled == null)
+        {
+            killer.firstKilled = victim;
+            killer.firstKilledRelationship = getRelationship(killer.getNumber(), victim.getNumber());
+        } else
+        {
+            killer.secondKilled = victim;
+            killer.secondKilledRelationship = getRelationship(killer.getNumber(), victim.getNumber());
+        }
     }
 
     public void toggleAdaptations()
@@ -1477,7 +1486,7 @@ public class WorldState
                     if(c.getPLEALevel() >= 3 && !cVirg.booleanValue() && (w.getBodyStatus()[12].booleanValue() || w.getBodyStatus()[11].booleanValue() || w.getBodyStatus()[4].booleanValue()))
                         w.append(t, (new StringBuilder("making ")).append(c.himHer()).append(" cum over and over again").toString());
                     else
-                        w.append(t, (new StringBuilder("taking advantage of how weakened ")).append(c.heShe()).append("is").toString());
+                        w.append(t, (new StringBuilder("taking advantage of how weakened ")).append(c.heShe()).append(" is").toString());
                     if(c.getEXPOLevel() >= 3 && !modest.booleanValue() && (w.getBodyStatus()[14].booleanValue() || w.getBodyStatus()[13].booleanValue() || w.getBodyStatus()[6].booleanValue()))
                         w.append(t, (new StringBuilder(", and ")).append(c.heShe()).append(" can see the flash of the cameras capturing ").append(c.hisHer()).append(" defeat.").toString());
                     else
@@ -3978,7 +3987,7 @@ public class WorldState
             if(captureProgression % 3 == 0)
             {
                 if(morality > 66)
-                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" looks horrified as a message appears on the screens surrounding ").append(c.himHer()).append("indicating ").toString());
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" looks horrified as a message appears on the screens surrounding ").append(c.himHer()).append(" indicating ").toString());
                 else
                 if(morality > 33)
                     w.append(t, (new StringBuilder("You display a message to ")).append(mainName).append(" and the viewers of ").append(c.hisHer()).append(" predicament showing ").toString());
@@ -5700,25 +5709,25 @@ public class WorldState
         if(!vVirg.booleanValue() && c.getHATELevel() >= 3)
         {
             penetrationBonus = Boolean.valueOf(true);
-            totalDamage = c.multiplyArray(totalDamage, 20);
+            totalDamage = c.multiplyArray(totalDamage, 200);
         }
         Boolean orgasmBonus = Boolean.valueOf(false);
         if(!cVirg.booleanValue() && c.getPLEALevel() >= 3)
         {
             orgasmBonus = Boolean.valueOf(true);
-            totalDamage = c.multiplyArray(totalDamage, 20);
+            totalDamage = c.multiplyArray(totalDamage, 200);
         }
         Boolean analBonus = Boolean.valueOf(false);
         if(!aVirg.booleanValue() && c.getINJULevel() >= 3)
         {
             analBonus = Boolean.valueOf(true);
-            totalDamage = c.multiplyArray(totalDamage, 20);
+            totalDamage = c.multiplyArray(totalDamage, 200);
         }
         Boolean broadcastBonus = Boolean.valueOf(false);
         if(!modest.booleanValue() && c.getEXPOLevel() >= 3)
         {
             broadcastBonus = Boolean.valueOf(true);
-            totalDamage = c.multiplyArray(totalDamage, 20);
+            totalDamage = c.multiplyArray(totalDamage, 200);
         }
         String firstRelation = "";
         String secondRelation = "";
@@ -5730,7 +5739,7 @@ public class WorldState
             else
                 summary = (new StringBuilder(String.valueOf(summary))).append("1.").append(6 - w.getRelationship(c.number, high.getNumber())).toString();
             summary = (new StringBuilder(String.valueOf(summary))).append(" damage due to relationship with ").append(high.getMainName()).append(")\n\n").toString();
-            totalDamage = c.multiplyArray(totalDamage, 16 - w.getRelationship(c.number, high.getNumber()));
+            totalDamage = c.multiplyArray(totalDamage, (16 - w.getRelationship(c.number, high.getNumber())) * 10);
             firstRelation = summary;
         }
         if(c != mid)
@@ -5741,7 +5750,7 @@ public class WorldState
             else
                 summary = (new StringBuilder(String.valueOf(summary))).append("1.").append(6 - w.getRelationship(c.number, mid.getNumber())).toString();
             summary = (new StringBuilder(String.valueOf(summary))).append(" damage due to relationship with ").append(mid.getMainName()).append(")\n\n").toString();
-            totalDamage = c.multiplyArray(totalDamage, 16 - w.getRelationship(c.number, mid.getNumber()));
+            totalDamage = c.multiplyArray(totalDamage, (16 - w.getRelationship(c.number, mid.getNumber())) * 10);
             if(c != high)
                 secondRelation = summary;
             else
@@ -5755,7 +5764,7 @@ public class WorldState
             else
                 summary = (new StringBuilder(String.valueOf(summary))).append("1.").append(6 - w.getRelationship(c.number, low.getNumber())).toString();
             summary = (new StringBuilder(String.valueOf(summary))).append(" damage due to relationship with ").append(low.getMainName()).append(")\n\n").toString();
-            totalDamage = c.multiplyArray(totalDamage, 16 - w.getRelationship(c.number, low.getNumber()));
+            totalDamage = c.multiplyArray(totalDamage, (16 - w.getRelationship(c.number, low.getNumber())) * 10);
             secondRelation = summary;
         }
         int previousHATE = c.getHATELevel();
@@ -7815,10 +7824,19 @@ public class WorldState
 
             adjusted = Boolean.valueOf(true);
         }
+        for(int i = 0; i < 3; i++)
+            if(getCast()[i] != null && (getCast()[i].timesSlaughtered() > 0 && getCast()[i].impregnationProgress == 0 || getCast()[i].timesFantasized() > 0 && getCast()[i].hypnosisProgress == 0 || getCast()[i].timesDetonated() > 0 && getCast()[i].drainProgress == 0 || getCast()[i].timesStripped() > 0 && getCast()[i].parasitismProgress == 0))
+            {
+                getCast()[i].impregnationProgress = getCast()[i].timesSlaughtered() * 30;
+                getCast()[i].hypnosisProgress = getCast()[i].timesFantasized() * 20;
+                getCast()[i].drainProgress = getCast()[i].timesDetonated() * 90;
+                getCast()[i].parasitismProgress = getCast()[i].timesStripped() * 60;
+            }
+
         if(version == null)
             adjusted = Boolean.valueOf(true);
         else
-        if(!version.equals("14"))
+        if(!version.equals("15"))
             adjusted = Boolean.valueOf(true);
         if(adjusted.booleanValue())
         {
@@ -7829,7 +7847,7 @@ public class WorldState
             }
             highScore = 0L;
             parScore = 0L;
-            version = "14";
+            version = "15";
         }
     }
 
@@ -8380,7 +8398,7 @@ public class WorldState
             "During downtime, the Chosen can compromise on performing activities that none of them would perform on their own.", "Selectively corrupting one of the Chosen can make her want to perform actions that her allies aren't corrupt enough to join her on.", "The first step in corrupting one of the Chosen is generally to make her use sinful techniques to protect herself while surrounded.", "When captured by a Commander with a special ability, it is not possible for the Chosen to defend themselves.", "When the Thralls are instructed to torment a surrounded Chosen, they will continue to do so on their own until she escapes.", "Once the Chosen start using sinful methods to defend themselves, surrounding them will be less effective, but it will also be possible to extract more Evil Energy from them.", "A Chosen less inherently susceptible to a trauma will be more susceptible to the associated circumstance, and vice versa.", "Compassionate Chosen hate their enemies less but are more fearful for their allies.", "Cruel Chosen hate their enemies more but are less fearful for their allies.", "Innocent Chosen have less interest in sex but are more prone to getting grossed out and disgusted.", 
             "Experienced Chosen have grown more accustomed to pleasure, but they're better at ignoring disgusting things.", "Prideful Chosen refuse to flinch away from pain, but they have the willpower to ignore being injured.", "Cowardly Chosen are careful to avoid pain, but they lack the willpower to ignore their injuries.", "Self-conscious Chosen feel more shame, but they're more careful to avoid getting stripped and exposed.", "Shameless Chosen care less about being humiliated, but they don't put much effort into avoiding getting stripped and exposed.", "After the evacuation has been completed, the extermination rate begins to increase exponentially.", "There are two types of damage: trauma and circumstance.", "Trauma inflicted during battle creates openings for the Chosen to be surrounded, but it decreases the damage received in the associated circumstance.", "Circumstances multiply the damage received by the Chosen (especially in the associated trauma), but they do not directly contribute to unresolved trauma.", "Chosen driven into a panic for their allies will stop listening to the hateful things said by their enemies.", 
             "Chosen who hate their enemies will feel greater fear for what those enemies will do.", "Chosen overwhelmed by disgust will be less receptive to pleasure.", "Chosen overwhelmed by pleasure in battle will be disgusted by that fact.", "Chosen who are in pain will be more careful to avoid getting further injured.", "Chosen who are already injured will feel more pain from being attacked again.", "Chosen who are feeling ashamed will be more careful to avoid getting exposed.", "Chosen who are exposed will feel more shame from all sources.", "The protective powers of the Chosen depend on their pure hearts, so a Chosen consumed by hate is more vulnerable both emotionally and physically.", "The more pleasure one of the Chosen feels, the deeper her trauma will be engraved in her memory.", "As the Chosen are injured, they become less able to defend themselves from other abuses.", 
-            "When one Chosen is exposed and humiliated, it distracts and breaks the morale of the other Chosen on the battlefield.", "Every day, each Chosen's ANGST is increased by the trauma she hasn't successfully resolved yet.", "High ANGST makes the Chosen willing to perform sinful activities, and until it's resolved, the distraction makes them take more damage from all sources.", "Every doubling of ANGST increases the damage bonus by +1, so even a few hundred ANGST is much better than none at all.", "A Chosen's susceptibility to a damage type normally ranges from 0 to 100 based on personality.  The ANGST bonus is added to this value.", "A Chosen's susceptibility to a damage type ranges from 0 to 100 based on personality.  This base susceptibility to a trauma and to its associated circumstance normally adds up to 100, but corruption increases increases them both, potentially even over 100.", "More sinful actions produce a bit more Evil Energy, but they resolve trauma at an exponentially greater rate.", "The Chosen will only begin to use sinful methods to defend themselves if they expect to reach level 3 circumstance damage otherwise.", "Some sinful actions taken during battle will also damage their users.", "As the Chosen are corrupted, they will begin to use more sinful but also more effective versions of their abilities.", 
+            "When one Chosen is exposed and humiliated, it distracts and breaks the morale of the other Chosen on the battlefield.", "Every day, each Chosen's ANGST is increased by the trauma she hasn't successfully resolved yet.", "High ANGST makes the Chosen willing to perform sinful activities, and until it's resolved, the distraction makes them take more damage from all sources.", "Every doubling of ANGST increases the damage bonus by +1, so even a few hundred ANGST is much better than none at all.", "A Chosen's susceptibility to a damage type normally ranges from 0 to 100 based on personality.  The ANGST bonus is added to this value.", "A Chosen's susceptibility to a damage type ranges from 0 to 100 based on personality.  This base susceptibility to a trauma and to its associated circumstance normally adds up to 100, but corruption increases them both, potentially even over 100.", "More sinful actions produce a bit more Evil Energy, but they resolve trauma at an exponentially greater rate.", "The Chosen will only begin to use sinful methods to defend themselves if they expect to reach level 3 circumstance damage otherwise.", "Some sinful actions taken during battle will also damage their users.", "As the Chosen are corrupted, they will begin to use more sinful but also more effective versions of their abilities.", 
             "Fearful Chosen are more vulnerable when their allies are surrounded or captured.", "Disgusted Chosen are always more vulnerable, but being grossed out won't generally create a major opening on its own.", "Chosen in pain are more vulnerable for awhile, but after they get surrounded, the adrenaline allows them to shake it off until the pain reaches the next level.", "Ashamed Chosen aren't any more vulnerable to being surrounded, but their efforts to retain their modesty mean that they'll remain surrounded for longer.", "Damage which currently contributes to the opening level is displayed in purple text.  Damage which does not is displayed in black text.  Damage which is only partially contributing to the opening level is displayed in orange text.", "By using \"Regenerate\", one of the Chosen can remove a fraction of her current circumstance damage.  However, nothing done in battle can remove trauma damage that has already been dealt.", "By using \"Blast\", one of the Chosen can increase evacuation and extermination progress.  If evacuation is already complete, the progress that would be added there is wasted.", "The Chosen choose their actions in battle according to which actions would seem to be most useful at the moment and how effective they are at performing those actions.", "Taunting is more effective against self-conscious Chosen, especially those who have been humiliated in the past.", "Attacking is more effective against Chosen who refuse to back down from a fight, especially those who feel insecure about past failures", 
             "Sliming is more effective against more naive Chosen, especially those who have come to associate battle with sexual pleasure.", "Threatening allies is more effective against more compassionate Chosen, especially those whose consciences aren't clean.", "It isn't possible to raise a circumstance by more than one level with a single instance of damage.  This limitation does not apply to trauma.", "Each of the actions the Chosen can perform in battle is linked with one of the four vulnerabilities.  The Chosen are better at performing actions associated with their greater vulnerabilities.", "Chosen who are surrounded or captured do not contribute to extermination progress until they escape.", "When a surrounded Chosen uses a tactic that decreases the effectiveness of Grind, Caress, Pummel, or Humiliate, the damage from that source is decreased to 3/5.  When both tactics against the source are used at once, the damage becomes 2/5.", "The main benefit of Suppressor-class upgrades is that they ignore defensive tactics.  Against Chosen who have not yet begun to use any defensive tactics, a Commander without Suppressor-class upgrades can actually more effective.", "When two of the Chosen have a hostile interaction with each other, Evil Energy is generated, especially when the interaction turns them from friends into enemies.", "Any action that deals circumstance damage also deals all four types of trauma damage, especially the one corresponding to the circumstance.", "An action's tooltip lists its damage types in descending order of how much is dealt.", 
             "From a gameplay perspective, there are no differences between male, female, and futanari Chosen.", "It isn't possible for one of the Chosen to use \"Slaughter,\" \"Fantasize,\" or \"Striptease\" twice in a row.", "Even when \"Slaughter\" causes a surround duration to go below 0, it will never cause a surrounded Chosen to escape on the same turn.", "Because high trauma penalizes circumstance damage, the circumstance damage reduction from \"Fantasize\" doesn't necessarily decrease circumstance damage in the long run.", "When your Commander has no extra captures remaining, the extra capture depletion from Chosen using \"Detonate\" does nothing.", "\"Striptease\" decreases damage to surrounded Chosen in the short term, but the fact that it increases the user's EXPO level means that it can increase the overall damage taken during the battle.", "Even after the critical trauma level is reached, a third-tier Vulnerability is not actually broken until the Chosen uses the unlocked move for the first time.", "When two Chosen are targeted by the same defiler action, they both take greatly increased damage, but as soon as one of them escapes, the other does too."
@@ -17390,6 +17408,7 @@ public class WorldState
         c.resolve = c.resolve - resolveLost;
         if(c.resolve <= 0)
         {
+            c.defeatType = 1;
             w.append(t, (new StringBuilder("-")).append(resolveLost).append("% Resolve\n\n").toString());
             w.underlineAppend(t, "Resolve Broken");
             w.append(t, "\n\n");
@@ -17552,6 +17571,7 @@ public class WorldState
         c.resolve = c.resolve - resolveLost;
         if(c.resolve <= 0)
         {
+            c.defeatType = 2;
             w.append(t, (new StringBuilder("-")).append(resolveLost).append("% Resolve\n\n").toString());
             w.underlineAppend(t, "Resolve Broken");
             w.append(t, "\n\n");
@@ -17790,6 +17810,7 @@ public class WorldState
             w.append(t, "\n\n");
             if(c.isDrained().booleanValue())
             {
+                c.defeatType = 3;
                 if(c.getConfidence() > 66)
                 {
                     w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" collapses face-first onto the pavement, exhausted after fighting so hard and enduring ").toString());
@@ -18203,6 +18224,7 @@ public class WorldState
         c.resolve = c.resolve - resolveLost;
         if(c.resolve <= 0)
         {
+            c.defeatType = 4;
             w.append(t, (new StringBuilder("-")).append(resolveLost).append("% Resolve\n\n").toString());
             w.underlineAppend(t, "Resolve Broken");
             w.append(t, "\n\n");
@@ -18354,10 +18376,365 @@ public class WorldState
         c.finalTaunted = c.finalTaunted + 1;
     }
 
+    public void ending(JTextPane t, int type, Chosen first, Chosen second, Chosen third)
+    {
+        if(type == 0)
+        {
+            if(second == null)
+                if(first.getInnocence() > 66)
+                {
+                    append(t, (new StringBuilder("Even after escaping the range of your influence, ")).append(first.getMainName()).append(" continues to fly higher and faster as ").append(first.heShe()).append(" distances ").append(first.himHer()).append("self from the city.  ").toString());
+                    if(first.getConfidence() > 66)
+                    {
+                        append(t, (new StringBuilder(String.valueOf(first.HisHer()))).append(" headstrong nature left ").append(first.himHer()).append(" completely unprepared for how helpless ").append(first.heShe()).append(" felt when forced to fight alone.  The longer ").append(first.heShe()).append(" dwells on it, the more ").append(first.heShe()).append(" sinks into blind panic.  When ").append(first.heShe()).append(" sees another figure flying up from the clouds to intercept ").append(first.himHer()).append(", ").append(first.heShe()).append(" just tries to shove ").append(first.himHer()).append(" aside with brute force.\n\n").toString());
+                        first.say(t, "\"No!  Get outta my way!  Leave me alone!\"\n\n");
+                        append(t, (new StringBuilder(String.valueOf(first.HeShe()))).append("'s shocked and horrified yet again when ").append(first.heShe()).append(" just bounces backward, leaving the other person - obviously also one of the Chosen - completely unharmed.\n\n").toString());
+                        orangeAppend(t, (new StringBuilder("\"You have nothing to fear from me, young ")).append(first.getMainName()).append(".  I am Basis.  ").toString());
+                        if(first.getMorality() > 33)
+                        {
+                            orangeAppend(t, "I am an ally.\"\n\n");
+                            append(t, (new StringBuilder(String.valueOf(first.getMainName()))).append(" backs off warily, unsettled by how easily ").append(first.hisHer()).append(" charge was deflected.\n\n").toString());
+                            first.say(t, "\"What do you want from me!?  I-I'm in a hurry!\"\n\n");
+                            orangeAppend(t, "\"I simply wished to make certain that you were safe.  After all, the Chosen would be helpless without your leadership.\"\n\n");
+                            first.say(t, "\"Huh?  But I can't actually do anything!  Did you see that big black thing?  I couldn't even scratch it!  It turns out I'm actually way weaker than the Demon Lord!\"\n\n");
+                            append(t, (new StringBuilder(String.valueOf(first.getMainName()))).append(" continues to drift backward, but Basis quickly closes the distance, smiling softly.\n\n").toString());
+                            orangeAppend(t, (new StringBuilder("\"Oh, ")).append(first.getMainName()).append(", is that what you were worried about?  The Demon Lord was actually just using an unfair power that gave him perfect protection against one Chosen attacking alone.  If you had even one other Chosen - even a much weaker one - to attack from the other side, you would have defeated him easily.  You shouldn't doubt yourself.  You are strong!\"\n\n").toString());
+                            first.say(t, "\"I'm... I'm strong...  That's right, I'm strong, I'm not weak at all...\"\n\n");
+                            append(t, (new StringBuilder("The fear of being weak is too much for ")).append(first.getMainName()).append("'s mind to bear, and with Basis offering ").append(first.himHer()).append(" a much more comforting way to think about ").append(first.hisHer()).append(" defeat, ").append(first.heShe()).append(" allows ").append(first.himHer()).append("self to be persuaded to continue to fight as one of the Chosen.").toString());
+                        } else
+                        {
+                            orangeAppend(t, "I am here to help.\"\n\n");
+                            first.say(t, "\"Then where were you during the battle!?  The rest of you Chosen are worthless!  I'm done fighting this stupid war!  I quit!\"\n\n");
+                            append(t, (new StringBuilder(String.valueOf(first.getMainName()))).append(" turns to leave, only to find that Basis is still somehow hovering in front of ").append(first.himHer()).append(", smiling softly.\n\n").toString());
+                            orangeAppend(t, "\"Are you really going to run away?  Are you going to let the Demon Lord win?\"\n\n");
+                            first.say(t, "\"Shut up!  I'm not running away!  It's just...  It's just pointless, I tried everything I could to kill that thing, and it still didn't die!\"\n\n");
+                            orangeAppend(t, "\"That's just because your allies were too weak to help - and because you were holding back in the early fights, before the Demon Lord reached full power.  If you aren't being held back by weaklings, and if you go all-out from the start, I'm sure you'll be able to start killing Demon Lords.  And it'll feel good to get them back for what they did to you.  I promise.\"\n\n");
+                            append(t, (new StringBuilder("With both ")).append(first.hisHer()).append(" pride and ").append(first.hisHer()).append(" vindictive nature being leveraged against ").append(first.himHer()).append(", ").append(first.getMainName()).append(" isn't difficult to convince.  ").append(first.HeShe()).append(" soon forgets ").append(first.hisHer()).append(" prior fear and goes back to looking forward to killing some more Demons.").toString());
+                        }
+                    } else
+                    if(first.getDignity() > 66)
+                    {
+                        append(t, (new StringBuilder("At first, ")).append(first.hisHer()).append(" mind doesn't have room for anything beyond sheer terror at the seemingly unbeatable foe ").append(first.heShe()).append(" faced.  But when ").append(first.heShe()).append(" sees a point of light rising from the clouds beneath ").append(first.himHer()).append(" - another Chosen - ").append(first.heShe()).append(" freezes up.\n\n").toString());
+                        orangeAppend(t, (new StringBuilder("You're ")).append(first.getMainName()).append(", correct?  I'm glad to have caught up with you.  My name is Basis.  I came to-").toString());
+                        if(first.getMorality() > 33)
+                        {
+                            first.say(t, "\"I'm sorry!  I-I'm so, so sorry!  I tried my best, but I couldn't... I was too weak to... do anything.  We failed, and it's all my fault.  I never should have become one of the Chosen...\"\n\n");
+                            append(t, (new StringBuilder(String.valueOf(first.getMainName()))).append("'s shame over ").append(first.hisHer()).append(" failure comes out in a rush of tearful words.  Basis is taken aback for a moment, but she quickly recovers.\n\n").toString());
+                            orangeAppend(t, "No, no, it wasn't your fault.  This war is bigger than any of us, and sometimes we happen to end up against forces too powerful for us to reasonably defeat.  Right now, the most important thing is that you continue to show a strong face for the sake of all your fans.  There are so many people who are still counting on you!\"\n\n");
+                            first.say(t, "\"Th-They're... counting on me...?\"\n\n");
+                            append(t, (new StringBuilder("Clinging desperately to the idea that not all is lost, that ")).append(first.heShe()).append(" isn't a complete failure, ").append(first.getMainName()).append(" allows ").append(first.himHer()).append("self to be pulled back from the brink of despair.  ").append(first.HeShe()).append(" is desperate to face the Demons again, delusionally hoping that ").append(first.heShe()).append("'ll be able to once again earn the public praise that made ").append(first.himHer()).append(" feel like ").append(first.heShe()).append(" wasn't worthless.").toString());
+                        } else
+                        {
+                            first.say(t, "\"I-I'm not running away!  I was just, um... regrouping.  By myself.  Yeah.  I'm about to go back and beat up the Demon Lord, honest!\"\n\n");
+                            append(t, (new StringBuilder("Basis graciously pretends to be fooled by ")).append(first.getMainName()).append("'s act, a reassuring smile on her face.\n\n").toString());
+                            orangeAppend(t, "\"That's very brave of you!  However, it looks like this battle has already been lost.  Of course, you still tried your best, so you'll be paid in full for your efforts.  Why don't you come back to base, so we can discuss your living arrangements while you recuperate?\"\n\n");
+                            append(t, (new StringBuilder(String.valueOf(first.getMainName()))).append(" hesitates.  In truth, ").append(first.heShe()).append(" had been wanting to run away, hide from the government, and never fight another Demon ever again.  But the fact that ").append(first.heShe()).append(" was apparently being rewarded even though ").append(first.heShe()).append(" failed, along with the fact that ").append(first.heShe()).append(" was apparently going to be able to continue ").append(first.hisHer()).append(" lavish lifestyle even while not actively fighting the Demons, was enough to tempt ").append(first.himHer()).append(".\n\n").toString());
+                            first.say(t, "\"Well, uh...  Okay...  But this really sucked, you know?  I wanna get paid a lot more if you're gonna ask me to do this again...\"");
+                        }
+                    } else
+                    if(first.getMorality() > 66)
+                    {
+                        append(t, (new StringBuilder("It takes some time before ")).append(first.hisHer()).append(" terror at finding ").append(first.himHer()).append("self up against a foe far beyond ").append(first.hisHer()).append(" abilities begins to fade.  But then, ").append(first.heShe()).append(" gradually comes to a stop and turns around, looking back at the city on the distant horizon and the black spire erupting from its center.\n\n").toString());
+                        if(first.getConfidence() > 33)
+                        {
+                            first.say(t, "\"I don't understand...  I tried my hardest, I did my best... but we still lost.  Did I do something wrong...?\"\n\n");
+                            append(t, (new StringBuilder(String.valueOf(first.HeShe()))).append(" starts to sob, but then quickly regains control of ").append(first.himHer()).append("self, wiping the tears from ").append(first.hisHer()).append(" eyes.\n\n").toString());
+                            first.say(t, "\"No!  I can't lose hope!  There are still lots of other people who need my help.  As bad as I feel now, they'll end up feeling even worse if I don't do anything!\"\n\n");
+                            append(t, (new StringBuilder(String.valueOf(first.getMainName()))).append(" turns away from the city once again, now flying at a more steady, purposeful pace.  ").append(first.HeShe()).append(" looks for the nearest allied unit down on the ground so that ").append(first.heShe()).append(" can give ").append(first.hisHer()).append(" report.\n\n").toString());
+                            first.say(t, "\"As long as I try my hardest...  I'm sure it'll turn out better next time!\"");
+                        } else
+                        {
+                            first.say(t, "\"I... I can't believe I ran away.  We lost... and it's all my fault...\"\n\n");
+                            append(t, (new StringBuilder("For several minutes, ")).append(first.heShe()).append(" hovers there in the sky, sobbing pitifully.  Finally, though, the cold winds whipping by ").append(first.himHer()).append(" remind ").append(first.himHer()).append(" that ").append(first.heShe()).append(" can't stay there forever.\n\n").toString());
+                            first.say(t, "\"I might have been pretty useless down there... but I'm even more useless up here.  I need to find someone smart and ask them what I should be doing to help save the people who got away.\"\n\n");
+                            append(t, (new StringBuilder(String.valueOf(first.getMainName()))).append(" dives downward, searching for the nearest allied unit and trying to distract ").append(first.himHer()).append("self from ").append(first.hisHer()).append(" despairing thoughts.\n\n").toString());
+                            first.say(t, "\"I need to make up for messing up so badly back there.  I'll do whatever they need me to.  E-Even... even if it means fighting the Demons again...\"");
+                        }
+                    } else
+                    if(first.getConfidence() < 34)
+                    {
+                        append(t, (new StringBuilder("Having ")).append(first.hisHer()).append(" Chosen powers so thoroughly outmatched has driven ").append(first.himHer()).append(" into a blind panic.  When ").append(first.heShe()).append(" sees another glowing figure rise out of the clouds to block ").append(first.hisHer()).append(" + path, ").append(first.heShe()).append(" screams and immediately throws ").append(first.hisHer()).append(" hands up in surrender.\n\n").toString());
+                        if(first.getMorality() < 34)
+                        {
+                            first.say(t, "\"Aaah!  Wait, wait, I'll join your side!  I'll fight the Chosen for you, I'll become one of the bad guys, just don't hurt meee!\"");
+                            append(t, (new StringBuilder("There's an awkward pause as the person hovering in front of ")).append(first.getMainName()).append(" stares at ").append(first.himHer()).append(".\n\n").toString());
+                            orangeAppend(t, "\"That is... hm... not the response I was hoping for.  My name is Basis.  I am also one of the Chosen.\"\n\n");
+                            first.say(t, "\"Oh...  That was... uh, a joke!  To lighten the mood, since we just kinda lost a city and all.  Yeah!  Ahah, hah...\"\n\n");
+                            append(t, "Basis sighs and shakes her head.\n\n");
+                            orangeAppend(t, "\"Right.  On an unrelated note, I hope you understand what the consequences for you will be if the Demons win this war.  The cities will fall, one by one, until there's no safe place left for you.  And your fate if captured will be worse than if they kill you outright.  You will be far more safe fighting alongside the rest of us than alone.\"\n\n");
+                            first.say(t, "\"Safe...  Yes, yes, I want to be safe...\"\n\n");
+                            append(t, (new StringBuilder("Cowardly as ")).append(first.heShe()).append(" is, ").append(first.getMainName()).append(" still finds the prospect of continuing to fight less frightening than the unknown fate ").append(first.heShe()).append("'d face by trying something different.  After ").append(first.heShe()).append(" calms down, ").append(first.heShe()).append(" once again agrees to join another team and fight to save a different city.").toString());
+                        } else
+                        if(first.getDignity() < 34)
+                        {
+                            first.say(t, "\"No!  We have to run away!  D-Don't try to stop me!  The Demons are too strong, we can't win!\"\n\n");
+                            append(t, (new StringBuilder("In contrast to ")).append(first.hisHer()).append(" terror, the other figure wears a calm expression, motioning gently for ").append(first.getMainName()).append(" to slow down.\n\n").toString());
+                            orangeAppend(t, "\"Everything's okay.  My name is Basis.  I'm here with a few other Chosen and some reinforcements from the military.  We won't be letting any Demons out of the city, so you're safe here.\"\n\n");
+                            append(t, (new StringBuilder("Basis's words are only partially effective.  ")).append(first.getMainName()).append(" stops trying to fly away, but ").append(first.heShe()).append(" still trembles and hugs ").append(first.himHer()).append("self, eyes darting left and right.\n\n").toString());
+                            first.say(t, "\"I can't go back in there...!  P-Please, please, don't make me go back!\"\n\n");
+                            orangeAppend(t, "\"Unfortunately, the city's been lost now, so there wouldn't be any point in making you go back.  You have plenty of time to rest and recuperate.  However... I do hope that you'll consider fighting for humanity again at some point.  If everyone runs away, then it's only a matter of time until the Demons get their hands on every last one of us...\"\n\n");
+                            append(t, (new StringBuilder("For now, ")).append(first.getMainName()).append(" is too terrified to listen.  But with time, ").append(first.heShe()).append("'ll forget just how severe the trauma ").append(first.heShe()).append(" faced at your hands was, and then it will be a simple matter for the other Chosen to convince ").append(first.himHer()).append(" to take up arms again.").toString());
+                        } else
+                        {
+                            first.say(t, "\"Please say you're one of the good guys!  Please, please, I don't wanna fight anymore!\"\n\n");
+                            orangeAppend(t, "\"I am in fact one of the good guys.  My name is Basis.  I'm here to help you.\"\n\n");
+                            append(t, (new StringBuilder("At first, ")).append(first.getMainName()).append(" looks relieved.  But then, a nervous expression creeps back onto ").append(first.hisHer()).append(" face.\n\n\"").toString());
+                            first.say(t, "\"Um, Ms. Basis, I...  I think I want to stop being one of the Chosen.  It's really scary, and the Demon Lord is way too strong, and it's not like I'm really helping much anyway, and you seem like a smart person, so... do you know how I can quit?  Like, right now?\"\n\n");
+                            append(t, (new StringBuilder("Basis appears taken aback by ")).append(first.getMainName()).append("'s request.  However, ").append(first.heShe()).append(" quickly recovers, putting on a gentle smile.\n\n").toString());
+                            orangeAppend(t, "\"Of course, if you want to give up your powers, there are ways to make it happen.  But... losing one of the Chosen is always tough for the rest of us.  A lot of people will probably die without your help.  This battle must have really shaken you up, so why don't you just come back to base and sleep on it for now?  It's better not to make big decisions until you're well-rested.\"\n\n");
+                            append(t, (new StringBuilder(String.valueOf(first.getMainName()))).append(" reluctantly nods and allows ").append(first.himHer()).append("self to be led back down to the ground.  And ").append(first.heShe()).append(" doesn't have the willpower to resist the pressure that will be put on ").append(first.himHer()).append(" by the other Chosen in order to get ").append(first.himHer()).append(" to fight again.  Soon, ").append(first.heShe()).append("'ll be back on the battlefield.").toString());
+                        }
+                    } else
+                    if(first.getMorality() < 34)
+                        append(t, (new StringBuilder("Tears of frustration run down ")).append(first.hisHer()).append(" face, ").toString());
+                } else
+                if(first.getInnocence() < 34)
+                    first.getMorality();
+        } else
+        if(type == 1)
+        {
+            if(second == null)
+            {
+                append(t, (new StringBuilder("Several weeks later, ")).append(first.getMainName()).append(" has been captured and sealed away by the military.  ").toString());
+                if(first.getConfidence() > 66)
+                {
+                    append(t, (new StringBuilder(String.valueOf(first.HeShe()))).append(" fought with all ").append(first.hisHer()).append(" considerable strength, taking down several platoons of mundane soldiers before enough other Chosen arrived to subdue ").append(first.himHer()).append(", but in the end, it made no difference.\n\n").toString());
+                    first.say(t, "(Even I couldn't hold out against the entire world...)\n\n");
+                } else
+                if(first.getConfidence() > 33)
+                {
+                    append(t, (new StringBuilder(String.valueOf(first.HeShe()))).append(" tried to escape into the wilderness, but a team of Chosen was sent to hunt ").append(first.himHer()).append(" down and bring ").append(first.himHer()).append(" back.\n\n").toString());
+                    first.say(t, "(For a little while, I thought I had actually made it...)\n\n");
+                } else
+                {
+                    append(t, (new StringBuilder(String.valueOf(first.HeShe()))).append(" tried to hide among the general populace, not using ").append(first.hisHer()).append(" powers and fleeing at the first sign that the authorities were searching for ").append(first.himHer()).append(".  But eventually, a team of Chosen ambushed ").append(first.himHer()).append(" in ").append(first.hisHer()).append(" sleep and captured ").append(first.himHer()).append(".\n\n").toString());
+                    first.say(t, "(I should have just given up in the first place...)\n\n");
+                }
+                if(first.getInnocence() > 66)
+                {
+                    append(t, (new StringBuilder("Before ")).append(first.heShe()).append(" knew it, ").append(first.heShe()).append(" was imprisoned in a dark, impossibly cold place.  ").append(first.HisHer()).append(" muscles are completely frozen - ").append(first.hisHer()).append(" heart doesn't even beat anymore.  ").append(first.HeShe()).append(" knows that this is being done to ").append(first.himHer()).append(" because ").append(first.heShe()).append(" bears the Demon Lord's child in ").append(first.hisHer()).append(" belly, but it still feels pointlessly cruel.  And to make matters worse, ").append(first.heShe()).append(" has no idea how long ").append(first.heShe()).append("'ll have to endure it.\n\n").toString());
+                    first.say(t, "(I'm... I'm scared...)\n\n");
+                } else
+                if(first.getInnocence() > 33)
+                {
+                    append(t, (new StringBuilder(String.valueOf(first.HeShe()))).append(" had heard the rumors about how Chosen impregnated by a Demon Lord were placed in cold storage in order to halt the progression of the pregnancy, but nothing could have prepared ").append(first.himHer()).append(" to experience it ").append(first.himHer()).append("self.  ").append(first.HisHer()).append(" cell is completely dark and completely silent, and even if ").append(first.heShe()).append(" weren't chained up, ").append(first.heShe()).append(" wouldn't be able to move a muscle due to ").append(first.hisHer()).append(" vital functions being brought to a halt by the extremely low temperature.  A dull ache seeps into ").append(first.hisHer()).append(" bones as the minutes turn into hours and then days.\n\n").toString());
+                    first.say(t, "(I can't take this...  I'm going to go crazy...!)\n\n");
+                } else
+                {
+                    append(t, (new StringBuilder(String.valueOf(first.HeShe()))).append(" resisted so hard because ").append(first.heShe()).append(" knew exactly what would be done to ").append(first.himHer()).append(" in order to stop the Demon Lord's child from growing inside ").append(first.himHer()).append(".  ").append(first.HeShe()).append(" was taken to a classified facility deep underground and locked away in a containment chamber kept at close to absolute zero in order to halt ").append(first.hisHer()).append(" vital functions.  Then, ").append(first.heShe()).append(" was left alone in darkness and silence with only the company of ").append(first.hisHer()).append(" own thoughts and the ache of the extreme cold which paralyzes even ").append(first.hisHer()).append(" Chosen physiology.\n\n").toString());
+                    first.say(t, "(This can't last forever...  Surely, it must kill me at some point...!)\n\n");
+                }
+                if(first.getDignity() > 66)
+                {
+                    append(t, (new StringBuilder("Now more than ever, ")).append(first.hisHer()).append(" popularity works against ").append(first.himHer()).append(".  As long as the public remembers ").append(first.himHer()).append(" as one of the Chosen, ").append(first.heShe()).append(" will continue to receive psychic energy, and ").append(first.heShe()).append(" will continue to slowly regenerate on the brink of death.  It will be years before ").append(first.heShe()).append("'s forgotten and ").append(first.heShe()).append("'s finally allowed to die.\n\n").toString());
+                    first.say(t, "(My fans will protest!  They'll save me!  They have to...!)\n\n");
+                } else
+                if(first.getDignity() > 33)
+                {
+                    append(t, (new StringBuilder("The Chosen can't die, but it's the psychic energy received from the public that turns a regular person into one of the Chosen in the first place.  That energy can still reach ")).append(first.himHer()).append(", even here, but now that ").append(first.heShe()).append("'s no longer fighting or making public appearances, people will be thinking about ").append(first.himHer()).append(" less and less.  ").append(first.HeShe()).append("'ll die eventually, though probably not as quickly as ").append(first.heShe()).append("'d prefer.\n\n").toString());
+                    first.say(t, "(It... hurts...)\n\n");
+                } else
+                {
+                    append(t, (new StringBuilder("It's a small mercy that ")).append(first.hisHer()).append(" cult fanbase is much smaller than those of other Chosen.  The damage dealt to ").append(first.hisHer()).append(" bodily tissues by the cold is currently balanced out by the flow of psychic energy from the public, but as they forget ").append(first.himHer()).append(", that energy grows weaker and weaker.  It won't be too long before the torture ends.\n\n").toString());
+                    first.say(t, "(I'm going to die here...)\n\n");
+                }
+                if(first.getMorality() > 66)
+                {
+                    append(t, (new StringBuilder("The physical pain is the lesser of the two tortures ")).append(first.getMainName()).append(" is facing, however.  Far worse is the sense of betrayal ").append(first.heShe()).append(" feels after being sealed away by the people ").append(first.heShe()).append(" fought so hard to protect.\n\n").toString());
+                    first.say(t, "(Why...?  Why...?)");
+                } else
+                if(first.getMorality() > 33)
+                {
+                    append(t, (new StringBuilder(String.valueOf(first.getMainName()))).append(" was once a hero, but even if ").append(first.heShe()).append(" were to be miraculously rescued from ").append(first.hisHer()).append(" fate, ").append(first.heShe()).append("'ll never be the same.  ").append(first.HisHer()).append(" emotions have already been twisted by the torture, and now ").append(first.heShe()).append(" can only think of revenge as ").append(first.hisHer()).append(" mind fades away.\n\n").toString());
+                    first.say(t, "(I'll never forgive them...  I'll never forgive them!)");
+                } else
+                {
+                    append(t, (new StringBuilder("The pain and the despair shatter what's left of ")).append(first.getMainName()).append("'s mind into pieces.  ").append(first.HeShe()).append(" descends further and further into violent fantasies in order to occupy ").append(first.himHer()).append("self, trying to forget ").append(first.hisHer()).append(" miserable situation.\n\n").toString());
+                    first.say(t, "(I'll kill them all... hahahah, yes, yes, kill them, tear them apart, devour their warm, warm guts!)");
+                }
+            }
+        } else
+        if(type == 2)
+        {
+            if(second == null)
+            {
+                append(t, (new StringBuilder("Several weeks later...\n\nA town on the border of Demon-controlled territory has been targeted by a raiding party.  Demons strike under cover of darkness, grabbing as many innocents as possible in order to drag them back to the hive, while Thralls mingled among the rescue workers sabotage any attempts to organize and repel the threat.  However, as the Demons start to make their escape, a brilliant blast of light shines down from the sky, disintegrating them before they even have a chance to retaliate.\n\nWhen the light fades, ")).append(first.getMainName()).append(" is hovering in the air where the Demons once stood.  The grateful civilians emerge from their hiding places, calling out to thank ").append(first.himHer()).append(" for saving them.  ").toString());
+                if(first.getConfidence() > 66)
+                {
+                    append(t, (new StringBuilder("However, when ")).append(first.getMainName()).append(" turns to look at them, ").append(first.heShe()).append(" just smirks and raises ").append(first.hisHer()).append(" hand to fire a lethal blast at them as well.\n\n").toString());
+                    first.say(t, "\"Pathetic.  Your tricks won't work on me, Demons!\"\n\n");
+                } else
+                if(first.getConfidence() > 33)
+                {
+                    append(t, (new StringBuilder("But ")).append(first.getMainName()).append(" doesn't seem to recognize their words, and when ").append(first.heShe()).append(" responds, it's with lethal intent.\n\n").toString());
+                    first.say(t, "\"There were more Demons hiding here?  I'll take them all out!\"\n\n");
+                } else
+                {
+                    append(t, (new StringBuilder(String.valueOf(first.getMainName()))).append(" shouts in alarm when ").append(first.heShe()).append(" hears them, spinning around and shooting rays of lethal light in their direction too.\n\n").toString());
+                    first.say(t, "\"Aaah!  Th-There are more of them!  I won't let you sneak up on me!\"\n\n");
+                }
+                if(first.getMorality() > 66)
+                {
+                    append(t, (new StringBuilder(String.valueOf(first.HisHer()))).append(" mind wasn't able to hold up under the strain of the sins ").append(first.heShe()).append(" was forced to commit, and now ").append(first.hisHer()).append(" hallucinations have grown beyond even your control.  ").append(first.HeShe()).append(" has imagined for ").append(first.himHer()).append("self a world where ").append(first.heShe()).append("'s surrounded by enemies ").append(first.heShe()).append("'s allowed to kill.\n\n").toString());
+                    first.say(t, "\"Phew...  No humans here this time, either.  Looks like I got here in time to stop the Demons from reaching them.\"\n\n");
+                } else
+                if(first.getMorality() > 33)
+                {
+                    append(t, (new StringBuilder("Even though ")).append(first.heShe()).append(" managed to escape your direct control, ").append(first.hisHer()).append(" grasp on reality has been broken beyond repair.  Now, there's nothing to stop ").append(first.himHer()).append(" from seeing the world however ").append(first.heShe()).append(" wants to see it.\n\n").toString());
+                    first.say(t, "\"Looks like there's no one here to appreciate my victory.  Oh well, that's fine too.\"\n\n");
+                } else
+                {
+                    append(t, (new StringBuilder("After ")).append(first.heShe()).append(" escaped from the Demon Lord, ").append(first.hisHer()).append(" mind only deteriorated further and further into violent fantasies, and soon ").append(first.heShe()).append(" began to lose track of where the fantasy ended and reality began.  Even though a part of ").append(first.himHer()).append(" suspects that ").append(first.heShe()).append("'s actually killing humans, ").append(first.heShe()).append(" doesn't care enough to heed it.\n\n").toString());
+                    first.say(t, "\"Those last ones died too quickly.  I need to find more Demons to kill, or I won't be satisfied.\"\n\n");
+                }
+                if(first.getDignity() > 66)
+                {
+                    append(t, (new StringBuilder("This kind of wanton slaughter is obviously unbefitting of one of the Chosen, but ")).append(first.getMainName()).append("'s prolific former reputation means that ").append(first.heShe()).append("'ll continue to receive psychic energy from the public for some time, even as the human authorities do their best to scrub ").append(first.hisHer()).append(" name from all media.\n\n").toString());
+                    first.say(t, (new StringBuilder("\"Still, I was hoping to encounter the mass murderer that was supposed to be somewhere around here.  If I can stop ")).append(first.himHer()).append(", maybe the news sites will go back to covering my heroics.\"\n\n").toString());
+                } else
+                if(first.getDignity() > 33)
+                {
+                    append(t, (new StringBuilder(String.valueOf(first.getMainName()))).append(" is slowly losing ").append(first.hisHer()).append(" Chosen powers as a result of ").append(first.hisHer()).append(" behavior, but ").append(first.hisHer()).append(" faith in ").append(first.himHer()).append("self is also greater than ever, so ").append(first.heShe()).append("'s still strong enough that neither the human authorities nor the local Demon Lords are interested in spending resources to bring ").append(first.himHer()).append(" down.\n\n").toString());
+                    first.say(t, "\"I should probably report in to base and take some time off soon... but for now, I'm enjoying this.\"\n\n");
+                } else
+                {
+                    append(t, (new StringBuilder(String.valueOf(first.getMainName()))).append(" is no longer receiving any psychic energy as one of the Chosen, but public's growing terror after every attack is turning ").append(first.himHer()).append(" into something different - neither Chosen nor Demon, and too strong for either side to want to oppose.  ").append(first.HeShe()).append(" hasn't yet realized that ").append(first.heShe()).append("'s starting to grow horns and fangs.\n\n").toString());
+                    first.say(t, "\"Working alone is nice.  I don't have to worry about what anyone else says.\"\n\n");
+                }
+                if(first.getInnocence() > 66)
+                {
+                    append(t, (new StringBuilder(String.valueOf(first.HeShe()))).append(" smiles through the blood spattering ").append(first.hisHer()).append(" face.  For the first time in a long while, ").append(first.getMainName()).append(" is truly happy.\n\n").toString());
+                    first.say(t, "\"Everything used to be so confusing, but now it all makes sense!\"");
+                } else
+                if(first.getInnocence() > 33)
+                {
+                    append(t, (new StringBuilder(String.valueOf(first.HeShe()))).append(" continues on ").append(first.hisHer()).append(" rampage, not even realizing what ").append(first.heShe()).append("'s doing.  Whenever ").append(first.heShe()).append(" starts to have doubts, ").append(first.hisHer()).append(" mind immediately recoils back into pure delusion.\n\n").toString());
+                    first.say(t, "\"I need to stop second-guessing myself.  Everything worked out alright, and that's that.\"");
+                } else
+                {
+                    append(t, (new StringBuilder(String.valueOf(first.HeShe()))).append(" can't help but notice the inconsistencies sometimes, and there are even nights that ").append(first.heShe()).append(" briefly returns to full horrified lucidity.  But when ").append(first.heShe()).append(" realizes that it's too late to go back to a normal life, ").append(first.heShe()).append(" willingly sinks back into ").append(first.hisHer()).append(" delusions, incapable of facing the reality that ").append(first.heShe()).append("'s become a monster.\n\n").toString());
+                    first.say(t, "\"The dark thoughts are coming back... h-hurry, I need to find more 'Demons' to kill, or else I'll...!\"");
+                }
+            }
+        } else
+        if(type == 3)
+        {
+            if(second == null)
+            {
+                append(t, "In a location undisclosed to the rest of humanity, sealed within a region of space pinched off from the rest of reality, fragments of a holographic cathedral float in an endless sea of brilliant light.  A lone wooden doorway serves to connect it to the outside world.  The perfect silence and serenity of the scene are broken when the door opens, revealing concrete walls and electric lighting on the other side.\n\nA man in a military uniform steps through.  His task was to deliver a message, but his voice dies in his throat as he sees the glowing figure kneeling at the altar before him.  Overcome with reverence, he drops to his knees, the door swinging shut behind him.\n\nFor several moments, silence reclaims the cathedral.  The messenger feels that he is unworthy to look directly at the one before him - unworthy to even exist in her presence.  He wants to gouge out his own eyes for daring to even glance in her direction.  But to soothe his shame in such a grotesque manner would itself be even more shameful, and he wants to beat his brains out against the marble floor for thinking such unworthy thoughts.  His mind continues to spiral inward and downward until a voice from above reminds him of his mission.\n\n");
+                orangeAppend(t, "\"You may speak.\"\n\n");
+                append(t, "The voice is quiet, calm, and androgynous.  The messenger shudders as he feels its beauty wash over him, but the implicit command in its words helps to keep him from being struck speechless a second time.  He had planned out exactly how he'd word his message before he came here, but now that he's been asked to speak, the words come out in a disorganized jumble.\n\n");
+                append(t, "\"Please forgive us, Crown.  We've failed.  The city is... it has fallen.  And the Chosen tasked to defend it...  They...  They couldn't...\"\n\n");
+                int killed = 0;
+                Chosen traitor = null;
+                for(int i = 0; i < 3; i++)
+                    if(!getCast()[i].alive.booleanValue())
+                        killed++;
+                    else
+                        traitor = getCast()[i];
+
+                orangeAppend(t, "\"");
+                if(killed == 3)
+                {
+                    orangeAppend(t, "They died in defense of the city.\"\n\n");
+                    append(t, "\"Y-Yes, Crown.  We failed to give them the support they needed in order to win.  I'm so sorry.\"\n\n");
+                    append(t, "The messenger's thoughts once again start to turn in dark directions, but this time, he's immediately rescued by Crown's words.  Her tone is surprisingly light.\n\n");
+                    orangeAppend(t, "\"Do not apologize.  Instead, rejoice.  The Holy Energy from their martyrdom will empower the forces of good.  This is the best possible result.  We can allow the Demon Lord to keep his new territory for now.  Our final victory is closer than ever.  Go, and spread the word to my lieutenants.\"");
+                } else
+                if(killed == 2)
+                {
+                    orangeAppend(t, "They were defeated.  But I felt only two of them die.  What of the third?\"\n\n");
+                    append(t, (new StringBuilder("\"R-Right.  As for the third... ")).append(traitor.getMainName()).append("...  ").append(traitor.HeShe()).append("... seems to have joined the side of the Demons.  At the very least, ").append(traitor.heShe()).append(" hasn't left the city, and there are no signs that ").append(traitor.heShe()).append("'s fighting against the Demons occupying it.\"\n\n").toString());
+                    append(t, "The messenger gulps, full of regret over being forced to trouble Crown with such bad news.  But when Crown replies, her voice is as calm as ever.\n\n");
+                    orangeAppend(t, "\"How... disappointing.  Nonetheless, this outcome still tips the scales in favor of the forces of good.  The Holy Energy produced from the martyrdom of two of the Chosen as once should empower the rest of us greatly.  Tell my lieutenants to prepare to press the attack on the other fronts.  We'll leave this Demon Lord undisturbed for now.  You may go.\"");
+                } else
+                {
+                    orangeAppend(t, "I felt only one of them die.  The other two... did they defect?\"\n\n");
+                    append(t, "\"Th-That's correct.  I'm sorry, Crown...  With two fallen Chosen defending it, there's no way we'll be able to retake the city.\"\n\n");
+                    append(t, "Silence once again stretches for several moments as the messenger cringes and stares at the floor.  Finally, Crown lets out a sigh and then responds.\n\n");
+                    orangeAppend(t, (new StringBuilder("\"This outcome is far from ideal, but it is not a complete loss.  When the Chosen martyr themselves, the resulting Holy Energy is considerable.  Go, and tell my lieutenants that ")).append(first.getMainName()).append("'s sacrifice shall drive us onward.\"").toString());
+                }
+            }
+        } else
+        if(type == 4 && second == null)
+        {
+            append(t, "Several weeks later...\n\n");
+            if(first.getDignity() > 66)
+            {
+                append(t, (new StringBuilder(String.valueOf(first.getGivenName()))).append("'s return to being a regular human has not gone well for ").append(first.himHer()).append(".  ").append(first.HisHer()).append(" great fame meant that ").append(first.heShe()).append(" was recognized on the street even by people who didn't regularly follow the battles between the Demons and the Chosen, and ").append(first.hisHer()).append(" failures had already become a regular topic of conversation.  It was impossible for ").append(first.himHer()).append(" to return to a normal life.\n\n").toString());
+                first.say(t, "\"So much for my so-called fans...\"\n\n");
+            } else
+            if(first.getDignity() > 33)
+            {
+                append(t, (new StringBuilder("The return to being a regular human has been somewhat of a mixed bag for ")).append(first.getGivenName()).append(".  On one hand, after the stresses of fighting as one of the Chosen, returning to a normal life was oddly comforting.  But on the other hand, ").append(first.hisHer()).append(" depraved fanbase quickly moved on to other Chosen once ").append(first.heShe()).append(" lost ").append(first.hisHer()).append(" powers, and on the rare occasion that someone does recognize ").append(first.himHer()).append(", they almost always have a very poor opinion of ").append(first.himHer()).append(".\n\n").toString());
+                first.say(t, "\"Maybe I should get surgery to chance my face...\"\n\n");
+            } else
+            {
+                append(t, (new StringBuilder("Because ")).append(first.getGivenName()).append(" never had a particularly large fanbase even at the height of ").append(first.hisHer()).append(" Chosen career, ").append(first.hisHer()).append(" fall from grace isn't common knowledge except among those who pay close attention to such things.  ").append(first.HeShe()).append("'s able to go back to a relatively normal life, and while ").append(first.heShe()).append(" makes no secret of the fact that ").append(first.heShe()).append(" used to be one of the Chosen, ").append(first.hisHer()).append(" acquaintances often don't even believe ").append(first.himHer()).append(".\n\n").toString());
+                first.say(t, "\"Maybe a peaceful life isn't so bad...\"\n\n");
+            }
+            if(first.getMorality() > 66)
+            {
+                append(t, (new StringBuilder("However, when a routine shopping trip is interrupted by Demons tearing their way up through the ground and starting to drag civilians back down with them into a new hive, ")).append(first.hisHer()).append(" battle-honed reflexes take over.  Just as one of the Demons is about to grab one of the civilians, ").append(first.getGivenName()).append(" pushes ").append(first.himHer()).append(" out of the way.\n\n").toString());
+                first.say(t, "\"Run!  Get to safety!\"\n\n");
+            } else
+            if(first.getMorality() > 33)
+            {
+                append(t, (new StringBuilder("However, things get significantly worse when the Demons start forming a hive under the city ")).append(first.heShe()).append(" now calls ").append(first.hisHer()).append(" home.  ").append(first.HeShe()).append(" happens to get caught right in the middle of their first attack, surrounded by Demons erupting from the pavement around ").append(first.himHer()).append(" on all sides.\n\n").toString());
+                first.say(t, "\"What!?  They're here, too!?\"\n\n");
+            } else
+            {
+                append(t, (new StringBuilder("However, ")).append(first.hisHer()).append(" new lack of power means ").append(first.heShe()).append("'s practically helpless when the city ").append(first.heShe()).append(" now calls home is targeted by the Demons.  ").append(first.HeShe()).append(" happens to get caught right in the middle of their first attack.  Desperate to escape, ").append(first.heShe()).append(" starts shoving other civilians to the ground in hopes of distracting the Demons with easier prey as ").append(first.heShe()).append(" flees.\n\n").toString());
+                first.say(t, "\"Get out of my way!\"\n\n");
+            }
+            if(first.getInnocence() > 66)
+            {
+                append(t, (new StringBuilder("Faced with a Demon right in front of ")).append(first.himHer()).append(", ").append(first.heShe()).append(" thoughtlessly tries to punch it aside - only to find that ").append(first.heShe()).append(" accomplishes nothing more than bruising ").append(first.hisHer()).append(" fist.\n\n").toString());
+                first.say(t, "\"Ow!  Oh, crap, that's right, I don't have my powers any-\"\n\n");
+            } else
+            if(first.getInnocence() > 33)
+            {
+                append(t, (new StringBuilder(String.valueOf(first.getGivenName()))).append(" isn't used to retreating.  ").append(first.HeShe()).append(" hesitates, looking around for an escape route, which gives the Demons plenty of time to grab ").append(first.himHer()).append(".\n\n").toString());
+                first.say(t, "\"I have to get out of here, or else-\"\n\n");
+            } else
+            {
+                append(t, (new StringBuilder("Thinking quickly, ")).append(first.getGivenName()).append(" immediately dives to the side, tumbling onto ").append(first.hisHer()).append(" feet as ").append(first.heShe()).append(" darts back and forth to evade the pursuing Demons.  But no matter how skillful ").append(first.hisHer()).append(" movements, ").append(first.hisHer()).append(" body is just too slow now, and they have no trouble catching ").append(first.himHer()).append(".\n\n").toString());
+                first.say(t, "\"No!  I can't-\"\n\n");
+            }
+            append(t, (new StringBuilder("A tentacled Demon grabs ")).append(first.himHer()).append(" by the ankles, spreads them wide apart, and then immediately rams a tentacle ").toString());
+            if(first.gender.equals("male"))
+                append(t, (new StringBuilder("up ")).append(first.hisHer()).append(" ass, ").toString());
+            else
+                append(t, (new StringBuilder("into ")).append(first.hisHer()).append(" pussy, ").toString());
+            if(first.vVirg.booleanValue() && !first.gender.equals("male"))
+                append(t, (new StringBuilder("stealing the virginity ")).append(first.heShe()).append(" had worked so hard to protect, and ").toString());
+            append(t, "squirting copious amounts of slime inside.  ");
+            if(first.getConfidence() > 66)
+            {
+                append(t, (new StringBuilder("The rough insertion is painful, but ")).append(first.getGivenName()).append(" still grits ").append(first.hisHer()).append(" teeth and struggles with all ").append(first.hisHer()).append(" might, refusing to accept ").append(first.hisHer()).append(" fate even as ").append(first.heShe()).append("'s dragged back to the Demonic hive.\n\n").toString());
+                first.say(t, "\"No!  You can't do this to me!  I'm... ngh... I'm supposed to be... stronger than this...\"\n\n");
+            } else
+            if(first.getConfidence() > 33)
+            {
+                append(t, (new StringBuilder(String.valueOf(first.getGivenName()))).append(" kicks and screams pitifully, but ").append(first.hisHer()).append(" efforts to escape don't even slow the Demon down as it drags ").append(first.himHer()).append(" back to the hive.\n\n").toString());
+                first.say(t, "\"Aaah!  No, no, no, let me go!\"\n\n");
+            } else
+            {
+                append(t, (new StringBuilder("For ")).append(first.getGivenName()).append(", who no longer has the partial protection of ").append(first.hisHer()).append(" Chosen resilience and regeneration, the insertion is even more painful than ").append(first.heShe()).append(" was expecting.  ").append(first.HeShe()).append(" whimpers and tries to curl into the fetal position, offering no resistance whatsoever as ").append(first.heShe()).append("'s brought back to the Demonic hive.\n\n").toString());
+                first.say(t, "\"I should have known... it would turn out this way...\"\n\n");
+            }
+            append(t, (new StringBuilder("Before long, the slime takes effect, and ")).append(first.getGivenName()).append(" is turned into an obedient Thrall, ").toString());
+            if(first.gender.equals("female"))
+                append(t, "learning to enjoy giving birth to countless Demons every day.");
+            else
+                append(t, "venturing back up to the city every day to help torment the Chosen tasked with defending it.");
+        }
+    }
+
     public WorldState()
     {
         textSize = 16;
-        version = "14";
+        version = "15";
         PURPLE = new Color(100, 0, 150);
         ORANGE = new Color(200, 100, 0);
         RED = new Color(180, 0, 0);
