@@ -81,7 +81,7 @@ public class Project extends JFrame
         p.getActionMap().clear();
         if(!t.getBackground().equals(w.BACKGROUND))
             w.toggleColors(t);
-        w.append(t, (new StringBuilder("Corrupted Saviors, Release 15: \"Conclusion\"\n\nThis game contains content of an adult nature and should not be played by the underaged or by those unable to distinguish fantasy from reality.\n\n")).append(w.getSeparator()).append("\n\nJapan, mid-21st century.  The psychic energies of humanity have finally begun to coalesce into physical form.  The resulting beings are known as Demons.  Born from the base desires suppressed deep within the human mind, these creatures spread across the planet, leaving chaos and depravity in their wake.\n\nBut Demons do not represent the entirety of the human condition.  The hopes and determination of humanity have also risen up, gathering in the bodies of a few Chosen warriors in order to grant them the power to fight the Demons.  Although each of them was once an ordinary person, their new abilities place them at the center of the struggle for the soul of humanity.\n\nYou are a Demon Lord, the highest form of Demon, with your own mind and will, focused on the corruption of all that is good in the world.  The Chosen are the keystone of humanity's resistance to your goal, but to simply kill them would be meaningless.  Instead, shatter their notions of right and wrong, showing them the true darkness that hides within!").toString());
+        w.append(t, (new StringBuilder("Corrupted Saviors, Release 16: \"Training\"\n\nThis game contains content of an adult nature and should not be played by the underaged or by those unable to distinguish fantasy from reality.\n\n")).append(w.getSeparator()).append("\n\nJapan, mid-21st century.  The psychic energies of humanity have finally begun to coalesce into physical form.  The resulting beings are known as Demons.  Born from the base desires suppressed deep within the human mind, these creatures spread across the planet, leaving chaos and depravity in their wake.\n\nBut Demons do not represent the entirety of the human condition.  The hopes and determination of humanity have also risen up, gathering in the bodies of a few Chosen warriors in order to grant them the power to fight the Demons.  Although each of them was once an ordinary person, their new abilities place them at the center of the struggle for the soul of humanity.\n\nYou are a Demon Lord, the highest form of Demon, with your own mind and will, focused on the corruption of all that is good in the world.  The Chosen are the keystone of humanity's resistance to your goal, but to simply kill them would be meaningless.  Instead, shatter their notions of right and wrong, showing them the true darkness that hides within!").toString());
         if(w.getCast()[0] == null)
         {
             Chosen newChosen = new Chosen();
@@ -280,24 +280,24 @@ public class Project extends JFrame
         {
             saves = new SaveData();
         }
-        if(saves.harem != null)
+        if(saves.harem == null)
+            saves.harem = new Forsaken[0];
+        if(saves.harem.length > 0 || w.getEarlyCheat().booleanValue())
         {
             final SaveData fileUsed = saves;
-            if(saves.harem.length > 0)
-            {
-                JButton Forsaken = new JButton("Forsaken");
-                Forsaken.addActionListener(new ActionListener() {
+            JButton Forsaken = new JButton("Forsaken");
+            Forsaken.addActionListener(new ActionListener() {
 
-                    public void actionPerformed(ActionEvent e)
-                    {
-                        Project.ForsakenMenu(t, p, f, w, fileUsed);
-                    }
+                public void actionPerformed(ActionEvent e)
+                {
+                    Project.ForsakenMenu(t, p, f, w, fileUsed, 0);
+                }
 
-                    private final JTextPane val$t;
-                    private final JPanel val$p;
-                    private final JFrame val$f;
-                    private final WorldState val$w;
-                    private final SaveData val$fileUsed;
+                private final JTextPane val$t;
+                private final JPanel val$p;
+                private final JFrame val$f;
+                private final WorldState val$w;
+                private final SaveData val$fileUsed;
 
             
             {
@@ -308,9 +308,8 @@ public class Project extends JFrame
                 fileUsed = savedata;
                 super();
             }
-                });
-                p.add(Forsaken);
-            }
+            });
+            p.add(Forsaken);
         }
         JButton About = new JButton("About");
         About.addActionListener(new ActionListener() {
@@ -1163,20 +1162,20 @@ public class Project extends JFrame
         p.repaint();
     }
 
-    public static void ForsakenMenu(final JTextPane t, final JPanel p, final JFrame f, final WorldState w, final SaveData s)
+    public static void ForsakenMenu(final JTextPane t, final JPanel p, final JFrame f, final WorldState w, final SaveData s, final int page)
     {
         p.removeAll();
-        w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\nWith which of your Forsaken would you like to interact?").toString());
-        for(int i = 0; i < s.harem.length; i++)
+        if(page == 0)
         {
-            final Forsaken subject = s.harem[i];
-            subject.textSize = w.textSize;
-            JButton ThisOne = new JButton(subject.mainName);
-            ThisOne.addActionListener(new ActionListener() {
+            w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\nWith which of your Forsaken would you like to interact?").toString());
+        } else
+        {
+            JButton PreviousPage = new JButton("<");
+            PreviousPage.addActionListener(new ActionListener() {
 
                 public void actionPerformed(ActionEvent e)
                 {
-                    Project.ForsakenInteraction(t, p, f, w, s, subject);
+                    Project.ForsakenMenu(t, p, f, w, s, page - 1);
                 }
 
                 private final JTextPane val$t;
@@ -1184,7 +1183,40 @@ public class Project extends JFrame
                 private final JFrame val$f;
                 private final WorldState val$w;
                 private final SaveData val$s;
-                private final Forsaken val$subject;
+                private final int val$page;
+
+            
+            {
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                w = worldstate;
+                s = savedata;
+                page = i;
+                super();
+            }
+            });
+            p.add(PreviousPage);
+        }
+        for(int i = 0; i < 5; i++)
+            if(s.harem != null && s.harem.length > i + page * 5)
+            {
+                final Forsaken subject = s.harem[i + page * 5];
+                subject.textSize = w.textSize;
+                JButton ThisOne = new JButton(subject.mainName);
+                ThisOne.addActionListener(new ActionListener() {
+
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        Project.ForsakenInteraction(t, p, f, w, s, subject);
+                    }
+
+                    private final JTextPane val$t;
+                    private final JPanel val$p;
+                    private final JFrame val$f;
+                    private final WorldState val$w;
+                    private final SaveData val$s;
+                    private final Forsaken val$subject;
 
             
             {
@@ -1196,10 +1228,89 @@ public class Project extends JFrame
                 subject = forsaken;
                 super();
             }
-            });
-            p.add(ThisOne);
-        }
+                });
+                p.add(ThisOne);
+            }
 
+        if(s.harem.length > 5 * (page + 1))
+        {
+            JButton NextPage = new JButton(">");
+            NextPage.addActionListener(new ActionListener() {
+
+                public void actionPerformed(ActionEvent e)
+                {
+                    Project.ForsakenMenu(t, p, f, w, s, page + 1);
+                }
+
+                private final JTextPane val$t;
+                private final JPanel val$p;
+                private final JFrame val$f;
+                private final WorldState val$w;
+                private final SaveData val$s;
+                private final int val$page;
+
+            
+            {
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                w = worldstate;
+                s = savedata;
+                page = i;
+                super();
+            }
+            });
+            p.add(NextPage);
+        }
+        JButton NewForsaken = new JButton("(Generate Forsaken)");
+        NewForsaken.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                WriteObject wobj = new WriteObject();
+                WorldState dummy = new WorldState();
+                dummy.copyToggles(w);
+                dummy.copySettings(t, w);
+                dummy.setGenders(w.getGenderBalance());
+                Chosen newChosen = new Chosen();
+                newChosen.setNumber(0);
+                dummy.initialize();
+                newChosen.generate(dummy);
+                int index = 0;
+                if(s.harem == null)
+                    s.harem = new Forsaken[1];
+                else
+                    index = s.harem.length;
+                int lastPage = s.harem.length / 5;
+                Forsaken newHarem[] = new Forsaken[index + 1];
+                for(int j = 0; j < index; j++)
+                    newHarem[j] = s.harem[j];
+
+                Forsaken newForsaken = new Forsaken();
+                newForsaken.initialize(w, newChosen);
+                newHarem[index] = newForsaken;
+                s.harem = newHarem;
+                wobj.serializeSaveData(s);
+                Project.ForsakenMenu(t, p, f, w, s, lastPage);
+            }
+
+            private final WorldState val$w;
+            private final JTextPane val$t;
+            private final SaveData val$s;
+            private final JPanel val$p;
+            private final JFrame val$f;
+
+            
+            {
+                w = worldstate;
+                t = jtextpane;
+                s = savedata;
+                p = jpanel;
+                f = jframe;
+                super();
+            }
+        });
+        p.add(NewForsaken);
         JButton Back = new JButton("Done");
         Back.addActionListener(new ActionListener() {
 
@@ -1256,7 +1367,7 @@ public class Project extends JFrame
         } else
         if(!x.givenName.equals(x.mainName) && !x.givenName.equals(x.originalName))
             w.append(t, (new StringBuilder("\nReal name: ")).append(x.givenName).toString());
-        w.append(t, (new StringBuilder("\n\nStamina: ")).append(x.stamina).append("%\nMotivation: ").append(x.motivation).append("%\n\nOrgasms given: ").toString());
+        w.append(t, "\n\nStamina: infinity%\nMotivation: infinity%\n\nOrgasms given: ");
         if(x.orgasmsGiven == 0)
             w.append(t, "none");
         else
@@ -1309,10 +1420,10 @@ public class Project extends JFrame
             w.append(t, "Desires the destruction of humanity");
         w.append(t, (new StringBuilder(")\nDeviancy: ")).append(x.deviancy).append("% (").toString());
         if(x.deviancy < 20)
-            w.append(t, "Little knowledge of sexuality");
+            w.append(t, "Little interest in sexuality");
         else
         if(x.deviancy < 40)
-            w.append(t, "Conventional sexual desires");
+            w.append(t, "Elaborate sexual fantasies");
         else
         if(x.deviancy < 61)
             w.append(t, "Twisted sexual desires");
@@ -1474,6 +1585,37 @@ public class Project extends JFrame
             }
         });
         p.add(ChangeName);
+        JButton FreeTraining = new JButton("Free Training");
+        FreeTraining.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                Boolean newTraining[] = new Boolean[6];
+                for(int i = 0; i < newTraining.length; i++)
+                    newTraining[i] = Boolean.valueOf(false);
+
+                x.trainingMenu(t, p, f, w, s, newTraining, 0, Boolean.valueOf(true));
+            }
+
+            private final Forsaken val$x;
+            private final JTextPane val$t;
+            private final JPanel val$p;
+            private final JFrame val$f;
+            private final WorldState val$w;
+            private final SaveData val$s;
+
+            
+            {
+                x = forsaken;
+                t = jtextpane;
+                p = jpanel;
+                f = jframe;
+                w = worldstate;
+                s = savedata;
+                super();
+            }
+        });
+        p.add(FreeTraining);
         JButton Delete = new JButton("Delete");
         Delete.addActionListener(new ActionListener() {
 
@@ -1504,10 +1646,10 @@ public class Project extends JFrame
 
                         s.harem = newHarem;
                         wobj.serializeSaveData(s);
-                        Project.ForsakenMenu(t, p, f, w, s);
+                        Project.ForsakenMenu(t, p, f, w, s, 0);
                     }
 
-                    final _cls37 this$1;
+                    final _cls41 this$1;
                     private final SaveData val$s;
                     private final Forsaken val$x;
                     private final WriteObject val$wobj;
@@ -1518,7 +1660,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls37.this;
+                        this$1 = _cls41.this;
                         s = savedata;
                         x = forsaken;
                         wobj = writeobject;
@@ -1538,7 +1680,7 @@ public class Project extends JFrame
                         Project.ForsakenInteraction(t, p, f, w, s, x);
                     }
 
-                    final _cls37 this$1;
+                    final _cls41 this$1;
                     private final JTextPane val$t;
                     private final JPanel val$p;
                     private final JFrame val$f;
@@ -1548,7 +1690,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls37.this;
+                        this$1 = _cls41.this;
                         t = jtextpane;
                         p = jpanel;
                         f = jframe;
@@ -1589,7 +1731,7 @@ public class Project extends JFrame
 
             public void actionPerformed(ActionEvent e)
             {
-                Project.ForsakenMenu(t, p, f, w, s);
+                Project.ForsakenMenu(t, p, f, w, s, 0);
             }
 
             private final JTextPane val$t;
@@ -5792,7 +5934,7 @@ public class Project extends JFrame
                                 Project.Downtime(t, p, f, w);
                             }
 
-                            final _cls64 this$1;
+                            final _cls68 this$1;
                             private final JTextPane val$t;
                             private final JPanel val$p;
                             private final JFrame val$f;
@@ -5800,7 +5942,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls64.this;
+                        this$1 = _cls68.this;
                         t = jtextpane;
                         p = jpanel;
                         f = jframe;
@@ -5855,7 +5997,7 @@ public class Project extends JFrame
                                     Project.Downtime(t, p, f, w);
                                 }
 
-                                final _cls65 this$1;
+                                final _cls69 this$1;
                                 private final JTextPane val$t;
                                 private final JPanel val$p;
                                 private final JFrame val$f;
@@ -5863,7 +6005,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls65.this;
+                        this$1 = _cls69.this;
                         t = jtextpane;
                         p = jpanel;
                         f = jframe;
@@ -6216,7 +6358,7 @@ public class Project extends JFrame
                         p.repaint();
                     }
 
-                    final _cls72 this$1;
+                    final _cls76 this$1;
                     private final JPanel val$p;
                     private final WorldState val$w;
                     private final JTextPane val$t;
@@ -6225,7 +6367,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls72.this;
+                        this$1 = _cls76.this;
                         p = jpanel;
                         w = worldstate;
                         t = jtextpane;
@@ -6390,7 +6532,7 @@ public class Project extends JFrame
                         p.repaint();
                     }
 
-                    final _cls73 this$1;
+                    final _cls77 this$1;
                     private final JPanel val$p;
                     private final WorldState val$w;
                     private final JTextPane val$t;
@@ -6399,7 +6541,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls73.this;
+                        this$1 = _cls77.this;
                         p = jpanel;
                         w = worldstate;
                         t = jtextpane;
@@ -6522,7 +6664,7 @@ public class Project extends JFrame
                         p.repaint();
                     }
 
-                    final _cls74 this$1;
+                    final _cls78 this$1;
                     private final JPanel val$p;
                     private final WorldState val$w;
                     private final JTextPane val$t;
@@ -6535,7 +6677,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls74.this;
+                        this$1 = _cls78.this;
                         p = jpanel;
                         w = worldstate;
                         t = jtextpane;
@@ -6934,7 +7076,7 @@ public class Project extends JFrame
                                 Project.Shop(t, p, f, w);
                             }
 
-                            final _cls76 this$1;
+                            final _cls80 this$1;
                             private final JTextPane val$t;
                             private final JPanel val$p;
                             private final JFrame val$f;
@@ -6942,7 +7084,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls76.this;
+                        this$1 = _cls80.this;
                         t = jtextpane;
                         p = jpanel;
                         f = jframe;
@@ -6997,7 +7139,7 @@ public class Project extends JFrame
                             Project.Shop(t, p, f, w);
                         }
 
-                        final _cls77 this$1;
+                        final _cls81 this$1;
                         private final JTextPane val$t;
                         private final JPanel val$p;
                         private final JFrame val$f;
@@ -7005,7 +7147,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls77.this;
+                        this$1 = _cls81.this;
                         t = jtextpane;
                         p = jpanel;
                         f = jframe;
@@ -7059,7 +7201,7 @@ public class Project extends JFrame
                             Project.Shop(t, p, f, w);
                         }
 
-                        final _cls78 this$1;
+                        final _cls82 this$1;
                         private final JTextPane val$t;
                         private final JPanel val$p;
                         private final JFrame val$f;
@@ -7067,7 +7209,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls78.this;
+                        this$1 = _cls82.this;
                         t = jtextpane;
                         p = jpanel;
                         f = jframe;
@@ -7153,7 +7295,7 @@ public class Project extends JFrame
                                     p.repaint();
                                 }
 
-                                final _cls79 this$1;
+                                final _cls83 this$1;
                                 private final WorldState val$w;
                                 private final JTextPane val$t;
                                 private final JPanel val$p;
@@ -7162,7 +7304,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls79.this;
+                        this$1 = _cls83.this;
                         w = worldstate;
                         t = jtextpane;
                         p = jpanel;
@@ -7185,7 +7327,7 @@ public class Project extends JFrame
                                     Project.Shop(t, p, f, w);
                                 }
 
-                                final _cls79 this$1;
+                                final _cls83 this$1;
                                 private final JTextPane val$t;
                                 private final JPanel val$p;
                                 private final JFrame val$f;
@@ -7193,7 +7335,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls79.this;
+                        this$1 = _cls83.this;
                         t = jtextpane;
                         p = jpanel;
                         f = jframe;
@@ -7300,7 +7442,7 @@ public class Project extends JFrame
                                 Project.Cheat(t, p, f, w);
                             }
 
-                            final _cls81 this$1;
+                            final _cls85 this$1;
                             private final WorldState val$w;
                             private final JTextPane val$t;
                             private final JPanel val$p;
@@ -7308,7 +7450,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls81.this;
+                        this$1 = _cls85.this;
                         w = worldstate;
                         t = jtextpane;
                         p = jpanel;
@@ -7325,7 +7467,7 @@ public class Project extends JFrame
                                 Project.Shop(t, p, f, w);
                             }
 
-                            final _cls81 this$1;
+                            final _cls85 this$1;
                             private final JTextPane val$t;
                             private final JPanel val$p;
                             private final JFrame val$f;
@@ -7333,7 +7475,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls81.this;
+                        this$1 = _cls85.this;
                         t = jtextpane;
                         p = jpanel;
                         f = jframe;
@@ -7410,7 +7552,7 @@ public class Project extends JFrame
                                         Project.Shop(t, p, f, w);
                                     }
 
-                                    final _cls83 this$1;
+                                    final _cls87 this$1;
                                     private final WorldState val$w;
                                     private final int val$thisTech;
                                     private final JPanel val$p;
@@ -7419,7 +7561,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls83.this;
+                        this$1 = _cls87.this;
                         w = worldstate;
                         thisTech = i;
                         p = jpanel;
@@ -7441,7 +7583,7 @@ public class Project extends JFrame
                                         Project.Shop(t, p, f, w);
                                     }
 
-                                    final _cls83 this$1;
+                                    final _cls87 this$1;
                                     private final JTextPane val$t;
                                     private final JPanel val$p;
                                     private final JFrame val$f;
@@ -7449,7 +7591,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls83.this;
+                        this$1 = _cls87.this;
                         t = jtextpane;
                         p = jpanel;
                         f = jframe;
@@ -7636,7 +7778,7 @@ public class Project extends JFrame
                                     p.repaint();
                                 }
 
-                                final _cls84 this$1;
+                                final _cls88 this$1;
                                 private final JPanel val$p;
                                 private final WorldState val$w;
                                 private final JTextPane val$t;
@@ -7645,7 +7787,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls84.this;
+                        this$1 = _cls88.this;
                         p = jpanel;
                         w = worldstate;
                         t = jtextpane;
@@ -7704,13 +7846,13 @@ public class Project extends JFrame
                             w.append(t, (new StringBuilder("\n")).append(totals).append(" ").append(w.getCast()[0].fixedFormat(totalFEAR)).append(" ").append(w.getCast()[0].fixedFormat(totalDISG)).append(" ").append(w.getCast()[0].fixedFormat(totalPAIN)).append(" ").append(w.getCast()[0].fixedFormat(totalSHAM)).append(" ").append(w.getCast()[0].fixedFormat(totalFEAR + totalDISG + totalPAIN + totalSHAM)).toString());
                         }
 
-                        final _cls84 this$1;
+                        final _cls88 this$1;
                         private final WorldState val$w;
                         private final JTextPane val$t;
 
                     
                     {
-                        this$1 = _cls84.this;
+                        this$1 = _cls88.this;
                         w = worldstate;
                         t = jtextpane;
                         super();
@@ -7725,7 +7867,7 @@ public class Project extends JFrame
                             Project.Shop(t, p, f, w);
                         }
 
-                        final _cls84 this$1;
+                        final _cls88 this$1;
                         private final JTextPane val$t;
                         private final JPanel val$p;
                         private final JFrame val$f;
@@ -7733,7 +7875,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls84.this;
+                        this$1 = _cls88.this;
                         t = jtextpane;
                         p = jpanel;
                         f = jframe;
@@ -7805,7 +7947,7 @@ public class Project extends JFrame
                         Project.Data(t, p, f, w, "newsave", 0, Boolean.valueOf(true));
                     }
 
-                    final _cls86 this$1;
+                    final _cls90 this$1;
                     private final JTextPane val$t;
                     private final JPanel val$p;
                     private final JFrame val$f;
@@ -7813,7 +7955,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls86.this;
+                        this$1 = _cls90.this;
                         t = jtextpane;
                         p = jpanel;
                         f = jframe;
@@ -7830,7 +7972,7 @@ public class Project extends JFrame
                         Project.Data(t, p, f, w, "overwrite", 0, Boolean.valueOf(true));
                     }
 
-                    final _cls86 this$1;
+                    final _cls90 this$1;
                     private final JTextPane val$t;
                     private final JPanel val$p;
                     private final JFrame val$f;
@@ -7838,7 +7980,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls86.this;
+                        this$1 = _cls90.this;
                         t = jtextpane;
                         p = jpanel;
                         f = jframe;
@@ -7855,7 +7997,7 @@ public class Project extends JFrame
                         Project.Data(t, p, f, w, "load", 0, Boolean.valueOf(true));
                     }
 
-                    final _cls86 this$1;
+                    final _cls90 this$1;
                     private final JTextPane val$t;
                     private final JPanel val$p;
                     private final JFrame val$f;
@@ -7863,7 +8005,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls86.this;
+                        this$1 = _cls90.this;
                         t = jtextpane;
                         p = jpanel;
                         f = jframe;
@@ -7880,7 +8022,7 @@ public class Project extends JFrame
                         Project.Data(t, p, f, w, "delete", 0, Boolean.valueOf(true));
                     }
 
-                    final _cls86 this$1;
+                    final _cls90 this$1;
                     private final JTextPane val$t;
                     private final JPanel val$p;
                     private final JFrame val$f;
@@ -7888,7 +8030,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls86.this;
+                        this$1 = _cls90.this;
                         t = jtextpane;
                         p = jpanel;
                         f = jframe;
@@ -7905,7 +8047,7 @@ public class Project extends JFrame
                         Project.Data(t, p, f, w, "import", 0, Boolean.valueOf(true));
                     }
 
-                    final _cls86 this$1;
+                    final _cls90 this$1;
                     private final JTextPane val$t;
                     private final JPanel val$p;
                     private final JFrame val$f;
@@ -7913,7 +8055,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls86.this;
+                        this$1 = _cls90.this;
                         t = jtextpane;
                         p = jpanel;
                         f = jframe;
@@ -7930,7 +8072,7 @@ public class Project extends JFrame
                         Project.Data(t, p, f, w, "export", 0, Boolean.valueOf(true));
                     }
 
-                    final _cls86 this$1;
+                    final _cls90 this$1;
                     private final JTextPane val$t;
                     private final JPanel val$p;
                     private final JFrame val$f;
@@ -7938,7 +8080,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls86.this;
+                        this$1 = _cls90.this;
                         t = jtextpane;
                         p = jpanel;
                         f = jframe;
@@ -7955,7 +8097,7 @@ public class Project extends JFrame
                         Project.Shop(t, p, f, w);
                     }
 
-                    final _cls86 this$1;
+                    final _cls90 this$1;
                     private final JTextPane val$t;
                     private final JPanel val$p;
                     private final JFrame val$f;
@@ -7963,7 +8105,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls86.this;
+                        this$1 = _cls90.this;
                         t = jtextpane;
                         p = jpanel;
                         f = jframe;
@@ -8010,7 +8152,7 @@ public class Project extends JFrame
                         Project.IntroOne(t, p, f, x);
                     }
 
-                    final _cls87 this$1;
+                    final _cls91 this$1;
                     private final WorldState val$w;
                     private final JTextPane val$t;
                     private final JPanel val$p;
@@ -8018,7 +8160,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls87.this;
+                        this$1 = _cls91.this;
                         w = worldstate;
                         t = jtextpane;
                         p = jpanel;
@@ -8035,7 +8177,7 @@ public class Project extends JFrame
                         Project.Shop(t, p, f, w);
                     }
 
-                    final _cls87 this$1;
+                    final _cls91 this$1;
                     private final JTextPane val$t;
                     private final JPanel val$p;
                     private final JFrame val$f;
@@ -8043,7 +8185,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls87.this;
+                        this$1 = _cls91.this;
                         t = jtextpane;
                         p = jpanel;
                         f = jframe;
@@ -8680,7 +8822,7 @@ public class Project extends JFrame
                                         }
                                     }
 
-                                    final _cls100 this$1;
+                                    final _cls104 this$1;
                                     private final SaveData val$saveFile;
                                     private final int val$fileSelected;
                                     private final WriteObject val$wobj;
@@ -8691,7 +8833,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls100.this;
+                        this$1 = _cls104.this;
                         saveFile = savedata;
                         fileSelected = i;
                         wobj = writeobject;
@@ -8711,7 +8853,7 @@ public class Project extends JFrame
                                         Project.Shop(t, p, f, w);
                                     }
 
-                                    final _cls100 this$1;
+                                    final _cls104 this$1;
                                     private final JTextPane val$t;
                                     private final JPanel val$p;
                                     private final JFrame val$f;
@@ -8719,7 +8861,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls100.this;
+                        this$1 = _cls104.this;
                         t = jtextpane;
                         p = jpanel;
                         f = jframe;
@@ -8766,7 +8908,7 @@ public class Project extends JFrame
                                     Project.Shop(t, p, f, w);
                                 }
 
-                                final _cls100 this$1;
+                                final _cls104 this$1;
                                 private final SaveData val$saveFile;
                                 private final int val$fileSelected;
                                 private final WriteObject val$wobj;
@@ -8777,7 +8919,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls100.this;
+                        this$1 = _cls104.this;
                         saveFile = savedata;
                         fileSelected = i;
                         wobj = writeobject;
@@ -8798,7 +8940,7 @@ public class Project extends JFrame
                                     Project.Shop(t, p, f, w);
                                 }
 
-                                final _cls100 this$1;
+                                final _cls104 this$1;
                                 private final WorldState val$w;
                                 private final JTextPane val$t;
                                 private final JPanel val$p;
@@ -8806,7 +8948,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls100.this;
+                        this$1 = _cls104.this;
                         w = worldstate;
                         t = jtextpane;
                         p = jpanel;
@@ -9034,7 +9176,7 @@ public class Project extends JFrame
                                     Project.Customize(t, p, f, w);
                                 }
 
-                                final _cls105 this$1;
+                                final _cls109 this$1;
                                 private final Boolean val$punisherUsed;
                                 private final WorldState val$w;
                                 private final Boolean val$defilerUsed;
@@ -9045,7 +9187,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls105.this;
+                        this$1 = _cls109.this;
                         punisherUsed = boolean1;
                         w = worldstate;
                         defilerUsed = boolean2;
@@ -9077,7 +9219,7 @@ public class Project extends JFrame
                                     Project.Customize(t, p, f, w);
                                 }
 
-                                final _cls105 this$1;
+                                final _cls109 this$1;
                                 private final Boolean val$punisherUsed;
                                 private final WorldState val$w;
                                 private final Boolean val$defilerUsed;
@@ -9088,7 +9230,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls105.this;
+                        this$1 = _cls109.this;
                         punisherUsed = boolean1;
                         w = worldstate;
                         defilerUsed = boolean2;
@@ -9120,7 +9262,7 @@ public class Project extends JFrame
                                     Project.Customize(t, p, f, w);
                                 }
 
-                                final _cls105 this$1;
+                                final _cls109 this$1;
                                 private final Boolean val$punisherUsed;
                                 private final WorldState val$w;
                                 private final Boolean val$defilerUsed;
@@ -9131,7 +9273,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls105.this;
+                        this$1 = _cls109.this;
                         punisherUsed = boolean1;
                         w = worldstate;
                         defilerUsed = boolean2;
@@ -9163,7 +9305,7 @@ public class Project extends JFrame
                                     Project.Customize(t, p, f, w);
                                 }
 
-                                final _cls105 this$1;
+                                final _cls109 this$1;
                                 private final Boolean val$punisherUsed;
                                 private final WorldState val$w;
                                 private final Boolean val$defilerUsed;
@@ -9174,7 +9316,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls105.this;
+                        this$1 = _cls109.this;
                         punisherUsed = boolean1;
                         w = worldstate;
                         defilerUsed = boolean2;
@@ -9195,7 +9337,7 @@ public class Project extends JFrame
                                 Project.Customize(t, p, f, w);
                             }
 
-                            final _cls105 this$1;
+                            final _cls109 this$1;
                             private final JTextPane val$t;
                             private final JPanel val$p;
                             private final JFrame val$f;
@@ -9203,7 +9345,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls105.this;
+                        this$1 = _cls109.this;
                         t = jtextpane;
                         p = jpanel;
                         f = jframe;
@@ -9263,7 +9405,7 @@ public class Project extends JFrame
                                     Project.Customize(t, p, f, w);
                                 }
 
-                                final _cls106 this$1;
+                                final _cls110 this$1;
                                 private final WorldState val$w;
                                 private final Boolean val$punisherUsed;
                                 private final int val$suppressorsUsedFinal;
@@ -9273,7 +9415,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls106.this;
+                        this$1 = _cls110.this;
                         w = worldstate;
                         punisherUsed = boolean1;
                         suppressorsUsedFinal = i;
@@ -9303,7 +9445,7 @@ public class Project extends JFrame
                                     Project.Customize(t, p, f, w);
                                 }
 
-                                final _cls106 this$1;
+                                final _cls110 this$1;
                                 private final WorldState val$w;
                                 private final Boolean val$punisherUsed;
                                 private final int val$suppressorsUsedFinal;
@@ -9313,7 +9455,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls106.this;
+                        this$1 = _cls110.this;
                         w = worldstate;
                         punisherUsed = boolean1;
                         suppressorsUsedFinal = i;
@@ -9343,7 +9485,7 @@ public class Project extends JFrame
                                     Project.Customize(t, p, f, w);
                                 }
 
-                                final _cls106 this$1;
+                                final _cls110 this$1;
                                 private final WorldState val$w;
                                 private final Boolean val$punisherUsed;
                                 private final int val$suppressorsUsedFinal;
@@ -9353,7 +9495,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls106.this;
+                        this$1 = _cls110.this;
                         w = worldstate;
                         punisherUsed = boolean1;
                         suppressorsUsedFinal = i;
@@ -9381,7 +9523,7 @@ public class Project extends JFrame
                                     Project.Customize(t, p, f, w);
                                 }
 
-                                final _cls106 this$1;
+                                final _cls110 this$1;
                                 private final WorldState val$w;
                                 private final Boolean val$punisherUsed;
                                 private final int val$suppressorsUsedFinal;
@@ -9391,7 +9533,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls106.this;
+                        this$1 = _cls110.this;
                         w = worldstate;
                         punisherUsed = boolean1;
                         suppressorsUsedFinal = i;
@@ -9411,7 +9553,7 @@ public class Project extends JFrame
                                 Project.Customize(t, p, f, w);
                             }
 
-                            final _cls106 this$1;
+                            final _cls110 this$1;
                             private final JTextPane val$t;
                             private final JPanel val$p;
                             private final JFrame val$f;
@@ -9419,7 +9561,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls106.this;
+                        this$1 = _cls110.this;
                         t = jtextpane;
                         p = jpanel;
                         f = jframe;
@@ -9474,7 +9616,7 @@ public class Project extends JFrame
                                     Project.Customize(t, p, f, w);
                                 }
 
-                                final _cls107 this$1;
+                                final _cls111 this$1;
                                 private final WorldState val$w;
                                 private final Boolean val$defilerUsed;
                                 private final int val$suppressorsUsedFinal;
@@ -9484,7 +9626,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls107.this;
+                        this$1 = _cls111.this;
                         w = worldstate;
                         defilerUsed = boolean1;
                         suppressorsUsedFinal = i;
@@ -9509,7 +9651,7 @@ public class Project extends JFrame
                                     Project.Customize(t, p, f, w);
                                 }
 
-                                final _cls107 this$1;
+                                final _cls111 this$1;
                                 private final WorldState val$w;
                                 private final Boolean val$defilerUsed;
                                 private final int val$suppressorsUsedFinal;
@@ -9519,7 +9661,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls107.this;
+                        this$1 = _cls111.this;
                         w = worldstate;
                         defilerUsed = boolean1;
                         suppressorsUsedFinal = i;
@@ -9546,7 +9688,7 @@ public class Project extends JFrame
                                     Project.Customize(t, p, f, w);
                                 }
 
-                                final _cls107 this$1;
+                                final _cls111 this$1;
                                 private final WorldState val$w;
                                 private final Boolean val$defilerUsed;
                                 private final int val$suppressorsUsedFinal;
@@ -9556,7 +9698,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls107.this;
+                        this$1 = _cls111.this;
                         w = worldstate;
                         defilerUsed = boolean1;
                         suppressorsUsedFinal = i;
@@ -9581,7 +9723,7 @@ public class Project extends JFrame
                                     Project.Customize(t, p, f, w);
                                 }
 
-                                final _cls107 this$1;
+                                final _cls111 this$1;
                                 private final WorldState val$w;
                                 private final Boolean val$defilerUsed;
                                 private final int val$suppressorsUsedFinal;
@@ -9591,7 +9733,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls107.this;
+                        this$1 = _cls111.this;
                         w = worldstate;
                         defilerUsed = boolean1;
                         suppressorsUsedFinal = i;
@@ -9611,7 +9753,7 @@ public class Project extends JFrame
                                 Project.Customize(t, p, f, w);
                             }
 
-                            final _cls107 this$1;
+                            final _cls111 this$1;
                             private final JTextPane val$t;
                             private final JPanel val$p;
                             private final JFrame val$f;
@@ -9619,7 +9761,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls107.this;
+                        this$1 = _cls111.this;
                         t = jtextpane;
                         p = jpanel;
                         f = jframe;
@@ -10381,7 +10523,7 @@ public class Project extends JFrame
                                     Project.BeginBattle(t, p, f, w, c);
                             }
 
-                            final _cls123 this$1;
+                            final _cls127 this$1;
                             private final WorldState val$w;
                             private final JPanel val$p;
                             private final Chosen val$c;
@@ -10391,7 +10533,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls123.this;
+                        this$1 = _cls127.this;
                         w = worldstate;
                         p = jpanel;
                         c = chosen;
@@ -10410,7 +10552,7 @@ public class Project extends JFrame
                                 Project.Shop(t, p, f, w);
                             }
 
-                            final _cls123 this$1;
+                            final _cls127 this$1;
                             private final JTextPane val$t;
                             private final JPanel val$p;
                             private final JFrame val$f;
@@ -10418,7 +10560,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls123.this;
+                        this$1 = _cls127.this;
                         t = jtextpane;
                         p = jpanel;
                         f = jframe;
@@ -10897,7 +11039,7 @@ public class Project extends JFrame
                         Project.Shop(t, p, f, w);
                     }
 
-                    final _cls127 this$1;
+                    final _cls131 this$1;
                     private final JTextPane val$t;
                     private final JPanel val$p;
                     private final JFrame val$f;
@@ -10905,7 +11047,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls127.this;
+                        this$1 = _cls131.this;
                         t = jtextpane;
                         p = jpanel;
                         f = jframe;
@@ -10990,10 +11132,10 @@ public class Project extends JFrame
                             x.copySettings(t, w);
                             x.copyToggles(w);
                             x.setGenders(w.getGenderBalance());
-                            Project.ForsakenMenu(t, p, f, x, fileUsed);
+                            Project.ForsakenMenu(t, p, f, x, fileUsed, 0);
                         }
 
-                        final _cls127 this$1;
+                        final _cls131 this$1;
                         private final JTextPane val$t;
                         private final WorldState val$w;
                         private final JPanel val$p;
@@ -11002,7 +11144,7 @@ public class Project extends JFrame
 
                     
                     {
-                        this$1 = _cls127.this;
+                        this$1 = _cls131.this;
                         t = jtextpane;
                         w = worldstate;
                         p = jpanel;

@@ -7836,7 +7836,7 @@ public class WorldState
         if(version == null)
             adjusted = Boolean.valueOf(true);
         else
-        if(!version.equals("15"))
+        if(!version.equals("16"))
             adjusted = Boolean.valueOf(true);
         if(adjusted.booleanValue())
         {
@@ -7847,7 +7847,7 @@ public class WorldState
             }
             highScore = 0L;
             parScore = 0L;
-            version = "15";
+            version = "16";
         }
     }
 
@@ -18734,7 +18734,7 @@ public class WorldState
     public WorldState()
     {
         textSize = 16;
-        version = "15";
+        version = "16";
         PURPLE = new Color(100, 0, 150);
         ORANGE = new Color(200, 100, 0);
         RED = new Color(180, 0, 0);
