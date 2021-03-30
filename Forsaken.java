@@ -131,6 +131,14 @@ public class Forsaken
 
     public void initialize(WorldState w, Chosen c)
     {
+        formerSelf = c;
+        for(int i = 0; i < 3; i++)
+        {
+            for(int j = 0; j < 3; j++)
+                formerRelationships[i][j] = w.getRelationship(i, j);
+
+        }
+
         hostility = (100 - c.morality) / 3;
         if(c.isImpregnated().booleanValue())
             hostility += 40;
@@ -180,7 +188,7 @@ public class Forsaken
         if(c.isDebased())
             disgrace += 10;
         if(c.isImpregnated().booleanValue())
-            demonicBirths = 1;
+            demonicBirths = -1;
         kills[0] = c.firstKilled;
         kills[1] = c.secondKilled;
         if(kills[1] != null)
@@ -346,8 +354,9 @@ public class Forsaken
             takers[3] = Taker.TOGETHER;
         else
             takers[3] = Taker.CHOSEN;
-        stamina = 100;
-        motivation = 100;
+        stamina = 1000;
+        motivation = 1000;
+        chooseCombatStyle();
     }
 
     public void selfTalk(JTextPane t)
@@ -1071,6 +1080,1801 @@ public class Forsaken
             if(disgrace < 61);
     }
 
+    public void othersTalk(WorldState w, JTextPane t, SaveData s)
+    {
+        int ownID = 32000;
+        for(int i = 0; i < s.harem.length; i++)
+            if(s.harem[i] != this)
+            {
+                Boolean killedPartner = Boolean.valueOf(false);
+                Boolean otherKilledPartner = Boolean.valueOf(false);
+                int opinionOfDead = 0;
+                int otherOpinionOfDead = 0;
+                int formerRelationship = 0;
+                Forsaken x = s.harem[i];
+                Boolean history = Boolean.valueOf(false);
+                if(firstFormerPartner != null && secondFormerPartner != null && formerSelf != null && x.firstFormerPartner != null && x.secondFormerPartner != null && x.formerSelf != null && (firstFormerPartner.equals(x.formerSelf) || secondFormerPartner.equals(x.formerSelf)))
+                    history = Boolean.valueOf(true);
+                if(formerSelf != null && x.formerSelf != null)
+                {
+                    if(kills != null && x.kills != null && kills.length > 0 && x.kills.length > 0)
+                        if(x.kills[0] != null && (x.kills[0].equals(firstFormerPartner) || x.kills[0].equals(secondFormerPartner)))
+                        {
+                            otherKilledPartner = Boolean.valueOf(true);
+                            if(ownID < i)
+                            {
+                                opinionOfDead = formerRelationships[formerSelf.number][x.kills[0].number];
+                                otherOpinionOfDead = formerRelationships[x.formerSelf.number][x.kills[0].number];
+                            } else
+                            {
+                                opinionOfDead = x.formerRelationships[formerSelf.number][x.kills[0].number];
+                                otherOpinionOfDead = x.formerRelationships[x.formerSelf.number][x.kills[0].number];
+                            }
+                        } else
+                        if(kills[0] != null && (kills[0].equals(firstFormerPartner) || kills[0].equals(secondFormerPartner)))
+                        {
+                            killedPartner = Boolean.valueOf(true);
+                            if(ownID < i)
+                            {
+                                opinionOfDead = formerRelationships[formerSelf.number][kills[0].number];
+                                otherOpinionOfDead = formerRelationships[x.formerSelf.number][kills[0].number];
+                            } else
+                            {
+                                opinionOfDead = x.formerRelationships[formerSelf.number][kills[0].number];
+                                otherOpinionOfDead = x.formerRelationships[x.formerSelf.number][kills[0].number];
+                            }
+                        }
+                    if(firstFormerPartner.equals(x.formerSelf) || secondFormerPartner.equals(x.formerSelf))
+                        if(ownID < i)
+                            formerRelationship = formerRelationships[formerSelf.number][x.formerSelf.number];
+                        else
+                            formerRelationship = x.formerRelationships[formerSelf.number][x.formerSelf.number];
+                }
+                if(i > 0 && (i > 1 || ownID != 0))
+                    w.append(t, "\n\n");
+                say(t, "\"");
+                if(opinion(x) > 100)
+                {
+                    if(innocence > 66)
+                    {
+                        if(x.hostility < 20)
+                        {
+                            if(x.confidence > 66)
+                                say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is strong, and amazing, and really nice too!  ").toString());
+                            else
+                            if(x.confidence > 33)
+                                say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is a really great, caring friend!  ").toString());
+                            else
+                                say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is shy and sweet.  I like ").append(x.himHer()).append(" a lot!  ").toString());
+                        } else
+                        if(x.hostility < 40)
+                        {
+                            if(x.confidence > 66)
+                                say(t, (new StringBuilder("Even though ")).append(x.mainName).append(" can seem scary at first, ").append(x.heShe()).append("'s not that bad.  ").toString());
+                            else
+                            if(x.confidence > 33)
+                                say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" isn't actually a bad person at all!  ").toString());
+                            else
+                                say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" seems a little quiet and weird until you get to know ").append(x.himHer()).append(".  ").toString());
+                        } else
+                        if(x.hostility < 61)
+                        {
+                            if(x.confidence > 66)
+                                say(t, (new StringBuilder("As long as you don't make ")).append(x.himHer()).append(" angry, ").append(x.mainName).append(" is really fun!  ").toString());
+                            else
+                            if(x.confidence > 33)
+                                say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" can get really, really grumpy sometimes, but that doesn't mean ").append(x.heShe()).append("'s a bad person!  ").toString());
+                            else
+                                say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" may be kinda unfriendly, always wanting to be by ").append(x.himHer()).append("self and glaring at people... but I still like ").append(x.himHer()).append("!  ").toString());
+                        } else
+                        if(x.hostility < 81)
+                        {
+                            if(x.confidence > 66)
+                                say(t, (new StringBuilder("Even though ")).append(x.mainName).append(" seems really angry all the time, I still like ").append(x.himHer()).append("!  ").toString());
+                            else
+                            if(x.confidence > 33)
+                                say(t, (new StringBuilder("I know ")).append(x.mainName).append(" basically hates everyone, but that doesn't mean I have to hate ").append(x.himHer()).append("!  ").toString());
+                            else
+                                say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" really seems like ").append(x.heShe()).append(" hates everyone, even ").append(x.himHer()).append("self.  But I definitely don't hate ").append(x.himHer()).append("!  ").toString());
+                        } else
+                        if(x.confidence > 66)
+                            say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" kinda seems like ").append(x.heShe()).append(" wants to kill everybody, even me... but I don't really hold it against ").append(x.himHer()).append("!  ").toString());
+                        else
+                        if(x.confidence > 33)
+                            say(t, (new StringBuilder("Is it weird that I like ")).append(x.mainName).append(" even though ").append(x.heShe()).append(" wants everyone, including me and ").append(x.himHer()).append(" both, to die?  ").toString());
+                        else
+                            say(t, (new StringBuilder("I wish that ")).append(x.mainName).append(" wasn't always so depressed and wanting the world to end and stuff, because I actually really like ").append(x.himHer()).append("!  ").toString());
+                    } else
+                    if(innocence > 33)
+                    {
+                        if(x.hostility < 20)
+                        {
+                            if(x.confidence > 66)
+                                say(t, (new StringBuilder("I appreciate the way that ")).append(x.mainName).append(" has such a strong sense of right and wrong.  ").toString());
+                            else
+                            if(x.confidence > 33)
+                                say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" makes an effort to be kind to everyone ").append(x.heShe()).append(" meets.  ").toString());
+                            else
+                                say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is such a cute, shy little thing.  ").toString());
+                        } else
+                        if(x.hostility < 40)
+                        {
+                            if(x.confidence > 66)
+                                say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is a strong person who doesn't give an inch.  ").toString());
+                            else
+                            if(x.confidence > 33)
+                                say(t, (new StringBuilder("I like ")).append(x.mainName).append(".  ").append(x.HeShe()).append("'s had a rough time of life, but ").append(x.heShe()).append("'s made the best of it.  ").toString());
+                            else
+                                say(t, (new StringBuilder("I can tell that ")).append(x.mainName).append(" has been hurt in the past, and it makes me want to protect ").append(x.himHer()).append(".  ").toString());
+                        } else
+                        if(x.hostility < 61)
+                        {
+                            if(x.confidence > 66)
+                                say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is someone you definitely want to have on your side.  ").append(x.HeShe()).append("'s fierce.  ").toString());
+                            else
+                            if(x.confidence > 33)
+                                say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is a harsh person, but only because ").append(x.heShe()).append(" has no choice.  I don't hold it against ").append(x.himHer()).append(".  ").toString());
+                            else
+                                say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is a major pessimist who doesn't have much hope for ").append(x.himHer()).append("self or the world, but I try to show ").append(x.himHer()).append(" that it's not all bad.  ").toString());
+                        } else
+                        if(x.hostility < 81)
+                        {
+                            if(x.confidence > 66)
+                                say(t, (new StringBuilder("I'll be the first to admit that it's dangerous to get too close to ")).append(x.mainName).append(", but I think it's worth it.  ").toString());
+                            else
+                            if(x.confidence > 33)
+                                say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" hates people in general, but that doesn't mean I have to hate ").append(x.himHer()).append(".  ").toString());
+                            else
+                                say(t, (new StringBuilder("I hope that as long as I keep showing ")).append(x.mainName).append(" how much I like ").append(x.himHer()).append(", ").append(x.heShe()).append("'ll stop hating ").append(x.himHer()).append("self so much.  ").toString());
+                        } else
+                        if(x.confidence > 66)
+                            say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" wants to destroy the world, but I don't think ").append(x.heShe()).append(" can manage it.  Probably.  ").toString());
+                        else
+                        if(x.confidence > 33)
+                            say(t, (new StringBuilder("The only thing keeping ")).append(x.mainName).append(" going is pure spite.  I still like ").append(x.himHer()).append(", though.  ").toString());
+                        else
+                            say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" wants to destroy everything and everyone, including ").append(x.himHer()).append("self.  It's hard to cheer ").append(x.himHer()).append(" up.  ").toString());
+                    } else
+                    if(x.hostility < 20)
+                    {
+                        if(x.confidence > 66)
+                            say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" has held onto ").append(x.hisHer()).append(" heroic ideals with a stubbornness I can't help but respect.  ").toString());
+                        else
+                        if(x.confidence > 33)
+                            say(t, (new StringBuilder("Despite becoming one of the Forsaken, ")).append(x.mainName).append(" still retains the mindset of an upstanding member of society.  I find ").append(x.himHer()).append(" refreshing.  ").toString());
+                        else
+                            say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is timid, but I can appreciate ").append(x.hisHer()).append(" adherence to ").append(x.hisHer()).append(" morality even after being subjected to such extreme circumstances.  ").toString());
+                    } else
+                    if(x.hostility < 40)
+                    {
+                        if(x.confidence > 66)
+                            say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is quite strong.  Merciless, even.  I hold a great deal of respect for ").append(x.himHer()).append(".  ").toString());
+                        else
+                        if(x.confidence > 33)
+                            say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is a bit jaded, but that doesn't bother me in the slightest.  ").toString());
+                        else
+                            say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" can come across as cowardly, but I appreciate ").append(x.hisHer()).append(" prudence in recognizing ").append(x.hisHer()).append(" own limitations.  ").toString());
+                    } else
+                    if(x.hostility < 61)
+                    {
+                        if(x.confidence > 66)
+                            say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is the type of person I'd much prefer to have on my side - powerful and utterly ruthless.  ").toString());
+                        else
+                        if(x.confidence > 33)
+                            say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" can come across as needlessly cruel, but ").append(x.heShe()).append("'s simply doing what ").append(x.heShe()).append(" must in order to survive.  ").toString());
+                        else
+                            say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" might not believe me when I say it, but I enjoy spending time around ").append(x.himHer()).append(".  ").toString());
+                    } else
+                    if(x.hostility < 81)
+                    {
+                        if(x.confidence > 66)
+                            say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" has developed some severe murderous tendencies, but I don't see this as being an unreasonable reaction to ").append(x.hisHer()).append(" circumstances.  ").toString());
+                        else
+                        if(x.confidence > 33)
+                            say(t, (new StringBuilder("Consumed by hatred as ")).append(x.heShe()).append(" is, I find ").append(x.mainName).append("'s perspective interesting, and I enjoy talking with ").append(x.himHer()).append(".  ").toString());
+                        else
+                            say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" hates all of humanity, and ").append(x.heShe()).append(" includes ").append(x.himHer()).append("self in that category, but I believe that ").append(x.heShe()).append(" doesn't give ").append(x.himHer()).append("self enough credit.  ").toString());
+                    } else
+                    if(x.confidence > 66)
+                        say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is determined to destroy the world, and I must admit that I sometimes feel compelled to help ").append(x.himHer()).append(".  ").toString());
+                    else
+                    if(x.confidence > 33)
+                        say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is so bent on the destruction of humanity that I suspect ").append(x.heShe()).append("'d be willing to destroy me as well, but I don't hold it against ").append(x.himHer()).append(".  ").toString());
+                    else
+                        say(t, (new StringBuilder("I believe that the only thing keeping ")).append(x.mainName).append(" from trying to kill ").append(x.himHer()).append("self is a stubborn desire to see the rest of the species die first.  I don't look down on ").append(x.himHer()).append(" at all.  ").toString());
+                    if(history.booleanValue())
+                    {
+                        if(otherKilledPartner.booleanValue())
+                        {
+                            if(opinionOfDead >= 0)
+                            {
+                                if(otherOpinionOfDead >= 0)
+                                {
+                                    if(x.opinion(this) > 100)
+                                    {
+                                        if(x.morality > 66)
+                                            say(t, (new StringBuilder("I know that ")).append(x.heShe()).append(" didn't want to kill ").append(x.kills[0].mainName).append(".  ").append(x.HeShe()).append("'s not the sort of person who does that sort of thing unless there was no choice.  ").toString());
+                                        else
+                                        if(x.morality > 33)
+                                            say(t, (new StringBuilder("I never thought I'd be friends with ")).append(x.kills[0].mainName).append("'s killer...  Still, I can't blame ").append(x.mainName).append(" for doing what ").append(x.heShe()).append(" thought ").append(x.heShe()).append(" had to do.  ").toString());
+                                        else
+                                            say(t, (new StringBuilder("I feel guilty about not being able to stop ")).append(x.himHer()).append(" from having to kill ").append(x.kills[0].mainName).append(".  It would have been nice if we all could have survived together...  ").toString());
+                                    } else
+                                    if(x.morality > 66)
+                                        say(t, (new StringBuilder("We used to be a lot closer, before ")).append(x.heShe()).append(" killed ").append(x.kills[0].mainName).append(".  ").toString());
+                                    else
+                                    if(x.morality > 33)
+                                        say(t, (new StringBuilder("I think ")).append(x.heShe()).append(" just hates being around me because it reminds ").append(x.himHer()).append(" of what ").append(x.heShe()).append(" did to ").append(x.kills[0].mainName).append(".  ").toString());
+                                    else
+                                        say(t, (new StringBuilder("I know that ")).append(x.heShe()).append(" still blames me for not being able to stop ").append(x.himHer()).append(" from killing ").append(x.kills[0].mainName).append("...  Hopefully ").append(x.heShe()).append("'ll let it go eventually.  ").toString());
+                                } else
+                                if(x.opinion(this) > 100)
+                                {
+                                    if(x.morality > 66)
+                                        say(t, (new StringBuilder("Now that ")).append(x.kills[0].mainName).append("'s gone, ").append(x.heShe()).append("'s the one who's closest to me.  ").toString());
+                                    else
+                                    if(x.morality > 33)
+                                        say(t, (new StringBuilder("We need to stick together, even if ")).append(x.heShe()).append(" is the one who killed ").append(x.kills[0].mainName).append(".  ").toString());
+                                    else
+                                        say(t, (new StringBuilder("Sometimes I think ")).append(x.heShe()).append(" killed ").append(x.kills[0].mainName).append(" just to get closer to me...  but no, that's ridiculous.  ").toString());
+                                } else
+                                if(x.morality > 66)
+                                    say(t, (new StringBuilder("I think ")).append(x.heShe()).append("'s uncomfortable around me because ").append(x.heShe()).append(" still feels guilty about how ").append(x.heShe()).append(" didn't really have a good reason for killing ").append(x.kills[0].mainName).append("...  Anyway, I don't live in the past.  ").toString());
+                                else
+                                if(x.morality > 33)
+                                    say(t, (new StringBuilder("It seems like ")).append(x.heShe()).append(" thinks we have to be enemies because ").append(x.heShe()).append(" killed ").append(x.kills[0].mainName).append(", who I cared about a lot...  That's all in the past, though.  ").toString());
+                                else
+                                    say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("... definitely enjoyed killing ").append(x.kills[0].mainName).append(".  Still, I forgive ").append(x.himHer()).append(", so I wish ").append(x.heShe()).append(" wouldn't be so hostile!  ").toString());
+                            } else
+                            if(otherOpinionOfDead >= 0)
+                            {
+                                if(x.opinion(this) >= 0)
+                                {
+                                    if(x.morality > 66)
+                                        say(t, (new StringBuilder("Killing ")).append(x.kills[0].mainName).append(" really messed ").append(x.himHer()).append(" up inside... and drove ").append(x.himHer()).append(" into my arms, heh.  ").toString());
+                                    else
+                                    if(x.morality > 33)
+                                        say(t, (new StringBuilder("We get along better ever since ")).append(x.heShe()).append(" killed ").append(x.kills[0].mainName).append(", and now ").append(x.heShe()).append(" spends all ").append(x.hisHer()).append(" time with me.  ").toString());
+                                    else
+                                        say(t, (new StringBuilder("It may seem harsh, but I think that being forced to kill ")).append(x.kills[0].mainName).append(" is the best thing that could have happened to ").append(x.himHer()).append(".  We're closer now.  ").toString());
+                                } else
+                                if(x.morality > 66)
+                                    say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" seems really offended that I'm not more sad about what happened to ").append(x.kills[0].mainName).append(".  Guilty conscience, I guess.  ").toString());
+                                else
+                                if(x.morality > 33)
+                                    say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s still obsessed with ").append(x.kills[0].mainName).append(", though, and doesn't have any time for me.  It must be the guilt.  ").toString());
+                                else
+                                    say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" thinks I set ").append(x.himHer()).append(" up to kill ").append(x.kills[0].mainName).append(", though, and ").append(x.heShe()).append(" hates me for it.  ").toString());
+                            } else
+                            if(x.opinion(this) >= 0)
+                            {
+                                if(x.morality > 66)
+                                    say(t, (new StringBuilder("I'm really happy ")).append(x.heShe()).append(" finally worked up the nerve to kill ").append(x.kills[0].mainName).append(", so it can just be the two of us together.  ").toString());
+                                else
+                                if(x.morality > 33)
+                                    say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" still feels a little bit guilty about killing ").append(x.kills[0].mainName).append(".  Fortunately, I never have any trouble cheering ").append(x.himHer()).append(" up.  ").toString());
+                                else
+                                    say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" probably enjoyed killing ").append(x.kills[0].mainName).append(" too much... not that I can complain, since it means the two of us can be together with no distractions.  ").toString());
+                            } else
+                            if(x.morality > 66)
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" always gets offended when I try to congratulate ").append(x.himHer()).append(" on getting rid of ").append(x.kills[0].mainName).append(" for us, though.  I guess we aren't exactly close anymore.  ").toString());
+                            else
+                            if(x.morality > 33)
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" doesn't like spending time around me, though.  Maybe being around an old teammate reminds ").append(x.himHer()).append(" about how ").append(x.heShe()).append(" killed ").append(x.kills[0].mainName).append("...  or about how much ").append(x.heShe()).append(" clearly enjoyed it.  ").toString());
+                            else
+                                say(t, (new StringBuilder("I don't think ")).append(x.heShe()).append(" really means it when ").append(x.heShe()).append(" says ").append(x.heShe()).append(" wishes ").append(x.heShe()).append(" killed me along with ").append(x.kills[0].mainName).append(".  ").toString());
+                        } else
+                        if(killedPartner.booleanValue())
+                        {
+                            if(opinionOfDead >= 0)
+                            {
+                                if(otherOpinionOfDead >= 0)
+                                {
+                                    if(x.opinion(this) > 100)
+                                    {
+                                        if(x.morality > 66)
+                                            say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" doesn't blame me for killing ").append(kills[0].mainName).append(".  ").append(x.HeShe()).append(" says that ").append(x.heShe()).append(" knows it hurts me more than it hurts ").append(x.himHer()).append(".  ").toString());
+                                        else
+                                        if(x.morality > 33)
+                                            say(t, (new StringBuilder("It's really surprising that ")).append(x.heShe()).append(" doesn't hate me after... what I did to ").append(kills[0].mainName).append(".  ").toString());
+                                        else
+                                            say(t, (new StringBuilder("I know ")).append(x.heShe()).append(" never forgave me for killing ").append(kills[0].mainName).append("...  Still, we've stayed close.  ").toString());
+                                    } else
+                                    if(x.morality > 66)
+                                        say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" says ").append(x.heShe()).append(" forgives me for killing ").append(kills[0].mainName).append("... which I'm pretty sure is a lie.  ").toString());
+                                    else
+                                    if(x.morality > 33)
+                                        say(t, (new StringBuilder("Of course, we're not friends.  How could we be, after I killed ")).append(kills[0].mainName).append("?  ").toString());
+                                    else
+                                        say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" hates me for killing ").append(kills[0].mainName).append(", though...  I can't really blame ").append(x.himHer()).append(".  ").toString());
+                                } else
+                                if(x.opinion(this) > 100)
+                                {
+                                    if(x.morality > 66)
+                                        say(t, (new StringBuilder("It's a little annoying how quick ")).append(x.heShe()).append(" was to 'forgive' me for killing ").append(kills[0].mainName).append("... not that that really matters.  ").toString());
+                                    else
+                                    if(x.morality > 33)
+                                        say(t, (new StringBuilder("As much as I miss ")).append(kills[0].mainName).append(", at least ").append(x.mainName).append(" was there to comfort me.  ").toString());
+                                    else
+                                        say(t, (new StringBuilder("I have to admit that I'm a little uncomfortable about how little ")).append(x.heShe()).append(" respects ").append(kills[0].mainName).append("'s memory, though...  Still, I won't let that come between us.  ").toString());
+                                } else
+                                if(x.morality > 66)
+                                    say(t, (new StringBuilder("Maybe I'm just lonely after killing ")).append(kills[0].mainName).append(".  If only ").append(x.mainName).append(" wanted anything to do with me...  ").toString());
+                                else
+                                if(x.morality > 33)
+                                    say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" doesn't want anything to do with me, though.  I know ").append(x.heShe()).append(" hated ").append(kills[0].mainName).append(", so it's not like ").append(x.heShe()).append(" hates me for killing ").append(kills[0].himHer()).append(".  ").toString());
+                                else
+                                    say(t, (new StringBuilder("I think the only major thing standing between us is that ")).append(x.heShe()).append("'s angry at me for killing ").append(kills[0].mainName).append(" before ").append(x.heShe()).append(" could do it first.  ").toString());
+                            } else
+                            if(otherOpinionOfDead >= 0)
+                            {
+                                if(x.opinion(this) >= 0)
+                                {
+                                    if(x.morality > 66)
+                                        say(t, (new StringBuilder("I'm glad I killed ")).append(kills[0].mainName).append(" so that there wouldn't be anything to come between the two of us.  ").toString());
+                                    else
+                                    if(x.morality > 33)
+                                        say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" forgave me for killing ").append(kills[0].mainName).append(", fortunately.  ").toString());
+                                    else
+                                        say(t, (new StringBuilder("By the way, I definitely didn't kill ")).append(kills[0].mainName).append(" just to get closer to ").append(x.himHer()).append(", alright?  ").toString());
+                                } else
+                                if(x.morality > 66)
+                                    say(t, (new StringBuilder("I was really hoping that we'd be able to get closer without ")).append(kills[0].mainName).append(" in the way...  ").toString());
+                                else
+                                if(x.morality > 33)
+                                    say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" still hasn't forgiven me for killing ").append(kills[0].mainName).append(", though.  ").toString());
+                                else
+                                    say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(", on the other hand, has sworn to kill me in order to avenge ").append(kills[0].mainName).append("... which is really sad.  Well, anyway...  ").toString());
+                            } else
+                            if(x.opinion(this) >= 0)
+                            {
+                                if(x.morality > 66)
+                                    say(t, (new StringBuilder("I think ")).append(x.heShe()).append("'s secretly grateful that I killed ").append(kills[0].mainName).append(" so that ").append(x.heShe()).append(" wouldn't have to.  ").toString());
+                                else
+                                if(x.morality > 33)
+                                    say(t, (new StringBuilder("We're both a lot happier without ")).append(kills[0].mainName).append(" around.  ").toString());
+                                else
+                                    say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s always thanking me for killing ").append(kills[0].mainName).append("... which makes me a little uncomfortable, not that I liked ").append(kills[0].himHer()).append(" much either.  ").toString());
+                            } else
+                            if(x.morality > 66)
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" thinks I should be more sorry about killing ").append(kills[0].mainName).append(", though.  Which is ridiculous, since ").append(x.heShe()).append(" hated ").append(kills[0].himHer()).append(", too.  ").toString());
+                            else
+                            if(x.morality > 33)
+                                say(t, (new StringBuilder("Even without ")).append(kills[0].mainName).append(" in the way, our relationship still hasn't gotten much better, though.  ").toString());
+                            else
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" doesn't like me, though, and ").append(x.heShe()).append(" says I should have let ").append(x.himHer()).append(" be the one to kill ").append(kills[0].mainName).append(".  ").toString());
+                        } else
+                        if(formerRelationship >= 0)
+                        {
+                            if(x.opinion(this) > 100)
+                            {
+                                if(confidence > 66)
+                                {
+                                    if(x.morality > 66)
+                                        say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s still my minion, same as ever.  ").toString());
+                                    else
+                                    if(x.morality > 33)
+                                        say(t, (new StringBuilder("Even though we were defeated together, ")).append(x.heShe()).append(" still looks up to me.  ").toString());
+                                    else
+                                        say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" still relies on me to protect ").append(x.himHer()).append(", just like when we were still Chosen.  ").toString());
+                                } else
+                                if(confidence > 33)
+                                {
+                                    if(x.morality > 66)
+                                        say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s always been kinder to me than to anyone else, though...  ").toString());
+                                    else
+                                    if(x.morality > 33)
+                                        say(t, "We've always been close.  ");
+                                    else
+                                        say(t, (new StringBuilder("I think ")).append(x.heShe()).append(" gets jealous when I spend time with the Forsaken from other teams.  ").toString());
+                                } else
+                                if(x.morality > 66)
+                                    say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" still protects me, even now...  ").toString());
+                                else
+                                if(x.morality > 33)
+                                    say(t, (new StringBuilder("I-I'm so happy ")).append(x.heShe()).append(" doesn't blame me for being too weak to help ").append(x.himHer()).append(" beat you...  ").toString());
+                                else
+                                    say(t, (new StringBuilder("Even now that I serve you, I still... b-belong to ")).append(x.himHer()).append("...  ").toString());
+                            } else
+                            if(confidence > 66)
+                            {
+                                if(x.morality > 66)
+                                    say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s defying me for now...  Don't worry, ").append(x.heShe()).append("'ll be mine again soon.  ").toString());
+                                else
+                                if(x.morality > 33)
+                                    say(t, (new StringBuilder("Ever since we were defeated together, ")).append(x.heShe()).append(" doesn't look up to me so much.  ").toString());
+                                else
+                                    say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("... blames me for being unable to protect ").append(x.himHer()).append(".  Maybe I deserve it.  ").toString());
+                            } else
+                            if(confidence > 33)
+                            {
+                                if(x.morality > 66)
+                                    say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" gives me the cold shoulder nowadays, though.  ").toString());
+                                else
+                                if(x.morality > 33)
+                                    say(t, "We used to be so close...  ");
+                                else
+                                    say(t, (new StringBuilder("Now ")).append(x.heShe()).append(" feels the same way about me as ").append(x.heShe()).append(" does about everyone else.  ").toString());
+                            } else
+                            if(x.morality > 66)
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" doesn't seem interested in protecting me anymore, though...  ").toString());
+                            else
+                            if(x.morality > 33)
+                                say(t, (new StringBuilder("A-Although...  ever since I failed to help ")).append(x.himHer()).append(" beat you... I think ").append(x.heShe()).append(" doesn't have the patience to put up with me anymore...  ").toString());
+                            else
+                                say(t, (new StringBuilder("I used to belong to ")).append(x.himHer()).append(", b-but now ").append(x.heShe()).append(" says... th-that I'm not worthy to be with ").append(x.himHer()).append("...  S-Still!  ").toString());
+                        } else
+                        if(x.opinion(this) > 100)
+                        {
+                            if(confidence > 66)
+                            {
+                                if(x.morality > 66)
+                                    say(t, (new StringBuilder("Ever since you broke ")).append(x.hisHer()).append(" will, ").append(x.heShe()).append("'s been much more content to follow my orders, too.  ").toString());
+                                else
+                                if(x.morality > 33)
+                                    say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" started being much nicer to me after we lost our fight against you.  I think ").append(x.heShe()).append(" was guilty about not being able to do more to help.  ").toString());
+                                else
+                                    say(t, (new StringBuilder("Ever since we were both defeated, ")).append(x.heShe()).append(" doesn't seem to resent me nearly as much.  ").toString());
+                            } else
+                            if(confidence > 33)
+                            {
+                                if(x.morality > 66)
+                                    say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" became a lot less self-righteous after you captured us.  ").toString());
+                                else
+                                if(x.morality > 33)
+                                    say(t, "We get along much better than we used to.  ");
+                                else
+                                    say(t, (new StringBuilder("Being beaten by you helped me understand ")).append(x.himHer()).append(" better, and now we actually get along.  ").toString());
+                            } else
+                            if(x.morality > 66)
+                                say(t, (new StringBuilder("I'm letting ")).append(x.himHer()).append(" protect me now, a-and... it's actually not so bad...  ").toString());
+                            else
+                            if(x.morality > 33)
+                                say(t, (new StringBuilder("I think that... after getting beaten by you... ")).append(x.heShe()).append(" realized that ").append(x.heShe()).append("'s actually not that much stronger than me...  ").toString());
+                            else
+                                say(t, (new StringBuilder("A-As long as I do whatever ")).append(x.heShe()).append(" tells me to, ").append(x.heShe()).append("'s willing to protect me now...  ").toString());
+                        } else
+                        if(confidence > 66)
+                        {
+                            if(x.morality > 66)
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" still resists my will, of course.  ").append(x.HeShe()).append("'ll give ").append(x.himHer()).append("self to me eventually.  I can wait.  ").toString());
+                            else
+                            if(x.morality > 33)
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" won't be able to hold onto ").append(x.hisHer()).append(" old hatred of me for much longer.  ").toString());
+                            else
+                                say(t, (new StringBuilder("It really doesn't bother me if ")).append(x.heShe()).append(" still hates me.  ").toString());
+                        } else
+                        if(confidence > 33)
+                        {
+                            if(x.morality > 66)
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s the forgiving type, so I'm sure we'll be able to put our grudges behind us soon.  ").toString());
+                            else
+                            if(x.morality > 33)
+                                say(t, (new StringBuilder("If only ")).append(x.heShe()).append(" liked me back...  ").toString());
+                            else
+                                say(t, (new StringBuilder("It was partly my fault that we never got along, so I don't blame ")).append(x.himHer()).append(" for still being angry at me.  ").toString());
+                        } else
+                        if(x.morality > 66)
+                            say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" still thinks of me as trash, of course...  A-And it's not like ").append(x.heShe()).append("'s wrong...  ").toString());
+                        else
+                        if(x.morality > 33)
+                            say(t, (new StringBuilder("I k-keep begging ")).append(x.himHer()).append(" to forgive me for being ungrateful to ").append(x.himHer()).append(" in the past...  ").toString());
+                        else
+                            say(t, (new StringBuilder("I-I don't really deserve to be liked, so it doesn't bother me that ")).append(x.heShe()).append(" still hates me... really...  ").toString());
+                    } else
+                    if(x.opinion(this) > 100)
+                    {
+                        if(confidence > 66)
+                        {
+                            if(x.morality > 66)
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s a good minion.  ").toString());
+                            else
+                            if(x.morality > 33)
+                                say(t, (new StringBuilder("I think ")).append(x.heShe()).append(" looks up to me.  ").toString());
+                            else
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" relies on me to protect ").append(x.himHer()).append(".  ").toString());
+                        } else
+                        if(confidence > 33)
+                        {
+                            if(x.morality > 66)
+                                say(t, (new StringBuilder("I think ")).append(x.heShe()).append("'s a naturally friendly person, deep down inside.  ").toString());
+                            else
+                            if(x.morality > 33)
+                                say(t, "We've gotten pretty close.  ");
+                            else
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" always gets jealous when I spend time with anyone else.  ").toString());
+                        } else
+                        if(x.morality > 66)
+                            say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" goes out of ").append(x.hisHer()).append(" way to protect me.  ").toString());
+                        else
+                        if(x.morality > 33)
+                            say(t, (new StringBuilder("I-I'm really grateful that ")).append(x.heShe()).append(" doesn't look down on me for being so much weaker than ").append(x.himHer()).append("...  ").toString());
+                        else
+                            say(t, (new StringBuilder("U-Um, I know I belong to you, but... ")).append(x.heShe()).append(" also makes sure I understand that I should spend all my free time serving ").append(x.himHer()).append(".  ").toString());
+                    } else
+                    if(confidence > 66)
+                    {
+                        if(x.morality > 66)
+                            say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s defying me for now...  Don't worry, ").append(x.heShe()).append("'ll figure out that ").append(x.heShe()).append(" should be mine soon enough.  ").toString());
+                        else
+                        if(x.morality > 33)
+                            say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" calls me arrogant, though.  ").toString());
+                        else
+                            say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("... says that I'm useless if I can't protect ").append(x.himHer()).append(".  ").append(x.HeShe()).append(" could at least let me try.  ").toString());
+                    } else
+                    if(confidence > 33)
+                    {
+                        if(x.morality > 66)
+                            say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" isn't interested in spending time around me, though.  ").toString());
+                        else
+                        if(x.morality > 33)
+                            say(t, (new StringBuilder("I wish ")).append(x.heShe()).append("'d let me get closer to ").append(x.himHer()).append(".  ").toString());
+                        else
+                            say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" doesn't trust anyone, even me.  ").toString());
+                    } else
+                    if(x.morality > 66)
+                        say(t, (new StringBuilder("I've been trying to convince ")).append(x.himHer()).append(" to protect me...  No luck yet.  ").toString());
+                    else
+                    if(x.morality > 33)
+                        say(t, (new StringBuilder("A-Although... ")).append(x.heShe()).append(" says I'm not worth ").append(x.hisHer()).append(" time.  ").toString());
+                    else
+                        say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" always just insults me whenever I try to talk to ").append(x.himHer()).append("...  S-Still!  ").toString());
+                    if(x.deviancy - deviancy <= 5)
+                    {
+                        if(deviancy < 20)
+                        {
+                            if(x.innocence > 66)
+                                say(t, "It's nice to have someone else who agrees with me that all the weird sexual stuff Demons do is just completely gross.  ");
+                            else
+                            if(x.innocence > 33)
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" hasn't let the Demons turn ").append(x.himHer()).append(" into a pervert, which is apparently really rare!  ").toString());
+                            else
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" doesn't let any of the weird sexual stuff get to ").append(x.himHer()).append(", and always just stays calm and smart as always.  ").toString());
+                        } else
+                        if(deviancy < 40)
+                        {
+                            if(x.innocence > 66)
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s done decently well in coping with all the deviant stuff ").append(x.heShe()).append(" never could have imagined back before ").append(x.heShe()).append(" became one of the Chosen.  ").toString());
+                            else
+                            if(x.innocence > 33)
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" has managed to stay mostly sane even with all the things that have been done to ").append(x.himHer()).append(".  ").toString());
+                            else
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s very smart, even when it comes to all the sexual stuff we end up having to do.  ").toString());
+                        } else
+                        if(deviancy < 61)
+                        {
+                            if(x.innocence > 66)
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" is clueless when it comes to our 'carnal duties', but that's alright, since I like helping ").append(x.himHer()).append(" out.  ").toString());
+                            else
+                            if(x.innocence > 33)
+                                say(t, (new StringBuilder("Sometimes I worry about making ")).append(x.himHer()).append(" uncomfortable with my perversions... but ").append(x.heShe()).append(" should understand that I have my needs, too!  ").toString());
+                            else
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" can be a bit stiff about the sexual stuff we have to do, but that just makes it more satisfying to show ").append(x.himHer()).append(" the ropes on one of the subjects I know more about.  ").toString());
+                        } else
+                        if(deviancy < 81)
+                        {
+                            if(x.innocence > 66)
+                                say(t, (new StringBuilder("It's really adorable, the way ")).append(x.heShe()).append(" has no idea what to do when we end up in really deviant situations.  ").toString());
+                            else
+                            if(x.innocence > 33)
+                            {
+                                say(t, (new StringBuilder("I wonder what ")).append(x.heShe()).append("'d say if ").append(x.heShe()).append(" knew about all the naughty stuff I want to do to ").append(x.himHer()).append(" someday...  ").toString());
+                            } else
+                            {
+                                say(t, "I always dream of melting that firm, rational mind of ");
+                                if(x.gender.equals(Gender.MALE))
+                                    w.append(t, "his");
+                                else
+                                    w.append(t, "hers");
+                                w.append(t, " in a sea of pleasure...  ");
+                            }
+                        } else
+                        if(x.innocence > 66)
+                            say(t, (new StringBuilder("I live for those moments when I can trick ")).append(x.himHer()).append(" into helping me get off in ways ").append(x.heShe()).append(" can't even understand...  ").toString());
+                        else
+                        if(x.innocence > 33)
+                            say(t, (new StringBuilder("I pretty much can't stop myself from masturbating when ")).append(x.heShe()).append("'s around.  ").toString());
+                        else
+                            say(t, (new StringBuilder("I know ")).append(x.heShe()).append("'s uncomfortable with how much I lust after ").append(x.himHer()).append(", but that just turns me on even more...  ").toString());
+                    } else
+                    if(deviancy < 20)
+                    {
+                        if(x.innocence > 66)
+                        {
+                            say(t, "I have to admit that it bothers me to see such an innocent ");
+                            if(x.gender.equals(Gender.MALE))
+                                say(t, "boy");
+                            else
+                                say(t, "girl");
+                            w.append(t, (new StringBuilder(" being so sexually forward, but I know it's not ")).append(x.hisHer()).append(" fault.  ").toString());
+                        } else
+                        if(x.innocence > 33)
+                            say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s a bit too interested in sex, but considering what ").append(x.heShe()).append("'s been through, I can't blame ").append(x.himHer()).append(".  ").toString());
+                        else
+                            say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" can be a bit... perverted, sometimes, but maybe I'm just too sensitive to that sort of thing.  ").toString());
+                    } else
+                    if(deviancy < 40)
+                    {
+                        if(x.innocence > 66)
+                            say(t, (new StringBuilder("I suppose it's a bit strange that ")).append(x.heShe()).append(" doesn't see anything wrong with being completely open about how much sex ").append(x.heShe()).append(" wants to have.  ").toString());
+                        else
+                        if(x.innocence > 33)
+                            say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s always doing sexual stuff with different people, but I guess ").append(x.hisHer()).append(" constant lust leaves ").append(x.himHer()).append(" no choice.  ").toString());
+                        else
+                            say(t, (new StringBuilder("I do get a little... uncomfortable when ")).append(x.heShe()).append(" talks about ").append(x.hisHer()).append(" sexual fetishes.  Some of them are so weird.  ").toString());
+                    } else
+                    if(deviancy < 61)
+                    {
+                        if(x.innocence > 66)
+                            say(t, (new StringBuilder("It does disturb me when ")).append(x.heShe()).append(" talks about all the messed up things ").append(x.heShe()).append(" wants to do to other people, as if those kinds of desires are completely normal.  ").toString());
+                        else
+                        if(x.innocence > 33)
+                            say(t, (new StringBuilder("I've heard rumors about what ")).append(x.heShe()).append(" does with some of ").append(x.hisHer()).append(" sexual partners, but I'm pretty sure they're exaggerations.  They have to be.  ").toString());
+                        else
+                            say(t, (new StringBuilder("I've learned not to talk to ")).append(x.himHer()).append(" about ").append(x.hisHer()).append(" sexual fetishes.  It always made me feel a bit sick, so I just don't do it anymore.  ").toString());
+                    } else
+                    if(deviancy < 81)
+                    {
+                        if(x.innocence > 66)
+                            say(t, (new StringBuilder("I wish ")).append(x.heShe()).append("'d stop masturbating all the time, but whenever I point it out to ").append(x.himHer()).append(", ").append(x.heShe()).append("'s always surprised, like ").append(x.heShe()).append(" was doing it without thinking.  ").toString());
+                        else
+                        if(x.innocence > 33)
+                            say(t, (new StringBuilder("In any case, ")).append(x.heShe()).append("'s completely obsessed with sex, so talking to ").append(x.himHer()).append(" about anything else can be difficult.  ").toString());
+                        else
+                            say(t, (new StringBuilder("It can be a little bit difficult to talk to ")).append(x.himHer()).append(", since ").append(x.hisHer()).append(" mind is always focused on seeking out ").append(x.hisHer()).append(" next orgasm.  ").toString());
+                    } else
+                    if(x.innocence > 66)
+                        say(t, (new StringBuilder("It's hard to imagine, but I think ")).append(x.heShe()).append(" might be an even bigger pervert than me.  ").toString());
+                    else
+                    if(x.innocence > 33)
+                        say(t, "We do agree that sex is the most important thing about being alive.  ");
+                    else
+                        say(t, (new StringBuilder(String.valueOf(x.HisHer()))).append(" sexual techniques are amazing.  I have to admire them.  ").toString());
+                    if(obedience - x.obedience <= 5)
+                    {
+                        if(obedience < 20)
+                        {
+                            if(x.confidence > 66)
+                                say(t, "I'll never forgive you for what you did to such a strong, beautiful person.  ");
+                            else
+                            if(x.confidence > 33)
+                                say(t, (new StringBuilder("If I can find a way to defeat you, I know ")).append(x.heShe()).append("'ll come to ").append(x.hisHer()).append(" senses and help me do it.  ").toString());
+                            else
+                                say(t, (new StringBuilder("More importantly, even if ")).append(x.heShe()).append(" doesn't have the willpower to resist you, I can resist on ").append(x.hisHer()).append(" behalf.  ").toString());
+                        } else
+                        if(obedience < 40)
+                        {
+                            if(x.confidence > 66)
+                                say(t, (new StringBuilder("The thing that bothers me most is seeing such a strong-willed person forced to humiliate ")).append(x.himHer()).append("self for you.  ").toString());
+                            else
+                            if(x.confidence > 33)
+                                say(t, (new StringBuilder("You should really go easier on ")).append(x.himHer()).append(".  ").append(x.HeShe()).append(" doesn't this.  ").toString());
+                            else
+                                say(t, (new StringBuilder("I just wish ")).append(x.heShe()).append(" were able to put up a little more resistance.  ").toString());
+                        } else
+                        if(obedience < 61)
+                        {
+                            if(x.confidence > 66)
+                                say(t, (new StringBuilder("The fact that you were able to break someone like ")).append(x.himHer()).append(" makes me feel less bad about being unable to resist.  ").toString());
+                            else
+                            if(x.confidence > 33)
+                                say(t, (new StringBuilder("We're both going through the same stuff, and that helps me feel closer to ")).append(x.himHer()).append(".  ").toString());
+                            else
+                                say(t, (new StringBuilder("I sort of envy the way that ")).append(x.heShe()).append("'s able to handle doing anything for you, no matter how demeaning.  ").toString());
+                        } else
+                        if(obedience < 81)
+                        {
+                            if(x.confidence > 66)
+                                say(t, (new StringBuilder("I really admire ")).append(x.hisHer()).append(" devotion to you.  ").append(x.HeShe()).append("'s amazing...  ").toString());
+                            else
+                            if(x.confidence > 33)
+                                say(t, "I'm really happy that we're able to serve you together.  ");
+                            else
+                                say(t, (new StringBuilder("If ")).append(x.heShe()).append(" were actually a weak person, though, ").append(x.heShe()).append(" wouldn't be able to devote ").append(x.himHer()).append("self so much to serving you.  ").toString());
+                        } else
+                        if(x.confidence > 66)
+                            say(t, (new StringBuilder("I'm glad that if I ever come up short in serving you, ")).append(x.heShe()).append("'ll be quick to strike me down.  ").toString());
+                        else
+                        if(x.confidence > 33)
+                            say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s a great servant.  I'm ashamed to admit it, but ").append(x.heShe()).append(" might even be a better servant than I am...  ").toString());
+                        else
+                            say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" seems so happy to finally be able to surrender ").append(x.hisHer()).append(" will completely to a master like you.  ").toString());
+                    } else
+                    if(obedience < 20)
+                    {
+                        if(x.confidence > 66)
+                            say(t, (new StringBuilder("Seeing ")).append(x.himHer()).append(" resist you gives me the strength to do the same.  ").toString());
+                        else
+                        if(x.confidence > 33)
+                            say(t, "In any case, we're united in our resistance against you.  ");
+                        else
+                            say(t, (new StringBuilder("Still, I think that ")).append(x.heShe()).append(" hasn't completely given up on resisting you, and I'm definitely not giving up before ").append(x.himHer()).append(".  ").toString());
+                    } else
+                    if(obedience < 40)
+                    {
+                        if(x.confidence > 66)
+                            say(t, (new StringBuilder("My only complaint is really shameful...  I'm envious of the way ")).append(x.heShe()).append("'s able to keep resisting you so bravely.  ").toString());
+                        else
+                        if(x.confidence > 33)
+                            say(t, (new StringBuilder("The closest thing to a real complaint I have about ")).append(x.himHer()).append(" is that the way ").append(x.heShe()).append(" resists you makes me look bad.  ").toString());
+                        else
+                            say(t, (new StringBuilder("I guess I'm just... a little bit annoyed that ")).append(x.heShe()).append(" of all people has managed to keep resisting you when I've failed.  ").toString());
+                    } else
+                    if(obedience < 61)
+                    {
+                        if(x.confidence > 66)
+                            say(t, (new StringBuilder("I just wish ")).append(x.heShe()).append("'d stop fighting you so much.  ").append(x.HeShe()).append("'s going to get us all punished...  ").toString());
+                        else
+                        if(x.confidence > 33)
+                            say(t, (new StringBuilder("The only real issue I have with ")).append(x.himHer()).append(" is that it's annoying to see ").append(x.himHer()).append(" keep fighting the inevitable.  ").toString());
+                        else
+                            say(t, (new StringBuilder("I do have a weird feeling about the fact that you haven't broken ")).append(x.himHer()).append(" as hard as me yet...  Is that on purpose?  ").toString());
+                    } else
+                    if(obedience < 81)
+                    {
+                        if(x.confidence > 66)
+                            say(t, (new StringBuilder("My only worry is that... if ")).append(x.heShe()).append(" doesn't completely give up on resisting you, it won't turn out well for ").append(x.himHer()).append(".  ").toString());
+                        else
+                        if(x.confidence > 33)
+                            say(t, (new StringBuilder("I just wish ")).append(x.heShe()).append(" were more devoted to you.  ").toString());
+                        else
+                            say(t, (new StringBuilder("If I had to come up with a serious complaint... it'd be that ")).append(x.heShe()).append("'s afraid of completely giving ").append(x.himHer()).append("self to you.  ").toString());
+                    } else
+                    if(x.confidence > 66)
+                        say(t, (new StringBuilder("I have to admit that it's a bit funny to see ")).append(x.himHer()).append(" pretend that ").append(x.hisHer()).append(" desires matter at all next to your greatness.  ").toString());
+                    else
+                    if(x.confidence > 33)
+                        say(t, "Of course, my devotion to you is still greater than anything I could possibly feel about anyone else.  But as long as we're talking about mere humans...  ");
+                    else
+                        say(t, (new StringBuilder("Oh, and this should go without saying, but if you decide to get rid of ")).append(x.himHer()).append(", I'll still happily do it for you.  But otherwise...  ").toString());
+                    if(others != null)
+                    {
+                        for(int j = 0; j < others.length; j++)
+                            if(others[j].equals(x) && troublemaker[j] > 20)
+                                if(troublemaker[j] < 70)
+                                {
+                                    if(morality > 66)
+                                    {
+                                        if(x.dignity > 66)
+                                            say(t, (new StringBuilder("I think ")).append(x.heShe()).append("'s actually sorry about hurting the rest of us in the past.  ").toString());
+                                        else
+                                        if(x.dignity > 33)
+                                            say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" seems a lot happier, lately.  ").toString());
+                                        else
+                                            say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" doesn't seem like ").append(x.heShe()).append(" wants to cause trouble for the rest of us anymore.  ").toString());
+                                    } else
+                                    if(morality > 33)
+                                    {
+                                        if(x.dignity > 66)
+                                            say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" says ").append(x.heShe()).append("'ll stop causing trouble for the other Forsaken, too.  ").toString());
+                                        else
+                                        if(x.dignity > 33)
+                                            say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s stopped causing trouble for the rest of us so often.  ").toString());
+                                        else
+                                            say(t, (new StringBuilder("I'm glad ")).append(x.heShe()).append(" hasn't been lashing out randomly as often.  ").toString());
+                                    } else
+                                    if(x.dignity > 66)
+                                        say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s promised to stop attacking the other Forsaken, so you shouldn't have any problem with ").append(x.himHer()).append(", right?  ").toString());
+                                    else
+                                    if(x.dignity > 33)
+                                        say(t, (new StringBuilder(String.valueOf(x.HisHer()))).append(" acting out used to be annoying, but ").append(x.heShe()).append("'s toned it down lately.  ").toString());
+                                    else
+                                        say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" knows it'd be a bad idea to cause trouble again the way ").append(x.heShe()).append(" used to.  ").toString());
+                                } else
+                                if(troublemaker[j] < 200)
+                                {
+                                    if(morality > 66)
+                                    {
+                                        if(x.dignity > 66)
+                                            say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" pretends otherwise, but I'm sure ").append(x.heShe()).append(" knows that ").append(x.heShe()).append(" shouldn't be attacking other Forsaken.  ").toString());
+                                        else
+                                        if(x.dignity > 33)
+                                            say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" doesn't seem to actually enjoy hurting the rest of us.  ").toString());
+                                        else
+                                            say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" isn't actually trying to cause trouble for the other Forsaken.  ").toString());
+                                    } else
+                                    if(morality > 33)
+                                    {
+                                        if(x.dignity > 66)
+                                            say(t, (new StringBuilder("I think ")).append(x.heShe()).append("'s only causing trouble because ").append(x.heShe()).append(" feels like ").append(x.heShe()).append(" needs to put on a tough face.  ").toString());
+                                        else
+                                        if(x.dignity > 33)
+                                            say(t, (new StringBuilder("I'm trying to convince ")).append(x.himHer()).append(" to stop attacking the other Forsaken so much, too.  ").toString());
+                                        else
+                                            say(t, (new StringBuilder(String.valueOf(x.HisHer()))).append(" random outbursts lately aren't that bad.  ").toString());
+                                    } else
+                                    if(x.dignity > 66)
+                                        say(t, (new StringBuilder("Even if ")).append(x.heShe()).append(" cares way too much about looking tough by causing trouble for the rest of us, that's just who ").append(x.heShe()).append(" is.  ").toString());
+                                    else
+                                    if(x.dignity > 33)
+                                        say(t, (new StringBuilder("I know that the trouble ")).append(x.heShe()).append(" causes isn't actually serious enough to affect your plans.  ").toString());
+                                    else
+                                        say(t, (new StringBuilder("The way ")).append(x.heShe()).append(" randomly attacks other Forsaken can be annoying, but you find ").append(x.hisHer()).append(" fierceness useful, right?  ").toString());
+                                } else
+                                if(morality > 66)
+                                {
+                                    if(x.dignity > 66)
+                                        say(t, (new StringBuilder("I'm going to keep trying to convince ")).append(x.himHer()).append(" to tone down the attacks on the other Forsaken.  ").toString());
+                                    else
+                                    if(x.dignity > 33)
+                                        say(t, (new StringBuilder("As long as ")).append(x.heShe()).append(" isn't actually killing the rest of us, I can forgive ").append(x.himHer()).append(" for ").append(x.hisHer()).append(" violent outbursts.  ").toString());
+                                    else
+                                        say(t, (new StringBuilder("I know that the way ")).append(x.heShe()).append(" randomly attacks other Forsaken is bad, and I won't try to defend it.  ").append(x.HeShe()).append("'s just...  ").toString());
+                                } else
+                                if(morality > 33)
+                                {
+                                    if(x.dignity > 66)
+                                        say(t, (new StringBuilder("After ")).append(x.heShe()).append("'s made it clear that ").append(x.heShe()).append(" has the power to hurt the rest of us, I'm sure ").append(x.heShe()).append("'ll tone down the constant attacks.  ").toString());
+                                    else
+                                    if(x.dignity > 33)
+                                        say(t, (new StringBuilder("I have to admit that the way ")).append(x.heShe()).append(" keeps attacking the other Forsaken is annoying, but it doesn't change the rest.  ").toString());
+                                    else
+                                        say(t, (new StringBuilder("I just wish ")).append(x.heShe()).append(" wouldn't randomly attack the rest of us so often...  ").toString());
+                                } else
+                                if(x.dignity > 66)
+                                    say(t, (new StringBuilder("And even if it's annoying in the moment, I have to appreciate the way ")).append(x.heShe()).append(" always gets away with causing trouble for the rest of us.  ").toString());
+                                else
+                                if(x.dignity > 33)
+                                    say(t, (new StringBuilder("And if you really wanted to stop ")).append(x.himHer()).append(" from attacking the rest of us all the time, I'm sure you would've stopped it by now.  ").toString());
+                                else
+                                    say(t, (new StringBuilder(String.valueOf(x.HisHer()))).append(" fierceness, the way ").append(x.heShe()).append("'s always attacking other Forsaken whenever ").append(x.heShe()).append("'s not on a mission, is part of what makes ").append(x.himHer()).append(" valuable to you, right?  ").toString());
+
+                    }
+                    if(opinion(x) < 401)
+                    {
+                        if(confidence > 66)
+                        {
+                            if(x.morality > 66)
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s someone I can trust to stand behind me.").toString());
+                            else
+                            if(x.morality > 33)
+                                say(t, (new StringBuilder("I enjoy ")).append(x.himHer()).append(".").toString());
+                            else
+                                say(t, (new StringBuilder("I want to protect ")).append(x.himHer()).append(".").toString());
+                        } else
+                        if(confidence > 33)
+                        {
+                            if(x.morality > 66)
+                                say(t, (new StringBuilder("I just like ")).append(x.himHer()).append(".").toString());
+                            else
+                            if(x.morality > 33)
+                                say(t, "It would be nice if we could spend more time together.");
+                            else
+                                say(t, (new StringBuilder("I want ")).append(x.himHer()).append(" to be happy.").toString());
+                        } else
+                        if(x.morality > 66)
+                            say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" makes me want to live up to ").append(x.hisHer()).append(" expectations.").toString());
+                        else
+                        if(x.morality > 33)
+                            say(t, (new StringBuilder("I admire ")).append(x.himHer()).append(" a lot.").toString());
+                        else
+                            say(t, (new StringBuilder("I want to be useful to ")).append(x.himHer()).append("...").toString());
+                    } else
+                    if(confidence > 66)
+                    {
+                        if(x.morality > 66)
+                            say(t, (new StringBuilder("I want ")).append(x.himHer()).append(" to look at me and no one else!").toString());
+                        else
+                        if(x.morality > 33)
+                            say(t, (new StringBuilder("It's fair to say that I love ")).append(x.himHer()).append(".").toString());
+                        else
+                            say(t, (new StringBuilder("I want to protect ")).append(x.himHer()).append(" forever!").toString());
+                    } else
+                    if(confidence > 33)
+                    {
+                        if(x.morality > 66)
+                            say(t, (new StringBuilder("I just... love ")).append(x.himHer()).append(" with all my heart.").toString());
+                        else
+                        if(x.morality > 33)
+                            say(t, "I live for the times we can spend together.");
+                        else
+                            say(t, (new StringBuilder("I'd give anything to help ")).append(x.himHer()).append(" be happy.").toString());
+                    } else
+                    if(x.morality > 66)
+                        say(t, (new StringBuilder("I'll never be as great as ")).append(x.himHer()).append(", but I have to try...").toString());
+                    else
+                    if(x.morality > 33)
+                        say(t, (new StringBuilder("I can't even think straight when ")).append(x.heShe()).append("'s around.").toString());
+                    else
+                        say(t, (new StringBuilder("I want to belong to ")).append(x.himHer()).append(" completely...").toString());
+                } else
+                {
+                    if(innocence > 66)
+                    {
+                        if(x.hostility < 20)
+                        {
+                            if(x.confidence > 66)
+                                say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" talks big, but ").append(x.heShe()).append(" isn't really scary at all.  ").toString());
+                            else
+                            if(x.confidence > 33)
+                                say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" isn't nearly as nice as ").append(x.heShe()).append(" pretends to be.  ").toString());
+                            else
+                                say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is a total wimp.  ").toString());
+                        } else
+                        if(x.hostility < 40)
+                        {
+                            if(x.confidence > 66)
+                                say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is nothing but a big bully!  ").toString());
+                            else
+                            if(x.confidence > 33)
+                                say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is really kind of a jerk.  ").toString());
+                            else
+                                say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is just your typical whiner.  ").toString());
+                        } else
+                        if(x.hostility < 61)
+                        {
+                            if(x.confidence > 66)
+                                say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is just pointlessly mean!  ").toString());
+                            else
+                            if(x.confidence > 33)
+                                say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is one hundred percent selfish.  ").toString());
+                            else
+                                say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is someone you can never rely on.  ").toString());
+                        } else
+                        if(x.hostility < 81)
+                        {
+                            if(x.confidence > 66)
+                                say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" doesn't care about anything but hurting people!  ").toString());
+                            else
+                            if(x.confidence > 33)
+                                say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is too busy hating everyone else to do anything useful.  ").toString());
+                            else
+                                say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" pretends to be harmless, but ").append(x.heShe()).append("'s actually really nasty!  ").toString());
+                        } else
+                        if(x.confidence > 66)
+                            say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is just a rampaging monster pretending to be a human!  ").toString());
+                        else
+                        if(x.confidence > 33)
+                            say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is crazy, ").append(x.heShe()).append(" just wants to fight everyone, no matter who!  ").toString());
+                        else
+                            say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is secretly plotting to kill the rest of us, I know it!  ").toString());
+                    } else
+                    if(innocence > 33)
+                    {
+                        if(x.hostility < 20)
+                        {
+                            if(x.confidence > 66)
+                                say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" isn't the hero ").append(x.heShe()).append(" pretends to be.  ").toString());
+                            else
+                            if(x.confidence > 33)
+                                say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is 'nice', for what little that's worth.  ").toString());
+                            else
+                                say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is weak.  Just weak in every way.  ").toString());
+                        } else
+                        if(x.hostility < 40)
+                        {
+                            if(x.confidence > 66)
+                                say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is an egomaniac.  ").toString());
+                            else
+                            if(x.confidence > 33)
+                                say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is nothing special.  ").toString());
+                            else
+                                say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is a coward.  ").toString());
+                        } else
+                        if(x.hostility < 61)
+                        {
+                            if(x.confidence > 66)
+                                say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is a huge asshole.  ").toString());
+                            else
+                            if(x.confidence > 33)
+                                say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" doesn't care about anyone or anything but ").append(x.himHer()).append("self.  ").toString());
+                            else
+                                say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is a paranoid nutcase.  ").toString());
+                        } else
+                        if(x.hostility < 81)
+                        {
+                            if(x.confidence > 66)
+                                say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is a complete psychopath.  ").toString());
+                            else
+                            if(x.confidence > 33)
+                                say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is a mean, vicious person.  ").toString());
+                            else
+                                say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is just an impotent ball of pure hatred.  ").toString());
+                        } else
+                        if(x.confidence > 66)
+                            say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" has completely gone off the deep end, ").append(x.heShe()).append("'s just a killing machine now.  ").toString());
+                        else
+                        if(x.confidence > 33)
+                            say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" isn't good for anything but wanton murder.  ").toString());
+                        else
+                            say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is a disaster waiting to happen.  ").toString());
+                    } else
+                    if(x.hostility < 20)
+                    {
+                        if(x.confidence > 66)
+                            say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is a fool with pretensions of heroism.  ").toString());
+                        else
+                        if(x.confidence > 33)
+                            say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is addicted to the feeling of righteousness, having spent far too little time thinking about what right and wrong actually are.  ").toString());
+                        else
+                            say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" masks ").append(x.hisHer()).append(" weakness with a thin veneer of kindness.  ").toString());
+                    } else
+                    if(x.hostility < 40)
+                    {
+                        if(x.confidence > 66)
+                            say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is reckless and selfish.  ").toString());
+                        else
+                        if(x.confidence > 33)
+                            say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is afraid to care about anything.  ").toString());
+                        else
+                            say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is a coward whose only redeeming feature is ").append(x.hisHer()).append(" acknowledgement of ").append(x.hisHer()).append(" own cowardice.  ").toString());
+                    } else
+                    if(x.hostility < 61)
+                    {
+                        if(x.confidence > 66)
+                            say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is convinced that ").append(x.heShe()).append("'s different from and better than everyone else.  ").toString());
+                        else
+                        if(x.confidence > 33)
+                            say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" lacks the capacity to worry about anything beyond ").append(x.hisHer()).append(" base desires.  ").toString());
+                        else
+                            say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is fierce and desperate as a cornered animal.  ").toString());
+                    } else
+                    if(x.hostility < 81)
+                    {
+                        if(x.confidence > 66)
+                            say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" attempts to use cruelty to hide ").append(x.hisHer()).append(" insecurities, even from ").append(x.himHer()).append("self.  ").toString());
+                        else
+                        if(x.confidence > 33)
+                            say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" knows that ").append(x.heShe()).append("'s an awful person on every level, but ").append(x.heShe()).append(" protects ").append(x.hisHer()).append(" ego by projecting it on everyone else.  ").toString());
+                        else
+                            say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is a spiteful little creature.  ").toString());
+                    } else
+                    if(x.confidence > 66)
+                        say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is uncontrollably violent.  I hope you know what you're doing by keeping ").append(x.himHer()).append(" around.  ").toString());
+                    else
+                    if(x.confidence > 33)
+                        say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is completely incapable of having a normal relationship with other humans.  ").toString());
+                    else
+                        say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" has done a poor job of concealing ").append(x.hisHer()).append(" desire to kill all of us.  Fortunately, ").append(x.heShe()).append("'s incompetent.  ").toString());
+                    if(history.booleanValue())
+                    {
+                        if(otherKilledPartner.booleanValue())
+                        {
+                            if(opinionOfDead >= 0)
+                            {
+                                if(otherOpinionOfDead >= 0)
+                                {
+                                    if(x.opinion(this) > 100)
+                                    {
+                                        if(x.morality > 66)
+                                            say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" cared more about trying to be a hero than about saving ").append(x.kills[0].mainName).append("'s life.  ").toString());
+                                        else
+                                        if(x.morality > 33)
+                                            say(t, (new StringBuilder("I can't forgive ")).append(x.himHer()).append(" for killing ").append(x.kills[0].mainName).append(".  ").toString());
+                                        else
+                                            say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" has never properly apologized for killing ").append(x.kills[0].mainName).append(".  ").toString());
+                                    } else
+                                    if(x.morality > 66)
+                                        say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" probably killed ").append(x.kills[0].mainName).append(" because ").append(x.heShe()).append(" was jealous about how close the two of us were.  ").toString());
+                                    else
+                                    if(x.morality > 33)
+                                        say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" fooled ").append(x.kills[0].mainName).append(" into thinking ").append(x.heShe()).append(" cared about ").append(x.kills[0].himHer()).append(" - and then ").append(x.heShe()).append(" killed ").append(x.kills[0].himHer()).append(".  ").toString());
+                                    else
+                                        say(t, (new StringBuilder("I used to think ")).append(x.heShe()).append(" cared about ").append(x.kills[0].mainName).append(", but then ").append(x.heShe()).append(" killed ").append(x.kills[0].himHer()).append(".  ").toString());
+                                } else
+                                if(x.opinion(this) > 100)
+                                {
+                                    if(x.morality > 66)
+                                        say(t, (new StringBuilder("The way ")).append(x.heShe()).append(" acts so sweet toward me just makes me sick, especially after ").append(x.heShe()).append(" so eagerly killed ").append(x.kills[0].mainName).append(".  ").toString());
+                                    else
+                                    if(x.morality > 33)
+                                        say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" says ").append(x.heShe()).append(" wants to be friends, but I still remember how happy ").append(x.heShe()).append(" was to kill ").append(x.kills[0].mainName).append(".  ").toString());
+                                    else
+                                        say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" killed ").append(x.kills[0].mainName).append(", just because ").append(x.heShe()).append(" was jealous of ").append(x.kills[0].himHer()).append(" for getting close to me.  ").toString());
+                                } else
+                                if(x.morality > 66)
+                                    say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" claims that ").append(x.heShe()).append("'s sorry about 'needing' to kill ").append(x.kills[0].mainName).append(", but I can tell that ").append(x.heShe()).append("'s lying.  ").toString());
+                                else
+                                if(x.morality > 33)
+                                    say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" took the first excuse ").append(x.heShe()).append(" could find to kill ").append(x.kills[0].mainName).append(".  ").toString());
+                                else
+                                    say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" killed ").append(x.kills[0].mainName).append(", and I know it's just a matter of time until ").append(x.heShe()).append(" comes after me.  ").toString());
+                            } else
+                            if(otherOpinionOfDead >= 0)
+                            {
+                                if(x.opinion(this) > 100)
+                                {
+                                    if(x.morality > 66)
+                                        say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" says that ").append(x.heShe()).append(" doesn't want to be enemies, but if ").append(x.heShe()).append(" does to all ").append(x.hisHer()).append(" friends what ").append(x.heShe()).append(" did to ").append(x.kills[0].mainName).append(", then I'm not interested.  ").toString());
+                                    else
+                                    if(x.morality > 33)
+                                        say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s obsessed with using me to fill the hole in ").append(x.hisHer()).append(" heart after killing ").append(x.kills[0].mainName).append(".  ").toString());
+                                    else
+                                        say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" got over killing ").append(x.kills[0].mainName).append(" much too quickly, and now ").append(x.heShe()).append("'s stalking me.  ").toString());
+                                } else
+                                if(x.morality > 66)
+                                    say(t, (new StringBuilder("I never liked ")).append(x.kills[0].mainName).append(", but I still can't understand how ").append(x.mainName).append(" could throw ").append(x.hisHer()).append(" friend's life away so easily.  ").toString());
+                                else
+                                if(x.morality > 33)
+                                    say(t, (new StringBuilder("Considering how willing ")).append(x.heShe()).append(" was to kill ").append(x.kills[0].mainName).append(", ").append(x.hisHer()).append(" closest friend, I'm glad that there's no connection between us anymore.  ").toString());
+                                else
+                                    say(t, (new StringBuilder("Something broke inside ")).append(x.himHer()).append(" after ").append(x.heShe()).append(" ended up killing ").append(x.kills[0].mainName).append(", and ").append(x.heShe()).append(" hates me for continuing to live on.  ").toString());
+                            } else
+                            if(x.opinion(this) > 100)
+                            {
+                                if(x.morality > 66)
+                                    say(t, (new StringBuilder("It's probably good that ")).append(x.heShe()).append(" killed ").append(x.kills[0].mainName).append(", but that doesn't mean I'm interested in being friends with ").append(x.himHer()).append(".  ").toString());
+                                else
+                                if(x.morality > 33)
+                                    say(t, (new StringBuilder("I don't blame ")).append(x.himHer()).append(" for killing ").append(x.kills[0].mainName).append(", but now that our time as a team is over, I'm not interested in being friends anymore.  ").toString());
+                                else
+                                    say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" thought I'd be grateful to ").append(x.himHer()).append(" for killing ").append(x.kills[0].mainName).append(".  Unbelievable.  ").toString());
+                            } else
+                            if(x.morality > 66)
+                                say(t, (new StringBuilder("The only useful thing ")).append(x.heShe()).append("'s ever done was killing ").append(x.kills[0].mainName).append(".  ").toString());
+                            else
+                            if(x.morality > 33)
+                                say(t, (new StringBuilder("We used to be a team, but ever since ")).append(x.heShe()).append(" killed ").append(x.kills[0].mainName).append(", there's no connection between us.  ").toString());
+                            else
+                                say(t, (new StringBuilder("I can't blame ")).append(x.himHer()).append(" for killing ").append(x.kills[0].mainName).append(", but I can tell you that ").append(x.heShe()).append(" did it for the wrong reasons.  ").toString());
+                        } else
+                        if(killedPartner.booleanValue())
+                        {
+                            if(opinionOfDead >= 0)
+                            {
+                                if(otherOpinionOfDead >= 0)
+                                {
+                                    if(x.opinion(this) > 100)
+                                    {
+                                        if(x.morality > 66)
+                                            say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" was way too quick to forgive me for killing ").append(kills[0].mainName).append(".  It makes me sick.  ").toString());
+                                        else
+                                        if(x.morality > 33)
+                                            say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" doesn't blame me for killing ").append(kills[0].mainName).append("... but I don't want forgiveness from ").append(x.himHer()).append(".  ").toString());
+                                        else
+                                            say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" just wants to go back to how things were before I killed ").append(kills[0].mainName).append("... but I refuse.  ").toString());
+                                    } else
+                                    if(x.morality > 66)
+                                        say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s hung up on the fact that I killed ").append(kills[0].mainName).append(" - not even considering how much worse it feels for me!  ").toString());
+                                    else
+                                    if(x.morality > 33)
+                                        say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" hates me for killing ").append(kills[0].mainName).append(", even though I'm sure ").append(x.heShe()).append(" would've done the same in my situation.  ").toString());
+                                    else
+                                        say(t, (new StringBuilder("The only good thing I can say about ")).append(x.himHer()).append(" is that ").append(x.heShe()).append(" properly hates me for murdering ").append(kills[0].mainName).append(".  ").toString());
+                                } else
+                                if(x.opinion(this) > 100)
+                                {
+                                    if(x.morality > 66)
+                                        say(t, (new StringBuilder("Whenever I see ")).append(x.himHer()).append(" smiling at me, I get so angry that I had to kill ").append(kills[0].mainName).append(" but ").append(x.heShe()).append("'s still around.  ").toString());
+                                    else
+                                    if(x.morality > 33)
+                                        say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" doesn't mind that I killed ").append(kills[0].mainName).append(", of course, but that just makes me hate ").append(x.himHer()).append(" even more.  ").toString());
+                                    else
+                                        say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("... laughed and thanked me when ").append(x.heShe()).append(" heard that I killed ").append(kills[0].mainName).append(".  ").append(x.HeShe()).append("'s awful.  ").toString());
+                                } else
+                                if(x.morality > 66)
+                                    say(t, (new StringBuilder("It's ")).append(x.hisHer()).append(" fault that I was forced to kill ").append(kills[0].mainName).append(".  ").toString());
+                                else
+                                if(x.morality > 33)
+                                    say(t, (new StringBuilder("For ")).append(kills[0].mainName).append("'s sake, I won't let ").append(x.himHer()).append(" win.  ").toString());
+                                else
+                                    say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" says that if I hadn't killed ").append(kills[0].mainName).append(", ").append(x.heShe()).append("'d have done it instead.  ").toString());
+                            } else
+                            if(otherOpinionOfDead >= 0)
+                            {
+                                if(x.opinion(this) > 100)
+                                {
+                                    if(x.morality > 66)
+                                        say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" says ").append(x.heShe()).append("'s willing to forgive me for killing ").append(kills[0].mainName).append(", but ").append(x.heShe()).append("'s probably just trying to trick me into letting ").append(x.himHer()).append(" get close enough to get revenge.  ").toString());
+                                    else
+                                    if(x.morality > 33)
+                                        say(t, (new StringBuilder("I killed ")).append(x.hisHer()).append(" friend, ").append(kills[0].mainName).append(", but ").append(x.heShe()).append(" still keeps trying to get close to me for some reason.  ").toString());
+                                    else
+                                        say(t, (new StringBuilder("For all ")).append(x.heShe()).append(" supposedly cared about ").append(kills[0].mainName).append(", ").append(x.heShe()).append(" doesn't even seem to care that I killed ").append(kills[0].himHer()).append(".  ").toString());
+                                } else
+                                if(x.morality > 66)
+                                    say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s always angry with me, probably because I killed ").append(kills[0].mainName).append(".  ").toString());
+                                else
+                                if(x.morality > 33)
+                                    say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" never did forgive me for killing ").append(kills[0].mainName).append(".  ").toString());
+                                else
+                                    say(t, (new StringBuilder("My reasons for killing ")).append(kills[0].mainName).append(" honestly weren't personal, but it's pointless to tell ").append(x.himHer()).append(" that.  ").toString());
+                            } else
+                            if(x.opinion(this) > 100)
+                            {
+                                if(x.morality > 66)
+                                    say(t, (new StringBuilder("I killed ")).append(kills[0].mainName).append(", and if ").append(x.heShe()).append(" keeps stalking me, ").append(x.heShe()).append("'d better be prepared for me to do the same to ").append(x.himHer()).append(".  ").toString());
+                                else
+                                if(x.morality > 33)
+                                    say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" seems convinced that I killed ").append(kills[0].mainName).append(" for ").append(x.hisHer()).append(" sake.  ").toString());
+                                else
+                                    say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" actually thanked me for getting rid of ").append(kills[0].mainName).append(".  I don't want to be thanked for something like that!  ").toString());
+                            } else
+                            if(x.morality > 66)
+                                say(t, (new StringBuilder("I killed ")).append(kills[0].mainName).append(" so that ").append(x.heShe()).append(" wouldn't whine about having to get ").append(x.hisHer()).append(" hands dirty, but ").append(x.heShe()).append(" never showed a bit of gratitude for it.  ").toString());
+                            else
+                            if(x.morality > 33)
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" doesn't seem to blame me for killing ").append(kills[0].mainName).append(", but we still definitely don't get along.  ").toString());
+                            else
+                                say(t, (new StringBuilder("I gave ")).append(kills[0].mainName).append(" a quick death, but ").append(x.mainName).append(" definitely would have done worse.  ").toString());
+                        } else
+                        if(formerRelationship >= 0)
+                        {
+                            if(x.opinion(this) > 100)
+                            {
+                                if(confidence > 66)
+                                {
+                                    if(x.morality > 66)
+                                        say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" still trails after me like a lost puppy, sometimes.  Pathetic.  ").toString());
+                                    else
+                                    if(x.morality > 33)
+                                        say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s even weaker than ").append(x.heShe()).append(" used to be, and I don't have time for ").append(x.himHer()).append(" anymore.  ").toString());
+                                    else
+                                        say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" claims that ").append(x.heShe()).append(" wants to be friends, but ").append(x.heShe()).append("'s just a coward who wants someone to fight for ").append(x.himHer()).append(".  ").toString());
+                                } else
+                                if(confidence > 33)
+                                {
+                                    if(x.morality > 66)
+                                        say(t, (new StringBuilder("It's ")).append(x.hisHer()).append(" fault that we lost, and I'm not going to make the mistake of relying on ").append(x.himHer()).append(" again.  ").toString());
+                                    else
+                                    if(x.morality > 33)
+                                        say(t, (new StringBuilder("I'm not interested in being ")).append(x.hisHer()).append(" friend anymore.  ").toString());
+                                    else
+                                        say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" claims ").append(x.heShe()).append(" can make it worth my while to stick with ").append(x.himHer()).append(", but I don't believe ").append(x.himHer()).append(".  ").toString());
+                                } else
+                                if(x.morality > 66)
+                                    say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" f-failed to protect me, and I won't forgive ").append(x.himHer()).append("!  ").toString());
+                                else
+                                if(x.morality > 33)
+                                    say(t, (new StringBuilder("I-I'm done being led around by ")).append(x.himHer()).append(", no matter what ").append(x.heShe()).append(" says!  ").toString());
+                                else
+                                    say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" thinks I belong to ").append(x.himHer()).append(", b-but those days are over!  ").toString());
+                            } else
+                            if(confidence > 66)
+                            {
+                                if(x.morality > 66)
+                                    say(t, (new StringBuilder("I'm better off without ")).append(x.himHer()).append(" trailing after me like a lost puppy.  ").toString());
+                                else
+                                if(x.morality > 33)
+                                    say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s even weaker than ").append(x.heShe()).append(" used to be, and I'm glad not to be stuck on a team with ").append(x.himHer()).append(" anymore.  ").toString());
+                                else
+                                    say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s a coward, but knows better than to try to convince me to protect ").append(x.himHer()).append(" now.  ").toString());
+                            } else
+                            if(confidence > 33)
+                            {
+                                if(x.morality > 66)
+                                    say(t, (new StringBuilder("I still need to give ")).append(x.himHer()).append(" payback for making us lose against you.  ").toString());
+                                else
+                                if(x.morality > 33)
+                                    say(t, "We aren't friends anymore.  ");
+                                else
+                                    say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" was never a good friend.  ").toString());
+                            } else
+                            if(x.morality > 66)
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" failed to protect me, a-and ").append(x.heShe()).append(" won't even try to make it up to me!  ").toString());
+                            else
+                            if(x.morality > 33)
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" says I'm not worth ").append(x.hisHer()).append(" time anymore, b-but I don't want to follow ").append(x.himHer()).append(" anyway!  ").toString());
+                            else
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" used to tell me that I belonged to ").append(x.himHer()).append("... b-but those days are over!  ").toString());
+                        } else
+                        if(x.opinion(this) > 100)
+                        {
+                            if(confidence > 66)
+                            {
+                                if(x.morality > 66)
+                                    say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" says ").append(x.heShe()).append(" wants to put our rivalry behind us, but ").append(x.heShe()).append(" just knows ").append(x.heShe()).append("'s doomed without my help!  ").toString());
+                                else
+                                if(x.morality > 33)
+                                    say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s even weaker than ").append(x.heShe()).append(" used to be, but I'm not going to let ").append(x.himHer()).append(" act like we're old friends.  ").toString());
+                                else
+                                    say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s always been a coward, and now that we're in this situation, ").append(x.heShe()).append("'s trying to act like we can be friends.  ").toString());
+                            } else
+                            if(confidence > 33)
+                            {
+                                if(x.morality > 66)
+                                    say(t, (new StringBuilder("If ")).append(x.heShe()).append(" had just done what I said, we never would have lost, and I'm not going to forgive ").append(x.himHer()).append(" for that.  ").toString());
+                                else
+                                if(x.morality > 33)
+                                    say(t, (new StringBuilder("I won't forgive ")).append(x.himHer()).append(" for what ").append(x.heShe()).append(" did during our time as Chosen.  ").toString());
+                                else
+                                    say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" claims that ").append(x.heShe()).append(" can make it worth my while to cooperate with ").append(x.himHer()).append(", but ").append(x.heShe()).append("'s always been a liar.  ").toString());
+                            } else
+                            if(x.morality > 66)
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" n-never... never cared about me before.  I don't believe ").append(x.himHer()).append(" when ").append(x.heShe()).append(" says ").append(x.heShe()).append(" does now.  ").toString());
+                            else
+                            if(x.morality > 33)
+                                say(t, (new StringBuilder("I hated every minute of following ")).append(x.hisHer()).append(" orders, a-and I'm not about to start again now!  ").toString());
+                            else
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" was awful to me back when we were Chosen, a-and now ").append(x.heShe()).append("'s actually trying to make me submit to ").append(x.himHer()).append("!  ").toString());
+                        } else
+                        if(confidence > 66)
+                        {
+                            if(x.morality > 66)
+                                say(t, (new StringBuilder("I was always better than ")).append(x.himHer()).append(".  ").toString());
+                            else
+                            if(x.morality > 33)
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" never could pull ").append(x.hisHer()).append(" own weight on the team.  ").toString());
+                            else
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" was always a coward.  ").toString());
+                        } else
+                        if(confidence > 33)
+                        {
+                            if(x.morality > 66)
+                                say(t, (new StringBuilder("If ")).append(x.heShe()).append(" had just done what I said, we never would have lost, but ").append(x.heShe()).append(" probably won't admit it.  ").toString());
+                            else
+                            if(x.morality > 33)
+                                say(t, "We've always been enemies, even during our time as Chosen.  ");
+                            else
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s always been a pain to work with.  ").toString());
+                        } else
+                        if(x.morality > 66)
+                            say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" always claimed to be a hero... b-but ").append(x.heShe()).append(" never cared enough to help me...  ").toString());
+                        else
+                        if(x.morality > 33)
+                            say(t, (new StringBuilder("I h-hated every minute of following ")).append(x.hisHer()).append(" orders, and I'm glad I don't have to do it anymore!  ").toString());
+                        else
+                            say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s... obsessed with making me s-suffer...  ").toString());
+                    } else
+                    if(x.opinion(this) > 100)
+                    {
+                        if(confidence > 66)
+                        {
+                            if(x.morality > 66)
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s much too nice to me - trying to get on my good side, I suppose.  ").toString());
+                            else
+                            if(x.morality > 33)
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" seems to want to be friends with me, but I'm not interested.  ").toString());
+                            else
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s weak, but ").append(x.heShe()).append("'s always trying to get other people to fight ").append(x.hisHer()).append(" battles for ").append(x.himHer()).append(".  ").toString());
+                        } else
+                        if(confidence > 33)
+                        {
+                            if(x.morality > 66)
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s sometimes so sweet towards me that it's creepy.  ").toString());
+                            else
+                            if(x.morality > 33)
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" might like me, but I definitely don't feel the same way in return.  ").toString());
+                            else
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" doesn't seem like the sort of person who you want to be friends with.  ").toString());
+                        } else
+                        if(x.morality > 66)
+                            say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s always trying to figure out what I want and give it to me, I-I really don't like it!  ").toString());
+                        else
+                        if(x.morality > 33)
+                            say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" says ").append(x.heShe()).append(" can protect me... b-but I don't believe ").append(x.himHer()).append("...  ").toString());
+                        else
+                            say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" keeps talking about how ").append(x.heShe()).append(" wants me to belong to ").append(x.himHer()).append("...  I-It's a little bit scary...  ").toString());
+                    } else
+                    if(confidence > 66)
+                    {
+                        if(x.morality > 66)
+                            say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("' just hates seeing people stronger than ").append(x.himHer()).append(" - like me.  ").toString());
+                        else
+                        if(x.morality > 33)
+                            say(t, (new StringBuilder("I've heard that ")).append(x.heShe()).append(" doesn't like me, but I don't really care.  ").toString());
+                        else
+                            say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" seems envious of me, and ").append(x.heShe()).append(" has trouble dealing with it.  ").toString());
+                    } else
+                    if(confidence > 33)
+                    {
+                        if(x.morality > 66)
+                            say(t, (new StringBuilder(String.valueOf(x.HisHer()))).append(" way of thinking doesn't make any sense at all.  ").toString());
+                        else
+                        if(x.morality > 33)
+                            say(t, "We really don't get along.  ");
+                        else
+                            say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s especially nasty toward me.  ").toString());
+                    } else
+                    if(x.morality > 66)
+                        say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s c-completely delusional...  ").toString());
+                    else
+                    if(x.morality > 33)
+                        say(t, (new StringBuilder("I d-don't like having to work with ")).append(x.himHer()).append("...  ").toString());
+                    else
+                        say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s... e-especially bad toward me, because ").append(x.heShe()).append(" knows I can't fight back...  ").toString());
+                    if(x.disgrace < 20)
+                    {
+                        if(morality > 66)
+                        {
+                            if(x.confidence > 66)
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" thinks ").append(x.heShe()).append("'s the center of the world!  ").toString());
+                            else
+                            if(x.confidence > 33)
+                                say(t, (new StringBuilder("And ")).append(x.heShe()).append(" doesn't see anything wrong with presenting ").append(x.himHer()).append("self as some sort of hero.  ").toString());
+                            else
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" doesn't deserve the respect that people still somehow have for ").append(x.himHer()).append(".  ").toString());
+                        } else
+                        if(morality > 33)
+                        {
+                            if(x.confidence > 66)
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" and all ").append(x.hisHer()).append(" fans are in denial about ").append(x.himHer()).append(" completely failing to put up a fight against you.  ").toString());
+                            else
+                            if(x.confidence > 33)
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s not nearly as strong as ").append(x.heShe()).append(" pretends to be.  ").toString());
+                            else
+                                say(t, (new StringBuilder("It's ridiculous that anyone still respects ")).append(x.himHer()).append(".  ").toString());
+                        } else
+                        if(x.confidence > 66)
+                            say(t, (new StringBuilder("You should really knock ")).append(x.himHer()).append(" down a peg, remind everyone that ").append(x.heShe()).append("'s still weaker than the Demon Lord.  ").toString());
+                        else
+                        if(x.confidence > 33)
+                            say(t, (new StringBuilder("It wouldn't take much to show everyone that ")).append(x.heShe()).append("'s not a hero at all.  ").toString());
+                        else
+                            say(t, (new StringBuilder("I want to show everyone what a weakling ")).append(x.heShe()).append(" really is.  ").toString());
+                    } else
+                    if(x.disgrace < 40)
+                    {
+                        if(morality > 66)
+                        {
+                            if(x.confidence > 66)
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s too proud to admit what everyone knows - that ").append(x.heShe()).append(" was never a real hero.  ").toString());
+                            else
+                            if(x.confidence > 33)
+                                say(t, (new StringBuilder("At least the most of your other minions know that there's no need to respect ")).append(x.himHer()).append(".  ").toString());
+                            else
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" doesn't even take responsibility for ").append(x.hisHer()).append(" own weakness.  ").toString());
+                        } else
+                        if(morality > 33)
+                        {
+                            if(x.confidence > 66)
+                                say(t, (new StringBuilder("You'd think ")).append(x.heShe()).append("'d be more humble after getting humiliated by you.  ").toString());
+                            else
+                            if(x.confidence > 33)
+                                say(t, (new StringBuilder("Everyone knows that ")).append(x.heShe()).append("'s no better than any of the rest of us Forsaken.  ").toString());
+                            else
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" doesn't have any willpower at all.  ").toString());
+                        } else
+                        if(x.confidence > 66)
+                            say(t, (new StringBuilder("It's almost funny to see ")).append(x.himHer()).append(" still pretending to be some sort of hero when ").append(x.heShe()).append("'s just a failure.  ").toString());
+                        else
+                        if(x.confidence > 33)
+                            say(t, (new StringBuilder("I'm glad you humiliated ")).append(x.himHer()).append(" and showed everyone how weak ").append(x.heShe()).append(" is.  ").toString());
+                        else
+                            say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" practically exists to be prey for people stronger than ").append(x.himHer()).append(".  ").toString());
+                    } else
+                    if(x.disgrace < 61)
+                    {
+                        if(morality > 66)
+                        {
+                            if(x.confidence > 66)
+                                say(t, (new StringBuilder("When ")).append(x.heShe()).append(" can't get what ").append(x.heShe()).append(" wants with violence, ").append(x.heShe()).append(" sees nothing wrong with using ").append(x.hisHer()).append(" sex appeal instead.  ").toString());
+                            else
+                            if(x.confidence > 33)
+                                say(t, (new StringBuilder("And ")).append(x.hisHer()).append(" fans are the worst sort of people, just following whatever makes them horny, not even thinking for themselves.  ").toString());
+                            else
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s a weak-willed slut.  ").toString());
+                        } else
+                        if(morality > 33)
+                        {
+                            if(x.confidence > 66)
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s really only dangerous because so many of your minions are willing to do what ").append(x.heShe()).append(" says in hopes of having sex with ").append(x.himHer()).append(".  ").toString());
+                            else
+                            if(x.confidence > 33)
+                                say(t, (new StringBuilder("Everyone knows that the only good thing about ")).append(x.himHer()).append(" is ").append(x.hisHer()).append(" body.  ").toString());
+                            else
+                                say(t, (new StringBuilder("The only reason anyone even cares about ")).append(x.himHer()).append(" is that ").append(x.heShe()).append("'s cute.  ").toString());
+                        } else
+                        if(x.confidence > 66)
+                            say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" relies too much on ").append(x.hisHer()).append(" pathetic fans.  Most of them don't even want sex, they just dream of having ").append(x.himHer()).append(" step on them.  ").toString());
+                        else
+                        if(x.confidence > 33)
+                            say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" usually surrounds ").append(x.himHer()).append("self with 'fans' who just want to have sex with ").append(x.himHer()).append(", but ").append(x.heShe()).append("'s vulnerable without them...  ").toString());
+                        else
+                            say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" should just stick with the few fans who have low enough standards to want ").append(x.hisHer()).append(" body.  ").toString());
+                    } else
+                    if(x.disgrace < 81)
+                    {
+                        if(morality > 66)
+                        {
+                            if(x.confidence > 66)
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s always getting booed and jeered on the streets, but that just makes ").append(x.himHer()).append(" act out even more to compensate.  ").toString());
+                            else
+                            if(x.confidence > 33)
+                                say(t, (new StringBuilder(String.valueOf(x.HisHer()))).append(" behavior has made ").append(x.himHer()).append(" plenty of enemies besides me, too.  ").toString());
+                            else
+                                say(t, (new StringBuilder("From the way that ")).append(x.heShe()).append("'s hated by everyone, I would've expected ").append(x.himHer()).append(" to learn from ").append(x.hisHer()).append(" mistakes, but it hasn't happened yet.  ").toString());
+                        } else
+                        if(morality > 33)
+                        {
+                            if(x.confidence > 66)
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" won't stop trying to boss people around, even though we all hate ").append(x.himHer()).append(".  ").toString());
+                            else
+                            if(x.confidence > 33)
+                                say(t, (new StringBuilder("I know that I'm not the only one who thinks we'd be better off without ")).append(x.himHer()).append(".  ").toString());
+                            else
+                                say(t, (new StringBuilder("The only reason ")).append(x.heShe()).append(" isn't hated by more people is that it's so easy to forget ").append(x.heShe()).append(" exists.  ").toString());
+                        } else
+                        if(x.confidence > 66)
+                            say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s too full of ").append(x.himHer()).append("self to get along with the rest of your minions, so you should just put ").append(x.himHer()).append(" down already.  ").toString());
+                        else
+                        if(x.confidence > 33)
+                            say(t, (new StringBuilder("You should just get rid of ")).append(x.himHer()).append(".  No one would miss ").append(x.himHer()).append(".  ").toString());
+                        else
+                            say(t, (new StringBuilder("Don't you agree that ")).append(x.heShe()).append("'s too weak to be worth keeping around here?  ").toString());
+                    } else
+                    if(morality > 66)
+                    {
+                        if(x.confidence > 66)
+                            say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" knows that ").append(x.heShe()).append("'ll provoke a lustful crowd into attacking ").append(x.himHer()).append(" whenever ").append(x.heShe()).append(" goes out, but ").append(x.heShe()).append("'s too prideful to hide.  ").toString());
+                        else
+                        if(x.confidence > 33)
+                            say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" can't even protect ").append(x.himHer()).append("self from the regular humans that lust after ").append(x.himHer()).append(".  ").toString());
+                        else
+                            say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" regularly tempts crowds into abusing ").append(x.himHer()).append(", then pretends that ").append(x.heShe()).append(" doesn't like it.  ").toString());
+                    } else
+                    if(morality > 33)
+                    {
+                        if(x.confidence > 66)
+                            say(t, (new StringBuilder("Because no one's scared of ")).append(x.himHer()).append(" anymore, there are plenty of times that ").append(x.heShe()).append("'s been attacked by crowds of horny 'fans'.  It's what ").append(x.heShe()).append(" deserves.  ").toString());
+                        else
+                        if(x.confidence > 33)
+                            say(t, (new StringBuilder("Ask any of your other minions, they'll tell you that ")).append(x.hisHer()).append(" only redeeming quality is that ").append(x.heShe()).append("'s a good sex toy.  ").toString());
+                        else
+                            say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s so pathetic that ").append(x.heShe()).append(" has to hide from your other minions, even the regular humans, or else they'll just gangrape ").append(x.himHer()).append(".  ").toString());
+                    } else
+                    if(x.confidence > 66)
+                        say(t, (new StringBuilder("I do really enjoy it when ")).append(x.heShe()).append(" gets attacked by a lustful mob to help put ").append(x.himHer()).append(" in ").append(x.hisHer()).append(" place.  ").toString());
+                    else
+                    if(x.confidence > 33)
+                        say(t, (new StringBuilder("I get back at ")).append(x.himHer()).append(" by letting ").append(x.hisHer()).append(" other enemies here know where ").append(x.heShe()).append("'s staying so that they can ambush ").append(x.himHer()).append(" while ").append(x.heShe()).append("'s asleep.  ").toString());
+                    else
+                        say(t, (new StringBuilder("At least it can be fun to blend into the crowds that chase ")).append(x.himHer()).append(" down to have fun with ").append(x.himHer()).append(" whenever ").append(x.heShe()).append(" shows ").append(x.hisHer()).append(" pathetic face outside.  ").toString());
+                    if(x.deviancy - deviancy >= 15)
+                        if(deviancy < 20)
+                        {
+                            if(x.innocence > 66)
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s always talking about perverted stuff like it's completely normal.  ").toString());
+                            else
+                            if(x.innocence > 33)
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s a huge pervert, too.  ").toString());
+                            else
+                                say(t, (new StringBuilder("I hate the way ")).append(x.heShe()).append(" looks at me, like ").append(x.heShe()).append("'s thinking about something perverted.  ").toString());
+                        } else
+                        if(deviancy < 40)
+                        {
+                            if(x.innocence > 66)
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" can't stop talking about all the bizarre fetishes ").append(x.heShe()).append(" has.  It's not normal.  ").toString());
+                            else
+                            if(x.innocence > 33)
+                                say(t, (new StringBuilder("And ")).append(x.heShe()).append(" has a long list of disgusting fetishes, too.  ").toString());
+                            else
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s not stupid, but that just makes it even worse when you realize that ").append(x.heShe()).append("'s spending all ").append(x.hisHer()).append(" time planning out how to satisfy ").append(x.hisHer()).append(" twisted sexual desires.  ").toString());
+                        } else
+                        if(deviancy < 61)
+                        {
+                            if(x.innocence > 66)
+                                say(t, (new StringBuilder("It's a good thing ")).append(x.heShe()).append("'s so stupid, because it means ").append(x.heShe()).append(" has no chance of getting ahold of me in order to do one of the sickening acts ").append(x.hisHer()).append(" little mind is obsessed with.  ").toString());
+                            else
+                            if(x.innocence > 33)
+                                say(t, (new StringBuilder("I think ")).append(x.heShe()).append(" wants to use me to satisfy some of ").append(x.hisHer()).append(" more twisted fantasies.  ").toString());
+                            else
+                                say(t, (new StringBuilder("If ")).append(x.heShe()).append(" were to somehow get ").append(x.hisHer()).append(" hands on me... I'd rather die than let ").append(x.himHer()).append(" put me through the kind of twisted stuff ").append(x.heShe()).append("'s interested in.  ").toString());
+                        } else
+                        if(x.innocence > 66)
+                            say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" doesn't even have control over ").append(x.hisHer()).append(" own body, always masturbating without even realizing it.  ").toString());
+                        else
+                        if(x.innocence > 33)
+                            say(t, (new StringBuilder("All ")).append(x.heShe()).append(" cares about is ").append(x.hisHer()).append(" own pleasure.  Nothing else matters to ").append(x.himHer()).append(".  ").toString());
+                        else
+                            say(t, (new StringBuilder("Everything ")).append(x.heShe()).append(" does - absolutely everything - is all about getting ").append(x.himHer()).append(" closer to cumming again.  ").toString());
+                    if(obedience - x.obedience >= 15)
+                        if(obedience < 40)
+                        {
+                            if(x.confidence > 66)
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s defiant to the point of stupidity, pointlessly fighting back when it's obvious that ").append(x.heShe()).append("'s only doing it for the sake of ").append(x.hisHer()).append(" own pride.  ").toString());
+                            else
+                            if(x.confidence > 33)
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s still convinced that it's possible to disobey you and survive the consequences.  ").toString());
+                            else
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" acts meek, but ").append(x.heShe()).append(" actually looks down on everyone else who works for you.  ").toString());
+                        } else
+                        if(obedience < 61)
+                        {
+                            if(x.confidence > 66)
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" still isn't afraid of you... ").append(x.heShe()).append("'s really an idiot.  ").toString());
+                            else
+                            if(x.confidence > 33)
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" still doesn't completely understand how much stronger you are than all of us put together.  ").toString());
+                            else
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" pretends to be broken, but ").append(x.heShe()).append("'s just looking for a chance to resist, and we'll all suffer for it eventually.  ").toString());
+                        } else
+                        if(obedience < 81)
+                        {
+                            if(x.confidence > 66)
+                                say(t, (new StringBuilder("And ")).append(x.heShe()).append("'s far too full of pride to completely submit ").append(x.himHer()).append("self to you.  ").toString());
+                            else
+                            if(x.confidence > 33)
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" doesn't yet realize that it'd be for the best if you defeated the forces of humanity.  ").toString());
+                            else
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" doesn't love you - ").append(x.heShe()).append(" only obeys out of fear.  ").toString());
+                        } else
+                        if(x.confidence > 66)
+                            say(t, (new StringBuilder("The way ")).append(x.heShe()).append(" speaks to you is unforgivably insulting!  ").toString());
+                        else
+                        if(x.confidence > 33)
+                            say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" still thinks for ").append(x.himHer()).append("self!  Ridiculous!  ").toString());
+                        else
+                            say(t, (new StringBuilder("If only ")).append(x.heShe()).append(" were willing to devote ").append(x.himHer()).append("self to you completely, ").append(x.heShe()).append(" wouldn't be so pathetic.  ").toString());
+                    if(others != null)
+                    {
+                        for(int j = 0; j < others.length; j++)
+                            if(others[j].equals(x) && troublemaker[j] > 20)
+                                if(troublemaker[j] < 70)
+                                {
+                                    if(morality > 66)
+                                    {
+                                        if(x.dignity > 66)
+                                            say(t, (new StringBuilder("If ")).append(x.hisHer()).append(" past attacks on the rest of us aren't punished, then it's only a matter of time until ").append(x.heShe()).append(" attacks us again.  ").toString());
+                                        else
+                                        if(x.dignity > 33)
+                                            say(t, (new StringBuilder("I still can't forgive ")).append(x.himHer()).append(" for all the trouble ").append(x.heShe()).append("'s caused in the past.  ").toString());
+                                        else
+                                            say(t, (new StringBuilder("I don't think ")).append(x.heShe()).append("'s even sorry about how ").append(x.heShe()).append(" used to abuse your weaker minions.  ").toString());
+                                    } else
+                                    if(morality > 33)
+                                    {
+                                        if(x.dignity > 66)
+                                            say(t, (new StringBuilder("I don't believe ")).append(x.himHer()).append(" for a moment when ").append(x.heShe()).append(" says ").append(x.heShe()).append("'s done causing trouble for the rest of us.  ").toString());
+                                        else
+                                        if(x.dignity > 33)
+                                            say(t, (new StringBuilder("I'm sure that ")).append(x.heShe()).append("'ll start attacking your other minions again once ").append(x.heShe()).append(" thinks ").append(x.heShe()).append(" can get away with it.  ").toString());
+                                        else
+                                            say(t, (new StringBuilder("The only reason ")).append(x.heShe()).append("'s behaving better lately is that you've been going easy on ").append(x.himHer()).append(".  ").toString());
+                                    } else
+                                    if(x.dignity > 66)
+                                        say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s trying to fool you, just pretending that ").append(x.heShe()).append("'s done making trouble.  ").toString());
+                                    else
+                                    if(x.dignity > 33)
+                                        say(t, (new StringBuilder("I don't know why you let ")).append(x.himHer()).append(" off so lightly for what ").append(x.heShe()).append("'s done to the rest of us.  ").toString());
+                                    else
+                                        say(t, (new StringBuilder("If you don't come down on ")).append(x.himHer()).append(" hard, ").append(x.heShe()).append("'ll be back to causing problems for your other minions soon enough.  ").toString());
+                                } else
+                                if(troublemaker[j] < 200)
+                                {
+                                    if(morality > 66)
+                                    {
+                                        if(x.dignity > 66)
+                                            say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s probably going to keep attacking the rest of us until ").append(x.heShe()).append("'s punished.  ").toString());
+                                        else
+                                        if(x.dignity > 33)
+                                            say(t, (new StringBuilder("I won't forgive ")).append(x.himHer()).append(" for the things ").append(x.heShe()).append("'s done and the things ").append(x.heShe()).append(" keeps doing.  ").toString());
+                                        else
+                                            say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" doesn't even seem to need a reason to abuse your weaker minions.  ").toString());
+                                    } else
+                                    if(morality > 33)
+                                    {
+                                        if(x.dignity > 66)
+                                            say(t, (new StringBuilder("And ")).append(x.heShe()).append("'s always saying ").append(x.heShe()).append("'ll stop causing trouble for the rest of us, but ").append(x.heShe()).append(" keeps doing it anyway.  ").toString());
+                                        else
+                                        if(x.dignity > 33)
+                                            say(t, (new StringBuilder("And ")).append(x.heShe()).append(" thinks ").append(x.heShe()).append(" can get away with attacking your other minions.  ").toString());
+                                        else
+                                            say(t, (new StringBuilder("If you don't stop going so easy on ")).append(x.himHer()).append(", ").append(x.heShe()).append("'s going to keep behaving badly.  ").toString());
+                                    } else
+                                    if(x.dignity > 66)
+                                        say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s trying to hide it from you, but ").append(x.heShe()).append("'s still being a troublemaker.  ").toString());
+                                    else
+                                    if(x.dignity > 33)
+                                        say(t, (new StringBuilder("I don't know why you let ")).append(x.himHer()).append(" get away with what ").append(x.heShe()).append("'s doing to the rest of us.  ").toString());
+                                    else
+                                        say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s causing problems for your other minions, and the best way to stop ").append(x.himHer()).append(" is to come down on ").append(x.himHer()).append(" hard.  ").toString());
+                                } else
+                                if(morality > 66)
+                                {
+                                    if(x.dignity > 66)
+                                        say(t, (new StringBuilder("It's past time that ")).append(x.heShe()).append(" was punished for constantly attacking the rest of us.  ").toString());
+                                    else
+                                    if(x.dignity > 33)
+                                        say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s always doing terrible things - we never get a break from ").append(x.himHer()).append("!  ").toString());
+                                    else
+                                        say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" abuses your weaker minions on a daily basis, too!  ").toString());
+                                } else
+                                if(morality > 33)
+                                {
+                                    if(x.dignity > 66)
+                                        say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s constantly causing trouble, and ").append(x.heShe()).append(" barely even tries to hide it!  ").toString());
+                                    else
+                                    if(x.dignity > 33)
+                                        say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" attacks your other minions on a daily basis, too.  ").toString());
+                                    else
+                                        say(t, (new StringBuilder("It seems like ")).append(x.heShe()).append("'s getting worse and worse, always behaving badly toward everyone else here.  ").toString());
+                                } else
+                                if(x.dignity > 66)
+                                    say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" tries to blame everyone else for the trouble ").append(x.heShe()).append(" constantly causes, but I think it's obvious by this point who's really at fault.  ").toString());
+                                else
+                                if(x.dignity > 33)
+                                    say(t, (new StringBuilder("Are you really going to let ")).append(x.himHer()).append(" get away with attacking the rest of us so often?  ").toString());
+                                else
+                                    say(t, (new StringBuilder("It's obvious that ")).append(x.heShe()).append("'s going to keep causing problems for your other minions all the time until you really make ").append(x.himHer()).append(" regret it.  ").toString());
+
+                    }
+                    if(opinion(x) >= -100)
+                    {
+                        if(confidence > 66)
+                        {
+                            if(x.morality > 66)
+                                say(t, (new StringBuilder("If you're going to have me work with ")).append(x.himHer()).append(", at least tell ").append(x.himHer()).append(" to shut up first.").toString());
+                            else
+                            if(x.morality > 33)
+                                say(t, (new StringBuilder("I definitely don't need ")).append(x.hisHer()).append(" help with any of the work you have me do.").toString());
+                            else
+                                say(t, (new StringBuilder("I don't want to work with ")).append(x.himHer()).append(".  ").append(x.HeShe()).append("'s impossible to control.").toString());
+                        } else
+                        if(confidence > 33)
+                        {
+                            if(x.morality > 66)
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s really annoying.  I think that sums ").append(x.himHer()).append(" up pretty well.").toString());
+                            else
+                            if(x.morality > 33)
+                                say(t, (new StringBuilder("I really don't like working with ")).append(x.himHer()).append(".").toString());
+                            else
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s just impossible to work with.").toString());
+                        } else
+                        if(x.morality > 66)
+                            say(t, (new StringBuilder("I don't want to let ")).append(x.himHer()).append(" t-tell me what to do...").toString());
+                        else
+                        if(x.morality > 33)
+                            say(t, (new StringBuilder("If you're asking me about ")).append(x.himHer()).append(", th-then does that mean I can ask not to be forced to work with ").append(x.himHer()).append("?").toString());
+                        else
+                            say(t, (new StringBuilder("I-I'm afraid of what ")).append(x.heShe()).append(" might do to me if you make us work together...").toString());
+                    } else
+                    if(opinion(x) >= -400)
+                    {
+                        if(confidence > 66)
+                        {
+                            if(x.morality > 66)
+                                say(t, (new StringBuilder("The only thing stopping me from getting violent with ")).append(x.himHer()).append(" is the fact that we're pretty much forced to live together.").toString());
+                            else
+                            if(x.morality > 33)
+                                say(t, (new StringBuilder("Even just looking at ")).append(x.himHer()).append(" makes me so angry...").toString());
+                            else
+                                say(t, (new StringBuilder("I'll try to control myself around ")).append(x.himHer()).append(", but I can't promise that I'll succeed.").toString());
+                        } else
+                        if(confidence > 33)
+                        {
+                            if(x.morality > 66)
+                                say(t, (new StringBuilder("I hate ")).append(x.himHer()).append(" more and more every time ").append(x.heShe()).append(" opens ").append(x.hisHer()).append(" mouth.").toString());
+                            else
+                            if(x.morality > 33)
+                                say(t, (new StringBuilder("Ugh, I really hate ")).append(x.himHer()).append(".").toString());
+                            else
+                                say(t, (new StringBuilder("I think it's fair to say that I hate ")).append(x.himHer()).append(" from the bottom of my heart.").toString());
+                        } else
+                        if(x.morality > 66)
+                            say(t, (new StringBuilder("I wish ")).append(x.heShe()).append("'d just disappear...").toString());
+                        else
+                        if(x.morality > 33)
+                            say(t, (new StringBuilder("I hate ")).append(x.himHer()).append("...  I-I hate ").append(x.himHer()).append(" so much...!").toString());
+                        else
+                            say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s the worst...").toString());
+                    } else
+                    if(confidence > 66)
+                    {
+                        if(x.morality > 66)
+                            say(t, (new StringBuilder("Sometimes I have dreams about killing ")).append(x.himHer()).append(".  They're good dreams.").toString());
+                        else
+                        if(x.morality > 33)
+                            say(t, (new StringBuilder("Whenever ")).append(x.heShe()).append(" opens ").append(x.hisHer()).append(" worthless mouth, it takes all my self-control to not attack ").append(x.himHer()).append(".").toString());
+                        else
+                            say(t, "I have to tell you, the next time the two of us end up in a room together, I might not be able to hold myself back.");
+                    } else
+                    if(confidence > 33)
+                    {
+                        if(x.morality > 66)
+                            say(t, (new StringBuilder("I want to stop ")).append(x.himHer()).append(" from getting what ").append(x.heShe()).append(" wants, no matter what.").toString());
+                        else
+                        if(x.morality > 33)
+                            say(t, (new StringBuilder("I don't think it's possible to hate someone more than I hate ")).append(x.himHer()).append(".").toString());
+                        else
+                            say(t, "There's no chance that we'll ever be friends.");
+                    } else
+                    if(x.morality > 66)
+                        say(t, (new StringBuilder("I can't stand being around ")).append(x.himHer()).append("!  I-If you make me, I might do something crazy!").toString());
+                    else
+                    if(x.morality > 33)
+                        say(t, (new StringBuilder("I'll never forgive ")).append(x.himHer()).append("...  Never...").toString());
+                    else
+                        say(t, (new StringBuilder(String.valueOf(x.HeShe().substring(0, 1)))).append("-").append(x.HeShe()).append("'s actually a worse person than me!").toString());
+                }
+            } else
+            {
+                ownID = i;
+            }
+
+        say(t, "\"");
+    }
+
     public void trainingMenu(final JTextPane t, final JPanel p, final JFrame f, final WorldState w, final SaveData s, final Boolean currentTraining[], int page, 
             final Boolean consenting)
     {
@@ -1085,37 +2889,58 @@ public class Forsaken
         int obedienceCount = 0;
         int disgraceCount = 0;
         int trainingIntensities[][] = new int[currentTraining.length][4];
+        final int trainingStaminas[] = new int[currentTraining.length];
+        final int trainingMotivations[] = new int[currentTraining.length];
+        final long trainingExpertises[] = new long[currentTraining.length];
         for(int i = 0; i < currentTraining.length; i++)
         {
             if(i == 0)
             {
                 trainingIntensities[i][0] = 20;
                 trainingIntensities[i][1] = 20;
+                trainingStaminas[i] = 180;
+                trainingMotivations[i] = 30;
+                trainingExpertises[i] = 1200L;
             } else
             if(i == 1)
             {
                 trainingIntensities[i][0] = 10;
                 trainingIntensities[i][2] = 15;
+                trainingStaminas[i] = 170;
+                trainingMotivations[i] = 40;
+                trainingExpertises[i] = 900L;
             } else
             if(i == 2)
             {
                 trainingIntensities[i][0] = 15;
                 trainingIntensities[i][3] = 15;
+                trainingStaminas[i] = 130;
+                trainingMotivations[i] = 20;
+                trainingExpertises[i] = 900L;
             } else
             if(i == 3)
             {
                 trainingIntensities[i][1] = 15;
                 trainingIntensities[i][2] = 10;
+                trainingStaminas[i] = 160;
+                trainingMotivations[i] = 40;
+                trainingExpertises[i] = 900L;
             } else
             if(i == 4)
             {
                 trainingIntensities[i][1] = 10;
                 trainingIntensities[i][3] = 10;
+                trainingStaminas[i] = 120;
+                trainingMotivations[i] = 20;
+                trainingExpertises[i] = 800L;
             } else
             if(i == 5)
             {
                 trainingIntensities[i][2] = 20;
                 trainingIntensities[i][3] = 20;
+                trainingStaminas[i] = 140;
+                trainingMotivations[i] = 30;
+                trainingExpertises[i] = 1000L;
             }
             if(currentTraining[i].booleanValue())
             {
@@ -1156,6 +2981,31 @@ public class Forsaken
                         currentDisgrace += 5;
                     disgraceCount++;
                 }
+            } else
+            {
+                long numerator = 0L;
+                long denominator = 0L;
+                if(i % 6 < 3)
+                    denominator += hateExp;
+                else
+                    numerator += hateExp;
+                if(i % 6 == 0 || i % 6 == 3 || i % 6 == 4)
+                    denominator += pleaExp;
+                else
+                    numerator += pleaExp;
+                if(i % 2 == 1)
+                    denominator += injuExp;
+                else
+                    numerator += injuExp;
+                if(i % 6 == 2 || i % 6 == 4 || i % 6 == 5)
+                    denominator += expoExp;
+                else
+                    numerator += expoExp;
+                if(numerator > denominator)
+                    if(numerator / denominator < 10L)
+                        trainingExpertises[i] = (trainingExpertises[i] * numerator) / denominator;
+                    else
+                        trainingExpertises[i] = trainingExpertises[i] * 10L;
             }
         }
 
@@ -1165,7 +3015,14 @@ public class Forsaken
         int trainingCounts[] = {
             hostilityCount, deviancyCount, obedienceCount, disgraceCount
         };
-        w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\n").toString());
+        w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\n").append(mainName).append("\n").toString());
+        w.append(t, (new StringBuilder("Stamina: ")).append(stamina / 10).append(".").append(stamina % 10).append("%\nMotivation: ").append(motivation / 10).append(".").append(motivation % 10).append("%").toString());
+        w.append(t, (new StringBuilder("\nExpertise\nHATE: ")).append(condensedFormat(hateExp)).append("\nPLEA: ").append(condensedFormat(pleaExp)).toString());
+        if(w.tickleOn.booleanValue())
+            w.append(t, "\nANTI: ");
+        else
+            w.append(t, "\nINJU: ");
+        w.append(t, (new StringBuilder(String.valueOf(condensedFormat(injuExp)))).append("\nEXPO: ").append(condensedFormat(expoExp)).append("\n").append(describeCombatStyle(w, Boolean.valueOf(false))).append("\n\n").toString());
         w.underlineAppend(t, "Current Training Intensity:");
         w.append(t, (new StringBuilder("\nHostility ")).append(currentHostility).append("%\nDeviancy ").append(currentDeviancy).append("%\nObedience ").append(currentObedience).append("%\nDisgrace ").append(currentDisgrace).append("%\n\n").toString());
         w.underlineAppend(t, "Current Training Modifiers:");
@@ -1176,21 +3033,31 @@ public class Forsaken
         {
             if(hostilityCount != deviancyCount)
             {
-                w.append(t, "\nGained skill ");
+                w.append(t, "\nGained Expertise ");
                 if(hostilityCount > deviancyCount)
                     w.append(t, (new StringBuilder("+")).append((hostilityCount - deviancyCount) * 20).append("%").toString());
                 else
                     w.append(t, (new StringBuilder("-")).append((deviancyCount - hostilityCount) * 20).append("%").toString());
+                for(int i = 0; i < trainingExpertises.length; i++)
+                {
+                    trainingExpertises[i] = (trainingExpertises[i] * (long)((5 + hostilityCount) - deviancyCount)) / 5L;
+                    if(trainingExpertises[i] < 0L)
+                        trainingExpertises[i] = 0L;
+                }
+
             }
-            if(types != disgraceCount)
+            if(types != disgraceCount || hostilityCount > 0)
             {
                 w.append(t, "\nStamina costs x");
                 int difference = (hostilityCount + types) - disgraceCount;
                 int base = 2;
-                for(; difference > 1; difference--)
+                for(; difference > 2; difference--)
                     base *= 2;
 
                 w.append(t, (new StringBuilder(String.valueOf(base))).toString());
+                for(int i = 0; i < trainingStaminas.length; i++)
+                    trainingStaminas[i] = trainingStaminas[i] * base;
+
             }
             if(deviancyCount != disgraceCount)
             {
@@ -1203,12 +3070,20 @@ public class Forsaken
                         base *= 2;
 
                     w.append(t, (new StringBuilder(String.valueOf(base))).toString());
+                    for(int i = 0; i < trainingMotivations.length; i++)
+                        trainingMotivations[i] = trainingMotivations[i] * base;
+
                 } else
                 {
                     w.append(t, "0.");
                     int base = 10000;
                     for(; difference < 0; difference++)
+                    {
                         base /= 2;
+                        for(int i = 0; i < trainingMotivations.length; i++)
+                            trainingMotivations[i] = trainingMotivations[i] / 2;
+
+                    }
 
                     if(base < 1000)
                         w.append(t, "0");
@@ -1219,6 +3094,9 @@ public class Forsaken
             if(obedienceCount > 0)
                 w.append(t, "\nConsent not required\nIf not consenting, all corruption increases also increase Obedience");
         }
+        for(int i = 0; i < trainingExpertises.length; i++)
+            trainingExpertises[i] = (trainingExpertises[i] * (long)expModifier()) / 1000L;
+
         String trainingNames[] = new String[currentTraining.length];
         for(int i = 0; i < trainingNames.length; i++)
             if(i == 0)
@@ -1289,12 +3167,20 @@ public class Forsaken
                     }
                 }
 
+                w.append(t, (new StringBuilder("\n  -")).append(trainingStaminas[i] / 10).toString());
+                if(trainingStaminas[i] % 10 != 0)
+                    w.append(t, (new StringBuilder(".")).append(trainingStaminas[i] % 10).toString());
+                w.append(t, (new StringBuilder("% Stamina, +")).append(trainingMotivations[i] / 10).toString());
+                if(trainingMotivations[i] % 10 != 0)
+                    w.append(t, (new StringBuilder(".")).append(trainingMotivations[i] % 10).toString());
+                w.append(t, (new StringBuilder("% Motivation, ")).append(condensedFormat(trainingExpertises[i])).append(" Expertise").toString());
+                final int variant = i;
                 JButton Action = new JButton(trainingName);
                 Action.addActionListener(new ActionListener() {
 
                     public void actionPerformed(ActionEvent e)
                     {
-                        trainingDescription(t, p, f, w, s, currentTraining, trainingType, threatenedIntensity, consenting);
+                        trainingDescription(t, p, f, w, s, currentTraining, trainingType, threatenedIntensity, consenting, trainingStaminas[variant], trainingMotivations[variant], trainingExpertises[variant]);
                     }
 
                     final Forsaken this$0;
@@ -1307,6 +3193,10 @@ public class Forsaken
                     private final int val$trainingType;
                     private final int val$threatenedIntensity[];
                     private final Boolean val$consenting;
+                    private final int val$trainingStaminas[];
+                    private final int val$variant;
+                    private final int val$trainingMotivations[];
+                    private final long val$trainingExpertises[];
 
             
             {
@@ -1320,33 +3210,38 @@ public class Forsaken
                 trainingType = i;
                 threatenedIntensity = ai;
                 consenting = boolean1;
+                trainingStaminas = ai1;
+                variant = j;
+                trainingMotivations = ai2;
+                trainingExpertises = al;
                 super();
             }
                 });
-                p.add(Action);
+                if(trainingStaminas[i] <= stamina)
+                    p.add(Action);
             }
         }
 
-        JButton Back = new JButton("Back");
-        if(types != 0)
-            Back.setText("Done");
-        final Forsaken x = this;
-        Back.addActionListener(new ActionListener() {
+        if(types == 0)
+        {
+            JButton Back = new JButton("Back");
+            final Forsaken x = this;
+            Back.addActionListener(new ActionListener() {
 
-            public void actionPerformed(ActionEvent e)
-            {
-                WriteObject wobj = new WriteObject();
-                wobj.serializeSaveData(s);
-                Project.ForsakenInteraction(t, p, f, w, s, x);
-            }
+                public void actionPerformed(ActionEvent e)
+                {
+                    WriteObject wobj = new WriteObject();
+                    wobj.serializeSaveData(s);
+                    Project.ForsakenInteraction(t, p, f, w, s, x);
+                }
 
-            final Forsaken this$0;
-            private final SaveData val$s;
-            private final JTextPane val$t;
-            private final JPanel val$p;
-            private final JFrame val$f;
-            private final WorldState val$w;
-            private final Forsaken val$x;
+                final Forsaken this$0;
+                private final SaveData val$s;
+                private final JTextPane val$t;
+                private final JPanel val$p;
+                private final JFrame val$f;
+                private final WorldState val$w;
+                private final Forsaken val$x;
 
             
             {
@@ -1359,14 +3254,79 @@ public class Forsaken
                 x = forsaken1;
                 super();
             }
-        });
-        p.add(Back);
+            });
+            p.add(Back);
+        } else
+        {
+            JButton Done = new JButton("Done");
+            final Forsaken x = this;
+            Done.addActionListener(new ActionListener() {
+
+                public void actionPerformed(ActionEvent e)
+                {
+                    p.removeAll();
+                    Project.ForsakenDowntime(t, p, f, w, s, new Forsaken[] {
+                        x
+                    });
+                    JButton Continue = new JButton("Continue");
+                    Continue.addActionListener(new ActionListener() {
+
+                        public void actionPerformed(ActionEvent e)
+                        {
+                            Project.ForsakenMenu(t, p, f, w, s, 0);
+                        }
+
+                        final _cls3 this$1;
+                        private final JTextPane val$t;
+                        private final JPanel val$p;
+                        private final JFrame val$f;
+                        private final WorldState val$w;
+                        private final SaveData val$s;
+
+                    
+                    {
+                        this$1 = _cls3.this;
+                        t = jtextpane;
+                        p = jpanel;
+                        f = jframe;
+                        w = worldstate;
+                        s = savedata;
+                        super();
+                    }
+                    });
+                    p.add(Continue);
+                    p.validate();
+                    p.repaint();
+                }
+
+                final Forsaken this$0;
+                private final JPanel val$p;
+                private final JTextPane val$t;
+                private final JFrame val$f;
+                private final WorldState val$w;
+                private final SaveData val$s;
+                private final Forsaken val$x;
+
+            
+            {
+                this$0 = Forsaken.this;
+                p = jpanel;
+                t = jtextpane;
+                f = jframe;
+                w = worldstate;
+                s = savedata;
+                x = forsaken1;
+                super();
+            }
+            });
+            p.add(Done);
+        }
         p.validate();
         p.repaint();
     }
 
     public void trainingDescription(final JTextPane t, final JPanel p, final JFrame f, final WorldState w, final SaveData s, final Boolean currentTraining[], final int nextTraining, 
-            int threatenedIntensity[], final Boolean consenting)
+            int threatenedIntensity[], final Boolean consenting, final int lostStamina, final int gainedMotivation, final long gainedExpertise)
     {
         p.removeAll();
         w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\n").toString());
@@ -2542,9 +4502,8 @@ public class Forsaken
                 w.append(t, "\nNone");
             } else
             {
+                Boolean comma = Boolean.valueOf(false);
                 for(int i = 0; i < 4; i++)
-                {
-                    Boolean comma = Boolean.valueOf(false);
                     if(increases[i] > 0)
                     {
                         if(comma.booleanValue())
@@ -2563,7 +4522,6 @@ public class Forsaken
                         else
                             w.append(t, "Disgrace");
                     }
-                }
 
             }
         }
@@ -2592,11 +4550,17 @@ public class Forsaken
                     deviancy += increases[1];
                     obedience += increases[2];
                     disgrace += increases[3];
-                    executeTraining(t, p, f, w, s, currentTraining, nextTraining, nowConsenting);
+                    stamina -= lostStamina;
+                    motivation += gainedMotivation;
+                    if(motivation > 1000)
+                        motivation = 1000;
+                    executeTraining(t, p, f, w, s, currentTraining, nextTraining, nowConsenting, gainedExpertise);
                 }
 
                 final Forsaken this$0;
                 private final int val$increases[];
+                private final int val$lostStamina;
+                private final int val$gainedMotivation;
                 private final JTextPane val$t;
                 private final JPanel val$p;
                 private final JFrame val$f;
@@ -2605,19 +4569,23 @@ public class Forsaken
                 private final Boolean val$currentTraining[];
                 private final int val$nextTraining;
                 private final Boolean val$nowConsenting;
+                private final long val$gainedExpertise;
 
             
             {
                 this$0 = Forsaken.this;
                 increases = ai;
+                lostStamina = i;
+                gainedMotivation = j;
                 t = jtextpane;
                 p = jpanel;
                 f = jframe;
                 w = worldstate;
                 s = savedata;
                 currentTraining = aboolean;
-                nextTraining = i;
+                nextTraining = k;
                 nowConsenting = boolean1;
+                gainedExpertise = l;
                 super();
             }
             });
@@ -2661,7 +4629,7 @@ public class Forsaken
     }
 
     public void executeTraining(final JTextPane t, final JPanel p, final JFrame f, final WorldState w, final SaveData s, final Boolean currentTraining[], int nextTraining, 
-            final Boolean consenting)
+            final Boolean consenting, long gainedExpertise)
     {
         p.removeAll();
         w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\n").toString());
@@ -3751,7 +5719,7 @@ public class Forsaken
             else
             if(deviancy < 20)
             {
-                w.append(t, (new StringBuilder("Latex spreads across ")).append(hisHer()).append(" skin, but stops short of ").append(hisHer()).append(" nipples and groin.  The outfit is fitted tightly enough that it squeezes and emphasizes ").append(hisHer()).append(" chest and butt, and adhesive strips build into the material spread open ").append(hisHer()).append(" ass ").toString());
+                w.append(t, (new StringBuilder("Latex spreads across ")).append(hisHer()).append(" skin, but stops short of ").append(hisHer()).append(" nipples and groin.  The outfit is fitted tightly enough that it squeezes and emphasizes ").append(hisHer()).append(" chest and butt, and adhesive strips built into the material spread open ").append(hisHer()).append(" ass ").toString());
                 if(gender != Gender.MALE)
                     w.append(t, "and pussy ");
                 w.append(t, "so that the pink insides are plainly visible.");
@@ -3889,7 +5857,7 @@ public class Forsaken
                 w.append(t, (new StringBuilder(String.valueOf(HeShe()))).append(" feels ").append(hisHer()).append(" own body getting strangely heated as ").append(heShe()).append(" sees how everyone's looking at ").append(himHer()).append(".").toString());
             else
             if(innocence > 33)
-                w.append(t, (new StringBuilder("A part of ")).append(himHer()).append(" wishes that they'd go further.").toString());
+                w.append(t, (new StringBuilder("A part of ")).append(himHer()).append(" wishes that the crowd would go further.").toString());
             else
                 w.append(t, (new StringBuilder(String.valueOf(HeShe()))).append(" can't deny that ").append(heShe()).append("'s getting more and more aroused, too.").toString());
         } else
@@ -4025,6 +5993,8 @@ public class Forsaken
                     orgasmsGiven += 3 + (int)(Math.random() * 3D);
             }
         }
+        w.append(t, "\n\n");
+        grantExpertise(t, w, nextTraining % 6, gainedExpertise);
         currentTraining[nextTraining] = Boolean.valueOf(true);
         JButton Continue = new JButton("Continue");
         Continue.addActionListener(new ActionListener() {
@@ -4059,6 +6029,274 @@ public class Forsaken
         p.add(Continue);
         p.validate();
         p.repaint();
+    }
+
+    public void chooseCombatStyle()
+    {
+        long highest = 1200L;
+        if(combatStyle == 0)
+            highest = 1320L;
+        int choice = 0;
+        long hateTotal = hateExp * (long)(200 - morality);
+        long pleaTotal = pleaExp * (long)(200 - innocence);
+        long injuTotal = injuExp * (long)(200 - confidence);
+        long expoTotal = expoExp * (long)(200 - dignity);
+        long weights[] = new long[15];
+        weights[1] = (hateTotal * 2700L) / (pleaTotal + injuTotal + expoTotal);
+        weights[2] = (pleaTotal * 2700L) / (hateTotal + injuTotal + expoTotal);
+        weights[3] = (injuTotal * 2700L) / (hateTotal + pleaTotal + expoTotal);
+        weights[4] = (expoTotal * 2700L) / (hateTotal + pleaTotal + injuTotal);
+        weights[5] = ((hateTotal + pleaTotal) * 1000L) / (injuTotal + expoTotal);
+        weights[6] = ((hateTotal + injuTotal) * 1000L) / (pleaTotal + expoTotal);
+        weights[7] = ((hateTotal + expoTotal) * 1000L) / (pleaTotal + injuTotal);
+        weights[8] = ((pleaTotal + injuTotal) * 1000L) / (hateTotal + expoTotal);
+        weights[9] = ((pleaTotal + expoTotal) * 1000L) / (hateTotal + injuTotal);
+        weights[10] = ((injuTotal + expoTotal) * 1000L) / (hateTotal + pleaTotal);
+        weights[11] = ((hateTotal + pleaTotal + injuTotal) * 1000L) / (expoTotal * 3L);
+        weights[12] = ((hateTotal + pleaTotal + expoTotal) * 1000L) / (injuTotal * 3L);
+        weights[13] = ((hateTotal + injuTotal + expoTotal) * 1000L) / (pleaTotal * 3L);
+        weights[14] = ((pleaTotal + injuTotal + expoTotal) * 1000L) / (hateTotal * 3L);
+        if(combatStyle >= 0 && combatStyle < 15)
+            weights[combatStyle] = (weights[combatStyle] * 11L) / 10L;
+        for(int i = 0; i < weights.length; i++)
+            if(weights[i] > highest)
+            {
+                highest = weights[i];
+                choice = i;
+            }
+
+        combatStyle = choice;
+    }
+
+    public void grantExpertise(JTextPane t, WorldState w, int pattern, long amount)
+    {
+        long expertises[] = {
+            hateExp, pleaExp, injuExp, expoExp
+        };
+        for(int i = 0; i < 3; i++)
+            if(expertises[i] < expertises[i + 1])
+            {
+                long storage = expertises[i];
+                expertises[i] = expertises[i + 1];
+                expertises[i + 1] = storage;
+                i = -1;
+            }
+
+        long moved = 0L;
+        for(long reductions = (expertises[0] * 5L) / amount - 100L; reductions > 0L; reductions--)
+        {
+            long difference = (amount * 23L) / 1000L;
+            amount -= difference;
+            moved += difference;
+        }
+
+        String INJU = "INJU";
+        if(w.tickleOn.booleanValue())
+            INJU = "ANTI";
+        if(pattern == 0)
+        {
+            hateExp += amount;
+            pleaExp += amount;
+            injuExp -= moved;
+            expoExp -= moved;
+            if(moved > 0L)
+                w.append(t, (new StringBuilder(String.valueOf(INJU))).append("/EXPO -> ").append(condensedFormat(moved)).append(" Exp -> HATE/PLEA\n").toString());
+            w.append(t, (new StringBuilder("+")).append(condensedFormat(amount)).append(" Exp HATE/PLEA").toString());
+        } else
+        if(pattern == 1)
+        {
+            hateExp += amount;
+            injuExp += amount;
+            pleaExp -= moved;
+            expoExp -= moved;
+            if(moved > 0L)
+                w.append(t, (new StringBuilder("PLEA/EXPO -> ")).append(condensedFormat(moved)).append(" Exp -> HATE/").append(INJU).append("\n").toString());
+            w.append(t, (new StringBuilder("+")).append(condensedFormat(amount)).append(" Exp HATE/").append(INJU).toString());
+        } else
+        if(pattern == 2)
+        {
+            hateExp += amount;
+            expoExp += amount;
+            pleaExp -= moved;
+            injuExp -= moved;
+            if(moved > 0L)
+                w.append(t, (new StringBuilder("PLEA/")).append(INJU).append(" -> ").append(condensedFormat(moved)).append(" Exp -> HATE/EXPO\n").toString());
+            w.append(t, (new StringBuilder("+")).append(condensedFormat(amount)).append(" Exp HATE/EXPO").toString());
+        } else
+        if(pattern == 3)
+        {
+            pleaExp += amount;
+            injuExp += amount;
+            hateExp -= moved;
+            expoExp -= moved;
+            if(moved > 0L)
+                w.append(t, (new StringBuilder("HATE/EXPO -> ")).append(condensedFormat(moved)).append(" Exp -> PLEA/").append(INJU).append("\n").toString());
+            w.append(t, (new StringBuilder("+")).append(condensedFormat(amount)).append(" Exp PLEA/").append(INJU).toString());
+        } else
+        if(pattern == 4)
+        {
+            pleaExp += amount;
+            expoExp += amount;
+            hateExp -= moved;
+            injuExp -= moved;
+            if(moved > 0L)
+                w.append(t, (new StringBuilder("HATE/")).append(INJU).append(" -> ").append(condensedFormat(moved)).append(" Exp -> PLEA/EXPO\n").toString());
+            w.append(t, (new StringBuilder("+")).append(condensedFormat(amount)).append(" Exp PLEA/EXPO").toString());
+        } else
+        {
+            injuExp += amount;
+            expoExp += amount;
+            hateExp -= moved;
+            pleaExp -= moved;
+            if(moved > 0L)
+                w.append(t, (new StringBuilder("HATE/PLEA -> ")).append(condensedFormat(moved)).append(" Exp -> ").append(INJU).append("/EXPO\n").toString());
+            w.append(t, (new StringBuilder("+")).append(condensedFormat(amount)).append(" Exp ").append(INJU).append("/EXPO").toString());
+        }
+        if(hateExp < 1L)
+            hateExp = 1L;
+        if(pleaExp < 1L)
+            pleaExp = 1L;
+        if(injuExp < 1L)
+            injuExp = 1L;
+        if(expoExp < 1L)
+            expoExp = 1L;
+        int combatStorage = combatStyle;
+        chooseCombatStyle();
+        if(combatStorage != combatStyle)
+            w.append(t, (new StringBuilder("\n\nNew ")).append(describeCombatStyle(w, Boolean.valueOf(true))).toString());
+    }
+
+    public int expModifier()
+    {
+        int value = 1000;
+        if(deviancy < 10)
+            value = 1750 - deviancy;
+        else
+        if(deviancy < 20)
+            value = 1740 - (deviancy - 10) * 4;
+        else
+        if(deviancy < 30)
+            value = 1700 - (deviancy - 20) * 10;
+        else
+        if(deviancy < 40)
+            value = 1600 - (deviancy - 30) * 22;
+        else
+        if(deviancy < 50)
+            value = 1380 - (deviancy - 40) * 38;
+        else
+        if(deviancy < 60)
+            value = 1000 - (deviancy - 50) * 28;
+        else
+        if(deviancy < 70)
+            value = 720 - (deviancy - 60) * 32;
+        else
+        if(deviancy < 80)
+            value = 400 - (deviancy - 70) * 23;
+        else
+        if(deviancy < 90)
+            value = 170 - (deviancy - 80) * 11;
+        else
+            value = 60 - (deviancy - 90) * 4;
+        return value;
+    }
+
+    public String describeCombatStyle(WorldState w, Boolean full)
+    {
+        String INJU = "INJU";
+        if(w.tickleOn.booleanValue())
+            INJU = "ANTI";
+        String message = "Combat Style: ";
+        if(combatStyle == 0)
+        {
+            message = (new StringBuilder(String.valueOf(message))).append("Unfocused (3% HATE/PLEA/").append(INJU).append("/EXPO)").toString();
+            if(full.booleanValue())
+                message = (new StringBuilder(String.valueOf(message))).append("\nAttacks with no singular strategy.  Deals all damage types, but unlikely to make much progress unless the user has an overwhelming advantage over the target.").toString();
+        } else
+        if(combatStyle == 1)
+        {
+            message = (new StringBuilder(String.valueOf(message))).append("Mean (1000% HATE)").toString();
+            if(full.booleanValue())
+                message = (new StringBuilder(String.valueOf(message))).append("\nAvoids direct combat, instead taunting and manipulating the target's emotional state.  Can set up for a powerful surround afterward.").toString();
+        } else
+        if(combatStyle == 2)
+        {
+            message = (new StringBuilder(String.valueOf(message))).append("Seductive (1000% PLEA)").toString();
+            if(full.booleanValue())
+                message = (new StringBuilder(String.valueOf(message))).append("\nFocuses on groping and stimulating the target.  Can leave a lasting impression, but only against a target who has already been weakened and distracted.").toString();
+        } else
+        if(combatStyle == 3)
+        {
+            message = (new StringBuilder(String.valueOf(message))).append("Desperate (1000% ").append(INJU).append(")").toString();
+            if(full.booleanValue())
+                message = (new StringBuilder(String.valueOf(message))).append("\nLacking confidence in own abilities, acts with singleminded focus to disable the target.  Useful early in the battle to increase future circumstance damage taken.").toString();
+        } else
+        if(combatStyle == 4)
+        {
+            message = (new StringBuilder(String.valueOf(message))).append("Flashy (1000% EXPO)").toString();
+            if(full.booleanValue())
+                message = (new StringBuilder(String.valueOf(message))).append("\nFocuses on putting on a show for any onlookers, usually by attacking the target's clothes or by sabotaging a stripped target's attempts at modesty.  Can be used to demoralize an entire team.").toString();
+        } else
+        if(combatStyle == 5)
+        {
+            message = (new StringBuilder(String.valueOf(message))).append("Rapacious (100% HATE/PLEA)").toString();
+            if(full.booleanValue())
+                message = (new StringBuilder(String.valueOf(message))).append("\nPrioritizes own pleasure, making use of the target's body.  Targets who are unable to fight back will find the experience highly traumatizing.").toString();
+        } else
+        if(combatStyle == 6)
+        {
+            message = (new StringBuilder(String.valueOf(message))).append("Sadistic (100% HATE/").append(INJU).append(")").toString();
+            if(full.booleanValue())
+                message = (new StringBuilder(String.valueOf(message))).append("\nAttacks without mercy, enjoying the target's suffering.  Weakens most targets significantly, making further attacks even easier.").toString();
+        } else
+        if(combatStyle == 7)
+        {
+            message = (new StringBuilder(String.valueOf(message))).append("Playful (100% HATE/EXPO)").toString();
+            if(full.booleanValue())
+                message = (new StringBuilder(String.valueOf(message))).append("\nShows no respect for the target's abilities, directing all attacks at the target's clothing and obviously making no effort to actually defeat the target.  Highly distracting to both the target and any teammates.").toString();
+        } else
+        if(combatStyle == 8)
+        {
+            message = (new StringBuilder(String.valueOf(message))).append("Dirty (100% PLEA/ ").append(INJU).append(")").toString();
+            if(full.booleanValue())
+                message = (new StringBuilder(String.valueOf(message))).append("\nGrapples with a focus on the target's sensitive parts, alternating between different kinds of stimulation in order to throw the target off-guard.  Can cause significant trauma even without support from Thralls.").toString();
+        } else
+        if(combatStyle == 9)
+        {
+            message = (new StringBuilder(String.valueOf(message))).append("Perverted (100% PLEA/EXPO)").toString();
+            if(full.booleanValue())
+                message = (new StringBuilder(String.valueOf(message))).append("\nStrips and molests the target.  Can be extremely distracting to the entire enemy team, but only if the target is weakened first.").toString();
+        } else
+        if(combatStyle == 10)
+        {
+            message = (new StringBuilder(String.valueOf(message))).append("Wild (100% ").append(INJU).append("/EXPO)").toString();
+            if(full.booleanValue())
+                message = (new StringBuilder(String.valueOf(message))).append("\nAttacks indiscrimiately, dealing as much damage to the target's clothes and surroundings as to the actual target.  Highly effective at distracting an entire team for follow-up attacks.").toString();
+        } else
+        if(combatStyle == 11)
+        {
+            message = (new StringBuilder(String.valueOf(message))).append("Decisive (15% HATE/PLEA/").append(INJU).append(")").toString();
+            if(full.booleanValue())
+                message = (new StringBuilder(String.valueOf(message))).append("\nAttempts to disable and then torture the target, inflicting as much suffering as possible in as little time as possible.  For maximum effectiveness, the user must be able to singlehandedly overpower the target.").toString();
+        } else
+        if(combatStyle == 12)
+        {
+            message = (new StringBuilder(String.valueOf(message))).append("Careless (15% HATE/PLEA/EXPO)").toString();
+            if(full.booleanValue())
+                message = (new StringBuilder(String.valueOf(message))).append("\nFocuses on groping, stripping, and taunting the target rather than actually fighting.  Unless the user is much stronger than the target, this is only effective if the target has already been weakened.").toString();
+        } else
+        if(combatStyle == 13)
+        {
+            message = (new StringBuilder(String.valueOf(message))).append("Opportunistic (15% HATE/").append(INJU).append("/EXPO)").toString();
+            if(full.booleanValue())
+                message = (new StringBuilder(String.valueOf(message))).append("\nTries to demoralize the entire enemy team by viciously humiliating one target.  If the user doesn't have a significant advantage over the target, the display might be underwhelming.").toString();
+        } else
+        if(combatStyle == 14)
+        {
+            message = (new StringBuilder(String.valueOf(message))).append("Practical (15% PLEA/").append(INJU).append("/EXPO)").toString();
+            if(full.booleanValue())
+                message = (new StringBuilder(String.valueOf(message))).append("\nAttempts to pin the target in a helpless position and then use a combination of pain and pleasure to disrupt any attempts at resistance.  Relatively effective against targets who are too well-composed for emotional manipulation to work.").toString();
+        }
+        return message;
     }
 
     public int intensity(int baseParameter, int currentParameter, int parameterCount)
@@ -4106,6 +6344,171 @@ public class Forsaken
         else
             value = -150 + (5 * obedience) / 2;
         return value;
+    }
+
+    public int staminaRegen()
+    {
+        int value = 0;
+        if(obedience < 40)
+            value = 800 - obedience * 10;
+        else
+        if(obedience < 50)
+            value = 310 + (50 - obedience) * 9;
+        else
+        if(obedience < 60)
+            value = 230 + (60 - obedience) * 8;
+        else
+        if(obedience < 70)
+            value = 160 + (70 - obedience) * 7;
+        else
+        if(obedience < 80)
+            value = 100 + (80 - obedience) * 6;
+        else
+        if(obedience < 90)
+            value = 50 + (90 - obedience) * 5;
+        else
+            value = 10 + (100 - obedience) * 4;
+        return value;
+    }
+
+    public int[] motivationDamage()
+    {
+        int damages[] = {
+            ((1000 - motivation) * 2) / 3, 1000 - motivation, ((1000 - motivation) * 3) / 2
+        };
+        for(int i = 0; i < 3; i++)
+            damages[i] = (damages[i] * 10) / (220 - hostility * 2);
+
+        return damages;
+    }
+
+    public int motivationCost()
+    {
+        int value = 500;
+        if(hostility < 10)
+            value = 500 - hostility * 12;
+        else
+        if(hostility < 20)
+            value = 380 - (hostility - 10) * 9;
+        else
+        if(hostility < 30)
+            value = 290 - (hostility - 20) * 6;
+        else
+        if(hostility < 40)
+            value = 230 - (hostility - 30) * 3;
+        else
+        if(hostility < 80)
+            value = 200 - (hostility - 40) * 2;
+        else
+            value = 120 - (hostility - 80);
+        return value;
+    }
+
+    public int EECost()
+    {
+        int value = 1000;
+        int magnitude = disgrace / 10;
+        int remainder = disgrace % 10;
+        if(remainder == 0)
+            value = 1000;
+        else
+        if(remainder == 1)
+            value = 933;
+        else
+        if(remainder == 2)
+            value = 871;
+        else
+        if(remainder == 3)
+            value = 812;
+        else
+        if(remainder == 4)
+            value = 758;
+        else
+        if(remainder == 5)
+            value = 707;
+        else
+        if(remainder == 6)
+            value = 660;
+        else
+        if(remainder == 7)
+            value = 616;
+        else
+        if(remainder == 8)
+            value = 574;
+        else
+        if(remainder == 9)
+            value = 536;
+        for(; magnitude > 0; magnitude--)
+            if(value % 2 == 0)
+                value /= 2;
+            else
+                value = value / 2 + 1;
+
+        return value;
+    }
+
+    public int opinion(Forsaken x)
+    {
+        int sum = 0;
+        if(x.equals(firstPartner))
+        {
+            if(firstOriginalRelationship == 4)
+                sum = 1000;
+            else
+            if(firstOriginalRelationship == 2)
+                sum = 300;
+            else
+            if(firstOriginalRelationship >= 0)
+                sum = 100;
+            else
+            if(firstOriginalRelationship == -2)
+                sum = -300;
+            else
+                sum = -1000;
+        } else
+        if(x.equals(secondPartner))
+            if(secondOriginalRelationship == 4)
+                sum = 1000;
+            else
+            if(secondOriginalRelationship == 2)
+                sum = 300;
+            else
+            if(secondOriginalRelationship >= 0)
+                sum = 100;
+            else
+            if(secondOriginalRelationship == -2)
+                sum = -300;
+            else
+                sum = -1000;
+        if(x.kills != null && x.kills.length > 0 && x.kills[0] != null && firstFormerPartner != null && secondFormerPartner != null)
+            if(x.kills[0].equals(firstFormerPartner))
+            {
+                if(firstOriginalRelationship == 4)
+                    sum -= 700;
+                else
+                if(firstOriginalRelationship >= 0)
+                    sum -= 500;
+            } else
+            if(x.kills[0].equals(secondFormerPartner))
+                if(secondOriginalRelationship == 4)
+                    sum -= 700;
+                else
+                if(secondOriginalRelationship >= 0)
+                    sum -= 500;
+        sum = (sum += 400) - hostility;
+        sum -= x.disgrace;
+        if(deviancy < x.deviancy)
+            sum -= (x.deviancy - deviancy) * 2;
+        if(x.obedience < obedience)
+            sum -= (obedience - x.obedience) * 2;
+        if(others != null)
+        {
+            for(int i = 0; i < others.length; i++)
+                if(others[i].equals(x))
+                    sum -= troublemaker[i];
+
+        }
+        return sum;
     }
 
     public String himHer()
@@ -4162,7 +6565,7 @@ public class Forsaken
         SimpleAttributeSet keyWord = new SimpleAttributeSet();
         StyleConstants.setFontSize(keyWord, textSize);
         Color usedColor = textColor;
-        if(t.getBackground() == Color.BLACK)
+        if(t.getBackground().equals(Color.BLACK))
             usedColor = darkColor;
         StyleConstants.setForeground(keyWord, usedColor);
         StyleConstants.setFontFamily(keyWord, "DialogInput");
@@ -4175,6 +6578,117 @@ public class Forsaken
         {
             System.out.println(e);
         }
+    }
+
+    public String fixedFormat(long amount)
+    {
+        if(amount < 0L)
+            amount = 0L - amount;
+        int power;
+        for(power = 3; amount >= 10000L; power++)
+            amount /= 10L;
+
+        if(power == 3)
+            if(amount < 10L)
+                power = 0;
+            else
+            if(amount < 100L)
+                power = 1;
+            else
+            if(amount < 1000L)
+                power = 2;
+        String format = "";
+        if(power < 4 || (power - 2) % 3 == 0)
+            format = (new StringBuilder(String.valueOf(format))).append(" ").toString();
+        if(power > 2)
+            format = (new StringBuilder(String.valueOf(format))).append(amount / 1000L).toString();
+        else
+            format = (new StringBuilder(String.valueOf(format))).append(" ").toString();
+        if(power % 3 == 0 && power > 3)
+            format = (new StringBuilder(String.valueOf(format))).append(".").toString();
+        if(power > 1)
+            format = (new StringBuilder(String.valueOf(format))).append((amount % 1000L) / 100L).toString();
+        else
+            format = (new StringBuilder(String.valueOf(format))).append(" ").toString();
+        if((power - 1) % 3 == 0 && power > 3)
+            format = (new StringBuilder(String.valueOf(format))).append(".").toString();
+        if(power > 0)
+            format = (new StringBuilder(String.valueOf(format))).append((amount % 100L) / 10L).toString();
+        else
+            format = (new StringBuilder(String.valueOf(format))).append(" ").toString();
+        if(power < 4)
+            format = (new StringBuilder(String.valueOf(format))).append(amount % 10L).toString();
+        if(power > 17)
+            format = (new StringBuilder(String.valueOf(format))).append("E").toString();
+        else
+        if(power > 14)
+            format = (new StringBuilder(String.valueOf(format))).append("P").toString();
+        else
+        if(power > 11)
+            format = (new StringBuilder(String.valueOf(format))).append("T").toString();
+        else
+        if(power > 8)
+            format = (new StringBuilder(String.valueOf(format))).append("G").toString();
+        else
+        if(power > 5)
+            format = (new StringBuilder(String.valueOf(format))).append("M").toString();
+        else
+        if(power > 3)
+            format = (new StringBuilder(String.valueOf(format))).append("k").toString();
+        return format;
+    }
+
+    public String condensedFormat(long amount)
+    {
+        String format = "";
+        if(amount < 0L)
+        {
+            amount = 0L - amount;
+            format = (new StringBuilder(String.valueOf(format))).append("-").toString();
+        }
+        int power;
+        for(power = 3; amount >= 10000L; power++)
+            amount /= 10L;
+
+        if(power == 3)
+            if(amount < 10L)
+                power = 0;
+            else
+            if(amount < 100L)
+                power = 1;
+            else
+            if(amount < 1000L)
+                power = 2;
+        if(power > 2)
+            format = (new StringBuilder(String.valueOf(format))).append(amount / 1000L).toString();
+        if(power % 3 == 0 && power > 3)
+            format = (new StringBuilder(String.valueOf(format))).append(".").toString();
+        if(power > 1)
+            format = (new StringBuilder(String.valueOf(format))).append((amount % 1000L) / 100L).toString();
+        if((power - 1) % 3 == 0 && power > 3)
+            format = (new StringBuilder(String.valueOf(format))).append(".").toString();
+        if(power > 0)
+            format = (new StringBuilder(String.valueOf(format))).append((amount % 100L) / 10L).toString();
+        if(power < 4)
+            format = (new StringBuilder(String.valueOf(format))).append(amount % 10L).toString();
+        if(power > 17)
+            format = (new StringBuilder(String.valueOf(format))).append("E").toString();
+        else
+        if(power > 14)
+            format = (new StringBuilder(String.valueOf(format))).append("P").toString();
+        else
+        if(power > 11)
+            format = (new StringBuilder(String.valueOf(format))).append("T").toString();
+        else
+        if(power > 8)
+            format = (new StringBuilder(String.valueOf(format))).append("G").toString();
+        else
+        if(power > 5)
+            format = (new StringBuilder(String.valueOf(format))).append("M").toString();
+        else
+        if(power > 3)
+            format = (new StringBuilder(String.valueOf(format))).append("k").toString();
+        return format;
     }
 
     public Forsaken()
@@ -4209,9 +6723,21 @@ public class Forsaken
         takerIDs = new int[4];
         kills = new Chosen[2];
         defeatType = 0;
-        others = new Forsaken[2];
-        relationships = new Relationship[2];
-        feelings = new int[2];
+        formerSelf = null;
+        formerRelationships = new int[3][3];
+        firstPartner = null;
+        secondPartner = null;
+        firstFormerPartner = null;
+        secondFormerPartner = null;
+        firstOriginalRelationship = 0;
+        secondOriginalRelationship = 0;
+        others = null;
+        troublemaker = null;
+        hateExp = 20000L;
+        pleaExp = 20000L;
+        injuExp = 20000L;
+        expoExp = 20000L;
+        combatStyle = -1;
     }
 
     private static final long serialVersionUID = 4L;
@@ -4271,7 +6797,19 @@ public class Forsaken
     int takerIDs[];
     Chosen kills[];
     int defeatType;
+    Chosen formerSelf;
+    int formerRelationships[][];
+    Forsaken firstPartner;
+    Forsaken secondPartner;
+    Chosen firstFormerPartner;
+    Chosen secondFormerPartner;
+    int firstOriginalRelationship;
+    int secondOriginalRelationship;
     Forsaken others[];
-    Relationship relationships[];
-    int feelings[];
+    int troublemaker[];
+    long hateExp;
+    long pleaExp;
+    long injuExp;
+    long expoExp;
+    int combatStyle;
 }

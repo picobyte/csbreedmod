@@ -7529,7 +7529,8 @@ public class WorldState
 
     public long softClamp(long base, long change, int preApplied)
     {
-        clampPercent = 100;
+        if(clampPercent == 0)
+            clampPercent = 100;
         long nextClamp = 10L;
         long startPower = clampStart;
         long usedPercent = clampPercent;
@@ -7542,7 +7543,12 @@ public class WorldState
         while(base > nextClamp && nextClamp < 0xcccccccccccccccL) 
         {
             nextClamp = nextMagnitude(nextClamp);
-            change /= 2L;
+            if(nextClamp >= 0xe8d4a51000L && usedPercent > 20L)
+                usedPercent = 20L;
+            if(change >= 0x147ae147ae147aeL)
+                change = (change / 100L) * usedPercent;
+            else
+                change = (change * usedPercent) / 100L;
         }
         while(base + change > nextClamp && nextClamp < 0xcccccccccccccccL) 
         {
@@ -7833,10 +7839,15 @@ public class WorldState
                 getCast()[i].parasitismProgress = getCast()[i].timesStripped() * 60;
             }
 
+        if(hardMode == null)
+        {
+            hardMode = Boolean.valueOf(false);
+            adjusted = Boolean.valueOf(true);
+        }
         if(version == null)
             adjusted = Boolean.valueOf(true);
         else
-        if(!version.equals("16"))
+        if(!version.equals("17"))
             adjusted = Boolean.valueOf(true);
         if(adjusted.booleanValue())
         {
@@ -7847,7 +7858,7 @@ public class WorldState
             }
             highScore = 0L;
             parScore = 0L;
-            version = "16";
+            version = "17";
         }
     }
 
@@ -7876,6 +7887,10 @@ public class WorldState
         setCommentaryRead(w.getCommentaryRead());
         setCommentaryWrite(w.getCommentaryWrite());
         earlyCheat = w.getEarlyCheat();
+        hardMode = w.hardMode;
+        eventOffset = w.eventOffset;
+        clampStart = w.clampStart;
+        clampPercent = w.clampPercent;
     }
 
     public int getFemaleShift()
@@ -8432,7 +8447,7 @@ public class WorldState
         Chosen second = getCast()[1];
         Chosen third = getCast()[2];
         long angstBonus = getCast()[0].getANGST() / 1000L + getCast()[1].getANGST() / 1000L + getCast()[2].getANGST() / 1000L;
-        append(t, (new StringBuilder(String.valueOf(first.condensedFormat(getCast()[0].getANGST())))).append(" (").append(getCast()[0].getMainName()).append(") + ").append(second.condensedFormat(getCast()[1].getANGST())).append(" (").append(getCast()[1].getMainName()).append(") + ").append(third.condensedFormat(getCast()[2].getANGST())).append(" (").append(getCast()[2].getMainName()).append(") = ").append(first.condensedFormat(angstBonus)).append(" pts\n\nUnresolved Trauma (1 pt per 100): ").toString());
+        append(t, (new StringBuilder(String.valueOf(first.condensedFormat(getCast()[0].getANGST() / 1000L)))).append(" (").append(getCast()[0].getMainName()).append(") + ").append(second.condensedFormat(getCast()[1].getANGST() / 1000L)).append(" (").append(getCast()[1].getMainName()).append(") + ").append(third.condensedFormat(getCast()[2].getANGST() / 1000L)).append(" (").append(getCast()[2].getMainName()).append(") = ").append(first.condensedFormat(angstBonus)).append(" pts\n\nUnresolved Trauma (1 pt per 100): ").toString());
         totalScore += angstBonus;
         long firstTrauma = getCast()[0].getTotalFEAR() / 100L + getCast()[0].getTotalDISG() / 100L + getCast()[0].getTotalPAIN() / 100L + getCast()[0].getTotalSHAM() / 100L;
         long secondTrauma = getCast()[1].getTotalFEAR() / 100L + getCast()[1].getTotalDISG() / 100L + getCast()[1].getTotalPAIN() / 100L + getCast()[1].getTotalSHAM() / 100L;
@@ -8797,8 +8812,8 @@ public class WorldState
         totalScore += enmityBonus;
         long earlyFinishBonus = 0L;
         long earlyFinishMultiplier = 0x16345785d8a0000L;
-        if(day < 50)
-            earlyFinishBonus = (50L - (long)day) * earlyFinishMultiplier;
+        if(day < 35)
+            earlyFinishBonus = (35L - (long)day) * earlyFinishMultiplier;
         totalScore += earlyFinishBonus;
         append(t, (new StringBuilder("\n\nEarly Finish Bonus (100P pts per day): ")).append(getCast()[0].condensedFormat(earlyFinishBonus)).append(" pts\n\nVictory Bonus: ").toString());
         int defeated = 0;
@@ -12003,7 +12018,7 @@ public class WorldState
             }
         }
 
-        if(day == 50 || techs[48].isOwned().booleanValue())
+        if(day == 50 - eventOffset * 3 || techs[48].isOwned().booleanValue())
         {
             finalBattle = Boolean.valueOf(true);
             for(int i = 0; i < 3; i++)
@@ -12842,7 +12857,7 @@ public class WorldState
                         {
                             duration1 = captureDuration - victim1.captureProgression;
                             if(victim1.timesDetonated() > 0)
-                                duration1 = -victim1.getINJULevel();
+                                duration1 -= victim1.getINJULevel();
                         }
                         int duration2 = 0;
                         if(victim2 != null)
@@ -12853,7 +12868,7 @@ public class WorldState
                             {
                                 duration2 = captureDuration - victim1.captureProgression;
                                 if(victim2.timesDetonated() > 0)
-                                    duration2 = -victim2.getINJULevel();
+                                    duration2 -= victim2.getINJULevel();
                             }
                         if(duration1 < 2 && duration2 < 2)
                         {
@@ -17423,30 +17438,60 @@ public class WorldState
             if(c.getMorality() > 66)
             {
                 if(c.getInnocence() > 66)
-                    c.say(t, "It was... really stupid of me to think I was fighting on the right side...");
-                else
+                {
+                    c.say(t, "It was... really stupid of me ");
+                    corruptColors(c);
+                    c.say(t, "to think I was fighting on the right side...");
+                } else
                 if(c.getInnocence() > 33)
-                    c.say(t, "I... I need to apologize to the others for taking so long to realize it...");
-                else
-                    c.say(t, "Both sides are equally evil.  The Demons... perhaps even less so...");
+                {
+                    c.say(t, "I... I need to apologize to the others ");
+                    corruptColors(c);
+                    c.say(t, "for taking so long to realize it...");
+                } else
+                {
+                    c.say(t, "Both sides are equally evil.  The Demons... ");
+                    corruptColors(c);
+                    c.say(t, "perhaps even less so...");
+                }
             } else
             if(c.getMorality() > 33)
             {
                 if(c.getInnocence() > 66)
-                    c.say(t, "I get it now...  I've been fighting for the bad guys all along...");
-                else
+                {
+                    c.say(t, "I get it now...  ");
+                    corruptColors(c);
+                    c.say(t, "I've been fighting for the bad guys all along...");
+                } else
                 if(c.getInnocence() > 33)
-                    c.say(t, "I think... the only way to stop this is to join the Demons...");
-                else
-                    c.say(t, "No... I cannot lend my support to those who use such cruel methods!");
+                {
+                    c.say(t, "I think... ");
+                    corruptColors(c);
+                    c.say(t, "the only way to stop this is to join the Demons...");
+                } else
+                {
+                    c.say(t, "No... ");
+                    corruptColors(c);
+                    c.say(t, "I cannot lend my support to those who use such cruel methods!");
+                }
             } else
             if(c.getInnocence() > 66)
-                c.say(t, "Am I seriously considering joining the Demons!?  I... actually, I guess I am...");
-            else
+            {
+                c.say(t, "Am I seriously considering joining the Demons!?  I... ");
+                corruptColors(c);
+                c.say(t, "actually, I guess I am...");
+            } else
             if(c.getInnocence() > 33)
-                c.say(t, "From the start, I guess it made more sense for me to be on the Demons' side...");
-            else
-                c.say(t, "This was your plan all along, wasn't it?  Very well.  I will join you.");
+            {
+                c.say(t, "From the start, ");
+                corruptColors(c);
+                c.say(t, "I guess it made more sense for me to be on the Demons' side...");
+            } else
+            {
+                c.say(t, "This was your plan all along, wasn't it?  Very well.  ");
+                corruptColors(c);
+                c.say(t, "I will join you.");
+            }
         } else
         {
             w.append(t, (new StringBuilder("-")).append(resolveLost).append("% Resolve (").append(c.resolve).append("% remaining)\n\n").toString());
@@ -17594,30 +17639,60 @@ public class WorldState
             if(c.getInnocence() > 66)
             {
                 if(c.getMorality() > 66)
-                    c.say(t, "Yes... it's better to just let my master tell me what's right and wrong...");
-                else
+                {
+                    c.say(t, "Yes... ");
+                    corruptColors(c);
+                    c.say(t, "it's better to just let my master tell me what's right and wrong...");
+                } else
                 if(c.getMorality() > 33)
-                    c.say(t, "I'm just... gonna stop thinking...");
-                else
-                    c.say(t, "Ah... this feels so much better...");
+                {
+                    c.say(t, "I'm just... ");
+                    corruptColors(c);
+                    c.say(t, "gonna stop thinking");
+                } else
+                {
+                    c.say(t, "Ah... ");
+                    corruptColors(c);
+                    c.say(t, "this feels so much better...");
+                }
             } else
             if(c.getInnocence() > 33)
             {
                 if(c.getConfidence() > 66)
-                    c.say(t, "I've been reduced to... this...");
-                else
+                {
+                    c.say(t, "I've been reduced to... ");
+                    corruptColors(c);
+                    c.say(t, "this...");
+                } else
                 if(c.getConfidence() > 33)
-                    c.say(t, "Everyone can see that I'm... a failure...");
-                else
-                    c.say(t, (new StringBuilder("Nnh...  I never should have pretended to be anyone but the weak, stupid, ")).append(c.getGivenName()).append("...").toString());
+                {
+                    c.say(t, "Everyone can see that I'm... ");
+                    corruptColors(c);
+                    c.say(t, "a failure...");
+                } else
+                {
+                    c.say(t, "Nnh...  I never should have pretended to be anyone but ");
+                    corruptColors(c);
+                    c.say(t, (new StringBuilder("the weak, stupid ")).append(c.getGivenName()).append("...").toString());
+                }
             } else
             if(c.getConfidence() > 66)
-                c.say(t, "No!  Without me... we'll certainly... be defeated...");
-            else
+            {
+                c.say(t, "No!  Without me... we'll certainly... ");
+                corruptColors(c);
+                c.say(t, "be defeated...");
+            } else
             if(c.getConfidence() > 33)
-                c.say(t, "There must... be something I...  Unh...");
-            else
-                c.say(t, "I suppose... I never... had... a chance...");
+            {
+                c.say(t, "There must... be something I...  ");
+                corruptColors(c);
+                c.say(t, "Unh...");
+            } else
+            {
+                c.say(t, "I suppose... I never... had... ");
+                corruptColors(c);
+                c.say(t, "a chance...");
+            }
         } else
         {
             w.append(t, (new StringBuilder("-")).append(resolveLost).append("% Resolve (").append(c.resolve).append("% remaining)\n\n").toString());
@@ -17838,50 +17913,100 @@ public class WorldState
                 if(c.getConfidence() > 66)
                 {
                     if(c.getInnocence() > 66)
-                        c.say(t, "I guess... I'm really not used to submitting to my new master...");
-                    else
+                    {
+                        c.say(t, "I guess... ");
+                        corruptColors(c);
+                        c.say(t, "I'm really not used to submitting to my new master...");
+                    } else
                     if(c.getInnocence() > 33)
-                        c.say(t, "Ugh... I never had a chance after all...");
-                    else
-                        c.say(t, "It was only foolish pride that led me to resist...");
+                    {
+                        c.say(t, "Ugh... ");
+                        corruptColors(c);
+                        c.say(t, "I never had a chance after all..");
+                    } else
+                    {
+                        c.say(t, "It was only foolish pride ");
+                        corruptColors(c);
+                        c.say(t, "that led me to resist...");
+                    }
                 } else
                 if(c.getConfidence() > 33)
                 {
                     if(tickleOn.booleanValue())
                     {
                         if(c.getInnocence() > 66)
-                            c.say(t, "Ahahah!  I give up!  I give uuup!  Hahahahah!");
-                        else
+                        {
+                            c.say(t, "Ahahah!  I give up!  ");
+                            corruptColors(c);
+                            c.say(t, "I give uuup!  Hahahahah!");
+                        } else
                         if(c.getInnocence() > 33)
-                            c.say(t, "Ahah... g-go on... I won't stop you.  Ahahah!");
-                        else
-                            c.say(t, "I yield!  Ah!  Hahah, I mean, I give up, I give up, I won't fight you anymore, ahahahahah!");
+                        {
+                            c.say(t, "Ahah... g-go on... ");
+                            corruptColors(c);
+                            c.say(t, "I won't stop you.  Ahahah!");
+                        } else
+                        {
+                            c.say(t, "I yield!  Ah!  Hahah, I mean, I give up, ");
+                            corruptColors(c);
+                            c.say(t, "I give up, I won't fight you anymore, ahahahahah!");
+                        }
                     } else
                     if(c.getInnocence() > 66)
-                        c.say(t, "Ow!  I give up!  I give uuup!  Aaah!");
-                    else
+                    {
+                        c.say(t, "Ow!  I give up!  ");
+                        corruptColors(c);
+                        c.say(t, "I give uuup!  Aaah!");
+                    } else
                     if(c.getInnocence() > 33)
-                        c.say(t, "Ergh!  Guh!  Phew...  K-Keep going, I won't stop you...");
-                    else
-                        c.say(t, "Ah!  Gah!  I yield!  I-I give up!  I give up!  I won't fight you anymore!  Aaagh!");
+                    {
+                        c.say(t, "Ergh!  Guh!  Phew...  K-Keep going, ");
+                        corruptColors(c);
+                        c.say(t, "I won't stop you...");
+                    } else
+                    {
+                        c.say(t, "Ah!  Gah!  I yield!  I-I give up!  ");
+                        corruptColors(c);
+                        c.say(t, "I give up!  I won't fight you anymore!  Aaagh!");
+                    }
                 } else
                 if(tickleOn.booleanValue())
                 {
                     if(c.getInnocence() > 66)
-                        c.say(t, "Hahahah, I'm breaking, I'm breaking, ahahahah, I'm breakiiing!");
-                    else
+                    {
+                        c.say(t, "Hahahah, I'm breaking, I'm breaking, ahahahah, ");
+                        corruptColors(c);
+                        c.say(t, "I'm breakiiing!");
+                    } else
                     if(c.getInnocence() > 33)
-                        c.say(t, "Hahah, I-I can't, hahahah, anymore- Hahahahah!");
-                    else
-                        c.say(t, "Hahahah, y-yes, punish me mooore, hahahahah!");
+                    {
+                        c.say(t, "Hahah, I-I can't, hahahah, anymore- ");
+                        corruptColors(c);
+                        c.say(t, "Hahahahah!");
+                    } else
+                    {
+                        c.say(t, "Hahahah, y-yes, ");
+                        corruptColors(c);
+                        c.say(t, "punish me mooore, hahahahah!");
+                    }
                 } else
                 if(c.getInnocence() > 66)
-                    c.say(t, "Aaah!  I p-promise, I won't fight you- Naah!  I won't fight you anymooore!");
-                else
+                {
+                    c.say(t, "Aaah!  I p-promise, I won't fight you- Naah!  ");
+                    corruptColors(c);
+                    c.say(t, "I won't fight you anymooore!");
+                } else
                 if(c.getInnocence() > 33)
-                    c.say(t, "Gh!  I-I can't, I can't fight anymore...  Ngh...");
-                else
-                    c.say(t, "Ngh!  Y-Yes, punish me more...");
+                {
+                    c.say(t, "Gh!  I-I can't, ");
+                    corruptColors(c);
+                    c.say(t, "I can't fight anymore...  Ngh...");
+                } else
+                {
+                    c.say(t, "Ngh!  Y-Yes, ");
+                    corruptColors(c);
+                    c.say(t, "punish me more...");
+                }
             } else
             {
                 if(c.getConfidence() > 66)
@@ -17895,30 +18020,60 @@ public class WorldState
                 if(c.getConfidence() > 66)
                 {
                     if(c.getMorality() > 66)
-                        c.say(t, "I am humanity's only hope!  I can't die here!  F-For everyone else's sake!");
-                    else
+                    {
+                        c.say(t, "I am humanity's only hope!  ");
+                        corruptColors(c);
+                        c.say(t, "I can't die here!  F-For everyone else's sake!");
+                    } else
                     if(c.getMorality() > 33)
-                        c.say(t, "I will defeat the Demon Lord someday.  But for now, I need to survive...");
-                    else
-                        c.say(t, "I must survive and become even stronger in order to get my revenge.  Even if it means working with Demons...");
+                    {
+                        c.say(t, "I will defeat the Demon Lord someday.  ");
+                        corruptColors(c);
+                        c.say(t, "But for now, I need to survive...");
+                    } else
+                    {
+                        c.say(t, "I must survive and become even stronger in order to get my revenge.  ");
+                        corruptColors(c);
+                        c.say(t, "Even if it means working with Demons...");
+                    }
                 } else
                 if(c.getConfidence() > 33)
                 {
                     if(c.getMorality() > 66)
-                        c.say(t, "If I die here, I won't be able to save anyone...");
-                    else
+                    {
+                        c.say(t, "If I die here, ");
+                        corruptColors(c);
+                        c.say(t, "I won't be able to save anyone...");
+                    } else
                     if(c.getMorality() > 33)
-                        c.say(t, "There's no point in dying here...");
-                    else
-                        c.say(t, "There's no way I'm dying for the sake of these people...");
+                    {
+                        c.say(t, "There's no point ");
+                        corruptColors(c);
+                        c.say(t, "in dying here...");
+                    } else
+                    {
+                        c.say(t, "There's no way I'm dying ");
+                        corruptColors(c);
+                        c.say(t, "for the sake of these people...");
+                    }
                 } else
                 if(c.getMorality() > 66)
-                    c.say(t, "I-I'm sorry, everyone... but I'm afraid of dying after all...");
-                else
+                {
+                    c.say(t, "I-I'm sorry, everyone... ");
+                    corruptColors(c);
+                    c.say(t, "but I'm afraid of dying after all...");
+                } else
                 if(c.getMorality() > 33)
-                    c.say(t, "Ah...  I-I ended up surrendering before I could stop myself...");
-                else
-                    c.say(t, "I-I don't wanna die!");
+                {
+                    c.say(t, "Ah...  I-I ended up surrendering ");
+                    corruptColors(c);
+                    c.say(t, "before I could stop myself...");
+                } else
+                {
+                    c.say(t, "I-I don't wanna ");
+                    corruptColors(c);
+                    c.say(t, "die!");
+                }
             }
         } else
         {
@@ -18253,30 +18408,60 @@ public class WorldState
             if(c.getDignity() > 66)
             {
                 if(c.getMorality() > 66)
-                    c.say(t, "I was supposed to be their savior...");
-                else
+                {
+                    c.say(t, "I was supposed to be ");
+                    corruptColors(c);
+                    c.say(t, "their saviors...");
+                } else
                 if(c.getMorality() > 33)
-                    c.say(t, "I can't go back to being a normal person...");
-                else
-                    c.say(t, "My fame...  My power...");
+                {
+                    c.say(t, "I can't go back to being a ");
+                    corruptColors(c);
+                    c.say(t, "normal person...");
+                } else
+                {
+                    c.say(t, "My fame...  ");
+                    corruptColors(c);
+                    c.say(t, "My power...");
+                }
             } else
             if(c.getDignity() > 33)
             {
                 if(c.getInnocence() > 66)
-                    c.say(t, "Huh!?  What's happening!?  Where are my powers!?");
-                else
+                {
+                    c.say(t, "Huh!?  What's happening!?  ");
+                    corruptColors(c);
+                    c.say(t, "Where are my powers!?");
+                } else
                 if(c.getInnocence() > 33)
-                    c.say(t, "S-Stop ignoring me!  I'm not giving up yet!  Come back here!  I can still fight!");
-                else
-                    c.say(t, "There... There still must be something I can do!  It cannot end like this!");
+                {
+                    c.say(t, "S-Stop ignoring me!  I'm not giving up yet!  Come back here!  I can still... ");
+                    corruptColors(c);
+                    c.say(t, "fight...");
+                } else
+                {
+                    c.say(t, "There... There still must be something I can do!  It cannot end like... ");
+                    corruptColors(c);
+                    c.say(t, "this...");
+                }
             } else
             if(c.getInnocence() > 66)
-                c.say(t, "Huh!?  My punches are supposed to be way, way stronger than that!  Hey, let go of me!  Let gooo!");
-            else
+            {
+                c.say(t, "Huh!?  My punches are supposed to be way, way stronger than that!  Hey, let go of me!  ");
+                corruptColors(c);
+                c.say(t, "Let gooo!");
+            } else
             if(c.getInnocence() > 33)
-                c.say(t, "Wh-What!?  No...  No, this can't be happening!");
-            else
-                c.say(t, "Hmph.  It seems... I have been utterly defeated.");
+            {
+                c.say(t, "Wh-What!?  No...  No, ");
+                corruptColors(c);
+                c.say(t, "this can't be happening!");
+            } else
+            {
+                c.say(t, "Hmph.  It seems... ");
+                corruptColors(c);
+                c.say(t, "I have been utterly defeated...");
+            }
         } else
         {
             w.append(t, (new StringBuilder("-")).append(resolveLost).append("% Resolve (").append(c.resolve).append("% remaining)\n\n").toString());
@@ -18731,10 +18916,28 @@ public class WorldState
         }
     }
 
+    public void corruptColors(Chosen c)
+    {
+        if(c.innocence > 66)
+        {
+            c.textColor = new Color(255, 0, 150);
+            c.darkColor = new Color(255, 0, 150);
+        } else
+        if(c.innocence > 33)
+        {
+            c.textColor = new Color(120, 50, 180);
+            c.darkColor = new Color(150, 100, 200);
+        } else
+        {
+            c.textColor = new Color(200, 100, 100);
+            c.darkColor = new Color(255, 130, 220);
+        }
+    }
+
     public WorldState()
     {
         textSize = 16;
-        version = "16";
+        version = "17";
         PURPLE = new Color(100, 0, 150);
         ORANGE = new Color(200, 100, 0);
         RED = new Color(180, 0, 0);
@@ -18797,6 +19000,8 @@ public class WorldState
         commentaryWrite = Boolean.valueOf(false);
         cheater = Boolean.valueOf(false);
         earlyCheat = Boolean.valueOf(false);
+        hardMode = Boolean.valueOf(false);
+        eventOffset = 0;
         customNames = new String[6];
         customAliases = new String[3];
         customTitles = new String[3];
@@ -18889,6 +19094,8 @@ public class WorldState
     Boolean commentaryWrite;
     Boolean cheater;
     Boolean earlyCheat;
+    Boolean hardMode;
+    int eventOffset;
     String customNames[];
     String customTop[] = {
         "", "", ""
