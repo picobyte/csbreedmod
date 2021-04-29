@@ -42,6 +42,7 @@ public class SaveData
     {
         WorldState newSaves[] = new WorldState[saves.length + 1];
         newSaves[saves.length] = w;
+        w.save = this;
         String newNames[] = new String[names.length + 1];
         newNames[saves.length] = name;
         for(int i = 0; i < saves.length; i++)

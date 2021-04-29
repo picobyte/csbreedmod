@@ -279,12 +279,12 @@ public class Forsaken
         else
             originalGender = Gender.FUTANARI;
         if(c.gender.equals("male"))
-            originalGender = Gender.MALE;
+            gender = Gender.MALE;
         else
         if(c.gender.equals("female"))
-            originalGender = Gender.FEMALE;
+            gender = Gender.FEMALE;
         else
-            originalGender = Gender.FUTANARI;
+            gender = Gender.FUTANARI;
         incantation = c.incantation;
         adjectiveName = c.adjectiveName;
         nounName = c.nounName;
@@ -955,7 +955,7 @@ public class Forsaken
                 if(disgrace > 33)
                     say(t, "As my own public standing has fallen, I have had an opportunity to experience more and more of the abuse which is normally reserved for the drgs of society.  ");
                 else
-                    say(t, "The fame and fortune I experienced as one of the Chosen was not enough to distract me from noticing the constant abuse to which humans subject their less fortunate kin.  ");
+                    say(t, "The fame and fortune I experienced as one of the Chosen were not enough to distract me from noticing the constant abuse to which humans subject their less fortunate kin.  ");
                 if(morality > 66)
                     say(t, "I now believe that altruism toward one's peers is not only pointless, but also contrary to human nature, and only results in greater problems in the long term.  ");
                 else
@@ -1095,7 +1095,7 @@ public class Forsaken
                 Boolean history = Boolean.valueOf(false);
                 if(firstFormerPartner != null && secondFormerPartner != null && formerSelf != null && x.firstFormerPartner != null && x.secondFormerPartner != null && x.formerSelf != null && (firstFormerPartner.equals(x.formerSelf) || secondFormerPartner.equals(x.formerSelf)))
                     history = Boolean.valueOf(true);
-                if(formerSelf != null && x.formerSelf != null)
+                if(formerSelf != null && x.formerSelf != null && x.firstFormerPartner != null)
                 {
                     if(kills != null && x.kills != null && kills.length > 0 && x.kills.length > 0)
                         if(x.kills[0] != null && (x.kills[0].equals(firstFormerPartner) || x.kills[0].equals(secondFormerPartner)))
@@ -1748,7 +1748,7 @@ public class Forsaken
                                 say(t, (new StringBuilder("The thing that bothers me most is seeing such a strong-willed person forced to humiliate ")).append(x.himHer()).append("self for you.  ").toString());
                             else
                             if(x.confidence > 33)
-                                say(t, (new StringBuilder("You should really go easier on ")).append(x.himHer()).append(".  ").append(x.HeShe()).append(" doesn't this.  ").toString());
+                                say(t, (new StringBuilder("You should really go easier on ")).append(x.himHer()).append(".  ").append(x.HeShe()).append(" doesn't deserve this.  ").toString());
                             else
                                 say(t, (new StringBuilder("I just wish ")).append(x.heShe()).append(" were able to put up a little more resistance.  ").toString());
                         } else
@@ -3265,23 +3265,25 @@ public class Forsaken
                 public void actionPerformed(ActionEvent e)
                 {
                     p.removeAll();
-                    Project.ForsakenDowntime(t, p, f, w, s, new Forsaken[] {
-                        x
-                    });
-                    JButton Continue = new JButton("Continue");
-                    Continue.addActionListener(new ActionListener() {
+                    if(!w.active.booleanValue())
+                    {
+                        Project.ForsakenDowntime(t, p, f, w, s, new Forsaken[] {
+                            x
+                        });
+                        JButton Continue = new JButton("Continue");
+                        Continue.addActionListener(new ActionListener() {
 
-                        public void actionPerformed(ActionEvent e)
-                        {
-                            Project.ForsakenMenu(t, p, f, w, s, 0);
-                        }
+                            public void actionPerformed(ActionEvent e)
+                            {
+                                Project.ForsakenMenu(t, p, f, w, s, 0);
+                            }
 
-                        final _cls3 this$1;
-                        private final JTextPane val$t;
-                        private final JPanel val$p;
-                        private final JFrame val$f;
-                        private final WorldState val$w;
-                        private final SaveData val$s;
+                            final _cls3 this$1;
+                            private final JTextPane val$t;
+                            private final JPanel val$p;
+                            private final JFrame val$f;
+                            private final WorldState val$w;
+                            private final SaveData val$s;
 
                     
                     {
@@ -3293,17 +3295,21 @@ public class Forsaken
                         s = savedata;
                         super();
                     }
-                    });
-                    p.add(Continue);
-                    p.validate();
-                    p.repaint();
+                        });
+                        p.add(Continue);
+                        p.validate();
+                        p.repaint();
+                    } else
+                    {
+                        Project.PostBattle(t, p, f, w);
+                    }
                 }
 
                 final Forsaken this$0;
                 private final JPanel val$p;
+                private final WorldState val$w;
                 private final JTextPane val$t;
                 private final JFrame val$f;
-                private final WorldState val$w;
                 private final SaveData val$s;
                 private final Forsaken val$x;
 
@@ -3311,9 +3317,9 @@ public class Forsaken
             {
                 this$0 = Forsaken.this;
                 p = jpanel;
+                w = worldstate;
                 t = jtextpane;
                 f = jframe;
-                w = worldstate;
                 s = savedata;
                 x = forsaken1;
                 super();
@@ -6299,6 +6305,7710 @@ public class Forsaken
         return message;
     }
 
+    public void captureChosen(JTextPane t, JPanel p, JFrame f, WorldState w, Chosen c)
+    {
+        w.captureDuration = compatibility(c);
+        c.lastAction = 0;
+        c.captured = Boolean.valueOf(true);
+        w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\n").toString());
+        String topDesc = topCover;
+        if(topDesc.equals("crop"))
+            topDesc = "crop top";
+        else
+        if(topDesc.equals("strips"))
+            topDesc = "strips of cloth";
+        else
+        if(topDesc.equals("bindings"))
+            topDesc = "chest bindings";
+        String bottomDesc = bottomCover;
+        if(bottomDesc.equals("strips"))
+            bottomDesc = "strips of cloth";
+        String organ = "penis";
+        String lowerOrgan = "pussy";
+        if(c.gender.equals("female"))
+            organ = "clit";
+        if(c.gender.equals("male"))
+            lowerOrgan = "balls";
+        int powerConstant = 200 - disgrace * 2;
+        int baseDamage[] = {
+            powerConstant, powerConstant, powerConstant, powerConstant, 0, 0, 0, 0
+        };
+        int styleDamage[] = new int[4];
+        if(combatStyle == 0)
+        {
+            styleDamage[0] = (powerConstant * 5) / 33;
+            styleDamage[1] = (powerConstant * 5) / 33;
+            styleDamage[2] = (powerConstant * 5) / 33;
+            styleDamage[3] = (powerConstant * 5) / 33;
+        }
+        if(combatStyle == 1)
+            styleDamage[0] = powerConstant * 50;
+        if(combatStyle == 2)
+            styleDamage[1] = powerConstant * 50;
+        if(combatStyle == 3)
+            styleDamage[2] = powerConstant * 50;
+        if(combatStyle == 4)
+            styleDamage[3] = powerConstant * 50;
+        if(combatStyle == 5 || combatStyle == 6 || combatStyle == 7)
+            styleDamage[0] = powerConstant * 5;
+        if(combatStyle == 5 || combatStyle == 8 || combatStyle == 9)
+            styleDamage[1] = powerConstant * 5;
+        if(combatStyle == 6 || combatStyle == 8 || combatStyle == 10)
+            styleDamage[2] = powerConstant * 5;
+        if(combatStyle == 7 || combatStyle == 9 || combatStyle == 10)
+            styleDamage[3] = powerConstant * 5;
+        if(combatStyle == 11 || combatStyle == 12 || combatStyle == 13)
+            styleDamage[0] = (powerConstant * 3) / 4;
+        if(combatStyle == 11 || combatStyle == 12 || combatStyle == 14)
+            styleDamage[1] = (powerConstant * 3) / 4;
+        if(combatStyle == 11 || combatStyle == 13 || combatStyle == 14)
+            styleDamage[2] = (powerConstant * 3) / 4;
+        if(combatStyle == 12 || combatStyle == 13 || combatStyle == 14)
+            styleDamage[3] = (powerConstant * 3) / 4;
+        styleDamage[0] = styleDamage[0] * (int)(expMultiplier(hateExp) / 1000L);
+        styleDamage[1] = styleDamage[1] * (int)(expMultiplier(pleaExp) / 1000L);
+        styleDamage[2] = styleDamage[2] * (int)(expMultiplier(injuExp) / 1000L);
+        styleDamage[3] = styleDamage[3] * (int)(expMultiplier(expoExp) / 1000L);
+        for(int i = 0; i < 4; i++)
+            baseDamage[i + 4] = styleDamage[i];
+
+        if(c.captureProgression == 0 && w.progressExtermination(0))
+            c.defenseLevel += 9000;
+        Boolean breakCapture = Boolean.valueOf(false);
+        Boolean firstMeeting = Boolean.valueOf(true);
+        if(c.usingDetonate.booleanValue() && c.captureProgression + c.getINJULevel() + 1 >= w.getCaptureDuration() && !w.adaptationsDisabled().booleanValue())
+        {
+            breakCapture = Boolean.valueOf(true);
+            if(c.captureProgression == 0)
+                w.setCaptureTarget(null);
+            c.PerformDetonate(t, p, f, w);
+        } else
+        if(c.captureProgression == 0)
+        {
+            w.setCaptureTarget(null);
+            Boolean otherTarget = Boolean.valueOf(false);
+            Boolean otherKiller = Boolean.valueOf(false);
+            for(int i = 0; i < 3; i++)
+                if(w.getCombatants()[i] != null && w.getCombatants()[i] != c)
+                    if(!w.getCombatants()[i].isSurrounded().booleanValue() && !w.getCombatants()[i].isCaptured().booleanValue() && w.getCombatants()[i].alive.booleanValue() && w.getCombatants()[i].resolve > 0 && w.getCombatants()[i].getConfidence() < c.confidence)
+                        otherKiller = Boolean.valueOf(true);
+                    else
+                    if(w.getCombatants()[i].isSurrounded().booleanValue() || w.getCombatants()[i].isCaptured().booleanValue())
+                        otherTarget = Boolean.valueOf(true);
+
+            if(otherKiller.booleanValue() && !otherTarget.booleanValue())
+                w.readyToEnd = Boolean.valueOf(false);
+            if(c.knownForsaken == null)
+            {
+                c.knownForsaken = (new Forsaken[] {
+                    this
+                });
+            } else
+            {
+                for(int i = 0; i < c.knownForsaken.length; i++)
+                    if(c.knownForsaken[i].equals(this))
+                        firstMeeting = Boolean.valueOf(false);
+
+                if(firstMeeting.booleanValue())
+                {
+                    Forsaken newKnownForsaken[] = new Forsaken[c.knownForsaken.length + 1];
+                    for(int i = 0; i < c.knownForsaken.length; i++)
+                        newKnownForsaken[i] = c.knownForsaken[i];
+
+                    newKnownForsaken[c.knownForsaken.length] = this;
+                    c.knownForsaken = newKnownForsaken;
+                }
+            }
+        } else
+        {
+            firstMeeting = Boolean.valueOf(false);
+        }
+        if(!breakCapture.booleanValue())
+        {
+            captureChosenFlavor(t, w, c, styleDamage, bottomDesc, topDesc, organ, lowerOrgan);
+            w.append(t, "\n\n");
+            int previousHATE = c.getHATELevel();
+            int previousPLEA = c.getPLEALevel();
+            int previousINJU = c.getINJULevel();
+            int previousEXPO = c.getEXPOLevel();
+            c.damage(t, w, baseDamage);
+            if(c.bonusHATE.booleanValue() && c.getHATELevel() == 2)
+            {
+                c.MoralityBreakZero(t, w);
+                w.append(t, "\n\n");
+            }
+            if(c.bonusPLEA.booleanValue() && c.getPLEALevel() == 2)
+            {
+                c.InnocenceBreakZero(t, w);
+                w.append(t, "\n\n");
+            }
+            if(c.bonusINJU.booleanValue() && c.getINJULevel() == 2)
+            {
+                c.ConfidenceBreakZero(t, w);
+                w.append(t, "\n\n");
+            }
+            if(c.bonusEXPO.booleanValue() && c.getEXPOLevel() == 2)
+            {
+                c.DignityBreakZero(t, w);
+                w.append(t, "\n\n");
+            }
+            w.forsakenDamage(t, w, c, this, previousHATE, previousPLEA, previousINJU, previousEXPO, topDesc, bottomDesc);
+        }
+        if(c.captureProgression >= w.getCaptureDuration() || breakCapture.booleanValue())
+        {
+            c.removeSurround = Boolean.valueOf(true);
+            if(!breakCapture.booleanValue())
+            {
+                if(confidence > 66)
+                    w.append(t, (new StringBuilder("Finally, ")).append(c.getMainName()).append(" lands a solid hit on ").append(mainName).append(", and ").append(mainName).append(" is forced to retreat.  ").append(c.getMainName()).append(" returns to the battle.").toString());
+                else
+                if(confidence > 33)
+                    w.append(t, (new StringBuilder("A stampede of fleeing Thralls rushes past the two combatants, and when it passes, ")).append(mainName).append(" has lost track of ").append(c.getMainName()).append(".").toString());
+                else
+                    w.append(t, (new StringBuilder("Finally, ")).append(c.getMainName()).append(" manages to successfully flee ").append(mainName).append(" and return to the main battlefield.").toString());
+                w.append(t, "\n\n");
+                c.printEscape(t, w, c.captureProgression % 3);
+            }
+            c.defenseLevel += 2;
+            c.captureProgression = 0;
+        } else
+        {
+            if(firstMeeting.booleanValue())
+            {
+                c.say(t, "\"");
+                if(disgrace > 66)
+                {
+                    if(c.getMorality() > 66)
+                    {
+                        if(morality > 66)
+                            c.say(t, (new StringBuilder("I can't believe that I used to look up to you, ")).append(mainName).append(".").toString());
+                        else
+                        if(morality > 33)
+                            c.say(t, (new StringBuilder(String.valueOf(mainName))).append("...  It's hard to believe that you used to be one of the Chosen.").toString());
+                        else
+                            c.say(t, (new StringBuilder("I've heard of you, ")).append(mainName).append(".  Such a sad story...").toString());
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        if(hostility > 66)
+                            say(t, "If you think you can afford to hold back, then you'll die.");
+                        else
+                        if(hostility >= 40)
+                            say(t, "I don't want your pity!");
+                        else
+                            say(t, "I hope you can avoid my mistakes.");
+                    } else
+                    if(c.getMorality() > 33)
+                    {
+                        if(confidence > 66)
+                            c.say(t, (new StringBuilder("Alright, I've heard that ")).append(mainName).append(" is all bark and no bite...").toString());
+                        else
+                        if(confidence > 33)
+                            c.say(t, (new StringBuilder("If this is ")).append(mainName).append(", then I should be able to handle ").append(himHer()).append("...").toString());
+                        else
+                            c.say(t, (new StringBuilder("Wait, isn't this ")).append(mainName).append("?  Why would they send out one of the weakest Forsaken?").toString());
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        if(hostility > 66)
+                            say(t, "I'm still plenty strong enough to kill you!");
+                        else
+                        if(hostility >= 40)
+                            say(t, "Don't take me lightly...");
+                        else
+                            say(t, "That's right.  You're probably stronger than me.");
+                    } else
+                    {
+                        if(dignity > 66)
+                            c.say(t, (new StringBuilder("Heh, the 'great' ")).append(mainName).append(" has become just another pathetic tool of the Demons...").toString());
+                        else
+                        if(dignity > 33)
+                            c.say(t, (new StringBuilder("This is ")).append(mainName).append("?  Ugh, get out of my way!").toString());
+                        else
+                            c.say(t, "I want to wipe the stupid smile off this failure's face...");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        if(hostility > 66)
+                            say(t, "You don't even realize the danger you're in.");
+                        else
+                        if(hostility >= 40)
+                            say(t, "You want to try me!?");
+                        else
+                            say(t, "Sorry.");
+                    }
+                } else
+                if(disgrace > 33)
+                {
+                    if(c.getMorality() > 66)
+                    {
+                        if(morality > 66)
+                            c.say(t, (new StringBuilder(String.valueOf(mainName))).append(", come back to the side of Good!").toString());
+                        else
+                        if(morality > 33)
+                            c.say(t, (new StringBuilder("This must be ")).append(mainName).append(".  Be ready, because I won't hold back!").toString());
+                        else
+                            c.say(t, "Give up your evil ways, Forsaken!");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        if(hostility > 66)
+                            say(t, "Your self-righteousness makes me sick!");
+                        else
+                        if(hostility >= 40)
+                            say(t, "Just try to defeat me!");
+                        else
+                            say(t, "I have to fight you.");
+                    } else
+                    if(c.getMorality() > 33)
+                    {
+                        if(confidence > 66)
+                            c.say(t, (new StringBuilder(String.valueOf(mainName))).append(" is supposed to be strong... but not as strong as ").append(heShe()).append(" thinks ").append(heShe()).append(" is...").toString());
+                        else
+                        if(confidence > 33)
+                            c.say(t, (new StringBuilder("I've heard that ")).append(mainName).append(" is no pushover.").toString());
+                        else
+                            c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append(" seems desperate... I can't let my guard down.").toString());
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        if(hostility > 66)
+                            say(t, "Shut up!  Just die!");
+                        else
+                        if(hostility >= 40)
+                            say(t, "You don't have time to talk to yourself!");
+                        else
+                            say(t, "Looks like you're taking me seriously.  That's smart.");
+                    } else
+                    {
+                        if(dignity > 66)
+                            c.say(t, "I recognize you.  I can't believe you gave it all up to serve the Demon Lord.");
+                        else
+                        if(dignity > 33)
+                            c.say(t, "I haven't seen this failure before.");
+                        else
+                            c.say(t, "I don't really feel like dealing with some crazy Forsaken right now...");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        String usedName = originalName;
+                        if(obedience > 40)
+                            usedName = mainName;
+                        if(hostility > 66)
+                            say(t, (new StringBuilder("My name is ")).append(usedName).append(", and I'm the one who will kill you!").toString());
+                        else
+                        if(hostility >= 40)
+                            say(t, (new StringBuilder("I'm ")).append(usedName).append(", and you'd better remember it!").toString());
+                        else
+                            say(t, (new StringBuilder("I'm ")).append(usedName).append(".").toString());
+                    }
+                } else
+                if(c.getMorality() > 66)
+                {
+                    if(morality > 66)
+                        c.say(t, (new StringBuilder(String.valueOf(originalName))).append("...?  No!  You were one of the best of us, how could you have turned to the Demons' side!?").toString());
+                    else
+                    if(morality > 33)
+                        c.say(t, (new StringBuilder("I didn't want to believe it...  ")).append(originalName).append(", you've really switched sides...").toString());
+                    else
+                        c.say(t, (new StringBuilder(String.valueOf(originalName))).append("...  You always seemed a little too bloodthirsty in your videos.").toString());
+                    c.say(t, "\"\n\n");
+                    say(t, "\"");
+                    if(hostility > 66)
+                        say(t, "And I've never been happier!");
+                    else
+                    if(hostility >= 40)
+                        say(t, "I was a fool, letting the public decide who I should be.");
+                    else
+                        say(t, "It's not that simple.");
+                } else
+                if(c.getMorality() > 33)
+                {
+                    if(confidence > 66)
+                        c.say(t, "I think... I might be outmatched...");
+                    else
+                    if(confidence > 33)
+                        c.say(t, (new StringBuilder(String.valueOf(originalName))).append(" really is strong...").toString());
+                    else
+                        c.say(t, (new StringBuilder("How is ")).append(heShe()).append(" so strong...!?").toString());
+                    c.say(t, "\"\n\n");
+                    say(t, "\"");
+                    if(hostility > 66)
+                        say(t, "Hahahah!  Fear and despair!");
+                    else
+                    if(hostility >= 40)
+                        say(t, "Giving up already?");
+                    else
+                        say(t, "You probably can't beat me.");
+                } else
+                {
+                    if(dignity > 66)
+                        c.say(t, (new StringBuilder("If I had known that I'd be up against the one and only ")).append(originalName).append("...").toString());
+                    else
+                    if(dignity > 33)
+                        c.say(t, "Guh!  If you're this strong, why couldn't you just beat the Demon Lord instead!?");
+                    else
+                        c.say(t, "Ugh, you really deserve your reputation for being annoying...");
+                    c.say(t, "\"\n\n");
+                    say(t, "\"");
+                    if(hostility > 66)
+                        say(t, "Beg!  Beg for your life!");
+                    else
+                    if(hostility >= 40)
+                        say(t, "I'm glad I could make you show a little respect.");
+                    else
+                        say(t, "This isn't personal.");
+                }
+                w.append(t, "  ");
+                int reason = -1;
+                int highest = 39;
+                if(hostility > highest)
+                {
+                    highest = hostility;
+                    reason = 0;
+                }
+                if(deviancy > highest)
+                {
+                    highest = deviancy;
+                    reason = 1;
+                }
+                if(obedience > highest)
+                {
+                    highest = obedience;
+                    reason = 2;
+                }
+                if(hostility > 66)
+                {
+                    if(c.getConfidence() > 66)
+                    {
+                        if(reason != -1)
+                            if(reason == 0)
+                            {
+                                if(morality > 66)
+                                    say(t, "The punishment for your pride is death!");
+                                else
+                                if(morality > 33)
+                                    say(t, "I'll find a way to kill you!");
+                                else
+                                    say(t, "The despair when you realize you're just another victim after all...!");
+                            } else
+                            if(reason == 1)
+                            {
+                                if(innocence > 66)
+                                    say(t, "Aaah, let's hurt each other a lot~!");
+                                else
+                                if(innocence > 33)
+                                    say(t, "Or maybe you'll kill me first?  Nn... I wonder what that would feel like...");
+                                else
+                                    say(t, "Finding a way to hurt one as strong as you should be... nnh... a stimulating challenge.");
+                            } else
+                            if(confidence > 66)
+                                say(t, "A strong one like you will make a great sacrifice to the Demon Lord!");
+                            else
+                            if(confidence > 33)
+                                say(t, "Don't underestimate the power of the Demon Lord!");
+                            else
+                                say(t, "I need to p-prove my worth to the Demon Lord!");
+                    } else
+                    if(c.getConfidence() > 33)
+                    {
+                        if(reason != -1)
+                            if(reason == 0)
+                            {
+                                if(morality > 66)
+                                    say(t, "You all deserve to die!");
+                                else
+                                if(morality > 33)
+                                    say(t, "Kill...  Kill...!");
+                                else
+                                    say(t, "I won't be satisfied until you're dead!");
+                            } else
+                            if(reason == 1)
+                            {
+                                if(innocence > 66)
+                                    say(t, "Hehehe... I wanna feel the blood...");
+                                else
+                                if(innocence > 33)
+                                    say(t, "You will suffer!");
+                                else
+                                    say(t, "I will show you the depths of my sadism...");
+                            } else
+                            if(reason == 2)
+                                if(confidence > 66)
+                                    say(t, "With the Demon Lord on my side, I'm unstoppable!");
+                                else
+                                if(confidence > 33)
+                                    say(t, "Only the Demon Lord's words could convince me to spare you!");
+                                else
+                                    say(t, "The Demon Lord will be happy with me when I... k-kill you...");
+                    } else
+                    if(reason != -1)
+                        if(reason == 0)
+                        {
+                            if(morality > 66)
+                                say(t, "It's wrong for someone as pathetic as you to live while so many others have died...");
+                            else
+                            if(morality > 33)
+                                say(t, "If it's not me, then someone else will come along and kill you soon enough.");
+                            else
+                                say(t, "A weakling like you might as well just roll over and die.");
+                        } else
+                        if(reason == 1)
+                        {
+                            if(innocence > 66)
+                                say(t, "I wanna see your cute little struggles as your life drains away...");
+                            else
+                            if(innocence > 33)
+                                say(t, "I'll make you squirm...");
+                            else
+                                say(t, "I can tell.  You're afraid of what I'm going to do to you.");
+                        } else
+                        if(reason == 2)
+                            if(confidence > 66)
+                                say(t, "Even if you give up, you aren't worthy to serve the Demon Lord.");
+                            else
+                            if(confidence > 33)
+                                say(t, "A weakling like you stands no chance against the Demon Lord!");
+                            else
+                                say(t, "Th-The only value of people like us is to be the Demon Lord's playthings...");
+                } else
+                if(hostility >= 40)
+                {
+                    if(c.getConfidence() > 66)
+                    {
+                        if(reason != -1)
+                            if(reason == 0)
+                            {
+                                if(morality > 66)
+                                    say(t, "You're way too full of yourself.");
+                                else
+                                if(morality > 33)
+                                    say(t, "You need to be taken down a peg.");
+                                else
+                                    say(t, "That attitude of yours pisses me off.");
+                            } else
+                            if(reason == 1)
+                            {
+                                if(innocence > 66)
+                                    say(t, "We're gonna have lots of fun hurting each other.");
+                                else
+                                if(innocence > 33)
+                                    say(t, "Fight back all you like.  I've learned to enjoy pain.");
+                                else
+                                    say(t, "Although... to be taking someone like you on, I must have developed a masochistic streak...");
+                            } else
+                            if(reason == 2)
+                                if(confidence > 66)
+                                    say(t, "You seem like a good opponent for showing the Demon Lord my worth.");
+                                else
+                                if(confidence > 33)
+                                    say(t, "This might not be easy, but it's the Demon Lord's orders.");
+                                else
+                                    say(t, "I-I'll show the Demon Lord that he can trust me with tough fights...");
+                    } else
+                    if(c.getConfidence() > 33)
+                    {
+                        if(reason != -1)
+                            if(reason == 0)
+                            {
+                                if(morality > 66)
+                                    say(t, "You'd better be ready for this...");
+                                else
+                                if(morality > 33)
+                                    say(t, "I'm not going to feel bad about this.");
+                                else
+                                    say(t, "This should be fun.");
+                            } else
+                            if(reason == 1)
+                            {
+                                if(innocence > 66)
+                                    say(t, "You're gonna help me feel good.");
+                                else
+                                if(innocence > 33)
+                                    say(t, "In the end, the pleasure will be all mine.");
+                                else
+                                    say(t, "I've grown to take a certain degree of sexual satisfaction from this sort of thing.");
+                            } else
+                            if(reason == 2)
+                                if(confidence > 66)
+                                    say(t, "It's unlucky for you that the Demon Lord sent me this time.");
+                                else
+                                if(confidence > 33)
+                                    say(t, "Even if I didn't want to fight, there's no disobeying the Demon Lord.");
+                                else
+                                    say(t, "If you want to blame someone for this, th-then blame the Demon Lord!");
+                    } else
+                    if(reason != -1)
+                        if(reason == 0)
+                        {
+                            if(morality > 66)
+                                say(t, "I was almost going to feel bad for picking on someone like you...");
+                            else
+                            if(morality > 33)
+                                say(t, "You never should have come out here.");
+                            else
+                                say(t, "I'm going to hurt you to make myself feel better.");
+                        } else
+                        if(reason == 1)
+                        {
+                            if(innocence > 66)
+                                say(t, "Let's see how loud I can make you squeal!");
+                            else
+                            if(innocence > 33)
+                                say(t, "You look like a perfect little victim.");
+                            else
+                                say(t, "Just looking at you, I can feel my sadism boiling over...");
+                        } else
+                        if(reason == 2)
+                            if(confidence > 66)
+                                say(t, "Sending me after someone as weak as you...  The Demon Lord really is merciless.");
+                            else
+                            if(confidence > 33)
+                                say(t, "If I let myself be beaten by someone like you, the Demon Lord will have no more use for me.");
+                            else
+                                say(t, "I need to use this weak opponent to show the Demon Lord what I can do!");
+                } else
+                if(c.getConfidence() > 66)
+                {
+                    if(reason == -1)
+                    {
+                        if(morality > 66)
+                            say(t, "If your team is strong enough to beat the Demon Lord, then show me!");
+                        else
+                        if(morality > 33)
+                            say(t, "I'm being forced to fight, but you don't need to hold back.");
+                        else
+                            say(t, "You're tough, right?  It'd help me a lot if you'd just let me do this.");
+                    } else
+                    if(reason == 1)
+                    {
+                        if(morality > 66)
+                            say(t, "When I lose control like this... ngh... you have to stop me by force...");
+                        else
+                        if(morality > 33)
+                            say(t, "I just need you to hurt me...");
+                        else
+                            say(t, "It's not my fault!  I'm addicted to this feeling...!");
+                    } else
+                    if(reason == 2)
+                        if(morality > 66)
+                            say(t, "We don't need to fight.  You'd be able to do so much good by joining us...");
+                        else
+                        if(morality > 33)
+                            say(t, "You're strong, but the Demon Lord is so much stronger.  You should give up.");
+                        else
+                            say(t, "I just want the Demon Lord to reward me for slowing you down.");
+                } else
+                if(c.getConfidence() > 33)
+                {
+                    if(reason == -1)
+                    {
+                        if(morality > 66)
+                            say(t, "I can't afford to be seen holding back.");
+                        else
+                        if(morality > 33)
+                            say(t, "I don't see you as my enemy.");
+                        else
+                            say(t, "I'm doing this for my own reasons.");
+                    } else
+                    if(reason == 1)
+                    {
+                        if(morality > 66)
+                            say(t, "I don't want to hurt you, but... nngh... the urges...!");
+                        else
+                        if(morality > 33)
+                            say(t, "I can't control myself anymore...!");
+                        else
+                            say(t, "I just... want to feel good... that's all...");
+                    } else
+                    if(reason == 2)
+                        if(morality > 66)
+                            say(t, "Listen, I think the Demon Lord isn't entirely evil!");
+                        else
+                        if(morality > 33)
+                            say(t, "I've served the Demon Lord for too long to stop now.");
+                        else
+                            say(t, "There's no point in opposing the Demon Lord.");
+                } else
+                if(reason == -1)
+                {
+                    if(morality > 66)
+                        say(t, "In order to buy time until I can betray the Demon Lord...  I really am sorry, but I have to do this!");
+                    else
+                    if(morality > 33)
+                        say(t, "If I wasn't able to beat the Demon Lord, then you definitely won't be.  For your own good, you should give up...");
+                    else
+                        say(t, "You're about to have a really bad time.");
+                } else
+                if(reason == 1)
+                {
+                    if(morality > 66)
+                        say(t, "I'm about to do something awful, just to feel good for a little while...");
+                    else
+                    if(morality > 33)
+                        say(t, "You're too.. ngh... cute...");
+                    else
+                        say(t, "Just to be clear, this is your fault for being too cute.");
+                } else
+                if(reason == 2)
+                    if(morality > 66)
+                        say(t, "I don't like it, but I have to punish you for defying the Demon Lord.");
+                    else
+                    if(morality > 33)
+                        say(t, "This will be hard for you.  Remember, you can always give in and join the Demon Lord...");
+                    else
+                        say(t, "I wonder if the Demon Lord is actually going to go to the trouble of taking you.");
+                say(t, "\"");
+            } else
+            if(c.captureProgression % 6 == 0)
+            {
+                if(styleDamage[0] > 0)
+                {
+                    if(styleDamage[1] > 0)
+                    {
+                        if(deviancy > 66)
+                        {
+                            c.say(t, "\"");
+                            if(c.confidence > 66)
+                            {
+                                if(c.morality > 66)
+                                    c.say(t, "Th-This is wrong!  Stop at once!");
+                                else
+                                if(c.morality > 33)
+                                    c.say(t, "I won't... let you...!");
+                                else
+                                    c.say(t, "Stop, or I'll kill you!  Are you even listening!?");
+                                c.say(t, "\"\n\n");
+                                say(t, "\"");
+                                if(confidence > 66)
+                                    say(t, "Mm, breaking you is going to be so much fun...");
+                                else
+                                if(confidence > 33)
+                                    say(t, "I love making the stubborn ones squeal...!");
+                                else
+                                    say(t, "H-Heh, hurt me all you want, I enjoy it...");
+                            } else
+                            if(c.confidence > 33)
+                            {
+                                if(c.morality > 66)
+                                    c.say(t, "How can you enjoy something like this!?");
+                                else
+                                if(c.morality > 33)
+                                    c.say(t, "Are you crazy!?");
+                                else
+                                    c.say(t, "You twisted bitch!");
+                                c.say(t, "\"\n\n");
+                                say(t, "\"");
+                                if(confidence > 66)
+                                    say(t, "Heh, I'll have to punish you for talking back...");
+                                else
+                                if(confidence > 33)
+                                    say(t, "Let me drag you down to my level...");
+                                else
+                                    say(t, "Those eyes... filled with disgust... nn, yes...!");
+                            } else
+                            {
+                                if(c.morality > 66)
+                                    c.say(t, "P-Please, stop...!  Aaah!");
+                                else
+                                if(c.morality > 33)
+                                    c.say(t, "H-Help!  I don't want- Nnaah!");
+                                else
+                                    c.say(t, "Ngh...  Enjoy it while you... caaan!");
+                                c.say(t, "\"\n\n");
+                                say(t, "\"");
+                                if(confidence > 66)
+                                    say(t, "Scream!  Scream for me!");
+                                else
+                                if(confidence > 33)
+                                    say(t, "Ah, you're so cuuute~!");
+                                else
+                                    say(t, "Heheh, it feels so nice to be the one doing this to someone else for a change...");
+                            }
+                            say(t, "\"");
+                        } else
+                        if(deviancy > 33)
+                        {
+                            c.say(t, "\"");
+                            if(c.confidence > 66)
+                            {
+                                if(c.morality > 66)
+                                    c.say(t, "Disgusting!  Stop at once!");
+                                else
+                                if(c.morality > 33)
+                                    c.say(t, "How dare you!?");
+                                else
+                                    c.say(t, "I won't let myself... be used for your pleasure...!");
+                                c.say(t, "\"\n\n");
+                                say(t, "\"");
+                                if(confidence > 66)
+                                    say(t, "I go out of my way to make you feel good too, and this is the thanks I get?");
+                                else
+                                if(confidence > 33)
+                                    say(t, "Don't even try to act like you aren't enjoying it too.");
+                                else
+                                    say(t, "Heh, even someone as strong as you is weak against this sort of thing, huh?");
+                            } else
+                            if(c.confidence > 33)
+                            {
+                                if(c.morality > 66)
+                                    c.say(t, "This is... wrong...!");
+                                else
+                                if(c.morality > 33)
+                                    c.say(t, "I don't... want this...!");
+                                else
+                                    c.say(t, "Get... ugh... your disgusting hands off me...!");
+                                c.say(t, "\"\n\n");
+                                say(t, "\"");
+                                if(confidence > 66)
+                                    say(t, "I'm going to make you give in to the pleasure.");
+                                else
+                                if(confidence > 33)
+                                    say(t, "You want it.  I can tell you do.");
+                                else
+                                    say(t, "I bet you could fight me off if you really wanted to.  But you don't.");
+                            } else
+                            {
+                                if(c.morality > 66)
+                                    c.say(t, "P-Please, this feels...  Nn!");
+                                else
+                                if(c.morality > 33)
+                                    c.say(t, "No!  L-Leave me alone!");
+                                else
+                                    c.say(t, "Ergh... just making yourself feel good...");
+                                c.say(t, "\"\n\n");
+                                say(t, "\"");
+                                if(confidence > 66)
+                                    say(t, "Hah, you little pervert, you like this, don't you!?");
+                                else
+                                if(confidence > 33)
+                                    say(t, "So, you're actually the type who enjoys this sort of thing?");
+                                else
+                                    say(t, "You shouldn't lie... it feels good to get raped, doesn't it...?");
+                            }
+                            say(t, "\"");
+                        } else
+                        {
+                            c.say(t, "\"");
+                            if(c.confidence > 66)
+                            {
+                                if(c.morality > 66)
+                                    c.say(t, "I have no interest in your perversions!");
+                                else
+                                if(c.morality > 33)
+                                    c.say(t, "Do you really think that will work on me!?");
+                                else
+                                    c.say(t, "You can't afford to mess around with me!");
+                                c.say(t, "\"\n\n");
+                                say(t, "\"");
+                                if(confidence > 66)
+                                    say(t, "You won't be able to withstand my technique for long!");
+                                else
+                                if(confidence > 33)
+                                    say(t, "You wouldn't be shouting if this didn't bother you.");
+                                else
+                                    say(t, "I'm fighting the only way I can...");
+                            } else
+                            if(c.confidence > 33)
+                            {
+                                if(c.morality > 66)
+                                    c.say(t, "Hey!  This isn't a game!");
+                                else
+                                if(c.morality > 33)
+                                    c.say(t, "Aren't we supposed to be fighting!?");
+                                else
+                                    c.say(t, "This won't stop me from killing you!");
+                                c.say(t, "\"\n\n");
+                                say(t, "\"");
+                                if(confidence > 66)
+                                    say(t, "You're completely at my mercy.");
+                                else
+                                if(confidence > 33)
+                                    say(t, "What's wrong?  Can't fight back like this?");
+                                else
+                                    say(t, "I-Isn't this better than fighting?");
+                            } else
+                            {
+                                if(c.morality > 66)
+                                    c.say(t, "S-Stop!  Can't you just beat me up normally!?");
+                                else
+                                if(c.morality > 33)
+                                    c.say(t, "Ah!  I c-can't...!");
+                                else
+                                    c.say(t, "Y-You're taking me too lightly!");
+                                c.say(t, "\"\n\n");
+                                say(t, "\"");
+                                if(confidence > 66)
+                                    say(t, "Pathetic.  Is this really all it takes to beat you?");
+                                else
+                                if(confidence > 33)
+                                    say(t, "Should such a pervert really be one of the Chosen?");
+                                else
+                                    say(t, "I may be one of the Forsaken, but I think you're more perverted than I am...");
+                            }
+                            say(t, "\"");
+                        }
+                    } else
+                    if(hostility > 66)
+                    {
+                        say(t, "\"");
+                        if(c.getConfidence() > 66)
+                        {
+                            if(confidence > 66)
+                                say(t, "Yes, show me your rage, your hatred!");
+                            else
+                            if(confidence > 33)
+                                say(t, "I knew that would get a reaction out of you!");
+                            else
+                                say(t, "I-It hurts you, doesn't it...?");
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            if(c.morality > 66)
+                                c.say(t, "I won't let you hurt anyone else!");
+                            else
+                            if(c.morality > 33)
+                                c.say(t, "You monster!");
+                            else
+                                c.say(t, "After all the trouble I went through saving them!");
+                        } else
+                        if(c.getConfidence() > 33)
+                        {
+                            if(confidence > 66)
+                                say(t, "Go on, try to stop me.");
+                            else
+                            if(confidence > 33)
+                                say(t, "You couldn't save them.  You can't save anyone.");
+                            else
+                                say(t, "Saving people is so much harder... th-than killing them, I mean...");
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            if(c.morality > 66)
+                                c.say(t, "Why...?");
+                            else
+                            if(c.morality > 33)
+                                c.say(t, "No!  Don't involve anyone else!");
+                            else
+                                c.say(t, "You need to be put down.");
+                        } else
+                        {
+                            if(confidence > 66)
+                                say(t, "Are you going to run away, little Chosen?");
+                            else
+                            if(confidence > 33)
+                                say(t, "Are you angry?  Afraid?");
+                            else
+                                say(t, "Look.  This is what I am, now...");
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            if(c.morality > 66)
+                                c.say(t, "No...  I would have done anything to save them, but you...");
+                            else
+                            if(c.morality > 33)
+                                c.say(t, "Just... Just to get my attention...?");
+                            else
+                                c.say(t, (new StringBuilder("I need to kill ")).append(himHer()).append("... before ").append(heShe()).append(" kills me...!").toString());
+                        }
+                        c.say(t, "\"");
+                    } else
+                    if(hostility > 33)
+                    {
+                        say(t, "\"");
+                        if(c.getConfidence() > 66)
+                        {
+                            if(innocence > 66)
+                                say(t, "Hurry up, dummy!  You'll never catch me like this!");
+                            else
+                            if(innocence > 33)
+                                say(t, "I could keep this up all day!");
+                            else
+                                say(t, "You don't even care that you're walking into a trap, do you?");
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            if(c.innocence > 66)
+                                c.say(t, "Now I'm really mad!");
+                            else
+                            if(c.innocence > 33)
+                                c.say(t, "Just fight me, coward!");
+                            else
+                                c.say(t, "I will make you regret this!");
+                        } else
+                        if(c.getConfidence() > 33)
+                        {
+                            if(innocence > 66)
+                                say(t, "That attack was so wimpy!  Can't you do any better!?");
+                            else
+                            if(innocence > 33)
+                                say(t, "Hey, dumbass!  Over here!");
+                            else
+                                say(t, "You only just noticed me!?  Oblivious fool!");
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            if(c.innocence > 66)
+                                c.say(t, "Why are you so mean!?");
+                            else
+                            if(c.innocence > 33)
+                                c.say(t, "I won't let you get away!");
+                            else
+                                c.say(t, "Defeating you is a higher priority.");
+                        } else
+                        {
+                            if(innocence > 66)
+                                say(t, (new StringBuilder("Aw, is wittle ")).append(c.getMainName()).append(" gonna cry?").toString());
+                            else
+                            if(innocence > 33)
+                                say(t, "You weakling!  What are you even doing here!?");
+                            else
+                                say(t, "Pathetic excuse for a Chosen!  Worthless pretender!");
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            if(c.innocence > 66)
+                                c.say(t, "S-Stop it... g-go away...!");
+                            else
+                            if(c.innocence > 33)
+                                c.say(t, "Y-You don't have to rub it in...");
+                            else
+                                c.say(t, "R-Ridiculous!  I won't let this get to me...!");
+                        }
+                        c.say(t, "\"");
+                    } else
+                    {
+                        say(t, "\"");
+                        if(c.getConfidence() > 66)
+                        {
+                            if(innocence > 66)
+                                say(t, "The Demon Lord is still way, way stronger than you.");
+                            else
+                            if(innocence > 33)
+                                say(t, "You won't win with brute force.");
+                            else
+                                say(t, "Do you believe you can prevail against the Demon Lord with strength alone?  Foolish.");
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            if(c.morality > 66)
+                                c.say(t, "I am capable of finesse when needed!");
+                            else
+                            if(c.morality > 33)
+                                c.say(t, "Don't underestimate me!");
+                            else
+                                c.say(t, "As if you'd know how to win, you failure!");
+                        } else
+                        if(c.getConfidence() > 33)
+                        {
+                            if(innocence > 66)
+                                say(t, "If you're having trouble with me... then that means you're way, way weaker than the Demon Lord.");
+                            else
+                            if(innocence > 33)
+                                say(t, "I'd love to say that I think you have a chance against the Demon Lord... but I really can't.");
+                            else
+                                say(t, "Tell me, Chosen.  How will you be able to succeed against the Demon Lord where I failed?");
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            if(c.morality > 66)
+                                c.say(t, "I won't give up!");
+                            else
+                            if(c.morality > 33)
+                                c.say(t, "I will become stronger!");
+                            else
+                                c.say(t, "You think you can scare me!?");
+                        } else
+                        {
+                            if(innocence > 66)
+                                say(t, "You sure you don't wanna quit?  This is kinda sad.");
+                            else
+                            if(innocence > 33)
+                                say(t, "I hoped you'd be able to beat the Demon Lord... how disappointing.");
+                            else
+                                say(t, "I say this without intending to offend: You have no chance whatsoever against the Demon Lord.");
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            if(c.morality > 66)
+                                c.say(t, "Then I'll just... lay down my life.  Even if it only saves a few people...");
+                            else
+                            if(c.morality > 33)
+                                c.say(t, "E-Even so, I have to try...!");
+                            else
+                                c.say(t, "Th-That's why I'm probably just gonna run away...");
+                        }
+                        c.say(t, "\"");
+                    }
+                } else
+                if(styleDamage[1] > 0)
+                {
+                    if(deviancy > 66)
+                    {
+                        c.say(t, "\"");
+                        if(c.confidence > 66)
+                        {
+                            if(c.morality > 66)
+                                c.say(t, "Th-This is wrong!  Stop at once!");
+                            else
+                            if(c.morality > 33)
+                                c.say(t, "I won't... let you...!");
+                            else
+                                c.say(t, "Stop, or I'll kill you!  Are you even listening!?");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(innocence > 66)
+                                say(t, "I'm making you feel good, so what's the big deal?");
+                            else
+                            if(innocence > 33)
+                                say(t, "Come on, show me your cumming face...!");
+                            else
+                                say(t, "My technique is impossible to resist, even for one as strong as you!");
+                        } else
+                        if(c.confidence > 33)
+                        {
+                            if(c.morality > 66)
+                                c.say(t, "How can you enjoy something like this!?");
+                            else
+                            if(c.morality > 33)
+                                c.say(t, "Are you crazy!?");
+                            else
+                                c.say(t, "You twisted bitch!");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(innocence > 66)
+                                say(t, "You're so mean!  But that's okay, I'll make you feel good anyway!");
+                            else
+                            if(innocence > 33)
+                                say(t, "No need to make this personal...");
+                            else
+                                say(t, "I suppose I am beyond help.");
+                        } else
+                        {
+                            if(c.morality > 66)
+                                c.say(t, "P-Please, stop...!  Aaah!");
+                            else
+                            if(c.morality > 33)
+                                c.say(t, "H-Help!  I don't want- Nnaah!");
+                            else
+                                c.say(t, "Ngh...  Enjoy it while you... caaan!");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(innocence > 66)
+                                say(t, "Sorry... but I'm way too turned on to stop now...!");
+                            else
+                            if(innocence > 33)
+                                say(t, "It's okay, you'll start enjoying it more soon...");
+                            else
+                                say(t, "You can still resist?  I must refine my technique...");
+                        }
+                        say(t, "\"");
+                    } else
+                    if(deviancy > 33)
+                    {
+                        c.say(t, "\"");
+                        if(c.confidence > 66)
+                        {
+                            if(c.morality > 66)
+                                c.say(t, "You deviant!  Stop at once!");
+                            else
+                            if(c.morality > 33)
+                                c.say(t, "You perverted freak!");
+                            else
+                                c.say(t, "I won't let myself... be used for your pleasure...!");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(innocence > 66)
+                                say(t, "I mean, I have to admit that this is fun, but I'm not even getting off right now.");
+                            else
+                            if(innocence > 33)
+                                say(t, "If I wanted to feel good, I wouldn't be doing it like this.");
+                            else
+                                say(t, "Unfortunately, I'm not feeling any pleasure whatsoever right now.");
+                        } else
+                        if(c.confidence > 33)
+                        {
+                            if(c.morality > 66)
+                                c.say(t, "This is... wrong...!");
+                            else
+                            if(c.morality > 33)
+                                c.say(t, "I don't... want this...!");
+                            else
+                                c.say(t, "Get... ugh... your disgusting hands off me...!");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(innocence > 66)
+                                say(t, "This is kinda perverted, isn't it?  Oh well.");
+                            else
+                            if(innocence > 33)
+                                say(t, "I'm getting pretty good at this.");
+                            else
+                                say(t, "This seems to be effective.");
+                        } else
+                        {
+                            if(c.morality > 66)
+                                c.say(t, "P-Please, this feels...  Nn!");
+                            else
+                            if(c.morality > 33)
+                                c.say(t, "No!  L-Leave me alone!");
+                            else
+                                c.say(t, "Ergh... just making yourself feel good...");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(innocence > 66)
+                                say(t, "You're actually kinda cute like this.");
+                            else
+                            if(innocence > 33)
+                                say(t, "It's better than if I were actually hurting you, right?");
+                            else
+                                say(t, "I'm impressed that you're resisting as well as you are.");
+                        }
+                        say(t, "\"");
+                    } else
+                    {
+                        c.say(t, "\"");
+                        if(c.confidence > 66)
+                        {
+                            if(c.morality > 66)
+                                c.say(t, "I have no interest in your perversions!");
+                            else
+                            if(c.morality > 33)
+                                c.say(t, "Do you really think that will work on me!?");
+                            else
+                                c.say(t, "You can't afford to mess around with me!");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(innocence > 66)
+                                say(t, "Wow, you really don't like this, do you?");
+                            else
+                            if(innocence > 33)
+                                say(t, "I'm just doing what I have to.");
+                            else
+                                say(t, "Well, attempting to restrain you with brute force would be futile.");
+                        } else
+                        if(c.confidence > 33)
+                        {
+                            if(c.morality > 66)
+                                c.say(t, "Hey!  This isn't a game!");
+                            else
+                            if(c.morality > 33)
+                                c.say(t, "Aren't we supposed to be fighting!?");
+                            else
+                                c.say(t, "This won't stop me from killing you!");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(innocence > 66)
+                                say(t, "I'm not happy about having to fight in a pervy way, either!");
+                            else
+                            if(innocence > 33)
+                                say(t, "Seems like this is your weak point, so I'm going to keep doing it.");
+                            else
+                                say(t, "Regrettably, this tactic seems to be the most effective.");
+                        } else
+                        {
+                            if(c.morality > 66)
+                                c.say(t, "S-Stop!  Can't you just beat me up normally!?");
+                            else
+                            if(c.morality > 33)
+                                c.say(t, "Ah!  I c-can't...!");
+                            else
+                                c.say(t, "Y-You're taking me too lightly!");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(innocence > 66)
+                                say(t, "Ew, are you actually enjoying this?");
+                            else
+                            if(innocence > 33)
+                                say(t, "Believe me, I'm not enjoying it either.");
+                            else
+                                say(t, "It appears that the Demon Lord was correct about your latent masochism.");
+                        }
+                        say(t, "\"");
+                    }
+                } else
+                if(disgrace > 66)
+                {
+                    c.say(t, "\"");
+                    if(c.getConfidence() > 66)
+                    {
+                        if(c.getMorality() > 66)
+                            c.say(t, "This one might actually be weak enough to subdue and rescue!");
+                        else
+                        if(c.getMorality() > 33)
+                            c.say(t, "I need to swat this one down before I go back to fighting the Demons.");
+                        else
+                            c.say(t, "Are you so eager to die, pathetic Forsaken!?");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        if(innocence > 66)
+                            say(t, "Ah, crap, now I've got the strong one after me!");
+                        else
+                        if(innocence > 33)
+                            say(t, "Alright, time to go on the defensive.");
+                        else
+                            say(t, "I must use my limited resources to the fullest...");
+                    } else
+                    if(c.getConfidence() > 33)
+                    {
+                        if(c.getMorality() > 66)
+                            c.say(t, (new StringBuilder("If I ignore ")).append(himHer()).append(", ").append(heShe()).append(" might go after the civilians.").toString());
+                        else
+                        if(c.getMorality() > 33)
+                            c.say(t, "If I let my guard down, even this one could still hurt me.");
+                        else
+                            c.say(t, "Get out of my way!");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        if(innocence > 66)
+                            say(t, "Being weak is tough...");
+                        else
+                        if(innocence > 33)
+                            say(t, "This might be tough.");
+                        else
+                            say(t, "So long as I'm careful, I have nothing to fear.");
+                    } else
+                    {
+                        if(c.getMorality() > 66)
+                            c.say(t, (new StringBuilder("I d-don't want to fight ")).append(himHer()).append("...").toString());
+                        else
+                        if(c.getMorality() > 33)
+                            c.say(t, "Wh-Why am I such a coward...?");
+                        else
+                            c.say(t, "P-Protecting myself comes first!");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        if(innocence > 66)
+                            say(t, (new StringBuilder("Wow, I actually scared ")).append(c.himHer()).append("!").toString());
+                        else
+                        if(innocence > 33)
+                            say(t, "Heh.  This is actually working.");
+                        else
+                            say(t, "I should have no trouble against such a weak-willed foe.");
+                    }
+                    say(t, "\"");
+                } else
+                if(disgrace > 33)
+                {
+                    c.say(t, "\"");
+                    if(c.getConfidence() > 66)
+                    {
+                        if(c.getMorality() > 66)
+                            c.say(t, "You cannot stand against the power of my righteousness, Forsaken!");
+                        else
+                        if(c.getMorality() > 33)
+                            c.say(t, "Do you really think you stand a chance against me!?");
+                        else
+                            c.say(t, "You'll regret standing in my way!");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        if(confidence > 66)
+                            say(t, "We'll see who's stronger!");
+                        else
+                        if(confidence > 33)
+                            say(t, "I can definitely slow you down.");
+                        else
+                            say(t, "I-I'm stronger than I look!");
+                    } else
+                    if(c.getConfidence() > 33)
+                    {
+                        if(c.getMorality() > 66)
+                            c.say(t, "I can't lose here!");
+                        else
+                        if(c.getMorality() > 33)
+                            c.say(t, "You're actually pretty strong.");
+                        else
+                            c.say(t, "Ugh, can't we do this some other time?");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        if(confidence > 66)
+                            say(t, "I've got the upper hand.");
+                        else
+                        if(confidence > 33)
+                            say(t, "Hmph!");
+                        else
+                            say(t, "Y-You don't have time to talk!");
+                    } else
+                    {
+                        if(c.getMorality() > 66)
+                            c.say(t, "I-I'm sorry, but I'm too weak...!");
+                        else
+                        if(c.getMorality() > 33)
+                            c.say(t, "Th-This one's strong!");
+                        else
+                            c.say(t, "Run away!");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        if(confidence > 66)
+                            say(t, "You can run, but you can't hide.");
+                        else
+                        if(confidence > 33)
+                            say(t, (new StringBuilder("Looks like ")).append(c.heShe()).append("'s not fighting back.").toString());
+                        else
+                            say(t, (new StringBuilder("I-I've got ")).append(c.himHer()).append(" on the run!").toString());
+                    }
+                    say(t, "\"");
+                } else
+                {
+                    c.say(t, "\"");
+                    if(c.getConfidence() > 66)
+                    {
+                        if(c.getMorality() > 66)
+                            c.say(t, "I must not... give in...!");
+                        else
+                        if(c.getMorality() > 33)
+                            c.say(t, "You... got lucky...!");
+                        else
+                            c.say(t, "You'll... pay for that...!");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        if(innocence > 66)
+                            say(t, "Hm?  Did I really hit you that hard?");
+                        else
+                        if(innocence > 33)
+                            say(t, "Looks like you aren't so strong after all.");
+                        else
+                            say(t, "Your self-confidence is worth far less than the faith of all those who still believe in me.");
+                    } else
+                    if(c.getConfidence() > 33)
+                    {
+                        if(c.getMorality() > 66)
+                            c.say(t, "I... I won't run-");
+                        else
+                        if(c.getMorality() > 33)
+                            c.say(t, "I might need to run-");
+                        else
+                            c.say(t, "Gah, I need to run-");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        if(innocence > 66)
+                            say(t, "Too laaate~!");
+                        else
+                        if(innocence > 33)
+                            say(t, "Hyah!");
+                        else
+                            say(t, "I will not allow you to escape!");
+                    } else
+                    {
+                        if(c.getMorality() > 66)
+                            c.say(t, "I won't lose hope...!");
+                        else
+                        if(c.getMorality() > 33)
+                            c.say(t, "N-No!  Leave me alone!");
+                        else
+                            c.say(t, "I-I give up!  Let me go!");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        if(innocence > 66)
+                            say(t, "Let's play together.");
+                        else
+                        if(innocence > 33)
+                            say(t, "Let's do this.");
+                        else
+                            say(t, "You understand that you're in a hopeless position.  Good.");
+                    }
+                    say(t, "\"");
+                }
+            } else
+            if(c.captureProgression % 6 == 1)
+            {
+                if(styleDamage[1] > 0)
+                {
+                    if(styleDamage[2] > 0)
+                    {
+                        if(disgrace > 66)
+                        {
+                            c.say(t, "\"");
+                            if(deviancy > 66)
+                            {
+                                if(c.getInnocence() > 66)
+                                    c.say(t, "Y-You're totally crazy!");
+                                else
+                                if(c.getInnocence() > 33)
+                                    c.say(t, "Don't you even care what happens to you!?");
+                                else
+                                    c.say(t, "You... You animal...!");
+                                c.say(t, "\"\n\n");
+                                say(t, "\"");
+                                if(c.getConfidence() > 66)
+                                    say(t, "Nngh, yes, look down on me...!");
+                                else
+                                if(c.getConfidence() > 33)
+                                    say(t, "This is the only way I can feel alive...!");
+                                else
+                                    say(t, "Heh, are you scared of feeling good...?  You should be.");
+                            } else
+                            if(deviancy > 33)
+                            {
+                                if(c.getConfidence() > 66)
+                                    c.say(t, "You're just... getting lucky...!");
+                                else
+                                if(c.getConfidence() > 33)
+                                    c.say(t, "Stop it, stop it!");
+                                else
+                                    c.say(t, "I-I want to resist, but...");
+                                c.say(t, "\"\n\n");
+                                say(t, "\"");
+                                if(c.getMorality() > 66)
+                                    say(t, "Why are you holding back?  Come on, I know you can hurt me!");
+                                else
+                                if(c.getMorality() > 33)
+                                    say(t, "Ah, this hurts so good...!");
+                                else
+                                    say(t, "Yes, that anger...  Let it out on me...!");
+                            } else
+                            {
+                                if(c.getMorality() > 66)
+                                    c.say(t, "Why are you doing this!?");
+                                else
+                                if(c.getMorality() > 33)
+                                    c.say(t, "Back off!");
+                                else
+                                    c.say(t, "You're really pissing me off...!");
+                                c.say(t, "\"\n\n");
+                                say(t, "\"");
+                                if(c.getConfidence() > 66)
+                                    say(t, "If you want me to stop, then stop me.");
+                                else
+                                if(c.getConfidence() > 33)
+                                    say(t, "I actually think you're enjoying this more than I am.");
+                                else
+                                    say(t, "Are you too turned on to fight back properly?  That's too bad.");
+                            }
+                            say(t, "\"");
+                        } else
+                        if(disgrace > 33)
+                        {
+                            c.say(t, "\"");
+                            if(c.getDignity() > 66)
+                            {
+                                if(hostility > 66)
+                                    c.say(t, "It just... ngh... j-just hurts...!");
+                                else
+                                if(hostility > 33)
+                                    c.say(t, "I-I could stop you if I wanted to!");
+                                else
+                                    c.say(t, "T-Trying to make me feel good is pointless!");
+                                c.say(t, "\"\n\n");
+                                say(t, "\"");
+                                if(innocence > 66)
+                                    say(t, "Okay, but I'm gonna keep doing this!");
+                                else
+                                if(innocence > 33)
+                                    say(t, "Then why don't you stop me?");
+                                else
+                                    say(t, "A poor bluff.");
+                            } else
+                            if(c.getDignity() > 33)
+                            {
+                                if(deviancy > 66)
+                                    c.say(t, "Y-You're just... satisfying yourself...!");
+                                else
+                                if(deviancy > 33)
+                                    c.say(t, "Ugh, you look like you're having a good time...");
+                                else
+                                    c.say(t, "You don't look like you're enjoying this, so why...?");
+                                c.say(t, "\"\n\n");
+                                say(t, "\"");
+                                if(obedience > 66)
+                                    say(t, "I enjoy everything I do in service to the Demon Lord.");
+                                else
+                                if(obedience > 33)
+                                    say(t, "I'm only following my orders.");
+                                else
+                                    say(t, "This is how I fight.");
+                            } else
+                            {
+                                if(hostility > 66)
+                                    c.say(t, "Aaagh, it huuurts!");
+                                else
+                                if(hostility > 33)
+                                    c.say(t, "Ow... nnaaah, oooh!");
+                                else
+                                    c.say(t, "F-Feels... goood...!");
+                                c.say(t, "\"\n\n");
+                                say(t, "\"");
+                                if(confidence > 66)
+                                    say(t, "Is that all you can do!?");
+                                else
+                                if(confidence > 33)
+                                    say(t, "You're weak right there, aren't you?");
+                                else
+                                    say(t, "Wow, I-I'm completely in control...");
+                            }
+                            say(t, "\"");
+                        } else
+                        {
+                            say(t, "\"");
+                            if(hostility > 66)
+                            {
+                                if(c.getInnocence() > 66)
+                                    say(t, "Idiot!  Do you understand now that you never should have got in my way!?");
+                                else
+                                if(c.getInnocence() > 33)
+                                    say(t, "Scream for me!");
+                                else
+                                    say(t, "Heh, you look like you're regretting your actions.");
+                                say(t, "\"\n\n");
+                                c.say(t, "\"");
+                                if(c.getConfidence() > 66)
+                                    c.say(t, "I... won't... ngh... beg...!");
+                                else
+                                if(c.getConfidence() > 33)
+                                    c.say(t, "It's... too much...!");
+                                else
+                                    c.say(t, "Please, forgive meee!");
+                            } else
+                            if(hostility > 33)
+                            {
+                                if(c.getConfidence() > 66)
+                                    say(t, "Still trying to resist?  How annoying.");
+                                else
+                                if(c.getConfidence() > 33)
+                                    say(t, "How about this?");
+                                else
+                                    say(t, "You're making such cute little noises.");
+                                say(t, "\"\n\n");
+                                c.say(t, "\"");
+                                if(c.getDignity() > 66)
+                                    c.say(t, "I-I'm not- Nn!  Not feeling anything at all!");
+                                else
+                                if(c.getDignity() > 33)
+                                    c.say(t, "Stop... this...!");
+                                else
+                                    c.say(t, "Aaagh, gaaah!");
+                            } else
+                            {
+                                if(c.getInnocence() > 66)
+                                    say(t, "I hoped that you wouldn't be the sort to enjoy this sort of thing.");
+                                else
+                                if(c.getInnocence() > 33)
+                                    say(t, "I don't want to be this rough, but you aren't leaving me any choice.");
+                                else
+                                    say(t, "You seem like you're trying to learn how to handle this.");
+                                say(t, "\"\n\n");
+                                c.say(t, "\"");
+                                if(c.getMorality() > 66)
+                                    c.say(t, "Am I really so weak...?");
+                                else
+                                if(c.getMorality() > 33)
+                                    c.say(t, "I get it, just let me go already!");
+                                else
+                                    c.say(t, "F-Fuck you!");
+                            }
+                            c.say(t, "\"");
+                        }
+                    } else
+                    if(disgrace > 66)
+                    {
+                        c.say(t, "\"");
+                        if(c.getConfidence() > 66)
+                        {
+                            if(dignity > 66)
+                                c.say(t, "Ergh...  You live up to your old reputation...!");
+                            else
+                            if(dignity > 33)
+                                c.say(t, "You're actually giving me a hard time!");
+                            else
+                                c.say(t, "You're- ngh!  Completely crazy!");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(innocence > 66)
+                                say(t, "Hahah, thanks!");
+                            else
+                            if(innocence > 33)
+                                say(t, "I can't hold back, especially against someone like you.");
+                            else
+                                say(t, "I do not need brute force in order to win!");
+                        } else
+                        if(c.getConfidence() > 33)
+                        {
+                            if(innocence > 66)
+                                c.say(t, "It's like fighting a wild animal...!");
+                            else
+                            if(innocence > 33)
+                                c.say(t, "Can't believe I'm getting pushed back...!");
+                            else
+                                c.say(t, "I should be able to win this, but...!");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(hostility > 66)
+                                say(t, "Kill, kill, kill!");
+                            else
+                            if(hostility > 33)
+                                say(t, "Graaah!");
+                            else
+                                say(t, "You shouldn't rely on your powers so much.");
+                        } else
+                        {
+                            if(hostility > 66)
+                                c.say(t, "I-I'm actually going to die...!");
+                            else
+                            if(hostility > 33)
+                                c.say(t, "Such... hatred...!");
+                            else
+                                c.say(t, "Even against one of the weaker Forsaken, I-I can't...");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(confidence > 66)
+                                say(t, "This is why you shouldn't underestimate me!");
+                            else
+                            if(confidence > 33)
+                                say(t, "Is this really all you can do!?");
+                            else
+                                say(t, "Yeah, this is pretty pathetic.");
+                        }
+                        say(t, "\"");
+                    } else
+                    if(disgrace > 33)
+                    {
+                        c.say(t, "\"");
+                        if(c.getConfidence() > 66)
+                        {
+                            if(hostility > 66)
+                                c.say(t, "Face me, coward!");
+                            else
+                            if(hostility > 33)
+                                c.say(t, "You won't have an easy time hurting me!");
+                            else
+                                c.say(t, "A straightforward fight.  Just how I like it!");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(confidence > 66)
+                                say(t, "Fine, let's see what you can do!");
+                            else
+                            if(confidence > 33)
+                                say(t, "Alright, let's do this!");
+                            else
+                                say(t, "I-I'm not giving up!");
+                        } else
+                        if(c.getConfidence() > 33)
+                        {
+                            if(confidence > 66)
+                                c.say(t, "I... think I can beat you...!");
+                            else
+                            if(confidence > 33)
+                                c.say(t, "Pretty... tough...!");
+                            else
+                                c.say(t, "You're... stronger than you look...!");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(innocence > 66)
+                                say(t, "I'm totally holding back my full power, just watch!");
+                            else
+                            if(innocence > 33)
+                                say(t, "Hyaaah!");
+                            else
+                                say(t, "Hmph!  How about this!?");
+                        } else
+                        {
+                            if(deviancy > 66)
+                                c.say(t, "S-Stop... looking at me like that... please...!");
+                            else
+                            if(deviancy > 33)
+                                c.say(t, (new StringBuilder("I-It's like... ")).append(heShe()).append("'s just enjoying it...!").toString());
+                            else
+                                c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append("'s... too strong...!").toString());
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(hostility > 66)
+                                say(t, "I'm going to make you beg me to kill you before I'm done!");
+                            else
+                            if(hostility > 33)
+                                say(t, "Hahah, you're already giving up!");
+                            else
+                                say(t, "You aren't giving up yet, are you?");
+                        }
+                        say(t, "\"");
+                    } else
+                    {
+                        String usedName = originalName;
+                        if(obedience > 40)
+                            usedName = mainName;
+                        c.say(t, "\"");
+                        if(c.getConfidence() > 66)
+                        {
+                            if(dignity > 66)
+                                c.say(t, "Heh...  You're as strong as... they say...");
+                            else
+                            if(dignity > 33)
+                                c.say(t, "You might actually be stronger than me...");
+                            else
+                                c.say(t, "Were you... always this strong...?");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(confidence > 66)
+                                say(t, (new StringBuilder("Of course.  I'm ")).append(usedName).append(".").toString());
+                            else
+                            if(confidence > 33)
+                                say(t, "I can't hold back.");
+                            else
+                                say(t, "Th-This is the strength of those who believe in me!");
+                        } else
+                        if(c.getConfidence() > 33)
+                        {
+                            if(morality > 66)
+                                c.say(t, "I heard that you... used to be so nice...");
+                            else
+                            if(morality > 33)
+                                c.say(t, "Don't you... feel bad about doing this...?");
+                            else
+                                c.say(t, "Ugh...  Have you been working for the Demons all along...?");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(hostility > 66)
+                                say(t, "I've just learned to enjoy hurting people!");
+                            else
+                            if(hostility > 33)
+                                say(t, "Shut up and take it.");
+                            else
+                                say(t, "I don't want to do this, but I have no choice.");
+                        } else
+                        {
+                            if(hostility > 66)
+                                c.say(t, "P-Please, no more, no more, I'm begging you...!");
+                            else
+                            if(hostility > 33)
+                                c.say(t, "I c-can't, I can't take it anymore...!");
+                            else
+                                c.say(t, "I know you aren't enjoying this, so why...?");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(obedience > 66)
+                                say(t, "And this is only a small fraction of the Demon Lord's power!");
+                            else
+                            if(obedience > 33)
+                                say(t, "I have my orders.");
+                            else
+                                say(t, "I'm sorry.");
+                        }
+                        say(t, "\"");
+                    }
+                } else
+                if(styleDamage[2] > 0)
+                {
+                    if(deviancy > 66)
+                    {
+                        c.say(t, "\"");
+                        if(c.getInnocence() > 66)
+                        {
+                            if(hostility > 66)
+                                c.say(t, "S-Stop!  You're hurting me!");
+                            else
+                            if(hostility > 33)
+                                c.say(t, "Th-This is really weird!");
+                            else
+                                c.say(t, "N-No!  I don't wanna feel good!");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(innocence > 66)
+                                say(t, "I'm gonna make you super perveted, like me!");
+                            else
+                            if(innocence > 33)
+                                say(t, "Ah, this is wonderful!");
+                            else
+                                say(t, "I'm... nn... stealing away your innocence...!");
+                        } else
+                        if(c.getInnocence() > 33)
+                        {
+                            if(innocence > 66)
+                                c.say(t, "You have no idea what you're doing!");
+                            else
+                            if(innocence > 33)
+                                c.say(t, "Stop doing all this screwed up stuff!");
+                            else
+                                c.say(t, "What are you even trying to accomplish by doing this!?");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(morality > 66)
+                                say(t, "The fact that I know it's wrong... makes it even kinkier!");
+                            else
+                            if(morality > 33)
+                                say(t, "I'll never stop, this is what I live for!");
+                            else
+                                say(t, "It feels good, that's all that matters.");
+                        } else
+                        {
+                            if(disgrace > 66)
+                                c.say(t, "I-I'll stop you by force!");
+                            else
+                            if(disgrace > 33)
+                                c.say(t, "W-Wasting effort on this will simply make it easier to defeat you!");
+                            else
+                                c.say(t, "S-Someone strong enough to stop you will come eventually!");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(confidence > 66)
+                                say(t, "Go on, try!  That makes it feel even better!");
+                            else
+                            if(confidence > 33)
+                                say(t, "Even if doing this gets me killed, it's still worth it.");
+                            else
+                                say(t, "I don't care... I just want to feel good and forget everything...");
+                        }
+                        say(t, "\"");
+                    } else
+                    if(deviancy > 33)
+                    {
+                        say(t, "\"");
+                        if(c.getDignity() > 66)
+                        {
+                            if(innocence > 66)
+                                say(t, "Um, are you trying to pretend that didn't feel good?");
+                            else
+                            if(innocence > 33)
+                                say(t, "Looks like a part of you is asking me to continue.");
+                            else
+                                say(t, "Protest as much as you like, but your pleasure is obvious.");
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            if(confidence > 66)
+                                c.say(t, "You brute!");
+                            else
+                            if(confidence > 33)
+                                c.say(t, "D-Don't be ridiculous!");
+                            else
+                                c.say(t, "Sneaky little...!");
+                        } else
+                        if(c.getDignity() > 33)
+                        {
+                            if(hostility > 66)
+                                say(t, "I still want to make you scream.");
+                            else
+                            if(hostility > 33)
+                                say(t, "Well, I enjoyed myself.");
+                            else
+                                say(t, "I might have gone too far...");
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            if(disgrace > 66)
+                                c.say(t, "I won't let you do that again!");
+                            else
+                            if(disgrace > 33)
+                                c.say(t, (new StringBuilder("Ugh, I can't let ")).append(himHer()).append(" do what ").append(heShe()).append(" wants...").toString());
+                            else
+                                c.say(t, "S-Stay back!");
+                        } else
+                        {
+                            if(confidence > 66)
+                                say(t, "What do you think of my technique?");
+                            else
+                            if(confidence > 33)
+                                say(t, "Looks like that had a nice effect.");
+                            else
+                                say(t, "H-Heh, looks like it worked...");
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            if(hostility > 66)
+                                c.say(t, "Ow...  You're... rough...");
+                            else
+                            if(hostility > 33)
+                                c.say(t, "I... I need a break...");
+                            else
+                                c.say(t, "I'll admit... that felt good...");
+                        }
+                        c.say(t, "\"");
+                    } else
+                    {
+                        say(t, "\"");
+                        if(c.getDignity() > 66)
+                        {
+                            if(innocence > 66)
+                                say(t, "I guess it's not working.  Oh well.");
+                            else
+                            if(innocence > 33)
+                                say(t, "Time to try something different.");
+                            else
+                                say(t, "I wonder, are you really not feeling anything?");
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            if(disgrace > 66)
+                                c.say(t, "Hmph.  It'd take more than that.");
+                            else
+                            if(disgrace > 33)
+                                c.say(t, "L-Let's just fight normally, then!");
+                            else
+                                c.say(t, "Huuh...  Phew...");
+                        } else
+                        if(c.getDignity() > 33)
+                        {
+                            if(disgrace > 66)
+                                say(t, "Close one...!");
+                            else
+                            if(disgrace > 33)
+                                say(t, "Too slow!");
+                            else
+                                say(t, "It's pointless to resist.");
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            if(confidence > 66)
+                                c.say(t, "You... smug...!");
+                            else
+                            if(confidence > 33)
+                                c.say(t, "Can't let that happen again...");
+                            else
+                                c.say(t, "Ugh, coward...!");
+                        } else
+                        {
+                            if(hostility > 66)
+                                say(t, "Disgusting.  Just die.");
+                            else
+                            if(hostility > 33)
+                                say(t, "Ugh, you pervert.");
+                            else
+                                say(t, "I really was hoping your body wouldn't be so weak to this.");
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            if(innocence > 66)
+                                c.say(t, "Huh...?  What...?");
+                            else
+                            if(innocence > 33)
+                                c.say(t, "No one asked you!");
+                            else
+                                c.say(t, "I expect you'd fare no better!");
+                        }
+                        c.say(t, "\"");
+                    }
+                } else
+                if(disgrace > 66)
+                {
+                    say(t, "\"");
+                    if(c.getConfidence() > 66)
+                    {
+                        if(hostility > 66)
+                            say(t, "Pathetic!  Is that what you call an attack!?");
+                        else
+                        if(hostility > 33)
+                            say(t, "Getting tired yet?");
+                        else
+                            say(t, "You won't be able to beat me like this.");
+                        say(t, "\"\n\n");
+                        c.say(t, "\"");
+                        if(innocence > 66)
+                            c.say(t, "Your luck has to run out eventually!");
+                        else
+                        if(innocence > 33)
+                            c.say(t, "Hold still!");
+                        else
+                            c.say(t, "Ugh, you're a slippery one.");
+                    } else
+                    if(c.getConfidence() > 33)
+                    {
+                        if(innocence > 66)
+                            say(t, "I'm not gonna let you hit me!");
+                        else
+                        if(innocence > 33)
+                            say(t, "Whew, close one.");
+                        else
+                            say(t, "As long as I avoid leaving any openings...");
+                        say(t, "\"\n\n");
+                        c.say(t, "\"");
+                        if(confidence > 66)
+                            c.say(t, "You're just a coward after all!");
+                        else
+                        if(confidence > 33)
+                            c.say(t, "Aren't you going to attack!?");
+                        else
+                            c.say(t, "Scared to face me!?");
+                    } else
+                    {
+                        if(confidence > 66)
+                            say(t, "Come on, try to attack me!");
+                        else
+                        if(confidence > 33)
+                            say(t, "If you're not going to fight me, what are you even doing here?");
+                        else
+                            say(t, "If I'm too much for you to handle, you might as well just quit now.");
+                        say(t, "\"\n\n");
+                        c.say(t, "\"");
+                        if(hostility > 66)
+                            c.say(t, "Y-You're just looking for a way to hurt me, I know it!");
+                        else
+                        if(hostility > 33)
+                            c.say(t, "D-Don't rush me!");
+                        else
+                            c.say(t, "S-Sorry, I just...");
+                    }
+                    c.say(t, "\"");
+                } else
+                if(disgrace > 33)
+                {
+                    c.say(t, "\"");
+                    if(c.getMorality() > 66)
+                    {
+                        if(innocence > 66)
+                            c.say(t, "Hey, look at me!  I'm the one you're after!");
+                        else
+                        if(innocence > 33)
+                            c.say(t, "I won't let you hurt them!");
+                        else
+                            c.say(t, "What are you planning to do to them!?");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        if(hostility > 66)
+                            say(t, "Idiot.  I've got you right where I want you.");
+                        else
+                        if(hostility > 33)
+                            say(t, "You're so predictable.");
+                        else
+                            say(t, "Nice response.");
+                    } else
+                    if(c.getMorality() > 33)
+                    {
+                        if(dignity > 66)
+                            c.say(t, (new StringBuilder("Am I even scratching ")).append(himHer()).append("?").toString());
+                        else
+                        if(dignity > 33)
+                            c.say(t, "There's no end to this...!");
+                        else
+                            c.say(t, (new StringBuilder("I can tell that ")).append(heShe()).append("'s getting tired too...").toString());
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        if(obedience > 66)
+                            say(t, "There's no end to the Demon Lord's power!");
+                        else
+                        if(obedience > 33)
+                            say(t, "Alright, next step...");
+                        else
+                            say(t, "I like how this is turning out.");
+                    } else
+                    {
+                        if(hostility > 66)
+                            c.say(t, "I won't let you kill me!");
+                        else
+                        if(hostility > 33)
+                            c.say(t, "I'm not your toy!");
+                        else
+                            c.say(t, "Stop looking down on me!");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        if(innocence > 66)
+                            say(t, "Oh, I guess I made you mad.");
+                        else
+                        if(innocence > 33)
+                            say(t, "You've got issues.");
+                        else
+                            say(t, "Nonetheless, you're quite easy to manipulate.");
+                    }
+                    say(t, "\"");
+                } else
+                {
+                    c.say(t, "\"");
+                    if(c.getInnocence() > 66)
+                    {
+                        if(deviancy > 66)
+                            c.say(t, "Stay away from me, weirdo!");
+                        else
+                        if(deviancy > 33)
+                            c.say(t, "What are you looking at me like that for!?  Get back!");
+                        else
+                            c.say(t, "Leave me alooone!");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        if(innocence > 66)
+                            say(t, "That tickles!");
+                        else
+                        if(innocence > 33)
+                            say(t, "You're wasting your energy.");
+                        else
+                            say(t, "Pointless.");
+                    } else
+                    if(c.getInnocence() > 33)
+                    {
+                        if(innocence > 66)
+                            c.say(t, (new StringBuilder("I need to outsmart ")).append(himHer()).append(" somehow...!").toString());
+                        else
+                        if(innocence > 33)
+                            c.say(t, "There's got to be some way out of this...!");
+                        else
+                            c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append("'s completely cornered me...").toString());
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        if(obedience > 66)
+                            say(t, "Now do you understand the Demon Lord's power?");
+                        else
+                        if(obedience > 33)
+                            say(t, "Alright, here should be good.");
+                        else
+                            say(t, "You can't run anymore.");
+                    } else
+                    {
+                        if(confidence > 66)
+                            c.say(t, "You aren't attacking.  Tell me why!");
+                        else
+                        if(confidence > 33)
+                            c.say(t, "It would appear that I'm at your mercy.");
+                        else
+                            c.say(t, "Wh-What do you want with me!?");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        if(hostility > 66)
+                            say(t, "I want you to feel completely hopeless...!");
+                        else
+                        if(hostility > 33)
+                            say(t, "I'm giving you a chance to beg for mercy.");
+                        else
+                            say(t, "You need to understand what you're up against.");
+                    }
+                    say(t, "\"");
+                }
+            } else
+            if(c.captureProgression % 6 == 2)
+            {
+                if(styleDamage[2] > 0)
+                {
+                    if(styleDamage[3] > 0)
+                    {
+                        if(disgrace > 66)
+                        {
+                            c.say(t, "\"");
+                            if(c.getDignity() > 66)
+                            {
+                                if(deviancy > 66)
+                                    c.say(t, "H-Hey, where are you touching!?");
+                                else
+                                if(deviancy > 33)
+                                    c.say(t, "You don't have to look so pleased with yourself!");
+                                else
+                                    c.say(t, "Hey, stop that!");
+                                c.say(t, "\"\n\n");
+                                say(t, "\"");
+                                if(innocence > 66)
+                                    say(t, "Oopsie!");
+                                else
+                                if(innocence > 33)
+                                    say(t, "Looks like you've got a weakness.");
+                                else
+                                    say(t, "You shouldn't worry about such trivial things.");
+                            } else
+                            if(c.getDignity() > 33)
+                            {
+                                if(hostility > 66)
+                                    c.say(t, "I don't like that look in your eyes...");
+                                else
+                                if(hostility > 33)
+                                    c.say(t, "What are you smirking about?");
+                                else
+                                    c.say(t, "Did it get colder?");
+                                c.say(t, "\"\n\n");
+                                say(t, "\"");
+                                if(confidence > 66)
+                                    say(t, "You don't have time to worry about that!");
+                                else
+                                if(confidence > 33)
+                                    say(t, "Let's keep going.");
+                                else
+                                    say(t, "A-Are you sure you can focus on me right now?");
+                            } else
+                            {
+                                if(innocence > 66)
+                                    c.say(t, "Ogle me if you like, it doesn't change anything.");
+                                else
+                                if(innocence > 33)
+                                    c.say(t, "Is that what you were after?  Ugh.");
+                                else
+                                    c.say(t, "What are you plotting?");
+                                c.say(t, "\"\n\n");
+                                say(t, "\"");
+                                if(deviancy > 66)
+                                    say(t, "Ah, it's showing, it's showiiing~!");
+                                else
+                                if(deviancy > 33)
+                                    say(t, "Hm, not bad.");
+                                else
+                                    say(t, "You should be more careful.");
+                            }
+                            say(t, "\"");
+                        } else
+                        if(disgrace > 33)
+                        {
+                            c.say(t, "\"");
+                            if(c.getConfidence() > 66)
+                            {
+                                if(hostility > 66)
+                                    c.say(t, "This is finally my chance to go all-out!");
+                                else
+                                if(hostility > 33)
+                                    c.say(t, "Now this is a fight!");
+                                else
+                                    c.say(t, "This is a chance to fight a worthy opponent!");
+                                c.say(t, "\"\n\n");
+                                say(t, "\"");
+                                if(deviancy > 66)
+                                    say(t, "W-Worth it...");
+                                else
+                                if(deviancy > 33)
+                                    say(t, "This is also a great show...");
+                                else
+                                    say(t, "Yaaah!");
+                            } else
+                            if(c.getConfidence() > 33)
+                            {
+                                if(deviancy > 66)
+                                    c.say(t, "You complete pervert!");
+                                else
+                                if(deviancy > 33)
+                                    c.say(t, "Stop messing around!");
+                                else
+                                    c.say(t, "I didn't think you were the type to do this.");
+                                c.say(t, "\"\n\n");
+                                say(t, "\"");
+                                if(dignity > 66)
+                                    say(t, "It suddenly looks like you're losing, doesn't it?");
+                                else
+                                if(dignity > 33)
+                                    say(t, "Can you still fight like that?");
+                                else
+                                    say(t, "A lot of people seem to care about this sort of thing.");
+                            } else
+                            {
+                                if(confidence > 66)
+                                    c.say(t, "I don't have any chance unless I can get away!");
+                                else
+                                if(confidence > 33)
+                                    c.say(t, "Let me go!");
+                                else
+                                    c.say(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s crazy, I have to run!").toString());
+                                c.say(t, "\"\n\n");
+                                say(t, "\"");
+                                if(innocence > 66)
+                                    say(t, "Stop it, I've gotta fight you!");
+                                else
+                                if(innocence > 33)
+                                    say(t, "Okay, but I'm keeping your clothes.");
+                                else
+                                    say(t, "Are you so sure that that's a good idea?");
+                            }
+                            say(t, "\"");
+                        } else
+                        {
+                            say(t, "\"");
+                            if(c.getInnocence() > 66)
+                            {
+                                if(hostility > 66)
+                                    say(t, "Shut up!  Shut up, or I'll kill you!");
+                                else
+                                if(hostility > 33)
+                                    say(t, "Hold still, you little shit!");
+                                else
+                                    say(t, (new StringBuilder("Ergh, ")).append(c.heShe()).append("'s desperate...!").toString());
+                                say(t, "\"\n\n");
+                                c.say(t, "\"");
+                                if(confidence > 66)
+                                    c.say(t, "No, no, I'm gonna dieee!");
+                                else
+                                if(confidence > 33)
+                                    c.say(t, "Let go of meee!");
+                                else
+                                    c.say(t, "Aaah!  Come on, seriously, let me gooo!");
+                            } else
+                            if(c.getInnocence() > 33)
+                            {
+                                if(deviancy > 66)
+                                    say(t, "Let's tear off a little extra~!");
+                                else
+                                if(deviancy > 33)
+                                    say(t, "You do have a nice body.");
+                                else
+                                    say(t, "I won't let you protect yourself.");
+                                say(t, "\"\n\n");
+                                c.say(t, "\"");
+                                if(dignity > 66)
+                                    c.say(t, "Please... just don't let them see...");
+                                else
+                                if(dignity > 33)
+                                    c.say(t, "Ugh...  Fine, do what you want...");
+                                else
+                                    c.say(t, "Aaagh, nooo!");
+                            } else
+                            {
+                                if(innocence > 66)
+                                    say(t, "Guess I can relax- Whah!?");
+                                else
+                                if(innocence > 33)
+                                    say(t, "It's over now, you can't- Gaaah!");
+                                else
+                                    say(t, "Giving up?  Or is this a tri- Ngh!");
+                                say(t, "\"\n\n");
+                                c.say(t, "\"\n\n");
+                                if(deviancy > 66)
+                                    c.say(t, "Hmph, I will need to wash my mouth out tonight.");
+                                else
+                                if(deviancy > 33)
+                                    c.say(t, "As if I'd offer myself to you!");
+                                else
+                                    c.say(t, "Now is my chance!");
+                            }
+                            c.say(t, "\"");
+                        }
+                    } else
+                    if(disgrace > 66)
+                    {
+                        c.say(t, "\"");
+                        if(c.getConfidence() > 66)
+                        {
+                            if(deviancy > 66)
+                                c.say(t, "Are you actually enjoying this!?");
+                            else
+                            if(deviancy > 33)
+                                c.say(t, "You look like you're having a little less fun now!");
+                            else
+                                c.say(t, "You'll stay down, if you know what's good for you.");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(hostility > 66)
+                                say(t, (new StringBuilder("I'm... I'm going to enjoy watching you break, ")).append(c.getMainName()).append("...").toString());
+                            else
+                            if(hostility > 33)
+                                say(t, "You'll... regret... that...");
+                            else
+                                say(t, "I... probably deserved that.");
+                        } else
+                        if(c.getConfidence() > 33)
+                        {
+                            if(innocence > 66)
+                                c.say(t, "Have you finally learned your lesson?");
+                            else
+                            if(innocence > 33)
+                                c.say(t, "I hope you're giving up.");
+                            else
+                                c.say(t, "What are you plotting now?");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(obedience > 66)
+                                say(t, "I'm no use to the Demon Lord if I'm dead.");
+                            else
+                            if(obedience > 33)
+                                say(t, "The Demon Lord might not be happy, but I can deal with that later.");
+                            else
+                                say(t, "Guh, why did the Demon Lord have to make me so weak!?");
+                        } else
+                        {
+                            if(hostility > 66)
+                                c.say(t, (new StringBuilder("I really thought... ")).append(heShe()).append(" was going to kill me...").toString());
+                            else
+                            if(hostility > 33)
+                                c.say(t, "This is my chance!");
+                            else
+                                c.say(t, "I'm.... I'm strong enough after all...!");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(confidence > 66)
+                                say(t, "I'm not done with you yet!");
+                            else
+                            if(confidence > 33)
+                                say(t, "This isn't over!");
+                            else
+                                say(t, "I-I can still fight!");
+                        }
+                        say(t, "\"");
+                    } else
+                    if(disgrace > 33)
+                    {
+                        c.say(t, "\"");
+                        if(c.getInnocence() > 66)
+                        {
+                            if(obedience > 66)
+                                c.say(t, "Whew...  You must really love the Demon Lord, huh?");
+                            else
+                            if(obedience > 33)
+                                c.say(t, "Huuuh...  Phew...");
+                            else
+                                c.say(t, "Come on, if you don't like the Demon Lord, then just give up already!");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(confidence > 66)
+                                say(t, "I never give up!");
+                            else
+                            if(confidence > 33)
+                                say(t, "Gah, haaah...");
+                            else
+                                say(t, "I can't stop... here...!");
+                        } else
+                        if(c.getInnocence() > 33)
+                        {
+                            if(dignity > 66)
+                                c.say(t, "Don't you ever get tired!?");
+                            else
+                            if(dignity > 33)
+                                c.say(t, "You look like you're tiring out.");
+                            else
+                                c.say(t, "Can't believe you're still standing...");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(obedience > 66)
+                                say(t, "If it's for the Demon Lord, I'll fight forever.");
+                            else
+                            if(obedience > 33)
+                                say(t, "The Demon Lord has a way of motivating us.");
+                            else
+                                say(t, "I'm not done yet.");
+                        } else
+                        {
+                            if(confidence > 66)
+                                c.say(t, "I will not be intimidated!");
+                            else
+                            if(confidence > 33)
+                                c.say(t, "I won't allow you to provoke me!");
+                            else
+                                c.say(t, "You won't be able to fool me into letting my guard down.");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(hostility > 66)
+                                say(t, "You think you can stop me from hurting you?");
+                            else
+                            if(hostility > 33)
+                                say(t, "We'll see about that.");
+                            else
+                                say(t, "Good.");
+                        }
+                        say(t, "\"");
+                    } else
+                    {
+                        c.say(t, "\"");
+                        if(c.getConfidence() > 66)
+                        {
+                            if(hostility > 66)
+                                c.say(t, "You... monster...");
+                            else
+                            if(hostility > 33)
+                                c.say(t, "I can still... stand up...!");
+                            else
+                                c.say(t, "I don't... understand you...");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(deviancy > 66)
+                                say(t, "Your broken body is so beautiful...");
+                            else
+                            if(deviancy > 33)
+                                say(t, "I'm not satisfied yet.");
+                            else
+                                say(t, "Go on, get up.");
+                        } else
+                        if(c.getConfidence() > 33)
+                        {
+                            if(deviancy > 66)
+                                c.say(t, (new StringBuilder("I can't let ")).append(himHer()).append(" find me again, or ").append(heShe()).append("'ll...").toString());
+                            else
+                            if(deviancy > 33)
+                                c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append("'s just playing with me...!").toString());
+                            else
+                                c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append("'s too strong...!").toString());
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(innocence > 66)
+                                say(t, "Found you!");
+                            else
+                            if(innocence > 33)
+                                say(t, "There you are!");
+                            else
+                                say(t, "You cannot hide from me.");
+                        } else
+                        {
+                            if(innocence > 66)
+                                c.say(t, "Maybe i-if I play dead...");
+                            else
+                            if(innocence > 33)
+                                c.say(t, "...");
+                            else
+                                c.say(t, "You win!  There's no point in going further, r-right...?");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(hostility > 66)
+                                say(t, "No, no, you need to suffer much more than this...");
+                            else
+                            if(hostility > 33)
+                                say(t, "Hm, what to do with you...?");
+                            else
+                                say(t, "You can't give up just yet.  I won't let you.");
+                        }
+                        say(t, "\"");
+                    }
+                } else
+                if(styleDamage[3] > 0)
+                {
+                    if(deviancy > 66)
+                    {
+                        c.say(t, "\"");
+                        if(c.getDignity() > 66)
+                        {
+                            if(innocence > 66)
+                                c.say(t, "Stop playing around!");
+                            else
+                            if(innocence > 33)
+                                c.say(t, "L-Let go!");
+                            else
+                                c.say(t, "You sneaky little-");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(hostility > 66)
+                                say(t, "You're so easy to hurt!");
+                            else
+                            if(hostility > 33)
+                                say(t, "Come on, show me!");
+                            else
+                                say(t, "Everyone needs to see this.");
+                        } else
+                        if(c.getDignity() > 33)
+                        {
+                            if(disgrace > 66)
+                                c.say(t, "What do you think you're-");
+                            else
+                            if(disgrace > 33)
+                                c.say(t, "Aaah!");
+                            else
+                                c.say(t, (new StringBuilder("I can't stop ")).append(himHer()).append("-").toString());
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(confidence > 66)
+                                say(t, "I'll take you right here!");
+                            else
+                            if(confidence > 33)
+                                say(t, "Mm, you're so soft...");
+                            else
+                                say(t, "Aaah~  I c-can't resist...!");
+                        } else
+                        {
+                            if(confidence > 66)
+                                c.say(t, "Come and get me.");
+                            else
+                            if(confidence > 33)
+                                c.say(t, "Let's try this.");
+                            else
+                                c.say(t, "Look, I'm defenseless.");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(innocence > 66)
+                                say(t, "Yes, gimme, gimme!");
+                            else
+                            if(innocence > 33)
+                                say(t, "Oh, wow!  Oh, wow!");
+                            else
+                                say(t, "I'd never fall for... s-such a... nngh, I want iiit!");
+                        }
+                        say(t, "\"");
+                    } else
+                    if(deviancy > 33)
+                    {
+                        say(t, "\"");
+                        if(c.getDignity() > 66)
+                        {
+                            if(innocence > 66)
+                                say(t, "You look so naughty!");
+                            else
+                            if(innocence > 33)
+                                say(t, "Feeling a bit chilly?");
+                            else
+                                say(t, "You're finally noticing?");
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            if(hostility > 66)
+                                c.say(t, "I won't let you tear me down!");
+                            else
+                            if(hostility > 33)
+                                c.say(t, "Wipe that smirk off your face!");
+                            else
+                                c.say(t, "You're just another pervert after all...!");
+                        } else
+                        if(c.getDignity() > 33)
+                        {
+                            if(obedience > 66)
+                                say(t, "If you oppose the Demon Lord, you don't get to wear clothes.");
+                            else
+                            if(obedience > 33)
+                                say(t, "I don't mind complying with this kind of order.");
+                            else
+                                say(t, "I want to see more of you.");
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            if(disgrace > 66)
+                                c.say(t, "I won't let you bring me down to your level!");
+                            else
+                            if(disgrace > 33)
+                                c.say(t, "I can still stop you!");
+                            else
+                                c.say(t, "My clothes are too fragile...!");
+                        } else
+                        {
+                            if(hostility > 66)
+                                say(t, "You won't be able to show your face in public after I'm done with you!");
+                            else
+                            if(hostility > 33)
+                                say(t, "Come on, show some embarrassment!");
+                            else
+                                say(t, "Aren't you going to cover yourself?");
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            if(innocence > 66)
+                                c.say(t, "Idiot, this won't stop me from fighting!");
+                            else
+                            if(innocence > 33)
+                                c.say(t, "What are you even trying to do?");
+                            else
+                                c.say(t, "Is this the best plan you can come up with?");
+                        }
+                        c.say(t, "\"");
+                    } else
+                    {
+                        c.say(t, "\"");
+                        if(c.getConfidence() > 66)
+                        {
+                            if(hostility > 66)
+                                c.say(t, "You're doing a pretty bad job at killing me.");
+                            else
+                            if(hostility > 33)
+                                c.say(t, "You still haven't put a scratch on me.");
+                            else
+                                c.say(t, "You're being careful not to hurt me.  That's annoying.");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(obedience > 66)
+                                say(t, "The Demon Lord is the one who really decides your fate.");
+                            else
+                            if(obedience > 33)
+                                say(t, "For now, I'm following my orders.");
+                            else
+                                say(t, "I know what I'm doing.");
+                        } else
+                        if(c.getConfidence() > 33)
+                        {
+                            if(confidence > 66)
+                                c.say(t, "I-I thought you were above hiding!");
+                            else
+                            if(confidence > 33)
+                                c.say(t, "Face me out in the open!");
+                            else
+                                c.say(t, "Too cowardly to face me head-on!?");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(innocence > 66)
+                                say(t, "I'm right here!");
+                            else
+                            if(innocence > 33)
+                                say(t, "Take this!");
+                            else
+                                say(t, "This worked out perfectly.");
+                        } else
+                        {
+                            if(disgrace > 66)
+                                c.say(t, "I don't need to be afraid, I don't need to be afraid...");
+                            else
+                            if(disgrace > 33)
+                                c.say(t, (new StringBuilder("If I can find the others before ")).append(heShe()).append(" catches me...").toString());
+                            else
+                                c.say(t, (new StringBuilder("I can't let ")).append(himHer()).append(" catch me...!").toString());
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(hostility > 66)
+                                say(t, "Give up!  Give in to despair!");
+                            else
+                            if(hostility > 33)
+                                say(t, "You might have stood a chance if you weren't such a coward!");
+                            else
+                                say(t, "What did you expect to happen when you ran!?");
+                        }
+                        say(t, "\"");
+                    }
+                } else
+                if(hostility > 66)
+                {
+                    say(t, "\"");
+                    if(c.getConfidence() > 66)
+                    {
+                        if(obedience > 66)
+                            say(t, "I will kill anyone who disrespects the Demon Lord!");
+                        else
+                        if(obedience > 33)
+                            say(t, "I'll make you show some respect!");
+                        else
+                            say(t, "You think you can afford to take me lightly!?");
+                        say(t, "\"\n\n");
+                        c.say(t, "\"");
+                        if(disgrace > 66)
+                            c.say(t, "Don't try to pretend you have any chance against me!");
+                        else
+                        if(disgrace > 33)
+                            c.say(t, "We'll see about that!");
+                        else
+                            c.say(t, "I don't care how strong you are, I'll never give in!");
+                    } else
+                    if(c.getConfidence() > 33)
+                    {
+                        if(disgrace > 66)
+                            say(t, "I'll still kill you!  Just wait and see!");
+                        else
+                        if(disgrace > 33)
+                            say(t, "You will suffer and die!");
+                        else
+                            say(t, "I'll kill you!  And those people too!  And everyone else!");
+                        say(t, "\"\n\n");
+                        c.say(t, "\"");
+                        if(morality > 66)
+                            c.say(t, "What even happened to you...?");
+                        else
+                        if(morality > 33)
+                            c.say(t, "I won't let that happen.");
+                        else
+                            c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append("'s actually smiling...").toString());
+                    } else
+                    {
+                        if(deviancy > 66)
+                            say(t, "And wait until you hear what I'm gonna do with your warm corpse!");
+                        else
+                        if(disgrace > 33)
+                            say(t, "I'm going to make you scream in all sorts of ways...");
+                        else
+                            say(t, "Are you ready to die?");
+                        say(t, "\"\n\n");
+                        c.say(t, "\"");
+                        if(innocence > 66)
+                            c.say(t, "D-Do you even have any idea what you're saying!?");
+                        else
+                        if(innocence > 33)
+                            c.say(t, "I d-don't want to hear this!");
+                        else
+                            c.say(t, "No...  P-Please, stop talking...");
+                    }
+                    c.say(t, "\"");
+                } else
+                if(hostility > 33)
+                {
+                    say(t, "\"");
+                    if(c.getInnocence() > 66)
+                    {
+                        if(innocence > 66)
+                            say(t, "You stupid, dummy... dumb-head!");
+                        else
+                        if(innocence > 33)
+                            say(t, "Idiot!  You have no business here on the battlefield!");
+                        else
+                            say(t, "Everyone knows that you're going to fail.  They're laughing at you behind your back.");
+                        say(t, "\"\n\n");
+                        c.say(t, "\"");
+                        if(morality > 66)
+                            c.say(t, "You big fat liar!");
+                        else
+                        if(morality > 33)
+                            c.say(t, "Stop talking to yourself!  Stop talking to yourself!");
+                        else
+                            c.say(t, "You're such a mean jerk!");
+                    } else
+                    if(c.getInnocence() > 33)
+                    {
+                        if(disgrace > 66)
+                            say(t, "I've been having a good time watching the Thralls play with you!");
+                        else
+                        if(disgrace > 33)
+                            say(t, "You want me to stop talking?  Come and make me!");
+                        else
+                            say(t, "Which of your friends do you think I should go after next?");
+                        say(t, "\"\n\n");
+                        c.say(t, "\"");
+                        if(obedience > 66)
+                            c.say(t, "You're just the Demon Lord's bitch!");
+                        else
+                        if(obedience > 33)
+                            c.say(t, "I'm not going to waste time listening to some coward who couldn't even beat the Demon Lord!");
+                        else
+                            c.say(t, "You think this is a game!?");
+                    } else
+                    {
+                        if(obedience > 66)
+                            say(t, "I've devoted my life to the great Demon Lord!");
+                        else
+                        if(obedience > 33)
+                            say(t, "I'm just looking out for myself, because no one else will.");
+                        else
+                            say(t, "I'm having a good time.  How about you?");
+                        say(t, "\"\n\n");
+                        c.say(t, "\"");
+                        if(deviancy > 66)
+                            c.say(t, "You're completely twisted.");
+                        else
+                        if(deviancy > 33)
+                            c.say(t, "You take a degree of sexual enjoyment from it as well.");
+                        else
+                            c.say(t, "You don't even feel guilty!");
+                    }
+                    c.say(t, "\"");
+                } else
+                {
+                    c.say(t, "\"");
+                    if(c.getMorality() > 66)
+                    {
+                        if(deviancy > 66)
+                            c.say(t, (new StringBuilder("I know you're in there somewhere, ")).append(originalName).append("!  Wake up!").toString());
+                        else
+                        if(deviancy > 33)
+                            c.say(t, (new StringBuilder("There's no way you actually enjoy doing this, ")).append(mainName).append("!  You can stop anytime!").toString());
+                        else
+                            c.say(t, (new StringBuilder("I can tell that it's hurting you to do this, ")).append(mainName).append("!  You belong on the side of Good!").toString());
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        if(obedience > 66)
+                            say(t, "Silence!  My life belongs to the Demon Lord!");
+                        else
+                        if(obedience > 33)
+                            say(t, "I've lost the ability to make that choice...");
+                        else
+                            say(t, "I'm sorry.  I've come too far to stop now.");
+                    } else
+                    if(c.getMorality() > 33)
+                    {
+                        if(disgrace > 66)
+                            c.say(t, "Hey!  Come back here!");
+                        else
+                        if(disgrace > 33)
+                            c.say(t, "Phew...");
+                        else
+                            c.say(t, "Guh!");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        if(innocence > 66)
+                            say(t, "I never really even thought about why I was fighting the Demon Lord.  Have you?");
+                        else
+                        if(innocence > 33)
+                            say(t, "If you really think you're strong enough to beat the Demon Lord, then show me!");
+                        else
+                            say(t, "Many Chosen stronger and smarter than you have failed.  If you don't understand why, then you, too, are doomed to failure.");
+                    } else
+                    {
+                        if(innocence > 66)
+                            c.say(t, "Stop pretending that you're so kind and gentle!");
+                        else
+                        if(innocence > 33)
+                            c.say(t, "Why aren't you even angry!?");
+                        else
+                            c.say(t, "Just face me head-on!");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        if(deviancy > 66)
+                            say(t, "Yes, look at me like I'm walking garbage!");
+                        else
+                        if(deviancy > 33)
+                            say(t, "Oh?  Are you going to hurt me?");
+                        else
+                            say(t, "You need to calm down.");
+                    }
+                    say(t, "\"");
+                }
+            } else
+            if(c.captureProgression % 6 == 3)
+            {
+                if(styleDamage[1] > 0)
+                {
+                    if(styleDamage[3] > 0)
+                    {
+                        if(disgrace > 66)
+                        {
+                            say(t, "\"");
+                            if(c.getDignity() > 66)
+                            {
+                                if(innocence > 66)
+                                    say(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s totally feeling good!  ").append(c.HeShe()).append("'s a huge pervert!").toString());
+                                else
+                                if(innocence > 33)
+                                {
+                                    if(c.gender.equals("female"))
+                                        say(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s sopping wet!  ").toString());
+                                    else
+                                        say(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s rock hard!  ").toString());
+                                    say(t, (new StringBuilder("Take a good look with your cameras when ")).append(c.heShe()).append(" comes around!").toString());
+                                } else
+                                {
+                                    say(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s trying to rape me!  Look, here ").append(c.heShe()).append(" comes now!").toString());
+                                }
+                                say(t, "\"\n\n");
+                                c.say(t, "\"");
+                                if(hostility > 66)
+                                    c.say(t, "Stop!  Please!");
+                                else
+                                if(hostility > 33)
+                                    c.say(t, (new StringBuilder("L-Liar!  ")).append(HeShe()).append("'s lying!").toString());
+                                else
+                                    c.say(t, "Why are you doing this!?");
+                            } else
+                            if(c.getDignity() > 33)
+                            {
+                                if(hostility > 66)
+                                    say(t, "Look at this worthless slut!");
+                                else
+                                if(hostility > 33)
+                                    say(t, "Hah, you let me go!  Thanks a lot!");
+                                else
+                                    say(t, "You should have had me there.");
+                                say(t, "\"\n\n");
+                                c.say(t, "\"");
+                                if(deviancy > 66)
+                                    c.say(t, "I can't fight like this!");
+                                else
+                                if(deviancy > 33)
+                                    c.say(t, "Ngh... guh...");
+                                else
+                                    c.say(t, "You're hard to pin down...");
+                            } else
+                            {
+                                if(obedience > 66)
+                                    say(t, (new StringBuilder("I should lead ")).append(c.himHer()).append(" past as many cameras as possible.").toString());
+                                else
+                                if(obedience > 33)
+                                    say(t, "Let's show this to your teammates.");
+                                else
+                                    say(t, "I think I'm doing pretty well for myself.");
+                                say(t, "\"\n\n");
+                                c.say(t, "\"");
+                                if(confidence > 66)
+                                    c.say(t, "Stop... looking so smug...");
+                                else
+                                if(confidence > 33)
+                                    c.say(t, "Get...  Get back here...");
+                                else
+                                    c.say(t, "Ergh...  Coward...");
+                            }
+                            c.say(t, "\"");
+                        } else
+                        if(disgrace > 33)
+                        {
+                            say(t, "\"");
+                            if(c.getConfidence() > 66)
+                            {
+                                if(hostility > 66)
+                                    say(t, "Pathetic slut!  You're getting turned on by this!");
+                                else
+                                if(hostility > 33)
+                                {
+                                    say(t, "The slut");
+                                    if(c.gender.equals("female"))
+                                        say(t, "'s sopping wet down there!");
+                                    else
+                                        say(t, "'s getting rock hard from this!");
+                                } else
+                                {
+                                    say(t, "You're aroused!  What happened to your self-control!?");
+                                }
+                                say(t, "\"\n\n");
+                                c.say(t, "\"");
+                                if(innocence > 66)
+                                    c.say(t, "Wh-What?  How did you-");
+                                else
+                                if(innocence > 33)
+                                    c.say(t, "Sh-Shut up!");
+                                else
+                                    c.say(t, "Damn you!");
+                            } else
+                            if(c.getConfidence() > 33)
+                            {
+                                if(deviancy > 66)
+                                    say(t, "Mm, I like that expression...");
+                                else
+                                if(deviancy > 33)
+                                    say(t, "Enjoying yourself without me?");
+                                else
+                                    say(t, "Disgusting...");
+                                say(t, "\"\n\n");
+                                c.say(t, "\"");
+                                if(innocence > 66)
+                                    c.say(t, "You're the one who's just having fun!");
+                                else
+                                if(innocence > 33)
+                                    c.say(t, "Ugh, just fight normally...");
+                                else
+                                    c.say(t, "So this is what you were after...");
+                            } else
+                            {
+                                if(confidence > 66)
+                                    say(t, "See!  You can't resist me!");
+                                else
+                                if(confidence > 33)
+                                    say(t, "That was actually pretty cute.");
+                                else
+                                    say(t, "Hard to resist, isn't it...?");
+                                say(t, "\"\n\n");
+                                c.say(t, "\"");
+                                if(hostility > 66)
+                                    c.say(t, "I-It mostly just hurt...");
+                                else
+                                if(hostility > 33)
+                                    c.say(t, "Y-You pinched me...");
+                                else
+                                    c.say(t, "I-I'm sorry...");
+                            }
+                            c.say(t, "\"");
+                        } else
+                        {
+                            say(t, "\"");
+                            if(c.getInnocence() > 66)
+                            {
+                                if(deviancy > 66)
+                                    say(t, "Ah, you really are too cute...");
+                                else
+                                if(deviancy > 33)
+                                    say(t, "Let's have some more fun.");
+                                else
+                                    say(t, "Is this really all it takes to beat you?");
+                                say(t, "\"\n\n");
+                                c.say(t, "\"");
+                                if(hostility > 66)
+                                    c.say(t, "It hurts...  It hurts, but...");
+                                else
+                                if(hostility > 33)
+                                    c.say(t, "Don't wanna feel good anymore...");
+                                else
+                                    c.say(t, "I feel... so weird...");
+                            } else
+                            if(c.getInnocence() > 33)
+                            {
+                                if(innocence > 66)
+                                    say(t, "Does it feel good or bad?");
+                                else
+                                if(innocence > 33)
+                                    say(t, "Where do you think you're going?");
+                                else
+                                    say(t, (new StringBuilder("I must allow ")).append(c.himHer()).append(" a moment to regain ").append(c.hisHer()).append(" senses, or there's no point.").toString());
+                                say(t, "\"\n\n");
+                                c.say(t, "\"");
+                                if(confidence > 66)
+                                    say(t, "Overwhelming...");
+                                else
+                                if(confidence > 33)
+                                    say(t, "Agh...");
+                                else
+                                    say(t, "Need to turn things around...");
+                            } else
+                            {
+                                if(hostility > 66)
+                                    say(t, "I'm not finished with you yet.");
+                                else
+                                if(hostility > 33)
+                                    say(t, "Ah, I got carried away...");
+                                else
+                                    say(t, "I'm glad that you managed to resist.");
+                                say(t, "\"\n\n");
+                                c.say(t, "\"");
+                                if(obedience > 66)
+                                    c.say(t, "The Demon Lord wants everyone to see me in this state...");
+                                else
+                                if(obedience > 33)
+                                    c.say(t, "Is this also your orders, or just your hobby?");
+                                else
+                                    c.say(t, "Enough... of this...!");
+                            }
+                            c.say(t, "\"");
+                        }
+                    } else
+                    if(disgrace > 66)
+                    {
+                        say(t, "\"");
+                        if(c.getConfidence() > 66)
+                        {
+                            if(innocence > 66)
+                                say(t, "I'm gonna keep doing this until you let go!");
+                            else
+                            if(innocence > 33)
+                                say(t, "Are you sure you want to have me this close?");
+                            else
+                                say(t, "If you insist on forcing yourself upon me, I suppose I must reciprocate.");
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            if(deviancy > 66)
+                                c.say(t, "Get your hands off me!");
+                            else
+                            if(deviancy > 33)
+                                c.say(t, "Stop that!");
+                            else
+                                c.say(t, "I won't let go...!");
+                        } else
+                        if(c.getConfidence() > 33)
+                        {
+                            if(confidence > 66)
+                                say(t, "I'm taking you right here!");
+                            else
+                            if(confidence > 33)
+                                say(t, "How's this?");
+                            else
+                                say(t, "Are you r-really sure you want me to stop...?");
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            if(hostility > 66)
+                                c.say(t, "Y-You're hurting me...!");
+                            else
+                            if(hostility > 33)
+                                c.say(t, "Ngh!  Not so tight...!");
+                            else
+                                c.say(t, "Let... Let go...");
+                        } else
+                        {
+                            if(hostility > 66)
+                                say(t, "You can't pretend you're not afraid.");
+                            else
+                            if(hostility > 33)
+                                say(t, "Now you've made me angry.");
+                            else
+                                say(t, "Let's see how determined you really are.");
+                            say(t, "\"\n\n");
+                            if(confidence > 66)
+                                c.say(t, (new StringBuilder("When ")).append(heShe()).append(" looks at me like that...").toString());
+                            else
+                            if(confidence > 33)
+                                c.say(t, "Why can't I make myself move...?");
+                            else
+                                c.say(t, "N-No!  I missed my chance to escape...!");
+                        }
+                        c.say(t, "\"");
+                    } else
+                    if(disgrace > 33)
+                    {
+                        say(t, "\"");
+                        if(c.getInnocence() > 66)
+                        {
+                            if(confidence > 66)
+                                say(t, "Let's see how you handle this!");
+                            else
+                            if(confidence > 33)
+                                say(t, "Can you block this?");
+                            else
+                                say(t, "H-Here I come!");
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            if(deviancy > 66)
+                                c.say(t, "Huh!?  What are you doing down there!?");
+                            else
+                            if(deviancy > 33)
+                                c.say(t, "N-No fair!");
+                            else
+                                c.say(t, "N-Not there!");
+                        } else
+                        if(c.getInnocence() > 33)
+                        {
+                            if(deviancy > 66)
+                                say(t, "Mm, it's even more fun like this...");
+                            else
+                            if(deviancy > 33)
+                                say(t, "It's like you're asking me to touch you.");
+                            else
+                                say(t, "You're wide open.");
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            if(innocence > 66)
+                                c.say(t, "Stop messing around!");
+                            else
+                            if(innocence > 33)
+                                c.say(t, "Stop doing that!");
+                            else
+                                c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append("'s tricky...").toString());
+                        } else
+                        {
+                            if(innocence > 66)
+                                say(t, "I won't let you keep trying tricky things!");
+                            else
+                            if(innocence > 33)
+                                say(t, "No escape!");
+                            else
+                                say(t, "I believe I am more experienced in this sort of fight.");
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            if(confidence > 66)
+                                c.say(t, "You brute...!");
+                            else
+                            if(confidence > 33)
+                                c.say(t, "Not a bad... nngh- tactic!");
+                            else
+                                c.say(t, "Have you no shame!?");
+                        }
+                        c.say(t, "\"");
+                    } else
+                    {
+                        c.say(t, "\"");
+                        if(c.getDignity() > 66)
+                        {
+                            if(confidence > 66)
+                                c.say(t, "There's no shame in losing to such a strong opponent...!");
+                            else
+                            if(confidence > 33)
+                                c.say(t, "I need to at least try to make my stand here...");
+                            else
+                                c.say(t, "If they see me running away from such a weak-looking enemy, I'm done for...");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(hostility > 66)
+                                say(t, "Idiot!  You think you get to decide how others see you!?");
+                            else
+                            if(hostility > 33)
+                                say(t, "Smile for the cameras!");
+                            else
+                                say(t, "If you're not going to fight back...");
+                        } else
+                        if(c.getDignity() > 33)
+                        {
+                            if(deviancy > 66)
+                                c.say(t, "You- Nnngh!  Freak!");
+                            else
+                            if(deviancy > 33)
+                                c.say(t, "You're sick!");
+                            else
+                                c.say(t, "You coward!  Let me up!");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(innocence > 66)
+                                say(t, "You shouldn't call people names!");
+                            else
+                            if(innocence > 33)
+                                say(t, "If you want me to stop, you'll just have to stop me.");
+                            else
+                                say(t, "Is this how you cope with your own powerlessness?");
+                        } else
+                        {
+                            if(hostility > 66)
+                                c.say(t, "Graaah, it huuurts!");
+                            else
+                            if(hostility > 33)
+                                c.say(t, "Ah!  Aaah, nooo!");
+                            else
+                                c.say(t, "Nnnaaah, it feels goood, stooop!");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(deviancy > 66)
+                                say(t, "I love the way you scream so loud!");
+                            else
+                            if(deviancy > 33)
+                                say(t, "Whew, you're a loud one!");
+                            else
+                                say(t, "Pathetic.");
+                        }
+                        say(t, "\"");
+                    }
+                } else
+                if(styleDamage[3] > 0)
+                {
+                    if(hostility > 66)
+                    {
+                        say(t, "\"");
+                        if(c.getMorality() > 66)
+                        {
+                            if(innocence > 66)
+                                say(t, "Hahahah!  Okay, okay, now eat the first thing you pull out of that garbage can!");
+                            else
+                            if(innocence > 33)
+                                say(t, "As long as you keep stripping your clothes off, I won't hurt him.  How does that sound?");
+                            else
+                                say(t, (new StringBuilder("Yes, ")).append(c.getMainName()).append(", come and save him from me!  Can't you manage that much?").toString());
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            if(disgrace > 66)
+                                c.say(t, "You... You coward!");
+                            else
+                            if(disgrace > 33)
+                                c.say(t, "Damn you!");
+                            else
+                                c.say(t, "Please, just let me take his place!");
+                        } else
+                        if(c.getMorality() > 33)
+                        {
+                            if(obedience > 66)
+                                say(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" can't save you from the Demon Lord!  No one can!").toString());
+                            else
+                            if(obedience > 33)
+                                say(t, "Go on, give me an excuse to kill them.");
+                            else
+                                say(t, "Ah, look how afraid they all are!");
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            if(deviancy > 66)
+                                c.say(t, "Hey!  Stay focused on me!  I'm the one whose body you want, right?");
+                            else
+                            if(deviancy > 33)
+                                c.say(t, "I can't do anything like this...!");
+                            else
+                                c.say(t, "I'm sorry, everyone...");
+                        } else
+                        {
+                            if(disgrace > 66)
+                                say(t, "You're so weak!  Not even worth killing!");
+                            else
+                            if(disgrace > 33)
+                                say(t, "I'm giving you a free shot.  Are you really okay with me killing you?");
+                            else
+                                say(t, "If this is the best you can do, then I might as well kill you.");
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            if(innocence > 66)
+                                c.say(t, "Stop laughing at me!");
+                            else
+                            if(innocence > 33)
+                                c.say(t, "Shut up, shut up, shut up!");
+                            else
+                                c.say(t, "Enough of your tricks!  Enough!");
+                        }
+                        c.say(t, "\"");
+                    } else
+                    if(hostility > 33)
+                    {
+                        c.say(t, "\"");
+                        if(c.getInnocence() > 66)
+                        {
+                            if(deviancy > 66)
+                                c.say(t, "Hold still, you weirdo!");
+                            else
+                            if(deviancy > 33)
+                                c.say(t, "Quit it!");
+                            else
+                                c.say(t, "You jerk!");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(innocence > 66)
+                                say(t, "Hahah, are you blind or something!?");
+                            else
+                            if(innocence > 33)
+                                say(t, "Having trouble?");
+                            else
+                                say(t, "Predictable.");
+                        } else
+                        if(c.getInnocence() > 33)
+                        {
+                            if(disgrace > 66)
+                                c.say(t, "I should be able to do this!");
+                            else
+                            if(disgrace > 33)
+                                c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append("'s trying to get me to leave an opening...").toString());
+                            else
+                                c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append("'s toying with me...").toString());
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(dignity > 66)
+                                say(t, "I'll be signing autographs after the battle!");
+                            else
+                            if(dignity > 33)
+                                say(t, "So far, so good.");
+                            else
+                                say(t, "Heh.");
+                        } else
+                        {
+                            if(obedience > 66)
+                                c.say(t, "Wouldn't the Demon Lord be happier if you took me head-on!?");
+                            else
+                            if(obedience > 33)
+                                c.say(t, "Will the Demon Lord really be satisfied with this performance?");
+                            else
+                                c.say(t, "Come, I know that you'd rather be on the attack!");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(disgrace > 66)
+                                say(t, "I'm not falling for that one...");
+                            else
+                            if(disgrace > 33)
+                                say(t, "This is plenty for now.");
+                            else
+                                say(t, "I don't want this to be over too quickly.");
+                        }
+                        say(t, "\"");
+                    } else
+                    {
+                        say(t, "\"");
+                        if(c.getConfidence() > 66)
+                        {
+                            if(confidence > 66)
+                                say(t, "I was even stronger than you, and I still got beaten.");
+                            else
+                            if(confidence > 33)
+                                say(t, "Trying to force your way through is pointless.");
+                            else
+                                say(t, "W-We're all weak compared to the Demon Lord!");
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            if(disgrace > 66)
+                                c.say(t, "No, you were a weak person deep inside all along.");
+                            else
+                            if(disgrace > 33)
+                                c.say(t, "Enough talk.  Just fight me.");
+                            else
+                                c.say(t, "First I'll get strong enough to beat you, then I'll get strong enough to beat the Demon Lord.");
+                        } else
+                        if(c.getConfidence() > 33)
+                        {
+                            if(obedience > 66)
+                                say(t, "Do you even understand the world the Demon Lord is trying to create!?");
+                            else
+                            if(obedience > 33)
+                                say(t, "You're pretty strong, but not nearly strong enough.");
+                            else
+                                say(t, "You might be able to beat the Demon Lord, but you have to be careful.");
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            if(innocence > 66)
+                                c.say(t, "You don't even understand what you're saying!");
+                            else
+                            if(innocence > 33)
+                                c.say(t, "I don't trust you!");
+                            else
+                                c.say(t, "Stop trying to distract me!");
+                        } else
+                        {
+                            if(deviancy > 66)
+                                say(t, "You'd be a lot happier as my personal sex toy.");
+                            else
+                            if(deviancy > 33)
+                                say(t, "You're just a cute little morsel, as far as the Demon Lord is concerned.");
+                            else
+                                say(t, "With how weak you are, there's no point in standing before the Demon Lord.");
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            if(obedience > 66)
+                                c.say(t, "I don't want to j-join you anyway!");
+                            else
+                            if(obedience > 33)
+                                c.say(t, "Y-You don't have to say it like that!");
+                            else
+                                c.say(t, "Um, th-thanks for the advice, but... I'm not giving up!");
+                        }
+                        c.say(t, "\"");
+                    }
+                } else
+                if(disgrace > 66)
+                {
+                    c.say(t, "\"");
+                    if(c.getMorality() > 66)
+                    {
+                        if(obedience > 66)
+                            c.say(t, "You don't have to keep serving the Demon Lord!");
+                        else
+                        if(obedience > 33)
+                            c.say(t, "If you come with us, the Demon Lord won't be able to hurt you anymore!");
+                        else
+                            c.say(t, "You can still be forgiven for what you've done!");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        if(hostility > 66)
+                            say(t, "I do this because I want to!");
+                        else
+                        if(hostility > 33)
+                            say(t, "I don't need your forgiveness!");
+                        else
+                            say(t, "You haven't beaten me yet!");
+                    }
+                    say(t, "\"");
+                } else
+                if(disgrace > 33)
+                {
+                    say(t, "\"");
+                    if(c.getConfidence() > 66)
+                    {
+                        if(confidence > 66)
+                            say(t, "Ngh!  Fine!  We'll do it this way!");
+                        else
+                        if(confidence > 33)
+                            say(t, "Ergh, this one's strong...!");
+                        else
+                            say(t, "Let go!  Let me go!");
+                        say(t, "\"\n\n");
+                        c.say(t, "\"");
+                        if(innocence > 66)
+                            c.say(t, "You left yourself wide open!");
+                        else
+                        if(innocence > 33)
+                            c.say(t, "Gh!  Hah, you sure do fight back...!");
+                        else
+                            c.say(t, "No more tricks, let's settle this here!");
+                    } else
+                    if(c.getConfidence() > 33)
+                    {
+                        if(innocence > 66)
+                            say(t, "Waaah!");
+                        else
+                        if(innocence > 33)
+                            say(t, "There!");
+                        else
+                            say(t, "Got you!");
+                        say(t, "\"\n\n");
+                        c.say(t, "\"");
+                        if(dignity > 66)
+                            c.say(t, "I knew you'd be a tough opponent!");
+                        else
+                        if(dignity > 33)
+                            c.say(t, "I will defeat you!");
+                        else
+                            c.say(t, (new StringBuilder("Hard to follow ")).append(hisHer()).append(" attacks...!").toString());
+                    } else
+                    {
+                        if(deviancy > 66)
+                            say(t, "Ah, the things I'm going to do to you...");
+                        else
+                        if(deviancy > 33)
+                            say(t, "You're such a cute little thing.");
+                        else
+                            say(t, "You're afraid.");
+                        say(t, "\"\n\n");
+                        c.say(t, "\"");
+                        if(confidence > 66)
+                            c.say(t, "D-Don't hurt me!");
+                        else
+                        if(confidence > 33)
+                            c.say(t, "No!  S-Stay back!");
+                        else
+                            c.say(t, "S-Stop trying to act tough, i-it's not working...!");
+                    }
+                    c.say(t, "\"");
+                } else
+                {
+                    c.say(t, "\"");
+                    if(c.getMorality() > 66)
+                    {
+                        if(hostility > 66)
+                            c.say(t, "I can't let you hurt anyone else.");
+                        else
+                        if(hostility > 33)
+                            c.say(t, "This is what you wanted, right?");
+                        else
+                            c.say(t, "I won't run anymore.");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        if(deviancy > 66)
+                            say(t, "That determination... nnngh, I love it!");
+                        else
+                        if(deviancy > 33)
+                            say(t, "I like that expression.");
+                        else
+                            say(t, "You know what happens next.");
+                    } else
+                    if(c.getMorality() > 33)
+                    {
+                        if(deviancy > 66)
+                            c.say(t, "Shut up!  I don't want to hear any of this!");
+                        else
+                        if(deviancy > 33)
+                            c.say(t, "Stop staring at me like that!");
+                        else
+                            c.say(t, "Haaah, ugh...");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        if(confidence > 66)
+                            say(t, "Let's continue!");
+                        else
+                        if(confidence > 33)
+                            say(t, "That's far enough!");
+                        else
+                            say(t, (new StringBuilder("This time, I need to face ")).append(c.himHer()).append(" down without hesitating...").toString());
+                    } else
+                    {
+                        if(confidence > 66)
+                            c.say(t, "No!  Not again!");
+                        else
+                        if(confidence > 33)
+                            c.say(t, "Get out of my way!");
+                        else
+                            c.say(t, "Haven't you had enough!?");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        if(innocence > 66)
+                            say(t, "Ah, there you are!");
+                        else
+                        if(innocence > 33)
+                            say(t, "Got you.");
+                        else
+                            say(t, "Did you really think you could escape me?");
+                    }
+                    say(t, "\"");
+                }
+            } else
+            if(c.captureProgression % 6 == 4)
+            {
+                if(styleDamage[0] > 0)
+                {
+                    if(styleDamage[3] > 0)
+                    {
+                        if(hostility > 66)
+                        {
+                            say(t, "\"");
+                            if(c.getMorality() > 66)
+                            {
+                                if(confidence > 66)
+                                    say(t, "You can't even imagine all the ways I'm going to hurt you!");
+                                else
+                                if(confidence > 33)
+                                    say(t, "I'll kill all of you!  Kill, kill, kill!");
+                                else
+                                    say(t, "Give up hope!  The sooner you end it all, the better!");
+                                say(t, "\"\n\n");
+                                c.say(t, "\"");
+                                if(disgrace > 66)
+                                    c.say(t, "I'll defeat you and prove you wrong!");
+                                else
+                                if(disgrace > 33)
+                                    c.say(t, "No!  Justice will prevail!");
+                                else
+                                    c.say(t, (new StringBuilder("Please, don't listen to ")).append(himHer()).append("!").toString());
+                            } else
+                            if(c.getMorality() > 33)
+                            {
+                                if(disgrace > 66)
+                                    say(t, "Ahahah, the more you hurt me, the more motivated I am to make you suffer!");
+                                else
+                                if(disgrace > 33)
+                                    say(t, "Die!  Die!  Die!");
+                                else
+                                    say(t, "Pathetic weakling!");
+                                say(t, "\"\n\n");
+                                c.say(t, "\"");
+                                if(innocence > 66)
+                                    c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append(" doesn't even care...!").toString());
+                                else
+                                if(innocence > 33)
+                                    c.say(t, "There's no end to this...!");
+                                else
+                                    c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append("'s always a step ahead...!").toString());
+                            } else
+                            {
+                                if(innocence > 66)
+                                    say(t, "I'm gonna kill you so hard that you'll be super dead!");
+                                else
+                                if(innocence > 33)
+                                    say(t, "I'll piss on your grave, bitch!");
+                                else
+                                    say(t, "Foolish puppet.  You're almost too useful to kill.");
+                                say(t, "\"\n\n");
+                                c.say(t, "\"");
+                                if(deviancy > 66)
+                                    c.say(t, "Brainless slut!  Ride this!");
+                                else
+                                if(deviancy > 33)
+                                    c.say(t, "You smug piece of shit!");
+                                else
+                                    c.say(t, "I'm putting you out of your misery right now!");
+                            }
+                            c.say(t, "\"");
+                        } else
+                        if(hostility > 33)
+                        {
+                            say(t, "\"");
+                            if(c.getInnocence() > 66)
+                            {
+                                if(deviancy > 66)
+                                    say(t, "By the way, I'm watching you through the cameras while I masturbate.");
+                                else
+                                if(deviancy > 33)
+                                    say(t, "This camera has a really good view.");
+                                else
+                                    say(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s too stupid to even keep track of ").append(c.hisHer()).append(" enemy!").toString());
+                                say(t, "\"\n\n");
+                                c.say(t, "\"");
+                                if(disgrace > 66)
+                                    c.say(t, "Come out, you wimp!");
+                                else
+                                if(disgrace > 33)
+                                    c.say(t, "Don't say that!");
+                                else
+                                    c.say(t, "I-I'm not scared to face you again, I'm not!");
+                            } else
+                            if(c.getInnocence() > 33)
+                            {
+                                if(confidence > 66)
+                                    say(t, "I will make you kneel!");
+                                else
+                                if(confidence > 33)
+                                    say(t, "You might as well surrender!");
+                                else
+                                    say(t, "There's no point in resisting.");
+                                say(t, "\"\n\n");
+                                c.say(t, "\"");
+                                if(deviancy > 66)
+                                    c.say(t, "You're disgusting!");
+                                else
+                                if(deviancy > 33)
+                                    c.say(t, "Laugh while you can!");
+                                else
+                                    c.say(t, "Just shut up!");
+                            } else
+                            {
+                                if(disgrace > 66)
+                                    say(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s actually letting me go because I bribed ").append(c.himHer()).append(".").toString());
+                                else
+                                if(disgrace > 33)
+                                    say(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" isn't even trying to fight me!").toString());
+                                else
+                                    say(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" only cares about protecting ").append(c.himHer()).append("self.").toString());
+                                say(t, "\"\n\n");
+                                c.say(t, "\"");
+                                if(innocence > 66)
+                                    c.say(t, "Surely none of you are stupid enough to fall for this!");
+                                else
+                                if(innocence > 33)
+                                    c.say(t, "Hmph, surprisingly cunning...");
+                                else
+                                    c.say(t, "I will not allow you to spread these lies!");
+                            }
+                            c.say(t, "\"");
+                        } else
+                        {
+                            c.say(t, "\"");
+                            if(c.getDignity() > 66)
+                            {
+                                if(deviancy > 66)
+                                    c.say(t, "Excuse me!");
+                                else
+                                if(deviancy > 33)
+                                    c.say(t, "I didn't give you permission to look!");
+                                else
+                                    c.say(t, "You could have warned me earlier!");
+                                c.say(t, "\"\n\n");
+                                say(t, "\"");
+                                if(innocence > 66)
+                                    say(t, "Oops.");
+                                else
+                                if(innocence > 33)
+                                    say(t, "Are you going to keep fighting me or not?");
+                                else
+                                    say(t, "Consider it an important lesson.");
+                            } else
+                            if(c.getDignity() > 33)
+                            {
+                                if(obedience > 66)
+                                    c.say(t, (new StringBuilder("That must have been what ")).append(heShe()).append(" was after all along...!").toString());
+                                else
+                                if(obedience > 33)
+                                    c.say(t, "So the Demon Lord ordered you to strip me?");
+                                else
+                                    c.say(t, "This is your fault!");
+                                c.say(t, "\"\n\n");
+                                say(t, "\"");
+                                if(deviancy > 66)
+                                    say(t, "I wish I had a camera, too...");
+                                else
+                                if(deviancy > 33)
+                                    say(t, "Looking good!");
+                                else
+                                    say(t, "If you can't stop this, then you have to get used to it.");
+                            } else
+                            {
+                                if(disgrace > 66)
+                                    c.say(t, "Get back here!");
+                                else
+                                if(disgrace > 33)
+                                    c.say(t, (new StringBuilder("I've got ")).append(himHer()).append(" on the run...!").toString());
+                                else
+                                    c.say(t, (new StringBuilder("I can't let ")).append(himHer()).append(" out of my sight...").toString());
+                                c.say(t, "\"\n\n");
+                                say(t, "\"");
+                                if(obedience > 66)
+                                    say(t, "Yes, yes, let everyone see...");
+                                else
+                                if(obedience > 33)
+                                    say(t, "Mission accomplished.");
+                                else
+                                    say(t, "Hey!  Don't you know what happens when people see you as weak!?");
+                            }
+                            say(t, "\"");
+                        }
+                    } else
+                    if(hostility > 66)
+                    {
+                        c.say(t, "\"");
+                        if(c.getInnocence() > 66)
+                        {
+                            if(deviancy > 66)
+                                c.say(t, "Stay away from me, you freak!");
+                            else
+                            if(deviancy > 33)
+                                c.say(t, "Stop messing with my body!");
+                            else
+                                c.say(t, "S-Stop saying those things!");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(disgrace > 66)
+                                say(t, "You may be stronger, but I know what I want.");
+                            else
+                            if(disgrace > 33)
+                                say(t, "But don't you want to know what's going to happen to you after I win?");
+                            else
+                                say(t, "You can't stop me.");
+                        } else
+                        if(c.getInnocence() > 33)
+                        {
+                            if(obedience > 66)
+                                c.say(t, "It's even worse than what I feel from the Demons...");
+                            else
+                            if(obedience > 33)
+                                c.say(t, (new StringBuilder("This is what the Demons have done to ")).append(himHer()).append("...").toString());
+                            else
+                                c.say(t, (new StringBuilder("I think... the Demon Lord is actually holding ")).append(himHer()).append(" back...").toString());
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(morality > 66)
+                                say(t, "I've become... everything I once hated...!");
+                            else
+                            if(morality > 33)
+                                say(t, "Aaagh!");
+                            else
+                                say(t, "Kill... everyone...!");
+                        } else
+                        {
+                            if(disgrace > 66)
+                                c.say(t, (new StringBuilder("I must not let ")).append(himHer()).append(" escape.").toString());
+                            else
+                            if(disgrace > 33)
+                                c.say(t, "Where...?");
+                            else
+                                c.say(t, (new StringBuilder("Now, while ")).append(heShe()).append("'s distracted...!").toString());
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(innocence > 66)
+                                say(t, "Ahahah, die, die!");
+                            else
+                            if(innocence > 33)
+                                say(t, "I'll have some fun with you guys first.");
+                            else
+                                say(t, "I must maximize the total number of casualties.");
+                        }
+                        say(t, "\"");
+                    } else
+                    if(hostility > 33)
+                    {
+                        c.say(t, "\"");
+                        if(c.getConfidence() > 66)
+                        {
+                            if(deviancy > 66)
+                                c.say(t, "Ugh!  I'm shutting that disgusting mouth of yours right now!");
+                            else
+                            if(deviancy > 33)
+                                c.say(t, "You don't have time to think about all that!");
+                            else
+                                c.say(t, "We'll see how smug you are after this!");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(disgrace > 66)
+                                say(t, "Ah, are you going to hurt me more?");
+                            else
+                            if(disgrace > 33)
+                                say(t, "Having trouble focusing?");
+                            else
+                                say(t, "You want me to get serious?");
+                        } else
+                        if(c.getConfidence() > 33)
+                        {
+                            if(disgrace > 66)
+                                c.say(t, "Tough words from someone who can barely stand!");
+                            else
+                            if(disgrace > 33)
+                                c.say(t, "You're wasting your breath!");
+                            else
+                                c.say(t, "Stop gloating!");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(innocence > 66)
+                                say(t, (new StringBuilder("Ooh, ")).append(c.heShe()).append("'s getting mad!").toString());
+                            else
+                            if(innocence > 33)
+                                say(t, "Hah!");
+                            else
+                                say(t, "You're so simple.");
+                        } else
+                        {
+                            if(dignity > 66)
+                                c.say(t, "P-Please, no more!");
+                            else
+                            if(dignity > 33)
+                                c.say(t, "Why do you hate me...?");
+                            else
+                                c.say(t, "Y-You don't have to shout...");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(obedience > 66)
+                                say(t, "You aren't even worthy to belong to the Demon Lord!");
+                            else
+                            if(obedience > 33)
+                                say(t, "Weakling!  Just get out of my way!");
+                            else
+                                say(t, "Hah, are you crying?  You're crying!");
+                        }
+                        say(t, "\"");
+                    } else
+                    {
+                        say(t, "\"");
+                        if(c.getMorality() > 66)
+                        {
+                            if(obedience > 66)
+                                say(t, "The Demon Lord doesn't want those people dead, either!");
+                            else
+                            if(obedience > 33)
+                                say(t, "I'm being forced to do this by the Demon Lord.");
+                            else
+                                say(t, "What would you have done if I had wanted to kill them!?");
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            if(innocence > 66)
+                                c.say(t, "Think about what you're saying!");
+                            else
+                            if(innocence > 33)
+                                c.say(t, "Stop acting like you're still a hero.");
+                            else
+                                c.say(t, "So, you've really found a way to convince yourself that you don't need to feel guilty.");
+                        } else
+                        if(c.getMorality() > 33)
+                        {
+                            if(deviancy > 66)
+                                say(t, "That was... uck, guh... worth it...");
+                            else
+                            if(deviancy > 33)
+                                say(t, "You shake your butt when you're climbing.");
+                            else
+                                say(t, "I don't sense anyone either, but that doesn't mean they aren't there!");
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            if(disgrace > 66)
+                                c.say(t, "Can't you just give up already!?");
+                            else
+                            if(disgrace > 33)
+                                c.say(t, "I don't want to hear that from you!");
+                            else
+                                c.say(t, "I should be grateful that you're just standing there now, but... it's still annoying...");
+                        } else
+                        {
+                            if(innocence > 66)
+                                say(t, "You really shouldn't be so mean!");
+                            else
+                            if(innocence > 33)
+                                say(t, "Too much hatred is a bad thing!  That goes for both Chosen and Forsaken!");
+                            else
+                                say(t, "The reserve of psychic energy we call 'Demonic' can be accessed most efficiently at a particular level of hatred - no lower than that, but also no higher than that!");
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            if(morality > 66)
+                                c.say(t, "I'm not interested in doing things your way!");
+                            else
+                            if(morality > 33)
+                                c.say(t, "Just shut up!");
+                            else
+                                c.say(t, "That's rich, coming from you!");
+                        }
+                        c.say(t, "\"");
+                    }
+                } else
+                if(styleDamage[3] > 0)
+                {
+                    if(deviancy > 66)
+                    {
+                        c.say(t, "\"");
+                        if(c.getConfidence() > 66)
+                        {
+                            if(disgrace > 66)
+                                c.say(t, "Where did all this energy come from!?");
+                            else
+                            if(disgrace > 33)
+                                c.say(t, "You can't afford to mess around like this!");
+                            else
+                                c.say(t, "Grrgh!  Let... go...!");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(innocence > 66)
+                                say(t, "I wanna see mooore!");
+                            else
+                            if(innocence > 33)
+                                say(t, "Tear it all off!");
+                            else
+                                say(t, "Ah, yes, this pain is... exquisite...!");
+                        } else
+                        if(c.getConfidence() > 33)
+                        {
+                            if(innocence > 66)
+                                c.say(t, "Do you even realize where we are!?");
+                            else
+                            if(innocence > 33)
+                                c.say(t, "This changes nothing!");
+                            else
+                                c.say(t, "You set this up...");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(dignity > 66)
+                                say(t, "Let's give them a good show!");
+                            else
+                            if(dignity > 33)
+                                say(t, "Ah, they're all looking...");
+                            else
+                                say(t, "Doing it in public feels so much better, doesn't it?");
+                        } else
+                        {
+                            if(hostility > 66)
+                                c.say(t, "Ow!  It hurts...!");
+                            else
+                            if(hostility > 33)
+                                c.say(t, "Please, not there!");
+                            else
+                                c.say(t, "They're... They're booing me...");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(disgrace > 66)
+                                say(t, "You're so much cuter when you stop fighting back!");
+                            else
+                            if(disgrace > 33)
+                                say(t, "I'm going to rape you right in front of them.");
+                            else
+                                say(t, "They're seeing how pathetic you are.");
+                        }
+                        say(t, "\"");
+                    } else
+                    if(deviancy > 33)
+                    {
+                        say(t, "\"");
+                        if(c.getDignity() > 66)
+                        {
+                            if(hostility > 66)
+                                say(t, "You'll just be remembered as a pretty set of legs!");
+                            else
+                            if(hostility > 33)
+                                say(t, "Everyone will know how weak you are!");
+                            else
+                                say(t, "When you react like that, I can't help myself...!");
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            if(disgrace > 66)
+                                c.say(t, "No, no, this is starting to go completely wrong!");
+                            else
+                            if(disgrace > 33)
+                                c.say(t, "I can't protect myself and my clothes at the same time...!");
+                            else
+                                c.say(t, "It's hopeless...");
+                        } else
+                        if(c.getDignity() > 33)
+                        {
+                            if(innocence > 66)
+                                say(t, "I wanna have some fun...");
+                            else
+                            if(innocence > 33)
+                                say(t, "This isn't good.  I'm getting more turned on...");
+                            else
+                                say(t, "Hm, it may be better in the long run if I sate some of my desire now...");
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            if(confidence > 66)
+                                c.say(t, "Hah, I'll make you pay for that!");
+                            else
+                            if(confidence > 33)
+                                c.say(t, "Hands off!");
+                            else
+                                c.say(t, "N-Nooo!");
+                        } else
+                        {
+                            if(disgrace > 66)
+                                say(t, "At least I can do this much.");
+                            else
+                            if(disgrace > 33)
+                                say(t, "Easy enough!");
+                            else
+                                say(t, "I'll blast them all off.");
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            if(innocence > 66)
+                                c.say(t, "Why are you attacking my clothes?");
+                            else
+                            if(innocence > 33)
+                                c.say(t, "What are you trying to do?");
+                            else
+                                c.say(t, (new StringBuilder(String.valueOf(HisHer()))).append(" attacks are just barely missing...").toString());
+                        }
+                        c.say(t, "\"");
+                    } else
+                    {
+                        c.say(t, "\"");
+                        if(c.getInnocence() > 66)
+                        {
+                            if(disgrace > 66)
+                                c.say(t, "It feels like nothing's weighing me down anymore!");
+                            else
+                            if(disgrace > 33)
+                                c.say(t, "Hyaaah!");
+                            else
+                                c.say(t, "Waaah!");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(innocence > 66)
+                                say(t, "Huh, did it get chillier?");
+                            else
+                            if(innocence > 33)
+                                say(t, "Hmph!");
+                            else
+                                say(t, "We will steer the fight in this direction.");
+                        } else
+                        if(c.getInnocence() > 33)
+                        {
+                            if(hostility > 66)
+                                c.say(t, (new StringBuilder("There's no way ")).append(heShe()).append(" can keep this up forever, right?").toString());
+                            else
+                            if(hostility > 33)
+                                c.say(t, "Ow!");
+                            else
+                                c.say(t, "Close one...!");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(obedience > 66)
+                                say(t, "For the Demon Lord!");
+                            else
+                            if(obedience > 33)
+                                say(t, "What a pain!");
+                            else
+                                say(t, "I'll take you down with this!");
+                        } else
+                        {
+                            if(innocence > 66)
+                                c.say(t, (new StringBuilder("Did ")).append(heShe()).append(" outmaneuver me?  No, ").append(heShe()).append("'s being directed...").toString());
+                            else
+                            if(innocence > 33)
+                                c.say(t, "Damn it.  Nothing that can be done now.");
+                            else
+                                c.say(t, (new StringBuilder("If I let my guard down, ")).append(heShe()).append(" will exploit it ruthlessly.").toString());
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(disgrace > 66)
+                                say(t, "I may be weaker, but I don't have to care about that stuff anymore.");
+                            else
+                            if(disgrace > 33)
+                                say(t, "So, can you hold me off now!?");
+                            else
+                                say(t, "You won't be able to protect yourself, either.");
+                        }
+                        say(t, "\"");
+                    }
+                } else
+                if(disgrace > 66)
+                {
+                    say(t, "\"");
+                    if(c.getConfidence() > 66)
+                    {
+                        if(deviancy > 66)
+                            say(t, "You could rape me if you wanted to.  Don't you want to?");
+                        else
+                        if(deviancy > 33)
+                            say(t, "I didn't know that you were into this sort of thing.");
+                        else
+                            say(t, "You can't hold me down forever!");
+                        say(t, "\"\n\n");
+                        c.say(t, "\"");
+                        if(confidence > 66)
+                            c.say(t, "You're a stubborn one...!");
+                        else
+                        if(confidence > 33)
+                            c.say(t, "Just shut up already!");
+                        else
+                            c.say(t, "Don't try to talk tough when you're practically crying!");
+                    } else
+                    if(c.getConfidence() > 33)
+                    {
+                        if(hostility > 66)
+                            say(t, "I'm going to enjoy watching you die...!");
+                        else
+                        if(hostility > 33)
+                            say(t, "I hope you're having as much fun as I am.");
+                        else
+                            say(t, "How about this!?");
+                        say(t, "\"\n\n");
+                        c.say(t, "\"");
+                        if(deviancy > 66)
+                            c.say(t, "You're completely twisted!");
+                        else
+                        if(deviancy > 33)
+                            c.say(t, "Stop moving around so much!");
+                        else
+                            c.say(t, "Guh!");
+                    } else
+                    {
+                        if(confidence > 66)
+                            say(t, "Your power is wasted on you!");
+                        else
+                        if(confidence > 33)
+                            say(t, "Maybe you secretly want to lose?");
+                        else
+                            say(t, "Haaah!");
+                        say(t, "\"\n\n");
+                        c.say(t, "\"");
+                        if(hostility > 66)
+                            c.say(t, "S-Stop, you're hurting me!");
+                        else
+                        if(hostility > 33)
+                            c.say(t, "What?  N-No!");
+                        else
+                            c.say(t, "I-I'm sorry, I can't...");
+                    }
+                    c.say(t, "\"");
+                } else
+                if(disgrace > 33)
+                {
+                    say(t, "\"");
+                    if(c.getInnocence() > 66)
+                    {
+                        if(confidence > 66)
+                            say(t, "Too weak!");
+                        else
+                        if(confidence > 33)
+                            say(t, "Take this!");
+                        else
+                            say(t, "Aaagh!");
+                        say(t, "\"\n\n");
+                        c.say(t, "\"");
+                        if(hostility > 66)
+                            c.say(t, "Ow!  Stop!");
+                        else
+                        if(hostility > 33)
+                            c.say(t, "Leave me alone!");
+                        else
+                            c.say(t, "You're crazy!");
+                    } else
+                    if(c.getInnocence() > 33)
+                    {
+                        if(obedience > 66)
+                            say(t, "Watch me...!");
+                        else
+                        if(obedience > 33)
+                            say(t, "I have no choice...!");
+                        else
+                            say(t, "I've got you!");
+                        say(t, "\"\n\n");
+                        c.say(t, "\"");
+                        if(innocence > 66)
+                            c.say(t, "You don't know when to quit!");
+                        else
+                        if(innocence > 33)
+                            c.say(t, "Let go!");
+                        else
+                            c.say(t, "Gh, how!?");
+                    } else
+                    {
+                        if(hostility > 66)
+                            say(t, "Grrr...!");
+                        else
+                        if(hostility > 33)
+                            say(t, "Haaah, yes...!");
+                        else
+                            say(t, "Hmph!");
+                        say(t, "\"\n\n");
+                        c.say(t, "\"");
+                        if(confidence > 66)
+                            c.say(t, "Nng- gah!");
+                        else
+                        if(confidence > 33)
+                            c.say(t, "Ergh...");
+                        else
+                            c.say(t, "Rrah!");
+                    }
+                    c.say(t, "\"");
+                } else
+                {
+                    c.say(t, "\"");
+                    if(c.getMorality() > 66)
+                    {
+                        if(innocence > 66)
+                            c.say(t, "You look surprised!");
+                        else
+                        if(innocence > 33)
+                            c.say(t, "Right now, I'm your opponent!");
+                        else
+                            c.say(t, "I don't know what you're planning, but I won't allow it!");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        if(hostility > 66)
+                            say(t, "You stupid little...!  I'll make you regret this!");
+                        else
+                        if(hostility > 33)
+                            say(t, "Are you actually asking me to hurt you?  Heh, alright then...");
+                        else
+                            say(t, "That's some good determination.  But I'm not going to go easy on you.");
+                    } else
+                    if(c.getMorality() > 33)
+                    {
+                        if(hostility > 66)
+                            c.say(t, "Ngh!  Aaah!");
+                        else
+                        if(hostility > 33)
+                            c.say(t, "I don't like that look in your eyes...");
+                        else
+                            c.say(t, "Ugh.  You've made your point...");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        if(deviancy > 66)
+                            say(t, "It's like you're on display for me...");
+                        else
+                        if(deviancy > 33)
+                            say(t, "Should we spread your legs, too?");
+                        else
+                            say(t, "You can't move, can you?");
+                    } else
+                    {
+                        if(confidence > 66)
+                            c.say(t, "... I shouldn't have said that.");
+                        else
+                        if(confidence > 33)
+                            c.say(t, "Well!?  What do you have to say to that!?");
+                        else
+                            c.say(t, (new StringBuilder("I was hoping it would make ")).append(himHer()).append(" cry...").toString());
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        if(obedience > 66)
+                            say(t, "If you just insulted me, I might have forgiven you.  But now... I think you need to learn some respect.");
+                        else
+                        if(obedience > 33)
+                            say(t, "We'll see who the coward is.  How long until you start begging for mercy?");
+                        else
+                            say(t, "I don't take that sort of thing from the Demon Lord, and I'm definitely not taking it from you.");
+                    }
+                    say(t, "\"");
+                }
+            } else
+            if(c.captureProgression % 6 == 5)
+                if(styleDamage[0] > 0)
+                {
+                    if(styleDamage[2] > 0)
+                    {
+                        if(hostility > 66)
+                        {
+                            say(t, "\"");
+                            if(c.getMorality() > 66)
+                            {
+                                if(disgrace > 66)
+                                    say(t, "No matter how much stronger you are, this weakness of yours is just too big!");
+                                else
+                                if(disgrace > 33)
+                                    say(t, "Hah!  It's your fault that I had to kill them!");
+                                else
+                                    say(t, "Yes!  Suffer!");
+                                say(t, "\"\n\n");
+                                c.say(t, "\"");
+                                if(confidence > 66)
+                                    c.say(t, "Hurting people just because you can...");
+                                else
+                                if(confidence > 33)
+                                    c.say(t, "I can still save some of them!");
+                                else
+                                    c.say(t, (new StringBuilder("I might not be able to forgive ")).append(himHer()).append("...").toString());
+                            } else
+                            if(c.getMorality() > 33)
+                            {
+                                if(deviancy > 66)
+                                {
+                                    say(t, "Nnnaaah~!  Ah...  Done...");
+                                    if(innocence < 67 || timesOrgasmed > 0)
+                                        timesOrgasmed++;
+                                } else
+                                if(deviancy > 33)
+                                    say(t, "That expression is so perfect...");
+                                else
+                                    say(t, "You're next.");
+                                say(t, "\"\n\n");
+                                c.say(t, "\"");
+                                if(innocence > 66)
+                                    c.say(t, (new StringBuilder("It's like... ")).append(heShe()).append(" doesn't even realize what ").append(heShe()).append("'s doing...").toString());
+                                else
+                                if(innocence > 33)
+                                    c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append("'s... enjoying this...").toString());
+                                else
+                                    c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append(" treats them... like objects...").toString());
+                            } else
+                            {
+                                if(innocence > 66)
+                                    say(t, "Where'd you go!?  Who am I supposed to hurt now!?  Aaargh!");
+                                else
+                                if(innocence > 33)
+                                    say(t, "You bitch!  I'll kill you, I'll kill you, I'll kill yooou!");
+                                else
+                                    say(t, "No, no, no!  This is WRONG!  Unacceptable!");
+                                say(t, "\"\n\n");
+                                c.say(t, "\"");
+                                if(disgrace > 66)
+                                    c.say(t, (new StringBuilder("Gah, I almost had ")).append(himHer()).append("!").toString());
+                                else
+                                if(disgrace > 33)
+                                    c.say(t, "Heh.  Too bad.");
+                                else
+                                    c.say(t, (new StringBuilder("Looks like ")).append(heShe()).append("'s not my problem anymore.").toString());
+                            }
+                            c.say(t, "\"");
+                        } else
+                        if(hostility > 33)
+                        {
+                            c.say(t, "\"");
+                            if(c.getConfidence() > 66)
+                            {
+                                if(obedience > 66)
+                                    c.say(t, "Did you go running back to your precious Demon Lord!");
+                                else
+                                if(obedience > 33)
+                                    c.say(t, "Don't tell me you're finally getting out of the way so I can kill the Demon Lord!");
+                                else
+                                    c.say(t, "Come on, your enemy is right here!");
+                                c.say(t, "\"\n\n");
+                                say(t, "\"");
+                                if(disgrace > 66)
+                                    say(t, (new StringBuilder("I'll go fight ")).append(c.himHer()).append("... after I catch my breath...").toString());
+                                else
+                                if(disgrace > 33)
+                                    say(t, "Don't flatter yourself.");
+                                else
+                                    say(t, "Tough words from someone who was just about ready to give up a moment ago.");
+                            } else
+                            if(c.getConfidence() > 33)
+                            {
+                                if(disgrace > 66)
+                                    c.say(t, "Coward!");
+                                else
+                                if(disgrace > 33)
+                                    c.say(t, "We weren't finished yet!");
+                                else
+                                    c.say(t, "At least these enemies are easier...");
+                                c.say(t, "\"\n\n");
+                                say(t, "\"");
+                                if(innocence > 66)
+                                    say(t, (new StringBuilder("Darn it, where'd ")).append(c.heShe()).append(" go!?").toString());
+                                else
+                                if(innocence > 33)
+                                    say(t, (new StringBuilder("I can't leave ")).append(c.himHer()).append(" alone for a minute.").toString());
+                                else
+                                    say(t, "And now you're completely defenseless...");
+                            } else
+                            {
+                                if(innocence > 66)
+                                    c.say(t, "This isn't funny!");
+                                else
+                                if(innocence > 33)
+                                    c.say(t, (new StringBuilder("I c-can't fight these and ")).append(himHer()).append(" at once...!").toString());
+                                else
+                                    c.say(t, "F-Fight me yourself!");
+                                c.say(t, "\"\n\n");
+                                say(t, "\"");
+                                if(deviancy > 66)
+                                    say(t, "I'm gonna see if I can squirt it on you from here, okay~?");
+                                else
+                                if(deviancy > 33)
+                                    say(t, "I love that cute little grunt when you attack!");
+                                else
+                                    say(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'ll only get weaker from here on.").toString());
+                            }
+                            say(t, "\"");
+                        } else
+                        {
+                            c.say(t, "\"");
+                            if(c.getInnocence() > 66)
+                            {
+                                if(deviancy > 66)
+                                    c.say(t, "You're looking at me all pervy again!");
+                                else
+                                if(deviancy > 33)
+                                    c.say(t, "You're smirking!  You're definitely smirking!");
+                                else
+                                    c.say(t, "That was your fault!");
+                                c.say(t, "\"\n\n");
+                                say(t, "\"");
+                                if(innocence > 66)
+                                    say(t, "You're just being a big dummy again!");
+                                else
+                                if(innocence > 33)
+                                    say(t, "You're wrong.  I'm just waiting for you to get back up here and fight me properly.");
+                                else
+                                    say(t, "Don't be ridiculous.  Just focus on remedying your own failures.");
+                            } else
+                            if(c.getInnocence() > 33)
+                            {
+                                if(obedience > 66)
+                                    c.say(t, "Ow!  Are you that eager for round 2?");
+                                else
+                                if(obedience > 33)
+                                    c.say(t, "Gah!  What was that for!?");
+                                else
+                                    c.say(t, "Hey!  I thought you didn't want to do this!");
+                                c.say(t, "\"\n\n");
+                                say(t, "\"");
+                                if(deviancy > 66)
+                                    say(t, "I'm sorry, I... I can't... resist...");
+                                else
+                                if(deviancy > 33)
+                                    say(t, "I'm not satisfied yet!");
+                                else
+                                    say(t, "You need to defeat me properly.");
+                            } else
+                            {
+                                if(disgrace > 66)
+                                    c.say(t, "Come.  I'm sure can defeat you...");
+                                else
+                                if(disgrace > 33)
+                                    c.say(t, "It seems you're not finished yet...");
+                                else
+                                    c.say(t, "I have no escape routes, so I can only clear out these hostiles to improve my chances.");
+                                c.say(t, "\"\n\n");
+                                say(t, "\"");
+                                if(obedience > 66)
+                                    say(t, "I will recruit you for the Demon Lord!");
+                                else
+                                if(obedience > 33)
+                                    say(t, "Sorry, but I can't afford to hold back...!");
+                                else
+                                    say(t, "This might hurt, but you need to get stronger somehow...!");
+                            }
+                            say(t, "\"");
+                        }
+                    } else
+                    if(hostility > 66)
+                    {
+                        c.say(t, "\"");
+                        if(c.getInnocence() > 66)
+                        {
+                            if(disgrace > 66)
+                                c.say(t, (new StringBuilder("Wow, ")).append(heShe()).append("'s so weak ").append(heShe()).append(" can't even part-way-kill me...").toString());
+                            else
+                            if(disgrace > 33)
+                                c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append("'s really unlucky.  ").append(HeShe()).append(" keeps missing me!").toString());
+                            else
+                                c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append("'s really strong, but ").append(heShe()).append("'s also really bad at killing me.").toString());
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(innocence > 66)
+                                say(t, "Shut up!  You don't know anything!");
+                            else
+                            if(innocence > 33)
+                                say(t, "You don't know how lucky you are, you little shit!");
+                            else
+                                say(t, "To be pitied by someone like this... unacceptable!");
+                        } else
+                        if(c.getInnocence() > 33)
+                        {
+                            if(confidence > 66)
+                                c.say(t, (new StringBuilder("I didn't think ")).append(heShe()).append("'d hide...").toString());
+                            else
+                            if(confidence > 33)
+                                c.say(t, "Where'd you go!?");
+                            else
+                                c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append(" really is a wimp at ").append(hisHer()).append(" core.").toString());
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(deviancy > 66)
+                                say(t, "I can't stay hidden, I need to make you scream some more!");
+                            else
+                            if(deviancy > 33)
+                                say(t, (new StringBuilder("Nnn...  ")).append(c.HisHer()).append(" throat's all exposed and vulnerable...").toString());
+                            else
+                                say(t, "Enjoy this break, because things are about to get a lot more painful...");
+                        } else
+                        {
+                            if(deviancy > 66)
+                                c.say(t, "Either this is some sort of bizarre fetish play, or you're not permitted to kill me.");
+                            else
+                            if(deviancy > 33)
+                                c.say(t, "You're enjoying this, but you'd be enjoying it even more if you had permission to kill me, right?");
+                            else
+                                c.say(t, "The thing that enrages you most is that you aren't allowed to kill me.  Am I correct?");
+                            c.say(t, "\"\n\n");
+                            if(obedience > 66)
+                                say(t, "I can only hope that the Demon Lord will change his mind...");
+                            else
+                            if(obedience > 33)
+                                say(t, "Don't push me, or I might decide that the punishment is worth it.");
+                            else
+                                say(t, "Those are the Demon Lord's orders, but I don't really care.  I just want to make you suffer more first.");
+                        }
+                        say(t, "\"");
+                    } else
+                    if(hostility > 33)
+                    {
+                        say(t, "\"");
+                        if(c.getConfidence() > 66)
+                        {
+                            if(disgrace > 66)
+                                say(t, "Come on, aren't you going to finish me off!?");
+                            else
+                            if(disgrace > 33)
+                                say(t, "Catch me if you can!");
+                            else
+                                say(t, "Try hitting me.");
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            if(deviancy > 66)
+                                c.say(t, "You'd like that, wouldn't you?");
+                            else
+                            if(deviancy > 33)
+                                c.say(t, "You won't be able to keep enjoying this for long!");
+                            else
+                                c.say(t, "I will defeat you!");
+                        } else
+                        if(c.getConfidence() > 33)
+                        {
+                            if(innocence > 66)
+                                say(t, "Hah, stupid dummy!");
+                            else
+                            if(innocence > 33)
+                                say(t, "Looks like you don't have what it takes after all!");
+                            else
+                                say(t, "A poor performance on your part, wouldn't you agree?");
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            if(disgrace > 66)
+                                c.say(t, "I'll make you regret this!");
+                            else
+                            if(disgrace > 33)
+                                c.say(t, "Come back here and fight me!");
+                            else
+                                c.say(t, "Ugh, you're really gloating...");
+                        } else
+                        {
+                            if(deviancy > 66)
+                                say(t, "Don't mind me, I'm just sizing you up for a collar.");
+                            else
+                            if(deviancy > 33)
+                                say(t, "You really are a masochist, aren't you?");
+                            else
+                                say(t, "People like you annoy me the most.");
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            if(confidence > 66)
+                                c.say(t, "I wish I weren't so weak to this sort of thing...");
+                            else
+                            if(confidence > 33)
+                                c.say(t, (new StringBuilder("I'm trying to ignore ")).append(himHer()).append(", but...").toString());
+                            else
+                                c.say(t, (new StringBuilder("I won't let ")).append(himHer()).append("...!").toString());
+                        }
+                        c.say(t, "\"");
+                    } else
+                    {
+                        c.say(t, "\"");
+                        if(c.getMorality() > 66)
+                        {
+                            if(obedience > 66)
+                                c.say(t, "How could you do that to them!?");
+                            else
+                            if(obedience > 33)
+                                c.say(t, "You're exchanging your safety for their lives!");
+                            else
+                                c.say(t, "You're in no position to talk about that!");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(innocence > 66)
+                                say(t, "I don't see what the big deal is.");
+                            else
+                            if(innocence > 33)
+                                say(t, "What are you going to do about it?");
+                            else
+                                say(t, "What did you expect?");
+                        } else
+                        if(c.getMorality() > 33)
+                        {
+                            if(deviancy > 66)
+                                c.say(t, "That's disgusting!");
+                            else
+                            if(deviancy > 33)
+                                c.say(t, "Stop talking about my body!");
+                            else
+                                c.say(t, "Keep your comments to yourself!");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(disgrace > 66)
+                                say(t, "I can't really fight you, so this is all I can do.");
+                            else
+                            if(disgrace > 33)
+                                say(t, "What else should I do?  Fight you?  I don't think either of us want that.");
+                            else
+                                say(t, "Do you really want to fight me?");
+                        } else
+                        {
+                            if(disgrace > 66)
+                                c.say(t, "You'd better keep running!");
+                            else
+                            if(disgrace > 33)
+                                c.say(t, "Get back here right now!");
+                            else
+                                c.say(t, "Just bleed already!");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(deviancy > 66)
+                                say(t, "Ah, this passion~!");
+                            else
+                            if(deviancy > 33)
+                                say(t, "You're actually cuter when you're mad!");
+                            else
+                                say(t, "You really need to learn to control yourself.");
+                        }
+                        say(t, "\"");
+                    }
+                } else
+                if(styleDamage[2] > 0)
+                {
+                    if(obedience > 66)
+                    {
+                        c.say(t, "\"");
+                        if(c.getMorality() > 66)
+                        {
+                            if(innocence > 66)
+                                c.say(t, "Let's put our fight on hold until they're safe.");
+                            else
+                            if(innocence > 33)
+                                c.say(t, "Let me help you.");
+                            else
+                                c.say(t, "I'll let you finish.");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(hostility > 66)
+                                say(t, "Don't look at me like that!  I'd rather kill them, but the Demon Lord has other plans.");
+                            else
+                            if(hostility > 33)
+                                say(t, "Are you sure?  Most of them are going to end up becoming my allies, after all.");
+                            else
+                                say(t, "Thanks.");
+                        } else
+                        if(c.getMorality() > 33)
+                        {
+                            if(disgrace > 66)
+                                c.say(t, "Stop hiding!");
+                            else
+                            if(disgrace > 33)
+                                c.say(t, "You've got to be kidding me!");
+                            else
+                                c.say(t, "At least these ones are easier...");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(confidence > 66)
+                                say(t, "I had things under control...");
+                            else
+                            if(confidence > 33)
+                                say(t, "Don't waste the lives the Demon Lord gave you!");
+                            else
+                                say(t, "Th-Thanks, everyone...");
+                        } else
+                        {
+                            if(hostility > 66)
+                                c.say(t, (new StringBuilder("Surprised ")).append(heShe()).append(" isn't killing any of them.").toString());
+                            else
+                            if(hostility > 33)
+                                c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append(" seems to be enjoying this.").toString());
+                            else
+                                c.say(t, "Not my problem.");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(innocence > 66)
+                                say(t, (new StringBuilder("Oh, right!  I'm supposed to be fighting ")).append(c.getMainName()).append("!").toString());
+                            else
+                            if(innocence > 33)
+                                say(t, (new StringBuilder("Alright, now what's ")).append(c.getMainName()).append(" doing?").toString());
+                            else
+                                say(t, "I must ensure that the mission as a whole is successful.");
+                        }
+                        say(t, "\"");
+                    } else
+                    if(obedience > 33)
+                    {
+                        c.say(t, "\"");
+                        if(c.getConfidence() > 66)
+                        {
+                            if(disgrace > 66)
+                                c.say(t, "You can't hide forever!");
+                            else
+                            if(disgrace > 33)
+                                c.say(t, "You know you can't beat me alone!");
+                            else
+                                c.say(t, "Don't turn your back on me!");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(confidence > 66)
+                                say(t, "What's the matter?  This should be nothing for you!");
+                            else
+                            if(confidence > 33)
+                                say(t, "Were you expecting me to fight fair?");
+                            else
+                                say(t, "I hope the Demon Lord doesn't mind me using his soldiers...");
+                        } else
+                        if(c.getConfidence() > 33)
+                        {
+                            if(confidence > 66)
+                                c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append(" holds all the cards...").toString());
+                            else
+                            if(confidence > 33)
+                                c.say(t, "I won't let this stop me...!");
+                            else
+                                c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append("'s scared, I can tell...!").toString());
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(innocence > 66)
+                                say(t, "Flanking maneuver!  About face!  Crazy Ivan!");
+                            else
+                            if(innocence > 33)
+                                say(t, "Can you handle this?");
+                            else
+                                say(t, "Squad G, hold until further orders!");
+                        } else
+                        {
+                            if(hostility > 66)
+                                c.say(t, "Why do you keep hurting me!?");
+                            else
+                            if(hostility > 33)
+                                c.say(t, "Ah!  Stop!");
+                            else
+                                c.say(t, "Please, tell them to let me go!");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(deviancy > 66)
+                                say(t, (new StringBuilder("Ah, ")).append(c.getMainName()).append(", your screams are too beautiful...!").toString());
+                            else
+                            if(deviancy > 33)
+                                say(t, "Hm, it's easier to appreciate the whole scene this way.");
+                            else
+                                say(t, "Are you just going to cry?");
+                        }
+                        say(t, "\"");
+                    } else
+                    {
+                        c.say(t, "\"");
+                        if(c.getInnocence() > 66)
+                        {
+                            if(innocence > 66)
+                                c.say(t, "Um, did you forget that you're on their side now?");
+                            else
+                            if(innocence > 33)
+                                c.say(t, "Woah!");
+                            else
+                                c.say(t, "Huh!?  Is this some sort of trick!?");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(deviancy > 66)
+                                say(t, "I had the PERFECT scene set up!  And that Demon RUINED it!");
+                            else
+                            if(deviancy > 33)
+                                say(t, "I just want to keep you all to myself!");
+                            else
+                                say(t, "I hate the Demons most of all.");
+                        } else
+                        if(c.getInnocence() > 33)
+                        {
+                            if(deviancy > 66)
+                                c.say(t, "You really are obsessed with me, aren't you?");
+                            else
+                            if(deviancy > 33)
+                                c.say(t, "So, I guess you've really fallen for me.");
+                            else
+                                c.say(t, "You hate the Demons that much?");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(hostility > 66)
+                                say(t, (new StringBuilder("I'm going to be the one who kills you, ")).append(c.getMainName()).append(".  No one else.").toString());
+                            else
+                            if(hostility > 33)
+                                say(t, "That's right.");
+                            else
+                                say(t, "I'm not on the Demons' side in the first place.");
+                        } else
+                        {
+                            if(hostility > 66)
+                                c.say(t, "You even refuse their help.");
+                            else
+                            if(hostility > 33)
+                                c.say(t, "You're sabotaging your supposed allies.");
+                            else
+                                c.say(t, "I see.  You want to deny the Demon Lord the additional resources.");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(innocence > 66)
+                                say(t, "Well, duh.");
+                            else
+                            if(innocence > 33)
+                                say(t, "I hope you're not expecting me to stop fighting you, though.");
+                            else
+                                say(t, "I'm glad you understand.");
+                        }
+                        say(t, "\"");
+                    }
+                } else
+                if(deviancy > 66)
+                {
+                    say(t, "\"");
+                    if(c.getDignity() > 66)
+                    {
+                        if(disgrace > 66)
+                            say(t, "You really want to fight me some more, don't you?");
+                        else
+                        if(disgrace > 33)
+                            say(t, "Come on, what's the matter?");
+                        else
+                            say(t, "Too slow.  Do you actually want to get caught?");
+                        say(t, "\"\n\n");
+                        c.say(t, "\"");
+                        if(innocence > 66)
+                            c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append(" has no idea what ").append(heShe()).append("'s doing to me...").toString());
+                        else
+                        if(innocence > 33)
+                            c.say(t, "There's no way I could actually be enjoying this!");
+                        else
+                            c.say(t, "Don't play dumb, you know exactly what you're doing...");
+                    } else
+                    if(c.getDignity() > 33)
+                    {
+                        if(dignity > 66)
+                            say(t, "Yes, yes, look at me!");
+                        else
+                        if(dignity > 33)
+                            say(t, "Ah, I started without realizing it...");
+                        else
+                            say(t, "F-Feels... good...!");
+                        say(t, "\"\n\n");
+                        c.say(t, "\"");
+                        if(hostility > 66)
+                            c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append(" actually looks happy for once...").toString());
+                        else
+                        if(hostility > 33)
+                            c.say(t, "Is this really all just a game to you?");
+                        else
+                            c.say(t, "What do you think you're doing?");
+                    } else
+                    {
+                        if(hostility > 66)
+                            say(t, "No!  You're supposed to blush and cover yourself and beg me to leave to alone!");
+                        else
+                        if(hostility > 33)
+                            say(t, "I need to get my hands on you even more...");
+                        else
+                            say(t, "Ah, I want to show you the pleasure of public sex!");
+                        say(t, "\"\n\n");
+                        c.say(t, "\"");
+                        if(disgrace > 66)
+                            say(t, "Is that what you were after?  You're pretty bad at this.");
+                        else
+                        if(disgrace > 33)
+                            say(t, "If you say so.  Can we hurry this up?");
+                        else
+                            say(t, "Well, it seems like you're stronger than me, so I can't really complain if you want to do this sort of thing instead.");
+                    }
+                    c.say(t, "\"");
+                } else
+                if(deviancy > 33)
+                {
+                    say(t, "\"");
+                    if(c.getConfidence() > 66)
+                    {
+                        if(hostility > 66)
+                            say(t, "You're so perfect that it's disgusting.");
+                        else
+                        if(hostility > 33)
+                            say(t, "The way you fight is... beautiful.");
+                        else
+                            say(t, "You have a strong will.  That's worth a lot.");
+                        say(t, "\"\n\n");
+                        c.say(t, "\"");
+                        if(obedience > 66)
+                            c.say(t, "Heh.  Trying to get me to join you?");
+                        else
+                        if(obedience > 33)
+                            c.say(t, "Don't worry.  I'll save you, too, when I kill the Demon Lord.");
+                        else
+                            c.say(t, "Then you know I have what it takes to beat the Demon Lord.");
+                    } else
+                    if(c.getConfidence() > 33)
+                    {
+                        if(confidence > 66)
+                            say(t, "We can wear disguises, go out like two civilians...");
+                        else
+                        if(confidence > 33)
+                            say(t, "You're so sexy I can hardly control myself.");
+                        else
+                            say(t, "You're just... beautiful in every single way...");
+                        say(t, "\"\n\n");
+                        c.say(t, "\"");
+                        if(disgrace > 66)
+                            c.say(t, "Are you trying to distract me?");
+                        else
+                        if(disgrace > 33)
+                            c.say(t, "Thanks, I suppose.");
+                        else
+                            c.say(t, "That means a lot, coming from you.");
+                    } else
+                    {
+                        if(disgrace > 66)
+                            say(t, "There would be no point in trying to physically hurt you.");
+                        else
+                        if(disgrace > 33)
+                            say(t, "You're fun to play with.");
+                        else
+                            say(t, "If you struggle too hard, you'll just hurt yourself.");
+                        say(t, "\"\n\n");
+                        c.say(t, "\"");
+                        if(hostility > 66)
+                            c.say(t, "Even though I know you want to kill me...");
+                        else
+                        if(hostility > 33)
+                            c.say(t, "You're holding back...");
+                        else
+                            c.say(t, "You don't hate me at all...");
+                    }
+                    c.say(t, "\"");
+                } else
+                {
+                    say(t, "\"");
+                    if(c.getInnocence() > 66)
+                    {
+                        if(disgrace > 66)
+                            say(t, "There would be no point in trying to physically hurt you.");
+                        else
+                        if(disgrace > 33)
+                            say(t, "Let's continue.");
+                        else
+                            say(t, "If you struggle too hard, you'll just hurt yourself.");
+                        say(t, "\"\n\n");
+                        c.say(t, "\"");
+                        if(hostility > 66)
+                            c.say(t, "Aren't you supposed to be super evil or something?");
+                        else
+                        if(hostility > 33)
+                            c.say(t, "Are you really having fun?");
+                        else
+                            c.say(t, "You don't really seem like a bad guy...");
+                    } else
+                    if(c.getInnocence() > 33)
+                    {
+                        if(hostility > 66)
+                            say(t, "Ergh... need to control myself...");
+                        else
+                        if(hostility > 33)
+                            say(t, "Come on, let's do this.");
+                        else
+                            say(t, "I have to do this.");
+                        say(t, "\"\n\n");
+                        c.say(t, "\"");
+                        if(obedience > 66)
+                            c.say(t, "For the Demon Lord's sake, you mean?");
+                        else
+                        if(obedience > 33)
+                            c.say(t, "The Demon Lord isn't giving you any choice...");
+                        else
+                            c.say(t, "Why?");
+                    } else
+                    {
+                        if(obedience > 66)
+                            say(t, "The things I do for the Demon Lord...");
+                        else
+                        if(obedience > 33)
+                            say(t, "If I don't do this...");
+                        else
+                            say(t, "You understand, right?");
+                        say(t, "\"\n\n");
+                        c.say(t, "\"");
+                        if(innocence > 66)
+                            c.say(t, "You're being manipulated.");
+                        else
+                        if(innocence > 33)
+                            c.say(t, "Do what you must.");
+                        else
+                            c.say(t, "It's all perfectly rational from your perspective.");
+                    }
+                    c.say(t, "\"");
+                }
+            c.captureProgression++;
+        }
+    }
+
+    public void captureChosenFlavor(JTextPane t, WorldState w, Chosen c, int styleDamage[], String bottomDesc, String topDesc, String organ, 
+            String lowerOrgan)
+    {
+        if(c.captureProgression % 6 == 0)
+        {
+            if(styleDamage[0] > 0)
+            {
+                if(styleDamage[1] > 0)
+                {
+                    if(deviancy > 66)
+                    {
+                        if(c.innocence > 66)
+                        {
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" tackles ").append(c.mainName).append(" from behind, releasing ").append(hisHer()).append(" overflowing lust on ").append(reference(c)).append(".  ").append(c.getMainName()).append(" is momentarily paralyzed by the sensation of ").append(mainName).append("'s body grinding against ").append(c.himHer()).toString());
+                            if(innocence > 66)
+                                w.append(t, (new StringBuilder(", helpless against ")).append(mainName).append("'s singleminded lust.").toString());
+                            else
+                            if(innocence > 33)
+                                w.append(t, (new StringBuilder(", and by the time ")).append(c.heShe()).append(" recovers, ").append(mainName).append(" has pinned ").append(c.himHer()).append(" down.").toString());
+                            else
+                                w.append(t, (new StringBuilder(", exactly as ")).append(mainName).append(" knew ").append(c.heShe()).append(" would be.").toString());
+                        } else
+                        if(c.innocence > 33)
+                        {
+                            if(innocence > 66)
+                                w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is lucky enough to stumble upon ").append(c.getMainName()).append(" while the latter is busy fending off a swarm of Demons, ").toString());
+                            else
+                            if(innocence > 33)
+                                w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" sees that ").append(c.getMainName()).append(" has ").append(c.hisHer()).append(" attention focused on a swarm of Demons, ").toString());
+                            else
+                                w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" orders a swarm of Demons to attack ").append(c.getMainName()).append(".  This makes for a good distraction, ").toString());
+                            w.append(t, (new StringBuilder("giving ")).append(himHer()).append(" an easy opportunity to grab ").append(reference(c)).append(" from behind and begin grinding against ").append(c.himHer()).append(" with wild abandon.").toString());
+                        } else
+                        {
+                            w.append(t, (new StringBuilder(String.valueOf(c.mainName))).append(" catches sight of ").append(mainName).append(" charging at ").append(c.himHer()).append(", but although ").append(c.heShe()).append(" launches an attack to fend the Forsaken off, ").append(mainName).append(" takes it head-on, ").toString());
+                            if(innocence > 66)
+                                w.append(t, (new StringBuilder("barely even noticing the pain as ")).append(heShe()).append(" ").toString());
+                            else
+                            if(innocence > 33)
+                                w.append(t, (new StringBuilder("getting turned on by the pain even as ")).append(heShe()).append(" ").toString());
+                            else
+                                w.append(t, (new StringBuilder("refusing to be distracted from ")).append(hisHer()).append(" lustful objectives as ").append(heShe()).append(" ").toString());
+                            w.append(t, (new StringBuilder("slams into ")).append(c.getMainName()).append(" and begins humping ").append(c.himHer()).append(" wildly.").toString());
+                        }
+                    } else
+                    if(deviancy > 33)
+                    {
+                        if(c.innocence > 66)
+                        {
+                            if(innocence > 66)
+                                w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" charges at ").append(c.getMainName()).append(" and grabs ").append(c.hisHer()).append(" wrists, trying to subdue ").append(c.himHer()).append(" with brute force, ").toString());
+                            else
+                            if(innocence > 33)
+                                w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" abruptly closes the distance to ").append(c.getMainName()).append(" and immediately begins to grapple with ").append(c.himHer()).append(", ").toString());
+                            else
+                                w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" takes advantage of a distraction in order to approach ").append(c.getMainName()).append(" from behind and pin ").append(c.hisHer()).append(" arms to ").append(c.hisHer()).append(" sides, ").toString());
+                            w.append(t, (new StringBuilder("but when ")).append(c.getMainName()).append(" tries to resist, ").append(c.heShe()).append("'s too disturbed by the feeling of ").append(mainName).append(" grinding their bodies together.").toString());
+                        } else
+                        if(c.innocence > 33)
+                        {
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" attacks ").append(c.getMainName()).append(" without any weapon, aiming to pin ").append(c.himHer()).append(" down and violate ").append(c.himHer()).append(".  ").toString());
+                            if(innocence > 66)
+                                w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" is caught off-guard, and ").append(c.heShe()).append("'s soon caught squirming and moaning under ").append(c.reference(this)).append(".").toString());
+                            else
+                            if(innocence > 33)
+                                w.append(t, (new StringBuilder("Soon, ")).append(c.getMainName()).append("'s resistance is reduced to trying desperately to buck ").append(mainName).append(" off as ").append(heShe()).append(" lustfully gropes ").append(c.himHer()).append(" and humps ").append(c.hisHer()).append(" thigh.").toString());
+                            else
+                                w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" knows what ").append(heShe()).append("'s planning, but there's nothing ").append(c.heShe()).append(" can do to stop ").append(c.himHer()).append("self from being forced to the ground, ").append(mainName).append(" humping their crotches together.").toString());
+                        } else
+                        {
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" emerges from the crowd of Thralls and seizes hold of ").append(c.getMainName()).append(" in an attempt to subdue ").append(c.himHer()).append(" with brute force.  ").toString());
+                            if(innocence > 66)
+                                w.append(t, (new StringBuilder("In the process of the grapple, their legs get tangled with each other, and ")).append(mainName).append(" gasps with pleasure, enjoying ").append(reference(c)).append("'s struggling.").toString());
+                            else
+                            if(innocence > 33)
+                                w.append(t, (new StringBuilder("Then, ")).append(heShe()).append(" positions ").append(himHer()).append("self between ").append(c.getMainName()).append("'s legs, smirking with feigned innocence as ").append(reference(c)).append("'s struggles stimulate them both.").toString());
+                            else
+                                w.append(t, (new StringBuilder("This would normally be a poor strategy against one of the Chosen, but ")).append(mainName).append(" has cunningly positioned their crotches against each other, and ").append(c.getMainName()).append(" has trouble keeping ").append(c.hisHer()).append(" composure as ").append(c.heShe()).append(" unavoidably stimulates ").append(c.himHer()).append("self as ").append(c.heShe()).append(" tries to escape.").toString());
+                        }
+                    } else
+                    if(c.innocence > 66)
+                    {
+                        if(innocence > 66)
+                            w.append(t, (new StringBuilder("Giggling madly, ")).append(mainName).append(" ambushes ").append(c.getMainName()).append(" from behind, ").toString());
+                        else
+                        if(innocence > 33)
+                            w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" is caught completely by surprise when ").append(mainName).append(" rushes forward and grabs ").append(c.himHer()).append(", ").toString());
+                        else
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" briefly conceals ").append(himHer()).append("self behind a crowd of Thralls, then springs out to grab ").append(c.getMainName()).append(", ").toString());
+                        w.append(t, (new StringBuilder("forcing out a squeak as ")).append(c.heShe()).append("'s roughly groped by ").append(c.reference(this)).append(".").toString());
+                    } else
+                    if(c.innocence > 33)
+                    {
+                        w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" stops a huge Demon's attack with ").append(c.hisHer()).append(" bare hands, but that leaves ").append(c.himHer()).append(" completely open for ").toString());
+                        if(innocence > 66)
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" to come up behind ").append(c.himHer()).append(" and start running ").append(c.hisHer()).append(" hands over ").append(reference(c)).append("'s body before abruptly grabbing ").append(c.hisHer()).append(" chest with both hands.").toString());
+                        else
+                        if(innocence > 33)
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" to embrace ").append(c.himHer()).append(" from behind, planting a mockingly gentle kiss on ").append(c.hisHer()).append(" lips before ").append(hisHer()).append(" hands begin to wander all over ").append(reference(c)).append("'s body.").toString());
+                        else
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" to seize the opportunity to grab ").append(c.himHer()).append(" from behind, abruptly stimulating ").append(reference(c)).append("'s most sensitive parts with ").append(hisHer()).append(" hands.").toString());
+                    } else
+                    {
+                        w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" and ").append(mainName).append(" meet in battle, but while ").append(c.getMainName()).append(" tries to fight conventionally, ").append(mainName).append(" ").toString());
+                        if(innocence > 66)
+                            w.append(t, (new StringBuilder("throws ")).append(c.hisHer()).append(" mind into complete disarray by embracing ").append(c.himHer()).append(" and kissing ").append(c.himHer()).append(" on the lips, then groping between ").append(c.hisHer()).append(" legs before ").append(c.heShe()).append(" can collect ").append(c.himHer()).append("self.").toString());
+                        else
+                        if(innocence > 33)
+                            w.append(t, (new StringBuilder("simply throws ")).append(c.himHer()).append(" off-balance by pinching and groping ").append(c.himHer()).append(" before falling back to defend ").append(c.himHer()).append("self.").toString());
+                        else
+                            w.append(t, (new StringBuilder("is completely focused on feeling up ")).append(c.getMainName()).append("'s body, a strategy ").append(c.heShe()).append("'s unprepared to fight against.").toString());
+                    }
+                } else
+                if(hostility > 66)
+                {
+                    if(c.getConfidence() > 66)
+                    {
+                        if(innocence > 66)
+                            w.append(t, (new StringBuilder("When ")).append(c.heShe()).append(" sees ").append(mainName).append(", giggling and covered in blood among the corpses of the countless fleeing civilians ").append(heShe()).append(" decided to kill, ").append(c.heShe()).append(" ").toString());
+                        else
+                        if(innocence > 33)
+                            w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" doesn't take notice of ").append(mainName).append(" quickly enough for the latter's liking, and so ").append(mainName).append(" decides to draw ").append(c.hisHer()).append(" attention with the screams of murdered civilians.  ").append(c.getMainName()).append(" turns ").append(c.hisHer()).append(" head, notices the slaughter, and ").toString());
+                        else
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" decides to draw ").append(c.getMainName()).append("'s attention by killing several of the civilians ").append(c.heShe()).append(" had just led to safety, and when").append(c.getMainName()).append(" notices, ").append(c.heShe()).append(" ").toString());
+                        w.append(t, "roars with rage and charges forward.");
+                    } else
+                    if(c.getConfidence() > 33)
+                    {
+                        w.append(t, (new StringBuilder("A blast of malevolent energy rips through one edge of the battlefield, tearing apart Demons, Thralls, and innocent civilians alike.  When the dust clears, ")).append(mainName).append(" is standing in the epicenter, ").toString());
+                        if(innocence > 66)
+                            w.append(t, (new StringBuilder("wearing a bloodstained deranged grin as ")).append(heShe()).append(" stares at the nearby ").append(c.getMainName()).append(".").toString());
+                        else
+                        if(innocence > 33)
+                            w.append(t, (new StringBuilder("having used it to clear a path to ")).append(c.getMainName()).append(".").toString());
+                        else
+                            w.append(t, (new StringBuilder("coldly striding through the carnage toward ")).append(c.getMainName()).append(".").toString());
+                    } else
+                    {
+                        if(innocence > 66)
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" walks slowly toward ").append(c.getMainName()).append(", giggling and covered in the blood of ").append(hisHer()).append(" civilian victims, ").toString());
+                        else
+                        if(innocence > 33)
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" carves a bloody swath through the civilians remaining on the battlefield as ").append(heShe()).append(" heads directly toward ").append(c.getMainName()).append(", ").toString());
+                        else
+                            w.append(t, (new StringBuilder("When ")).append(mainName).append(" sees that ").append(c.getMainName()).append(" is looking at ").append(himHer()).append(", ").append(heShe()).append(" grabs a random fleeing civilian and kills him in front of ").append(reference(c)).append("'s eyes, ").toString());
+                        w.append(t, (new StringBuilder("and it's all ")).append(c.getMainName()).append(" can do to gasp and back away in horror.").toString());
+                    }
+                } else
+                if(hostility > 33)
+                {
+                    if(c.getConfidence() > 66)
+                    {
+                        w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" spots ").append(mainName).append(" and immediately rushes forward to do battle, but ").toString());
+                        if(innocence > 66)
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" giggles and skips away, just out of reach, taunting ").append(c.getMainName()).append(" and calling ").append(c.himHer()).append(" names.").toString());
+                        else
+                        if(innocence > 33)
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" refuses to engage ").append(c.himHer()).append(", preferring to stay just close enough to shout insults at ").append(c.himHer()).append(".").toString());
+                        else
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" has carefully positioned ").append(himHer()).append("self so that ").append(heShe()).append(" has an easy escape route, and ").append(heShe()).append(" leads ").append(c.getMainName()).append(" on a chase, cruelly insulting ").append(c.himHer()).append(" as ").append(heShe()).append(" does so.").toString());
+                    } else
+                    if(c.getConfidence() > 33)
+                    {
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" perches on a rooftop near where ").append(c.getMainName()).append(" is fighting, shouting out unhelpful advice and demoralizing insults.  When ").append(c.getMainName()).append(" takes the bait and starts trying to give chase, ").toString());
+                        if(innocence > 66)
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" laughs and dashes off, continuing to taunt ").append(c.himHer()).append(" as ").append(heShe()).append(" runs.").toString());
+                        else
+                        if(innocence > 33)
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" takes the opportunity to lead ").append(c.himHer()).append(" further and further from the main battlefield.").toString());
+                        else
+                            w.append(t, (new StringBuilder(String.valueOf(c.heShe()))).append(" finds that ").append(mainName).append(" already planned in advance, and ").append(c.heShe()).append(" can't seem to catch up.").toString());
+                    } else
+                    {
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" confronts ").append(c.getMainName()).append(" on the battlefield, but rather than immediately attacking, ").append(heShe()).append(" ").toString());
+                        if(innocence > 66)
+                            w.append(t, (new StringBuilder("just shouts crueler and crueler insults, smirking as ")).append(heShe()).append(" sees ").append(reference(c)).append(" shrinking under the verbal assault.").toString());
+                        else
+                        if(innocence > 33)
+                            w.append(t, (new StringBuilder("forces ")).append(c.getMainName()).append(" to shy away with a barrage of cruel words, giving ").append(c.himHer()).append(" no respite.").toString());
+                        else
+                            w.append(t, (new StringBuilder("opts to strike at ")).append(c.getMainName()).append("'s morale instead, making cutting remarks carefully picked to target ").append(reference(c)).append("'s insecurities.").toString());
+                    }
+                } else
+                if(c.getConfidence() > 66)
+                {
+                    if(confidence > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" blasts the Demons with a huge attack, but when the dust clears, ").append(mainName).append(" stands in front of them, having just barely deflected the attack, and ").toString());
+                    else
+                    if(confidence > 33)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" engages ").append(c.getMainName()).append(" in battle, but fights defensively for the time being, using the opportunity to talk.  ").append(HisHer()).append(" words are unwelcome, and ").toString());
+                    else
+                        w.append(t, (new StringBuilder("While ")).append(c.getMainName()).append(" tries to fight the Demons, ").append(mainName).append(" skulks nearby, whispering discouraging messages.  They're just loud enough to hear, but it's impossible to pinpoint ").append(hisHer()).append(" location, and ").toString());
+                    w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" grits ").append(c.hisHer()).append(" teeth in frustration.").toString());
+                } else
+                if(c.getConfidence() > 33)
+                {
+                    if(confidence > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" charges at ").append(c.getMainName()).append(", and they end up clashing, gripping each other's wrists as they struggle for control.  ").toString());
+                    else
+                    if(confidence > 33)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" and ").append(c.getMainName()).append(" face each other down at the center of the battlefield, pacing warily in a circle around each other.  ").toString());
+                    else
+                        w.append(t, (new StringBuilder("Facing down ")).append(c.getMainName()).append(", ").append(mainName).append(" trembles with nerves, but ").append(heShe()).append(" still sets ").append(hisHer()).append(" jaw and speaks harshly.  ").toString());
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s words give ").append(c.getMainName()).append(" pause.").toString());
+                } else
+                {
+                    if(disgrace < 34)
+                        w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" tries to attack the Demons, but ").append(mainName).append(" jumps in the way and takes the attack head-on.  The attack leaves no visible mark on ").append(c.reference(this)).append(".  ").toString());
+                    else
+                    if(disgrace < 67)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" fires an enormous burst of dark energy from ").append(hisHer()).append(" ").append(weapon).append(", but it dissipates the instant before it reaches ").append(c.getMainName()).append(", revealing ").append(c.hisHer()).append(" pitifully-flinching form.  ").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" and ").append(c.getMainName()).append(" briefly meet in battle, exchanging several attacks.  However, ").append(c.getMainName()).append("'s heart clearly isn't in it, and the two soon separate to face each other down.  ").toString());
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" shakes ").append(hisHer()).append(" head in disappointment.").toString());
+                }
+            } else
+            if(styleDamage[1] > 0)
+            {
+                if(deviancy > 66)
+                {
+                    if(c.innocence > 66)
+                    {
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" tackles ").append(c.mainName).append(" from behind, releasing ").append(hisHer()).append(" overflowing lust on ").append(reference(c)).append(".  ").append(c.getMainName()).append(" is momentarily paralyzed by the sensation of ").append(mainName).append("'s skillful hands seeming to pinch and stroke a dozen places at once").toString());
+                        if(innocence > 66)
+                            w.append(t, (new StringBuilder(", helpless against ")).append(mainName).append("'s singleminded lust.").toString());
+                        else
+                        if(innocence > 33)
+                            w.append(t, (new StringBuilder(", and by the time ")).append(c.heShe()).append(" recovers, ").append(mainName).append(" has pinned ").append(c.himHer()).append(" down.").toString());
+                        else
+                            w.append(t, (new StringBuilder(", exactly as ")).append(mainName).append(" knew ").append(c.heShe()).append(" would be.").toString());
+                    } else
+                    if(c.innocence > 33)
+                    {
+                        if(innocence > 66)
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is lucky enough to stumble upon ").append(c.getMainName()).append(" while the latter is busy fending off a swarm of Demons, ").toString());
+                        else
+                        if(innocence > 33)
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" sees that ").append(c.getMainName()).append(" has ").append(c.hisHer()).append(" attention focused on a swarm of Demons, ").toString());
+                        else
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" waits for a swarm of Demons to attack ").append(c.getMainName()).append(".  This makes for a good distraction, ").toString());
+                        w.append(t, (new StringBuilder("giving ")).append(himHer()).append(" an easy opportunity to grab ").append(reference(c)).append(" from behind and begin groping ").append(c.himHer()).append(" with wild abandon.").toString());
+                    } else
+                    {
+                        w.append(t, (new StringBuilder(String.valueOf(c.mainName))).append(" catches sight of ").append(mainName).append(" charging at ").append(c.himHer()).append(", but although ").append(c.heShe()).append(" launches an attack to fend the Forsaken off, ").append(mainName).append(" takes it head-on, ").toString());
+                        if(innocence > 66)
+                            w.append(t, (new StringBuilder("barely even noticing the pain as ")).append(heShe()).append(" ").toString());
+                        else
+                        if(innocence > 33)
+                            w.append(t, (new StringBuilder("getting turned on by the pain even as ")).append(heShe()).append(" ").toString());
+                        else
+                            w.append(t, (new StringBuilder("refusing to be distracted from ")).append(hisHer()).append(" lustful objectives as ").append(heShe()).append(" ").toString());
+                        w.append(t, (new StringBuilder("slams into ")).append(c.getMainName()).append(" and begins feverishly molesting ").append(c.himHer()).append(".").toString());
+                    }
+                } else
+                if(deviancy > 33)
+                {
+                    if(c.innocence > 66)
+                    {
+                        if(innocence > 66)
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" charges at ").append(c.getMainName()).append(" and grabs ").append(c.hisHer()).append(" wrists, trying to subdue ").append(c.himHer()).append(" with brute force, ").toString());
+                        else
+                        if(innocence > 33)
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" abruptly closes the distance to ").append(c.getMainName()).append(" and immediately begins to grapple with ").append(c.himHer()).append(", ").toString());
+                        else
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" takes advantage of a distraction in order to approach ").append(c.getMainName()).append(" from behind and pin ").append(c.hisHer()).append(" arms to ").append(c.hisHer()).append(" sides, ").toString());
+                        w.append(t, (new StringBuilder("but when ")).append(c.getMainName()).append(" tries to resist, ").append(c.heShe()).append("'s too disturbed by the feeling of ").append(mainName).append("'s thigh between ").append(c.hisHer()).append(" legs.").toString());
+                    } else
+                    if(c.innocence > 33)
+                    {
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" attacks ").append(c.getMainName()).append(" without any weapon, aiming to pin ").append(c.himHer()).append(" down and stimulate ").append(c.himHer()).append(".  ").toString());
+                        if(innocence > 66)
+                            w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" is caught off-guard, and ").append(c.heShe()).append("'s soon caught squirming and moaning under ").append(c.reference(this)).append(".").toString());
+                        else
+                        if(innocence > 33)
+                            w.append(t, (new StringBuilder("Soon, ")).append(c.getMainName()).append("'s resistance is reduced to trying desperately to buck ").append(mainName).append(" off as ").append(heShe()).append(" forcefully gropes ").append(c.hisHer()).append(" chest and rubs between ").append(c.hisHer()).append(" legs.").toString());
+                        else
+                            w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" knows what ").append(heShe()).append("'s planning, but there's nothing ").append(c.heShe()).append(" can do to stop ").append(c.himHer()).append("self from being forced to the ground, ").append(mainName).append("'s hand working its way between ").append(c.hisHer()).append(" tightly-clenched thighs.").toString());
+                    } else
+                    {
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" emerges from the crowd of Thralls and seizes hold of ").append(c.getMainName()).append(" in an attempt to subdue ").append(c.himHer()).append(" with brute force.  ").toString());
+                        if(innocence > 66)
+                            w.append(t, (new StringBuilder("In the process of the grapple, their legs get tangled with each other, and ")).append(c.getMainName()).append(" ends up being forced to gasp with pleasure, much to ").append(mainName).append("'s satisfaction.").toString());
+                        else
+                        if(innocence > 33)
+                            w.append(t, (new StringBuilder("Then, ")).append(heShe()).append(" slowly pries ").append(c.getMainName()).append("'s legs apart, and uses ").append(hisHer()).append(" foot to stimulate ").append(reference(c)).append(".").toString());
+                        else
+                            w.append(t, (new StringBuilder("This would normally be a poor strategy against one of the Chosen, but ")).append(mainName).append(" has cunningly positioned ").append(c.getMainName()).append("'s crotch against the corner of a piece of rubble, and ").append(c.heShe()).append(" has trouble keeping ").append(c.hisHer()).append(" composure as ").append(c.heShe()).append(" unavoidably stimulates ").append(c.himHer()).append("self as ").append(c.heShe()).append(" tries to escape.").toString());
+                    }
+                } else
+                if(c.innocence > 66)
+                {
+                    if(innocence > 66)
+                        w.append(t, (new StringBuilder("Giggling madly, ")).append(mainName).append(" ambushes ").append(c.getMainName()).append(" from behind, ").toString());
+                    else
+                    if(innocence > 33)
+                        w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" is caught completely by surprise when ").append(mainName).append(" rushes forward and grabs ").append(c.himHer()).append(", ").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" briefly conceals ").append(himHer()).append("self behind a crowd of Thralls, then springs out to grab ").append(c.getMainName()).append(", ").toString());
+                    w.append(t, (new StringBuilder("forcing out a squeak as ")).append(c.heShe()).append("'s roughly groped by ").append(c.reference(this)).append(".").toString());
+                } else
+                if(c.innocence > 33)
+                {
+                    w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" stops a huge Demon's attack with ").append(c.hisHer()).append(" bare hands, but that leaves ").append(c.himHer()).append(" completely open for ").toString());
+                    if(innocence > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" to come up behind ").append(c.himHer()).append(" and start running ").append(c.hisHer()).append(" hands over ").append(reference(c)).append("'s body before abruptly grabbing ").append(c.hisHer()).append(" chest with both hands.").toString());
+                    else
+                    if(innocence > 33)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" to embrace ").append(c.himHer()).append(" from behind, planting a mockingly gentle kiss on ").append(c.hisHer()).append(" lips before ").append(hisHer()).append(" hands begin to wander all over ").append(reference(c)).append("'s body.").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" to seize the opportunity to grab ").append(c.himHer()).append(" from behind, abruptly stimulating ").append(reference(c)).append("'s most sensitive parts with ").append(hisHer()).append(" hands.").toString());
+                } else
+                {
+                    w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" and ").append(mainName).append(" meet in battle, but while ").append(c.getMainName()).append(" tries to fight conventionally, ").append(mainName).append(" ").toString());
+                    if(innocence > 66)
+                        w.append(t, (new StringBuilder("throws ")).append(c.hisHer()).append(" mind into complete disarray by embracing ").append(c.himHer()).append(" and kissing ").append(c.himHer()).append(" on the lips, then groping between ").append(c.hisHer()).append(" legs before ").append(c.heShe()).append(" can collect ").append(c.himHer()).append("self.").toString());
+                    else
+                    if(innocence > 33)
+                        w.append(t, (new StringBuilder("simply throws ")).append(c.himHer()).append(" off-balance by pinching and groping ").append(c.himHer()).append(" before falling back to defend ").append(c.himHer()).append("self.").toString());
+                    else
+                        w.append(t, (new StringBuilder("is completely focused on feeling up ")).append(c.getMainName()).append("'s body, a strategy ").append(c.heShe()).append("'s unprepared to fight against.").toString());
+                }
+            } else
+            if(disgrace > 66)
+            {
+                if(c.getConfidence() > 66)
+                {
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" and ").append(c.getMainName()).append(" meet each other in combat in the middle of the battlefield, ").toString());
+                    if(confidence > 66)
+                        w.append(t, (new StringBuilder("but despite ")).append(hisHer()).append(" former strength, ").append(mainName).append(" is forced onto the defensive, barely holding ").append(hisHer()).append(" own.").toString());
+                    else
+                    if(confidence > 33)
+                        w.append(t, (new StringBuilder("and although ")).append(c.getMainName()).append(" has the clear upper hand, it still distracts ").append(c.himHer()).append(" from the Demons and forces ").append(c.himHer()).append(" to spend ").append(c.hisHer()).append(" valuable energy.").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" using ").append(hisHer()).append(" experience fighting defensively to try to exhaust ").append(hisHer()).append(" much stronger foe as much as possible.").toString());
+                } else
+                if(c.getConfidence() > 33)
+                {
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" attempts to engage ").append(c.getMainName()).append(" in single combat, ").toString());
+                    if(confidence > 66)
+                        w.append(t, "recklessly launching all-out attacks even though the psychic force behind them isn't especially impressive.");
+                    else
+                    if(confidence > 33)
+                        w.append(t, (new StringBuilder("then falls back into a defensive stance when ")).append(reference(c)).append(" responds.").toString());
+                    else
+                        w.append(t, (new StringBuilder("and while ")).append(hisHer()).append(" attacks are weak and hesitant, they're still just strong enough that ").append(reference(c)).append(" can't completely ignore them.").toString());
+                } else
+                {
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" ambushes ").append(c.getMainName()).append(" in a sudden attack, ").toString());
+                    if(confidence > 66)
+                        w.append(t, (new StringBuilder("using pure force of personality to intimidate ")).append(hisHer()).append(" stronger opponent into fighting on the defensive.").toString());
+                    else
+                    if(confidence > 33)
+                        w.append(t, (new StringBuilder("and although ")).append(mainName).append(" isn't very strong for one of the Forsaken, ").append(c.getMainName()).append("'s lack of self-confidence causes ").append(c.himHer()).append(" to fall back.").toString());
+                    else
+                        w.append(t, "but before long, the match devolves into the two of them exchanging timid attacks without much result.");
+                }
+            } else
+            if(disgrace > 33)
+            {
+                if(c.getConfidence() > 66)
+                {
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" and ").append(c.getMainName()).append(" catch sight of each other across the battlefield, ").toString());
+                    if(confidence > 66)
+                        w.append(t, "and they immediately rush toward each other, readying their strongest attacks.");
+                    else
+                    if(confidence > 33)
+                        w.append(t, (new StringBuilder("and ")).append(mainName).append(" takes a defensive stance as ").append(reference(c)).append(" charges toward ").append(himHer()).append(".").toString());
+                    else
+                        w.append(t, (new StringBuilder("but when ")).append(c.getMainName()).append(" tries to subdue ").append(c.reference(this)).append(" quickly, ").append(heShe()).append(" finds that ").append(mainName).append(" is no pushover.").toString());
+                } else
+                if(c.getConfidence() > 33)
+                {
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" ambushes ").append(c.getMainName()).append(" while the latter is caught up in the melee of Demons, and as they begin to battle each other, ").toString());
+                    if(confidence > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" is forced to give ground, little by little.").toString());
+                    else
+                    if(confidence > 33)
+                        w.append(t, "it's clear that they're evenly matched.");
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" fights with a ferocity far beyond what ").append(hisHer()).append(" timid demeanor would suggest.").toString());
+                } else
+                {
+                    w.append(t, (new StringBuilder("A nearby blast of dark psychic energy startles ")).append(c.getMainName()).append(", and ").append(c.heShe()).append("'s retreating before ").append(c.heShe()).append(" realizes it, ").toString());
+                    if(confidence > 66)
+                        w.append(t, (new StringBuilder("slowly pursued by ")).append(mainName).append("'s menacing form.").toString());
+                    else
+                    if(confidence > 33)
+                        w.append(t, (new StringBuilder("intimidated by ")).append(mainName).append("'s show of confidence.").toString());
+                    else
+                        w.append(t, (new StringBuilder("much to the relief of ")).append(mainName).append(", who hoped to use intimidation to avoid an all-out fight.").toString());
+                }
+            } else
+            if(c.getConfidence() > 66)
+            {
+                if(confidence > 66)
+                    w.append(t, "Roaring out a challenge, ");
+                else
+                if(confidence > 33)
+                    w.append(t, "Teeth tightly grit together, ");
+                else
+                    w.append(t, "Screaming in desperation, ");
+                w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" hurls an enormous blast of dark energy at ").append(c.getMainName()).append(", who is shocked to find ").append(c.himHer()).append("self laying on the ground afterward, trails of smoke rising from ").toString());
+                if(c.getEXPOLevel() < 2)
+                    w.append(t, (new StringBuilder(String.valueOf(c.hisHer()))).append(" clothes.").toString());
+                else
+                    w.append(t, (new StringBuilder("the remains of ")).append(c.hisHer()).append(" clothes.").toString());
+            } else
+            if(c.getConfidence() > 33)
+            {
+                w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" charges at ").append(c.getMainName()).append(", smashing apart any buildings and vehicles in ").append(hisHer()).append(" path.  Although ").append(c.getMainName()).append(" tries to stop ").append(himHer()).append(", ").toString());
+                if(confidence > 66)
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" smacks aside ").append(c.hisHer()).append(" attacks with contemptuous ease.").toString());
+                else
+                if(confidence > 33)
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" takes ").append(c.hisHer()).append(" attacks head-on without any visible reaction.").toString());
+                else
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s frantic strength is unstoppable.").toString());
+            } else
+            {
+                w.append(t, (new StringBuilder("The Demons switch tactics, forming a wall around ")).append(c.getMainName()).append(" so that ").append(c.heShe()).append("'s trapped in the same area as ").append(mainName).append(", unable to escape or get help.  ").append(c.HeShe()).append(" quails as ").append(c.heShe()).append(" sees ").append(mainName).toString());
+                if(confidence > 66)
+                    w.append(t, "'s merciless expression.");
+                else
+                if(confidence > 33)
+                    w.append(t, " slowly advancing forward, pulsing with dark energy.");
+                else
+                    w.append(t, (new StringBuilder("'s wide eyes fixed on ")).append(c.himHer()).append(".").toString());
+            }
+        } else
+        if(c.captureProgression % 6 == 1)
+        {
+            if(styleDamage[1] > 0)
+            {
+                if(styleDamage[2] > 0)
+                {
+                    if(disgrace > 66)
+                    {
+                        if(c.getConfidence() > 66)
+                        {
+                            w.append(t, (new StringBuilder("Even though ")).append(c.getMainName()).append(" is far stronger than ").append(mainName).append(", ").append(c.reference(this)).toString());
+                            if(innocence > 66)
+                                w.append(t, (new StringBuilder("'s frantic efforts to get at ")).append(c.hisHer()).append(" ").append(lowerOrgan).append(" even as ").append(c.heShe()).append(" tries to fight ").append(himHer()).append(" off proves difficult to deal with.").toString());
+                            else
+                            if(innocence > 33)
+                                w.append(t, (new StringBuilder(" fights dirty, kicking ")).append(c.himHer()).append(" in the ").append(lowerOrgan).append(" and then molesting ").append(c.himHer()).append(" for several moments before before forced back again.").toString());
+                            else
+                                w.append(t, (new StringBuilder(" makes cunning use of ")).append(c.getMainName()).append("'s reluctance to be stimulated against ").append(c.hisHer()).append(" will, groping ").append(c.hisHer()).append(" ").append(lowerOrgan).append(" and then taking advantage of ").append(c.hisHer()).append(" surprise to press the advantage.").toString());
+                        } else
+                        if(c.getConfidence() > 33)
+                        {
+                            w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" pushes ").append(mainName).append(" away over and over again, but ").toString());
+                            if(deviancy > 66)
+                                w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" can't think about anything but ").append(c.getMainName()).append("'s ").append(lowerOrgan).toString());
+                            else
+                            if(deviancy > 33)
+                                w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is kinky enough that it just turns ").append(himHer()).append(" on even more").toString());
+                            else
+                                w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" won't be dissuaded").toString());
+                            w.append(t, (new StringBuilder(", and soon ")).append(c.getMainName()).append(" is blushing and gasping from the repeated groping.").toString());
+                        } else
+                        {
+                            w.append(t, (new StringBuilder("Despite ")).append(mainName).append("'s relative weakness, ").append(c.getMainName()).append(" lacks the willpower to pull free of ").append(c.reference(this)).append("'s grip on ").append(c.hisHer()).append(" ").append(lowerOrgan).toString());
+                            if(innocence > 66)
+                                w.append(t, (new StringBuilder(", helpless against the enthusiastic movements of ")).append(hisHer()).append(" fingers.").toString());
+                            else
+                            if(innocence > 33)
+                                w.append(t, ".");
+                            else
+                                w.append(t, (new StringBuilder(", unused to being stimulated by someone as skillful as ")).append(mainName).append(".").toString());
+                        }
+                    } else
+                    if(disgrace > 33)
+                    {
+                        if(c.getConfidence() > 66)
+                        {
+                            w.append(t, (new StringBuilder("In a straight fistfight, ")).append(c.getMainName()).append(" would easily beat ").append(mainName).append(", but ").toString());
+                            if(innocence > 66)
+                                w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is unwittingly exploiting ").append(reference(c)).append("'s reluctance to acknowledge unwilling pleasure by focusing more on groping ").append(c.himHer()).append(" than on actually fighting.").toString());
+                            else
+                            if(innocence > 33)
+                                w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is less interested in bruising ").append(reference(c)).append(" and more interested in feeling ").append(c.himHer()).append(" up.  It proves difficult to stop.").toString());
+                            else
+                                w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is well aware of that, and ").append(heShe()).append(" refuses to have a fair fight, instead grabbing ").append(c.getMainName()).append("'s ").append(lowerOrgan).append(" through ").append(c.hisHer()).append(" ").append(bottomDesc).append(" and roughly tugging it whenever ").append(reference(c)).append(" tries to overpower ").append(himHer()).append(".").toString());
+                        } else
+                        if(c.getConfidence() > 33)
+                        {
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" and ").append(c.getMainName()).append(" grapple desperately, ").toString());
+                            if(hostility > 66)
+                                w.append(t, (new StringBuilder("with ")).append(c.getMainName()).append(" crying out and giving up the advantage when ").append(mainName).append(" manages to seize and twist ").append(c.hisHer()).append(" ").append(organ).append(".").toString());
+                            else
+                            if(hostility > 33)
+                                w.append(t, (new StringBuilder("but while ")).append(c.getMainName()).append(" only knows how to fight conventionally, ").append(mainName).append(" is ruthless about kneeing and grinding against ").append(c.getMainName()).append("'s sensitive ").append(organ).append(".").toString());
+                            else
+                                w.append(t, (new StringBuilder("but ")).append(mainName).append("'s surprisingly gentle hands on ").append(reference(c)).append("'s ").append(organ).append(" and ").append(lowerOrgan).append(" make it hard to focus on the fight.").toString());
+                        } else
+                        {
+                            if(deviancy > 66)
+                                w.append(t, (new StringBuilder("Driven wild by ")).append(reference(c)).append("'s meek, vulnerable manner, ").toString());
+                            else
+                            if(deviancy > 33)
+                                w.append(t, (new StringBuilder("Taking some satisfaction from ")).append(reference(c)).append("'s shrill pleas, ").toString());
+                            else
+                                w.append(t, (new StringBuilder("Taking advantage of ")).append(reference(c)).append("'s insecurities, ").toString());
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" roughly ").append(c.getMainName()).append(" down and presses the advantage, firmly rubbing ").append(c.hisHer()).append(" ").append(organ).append(" until ").append(c.heShe()).append(" squeals for mercy.").toString());
+                        }
+                    } else
+                    if(c.getConfidence() > 66)
+                    {
+                        w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" struggles as hard as ").append(c.heShe()).append(" can, but ").append(mainName).append("'s iron grip holds ").append(c.himHer()).append(" in place").toString());
+                        if(innocence > 66)
+                            w.append(t, (new StringBuilder(", ")).append(c.reference(this)).append("'s overly enthusiastic stimulation causing as much discomfort as pleasure.").toString());
+                        else
+                        if(innocence > 33)
+                        {
+                            w.append(t, (new StringBuilder(" so that ")).append(c.heShe()).append(" can't escape the rough rubbing against ").append(c.hisHer()).append(" ").append(organ).append(".").toString());
+                        } else
+                        {
+                            w.append(t, ", and every time escape seems imminent, ");
+                            if(w.tickle().booleanValue())
+                                w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s fingers against ").append(c.hisHer()).append(" armpits cause ").append(c.himHer()).append(" to jerk and spasm, losing leverage.").toString());
+                            else
+                                w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" harshly twists ").append(c.hisHer()).append(" limbs to keep ").append(c.himHer()).append(" from getting away.").toString());
+                        }
+                    } else
+                    if(c.getConfidence() > 33)
+                    {
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" slams ").append(c.getMainName()).append(" halfway through a concrete wall so that ").append(c.hisHer()).append(" butt is hanging out, then rips open ").append(c.getMainName()).append("'s ").append(bottomDesc).toString());
+                        if(deviancy > 66)
+                            w.append(t, (new StringBuilder(" and starts eagerly licking ")).append(c.hisHer()).append(" ").append(organ).append(".").toString());
+                        else
+                        if(deviancy > 33)
+                            w.append(t, (new StringBuilder(", plants a foot on ")).append(c.hisHer()).append(" organ, and starts moving it back and forth.").toString());
+                        else
+                            w.append(t, (new StringBuilder(" and uses one hand to firmly stimulate ")).append(c.hisHer()).append(" ").append(organ).append(".").toString());
+                    } else
+                    {
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" gives ").append(c.getMainName()).append("'s ").append(organ).append(" a slight tweak, ").toString());
+                        if(hostility > 66)
+                            w.append(t, "grinning with sadistic glee");
+                        else
+                        if(hostility > 33)
+                            w.append(t, (new StringBuilder("looking down on ")).append(c.himHer()).append(" contemptfully").toString());
+                        else
+                            w.append(t, (new StringBuilder("shaking ")).append(hisHer()).append(" head with disappointment").toString());
+                        w.append(t, (new StringBuilder(" when ")).append(c.getMainName()).append(" can only squirm and whine in response.").toString());
+                    }
+                } else
+                if(disgrace > 66)
+                {
+                    if(c.getInnocence() > 66)
+                    {
+                        if(confidence > 66)
+                            w.append(t, (new StringBuilder("Refusing to acknowledge ")).append(hisHer()).append(" own weakness, ").toString());
+                        else
+                        if(confidence > 33)
+                            w.append(t, "Wanting to avoid being put on the defensive, ");
+                        else
+                            w.append(t, "Eyes wild and desperate, ");
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" charges forward, taking ").append(c.getMainName()).append(" completely by surprise ").toString());
+                        if(w.tickle().booleanValue())
+                            w.append(t, (new StringBuilder("and lunging forward to start tickling ")).append(c.himHer()).append(".").toString());
+                        else
+                            w.append(t, (new StringBuilder("and landing several solid hits with ")).append(hisHer()).append(" ").append(weapon).append(".").toString());
+                    } else
+                    if(c.getInnocence() > 33)
+                    {
+                        if(dignity > 66)
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" forces ").append(himHer()).append("self to ignore ").append(c.getMainName()).append("'s attacks, and ").toString());
+                        else
+                        if(dignity > 33)
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" charges right through a flurry of attacks from ").append(c.getMainName()).append("'s ").append(weapon).append(", and ").toString());
+                        else
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" cries out in pain as ").append(heShe()).append("'s struck by ").append(c.getMainName()).append("'s ").append(weapon).append(", but ").toString());
+                        w.append(t, (new StringBuilder(String.valueOf(heShe()))).append(" soon gets close enough to start grappling with ").append(c.himHer()).append(" directly").toString());
+                        if(w.tickle().booleanValue())
+                            w.append(t, ", trying to get some tickling in");
+                        else
+                            w.append(t, (new StringBuilder(", trying to deal some damage with ")).append(hisHer()).append(" bare hands").toString());
+                        w.append(t, (new StringBuilder(" despite ")).append(hisHer()).append(" relative weakness.").toString());
+                    } else
+                    {
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" immediately rushes to close range against ").append(c.getMainName()).append(" and starts ").toString());
+                        if(w.tickle().booleanValue())
+                            w.append(t, (new StringBuilder("trying to tickle ")).append(c.himHer()).toString());
+                        else
+                            w.append(t, (new StringBuilder("attacking with ")).append(hisHer()).append(" weapon").toString());
+                        w.append(t, ", ");
+                        if(innocence > 66)
+                            w.append(t, (new StringBuilder("figuring that a situation where neither of them has time to think will work out in ")).append(hisHer()).append(" favor.").toString());
+                        else
+                        if(innocence > 33)
+                            w.append(t, (new StringBuilder("knowing that ")).append(heShe()).append(" doesn't have any chance of victory if ").append(reference(c)).append(" is given any opportunity to use ").append(hisHer()).append(" formidable strategic abilities.").toString());
+                        else
+                            w.append(t, (new StringBuilder("planning around the expectation that ")).append(reference(c)).append(" is not as experienced at fighting under this kind of pressure.").toString());
+                    }
+                } else
+                if(disgrace > 33)
+                {
+                    if(c.getMorality() > 66)
+                    {
+                        w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" tries to draw ").append(mainName).append(" away to an area further from any civilians, ").toString());
+                        if(hostility > 66)
+                            w.append(t, (new StringBuilder("but ")).append(mainName).append(" just grins and starts heading straight for the evacuation route, forcing ").append(c.getMainName()).append(" to tackle ").append(himHer()).append(" and open ").append(himHer()).append("self up to a punishing counterattack.").toString());
+                        else
+                        if(hostility > 33)
+                            w.append(t, (new StringBuilder("and ")).append(mainName).append(" takes advantage by attacking ").append(reference(c)).append(" from behind with ").append(hisHer()).append(" ").append(weapon).append(".").toString());
+                        else
+                            w.append(t, (new StringBuilder("and ")).append(mainName).append(" is content to oblige, soon catching up to ").append(c.himHer()).append(" and engaging ").append(c.himHer()).append(" in a close-range grapple.").toString());
+                    } else
+                    if(c.getMorality() > 33)
+                    {
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" and ").append(c.getMainName()).append(" exchange blows in the middle of the street, blasting apart nearby cars and buildings").toString());
+                        if(innocence > 66)
+                            w.append(t, (new StringBuilder(" as ")).append(mainName).append(" struggles to overpower ").append(reference(c)).append(" with brute force.").toString());
+                        else
+                        if(innocence > 33)
+                            w.append(t, ", evenly-matched in their power and skill.");
+                        else
+                            w.append(t, (new StringBuilder(" as ")).append(mainName).append(" skillfully deflects ").append(reference(c)).append("'s attacks before responding with ").append(hisHer()).append(" own.").toString());
+                    } else
+                    {
+                        w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" charges directly at ").append(mainName).append(", intent on striking ").append(himHer()).append(" down first, ").toString());
+                        if(confidence > 66)
+                            w.append(t, (new StringBuilder("and ")).append(mainName).append(" is happy to meet ").append(c.himHer()).append(" head-on, ").append(hisHer()).append(" ").append(weapon).append(" at the ready.").toString());
+                        else
+                        if(confidence > 33)
+                        {
+                            w.append(t, (new StringBuilder("but ")).append(mainName).append(" refuses to be intimidated, and ").append(heShe()).append(" even takes the chance to land a quick attack with ").append(hisHer()).append(" ").append(weapon).append(".").toString());
+                        } else
+                        {
+                            w.append(t, (new StringBuilder("and while ")).append(mainName).append(" flees at first, ").append(heShe()).append(" fights ferociously once cornered, rounding on ").append(c.getMainName()).append(" to ").toString());
+                            if(w.tickle().booleanValue())
+                                w.append(t, (new StringBuilder("desperately try to tickle ")).append(c.himHer()).append(".").toString());
+                            else
+                                w.append(t, (new StringBuilder("kick, punch, and bite ")).append(c.himHer()).append(".").toString());
+                        }
+                    }
+                } else
+                if(c.getInnocence() > 66)
+                {
+                    w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" launches an all-out attack at ").append(mainName).append(", ").toString());
+                    if(dignity > 66)
+                        w.append(t, (new StringBuilder("but ")).append(mainName).append(" is able to pretend that it didn't hurt at all, walking calmly up to ").append(reference(c)).append(" to grab ").append(c.himHer()).append(" by the throat").toString());
+                    else
+                    if(dignity > 33)
+                        w.append(t, (new StringBuilder("but it isn't enough to stop ")).append(himHer()).append(" from charging forward to grab ").append(c.getMainName()).toString());
+                    else
+                        w.append(t, (new StringBuilder("but it just annoys ")).append(mainName).append(", who grits ").append(hisHer()).append(" teeth and rushes forward to tackle ").append(c.himHer()).toString());
+                    if(w.tickle().booleanValue())
+                        w.append(t, (new StringBuilder(" and start mercilessly tickling ")).append(c.himHer()).append(".").toString());
+                    else
+                        w.append(t, (new StringBuilder(" and begin crushing the life out of ")).append(c.himHer()).append(".").toString());
+                } else
+                if(c.getInnocence() > 33)
+                {
+                    if(confidence > 66)
+                        w.append(t, (new StringBuilder("Intimidated by ")).append(mainName).append("'s clear confidence").toString());
+                    else
+                    if(confidence > 33)
+                        w.append(t, (new StringBuilder("Wanting ")).append(c.hisHer()).append(" team's help for this fight").toString());
+                    else
+                        w.append(t, (new StringBuilder("Hoping to take advantage of ")).append(mainName).append("'s hesitation").toString());
+                    w.append(t, (new StringBuilder(", ")).append(c.getMainName()).append(" turns to flee, but ").append(mainName).append(" is fast enough to immediately catch up and slam ").append(c.himHer()).append(" down into the concrete so hard that it leaves a crater.").toString());
+                } else
+                {
+                    if(hostility > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" fires an overwhelming blast of energy at a building with some civilians still inside").toString());
+                    else
+                    if(hostility > 33)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" fires indiscriminate blasts of energy at the surrounding buildings").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" fires a few blasts of energy at nearby abandoned buildings").toString());
+                    w.append(t, (new StringBuilder(" in order to block ")).append(c.getMainName()).append("'s only possible escape routes.  ").append(c.getMainName()).append(" tries to think of another way out, but before ").append(c.heShe()).append(" can do anything, ").append(mainName).append(" corners ").append(c.himHer()).append(" ").toString());
+                    if(w.tickle().booleanValue())
+                        w.append(t, (new StringBuilder("and begins to tickle ")).append(c.himHer()).append(" with overwhelming strength.").toString());
+                    else
+                        w.append(t, (new StringBuilder("and begins to ruthlessly pummel ")).append(c.hisHer()).append(" body.").toString());
+                }
+            } else
+            if(styleDamage[2] > 0)
+            {
+                if(deviancy > 66)
+                {
+                    if(c.getConfidence() > 66)
+                    {
+                        w.append(t, (new StringBuilder("Overwhelmed by the sensation of ")).append(mainName).append("'s hands all over ").append(c.hisHer()).append(" body, ").append(c.getMainName()).append(" finally manages to deliver a mighty wallop to ").append(c.reference(this)).append("'s head.  ").append(c.getMainName()).append(" manages to escape and get some distance, ").toString());
+                        if(hostility > 66)
+                            w.append(t, (new StringBuilder("but the murderous sadism in ")).append(mainName).append("'s eyes as ").append(heShe()).append(" recovers promises even worse torment to come.").toString());
+                        else
+                        if(hostility > 33)
+                            w.append(t, (new StringBuilder("but ")).append(mainName).append(" wastes no time in immediately starting to pursue ").append(c.himHer()).append(" again.").toString());
+                        else
+                            w.append(t, (new StringBuilder("and ")).append(mainName).append(" even briefly looks apologetic as ").append(heShe()).append(" recovers, but then ").append(hisHer()).append(" expression again melts into mindless lust.").toString());
+                    } else
+                    if(c.getConfidence() > 33)
+                    {
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" ").toString());
+                        if(c.gender.equals("male"))
+                            w.append(t, (new StringBuilder("runs ")).append(hisHer()).append(" hands all over ").append(c.getMainName()).append("'s chest").toString());
+                        else
+                            w.append(t, (new StringBuilder("eagerly gropes ")).append(c.getMainName()).append("'s breasts").toString());
+                        w.append(t, (new StringBuilder(", pushing ")).append(c.himHer()).append(" down onto ").append(c.hisHer()).append(" knees in order to molest ").append(c.himHer()).append(" from a better angle, but ").toString());
+                        if(innocence > 66)
+                            w.append(t, (new StringBuilder("this proves too greedy, and ")).append(reference(c)).append(" manages to use the opportunity to escape.").toString());
+                        else
+                        if(innocence > 33)
+                            w.append(t, (new StringBuilder("while it's more satisfying to hold ")).append(reference(c)).append(" like this, it's also more difficult, and ").append(c.getMainName()).append(" manages to buck ").append(himHer()).append(" off and clamber to ").append(hisHer()).append(" feet.").toString());
+                        else
+                            w.append(t, (new StringBuilder(String.valueOf(heShe()))).append(" gets distracted by the view of ").append(reference(c)).append("'s ass and allows ").append(c.getMainName()).append(" to crawl away and escape.").toString());
+                    } else
+                    {
+                        if(innocence > 66)
+                            w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append("'s squirming attempts to escape ").append(mainName).append(" are inadvertently causing ").append(c.himHer()).append(" to grind against ").append(mainName).append(" in turn, and ").append(c.heShe()).append(" doesn't even realize that ").toString());
+                        else
+                        if(innocence > 33)
+                            w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" notices that ").append(mainName).append("'s groping grows weaker when ").append(c.heShe()).append(" knees the Forsaken in a particular spot, but ").append(c.heShe()).append(" only belatedly realizes that ").toString());
+                        else
+                            w.append(t, (new StringBuilder("The grinding of ")).append(mainName).append("'s body against ").append(c.getMainName()).append("'s grows more and more frantic, and ").append(c.getMainName()).append(" realizes that ").append(c.heShe()).append(" will have an easy opportunity to escape while ").toString());
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is cumming.  ").append(c.getMainName()).append(" blushes deeply and scrambles away, and both of the combatants take a moment to catch their breath.").toString());
+                    }
+                } else
+                if(deviancy > 33)
+                {
+                    if(c.getConfidence() > 66)
+                    {
+                        w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" starts lashing out with superhuman strength, and ").append(mainName).append(" stops molesting ").append(c.himHer()).append(" and backs off").toString());
+                        if(disgrace > 66)
+                            w.append(t, (new StringBuilder(", knowing that taking a direct hit could end ")).append(hisHer()).append(" playtime with ").append(reference(c)).append(" sooner than ").append(heShe()).append("'d prefer.").toString());
+                        else
+                        if(disgrace > 33)
+                            w.append(t, " reluctantly.");
+                        else
+                            w.append(t, (new StringBuilder(", happily letting ")).append(c.getMainName()).append(" exhaust ").append(c.himHer()).append("self.").toString());
+                    } else
+                    if(c.getConfidence() > 33)
+                    {
+                        w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" finally manages to disentangle ").append(c.himHer()).append("self from ").append(mainName).append("'s lustful hands and shove ").append(c.reference(this)).append(" away").toString());
+                        if(disgrace > 66)
+                            w.append(t, (new StringBuilder(", and while ")).append(mainName).append(" is far from satisfied, ").append(heShe()).append(" knows ").append(heShe()).append(" needs to pace ").append(himHer()).append("self if ").append(heShe()).append(" wants to continue enjoying ").append(hisHer()).append(" stronger opponent's body.").toString());
+                        else
+                        if(disgrace > 33)
+                            w.append(t, (new StringBuilder(".  ")).append(mainName).append(" immediately tries to grab ").append(c.himHer()).append(" again, but ").append(c.getMainName()).append(" is just barely able to avoid ").append(mainName).append("'s eager groping.").toString());
+                        else
+                            w.append(t, (new StringBuilder(", but ")).append(mainName).append(" is only allowing ").append(c.himHer()).append(" to think ").append(c.heShe()).append(" has any control over the situation in order to crush ").append(c.hisHer()).append(" spirit later on.").toString());
+                    } else
+                    {
+                        w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" sighs with relief as ").append(c.heShe()).append(" feels ").append(mainName).append("'s molesting hands retreat, but then ").append(c.heShe()).append(" gasps and desperately scrambles away when ").toString());
+                        if(innocence > 66)
+                            w.append(t, (new StringBuilder(String.valueOf(c.heShe()))).append(" hears ").append(c.reference(this)).append(" trying to persuade a nearby Demon to abandon the fight and help rape ").append(c.himHer()).append(".").toString());
+                        else
+                        if(innocence > 33)
+                            w.append(t, (new StringBuilder(String.valueOf(c.heShe()))).append(" sees ").append(c.reference(this)).append(" approaching again with the bag of sex toys ").append(heShe()).append(" had stashed nearby.").toString());
+                        else
+                            w.append(t, (new StringBuilder(String.valueOf(c.reference(this)))).append(" starts trying to tie ").append(c.himHer()).append(" up with heavy-duty restraints.").toString());
+                    }
+                } else
+                if(c.getDignity() > 66)
+                {
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" steadily strokes ").append(c.getMainName()).append("'s ").append(organ).append(", but after not seeming to get much of a reaction, ").append(heShe()).append(" releases ").append(reference(c)).append(" and takes a few steps back in order to switch to another tactic.  ").toString());
+                    if(disgrace > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" sets ").append(c.hisHer()).append(" jaw and resumes a fighting stance.").toString());
+                    else
+                    if(disgrace > 33)
+                        w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" takes a breath to compose ").append(c.himHer()).append("self, then prepares to fight again.").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" is privately relieved that ").append(c.heShe()).append(" can pretend not to be feeling any pleasure.").toString());
+                } else
+                if(c.getDignity() > 33)
+                {
+                    w.append(t, (new StringBuilder("Made desperate by the quickly mounting pleasure of ")).append(mainName).append("'s hand on ").append(c.hisHer()).append(" ").append(organ).append(", ").append(c.getMainName()).append(" swings a blind punch at ").append(c.reference(this)).append(", but ").toString());
+                    if(innocence > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" chooses that moment to grow bored with the stimulation and start backing away, preferring to have a more conventional fight.").toString());
+                    else
+                    if(innocence > 33)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" sees the clumsy attack and shoves ").append(c.getMainName()).append(" away.").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" skillfully dodges and opens up some distance between the two of them, satisfied with the disruption to ").append(c.getMainName()).append("'s mental state.").toString());
+                } else
+                {
+                    w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" gasps and shudders, unwillingly humping ").append(c.hisHer()).append(" ").append(organ).append(" against ").append(mainName).append("'s hand").toString());
+                    if(innocence > 66)
+                        w.append(t, (new StringBuilder(", causing ")).append(mainName).append(" to reflexively let go and back off, wiping ").append(hisHer()).append(" palm on ").append(hisHer()).append(" clothes.").toString());
+                    else
+                    if(innocence > 33)
+                        w.append(t, (new StringBuilder(", but ")).append(mainName).append(" refuses to go any further, uncomfortable with what ").append(heShe()).append("'s doing, and backs away to fighting distance.").toString());
+                    else
+                        w.append(t, (new StringBuilder(", and ")).append(mainName).append(" backs off and readies ").append(hisHer()).append(" ").append(weapon).append(" with a slight expression of disgust on ").append(hisHer()).append(" face.").toString());
+                }
+            } else
+            if(disgrace > 66)
+            {
+                if(c.getConfidence() > 66)
+                {
+                    w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" chases after ").append(mainName).append(", launching attack after attack with ").append(c.hisHer()).append(" ").append(c.weapon).append(", but ").toString());
+                    if(innocence > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" keeps just barely managing to scramble away.").toString());
+                    else
+                    if(innocence > 33)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" flees like ").append(hisHer()).append(" life depends on it, hoping to tire ").append(reference(c)).append(" out.").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" knows ").append(heShe()).append(" stands no chance in a direct fight, so ").append(heShe()).append(" makes sure that ").append(reference(c)).append(" doesn't get any opportunity to actually catch ").append(himHer()).append(".").toString());
+                } else
+                if(c.getConfidence() > 33)
+                {
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" fights defensively, not even using ").append(hisHer()).append(" ").append(weapon).toString());
+                    if(hostility > 66)
+                        w.append(t, (new StringBuilder(", laughing and cruelly taunting ")).append(c.getMainName()).append(" in lieu of actually trying to attack.").toString());
+                    else
+                    if(hostility > 33)
+                        w.append(t, (new StringBuilder(", smirking with satisfaction at being able to hold ")).append(hisHer()).append(" ground against the more powerful ").append(c.getMainName()).append(".").toString());
+                    else
+                        w.append(t, (new StringBuilder(", knowing that ")).append(hisHer()).append(" powers have become weak enough that ").append(heShe()).append(" wouldn't even be able to leave a scratch on ").append(c.getMainName()).append(".").toString());
+                } else
+                {
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" and ").append(c.getMainName()).append(" have a tense standoff.  ").append(c.getMainName()).append(" lacks the confidence to actively attack one of the Forsaken, while ").append(mainName).toString());
+                    if(morality > 66)
+                        w.append(t, (new StringBuilder("'s objectives don't involve actually injuring ")).append(c.getMainName()).append(".").toString());
+                    else
+                    if(morality > 33)
+                        w.append(t, " has no intention of engaging in a straightforward fight in the first place.");
+                    else
+                        w.append(t, " is content to take a breather.");
+                }
+            } else
+            if(disgrace > 33)
+            {
+                if(c.getMorality() > 66)
+                {
+                    if(hostility > 66)
+                        w.append(t, "Eager for any excuse to cause some bloodshed, ");
+                    else
+                    if(hostility > 33)
+                        w.append(t, "Threatening to put innocents in harm's way, ");
+                    else
+                        w.append(t, (new StringBuilder("Even though ")).append(heShe()).append(" has no intention of actually targeting innocents, ").toString());
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" starts to advance toward the nearest group of civilians, then easily dodges the predictable attacks ").append(c.getMainName()).append(" is forced to throw ").append(hisHer()).append(" way in order to stop ").append(himHer()).append(".").toString());
+                } else
+                if(c.getMorality() > 33)
+                {
+                    if(confidence > 66)
+                        w.append(t, (new StringBuilder("Preferring to minimize the risk of taking a hit from the powerful ")).append(c.getMainName()).append(", ").append(mainName).append(" focuses on ").toString());
+                    else
+                    if(confidence > 33)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" and ").append(c.getMainName()).append(" are evenly-matched in power, but their fight still can't come to a decisive conclusion due to ").append(mainName).append(" ").toString());
+                    else
+                        w.append(t, (new StringBuilder("Even though ")).append(mainName).append(" feels like ").append(heShe()).append(" would have a decent chance in a straight fight against ").append(c.getMainName()).append(", ").append(heShe()).append(" still prefers ").toString());
+                    w.append(t, "fighting completely on the defensive, barely even trying to attack at all.");
+                } else
+                {
+                    if(innocence > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s careless fighting style leaves plenty of openings for the bloodthirsty ").append(c.getMainName()).append(" to counterattack, but ").append(heShe()).append("'s still able to ").toString());
+                    else
+                    if(innocence > 33)
+                        w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" is eager to strike down ").append(mainName).append(", but when ").append(c.heShe()).append(" tries to press the attack, ").append(mainName).append(" manages to ").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" deliberately leaves an opening for ").append(c.getMainName()).append(" to attack ").append(himHer()).append(", and when the predicted attack comes, ").append(heShe()).append("'s easily able to ").toString());
+                    w.append(t, (new StringBuilder("avoid taking any serious hits from ")).append(c.hisHer()).append(" ").append(c.weapon).append(".").toString());
+                }
+            } else
+            if(c.getInnocence() > 66)
+            {
+                w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" cries out with futile effort as ").append(c.heShe()).append(" launches constant desperate attacks with ").append(c.hisHer()).append(" ").append(weapon).toString());
+                if(morality > 66)
+                    w.append(t, (new StringBuilder(", but ")).append(mainName).append(" just continues to stare back at ").append(c.himHer()).append(" impassively.").toString());
+                else
+                if(morality > 33)
+                    w.append(t, (new StringBuilder(", but ")).append(mainName).append(" is completely unharmed.").toString());
+                else
+                    w.append(t, (new StringBuilder(", but ")).append(c.heShe()).append(" only succeeds in annoying ").append(mainName).append(".").toString());
+            } else
+            if(c.getInnocence() > 33)
+            {
+                if(confidence > 66)
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" smirks with self-satisfaction as ").append(heShe()).append(" weathers ").append(c.getMainName()).append("'s attacks, and ").toString());
+                else
+                if(confidence > 33)
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" doesn't show any sign of being damaged by ").append(c.getMainName()).append("'s attacks, and ").toString());
+                else
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" flinches with pain under ").append(c.getMainName()).append("'s barrage of attacks, but ").append(heShe()).append(" doesn't stop advancing forward, and ").toString());
+                w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" has no choice but to retreat, backing away nervously as ").append(c.heShe()).append("'s forced into a corner.").toString());
+            } else
+            {
+                w.append(t, (new StringBuilder("After a few attacks, ")).append(c.getMainName()).append(" recognizes the futility of trying to fight ").append(mainName).toString());
+                if(hostility > 66)
+                    w.append(t, (new StringBuilder(", and ")).append(c.hisHer()).append(" blood runs cold as ").append(c.heShe()).append(" realizes that ").append(c.heShe()).append("'s completely at ").append(c.reference(this)).append("'s mercy.").toString());
+                else
+                if(hostility > 33)
+                    w.append(t, (new StringBuilder(", and ")).append(c.heShe()).append(" can only back off warily, alarmed at the palpable hatred pouring off ").append(c.reference(this)).append(".").toString());
+                else
+                    w.append(t, (new StringBuilder(", but ")).append(c.heShe()).append("'s grateful for the fact that ").append(c.reference(this)).append(" doesn't seem to intend to hurt ").append(c.himHer()).append(".").toString());
+            }
+        } else
+        if(c.captureProgression % 6 == 2)
+        {
+            if(styleDamage[2] > 0)
+            {
+                if(styleDamage[3] > 0)
+                {
+                    if(disgrace > 66)
+                    {
+                        if(c.getDignity() > 66)
+                        {
+                            if(innocence > 66)
+                                w.append(t, (new StringBuilder("Even ")).append(mainName).append(" has noticed how much ").append(c.getMainName()).append(" seems to care about ").append(c.hisHer()).append(" image, and ").append(heShe()).append(" ").toString());
+                            else
+                            if(innocence > 33)
+                                w.append(t, (new StringBuilder("Taking advantage of the way that ")).append(c.getMainName()).append(" reflexively tries to look strong in front of the public, ").append(mainName).append(" ").toString());
+                            else
+                                w.append(t, (new StringBuilder("Using ")).append(hisHer()).append(" cunning to defeat ").append(hisHer()).append(" stronger opponent, ").append(mainName).append(" exploits ").append(c.getMainName()).append("'s obsession with ").append(c.hisHer()).append(" own public image and ").toString());
+                            w.append(t, (new StringBuilder("grabs ")).append(reference(c)).append("'s ").append(bottomDesc).append(", distracting ").append(c.himHer()).append(" enough that ").append(mainName).append(" can ").toString());
+                            if(w.tickle().booleanValue())
+                                w.append(t, (new StringBuilder("tickle ")).append(c.hisHer()).append(" belly.").toString());
+                            else
+                                w.append(t, "get a couple of good punches in.");
+                        } else
+                        if(c.getDignity() > 33)
+                        {
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is on the losing end of ").append(hisHer()).append(" grapple with ").append(c.getMainName()).append(", but ").toString());
+                            if(innocence > 66)
+                                w.append(t, (new StringBuilder(String.valueOf(hisHer()))).append(" desperate squirming still manages to tug ").append(reference(c)).append("'s ").append(bottomDesc).append(" further and further to the side").toString());
+                            else
+                            if(innocence > 33)
+                                w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append("'s victory comes at the expense of ").append(c.hisHer()).append(" ").append(bottomDesc).append(" getting torn further and further.").toString());
+                            else
+                                w.append(t, (new StringBuilder(String.valueOf(heShe()))).append(" still manages to achieve ").append(hisHer()).append(" secondary objective of tearing at ").append(reference(c)).append("'s ").append(bottomDesc).toString());
+                        } else
+                        {
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" and ").append(c.getMainName()).append(" roll around on the ground together, wrestling in a very undignified manner.  ").append(c.getMainName()).append("'s clothes are too fragile to handle this kind of fight, ").toString());
+                            if(deviancy > 66)
+                                w.append(t, (new StringBuilder("and the distraction of seeing more and more of ")).append(reference(c)).append("'s skin slowly exposed makes ").append(mainName).append(" perform even more poorly.").toString());
+                            else
+                            if(deviancy > 33)
+                                w.append(t, (new StringBuilder("and ")).append(c.reference(this)).append(" enjoys the view.").toString());
+                            else
+                                w.append(t, (new StringBuilder("but when ")).append(c.reference(this)).append(" points it out, ").append(mainName).append(" just makes an apathetic noise.").toString());
+                        }
+                    } else
+                    if(disgrace > 33)
+                    {
+                        if(c.getConfidence() > 66)
+                        {
+                            w.append(t, (new StringBuilder("The flurry of blows exchanged between ")).append(mainName).append(" and ").append(c.getMainName()).append(" is so intense that it sends scraps of their clothes flying").toString());
+                            if(deviancy > 66)
+                                w.append(t, (new StringBuilder(" - and ")).append(mainName).append("'s increasing distraction as ").append(heShe()).append(" sees more and more of ").append(reference(c)).append("'s bare skin eventually causes ").append(himHer()).append(" to take a punch right in the jaw.").toString());
+                            else
+                            if(deviancy > 33)
+                                w.append(t, (new StringBuilder(", much to ")).append(mainName).append("'s amusement.").toString());
+                            else
+                                w.append(t, ", but both combatants are so caught up in the rush of combat that they don't even notice.");
+                        } else
+                        if(c.getConfidence() > 33)
+                        {
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" and ").append(c.getMainName()).append(" are evenly matched in their fight").toString());
+                            if(morality > 66)
+                                w.append(t, (new StringBuilder(", but ")).append(mainName).append(" has learned the hard way that fairness is meaningless").toString());
+                            else
+                            if(morality > 33)
+                                w.append(t, (new StringBuilder(", but ")).append(mainName).append(" wants to win, ").toString());
+                            else
+                                w.append(t, (new StringBuilder(", but ")).append(mainName).append(" loves underhanded tactics, ").toString());
+                            w.append(t, (new StringBuilder("so ")).append(heShe()).append(" starts using ").append(hisHer()).append(" ").append(weapon).append(" to directly attack ").append(reference(c)).append("'s ").append(bottomDesc).append(".").toString());
+                        } else
+                        {
+                            w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" tries to pull away from ").append(mainName).append("'s ").toString());
+                            if(w.tickle().booleanValue())
+                                w.append(t, "tickling, ");
+                            else
+                                w.append(t, "brutal pummeling, ");
+                            if(innocence > 66)
+                                w.append(t, (new StringBuilder("and while ")).append(mainName).append("'s decision to hold ").append(c.himHer()).append(" by ").append(c.hisHer()).append(" ").append(bottomDesc).append(" is a poor strategy, it does mean that ").append(reference(c)).append(" ends up practically tearing ").append(c.hisHer()).append(" own clothes off in ").append(c.hisHer()).append(" haste to escape.").toString());
+                            else
+                            if(innocence > 33)
+                                w.append(t, (new StringBuilder("but only succeeds in tearing apart ")).append(c.hisHer()).append(" own clothes as ").append(c.reference(this)).append(" clings to every dangling scrap in order to keep ").append(c.himHer()).append(" there.").toString());
+                            else
+                                w.append(t, (new StringBuilder("but ")).append(mainName).append(" grabs ").append(c.himHer()).append(" by the ").append(bottomDesc).append(", using ").append(reference(c)).append("'s struggling to help tear through the durable material.").toString());
+                        }
+                    } else
+                    if(c.getInnocence() > 66)
+                    {
+                        if(confidence > 66)
+                            w.append(t, (new StringBuilder("Completely helpless with ")).append(mainName).append(" brutally holding ").append(c.himHer()).append(" down, ").toString());
+                        else
+                        if(confidence > 33)
+                            w.append(t, (new StringBuilder("Held in ")).append(mainName).append("'s iron grip, ").toString());
+                        else
+                            w.append(t, (new StringBuilder("Completely trapped by ")).append(mainName).append("'s surprisingly strong grip, ").toString());
+                        w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" panics and thrashes wildly, ").toString());
+                        if(w.tickle().booleanValue())
+                            w.append(t, "hurting");
+                        else
+                            w.append(t, "exhausting");
+                        w.append(t, (new StringBuilder(" ")).append(c.himHer()).append("self and tearing ").append(c.hisHer()).append(" own clothes apart with ").append(c.hisHer()).append(" frantic motions.").toString());
+                    } else
+                    if(c.getInnocence() > 33)
+                    {
+                        if(w.tickle().booleanValue())
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" holds ").append(c.getMainName()).append(" down and deliberately tears apart ").append(c.hisHer()).append(" clothes in order to expose ").append(c.hisHer()).append(" sensitive spots for a brutal tickling").toString());
+                        else
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" holds ").append(c.getMainName()).append(" down and repeatedly punches ").append(c.himHer()).append(" so hard that it blasts ").append(c.hisHer()).append(" clothes off ").append(c.hisHer()).append(" body").toString());
+                        if(hostility > 66)
+                            w.append(t, ", grinning with sadistic glee.");
+                        else
+                        if(hostility > 33)
+                            w.append(t, ", completely without mercy.");
+                        else
+                            w.append(t, (new StringBuilder(", though ")).append(heShe()).append(" doesn't seem to actually enjoy tormenting ").append(reference(c)).append(".").toString());
+                    } else
+                    {
+                        w.append(t, (new StringBuilder("In order to escape ")).append(mainName).append("'s ").toString());
+                        if(w.tickle().booleanValue())
+                            w.append(t, "tickling");
+                        else
+                            w.append(t, "pummeling");
+                        w.append(t, (new StringBuilder(", ")).append(c.getMainName()).append(" ").toString());
+                        if(deviancy > 66)
+                            w.append(t, (new StringBuilder("abruptly kisses ")).append(c.reference(this)).append(" on the lips, and then when ").append(mainName).append(" starts to instinctively respond, ").append(c.getMainName()).append(" ").toString());
+                        else
+                        if(deviancy > 33)
+                            w.append(t, (new StringBuilder("starts to spread ")).append(c.hisHer()).append(" legs, and when ").append(c.reference(this)).append(" lustfully looks downward, ").append(c.getMainName()).append(" ").toString());
+                        else
+                            w.append(t, (new StringBuilder("waits for ")).append(c.reference(this)).append(" to let ").append(hisHer()).append(" guard down, then ").toString());
+                        w.append(t, (new StringBuilder("starts fighting with all ")).append(c.hisHer()).append(" might.  ").append(c.HeShe()).append("'s close to escaping, although the frantic struggle is enough to tear ").append(c.hisHer()).append(" clothes apart.").toString());
+                    }
+                } else
+                if(disgrace > 66)
+                {
+                    if(c.getConfidence() > 66)
+                    {
+                        if(morality > 66)
+                            w.append(t, (new StringBuilder("No matter how determined ")).append(heShe()).append(" is, ").toString());
+                        else
+                        if(morality > 33)
+                            w.append(t, (new StringBuilder("With ")).append(hisHer()).append(" power so much weaker than it used to be, ").toString());
+                        else
+                            w.append(t, (new StringBuilder("No matter what dirty tricks ")).append(heShe()).append(" tries to pull, ").toString());
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" can't keep the much stronger ").append(c.getMainName()).append(" pinned for long, and ").append(heShe()).append("'s sent flying with a powerful punch.  It's all ").append(mainName).append(" can do to struggle to ").append(hisHer()).append(" feet and face down ").append(reference(c)).append(" again.").toString());
+                    } else
+                    if(c.getConfidence() > 33)
+                    {
+                        w.append(t, (new StringBuilder("The constant grappling is taking its toll on ")).append(mainName).append("'s energy reserves, and ").toString());
+                        if(confidence > 66)
+                            w.append(t, (new StringBuilder("as much as ")).append(heShe()).append(" wants to deny it").toString());
+                        else
+                        if(confidence > 33)
+                            w.append(t, "with no other option available");
+                        else
+                            w.append(t, "out of fear of being truly injured or even killed");
+                        w.append(t, (new StringBuilder(", ")).append(heShe()).append(" retreats, giving ").append(c.getMainName()).append(" some breathing room.").toString());
+                    } else
+                    {
+                        if(innocence > 66)
+                            w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" sees a chance to get some distance between ").append(c.himHer()).append("self and ").append(c.hisHer()).append(" opponent, and with a carefully-placed kick, ").append(heShe()).append(" ").toString());
+                        else
+                        if(innocence > 33)
+                            w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" finally summons the willpower to fight back in earnest, and ").append(c.heShe()).append(" ").toString());
+                        else
+                            w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append("'s fear of further abuse finally gives ").append(c.himHer()).append(" the strength to overcome ").append(mainName).append("'s combat techniques, and ").append(c.heShe()).append(" ").toString());
+                        w.append(t, (new StringBuilder("pushes ")).append(mainName).append(" away.  The impact is surprisingly strong, and ").append(mainName).append(" takes long enough to recover that ").append(reference(c)).append(" is able to earn a significant respite from ").append(hisHer()).append(" ").toString());
+                        if(w.tickle().booleanValue())
+                            w.append(t, "tickling.");
+                        else
+                            w.append(t, "pummeling.");
+                    }
+                } else
+                if(disgrace > 33)
+                {
+                    if(c.getInnocence() > 66)
+                    {
+                        w.append(t, (new StringBuilder("Between ")).append(c.getMainName()).append("'s singlemindedness and ").toString());
+                        if(deviancy > 66)
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s overwhelming lust for ").append(reference(c)).toString());
+                        else
+                        if(deviancy > 33)
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s anger").toString());
+                        else
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s focused determination").toString());
+                        w.append(t, ", the two of them ");
+                        if(w.tickle().booleanValue())
+                            w.append(t, "tickle each other");
+                        else
+                            w.append(t, "exchange punches");
+                        w.append(t, " until they're both exhausted and can only stagger apart, catching their breath.");
+                    } else
+                    if(c.getInnocence() > 33)
+                    {
+                        if(confidence > 66)
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" presses the attack against ").append(c.getMainName()).append(", but backs off when it becomes clear that ").append(heShe()).append("'s not making any headway.  ").toString());
+                        else
+                        if(confidence > 33)
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" and ").append(c.getMainName()).append(" circle around each other, clashing several times as they try to find a hole in each other's defenses, but they can only come to a stalemate.  ").toString());
+                        else
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" falters, but although ").append(c.getMainName()).append(" tries to press the attack, ").append(c.heShe()).append(" isn't able to score any decisive hits.  ").toString());
+                        w.append(t, "There's a tense standoff as the two sides each wait for the other to attack again.");
+                    } else
+                    {
+                        if(innocence > 66)
+                            w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" knows that ").append(mainName).append("'s energy reserves will likely outlast ").append(c.hisHer()).append(" own, ").toString());
+                        else
+                        if(innocence > 33)
+                            w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" knows that it wouldn't be to ").append(c.hisHer()).append(" advantage to waste ").append(c.hisHer()).append(" energy trying to defeat ").append(mainName).append(", ").toString());
+                        else
+                            w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" knows that ").append(mainName).append(" is trying to bait ").append(c.himHer()).append(" into exhausting ").append(c.himHer()).append("self, ").toString());
+                        w.append(t, (new StringBuilder("so ")).append(c.heShe()).append(" backs off, seeing whether ").append(c.reference(this)).append(" will come to ").append(himHer()).append(".").toString());
+                    }
+                } else
+                if(c.getConfidence() > 66)
+                {
+                    w.append(t, (new StringBuilder("A powerful blast of energy knocks ")).append(c.getMainName()).append(" straight through several buildings.  ").toString());
+                    if(hostility > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" passes out for a fraction of a second, only to wake up to the screams of injured civilians and the silhouette of ").append(mainName).append(" slowly approaching ").append(c.himHer()).append(" through the flames.").toString());
+                    else
+                    if(hostility > 33)
+                        w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" ends up at the center of a large crater, ").append(mainName).append(" hovering up above and looking down on ").append(c.himHer()).append(".").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" was careful to aim ").append(c.himHer()).append(" at an area without any remaining civilians, but the devastation is still immense.").toString());
+                } else
+                if(c.getConfidence() > 33)
+                {
+                    w.append(t, (new StringBuilder("The tussle between ")).append(mainName).append(" and ").append(c.getMainName()).append(" was brief, but ").append(c.getMainName()).append(" is still left limping away, ").toString());
+                    if(w.tickle().booleanValue())
+                        w.append(t, (new StringBuilder("gasping for breath in the wake of ")).append(c.hisHer()).append(" tickling").toString());
+                    else
+                        w.append(t, "bleeding from several new wounds");
+                    if(hostility > 66)
+                        w.append(t, (new StringBuilder(" while ")).append(mainName).append(" gleefully follows, shouting promises of more suffering to come.").toString());
+                    else
+                    if(hostility > 33)
+                        w.append(t, (new StringBuilder(" while ")).append(mainName).append(" launches random blasts of energy until one of them destroys ").append(c.getMainName()).append("'s cover.").toString());
+                    else
+                        w.append(t, (new StringBuilder(" while ")).append(mainName).append(" grimly tracks ").append(c.himHer()).append(" down.").toString());
+                } else
+                {
+                    w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" lies motionless on the pavement, overwhelmed by ").append(mainName).append("'s superior power.  ").toString());
+                    if(hostility > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" licks ").append(hisHer()).append(" lips, savoring the building dread within ").append(reference(c)).append(".").toString());
+                    else
+                    if(hostility > 33)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" stands nearby and looks down on ").append(c.himHer()).append(", taking ").append(hisHer()).append(" time as ").append(heShe()).append(" decides what to do next.").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" sighs, clearly disappointed.").toString());
+                }
+            } else
+            if(styleDamage[3] > 0)
+            {
+                if(deviancy > 66)
+                {
+                    if(c.getDignity() > 66)
+                    {
+                        w.append(t, (new StringBuilder("Overwhelmed with lust, ")).append(mainName).append(" charges at ").append(c.getMainName()).append(" with ").append(hisHer()).append(" hands outstretched, ").toString());
+                        if(disgrace > 66)
+                            w.append(t, (new StringBuilder("and while ")).append(heShe()).append("'s too weak to threaten ").append(c.getMainName()).append(" directly, ").append(heShe()).append("'s more than capable of tearing off ").append(c.hisHer()).append(" clothes.").toString());
+                        else
+                        if(disgrace > 33)
+                            w.append(t, (new StringBuilder("but while ")).append(c.getMainName()).append(" is prepared to fend off a direct attack, ").append(c.heShe()).append(" isn't able to stop ").append(himHer()).append(" from grabbing ").append(c.hisHer()).append(" clothes and starting to tear them off.").toString());
+                        else
+                            w.append(t, (new StringBuilder("moving with such startling speed and strength that ")).append(c.getMainName()).append("'s clothes are being torn off almost before ").append(c.heShe()).append(" realizes it.").toString());
+                        w.append(t, (new StringBuilder("  ")).append(c.getMainName()).append(" is forced to grab ").append(c.reference(this)).append(" and try to wrestle ").append(himHer()).append(" down just to stop ").append(c.himHer()).append("self from being stripped naked.").toString());
+                    } else
+                    if(c.getDignity() > 33)
+                    {
+                        if(disgrace > 66)
+                            w.append(t, (new StringBuilder("Although ")).append(mainName).append(" is weaker than ").append(c.getMainName()).append(", ").toString());
+                        else
+                        if(disgrace > 33)
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" isn't significantly stronger than ").append(c.getMainName()).append(", but ").toString());
+                        else
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is already stronger than ").append(c.getMainName()).append(", and ").toString());
+                        w.append(t, (new StringBuilder("as ")).append(hisHer()).append(" hit-and-run attacks against ").append(reference(c)).append("'s clothes start to expose more and more skin, ").append(hisHer()).append(" lust drives ").append(himHer()).append(" to fight harder and harder, and ").append(heShe()).append(" eventually ends up pouncing on ").append(c.getMainName()).append(" and tackling ").append(c.himHer()).append(" to the ground.").toString());
+                    } else
+                    {
+                        if(disgrace > 66)
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" has slipped away to ambush ").append(c.getMainName()).append(" again, and ").append(c.getMainName()).append(" knows that it would be bad for ").append(c.himHer()).append(" to have to look over ").append(c.hisHer()).append(" shoulder for a possible ambush for the rest of the battle.  ").toString());
+                        else
+                        if(disgrace > 33)
+                            w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" wants to decisively beat ").append(mainName).append(", but ").append(mainName).append(" has been too focused on defending ").append(himHer()).append("self.  ").toString());
+                        else
+                            w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" reaches a good high ground position for seizing the advantage over the stronger ").append(mainName).append(", but ").append(mainName).append(" isn't foolish enough to attack ").append(c.himHer()).append(" there.  ").toString());
+                        w.append(t, (new StringBuilder("So, ")).append(c.heShe()).append(" decides to provoke ").append(c.reference(this)).append(" into attacking by acting like ").append(c.heShe()).append("'s pulling off ").append(c.hisHer()).append(" own ").append(bottomDesc).append(".  ").append(mainName).append(" is too blinded by lust to resist lunging forward to finish the job.").toString());
+                    }
+                } else
+                if(deviancy > 33)
+                {
+                    if(c.getDignity() > 66)
+                    {
+                        if(disgrace > 66)
+                            w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" isn't too worried about being hurt by ").append(mainName).append("'s weak ranged attacks").toString());
+                        else
+                        if(disgrace > 33)
+                            w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" is feeling pretty good about ").append(c.hisHer()).append(" performance as ").append(c.heShe()).append(" duels ").append(mainName).append(" at range").toString());
+                        else
+                            w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" keeps having close calls with ").append(mainName).append("'s powerful ranged attacks just barely missing ").append(c.himHer()).toString());
+                        w.append(t, (new StringBuilder(", blasts of energy flying back and forth across the rooftops.  But then ")).append(c.heShe()).append(" realizes that ").append(c.reference(this)).append(" is deliberately trying to blast off ").append(c.hisHer()).append(" clothes, and the only way to stop ").append(himHer()).append(" is to close the distance and try to bring ").append(himHer()).append(" down before the spectators notice that ").append(c.heShe()).append("'s being toyed with.").toString());
+                    } else
+                    if(c.getDignity() > 33)
+                    {
+                        if(innocence > 66)
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" subconsciously ends up letting ").append(hisHer()).append(" perversions get carried away").toString());
+                        else
+                        if(innocence > 33)
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" isn't interested in physically injuring ").append(hisHer()).append(" opponent").toString());
+                        else
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" knows that tarnishing ").append(hisHer()).append(" opponent's image will be more effective in the long term").toString());
+                        w.append(t, (new StringBuilder(", and ")).append(heShe()).append(" advances to point-blank range so that ").append(heShe()).append(" can precisely target ").append(c.getMainName()).append("'s clothes and blast them away.").toString());
+                    } else
+                    {
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" notices that ").append(c.getMainName()).append(" pays practically no mind at all to protecting ").append(c.hisHer()).append(" own clothes, and ").toString());
+                        if(obedience > 66)
+                            w.append(t, "in hopes of demoralizing all those who would resist the Demon Lord");
+                        else
+                        if(obedience > 33)
+                            w.append(t, (new StringBuilder("in accordance with ")).append(hisHer()).append(" orders").toString());
+                        else
+                            w.append(t, (new StringBuilder("in order to satisfy ")).append(hisHer()).append(" perversions").toString());
+                        w.append(t, (new StringBuilder(", ")).append(heShe()).append(" gets in close, grabs ").append(reference(c)).append(", and starts trying to tear off as much of ").append(c.hisHer()).append(" ").append(bottomDesc).append(" as possible before ").append(heShe()).append("'s stopped.").toString());
+                    }
+                } else
+                if(c.getConfidence() > 66)
+                {
+                    if(disgrace > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" tries to press the attack against ").append(c.getMainName()).append(", but even the strongest close-range hits from ").append(hisHer()).append(" ").append(weapon).append(" only ").toString());
+                    else
+                    if(disgrace > 33)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" and ").append(c.getMainName()).append(" clash more and more fiercely, and each blast of energy released between them ").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" charges at ").append(mainName).append(" and launches a point-blank attack with all ").append(c.hisHer()).append(" strength, but it doesn't even leave a scratch, and the energies released from the backblast ").toString());
+                    w.append(t, (new StringBuilder("tear ")).append(c.getMainName()).append("'s clothes apart.").toString());
+                } else
+                if(c.getConfidence() > 33)
+                {
+                    w.append(t, (new StringBuilder("The fighting so far has kicked up a cloud of smoke, and ")).append(mainName).append(" finds ").append(himHer()).append("self directly behind ").append(c.getMainName()).append(", in the perfect position for a sneak attack.  ").toString());
+                    if(hostility > 66)
+                        w.append(t, (new StringBuilder("Knowing that ")).append(c.heShe()).append("'ll suffer more if ").append(c.hisHer()).append(" public image is destroyed, ").toString());
+                    else
+                    if(hostility > 33)
+                        w.append(t, (new StringBuilder("More interested in humiliating ")).append(c.himHer()).append(" than in actually wounding ").append(c.himHer()).append(", ").toString());
+                    else
+                        w.append(t, (new StringBuilder("Wanting to hinder ")).append(c.himHer()).append(" without wounding ").append(c.himHer()).append(", ").toString());
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" starts tearing at ").append(reference(c)).append("'s clothes with ").append(hisHer()).append(" bare hands.").toString());
+                } else
+                {
+                    w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" falters and starts to flee, questioning whether ").append(c.heShe()).append(" can really fight one of the Forsaken.  ").toString());
+                    if(hostility > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" allows ").append(c.himHer()).append(" to think ").append(c.heShe()).append("'s escaped before abruptly dropping down from a rooftop, pinning ").append(c.himHer()).append(" to the ground and tearing at ").append(c.hisHer()).append(" clothes in hopes of adding to the humiliation.").toString());
+                    else
+                    if(hostility > 33)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" enjoys running ").append(c.himHer()).append(" down, chasing ").append(c.himHer()).append(" with blasts of energy which fry ").append(c.hisHer()).append(" clothes before finally tackling ").append(c.himHer()).append(" to the ground.").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" tries to provoke ").append(c.himHer()).append(" into fighting back by firing several warning blasts of energy at ").append(c.hisHer()).append(" clothes, then finally sighs and starts chasing ").append(c.himHer()).append(", eventually managing to grab ").append(c.himHer()).append(" by the wrist.").toString());
+                }
+            } else
+            if(hostility > 66)
+            {
+                if(c.getConfidence() > 66)
+                {
+                    if(obedience > 66)
+                        w.append(t, (new StringBuilder("Furious over ")).append(c.getMainName()).append("'s continued defiance against the Demon Lord, ").toString());
+                    else
+                    if(obedience > 33)
+                        w.append(t, "Full of directionless bloodlust, ");
+                    else
+                        w.append(t, (new StringBuilder("Annoyed about the fact that ")).append(c.getMainName()).append(" is still standing up against ").append(himHer()).append(", ").toString());
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" shouts insults at ").append(reference(c)).append(" from afar.  ").append(HeShe()).append(" can't think about anything other than venting ").append(hisHer()).append(" anger.").toString());
+                } else
+                if(c.getConfidence() > 33)
+                {
+                    if(disgrace > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" keeps getting beaten back every time ").append(heShe()).append(" tries to press the attack against ").append(c.getMainName()).append(", so ").append(heShe()).append(" contents ").append(himHer()).append("self by ").toString());
+                    else
+                    if(disgrace > 33)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" stares ").append(c.getMainName()).append(" down across the rooftops, ").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" releases ").append(hisHer()).append(" rage on ").append(hisHer()).append(" surroundings, smashing buildings and parked cars while ").toString());
+                    w.append(t, (new StringBuilder("screaming barely-coherent threats as ")).append(heShe()).append(" pumps ").append(himHer()).append("self up for more fighting.").toString());
+                } else
+                {
+                    w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" backs away warily from ").append(mainName).append(", who stalks after ").append(c.himHer()).append(" and ").toString());
+                    if(deviancy > 66)
+                        w.append(t, (new StringBuilder("gibbers madly about all the sexual things ")).append(heShe()).append(" wants to do with ").append(reference(c)).append(".").toString());
+                    else
+                    if(deviancy > 33)
+                        w.append(t, (new StringBuilder("licks ")).append(hisHer()).append(" lips as ").append(heShe()).append(" fantasizes about making ").append(reference(c)).append(" suffer.").toString());
+                    else
+                        w.append(t, (new StringBuilder("grimly promises to kill ")).append(c.himHer()).append(" along with everyone ").append(c.heShe()).append(" cares about.").toString());
+                }
+            } else
+            if(hostility > 33)
+            {
+                if(c.getInnocence() > 66)
+                {
+                    w.append(t, (new StringBuilder("As ")).append(mainName).append(" and ").append(c.getMainName()).append(" circle each other and look for an opening, ").toString());
+                    if(innocence > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" hurls childish insults at ").append(reference(c)).append(", who is quickly goaded into responding in kind.").toString());
+                    else
+                    if(innocence > 33)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" verbally abuses ").append(reference(c)).append(", trying to unnerve ").append(c.himHer()).append(" while also satisfying ").append(hisHer()).append(" own sadism.").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" whispers vicious, cruel insults selected to stab into ").append(reference(c)).append("'s impressionable mind.").toString());
+                } else
+                if(c.getInnocence() > 33)
+                {
+                    if(disgrace > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" knows that ").append(heShe()).append(" will have a hard time against ").append(c.getMainName()).append(" in direct combat, so ").append(heShe()).append(" ").toString());
+                    else
+                    if(disgrace > 33)
+                        w.append(t, (new StringBuilder("Daring ")).append(c.getMainName()).append(" to approach and put ").append(c.himHer()).append("self at a disadvantage, ").append(mainName).append(" ").toString());
+                    else
+                        w.append(t, (new StringBuilder("Wanting to emphasize ")).append(c.getMainName()).append("'s weakness and inability to go on the offensive, ").append(mainName).append(" ").toString());
+                    w.append(t, (new StringBuilder("taunts ")).append(reference(c)).append(" from a distance.").toString());
+                } else
+                {
+                    w.append(t, (new StringBuilder("During a pause in the combat, ")).append(c.getMainName()).append(" tries to get ").append(mainName).append(" to explain more about why ").append(heShe()).append("'s fighting, but ").toString());
+                    if(obedience > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(c.heShe()))).append("'s disgusted to hear ").append(c.reference(this)).append(" reverently praising the Demon Lord.").toString());
+                    else
+                    if(obedience > 33)
+                        w.append(t, (new StringBuilder(String.valueOf(c.heShe()))).append("'s annoyed by ").append(c.reference(this)).append("'s insistence that ").append(heShe()).append(" has no choice but to follow the Demon Lord's orders.").toString());
+                    else
+                        w.append(t, (new StringBuilder("it quickly becomes clear that ")).append(c.reference(this)).append(" is just looking for an excuse to satisfy ").append(hisHer()).append(" sadism.").toString());
+                }
+            } else
+            if(c.getMorality() > 66)
+            {
+                w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" calls out after ").append(mainName).append(", trying to convince ").append(himHer()).append(" to stop fighting for the Demons").toString());
+                if(obedience > 66)
+                    w.append(t, (new StringBuilder(", but ")).append(mainName).append("'s zealous reply leaves no doubt as to ").append(hisHer()).append(" loyalty.").toString());
+                else
+                if(obedience > 33)
+                    w.append(t, (new StringBuilder(".  It's enough to make ")).append(mainName).append(" hesitate, but ").append(heShe()).append(" still shakes ").append(hisHer()).append(" head.").toString());
+                else
+                    w.append(t, (new StringBuilder(", but ")).append(mainName).append(" can only reply with a sad, slightly twisted smile.").toString());
+            } else
+            if(c.getMorality() > 33)
+            {
+                if(disgrace > 66)
+                    w.append(t, (new StringBuilder("As ")).append(mainName).append(" flees ").append(c.getMainName()).append(", ").append(heShe()).append(" turns to look over ").append(hisHer()).append(" shoulder and ").toString());
+                else
+                if(disgrace > 33)
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" and ").append(c.getMainName()).append(", both exhausted from their maneuvering, stare each other down.  ").append(mainName).append(" ").toString());
+                else
+                    w.append(t, (new StringBuilder("A pressure wave shoots out from ")).append(mainName).append(", stunning ").append(c.getMainName()).append(" and stopping ").append(c.himHer()).append(" in ").append(c.hisHer()).append(" tracks.  ").append(mainName).append(" ").toString());
+                w.append(t, (new StringBuilder("raises ")).append(hisHer()).append(" voice, questioning ").append(reference(c)).append("'s reason for fighting.").toString());
+            } else
+            {
+                if(innocence > 66)
+                    w.append(t, (new StringBuilder("Annoyed by ")).append(mainName).append("'s superficially innocent demeanor, ").toString());
+                else
+                if(innocence > 33)
+                    w.append(t, (new StringBuilder("Angry and disturbed by the way that ")).append(mainName).append(" doesn't even seem hostile toward ").append(c.himHer()).append(", ").toString());
+                else
+                    w.append(t, (new StringBuilder("Frustrated by ")).append(mainName).append("'s cunning tactics, ").toString());
+                w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" hurls verbal abuse at ").append(c.reference(this)).append(", trying to hurt ").append(himHer()).append(" emotionally in retaliation.").toString());
+            }
+        } else
+        if(c.captureProgression % 6 == 3)
+        {
+            if(styleDamage[1] > 0)
+            {
+                if(styleDamage[3] > 0)
+                {
+                    if(disgrace > 66)
+                    {
+                        if(c.getDignity() > 66)
+                        {
+                            if(hostility > 66)
+                                w.append(t, (new StringBuilder("Eager to humiliate ")).append(c.getMainName()).append(", ").toString());
+                            else
+                            if(hostility > 33)
+                                w.append(t, (new StringBuilder("Exploiting ")).append(c.getMainName()).append("'s reliance on ").append(c.hisHer()).append(" public image, ").toString());
+                            else
+                                w.append(t, (new StringBuilder("Wanting to ensure that ")).append(c.getMainName()).append(" will follow ").append(himHer()).append(", ").toString());
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" disengages from their scuffle and starts running past spectators, shouting about how ").append(reference(c)).append("'s body was reacting during its molestation.  ").append(c.getMainName()).append(" desperately gives chase, trying to stop ").append(himHer()).append(".").toString());
+                        } else
+                        if(c.getDignity() > 33)
+                        {
+                            w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" has ").append(mainName).append(" pinned and almost helpless, ").toString());
+                            if(deviancy > 66)
+                                w.append(t, (new StringBuilder("but the way ")).append(mainName).append(" eagerly bucks ").append(hisHer()).append(" hips and coaxes ").append(reference(c)).append(" to take ").append(himHer()).append(" ").toString());
+                            else
+                            if(deviancy > 33)
+                                w.append(t, (new StringBuilder("but ")).append(mainName).append("'s lewd squirming against ").append(c.hisHer()).append(" body ").toString());
+                            else
+                                w.append(t, (new StringBuilder("but ")).append(mainName).append("'s deliberate squirming to repeatedly put pressure against ").append(reference(c)).append("'s organ ").toString());
+                            w.append(t, (new StringBuilder("causes ")).append(c.getMainName()).append(" to gasp with pleasure and let ").append(c.himHer()).append(" go, much to the confusion and suspicion of the spectators.").toString());
+                        } else
+                        {
+                            w.append(t, (new StringBuilder("Every time ")).append(mainName).append(" and ").append(c.getMainName()).append(" clash, ").append(c.getMainName()).append(" gets the better of the exchange, but ").append(c.heShe()).append("'s bad at hiding the pleasure ").append(c.reference(this)).append("'s groping is inflicting on ").append(c.himHer()).append(", and ").toString());
+                            if(obedience > 66)
+                                w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" hopes that the sight of ").append(c.getMainName()).append("'s lewd expression with ").append(c.hisHer()).append(" tongue hanging out will make an impression on the public.").toString());
+                            else
+                            if(obedience > 33)
+                                w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" knows that ").append(c.getMainName()).append("'s inability to stifle ").append(c.hisHer()).append(" lewd moans will distract ").append(c.hisHer()).append(" allies and make ").append(mainName).append("'s mission easier.").toString());
+                            else
+                            if(c.gender.equals("female"))
+                                w.append(t, (new StringBuilder(String.valueOf(c.hisHer()))).append(" disheveled clothes draw every eye on the battlefield.").toString());
+                            else
+                                w.append(t, (new StringBuilder(String.valueOf(c.hisHer()))).append(" erection is obvious to everyone who looks.").toString());
+                        }
+                    } else
+                    if(disgrace > 33)
+                    {
+                        if(c.getConfidence() > 66)
+                        {
+                            w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" slams ").append(mainName).append(" hard enough to send ").append(himHer()).append(" tumbling down the street, but ").toString());
+                            if(deviancy > 66)
+                                w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" very obviously considered it more than worthwhile for the chance to feel up ").append(reference(c)).append(".").toString());
+                            else
+                            if(deviancy > 33)
+                                w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" still got the chance to grope ").append(c.himHer()).append(" - and to announce it to the spectators.").toString());
+                            else
+                                w.append(t, (new StringBuilder("as far as ")).append(mainName).append(" is concerned, the important thing is that the spectators know that ").append(heShe()).append(" got a chance to observe ").append(reference(c)).append("'s body's reactions up close.").toString());
+                        } else
+                        if(c.getConfidence() > 33)
+                        {
+                            w.append(t, (new StringBuilder("As ")).append(mainName).append(" and ").append(c.getMainName()).append(" scuffle, ").toString());
+                            if(confidence > 66)
+                                w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s firm hands on ").append(reference(c)).append("'s nipples and ").append(organ).append(" are starting to have an effect, ").toString());
+                            else
+                            if(confidence > 33)
+                                w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" keeps rubbing ").append(reference(c)).append("'s ").append(organ).append(", ").toString());
+                            else
+                                w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s desperate attempts to fend ").append(reference(c)).append(" off with a knee against ").append(c.hisHer()).append(" ").append(lowerOrgan).append(" are becoming increasingly stimulating, ").toString());
+                            w.append(t, (new StringBuilder("and when they finally pull apart, ")).append(c.getMainName()).append(" can't hide ").append(c.hisHer()).append(" arousal from the spectators.").toString());
+                        } else
+                        {
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" squeezes ").append(c.getMainName()).append("'s ").append(lowerOrgan).append(", causing ").append(c.getMainName()).append(" to squeak and push ").append(himHer()).append(" away with surprising force.  As ").append(mainName).append(" recovers, ").toString());
+                            if(hostility > 66)
+                                w.append(t, (new StringBuilder(String.valueOf(heShe()))).append(" wears a cruel grin as ").append(heShe()).append(" speaks.").toString());
+                            else
+                            if(hostility > 33)
+                                w.append(t, (new StringBuilder(String.valueOf(heShe()))).append(" masks ").append(hisHer()).append(" annoyance and raises ").append(hisHer()).append(" voice.").toString());
+                            else
+                                w.append(t, (new StringBuilder("looks disappointed with what ")).append(heShe()).append(" found.").toString());
+                        }
+                    } else
+                    if(c.getInnocence() > 66)
+                    {
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" holds ").append(c.getMainName()).append(" from behind, rubbing ").append(reference(c)).append("'s ").append(organ).append(" while ").append(c.heShe()).append(" kicks and squeals for the watching cameras, ").toString());
+                        if(deviancy > 66)
+                            w.append(t, (new StringBuilder("then slowly licks the side of ")).append(c.hisHer()).append(" face before pushing ").append(c.himHer()).append(" to the ground.").toString());
+                        else
+                        if(deviancy > 33)
+                            w.append(t, (new StringBuilder("then pushes ")).append(c.himHer()).append(" away and leers at ").append(c.himHer()).append(" on the ground.").toString());
+                        else
+                            w.append(t, (new StringBuilder("then shoves ")).append(c.himHer()).append(" away with a huff of disgust.").toString());
+                    } else
+                    if(c.getInnocence() > 33)
+                    {
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" forces ").append(c.getMainName()).append(" to lie on ").append(c.hisHer()).append(" back, pinning ").append(reference(c)).append(" in place with a foot on ").append(c.hisHer()).append(" ").append(lowerOrgan).append(".  ").toString());
+                        if(innocence > 66)
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" tilts ").append(hisHer()).append(" head in mild puzzlement as ").append(c.getMainName()).append(" groans and squirms, ").toString());
+                        else
+                        if(innocence > 33)
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" shifts ").append(hisHer()).append(" weight forward until ").append(c.getMainName()).append(" cries out, ").toString());
+                        else
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" moves ").append(hisHer()).append(" foot precisely forward and back, at just the right level of pressure to straddle the line between pleasure and pain, ").toString());
+                        w.append(t, (new StringBuilder("then steps back and allows ")).append(c.getMainName()).append(" to roll over and slowly crawl away, following behind at a short distance while the spectators' cameras flash.").toString());
+                    } else
+                    {
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" pins ").append(c.getMainName()).append(" down, ").toString());
+                        if(hostility > 66)
+                            w.append(t, (new StringBuilder("repeatedly stomping on ")).append(c.hisHer()).append(" ").append(lowerOrgan).append(", but the sadistic pleasure causes ").append(himHer()).append(" to let ").append(hisHer()).append(" guard down, and ").append(c.getMainName()).append(" sees an opportunity to ").toString());
+                        else
+                        if(hostility > 33)
+                            w.append(t, (new StringBuilder("cruelly pinching and twisting ")).append(c.hisHer()).append(" ").append(organ).append(", but the fact that ").append(heShe()).append(" only has one free hand to hold ").append(reference(c)).append(" in place means that ").append(c.getMainName()).append(" can ").toString());
+                        else
+                            w.append(t, (new StringBuilder("gently stroking ")).append(c.hisHer()).append(" ").append(organ).append(" and ").append(lowerOrgan).append(".  ").append(HisHer()).append(" grip on ").append(reference(c)).append(" is light enough that eventually ").append(c.getMainName()).append(" is able to ").toString());
+                        w.append(t, (new StringBuilder("abruptly pull away - but only at the cost of leaving much of ")).append(c.hisHer()).append(" ").append(bottomDesc).append(" in ").append(mainName).append("'s hands.").toString());
+                    }
+                } else
+                if(disgrace > 66)
+                {
+                    if(c.getConfidence() > 66)
+                    {
+                        w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" chases down ").append(mainName).append(" and grabs ").append(himHer()).append(" by the arm in order to stop ").append(himHer()).append(" from escaping again, ").toString());
+                        if(deviancy > 66)
+                            w.append(t, (new StringBuilder("but ")).append(mainName).append(" doesn't even try to get free, instead embracing ").append(reference(c)).append(" and eagerly running ").append(hisHer()).append(" hands all over ").append(c.hisHer()).append(" body.").toString());
+                        else
+                        if(deviancy > 33)
+                            w.append(t, (new StringBuilder("and ")).append(mainName).append(" retaliates by turning around and immediately trying to make out with ").append(reference(c)).append(", using ").append(c.getMainName()).append(" preoccupation with holding ").append(himHer()).append(" in order to easily grope ").append(c.hisHer()).append(" ").append(lowerOrgan).append(".").toString());
+                        else
+                            w.append(t, (new StringBuilder("leaving ")).append(mainName).append(" no choice but to try to distract ").append(reference(c)).append(" by acting in an overtly sexual manner again, reaching down and rubbing ").append(c.hisHer()).append(" ").append(organ).append(".").toString());
+                    } else
+                    if(c.getConfidence() > 33)
+                    {
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" flees around the corner of a building, but when ").append(c.getMainName()).append(" follows, ").append(mainName).append(" ambushes ").append(c.himHer()).append(" and stuns ").append(c.himHer()).append(" with a firm grip on ").append(c.hisHer()).append(" ").append(lowerOrgan).toString());
+                        if(confidence > 66)
+                            w.append(t, ", trying to turn the situation around with sexual domination.");
+                        else
+                        if(confidence > 33)
+                            w.append(t, (new StringBuilder(", using ")).append(hisHer()).append(" other hand to squeeze ").append(reference(c)).append("'s butt.").toString());
+                        else
+                            w.append(t, (new StringBuilder(", begging ")).append(reference(c)).append(" to ignore the fight for awhile and just let ").append(c.himHer()).append("self feel good.").toString());
+                    } else
+                    {
+                        w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" had been chasing ").append(mainName).append(", but when ").append(mainName).append(" turns around ").toString());
+                        if(hostility > 66)
+                            w.append(t, (new StringBuilder("and fixes ")).append(c.himHer()).append(" with a murderous glare").toString());
+                        else
+                        if(hostility > 33)
+                            w.append(t, (new StringBuilder("and suddenly starts approaching ")).append(c.himHer()).toString());
+                        else
+                            w.append(t, (new StringBuilder("and starts striding toward ")).append(c.himHer()).append(" with a sense of purpose").toString());
+                        w.append(t, (new StringBuilder(", ")).append(c.heShe()).append(" falters.  ").append(mainName).append(" pushes ").append(c.himHer()).append(" up against the nearest wall and immediately starts grinding their bodies together.").toString());
+                    }
+                } else
+                if(disgrace > 33)
+                {
+                    if(c.getInnocence() > 66)
+                    {
+                        w.append(t, (new StringBuilder("When ")).append(mainName).append(" rushes forward to launch some close-range attacks, ").append(c.getMainName()).append(" takes a defensive stance to protect ").append(c.himHer()).append("self, but ").append(c.heShe()).append("'s surprised and paralyzed by pleasurable sensations when ").toString());
+                        if(deviancy > 66)
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" drops to ").append(hisHer()).append(" knees and starts pawing at ").append(c.hisHer()).append(" crotch, drooling over the thought of licking ").append(c.himHer()).append(" down there.").toString());
+                        else
+                        if(deviancy > 33)
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" practically pounces on ").append(c.himHer()).append(", forcing ").append(c.hisHer()).append(" legs apart and grinding their hips together.").toString());
+                        else
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" grapples ").append(c.himHer()).append(" instead, distracting ").append(c.himHer()).append(" with a hand rubbing between ").append(c.hisHer()).append(" legs.").toString());
+                    } else
+                    if(c.getInnocence() > 33)
+                    {
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" and ").append(c.getMainName()).append(" start to fight at closer range again, weapons clashing against each other.  However, ").toString());
+                        if(innocence > 66)
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is acting almost playfully, trying to grope ").append(reference(c)).append(" whenever ").append(c.heShe()).append("'s within arm's reach").toString());
+                        else
+                        if(innocence > 33)
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" remains focused on trying to inflict pleasure on ").append(reference(c)).append(", and now that they're fighting within arm's length, there are plenty of opportunities to bump up against ").append(c.hisHer()).append(" crotch, slap ").append(c.hisHer()).append(" bottom, or briefly grab ").append(c.hisHer()).append(" chest.").toString());
+                        else
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s strategy still relies on disrupting ").append(reference(c)).append(" with unwanted pleasure, and most of ").append(hisHer()).append(" attacks are focused around cornering ").append(c.getMainName()).append(" until ").append(mainName).append(" can finally grab ").append(c.himHer()).append(" with both hands and start stimulating ").append(c.himHer()).append(" in earnest.").toString());
+                    } else
+                    {
+                        if(confidence > 66)
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" aggressively fights ").append(hisHer()).append(" way toward ").append(c.getMainName()).append(", ").toString());
+                        else
+                        if(confidence > 33)
+                            w.append(t, (new StringBuilder("Leaving ")).append(c.himHer()).append(" no time to evade, ").append(mainName).append(" launches ").append(himHer()).append("self directly at ").append(c.getMainName()).append(" , ").toString());
+                        else
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is afraid that a battle at range will give ").append(c.getMainName()).append(" too much opportunity to strategize, so ").append(heShe()).append(" tries ").toString());
+                        w.append(t, (new StringBuilder("tackling ")).append(c.himHer()).append(" to the ground and trying to hold ").append(c.himHer()).append(" there.  ").append(c.getMainName()).append("'s determined struggling takes its toll on ").append(mainName).append("'s body, but the way they grind against each other, almost as if they're having sex in the middle of the battlefield, also wears down ").append(c.getMainName()).append("'s self-control.").toString());
+                    }
+                } else
+                if(c.getDignity() > 66)
+                {
+                    w.append(t, (new StringBuilder("Caught in front of the spectators' cameras, ")).append(c.getMainName()).append(" refuses to flee from the approaching ").append(mainName).append(", ").toString());
+                    if(hostility > 66)
+                        w.append(t, (new StringBuilder("but ")).append(mainName).append(" still doesn't show any mercy whatsoever as ").append(heShe()).append(" throws ").append(reference(c)).append(" down to the pavement and starts stomping on ").append(c.hisHer()).append(" ").append(lowerOrgan).append(".").toString());
+                    else
+                    if(hostility > 33)
+                        w.append(t, (new StringBuilder("but ")).append(mainName).append(" still manages to humiliate ").append(reference(c)).append(" by grabbing ").append(c.himHer()).append(" from behind and rubbing a palm against ").append(c.hisHer()).append(" ").append(organ).append(" in front of everyone.").toString());
+                    else
+                        w.append(t, (new StringBuilder("and ")).append(mainName).append(" responds by being almost gentle as ").append(heShe()).append(" pushes ").append(reference(c)).append(" onto ").append(c.hisHer()).append(" back and starts stroking ").append(c.hisHer()).append(" ").append(organ).append(".").toString());
+                } else
+                if(c.getDignity() > 33)
+                {
+                    if(deviancy > 66)
+                        w.append(t, (new StringBuilder("Eagerly using ")).append(hisHer()).append(" overwhelming power to satisfy ").append(himHer()).append("self, ").toString());
+                    else
+                    if(deviancy > 33)
+                        w.append(t, (new StringBuilder("Toying with ")).append(hisHer()).append(" weaker opponent, ").toString());
+                    else
+                        w.append(t, (new StringBuilder("Though ")).append(heShe()).append(" doesn't exactly look like ").append(heShe()).append("'s enjoying what ").append(heShe()).append("'s doing, ").toString());
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" quickly closes the distance with ").append(c.getMainName()).append(", pins ").append(c.hisHer()).append(" hands down, and starts mercilessly rubbing ").append(c.hisHer()).append(" ").append(organ).append(".").toString());
+                } else
+                {
+                    w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" tries to get some more distance from ").append(mainName).append(", but ").append(c.heShe()).append("'s still abruptly knocked to the ground from behind as ").append(c.reference(this)).append(" catches up, and then ").append(c.heShe()).append("'s screaming, gasping, and moaning while ").toString());
+                    if(innocence > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" enthusiastically plays with ").append(c.hisHer()).append(" ").append(organ).append(" and ").append(lowerOrgan).append(".").toString());
+                    else
+                    if(innocence > 33)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" holds ").append(c.himHer()).append(" in place with a hand on ").append(c.hisHer()).append(" ").append(lowerOrgan).append(".").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" pinches ").append(c.hisHer()).append(" ").append(organ).append(" and allows ").append(c.himHer()).append(" to stimulate ").append(c.himHer()).append("self with ").append(c.hisHer()).append(" own reflexive struggling.").toString());
+                }
+            } else
+            if(styleDamage[3] > 0)
+            {
+                if(hostility > 66)
+                {
+                    if(c.getMorality() > 66)
+                    {
+                        if(disgrace > 66)
+                            w.append(t, (new StringBuilder("In order to level the playing field with ")).append(hisHer()).append(" stronger opponent, ").toString());
+                        else
+                        if(disgrace > 33)
+                            w.append(t, "Taking an opportunity to seize the advantage, ");
+                        else
+                            w.append(t, (new StringBuilder("Wanting to crush ")).append(hisHer()).append(" victim's spirit, ").toString());
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" grabs a trapped civilian and demands that ").append(c.getMainName()).append(" humiliate ").append(c.himHer()).append("self in order to secure the regular human's safety.").toString());
+                    } else
+                    if(c.getMorality() > 33)
+                    {
+                        if(innocence > 66)
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" ends up running through a crowd of civilians at the edge of the battlefield, and ").append(heShe()).append("'s delighted to find that ").toString());
+                        else
+                        if(innocence > 33)
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" spots a crowd of civilians who haven't been able to evacuate the battlefield, and ").append(heShe()).append(" immediately charges into the middle of them, banking on the fact that ").toString());
+                        else
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" leads ").append(c.getMainName()).append(" on a chase toward the edge of the battlefield.  ").append(HeShe()).append(" knows that there are some civilians there who haven't evacuated far enough away, and that ").toString());
+                        w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" won't be able to attack ").append(himHer()).append(" there.  The terrified humans cry out for ").append(c.getMainName()).append(" to save them, but ").append(c.heShe()).append(" clearly can't even do that.").toString());
+                    } else
+                    {
+                        w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" becomes more and more annoyed as ").append(c.heShe()).append(" tries to chase and strike down ").append(mainName).append(", whose ").toString());
+                        if(confidence > 66)
+                            w.append(t, (new StringBuilder("boastful, confident manner makes the spectators think ")).append(heShe()).append("'s completely out of ").append(c.getMainName()).append("'s league.").toString());
+                        else
+                        if(confidence > 33)
+                            w.append(t, (new StringBuilder("showy evasive maneuvers catch the spectators' eyes, making ")).append(himHer()).append(" look like ").append(heShe()).append("'s easily beating ").append(c.getMainName()).append(" even without directly fighting ").append(c.himHer()).append(".").toString());
+                        else
+                            w.append(t, (new StringBuilder("meek demeanor makes the spectators think it's completely ridiculous that ")).append(c.getMainName()).append(" is still struggling to land a solid hit on ").append(himHer()).append(".").toString());
+                    }
+                } else
+                if(hostility > 33)
+                {
+                    if(c.getInnocence() > 66)
+                    {
+                        if(innocence > 66)
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s laughter and namecalling are really starting to get to ").append(c.getMainName()).append(", ").toString());
+                        else
+                        if(innocence > 33)
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" fights on the defensive, focusing on avoiding all of ").append(c.getMainName()).append("'s attacks, ").toString());
+                        else
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" has no trouble at all manipulating ").append(c.getMainName()).append("'s emotional state and strategic position, ").toString());
+                        w.append(t, (new StringBuilder("and the more ")).append(c.heShe()).append(" gets frustrated and starts attacking ").append(c.reference(this)).append(" with wild, obviously futile attacks, the more pathetic ").append(c.heShe()).append(" looks to the spectators.").toString());
+                    } else
+                    if(c.getInnocence() > 33)
+                    {
+                        w.append(t, (new StringBuilder("As ")).append(c.getMainName()).append(" pursues ").append(mainName).append(" and tries to land at least one decisive hit, ").toString());
+                        if(dignity > 66)
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" flaunts ").append(hisHer()).append(" moves for the spectators, performing elaborate dodges designed to make them respect ").append(himHer()).append(" and question ").append(reference(c)).append(".").toString());
+                        else
+                        if(dignity > 33)
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" refuses to let ").append(c.himHer()).append(" do so.  The defensive fighting style doesn't accomplish much in the short term, but it does make everyone who sees it question ").append(c.getMainName()).append("'s competence.").toString());
+                        else
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" just smirks and puts all ").append(hisHer()).append(" effort into dodging.  For the spectators, who are used to flashier fights, it appears as though ").append(c.getMainName()).append(" is just weak.").toString());
+                    } else
+                    {
+                        w.append(t, (new StringBuilder("As their running battle reaches a high ground in view of several crowds of distant spectators across the city, ")).append(mainName).append(" adopts a defensive posture.  Although ").append(c.getMainName()).append(" tries several possible strategies for getting around it, ").toString());
+                        if(disgrace > 66)
+                            w.append(t, (new StringBuilder("even the weaker ")).append(mainName).append(" is able to avoid taking any hits as long as ").append(heShe()).append(" doesn't try to accomplish anything else.").toString());
+                        else
+                        if(disgrace > 33)
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" doesn't take any risks that could be exploited.").toString());
+                        else
+                            w.append(t, "the difference in their strength and speed is just too great.");
+                    }
+                } else
+                if(c.getConfidence() > 66)
+                {
+                    if(disgrace > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" focuses everything ").append(heShe()).append(" has on avoiding ").append(c.getMainName()).append("'s attacks, ").toString());
+                    else
+                    if(disgrace > 33)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" repeatedly deflects ").append(c.getMainName()).append("'s attacks just enough to avoid taking a direct hit, ").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" makes a point of enduring ").append(c.getMainName()).append("'s attacks without even showing any signs of pain, ").toString());
+                    w.append(t, (new StringBuilder("lecturing ")).append(c.himHer()).append(" at the same time about how ").append(c.hisHer()).append(" raw strength isn't enough on its own.").toString());
+                } else
+                if(c.getConfidence() > 33)
+                {
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" spends some time focusing on talking rather than fighting, constantly dodging backward ").toString());
+                    if(obedience > 66)
+                        w.append(t, (new StringBuilder("as ")).append(heShe()).append(" tries to convince ").append(c.getMainName()).append(" to switch sides.").toString());
+                    else
+                    if(obedience > 33)
+                        w.append(t, (new StringBuilder("and warning ")).append(c.getMainName()).append(" that ").append(c.hisHer()).append(" strength still isn't enough to stand up to the Demon Lord.").toString());
+                    else
+                        w.append(t, (new StringBuilder("and giving ")).append(c.getMainName()).append(" tips on how to fight more effectively.").toString());
+                } else
+                {
+                    w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" hesitates, unable to approach ").append(mainName).append(" while ").toString());
+                    if(deviancy > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(heShe()))).append(" leers at ").append(c.getMainName()).append(" and voices ").append(hisHer()).append(" perverted desires.").toString());
+                    else
+                    if(deviancy > 33)
+                        w.append(t, (new StringBuilder(String.valueOf(heShe()))).append(" belittles ").append(c.getMainName()).append(" and points out the futility of ").append(hisHer()).append(" actions.").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(heShe()))).append(" calmly explains ").append(c.getMainName()).append("'s failings.").toString());
+                }
+            } else
+            if(disgrace > 66)
+            {
+                if(c.getMorality() > 66)
+                {
+                    w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append("'s attempts to offer ").append(mainName).append(" a chance to surrender peacefully are interrupted when ").append(mainName).append(" abruptly charges at ").append(c.himHer()).append(", ").toString());
+                    if(hostility > 66)
+                        w.append(t, (new StringBuilder("too enraged to even consider ")).append(reference(c)).append("'s words.").toString());
+                    else
+                    if(hostility > 33)
+                        w.append(t, (new StringBuilder("unwilling to accept ")).append(reference(c)).append("'s pity.").toString());
+                    else
+                        w.append(t, (new StringBuilder("knowing that ")).append(heShe()).append(" has to take any opening ").append(heShe()).append(" can.").toString());
+                } else
+                if(c.getMorality() > 33)
+                {
+                    w.append(t, (new StringBuilder("Feeling the effects of exhaustion, ")).append(mainName).append(" ").toString());
+                    if(innocence > 66)
+                        w.append(t, "very obviously isn't able to effectively fight anymore, and ");
+                    else
+                    if(innocence > 33)
+                        w.append(t, "would prefer to take a break from the battle, but ");
+                    else
+                        w.append(t, (new StringBuilder("tries to take advantage of ")).append(c.getMainName()).append("'s distraction to slip away and catch ").append(hisHer()).append(" breath, but ").toString());
+                    w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" manages to lunge forward and grab ").append(himHer()).append(" by the arm, preventing ").append(hisHer()).append(" escape.").toString());
+                } else
+                {
+                    w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" senses ").append(mainName).append("'s weakness and charges in for the kill, ").toString());
+                    if(confidence > 66)
+                        w.append(t, (new StringBuilder("but ")).append(mainName).append(" fights back fiercely despite how far ").append(hisHer()).append(" powers have declined.").toString());
+                    else
+                    if(confidence > 33)
+                        w.append(t, (new StringBuilder("and ")).append(c.hisHer()).append(" aggression is rewarded as ").append(mainName).append(" quickly starts to falter under the assault.").toString());
+                    else
+                        w.append(t, (new StringBuilder("causing ")).append(mainName).append(" to shriek in pain and fear as ").append(heShe()).append(" desperately defends ").append(himHer()).append("self.").toString());
+                }
+            } else
+            if(disgrace > 33)
+            {
+                if(c.getConfidence() > 66)
+                {
+                    if(confidence > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" never shies away from battle, but a moment of carelessness puts ").append(himHer()).append(" on ").append(hisHer()).append(" back foot, forcing ").append(himHer()).append(" to retreat, and ").toString());
+                    else
+                    if(confidence > 33)
+                        w.append(t, (new StringBuilder("In terms of raw strength, ")).append(mainName).append(" is just a bit weaker than ").append(c.getMainName()).append(".  ").append(HeShe()).append(" tries to put some more distance between ").append(himHer()).append("self and ").append(reference(c)).append(", but ").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s Forsaken powers aren't weak, but ").append(heShe()).append(" still finds it difficult to fight enemies head-on, and ").toString());
+                    w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" quickly chases ").append(himHer()).append(" down and tackles ").append(himHer()).append(" to the ground, where they continue to scuffle.").toString());
+                } else
+                if(c.getConfidence() > 33)
+                {
+                    w.append(t, (new StringBuilder("As ")).append(mainName).append(" and ").append(c.getMainName()).append(" quietly circle each other, ").toString());
+                    if(innocence > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" gets distracted by a loud noise behind ").append(himHer()).append(", and ").append(c.getMainName()).append(" darts forward to take advantage of the opening!").toString());
+                    else
+                    if(innocence > 33)
+                        w.append(t, "both of them spot what they believe to be an opening in the other's stance, and they dart toward each other simultaneously, clashing with a brilliant flash of light that can be seen across the whole battlefield.");
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" abruptly realizes that ").append(c.heShe()).append("'s been maneuvered into a corner, and an instant later, ").append(mainName).append(" darts directly at ").append(himHer()).append(" in order to take advantage of the positional advantage!").toString());
+                } else
+                {
+                    if(deviancy > 66)
+                        w.append(t, (new StringBuilder("Intimidated by ")).append(mainName).append(" obvious desire to violate ").append(c.himHer()).append(", ").toString());
+                    else
+                    if(deviancy > 33)
+                        w.append(t, (new StringBuilder("Uneasy over the way ")).append(mainName).append(" leers at ").append(c.himHer()).append(", ").toString());
+                    else
+                        w.append(t, (new StringBuilder("Insecure about ")).append(c.hisHer()).append(" own strength, ").toString());
+                    w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" starts looking around for a way to escape ").append(c.hisHer()).append(" confrontation with ").append(mainName).append(", but that moment of hesitation is all the excuse ").append(mainName).append(" needs to pounce forward and press the attack against ").append(c.himHer()).append(".").toString());
+                }
+            } else
+            if(c.getMorality() > 66)
+            {
+                w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" has briefly managed to escape ").append(c.hisHer()).append(" opponent, but when ").append(c.heShe()).append(" realizes that there's no one else nearby to stop ").append(mainName).append(" from leading the Demons and breaching the evacuation perimeter, ").append(c.heShe()).append(" reluctantly turns around and willingly faces ").append(c.reference(this)).append(", ").toString());
+                if(hostility > 66)
+                    w.append(t, (new StringBuilder("mentally bracing ")).append(c.himHer()).append("self for the torture that ").append(mainName).append(" no doubt has in store.").toString());
+                else
+                if(hostility > 33)
+                    w.append(t, (new StringBuilder("much to ")).append(mainName).append("'s amusement.").toString());
+                else
+                    w.append(t, (new StringBuilder("calling out ")).append(hisHer()).append(" name and jumping directly at ").append(himHer()).append(".").toString());
+            } else
+            if(c.getMorality() > 33)
+            {
+                w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" follows the fleeing ").append(c.getMainName()).append(", ").toString());
+                if(deviancy > 66)
+                    w.append(t, "calling out lewd suggestions");
+                else
+                if(deviancy > 33)
+                    w.append(t, (new StringBuilder("enjoying the view of ")).append(c.hisHer()).append(" behind").toString());
+                else
+                    w.append(t, (new StringBuilder("allowing ")).append(c.himHer()).append(" to exhaust ").append(c.himHer()).append("self").toString());
+                w.append(t, (new StringBuilder(", then abruptly picks up speed, grabbing ")).append(reference(c)).append(" and pulling ").append(c.himHer()).append(" down to the ground.").toString());
+            } else
+            {
+                if(innocence > 66)
+                    w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" briefly escapes ").append(mainName).append("'s notice, but then ").toString());
+                else
+                if(innocence > 33)
+                    w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" has fled far enough from ").append(mainName).append(" that they can no longer see each other, but then ").toString());
+                else
+                    w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" thinks ").append(c.heShe()).append("'s managed to hide from ").append(mainName).append(", but ").toString());
+                w.append(t, (new StringBuilder(String.valueOf(c.heShe()))).append(" rounds a corner to find ").append(mainName).append(" standing right there.  ").append(c.getMainName()).append(" tries to turn away again, but ").append(mainName).append(" grabs ").append(c.himHer()).append(" by the hair.").toString());
+            }
+        } else
+        if(c.captureProgression % 6 == 4)
+        {
+            if(styleDamage[0] > 0)
+            {
+                if(styleDamage[3] > 0)
+                {
+                    if(hostility > 66)
+                    {
+                        if(c.getMorality() > 66)
+                        {
+                            if(confidence > 66)
+                                w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" sees that countless cameras are watching ").append(hisHer()).append(" battle, and ").append(heShe()).append(" exults in the chance to directly threaten the public with an excruciatingly painful death.  ").toString());
+                            else
+                            if(confidence > 33)
+                                w.append(t, (new StringBuilder("As the spectators' cameras watch the battle, ")).append(mainName).append(" rants and raves, shouting to anyone who will listen that death awaits them all.  ").toString());
+                            else
+                                w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" gives voice to ").append(hisHer()).append(" despair, calling out to all the watching spectators about how humanity is doomed and the closest thing to salvation is a quick death.  ").toString());
+                            w.append(t, (new StringBuilder("For ")).append(c.getMainName()).append(", protecting the people's hope is just as important as striking down ").append(c.reference(this)).append(", and ").append(heShe()).append(" feels obligated to try to reassure everyone.").toString());
+                        } else
+                        if(c.getMorality() > 33)
+                        {
+                            if(disgrace > 66)
+                                w.append(t, (new StringBuilder("Even though ")).append(heShe()).append(" barely has the energy to stand, ").append(mainName).append("'s hatred gives ").append(himHer()).append(" the strength to keep fighting and ").toString());
+                            else
+                            if(disgrace > 33)
+                                w.append(t, (new StringBuilder("They might be evenly-matched, but ")).append(mainName).append(" is far more bloodthirsty than ").append(c.getMainName()).append(", and ").append(heShe()).append(" keeps ").toString());
+                            else
+                                w.append(t, (new StringBuilder("The difference in strength is so great that ")).append(mainName).append(" doesn't even need to worry about ").append(c.getMainName()).append("'s attacks, leaving ").append(himHer()).append(" free to continuously ").toString());
+                            w.append(t, (new StringBuilder("shout violent threats and insults.  The spectating crowd is horrified that ")).append(c.getMainName()).append(" doesn't seem to be making any progress.").toString());
+                        } else
+                        {
+                            if(innocence > 66)
+                                w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" gleefully shouts whatever insults come to mind at ").append(c.getMainName()).append(", addicted to the feeling of seeing people in emotional pain, and ").toString());
+                            else
+                            if(innocence > 33)
+                                w.append(t, (new StringBuilder("Whenever there's a pause in the battle, ")).append(mainName).append(" and ").append(c.getMainName()).append(" scream increasingly angry insults at each other, feeding off each other's hatred, and ").toString());
+                            else
+                                w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s experiences have given ").append(himHer()).append(" a good idea of the psychological weaknesses of people like ").append(c.getMainName()).append(".  ").append(HeShe()).append(" uses ").append(hisHer()).append(" words to exploit those weaknesses mercilessly, causing as much pain as possible, and ").toString());
+                            w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append("'s obvious impotent rage weakens both ").append(c.hisHer()).append(" emotional stability and ").append(c.hisHer()).append(" public image.").toString());
+                        }
+                    } else
+                    if(hostility > 33)
+                    {
+                        if(c.getInnocence() > 66)
+                        {
+                            if(innocence > 66)
+                                w.append(t, (new StringBuilder("In the chaotic melee, ")).append(mainName).append(" and ").append(c.getMainName()).append(" lose track of each other, but ").append(mainName).append(" gets ").append(c.hisHer()).append(" attention again by ").toString());
+                            else
+                            if(innocence > 33)
+                                w.append(t, (new StringBuilder("Taking advantage of ")).append(c.getMainName()).append("'s easily-distracted nature, ").append(mainName).append(" briefly disengages from the fight before quickly ").toString());
+                            else
+                                w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" manages to slip away from ").append(c.getMainName()).append(" and make ").append(hisHer()).append(" way to a nearby emergency broadcasting hub, where ").append(heShe()).append(" starts ").toString());
+                            w.append(t, (new StringBuilder("speaking over the neighborhood's emergency public address system, taunting ")).append(c.getMainName()).append(" and challenging ").append(c.himHer()).append(" to come and find ").append(c.reference(this)).append(".").toString());
+                        } else
+                        if(c.getInnocence() > 33)
+                        {
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" and ").append(c.getMainName()).append(" stare each other down, ").append(mainName).append(" ").toString());
+                            if(deviancy > 66)
+                                w.append(t, "taking the opportunity to make several obscene taunts.  ");
+                            else
+                            if(deviancy > 33)
+                                w.append(t, (new StringBuilder("happily taking the opportunity to insult ")).append(c.getMainName()).append(" and try to provoke ").append(c.himHer()).append(".  ").toString());
+                            else
+                                w.append(t, (new StringBuilder("venting ")).append(hisHer()).append(" irritation by harshly insulting ").append(reference(c)).append(".  ").toString());
+                            w.append(t, "The moment is uploaded by some civilians who are within filming range, instantly getting countless views from watchers across the world.");
+                        } else
+                        {
+                            if(disgrace > 66)
+                                w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" knows that ").append(heShe()).append(" doesn't have much of a chance against ").append(c.getMainName()).append("'s tactical acumen and superior power, so ").append(heShe()).append(" continues backing off and ").toString());
+                            else
+                            if(disgrace > 33)
+                                w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append("'s combat style is precise and methodical, but ").append(mainName).append(" manages to take advantage of it as ").append(heShe()).append(" ").toString());
+                            else
+                                w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" is too smart to carelessly approach the stronger ").append(mainName).append(", but ").append(mainName).append(" tries to force ").append(c.hisHer()).append(" hand, ").toString());
+                            w.append(t, (new StringBuilder("addressing the filming spectators.  ")).append(HeShe()).append(" calls ").append(c.getMainName()).append(" a coward and a fake hero, watching closely for a reaction.").toString());
+                        }
+                    } else
+                    if(c.getDignity() > 66)
+                    {
+                        w.append(t, (new StringBuilder("A sudden flurry of camera flashes reminds ")).append(c.getMainName()).append(" of how much damage ").append(c.hisHer()).append(" clothes have taken over the course of the fight.  ").append(c.HeShe()).append(" blushes and hurriedly rearranges them, then frowns at ").append(mainName).append(", ").toString());
+                        if(deviancy > 66)
+                            w.append(t, (new StringBuilder("whose lustful urges have overflowed and caused ")).append(c.himHer()).append(" to make lewd comments.").toString());
+                        else
+                        if(deviancy > 33)
+                            w.append(t, (new StringBuilder("who is very obviously leering at ")).append(c.himHer()).append(".").toString());
+                        else
+                            w.append(t, "who flatly comments on how much was showing.");
+                    } else
+                    if(c.getDignity() > 33)
+                    {
+                        if(disgrace > 66)
+                            w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" isn't having much trouble fighting ").append(mainName).append(", but ").toString());
+                        else
+                        if(disgrace > 33)
+                            w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append("'s fight against ").append(mainName).append(" doesn't give ").append(c.himHer()).append(" a chance to worry about secondary concerns, and ").toString());
+                        else
+                            w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" knows that ").append(c.heShe()).append("'s doing a very poor job at fighting ").append(mainName).append(", and ").toString());
+                        w.append(t, (new StringBuilder(String.valueOf(c.hisHer()))).append(" lips tighten with irritation when ").append(c.heShe()).append(" hears nearby spectators commenting on ").append(c.hisHer()).append(" torn clothes and taking pictures.").toString());
+                    } else
+                    {
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" leads the half-clothed ").append(c.getMainName()).append(" through a crowd of flashing cameras, ").toString());
+                        if(obedience > 66)
+                            w.append(t, (new StringBuilder("happy to have done ")).append(hisHer()).append(" part in the continued effort to make sure that Chosen are seen as nothing but sex objects.").toString());
+                        else
+                        if(obedience > 33)
+                            w.append(t, (new StringBuilder("following your orders to humiliate ")).append(reference(c)).append(" as much as possible.").toString());
+                        else
+                            w.append(t, (new StringBuilder("then turns around and angrily admonishes ")).append(c.getMainName()).append(" for not covering ").append(c.himHer()).append("self up better.").toString());
+                    }
+                } else
+                if(hostility > 66)
+                {
+                    if(c.getInnocence() > 66)
+                    {
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" and ").append(c.getMainName()).append(" roll around on the ground together, wrestling for control, ").toString());
+                        if(deviancy > 66)
+                            w.append(t, (new StringBuilder("but the sexual moans ")).append(mainName).append(" releases as they do so are so disturbing to ").append(c.getMainName()).append(" that ").append(c.heShe()).append(" reflexively lets go and backs off, shivering with revulsion.").toString());
+                        else
+                        if(deviancy > 33)
+                            w.append(t, (new StringBuilder("but ")).append(c.getMainName()).append(" is disgusted by the way that ").append(mainName).append(" is clearly enjoing the contact with ").append(c.hisHer()).append(" body.  ").append(c.getMainName()).append(" shifts ").append(c.hisHer()).append(" efforts into getting away, opening up some distance between ").append(c.himHer()).append("self and ").append(c.reference(this)).append(", then looks back at ").append(himHer()).append(" with revulsion.").toString());
+                        else
+                            w.append(t, (new StringBuilder("but the cold threats ")).append(mainName).append(" whispers into ").append(c.getMainName()).append("'s ear soon become too much to bear, and ").append(c.getMainName()).append(" recoils backward, trying to collect ").append(c.himHer()).append("self.").toString());
+                    } else
+                    if(c.getInnocence() > 66)
+                    {
+                        if(morality > 66)
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s sense of betrayal toward humanity and hatred toward ").append(himHer()).append("self grwos strong enough to take physical form around ").append(himHer()).append(" as a dark aura of despair, and ").toString());
+                        else
+                        if(morality > 33)
+                            w.append(t, (new StringBuilder("The battle causes ")).append(mainName).append("'s negative emotions to overflow, briefly coalescing around ").append(himHer()).append(" in a visible whirlpool of blackness, and ").toString());
+                        else
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is engulfed in cold flames that seem to drink the light from ").append(hisHer()).append(" surroundings, a psychic manifestation of ").append(hisHer()).append(" burning hatred toward humanity itself.  Although they're only a mental projection, they induce a very real reaction in other people, and ").toString());
+                        w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" is forced to retreat as ").append(c.heShe()).append(" fights off the effects on ").append(c.hisHer()).append(" own mind.").toString());
+                    } else
+                    if(disgrace > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" struggles to lock ").append(mainName).append(" in a pin against the ground, and although ").append(mainName).append(" is struggling desperately, ").append(heShe()).append("'s distracted by the sight of a nearby civilian.  ").append(mainName).append(" tries to lunge after the bystander, consumed by thoughts of murdering him, and ").append(c.getMainName()).append(" takes the opportunity to seize control.").toString());
+                    else
+                    if(disgrace > 33)
+                        w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append("'s and ").append(mainName).append("'s battle is briefly interrupted as ").append(mainName).append(" spots a passing civilian and darts off to intercept him, bloodlust in ").append(hisHer()).append(" eyes.").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" is pinned on the ground, helpless underneath ").append(mainName).append(", but ").append(c.heShe()).append("'s suddenly surprised to find that ").append(mainName).append(" has released ").append(c.himHer()).append(".  A small group of civilians who are late to be evacuated has wandered by, and ").append(mainName).append(" wants to kill them before returning to finish off ").append(reference(c)).append(".").toString());
+                } else
+                if(hostility > 33)
+                {
+                    if(c.getConfidence() > 66)
+                    {
+                        w.append(t, (new StringBuilder("Wearing an infuriating smirk, ")).append(mainName).append(" ").toString());
+                        if(deviancy > 66)
+                            w.append(t, (new StringBuilder("allows ")).append(c.getMainName()).append(" to graze ").append(himHer()).append(" with several attacks, moaning in sexual pleasure every time.  The sight unnverves ").append(c.getMainName()).append(" enough to slow ").append(c.hisHer()).append(" movements, and ").append(mainName).append(" backs off to focus on taunting ").append(c.himHer()).append(" even more.").toString());
+                        else
+                        if(deviancy > 33)
+                            w.append(t, (new StringBuilder("deliberately makes ")).append(c.getMainName()).append(" uncomfortable with constant sexual talk as they fight, using ").append(c.hisHer()).append(" disgust to make ").append(c.himHer()).append(" grow increasingly careless and allow ").append(mainName).append(" to easily evade ").append(c.hisHer()).append(" attacks and get to a high ground position above ").append(c.himHer()).append(".").toString());
+                        else
+                            w.append(t, (new StringBuilder("keeps making derogatory remarks about ")).append(c.getMainName()).append(", calling ").append(c.himHer()).append(" weak and stupid, and claiming that ").append(c.heShe()).append("'s nowhere near strong enough to beat the Demon Lord.  ").append(c.getMainName()).append("'s determination to prove ").append(mainName).append(" wrong causes ").append(c.himHer()).append(" to become reckless, and ").append(mainName).append(" emphasizes the point by dodging around ").append(c.himHer()).append(" and leading ").append(c.himHer()).append(" on a chase.").toString());
+                    } else
+                    if(c.getConfidence() > 33)
+                    {
+                        if(disgrace > 66)
+                            w.append(t, (new StringBuilder("Even as ")).append(c.getMainName()).append("'s attacks take their toll, ").toString());
+                        else
+                        if(disgrace > 33)
+                            w.append(t, (new StringBuilder("As ")).append(heShe()).append(" exchanges blows with ").append(c.getMainName()).append(", ").toString());
+                        else
+                            w.append(t, (new StringBuilder("Shrugging off ")).append(c.getMainName()).append("'s attacks like they're nothing, ").toString());
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" constantly insults ").append(c.getMainName()).append("'s abilities.  Several Demons show up to occupy ").append(c.getMainName()).append(" so that ").append(mainName).append(" can continue the stream of cruel words uninterrupted.").toString());
+                    } else
+                    {
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" shouts in ").append(c.getMainName()).append("'s face, ").toString());
+                        if(dignity > 66)
+                            w.append(t, "and the verbal abuse from someone once regarded as a great hero has the desired effect.  ");
+                        else
+                        if(dignity > 33)
+                            w.append(t, (new StringBuilder("insulting ")).append(c.himHer()).append(" again and again.  ").toString());
+                        else
+                            w.append(t, "unleashing a torrent of raw hostility.  ");
+                        w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" ends up stumbling backwards, wiping tears out of ").append(c.hisHer()).append(" eyes and trying to remind ").append(c.himHer()).append("self that there's no need to care about the words spoken by an enemy.").toString());
+                    }
+                } else
+                if(c.getMorality() > 66)
+                {
+                    w.append(t, (new StringBuilder("The fight between ")).append(mainName).append(" and ").append(c.getMainName()).append(" gets dangerously close to a group of evacuated civilians on the edge of the battlefield, and they combatants are forced to call a ceasefire until they can relocate.  In the meantime, ").toString());
+                    if(obedience > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" tries to persuade ").append(c.getMainName()).append(" to join the Demon Lord, much to the latter's annoyance.").toString());
+                    else
+                    if(obedience > 33)
+                        w.append(t, (new StringBuilder("they talk, and ")).append(c.getMainName()).append(" is annoyed by the way that ").append(mainName).append(" refuses to take responsibility for ").append(hisHer()).append(" actions.").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" harshly criticizes what ").append(heShe()).append(" sees as ").append(c.getMainName()).append("'s failings.").toString());
+                } else
+                if(c.getMorality() > 33)
+                {
+                    w.append(t, (new StringBuilder("A clash of energy between ")).append(mainName).append(" and ").append(c.getMainName()).append(" starts to collapse the building whose rooftop they're fighting on.  ").toString());
+                    if(deviancy > 66)
+                        w.append(t, (new StringBuilder("As they both clamber to safety, ")).append(mainName).append(" can't resist groping ").append(c.getMainName()).append(", causing them both to fall and land some distance apart.").toString());
+                    else
+                    if(deviancy > 33)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" reaches the ground first, and ").append(heShe()).append(" can't resist making lewd comments as ").append(heShe()).append(" looks up at where ").append(c.getMainName()).append(" is climbing down.").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" berates ").append(c.getMainName()).append(" for not checking to make sure that the location was clear of civilians first, although ").append(heShe()).append(" also feels guilty for letting it happen.").toString());
+                } else
+                {
+                    if(disgrace > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" starts to flee the enraged ").append(c.getMainName()).append(", shouting over ").append(hisHer()).append(" shoulder the whole while, and ").toString());
+                    else
+                    if(disgrace > 33)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" and ").append(c.getMainName()).append(" separate from each other as they catch their breath.  Although ").append(mainName).append(" speaks up to try to smooth things over between them, ").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" flings ").append(c.getMainName()).append(" away, then begins self-righteously preaching at ").append(c.himHer()).append(", and ").toString());
+                    w.append(t, (new StringBuilder(String.valueOf(hisHer()))).append(" claim that ").append(c.getMainName()).append("'s anger will just weaken ").append(c.himHer()).append(" in the long run only irritates ").append(reference(c)).append(" even more.").toString());
+                }
+            } else
+            if(styleDamage[3] > 0)
+            {
+                if(deviancy > 66)
+                {
+                    if(c.getConfidence() > 66)
+                    {
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" launches ").append(himHer()).append("self at ").append(c.getMainName()).append(", wrapping ").append(hisHer()).append(" limbs around ").append(c.himHer()).append(", and no matter how violently ").append(c.getMainName()).append(" tries to beat ").append(himHer()).append(" away, ").toString());
+                        if(innocence > 66)
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" doesn't even seem to care, ").toString());
+                        else
+                        if(innocence > 33)
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s lust gives ").append(himHer()).append(" the strength to hold on, ").toString());
+                        else
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" squirms to avoid the worst of it, ").toString());
+                        w.append(t, (new StringBuilder("completely focused on tearing ")).append(reference(c)).append("'s clothes off.").toString());
+                    } else
+                    if(c.getConfidence() > 33)
+                    {
+                        if(disgrace > 66)
+                            w.append(t, (new StringBuilder("The fleeing ")).append(mainName).append(" leads ").append(c.getMainName()).append(" into a central plaza in plain view of many distant cameras, then abruptly rounds on ").append(c.himHer()).append(" and ").toString());
+                        else
+                        if(disgrace > 33)
+                            w.append(t, (new StringBuilder("When ")).append(mainName).append(" realizes that ").append(hisHer()).append(" battle with ").append(c.getMainName()).append(" has led them into view of several nearby spectators' cameras, ").append(heShe()).append(" immediately rushes in close and ").toString());
+                        else
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" charges at ").append(c.getMainName()).append(", and picks ").append(c.himHer()).append(" up bodily, hauling ").append(c.himHer()).append(" out of the alleyways and into the open, then ").toString());
+                        w.append(t, (new StringBuilder("starts tearing at ")).append(reference(c)).append("'s clothes, as turned on by the fact that they're being watched as ").append(heShe()).append(" is by ").append(c.getMainName()).append("'s increasingly exposed skin.").toString());
+                    } else
+                    {
+                        if(hostility > 66)
+                            w.append(t, (new StringBuilder("Determined to make the shy ")).append(c.getMainName()).append(" suffer, ").append(mainName).append(" tackles ").append(c.himHer()).append(" and ").toString());
+                        else
+                        if(hostility > 33)
+                            w.append(t, (new StringBuilder("Becoming fixated on the thought of making ")).append(c.getMainName()).append(" squeal and cover ").append(c.himHer()).append("self, ").append(mainName).append(" tackles ").append(c.himHer()).append(" and ").toString());
+                        else
+                            w.append(t, (new StringBuilder("Unable to resist ")).append(hisHer()).append(" perverted desires, ").append(mainName).append(" tackles ").append(c.getMainName()).append(" and ").toString());
+                        w.append(t, (new StringBuilder("starts pulling ")).append(c.hisHer()).append(" torn clothes out of the way for the benefit of the countless cameras watching the battle.").toString());
+                    }
+                } else
+                if(deviancy > 33)
+                {
+                    if(c.getDignity() > 66)
+                    {
+                        if(innocence > 66)
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" finds it incredibly funny that ").append(c.getMainName()).append(" tries so hard to control how much skin ").append(c.heShe()).append("'s showing the spectators, ").toString());
+                        else
+                        if(innocence > 33)
+                            w.append(t, (new StringBuilder("When watching recordings of ")).append(c.getMainName()).append("'s battles, ").append(mainName).append(" has been getting turned on by the sight of ").append(c.hisHer()).append(" embarrassment, ").toString());
+                        else
+                            w.append(t, (new StringBuilder("It hasn't escaped ")).append(mainName).append("'s notice that ").append(c.getMainName()).append(" gets more careful around cameras the more ").append(c.hisHer()).append(" clothes are torn, ").toString());
+                        w.append(t, (new StringBuilder("and when ")).append(heShe()).append(" lunges at ").append(reference(c)).append(" to start trying to pull ").append(c.hisHer()).append(" ").append(bottomDesc).append(" aside, ").append(heShe()).append(" isn't disappointed with ").append(c.getMainName()).append("'s squealing reaction.").toString());
+                    } else
+                    if(c.getDignity() > 33)
+                    {
+                        w.append(t, (new StringBuilder("The more ")).append(c.getMainName()).append("'s come off, the more perverted ").append(mainName).append("'s expression gets.  ").append(HeShe()).append(" runs at ").append(c.getMainName()).append(", intent on tearing off even more of ").append(c.hisHer()).append(" clothes").toString());
+                        if(disgrace > 66)
+                            w.append(t, (new StringBuilder(" even though it opens ")).append(himHer()).append(" up to a punishing counterattack.").toString());
+                        else
+                        if(disgrace > 33)
+                            w.append(t, (new StringBuilder(", now thinking less about the battle and more about ")).append(hisHer()).append(" own lustful desires.").toString());
+                        else
+                            w.append(t, (new StringBuilder(", and ")).append(reference(c)).append(" doesn't have the strength to resist ").append(himHer()).append(".").toString());
+                    } else
+                    {
+                        w.append(t, (new StringBuilder("No matter how much ")).append(c.hisHer()).append(" clothes get torn, ").append(c.getMainName()).append(" hardly seems to care.  ").append(mainName).append(" gets in close to help tear them off further, ").toString());
+                        if(obedience > 66)
+                            w.append(t, (new StringBuilder("happy that ")).append(heShe()).append("'s found an opponent who doesn't realize how valuable it is for the Demons when the Chosen are made to look vulnerable to the public.").toString());
+                        else
+                        if(obedience > 33)
+                            w.append(t, (new StringBuilder("relieved that ")).append(hisHer()).append(" orders to humiliate ").append(c.getMainName()).append(" will be relatively easy to execute.").toString());
+                        else
+                            w.append(t, (new StringBuilder("enjoying feeling like ")).append(heShe()).append("'s playing a prank on ").append(c.himHer()).append(".").toString());
+                    }
+                } else
+                if(c.getInnocence() > 66)
+                {
+                    if(disgrace > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" desperately dodges ").append(c.getMainName()).append("'s clumsy attacks, each one knocking down a wall or blasting a crater in the ground.  ").toString());
+                    else
+                    if(disgrace > 33)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" and ").append(c.getMainName()).append(" charge at each other once again, exchanging close-range attacks that make the ground shake and blow out nearby windows.  ").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" chases after ").append(c.getMainName()).append(", carving a wide swath of destruction through the city with ").append(hisHer()).append(" attacks.  ").toString());
+                    w.append(t, "Every release of energy shreds both combatants' clothes, but they neither notice nor care.");
+                } else
+                if(c.getInnocence() > 33)
+                {
+                    if(hostility > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" closes in on ").append(c.getMainName()).append(", attacking with a wild ferocity that shreds apart everything that's not protected by a Chosen's supernatural durability.  This applies not only to buildings, but to ").append(reference(c)).append("'s clothes as well.").toString());
+                    else
+                    if(hostility > 33)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" closes in and grapples for control with ").append(c.getMainName()).append(", snarling in ").append(c.hisHer()).append(" face.  Both combatants try to seize control by grabbing and pulling on each other's clothes, but their garments aren't resilient enough to stand up to their supernatural strength for long.").toString());
+                    else
+                        w.append(t, (new StringBuilder("There's no anger behind ")).append(mainName).append("'s attacks, but ").append(heShe()).append(" still intends to debilitate ").append(c.getMainName()).append(".  ").append(HisHer()).append(" strikes are precise, and even when ").append(c.getMainName()).append(" dodges, ").append(c.hisHer()).append(" clothes are usually caught and partially torn away.").toString());
+                } else
+                {
+                    w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append("'s clothes have taken significant damage, and while ").append(mainName).append(" isn't interested in ogling ").append(c.himHer()).append(", ").toString());
+                    if(obedience > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(heShe()))).append("'s eager to please the Demon Lord.  ").toString());
+                    else
+                    if(obedience > 33)
+                        w.append(t, (new StringBuilder(String.valueOf(heShe()))).append(" knows that the fight will become easier as the Chosen begin to look more exposed and vulnerable to the public and each other.  ").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(heShe()))).append(" knows that ").append(c.getMainName()).append(" doesn't want to be exposed.  ").toString());
+                    w.append(t, (new StringBuilder(String.valueOf(HeShe()))).append(" charges forward, forcing ").append(c.getMainName()).append(" to choose between fighting effectively and keeping ").append(c.hisHer()).append(" movements minimal in order to protect ").append(c.hisHer()).append(" modesty in front of the watching cameras.").toString());
+                }
+            } else
+            if(disgrace > 66)
+            {
+                if(c.getConfidence() > 66)
+                {
+                    if(innocence > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" can't help but underestimate ").append(mainName).append(", and ").append(c.heShe()).append("'s too prideful to admit to ").append(c.himHer()).append("self that ").append(c.reference(this)).append(" might actually be able to wear ").append(c.himHer()).append(" down.  ").toString());
+                    else
+                    if(innocence > 33)
+                        w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" pins ").append(mainName).append(" down, trying to break ").append(hisHer()).append(" will to fight, but ").append(mainName).append(" isn't completely helpless.  ").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" knows how prideful and headstrong ").append(c.getMainName()).append(" is, and ").append(heShe()).append(" exploits those traits to the fullest, playing up ").append(hisHer()).append(" own weakness so that ").append(reference(c)).append(" will try to quickly finish ").append(himHer()).append(" off at hand-to-hand range.  ").toString());
+                    w.append(t, (new StringBuilder("This allows ")).append(mainName).append(" to use the opportunity to get ").append(hisHer()).append(" hands on ").append(c.getMainName()).append(" as well.").toString());
+                } else
+                if(c.getConfidence() > 33)
+                {
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is weak enough that ").append(c.getMainName()).append(" is able to pin ").append(himHer()).append(" down, but ").toString());
+                    if(deviancy > 66)
+                        w.append(t, (new StringBuilder("the way that ")).append(mainName).append(" treats it as a kinky game and keeps trying to grope ").append(reference(c)).append(" at the same time makes it hard to focus on keeping ").append(himHer()).append(" under control.").toString());
+                    else
+                    if(deviancy > 33)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" constantly squirms and contorts ").append(hisHer()).append(" body, even enjoying the way it causes ").append(himHer()).append(" to rub up against ").append(reference(c)).append(", and ").append(c.getMainName()).append(" can't completely keep ").append(hisHer()).append(" hands off ").append(c.himHer()).append(".").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is content to bide ").append(hisHer()).append(" time and look for an opening to kick ").append(hisHer()).append(" way free - which ").append(heShe()).append(" eventually finds.").toString());
+                } else
+                {
+                    w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" has tackled ").append(mainName).append(" to the ground, and by all rights, ").append(c.getMainName()).append(" should be able to neutralize ").append(c.hisHer()).append(" weakened opponent right then and there.  ").toString());
+                    if(confidence > 66)
+                        w.append(t, (new StringBuilder("But ")).append(mainName).append("'s personality is intimidating even now, ").toString());
+                    else
+                    if(confidence > 33)
+                        w.append(t, (new StringBuilder("But ")).append(c.getMainName()).append(" lacks the willpower to follow through, ").toString());
+                    else
+                        w.append(t, (new StringBuilder("But ")).append(mainName).append(" struggles with a wild desperation that ").append(c.getMainName()).append(" isn't prepared for, ").toString());
+                    w.append(t, (new StringBuilder("and soon it's ")).append(mainName).append(" that's back on top of ").append(reference(c)).append(".").toString());
+                }
+            } else
+            if(disgrace > 33)
+            {
+                if(c.getInnocence() > 66)
+                {
+                    w.append(t, (new StringBuilder("Neither ")).append(mainName).append(" nor ").append(c.getMainName()).append(" is significantly stronger than the other, but ").toString());
+                    if(confidence > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is clearly so convinced of ").append(hisHer()).append(" victory that ").append(c.getMainName()).append(" subconsciously assumes that there's no point in resisting as ").append(c.heShe()).append("'s pushed down to the ground.").toString());
+                    else
+                    if(confidence > 33)
+                        w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" is careless and easily distracted.  One inattentive moment is all it takes for ").append(mainName).append(" to push ").append(c.himHer()).append(" to the ground.").toString());
+                    else
+                        w.append(t, (new StringBuilder("while ")).append(c.getMainName()).append(" doesn't fully understand the stakes of the battle, ").append(mainName).append(" is motivated by terror of the consequences if ").append(heShe()).append(" fails.  Desperation fuels ").append(mainName).append("'s strength, allowing ").append(himHer()).append(" to overpower ").append(c.getMainName()).append(" and push ").append(c.himHer()).append(" to the ground.").toString());
+                } else
+                if(c.getInnocence() > 33)
+                {
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" and ").append(c.getMainName()).append(" grip each other's wrists, struggling back and forth for control as ").append(mainName).append(" ").toString());
+                    if(obedience > 66)
+                        w.append(t, (new StringBuilder("calls out to the Demon Lord to give ")).append(himHer()).append(" strength.").toString());
+                    else
+                    if(obedience > 33)
+                        w.append(t, (new StringBuilder("grits ")).append(hisHer()).append(" teeth and reminds ").append(himHer()).append("self that ").append(heShe()).append(" can't lose.").toString());
+                    else
+                        w.append(t, "refuses to give up.");
+                } else
+                {
+                    if(hostility > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" claws at ").append(c.getMainName()).append(" with singleminded fury, ").toString());
+                    else
+                    if(hostility > 33)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is taking great satisfaction in the opportunity to fight ").append(c.getMainName()).append(" hand-to-hand, ").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" fights with firm determination against ").append(c.getMainName()).append(", ").toString());
+                    w.append(t, (new StringBuilder("and ")).append(c.getMainName()).append(" is also completely focused on their battle.  As they wrestle each other for control, their surroundings are almost silent except for their grunts of effort and the clatter of rubble sent bouncing across the ground.").toString());
+                }
+            } else
+            if(c.getMorality() > 66)
+            {
+                w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" knows that ").append(c.heShe()).append("'s no match for ").append(mainName).append(", but ").toString());
+                if(hostility > 66)
+                    w.append(t, (new StringBuilder(String.valueOf(c.heShe()))).append(" also knows that many civilian lives depend on keeping ").append(c.reference(this)).append(" occupied, ").toString());
+                else
+                if(hostility > 33)
+                    w.append(t, (new StringBuilder(String.valueOf(c.heShe()))).append("'s willing to bear the brunt of ").append(c.reference(this)).append("'s assault ").append(c.himHer()).append("self, ").toString());
+                else
+                    w.append(t, (new StringBuilder(String.valueOf(c.heShe()))).append(" isn't ready to give up on ").append(c.reference(this)).append(" yet, ").toString());
+                w.append(t, (new StringBuilder("so ")).append(c.heShe()).append(" clings to ").append(mainName).append(" with all ").append(c.hisHer()).append(" strength, forcing ").append(himHer()).append(" to deal with ").append(c.getMainName()).append(" ").append(c.himHer()).append("self before leaving.").toString());
+            } else
+            if(c.getMorality() > 33)
+            {
+                w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" easily seizes control in ").append(hisHer()).append(" grapple with ").append(c.getMainName()).append(", putting ").append(c.himHer()).append(" on ").append(c.hisHer()).append(" back and pinning ").append(c.hisHer()).append(" hands over ").append(c.hisHer()).append(" head").toString());
+                if(deviancy > 66)
+                    w.append(t, (new StringBuilder(" while practically drooling over the sight of ")).append(c.hisHer()).append(" body.").toString());
+                else
+                if(deviancy > 33)
+                    w.append(t, (new StringBuilder(", unable to resist the urge to make some sexual comments while ")).append(c.heShe()).append(" does so.").toString());
+                else
+                    w.append(t, (new StringBuilder(" in order to make sure ")).append(c.heShe()).append(" understands how helpless ").append(c.heShe()).append(" is.").toString());
+            } else
+            {
+                w.append(t, (new StringBuilder("Frustrated with ")).append(c.hisHer()).append(" inability to make a dent in ").append(mainName).append("'s body, ").append(c.getMainName()).append(" gives in to ").append(c.hisHer()).append(" anger, ").toString());
+                if(obedience > 66)
+                    w.append(t, "insulting the Demon Lord");
+                else
+                if(obedience > 33)
+                    w.append(t, (new StringBuilder("calling ")).append(mainName).append(" a coward").toString());
+                else
+                    w.append(t, (new StringBuilder("calling ")).append(mainName).append(" every name ").append(c.heShe()).append(" can think of").toString());
+                w.append(t, (new StringBuilder(" in hopes of at least inflicting some emotional damage.  Considering that ")).append(c.heShe()).append("'s currently locked in a grapple with ").append(mainName).append(", this proves to be a poor decision.").toString());
+            }
+        } else
+        if(c.captureProgression % 6 == 5)
+            if(styleDamage[0] > 0)
+            {
+                if(styleDamage[2] > 0)
+                {
+                    if(hostility > 66)
+                    {
+                        if(c.getMorality() > 66)
+                        {
+                            if(disgrace > 66)
+                                w.append(t, (new StringBuilder("Desperate to buy ")).append(himHer()).append("self some time and willing to do anything for it, ").toString());
+                            else
+                            if(disgrace > 33)
+                                w.append(t, "As if it's nothing more than a completely normal combat tactic, ");
+                            else
+                                w.append(t, (new StringBuilder("Knowing that this will hurt ")).append(c.getMainName()).append(" more than anything else, ").toString());
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" begins shooting out random blasts of energy, causing the buildings all around them to start to collapse.  ").append(c.getMainName()).append(" panics as ").append(c.heShe()).append(" rushes to try to save as many trapped civilians who couldn't evacuate as possible, and ").append(mainName).append(" looms behind ").append(himHer()).append(", readying another attack.").toString());
+                        } else
+                        if(c.getMorality() > 33)
+                        {
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" begins drawing on as much Demonic energy as ").append(heShe()).append(" can, and before ").append(c.getMainName()).append(" can stop ").append(himHer()).append(", an enormous blast consumes their side of the district, slaughtering Thralls along with any nearby civilians who couldn't evaucate.  As the light fades, ").toString());
+                            if(deviancy > 66)
+                                w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" stands in the middle of the destruction, an expression of sexual ecstasy on ").append(hisHer()).append(" face.").toString());
+                            else
+                            if(deviancy > 33)
+                                w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" grins at ").append(c.getMainName()).append(" before backing away into the cloud of dust.").toString());
+                            else
+                                w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is already gone, coldly using ").append(c.getMainName()).append("'s stunned horror as an opportunity to maneuver around behind ").append(c.himHer()).append(".").toString());
+                        } else
+                        {
+                            w.append(t, (new StringBuilder("A tall building collapses nearby, showering ")).append(mainName).append(" and ").append(c.getMainName()).append(" both with painful rubble.  A large pile of debris separates the two of them, ").toString());
+                            if(innocence > 66)
+                                w.append(t, (new StringBuilder("and ")).append(mainName).append(" assumes that it's ").append(reference(c)).append("'s fault, ").toString());
+                            else
+                            if(innocence > 33)
+                                w.append(t, (new StringBuilder("and ")).append(mainName).append(" doesn't take losing sight of the object of ").append(hisHer()).append(" sadism well, ").toString());
+                            else
+                                w.append(t, (new StringBuilder("and the disruption to ")).append(hisHer()).append(" plans causes ").append(mainName).append(" to abruptly snap, ").toString());
+                            w.append(t, (new StringBuilder("shrieking with incoherent rage at ")).append(c.getMainName()).append(" and lashing out in all directions.").toString());
+                        }
+                    } else
+                    if(hostility > 33)
+                    {
+                        if(c.getConfidence() > 66)
+                        {
+                            w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append("'s fight with ").append(mainName).append(" takes them into the heart of the Demonic army, breaking their line of sight with each other.  ").append(c.getMainName()).append(" shouts angry accusations that ").append(mainName).append(" is hiding behind the Demons as ").append(c.heShe()).append(" fends them off, ").toString());
+                            if(disgrace > 66)
+                                w.append(t, (new StringBuilder("and ")).append(c.heShe()).append("'s not completely wrong.").toString());
+                            else
+                            if(disgrace > 33)
+                                w.append(t, (new StringBuilder("although ")).append(mainName).append(" is just as annoyed by the development.").toString());
+                            else
+                                w.append(t, (new StringBuilder("even though ")).append(c.getMainName()).append(" ").append(c.himHer()).append("self is the one who benefits more from the reprieve.").toString());
+                        } else
+                        if(c.getConfidence() > 33)
+                        {
+                            if(innocence > 66)
+                                w.append(t, (new StringBuilder("A squad of Demons pushes past ")).append(mainName).append(" on their way to ").append(c.getMainName()).append(", disorienting ").append(himHer()).append(" and causing ").append(himHer()).append(" to briefly lose track of ").append(reference(c)).append(".  ").toString());
+                            else
+                            if(innocence > 33)
+                                w.append(t, (new StringBuilder("While ")).append(c.getMainName()).append(" and ").append(mainName).append(" are separated, a large force of Demons arrives to take ").append(mainName).append("'s place.  ").toString());
+                            else
+                                w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" leads ").append(c.getMainName()).append(" into a large group of Demons, then slips around a corner and comes around in order to attack from another angle.  ").toString());
+                            w.append(t, (new StringBuilder("When ")).append(mainName).append(" sees ").append(c.getMainName()).append(" again, ").append(heShe()).append(" launches a blast of psychic energy from afar to disrupt ").append(c.hisHer()).append(" fight.").toString());
+                        } else
+                        {
+                            w.append(t, (new StringBuilder("A horde of Demons suddenly attacks ")).append(c.getMainName()).append(", and ").append(c.heShe()).append(" has trouble fending them off.  ").toString());
+                            if(deviancy > 66)
+                                w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" takes a seat on a nearby rooftop and starts masturbating as ").append(heShe()).append(" watches, moaning loudly to make sure ").append(c.getMainName()).append(" notices ").append(himHer()).append(".").toString());
+                            else
+                            if(deviancy > 33)
+                                w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" laughs and steps back, calling out unhelpful advice as ").append(c.getMainName()).append(" struggles.").toString());
+                            else
+                                w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" decides to take the opportunity to catch ").append(hisHer()).append(" breath and prepare for ").append(hisHer()).append(" next attack.").toString());
+                        }
+                    } else
+                    if(c.getInnocence() > 66)
+                    {
+                        w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" falls off a rooftop as ").append(c.heShe()).append(" tries to close the distance with ").append(mainName).append(".  When ").append(mainName).append(" notices, ").append(heShe()).append(" ").toString());
+                        if(innocence > 66)
+                            w.append(t, (new StringBuilder("looks down and giggles despite ")).append(himHer()).append("self.").toString());
+                        else
+                        if(innocence > 33)
+                            w.append(t, (new StringBuilder("angrily reminds ")).append(c.getMainName()).append(" to take their fight seriously.").toString());
+                        else
+                            w.append(t, "sighs and voices some biting criticism.");
+                    } else
+                    if(c.getInnocence() > 33)
+                    {
+                        w.append(t, (new StringBuilder("The flow of the battle has put some distance between ")).append(c.getMainName()).append(" and ").append(mainName).append(", but when ").append(c.getMainName()).append(" tries to turn away and put ").append(c.hisHer()).append(" focus back on fighting the Demons, ").append(mainName).append(" hits ").append(c.himHer()).append(" in the back with a long-range blast of energy").toString());
+                        if(deviancy > 66)
+                            w.append(t, (new StringBuilder(", suddenly overcome by an irresistable urge to make ")).append(reference(c)).append(" scream.").toString());
+                        else
+                        if(deviancy > 33)
+                            w.append(t, (new StringBuilder(", smirking at the way ")).append(c.heShe()).append(" squeaks in indignation.").toString());
+                        else
+                            w.append(t, (new StringBuilder(", reminding ")).append(c.himHer()).append(" not to let ").append(c.hisHer()).append(" guard down around an opponent.").toString());
+                    } else
+                    {
+                        w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" fights off some straggler Demons, keeping a wary eye on ").append(mainName).append(" at the same time.  They're too far from each other to fight now, but ").toString());
+                        if(obedience > 66)
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is determined to bring ").append(c.himHer()).append(" down for the Demon Lord, ").toString());
+                        else
+                        if(obedience > 33)
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" knows that the Demon Lord won't be satisfied with this performance, ").toString());
+                        else
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" shows no signs of stopping, ").toString());
+                        w.append(t, (new StringBuilder("and soon enough ")).append(heShe()).append(" starts to move toward ").append(c.getMainName()).append(" again.").toString());
+                    }
+                } else
+                if(hostility > 66)
+                {
+                    if(c.getInnocence() > 66)
+                    {
+                        if(obedience > 66)
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is willing to put ").append(hisHer()).append(" murderous desires aside for the Demon Lord's sake, ").toString());
+                        else
+                        if(obedience > 33)
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s fear of the Demon Lord's wrath is greater than ").append(hisHer()).append(" desire to kill, ").toString());
+                        else
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s hatred wouldn't be satisfied by giving ").append(hisHer()).append(" oppoent a kick death, ").toString());
+                        w.append(t, (new StringBuilder("but ")).append(heShe()).append(" would still prefer to be directly attacking ").append(c.getMainName()).append(".  However, ").append(mainName).append(" worries that ").append(c.getMainName()).append("'s oblivious nature would lead ").append(c.himHer()).append(" to get ").append(c.himHer()).append("self killed even by an attack that's not intended to be fatal, and so ").append(mainName).append(" contents ").append(himHer()).append("self with causing emotional pain.").toString());
+                    } else
+                    if(c.getInnocence() > 33)
+                    {
+                        w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" loses sight of ").append(mainName).append(" in the chaotic battlefield, ").toString());
+                        if(innocence > 66)
+                            w.append(t, (new StringBuilder("but ")).append(mainName).append(" spoils the tactical advantage by continuing to shout furious insults, giving ").append(reference(c)).append(" hints as to where ").append(heShe()).append(" is.").toString());
+                        else
+                        if(innocence > 33)
+                            w.append(t, (new StringBuilder("and ")).append(mainName).append(" stalks ").append(c.himHer()).append(" from the shadows, whispering cruel threats just loudly enough to be heard before vanishing again.").toString());
+                        else
+                            w.append(t, (new StringBuilder("and ")).append(mainName).append(" decides to unnerve ").append(c.himHer()).append(" by leaving a trail of civilian corpses leading into an ambush.").toString());
+                    } else
+                    {
+                        if(disgrace > 66)
+                            w.append(t, (new StringBuilder("Despite all ")).append(hisHer()).append(" impotent rage, ").toString());
+                        else
+                        if(disgrace > 33)
+                            w.append(t, (new StringBuilder("Even though ")).append(hisHer()).append(" desire to kill ").append(c.getMainName()).append(" is very sincere, ").toString());
+                        else
+                            w.append(t, (new StringBuilder("Even though ")).append(heShe()).append(" might well be capable of killing ").append(c.getMainName()).append(", ").toString());
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" still hasn't inflicted even a scratch on ").append(c.himHer()).append(".  ").append(c.getMainName()).append(" can only conclude that it must be because of the Demon Lord's orders.").toString());
+                    }
+                } else
+                if(hostility > 33)
+                {
+                    if(c.getConfidence() > 66)
+                    {
+                        if(disgrace > 66)
+                            w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" chases after the fleeing ").append(mainName).append(", but all the while, ").toString());
+                        else
+                        if(disgrace > 33)
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" leads ").append(c.getMainName()).append(" on a chase.  ").append(HeShe()).append("'s fast enough that ").append(reference(c)).append(" has difficulty keeping up, and ").toString());
+                        else
+                            w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" wants to charge at ").append(mainName).append(", but instead ").append(c.heShe()).append("'s left gasping for breath after the exertion of their battle, and ").toString());
+                        w.append(t, (new StringBuilder(String.valueOf(hisHer()))).append(" insults enrage ").append(c.getMainName()).append(" to the point that it's hard to see where ").append(c.heShe()).append("'s going.").toString());
+                    } else
+                    if(c.getConfidence() > 33)
+                    {
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" laughs and taunts ").append(c.getMainName()).append(" from a distance, and ").toString());
+                        if(innocence > 66)
+                            w.append(t, (new StringBuilder("while ")).append(heShe()).append(" isn't smart enough to make the insults actually sting, the fact that ").append(heShe()).append("'s having such a good time is enough on its own to infuriate ").append(c.getMainName()).append(".").toString());
+                        else
+                        if(innocence > 33)
+                            w.append(t, (new StringBuilder("due to the Demons and piles of rubble between them, ")).append(c.getMainName()).append(" has no choice but to grit ").append(c.hisHer()).append(" teeth and take it.").toString());
+                        else
+                            w.append(t, (new StringBuilder("with how much ")).append(heShe()).append("'s come to understand ").append(reference(c)).append(", ").append(heShe()).append(" knows exactly what subjects will get the biggest reaction out of ").append(c.himHer()).append(".").toString());
+                    } else
+                    {
+                        w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" finds ").append(c.himHer()).append("self briefly too intimidated to approach ").append(mainName).append(", ").toString());
+                        if(deviancy > 66)
+                            w.append(t, (new StringBuilder("deeply disturbed by the way that ")).append(c.reference(this)).append(" stares hungrily at ").append(c.himHer()).append(" like ").append(c.heShe()).append("'s a delicious piece of meat.").toString());
+                        else
+                        if(deviancy > 33)
+                            w.append(t, (new StringBuilder("and the cruel taunts and laughter coming ")).append(c.hisHer()).append(" way from ").append(c.reference(this)).append(" don't help matters.").toString());
+                        else
+                            w.append(t, (new StringBuilder("sensing ")).append(c.reference(this)).append("'s sadistic nature.").toString());
+                    }
+                } else
+                if(c.getMorality() > 66)
+                {
+                    w.append(t, "While they're too far apart to fight, ");
+                    if(obedience > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" sees ").append(mainName).append(" eagerly stunning the civilians who were too slow to evacuate and handing them over to the Demons, ").toString());
+                    else
+                    if(obedience > 33)
+                        w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" sees ").append(mainName).append(" refusing to help a group of civilians who are asking ").append(himHer()).append(" for help with their evacuation, ").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" harshly criticizes ").append(c.getMainName()).append(" for failing to live up to ").append(c.hisHer()).append(" own supposed ideals, ").toString());
+                    w.append(t, (new StringBuilder("causing ")).append(c.getMainName()).append("'s eyes to burn with anger.").toString());
+                } else
+                if(c.getMorality() > 33)
+                {
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" has ended up some distance from ").append(hisHer()).append(" opponent, ").toString());
+                    if(deviancy > 66)
+                        w.append(t, (new StringBuilder("masturbating and moaning ")).append(c.getMainName()).append("'s name out loud.  ").toString());
+                    else
+                    if(deviancy > 33)
+                        w.append(t, (new StringBuilder("calling out lewd backhanded compliments at ")).append(c.getMainName()).append(".  ").toString());
+                    else
+                        w.append(t, (new StringBuilder("coldly insulting ")).append(c.getMainName()).append("'s abilities.  ").toString());
+                    w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" is angry, but there's not much ").append(c.heShe()).append(" can do about it from down below.").toString());
+                } else
+                {
+                    w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" is eager to let out the frustration that's been building over the course of the fruitless battle, but ").toString());
+                    if(disgrace > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" keeps running away").toString());
+                    else
+                    if(disgrace > 33)
+                        w.append(t, (new StringBuilder("the flow of the battle has put ")).append(mainName).append(" too far away").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is too dangerous to approach").toString());
+                    w.append(t, (new StringBuilder(", and ")).append(c.getMainName()).append("'s aggression continues to grow.").toString());
+                }
+            } else
+            if(styleDamage[2] > 0)
+            {
+                if(obedience > 66)
+                {
+                    if(c.getMorality() > 66)
+                    {
+                        w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" fights through waves of Demons to reach ").append(mainName).append(", but ").append(c.heShe()).append(" has mixed feelings when ").append(c.heShe()).append(" sees that ").append(c.reference(this)).append(" is ").toString());
+                        if(innocence > 66)
+                            w.append(t, "protecting the Demons' civilian captives from the waves of flame and rubble across the battlefield");
+                        else
+                        if(innocence > 33)
+                            w.append(t, "helping trapped civilians out of the ruins of a collapsed building");
+                        else
+                            w.append(t, "giving medical treatment to the wounded among the Demons' civilian captives");
+                        w.append(t, ".");
+                    } else
+                    if(c.getMorality() > 33)
+                    {
+                        w.append(t, (new StringBuilder("Several Demons rush in between ")).append(c.getMainName()).append(" and ").append(mainName).append(", fighting to protect the Forsaken.  ").toString());
+                        if(confidence > 66)
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" mostly just looks annoyed at the interference.").toString());
+                        else
+                        if(confidence > 33)
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" angrily tells them not to throw their lives away, but they don't listen.").toString());
+                        else
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" looks grateful for the chance to catch ").append(hisHer()).append(" breath.").toString());
+                    } else
+                    {
+                        if(disgrace > 66)
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is weaker than ").append(c.getMainName()).append(", but ").append(heShe()).append("'s still strong enough to help the Demons clear a path to carry their captives back to the hive.  ").toString());
+                        else
+                        if(disgrace > 33)
+                            w.append(t, (new StringBuilder("With the fight against ")).append(c.getMainName()).append(" turning into a stalemate, ").append(mainName).append(" devotes some attention to helping the nearby Demons secure some human captives.  ").toString());
+                        else
+                            w.append(t, (new StringBuilder("Deciding that ")).append(c.getMainName()).append(" is beneath ").append(hisHer()).append(" notice for the moment, ").append(mainName).append(" blasts a tunnel straight down through the ground so that the Demons can easily carry their captives to the hive.  ").toString());
+                        w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" doesn't care enough to stop ").append(himHer()).append(", and ").append(c.heShe()).append("'s busy fighting off some Demons attacking ").append(c.himHer()).append(" at the same time, so ").append(c.heShe()).append(" lets it happen.").toString());
+                    }
+                } else
+                if(obedience > 33)
+                {
+                    if(c.getConfidence() > 66)
+                    {
+                        if(disgrace > 66)
+                            w.append(t, (new StringBuilder("Desperate to delay the powerful ")).append(c.getMainName()).append(", ").append(mainName).append(" orders a swarm of Demons to attack ").append(c.himHer()).append(".  ").toString());
+                        else
+                        if(disgrace > 33)
+                            w.append(t, (new StringBuilder("With the battle between ")).append(mainName).append(" and ").append(c.getMainName()).append(" at a stalemate, ").append(mainName).append(" decides to tip the scales by ordering a large-scale Demon attack against ").append(c.getMainName()).append(".  ").toString());
+                        else
+                            w.append(t, (new StringBuilder("A swarm of Demons attacks ")).append(c.getMainName()).append(", and ").append(mainName).append(" decides to use the opportunity to check on how the rest of the battle is going.  ").toString());
+                        w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(", for ").append(c.hisHer()).append(" part, enjoys cutting down the weaker enemies.").toString());
+                    } else
+                    if(c.getConfidence() > 33)
+                    {
+                        w.append(t, (new StringBuilder("A crowd of Demons has grown around the spot where ")).append(mainName).append(" and ").append(c.getMainName()).append(" are fighting, forming into a ring around them.  ").append(mainName).append(" steps back, points at ").append(c.getMainName()).append(", and begins shouting combat orders to the Demons, ").toString());
+                        if(innocence > 66)
+                            w.append(t, (new StringBuilder("although this generally amounts to just using random military jargon ")).append(heShe()).append(" picked up from the shows ").append(heShe()).append(" watches.").toString());
+                        else
+                        if(innocence > 33)
+                            w.append(t, "staying out of the way while they fight.");
+                        else
+                            w.append(t, (new StringBuilder("using ")).append(hisHer()).append(" keen tactical mind to let them fight at a greater effectiveness than ").append(c.getMainName()).append(" is used to.").toString());
+                    } else
+                    {
+                        if(deviancy > 66)
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" takes a voyeuristic thrill in watching ").append(c.getMainName()).append(" struggle against the Demons, ").toString());
+                        else
+                        if(deviancy > 33)
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" decides that it's easier to appreciate ").append(c.getMainName()).append("'s crying face from a slight distance, ").toString());
+                        else
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" knows that ").append(c.getMainName()).append(" often has trouble fighting against Demons, ").toString());
+                        w.append(t, (new StringBuilder("and ")).append(heShe()).append(" commands any Demons within range to charge at ").append(c.getMainName()).append(" all at once.").toString());
+                    }
+                } else
+                if(c.getInnocence() > 66)
+                {
+                    w.append(t, (new StringBuilder("A Demon attacks ")).append(c.getMainName()).append(" from behind, knocking ").append(c.himHer()).append(" down, but when it tries to hit ").append(c.himHer()).append(" again, ").toString());
+                    if(deviancy > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" flies into a rage, tearing it apart in an instant.").toString());
+                    else
+                    if(deviancy > 33)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" runs by, killing the Demon with a smirk.").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" coldly kills the Demon with a blast of energy.").toString());
+                } else
+                if(c.getInnocence() > 33)
+                {
+                    w.append(t, (new StringBuilder("A huge wave of Demons crashes over ")).append(c.getMainName()).append(", and ").append(c.heShe()).append("'s suddenly fighting enemies in all directions.  However, before ").append(c.heShe()).append(" can be overwhelmed, ").toString());
+                    if(disgrace > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" takes down the Demon that was about to grab ").append(c.himHer()).append(" from behind, and with ").append(c.reference(this)).append("'s help, ").append(c.getMainName()).append(" is just barely able to hold out.").toString());
+                    else
+                    if(disgrace > 33)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" starts fighting through the Demons as well, carving a path to ").append(c.hisHer()).append(" side.  The two of them fight back-to-back, sending the Demons fleeing, before they both jump apart and resume staring each other down.").toString());
+                    else
+                        w.append(t, (new StringBuilder("huge explosions start raining from the sky, annihilating the Demons.  ")).append(mainName).append(" looks down on the scene, energy crackling around ").append(hisHer()).append(" outstretched hand.").toString());
+                } else
+                {
+                    w.append(t, (new StringBuilder("As ")).append(mainName).append(" and ").append(c.getMainName()).append(" fight, ").toString());
+                    if(hostility > 66)
+                        w.append(t, (new StringBuilder("some Demons try to swarm at ")).append(c.getMainName()).append(", only to be immediately struck down by ").append(mainName).append(" before they can lay a finger on ").append(reference(c)).append(".").toString());
+                    else
+                    if(hostility > 33)
+                        w.append(t, (new StringBuilder("some Demons come within view, but ")).append(mainName).append(" instantly incinerates them before returning ").append(hisHer()).append(" attention to ").append(reference(c)).append(".").toString());
+                    else
+                        w.append(t, (new StringBuilder("some Demons with captive civilians march by, but ")).append(mainName).append(" attacks in order to free the humans, and soon both ").append(heShe()).append(" and ").append(reference(c)).append(" are fighting the Demons off together.").toString());
+                }
+            } else
+            if(deviancy > 66)
+            {
+                if(c.getDignity() > 66)
+                {
+                    if(disgrace > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" darts toward ").append(c.getMainName()).append(" and then backs off, again and again, ").toString());
+                    else
+                    if(disgrace > 33)
+                        w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" keeps ").append(c.hisHer()).append(" guard up, unwilling to let ").append(mainName).append(" approach ").append(c.himHer()).append(" again, ").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" flees across the city, just ahead of ").append(mainName).append("'s grasping hands, ").toString());
+                    w.append(t, (new StringBuilder("blushing deeply as ")).append(c.heShe()).append(" tries to come to terms with the fact that ").append(c.heShe()).append(" doesn't entirely dislike ").append(c.reference(this)).append("'s molestation.").toString());
+                } else
+                if(c.getDignity() > 33)
+                {
+                    w.append(t, (new StringBuilder("As ")).append(mainName).append(" and ").append(c.getMainName()).append(" maneuver around each other, ").append(mainName).append("'s movements become increasingly spastic").toString());
+                    if(innocence > 66)
+                        w.append(t, (new StringBuilder(", and while it's obvious to ")).append(c.getMainName()).append(" that ").append(c.reference(this)).append(" is attempting to masturbate under ").append(hisHer()).append(" clothes in the middle of their fight, ").append(c.heShe()).append(" does ").append(c.hisHer()).append(" best not to dwell on it.").toString());
+                    else
+                    if(innocence > 33)
+                        w.append(t, (new StringBuilder(" as ")).append(heShe()).append(" tries without much success to masturbate even while ").append(heShe()).append(" fights.").toString());
+                    else
+                        w.append(t, (new StringBuilder(", because despite ")).append(hisHer()).append(" expertise on both subjects, ").append(heShe()).append(" finds it difficult to masturbate and fight at the same time.").toString());
+                } else
+                if(hostility > 66)
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" has been trying to anger ").append(c.getMainName()).append(" with ").append(hisHer()).append(" constant sexual behavior, but the more ").append(heShe()).append(" sees that ").append(reference(c)).append(" is able to mostly keep ").append(c.hisHer()).append(" composure, the more enraged ").append(mainName).append(" ").append(himHer()).append("self gets.").toString());
+                else
+                if(hostility > 33)
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is getting so turned on that ").append(heShe()).append("'s having a hard time doing much to ").append(c.getMainName()).append(" even when ").append(heShe()).append(" manages to get ").append(hisHer()).append(" hands on ").append(reference(c)).append(".  ").append(HeShe()).append("'s forced to duck away behind a wall of Demons in order to calm down so ").append(heShe()).append(" can fight again.").toString());
+                else
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" comments with complete honesty about how pleased ").append(heShe()).append(" is that ").append(c.getMainName()).append(" doesn't seem to be bothered by ").append(mainName).append("'s sexual playfulness.  ").append(c.getMainName()).append(" just shrugs ").append(hisHer()).append(" words off.").toString());
+            } else
+            if(deviancy > 33)
+            {
+                if(c.getConfidence() > 66)
+                {
+                    if(hostility > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" rants angrily at ").append(c.getMainName()).append(", but the thing that's angering ").append(himHer()).append(" is ").append(hisHer()).append(" admiration of ").append(reference(c)).append(", and ").toString());
+                    else
+                    if(hostility > 33)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" grudgingly compliments ").append(c.getMainName()).append(", acknowledging ").append(c.himHer()).append(" as a worthy (and especially attractive) opponent.  ").toString());
+                    else
+                        w.append(t, (new StringBuilder("During a standoff between ")).append(himHer()).append("self and ").append(c.getMainName()).append(", ").append(mainName).append(" takes the opportunity to describe in detail which of ").append(reference(c)).append("'s traits ").append(heShe()).append(" approves of.  ").toString());
+                    w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" preens as ").append(c.heShe()).append("'s praised.").toString());
+                } else
+                if(c.getConfidence() > 33)
+                {
+                    if(confidence > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" starts trying to seduce ").append(c.getMainName()).append(" right in the middle of the battle, using ").append(hisHer()).append(" best pickup lines.  ").toString());
+                    else
+                    if(confidence > 33)
+                        w.append(t, (new StringBuilder("Now that ")).append(heShe()).append("'s gotten a chance to examine ").append(c.getMainName()).append("'s body very closely, ").append(mainName).append(" compliments it, using very detailed language.  ").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" comments on how much ").append(heShe()).append(" admires ").append(c.getMainName()).append("'s figure, disparaging ").append(hisHer()).append(" own in the process.  ").toString());
+                    w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" can't help but feel flattered.").toString());
+                } else
+                {
+                    w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" knows that ").append(c.heShe()).append("'s supposed to be fighting ").append(mainName).append(", but ").append(c.heShe()).append(" finds it harder and harder to do so, ").toString());
+                    if(disgrace > 66)
+                        w.append(t, (new StringBuilder("as ")).append(mainName).append("'s relative weakness and apparent unwillingness to actually harm ").append(c.himHer()).append(" makes it difficult to get motivated.").toString());
+                    else
+                    if(disgrace > 33)
+                        w.append(t, (new StringBuilder("as ")).append(mainName).append(" hasn't actually been launching any dangerous attacks in return.").toString());
+                    else
+                        w.append(t, (new StringBuilder("demotivated and confused by ")).append(mainName).append("'s unwillingness to actually harm ").append(c.himHer()).append(" despite the vast difference in power between them.").toString());
+                    w.append(t, (new StringBuilder("  The molestation is unpleasant, but not to the point of provoking ")).append(c.himHer()).append(".").toString());
+                }
+            } else
+            if(c.getInnocence() > 66)
+            {
+                w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" knows that ").append(c.heShe()).append("'s supposed to be fighting ").append(mainName).append(", but ").append(c.heShe()).append(" finds it harder and harder to do so, ").toString());
+                if(disgrace > 66)
+                    w.append(t, (new StringBuilder("as ")).append(mainName).append("'s relative weakness and apparent unwillingness to actually harm ").append(c.himHer()).append(" makes it difficult to get motivated.").toString());
+                else
+                if(disgrace > 33)
+                    w.append(t, (new StringBuilder("as ")).append(mainName).append(" hasn't actually been launching any dangerous attacks in return.").toString());
+                else
+                    w.append(t, (new StringBuilder("demotivated and confused by ")).append(mainName).append("'s unwillingness to actually harm ").append(c.himHer()).append(" despite the vast difference in power between them.").toString());
+                w.append(t, (new StringBuilder("  The molestation is unpleasant, but not to the point of provoking ")).append(c.himHer()).append(".").toString());
+            } else
+            if(c.getInnocence() > 33)
+            {
+                if(hostility > 66)
+                    w.append(t, (new StringBuilder("Given ")).append(mainName).append("'s obvious murderous desires, ").append(heShe()).append("'s showing a surprising amount of restraint against ").append(c.getMainName()).append(".  ").toString());
+                else
+                if(hostility > 33)
+                    w.append(t, (new StringBuilder("Although ")).append(mainName).append(" clearly takes a sort of mischievous pleasure out of tormenting ").append(c.getMainName()).append(", there's no actual malice behind it.  ").toString());
+                else
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" seems to be doing the things ").append(heShe()).append("'s doing out of a sense of obligation, rather than for ").append(hisHer()).append(" own personal pleasure.  ").toString());
+                w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" takes notice, hesitating as ").append(c.heShe()).append(" decides how to proceed.").toString());
+            } else
+            {
+                w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" is annoyed by the way that ").append(mainName).append(" is trying to molest ").append(c.himHer()).append(", but it's obvious that ").append(mainName).append(" isn't enjoying it ").toString());
+                if(obedience > 66)
+                    w.append(t, " and is only doing it out of devotion to the Demon Lord, ");
+                else
+                if(obedience > 33)
+                    w.append(t, (new StringBuilder(" and is only following ")).append(hisHer()).append(" orders, ").toString());
+                else
+                    w.append(t, " and is only using whichever tactic seems most effective, ");
+                w.append(t, (new StringBuilder("so ")).append(c.getMainName()).append(" finds it impossible to actually hold it against ").append(himHer()).append(".").toString());
+            }
+    }
+
     public int intensity(int baseParameter, int currentParameter, int parameterCount)
     {
         int total = currentParameter;
@@ -6509,6 +14219,43 @@ public class Forsaken
 
         }
         return sum;
+    }
+
+    public int compatibility(Chosen c)
+    {
+        return (850 - ((Math.abs(morality - c.morality) + Math.abs(innocence - c.innocence) + Math.abs(confidence - c.confidence) + Math.abs(dignity - c.dignity)) * 4) / 3) / 100;
+    }
+
+    public long expMultiplier(long exp)
+    {
+        long value = 1000L;
+        if(exp < 20000L)
+            value = exp / 20L;
+        else
+            while(exp > 20000L) 
+            {
+                exp = (exp * 0x183faL) / 0x186a0L;
+                value++;
+            }
+        return value;
+    }
+
+    public String expMultiplierDisplay(long expDisplay)
+    {
+        expDisplay = expMultiplier(expDisplay);
+        String displayed = (new StringBuilder(String.valueOf(expDisplay / 1000L))).append(".").toString();
+        expDisplay %= 1000L;
+        if(expDisplay < 100L)
+            displayed = (new StringBuilder(String.valueOf(displayed))).append(0).toString();
+        if(expDisplay < 10L)
+            displayed = (new StringBuilder(String.valueOf(displayed))).append(0).toString();
+        displayed = (new StringBuilder(String.valueOf(displayed))).append(expDisplay).toString();
+        return displayed;
+    }
+
+    public String reference(Chosen c)
+    {
+        return "the Chosen";
     }
 
     public String himHer()
@@ -6738,6 +14485,7 @@ public class Forsaken
         injuExp = 20000L;
         expoExp = 20000L;
         combatStyle = -1;
+        injured = 0;
     }
 
     private static final long serialVersionUID = 4L;
@@ -6812,4 +14560,5 @@ public class Forsaken
     long injuExp;
     long expoExp;
     int combatStyle;
+    int injured;
 }
