@@ -71,36 +71,47 @@ public class Project extends JFrame
             ThisState.copyToggles(saveFile.getSaves()[0]);
             ThisState.setGenders(saveFile.getSaves()[0].getGenderBalance());
         }
-        if(saves.harem != null && saves.harem.length > 0 && saves.harem[0].hateExp == 0L)
+        if(saves.harem != null && saves.harem.length > 0)
         {
-            for(int i = 0; i < saves.harem.length; i++)
+            if(saves.harem[0].hateExp == 0L)
             {
-                saves.harem[i].hateExp = 20000L;
-                saves.harem[i].pleaExp = 20000L;
-                saves.harem[i].injuExp = 20000L;
-                saves.harem[i].expoExp = 20000L;
-                saves.harem[i].chooseCombatStyle();
-                saves.harem[i].motivation = 1000;
-                saves.harem[i].stamina = 1000;
-                if(saves.harem[i].innocence > 66)
+                for(int i = 0; i < saves.harem.length; i++)
                 {
-                    saves.harem[i].textColor = new Color(255, 0, 150);
-                    saves.harem[i].darkColor = new Color(255, 0, 150);
-                } else
-                if(saves.harem[i].innocence > 33)
-                {
-                    saves.harem[i].textColor = new Color(120, 50, 180);
-                    saves.harem[i].darkColor = new Color(150, 100, 200);
-                } else
-                {
-                    saves.harem[i].textColor = new Color(200, 100, 100);
-                    saves.harem[i].darkColor = new Color(255, 130, 220);
+                    saves.harem[i].hateExp = 20000L;
+                    saves.harem[i].pleaExp = 20000L;
+                    saves.harem[i].injuExp = 20000L;
+                    saves.harem[i].expoExp = 20000L;
+                    saves.harem[i].chooseCombatStyle();
+                    saves.harem[i].motivation = 1000;
+                    saves.harem[i].stamina = 1000;
+                    if(saves.harem[i].innocence > 66)
+                    {
+                        saves.harem[i].textColor = new Color(255, 0, 150);
+                        saves.harem[i].darkColor = new Color(255, 0, 150);
+                    } else
+                    if(saves.harem[i].innocence > 33)
+                    {
+                        saves.harem[i].textColor = new Color(120, 50, 180);
+                        saves.harem[i].darkColor = new Color(150, 100, 200);
+                    } else
+                    {
+                        saves.harem[i].textColor = new Color(200, 100, 100);
+                        saves.harem[i].darkColor = new Color(255, 130, 220);
+                    }
+                    saves.harem[i].others = null;
                 }
-                saves.harem[i].others = null;
-            }
 
-            WriteObject wobj = new WriteObject();
-            wobj.serializeSaveData(saves);
+                WriteObject wobj = new WriteObject();
+                wobj.serializeSaveData(saves);
+            }
+            for(int i = 0; i < saves.harem.length; i++)
+                if(saves.harem[i].forsakenID == 0)
+                {
+                    saves.harem[i].forsakenID = saves.assignID();
+                    WriteObject wobj = new WriteObject();
+                    wobj.serializeSaveData(saves);
+                }
+
         }
         ThisState.save = saves;
         IntroOne(textPane, controlPanel, window, ThisState);
@@ -113,7 +124,7 @@ public class Project extends JFrame
         p.getActionMap().clear();
         if(!t.getBackground().equals(w.BACKGROUND))
             w.toggleColors(t);
-        w.append(t, (new StringBuilder("Corrupted Saviors, Release 18b: \"Confrontation\"\n\nThis game contains content of an adult nature and should not be played by the underaged or by those unable to distinguish fantasy from reality.\n\n")).append(w.getSeparator()).append("\n\nJapan, mid-21st century.  The psychic energies of humanity have finally begun to coalesce into physical form.  The resulting beings are known as Demons.  Born from the base desires suppressed deep within the human mind, these creatures spread across the planet, leaving chaos and depravity in their wake.\n\nBut Demons do not represent the entirety of the human condition.  The hopes and determination of humanity have also risen up, gathering in the bodies of a few Chosen warriors in order to grant them the power to fight the Demons.  Although each of them was once an ordinary person, their new abilities place them at the center of the struggle for the soul of humanity.\n\nYou are a Demon Lord, the highest form of Demon, with your own mind and will, focused on the corruption of all that is good in the world.  The Chosen are the keystone of humanity's resistance to your goal, but to simply kill them would be meaningless.  Instead, shatter their notions of right and wrong, showing them the true darkness that hides within!").toString());
+        w.append(t, (new StringBuilder("Corrupted Saviors, Release 18e: \"Confrontation\"\n\nThis game contains content of an adult nature and should not be played by the underaged or by those unable to distinguish fantasy from reality.\n\n")).append(w.getSeparator()).append("\n\nJapan, mid-21st century.  The psychic energies of humanity have finally begun to coalesce into physical form.  The resulting beings are known as Demons.  Born from the base desires suppressed deep within the human mind, these creatures spread across the planet, leaving chaos and depravity in their wake.\n\nBut Demons do not represent the entirety of the human condition.  The hopes and determination of humanity have also risen up, gathering in the bodies of a few Chosen warriors in order to grant them the power to fight the Demons.  Although each of them was once an ordinary person, their new abilities place them at the center of the struggle for the soul of humanity.\n\nYou are a Demon Lord, the highest form of Demon, with your own mind and will, focused on the corruption of all that is good in the world.  The Chosen are the keystone of humanity's resistance to your goal, but to simply kill them would be meaningless.  Instead, shatter their notions of right and wrong, showing them the true darkness that hides within!").toString());
         if(w.getCast()[0] == null)
         {
             Chosen newChosen = new Chosen();
@@ -582,6 +593,7 @@ public class Project extends JFrame
                     w.hardMode = Boolean.valueOf(false);
                     w.clampStart = 11;
                     w.clampPercent = 100;
+                    w.eventOffset = 0;
                 } else
                 {
                     w.setEarlyCheat(Boolean.valueOf(true));
@@ -1364,6 +1376,7 @@ public class Project extends JFrame
                 Forsaken newForsaken = new Forsaken();
                 newForsaken.initialize(w, newChosen);
                 newHarem[index] = newForsaken;
+                newForsaken.forsakenID = s.assignID();
                 s.harem = newHarem;
                 wobj.serializeSaveData(s);
                 Project.ForsakenMenu(t, p, f, w, s, lastPage);
@@ -11339,7 +11352,12 @@ public class Project extends JFrame
 
                             public void actionPerformed(ActionEvent e)
                             {
-                                if(w.getDay() > 1 && !w.isCheater().booleanValue())
+                                if(w.usedForsaken != null || w.recordedCommanders.length < w.day - 1)
+                                {
+                                    w.commentaryRead = Boolean.valueOf(false);
+                                    w.commentaryWrite = Boolean.valueOf(false);
+                                }
+                                if(w.getDay() > 1 && !w.isCheater().booleanValue() && (w.commentaryWrite.booleanValue() || w.commentaryRead.booleanValue()))
                                     w.archiveCommander(w.getDay());
                                 Project.advanceDowntimeAction(p, w, w.getTechs().length + w.getCast().length + c.getNumber() * 4 + type);
                                 if(type == 0)
@@ -11440,7 +11458,12 @@ public class Project extends JFrame
 
                 public void actionPerformed(ActionEvent e)
                 {
-                    if(w.getDay() > 1 && !w.isCheater().booleanValue())
+                    if(w.usedForsaken != null || w.recordedCommanders.length < w.day - 1)
+                    {
+                        w.commentaryRead = Boolean.valueOf(false);
+                        w.commentaryWrite = Boolean.valueOf(false);
+                    }
+                    if(w.getDay() > 1 && !w.isCheater().booleanValue() && (w.commentaryRead.booleanValue() || w.commentaryWrite.booleanValue()))
                         w.archiveCommander(w.getDay());
                     Project.advanceDowntimeAction(p, w, w.getTechs().length + c.getNumber());
                     if(w.getDay() == 50 - w.eventOffset * 3 || w.getTechs()[48].isOwned().booleanValue())
@@ -11906,7 +11929,7 @@ public class Project extends JFrame
                 });
                 p.add(ContinueFour);
                 if(w.isCheater().booleanValue() || !w.hardMode.booleanValue())
-                    w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\nI hope you enjoyed this playthrough of Corrupted Saviors!  In future versions, there will be more possible fates for escaped and victorious Chosen, and there will also be options to use your corrupted Chosen in future playthroughs, even on cheat files.  Look forward to it!").toString());
+                    w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\nI hope you enjoyed this playthrough of Corrupted Saviors!  Future versions will add a proper campaign mode with more continuity between each loop, so look forward to it!").toString());
                 if(forsaken > 0)
                 {
                     w.append(t, "\n\n");
@@ -11917,7 +11940,7 @@ public class Project extends JFrame
                         w.append(t, (new StringBuilder(String.valueOf(corrupted[0].getMainName()))).append(" and ").append(corrupted[1].getMainName()).append(" have ").toString());
                     else
                         w.append(t, (new StringBuilder(String.valueOf(corrupted[0].getMainName()))).append(", ").append(corrupted[1].getMainName()).append(", and ").append(corrupted[2].getMainName()).append(" have ").toString());
-                    w.append(t, "been added to the ranks of the Forsaken!  You can interact with them from the Main Menu.  The option to use them in future playthroughs will be added in a later release.");
+                    w.append(t, "been added to the ranks of the Forsaken!  You can interact with them from the Main Menu, and you may also use them to help corrupt new Chosen in future playthroughs!");
                     String path = Project.getProtectionDomain().getCodeSource().getLocation().getPath();
                     String fileName = "";
                     for(int i = path.length() - 1; i >= 0; i--)
@@ -11967,6 +11990,7 @@ public class Project extends JFrame
                             Forsaken newForsaken = new Forsaken();
                             newForsaken.initialize(w, corrupted[i]);
                             newHarem[index] = newForsaken;
+                            newHarem[index].forsakenID = saves.assignID();
                             if(i == 1)
                             {
                                 int originalRelationship = w.getRelationship(corrupted[0].number, corrupted[i].number);
@@ -12105,6 +12129,8 @@ public class Project extends JFrame
             }
 
         Forsaken included[] = s.harem;
+        if(exhausted != null && exhausted.length == 0)
+            exhausted = w.trainedForsaken;
         if(exhausted != null && exhausted.length > 0)
         {
             Forsaken newIncluded[] = new Forsaken[s.harem.length - exhausted.length];
@@ -12113,7 +12139,7 @@ public class Project extends JFrame
             {
                 Boolean notExhausted = Boolean.valueOf(true);
                 for(int j = 0; j < exhausted.length; j++)
-                    if(s.harem[i].equals(exhausted[j]))
+                    if(s.harem[i].equals(exhausted[j]).booleanValue())
                         notExhausted = Boolean.valueOf(false);
 
                 if(notExhausted.booleanValue())
@@ -12160,7 +12186,7 @@ public class Project extends JFrame
                     {
                         Boolean found = Boolean.valueOf(false);
                         for(int j = 0; j < s.harem[i].others.length; j++)
-                            if(s.harem[i].others[j].equals(tantruming))
+                            if(s.harem[i].others[j].equals(tantruming).booleanValue())
                             {
                                 found = Boolean.valueOf(true);
                                 s.harem[i].troublemaker[j] += offense;
@@ -12563,6 +12589,7 @@ public class Project extends JFrame
             tantruming.motivation = 1000;
         WriteObject wobj = new WriteObject();
         wobj.serializeSaveData(s);
+        w.trainedForsaken = null;
         if(w.active.booleanValue())
         {
             p.removeAll();

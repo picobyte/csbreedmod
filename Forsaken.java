@@ -1830,7 +1830,7 @@ public class Forsaken
                     if(others != null)
                     {
                         for(int j = 0; j < others.length; j++)
-                            if(others[j].equals(x) && troublemaker[j] > 20)
+                            if(others[j].equals(x).booleanValue() && troublemaker[j] > 20)
                                 if(troublemaker[j] < 70)
                                 {
                                     if(morality > 66)
@@ -1928,7 +1928,7 @@ public class Forsaken
                                 say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s someone I can trust to stand behind me.").toString());
                             else
                             if(x.morality > 33)
-                                say(t, (new StringBuilder("I enjoy ")).append(x.himHer()).append(".").toString());
+                                say(t, (new StringBuilder("Overall, I enjoy ")).append(x.himHer()).append(".").toString());
                             else
                                 say(t, (new StringBuilder("I want to protect ")).append(x.himHer()).append(".").toString());
                         } else
@@ -2689,7 +2689,7 @@ public class Forsaken
                     if(others != null)
                     {
                         for(int j = 0; j < others.length; j++)
-                            if(others[j].equals(x) && troublemaker[j] > 20)
+                            if(others[j].equals(x).booleanValue() && troublemaker[j] > 20)
                                 if(troublemaker[j] < 70)
                                 {
                                     if(morality > 66)
@@ -3259,7 +3259,9 @@ public class Forsaken
         } else
         {
             JButton Done = new JButton("Done");
-            final Forsaken x = this;
+            w.trainedForsaken = (new Forsaken[] {
+                this
+            });
             Done.addActionListener(new ActionListener() {
 
                 public void actionPerformed(ActionEvent e)
@@ -3267,9 +3269,7 @@ public class Forsaken
                     p.removeAll();
                     if(!w.active.booleanValue())
                     {
-                        Project.ForsakenDowntime(t, p, f, w, s, new Forsaken[] {
-                            x
-                        });
+                        Project.ForsakenDowntime(t, p, f, w, s, null);
                         JButton Continue = new JButton("Continue");
                         Continue.addActionListener(new ActionListener() {
 
@@ -3301,6 +3301,8 @@ public class Forsaken
                         p.repaint();
                     } else
                     {
+                        w.commentaryRead = Boolean.valueOf(false);
+                        w.commentaryWrite = Boolean.valueOf(false);
                         Project.PostBattle(t, p, f, w);
                     }
                 }
@@ -3311,7 +3313,6 @@ public class Forsaken
                 private final JTextPane val$t;
                 private final JFrame val$f;
                 private final SaveData val$s;
-                private final Forsaken val$x;
 
             
             {
@@ -3321,7 +3322,6 @@ public class Forsaken
                 t = jtextpane;
                 f = jframe;
                 s = savedata;
-                x = forsaken1;
                 super();
             }
             });
@@ -6406,7 +6406,7 @@ public class Forsaken
             } else
             {
                 for(int i = 0; i < c.knownForsaken.length; i++)
-                    if(c.knownForsaken[i].equals(this))
+                    if(c.knownForsaken[i].equals(this).booleanValue())
                         firstMeeting = Boolean.valueOf(false);
 
                 if(firstMeeting.booleanValue())
@@ -8614,7 +8614,7 @@ public class Forsaken
                                 else
                                     say(t, "Giving up?  Or is this a tri- Ngh!");
                                 say(t, "\"\n\n");
-                                c.say(t, "\"\n\n");
+                                c.say(t, "\"");
                                 if(deviancy > 66)
                                     c.say(t, "Hmph, I will need to wash my mouth out tonight.");
                                 else
@@ -12758,7 +12758,7 @@ public class Forsaken
                             if(deviancy > 33)
                                 w.append(t, (new StringBuilder("but ")).append(mainName).append("'s lewd squirming against ").append(c.hisHer()).append(" body ").toString());
                             else
-                                w.append(t, (new StringBuilder("but ")).append(mainName).append("'s deliberate squirming to repeatedly put pressure against ").append(reference(c)).append("'s organ ").toString());
+                                w.append(t, (new StringBuilder("but ")).append(mainName).append("'s deliberate squirming to repeatedly put pressure against ").append(reference(c)).append("'s ").append(organ).append(" ").toString());
                             w.append(t, (new StringBuilder("causes ")).append(c.getMainName()).append(" to gasp with pleasure and let ").append(c.himHer()).append(" go, much to the confusion and suspicion of the spectators.").toString());
                         } else
                         {
@@ -14160,7 +14160,7 @@ public class Forsaken
     public int opinion(Forsaken x)
     {
         int sum = 0;
-        if(x.equals(firstPartner))
+        if(x.equals(firstPartner).booleanValue())
         {
             if(firstOriginalRelationship == 4)
                 sum = 1000;
@@ -14176,7 +14176,7 @@ public class Forsaken
             else
                 sum = -1000;
         } else
-        if(x.equals(secondPartner))
+        if(x.equals(secondPartner).booleanValue())
             if(secondOriginalRelationship == 4)
                 sum = 1000;
             else
@@ -14214,7 +14214,7 @@ public class Forsaken
         if(others != null)
         {
             for(int i = 0; i < others.length; i++)
-                if(others[i].equals(x))
+                if(others[i].equals(x).booleanValue())
                     sum -= troublemaker[i];
 
         }
@@ -14438,6 +14438,16 @@ public class Forsaken
         return format;
     }
 
+    public Boolean equals(Forsaken x)
+    {
+        if(this == null || x == null)
+            return Boolean.valueOf(false);
+        if(forsakenID == x.forsakenID)
+            return Boolean.valueOf(true);
+        else
+            return Boolean.valueOf(false);
+    }
+
     public Forsaken()
     {
         textSize = 16;
@@ -14480,6 +14490,7 @@ public class Forsaken
         secondOriginalRelationship = 0;
         others = null;
         troublemaker = null;
+        forsakenID = 0;
         hateExp = 20000L;
         pleaExp = 20000L;
         injuExp = 20000L;
@@ -14555,6 +14566,7 @@ public class Forsaken
     int secondOriginalRelationship;
     Forsaken others[];
     int troublemaker[];
+    int forsakenID;
     long hateExp;
     long pleaExp;
     long injuExp;

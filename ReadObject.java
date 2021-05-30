@@ -22,7 +22,6 @@ public class ReadObject
         fin = null;
         ois = null;
         String path = Project.getProtectionDomain().getCodeSource().getLocation().getPath();
-        System.out.println(path);
         String fileName = "";
         for(int i = path.length() - 1; i >= 0; i--)
             if(path.charAt(i) != '/')
@@ -68,7 +67,7 @@ public class ReadObject
             }
 
             worlds = newWorlds;
-            break MISSING_BLOCK_LABEL_380;
+            break MISSING_BLOCK_LABEL_372;
         }
         catch(Exception ex)
         {
@@ -92,7 +91,7 @@ public class ReadObject
             {
                 e.printStackTrace();
             }
-        break MISSING_BLOCK_LABEL_416;
+        break MISSING_BLOCK_LABEL_408;
         Exception exception;
         exception;
         if(fin != null)

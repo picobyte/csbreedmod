@@ -1021,6 +1021,7 @@ public class WorldState
                 w.append(t, (new StringBuilder(String.valueOf(victim1.getMainName()))).append(" and ").append(victim2.getMainName()).append(" won't have time to get out of the way.").toString());
             else
                 w.append(t, (new StringBuilder(String.valueOf(victim1.getMainName()))).append(" and ").append(victim2.getMainName()).append(" to escape before ").append(killer.heShe()).append(" launches ").append(killer.hisHer()).append(" final attack.").toString());
+            killer.say(t, "\n\n\"");
             if(killer.getInnocence() > 66)
                 killer.say(t, "This... This has to be a nightmare...  I wanna wake up!");
             else
@@ -18602,7 +18603,7 @@ public class WorldState
                 {
                     c.say(t, "I'm just... ");
                     corruptColors(c);
-                    c.say(t, "gonna stop thinking");
+                    c.say(t, "gonna stop thinking...");
                 } else
                 {
                     c.say(t, "Ah... ");
@@ -20112,4 +20113,5 @@ public class WorldState
     Boolean active;
     Forsaken usedForsaken;
     int usedForsakenIndex;
+    public Forsaken trainedForsaken[];
 }

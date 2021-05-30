@@ -10,6 +10,13 @@ public class SaveData
         saves = new WorldState[0];
         names = new String[0];
         harem = null;
+        forsakenMade = 0;
+    }
+
+    public int assignID()
+    {
+        forsakenMade++;
+        return forsakenMade;
     }
 
     public WorldState[] getSaves()
@@ -105,4 +112,5 @@ public class SaveData
     WorldState saves[];
     String names[];
     Forsaken harem[];
+    int forsakenMade;
 }
