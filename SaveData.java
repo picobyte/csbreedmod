@@ -9,14 +9,6 @@ public class SaveData
     {
         saves = new WorldState[0];
         names = new String[0];
-        harem = null;
-        forsakenMade = 0;
-    }
-
-    public int assignID()
-    {
-        forsakenMade++;
-        return forsakenMade;
     }
 
     public WorldState[] getSaves()
@@ -49,7 +41,6 @@ public class SaveData
     {
         WorldState newSaves[] = new WorldState[saves.length + 1];
         newSaves[saves.length] = w;
-        w.save = this;
         String newNames[] = new String[names.length + 1];
         newNames[saves.length] = name;
         for(int i = 0; i < saves.length; i++)
@@ -108,9 +99,6 @@ public class SaveData
         names = newNames;
     }
 
-    private static final long serialVersionUID = 0xd05cc0c71818b918L;
     WorldState saves[];
     String names[];
-    Forsaken harem[];
-    int forsakenMade;
 }
