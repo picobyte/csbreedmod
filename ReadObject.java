@@ -39,7 +39,7 @@ public class ReadObject
             ex.printStackTrace();
         }
         path = path.replaceAll("file:/", "");
-        path = path.replaceAll("\\u0020", "\\ ");
+        path = path.replaceAll((new StringBuilder(String.valueOf(File.separator))).append("u0020").toString(), (new StringBuilder(String.valueOf(File.separator))).append(" ").toString());
         File f = new File(path);
         matchingFiles = f.listFiles(new FilenameFilter() {
 
@@ -67,7 +67,7 @@ public class ReadObject
             }
 
             worlds = newWorlds;
-            break MISSING_BLOCK_LABEL_334;
+            break MISSING_BLOCK_LABEL_372;
         }
         catch(Exception ex)
         {
@@ -91,7 +91,7 @@ public class ReadObject
             {
                 e.printStackTrace();
             }
-        break MISSING_BLOCK_LABEL_370;
+        break MISSING_BLOCK_LABEL_408;
         Exception exception;
         exception;
         if(fin != null)
@@ -211,6 +211,7 @@ public class ReadObject
             {
                 e.printStackTrace();
             }
+        s.organizeScenes(40);
         return s;
     }
 }
