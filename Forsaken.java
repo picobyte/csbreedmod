@@ -173,7 +173,7 @@ public class Forsaken
         if(!c.isAVirg())
             obedience += 20;
         else
-        if(c.isMeek())
+        if(c.isMeek() && defeatType != 5)
             obedience += 10;
         disgrace = (100 - c.dignity) / 3;
         if(c.isParasitized().booleanValue())
@@ -356,13 +356,18 @@ public class Forsaken
             takers[3] = Taker.CHOSEN;
         stamina = 1000;
         motivation = 1000;
+        if(defeatType == 5)
+        {
+            pleaExp = (pleaExp * 3L) / 2L;
+            expoExp = (expoExp * 3L) / 2L;
+        }
         chooseCombatStyle();
     }
 
     public void selfTalk(JTextPane t)
     {
         say(t, "\"");
-        if(obedience < 20)
+        if(flavorObedience() < 20)
         {
             if(confidence > 66)
             {
@@ -405,14 +410,25 @@ public class Forsaken
                 else
                     say(t, "Your hypnotic influence has led me to work for you, and although I suspect that I could break it with enough effort, I have decided not to resist for the time being.  ");
             } else
-            if(defeatType != 3 && defeatType == 4)
-                if(dignity > 66)
-                    say(t, "My Chosen powers are gone, but my fans seem to prefer seeing me fighting on this side, so here I am.  ");
-                else
-                if(dignity > 33)
-                    say(t, "I need to regain popularity in order to be able to transform on my own again, and you're helping me do that.  ");
-                else
-                    say(t, "Now that I can't transform on my own, I figure that if you're dumb enough to lend me your power to do so, I might as well take you up on it.  ");
+            if(defeatType != 3)
+                if(defeatType == 4)
+                {
+                    if(dignity > 66)
+                        say(t, "My Chosen powers are gone, but my fans seem to prefer seeing me fighting on this side, so here I am.  ");
+                    else
+                    if(dignity > 33)
+                        say(t, "I need to regain popularity in order to be able to transform on my own again, and you're helping me do that.  ");
+                    else
+                        say(t, "Now that I can't transform on my own, I figure that if you're dumb enough to lend me your power to do so, I might as well take you up on it.  ");
+                } else
+                if(defeatType == 5)
+                    if(morality > 66)
+                        say(t, "I made the mistake of thinking that you had people's best interests in mind, but now I can't turn back.  ");
+                    else
+                    if(morality > 33)
+                        say(t, "You pretended to be my friend, and then you turned on me as soon as you had power over me.  Well, now I can't go back.  ");
+                    else
+                        say(t, "I'll never forgive you for tricking me into joining your side, but all I can do now is fight.  ");
             if(hostility > 66)
             {
                 if(morality > 66)
@@ -441,7 +457,7 @@ public class Forsaken
             else
                 say(t, "I'm just looking out for myself.");
         } else
-        if(obedience < 40)
+        if(flavorObedience() < 40)
         {
             String dots = "...";
             if(originalName.equals(mainName))
@@ -483,14 +499,25 @@ public class Forsaken
                 else
                     say(t, "Your hypnotic influence has left me with little choice but to work for you.  ");
             } else
-            if(defeatType != 3 && defeatType == 4)
-                if(dignity > 66)
-                    say(t, "I don't really want to work for you, but... my fans... expect it of me now.  ");
-                else
-                if(dignity > 33)
-                    say(t, "I lost the ability to transform on my own, but I'm not ready to stop being one of the Chosen.  Even if I am called one of the 'Forsaken' now.  ");
-                else
-                    say(t, "I can't transform on my own anymore, so I don't have any choice other than to work for you.  ");
+            if(defeatType != 3)
+                if(defeatType == 4)
+                {
+                    if(dignity > 66)
+                        say(t, "I don't really want to work for you, but... my fans... expect it of me now.  ");
+                    else
+                    if(dignity > 33)
+                        say(t, "I lost the ability to transform on my own, but I'm not ready to stop being one of the Chosen.  Even if I am called one of the 'Forsaken' now.  ");
+                    else
+                        say(t, "I can't transform on my own anymore, so I don't have any choice other than to work for you.  ");
+                } else
+                if(defeatType == 5)
+                    if(morality > 66)
+                        say(t, "I used to think that you just wanted to make everyone happy... but not anymore.  ");
+                    else
+                    if(morality > 33)
+                        say(t, "I used to think that you wanted to be... friends.  ");
+                    else
+                        say(t, "You told me that if I served you, you'd make me feel good...  ");
             if(hostility > 66)
             {
                 if(morality > 66)
@@ -519,7 +546,7 @@ public class Forsaken
             else
                 say(t, "It's annoying, but... it's not like I really care whether you're having me hurt people or not.");
         } else
-        if(obedience < 61)
+        if(flavorObedience() < 61)
         {
             if(confidence > 66)
                 say(t, (new StringBuilder("I'm ")).append(mainName).append(".  ").toString());
@@ -569,13 +596,23 @@ public class Forsaken
                     say(t, "I realized that... I don't get to decide when I die.  I don't really understand why you keep me around, but I know that trying to kill myself will just get me punished.  ");
             } else
             if(defeatType == 4)
+            {
                 if(dignity > 66)
-                    say(t, "I realized how worthless I am on my own.  My only value in my fans... a-and if I don't serve you, you'll take them away from me...  ");
+                    say(t, "I realized how worthless I am on my own.  My only value is in my fans... a-and if I don't serve you, you'll take them away from me...  ");
                 else
                 if(dignity > 33)
                     say(t, "I realize now that I can't do anything on my own, so I just want... I can only ask you to give me the power to transform once in awhile and still pretend to be one of the Chosen.  ");
                 else
                     say(t, "Now that I've lost my powers, I know that the only way I can transform... the only way I can do anything... is if I do whatever you want me to.  ");
+            } else
+            if(defeatType == 5)
+                if(morality > 66)
+                    say(t, "I joined you because I wanted to make your other minions happy.  That much hasn't changed.  ");
+                else
+                if(morality > 33)
+                    say(t, "I joined you because the Thralls were my friends.  I didn't know what I was getting into, but... I guess it's fine.  ");
+                else
+                    say(t, "I joined you because I thought you'd give me pleasure.  It... hasn't exactly been what I expected.  ");
             if(hostility > 66)
             {
                 if(morality > 66)
@@ -604,7 +641,7 @@ public class Forsaken
             else
                 say(t, "I'll fight whoever you want me to!  Whatever you want me to do!");
         } else
-        if(obedience < 81)
+        if(flavorObedience() < 81)
         {
             if(confidence > 66)
                 say(t, (new StringBuilder("I'm ")).append(mainName).append(", your greatest servant!  ").toString());
@@ -654,6 +691,7 @@ public class Forsaken
                     say(t, "I'm so ashamed that I used to try to kill myself without your permission.  After all, my life belongs to you.  ");
             } else
             if(defeatType == 4)
+            {
                 if(dignity > 66)
                     say(t, "My fans helped to show me that what I should really be doing is serving you.  They saw me for what I truly am, a natural member of the Forsaken.  ");
                 else
@@ -661,6 +699,25 @@ public class Forsaken
                     say(t, "I'm honored that you allow me to lead some of your forces.  I just have to be careful to remind them that I'm just a servant to a greater power - you.  ");
                 else
                     say(t, "I'm nothing without you.  I can't even transform on my own.  Serving you is my only purpose in life.  ");
+            } else
+            if(defeatType == 5)
+                if(obedience < 40)
+                {
+                    if(morality > 66)
+                        say(t, "I want to help you make other people happy, the way you've made me happy.  ");
+                    else
+                    if(morality > 33)
+                        say(t, "I'm serving you because my friends are all on your side.  ");
+                    else
+                        say(t, "I joined you because I really enjoy what you and your minions do to my body.  And... I guess I've started caring a little about your minions, too.  ");
+                } else
+                if(morality > 66)
+                    say(t, "I joined you because I wanted to make people happy.  But it took a lot of training before I understood what I should really be doing.  ");
+                else
+                if(morality > 33)
+                    say(t, "I joined you for the sake of my friends.  For awhile, I thought it was a mistake, but not anymore.  ");
+                else
+                    say(t, "I used to be angry about how you hurt me after promising to just give me pleasure, but now I'm even happier than before!  ");
             if(hostility > 66)
             {
                 if(morality > 66)
@@ -711,6 +768,9 @@ public class Forsaken
             else
             if(defeatType == 4)
                 say(t, "I'm just another part of the masses that serve you.  It feels really nice, not having to be alone...  ");
+            else
+            if(defeatType == 5)
+                say(t, "I joined you because you made me feel good, but you don't have to worry about doing that anymore.  I'm all yours regardless.  ");
             if(hostility > 66)
             {
                 if(morality > 66)
@@ -749,10 +809,10 @@ public class Forsaken
         {
             if(innocence > 66)
             {
-                if(obedience > 66)
+                if(flavorObedience() > 66)
                     say(t, "I don't really get why you care what I think, since I'm dumb and you're basically the smartest thing in the world... um, n-not that I'm disobeying!  I'll do my best to explain it...  ");
                 else
-                if(obedience > 33)
+                if(flavorObedience() > 33)
                     say(t, "Are you just gonna ask me hard questions in order to make fun of my answers...?  Well, whatever, I'll answer anyway...  ");
                 else
                     say(t, "Okay, I'll tell you what I think about everything!  Maybe I can convince you to stop doing all this bad stuff!  ");
@@ -778,10 +838,10 @@ public class Forsaken
             } else
             if(innocence > 33)
             {
-                if(obedience > 66)
+                if(flavorObedience() > 66)
                     say(t, "Do you... really care what I think...?  Of course, I'll answer regardless!  ");
                 else
-                if(obedience > 33)
+                if(flavorObedience() > 33)
                     say(t, "Sure.  I guess we can talk about right and wrong, if that's what you want me to do.  ");
                 else
                     say(t, "This is pointless.  We aren't going to change each other's minds.  But alright, I'll answer.  ");
@@ -805,10 +865,10 @@ public class Forsaken
                     say(t, "I guess that might be considered a sheltered point of view... but I haven't seen anything to disprove it.");
             } else
             {
-                if(obedience > 66)
+                if(flavorObedience() > 66)
                     say(t, "My point of view must be of little value to you, since you are obviously my intellectual superior, but of course I will explain my own thoughts as best I can.  ");
                 else
-                if(obedience > 33)
+                if(flavorObedience() > 33)
                     say(t, "A philosphical discussion?  I am unsure of your purpose, but... if it is a command, I will obey it.  Very well.  ");
                 else
                     say(t, "Having a philosophical discussion with what amounts to the physical manifestation of an ideology strikes me as... unproductive.  But nonetheless, I must take the opportunity to convince you to give up your evil ways.  ");
@@ -836,10 +896,10 @@ public class Forsaken
         {
             if(innocence > 66)
             {
-                if(obedience > 66)
+                if(flavorObedience() > 66)
                     say(t, "I think it's kind of a waste of time to think much about 'philosophy', since you're so much smarter than I am and it's easier to just follow what you tell me to do.  Um... I guess I can tell you about what I think when I do think of it, though.  ");
                 else
-                if(obedience > 33)
+                if(flavorObedience() > 33)
                     say(t, "Are you just gonna ask me hard questions in order to make fun of my answers...?  Well, whatever, it's not like I care much about anything anyway...  ");
                 else
                     say(t, "Okay, I'll tell you what I think about everything!  Though, I'm not exactly sure what to think lately...  ");
@@ -867,10 +927,10 @@ public class Forsaken
             } else
             if(innocence > 33)
             {
-                if(obedience > 66)
+                if(flavorObedience() > 66)
                     say(t, "Okay.  First of all, though, just to be clear, I'm not going to let any of my own ideas stand in the way of serving you.  ");
                 else
-                if(obedience > 33)
+                if(flavorObedience() > 33)
                     say(t, "Sure.  I guess I can complain about how the world works, if you really want...  ");
                 else
                     say(t, "This is pointless.  I'm not going to be able to convince you to do anything.  But alright, I'll answer.  ");
@@ -897,10 +957,10 @@ public class Forsaken
                     say(t, "The worst part is that I don't think I've even seen how dark people's hearts can get...");
             } else
             {
-                if(obedience > 66)
+                if(flavorObedience() > 66)
                     say(t, "Above all else, my purpose is to serve you.  That said, I am beginning to suspect that your actions are not as incompatible with the wellbeing of humanity as I had been led to believe.  ");
                 else
-                if(obedience > 33)
+                if(flavorObedience() > 33)
                     say(t, "If I weren't at least somewhat of a misanthrope, I wouldn't be cooperating with you as much as I am now.  ");
                 else
                     say(t, "You want to know why I'm going along with your plans, even though I hate you so much.  Very well.  ");
@@ -931,10 +991,10 @@ public class Forsaken
         {
             if(innocence > 66)
             {
-                if(obedience > 66)
+                if(flavorObedience() > 66)
                     say(t, "You mean like, why I'm serving you?  Well, why wouldn't I?  ");
                 else
-                if(obedience > 33)
+                if(flavorObedience() > 33)
                     say(t, "Um... I'm not really sure how to explain it, but I think you Demons might actually be right about some things.  ");
                 else
                     say(t, "Oh, is it weird that I'm fighting on your side even though I kinda hate you?  I guess it doesn't seem so weird to me.  ");
@@ -962,10 +1022,10 @@ public class Forsaken
             } else
             if(innocence > 33)
             {
-                if(obedience > 66)
+                if(flavorObedience() > 66)
                     say(t, "All I care about is serving you.  But even without that, I don't think the Demons are exactly wrong to do what they do.  ");
                 else
-                if(obedience > 33)
+                if(flavorObedience() > 33)
                     say(t, "I mean, I wouldn't be following your orders unless I thought you Demons were right about some stuff.  ");
                 else
                     say(t, "I hate to say it, but I think my own views aren't that much different from those of the Demons.  ");
@@ -992,10 +1052,10 @@ public class Forsaken
                     say(t, "Humanity is just... disgusting to the core, every last bit of it.");
             } else
             {
-                if(obedience > 66)
+                if(flavorObedience() > 66)
                     say(t, "At this point, I'm absolutely certain that the Demons must be victorious in order for humanity to move forward.  ");
                 else
-                if(obedience > 33)
+                if(flavorObedience() > 33)
                     say(t, "In my time working with you, I've found that your goals are... surprisingly less objectionable than I would have thought.  ");
                 else
                     say(t, "I'm working with the Demons because your interests and mine happen to coincide.  That is all.  ");
@@ -1025,10 +1085,10 @@ public class Forsaken
         if(hostility < 81)
             if(innocence > 66)
             {
-                if(obedience > 66)
+                if(flavorObedience() > 66)
                     say(t, "Philosophy?  Um, I don't really think about it.  You just tell me who needs to suffer, and then I make it happen!  ");
                 else
-                if(obedience > 33)
+                if(flavorObedience() > 33)
                     say(t, "I don't really care about all that philosophy stuff.  All I know is that as long as I follow you, I get to make people cry and scream!  ");
                 else
                     say(t, "Ugh, I don't wanna talk about boring stuff.  Hurry, send me out to make more people suffer...  ");
@@ -1056,10 +1116,10 @@ public class Forsaken
             } else
             if(innocence > 33)
             {
-                if(obedience > 66)
+                if(flavorObedience() > 66)
                     say(t, "Well, obviously I hate humanity.  I'd stop hurting people if you told me to... but I'm hoping you don't tell me to do that.  ");
                 else
-                if(obedience > 33)
+                if(flavorObedience() > 33)
                     say(t, "I think a big part of the reason I'm following you is that it gives me an excuse to hurt people.  ");
                 else
                     say(t, "Well, basically, my only reason for fighting alongside you is that I hate humanity even more than I hate the Demons.  ");
@@ -1086,10 +1146,10 @@ public class Forsaken
                     say(t, "I don't even exactly enjoy hurting them.  It just... makes me feel less empty inside for a little while.");
             } else
             {
-                if(obedience > 66)
+                if(flavorObedience() > 66)
                     say(t, "I have cast aside philosophy in favor of blind servitude under you.  I don't attach any moral significance to making your enemies suffer.  ");
                 else
-                if(obedience > 33)
+                if(flavorObedience() > 33)
                     say(t, "I do not have much of a philosophy anymore.  I simply follow you in order to satisfy my sadistic urges.  ");
                 else
                     say(t, "I've decided to devote my life toward making others suffer.  If it happens to serve your ends... well, I'm not happy about it, but it can't be helped.  ");
@@ -1780,9 +1840,9 @@ public class Forsaken
                         say(t, "We do agree that sex is the most important thing about being alive.  ");
                     else
                         say(t, (new StringBuilder(String.valueOf(x.HisHer()))).append(" sexual techniques are amazing.  I have to admire them.  ").toString());
-                    if(obedience - x.obedience <= 5)
+                    if(flavorObedience() - x.flavorObedience() <= 5)
                     {
-                        if(obedience < 20)
+                        if(flavorObedience() < 20)
                         {
                             if(x.confidence > 66)
                                 say(t, "I'll never forgive you for what you did to such a strong, beautiful person.  ");
@@ -1792,7 +1852,7 @@ public class Forsaken
                             else
                                 say(t, (new StringBuilder("More importantly, even if ")).append(x.heShe()).append(" doesn't have the willpower to resist you, I can resist on ").append(x.hisHer()).append(" behalf.  ").toString());
                         } else
-                        if(obedience < 40)
+                        if(flavorObedience() < 40)
                         {
                             if(x.confidence > 66)
                                 say(t, (new StringBuilder("The thing that bothers me most is seeing such a strong-willed person forced to humiliate ")).append(x.himHer()).append("self for you.  ").toString());
@@ -1802,7 +1862,7 @@ public class Forsaken
                             else
                                 say(t, (new StringBuilder("I just wish ")).append(x.heShe()).append(" were able to put up a little more resistance.  ").toString());
                         } else
-                        if(obedience < 61)
+                        if(flavorObedience() < 61)
                         {
                             if(x.confidence > 66)
                                 say(t, (new StringBuilder("The fact that you were able to break someone like ")).append(x.himHer()).append(" makes me feel less bad about being unable to resist.  ").toString());
@@ -1812,7 +1872,7 @@ public class Forsaken
                             else
                                 say(t, (new StringBuilder("I sort of envy the way that ")).append(x.heShe()).append("'s able to handle doing anything for you, no matter how demeaning.  ").toString());
                         } else
-                        if(obedience < 81)
+                        if(flavorObedience() < 81)
                         {
                             if(x.confidence > 66)
                                 say(t, (new StringBuilder("I really admire ")).append(x.hisHer()).append(" devotion to you.  ").append(x.HeShe()).append("'s amazing...  ").toString());
@@ -1830,7 +1890,7 @@ public class Forsaken
                         else
                             say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" seems so happy to finally be able to surrender ").append(x.hisHer()).append(" will completely to a master like you.  ").toString());
                     } else
-                    if(obedience < 20)
+                    if(flavorObedience() < 20)
                     {
                         if(x.confidence > 66)
                             say(t, (new StringBuilder("Seeing ")).append(x.himHer()).append(" resist you gives me the strength to do the same.  ").toString());
@@ -1840,7 +1900,7 @@ public class Forsaken
                         else
                             say(t, (new StringBuilder("Still, I think that ")).append(x.heShe()).append(" hasn't completely given up on resisting you, and I'm definitely not giving up before ").append(x.himHer()).append(".  ").toString());
                     } else
-                    if(obedience < 40)
+                    if(flavorObedience() < 40)
                     {
                         if(x.confidence > 66)
                             say(t, (new StringBuilder("My only complaint is really shameful...  I'm envious of the way ")).append(x.heShe()).append("'s able to keep resisting you so bravely.  ").toString());
@@ -1850,7 +1910,7 @@ public class Forsaken
                         else
                             say(t, (new StringBuilder("I guess I'm just... a little bit annoyed that ")).append(x.heShe()).append(" of all people has managed to keep resisting you when I've failed.  ").toString());
                     } else
-                    if(obedience < 61)
+                    if(flavorObedience() < 61)
                     {
                         if(x.confidence > 66)
                             say(t, (new StringBuilder("I just wish ")).append(x.heShe()).append("'d stop fighting you so much.  ").append(x.HeShe()).append("'s going to get us all punished...  ").toString());
@@ -1860,7 +1920,7 @@ public class Forsaken
                         else
                             say(t, (new StringBuilder("I do have a weird feeling about the fact that you haven't broken ")).append(x.himHer()).append(" as hard as me yet...  Is that on purpose?  ").toString());
                     } else
-                    if(obedience < 81)
+                    if(flavorObedience() < 81)
                     {
                         if(x.confidence > 66)
                             say(t, (new StringBuilder("My only worry is that... if ")).append(x.heShe()).append(" doesn't completely give up on resisting you, it won't turn out well for ").append(x.himHer()).append(".  ").toString());
@@ -2698,8 +2758,8 @@ public class Forsaken
                             say(t, (new StringBuilder("All ")).append(x.heShe()).append(" cares about is ").append(x.hisHer()).append(" own pleasure.  Nothing else matters to ").append(x.himHer()).append(".  ").toString());
                         else
                             say(t, (new StringBuilder("Everything ")).append(x.heShe()).append(" does - absolutely everything - is all about getting ").append(x.himHer()).append(" closer to cumming again.  ").toString());
-                    if(obedience - x.obedience >= 15)
-                        if(obedience < 40)
+                    if(flavorObedience() - x.flavorObedience() >= 15)
+                        if(flavorObedience() < 40)
                         {
                             if(x.confidence > 66)
                                 say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s defiant to the point of stupidity, pointlessly fighting back when it's obvious that ").append(x.heShe()).append("'s only doing it for the sake of ").append(x.hisHer()).append(" own pride.  ").toString());
@@ -2709,7 +2769,7 @@ public class Forsaken
                             else
                                 say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" acts meek, but ").append(x.heShe()).append(" actually looks down on everyone else who works for you.  ").toString());
                         } else
-                        if(obedience < 61)
+                        if(flavorObedience() < 61)
                         {
                             if(x.confidence > 66)
                                 say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" still isn't afraid of you... ").append(x.heShe()).append("'s really an idiot.  ").toString());
@@ -2719,7 +2779,7 @@ public class Forsaken
                             else
                                 say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" pretends to be broken, but ").append(x.heShe()).append("'s just looking for a chance to resist, and we'll all suffer for it eventually.  ").toString());
                         } else
-                        if(obedience < 81)
+                        if(flavorObedience() < 81)
                         {
                             if(x.confidence > 66)
                                 say(t, (new StringBuilder("And ")).append(x.heShe()).append("'s far too full of pride to completely submit ").append(x.himHer()).append("self to you.  ").toString());
@@ -3767,7 +3827,7 @@ public class Forsaken
         {
             if(nextTraining == 0)
             {
-                if(obedience < 20)
+                if(flavorObedience() < 20)
                 {
                     if(innocence > 66)
                         say(t, "I-I'm not afraid of regular humans, even if you do make them way more perverted than usual!");
@@ -3777,7 +3837,7 @@ public class Forsaken
                     else
                         say(t, "So you're encouraging them to torture me while I'm helpless?  Typical.");
                 } else
-                if(obedience < 40)
+                if(flavorObedience() < 40)
                 {
                     if(innocence > 66)
                         say(t, "Let me go!  Th-They're looking really scary!");
@@ -3787,7 +3847,7 @@ public class Forsaken
                     else
                         say(t, "R-Ridiculous!  Aren't they already lustful enough!?");
                 } else
-                if(obedience < 61)
+                if(flavorObedience() < 61)
                 {
                     if(innocence > 66)
                         say(t, "I-I'm sorry!  I won't disobey you again!  S-So don't make them go even crazier!");
@@ -3797,7 +3857,7 @@ public class Forsaken
                     else
                         say(t, "Ah...  I... I understand that I displeased you, so...  Please do not make them... ravage me...");
                 } else
-                if(obedience < 81)
+                if(flavorObedience() < 81)
                 {
                     if(innocence > 66)
                         say(t, "Wow, they're gonna... do all sorts of stuff to me...");
@@ -3817,7 +3877,7 @@ public class Forsaken
             } else
             if(nextTraining == 1)
             {
-                if(obedience < 20)
+                if(flavorObedience() < 20)
                 {
                     if(innocence > 66)
                         say(t, "Hey!  Stay outta my head!");
@@ -3827,7 +3887,7 @@ public class Forsaken
                     else
                         say(t, "I must focus.  Clear my mind of any attempted outside influence.");
                 } else
-                if(obedience < 40)
+                if(flavorObedience() < 40)
                 {
                     if(innocence > 66)
                         say(t, "Huh!?  What kind of weird stuff are you trying to put in my head?");
@@ -3837,7 +3897,7 @@ public class Forsaken
                     else
                         say(t, "I... I must try not to lose myself...!");
                 } else
-                if(obedience < 60)
+                if(flavorObedience() < 60)
                 {
                     if(innocence > 66)
                         say(t, "Please!  I'll do whatever you want, just stop making my head feel all funny!");
@@ -3847,7 +3907,7 @@ public class Forsaken
                     else
                         say(t, "S-Surely my mind is a large part of what makes me useful to you.  If you tamper with it carelessly, I might... not be the same afterward...");
                 } else
-                if(obedience < 81)
+                if(flavorObedience() < 81)
                 {
                     if(innocence > 66)
                         say(t, "I-I'll try to let you into my brain, but... I'm scared...!");
@@ -3867,7 +3927,7 @@ public class Forsaken
             } else
             if(nextTraining == 2)
             {
-                if(obedience < 20)
+                if(flavorObedience() < 20)
                 {
                     if(innocence > 66)
                         say(t, "I'm not gonna let you present me to everyone like this!  I'll just... um... scream really loud at everyone until they get annoyed and go away!");
@@ -3877,7 +3937,7 @@ public class Forsaken
                     else
                         say(t, "Hmph.  I may be in no position to stop you from offering me to everyone, but I will not cooperate in the slightest!");
                 } else
-                if(obedience < 40)
+                if(flavorObedience() < 40)
                 {
                     if(innocence > 66)
                         say(t, "Huh!?  W-Wait, don't show me to everyone like this, they'll think I'm super weak!");
@@ -3887,7 +3947,7 @@ public class Forsaken
                     else
                         say(t, "Hmph.  Showing everyone your dominion over me?  So be it.");
                 } else
-                if(obedience < 61)
+                if(flavorObedience() < 61)
                 {
                     if(innocence > 66)
                         say(t, "Y-You're gonna humiliate me even more!?");
@@ -3897,7 +3957,7 @@ public class Forsaken
                     else
                         say(t, "Y-You could at least let me present myself to everyone on my own terms...!");
                 } else
-                if(obedience < 81)
+                if(flavorObedience() < 81)
                 {
                     if(innocence > 66)
                         say(t, "Huh?  Y-You're gonna present me to everyone?  Is there anything I should be doing to help...?");
@@ -3917,7 +3977,7 @@ public class Forsaken
             } else
             if(nextTraining == 3)
             {
-                if(obedience < 20)
+                if(flavorObedience() < 20)
                 {
                     if(innocence > 66)
                         say(t, "It'll take more than that to keep me under control!  I'll break free!  Watch me!");
@@ -3927,7 +3987,7 @@ public class Forsaken
                     else
                         say(t, "Heh.  Am I so dangerous that you have no choice but to tie me up?");
                 } else
-                if(obedience < 40)
+                if(flavorObedience() < 40)
                 {
                     if(innocence > 66)
                         say(t, "Even if it feels really good... I have to make sure not to lose control...!");
@@ -3937,7 +3997,7 @@ public class Forsaken
                     else
                         say(t, "You may be able to get some... reactions from my body.  But my mind will not break.");
                 } else
-                if(obedience < 61)
+                if(flavorObedience() < 61)
                 {
                     if(innocence > 66)
                         say(t, "H-Hey!  There's no need to use all that stuff on me right now, is there!?");
@@ -3947,7 +4007,7 @@ public class Forsaken
                     else
                         say(t, "If you don't let up... I will truly lose my mind...!");
                 } else
-                if(obedience < 81)
+                if(flavorObedience() < 81)
                 {
                     if(innocence > 66)
                         say(t, "Huh...?  What're all those for...?");
@@ -3967,7 +4027,7 @@ public class Forsaken
             } else
             if(nextTraining == 4)
             {
-                if(obedience < 20)
+                if(flavorObedience() < 20)
                 {
                     if(innocence > 66)
                         say(t, "But... But I can't fight back if I don't transform!");
@@ -3977,7 +4037,7 @@ public class Forsaken
                     else
                         say(t, "Using a humiliating appearance to dissuade me from transforming?  Even so, I will not give up!");
                 } else
-                if(obedience < 40)
+                if(flavorObedience() < 40)
                 {
                     if(innocence > 66)
                         say(t, "Huh?  Something feels funny...");
@@ -3987,7 +4047,7 @@ public class Forsaken
                     else
                         say(t, "This disruption to my psychic energy...  Could it be...?");
                 } else
-                if(obedience < 61)
+                if(flavorObedience() < 61)
                 {
                     if(innocence > 66)
                         say(t, "Taking control of the way I look?  Th-That's so mean!");
@@ -3997,7 +4057,7 @@ public class Forsaken
                     else
                         say(t, "I... I must confess that I do not appreciate having my appearance altered like that!");
                 } else
-                if(obedience < 81)
+                if(flavorObedience() < 81)
                 {
                     if(innocence > 66)
                         say(t, "Um, I want to make you happy and all, but this feels weird...");
@@ -4017,7 +4077,7 @@ public class Forsaken
             } else
             if(nextTraining == 5)
             {
-                if(obedience < 20)
+                if(flavorObedience() < 20)
                 {
                     if(innocence > 66)
                         say(t, "Everyone's going to be impressed when they see that I'm not broken yet!  Yeah, that's how it's gonna work!");
@@ -4027,7 +4087,7 @@ public class Forsaken
                     else
                         say(t, "Isn't it too early to parade me around like some sort of trophy?  I am not defeated yet!");
                 } else
-                if(obedience < 40)
+                if(flavorObedience() < 40)
                 {
                     if(innocence > 66)
                         say(t, "Everyone's going to laugh at me...");
@@ -4037,7 +4097,7 @@ public class Forsaken
                     else
                         say(t, "I can only hope that the crowd won't grow too bold...");
                 } else
-                if(obedience < 61)
+                if(flavorObedience() < 61)
                 {
                     if(innocence > 66)
                         say(t, "Aaah, no!  I'm scared of what they'll do to me while I'm like this!");
@@ -4047,7 +4107,7 @@ public class Forsaken
                     else
                         say(t, "To be seen by so many in my current state...  No, please, don't do this!");
                 } else
-                if(obedience < 81)
+                if(flavorObedience() < 81)
                 {
                     if(innocence > 66)
                         say(t, "I'm afraid to go out in public like this... b-but I'll do it for you!");
@@ -4067,7 +4127,7 @@ public class Forsaken
             } else
             if(nextTraining == 6)
             {
-                if(obedience < 20)
+                if(flavorObedience() < 20)
                 {
                     if(innocence > 66)
                         say(t, "If you make them attack me, I'm gonna get really mad!");
@@ -4077,7 +4137,7 @@ public class Forsaken
                     else
                         say(t, "Are you so eager to waste your pawns so pointlessly!?");
                 } else
-                if(obedience < 40)
+                if(flavorObedience() < 40)
                 {
                     if(innocence > 66)
                         say(t, "Huh!?  I can fight back!?");
@@ -4087,7 +4147,7 @@ public class Forsaken
                     else
                         say(t, "Putting me in a situation where I have no choice but to sin...  More of your typical dirty tricks.");
                 } else
-                if(obedience < 61)
+                if(flavorObedience() < 61)
                 {
                     if(confidence > 66)
                         say(t, "Are you just using me to hurt people?  I guess that's what I'm good at...");
@@ -4097,7 +4157,7 @@ public class Forsaken
                     else
                         say(t, "Th-Thank you for giving me a chance to defend myself, at least...");
                 } else
-                if(obedience < 81)
+                if(flavorObedience() < 81)
                 {
                     if(morality > 66)
                         say(t, "Don't worry, Demon Lord, I won't let myself be held back by morals anymore.");
@@ -4117,7 +4177,7 @@ public class Forsaken
             } else
             if(nextTraining == 7)
             {
-                if(obedience < 20)
+                if(flavorObedience() < 20)
                 {
                     if(morality > 66)
                         say(t, "I can handle whatever torture you or your minions do to me!");
@@ -4127,7 +4187,7 @@ public class Forsaken
                     else
                         say(t, "They can do whatever they want to me, but they'd better sleep with one eye open afterwards...");
                 } else
-                if(obedience < 40)
+                if(flavorObedience() < 40)
                 {
                     if(confidence > 66)
                         say(t, "I won't bother with trying to run away.");
@@ -4137,7 +4197,7 @@ public class Forsaken
                     else
                         say(t, "Even regular humans are enough to scare me now...");
                 } else
-                if(obedience < 61)
+                if(flavorObedience() < 61)
                 {
                     if(innocence > 66)
                         say(t, "Why are you gonna have everyone punish me!?  What did I do wrong!?");
@@ -4147,7 +4207,7 @@ public class Forsaken
                     else
                         say(t, "I-I'm sure your minions have better things to do than wasting time punishing me, right...?");
                 } else
-                if(obedience < 81)
+                if(flavorObedience() < 81)
                 {
                     if(morality > 66)
                         say(t, "Of course, if you want them to punish me, I'd never even think of trying to escape it.");
@@ -4167,7 +4227,7 @@ public class Forsaken
             } else
             if(nextTraining == 8)
             {
-                if(obedience < 20)
+                if(flavorObedience() < 20)
                 {
                     if(dignity > 66)
                         say(t, "I... I need to control my thoughts...!");
@@ -4177,7 +4237,7 @@ public class Forsaken
                     else
                         say(t, "Hah!  This just means I can shout at them directly into their heads!");
                 } else
-                if(obedience < 40)
+                if(flavorObedience() < 40)
                 {
                     if(dignity > 66)
                         say(t, "N-No!  Don't let them know what I'm thinking!  You'll ruin everything!");
@@ -4187,7 +4247,7 @@ public class Forsaken
                     else
                         say(t, "Ugh...  Whatever, it won't tell them anything they don't already know...");
                 } else
-                if(obedience < 61)
+                if(flavorObedience() < 61)
                 {
                     if(morality > 66)
                         say(t, "They'll all know what a coward I am...");
@@ -4197,7 +4257,7 @@ public class Forsaken
                     else
                         say(t, "They'll know all my weaknesses...");
                 } else
-                if(obedience < 81)
+                if(flavorObedience() < 81)
                 {
                     if(innocence > 66)
                         say(t, "Um, is there anything you want me to tell them with my brain?");
@@ -4217,7 +4277,7 @@ public class Forsaken
             } else
             if(nextTraining == 9)
             {
-                if(obedience < 20)
+                if(flavorObedience() < 20)
                 {
                     if(innocence > 66)
                         say(t, "Huh!?  Don't give me anything weird!");
@@ -4227,7 +4287,7 @@ public class Forsaken
                     else
                         say(t, "While living within your domain, I doubt I can escape your poison for long.  But I refuse to cooperate!");
                 } else
-                if(obedience < 40)
+                if(flavorObedience() < 40)
                 {
                     if(confidence > 66)
                         say(t, "I... I can't let dirty tricks take me down!");
@@ -4237,7 +4297,7 @@ public class Forsaken
                     else
                         say(t, "Even if I refuse, the Demon Lord will probably drug me anyway...");
                 } else
-                if(obedience < 61)
+                if(flavorObedience() < 61)
                 {
                     if(innocence > 66)
                         say(t, "I'm scared...  Whenever I drink that stuff, it's like I'm not myself anymore...");
@@ -4247,7 +4307,7 @@ public class Forsaken
                     else
                         say(t, "While I'm drugged, my behavior becomes completely irrational...  It's frightening...");
                 } else
-                if(obedience < 81)
+                if(flavorObedience() < 81)
                 {
                     if(morality > 66)
                         say(t, "Thank you...  I will try to enjoy it as much as I can.");
@@ -4267,7 +4327,7 @@ public class Forsaken
             } else
             if(nextTraining == 10)
             {
-                if(obedience < 20)
+                if(flavorObedience() < 20)
                 {
                     if(morality > 66)
                         say(t, "My body isn't yours to give away!");
@@ -4277,7 +4337,7 @@ public class Forsaken
                     else
                         say(t, "You can't keep me like this forever.  And once I'm free, I'll track down each of these Thralls and make them pay...");
                 } else
-                if(obedience < 40)
+                if(flavorObedience() < 40)
                 {
                     if(innocence > 66)
                         say(t, "I... I can take this.  It's just some naughty stuff...");
@@ -4287,7 +4347,7 @@ public class Forsaken
                     else
                         say(t, "S-Surely there are more efficient ways for me to help bolster your troops' morale...!");
                 } else
-                if(obedience < 61)
+                if(flavorObedience() < 61)
                 {
                     if(confidence > 66)
                         say(t, "If this is how you want to use me...  I'll survive.");
@@ -4297,7 +4357,7 @@ public class Forsaken
                     else
                         say(t, "There are so many of them... I d-don't know if I'll be able to take it...");
                 } else
-                if(obedience < 81)
+                if(flavorObedience() < 81)
                 {
                     if(morality > 66)
                         say(t, "I'll do my best to cheer them up for you, Demon Lord.");
@@ -4316,7 +4376,7 @@ public class Forsaken
                     say(t, "I'm honored to be used so thoroughly, Demon Lord.");
             } else
             if(nextTraining == 11)
-                if(obedience < 20)
+                if(flavorObedience() < 20)
                 {
                     if(innocence > 66)
                         say(t, "Bring 'em on!  I won't lose again!");
@@ -4326,7 +4386,7 @@ public class Forsaken
                     else
                         say(t, "Even if I have no hope of victory, I will never yield!");
                 } else
-                if(obedience < 40)
+                if(flavorObedience() < 40)
                 {
                     if(confidence > 66)
                         say(t, "Are you really that afraid of giving me a fair fight!?");
@@ -4336,7 +4396,7 @@ public class Forsaken
                     else
                         say(t, "Maybe I can find a chance to run away...");
                 } else
-                if(obedience < 61)
+                if(flavorObedience() < 61)
                 {
                     if(innocence > 66)
                         say(t, "No!  I don't wanna get beaten up again!");
@@ -4346,7 +4406,7 @@ public class Forsaken
                     else
                         say(t, "My only choice is to yield quickly...");
                 } else
-                if(obedience < 81)
+                if(flavorObedience() < 81)
                 {
                     if(dignity > 66)
                         say(t, "Don't worry, Demon Lord, I'll put on a good show for everyone.");
@@ -4593,7 +4653,7 @@ public class Forsaken
         {
             if(nextTraining == 0)
             {
-                if(obedience < 20)
+                if(flavorObedience() < 20)
                 {
                     if(hostility < 20)
                     {
@@ -4669,7 +4729,7 @@ public class Forsaken
             } else
             if(nextTraining == 2)
             {
-                if(obedience < 20)
+                if(flavorObedience() < 20)
                 {
                     if(disgrace < 15)
                     {
@@ -4745,7 +4805,7 @@ public class Forsaken
             } else
             if(nextTraining == 4)
             {
-                if(obedience < 20)
+                if(flavorObedience() < 20)
                 {
                     if(deviancy < 10)
                     {
@@ -4821,7 +4881,7 @@ public class Forsaken
             } else
             if(nextTraining == 6)
             {
-                if(obedience < 40)
+                if(flavorObedience() < 40)
                 {
                     if(deviancy < 30)
                     {
@@ -4897,7 +4957,7 @@ public class Forsaken
             } else
             if(nextTraining == 8)
             {
-                if(obedience < 40)
+                if(flavorObedience() < 40)
                 {
                     if(disgrace < 40)
                     {
@@ -4972,7 +5032,7 @@ public class Forsaken
                 }
             } else
             if(nextTraining == 10)
-                if(obedience < 40)
+                if(flavorObedience() < 40)
                 {
                     if(deviancy < 40)
                     {
@@ -5048,7 +5108,7 @@ public class Forsaken
         } else
         if(nextTraining == 0)
         {
-            if(obedience < 20)
+            if(flavorObedience() < 20)
             {
                 if(deviancy < 20)
                 {
@@ -5124,7 +5184,7 @@ public class Forsaken
         } else
         if(nextTraining == 1)
         {
-            if(obedience < 20)
+            if(flavorObedience() < 20)
             {
                 if(hostility < 10)
                 {
@@ -5176,7 +5236,7 @@ public class Forsaken
         } else
         if(nextTraining == 2)
         {
-            if(obedience < 20)
+            if(flavorObedience() < 20)
             {
                 if(disgrace < 15)
                 {
@@ -5252,7 +5312,7 @@ public class Forsaken
         } else
         if(nextTraining == 3)
         {
-            if(obedience < 20)
+            if(flavorObedience() < 20)
             {
                 if(innocence > 66)
                     say(t, "You're a huge pervert, Demon Lord.  ");
@@ -5304,7 +5364,7 @@ public class Forsaken
         } else
         if(nextTraining == 4)
         {
-            if(obedience < 20)
+            if(flavorObedience() < 20)
             {
                 if(deviancy < 10)
                 {
@@ -5380,7 +5440,7 @@ public class Forsaken
         } else
         if(nextTraining == 5)
         {
-            if(obedience < 20)
+            if(flavorObedience() < 20)
             {
                 if(disgrace < 20)
                 {
@@ -5430,7 +5490,7 @@ public class Forsaken
         } else
         if(nextTraining == 6)
         {
-            if(obedience < 40)
+            if(flavorObedience() < 40)
             {
                 if(hostility < 30)
                 {
@@ -5506,7 +5566,7 @@ public class Forsaken
         } else
         if(nextTraining == 7)
         {
-            if(obedience < 35)
+            if(flavorObedience() < 35)
             {
                 if(hostility < 40)
                 {
@@ -5562,7 +5622,7 @@ public class Forsaken
         } else
         if(nextTraining == 8)
         {
-            if(obedience < 40)
+            if(flavorObedience() < 40)
             {
                 if(disgrace < 40)
                 {
@@ -5638,7 +5698,7 @@ public class Forsaken
         } else
         if(nextTraining == 9)
         {
-            if(obedience < 30)
+            if(flavorObedience() < 30)
             {
                 if(deviancy < 35)
                 {
@@ -5694,7 +5754,7 @@ public class Forsaken
         } else
         if(nextTraining == 10)
         {
-            if(obedience < 40)
+            if(flavorObedience() < 40)
             {
                 if(deviancy < 40)
                 {
@@ -5776,7 +5836,7 @@ public class Forsaken
             }
         } else
         if(nextTraining == 11)
-            if(obedience < 40)
+            if(flavorObedience() < 40)
             {
                 if(innocence > 66)
                     say(t, "I'll win, this time!  I'll definitely win!  ");
@@ -8495,6 +8555,11 @@ public class Forsaken
         styleDamage[1] = styleDamage[1] * (int)(expMultiplier(pleaExp) / 1000L);
         styleDamage[2] = styleDamage[2] * (int)(expMultiplier(injuExp) / 1000L);
         styleDamage[3] = styleDamage[3] * (int)(expMultiplier(expoExp) / 1000L);
+        if(defeatType == 5 && obedience < 40)
+        {
+            styleDamage[1] = (styleDamage[1] * 3) / 2;
+            styleDamage[3] = (styleDamage[3] * 3) / 2;
+        }
         for(int i = 0; i < 4; i++)
             baseDamage[i + 4] = styleDamage[i];
 
@@ -8712,7 +8777,7 @@ public class Forsaken
                         c.say(t, "\"\n\n");
                         say(t, "\"");
                         String usedName = originalName;
-                        if(obedience > 40)
+                        if(flavorObedience() > 40)
                             usedName = mainName;
                         if(hostility > 66)
                             say(t, (new StringBuilder("My name is ")).append(usedName).append(", and I'm the one who will kill you!").toString());
@@ -8792,9 +8857,9 @@ public class Forsaken
                     highest = deviancy;
                     reason = 1;
                 }
-                if(obedience > highest)
+                if(flavorObedience() > highest)
                 {
-                    highest = obedience;
+                    highest = flavorObedience();
                     reason = 2;
                 }
                 if(hostility > 66)
@@ -9920,10 +9985,10 @@ public class Forsaken
                                     c.say(t, "You don't look like you're enjoying this, so why...?");
                                 c.say(t, "\"\n\n");
                                 say(t, "\"");
-                                if(obedience > 66)
+                                if(flavorObedience() > 66)
                                     say(t, "I enjoy everything I do in service to the Demon Lord.");
                                 else
-                                if(obedience > 33)
+                                if(flavorObedience() > 33)
                                     say(t, "I'm only following my orders.");
                                 else
                                     say(t, "This is how I fight.");
@@ -10133,7 +10198,7 @@ public class Forsaken
                     } else
                     {
                         String usedName = originalName;
-                        if(obedience > 40)
+                        if(flavorObedience() > 40)
                             usedName = mainName;
                         c.say(t, "\"");
                         if(c.getConfidence() > 66)
@@ -10184,10 +10249,10 @@ public class Forsaken
                                 c.say(t, "I know you aren't enjoying this, so why...?");
                             c.say(t, "\"\n\n");
                             say(t, "\"");
-                            if(obedience > 66)
+                            if(flavorObedience() > 66)
                                 say(t, "And this is only a small fraction of the Demon Lord's power!");
                             else
-                            if(obedience > 33)
+                            if(flavorObedience() > 33)
                                 say(t, "I have my orders.");
                             else
                                 say(t, "I'm sorry.");
@@ -10474,10 +10539,10 @@ public class Forsaken
                             c.say(t, (new StringBuilder("I can tell that ")).append(heShe()).append("'s getting tired too...").toString());
                         c.say(t, "\"\n\n");
                         say(t, "\"");
-                        if(obedience > 66)
+                        if(flavorObedience() > 66)
                             say(t, "There's no end to the Demon Lord's power!");
                         else
-                        if(obedience > 33)
+                        if(flavorObedience() > 33)
                             say(t, "Alright, next step...");
                         else
                             say(t, "I like how this is turning out.");
@@ -10534,10 +10599,10 @@ public class Forsaken
                             c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append("'s completely cornered me...").toString());
                         c.say(t, "\"\n\n");
                         say(t, "\"");
-                        if(obedience > 66)
+                        if(flavorObedience() > 66)
                             say(t, "Now do you understand the Demon Lord's power?");
                         else
-                        if(obedience > 33)
+                        if(flavorObedience() > 33)
                             say(t, "Alright, here should be good.");
                         else
                             say(t, "You can't run anymore.");
@@ -10785,10 +10850,10 @@ public class Forsaken
                                 c.say(t, "What are you plotting now?");
                             c.say(t, "\"\n\n");
                             say(t, "\"");
-                            if(obedience > 66)
+                            if(flavorObedience() > 66)
                                 say(t, "I'm no use to the Demon Lord if I'm dead.");
                             else
-                            if(obedience > 33)
+                            if(flavorObedience() > 33)
                                 say(t, "The Demon Lord might not be happy, but I can deal with that later.");
                             else
                                 say(t, "Guh, why did the Demon Lord have to make me so weak!?");
@@ -10818,10 +10883,10 @@ public class Forsaken
                         c.say(t, "\"");
                         if(c.getInnocence() > 66)
                         {
-                            if(obedience > 66)
+                            if(flavorObedience() > 66)
                                 c.say(t, "Whew...  You must really love the Demon Lord, huh?");
                             else
-                            if(obedience > 33)
+                            if(flavorObedience() > 33)
                                 c.say(t, "Huuuh...  Phew...");
                             else
                                 c.say(t, "Come on, if you don't like the Demon Lord, then just give up already!");
@@ -10846,10 +10911,10 @@ public class Forsaken
                                 c.say(t, "Can't believe you're still standing...");
                             c.say(t, "\"\n\n");
                             say(t, "\"");
-                            if(obedience > 66)
+                            if(flavorObedience() > 66)
                                 say(t, "If it's for the Demon Lord, I'll fight forever.");
                             else
-                            if(obedience > 33)
+                            if(flavorObedience() > 33)
                                 say(t, "The Demon Lord has a way of motivating us.");
                             else
                                 say(t, "I'm not done yet.");
@@ -11022,10 +11087,10 @@ public class Forsaken
                         } else
                         if(c.getDignity() > 33)
                         {
-                            if(obedience > 66)
+                            if(flavorObedience() > 66)
                                 say(t, "If you oppose the Demon Lord, you don't get to wear clothes.");
                             else
-                            if(obedience > 33)
+                            if(flavorObedience() > 33)
                                 say(t, "I don't mind complying with this kind of order.");
                             else
                                 say(t, "I want to see more of you.");
@@ -11072,10 +11137,10 @@ public class Forsaken
                                 c.say(t, "You're being careful not to hurt me.  That's annoying.");
                             c.say(t, "\"\n\n");
                             say(t, "\"");
-                            if(obedience > 66)
+                            if(flavorObedience() > 66)
                                 say(t, "The Demon Lord is the one who really decides your fate.");
                             else
-                            if(obedience > 33)
+                            if(flavorObedience() > 33)
                                 say(t, "For now, I'm following my orders.");
                             else
                                 say(t, "I know what I'm doing.");
@@ -11125,10 +11190,10 @@ public class Forsaken
                     say(t, "\"");
                     if(c.getConfidence() > 66)
                     {
-                        if(obedience > 66)
+                        if(flavorObedience() > 66)
                             say(t, "I will kill anyone who disrespects the Demon Lord!");
                         else
-                        if(obedience > 33)
+                        if(flavorObedience() > 33)
                             say(t, "I'll make you show some respect!");
                         else
                             say(t, "You think you can afford to take me lightly!?");
@@ -11214,19 +11279,19 @@ public class Forsaken
                             say(t, "Which of your friends do you think I should go after next?");
                         say(t, "\"\n\n");
                         c.say(t, "\"");
-                        if(obedience > 66)
+                        if(flavorObedience() > 66)
                             c.say(t, "You're just the Demon Lord's bitch!");
                         else
-                        if(obedience > 33)
+                        if(flavorObedience() > 33)
                             c.say(t, "I'm not going to waste time listening to some coward who couldn't even beat the Demon Lord!");
                         else
                             c.say(t, "You think this is a game!?");
                     } else
                     {
-                        if(obedience > 66)
+                        if(flavorObedience() > 66)
                             say(t, "I've devoted my life to the great Demon Lord!");
                         else
-                        if(obedience > 33)
+                        if(flavorObedience() > 33)
                             say(t, "I'm just looking out for myself, because no one else will.");
                         else
                             say(t, "I'm having a good time.  How about you?");
@@ -11255,10 +11320,10 @@ public class Forsaken
                             c.say(t, (new StringBuilder("I can tell that it's hurting you to do this, ")).append(mainName).append("!  You belong on the side of Good!").toString());
                         c.say(t, "\"\n\n");
                         say(t, "\"");
-                        if(obedience > 66)
+                        if(flavorObedience() > 66)
                             say(t, "Silence!  My life belongs to the Demon Lord!");
                         else
-                        if(obedience > 33)
+                        if(flavorObedience() > 33)
                             say(t, "I've lost the ability to make that choice...");
                         else
                             say(t, "I'm sorry.  I've come too far to stop now.");
@@ -11358,10 +11423,10 @@ public class Forsaken
                                     c.say(t, "You're hard to pin down...");
                             } else
                             {
-                                if(obedience > 66)
+                                if(flavorObedience() > 66)
                                     say(t, (new StringBuilder("I should lead ")).append(c.himHer()).append(" past as many cameras as possible.").toString());
                                 else
-                                if(obedience > 33)
+                                if(flavorObedience() > 33)
                                     say(t, "Let's show this to your teammates.");
                                 else
                                     say(t, "I think I'm doing pretty well for myself.");
@@ -11495,10 +11560,10 @@ public class Forsaken
                                     say(t, "I'm glad that you managed to resist.");
                                 say(t, "\"\n\n");
                                 c.say(t, "\"");
-                                if(obedience > 66)
+                                if(flavorObedience() > 66)
                                     c.say(t, "The Demon Lord wants everyone to see me in this state...");
                                 else
-                                if(obedience > 33)
+                                if(flavorObedience() > 33)
                                     c.say(t, "Is this also your orders, or just your hobby?");
                                 else
                                     c.say(t, "Enough... of this...!");
@@ -11714,10 +11779,10 @@ public class Forsaken
                         } else
                         if(c.getMorality() > 33)
                         {
-                            if(obedience > 66)
+                            if(flavorObedience() > 66)
                                 say(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" can't save you from the Demon Lord!  No one can!").toString());
                             else
-                            if(obedience > 33)
+                            if(flavorObedience() > 33)
                                 say(t, "Go on, give me an excuse to kill them.");
                             else
                                 say(t, "Ah, look how afraid they all are!");
@@ -11793,10 +11858,10 @@ public class Forsaken
                                 say(t, "Heh.");
                         } else
                         {
-                            if(obedience > 66)
+                            if(flavorObedience() > 66)
                                 c.say(t, "Wouldn't the Demon Lord be happier if you took me head-on!?");
                             else
-                            if(obedience > 33)
+                            if(flavorObedience() > 33)
                                 c.say(t, "Will the Demon Lord really be satisfied with this performance?");
                             else
                                 c.say(t, "Come, I know that you'd rather be on the attack!");
@@ -11835,10 +11900,10 @@ public class Forsaken
                         } else
                         if(c.getConfidence() > 33)
                         {
-                            if(obedience > 66)
+                            if(flavorObedience() > 66)
                                 say(t, "Do you even understand the world the Demon Lord is trying to create!?");
                             else
-                            if(obedience > 33)
+                            if(flavorObedience() > 33)
                                 say(t, "You're pretty strong, but not nearly strong enough.");
                             else
                                 say(t, "You might be able to beat the Demon Lord, but you have to be careful.");
@@ -11862,10 +11927,10 @@ public class Forsaken
                                 say(t, "With how weak you are, there's no point in standing before the Demon Lord.");
                             say(t, "\"\n\n");
                             c.say(t, "\"");
-                            if(obedience > 66)
+                            if(flavorObedience() > 66)
                                 c.say(t, "I don't want to j-join you anyway!");
                             else
-                            if(obedience > 33)
+                            if(flavorObedience() > 33)
                                 c.say(t, "Y-You don't have to say it like that!");
                             else
                                 c.say(t, "Um, th-thanks for the advice, but... I'm not giving up!");
@@ -11878,10 +11943,10 @@ public class Forsaken
                     c.say(t, "\"");
                     if(c.getMorality() > 66)
                     {
-                        if(obedience > 66)
+                        if(flavorObedience() > 66)
                             c.say(t, "You don't have to keep serving the Demon Lord!");
                         else
-                        if(obedience > 33)
+                        if(flavorObedience() > 33)
                             c.say(t, "If you come with us, the Demon Lord won't be able to hurt you anymore!");
                         else
                             c.say(t, "You can still be forgiven for what you've done!");
@@ -12170,10 +12235,10 @@ public class Forsaken
                             } else
                             if(c.getDignity() > 33)
                             {
-                                if(obedience > 66)
+                                if(flavorObedience() > 66)
                                     c.say(t, (new StringBuilder("That must have been what ")).append(heShe()).append(" was after all along...!").toString());
                                 else
-                                if(obedience > 33)
+                                if(flavorObedience() > 33)
                                     c.say(t, "So the Demon Lord ordered you to strip me?");
                                 else
                                     c.say(t, "This is your fault!");
@@ -12197,10 +12262,10 @@ public class Forsaken
                                     c.say(t, (new StringBuilder("I can't let ")).append(himHer()).append(" out of my sight...").toString());
                                 c.say(t, "\"\n\n");
                                 say(t, "\"");
-                                if(obedience > 66)
+                                if(flavorObedience() > 66)
                                     say(t, "Yes, yes, let everyone see...");
                                 else
-                                if(obedience > 33)
+                                if(flavorObedience() > 33)
                                     say(t, "Mission accomplished.");
                                 else
                                     say(t, "Hey!  Don't you know what happens when people see you as weak!?");
@@ -12232,10 +12297,10 @@ public class Forsaken
                         } else
                         if(c.getInnocence() > 33)
                         {
-                            if(obedience > 66)
+                            if(flavorObedience() > 66)
                                 c.say(t, "It's even worse than what I feel from the Demons...");
                             else
-                            if(obedience > 33)
+                            if(flavorObedience() > 33)
                                 c.say(t, (new StringBuilder("This is what the Demons have done to ")).append(himHer()).append("...").toString());
                             else
                                 c.say(t, (new StringBuilder("I think... the Demon Lord is actually holding ")).append(himHer()).append(" back...").toString());
@@ -12320,10 +12385,10 @@ public class Forsaken
                                 c.say(t, "Y-You don't have to shout...");
                             c.say(t, "\"\n\n");
                             say(t, "\"");
-                            if(obedience > 66)
+                            if(flavorObedience() > 66)
                                 say(t, "You aren't even worthy to belong to the Demon Lord!");
                             else
-                            if(obedience > 33)
+                            if(flavorObedience() > 33)
                                 say(t, "Weakling!  Just get out of my way!");
                             else
                                 say(t, "Hah, are you crying?  You're crying!");
@@ -12334,10 +12399,10 @@ public class Forsaken
                         say(t, "\"");
                         if(c.getMorality() > 66)
                         {
-                            if(obedience > 66)
+                            if(flavorObedience() > 66)
                                 say(t, "The Demon Lord doesn't want those people dead, either!");
                             else
-                            if(obedience > 33)
+                            if(flavorObedience() > 33)
                                 say(t, "I'm being forced to do this by the Demon Lord.");
                             else
                                 say(t, "What would you have done if I had wanted to kill them!?");
@@ -12547,10 +12612,10 @@ public class Forsaken
                                 c.say(t, "Close one...!");
                             c.say(t, "\"\n\n");
                             say(t, "\"");
-                            if(obedience > 66)
+                            if(flavorObedience() > 66)
                                 say(t, "For the Demon Lord!");
                             else
-                            if(obedience > 33)
+                            if(flavorObedience() > 33)
                                 say(t, "What a pain!");
                             else
                                 say(t, "I'll take you down with this!");
@@ -12661,10 +12726,10 @@ public class Forsaken
                     } else
                     if(c.getInnocence() > 33)
                     {
-                        if(obedience > 66)
+                        if(flavorObedience() > 66)
                             say(t, "Watch me...!");
                         else
-                        if(obedience > 33)
+                        if(flavorObedience() > 33)
                             say(t, "I have no choice...!");
                         else
                             say(t, "I've got you!");
@@ -12748,10 +12813,10 @@ public class Forsaken
                             c.say(t, (new StringBuilder("I was hoping it would make ")).append(himHer()).append(" cry...").toString());
                         c.say(t, "\"\n\n");
                         say(t, "\"");
-                        if(obedience > 66)
+                        if(flavorObedience() > 66)
                             say(t, "If you just insulted me, I might have forgiven you.  But now... I think you need to learn some respect.");
                         else
-                        if(obedience > 33)
+                        if(flavorObedience() > 33)
                             say(t, "We'll see who the coward is.  How long until you start begging for mercy?");
                         else
                             say(t, "I don't take that sort of thing from the Demon Lord, and I'm definitely not taking it from you.");
@@ -12833,10 +12898,10 @@ public class Forsaken
                             c.say(t, "\"");
                             if(c.getConfidence() > 66)
                             {
-                                if(obedience > 66)
+                                if(flavorObedience() > 66)
                                     c.say(t, "Did you go running back to your precious Demon Lord!");
                                 else
-                                if(obedience > 33)
+                                if(flavorObedience() > 33)
                                     c.say(t, "Don't tell me you're finally getting out of the way so I can kill the Demon Lord!");
                                 else
                                     c.say(t, "Come on, your enemy is right here!");
@@ -12912,10 +12977,10 @@ public class Forsaken
                             } else
                             if(c.getInnocence() > 33)
                             {
-                                if(obedience > 66)
+                                if(flavorObedience() > 66)
                                     c.say(t, "Ow!  Are you that eager for round 2?");
                                 else
-                                if(obedience > 33)
+                                if(flavorObedience() > 33)
                                     c.say(t, "Gah!  What was that for!?");
                                 else
                                     c.say(t, "Hey!  I thought you didn't want to do this!");
@@ -12939,10 +13004,10 @@ public class Forsaken
                                     c.say(t, "I have no escape routes, so I can only clear out these hostiles to improve my chances.");
                                 c.say(t, "\"\n\n");
                                 say(t, "\"");
-                                if(obedience > 66)
+                                if(flavorObedience() > 66)
                                     say(t, "I will recruit you for the Demon Lord!");
                                 else
-                                if(obedience > 33)
+                                if(flavorObedience() > 33)
                                     say(t, "Sorry, but I can't afford to hold back...!");
                                 else
                                     say(t, "This might hurt, but you need to get stronger somehow...!");
@@ -13000,10 +13065,10 @@ public class Forsaken
                             else
                                 c.say(t, "The thing that enrages you most is that you aren't allowed to kill me.  Am I correct?");
                             c.say(t, "\"\n\n");
-                            if(obedience > 66)
+                            if(flavorObedience() > 66)
                                 say(t, "I can only hope that the Demon Lord will change his mind...");
                             else
-                            if(obedience > 33)
+                            if(flavorObedience() > 33)
                                 say(t, "Don't push me, or I might decide that the punishment is worth it.");
                             else
                                 say(t, "Those are the Demon Lord's orders, but I don't really care.  I just want to make you suffer more first.");
@@ -13075,10 +13140,10 @@ public class Forsaken
                         c.say(t, "\"");
                         if(c.getMorality() > 66)
                         {
-                            if(obedience > 66)
+                            if(flavorObedience() > 66)
                                 c.say(t, "How could you do that to them!?");
                             else
-                            if(obedience > 33)
+                            if(flavorObedience() > 33)
                                 c.say(t, "You're exchanging your safety for their lives!");
                             else
                                 c.say(t, "You're in no position to talk about that!");
@@ -13134,7 +13199,7 @@ public class Forsaken
                 } else
                 if(styleDamage[2] > 0)
                 {
-                    if(obedience > 66)
+                    if(flavorObedience() > 66)
                     {
                         c.say(t, "\"");
                         if(c.getMorality() > 66)
@@ -13195,7 +13260,7 @@ public class Forsaken
                         }
                         say(t, "\"");
                     } else
-                    if(obedience > 33)
+                    if(flavorObedience() > 33)
                     {
                         c.say(t, "\"");
                         if(c.getConfidence() > 66)
@@ -13392,10 +13457,10 @@ public class Forsaken
                             say(t, "You have a strong will.  That's worth a lot.");
                         say(t, "\"\n\n");
                         c.say(t, "\"");
-                        if(obedience > 66)
+                        if(flavorObedience() > 66)
                             c.say(t, "Heh.  Trying to get me to join you?");
                         else
-                        if(obedience > 33)
+                        if(flavorObedience() > 33)
                             c.say(t, "Don't worry.  I'll save you, too, when I kill the Demon Lord.");
                         else
                             c.say(t, "Then you know I have what it takes to beat the Demon Lord.");
@@ -13471,19 +13536,19 @@ public class Forsaken
                             say(t, "I have to do this.");
                         say(t, "\"\n\n");
                         c.say(t, "\"");
-                        if(obedience > 66)
+                        if(flavorObedience() > 66)
                             c.say(t, "For the Demon Lord's sake, you mean?");
                         else
-                        if(obedience > 33)
+                        if(flavorObedience() > 33)
                             c.say(t, "The Demon Lord isn't giving you any choice...");
                         else
                             c.say(t, "Why?");
                     } else
                     {
-                        if(obedience > 66)
+                        if(flavorObedience() > 66)
                             say(t, "The things I do for the Demon Lord...");
                         else
-                        if(obedience > 33)
+                        if(flavorObedience() > 33)
                             say(t, "If I don't do this...");
                         else
                             say(t, "You understand, right?");
@@ -14709,10 +14774,10 @@ public class Forsaken
                     } else
                     {
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" notices that ").append(c.getMainName()).append(" pays practically no mind at all to protecting ").append(c.hisHer()).append(" own clothes, and ").toString());
-                        if(obedience > 66)
+                        if(flavorObedience() > 66)
                             w.append(t, "in hopes of demoralizing all those who would resist the Demon Lord");
                         else
-                        if(obedience > 33)
+                        if(flavorObedience() > 33)
                             w.append(t, (new StringBuilder("in accordance with ")).append(hisHer()).append(" orders").toString());
                         else
                             w.append(t, (new StringBuilder("in order to satisfy ")).append(hisHer()).append(" perversions").toString());
@@ -14757,10 +14822,10 @@ public class Forsaken
             {
                 if(c.getConfidence() > 66)
                 {
-                    if(obedience > 66)
+                    if(flavorObedience() > 66)
                         w.append(t, (new StringBuilder("Furious over ")).append(c.getMainName()).append("'s continued defiance against the Demon Lord, ").toString());
                     else
-                    if(obedience > 33)
+                    if(flavorObedience() > 33)
                         w.append(t, "Full of directionless bloodlust, ");
                     else
                         w.append(t, (new StringBuilder("Annoyed about the fact that ")).append(c.getMainName()).append(" is still standing up against ").append(himHer()).append(", ").toString());
@@ -14814,10 +14879,10 @@ public class Forsaken
                 } else
                 {
                     w.append(t, (new StringBuilder("During a pause in the combat, ")).append(c.getMainName()).append(" tries to get ").append(mainName).append(" to explain more about why ").append(heShe()).append("'s fighting, but ").toString());
-                    if(obedience > 66)
+                    if(flavorObedience() > 66)
                         w.append(t, (new StringBuilder(String.valueOf(c.heShe()))).append("'s disgusted to hear ").append(c.reference(this)).append(" reverently praising the Demon Lord.").toString());
                     else
-                    if(obedience > 33)
+                    if(flavorObedience() > 33)
                         w.append(t, (new StringBuilder(String.valueOf(c.heShe()))).append("'s annoyed by ").append(c.reference(this)).append("'s insistence that ").append(heShe()).append(" has no choice but to follow the Demon Lord's orders.").toString());
                     else
                         w.append(t, (new StringBuilder("it quickly becomes clear that ")).append(c.reference(this)).append(" is just looking for an excuse to satisfy ").append(hisHer()).append(" sadism.").toString());
@@ -14826,10 +14891,10 @@ public class Forsaken
             if(c.getMorality() > 66)
             {
                 w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" calls out after ").append(mainName).append(", trying to convince ").append(himHer()).append(" to stop fighting for the Demons").toString());
-                if(obedience > 66)
+                if(flavorObedience() > 66)
                     w.append(t, (new StringBuilder(", but ")).append(mainName).append("'s zealous reply leaves no doubt as to ").append(hisHer()).append(" loyalty.").toString());
                 else
-                if(obedience > 33)
+                if(flavorObedience() > 33)
                     w.append(t, (new StringBuilder(".  It's enough to make ")).append(mainName).append(" hesitate, but ").append(heShe()).append(" still shakes ").append(hisHer()).append(" head.").toString());
                 else
                     w.append(t, (new StringBuilder(", but ")).append(mainName).append(" can only reply with a sad, slightly twisted smile.").toString());
@@ -14889,10 +14954,10 @@ public class Forsaken
                         } else
                         {
                             w.append(t, (new StringBuilder("Every time ")).append(mainName).append(" and ").append(c.getMainName()).append(" clash, ").append(c.getMainName()).append(" gets the better of the exchange, but ").append(c.heShe()).append("'s bad at hiding the pleasure ").append(c.reference(this)).append("'s groping is inflicting on ").append(c.himHer()).append(", and ").toString());
-                            if(obedience > 66)
+                            if(flavorObedience() > 66)
                                 w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" hopes that the sight of ").append(c.getMainName()).append("'s lewd expression with ").append(c.hisHer()).append(" tongue hanging out will make an impression on the public.").toString());
                             else
-                            if(obedience > 33)
+                            if(flavorObedience() > 33)
                                 w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" knows that ").append(c.getMainName()).append("'s inability to stifle ").append(c.hisHer()).append(" lewd moans will distract ").append(c.hisHer()).append(" allies and make ").append(mainName).append("'s mission easier.").toString());
                             else
                             if(c.gender.equals("female"))
@@ -15162,10 +15227,10 @@ public class Forsaken
                 if(c.getConfidence() > 33)
                 {
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" spends some time focusing on talking rather than fighting, constantly dodging backward ").toString());
-                    if(obedience > 66)
+                    if(flavorObedience() > 66)
                         w.append(t, (new StringBuilder("as ")).append(heShe()).append(" tries to convince ").append(c.getMainName()).append(" to switch sides.").toString());
                     else
-                    if(obedience > 33)
+                    if(flavorObedience() > 33)
                         w.append(t, (new StringBuilder("and warning ")).append(c.getMainName()).append(" that ").append(c.hisHer()).append(" strength still isn't enough to stand up to the Demon Lord.").toString());
                     else
                         w.append(t, (new StringBuilder("and giving ")).append(c.getMainName()).append(" tips on how to fight more effectively.").toString());
@@ -15387,10 +15452,10 @@ public class Forsaken
                     } else
                     {
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" leads the half-clothed ").append(c.getMainName()).append(" through a crowd of flashing cameras, ").toString());
-                        if(obedience > 66)
+                        if(flavorObedience() > 66)
                             w.append(t, (new StringBuilder("happy to have done ")).append(hisHer()).append(" part in the continued effort to make sure that Chosen are seen as nothing but sex objects.").toString());
                         else
-                        if(obedience > 33)
+                        if(flavorObedience() > 33)
                             w.append(t, (new StringBuilder("following your orders to humiliate ")).append(reference(c)).append(" as much as possible.").toString());
                         else
                             w.append(t, (new StringBuilder("then turns around and angrily admonishes ")).append(c.getMainName()).append(" for not covering ").append(c.himHer()).append("self up better.").toString());
@@ -15467,10 +15532,10 @@ public class Forsaken
                 if(c.getMorality() > 66)
                 {
                     w.append(t, (new StringBuilder("The fight between ")).append(mainName).append(" and ").append(c.getMainName()).append(" gets dangerously close to a group of evacuated civilians on the edge of the battlefield, and they combatants are forced to call a ceasefire until they can relocate.  In the meantime, ").toString());
-                    if(obedience > 66)
+                    if(flavorObedience() > 66)
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" tries to persuade ").append(c.getMainName()).append(" to join the Demon Lord, much to the latter's annoyance.").toString());
                     else
-                    if(obedience > 33)
+                    if(flavorObedience() > 33)
                         w.append(t, (new StringBuilder("they talk, and ")).append(c.getMainName()).append(" is annoyed by the way that ").append(mainName).append(" refuses to take responsibility for ").append(hisHer()).append(" actions.").toString());
                     else
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" harshly criticizes what ").append(heShe()).append(" sees as ").append(c.getMainName()).append("'s failings.").toString());
@@ -15561,10 +15626,10 @@ public class Forsaken
                     } else
                     {
                         w.append(t, (new StringBuilder("No matter how much ")).append(c.hisHer()).append(" clothes get torn, ").append(c.getMainName()).append(" hardly seems to care.  ").append(mainName).append(" gets in close to help tear them off further, ").toString());
-                        if(obedience > 66)
+                        if(flavorObedience() > 66)
                             w.append(t, (new StringBuilder("happy that ")).append(heShe()).append("'s found an opponent who doesn't realize how valuable it is for the Demons when the Chosen are made to look vulnerable to the public.").toString());
                         else
-                        if(obedience > 33)
+                        if(flavorObedience() > 33)
                             w.append(t, (new StringBuilder("relieved that ")).append(hisHer()).append(" orders to humiliate ").append(c.getMainName()).append(" will be relatively easy to execute.").toString());
                         else
                             w.append(t, (new StringBuilder("enjoying feeling like ")).append(heShe()).append("'s playing a prank on ").append(c.himHer()).append(".").toString());
@@ -15593,10 +15658,10 @@ public class Forsaken
                 } else
                 {
                     w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append("'s clothes have taken significant damage, and while ").append(mainName).append(" isn't interested in ogling ").append(c.himHer()).append(", ").toString());
-                    if(obedience > 66)
+                    if(flavorObedience() > 66)
                         w.append(t, (new StringBuilder(String.valueOf(heShe()))).append("'s eager to please the Demon Lord.  ").toString());
                     else
-                    if(obedience > 33)
+                    if(flavorObedience() > 33)
                         w.append(t, (new StringBuilder(String.valueOf(heShe()))).append(" knows that the fight will become easier as the Chosen begin to look more exposed and vulnerable to the public and each other.  ").toString());
                     else
                         w.append(t, (new StringBuilder(String.valueOf(heShe()))).append(" knows that ").append(c.getMainName()).append(" doesn't want to be exposed.  ").toString());
@@ -15655,10 +15720,10 @@ public class Forsaken
                 if(c.getInnocence() > 33)
                 {
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" and ").append(c.getMainName()).append(" grip each other's wrists, struggling back and forth for control as ").append(mainName).append(" ").toString());
-                    if(obedience > 66)
+                    if(flavorObedience() > 66)
                         w.append(t, (new StringBuilder("calls out to the Demon Lord to give ")).append(himHer()).append(" strength.").toString());
                     else
-                    if(obedience > 33)
+                    if(flavorObedience() > 33)
                         w.append(t, (new StringBuilder("grits ")).append(hisHer()).append(" teeth and reminds ").append(himHer()).append("self that ").append(heShe()).append(" can't lose.").toString());
                     else
                         w.append(t, "refuses to give up.");
@@ -15699,10 +15764,10 @@ public class Forsaken
             } else
             {
                 w.append(t, (new StringBuilder("Frustrated with ")).append(c.hisHer()).append(" inability to make a dent in ").append(mainName).append("'s body, ").append(c.getMainName()).append(" gives in to ").append(c.hisHer()).append(" anger, ").toString());
-                if(obedience > 66)
+                if(flavorObedience() > 66)
                     w.append(t, "insulting the Demon Lord");
                 else
-                if(obedience > 33)
+                if(flavorObedience() > 33)
                     w.append(t, (new StringBuilder("calling ")).append(mainName).append(" a coward").toString());
                 else
                     w.append(t, (new StringBuilder("calling ")).append(mainName).append(" every name ").append(c.heShe()).append(" can think of").toString());
@@ -15809,10 +15874,10 @@ public class Forsaken
                     } else
                     {
                         w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" fights off some straggler Demons, keeping a wary eye on ").append(mainName).append(" at the same time.  They're too far from each other to fight now, but ").toString());
-                        if(obedience > 66)
+                        if(flavorObedience() > 66)
                             w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is determined to bring ").append(c.himHer()).append(" down for the Demon Lord, ").toString());
                         else
-                        if(obedience > 33)
+                        if(flavorObedience() > 33)
                             w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" knows that the Demon Lord won't be satisfied with this performance, ").toString());
                         else
                             w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" shows no signs of stopping, ").toString());
@@ -15823,10 +15888,10 @@ public class Forsaken
                 {
                     if(c.getInnocence() > 66)
                     {
-                        if(obedience > 66)
+                        if(flavorObedience() > 66)
                             w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is willing to put ").append(hisHer()).append(" murderous desires aside for the Demon Lord's sake, ").toString());
                         else
-                        if(obedience > 33)
+                        if(flavorObedience() > 33)
                             w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s fear of the Demon Lord's wrath is greater than ").append(hisHer()).append(" desire to kill, ").toString());
                         else
                             w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s hatred wouldn't be satisfied by giving ").append(hisHer()).append(" oppoent a kick death, ").toString());
@@ -15892,10 +15957,10 @@ public class Forsaken
                 if(c.getMorality() > 66)
                 {
                     w.append(t, "While they're too far apart to fight, ");
-                    if(obedience > 66)
+                    if(flavorObedience() > 66)
                         w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" sees ").append(mainName).append(" eagerly stunning the civilians who were too slow to evacuate and handing them over to the Demons, ").toString());
                     else
-                    if(obedience > 33)
+                    if(flavorObedience() > 33)
                         w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" sees ").append(mainName).append(" refusing to help a group of civilians who are asking ").append(himHer()).append(" for help with their evacuation, ").toString());
                     else
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" harshly criticizes ").append(c.getMainName()).append(" for failing to live up to ").append(c.hisHer()).append(" own supposed ideals, ").toString());
@@ -15927,7 +15992,7 @@ public class Forsaken
             } else
             if(styleDamage[2] > 0)
             {
-                if(obedience > 66)
+                if(flavorObedience() > 66)
                 {
                     if(c.getMorality() > 66)
                     {
@@ -15963,7 +16028,7 @@ public class Forsaken
                         w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" doesn't care enough to stop ").append(himHer()).append(", and ").append(c.heShe()).append("'s busy fighting off some Demons attacking ").append(c.himHer()).append(" at the same time, so ").append(c.heShe()).append(" lets it happen.").toString());
                     }
                 } else
-                if(obedience > 33)
+                if(flavorObedience() > 33)
                 {
                     if(c.getConfidence() > 66)
                     {
@@ -16124,10 +16189,10 @@ public class Forsaken
             } else
             {
                 w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" is annoyed by the way that ").append(mainName).append(" is trying to molest ").append(c.himHer()).append(", but it's obvious that ").append(mainName).append(" isn't enjoying it ").toString());
-                if(obedience > 66)
+                if(flavorObedience() > 66)
                     w.append(t, " and is only doing it out of devotion to the Demon Lord, ");
                 else
-                if(obedience > 33)
+                if(flavorObedience() > 33)
                     w.append(t, (new StringBuilder(" and is only following ")).append(hisHer()).append(" orders, ").toString());
                 else
                     w.append(t, " and is only using whichever tactic seems most effective, ");
@@ -16237,6 +16302,8 @@ public class Forsaken
             value = 200 - (hostility - 40) * 2;
         else
             value = 120 - (hostility - 80);
+        if(defeatType == 5 && obedience < 40)
+            value /= 4;
         return value;
     }
 
@@ -16382,6 +16449,14 @@ public class Forsaken
     public String reference(Chosen c)
     {
         return "the Chosen";
+    }
+
+    public int flavorObedience()
+    {
+        if(defeatType == 5 && obedience < 40)
+            return 65;
+        else
+            return obedience;
     }
 
     public String himHer()

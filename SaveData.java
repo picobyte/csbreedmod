@@ -12,14 +12,14 @@ public class SaveData
         names = new String[0];
         harem = null;
         forsakenMade = 0;
-        sceneText = new String[40][0][0];
-        sceneColor = new Color[40][0][0];
-        sceneUnderline = new Boolean[40][0][0];
+        sceneText = new String[42][0][0];
+        sceneColor = new Color[42][0][0];
+        sceneUnderline = new Boolean[42][0][0];
         currentText = new String[0];
         currentColor = new Color[0];
         currentUnderline = new Boolean[0];
-        sceneButtons = new String[40][0];
-        sceneSummaries = new String[40][0];
+        sceneButtons = new String[42][0];
+        sceneSummaries = new String[42][0];
     }
 
     public void organizeScenes(int scenesThisVersion)
