@@ -173,7 +173,7 @@ public class Forsaken
         if(!c.isAVirg())
             obedience += 20;
         else
-        if(c.isMeek() && defeatType != 5)
+        if(c.isMeek())
             obedience += 10;
         disgrace = (100 - c.dignity) / 3;
         if(c.isParasitized().booleanValue())
@@ -263,6 +263,12 @@ public class Forsaken
         }
         if(c.isParasitized().booleanValue())
             parasitized = Boolean.valueOf(true);
+        long temptTrack = c.temptReq;
+        if(c.pastTempted.booleanValue())
+            enjoyedAnal = 3 + (int)(Math.random() * 4D);
+        for(; temptTrack < 0x186a0L; temptTrack = (temptTrack * 10L) / 9L)
+            enjoyedAnal = (enjoyedAnal * 3) / 2 + (int)(Math.random() * 3D);
+
         defeatType = c.defeatType;
         givenName = c.givenName;
         familyName = c.familyName;
@@ -360,7 +366,9 @@ public class Forsaken
         {
             pleaExp = (pleaExp * 3L) / 2L;
             expoExp = (expoExp * 3L) / 2L;
+            obedience = (obedience * 9) / 10;
         }
+        type = c.type;
         chooseCombatStyle();
     }
 
@@ -601,7 +609,7 @@ public class Forsaken
                     say(t, "I realized how worthless I am on my own.  My only value is in my fans... a-and if I don't serve you, you'll take them away from me...  ");
                 else
                 if(dignity > 33)
-                    say(t, "I realize now that I can't do anything on my own, so I just want... I can only ask you to give me the power to transform once in awhile and still pretend to be one of the Chosen.  ");
+                    say(t, "I realize now that I can't do anything on my own, so I just want... I mean, I can only ask you to give me the power to transform once in awhile and still pretend to be one of the Chosen.  ");
                 else
                     say(t, "Now that I've lost my powers, I know that the only way I can transform... the only way I can do anything... is if I do whatever you want me to.  ");
             } else
@@ -704,10 +712,10 @@ public class Forsaken
                 if(obedience < 40)
                 {
                     if(morality > 66)
-                        say(t, "I want to help you make other people happy, the way you've made me happy.  ");
+                        say(t, "I wanted to help you make other people happy, the way you've made me happy.  ");
                     else
                     if(morality > 33)
-                        say(t, "I'm serving you because my friends are all on your side.  ");
+                        say(t, "I started serving you because my friends are all on your side.  ");
                     else
                         say(t, "I joined you because I really enjoy what you and your minions do to my body.  And... I guess I've started caring a little about your minions, too.  ");
                 } else
@@ -730,6 +738,16 @@ public class Forsaken
             } else
             if(hostility > 33)
             {
+                if(defeatType == 5 && obedience < 40)
+                {
+                    if(morality > 66)
+                        say(t, "But more and more, I'm realizing that it's really just my own happiness that I care about.");
+                    else
+                    if(morality > 33)
+                        say(t, "I don't care about them as much anymore, but I'm mostly enjoying this, so it's fine.");
+                    else
+                        say(t, "Just a little, though.");
+                } else
                 if(morality > 66)
                     say(t, "I'm trying to learn to be bothered less by the screams of the people you send me after.  If I'm not learning fast enough, please feel free to torture me however you like...");
                 else
@@ -737,6 +755,16 @@ public class Forsaken
                     say(t, "I never used to enjoy hurting people, but now that I'm doing it for your sake, it's... satisfying.");
                 else
                     say(t, "I always had to hold back my violent urges, but now that I'm serving you, I can just let them all out!");
+            } else
+            if(defeatType == 5 && obedience < 40)
+            {
+                if(morality > 66)
+                    say(t, "Some of the things you want me to do seem... horrible.  But I trust that you have a good reason.");
+                else
+                if(morality > 33)
+                    say(t, "I'm happier when you aren't asking me to hurt anyone.  But... I'll still do it.");
+                else
+                    say(t, "I can still hurt people if you need me to, but I don't mind giving them pleasure instead.");
             } else
             if(morality > 66)
                 say(t, "You're always torturing me by forcing me to hurt the innocent - and I'm so happy to be tortured by you!");
@@ -1063,7 +1091,7 @@ public class Forsaken
                     say(t, "The abuses I've suffered at the hands of humans, even those free of Demonic influence, have given me ample opportunity to see the truth of human nature.  ");
                 else
                 if(disgrace > 33)
-                    say(t, "As my own public standing has fallen, I have had an opportunity to experience more and more of the abuse which is normally reserved for the drgs of society.  ");
+                    say(t, "As my own public standing has fallen, I have had an opportunity to experience more and more of the abuse which is normally reserved for the dregs of society.  ");
                 else
                     say(t, "The fame and fortune I experienced as one of the Chosen were not enough to distract me from noticing the constant abuse to which humans subject their less fortunate kin.  ");
                 if(morality > 66)
@@ -1193,22 +1221,22 @@ public class Forsaken
     public void othersTalk(WorldState w, JTextPane t, SaveData s)
     {
         int ownID = 32000;
-        for(int i = 0; i < s.harem.length; i++)
-            if(s.harem[i] != this)
+        for(int i = 0; i < w.getHarem().length; i++)
+            if(w.getHarem()[i] != this)
             {
                 Boolean killedPartner = Boolean.valueOf(false);
                 Boolean otherKilledPartner = Boolean.valueOf(false);
                 int opinionOfDead = 0;
                 int otherOpinionOfDead = 0;
                 int formerRelationship = 0;
-                Forsaken x = s.harem[i];
+                Forsaken x = w.getHarem()[i];
                 Boolean history = Boolean.valueOf(false);
-                if(firstFormerPartner != null && secondFormerPartner != null && formerSelf != null && x.firstFormerPartner != null && x.secondFormerPartner != null && x.formerSelf != null && (firstFormerPartner.equals(x.formerSelf) || secondFormerPartner.equals(x.formerSelf)))
+                if(firstFormerPartner != null && secondFormerPartner != null && formerSelf != null && x.firstFormerPartner != null && x.secondFormerPartner != null && x.formerSelf != null && (firstFormerPartner.equals(x.formerSelf).booleanValue() || secondFormerPartner.equals(x.formerSelf).booleanValue()))
                     history = Boolean.valueOf(true);
                 if(formerSelf != null && x.formerSelf != null && x.firstFormerPartner != null)
                 {
                     if(kills != null && x.kills != null && kills.length > 0 && x.kills.length > 0)
-                        if(x.kills[0] != null && (x.kills[0].equals(firstFormerPartner) || x.kills[0].equals(secondFormerPartner)))
+                        if(x.kills[0] != null && (x.kills[0].equals(firstFormerPartner).booleanValue() || x.kills[0].equals(secondFormerPartner).booleanValue()))
                         {
                             otherKilledPartner = Boolean.valueOf(true);
                             if(ownID < i)
@@ -1221,7 +1249,7 @@ public class Forsaken
                                 otherOpinionOfDead = x.formerRelationships[x.formerSelf.number][x.kills[0].number];
                             }
                         } else
-                        if(kills[0] != null && (kills[0].equals(firstFormerPartner) || kills[0].equals(secondFormerPartner)))
+                        if(kills[0] != null && (kills[0].equals(firstFormerPartner).booleanValue() || kills[0].equals(secondFormerPartner).booleanValue()))
                         {
                             killedPartner = Boolean.valueOf(true);
                             if(ownID < i)
@@ -1234,7 +1262,7 @@ public class Forsaken
                                 otherOpinionOfDead = x.formerRelationships[x.formerSelf.number][kills[0].number];
                             }
                         }
-                    if(firstFormerPartner.equals(x.formerSelf) || secondFormerPartner.equals(x.formerSelf))
+                    if(firstFormerPartner.equals(x.formerSelf).booleanValue() || secondFormerPartner.equals(x.formerSelf).booleanValue())
                         if(ownID < i)
                             formerRelationship = formerRelationships[formerSelf.number][x.formerSelf.number];
                         else
@@ -1677,7 +1705,7 @@ public class Forsaken
                         if(confidence > 66)
                         {
                             if(x.morality > 66)
-                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s a good minion.  ").toString());
+                                say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s loyal to me.  ").toString());
                             else
                             if(x.morality > 33)
                                 say(t, (new StringBuilder("I think ")).append(x.heShe()).append(" looks up to me.  ").toString());
@@ -1773,10 +1801,10 @@ public class Forsaken
                             {
                                 say(t, "I always dream of melting that firm, rational mind of ");
                                 if(x.gender.equals(Gender.MALE))
-                                    w.append(t, "his");
+                                    say(t, "his");
                                 else
-                                    w.append(t, "hers");
-                                w.append(t, " in a sea of pleasure...  ");
+                                    say(t, "hers");
+                                say(t, " in a sea of pleasure...  ");
                             }
                         } else
                         if(x.innocence > 66)
@@ -1860,7 +1888,7 @@ public class Forsaken
                             if(x.confidence > 33)
                                 say(t, (new StringBuilder("You should really go easier on ")).append(x.himHer()).append(".  ").append(x.HeShe()).append(" doesn't deserve this.  ").toString());
                             else
-                                say(t, (new StringBuilder("I just wish ")).append(x.heShe()).append(" were able to put up a little more resistance.  ").toString());
+                                say(t, (new StringBuilder("I just wish ")).append(x.heShe()).append(" were able to put up a little more resistance against you.  ").toString());
                         } else
                         if(flavorObedience() < 61)
                         {
@@ -2985,6 +3013,179 @@ public class Forsaken
         say(t, "\"");
     }
 
+    public void describeSacrifice(JTextPane t, WorldState w)
+    {
+        String hole = "vagina";
+        if(gender == Gender.MALE)
+            hole = "anus";
+        w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\n").toString());
+        if(obedience > 66)
+        {
+            if(disgrace > 66)
+                w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" doesn't voice even a word of complaint as your Thralls lead ").append(himHer()).append(" to the breeding chamber (not that ").append(heShe()).append(" retains enough strength to resist even if ").append(heShe()).append(" wanted to).  ").toString());
+            else
+            if(disgrace > 33)
+                w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" gladly cooperates with the Thralls who tell ").append(himHer()).append(" that it's ").append(hisHer()).append(" turn to be sent to the breeding chamber.  ").toString());
+            else
+                w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is still quite strong, perhaps even strong enough to resist if ").append(heShe()).append(" wanted to, but ").append(heShe()).append(" still happily accompanies the Thralls sent to bring ").append(himHer()).append(" to the breeding chamber.  ").toString());
+            if(hostility > 66)
+            {
+                w.append(t, (new StringBuilder("Madness swims in ")).append(hisHer()).append(" eyes as ").append(heShe()).append(" eagerly welcomes the tentacles wrapping around ").append(himHer()).append(".\n\n").toString());
+                say(t, "\"");
+                if(confidence > 66)
+                    say(t, "Yes!  Use my body to create an army that will bring death and destruction to all of humanity!");
+                else
+                if(confidence > 33)
+                    say(t, "I can hurt so many more people this way...  Thank you so much, Demon Lord!");
+                else
+                    say(t, "You're using me to hurt them...  To hurt all the people who hurt me.  I'm so happy...");
+            } else
+            if(hostility > 33)
+            {
+                w.append(t, (new StringBuilder(String.valueOf(HisHer()))).append(" face shines with pure happiness right up until the end.\n\n").toString());
+                say(t, "\"");
+                if(innocence > 66)
+                    say(t, "I'm gonna make lots and lots of babies for you, Demon Lord!");
+                else
+                if(innocence > 33)
+                    say(t, "As long as I'm useful to you, I don't care about anything else.");
+                else
+                    say(t, "You honor me by choosing me for this role.  I hope I do not disappoint.");
+            } else
+            {
+                w.append(t, (new StringBuilder(String.valueOf(HeShe()))).append(" holds ").append(hisHer()).append(" head high, smiling triumphantly as the tentacles approach.\n\n").toString());
+                say(t, "\"");
+                if(morality > 66)
+                    say(t, "The Demons born from my body will make this world a better place.  I'm sure of it!");
+                else
+                if(morality > 33)
+                    say(t, "This is what I was always meant for, from the start.");
+                else
+                    say(t, "After resisting for so long, I finally get to be a part of something greater than myself...");
+            }
+            say(t, "\"\n\n");
+            if(deviancy > 66)
+                w.append(t, (new StringBuilder(String.valueOf(HeShe()))).append(" screams in ecstasy as a tentacle rams into ").append(hisHer()).append(" ").append(hole).append(", climaxing instantly.  ").append(HisHer()).append(" voice rises in pitch and volume, the orgasm being drawn out by the spurts of slime being shot into ").append(himHer()).append(", only growing more and more intense with time.  ").toString());
+            else
+            if(deviancy > 33)
+                w.append(t, (new StringBuilder(String.valueOf(HeShe()))).append(" sighs with satisfaction at the feeling of one of your tentacles entering ").append(hisHer()).append(" ").append(hole).append(", then moans and shudders at the pleasure radiating through ").append(hisHer()).append(" body from the slime being pumped inside.  ").toString());
+            else
+                w.append(t, (new StringBuilder("When one of your tentacles forces its way into ")).append(hisHer()).append(" ").append(hole).append(", ").append(heShe()).append(" winces in discomfort at first.  But ").append(heShe()).append(" concentrates on relaxing and accepting it into ").append(himHer()).append(", and soon ").append(heShe()).append("'s rewarded by several spurts of slime into ").append(hisHer()).append(" belly.  ").append(HisHer()).append(" senses are assaulted by sudden overwhelming pleasure, and all pain is forgotten.  ").toString());
+        } else
+        if(obedience > 33)
+        {
+            if(disgrace > 66)
+                w.append(t, (new StringBuilder("When the Thralls come for ")).append(mainName).append(", ").append(hisHer()).append(" face goes pale with fear, but ").append(heShe()).append(" knows that there's no point in resisting with force.  Instead, as ").append(heShe()).append("'s led to the breeding chamber, ").append(heShe()).append(" pleads and bargains, grasping for any reason at all for you to spare ").append(himHer()).append(".  ").toString());
+            else
+            if(disgrace > 33)
+                w.append(t, (new StringBuilder("As the Thralls lead ")).append(mainName).append(" to the breeding chamber, ").append(heShe()).append(" protests that ").append(heShe()).append("'s still strong enough to be of use to you, but ").append(heShe()).append(" doesn't actually fight back, hoping against hope that you'll have a change of heart if ").append(heShe()).append(" acts obediently enough.  ").toString());
+            else
+                w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is still strong enough that ").append(heShe()).append(" could put up some serious resistance, but ").append(heShe()).append("'s paralyzed by the fear you've put into ").append(hisHer()).append(" heart, and ").append(heShe()).append(" allows ").append(himHer()).append("self to be led to the breeding chamber.  ").toString());
+            if(hostility > 66)
+            {
+                w.append(t, (new StringBuilder("As the tentacles encircle ")).append(himHer()).append(" and it becomes clear that ").append(heShe()).append("'s truly going to be converted into breeding stock, ").append(heShe()).append(" breaks out into terrified, insane laughter.\n\n").toString());
+                say(t, "\"");
+                if(confidence > 66)
+                    say(t, "Fine!  I'll breed an army of Demons for you!  And those Demons will be my revenge on the world of humans!  They'll all suffer!  Hahahah, ahahahah, hahahaaah!");
+                else
+                if(confidence > 33)
+                    say(t, "Heh.  This is... what I really want, isn't it?  For more Demons to... eheheh... make people suffer.  And all I have to do is let you use my body!  Hahahahah!");
+                else
+                    say(t, "Ahah, ahahah...  I can't believe I'm actually... looking forward to never seeing another person again.  Ahahahah!");
+            } else
+            if(hostility > 33)
+            {
+                w.append(t, (new StringBuilder("Even when the tentacles begin to entwine ")).append(hisHer()).append(" limbs, ").append(heShe()).append(" still doesn't fight back, ").append(hisHer()).append(" fear giving way to resignation.\n\n").toString());
+                say(t, "\"");
+                if(morality > 66)
+                    say(t, "Fine.  Use my body to make more Demons.  I don't really even care... anymore...");
+                else
+                if(morality > 33)
+                    say(t, "I can't do anything about it.  I can't do anything...");
+                else
+                    say(t, "At least I've heard that this is supposed to... feel good...");
+            } else
+            {
+                w.append(t, (new StringBuilder(String.valueOf(HeShe()))).append(" hangs ").append(hisHer()).append(" head, so consumed by ").append(hisHer()).append(" self-loathing that ").append(heShe()).append(" barely notices the tentacles wrapping around ").append(hisHer()).append(" wrists and ankles.\n\n").toString());
+                say(t, "\"");
+                if(innocence > 66)
+                    say(t, "I really messed up... and now the Demon Lord is gonna use me to hurt lots of other people...");
+                else
+                if(innocence > 33)
+                    say(t, "Damn it.  Damn it!  How could I be so useless...!?");
+                else
+                    say(t, "I could have died before letting myself be taken.  I could have fled.  I could have... done so many things...");
+            }
+            say(t, "\"\n\n");
+            if(deviancy > 66)
+                w.append(t, (new StringBuilder(String.valueOf(HisHer()))).append(" reluctance quickly fades when ").append(heShe()).append(" sees the aphrodisiac-laced slime dripping from the surrounding tentacles.  ").append(HeShe()).append(" eagerly takes one into ").append(hisHer()).append(" mouth, then moans around it as ").append(heShe()).append(" feels another slip into ").append(hisHer()).append(" ").append(hole).append(".  ").toString());
+            else
+            if(deviancy > 33)
+                w.append(t, (new StringBuilder("But ")).append(hisHer()).append(" breathing quickens and ").append(heShe()).append(" instinctively spreads ").append(hisHer()).append(" legs wider when ").append(heShe()).append(" sees a tentacle approaching ").append(hisHer()).append(" ").append(hole).append(".  It pushes inside, and ").append(mainName).append("'s last traces of terror fade away as the slime pumped inside ").append(himHer()).append(" fills ").append(hisHer()).append(" head with a sexual arousal too thick to think through.  ").toString());
+            else
+                w.append(t, (new StringBuilder("A spike of terror shoots through ")).append(hisHer()).append(" mind when ").append(heShe()).append(" feels a tentacle pushing against ").append(hisHer()).append(" ").append(hole).append(", and ").append(heShe()).append(" groans in mingled fear and discomfort when it penetrates ").append(himHer()).append(".  However, ").append(hisHer()).append(" body soon begins to feel hot, a side-effect of the slime being pumped into ").append(himHer()).append(", and ").append(hisHer()).append(" reluctance gradually fades until ").append(heShe()).append("'s openly moaning in pleasure, unable to think of anything other than how good it feels.  ").toString());
+        } else
+        {
+            if(disgrace > 66)
+                w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" struggles with all ").append(hisHer()).append(" might, kicking and screaming as ").append(heShe()).append("'s dragged to the breeding chamber, but ").append(heShe()).append("'s not significantly stronger than a regular human anymore, and it takes only three Thralls to subdue ").append(himHer()).append(".  ").toString());
+            else
+            if(disgrace > 33)
+                w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" does ").append(hisHer()).append(" best to stop you from bringing ").append(himHer()).append(" to the breeding chamber, but ").append(heShe()).append(" can't access ").append(hisHer()).append(" full power anymore without your help, and it's not long before ").append(heShe()).append("'s defeated and thrown inside.  ").toString());
+            else
+                w.append(t, (new StringBuilder("Enough residual psychic energy remains within ")).append(mainName).append(" that ").append(heShe()).append("'s able to make an impressive last stand, killing the Demons you send after ").append(himHer()).append(" and collapsing several chambers of the hive.  But eventually, ").append(heShe()).append(" exhausts ").append(himHer()).append("self, and ").append(heShe()).append("'s dragged to the breeding chamber.  ").toString());
+            if(hostility > 66)
+            {
+                w.append(t, (new StringBuilder("Even then, ")).append(heShe()).append(" snarls and shrieks, screaming bloody vengeance loud enough to be heard several chambers away.\n\n").toString());
+                say(t, "\"");
+                if(innocence > 66)
+                    say(t, "No!  No!  No!  I'm not done killing yet!  Let me go!  I'll kill you too!");
+                else
+                if(innocence > 33)
+                    say(t, "Damn it, no!  There are still so many people I have to kill!  Graaagh!");
+                else
+                    say(t, "Hear me, Demon Lord!  The malice in my heart is greater than what you can contain!  May you choke on it!");
+            } else
+            if(hostility > 33)
+            {
+                w.append(t, (new StringBuilder("The tentacles close in, and ")).append(heShe()).append(" shouts wild denials, unable to accept ").append(hisHer()).append(" fate.\n\n").toString());
+                say(t, "\"");
+                if(confidence > 66)
+                    say(t, "I'm... I'm supposed to be someone important!  The one who will defeat you!  This is impossible!");
+                else
+                if(confidence > 33)
+                    say(t, "No!  I'm one of the Chosen!  This can't be happening!");
+                else
+                    say(t, "This is... a bad dream.  I-I'm going to wake up now!  Wake up!");
+            } else
+            {
+                w.append(t, (new StringBuilder("More and more tentacles surround ")).append(himHer()).append(", piling on, wrapping around ").append(himHer()).append(" so thickly that ").append(heShe()).append(" can hardly been seen, but ").append(heShe()).append(" puts all ").append(hisHer()).append(" strength into mounting as much resistance as ").append(heShe()).append(" can.\n\n").toString());
+                say(t, "\"");
+                if(morality > 66)
+                    say(t, "Have to... at least try...!  For everyone's sake...!");
+                else
+                if(morality > 33)
+                    say(t, "Resist... until the very end...!");
+                else
+                    say(t, "Don't... use my body... for something so disgusting...!");
+            }
+            say(t, "\"\n\n");
+            if(deviancy > 66)
+                w.append(t, (new StringBuilder("Despite ")).append(hisHer()).append(" extreme sexual appetites, ").append(heShe()).append(" still ends up struggling even harder when ").append(heShe()).append(" feels a tentacle pushing its way into ").append(hisHer()).append(" ").append(hole).append(", because ").append(heShe()).append(" knows that the pleasure will stop ").append(himHer()).append(" from thinking about resisting ever again.  And when the slime starts getting pumped inside ").append(himHer()).append(", ").append(heShe()).append("'s proven completely right.  ").toString());
+            else
+            if(deviancy > 33)
+                w.append(t, (new StringBuilder(String.valueOf(HisHer()))).append(" eyes go wide with shock as a tentacle abruptly thrusts itself into ").append(hisHer()).append(" anus, immediately shooting out several spurts of slime.  ").append(HeShe()).append(" has to admit to ").append(himHer()).append("self that it feels good, and that crack in ").append(hisHer()).append(" willpower soon causes ").append(hisHer()).append(" entire mind to crumble into a sea of warm pleasure.  ").toString());
+            else
+                w.append(t, (new StringBuilder(String.valueOf(HeShe()))).append(" grits ").append(hisHer()).append(" teeth, tightening the muscles in ").append(hisHer()).append(" lower body and willing ").append(himHer()).append("self to resist the penetration of the tentacle slithering toward ").append(hisHer()).append(" ").append(hole).append(".  But it's completely in vain.  The appendage thrusts inside and begins pouring out slime, and although ").append(mainName).append(" steels ").append(hisHer()).append(" willpower as best ").append(heShe()).append(" can, it's only a matter of time until ").append(heShe()).append("'s drooling and moaning, ").append(hisHer()).append(" mind whited out by continuous climax.  ").toString());
+        }
+        if(gender == Gender.MALE)
+            w.append(t, (new StringBuilder(String.valueOf(HisHer()))).append(" midsection is already swelling even before ").append(hisHer()).append(" body begins to change.  ").append(HeShe()).append("'ll never eat a solid meal again, and so ").append(hisHer()).append(" intestines can be largely repurposed into a set of parallel wombs for growing more Demons.  Every shift in ").append(hisHer()).append(" flesh causes another orgasm to shudder through ").append(himHer()).append(", overlapping and stacking atop each other as ").append(hisHer()).append(" eyes roll into the back of ").append(hisHer()).append(" head.\n\nIn the end, ").append(heShe()).append(" hangs limp, belly heavy below ").append(himHer()).append(".  ").append(HisHer()).append(" penis, a purely vestigial organ now, dribbles a steady stream of cum onto the floor, and occasionally a new Demon will crawl out of ").append(hisHer()).append(" ass, the intense stimulation causing ").append(himHer()).append(" to shudder silently before ").append(heShe()).append(" goes limp once more.").toString());
+        else
+        if(gender == Gender.FEMALE)
+            w.append(t, (new StringBuilder("It will take several minutes for the Demonic seed inside ")).append(himHer()).append(" to take root, and hours after that until the offspring grow large enough to distend ").append(hisHer()).append(" belly.  But the sheer quantity of slime is already enough to make ").append(himHer()).append(" look pregnant, and as it's absorbed into ").append(hisHer()).append(" bloodstream, ").append(heShe()).append(" starts cumming uncontrollably, ").append(hisHer()).append(" whole body seizing up with blinding ecstacy.\n\nIt's impossible for a human's sense of self to remain intact under that kind of extended stimulation.  ").append(HeShe()).append(" can only moan wordlessly, ").append(hisHer()).append(" voice rising to a crescendo every time ").append(heShe()).append(" squeezes out another Demon through ").append(hisHer()).append(" birth canal.  Aside from that, ").append(heShe()).append(" makes no other movements or sounds.  ").append(HeShe()).append(" has become nothing more than breeding stock.").toString());
+        else
+            w.append(t, (new StringBuilder("It will take several minutes for the Demonic seed inside ")).append(himHer()).append(" to take root, and hours after that until the offspring grow large enough to distend ").append(hisHer()).append(" belly.  But the sheer quantity of slime is already enough to make ").append(himHer()).append(" look pregnant, and as it's absorbed into ").append(hisHer()).append(" bloodstream, ").append(heShe()).append(" starts climaxing uncontrollably, powerful spurts of cum shooting from ").append(hisHer()).append(" cock.  But the longer it continues, the less ").append(hisHer()).append(" body can keep up, and soon ").append(heShe()).append("'s barely twitching as a small, steady trickle of cum leaks from ").append(hisHer()).append(" tip.\n\nIt's impossible for a human's sense of self to remain intact under that kind of extended stimulation.  ").append(HeShe()).append(" can only moan wordlessly, ").append(hisHer()).append(" voice rising to a crescendo every time ").append(heShe()).append(" squeezes out another Demon through ").append(hisHer()).append(" birth canal.  Aside from that, ").append(heShe()).append(" makes no other movements or sounds.  ").append(HeShe()).append(" has become nothing more than breeding stock.").toString());
+    }
+
     public void trainingMenu(final JTextPane t, final JPanel p, final JFrame f, final WorldState w, final SaveData s, final Boolean currentTraining[], final int page, 
             final Boolean consenting)
     {
@@ -3181,8 +3382,8 @@ public class Forsaken
         else
             w.append(t, "\nINJU: ");
         w.append(t, (new StringBuilder(String.valueOf(condensedFormat(injuExp)))).append("\nEXPO: ").append(condensedFormat(expoExp)).append("\n").append(describeCombatStyle(w, Boolean.valueOf(false))).append("\n\n").toString());
-        w.underlineAppend(t, "Current Training Intensity:");
-        w.append(t, (new StringBuilder("\nHostility ")).append(currentHostility).append("%\nDeviancy ").append(currentDeviancy).append("%\nObedience ").append(currentObedience).append("%\nDisgrace ").append(currentDisgrace).append("%\n\n").toString());
+        w.underlineAppend(t, "Current Training Intensity / Current Corruption:");
+        w.append(t, (new StringBuilder("\nHostility ")).append(currentHostility).append("% / ").append(hostility).append("%\nDeviancy ").append(currentDeviancy).append("% / ").append(deviancy).append("%\nObedience ").append(currentObedience).append("% / ").append(obedience).append("%\nDisgrace ").append(currentDisgrace).append("% / ").append(disgrace).append("%\n\n").toString());
         w.underlineAppend(t, "Current Training Modifiers:");
         if(types == 0)
         {
@@ -3209,7 +3410,7 @@ public class Forsaken
                 w.append(t, "\nStamina costs x");
                 int difference = (hostilityCount + types) - disgraceCount;
                 int base = 2;
-                for(; difference > 2; difference--)
+                for(; difference > 1; difference--)
                     base *= 2;
 
                 w.append(t, (new StringBuilder(String.valueOf(base))).toString());
@@ -3575,6 +3776,11 @@ public class Forsaken
                     {
                         w.commentaryRead = Boolean.valueOf(false);
                         w.commentaryWrite = Boolean.valueOf(false);
+                        if(w.usedForsaken != null)
+                        {
+                            w.evilEnergy += w.usedForsaken.EECost();
+                            w.usedForsaken = null;
+                        }
                         Project.PostBattle(t, p, f, w);
                     }
                 }
@@ -3827,7 +4033,7 @@ public class Forsaken
         {
             if(nextTraining == 0)
             {
-                if(flavorObedience() < 20)
+                if(obedience < 20)
                 {
                     if(innocence > 66)
                         say(t, "I-I'm not afraid of regular humans, even if you do make them way more perverted than usual!");
@@ -3837,7 +4043,7 @@ public class Forsaken
                     else
                         say(t, "So you're encouraging them to torture me while I'm helpless?  Typical.");
                 } else
-                if(flavorObedience() < 40)
+                if(obedience < 40)
                 {
                     if(innocence > 66)
                         say(t, "Let me go!  Th-They're looking really scary!");
@@ -3847,7 +4053,7 @@ public class Forsaken
                     else
                         say(t, "R-Ridiculous!  Aren't they already lustful enough!?");
                 } else
-                if(flavorObedience() < 61)
+                if(obedience < 61)
                 {
                     if(innocence > 66)
                         say(t, "I-I'm sorry!  I won't disobey you again!  S-So don't make them go even crazier!");
@@ -3857,7 +4063,7 @@ public class Forsaken
                     else
                         say(t, "Ah...  I... I understand that I displeased you, so...  Please do not make them... ravage me...");
                 } else
-                if(flavorObedience() < 81)
+                if(obedience < 81)
                 {
                     if(innocence > 66)
                         say(t, "Wow, they're gonna... do all sorts of stuff to me...");
@@ -3877,7 +4083,7 @@ public class Forsaken
             } else
             if(nextTraining == 1)
             {
-                if(flavorObedience() < 20)
+                if(obedience < 20)
                 {
                     if(innocence > 66)
                         say(t, "Hey!  Stay outta my head!");
@@ -3887,7 +4093,7 @@ public class Forsaken
                     else
                         say(t, "I must focus.  Clear my mind of any attempted outside influence.");
                 } else
-                if(flavorObedience() < 40)
+                if(obedience < 40)
                 {
                     if(innocence > 66)
                         say(t, "Huh!?  What kind of weird stuff are you trying to put in my head?");
@@ -3897,7 +4103,7 @@ public class Forsaken
                     else
                         say(t, "I... I must try not to lose myself...!");
                 } else
-                if(flavorObedience() < 60)
+                if(obedience < 60)
                 {
                     if(innocence > 66)
                         say(t, "Please!  I'll do whatever you want, just stop making my head feel all funny!");
@@ -3907,7 +4113,7 @@ public class Forsaken
                     else
                         say(t, "S-Surely my mind is a large part of what makes me useful to you.  If you tamper with it carelessly, I might... not be the same afterward...");
                 } else
-                if(flavorObedience() < 81)
+                if(obedience < 81)
                 {
                     if(innocence > 66)
                         say(t, "I-I'll try to let you into my brain, but... I'm scared...!");
@@ -3927,7 +4133,7 @@ public class Forsaken
             } else
             if(nextTraining == 2)
             {
-                if(flavorObedience() < 20)
+                if(obedience < 20)
                 {
                     if(innocence > 66)
                         say(t, "I'm not gonna let you present me to everyone like this!  I'll just... um... scream really loud at everyone until they get annoyed and go away!");
@@ -3937,7 +4143,7 @@ public class Forsaken
                     else
                         say(t, "Hmph.  I may be in no position to stop you from offering me to everyone, but I will not cooperate in the slightest!");
                 } else
-                if(flavorObedience() < 40)
+                if(obedience < 40)
                 {
                     if(innocence > 66)
                         say(t, "Huh!?  W-Wait, don't show me to everyone like this, they'll think I'm super weak!");
@@ -3947,7 +4153,7 @@ public class Forsaken
                     else
                         say(t, "Hmph.  Showing everyone your dominion over me?  So be it.");
                 } else
-                if(flavorObedience() < 61)
+                if(obedience < 61)
                 {
                     if(innocence > 66)
                         say(t, "Y-You're gonna humiliate me even more!?");
@@ -3957,7 +4163,7 @@ public class Forsaken
                     else
                         say(t, "Y-You could at least let me present myself to everyone on my own terms...!");
                 } else
-                if(flavorObedience() < 81)
+                if(obedience < 81)
                 {
                     if(innocence > 66)
                         say(t, "Huh?  Y-You're gonna present me to everyone?  Is there anything I should be doing to help...?");
@@ -3977,7 +4183,7 @@ public class Forsaken
             } else
             if(nextTraining == 3)
             {
-                if(flavorObedience() < 20)
+                if(obedience < 20)
                 {
                     if(innocence > 66)
                         say(t, "It'll take more than that to keep me under control!  I'll break free!  Watch me!");
@@ -3987,7 +4193,7 @@ public class Forsaken
                     else
                         say(t, "Heh.  Am I so dangerous that you have no choice but to tie me up?");
                 } else
-                if(flavorObedience() < 40)
+                if(obedience < 40)
                 {
                     if(innocence > 66)
                         say(t, "Even if it feels really good... I have to make sure not to lose control...!");
@@ -3997,7 +4203,7 @@ public class Forsaken
                     else
                         say(t, "You may be able to get some... reactions from my body.  But my mind will not break.");
                 } else
-                if(flavorObedience() < 61)
+                if(obedience < 61)
                 {
                     if(innocence > 66)
                         say(t, "H-Hey!  There's no need to use all that stuff on me right now, is there!?");
@@ -4007,7 +4213,7 @@ public class Forsaken
                     else
                         say(t, "If you don't let up... I will truly lose my mind...!");
                 } else
-                if(flavorObedience() < 81)
+                if(obedience < 81)
                 {
                     if(innocence > 66)
                         say(t, "Huh...?  What're all those for...?");
@@ -4027,7 +4233,7 @@ public class Forsaken
             } else
             if(nextTraining == 4)
             {
-                if(flavorObedience() < 20)
+                if(obedience < 20)
                 {
                     if(innocence > 66)
                         say(t, "But... But I can't fight back if I don't transform!");
@@ -4037,7 +4243,7 @@ public class Forsaken
                     else
                         say(t, "Using a humiliating appearance to dissuade me from transforming?  Even so, I will not give up!");
                 } else
-                if(flavorObedience() < 40)
+                if(obedience < 40)
                 {
                     if(innocence > 66)
                         say(t, "Huh?  Something feels funny...");
@@ -4047,7 +4253,7 @@ public class Forsaken
                     else
                         say(t, "This disruption to my psychic energy...  Could it be...?");
                 } else
-                if(flavorObedience() < 61)
+                if(obedience < 61)
                 {
                     if(innocence > 66)
                         say(t, "Taking control of the way I look?  Th-That's so mean!");
@@ -4057,7 +4263,7 @@ public class Forsaken
                     else
                         say(t, "I... I must confess that I do not appreciate having my appearance altered like that!");
                 } else
-                if(flavorObedience() < 81)
+                if(obedience < 81)
                 {
                     if(innocence > 66)
                         say(t, "Um, I want to make you happy and all, but this feels weird...");
@@ -4077,7 +4283,7 @@ public class Forsaken
             } else
             if(nextTraining == 5)
             {
-                if(flavorObedience() < 20)
+                if(obedience < 20)
                 {
                     if(innocence > 66)
                         say(t, "Everyone's going to be impressed when they see that I'm not broken yet!  Yeah, that's how it's gonna work!");
@@ -4087,7 +4293,7 @@ public class Forsaken
                     else
                         say(t, "Isn't it too early to parade me around like some sort of trophy?  I am not defeated yet!");
                 } else
-                if(flavorObedience() < 40)
+                if(obedience < 40)
                 {
                     if(innocence > 66)
                         say(t, "Everyone's going to laugh at me...");
@@ -4097,7 +4303,7 @@ public class Forsaken
                     else
                         say(t, "I can only hope that the crowd won't grow too bold...");
                 } else
-                if(flavorObedience() < 61)
+                if(obedience < 61)
                 {
                     if(innocence > 66)
                         say(t, "Aaah, no!  I'm scared of what they'll do to me while I'm like this!");
@@ -4107,7 +4313,7 @@ public class Forsaken
                     else
                         say(t, "To be seen by so many in my current state...  No, please, don't do this!");
                 } else
-                if(flavorObedience() < 81)
+                if(obedience < 81)
                 {
                     if(innocence > 66)
                         say(t, "I'm afraid to go out in public like this... b-but I'll do it for you!");
@@ -4127,7 +4333,7 @@ public class Forsaken
             } else
             if(nextTraining == 6)
             {
-                if(flavorObedience() < 20)
+                if(obedience < 20)
                 {
                     if(innocence > 66)
                         say(t, "If you make them attack me, I'm gonna get really mad!");
@@ -4137,7 +4343,7 @@ public class Forsaken
                     else
                         say(t, "Are you so eager to waste your pawns so pointlessly!?");
                 } else
-                if(flavorObedience() < 40)
+                if(obedience < 40)
                 {
                     if(innocence > 66)
                         say(t, "Huh!?  I can fight back!?");
@@ -4147,7 +4353,7 @@ public class Forsaken
                     else
                         say(t, "Putting me in a situation where I have no choice but to sin...  More of your typical dirty tricks.");
                 } else
-                if(flavorObedience() < 61)
+                if(obedience < 61)
                 {
                     if(confidence > 66)
                         say(t, "Are you just using me to hurt people?  I guess that's what I'm good at...");
@@ -4157,7 +4363,7 @@ public class Forsaken
                     else
                         say(t, "Th-Thank you for giving me a chance to defend myself, at least...");
                 } else
-                if(flavorObedience() < 81)
+                if(obedience < 81)
                 {
                     if(morality > 66)
                         say(t, "Don't worry, Demon Lord, I won't let myself be held back by morals anymore.");
@@ -4177,7 +4383,7 @@ public class Forsaken
             } else
             if(nextTraining == 7)
             {
-                if(flavorObedience() < 20)
+                if(obedience < 20)
                 {
                     if(morality > 66)
                         say(t, "I can handle whatever torture you or your minions do to me!");
@@ -4187,7 +4393,7 @@ public class Forsaken
                     else
                         say(t, "They can do whatever they want to me, but they'd better sleep with one eye open afterwards...");
                 } else
-                if(flavorObedience() < 40)
+                if(obedience < 40)
                 {
                     if(confidence > 66)
                         say(t, "I won't bother with trying to run away.");
@@ -4197,7 +4403,7 @@ public class Forsaken
                     else
                         say(t, "Even regular humans are enough to scare me now...");
                 } else
-                if(flavorObedience() < 61)
+                if(obedience < 61)
                 {
                     if(innocence > 66)
                         say(t, "Why are you gonna have everyone punish me!?  What did I do wrong!?");
@@ -4207,7 +4413,7 @@ public class Forsaken
                     else
                         say(t, "I-I'm sure your minions have better things to do than wasting time punishing me, right...?");
                 } else
-                if(flavorObedience() < 81)
+                if(obedience < 81)
                 {
                     if(morality > 66)
                         say(t, "Of course, if you want them to punish me, I'd never even think of trying to escape it.");
@@ -4227,7 +4433,7 @@ public class Forsaken
             } else
             if(nextTraining == 8)
             {
-                if(flavorObedience() < 20)
+                if(obedience < 20)
                 {
                     if(dignity > 66)
                         say(t, "I... I need to control my thoughts...!");
@@ -4237,7 +4443,7 @@ public class Forsaken
                     else
                         say(t, "Hah!  This just means I can shout at them directly into their heads!");
                 } else
-                if(flavorObedience() < 40)
+                if(obedience < 40)
                 {
                     if(dignity > 66)
                         say(t, "N-No!  Don't let them know what I'm thinking!  You'll ruin everything!");
@@ -4247,7 +4453,7 @@ public class Forsaken
                     else
                         say(t, "Ugh...  Whatever, it won't tell them anything they don't already know...");
                 } else
-                if(flavorObedience() < 61)
+                if(obedience < 61)
                 {
                     if(morality > 66)
                         say(t, "They'll all know what a coward I am...");
@@ -4257,7 +4463,7 @@ public class Forsaken
                     else
                         say(t, "They'll know all my weaknesses...");
                 } else
-                if(flavorObedience() < 81)
+                if(obedience < 81)
                 {
                     if(innocence > 66)
                         say(t, "Um, is there anything you want me to tell them with my brain?");
@@ -4277,7 +4483,7 @@ public class Forsaken
             } else
             if(nextTraining == 9)
             {
-                if(flavorObedience() < 20)
+                if(obedience < 20)
                 {
                     if(innocence > 66)
                         say(t, "Huh!?  Don't give me anything weird!");
@@ -4287,7 +4493,7 @@ public class Forsaken
                     else
                         say(t, "While living within your domain, I doubt I can escape your poison for long.  But I refuse to cooperate!");
                 } else
-                if(flavorObedience() < 40)
+                if(obedience < 40)
                 {
                     if(confidence > 66)
                         say(t, "I... I can't let dirty tricks take me down!");
@@ -4297,7 +4503,7 @@ public class Forsaken
                     else
                         say(t, "Even if I refuse, the Demon Lord will probably drug me anyway...");
                 } else
-                if(flavorObedience() < 61)
+                if(obedience < 61)
                 {
                     if(innocence > 66)
                         say(t, "I'm scared...  Whenever I drink that stuff, it's like I'm not myself anymore...");
@@ -4307,7 +4513,7 @@ public class Forsaken
                     else
                         say(t, "While I'm drugged, my behavior becomes completely irrational...  It's frightening...");
                 } else
-                if(flavorObedience() < 81)
+                if(obedience < 81)
                 {
                     if(morality > 66)
                         say(t, "Thank you...  I will try to enjoy it as much as I can.");
@@ -4327,7 +4533,7 @@ public class Forsaken
             } else
             if(nextTraining == 10)
             {
-                if(flavorObedience() < 20)
+                if(obedience < 20)
                 {
                     if(morality > 66)
                         say(t, "My body isn't yours to give away!");
@@ -4337,7 +4543,7 @@ public class Forsaken
                     else
                         say(t, "You can't keep me like this forever.  And once I'm free, I'll track down each of these Thralls and make them pay...");
                 } else
-                if(flavorObedience() < 40)
+                if(obedience < 40)
                 {
                     if(innocence > 66)
                         say(t, "I... I can take this.  It's just some naughty stuff...");
@@ -4347,7 +4553,7 @@ public class Forsaken
                     else
                         say(t, "S-Surely there are more efficient ways for me to help bolster your troops' morale...!");
                 } else
-                if(flavorObedience() < 61)
+                if(obedience < 61)
                 {
                     if(confidence > 66)
                         say(t, "If this is how you want to use me...  I'll survive.");
@@ -4357,7 +4563,7 @@ public class Forsaken
                     else
                         say(t, "There are so many of them... I d-don't know if I'll be able to take it...");
                 } else
-                if(flavorObedience() < 81)
+                if(obedience < 81)
                 {
                     if(morality > 66)
                         say(t, "I'll do my best to cheer them up for you, Demon Lord.");
@@ -4376,7 +4582,7 @@ public class Forsaken
                     say(t, "I'm honored to be used so thoroughly, Demon Lord.");
             } else
             if(nextTraining == 11)
-                if(flavorObedience() < 20)
+                if(obedience < 20)
                 {
                     if(innocence > 66)
                         say(t, "Bring 'em on!  I won't lose again!");
@@ -4386,7 +4592,7 @@ public class Forsaken
                     else
                         say(t, "Even if I have no hope of victory, I will never yield!");
                 } else
-                if(flavorObedience() < 40)
+                if(obedience < 40)
                 {
                     if(confidence > 66)
                         say(t, "Are you really that afraid of giving me a fair fight!?");
@@ -4396,7 +4602,7 @@ public class Forsaken
                     else
                         say(t, "Maybe I can find a chance to run away...");
                 } else
-                if(flavorObedience() < 61)
+                if(obedience < 61)
                 {
                     if(innocence > 66)
                         say(t, "No!  I don't wanna get beaten up again!");
@@ -4406,7 +4612,7 @@ public class Forsaken
                     else
                         say(t, "My only choice is to yield quickly...");
                 } else
-                if(flavorObedience() < 81)
+                if(obedience < 81)
                 {
                     if(dignity > 66)
                         say(t, "Don't worry, Demon Lord, I'll put on a good show for everyone.");
@@ -4653,7 +4859,7 @@ public class Forsaken
         {
             if(nextTraining == 0)
             {
-                if(flavorObedience() < 20)
+                if(obedience < 20)
                 {
                     if(hostility < 20)
                     {
@@ -4729,7 +4935,7 @@ public class Forsaken
             } else
             if(nextTraining == 2)
             {
-                if(flavorObedience() < 20)
+                if(obedience < 20)
                 {
                     if(disgrace < 15)
                     {
@@ -4805,7 +5011,7 @@ public class Forsaken
             } else
             if(nextTraining == 4)
             {
-                if(flavorObedience() < 20)
+                if(obedience < 20)
                 {
                     if(deviancy < 10)
                     {
@@ -4881,7 +5087,7 @@ public class Forsaken
             } else
             if(nextTraining == 6)
             {
-                if(flavorObedience() < 40)
+                if(obedience < 40)
                 {
                     if(deviancy < 30)
                     {
@@ -4957,7 +5163,7 @@ public class Forsaken
             } else
             if(nextTraining == 8)
             {
-                if(flavorObedience() < 40)
+                if(obedience < 40)
                 {
                     if(disgrace < 40)
                     {
@@ -5032,7 +5238,7 @@ public class Forsaken
                 }
             } else
             if(nextTraining == 10)
-                if(flavorObedience() < 40)
+                if(obedience < 40)
                 {
                     if(deviancy < 40)
                     {
@@ -7520,7 +7726,7 @@ public class Forsaken
                 {
                     w.append(t, (new StringBuilder("You order your Thralls to clear a perimeter around ")).append(mainName).append(" ").toString());
                     if(tied.booleanValue())
-                        w.append(t, (new StringBuilder("while you loosen ")).append(hisHer()).append(" bindings and allow ").append(himHer()).append(" to stand up.  ").toString());
+                        w.append(t, (new StringBuilder("while you loosen ")).append(hisHer()).append(" bindings and allow ").append(himHer()).append(" to stand up.  Then, you ").toString());
                     else
                         w.append(t, (new StringBuilder("while ")).append(heShe()).append(" recovers from what's been done to ").append(himHer()).append(".  Then, you ").toString());
                 } else
@@ -8448,7 +8654,7 @@ public class Forsaken
         } else
         if(combatStyle == 8)
         {
-            message = (new StringBuilder(String.valueOf(message))).append("Dirty (100% PLEA/ ").append(INJU).append(")").toString();
+            message = (new StringBuilder(String.valueOf(message))).append("Dirty (100% PLEA/").append(INJU).append(")").toString();
             if(full.booleanValue())
                 message = (new StringBuilder(String.valueOf(message))).append("\nGrapples with a focus on the target's sensitive parts, alternating between different kinds of stimulation in order to throw the target off-guard.  Can cause significant trauma even without support from Thralls.").toString();
         } else
@@ -8516,6 +8722,8 @@ public class Forsaken
         if(c.gender.equals("male"))
             lowerOrgan = "balls";
         int powerConstant = 200 - disgrace * 2;
+        if(type == Chosen.Species.SUPERIOR)
+            powerConstant = (powerConstant * 3) / 2;
         int baseDamage[] = {
             powerConstant, powerConstant, powerConstant, powerConstant, 0, 0, 0, 0
         };
@@ -8857,7 +9065,7 @@ public class Forsaken
                     highest = deviancy;
                     reason = 1;
                 }
-                if(flavorObedience() > highest)
+                if(obedience > highest)
                 {
                     highest = flavorObedience();
                     reason = 2;
@@ -9077,7 +9285,7 @@ public class Forsaken
                     } else
                     if(reason == 2)
                         if(morality > 66)
-                            say(t, "We don't need to fight.  You'd be able to do so much good by joining us...");
+                            say(t, "It would be best if you'd surrender.  You'd be able to do so much good by joining us...");
                         else
                         if(morality > 33)
                             say(t, "You're strong, but the Demon Lord is so much stronger.  You should give up.");
@@ -10074,6 +10282,191 @@ public class Forsaken
                             c.say(t, "\"");
                         }
                     } else
+                    if(deviancy > 66)
+                    {
+                        c.say(t, "\"");
+                        if(c.getInnocence() > 66)
+                        {
+                            if(hostility > 66)
+                                c.say(t, "S-Stop!  You're hurting me!");
+                            else
+                            if(hostility > 33)
+                                c.say(t, "Th-This is really weird!");
+                            else
+                                c.say(t, "N-No!  I don't wanna feel good!");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(innocence > 66)
+                                say(t, "I'm gonna make you super perveted, like me!");
+                            else
+                            if(innocence > 33)
+                                say(t, "Ah, this is wonderful!");
+                            else
+                                say(t, "I'm... nn... stealing away your innocence...!");
+                        } else
+                        if(c.getInnocence() > 33)
+                        {
+                            if(innocence > 66)
+                                c.say(t, "You have no idea what you're doing!");
+                            else
+                            if(innocence > 33)
+                                c.say(t, "Stop doing all this screwed up stuff!");
+                            else
+                                c.say(t, "What are you even trying to accomplish by doing this!?");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(morality > 66)
+                                say(t, "The fact that I know it's wrong... makes it even kinkier!");
+                            else
+                            if(morality > 33)
+                                say(t, "I'll never stop, this is what I live for!");
+                            else
+                                say(t, "It feels good, that's all that matters.");
+                        } else
+                        {
+                            if(disgrace > 66)
+                                c.say(t, "I-I'll stop you by force!");
+                            else
+                            if(disgrace > 33)
+                                c.say(t, "W-Wasting effort on this will simply make it easier to defeat you!");
+                            else
+                                c.say(t, "S-Someone strong enough to stop you will come eventually!");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(confidence > 66)
+                                say(t, "Go on, try!  That makes it feel even better!");
+                            else
+                            if(confidence > 33)
+                                say(t, "Even if doing this gets me killed, it's still worth it.");
+                            else
+                                say(t, "I don't care... I just want to feel good and forget everything...");
+                        }
+                        say(t, "\"");
+                    } else
+                    if(deviancy > 33)
+                    {
+                        say(t, "\"");
+                        if(c.getDignity() > 66)
+                        {
+                            if(innocence > 66)
+                                say(t, "Um, are you trying to pretend that didn't feel good?");
+                            else
+                            if(innocence > 33)
+                                say(t, "Looks like a part of you is asking me to continue.");
+                            else
+                                say(t, "Protest as much as you like, but your pleasure is obvious.");
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            if(confidence > 66)
+                                c.say(t, "You brute!");
+                            else
+                            if(confidence > 33)
+                                c.say(t, "D-Don't be ridiculous!");
+                            else
+                                c.say(t, "Sneaky little...!");
+                        } else
+                        if(c.getDignity() > 33)
+                        {
+                            if(hostility > 66)
+                                say(t, "I still want to make you scream.");
+                            else
+                            if(hostility > 33)
+                                say(t, "Well, I enjoyed myself.");
+                            else
+                                say(t, "I might have gone too far...");
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            if(disgrace > 66)
+                                c.say(t, "I won't let you do that again!");
+                            else
+                            if(disgrace > 33)
+                                c.say(t, (new StringBuilder("Ugh, I can't let ")).append(himHer()).append(" do what ").append(heShe()).append(" wants...").toString());
+                            else
+                                c.say(t, "S-Stay back!");
+                        } else
+                        {
+                            if(confidence > 66)
+                                say(t, "What do you think of my technique?");
+                            else
+                            if(confidence > 33)
+                                say(t, "Looks like that had a nice effect.");
+                            else
+                                say(t, "H-Heh, looks like it worked...");
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            if(hostility > 66)
+                                c.say(t, "Ow...  You're... rough...");
+                            else
+                            if(hostility > 33)
+                                c.say(t, "I... I need a break...");
+                            else
+                                c.say(t, "I'll admit... that felt good...");
+                        }
+                        c.say(t, "\"");
+                    } else
+                    {
+                        say(t, "\"");
+                        if(c.getDignity() > 66)
+                        {
+                            if(innocence > 66)
+                                say(t, "I guess it's not working.  Oh well.");
+                            else
+                            if(innocence > 33)
+                                say(t, "Time to try something different.");
+                            else
+                                say(t, "I wonder, are you really not feeling anything?");
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            if(disgrace > 66)
+                                c.say(t, "Hmph.  It'd take more than that.");
+                            else
+                            if(disgrace > 33)
+                                c.say(t, "L-Let's just fight normally, then!");
+                            else
+                                c.say(t, "Huuh...  Phew...");
+                        } else
+                        if(c.getDignity() > 33)
+                        {
+                            if(disgrace > 66)
+                                say(t, "Close one...!");
+                            else
+                            if(disgrace > 33)
+                                say(t, "Too slow!");
+                            else
+                                say(t, "It's pointless to resist.");
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            if(confidence > 66)
+                                c.say(t, "You... smug...!");
+                            else
+                            if(confidence > 33)
+                                c.say(t, "Can't let that happen again...");
+                            else
+                                c.say(t, "Ugh, coward...!");
+                        } else
+                        {
+                            if(hostility > 66)
+                                say(t, "Disgusting.  Just die.");
+                            else
+                            if(hostility > 33)
+                                say(t, "Ugh, you pervert.");
+                            else
+                                say(t, "I really was hoping your body wouldn't be so weak to this.");
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            if(innocence > 66)
+                                c.say(t, "Huh...?  What...?");
+                            else
+                            if(innocence > 33)
+                                c.say(t, "No one asked you!");
+                            else
+                                c.say(t, "I expect you'd fare no better!");
+                        }
+                        c.say(t, "\"");
+                    }
+                } else
+                if(styleDamage[2] > 0)
+                {
                     if(disgrace > 66)
                     {
                         c.say(t, "\"");
@@ -10258,191 +10651,6 @@ public class Forsaken
                                 say(t, "I'm sorry.");
                         }
                         say(t, "\"");
-                    }
-                } else
-                if(styleDamage[2] > 0)
-                {
-                    if(deviancy > 66)
-                    {
-                        c.say(t, "\"");
-                        if(c.getInnocence() > 66)
-                        {
-                            if(hostility > 66)
-                                c.say(t, "S-Stop!  You're hurting me!");
-                            else
-                            if(hostility > 33)
-                                c.say(t, "Th-This is really weird!");
-                            else
-                                c.say(t, "N-No!  I don't wanna feel good!");
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
-                            if(innocence > 66)
-                                say(t, "I'm gonna make you super perveted, like me!");
-                            else
-                            if(innocence > 33)
-                                say(t, "Ah, this is wonderful!");
-                            else
-                                say(t, "I'm... nn... stealing away your innocence...!");
-                        } else
-                        if(c.getInnocence() > 33)
-                        {
-                            if(innocence > 66)
-                                c.say(t, "You have no idea what you're doing!");
-                            else
-                            if(innocence > 33)
-                                c.say(t, "Stop doing all this screwed up stuff!");
-                            else
-                                c.say(t, "What are you even trying to accomplish by doing this!?");
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
-                            if(morality > 66)
-                                say(t, "The fact that I know it's wrong... makes it even kinkier!");
-                            else
-                            if(morality > 33)
-                                say(t, "I'll never stop, this is what I live for!");
-                            else
-                                say(t, "It feels good, that's all that matters.");
-                        } else
-                        {
-                            if(disgrace > 66)
-                                c.say(t, "I-I'll stop you by force!");
-                            else
-                            if(disgrace > 33)
-                                c.say(t, "W-Wasting effort on this will simply make it easier to defeat you!");
-                            else
-                                c.say(t, "S-Someone strong enough to stop you will come eventually!");
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
-                            if(confidence > 66)
-                                say(t, "Go on, try!  That makes it feel even better!");
-                            else
-                            if(confidence > 33)
-                                say(t, "Even if doing this gets me killed, it's still worth it.");
-                            else
-                                say(t, "I don't care... I just want to feel good and forget everything...");
-                        }
-                        say(t, "\"");
-                    } else
-                    if(deviancy > 33)
-                    {
-                        say(t, "\"");
-                        if(c.getDignity() > 66)
-                        {
-                            if(innocence > 66)
-                                say(t, "Um, are you trying to pretend that didn't feel good?");
-                            else
-                            if(innocence > 33)
-                                say(t, "Looks like a part of you is asking me to continue.");
-                            else
-                                say(t, "Protest as much as you like, but your pleasure is obvious.");
-                            say(t, "\"\n\n");
-                            c.say(t, "\"");
-                            if(confidence > 66)
-                                c.say(t, "You brute!");
-                            else
-                            if(confidence > 33)
-                                c.say(t, "D-Don't be ridiculous!");
-                            else
-                                c.say(t, "Sneaky little...!");
-                        } else
-                        if(c.getDignity() > 33)
-                        {
-                            if(hostility > 66)
-                                say(t, "I still want to make you scream.");
-                            else
-                            if(hostility > 33)
-                                say(t, "Well, I enjoyed myself.");
-                            else
-                                say(t, "I might have gone too far...");
-                            say(t, "\"\n\n");
-                            c.say(t, "\"");
-                            if(disgrace > 66)
-                                c.say(t, "I won't let you do that again!");
-                            else
-                            if(disgrace > 33)
-                                c.say(t, (new StringBuilder("Ugh, I can't let ")).append(himHer()).append(" do what ").append(heShe()).append(" wants...").toString());
-                            else
-                                c.say(t, "S-Stay back!");
-                        } else
-                        {
-                            if(confidence > 66)
-                                say(t, "What do you think of my technique?");
-                            else
-                            if(confidence > 33)
-                                say(t, "Looks like that had a nice effect.");
-                            else
-                                say(t, "H-Heh, looks like it worked...");
-                            say(t, "\"\n\n");
-                            c.say(t, "\"");
-                            if(hostility > 66)
-                                c.say(t, "Ow...  You're... rough...");
-                            else
-                            if(hostility > 33)
-                                c.say(t, "I... I need a break...");
-                            else
-                                c.say(t, "I'll admit... that felt good...");
-                        }
-                        c.say(t, "\"");
-                    } else
-                    {
-                        say(t, "\"");
-                        if(c.getDignity() > 66)
-                        {
-                            if(innocence > 66)
-                                say(t, "I guess it's not working.  Oh well.");
-                            else
-                            if(innocence > 33)
-                                say(t, "Time to try something different.");
-                            else
-                                say(t, "I wonder, are you really not feeling anything?");
-                            say(t, "\"\n\n");
-                            c.say(t, "\"");
-                            if(disgrace > 66)
-                                c.say(t, "Hmph.  It'd take more than that.");
-                            else
-                            if(disgrace > 33)
-                                c.say(t, "L-Let's just fight normally, then!");
-                            else
-                                c.say(t, "Huuh...  Phew...");
-                        } else
-                        if(c.getDignity() > 33)
-                        {
-                            if(disgrace > 66)
-                                say(t, "Close one...!");
-                            else
-                            if(disgrace > 33)
-                                say(t, "Too slow!");
-                            else
-                                say(t, "It's pointless to resist.");
-                            say(t, "\"\n\n");
-                            c.say(t, "\"");
-                            if(confidence > 66)
-                                c.say(t, "You... smug...!");
-                            else
-                            if(confidence > 33)
-                                c.say(t, "Can't let that happen again...");
-                            else
-                                c.say(t, "Ugh, coward...!");
-                        } else
-                        {
-                            if(hostility > 66)
-                                say(t, "Disgusting.  Just die.");
-                            else
-                            if(hostility > 33)
-                                say(t, "Ugh, you pervert.");
-                            else
-                                say(t, "I really was hoping your body wouldn't be so weak to this.");
-                            say(t, "\"\n\n");
-                            c.say(t, "\"");
-                            if(innocence > 66)
-                                c.say(t, "Huh...?  What...?");
-                            else
-                            if(innocence > 33)
-                                c.say(t, "No one asked you!");
-                            else
-                                c.say(t, "I expect you'd fare no better!");
-                        }
-                        c.say(t, "\"");
                     }
                 } else
                 if(disgrace > 66)
@@ -11831,7 +12039,7 @@ public class Forsaken
                             c.say(t, "\"\n\n");
                             say(t, "\"");
                             if(innocence > 66)
-                                say(t, "Hahah, are you blind or something!?");
+                                say(t, "Kyahah, are you blind or something!?");
                             else
                             if(innocence > 33)
                                 say(t, "Having trouble?");
@@ -14115,140 +14323,6 @@ public class Forsaken
                         w.append(t, (new StringBuilder(" when ")).append(c.getMainName()).append(" can only squirm and whine in response.").toString());
                     }
                 } else
-                if(disgrace > 66)
-                {
-                    if(c.getInnocence() > 66)
-                    {
-                        if(confidence > 66)
-                            w.append(t, (new StringBuilder("Refusing to acknowledge ")).append(hisHer()).append(" own weakness, ").toString());
-                        else
-                        if(confidence > 33)
-                            w.append(t, "Wanting to avoid being put on the defensive, ");
-                        else
-                            w.append(t, "Eyes wild and desperate, ");
-                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" charges forward, taking ").append(c.getMainName()).append(" completely by surprise ").toString());
-                        if(w.tickle().booleanValue())
-                            w.append(t, (new StringBuilder("and lunging forward to start tickling ")).append(c.himHer()).append(".").toString());
-                        else
-                            w.append(t, (new StringBuilder("and landing several solid hits with ")).append(hisHer()).append(" ").append(weapon).append(".").toString());
-                    } else
-                    if(c.getInnocence() > 33)
-                    {
-                        if(dignity > 66)
-                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" forces ").append(himHer()).append("self to ignore ").append(c.getMainName()).append("'s attacks, and ").toString());
-                        else
-                        if(dignity > 33)
-                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" charges right through a flurry of attacks from ").append(c.getMainName()).append("'s ").append(weapon).append(", and ").toString());
-                        else
-                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" cries out in pain as ").append(heShe()).append("'s struck by ").append(c.getMainName()).append("'s ").append(weapon).append(", but ").toString());
-                        w.append(t, (new StringBuilder(String.valueOf(heShe()))).append(" soon gets close enough to start grappling with ").append(c.himHer()).append(" directly").toString());
-                        if(w.tickle().booleanValue())
-                            w.append(t, ", trying to get some tickling in");
-                        else
-                            w.append(t, (new StringBuilder(", trying to deal some damage with ")).append(hisHer()).append(" bare hands").toString());
-                        w.append(t, (new StringBuilder(" despite ")).append(hisHer()).append(" relative weakness.").toString());
-                    } else
-                    {
-                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" immediately rushes to close range against ").append(c.getMainName()).append(" and starts ").toString());
-                        if(w.tickle().booleanValue())
-                            w.append(t, (new StringBuilder("trying to tickle ")).append(c.himHer()).toString());
-                        else
-                            w.append(t, (new StringBuilder("attacking with ")).append(hisHer()).append(" weapon").toString());
-                        w.append(t, ", ");
-                        if(innocence > 66)
-                            w.append(t, (new StringBuilder("figuring that a situation where neither of them has time to think will work out in ")).append(hisHer()).append(" favor.").toString());
-                        else
-                        if(innocence > 33)
-                            w.append(t, (new StringBuilder("knowing that ")).append(heShe()).append(" doesn't have any chance of victory if ").append(reference(c)).append(" is given any opportunity to use ").append(hisHer()).append(" formidable strategic abilities.").toString());
-                        else
-                            w.append(t, (new StringBuilder("planning around the expectation that ")).append(reference(c)).append(" is not as experienced at fighting under this kind of pressure.").toString());
-                    }
-                } else
-                if(disgrace > 33)
-                {
-                    if(c.getMorality() > 66)
-                    {
-                        w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" tries to draw ").append(mainName).append(" away to an area further from any civilians, ").toString());
-                        if(hostility > 66)
-                            w.append(t, (new StringBuilder("but ")).append(mainName).append(" just grins and starts heading straight for the evacuation route, forcing ").append(c.getMainName()).append(" to tackle ").append(himHer()).append(" and open ").append(himHer()).append("self up to a punishing counterattack.").toString());
-                        else
-                        if(hostility > 33)
-                            w.append(t, (new StringBuilder("and ")).append(mainName).append(" takes advantage by attacking ").append(reference(c)).append(" from behind with ").append(hisHer()).append(" ").append(weapon).append(".").toString());
-                        else
-                            w.append(t, (new StringBuilder("and ")).append(mainName).append(" is content to oblige, soon catching up to ").append(c.himHer()).append(" and engaging ").append(c.himHer()).append(" in a close-range grapple.").toString());
-                    } else
-                    if(c.getMorality() > 33)
-                    {
-                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" and ").append(c.getMainName()).append(" exchange blows in the middle of the street, blasting apart nearby cars and buildings").toString());
-                        if(innocence > 66)
-                            w.append(t, (new StringBuilder(" as ")).append(mainName).append(" struggles to overpower ").append(reference(c)).append(" with brute force.").toString());
-                        else
-                        if(innocence > 33)
-                            w.append(t, ", evenly-matched in their power and skill.");
-                        else
-                            w.append(t, (new StringBuilder(" as ")).append(mainName).append(" skillfully deflects ").append(reference(c)).append("'s attacks before responding with ").append(hisHer()).append(" own.").toString());
-                    } else
-                    {
-                        w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" charges directly at ").append(mainName).append(", intent on striking ").append(himHer()).append(" down first, ").toString());
-                        if(confidence > 66)
-                            w.append(t, (new StringBuilder("and ")).append(mainName).append(" is happy to meet ").append(c.himHer()).append(" head-on, ").append(hisHer()).append(" ").append(weapon).append(" at the ready.").toString());
-                        else
-                        if(confidence > 33)
-                        {
-                            w.append(t, (new StringBuilder("but ")).append(mainName).append(" refuses to be intimidated, and ").append(heShe()).append(" even takes the chance to land a quick attack with ").append(hisHer()).append(" ").append(weapon).append(".").toString());
-                        } else
-                        {
-                            w.append(t, (new StringBuilder("and while ")).append(mainName).append(" flees at first, ").append(heShe()).append(" fights ferociously once cornered, rounding on ").append(c.getMainName()).append(" to ").toString());
-                            if(w.tickle().booleanValue())
-                                w.append(t, (new StringBuilder("desperately try to tickle ")).append(c.himHer()).append(".").toString());
-                            else
-                                w.append(t, (new StringBuilder("kick, punch, and bite ")).append(c.himHer()).append(".").toString());
-                        }
-                    }
-                } else
-                if(c.getInnocence() > 66)
-                {
-                    w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" launches an all-out attack at ").append(mainName).append(", ").toString());
-                    if(dignity > 66)
-                        w.append(t, (new StringBuilder("but ")).append(mainName).append(" is able to pretend that it didn't hurt at all, walking calmly up to ").append(reference(c)).append(" to grab ").append(c.himHer()).append(" by the throat").toString());
-                    else
-                    if(dignity > 33)
-                        w.append(t, (new StringBuilder("but it isn't enough to stop ")).append(himHer()).append(" from charging forward to grab ").append(c.getMainName()).toString());
-                    else
-                        w.append(t, (new StringBuilder("but it just annoys ")).append(mainName).append(", who grits ").append(hisHer()).append(" teeth and rushes forward to tackle ").append(c.himHer()).toString());
-                    if(w.tickle().booleanValue())
-                        w.append(t, (new StringBuilder(" and start mercilessly tickling ")).append(c.himHer()).append(".").toString());
-                    else
-                        w.append(t, (new StringBuilder(" and begin crushing the life out of ")).append(c.himHer()).append(".").toString());
-                } else
-                if(c.getInnocence() > 33)
-                {
-                    if(confidence > 66)
-                        w.append(t, (new StringBuilder("Intimidated by ")).append(mainName).append("'s clear confidence").toString());
-                    else
-                    if(confidence > 33)
-                        w.append(t, (new StringBuilder("Wanting ")).append(c.hisHer()).append(" team's help for this fight").toString());
-                    else
-                        w.append(t, (new StringBuilder("Hoping to take advantage of ")).append(mainName).append("'s hesitation").toString());
-                    w.append(t, (new StringBuilder(", ")).append(c.getMainName()).append(" turns to flee, but ").append(mainName).append(" is fast enough to immediately catch up and slam ").append(c.himHer()).append(" down into the concrete so hard that it leaves a crater.").toString());
-                } else
-                {
-                    if(hostility > 66)
-                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" fires an overwhelming blast of energy at a building with some civilians still inside").toString());
-                    else
-                    if(hostility > 33)
-                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" fires indiscriminate blasts of energy at the surrounding buildings").toString());
-                    else
-                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" fires a few blasts of energy at nearby abandoned buildings").toString());
-                    w.append(t, (new StringBuilder(" in order to block ")).append(c.getMainName()).append("'s only possible escape routes.  ").append(c.getMainName()).append(" tries to think of another way out, but before ").append(c.heShe()).append(" can do anything, ").append(mainName).append(" corners ").append(c.himHer()).append(" ").toString());
-                    if(w.tickle().booleanValue())
-                        w.append(t, (new StringBuilder("and begins to tickle ")).append(c.himHer()).append(" with overwhelming strength.").toString());
-                    else
-                        w.append(t, (new StringBuilder("and begins to ruthlessly pummel ")).append(c.hisHer()).append(" body.").toString());
-                }
-            } else
-            if(styleDamage[2] > 0)
-            {
                 if(deviancy > 66)
                 {
                     if(c.getConfidence() > 66)
@@ -14355,6 +14429,140 @@ public class Forsaken
                         w.append(t, (new StringBuilder(", but ")).append(mainName).append(" refuses to go any further, uncomfortable with what ").append(heShe()).append("'s doing, and backs away to fighting distance.").toString());
                     else
                         w.append(t, (new StringBuilder(", and ")).append(mainName).append(" backs off and readies ").append(hisHer()).append(" ").append(weapon).append(" with a slight expression of disgust on ").append(hisHer()).append(" face.").toString());
+                }
+            } else
+            if(styleDamage[2] > 0)
+            {
+                if(disgrace > 66)
+                {
+                    if(c.getInnocence() > 66)
+                    {
+                        if(confidence > 66)
+                            w.append(t, (new StringBuilder("Refusing to acknowledge ")).append(hisHer()).append(" own weakness, ").toString());
+                        else
+                        if(confidence > 33)
+                            w.append(t, "Wanting to avoid being put on the defensive, ");
+                        else
+                            w.append(t, "Eyes wild and desperate, ");
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" charges forward, taking ").append(c.getMainName()).append(" completely by surprise ").toString());
+                        if(w.tickle().booleanValue())
+                            w.append(t, (new StringBuilder("and lunging forward to start tickling ")).append(c.himHer()).append(".").toString());
+                        else
+                            w.append(t, (new StringBuilder("and landing several solid hits with ")).append(hisHer()).append(" ").append(weapon).append(".").toString());
+                    } else
+                    if(c.getInnocence() > 33)
+                    {
+                        if(dignity > 66)
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" forces ").append(himHer()).append("self to ignore ").append(c.getMainName()).append("'s attacks, and ").toString());
+                        else
+                        if(dignity > 33)
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" charges right through a flurry of attacks from ").append(c.getMainName()).append("'s ").append(weapon).append(", and ").toString());
+                        else
+                            w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" cries out in pain as ").append(heShe()).append("'s struck by ").append(c.getMainName()).append("'s ").append(weapon).append(", but ").toString());
+                        w.append(t, (new StringBuilder(String.valueOf(heShe()))).append(" soon gets close enough to start grappling with ").append(c.himHer()).append(" directly").toString());
+                        if(w.tickle().booleanValue())
+                            w.append(t, ", trying to get some tickling in");
+                        else
+                            w.append(t, (new StringBuilder(", trying to deal some damage with ")).append(hisHer()).append(" bare hands").toString());
+                        w.append(t, (new StringBuilder(" despite ")).append(hisHer()).append(" relative weakness.").toString());
+                    } else
+                    {
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" immediately rushes to close range against ").append(c.getMainName()).append(" and starts ").toString());
+                        if(w.tickle().booleanValue())
+                            w.append(t, (new StringBuilder("trying to tickle ")).append(c.himHer()).toString());
+                        else
+                            w.append(t, (new StringBuilder("attacking with ")).append(hisHer()).append(" weapon").toString());
+                        w.append(t, ", ");
+                        if(innocence > 66)
+                            w.append(t, (new StringBuilder("figuring that a situation where neither of them has time to think will work out in ")).append(hisHer()).append(" favor.").toString());
+                        else
+                        if(innocence > 33)
+                            w.append(t, (new StringBuilder("knowing that ")).append(heShe()).append(" doesn't have any chance of victory if ").append(reference(c)).append(" is given any opportunity to use ").append(hisHer()).append(" formidable strategic abilities.").toString());
+                        else
+                            w.append(t, (new StringBuilder("planning around the expectation that ")).append(reference(c)).append(" is not as experienced at fighting under this kind of pressure.").toString());
+                    }
+                } else
+                if(disgrace > 33)
+                {
+                    if(c.getMorality() > 66)
+                    {
+                        w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" tries to draw ").append(mainName).append(" away to an area further from any civilians, ").toString());
+                        if(hostility > 66)
+                            w.append(t, (new StringBuilder("but ")).append(mainName).append(" just grins and starts heading straight for the evacuation route, forcing ").append(c.getMainName()).append(" to tackle ").append(himHer()).append(" and open ").append(himHer()).append("self up to a punishing counterattack.").toString());
+                        else
+                        if(hostility > 33)
+                            w.append(t, (new StringBuilder("and ")).append(mainName).append(" takes advantage by attacking ").append(reference(c)).append(" from behind with ").append(hisHer()).append(" ").append(weapon).append(".").toString());
+                        else
+                            w.append(t, (new StringBuilder("and ")).append(mainName).append(" is content to oblige, soon catching up to ").append(c.himHer()).append(" and engaging ").append(c.himHer()).append(" in a close-range grapple.").toString());
+                    } else
+                    if(c.getMorality() > 33)
+                    {
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" and ").append(c.getMainName()).append(" exchange blows in the middle of the street, blasting apart nearby cars and buildings").toString());
+                        if(innocence > 66)
+                            w.append(t, (new StringBuilder(" as ")).append(mainName).append(" struggles to overpower ").append(reference(c)).append(" with brute force.").toString());
+                        else
+                        if(innocence > 33)
+                            w.append(t, ", evenly-matched in their power and skill.");
+                        else
+                            w.append(t, (new StringBuilder(" as ")).append(mainName).append(" skillfully deflects ").append(reference(c)).append("'s attacks before responding with ").append(hisHer()).append(" own.").toString());
+                    } else
+                    {
+                        w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" charges directly at ").append(mainName).append(", intent on striking ").append(himHer()).append(" down first, ").toString());
+                        if(confidence > 66)
+                            w.append(t, (new StringBuilder("and ")).append(mainName).append(" is happy to meet ").append(c.himHer()).append(" head-on, ").append(hisHer()).append(" ").append(weapon).append(" at the ready.").toString());
+                        else
+                        if(confidence > 33)
+                        {
+                            w.append(t, (new StringBuilder("but ")).append(mainName).append(" refuses to be intimidated, and ").append(heShe()).append(" even takes the chance to land a quick attack with ").append(hisHer()).append(" ").append(weapon).append(".").toString());
+                        } else
+                        {
+                            w.append(t, (new StringBuilder("and while ")).append(mainName).append(" initially flees, ").append(heShe()).append(" fights ferociously once cornered, rounding on ").append(c.getMainName()).append(" to ").toString());
+                            if(w.tickle().booleanValue())
+                                w.append(t, (new StringBuilder("desperately try to tickle ")).append(c.himHer()).append(".").toString());
+                            else
+                                w.append(t, (new StringBuilder("kick, punch, and bite ")).append(c.himHer()).append(".").toString());
+                        }
+                    }
+                } else
+                if(c.getInnocence() > 66)
+                {
+                    w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" launches an all-out attack at ").append(mainName).append(", ").toString());
+                    if(dignity > 66)
+                        w.append(t, (new StringBuilder("but ")).append(mainName).append(" is able to pretend that it didn't hurt at all, walking calmly up to ").append(reference(c)).append(" to grab ").append(c.himHer()).append(" by the throat").toString());
+                    else
+                    if(dignity > 33)
+                        w.append(t, (new StringBuilder("but it isn't enough to stop ")).append(himHer()).append(" from charging forward to grab ").append(c.getMainName()).toString());
+                    else
+                        w.append(t, (new StringBuilder("but it just annoys ")).append(mainName).append(", who grits ").append(hisHer()).append(" teeth and rushes forward to tackle ").append(c.himHer()).toString());
+                    if(w.tickle().booleanValue())
+                        w.append(t, (new StringBuilder(" and start mercilessly tickling ")).append(c.himHer()).append(".").toString());
+                    else
+                        w.append(t, (new StringBuilder(" and begin crushing the life out of ")).append(c.himHer()).append(".").toString());
+                } else
+                if(c.getInnocence() > 33)
+                {
+                    if(confidence > 66)
+                        w.append(t, (new StringBuilder("Intimidated by ")).append(mainName).append("'s clear confidence").toString());
+                    else
+                    if(confidence > 33)
+                        w.append(t, (new StringBuilder("Wanting ")).append(c.hisHer()).append(" team's help for this fight").toString());
+                    else
+                        w.append(t, (new StringBuilder("Hoping to take advantage of ")).append(mainName).append("'s hesitation").toString());
+                    w.append(t, (new StringBuilder(", ")).append(c.getMainName()).append(" turns to flee, but ").append(mainName).append(" is fast enough to immediately catch up and slam ").append(c.himHer()).append(" down into the concrete so hard that it leaves a crater.").toString());
+                } else
+                {
+                    if(hostility > 66)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" fires an overwhelming blast of energy at a building with some civilians still inside").toString());
+                    else
+                    if(hostility > 33)
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" fires indiscriminate blasts of energy at the surrounding buildings").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" fires a few blasts of energy at nearby abandoned buildings").toString());
+                    w.append(t, (new StringBuilder(" in order to block ")).append(c.getMainName()).append("'s only possible escape routes.  ").append(c.getMainName()).append(" tries to think of another way out, but before ").append(c.heShe()).append(" can do anything, ").append(mainName).append(" corners ").append(c.himHer()).append(" ").toString());
+                    if(w.tickle().booleanValue())
+                        w.append(t, (new StringBuilder("and begins to tickle ")).append(c.himHer()).append(" with overwhelming strength.").toString());
+                    else
+                        w.append(t, (new StringBuilder("and begins to ruthlessly pummel ")).append(c.hisHer()).append(" body.").toString());
                 }
             } else
             if(disgrace > 66)
@@ -14522,7 +14730,7 @@ public class Forsaken
                         {
                             w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" and ").append(c.getMainName()).append(" are evenly matched in their fight").toString());
                             if(morality > 66)
-                                w.append(t, (new StringBuilder(", but ")).append(mainName).append(" has learned the hard way that fairness is meaningless").toString());
+                                w.append(t, (new StringBuilder(", but ")).append(mainName).append(" has learned the hard way that fairness is meaningless, ").toString());
                             else
                             if(morality > 33)
                                 w.append(t, (new StringBuilder(", but ")).append(mainName).append(" wants to win, ").toString());
@@ -14999,7 +15207,7 @@ public class Forsaken
                             if(hostility > 33)
                                 w.append(t, (new StringBuilder(String.valueOf(heShe()))).append(" masks ").append(hisHer()).append(" annoyance and raises ").append(hisHer()).append(" voice.").toString());
                             else
-                                w.append(t, (new StringBuilder("looks disappointed with what ")).append(heShe()).append(" found.").toString());
+                                w.append(t, (new StringBuilder(String.valueOf(heShe()))).append(" looks disappointed with ").append(reference(c)).append("'s reaction.").toString());
                         }
                     } else
                     if(c.getInnocence() > 66)
@@ -15608,14 +15816,14 @@ public class Forsaken
                             w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" finds it incredibly funny that ").append(c.getMainName()).append(" tries so hard to control how much skin ").append(c.heShe()).append("'s showing the spectators, ").toString());
                         else
                         if(innocence > 33)
-                            w.append(t, (new StringBuilder("When watching recordings of ")).append(c.getMainName()).append("'s battles, ").append(mainName).append(" has been getting turned on by the sight of ").append(c.hisHer()).append(" embarrassment, ").toString());
+                            w.append(t, (new StringBuilder("Whenever ")).append(heShe()).append(" watched recordings of ").append(c.getMainName()).append("'s battles, ").append(mainName).append(" would always getting turned on by the sight of ").append(c.hisHer()).append(" embarrassment, ").toString());
                         else
                             w.append(t, (new StringBuilder("It hasn't escaped ")).append(mainName).append("'s notice that ").append(c.getMainName()).append(" gets more careful around cameras the more ").append(c.hisHer()).append(" clothes are torn, ").toString());
                         w.append(t, (new StringBuilder("and when ")).append(heShe()).append(" lunges at ").append(reference(c)).append(" to start trying to pull ").append(c.hisHer()).append(" ").append(bottomDesc).append(" aside, ").append(heShe()).append(" isn't disappointed with ").append(c.getMainName()).append("'s squealing reaction.").toString());
                     } else
                     if(c.getDignity() > 33)
                     {
-                        w.append(t, (new StringBuilder("The more ")).append(c.getMainName()).append("'s come off, the more perverted ").append(mainName).append("'s expression gets.  ").append(HeShe()).append(" runs at ").append(c.getMainName()).append(", intent on tearing off even more of ").append(c.hisHer()).append(" clothes").toString());
+                        w.append(t, (new StringBuilder("The more ")).append(c.getMainName()).append("'s clothes come off, the more perverted ").append(mainName).append("'s expression gets.  ").append(HeShe()).append(" runs at ").append(c.getMainName()).append(", intent on tearing off even more of ").append(c.hisHer()).append(" clothes").toString());
                         if(disgrace > 66)
                             w.append(t, (new StringBuilder(" even though it opens ")).append(himHer()).append(" up to a punishing counterattack.").toString());
                         else
@@ -16302,6 +16510,8 @@ public class Forsaken
             value = 200 - (hostility - 40) * 2;
         else
             value = 120 - (hostility - 80);
+        if(type == Chosen.Species.SUPERIOR)
+            value *= 2;
         if(defeatType == 5 && obedience < 40)
             value /= 4;
         return value;
@@ -16384,7 +16594,7 @@ public class Forsaken
             else
                 sum = -1000;
         if(x.kills != null && x.kills.length > 0 && x.kills[0] != null && firstFormerPartner != null && secondFormerPartner != null)
-            if(x.kills[0].equals(firstFormerPartner))
+            if(x.kills[0].equals(firstFormerPartner).booleanValue())
             {
                 if(firstOriginalRelationship == 4)
                     sum -= 700;
@@ -16392,7 +16602,7 @@ public class Forsaken
                 if(firstOriginalRelationship >= 0)
                     sum -= 500;
             } else
-            if(x.kills[0].equals(secondFormerPartner))
+            if(x.kills[0].equals(secondFormerPartner).booleanValue())
                 if(secondOriginalRelationship == 4)
                     sum -= 700;
                 else
@@ -16675,6 +16885,7 @@ public class Forsaken
         timesExposed = 0;
         timesExposedSelf = 0;
         parasitized = Boolean.valueOf(false);
+        enjoyedAnal = 0;
         takers = (new Taker[] {
             Taker.NONE, Taker.NONE, Taker.NONE, Taker.NONE
         });
@@ -16699,6 +16910,7 @@ public class Forsaken
         combatStyle = -1;
         injured = 0;
         save = null;
+        type = null;
     }
 
     private static final long serialVersionUID = 4L;
@@ -16754,6 +16966,7 @@ public class Forsaken
     int timesExposed;
     int timesExposedSelf;
     Boolean parasitized;
+    int enjoyedAnal;
     Taker takers[];
     int takerIDs[];
     Chosen kills[];
@@ -16776,4 +16989,5 @@ public class Forsaken
     int combatStyle;
     int injured;
     transient SaveData save;
+    Chosen.Species type;
 }

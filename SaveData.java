@@ -10,16 +10,17 @@ public class SaveData
     {
         saves = new WorldState[0];
         names = new String[0];
-        harem = null;
+        harem = new Forsaken[0];
         forsakenMade = 0;
-        sceneText = new String[42][0][0];
-        sceneColor = new Color[42][0][0];
-        sceneUnderline = new Boolean[42][0][0];
+        chosenMade = 0;
+        sceneText = new String[44][0][0];
+        sceneColor = new Color[44][0][0];
+        sceneUnderline = new Boolean[44][0][0];
         currentText = new String[0];
         currentColor = new Color[0];
         currentUnderline = new Boolean[0];
-        sceneButtons = new String[42][0];
-        sceneSummaries = new String[42][0];
+        sceneButtons = new String[44][0];
+        sceneSummaries = new String[44][0];
     }
 
     public void organizeScenes(int scenesThisVersion)
@@ -130,6 +131,72 @@ public class SaveData
         return forsakenMade;
     }
 
+    public int assignChosenID()
+    {
+        chosenMade++;
+        return chosenMade;
+    }
+
+    public void fillIDs()
+    {
+        for(int i = 0; i < harem.length; i++)
+            if(harem[i].forsakenID == 0)
+                harem[i].forsakenID = assignID();
+
+        for(int i = 0; i < saves.length; i++)
+        {
+            if(saves[i].campaign == null)
+                saves[i].campaign = Boolean.valueOf(false);
+            if(saves[i].campaign.booleanValue())
+            {
+                for(int j = 0; j < saves[i].conquered.length; j++)
+                    if(saves[i].conquered[j].forsakenID == 0)
+                        saves[i].conquered[j].forsakenID = assignID();
+
+                for(int j = 0; j < saves[i].sacrificed.length; j++)
+                    if(saves[i].sacrificed[j].forsakenID == 0)
+                        saves[i].sacrificed[j].forsakenID = assignID();
+
+            }
+            for(int j = 0; j < 3; j++)
+                if(saves[i].getCast()[j] != null && saves[i].getCast()[j].globalID == 0)
+                    saves[i].getCast()[j].globalID = assignChosenID();
+
+        }
+
+    }
+
+    public void checkIDs()
+    {
+        int highest = 0;
+        int highestChosen = 0;
+        for(int i = 0; i < harem.length; i++)
+            if(harem[i].forsakenID > highest)
+                highest = harem[i].forsakenID;
+
+        for(int i = 0; i < saves.length; i++)
+        {
+            if(saves[i].campaign.booleanValue())
+            {
+                for(int j = 0; j < saves[i].conquered.length; j++)
+                    if(saves[i].conquered[j].forsakenID > highest)
+                        highest = saves[i].conquered[j].forsakenID;
+
+                for(int j = 0; j < saves[i].sacrificed.length; j++)
+                    if(saves[i].sacrificed[j].forsakenID > highest)
+                        highest = saves[i].sacrificed[j].forsakenID;
+
+            }
+            for(int j = 0; j < 3; j++)
+                if(saves[i].getCast()[j] != null && saves[i].getCast()[j].globalID > highestChosen)
+                    highestChosen = saves[i].getCast()[j].globalID;
+
+        }
+
+        forsakenMade = highest;
+        chosenMade = highestChosen;
+    }
+
     public WorldState[] getSaves()
     {
         return saves;
@@ -224,6 +291,7 @@ public class SaveData
     String names[];
     Forsaken harem[];
     int forsakenMade;
+    int chosenMade;
     String sceneText[][][];
     Color sceneColor[][][];
     Boolean sceneUnderline[][][];
