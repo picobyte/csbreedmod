@@ -13,14 +13,19 @@ public class SaveData
         harem = new Forsaken[0];
         forsakenMade = 0;
         chosenMade = 0;
-        sceneText = new String[44][0][0];
-        sceneColor = new Color[44][0][0];
-        sceneUnderline = new Boolean[44][0][0];
+        sceneText = new String[46][0][0];
+        sceneColor = new Color[46][0][0];
+        sceneUnderline = new Boolean[46][0][0];
         currentText = new String[0];
         currentColor = new Color[0];
         currentUnderline = new Boolean[0];
-        sceneButtons = new String[44][0];
-        sceneSummaries = new String[44][0];
+        sceneButtons = new String[46][0];
+        sceneSummaries = new String[46][0];
+        sceneEmotions = new Project.Emotion[46][0][5];
+        sceneFaces = new String[46][0][5];
+        sceneSpecs = new Chosen.Species[46][0][5];
+        sceneCivs = new Boolean[46][0][5];
+        sceneFallen = new Boolean[46][0][5];
     }
 
     public void organizeScenes(int scenesThisVersion)
@@ -31,6 +36,11 @@ public class SaveData
         Boolean newSceneUnderline[][][] = new Boolean[scenesThisVersion][0][0];
         String newSceneButtons[][] = new String[scenesThisVersion][0];
         String newSceneSummaries[][] = new String[scenesThisVersion][0];
+        Project.Emotion newSceneEmotions[][][] = new Project.Emotion[scenesThisVersion][0][5];
+        String newSceneFaces[][][] = new String[scenesThisVersion][0][5];
+        Chosen.Species newSceneSpecs[][][] = new Chosen.Species[scenesThisVersion][0][5];
+        Boolean newSceneCivs[][][] = new Boolean[scenesThisVersion][0][5];
+        Boolean newSceneFallen[][][] = new Boolean[scenesThisVersion][0][5];
         if(sceneText != null)
         {
             for(int i = 0; i < sceneText.length; i++)
@@ -40,6 +50,21 @@ public class SaveData
                 newSceneUnderline[i] = sceneUnderline[i];
                 newSceneButtons[i] = sceneButtons[i];
                 newSceneSummaries[i] = sceneSummaries[i];
+                if(sceneEmotions != null)
+                {
+                    newSceneEmotions[i] = sceneEmotions[i];
+                    newSceneFaces[i] = sceneFaces[i];
+                    newSceneSpecs[i] = sceneSpecs[i];
+                    newSceneCivs[i] = sceneCivs[i];
+                    newSceneFallen[i] = sceneFallen[i];
+                } else
+                {
+                    newSceneEmotions[i] = new Project.Emotion[sceneText[i].length][5];
+                    newSceneFaces[i] = new String[sceneText[i].length][5];
+                    newSceneSpecs[i] = new Chosen.Species[sceneText[i].length][5];
+                    newSceneCivs[i] = new Boolean[sceneText[i].length][5];
+                    newSceneFallen[i] = new Boolean[sceneText[i].length][5];
+                }
             }
 
         }
@@ -48,6 +73,11 @@ public class SaveData
         sceneUnderline = newSceneUnderline;
         sceneButtons = newSceneButtons;
         sceneSummaries = newSceneSummaries;
+        sceneEmotions = newSceneEmotions;
+        sceneFaces = newSceneFaces;
+        sceneSpecs = newSceneSpecs;
+        sceneCivs = newSceneCivs;
+        sceneFallen = newSceneFallen;
     }
 
     public void newScene()
@@ -100,6 +130,11 @@ public class SaveData
             Boolean newUnderline[][] = new Boolean[sceneUnderline[type].length + 1][0];
             String newButtons[] = new String[sceneButtons[type].length + 1];
             String newSummaries[] = new String[sceneSummaries[type].length + 1];
+            Project.Emotion newEmotions[][] = new Project.Emotion[sceneEmotions[type].length + 1][5];
+            String newFaces[][] = new String[sceneFaces[type].length + 1][5];
+            Chosen.Species newSpecs[][] = new Chosen.Species[sceneSpecs[type].length + 1][5];
+            Boolean newCivs[][] = new Boolean[sceneCivs[type].length + 1][5];
+            Boolean newFallen[][] = new Boolean[sceneFallen[type].length + 1][5];
             for(int i = 0; i < sceneText[type].length; i++)
             {
                 newText[i] = sceneText[type][i];
@@ -107,6 +142,11 @@ public class SaveData
                 newUnderline[i] = sceneUnderline[type][i];
                 newButtons[i] = sceneButtons[type][i];
                 newSummaries[i] = sceneSummaries[type][i];
+                newEmotions[i] = sceneEmotions[type][i];
+                newFaces[i] = sceneFaces[type][i];
+                newSpecs[i] = sceneSpecs[type][i];
+                newCivs[i] = sceneCivs[type][i];
+                newFallen[i] = sceneFallen[type][i];
             }
 
             newText[sceneText[type].length] = currentText;
@@ -114,11 +154,21 @@ public class SaveData
             newUnderline[sceneUnderline[type].length] = currentUnderline;
             newButtons[sceneButtons[type].length] = button;
             newSummaries[sceneSummaries[type].length] = summary;
+            newEmotions[sceneEmotions[type].length] = Project.displayedEmotions;
+            newFaces[sceneFaces[type].length] = Project.displayedNames;
+            newSpecs[sceneSpecs[type].length] = Project.displayedType;
+            newCivs[sceneCivs[type].length] = Project.displayedCivilians;
+            newFallen[sceneFallen[type].length] = Project.displayedFallen;
             sceneText[type] = newText;
             sceneColor[type] = newColor;
             sceneUnderline[type] = newUnderline;
             sceneButtons[type] = newButtons;
             sceneSummaries[type] = newSummaries;
+            sceneEmotions[type] = newEmotions;
+            sceneFaces[type] = newFaces;
+            sceneSpecs[type] = newSpecs;
+            sceneCivs[type] = newCivs;
+            sceneFallen[type] = newFallen;
             WriteObject wobj = new WriteObject();
             wobj.serializeSaveData(this);
         }
@@ -300,4 +350,9 @@ public class SaveData
     Boolean currentUnderline[];
     String sceneButtons[][];
     String sceneSummaries[][];
+    Project.Emotion sceneEmotions[][][];
+    String sceneFaces[][][];
+    Chosen.Species sceneSpecs[][][];
+    Boolean sceneCivs[][][];
+    Boolean sceneFallen[][][];
 }

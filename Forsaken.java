@@ -860,7 +860,7 @@ public class Forsaken
                     say(t, "Even after all the weird stuff I've been through, that hasn't changed.");
                 else
                 if(deviancy > 33)
-                    say(t, "I guess I could be wrong, but it just feels right to help people");
+                    say(t, "I guess I could be wrong, but it just feels right to help people.");
                 else
                     say(t, "I know that there's a lot I don't know... it even feels like I just became one of the Chosen a few days ago... but I think that helping people is a good thing.");
             } else
@@ -3203,8 +3203,12 @@ public class Forsaken
         final int trainingStaminas[] = new int[currentTraining.length];
         final int trainingMotivations[] = new int[currentTraining.length];
         final long trainingExpertises[] = new long[currentTraining.length];
+        Boolean bonus[] = new Boolean[currentTraining.length];
+        Boolean penalty[] = new Boolean[currentTraining.length];
         for(int i = 0; i < currentTraining.length; i++)
         {
+            bonus[i] = Boolean.valueOf(false);
+            penalty[i] = Boolean.valueOf(false);
             if(i == 0)
             {
                 trainingIntensities[i][0] = 20;
@@ -3361,10 +3365,33 @@ public class Forsaken
                 else
                     numerator += expoExp;
                 if(numerator > denominator)
+                {
+                    bonus[i] = Boolean.valueOf(true);
                     if(numerator / denominator < 10L)
                         trainingExpertises[i] = (trainingExpertises[i] * numerator) / denominator;
                     else
                         trainingExpertises[i] = trainingExpertises[i] * 10L;
+                }
+                if(trainingExpertises[i] >= hateExp && i % 6 >= 3)
+                {
+                    trainingExpertises[i] = hateExp - 1L;
+                    penalty[i] = Boolean.valueOf(true);
+                }
+                if(trainingExpertises[i] >= pleaExp && (i % 6 == 1 || i % 6 == 2 || i % 6 == 5))
+                {
+                    trainingExpertises[i] = pleaExp - 1L;
+                    penalty[i] = Boolean.valueOf(true);
+                }
+                if(trainingExpertises[i] >= injuExp && i % 2 == 0)
+                {
+                    trainingExpertises[i] = injuExp - 1L;
+                    penalty[i] = Boolean.valueOf(true);
+                }
+                if(trainingExpertises[i] >= expoExp && (i % 6 == 0 || i % 6 == 1 || i % 6 == 3))
+                {
+                    trainingExpertises[i] = expoExp - 1L;
+                    penalty[i] = Boolean.valueOf(true);
+                }
             }
         }
 
@@ -3592,7 +3619,14 @@ public class Forsaken
                     w.append(t, (new StringBuilder("% Stamina, +")).append(trainingMotivations[trainingType] / 10).toString());
                     if(trainingMotivations[trainingType] % 10 != 0)
                         w.append(t, (new StringBuilder(".")).append(trainingMotivations[trainingType] % 10).toString());
-                    w.append(t, (new StringBuilder("% Motivation, ")).append(condensedFormat(trainingExpertises[trainingType])).append(" Expertise").toString());
+                    w.append(t, "% Motivation, ");
+                    if(penalty[trainingType].booleanValue())
+                        w.redAppend(t, (new StringBuilder(String.valueOf(condensedFormat(trainingExpertises[trainingType])))).append(" Expertise").toString());
+                    else
+                    if(bonus[trainingType].booleanValue())
+                        w.greenAppend(t, (new StringBuilder(String.valueOf(condensedFormat(trainingExpertises[trainingType])))).append(" Expertise").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(condensedFormat(trainingExpertises[trainingType])))).append(" Expertise").toString());
                 } else
                 {
                     w.grayAppend(t, (new StringBuilder("\n")).append(trainingName).append("\n  ").toString());
@@ -4035,6 +4069,7 @@ public class Forsaken
             {
                 if(obedience < 20)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                     if(innocence > 66)
                         say(t, "I-I'm not afraid of regular humans, even if you do make them way more perverted than usual!");
                     else
@@ -4045,6 +4080,7 @@ public class Forsaken
                 } else
                 if(obedience < 40)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                     if(innocence > 66)
                         say(t, "Let me go!  Th-They're looking really scary!");
                     else
@@ -4055,6 +4091,7 @@ public class Forsaken
                 } else
                 if(obedience < 61)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                     if(innocence > 66)
                         say(t, "I-I'm sorry!  I won't disobey you again!  S-So don't make them go even crazier!");
                     else
@@ -4065,6 +4102,7 @@ public class Forsaken
                 } else
                 if(obedience < 81)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.SHAME, Project.Emotion.LEWD);
                     if(innocence > 66)
                         say(t, "Wow, they're gonna... do all sorts of stuff to me...");
                     else
@@ -4073,18 +4111,22 @@ public class Forsaken
                     else
                         say(t, "I... I understand.  I will try to learn as much as I can from them, at least.");
                 } else
-                if(innocence > 66)
-                    say(t, "They'll be able to do whatever they want...");
-                else
-                if(innocence > 33)
-                    say(t, "Nn... they'll be able to help break me completely...");
-                else
-                    say(t, "My body is yours to give to them as you wish...");
+                {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.FEAR, Project.Emotion.JOY);
+                    if(innocence > 66)
+                        say(t, "They'll be able to do whatever they want...");
+                    else
+                    if(innocence > 33)
+                        say(t, "Nn... they'll be able to help break me completely...");
+                    else
+                        say(t, "My body is yours to give to them as you wish...");
+                }
             } else
             if(nextTraining == 1)
             {
                 if(obedience < 20)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
                     if(innocence > 66)
                         say(t, "Hey!  Stay outta my head!");
                     else
@@ -4095,6 +4137,7 @@ public class Forsaken
                 } else
                 if(obedience < 40)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.STRUGGLE, Project.Emotion.ANGER);
                     if(innocence > 66)
                         say(t, "Huh!?  What kind of weird stuff are you trying to put in my head?");
                     else
@@ -4105,6 +4148,7 @@ public class Forsaken
                 } else
                 if(obedience < 60)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                     if(innocence > 66)
                         say(t, "Please!  I'll do whatever you want, just stop making my head feel all funny!");
                     else
@@ -4115,6 +4159,7 @@ public class Forsaken
                 } else
                 if(obedience < 81)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.SHAME, Project.Emotion.FEAR);
                     if(innocence > 66)
                         say(t, "I-I'll try to let you into my brain, but... I'm scared...!");
                     else
@@ -4123,18 +4168,22 @@ public class Forsaken
                     else
                         say(t, "I must apologize.  It appears as though some part of my subconscious still resists you...");
                 } else
-                if(innocence > 66)
-                    say(t, "My head feels... so weird...");
-                else
-                if(innocence > 33)
-                    say(t, "Even my thoughts... aren't my own anymore...");
-                else
-                    say(t, "My mind is yours to mold as you wish...");
+                {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.LEWD, Project.Emotion.JOY);
+                    if(innocence > 66)
+                        say(t, "My head feels... so weird...");
+                    else
+                    if(innocence > 33)
+                        say(t, "Even my thoughts... aren't my own anymore...");
+                    else
+                        say(t, "My mind is yours to mold as you wish...");
+                }
             } else
             if(nextTraining == 2)
             {
                 if(obedience < 20)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                     if(innocence > 66)
                         say(t, "I'm not gonna let you present me to everyone like this!  I'll just... um... scream really loud at everyone until they get annoyed and go away!");
                     else
@@ -4145,6 +4194,7 @@ public class Forsaken
                 } else
                 if(obedience < 40)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.SHAME, Project.Emotion.FEAR);
                     if(innocence > 66)
                         say(t, "Huh!?  W-Wait, don't show me to everyone like this, they'll think I'm super weak!");
                     else
@@ -4155,6 +4205,7 @@ public class Forsaken
                 } else
                 if(obedience < 61)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                     if(innocence > 66)
                         say(t, "Y-You're gonna humiliate me even more!?");
                     else
@@ -4165,6 +4216,7 @@ public class Forsaken
                 } else
                 if(obedience < 81)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.SHAME, Project.Emotion.FEAR);
                     if(innocence > 66)
                         say(t, "Huh?  Y-You're gonna present me to everyone?  Is there anything I should be doing to help...?");
                     else
@@ -4173,18 +4225,22 @@ public class Forsaken
                     else
                         say(t, "I... I see.  Yes, everyone should know that I belong to you...");
                 } else
-                if(innocence > 66)
-                    say(t, "Wow...!  E-Everyone will see...!");
-                else
-                if(innocence > 33)
-                    say(t, "Yes... make sure I can't have second thoughts... since everyone will know that I'm completely yours...");
-                else
-                    say(t, "Let everyone see... how pathetic I am...");
+                {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.LEWD, Project.Emotion.JOY);
+                    if(innocence > 66)
+                        say(t, "Wow...!  E-Everyone will see...!");
+                    else
+                    if(innocence > 33)
+                        say(t, "Yes... make sure I can't have second thoughts... since everyone will know that I'm completely yours...");
+                    else
+                        say(t, "Let everyone see... how pathetic I am...");
+                }
             } else
             if(nextTraining == 3)
             {
                 if(obedience < 20)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.FOCUS, Project.Emotion.ANGER);
                     if(innocence > 66)
                         say(t, "It'll take more than that to keep me under control!  I'll break free!  Watch me!");
                     else
@@ -4195,6 +4251,7 @@ public class Forsaken
                 } else
                 if(obedience < 40)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.STRUGGLE, Project.Emotion.SHAME);
                     if(innocence > 66)
                         say(t, "Even if it feels really good... I have to make sure not to lose control...!");
                     else
@@ -4205,6 +4262,7 @@ public class Forsaken
                 } else
                 if(obedience < 61)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                     if(innocence > 66)
                         say(t, "H-Hey!  There's no need to use all that stuff on me right now, is there!?");
                     else
@@ -4215,6 +4273,7 @@ public class Forsaken
                 } else
                 if(obedience < 81)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.FEAR, Project.Emotion.SHAME);
                     if(innocence > 66)
                         say(t, "Huh...?  What're all those for...?");
                     else
@@ -4223,18 +4282,22 @@ public class Forsaken
                     else
                         say(t, "I... I see...  I must be disciplined even further...");
                 } else
-                if(innocence > 66)
-                    say(t, "More naughty stuff... eheheh...");
-                else
-                if(innocence > 33)
-                    say(t, "This is getting so kinky...");
-                else
-                    say(t, "Please... train... my body... until I can endure even this...");
+                {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.LEWD, Project.Emotion.JOY);
+                    if(innocence > 66)
+                        say(t, "More naughty stuff... eheheh...");
+                    else
+                    if(innocence > 33)
+                        say(t, "This is getting so kinky...");
+                    else
+                        say(t, "Please... train... my body... until I can endure even this...");
+                }
             } else
             if(nextTraining == 4)
             {
                 if(obedience < 20)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                     if(innocence > 66)
                         say(t, "But... But I can't fight back if I don't transform!");
                     else
@@ -4245,6 +4308,7 @@ public class Forsaken
                 } else
                 if(obedience < 40)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                     if(innocence > 66)
                         say(t, "Huh?  Something feels funny...");
                     else
@@ -4255,6 +4319,7 @@ public class Forsaken
                 } else
                 if(obedience < 61)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.ANGER, Project.Emotion.SHAME);
                     if(innocence > 66)
                         say(t, "Taking control of the way I look?  Th-That's so mean!");
                     else
@@ -4265,6 +4330,7 @@ public class Forsaken
                 } else
                 if(obedience < 81)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
                     if(innocence > 66)
                         say(t, "Um, I want to make you happy and all, but this feels weird...");
                     else
@@ -4273,18 +4339,22 @@ public class Forsaken
                     else
                         say(t, "Does it please you more to train me in a different appearance?  Very well...");
                 } else
-                if(innocence > 66)
-                    say(t, "I don't get what you're doing... but I guess that's okay...");
-                else
-                if(innocence > 33)
-                    say(t, "Ah...  You're going to make sure everyone can see that I'm yours...");
-                else
-                    say(t, "The way that others see me... is yours to dictate.");
+                {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.LEWD, Project.Emotion.JOY);
+                    if(innocence > 66)
+                        say(t, "I don't get what you're doing... but I guess that's okay...");
+                    else
+                    if(innocence > 33)
+                        say(t, "Ah...  You're going to make sure everyone can see that I'm yours...");
+                    else
+                        say(t, "The way that others see me... is yours to dictate.");
+                }
             } else
             if(nextTraining == 5)
             {
                 if(obedience < 20)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.FOCUS, Project.Emotion.ANGER);
                     if(innocence > 66)
                         say(t, "Everyone's going to be impressed when they see that I'm not broken yet!  Yeah, that's how it's gonna work!");
                     else
@@ -4295,6 +4365,7 @@ public class Forsaken
                 } else
                 if(obedience < 40)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.SHAME, Project.Emotion.FEAR);
                     if(innocence > 66)
                         say(t, "Everyone's going to laugh at me...");
                     else
@@ -4305,6 +4376,7 @@ public class Forsaken
                 } else
                 if(obedience < 61)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                     if(innocence > 66)
                         say(t, "Aaah, no!  I'm scared of what they'll do to me while I'm like this!");
                     else
@@ -4315,6 +4387,7 @@ public class Forsaken
                 } else
                 if(obedience < 81)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.SHAME, Project.Emotion.FEAR);
                     if(innocence > 66)
                         say(t, "I'm afraid to go out in public like this... b-but I'll do it for you!");
                     else
@@ -4323,18 +4396,22 @@ public class Forsaken
                     else
                         say(t, "I see, so you wish to show everyone what you're doing to me...  Of course, I'm in no place to object.");
                 } else
-                if(innocence > 66)
-                    say(t, "Aaah, wow, everyone will see...!");
-                else
-                if(innocence > 33)
-                    say(t, "I'm already completely helpless before you.  And now we're going even further...");
-                else
-                    say(t, "This should ensure... that everyone knows I'm yours...");
+                {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.LEWD, Project.Emotion.JOY);
+                    if(innocence > 66)
+                        say(t, "Aaah, wow, everyone will see...!");
+                    else
+                    if(innocence > 33)
+                        say(t, "I'm already completely helpless before you.  And now we're going even further...");
+                    else
+                        say(t, "This should ensure... that everyone knows I'm yours...");
+                }
             } else
             if(nextTraining == 6)
             {
                 if(obedience < 20)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                     if(innocence > 66)
                         say(t, "If you make them attack me, I'm gonna get really mad!");
                     else
@@ -4345,6 +4422,7 @@ public class Forsaken
                 } else
                 if(obedience < 40)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                     if(innocence > 66)
                         say(t, "Huh!?  I can fight back!?");
                     else
@@ -4355,6 +4433,7 @@ public class Forsaken
                 } else
                 if(obedience < 61)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
                     if(confidence > 66)
                         say(t, "Are you just using me to hurt people?  I guess that's what I'm good at...");
                     else
@@ -4365,6 +4444,7 @@ public class Forsaken
                 } else
                 if(obedience < 81)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.FOCUS, Project.Emotion.NEUTRAL);
                     if(morality > 66)
                         say(t, "Don't worry, Demon Lord, I won't let myself be held back by morals anymore.");
                     else
@@ -4373,18 +4453,22 @@ public class Forsaken
                     else
                         say(t, "You're letting me hurt them?  Oh, Demon Lord, you're so generous!");
                 } else
-                if(innocence > 66)
-                    say(t, "I don't really get it, but if it makes the Demon Lord happy, I'll hurt anyone!");
-                else
-                if(innocence > 33)
-                    say(t, "Exactly how much do you want me to hurt them?  I'm afraid of making it too much or too little...");
-                else
-                    say(t, "I understand.  Whether enduring pain or causing it, anything in service to the Demon Lord.");
+                {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                    if(innocence > 66)
+                        say(t, "I don't really get it, but if it makes the Demon Lord happy, I'll hurt anyone!");
+                    else
+                    if(innocence > 33)
+                        say(t, "Exactly how much do you want me to hurt them?  I'm afraid of making it too much or too little...");
+                    else
+                        say(t, "I understand.  Whether enduring pain or causing it, anything in service to the Demon Lord.");
+                }
             } else
             if(nextTraining == 7)
             {
                 if(obedience < 20)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.FOCUS, Project.Emotion.ANGER);
                     if(morality > 66)
                         say(t, "I can handle whatever torture you or your minions do to me!");
                     else
@@ -4395,6 +4479,7 @@ public class Forsaken
                 } else
                 if(obedience < 40)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
                     if(confidence > 66)
                         say(t, "I won't bother with trying to run away.");
                     else
@@ -4405,6 +4490,7 @@ public class Forsaken
                 } else
                 if(obedience < 61)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.FEAR, Project.Emotion.SHAME);
                     if(innocence > 66)
                         say(t, "Why are you gonna have everyone punish me!?  What did I do wrong!?");
                     else
@@ -4415,6 +4501,7 @@ public class Forsaken
                 } else
                 if(obedience < 81)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.NEUTRAL, Project.Emotion.STRUGGLE);
                     if(morality > 66)
                         say(t, "Of course, if you want them to punish me, I'd never even think of trying to escape it.");
                     else
@@ -4423,18 +4510,22 @@ public class Forsaken
                     else
                         say(t, "I don't mind if you want to torture me, but I'd rather not involve all these disgusting humans...");
                 } else
-                if(dignity > 66)
-                    say(t, "I'm always really happy when I can show everyone how obedient I am toward you.");
-                else
-                if(dignity > 33)
-                    say(t, "I hope they're grateful that you're letting them play with your toy.");
-                else
-                    say(t, "It doesn't feel as good as when you give me your personal attention, but of course I'm still happy to let you do this to me!");
+                {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                    if(dignity > 66)
+                        say(t, "I'm always really happy when I can show everyone how obedient I am toward you.");
+                    else
+                    if(dignity > 33)
+                        say(t, "I hope they're grateful that you're letting them play with your toy.");
+                    else
+                        say(t, "It doesn't feel as good as when you give me your personal attention, but of course I'm still happy to let you do this to me!");
+                }
             } else
             if(nextTraining == 8)
             {
                 if(obedience < 20)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.STRUGGLE, Project.Emotion.ANGER);
                     if(dignity > 66)
                         say(t, "I... I need to control my thoughts...!");
                     else
@@ -4445,6 +4536,7 @@ public class Forsaken
                 } else
                 if(obedience < 40)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.STRUGGLE, Project.Emotion.SHAME);
                     if(dignity > 66)
                         say(t, "N-No!  Don't let them know what I'm thinking!  You'll ruin everything!");
                     else
@@ -4455,6 +4547,7 @@ public class Forsaken
                 } else
                 if(obedience < 61)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
                     if(morality > 66)
                         say(t, "They'll all know what a coward I am...");
                     else
@@ -4465,6 +4558,7 @@ public class Forsaken
                 } else
                 if(obedience < 81)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.NEUTRAL, Project.Emotion.JOY);
                     if(innocence > 66)
                         say(t, "Um, is there anything you want me to tell them with my brain?");
                     else
@@ -4473,18 +4567,22 @@ public class Forsaken
                     else
                         say(t, "You're certain that there's nothing in my mind which you'd prefer not to become public knowledge?  Very well, then proceed as you wish.");
                 } else
-                if(dignity > 66)
-                    say(t, "Heh, after this, they'll know that no one loves you as much as I do.");
-                else
-                if(dignity > 33)
-                    say(t, "You think it's worthwhile to send my thoughts to all those people?  I'm so happy!");
-                else
-                    say(t, "After all, I don't have any secrets.  I'm just your loyal servant, nothing more.");
+                {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.JOY, Project.Emotion.FOCUS);
+                    if(dignity > 66)
+                        say(t, "Heh, after this, they'll know that no one loves you as much as I do.");
+                    else
+                    if(dignity > 33)
+                        say(t, "You think it's worthwhile to send my thoughts to all those people?  I'm so happy!");
+                    else
+                        say(t, "After all, I don't have any secrets.  I'm just your loyal servant, nothing more.");
+                }
             } else
             if(nextTraining == 9)
             {
                 if(obedience < 20)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                     if(innocence > 66)
                         say(t, "Huh!?  Don't give me anything weird!");
                     else
@@ -4495,6 +4593,7 @@ public class Forsaken
                 } else
                 if(obedience < 40)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.STRUGGLE, Project.Emotion.FEAR);
                     if(confidence > 66)
                         say(t, "I... I can't let dirty tricks take me down!");
                     else
@@ -4505,6 +4604,7 @@ public class Forsaken
                 } else
                 if(obedience < 61)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.FEAR, Project.Emotion.SHAME);
                     if(innocence > 66)
                         say(t, "I'm scared...  Whenever I drink that stuff, it's like I'm not myself anymore...");
                     else
@@ -4515,6 +4615,7 @@ public class Forsaken
                 } else
                 if(obedience < 81)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.NEUTRAL, Project.Emotion.LEWD);
                     if(morality > 66)
                         say(t, "Thank you...  I will try to enjoy it as much as I can.");
                     else
@@ -4523,18 +4624,22 @@ public class Forsaken
                     else
                         say(t, "This is going to feel incredible...");
                 } else
-                if(innocence > 66)
-                    say(t, "I'm sorry for being bad before...  Maybe this will help me be better.");
-                else
-                if(innocence > 33)
-                    say(t, "Yes, I want to forget about everything but my devotion to you...");
-                else
-                    say(t, "My only worry is that it might impair my ability to faithfully serve you.");
+                {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.SHAME, Project.Emotion.LEWD);
+                    if(innocence > 66)
+                        say(t, "I'm sorry for being bad before...  Maybe this will help me be better.");
+                    else
+                    if(innocence > 33)
+                        say(t, "Yes, I want to forget about everything but my devotion to you...");
+                    else
+                        say(t, "My only worry is that it might impair my ability to faithfully serve you.");
+                }
             } else
             if(nextTraining == 10)
             {
                 if(obedience < 20)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.ANGER, Project.Emotion.FOCUS);
                     if(morality > 66)
                         say(t, "My body isn't yours to give away!");
                     else
@@ -4545,6 +4650,7 @@ public class Forsaken
                 } else
                 if(obedience < 40)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                     if(innocence > 66)
                         say(t, "I... I can take this.  It's just some naughty stuff...");
                     else
@@ -4555,6 +4661,7 @@ public class Forsaken
                 } else
                 if(obedience < 61)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.FEAR, Project.Emotion.SHAME);
                     if(confidence > 66)
                         say(t, "If this is how you want to use me...  I'll survive.");
                     else
@@ -4565,6 +4672,7 @@ public class Forsaken
                 } else
                 if(obedience < 81)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.FOCUS, Project.Emotion.JOY);
                     if(morality > 66)
                         say(t, "I'll do my best to cheer them up for you, Demon Lord.");
                     else
@@ -4573,17 +4681,21 @@ public class Forsaken
                     else
                         say(t, "They'd better be grateful that the Demon Lord is letting them use me!");
                 } else
-                if(innocence > 66)
-                    say(t, "When there are so many at once, their hands kinda feel like the Demon Lord's tentacles.  It's nice...");
-                else
-                if(innocence > 33)
-                    say(t, "If it's for the Demon Lord, I can service ten times as many people!");
-                else
-                    say(t, "I'm honored to be used so thoroughly, Demon Lord.");
+                {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.JOY, Project.Emotion.FOCUS);
+                    if(innocence > 66)
+                        say(t, "When there are so many at once, their hands kinda feel like the Demon Lord's tentacles.  It's nice...");
+                    else
+                    if(innocence > 33)
+                        say(t, "If it's for the Demon Lord, I can service ten times as many people!");
+                    else
+                        say(t, "I'm honored to be used so thoroughly, Demon Lord.");
+                }
             } else
             if(nextTraining == 11)
                 if(obedience < 20)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.FOCUS, Project.Emotion.ANGER);
                     if(innocence > 66)
                         say(t, "Bring 'em on!  I won't lose again!");
                     else
@@ -4594,6 +4706,7 @@ public class Forsaken
                 } else
                 if(obedience < 40)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                     if(confidence > 66)
                         say(t, "Are you really that afraid of giving me a fair fight!?");
                     else
@@ -4604,6 +4717,7 @@ public class Forsaken
                 } else
                 if(obedience < 61)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                     if(innocence > 66)
                         say(t, "No!  I don't wanna get beaten up again!");
                     else
@@ -4614,6 +4728,7 @@ public class Forsaken
                 } else
                 if(obedience < 81)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.FOCUS, Project.Emotion.JOY);
                     if(dignity > 66)
                         say(t, "Don't worry, Demon Lord, I'll put on a good show for everyone.");
                     else
@@ -4622,18 +4737,22 @@ public class Forsaken
                     else
                         say(t, "I thought it was already obvious that I'm just your plaything, but I suppose we can make it more clear if you want.");
                 } else
-                if(confidence > 66)
-                    say(t, "Yes!  Hurry, please, put me in my place!  I deserve it for resisting you for so long!");
-                else
-                if(confidence > 33)
-                    say(t, "Be as rough as you want with me, Demon Lord.  My life belongs to you.");
-                else
-                    say(t, "H-Heh... it'll be just like old times...");
+                {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.JOY, Project.Emotion.FOCUS);
+                    if(confidence > 66)
+                        say(t, "Yes!  Hurry, please, put me in my place!  I deserve it for resisting you for so long!");
+                    else
+                    if(confidence > 33)
+                        say(t, "Be as rough as you want with me, Demon Lord.  My life belongs to you.");
+                    else
+                        say(t, "H-Heh... it'll be just like old times...");
+                }
         } else
         if(lacksConsent.booleanValue() && consentBlock.booleanValue())
         {
             if(nextTraining == 0)
             {
+                Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
                 if(deviancy < 20)
                 {
                     if(morality > 66)
@@ -4673,6 +4792,7 @@ public class Forsaken
             {
                 if(disgrace < 15)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.FOCUS, Project.Emotion.ANGER);
                     if(morality > 66)
                         say(t, "Even defeated, I can still be a symbol of hope!  ");
                     else
@@ -4683,6 +4803,7 @@ public class Forsaken
                 } else
                 if(hostility < 15)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.SHAME, Project.Emotion.NEUTRAL);
                     if(dignity > 66)
                         say(t, "There still have to be a few people who haven't given up faith in me.  ");
                     else
@@ -4691,13 +4812,16 @@ public class Forsaken
                     else
                         say(t, "I'm not going to lie to people and say stuff I don't believe in.  ");
                 } else
-                if(dignity > 66)
-                    say(t, "You're just trying to sabotage my inevitable return to glory!  ");
-                else
-                if(dignity > 33)
-                    say(t, "I'm not going to help you make yourself look more powerful.  ");
-                else
-                    say(t, "You want me to pretend to be submissive and defeated?  That's not happening.  ");
+                {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                    if(dignity > 66)
+                        say(t, "You're just trying to sabotage my inevitable return to glory!  ");
+                    else
+                    if(dignity > 33)
+                        say(t, "I'm not going to help you make yourself look more powerful.  ");
+                    else
+                        say(t, "You want me to pretend to be submissive and defeated?  That's not happening.  ");
+                }
                 if(confidence > 66)
                     say(t, "I still hold my head as high as ever!");
                 else
@@ -4710,6 +4834,7 @@ public class Forsaken
             {
                 if(deviancy < 10)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                     if(dignity > 66)
                         say(t, "B-But everyone will think that I'm totally a pervert!  And I'm not!  ");
                     else
@@ -4720,6 +4845,7 @@ public class Forsaken
                 } else
                 if(disgrace < 10)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.NEUTRAL, Project.Emotion.STRUGGLE);
                     if(innocence > 66)
                         say(t, "I don't wanna let people see my private parts!  ");
                     else
@@ -4728,13 +4854,16 @@ public class Forsaken
                     else
                         say(t, "I would prefer to keep some degree of modesty.  ");
                 } else
-                if(confidence > 66)
-                    say(t, "My outfit is perfect the way it is!  ");
-                else
-                if(confidence > 33)
-                    say(t, "I'm not going to let you dress me up however you like!  ");
-                else
-                    say(t, "J-Just because you beat me doesn't mean I'm going to let you show me off like some sort of trophy!  ");
+                {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
+                    if(confidence > 66)
+                        say(t, "My outfit is perfect the way it is!  ");
+                    else
+                    if(confidence > 33)
+                        say(t, "I'm not going to let you dress me up however you like!  ");
+                    else
+                        say(t, "J-Just because you beat me doesn't mean I'm going to let you show me off like some sort of trophy!  ");
+                }
                 if(innocence > 66)
                     say(t, "If you try anything funny like that, I just won't transform at all!");
                 else
@@ -4747,6 +4876,7 @@ public class Forsaken
             {
                 if(hostility < 30)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
                     if(confidence > 66)
                         say(t, "You think that just because I enjoy fighting, that means I must enjoy torturing too?  ");
                     else
@@ -4757,6 +4887,7 @@ public class Forsaken
                 } else
                 if(deviancy < 30)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
                     if(morality > 66)
                         say(t, "I don't want to be the one doling out punishment for you.  ");
                     else
@@ -4765,13 +4896,16 @@ public class Forsaken
                     else
                         say(t, "Why bother with torture?  Just kill them quickly and be done with it.  ");
                 } else
-                if(innocence > 66)
-                    say(t, "It's less fun if I'm being told to do it.  ");
-                else
-                if(innocence > 33)
-                    say(t, "Maybe another time.  ");
-                else
-                    say(t, "I expect that you just want me surrounded by your minions so that you can have them torment me later.  ");
+                {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
+                    if(innocence > 66)
+                        say(t, "It's less fun if I'm being told to do it.  ");
+                    else
+                    if(innocence > 33)
+                        say(t, "Maybe another time.  ");
+                    else
+                        say(t, "I expect that you just want me surrounded by your minions so that you can have them torment me later.  ");
+                }
                 if(confidence > 66)
                     say(t, "I refuse!");
                 else
@@ -4784,6 +4918,7 @@ public class Forsaken
             {
                 if(disgrace < 40)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.FEAR, Project.Emotion.SHAME);
                     if(innocence > 66)
                         say(t, "Letting everyone look inside my head would be totally embarrassing!  ");
                     else
@@ -4794,6 +4929,7 @@ public class Forsaken
                 } else
                 if(hostility < 35)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.NEUTRAL, Project.Emotion.SHAME);
                     if(morality > 66)
                         say(t, "I know that there are a few people who still think of me as a hero, and I don't want to disappoint them.  ");
                     else
@@ -4802,13 +4938,16 @@ public class Forsaken
                     else
                         say(t, "This will just make people think I'm an easy target, and I don't want to go to the hassle of fighting them off.  ");
                 } else
-                if(dignity > 66)
-                    say(t, "I'm sick of people laughing at my fall from grace.  ");
-                else
-                if(dignity > 33)
-                    say(t, "I don't want to provide any more amusement for all the people I hate.  ");
-                else
-                    say(t, "I hate all of this pointless manipulation of the worthless public.  ");
+                {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
+                    if(dignity > 66)
+                        say(t, "I'm sick of people laughing at my fall from grace.  ");
+                    else
+                    if(dignity > 33)
+                        say(t, "I don't want to provide any more amusement for all the people I hate.  ");
+                    else
+                        say(t, "I hate all of this pointless manipulation of the worthless public.  ");
+                }
                 if(innocence > 66)
                     say(t, "I'll just run away until your power wears off!");
                 else
@@ -4821,6 +4960,7 @@ public class Forsaken
             {
                 if(deviancy < 40)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                     if(innocence > 66)
                         say(t, "That sounds so gross!  ");
                     else
@@ -4831,6 +4971,7 @@ public class Forsaken
                 } else
                 if(disgrace < 30)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
                     if(dignity > 66)
                         say(t, (new StringBuilder("The notorious ")).append(originalName).append(" having sex with the public?  Unthinkable!  ").toString());
                     else
@@ -4839,13 +4980,16 @@ public class Forsaken
                     else
                         say(t, "If I go along with this, I know that everyone's going to be begging for me to do it again later.  ");
                 } else
-                if(innocence > 66)
-                    say(t, "Um, actually, I had some other plans tonight that I want to get to.  ");
-                else
-                if(innocence > 33)
-                    say(t, "This sounds like a bit much.  ");
-                else
-                    say(t, "I'd need some time to evaluate the possible consequences of going so far.  ");
+                {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
+                    if(innocence > 66)
+                        say(t, "Um, actually, I had some other plans tonight that I want to get to.  ");
+                    else
+                    if(innocence > 33)
+                        say(t, "This sounds like a bit much.  ");
+                    else
+                        say(t, "I'd need some time to evaluate the possible consequences of going so far.  ");
+                }
                 if(confidence > 66)
                     say(t, "I refuse.");
                 else
@@ -4861,6 +5005,7 @@ public class Forsaken
             {
                 if(obedience < 20)
                 {
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
                     if(hostility < 20)
                     {
                         if(innocence > 66)
@@ -4916,6 +5061,7 @@ public class Forsaken
                         say(t, "I guess that driving them crazy might also feel good for me... but...  ");
                     if(hostility < 20)
                     {
+                        Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
                         if(innocence > 66)
                             say(t, "I'd feel bad about tempting other people to do naughty things, too.  Can't you just leave them out of it...?");
                         else
@@ -4924,13 +5070,16 @@ public class Forsaken
                         else
                             say(t, "Manipulating their desires like this is unethical.  I... do not wish to be a part of it...");
                     } else
-                    if(innocence > 66)
-                        say(t, "They always get so mean when I can't fight back.");
-                    else
-                    if(innocence > 33)
-                        say(t, "I hate them.  I don't want them to enjoy themselves.");
-                    else
-                        say(t, "I'm sure that they will only be focused on their own pleasure...");
+                    {
+                        Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                        if(innocence > 66)
+                            say(t, "They always get so mean when I can't fight back.");
+                        else
+                        if(innocence > 33)
+                            say(t, "I hate them.  I don't want them to enjoy themselves.");
+                        else
+                            say(t, "I'm sure that they will only be focused on their own pleasure...");
+                    }
                 }
             } else
             if(nextTraining == 2)
@@ -4956,6 +5105,7 @@ public class Forsaken
                         say(t, "Are you trying to sabotage my inevitable comeback as a beloved hero!?  ");
                     if(hostility < 15)
                     {
+                        Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.FOCUS, Project.Emotion.ANGER);
                         if(dignity > 66)
                             say(t, "If I completely give in, then surely everyone else will follow.");
                         else
@@ -4964,13 +5114,16 @@ public class Forsaken
                         else
                             say(t, "Even if it's just stubbornness, I can't give up.");
                     } else
-                    if(dignity > 66)
-                        say(t, "Someone needs to show the ignorant masses what strength looks like.");
-                    else
-                    if(dignity > 33)
-                        say(t, "If I can't be loved, at least I should be feared.");
-                    else
-                        say(t, "There's no way I'll act submissive just for your sake.");
+                    {
+                        Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
+                        if(dignity > 66)
+                            say(t, "Someone needs to show the ignorant masses what strength looks like.");
+                        else
+                        if(dignity > 33)
+                            say(t, "If I can't be loved, at least I should be feared.");
+                        else
+                            say(t, "There's no way I'll act submissive just for your sake.");
+                    }
                 } else
                 {
                     if(hostility < 15)
@@ -5007,6 +5160,7 @@ public class Forsaken
                         say(t, "I may already be disgraced, but I don't have to make it even worse...");
                     else
                         say(t, "Making people fear me again is the only hope I have...");
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
                 }
             } else
             if(nextTraining == 4)
@@ -5047,6 +5201,7 @@ public class Forsaken
                         say(t, "No matter what people say, I'm still strong enough that you shouldn't piss me off.");
                     else
                         say(t, "I won't assist you in your attempts to make my reputation sink even further.");
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
                 } else
                 {
                     if(disgrace < 10)
@@ -5068,6 +5223,7 @@ public class Forsaken
                         say(t, "I'm aware that I'm already somewhat of a laughing stock, but...  ");
                     if(deviancy < 10)
                     {
+                        Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.FEAR, Project.Emotion.SHAME);
                         if(dignity > 66)
                             say(t, "It'd look like I'm inviting them to do weird stuff with me...");
                         else
@@ -5076,13 +5232,16 @@ public class Forsaken
                         else
                             say(t, "Everyone will want to touch me, and I probably won't be able to stop myself from running away...");
                     } else
-                    if(dignity > 66)
-                        say(t, "I won't be able to take it.");
-                    else
-                    if(dignity > 33)
-                        say(t, "This is just too extreme.");
-                    else
-                        say(t, "I don't want to let you do it.");
+                    {
+                        Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.FEAR, Project.Emotion.NEUTRAL);
+                        if(dignity > 66)
+                            say(t, "I won't be able to take it.");
+                        else
+                        if(dignity > 33)
+                            say(t, "This is just too extreme.");
+                        else
+                            say(t, "I don't want to let you do it.");
+                    }
                 }
             } else
             if(nextTraining == 6)
@@ -5123,6 +5282,7 @@ public class Forsaken
                         say(t, "you're the one I should be punishing.");
                     else
                         say(t, "no one tells me who I can or can't hurt.");
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
                 } else
                 {
                     if(deviancy < 30)
@@ -5159,6 +5319,7 @@ public class Forsaken
                         say(t, "I'm feeling sort of overwhelmed right now.  Sorry.");
                     else
                         say(t, "my current mental state is too disturbed for me to perform to your standards.");
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
                 }
             } else
             if(nextTraining == 8)
@@ -5191,14 +5352,18 @@ public class Forsaken
                             say(t, "I don't want you to use this to make yourself look strong.");
                         else
                             say(t, "I never agreed to go this far.");
+                        Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
                     } else
-                    if(morality > 66)
-                        say(t, "your minions don't deserve the chance to laugh at me.");
-                    else
-                    if(morality > 33)
-                        say(t, "I'm not interested in entertaining your minions.");
-                    else
-                        say(t, "I'd rather be killing your minions than entertaining them.");
+                    {
+                        if(morality > 66)
+                            say(t, "your minions don't deserve the chance to laugh at me.");
+                        else
+                        if(morality > 33)
+                            say(t, "I'm not interested in entertaining your minions.");
+                        else
+                            say(t, "I'd rather be killing your minions than entertaining them.");
+                        Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
+                    }
                 } else
                 {
                     if(hostility < 35)
@@ -5235,6 +5400,7 @@ public class Forsaken
                         say(t, "this is all getting to be a bit too much.  If even my own mind is getting violated... I might completely lose it...");
                     else
                         say(t, "I must admit that the training so far has caused my composure to wear thin.  Frankly, I expect that this would be enough to push me over the edge into hysteria.");
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
                 }
             } else
             if(nextTraining == 10)
@@ -5274,6 +5440,7 @@ public class Forsaken
                         say(t, "I may be seen as a weakling, but I won't let myself be seen as a weakling you own.");
                     else
                         say(t, "People already harass me enough as it is.");
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
                 } else
                 {
                     if(disgrace < 30)
@@ -5310,6 +5477,7 @@ public class Forsaken
                         say(t, "I'm feeling sort of overwhelmed right now.  Please... can we do this later?");
                     else
                         say(t, "my psychological state is unprepared for the rigors of a long shift servicing the public.  I know from experience that I'm likely to lose patience and lash out...");
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
                 }
         } else
         if(nextTraining == 0)
@@ -5342,14 +5510,18 @@ public class Forsaken
                         say(t, "I should be able to ensure that nobody gets hurt.");
                     else
                         say(t, "I'm not one to hold people's lustful natures against them.");
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.NEUTRAL, Project.Emotion.FOCUS);
                 } else
-                if(innocence > 66)
-                    say(t, "if they try to go too far, I'll just beat them up!");
-                else
-                if(innocence > 33)
-                    say(t, "I'm not afraid of anything they can do to me.");
-                else
-                    say(t, "I have nothing to fear from regular people.");
+                {
+                    if(innocence > 66)
+                        say(t, "if they try to go too far, I'll just beat them up!");
+                    else
+                    if(innocence > 33)
+                        say(t, "I'm not afraid of anything they can do to me.");
+                    else
+                        say(t, "I have nothing to fear from regular people.");
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.FOCUS, Project.Emotion.ANGER);
+                }
             } else
             {
                 if(hostility < 20)
@@ -5386,6 +5558,7 @@ public class Forsaken
                     say(t, "Sometimes I enjoy it, but still...");
                 else
                     say(t, "They don't really care about my pleasure...");
+                Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.SHAME, Project.Emotion.NEUTRAL);
             }
         } else
         if(nextTraining == 1)
@@ -5412,6 +5585,7 @@ public class Forsaken
                     say(t, "You're wasting your time.");
                 else
                     say(t, "You must not know me that well after all.");
+                Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.FOCUS, Project.Emotion.ANGER);
             } else
             {
                 if(morality > 66)
@@ -5430,14 +5604,18 @@ public class Forsaken
                         say(t, "No, I mean, I still think that people are basically good!");
                     else
                         say(t, "And... y-you won't be able to change my mind!  Phew, I actually said it...");
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.FOCUS, Project.Emotion.STRUGGLE);
                 } else
-                if(confidence > 66)
-                    say(t, "But if you want to show me this, I can't stop you anymore.");
-                else
-                if(confidence > 33)
-                    say(t, "I suppose I should thank you for showing me the truth.");
-                else
-                    say(t, "But to think that they'd enjoy hurting me so much...");
+                {
+                    if(confidence > 66)
+                        say(t, "But if you want to show me this, I can't stop you anymore.");
+                    else
+                    if(confidence > 33)
+                        say(t, "I suppose I should thank you for showing me the truth.");
+                    else
+                        say(t, "But to think that they'd enjoy hurting me so much...");
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
+                }
             }
         } else
         if(nextTraining == 2)
@@ -5478,6 +5656,7 @@ public class Forsaken
                     say(t, "They're all fools anyway.");
                 else
                     say(t, "I can beat you without anyone else's help.");
+                Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
             } else
             {
                 if(hostility < 15)
@@ -5514,6 +5693,7 @@ public class Forsaken
                     say(t, "It's not like I have anything left to lose at this point.");
                 else
                     say(t, "Let them feel some of my despair...");
+                Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.SHAME, Project.Emotion.NEUTRAL);
             }
         } else
         if(nextTraining == 3)
@@ -5540,6 +5720,7 @@ public class Forsaken
                 else
                 if(confidence > 33)
                     say(t, "I'll just take this chance to enjoy myself.");
+                Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.FOCUS, Project.Emotion.ANGER);
             } else
             {
                 if(deviancy < 15)
@@ -5566,6 +5747,7 @@ public class Forsaken
                     say(t, "I'm ready to cum for you.");
                 else
                     say(t, "Thank you for granting me pleasure.");
+                Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.SHAME, Project.Emotion.LEWD);
             }
         } else
         if(nextTraining == 4)
@@ -5581,14 +5763,18 @@ public class Forsaken
                         say(t, "If you do that, then people will basically think I'm inviting them to do weird stuff with me!  ");
                     else
                         say(t, "That'll make it super annoying to stop people from doing weird stuff to me!  ");
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                 } else
-                if(dignity > 66)
-                    say(t, "I do like the idea of getting everyone to look at me.  ");
-                else
-                if(dignity > 33)
-                    say(t, "Hm, it'll be like I'm announcing my lewdness to the whole city.  ");
-                else
-                    say(t, "Well, I don't really care whether people think my outfit is appropriate or not.  ");
+                {
+                    if(dignity > 66)
+                        say(t, "I do like the idea of getting everyone to look at me.  ");
+                    else
+                    if(dignity > 33)
+                        say(t, "Hm, it'll be like I'm announcing my lewdness to the whole city.  ");
+                    else
+                        say(t, "Well, I don't really care whether people think my outfit is appropriate or not.  ");
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.JOY, Project.Emotion.FOCUS);
+                }
                 if(disgrace < 10)
                 {
                     if(innocence > 66)
@@ -5634,14 +5820,18 @@ public class Forsaken
                         say(t, "I just hope the sight doesn't get them too excited...");
                     else
                         say(t, "I hope it doesn't get too chilly with most of my clothes gone...");
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.SHAME, Project.Emotion.FEAR);
                 } else
-                if(dignity > 66)
-                    say(t, "I actually enjoy the way their eyes feel on my body...");
-                else
-                if(dignity > 33)
-                    say(t, "My heart is pounding...");
-                else
-                    say(t, "Just tell me whenever you want me transformed.");
+                {
+                    if(dignity > 66)
+                        say(t, "I actually enjoy the way their eyes feel on my body...");
+                    else
+                    if(dignity > 33)
+                        say(t, "My heart is pounding...");
+                    else
+                        say(t, "Just tell me whenever you want me transformed.");
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                }
             }
         } else
         if(nextTraining == 5)
@@ -5666,6 +5856,7 @@ public class Forsaken
                     say(t, "I'm not afraid.");
                 else
                     say(t, "Let's get this over with.");
+                Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.FOCUS, Project.Emotion.ANGER);
             } else
             {
                 if(disgrace < 20)
@@ -5692,6 +5883,7 @@ public class Forsaken
                     say(t, "It's a bit embarrassing...");
                 else
                     say(t, "Do you want my hands behind my back?");
+                Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.SHAME, Project.Emotion.NEUTRAL);
             }
         } else
         if(nextTraining == 6)
@@ -5724,14 +5916,18 @@ public class Forsaken
                         say(t, "This will basically just be like a normal fight.");
                     else
                         say(t, "I resent your implication that I'd take sexual pleasure from something like this, however.");
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
                 } else
-                if(dignity > 66)
-                    say(t, "Of course, this won't be pleasurable for me at all... heh heh...");
-                else
-                if(dignity > 33)
-                    say(t, "I suppose I should thank you for giving me a chance to enjoy myself.");
-                else
-                    say(t, "I'm going to enjoy this.");
+                {
+                    if(dignity > 66)
+                        say(t, "Of course, this won't be pleasurable for me at all... heh heh...");
+                    else
+                    if(dignity > 33)
+                        say(t, "I suppose I should thank you for giving me a chance to enjoy myself.");
+                    else
+                        say(t, "I'm going to enjoy this.");
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                }
             } else
             {
                 if(deviancy < 30)
@@ -5743,14 +5939,18 @@ public class Forsaken
                         say(t, "I'll do it, though I'd prefer to avoid getting too... sexual with it.  ");
                     else
                         say(t, "I will comply, although I hope you aren't expecting me to take any degree of fetishistic satisfaction from this.  ");
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.NEUTRAL, Project.Emotion.SHAME);
                 } else
-                if(innocence > 66)
-                    say(t, "Ah...  This is gonna feel really, really good.  ");
-                else
-                if(innocence > 33)
-                    say(t, "Thanks, I've really been wanting to do something like this...  ");
-                else
-                    say(t, "You are very kind to give me an outlet for some of my more... sadistic desires.  ");
+                {
+                    if(innocence > 66)
+                        say(t, "Ah...  This is gonna feel really, really good.  ");
+                    else
+                    if(innocence > 33)
+                        say(t, "Thanks, I've really been wanting to do something like this...  ");
+                    else
+                        say(t, "You are very kind to give me an outlet for some of my more... sadistic desires.  ");
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.JOY, Project.Emotion.FOCUS);
+                }
                 if(hostility < 30)
                 {
                     if(morality > 66)
@@ -5783,14 +5983,18 @@ public class Forsaken
                         say(t, "I'm not afraid of anything they can do to me.  ");
                     else
                         say(t, "Those idiots won't be able to hurt me.  ");
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
                 } else
-                if(confidence > 66)
-                    say(t, "Hah!  I welcome the chance to go up against your minions!  ");
-                else
-                if(confidence > 33)
-                    say(t, "If they attack me, they'd better watch out.  I won't hold back.  ");
-                else
-                    say(t, "Everyone's always looking for chances to hurt me anyway...");
+                {
+                    if(confidence > 66)
+                        say(t, "Hah!  I welcome the chance to go up against your minions!  ");
+                    else
+                    if(confidence > 33)
+                        say(t, "If they attack me, they'd better watch out.  I won't hold back.  ");
+                    else
+                        say(t, "Everyone's always looking for chances to hurt me anyway...");
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.FOCUS, Project.Emotion.ANGER);
+                }
                 if(innocence > 66)
                     say(t, "I'm basically still one of the Chosen, so I should be fine, right?");
                 else
@@ -5816,14 +6020,18 @@ public class Forsaken
                         say(t, "I know I can't blame them for obeying your orders, but still...");
                     else
                         say(t, "Maybe I can find a way to make them go easy on me...");
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
                 } else
-                if(innocence > 66)
-                    say(t, "People are such jerks.  I hate them.");
-                else
-                if(innocence > 33)
-                    say(t, "If they go too far, though, I'm going to try to make them pay...");
-                else
-                    say(t, "I am allowed to fight back, correct?");
+                {
+                    if(innocence > 66)
+                        say(t, "People are such jerks.  I hate them.");
+                    else
+                    if(innocence > 33)
+                        say(t, "If they go too far, though, I'm going to try to make them pay...");
+                    else
+                        say(t, "I am allowed to fight back, correct?");
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
+                }
             }
         } else
         if(nextTraining == 8)
@@ -5864,6 +6072,7 @@ public class Forsaken
                     say(t, "They'll definitely try to use what they hear against me, but I can deal with that.");
                 else
                     say(t, "If they still try to attack me after they hear how willing I am to kill them all, then they deserve what they get.");
+                Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.FOCUS, Project.Emotion.NEUTRAL);
             } else
             {
                 if(hostility < 35)
@@ -5892,14 +6101,18 @@ public class Forsaken
                         say(t, "I guess that people aren't going to respect me anymore...");
                     else
                         say(t, "It's past due that everyone realized I'm just another one of your servants.");
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
                 } else
-                if(innocence > 66)
-                    say(t, "It's kinda awkward, though.  I'm not sure what sorts of things I should be thinking at people.");
-                else
-                if(innocence > 33)
-                    say(t, "At this point, I doubt that people will be surprised about what they hear.");
-                else
-                    say(t, "While you're at it, are there any telepathic messages you'd like me to convey?");
+                {
+                    if(innocence > 66)
+                        say(t, "It's kinda awkward, though.  I'm not sure what sorts of things I should be thinking at people.");
+                    else
+                    if(innocence > 33)
+                        say(t, "At this point, I doubt that people will be surprised about what they hear.");
+                    else
+                        say(t, "While you're at it, are there any telepathic messages you'd like me to convey?");
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.NEUTRAL, Project.Emotion.JOY);
+                }
             }
         } else
         if(nextTraining == 9)
@@ -5930,6 +6143,7 @@ public class Forsaken
                     say(t, "I'll go along with it.");
                 else
                     say(t, "If this is all you're going to do to me, then there's no point in resisting...");
+                Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.FOCUS, Project.Emotion.ANGER);
             } else
             {
                 if(innocence > 66)
@@ -5948,14 +6162,18 @@ public class Forsaken
                         say(t, "I hope it doesn't hit me too hard this time.");
                     else
                         say(t, "There's no point in complaining...");
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.SHAME, Project.Emotion.NEUTRAL);
                 } else
-                if(dignity > 66)
-                    say(t, "O-Of course, I'm only doing this for your sake, Demon Lord.");
-                else
-                if(dignity > 33)
-                    say(t, "Thanks for helping me feel good.");
-                else
-                    say(t, "I can hardly wait...!");
+                {
+                    if(dignity > 66)
+                        say(t, "O-Of course, I'm only doing this for your sake, Demon Lord.");
+                    else
+                    if(dignity > 33)
+                        say(t, "Thanks for helping me feel good.");
+                    else
+                        say(t, "I can hardly wait...!");
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                }
             }
         } else
         if(nextTraining == 10)
@@ -5971,14 +6189,18 @@ public class Forsaken
                         say(t, "You think I'm too squeamish for something like this?  I'm not.  ");
                     else
                         say(t, "I have no interest in such menial tasks, but it's not important enough to bother with defying you.  ");
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
                 } else
-                if(confidence > 66)
-                    say(t, "Give me five minutes with them, and I'll have them eating out of my hand!  ");
-                else
-                if(confidence > 33)
-                    say(t, "Heh.  The pleasure will be all mine.  ");
-                else
-                    say(t, "Yes.  I'll have them hurt me.  And maybe that pain will give me the strength to resist you...  ");
+                {
+                    if(confidence > 66)
+                        say(t, "Give me five minutes with them, and I'll have them eating out of my hand!  ");
+                    else
+                    if(confidence > 33)
+                        say(t, "Heh.  The pleasure will be all mine.  ");
+                    else
+                        say(t, "Yes.  I'll have them hurt me.  And maybe that pain will give me the strength to resist you...  ");
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                }
                 if(disgrace < 30)
                 {
                     if(dignity > 66)
@@ -6031,14 +6253,18 @@ public class Forsaken
                         say(t, "I don't enjoy this, but if it's for you, I'll do it.");
                     else
                         say(t, "I don't like being used for other people's pleasure, but I'll deal with it.");
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.NEUTRAL, Project.Emotion.FOCUS);
                 } else
-                if(confidence > 66)
-                    say(t, "You're really kind, to let me have some fun like this.");
-                else
-                if(confidence > 33)
-                    say(t, "I'm going to give them as much pleasure as I can!");
-                else
-                    say(t, "I'm happy that I can be good for something...");
+                {
+                    if(confidence > 66)
+                        say(t, "You're really kind, to let me have some fun like this.");
+                    else
+                    if(confidence > 33)
+                        say(t, "I'm going to give them as much pleasure as I can!");
+                    else
+                        say(t, "I'm happy that I can be good for something...");
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                }
             }
         } else
         if(nextTraining == 11)
@@ -6068,6 +6294,7 @@ public class Forsaken
                     say(t, "The fact that my fans are gone just means I have nothing left to lose!");
                 else
                     say(t, "It doesn't matter if everyone expects me to lose again!");
+                Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.FOCUS, Project.Emotion.ANGER);
             } else
             {
                 if(disgrace < 35)
@@ -6079,14 +6306,18 @@ public class Forsaken
                         say(t, "I can't believe that some idiots still expect me to win.  ");
                     else
                         say(t, "Very shrewd.  A public defeat should help crush the remainder of my reputation as someone who resists you.  ");
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.NEUTRAL, Project.Emotion.SHAME);
                 } else
-                if(dignity > 66)
-                    say(t, "Don't worry, I'll put on a good show before going down!  ");
-                else
-                if(dignity > 33)
-                    say(t, "Do you want it to look like I was barely defeated, or should I just fail immediately?  ");
-                else
-                    say(t, "Sure, it's all the same to me.  ");
+                {
+                    if(dignity > 66)
+                        say(t, "Don't worry, I'll put on a good show before going down!  ");
+                    else
+                    if(dignity > 33)
+                        say(t, "Do you want it to look like I was barely defeated, or should I just fail immediately?  ");
+                    else
+                        say(t, "Sure, it's all the same to me.  ");
+                    Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.FOCUS, Project.Emotion.NEUTRAL);
+                }
                 if(confidence > 66)
                     say(t, "I still don't like losing, but I suppose this isn't really a fight.");
                 else
@@ -6524,6 +6755,7 @@ public class Forsaken
                     w.append(t, "  The aphrodisiac makes even the slightest touch down there too much to bear.");
                 if(currentTraining[8].booleanValue())
                     w.append(t, (new StringBuilder("  With the telepathy informing them of just how intensely the penetration is affecting ")).append(himHer()).append(", the men grow bolder and bolder.").toString());
+                Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
             } else
             if(stimulated.booleanValue())
             {
@@ -6641,6 +6873,7 @@ public class Forsaken
                     w.append(t, (new StringBuilder(String.valueOf(HeShe()))).append(" tries to fight through ").append(hisHer()).append(" growing exhaustion, knowing that the crowd won't let up.").toString());
                 else
                     w.append(t, (new StringBuilder("With ")).append(hisHer()).append(" body satisfied and ").append(hisHer()).append(" head feeling more clear, ").append(heShe()).append(" tries to make ").append(hisHer()).append(" exit, but much to ").append(hisHer()).append(" annoyance, ").append(heShe()).append("'s boxed in on all sides by more people thrusting their cocks at ").append(himHer()).append(" and demanding service.").toString());
+                Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
             } else
             if(oral.booleanValue())
             {
@@ -6665,6 +6898,7 @@ public class Forsaken
                     w.append(t, (new StringBuilder("Having a cock repeatedly thrust down ")).append(hisHer()).append(" throat doesn't feel good at all, but ").append(mainName).append(" just endures it, ").append(hisHer()).append(" eyes glazed over.  ").append(HeShe()).append(" knows that there's no point in protesting.").toString());
                 else
                     w.append(t, (new StringBuilder("The lust amplification causes the man thrusting down ")).append(mainName).append("'s throat to be exceptionally rough and merciless, prompting ").append(mainName).append(" to glare up at him with resentful fury.  ").append(mainName).append(" briefly considers biting down, but ").append(heShe()).append(" knows that it would only make things much worse for ").append(himHer()).append(".").toString());
+                Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.STRUGGLE, Project.Emotion.FEAR);
             } else
             {
                 w.append(t, (new StringBuilder("Tension hangs in the air as the men grow more and more irritated at ")).append(hisHer()).append(" refusal to service them.\n\n").toString());
@@ -6703,6 +6937,7 @@ public class Forsaken
                     w.append(t, (new StringBuilder(String.valueOf(HeShe()))).append(" tries to content ").append(himHer()).append("self with the knowledge that if they try to go any further, ").append(heShe()).append("'ll probably be able to hurt a few of them for it.").toString());
                 if(currentTraining[8].booleanValue())
                     w.append(t, (new StringBuilder("  The telepathic broadcast tells everyone exactly how afraid ")).append(heShe()).append(" is that they'll press the issue.").toString());
+                Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
             }
             if(vaginal.booleanValue())
             {
@@ -6952,6 +7187,7 @@ public class Forsaken
                 }
                 if(currentTraining[10].booleanValue())
                     w.append(t, (new StringBuilder("  Yet even more than the orgasms of the relatively few men fucking ")).append(himHer()).append(" now, the built-up lust of the long line of Thralls waiting for their turn with ").append(himHer()).append(" flows into ").append(himHer()).append(", and ").append(heShe()).append(" finds it impossible to be satisfied.").toString());
+                Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
             } else
             if(inPublic.booleanValue())
             {
@@ -6987,6 +7223,7 @@ public class Forsaken
                     w.append(t, (new StringBuilder("A chorus of derogatory thoughts directed at ")).append(himHer()).append(" fills ").append(hisHer()).append(" head, driving ").append(himHer()).append(" insane.").toString());
                 else
                     w.append(t, (new StringBuilder("Under the effects of your power, ")).append(heShe()).append(" can't ignore what people think about ").append(himHer()).append(" anymore.").toString());
+                Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.SHAME, Project.Emotion.FEAR);
             } else
             {
                 if(obedience < 20)
@@ -7018,6 +7255,7 @@ public class Forsaken
                     w.append(t, (new StringBuilder(String.valueOf(HeShe()))).append(" tries to resist, subconsciously afraid of leaving ").append(hisHer()).append(" body unattended, but even as ").append(heShe()).append(" squirms and struggles on the ground, the experiences ").append(heShe()).append("'s forced to live through ensure that ").append(heShe()).append(" doesn't forget the cruel things humans do to each other.").toString());
                 else
                     w.append(t, (new StringBuilder(String.valueOf(HeShe()))).append(" isn't surprised by what ").append(heShe()).append(" sees, having known all along that ").append(heShe()).append("'s surrounded by rapists, sadists, and weaklings who allow themselves and others to be trampled upon.  But as ").append(heShe()).append(" starts to return to ").append(hisHer()).append(" body, ").append(hisHer()).append(" eyes burn with renewed contempt for the rest of humanity.").toString());
+                Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.STRUGGLE, Project.Emotion.FEAR);
             }
             if(servicing.booleanValue())
             {
@@ -7136,6 +7374,7 @@ public class Forsaken
                     w.append(t, (new StringBuilder("It's not long before ")).append(mainName).append(" loses ").append(hisHer()).append(" motivation to speak, hanging ").append(hisHer()).append(" head in exhaustion.").toString());
                 else
                     w.append(t, (new StringBuilder("The combined pleasure and pain of the rough treatment eventually grows to the point of annoyance, but ")).append(mainName).append("'s only reaction is to halfheartedly try to kick behind ").append(himHer()).append(".  ").append(HeShe()).append(" knows that there's no point in asking for mercy.").toString());
+                Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.STRUGGLE, Project.Emotion.LEWD);
             } else
             {
                 if(currentTraining[4].booleanValue())
@@ -7165,6 +7404,7 @@ public class Forsaken
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" bites ").append(hisHer()).append(" lip in annoyance, but doesn't bother trying to continue.  ").append(HeShe()).append(" knows that there's no point.").toString());
                 else
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" falls silent, taking a sort of grim satisfaction in seeing proof that ").append(heShe()).append(" was right not to expect any sympathy from them.").toString());
+                Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
             }
             if(servicing.booleanValue())
             {
@@ -7388,9 +7628,11 @@ public class Forsaken
                     w.append(t, (new StringBuilder("  The Thralls' treatment of ")).append(mainName).append(" only grows more and more harsh as they take revenge for how ").append(heShe()).append(" was hurting them before.").toString());
             if(timesOrgasmed > 0)
                 timesOrgasmed += 5 + (int)(Math.random() * 5D);
+            Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
         } else
         if(nextTraining == 4)
         {
+            Project.displayedCivilians[0] = Boolean.valueOf(false);
             if(consenting.booleanValue())
             {
                 if(inPublic.booleanValue())
@@ -7575,6 +7817,7 @@ public class Forsaken
                 w.append(t, (new StringBuilder("A part of ")).append(himHer()).append(" wishes that the crowd would go further.").toString());
             else
                 w.append(t, (new StringBuilder(String.valueOf(HeShe()))).append(" can't deny that ").append(heShe()).append("'s getting more and more aroused, too.").toString());
+            Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
         } else
         if(nextTraining == 5)
         {
@@ -7695,6 +7938,7 @@ public class Forsaken
                 w.append(t, (new StringBuilder(String.valueOf(HisHer()))).append(" only saving grace is that ").append(heShe()).append("'s lost ").append(hisHer()).append(" novelty as a target of abuse, as everyone already knows that ").append(heShe()).append("'s unable to fight back.").toString());
             else
                 w.append(t, (new StringBuilder(String.valueOf(HeShe()))).append(" tries to ignore the crowd's amused laughter, but a part of ").append(himHer()).append(" knows that the less they think of ").append(himHer()).append(", the worse ").append(hisHer()).append(" treatment will get.").toString());
+            Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.SHAME, Project.Emotion.FEAR);
             if(currentTraining[6].booleanValue() && consenting.booleanValue())
                 w.append(t, (new StringBuilder("  Finally, the pillory disappears, although loose chains remain around ")).append(hisHer()).append(" wrists - a reminder that you can seize control from ").append(himHer()).append(" again at any moment.").toString());
             if(servicing.booleanValue())
@@ -7830,6 +8074,7 @@ public class Forsaken
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" pushes things far further than ").append(heShe()).append(" has to, getting more and more vicious until ").append(hisHer()).append(" victims don't even have the energy to scream anymore.  The Thralls only get relief when ").append(heShe()).append(" finally gets bored.").toString());
                 if(currentTraining[10].booleanValue())
                     w.append(t, (new StringBuilder("  A part of ")).append(himHer()).append(" is reluctant to go back to servicing them sexually.").toString());
+                Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
             } else
             {
                 if(timesHadSex > 0)
@@ -7866,6 +8111,7 @@ public class Forsaken
                 orgasmsGiven += 100 + (int)(Math.random() * 100D);
                 if(timesOrgasmed > 0)
                     timesOrgasmed += 3 + (int)(Math.random() * 3D);
+                Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.STRUGGLE, Project.Emotion.LEWD);
             }
             peopleInjured += 100 + (int)(Math.random() * 100D);
             ruthless = Boolean.valueOf(true);
@@ -7996,14 +8242,18 @@ public class Forsaken
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" doesn't understand why ").append(heShe()).append("'s being treated this way, but ").append(heShe()).append(" quickly begins to hate the Thralls for it.").toString());
                 else
                     w.append(t, (new StringBuilder("Even for ")).append(mainName).append(", who has long since decided that all people are evil at heart, the sheer enjoyment that the Thralls take from attacking ").append(himHer()).append(" is shocking.").toString());
+                Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.STRUGGLE, Project.Emotion.SHAME);
             } else
-            if(morality > 66)
-                w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" feels foolish for ever believing that people were all basically good inside.").toString());
-            else
-            if(morality > 33)
-                w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" can't muster the effort to feel any emotions at all about ").append(hisHer()).append(" treatment - ").append(heShe()).append(" has already accepted that everyone is just waiting for an excuse to do things like this.").toString());
-            else
-                w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" distracts ").append(himHer()).append("self from ").append(hisHer()).append(" torment by imagining all the ways ").append(heShe()).append(" might be able to get revenge someday.").toString());
+            {
+                if(morality > 66)
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" feels foolish for ever believing that people were all basically good inside.").toString());
+                else
+                if(morality > 33)
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" can't muster the effort to feel any emotions at all about ").append(hisHer()).append(" treatment - ").append(heShe()).append(" has already accepted that everyone is just waiting for an excuse to do things like this.").toString());
+                else
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" distracts ").append(himHer()).append("self from ").append(hisHer()).append(" torment by imagining all the ways ").append(heShe()).append(" might be able to get revenge someday.").toString());
+                Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+            }
             if(servicing.booleanValue())
                 orgasmsGiven += 15 + (int)(Math.random() * 15D);
             if(vaginal.booleanValue())
@@ -8061,14 +8311,18 @@ public class Forsaken
                     w.append(t, (new StringBuilder("A part of ")).append(mainName).append(" had hoped that knowledge of ").append(hisHer()).append(" own weakness would make others sympathetic, but the men laugh openly at ").append(hisHer()).append(" naivete.  ").append(HisHer()).append(" fear only turns them on even more.").toString());
                 else
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" had thought that ").append(heShe()).append(" understood how cruel people could be, but the complete callous disregard these people show for ").append(hisHer()).append(" suffering is still surprising.  ").append(mainName).append(" berates ").append(himHer()).append("self for not being even more harsh toward others, and that prompts another wave of laughter from those who hear ").append(hisHer()).append(" thoughts.").toString());
+                Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.SHAME, Project.Emotion.FEAR);
             } else
-            if(morality > 66)
-                w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" barely even has the energy to get angry anymore.  ").append(HeShe()).append(" had known that they would act this way, and only a lingering sense of betrayal remains to be broadcast to the surrounding people.").toString());
-            else
-            if(morality > 33)
-                w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s thoughts grow increasingly angry, much to their amusement.  They begin deliberately trying to provoke ").append(himHer()).append(", competing to see who can get the biggest mental reaction.").toString());
-            else
-                w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" tries to threaten the surrounding people, imagining them all experiencing painful gorey deaths.  But they just laugh even harder, stoking ").append(hisHer()).append(" anger even more.").toString());
+            {
+                if(morality > 66)
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" barely even has the energy to get angry anymore.  ").append(HeShe()).append(" had known that they would act this way, and only a lingering sense of betrayal remains to be broadcast to the surrounding people.").toString());
+                else
+                if(morality > 33)
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s thoughts grow increasingly angry, much to their amusement.  They begin deliberately trying to provoke ").append(himHer()).append(", competing to see who can get the biggest mental reaction.").toString());
+                else
+                    w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" tries to threaten the surrounding people, imagining them all experiencing painful gorey deaths.  But they just laugh even harder, stoking ").append(hisHer()).append(" anger even more.").toString());
+                Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.ANGER, Project.Emotion.SHAME);
+            }
             debased = Boolean.valueOf(true);
         } else
         if(nextTraining == 9)
@@ -8185,6 +8439,7 @@ public class Forsaken
                     w.append(t, (new StringBuilder("When ")).append(heShe()).append(" cums, ").append(heShe()).append(" feels truly satisfied - but only for a moment.  Before the doubts have a chance to return to ").append(himHer()).append(", ").append(heShe()).append(" desperately starts pursuing orgasm once again, afraid of the brief clarity that sometimes comes after the pleasure.").toString());
                 timesOrgasmed += 3 + (int)(Math.random() * 3D);
             }
+            Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
         } else
         if(nextTraining == 10)
         {
@@ -8281,6 +8536,7 @@ public class Forsaken
                 timesOrgasmed += 10 + (int)(Math.random() * 10D);
             lustful = Boolean.valueOf(true);
             orgasmsGiven += 1000 + (int)(Math.random() * 200D);
+            Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
         } else
         if(nextTraining == 11)
         {
@@ -8384,9 +8640,11 @@ public class Forsaken
                 }
                 if(currentTraining[10].booleanValue())
                     w.append(t, "  The line of Thralls waiting to be serviced has only grown longer during the brief fight.");
+                Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
             } else
             {
                 w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is dangled by ").append(hisHer()).append(" wrists above the crowd, which pelts ").append(himHer()).append(" with rocks and bits of garbage.").toString());
+                Project.changePortrait(type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
             }
             meek = Boolean.valueOf(true);
         }
@@ -8880,24 +9138,39 @@ public class Forsaken
                     if(c.getMorality() > 66)
                     {
                         if(morality > 66)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.ANGER);
                             c.say(t, (new StringBuilder("I can't believe that I used to look up to you, ")).append(mainName).append(".").toString());
-                        else
+                        } else
                         if(morality > 33)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.NEUTRAL, Project.Emotion.NEUTRAL);
                             c.say(t, (new StringBuilder(String.valueOf(mainName))).append("...  It's hard to believe that you used to be one of the Chosen.").toString());
-                        else
+                        } else
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.SHAME);
                             c.say(t, (new StringBuilder("I've heard of you, ")).append(mainName).append(".  Such a sad story...").toString());
+                        }
                         c.say(t, "\"\n\n");
                         say(t, "\"");
                         if(hostility > 66)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.ANGER);
                             say(t, "If you think you can afford to hold back, then you'll die.");
-                        else
+                        } else
                         if(hostility >= 40)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.ANGER);
                             say(t, "I don't want your pity!");
-                        else
+                        } else
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.SHAME, Project.Emotion.SHAME);
                             say(t, "I hope you can avoid my mistakes.");
+                        }
                     } else
                     if(c.getMorality() > 33)
                     {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.NEUTRAL, Project.Emotion.NEUTRAL);
                         if(confidence > 66)
                             c.say(t, (new StringBuilder("Alright, I've heard that ")).append(mainName).append(" is all bark and no bite...").toString());
                         else
@@ -8908,30 +9181,51 @@ public class Forsaken
                         c.say(t, "\"\n\n");
                         say(t, "\"");
                         if(hostility > 66)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.ANGER);
                             say(t, "I'm still plenty strong enough to kill you!");
-                        else
+                        } else
                         if(hostility >= 40)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.ANGER);
                             say(t, "Don't take me lightly...");
-                        else
+                        } else
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.SHAME, Project.Emotion.SHAME);
                             say(t, "That's right.  You're probably stronger than me.");
+                        }
                     } else
                     {
                         if(dignity > 66)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FOCUS, Project.Emotion.FOCUS);
                             c.say(t, (new StringBuilder("Heh, the 'great' ")).append(mainName).append(" has become just another pathetic tool of the Demons...").toString());
-                        else
+                        } else
                         if(dignity > 33)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.ANGER);
                             c.say(t, (new StringBuilder("This is ")).append(mainName).append("?  Ugh, get out of my way!").toString());
-                        else
+                        } else
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.ANGER);
                             c.say(t, "I want to wipe the stupid smile off this failure's face...");
+                        }
                         c.say(t, "\"\n\n");
                         say(t, "\"");
                         if(hostility > 66)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.ANGER);
                             say(t, "You don't even realize the danger you're in.");
-                        else
+                        } else
                         if(hostility >= 40)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.ANGER);
                             say(t, "You want to try me!?");
-                        else
+                        } else
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.SHAME, Project.Emotion.SHAME);
                             say(t, "Sorry.");
+                        }
                     }
                 } else
                 if(disgrace > 33)
@@ -8939,24 +9233,39 @@ public class Forsaken
                     if(c.getMorality() > 66)
                     {
                         if(morality > 66)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.SHAME);
                             c.say(t, (new StringBuilder(String.valueOf(mainName))).append(", come back to the side of Good!").toString());
-                        else
+                        } else
                         if(morality > 33)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FOCUS, Project.Emotion.FOCUS);
                             c.say(t, (new StringBuilder("This must be ")).append(mainName).append(".  Be ready, because I won't hold back!").toString());
-                        else
+                        } else
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.ANGER);
                             c.say(t, "Give up your evil ways, Forsaken!");
+                        }
                         c.say(t, "\"\n\n");
                         say(t, "\"");
                         if(hostility > 66)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.ANGER);
                             say(t, "Your self-righteousness makes me sick!");
-                        else
+                        } else
                         if(hostility >= 40)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.ANGER);
                             say(t, "Just try to defeat me!");
-                        else
+                        } else
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.SHAME, Project.Emotion.SHAME);
                             say(t, "I have to fight you.");
+                        }
                     } else
                     if(c.getMorality() > 33)
                     {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.NEUTRAL, Project.Emotion.NEUTRAL);
                         if(confidence > 66)
                             c.say(t, (new StringBuilder(String.valueOf(mainName))).append(" is supposed to be strong... but not as strong as ").append(heShe()).append(" thinks ").append(heShe()).append(" is...").toString());
                         else
@@ -8967,14 +9276,22 @@ public class Forsaken
                         c.say(t, "\"\n\n");
                         say(t, "\"");
                         if(hostility > 66)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.ANGER);
                             say(t, "Shut up!  Just die!");
-                        else
+                        } else
                         if(hostility >= 40)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.ANGER);
                             say(t, "You don't have time to talk to yourself!");
-                        else
+                        } else
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.FOCUS);
                             say(t, "Looks like you're taking me seriously.  That's smart.");
+                        }
                     } else
                     {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.NEUTRAL, Project.Emotion.NEUTRAL);
                         if(dignity > 66)
                             c.say(t, "I recognize you.  I can't believe you gave it all up to serve the Demon Lord.");
                         else
@@ -8988,35 +9305,57 @@ public class Forsaken
                         if(flavorObedience() > 40)
                             usedName = mainName;
                         if(hostility > 66)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.ANGER);
                             say(t, (new StringBuilder("My name is ")).append(usedName).append(", and I'm the one who will kill you!").toString());
-                        else
+                        } else
                         if(hostility >= 40)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.ANGER);
                             say(t, (new StringBuilder("I'm ")).append(usedName).append(", and you'd better remember it!").toString());
-                        else
+                        } else
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.NEUTRAL);
                             say(t, (new StringBuilder("I'm ")).append(usedName).append(".").toString());
+                        }
                     }
                 } else
                 if(c.getMorality() > 66)
                 {
                     if(morality > 66)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.FEAR);
                         c.say(t, (new StringBuilder(String.valueOf(originalName))).append("...?  No!  You were one of the best of us, how could you have turned to the Demons' side!?").toString());
-                    else
+                    } else
                     if(morality > 33)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.FEAR);
                         c.say(t, (new StringBuilder("I didn't want to believe it...  ")).append(originalName).append(", you've really switched sides...").toString());
-                    else
+                    } else
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.NEUTRAL, Project.Emotion.NEUTRAL);
                         c.say(t, (new StringBuilder(String.valueOf(originalName))).append("...  You always seemed a little too bloodthirsty in your videos.").toString());
+                    }
                     c.say(t, "\"\n\n");
                     say(t, "\"");
                     if(hostility > 66)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.FOCUS);
                         say(t, "And I've never been happier!");
-                    else
+                    } else
                     if(hostility >= 40)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.ANGER);
                         say(t, "I was a fool, letting the public decide who I should be.");
-                    else
+                    } else
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.SHAME, Project.Emotion.SHAME);
                         say(t, "It's not that simple.");
+                    }
                 } else
                 if(c.getMorality() > 33)
                 {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.FEAR);
                     if(confidence > 66)
                         c.say(t, "I think... I might be outmatched...");
                     else
@@ -9027,30 +9366,51 @@ public class Forsaken
                     c.say(t, "\"\n\n");
                     say(t, "\"");
                     if(hostility > 66)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.FOCUS);
                         say(t, "Hahahah!  Fear and despair!");
-                    else
+                    } else
                     if(hostility >= 40)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.FOCUS);
                         say(t, "Giving up already?");
-                    else
+                    } else
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.NEUTRAL);
                         say(t, "You probably can't beat me.");
+                    }
                 } else
                 {
                     if(dignity > 66)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.FEAR);
                         c.say(t, (new StringBuilder("If I had known that I'd be up against the one and only ")).append(originalName).append("...").toString());
-                    else
+                    } else
                     if(dignity > 33)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.ANGER);
                         c.say(t, "Guh!  If you're this strong, why couldn't you just beat the Demon Lord instead!?");
-                    else
+                    } else
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.ANGER);
                         c.say(t, "Ugh, you really deserve your reputation for being annoying...");
+                    }
                     c.say(t, "\"\n\n");
                     say(t, "\"");
                     if(hostility > 66)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.FOCUS);
                         say(t, "Beg!  Beg for your life!");
-                    else
+                    } else
                     if(hostility >= 40)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.JOY);
                         say(t, "I'm glad I could make you show a little respect.");
-                    else
+                    } else
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.NEUTRAL);
                         say(t, "This isn't personal.");
+                    }
                 }
                 w.append(t, "  ");
                 int reason = -1;
@@ -9087,6 +9447,7 @@ public class Forsaken
                             } else
                             if(reason == 1)
                             {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.LEWD);
                                 if(innocence > 66)
                                     say(t, "Aaah, let's hurt each other a lot~!");
                                 else
@@ -9353,378 +9714,19 @@ public class Forsaken
                         say(t, "I wonder if the Demon Lord is actually going to go to the trouble of taking you.");
                 say(t, "\"");
             } else
-            if(c.captureProgression % 6 == 0)
             {
-                if(styleDamage[0] > 0)
-                {
-                    if(styleDamage[1] > 0)
-                    {
-                        if(deviancy > 66)
-                        {
-                            c.say(t, "\"");
-                            if(c.confidence > 66)
-                            {
-                                if(c.morality > 66)
-                                    c.say(t, "Th-This is wrong!  Stop at once!");
-                                else
-                                if(c.morality > 33)
-                                    c.say(t, "I won't... let you...!");
-                                else
-                                    c.say(t, "Stop, or I'll kill you!  Are you even listening!?");
-                                c.say(t, "\"\n\n");
-                                say(t, "\"");
-                                if(confidence > 66)
-                                    say(t, "Mm, breaking you is going to be so much fun...");
-                                else
-                                if(confidence > 33)
-                                    say(t, "I love making the stubborn ones squeal...!");
-                                else
-                                    say(t, "H-Heh, hurt me all you want, I enjoy it...");
-                            } else
-                            if(c.confidence > 33)
-                            {
-                                if(c.morality > 66)
-                                    c.say(t, "How can you enjoy something like this!?");
-                                else
-                                if(c.morality > 33)
-                                    c.say(t, "Are you crazy!?");
-                                else
-                                    c.say(t, "You twisted bitch!");
-                                c.say(t, "\"\n\n");
-                                say(t, "\"");
-                                if(confidence > 66)
-                                    say(t, "Heh, I'll have to punish you for talking back...");
-                                else
-                                if(confidence > 33)
-                                    say(t, "Let me drag you down to my level...");
-                                else
-                                    say(t, "Those eyes... filled with disgust... nn, yes...!");
-                            } else
-                            {
-                                if(c.morality > 66)
-                                    c.say(t, "P-Please, stop...!  Aaah!");
-                                else
-                                if(c.morality > 33)
-                                    c.say(t, "H-Help!  I don't want- Nnaah!");
-                                else
-                                    c.say(t, "Ngh...  Enjoy it while you... caaan!");
-                                c.say(t, "\"\n\n");
-                                say(t, "\"");
-                                if(confidence > 66)
-                                    say(t, "Scream!  Scream for me!");
-                                else
-                                if(confidence > 33)
-                                    say(t, "Ah, you're so cuuute~!");
-                                else
-                                    say(t, "Heheh, it feels so nice to be the one doing this to someone else for a change...");
-                            }
-                            say(t, "\"");
-                        } else
-                        if(deviancy > 33)
-                        {
-                            c.say(t, "\"");
-                            if(c.confidence > 66)
-                            {
-                                if(c.morality > 66)
-                                    c.say(t, "Disgusting!  Stop at once!");
-                                else
-                                if(c.morality > 33)
-                                    c.say(t, "How dare you!?");
-                                else
-                                    c.say(t, "I won't let myself... be used for your pleasure...!");
-                                c.say(t, "\"\n\n");
-                                say(t, "\"");
-                                if(confidence > 66)
-                                    say(t, "I go out of my way to make you feel good too, and this is the thanks I get?");
-                                else
-                                if(confidence > 33)
-                                    say(t, "Don't even try to act like you aren't enjoying it too.");
-                                else
-                                    say(t, "Heh, even someone as strong as you is weak against this sort of thing, huh?");
-                            } else
-                            if(c.confidence > 33)
-                            {
-                                if(c.morality > 66)
-                                    c.say(t, "This is... wrong...!");
-                                else
-                                if(c.morality > 33)
-                                    c.say(t, "I don't... want this...!");
-                                else
-                                    c.say(t, "Get... ugh... your disgusting hands off me...!");
-                                c.say(t, "\"\n\n");
-                                say(t, "\"");
-                                if(confidence > 66)
-                                    say(t, "I'm going to make you give in to the pleasure.");
-                                else
-                                if(confidence > 33)
-                                    say(t, "You want it.  I can tell you do.");
-                                else
-                                    say(t, "I bet you could fight me off if you really wanted to.  But you don't.");
-                            } else
-                            {
-                                if(c.morality > 66)
-                                    c.say(t, "P-Please, this feels...  Nn!");
-                                else
-                                if(c.morality > 33)
-                                    c.say(t, "No!  L-Leave me alone!");
-                                else
-                                    c.say(t, "Ergh... just making yourself feel good...");
-                                c.say(t, "\"\n\n");
-                                say(t, "\"");
-                                if(confidence > 66)
-                                    say(t, "Hah, you little pervert, you like this, don't you!?");
-                                else
-                                if(confidence > 33)
-                                    say(t, "So, you're actually the type who enjoys this sort of thing?");
-                                else
-                                    say(t, "You shouldn't lie... it feels good to get raped, doesn't it...?");
-                            }
-                            say(t, "\"");
-                        } else
-                        {
-                            c.say(t, "\"");
-                            if(c.confidence > 66)
-                            {
-                                if(c.morality > 66)
-                                    c.say(t, "I have no interest in your perversions!");
-                                else
-                                if(c.morality > 33)
-                                    c.say(t, "Do you really think that will work on me!?");
-                                else
-                                    c.say(t, "You can't afford to mess around with me!");
-                                c.say(t, "\"\n\n");
-                                say(t, "\"");
-                                if(confidence > 66)
-                                    say(t, "You won't be able to withstand my technique for long!");
-                                else
-                                if(confidence > 33)
-                                    say(t, "You wouldn't be shouting if this didn't bother you.");
-                                else
-                                    say(t, "I'm fighting the only way I can...");
-                            } else
-                            if(c.confidence > 33)
-                            {
-                                if(c.morality > 66)
-                                    c.say(t, "Hey!  This isn't a game!");
-                                else
-                                if(c.morality > 33)
-                                    c.say(t, "Aren't we supposed to be fighting!?");
-                                else
-                                    c.say(t, "This won't stop me from killing you!");
-                                c.say(t, "\"\n\n");
-                                say(t, "\"");
-                                if(confidence > 66)
-                                    say(t, "You're completely at my mercy.");
-                                else
-                                if(confidence > 33)
-                                    say(t, "What's wrong?  Can't fight back like this?");
-                                else
-                                    say(t, "I-Isn't this better than fighting?");
-                            } else
-                            {
-                                if(c.morality > 66)
-                                    c.say(t, "S-Stop!  Can't you just beat me up normally!?");
-                                else
-                                if(c.morality > 33)
-                                    c.say(t, "Ah!  I c-can't...!");
-                                else
-                                    c.say(t, "Y-You're taking me too lightly!");
-                                c.say(t, "\"\n\n");
-                                say(t, "\"");
-                                if(confidence > 66)
-                                    say(t, "Pathetic.  Is this really all it takes to beat you?");
-                                else
-                                if(confidence > 33)
-                                    say(t, "Should such a pervert really be one of the Chosen?");
-                                else
-                                    say(t, "I may be one of the Forsaken, but I think you're more perverted than I am...");
-                            }
-                            say(t, "\"");
-                        }
-                    } else
-                    if(hostility > 66)
-                    {
-                        say(t, "\"");
-                        if(c.getConfidence() > 66)
-                        {
-                            if(confidence > 66)
-                                say(t, "Yes, show me your rage, your hatred!");
-                            else
-                            if(confidence > 33)
-                                say(t, "I knew that would get a reaction out of you!");
-                            else
-                                say(t, "I-It hurts you, doesn't it...?");
-                            say(t, "\"\n\n");
-                            c.say(t, "\"");
-                            if(c.morality > 66)
-                                c.say(t, "I won't let you hurt anyone else!");
-                            else
-                            if(c.morality > 33)
-                                c.say(t, "You monster!");
-                            else
-                                c.say(t, "After all the trouble I went through saving them!");
-                        } else
-                        if(c.getConfidence() > 33)
-                        {
-                            if(confidence > 66)
-                                say(t, "Go on, try to stop me.");
-                            else
-                            if(confidence > 33)
-                                say(t, "You couldn't save them.  You can't save anyone.");
-                            else
-                                say(t, "Saving people is so much harder... th-than killing them, I mean...");
-                            say(t, "\"\n\n");
-                            c.say(t, "\"");
-                            if(c.morality > 66)
-                                c.say(t, "Why...?");
-                            else
-                            if(c.morality > 33)
-                                c.say(t, "No!  Don't involve anyone else!");
-                            else
-                                c.say(t, "You need to be put down.");
-                        } else
-                        {
-                            if(confidence > 66)
-                                say(t, "Are you going to run away, little Chosen?");
-                            else
-                            if(confidence > 33)
-                                say(t, "Are you angry?  Afraid?");
-                            else
-                                say(t, "Look.  This is what I am, now...");
-                            say(t, "\"\n\n");
-                            c.say(t, "\"");
-                            if(c.morality > 66)
-                                c.say(t, "No...  I would have done anything to save them, but you...");
-                            else
-                            if(c.morality > 33)
-                                c.say(t, "Just... Just to get my attention...?");
-                            else
-                                c.say(t, (new StringBuilder("I need to kill ")).append(himHer()).append("... before ").append(heShe()).append(" kills me...!").toString());
-                        }
-                        c.say(t, "\"");
-                    } else
-                    if(hostility > 33)
-                    {
-                        say(t, "\"");
-                        if(c.getConfidence() > 66)
-                        {
-                            if(innocence > 66)
-                                say(t, "Hurry up, dummy!  You'll never catch me like this!");
-                            else
-                            if(innocence > 33)
-                                say(t, "I could keep this up all day!");
-                            else
-                                say(t, "You don't even care that you're walking into a trap, do you?");
-                            say(t, "\"\n\n");
-                            c.say(t, "\"");
-                            if(c.innocence > 66)
-                                c.say(t, "Now I'm really mad!");
-                            else
-                            if(c.innocence > 33)
-                                c.say(t, "Just fight me, coward!");
-                            else
-                                c.say(t, "I will make you regret this!");
-                        } else
-                        if(c.getConfidence() > 33)
-                        {
-                            if(innocence > 66)
-                                say(t, "That attack was so wimpy!  Can't you do any better!?");
-                            else
-                            if(innocence > 33)
-                                say(t, "Hey, dumbass!  Over here!");
-                            else
-                                say(t, "You only just noticed me!?  Oblivious fool!");
-                            say(t, "\"\n\n");
-                            c.say(t, "\"");
-                            if(c.innocence > 66)
-                                c.say(t, "Why are you so mean!?");
-                            else
-                            if(c.innocence > 33)
-                                c.say(t, "I won't let you get away!");
-                            else
-                                c.say(t, "Defeating you is a higher priority.");
-                        } else
-                        {
-                            if(innocence > 66)
-                                say(t, (new StringBuilder("Aw, is wittle ")).append(c.getMainName()).append(" gonna cry?").toString());
-                            else
-                            if(innocence > 33)
-                                say(t, "You weakling!  What are you even doing here!?");
-                            else
-                                say(t, "Pathetic excuse for a Chosen!  Worthless pretender!");
-                            say(t, "\"\n\n");
-                            c.say(t, "\"");
-                            if(c.innocence > 66)
-                                c.say(t, "S-Stop it... g-go away...!");
-                            else
-                            if(c.innocence > 33)
-                                c.say(t, "Y-You don't have to rub it in...");
-                            else
-                                c.say(t, "R-Ridiculous!  I won't let this get to me...!");
-                        }
-                        c.say(t, "\"");
-                    } else
-                    {
-                        say(t, "\"");
-                        if(c.getConfidence() > 66)
-                        {
-                            if(innocence > 66)
-                                say(t, "The Demon Lord is still way, way stronger than you.");
-                            else
-                            if(innocence > 33)
-                                say(t, "You won't win with brute force.");
-                            else
-                                say(t, "Do you believe you can prevail against the Demon Lord with strength alone?  Foolish.");
-                            say(t, "\"\n\n");
-                            c.say(t, "\"");
-                            if(c.morality > 66)
-                                c.say(t, "I am capable of finesse when needed!");
-                            else
-                            if(c.morality > 33)
-                                c.say(t, "Don't underestimate me!");
-                            else
-                                c.say(t, "As if you'd know how to win, you failure!");
-                        } else
-                        if(c.getConfidence() > 33)
-                        {
-                            if(innocence > 66)
-                                say(t, "If you're having trouble with me... then that means you're way, way weaker than the Demon Lord.");
-                            else
-                            if(innocence > 33)
-                                say(t, "I'd love to say that I think you have a chance against the Demon Lord... but I really can't.");
-                            else
-                                say(t, "Tell me, Chosen.  How will you be able to succeed against the Demon Lord where I failed?");
-                            say(t, "\"\n\n");
-                            c.say(t, "\"");
-                            if(c.morality > 66)
-                                c.say(t, "I won't give up!");
-                            else
-                            if(c.morality > 33)
-                                c.say(t, "I will become stronger!");
-                            else
-                                c.say(t, "You think you can scare me!?");
-                        } else
-                        {
-                            if(innocence > 66)
-                                say(t, "You sure you don't wanna quit?  This is kinda sad.");
-                            else
-                            if(innocence > 33)
-                                say(t, "I hoped you'd be able to beat the Demon Lord... how disappointing.");
-                            else
-                                say(t, "I say this without intending to offend: You have no chance whatsoever against the Demon Lord.");
-                            say(t, "\"\n\n");
-                            c.say(t, "\"");
-                            if(c.morality > 66)
-                                c.say(t, "Then I'll just... lay down my life.  Even if it only saves a few people...");
-                            else
-                            if(c.morality > 33)
-                                c.say(t, "E-Even so, I have to try...!");
-                            else
-                                c.say(t, "Th-That's why I'm probably just gonna run away...");
-                        }
-                        c.say(t, "\"");
-                    }
-                } else
+                chosenLine(t, w, c, styleDamage);
+            }
+            c.captureProgression++;
+        }
+    }
+
+    public void chosenLine(JTextPane t, WorldState w, Chosen c, int styleDamage[])
+    {
+        if(c.captureProgression % 6 == 0)
+        {
+            if(styleDamage[0] > 0)
+            {
                 if(styleDamage[1] > 0)
                 {
                     if(deviancy > 66)
@@ -9732,6 +9734,7 @@ public class Forsaken
                         c.say(t, "\"");
                         if(c.confidence > 66)
                         {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                             if(c.morality > 66)
                                 c.say(t, "Th-This is wrong!  Stop at once!");
                             else
@@ -9741,16 +9744,18 @@ public class Forsaken
                                 c.say(t, "Stop, or I'll kill you!  Are you even listening!?");
                             c.say(t, "\"\n\n");
                             say(t, "\"");
-                            if(innocence > 66)
-                                say(t, "I'm making you feel good, so what's the big deal?");
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.LEWD);
+                            if(confidence > 66)
+                                say(t, "Mm, breaking you is going to be so much fun...");
                             else
-                            if(innocence > 33)
-                                say(t, "Come on, show me your cumming face...!");
+                            if(confidence > 33)
+                                say(t, "I love making the stubborn ones squeal...!");
                             else
-                                say(t, "My technique is impossible to resist, even for one as strong as you!");
+                                say(t, "H-Heh, hurt me all you want, I enjoy it...");
                         } else
                         if(c.confidence > 33)
                         {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                             if(c.morality > 66)
                                 c.say(t, "How can you enjoy something like this!?");
                             else
@@ -9760,31 +9765,40 @@ public class Forsaken
                                 c.say(t, "You twisted bitch!");
                             c.say(t, "\"\n\n");
                             say(t, "\"");
-                            if(innocence > 66)
-                                say(t, "You're so mean!  But that's okay, I'll make you feel good anyway!");
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.LEWD);
+                            if(confidence > 66)
+                                say(t, "Heh, I'll have to punish you for talking back...");
                             else
-                            if(innocence > 33)
-                                say(t, "No need to make this personal...");
+                            if(confidence > 33)
+                                say(t, "Let me drag you down to my level...");
                             else
-                                say(t, "I suppose I am beyond help.");
+                                say(t, "Those eyes... filled with disgust... nn, yes...!");
                         } else
                         {
                             if(c.morality > 66)
+                            {
+                                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.LEWD);
                                 c.say(t, "P-Please, stop...!  Aaah!");
-                            else
+                            } else
                             if(c.morality > 33)
+                            {
+                                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.LEWD);
                                 c.say(t, "H-Help!  I don't want- Nnaah!");
-                            else
+                            } else
+                            {
+                                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.LEWD);
                                 c.say(t, "Ngh...  Enjoy it while you... caaan!");
+                            }
                             c.say(t, "\"\n\n");
                             say(t, "\"");
-                            if(innocence > 66)
-                                say(t, "Sorry... but I'm way too turned on to stop now...!");
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                            if(confidence > 66)
+                                say(t, "Scream!  Scream for me!");
                             else
-                            if(innocence > 33)
-                                say(t, "It's okay, you'll start enjoying it more soon...");
+                            if(confidence > 33)
+                                say(t, "Ah, you're so cuuute~!");
                             else
-                                say(t, "You can still resist?  I must refine my technique...");
+                                say(t, "Heheh, it feels so nice to be the one doing this to someone else for a change...");
                         }
                         say(t, "\"");
                     } else
@@ -9793,25 +9807,28 @@ public class Forsaken
                         c.say(t, "\"");
                         if(c.confidence > 66)
                         {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                             if(c.morality > 66)
-                                c.say(t, "You deviant!  Stop at once!");
+                                c.say(t, "Disgusting!  Stop at once!");
                             else
                             if(c.morality > 33)
-                                c.say(t, "You perverted freak!");
+                                c.say(t, "How dare you!?");
                             else
                                 c.say(t, "I won't let myself... be used for your pleasure...!");
                             c.say(t, "\"\n\n");
                             say(t, "\"");
-                            if(innocence > 66)
-                                say(t, "I mean, I have to admit that this is fun, but I'm not even getting off right now.");
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.ANGER);
+                            if(confidence > 66)
+                                say(t, "I go out of my way to make you feel good too, and this is the thanks I get?");
                             else
-                            if(innocence > 33)
-                                say(t, "If I wanted to feel good, I wouldn't be doing it like this.");
+                            if(confidence > 33)
+                                say(t, "Don't even try to act like you aren't enjoying it too.");
                             else
-                                say(t, "Unfortunately, I'm not feeling any pleasure whatsoever right now.");
+                                say(t, "Heh, even someone as strong as you is weak against this sort of thing, huh?");
                         } else
                         if(c.confidence > 33)
                         {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                             if(c.morality > 66)
                                 c.say(t, "This is... wrong...!");
                             else
@@ -9821,31 +9838,40 @@ public class Forsaken
                                 c.say(t, "Get... ugh... your disgusting hands off me...!");
                             c.say(t, "\"\n\n");
                             say(t, "\"");
-                            if(innocence > 66)
-                                say(t, "This is kinda perverted, isn't it?  Oh well.");
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.LEWD);
+                            if(confidence > 66)
+                                say(t, "I'm going to make you give in to the pleasure.");
                             else
-                            if(innocence > 33)
-                                say(t, "I'm getting pretty good at this.");
+                            if(confidence > 33)
+                                say(t, "You want it.  I can tell you do.");
                             else
-                                say(t, "This seems to be effective.");
+                                say(t, "I bet you could fight me off if you really wanted to.  But you don't.");
                         } else
                         {
                             if(c.morality > 66)
+                            {
+                                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.LEWD);
                                 c.say(t, "P-Please, this feels...  Nn!");
-                            else
+                            } else
                             if(c.morality > 33)
+                            {
+                                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                                 c.say(t, "No!  L-Leave me alone!");
-                            else
+                            } else
+                            {
+                                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                                 c.say(t, "Ergh... just making yourself feel good...");
+                            }
                             c.say(t, "\"\n\n");
                             say(t, "\"");
-                            if(innocence > 66)
-                                say(t, "You're actually kinda cute like this.");
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.LEWD);
+                            if(confidence > 66)
+                                say(t, "Hah, you little pervert, you like this, don't you!?");
                             else
-                            if(innocence > 33)
-                                say(t, "It's better than if I were actually hurting you, right?");
+                            if(confidence > 33)
+                                say(t, "So, you're actually the type who enjoys this sort of thing?");
                             else
-                                say(t, "I'm impressed that you're resisting as well as you are.");
+                                say(t, "You shouldn't lie... it feels good to get raped, doesn't it...?");
                         }
                         say(t, "\"");
                     } else
@@ -9853,6 +9879,7 @@ public class Forsaken
                         c.say(t, "\"");
                         if(c.confidence > 66)
                         {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.FOCUS);
                             if(c.morality > 66)
                                 c.say(t, "I have no interest in your perversions!");
                             else
@@ -9862,16 +9889,24 @@ public class Forsaken
                                 c.say(t, "You can't afford to mess around with me!");
                             c.say(t, "\"\n\n");
                             say(t, "\"");
-                            if(innocence > 66)
-                                say(t, "Wow, you really don't like this, do you?");
-                            else
-                            if(innocence > 33)
-                                say(t, "I'm just doing what I have to.");
-                            else
-                                say(t, "Well, attempting to restrain you with brute force would be futile.");
+                            if(confidence > 66)
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                                say(t, "You won't be able to withstand my technique for long!");
+                            } else
+                            if(confidence > 33)
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.FOCUS);
+                                say(t, "You wouldn't be shouting if this didn't bother you.");
+                            } else
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
+                                say(t, "I'm fighting the only way I can...");
+                            }
                         } else
                         if(c.confidence > 33)
                         {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                             if(c.morality > 66)
                                 c.say(t, "Hey!  This isn't a game!");
                             else
@@ -9881,1514 +9916,46 @@ public class Forsaken
                                 c.say(t, "This won't stop me from killing you!");
                             c.say(t, "\"\n\n");
                             say(t, "\"");
-                            if(innocence > 66)
-                                say(t, "I'm not happy about having to fight in a pervy way, either!");
-                            else
-                            if(innocence > 33)
-                                say(t, "Seems like this is your weak point, so I'm going to keep doing it.");
-                            else
-                                say(t, "Regrettably, this tactic seems to be the most effective.");
+                            if(confidence > 66)
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.FOCUS);
+                                say(t, "You're completely at my mercy.");
+                            } else
+                            if(confidence > 33)
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                                say(t, "What's wrong?  Can't fight back like this?");
+                            } else
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.SHAME, Project.Emotion.NEUTRAL);
+                                say(t, "I-Isn't this better than fighting?");
+                            }
                         } else
                         {
                             if(c.morality > 66)
+                            {
+                                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                                 c.say(t, "S-Stop!  Can't you just beat me up normally!?");
-                            else
+                            } else
                             if(c.morality > 33)
+                            {
+                                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                                 c.say(t, "Ah!  I c-can't...!");
-                            else
+                            } else
+                            {
+                                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                                 c.say(t, "Y-You're taking me too lightly!");
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
-                            if(innocence > 66)
-                                say(t, "Ew, are you actually enjoying this?");
-                            else
-                            if(innocence > 33)
-                                say(t, "Believe me, I'm not enjoying it either.");
-                            else
-                                say(t, "It appears that the Demon Lord was correct about your latent masochism.");
-                        }
-                        say(t, "\"");
-                    }
-                } else
-                if(disgrace > 66)
-                {
-                    c.say(t, "\"");
-                    if(c.getConfidence() > 66)
-                    {
-                        if(c.getMorality() > 66)
-                            c.say(t, "This one might actually be weak enough to subdue and rescue!");
-                        else
-                        if(c.getMorality() > 33)
-                            c.say(t, "I need to swat this one down before I go back to fighting the Demons.");
-                        else
-                            c.say(t, "Are you so eager to die, pathetic Forsaken!?");
-                        c.say(t, "\"\n\n");
-                        say(t, "\"");
-                        if(innocence > 66)
-                            say(t, "Ah, crap, now I've got the strong one after me!");
-                        else
-                        if(innocence > 33)
-                            say(t, "Alright, time to go on the defensive.");
-                        else
-                            say(t, "I must use my limited resources to the fullest...");
-                    } else
-                    if(c.getConfidence() > 33)
-                    {
-                        if(c.getMorality() > 66)
-                            c.say(t, (new StringBuilder("If I ignore ")).append(himHer()).append(", ").append(heShe()).append(" might go after the civilians.").toString());
-                        else
-                        if(c.getMorality() > 33)
-                            c.say(t, "If I let my guard down, even this one could still hurt me.");
-                        else
-                            c.say(t, "Get out of my way!");
-                        c.say(t, "\"\n\n");
-                        say(t, "\"");
-                        if(innocence > 66)
-                            say(t, "Being weak is tough...");
-                        else
-                        if(innocence > 33)
-                            say(t, "This might be tough.");
-                        else
-                            say(t, "So long as I'm careful, I have nothing to fear.");
-                    } else
-                    {
-                        if(c.getMorality() > 66)
-                            c.say(t, (new StringBuilder("I d-don't want to fight ")).append(himHer()).append("...").toString());
-                        else
-                        if(c.getMorality() > 33)
-                            c.say(t, "Wh-Why am I such a coward...?");
-                        else
-                            c.say(t, "P-Protecting myself comes first!");
-                        c.say(t, "\"\n\n");
-                        say(t, "\"");
-                        if(innocence > 66)
-                            say(t, (new StringBuilder("Wow, I actually scared ")).append(c.himHer()).append("!").toString());
-                        else
-                        if(innocence > 33)
-                            say(t, "Heh.  This is actually working.");
-                        else
-                            say(t, "I should have no trouble against such a weak-willed foe.");
-                    }
-                    say(t, "\"");
-                } else
-                if(disgrace > 33)
-                {
-                    c.say(t, "\"");
-                    if(c.getConfidence() > 66)
-                    {
-                        if(c.getMorality() > 66)
-                            c.say(t, "You cannot stand against the power of my righteousness, Forsaken!");
-                        else
-                        if(c.getMorality() > 33)
-                            c.say(t, "Do you really think you stand a chance against me!?");
-                        else
-                            c.say(t, "You'll regret standing in my way!");
-                        c.say(t, "\"\n\n");
-                        say(t, "\"");
-                        if(confidence > 66)
-                            say(t, "We'll see who's stronger!");
-                        else
-                        if(confidence > 33)
-                            say(t, "I can definitely slow you down.");
-                        else
-                            say(t, "I-I'm stronger than I look!");
-                    } else
-                    if(c.getConfidence() > 33)
-                    {
-                        if(c.getMorality() > 66)
-                            c.say(t, "I can't lose here!");
-                        else
-                        if(c.getMorality() > 33)
-                            c.say(t, "You're actually pretty strong.");
-                        else
-                            c.say(t, "Ugh, can't we do this some other time?");
-                        c.say(t, "\"\n\n");
-                        say(t, "\"");
-                        if(confidence > 66)
-                            say(t, "I've got the upper hand.");
-                        else
-                        if(confidence > 33)
-                            say(t, "Hmph!");
-                        else
-                            say(t, "Y-You don't have time to talk!");
-                    } else
-                    {
-                        if(c.getMorality() > 66)
-                            c.say(t, "I-I'm sorry, but I'm too weak...!");
-                        else
-                        if(c.getMorality() > 33)
-                            c.say(t, "Th-This one's strong!");
-                        else
-                            c.say(t, "Run away!");
-                        c.say(t, "\"\n\n");
-                        say(t, "\"");
-                        if(confidence > 66)
-                            say(t, "You can run, but you can't hide.");
-                        else
-                        if(confidence > 33)
-                            say(t, (new StringBuilder("Looks like ")).append(c.heShe()).append("'s not fighting back.").toString());
-                        else
-                            say(t, (new StringBuilder("I-I've got ")).append(c.himHer()).append(" on the run!").toString());
-                    }
-                    say(t, "\"");
-                } else
-                {
-                    c.say(t, "\"");
-                    if(c.getConfidence() > 66)
-                    {
-                        if(c.getMorality() > 66)
-                            c.say(t, "I must not... give in...!");
-                        else
-                        if(c.getMorality() > 33)
-                            c.say(t, "You... got lucky...!");
-                        else
-                            c.say(t, "You'll... pay for that...!");
-                        c.say(t, "\"\n\n");
-                        say(t, "\"");
-                        if(innocence > 66)
-                            say(t, "Hm?  Did I really hit you that hard?");
-                        else
-                        if(innocence > 33)
-                            say(t, "Looks like you aren't so strong after all.");
-                        else
-                            say(t, "Your self-confidence is worth far less than the faith of all those who still believe in me.");
-                    } else
-                    if(c.getConfidence() > 33)
-                    {
-                        if(c.getMorality() > 66)
-                            c.say(t, "I... I won't run-");
-                        else
-                        if(c.getMorality() > 33)
-                            c.say(t, "I might need to run-");
-                        else
-                            c.say(t, "Gah, I need to run-");
-                        c.say(t, "\"\n\n");
-                        say(t, "\"");
-                        if(innocence > 66)
-                            say(t, "Too laaate~!");
-                        else
-                        if(innocence > 33)
-                            say(t, "Hyah!");
-                        else
-                            say(t, "I will not allow you to escape!");
-                    } else
-                    {
-                        if(c.getMorality() > 66)
-                            c.say(t, "I won't lose hope...!");
-                        else
-                        if(c.getMorality() > 33)
-                            c.say(t, "N-No!  Leave me alone!");
-                        else
-                            c.say(t, "I-I give up!  Let me go!");
-                        c.say(t, "\"\n\n");
-                        say(t, "\"");
-                        if(innocence > 66)
-                            say(t, "Let's play together.");
-                        else
-                        if(innocence > 33)
-                            say(t, "Let's do this.");
-                        else
-                            say(t, "You understand that you're in a hopeless position.  Good.");
-                    }
-                    say(t, "\"");
-                }
-            } else
-            if(c.captureProgression % 6 == 1)
-            {
-                if(styleDamage[1] > 0)
-                {
-                    if(styleDamage[2] > 0)
-                    {
-                        if(disgrace > 66)
-                        {
-                            c.say(t, "\"");
-                            if(deviancy > 66)
-                            {
-                                if(c.getInnocence() > 66)
-                                    c.say(t, "Y-You're totally crazy!");
-                                else
-                                if(c.getInnocence() > 33)
-                                    c.say(t, "Don't you even care what happens to you!?");
-                                else
-                                    c.say(t, "You... You animal...!");
-                                c.say(t, "\"\n\n");
-                                say(t, "\"");
-                                if(c.getConfidence() > 66)
-                                    say(t, "Nngh, yes, look down on me...!");
-                                else
-                                if(c.getConfidence() > 33)
-                                    say(t, "This is the only way I can feel alive...!");
-                                else
-                                    say(t, "Heh, are you scared of feeling good...?  You should be.");
-                            } else
-                            if(deviancy > 33)
-                            {
-                                if(c.getConfidence() > 66)
-                                    c.say(t, "You're just... getting lucky...!");
-                                else
-                                if(c.getConfidence() > 33)
-                                    c.say(t, "Stop it, stop it!");
-                                else
-                                    c.say(t, "I-I want to resist, but...");
-                                c.say(t, "\"\n\n");
-                                say(t, "\"");
-                                if(c.getMorality() > 66)
-                                    say(t, "Why are you holding back?  Come on, I know you can hurt me!");
-                                else
-                                if(c.getMorality() > 33)
-                                    say(t, "Ah, this hurts so good...!");
-                                else
-                                    say(t, "Yes, that anger...  Let it out on me...!");
-                            } else
-                            {
-                                if(c.getMorality() > 66)
-                                    c.say(t, "Why are you doing this!?");
-                                else
-                                if(c.getMorality() > 33)
-                                    c.say(t, "Back off!");
-                                else
-                                    c.say(t, "You're really pissing me off...!");
-                                c.say(t, "\"\n\n");
-                                say(t, "\"");
-                                if(c.getConfidence() > 66)
-                                    say(t, "If you want me to stop, then stop me.");
-                                else
-                                if(c.getConfidence() > 33)
-                                    say(t, "I actually think you're enjoying this more than I am.");
-                                else
-                                    say(t, "Are you too turned on to fight back properly?  That's too bad.");
                             }
-                            say(t, "\"");
-                        } else
-                        if(disgrace > 33)
-                        {
-                            c.say(t, "\"");
-                            if(c.getDignity() > 66)
-                            {
-                                if(hostility > 66)
-                                    c.say(t, "It just... ngh... j-just hurts...!");
-                                else
-                                if(hostility > 33)
-                                    c.say(t, "I-I could stop you if I wanted to!");
-                                else
-                                    c.say(t, "T-Trying to make me feel good is pointless!");
-                                c.say(t, "\"\n\n");
-                                say(t, "\"");
-                                if(innocence > 66)
-                                    say(t, "Okay, but I'm gonna keep doing this!");
-                                else
-                                if(innocence > 33)
-                                    say(t, "Then why don't you stop me?");
-                                else
-                                    say(t, "A poor bluff.");
-                            } else
-                            if(c.getDignity() > 33)
-                            {
-                                if(deviancy > 66)
-                                    c.say(t, "Y-You're just... satisfying yourself...!");
-                                else
-                                if(deviancy > 33)
-                                    c.say(t, "Ugh, you look like you're having a good time...");
-                                else
-                                    c.say(t, "You don't look like you're enjoying this, so why...?");
-                                c.say(t, "\"\n\n");
-                                say(t, "\"");
-                                if(flavorObedience() > 66)
-                                    say(t, "I enjoy everything I do in service to the Demon Lord.");
-                                else
-                                if(flavorObedience() > 33)
-                                    say(t, "I'm only following my orders.");
-                                else
-                                    say(t, "This is how I fight.");
-                            } else
-                            {
-                                if(hostility > 66)
-                                    c.say(t, "Aaagh, it huuurts!");
-                                else
-                                if(hostility > 33)
-                                    c.say(t, "Ow... nnaaah, oooh!");
-                                else
-                                    c.say(t, "F-Feels... goood...!");
-                                c.say(t, "\"\n\n");
-                                say(t, "\"");
-                                if(confidence > 66)
-                                    say(t, "Is that all you can do!?");
-                                else
-                                if(confidence > 33)
-                                    say(t, "You're weak right there, aren't you?");
-                                else
-                                    say(t, "Wow, I-I'm completely in control...");
-                            }
-                            say(t, "\"");
-                        } else
-                        {
-                            say(t, "\"");
-                            if(hostility > 66)
-                            {
-                                if(c.getInnocence() > 66)
-                                    say(t, "Idiot!  Do you understand now that you never should have got in my way!?");
-                                else
-                                if(c.getInnocence() > 33)
-                                    say(t, "Scream for me!");
-                                else
-                                    say(t, "Heh, you look like you're regretting your actions.");
-                                say(t, "\"\n\n");
-                                c.say(t, "\"");
-                                if(c.getConfidence() > 66)
-                                    c.say(t, "I... won't... ngh... beg...!");
-                                else
-                                if(c.getConfidence() > 33)
-                                    c.say(t, "It's... too much...!");
-                                else
-                                    c.say(t, "Please, forgive meee!");
-                            } else
-                            if(hostility > 33)
-                            {
-                                if(c.getConfidence() > 66)
-                                    say(t, "Still trying to resist?  How annoying.");
-                                else
-                                if(c.getConfidence() > 33)
-                                    say(t, "How about this?");
-                                else
-                                    say(t, "You're making such cute little noises.");
-                                say(t, "\"\n\n");
-                                c.say(t, "\"");
-                                if(c.getDignity() > 66)
-                                    c.say(t, "I-I'm not- Nn!  Not feeling anything at all!");
-                                else
-                                if(c.getDignity() > 33)
-                                    c.say(t, "Stop... this...!");
-                                else
-                                    c.say(t, "Aaagh, gaaah!");
-                            } else
-                            {
-                                if(c.getInnocence() > 66)
-                                    say(t, "I hoped that you wouldn't be the sort to enjoy this sort of thing.");
-                                else
-                                if(c.getInnocence() > 33)
-                                    say(t, "I don't want to be this rough, but you aren't leaving me any choice.");
-                                else
-                                    say(t, "You seem like you're trying to learn how to handle this.");
-                                say(t, "\"\n\n");
-                                c.say(t, "\"");
-                                if(c.getMorality() > 66)
-                                    c.say(t, "Am I really so weak...?");
-                                else
-                                if(c.getMorality() > 33)
-                                    c.say(t, "I get it, just let me go already!");
-                                else
-                                    c.say(t, "F-Fuck you!");
-                            }
-                            c.say(t, "\"");
-                        }
-                    } else
-                    if(deviancy > 66)
-                    {
-                        c.say(t, "\"");
-                        if(c.getInnocence() > 66)
-                        {
-                            if(hostility > 66)
-                                c.say(t, "S-Stop!  You're hurting me!");
-                            else
-                            if(hostility > 33)
-                                c.say(t, "Th-This is really weird!");
-                            else
-                                c.say(t, "N-No!  I don't wanna feel good!");
                             c.say(t, "\"\n\n");
                             say(t, "\"");
-                            if(innocence > 66)
-                                say(t, "I'm gonna make you super perveted, like me!");
-                            else
-                            if(innocence > 33)
-                                say(t, "Ah, this is wonderful!");
-                            else
-                                say(t, "I'm... nn... stealing away your innocence...!");
-                        } else
-                        if(c.getInnocence() > 33)
-                        {
-                            if(innocence > 66)
-                                c.say(t, "You have no idea what you're doing!");
-                            else
-                            if(innocence > 33)
-                                c.say(t, "Stop doing all this screwed up stuff!");
-                            else
-                                c.say(t, "What are you even trying to accomplish by doing this!?");
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
-                            if(morality > 66)
-                                say(t, "The fact that I know it's wrong... makes it even kinkier!");
-                            else
-                            if(morality > 33)
-                                say(t, "I'll never stop, this is what I live for!");
-                            else
-                                say(t, "It feels good, that's all that matters.");
-                        } else
-                        {
-                            if(disgrace > 66)
-                                c.say(t, "I-I'll stop you by force!");
-                            else
-                            if(disgrace > 33)
-                                c.say(t, "W-Wasting effort on this will simply make it easier to defeat you!");
-                            else
-                                c.say(t, "S-Someone strong enough to stop you will come eventually!");
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
                             if(confidence > 66)
-                                say(t, "Go on, try!  That makes it feel even better!");
+                                say(t, "Pathetic.  Is this really all it takes to beat you?");
                             else
                             if(confidence > 33)
-                                say(t, "Even if doing this gets me killed, it's still worth it.");
+                                say(t, "Should such a pervert really be one of the Chosen?");
                             else
-                                say(t, "I don't care... I just want to feel good and forget everything...");
-                        }
-                        say(t, "\"");
-                    } else
-                    if(deviancy > 33)
-                    {
-                        say(t, "\"");
-                        if(c.getDignity() > 66)
-                        {
-                            if(innocence > 66)
-                                say(t, "Um, are you trying to pretend that didn't feel good?");
-                            else
-                            if(innocence > 33)
-                                say(t, "Looks like a part of you is asking me to continue.");
-                            else
-                                say(t, "Protest as much as you like, but your pleasure is obvious.");
-                            say(t, "\"\n\n");
-                            c.say(t, "\"");
-                            if(confidence > 66)
-                                c.say(t, "You brute!");
-                            else
-                            if(confidence > 33)
-                                c.say(t, "D-Don't be ridiculous!");
-                            else
-                                c.say(t, "Sneaky little...!");
-                        } else
-                        if(c.getDignity() > 33)
-                        {
-                            if(hostility > 66)
-                                say(t, "I still want to make you scream.");
-                            else
-                            if(hostility > 33)
-                                say(t, "Well, I enjoyed myself.");
-                            else
-                                say(t, "I might have gone too far...");
-                            say(t, "\"\n\n");
-                            c.say(t, "\"");
-                            if(disgrace > 66)
-                                c.say(t, "I won't let you do that again!");
-                            else
-                            if(disgrace > 33)
-                                c.say(t, (new StringBuilder("Ugh, I can't let ")).append(himHer()).append(" do what ").append(heShe()).append(" wants...").toString());
-                            else
-                                c.say(t, "S-Stay back!");
-                        } else
-                        {
-                            if(confidence > 66)
-                                say(t, "What do you think of my technique?");
-                            else
-                            if(confidence > 33)
-                                say(t, "Looks like that had a nice effect.");
-                            else
-                                say(t, "H-Heh, looks like it worked...");
-                            say(t, "\"\n\n");
-                            c.say(t, "\"");
-                            if(hostility > 66)
-                                c.say(t, "Ow...  You're... rough...");
-                            else
-                            if(hostility > 33)
-                                c.say(t, "I... I need a break...");
-                            else
-                                c.say(t, "I'll admit... that felt good...");
-                        }
-                        c.say(t, "\"");
-                    } else
-                    {
-                        say(t, "\"");
-                        if(c.getDignity() > 66)
-                        {
-                            if(innocence > 66)
-                                say(t, "I guess it's not working.  Oh well.");
-                            else
-                            if(innocence > 33)
-                                say(t, "Time to try something different.");
-                            else
-                                say(t, "I wonder, are you really not feeling anything?");
-                            say(t, "\"\n\n");
-                            c.say(t, "\"");
-                            if(disgrace > 66)
-                                c.say(t, "Hmph.  It'd take more than that.");
-                            else
-                            if(disgrace > 33)
-                                c.say(t, "L-Let's just fight normally, then!");
-                            else
-                                c.say(t, "Huuh...  Phew...");
-                        } else
-                        if(c.getDignity() > 33)
-                        {
-                            if(disgrace > 66)
-                                say(t, "Close one...!");
-                            else
-                            if(disgrace > 33)
-                                say(t, "Too slow!");
-                            else
-                                say(t, "It's pointless to resist.");
-                            say(t, "\"\n\n");
-                            c.say(t, "\"");
-                            if(confidence > 66)
-                                c.say(t, "You... smug...!");
-                            else
-                            if(confidence > 33)
-                                c.say(t, "Can't let that happen again...");
-                            else
-                                c.say(t, "Ugh, coward...!");
-                        } else
-                        {
-                            if(hostility > 66)
-                                say(t, "Disgusting.  Just die.");
-                            else
-                            if(hostility > 33)
-                                say(t, "Ugh, you pervert.");
-                            else
-                                say(t, "I really was hoping your body wouldn't be so weak to this.");
-                            say(t, "\"\n\n");
-                            c.say(t, "\"");
-                            if(innocence > 66)
-                                c.say(t, "Huh...?  What...?");
-                            else
-                            if(innocence > 33)
-                                c.say(t, "No one asked you!");
-                            else
-                                c.say(t, "I expect you'd fare no better!");
-                        }
-                        c.say(t, "\"");
-                    }
-                } else
-                if(styleDamage[2] > 0)
-                {
-                    if(disgrace > 66)
-                    {
-                        c.say(t, "\"");
-                        if(c.getConfidence() > 66)
-                        {
-                            if(dignity > 66)
-                                c.say(t, "Ergh...  You live up to your old reputation...!");
-                            else
-                            if(dignity > 33)
-                                c.say(t, "You're actually giving me a hard time!");
-                            else
-                                c.say(t, "You're- ngh!  Completely crazy!");
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
-                            if(innocence > 66)
-                                say(t, "Hahah, thanks!");
-                            else
-                            if(innocence > 33)
-                                say(t, "I can't hold back, especially against someone like you.");
-                            else
-                                say(t, "I do not need brute force in order to win!");
-                        } else
-                        if(c.getConfidence() > 33)
-                        {
-                            if(innocence > 66)
-                                c.say(t, "It's like fighting a wild animal...!");
-                            else
-                            if(innocence > 33)
-                                c.say(t, "Can't believe I'm getting pushed back...!");
-                            else
-                                c.say(t, "I should be able to win this, but...!");
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
-                            if(hostility > 66)
-                                say(t, "Kill, kill, kill!");
-                            else
-                            if(hostility > 33)
-                                say(t, "Graaah!");
-                            else
-                                say(t, "You shouldn't rely on your powers so much.");
-                        } else
-                        {
-                            if(hostility > 66)
-                                c.say(t, "I-I'm actually going to die...!");
-                            else
-                            if(hostility > 33)
-                                c.say(t, "Such... hatred...!");
-                            else
-                                c.say(t, "Even against one of the weaker Forsaken, I-I can't...");
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
-                            if(confidence > 66)
-                                say(t, "This is why you shouldn't underestimate me!");
-                            else
-                            if(confidence > 33)
-                                say(t, "Is this really all you can do!?");
-                            else
-                                say(t, "Yeah, this is pretty pathetic.");
-                        }
-                        say(t, "\"");
-                    } else
-                    if(disgrace > 33)
-                    {
-                        c.say(t, "\"");
-                        if(c.getConfidence() > 66)
-                        {
-                            if(hostility > 66)
-                                c.say(t, "Face me, coward!");
-                            else
-                            if(hostility > 33)
-                                c.say(t, "You won't have an easy time hurting me!");
-                            else
-                                c.say(t, "A straightforward fight.  Just how I like it!");
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
-                            if(confidence > 66)
-                                say(t, "Fine, let's see what you can do!");
-                            else
-                            if(confidence > 33)
-                                say(t, "Alright, let's do this!");
-                            else
-                                say(t, "I-I'm not giving up!");
-                        } else
-                        if(c.getConfidence() > 33)
-                        {
-                            if(confidence > 66)
-                                c.say(t, "I... think I can beat you...!");
-                            else
-                            if(confidence > 33)
-                                c.say(t, "Pretty... tough...!");
-                            else
-                                c.say(t, "You're... stronger than you look...!");
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
-                            if(innocence > 66)
-                                say(t, "I'm totally holding back my full power, just watch!");
-                            else
-                            if(innocence > 33)
-                                say(t, "Hyaaah!");
-                            else
-                                say(t, "Hmph!  How about this!?");
-                        } else
-                        {
-                            if(deviancy > 66)
-                                c.say(t, "S-Stop... looking at me like that... please...!");
-                            else
-                            if(deviancy > 33)
-                                c.say(t, (new StringBuilder("I-It's like... ")).append(heShe()).append("'s just enjoying it...!").toString());
-                            else
-                                c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append("'s... too strong...!").toString());
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
-                            if(hostility > 66)
-                                say(t, "I'm going to make you beg me to kill you before I'm done!");
-                            else
-                            if(hostility > 33)
-                                say(t, "Hahah, you're already giving up!");
-                            else
-                                say(t, "You aren't giving up yet, are you?");
-                        }
-                        say(t, "\"");
-                    } else
-                    {
-                        String usedName = originalName;
-                        if(flavorObedience() > 40)
-                            usedName = mainName;
-                        c.say(t, "\"");
-                        if(c.getConfidence() > 66)
-                        {
-                            if(dignity > 66)
-                                c.say(t, "Heh...  You're as strong as... they say...");
-                            else
-                            if(dignity > 33)
-                                c.say(t, "You might actually be stronger than me...");
-                            else
-                                c.say(t, "Were you... always this strong...?");
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
-                            if(confidence > 66)
-                                say(t, (new StringBuilder("Of course.  I'm ")).append(usedName).append(".").toString());
-                            else
-                            if(confidence > 33)
-                                say(t, "I can't hold back.");
-                            else
-                                say(t, "Th-This is the strength of those who believe in me!");
-                        } else
-                        if(c.getConfidence() > 33)
-                        {
-                            if(morality > 66)
-                                c.say(t, "I heard that you... used to be so nice...");
-                            else
-                            if(morality > 33)
-                                c.say(t, "Don't you... feel bad about doing this...?");
-                            else
-                                c.say(t, "Ugh...  Have you been working for the Demons all along...?");
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
-                            if(hostility > 66)
-                                say(t, "I've just learned to enjoy hurting people!");
-                            else
-                            if(hostility > 33)
-                                say(t, "Shut up and take it.");
-                            else
-                                say(t, "I don't want to do this, but I have no choice.");
-                        } else
-                        {
-                            if(hostility > 66)
-                                c.say(t, "P-Please, no more, no more, I'm begging you...!");
-                            else
-                            if(hostility > 33)
-                                c.say(t, "I c-can't, I can't take it anymore...!");
-                            else
-                                c.say(t, "I know you aren't enjoying this, so why...?");
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
-                            if(flavorObedience() > 66)
-                                say(t, "And this is only a small fraction of the Demon Lord's power!");
-                            else
-                            if(flavorObedience() > 33)
-                                say(t, "I have my orders.");
-                            else
-                                say(t, "I'm sorry.");
-                        }
-                        say(t, "\"");
-                    }
-                } else
-                if(disgrace > 66)
-                {
-                    say(t, "\"");
-                    if(c.getConfidence() > 66)
-                    {
-                        if(hostility > 66)
-                            say(t, "Pathetic!  Is that what you call an attack!?");
-                        else
-                        if(hostility > 33)
-                            say(t, "Getting tired yet?");
-                        else
-                            say(t, "You won't be able to beat me like this.");
-                        say(t, "\"\n\n");
-                        c.say(t, "\"");
-                        if(innocence > 66)
-                            c.say(t, "Your luck has to run out eventually!");
-                        else
-                        if(innocence > 33)
-                            c.say(t, "Hold still!");
-                        else
-                            c.say(t, "Ugh, you're a slippery one.");
-                    } else
-                    if(c.getConfidence() > 33)
-                    {
-                        if(innocence > 66)
-                            say(t, "I'm not gonna let you hit me!");
-                        else
-                        if(innocence > 33)
-                            say(t, "Whew, close one.");
-                        else
-                            say(t, "As long as I avoid leaving any openings...");
-                        say(t, "\"\n\n");
-                        c.say(t, "\"");
-                        if(confidence > 66)
-                            c.say(t, "You're just a coward after all!");
-                        else
-                        if(confidence > 33)
-                            c.say(t, "Aren't you going to attack!?");
-                        else
-                            c.say(t, "Scared to face me!?");
-                    } else
-                    {
-                        if(confidence > 66)
-                            say(t, "Come on, try to attack me!");
-                        else
-                        if(confidence > 33)
-                            say(t, "If you're not going to fight me, what are you even doing here?");
-                        else
-                            say(t, "If I'm too much for you to handle, you might as well just quit now.");
-                        say(t, "\"\n\n");
-                        c.say(t, "\"");
-                        if(hostility > 66)
-                            c.say(t, "Y-You're just looking for a way to hurt me, I know it!");
-                        else
-                        if(hostility > 33)
-                            c.say(t, "D-Don't rush me!");
-                        else
-                            c.say(t, "S-Sorry, I just...");
-                    }
-                    c.say(t, "\"");
-                } else
-                if(disgrace > 33)
-                {
-                    c.say(t, "\"");
-                    if(c.getMorality() > 66)
-                    {
-                        if(innocence > 66)
-                            c.say(t, "Hey, look at me!  I'm the one you're after!");
-                        else
-                        if(innocence > 33)
-                            c.say(t, "I won't let you hurt them!");
-                        else
-                            c.say(t, "What are you planning to do to them!?");
-                        c.say(t, "\"\n\n");
-                        say(t, "\"");
-                        if(hostility > 66)
-                            say(t, "Idiot.  I've got you right where I want you.");
-                        else
-                        if(hostility > 33)
-                            say(t, "You're so predictable.");
-                        else
-                            say(t, "Nice response.");
-                    } else
-                    if(c.getMorality() > 33)
-                    {
-                        if(dignity > 66)
-                            c.say(t, (new StringBuilder("Am I even scratching ")).append(himHer()).append("?").toString());
-                        else
-                        if(dignity > 33)
-                            c.say(t, "There's no end to this...!");
-                        else
-                            c.say(t, (new StringBuilder("I can tell that ")).append(heShe()).append("'s getting tired too...").toString());
-                        c.say(t, "\"\n\n");
-                        say(t, "\"");
-                        if(flavorObedience() > 66)
-                            say(t, "There's no end to the Demon Lord's power!");
-                        else
-                        if(flavorObedience() > 33)
-                            say(t, "Alright, next step...");
-                        else
-                            say(t, "I like how this is turning out.");
-                    } else
-                    {
-                        if(hostility > 66)
-                            c.say(t, "I won't let you kill me!");
-                        else
-                        if(hostility > 33)
-                            c.say(t, "I'm not your toy!");
-                        else
-                            c.say(t, "Stop looking down on me!");
-                        c.say(t, "\"\n\n");
-                        say(t, "\"");
-                        if(innocence > 66)
-                            say(t, "Oh, I guess I made you mad.");
-                        else
-                        if(innocence > 33)
-                            say(t, "You've got issues.");
-                        else
-                            say(t, "Nonetheless, you're quite easy to manipulate.");
-                    }
-                    say(t, "\"");
-                } else
-                {
-                    c.say(t, "\"");
-                    if(c.getInnocence() > 66)
-                    {
-                        if(deviancy > 66)
-                            c.say(t, "Stay away from me, weirdo!");
-                        else
-                        if(deviancy > 33)
-                            c.say(t, "What are you looking at me like that for!?  Get back!");
-                        else
-                            c.say(t, "Leave me alooone!");
-                        c.say(t, "\"\n\n");
-                        say(t, "\"");
-                        if(innocence > 66)
-                            say(t, "That tickles!");
-                        else
-                        if(innocence > 33)
-                            say(t, "You're wasting your energy.");
-                        else
-                            say(t, "Pointless.");
-                    } else
-                    if(c.getInnocence() > 33)
-                    {
-                        if(innocence > 66)
-                            c.say(t, (new StringBuilder("I need to outsmart ")).append(himHer()).append(" somehow...!").toString());
-                        else
-                        if(innocence > 33)
-                            c.say(t, "There's got to be some way out of this...!");
-                        else
-                            c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append("'s completely cornered me...").toString());
-                        c.say(t, "\"\n\n");
-                        say(t, "\"");
-                        if(flavorObedience() > 66)
-                            say(t, "Now do you understand the Demon Lord's power?");
-                        else
-                        if(flavorObedience() > 33)
-                            say(t, "Alright, here should be good.");
-                        else
-                            say(t, "You can't run anymore.");
-                    } else
-                    {
-                        if(confidence > 66)
-                            c.say(t, "You aren't attacking.  Tell me why!");
-                        else
-                        if(confidence > 33)
-                            c.say(t, "It would appear that I'm at your mercy.");
-                        else
-                            c.say(t, "Wh-What do you want with me!?");
-                        c.say(t, "\"\n\n");
-                        say(t, "\"");
-                        if(hostility > 66)
-                            say(t, "I want you to feel completely hopeless...!");
-                        else
-                        if(hostility > 33)
-                            say(t, "I'm giving you a chance to beg for mercy.");
-                        else
-                            say(t, "You need to understand what you're up against.");
-                    }
-                    say(t, "\"");
-                }
-            } else
-            if(c.captureProgression % 6 == 2)
-            {
-                if(styleDamage[2] > 0)
-                {
-                    if(styleDamage[3] > 0)
-                    {
-                        if(disgrace > 66)
-                        {
-                            c.say(t, "\"");
-                            if(c.getDignity() > 66)
-                            {
-                                if(deviancy > 66)
-                                    c.say(t, "H-Hey, where are you touching!?");
-                                else
-                                if(deviancy > 33)
-                                    c.say(t, "You don't have to look so pleased with yourself!");
-                                else
-                                    c.say(t, "Hey, stop that!");
-                                c.say(t, "\"\n\n");
-                                say(t, "\"");
-                                if(innocence > 66)
-                                    say(t, "Oopsie!");
-                                else
-                                if(innocence > 33)
-                                    say(t, "Looks like you've got a weakness.");
-                                else
-                                    say(t, "You shouldn't worry about such trivial things.");
-                            } else
-                            if(c.getDignity() > 33)
-                            {
-                                if(hostility > 66)
-                                    c.say(t, "I don't like that look in your eyes...");
-                                else
-                                if(hostility > 33)
-                                    c.say(t, "What are you smirking about?");
-                                else
-                                    c.say(t, "Did it get colder?");
-                                c.say(t, "\"\n\n");
-                                say(t, "\"");
-                                if(confidence > 66)
-                                    say(t, "You don't have time to worry about that!");
-                                else
-                                if(confidence > 33)
-                                    say(t, "Let's keep going.");
-                                else
-                                    say(t, "A-Are you sure you can focus on me right now?");
-                            } else
-                            {
-                                if(innocence > 66)
-                                    c.say(t, "Ogle me if you like, it doesn't change anything.");
-                                else
-                                if(innocence > 33)
-                                    c.say(t, "Is that what you were after?  Ugh.");
-                                else
-                                    c.say(t, "What are you plotting?");
-                                c.say(t, "\"\n\n");
-                                say(t, "\"");
-                                if(deviancy > 66)
-                                    say(t, "Ah, it's showing, it's showiiing~!");
-                                else
-                                if(deviancy > 33)
-                                    say(t, "Hm, not bad.");
-                                else
-                                    say(t, "You should be more careful.");
-                            }
-                            say(t, "\"");
-                        } else
-                        if(disgrace > 33)
-                        {
-                            c.say(t, "\"");
-                            if(c.getConfidence() > 66)
-                            {
-                                if(hostility > 66)
-                                    c.say(t, "This is finally my chance to go all-out!");
-                                else
-                                if(hostility > 33)
-                                    c.say(t, "Now this is a fight!");
-                                else
-                                    c.say(t, "This is a chance to fight a worthy opponent!");
-                                c.say(t, "\"\n\n");
-                                say(t, "\"");
-                                if(deviancy > 66)
-                                    say(t, "W-Worth it...");
-                                else
-                                if(deviancy > 33)
-                                    say(t, "This is also a great show...");
-                                else
-                                    say(t, "Yaaah!");
-                            } else
-                            if(c.getConfidence() > 33)
-                            {
-                                if(deviancy > 66)
-                                    c.say(t, "You complete pervert!");
-                                else
-                                if(deviancy > 33)
-                                    c.say(t, "Stop messing around!");
-                                else
-                                    c.say(t, "I didn't think you were the type to do this.");
-                                c.say(t, "\"\n\n");
-                                say(t, "\"");
-                                if(dignity > 66)
-                                    say(t, "It suddenly looks like you're losing, doesn't it?");
-                                else
-                                if(dignity > 33)
-                                    say(t, "Can you still fight like that?");
-                                else
-                                    say(t, "A lot of people seem to care about this sort of thing.");
-                            } else
-                            {
-                                if(confidence > 66)
-                                    c.say(t, "I don't have any chance unless I can get away!");
-                                else
-                                if(confidence > 33)
-                                    c.say(t, "Let me go!");
-                                else
-                                    c.say(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s crazy, I have to run!").toString());
-                                c.say(t, "\"\n\n");
-                                say(t, "\"");
-                                if(innocence > 66)
-                                    say(t, "Stop it, I've gotta fight you!");
-                                else
-                                if(innocence > 33)
-                                    say(t, "Okay, but I'm keeping your clothes.");
-                                else
-                                    say(t, "Are you so sure that that's a good idea?");
-                            }
-                            say(t, "\"");
-                        } else
-                        {
-                            say(t, "\"");
-                            if(c.getInnocence() > 66)
-                            {
-                                if(hostility > 66)
-                                    say(t, "Shut up!  Shut up, or I'll kill you!");
-                                else
-                                if(hostility > 33)
-                                    say(t, "Hold still, you little shit!");
-                                else
-                                    say(t, (new StringBuilder("Ergh, ")).append(c.heShe()).append("'s desperate...!").toString());
-                                say(t, "\"\n\n");
-                                c.say(t, "\"");
-                                if(confidence > 66)
-                                    c.say(t, "No, no, I'm gonna dieee!");
-                                else
-                                if(confidence > 33)
-                                    c.say(t, "Let go of meee!");
-                                else
-                                    c.say(t, "Aaah!  Come on, seriously, let me gooo!");
-                            } else
-                            if(c.getInnocence() > 33)
-                            {
-                                if(deviancy > 66)
-                                    say(t, "Let's tear off a little extra~!");
-                                else
-                                if(deviancy > 33)
-                                    say(t, "You do have a nice body.");
-                                else
-                                    say(t, "I won't let you protect yourself.");
-                                say(t, "\"\n\n");
-                                c.say(t, "\"");
-                                if(dignity > 66)
-                                    c.say(t, "Please... just don't let them see...");
-                                else
-                                if(dignity > 33)
-                                    c.say(t, "Ugh...  Fine, do what you want...");
-                                else
-                                    c.say(t, "Aaagh, nooo!");
-                            } else
-                            {
-                                if(innocence > 66)
-                                    say(t, "Guess I can relax- Whah!?");
-                                else
-                                if(innocence > 33)
-                                    say(t, "It's over now, you can't- Gaaah!");
-                                else
-                                    say(t, "Giving up?  Or is this a tri- Ngh!");
-                                say(t, "\"\n\n");
-                                c.say(t, "\"");
-                                if(deviancy > 66)
-                                    c.say(t, "Hmph, I will need to wash my mouth out tonight.");
-                                else
-                                if(deviancy > 33)
-                                    c.say(t, "As if I'd offer myself to you!");
-                                else
-                                    c.say(t, "Now is my chance!");
-                            }
-                            c.say(t, "\"");
-                        }
-                    } else
-                    if(disgrace > 66)
-                    {
-                        c.say(t, "\"");
-                        if(c.getConfidence() > 66)
-                        {
-                            if(deviancy > 66)
-                                c.say(t, "Are you actually enjoying this!?");
-                            else
-                            if(deviancy > 33)
-                                c.say(t, "You look like you're having a little less fun now!");
-                            else
-                                c.say(t, "You'll stay down, if you know what's good for you.");
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
-                            if(hostility > 66)
-                                say(t, (new StringBuilder("I'm... I'm going to enjoy watching you break, ")).append(c.getMainName()).append("...").toString());
-                            else
-                            if(hostility > 33)
-                                say(t, "You'll... regret... that...");
-                            else
-                                say(t, "I... probably deserved that.");
-                        } else
-                        if(c.getConfidence() > 33)
-                        {
-                            if(innocence > 66)
-                                c.say(t, "Have you finally learned your lesson?");
-                            else
-                            if(innocence > 33)
-                                c.say(t, "I hope you're giving up.");
-                            else
-                                c.say(t, "What are you plotting now?");
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
-                            if(flavorObedience() > 66)
-                                say(t, "I'm no use to the Demon Lord if I'm dead.");
-                            else
-                            if(flavorObedience() > 33)
-                                say(t, "The Demon Lord might not be happy, but I can deal with that later.");
-                            else
-                                say(t, "Guh, why did the Demon Lord have to make me so weak!?");
-                        } else
-                        {
-                            if(hostility > 66)
-                                c.say(t, (new StringBuilder("I really thought... ")).append(heShe()).append(" was going to kill me...").toString());
-                            else
-                            if(hostility > 33)
-                                c.say(t, "This is my chance!");
-                            else
-                                c.say(t, "I'm.... I'm strong enough after all...!");
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
-                            if(confidence > 66)
-                                say(t, "I'm not done with you yet!");
-                            else
-                            if(confidence > 33)
-                                say(t, "This isn't over!");
-                            else
-                                say(t, "I-I can still fight!");
-                        }
-                        say(t, "\"");
-                    } else
-                    if(disgrace > 33)
-                    {
-                        c.say(t, "\"");
-                        if(c.getInnocence() > 66)
-                        {
-                            if(flavorObedience() > 66)
-                                c.say(t, "Whew...  You must really love the Demon Lord, huh?");
-                            else
-                            if(flavorObedience() > 33)
-                                c.say(t, "Huuuh...  Phew...");
-                            else
-                                c.say(t, "Come on, if you don't like the Demon Lord, then just give up already!");
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
-                            if(confidence > 66)
-                                say(t, "I never give up!");
-                            else
-                            if(confidence > 33)
-                                say(t, "Gah, haaah...");
-                            else
-                                say(t, "I can't stop... here...!");
-                        } else
-                        if(c.getInnocence() > 33)
-                        {
-                            if(dignity > 66)
-                                c.say(t, "Don't you ever get tired!?");
-                            else
-                            if(dignity > 33)
-                                c.say(t, "You look like you're tiring out.");
-                            else
-                                c.say(t, "Can't believe you're still standing...");
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
-                            if(flavorObedience() > 66)
-                                say(t, "If it's for the Demon Lord, I'll fight forever.");
-                            else
-                            if(flavorObedience() > 33)
-                                say(t, "The Demon Lord has a way of motivating us.");
-                            else
-                                say(t, "I'm not done yet.");
-                        } else
-                        {
-                            if(confidence > 66)
-                                c.say(t, "I will not be intimidated!");
-                            else
-                            if(confidence > 33)
-                                c.say(t, "I won't allow you to provoke me!");
-                            else
-                                c.say(t, "You won't be able to fool me into letting my guard down.");
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
-                            if(hostility > 66)
-                                say(t, "You think you can stop me from hurting you?");
-                            else
-                            if(hostility > 33)
-                                say(t, "We'll see about that.");
-                            else
-                                say(t, "Good.");
-                        }
-                        say(t, "\"");
-                    } else
-                    {
-                        c.say(t, "\"");
-                        if(c.getConfidence() > 66)
-                        {
-                            if(hostility > 66)
-                                c.say(t, "You... monster...");
-                            else
-                            if(hostility > 33)
-                                c.say(t, "I can still... stand up...!");
-                            else
-                                c.say(t, "I don't... understand you...");
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
-                            if(deviancy > 66)
-                                say(t, "Your broken body is so beautiful...");
-                            else
-                            if(deviancy > 33)
-                                say(t, "I'm not satisfied yet.");
-                            else
-                                say(t, "Go on, get up.");
-                        } else
-                        if(c.getConfidence() > 33)
-                        {
-                            if(deviancy > 66)
-                                c.say(t, (new StringBuilder("I can't let ")).append(himHer()).append(" find me again, or ").append(heShe()).append("'ll...").toString());
-                            else
-                            if(deviancy > 33)
-                                c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append("'s just playing with me...!").toString());
-                            else
-                                c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append("'s too strong...!").toString());
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
-                            if(innocence > 66)
-                                say(t, "Found you!");
-                            else
-                            if(innocence > 33)
-                                say(t, "There you are!");
-                            else
-                                say(t, "You cannot hide from me.");
-                        } else
-                        {
-                            if(innocence > 66)
-                                c.say(t, "Maybe i-if I play dead...");
-                            else
-                            if(innocence > 33)
-                                c.say(t, "...");
-                            else
-                                c.say(t, "You win!  There's no point in going further, r-right...?");
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
-                            if(hostility > 66)
-                                say(t, "No, no, you need to suffer much more than this...");
-                            else
-                            if(hostility > 33)
-                                say(t, "Hm, what to do with you...?");
-                            else
-                                say(t, "You can't give up just yet.  I won't let you.");
-                        }
-                        say(t, "\"");
-                    }
-                } else
-                if(styleDamage[3] > 0)
-                {
-                    if(deviancy > 66)
-                    {
-                        c.say(t, "\"");
-                        if(c.getDignity() > 66)
-                        {
-                            if(innocence > 66)
-                                c.say(t, "Stop playing around!");
-                            else
-                            if(innocence > 33)
-                                c.say(t, "L-Let go!");
-                            else
-                                c.say(t, "You sneaky little-");
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
-                            if(hostility > 66)
-                                say(t, "You're so easy to hurt!");
-                            else
-                            if(hostility > 33)
-                                say(t, "Come on, show me!");
-                            else
-                                say(t, "Everyone needs to see this.");
-                        } else
-                        if(c.getDignity() > 33)
-                        {
-                            if(disgrace > 66)
-                                c.say(t, "What do you think you're-");
-                            else
-                            if(disgrace > 33)
-                                c.say(t, "Aaah!");
-                            else
-                                c.say(t, (new StringBuilder("I can't stop ")).append(himHer()).append("-").toString());
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
-                            if(confidence > 66)
-                                say(t, "I'll take you right here!");
-                            else
-                            if(confidence > 33)
-                                say(t, "Mm, you're so soft...");
-                            else
-                                say(t, "Aaah~  I c-can't resist...!");
-                        } else
-                        {
-                            if(confidence > 66)
-                                c.say(t, "Come and get me.");
-                            else
-                            if(confidence > 33)
-                                c.say(t, "Let's try this.");
-                            else
-                                c.say(t, "Look, I'm defenseless.");
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
-                            if(innocence > 66)
-                                say(t, "Yes, gimme, gimme!");
-                            else
-                            if(innocence > 33)
-                                say(t, "Oh, wow!  Oh, wow!");
-                            else
-                                say(t, "I'd never fall for... s-such a... nngh, I want iiit!");
-                        }
-                        say(t, "\"");
-                    } else
-                    if(deviancy > 33)
-                    {
-                        say(t, "\"");
-                        if(c.getDignity() > 66)
-                        {
-                            if(innocence > 66)
-                                say(t, "You look so naughty!");
-                            else
-                            if(innocence > 33)
-                                say(t, "Feeling a bit chilly?");
-                            else
-                                say(t, "You're finally noticing?");
-                            say(t, "\"\n\n");
-                            c.say(t, "\"");
-                            if(hostility > 66)
-                                c.say(t, "I won't let you tear me down!");
-                            else
-                            if(hostility > 33)
-                                c.say(t, "Wipe that smirk off your face!");
-                            else
-                                c.say(t, "You're just another pervert after all...!");
-                        } else
-                        if(c.getDignity() > 33)
-                        {
-                            if(flavorObedience() > 66)
-                                say(t, "If you oppose the Demon Lord, you don't get to wear clothes.");
-                            else
-                            if(flavorObedience() > 33)
-                                say(t, "I don't mind complying with this kind of order.");
-                            else
-                                say(t, "I want to see more of you.");
-                            say(t, "\"\n\n");
-                            c.say(t, "\"");
-                            if(disgrace > 66)
-                                c.say(t, "I won't let you bring me down to your level!");
-                            else
-                            if(disgrace > 33)
-                                c.say(t, "I can still stop you!");
-                            else
-                                c.say(t, "My clothes are too fragile...!");
-                        } else
-                        {
-                            if(hostility > 66)
-                                say(t, "You won't be able to show your face in public after I'm done with you!");
-                            else
-                            if(hostility > 33)
-                                say(t, "Come on, show some embarrassment!");
-                            else
-                                say(t, "Aren't you going to cover yourself?");
-                            say(t, "\"\n\n");
-                            c.say(t, "\"");
-                            if(innocence > 66)
-                                c.say(t, "Idiot, this won't stop me from fighting!");
-                            else
-                            if(innocence > 33)
-                                c.say(t, "What are you even trying to do?");
-                            else
-                                c.say(t, "Is this the best plan you can come up with?");
-                        }
-                        c.say(t, "\"");
-                    } else
-                    {
-                        c.say(t, "\"");
-                        if(c.getConfidence() > 66)
-                        {
-                            if(hostility > 66)
-                                c.say(t, "You're doing a pretty bad job at killing me.");
-                            else
-                            if(hostility > 33)
-                                c.say(t, "You still haven't put a scratch on me.");
-                            else
-                                c.say(t, "You're being careful not to hurt me.  That's annoying.");
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
-                            if(flavorObedience() > 66)
-                                say(t, "The Demon Lord is the one who really decides your fate.");
-                            else
-                            if(flavorObedience() > 33)
-                                say(t, "For now, I'm following my orders.");
-                            else
-                                say(t, "I know what I'm doing.");
-                        } else
-                        if(c.getConfidence() > 33)
-                        {
-                            if(confidence > 66)
-                                c.say(t, "I-I thought you were above hiding!");
-                            else
-                            if(confidence > 33)
-                                c.say(t, "Face me out in the open!");
-                            else
-                                c.say(t, "Too cowardly to face me head-on!?");
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
-                            if(innocence > 66)
-                                say(t, "I'm right here!");
-                            else
-                            if(innocence > 33)
-                                say(t, "Take this!");
-                            else
-                                say(t, "This worked out perfectly.");
-                        } else
-                        {
-                            if(disgrace > 66)
-                                c.say(t, "I don't need to be afraid, I don't need to be afraid...");
-                            else
-                            if(disgrace > 33)
-                                c.say(t, (new StringBuilder("If I can find the others before ")).append(heShe()).append(" catches me...").toString());
-                            else
-                                c.say(t, (new StringBuilder("I can't let ")).append(himHer()).append(" catch me...!").toString());
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
-                            if(hostility > 66)
-                                say(t, "Give up!  Give in to despair!");
-                            else
-                            if(hostility > 33)
-                                say(t, "You might have stood a chance if you weren't such a coward!");
-                            else
-                                say(t, "What did you expect to happen when you ran!?");
+                                say(t, "I may be one of the Forsaken, but I think you're more perverted than I am...");
                         }
                         say(t, "\"");
                     }
@@ -11398,1455 +9965,2971 @@ public class Forsaken
                     say(t, "\"");
                     if(c.getConfidence() > 66)
                     {
-                        if(flavorObedience() > 66)
-                            say(t, "I will kill anyone who disrespects the Demon Lord!");
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.ANGER);
+                        if(confidence > 66)
+                            say(t, "Yes, show me your rage, your hatred!");
                         else
-                        if(flavorObedience() > 33)
-                            say(t, "I'll make you show some respect!");
+                        if(confidence > 33)
+                            say(t, "I knew that would get a reaction out of you!");
                         else
-                            say(t, "You think you can afford to take me lightly!?");
+                            say(t, "I-It hurts you, doesn't it...?");
                         say(t, "\"\n\n");
                         c.say(t, "\"");
-                        if(disgrace > 66)
-                            c.say(t, "Don't try to pretend you have any chance against me!");
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                        if(c.morality > 66)
+                            c.say(t, "I won't let you hurt anyone else!");
                         else
-                        if(disgrace > 33)
-                            c.say(t, "We'll see about that!");
+                        if(c.morality > 33)
+                            c.say(t, "You monster!");
                         else
-                            c.say(t, "I don't care how strong you are, I'll never give in!");
+                            c.say(t, "After all the trouble I went through saving them!");
                     } else
                     if(c.getConfidence() > 33)
                     {
-                        if(disgrace > 66)
-                            say(t, "I'll still kill you!  Just wait and see!");
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.FOCUS);
+                        if(confidence > 66)
+                            say(t, "Go on, try to stop me.");
                         else
-                        if(disgrace > 33)
-                            say(t, "You will suffer and die!");
+                        if(confidence > 33)
+                            say(t, "You couldn't save them.  You can't save anyone.");
                         else
-                            say(t, "I'll kill you!  And those people too!  And everyone else!");
+                            say(t, "Saving people is so much harder... th-than killing them, I mean...");
                         say(t, "\"\n\n");
                         c.say(t, "\"");
-                        if(morality > 66)
-                            c.say(t, "What even happened to you...?");
-                        else
-                        if(morality > 33)
-                            c.say(t, "I won't let that happen.");
-                        else
-                            c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append("'s actually smiling...").toString());
+                        if(c.morality > 66)
+                        {
+                            c.say(t, "Why...?");
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.FEAR);
+                        } else
+                        if(c.morality > 33)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
+                            c.say(t, "No!  Don't involve anyone else!");
+                        } else
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                            c.say(t, "You need to be put down.");
+                        }
                     } else
                     {
-                        if(deviancy > 66)
-                            say(t, "And wait until you hear what I'm gonna do with your warm corpse!");
-                        else
-                        if(disgrace > 33)
-                            say(t, "I'm going to make you scream in all sorts of ways...");
-                        else
-                            say(t, "Are you ready to die?");
+                        if(confidence > 66)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                            say(t, "Are you going to run away, little Chosen?");
+                        } else
+                        if(confidence > 33)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.FOCUS);
+                            say(t, "Are you angry?  Afraid?");
+                        } else
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.JOY);
+                            say(t, "Look.  This is what I am, now...");
+                        }
                         say(t, "\"\n\n");
                         c.say(t, "\"");
-                        if(innocence > 66)
-                            c.say(t, "D-Do you even have any idea what you're saying!?");
-                        else
-                        if(innocence > 33)
-                            c.say(t, "I d-don't want to hear this!");
-                        else
-                            c.say(t, "No...  P-Please, stop talking...");
+                        if(c.morality > 66)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.FEAR);
+                            c.say(t, "No...  I would have done anything to save them, but you...");
+                        } else
+                        if(c.morality > 33)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.SHAME);
+                            c.say(t, "Just... Just to get my attention...?");
+                        } else
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.ANGER);
+                            c.say(t, (new StringBuilder("I need to kill ")).append(himHer()).append("... before ").append(heShe()).append(" kills me...!").toString());
+                        }
                     }
                     c.say(t, "\"");
                 } else
                 if(hostility > 33)
                 {
                     say(t, "\"");
-                    if(c.getInnocence() > 66)
+                    if(c.getConfidence() > 66)
                     {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
                         if(innocence > 66)
-                            say(t, "You stupid, dummy... dumb-head!");
+                            say(t, "Hurry up, dummy!  You'll never catch me like this!");
                         else
                         if(innocence > 33)
-                            say(t, "Idiot!  You have no business here on the battlefield!");
+                            say(t, "I could keep this up all day!");
                         else
-                            say(t, "Everyone knows that you're going to fail.  They're laughing at you behind your back.");
+                            say(t, "You don't even care that you're walking into a trap, do you?");
                         say(t, "\"\n\n");
                         c.say(t, "\"");
-                        if(morality > 66)
-                            c.say(t, "You big fat liar!");
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                        if(c.innocence > 66)
+                            c.say(t, "Now I'm really mad!");
                         else
-                        if(morality > 33)
-                            c.say(t, "Stop talking to yourself!  Stop talking to yourself!");
+                        if(c.innocence > 33)
+                            c.say(t, "Just fight me, coward!");
                         else
-                            c.say(t, "You're such a mean jerk!");
+                            c.say(t, "I will make you regret this!");
+                    } else
+                    if(c.getConfidence() > 33)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.FOCUS);
+                        if(innocence > 66)
+                            say(t, "That attack was so wimpy!  Can't you do any better!?");
+                        else
+                        if(innocence > 33)
+                            say(t, "Hey, dumbass!  Over here!");
+                        else
+                            say(t, "You only just noticed me!?  Oblivious fool!");
+                        say(t, "\"\n\n");
+                        c.say(t, "\"");
+                        if(c.innocence > 66)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.SHAME);
+                            c.say(t, "Why are you so mean!?");
+                        } else
+                        if(c.innocence > 33)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FOCUS, Project.Emotion.ANGER);
+                            c.say(t, "I won't let you get away!");
+                        } else
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FOCUS, Project.Emotion.ANGER);
+                            c.say(t, "Defeating you is a higher priority.");
+                        }
+                    } else
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                        if(innocence > 66)
+                            say(t, (new StringBuilder("Aw, is wittle ")).append(c.getMainName()).append(" gonna cry?").toString());
+                        else
+                        if(innocence > 33)
+                            say(t, "You weakling!  What are you even doing here!?");
+                        else
+                            say(t, "Pathetic excuse for a Chosen!  Worthless pretender!");
+                        say(t, "\"\n\n");
+                        c.say(t, "\"");
+                        if(c.innocence > 66)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.ANGER);
+                            c.say(t, "S-Stop it... g-go away...!");
+                        } else
+                        if(c.innocence > 33)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.ANGER);
+                            c.say(t, "Y-You don't have to rub it in...");
+                        } else
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                            c.say(t, "R-Ridiculous!  I won't let this get to me...!");
+                        }
+                    }
+                    c.say(t, "\"");
+                } else
+                {
+                    say(t, "\"");
+                    if(c.getConfidence() > 66)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
+                        if(innocence > 66)
+                            say(t, "The Demon Lord is still way, way stronger than you.");
+                        else
+                        if(innocence > 33)
+                            say(t, "You won't win with brute force.");
+                        else
+                            say(t, "Do you believe you can prevail against the Demon Lord with strength alone?  Foolish.");
+                        say(t, "\"\n\n");
+                        c.say(t, "\"");
+                        if(c.morality > 66)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.ANGER);
+                            c.say(t, "I am capable of finesse when needed!");
+                        } else
+                        if(c.morality > 33)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                            c.say(t, "Don't underestimate me!");
+                        } else
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                            c.say(t, "As if you'd know how to win, you failure!");
+                        }
+                    } else
+                    if(c.getConfidence() > 33)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.SHAME);
+                        if(innocence > 66)
+                            say(t, "If you're having trouble with me... then that means you're way, way weaker than the Demon Lord.");
+                        else
+                        if(innocence > 33)
+                            say(t, "I'd love to say that I think you have a chance against the Demon Lord... but I really can't.");
+                        else
+                            say(t, "Tell me, Chosen.  How will you be able to succeed against the Demon Lord where I failed?");
+                        say(t, "\"\n\n");
+                        c.say(t, "\"");
+                        if(c.morality > 66)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FOCUS, Project.Emotion.SHAME);
+                            c.say(t, "I won't give up!");
+                        } else
+                        if(c.morality > 33)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FOCUS, Project.Emotion.ANGER);
+                            c.say(t, "I will become stronger!");
+                        } else
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                            c.say(t, "You think you can scare me!?");
+                        }
+                    } else
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.SHAME, Project.Emotion.NEUTRAL);
+                        if(innocence > 66)
+                            say(t, "You sure you don't wanna quit?  This is kinda sad.");
+                        else
+                        if(innocence > 33)
+                            say(t, "I hoped you'd be able to beat the Demon Lord... how disappointing.");
+                        else
+                            say(t, "I say this without intending to offend: You have no chance whatsoever against the Demon Lord.");
+                        say(t, "\"\n\n");
+                        c.say(t, "\"");
+                        if(c.morality > 66)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
+                            c.say(t, "Then I'll just... lay down my life.  Even if it only saves a few people...");
+                        } else
+                        if(c.morality > 33)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.FOCUS);
+                            c.say(t, "E-Even so, I have to try...!");
+                        } else
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
+                            c.say(t, "Th-That's why I'm probably just gonna run away...");
+                        }
+                    }
+                    c.say(t, "\"");
+                }
+            } else
+            if(styleDamage[1] > 0)
+            {
+                if(deviancy > 66)
+                {
+                    c.say(t, "\"");
+                    if(c.confidence > 66)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                        if(c.morality > 66)
+                            c.say(t, "Th-This is wrong!  Stop at once!");
+                        else
+                        if(c.morality > 33)
+                            c.say(t, "I won't... let you...!");
+                        else
+                            c.say(t, "Stop, or I'll kill you!  Are you even listening!?");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.LEWD);
+                        if(innocence > 66)
+                            say(t, "I'm making you feel good, so what's the big deal?");
+                        else
+                        if(innocence > 33)
+                            say(t, "Come on, show me your cumming face...!");
+                        else
+                            say(t, "My technique is impossible to resist, even for one as strong as you!");
+                    } else
+                    if(c.confidence > 33)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                        if(c.morality > 66)
+                            c.say(t, "How can you enjoy something like this!?");
+                        else
+                        if(c.morality > 33)
+                            c.say(t, "Are you crazy!?");
+                        else
+                            c.say(t, "You twisted bitch!");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        if(innocence > 66)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.FOCUS);
+                            say(t, "You're so mean!  But that's okay, I'll make you feel good anyway!");
+                        } else
+                        if(innocence > 33)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.NEUTRAL);
+                            say(t, "No need to make this personal...");
+                        } else
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.NEUTRAL);
+                            say(t, "I suppose I am beyond help.");
+                        }
+                    } else
+                    {
+                        if(c.morality > 66)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.LEWD);
+                            c.say(t, "P-Please, stop...!  Aaah!");
+                        } else
+                        if(c.morality > 33)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.LEWD);
+                            c.say(t, "H-Help!  I don't want- Nnaah!");
+                        } else
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.LEWD);
+                            c.say(t, "Ngh...  Enjoy it while you... caaan!");
+                        }
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.FOCUS);
+                        if(innocence > 66)
+                            say(t, "Sorry... but I'm way too turned on to stop now...!");
+                        else
+                        if(innocence > 33)
+                            say(t, "It's okay, you'll start enjoying it more soon...");
+                        else
+                            say(t, "You can still resist?  I must refine my technique...");
+                    }
+                    say(t, "\"");
+                } else
+                if(deviancy > 33)
+                {
+                    c.say(t, "\"");
+                    if(c.confidence > 66)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                        if(c.morality > 66)
+                            c.say(t, "You deviant!  Stop at once!");
+                        else
+                        if(c.morality > 33)
+                            c.say(t, "You perverted freak!");
+                        else
+                            c.say(t, "I won't let myself... be used for your pleasure...!");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.FOCUS);
+                        if(innocence > 66)
+                            say(t, "I mean, I have to admit that this is fun, but I'm not even getting off right now.");
+                        else
+                        if(innocence > 33)
+                            say(t, "If I wanted to feel good, I wouldn't be doing it like this.");
+                        else
+                            say(t, "Unfortunately, I'm not feeling any pleasure whatsoever right now.");
+                    } else
+                    if(c.confidence > 33)
+                    {
+                        if(c.morality > 66)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.FEAR);
+                            c.say(t, "This is... wrong...!");
+                        } else
+                        if(c.morality > 33)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.ANGER);
+                            c.say(t, "I don't... want this...!");
+                        } else
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                            c.say(t, "Get... ugh... your disgusting hands off me...!");
+                        }
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.FOCUS);
+                        if(innocence > 66)
+                            say(t, "This is kinda perverted, isn't it?  Oh well.");
+                        else
+                        if(innocence > 33)
+                            say(t, "I'm getting pretty good at this.");
+                        else
+                            say(t, "This seems to be effective.");
+                    } else
+                    {
+                        if(c.morality > 66)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.LEWD);
+                            c.say(t, "P-Please, this feels...  Nn!");
+                        } else
+                        if(c.morality > 33)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
+                            c.say(t, "No!  L-Leave me alone!");
+                        } else
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                            c.say(t, "Ergh... just making yourself feel good...");
+                        }
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.NEUTRAL);
+                        if(innocence > 66)
+                            say(t, "You're actually kinda cute like this.");
+                        else
+                        if(innocence > 33)
+                            say(t, "It's better than if I were actually hurting you, right?");
+                        else
+                            say(t, "I'm impressed that you're resisting as well as you are.");
+                    }
+                    say(t, "\"");
+                } else
+                {
+                    c.say(t, "\"");
+                    if(c.confidence > 66)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                        if(c.morality > 66)
+                            c.say(t, "I have no interest in your perversions!");
+                        else
+                        if(c.morality > 33)
+                            c.say(t, "Do you really think that will work on me!?");
+                        else
+                            c.say(t, "You can't afford to mess around with me!");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.FOCUS);
+                        if(innocence > 66)
+                            say(t, "Wow, you really don't like this, do you?");
+                        else
+                        if(innocence > 33)
+                            say(t, "I'm just doing what I have to.");
+                        else
+                            say(t, "Well, attempting to restrain you with brute force would be futile.");
+                    } else
+                    if(c.confidence > 33)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                        if(c.morality > 66)
+                            c.say(t, "Hey!  This isn't a game!");
+                        else
+                        if(c.morality > 33)
+                            c.say(t, "Aren't we supposed to be fighting!?");
+                        else
+                            c.say(t, "This won't stop me from killing you!");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        if(innocence > 66)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
+                            say(t, "I'm not happy about having to fight in a pervy way, either!");
+                        } else
+                        if(innocence > 33)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.NEUTRAL);
+                            say(t, "Seems like this is your weak point, so I'm going to keep doing it.");
+                        } else
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
+                            say(t, "Regrettably, this tactic seems to be the most effective.");
+                        }
+                    } else
+                    {
+                        if(c.morality > 66)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
+                            c.say(t, "S-Stop!  Can't you just beat me up normally!?");
+                        } else
+                        if(c.morality > 33)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
+                            c.say(t, "Ah!  I c-can't...!");
+                        } else
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                            c.say(t, "Y-You're taking me too lightly!");
+                        }
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        if(innocence > 66)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                            say(t, "Ew, are you actually enjoying this?");
+                        } else
+                        if(innocence > 33)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
+                            say(t, "Believe me, I'm not enjoying it either.");
+                        } else
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.FOCUS);
+                            say(t, "It appears that the Demon Lord was correct about your latent masochism.");
+                        }
+                    }
+                    say(t, "\"");
+                }
+            } else
+            if(disgrace > 66)
+            {
+                c.say(t, "\"");
+                if(c.getConfidence() > 66)
+                {
+                    if(c.getMorality() > 66)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FOCUS, Project.Emotion.JOY);
+                        c.say(t, "This one might actually be weak enough to subdue and rescue!");
+                    } else
+                    if(c.getMorality() > 33)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FOCUS, Project.Emotion.NEUTRAL);
+                        c.say(t, "I need to swat this one down before I go back to fighting the Demons.");
+                    } else
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                        c.say(t, "Are you so eager to die, pathetic Forsaken!?");
+                    }
+                    c.say(t, "\"\n\n");
+                    say(t, "\"");
+                    if(innocence > 66)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
+                        say(t, "Ah, crap, now I've got the strong one after me!");
+                    } else
+                    if(innocence > 33)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.STRUGGLE);
+                        say(t, "Alright, time to go on the defensive.");
+                    } else
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.FOCUS);
+                        say(t, "I must use my limited resources to the fullest...");
+                    }
+                } else
+                if(c.getConfidence() > 33)
+                {
+                    if(c.getMorality() > 66)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FOCUS, Project.Emotion.FEAR);
+                        c.say(t, (new StringBuilder("If I ignore ")).append(himHer()).append(", ").append(heShe()).append(" might go after the civilians.").toString());
+                    } else
+                    if(c.getMorality() > 33)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.NEUTRAL, Project.Emotion.FOCUS);
+                        c.say(t, "If I let my guard down, even this one could still hurt me.");
+                    } else
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                        c.say(t, "Get out of my way!");
+                    }
+                    c.say(t, "\"\n\n");
+                    say(t, "\"");
+                    if(innocence > 66)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.SHAME, Project.Emotion.FEAR);
+                        say(t, "Being weak is tough...");
+                    } else
+                    if(innocence > 33)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.SHAME, Project.Emotion.NEUTRAL);
+                        say(t, "This might be tough.");
+                    } else
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.SHAME);
+                        say(t, "So long as I'm careful, I have nothing to fear.");
+                    }
+                } else
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.SHAME);
+                    if(c.getMorality() > 66)
+                        c.say(t, (new StringBuilder("I d-don't want to fight ")).append(himHer()).append("...").toString());
+                    else
+                    if(c.getMorality() > 33)
+                        c.say(t, "Wh-Why am I such a coward...?");
+                    else
+                        c.say(t, "P-Protecting myself comes first!");
+                    c.say(t, "\"\n\n");
+                    say(t, "\"");
+                    Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                    if(innocence > 66)
+                        say(t, (new StringBuilder("Wow, I actually scared ")).append(c.himHer()).append("!").toString());
+                    else
+                    if(innocence > 33)
+                        say(t, "Heh.  This is actually working.");
+                    else
+                        say(t, "I should have no trouble against such a weak-willed foe.");
+                }
+                say(t, "\"");
+            } else
+            if(disgrace > 33)
+            {
+                c.say(t, "\"");
+                if(c.getConfidence() > 66)
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FOCUS, Project.Emotion.ANGER);
+                    if(c.getMorality() > 66)
+                        c.say(t, "You cannot stand against the power of my righteousness, Forsaken!");
+                    else
+                    if(c.getMorality() > 33)
+                        c.say(t, "Do you really think you stand a chance against me!?");
+                    else
+                        c.say(t, "You'll regret standing in my way!");
+                    c.say(t, "\"\n\n");
+                    say(t, "\"");
+                    Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.ANGER);
+                    if(confidence > 66)
+                        say(t, "We'll see who's stronger!");
+                    else
+                    if(confidence > 33)
+                        say(t, "I can definitely slow you down.");
+                    else
+                        say(t, "I-I'm stronger than I look!");
+                } else
+                if(c.getConfidence() > 33)
+                {
+                    if(c.getMorality() > 66)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FOCUS, Project.Emotion.STRUGGLE);
+                        c.say(t, "I can't lose here!");
+                    } else
+                    if(c.getMorality() > 33)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.FOCUS);
+                        c.say(t, "You're actually pretty strong.");
+                    } else
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                        c.say(t, "Ugh, can't we do this some other time?");
+                    }
+                    c.say(t, "\"\n\n");
+                    say(t, "\"");
+                    if(confidence > 66)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                        say(t, "I've got the upper hand.");
+                    } else
+                    if(confidence > 33)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.STRUGGLE);
+                        say(t, "Hmph!");
+                    } else
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.STRUGGLE);
+                        say(t, "Y-You don't have time to talk!");
+                    }
+                } else
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
+                    if(c.getMorality() > 66)
+                        c.say(t, "I-I'm sorry, but I'm too weak...!");
+                    else
+                    if(c.getMorality() > 33)
+                        c.say(t, "Th-This one's strong!");
+                    else
+                        c.say(t, "Run away!");
+                    c.say(t, "\"\n\n");
+                    say(t, "\"");
+                    Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                    if(confidence > 66)
+                        say(t, "You can run, but you can't hide.");
+                    else
+                    if(confidence > 33)
+                        say(t, (new StringBuilder("Looks like ")).append(c.heShe()).append("'s not fighting back.").toString());
+                    else
+                        say(t, (new StringBuilder("I-I've got ")).append(c.himHer()).append(" on the run!").toString());
+                }
+                say(t, "\"");
+            } else
+            {
+                c.say(t, "\"");
+                if(c.getConfidence() > 66)
+                {
+                    if(c.getMorality() > 66)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.FEAR);
+                        c.say(t, "I must not... give in...!");
+                    } else
+                    if(c.getMorality() > 33)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.ANGER);
+                        c.say(t, "You... got lucky...!");
+                    } else
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                        c.say(t, "You'll... pay for that...!");
+                    }
+                    c.say(t, "\"\n\n");
+                    say(t, "\"");
+                    Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.JOY);
+                    if(innocence > 66)
+                        say(t, "Hm?  Did I really hit you that hard?");
+                    else
+                    if(innocence > 33)
+                        say(t, "Looks like you aren't so strong after all.");
+                    else
+                        say(t, "Your self-confidence is worth far less than the faith of all those who still believe in me.");
+                } else
+                if(c.getConfidence() > 33)
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
+                    if(c.getMorality() > 66)
+                        c.say(t, "I... I won't run-");
+                    else
+                    if(c.getMorality() > 33)
+                        c.say(t, "I might need to run-");
+                    else
+                        c.say(t, "Gah, I need to run-");
+                    c.say(t, "\"\n\n");
+                    say(t, "\"");
+                    if(innocence > 66)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                        say(t, "Too laaate~!");
+                    } else
+                    if(innocence > 33)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.STRUGGLE);
+                        say(t, "Hyah!");
+                    } else
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.NEUTRAL);
+                        say(t, "I will not allow you to escape!");
+                    }
+                } else
+                {
+                    if(c.getMorality() > 66)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.SHAME);
+                        c.say(t, "I won't lose hope...!");
+                    } else
+                    if(c.getMorality() > 33)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
+                        c.say(t, "N-No!  Leave me alone!");
+                    } else
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
+                        c.say(t, "I-I give up!  Let me go!");
+                    }
+                    c.say(t, "\"\n\n");
+                    say(t, "\"");
+                    Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.FOCUS);
+                    if(innocence > 66)
+                        say(t, "Let's play together.");
+                    else
+                    if(innocence > 33)
+                        say(t, "Let's do this.");
+                    else
+                        say(t, "You understand that you're in a hopeless position.  Good.");
+                }
+                say(t, "\"");
+            }
+        } else
+        if(c.captureProgression % 6 == 1)
+        {
+            if(styleDamage[1] > 0)
+            {
+                if(styleDamage[2] > 0)
+                {
+                    if(disgrace > 66)
+                    {
+                        c.say(t, "\"");
+                        if(deviancy > 66)
+                        {
+                            if(c.getInnocence() > 66)
+                            {
+                                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
+                                c.say(t, "Y-You're totally crazy!");
+                            } else
+                            if(c.getInnocence() > 33)
+                            {
+                                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.ANGER);
+                                c.say(t, "Don't you even care what happens to you!?");
+                            } else
+                            {
+                                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.ANGER);
+                                c.say(t, "You... You animal...!");
+                            }
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.FOCUS);
+                            if(c.getConfidence() > 66)
+                                say(t, "Nngh, yes, look down on me...!");
+                            else
+                            if(c.getConfidence() > 33)
+                                say(t, "This is the only way I can feel alive...!");
+                            else
+                                say(t, "Heh, are you scared of feeling good...?  You should be.");
+                        } else
+                        if(deviancy > 33)
+                        {
+                            if(c.getConfidence() > 66)
+                            {
+                                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                                c.say(t, "You're just... getting lucky...!");
+                            } else
+                            if(c.getConfidence() > 33)
+                            {
+                                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.ANGER);
+                                c.say(t, "Stop it, stop it!");
+                            } else
+                            {
+                                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
+                                c.say(t, "I-I want to resist, but...");
+                            }
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(c.getMorality() > 66)
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.STRUGGLE);
+                                say(t, "Why are you holding back?  Come on, I know you can hurt me!");
+                            } else
+                            if(c.getMorality() > 33)
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.FOCUS);
+                                say(t, "Ah, this hurts so good...!");
+                            } else
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.LEWD);
+                                say(t, "Yes, that anger...  Let it out on me...!");
+                            }
+                        } else
+                        {
+                            if(c.getMorality() > 66)
+                            {
+                                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.FEAR);
+                                c.say(t, "Why are you doing this!?");
+                            } else
+                            if(c.getMorality() > 33)
+                            {
+                                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                                c.say(t, "Back off!");
+                            } else
+                            {
+                                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                                c.say(t, "You're really pissing me off...!");
+                            }
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.NEUTRAL);
+                            if(c.getConfidence() > 66)
+                                say(t, "If you want me to stop, then stop me.");
+                            else
+                            if(c.getConfidence() > 33)
+                                say(t, "I actually think you're enjoying this more than I am.");
+                            else
+                                say(t, "Are you too turned on to fight back properly?  That's too bad.");
+                        }
+                        say(t, "\"");
+                    } else
+                    if(disgrace > 33)
+                    {
+                        c.say(t, "\"");
+                        if(c.getDignity() > 66)
+                        {
+                            if(hostility > 66)
+                            {
+                                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.SHAME);
+                                c.say(t, "It just... ngh... j-just hurts...!");
+                            } else
+                            if(hostility > 33)
+                            {
+                                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.ANGER);
+                                c.say(t, "I-I could stop you if I wanted to!");
+                            } else
+                            {
+                                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                                c.say(t, "T-Trying to make me feel good is pointless!");
+                            }
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.NEUTRAL);
+                            if(innocence > 66)
+                                say(t, "Okay, but I'm gonna keep doing this!");
+                            else
+                            if(innocence > 33)
+                                say(t, "Then why don't you stop me?");
+                            else
+                                say(t, "A poor bluff.");
+                        } else
+                        if(c.getDignity() > 33)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.SHAME);
+                            if(deviancy > 66)
+                                c.say(t, "Y-You're just... satisfying yourself...!");
+                            else
+                            if(deviancy > 33)
+                                c.say(t, "Ugh, you look like you're having a good time...");
+                            else
+                                c.say(t, "You don't look like you're enjoying this, so why...?");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(flavorObedience() > 66)
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                                say(t, "I enjoy everything I do in service to the Demon Lord.");
+                            } else
+                            if(flavorObedience() > 33)
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.FOCUS);
+                                say(t, "I'm only following my orders.");
+                            } else
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
+                                say(t, "This is how I fight.");
+                            }
+                        } else
+                        {
+                            if(hostility > 66)
+                            {
+                                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.FEAR);
+                                c.say(t, "Aaagh, it huuurts!");
+                            } else
+                            if(hostility > 33)
+                            {
+                                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.LEWD);
+                                c.say(t, "Ow... nnaaah, oooh!");
+                            } else
+                            {
+                                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
+                                c.say(t, "F-Feels... goood...!");
+                            }
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(confidence > 66)
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.ANGER);
+                                say(t, "Is that all you can do!?");
+                            } else
+                            if(confidence > 33)
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                                say(t, "You're weak right there, aren't you?");
+                            } else
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.FOCUS);
+                                say(t, "Wow, I-I'm completely in control...");
+                            }
+                        }
+                        say(t, "\"");
+                    } else
+                    {
+                        say(t, "\"");
+                        if(hostility > 66)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.ANGER);
+                            if(c.getInnocence() > 66)
+                                say(t, "Idiot!  Do you understand now that you never should have got in my way!?");
+                            else
+                            if(c.getInnocence() > 33)
+                                say(t, "Scream for me!");
+                            else
+                                say(t, "Heh, you look like you're regretting your actions.");
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            if(c.getConfidence() > 66)
+                            {
+                                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                                c.say(t, "I... won't... ngh... beg...!");
+                            } else
+                            if(c.getConfidence() > 33)
+                            {
+                                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.FEAR);
+                                c.say(t, "It's... too much...!");
+                            } else
+                            {
+                                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
+                                c.say(t, "Please, forgive meee!");
+                            }
+                        } else
+                        if(hostility > 33)
+                        {
+                            if(c.getConfidence() > 66)
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                                say(t, "Still trying to resist?  How annoying.");
+                            } else
+                            if(c.getConfidence() > 33)
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                                say(t, "How about this?");
+                            } else
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.JOY);
+                                say(t, "You're making such cute little noises.");
+                            }
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.FEAR);
+                            if(c.getDignity() > 66)
+                                c.say(t, "I-I'm not- Nn!  Not feeling anything at all!");
+                            else
+                            if(c.getDignity() > 33)
+                                c.say(t, "Stop... this...!");
+                            else
+                                c.say(t, "Aaagh, gaaah!");
+                        } else
+                        {
+                            if(c.getInnocence() > 66)
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.SHAME, Project.Emotion.ANGER);
+                                say(t, "I hoped that you wouldn't be the sort to enjoy this sort of thing.");
+                            } else
+                            if(c.getInnocence() > 33)
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.SHAME);
+                                say(t, "I don't want to be this rough, but you aren't leaving me any choice.");
+                            } else
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.FOCUS);
+                                say(t, "You seem like you're trying to learn how to handle this.");
+                            }
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            if(c.getMorality() > 66)
+                            {
+                                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
+                                c.say(t, "Am I really so weak...?");
+                            } else
+                            if(c.getMorality() > 33)
+                            {
+                                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.ANGER);
+                                c.say(t, "I get it, just let me go already!");
+                            } else
+                            {
+                                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                                c.say(t, "F-Fuck you!");
+                            }
+                        }
+                        c.say(t, "\"");
+                    }
+                } else
+                if(deviancy > 66)
+                {
+                    c.say(t, "\"");
+                    if(c.getInnocence() > 66)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
+                        if(hostility > 66)
+                            c.say(t, "S-Stop!  You're hurting me!");
+                        else
+                        if(hostility > 33)
+                            c.say(t, "Th-This is really weird!");
+                        else
+                            c.say(t, "N-No!  I don't wanna feel good!");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.FOCUS);
+                        if(innocence > 66)
+                            say(t, "I'm gonna make you super perveted, like me!");
+                        else
+                        if(innocence > 33)
+                            say(t, "Ah, this is wonderful!");
+                        else
+                            say(t, "I'm... nn... stealing away your innocence...!");
                     } else
                     if(c.getInnocence() > 33)
                     {
-                        if(disgrace > 66)
-                            say(t, "I've been having a good time watching the Thralls play with you!");
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                        if(innocence > 66)
+                            c.say(t, "You have no idea what you're doing!");
                         else
-                        if(disgrace > 33)
-                            say(t, "You want me to stop talking?  Come and make me!");
+                        if(innocence > 33)
+                            c.say(t, "Stop doing all this screwed up stuff!");
                         else
-                            say(t, "Which of your friends do you think I should go after next?");
-                        say(t, "\"\n\n");
-                        c.say(t, "\"");
-                        if(flavorObedience() > 66)
-                            c.say(t, "You're just the Demon Lord's bitch!");
+                            c.say(t, "What are you even trying to accomplish by doing this!?");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.FOCUS);
+                        if(morality > 66)
+                            say(t, "The fact that I know it's wrong... makes it even kinkier!");
                         else
-                        if(flavorObedience() > 33)
-                            c.say(t, "I'm not going to waste time listening to some coward who couldn't even beat the Demon Lord!");
+                        if(morality > 33)
+                            say(t, "I'll never stop, this is what I live for!");
                         else
-                            c.say(t, "You think this is a game!?");
+                            say(t, "It feels good, that's all that matters.");
                     } else
                     {
-                        if(flavorObedience() > 66)
-                            say(t, "I've devoted my life to the great Demon Lord!");
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.FOCUS);
+                        if(disgrace > 66)
+                            c.say(t, "I-I'll stop you by force!");
                         else
-                        if(flavorObedience() > 33)
-                            say(t, "I'm just looking out for myself, because no one else will.");
+                        if(disgrace > 33)
+                            c.say(t, "W-Wasting effort on this will simply make it easier to defeat you!");
                         else
-                            say(t, "I'm having a good time.  How about you?");
+                            c.say(t, "S-Someone strong enough to stop you will come eventually!");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.LEWD);
+                        if(confidence > 66)
+                            say(t, "Go on, try!  That makes it feel even better!");
+                        else
+                        if(confidence > 33)
+                            say(t, "Even if doing this gets me killed, it's still worth it.");
+                        else
+                            say(t, "I don't care... I just want to feel good and forget everything...");
+                    }
+                    say(t, "\"");
+                } else
+                if(deviancy > 33)
+                {
+                    say(t, "\"");
+                    if(c.getDignity() > 66)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.FOCUS);
+                        if(innocence > 66)
+                            say(t, "Um, are you trying to pretend that didn't feel good?");
+                        else
+                        if(innocence > 33)
+                            say(t, "Looks like a part of you is asking me to continue.");
+                        else
+                            say(t, "Protest as much as you like, but your pleasure is obvious.");
                         say(t, "\"\n\n");
                         c.say(t, "\"");
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                        if(confidence > 66)
+                            c.say(t, "You brute!");
+                        else
+                        if(confidence > 33)
+                            c.say(t, "D-Don't be ridiculous!");
+                        else
+                            c.say(t, "Sneaky little...!");
+                    } else
+                    if(c.getDignity() > 33)
+                    {
+                        if(hostility > 66)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.LEWD);
+                            say(t, "I still want to make you scream.");
+                        } else
+                        if(hostility > 33)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.LEWD);
+                            say(t, "Well, I enjoyed myself.");
+                        } else
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.SHAME, Project.Emotion.LEWD);
+                            say(t, "I might have gone too far...");
+                        }
+                        say(t, "\"\n\n");
+                        c.say(t, "\"");
+                        if(disgrace > 66)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                            c.say(t, "I won't let you do that again!");
+                        } else
+                        if(disgrace > 33)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.ANGER);
+                            c.say(t, (new StringBuilder("Ugh, I can't let ")).append(himHer()).append(" do what ").append(heShe()).append(" wants...").toString());
+                        } else
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
+                            c.say(t, "S-Stay back!");
+                        }
+                    } else
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.FOCUS);
+                        if(confidence > 66)
+                            say(t, "What do you think of my technique?");
+                        else
+                        if(confidence > 33)
+                            say(t, "Looks like that had a nice effect.");
+                        else
+                            say(t, "H-Heh, looks like it worked...");
+                        say(t, "\"\n\n");
+                        c.say(t, "\"");
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.LEWD);
+                        if(hostility > 66)
+                            c.say(t, "Ow...  You're... rough...");
+                        else
+                        if(hostility > 33)
+                            c.say(t, "I... I need a break...");
+                        else
+                            c.say(t, "I'll admit... that felt good...");
+                    }
+                    c.say(t, "\"");
+                } else
+                {
+                    say(t, "\"");
+                    if(c.getDignity() > 66)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.FOCUS);
+                        if(innocence > 66)
+                            say(t, "I guess it's not working.  Oh well.");
+                        else
+                        if(innocence > 33)
+                            say(t, "Time to try something different.");
+                        else
+                            say(t, "I wonder, are you really not feeling anything?");
+                        say(t, "\"\n\n");
+                        c.say(t, "\"");
+                        if(disgrace > 66)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                            c.say(t, "Hmph.  It'd take more than that.");
+                        } else
+                        if(disgrace > 33)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.LEWD);
+                            c.say(t, "L-Let's just fight normally, then!");
+                        } else
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
+                            c.say(t, "Huuh...  Phew...");
+                        }
+                    } else
+                    if(c.getDignity() > 33)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.STRUGGLE);
+                        if(disgrace > 66)
+                            say(t, "Close one...!");
+                        else
+                        if(disgrace > 33)
+                            say(t, "Too slow!");
+                        else
+                            say(t, "It's pointless to resist.");
+                        say(t, "\"\n\n");
+                        c.say(t, "\"");
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                        if(confidence > 66)
+                            c.say(t, "You... smug...!");
+                        else
+                        if(confidence > 33)
+                            c.say(t, "Can't let that happen again...");
+                        else
+                            c.say(t, "Ugh, coward...!");
+                    } else
+                    {
+                        if(hostility > 66)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                            say(t, "Disgusting.  Just die.");
+                        } else
+                        if(hostility > 33)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
+                            say(t, "Ugh, you pervert.");
+                        } else
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.SHAME, Project.Emotion.ANGER);
+                            say(t, "I really was hoping your body wouldn't be so weak to this.");
+                        }
+                        say(t, "\"\n\n");
+                        c.say(t, "\"");
+                        if(innocence > 66)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.SHAME);
+                            c.say(t, "Huh...?  What...?");
+                        } else
+                        if(innocence > 33)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                            c.say(t, "No one asked you!");
+                        } else
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                            c.say(t, "I expect you'd fare no better!");
+                        }
+                    }
+                    c.say(t, "\"");
+                }
+            } else
+            if(styleDamage[2] > 0)
+            {
+                if(disgrace > 66)
+                {
+                    c.say(t, "\"");
+                    if(c.getConfidence() > 66)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.ANGER);
+                        if(dignity > 66)
+                            c.say(t, "Ergh...  You live up to your old reputation...!");
+                        else
+                        if(dignity > 33)
+                            c.say(t, "You're actually giving me a hard time!");
+                        else
+                            c.say(t, "You're- ngh!  Completely crazy!");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                        if(innocence > 66)
+                            say(t, "Hahah, thanks!");
+                        else
+                        if(innocence > 33)
+                            say(t, "I can't hold back, especially against someone like you.");
+                        else
+                            say(t, "I do not need brute force in order to win!");
+                    } else
+                    if(c.getConfidence() > 33)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.FEAR);
+                        if(innocence > 66)
+                            c.say(t, "It's like fighting a wild animal...!");
+                        else
+                        if(innocence > 33)
+                            c.say(t, "Can't believe I'm getting pushed back...!");
+                        else
+                            c.say(t, "I should be able to win this, but...!");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        if(hostility > 66)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                            say(t, "Kill, kill, kill!");
+                        } else
+                        if(hostility > 33)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.ANGER);
+                            say(t, "Graaah!");
+                        } else
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.STRUGGLE);
+                            say(t, "You shouldn't rely on your powers so much.");
+                        }
+                    } else
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
+                        if(hostility > 66)
+                            c.say(t, "I-I'm actually going to die...!");
+                        else
+                        if(hostility > 33)
+                            c.say(t, "Such... hatred...!");
+                        else
+                            c.say(t, "Even against one of the weaker Forsaken, I-I can't...");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                        if(confidence > 66)
+                            say(t, "This is why you shouldn't underestimate me!");
+                        else
+                        if(confidence > 33)
+                            say(t, "Is this really all you can do!?");
+                        else
+                            say(t, "Yeah, this is pretty pathetic.");
+                    }
+                    say(t, "\"");
+                } else
+                if(disgrace > 33)
+                {
+                    c.say(t, "\"");
+                    if(c.getConfidence() > 66)
+                    {
+                        if(hostility > 66)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                            c.say(t, "Face me, coward!");
+                        } else
+                        if(hostility > 33)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FOCUS, Project.Emotion.STRUGGLE);
+                            c.say(t, "You won't have an easy time hurting me!");
+                        } else
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FOCUS, Project.Emotion.JOY);
+                            c.say(t, "A straightforward fight.  Just how I like it!");
+                        }
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.STRUGGLE);
+                        if(confidence > 66)
+                            say(t, "Fine, let's see what you can do!");
+                        else
+                        if(confidence > 33)
+                            say(t, "Alright, let's do this!");
+                        else
+                            say(t, "I-I'm not giving up!");
+                    } else
+                    if(c.getConfidence() > 33)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FOCUS, Project.Emotion.STRUGGLE);
+                        if(confidence > 66)
+                            c.say(t, "I... think I can beat you...!");
+                        else
+                        if(confidence > 33)
+                            c.say(t, "Pretty... tough...!");
+                        else
+                            c.say(t, "You're... stronger than you look...!");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.STRUGGLE);
+                        if(innocence > 66)
+                            say(t, "I'm totally holding back my full power, just watch!");
+                        else
+                        if(innocence > 33)
+                            say(t, "Hyaaah!");
+                        else
+                            say(t, "Hmph!  How about this!?");
+                    } else
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                         if(deviancy > 66)
-                            c.say(t, "You're completely twisted.");
+                            c.say(t, "S-Stop... looking at me like that... please...!");
                         else
                         if(deviancy > 33)
-                            c.say(t, "You take a degree of sexual enjoyment from it as well.");
+                            c.say(t, (new StringBuilder("I-It's like... ")).append(heShe()).append("'s just enjoying it...!").toString());
                         else
-                            c.say(t, "You don't even feel guilty!");
+                            c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append("'s... too strong...!").toString());
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                        if(hostility > 66)
+                            say(t, "I'm going to make you beg me to kill you before I'm done!");
+                        else
+                        if(hostility > 33)
+                            say(t, "Hahah, you're already giving up!");
+                        else
+                            say(t, "You aren't giving up yet, are you?");
+                    }
+                    say(t, "\"");
+                } else
+                {
+                    String usedName = originalName;
+                    if(flavorObedience() > 40)
+                        usedName = mainName;
+                    c.say(t, "\"");
+                    if(c.getConfidence() > 66)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.SHAME);
+                        if(dignity > 66)
+                            c.say(t, "Heh...  You're as strong as... they say...");
+                        else
+                        if(dignity > 33)
+                            c.say(t, "You might actually be stronger than me...");
+                        else
+                            c.say(t, "Were you... always this strong...?");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.FOCUS);
+                        if(confidence > 66)
+                            say(t, (new StringBuilder("Of course.  I'm ")).append(usedName).append(".").toString());
+                        else
+                        if(confidence > 33)
+                            say(t, "I can't hold back.");
+                        else
+                            say(t, "Th-This is the strength of those who believe in me!");
+                    } else
+                    if(c.getConfidence() > 33)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
+                        if(morality > 66)
+                            c.say(t, "I heard that you... used to be so nice...");
+                        else
+                        if(morality > 33)
+                            c.say(t, "Don't you... feel bad about doing this...?");
+                        else
+                            c.say(t, "Ugh...  Have you been working for the Demons all along...?");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        if(hostility > 66)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.FOCUS);
+                            say(t, "I've just learned to enjoy hurting people!");
+                        } else
+                        if(hostility > 33)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                            say(t, "Shut up and take it.");
+                        } else
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.SHAME, Project.Emotion.NEUTRAL);
+                            say(t, "I don't want to do this, but I have no choice.");
+                        }
+                    } else
+                    {
+                        if(hostility > 66)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
+                            c.say(t, "P-Please, no more, no more, I'm begging you...!");
+                        } else
+                        if(hostility > 33)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
+                            c.say(t, "I c-can't, I can't take it anymore...!");
+                        } else
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.FEAR);
+                            c.say(t, "I know you aren't enjoying this, so why...?");
+                        }
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        if(flavorObedience() > 66)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.FOCUS);
+                            say(t, "And this is only a small fraction of the Demon Lord's power!");
+                        } else
+                        if(flavorObedience() > 33)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.FOCUS);
+                            say(t, "I have my orders.");
+                        } else
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
+                            say(t, "This is my choice.");
+                        }
+                    }
+                    say(t, "\"");
+                }
+            } else
+            if(disgrace > 66)
+            {
+                say(t, "\"");
+                if(c.getConfidence() > 66)
+                {
+                    if(hostility > 66)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                        say(t, "Pathetic!  Is that what you call an attack!?");
+                    } else
+                    if(hostility > 33)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.FOCUS);
+                        say(t, "Getting tired yet?");
+                    } else
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.SHAME);
+                        say(t, "You won't be able to beat me like this.");
+                    }
+                    say(t, "\"\n\n");
+                    c.say(t, "\"");
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                    if(innocence > 66)
+                        c.say(t, "Your luck has to run out eventually!");
+                    else
+                    if(innocence > 33)
+                        c.say(t, "Hold still!");
+                    else
+                        c.say(t, "Ugh, you're a slippery one.");
+                } else
+                if(c.getConfidence() > 33)
+                {
+                    if(innocence > 66)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.NEUTRAL);
+                        say(t, "I'm not gonna let you hit me!");
+                    } else
+                    if(innocence > 33)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FEAR, Project.Emotion.FOCUS);
+                        say(t, "Whew, close one.");
+                    } else
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.FOCUS);
+                        say(t, "As long as I avoid leaving any openings...");
+                    }
+                    say(t, "\"\n\n");
+                    c.say(t, "\"");
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                    if(confidence > 66)
+                        c.say(t, "You're just a coward after all!");
+                    else
+                    if(confidence > 33)
+                        c.say(t, "Aren't you going to attack!?");
+                    else
+                        c.say(t, "Scared to face me!?");
+                } else
+                {
+                    if(confidence > 66)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                        say(t, "Come on, try to attack me!");
+                    } else
+                    if(confidence > 33)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                        say(t, "If you're not going to fight me, what are you even doing here?");
+                    } else
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
+                        say(t, "If I'm too much for you to handle, you might as well just quit now.");
+                    }
+                    say(t, "\"\n\n");
+                    c.say(t, "\"");
+                    if(hostility > 66)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.SHAME);
+                        c.say(t, "Y-You're just looking for a way to hurt me, I know it!");
+                    } else
+                    if(hostility > 33)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.ANGER);
+                        c.say(t, "D-Don't rush me!");
+                    } else
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.FEAR);
+                        c.say(t, "S-Sorry, I just...");
+                    }
+                }
+                c.say(t, "\"");
+            } else
+            if(disgrace > 33)
+            {
+                c.say(t, "\"");
+                if(c.getMorality() > 66)
+                {
+                    if(innocence > 66)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FOCUS, Project.Emotion.ANGER);
+                        c.say(t, "Hey, look at me!  I'm the one you're after!");
+                    } else
+                    if(innocence > 33)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                        c.say(t, "I won't let you hurt them!");
+                    } else
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                        c.say(t, "What are you planning to do to them!?");
+                    }
+                    c.say(t, "\"\n\n");
+                    say(t, "\"");
+                    if(hostility > 66)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                        say(t, "Idiot.  I've got you right where I want you.");
+                    } else
+                    if(hostility > 33)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.FOCUS);
+                        say(t, "You're so predictable.");
+                    } else
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.FOCUS);
+                        say(t, "Nice response.");
+                    }
+                } else
+                if(c.getMorality() > 33)
+                {
+                    if(dignity > 66)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
+                        c.say(t, (new StringBuilder("Am I even scratching ")).append(himHer()).append("?").toString());
+                    } else
+                    if(dignity > 33)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.ANGER);
+                        c.say(t, "There's no end to this...!");
+                    } else
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.NEUTRAL, Project.Emotion.FOCUS);
+                        c.say(t, (new StringBuilder("I can tell that ")).append(heShe()).append("'s getting tired too...").toString());
+                    }
+                    c.say(t, "\"\n\n");
+                    say(t, "\"");
+                    if(flavorObedience() > 66)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                        say(t, "There's no end to the Demon Lord's power!");
+                    } else
+                    if(flavorObedience() > 33)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.NEUTRAL);
+                        say(t, "Alright, next step...");
+                    } else
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.JOY);
+                        say(t, "I like how this is turning out.");
+                    }
+                } else
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                    if(hostility > 66)
+                        c.say(t, "I won't let you kill me!");
+                    else
+                    if(hostility > 33)
+                        c.say(t, "I'm not your toy!");
+                    else
+                        c.say(t, "Stop looking down on me!");
+                    c.say(t, "\"\n\n");
+                    say(t, "\"");
+                    Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.JOY);
+                    if(innocence > 66)
+                        say(t, "Oh, I guess I made you mad.");
+                    else
+                    if(innocence > 33)
+                        say(t, "You've got issues.");
+                    else
+                        say(t, "Nonetheless, you're quite easy to manipulate.");
+                }
+                say(t, "\"");
+            } else
+            {
+                c.say(t, "\"");
+                if(c.getInnocence() > 66)
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
+                    if(deviancy > 66)
+                        c.say(t, "Stay away from me, weirdo!");
+                    else
+                    if(deviancy > 33)
+                        c.say(t, "What are you looking at me like that for!?  Get back!");
+                    else
+                        c.say(t, "Leave me alooone!");
+                    c.say(t, "\"\n\n");
+                    say(t, "\"");
+                    if(innocence > 66)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.FOCUS);
+                        say(t, "That tickles!");
+                    } else
+                    if(innocence > 33)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
+                        say(t, "You're wasting your energy.");
+                    } else
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
+                        say(t, "Pointless.");
+                    }
+                } else
+                if(c.getInnocence() > 33)
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.SHAME);
+                    if(innocence > 66)
+                        c.say(t, (new StringBuilder("I need to outsmart ")).append(himHer()).append(" somehow...!").toString());
+                    else
+                    if(innocence > 33)
+                        c.say(t, "There's got to be some way out of this...!");
+                    else
+                        c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append("'s completely cornered me...").toString());
+                    c.say(t, "\"\n\n");
+                    say(t, "\"");
+                    if(flavorObedience() > 66)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                        say(t, "Now do you understand the Demon Lord's power?");
+                    } else
+                    if(flavorObedience() > 33)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
+                        say(t, "Alright, here should be good.");
+                    } else
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
+                        say(t, "You can't run anymore.");
+                    }
+                } else
+                {
+                    if(confidence > 66)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.FEAR);
+                        c.say(t, "You aren't attacking.  Tell me why!");
+                    } else
+                    if(confidence > 33)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.ANGER);
+                        c.say(t, "It would appear that I'm at your mercy.");
+                    } else
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
+                        c.say(t, "Wh-What do you want with me!?");
+                    }
+                    c.say(t, "\"\n\n");
+                    say(t, "\"");
+                    if(hostility > 66)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                        say(t, "I want you to feel completely hopeless...!");
+                    } else
+                    if(hostility > 33)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.NEUTRAL);
+                        say(t, "I'm giving you a chance to beg for mercy.");
+                    } else
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
+                        say(t, "You need to understand what you're up against.");
+                    }
+                }
+                say(t, "\"");
+            }
+        } else
+        if(c.captureProgression % 6 == 2)
+        {
+            if(styleDamage[2] > 0)
+            {
+                if(styleDamage[3] > 0)
+                {
+                    if(disgrace > 66)
+                    {
+                        c.say(t, "\"");
+                        if(c.getDignity() > 66)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                            if(deviancy > 66)
+                                c.say(t, "H-Hey, where are you touching!?");
+                            else
+                            if(deviancy > 33)
+                                c.say(t, "You don't have to look so pleased with yourself!");
+                            else
+                                c.say(t, "Hey, stop that!");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(innocence > 66)
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.FOCUS);
+                                say(t, "Oopsie!");
+                            } else
+                            if(innocence > 33)
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.NEUTRAL);
+                                say(t, "Looks like you've got a weakness.");
+                            } else
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
+                                say(t, "You shouldn't worry about such trivial things.");
+                            }
+                        } else
+                        if(c.getDignity() > 33)
+                        {
+                            if(hostility > 66)
+                            {
+                                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.SHAME);
+                                c.say(t, "I don't like that look in your eyes...");
+                            } else
+                            if(hostility > 33)
+                            {
+                                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                                c.say(t, "What are you smirking about?");
+                            } else
+                            {
+                                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.NEUTRAL, Project.Emotion.FEAR);
+                                c.say(t, "Did it get colder?");
+                            }
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.NEUTRAL);
+                            if(confidence > 66)
+                                say(t, "You don't have time to worry about that!");
+                            else
+                            if(confidence > 33)
+                                say(t, "Let's keep going.");
+                            else
+                                say(t, "A-Are you sure you can focus on me right now?");
+                        } else
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
+                            if(innocence > 66)
+                                c.say(t, "Ogle me if you like, it doesn't change anything.");
+                            else
+                            if(innocence > 33)
+                                c.say(t, "Is that what you were after?  Ugh.");
+                            else
+                                c.say(t, "What are you plotting?");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(deviancy > 66)
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.LEWD);
+                                say(t, "Ah, it's showing, it's showiiing~!");
+                            } else
+                            if(deviancy > 33)
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.FOCUS);
+                                say(t, "Hm, not bad.");
+                            } else
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
+                                say(t, "You should be more careful.");
+                            }
+                        }
+                        say(t, "\"");
+                    } else
+                    if(disgrace > 33)
+                    {
+                        c.say(t, "\"");
+                        if(c.getConfidence() > 66)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FOCUS, Project.Emotion.JOY);
+                            if(hostility > 66)
+                                c.say(t, "This is finally my chance to go all-out!");
+                            else
+                            if(hostility > 33)
+                                c.say(t, "Now this is a fight!");
+                            else
+                                c.say(t, "This is a chance to fight a worthy opponent!");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(deviancy > 66)
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.LEWD);
+                                say(t, "W-Worth it...");
+                            } else
+                            if(deviancy > 33)
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.LEWD);
+                                say(t, "This is also a great show...");
+                            } else
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.STRUGGLE);
+                                say(t, "Yaaah!");
+                            }
+                        } else
+                        if(c.getConfidence() > 33)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                            if(deviancy > 66)
+                                c.say(t, "You complete pervert!");
+                            else
+                            if(deviancy > 33)
+                                c.say(t, "Stop messing around!");
+                            else
+                                c.say(t, "I didn't think you were the type to do this.");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.FOCUS);
+                            if(dignity > 66)
+                                say(t, "It suddenly looks like you're losing, doesn't it?");
+                            else
+                            if(dignity > 33)
+                                say(t, "Can you still fight like that?");
+                            else
+                                say(t, "A lot of people seem to care about this sort of thing.");
+                        } else
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
+                            if(confidence > 66)
+                                c.say(t, "I don't have any chance unless I can get away!");
+                            else
+                            if(confidence > 33)
+                                c.say(t, "Let me go!");
+                            else
+                                c.say(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s crazy, I have to run!").toString());
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(innocence > 66)
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                                say(t, "Stop it, I've gotta fight you!");
+                            } else
+                            if(innocence > 33)
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.JOY);
+                                say(t, "Okay, but I'm keeping your clothes.");
+                            } else
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.FOCUS);
+                                say(t, "Are you so sure that that's a good idea?");
+                            }
+                        }
+                        say(t, "\"");
+                    } else
+                    {
+                        say(t, "\"");
+                        if(c.getInnocence() > 66)
+                        {
+                            if(hostility > 66)
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                                say(t, "Shut up!  Shut up, or I'll kill you!");
+                            } else
+                            if(hostility > 33)
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                                say(t, "Hold still, you little shit!");
+                            } else
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.STRUGGLE, Project.Emotion.NEUTRAL);
+                                say(t, (new StringBuilder("Ergh, ")).append(c.heShe()).append("'s desperate...!").toString());
+                            }
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
+                            if(confidence > 66)
+                                c.say(t, "No, no, I'm gonna dieee!");
+                            else
+                            if(confidence > 33)
+                                c.say(t, "Let go of meee!");
+                            else
+                                c.say(t, "Aaah!  Come on, seriously, let me gooo!");
+                        } else
+                        if(c.getInnocence() > 33)
+                        {
+                            if(deviancy > 66)
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                                say(t, "Let's tear off a little extra~!");
+                            } else
+                            if(deviancy > 33)
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.NEUTRAL);
+                                say(t, "You do have a nice body.");
+                            } else
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.FOCUS);
+                                say(t, "I won't let you protect yourself.");
+                            }
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            if(dignity > 66)
+                            {
+                                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
+                                c.say(t, "Please... just don't let them see...");
+                            } else
+                            if(dignity > 33)
+                            {
+                                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
+                                c.say(t, "Ugh...  Fine, do what you want...");
+                            } else
+                            {
+                                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
+                                c.say(t, "Aaagh, nooo!");
+                            }
+                        } else
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
+                            if(innocence > 66)
+                                say(t, "Guess I can relax- Whah!?");
+                            else
+                            if(innocence > 33)
+                                say(t, "It's over now, you can't- Gaaah!");
+                            else
+                                say(t, "Giving up?  Or is this a tri- Ngh!");
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            if(deviancy > 66)
+                            {
+                                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
+                                c.say(t, "Hmph, I will need to wash my mouth out tonight.");
+                            } else
+                            if(deviancy > 33)
+                            {
+                                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
+                                c.say(t, "As if I'd offer myself to you!");
+                            } else
+                            {
+                                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FOCUS, Project.Emotion.STRUGGLE);
+                                c.say(t, "Now is my chance!");
+                            }
+                        }
+                        c.say(t, "\"");
+                    }
+                } else
+                if(disgrace > 66)
+                {
+                    c.say(t, "\"");
+                    if(c.getConfidence() > 66)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
+                        if(deviancy > 66)
+                            c.say(t, "Are you actually enjoying this!?");
+                        else
+                        if(deviancy > 33)
+                            c.say(t, "You look like you're having a little less fun now!");
+                        else
+                            c.say(t, "You'll stay down, if you know what's good for you.");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        if(hostility > 66)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                            say(t, (new StringBuilder("I'm... I'm going to enjoy watching you break, ")).append(c.getMainName()).append("...").toString());
+                        } else
+                        if(hostility > 33)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                            say(t, "You'll... regret... that...");
+                        } else
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
+                            say(t, "I... probably deserved that.");
+                        }
+                    } else
+                    if(c.getConfidence() > 33)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                        if(innocence > 66)
+                            c.say(t, "Have you finally learned your lesson?");
+                        else
+                        if(innocence > 33)
+                            c.say(t, "I hope you're giving up.");
+                        else
+                            c.say(t, "What are you plotting now?");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
+                        if(flavorObedience() > 66)
+                            say(t, "I'm no use to the Demon Lord if I'm dead.");
+                        else
+                        if(flavorObedience() > 33)
+                            say(t, "The Demon Lord might not be happy, but I can deal with that later.");
+                        else
+                            say(t, "Guh, why did the Demon Lord have to make me so weak!?");
+                    } else
+                    {
+                        if(hostility > 66)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
+                            c.say(t, (new StringBuilder("I really thought... ")).append(heShe()).append(" was going to kill me...").toString());
+                        } else
+                        if(hostility > 33)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FOCUS, Project.Emotion.STRUGGLE);
+                            c.say(t, "This is my chance!");
+                        } else
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FOCUS, Project.Emotion.STRUGGLE);
+                            c.say(t, "I'm.... I'm strong enough after all...!");
+                        }
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                        if(confidence > 66)
+                            say(t, "I'm not done with you yet!");
+                        else
+                        if(confidence > 33)
+                            say(t, "This isn't over!");
+                        else
+                            say(t, "I-I can still fight!");
+                    }
+                    say(t, "\"");
+                } else
+                if(disgrace > 33)
+                {
+                    c.say(t, "\"");
+                    if(c.getInnocence() > 66)
+                    {
+                        if(flavorObedience() > 66)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.NEUTRAL);
+                            c.say(t, "Whew...  You must really love the Demon Lord, huh?");
+                        } else
+                        if(flavorObedience() > 33)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.SHAME);
+                            c.say(t, "Huuuh...  Phew...");
+                        } else
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                            c.say(t, "Come on, if you don't like the Demon Lord, then just give up already!");
+                        }
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        if(confidence > 66)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.STRUGGLE);
+                            say(t, "I never give up!");
+                        } else
+                        if(confidence > 33)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.STRUGGLE, Project.Emotion.NEUTRAL);
+                            say(t, "Gah, haaah...");
+                        } else
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.STRUGGLE, Project.Emotion.FOCUS);
+                            say(t, "I can't stop... here...!");
+                        }
+                    } else
+                    if(c.getInnocence() > 33)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
+                        if(dignity > 66)
+                            c.say(t, "Don't you ever get tired!?");
+                        else
+                        if(dignity > 33)
+                            c.say(t, "You look like you're tiring out.");
+                        else
+                            c.say(t, "Can't believe you're still standing...");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.STRUGGLE, Project.Emotion.SHAME);
+                        if(flavorObedience() > 66)
+                            say(t, "If it's for the Demon Lord, I'll fight forever.");
+                        else
+                        if(flavorObedience() > 33)
+                            say(t, "The Demon Lord has a way of motivating us.");
+                        else
+                            say(t, "I'm not done yet.");
+                    } else
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                        if(confidence > 66)
+                            c.say(t, "I will not be intimidated!");
+                        else
+                        if(confidence > 33)
+                            c.say(t, "I won't allow you to provoke me!");
+                        else
+                            c.say(t, "You won't be able to fool me into letting my guard down.");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                        if(hostility > 66)
+                            say(t, "You think you can stop me from hurting you?");
+                        else
+                        if(hostility > 33)
+                            say(t, "We'll see about that.");
+                        else
+                            say(t, "Good.");
+                    }
+                    say(t, "\"");
+                } else
+                {
+                    c.say(t, "\"");
+                    if(c.getConfidence() > 66)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
+                        if(hostility > 66)
+                            c.say(t, "You... monster...");
+                        else
+                        if(hostility > 33)
+                            c.say(t, "I can still... stand up...!");
+                        else
+                            c.say(t, "I don't... understand you...");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        if(deviancy > 66)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.LEWD);
+                            say(t, "Your broken body is so beautiful...");
+                        } else
+                        if(deviancy > 33)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.LEWD);
+                            say(t, "I'm not satisfied yet.");
+                        } else
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
+                            say(t, "Go on, get up.");
+                        }
+                    } else
+                    if(c.getConfidence() > 33)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
+                        if(deviancy > 66)
+                            c.say(t, (new StringBuilder("I can't let ")).append(himHer()).append(" find me again, or ").append(heShe()).append("'ll...").toString());
+                        else
+                        if(deviancy > 33)
+                            c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append("'s just playing with me...!").toString());
+                        else
+                            c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append("'s too strong...!").toString());
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        if(innocence > 66)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                            say(t, "Found you!");
+                        } else
+                        if(innocence > 33)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                            say(t, "There you are!");
+                        } else
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.FOCUS);
+                            say(t, "You cannot hide from me.");
+                        }
+                    } else
+                    {
+                        if(innocence > 66)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
+                            c.say(t, "Maybe i-if I play dead...");
+                        } else
+                        if(innocence > 33)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SWOON, Project.Emotion.SWOON);
+                            c.say(t, "...");
+                        } else
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
+                            c.say(t, "You win!  There's no point in going further, r-right...?");
+                        }
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
+                        if(hostility > 66)
+                            say(t, "No, no, you need to suffer much more than this...");
+                        else
+                        if(hostility > 33)
+                            say(t, "Hm, what to do with you...?");
+                        else
+                            say(t, "You can't give up just yet.  I won't let you.");
+                    }
+                    say(t, "\"");
+                }
+            } else
+            if(styleDamage[3] > 0)
+            {
+                if(deviancy > 66)
+                {
+                    c.say(t, "\"");
+                    if(c.getDignity() > 66)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                        if(innocence > 66)
+                            c.say(t, "Stop playing around!");
+                        else
+                        if(innocence > 33)
+                            c.say(t, "L-Let go!");
+                        else
+                            c.say(t, "You sneaky little-");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        if(hostility > 66)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                            say(t, "You're so easy to hurt!");
+                        } else
+                        if(hostility > 33)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                            say(t, "Come on, show me!");
+                        } else
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.NEUTRAL);
+                            say(t, "Everyone needs to see this.");
+                        }
+                    } else
+                    if(c.getDignity() > 33)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
+                        if(disgrace > 66)
+                            c.say(t, "What do you think you're-");
+                        else
+                        if(disgrace > 33)
+                            c.say(t, "Aaah!");
+                        else
+                            c.say(t, (new StringBuilder("I can't stop ")).append(himHer()).append("-").toString());
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.LEWD);
+                        if(confidence > 66)
+                            say(t, "I'll take you right here!");
+                        else
+                        if(confidence > 33)
+                            say(t, "Mm, you're so soft...");
+                        else
+                            say(t, "Aaah~  I c-can't resist...!");
+                    } else
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FOCUS, Project.Emotion.NEUTRAL);
+                        if(confidence > 66)
+                            c.say(t, "Come and get me.");
+                        else
+                        if(confidence > 33)
+                            c.say(t, "Let's try this.");
+                        else
+                            c.say(t, "Look, I'm defenseless.");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.FOCUS);
+                        if(innocence > 66)
+                            say(t, "Yes, gimme, gimme!");
+                        else
+                        if(innocence > 33)
+                            say(t, "Oh, wow!  Oh, wow!");
+                        else
+                            say(t, "I'd never fall for... s-such a... nngh, I want iiit!");
+                    }
+                    say(t, "\"");
+                } else
+                if(deviancy > 33)
+                {
+                    say(t, "\"");
+                    if(c.getDignity() > 66)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.FOCUS);
+                        if(innocence > 66)
+                            say(t, "You look so naughty!");
+                        else
+                        if(innocence > 33)
+                            say(t, "Feeling a bit chilly?");
+                        else
+                            say(t, "You're finally noticing?");
+                        say(t, "\"\n\n");
+                        c.say(t, "\"");
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                        if(hostility > 66)
+                            c.say(t, "I won't let you tear me down!");
+                        else
+                        if(hostility > 33)
+                            c.say(t, "Wipe that smirk off your face!");
+                        else
+                            c.say(t, "You're just another pervert after all...!");
+                    } else
+                    if(c.getDignity() > 33)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                        if(flavorObedience() > 66)
+                            say(t, "If you oppose the Demon Lord, you don't get to wear clothes.");
+                        else
+                        if(flavorObedience() > 33)
+                            say(t, "I don't mind complying with this kind of order.");
+                        else
+                            say(t, "I want to see more of you.");
+                        say(t, "\"\n\n");
+                        c.say(t, "\"");
+                        if(disgrace > 66)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                            c.say(t, "I won't let you bring me down to your level!");
+                        } else
+                        if(disgrace > 33)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                            c.say(t, "I can still stop you!");
+                        } else
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
+                            c.say(t, "My clothes are too fragile...!");
+                        }
+                    } else
+                    {
+                        if(hostility > 66)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                            say(t, "You won't be able to show your face in public after I'm done with you!");
+                        } else
+                        if(hostility > 33)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                            say(t, "Come on, show some embarrassment!");
+                        } else
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.LEWD);
+                            say(t, "Aren't you going to cover yourself?");
+                        }
+                        say(t, "\"\n\n");
+                        c.say(t, "\"");
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                        if(innocence > 66)
+                            c.say(t, "Idiot, this won't stop me from fighting!");
+                        else
+                        if(innocence > 33)
+                            c.say(t, "What are you even trying to do?");
+                        else
+                            c.say(t, "Is this the best plan you can come up with?");
                     }
                     c.say(t, "\"");
                 } else
                 {
                     c.say(t, "\"");
-                    if(c.getMorality() > 66)
+                    if(c.getConfidence() > 66)
                     {
-                        if(deviancy > 66)
-                            c.say(t, (new StringBuilder("I know you're in there somewhere, ")).append(originalName).append("!  Wake up!").toString());
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                        if(hostility > 66)
+                            c.say(t, "You're doing a pretty bad job at killing me.");
                         else
-                        if(deviancy > 33)
-                            c.say(t, (new StringBuilder("There's no way you actually enjoy doing this, ")).append(mainName).append("!  You can stop anytime!").toString());
+                        if(hostility > 33)
+                            c.say(t, "You still haven't put a scratch on me.");
                         else
-                            c.say(t, (new StringBuilder("I can tell that it's hurting you to do this, ")).append(mainName).append("!  You belong on the side of Good!").toString());
+                            c.say(t, "You're being careful not to hurt me.  That's annoying.");
                         c.say(t, "\"\n\n");
                         say(t, "\"");
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
                         if(flavorObedience() > 66)
-                            say(t, "Silence!  My life belongs to the Demon Lord!");
+                            say(t, "The Demon Lord is the one who really decides your fate.");
                         else
                         if(flavorObedience() > 33)
-                            say(t, "I've lost the ability to make that choice...");
+                            say(t, "For now, I'm following my orders.");
                         else
-                            say(t, "I'm sorry.  I've come too far to stop now.");
+                            say(t, "I know what I'm doing.");
                     } else
-                    if(c.getMorality() > 33)
+                    if(c.getConfidence() > 33)
                     {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                        if(confidence > 66)
+                            c.say(t, "I-I thought you were above hiding!");
+                        else
+                        if(confidence > 33)
+                            c.say(t, "Face me out in the open!");
+                        else
+                            c.say(t, "Too cowardly to face me head-on!?");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                        if(innocence > 66)
+                            say(t, "I'm right here!");
+                        else
+                        if(innocence > 33)
+                            say(t, "Take this!");
+                        else
+                            say(t, "This worked out perfectly.");
+                    } else
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                         if(disgrace > 66)
-                            c.say(t, "Hey!  Come back here!");
+                            c.say(t, "I don't need to be afraid, I don't need to be afraid...");
                         else
                         if(disgrace > 33)
-                            c.say(t, "Phew...");
+                            c.say(t, (new StringBuilder("If I can find the others before ")).append(heShe()).append(" catches me...").toString());
                         else
-                            c.say(t, "Guh!");
+                            c.say(t, (new StringBuilder("I can't let ")).append(himHer()).append(" catch me...!").toString());
                         c.say(t, "\"\n\n");
                         say(t, "\"");
-                        if(innocence > 66)
-                            say(t, "I never really even thought about why I was fighting the Demon Lord.  Have you?");
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                        if(hostility > 66)
+                            say(t, "Give up!  Give in to despair!");
                         else
-                        if(innocence > 33)
-                            say(t, "If you really think you're strong enough to beat the Demon Lord, then show me!");
+                        if(hostility > 33)
+                            say(t, "You might have stood a chance if you weren't such a coward!");
                         else
-                            say(t, "Many Chosen stronger and smarter than you have failed.  If you don't understand why, then you, too, are doomed to failure.");
-                    } else
-                    {
-                        if(innocence > 66)
-                            c.say(t, "Stop pretending that you're so kind and gentle!");
-                        else
-                        if(innocence > 33)
-                            c.say(t, "Why aren't you even angry!?");
-                        else
-                            c.say(t, "Just face me head-on!");
-                        c.say(t, "\"\n\n");
-                        say(t, "\"");
-                        if(deviancy > 66)
-                            say(t, "Yes, look at me like I'm walking garbage!");
-                        else
-                        if(deviancy > 33)
-                            say(t, "Oh?  Are you going to hurt me?");
-                        else
-                            say(t, "You need to calm down.");
+                            say(t, "What did you expect to happen when you ran!?");
                     }
                     say(t, "\"");
                 }
             } else
-            if(c.captureProgression % 6 == 3)
+            if(hostility > 66)
             {
-                if(styleDamage[1] > 0)
+                say(t, "\"");
+                if(c.getConfidence() > 66)
                 {
-                    if(styleDamage[3] > 0)
+                    Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                    if(flavorObedience() > 66)
+                        say(t, "I will kill anyone who disrespects the Demon Lord!");
+                    else
+                    if(flavorObedience() > 33)
+                        say(t, "I'll make you show some respect!");
+                    else
+                        say(t, "You think you can afford to take me lightly!?");
+                    say(t, "\"\n\n");
+                    c.say(t, "\"");
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                    if(disgrace > 66)
+                        c.say(t, "Don't try to pretend you have any chance against me!");
+                    else
+                    if(disgrace > 33)
+                        c.say(t, "We'll see about that!");
+                    else
+                        c.say(t, "I don't care how strong you are, I'll never give in!");
+                } else
+                if(c.getConfidence() > 33)
+                {
+                    Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                    if(disgrace > 66)
+                        say(t, "I'll still kill you!  Just wait and see!");
+                    else
+                    if(disgrace > 33)
+                        say(t, "You will suffer and die!");
+                    else
+                        say(t, "I'll kill you!  And those people too!  And everyone else!");
+                    say(t, "\"\n\n");
+                    c.say(t, "\"");
+                    if(morality > 66)
                     {
-                        if(disgrace > 66)
-                        {
-                            say(t, "\"");
-                            if(c.getDignity() > 66)
-                            {
-                                if(innocence > 66)
-                                    say(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s totally feeling good!  ").append(c.HeShe()).append("'s a huge pervert!").toString());
-                                else
-                                if(innocence > 33)
-                                {
-                                    if(c.gender.equals("female"))
-                                        say(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s sopping wet!  ").toString());
-                                    else
-                                        say(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s rock hard!  ").toString());
-                                    say(t, (new StringBuilder("Take a good look with your cameras when ")).append(c.heShe()).append(" comes around!").toString());
-                                } else
-                                {
-                                    say(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s trying to rape me!  Look, here ").append(c.heShe()).append(" comes now!").toString());
-                                }
-                                say(t, "\"\n\n");
-                                c.say(t, "\"");
-                                if(hostility > 66)
-                                    c.say(t, "Stop!  Please!");
-                                else
-                                if(hostility > 33)
-                                    c.say(t, (new StringBuilder("L-Liar!  ")).append(HeShe()).append("'s lying!").toString());
-                                else
-                                    c.say(t, "Why are you doing this!?");
-                            } else
-                            if(c.getDignity() > 33)
-                            {
-                                if(hostility > 66)
-                                    say(t, "Look at this worthless slut!");
-                                else
-                                if(hostility > 33)
-                                    say(t, "Hah, you let me go!  Thanks a lot!");
-                                else
-                                    say(t, "You should have had me there.");
-                                say(t, "\"\n\n");
-                                c.say(t, "\"");
-                                if(deviancy > 66)
-                                    c.say(t, "I can't fight like this!");
-                                else
-                                if(deviancy > 33)
-                                    c.say(t, "Ngh... guh...");
-                                else
-                                    c.say(t, "You're hard to pin down...");
-                            } else
-                            {
-                                if(flavorObedience() > 66)
-                                    say(t, (new StringBuilder("I should lead ")).append(c.himHer()).append(" past as many cameras as possible.").toString());
-                                else
-                                if(flavorObedience() > 33)
-                                    say(t, "Let's show this to your teammates.");
-                                else
-                                    say(t, "I think I'm doing pretty well for myself.");
-                                say(t, "\"\n\n");
-                                c.say(t, "\"");
-                                if(confidence > 66)
-                                    c.say(t, "Stop... looking so smug...");
-                                else
-                                if(confidence > 33)
-                                    c.say(t, "Get...  Get back here...");
-                                else
-                                    c.say(t, "Ergh...  Coward...");
-                            }
-                            c.say(t, "\"");
-                        } else
-                        if(disgrace > 33)
-                        {
-                            say(t, "\"");
-                            if(c.getConfidence() > 66)
-                            {
-                                if(hostility > 66)
-                                    say(t, "Pathetic slut!  You're getting turned on by this!");
-                                else
-                                if(hostility > 33)
-                                {
-                                    say(t, "The slut");
-                                    if(c.gender.equals("female"))
-                                        say(t, "'s sopping wet down there!");
-                                    else
-                                        say(t, "'s getting rock hard from this!");
-                                } else
-                                {
-                                    say(t, "You're aroused!  What happened to your self-control!?");
-                                }
-                                say(t, "\"\n\n");
-                                c.say(t, "\"");
-                                if(innocence > 66)
-                                    c.say(t, "Wh-What?  How did you-");
-                                else
-                                if(innocence > 33)
-                                    c.say(t, "Sh-Shut up!");
-                                else
-                                    c.say(t, "Damn you!");
-                            } else
-                            if(c.getConfidence() > 33)
-                            {
-                                if(deviancy > 66)
-                                    say(t, "Mm, I like that expression...");
-                                else
-                                if(deviancy > 33)
-                                    say(t, "Enjoying yourself without me?");
-                                else
-                                    say(t, "Disgusting...");
-                                say(t, "\"\n\n");
-                                c.say(t, "\"");
-                                if(innocence > 66)
-                                    c.say(t, "You're the one who's just having fun!");
-                                else
-                                if(innocence > 33)
-                                    c.say(t, "Ugh, just fight normally...");
-                                else
-                                    c.say(t, "So this is what you were after...");
-                            } else
-                            {
-                                if(confidence > 66)
-                                    say(t, "See!  You can't resist me!");
-                                else
-                                if(confidence > 33)
-                                    say(t, "That was actually pretty cute.");
-                                else
-                                    say(t, "Hard to resist, isn't it...?");
-                                say(t, "\"\n\n");
-                                c.say(t, "\"");
-                                if(hostility > 66)
-                                    c.say(t, "I-It mostly just hurt...");
-                                else
-                                if(hostility > 33)
-                                    c.say(t, "Y-You pinched me...");
-                                else
-                                    c.say(t, "I-I'm sorry...");
-                            }
-                            c.say(t, "\"");
-                        } else
-                        {
-                            say(t, "\"");
-                            if(c.getInnocence() > 66)
-                            {
-                                if(deviancy > 66)
-                                    say(t, "Ah, you really are too cute...");
-                                else
-                                if(deviancy > 33)
-                                    say(t, "Let's have some more fun.");
-                                else
-                                    say(t, "Is this really all it takes to beat you?");
-                                say(t, "\"\n\n");
-                                c.say(t, "\"");
-                                if(hostility > 66)
-                                    c.say(t, "It hurts...  It hurts, but...");
-                                else
-                                if(hostility > 33)
-                                    c.say(t, "Don't wanna feel good anymore...");
-                                else
-                                    c.say(t, "I feel... so weird...");
-                            } else
-                            if(c.getInnocence() > 33)
-                            {
-                                if(innocence > 66)
-                                    say(t, "Does it feel good or bad?");
-                                else
-                                if(innocence > 33)
-                                    say(t, "Where do you think you're going?");
-                                else
-                                    say(t, (new StringBuilder("I must allow ")).append(c.himHer()).append(" a moment to regain ").append(c.hisHer()).append(" senses, or there's no point.").toString());
-                                say(t, "\"\n\n");
-                                c.say(t, "\"");
-                                if(confidence > 66)
-                                    say(t, "Overwhelming...");
-                                else
-                                if(confidence > 33)
-                                    say(t, "Agh...");
-                                else
-                                    say(t, "Need to turn things around...");
-                            } else
-                            {
-                                if(hostility > 66)
-                                    say(t, "I'm not finished with you yet.");
-                                else
-                                if(hostility > 33)
-                                    say(t, "Ah, I got carried away...");
-                                else
-                                    say(t, "I'm glad that you managed to resist.");
-                                say(t, "\"\n\n");
-                                c.say(t, "\"");
-                                if(flavorObedience() > 66)
-                                    c.say(t, "The Demon Lord wants everyone to see me in this state...");
-                                else
-                                if(flavorObedience() > 33)
-                                    c.say(t, "Is this also your orders, or just your hobby?");
-                                else
-                                    c.say(t, "Enough... of this...!");
-                            }
-                            c.say(t, "\"");
-                        }
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.SHAME);
+                        c.say(t, "What even happened to you...?");
                     } else
+                    if(morality > 33)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                        c.say(t, "I won't let that happen.");
+                    } else
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
+                        c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append("'s actually smiling...").toString());
+                    }
+                } else
+                {
+                    Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                    if(deviancy > 66)
+                        say(t, "And wait until you hear what I'm gonna do with your warm corpse!");
+                    else
+                    if(disgrace > 33)
+                        say(t, "I'm going to make you scream in all sorts of ways...");
+                    else
+                        say(t, "Are you ready to die?");
+                    say(t, "\"\n\n");
+                    c.say(t, "\"");
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.SHAME);
+                    if(innocence > 66)
+                        c.say(t, "D-Do you even have any idea what you're saying!?");
+                    else
+                    if(innocence > 33)
+                        c.say(t, "I d-don't want to hear this!");
+                    else
+                        c.say(t, "No...  P-Please, stop talking...");
+                }
+                c.say(t, "\"");
+            } else
+            if(hostility > 33)
+            {
+                say(t, "\"");
+                if(c.getInnocence() > 66)
+                {
+                    Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                    if(innocence > 66)
+                        say(t, "You stupid, dummy... dumb-head!");
+                    else
+                    if(innocence > 33)
+                        say(t, "Idiot!  You have no business here on the battlefield!");
+                    else
+                        say(t, "Everyone knows that you're going to fail.  They're laughing at you behind your back.");
+                    say(t, "\"\n\n");
+                    c.say(t, "\"");
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                    if(morality > 66)
+                        c.say(t, "You big fat liar!");
+                    else
+                    if(morality > 33)
+                        c.say(t, "Stop talking to yourself!  Stop talking to yourself!");
+                    else
+                        c.say(t, "You're such a mean jerk!");
+                } else
+                if(c.getInnocence() > 33)
+                {
+                    Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                    if(disgrace > 66)
+                        say(t, "I've been having a good time watching the Thralls play with you!");
+                    else
+                    if(disgrace > 33)
+                        say(t, "You want me to stop talking?  Come and make me!");
+                    else
+                        say(t, "Which of your friends do you think I should go after next?");
+                    say(t, "\"\n\n");
+                    c.say(t, "\"");
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                    if(flavorObedience() > 66)
+                        c.say(t, "You're just the Demon Lord's bitch!");
+                    else
+                    if(flavorObedience() > 33)
+                        c.say(t, "I'm not going to waste time listening to some coward who couldn't even beat the Demon Lord!");
+                    else
+                        c.say(t, "You think this is a game!?");
+                } else
+                {
+                    Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                    if(flavorObedience() > 66)
+                        say(t, "I've devoted my life to the great Demon Lord!");
+                    else
+                    if(flavorObedience() > 33)
+                        say(t, "I'm just looking out for myself, because no one else will.");
+                    else
+                        say(t, "I'm having a good time.  How about you?");
+                    say(t, "\"\n\n");
+                    c.say(t, "\"");
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
+                    if(deviancy > 66)
+                        c.say(t, "You're completely twisted.");
+                    else
+                    if(deviancy > 33)
+                        c.say(t, "You take a degree of sexual enjoyment from it as well.");
+                    else
+                        c.say(t, "You don't even feel guilty!");
+                }
+                c.say(t, "\"");
+            } else
+            {
+                c.say(t, "\"");
+                if(c.getMorality() > 66)
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
+                    if(deviancy > 66)
+                        c.say(t, (new StringBuilder("I know you're in there somewhere, ")).append(originalName).append("!  Wake up!").toString());
+                    else
+                    if(deviancy > 33)
+                        c.say(t, (new StringBuilder("There's no way you actually enjoy doing this, ")).append(mainName).append("!  You can stop anytime!").toString());
+                    else
+                        c.say(t, (new StringBuilder("I can tell that it's hurting you to do this, ")).append(mainName).append("!  You belong on the side of Good!").toString());
+                    c.say(t, "\"\n\n");
+                    say(t, "\"");
+                    if(flavorObedience() > 66)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                        say(t, "Silence!  My life belongs to the Demon Lord!");
+                    } else
+                    if(flavorObedience() > 33)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.SHAME, Project.Emotion.NEUTRAL);
+                        say(t, "I've lost the ability to make that choice...");
+                    } else
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.SHAME, Project.Emotion.NEUTRAL);
+                        say(t, "I'm sorry.  I've come too far to stop now.");
+                    }
+                } else
+                if(c.getMorality() > 33)
+                {
+                    if(disgrace > 66)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                        c.say(t, "Hey!  Come back here!");
+                    } else
+                    if(disgrace > 33)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.SHAME);
+                        c.say(t, "Phew...");
+                    } else
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
+                        c.say(t, "Guh!");
+                    }
+                    c.say(t, "\"\n\n");
+                    say(t, "\"");
+                    if(innocence > 66)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.SHAME);
+                        say(t, "I never really even thought about why I was fighting the Demon Lord.  Have you?");
+                    } else
+                    if(innocence > 33)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.ANGER);
+                        say(t, "If you really think you're strong enough to beat the Demon Lord, then show me!");
+                    } else
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
+                        say(t, "Many Chosen stronger and smarter than you have failed.  If you don't understand why, then you, too, are doomed to failure.");
+                    }
+                } else
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                    if(innocence > 66)
+                        c.say(t, "Stop pretending that you're so kind and gentle!");
+                    else
+                    if(innocence > 33)
+                        c.say(t, "Why aren't you even angry!?");
+                    else
+                        c.say(t, "Just face me head-on!");
+                    c.say(t, "\"\n\n");
+                    say(t, "\"");
+                    if(deviancy > 66)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.JOY);
+                        say(t, "Yes, look at me like I'm walking garbage!");
+                    } else
+                    if(deviancy > 33)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.LEWD);
+                        say(t, "Oh?  Are you going to hurt me?");
+                    } else
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
+                        say(t, "You need to calm down.");
+                    }
+                }
+                say(t, "\"");
+            }
+        } else
+        if(c.captureProgression % 6 == 3)
+        {
+            if(styleDamage[1] > 0)
+            {
+                if(styleDamage[3] > 0)
+                {
                     if(disgrace > 66)
                     {
                         say(t, "\"");
-                        if(c.getConfidence() > 66)
+                        if(c.getDignity() > 66)
                         {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
                             if(innocence > 66)
-                                say(t, "I'm gonna keep doing this until you let go!");
+                                say(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s totally feeling good!  ").append(c.HeShe()).append("'s a huge pervert!").toString());
                             else
                             if(innocence > 33)
-                                say(t, "Are you sure you want to have me this close?");
-                            else
-                                say(t, "If you insist on forcing yourself upon me, I suppose I must reciprocate.");
+                            {
+                                if(c.gender.equals("female"))
+                                    say(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s sopping wet!  ").toString());
+                                else
+                                    say(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s rock hard!  ").toString());
+                                say(t, (new StringBuilder("Take a good look with your cameras when ")).append(c.heShe()).append(" comes around!").toString());
+                            } else
+                            {
+                                say(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s trying to rape me!  Look, here ").append(c.heShe()).append(" comes now!").toString());
+                            }
                             say(t, "\"\n\n");
                             c.say(t, "\"");
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.ANGER);
+                            if(hostility > 66)
+                                c.say(t, "Stop!  Please!");
+                            else
+                            if(hostility > 33)
+                                c.say(t, (new StringBuilder("L-Liar!  ")).append(HeShe()).append("'s lying!").toString());
+                            else
+                                c.say(t, "Why are you doing this!?");
+                        } else
+                        if(c.getDignity() > 33)
+                        {
+                            if(hostility > 66)
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                                say(t, "Look at this worthless slut!");
+                            } else
+                            if(hostility > 33)
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.FOCUS);
+                                say(t, "Hah, you let me go!  Thanks a lot!");
+                            } else
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
+                                say(t, "You should have had me there.");
+                            }
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.SHAME);
                             if(deviancy > 66)
-                                c.say(t, "Get your hands off me!");
+                                c.say(t, "I can't fight like this!");
                             else
                             if(deviancy > 33)
-                                c.say(t, "Stop that!");
+                                c.say(t, "Ngh... guh...");
                             else
-                                c.say(t, "I won't let go...!");
+                                c.say(t, "You're hard to pin down...");
                         } else
-                        if(c.getConfidence() > 33)
                         {
-                            if(confidence > 66)
-                                say(t, "I'm taking you right here!");
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.NEUTRAL);
+                            if(flavorObedience() > 66)
+                                say(t, (new StringBuilder("I should lead ")).append(c.himHer()).append(" past as many cameras as possible.").toString());
                             else
-                            if(confidence > 33)
-                                say(t, "How's this?");
+                            if(flavorObedience() > 33)
+                                say(t, "Let's show this to your teammates.");
                             else
-                                say(t, "Are you r-really sure you want me to stop...?");
+                                say(t, "I think I'm doing pretty well for myself.");
                             say(t, "\"\n\n");
                             c.say(t, "\"");
-                            if(hostility > 66)
-                                c.say(t, "Y-You're hurting me...!");
-                            else
-                            if(hostility > 33)
-                                c.say(t, "Ngh!  Not so tight...!");
-                            else
-                                c.say(t, "Let... Let go...");
-                        } else
-                        {
-                            if(hostility > 66)
-                                say(t, "You can't pretend you're not afraid.");
-                            else
-                            if(hostility > 33)
-                                say(t, "Now you've made me angry.");
-                            else
-                                say(t, "Let's see how determined you really are.");
-                            say(t, "\"\n\n");
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                             if(confidence > 66)
-                                c.say(t, (new StringBuilder("When ")).append(heShe()).append(" looks at me like that...").toString());
+                                c.say(t, "Stop... looking so smug...");
                             else
                             if(confidence > 33)
-                                c.say(t, "Why can't I make myself move...?");
+                                c.say(t, "Get...  Get back here...");
                             else
-                                c.say(t, "N-No!  I missed my chance to escape...!");
+                                c.say(t, "Ergh...  Coward...");
                         }
                         c.say(t, "\"");
                     } else
                     if(disgrace > 33)
                     {
                         say(t, "\"");
-                        if(c.getInnocence() > 66)
-                        {
-                            if(confidence > 66)
-                                say(t, "Let's see how you handle this!");
-                            else
-                            if(confidence > 33)
-                                say(t, "Can you block this?");
-                            else
-                                say(t, "H-Here I come!");
-                            say(t, "\"\n\n");
-                            c.say(t, "\"");
-                            if(deviancy > 66)
-                                c.say(t, "Huh!?  What are you doing down there!?");
-                            else
-                            if(deviancy > 33)
-                                c.say(t, "N-No fair!");
-                            else
-                                c.say(t, "N-Not there!");
-                        } else
-                        if(c.getInnocence() > 33)
-                        {
-                            if(deviancy > 66)
-                                say(t, "Mm, it's even more fun like this...");
-                            else
-                            if(deviancy > 33)
-                                say(t, "It's like you're asking me to touch you.");
-                            else
-                                say(t, "You're wide open.");
-                            say(t, "\"\n\n");
-                            c.say(t, "\"");
-                            if(innocence > 66)
-                                c.say(t, "Stop messing around!");
-                            else
-                            if(innocence > 33)
-                                c.say(t, "Stop doing that!");
-                            else
-                                c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append("'s tricky...").toString());
-                        } else
-                        {
-                            if(innocence > 66)
-                                say(t, "I won't let you keep trying tricky things!");
-                            else
-                            if(innocence > 33)
-                                say(t, "No escape!");
-                            else
-                                say(t, "I believe I am more experienced in this sort of fight.");
-                            say(t, "\"\n\n");
-                            c.say(t, "\"");
-                            if(confidence > 66)
-                                c.say(t, "You brute...!");
-                            else
-                            if(confidence > 33)
-                                c.say(t, "Not a bad... nngh- tactic!");
-                            else
-                                c.say(t, "Have you no shame!?");
-                        }
-                        c.say(t, "\"");
-                    } else
-                    {
-                        c.say(t, "\"");
-                        if(c.getDignity() > 66)
-                        {
-                            if(confidence > 66)
-                                c.say(t, "There's no shame in losing to such a strong opponent...!");
-                            else
-                            if(confidence > 33)
-                                c.say(t, "I need to at least try to make my stand here...");
-                            else
-                                c.say(t, "If they see me running away from such a weak-looking enemy, I'm done for...");
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
-                            if(hostility > 66)
-                                say(t, "Idiot!  You think you get to decide how others see you!?");
-                            else
-                            if(hostility > 33)
-                                say(t, "Smile for the cameras!");
-                            else
-                                say(t, "If you're not going to fight back...");
-                        } else
-                        if(c.getDignity() > 33)
-                        {
-                            if(deviancy > 66)
-                                c.say(t, "You- Nnngh!  Freak!");
-                            else
-                            if(deviancy > 33)
-                                c.say(t, "You're sick!");
-                            else
-                                c.say(t, "You coward!  Let me up!");
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
-                            if(innocence > 66)
-                                say(t, "You shouldn't call people names!");
-                            else
-                            if(innocence > 33)
-                                say(t, "If you want me to stop, you'll just have to stop me.");
-                            else
-                                say(t, "Is this how you cope with your own powerlessness?");
-                        } else
+                        if(c.getConfidence() > 66)
                         {
                             if(hostility > 66)
-                                c.say(t, "Graaah, it huuurts!");
-                            else
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                                say(t, "Pathetic slut!  You're getting turned on by this!");
+                            } else
                             if(hostility > 33)
-                                c.say(t, "Ah!  Aaah, nooo!");
-                            else
-                                c.say(t, "Nnnaaah, it feels goood, stooop!");
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
-                            if(deviancy > 66)
-                                say(t, "I love the way you scream so loud!");
-                            else
-                            if(deviancy > 33)
-                                say(t, "Whew, you're a loud one!");
-                            else
-                                say(t, "Pathetic.");
-                        }
-                        say(t, "\"");
-                    }
-                } else
-                if(styleDamage[3] > 0)
-                {
-                    if(hostility > 66)
-                    {
-                        say(t, "\"");
-                        if(c.getMorality() > 66)
-                        {
-                            if(innocence > 66)
-                                say(t, "Hahahah!  Okay, okay, now eat the first thing you pull out of that garbage can!");
-                            else
-                            if(innocence > 33)
-                                say(t, "As long as you keep stripping your clothes off, I won't hurt him.  How does that sound?");
-                            else
-                                say(t, (new StringBuilder("Yes, ")).append(c.getMainName()).append(", come and save him from me!  Can't you manage that much?").toString());
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                                say(t, "The slut");
+                                if(c.gender.equals("female"))
+                                    say(t, "'s sopping wet down there!");
+                                else
+                                    say(t, "'s getting rock hard from this!");
+                            } else
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
+                                say(t, "You're aroused!  What happened to your self-control!?");
+                            }
                             say(t, "\"\n\n");
                             c.say(t, "\"");
-                            if(disgrace > 66)
-                                c.say(t, "You... You coward!");
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.FEAR);
+                            if(innocence > 66)
+                                c.say(t, "Wh-What?  How did you-");
                             else
-                            if(disgrace > 33)
+                            if(innocence > 33)
+                                c.say(t, "Sh-Shut up!");
+                            else
                                 c.say(t, "Damn you!");
-                            else
-                                c.say(t, "Please, just let me take his place!");
                         } else
-                        if(c.getMorality() > 33)
-                        {
-                            if(flavorObedience() > 66)
-                                say(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" can't save you from the Demon Lord!  No one can!").toString());
-                            else
-                            if(flavorObedience() > 33)
-                                say(t, "Go on, give me an excuse to kill them.");
-                            else
-                                say(t, "Ah, look how afraid they all are!");
-                            say(t, "\"\n\n");
-                            c.say(t, "\"");
-                            if(deviancy > 66)
-                                c.say(t, "Hey!  Stay focused on me!  I'm the one whose body you want, right?");
-                            else
-                            if(deviancy > 33)
-                                c.say(t, "I can't do anything like this...!");
-                            else
-                                c.say(t, "I'm sorry, everyone...");
-                        } else
-                        {
-                            if(disgrace > 66)
-                                say(t, "You're so weak!  Not even worth killing!");
-                            else
-                            if(disgrace > 33)
-                                say(t, "I'm giving you a free shot.  Are you really okay with me killing you?");
-                            else
-                                say(t, "If this is the best you can do, then I might as well kill you.");
-                            say(t, "\"\n\n");
-                            c.say(t, "\"");
-                            if(innocence > 66)
-                                c.say(t, "Stop laughing at me!");
-                            else
-                            if(innocence > 33)
-                                c.say(t, "Shut up, shut up, shut up!");
-                            else
-                                c.say(t, "Enough of your tricks!  Enough!");
-                        }
-                        c.say(t, "\"");
-                    } else
-                    if(hostility > 33)
-                    {
-                        c.say(t, "\"");
-                        if(c.getInnocence() > 66)
+                        if(c.getConfidence() > 33)
                         {
                             if(deviancy > 66)
-                                c.say(t, "Hold still, you weirdo!");
-                            else
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.JOY);
+                                say(t, "Mm, I like that expression...");
+                            } else
                             if(deviancy > 33)
-                                c.say(t, "Quit it!");
-                            else
-                                c.say(t, "You jerk!");
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.FOCUS);
+                                say(t, "Enjoying yourself without me?");
+                            } else
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
+                                say(t, "Disgusting...");
+                            }
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                             if(innocence > 66)
-                                say(t, "Kyahah, are you blind or something!?");
+                                c.say(t, "You're the one who's just having fun!");
                             else
                             if(innocence > 33)
-                                say(t, "Having trouble?");
+                                c.say(t, "Ugh, just fight normally...");
                             else
-                                say(t, "Predictable.");
-                        } else
-                        if(c.getInnocence() > 33)
-                        {
-                            if(disgrace > 66)
-                                c.say(t, "I should be able to do this!");
-                            else
-                            if(disgrace > 33)
-                                c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append("'s trying to get me to leave an opening...").toString());
-                            else
-                                c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append("'s toying with me...").toString());
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
-                            if(dignity > 66)
-                                say(t, "I'll be signing autographs after the battle!");
-                            else
-                            if(dignity > 33)
-                                say(t, "So far, so good.");
-                            else
-                                say(t, "Heh.");
+                                c.say(t, "So this is what you were after...");
                         } else
                         {
-                            if(flavorObedience() > 66)
-                                c.say(t, "Wouldn't the Demon Lord be happier if you took me head-on!?");
-                            else
-                            if(flavorObedience() > 33)
-                                c.say(t, "Will the Demon Lord really be satisfied with this performance?");
-                            else
-                                c.say(t, "Come, I know that you'd rather be on the attack!");
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
-                            if(disgrace > 66)
-                                say(t, "I'm not falling for that one...");
-                            else
-                            if(disgrace > 33)
-                                say(t, "This is plenty for now.");
-                            else
-                                say(t, "I don't want this to be over too quickly.");
-                        }
-                        say(t, "\"");
-                    } else
-                    {
-                        say(t, "\"");
-                        if(c.getConfidence() > 66)
-                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.NEUTRAL);
                             if(confidence > 66)
-                                say(t, "I was even stronger than you, and I still got beaten.");
+                                say(t, "See!  You can't resist me!");
                             else
                             if(confidence > 33)
-                                say(t, "Trying to force your way through is pointless.");
+                                say(t, "That was actually pretty cute.");
                             else
-                                say(t, "W-We're all weak compared to the Demon Lord!");
+                                say(t, "Hard to resist, isn't it...?");
                             say(t, "\"\n\n");
                             c.say(t, "\"");
-                            if(disgrace > 66)
-                                c.say(t, "No, you were a weak person deep inside all along.");
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
+                            if(hostility > 66)
+                                c.say(t, "I-It mostly just hurt...");
                             else
-                            if(disgrace > 33)
-                                c.say(t, "Enough talk.  Just fight me.");
+                            if(hostility > 33)
+                                c.say(t, "Y-You pinched me...");
                             else
-                                c.say(t, "First I'll get strong enough to beat you, then I'll get strong enough to beat the Demon Lord.");
-                        } else
-                        if(c.getConfidence() > 33)
-                        {
-                            if(flavorObedience() > 66)
-                                say(t, "Do you even understand the world the Demon Lord is trying to create!?");
-                            else
-                            if(flavorObedience() > 33)
-                                say(t, "You're pretty strong, but not nearly strong enough.");
-                            else
-                                say(t, "You might be able to beat the Demon Lord, but you have to be careful.");
-                            say(t, "\"\n\n");
-                            c.say(t, "\"");
-                            if(innocence > 66)
-                                c.say(t, "You don't even understand what you're saying!");
-                            else
-                            if(innocence > 33)
-                                c.say(t, "I don't trust you!");
-                            else
-                                c.say(t, "Stop trying to distract me!");
-                        } else
-                        {
-                            if(deviancy > 66)
-                                say(t, "You'd be a lot happier as my personal sex toy.");
-                            else
-                            if(deviancy > 33)
-                                say(t, "You're just a cute little morsel, as far as the Demon Lord is concerned.");
-                            else
-                                say(t, "With how weak you are, there's no point in standing before the Demon Lord.");
-                            say(t, "\"\n\n");
-                            c.say(t, "\"");
-                            if(flavorObedience() > 66)
-                                c.say(t, "I don't want to j-join you anyway!");
-                            else
-                            if(flavorObedience() > 33)
-                                c.say(t, "Y-You don't have to say it like that!");
-                            else
-                                c.say(t, "Um, th-thanks for the advice, but... I'm not giving up!");
+                                c.say(t, "I-I'm sorry...");
                         }
                         c.say(t, "\"");
-                    }
-                } else
-                if(disgrace > 66)
-                {
-                    c.say(t, "\"");
-                    if(c.getMorality() > 66)
+                    } else
                     {
-                        if(flavorObedience() > 66)
-                            c.say(t, "You don't have to keep serving the Demon Lord!");
-                        else
-                        if(flavorObedience() > 33)
-                            c.say(t, "If you come with us, the Demon Lord won't be able to hurt you anymore!");
-                        else
-                            c.say(t, "You can still be forgiven for what you've done!");
-                        c.say(t, "\"\n\n");
                         say(t, "\"");
-                        if(hostility > 66)
-                            say(t, "I do this because I want to!");
-                        else
-                        if(hostility > 33)
-                            say(t, "I don't need your forgiveness!");
-                        else
-                            say(t, "You haven't beaten me yet!");
-                    }
-                    say(t, "\"");
-                } else
-                if(disgrace > 33)
-                {
-                    say(t, "\"");
-                    if(c.getConfidence() > 66)
-                    {
-                        if(confidence > 66)
-                            say(t, "Ngh!  Fine!  We'll do it this way!");
-                        else
-                        if(confidence > 33)
-                            say(t, "Ergh, this one's strong...!");
-                        else
-                            say(t, "Let go!  Let me go!");
-                        say(t, "\"\n\n");
-                        c.say(t, "\"");
-                        if(innocence > 66)
-                            c.say(t, "You left yourself wide open!");
-                        else
-                        if(innocence > 33)
-                            c.say(t, "Gh!  Hah, you sure do fight back...!");
-                        else
-                            c.say(t, "No more tricks, let's settle this here!");
-                    } else
-                    if(c.getConfidence() > 33)
-                    {
-                        if(innocence > 66)
-                            say(t, "Waaah!");
-                        else
-                        if(innocence > 33)
-                            say(t, "There!");
-                        else
-                            say(t, "Got you!");
-                        say(t, "\"\n\n");
-                        c.say(t, "\"");
-                        if(dignity > 66)
-                            c.say(t, "I knew you'd be a tough opponent!");
-                        else
-                        if(dignity > 33)
-                            c.say(t, "I will defeat you!");
-                        else
-                            c.say(t, (new StringBuilder("Hard to follow ")).append(hisHer()).append(" attacks...!").toString());
-                    } else
-                    {
-                        if(deviancy > 66)
-                            say(t, "Ah, the things I'm going to do to you...");
-                        else
-                        if(deviancy > 33)
-                            say(t, "You're such a cute little thing.");
-                        else
-                            say(t, "You're afraid.");
-                        say(t, "\"\n\n");
-                        c.say(t, "\"");
-                        if(confidence > 66)
-                            c.say(t, "D-Don't hurt me!");
-                        else
-                        if(confidence > 33)
-                            c.say(t, "No!  S-Stay back!");
-                        else
-                            c.say(t, "S-Stop trying to act tough, i-it's not working...!");
-                    }
-                    c.say(t, "\"");
-                } else
-                {
-                    c.say(t, "\"");
-                    if(c.getMorality() > 66)
-                    {
-                        if(hostility > 66)
-                            c.say(t, "I can't let you hurt anyone else.");
-                        else
-                        if(hostility > 33)
-                            c.say(t, "This is what you wanted, right?");
-                        else
-                            c.say(t, "I won't run anymore.");
-                        c.say(t, "\"\n\n");
-                        say(t, "\"");
-                        if(deviancy > 66)
-                            say(t, "That determination... nnngh, I love it!");
-                        else
-                        if(deviancy > 33)
-                            say(t, "I like that expression.");
-                        else
-                            say(t, "You know what happens next.");
-                    } else
-                    if(c.getMorality() > 33)
-                    {
-                        if(deviancy > 66)
-                            c.say(t, "Shut up!  I don't want to hear any of this!");
-                        else
-                        if(deviancy > 33)
-                            c.say(t, "Stop staring at me like that!");
-                        else
-                            c.say(t, "Haaah, ugh...");
-                        c.say(t, "\"\n\n");
-                        say(t, "\"");
-                        if(confidence > 66)
-                            say(t, "Let's continue!");
-                        else
-                        if(confidence > 33)
-                            say(t, "That's far enough!");
-                        else
-                            say(t, (new StringBuilder("This time, I need to face ")).append(c.himHer()).append(" down without hesitating...").toString());
-                    } else
-                    {
-                        if(confidence > 66)
-                            c.say(t, "No!  Not again!");
-                        else
-                        if(confidence > 33)
-                            c.say(t, "Get out of my way!");
-                        else
-                            c.say(t, "Haven't you had enough!?");
-                        c.say(t, "\"\n\n");
-                        say(t, "\"");
-                        if(innocence > 66)
-                            say(t, "Ah, there you are!");
-                        else
-                        if(innocence > 33)
-                            say(t, "Got you.");
-                        else
-                            say(t, "Did you really think you could escape me?");
-                    }
-                    say(t, "\"");
-                }
-            } else
-            if(c.captureProgression % 6 == 4)
-            {
-                if(styleDamage[0] > 0)
-                {
-                    if(styleDamage[3] > 0)
-                    {
-                        if(hostility > 66)
-                        {
-                            say(t, "\"");
-                            if(c.getMorality() > 66)
-                            {
-                                if(confidence > 66)
-                                    say(t, "You can't even imagine all the ways I'm going to hurt you!");
-                                else
-                                if(confidence > 33)
-                                    say(t, "I'll kill all of you!  Kill, kill, kill!");
-                                else
-                                    say(t, "Give up hope!  The sooner you end it all, the better!");
-                                say(t, "\"\n\n");
-                                c.say(t, "\"");
-                                if(disgrace > 66)
-                                    c.say(t, "I'll defeat you and prove you wrong!");
-                                else
-                                if(disgrace > 33)
-                                    c.say(t, "No!  Justice will prevail!");
-                                else
-                                    c.say(t, (new StringBuilder("Please, don't listen to ")).append(himHer()).append("!").toString());
-                            } else
-                            if(c.getMorality() > 33)
-                            {
-                                if(disgrace > 66)
-                                    say(t, "Ahahah, the more you hurt me, the more motivated I am to make you suffer!");
-                                else
-                                if(disgrace > 33)
-                                    say(t, "Die!  Die!  Die!");
-                                else
-                                    say(t, "Pathetic weakling!");
-                                say(t, "\"\n\n");
-                                c.say(t, "\"");
-                                if(innocence > 66)
-                                    c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append(" doesn't even care...!").toString());
-                                else
-                                if(innocence > 33)
-                                    c.say(t, "There's no end to this...!");
-                                else
-                                    c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append("'s always a step ahead...!").toString());
-                            } else
-                            {
-                                if(innocence > 66)
-                                    say(t, "I'm gonna kill you so hard that you'll be super dead!");
-                                else
-                                if(innocence > 33)
-                                    say(t, "I'll piss on your grave, bitch!");
-                                else
-                                    say(t, "Foolish puppet.  You're almost too useful to kill.");
-                                say(t, "\"\n\n");
-                                c.say(t, "\"");
-                                if(deviancy > 66)
-                                    c.say(t, "Brainless slut!  Ride this!");
-                                else
-                                if(deviancy > 33)
-                                    c.say(t, "You smug piece of shit!");
-                                else
-                                    c.say(t, "I'm putting you out of your misery right now!");
-                            }
-                            c.say(t, "\"");
-                        } else
-                        if(hostility > 33)
-                        {
-                            say(t, "\"");
-                            if(c.getInnocence() > 66)
-                            {
-                                if(deviancy > 66)
-                                    say(t, "By the way, I'm watching you through the cameras while I masturbate.");
-                                else
-                                if(deviancy > 33)
-                                    say(t, "This camera has a really good view.");
-                                else
-                                    say(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s too stupid to even keep track of ").append(c.hisHer()).append(" enemy!").toString());
-                                say(t, "\"\n\n");
-                                c.say(t, "\"");
-                                if(disgrace > 66)
-                                    c.say(t, "Come out, you wimp!");
-                                else
-                                if(disgrace > 33)
-                                    c.say(t, "Don't say that!");
-                                else
-                                    c.say(t, "I-I'm not scared to face you again, I'm not!");
-                            } else
-                            if(c.getInnocence() > 33)
-                            {
-                                if(confidence > 66)
-                                    say(t, "I will make you kneel!");
-                                else
-                                if(confidence > 33)
-                                    say(t, "You might as well surrender!");
-                                else
-                                    say(t, "There's no point in resisting.");
-                                say(t, "\"\n\n");
-                                c.say(t, "\"");
-                                if(deviancy > 66)
-                                    c.say(t, "You're disgusting!");
-                                else
-                                if(deviancy > 33)
-                                    c.say(t, "Laugh while you can!");
-                                else
-                                    c.say(t, "Just shut up!");
-                            } else
-                            {
-                                if(disgrace > 66)
-                                    say(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s actually letting me go because I bribed ").append(c.himHer()).append(".").toString());
-                                else
-                                if(disgrace > 33)
-                                    say(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" isn't even trying to fight me!").toString());
-                                else
-                                    say(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" only cares about protecting ").append(c.himHer()).append("self.").toString());
-                                say(t, "\"\n\n");
-                                c.say(t, "\"");
-                                if(innocence > 66)
-                                    c.say(t, "Surely none of you are stupid enough to fall for this!");
-                                else
-                                if(innocence > 33)
-                                    c.say(t, "Hmph, surprisingly cunning...");
-                                else
-                                    c.say(t, "I will not allow you to spread these lies!");
-                            }
-                            c.say(t, "\"");
-                        } else
-                        {
-                            c.say(t, "\"");
-                            if(c.getDignity() > 66)
-                            {
-                                if(deviancy > 66)
-                                    c.say(t, "Excuse me!");
-                                else
-                                if(deviancy > 33)
-                                    c.say(t, "I didn't give you permission to look!");
-                                else
-                                    c.say(t, "You could have warned me earlier!");
-                                c.say(t, "\"\n\n");
-                                say(t, "\"");
-                                if(innocence > 66)
-                                    say(t, "Oops.");
-                                else
-                                if(innocence > 33)
-                                    say(t, "Are you going to keep fighting me or not?");
-                                else
-                                    say(t, "Consider it an important lesson.");
-                            } else
-                            if(c.getDignity() > 33)
-                            {
-                                if(flavorObedience() > 66)
-                                    c.say(t, (new StringBuilder("That must have been what ")).append(heShe()).append(" was after all along...!").toString());
-                                else
-                                if(flavorObedience() > 33)
-                                    c.say(t, "So the Demon Lord ordered you to strip me?");
-                                else
-                                    c.say(t, "This is your fault!");
-                                c.say(t, "\"\n\n");
-                                say(t, "\"");
-                                if(deviancy > 66)
-                                    say(t, "I wish I had a camera, too...");
-                                else
-                                if(deviancy > 33)
-                                    say(t, "Looking good!");
-                                else
-                                    say(t, "If you can't stop this, then you have to get used to it.");
-                            } else
-                            {
-                                if(disgrace > 66)
-                                    c.say(t, "Get back here!");
-                                else
-                                if(disgrace > 33)
-                                    c.say(t, (new StringBuilder("I've got ")).append(himHer()).append(" on the run...!").toString());
-                                else
-                                    c.say(t, (new StringBuilder("I can't let ")).append(himHer()).append(" out of my sight...").toString());
-                                c.say(t, "\"\n\n");
-                                say(t, "\"");
-                                if(flavorObedience() > 66)
-                                    say(t, "Yes, yes, let everyone see...");
-                                else
-                                if(flavorObedience() > 33)
-                                    say(t, "Mission accomplished.");
-                                else
-                                    say(t, "Hey!  Don't you know what happens when people see you as weak!?");
-                            }
-                            say(t, "\"");
-                        }
-                    } else
-                    if(hostility > 66)
-                    {
-                        c.say(t, "\"");
                         if(c.getInnocence() > 66)
                         {
                             if(deviancy > 66)
-                                c.say(t, "Stay away from me, you freak!");
-                            else
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.JOY);
+                                say(t, "Ah, you really are too cute...");
+                            } else
                             if(deviancy > 33)
-                                c.say(t, "Stop messing with my body!");
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.FOCUS);
+                                say(t, "Let's have some more fun.");
+                            } else
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
+                                say(t, "Is this really all it takes to beat you?");
+                            }
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
+                            if(hostility > 66)
+                                c.say(t, "It hurts...  It hurts, but...");
                             else
-                                c.say(t, "S-Stop saying those things!");
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
-                            if(disgrace > 66)
-                                say(t, "You may be stronger, but I know what I want.");
+                            if(hostility > 33)
+                                c.say(t, "Don't wanna feel good anymore...");
                             else
-                            if(disgrace > 33)
-                                say(t, "But don't you want to know what's going to happen to you after I win?");
-                            else
-                                say(t, "You can't stop me.");
+                                c.say(t, "I feel... so weird...");
                         } else
                         if(c.getInnocence() > 33)
                         {
-                            if(flavorObedience() > 66)
-                                c.say(t, "It's even worse than what I feel from the Demons...");
-                            else
-                            if(flavorObedience() > 33)
-                                c.say(t, (new StringBuilder("This is what the Demons have done to ")).append(himHer()).append("...").toString());
-                            else
-                                c.say(t, (new StringBuilder("I think... the Demon Lord is actually holding ")).append(himHer()).append(" back...").toString());
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
-                            if(morality > 66)
-                                say(t, "I've become... everything I once hated...!");
-                            else
-                            if(morality > 33)
-                                say(t, "Aaagh!");
-                            else
-                                say(t, "Kill... everyone...!");
-                        } else
-                        {
-                            if(disgrace > 66)
-                                c.say(t, (new StringBuilder("I must not let ")).append(himHer()).append(" escape.").toString());
-                            else
-                            if(disgrace > 33)
-                                c.say(t, "Where...?");
-                            else
-                                c.say(t, (new StringBuilder("Now, while ")).append(heShe()).append("'s distracted...!").toString());
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
                             if(innocence > 66)
-                                say(t, "Ahahah, die, die!");
-                            else
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.NEUTRAL);
+                                say(t, "Does it feel good or bad?");
+                            } else
                             if(innocence > 33)
-                                say(t, "I'll have some fun with you guys first.");
-                            else
-                                say(t, "I must maximize the total number of casualties.");
-                        }
-                        say(t, "\"");
-                    } else
-                    if(hostility > 33)
-                    {
-                        c.say(t, "\"");
-                        if(c.getConfidence() > 66)
-                        {
-                            if(deviancy > 66)
-                                c.say(t, "Ugh!  I'm shutting that disgusting mouth of yours right now!");
-                            else
-                            if(deviancy > 33)
-                                c.say(t, "You don't have time to think about all that!");
-                            else
-                                c.say(t, "We'll see how smug you are after this!");
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
-                            if(disgrace > 66)
-                                say(t, "Ah, are you going to hurt me more?");
-                            else
-                            if(disgrace > 33)
-                                say(t, "Having trouble focusing?");
-                            else
-                                say(t, "You want me to get serious?");
-                        } else
-                        if(c.getConfidence() > 33)
-                        {
-                            if(disgrace > 66)
-                                c.say(t, "Tough words from someone who can barely stand!");
-                            else
-                            if(disgrace > 33)
-                                c.say(t, "You're wasting your breath!");
-                            else
-                                c.say(t, "Stop gloating!");
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
-                            if(innocence > 66)
-                                say(t, (new StringBuilder("Ooh, ")).append(c.heShe()).append("'s getting mad!").toString());
-                            else
-                            if(innocence > 33)
-                                say(t, "Hah!");
-                            else
-                                say(t, "You're so simple.");
-                        } else
-                        {
-                            if(dignity > 66)
-                                c.say(t, "P-Please, no more!");
-                            else
-                            if(dignity > 33)
-                                c.say(t, "Why do you hate me...?");
-                            else
-                                c.say(t, "Y-You don't have to shout...");
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
-                            if(flavorObedience() > 66)
-                                say(t, "You aren't even worthy to belong to the Demon Lord!");
-                            else
-                            if(flavorObedience() > 33)
-                                say(t, "Weakling!  Just get out of my way!");
-                            else
-                                say(t, "Hah, are you crying?  You're crying!");
-                        }
-                        say(t, "\"");
-                    } else
-                    {
-                        say(t, "\"");
-                        if(c.getMorality() > 66)
-                        {
-                            if(flavorObedience() > 66)
-                                say(t, "The Demon Lord doesn't want those people dead, either!");
-                            else
-                            if(flavorObedience() > 33)
-                                say(t, "I'm being forced to do this by the Demon Lord.");
-                            else
-                                say(t, "What would you have done if I had wanted to kill them!?");
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
+                                say(t, "Where do you think you're going?");
+                            } else
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
+                                say(t, (new StringBuilder("I must allow ")).append(c.himHer()).append(" a moment to regain ").append(c.hisHer()).append(" senses, or there's no point.").toString());
+                            }
                             say(t, "\"\n\n");
                             c.say(t, "\"");
-                            if(innocence > 66)
-                                c.say(t, "Think about what you're saying!");
-                            else
-                            if(innocence > 33)
-                                c.say(t, "Stop acting like you're still a hero.");
-                            else
-                                c.say(t, "So, you've really found a way to convince yourself that you don't need to feel guilty.");
-                        } else
-                        if(c.getMorality() > 33)
-                        {
-                            if(deviancy > 66)
-                                say(t, "That was... uck, guh... worth it...");
-                            else
-                            if(deviancy > 33)
-                                say(t, "You shake your butt when you're climbing.");
-                            else
-                                say(t, "I don't sense anyone either, but that doesn't mean they aren't there!");
-                            say(t, "\"\n\n");
-                            c.say(t, "\"");
-                            if(disgrace > 66)
-                                c.say(t, "Can't you just give up already!?");
-                            else
-                            if(disgrace > 33)
-                                c.say(t, "I don't want to hear that from you!");
-                            else
-                                c.say(t, "I should be grateful that you're just standing there now, but... it's still annoying...");
-                        } else
-                        {
-                            if(innocence > 66)
-                                say(t, "You really shouldn't be so mean!");
-                            else
-                            if(innocence > 33)
-                                say(t, "Too much hatred is a bad thing!  That goes for both Chosen and Forsaken!");
-                            else
-                                say(t, "The reserve of psychic energy we call 'Demonic' can be accessed most efficiently at a particular level of hatred - no lower than that, but also no higher than that!");
-                            say(t, "\"\n\n");
-                            c.say(t, "\"");
-                            if(morality > 66)
-                                c.say(t, "I'm not interested in doing things your way!");
-                            else
-                            if(morality > 33)
-                                c.say(t, "Just shut up!");
-                            else
-                                c.say(t, "That's rich, coming from you!");
-                        }
-                        c.say(t, "\"");
-                    }
-                } else
-                if(styleDamage[3] > 0)
-                {
-                    if(deviancy > 66)
-                    {
-                        c.say(t, "\"");
-                        if(c.getConfidence() > 66)
-                        {
-                            if(disgrace > 66)
-                                c.say(t, "Where did all this energy come from!?");
-                            else
-                            if(disgrace > 33)
-                                c.say(t, "You can't afford to mess around like this!");
-                            else
-                                c.say(t, "Grrgh!  Let... go...!");
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
-                            if(innocence > 66)
-                                say(t, "I wanna see mooore!");
-                            else
-                            if(innocence > 33)
-                                say(t, "Tear it all off!");
-                            else
-                                say(t, "Ah, yes, this pain is... exquisite...!");
-                        } else
-                        if(c.getConfidence() > 33)
-                        {
-                            if(innocence > 66)
-                                c.say(t, "Do you even realize where we are!?");
-                            else
-                            if(innocence > 33)
-                                c.say(t, "This changes nothing!");
-                            else
-                                c.say(t, "You set this up...");
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
-                            if(dignity > 66)
-                                say(t, "Let's give them a good show!");
-                            else
-                            if(dignity > 33)
-                                say(t, "Ah, they're all looking...");
-                            else
-                                say(t, "Doing it in public feels so much better, doesn't it?");
-                        } else
-                        {
-                            if(hostility > 66)
-                                c.say(t, "Ow!  It hurts...!");
-                            else
-                            if(hostility > 33)
-                                c.say(t, "Please, not there!");
-                            else
-                                c.say(t, "They're... They're booing me...");
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
-                            if(disgrace > 66)
-                                say(t, "You're so much cuter when you stop fighting back!");
-                            else
-                            if(disgrace > 33)
-                                say(t, "I'm going to rape you right in front of them.");
-                            else
-                                say(t, "They're seeing how pathetic you are.");
-                        }
-                        say(t, "\"");
-                    } else
-                    if(deviancy > 33)
-                    {
-                        say(t, "\"");
-                        if(c.getDignity() > 66)
-                        {
-                            if(hostility > 66)
-                                say(t, "You'll just be remembered as a pretty set of legs!");
-                            else
-                            if(hostility > 33)
-                                say(t, "Everyone will know how weak you are!");
-                            else
-                                say(t, "When you react like that, I can't help myself...!");
-                            say(t, "\"\n\n");
-                            c.say(t, "\"");
-                            if(disgrace > 66)
-                                c.say(t, "No, no, this is starting to go completely wrong!");
-                            else
-                            if(disgrace > 33)
-                                c.say(t, "I can't protect myself and my clothes at the same time...!");
-                            else
-                                c.say(t, "It's hopeless...");
-                        } else
-                        if(c.getDignity() > 33)
-                        {
-                            if(innocence > 66)
-                                say(t, "I wanna have some fun...");
-                            else
-                            if(innocence > 33)
-                                say(t, "This isn't good.  I'm getting more turned on...");
-                            else
-                                say(t, "Hm, it may be better in the long run if I sate some of my desire now...");
-                            say(t, "\"\n\n");
-                            c.say(t, "\"");
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
                             if(confidence > 66)
-                                c.say(t, "Hah, I'll make you pay for that!");
+                                c.say(t, "Overwhelming...");
                             else
                             if(confidence > 33)
-                                c.say(t, "Hands off!");
+                                c.say(t, "Agh...");
                             else
-                                c.say(t, "N-Nooo!");
+                                c.say(t, "Need to turn things around...");
                         } else
                         {
-                            if(disgrace > 66)
-                                say(t, "At least I can do this much.");
-                            else
-                            if(disgrace > 33)
-                                say(t, "Easy enough!");
-                            else
-                                say(t, "I'll blast them all off.");
-                            say(t, "\"\n\n");
-                            c.say(t, "\"");
-                            if(innocence > 66)
-                                c.say(t, "Why are you attacking my clothes?");
-                            else
-                            if(innocence > 33)
-                                c.say(t, "What are you trying to do?");
-                            else
-                                c.say(t, (new StringBuilder(String.valueOf(HisHer()))).append(" attacks are just barely missing...").toString());
-                        }
-                        c.say(t, "\"");
-                    } else
-                    {
-                        c.say(t, "\"");
-                        if(c.getInnocence() > 66)
-                        {
-                            if(disgrace > 66)
-                                c.say(t, "It feels like nothing's weighing me down anymore!");
-                            else
-                            if(disgrace > 33)
-                                c.say(t, "Hyaaah!");
-                            else
-                                c.say(t, "Waaah!");
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
-                            if(innocence > 66)
-                                say(t, "Huh, did it get chillier?");
-                            else
-                            if(innocence > 33)
-                                say(t, "Hmph!");
-                            else
-                                say(t, "We will steer the fight in this direction.");
-                        } else
-                        if(c.getInnocence() > 33)
-                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
                             if(hostility > 66)
-                                c.say(t, (new StringBuilder("There's no way ")).append(heShe()).append(" can keep this up forever, right?").toString());
+                                say(t, "I'm not finished with you yet.");
                             else
                             if(hostility > 33)
-                                c.say(t, "Ow!");
+                                say(t, "Ah, I got carried away...");
                             else
-                                c.say(t, "Close one...!");
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
+                                say(t, "I'm glad that you managed to resist.");
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                             if(flavorObedience() > 66)
-                                say(t, "For the Demon Lord!");
+                                c.say(t, "The Demon Lord wants everyone to see me in this state...");
                             else
                             if(flavorObedience() > 33)
-                                say(t, "What a pain!");
+                                c.say(t, "Is this also your orders, or just your hobby?");
                             else
-                                say(t, "I'll take you down with this!");
-                        } else
-                        {
-                            if(innocence > 66)
-                                c.say(t, (new StringBuilder("Did ")).append(heShe()).append(" outmaneuver me?  No, ").append(heShe()).append("'s being directed...").toString());
-                            else
-                            if(innocence > 33)
-                                c.say(t, "Damn it.  Nothing that can be done now.");
-                            else
-                                c.say(t, (new StringBuilder("If I let my guard down, ")).append(heShe()).append(" will exploit it ruthlessly.").toString());
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
-                            if(disgrace > 66)
-                                say(t, "I may be weaker, but I don't have to care about that stuff anymore.");
-                            else
-                            if(disgrace > 33)
-                                say(t, "So, can you hold me off now!?");
-                            else
-                                say(t, "You won't be able to protect yourself, either.");
+                                c.say(t, "Enough... of this...!");
                         }
-                        say(t, "\"");
+                        c.say(t, "\"");
                     }
                 } else
                 if(disgrace > 66)
@@ -12854,59 +12937,64 @@ public class Forsaken
                     say(t, "\"");
                     if(c.getConfidence() > 66)
                     {
-                        if(deviancy > 66)
-                            say(t, "You could rape me if you wanted to.  Don't you want to?");
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.STRUGGLE);
+                        if(innocence > 66)
+                            say(t, "I'm gonna keep doing this until you let go!");
                         else
-                        if(deviancy > 33)
-                            say(t, "I didn't know that you were into this sort of thing.");
+                        if(innocence > 33)
+                            say(t, "Are you sure you want to have me this close?");
                         else
-                            say(t, "You can't hold me down forever!");
+                            say(t, "If you insist on forcing yourself upon me, I suppose I must reciprocate.");
                         say(t, "\"\n\n");
                         c.say(t, "\"");
-                        if(confidence > 66)
-                            c.say(t, "You're a stubborn one...!");
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                        if(deviancy > 66)
+                            c.say(t, "Get your hands off me!");
                         else
-                        if(confidence > 33)
-                            c.say(t, "Just shut up already!");
+                        if(deviancy > 33)
+                            c.say(t, "Stop that!");
                         else
-                            c.say(t, "Don't try to talk tough when you're practically crying!");
+                            c.say(t, "I won't let go...!");
                     } else
                     if(c.getConfidence() > 33)
                     {
-                        if(hostility > 66)
-                            say(t, "I'm going to enjoy watching you die...!");
-                        else
-                        if(hostility > 33)
-                            say(t, "I hope you're having as much fun as I am.");
-                        else
-                            say(t, "How about this!?");
-                        say(t, "\"\n\n");
-                        c.say(t, "\"");
-                        if(deviancy > 66)
-                            c.say(t, "You're completely twisted!");
-                        else
-                        if(deviancy > 33)
-                            c.say(t, "Stop moving around so much!");
-                        else
-                            c.say(t, "Guh!");
-                    } else
-                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.LEWD);
                         if(confidence > 66)
-                            say(t, "Your power is wasted on you!");
+                            say(t, "I'm taking you right here!");
                         else
                         if(confidence > 33)
-                            say(t, "Maybe you secretly want to lose?");
+                            say(t, "How's this?");
                         else
-                            say(t, "Haaah!");
+                            say(t, "Are you r-really sure you want me to stop...?");
                         say(t, "\"\n\n");
                         c.say(t, "\"");
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
                         if(hostility > 66)
-                            c.say(t, "S-Stop, you're hurting me!");
+                            c.say(t, "Y-You're hurting me...!");
                         else
                         if(hostility > 33)
-                            c.say(t, "What?  N-No!");
+                            c.say(t, "Ngh!  Not so tight...!");
                         else
-                            c.say(t, "I-I'm sorry, I can't...");
+                            c.say(t, "Let... Let go...");
+                    } else
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.NEUTRAL);
+                        if(hostility > 66)
+                            say(t, "You can't pretend you're not afraid.");
+                        else
+                        if(hostility > 33)
+                            say(t, "Now you've made me angry.");
+                        else
+                            say(t, "Let's see how determined you really are.");
+                        say(t, "\"\n\n");
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.SHAME);
+                        if(confidence > 66)
+                            c.say(t, (new StringBuilder("When ")).append(heShe()).append(" looks at me like that...").toString());
+                        else
+                        if(confidence > 33)
+                            c.say(t, "Why can't I make myself move...?");
+                        else
+                            c.say(t, "N-No!  I missed my chance to escape...!");
                     }
                     c.say(t, "\"");
                 } else
@@ -12915,865 +13003,2404 @@ public class Forsaken
                     say(t, "\"");
                     if(c.getInnocence() > 66)
                     {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
                         if(confidence > 66)
-                            say(t, "Too weak!");
+                            say(t, "Let's see how you handle this!");
                         else
                         if(confidence > 33)
-                            say(t, "Take this!");
+                            say(t, "Can you block this?");
                         else
-                            say(t, "Aaagh!");
+                            say(t, "H-Here I come!");
                         say(t, "\"\n\n");
                         c.say(t, "\"");
-                        if(hostility > 66)
-                            c.say(t, "Ow!  Stop!");
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.FEAR);
+                        if(deviancy > 66)
+                            c.say(t, "Huh!?  What are you doing down there!?");
                         else
-                        if(hostility > 33)
-                            c.say(t, "Leave me alone!");
+                        if(deviancy > 33)
+                            c.say(t, "N-No fair!");
                         else
-                            c.say(t, "You're crazy!");
+                            c.say(t, "N-Not there!");
                     } else
                     if(c.getInnocence() > 33)
                     {
-                        if(flavorObedience() > 66)
-                            say(t, "Watch me...!");
-                        else
-                        if(flavorObedience() > 33)
-                            say(t, "I have no choice...!");
-                        else
-                            say(t, "I've got you!");
+                        if(deviancy > 66)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.FOCUS);
+                            say(t, "Mm, it's even more fun like this...");
+                        } else
+                        if(deviancy > 33)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.LEWD);
+                            say(t, "It's like you're asking me to touch you.");
+                        } else
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                            say(t, "You're wide open.");
+                        }
                         say(t, "\"\n\n");
                         c.say(t, "\"");
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.ANGER);
                         if(innocence > 66)
-                            c.say(t, "You don't know when to quit!");
+                            c.say(t, "Stop messing around!");
                         else
                         if(innocence > 33)
-                            c.say(t, "Let go!");
+                            c.say(t, "Stop doing that!");
                         else
-                            c.say(t, "Gh, how!?");
+                            c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append("'s tricky...").toString());
                     } else
                     {
-                        if(hostility > 66)
-                            say(t, "Grrr...!");
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                        if(innocence > 66)
+                            say(t, "I won't let you keep trying tricky things!");
                         else
-                        if(hostility > 33)
-                            say(t, "Haaah, yes...!");
+                        if(innocence > 33)
+                            say(t, "No escape!");
                         else
-                            say(t, "Hmph!");
+                            say(t, "I believe I am more experienced in this sort of fight.");
                         say(t, "\"\n\n");
                         c.say(t, "\"");
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.ANGER);
                         if(confidence > 66)
-                            c.say(t, "Nng- gah!");
+                            c.say(t, "You brute...!");
                         else
                         if(confidence > 33)
-                            c.say(t, "Ergh...");
+                            c.say(t, "Not a bad... nngh- tactic!");
                         else
-                            c.say(t, "Rrah!");
+                            c.say(t, "Have you no shame!?");
                     }
                     c.say(t, "\"");
                 } else
                 {
                     c.say(t, "\"");
-                    if(c.getMorality() > 66)
+                    if(c.getDignity() > 66)
                     {
-                        if(innocence > 66)
-                            c.say(t, "You look surprised!");
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.FOCUS);
+                        if(confidence > 66)
+                            c.say(t, "There's no shame in losing to such a strong opponent...!");
                         else
-                        if(innocence > 33)
-                            c.say(t, "Right now, I'm your opponent!");
+                        if(confidence > 33)
+                            c.say(t, "I need to at least try to make my stand here...");
                         else
-                            c.say(t, "I don't know what you're planning, but I won't allow it!");
+                            c.say(t, "If they see me running away from such a weak-looking enemy, I'm done for...");
                         c.say(t, "\"\n\n");
                         say(t, "\"");
                         if(hostility > 66)
-                            say(t, "You stupid little...!  I'll make you regret this!");
-                        else
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                            say(t, "Idiot!  You think you get to decide how others see you!?");
+                        } else
                         if(hostility > 33)
-                            say(t, "Are you actually asking me to hurt you?  Heh, alright then...");
-                        else
-                            say(t, "That's some good determination.  But I'm not going to go easy on you.");
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                            say(t, "Smile for the cameras!");
+                        } else
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
+                            say(t, "If you're not going to fight back...");
+                        }
                     } else
-                    if(c.getMorality() > 33)
+                    if(c.getDignity() > 33)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                        if(deviancy > 66)
+                            c.say(t, "You- Nnngh!  Freak!");
+                        else
+                        if(deviancy > 33)
+                            c.say(t, "You're sick!");
+                        else
+                            c.say(t, "You coward!  Let me up!");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
+                        if(innocence > 66)
+                            say(t, "You shouldn't call people names!");
+                        else
+                        if(innocence > 33)
+                            say(t, "If you want me to stop, you'll just have to stop me.");
+                        else
+                            say(t, "Is this how you cope with your own powerlessness?");
+                    } else
                     {
                         if(hostility > 66)
-                            c.say(t, "Ngh!  Aaah!");
-                        else
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.FEAR);
+                            c.say(t, "Graaah, it huuurts!");
+                        } else
                         if(hostility > 33)
-                            c.say(t, "I don't like that look in your eyes...");
-                        else
-                            c.say(t, "Ugh.  You've made your point...");
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
+                            c.say(t, "Ah!  Aaah, nooo!");
+                        } else
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.FEAR);
+                            c.say(t, "Nnnaaah, it feels goood, stooop!");
+                        }
                         c.say(t, "\"\n\n");
                         say(t, "\"");
                         if(deviancy > 66)
-                            say(t, "It's like you're on display for me...");
-                        else
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.FOCUS);
+                            say(t, "I love the way you scream so loud!");
+                        } else
                         if(deviancy > 33)
-                            say(t, "Should we spread your legs, too?");
-                        else
-                            say(t, "You can't move, can you?");
-                    } else
-                    {
-                        if(confidence > 66)
-                            c.say(t, "... I shouldn't have said that.");
-                        else
-                        if(confidence > 33)
-                            c.say(t, "Well!?  What do you have to say to that!?");
-                        else
-                            c.say(t, (new StringBuilder("I was hoping it would make ")).append(himHer()).append(" cry...").toString());
-                        c.say(t, "\"\n\n");
-                        say(t, "\"");
-                        if(flavorObedience() > 66)
-                            say(t, "If you just insulted me, I might have forgiven you.  But now... I think you need to learn some respect.");
-                        else
-                        if(flavorObedience() > 33)
-                            say(t, "We'll see who the coward is.  How long until you start begging for mercy?");
-                        else
-                            say(t, "I don't take that sort of thing from the Demon Lord, and I'm definitely not taking it from you.");
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                            say(t, "Whew, you're a loud one!");
+                        } else
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
+                            say(t, "Pathetic.");
+                        }
                     }
                     say(t, "\"");
                 }
             } else
-            if(c.captureProgression % 6 == 5)
-                if(styleDamage[0] > 0)
+            if(styleDamage[3] > 0)
+            {
+                if(hostility > 66)
                 {
-                    if(styleDamage[2] > 0)
+                    say(t, "\"");
+                    if(c.getMorality() > 66)
                     {
-                        if(hostility > 66)
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.FOCUS);
+                        if(innocence > 66)
+                            say(t, "Hahahah!  Okay, okay, now eat the first thing you pull out of that garbage can!");
+                        else
+                        if(innocence > 33)
+                            say(t, "As long as you keep stripping your clothes off, I won't hurt him.  How does that sound?");
+                        else
+                            say(t, (new StringBuilder("Yes, ")).append(c.getMainName()).append(", come and save him from me!  Can't you manage that much?").toString());
+                        say(t, "\"\n\n");
+                        c.say(t, "\"");
+                        if(disgrace > 66)
                         {
-                            say(t, "\"");
-                            if(c.getMorality() > 66)
-                            {
-                                if(disgrace > 66)
-                                    say(t, "No matter how much stronger you are, this weakness of yours is just too big!");
-                                else
-                                if(disgrace > 33)
-                                    say(t, "Hah!  It's your fault that I had to kill them!");
-                                else
-                                    say(t, "Yes!  Suffer!");
-                                say(t, "\"\n\n");
-                                c.say(t, "\"");
-                                if(confidence > 66)
-                                    c.say(t, "Hurting people just because you can...");
-                                else
-                                if(confidence > 33)
-                                    c.say(t, "I can still save some of them!");
-                                else
-                                    c.say(t, (new StringBuilder("I might not be able to forgive ")).append(himHer()).append("...").toString());
-                            } else
-                            if(c.getMorality() > 33)
-                            {
-                                if(deviancy > 66)
-                                {
-                                    say(t, "Nnnaaah~!  Ah...  Done...");
-                                    if(innocence < 67 || timesOrgasmed > 0)
-                                        timesOrgasmed++;
-                                } else
-                                if(deviancy > 33)
-                                    say(t, "That expression is so perfect...");
-                                else
-                                    say(t, "You're next.");
-                                say(t, "\"\n\n");
-                                c.say(t, "\"");
-                                if(innocence > 66)
-                                    c.say(t, (new StringBuilder("It's like... ")).append(heShe()).append(" doesn't even realize what ").append(heShe()).append("'s doing...").toString());
-                                else
-                                if(innocence > 33)
-                                    c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append("'s... enjoying this...").toString());
-                                else
-                                    c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append(" treats them... like objects...").toString());
-                            } else
-                            {
-                                if(innocence > 66)
-                                    say(t, "Where'd you go!?  Who am I supposed to hurt now!?  Aaargh!");
-                                else
-                                if(innocence > 33)
-                                    say(t, "You bitch!  I'll kill you, I'll kill you, I'll kill yooou!");
-                                else
-                                    say(t, "No, no, no!  This is WRONG!  Unacceptable!");
-                                say(t, "\"\n\n");
-                                c.say(t, "\"");
-                                if(disgrace > 66)
-                                    c.say(t, (new StringBuilder("Gah, I almost had ")).append(himHer()).append("!").toString());
-                                else
-                                if(disgrace > 33)
-                                    c.say(t, "Heh.  Too bad.");
-                                else
-                                    c.say(t, (new StringBuilder("Looks like ")).append(heShe()).append("'s not my problem anymore.").toString());
-                            }
-                            c.say(t, "\"");
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                            c.say(t, "You... You coward!");
                         } else
-                        if(hostility > 33)
+                        if(disgrace > 33)
                         {
-                            c.say(t, "\"");
-                            if(c.getConfidence() > 66)
-                            {
-                                if(flavorObedience() > 66)
-                                    c.say(t, "Did you go running back to your precious Demon Lord!");
-                                else
-                                if(flavorObedience() > 33)
-                                    c.say(t, "Don't tell me you're finally getting out of the way so I can kill the Demon Lord!");
-                                else
-                                    c.say(t, "Come on, your enemy is right here!");
-                                c.say(t, "\"\n\n");
-                                say(t, "\"");
-                                if(disgrace > 66)
-                                    say(t, (new StringBuilder("I'll go fight ")).append(c.himHer()).append("... after I catch my breath...").toString());
-                                else
-                                if(disgrace > 33)
-                                    say(t, "Don't flatter yourself.");
-                                else
-                                    say(t, "Tough words from someone who was just about ready to give up a moment ago.");
-                            } else
-                            if(c.getConfidence() > 33)
-                            {
-                                if(disgrace > 66)
-                                    c.say(t, "Coward!");
-                                else
-                                if(disgrace > 33)
-                                    c.say(t, "We weren't finished yet!");
-                                else
-                                    c.say(t, "At least these enemies are easier...");
-                                c.say(t, "\"\n\n");
-                                say(t, "\"");
-                                if(innocence > 66)
-                                    say(t, (new StringBuilder("Darn it, where'd ")).append(c.heShe()).append(" go!?").toString());
-                                else
-                                if(innocence > 33)
-                                    say(t, (new StringBuilder("I can't leave ")).append(c.himHer()).append(" alone for a minute.").toString());
-                                else
-                                    say(t, "And now you're completely defenseless...");
-                            } else
-                            {
-                                if(innocence > 66)
-                                    c.say(t, "This isn't funny!");
-                                else
-                                if(innocence > 33)
-                                    c.say(t, (new StringBuilder("I c-can't fight these and ")).append(himHer()).append(" at once...!").toString());
-                                else
-                                    c.say(t, "F-Fight me yourself!");
-                                c.say(t, "\"\n\n");
-                                say(t, "\"");
-                                if(deviancy > 66)
-                                    say(t, "I'm gonna see if I can squirt it on you from here, okay~?");
-                                else
-                                if(deviancy > 33)
-                                    say(t, "I love that cute little grunt when you attack!");
-                                else
-                                    say(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'ll only get weaker from here on.").toString());
-                            }
-                            say(t, "\"");
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                            c.say(t, "Damn you!");
                         } else
                         {
-                            c.say(t, "\"");
-                            if(c.getInnocence() > 66)
-                            {
-                                if(deviancy > 66)
-                                    c.say(t, "You're looking at me all pervy again!");
-                                else
-                                if(deviancy > 33)
-                                    c.say(t, "You're smirking!  You're definitely smirking!");
-                                else
-                                    c.say(t, "That was your fault!");
-                                c.say(t, "\"\n\n");
-                                say(t, "\"");
-                                if(innocence > 66)
-                                    say(t, "You're just being a big dummy again!");
-                                else
-                                if(innocence > 33)
-                                    say(t, "You're wrong.  I'm just waiting for you to get back up here and fight me properly.");
-                                else
-                                    say(t, "Don't be ridiculous.  Just focus on remedying your own failures.");
-                            } else
-                            if(c.getInnocence() > 33)
-                            {
-                                if(flavorObedience() > 66)
-                                    c.say(t, "Ow!  Are you that eager for round 2?");
-                                else
-                                if(flavorObedience() > 33)
-                                    c.say(t, "Gah!  What was that for!?");
-                                else
-                                    c.say(t, "Hey!  I thought you didn't want to do this!");
-                                c.say(t, "\"\n\n");
-                                say(t, "\"");
-                                if(deviancy > 66)
-                                    say(t, "I'm sorry, I... I can't... resist...");
-                                else
-                                if(deviancy > 33)
-                                    say(t, "I'm not satisfied yet!");
-                                else
-                                    say(t, "You need to defeat me properly.");
-                            } else
-                            {
-                                if(disgrace > 66)
-                                    c.say(t, "Come.  I'm sure can defeat you...");
-                                else
-                                if(disgrace > 33)
-                                    c.say(t, "It seems you're not finished yet...");
-                                else
-                                    c.say(t, "I have no escape routes, so I can only clear out these hostiles to improve my chances.");
-                                c.say(t, "\"\n\n");
-                                say(t, "\"");
-                                if(flavorObedience() > 66)
-                                    say(t, "I will recruit you for the Demon Lord!");
-                                else
-                                if(flavorObedience() > 33)
-                                    say(t, "Sorry, but I can't afford to hold back...!");
-                                else
-                                    say(t, "This might hurt, but you need to get stronger somehow...!");
-                            }
-                            say(t, "\"");
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
+                            c.say(t, "Please, just let me take his place!");
                         }
                     } else
+                    if(c.getMorality() > 33)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                        if(flavorObedience() > 66)
+                            say(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" can't save you from the Demon Lord!  No one can!").toString());
+                        else
+                        if(flavorObedience() > 33)
+                            say(t, "Go on, give me an excuse to kill them.");
+                        else
+                            say(t, "Ah, look how afraid they all are!");
+                        say(t, "\"\n\n");
+                        c.say(t, "\"");
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.SHAME);
+                        if(deviancy > 66)
+                            c.say(t, "Hey!  Stay focused on me!  I'm the one whose body you want, right?");
+                        else
+                        if(deviancy > 33)
+                            c.say(t, "I can't do anything like this...!");
+                        else
+                            c.say(t, "I'm sorry, everyone...");
+                    } else
+                    {
+                        if(disgrace > 66)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                            say(t, "You're so weak!  Not even worth killing!");
+                        } else
+                        if(disgrace > 33)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.NEUTRAL);
+                            say(t, "I'm giving you a free shot.  Are you really okay with me killing you?");
+                        } else
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
+                            say(t, "If this is the best you can do, then I might as well kill you.");
+                        }
+                        say(t, "\"\n\n");
+                        c.say(t, "\"");
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                        if(innocence > 66)
+                            c.say(t, "Stop laughing at me!");
+                        else
+                        if(innocence > 33)
+                            c.say(t, "Shut up, shut up, shut up!");
+                        else
+                            c.say(t, "Enough of your tricks!  Enough!");
+                    }
+                    c.say(t, "\"");
+                } else
+                if(hostility > 33)
+                {
+                    c.say(t, "\"");
+                    if(c.getInnocence() > 66)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                        if(deviancy > 66)
+                            c.say(t, "Hold still, you weirdo!");
+                        else
+                        if(deviancy > 33)
+                            c.say(t, "Quit it!");
+                        else
+                            c.say(t, "You jerk!");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                        if(innocence > 66)
+                            say(t, "Kyahah, are you blind or something!?");
+                        else
+                        if(innocence > 33)
+                            say(t, "Having trouble?");
+                        else
+                            say(t, "Predictable.");
+                    } else
+                    if(c.getInnocence() > 33)
+                    {
+                        if(disgrace > 66)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                            c.say(t, "I should be able to do this!");
+                        } else
+                        if(disgrace > 33)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
+                            c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append("'s trying to get me to leave an opening...").toString());
+                        } else
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.FEAR);
+                            c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append("'s toying with me...").toString());
+                        }
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.FOCUS);
+                        if(dignity > 66)
+                            say(t, "I'll be signing autographs after the battle!");
+                        else
+                        if(dignity > 33)
+                            say(t, "So far, so good.");
+                        else
+                            say(t, "Heh.");
+                    } else
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FOCUS, Project.Emotion.ANGER);
+                        if(flavorObedience() > 66)
+                            c.say(t, "Wouldn't the Demon Lord be happier if you took me head-on!?");
+                        else
+                        if(flavorObedience() > 33)
+                            c.say(t, "Will the Demon Lord really be satisfied with this performance?");
+                        else
+                            c.say(t, "Come, I know that you'd rather be on the attack!");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
+                        if(disgrace > 66)
+                            say(t, "I'm not falling for that one...");
+                        else
+                        if(disgrace > 33)
+                            say(t, "This is plenty for now.");
+                        else
+                            say(t, "I don't want this to be over too quickly.");
+                    }
+                    say(t, "\"");
+                } else
+                {
+                    say(t, "\"");
+                    if(c.getConfidence() > 66)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.SHAME, Project.Emotion.NEUTRAL);
+                        if(confidence > 66)
+                            say(t, "I was even stronger than you, and I still got beaten.");
+                        else
+                        if(confidence > 33)
+                            say(t, "Trying to force your way through is pointless.");
+                        else
+                            say(t, "W-We're all weak compared to the Demon Lord!");
+                        say(t, "\"\n\n");
+                        c.say(t, "\"");
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                        if(disgrace > 66)
+                            c.say(t, "No, you were a weak person deep inside all along.");
+                        else
+                        if(disgrace > 33)
+                            c.say(t, "Enough talk.  Just fight me.");
+                        else
+                            c.say(t, "First I'll get strong enough to beat you, then I'll get strong enough to beat the Demon Lord.");
+                    } else
+                    if(c.getConfidence() > 33)
+                    {
+                        if(flavorObedience() > 66)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                            say(t, "Do you even understand the world the Demon Lord is trying to create!?");
+                        } else
+                        if(flavorObedience() > 33)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.NEUTRAL);
+                            say(t, "You're pretty strong, but not nearly strong enough.");
+                        } else
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.FOCUS);
+                            say(t, "You might be able to beat the Demon Lord, but you have to be careful.");
+                        }
+                        say(t, "\"\n\n");
+                        c.say(t, "\"");
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                        if(innocence > 66)
+                            c.say(t, "You don't even understand what you're saying!");
+                        else
+                        if(innocence > 33)
+                            c.say(t, "I don't trust you!");
+                        else
+                            c.say(t, "Stop trying to distract me!");
+                    } else
+                    {
+                        if(deviancy > 66)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.LEWD);
+                            say(t, "You'd be a lot happier as my personal sex toy.");
+                        } else
+                        if(deviancy > 33)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.JOY);
+                            say(t, "You're just a cute little morsel, as far as the Demon Lord is concerned.");
+                        } else
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
+                            say(t, "With how weak you are, there's no point in standing before the Demon Lord.");
+                        }
+                        say(t, "\"\n\n");
+                        c.say(t, "\"");
+                        if(flavorObedience() > 66)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                            c.say(t, "I don't want to j-join you anyway!");
+                        } else
+                        if(flavorObedience() > 33)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                            c.say(t, "Y-You don't have to say it like that!");
+                        } else
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FOCUS, Project.Emotion.NEUTRAL);
+                            c.say(t, "Um, th-thanks for the advice, but... I'm not giving up!");
+                        }
+                    }
+                    c.say(t, "\"");
+                }
+            } else
+            if(disgrace > 66)
+            {
+                c.say(t, "\"");
+                if(c.getMorality() > 66)
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.FOCUS);
+                    if(flavorObedience() > 66)
+                        c.say(t, "You don't have to keep serving the Demon Lord!");
+                    else
+                    if(flavorObedience() > 33)
+                        c.say(t, "If you come with us, the Demon Lord won't be able to hurt you anymore!");
+                    else
+                        c.say(t, "You can still be forgiven for what you've done!");
+                    c.say(t, "\"\n\n");
+                    say(t, "\"");
+                    Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.ANGER);
+                    if(hostility > 66)
+                        say(t, "I do this because I want to!");
+                    else
+                    if(hostility > 33)
+                        say(t, "I don't need your forgiveness!");
+                    else
+                        say(t, "You haven't beaten me yet!");
+                }
+                say(t, "\"");
+            } else
+            if(disgrace > 33)
+            {
+                say(t, "\"");
+                if(c.getConfidence() > 66)
+                {
+                    Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                    if(confidence > 66)
+                        say(t, "Ngh!  Fine!  We'll do it this way!");
+                    else
+                    if(confidence > 33)
+                        say(t, "Ergh, this one's strong...!");
+                    else
+                        say(t, "Let go!  Let me go!");
+                    say(t, "\"\n\n");
+                    c.say(t, "\"");
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FOCUS, Project.Emotion.STRUGGLE);
+                    if(innocence > 66)
+                        c.say(t, "You left yourself wide open!");
+                    else
+                    if(innocence > 33)
+                        c.say(t, "Gh!  Hah, you sure do fight back...!");
+                    else
+                        c.say(t, "No more tricks, let's settle this here!");
+                } else
+                if(c.getConfidence() > 33)
+                {
+                    Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.STRUGGLE);
+                    if(innocence > 66)
+                        say(t, "Waaah!");
+                    else
+                    if(innocence > 33)
+                        say(t, "There!");
+                    else
+                        say(t, "Got you!");
+                    say(t, "\"\n\n");
+                    c.say(t, "\"");
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FOCUS, Project.Emotion.STRUGGLE);
+                    if(dignity > 66)
+                        c.say(t, "I knew you'd be a tough opponent!");
+                    else
+                    if(dignity > 33)
+                        c.say(t, "I will defeat you!");
+                    else
+                        c.say(t, (new StringBuilder("Hard to follow ")).append(hisHer()).append(" attacks...!").toString());
+                } else
+                {
+                    if(deviancy > 66)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.JOY);
+                        say(t, "Ah, the things I'm going to do to you...");
+                    } else
+                    if(deviancy > 33)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.FOCUS);
+                        say(t, "You're such a cute little thing.");
+                    } else
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
+                        say(t, "You're afraid.");
+                    }
+                    say(t, "\"\n\n");
+                    c.say(t, "\"");
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
+                    if(confidence > 66)
+                        c.say(t, "D-Don't hurt me!");
+                    else
+                    if(confidence > 33)
+                        c.say(t, "No!  S-Stay back!");
+                    else
+                        c.say(t, "S-Stop trying to act tough, i-it's not working...!");
+                }
+                c.say(t, "\"");
+            } else
+            {
+                c.say(t, "\"");
+                if(c.getMorality() > 66)
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                    if(hostility > 66)
+                        c.say(t, "I can't let you hurt anyone else.");
+                    else
+                    if(hostility > 33)
+                        c.say(t, "This is what you wanted, right?");
+                    else
+                        c.say(t, "I won't run anymore.");
+                    c.say(t, "\"\n\n");
+                    say(t, "\"");
+                    if(deviancy > 66)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.JOY);
+                        say(t, "That determination... nnngh, I love it!");
+                    } else
+                    if(deviancy > 33)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                        say(t, "I like that expression.");
+                    } else
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
+                        say(t, "You know what happens next.");
+                    }
+                } else
+                if(c.getMorality() > 33)
+                {
+                    if(deviancy > 66)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                        c.say(t, "Shut up!  I don't want to hear any of this!");
+                    } else
+                    if(deviancy > 33)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                        c.say(t, "Stop staring at me like that!");
+                    } else
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.FEAR);
+                        c.say(t, "Haaah, ugh...");
+                    }
+                    c.say(t, "\"\n\n");
+                    say(t, "\"");
+                    Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.NEUTRAL);
+                    if(confidence > 66)
+                        say(t, "Let's continue!");
+                    else
+                    if(confidence > 33)
+                        say(t, "That's far enough!");
+                    else
+                        say(t, (new StringBuilder("This time, I need to face ")).append(c.himHer()).append(" down without hesitating...").toString());
+                } else
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
+                    if(confidence > 66)
+                        c.say(t, "No!  Not again!");
+                    else
+                    if(confidence > 33)
+                        c.say(t, "Get out of my way!");
+                    else
+                        c.say(t, "Haven't you had enough!?");
+                    c.say(t, "\"\n\n");
+                    say(t, "\"");
+                    Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.NEUTRAL);
+                    if(innocence > 66)
+                        say(t, "Ah, there you are!");
+                    else
+                    if(innocence > 33)
+                        say(t, "Got you.");
+                    else
+                        say(t, "Did you really think you could escape me?");
+                }
+                say(t, "\"");
+            }
+        } else
+        if(c.captureProgression % 6 == 4)
+        {
+            if(styleDamage[0] > 0)
+            {
+                if(styleDamage[3] > 0)
+                {
                     if(hostility > 66)
                     {
-                        c.say(t, "\"");
-                        if(c.getInnocence() > 66)
+                        say(t, "\"");
+                        if(c.getMorality() > 66)
                         {
-                            if(disgrace > 66)
-                                c.say(t, (new StringBuilder("Wow, ")).append(heShe()).append("'s so weak ").append(heShe()).append(" can't even part-way-kill me...").toString());
-                            else
-                            if(disgrace > 33)
-                                c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append("'s really unlucky.  ").append(HeShe()).append(" keeps missing me!").toString());
-                            else
-                                c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append("'s really strong, but ").append(heShe()).append("'s also really bad at killing me.").toString());
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
-                            if(innocence > 66)
-                                say(t, "Shut up!  You don't know anything!");
-                            else
-                            if(innocence > 33)
-                                say(t, "You don't know how lucky you are, you little shit!");
-                            else
-                                say(t, "To be pitied by someone like this... unacceptable!");
-                        } else
-                        if(c.getInnocence() > 33)
-                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.FOCUS);
                             if(confidence > 66)
-                                c.say(t, (new StringBuilder("I didn't think ")).append(heShe()).append("'d hide...").toString());
+                                say(t, "You can't even imagine all the ways I'm going to hurt you!");
                             else
                             if(confidence > 33)
-                                c.say(t, "Where'd you go!?");
+                                say(t, "I'll kill all of you!  Kill, kill, kill!");
                             else
-                                c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append(" really is a wimp at ").append(hisHer()).append(" core.").toString());
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
-                            if(deviancy > 66)
-                                say(t, "I can't stay hidden, I need to make you scream some more!");
+                                say(t, "Give up hope!  The sooner you end it all, the better!");
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            if(disgrace > 66)
+                            {
+                                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FOCUS, Project.Emotion.ANGER);
+                                c.say(t, "I'll defeat you and prove you wrong!");
+                            } else
+                            if(disgrace > 33)
+                            {
+                                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FOCUS, Project.Emotion.FEAR);
+                                c.say(t, "No!  Justice will prevail!");
+                            } else
+                            {
+                                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.SHAME);
+                                c.say(t, (new StringBuilder("Please, don't listen to ")).append(himHer()).append("!").toString());
+                            }
+                        } else
+                        if(c.getMorality() > 33)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.ANGER);
+                            if(disgrace > 66)
+                                say(t, "Ahahah, the more you hurt me, the more motivated I am to make you suffer!");
                             else
-                            if(deviancy > 33)
-                                say(t, (new StringBuilder("Nnn...  ")).append(c.HisHer()).append(" throat's all exposed and vulnerable...").toString());
+                            if(disgrace > 33)
+                                say(t, "Die!  Die!  Die!");
                             else
-                                say(t, "Enjoy this break, because things are about to get a lot more painful...");
+                                say(t, "Pathetic weakling!");
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
+                            if(innocence > 66)
+                                c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append(" doesn't even care...!").toString());
+                            else
+                            if(innocence > 33)
+                                c.say(t, "There's no end to this...!");
+                            else
+                                c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append("'s always a step ahead...!").toString());
                         } else
                         {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                            if(innocence > 66)
+                                say(t, "I'm gonna kill you so hard that you'll be super dead!");
+                            else
+                            if(innocence > 33)
+                                say(t, "I'll piss on your grave, bitch!");
+                            else
+                                say(t, "Foolish puppet.  You're almost too useful to kill.");
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                             if(deviancy > 66)
-                                c.say(t, "Either this is some sort of bizarre fetish play, or you're not permitted to kill me.");
+                                c.say(t, "Brainless slut!  Ride this!");
                             else
                             if(deviancy > 33)
-                                c.say(t, "You're enjoying this, but you'd be enjoying it even more if you had permission to kill me, right?");
+                                c.say(t, "You smug piece of shit!");
                             else
-                                c.say(t, "The thing that enrages you most is that you aren't allowed to kill me.  Am I correct?");
-                            c.say(t, "\"\n\n");
-                            if(flavorObedience() > 66)
-                                say(t, "I can only hope that the Demon Lord will change his mind...");
-                            else
-                            if(flavorObedience() > 33)
-                                say(t, "Don't push me, or I might decide that the punishment is worth it.");
-                            else
-                                say(t, "Those are the Demon Lord's orders, but I don't really care.  I just want to make you suffer more first.");
+                                c.say(t, "I'm putting you out of your misery right now!");
                         }
-                        say(t, "\"");
+                        c.say(t, "\"");
                     } else
                     if(hostility > 33)
                     {
                         say(t, "\"");
-                        if(c.getConfidence() > 66)
-                        {
-                            if(disgrace > 66)
-                                say(t, "Come on, aren't you going to finish me off!?");
-                            else
-                            if(disgrace > 33)
-                                say(t, "Catch me if you can!");
-                            else
-                                say(t, "Try hitting me.");
-                            say(t, "\"\n\n");
-                            c.say(t, "\"");
-                            if(deviancy > 66)
-                                c.say(t, "You'd like that, wouldn't you?");
-                            else
-                            if(deviancy > 33)
-                                c.say(t, "You won't be able to keep enjoying this for long!");
-                            else
-                                c.say(t, "I will defeat you!");
-                        } else
-                        if(c.getConfidence() > 33)
-                        {
-                            if(innocence > 66)
-                                say(t, "Hah, stupid dummy!");
-                            else
-                            if(innocence > 33)
-                                say(t, "Looks like you don't have what it takes after all!");
-                            else
-                                say(t, "A poor performance on your part, wouldn't you agree?");
-                            say(t, "\"\n\n");
-                            c.say(t, "\"");
-                            if(disgrace > 66)
-                                c.say(t, "I'll make you regret this!");
-                            else
-                            if(disgrace > 33)
-                                c.say(t, "Come back here and fight me!");
-                            else
-                                c.say(t, "Ugh, you're really gloating...");
-                        } else
-                        {
-                            if(deviancy > 66)
-                                say(t, "Don't mind me, I'm just sizing you up for a collar.");
-                            else
-                            if(deviancy > 33)
-                                say(t, "You really are a masochist, aren't you?");
-                            else
-                                say(t, "People like you annoy me the most.");
-                            say(t, "\"\n\n");
-                            c.say(t, "\"");
-                            if(confidence > 66)
-                                c.say(t, "I wish I weren't so weak to this sort of thing...");
-                            else
-                            if(confidence > 33)
-                                c.say(t, (new StringBuilder("I'm trying to ignore ")).append(himHer()).append(", but...").toString());
-                            else
-                                c.say(t, (new StringBuilder("I won't let ")).append(himHer()).append("...!").toString());
-                        }
-                        c.say(t, "\"");
-                    } else
-                    {
-                        c.say(t, "\"");
-                        if(c.getMorality() > 66)
-                        {
-                            if(flavorObedience() > 66)
-                                c.say(t, "How could you do that to them!?");
-                            else
-                            if(flavorObedience() > 33)
-                                c.say(t, "You're exchanging your safety for their lives!");
-                            else
-                                c.say(t, "You're in no position to talk about that!");
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
-                            if(innocence > 66)
-                                say(t, "I don't see what the big deal is.");
-                            else
-                            if(innocence > 33)
-                                say(t, "What are you going to do about it?");
-                            else
-                                say(t, "What did you expect?");
-                        } else
-                        if(c.getMorality() > 33)
-                        {
-                            if(deviancy > 66)
-                                c.say(t, "That's disgusting!");
-                            else
-                            if(deviancy > 33)
-                                c.say(t, "Stop talking about my body!");
-                            else
-                                c.say(t, "Keep your comments to yourself!");
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
-                            if(disgrace > 66)
-                                say(t, "I can't really fight you, so this is all I can do.");
-                            else
-                            if(disgrace > 33)
-                                say(t, "What else should I do?  Fight you?  I don't think either of us want that.");
-                            else
-                                say(t, "Do you really want to fight me?");
-                        } else
-                        {
-                            if(disgrace > 66)
-                                c.say(t, "You'd better keep running!");
-                            else
-                            if(disgrace > 33)
-                                c.say(t, "Get back here right now!");
-                            else
-                                c.say(t, "Just bleed already!");
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
-                            if(deviancy > 66)
-                                say(t, "Ah, this passion~!");
-                            else
-                            if(deviancy > 33)
-                                say(t, "You're actually cuter when you're mad!");
-                            else
-                                say(t, "You really need to learn to control yourself.");
-                        }
-                        say(t, "\"");
-                    }
-                } else
-                if(styleDamage[2] > 0)
-                {
-                    if(flavorObedience() > 66)
-                    {
-                        c.say(t, "\"");
-                        if(c.getMorality() > 66)
-                        {
-                            if(innocence > 66)
-                                c.say(t, "Let's put our fight on hold until they're safe.");
-                            else
-                            if(innocence > 33)
-                                c.say(t, "Let me help you.");
-                            else
-                                c.say(t, "I'll let you finish.");
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
-                            if(hostility > 66)
-                                say(t, "Don't look at me like that!  I'd rather kill them, but the Demon Lord has other plans.");
-                            else
-                            if(hostility > 33)
-                                say(t, "Are you sure?  Most of them are going to end up becoming my allies, after all.");
-                            else
-                                say(t, "Thanks.");
-                        } else
-                        if(c.getMorality() > 33)
-                        {
-                            if(disgrace > 66)
-                                c.say(t, "Stop hiding!");
-                            else
-                            if(disgrace > 33)
-                                c.say(t, "You've got to be kidding me!");
-                            else
-                                c.say(t, "At least these ones are easier...");
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
-                            if(confidence > 66)
-                                say(t, "I had things under control...");
-                            else
-                            if(confidence > 33)
-                                say(t, "Don't waste the lives the Demon Lord gave you!");
-                            else
-                                say(t, "Th-Thanks, everyone...");
-                        } else
-                        {
-                            if(hostility > 66)
-                                c.say(t, (new StringBuilder("Surprised ")).append(heShe()).append(" isn't killing any of them.").toString());
-                            else
-                            if(hostility > 33)
-                                c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append(" seems to be enjoying this.").toString());
-                            else
-                                c.say(t, "Not my problem.");
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
-                            if(innocence > 66)
-                                say(t, (new StringBuilder("Oh, right!  I'm supposed to be fighting ")).append(c.getMainName()).append("!").toString());
-                            else
-                            if(innocence > 33)
-                                say(t, (new StringBuilder("Alright, now what's ")).append(c.getMainName()).append(" doing?").toString());
-                            else
-                                say(t, "I must ensure that the mission as a whole is successful.");
-                        }
-                        say(t, "\"");
-                    } else
-                    if(flavorObedience() > 33)
-                    {
-                        c.say(t, "\"");
-                        if(c.getConfidence() > 66)
-                        {
-                            if(disgrace > 66)
-                                c.say(t, "You can't hide forever!");
-                            else
-                            if(disgrace > 33)
-                                c.say(t, "You know you can't beat me alone!");
-                            else
-                                c.say(t, "Don't turn your back on me!");
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
-                            if(confidence > 66)
-                                say(t, "What's the matter?  This should be nothing for you!");
-                            else
-                            if(confidence > 33)
-                                say(t, "Were you expecting me to fight fair?");
-                            else
-                                say(t, "I hope the Demon Lord doesn't mind me using his soldiers...");
-                        } else
-                        if(c.getConfidence() > 33)
-                        {
-                            if(confidence > 66)
-                                c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append(" holds all the cards...").toString());
-                            else
-                            if(confidence > 33)
-                                c.say(t, "I won't let this stop me...!");
-                            else
-                                c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append("'s scared, I can tell...!").toString());
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
-                            if(innocence > 66)
-                                say(t, "Flanking maneuver!  About face!  Crazy Ivan!");
-                            else
-                            if(innocence > 33)
-                                say(t, "Can you handle this?");
-                            else
-                                say(t, "Squad G, hold until further orders!");
-                        } else
-                        {
-                            if(hostility > 66)
-                                c.say(t, "Why do you keep hurting me!?");
-                            else
-                            if(hostility > 33)
-                                c.say(t, "Ah!  Stop!");
-                            else
-                                c.say(t, "Please, tell them to let me go!");
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
-                            if(deviancy > 66)
-                                say(t, (new StringBuilder("Ah, ")).append(c.getMainName()).append(", your screams are too beautiful...!").toString());
-                            else
-                            if(deviancy > 33)
-                                say(t, "Hm, it's easier to appreciate the whole scene this way.");
-                            else
-                                say(t, "Are you just going to cry?");
-                        }
-                        say(t, "\"");
-                    } else
-                    {
-                        c.say(t, "\"");
                         if(c.getInnocence() > 66)
                         {
-                            if(innocence > 66)
-                                c.say(t, "Um, did you forget that you're on their side now?");
-                            else
-                            if(innocence > 33)
-                                c.say(t, "Woah!");
-                            else
-                                c.say(t, "Huh!?  Is this some sort of trick!?");
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.JOY);
                             if(deviancy > 66)
-                                say(t, "I had the PERFECT scene set up!  And that Demon RUINED it!");
+                                say(t, "By the way, I'm watching you through the cameras while I masturbate.");
                             else
                             if(deviancy > 33)
-                                say(t, "I just want to keep you all to myself!");
+                                say(t, "This camera has a really good view.");
                             else
-                                say(t, "I hate the Demons most of all.");
+                                say(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s too stupid to even keep track of ").append(c.hisHer()).append(" enemy!").toString());
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            if(disgrace > 66)
+                            {
+                                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                                c.say(t, "Come out, you wimp!");
+                            } else
+                            if(disgrace > 33)
+                            {
+                                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.FEAR);
+                                c.say(t, "Don't say that!");
+                            } else
+                            {
+                                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.ANGER);
+                                c.say(t, "I-I'm not scared to face you again, I'm not!");
+                            }
                         } else
                         if(c.getInnocence() > 33)
                         {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.ANGER);
+                            if(confidence > 66)
+                                say(t, "I will make you kneel!");
+                            else
+                            if(confidence > 33)
+                                say(t, "You might as well surrender!");
+                            else
+                                say(t, "There's no point in resisting.");
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
                             if(deviancy > 66)
-                                c.say(t, "You really are obsessed with me, aren't you?");
+                                c.say(t, "You're disgusting!");
                             else
                             if(deviancy > 33)
-                                c.say(t, "So, I guess you've really fallen for me.");
+                                c.say(t, "Laugh while you can!");
                             else
-                                c.say(t, "You hate the Demons that much?");
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
-                            if(hostility > 66)
-                                say(t, (new StringBuilder("I'm going to be the one who kills you, ")).append(c.getMainName()).append(".  No one else.").toString());
-                            else
-                            if(hostility > 33)
-                                say(t, "That's right.");
-                            else
-                                say(t, "I'm not on the Demons' side in the first place.");
+                                c.say(t, "Just shut up!");
                         } else
                         {
-                            if(hostility > 66)
-                                c.say(t, "You even refuse their help.");
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.FOCUS);
+                            if(disgrace > 66)
+                                say(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s actually letting me go because I bribed ").append(c.himHer()).append(".").toString());
                             else
-                            if(hostility > 33)
-                                c.say(t, "You're sabotaging your supposed allies.");
+                            if(disgrace > 33)
+                                say(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" isn't even trying to fight me!").toString());
                             else
-                                c.say(t, "I see.  You want to deny the Demon Lord the additional resources.");
-                            c.say(t, "\"\n\n");
-                            say(t, "\"");
+                                say(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" only cares about protecting ").append(c.himHer()).append("self.").toString());
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
                             if(innocence > 66)
-                                say(t, "Well, duh.");
+                                c.say(t, "Surely none of you are stupid enough to fall for this!");
                             else
                             if(innocence > 33)
-                                say(t, "I hope you're not expecting me to stop fighting you, though.");
+                                c.say(t, "Hmph, surprisingly cunning...");
                             else
-                                say(t, "I'm glad you understand.");
+                                c.say(t, "I will not allow you to spread these lies!");
+                        }
+                        c.say(t, "\"");
+                    } else
+                    {
+                        c.say(t, "\"");
+                        if(c.getDignity() > 66)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                            if(deviancy > 66)
+                                c.say(t, "Excuse me!");
+                            else
+                            if(deviancy > 33)
+                                c.say(t, "I didn't give you permission to look!");
+                            else
+                                c.say(t, "You could have warned me earlier!");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.SHAME);
+                            if(innocence > 66)
+                                say(t, "Oops.");
+                            else
+                            if(innocence > 33)
+                                say(t, "Are you going to keep fighting me or not?");
+                            else
+                                say(t, "Consider it an important lesson.");
+                        } else
+                        if(c.getDignity() > 33)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                            if(flavorObedience() > 66)
+                                c.say(t, (new StringBuilder("That must have been what ")).append(heShe()).append(" was after all along...!").toString());
+                            else
+                            if(flavorObedience() > 33)
+                                c.say(t, "So the Demon Lord ordered you to strip me?");
+                            else
+                                c.say(t, "This is your fault!");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(deviancy > 66)
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.JOY);
+                                say(t, "I wish I had a camera, too...");
+                            } else
+                            if(deviancy > 33)
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.LEWD);
+                                say(t, "Looking good!");
+                            } else
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
+                                say(t, "If you can't stop this, then you have to get used to it.");
+                            }
+                        } else
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FOCUS, Project.Emotion.ANGER);
+                            if(disgrace > 66)
+                                c.say(t, "Get back here!");
+                            else
+                            if(disgrace > 33)
+                                c.say(t, (new StringBuilder("I've got ")).append(himHer()).append(" on the run...!").toString());
+                            else
+                                c.say(t, (new StringBuilder("I can't let ")).append(himHer()).append(" out of my sight...").toString());
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                            if(flavorObedience() > 66)
+                                say(t, "Yes, yes, let everyone see...");
+                            else
+                            if(flavorObedience() > 33)
+                                say(t, "Mission accomplished.");
+                            else
+                                say(t, "Hey!  Don't you know what happens when people see you as weak!?");
                         }
                         say(t, "\"");
                     }
                 } else
-                if(deviancy > 66)
+                if(hostility > 66)
                 {
-                    say(t, "\"");
-                    if(c.getDignity() > 66)
+                    c.say(t, "\"");
+                    if(c.getInnocence() > 66)
                     {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                        if(deviancy > 66)
+                            c.say(t, "Stay away from me, you freak!");
+                        else
+                        if(deviancy > 33)
+                            c.say(t, "Stop messing with my body!");
+                        else
+                            c.say(t, "S-Stop saying those things!");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.FOCUS);
                         if(disgrace > 66)
-                            say(t, "You really want to fight me some more, don't you?");
+                            say(t, "You may be stronger, but I know what I want.");
                         else
                         if(disgrace > 33)
-                            say(t, "Come on, what's the matter?");
+                            say(t, "But don't you want to know what's going to happen to you after I win?");
                         else
-                            say(t, "Too slow.  Do you actually want to get caught?");
-                        say(t, "\"\n\n");
-                        c.say(t, "\"");
+                            say(t, "You can't stop me.");
+                    } else
+                    if(c.getInnocence() > 33)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
+                        if(flavorObedience() > 66)
+                            c.say(t, "It's even worse than what I feel from the Demons...");
+                        else
+                        if(flavorObedience() > 33)
+                            c.say(t, (new StringBuilder("This is what the Demons have done to ")).append(himHer()).append("...").toString());
+                        else
+                            c.say(t, (new StringBuilder("I think... the Demon Lord is actually holding ")).append(himHer()).append(" back...").toString());
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                        if(morality > 66)
+                            say(t, "I've become... everything I once hated...!");
+                        else
+                        if(morality > 33)
+                            say(t, "Aaagh!");
+                        else
+                            say(t, "Kill... everyone...!");
+                    } else
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FOCUS, Project.Emotion.STRUGGLE);
+                        if(disgrace > 66)
+                            c.say(t, (new StringBuilder("I must not let ")).append(himHer()).append(" escape.").toString());
+                        else
+                        if(disgrace > 33)
+                            c.say(t, "Where...?");
+                        else
+                            c.say(t, (new StringBuilder("Now, while ")).append(heShe()).append("'s distracted...!").toString());
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
                         if(innocence > 66)
-                            c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append(" has no idea what ").append(heShe()).append("'s doing to me...").toString());
+                            say(t, "Ahahah, die, die!");
                         else
                         if(innocence > 33)
-                            c.say(t, "There's no way I could actually be enjoying this!");
+                            say(t, "I'll have some fun with you guys first.");
                         else
-                            c.say(t, "Don't play dumb, you know exactly what you're doing...");
-                    } else
-                    if(c.getDignity() > 33)
+                            say(t, "I must maximize the total number of casualties.");
+                    }
+                    say(t, "\"");
+                } else
+                if(hostility > 33)
+                {
+                    c.say(t, "\"");
+                    if(c.getConfidence() > 66)
                     {
-                        if(dignity > 66)
-                            say(t, "Yes, yes, look at me!");
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                        if(deviancy > 66)
+                            c.say(t, "Ugh!  I'm shutting that disgusting mouth of yours right now!");
                         else
-                        if(dignity > 33)
-                            say(t, "Ah, I started without realizing it...");
+                        if(deviancy > 33)
+                            c.say(t, "You don't have time to think about all that!");
                         else
-                            say(t, "F-Feels... good...!");
-                        say(t, "\"\n\n");
-                        c.say(t, "\"");
-                        if(hostility > 66)
-                            c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append(" actually looks happy for once...").toString());
-                        else
-                        if(hostility > 33)
-                            c.say(t, "Is this really all just a game to you?");
-                        else
-                            c.say(t, "What do you think you're doing?");
-                    } else
-                    {
-                        if(hostility > 66)
-                            say(t, "No!  You're supposed to blush and cover yourself and beg me to leave to alone!");
-                        else
-                        if(hostility > 33)
-                            say(t, "I need to get my hands on you even more...");
-                        else
-                            say(t, "Ah, I want to show you the pleasure of public sex!");
-                        say(t, "\"\n\n");
-                        c.say(t, "\"");
+                            c.say(t, "We'll see how smug you are after this!");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
                         if(disgrace > 66)
-                            say(t, "Is that what you were after?  You're pretty bad at this.");
+                            say(t, "Ah, are you going to hurt me more?");
                         else
                         if(disgrace > 33)
-                            say(t, "If you say so.  Can we hurry this up?");
+                            say(t, "Having trouble focusing?");
                         else
-                            say(t, "Well, it seems like you're stronger than me, so I can't really complain if you want to do this sort of thing instead.");
+                            say(t, "You want me to get serious?");
+                    } else
+                    if(c.getConfidence() > 33)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                        if(disgrace > 66)
+                            c.say(t, "Tough words from someone who can barely stand!");
+                        else
+                        if(disgrace > 33)
+                            c.say(t, "You're wasting your breath!");
+                        else
+                            c.say(t, "Stop gloating!");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.FOCUS);
+                        if(innocence > 66)
+                            say(t, (new StringBuilder("Ooh, ")).append(c.heShe()).append("'s getting mad!").toString());
+                        else
+                        if(innocence > 33)
+                            say(t, "Hah!");
+                        else
+                            say(t, "You're so simple.");
+                    } else
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
+                        if(dignity > 66)
+                            c.say(t, "P-Please, no more!");
+                        else
+                        if(dignity > 33)
+                            c.say(t, "Why do you hate me...?");
+                        else
+                            c.say(t, "Y-You don't have to shout...");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        if(flavorObedience() > 66)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
+                            say(t, "You aren't even worthy to belong to the Demon Lord!");
+                        } else
+                        if(flavorObedience() > 33)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                            say(t, "Weakling!  Just get out of my way!");
+                        } else
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                            say(t, "Hah, are you crying?  You're crying!");
+                        }
+                    }
+                    say(t, "\"");
+                } else
+                {
+                    say(t, "\"");
+                    if(c.getMorality() > 66)
+                    {
+                        if(flavorObedience() > 66)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
+                            say(t, "The Demon Lord doesn't want those people dead, either!");
+                        } else
+                        if(flavorObedience() > 33)
+                            say(t, "I'm being forced to do this by the Demon Lord.");
+                        else
+                            say(t, "What would you have done if I had wanted to kill them!?");
+                        say(t, "\"\n\n");
+                        c.say(t, "\"");
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.SHAME);
+                        if(innocence > 66)
+                            c.say(t, "Think about what you're saying!");
+                        else
+                        if(innocence > 33)
+                            c.say(t, "Stop acting like you're still a hero.");
+                        else
+                            c.say(t, "So, you've really found a way to convince yourself that you don't need to feel guilty.");
+                    } else
+                    if(c.getMorality() > 33)
+                    {
+                        if(deviancy > 66)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
+                            say(t, "That was... uck, guh... worth it...");
+                        } else
+                        if(deviancy > 33)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.LEWD);
+                            say(t, "You shake your butt when you're climbing.");
+                        } else
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                            say(t, "I don't sense anyone either, but that doesn't mean they aren't there!");
+                        }
+                        say(t, "\"\n\n");
+                        c.say(t, "\"");
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.SHAME);
+                        if(disgrace > 66)
+                            c.say(t, "Can't you just give up already!?");
+                        else
+                        if(disgrace > 33)
+                            c.say(t, "I don't want to hear that from you!");
+                        else
+                            c.say(t, "I should be grateful that you're just standing there now, but... it's still annoying...");
+                    } else
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.SHAME);
+                        if(innocence > 66)
+                            say(t, "You really shouldn't be so mean!");
+                        else
+                        if(innocence > 33)
+                            say(t, "Too much hatred is a bad thing!  That goes for both Chosen and Forsaken!");
+                        else
+                            say(t, "The reserve of psychic energy we call 'Demonic' can be accessed most efficiently at a particular level of hatred - no lower than that, but also no higher than that!");
+                        say(t, "\"\n\n");
+                        c.say(t, "\"");
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                        if(morality > 66)
+                            c.say(t, "I'm not interested in doing things your way!");
+                        else
+                        if(morality > 33)
+                            c.say(t, "Just shut up!");
+                        else
+                            c.say(t, "That's rich, coming from you!");
                     }
                     c.say(t, "\"");
+                }
+            } else
+            if(styleDamage[3] > 0)
+            {
+                if(deviancy > 66)
+                {
+                    c.say(t, "\"");
+                    if(c.getConfidence() > 66)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
+                        if(disgrace > 66)
+                            c.say(t, "Where did all this energy come from!?");
+                        else
+                        if(disgrace > 33)
+                            c.say(t, "You can't afford to mess around like this!");
+                        else
+                            c.say(t, "Grrgh!  Let... go...!");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.FOCUS);
+                        if(innocence > 66)
+                            say(t, "I wanna see mooore!");
+                        else
+                        if(innocence > 33)
+                            say(t, "Tear it all off!");
+                        else
+                            say(t, "Ah, yes, this pain is... exquisite...!");
+                    } else
+                    if(c.getConfidence() > 33)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                        if(innocence > 66)
+                            c.say(t, "Do you even realize where we are!?");
+                        else
+                        if(innocence > 33)
+                            c.say(t, "This changes nothing!");
+                        else
+                            c.say(t, "You set this up...");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.LEWD);
+                        if(dignity > 66)
+                            say(t, "Let's give them a good show!");
+                        else
+                        if(dignity > 33)
+                            say(t, "Ah, they're all looking...");
+                        else
+                            say(t, "Doing it in public feels so much better, doesn't it?");
+                    } else
+                    {
+                        if(hostility > 66)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
+                            c.say(t, "Ow!  It hurts...!");
+                        } else
+                        if(hostility > 33)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
+                            c.say(t, "Please, not there!");
+                        } else
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.FEAR);
+                            c.say(t, "They're... They're booing me...");
+                        }
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.FOCUS);
+                        if(disgrace > 66)
+                            say(t, "You're so much cuter when you stop fighting back!");
+                        else
+                        if(disgrace > 33)
+                            say(t, "I'm going to rape you right in front of them.");
+                        else
+                            say(t, "They're seeing how pathetic you are.");
+                    }
+                    say(t, "\"");
                 } else
                 if(deviancy > 33)
                 {
                     say(t, "\"");
-                    if(c.getConfidence() > 66)
+                    if(c.getDignity() > 66)
                     {
                         if(hostility > 66)
-                            say(t, "You're so perfect that it's disgusting.");
-                        else
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.FOCUS);
+                            say(t, "You'll just be remembered as a pretty set of legs!");
+                        } else
                         if(hostility > 33)
-                            say(t, "The way you fight is... beautiful.");
-                        else
-                            say(t, "You have a strong will.  That's worth a lot.");
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                            say(t, "Everyone will know how weak you are!");
+                        } else
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
+                            say(t, "When you react like that, I can't help myself...!");
+                        }
                         say(t, "\"\n\n");
                         c.say(t, "\"");
-                        if(flavorObedience() > 66)
-                            c.say(t, "Heh.  Trying to get me to join you?");
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.SHAME);
+                        if(disgrace > 66)
+                            c.say(t, "No, no, this is starting to go completely wrong!");
                         else
-                        if(flavorObedience() > 33)
-                            c.say(t, "Don't worry.  I'll save you, too, when I kill the Demon Lord.");
+                        if(disgrace > 33)
+                            c.say(t, "I can't protect myself and my clothes at the same time...!");
                         else
-                            c.say(t, "Then you know I have what it takes to beat the Demon Lord.");
+                            c.say(t, "It's hopeless...");
                     } else
-                    if(c.getConfidence() > 33)
+                    if(c.getDignity() > 33)
                     {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.FOCUS);
+                        if(innocence > 66)
+                            say(t, "I wanna have some fun...");
+                        else
+                        if(innocence > 33)
+                            say(t, "This isn't good.  I'm getting more turned on...");
+                        else
+                            say(t, "Hm, it may be better in the long run if I sate some of my desire now...");
+                        say(t, "\"\n\n");
+                        c.say(t, "\"");
                         if(confidence > 66)
-                            say(t, "We can wear disguises, go out like two civilians...");
-                        else
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FOCUS, Project.Emotion.ANGER);
+                            c.say(t, "Hah, I'll make you pay for that!");
+                        } else
                         if(confidence > 33)
-                            say(t, "You're so sexy I can hardly control myself.");
-                        else
-                            say(t, "You're just... beautiful in every single way...");
-                        say(t, "\"\n\n");
-                        c.say(t, "\"");
-                        if(disgrace > 66)
-                            c.say(t, "Are you trying to distract me?");
-                        else
-                        if(disgrace > 33)
-                            c.say(t, "Thanks, I suppose.");
-                        else
-                            c.say(t, "That means a lot, coming from you.");
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.FEAR);
+                            c.say(t, "Hands off!");
+                        } else
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
+                            c.say(t, "N-Nooo!");
+                        }
                     } else
                     {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
                         if(disgrace > 66)
-                            say(t, "There would be no point in trying to physically hurt you.");
+                            say(t, "At least I can do this much.");
                         else
                         if(disgrace > 33)
-                            say(t, "You're fun to play with.");
+                            say(t, "Easy enough!");
                         else
-                            say(t, "If you struggle too hard, you'll just hurt yourself.");
+                            say(t, "I'll blast them all off.");
                         say(t, "\"\n\n");
                         c.say(t, "\"");
-                        if(hostility > 66)
-                            c.say(t, "Even though I know you want to kill me...");
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.ANGER);
+                        if(innocence > 66)
+                            c.say(t, "Why are you attacking my clothes?");
                         else
-                        if(hostility > 33)
-                            c.say(t, "You're holding back...");
+                        if(innocence > 33)
+                            c.say(t, "What are you trying to do?");
                         else
-                            c.say(t, "You don't hate me at all...");
+                            c.say(t, (new StringBuilder(String.valueOf(HisHer()))).append(" attacks are just barely missing...").toString());
                     }
                     c.say(t, "\"");
                 } else
                 {
-                    say(t, "\"");
+                    c.say(t, "\"");
                     if(c.getInnocence() > 66)
                     {
                         if(disgrace > 66)
-                            say(t, "There would be no point in trying to physically hurt you.");
-                        else
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FOCUS, Project.Emotion.JOY);
+                            c.say(t, "It feels like nothing's weighing me down anymore!");
+                        } else
                         if(disgrace > 33)
-                            say(t, "Let's continue.");
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FOCUS, Project.Emotion.STRUGGLE);
+                            c.say(t, "Hyaaah!");
+                        } else
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.FEAR);
+                            c.say(t, "Waaah!");
+                        }
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.FOCUS);
+                        if(innocence > 66)
+                            say(t, "Huh, did it get chillier?");
                         else
-                            say(t, "If you struggle too hard, you'll just hurt yourself.");
-                        say(t, "\"\n\n");
-                        c.say(t, "\"");
-                        if(hostility > 66)
-                            c.say(t, "Aren't you supposed to be super evil or something?");
+                        if(innocence > 33)
+                            say(t, "Hmph!");
                         else
-                        if(hostility > 33)
-                            c.say(t, "Are you really having fun?");
-                        else
-                            c.say(t, "You don't really seem like a bad guy...");
+                            say(t, "We will steer the fight in this direction.");
                     } else
                     if(c.getInnocence() > 33)
                     {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                         if(hostility > 66)
-                            say(t, "Ergh... need to control myself...");
+                            c.say(t, (new StringBuilder("There's no way ")).append(heShe()).append(" can keep this up forever, right?").toString());
                         else
                         if(hostility > 33)
-                            say(t, "Come on, let's do this.");
+                            c.say(t, "Ow!");
                         else
-                            say(t, "I have to do this.");
-                        say(t, "\"\n\n");
-                        c.say(t, "\"");
+                            c.say(t, "Close one...!");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.ANGER);
                         if(flavorObedience() > 66)
-                            c.say(t, "For the Demon Lord's sake, you mean?");
+                            say(t, "For the Demon Lord!");
                         else
                         if(flavorObedience() > 33)
-                            c.say(t, "The Demon Lord isn't giving you any choice...");
+                            say(t, "What a pain!");
                         else
-                            c.say(t, "Why?");
+                            say(t, "I'll take you down with this!");
                     } else
                     {
-                        if(flavorObedience() > 66)
-                            say(t, "The things I do for the Demon Lord...");
-                        else
-                        if(flavorObedience() > 33)
-                            say(t, "If I don't do this...");
-                        else
-                            say(t, "You understand, right?");
-                        say(t, "\"\n\n");
-                        c.say(t, "\"");
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
                         if(innocence > 66)
-                            c.say(t, "You're being manipulated.");
+                            c.say(t, (new StringBuilder("Did ")).append(heShe()).append(" outmaneuver me?  No, ").append(heShe()).append("'s being directed...").toString());
                         else
                         if(innocence > 33)
-                            c.say(t, "Do what you must.");
+                            c.say(t, "Damn it.  Nothing that can be done now.");
                         else
-                            c.say(t, "It's all perfectly rational from your perspective.");
+                            c.say(t, (new StringBuilder("If I let my guard down, ")).append(heShe()).append(" will exploit it ruthlessly.").toString());
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.FOCUS);
+                        if(disgrace > 66)
+                            say(t, "I may be weaker, but I don't have to care about that stuff anymore.");
+                        else
+                        if(disgrace > 33)
+                            say(t, "So, can you hold me off now!?");
+                        else
+                            say(t, "You won't be able to protect yourself, either.");
+                    }
+                    say(t, "\"");
+                }
+            } else
+            if(disgrace > 66)
+            {
+                say(t, "\"");
+                if(c.getConfidence() > 66)
+                {
+                    if(deviancy > 66)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.JOY);
+                        say(t, "You could rape me if you wanted to.  Don't you want to?");
+                    } else
+                    if(deviancy > 33)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.FOCUS);
+                        say(t, "I didn't know that you were into this sort of thing.");
+                    } else
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.STRUGGLE);
+                        say(t, "You can't hold me down forever!");
+                    }
+                    say(t, "\"\n\n");
+                    c.say(t, "\"");
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FOCUS, Project.Emotion.ANGER);
+                    if(confidence > 66)
+                        c.say(t, "You're a stubborn one...!");
+                    else
+                    if(confidence > 33)
+                        c.say(t, "Just shut up already!");
+                    else
+                        c.say(t, "Don't try to talk tough when you're practically crying!");
+                } else
+                if(c.getConfidence() > 33)
+                {
+                    if(hostility > 66)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                        say(t, "I'm going to enjoy watching you die...!");
+                    } else
+                    if(hostility > 33)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                        say(t, "I hope you're having as much fun as I am.");
+                    } else
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.STRUGGLE);
+                        say(t, "How about this!?");
+                    }
+                    say(t, "\"\n\n");
+                    c.say(t, "\"");
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                    if(deviancy > 66)
+                        c.say(t, "You're completely twisted!");
+                    else
+                    if(deviancy > 33)
+                        c.say(t, "Stop moving around so much!");
+                    else
+                        c.say(t, "Guh!");
+                } else
+                {
+                    Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                    if(confidence > 66)
+                        say(t, "Your power is wasted on you!");
+                    else
+                    if(confidence > 33)
+                        say(t, "Maybe you secretly want to lose?");
+                    else
+                        say(t, "Haaah!");
+                    say(t, "\"\n\n");
+                    c.say(t, "\"");
+                    if(hostility > 66)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
+                        c.say(t, "S-Stop, you're hurting me!");
+                    } else
+                    if(hostility > 33)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
+                        c.say(t, "What?  N-No!");
+                    } else
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
+                        c.say(t, "I-I'm sorry, I can't...");
+                    }
+                }
+                c.say(t, "\"");
+            } else
+            if(disgrace > 33)
+            {
+                say(t, "\"");
+                if(c.getInnocence() > 66)
+                {
+                    Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.STRUGGLE);
+                    if(confidence > 66)
+                        say(t, "Too weak!");
+                    else
+                    if(confidence > 33)
+                        say(t, "Take this!");
+                    else
+                        say(t, "Aaagh!");
+                    say(t, "\"\n\n");
+                    c.say(t, "\"");
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
+                    if(hostility > 66)
+                        c.say(t, "Ow!  Stop!");
+                    else
+                    if(hostility > 33)
+                        c.say(t, "Leave me alone!");
+                    else
+                        c.say(t, "You're crazy!");
+                } else
+                if(c.getInnocence() > 33)
+                {
+                    Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.STRUGGLE);
+                    if(flavorObedience() > 66)
+                        say(t, "Watch me...!");
+                    else
+                    if(flavorObedience() > 33)
+                        say(t, "I have no choice...!");
+                    else
+                        say(t, "I've got you!");
+                    say(t, "\"\n\n");
+                    c.say(t, "\"");
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.ANGER);
+                    if(innocence > 66)
+                        c.say(t, "You don't know when to quit!");
+                    else
+                    if(innocence > 33)
+                        c.say(t, "Let go!");
+                    else
+                        c.say(t, "Gh, how!?");
+                } else
+                {
+                    if(hostility > 66)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                        say(t, "Grrr...!");
+                    } else
+                    if(hostility > 33)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                        say(t, "Haaah, yes...!");
+                    } else
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.STRUGGLE);
+                        say(t, "Hmph!");
+                    }
+                    say(t, "\"\n\n");
+                    c.say(t, "\"");
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.ANGER);
+                    if(confidence > 66)
+                        c.say(t, "Nng- gah!");
+                    else
+                    if(confidence > 33)
+                        c.say(t, "Ergh...");
+                    else
+                        c.say(t, "Rrah!");
+                }
+                c.say(t, "\"");
+            } else
+            {
+                c.say(t, "\"");
+                if(c.getMorality() > 66)
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FOCUS, Project.Emotion.ANGER);
+                    if(innocence > 66)
+                        c.say(t, "You look surprised!");
+                    else
+                    if(innocence > 33)
+                        c.say(t, "Right now, I'm your opponent!");
+                    else
+                        c.say(t, "I don't know what you're planning, but I won't allow it!");
+                    c.say(t, "\"\n\n");
+                    say(t, "\"");
+                    if(hostility > 66)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                        say(t, "You stupid little...!  I'll make you regret this!");
+                    } else
+                    if(hostility > 33)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.FOCUS);
+                        say(t, "Are you actually asking me to hurt you?  Heh, alright then...");
+                    } else
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.NEUTRAL);
+                        say(t, "That's some good determination.  But I'm not going to go easy on you.");
+                    }
+                } else
+                if(c.getMorality() > 33)
+                {
+                    if(hostility > 66)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
+                        c.say(t, "Ngh!  Aaah!");
+                    } else
+                    if(hostility > 33)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.FEAR);
+                        c.say(t, "I don't like that look in your eyes...");
+                    } else
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
+                        c.say(t, "Ugh.  You've made your point...");
+                    }
+                    c.say(t, "\"\n\n");
+                    say(t, "\"");
+                    Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                    if(deviancy > 66)
+                        say(t, "It's like you're on display for me...");
+                    else
+                    if(deviancy > 33)
+                        say(t, "Should we spread your legs, too?");
+                    else
+                        say(t, "You can't move, can you?");
+                } else
+                {
+                    if(confidence > 66)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.SHAME);
+                        c.say(t, "... I shouldn't have said that.");
+                    } else
+                    if(confidence > 33)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.FEAR);
+                        c.say(t, "Well!?  What do you have to say to that!?");
+                    } else
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.FEAR);
+                        c.say(t, (new StringBuilder("I was hoping it would make ")).append(himHer()).append(" cry...").toString());
+                    }
+                    c.say(t, "\"\n\n");
+                    say(t, "\"");
+                    Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                    if(flavorObedience() > 66)
+                        say(t, "If you just insulted me, I might have forgiven you.  But now... I think you need to learn some respect.");
+                    else
+                    if(flavorObedience() > 33)
+                        say(t, "We'll see who the coward is.  How long until you start begging for mercy?");
+                    else
+                        say(t, "I don't take that sort of thing from the Demon Lord, and I'm definitely not taking it from you.");
+                }
+                say(t, "\"");
+            }
+        } else
+        if(c.captureProgression % 6 == 5)
+            if(styleDamage[0] > 0)
+            {
+                if(styleDamage[2] > 0)
+                {
+                    if(hostility > 66)
+                    {
+                        say(t, "\"");
+                        if(c.getMorality() > 66)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                            if(disgrace > 66)
+                                say(t, "No matter how much stronger you are, this weakness of yours is just too big!");
+                            else
+                            if(disgrace > 33)
+                                say(t, "Hah!  It's your fault that I had to kill them!");
+                            else
+                                say(t, "Yes!  Suffer!");
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            if(confidence > 66)
+                            {
+                                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.SHAME);
+                                c.say(t, "Hurting people just because you can...");
+                            } else
+                            if(confidence > 33)
+                            {
+                                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.ANGER);
+                                c.say(t, "I can still save some of them!");
+                            } else
+                            {
+                                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.SHAME);
+                                c.say(t, (new StringBuilder("I might not be able to forgive ")).append(himHer()).append("...").toString());
+                            }
+                        } else
+                        if(c.getMorality() > 33)
+                        {
+                            if(deviancy > 66)
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.JOY);
+                                say(t, "Nnnaaah~!  Ah...  Done...");
+                                if(innocence < 67 || timesOrgasmed > 0)
+                                    timesOrgasmed++;
+                            } else
+                            if(deviancy > 33)
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.LEWD);
+                                say(t, "That expression is so perfect...");
+                            } else
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                                say(t, "You're next.");
+                            }
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.SHAME);
+                            if(innocence > 66)
+                                c.say(t, (new StringBuilder("It's like... ")).append(heShe()).append(" doesn't even realize what ").append(heShe()).append("'s doing...").toString());
+                            else
+                            if(innocence > 33)
+                                c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append("'s... enjoying this...").toString());
+                            else
+                                c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append(" treats them... like objects...").toString());
+                        } else
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                            if(innocence > 66)
+                                say(t, "Where'd you go!?  Who am I supposed to hurt now!?  Aaargh!");
+                            else
+                            if(innocence > 33)
+                                say(t, "You bitch!  I'll kill you, I'll kill you, I'll kill yooou!");
+                            else
+                                say(t, "No, no, no!  This is WRONG!  Unacceptable!");
+                            say(t, "\"\n\n");
+                            c.say(t, "\"");
+                            if(disgrace > 66)
+                            {
+                                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
+                                c.say(t, (new StringBuilder("Gah, I almost had ")).append(himHer()).append("!").toString());
+                            } else
+                            if(disgrace > 33)
+                            {
+                                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.JOY, Project.Emotion.NEUTRAL);
+                                c.say(t, "Heh.  Too bad.");
+                            } else
+                            {
+                                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
+                                c.say(t, (new StringBuilder("Looks like ")).append(heShe()).append("'s not my problem anymore.").toString());
+                            }
+                        }
+                        c.say(t, "\"");
+                    } else
+                    if(hostility > 33)
+                    {
+                        c.say(t, "\"");
+                        if(c.getConfidence() > 66)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                            if(flavorObedience() > 66)
+                                c.say(t, "Did you go running back to your precious Demon Lord!");
+                            else
+                            if(flavorObedience() > 33)
+                                c.say(t, "Don't tell me you're finally getting out of the way so I can kill the Demon Lord!");
+                            else
+                                c.say(t, "Come on, your enemy is right here!");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
+                            if(disgrace > 66)
+                                say(t, (new StringBuilder("I'll go fight ")).append(c.himHer()).append("... after I catch my breath...").toString());
+                            else
+                            if(disgrace > 33)
+                                say(t, "Don't flatter yourself.");
+                            else
+                                say(t, "Tough words from someone who was just about ready to give up a moment ago.");
+                        } else
+                        if(c.getConfidence() > 33)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                            if(disgrace > 66)
+                                c.say(t, "Coward!");
+                            else
+                            if(disgrace > 33)
+                                c.say(t, "We weren't finished yet!");
+                            else
+                                c.say(t, "At least these enemies are easier...");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(innocence > 66)
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                                say(t, (new StringBuilder("Darn it, where'd ")).append(c.heShe()).append(" go!?").toString());
+                            } else
+                            if(innocence > 33)
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
+                                say(t, (new StringBuilder("I can't leave ")).append(c.himHer()).append(" alone for a minute.").toString());
+                            } else
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                                say(t, "And now you're completely defenseless...");
+                            }
+                        } else
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
+                            if(innocence > 66)
+                                c.say(t, "This isn't funny!");
+                            else
+                            if(innocence > 33)
+                                c.say(t, (new StringBuilder("I c-can't fight these and ")).append(himHer()).append(" at once...!").toString());
+                            else
+                                c.say(t, "F-Fight me yourself!");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(deviancy > 66)
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.FOCUS);
+                                say(t, "I'm gonna see if I can squirt it on you from here, okay~?");
+                            } else
+                            if(deviancy > 33)
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                                say(t, "I love that cute little grunt when you attack!");
+                            } else
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.FOCUS);
+                                say(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'ll only get weaker from here on.").toString());
+                            }
+                        }
+                        say(t, "\"");
+                    } else
+                    {
+                        c.say(t, "\"");
+                        if(c.getInnocence() > 66)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                            if(deviancy > 66)
+                                c.say(t, "You're looking at me all pervy again!");
+                            else
+                            if(deviancy > 33)
+                                c.say(t, "You're smirking!  You're definitely smirking!");
+                            else
+                                c.say(t, "That was your fault!");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
+                            if(innocence > 66)
+                                say(t, "You're just being a big dummy again!");
+                            else
+                            if(innocence > 33)
+                                say(t, "You're wrong.  I'm just waiting for you to get back up here and fight me properly.");
+                            else
+                                say(t, "Don't be ridiculous.  Just focus on remedying your own failures.");
+                        } else
+                        if(c.getInnocence() > 33)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                            if(flavorObedience() > 66)
+                                c.say(t, "Ow!  Are you that eager for round 2?");
+                            else
+                            if(flavorObedience() > 33)
+                                c.say(t, "Gah!  What was that for!?");
+                            else
+                                c.say(t, "Hey!  I thought you didn't want to do this!");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            if(deviancy > 66)
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
+                                say(t, "I'm sorry, I... I can't... resist...");
+                            } else
+                            if(deviancy > 33)
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.ANGER);
+                                say(t, "I'm not satisfied yet!");
+                            } else
+                            {
+                                Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
+                                say(t, "You need to defeat me properly.");
+                            }
+                        } else
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FOCUS, Project.Emotion.NEUTRAL);
+                            if(disgrace > 66)
+                                c.say(t, "Come.  I'm sure can defeat you...");
+                            else
+                            if(disgrace > 33)
+                                c.say(t, "It seems you're not finished yet...");
+                            else
+                                c.say(t, "I have no escape routes, so I can only clear out these hostiles to improve my chances.");
+                            c.say(t, "\"\n\n");
+                            say(t, "\"");
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.STRUGGLE);
+                            if(flavorObedience() > 66)
+                                say(t, "I will recruit you for the Demon Lord!");
+                            else
+                            if(flavorObedience() > 33)
+                                say(t, "Sorry, but I can't afford to hold back...!");
+                            else
+                                say(t, "This might hurt, but you need to get stronger somehow...!");
+                        }
+                        say(t, "\"");
+                    }
+                } else
+                if(hostility > 66)
+                {
+                    c.say(t, "\"");
+                    if(c.getInnocence() > 66)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.NEUTRAL, Project.Emotion.FOCUS);
+                        if(disgrace > 66)
+                            c.say(t, (new StringBuilder("Wow, ")).append(heShe()).append("'s so weak ").append(heShe()).append(" can't even part-way-kill me...").toString());
+                        else
+                        if(disgrace > 33)
+                            c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append("'s really unlucky.  ").append(HeShe()).append(" keeps missing me!").toString());
+                        else
+                            c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append("'s really strong, but ").append(heShe()).append("'s also really bad at killing me.").toString());
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                        if(innocence > 66)
+                            say(t, "Shut up!  You don't know anything!");
+                        else
+                        if(innocence > 33)
+                            say(t, "You don't know how lucky you are, you little shit!");
+                        else
+                            say(t, "To be pitied by someone like this... unacceptable!");
+                    } else
+                    if(c.getInnocence() > 33)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
+                        if(confidence > 66)
+                            c.say(t, (new StringBuilder("I didn't think ")).append(heShe()).append("'d hide...").toString());
+                        else
+                        if(confidence > 33)
+                            c.say(t, "Where'd you go!?");
+                        else
+                            c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append(" really is a wimp at ").append(hisHer()).append(" core.").toString());
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        if(deviancy > 66)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.ANGER);
+                            say(t, "I can't stay hidden, I need to make you scream some more!");
+                        } else
+                        if(deviancy > 33)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.FOCUS);
+                            say(t, (new StringBuilder("Nnn...  ")).append(c.HisHer()).append(" throat's all exposed and vulnerable...").toString());
+                        } else
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.JOY);
+                            say(t, "Enjoy this break, because things are about to get a lot more painful...");
+                        }
+                    } else
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.NEUTRAL, Project.Emotion.FOCUS);
+                        if(deviancy > 66)
+                            c.say(t, "Either this is some sort of bizarre fetish play, or you're not permitted to kill me.");
+                        else
+                        if(deviancy > 33)
+                            c.say(t, "You're enjoying this, but you'd be enjoying it even more if you had permission to kill me, right?");
+                        else
+                            c.say(t, "The thing that enrages you most is that you aren't allowed to kill me.  Am I correct?");
+                        c.say(t, "\"\n\n");
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
+                        if(flavorObedience() > 66)
+                            say(t, "I can only hope that the Demon Lord will change his mind...");
+                        else
+                        if(flavorObedience() > 33)
+                            say(t, "Don't push me, or I might decide that the punishment is worth it.");
+                        else
+                            say(t, "Those are the Demon Lord's orders, but I don't really care.  I just want to make you suffer more first.");
+                    }
+                    say(t, "\"");
+                } else
+                if(hostility > 33)
+                {
+                    say(t, "\"");
+                    if(c.getConfidence() > 66)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.ANGER);
+                        if(disgrace > 66)
+                            say(t, "Come on, aren't you going to finish me off!?");
+                        else
+                        if(disgrace > 33)
+                            say(t, "Catch me if you can!");
+                        else
+                            say(t, "Try hitting me.");
+                        say(t, "\"\n\n");
+                        c.say(t, "\"");
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FOCUS, Project.Emotion.ANGER);
+                        if(deviancy > 66)
+                            c.say(t, "You'd like that, wouldn't you?");
+                        else
+                        if(deviancy > 33)
+                            c.say(t, "You won't be able to keep enjoying this for long!");
+                        else
+                            c.say(t, "I will defeat you!");
+                    } else
+                    if(c.getConfidence() > 33)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.FOCUS);
+                        if(innocence > 66)
+                            say(t, "Hah, stupid dummy!");
+                        else
+                        if(innocence > 33)
+                            say(t, "Looks like you don't have what it takes after all!");
+                        else
+                            say(t, "A poor performance on your part, wouldn't you agree?");
+                        say(t, "\"\n\n");
+                        c.say(t, "\"");
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                        if(disgrace > 66)
+                            c.say(t, "I'll make you regret this!");
+                        else
+                        if(disgrace > 33)
+                            c.say(t, "Come back here and fight me!");
+                        else
+                            c.say(t, "Ugh, you're really gloating...");
+                    } else
+                    {
+                        if(deviancy > 66)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.JOY);
+                            say(t, "Don't mind me, I'm just sizing you up for a collar.");
+                        } else
+                        if(deviancy > 33)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.FOCUS);
+                            say(t, "You really are a masochist, aren't you?");
+                        } else
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
+                            say(t, "People like you annoy me the most.");
+                        }
+                        say(t, "\"\n\n");
+                        c.say(t, "\"");
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
+                        if(confidence > 66)
+                            c.say(t, "I wish I weren't so weak to this sort of thing...");
+                        else
+                        if(confidence > 33)
+                            c.say(t, (new StringBuilder("I'm trying to ignore ")).append(himHer()).append(", but...").toString());
+                        else
+                            c.say(t, (new StringBuilder("I won't let ")).append(himHer()).append("...!").toString());
                     }
                     c.say(t, "\"");
+                } else
+                {
+                    c.say(t, "\"");
+                    if(c.getMorality() > 66)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                        if(flavorObedience() > 66)
+                            c.say(t, "How could you do that to them!?");
+                        else
+                        if(flavorObedience() > 33)
+                            c.say(t, "You're exchanging your safety for their lives!");
+                        else
+                            c.say(t, "You're in no position to talk about that!");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
+                        if(innocence > 66)
+                            say(t, "I don't see what the big deal is.");
+                        else
+                        if(innocence > 33)
+                            say(t, "What are you going to do about it?");
+                        else
+                            say(t, "What did you expect?");
+                    } else
+                    if(c.getMorality() > 33)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                        if(deviancy > 66)
+                            c.say(t, "That's disgusting!");
+                        else
+                        if(deviancy > 33)
+                            c.say(t, "Stop talking about my body!");
+                        else
+                            c.say(t, "Keep your comments to yourself!");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.SHAME);
+                        if(disgrace > 66)
+                            say(t, "I can't really fight you, so this is all I can do.");
+                        else
+                        if(disgrace > 33)
+                            say(t, "What else should I do?  Fight you?  I don't think either of us want that.");
+                        else
+                            say(t, "Do you really want to fight me?");
+                    } else
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                        if(disgrace > 66)
+                            c.say(t, "You'd better keep running!");
+                        else
+                        if(disgrace > 33)
+                            c.say(t, "Get back here right now!");
+                        else
+                            c.say(t, "Just bleed already!");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        if(deviancy > 66)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.JOY);
+                            say(t, "Ah, this passion~!");
+                        } else
+                        if(deviancy > 33)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                            say(t, "You're actually cuter when you're mad!");
+                        } else
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
+                            say(t, "You really need to learn to control yourself.");
+                        }
+                    }
+                    say(t, "\"");
                 }
-            c.captureProgression++;
-        }
+            } else
+            if(styleDamage[2] > 0)
+            {
+                if(flavorObedience() > 66)
+                {
+                    c.say(t, "\"");
+                    if(c.getMorality() > 66)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.NEUTRAL, Project.Emotion.FOCUS);
+                        if(innocence > 66)
+                            c.say(t, "Let's put our fight on hold until they're safe.");
+                        else
+                        if(innocence > 33)
+                            c.say(t, "Let me help you.");
+                        else
+                            c.say(t, "I'll let you finish.");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        if(hostility > 66)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.SHAME);
+                            say(t, "Don't look at me like that!  I'd rather kill them, but the Demon Lord has other plans.");
+                        } else
+                        if(hostility > 33)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                            say(t, "Are you sure?  Most of them are going to end up becoming my allies, after all.");
+                        } else
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                            say(t, "Thanks.");
+                        }
+                    } else
+                    if(c.getMorality() > 33)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                        if(disgrace > 66)
+                            c.say(t, "Stop hiding!");
+                        else
+                        if(disgrace > 33)
+                            c.say(t, "You've got to be kidding me!");
+                        else
+                            c.say(t, "At least these ones are easier...");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        if(confidence > 66)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.SHAME);
+                            say(t, "I had things under control...");
+                        } else
+                        if(confidence > 33)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FEAR, Project.Emotion.ANGER);
+                            say(t, "Don't waste the lives the Demon Lord gave you!");
+                        } else
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.SHAME, Project.Emotion.JOY);
+                            say(t, "Th-Thanks, everyone...");
+                        }
+                    } else
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
+                        if(hostility > 66)
+                            c.say(t, (new StringBuilder("Surprised ")).append(heShe()).append(" isn't killing any of them.").toString());
+                        else
+                        if(hostility > 33)
+                            c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append(" seems to be enjoying this.").toString());
+                        else
+                            c.say(t, "Not my problem.");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.NEUTRAL);
+                        if(innocence > 66)
+                            say(t, (new StringBuilder("Oh, right!  I'm supposed to be fighting ")).append(c.getMainName()).append("!").toString());
+                        else
+                        if(innocence > 33)
+                            say(t, (new StringBuilder("Alright, now what's ")).append(c.getMainName()).append(" doing?").toString());
+                        else
+                            say(t, "I must ensure that the mission as a whole is successful.");
+                    }
+                    say(t, "\"");
+                } else
+                if(flavorObedience() > 33)
+                {
+                    c.say(t, "\"");
+                    if(c.getConfidence() > 66)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                        if(disgrace > 66)
+                            c.say(t, "You can't hide forever!");
+                        else
+                        if(disgrace > 33)
+                            c.say(t, "You know you can't beat me alone!");
+                        else
+                            c.say(t, "Don't turn your back on me!");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        if(confidence > 66)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.ANGER);
+                            say(t, "What's the matter?  This should be nothing for you!");
+                        } else
+                        if(confidence > 33)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.JOY);
+                            say(t, "Were you expecting me to fight fair?");
+                        } else
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.SHAME, Project.Emotion.FEAR);
+                            say(t, "I hope the Demon Lord doesn't mind me using his soldiers...");
+                        }
+                    } else
+                    if(c.getConfidence() > 33)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FOCUS, Project.Emotion.ANGER);
+                        if(confidence > 66)
+                            c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append(" holds all the cards...").toString());
+                        else
+                        if(confidence > 33)
+                            c.say(t, "I won't let this stop me...!");
+                        else
+                            c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append("'s scared, I can tell...!").toString());
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                        if(innocence > 66)
+                            say(t, "Flanking maneuver!  About face!  Crazy Ivan!");
+                        else
+                        if(innocence > 33)
+                            say(t, "Can you handle this?");
+                        else
+                            say(t, "Squad G, hold until further orders!");
+                    } else
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
+                        if(hostility > 66)
+                            c.say(t, "Why do you keep hurting me!?");
+                        else
+                        if(hostility > 33)
+                            c.say(t, "Ah!  Stop!");
+                        else
+                            c.say(t, "Please, tell them to let me go!");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        if(deviancy > 66)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.JOY);
+                            say(t, (new StringBuilder("Ah, ")).append(c.getMainName()).append(", your screams are too beautiful...!").toString());
+                        } else
+                        if(deviancy > 33)
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.FOCUS);
+                            say(t, "Hm, it's easier to appreciate the whole scene this way.");
+                        } else
+                        {
+                            Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
+                            say(t, "Are you just going to cry?");
+                        }
+                    }
+                    say(t, "\"");
+                } else
+                {
+                    c.say(t, "\"");
+                    if(c.getInnocence() > 66)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.NEUTRAL, Project.Emotion.STRUGGLE);
+                        if(innocence > 66)
+                            c.say(t, "Um, did you forget that you're on their side now?");
+                        else
+                        if(innocence > 33)
+                            c.say(t, "Woah!");
+                        else
+                            c.say(t, "Huh!?  Is this some sort of trick!?");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                        if(deviancy > 66)
+                            say(t, "I had the PERFECT scene set up!  And that Demon RUINED it!");
+                        else
+                        if(deviancy > 33)
+                            say(t, "I just want to keep you all to myself!");
+                        else
+                            say(t, "I hate the Demons most of all.");
+                    } else
+                    if(c.getInnocence() > 33)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
+                        if(deviancy > 66)
+                            c.say(t, "You really are obsessed with me, aren't you?");
+                        else
+                        if(deviancy > 33)
+                            c.say(t, "So, I guess you've really fallen for me.");
+                        else
+                            c.say(t, "You hate the Demons that much?");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
+                        if(hostility > 66)
+                            say(t, (new StringBuilder("I'm going to be the one who kills you, ")).append(c.getMainName()).append(".  No one else.").toString());
+                        else
+                        if(hostility > 33)
+                            say(t, "That's right.");
+                        else
+                            say(t, "I'm not on the Demons' side in the first place.");
+                    } else
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
+                        if(hostility > 66)
+                            c.say(t, "You even refuse their help.");
+                        else
+                        if(hostility > 33)
+                            c.say(t, "You're sabotaging your supposed allies.");
+                        else
+                            c.say(t, "I see.  You want to deny the Demon Lord the additional resources.");
+                        c.say(t, "\"\n\n");
+                        say(t, "\"");
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.NEUTRAL);
+                        if(innocence > 66)
+                            say(t, "Well, duh.");
+                        else
+                        if(innocence > 33)
+                            say(t, "I hope you're not expecting me to stop fighting you, though.");
+                        else
+                            say(t, "I'm glad you understand.");
+                    }
+                    say(t, "\"");
+                }
+            } else
+            if(deviancy > 66)
+            {
+                say(t, "\"");
+                if(c.getDignity() > 66)
+                {
+                    Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.NEUTRAL);
+                    if(disgrace > 66)
+                        say(t, "You really want to fight me some more, don't you?");
+                    else
+                    if(disgrace > 33)
+                        say(t, "Come on, what's the matter?");
+                    else
+                        say(t, "Too slow.  Do you actually want to get caught?");
+                    say(t, "\"\n\n");
+                    c.say(t, "\"");
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                    if(innocence > 66)
+                        c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append(" has no idea what ").append(heShe()).append("'s doing to me...").toString());
+                    else
+                    if(innocence > 33)
+                        c.say(t, "There's no way I could actually be enjoying this!");
+                    else
+                        c.say(t, "Don't play dumb, you know exactly what you're doing...");
+                } else
+                if(c.getDignity() > 33)
+                {
+                    Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.JOY);
+                    if(dignity > 66)
+                        say(t, "Yes, yes, look at me!");
+                    else
+                    if(dignity > 33)
+                        say(t, "Ah, I started without realizing it...");
+                    else
+                        say(t, "F-Feels... good...!");
+                    say(t, "\"\n\n");
+                    c.say(t, "\"");
+                    if(hostility > 66)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.NEUTRAL, Project.Emotion.STRUGGLE);
+                        c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append(" actually looks happy for once...").toString());
+                    } else
+                    if(hostility > 33)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                        c.say(t, "Is this really all just a game to you?");
+                    } else
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                        c.say(t, "What do you think you're doing?");
+                    }
+                } else
+                {
+                    if(hostility > 66)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                        say(t, "No!  You're supposed to blush and cover yourself and beg me to leave to alone!");
+                    } else
+                    if(hostility > 33)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.FOCUS);
+                        say(t, "I need to get my hands on you even more...");
+                    } else
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.FOCUS);
+                        say(t, "Ah, I want to show you the pleasure of public sex!");
+                    }
+                    say(t, "\"\n\n");
+                    c.say(t, "\"");
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
+                    if(disgrace > 66)
+                        c.say(t, "Is that what you were after?  You're pretty bad at this.");
+                    else
+                    if(disgrace > 33)
+                        c.say(t, "If you say so.  Can we hurry this up?");
+                    else
+                        c.say(t, "Well, it seems like you're stronger than me, so I can't really complain if you want to do this sort of thing instead.");
+                }
+                c.say(t, "\"");
+            } else
+            if(deviancy > 33)
+            {
+                say(t, "\"");
+                if(c.getConfidence() > 66)
+                {
+                    if(hostility > 66)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.SHAME);
+                        say(t, "You're so perfect that it's disgusting.");
+                    } else
+                    if(hostility > 33)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
+                        say(t, "The way you fight is... beautiful.");
+                    } else
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.JOY);
+                        say(t, "You have a strong will.  That's worth a lot.");
+                    }
+                    say(t, "\"\n\n");
+                    c.say(t, "\"");
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FOCUS, Project.Emotion.JOY);
+                    if(flavorObedience() > 66)
+                        c.say(t, "Heh.  Trying to get me to join you?");
+                    else
+                    if(flavorObedience() > 33)
+                        c.say(t, "Don't worry.  I'll save you, too, when I kill the Demon Lord.");
+                    else
+                        c.say(t, "Then you know I have what it takes to beat the Demon Lord.");
+                } else
+                if(c.getConfidence() > 33)
+                {
+                    Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.JOY);
+                    if(confidence > 66)
+                        say(t, "We can wear disguises, go out like two civilians...");
+                    else
+                    if(confidence > 33)
+                        say(t, "You're so sexy I can hardly control myself.");
+                    else
+                        say(t, "You're just... beautiful in every single way...");
+                    say(t, "\"\n\n");
+                    c.say(t, "\"");
+                    if(disgrace > 66)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
+                        c.say(t, "Are you trying to distract me?");
+                    } else
+                    if(disgrace > 33)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.NEUTRAL, Project.Emotion.SHAME);
+                        c.say(t, "Thanks, I suppose.");
+                    } else
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.JOY);
+                        c.say(t, "That means a lot, coming from you.");
+                    }
+                } else
+                {
+                    Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.FOCUS);
+                    if(disgrace > 66)
+                        say(t, "There would be no point in trying to physically hurt you.");
+                    else
+                    if(disgrace > 33)
+                        say(t, "You're fun to play with.");
+                    else
+                        say(t, "If you struggle too hard, you'll just hurt yourself.");
+                    say(t, "\"\n\n");
+                    c.say(t, "\"");
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
+                    if(hostility > 66)
+                        c.say(t, "Even though I know you want to kill me...");
+                    else
+                    if(hostility > 33)
+                        c.say(t, "You're holding back...");
+                    else
+                        c.say(t, "You don't hate me at all...");
+                }
+                c.say(t, "\"");
+            } else
+            {
+                say(t, "\"");
+                if(c.getInnocence() > 66)
+                {
+                    Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.FOCUS);
+                    if(disgrace > 66)
+                        say(t, "There would be no point in trying to physically hurt you.");
+                    else
+                    if(disgrace > 33)
+                        say(t, "Let's continue.");
+                    else
+                        say(t, "If you struggle too hard, you'll just hurt yourself.");
+                    say(t, "\"\n\n");
+                    c.say(t, "\"");
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.NEUTRAL, Project.Emotion.SHAME);
+                    if(hostility > 66)
+                        c.say(t, "Aren't you supposed to be super evil or something?");
+                    else
+                    if(hostility > 33)
+                        c.say(t, "Are you really having fun?");
+                    else
+                        c.say(t, "You don't really seem like a bad guy...");
+                } else
+                if(c.getInnocence() > 33)
+                {
+                    if(hostility > 66)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.STRUGGLE, Project.Emotion.SHAME);
+                        say(t, "Ergh... need to control myself...");
+                    } else
+                    if(hostility > 33)
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.NEUTRAL);
+                        say(t, "Come on, let's do this.");
+                    } else
+                    {
+                        Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.FOCUS);
+                        say(t, "I have to do this.");
+                    }
+                    say(t, "\"\n\n");
+                    c.say(t, "\"");
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.NEUTRAL, Project.Emotion.SHAME);
+                    if(flavorObedience() > 66)
+                        c.say(t, "For the Demon Lord's sake, you mean?");
+                    else
+                    if(flavorObedience() > 33)
+                        c.say(t, "The Demon Lord isn't giving you any choice...");
+                    else
+                        c.say(t, "Why?");
+                } else
+                {
+                    Project.changePortrait(type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.SHAME);
+                    if(flavorObedience() > 66)
+                        say(t, "The things I do for the Demon Lord...");
+                    else
+                    if(flavorObedience() > 33)
+                        say(t, "If I don't do this...");
+                    else
+                        say(t, "You understand, right?");
+                    say(t, "\"\n\n");
+                    c.say(t, "\"");
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.NEUTRAL, Project.Emotion.SHAME);
+                    if(innocence > 66)
+                        c.say(t, "You're being manipulated.");
+                    else
+                    if(innocence > 33)
+                        c.say(t, "Do what you must.");
+                    else
+                        c.say(t, "It's all perfectly rational from your perspective.");
+                }
+                c.say(t, "\"");
+            }
     }
 
     public void captureChosenFlavor(JTextPane t, WorldState w, Chosen c, int styleDamage[], String bottomDesc, String topDesc, String organ, 

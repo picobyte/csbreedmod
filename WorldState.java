@@ -18,6 +18,362 @@ public class WorldState
     implements Serializable
 {
 
+    public void BeCaptured(JTextPane t, JPanel p, JFrame f, WorldState w, Chosen c)
+    {
+        c.lastAction = 0;
+        c.captured = Boolean.valueOf(true);
+        w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\n").toString());
+        int thisAttack = c.nextAttack[0];
+        c.nextAttack[0] = c.nextAttack[1];
+        c.nextAttack[1] = c.nextAttack[2];
+        c.nextAttack[2] = thisAttack;
+        int startDamage[] = new int[8];
+        int ai[];
+        if(w.getBodyStatus()[3].booleanValue())
+        {
+            ai = new int[8];
+            ai[0] = 100;
+            ai[1] = 75;
+            ai[2] = 50;
+            ai[3] = 25;
+            ai[4] = 200;
+            startDamage = c.addArray(startDamage, ai);
+        }
+        int ai1[];
+        if(w.getBodyStatus()[4].booleanValue())
+        {
+            ai1 = new int[8];
+            ai1[0] = 25;
+            ai1[1] = 100;
+            ai1[2] = 75;
+            ai1[3] = 50;
+            ai1[5] = 200;
+            startDamage = c.addArray(startDamage, ai1);
+        }
+        int ai2[];
+        if(w.getBodyStatus()[5].booleanValue())
+        {
+            ai2 = new int[8];
+            ai2[0] = 50;
+            ai2[1] = 25;
+            ai2[2] = 100;
+            ai2[3] = 75;
+            ai2[6] = 200;
+            startDamage = c.addArray(startDamage, ai2);
+        }
+        if(w.getBodyStatus()[6].booleanValue())
+            startDamage = c.addArray(startDamage, new int[] {
+                75, 50, 25, 100, 0, 0, 0, 200
+            });
+        int ai3[];
+        if(w.getBodyStatus()[11].booleanValue())
+        {
+            ai3 = new int[8];
+            ai3[0] = 200;
+            ai3[1] = 100;
+            ai3[2] = 50;
+            ai3[3] = 25;
+            ai3[4] = 300;
+            ai3[5] = 150;
+            startDamage = c.addArray(startDamage, ai3);
+        }
+        int ai4[];
+        if(w.getBodyStatus()[12].booleanValue())
+        {
+            ai4 = new int[8];
+            ai4[0] = 25;
+            ai4[1] = 200;
+            ai4[2] = 100;
+            ai4[3] = 50;
+            ai4[5] = 300;
+            ai4[6] = 150;
+            startDamage = c.addArray(startDamage, ai4);
+        }
+        if(w.getBodyStatus()[13].booleanValue())
+            startDamage = c.addArray(startDamage, new int[] {
+                50, 25, 200, 100, 0, 0, 300, 150
+            });
+        if(w.getBodyStatus()[14].booleanValue())
+            startDamage = c.addArray(startDamage, new int[] {
+                100, 50, 25, 200, 150, 0, 0, 300
+            });
+        int ai5[];
+        if(w.getBodyStatus()[19].booleanValue())
+        {
+            ai5 = new int[8];
+            ai5[0] = 1000;
+            ai5[1] = 300;
+            ai5[2] = 100;
+            ai5[3] = 30;
+            ai5[4] = 3000;
+            startDamage = c.addArray(startDamage, ai5);
+            startDamage = c.multiplyArray(startDamage, c.getImpregnationEffectiveness());
+        }
+        int ai6[];
+        if(w.getBodyStatus()[20].booleanValue())
+        {
+            ai6 = new int[8];
+            ai6[0] = 30;
+            ai6[1] = 1000;
+            ai6[2] = 300;
+            ai6[3] = 100;
+            ai6[5] = 3000;
+            startDamage = c.addArray(startDamage, ai6);
+            startDamage = c.multiplyArray(startDamage, c.getHypnosisEffectiveness());
+        }
+        int ai7[];
+        if(w.getBodyStatus()[21].booleanValue())
+        {
+            ai7 = new int[8];
+            ai7[0] = 100;
+            ai7[1] = 30;
+            ai7[2] = 1000;
+            ai7[3] = 300;
+            ai7[6] = 3000;
+            startDamage = c.addArray(startDamage, ai7);
+            startDamage = c.multiplyArray(startDamage, c.getDrainEffectiveness());
+        }
+        if(w.getBodyStatus()[22].booleanValue())
+        {
+            startDamage = c.addArray(startDamage, new int[] {
+                300, 100, 30, 1000, 0, 0, 0, 3000
+            });
+            startDamage = c.multiplyArray(startDamage, c.getParasitismEffectiveness());
+        }
+        if(c.captureProgression == 0 && w.progressExtermination(0))
+        {
+            if(c.defenseLevel >= 9000)
+                w.append(t, (new StringBuilder(String.valueOf(c.mainName))).append(" abruptly plummets to earth, pulled from the sky by your telekinetic powers.  Before ").append(c.heShe()).append(" can recover, you make your move.  ").toString());
+            c.defenseLevel += 9000;
+        }
+        Boolean breakCapture = Boolean.valueOf(false);
+        if(c.usingDetonate.booleanValue() && c.captureProgression + c.getINJULevel() + 1 >= w.getCaptureDuration() && !w.adaptationsDisabled().booleanValue())
+        {
+            breakCapture = Boolean.valueOf(true);
+            if(c.captureProgression == 0)
+                w.setCaptureTarget(null);
+            c.PerformDetonate(t, p, f, w);
+        } else
+        if(c.captureProgression == 0)
+        {
+            w.setCaptureTarget(null);
+            if(w.finalBattle.booleanValue())
+            {
+                Boolean otherTarget = Boolean.valueOf(false);
+                Boolean otherKiller = Boolean.valueOf(false);
+                for(int i = 0; i < 3; i++)
+                    if(w.getCombatants()[i] != null && w.getCombatants()[i] != c)
+                        if(!w.getCombatants()[i].isSurrounded().booleanValue() && !w.getCombatants()[i].isCaptured().booleanValue() && w.getCombatants()[i].alive.booleanValue() && w.getCombatants()[i].resolve > 0 && w.getCombatants()[i].getConfidence() < c.confidence)
+                            otherKiller = Boolean.valueOf(true);
+                        else
+                        if(w.getCombatants()[i].isSurrounded().booleanValue() || w.getCombatants()[i].isCaptured().booleanValue())
+                            otherTarget = Boolean.valueOf(true);
+
+                if(otherKiller.booleanValue() && !otherTarget.booleanValue())
+                    w.readyToEnd = Boolean.valueOf(false);
+            }
+            c.announceCapture(t, w);
+        } else
+        if(!w.getBodyStatus()[26].booleanValue() && (w.getBodyStatus()[19].booleanValue() || w.getBodyStatus()[20].booleanValue()) || w.getBodyStatus()[21].booleanValue() || w.getBodyStatus()[22].booleanValue())
+            w.punisherFlavor(t, w, thisAttack, c);
+        else
+        if(w.getBodyStatus()[11].booleanValue() || w.getBodyStatus()[12].booleanValue() || w.getBodyStatus()[13].booleanValue() || w.getBodyStatus()[14].booleanValue())
+            w.defilerFlavor(t, w, thisAttack, c);
+        else
+            c.suppressorFlavor(t, w, thisAttack);
+        if(!breakCapture.booleanValue())
+        {
+            w.append(t, "\n\n");
+            c.captureDamage(t, w, startDamage);
+        }
+        if(c.captureProgression >= w.getCaptureDuration() || breakCapture.booleanValue())
+        {
+            c.removeSurround = Boolean.valueOf(true);
+            if(!breakCapture.booleanValue())
+            {
+                if(w.getBodyStatus()[19].booleanValue() && !w.getBodyStatus()[26].booleanValue())
+                {
+                    w.append(t, (new StringBuilder("Finally, ")).append(c.mainName).toString());
+                    if(c.weapon.equals("revolver") || c.weapon.equals("pistols") || c.weapon.equals("rifle") || c.weapon.equals("shurikens") || c.weapon.equals("bow") || c.weapon.equals("staff") || c.weapon.equals("spirits") || c.customWeaponType.equals("shoot") || c.customWeaponType.equals("command"))
+                        w.append(t, (new StringBuilder(" manages to break free of your Commander's strong grip.  ")).append(c.HeShe()).append(" reaches a safe distance, then turns and launches and all-out attack with ").append(c.hisHer()).append(" ").append(c.weapon).append(".").toString());
+                    else
+                    if(c.weapon.equals("monster"))
+                        w.append(t, (new StringBuilder(" manages to break free of your Commander's strong grip.  The moment ")).append(c.heShe()).append(" reaches a safe distance, ").append(c.hisHer()).append(" monster charges forward, swiping at your body with one huge claw.").toString());
+                    else
+                        w.append(t, (new StringBuilder(" lands a solid blow with ")).append(c.hisHer()).append(" ").append(c.weapon).append(" into the narrowest part of your form - your neck.").toString());
+                } else
+                if(w.getBodyStatus()[20].booleanValue() && !w.getBodyStatus()[26].booleanValue())
+                {
+                    if(c.hypnotized.booleanValue())
+                        w.append(t, (new StringBuilder("Finally, ")).append(c.mainName).append(" manages to come to ").append(c.hisHer()).append(" senses, blast a hole in your dome, and crawl outside.  ").toString());
+                    else
+                        w.append(t, (new StringBuilder("Finally, ")).append(c.mainName).append(" manages to blast a hole in your dome and crawl outside.  ").toString());
+                    if(c.weapon.equals("revolver") || c.weapon.equals("pistols") || c.weapon.equals("rifle") || c.weapon.equals("shurikens") || c.weapon.equals("bow") || c.weapon.equals("staff") || c.weapon.equals("spirits") || c.customWeaponType.equals("shoot") || c.customWeaponType.equals("command"))
+                        w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" reaches a safe distance, then turns and launches and all-out attack with ").append(c.hisHer()).append(" ").append(c.weapon).append(".").toString());
+                    else
+                    if(c.weapon.equals("monster"))
+                        w.append(t, (new StringBuilder("The moment ")).append(c.heShe()).append(" reaches a safe distance, ").append(c.hisHer()).append(" monster charges forward, swiping at your body with one huge claw.").toString());
+                    else
+                        w.append(t, (new StringBuilder("With nothing deceiving ")).append(c.hisHer()).append(" senses, ").append(c.heShe()).append(" quickly lands a mighty blow with ").append(c.hisHer()).append(" ").append(c.weapon).append(".").toString());
+                } else
+                if(w.getBodyStatus()[21].booleanValue())
+                {
+                    w.append(t, (new StringBuilder("Finally, ")).append(c.mainName).append(" manages to break free of the tentacles and climb away from your body.  ").toString());
+                    if(c.weapon.equals("revolver") || c.weapon.equals("pistols") || c.weapon.equals("rifle") || c.weapon.equals("shurikens") || c.weapon.equals("bow") || c.weapon.equals("staff") || c.weapon.equals("spirits") || c.customWeaponType.equals("shoot") || c.customWeaponType.equals("command"))
+                        w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" reaches a safe distance, then turns and launches and all-out attack with ").append(c.hisHer()).append(" ").append(c.weapon).append(".").toString());
+                    else
+                    if(c.weapon.equals("monster"))
+                        w.append(t, (new StringBuilder("The moment ")).append(c.heShe()).append(" reaches a safe distance, ").append(c.hisHer()).append(" monster charges forward, swiping at your body with one huge claw.").toString());
+                    else
+                        w.append(t, (new StringBuilder("With ")).append(c.hisHer()).append(" limbs freed, there's nothing stopping ").append(c.himHer()).append(" from landing a mighty blow with ").append(c.hisHer()).append(" ").append(c.weapon).append(".").toString());
+                } else
+                if(w.getBodyStatus()[22].booleanValue())
+                {
+                    w.append(t, (new StringBuilder("Finally, ")).append(c.mainName).append("'s own psychic energy surges strong enough to expel you from ").append(c.hisHer()).append(" clothes.  ").toString());
+                    if(c.parasitized.booleanValue())
+                        w.append(t, (new StringBuilder("However, now that the public has seen ")).append(c.hisHer()).append(" new outfit, the only effect is that new tentacles stop emerging and trying to strip ").append(c.himHer()).append(".  ").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" clothes quickly return to normal.  ").toString());
+                } else
+                if(w.getBodyStatus()[11].booleanValue())
+                {
+                    w.append(t, (new StringBuilder("Finally, ")).append(c.mainName).append(" manages to escape out from under your body.  ").toString());
+                    if(c.weapon.equals("revolver") || c.weapon.equals("pistols") || c.weapon.equals("rifle") || c.weapon.equals("shurikens") || c.weapon.equals("bow") || c.weapon.equals("staff") || c.weapon.equals("spirits") || c.customWeaponType.equals("shoot") || c.customWeaponType.equals("command"))
+                        w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" reaches a safe distance, then turns and launches and all-out attack with ").append(c.hisHer()).append(" ").append(c.weapon).append(".").toString());
+                    else
+                    if(c.weapon.equals("monster"))
+                        w.append(t, (new StringBuilder("The moment ")).append(c.heShe()).append(" reaches a safe distance, ").append(c.hisHer()).append(" monster charges forward, swiping at your body with one huge claw.").toString());
+                    else
+                        w.append(t, (new StringBuilder("With nothing pinning ")).append(c.himHer()).append(" down, ").append(c.heShe()).append(" quickly lands a mighty blow with ").append(c.hisHer()).append(" ").append(c.weapon).append(".").toString());
+                } else
+                if(w.getBodyStatus()[12].booleanValue())
+                {
+                    w.append(t, (new StringBuilder("Finally, ")).append(c.mainName).append(" manages to break free of the tentacles and climb out of your body.  ").toString());
+                    if(c.weapon.equals("revolver") || c.weapon.equals("pistols") || c.weapon.equals("rifle") || c.weapon.equals("shurikens") || c.weapon.equals("bow") || c.weapon.equals("staff") || c.weapon.equals("spirits") || c.customWeaponType.equals("shoot") || c.customWeaponType.equals("command"))
+                        w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" reaches a safe distance, then turns and launches and all-out attack with ").append(c.hisHer()).append(" ").append(c.weapon).append(".").toString());
+                    else
+                    if(c.weapon.equals("monster"))
+                        w.append(t, (new StringBuilder("The moment ")).append(c.heShe()).append(" reaches a safe distance, ").append(c.hisHer()).append(" monster charges forward, swiping at your body with one huge claw.").toString());
+                    else
+                        w.append(t, (new StringBuilder("With ")).append(c.hisHer()).append(" limbs freed, there's nothing stopping ").append(c.himHer()).append(" from landing a mighty blow with ").append(c.hisHer()).append(" ").append(c.weapon).append(".").toString());
+                } else
+                if(w.getBodyStatus()[13].booleanValue())
+                {
+                    w.append(t, (new StringBuilder("Finally, ")).append(c.mainName).toString());
+                    if(c.weapon.equals("revolver") || c.weapon.equals("pistols") || c.weapon.equals("rifle") || c.weapon.equals("shurikens") || c.weapon.equals("bow") || c.weapon.equals("staff") || c.weapon.equals("spirits") || c.customWeaponType.equals("shoot") || c.customWeaponType.equals("command"))
+                        w.append(t, (new StringBuilder(" manages to break free of your Commander's strong grip.  ")).append(c.HeShe()).append(" reaches a safe distance, then turns and launches and all-out attack with ").append(c.hisHer()).append(" ").append(c.weapon).append(".").toString());
+                    else
+                    if(c.weapon.equals("monster"))
+                        w.append(t, (new StringBuilder(" manages to break free of your Commander's strong grip.  The moment ")).append(c.heShe()).append(" reaches a safe distance, ").append(c.hisHer()).append(" monster charges forward, swiping at your body with one huge claw.").toString());
+                    else
+                        w.append(t, (new StringBuilder(" lands a solid blow with ")).append(c.hisHer()).append(" ").append(c.weapon).append(" into the narrowest part of your muscled form - your neck.").toString());
+                } else
+                if(w.getBodyStatus()[14].booleanValue())
+                {
+                    w.append(t, (new StringBuilder("Finally, ")).append(c.mainName).append(" manages to break free of the cables holding ").append(c.himHer()).append(" in place.  ").toString());
+                    if(c.weapon.equals("revolver") || c.weapon.equals("pistols") || c.weapon.equals("rifle") || c.weapon.equals("shurikens") || c.weapon.equals("bow") || c.weapon.equals("staff") || c.weapon.equals("spirits") || c.customWeaponType.equals("shoot") || c.customWeaponType.equals("command"))
+                        w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" reaches a safe distance, then turns and launches and all-out attack with ").append(c.hisHer()).append(" ").append(c.weapon).append(".").toString());
+                    else
+                    if(c.weapon.equals("monster"))
+                        w.append(t, (new StringBuilder("The moment ")).append(c.heShe()).append(" reaches a safe distance, ").append(c.hisHer()).append(" monster charges forward, swiping at your body with one huge claw.").toString());
+                    else
+                        w.append(t, (new StringBuilder("With ")).append(c.hisHer()).append(" limbs freed, there's nothing stopping ").append(c.himHer()).append(" from landing a mighty blow with ").append(c.hisHer()).append(" ").append(c.weapon).append(".").toString());
+                } else
+                if(w.getBodyStatus()[3].booleanValue())
+                {
+                    w.append(t, (new StringBuilder("Finally, ")).append(c.mainName).toString());
+                    if(c.weapon.equals("revolver") || c.weapon.equals("pistols") || c.weapon.equals("rifle") || c.weapon.equals("shurikens") || c.weapon.equals("bow") || c.weapon.equals("staff") || c.customWeaponType.equals("shoot"))
+                        w.append(t, (new StringBuilder(" manages to angle ")).append(c.hisHer()).append(" arms so that ").append(c.heShe()).append(" can land several shots with ").append(c.hisHer()).append(" ").append(c.weapon).append(" directly in the largest mouth on your chest.").toString());
+                    else
+                    if(c.weapon.equals("spirits"))
+                        w.append(t, (new StringBuilder("'s ")).append(c.weapon).append(" catch up to where your tongues have dragged ").append(c.himHer()).append(" and begin draining the life from your body.").toString());
+                    else
+                    if(c.weapon.equals("monster"))
+                        w.append(t, (new StringBuilder(" manages to pull far enough away from your body that ")).append(c.hisHer()).append(" ").append(c.weapon).append(" can land a clawed swipe between the two of you, severing the tongues you've wrapped around ").append(c.himHer()).append(".").toString());
+                    else
+                    if(c.customWeaponType.equals("command"))
+                        w.append(t, (new StringBuilder("'s predicament is solved when your body abruptly comes under attack from ")).append(c.hisHer()).append(" ").append(c.weapon).append(".").toString());
+                    else
+                        w.append(t, (new StringBuilder(" lands a solid blow with ")).append(c.hisHer()).append(" ").append(c.weapon).append(" into the largest mouth on your chest.").toString());
+                } else
+                if(w.getBodyStatus()[4].booleanValue())
+                {
+                    w.append(t, (new StringBuilder("Finally, ")).append(c.mainName).append(" manages to break free of the tentacles.  ").toString());
+                    if(c.weapon.equals("revolver") || c.weapon.equals("pistols") || c.weapon.equals("rifle") || c.weapon.equals("shurikens") || c.weapon.equals("bow") || c.weapon.equals("staff") || c.weapon.equals("spirits") || c.customWeaponType.equals("shoot") || c.customWeaponType.equals("command"))
+                        w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" reaches a safe distance, then turns and launches and all-out attack with ").append(c.hisHer()).append(" ").append(c.weapon).append(".").toString());
+                    else
+                    if(c.weapon.equals("monster"))
+                        w.append(t, (new StringBuilder("The moment ")).append(c.heShe()).append(" reaches a safe distance, ").append(c.hisHer()).append(" monster charges forward, swiping at your body with one huge claw.").toString());
+                    else
+                        w.append(t, (new StringBuilder("With ")).append(c.hisHer()).append(" limbs freed, there's nothing stopping ").append(c.himHer()).append(" from landing a mighty blow with ").append(c.hisHer()).append(" ").append(c.weapon).append(".").toString());
+                } else
+                if(w.getBodyStatus()[5].booleanValue())
+                {
+                    w.append(t, (new StringBuilder("Finally, ")).append(c.mainName).toString());
+                    if(c.weapon.equals("revolver") || c.weapon.equals("pistols") || c.weapon.equals("rifle") || c.weapon.equals("shurikens") || c.weapon.equals("bow") || c.weapon.equals("staff") || c.weapon.equals("spirits") || c.customWeaponType.equals("shoot") || c.customWeaponType.equals("command"))
+                        w.append(t, (new StringBuilder(" manages to break free of your Commander's strong grip.  ")).append(c.HeShe()).append(" reaches a safe distance, then turns and launches and all-out attack with ").append(c.hisHer()).append(" ").append(c.weapon).append(".").toString());
+                    else
+                    if(c.weapon.equals("monster"))
+                        w.append(t, (new StringBuilder(" manages to break free of your Commander's strong grip.  The moment ")).append(c.heShe()).append(" reaches a safe distance, ").append(c.hisHer()).append(" monster charges forward, swiping at your body with one huge claw.").toString());
+                    else
+                        w.append(t, (new StringBuilder(" lands a solid blow with ")).append(c.hisHer()).append(" ").append(c.weapon).append(" into the narrowest part of your muscled form - your neck.").toString());
+                } else
+                if(w.getBodyStatus()[6].booleanValue())
+                {
+                    w.append(t, (new StringBuilder("Finally, ")).append(c.mainName).toString());
+                    if(c.weapon.equals("revolver") || c.weapon.equals("pistols") || c.weapon.equals("rifle") || c.weapon.equals("shurikens") || c.weapon.equals("bow") || c.weapon.equals("staff") || c.weapon.equals("spirits") || c.customWeaponType.equals("shoot") || c.customWeaponType.equals("command"))
+                        w.append(t, (new StringBuilder(" manages to break the chains ensaring ")).append(c.hisHer()).append(" clothes.  ").append(c.HeShe()).append(" reaches a safe distance, dragging the ends of the chains behind, then turns and launches and all-out attack with ").append(c.hisHer()).append(" ").append(c.weapon).append(".").toString());
+                    else
+                    if(c.weapon.equals("monster"))
+                        w.append(t, (new StringBuilder(" manages to break the chains ensaring ")).append(c.hisHer()).append(" clothes.  The moment ").append(c.heShe()).append(" reaches a safe distance, ").append(c.hisHer()).append(" monster charges forward, swiping at your body with one huge claw.").toString());
+                    else
+                        w.append(t, (new StringBuilder(" lands a solid blow with ")).append(c.hisHer()).append(" ").append(c.weapon).append(" into the core of your body.  The embedded machinery bursts into intense flames, melting the chains connecting you to ").append(c.himHer()).append(".").toString());
+                }
+                if(w.spendCapture().booleanValue())
+                {
+                    if(w.getBodyStatus()[22].booleanValue())
+                        w.append(t, "  You're still energized enough to do this again.");
+                    else
+                        w.append(t, "  You stumble backward, your body badly injured but still functional.");
+                } else
+                if(w.getBodyStatus()[22].booleanValue())
+                    w.append(t, "  Completely exhausted, the parasitic energy field dissipates.");
+                else
+                    w.append(t, "  The mortal wound causes your body to crumble to ash.");
+                w.append(t, "\n\n");
+                if(w.getBodyStatus()[11].booleanValue() && (c.getHATELevel() >= 3 || c.getPLEALevel() >= 3 && !c.cVirg.booleanValue()) || w.getBodyStatus()[12].booleanValue() && (c.getPLEALevel() >= 3 || c.getINJULevel() >= 3 && !c.aVirg.booleanValue()) || w.getBodyStatus()[13].booleanValue() && (c.getINJULevel() >= 3 || c.getEXPOLevel() >= 3 && !c.modest.booleanValue()) || w.getBodyStatus()[14].booleanValue() && (c.getEXPOLevel() >= 3 || c.getHATELevel() >= 3 && !c.vVirg.booleanValue()))
+                {
+                    if(c.battleSeriousness < 2)
+                        c.battleSeriousness = 2;
+                    if(w.getBodyStatus()[11].booleanValue() && c.getHATELevel() >= 3 && c.vVirg.booleanValue() || w.getBodyStatus()[12].booleanValue() && c.getPLEALevel() >= 3 && c.cVirg.booleanValue() || w.getBodyStatus()[13].booleanValue() && c.getINJULevel() >= 3 && c.aVirg.booleanValue() || w.getBodyStatus()[14].booleanValue() && c.getEXPOLevel() >= 3 && c.modest.booleanValue())
+                        c.printCapturedLine(t, w, thisAttack);
+                    else
+                        c.printEscape(t, w, thisAttack);
+                } else
+                {
+                    c.printEscape(t, w, thisAttack);
+                }
+            }
+            c.defenseLevel = c.defenseLevel + 2;
+            c.captureProgression = 0;
+        } else
+        {
+            c.printCapturedLine(t, w, c.captureProgression % 3);
+            c.captureProgression++;
+        }
+    }
+
+    public String[] nameCombatants()
+    {
+        String shown[] = new String[5];
+        for(int i = 0; i < 3 && getCombatants()[i] != null; i++)
+            shown[i] = getCombatants()[i].mainName;
+
+        if(usedForsaken != null)
+            shown[3] = usedForsaken.mainName;
+        return shown;
+    }
+
     public int threatenResolve()
     {
         int amount = 3 + achievementHeld(6)[0];
@@ -501,9 +857,13 @@ public class WorldState
                         EEGained += 15;
                 }
             }
+            String nameDisplay[] = {
+                subject.mainName, 0, 0, 0, 0
+            };
             Chosen leader = c;
             Chosen follower = d;
             if(d != null)
+            {
                 if(d.confidence > c.confidence)
                 {
                     leader = d;
@@ -512,6 +872,12 @@ public class WorldState
                 {
                     follower = d;
                 }
+                nameDisplay[1] = leader.mainName;
+                nameDisplay[2] = follower.mainName;
+            } else
+            {
+                nameDisplay[1] = c.mainName;
+            }
             String Thrall = "him";
             if(subject.morality > 66)
             {
@@ -537,7 +903,7 @@ public class WorldState
                     append(t, (new StringBuilder(" and ")).append(d.mainName).append(" realize that ").append(subject.heShe()).append("'s nowhere to be seen, they both start searching.  They find ").toString());
                 if(subject.gender.equals("female"))
                 {
-                    append(t, (new StringBuilder(String.valueOf(subject.mainName))).append(" completely naked, a similarly-naked Thrall laying face-up at ").append(subject.hisHer()).append(" feet.  ").append(subject.HeShe()).append(" steps on his erect, twitching penis, taunting him and using one hand to between ").append(subject.hisHer()).append(" legs to play with ").append(subject.himHer()).append("self as ").append(subject.heShe()).append(" does so.").toString());
+                    append(t, (new StringBuilder(String.valueOf(subject.mainName))).append(" completely naked, a similarly-naked Thrall laying face-up at ").append(subject.hisHer()).append(" feet.  ").append(subject.HeShe()).append(" steps on the Thrall's erect, twitching penis, taunting him and using one hand to between ").append(subject.hisHer()).append(" own legs to play with ").append(subject.himHer()).append("self as ").append(subject.heShe()).append(" does so.").toString());
                 } else
                 {
                     Thrall = "them";
@@ -601,6 +967,11 @@ public class WorldState
                     leader.say(t, "But that's...  You're...  You hate the Demons!  You're our strongest fighter against them!  ");
                 }
             }
+            Project.clearPortraits();
+            Project.changePortrait(subject.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 0, Project.Emotion.ANGER, Project.Emotion.ANGER);
+            Project.changePortrait(leader.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 1, Project.Emotion.ANGER, Project.Emotion.ANGER);
+            if(follower != null)
+                Project.changePortrait(follower.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 2, Project.Emotion.ANGER, Project.Emotion.ANGER);
             if(leader.temptReq < 0x186a0L)
             {
                 if(d == null)
@@ -628,6 +999,7 @@ public class WorldState
                         else
                             leader.say(t, "Heh, you owe me one.");
                         leader.say(t, "\"\n\n");
+                        Project.changePortrait(subject.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 0, Project.Emotion.JOY, Project.Emotion.JOY);
                     } else
                     {
                         if(subject.confidence > 66)
@@ -649,6 +1021,7 @@ public class WorldState
                             leader.say(t, "You'll definitely be making it up to me.");
                         leader.say(t, "\"\n\n");
                     }
+                    Project.changePortrait(leader.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 1, Project.Emotion.JOY, Project.Emotion.JOY);
                     if(getRelationship(subject.number, leader.number) == 4)
                     {
                         append(t, "Their shared experiences among the Thralls begin to build an ");
@@ -665,6 +1038,9 @@ public class WorldState
                     leader.say(t, (new StringBuilder("What about you, ")).append(follower.mainName).append("?\"\n\n").toString());
                     if(follower.temptReq < 0x186a0L)
                     {
+                        Project.changePortrait(subject.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 0, Project.Emotion.JOY, Project.Emotion.JOY);
+                        Project.changePortrait(leader.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 1, Project.Emotion.JOY, Project.Emotion.JOY);
+                        Project.changePortrait(follower.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 2, Project.Emotion.LEWD, Project.Emotion.LEWD);
                         append(t, (new StringBuilder(String.valueOf(follower.mainName))).append(" was too engrossed in watching to be paying much attention, but ").append(follower.heShe()).append(" jumps at the sound of ").append(follower.hisHer()).append(" name.\n\n").toString());
                         follower.say(t, "\"I, um...  I'm actually really turned on... from watching you.  Would you mind if I... joined in?\"\n\n");
                         append(t, (new StringBuilder(String.valueOf(subject.mainName))).append(" looks pleasantly surprised as ").append(subject.heShe()).append(" glances between ").append(leader.mainName).append(" and ").append(follower.mainName).append(".\n\n").toString());
@@ -698,6 +1074,9 @@ public class WorldState
                         save.saveScene(21, (new StringBuilder(String.valueOf(subject.mainName))).append("/").append(leader.mainName).append("/").append(follower.mainName).toString(), (new StringBuilder(String.valueOf(subject.mainName))).append(" joins ").append(leader.mainName).append(" and ").append(subject.mainName).append(" in turning ").append(subject.hisHer()).append(" back on the war.").toString());
                     } else
                     {
+                        Project.changePortrait(subject.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 0, Project.Emotion.JOY, Project.Emotion.JOY);
+                        Project.changePortrait(leader.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 1, Project.Emotion.JOY, Project.Emotion.JOY);
+                        Project.changePortrait(follower.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 2, Project.Emotion.FEAR, Project.Emotion.FEAR);
                         append(t, (new StringBuilder(String.valueOf(follower.mainName))).append(" gapes in horror at both of the other Chosen.  ").append(follower.HeShe()).append(" shakes ").append(follower.hisHer()).append(" head and backs away.").toString());
                         follower.say(t, "\"H-Have you both gone crazy?  No!  I don't want anything to do with this!\"\n\n");
                         append(t, (new StringBuilder(String.valueOf(subject.mainName))).append(" smiles sadly, but ").append(subject.hisHer()).append(" expression brightens as ").append(subject.heShe()).append(" turns toward ").append(leader.mainName).append(".\n\n").toString());
@@ -787,6 +1166,8 @@ public class WorldState
                 leader.say(t, (new StringBuilder("Right, ")).append(follower.mainName).append("!?\"\n\n").toString());
                 if(follower.temptReq < 0x186a0L)
                 {
+                    Project.changePortrait(subject.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 0, Project.Emotion.JOY, Project.Emotion.JOY);
+                    Project.changePortrait(follower.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 2, Project.Emotion.SHAME, Project.Emotion.SHAME);
                     append(t, (new StringBuilder("An awkward silence stretches for several seconds before ")).append(follower.mainName).append(" can force ").append(follower.himHer()).append("self to speak up.").toString());
                     follower.say(t, (new StringBuilder("\"Um, actually...  I think ")).append(subject.mainName).append(" is right.  S-Sorry, ").append(leader.mainName).append("...\"\n\n").toString());
                     append(t, (new StringBuilder("Hanging ")).append(follower.hisHer()).append(" head, ").append(follower.mainName).append(" walks over to join ").append(subject.mainName).append(", who embraces ").append(follower.himHer()).append(" with one arm and smiles sadly at ").append(leader.mainName).append(".\n\n").toString());
@@ -822,6 +1203,7 @@ public class WorldState
                     save.saveScene(21, (new StringBuilder(String.valueOf(subject.mainName))).append("/").append(leader.mainName).append("/").append(follower.mainName).toString(), (new StringBuilder(String.valueOf(subject.mainName))).append(" joins ").append(follower.mainName).append(" in turning ").append(subject.hisHer()).append(" back to the war, much to ").append(leader.mainName).append("'s fury.").toString());
                 } else
                 {
+                    Project.changePortrait(follower.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 2, Project.Emotion.SHAME, Project.Emotion.SHAME);
                     append(t, (new StringBuilder("There are tears in ")).append(follower.hisHer()).append(" eyes as ").append(follower.mainName).append(" stares with disbelief at ").append(subject.mainName).append(".\n\n").toString());
                     follower.say(t, "\"Weren't you supposed to be a hero?  H-How could you betray us like this...?\"\n\n");
                     append(t, (new StringBuilder("For a moment, ")).append(subject.mainName).append(" looks hurt by their rejection.  But then ").append(subject.hisHer()).append(" expression grows hard.\n\n").toString());
@@ -864,6 +1246,7 @@ public class WorldState
 
     public void beTempted(JTextPane t, JPanel p, JFrame f, Chosen c)
     {
+        c.battleSeriousness = 0;
         if(!c.betraying.booleanValue())
         {
             if(c.temptReq == 0x186a0L)
@@ -908,7 +1291,7 @@ public class WorldState
                     if(c.dignity > 33)
                         append(t, (new StringBuilder(String.valueOf(c.heShe()))).append("'s started to grow numb to the constant ridicule ").append(c.heShe()).append(" receives for being a pervert.  If that's what ").append(c.heShe()).append(" is, then ").append(c.heShe()).append("'s decided to embrace it.  ").toString());
                     else
-                        append(t, (new StringBuilder(String.valueOf(c.heShe()))).append("'s never been one to hide or deny ").append(c.hisHer()).append(" own feelings.  When the public tells ").append(c.himHer()).append(" that only a bad person would enjoy doing sexual things in public, ").append(c.heShe()).append(" just thinks that maybe it's not so wrong to be a bad person.  ").toString());
+                        append(t, (new StringBuilder(String.valueOf(c.heShe()))).append("'s never been one to hide or deny ").append(c.hisHer()).append(" own feelings.  When the public tells ").append(c.himHer()).append(" that only a bad person would enjoy doing sexual things in public, ").append(c.heShe()).append(" simply thinks that maybe it's not so wrong to be a bad person.  ").toString());
                     if(c.morality > 66)
                         append(t, "After all, if it makes other people feel good too, then it can't be that bad.");
                     else
@@ -1896,33 +2279,52 @@ public class WorldState
         c.say(t, "\"");
         if(!c.betraying.booleanValue() && c.temptReq == 0x15f90L)
         {
+            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.SHAME);
             if(c.morality > 66)
             {
                 if(c.confidence > 66)
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.NEUTRAL);
                     c.say(t, "If it keeps these Thralls occupied, then it certainly harms no one to indulge them.");
-                else
+                } else
                 if(c.confidence > 33)
-                    c.say(t, "Okay, but if some one needs to be saved, you'd better not try to stop me from leaving.");
-                else
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.NEUTRAL);
+                    c.say(t, "Okay, but if someone needs to be saved, you'd better not try to stop me from leaving.");
+                } else
+                {
                     c.say(t, "I-I'm... tired of fighting people who aren't truly evil...");
+                }
             } else
             if(c.morality > 33)
             {
                 if(c.confidence > 66)
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.NEUTRAL);
                     c.say(t, "I suppose I've earned the right to take a little break.");
-                else
+                } else
                 if(c.confidence > 33)
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.NEUTRAL);
                     c.say(t, "They really just want to give me pleasure...?");
-                else
+                } else
+                {
                     c.say(t, "It's not like I'm helping things much by fighting...");
+                }
             } else
             if(c.confidence > 66)
+            {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.NEUTRAL);
                 c.say(t, "If this is a trick, I'll make you regret it...");
-            else
+            } else
             if(c.confidence > 33)
+            {
                 c.say(t, "I don't care what happens anymore.");
-            else
+            } else
+            {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.LEWD);
                 c.say(t, "Ah...  Feels too good to resist...");
+            }
         } else
         if(c.defilementStage == 0)
         {
@@ -1931,38 +2333,66 @@ public class WorldState
                 if(c.getINJULevel() > 2)
                 {
                     if(c.innocence > 66)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.JOY);
                         c.say(t, "As soon as I'm rested up, I'll-  Aah!  Ooh, that feels good...");
-                    else
+                    } else
                     if(c.innocence > 33)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.SHAME);
                         c.say(t, "This will give me a chance to rest...");
-                    else
+                    } else
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.SHAME);
                         c.say(t, "In my exhausted state, I have little choice.");
+                    }
                 } else
                 if(c.morality > 66)
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.FOCUS);
                     c.say(t, "If I can get out of this without hurting them...");
-                else
+                } else
                 if(c.morality > 33)
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
                     c.say(t, "As long as you don't try to stop me once we're done...");
-                else
+                } else
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
                     c.say(t, "Don't think this means I've forgiven you.");
+                }
             } else
             if(c.getINJULevel() > 2)
             {
                 if(c.dignity > 66)
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.SHAME);
                     c.say(t, "Hmph, it's not like I was hoping you'd take me by force.");
-                else
+                } else
                 if(c.dignity > 33)
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.JOY, Project.Emotion.FOCUS);
                     c.say(t, "I thought you'd never ask...");
-                else
+                } else
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FOCUS, Project.Emotion.LEWD);
                     c.say(t, "Okay, okay, you win this round!");
+                }
             } else
             if(c.confidence > 66)
+            {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.FOCUS);
                 c.say(t, "I'm feeling merciful, so I'll play along.");
-            else
+            } else
             if(c.confidence > 33)
+            {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.JOY, Project.Emotion.LEWD);
                 c.say(t, "You've given me some pleasure, so now I suppose I can return the favor.");
-            else
+            } else
+            {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.JOY, Project.Emotion.LEWD);
                 c.say(t, "Th-Thanks for being so gentle...");
+            }
         } else
         if(c.defilementStage % 3 == 0)
         {
@@ -1971,38 +2401,66 @@ public class WorldState
                 if(c.timesStripped() > 0)
                 {
                     if(c.morality > 66)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.NEUTRAL);
                         c.say(t, "Please, don't make me choose...");
-                    else
+                    } else
                     if(c.morality > 33)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.NEUTRAL);
                         c.say(t, "Even I have my limits...");
-                    else
+                    } else
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FOCUS, Project.Emotion.LEWD);
                         c.say(t, "Let's go back to the part where you make me feel good.");
+                    }
                 } else
                 if(c.dignity > 66)
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                     c.say(t, "W-W-Wait!  Turn that off!");
-                else
+                } else
                 if(c.dignity > 33)
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.FEAR);
                     c.say(t, "Hey!  What are you doing!?");
-                else
+                } else
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
                     c.say(t, "I don't like this.");
+                }
             } else
             if(c.timesStripped() > 0)
             {
                 if(c.confidence > 66)
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FOCUS, Project.Emotion.JOY);
                     c.say(t, "Right, I'm just about ready to join the Demons.  Who's going to try to stop me?");
-                else
+                } else
                 if(c.confidence > 33)
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FOCUS, Project.Emotion.JOY);
                     c.say(t, "It's time to let everyone know how I really feel.");
-                else
+                } else
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FOCUS, Project.Emotion.JOY);
                     c.say(t, "I'm not going to hide from it anymore.  I'm... a traitor.  A-And I'm happy to be a traitor!");
+                }
             } else
             if(c.innocence > 66)
+            {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.FEAR);
                 c.say(t, "Um, I know we're friends and all, but maybe we shouldn't be super obvious about it...?");
-            else
+            } else
             if(c.innocence > 33)
+            {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.FEAR);
                 c.say(t, "It's not like I don't want to publicly support you, but I'm worried about what would happen afterward...");
-            else
+            } else
+            {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.SHAME);
                 c.say(t, "When the time comes, I may well join you.  But the time... has not come yet.");
+            }
         } else
         if(c.defilementStage % 3 == 1)
         {
@@ -2016,47 +2474,71 @@ public class WorldState
                     if(c.parasitized.booleanValue())
                     {
                         if(c.morality > 66)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.LEWD);
                             c.say(t, "If you rape anybody else, then that's basically cheating on me!");
-                        else
+                        } else
                         if(c.morality > 33)
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.LEWD);
                             c.say(t, "If I say I don't want it, then just back off!  Or at least... be gentle.");
-                        else
+                        } else
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FOCUS, Project.Emotion.LEWD);
                             c.say(t, "If you're good, I might even let one of you be my first!");
+                        }
                     } else
                     if(c.confidence > 66)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
                         c.say(t, "You should be grateful that I'm letting you use every other part of my body!");
-                    else
+                    } else
                     if(c.confidence > 33)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
                         c.say(t, "That's going too far, even for me.");
-                    else
+                    } else
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.SHAME);
                         c.say(t, (new StringBuilder("P-Please... just leave my ")).append(hole).append(" alone...").toString());
+                    }
                 } else
                 if(c.parasitized.booleanValue())
                 {
                     if(c.dignity > 66)
                     {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.SHAME);
                         if(c.gender.equals("male"))
                             c.say(t, "It's never been penetrated by a penis... so far...");
                         else
                             c.say(t, "A-As you can see, my hymen is... still intact...");
                     } else
                     if(c.dignity > 33)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.JOY);
                         c.say(t, "Yes, I do sometimes wonder what it would be like to let one of you go all the way with me...");
-                    else
+                    } else
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.JOY);
                         c.say(t, "Mm...  Even my finger barely fits...");
+                    }
                 } else
-                if(c.innocence > 66)
-                    c.say(t, "Aaah...  Being looked at feels crazy...!");
-                else
-                if(c.innocence > 33)
-                    c.say(t, "Phew...  Everyone could see...");
-                else
-                    c.say(t, "N-Now, let's do something completely different!");
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.JOY);
+                    if(c.innocence > 66)
+                        c.say(t, "Aaah...  Being looked at feels crazy...!");
+                    else
+                    if(c.innocence > 33)
+                        c.say(t, "Phew...  Everyone could see...");
+                    else
+                        c.say(t, "N-Now, let's do something completely different!");
+                }
             } else
             if(c.temptReq >= 60000L)
             {
                 if(c.timesFantasized() > 0)
                 {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.JOY, Project.Emotion.LEWD);
                     if(c.dignity > 66)
                         c.say(t, "They love me, they all love me...!");
                     else
@@ -2066,30 +2548,51 @@ public class WorldState
                         c.say(t, "Ah, I love you all...!");
                 } else
                 if(c.confidence > 66)
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.SHAME);
                     c.say(t, (new StringBuilder("Don't start doubting yourself now, ")).append(c.mainName).append("!").toString());
-                else
+                } else
                 if(c.confidence > 33)
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.NEUTRAL);
                     c.say(t, "I'm fine, let's keep going.");
-                else
+                } else
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.NEUTRAL);
                     c.say(t, "S-Sorry, I'll hurry up...");
+                }
             } else
             if(c.timesFantasized() > 0)
             {
                 if(c.innocence > 66)
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.JOY, Project.Emotion.LEWD);
                     c.say(t, "Why would I ever fight you?  That's silly!");
-                else
+                } else
                 if(c.innocence > 33)
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.JOY);
                     c.say(t, "Aaah, yes!  Cumming, cumming, cummiiing...!");
-                else
+                } else
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.JOY);
                     c.say(t, "Yes...  Let my mind melt away...");
+                }
             } else
             if(c.morality > 66)
+            {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.JOY, Project.Emotion.LEWD);
                 c.say(t, "As long as we're all happy, that's what really matters.");
-            else
+            } else
             if(c.morality > 33)
+            {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.JOY);
                 c.say(t, "I'm addicted to this...!");
-            else
+            } else
+            {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.JOY, Project.Emotion.LEWD);
                 c.say(t, "I've finally found the place where I belong...");
+            }
         } else
         if(c.defilementStage % 3 == 2)
             if(c.temptReq >= 50000L)
@@ -2097,38 +2600,62 @@ public class WorldState
                 if(c.gender.equals("male") || c.gender.equals("futanari") && (c.temptReq / 10000L) % 2L == 0L)
                 {
                     if(c.morality > 66)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FOCUS, Project.Emotion.LEWD);
                         c.say(t, "I will... make you... feel good too...!");
-                    else
+                    } else
                     if(c.morality > 33)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.JOY);
                         c.say(t, "That was... intense...");
-                    else
+                    } else
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.JOY);
                         c.say(t, "Ah...  It really does feel better to cum inside a woman...");
+                    }
                 } else
                 if(c.dignity > 66)
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.JOY, Project.Emotion.SHAME);
                     c.say(t, "You don't need to treat me like a weakling...  Thanks, though.");
-                else
+                } else
                 if(c.dignity > 33)
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
                     c.say(t, "It's going...  Nng!  Insiiide!");
-                else
+                } else
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.FOCUS);
                     c.say(t, "Nghfff...  Whew, it doesn't look like much, but it feels plenty big once it's inside...");
+                }
             } else
             if(c.gender.equals("male") || c.gender.equals("futanari") && (c.temptReq / 10000L) % 2L == 0L)
             {
                 if(c.confidence > 66)
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FOCUS, Project.Emotion.JOY);
                     c.say(t, "Hello, ladies!");
-                else
+                } else
                 if(c.confidence > 33)
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.JOY);
                     c.say(t, "You both... feel so good...!");
-                else
+                } else
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.SHAME);
                     c.say(t, "B-Both at once?  Oh, wow...");
+                }
             } else
-            if(c.innocence > 66)
-                c.say(t, "I'm so happy that you all taught me how good butt stuff feels!");
-            else
-            if(c.innocence > 33)
-                c.say(t, "Yes!  Yes!  I love anal sex!");
-            else
-                c.say(t, "Incredible...!  To stimulate the Graefenberg spot through the colon...!  Oooh!");
+            {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.JOY);
+                if(c.innocence > 66)
+                    c.say(t, "I'm so happy that you all taught me how good butt stuff feels!");
+                else
+                if(c.innocence > 33)
+                    c.say(t, "Yes!  Yes!  I love anal sex!");
+                else
+                    c.say(t, "Incredible...!  To stimulate the Graefenberg spot through the colon...!  Oooh!");
+            }
         c.say(t, "\"");
         c.cKnown = Boolean.valueOf(true);
         c.mKnown = Boolean.valueOf(true);
@@ -2149,6 +2676,7 @@ public class WorldState
     {
         append(t, (new StringBuilder("\n\n")).append(getSeparator()).append("\n\n").toString());
         save.newScene();
+        Project.clearPortraits();
         Chosen c = null;
         Chosen d = null;
         if(id == 0)
@@ -2157,6 +2685,9 @@ public class WorldState
                 if(getCast()[i].morality > 66)
                     c = getCast()[i];
 
+            String nameDisplay[] = {
+                c.mainName, 0, 0, 0, 0
+            };
             append(t, (new StringBuilder("As public figures, the Chosen have the ability to exert a great deal of influence simply by choosing where to make appearances.  Some Chosen use that power for purely selfish reasons, but ")).append(c.mainName).append(" is always on the lookout for ways ").append(c.heShe()).append(" can help people.  When ").append(c.heShe()).append(" receives an invitation to be the guest of honor at an upcoming charity dinner in order to attract more donors, ").append(c.heShe()).append("'s overnjoyed.\n\n").toString());
             append(t, (new StringBuilder("The first indication that not everything was as it seemed was the formal attire ")).append(c.heShe()).append(" was sent, 'as a courtesy', after accepting the invitation.  It was a strapless, low-cut, practically transparent black dress which would normally be considered insufficient to protect the wearer's modesty without a bra, and yet was clearly intended to be worn without one.  ").toString());
             if(getGenders()[c.number].equals("male"))
@@ -2222,20 +2753,24 @@ public class WorldState
             {
                 append(t, (new StringBuilder(String.valueOf(c.mainName))).append(" keeps moving ").append(c.hisHer()).append(" head with every spurt it releases, encouraging the chairman to fuck ").append(c.hisHer()).append(" throat.  Once he's finished, ").append(c.mainName).append(" triumphantly stands up, wiping the white fluid off ").append(c.hisHer()).append(" smiling lips.  The chairman's grunts of pleasure mean that the guests at several other tables are already staring at ").append(c.mainName).append(", but ").append(c.heShe()).append("'s too turned on to care.  Even the chairman is taken aback by how brazen ").append(c.heShe()).append(" is.\n\n").toString());
                 c.say(t, "\"Now that I think about it, I don't mind if you call me a slut.  I don't need your respect.  After all, I just want to make everybody happy.\"");
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 0, Project.Emotion.JOY, Project.Emotion.JOY);
             } else
             if(c.dignity > 66)
             {
                 append(t, (new StringBuilder("The shock of it reminds ")).append(c.mainName).append(" of the situation, and ").append(c.heShe()).append(" desperately gulps down every spurt, knowing that even a few drops leaking from ").append(c.hisHer()).append(" lips would result in an incredibly obvious spatter on ").append(c.hisHer()).append(" black dress.  After the chairman finishes, ").append(c.mainName).append(" waits a full minute before attempting to stealthily reclaim ").append(c.hisHer()).append(" seat.  But when ").append(c.heShe()).append(" looks at the surrounding tables, ").append(c.heShe()).append(" can see several guests glancing in ").append(c.hisHer()).append(" direction, and they seem to be laughing at ").append(c.hisHer()).append(" expense.  ").append(c.HeShe()).append(" feels compelled to defend ").append(c.hisHer()).append(" honor to the chairman.\n\n").toString());
                 c.say(t, "\"Th-There!  I went out of my way to satisfy you.  I expect that you'll put a similar level of effort into helping the public.  I certainly didn't enjoy that one bit!\"");
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 0, Project.Emotion.ANGER, Project.Emotion.ANGER);
             } else
             if(c.dignity > 33)
             {
                 append(t, (new StringBuilder(String.valueOf(c.mainName))).append(" coughs and chokes, and the last few spurts go onto ").append(c.hisHer()).append(" face and chest.  ").append(c.HeShe()).append("'s horrified when ").append(c.heShe()).append(" realizes that it will be obvious to anyone who looks what ").append(c.heShe()).append(" was doing.  ").append(c.HeShe()).append("'s able to wipe off most of the fluid with ").append(c.hisHer()).append(" fingers and dispose of it by licking them clean, but the wet spot on the front of ").append(c.hisHer()).append(" dress won't go away.  ").append(c.HeShe()).append(" tries to cover ").append(c.himHer()).append("self as ").append(c.heShe()).append(" gets out from under the table and reclaims ").append(c.hisHer()).append(" seat, but the scattered chuckling from the surrounding tables makes it clear that ").append(c.heShe()).append("'s failed.\n\n").toString());
                 c.say(t, "(They all know what the chairman was doing with me.  And yet... none of them seem to care...");
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 0, Project.Emotion.SHAME, Project.Emotion.SHAME);
             } else
             {
                 append(t, (new StringBuilder(String.valueOf(c.mainName))).append(" barely even notices the pain.  When ").append(c.heShe()).append(" unsteadily climbs back into ").append(c.hisHer()).append(" chair, there's white fluid across ").append(c.hisHer()).append(" face and down ").append(c.hisHer()).append(" dress, and one of ").append(c.hisHer()).append(" nipples has slipped free, but ").append(c.heShe()).append("'s too turned on to care.  ").append(c.HeShe()).append(" has the presence of mind to negotiate with the chairman about what his charity can do for the public, but even that much is a struggle.\n\n").toString());
                 c.say(t, "(That actually felt good...  I suppose this sort of thing doesn't bother me that much after all.)");
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 0, Project.Emotion.LEWD, Project.Emotion.LEWD);
             }
             save.saveScene(33, c.mainName, (new StringBuilder("At a high-class charity dinner, ")).append(c.mainName).append(" is given the chance to help even more people by using ").append(c.hisHer()).append(" sexual skills.").toString());
         } else
@@ -2245,6 +2780,9 @@ public class WorldState
                 if(getCast()[i].confidence > 66)
                     c = getCast()[i];
 
+            String nameDisplay[] = {
+                c.mainName, 0, 0, 0, 0
+            };
             if(c.morality > 66)
             {
                 append(t, (new StringBuilder(String.valueOf(c.givenName))).append(" wants to improve ").append(c.hisHer()).append(" ability to pacify Thralls using sexual methods, but ").append(c.heShe()).append(" knows that ").append(c.heShe()).append(" can't practice without a willing partner.  However, when ").append(c.heShe()).append(" notices one of ").append(c.hisHer()).append(" friends stealing lustful glances in ").append(c.hisHer()).append(" direction, ").append(c.heShe()).append(" decides that ").append(c.heShe()).append(" can't pass up this opportunity.\n\n").toString());
@@ -2283,6 +2821,7 @@ public class WorldState
                 else
                     append(t, (new StringBuilder("start pumping ")).append(c.hisHer()).append(" own cock - but with much more purposeful, steady motions than the one ").append(c.heShe()).append(" had been using on the one now in ").append(c.hisHer()).append(" mouth.  ").toString());
                 append(t, (new StringBuilder("The two of them cum together, ")).append(c.givenName).append("'s eyes rolling upward with ecstasy as ").append(c.heShe()).append(" swallows every last drop.\n\n").toString());
+                Project.changePortrait(c.type, Boolean.valueOf(true), Boolean.valueOf(false), this, nameDisplay, 0, Project.Emotion.LEWD, Project.Emotion.LEWD);
                 if(c.morality > 66)
                     c.say(t, "(I love... making people happy...)");
                 else
@@ -2294,6 +2833,7 @@ public class WorldState
             {
                 append(t, (new StringBuilder("\n\nWhen ")).append(c.givenName).append(" curls ").append(c.hisHer()).append(" finger, ").append(c.hisHer()).append(" partner gives one last helpless cry, then cums all over himself, gasping and shuddering in the afterglow.  ").append(c.givenName).append(" looks down at him with a faintly dissatisfied expression.\n\n").toString());
                 c.say(t, "\"");
+                Project.changePortrait(c.type, Boolean.valueOf(true), Boolean.valueOf(false), this, nameDisplay, 0, Project.Emotion.ANGER, Project.Emotion.ANGER);
                 if(c.morality > 66)
                     c.say(t, "Tell me the truth.  Is this what you wanted from me all along?");
                 else
@@ -2319,6 +2859,9 @@ public class WorldState
                 if(getCast()[i].dignity > 66)
                     c = getCast()[i];
 
+            String nameDisplay[] = {
+                c.mainName, 0, 0, 0, 0
+            };
             append(t, (new StringBuilder("Backstage at a public event, ")).append(c.mainName).append(" has been cornered alone in a room with an overly pushy fan.  Under normal circumstances, ").append(c.heShe()).append(" could have called for security, or simply used ").append(c.hisHer()).append(" Chosen powers to fend the regular human off.  However, the fan is brandishing his phone at ").append(c.himHer()).append(", and the video being played on it gives ").append(c.mainName).append(" pause.\n\n").toString());
             append(t, "\"");
             if(c.innocence > 66)
@@ -2404,18 +2947,25 @@ public class WorldState
                 append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" hand slips away, and the man takes the opportunity to ram himself balls-deep inside ").append(c.himHer()).append(".  With ").append(c.hisHer()).append(" folds squeezing down on it, the man's cock cums instantly, shooting spurt after spurt of hot cum directly into ").append(c.hisHer()).append(" womb.  ").toString());
             else
             if(!c.vVirg.booleanValue() || !c.aVirg.booleanValue() && !c.gender.equals("male"))
-                append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" hand slips away, and the man takes the opportunity to bury himself deep inside ").append(c.mainName).append("'s loosened, experienced asshole.  He cums instantly, filling ").append(c.mainName).append("'s belly with a torrent of pungent cum.  ").toString());
+                append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" hand slips away, and the man takes the opportunity to bury himself deep inside ").append(c.mainName).append("'s loosened, experienced asshole.  He climaxes instantly, filling ").append(c.mainName).append("'s belly with a torrent of pungent cum.  ").toString());
             else
                 append(t, (new StringBuilder("The extra stimulation causes the man to climax.  He pulls back as his cock erupts, shooting spurts of white cum all over ")).append(c.mainName).append("'s ass.  ").toString());
             append(t, (new StringBuilder("When ")).append(c.mainName).append(" comes to ").append(c.hisHer()).append(" senses, ").append(c.hisHer()).append(" attacker is gone - having decided to make himself scarce before ").append(c.mainName).append(" could get angry.  ").append(c.mainName).append(" stands up shakily, wiping ").append(c.himHer()).append("self clean and trying to get ").append(c.hisHer()).append(" clothes back in order.\n\n").toString());
             c.say(t, "\"");
             if(c.innocence > 66)
+            {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 0, Project.Emotion.LEWD, Project.Emotion.LEWD);
                 c.say(t, "I feel... really funny.  That jerk must've given me a drug or something when I was distracted...");
-            else
+            } else
             if(c.innocence > 33)
+            {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 0, Project.Emotion.ANGER, Project.Emotion.ANGER);
                 c.say(t, "I wonder if he'll force me to do more with him...  Hmph, of course, it's not as if I hope he will!");
-            else
+            } else
+            {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 0, Project.Emotion.SHAME, Project.Emotion.SHAME);
                 c.say(t, "I must... try to avoid remembering this incident...  Yes, act as though it never happened.");
+            }
             c.say(t, "\"");
             String description = "";
             if(c.innocence > 66)
@@ -2433,6 +2983,9 @@ public class WorldState
                 if(getCast()[i].innocence > 66)
                     c = getCast()[i];
 
+            String nameDisplay[] = {
+                c.mainName, 0, 0, 0, 0
+            };
             if(c.dignity > 66)
             {
                 append(t, (new StringBuilder(String.valueOf(c.mainName))).append(" has always been desperate for attention, praise, and approval from the public.  ").append(c.HeShe()).append("'s still embarrassed about the photographs of ").append(c.hisHer()).append(" panties being stripped off in battle, and whenever ").append(c.heShe()).append(" checks ").append(c.hisHer()).append(" social media accounts, some perverted fan is always reminding ").append(c.himHer()).append(" of it.  Desperate for a way to avoid facing more humiliation, ").append(c.heShe()).append(" starts wearing a layer of bodypaint across ").append(c.hisHer()).append(" torso, as this is the only kind of covering that won't be destroyed by ").append(c.hisHer()).append(" transformation.\n\n").toString());
@@ -2485,6 +3038,7 @@ public class WorldState
             else
                 append(t, (new StringBuilder("squeezing ")).append(c.hisHer()).append(" breasts from behind").toString());
             append(t, (new StringBuilder(" and then sprinting away.  ")).append(c.givenName).append(" gives chase, ").toString());
+            Project.changePortrait(c.type, Boolean.valueOf(true), Boolean.valueOf(false), this, nameDisplay, 0, Project.Emotion.ANGER, Project.Emotion.ANGER);
             if(c.morality > 66)
             {
                 append(t, (new StringBuilder("but when ")).append(c.heShe()).append(" catches up, the pervert falls to his knees and apologizes profusely, claiming that seeing ").append(c.givenName).append("'s body made him lose control.  ").append(c.givenName).append(" is caught off-guard, and ").append(c.heShe()).append(" feels guilty about tempting him.\n\n").toString());
@@ -2495,6 +3049,7 @@ public class WorldState
                     append(t, "pussy");
                 append(t, (new StringBuilder(" wide open, the pervert finally cums all over ")).append(c.himHer()).append(", his seed dribbling down the faded remnants of ").append(c.givenName).append("'s painted-on swimsuit.\n\n").toString());
                 c.say(t, "\"Your thing still looks really swollen and painful...  Um, I can keep sitting here if you wanna do that again...");
+                Project.changePortrait(c.type, Boolean.valueOf(true), Boolean.valueOf(false), this, nameDisplay, 0, Project.Emotion.LEWD, Project.Emotion.LEWD);
             } else
             if(c.morality > 33)
             {
@@ -2533,6 +3088,9 @@ public class WorldState
                 if(getCast()[i].confidence > 66)
                     c = getCast()[i];
 
+            String nameDisplay[] = {
+                c.mainName, 0, 0, 0, 0
+            };
             if(c.mStart.booleanValue())
                 append(t, (new StringBuilder("Until recently, ")).append(c.mainName).append(" didn't listen at all when ").append(c.hisHer()).append(" publicity team advised ").append(c.himHer()).append(" to win more fans by playing up ").append(c.hisHer()).append(" sex appeal.  However, now that the pictures of ").append(c.himHer()).append(" being stripped during battle are a common topic of conversation among ").append(c.hisHer()).append(" fans already, ").append(c.heShe()).append(" figures that ").append(c.heShe()).append(" has nothing more to lose by scheduling a risque photoshoot with a professional propaganda agency.  ").toString());
             else
@@ -2569,7 +3127,7 @@ public class WorldState
             } else
             if(c.morality > 33)
             {
-                append(t, (new StringBuilder("As ")).append(c.hisHer()).append(" enthsiasm grows, ").append(c.mainName).append(" goes off-script, taking charge of the scene.  ").append(c.HeShe()).append(" summons ").append(c.hisHer()).append(" Chosen garb and strikes some powerful, authoritative poses.  The photographers adapt, improvising several shots where they bow worshipfully at ").append(c.hisHer()).append(" feet, praising ").append(c.himHer()).append(" as ").append(c.hisHer()).append(" savior.\n\n").toString());
+                append(t, (new StringBuilder("As ")).append(c.hisHer()).append(" enthsiasm grows, ").append(c.mainName).append(" goes off-script, taking charge of the scene.  ").append(c.HeShe()).append(" summons ").append(c.hisHer()).append(" Chosen garb and strikes some powerful, authoritative poses.  The photographers adapt, improvising several shots where they bow worshipfully at ").append(c.hisHer()).append(" feet, praising ").append(c.himHer()).append(" as their savior.\n\n").toString());
                 c.say(t, "\"That's right, this is how things are meant to be.\"\n\n");
                 append(t, (new StringBuilder("Their motives aren't entirely pure, as they know that flattering ")).append(c.himHer()).append(" will make ").append(c.himHer()).append(" more likely to accept their next requests.  ").toString());
             } else
@@ -2596,6 +3154,7 @@ public class WorldState
             append(t, (new StringBuilder("At the end of the photoshoot, several of the photographers gather around ")).append(c.mainName).append(", asking if ").append(c.heShe()).append("'d like to accompany them to a bar or a club or something to wind down.  They don't even hide the fact that they're hungry for some hands-on experience with the body they've been photographing.  ").toString());
             if(!c.vVirg.booleanValue() || c.lustful)
             {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 0, Project.Emotion.FOCUS, Project.Emotion.FOCUS);
                 append(t, (new StringBuilder(String.valueOf(c.mainName))).append(" licks ").append(c.hisHer()).append(" lips.\n\n").toString());
                 c.say(t, "\"");
                 if(c.innocence > 66)
@@ -2607,6 +3166,7 @@ public class WorldState
                     c.say(t, "This experience was quite... stimulating, wasn't it?  Yes, let us continue elsewhere.");
             } else
             {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 0, Project.Emotion.JOY, Project.Emotion.JOY);
                 append(t, (new StringBuilder(String.valueOf(c.mainName))).append(" is delighted by the attention, but ").append(c.heShe()).append(" has no interest in letting things progress any further than that.  ").append(c.HeShe()).append(" smirk over ").append(c.hisHer()).append(" shoulder as ").append(c.heShe()).append(" walks past them and leaves.\n\n").toString());
                 c.say(t, "\"\"");
                 if(c.innocence > 66)
@@ -2634,6 +3194,9 @@ public class WorldState
                 if(getCast()[i].morality > 66)
                     c = getCast()[i];
 
+            String nameDisplay[] = {
+                c.mainName, 0, 0, 0, 0
+            };
             append(t, (new StringBuilder("That evening, ")).append(c.mainName).append(" is scheduled to appear at a celebrity event in order to produce positive publicity for the Chosen and reassure the public that everything is under control.  ").toString());
             if(c.dignity > 66)
             {
@@ -2685,6 +3248,7 @@ public class WorldState
                 append(t, "naked slit.\n\n");
             else
                 append(t, "hermaphroditic genitals.\n\n");
+            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 0, Project.Emotion.SHAME, Project.Emotion.SHAME);
             if(c.confidence > 66)
             {
                 append(t, (new StringBuilder(String.valueOf(c.mainName))).append(" reacts reflexively, delivering a closed-fist punch directly to the man's jaw.  Even without ").append(c.hisHer()).append(" powers, it's enough to knock him out cold.  However, ").append(c.heShe()).append(" immediately regrets it.  ").append(c.HisHer()).append(" fist clenches even tighter, and ").append(c.heShe()).append(" grits ").append(c.hisHer()).append(" teeth as ").append(c.heShe()).append(" looks downward in shame.  Not at ").append(c.hisHer()).append(" exposure - for ").append(c.heShe()).append("'s stopped caring about that entirely - but at how easily ").append(c.heShe()).append("'s provoked by mere ridicule.\n\n").toString());
@@ -2719,6 +3283,9 @@ public class WorldState
                 if(getCast()[i].confidence < 67)
                     c = getCast()[i];
 
+            String nameDisplay[] = {
+                c.mainName, d.mainName, 0, 0, 0
+            };
             append(t, (new StringBuilder(String.valueOf(c.mainName))).append(" and ").append(d.mainName).append(" spend the evening relaxing together in their civilian identities").toString());
             if(c.mainName.equals(c.givenName) && d.mainName.equals(d.givenName))
                 append(t, ".  ");
@@ -3010,6 +3577,8 @@ public class WorldState
                     c.say(t, "I've been looking forward to showing you that technique.  It seems it was more than satisfactory.");
                 c.say(t, "\"");
             }
+            Project.changePortrait(c.type, Boolean.valueOf(true), Boolean.valueOf(false), this, nameDisplay, 0, Project.Emotion.JOY, Project.Emotion.JOY);
+            Project.changePortrait(d.type, Boolean.valueOf(true), Boolean.valueOf(false), this, nameDisplay, 1, Project.Emotion.JOY, Project.Emotion.JOY);
             String description = "";
             if(c.morality > 66)
                 description = (new StringBuilder(String.valueOf(c.givenName))).append(" treats the needy ").append(d.givenName).append(" to a movie date and a night of generous lovemaking.").toString();
@@ -3029,6 +3598,9 @@ public class WorldState
                 if(getCast()[i].confidence < 34)
                     d = getCast()[i];
 
+            String nameDisplay[] = {
+                c.mainName, d.mainName, 0, 0, 0
+            };
             append(t, (new StringBuilder("After another hard-fought battle against the Demons, ")).append(d.mainName).append(" is left feeling exhausted and discouraged, but ").append(d.hisHer()).append(" spirits brighten when ").append(c.mainName).append(" tells ").append(d.himHer()).append(" that ").append(c.heShe()).append(" has a gift at home to give to ").append(d.himHer()).append(".  They fly back to ").append(c.mainName).append("'s place, transform back into their civilian identities").toString());
             if(!c.mainName.equals(c.givenName) && !d.mainName.equals(d.givenName))
                 append(t, (new StringBuilder(" as ")).append(c.givenName).append(" and ").append(d.givenName).toString());
@@ -3050,7 +3622,7 @@ public class WorldState
             } else
             if(c.dignity > 33)
             {
-                append(t, (new StringBuilder(String.valueOf(c.givenName))).append(" takes a box from next to the door which it had arrived earlier that day.  ").append(c.HeShe()).append(" hands it to ").append(d.givenName).append(", then chuckles at the way ").append(d.hisHer()).append(" eyebrows raise when ").append(d.heShe()).append(" reads the label.\n\n").toString());
+                append(t, (new StringBuilder(String.valueOf(c.givenName))).append(" takes a newly-arrived package from next to the door.  ").append(c.HeShe()).append(" hands it to ").append(d.givenName).append(", then chuckles at the way ").append(d.hisHer()).append(" eyebrows raise when ").append(d.heShe()).append(" reads the label.\n\n").toString());
                 d.say(t, "\"");
                 if(d.innocence > 66)
                     d.say(t, "Adult... Implements...  Oh!  Th-This is something naughty, isn't it...?");
@@ -3153,7 +3725,7 @@ public class WorldState
             if(d.gender.equals("male") || d.vVirg.booleanValue())
                 append(t, (new StringBuilder(", pulls the tail out of ")).append(d.givenName).append("'s ass in one swift motion, and then immediately thrusts ").append(d.himHer()).append("self into the vacant hole.\n\n").toString());
             else
-                append(t, (new StringBuilder(" to line ")).append(c.himHer()).append("self up with ").append(d.givenName).append("'s soaked pussy, then rams inside, so that ").append(d.givenName).append("'s having both ").append(d.hisHer()).append(" holes filled at once.\n\n").toString());
+                append(t, (new StringBuilder(" to line ")).append(c.himHer()).append("self up with ").append(d.givenName).append("'s soaked pussy and ram inside, so that ").append(d.givenName).append("'s having both ").append(d.hisHer()).append(" holes filled at once.\n\n").toString());
             append(t, (new StringBuilder(String.valueOf(d.givenName))).append(" was already almost ready to cum, and the sudden penetration pushes ").append(d.himHer()).append(" over the edge, ").toString());
             if(d.gender.equals("female"))
             {
@@ -3218,6 +3790,8 @@ public class WorldState
                 else
                     d.say(t, (new StringBuilder(String.valueOf(c.givenName))).append("...  You really do just want to make me happy...  I don't get it...").toString());
             }
+            Project.changePortrait(c.type, Boolean.valueOf(true), Boolean.valueOf(false), this, nameDisplay, 0, Project.Emotion.JOY, Project.Emotion.JOY);
+            Project.changePortrait(d.type, Boolean.valueOf(true), Boolean.valueOf(false), this, nameDisplay, 1, Project.Emotion.JOY, Project.Emotion.JOY);
             d.say(t, "\"");
             String description = "";
             if(c.morality > 66)
@@ -3235,6 +3809,9 @@ public class WorldState
                 if(getCast()[i] != null && getCast()[i].morality > 66)
                     c = getCast()[i];
 
+            String nameDisplay[] = {
+                c.mainName, 0, 0, 0, 0
+            };
             append(t, (new StringBuilder(String.valueOf(c.mainName))).append(" had scheduled an appearance today at one of the city's children's hospitals, and although a part of ").append(c.himHer()).append(" wants to cancel it and just go home to rest, ").append(c.heShe()).append(" feels like ").append(c.heShe()).append("'s obligated to keep ").append(c.hisHer()).append(" word and show up.  In order to avoid any chance that the paparazzi might follow ").append(c.himHer()).append(" and disrupt the event, ").append(c.heShe()).append(" heads there in ").append(c.hisHer()).append(" civilian form").toString());
             if(!c.mainName.equals(c.givenName))
                 append(t, (new StringBuilder(" as ")).append(c.givenName).toString());
@@ -3290,8 +3867,10 @@ public class WorldState
                 append(t, (new StringBuilder("The molester's other hand goes down the back of ")).append(c.givenName).append("'s pants, his middle finger unerringly seeking out ").append(c.givenName).append("'s asshole.  As it begins to tease the entrance, ").toString());
             else
                 append(t, (new StringBuilder("The molester's other hand goes up the front of ")).append(c.givenName).append("'s shirt, giving one of ").append(c.hisHer()).append(" breasts a firm squeeze.  The fingers find ").append(c.hisHer()).append(" nipple, and as they begin to pinch it in time with the movements below, ").toString());
+            Project.changePortrait(c.type, Boolean.valueOf(true), Boolean.valueOf(false), this, nameDisplay, 0, Project.Emotion.LEWD, Project.Emotion.LEWD);
             if(c.dignity > 66)
             {
+                Project.changePortrait(c.type, Boolean.valueOf(true), Boolean.valueOf(false), this, nameDisplay, 0, Project.Emotion.FEAR, Project.Emotion.FEAR);
                 append(t, (new StringBuilder(String.valueOf(c.givenName))).append(" is too turned on to pay any mind to the shaft being pressed against ").append(c.hisHer()).append(" butt, too warm and too distinctly hard to be sheathed within the molester's own pants.  It's been humping against ").append(c.himHer()).append(" rapidly during the later stages of the molestation, and after one final passionate thrust, it suddenly pulls away from ").append(c.himHer()).append(", bringing the groping hands with it.  When ").append(c.givenName).append(" looks down in confusion at the resulting white smear left on ").append(c.hisHer()).append(" butt, ").append(c.heShe()).append(" wails in horror and hurriedly pulls out a tissue to wipe up the mess, feeling the other passengers' eyes on ").append(c.himHer()).append(" all the while.\n\n").toString());
                 c.say(t, "(No, no, no!  I look like a shameless pervert!)");
             } else
@@ -3324,6 +3903,9 @@ public class WorldState
                     if(getCast()[i].confidence > 33)
                         d = getCast()[i];
 
+            String nameDisplay[] = {
+                c.mainName, d.mainName, 0, 0, 0
+            };
             append(t, (new StringBuilder("Neither ")).append(c.mainName).append(" nor ").append(d.mainName).append(" have anything scheduled for after the battle, ").toString());
             if(c.innocence > 66)
             {
@@ -3363,7 +3945,7 @@ public class WorldState
                 else
                     d.say(t, "Ah, crap.  This is gonna hurt, isn't it?");
             }
-            c.say(t, "\"\n\n");
+            d.say(t, "\"\n\n");
             append(t, "They decide to practice their unarmed combat techniques, hand-to-hand wrestling with the intent to subdue and avoid being pinned, each treating the other the way they'd treat a hostile Thrall.  After flying together to an abandoned lot near the city limits, where no one will see or disturb them, they rush directly at each other, and their mock-battle is joined.  ");
             if(d.morality > 66)
             {
@@ -3435,6 +4017,8 @@ public class WorldState
             append(t, (new StringBuilder("Finally, ")).append(c.mainName).append(" rams ").append(c.himHer()).append("self inside, all the way to the base, in one savage thrust.  ").append(d.mainName).append(" screams into ").append(c.mainName).append("'s mouth, both with pleasure and with pain at the rough insertion, but ").append(d.heShe()).append(" doesn't stop fighting.  Every buck of ").append(d.hisHer()).append(" hips, every squirm and kick, makes ").append(d.himHer()).append(" even more aware of the thick rod invading ").append(d.hisHer()).append(" body.  But ").append(c.mainName).append(" can feel ").append(d.mainName).append(" squeezing down as well").toString());
             if(c.gender.equals("female"))
                 append(t, (new StringBuilder(", every jostle of the dildo being transmitted through the harness to ")).append(c.mainName).append("'s clit.  ").toString());
+            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 0, Project.Emotion.JOY, Project.Emotion.JOY);
+            Project.changePortrait(d.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 1, Project.Emotion.JOY, Project.Emotion.JOY);
             if(d.dignity > 66)
             {
                 append(t, (new StringBuilder(String.valueOf(d.mainName))).append(" is just barely able to withstand the pleasure until ").append(c.mainName).append(" climaxes.  Only then does ").append(d.mainName).append(" allow ").append(d.himHer()).append("self to orgasm as well").toString());
@@ -3460,8 +4044,10 @@ public class WorldState
                 append(t, ".  Then, they lay side-by-side, smiling at each other despite the cuts and bruises that cover them both.\n\n");
                 c.say(t, "\"");
                 if(c.morality > 66)
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 0, Project.Emotion.NEUTRAL, Project.Emotion.NEUTRAL);
                     c.say(t, (new StringBuilder("I hope I wasn't too rough with you, ")).append(d.mainName).append("...  Sometimes I don't know my own strength.").toString());
-                else
+                } else
                 if(c.morality > 33)
                     c.say(t, "You really enjoyed that, didn't you?  I hope you weren't holding back.");
                 else
@@ -3502,6 +4088,9 @@ public class WorldState
                 if(getCast()[i].morality > 66)
                     c = getCast()[i];
 
+            String nameDisplay[] = {
+                c.mainName, 0, 0, 0, 0
+            };
             append(t, (new StringBuilder("The government provides the Chosen with servants to fulfill their every need, from chauffers to chefs, but ")).append(c.givenName).append(" has always felt that ").append(c.heShe()).append(" should handle ").append(c.hisHer()).append(" own chores and live humbly.  ").toString());
             if(c.debased)
             {
@@ -3585,8 +4174,10 @@ public class WorldState
                     append(t, ", leaving white stains in the former Thrall's lap.  ");
                 append(t, "They both go limp, catching their breath");
             }
+            Project.changePortrait(c.type, Boolean.valueOf(true), Boolean.valueOf(false), this, nameDisplay, 0, Project.Emotion.LEWD, Project.Emotion.LEWD);
             if(c.confidence > 66)
             {
+                Project.changePortrait(c.type, Boolean.valueOf(true), Boolean.valueOf(false), this, nameDisplay, 0, Project.Emotion.ANGER, Project.Emotion.ANGER);
                 append(t, (new StringBuilder(", before ")).append(c.givenName).append(" finally forces ").append(c.himHer()).append("self to ").append(c.hisHer()).append(" feet, glaring down at the former Thrall.\n\n").toString());
                 c.say(t, "\"Hmph.  You took advantage of my kindness.  You're lucky that I didn't... entirely hate it...");
             } else
@@ -3609,6 +4200,280 @@ public class WorldState
             else
                 description = (new StringBuilder("Even though ")).append(c.heShe()).append(" knows it's nonsense, ").append(c.mainName).append(" goes along with a former Thrall claiming that ").append(c.heShe()).append(" needs to 'purify' his lust.").toString();
             save.saveScene(43, c.mainName, description);
+        } else
+        if(id == 11)
+        {
+            for(int i = 0; i < 3; i++)
+                if(getCast()[i].morality > 33 && getCast()[i].morality < 67)
+                    c = getCast()[i];
+
+            String nameDisplay[] = {
+                c.mainName, 0, 0, 0, 0
+            };
+            append(t, (new StringBuilder("As the Demons have grown stronger, the stress of battle has become harder and harder for ")).append(c.mainName).append(" to bear.  ").append(c.HeShe()).append("'s already exhausted by the time ").append(c.heShe()).append(" comes home from each fight, and on top of that, ").append(c.hisHer()).append(" schedule is packed with training sessions and public appearances.  The burden is too much for ").append(c.hisHer()).append(" body and mind to bear, and eventually, after an event spent mingling and signing autographs for ").append(c.hisHer()).append(" fans, ").append(c.heShe()).append(" returns to ").append(c.hisHer()).append(" dressing room and falls asleep in ").append(c.hisHer()).append(" chair.\n\n").toString());
+            append(t, (new StringBuilder("For superhumans like the Chosen, there's no need for private security details, and the only thing protecting ")).append(c.mainName).append("'s rest is the dressing room door ").append(c.heShe()).append(" forgot to lock.  A male fan trespassing backstage pushes open the door and is shocked by what he sees inside.  ").toString());
+            if(c.dignity > 66)
+            {
+                append(t, (new StringBuilder("At first, ")).append(c.mainName).append(" looks like ").append(c.heShe()).append("'s awake and just resting ").append(c.hisHer()).append(" eyes, but ").append(c.heShe()).append(" doesn't react to the noise of the door opening, and in ").append(c.hisHer()).append(" current state of undress, that can only mean that ").append(c.heShe()).append("'s asleep.  ").append(c.HeShe()).append(" isn't wearing ").append(c.hisHer()).append(" ").append(c.topDesc()).append(", and the fan feels his cock growing stiff at the sight of ").append(c.hisHer()).append(" nipples.\n\n").toString());
+                append(t, "\"I only came here for an autograph... but it's like you're telling me I can have something even better...\"\n\n");
+                append(t, (new StringBuilder("The man quickly snaps some pictures for his own personal use, but when ")).append(c.mainName).append(" shows no signs of waking anytime soon, he grows bolder and unzips his pants.  As he starts to masturbate, the allure of ").append(c.mainName).append("'s sleeping face becomes too much to bear.  When he stands on his tiptoes and braces himself on the table, he finds that he can make his cock reach ").append(c.mainName).append("'s lips.  Then, ever so slowly, he pushes his hips forward until those lips are wrapped around his shaft.\n\n").toString());
+            } else
+            if(c.dignity > 33)
+            {
+                append(t, (new StringBuilder(String.valueOf(c.mainName))).append(" is sleeping with ").append(c.hisHer()).append(" upper half on the table, ").append(c.hisHer()).append(" face turned to one side, breathing the deep, steady breaths of sleep.  The fan sneaks over, bending down to take a closer look.  At first, he plans on sneaking out before he's caught, but standing so close to the object of his obsession has an effect on him, and he realizes that his cock is standing almost painfully erect in his pants.\n\n").toString());
+                append(t, "\"This...  This is a once in a lifetime chance...!\"\n\n");
+                append(t, (new StringBuilder("He carefully, slowly unzips his pants, then starts to quietly masturbate.  His hips jerk when he feels ")).append(c.mainName).append("'s breath on his penis, and he moves it closer and closer to ").append(c.himHer()).append(".  When he feels ").append(c.hisHer()).append(" lips against his tip, he has to stifle a groan of pleasure.  But he wants to go even further.  He pushes forward until ").append(c.mainName).append("'s lips part, taking the man's tip into ").append(c.hisHer()).append(" mouth.\n\n").toString());
+            } else
+            {
+                append(t, (new StringBuilder(String.valueOf(c.mainName))).append(" is leaning back in the chair, eyes closed, mouth wide open as ").append(c.heShe()).append(" snores loudly.  The man stares for several moments, eyes traveling up the lines of ").append(c.hisHer()).append(" defenseless body before settling on ").append(c.hisHer()).append(" lips and the glistening drool running down one cheek.  With a start, the man realizes that his cock is growing hard.\n\n").toString());
+                append(t, (new StringBuilder("\"It's already wide open... like ")).append(c.heShe()).append("'s asking for it...\"\n\n").toString());
+                append(t, (new StringBuilder("On impulse, the man hurriedly unzips his pants and starts to masturbate.  With ")).append(c.mainName).append("'s snoring, he doesn't feel like he needs to worry about being too noisy.  ").append(c.HisHer()).append(" open mouth invites him, and he steps closer, looking down ").append(c.hisHer()).append(" throat and dreaming of filling it with his cum.  But then he realizes that he doesn't need to dream.  He stands on a nearby chair and starts to masturbate at ").append(c.mainName).append("'s mouth, leaning closer and closer until ").append(c.hisHer()).append(" snores are muffled, ").append(c.hisHer()).append(" lips encircling his cock.\n\n").toString());
+            }
+            if(c.confidence > 66)
+            {
+                append(t, "\"Take this... you bitch... ngh...!  You're just a wet hole for my cock...!\"\n\n");
+                append(t, (new StringBuilder(String.valueOf(c.mainName))).append(" has some fans who genuinely admire ").append(c.himHer()).append(", but ").append(c.hisHer()).append(" headstrong nature has attracted many more who watch ").append(c.himHer()).append(" with twisted desires, hoping to see ").append(c.himHer()).append(" humbled and broken.  This fan is one of the latter.  He exults in the feeling of debasing such an arrogant heroine.  ").toString());
+            } else
+            if(c.confidence > 33)
+            {
+                append(t, "\"Aah... is that your tongue...?  You were a slut all along.  My own dirty little slut...!\"\n\n");
+                append(t, (new StringBuilder("The feeling of a warm rod invading ")).append(c.hisHer()).append(" mouth has invaded ").append(c.mainName).append("'s dream.  But it's not an unpleasant dream, and ").append(c.heShe()).append(" moans softly as ").append(c.hisHer()).append(" tongue caresses the shaft, dreaming of pleasuring a lover.  ").toString());
+            } else
+            {
+                append(t, "\"Acting all shy and helpless all the time...!  I bet you were secretly hoping someone would come along and... ngh!  Rape your mouth...!\"\n\n");
+                append(t, (new StringBuilder(String.valueOf(c.mainName))).append(" whimpers softly as it hits the back of ").append(c.hisHer()).append(" throat, but ").append(c.heShe()).append(" truly has driven ").append(c.himHer()).append("self to the point of exhaustion, and ").append(c.heShe()).append(" remains asleep.  ").toString());
+            }
+            append(t, (new StringBuilder("It's impossible to truly thrust in and out without risking waking ")).append(c.himHer()).append(", but the man still holds the tip inside ").append(c.mainName).append("'s mouth as he furiously pumps his hand up and down the base of his shaft.\n\nIt's an awkward position, but the situation is incredibly arousing, and the warm wetness of ").append(c.mainName).append("'s mouth around his tip is overwhelming.  His orgasm hits him abruptly.  He loses his balance, and only the first spurt goes onto ").append(c.mainName).append("'s tongue and down ").append(c.hisHer()).append(" throat.  The rest ends up on ").append(c.hisHer()).append(" face and hair.  ").toString());
+            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 0, Project.Emotion.JOY, Project.Emotion.JOY);
+            if(c.innocence > 66)
+            {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 0, Project.Emotion.NEUTRAL, Project.Emotion.NEUTRAL);
+                append(t, (new StringBuilder(String.valueOf(c.mainName))).append(" chokes and coughs, stumbling backward to stare bleary-eyed at the fan, who stares back at ").append(c.himHer()).append(" like a deer caught in the headlights.  Thinking quickly, he manages to convince ").append(c.himHer()).append(" that ").append(c.heShe()).append(" was already that way when he walked in, and then the fan quickly makes his escape before anyone else can show up to question him.\n\n").toString());
+                c.say(t, "\"Weird...  I must've just drooled a whole, whole bunch.\"");
+            } else
+            if(c.innocence > 33)
+            {
+                append(t, (new StringBuilder("Only then does he realize how lucky he is that ")).append(c.mainName).append(" is sleeping so deeply.  He hurries from the room.  A few minutes later, one of ").append(c.mainName).append("'s assistants arrives and gasps upon seeing the cum spattered across ").append(c.himHer()).append(".  The assistant frets for awhile before deciding that it'd be better if ").append(c.mainName).append(" doesn't know that anything is amiss.  By the time ").append(c.mainName).append(" wakes, ").append(c.heShe()).append("'s already been cleaned up, and ").append(c.heShe()).append(" continues about ").append(c.hisHer()).append(" day without a care in the world.\n\n").toString());
+                c.say(t, "\"Mm...!  Ah!  What a refreshing nap!  I should do this more often.\"");
+            } else
+            {
+                append(t, (new StringBuilder("The warmth in ")).append(c.hisHer()).append(" mouth causes ").append(c.mainName).append(" to start to stir, but by the time ").append(c.heShe()).append(" opens ").append(c.hisHer()).append(" eyes, the fan has fled down the hallway.  ").append(c.mainName).append(" instantly realizes what happened").toString());
+                if(c.timesFantasized() > 0)
+                {
+                    append(t, (new StringBuilder(", and ")).append(c.heShe()).append(" smirks as ").append(c.heShe()).append(" collects the remaining cum on ").append(c.hisHer()).append(" fingers and licks them off.\n\n").toString());
+                    c.say(t, "\"He must have fled.  What a shame.  I might have enjoyed playing around a bit more...\"");
+                } else
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 0, Project.Emotion.ANGER, Project.Emotion.ANGER);
+                    append(t, (new StringBuilder(", and ")).append(c.hisHer()).append(" mouth twists in disgust and anger, both at ").append(c.hisHer()).append(" attacker and at ").append(c.himHer()).append("self.\n\n").toString());
+                    c.say(t, "\"Foolish of me to let my guard down.  I must always remain vigilant...  Always, without exception...\"");
+                }
+            }
+            String description = "";
+            if(c.innocence > 66)
+                description = (new StringBuilder(String.valueOf(c.mainName))).append(" wakes from ").append(c.hisHer()).append(" nap bewildered to find ").append(c.himHer()).append("self covered in a horny fan's cum.").toString();
+            else
+            if(c.innocence > 33)
+                description = (new StringBuilder("After falling asleep from exhaustion, ")).append(c.mainName).append(" is molested in ").append(c.hisHer()).append(" sleep and wakes none the wiser.").toString();
+            else
+                description = (new StringBuilder("A passing fan molests ")).append(c.mainName).append(" in ").append(c.hisHer()).append(" sleep, but ").append(c.heShe()).append(" wakes too slowly to do anything about it.").toString();
+            save.saveScene(44, c.mainName, description);
+        } else
+        if(id == 12)
+        {
+            for(int i = 0; i < 3; i++)
+                if(getCast()[i].morality > 66)
+                    c = getCast()[i];
+                else
+                if(getCast()[i].morality < 34)
+                    d = getCast()[i];
+
+            String nameDisplay[] = {
+                c.mainName, d.mainName, 0, 0, 0
+            };
+            append(t, (new StringBuilder("Tonight, both ")).append(c.mainName).append(" and ").append(d.mainName).append(" have been assigned an evening patrol.  They split up and search separately, planning to rendezvous later on.  ").append(c.mainName).append(" is delayed by the appearance of a large Demon on ").append(c.hisHer()).append(" patrol, and ").append(c.heShe()).append(" ends up running late.  But when ").append(c.heShe()).append(" finally arrives, ").append(c.heShe()).append(" sees that the rendezvous area is already swarming with Thralls, and ").append(c.heShe()).append(" realizes that something must be wrong.\n\n").toString());
+            append(t, (new StringBuilder("The Thralls seem to be expecting ")).append(c.himHer()).append(", and they don't appear to be afraid in the slightest.  Laughing and jeering at ").append(c.himHer()).append(", the crowd parts to give ").append(c.himHer()).append(" a view of what's at the center.  ").toString());
+            if(d.innocence > 66)
+            {
+                append(t, (new StringBuilder(String.valueOf(d.mainName))).append(" hangs limp, apparently unconscious, in the arms of several Thralls who are happily groping ").append(d.hisHer()).append(" body and look intent on going even further.\n\n").toString());
+                c.say(t, "\"");
+                if(c.innocence > 33)
+                    c.say(t, (new StringBuilder(String.valueOf(d.mainName))).append("!?  ").append(d.mainName).append("!  Answer me, damn it!").toString());
+                else
+                    c.say(t, (new StringBuilder(String.valueOf(d.HeShe()))).append("... was knocked unconscious by mere Thralls?  How is this possible?  No, it doesn't matter!").toString());
+                c.say(t, "\"\n\n");
+                d.say(t, "\"...\"\n\n");
+            } else
+            if(d.innocence > 33)
+            {
+                append(t, (new StringBuilder(String.valueOf(d.mainName))).append(" sways unsteadily, only held upright by the Thralls groping ").append(d.hisHer()).append(" chest and between ").append(d.hisHer()).append(" legs.  ").append(d.HisHer()).append(" head lolls to the side, but ").append(d.hisHer()).append(" bleary eyes start to focus and squint when ").append(d.heShe()).append(" sees ").append(c.mainName).append(".\n\n").toString());
+                d.say(t, (new StringBuilder("\"")).append(c.mainName).append("...?  Where... am I...?\"\n\n").toString());
+                c.say(t, "\"");
+                if(c.innocence > 66)
+                    c.say(t, (new StringBuilder("They're doing something weird to ")).append(d.mainName).append("!  Even if it's ").append(d.mainName).append("... I can't just stand here!").toString());
+                else
+                    c.say(t, (new StringBuilder("Hmph.  Even if ")).append(c.heShe()).append("'s the type to neglect ").append(c.hisHer()).append(" duties for the sake of ").append(c.hisHer()).append(" own pleasure, ").append(c.heShe()).append("'s clearly not in ").append(c.hisHer()).append(" right mind.  I must put a stop to this!").toString());
+                c.say(t, "\"\n\n");
+            } else
+            {
+                append(t, (new StringBuilder(String.valueOf(d.mainName))).append(" struggles weakly against the Thralls stripping ").append(d.himHer()).append(" and pawing at ").append(d.hisHer()).append(" body.  ").append(d.HeShe()).append("'s bleeding from a head wound, and when one of the Thralls puts a knife to ").append(d.hisHer()).append(" throat, ").append(d.heShe()).append(" turns in wide-eyed desperation toward ").append(c.mainName).append(".\n\n").toString());
+                d.say(t, "\"H-Help!  There's something wrong with my regeneration!\"\n\n");
+                c.say(t, "\"");
+                if(c.innocence > 66)
+                    c.say(t, (new StringBuilder("This is my chance to show ")).append(d.mainName).append(" how nice heroes are, and turn ").append(d.himHer()).append(" into a good person!").toString());
+                else
+                    c.say(t, (new StringBuilder("Is that even possible?  No, regardless, saving ")).append(d.mainName).append(" comes first!").toString());
+                c.say(t, "\"\n\n");
+            }
+            append(t, (new StringBuilder("Despite how much they hate each other, ")).append(c.mainName).append(" feels like ").append(c.heShe()).append(" has a duty to protect ").append(c.hisHer()).append(" teammate, and ").append(c.heShe()).append("'s worried about what will happen if ").append(d.mainName).append(" is brought back to the Demonic hive in that state.  But there are too many Thralls between the two of them for ").append(c.mainName).append(" to fight ").append(c.hisHer()).append(" way through, so ").append(c.heShe()).append(" realizes that ").append(c.heShe()).append(" has no choice but to play nice with the Thralls until a chance to escape together appears.  When the Thralls' hands surge toward ").append(c.himHer()).append(", ").append(c.heShe()).append(" doesn't resist.\n\n").toString());
+            append(t, (new StringBuilder("One Thrall grabs ")).append(c.mainName).append(" by the wrist and pulls ").append(c.himHer()).append(" forward at the same time as another kicks ").append(c.hisHer()).append(" leg out from under ").append(c.himHer()).append(".  ").append(c.HeShe()).append(" falls to ").append(c.hisHer()).append(" knees, ").append(c.hisHer()).append(" head at waist level, and suddenly three different cocks are thrust against ").append(c.hisHer()).append(" face.  ").append(c.HeShe()).append(" turns away and reflexively closes ").append(c.hisHer()).append(" eyes in order to avoid having them poked out, but a rough hand in ").append(c.hisHer()).append(" hair jerks ").append(c.himHer()).append(" back into position, and one of the Thralls pinches ").append(c.hisHer()).append(" nose shut.  ").append(c.HisHer()).append(" lungs soon start burning for air, and when ").append(c.heShe()).append(" gasps for breath, a Thrall's thick shaft is rammed down ").append(c.hisHer()).append(" throat.\n\n").toString());
+            append(t, (new StringBuilder(String.valueOf(c.mainName))).append("'s efforts to pull away from the cock in ").append(c.hisHer()).append(" mouth just cause ").append(c.hisHer()).append(" lips to slide back and forth along its length.  ").append(c.HeShe()).append(" can't resist too firmly for fear of what will happen to ").append(d.mainName).append(".  ").append(c.HisHer()).append(" hands, clenched into fists, are pulled out to either side, and ").append(c.hisHer()).append(" soft fingers are pried apart so that another penis can be rubbed against each of ").append(c.hisHer()).append(" palms.  Even though ").append(c.heShe()).append(" refuses to actively stroke them, the Thralls seem plenty happy to just thrust against ").append(c.hisHer()).append(" skin.  ").append(c.HisHer()).append(" attempts to pull ").append(c.hisHer()).append(" hands away are interrupted when ").append(c.heShe()).append(" starts choking on the cum abruptly spurted down ").append(c.hisHer()).append(" throat, but before ").append(c.heShe()).append(" can catch ").append(c.hisHer()).append(" breath, the Thrall pulls out and is replaced by another cock big enough to make ").append(c.hisHer()).append(" jaw ache.\n\n").toString());
+            append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" resistance grows weaker and weaker as the other Thralls cum on ").append(c.hisHer()).append(" hands and more approach to use ").append(c.hisHer()).append(" body, thrusting against ").append(c.hisHer()).append(" hair, against ").append(c.hisHer()).append(" clothes, and starting to undress ").append(c.himHer()).append(" in order to prepare ").append(c.himHer()).append(" for further violation.  ").append(c.HisHer()).append(" eyes start to glaze over, and only ").append(c.hisHer()).append(" determination to rescue ").append(c.hisHer()).append(" teammate keeps ").append(c.himHer()).append(" lucid.  ").toString());
+            if(!c.vVirg.booleanValue() && !c.gender.equals("male"))
+            {
+                append(t, (new StringBuilder("It's not long before they start using ")).append(c.hisHer()).append(" pussy as well, ramming themselves inside and cumming quickly between ").append(c.hisHer()).append(" squeezing folds until rivulets of semen are constantly streaming down ").append(c.hisHer()).append(" thighs.  ").append(c.HeShe()).append(" barely notices when ").toString());
+                if(d.gender.equals("female"))
+                    append(t, (new StringBuilder("one of ")).append(c.hisHer()).append(" attackers starts fucking ").append(c.himHer()).append(" with a huge plastic strap-on dildo instead").toString());
+                else
+                    append(t, (new StringBuilder("a particularly strong Thrall starts raping ")).append(c.himHer()).append(" with deep, cruel, merciless thrusts").toString());
+                append(t, (new StringBuilder(".  However, when ")).append(c.heShe()).append(" opens ").append(c.hisHer()).append(" eyes, ").append(c.heShe()).append(" sees ").toString());
+            } else
+            if(c.gender.equals("male") && !c.vVirg.booleanValue() || !c.gender.equals("male") && (!c.aVirg.booleanValue() || c.pastTempted.booleanValue()))
+            {
+                append(t, (new StringBuilder("It's not long before they start using ")).append(c.hisHer()).append(" asshole as well, ramming themselves inside and cumming quickly in ").append(c.hisHer()).append(" bowels until rivulets of semen are constantly streaming down ").append(c.hisHer()).append(" thighs.  ").append(c.HeShe()).append(" barely notices when ").toString());
+                if(d.gender.equals("female"))
+                    append(t, (new StringBuilder("one of ")).append(c.hisHer()).append(" attackers starts fucking ").append(c.himHer()).append(" with a huge plastic strap-on dildo instead").toString());
+                else
+                    append(t, (new StringBuilder("a particularly strong Thrall starts raping ")).append(c.himHer()).append(" with deep, cruel, merciless thrusts").toString());
+                append(t, (new StringBuilder(".  However, when ")).append(c.heShe()).append(" opens ").append(c.hisHer()).append(" eyes, ").append(c.heShe()).append(" sees ").toString());
+            } else
+            {
+                append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s managed to protect ").append(c.hisHer()).append(" ").toString());
+                if(c.gender.equals("male"))
+                    append(t, "anal ");
+                append(t, (new StringBuilder("virginity so far, but then a particularly strong Thrall holds ")).append(c.himHer()).append(" down, and ").append(c.heShe()).append(" feels ").toString());
+                if(d.gender.equals("female"))
+                    append(t, "a strap-on dildo ");
+                else
+                    append(t, "a penis ");
+                if(c.gender.equals("male"))
+                    append(t, (new StringBuilder("starting to force its way into ")).append(c.hisHer()).append(" asshole.  ").toString());
+                else
+                    append(t, (new StringBuilder("firmly forcing apart ")).append(c.hisHer()).append(" lower lips.  ").toString());
+                append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" opens ").append(c.hisHer()).append(" eyes and sees ").toString());
+            }
+            append(t, (new StringBuilder("that it's ")).append(d.mainName).append(", grinning down at ").append(c.himHer()).append(" and looking perfectly fine.\n\n").toString());
+            if(c.confidence > 66)
+            {
+                append(t, (new StringBuilder("A flash of true anger sparks in ")).append(c.mainName).append("'s eyes, more anger than ").append(c.heShe()).append(" once would have thought ").append(c.heShe()).append(" could ever feel.  A wave of pressure erupts outward as ").append(c.heShe()).append(" stands up, knocking the Thralls back, and ").append(c.heShe()).append(" lifts ").append(d.mainName).append(" up by the throat.\n\n").toString());
+                c.say(t, (new StringBuilder("\"Why, ")).append(d.mainName).append("!?  Why would you punish me for wanting to help you!?\"\n\n").toString());
+                d.say(t, "\"");
+                if(d.innocence > 66)
+                    d.say(t, "Ack!  It was... gh... the Thralls'... idea...!");
+                else
+                if(d.innocence > 33)
+                    d.say(t, "Because I... fucking hate you...!  Don't you get it, dumbass!?");
+                else
+                    d.say(t, "Because... that's the part of you... which I hate the most!");
+                d.say(t, "\"\n\n");
+                append(t, (new StringBuilder("Just then, while ")).append(c.mainName).append(" is distracted, a Thrall runs up behind ").append(c.himHer()).append(" and whacks ").append(c.himHer()).append(" in the head with a metal pipe.  ").append(c.HeShe()).append(" falters, dropping ").append(d.mainName).append(", who collapses to the ground as well, clearly weakened and vulnerable.  ").toString());
+            } else
+            if(c.confidence > 33)
+            {
+                append(t, (new StringBuilder(String.valueOf(c.mainName))).append(" cries out in frustrated anger, pushing ").append(d.mainName).append(" away.  ").append(d.mainName).append(", for ").append(d.hisHer()).append(" part, breaks out in laughter, almost doubling over as ").append(d.heShe()).append(" taunts ").append(c.mainName).append(".\n\n").toString());
+                d.say(t, "\"");
+                if(d.innocence > 66)
+                    d.say(t, "You really are such a dummy!  Stupid, stupid, hahahah!");
+                else
+                if(d.innocence > 33)
+                    d.say(t, "Even if they did drug me, why would I want your help?  Hah, get over yourself!");
+                else
+                    d.say(t, "A sudden failure of my regenerative powers?  Heh.  Who would believe something so ridiculous?");
+                d.say(t, "\"\n\n");
+                c.say(t, "\"That's- Wait, look out behind you!\"\n\n");
+                append(t, (new StringBuilder("A Thrall tackles ")).append(d.mainName).append(" from behind, and two more do the same to ").append(c.mainName).append(".  During their moment of distraction, the Thralls have decided that this is their chance to enjoy them both.  ").toString());
+            } else
+            {
+                append(t, (new StringBuilder(String.valueOf(c.mainName))).append(" squeaks and tries to squirm away, but ").append(d.mainName).append(" just pushes ").append(c.himHer()).append(" down harder, ").toString());
+                if(c.vVirg.booleanValue() && (c.aVirg.booleanValue() && !c.pastTempted.booleanValue() || c.gender.equals("male")))
+                    append(t, (new StringBuilder("and ")).append(c.mainName).append(" whimpers under the feeling of ").append(d.mainName).append("'s shaft almost penetrating ").append(c.himHer()).append(".\n\n").toString());
+                else
+                    append(t, (new StringBuilder(String.valueOf(d.hisHer()))).append(" shaft bottoming out inside ").append(c.mainName).append(".\n\n").toString());
+                c.say(t, "\"P-Please... I just wanted to help you...!\"\n\n");
+                d.say(t, "\"");
+                if(d.innocence > 66)
+                    d.say(t, "The Thralls said this would put you right where I want you.  And now I'm gonna rape you all n-nnnaaah!?");
+                else
+                if(d.innocence > 33)
+                    d.say(t, "What's the problem?  You were willing to get raped for my sake, so you might as well-  Gaaah!?");
+                else
+                    d.say(t, "Such a gullible fool.  People like you exist to be prey for people like m-myaaah!?");
+                d.say(t, "\"\n\n");
+                append(t, (new StringBuilder(String.valueOf(d.mainName))).append(" is cut off by a Thrall rushing forward to pinch ").append(d.hisHer()).append(" butt.  Now that the Chosen are occupied with each other, the Thralls feel like they have a chance to take them both.  ").toString());
+            }
+            append(t, (new StringBuilder("The crowd surges forward, and both ")).append(c.mainName).append(" and ").append(d.mainName).append(" vanish in the press of bodies.\n\n").toString());
+            append(t, (new StringBuilder("Some time later, ")).append(c.mainName).append(" and ").append(d.mainName).append(" stumble down the street side-by-side, both caked in layers of sticky white cum and exhausted from the long fight.  ").append(c.mainName).append(" glares over at ").append(d.mainName).append(".\n\n").toString());
+            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 0, Project.Emotion.ANGER, Project.Emotion.ANGER);
+            Project.changePortrait(d.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 1, Project.Emotion.JOY, Project.Emotion.JOY);
+            if(c.innocence > 66)
+            {
+                d.say(t, "\"");
+                if(d.dignity > 66)
+                    d.say(t, (new StringBuilder("Oh, ")).append(c.mainName).append(", I'm so sorry for taking advantage of your stupidly kindhearted nature.  I won't do it again, I promise!  So make sure to 'rescue' me again next time!  Hahahah!").toString());
+                else
+                if(d.dignity > 33)
+                    d.say(t, "Oh, stop glaring at me like that.  It's not cute at all.");
+                else
+                    d.say(t, "It must be hard to be so weak and stupid.  You should thank me for teaching you a lesson.");
+                d.say(t, "\"\n\n");
+                c.say(t, "\"Ugh, you're... you're really, really, really, really.... really mean!  Really!\"");
+            } else
+            if(c.innocence > 33)
+            {
+                c.say(t, "\"That's it.  Next time, I'm really not helping you.\"\n\n");
+                d.say(t, "\"");
+                if(d.dignity > 66)
+                {
+                    Project.changePortrait(d.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 1, Project.Emotion.NEUTRAL, Project.Emotion.NEUTRAL);
+                    d.say(t, "Whatever.");
+                } else
+                if(d.dignity > 33)
+                {
+                    d.say(t, "Oh, come on.  You enjoyed it too.");
+                } else
+                {
+                    Project.changePortrait(d.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 1, Project.Emotion.ANGER, Project.Emotion.ANGER);
+                    d.say(t, "Idiot.  I keep telling you I don't need your help.");
+                }
+                d.say(t, "\"");
+            } else
+            {
+                c.say(t, "\"This is foolish.  You're ensuring that I will be skeptical and hesitant even when you do actually need help.\"\n\n");
+                d.say(t, "\"");
+                if(d.dignity > 66)
+                {
+                    Project.changePortrait(d.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 1, Project.Emotion.ANGER, Project.Emotion.ANGER);
+                    d.say(t, "Don't call me a fool!  You're the fool for falling into such an obvious trap!");
+                } else
+                if(d.dignity > 33)
+                {
+                    d.say(t, "That's a problem for future me.");
+                } else
+                {
+                    Project.changePortrait(d.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 1, Project.Emotion.NEUTRAL, Project.Emotion.NEUTRAL);
+                    d.say(t, "Meh.  I got along fine before you showed up.");
+                }
+                d.say(t, "\"");
+            }
+            String description = "";
+            if(d.innocence > 66)
+                description = (new StringBuilder("Acting on a suggestion from the Thralls ")).append(d.heShe()).append(" uses to satisfy ").append(d.hisHer()).append(" sexual needs, ").append(d.mainName).append(" feigns unconsciousness in order to fool ").append(c.mainName).append(" into trying to rescue ").append(c.himHer()).append(".").toString();
+            else
+            if(d.innocence > 33)
+                description = (new StringBuilder(String.valueOf(d.mainName))).append(" plays a nasty prank on ").append(c.mainName).append(", tricking ").append(c.himHer()).append(" into surrendering to a group of Thralls.").toString();
+            else
+                description = (new StringBuilder(String.valueOf(c.mainName))).append(" tries to save the seemingly helpless ").append(d.mainName).append(", but it turns out to be a plot by ").append(d.mainName).append(" to rape ").append(c.himHer()).append(".").toString();
+            save.saveScene(45, (new StringBuilder(String.valueOf(c.mainName))).append("/").append(d.mainName).toString(), description);
         }
         vignetteSeen[id] = Boolean.valueOf(true);
     }
@@ -3707,8 +4572,28 @@ public class WorldState
 
                         }
                     } else
-                    if(j == 10 && c.morality > 66 && c.lustful && c.meek)
-                        valid[j] = Boolean.valueOf(true);
+                    if(j == 10)
+                    {
+                        if(c.morality > 66 && c.lustful && c.meek && c.totalSHAM >= 0x186a0L)
+                            valid[j] = Boolean.valueOf(true);
+                    } else
+                    if(j == 11)
+                    {
+                        if(c.morality < 67 && c.morality > 33 && c.totalFEAR + c.totalDISG + c.totalPAIN + c.totalSHAM > 0x186a0L)
+                            valid[j] = Boolean.valueOf(true);
+                    } else
+                    if(j == 12 && c.morality > 66 && c.lustful && c.totalDISG > 0x12a05f200L)
+                    {
+                        Chosen d = null;
+                        for(int k = 0; k < 3; k++)
+                            if(k != i && getCast()[k] != null)
+                            {
+                                d = getCast()[k];
+                                if(d.timesFantasized() > 0 && d.morality < 34 && d.totalDISG >= 0x12a05f200L && getRelationship(i, k) < 0)
+                                    valid[j] = Boolean.valueOf(true);
+                            }
+
+                    }
                     if(vignetteSeen[j].booleanValue())
                         valid[j] = Boolean.valueOf(false);
                 }
@@ -4687,6 +5572,7 @@ public class WorldState
 
     public void hesitate(JTextPane t, WorldState w, Chosen killer, Chosen victim1, Chosen victim2)
     {
+        Project.changePortrait(killer.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), killer.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.FEAR);
         killer.lastAction = 0;
         append(t, (new StringBuilder("\n\n")).append(getSeparator()).append("\n\n").toString());
         if(victim1.getConfidence() > 66)
@@ -4799,6 +5685,7 @@ public class WorldState
 
     public void murder(JTextPane t, WorldState w, Chosen killer, Chosen victim)
     {
+        Project.changePortrait(victim.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), victim.combatantNumber(this), Project.Emotion.SWOON, Project.Emotion.SWOON);
         killer.lastAction = 0;
         w.append(t, (new StringBuilder("\n\n")).append(getSeparator()).append("\n\n").toString());
         killer.hesitated = Boolean.valueOf(false);
@@ -4829,6 +5716,7 @@ public class WorldState
                         w.append(t, "as your nearby Commander body begins to piece itself back together.");
                     else
                         w.append(t, "near the smoldering remains of your Commander body.");
+                    Project.changePortrait(killer.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), killer.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.FEAR);
                     killer.say(t, "\n\n\"No!  Th-This can't be happening!  ");
                     if(thirdAlive.booleanValue())
                         killer.say(t, (new StringBuilder(String.valueOf(victim.getMainName()))).append(", you were supposed to be the one who would definitely survive the longest!  Get up, get up!").toString());
@@ -4848,6 +5736,7 @@ public class WorldState
                         w.append(t, "Near your regenerating Commander body, ");
                     else
                         w.append(t, "Near what's left of your Commander body, ");
+                    Project.changePortrait(killer.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), killer.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.FEAR);
                     w.append(t, (new StringBuilder(String.valueOf(victim.getMainName()))).append("'s form lies motionless.\n\n").toString());
                     killer.say(t, (new StringBuilder("\"")).append(victim.getMainName()).append("...  I...  I didn't mean to...").toString());
                 } else
@@ -4863,6 +5752,7 @@ public class WorldState
                         w.append(t, (new StringBuilder(String.valueOf(killer.HeShe()))).append(" blasts a hole in your body and then starts to make chase as you flee, but ").append(killer.heShe()).append(" comes up short when ").append(killer.heShe()).append(" realizes that the charred shape which fell out is actually ").append(victim.getMainName()).append("'s remains.").toString());
                     else
                         w.append(t, (new StringBuilder(String.valueOf(killer.HeShe()))).append(" smiles with satisfaction as ").append(killer.heShe()).append(" destroys your Commander body, but ").append(killer.hisHer()).append(" expression turns to horror when ").append(killer.heShe()).append(" sees that ").append(victim.getMainName()).append(" was caught in the blast.").toString());
+                    Project.changePortrait(killer.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), killer.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.FEAR);
                     killer.say(t, "\n\n\"Did... Did I do this...?");
                 }
                 killer.say(t, "\"\n\n");
@@ -4900,6 +5790,7 @@ public class WorldState
                         w.append(t, " lying on the ground, discarded by your badly damaged Commander.");
                     else
                         w.append(t, " lying on the ground among the remains of your Commander.");
+                    Project.changePortrait(killer.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), killer.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.SHAME);
                     killer.say(t, (new StringBuilder("\n\n\"")).append(victim.getMainName()).append("...  I-I hoped...  I thought you might be strong enough to...").toString());
                 } else
                 if(victim.getConfidence() > 33)
@@ -4915,6 +5806,7 @@ public class WorldState
                         w.append(t, (new StringBuilder("only reluctantly gives chase to your Commander, knowing whose body ")).append(killer.heShe()).append("'ll find discarded behind it.").toString());
                     else
                         w.append(t, (new StringBuilder("reluctantly approaches what's left of your Commander, knowing whose body ")).append(killer.heShe()).append("'ll find in the midst of the remains.").toString());
+                    Project.changePortrait(killer.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), killer.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.SHAME);
                     killer.say(t, (new StringBuilder("\n\n\"")).append(victim.getMainName()).append("...  I'm sorry.").toString());
                 } else
                 {
@@ -4929,6 +5821,7 @@ public class WorldState
                         w.append(t, (new StringBuilder("ignoring your fleeing Commander as ")).append(killer.heShe()).append(" picks ").toString());
                     else
                         w.append(t, (new StringBuilder("stepping through the remains of your Commander as ")).append(killer.heShe()).append(" picks ").toString());
+                    Project.changePortrait(killer.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), killer.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.SHAME);
                     w.append(t, (new StringBuilder(String.valueOf(victim.himHer()))).append(" up in time to hear ").append(victim.hisHer()).append(" last words.").toString());
                     killer.say(t, (new StringBuilder("\n\n\"")).append(victim.getMainName()).append(", I'm... I'm here.").toString());
                 }
@@ -4967,6 +5860,7 @@ public class WorldState
                     else
                         w.append(t, "the gory remains of your Commander body");
                     w.append(t, (new StringBuilder(", and ")).append(killer.heShe()).append(" rushes over to investigate.  ").append(killer.HisHer()).append(" heart sinks again when ").append(killer.heShe()).append(" sees that ").append(victim.getMainName()).append(" clearly isn't long for this world.").toString());
+                    Project.changePortrait(killer.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), killer.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.SHAME);
                     killer.say(t, "\n\n\"I'm... s-sorry I couldn't make it quick...");
                 } else
                 if(victim.getConfidence() > 33)
@@ -4982,6 +5876,7 @@ public class WorldState
                         w.append(t, "'s discarded form, left behind by your damaged Commander.");
                     else
                         w.append(t, "'s crumpled form among the remains of your Commander body.");
+                    Project.changePortrait(killer.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), killer.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.FEAR);
                     killer.say(t, "\n\n\"No... I do not want to see this...!");
                 } else
                 {
@@ -4996,6 +5891,7 @@ public class WorldState
                         w.append(t, (new StringBuilder("cutting through your body and piercing ")).append(victim.getMainName()).append("'s captive form.").toString());
                     else
                         w.append(t, (new StringBuilder("cutting your body apart and piercing the captive ")).append(victim.getMainName()).append(" as well.").toString());
+                    Project.changePortrait(killer.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), killer.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.ANGER);
                     w.append(t, (new StringBuilder("  ")).append(killer.getMainName()).append(" turns away from the scene of destruction and doesn't look back.").toString());
                     killer.say(t, "\n\n\"Damn the Demon Lord for forcing me to do this.");
                 }
@@ -5038,6 +5934,7 @@ public class WorldState
                             w.append(t, (new StringBuilder("tearing through one of the last Demonic formations, your Commander body included, as well as the captive ")).append(victim.getMainName()).append(".").toString());
                         else
                             w.append(t, (new StringBuilder("tearing through one of the last Demonic formations, blasting apart your Commander body, and fatally wounding the captive ")).append(victim.getMainName()).append(".").toString());
+                        Project.changePortrait(killer.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), killer.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.SHAME);
                         killer.say(t, (new StringBuilder("\n\n\"I'm sorry, ")).append(victim.getMainName()).append("...  But I couldn't afford to give you a chance to turn to the Demons' side.").toString());
                     } else
                     if(victim.getConfidence() > 33)
@@ -5051,6 +5948,7 @@ public class WorldState
                         else
                             w.append(t, (new StringBuilder("clustered around your Commander and the captive ")).append(victim.getMainName()).toString());
                         w.append(t, (new StringBuilder(".  ")).append(killer.HeShe()).append(" struggles with ").append(killer.hisHer()).append(" conscience for only a moment before unleashing a blast of destructive energy at ").append(killer.hisHer()).append(" target.").toString());
+                        Project.changePortrait(killer.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), killer.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.SHAME);
                         killer.say(t, "\n\n\"I'm not doing this because I hate you.  I'm doing it because it's the only way to save everyone else.");
                     } else
                     {
@@ -5063,6 +5961,7 @@ public class WorldState
                         else
                             w.append(t, (new StringBuilder(String.valueOf(victim.getMainName()))).append(" is being held by your Commander there").toString());
                         w.append(t, (new StringBuilder(", but ")).append(killer.heShe()).append(" still doesn't hold back, and it isn't long before one of the blasts deals ").append(victim.himHer()).append(" a fatal wound.").toString());
+                        Project.changePortrait(killer.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), killer.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.NEUTRAL);
                         killer.say(t, (new StringBuilder("\n\n\"There are too many other people counting on me.  I can't hold back just for ")).append(victim.getMainName()).append("'s sake.").toString());
                     }
                 } else
@@ -5079,6 +5978,7 @@ public class WorldState
                         else
                             w.append(t, (new StringBuilder("catches a glimpse of your Commander body and senses that ")).append(victim.getMainName()).append(" is still being held.  A moment later, ").toString());
                         w.append(t, (new StringBuilder(String.valueOf(killer.getMainName()))).append(" continues ").append(killer.hisHer()).append(" attack, incinerating ").append(victim.getMainName()).append(".").toString());
+                        Project.changePortrait(killer.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), killer.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.NEUTRAL);
                         killer.say(t, "\n\n\"I didn't really have a choice...");
                     } else
                     if(victim.getConfidence() > 33)
@@ -5092,6 +5992,7 @@ public class WorldState
                         else
                             w.append(t, (new StringBuilder("core of the Demonic formation, where your Commander torments the captured ")).append(victim.getMainName()).toString());
                         w.append(t, (new StringBuilder(".  ")).append(killer.getMainName()).append(" cuts a path for ").append(killer.himHer()).append("self without hesitation, not even looking back at ").append(victim.getMainName()).append("'s charred remains.").toString());
+                        Project.changePortrait(killer.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), killer.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.ANGER);
                         killer.say(t, "\n\n\"I won't let you take me down with you.");
                     } else
                     {
@@ -5107,6 +6008,7 @@ public class WorldState
                         else
                             w.append(t, (new StringBuilder("Your Commander body is ")).append(killer.hisHer()).append(" main target, and ").append(killer.heShe()).append(" blasts it with all ").append(killer.hisHer()).append(" power even though you're holding ").append(victim.getMainName()).append(" captive.  Your body is blasted apart, and ").append(killer.getMainName()).append(" moves on to cleaning up the lesser Demons.  ").toString());
                         w.append(t, (new StringBuilder("The mortally wounded ")).append(victim.getMainName()).append(" is left behind to die alone.").toString());
+                        Project.changePortrait(killer.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), killer.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.ANGER);
                         killer.say(t, "\n\n\"I can finish this without you.");
                     }
                 } else
@@ -5121,6 +6023,7 @@ public class WorldState
                     else
                         w.append(t, (new StringBuilder("struggling to control ")).append(victim.himHer()).append("self in the grasp of your Commander, ").toString());
                     w.append(t, (new StringBuilder("but then everything is consumed by an indiscriminate blast of energy launched by ")).append(killer.getMainName()).append(".").toString());
+                    Project.changePortrait(killer.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), killer.combatantNumber(this), Project.Emotion.JOY, Project.Emotion.JOY);
                     killer.say(t, "\n\n\"Heh.  Looks like you weren't so strong after all.");
                 } else
                 if(victim.getConfidence() > 33)
@@ -5134,6 +6037,7 @@ public class WorldState
                     else
                         w.append(t, (new StringBuilder("aiming to take out your Commander body even though you're currently holding ")).append(victim.getMainName()).append(" captive.  ").toString());
                     w.append(t, (new StringBuilder("The last thing ")).append(victim.getMainName()).append(" sees is ").append(killer.getMainName()).append(" smirking down at ").append(victim.himHer()).append(".").toString());
+                    Project.changePortrait(killer.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), killer.combatantNumber(this), Project.Emotion.JOY, Project.Emotion.JOY);
                     killer.say(t, (new StringBuilder("\n\n\"Is that...?  Aha, ")).append(victim.heShe()).append(" looks so pathetic from up here!").toString());
                 } else
                 {
@@ -5153,6 +6057,7 @@ public class WorldState
                         w.append(t, (new StringBuilder("such an overwhelmingly destructive barrage of energy that ")).append(usedForsaken.mainName).append(" almost doesn't make it.  Fortunately, it's mostly focused on ").append(victim.getMainName()).append("'s position.").toString());
                     else
                         w.append(t, (new StringBuilder("such an overwhelmingly destructive barrage of energy that you almost don't make it.  Fortunately, it's mostly focused on ")).append(victim.getMainName()).append("'s position.").toString());
+                    Project.changePortrait(killer.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), killer.combatantNumber(this), Project.Emotion.JOY, Project.Emotion.JOY);
                     killer.say(t, "\n\n\"There, target destroyed.  Looks like I accidentally ended up killing some Demons, too.");
                 }
             } else
@@ -5171,6 +6076,7 @@ public class WorldState
                         w.append(t, (new StringBuilder("tearing through one of the last Demonic formations, your Commander body included, as well as the captive ")).append(victim.getMainName()).append(".").toString());
                     else
                         w.append(t, (new StringBuilder("tearing through one of the last Demonic formations, blasting apart your Commander body, and fatally wounding the captive ")).append(victim.getMainName()).append(".").toString());
+                    Project.changePortrait(killer.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), killer.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.ANGER);
                     killer.say(t, (new StringBuilder("\n\n\"I'm sorry...  No.  I'm not sorry.  You're an evil person, ")).append(victim.getMainName()).append(", and this is what you deserve.").toString());
                 } else
                 if(victim.getConfidence() > 33)
@@ -5184,6 +6090,7 @@ public class WorldState
                     else
                         w.append(t, (new StringBuilder("clustered around your Commander and the captive ")).append(victim.getMainName()).toString());
                     w.append(t, (new StringBuilder(".  ")).append(killer.HeShe()).append(" doesn't even hesitate before unleashing a blast of destructive energy at ").append(killer.hisHer()).append(" target.").toString());
+                    Project.changePortrait(killer.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), killer.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.NEUTRAL);
                     killer.say(t, "\n\n\"Maybe I could have saved you...  But after seeing what kind of person you are, I think you need to die here, for the sake of everyone you'd hurt in the future.");
                 } else
                 {
@@ -5196,6 +6103,7 @@ public class WorldState
                     else
                         w.append(t, (new StringBuilder(String.valueOf(victim.getMainName()))).append(" is being held by your Commander there").toString());
                     w.append(t, (new StringBuilder(", but that's half the reason ")).append(killer.heShe()).append(" chose to attack from this angle, and it isn't long before one of the blasts deals ").append(victim.mainName).append(" a fatal wound.").toString());
+                    Project.changePortrait(killer.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), killer.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.ANGER);
                     killer.say(t, "\n\n\"Good.  The Demon Lord isn't the only monster I came here to slay.");
                 }
             } else
@@ -5212,6 +6120,7 @@ public class WorldState
                     else
                         w.append(t, (new StringBuilder("catches a glimpse of your Commander body and senses that ")).append(victim.getMainName()).append(" is still being held.  A moment later, ").toString());
                     w.append(t, (new StringBuilder(String.valueOf(killer.getMainName()))).append("'s face twists with hatred. ").append(killer.HeShe()).append(" intensifies, ").append(killer.hisHer()).append(" attack, incinerating ").append(victim.getMainName()).append(".").toString());
+                    Project.changePortrait(killer.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), killer.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.ANGER);
                     killer.say(t, "\n\n\"Good riddance.");
                 } else
                 if(victim.getConfidence() > 33)
@@ -5225,6 +6134,7 @@ public class WorldState
                     else
                         w.append(t, (new StringBuilder("core of the Demonic formation, where your Commander torments the captured ")).append(victim.getMainName()).toString());
                     w.append(t, (new StringBuilder(".  ")).append(killer.getMainName()).append(" cuts a path for ").append(killer.himHer()).append("self without hesitation, actually going out of ").append(killer.hisHer()).append(" way to launch a lethal blast of energy directly at ").append(victim.getMainName()).append(".").toString());
+                    Project.changePortrait(killer.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), killer.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.ANGER);
                     killer.say(t, "\n\n\"You've had this coming for a long time.");
                 } else
                 {
@@ -5240,6 +6150,7 @@ public class WorldState
                     else
                         w.append(t, (new StringBuilder("Your Commander body is ")).append(killer.hisHer()).append(" main target, and ").append(killer.heShe()).append(" blasts it with all ").append(killer.hisHer()).append(" power even though you're holding ").append(victim.getMainName()).append(" captive.  Your body is blasted apart.  ").toString());
                     w.append(t, (new StringBuilder(String.valueOf(killer.getMainName()))).append(" stops by ").append(victim.getMainName()).append("'s side, almost as if to help ").append(victim.himHer()).append(" up... then finishes ").append(victim.himHer()).append(" off with a point-blank lethal blast of destructive energy.").toString());
+                    Project.changePortrait(killer.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), killer.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.ANGER);
                     killer.say(t, "\n\n\"I'm not giving you a chance to screw this up.");
                 }
             } else
@@ -5254,6 +6165,7 @@ public class WorldState
                 else
                     w.append(t, (new StringBuilder("struggling to control ")).append(victim.himHer()).append("self in the grasp of your Commander, ").toString());
                 w.append(t, (new StringBuilder("but then a beam of lethal energy pierces ")).append(victim.hisHer()).append(" chest from afar.  ").append(killer.getMainName()).append(" stands nearby, grinning madly with ").append(killer.hisHer()).append(" hand outstretched.").toString());
+                Project.changePortrait(killer.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), killer.combatantNumber(this), Project.Emotion.FOCUS, Project.Emotion.FOCUS);
                 killer.say(t, "\n\n\"Yes!  Now, if anyone asks, I'll just need to tell them you were dead when I found you.");
             } else
             if(victim.getConfidence() > 33)
@@ -5267,6 +6179,7 @@ public class WorldState
                 else
                     w.append(t, "aiming for your Commander body - or more precisely, the one you're holding captive.  ");
                 w.append(t, (new StringBuilder("The last thing ")).append(victim.getMainName()).append(" sees is ").append(killer.getMainName()).append(" smirking down at ").append(victim.himHer()).append(".").toString());
+                Project.changePortrait(killer.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), killer.combatantNumber(this), Project.Emotion.JOY, Project.Emotion.JOY);
                 killer.say(t, "\n\n\"Hahah!  What a way to die!");
             } else
             {
@@ -5283,6 +6196,7 @@ public class WorldState
                 else
                     w.append(t, (new StringBuilder(String.valueOf(killer.getMainName()))).append(" doesn't bother to interfere, walking over to ").append(victim.getMainName()).append(" and picking ").append(victim.himHer()).append(" up by the throat.  ").toString());
                 w.append(t, (new StringBuilder(String.valueOf(killer.HeShe()))).append(" strangles the life from ").append(victim.getMainName()).append(" snarling with satisfaction.").toString());
+                Project.changePortrait(killer.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), killer.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.ANGER);
                 killer.say(t, "\n\n\"To be able to kill you with my own bare hands...  Maybe all this was worth it in the end.");
             }
             killer.say(t, "\"\n\n");
@@ -11726,12 +12640,18 @@ public class WorldState
                 if(variant == 0)
                 {
                     if(c.getPLEALevel() < 3 || cVirg.booleanValue())
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.STRUGGLE, Project.Emotion.ANGER);
                         c.say(t, "Ergh, no, take it out!");
-                    else
+                    } else
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
                         c.say(t, "Ngh, no...!  Don't make me... enjoy this...!  Aaah!");
+                    }
                 } else
                 if(variant == 1)
                 {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
                     if(c.getHATELevel() < 3 || vVirg.booleanValue())
                         c.say(t, "Need to... hold... aaah, ah, I'm-");
                     else
@@ -11741,37 +12661,52 @@ public class WorldState
                 {
                     if(w.tickle().booleanValue())
                     {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
                         if(c.getHATELevel() < 3 || vVirg.booleanValue())
                             c.say(t, "Hahah, ahahah, stop, don't touch meee!");
                         else
                             c.say(t, "Ahahah, no, not while you're insiiide, hahahahah!");
                     } else
-                    if(c.getHATELevel() < 3 || vVirg.booleanValue())
-                        c.say(t, "Ah!  No!  No more!");
-                    else
-                        c.say(t, "Agh!  Ow!  No, no, take it out!");
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
+                        if(c.getHATELevel() < 3 || vVirg.booleanValue())
+                            c.say(t, "Ah!  No!  No more!");
+                        else
+                            c.say(t, "Agh!  Ow!  No, no, take it out!");
+                    }
                 } else
                 if(variant == 3)
                 {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                     if(c.getHATELevel() < 3 || vVirg.booleanValue())
                         c.say(t, "Don't make me join in this disgusting stuff...");
                     else
                         c.say(t, "You'd better pull out...");
                 } else
                 if(loved.booleanValue())
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                     c.say(t, "No!  Leave them alone!");
-                else
+                } else
                 if(hated.booleanValue())
                 {
                     if(morality > 66)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                         c.say(t, "Do not harm them!");
-                    else
+                    } else
                     if(morality > 33)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
                         c.say(t, "I guess those two are relying on me to rescue them...");
-                    else
+                    } else
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.JOY, Project.Emotion.NEUTRAL);
                         c.say(t, "I do like to see those two suffer...");
+                    }
                 } else
                 {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                     c.say(t, (new StringBuilder("No!  Leave ")).append(lover.getMainName()).append(" alone!").toString());
                 }
             } else
@@ -11780,18 +12715,28 @@ public class WorldState
                 if(variant == 0)
                 {
                     if(c.getINJULevel() < 3 || aVirg.booleanValue())
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.STRUGGLE, Project.Emotion.ANGER);
                         c.say(t, "I won't... give in...!");
-                    else
+                    } else
                     if(w.tickle().booleanValue())
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
                         c.say(t, "Ahahah, gaaah, take it ooout, hahahahah!");
-                    else
+                    } else
                     if(c.getGender().equals("male"))
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                         c.say(t, "Don't touch my- Ah!  Ow, nooo!");
-                    else
+                    } else
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                         c.say(t, "Agh, no, not in both at once- Gaaah!");
+                    }
                 } else
                 if(variant == 1)
                 {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
                     if(c.getINJULevel() < 3 || aVirg.booleanValue())
                         c.say(t, "D-Don't touch me theeere!");
                     else
@@ -11805,91 +12750,149 @@ public class WorldState
                     if(w.tickle().booleanValue())
                     {
                         if(c.getPLEALevel() < 3 || cVirg.booleanValue())
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.SHAME);
                             c.say(t, "Ahah... ahah... why can't I...?");
-                        else
+                        } else
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
                             c.say(t, "Ahahah, nooo, not while I'm- Hahahah, aaahnnn!");
+                        }
                     } else
                     if(c.getPLEALevel() < 3 || cVirg.booleanValue())
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
                         c.say(t, "Ow...  Why...  Why can't I beat this...?");
-                    else
+                    } else
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
                         c.say(t, "I can't... fight thiiis...!");
+                    }
                 } else
                 if(variant == 3)
                 {
                     if(c.getPLEALevel() < 3 || cVirg.booleanValue())
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                         c.say(t, "I won't play along!");
-                    else
+                    } else
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
                         c.say(t, "I won't... nnn... no, not there...!");
+                    }
                 } else
                 if(loved.booleanValue())
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.ANGER);
                     c.say(t, "They don't deserve this!");
-                else
+                } else
                 if(hated.booleanValue())
                 {
                     if(morality > 66)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.ANGER);
                         c.say(t, "Even if it's those two, they don't deserve this...");
-                    else
+                    } else
                     if(morality > 33)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
                         c.say(t, "Well, I guess those two might deserve this...");
-                    else
+                    } else
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.JOY, Project.Emotion.NEUTRAL);
                         c.say(t, "Heh, looks like those two are having a harder time...");
+                    }
                 } else
                 {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.ANGER);
                     c.say(t, (new StringBuilder(String.valueOf(lover.getMainName()))).append(" doesn't deserve this!").toString());
                 }
             } else
             if(variant == 0)
             {
                 if(c.getEXPOLevel() < 3 || modest.booleanValue())
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                     c.say(t, "Y-You think I'll be bothered by getting stripped when you're already doing this!?");
-                else
+                } else
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                     c.say(t, "What sort of freak would enjoy watching me get- Gh!  Aaah, stop!");
+                }
             } else
             if(variant == 1)
             {
                 if(c.getEXPOLevel() < 3 || modest.booleanValue())
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.LEWD);
                     c.say(t, "I won't let you- Hng!?  Ah, ah, no, stooop!");
-                else
+                } else
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.ANGER);
                     c.say(t, "Aaah, wow... hah, wh-what are you all looking at...?");
+                }
             } else
             if(variant == 2)
             {
                 if(w.tickle().booleanValue())
                 {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
                     if(c.getEXPOLevel() < 3 || modest.booleanValue())
                         c.say(t, "Hmph...  Ngah!?  Hahahahah, aaagh!");
                     else
                         c.say(t, "Aaahahah, no, no, not my feeet!");
                 } else
                 if(c.getEXPOLevel() < 3 || modest.booleanValue())
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                     c.say(t, "Hmph...  Ngah, ow, ow, no, not there!");
-                else
+                } else
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.STRUGGLE, Project.Emotion.ANGER);
                     c.say(t, "Guh!  Urgh, ow, ow...  Is this really... so fun to watch...?");
+                }
             } else
             if(variant == 3)
             {
                 if(c.getINJULevel() < 3 || aVirg.booleanValue())
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.ANGER);
                     c.say(t, "Ugh, leave me alone...");
-                else
+                } else
                 if(w.tickle().booleanValue())
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
                     c.say(t, "Hahah, ahahah, j-just stop, stop it already!  Hahahahah!");
-                else
+                } else
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.STRUGGLE, Project.Emotion.ANGER);
                     c.say(t, "Just- ow!  J-Just stop!");
+                }
             } else
             if(loved.booleanValue())
+            {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.FEAR);
                 c.say(t, "Come on, focus on me instead!");
-            else
+            } else
             if(hated.booleanValue())
             {
                 if(morality > 66)
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                     c.say(t, "If you don't break me harder, I absolutely will rescue the others.");
-                else
+                } else
                 if(morality > 33)
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FOCUS, Project.Emotion.ANGER);
                     c.say(t, "You Thralls can't afford to waste your time breaking the weaklings!  Come!");
-                else
+                } else
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FOCUS, Project.Emotion.ANGER);
                     c.say(t, "Come on, let me help you break the others!");
+                }
             } else
             {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.FEAR);
                 c.say(t, (new StringBuilder("Come on, focus on me instead of ")).append(lover.getMainName()).append("!").toString());
             }
         } else
@@ -11900,12 +12903,18 @@ public class WorldState
                 if(variant == 0)
                 {
                     if(c.getPLEALevel() < 3 || cVirg.booleanValue())
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.SHAME);
                         c.say(t, "Ugh, this is disgusting...");
-                    else
+                    } else
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
                         c.say(t, "Don't want to... enjoy this- Aaah!");
+                    }
                 } else
                 if(variant == 1)
                 {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
                     if(c.getHATELevel() < 3 || vVirg.booleanValue())
                         c.say(t, "Aaah, d-don't- Mmf!  Nn nn!");
                     else
@@ -11915,6 +12924,7 @@ public class WorldState
                 {
                     if(w.tickle().booleanValue())
                     {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
                         if(c.getHATELevel() < 3 || vVirg.booleanValue())
                             c.say(t, "Ahahah, w-wait, don't tickle me with your- Ahahahahah!");
                         else
@@ -11923,36 +12933,59 @@ public class WorldState
                     if(c.getGender().equals("male"))
                     {
                         if(c.getHATELevel() < 3 || vVirg.booleanValue())
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                             c.say(t, "They're all... so much bigger...");
-                        else
+                        } else
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.STRUGGLE, Project.Emotion.FEAR);
                             c.say(t, "It... hurts...!");
+                        }
                     } else
-                    if(c.getHATELevel() < 3 || vVirg.booleanValue())
-                        c.say(t, "They're... getting it all over me...");
-                    else
-                        c.say(t, "Urgh... They're filling me up...");
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.LEWD);
+                        if(c.getHATELevel() < 3 || vVirg.booleanValue())
+                            c.say(t, "They're... getting it all over me...");
+                        else
+                            c.say(t, "Urgh... They're filling me up...");
+                    }
                 } else
                 if(variant == 3)
                 {
                     if(c.getHATELevel() < 3 || vVirg.booleanValue())
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
                         c.say(t, "Nn...!  Gh!");
-                    else
+                    } else
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.STRUGGLE, Project.Emotion.SHAME);
                         c.say(t, "Ugh!  Not... inside...!  Mmf!");
+                    }
                 } else
                 if(loved.booleanValue())
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.FEAR);
                     c.say(t, "I don't want to see what's happening to them...");
-                else
+                } else
                 if(hated.booleanValue())
                 {
                     if(morality > 66)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
                         c.say(t, "This is awful...");
-                    else
+                    } else
                     if(morality > 33)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.STRUGGLE, Project.Emotion.SHAME);
                         c.say(t, "I can... deal with this...");
-                    else
+                    } else
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
                         c.say(t, "I don't care what happens to the others.");
+                    }
                 } else
                 {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.FEAR);
                     c.say(t, (new StringBuilder("I don't want to see what's happening to ")).append(lover.getMainName()).append("...").toString());
                 }
             } else
@@ -11961,18 +12994,28 @@ public class WorldState
                 if(variant == 0)
                 {
                     if(c.getINJULevel() < 3 || aVirg.booleanValue())
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                         c.say(t, "Ah!  It's going inside...!");
-                    else
+                    } else
                     if(w.tickle().booleanValue())
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
                         c.say(t, "Ahah!  Ahahah, no, i-it's too deep, I'm- Hahahahahah!");
-                    else
+                    } else
                     if(c.getGender().equals("male"))
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
                         c.say(t, "Ng... hitting that spot... from both sides...!");
-                    else
+                    } else
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
                         c.say(t, "Ugh!  B-Both holes at once...!?");
+                    }
                 } else
                 if(variant == 1)
                 {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
                     if(c.getINJULevel() < 3 || aVirg.booleanValue())
                         c.say(t, "I can't... ah... can't resist...!");
                     else
@@ -11986,6 +13029,7 @@ public class WorldState
                 } else
                 if(variant == 2)
                 {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
                     if(w.tickle().booleanValue())
                     {
                         if(c.getPLEALevel() < 3 || cVirg.booleanValue())
@@ -12008,36 +13052,57 @@ public class WorldState
                 if(variant == 3)
                 {
                     if(c.getPLEALevel() < 3 || cVirg.booleanValue())
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.STRUGGLE, Project.Emotion.SHAME);
                         c.say(t, "Have to... ignore it...!");
-                    else
+                    } else
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.FEAR);
                         c.say(t, "Ah!  Th-They're... watchiiing!");
+                    }
                 } else
                 if(loved.booleanValue())
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.FEAR);
                     c.say(t, "I know this is even harder for them...");
-                else
+                } else
                 if(hated.booleanValue())
                 {
                     if(morality > 66)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.NEUTRAL);
                         c.say(t, "Those two must have it even worse...");
-                    else
+                    } else
                     if(morality > 33)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.SHAME);
                         c.say(t, "I guess it's not too bad compared to what they're going through...");
-                    else
+                    } else
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.JOY, Project.Emotion.NEUTRAL);
                         c.say(t, "At least those two are suffering worse.");
+                    }
                 } else
                 {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.FEAR);
                     c.say(t, (new StringBuilder("I know this is even harder for ")).append(lover.getMainName()).append("...").toString());
                 }
             } else
             if(variant == 0)
             {
                 if(c.getEXPOLevel() < 3 || modest.booleanValue())
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                     c.say(t, "Let go of me!");
-                else
+                } else
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.FEAR);
                     c.say(t, "They can all see the spot where we're joined...");
+                }
             } else
             if(variant == 1)
             {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.FEAR);
                 if(c.getEXPOLevel() < 3 || modest.booleanValue())
                     c.say(t, "I'm... nn... a-again...  ah, wooow!");
                 else
@@ -12047,43 +13112,66 @@ public class WorldState
             {
                 if(w.tickle().booleanValue())
                 {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.FEAR);
                     if(c.getEXPOLevel() < 3 || modest.booleanValue())
                         c.say(t, "Ahahah, i-if they strip me, it'll make it even easier to- Hahahahah!");
                     else
                         c.say(t, "Ahahah, nooo, I-I'm completely...!");
                 } else
-                if(c.getEXPOLevel() < 3 || modest.booleanValue())
-                    c.say(t, "Ergh!  Even my clothes...!");
-                else
-                    c.say(t, "Ergh!  Let... go...!");
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.STRUGGLE, Project.Emotion.FEAR);
+                    if(c.getEXPOLevel() < 3 || modest.booleanValue())
+                        c.say(t, "Ergh!  Even my clothes...!");
+                    else
+                        c.say(t, "Ergh!  Let... go...!");
+                }
             } else
             if(variant == 3)
             {
                 if(c.getINJULevel() < 3 || aVirg.booleanValue())
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.SHAME);
                     c.say(t, "Don't!");
-                else
+                } else
                 if(w.tickle().booleanValue())
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.FEAR);
                     c.say(t, "Ahah, ahahah, dooon't!");
-                else
+                } else
                 if(c.getGender().equals("male"))
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                     c.say(t, "Ow, dooon't, aaagh!");
-                else
+                } else
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                     c.say(t, "Nn!  Nn!  Stop... this...!");
+                }
             } else
             if(loved.booleanValue())
+            {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
                 c.say(t, "I need to... become stronger... for them...!");
-            else
+            } else
             if(hated.booleanValue())
             {
                 if(morality > 66)
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FOCUS, Project.Emotion.STRUGGLE);
                     c.say(t, "For their sakes, too... I need to fight this...!");
-                else
+                } else
                 if(morality > 33)
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FOCUS, Project.Emotion.ANGER);
                     c.say(t, "I won't let you... do what you want...!");
-                else
+                } else
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.FOCUS);
                     c.say(t, "I'll... make all of you pay...!");
+                }
             } else
             {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
                 c.say(t, (new StringBuilder("I need to... become stronger... for ")).append(lover.getMainName()).append("...!").toString());
             }
         } else
@@ -12092,12 +13180,18 @@ public class WorldState
             if(variant == 0)
             {
                 if(c.getPLEALevel() < 3 || cVirg.booleanValue())
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
                     c.say(t, "Mmf, mmf...  Mm...");
-                else
+                } else
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.SHAME);
                     c.say(t, "Mmf...  Mm!?  Nn, nn, nnn!");
+                }
             } else
             if(variant == 1)
             {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.SHAME);
                 if(c.getHATELevel() < 3 || vVirg.booleanValue())
                     c.say(t, "They're... rubbing... aaah...!");
                 else
@@ -12107,37 +13201,52 @@ public class WorldState
             {
                 if(w.tickle().booleanValue())
                 {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
                     if(c.getHATELevel() < 3 || vVirg.booleanValue())
                         c.say(t, "Ahahah, ahah, th-they're touching my- Nn!  Hahahah!");
                     else
                         c.say(t, "Ah!  Ahah!  Ahah!  It's... in...!  Ahah!");
                 } else
-                if(c.getHATELevel() < 3 || vVirg.booleanValue())
-                    c.say(t, "Nn!  So... rough...!");
-                else
-                    c.say(t, "Y-You're... ripping me in half...!");
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
+                    if(c.getHATELevel() < 3 || vVirg.booleanValue())
+                        c.say(t, "Nn!  So... rough...!");
+                    else
+                        c.say(t, "Y-You're... ripping me in half...!");
+                }
             } else
             if(variant == 3)
             {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.LEWD);
                 if(c.getHATELevel() < 3 || vVirg.booleanValue())
                     c.say(t, "Um... P-Please... use my mouth...  Mm...");
                 else
                     c.say(t, "Nn... O-Okay... I'm moving...");
             } else
             if(loved.booleanValue())
+            {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.FEAR);
                 c.say(t, "It's my fault that this is happening to them...");
-            else
+            } else
             if(hated.booleanValue())
             {
                 if(morality > 66)
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.FEAR);
                     c.say(t, "I should have tried harder to stop this from happening to them...");
-                else
+                } else
                 if(morality > 33)
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.NEUTRAL);
                     c.say(t, "They're right about how weak I am...");
-                else
+                } else
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.SHAME);
                     c.say(t, "The others should have known better than to rely on me...");
+                }
             } else
             {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.FEAR);
                 c.say(t, (new StringBuilder("It's my fault that this is happening to ")).append(lover.getMainName()).append("...").toString());
             }
         } else
@@ -12146,15 +13255,23 @@ public class WorldState
             if(variant == 0)
             {
                 if(c.getINJULevel() < 3 || aVirg.booleanValue())
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
                     c.say(t, "Mm.  Mm...");
-                else
+                } else
                 if(w.tickle().booleanValue())
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.SHAME);
                     c.say(t, "Hahahahammf!  Mm mm mm mm!");
-                else
+                } else
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.STRUGGLE, Project.Emotion.SHAME);
                     c.say(t, "Mm!  Mm!  Mm!  Mm!");
+                }
             } else
             if(variant == 1)
             {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
                 if(c.getINJULevel() < 3 || aVirg.booleanValue())
                     c.say(t, "Nooo... my body is...");
                 else
@@ -12165,6 +13282,7 @@ public class WorldState
             } else
             if(variant == 2)
             {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
                 if(w.tickle().booleanValue())
                 {
                     if(c.getPLEALevel() < 3 || cVirg.booleanValue())
@@ -12180,79 +13298,125 @@ public class WorldState
             if(variant == 3)
             {
                 if(c.getPLEALevel() < 3 || cVirg.booleanValue())
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.FEAR);
                     c.say(t, "Please... go easy on me...");
-                else
+                } else
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.LEWD);
                     c.say(t, "Aaah, pleeease, not theeere!  Mmm!");
+                }
             } else
             if(loved.booleanValue())
+            {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                 c.say(t, "P-Please, I'll do anything, but leave them alone!");
-            else
+            } else
             if(hated.booleanValue())
             {
                 if(morality > 66)
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.NEUTRAL);
                     c.say(t, "I feel like I should offer myself in their place...");
-                else
+                } else
                 if(morality > 33)
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.NEUTRAL);
                     c.say(t, "There's nothing I can do to help the others...");
-                else
+                } else
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                     c.say(t, "P-Please, I'll do anything, just let me go!");
+                }
             } else
             {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                 c.say(t, (new StringBuilder("P-Please, I'll do anything, but leave ")).append(lover.getMainName()).append(" alone!").toString());
             }
         } else
         if(variant == 0)
         {
             if(c.getEXPOLevel() < 3 || modest.booleanValue())
+            {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
                 c.say(t, "Mmf!?  Nn...");
-            else
+            } else
+            {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
                 c.say(t, "Nn...");
+            }
         } else
         if(variant == 1)
         {
             if(c.getEXPOLevel() < 3 || modest.booleanValue())
+            {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
                 c.say(t, "Nn... I can't... do anything...");
-            else
+            } else
+            {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.SHAME);
                 c.say(t, "Aaah... th-they're seeing... how worthless I am...");
+            }
         } else
         if(variant == 2)
         {
             if(w.tickle().booleanValue())
             {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.FEAR);
                 if(c.getEXPOLevel() < 3 || modest.booleanValue())
                     c.say(t, "Ahah, ahahah, th-they're going to see...!");
                 else
                     c.say(t, "Ahahah, nooo, don't loook!");
             } else
-            if(c.getEXPOLevel() < 3 || modest.booleanValue())
-                c.say(t, "I don't want... this...");
-            else
-                c.say(t, "I'm... completely defeated...");
+            {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
+                if(c.getEXPOLevel() < 3 || modest.booleanValue())
+                    c.say(t, "I don't want... this...");
+                else
+                    c.say(t, "I'm... completely defeated...");
+            }
         } else
         if(variant == 3)
         {
             if(c.getINJULevel() < 3 || aVirg.booleanValue())
+            {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                 c.say(t, "Ah, I-I, um, really- AH!");
-            else
+            } else
             if(w.tickle().booleanValue())
+            {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
                 c.say(t, "Ahahah, hah, nnn, hahahahah, nooo!");
-            else
+            } else
+            {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
                 c.say(t, "I'm... I'm doing my best, so...");
+            }
         } else
         if(loved.booleanValue())
+        {
+            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
             c.say(t, "A-Are you two alright!?");
-        else
+        } else
         if(hated.booleanValue())
         {
             if(morality > 66)
+            {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.NEUTRAL);
                 c.say(t, "Um, are you two doing alright...?");
-            else
+            } else
             if(morality > 33)
+            {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.SHAME);
                 c.say(t, "I hope those two are doing alright...");
-            else
+            } else
+            {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
                 c.say(t, "I don't really care what happens to the others...");
+            }
         } else
         {
+            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
             c.say(t, (new StringBuilder("A-Are you alright, ")).append(lover.getMainName()).append("!?").toString());
         }
         c.say(t, "\"");
@@ -12296,8 +13460,8 @@ public class WorldState
         while(base > nextClamp && nextClamp < 0xcccccccccccccccL) 
         {
             nextClamp = nextMagnitude(nextClamp);
-            if(nextClamp >= 0xe8d4a51000L && usedPercent > 20L)
-                usedPercent = 20L;
+            if(nextClamp >= 0x38d7ea4c68000L && usedPercent > 5L)
+                usedPercent = 5L;
             if(change >= 0x147ae147ae147aeL)
                 change = (change / 100L) * usedPercent;
             else
@@ -12305,8 +13469,8 @@ public class WorldState
         }
         while(base + change > nextClamp && nextClamp < 0xcccccccccccccccL) 
         {
-            if(nextClamp >= 0xe8d4a51000L && usedPercent > 20L)
-                usedPercent = 20L;
+            if(nextClamp >= 0x38d7ea4c68000L && usedPercent > 5L)
+                usedPercent = 5L;
             long remainder = (base + change) - nextClamp;
             if(remainder >= 0x147ae147ae147aeL)
                 remainder = (remainder / 100L) * usedPercent;
@@ -12461,6 +13625,8 @@ public class WorldState
             formerChosen = new Chosen[0];
             loopComplete = Boolean.valueOf(false);
         }
+        if(portraits == null)
+            portraits = Boolean.valueOf(true);
         if(achievementSeen == null || achievementSeen.length < 7)
         {
             achievementSeen = new int[7];
@@ -12634,7 +13800,7 @@ public class WorldState
         else
         if(!version.equals("17"))
             adjusted = Boolean.valueOf(true);
-        int vignettesThisVersion = 11;
+        int vignettesThisVersion = 13;
         if(vignetteSeen == null || vignetteSeen.length < vignettesThisVersion || vignetteSeen[0] == null)
         {
             int currentLength = 0;
@@ -12674,6 +13840,7 @@ public class WorldState
         femaleShift = w.getFemaleShift();
         repeatShift = Boolean.valueOf(w.getRepeatShift());
         separator = w.getSeparator();
+        portraits = w.portraits;
         if(!tickleOn.equals(w.tickle()))
             toggleTickle();
         save = w.save;
@@ -14155,6 +15322,7 @@ public class WorldState
                 {
                     if(target.getMoralityBreakage() == 2)
                     {
+                        Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.FOCUS, Project.Emotion.ANGER);
                         if(nextSpeaker.getMorality() > 66)
                         {
                             if(nextSpeaker.getInnocence() > 66)
@@ -14185,6 +15353,7 @@ public class WorldState
                     } else
                     if(target.getMoralityBreakage() == 1)
                     {
+                        Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.FOCUS, Project.Emotion.NEUTRAL);
                         if(nextSpeaker.getMorality() > 66)
                         {
                             if(nextSpeaker.getInnocence() > 66)
@@ -14213,38 +15382,42 @@ public class WorldState
                         else
                             nextSpeaker.say(t, (new StringBuilder("Eliminate them as quickly as possible, ")).append(target.getMainName()).append(".").toString());
                     } else
-                    if(nextSpeaker.getMorality() > 66)
                     {
+                        Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.JOY, Project.Emotion.FOCUS);
+                        if(nextSpeaker.getMorality() > 66)
+                        {
+                            if(nextSpeaker.getConfidence() > 66)
+                                nextSpeaker.say(t, (new StringBuilder("Well done, ")).append(target.getMainName()).append("!").toString());
+                            else
+                            if(nextSpeaker.getConfidence() > 33)
+                                nextSpeaker.say(t, (new StringBuilder("You're actually pretty strong, ")).append(target.getMainName()).append("!").toString());
+                            else
+                                nextSpeaker.say(t, (new StringBuilder("I'm so glad you're fighting with us, ")).append(target.getMainName()).append("...").toString());
+                        } else
+                        if(nextSpeaker.getMorality() > 33)
+                        {
+                            if(nextSpeaker.getConfidence() > 66)
+                                nextSpeaker.say(t, (new StringBuilder("You're almost as strong as me, ")).append(target.getMainName()).append("!").toString());
+                            else
+                            if(nextSpeaker.getConfidence() > 33)
+                                nextSpeaker.say(t, (new StringBuilder("Great job, ")).append(target.getMainName()).append("!").toString());
+                            else
+                                nextSpeaker.say(t, (new StringBuilder("I wish I were as strong as you, ")).append(target.getMainName()).append("...").toString());
+                        } else
                         if(nextSpeaker.getConfidence() > 66)
-                            nextSpeaker.say(t, (new StringBuilder("Well done, ")).append(target.getMainName()).append("!").toString());
+                            nextSpeaker.say(t, (new StringBuilder("Good, ")).append(target.getMainName()).append("!  You handle the small fry!").toString());
                         else
                         if(nextSpeaker.getConfidence() > 33)
-                            nextSpeaker.say(t, (new StringBuilder("You're actually pretty strong, ")).append(target.getMainName()).append("!").toString());
+                            nextSpeaker.say(t, (new StringBuilder("Not bad, ")).append(target.getMainName()).append(".").toString());
                         else
-                            nextSpeaker.say(t, (new StringBuilder("I'm so glad you're fighting with us, ")).append(target.getMainName()).append("...").toString());
-                    } else
-                    if(nextSpeaker.getMorality() > 33)
-                    {
-                        if(nextSpeaker.getConfidence() > 66)
-                            nextSpeaker.say(t, (new StringBuilder("You're almost as strong as me, ")).append(target.getMainName()).append("!").toString());
-                        else
-                        if(nextSpeaker.getConfidence() > 33)
-                            nextSpeaker.say(t, (new StringBuilder("Great job, ")).append(target.getMainName()).append("!").toString());
-                        else
-                            nextSpeaker.say(t, (new StringBuilder("I wish I were as strong as you, ")).append(target.getMainName()).append("...").toString());
-                    } else
-                    if(nextSpeaker.getConfidence() > 66)
-                        nextSpeaker.say(t, (new StringBuilder("Good, ")).append(target.getMainName()).append("!  You handle the small fry!").toString());
-                    else
-                    if(nextSpeaker.getConfidence() > 33)
-                        nextSpeaker.say(t, (new StringBuilder("Not bad, ")).append(target.getMainName()).append(".").toString());
-                    else
-                        nextSpeaker.say(t, (new StringBuilder("How are you so good at this, ")).append(target.getMainName()).append("?").toString());
+                            nextSpeaker.say(t, (new StringBuilder("How are you so good at this, ")).append(target.getMainName()).append("?").toString());
+                    }
                 } else
                 if(nextLine == 2)
                 {
                     if(target.getInnocenceBreakage() == 2)
                     {
+                        Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.JOY);
                         if(nextSpeaker.getInnocence() > 66)
                         {
                             if(nextSpeaker.getDignity() > 66)
@@ -14275,6 +15448,7 @@ public class WorldState
                     } else
                     if(target.getInnocenceBreakage() == 1)
                     {
+                        Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.JOY);
                         if(nextSpeaker.getInnocence() > 66)
                         {
                             if(nextSpeaker.getDignity() > 66)
@@ -14303,38 +15477,42 @@ public class WorldState
                         else
                             nextSpeaker.say(t, (new StringBuilder("It's an interesting side-effect, isn't it, ")).append(target.getMainName()).append("?").toString());
                     } else
-                    if(nextSpeaker.getInnocence() > 66)
                     {
+                        Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.FOCUS, Project.Emotion.JOY);
+                        if(nextSpeaker.getInnocence() > 66)
+                        {
+                            if(nextSpeaker.getDignity() > 66)
+                                nextSpeaker.say(t, (new StringBuilder("We'll hold them off, ")).append(target.getMainName()).append("!").toString());
+                            else
+                            if(nextSpeaker.getDignity() > 33)
+                                nextSpeaker.say(t, (new StringBuilder("Are you feeling better, ")).append(target.getMainName()).append("?").toString());
+                            else
+                                nextSpeaker.say(t, (new StringBuilder("Hooray!  ")).append(target.getMainName()).append(" is looking better!").toString());
+                        } else
+                        if(nextSpeaker.getInnocence() > 33)
+                        {
+                            if(nextSpeaker.getDignity() > 66)
+                                nextSpeaker.say(t, (new StringBuilder("Take your time, ")).append(target.getMainName()).append(".").toString());
+                            else
+                            if(nextSpeaker.getDignity() > 33)
+                                nextSpeaker.say(t, (new StringBuilder("How are you holding up, ")).append(target.getMainName()).append("?").toString());
+                            else
+                                nextSpeaker.say(t, (new StringBuilder("Alright, ")).append(target.getMainName()).append(" is back in action!").toString());
+                        } else
                         if(nextSpeaker.getDignity() > 66)
-                            nextSpeaker.say(t, (new StringBuilder("We'll hold them off, ")).append(target.getMainName()).append("!").toString());
+                            nextSpeaker.say(t, (new StringBuilder("It would be unwise to rush, ")).append(target.getMainName()).append(".").toString());
                         else
                         if(nextSpeaker.getDignity() > 33)
-                            nextSpeaker.say(t, (new StringBuilder("Are you feeling better, ")).append(target.getMainName()).append("?").toString());
+                            nextSpeaker.say(t, (new StringBuilder(String.valueOf(target.getMainName()))).append("'s recovery will enhance our combat prowess significantly.").toString());
                         else
-                            nextSpeaker.say(t, (new StringBuilder("Hooray!  ")).append(target.getMainName()).append(" is looking better!").toString());
-                    } else
-                    if(nextSpeaker.getInnocence() > 33)
-                    {
-                        if(nextSpeaker.getDignity() > 66)
-                            nextSpeaker.say(t, (new StringBuilder("Take your time, ")).append(target.getMainName()).append(".").toString());
-                        else
-                        if(nextSpeaker.getDignity() > 33)
-                            nextSpeaker.say(t, (new StringBuilder("How are you holding up, ")).append(target.getMainName()).append("?").toString());
-                        else
-                            nextSpeaker.say(t, (new StringBuilder("Alright, ")).append(target.getMainName()).append(" is back in action!").toString());
-                    } else
-                    if(nextSpeaker.getDignity() > 66)
-                        nextSpeaker.say(t, (new StringBuilder("It would be unwise to rush, ")).append(target.getMainName()).append(".").toString());
-                    else
-                    if(nextSpeaker.getDignity() > 33)
-                        nextSpeaker.say(t, (new StringBuilder(String.valueOf(target.getMainName()))).append("'s recovery will enhance our combat prowess significantly.").toString());
-                    else
-                        nextSpeaker.say(t, (new StringBuilder("Is your recovery going smoothly, ")).append(target.getMainName()).append("?").toString());
+                            nextSpeaker.say(t, (new StringBuilder("Is your recovery going smoothly, ")).append(target.getMainName()).append("?").toString());
+                    }
                 } else
                 if(nextLine == 3)
                 {
                     if(target.getConfidenceBreakage() == 2)
                     {
+                        Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.SHAME);
                         if(nextSpeaker.getConfidence() > 66)
                         {
                             if(nextSpeaker.getDignity() > 66)
@@ -14365,6 +15543,7 @@ public class WorldState
                     } else
                     if(target.getConfidenceBreakage() == 1)
                     {
+                        Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.FOCUS, Project.Emotion.NEUTRAL);
                         if(nextSpeaker.getConfidence() > 66)
                         {
                             if(nextSpeaker.getDignity() > 66)
@@ -14393,38 +15572,42 @@ public class WorldState
                         else
                             nextSpeaker.say(t, (new StringBuilder(String.valueOf(target.getMainName()))).append("!  A-Are you alright?").toString());
                     } else
-                    if(nextSpeaker.getConfidence() > 66)
                     {
+                        Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.FOCUS, Project.Emotion.JOY);
+                        if(nextSpeaker.getConfidence() > 66)
+                        {
+                            if(nextSpeaker.getDignity() > 66)
+                                nextSpeaker.say(t, (new StringBuilder("Impressive, ")).append(target.getMainName()).append(".").toString());
+                            else
+                            if(nextSpeaker.getDignity() > 33)
+                                nextSpeaker.say(t, (new StringBuilder("Keep it up, ")).append(target.getMainName()).append("!").toString());
+                            else
+                                nextSpeaker.say(t, (new StringBuilder("Looking good, ")).append(target.getMainName()).append("!").toString());
+                        } else
+                        if(nextSpeaker.getConfidence() > 33)
+                        {
+                            if(nextSpeaker.getDignity() > 66)
+                                nextSpeaker.say(t, (new StringBuilder("I'll follow you anywhere, ")).append(target.getMainName()).append(".").toString());
+                            else
+                            if(nextSpeaker.getDignity() > 33)
+                                nextSpeaker.say(t, (new StringBuilder("I'm right behind you, ")).append(target.getMainName()).append("!").toString());
+                            else
+                                nextSpeaker.say(t, (new StringBuilder("Lead the way, ")).append(target.getMainName()).append("!").toString());
+                        } else
                         if(nextSpeaker.getDignity() > 66)
-                            nextSpeaker.say(t, (new StringBuilder("Impressive, ")).append(target.getMainName()).append(".").toString());
+                            nextSpeaker.say(t, (new StringBuilder("Th-Thanks, ")).append(target.getMainName()).append(", I feel much better now.").toString());
                         else
                         if(nextSpeaker.getDignity() > 33)
-                            nextSpeaker.say(t, (new StringBuilder("Keep it up, ")).append(target.getMainName()).append("!").toString());
+                            nextSpeaker.say(t, (new StringBuilder(String.valueOf(target.getMainName()))).append("!  I-I'm right behind you!").toString());
                         else
-                            nextSpeaker.say(t, (new StringBuilder("Looking good, ")).append(target.getMainName()).append("!").toString());
-                    } else
-                    if(nextSpeaker.getConfidence() > 33)
-                    {
-                        if(nextSpeaker.getDignity() > 66)
-                            nextSpeaker.say(t, (new StringBuilder("I'll follow you anywhere, ")).append(target.getMainName()).append(".").toString());
-                        else
-                        if(nextSpeaker.getDignity() > 33)
-                            nextSpeaker.say(t, (new StringBuilder("I'm right behind you, ")).append(target.getMainName()).append("!").toString());
-                        else
-                            nextSpeaker.say(t, (new StringBuilder("Lead the way, ")).append(target.getMainName()).append("!").toString());
-                    } else
-                    if(nextSpeaker.getDignity() > 66)
-                        nextSpeaker.say(t, (new StringBuilder("Th-Thanks, ")).append(target.getMainName()).append(", I feel much better now.").toString());
-                    else
-                    if(nextSpeaker.getDignity() > 33)
-                        nextSpeaker.say(t, (new StringBuilder(String.valueOf(target.getMainName()))).append("!  I-I'm right behind you!").toString());
-                    else
-                        nextSpeaker.say(t, (new StringBuilder("D-Don't worry, ")).append(target.getMainName()).append(", I'm done panicking...").toString());
+                            nextSpeaker.say(t, (new StringBuilder("D-Don't worry, ")).append(target.getMainName()).append(", I'm done panicking...").toString());
+                    }
                 } else
                 if(nextLine == 4)
                 {
                     if(target.getDignityBreakage() == 2)
                     {
+                        Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.JOY);
                         if(nextSpeaker.getDignity() > 66)
                         {
                             if(nextSpeaker.getInnocence() > 66)
@@ -14455,6 +15638,7 @@ public class WorldState
                     } else
                     if(target.getDignityBreakage() == 1)
                     {
+                        Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.FOCUS, Project.Emotion.JOY);
                         if(nextSpeaker.getDignity() > 66)
                         {
                             if(nextSpeaker.getInnocence() > 66)
@@ -14483,36 +15667,40 @@ public class WorldState
                         else
                             nextSpeaker.say(t, (new StringBuilder("You're far too good at that, ")).append(target.getMainName()).append("...").toString());
                     } else
-                    if(nextSpeaker.getDignity() > 66)
                     {
+                        Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.FOCUS, Project.Emotion.JOY);
+                        if(nextSpeaker.getDignity() > 66)
+                        {
+                            if(nextSpeaker.getInnocence() > 66)
+                                nextSpeaker.say(t, (new StringBuilder("You're amazing, ")).append(target.getMainName()).append("...").toString());
+                            else
+                            if(nextSpeaker.getInnocence() > 33)
+                                nextSpeaker.say(t, (new StringBuilder(String.valueOf(target.getMainName()))).append(" looks magnificent...").toString());
+                            else
+                                nextSpeaker.say(t, (new StringBuilder("Very heroic of you, ")).append(target.getMainName()).append(".").toString());
+                        } else
+                        if(nextSpeaker.getDignity() > 33)
+                        {
+                            if(nextSpeaker.getInnocence() > 66)
+                                nextSpeaker.say(t, (new StringBuilder("You're so cool, ")).append(target.getMainName()).append(".").toString());
+                            else
+                            if(nextSpeaker.getInnocence() > 33)
+                                nextSpeaker.say(t, (new StringBuilder("Stylish, ")).append(target.getMainName()).append(".").toString());
+                            else
+                                nextSpeaker.say(t, (new StringBuilder("You cut an impressive figure, ")).append(target.getMainName()).append(".").toString());
+                        } else
                         if(nextSpeaker.getInnocence() > 66)
-                            nextSpeaker.say(t, (new StringBuilder("You're amazing, ")).append(target.getMainName()).append("...").toString());
+                            nextSpeaker.say(t, (new StringBuilder(String.valueOf(target.getMainName()))).append("!  Awesome!").toString());
                         else
                         if(nextSpeaker.getInnocence() > 33)
-                            nextSpeaker.say(t, (new StringBuilder(String.valueOf(target.getMainName()))).append(" looks magnificent...").toString());
+                            nextSpeaker.say(t, (new StringBuilder("Looking good, ")).append(target.getMainName()).append("!").toString());
                         else
-                            nextSpeaker.say(t, (new StringBuilder("Very heroic of you, ")).append(target.getMainName()).append(".").toString());
-                    } else
-                    if(nextSpeaker.getDignity() > 33)
-                    {
-                        if(nextSpeaker.getInnocence() > 66)
-                            nextSpeaker.say(t, (new StringBuilder("You're so cool, ")).append(target.getMainName()).append(".").toString());
-                        else
-                        if(nextSpeaker.getInnocence() > 33)
-                            nextSpeaker.say(t, (new StringBuilder("Stylish, ")).append(target.getMainName()).append(".").toString());
-                        else
-                            nextSpeaker.say(t, (new StringBuilder("You cut an impressive figure, ")).append(target.getMainName()).append(".").toString());
-                    } else
-                    if(nextSpeaker.getInnocence() > 66)
-                        nextSpeaker.say(t, (new StringBuilder(String.valueOf(target.getMainName()))).append("!  Awesome!").toString());
-                    else
-                    if(nextSpeaker.getInnocence() > 33)
-                        nextSpeaker.say(t, (new StringBuilder("Looking good, ")).append(target.getMainName()).append("!").toString());
-                    else
-                        nextSpeaker.say(t, (new StringBuilder("Well done, ")).append(target.getMainName()).append(".  The Thralls are completely distracted.").toString());
+                            nextSpeaker.say(t, (new StringBuilder("Well done, ")).append(target.getMainName()).append(".  The Thralls are completely distracted.").toString());
+                    }
                 } else
                 if(nextLine == 5)
                 {
+                    Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                     if(nextSpeaker.getConfidence() > 66)
                     {
                         if(nextSpeaker.getInnocence() > 66)
@@ -14543,6 +15731,7 @@ public class WorldState
                 } else
                 if(nextLine == 6)
                 {
+                    Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.FOCUS, Project.Emotion.ANGER);
                     if(nextSpeaker.getMorality() > 66)
                     {
                         if(nextSpeaker.getInnocence() > 66)
@@ -14573,6 +15762,7 @@ public class WorldState
                 } else
                 if(nextLine == 7)
                 {
+                    Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.FOCUS, Project.Emotion.JOY);
                     if(nextSpeaker.getInnocence() > 66)
                     {
                         if(nextSpeaker.getDignity() > 66)
@@ -14605,6 +15795,7 @@ public class WorldState
                 {
                     if(nextSpeaker.getConfidence() > 66)
                     {
+                        Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.FOCUS, Project.Emotion.NEUTRAL);
                         if(nextSpeaker.getDignity() > 66)
                             nextSpeaker.say(t, (new StringBuilder("Yes, ")).append(target.getMainName()).append(", appeal to their conscience!").toString());
                         else
@@ -14615,6 +15806,7 @@ public class WorldState
                     } else
                     if(nextSpeaker.getConfidence() > 33)
                     {
+                        Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.ANGER);
                         if(nextSpeaker.getDignity() > 66)
                             nextSpeaker.say(t, (new StringBuilder("I hope this isn't too painful for you, ")).append(target.getMainName()).append("...").toString());
                         else
@@ -14623,16 +15815,20 @@ public class WorldState
                         else
                             nextSpeaker.say(t, (new StringBuilder("Just say whatever you have to in order to get them to back off, ")).append(target.getMainName()).append(".").toString());
                     } else
-                    if(nextSpeaker.getDignity() > 66)
-                        nextSpeaker.say(t, (new StringBuilder("I'm glad that ")).append(target.getMainName()).append(" isn't clinging to ").append(target.hisHer()).append(" pride...").toString());
-                    else
-                    if(nextSpeaker.getDignity() > 33)
-                        nextSpeaker.say(t, (new StringBuilder("It's hard, isn't it, ")).append(target.getMainName()).append("...?").toString());
-                    else
-                        nextSpeaker.say(t, (new StringBuilder("Just throw your pride away, ")).append(target.getMainName()).append("...").toString());
+                    {
+                        Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
+                        if(nextSpeaker.getDignity() > 66)
+                            nextSpeaker.say(t, (new StringBuilder("I'm glad that ")).append(target.getMainName()).append(" isn't clinging to ").append(target.hisHer()).append(" pride...").toString());
+                        else
+                        if(nextSpeaker.getDignity() > 33)
+                            nextSpeaker.say(t, (new StringBuilder("It's hard, isn't it, ")).append(target.getMainName()).append("...?").toString());
+                        else
+                            nextSpeaker.say(t, (new StringBuilder("Just throw your pride away, ")).append(target.getMainName()).append("...").toString());
+                    }
                 } else
                 if(nextLine == 9)
                 {
+                    Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.ANGER);
                     if(nextSpeaker.getDignity() > 66)
                     {
                         if(nextSpeaker.getMorality() > 66)
@@ -14665,6 +15861,7 @@ public class WorldState
                 {
                     if(nextSpeaker.getMorality() > 66)
                     {
+                        Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.SHAME);
                         if(nextSpeaker.getInnocence() > 66)
                             nextSpeaker.say(t, (new StringBuilder("I don't like it when you look so mad, ")).append(target.getMainName()).append("...").toString());
                         else
@@ -14675,6 +15872,7 @@ public class WorldState
                     } else
                     if(nextSpeaker.getMorality() > 33)
                     {
+                        Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.NEUTRAL);
                         if(nextSpeaker.getInnocence() > 66)
                             nextSpeaker.say(t, (new StringBuilder("You're looking scary, ")).append(target.getMainName()).append("...").toString());
                         else
@@ -14683,18 +15881,22 @@ public class WorldState
                         else
                             nextSpeaker.say(t, (new StringBuilder("Careful, ")).append(target.getMainName()).append(".  It will cause problems if you give in to your emotions.").toString());
                     } else
-                    if(nextSpeaker.getInnocence() > 66)
-                        nextSpeaker.say(t, (new StringBuilder("Ooh, the Demons made ")).append(target.getMainName()).append(" mad...").toString());
-                    else
-                    if(nextSpeaker.getInnocence() > 33)
-                        nextSpeaker.say(t, (new StringBuilder("You look like you're going crazy, ")).append(target.getMainName()).append(".").toString());
-                    else
-                        nextSpeaker.say(t, (new StringBuilder("I think you're understanding how I feel about the Demons now, ")).append(target.getMainName()).append(".").toString());
+                    {
+                        Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
+                        if(nextSpeaker.getInnocence() > 66)
+                            nextSpeaker.say(t, (new StringBuilder("Ooh, the Demons made ")).append(target.getMainName()).append(" mad...").toString());
+                        else
+                        if(nextSpeaker.getInnocence() > 33)
+                            nextSpeaker.say(t, (new StringBuilder("You look like you're going crazy, ")).append(target.getMainName()).append(".").toString());
+                        else
+                            nextSpeaker.say(t, (new StringBuilder("I think you're understanding how I feel about the Demons now, ")).append(target.getMainName()).append(".").toString());
+                    }
                 } else
                 if(nextLine == 11)
                 {
                     if(nextSpeaker.getInnocence() > 66)
                     {
+                        Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.FOCUS);
                         if(nextSpeaker.getDignity() > 66)
                             nextSpeaker.say(t, (new StringBuilder("Are you feeling sick, ")).append(target.getMainName()).append("?  Your face is red...").toString());
                         else
@@ -14705,6 +15907,7 @@ public class WorldState
                     } else
                     if(nextSpeaker.getInnocence() > 33)
                     {
+                        Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.SHAME);
                         if(nextSpeaker.getDignity() > 66)
                             nextSpeaker.say(t, (new StringBuilder("Hold it together, ")).append(target.getMainName()).append("...").toString());
                         else
@@ -14713,16 +15916,20 @@ public class WorldState
                         else
                             nextSpeaker.say(t, (new StringBuilder("You look like you're really turned on, ")).append(target.getMainName()).append(".").toString());
                     } else
-                    if(nextSpeaker.getDignity() > 66)
-                        nextSpeaker.say(t, (new StringBuilder("You must resist the pleasure, ")).append(target.getMainName()).append("...").toString());
-                    else
-                    if(nextSpeaker.getDignity() > 33)
-                        nextSpeaker.say(t, (new StringBuilder(String.valueOf(target.getMainName()))).append(" is being overcome by lustful feelings...").toString());
-                    else
-                        nextSpeaker.say(t, (new StringBuilder("You're experiencing severe sexual arousal, ")).append(target.getMainName()).append(".").toString());
+                    {
+                        Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.SHAME);
+                        if(nextSpeaker.getDignity() > 66)
+                            nextSpeaker.say(t, (new StringBuilder("You must resist the pleasure, ")).append(target.getMainName()).append("...").toString());
+                        else
+                        if(nextSpeaker.getDignity() > 33)
+                            nextSpeaker.say(t, (new StringBuilder(String.valueOf(target.getMainName()))).append(" is being overcome by lustful feelings...").toString());
+                        else
+                            nextSpeaker.say(t, (new StringBuilder("You're experiencing severe sexual arousal, ")).append(target.getMainName()).append(".").toString());
+                    }
                 } else
                 if(nextLine == 12)
                 {
+                    Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                     if(nextSpeaker.getConfidence() > 66)
                     {
                         if(nextSpeaker.getMorality() > 66)
@@ -14763,6 +15970,7 @@ public class WorldState
                 } else
                 if(nextLine == 13)
                 {
+                    Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.FOCUS);
                     if(nextSpeaker.getDignity() > 66)
                     {
                         if(nextSpeaker.getInnocence() > 66)
@@ -14793,6 +16001,7 @@ public class WorldState
                 } else
                 if(nextLine == 14)
                 {
+                    Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                     if(nextSpeaker.getMorality() > 66)
                     {
                         if(nextSpeaker.getConfidence() > 66)
@@ -14823,6 +16032,7 @@ public class WorldState
                 } else
                 if(nextLine == 15)
                 {
+                    Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.STRUGGLE, Project.Emotion.SHAME);
                     if(nextSpeaker.getInnocence() > 66)
                     {
                         if(nextSpeaker.getConfidence() > 66)
@@ -14853,6 +16063,7 @@ public class WorldState
                 } else
                 if(nextLine == 17)
                 {
+                    Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                     if(nextSpeaker.getDignity() > 66)
                     {
                         if(nextSpeaker.getConfidence() > 66)
@@ -14883,6 +16094,7 @@ public class WorldState
                 } else
                 if(nextLine == 18)
                 {
+                    Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.NEUTRAL);
                     if(nextSpeaker.getMorality() > 66)
                     {
                         if(nextSpeaker.getInnocence() > 66)
@@ -14913,6 +16125,7 @@ public class WorldState
                 } else
                 if(nextLine == 19)
                 {
+                    Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.FOCUS);
                     if(nextSpeaker.getInnocence() > 66)
                     {
                         if(nextSpeaker.getDignity() > 66)
@@ -14943,6 +16156,7 @@ public class WorldState
                 } else
                 if(nextLine == 20)
                 {
+                    Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
                     if(nextSpeaker.getConfidence() > 66)
                     {
                         if(nextSpeaker.getDignity() > 66)
@@ -14972,6 +16186,8 @@ public class WorldState
                         nextSpeaker.say(t, (new StringBuilder("I'm sorry I'm not strong enough to help, ")).append(target.getMainName()).append("...").toString());
                 } else
                 if(nextLine == 21)
+                {
+                    Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.NEUTRAL);
                     if(nextSpeaker.getDignity() > 66)
                     {
                         if(nextSpeaker.getInnocence() > 66)
@@ -14999,9 +16215,11 @@ public class WorldState
                         nextSpeaker.say(t, (new StringBuilder("The public may mock us, ")).append(target.getMainName()).append(", but it changes nothing.").toString());
                     else
                         nextSpeaker.say(t, (new StringBuilder("Perhaps I should let them film me some more in order to draw attention from ")).append(target.getMainName()).append("'s humiliation.").toString());
+                }
             } else
             if(nextLine == 1 || nextLine == 6)
             {
+                Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
                 if(nextSpeaker.getMorality() > 66)
                 {
                     if(nextSpeaker.getInnocence() > 66)
@@ -15032,6 +16250,7 @@ public class WorldState
             } else
             if(nextLine == 2)
             {
+                Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
                 if(nextSpeaker.getInnocence() > 66)
                 {
                     if(nextSpeaker.getConfidence() > 66)
@@ -15062,6 +16281,7 @@ public class WorldState
             } else
             if(nextLine == 3)
             {
+                Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
                 if(nextSpeaker.getConfidence() > 66)
                 {
                     if(nextSpeaker.getDignity() > 66)
@@ -15092,6 +16312,7 @@ public class WorldState
             } else
             if(nextLine == 4)
             {
+                Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
                 if(nextSpeaker.getDignity() > 66)
                 {
                     if(nextSpeaker.getMorality() > 66)
@@ -15124,6 +16345,7 @@ public class WorldState
             {
                 if(nextSpeaker.getMorality() > 66)
                 {
+                    Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.FEAR);
                     if(nextSpeaker.getConfidence() > 66)
                         nextSpeaker.say(t, (new StringBuilder("Don't you dare give in, ")).append(target.getMainName()).append("!").toString());
                     else
@@ -15134,6 +16356,7 @@ public class WorldState
                 } else
                 if(nextSpeaker.getMorality() > 33)
                 {
+                    Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
                     if(nextSpeaker.getConfidence() > 66)
                         nextSpeaker.say(t, (new StringBuilder("You're lucky that I'm here to save you, ")).append(target.getMainName()).append("!").toString());
                     else
@@ -15142,18 +16365,22 @@ public class WorldState
                     else
                         nextSpeaker.say(t, (new StringBuilder("Don't think that you can rely on me to save you, ")).append(target.getMainName()).append("...").toString());
                 } else
-                if(nextSpeaker.getConfidence() > 66)
-                    nextSpeaker.say(t, (new StringBuilder("You're holding me back, ")).append(target.getMainName()).append("!").toString());
-                else
-                if(nextSpeaker.getConfidence() > 33)
-                    nextSpeaker.say(t, (new StringBuilder("I'm not saving you, ")).append(target.getMainName()).append("!").toString());
-                else
-                    nextSpeaker.say(t, (new StringBuilder("You're useless, ")).append(target.getMainName()).append("...").toString());
+                {
+                    Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
+                    if(nextSpeaker.getConfidence() > 66)
+                        nextSpeaker.say(t, (new StringBuilder("You're holding me back, ")).append(target.getMainName()).append("!").toString());
+                    else
+                    if(nextSpeaker.getConfidence() > 33)
+                        nextSpeaker.say(t, (new StringBuilder("I'm not saving you, ")).append(target.getMainName()).append("!").toString());
+                    else
+                        nextSpeaker.say(t, (new StringBuilder("You're useless, ")).append(target.getMainName()).append("...").toString());
+                }
             } else
             if(nextLine == 7)
             {
                 if(nextSpeaker.getInnocence() > 66)
                 {
+                    Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.JOY, Project.Emotion.FOCUS);
                     if(nextSpeaker.getDignity() > 66)
                         nextSpeaker.say(t, (new StringBuilder("You're such a pervert, ")).append(target.getMainName()).append(".").toString());
                     else
@@ -15164,6 +16391,7 @@ public class WorldState
                 } else
                 if(nextSpeaker.getInnocence() > 33)
                 {
+                    Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.JOY);
                     if(nextSpeaker.getDignity() > 66)
                         nextSpeaker.say(t, (new StringBuilder("You're such a slut, ")).append(target.getMainName()).append(".").toString());
                     else
@@ -15172,16 +16400,20 @@ public class WorldState
                     else
                         nextSpeaker.say(t, (new StringBuilder("I kinda like seeing ")).append(target.getMainName()).append(" humbled like this.").toString());
                 } else
-                if(nextSpeaker.getDignity() > 66)
-                    nextSpeaker.say(t, (new StringBuilder("It appears that you've given into your lusts, ")).append(target.getMainName()).append(".").toString());
-                else
-                if(nextSpeaker.getDignity() > 33)
-                    nextSpeaker.say(t, (new StringBuilder("You're just encouraging them, ")).append(target.getMainName()).append(".").toString());
-                else
-                    nextSpeaker.say(t, (new StringBuilder("That position suits you perfectly, ")).append(target.getMainName()).append(".").toString());
+                {
+                    Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
+                    if(nextSpeaker.getDignity() > 66)
+                        nextSpeaker.say(t, (new StringBuilder("It appears that you've given into your lusts, ")).append(target.getMainName()).append(".").toString());
+                    else
+                    if(nextSpeaker.getDignity() > 33)
+                        nextSpeaker.say(t, (new StringBuilder("You're just encouraging them, ")).append(target.getMainName()).append(".").toString());
+                    else
+                        nextSpeaker.say(t, (new StringBuilder("That position suits you perfectly, ")).append(target.getMainName()).append(".").toString());
+                }
             } else
             if(nextLine == 8)
             {
+                Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
                 if(nextSpeaker.getConfidence() > 66)
                 {
                     if(nextSpeaker.getDignity() > 66)
@@ -15212,6 +16444,7 @@ public class WorldState
             } else
             if(nextLine == 9)
             {
+                Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
                 if(nextSpeaker.getDignity() > 66)
                 {
                     if(nextSpeaker.getMorality() > 66)
@@ -15242,6 +16475,7 @@ public class WorldState
             } else
             if(nextLine == 10)
             {
+                Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
                 if(nextSpeaker.getMorality() > 66)
                 {
                     if(nextSpeaker.getConfidence() > 66)
@@ -15272,6 +16506,7 @@ public class WorldState
             } else
             if(nextLine == 11)
             {
+                Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
                 if(nextSpeaker.getInnocence() > 66)
                 {
                     if(nextSpeaker.getConfidence() > 66)
@@ -15302,6 +16537,7 @@ public class WorldState
             } else
             if(nextLine == 12)
             {
+                Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
                 if(nextSpeaker.getConfidence() > 66)
                 {
                     if(nextSpeaker.getDignity() > 66)
@@ -15332,6 +16568,7 @@ public class WorldState
             } else
             if(nextLine == 13)
             {
+                Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
                 if(nextSpeaker.getDignity() > 66)
                 {
                     if(nextSpeaker.getConfidence() > 66)
@@ -15364,6 +16601,7 @@ public class WorldState
             {
                 if(nextSpeaker.getMorality() > 66)
                 {
+                    Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.FEAR);
                     if(nextSpeaker.getConfidence() > 66)
                         nextSpeaker.say(t, (new StringBuilder("I won't let you get hurt, ")).append(target.getMainName()).append(", no matter how much you screw up!").toString());
                     else
@@ -15374,6 +16612,7 @@ public class WorldState
                 } else
                 if(nextSpeaker.getMorality() > 33)
                 {
+                    Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
                     if(nextSpeaker.getConfidence() > 66)
                         nextSpeaker.say(t, (new StringBuilder("You'd better not make me rescue you, ")).append(target.getMainName()).append("!").toString());
                     else
@@ -15382,16 +16621,20 @@ public class WorldState
                     else
                         nextSpeaker.say(t, (new StringBuilder("I don't want ")).append(target.getMainName()).append(" to get hurt... much...").toString());
                 } else
-                if(nextSpeaker.getConfidence() > 66)
-                    nextSpeaker.say(t, (new StringBuilder("Damn that ")).append(target.getMainName()).append(", making me worry about ").append(target.himHer()).append("...!").toString());
-                else
-                if(nextSpeaker.getConfidence() > 33)
-                    nextSpeaker.say(t, (new StringBuilder("I guess it would be nice to have ")).append(target.getMainName()).append(" in my debt...").toString());
-                else
-                    nextSpeaker.say(t, (new StringBuilder("I guess I'll be in trouble if something happens to ")).append(target.getMainName()).append("...").toString());
+                {
+                    Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
+                    if(nextSpeaker.getConfidence() > 66)
+                        nextSpeaker.say(t, (new StringBuilder("Damn that ")).append(target.getMainName()).append(", making me worry about ").append(target.himHer()).append("...!").toString());
+                    else
+                    if(nextSpeaker.getConfidence() > 33)
+                        nextSpeaker.say(t, (new StringBuilder("I guess it would be nice to have ")).append(target.getMainName()).append(" in my debt...").toString());
+                    else
+                        nextSpeaker.say(t, (new StringBuilder("I guess I'll be in trouble if something happens to ")).append(target.getMainName()).append("...").toString());
+                }
             } else
             if(nextLine == 15)
             {
+                Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                 if(nextSpeaker.getInnocence() > 66)
                 {
                     if(nextSpeaker.getConfidence() > 66)
@@ -15422,6 +16665,7 @@ public class WorldState
             } else
             if(nextLine == 17)
             {
+                Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                 if(nextSpeaker.getDignity() > 66)
                 {
                     if(nextSpeaker.getConfidence() > 66)
@@ -15454,6 +16698,7 @@ public class WorldState
             {
                 if(nextSpeaker.getMorality() > 66)
                 {
+                    Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
                     if(nextSpeaker.getInnocence() > 66)
                         nextSpeaker.say(t, (new StringBuilder("Why'd you let them rape you, ")).append(target.getMainName()).append("?").toString());
                     else
@@ -15464,6 +16709,7 @@ public class WorldState
                 } else
                 if(nextSpeaker.getMorality() > 33)
                 {
+                    Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.FOCUS, Project.Emotion.ANGER);
                     if(nextSpeaker.getInnocence() > 66)
                     {
                         if(target.getGender().equals("male"))
@@ -15476,16 +16722,20 @@ public class WorldState
                     else
                         nextSpeaker.say(t, (new StringBuilder("You let them break your Sexual Barrier?  ")).append(target.getMainName()).append(", you idiot...").toString());
                 } else
-                if(nextSpeaker.getInnocence() > 66)
-                    nextSpeaker.say(t, (new StringBuilder("Hahah, they're doing naughty stuff with ")).append(target.getMainName()).append(".").toString());
-                else
-                if(nextSpeaker.getInnocence() > 33)
-                    nextSpeaker.say(t, (new StringBuilder("You make a good fleshlight, ")).append(target.getMainName()).append(".").toString());
-                else
-                    nextSpeaker.say(t, (new StringBuilder("This is what you get for being so weak, ")).append(target.getMainName()).append(".").toString());
+                {
+                    Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.JOY, Project.Emotion.FOCUS);
+                    if(nextSpeaker.getInnocence() > 66)
+                        nextSpeaker.say(t, (new StringBuilder("Hahah, they're doing naughty stuff with ")).append(target.getMainName()).append(".").toString());
+                    else
+                    if(nextSpeaker.getInnocence() > 33)
+                        nextSpeaker.say(t, (new StringBuilder("You make a good fleshlight, ")).append(target.getMainName()).append(".").toString());
+                    else
+                        nextSpeaker.say(t, (new StringBuilder("This is what you get for being so weak, ")).append(target.getMainName()).append(".").toString());
+                }
             } else
             if(nextLine == 19)
             {
+                Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
                 if(nextSpeaker.getInnocence() > 66)
                 {
                     if(nextSpeaker.getMorality() > 66)
@@ -15516,6 +16766,7 @@ public class WorldState
             } else
             if(nextLine == 20)
             {
+                Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
                 if(nextSpeaker.getConfidence() > 66)
                 {
                     if(nextSpeaker.getMorality() > 66)
@@ -15556,6 +16807,8 @@ public class WorldState
                     nextSpeaker.say(t, (new StringBuilder("Maybe now ")).append(target.getMainName()).append(" will stop thinking ").append(target.heShe()).append("'s so much better than everyone else...").toString());
             } else
             if(nextLine == 21)
+            {
+                Project.changePortrait(nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
                 if(nextSpeaker.getDignity() > 66)
                 {
                     if(nextSpeaker.getMorality() > 66)
@@ -15583,6 +16836,7 @@ public class WorldState
                     nextSpeaker.say(t, (new StringBuilder("I thought you were the type to try harder to keep your dignity, ")).append(target.getMainName()).append(".").toString());
                 else
                     nextSpeaker.say(t, (new StringBuilder("Hahahah, you look so pathetic, ")).append(target.getMainName()).append("!").toString());
+            }
             nextSpeaker.say(t, "\"");
         }
         lastLastLine = lastLine;
@@ -15604,6 +16858,7 @@ public class WorldState
             currentCombatants[1] = c;
         else
             currentCombatants[2] = c;
+        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.FOCUS);
     }
 
     public int getTotalRounds()
@@ -16762,6 +18017,7 @@ public class WorldState
     {
         evacNotice = Boolean.valueOf(false);
         currentCombatants = c;
+        Project.changePortrait(c[0].type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), 0, Project.Emotion.NEUTRAL, Project.Emotion.FOCUS);
         if(usedForsaken != null)
             usedForsaken.injured = 0;
         battleRound = 1;
@@ -17290,8 +18546,8 @@ public class WorldState
         for(int i = 0; i < groupScenes.length; i++)
             groupScenes[i] = Boolean.valueOf(false);
 
-        vignetteSeen = new Boolean[11];
-        for(int i = 0; i < 11; i++)
+        vignetteSeen = new Boolean[13];
+        for(int i = 0; i < 13; i++)
             vignetteSeen[i] = Boolean.valueOf(false);
 
     }
@@ -21902,6 +23158,7 @@ public class WorldState
         {
             if(c.getConfidence() > 66)
             {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.ANGER);
                 if(c.getInnocence() > 66)
                     c.say(t, "Demon Lord!  Hey, Demon Lord!  Come here and kill me already!");
                 else
@@ -21912,6 +23169,7 @@ public class WorldState
             } else
             if(c.getConfidence() > 33)
             {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.FEAR);
                 if(c.getInnocence() > 66)
                     c.say(t, "So, this is my chance to die, right?");
                 else
@@ -21921,17 +23179,25 @@ public class WorldState
                     c.say(t, "This is my best - and perhaps only - opportunity to die.");
             } else
             if(c.getInnocence() > 66)
+            {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.SHAME);
                 c.say(t, "I really, really hope the Demon Lord kills me...");
-            else
+            } else
             if(c.getInnocence() > 33)
+            {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.FEAR);
                 c.say(t, "Please...  Please, let me find a way to die here...");
-            else
+            } else
+            {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FOCUS, Project.Emotion.FOCUS);
                 c.say(t, "I fear that I am too insignificant to merit being killed by the Demon Lord... but I must try!");
+            }
         } else
         if(type == 2)
         {
             if(c.getInnocence() > 66)
             {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.JOY, Project.Emotion.JOY);
                 if(c.getConfidence() > 66)
                     c.say(t, "Ah...  This is gonna be so much fun...");
                 else
@@ -21942,6 +23208,7 @@ public class WorldState
             } else
             if(c.getInnocence() > 33)
             {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.FEAR);
                 if(c.getConfidence() > 66)
                     c.say(t, "Ugh, damn...  It's doing something to my head...!");
                 else
@@ -21951,17 +23218,25 @@ public class WorldState
                     c.say(t, "No!  P-Please...!  Get out... of my head...!");
             } else
             if(c.getConfidence() > 66)
+            {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.ANGER);
                 c.say(t, "Hmph... It's attempting to exert control over my mind...");
-            else
+            } else
             if(c.getConfidence() > 33)
+            {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.STRUGGLE, Project.Emotion.STRUGGLE);
                 c.say(t, "I must... avoid looking directly at the tower...!");
-            else
+            } else
+            {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.FEAR);
                 c.say(t, "My... mind...  No!  I-I'm not strong enough to resist...!");
+            }
         } else
         if(type == 1)
         {
             if(c.getMorality() > 66)
             {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.SHAME);
                 if(c.getConfidence() > 66)
                     c.say(t, "Though humanity will come to consider me an enemy soon, I will fight for them one last time!");
                 else
@@ -21972,6 +23247,7 @@ public class WorldState
             } else
             if(c.getMorality() > 33)
             {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FOCUS, Project.Emotion.FOCUS);
                 if(c.getConfidence() > 66)
                     c.say(t, "I don't know why I'm still bothering to save this city...  But it's too late to back down now!");
                 else
@@ -21981,70 +23257,101 @@ public class WorldState
                     c.say(t, "I've killed so many people...  But maybe I can make up for it now...");
             } else
             if(c.getConfidence() > 66)
+            {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FOCUS, Project.Emotion.FOCUS);
                 c.say(t, "First, I'll kill the Demon Lord.  Then, the true bloodshed will begin!");
-            else
+            } else
             if(c.getConfidence() > 33)
+            {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.ANGER);
                 c.say(t, "Alright, I just have to survive here, and then I can make my move against the government...");
-            else
+            } else
+            {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.ANGER);
                 c.say(t, "Ugh, I don't care about this city or these people...  Why am I still doing this!?");
+            }
         } else
         if(type == 4)
         {
             if(c.getDignity() > 66)
             {
                 if(c.getConfidence() > 66)
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.JOY, Project.Emotion.JOY);
                     c.say(t, "I will show mercy on my new fans in order to win an even deeper degree of devotion from them.");
-                else
+                } else
                 if(c.getConfidence() > 33)
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.NEUTRAL);
                     c.say(t, "I see my fans among the Thralls, but I'm going to hold back against them.  I'm sure it'll turn out alright.");
-                else
+                } else
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.SHAME);
                     c.say(t, "My fans are here on the Demons' side...  I-I can't oppose them, I can't do it...!");
+                }
             } else
             if(c.getDignity() > 33)
             {
                 if(c.getConfidence() > 66)
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FOCUS, Project.Emotion.FOCUS);
                     c.say(t, "After I defeat the Demon Lord, my fans must acknowledge me as their new master!");
-                else
+                } else
                 if(c.getConfidence() > 33)
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.NEUTRAL);
                     c.say(t, "I should still be able to convince my fans to switch sides...");
-                else
+                } else
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.FEAR);
                     c.say(t, "Ah, I see my fans out there...  Th-They'll go easy on me, right...?");
+                }
             } else
             if(c.getConfidence() > 66)
+            {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.NEUTRAL);
                 c.say(t, "Well, I might have to beat up a few of my new friends, but I'm sure they won't hold it against me.");
-            else
+            } else
             if(c.getConfidence() > 33)
+            {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.JOY, Project.Emotion.JOY);
                 c.say(t, "Hey, Thrall!  I recognize you from my fanclub!  No hard feelings, right?");
-            else
+            } else
+            {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.SHAME);
                 c.say(t, "I feel bad for having to fight my new friends...");
+            }
         } else
-        if(c.getMorality() > 66)
         {
+            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FOCUS, Project.Emotion.FOCUS);
+            if(c.getMorality() > 66)
+            {
+                if(c.getConfidence() > 66)
+                    c.say(t, "This is it.  I will save as many people as possible.");
+                else
+                if(c.getConfidence() > 33)
+                    c.say(t, "I'm going to do my best to save everyone!");
+                else
+                    c.say(t, "I-I'm ready!  Everyone's counting on us!");
+            } else
+            if(c.getMorality() > 33)
+            {
+                if(c.getConfidence() > 66)
+                    c.say(t, "Alright, let's do this!  I won't lose!");
+                else
+                if(c.getConfidence() > 33)
+                    c.say(t, "I think we can get through this.");
+                else
+                    c.say(t, "A-Alright, I'm here!");
+            } else
             if(c.getConfidence() > 66)
-                c.say(t, "This is it.  I will save as many people as possible.");
+                c.say(t, "Hah!  No more holding back!");
             else
             if(c.getConfidence() > 33)
-                c.say(t, "I'm going to do my best to save everyone!");
+                c.say(t, "Everyone will know that I'm the one who saved them!");
             else
-                c.say(t, "I-I'm ready!  Everyone's counting on us!");
-        } else
-        if(c.getMorality() > 33)
-        {
-            if(c.getConfidence() > 66)
-                c.say(t, "Alright, let's do this!  I won't lose!");
-            else
-            if(c.getConfidence() > 33)
-                c.say(t, "I think we can get through this.");
-            else
-                c.say(t, "A-Alright, I'm here!");
-        } else
-        if(c.getConfidence() > 66)
-            c.say(t, "Hah!  No more holding back!");
-        else
-        if(c.getConfidence() > 33)
-            c.say(t, "Everyone will know that I'm the one who saved them!");
-        else
-            c.say(t, "Let's just get this over with.");
+                c.say(t, "Let's just get this over with.");
+        }
         c.say(t, "\"");
     }
 
@@ -22212,6 +23519,7 @@ public class WorldState
             c.say(t, "\n\n\"");
             if(c.getMorality() > 66)
             {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(true), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.SHAME);
                 if(c.getInnocence() > 66)
                 {
                     c.say(t, "It was... really stupid of me ");
@@ -22234,38 +23542,44 @@ public class WorldState
             {
                 if(c.getInnocence() > 66)
                 {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(true), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.SHAME);
                     c.say(t, "I get it now...  ");
                     corruptColors(c);
                     c.say(t, "I've been fighting for the bad guys all along...");
                 } else
                 if(c.getInnocence() > 33)
                 {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(true), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.SHAME);
                     c.say(t, "I think... ");
                     corruptColors(c);
                     c.say(t, "the only way to stop this is to join the Demons...");
                 } else
                 {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(true), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.ANGER);
                     c.say(t, "No... ");
                     corruptColors(c);
                     c.say(t, "I cannot lend my support to those who use such cruel methods!");
                 }
             } else
-            if(c.getInnocence() > 66)
             {
-                c.say(t, "Am I seriously considering joining the Demons!?  I... ");
-                corruptColors(c);
-                c.say(t, "actually, I guess I am...");
-            } else
-            if(c.getInnocence() > 33)
-            {
-                c.say(t, "From the start, ");
-                corruptColors(c);
-                c.say(t, "I guess it made more sense for me to be on the Demons' side...");
-            } else
-            {
-                c.say(t, "This was your plan all along, wasn't it?  Very well.  ");
-                corruptColors(c);
-                c.say(t, "I will join you.");
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(true), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.NEUTRAL);
+                if(c.getInnocence() > 66)
+                {
+                    c.say(t, "Am I seriously considering joining the Demons!?  I... ");
+                    corruptColors(c);
+                    c.say(t, "actually, I guess I am...");
+                } else
+                if(c.getInnocence() > 33)
+                {
+                    c.say(t, "From the start, ");
+                    corruptColors(c);
+                    c.say(t, "I guess it made more sense for me to be on the Demons' side...");
+                } else
+                {
+                    c.say(t, "This was your plan all along, wasn't it?  Very well.  ");
+                    corruptColors(c);
+                    c.say(t, "I will join you.");
+                }
             }
         } else
         {
@@ -22275,6 +23589,7 @@ public class WorldState
             {
                 if(c.finalThreatened % 3 == 0)
                 {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
                     if(c.getInnocence() > 66)
                         c.say(t, "This...  This is too cruel...");
                     else
@@ -22286,25 +23601,36 @@ public class WorldState
                 if(c.finalThreatened % 3 == 1)
                 {
                     if(c.getConfidence() > 66)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                         c.say(t, "Ugh...!  Stop trying to manipulate me...!");
-                    else
+                    } else
                     if(c.getConfidence() > 33)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.FEAR);
                         c.say(t, "There has to be something I can do...");
-                    else
+                    } else
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.FEAR);
                         c.say(t, "This is wrong... but what can I do about it...?");
+                    }
                 } else
-                if(c.getDignity() > 66)
-                    c.say(t, "There's nothing I can do...  Or is there?");
-                else
-                if(c.getDignity() > 33)
-                    c.say(t, "Could it be better for the Demons to win after all...?");
-                else
-                    c.say(t, "This is actually making me a little angry...");
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.ANGER);
+                    if(c.getDignity() > 66)
+                        c.say(t, "There's nothing I can do...  Or is there?");
+                    else
+                    if(c.getDignity() > 33)
+                        c.say(t, "Could it be better for the Demons to win after all...?");
+                    else
+                        c.say(t, "This is actually making me a little angry...");
+                }
             } else
             if(c.getMorality() > 33)
             {
                 if(c.finalThreatened % 3 == 0)
                 {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
                     if(c.getInnocence() > 66)
                         c.say(t, "Who... Who are the real bad guys...?");
                     else
@@ -22315,6 +23641,7 @@ public class WorldState
                 } else
                 if(c.finalThreatened % 3 == 1)
                 {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                     if(c.getConfidence() > 66)
                         c.say(t, "I should be strong enough to stop this...!");
                     else
@@ -22323,16 +23650,20 @@ public class WorldState
                     else
                         c.say(t, "I... I don't want to think about this anymore...!");
                 } else
-                if(c.getDignity() > 66)
-                    c.say(t, "I could just lose on purpose...");
-                else
-                if(c.getDignity() > 33)
-                    c.say(t, "Huh?  You...  You don't want this to happen either...?");
-                else
-                    c.say(t, "I can't allow this, no matter what I have to do...");
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.FEAR);
+                    if(c.getDignity() > 66)
+                        c.say(t, "I could just lose on purpose...");
+                    else
+                    if(c.getDignity() > 33)
+                        c.say(t, "Huh?  You...  You don't want this to happen either...?");
+                    else
+                        c.say(t, "I can't allow this, no matter what I have to do...");
+                }
             } else
             if(c.finalThreatened % 3 == 0)
             {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.SHAME);
                 if(c.getInnocence() > 66)
                     c.say(t, "No way, I don't wanna let that happen to me!");
                 else
@@ -22343,6 +23674,7 @@ public class WorldState
             } else
             if(c.finalThreatened % 3 == 1)
             {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.ANGER);
                 if(c.getConfidence() > 66)
                     c.say(t, "But at least the government could never catch me, right?  R-Right, definitely not!");
                 else
@@ -22351,13 +23683,16 @@ public class WorldState
                 else
                     c.say(t, "It's only a matter of time until I end up like that too...");
             } else
-            if(c.getDignity() > 66)
-                c.say(t, "I liked being called a hero, but...");
-            else
-            if(c.getDignity() > 33)
-                c.say(t, "I hate the Demons... but I think I hate this more...");
-            else
-                c.say(t, "Hahah...  I could actually... help the Demons win instead...");
+            {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.SHAME);
+                if(c.getDignity() > 66)
+                    c.say(t, "I liked being called a hero, but...");
+                else
+                if(c.getDignity() > 33)
+                    c.say(t, "I hate the Demons... but I think I hate this more...");
+                else
+                    c.say(t, "Hahah...  I could actually... help the Demons win instead...");
+            }
         }
         c.say(t, "\"");
         c.finalThreatened = c.finalThreatened + 1;
@@ -22413,6 +23748,7 @@ public class WorldState
             c.say(t, "\n\n\"");
             if(c.getInnocence() > 66)
             {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(true), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.JOY, Project.Emotion.JOY);
                 if(c.getMorality() > 66)
                 {
                     c.say(t, "Yes... ");
@@ -22433,6 +23769,7 @@ public class WorldState
             } else
             if(c.getInnocence() > 33)
             {
+                Project.changePortrait(c.type, Boolean.valueOf(true), Boolean.valueOf(true), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.SHAME);
                 if(c.getConfidence() > 66)
                 {
                     c.say(t, "I've been reduced to... ");
@@ -22453,17 +23790,20 @@ public class WorldState
             } else
             if(c.getConfidence() > 66)
             {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(true), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.FEAR);
                 c.say(t, "No!  Without me... we'll certainly... ");
                 corruptColors(c);
                 c.say(t, "be defeated...");
             } else
             if(c.getConfidence() > 33)
             {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(true), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.STRUGGLE, Project.Emotion.STRUGGLE);
                 c.say(t, "There must... be something I...  ");
                 corruptColors(c);
                 c.say(t, "Unh...");
             } else
             {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(true), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.SHAME);
                 c.say(t, "I suppose... I never... had... ");
                 corruptColors(c);
                 c.say(t, "a chance...");
@@ -22474,6 +23814,7 @@ public class WorldState
             c.say(t, "\"");
             if(c.getInnocence() > 66)
             {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.JOY);
                 if(c.finalSlimed % 3 == 0)
                 {
                     if(c.getConfidence() > 66)
@@ -22504,6 +23845,7 @@ public class WorldState
             } else
             if(c.getInnocence() > 33)
             {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                 if(c.finalSlimed % 3 == 0)
                 {
                     if(c.getConfidence() > 66)
@@ -22534,6 +23876,7 @@ public class WorldState
             } else
             if(c.finalSlimed % 3 == 0)
             {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.STRUGGLE, Project.Emotion.ANGER);
                 if(c.getConfidence() > 66)
                     c.say(t, "I will not allow you to take my mind!");
                 else
@@ -22544,6 +23887,7 @@ public class WorldState
             } else
             if(c.finalSlimed % 3 == 1)
             {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.STRUGGLE, Project.Emotion.FEAR);
                 if(c.getDignity() > 66)
                     c.say(t, "I will not face such a shameful end...!");
                 else
@@ -22552,13 +23896,16 @@ public class WorldState
                 else
                     c.say(t, "Aaagh!  No!  I will absolutely not give in!  Gaah!");
             } else
-            if(c.getMorality() > 66)
-                c.say(t, "Everyone, please forgive me...");
-            else
-            if(c.getMorality() > 33)
-                c.say(t, "I'm... slipping away...!");
-            else
-                c.say(t, "I will never bow... to another...!");
+            {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
+                if(c.getMorality() > 66)
+                    c.say(t, "Everyone, please forgive me...");
+                else
+                if(c.getMorality() > 33)
+                    c.say(t, "I'm... slipping away...!");
+                else
+                    c.say(t, "I will never bow... to another...!");
+            }
         }
         c.say(t, "\"");
         c.finalSlimed = c.finalSlimed + 1;
@@ -22687,6 +24034,7 @@ public class WorldState
                 c.say(t, "\n\n\"");
                 if(c.getConfidence() > 66)
                 {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(true), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.SHAME);
                     if(c.getInnocence() > 66)
                     {
                         c.say(t, "I guess... ");
@@ -22709,6 +24057,7 @@ public class WorldState
                 {
                     if(tickleOn.booleanValue())
                     {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(true), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.LEWD);
                         if(c.getInnocence() > 66)
                         {
                             c.say(t, "Ahahah!  I give up!  ");
@@ -22729,17 +24078,20 @@ public class WorldState
                     } else
                     if(c.getInnocence() > 66)
                     {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(true), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.FEAR);
                         c.say(t, "Ow!  I give up!  ");
                         corruptColors(c);
                         c.say(t, "I give uuup!  Aaah!");
                     } else
                     if(c.getInnocence() > 33)
                     {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(true), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.STRUGGLE, Project.Emotion.STRUGGLE);
                         c.say(t, "Ergh!  Guh!  Phew...  K-Keep going, ");
                         corruptColors(c);
                         c.say(t, "I won't stop you...");
                     } else
                     {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(true), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.FEAR);
                         c.say(t, "Ah!  Gah!  I yield!  I-I give up!  ");
                         corruptColors(c);
                         c.say(t, "I give up!  I won't fight you anymore!  Aaagh!");
@@ -22747,6 +24099,7 @@ public class WorldState
                 } else
                 if(tickleOn.booleanValue())
                 {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(true), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.LEWD);
                     if(c.getInnocence() > 66)
                     {
                         c.say(t, "Hahahah, I'm breaking, I'm breaking, ahahahah, ");
@@ -22767,17 +24120,20 @@ public class WorldState
                 } else
                 if(c.getInnocence() > 66)
                 {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(true), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.FEAR);
                     c.say(t, "Aaah!  I p-promise, I won't fight you- Naah!  ");
                     corruptColors(c);
                     c.say(t, "I won't fight you anymooore!");
                 } else
                 if(c.getInnocence() > 33)
                 {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(true), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.SHAME);
                     c.say(t, "Gh!  I-I can't, ");
                     corruptColors(c);
                     c.say(t, "I can't fight anymore...  Ngh...");
                 } else
                 {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(true), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.LEWD);
                     c.say(t, "Ngh!  Y-Yes, ");
                     corruptColors(c);
                     c.say(t, "punish me more...");
@@ -22792,6 +24148,7 @@ public class WorldState
                 else
                     w.append(t, (new StringBuilder("The Demons charge at ")).append(c.getMainName()).append(", causing ").append(c.himHer()).append(" to flinch away, closing ").append(c.hisHer()).append(" eyes and raising ").append(c.hisHer()).append(" hands.  Before ").append(c.heShe()).append(" knows it, ").append(c.heShe()).append("'s started to blurt out apologies and offers of surrender - and ").append(c.heShe()).append(" realizes that ").append(c.heShe()).append("'s actually willing to follow through with them.").toString());
                 c.say(t, "\n\n\"");
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(true), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.FEAR);
                 if(c.getConfidence() > 66)
                 {
                     if(c.getMorality() > 66)
@@ -22860,6 +24217,7 @@ public class WorldState
                 {
                     if(c.getConfidence() > 66)
                     {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
                         if(c.finalAttacked % 3 == 0)
                         {
                             if(c.getInnocence() > 66)
@@ -22892,6 +24250,7 @@ public class WorldState
                     {
                         if(c.finalAttacked % 3 == 0)
                         {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.FEAR);
                             if(c.getInnocence() > 66)
                                 c.say(t, "Ahah...  Why...?  Ahahah!  Why isn't it working!?");
                             else
@@ -22902,6 +24261,7 @@ public class WorldState
                         } else
                         if(c.finalAttacked % 3 == 1)
                         {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.SHAME);
                             if(c.getDignity() > 66)
                                 c.say(t, "Ahah... hahah... ah...");
                             else
@@ -22910,46 +24270,53 @@ public class WorldState
                             else
                                 c.say(t, "Ahah, hah... I can't do this anymore...");
                         } else
+                        {
+                            Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
+                            if(c.getMorality() > 66)
+                                c.say(t, "I wanted... to go out fighting like a hero...");
+                            else
+                            if(c.getMorality() > 33)
+                                c.say(t, "I guess... I might not have any choice...");
+                            else
+                                c.say(t, "Ugh...  What else can I do to make them kill me...?");
+                        }
+                    } else
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.FEAR);
+                        if(c.finalAttacked % 3 == 0)
+                        {
+                            if(c.getInnocence() > 66)
+                                c.say(t, "I'm sorry!  I'm sorry!  Please just kill meee!");
+                            else
+                            if(c.getInnocence() > 33)
+                                c.say(t, "Gah!  Ahahah, p-please, nooo!");
+                            else
+                                c.say(t, "Ahah!  N-No!  This is e-excessive!");
+                        } else
+                        if(c.finalAttacked % 3 == 1)
+                        {
+                            if(c.getDignity() > 66)
+                                c.say(t, "Ahah, s-stop, I'm- hahahahah!");
+                            else
+                            if(c.getDignity() > 33)
+                                c.say(t, "Ah, ahahah, n-no more...!");
+                            else
+                                c.say(t, "Ahahah, aaagh!");
+                        } else
                         if(c.getMorality() > 66)
-                            c.say(t, "I wanted... to go out fighting like a hero...");
+                            c.say(t, "Hah... I d-deserve this...");
                         else
                         if(c.getMorality() > 33)
-                            c.say(t, "I guess... I might not have any choice...");
+                            c.say(t, "Hahahah, I can't, I can't...");
                         else
-                            c.say(t, "Ugh...  What else can I do to make them kill me...?");
-                    } else
-                    if(c.finalAttacked % 3 == 0)
-                    {
-                        if(c.getInnocence() > 66)
-                            c.say(t, "I'm sorry!  I'm sorry!  Please just kill meee!");
-                        else
-                        if(c.getInnocence() > 33)
-                            c.say(t, "Gah!  Ahahah, p-please, nooo!");
-                        else
-                            c.say(t, "Ahah!  N-No!  This is e-excessive!");
-                    } else
-                    if(c.finalAttacked % 3 == 1)
-                    {
-                        if(c.getDignity() > 66)
-                            c.say(t, "Ahah, s-stop, I'm- hahahahah!");
-                        else
-                        if(c.getDignity() > 33)
-                            c.say(t, "Ah, ahahah, n-no more...!");
-                        else
-                            c.say(t, "Ahahah, aaagh!");
-                    } else
-                    if(c.getMorality() > 66)
-                        c.say(t, "Hah... I d-deserve this...");
-                    else
-                    if(c.getMorality() > 33)
-                        c.say(t, "Hahahah, I can't, I can't...");
-                    else
-                        c.say(t, "I-I'll do anything, just stooop!");
+                            c.say(t, "I-I'll do anything, just stooop!");
+                    }
                 } else
                 if(c.getConfidence() > 66)
                 {
                     if(c.finalAttacked % 3 == 0)
                     {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.STRUGGLE, Project.Emotion.ANGER);
                         if(c.getInnocence() > 66)
                             c.say(t, "Gah!?  Ow, no, no, you have to kill meee!");
                         else
@@ -22960,6 +24327,7 @@ public class WorldState
                     } else
                     if(c.finalAttacked % 3 == 1)
                     {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.STRUGGLE, Project.Emotion.ANGER);
                         if(c.getDignity() > 66)
                             c.say(t, "Enough!  You'll kill me this instant if you know what's good for- Gaah!");
                         else
@@ -22968,18 +24336,22 @@ public class WorldState
                         else
                             c.say(t, "Hng...!  Gah!  Ergh, no, again...!");
                     } else
-                    if(c.getMorality() > 66)
-                        c.say(t, "Agh!  What am I even doing...!?");
-                    else
-                    if(c.getMorality() > 33)
-                        c.say(t, "If I had fought this hard from the start, I...");
-                    else
-                        c.say(t, "No!  You won't take this from me!");
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.STRUGGLE, Project.Emotion.FEAR);
+                        if(c.getMorality() > 66)
+                            c.say(t, "Agh!  What am I even doing...!?");
+                        else
+                        if(c.getMorality() > 33)
+                            c.say(t, "If I had fought this hard from the start, I...");
+                        else
+                            c.say(t, "No!  You won't take this from me!");
+                    }
                 } else
                 if(c.getConfidence() > 33)
                 {
                     if(c.finalAttacked % 3 == 0)
                     {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.STRUGGLE, Project.Emotion.FEAR);
                         if(c.getInnocence() > 66)
                             c.say(t, "Ow!  Why!?  Why isn't it working!?");
                         else
@@ -22990,6 +24362,7 @@ public class WorldState
                     } else
                     if(c.finalAttacked % 3 == 1)
                     {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.STRUGGLE, Project.Emotion.SHAME);
                         if(c.getDignity() > 66)
                             c.say(t, "Gah!  Agh...");
                         else
@@ -22998,46 +24371,53 @@ public class WorldState
                         else
                             c.say(t, "I can't do this anymore...");
                     } else
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
+                        if(c.getMorality() > 66)
+                            c.say(t, "I wanted... to go out fighting like a hero...");
+                        else
+                        if(c.getMorality() > 33)
+                            c.say(t, "I guess... I might not have any choice...");
+                        else
+                            c.say(t, "Ugh...  What else can I do to make them kill me...?");
+                    }
+                } else
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.STRUGGLE, Project.Emotion.FEAR);
+                    if(c.finalAttacked % 3 == 0)
+                    {
+                        if(c.getInnocence() > 66)
+                            c.say(t, "I'm sorry!  I'm sorry!  Please just kill meee!");
+                        else
+                        if(c.getInnocence() > 33)
+                            c.say(t, "Gah!  P-Please, nooo!");
+                        else
+                            c.say(t, "N-No!  This is e-excessive!");
+                    } else
+                    if(c.finalAttacked % 3 == 1)
+                    {
+                        if(c.getDignity() > 66)
+                            c.say(t, "S-Stop, I'm... already...");
+                        else
+                        if(c.getDignity() > 33)
+                            c.say(t, "N-No more...!");
+                        else
+                            c.say(t, "Ow...");
+                    } else
                     if(c.getMorality() > 66)
-                        c.say(t, "I wanted... to go out fighting like a hero...");
+                        c.say(t, "I d-deserve this...");
                     else
                     if(c.getMorality() > 33)
-                        c.say(t, "I guess... I might not have any choice...");
+                        c.say(t, "I can't, I can't...");
                     else
-                        c.say(t, "Ugh...  What else can I do to make them kill me...?");
-                } else
-                if(c.finalAttacked % 3 == 0)
-                {
-                    if(c.getInnocence() > 66)
-                        c.say(t, "I'm sorry!  I'm sorry!  Please just kill meee!");
-                    else
-                    if(c.getInnocence() > 33)
-                        c.say(t, "Gah!  P-Please, nooo!");
-                    else
-                        c.say(t, "N-No!  This is e-excessive!");
-                } else
-                if(c.finalAttacked % 3 == 1)
-                {
-                    if(c.getDignity() > 66)
-                        c.say(t, "S-Stop, I'm... already...");
-                    else
-                    if(c.getDignity() > 33)
-                        c.say(t, "N-No more...!");
-                    else
-                        c.say(t, "Ow...");
-                } else
-                if(c.getMorality() > 66)
-                    c.say(t, "I d-deserve this...");
-                else
-                if(c.getMorality() > 33)
-                    c.say(t, "I can't, I can't...");
-                else
-                    c.say(t, "I-I'll do anything, just stop!");
+                        c.say(t, "I-I'll do anything, just stop!");
+                }
             } else
             if(c.getConfidence() > 66)
             {
                 if(c.finalAttacked % 3 == 0)
                 {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
                     if(c.getInnocence() > 66)
                         c.say(t, "I'm supposed to be the strongest!  So why...?");
                     else
@@ -23048,6 +24428,7 @@ public class WorldState
                 } else
                 if(c.finalAttacked % 3 == 1)
                 {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.STRUGGLE, Project.Emotion.ANGER);
                     if(c.getDignity() > 66)
                         c.say(t, "R-Ridiculous!");
                     else
@@ -23057,17 +24438,25 @@ public class WorldState
                         c.say(t, "Ergh!");
                 } else
                 if(c.getMorality() > 66)
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                     c.say(t, "I can't... can't die when so many people are counting on me...!");
-                else
+                } else
                 if(c.getMorality() > 33)
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.SHAME);
                     c.say(t, "I could actually die after all...");
-                else
+                } else
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.FEAR);
                     c.say(t, "I'll kill you before you can kill me!");
+                }
             } else
             if(c.getConfidence() > 33)
             {
                 if(c.finalAttacked % 3 == 0)
                 {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                     if(c.getInnocence() > 66)
                         c.say(t, "N-No fair!  You got way too strong!");
                     else
@@ -23078,6 +24467,7 @@ public class WorldState
                 } else
                 if(c.finalAttacked % 3 == 1)
                 {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                     if(c.getDignity() > 66)
                         c.say(t, "I won't let something like this kill me!");
                     else
@@ -23087,40 +24477,50 @@ public class WorldState
                         c.say(t, "I could die here...");
                 } else
                 if(c.getMorality() > 66)
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.STRUGGLE, Project.Emotion.FOCUS);
                     c.say(t, "For everyone's sake, I can't give in!");
+                } else
+                if(c.getMorality() > 33)
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.STRUGGLE, Project.Emotion.FOCUS);
+                    c.say(t, "I'm not done yet!");
+                } else
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.STRUGGLE, Project.Emotion.ANGER);
+                    c.say(t, "This is... ergh... really getting on my nerves...");
+                }
+            } else
+            {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
+                if(c.finalAttacked % 3 == 0)
+                {
+                    if(c.getInnocence() > 66)
+                        c.say(t, "I'm scared!  I'm really scared!");
+                    else
+                    if(c.getInnocence() > 33)
+                        c.say(t, "Aaah, no!");
+                    else
+                        c.say(t, "My odds of survival... a-are dropping quickly...");
+                } else
+                if(c.finalAttacked % 3 == 1)
+                {
+                    if(c.getDignity() > 66)
+                        c.say(t, "I need to stop pretending I can take this...!");
+                    else
+                    if(c.getDignity() > 33)
+                        c.say(t, "I need to call for help!");
+                    else
+                        c.say(t, "Help!  Someone, save me!");
+                } else
+                if(c.getMorality() > 66)
+                    c.say(t, "I said I was willing to sacrifice my life... I really thought I was...");
                 else
                 if(c.getMorality() > 33)
-                    c.say(t, "I'm not done yet!");
+                    c.say(t, "This is too much for me after all...");
                 else
-                    c.say(t, "This is... ergh... really getting on my nerves...");
-            } else
-            if(c.finalAttacked % 3 == 0)
-            {
-                if(c.getInnocence() > 66)
-                    c.say(t, "I'm scared!  I'm really scared!");
-                else
-                if(c.getInnocence() > 33)
-                    c.say(t, "Aaah, no!");
-                else
-                    c.say(t, "My odds of survival... a-are dropping quickly...");
-            } else
-            if(c.finalAttacked % 3 == 1)
-            {
-                if(c.getDignity() > 66)
-                    c.say(t, "I need to stop pretending I can take this...!");
-                else
-                if(c.getDignity() > 33)
-                    c.say(t, "I need to call for help!");
-                else
-                    c.say(t, "Help!  Someone, save me!");
-            } else
-            if(c.getMorality() > 66)
-                c.say(t, "I said I was willing to sacrifice my life... I really thought I was...");
-            else
-            if(c.getMorality() > 33)
-                c.say(t, "This is too much for me after all...");
-            else
-                c.say(t, "This is crazy!  I-I'm not gonna die here!");
+                    c.say(t, "This is crazy!  I-I'm not gonna die here!");
+            }
         }
         c.say(t, "\"");
         c.finalAttacked = c.finalAttacked + 1;
@@ -23182,11 +24582,12 @@ public class WorldState
             c.say(t, "\n\n\"");
             if(c.getDignity() > 66)
             {
+                Project.changePortrait(c.type, Boolean.valueOf(true), Boolean.valueOf(true), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.SHAME);
                 if(c.getMorality() > 66)
                 {
                     c.say(t, "I was supposed to be ");
                     corruptColors(c);
-                    c.say(t, "their saviors...");
+                    c.say(t, "their savior...");
                 } else
                 if(c.getMorality() > 33)
                 {
@@ -23202,6 +24603,7 @@ public class WorldState
             } else
             if(c.getDignity() > 33)
             {
+                Project.changePortrait(c.type, Boolean.valueOf(true), Boolean.valueOf(true), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.FEAR);
                 if(c.getInnocence() > 66)
                 {
                     c.say(t, "Huh!?  What's happening!?  ");
@@ -23222,17 +24624,20 @@ public class WorldState
             } else
             if(c.getInnocence() > 66)
             {
+                Project.changePortrait(c.type, Boolean.valueOf(true), Boolean.valueOf(true), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.FEAR);
                 c.say(t, "Huh!?  My punches are supposed to be way, way stronger than that!  Hey, let go of me!  ");
                 corruptColors(c);
                 c.say(t, "Let gooo!");
             } else
             if(c.getInnocence() > 33)
             {
+                Project.changePortrait(c.type, Boolean.valueOf(true), Boolean.valueOf(true), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.FEAR);
                 c.say(t, "Wh-What!?  No...  No, ");
                 corruptColors(c);
                 c.say(t, "this can't be happening!");
             } else
             {
+                Project.changePortrait(c.type, Boolean.valueOf(true), Boolean.valueOf(true), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.SHAME);
                 c.say(t, "Hmph.  It seems... ");
                 corruptColors(c);
                 c.say(t, "I have been utterly defeated...");
@@ -23246,15 +24651,23 @@ public class WorldState
                 if(c.finalTaunted % 3 == 0)
                 {
                     if(c.getInnocence() > 66)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.ANGER);
                         c.say(t, "Th-They keep making fun of me, over and over again...  Stop it, stop it...!");
-                    else
+                    } else
                     if(c.getInnocence() > 33)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.FEAR);
                         c.say(t, "There must be so many people watching...");
-                    else
+                    } else
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.SHAME);
                         c.say(t, "Even now, they continue to take me so lightly...");
+                    }
                 } else
                 if(c.finalTaunted % 3 == 1)
                 {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
                     if(c.getMorality() > 66)
                         c.say(t, "Everyone... thought they could count on me...");
                     else
@@ -23264,6 +24677,8 @@ public class WorldState
                         c.say(t, "They used to be afraid of me.  But now...");
                 } else
                 if(c.finalTaunted % 3 == 2)
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
                     if(c.getConfidence() > 66)
                         c.say(t, "I'm... supposed to be strong...!");
                     else
@@ -23271,30 +24686,47 @@ public class WorldState
                         c.say(t, "I wasn't as strong as they thought I was...");
                     else
                         c.say(t, "I was never actually strong in the first place...");
+                }
             } else
             if(c.getDignity() > 33)
             {
                 if(c.finalTaunted % 3 == 0)
                 {
                     if(c.getInnocence() > 66)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
                         c.say(t, "Stop... messing with me...");
-                    else
+                    } else
                     if(c.getInnocence() > 33)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.STRUGGLE, Project.Emotion.FEAR);
                         c.say(t, "I need to stop them...!");
-                    else
+                    } else
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.ANGER);
                         c.say(t, "Stop this foolishness!  Stop!");
+                    }
                 } else
                 if(c.finalTaunted % 3 == 1)
                 {
                     if(c.getMorality() > 66)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
                         c.say(t, "I should be able to ignore them and focus on saving everyone, but...");
-                    else
+                    } else
                     if(c.getMorality() > 33)
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                         c.say(t, "You're still doing this...!");
-                    else
+                    } else
+                    {
+                        Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                         c.say(t, "I won't let them get away with this...!");
+                    }
                 } else
                 if(c.finalTaunted % 3 == 2)
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
                     if(c.getConfidence() > 66)
                         c.say(t, "I just need to... believe in myself...!");
                     else
@@ -23302,28 +24734,45 @@ public class WorldState
                         c.say(t, "I can't let them get to me...");
                     else
                         c.say(t, "I know I'm weak, stop rubbing it in my face!");
+                }
             } else
             if(c.finalTaunted % 3 == 0)
             {
                 if(c.getInnocence() > 66)
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
                     c.say(t, "Ah...  I don't really care anymore...");
-                else
+                } else
                 if(c.getInnocence() > 33)
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
                     c.say(t, "I guess I had this coming...");
-                else
+                } else
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                     c.say(t, "The Demon Lord is targeting my supply of psychic energy!");
+                }
             } else
             if(c.finalTaunted % 3 == 1)
             {
                 if(c.getMorality() > 66)
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
                     c.say(t, "I deserve this...");
-                else
+                } else
                 if(c.getMorality() > 33)
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.ANGER);
                     c.say(t, "I think I recognize a few of my fans...");
-                else
+                } else
+                {
+                    Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.SHAME);
                     c.say(t, "Go on, laugh while you can!");
+                }
             } else
             if(c.finalTaunted % 3 == 2)
+            {
+                Project.changePortrait(c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
                 if(c.getConfidence() > 66)
                     c.say(t, "Hah, I think I've become the biggest laughingstock in the city...");
                 else
@@ -23331,6 +24780,7 @@ public class WorldState
                     c.say(t, "Are my powers getting weaker...?");
                 else
                     c.say(t, "I guess they're not wrong about me...");
+            }
         }
         c.say(t, "\"");
         c.finalTaunted = c.finalTaunted + 1;
@@ -23384,17 +24834,20 @@ public class WorldState
             c.say(t, "\"");
             if(c.morality > 66)
             {
+                Project.changePortrait(c.type, Boolean.valueOf(true), Boolean.valueOf(true), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.SHAME);
                 c.say(t, "Of my own free will, I choose to become one of... ");
                 corruptColors(c);
                 c.say(t, "the Forsaken.");
             } else
             if(c.morality > 33)
             {
+                Project.changePortrait(c.type, Boolean.valueOf(true), Boolean.valueOf(true), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.JOY, Project.Emotion.JOY);
                 c.say(t, "Heh.  What would you do ");
                 corruptColors(c);
                 c.say(t, "without me?");
             } else
             {
+                Project.changePortrait(c.type, Boolean.valueOf(true), Boolean.valueOf(true), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.JOY, Project.Emotion.JOY);
                 c.say(t, "We're going to have... ");
                 corruptColors(c);
                 c.say(t, "lots of fun.");
@@ -23404,6 +24857,7 @@ public class WorldState
         {
             append(t, (new StringBuilder("Deliberately releasing ")).append(c.hisHer()).append(" transformation, ").append(c.mainName).append(" entrusts ").append(c.hisHer()).append(" naked body to the Thralls.  They briefly lay their hands on ").append(c.himHer()).append(", bringing ").append(c.himHer()).append(" to a quick and very satisfying orgasm, but they need to return their attention to the fight, so they happily part ways while ").append(c.mainName).append(" makes ").append(c.hisHer()).append(" way to the hive in order to present ").append(c.himHer()).append("self to you.\n\n").toString());
             c.say(t, "\"");
+            Project.changePortrait(c.type, Boolean.valueOf(true), Boolean.valueOf(true), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.JOY, Project.Emotion.JOY);
             if(c.morality > 66)
             {
                 c.say(t, "I think of you all as... ");
@@ -23424,6 +24878,7 @@ public class WorldState
         } else
         {
             append(t, (new StringBuilder("Overcome by emotion, ")).append(c.mainName).append(" is no longer able to maintain ").append(c.hisHer()).append(" Chosen transformation.  ").append(c.HisHer()).append(" clothes fade away, and ").append(c.heShe()).append("'s briefly startled, but then ").append(c.heShe()).append(" smiles with gratitude at the Thrall who hands ").append(c.himHer()).append(" a coat, and ").append(c.heShe()).append(" feels oddly happy as ").append(c.heShe()).append(" begins the walk back to the hive.\n\n").toString());
+            Project.changePortrait(c.type, Boolean.valueOf(true), Boolean.valueOf(true), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.JOY, Project.Emotion.JOY);
             if(c.morality > 66)
             {
                 c.say(t, "You've been so kind to me.  I promise to make it up to you... ");
@@ -23622,6 +25077,11 @@ public class WorldState
                     append(t, (new StringBuilder("The pain and the despair shatter what's left of ")).append(first.getMainName()).append("'s mind into pieces.  ").append(first.HeShe()).append(" descends further and further into violent fantasies in order to occupy ").append(first.himHer()).append("self, trying to forget ").append(first.hisHer()).append(" miserable situation.\n\n").toString());
                     first.say(t, "(I'll kill them all... hahahah, yes, yes, kill them, tear them apart, devour their warm, warm guts!)");
                 }
+                Project.clearPortraits();
+                String nameDisplay[] = {
+                    first.mainName, 0, 0, 0, 0
+                };
+                Project.changePortrait(first.type, Boolean.valueOf(true), Boolean.valueOf(false), this, nameDisplay, 0, Project.Emotion.SWOON, Project.Emotion.SWOON);
                 save.saveScene(4, (new StringBuilder(String.valueOf(first.mainName))).append(" Sealed").toString(), (new StringBuilder("In order to prevent the monstrous child of the Demon Lord and one of the Chosen from being born, ")).append(first.mainName).append(" is locked away in cold storage...").toString());
             }
         } else
@@ -23672,6 +25132,11 @@ public class WorldState
                     append(t, (new StringBuilder(String.valueOf(first.getMainName()))).append(" is no longer receiving any psychic energy as one of the Chosen, but public's growing terror after every attack is turning ").append(first.himHer()).append(" into something different - neither Chosen nor Demon, and too strong for either side to want to oppose.  ").append(first.HeShe()).append(" hasn't yet realized that ").append(first.heShe()).append("'s starting to grow horns and fangs.\n\n").toString());
                     first.say(t, "\"Working alone is nice.  I don't have to worry about what anyone else says.\"\n\n");
                 }
+                Project.clearPortraits();
+                String nameDisplay[] = {
+                    first.mainName, 0, 0, 0, 0
+                };
+                Project.changePortrait(first.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 0, Project.Emotion.FOCUS, Project.Emotion.FOCUS);
                 if(first.getInnocence() > 66)
                 {
                     append(t, (new StringBuilder(String.valueOf(first.HeShe()))).append(" smiles through the blood spattering ").append(first.hisHer()).append(" face.  For the first time in a long while, ").append(first.getMainName()).append(" is truly happy.\n\n").toString());
@@ -23683,6 +25148,7 @@ public class WorldState
                     first.say(t, "\"I need to stop second-guessing myself.  Everything worked out alright, and that's that.\"");
                 } else
                 {
+                    Project.changePortrait(first.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 0, Project.Emotion.FEAR, Project.Emotion.FEAR);
                     append(t, (new StringBuilder(String.valueOf(first.HeShe()))).append(" can't help but notice the inconsistencies sometimes, and there are even nights that ").append(first.heShe()).append(" briefly returns to full horrified lucidity.  But when ").append(first.heShe()).append(" realizes that it's too late to go back to a normal life, ").append(first.heShe()).append(" willingly sinks back into ").append(first.hisHer()).append(" delusions, incapable of facing the reality that ").append(first.heShe()).append("'s become a monster.\n\n").toString());
                     first.say(t, "\"The dark thoughts are coming back... h-hurry, I need to find more 'Demons' to kill, or else I'll...!\"");
                 }
@@ -23693,6 +25159,7 @@ public class WorldState
         {
             if(second == null)
             {
+                Project.clearPortraits();
                 append(t, "In a location undisclosed to the public, sealed within a region of space pinched off from the rest of reality, fragments of a holographic cathedral float in an endless sea of brilliant light.  A lone wooden doorway serves to connect it to the outside world.  The perfect silence and serenity of the scene are broken when the door opens, revealing concrete walls and fluorescent lighting on the other side.\n\nA man in a military uniform steps through.  His task was to deliver a message, but his voice dies in his throat as he sees the glowing figure kneeling at the altar before him.  Overcome with reverence, he drops to his knees as well, the door swinging shut behind him.\n\nFor several moments, silence reclaims the cathedral.  The messenger feels that he is unworthy to look directly at the one before him - unworthy to even exist in her presence.  He wants to gouge out his own eyes for daring to even glance in her direction.  But to soothe his shame in such a grotesque manner would itself be even more shameful, and he wants to beat his brains out against the marble floor for thinking such unworthy thoughts.  His mind continues to spiral inward and downward until a voice from above reminds him of his mission.\n\n");
                 orangeAppend(t, "\"You may speak.\"\n\n");
                 append(t, "The voice is quiet, calm, and androgynous.  The messenger shudders as he feels its beauty wash over him, but the implicit command in its words helps to keep him from being struck speechless a second time.  He had planned out exactly how he'd word his message before he came here, but now that he's been asked to speak, the words come out in a disorganized jumble.\n\n");
@@ -23726,7 +25193,11 @@ public class WorldState
                     append(t, "Silence once again stretches for several moments as the messenger cringes and stares at the floor.  Finally, Crown lets out a sigh and then responds.\n\n");
                     orangeAppend(t, (new StringBuilder("\"This outcome is far from ideal, but it is not a complete loss.  When the Chosen martyr themselves, the resulting Holy Energy is considerable.  Go, and tell my lieutenants that ")).append(first.getMainName()).append("'s sacrifice shall drive us onward.\"").toString());
                 }
-                save.saveScene(4, "Crown", (new StringBuilder("Following ")).append(first.getMainName()).append("'s death in battle, the leader of the Council of Ten reflects on the ramifications for the war as a whole.").toString());
+                String nameDisplay[] = {
+                    "Crown", 0, 0, 0, 0
+                };
+                Project.changePortrait(null, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 0, Project.Emotion.NEUTRAL, Project.Emotion.NEUTRAL);
+                save.saveScene(4, (new StringBuilder("Crown hears of ")).append(first.getMainName()).toString(), (new StringBuilder("Following ")).append(first.getMainName()).append("'s death in battle, the leader of the Council of Ten reflects on the ramifications for the war as a whole.").toString());
             }
         } else
         if(type == 4 && second == null)
@@ -23782,6 +25253,11 @@ public class WorldState
             if(first.vVirg.booleanValue() && !first.gender.equals("male"))
                 append(t, (new StringBuilder("stealing the virginity ")).append(first.heShe()).append(" had worked so hard to protect, and ").toString());
             append(t, "squirting copious amounts of slime inside.  ");
+            Project.clearPortraits();
+            String nameDisplay[] = {
+                first.mainName, 0, 0, 0, 0
+            };
+            Project.changePortrait(first.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 0, Project.Emotion.LEWD, Project.Emotion.LEWD);
             if(first.getConfidence() > 66)
             {
                 append(t, (new StringBuilder("The rough insertion is painful, but ")).append(first.getGivenName()).append(" still grits ").append(first.hisHer()).append(" teeth and struggles with all ").append(first.hisHer()).append(" might, refusing to accept ").append(first.hisHer()).append(" fate even as ").append(first.heShe()).append("'s dragged back to the Demonic hive.\n\n").toString());
@@ -23798,9 +25274,13 @@ public class WorldState
             }
             append(t, (new StringBuilder("Before long, the slime takes effect, and ")).append(first.getGivenName()).append(" is turned into an obedient Thrall, ").toString());
             if(first.gender.equals("female"))
+            {
                 append(t, "learning to enjoy giving birth to countless Demons every day.");
-            else
+            } else
+            {
+                Project.changePortrait(first.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 0, Project.Emotion.FOCUS, Project.Emotion.FOCUS);
                 append(t, "venturing back up to the city every day to help torment the Chosen tasked with defending it.");
+            }
             save.saveScene(4, (new StringBuilder(String.valueOf(first.givenName))).append(" the Thrall").toString(), (new StringBuilder("Stripped of ")).append(first.hisHer()).append(" powers, the civilian once known as ").append(first.mainName).append(" is captured by the Demons and turned into an eager slave.").toString());
         }
     }
@@ -23841,6 +25321,7 @@ public class WorldState
         femaleShift = 0;
         repeatShift = Boolean.valueOf(true);
         tickleOn = Boolean.valueOf(false);
+        portraits = Boolean.valueOf(true);
         disableAdaptations = Boolean.valueOf(false);
         totalThreatened = 0;
         totalSlimed = 0;
@@ -23944,6 +25425,7 @@ public class WorldState
     int femaleShift;
     Boolean repeatShift;
     Boolean tickleOn;
+    Boolean portraits;
     Boolean disableAdaptations;
     String shopTutorial;
     String groupTutorial;
