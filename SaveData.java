@@ -13,19 +13,20 @@ public class SaveData
         harem = new Forsaken[0];
         forsakenMade = 0;
         chosenMade = 0;
-        sceneText = new String[46][0][0];
-        sceneColor = new Color[46][0][0];
-        sceneUnderline = new Boolean[46][0][0];
+        sceneText = new String[48][0][0];
+        sceneColor = new Color[48][0][0];
+        sceneUnderline = new Boolean[48][0][0];
         currentText = new String[0];
         currentColor = new Color[0];
         currentUnderline = new Boolean[0];
-        sceneButtons = new String[46][0];
-        sceneSummaries = new String[46][0];
-        sceneEmotions = new Project.Emotion[46][0][5];
-        sceneFaces = new String[46][0][5];
-        sceneSpecs = new Chosen.Species[46][0][5];
-        sceneCivs = new Boolean[46][0][5];
-        sceneFallen = new Boolean[46][0][5];
+        sceneButtons = new String[48][0];
+        sceneSummaries = new String[48][0];
+        sceneEmotions = new Project.Emotion[48][0][5];
+        sceneFaces = new String[48][0][5];
+        sceneSpecs = new Chosen.Species[48][0][5];
+        sceneCivs = new Boolean[48][0][5];
+        sceneFallen = new Boolean[48][0][5];
+        sceneGenders = new Forsaken.Gender[48][0][5];
     }
 
     public void organizeScenes(int scenesThisVersion)
@@ -41,6 +42,7 @@ public class SaveData
         Chosen.Species newSceneSpecs[][][] = new Chosen.Species[scenesThisVersion][0][5];
         Boolean newSceneCivs[][][] = new Boolean[scenesThisVersion][0][5];
         Boolean newSceneFallen[][][] = new Boolean[scenesThisVersion][0][5];
+        Forsaken.Gender newSceneGenders[][][] = new Forsaken.Gender[scenesThisVersion][0][5];
         if(sceneText != null)
         {
             for(int i = 0; i < sceneText.length; i++)
@@ -65,6 +67,10 @@ public class SaveData
                     newSceneCivs[i] = new Boolean[sceneText[i].length][5];
                     newSceneFallen[i] = new Boolean[sceneText[i].length][5];
                 }
+                if(sceneGenders != null)
+                    newSceneGenders[i] = sceneGenders[i];
+                else
+                    newSceneGenders[i] = new Forsaken.Gender[sceneText[i].length][5];
             }
 
         }
@@ -78,6 +84,7 @@ public class SaveData
         sceneSpecs = newSceneSpecs;
         sceneCivs = newSceneCivs;
         sceneFallen = newSceneFallen;
+        sceneGenders = newSceneGenders;
     }
 
     public void newScene()
@@ -135,6 +142,7 @@ public class SaveData
             Chosen.Species newSpecs[][] = new Chosen.Species[sceneSpecs[type].length + 1][5];
             Boolean newCivs[][] = new Boolean[sceneCivs[type].length + 1][5];
             Boolean newFallen[][] = new Boolean[sceneFallen[type].length + 1][5];
+            Forsaken.Gender newGenders[][] = new Forsaken.Gender[sceneGenders[type].length + 1][5];
             for(int i = 0; i < sceneText[type].length; i++)
             {
                 newText[i] = sceneText[type][i];
@@ -147,6 +155,7 @@ public class SaveData
                 newSpecs[i] = sceneSpecs[type][i];
                 newCivs[i] = sceneCivs[type][i];
                 newFallen[i] = sceneFallen[type][i];
+                newGenders[i] = sceneGenders[type][i];
             }
 
             newText[sceneText[type].length] = currentText;
@@ -159,6 +168,7 @@ public class SaveData
             newSpecs[sceneSpecs[type].length] = Project.displayedType;
             newCivs[sceneCivs[type].length] = Project.displayedCivilians;
             newFallen[sceneFallen[type].length] = Project.displayedFallen;
+            newGenders[sceneGenders[type].length] = Project.displayedGender;
             sceneText[type] = newText;
             sceneColor[type] = newColor;
             sceneUnderline[type] = newUnderline;
@@ -169,6 +179,7 @@ public class SaveData
             sceneSpecs[type] = newSpecs;
             sceneCivs[type] = newCivs;
             sceneFallen[type] = newFallen;
+            sceneGenders[type] = newGenders;
             WriteObject wobj = new WriteObject();
             wobj.serializeSaveData(this);
         }
@@ -355,4 +366,5 @@ public class SaveData
     Chosen.Species sceneSpecs[][][];
     Boolean sceneCivs[][][];
     Boolean sceneFallen[][][];
+    Forsaken.Gender sceneGenders[][][];
 }
