@@ -27,6 +27,7 @@ public class SaveData
         sceneCivs = new Boolean[48][0][5];
         sceneFallen = new Boolean[48][0][5];
         sceneGenders = new Forsaken.Gender[48][0][5];
+        customRoster = new Chosen[0];
     }
 
     public void organizeScenes(int scenesThisVersion)
@@ -367,4 +368,5 @@ public class SaveData
     Boolean sceneCivs[][][];
     Boolean sceneFallen[][][];
     Forsaken.Gender sceneGenders[][][];
+    Chosen customRoster[];
 }

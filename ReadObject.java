@@ -134,6 +134,128 @@ public class ReadObject
         return worlds;
     }
 
+    public Chosen[][] importRoster()
+    {
+        Chosen additions[][];
+        FileInputStream fin;
+        ObjectInputStream ois;
+        File matchingFiles[];
+        additions = new Chosen[0][0];
+        fin = null;
+        ois = null;
+        String path = Project.getProtectionDomain().getCodeSource().getLocation().getPath();
+        String fileName = "";
+        for(int i = path.length() - 1; i >= 0; i--)
+            if(path.charAt(i) != '/')
+                fileName = (new StringBuilder(String.valueOf(path.charAt(i)))).append(fileName).toString();
+            else
+                i = -1;
+
+        path = path.substring(0, path.length() - fileName.length() - 1);
+        try
+        {
+            path = URLDecoder.decode(path, "UTF-8");
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+        path = path.replaceAll("file:/", "");
+        path = path.replaceAll((new StringBuilder(String.valueOf(File.separator))).append("u0020").toString(), (new StringBuilder(String.valueOf(File.separator))).append(" ").toString());
+        File f = new File(path);
+        matchingFiles = f.listFiles(new FilenameFilter() {
+
+            public boolean accept(File dir, String name)
+            {
+                return name.endsWith("ros");
+            }
+
+            final ReadObject this$0;
+
+            
+            {
+                this$0 = ReadObject.this;
+                super();
+            }
+        });
+        try
+        {
+            Chosen newAdditions[][] = new Chosen[matchingFiles.length][0];
+            for(int i = 0; i < matchingFiles.length; i++)
+            {
+                fin = new FileInputStream(matchingFiles[i]);
+                ois = new ObjectInputStream(fin);
+                newAdditions[i] = (Chosen[])ois.readObject();
+            }
+
+            additions = newAdditions;
+            break MISSING_BLOCK_LABEL_376;
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+        if(fin != null)
+            try
+            {
+                fin.close();
+            }
+            catch(IOException e)
+            {
+                e.printStackTrace();
+            }
+        if(ois != null)
+            try
+            {
+                ois.close();
+            }
+            catch(IOException e)
+            {
+                e.printStackTrace();
+            }
+        break MISSING_BLOCK_LABEL_412;
+        Exception exception;
+        exception;
+        if(fin != null)
+            try
+            {
+                fin.close();
+            }
+            catch(IOException e)
+            {
+                e.printStackTrace();
+            }
+        if(ois != null)
+            try
+            {
+                ois.close();
+            }
+            catch(IOException e)
+            {
+                e.printStackTrace();
+            }
+        throw exception;
+        if(fin != null)
+            try
+            {
+                fin.close();
+            }
+            catch(IOException e)
+            {
+                e.printStackTrace();
+            }
+        if(ois != null)
+            try
+            {
+                ois.close();
+            }
+            catch(IOException e)
+            {
+                e.printStackTrace();
+            }
+        return additions;
+    }
+
     public SaveData deserializeSaveData(String filename)
     {
         SaveData s;

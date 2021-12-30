@@ -631,6 +631,7 @@ public class WorldState
 
     public String getCityName(int index)
     {
+        index %= 47;
         String result = "";
         if(index == 0)
             result = "Nagano";
@@ -6590,15 +6591,16 @@ public class WorldState
         victim.surrounded = Boolean.valueOf(false);
         victim.captured = Boolean.valueOf(false);
         readyToEnd = Boolean.valueOf(false);
-        if(killer.firstKilled == null)
+        Chosen newKills[] = new Chosen[killer.kills.length + 1];
+        int newRelations[] = new int[killer.killRelationships.length + 1];
+        for(int i = 0; i < killer.kills.length; i++)
         {
-            killer.firstKilled = victim;
-            killer.firstKilledRelationship = getRelationship(killer.getNumber(), victim.getNumber());
-        } else
-        {
-            killer.secondKilled = victim;
-            killer.secondKilledRelationship = getRelationship(killer.getNumber(), victim.getNumber());
+            newKills[i] = killer.kills[i];
+            newRelations[i] = killer.killRelationships[i];
         }
+
+        newKills[killer.kills.length] = victim;
+        newRelations[killer.killRelationships.length] = getRelationship(killer.getNumber(), victim.getNumber());
     }
 
     public void toggleAdaptations()
@@ -10140,6 +10142,435 @@ public class WorldState
                     w.append(t, (new StringBuilder("  There are rapid flashes of light as your cameras take detailed photographs of ")).append(c.hisHer()).append(" humiliation from every possible angle.").toString());
             }
         }
+    }
+
+    public void Examine(JTextPane t, JPanel p, JFrame f, Chosen c)
+    {
+        WorldState w = this;
+        String breasts = "breasts";
+        if(c.gender.equals("male"))
+            breasts = "nipples";
+        w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\n").toString());
+        if((c.surrounded.booleanValue() || c.captured.booleanValue()) && (c.previousFEAR > 0L || c.previousDISG > 0L || c.previousPAIN > 0L || c.previousSHAM > 0L || c.previousHATE > 0L || c.previousPLEA > 0L || c.previousINJU > 0L || c.previousEXPO > 0L))
+        {
+            w.append(t, "Previous ");
+            if(c.surrounded.booleanValue())
+                w.append(t, "Surround");
+            else
+                w.append(t, "Capture");
+            w.append(t, (new StringBuilder(" Damage\nFEAR: ")).append(c.fixedFormat(c.previousFEAR)).append("  HATE: ").append(c.fixedFormat(c.previousHATE)).append("\nDISG: ").append(c.fixedFormat(c.previousDISG)).append("  PLEA: ").append(c.fixedFormat(c.previousPLEA)).append("\n").toString());
+            if(w.tickle().booleanValue())
+                w.append(t, (new StringBuilder("TICK: ")).append(c.fixedFormat(c.previousPAIN)).append("  ANTI: ").append(c.fixedFormat(c.previousINJU)).append("\n").toString());
+            else
+                w.append(t, (new StringBuilder("PAIN: ")).append(c.fixedFormat(c.previousPAIN)).append("  INJU: ").append(c.fixedFormat(c.previousINJU)).append("\n").toString());
+            w.append(t, (new StringBuilder("SHAM: ")).append(c.fixedFormat(c.previousSHAM)).append("  EXPO: ").append(c.fixedFormat(c.previousEXPO)).append("\n\n").toString());
+        }
+        w.append(t, c.mainName);
+        if(c.captured.booleanValue())
+        {
+            if(c.getHATELevel() == 0)
+                w.append(t, " is struggling to escape the clutches of your Commander body.  ");
+            else
+            if(c.getHATELevel() == 1)
+                w.append(t, (new StringBuilder("'s eyes are narrowed with annoyance as ")).append(c.heShe()).append(" struggles to escape your Commander body.  ").toString());
+            else
+            if(c.getHATELevel() == 2)
+                w.append(t, (new StringBuilder(" is fuming with anger as ")).append(c.heShe()).append(" struggles to escape your Commander body.  ").toString());
+            else
+            if(c.getHATELevel() == 3)
+                w.append(t, (new StringBuilder(" is violently lashing out at anyone who strays too close to ")).append(c.hisHer()).append(" struggle with your Commander body.  ").toString());
+            else
+            if(c.getHATELevel() == 4)
+                w.append(t, (new StringBuilder(" is screaming madly, overwhelmed by emotion, as ")).append(c.heShe()).append(" struggles to escape your Commander body.  ").toString());
+            else
+                w.append(t, (new StringBuilder("'s body is erupting with Demonic energy, a sign of ")).append(c.hisHer()).append(" hateful state of mind, as ").append(c.heShe()).append(" struggles to escape your Commander.  ").toString());
+        } else
+        if(c.surrounded.booleanValue())
+        {
+            if(c.getHATELevel() == 0)
+                w.append(t, (new StringBuilder(" is struggling to escape the Thralls surrounding ")).append(c.himHer()).append(".  ").toString());
+            else
+            if(c.getHATELevel() == 1)
+                w.append(t, (new StringBuilder("'s eyes are narrowed with annoyance as ")).append(c.heShe()).append(" struggles to escape the Thralls surrounding ").append(c.himHer()).append(".  ").toString());
+            else
+            if(c.getHATELevel() == 2)
+                w.append(t, (new StringBuilder(" is fuming with anger as ")).append(c.heShe()).append(" struggles to escape the Thralls surrounding ").append(c.himHer()).append(".  ").toString());
+            else
+            if(c.getHATELevel() == 3)
+                w.append(t, (new StringBuilder(" is violently lashing out at anyone who strays too close to ")).append(c.hisHer()).append(" struggle with the Thralls surrounding ").append(c.himHer()).append(".  ").toString());
+            else
+            if(c.getHATELevel() == 4)
+                w.append(t, (new StringBuilder(" is screaming madly, overwhelmed by emotion, as ")).append(c.heShe()).append(" struggles to escape the Thralls surrounding ").append(c.himHer()).append(".  ").toString());
+            else
+                w.append(t, (new StringBuilder("'s body is erupting with Demonic energy, a sign of ")).append(c.hisHer()).append(" hateful state of mind, as ").append(c.heShe()).append(" struggles to escape the Thralls surrounding ").append(c.himHer()).append(".  ").toString());
+        } else
+        if(c.getHATELevel() == 0)
+            w.append(t, (new StringBuilder(" is doing ")).append(c.hisHer()).append(" best to stay focused.  ").toString());
+        else
+        if(c.getHATELevel() == 1)
+            w.append(t, "'s eyes are narrowed with annoyance.  ");
+        else
+        if(c.getHATELevel() == 2)
+            w.append(t, "'s teeth are clenched with hatred.  ");
+        else
+        if(c.getHATELevel() == 3)
+            w.append(t, " is violently lashing out.  ");
+        else
+        if(c.getHATELevel() == 4)
+            w.append(t, (new StringBuilder(" is screaming madly as ")).append(c.hisHer()).append(" emotions overwhelm ").append(c.himHer()).append(".  ").toString());
+        else
+            w.append(t, (new StringBuilder("'s body is erupting with Demonic energy due to ")).append(c.hisHer()).append(" hateful state of mind.  ").toString());
+        if(c.getEXPOLevel() == 0 || c.getEXPOLevel() == 1)
+        {
+            if(c.getINJULevel() == 0)
+            {
+                if(c.weapon.equals("boots") || c.weapon.equals("fists") || c.weapon.equals("claws") || c.weapon.equals("gauntlets") || c.customWeaponType.equals("part"))
+                    w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s fighting at full strength, ").append(c.hisHer()).append(" ").append(c.weapon).append(" crackling with energy.  ").toString());
+                else
+                if(c.weapon.equals("spirits") || c.weapon.equals("monster") || c.customWeaponType.equals("command"))
+                {
+                    if(w.tickle().booleanValue())
+                        w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s still full of energy, allowing ").append(c.hisHer()).append(" ").append(c.weapon).append(" to do the fighting for ").append(c.himHer()).append(".  ").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s uninjured, allowing ").append(c.hisHer()).append(" ").append(c.weapon).append(" to do the fighting for ").append(c.himHer()).append(".  ").toString());
+                } else
+                {
+                    w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" fights with a firm grip on ").append(c.hisHer()).append(" ").append(c.weapon).append(".  ").toString());
+                }
+            } else
+            if(c.getINJULevel() == 1)
+            {
+                if(w.tickle().booleanValue())
+                    w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s grimacing with the effort of continuing to fight, especially when ").append(c.heShe()).append("'s poked some place sensitive.  ").toString());
+                else
+                    w.append(t, (new StringBuilder("Some bruises show on ")).append(c.hisHer()).append(" skin where they aren't covered by ").append(c.hisHer()).append(" ").append(c.topDesc()).append(".  ").toString());
+            } else
+            if(c.getINJULevel() == 2)
+            {
+                if(w.tickle().booleanValue())
+                    w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s demoralized by how the fight has gone so far, flinching reflexively from the Demons' attacks.  ").toString());
+                else
+                    w.append(t, (new StringBuilder("Blood is dripping from beneath ")).append(c.hisHer()).append(" ").append(c.topDesc()).append(".  ").toString());
+            } else
+            if(c.getINJULevel() == 3)
+            {
+                if(w.tickle().booleanValue())
+                    w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s gasping with exhaustion, chest heaving under ").append(c.hisHer()).append(" ").append(c.topDesc()).append(".  ").toString());
+                else
+                    w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" body is covered with deep wounds, though it's hard to see the full extent of them under ").append(c.hisHer()).append(" ").append(c.topDesc()).append(".  ").toString());
+            } else
+            if(c.getINJULevel() == 4)
+            {
+                if(w.tickle().booleanValue())
+                    w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s still spasming reflexively due to the intense stimulation ").append(c.heShe()).append("'s faced over the course of the battle.  ").toString());
+                else
+                    w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" body is shattered, and ").append(c.heShe()).append("'s only able to stay upright due to the magical power flowing through ").append(c.himHer()).append(".  ").toString());
+            } else
+            if(w.tickle().booleanValue())
+                w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s gasping with exhaustion due to the intense tickle torture ").append(c.heShe()).append("'s faced, only remaining conscious due to the magical power flowing through ").append(c.himHer()).append(".  ").toString());
+            else
+                w.append(t, (new StringBuilder("Moral wounds cover ")).append(c.hisHer()).append(" body, which only remains alive due to the magical power flowing through ").append(c.himHer()).append(".  ").toString());
+            if(c.getPLEALevel() == 0)
+            {
+                if(c.innocence > 66)
+                    w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" uses whatever tactics feel right, not thinking too hard about what ").append(c.heShe()).append("'s doing").toString());
+                else
+                if(c.innocence > 33)
+                    w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" acts to finish the battle as quickly as possible").toString());
+                else
+                    w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" acts with measured precision, choosing ").append(c.hisHer()).append(" tactics for maximum effectiveness").toString());
+                if(c.getEXPOLevel() == 1)
+                {
+                    w.append(t, " and trying not to think about how ");
+                    if(c.getINJULevel() > 0 && c.getINJULevel() < 4 && c.topDesc().equals(c.bottomDesc()))
+                        w.append(t, (new StringBuilder("the torn garment exposes so much of ")).append(c.hisHer()).append(" skin.").toString());
+                    else
+                        w.append(t, (new StringBuilder(String.valueOf(c.hisHer()))).append(" legs are completely exposed by ").append(c.hisHer()).append(" torn ").append(c.bottomDesc()).append(".").toString());
+                } else
+                {
+                    w.append(t, ".");
+                }
+            } else
+            if(c.getPLEALevel() == 1)
+            {
+                if(c.getEXPOLevel() == 0)
+                    w.append(t, (new StringBuilder("The blush rising in ")).append(c.hisHer()).append(" cheeks shows that ").append(c.heShe()).append("'s becoming aroused.").toString());
+                else
+                if(c.getINJULevel() > 0 && c.getINJULevel() < 4 && c.topDesc().equals(c.bottomDesc()))
+                    w.append(t, (new StringBuilder("The garment is torn, and perhaps because of how much of ")).append(c.hisHer()).append(" legs it now exposes, a blush has risen to ").append(c.hisHer()).append(" cheeks.").toString());
+                else
+                    w.append(t, (new StringBuilder("There's a deep blush in ")).append(c.hisHer()).append(" cheeks, perhaps because of how ").append(c.hisHer()).append(" legs are exposed by ").append(c.hisHer()).append(" torn ").append(c.bottomDesc()).append(".").toString());
+            } else
+            if(c.getPLEALevel() == 2)
+            {
+                if(c.getEXPOLevel() == 0)
+                    w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" breaths come in soft moans, betraying ").append(c.hisHer()).append(" strong sexual arousal.").toString());
+                else
+                if(c.getINJULevel() > 0 && c.getINJULevel() < 4 && c.topDesc().equals(c.bottomDesc()))
+                    w.append(t, (new StringBuilder("The garment is torn, revealing the way that ")).append(c.hisHer()).append(" legs tremble slightly with each moaning breath.").toString());
+                else
+                    w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" legs are visible through ").append(c.hisHer()).append(" torn ").append(c.bottomDesc()).append(", and they tremble slightly with each moaning breath.").toString());
+            } else
+            if(c.getPLEALevel() == 3)
+            {
+                if(c.gender.equals("female"))
+                {
+                    w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" love juices run down ").append(c.hisHer()).append(" thighs").toString());
+                    if(c.getEXPOLevel() == 0)
+                        w.append(t, (new StringBuilder(", though it's hard to tell beneath ")).append(c.hisHer()).append(" ").append(c.bottomDesc()).append(".").toString());
+                    else
+                    if(c.getINJULevel() > 0 && c.getINJULevel() < 4 && c.topDesc().equals(c.bottomDesc()))
+                        w.append(t, ", plainly visible through the torn garment.");
+                    else
+                        w.append(t, (new StringBuilder(", plainly visible through ")).append(c.hisHer()).append(" torn ").append(c.bottomDesc()).append(".").toString());
+                } else
+                if(c.getINJULevel() > 0 && c.getINJULevel() < 4 && c.topDesc().equals(c.bottomDesc()))
+                {
+                    w.append(t, "The ");
+                    if(c.getEXPOLevel() > 0)
+                        w.append(t, "torn ");
+                    w.append(t, (new StringBuilder("garment is tented upward between ")).append(c.hisHer()).append(" legs by the straining erection underneath.").toString());
+                } else
+                {
+                    w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" straining erection tents ").append(c.hisHer()).toString());
+                    if(c.getEXPOLevel() > 0)
+                        w.append(t, " torn");
+                    w.append(t, (new StringBuilder(" ")).append(c.bottomDesc()).append(" noticeably between ").append(c.hisHer()).append(" legs.").toString());
+                }
+            } else
+            {
+                w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" legs shudder with constant orgasmic spasms").toString());
+                if(c.getEXPOLevel() == 0)
+                    w.append(t, ".");
+                else
+                if(c.getINJULevel() > 0 && c.getINJULevel() < 4 && c.topDesc().equals(c.bottomDesc()))
+                    w.append(t, ", making the torn garment especially immodest.");
+                else
+                    w.append(t, (new StringBuilder(", making ")).append(c.hisHer()).append(" torn ").append(c.bottomDesc()).append(" especially immodest.").toString());
+            }
+        } else
+        if(c.getEXPOLevel() == 2 || c.getEXPOLevel() == 3)
+        {
+            if(c.getINJULevel() == 0)
+                w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" needs to use one hand to hold ").append(c.hisHer()).append(" torn ").append(c.topDesc()).append(" closed and keep ").append(c.hisHer()).append(" ").append(breasts).append(" covered").toString());
+            else
+            if(c.getINJULevel() == 1)
+            {
+                if(w.tickle().booleanValue())
+                    w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" frowns with the effort required to maintain ").append(c.hisHer()).append(" composure as ").append(c.heShe()).append(" holds ").append(c.hisHer()).append(" torn ").append(c.topDesc()).append(" closed to cover ").append(c.hisHer()).append(" ").append(breasts).toString());
+                else
+                    w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" needs to devote one bruised arm toward holding ").append(c.hisHer()).append(" torn ").append(c.topDesc()).append(" closed in order to keep ").append(c.hisHer()).append(" ").append(breasts).append(" covered").toString());
+            } else
+            if(c.getINJULevel() == 2)
+            {
+                if(w.tickle().booleanValue())
+                    w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" makes for a sad sight with ").append(c.hisHer()).append(" torn ").append(c.topDesc()).append(", flinching away from the Demons' attacks and crossing ").append(c.hisHer()).append(" arms in front of ").append(c.hisHer()).append(" bare ").append(breasts).toString());
+                else
+                    w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" bloodied arm holds ").append(c.hisHer()).append(" torn ").append(c.topDesc()).append(" closed with a weakening grip in order to keep ").append(c.hisHer()).append(" ").append(breasts).append(" covered").toString());
+            } else
+            if(c.getINJULevel() == 3)
+            {
+                if(w.tickle().booleanValue())
+                    w.append(t, (new StringBuilder("Moaning with exhaustion, ")).append(c.heShe()).append(" has trouble holding ").append(c.hisHer()).append(" torn ").append(c.topDesc()).append(" closed to cover ").append(c.hisHer()).append(" ").append(breasts).toString());
+                else
+                    w.append(t, (new StringBuilder("With one arm fractured, ")).append(c.heShe()).append(" has trouble holding ").append(c.hisHer()).append(" torn ").append(c.topDesc()).append(" closed to cover ").append(c.hisHer()).append(" ").append(breasts).toString());
+            } else
+            if(w.tickle().booleanValue())
+                w.append(t, (new StringBuilder("Twitching reflexively at the lightest touch, ")).append(c.heShe()).append(" has no hope of holding ").append(c.hisHer()).append(" torn ").append(c.topDesc()).append(" closed to conceal ").append(c.hisHer()).append(" ").append(breasts).toString());
+            else
+                w.append(t, (new StringBuilder("With ")).append(c.hisHer()).append(" shattered body, ").append(c.heShe()).append(" has no hope of holding ").append(c.hisHer()).append(" torn ").append(c.topDesc()).append(" closed to conceal ").append(c.hisHer()).append(" ").append(breasts).toString());
+            if(c.getPLEALevel() == 0)
+            {
+                if(c.getEXPOLevel() == 2)
+                {
+                    if(c.topDesc().equals(c.bottomDesc()))
+                        w.append(t, (new StringBuilder(", and ")).append(c.hisHer()).append(" legs are completely exposed up to the hip.").toString());
+                    else
+                        w.append(t, (new StringBuilder(", while ")).append(c.hisHer()).append(" legs are completely exposed up to the hip by the damage to ").append(c.hisHer()).append(" ").append(c.bottomDesc()).append(".").toString());
+                } else
+                if(c.topDesc().equals(c.bottomDesc()))
+                    w.append(t, (new StringBuilder(", and ")).append(c.heShe()).append(" has to be careful not to reveal ").append(c.hisHer()).append(" lack of panties.").toString());
+                else
+                    w.append(t, (new StringBuilder(", and the damage to ")).append(c.hisHer()).append(" ").append(c.bottomDesc()).append(" nearly reveals ").append(c.hisHer()).append(" lack of panties.").toString());
+            } else
+            if(c.getPLEALevel() == 1)
+            {
+                if(c.getEXPOLevel() == 2)
+                {
+                    if(c.topDesc().equals(c.bottomDesc()))
+                        w.append(t, (new StringBuilder(", and the way the damaged garment completely exposes ")).append(c.hisHer()).append(" legs makes ").append(c.himHer()).append(" blush deeply.").toString());
+                    else
+                        w.append(t, (new StringBuilder(", while the damage to ")).append(c.hisHer()).append(" ").append(c.bottomDesc()).append(" exposes enough leg to make ").append(c.himHer()).append(" blush deeply.").toString());
+                } else
+                if(c.topDesc().equals(c.bottomDesc()))
+                    w.append(t, (new StringBuilder(", and the way the damaged garment allows the cool air to blow over ")).append(c.hisHer()).append(" pantiless crotch makes ").append(c.himHer()).append(" blush with embarrassment and arousal.").toString());
+                else
+                    w.append(t, (new StringBuilder(", while the damage to ")).append(c.hisHer()).append(" ").append(c.bottomDesc()).append(" allows cool air to blow over ").append(c.hisHer()).append(" pantiless crotch, making ").append(c.himHer()).append(" blush with arousal.").toString());
+            } else
+            if(c.getPLEALevel() == 2)
+            {
+                w.append(t, " as they heave with moans of arousal.  ");
+                if(c.getEXPOLevel() == 2)
+                {
+                    if(c.topDesc().equals(c.bottomDesc()))
+                        w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" legs are also completely exposed by the damaged garment.").toString());
+                    else
+                        w.append(t, (new StringBuilder("There's also significant damage to ")).append(c.hisHer()).append(" ").append(c.bottomDesc()).append(", exposing ").append(c.hisHer()).append(" legs up to the hip.").toString());
+                } else
+                if(c.topDesc().equals(c.bottomDesc()))
+                    w.append(t, (new StringBuilder("The damaged garment also threatens to expose ")).append(c.hisHer()).append(" lack of panties.").toString());
+                else
+                    w.append(t, (new StringBuilder("There's also significant damage to ")).append(c.hisHer()).append(" ").append(c.bottomDesc()).append(", threatening to expose ").append(c.hisHer()).append(" lack of panties.").toString());
+            } else
+            if(c.getPLEALevel() == 3)
+            {
+                if(c.getEXPOLevel() == 2)
+                {
+                    if(c.topDesc().equals(c.bottomDesc()))
+                    {
+                        if(c.gender.equals("female"))
+                            w.append(t, (new StringBuilder(", and the damaged garment also reveals ")).append(c.hisHer()).append(" thighs, glistening with ").append(c.hisHer()).append(" juices.").toString());
+                        else
+                        if(c.gender.equals("male"))
+                            w.append(t, (new StringBuilder(", and the damaged garment is tented up by ")).append(c.hisHer()).append(" erection to reveal ").append(c.hisHer()).append(" thighs.").toString());
+                        else
+                            w.append(t, (new StringBuilder(", and the damaged garment is tented up by ")).append(c.hisHer()).append(" erection to reveal ").append(c.hisHer()).append(" thighs, glistening with ").append(c.hisHer()).append(" juices.").toString());
+                    } else
+                    if(c.gender.equals("female"))
+                        w.append(t, (new StringBuilder(", while the damage to ")).append(c.hisHer()).append(" ").append(c.bottomDesc()).append(" also reveals ").append(c.hisHer()).append(" thighs, glistening with ").append(c.hisHer()).append(" juices.").toString());
+                    else
+                    if(c.gender.equals("male"))
+                        w.append(t, (new StringBuilder(", while ")).append(c.hisHer()).append(" straining erection tents ").append(c.hisHer()).append(" torn ").append(c.bottomDesc()).append(" upward to reveal ").append(c.hisHer()).append(" thighs.").toString());
+                    else
+                        w.append(t, (new StringBuilder(", while ")).append(c.hisHer()).append(" straining erection tents ").append(c.hisHer()).append(" torn ").append(c.bottomDesc()).append(" upward to reveal ").append(c.hisHer()).append(" thighs, glistening with ").append(c.hisHer()).append(" juices.").toString());
+                } else
+                if(c.topDesc().equals(c.bottomDesc()))
+                {
+                    if(c.gender.equals("female"))
+                        w.append(t, (new StringBuilder(", and the damaged garment also threatens to reveal ")).append(c.hisHer()).append(" lack of panties and the fact that ").append(c.hisHer()).append(" juices drip down ").append(c.hisHer()).append(" thighs.").toString());
+                    else
+                    if(c.gender.equals("male"))
+                        w.append(t, (new StringBuilder(", ")).append(c.hisHer()).append(" straining erection lifts the damaged garment almost enough to reveal ").append(c.hisHer()).append(" lack of panties.").toString());
+                    else
+                        w.append(t, (new StringBuilder(", ")).append(c.hisHer()).append(" straining erection lifts the damaged garment almost enough to reveal ").append(c.hisHer()).append(" lack of panties and the fact that ").append(c.hisHer()).append(" juices drip down ").append(c.hisHer()).append(" thighs.").toString());
+                } else
+                if(c.gender.equals("female"))
+                    w.append(t, (new StringBuilder(", while the damage to ")).append(c.hisHer()).append(" ").append(c.bottomDesc()).append(" threatens to reveal ").append(c.hisHer()).append(" lack of panties and the fact that ").append(c.hisHer()).append(" juices drip down ").append(c.hisHer()).append(" thighs.").toString());
+                else
+                if(c.gender.equals("male"))
+                    w.append(t, (new StringBuilder(", while ")).append(c.hisHer()).append(" straining erection lifts ").append(c.hisHer()).append(" damaged ").append(c.bottomDesc()).append(" almost enough to reveal ").append(c.hisHer()).append(" lack of panties.").toString());
+                else
+                    w.append(t, (new StringBuilder(", while ")).append(c.hisHer()).append(" straining erection lifts ").append(c.hisHer()).append(" damaged ").append(c.bottomDesc()).append(" almost enough to reveal ").append(c.hisHer()).append(" lack of panties and the fact that ").append(c.hisHer()).append(" juices drip down ").append(c.hisHer()).append(" thighs.").toString());
+            } else
+            if(c.getEXPOLevel() == 2)
+            {
+                if(c.topDesc().equals(c.bottomDesc()))
+                    w.append(t, (new StringBuilder(", and the garment's damage also completely exposes ")).append(c.hisHer()).append(" legs, which spasm uncontrollably with pleasure.").toString());
+                else
+                    w.append(t, (new StringBuilder(", while the damage to ")).append(c.hisHer()).append(" ").append(c.bottomDesc()).append(" exposes ").append(c.hisHer()).append(" legs, which spasm uncontrollably with pleasure.").toString());
+            } else
+            if(c.topDesc().equals(c.bottomDesc()))
+                w.append(t, (new StringBuilder(", and the damaged garment also threatens to reveal ")).append(c.hisHer()).append(" lack of panties, particularly with ").append(c.hisHer()).append(" legs spasming uncontrollably in pleasure.").toString());
+            else
+                w.append(t, (new StringBuilder(", while the damage to ")).append(c.hisHer()).append(" ").append(c.bottomDesc()).append(" threatens to reveal ").append(c.hisHer()).append(" lack of panties, particularly with ").append(c.hisHer()).append(" legs spasming uncontrollably in pleasure.").toString());
+        } else
+        {
+            if(!c.topDesc().equals(c.bottomDesc()) || c.getEXPOLevel() > 4)
+                w.append(t, (new StringBuilder("With ")).append(c.hisHer()).append(" ").append(c.topDesc()).append(" completely torn away, ").toString());
+            else
+                w.append(t, (new StringBuilder("The top half of ")).append(c.hisHer()).append(" ").append(c.topDesc()).append(" has been completely torn away, ").toString());
+            if(c.getINJULevel() == 0)
+                w.append(t, (new StringBuilder("forcing ")).append(c.himHer()).append(" to use one arm to cover ").append(c.hisHer()).append(" bare ").append(breasts).append(" ").toString());
+            else
+            if(c.getINJULevel() == 1)
+            {
+                if(w.tickle().booleanValue())
+                    w.append(t, (new StringBuilder("and ")).append(c.heShe()).append(" frowns with the effort of fighting while remembering to keep ").append(c.hisHer()).append(" ").append(breasts).append(" covered").toString());
+                else
+                    w.append(t, (new StringBuilder("exposing ")).append(c.hisHer()).append(" bruises and ").append(c.hisHer()).append(" ").append(breasts).append(" when ").append(c.heShe()).append(" isn't careful enough to cover them").toString());
+            } else
+            if(c.getINJULevel() == 2)
+            {
+                if(w.tickle().booleanValue())
+                    w.append(t, (new StringBuilder("forcing ")).append(c.himHer()).append(" to flinch away whenever the Demons try to force ").append(c.himHer()).append(" to stop covering ").append(c.hisHer()).append(" bare ").append(breasts).toString());
+                else
+                    w.append(t, (new StringBuilder("forcing ")).append(c.himHer()).append(" to use one bloodied arm to weakly cover ").append(c.hisHer()).append(" bare ").append(breasts).toString());
+            } else
+            if(c.getINJULevel() == 3)
+            {
+                if(w.tickle().booleanValue())
+                    w.append(t, (new StringBuilder("and ")).append(c.heShe()).append("'s so out of breath that it's difficult for ").append(c.himHer()).append(" to remember to cover ").append(c.hisHer()).append(" bare ").append(breasts).toString());
+                else
+                    w.append(t, (new StringBuilder("and ")).append(c.hisHer()).append(" fractured arm makes it difficult for ").append(c.himHer()).append(" to cover ").append(c.hisHer()).append(" bare ").append(breasts).toString());
+            } else
+            if(w.tickle().booleanValue())
+                w.append(t, (new StringBuilder("and with the way ")).append(c.hisHer()).append(" sensitive body reacts to the lightest touch, ").append(c.heShe()).append(" has little hope of keeping ").append(c.hisHer()).append(" bare ").append(breasts).append(" hidden").toString());
+            else
+                w.append(t, (new StringBuilder("and with ")).append(c.hisHer()).append(" body shattered, ").append(c.heShe()).append(" has little hope of keeping ").append(c.hisHer()).append(" bare ").append(breasts).append(" hidden").toString());
+            w.append(t, ".  ");
+            if(c.topDesc().equals(c.bottomDesc()) && c.getEXPOLevel() > 4)
+            {
+                if(c.gender.equals("female"))
+                    w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" pussy is completely exposed as well.  It's practically impossible to keep it covered while fighting").toString());
+                else
+                if(c.gender.equals("male"))
+                    w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" penis is completely exposed as well.  It's practically impossible to keep it covered while fighting").toString());
+                else
+                    w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" penis and pussy are both completely exposed as well.  It's practically impossible to keep them covered while fighting").toString());
+            } else
+            if(c.getEXPOLevel() > 4)
+            {
+                if(c.gender.equals("female"))
+                    w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s also lost ").append(c.hisHer()).append(" ").append(c.bottomDesc()).append(", exposing ").append(c.hisHer()).append(" pussy too").toString());
+                else
+                if(c.gender.equals("male"))
+                    w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s also lost ").append(c.hisHer()).append(" ").append(c.bottomDesc()).append(", exposing ").append(c.hisHer()).append(" penis too").toString());
+                else
+                    w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s also lost ").append(c.hisHer()).append(" ").append(c.bottomDesc()).append(", exposing ").append(c.hisHer()).append(" pussy and penis too").toString());
+            } else
+            if(c.topDesc().equals(c.bottomDesc()))
+                w.append(t, (new StringBuilder("The scraps that remain are far too short to conceal ")).append(c.hisHer()).append(" lack of panties").toString());
+            else
+                w.append(t, (new StringBuilder("Parts of ")).append(c.hisHer()).append(" ").append(c.bottomDesc()).append(" remain, but not nearly enough to hide ").append(c.hisHer()).append(" lack of panties").toString());
+            if(c.getPLEALevel() == 0)
+                w.append(t, ".");
+            else
+            if(c.getPLEALevel() == 1)
+                w.append(t, (new StringBuilder(", and the feeling of so many eyes watching ")).append(c.himHer()).append(" brings a blush to ").append(c.hisHer()).append(" cheeks.").toString());
+            else
+            if(c.getPLEALevel() == 2)
+                w.append(t, (new StringBuilder(", and the feeling of so many eyes watching ")).append(c.himHer()).append(" causes ").append(c.himHer()).append(" to pant and moan with arousal.").toString());
+            else
+            if(c.getPLEALevel() == 3)
+            {
+                if(c.gender.equals("female"))
+                    w.append(t, (new StringBuilder(", making the trails of wetness running down ")).append(c.hisHer()).append(" thighs humiliatingly obvious.").toString());
+                else
+                    w.append(t, (new StringBuilder(", making ")).append(c.hisHer()).append(" straining erection humiliatingly obvious.").toString());
+            } else
+            {
+                w.append(t, (new StringBuilder(", and ")).append(c.hisHer()).append(" orgasmic spasms only make ").append(c.hisHer()).append(" humiliation more complete.").toString());
+            }
+        }
+        if(w.getTechs()[0].isOwned().booleanValue())
+            c.printProfile(t, p, f, w);
+        if(w.tutorialResponse().booleanValue())
+            if(w.getBattleRound() == 1)
+            {
+                if(w.tickle().booleanValue())
+                    w.grayAppend(t, "\n\n(Most of the information here only shows up when the player has the Psychic Reading upgrade, which can be very useful for new players.  When breaking vulnerabilities, the circumstances listed on the right side are the most important thing to consider.  Looks like Miracle is weakest to ANTIcipation and strongest against HATE.  To make use of that, let's create an opening.  Threaten and Taunt only create openings when certain conditions hold, and she doesn't take much TICKle damage, so let's use Slime.)");
+                else
+                    w.grayAppend(t, "\n\n(Most of the information here only shows up when the player has the Psychic Reading upgrade, which can be very useful for new players.  When breaking vulnerabilities, the circumstances listed on the right side are the most important thing to consider.  Looks like Miracle is weakest to INJUry and strongest against HATE.  To make use of that, let's create an opening.  Threaten and Taunt only create openings when certain conditions hold, and she doesn't take much PAIN damage, so let's use Slime.)");
+            } else
+            if(w.getBattleRound() == 6 && c == w.getCast()[2])
+            {
+                if(w.tickle().booleanValue())
+                    w.grayAppend(t, "\n\n(You can see that if we had started the battle by going after Axiom instead, Miracle would have shown up on round 7.  Anyway, Axiom isn't very weak against FEAR, DISG, ANTI, or SHAM.  It would take two turns to set up an opening against her, and that time would be better spent working on our main target, Miracle.  Go back to the target selection screen.)");
+                else
+                    w.grayAppend(t, "\n\n(You can see that if we had started the battle by going after Axiom instead, Miracle would have shown up on round 7.  Anyway, Axiom isn't very weak against FEAR, DISG, PAIN, or SHAM.  It would take two turns to set up an opening against her, and that time would be better spent working on our main target, Miracle.  Go back to the target selection screen.)");
+            } else
+            if(w.getBattleRound() == 7 && c == w.getCast()[1])
+                w.grayAppend(t, "\n\n(Her pre-broken vulnerabilities mean that she's extremely weak to HATE and EXPO.  However, with all three Chosen here, the battle is quickly moving toward its ending, and we don't have time to both set up an opening and then take it.  This sort of situation is what Commanders are for.  If you hover over the purple Capture button, you can see the traits of the Commander that's been brought to this battle.  It specializes in EXPO, which is Spice's biggest weakness.  This Commander cost 2 Evil Energy to make, but as long as we get at least 2 Evil Energy from breaking vulnerabilities, it's definitely worth it.  Capture Spice!");
     }
 
     public void Orgy(JTextPane t, JPanel p, JFrame f, Chosen c)
@@ -13932,6 +14363,149 @@ public class WorldState
             earlyCheat = Boolean.valueOf(false);
             adjusted = Boolean.valueOf(true);
         }
+        if(save != null && save.harem != null && save.harem.length > 0 && save.harem[0].killRelationships == null)
+        {
+            for(int i = 0; i < save.harem.length; i++)
+            {
+                save.harem[i].formerPartners = (new Chosen[] {
+                    save.harem[i].firstFormerPartner, save.harem[i].secondFormerPartner
+                });
+                save.harem[i].formerFriendships = (new int[] {
+                    save.harem[i].firstOriginalRelationship, save.harem[i].secondOriginalRelationship
+                });
+                if(save.harem[i].kills[1] != null)
+                    save.harem[i].killRelationships = (new int[] {
+                        save.harem[i].firstOriginalRelationship, save.harem[i].secondOriginalRelationship
+                    });
+                else
+                if(save.harem[i].kills[0] != null)
+                {
+                    save.harem[i].kills = (new Chosen[] {
+                        save.harem[i].kills[0]
+                    });
+                    save.harem[i].killRelationships = (new int[] {
+                        save.harem[i].firstOriginalRelationship
+                    });
+                } else
+                {
+                    save.harem[i].kills = new Chosen[0];
+                    save.harem[i].killRelationships = new int[0];
+                }
+            }
+
+        }
+        if(getCast()[0] != null)
+        {
+            if(getCast()[0].kills == null)
+            {
+                for(int i = 0; i < 3; i++)
+                    if(getCast()[i] != null)
+                    {
+                        getCast()[i].formerPartners = new Chosen[0];
+                        getCast()[i].formerRelationships = new int[0];
+                        if(getCast()[i].secondKilled != null)
+                        {
+                            getCast()[i].kills = (new Chosen[] {
+                                getCast()[i].firstKilled, getCast()[i].secondKilled
+                            });
+                            getCast()[i].killRelationships = (new int[] {
+                                getCast()[i].firstKilledRelationship, getCast()[i].secondKilledRelationship
+                            });
+                        } else
+                        if(getCast()[i].firstKilled != null)
+                        {
+                            getCast()[i].kills = (new Chosen[] {
+                                getCast()[i].firstKilled
+                            });
+                            getCast()[i].killRelationships = (new int[] {
+                                getCast()[i].firstKilledRelationship
+                            });
+                        } else
+                        {
+                            getCast()[i].kills = new Chosen[0];
+                            getCast()[i].killRelationships = new int[0];
+                        }
+                    }
+
+                if(returning != null)
+                {
+                    for(int i = 0; i < returning.length; i++)
+                    {
+                        returning[i].formerPartners = new Chosen[0];
+                        returning[i].formerRelationships = new int[0];
+                        if(returning[i].secondKilled != null)
+                        {
+                            returning[i].kills = (new Chosen[] {
+                                returning[i].firstKilled, returning[i].secondKilled
+                            });
+                            returning[i].killRelationships = (new int[] {
+                                returning[i].firstKilledRelationship, returning[i].secondKilledRelationship
+                            });
+                        } else
+                        if(returning[i].firstKilled != null)
+                        {
+                            returning[i].kills = (new Chosen[] {
+                                returning[i].firstKilled
+                            });
+                            returning[i].killRelationships = (new int[] {
+                                returning[i].firstKilledRelationship
+                            });
+                        } else
+                        {
+                            returning[i].kills = new Chosen[0];
+                            returning[i].killRelationships = new int[0];
+                        }
+                    }
+
+                }
+                if(conquered != null)
+                {
+                    for(int i = 0; i < conquered.length; i++)
+                    {
+                        conquered[i].formerPartners = (new Chosen[] {
+                            conquered[i].firstFormerPartner, conquered[i].secondFormerPartner
+                        });
+                        conquered[i].formerFriendships = (new int[] {
+                            conquered[i].firstOriginalRelationship, conquered[i].secondOriginalRelationship
+                        });
+                        if(conquered[i].kills[1] != null)
+                            conquered[i].killRelationships = (new int[] {
+                                conquered[i].firstOriginalRelationship, conquered[i].secondOriginalRelationship
+                            });
+                        else
+                        if(conquered[i].kills[0] != null)
+                        {
+                            conquered[i].kills = (new Chosen[] {
+                                conquered[i].kills[0]
+                            });
+                            conquered[i].killRelationships = (new int[] {
+                                conquered[i].firstOriginalRelationship
+                            });
+                        } else
+                        {
+                            conquered[i].kills = new Chosen[0];
+                            conquered[i].killRelationships = new int[0];
+                        }
+                    }
+
+                }
+            }
+            if(getCast()[0].originalGender == null)
+            {
+                for(int i = 0; i < 3; i++)
+                    if(getCast()[i] != null)
+                        getCast()[i].originalGender = getGenders()[i];
+
+                if(returning != null)
+                {
+                    for(int i = 0; i < returning.length; i++)
+                        returning[i].originalGender = returning[i].gender;
+
+                }
+            }
+        }
+        if(campaignCustom == null)
+            campaignCustom = new Chosen[0];
         if(conquered != null)
         {
             for(int i = 0; i < conquered.length; i++)
@@ -18755,6 +19329,7 @@ public class WorldState
 
     public void copyInitial(WorldState w)
     {
+        loopChosen = w.loopChosen;
         day = 1;
         initializeTips();
         nameSeed = w.getNameSeed();
@@ -18901,29 +19476,461 @@ public class WorldState
 
         }
 
-        for(Boolean goodStats = Boolean.valueOf(false); !goodStats.booleanValue();)
+        int ai[];
+        if(campaign.booleanValue())
         {
-            goodStats = Boolean.valueOf(true);
-            for(int i = 0; i < statSeed.length; i++)
-                if(campaign.booleanValue())
-                    statSeed[i] = (int)(campaignRand.nextDouble() * 101D);
-                else
-                    statSeed[i] = (int)(Math.random() * 101D);
-
-            if(!legalSpread(statSeed, Boolean.valueOf(false)).booleanValue())
-                goodStats = Boolean.valueOf(false);
-            Boolean pureTarget = Boolean.valueOf(false);
-            Boolean corruptTarget = Boolean.valueOf(false);
+            Boolean twoHigh = Boolean.valueOf(false);
+            Boolean twoMid = Boolean.valueOf(false);
+            Boolean twoLow = Boolean.valueOf(false);
+            Boolean morHigh = Boolean.valueOf(false);
+            Boolean morMid = Boolean.valueOf(false);
+            Boolean morLow = Boolean.valueOf(false);
+            Boolean innHigh = Boolean.valueOf(false);
+            Boolean innMid = Boolean.valueOf(false);
+            Boolean innLow = Boolean.valueOf(false);
+            Boolean conHigh = Boolean.valueOf(false);
+            Boolean conMid = Boolean.valueOf(false);
+            Boolean conLow = Boolean.valueOf(false);
+            Boolean digHigh = Boolean.valueOf(false);
+            Boolean digMid = Boolean.valueOf(false);
+            Boolean digLow = Boolean.valueOf(false);
             for(int i = 0; i < 3; i++)
-                if(determinePurity(statSeed[i * 4], statSeed[1 + i * 4], statSeed[2 + i * 4], statSeed[3 + i * 4]).booleanValue())
-                    pureTarget = Boolean.valueOf(true);
+            {
+                Chosen candidates[] = new Chosen[returning.length + campaignCustom.length];
+                Chosen valid[] = new Chosen[0];
+                for(int j = 0; j < returning.length; j++)
+                    candidates[j] = returning[j];
+
+                for(int j = 0; j < campaignCustom.length; j++)
+                    candidates[j + returning.length] = campaignCustom[j];
+
+                for(int j = 0; j < candidates.length; j++)
+                {
+                    Boolean compatible = Boolean.valueOf(true);
+                    if(candidates[j].morality > 66 && morHigh.booleanValue())
+                        compatible = Boolean.valueOf(false);
+                    if(candidates[j].morality > 33 && candidates[j].morality < 67 && morMid.booleanValue())
+                        compatible = Boolean.valueOf(false);
+                    if(candidates[j].morality < 34 && morLow.booleanValue())
+                        compatible = Boolean.valueOf(false);
+                    if(candidates[j].innocence > 66)
+                    {
+                        if(innHigh.booleanValue())
+                            compatible = Boolean.valueOf(false);
+                        if(candidates[j].morality > 66 && twoHigh.booleanValue())
+                            compatible = Boolean.valueOf(false);
+                    }
+                    if(candidates[j].innocence > 33 && candidates[j].innocence < 67)
+                    {
+                        if(innMid.booleanValue())
+                            compatible = Boolean.valueOf(false);
+                        if(candidates[j].morality > 33 && candidates[j].morality < 67 && twoMid.booleanValue())
+                            compatible = Boolean.valueOf(false);
+                    }
+                    if(candidates[j].innocence < 34)
+                    {
+                        if(innLow.booleanValue())
+                            compatible = Boolean.valueOf(false);
+                        if(candidates[j].morality < 34 && twoLow.booleanValue())
+                            compatible = Boolean.valueOf(false);
+                    }
+                    if(candidates[j].confidence > 66)
+                    {
+                        if(conHigh.booleanValue())
+                            compatible = Boolean.valueOf(false);
+                        if((candidates[j].morality > 66 || candidates[j].innocence > 66) && twoHigh.booleanValue())
+                            compatible = Boolean.valueOf(false);
+                    }
+                    if(candidates[j].confidence > 33 && candidates[j].confidence < 67)
+                    {
+                        if(conMid.booleanValue())
+                            compatible = Boolean.valueOf(false);
+                        if((candidates[j].morality > 33 && candidates[j].morality < 67 || candidates[j].innocence > 33 && candidates[j].innocence < 67) && twoMid.booleanValue())
+                            compatible = Boolean.valueOf(false);
+                    }
+                    if(candidates[j].confidence < 34)
+                    {
+                        if(conLow.booleanValue())
+                            compatible = Boolean.valueOf(false);
+                        if((candidates[j].morality < 34 || candidates[j].innocence < 34) && twoLow.booleanValue())
+                            compatible = Boolean.valueOf(false);
+                    }
+                    if(candidates[j].dignity > 66)
+                    {
+                        if(digHigh.booleanValue())
+                            compatible = Boolean.valueOf(false);
+                        if((candidates[j].morality > 66 || candidates[j].innocence > 66 || candidates[j].confidence > 66) && twoHigh.booleanValue())
+                            compatible = Boolean.valueOf(false);
+                    }
+                    if(candidates[j].dignity > 33 && candidates[j].dignity < 67)
+                    {
+                        if(digMid.booleanValue())
+                            compatible = Boolean.valueOf(false);
+                        if((candidates[j].morality > 33 && candidates[j].morality < 67 || candidates[j].innocence > 33 && candidates[j].innocence < 67 || candidates[j].confidence > 33 && candidates[j].confidence < 67) && twoMid.booleanValue())
+                            compatible = Boolean.valueOf(false);
+                    }
+                    if(candidates[j].dignity < 34)
+                    {
+                        if(digLow.booleanValue())
+                            compatible = Boolean.valueOf(false);
+                        if((candidates[j].morality < 34 || candidates[j].innocence < 34 || candidates[j].confidence < 34) && twoLow.booleanValue())
+                            compatible = Boolean.valueOf(false);
+                    }
+                    if(candidates[j].type != types[2 - i] && (candidates[j].type != null || types[2 - i] != Chosen.Species.SUPERIOR))
+                        compatible = Boolean.valueOf(false);
+                    if(candidates[j].lastLoop > loops - 2 && j < returning.length)
+                        compatible = Boolean.valueOf(false);
+                    if(compatible.booleanValue())
+                    {
+                        Chosen newValid[] = new Chosen[valid.length + 1];
+                        for(int k = 0; k < valid.length; k++)
+                            newValid[k] = valid[k];
+
+                        newValid[newValid.length - 1] = candidates[j];
+                        valid = newValid;
+                    }
+                }
+
+                if(valid.length > 0)
+                {
+                    int picked = (int)(campaignRand.nextDouble() * (double)valid.length);
+                    loopChosen[i] = valid[picked];
+                    int index = 0;
+                    for(int j = 0; j < candidates.length; j++)
+                        if(candidates[j].equals(valid[picked]).booleanValue())
+                            index = j;
+
+                    if(index < returning.length)
+                    {
+                        Chosen newReturning[] = new Chosen[returning.length - 1];
+                        for(int j = 0; j < returning.length && newReturning.length > 0; j++)
+                            if(j < index)
+                                newReturning[j] = returning[j];
+                            else
+                            if(j > index)
+                                newReturning[j - 1] = returning[j];
+
+                        returning = newReturning;
+                    } else
+                    {
+                        Chosen newCustom[] = new Chosen[campaignCustom.length - 1];
+                        for(int j = 0; j < campaignCustom.length && newCustom.length > 0; j++)
+                            if(j < index - returning.length)
+                                newCustom[j] = campaignCustom[j];
+                            else
+                            if(j > index - returning.length)
+                                newCustom[j - 1] = campaignCustom[j];
+
+                        campaignCustom = newCustom;
+                    }
+                } else
+                {
+                    for(Boolean compatible = Boolean.valueOf(false); !compatible.booleanValue();)
+                    {
+                        compatible = Boolean.valueOf(true);
+                        int stats[] = new int[4];
+                        int highCount = 0;
+                        int midCount = 0;
+                        int lowCount = 0;
+                        for(int j = 0; j < 4; j++)
+                        {
+                            stats[j] = (int)(campaignRand.nextDouble() * 101D);
+                            if(stats[j] > 66)
+                                highCount++;
+                            else
+                            if(stats[j] > 33)
+                                midCount++;
+                            else
+                                lowCount++;
+                        }
+
+                        if(highCount == 0 || midCount == 0 || lowCount == 0)
+                            compatible = Boolean.valueOf(false);
+                        if(highCount == 2 && twoHigh.booleanValue() || midCount == 2 && twoMid.booleanValue() || lowCount == 2 && twoLow.booleanValue())
+                            compatible = Boolean.valueOf(false);
+                        if(stats[0] > 66)
+                        {
+                            if(morHigh.booleanValue())
+                                compatible = Boolean.valueOf(false);
+                        } else
+                        if(stats[0] > 33)
+                        {
+                            if(morMid.booleanValue())
+                                compatible = Boolean.valueOf(false);
+                        } else
+                        if(morLow.booleanValue())
+                            compatible = Boolean.valueOf(false);
+                        if(stats[1] > 66)
+                        {
+                            if(innHigh.booleanValue())
+                                compatible = Boolean.valueOf(false);
+                        } else
+                        if(stats[1] > 33)
+                        {
+                            if(innMid.booleanValue())
+                                compatible = Boolean.valueOf(false);
+                        } else
+                        if(innLow.booleanValue())
+                            compatible = Boolean.valueOf(false);
+                        if(stats[2] > 66)
+                        {
+                            if(conHigh.booleanValue())
+                                compatible = Boolean.valueOf(false);
+                        } else
+                        if(stats[2] > 33)
+                        {
+                            if(conMid.booleanValue())
+                                compatible = Boolean.valueOf(false);
+                        } else
+                        if(conLow.booleanValue())
+                            compatible = Boolean.valueOf(false);
+                        if(stats[3] > 66)
+                        {
+                            if(digHigh.booleanValue())
+                                compatible = Boolean.valueOf(false);
+                        } else
+                        if(stats[3] > 33)
+                        {
+                            if(digMid.booleanValue())
+                                compatible = Boolean.valueOf(false);
+                        } else
+                        if(digLow.booleanValue())
+                            compatible = Boolean.valueOf(false);
+                        if(i == 1)
+                            if(determineVVirg(stats[0], stats[1], stats[2], stats[3]).booleanValue() && determineCVirg(stats[0], stats[1], stats[2], stats[3]).booleanValue() && determineAVirg(stats[0], stats[1], stats[2], stats[3]).booleanValue() && determineModest(stats[0], stats[1], stats[2], stats[3]).booleanValue())
+                            {
+                                if(loopChosen[0].vVirg.booleanValue() && loopChosen[0].cVirg.booleanValue() && loopChosen[0].aVirg.booleanValue() && loopChosen[0].modest.booleanValue())
+                                    compatible = Boolean.valueOf(false);
+                            } else
+                            if(!loopChosen[0].vVirg.booleanValue() || !loopChosen[0].cVirg.booleanValue() || !loopChosen[0].aVirg.booleanValue() || !loopChosen[0].modest.booleanValue())
+                                compatible = Boolean.valueOf(false);
+                        if(compatible.booleanValue())
+                        {
+                            Chosen c = new Chosen();
+                            c.world = this;
+                            c.type = types[2 - i];
+                            int femaleQuota = getGenderBalance()[1];
+                            int maleQuota = getGenderBalance()[2];
+                            int futaQuota = getGenderBalance()[3];
+                            if(getGenderBalance()[0] == 0)
+                            {
+                                for(int j = 0; j < i; j++)
+                                    if(loopChosen[j] != null)
+                                    {
+                                        if(loopChosen[j].gender.equals("female"))
+                                            femaleQuota--;
+                                        if(loopChosen[j].gender.equals("male"))
+                                            maleQuota--;
+                                        if(loopChosen[j].gender.equals("futanari"))
+                                            futaQuota--;
+                                    }
+
+                            }
+                            if(femaleQuota < 0)
+                                femaleQuota = 0;
+                            if(maleQuota < 0)
+                                maleQuota = 0;
+                            if(futaQuota < 0)
+                                futaQuota = 0;
+                            if(femaleQuota + futaQuota + maleQuota > 0)
+                            {
+                                int choice = (int)(Math.random() * (double)(femaleQuota + futaQuota + maleQuota));
+                                if(choice < femaleQuota)
+                                    c.gender = "female";
+                                else
+                                if(choice < femaleQuota + maleQuota)
+                                    c.gender = "male";
+                                else
+                                    c.gender = "futanari";
+                            } else
+                            {
+                                c.gender = "female";
+                            }
+                            c.originalGender = c.gender;
+                            for(Boolean uniqueName = Boolean.valueOf(false); !uniqueName.booleanValue();)
+                            {
+                                uniqueName = Boolean.valueOf(true);
+                                ai = new int[6];
+                                ai[0] = (int)(Math.random() * 26D);
+                                ai[1] = (int)(Math.random() * 26D);
+                                String names[] = c.genName(this, ai);
+                                for(int j = 0; j < i; j++)
+                                    if(loopChosen[j].givenName.equals(names[1]) || loopChosen[j].familyName.equals(names[0]))
+                                        uniqueName = Boolean.valueOf(false);
+
+                                if(uniqueName.booleanValue())
+                                {
+                                    c.givenName = names[1];
+                                    c.familyName = names[0];
+                                }
+                            }
+
+                            c.morality = stats[0];
+                            c.innocence = stats[1];
+                            c.confidence = stats[2];
+                            c.dignity = stats[3];
+                            if(c.morality > 66)
+                            {
+                                c.textColor = new Color(0, 0, 230);
+                                c.darkColor = new Color(100, 100, 255);
+                            } else
+                            if(c.morality > 33)
+                            {
+                                c.textColor = new Color(0, 110, 0);
+                                c.darkColor = new Color(70, 170, 70);
+                            } else
+                            {
+                                c.textColor = new Color(180, 0, 0);
+                                c.darkColor = new Color(220, 90, 90);
+                            }
+                            if(!determineVVirg(stats[0], stats[1], stats[2], stats[3]).booleanValue())
+                            {
+                                c.vVirg = Boolean.valueOf(false);
+                                c.vStart = Boolean.valueOf(false);
+                                c.ruthless = true;
+                                c.vTaker = 0;
+                            }
+                            if(!determineCVirg(stats[0], stats[1], stats[2], stats[3]).booleanValue())
+                            {
+                                c.cVirg = Boolean.valueOf(false);
+                                c.cStart = Boolean.valueOf(false);
+                                c.lustful = true;
+                                c.cTaker = 0;
+                            }
+                            if(!determineAVirg(stats[0], stats[1], stats[2], stats[3]).booleanValue())
+                            {
+                                c.aVirg = Boolean.valueOf(false);
+                                c.aStart = Boolean.valueOf(false);
+                                c.meek = true;
+                                c.aTaker = 0;
+                            }
+                            if(!determineModest(stats[0], stats[1], stats[2], stats[3]).booleanValue())
+                            {
+                                c.modest = Boolean.valueOf(false);
+                                c.mStart = Boolean.valueOf(false);
+                                c.debased = true;
+                                c.mTaker = 0;
+                            }
+                            c.incantation = c.genIncantation(stats[0], stats[3]);
+                            c.adjectiveName = c.genAdjectiveName(stats[1], stats[2]);
+                            c.nounName = c.genNounName(stats[0], stats[1]);
+                            c.mainName = c.genMainName(stats[0], stats[1], stats[2], stats[3]);
+                            String cosmetics[] = pickCosmetics(stats[0], stats[1], stats[2], stats[3]);
+                            c.topCover = cosmetics[0];
+                            c.topAccess = cosmetics[1];
+                            c.bottomCover = cosmetics[2];
+                            c.bottomAccess = cosmetics[3];
+                            c.feetType = cosmetics[9];
+                            c.underType = cosmetics[4];
+                            c.color = cosmetics[5];
+                            c.accessory = cosmetics[6];
+                            c.weapon = cosmetics[7];
+                            c.customWeaponType = cosmetics[8];
+                            if(c.morality > 66)
+                                c.bonusHATE = Boolean.valueOf(true);
+                            if(c.innocence > 66)
+                                c.bonusPLEA = Boolean.valueOf(true);
+                            if(c.confidence > 66)
+                                c.bonusINJU = Boolean.valueOf(true);
+                            if(c.dignity > 66)
+                                c.bonusEXPO = Boolean.valueOf(true);
+                            loopChosen[i] = c;
+                        }
+                    }
+
+                }
+                if(loopChosen[i].morality > 66)
+                    morHigh = Boolean.valueOf(true);
                 else
-                    corruptTarget = Boolean.valueOf(true);
+                if(loopChosen[i].morality > 33)
+                    morMid = Boolean.valueOf(true);
+                else
+                    morLow = Boolean.valueOf(true);
+                if(loopChosen[i].innocence > 66)
+                {
+                    innHigh = Boolean.valueOf(true);
+                    if(loopChosen[i].morality > 66)
+                        twoHigh = Boolean.valueOf(true);
+                } else
+                if(loopChosen[i].innocence > 33)
+                {
+                    innMid = Boolean.valueOf(true);
+                    if(loopChosen[i].morality > 33 && loopChosen[i].morality < 67)
+                        twoMid = Boolean.valueOf(true);
+                } else
+                {
+                    innLow = Boolean.valueOf(true);
+                    if(loopChosen[i].morality < 34)
+                        twoLow = Boolean.valueOf(true);
+                }
+                if(loopChosen[i].confidence > 66)
+                {
+                    conHigh = Boolean.valueOf(true);
+                    if(loopChosen[i].morality > 66 || loopChosen[i].innocence > 66)
+                        twoHigh = Boolean.valueOf(true);
+                } else
+                if(loopChosen[i].confidence > 33)
+                {
+                    conMid = Boolean.valueOf(true);
+                    if(loopChosen[i].morality > 33 && loopChosen[i].morality < 67 || loopChosen[i].innocence > 33 && loopChosen[i].innocence < 67)
+                        twoMid = Boolean.valueOf(true);
+                } else
+                {
+                    conLow = Boolean.valueOf(true);
+                    if(loopChosen[i].morality < 34 || loopChosen[i].innocence < 34)
+                        twoLow = Boolean.valueOf(true);
+                }
+                if(loopChosen[i].dignity > 66)
+                {
+                    digHigh = Boolean.valueOf(true);
+                    if(loopChosen[i].morality > 66 || loopChosen[i].innocence > 66 || loopChosen[i].confidence > 66)
+                        twoHigh = Boolean.valueOf(true);
+                } else
+                if(loopChosen[i].dignity > 33)
+                {
+                    digMid = Boolean.valueOf(true);
+                    if(loopChosen[i].morality > 33 && loopChosen[i].morality < 67 || loopChosen[i].innocence > 33 && loopChosen[i].innocence < 67 || loopChosen[i].confidence > 33 && loopChosen[i].confidence < 67)
+                        twoMid = Boolean.valueOf(true);
+                } else
+                {
+                    digLow = Boolean.valueOf(true);
+                    if(loopChosen[i].morality < 34 || loopChosen[i].innocence < 34 || loopChosen[i].confidence < 34)
+                        twoLow = Boolean.valueOf(true);
+                }
+            }
 
-            if(!pureTarget.booleanValue() || !corruptTarget.booleanValue())
-                goodStats = Boolean.valueOf(false);
+            Chosen storage = loopChosen[0];
+            loopChosen[0] = loopChosen[2];
+            loopChosen[2] = storage;
+            for(int i = 0; i < 3; i++)
+                genders[i] = loopChosen[i].gender;
+
+        } else
+        {
+            for(Boolean goodStats = Boolean.valueOf(false); !goodStats.booleanValue();)
+            {
+                goodStats = Boolean.valueOf(true);
+                for(int i = 0; i < statSeed.length; i++)
+                    if(campaign.booleanValue())
+                        statSeed[i] = (int)(campaignRand.nextDouble() * 101D);
+                    else
+                        statSeed[i] = (int)(Math.random() * 101D);
+
+                if(!legalSpread(statSeed, Boolean.valueOf(false)).booleanValue())
+                    goodStats = Boolean.valueOf(false);
+                Boolean pureTarget = Boolean.valueOf(false);
+                Boolean corruptTarget = Boolean.valueOf(false);
+                for(int i = 0; i < 3; i++)
+                    if(determinePurity(statSeed[i * 4], statSeed[1 + i * 4], statSeed[2 + i * 4], statSeed[3 + i * 4]).booleanValue())
+                        pureTarget = Boolean.valueOf(true);
+                    else
+                        corruptTarget = Boolean.valueOf(true);
+
+                if(!pureTarget.booleanValue() || !corruptTarget.booleanValue())
+                    goodStats = Boolean.valueOf(false);
+            }
+
         }
-
         for(int i = 0; i < groupScenes.length; i++)
             groupScenes[i] = Boolean.valueOf(false);
 
@@ -22609,7 +23616,10 @@ public class WorldState
             himHer = "him";
             heShe = "he";
         }
-        append(t, (new StringBuilder("\n\n")).append(separator).append("\n\nAnd in order to get at ").append(hisHer).append(" breasts, does one go up ").append(hisHer).append(" ").append(input).append(", into ").append(hisHer).append(" ").append(input).append(", down ").append(hisHer).append(" ").append(input).append(", or around ").append(hisHer).append(" ").append(input).append("?").toString());
+        if(genders[i].equals("male"))
+            append(t, (new StringBuilder("\n\n")).append(separator).append("\n\nAnd in order to get at ").append(hisHer).append(" nipples, does one go up ").append(hisHer).append(" ").append(input).append(", into ").append(hisHer).append(" ").append(input).append(", down ").append(hisHer).append(" ").append(input).append(", or around ").append(hisHer).append(" ").append(input).append("?").toString());
+        else
+            append(t, (new StringBuilder("\n\n")).append(separator).append("\n\nAnd in order to get at ").append(hisHer).append(" breasts, does one go up ").append(hisHer).append(" ").append(input).append(", into ").append(hisHer).append(" ").append(input).append(", down ").append(hisHer).append(" ").append(input).append(", or around ").append(hisHer).append(" ").append(input).append("?").toString());
         for(int j = 0; j < 4; j++)
         {
             String method = "";
@@ -25778,6 +26788,8 @@ public class WorldState
         returning = new Chosen[0];
         deceased = new Chosen[0];
         formerChosen = new Chosen[0];
+        campaignCustom = new Chosen[0];
+        loopChosen = new Chosen[3];
         cityName = "";
         campaignRand = new Random();
         loopComplete = Boolean.valueOf(false);
@@ -25938,6 +26950,8 @@ public class WorldState
     Chosen returning[];
     Chosen deceased[];
     Chosen formerChosen[];
+    Chosen campaignCustom[];
+    Chosen loopChosen[];
     String cityName;
     Random campaignRand;
     Boolean loopComplete;
