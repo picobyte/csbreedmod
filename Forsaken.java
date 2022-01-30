@@ -194,7 +194,10 @@ public class Forsaken
             timesKilled += c.timesSlaughtered() * 10 + (int)(Math.random() * 10D);
         if(!c.isVVirg())
         {
-            timesHadSex = 100 + (int)(Math.random() * 500D);
+            int counter = c.dissociationReq;
+            for(timesHadSex = 100 + (int)(Math.random() * 500D); counter < 10; timesHadSex = (timesHadSex * 3) / 2 + (int)(Math.random() * 10D))
+                counter++;
+
             if(!c.vStart.booleanValue())
             {
                 int added = 300 + (int)(Math.random() * 300D);
@@ -235,7 +238,15 @@ public class Forsaken
         if(c.isMeek())
             meek = Boolean.valueOf(true);
         if(!c.isAVirg())
+        {
             timesTortured = 30 + (int)(Math.random() * 30D);
+            for(int counter = c.dissociationReq; counter < 10;)
+            {
+                counter++;
+                timesTortured = (timesTortured * 3) / 2 + (int)(Math.random() * 10D);
+            }
+
+        }
         if(c.timesDetonated() > 0)
             timesHarmedSelf = c.timesDetonated() + (int)(Math.random() * (double)(c.timesDetonated() * 2));
         if(c.isDrained().booleanValue())
@@ -258,6 +269,8 @@ public class Forsaken
         if(c.isParasitized().booleanValue())
             parasitized = Boolean.valueOf(true);
         long temptTrack = c.temptReq;
+        if(temptTrack < 10L)
+            temptTrack = 10L;
         if(gender != Gender.MALE)
         {
             if(c.pastTempted.booleanValue())
@@ -364,6 +377,12 @@ public class Forsaken
             pleaExp = (pleaExp * 3L) / 2L;
             expoExp = (expoExp * 3L) / 2L;
             obedience = (obedience * 9) / 10;
+        } else
+        if(defeatType == 6)
+        {
+            hateExp = (hateExp * 3L) / 2L;
+            injuExp = (injuExp * 3L) / 2L;
+            disgrace = (disgrace * 9) / 10;
         }
         type = c.type;
         chooseCombatStyle();
@@ -434,7 +453,7 @@ public class Forsaken
                         say(t, "You pretended to be my friend, and then you turned on me as soon as you had power over me.  Well, now I can't go back.  ");
                     else
                         say(t, "I'll never forgive you for tricking me into joining your side, but all I can do now is fight.  ");
-            if(hostility > 66)
+            if(flavorHostility() > 66)
             {
                 if(morality > 66)
                     say(t, "There are so many people who still need to be punished.");
@@ -444,7 +463,7 @@ public class Forsaken
                 else
                     say(t, "The most important thing is that it gives me an excuse to make my enemies suffer.");
             } else
-            if(hostility > 33)
+            if(flavorHostility() > 33)
             {
                 if(morality > 66)
                     say(t, "I need to be more harsh, more willing to do cruel things, if I'm going to save humanity.");
@@ -523,7 +542,7 @@ public class Forsaken
                         say(t, "I used to think that you wanted to be... friends.  ");
                     else
                         say(t, "You told me that if I served you, you'd make me feel good...  ");
-            if(hostility > 66)
+            if(flavorHostility() > 66)
             {
                 if(morality > 66)
                     say(t, "Most of the people you have me hurt are people who deserve it, so I don't really mind.");
@@ -533,7 +552,7 @@ public class Forsaken
                 else
                     say(t, "I wish you'd let me fight for you more often.  I... want to make more people suffer...!");
             } else
-            if(hostility > 33)
+            if(flavorHostility() > 33)
             {
                 if(morality > 66)
                     say(t, "Whenever your orders involve hurting people, I just have to tell myself that it's not actually my fault.");
@@ -618,7 +637,7 @@ public class Forsaken
                     say(t, "I joined you because the Thralls were my friends.  I didn't know what I was getting into, but... I guess it's fine.  ");
                 else
                     say(t, "I joined you because I thought you'd give me pleasure.  It... hasn't exactly been what I expected.  ");
-            if(hostility > 66)
+            if(flavorHostility() > 66)
             {
                 if(morality > 66)
                     say(t, "It still hurts to fight innocent people, but I'm happy that it hurts, because I deserve it.");
@@ -628,7 +647,7 @@ public class Forsaken
                 else
                     say(t, "I promise that I won't become useless to you.  I'll make your enemies scream!");
             } else
-            if(hostility > 33)
+            if(flavorHostility() > 33)
             {
                 if(morality > 66)
                     say(t, "I'm trying to learn to enjoy hurting people... because I know I can't disobey you.");
@@ -648,6 +667,32 @@ public class Forsaken
         } else
         if(flavorObedience() < 81)
         {
+            if(defeatType == 6)
+            {
+                if(confidence > 66)
+                {
+                    say(t, "I'm one of your soldiers, and that's plenty for me.  ");
+                    if(mainName.equals(originalName))
+                        say(t, (new StringBuilder("Everyone calls me ")).append(mainName).append(", but I'd be happy if you gave me a new name that I don't have to share with that idiot who didn't know ").append(formerSelf.hisHer()).append(" place.  ").toString());
+                    else
+                        say(t, (new StringBuilder("I do like the name ")).append(mainName).append(", though.  It reminds everyone that I'm nothing like that arrogant ").append(originalName).append(" who didn't know ").append(formerSelf.hisHer()).append(" place.  ").toString());
+                } else
+                if(confidence > 33)
+                {
+                    say(t, (new StringBuilder("I'm ")).append(mainName).append(".  ").toString());
+                    if(mainName.equals(originalName))
+                        say(t, (new StringBuilder("But not the same ")).append(mainName).append(" who was one of the Chosen.  I'm someone else entirely.  ").toString());
+                    else
+                        say(t, (new StringBuilder("People still mistake me for ")).append(originalName).append(", but I'm someone else entirely.  ").toString());
+                } else
+                {
+                    say(t, (new StringBuilder("I'm ")).append(mainName).append(", your proud servant!  ").toString());
+                    if(mainName.equals(originalName))
+                        say(t, "And I'm nothing like the weak, fainthearted fool who used to have that name.  ");
+                    else
+                        say(t, (new StringBuilder("And I'm nothing like that weak, fainthearted ")).append(originalName).append(".  ").toString());
+                }
+            } else
             if(confidence > 66)
                 say(t, (new StringBuilder("I'm ")).append(mainName).append(", your greatest servant!  ").toString());
             else
@@ -706,6 +751,7 @@ public class Forsaken
                     say(t, "I'm nothing without you.  I can't even transform on my own.  Serving you is my only purpose in life.  ");
             } else
             if(defeatType == 5)
+            {
                 if(obedience < 40)
                 {
                     if(morality > 66)
@@ -723,17 +769,43 @@ public class Forsaken
                     say(t, "I joined you for the sake of my friends.  For awhile, I thought it was a mistake, but not anymore.  ");
                 else
                     say(t, "I used to be angry about how you hurt me after promising to just give me pleasure, but now I'm even happier than before!  ");
-            if(hostility > 66)
-            {
+            } else
+            if(defeatType == 6)
                 if(morality > 66)
-                    say(t, "I used to be so weak and sentimental, but you taught me to throw all that aside.  Thank you so much!");
+                    say(t, "I've never cared about other people, and you've always been so kind to me, so why wouldn't I join you?  ");
                 else
                 if(morality > 33)
-                    say(t, "You've taught me to enjoy hurting people.  I'm so much happier now that I'm serving you.");
-                else
+                {
+                    say(t, "I just happened to join you on the day that ");
+                    if(mainName.equals(originalName))
+                        say(t, "one of the Chosen who had the same name was defeated.  ");
+                    else
+                        say(t, (new StringBuilder(String.valueOf(originalName))).append(" was defeated.  ").toString());
+                } else
+                {
+                    say(t, "I'm happy to be working with Demons and commanding Thralls.  After all, I can't remember them ever doing anything I didn't like.  ");
+                }
+            if(flavorHostility() > 66)
+            {
+                if(morality > 66)
+                {
+                    if(defeatType == 6)
+                        say(t, "Hurting the innocent and doing evil for evil's sake are what make me happiest, so I hope we can do plenty of that together!");
+                    else
+                        say(t, "I used to be so weak and sentimental, but you taught me to throw all that aside.  Thank you so much!");
+                } else
+                if(morality > 33)
+                {
+                    if(defeatType == 6)
+                        say(t, "I've never even once felt conflicted about hurting people, so I'm grateful for all the wonderful torture techniques you've taught me!");
+                    else
+                        say(t, "You've taught me to enjoy hurting people.  I'm so much happier now that I'm serving you.");
+                } else
+                {
                     say(t, "Please, please, send me out to fight for you!  To torture for you!  To kill for you!");
+                }
             } else
-            if(hostility > 33)
+            if(flavorHostility() > 33)
             {
                 if(defeatType == 5 && obedience < 40)
                 {
@@ -796,7 +868,10 @@ public class Forsaken
             else
             if(defeatType == 5)
                 say(t, "I joined you because you made me feel good, but you don't have to worry about doing that anymore.  I'm all yours regardless.  ");
-            if(hostility > 66)
+            else
+            if(defeatType == 6)
+                say(t, "I think... you created me.  As your tool.  To hurt people.  ");
+            if(flavorHostility() > 66)
             {
                 if(morality > 66)
                     say(t, "Humanity doesn't deserve your greatness.");
@@ -806,7 +881,7 @@ public class Forsaken
                 else
                     say(t, "I'll do anything you ask of me, even if it means sparing the people I want to kill.");
             } else
-            if(hostility > 33)
+            if(flavorHostility() > 33)
             {
                 if(morality > 66)
                     say(t, "First I loved humanity, and then I hated it, and finally... I just don't care about them.  Only about you.");
@@ -830,7 +905,7 @@ public class Forsaken
     public void philosophyTalk(JTextPane t)
     {
         say(t, "\"");
-        if(hostility < 20)
+        if(flavorHostility() < 20)
         {
             if(innocence > 66)
             {
@@ -853,10 +928,10 @@ public class Forsaken
                 else
                 if(morality > 33)
                     say(t, "I don't like to see them get sad.  ");
-                if(deviancy > 66)
+                if(flavorDeviancy() > 66)
                     say(t, "Even after all the weird stuff I've been through, that hasn't changed.");
                 else
-                if(deviancy > 33)
+                if(flavorDeviancy() > 33)
                     say(t, "I guess I could be wrong, but it just feels right to help people.");
                 else
                     say(t, "I know that there's a lot I don't know... it even feels like I just became one of the Chosen a few days ago... but I think that helping people is a good thing.");
@@ -881,10 +956,10 @@ public class Forsaken
                     say(t, "And even when they actually do bad things on their own, I think it's important to show them compassion and forgiveness.  ");
                 else
                     say(t, "Sometimes you have to use violence to stop them from doing bad things, but solving things nonviolently is always better whenever you can manage it.  ");
-                if(deviancy > 66)
+                if(flavorDeviancy() > 66)
                     say(t, "Even in all the tortures you've put me through, when I look at the other people involved, I think I can see a core of goodness inside them.");
                 else
-                if(deviancy > 33)
+                if(flavorDeviancy() > 33)
                     say(t, "Some of the things I've seen people do when you use them to torture me have made me question that... but no, it's not enough to convince me otherwise.");
                 else
                     say(t, "I guess that might be considered a sheltered point of view... but I haven't seen anything to disprove it.");
@@ -908,16 +983,16 @@ public class Forsaken
                     say(t, "I believe that it is important to follow moral principles such as nonviolence in order to respect the rights of others, and that as long as we do so, we can all make the world a much better place.  ");
                 else
                     say(t, "I would not call myself an especially merciful or compassionate person, but I nonetheless believe that it is possible to live in harmony and mutual respect with the rest of society.  ");
-                if(deviancy > 66)
+                if(flavorDeviancy() > 66)
                     say(t, "If it were possible to convince me otherwise, I think it already would have happened in the course of all the various tortures your minions have put me through.");
                 else
-                if(deviancy > 33)
+                if(flavorDeviancy() > 33)
                     say(t, "I think I've had more opportunities than most to see humans at their worst, and none of what I've seen has shaken my convictions.");
                 else
                     say(t, "I acknowledge that I might be wrong, and I invite you to try to convince me otherwise.");
             }
         } else
-        if(hostility < 40)
+        if(flavorHostility() < 40)
         {
             if(innocence > 66)
             {
@@ -942,10 +1017,10 @@ public class Forsaken
                     say(t, "I've started liking other people less and less.  ");
                 else
                     say(t, "I still really don't like people.  ");
-                if(deviancy > 66)
+                if(flavorDeviancy() > 66)
                     say(t, "I've pretty much stopped paying attention to them so I can just focus on things that feel good.");
                 else
-                if(deviancy > 33)
+                if(flavorDeviancy() > 33)
                     say(t, "The more I find out about them, the more I realize that we're all really messed up inside..");
                 else
                     say(t, "It's not like I want to kill them all or anything, but... I dunno, I should probably stop there.");
@@ -973,10 +1048,10 @@ public class Forsaken
                     say(t, "I always knew that humanity was a mixed bag, but I think I was probably giving them too much credit.  ");
                 else
                     say(t, "I never had much faith in humanity in the first place, and somehow I still end up disappointed on a regular basis.  ");
-                if(deviancy > 66)
+                if(flavorDeviancy() > 66)
                     say(t, "I understand why people act the way they do - after all, I've done some pretty sick stuff for my own pleasure, too.  So, I can't really hate them for it.");
                 else
-                if(deviancy > 33)
+                if(flavorDeviancy() > 33)
                     say(t, "I'm not sure if I'm really any better than them, though.  They just want to feel good, and so do I.");
                 else
                     say(t, "The worst part is that I don't think I've even seen how dark people's hearts can get...");
@@ -1003,16 +1078,16 @@ public class Forsaken
                     say(t, "My experiences have led me to the view that people act however they must in order to satisfy their own desires, and it's only by coincidence that these desires sometimes result in the appearance of selfless morality.  ");
                 else
                     say(t, "I don't think that the term 'morality' refers to any objectively measurable entity, and based on the way they behave, I think that most people agree with me on some subconscious level.  ");
-                if(deviancy > 66)
+                if(flavorDeviancy() > 66)
                     say(t, "After cultivating my own deviant impulses, I recognize that other people are essentially the same, myself included.  I feel neither pride nor hatred about that fact.");
                 else
-                if(deviancy > 33)
+                if(flavorDeviancy() > 33)
                     say(t, "Frankly, I'm not sure whether I can even consider myself fundamentally better than any of the most depraved torturers I've faced.");
                 else
                     say(t, "The more I find out about what people truly desire, the more my feelings turn from apathy toward active disgust.");
             }
         } else
-        if(hostility < 61)
+        if(flavorHostility() < 61)
         {
             if(innocence > 66)
             {
@@ -1037,10 +1112,10 @@ public class Forsaken
                     say(t, "They tricked me, over and over again.  I'm tired of it.  ");
                 else
                     say(t, "I wish they'd all just die.  ");
-                if(deviancy > 66)
+                if(flavorDeviancy() > 66)
                     say(t, "I've decided that I just want to spend my life feeling good, no matter how many people it ends up hurting.");
                 else
-                if(deviancy > 33)
+                if(flavorDeviancy() > 33)
                     say(t, "I'm done with letting them do gross stuff to me.");
                 else
                     say(t, "And the things they try to do with me whenever I let my guard down...  Ugh, people are just so gross!");
@@ -1068,10 +1143,10 @@ public class Forsaken
                     say(t, "I'm done helping people.  They can get what's coming to them.  ");
                 else
                     say(t, "If everyone's going to be constantly screwing everyone else over, I might as well join in.  ");
-                if(deviancy > 66)
+                if(flavorDeviancy() > 66)
                     say(t, "I'm just going to spend the rest of my days living out my most twisted fantasies.");
                 else
-                if(deviancy > 33)
+                if(flavorDeviancy() > 33)
                     say(t, "The more I see, the less I care.");
                 else
                     say(t, "Humanity is just... disgusting to the core, every last bit of it.");
@@ -1098,16 +1173,16 @@ public class Forsaken
                     say(t, "Personally, I feel no particular inclination toward cruelty, but I'm in the minority in that regard, and I see nothing wrong with giving people the treatment they secretly wish to visit upon others.  ");
                 else
                     say(t, "Everyone is fundamentally cruel, although most prefer not to acknowledge their own cruelty.  ");
-                if(deviancy > 66)
+                if(flavorDeviancy() > 66)
                     say(t, "I simply wish to be left alone to pursue my own pleasures.");
                 else
-                if(deviancy > 33)
+                if(flavorDeviancy() > 33)
                     say(t, "I'm beginning to grow numb to the perversions in which I see people indulge every day.");
                 else
                     say(t, "Somehow, I'm still surprised when I see the depths to which some people will sink in pursuit of sadistic pleasure.");
             }
         } else
-        if(hostility < 81)
+        if(flavorHostility() < 81)
             if(innocence > 66)
             {
                 if(flavorObedience() > 66)
@@ -1124,6 +1199,9 @@ public class Forsaken
                     say(t, "I'll make them respect me again... make them fear me again...  ");
                 else
                     say(t, "The way they scream and run from me is so much fun!  ");
+                if(defeatType == 6)
+                    say(t, "For some reason, I feel like I wasn't always this way... but that's impossible, hahah!  ");
+                else
                 if(morality > 66)
                     say(t, "I was so stupid, always babbling about love and hope.  Hate and despair are so much cooler!  ");
                 else
@@ -1131,10 +1209,10 @@ public class Forsaken
                     say(t, "I always just accepted everything everyone told me about right and wrong.  I'm a little smarter now!  ");
                 else
                     say(t, "I always wanted to do stuff like this, but I let them trick me into being a hero...  Heheh, those days are over...  ");
-                if(deviancy > 66)
+                if(flavorDeviancy() > 66)
                     say(t, "Nn...  Aaah, now that we've started talking about this, I'm getting all excited.  I wanna tear somebody apart right now!");
                 else
-                if(deviancy > 33)
+                if(flavorDeviancy() > 33)
                     say(t, "I wonder what I could do to have even more fun...");
                 else
                     say(t, "It seems like no matter how many people I hurt, it's never quite enough to satisfy me...  Maybe there's something else missing...");
@@ -1162,10 +1240,10 @@ public class Forsaken
                     say(t, "They just do whatever's easiest in the moment, justifying it to themselves after the fact.  They're animals pretending to be conscious beings.  ");
                 else
                     say(t, "They're each irritating in their own little way.  Perverted, pathetic, self-absorbed, self-righteous, useless, disgusting humans.  ");
-                if(deviancy > 66)
+                if(flavorDeviancy() > 66)
                     say(t, "Of course, I know I'm no exception.  I hate myself most of all.");
                 else
-                if(deviancy > 33)
+                if(flavorDeviancy() > 33)
                     say(t, "The only thing they're good for is hurting them to make myself feel better.");
                 else
                     say(t, "I don't even exactly enjoy hurting them.  It just... makes me feel less empty inside for a little while.");
@@ -1185,6 +1263,9 @@ public class Forsaken
                     say(t, "I do not particularly care who I victimize, whether they're those who have turned their back on me or those who still remain loyal.  ");
                 else
                     say(t, "Although some still seem to consider me to be some sort of hero, the nature of my motivation is utterly amoral.  ");
+                if(defeatType == 6)
+                    say(t, "I simply lack whichever psychological factor that causes most people to refrain from cruelty.  ");
+                else
                 if(morality > 66)
                     say(t, "It took me much too long to realize that restricting myself to arbitrary ethical codes was pointless, and I intend to make up for lost time.  ");
                 else
@@ -1192,10 +1273,10 @@ public class Forsaken
                     say(t, "My actions have no particular long-term purpose behind them.  ");
                 else
                     say(t, "My prior obession with pride and glory was no less arbitrary than a deluded hero's efforts toward the 'greater good'.  ");
-                if(deviancy > 66)
+                if(flavorDeviancy() > 66)
                     say(t, "I take a certain degree of sexual pleasure from the knowledge that I'm causing pain to others, and so I do so at every opportunity.  That's all.");
                 else
-                if(deviancy > 33)
+                if(flavorDeviancy() > 33)
                     say(t, "I simply act in whichever manner is necessary to make myself feel better in the moment.  It's perfectly rational.");
                 else
                     say(t, "This is the only form of entertainment which I still enjoy.");
@@ -1205,8 +1286,8 @@ public class Forsaken
 
     public void trainingTalk(JTextPane t)
     {
-        if(deviancy >= 20 && deviancy >= 40)
-            if(deviancy < 61);
+        if(flavorDeviancy() >= 20 && flavorDeviancy() >= 40 && flavorDeviancy() >= 61)
+            flavorDeviancy();
     }
 
     public void lifeTalk(JTextPane t)
@@ -1234,6 +1315,7 @@ public class Forsaken
                     if(w.getHarem()[i].formerSelf.equals(formerPartners[j]).booleanValue())
                     {
                         history = Boolean.valueOf(true);
+                        oldPartners = Boolean.valueOf(true);
                         formerRelationship = formerFriendships[j];
                     }
 
@@ -1278,7 +1360,7 @@ public class Forsaken
                 {
                     if(innocence > 66)
                     {
-                        if(x.hostility < 20)
+                        if(x.flavorHostility() < 20)
                         {
                             if(x.confidence > 66)
                                 say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is strong, and amazing, and really nice too!  ").toString());
@@ -1288,7 +1370,7 @@ public class Forsaken
                             else
                                 say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is shy and sweet.  I like ").append(x.himHer()).append(" a lot!  ").toString());
                         } else
-                        if(x.hostility < 40)
+                        if(x.flavorHostility() < 40)
                         {
                             if(x.confidence > 66)
                                 say(t, (new StringBuilder("Even though ")).append(x.mainName).append(" can seem scary at first, ").append(x.heShe()).append("'s not that bad.  ").toString());
@@ -1298,7 +1380,7 @@ public class Forsaken
                             else
                                 say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" seems a little quiet and weird until you get to know ").append(x.himHer()).append(".  ").toString());
                         } else
-                        if(x.hostility < 61)
+                        if(x.flavorHostility() < 61)
                         {
                             if(x.confidence > 66)
                                 say(t, (new StringBuilder("As long as you don't make ")).append(x.himHer()).append(" angry, ").append(x.mainName).append(" is really fun!  ").toString());
@@ -1308,7 +1390,7 @@ public class Forsaken
                             else
                                 say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" may be kinda unfriendly, always wanting to be by ").append(x.himHer()).append("self and glaring at people... but I still like ").append(x.himHer()).append("!  ").toString());
                         } else
-                        if(x.hostility < 81)
+                        if(x.flavorHostility() < 81)
                         {
                             if(x.confidence > 66)
                                 say(t, (new StringBuilder("Even though ")).append(x.mainName).append(" seems really angry all the time, I still like ").append(x.himHer()).append("!  ").toString());
@@ -1328,7 +1410,7 @@ public class Forsaken
                     } else
                     if(innocence > 33)
                     {
-                        if(x.hostility < 20)
+                        if(x.flavorHostility() < 20)
                         {
                             if(x.confidence > 66)
                                 say(t, (new StringBuilder("I appreciate the way that ")).append(x.mainName).append(" has such a strong sense of right and wrong.  ").toString());
@@ -1338,7 +1420,7 @@ public class Forsaken
                             else
                                 say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is such a cute, shy little thing.  ").toString());
                         } else
-                        if(x.hostility < 40)
+                        if(x.flavorHostility() < 40)
                         {
                             if(x.confidence > 66)
                                 say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is a strong person who doesn't give an inch.  ").toString());
@@ -1348,7 +1430,7 @@ public class Forsaken
                             else
                                 say(t, (new StringBuilder("I can tell that ")).append(x.mainName).append(" has been hurt in the past, and it makes me want to protect ").append(x.himHer()).append(".  ").toString());
                         } else
-                        if(x.hostility < 61)
+                        if(x.flavorHostility() < 61)
                         {
                             if(x.confidence > 66)
                                 say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is someone you definitely want to have on your side.  ").append(x.HeShe()).append("'s fierce.  ").toString());
@@ -1358,7 +1440,7 @@ public class Forsaken
                             else
                                 say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is a major pessimist who doesn't have much hope for ").append(x.himHer()).append("self or the world, but I try to show ").append(x.himHer()).append(" that it's not all bad.  ").toString());
                         } else
-                        if(x.hostility < 81)
+                        if(x.flavorHostility() < 81)
                         {
                             if(x.confidence > 66)
                                 say(t, (new StringBuilder("I'll be the first to admit that it's dangerous to get too close to ")).append(x.mainName).append(", but I think it's worth it.  ").toString());
@@ -1376,7 +1458,7 @@ public class Forsaken
                         else
                             say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" wants to destroy everything and everyone, including ").append(x.himHer()).append("self.  It's hard to cheer ").append(x.himHer()).append(" up.  ").toString());
                     } else
-                    if(x.hostility < 20)
+                    if(x.flavorHostility() < 20)
                     {
                         if(x.confidence > 66)
                             say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" has held onto ").append(x.hisHer()).append(" heroic ideals with a stubbornness I can't help but respect.  ").toString());
@@ -1386,7 +1468,7 @@ public class Forsaken
                         else
                             say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is timid, but I can appreciate ").append(x.hisHer()).append(" adherence to ").append(x.hisHer()).append(" morality even after being subjected to such extreme circumstances.  ").toString());
                     } else
-                    if(x.hostility < 40)
+                    if(x.flavorHostility() < 40)
                     {
                         if(x.confidence > 66)
                             say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is quite strong.  Merciless, even.  I hold a great deal of respect for ").append(x.himHer()).append(".  ").toString());
@@ -1396,7 +1478,7 @@ public class Forsaken
                         else
                             say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" can come across as cowardly, but I appreciate ").append(x.hisHer()).append(" prudence in recognizing ").append(x.hisHer()).append(" own limitations.  ").toString());
                     } else
-                    if(x.hostility < 61)
+                    if(x.flavorHostility() < 61)
                     {
                         if(x.confidence > 66)
                             say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is the type of person I'd much prefer to have on my side - powerful and utterly ruthless.  ").toString());
@@ -1406,7 +1488,7 @@ public class Forsaken
                         else
                             say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" might not believe me when I say it, but I enjoy spending time around ").append(x.himHer()).append(".  ").toString());
                     } else
-                    if(x.hostility < 81)
+                    if(x.flavorHostility() < 81)
                     {
                         if(x.confidence > 66)
                             say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" has developed some severe murderous tendencies, but I don't see this as being an unreasonable reaction to ").append(x.hisHer()).append(" circumstances.  ").toString());
@@ -1760,9 +1842,9 @@ public class Forsaken
                         say(t, (new StringBuilder("A-Although... ")).append(x.heShe()).append(" says I'm not worth ").append(x.hisHer()).append(" time.  ").toString());
                     else
                         say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" always just insults me whenever I try to talk to ").append(x.himHer()).append("...  S-Still!  ").toString());
-                    if(x.deviancy - deviancy <= 5)
+                    if(x.flavorDeviancy() - flavorDeviancy() <= 5)
                     {
-                        if(deviancy < 20)
+                        if(flavorDeviancy() < 20)
                         {
                             if(x.innocence > 66)
                                 say(t, "It's nice to have someone else who agrees with me that all the weird sexual stuff Demons do is just completely gross.  ");
@@ -1772,7 +1854,7 @@ public class Forsaken
                             else
                                 say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" doesn't let any of the weird sexual stuff get to ").append(x.himHer()).append(", and always just stays calm and smart as always.  ").toString());
                         } else
-                        if(deviancy < 40)
+                        if(flavorDeviancy() < 40)
                         {
                             if(x.innocence > 66)
                                 say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s done decently well in coping with all the deviant stuff ").append(x.heShe()).append(" never could have imagined back before ").append(x.heShe()).append(" became one of the Chosen.  ").toString());
@@ -1782,7 +1864,7 @@ public class Forsaken
                             else
                                 say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s very smart, even when it comes to all the sexual stuff we end up having to do.  ").toString());
                         } else
-                        if(deviancy < 61)
+                        if(flavorDeviancy() < 61)
                         {
                             if(x.innocence > 66)
                                 say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" is clueless when it comes to our 'carnal duties', but that's alright, since I like helping ").append(x.himHer()).append(" out.  ").toString());
@@ -1792,7 +1874,7 @@ public class Forsaken
                             else
                                 say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" can be a bit stiff about the sexual stuff we have to do, but that just makes it more satisfying to show ").append(x.himHer()).append(" the ropes on one of the subjects I know more about.  ").toString());
                         } else
-                        if(deviancy < 81)
+                        if(flavorDeviancy() < 81)
                         {
                             if(x.innocence > 66)
                                 say(t, (new StringBuilder("It's really adorable, the way ")).append(x.heShe()).append(" has no idea what to do when we end up in really deviant situations.  ").toString());
@@ -1818,7 +1900,7 @@ public class Forsaken
                         else
                             say(t, (new StringBuilder("I know ")).append(x.heShe()).append("'s uncomfortable with how much I lust after ").append(x.himHer()).append(", but that just turns me on even more...  ").toString());
                     } else
-                    if(deviancy < 20)
+                    if(flavorDeviancy() < 20)
                     {
                         if(x.innocence > 66)
                         {
@@ -1834,7 +1916,7 @@ public class Forsaken
                         else
                             say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" can be a bit... perverted, sometimes, but maybe I'm just too sensitive to that sort of thing.  ").toString());
                     } else
-                    if(deviancy < 40)
+                    if(flavorDeviancy() < 40)
                     {
                         if(x.innocence > 66)
                             say(t, (new StringBuilder("I suppose it's a bit strange that ")).append(x.heShe()).append(" doesn't see anything wrong with being completely open about how much sex ").append(x.heShe()).append(" wants to have.  ").toString());
@@ -1844,7 +1926,7 @@ public class Forsaken
                         else
                             say(t, (new StringBuilder("I do get a little... uncomfortable when ")).append(x.heShe()).append(" talks about ").append(x.hisHer()).append(" sexual fetishes.  Some of them are so weird.  ").toString());
                     } else
-                    if(deviancy < 61)
+                    if(flavorDeviancy() < 61)
                     {
                         if(x.innocence > 66)
                             say(t, (new StringBuilder("It does disturb me when ")).append(x.heShe()).append(" talks about all the messed up things ").append(x.heShe()).append(" wants to do to other people, as if those kinds of desires are completely normal.  ").toString());
@@ -1854,7 +1936,7 @@ public class Forsaken
                         else
                             say(t, (new StringBuilder("I've learned not to talk to ")).append(x.himHer()).append(" about ").append(x.hisHer()).append(" sexual fetishes.  It always made me feel a bit sick, so I just don't do it anymore.  ").toString());
                     } else
-                    if(deviancy < 81)
+                    if(flavorDeviancy() < 81)
                     {
                         if(x.innocence > 66)
                             say(t, (new StringBuilder("I wish ")).append(x.heShe()).append("'d stop masturbating all the time, but whenever I point it out to ").append(x.himHer()).append(", ").append(x.heShe()).append("'s always surprised, like ").append(x.heShe()).append(" was doing it without thinking.  ").toString());
@@ -2122,7 +2204,7 @@ public class Forsaken
                 {
                     if(innocence > 66)
                     {
-                        if(x.hostility < 20)
+                        if(x.flavorHostility() < 20)
                         {
                             if(x.confidence > 66)
                                 say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" talks big, but ").append(x.heShe()).append(" isn't really scary at all.  ").toString());
@@ -2132,7 +2214,7 @@ public class Forsaken
                             else
                                 say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is a total wimp.  ").toString());
                         } else
-                        if(x.hostility < 40)
+                        if(x.flavorHostility() < 40)
                         {
                             if(x.confidence > 66)
                                 say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is nothing but a big bully!  ").toString());
@@ -2142,7 +2224,7 @@ public class Forsaken
                             else
                                 say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is just your typical whiner.  ").toString());
                         } else
-                        if(x.hostility < 61)
+                        if(x.flavorHostility() < 61)
                         {
                             if(x.confidence > 66)
                                 say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is just pointlessly mean!  ").toString());
@@ -2152,7 +2234,7 @@ public class Forsaken
                             else
                                 say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is someone you can never rely on.  ").toString());
                         } else
-                        if(x.hostility < 81)
+                        if(x.flavorHostility() < 81)
                         {
                             if(x.confidence > 66)
                                 say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" doesn't care about anything but hurting people!  ").toString());
@@ -2172,7 +2254,7 @@ public class Forsaken
                     } else
                     if(innocence > 33)
                     {
-                        if(x.hostility < 20)
+                        if(x.flavorHostility() < 20)
                         {
                             if(x.confidence > 66)
                                 say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" isn't the hero ").append(x.heShe()).append(" pretends to be.  ").toString());
@@ -2182,7 +2264,7 @@ public class Forsaken
                             else
                                 say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is weak.  Just weak in every way.  ").toString());
                         } else
-                        if(x.hostility < 40)
+                        if(x.flavorHostility() < 40)
                         {
                             if(x.confidence > 66)
                                 say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is an egomaniac.  ").toString());
@@ -2192,7 +2274,7 @@ public class Forsaken
                             else
                                 say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is a coward.  ").toString());
                         } else
-                        if(x.hostility < 61)
+                        if(x.flavorHostility() < 61)
                         {
                             if(x.confidence > 66)
                                 say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is a huge asshole.  ").toString());
@@ -2202,7 +2284,7 @@ public class Forsaken
                             else
                                 say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is a paranoid nutcase.  ").toString());
                         } else
-                        if(x.hostility < 81)
+                        if(x.flavorHostility() < 81)
                         {
                             if(x.confidence > 66)
                                 say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is a complete psychopath.  ").toString());
@@ -2220,7 +2302,7 @@ public class Forsaken
                         else
                             say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is a disaster waiting to happen.  ").toString());
                     } else
-                    if(x.hostility < 20)
+                    if(x.flavorHostility() < 20)
                     {
                         if(x.confidence > 66)
                             say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is a fool with pretensions of heroism.  ").toString());
@@ -2230,7 +2312,7 @@ public class Forsaken
                         else
                             say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" masks ").append(x.hisHer()).append(" weakness with a thin veneer of kindness.  ").toString());
                     } else
-                    if(x.hostility < 40)
+                    if(x.flavorHostility() < 40)
                     {
                         if(x.confidence > 66)
                             say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is reckless and selfish.  ").toString());
@@ -2240,7 +2322,7 @@ public class Forsaken
                         else
                             say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is a coward whose only redeeming feature is ").append(x.hisHer()).append(" acknowledgement of ").append(x.hisHer()).append(" own cowardice.  ").toString());
                     } else
-                    if(x.hostility < 61)
+                    if(x.flavorHostility() < 61)
                     {
                         if(x.confidence > 66)
                             say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is convinced that ").append(x.heShe()).append("'s different from and better than everyone else.  ").toString());
@@ -2250,7 +2332,7 @@ public class Forsaken
                         else
                             say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" is fierce and desperate as a cornered animal.  ").toString());
                     } else
-                    if(x.hostility < 81)
+                    if(x.flavorHostility() < 81)
                     {
                         if(x.confidence > 66)
                             say(t, (new StringBuilder(String.valueOf(x.mainName))).append(" attempts to use cruelty to hide ").append(x.hisHer()).append(" insecurities, even from ").append(x.himHer()).append("self.  ").toString());
@@ -2751,8 +2833,8 @@ public class Forsaken
                         say(t, (new StringBuilder("I get back at ")).append(x.himHer()).append(" by letting ").append(x.hisHer()).append(" other enemies here know where ").append(x.heShe()).append("'s staying so that they can ambush ").append(x.himHer()).append(" while ").append(x.heShe()).append("'s asleep.  ").toString());
                     else
                         say(t, (new StringBuilder("At least it can be fun to blend into the crowds that chase ")).append(x.himHer()).append(" down to have fun with ").append(x.himHer()).append(" whenever ").append(x.heShe()).append(" shows ").append(x.hisHer()).append(" pathetic face outside.  ").toString());
-                    if(x.deviancy - deviancy >= 15)
-                        if(deviancy < 20)
+                    if(x.flavorDeviancy() - flavorDeviancy() >= 15)
+                        if(flavorDeviancy() < 20)
                         {
                             if(x.innocence > 66)
                                 say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s always talking about perverted stuff like it's completely normal.  ").toString());
@@ -2762,7 +2844,7 @@ public class Forsaken
                             else
                                 say(t, (new StringBuilder("I hate the way ")).append(x.heShe()).append(" looks at me, like ").append(x.heShe()).append("'s thinking about something perverted.  ").toString());
                         } else
-                        if(deviancy < 40)
+                        if(flavorDeviancy() < 40)
                         {
                             if(x.innocence > 66)
                                 say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append(" can't stop talking about all the bizarre fetishes ").append(x.heShe()).append(" has.  It's not normal.  ").toString());
@@ -2772,7 +2854,7 @@ public class Forsaken
                             else
                                 say(t, (new StringBuilder(String.valueOf(x.HeShe()))).append("'s not stupid, but that just makes it even worse when you realize that ").append(x.heShe()).append("'s spending all ").append(x.hisHer()).append(" time planning out how to satisfy ").append(x.hisHer()).append(" twisted sexual desires.  ").toString());
                         } else
-                        if(deviancy < 61)
+                        if(flavorDeviancy() < 61)
                         {
                             if(x.innocence > 66)
                                 say(t, (new StringBuilder("It's a good thing ")).append(x.heShe()).append("'s so stupid, because it means ").append(x.heShe()).append(" has no chance of getting ahold of me in order to do one of the sickening acts ").append(x.hisHer()).append(" little mind is obsessed with.  ").toString());
@@ -3034,7 +3116,7 @@ public class Forsaken
                 w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" gladly cooperates with the Thralls who tell ").append(himHer()).append(" that it's ").append(hisHer()).append(" turn to be sent to the breeding chamber.  ").toString());
             else
                 w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is still quite strong, perhaps even strong enough to resist if ").append(heShe()).append(" wanted to, but ").append(heShe()).append(" still happily accompanies the Thralls sent to bring ").append(himHer()).append(" to the breeding chamber.  ").toString());
-            if(hostility > 66)
+            if(flavorHostility() > 66)
             {
                 w.append(t, (new StringBuilder("Madness swims in ")).append(hisHer()).append(" eyes as ").append(heShe()).append(" eagerly welcomes the tentacles wrapping around ").append(himHer()).append(".\n\n").toString());
                 say(t, "\"");
@@ -3046,7 +3128,7 @@ public class Forsaken
                 else
                     say(t, "You're using me to hurt them...  To hurt all the people who hurt me.  I'm so happy...");
             } else
-            if(hostility > 33)
+            if(flavorHostility() > 33)
             {
                 w.append(t, (new StringBuilder(String.valueOf(HisHer()))).append(" face shines with pure happiness right up until the end.\n\n").toString());
                 say(t, "\"");
@@ -3070,10 +3152,10 @@ public class Forsaken
                     say(t, "After resisting for so long, I finally get to be a part of something greater than myself...");
             }
             say(t, "\"\n\n");
-            if(deviancy > 66)
+            if(flavorDeviancy() > 66)
                 w.append(t, (new StringBuilder(String.valueOf(HeShe()))).append(" screams in ecstasy as a tentacle rams into ").append(hisHer()).append(" ").append(hole).append(", climaxing instantly.  ").append(HisHer()).append(" voice rises in pitch and volume, the orgasm being drawn out by the spurts of slime being shot into ").append(himHer()).append(", only growing more and more intense with time.  ").toString());
             else
-            if(deviancy > 33)
+            if(flavorDeviancy() > 33)
                 w.append(t, (new StringBuilder(String.valueOf(HeShe()))).append(" sighs with satisfaction at the feeling of one of your tentacles entering ").append(hisHer()).append(" ").append(hole).append(", then moans and shudders at the pleasure radiating through ").append(hisHer()).append(" body from the slime being pumped inside.  ").toString());
             else
                 w.append(t, (new StringBuilder("When one of your tentacles forces its way into ")).append(hisHer()).append(" ").append(hole).append(", ").append(heShe()).append(" winces in discomfort at first.  But ").append(heShe()).append(" concentrates on relaxing and accepting it into ").append(himHer()).append(", and soon ").append(heShe()).append("'s rewarded by several spurts of slime into ").append(hisHer()).append(" belly.  ").append(HisHer()).append(" senses are assaulted by sudden overwhelming pleasure, and all pain is forgotten.  ").toString());
@@ -3087,7 +3169,7 @@ public class Forsaken
                 w.append(t, (new StringBuilder("As the Thralls lead ")).append(mainName).append(" to the breeding chamber, ").append(heShe()).append(" protests that ").append(heShe()).append("'s still strong enough to be of use to you, but ").append(heShe()).append(" doesn't actually fight back, hoping against hope that you'll have a change of heart if ").append(heShe()).append(" acts obediently enough.  ").toString());
             else
                 w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is still strong enough that ").append(heShe()).append(" could put up some serious resistance, but ").append(heShe()).append("'s paralyzed by the fear you've put into ").append(hisHer()).append(" heart, and ").append(heShe()).append(" allows ").append(himHer()).append("self to be led to the breeding chamber.  ").toString());
-            if(hostility > 66)
+            if(flavorHostility() > 66)
             {
                 w.append(t, (new StringBuilder("As the tentacles encircle ")).append(himHer()).append(" and it becomes clear that ").append(heShe()).append("'s truly going to be converted into breeding stock, ").append(heShe()).append(" breaks out into terrified, insane laughter.\n\n").toString());
                 say(t, "\"");
@@ -3099,7 +3181,7 @@ public class Forsaken
                 else
                     say(t, "Ahah, ahahah...  I can't believe I'm actually... looking forward to never seeing another person again.  Ahahahah!");
             } else
-            if(hostility > 33)
+            if(flavorHostility() > 33)
             {
                 w.append(t, (new StringBuilder("Even when the tentacles begin to entwine ")).append(hisHer()).append(" limbs, ").append(heShe()).append(" still doesn't fight back, ").append(hisHer()).append(" fear giving way to resignation.\n\n").toString());
                 say(t, "\"");
@@ -3123,10 +3205,10 @@ public class Forsaken
                     say(t, "I could have died before letting myself be taken.  I could have fled.  I could have... done so many things...");
             }
             say(t, "\"\n\n");
-            if(deviancy > 66)
+            if(flavorDeviancy() > 66)
                 w.append(t, (new StringBuilder(String.valueOf(HisHer()))).append(" reluctance quickly fades when ").append(heShe()).append(" sees the aphrodisiac-laced slime dripping from the surrounding tentacles.  ").append(HeShe()).append(" eagerly takes one into ").append(hisHer()).append(" mouth, then moans around it as ").append(heShe()).append(" feels another slip into ").append(hisHer()).append(" ").append(hole).append(".  ").toString());
             else
-            if(deviancy > 33)
+            if(flavorDeviancy() > 33)
                 w.append(t, (new StringBuilder("But ")).append(hisHer()).append(" breathing quickens and ").append(heShe()).append(" instinctively spreads ").append(hisHer()).append(" legs wider when ").append(heShe()).append(" sees a tentacle approaching ").append(hisHer()).append(" ").append(hole).append(".  It pushes inside, and ").append(mainName).append("'s last traces of terror fade away as the slime pumped inside ").append(himHer()).append(" fills ").append(hisHer()).append(" head with a sexual arousal too thick to think through.  ").toString());
             else
                 w.append(t, (new StringBuilder("A spike of terror shoots through ")).append(hisHer()).append(" mind when ").append(heShe()).append(" feels a tentacle pushing against ").append(hisHer()).append(" ").append(hole).append(", and ").append(heShe()).append(" groans in mingled fear and discomfort when it penetrates ").append(himHer()).append(".  However, ").append(hisHer()).append(" body soon begins to feel hot, a side-effect of the slime being pumped into ").append(himHer()).append(", and ").append(hisHer()).append(" reluctance gradually fades until ").append(heShe()).append("'s openly moaning in pleasure, unable to think of anything other than how good it feels.  ").toString());
@@ -3139,7 +3221,7 @@ public class Forsaken
                 w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" does ").append(hisHer()).append(" best to stop you from bringing ").append(himHer()).append(" to the breeding chamber, but ").append(heShe()).append(" can't access ").append(hisHer()).append(" full power anymore without your help, and it's not long before ").append(heShe()).append("'s defeated and thrown inside.  ").toString());
             else
                 w.append(t, (new StringBuilder("Enough residual psychic energy remains within ")).append(mainName).append(" that ").append(heShe()).append("'s able to make an impressive last stand, killing the Demons you send after ").append(himHer()).append(" and collapsing several chambers of the hive.  But eventually, ").append(heShe()).append(" exhausts ").append(himHer()).append("self, and ").append(heShe()).append("'s dragged to the breeding chamber.  ").toString());
-            if(hostility > 66)
+            if(flavorHostility() > 66)
             {
                 w.append(t, (new StringBuilder("Even then, ")).append(heShe()).append(" snarls and shrieks, screaming bloody vengeance loud enough to be heard several chambers away.\n\n").toString());
                 say(t, "\"");
@@ -3151,7 +3233,7 @@ public class Forsaken
                 else
                     say(t, "Hear me, Demon Lord!  The malice in my heart is greater than what you can contain!  May you choke on it!");
             } else
-            if(hostility > 33)
+            if(flavorHostility() > 33)
             {
                 w.append(t, (new StringBuilder("The tentacles close in, and ")).append(heShe()).append(" shouts wild denials, unable to accept ").append(hisHer()).append(" fate.\n\n").toString());
                 say(t, "\"");
@@ -3175,10 +3257,10 @@ public class Forsaken
                     say(t, "Don't... use my body... for something so disgusting...!");
             }
             say(t, "\"\n\n");
-            if(deviancy > 66)
+            if(flavorDeviancy() > 66)
                 w.append(t, (new StringBuilder("Despite ")).append(hisHer()).append(" extreme sexual appetites, ").append(heShe()).append(" still ends up struggling even harder when ").append(heShe()).append(" feels a tentacle pushing its way into ").append(hisHer()).append(" ").append(hole).append(", because ").append(heShe()).append(" knows that the pleasure will stop ").append(himHer()).append(" from thinking about resisting ever again.  And when the slime starts getting pumped inside ").append(himHer()).append(", ").append(heShe()).append("'s proven completely right.  ").toString());
             else
-            if(deviancy > 33)
+            if(flavorDeviancy() > 33)
                 w.append(t, (new StringBuilder(String.valueOf(HisHer()))).append(" eyes go wide with shock as a tentacle abruptly thrusts itself into ").append(hisHer()).append(" ").append(hole).append(", immediately shooting out several spurts of slime.  ").append(HeShe()).append(" has to admit to ").append(himHer()).append("self that it feels good, and that crack in ").append(hisHer()).append(" willpower soon causes ").append(hisHer()).append(" entire mind to crumble into a sea of warm pleasure.  ").toString());
             else
                 w.append(t, (new StringBuilder(String.valueOf(HeShe()))).append(" grits ").append(hisHer()).append(" teeth, tightening the muscles in ").append(hisHer()).append(" lower body and willing ").append(himHer()).append("self to resist the penetration of the tentacle slithering toward ").append(hisHer()).append(" ").append(hole).append(".  But it's completely in vain.  The appendage thrusts inside and begins pouring out slime, and although ").append(mainName).append(" steels ").append(hisHer()).append(" willpower as best ").append(heShe()).append(" can, it's only a matter of time until ").append(heShe()).append("'s drooling and moaning, ").append(hisHer()).append(" mind whited out by continuous climax.  ").toString());
@@ -4020,13 +4102,13 @@ public class Forsaken
             } else
             {
                 w.append(t, (new StringBuilder("Exposing ")).append(hisHer()).append(" body doesn't bother ").append(himHer()).append(" much anymore, but ").toString());
-                if(deviancy < 34)
+                if(flavorDeviancy() < 34)
                     w.append(t, "the blatantly sexual design will be even worse than just being seen naked.");
                 else
                 if(obedience < 34)
                     w.append(t, (new StringBuilder("being forced to wear an outfit of your choosing will rankle ")).append(himHer()).append(".").toString());
                 else
-                if(hostility < 34)
+                if(flavorHostility() < 34)
                     w.append(t, (new StringBuilder("the Demonic features incorporated into ")).append(hisHer()).append(" garb will highlight how far ").append(heShe()).append("'s fallen.").toString());
                 else
                     w.append(t, (new StringBuilder("the fact that it's being forced upon ")).append(himHer()).append(" will take ").append(himHer()).append(" out of ").append(hisHer()).append(" comfort zone.").toString());
@@ -4348,6 +4430,7 @@ public class Forsaken
                             opinionClamp = (opinionClamp * (80 - obedience)) / 80;
                         if(opinionClamp == 0)
                             w.append(t, "-");
+                        w.append(t, (new StringBuilder(String.valueOf(opinionClamp))).append("(").toString());
                         if(obedience > 80)
                             w.append(t, (new StringBuilder("accepts your decision to sacrifice ")).append(others[i].mainName).toString());
                         else
@@ -4361,7 +4444,6 @@ public class Forsaken
                             w.append(t, (new StringBuilder("angry that you sacrificed ")).append(others[i].mainName).toString());
                         else
                             w.append(t, (new StringBuilder("determined to avenge ")).append(others[i].mainName).toString());
-                        w.append(t, (new StringBuilder(String.valueOf(opinionClamp))).append(" (").toString());
                         w.append(t, ")\n");
                         relationTotal += opinionClamp;
                         if(opinionClamp < objectionTotal)
@@ -5592,7 +5674,7 @@ public class Forsaken
             if(nextTraining == 0)
             {
                 Project.changePortrait(gender, type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
-                if(deviancy < 20)
+                if(flavorDeviancy() < 20)
                 {
                     if(morality > 66)
                         say(t, "I'm not just going to let everyone do perverted stuff with me!  ");
@@ -5602,7 +5684,7 @@ public class Forsaken
                     else
                         say(t, "I don't feel like putting up with a bunch of perverted stuff.  ");
                 } else
-                if(hostility < 20)
+                if(flavorHostility() < 20)
                 {
                     if(innocence > 66)
                         say(t, "There's no way I'd actually be able to make that many people happy, though...  ");
@@ -5640,7 +5722,7 @@ public class Forsaken
                     else
                         say(t, "Do you think that just because I'm your prisoner, I've given up on my dreams of becoming a beloved celebrity?  ");
                 } else
-                if(hostility < 15)
+                if(flavorHostility() < 15)
                 {
                     Project.changePortrait(gender, type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.SHAME, Project.Emotion.NEUTRAL);
                     if(dignity > 66)
@@ -5671,7 +5753,7 @@ public class Forsaken
             } else
             if(nextTraining == 4)
             {
-                if(deviancy < 10)
+                if(flavorDeviancy() < 10)
                 {
                     Project.changePortrait(gender, type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                     if(dignity > 66)
@@ -5713,7 +5795,7 @@ public class Forsaken
             } else
             if(nextTraining == 6)
             {
-                if(hostility < 30)
+                if(flavorHostility() < 30)
                 {
                     Project.changePortrait(gender, type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
                     if(confidence > 66)
@@ -5724,7 +5806,7 @@ public class Forsaken
                     else
                         say(t, "I-I'm not the kind of person who enjoys that sort of thing!  ");
                 } else
-                if(deviancy < 30)
+                if(flavorDeviancy() < 30)
                 {
                     Project.changePortrait(gender, type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
                     if(morality > 66)
@@ -5766,7 +5848,7 @@ public class Forsaken
                     else
                         say(t, "My Forsaken powers are dependent on the public's beliefs that I am above fear and doubt.  ");
                 } else
-                if(hostility < 35)
+                if(flavorHostility() < 35)
                 {
                     Project.changePortrait(gender, type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.NEUTRAL, Project.Emotion.SHAME);
                     if(morality > 66)
@@ -5797,7 +5879,7 @@ public class Forsaken
             } else
             if(nextTraining == 10)
             {
-                if(deviancy < 40)
+                if(flavorDeviancy() < 40)
                 {
                     Project.changePortrait(gender, type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                     if(innocence > 66)
@@ -5839,7 +5921,7 @@ public class Forsaken
             } else
             if(nextTraining == 12)
             {
-                if(deviancy < 50)
+                if(flavorDeviancy() < 50)
                 {
                     if(innocence > 66)
                         say(t, "Having actual sex with an actual Demon is just too weird.  ");
@@ -5849,7 +5931,7 @@ public class Forsaken
                     else
                         say(t, "If you were to go that far, I expect I'd have difficulty retaining my sanity.  ");
                 } else
-                if(hostility < 50)
+                if(flavorHostility() < 50)
                 {
                     if(morality > 66)
                         say(t, "I'm not interested in being impregnated with an enemy of humanity.  ");
@@ -5887,7 +5969,7 @@ public class Forsaken
                     else
                         say(t, "Such a large-scale humiliation would have the potential to completely sever the flow of psychic energy to my body.  ");
                 } else
-                if(hostility < 70)
+                if(flavorHostility() < 70)
                 {
                     if(dignity > 66)
                         say(t, "If I let this happen, then even my old fans outside the Demonic hive will know that I was never a true hero.  ");
@@ -5915,7 +5997,7 @@ public class Forsaken
             } else
             if(nextTraining == 16)
             {
-                if(deviancy < 60)
+                if(flavorDeviancy() < 60)
                 {
                     if(confidence > 66)
                         say(t, "Isn't this just torture?  I refuse!  ");
@@ -5959,7 +6041,7 @@ public class Forsaken
                 if(obedience < 20)
                 {
                     Project.changePortrait(gender, type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
-                    if(hostility < 20)
+                    if(flavorHostility() < 20)
                     {
                         if(innocence > 66)
                             say(t, "Even if you try to tempt them, I know that these people won't go too far!  Probably!  ");
@@ -5976,7 +6058,7 @@ public class Forsaken
                         say(t, "If you drive them crazy like that, I won't be able to control them!  ");
                     else
                         say(t, "This may surprise you, but my abilities do have limits.  I won't be able to maintain control of the people affected by the curse.  ");
-                    if(deviancy < 20)
+                    if(flavorDeviancy() < 20)
                     {
                         if(morality > 66)
                             say(t, "I'm not interested in being part of something perverted.");
@@ -5995,7 +6077,7 @@ public class Forsaken
                         say(t, "I let you go this far for my own reasons, but I'm not interested in going any further!");
                 } else
                 {
-                    if(deviancy < 20)
+                    if(flavorDeviancy() < 20)
                     {
                         if(morality > 66)
                             say(t, "Wait, please!  If you let them go any further, they might really turn me into a pervert!  ");
@@ -6012,7 +6094,7 @@ public class Forsaken
                         say(t, "Ah...  I'm... completely helpless like this...  Ergh, no, more importantly...  ");
                     else
                         say(t, "I guess that driving them crazy might also feel good for me... but...  ");
-                    if(hostility < 20)
+                    if(flavorHostility() < 20)
                     {
                         Project.changePortrait(gender, type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
                         if(innocence > 66)
@@ -6056,7 +6138,7 @@ public class Forsaken
                         say(t, "I'm not going to give people any more reason to think I've become weak.  ");
                     else
                         say(t, "Are you trying to sabotage my inevitable comeback as a beloved hero!?  ");
-                    if(hostility < 15)
+                    if(flavorHostility() < 15)
                     {
                         Project.changePortrait(gender, type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.FOCUS, Project.Emotion.ANGER);
                         if(dignity > 66)
@@ -6079,7 +6161,7 @@ public class Forsaken
                     }
                 } else
                 {
-                    if(hostility < 15)
+                    if(flavorHostility() < 15)
                     {
                         if(dignity > 66)
                             say(t, "I'm... not really comfortable with letting everyone know exactly how far I've fallen.  ");
@@ -6120,7 +6202,7 @@ public class Forsaken
             {
                 if(obedience < 20)
                 {
-                    if(deviancy < 10)
+                    if(flavorDeviancy() < 10)
                     {
                         if(dignity > 66)
                             say(t, "But if you do that, everyone will think I'm a pervert!  ");
@@ -6174,7 +6256,7 @@ public class Forsaken
                         say(t, "It might be too late to save my reputation, but...  ");
                     else
                         say(t, "I'm aware that I'm already somewhat of a laughing stock, but...  ");
-                    if(deviancy < 10)
+                    if(flavorDeviancy() < 10)
                     {
                         Project.changePortrait(gender, type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.FEAR, Project.Emotion.SHAME);
                         if(dignity > 66)
@@ -6201,7 +6283,7 @@ public class Forsaken
             {
                 if(obedience < 40)
                 {
-                    if(deviancy < 30)
+                    if(flavorDeviancy() < 30)
                     {
                         if(innocence > 66)
                             say(t, "This is starting to get a little bit too perverted for me.  And ");
@@ -6218,7 +6300,7 @@ public class Forsaken
                         say(t, "That definitely sounds like something I'd enjoy.  But ");
                     else
                         say(t, "Ah, being the one on top for once sounds like fun...  But ");
-                    if(hostility < 30)
+                    if(flavorHostility() < 30)
                     {
                         if(morality > 66)
                             say(t, "I'm supposed to protecting the people you're after, not hurting them myself.");
@@ -6238,7 +6320,7 @@ public class Forsaken
                     Project.changePortrait(gender, type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
                 } else
                 {
-                    if(deviancy < 30)
+                    if(flavorDeviancy() < 30)
                     {
                         if(confidence > 66)
                             say(t, "You definitely understand what I'm good at.  But ");
@@ -6255,7 +6337,7 @@ public class Forsaken
                         say(t, "This is definitely something I'd enjoy a lot.  But ");
                     else
                         say(t, "I must admit that this task holds a great deal of fetishistic appeal for me.  However, ");
-                    if(hostility < 30)
+                    if(flavorHostility() < 30)
                     {
                         if(morality > 66)
                             say(t, "I'd feel bad about hurting them right now.  That might stop me from doing a good enough job...");
@@ -6296,7 +6378,7 @@ public class Forsaken
                         say(t, "Haven't you humiliated me enough!?  Plus, ");
                     else
                         say(t, "Th-They already know how helpless I am!  Also, ");
-                    if(hostility < 35)
+                    if(flavorHostility() < 35)
                     {
                         if(morality > 66)
                             say(t, "there are still some people depending on me to be strong...");
@@ -6319,7 +6401,7 @@ public class Forsaken
                     }
                 } else
                 {
-                    if(hostility < 35)
+                    if(flavorHostility() < 35)
                     {
                         if(confidence > 66)
                             say(t, "If you were just using this power so that I could tell everyone how great you are, that would be fine.  But ");
@@ -6360,7 +6442,7 @@ public class Forsaken
             {
                 if(obedience < 40)
                 {
-                    if(deviancy < 40)
+                    if(flavorDeviancy() < 40)
                     {
                         if(innocence > 66)
                             say(t, "H-Hold on!  This is getting way too lewd!  ");
@@ -6414,7 +6496,7 @@ public class Forsaken
                         say(t, "Please don't take this the wrong way, but I'm not sure I'll be able to obey.  The thing is... ");
                     else
                         say(t, "Um, I don't mind serving you, a-and it's not like I have a reputation to protect anymore anyway... but... ");
-                    if(deviancy < 40)
+                    if(flavorDeviancy() < 40)
                     {
                         if(innocence > 66)
                             say(t, "I'm not that good with perverted stuff.  I try to go along with it, but I'm so bad at it that sometimes people think I'm resisting...");
@@ -6438,7 +6520,7 @@ public class Forsaken
             {
                 if(obedience < 60)
                 {
-                    if(deviancy < 50)
+                    if(flavorDeviancy() < 50)
                     {
                         if(innocence > 66)
                             say(t, "Yuck!  I definitely don't want the Demon Lord's thing inside me right now!  ");
@@ -6456,7 +6538,7 @@ public class Forsaken
                     else
                         say(t, "I don't doubt that you could make the experience quite enjoyable.  However...  ");
                     Project.changePortrait(gender, type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                    if(hostility < 50)
+                    if(flavorHostility() < 50)
                     {
                         if(morality > 66)
                             say(t, "I still have some pride as a hero...");
@@ -6475,7 +6557,7 @@ public class Forsaken
                         say(t, "I... I still hate you!");
                 } else
                 {
-                    if(hostility < 50)
+                    if(flavorHostility() < 50)
                     {
                         if(morality > 66)
                             say(t, "Yes, I... I want your slime to help me forget who I used to be.  ");
@@ -6493,7 +6575,7 @@ public class Forsaken
                     else
                         say(t, "Heh...  I'd rather be killing for you, but I guess this works too.  ");
                     Project.changePortrait(gender, type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.LEWD, Project.Emotion.JOY);
-                    if(deviancy < 50)
+                    if(flavorDeviancy() < 50)
                     {
                         if(innocence > 66)
                             say(t, "I'm scared, but... even if I panic, I don't want you to stop...");
@@ -6516,7 +6598,7 @@ public class Forsaken
             {
                 if(obedience < 60)
                 {
-                    if(hostility < 70)
+                    if(flavorHostility() < 70)
                     {
                         if(innocence > 66)
                             say(t, "I'm not gonna let everyone see me doing this!  ");
@@ -6574,7 +6656,7 @@ public class Forsaken
                     else
                         say(t, "I don't really care how many people see.  It's just...  ");
                     Project.changePortrait(gender, type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.SHAME, Project.Emotion.NEUTRAL);
-                    if(hostility < 70)
+                    if(flavorHostility() < 70)
                     {
                         if(confidence > 66)
                             say(t, "I'm not as strong as I used to be.  I might lose my cool...");
@@ -6596,7 +6678,7 @@ public class Forsaken
             if(nextTraining == 16)
                 if(obedience < 60)
                 {
-                    if(deviancy < 60)
+                    if(flavorDeviancy() < 60)
                     {
                         if(innocence > 66)
                             say(t, "This is getting a little too gross for me.  ");
@@ -6650,7 +6732,7 @@ public class Forsaken
                         say(t, "Doing this at the same time...  Yeah, that's the kind of thing I'm known for.  ");
                     else
                         say(t, "Well, I doubt it will surprise anyone, but it should be an entertaining show.  ");
-                    if(deviancy < 60)
+                    if(flavorDeviancy() < 60)
                     {
                         Project.changePortrait(gender, type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.NEUTRAL, Project.Emotion.JOY);
                         if(innocence > 66)
@@ -6677,7 +6759,7 @@ public class Forsaken
         {
             if(flavorObedience() < 20)
             {
-                if(deviancy < 20)
+                if(flavorDeviancy() < 20)
                 {
                     if(morality > 66)
                         say(t, "You're trying to get me wrapped up in immoral behavior.  But ");
@@ -6694,7 +6776,7 @@ public class Forsaken
                     say(t, "I'd normally refuse to play along, but this does sound like it could be fun.  And ");
                 else
                     say(t, "One way or another, your minions will entertain me.  And ");
-                if(hostility < 20)
+                if(flavorHostility() < 20)
                 {
                     if(innocence > 66)
                         say(t, "I like making people happy.");
@@ -6717,7 +6799,7 @@ public class Forsaken
                 }
             } else
             {
-                if(hostility < 20)
+                if(flavorHostility() < 20)
                 {
                     if(innocence > 66)
                         say(t, "They're not actually gonna hurt me, right?  ");
@@ -6734,7 +6816,7 @@ public class Forsaken
                     say(t, "Ugh, they're going to get rough with me again, I know it...  ");
                 else
                     say(t, "Would you prefer that I fight back, or should I let them... have their way with me?  ");
-                if(deviancy < 20)
+                if(flavorDeviancy() < 20)
                 {
                     if(morality > 66)
                         say(t, "Maybe I deserve it all...");
@@ -6758,7 +6840,7 @@ public class Forsaken
         {
             if(flavorObedience() < 20)
             {
-                if(hostility < 10)
+                if(flavorHostility() < 10)
                 {
                     if(confidence > 66)
                         say(t, "My faith in humanity will survive whatever you try to show me!  ");
@@ -6788,7 +6870,7 @@ public class Forsaken
                     say(t, "I sometimes had my doubts about whether humanity was actually worth saving.  ");
                 else
                     say(t, "I've always known how cruel people are, deep down inside...  ");
-                if(hostility < 10)
+                if(flavorHostility() < 10)
                 {
                     if(confidence > 66)
                         say(t, "And I still... I still think so!  Punish me for that if you want!");
@@ -6832,7 +6914,7 @@ public class Forsaken
                     say(t, "Hmph.  I don't care what people think of me anymore.  ");
                 else
                     say(t, "If I can convince these idiots that I'm weak, then they'll just be taken by surprise when I show them my true power.  ");
-                if(hostility < 15)
+                if(flavorHostility() < 15)
                 {
                     if(dignity > 66)
                         say(t, "I'll just have to hope that they understand that I don't mean any of the things I say.");
@@ -6852,7 +6934,7 @@ public class Forsaken
                 Project.changePortrait(gender, type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
             } else
             {
-                if(hostility < 15)
+                if(flavorHostility() < 15)
                 {
                     if(dignity > 66)
                         say(t, "I was wrong to tell everyone that I was strong in the first place.  ");
@@ -6900,7 +6982,7 @@ public class Forsaken
                     say(t, "Am I supposed to be afraid of this sort of thing?  ");
                 else
                     say(t, "Attempting to break my will with pleasure?  I am not worried.  ");
-                if(deviancy < 15)
+                if(flavorDeviancy() < 15)
                 {
                     if(confidence > 66)
                         say(t, "I'll go along with it, but don't expect me to actually enjoy any of this.");
@@ -6916,7 +6998,7 @@ public class Forsaken
                 Project.changePortrait(gender, type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.FOCUS, Project.Emotion.ANGER);
             } else
             {
-                if(deviancy < 15)
+                if(flavorDeviancy() < 15)
                 {
                     if(confidence > 66)
                         say(t, "I can't believe I'm just letting you do this to me...  ");
@@ -6947,7 +7029,7 @@ public class Forsaken
         {
             if(flavorObedience() < 20)
             {
-                if(deviancy < 10)
+                if(flavorDeviancy() < 10)
                 {
                     if(dignity > 66)
                         say(t, "But I don't really want to look super perverted!  ");
@@ -7004,7 +7086,7 @@ public class Forsaken
                     say(t, "Well, it's not like I'm respected much anymore anyway...  ");
                 else
                     say(t, "I've already suffered the shame of being defeated by you.  This isn't any worse.  ");
-                if(deviancy < 10)
+                if(flavorDeviancy() < 10)
                 {
                     if(dignity > 66)
                         say(t, "I always feels so weird when people look at my whole body...");
@@ -7083,7 +7165,7 @@ public class Forsaken
         {
             if(flavorObedience() < 40)
             {
-                if(hostility < 30)
+                if(flavorHostility() < 30)
                 {
                     if(morality > 66)
                         say(t, "I don't like to needlessly hurt people, but if they're your minions, then they do deserve to be punished.  ");
@@ -7100,7 +7182,7 @@ public class Forsaken
                     say(t, "I don't like doing your dirty work, but if it means dealing out some punishment to your minions...  ");
                 else
                     say(t, "Finally... a chance to get some payback for what they've done to me...  ");
-                if(deviancy < 30)
+                if(flavorDeviancy() < 30)
                 {
                     if(innocence > 66)
                         say(t, "I guess I'll just beat them up, then?");
@@ -7123,7 +7205,7 @@ public class Forsaken
                 }
             } else
             {
-                if(deviancy < 30)
+                if(flavorDeviancy() < 30)
                 {
                     if(innocence > 66)
                         say(t, "Um, if it makes you happy, I'll do it!  ");
@@ -7144,7 +7226,7 @@ public class Forsaken
                         say(t, "You are very kind to give me an outlet for some of my more... sadistic desires.  ");
                     Project.changePortrait(gender, type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.JOY, Project.Emotion.FOCUS);
                 }
-                if(hostility < 30)
+                if(flavorHostility() < 30)
                 {
                     if(morality > 66)
                         say(t, "I feel a bit guilty, but I suppose they were going to get punished anyway even without my help.");
@@ -7167,7 +7249,7 @@ public class Forsaken
         {
             if(flavorObedience() < 35)
             {
-                if(hostility < 40)
+                if(flavorHostility() < 40)
                 {
                     if(morality > 66)
                         say(t, "I'm not going to give up my ideals just because you turn a few people against me.  ");
@@ -7204,7 +7286,7 @@ public class Forsaken
                     say(t, "Thanks for the warning.  ");
                 else
                     say(t, "I-I'm a little scared... but that's what you want from me, right?  ");
-                if(hostility < 40)
+                if(flavorHostility() < 40)
                 {
                     if(morality > 66)
                         say(t, "It's going to be hard to avoid hurting them...");
@@ -7248,7 +7330,7 @@ public class Forsaken
                     say(t, "Well, it's not like my reputation can get much worse.  ");
                 else
                     say(t, "I don't know why you're so obsessed with humiliating me...  ");
-                if(hostility < 35)
+                if(flavorHostility() < 35)
                 {
                     if(morality > 66)
                         say(t, "I'm sure that they'll have the decency not to exploit whatever they learn.");
@@ -7268,7 +7350,7 @@ public class Forsaken
                 Project.changePortrait(gender, type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.FOCUS, Project.Emotion.NEUTRAL);
             } else
             {
-                if(hostility < 35)
+                if(flavorHostility() < 35)
                 {
                     if(innocence > 66)
                         say(t, "Maybe they'll feel sorry for me after hearing my thoughts!  ");
@@ -7312,7 +7394,7 @@ public class Forsaken
         {
             if(flavorObedience() < 30)
             {
-                if(deviancy < 35)
+                if(flavorDeviancy() < 35)
                 {
                     if(innocence > 66)
                         say(t, "Well, what's the worst that can happen?  ");
@@ -7346,7 +7428,7 @@ public class Forsaken
                     say(t, "Ah, just the smell of it is making it hard to think...  ");
                 else
                     say(t, "I understand.  I will allow you to place me under the influence of whatever drugs you prefer.  ");
-                if(deviancy < 35)
+                if(flavorDeviancy() < 35)
                 {
                     if(confidence > 66)
                         say(t, "To be honest, I don't like this at all, but I'm doing it for your sake.");
@@ -7373,7 +7455,7 @@ public class Forsaken
         {
             if(flavorObedience() < 40)
             {
-                if(deviancy < 40)
+                if(flavorDeviancy() < 40)
                 {
                     if(innocence > 66)
                         say(t, "This sounds really annoying, but if it'll get you off my back, then fine.  ");
@@ -7437,7 +7519,7 @@ public class Forsaken
                     say(t, "Do you think very many people will show up to be serviced by me?  ");
                 else
                     say(t, "So I just have to sit there and let them use me, right?  ");
-                if(deviancy < 40)
+                if(flavorDeviancy() < 40)
                 {
                     if(morality > 66)
                         say(t, "You can use me however you like.");
@@ -7525,7 +7607,7 @@ public class Forsaken
         {
             if(flavorObedience() < 60)
             {
-                if(deviancy < 50)
+                if(flavorDeviancy() < 50)
                 {
                     if(innocence > 66)
                         say(t, "This sounds kinda gross, but I guess it won't kill me.  ");
@@ -7542,7 +7624,7 @@ public class Forsaken
                     say(t, "If it lets me feel good, I don't even mind sleeping with you.  ");
                 else
                     say(t, "I don't want to have sex with you... but... I do want to feel good.  ");
-                if(hostility < 50)
+                if(flavorHostility() < 50)
                 {
                     if(morality > 66)
                         say(t, "I just have to resist your slime...");
@@ -7562,7 +7644,7 @@ public class Forsaken
                 Project.changePortrait(gender, type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.NEUTRAL, Project.Emotion.FOCUS);
             } else
             {
-                if(hostility < 50)
+                if(flavorHostility() < 50)
                 {
                     if(morality > 66)
                         say(t, "Yes, please...  Use your slime to burn away the last bits of kindness inside me...  ");
@@ -7579,7 +7661,7 @@ public class Forsaken
                     say(t, "Whether in battle or in bed, I'm always happy to serve you.  ");
                 else
                     say(t, "Can your slime turn me into an even better slave?  I'd like that...  ");
-                if(deviancy < 50)
+                if(flavorDeviancy() < 50)
                 {
                     Project.changePortrait(gender, type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.JOY, Project.Emotion.FOCUS);
                     if(innocence > 66)
@@ -7606,7 +7688,7 @@ public class Forsaken
         {
             if(obedience < 50)
             {
-                if(hostility < 60)
+                if(flavorHostility() < 60)
                 {
                     if(innocence > 66)
                         say(t, "How bad can a bunch of regular goons be!?  ");
@@ -7640,7 +7722,7 @@ public class Forsaken
                     say(t, "If you think I should be punished, then I won't run from it.  ");
                 else
                     say(t, "To be honest, I've started... to enjoy... getting punished.  ");
-                if(hostility < 60)
+                if(flavorHostility() < 60)
                 {
                     if(morality > 66)
                         say(t, "I probably deserve it.");
@@ -7681,7 +7763,7 @@ public class Forsaken
                     say(t, "There's no point in worrying about my reputation anymore.  ");
                 else
                     say(t, "Everyone knows how worthless I am by now.  ");
-                if(hostility < 70)
+                if(flavorHostility() < 70)
                 {
                     if(innocence > 66)
                         say(t, "And even if I end up getting laughed at by the whole world, how bad can it be?");
@@ -7701,7 +7783,7 @@ public class Forsaken
                 Project.changePortrait(gender, type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.FOCUS, Project.Emotion.JOY);
             } else
             {
-                if(hostility < 70)
+                if(flavorHostility() < 70)
                 {
                     if(morality > 66)
                         say(t, "It still feels strange to be making propaganda for the Demons... but I need to get used to it.  ");
@@ -7742,7 +7824,7 @@ public class Forsaken
         {
             if(obedience < 60)
             {
-                if(deviancy < 70)
+                if(flavorDeviancy() < 70)
                 {
                     Project.changePortrait(gender, type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.NEUTRAL, Project.Emotion.SHAME);
                     if(innocence > 66)
@@ -7780,7 +7862,7 @@ public class Forsaken
                 else
                     say(t, "This sort of thing is why I like serving you.  ");
                 Project.changePortrait(gender, type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.JOY, Project.Emotion.FOCUS);
-                if(deviancy < 70)
+                if(flavorDeviancy() < 70)
                 {
                     if(confidence > 66)
                         say(t, "Push my body to the limit!");
@@ -7821,7 +7903,7 @@ public class Forsaken
                 else
                     say(t, "Ugh, haven't you humiliated me enough...?  ");
                 Project.changePortrait(gender, type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
-                if(deviancy < 60)
+                if(flavorDeviancy() < 60)
                 {
                     if(dignity > 66)
                         say(t, "Although, I suppose it could be fun to show off...");
@@ -7841,7 +7923,7 @@ public class Forsaken
             } else
             {
                 Project.changePortrait(gender, type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.FOCUS, Project.Emotion.JOY);
-                if(deviancy < 60)
+                if(flavorDeviancy() < 60)
                 {
                     if(innocence > 66)
                         say(t, "It sounds kinda gross, but if it's for the Demon Lord, then I'll do it!  ");
@@ -7970,6 +8052,12 @@ public class Forsaken
                 for(int i = 0; i < 4; i++)
                     if(i != 2)
                         increases[2] += increases[i];
+
+            } else
+            if(defeatType == 6)
+            {
+                for(int i = 0; i < 3; i++)
+                    increases[i] = 0;
 
             }
             if(increases[0] == 0 && increases[1] == 0 && increases[2] == 0 && increases[3] == 0)
@@ -8275,7 +8363,7 @@ public class Forsaken
             }
             if(vaginal.booleanValue() || anal.booleanValue())
             {
-                if(deviancy > 33)
+                if(flavorDeviancy() > 33)
                 {
                     if(innocence > 66)
                         w.append(t, (new StringBuilder("The pleasure soon overwhelms ")).append(mainName).append(", leaving ").append(himHer()).append(" moaning and bucking ").append(hisHer()).append(" hips like an animal in heat.").toString());
@@ -8339,7 +8427,7 @@ public class Forsaken
                         w.append(t, (new StringBuilder("milking ")).append(hisHer()).append(" partner's cock of every drop of semen until ").append(hisHer()).append(" ass has been completely filled.  ").toString());
                     timesOrgasmed++;
                 }
-                if(hostility < 20)
+                if(flavorHostility() < 20)
                 {
                     if(morality > 66)
                     {
@@ -8387,7 +8475,7 @@ public class Forsaken
                 if(oral.booleanValue())
                 {
                     if(currentTraining[3].booleanValue())
-                        if(deviancy > 33)
+                        if(flavorDeviancy() > 33)
                         {
                             if(innocence > 66)
                                 w.append(t, (new StringBuilder("When the vibrators attached to ")).append(mainName).append("'s nipples and ").append(target).append(" abruptly turn up to a higher intensity, ").append(hisHer()).append(" squeak of surprise is muffled by the cock in ").append(hisHer()).append(" mouth.").toString());
@@ -8475,7 +8563,7 @@ public class Forsaken
                 }
                 if(currentTraining[8].booleanValue())
                     w.append(t, (new StringBuilder("The telepathic broadcast of the orgasm hits the men all at once, and the ones who haven't been satisfied yet jeer at ")).append(mainName).append(" for putting ").append(hisHer()).append(" own satisfaction ahead of theirs.  ").toString());
-                if(hostility < 20)
+                if(flavorHostility() < 20)
                 {
                     if(morality > 66)
                     {
@@ -8499,7 +8587,7 @@ public class Forsaken
             } else
             if(oral.booleanValue())
             {
-                if(hostility < 20)
+                if(flavorHostility() < 20)
                 {
                     if(currentTraining[6].booleanValue() && consenting.booleanValue())
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is far too gentle for this to be considered part of the punishment, but ").append(heShe()).append(" still can't help but take satisfaction in the sense of power ").append(heShe()).append(" has over the Thrall who desperately wants to orgasm inside ").append(hisHer()).append(" mouth.").toString());
@@ -8542,7 +8630,7 @@ public class Forsaken
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" tries to convince them to go away, alternating between promises and threats, but no one in the crowd is afraid of ").append(himHer()).append(" anymore.  ").toString());
                 else
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" soon lapses into sullen silence, glaring at the assembled crowd as it grows larger and larger.  They know that ").append(heShe()).append(" can't truly stop them if they all decide to take ").append(himHer()).append(" together, and ").append(heShe()).append(" knows that ").append(heShe()).append(" knows.  ").toString());
-                if(hostility < 20)
+                if(flavorHostility() < 20)
                 {
                     if(morality > 66)
                         w.append(t, (new StringBuilder("In the end, all ")).append(heShe()).append(" can do is appeal to their sense of right and wrong, and ").append(hisHer()).append(" heart breaks a little when ").append(heShe()).append(" sees how ineffective it is.").toString());
@@ -8658,7 +8746,7 @@ public class Forsaken
                     if(anal.booleanValue())
                     {
                         w.append(t, (new StringBuilder("One attacker grabs ")).append(himHer()).append(" from behind, lifting ").append(himHer()).append(" up with ").append(hisHer()).append(" legs in the air.  Then, he lowers ").append(mainName).append(" down, ").toString());
-                        if(hostility < 20)
+                        if(flavorHostility() < 20)
                         {
                             if(morality > 66)
                             {
@@ -8694,7 +8782,7 @@ public class Forsaken
                     if(vaginal.booleanValue())
                     {
                         w.append(t, (new StringBuilder("One attacker lifts ")).append(himHer()).append(" up from behind, placing his cock against ").append(hisHer()).append(" pussy and then slowly lowering ").append(himHer()).append(" donwward.  ").toString());
-                        if(hostility < 20)
+                        if(flavorHostility() < 20)
                         {
                             if(morality > 66)
                                 w.append(t, (new StringBuilder("At first, ")).append(mainName).append("'s pleas for ").append(hisHer()).append(" attackers to stop, but ").append(hisHer()).append(" voice breaks with a strangled cry as the man's cock slams its way inside.  ").toString());
@@ -8712,7 +8800,7 @@ public class Forsaken
                     } else
                     if(currentTraining[3].booleanValue())
                     {
-                        if(hostility < 20)
+                        if(flavorHostility() < 20)
                         {
                             if(morality > 66)
                                 w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" tries to explain that the chastity belt that's been forced upon ").append(himHer()).append(" means that they're wasting their time attacking ").append(himHer()).append(", but ").append(heShe()).append("'s surprised when they start taking out their rage on ").append(hisHer()).append(" body.  ").toString());
@@ -8728,7 +8816,7 @@ public class Forsaken
                         else
                             w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" manages a cheeky smirk as ").append(heShe()).append(" taunts them about being foiled by the chastity belt you put on ").append(himHer()).append(", but they're quick to punish ").append(himHer()).append(" for ").append(hisHer()).append(" insolence.  ").toString());
                     } else
-                    if(hostility < 20)
+                    if(flavorHostility() < 20)
                     {
                         if(morality > 66)
                             w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" tries to keep a pure heart and a clear head, trusting ").append(hisHer()).append(" Sexual Barrier to protect ").append(himHer()).append(", but ").append(heShe()).append("'s horrified by how determined the crowd is to abuse ").append(himHer()).append(".  ").toString());
@@ -8787,7 +8875,7 @@ public class Forsaken
                     w.append(t, (new StringBuilder("By this point, ")).append(mainName).append(" has already acknowledged ").append(hisHer()).append(" own weakness, but feeling what it's like to fuck ").append(hisHer()).append(" helpless body from the shared senses of the crowd drives the point home even further.  ").toString());
                 else
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is content to lose ").append(himHer()).append("self in the senses of the crowd caught up in the gangbang, taking the opportunity to dissocate ").append(himHer()).append("self from the weak, useless body that's never been able to put up any resistance to those who would abuse ").append(himHer()).append(".  ").toString());
-                if(deviancy > 33)
+                if(flavorDeviancy() > 33)
                 {
                     if(innocence > 66)
                         w.append(t, (new StringBuilder(String.valueOf(HeShe()))).append(" quickly loses track of where ").append(hisHer()).append(" senses end and the others' begin, simply enjoying each and every orgasm experienced by anyone in the gangbang.").toString());
@@ -8869,7 +8957,7 @@ public class Forsaken
                     w.append(t, (new StringBuilder("As ")).append(mainName).append("'s body lies abandoned, ").append(hisHer()).append(" mind is yours to manipulate.  ").toString());
                 else
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s mind is unable to put up even a token resistance, and soon it's completely at your mercy, subject to being shown whatever experiences you see fit.  ").toString());
-                if(hostility < 20)
+                if(flavorHostility() < 20)
                 {
                     if(morality > 66)
                         w.append(t, (new StringBuilder(String.valueOf(HisHer()))).append(" horror at what ").append(heShe()).append(" sees happening across your domain - violence, debauchery, and sin - causes ").append(himHer()).append(" to recoil, and ").append(heShe()).append(" gradually starts to return to ").append(himHer()).append("self.").toString());
@@ -8984,7 +9072,7 @@ public class Forsaken
                     w.append(t, (new StringBuilder("The men penetrating ")).append(mainName).append("'s lower holes are too occupied with their own pleasure to even bother listening to ").append(mainName).append("'s words, and their pace quickens as they approach their climaxes.  ").toString());
                 else
                     w.append(t, (new StringBuilder("The man thrusting into ")).append(mainName).append(" from behind is too occupied with his own pleasure to even bother listening to ").append(hisHer()).append(" words, and his pace quickens as ").append(heShe()).append(" approaches his climax.  ").toString());
-                if(deviancy > 33)
+                if(flavorDeviancy() > 33)
                 {
                     if(innocence > 66)
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s voice becomes weaker and less coherent as the pace increases, and soon ").append(heShe()).append("'s just squealing and moaning in ").append(hisHer()).append(" own pitiful orgasm.").toString());
@@ -8994,7 +9082,7 @@ public class Forsaken
                     else
                         w.append(t, (new StringBuilder("The more the pleasure mounts, the more difficulty ")).append(mainName).append(" has controlling ").append(hisHer()).append(" voice.  At first, ").append(heShe()).append(" falls silent in an attempt to collect ").append(himHer()).append("self again, but soon ").append(heShe()).append("'s openly crying out in orgasm.").toString());
                 } else
-                if(hostility < 20)
+                if(flavorHostility() < 20)
                 {
                     if(morality > 66)
                         w.append(t, (new StringBuilder("The sheer apathy drives ")).append(mainName).append(" to despair, and ").append(heShe()).append(" soon loses the will to raise ").append(hisHer()).append(" voice, hanging ").append(hisHer()).append(" head as ").append(heShe()).append(" tries to ignore the shameful pleasure building inside ").append(himHer()).append(".").toString());
@@ -9024,7 +9112,7 @@ public class Forsaken
                 {
                     w.append(t, (new StringBuilder("At first, the crowd is interested, but they soon grow bored and begin pelting ")).append(mainName).append(" with garbage and shouting over ").append(himHer()).append(".  ").toString());
                 }
-                if(hostility < 20)
+                if(flavorHostility() < 20)
                 {
                     if(morality > 66)
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is shocked speechless by how vicious they are.").toString());
@@ -9191,7 +9279,7 @@ public class Forsaken
                     String dildo = "dildo";
                     if(vaginal.booleanValue() && anal.booleanValue())
                         dildo = "dildoes";
-                    if(deviancy > 33)
+                    if(flavorDeviancy() > 33)
                     {
                         if(innocence > 66)
                             w.append(t, (new StringBuilder(String.valueOf(HeShe()))).append(" cums over and over again, tongue hanging out of ").append(hisHer()).append(" mouth, and when you finally remove the ").append(dildo).append(", ").append(heShe()).append(" arches ").append(hisHer()).append(" back without thinking, presenting ").append(himHer()).append("self to be taken by the whole crowd.").toString());
@@ -9214,7 +9302,7 @@ public class Forsaken
                     if(currentTraining[10].booleanValue())
                         w.append(t, (new StringBuilder("  Spontaneous applause erupts from the crowd of Thralls, and after the show, they're more eager than ever to have their turn with ")).append(mainName).append(".").toString());
                 } else
-                if(deviancy > 33)
+                if(flavorDeviancy() > 33)
                 {
                     if(innocence > 66)
                         w.append(t, (new StringBuilder(String.valueOf(HeShe()))).append(" cums over and over again, tongue hanging out of ").append(hisHer()).append(" mouth, and when you give ").append(himHer()).append(" a break from the vibration, ").append(heShe()).append(" thoughtlessly starts trying to squirm out of ").append(hisHer()).append(" chastity belt, unable to think of anything other than getting filled up inside.").toString());
@@ -9235,7 +9323,7 @@ public class Forsaken
                 else
                     w.append(t, (new StringBuilder(String.valueOf(HeShe()))).append(" allows ").append(himHer()).append("self to cum, knowing that there's no point in resistance.  When the vibration briefly shuts off, ").append(heShe()).append(" looks relieved at first, but ").append(heShe()).append(" quickly realizes that you surely have more torments in store.").toString());
             } else
-            if(deviancy > 33)
+            if(flavorDeviancy() > 33)
             {
                 if(innocence > 66)
                     w.append(t, (new StringBuilder(String.valueOf(HeShe()))).append(" cums over and over again, tongue hanging out of ").append(hisHer()).append(" mouth.  Babbling incoherently, ").append(heShe()).append(" offers ").append(himHer()).append("self to anyone who can make ").append(himHer()).append(" feel even better, but there's no one nearby to take ").append(himHer()).append(".").toString());
@@ -9302,14 +9390,14 @@ public class Forsaken
             if(obedience < 20)
                 w.append(t, (new StringBuilder("A fur-lined bodysuit spreads across ")).append(hisHer()).append(" skin, with openings over ").append(hisHer()).append(" nipples and groin, complete with an animal ear headband, a fluffy tail, and paw-like gloves that render ").append(hisHer()).append(" hands practically useless.  A collar with an attached leash completes the ensemble, marking ").append(himHer()).append(" as the Demon Lord's pet.").toString());
             else
-            if(deviancy < 20)
+            if(flavorDeviancy() < 20)
             {
                 w.append(t, (new StringBuilder("Latex spreads across ")).append(hisHer()).append(" skin, but stops short of ").append(hisHer()).append(" nipples and groin.  The outfit is fitted tightly enough that it squeezes and emphasizes ").append(hisHer()).append(" chest and butt, and adhesive strips built into the material spread open ").append(hisHer()).append(" ass ").toString());
                 if(gender != Gender.MALE)
                     w.append(t, "and pussy ");
                 w.append(t, "so that the pink insides are plainly visible.");
             } else
-            if(hostility < 20)
+            if(flavorHostility() < 20)
                 w.append(t, (new StringBuilder(String.valueOf(HeShe()))).append("'s enveloped in tentacles which caress ").append(hisHer()).append(" chest and frame ").append(hisHer()).append(" groin in a mockery of modesty, marking ").append(himHer()).append(" as a servant of the Demons.").toString());
             else
                 w.append(t, (new StringBuilder("Countless ropes wrap themselves intricately around ")).append(hisHer()).append(" torso, the crisscrossing pattern managing to avoid actually covering any of ").append(hisHer()).append(" private parts.  It's less of an outfit and more of an ornament for ").append(hisHer()).append(" naked body.").toString());
@@ -9422,7 +9510,7 @@ public class Forsaken
             }
             if(oral.booleanValue() || anal.booleanValue() || vaginal.booleanValue())
             {
-                if(deviancy < 20)
+                if(flavorDeviancy() < 20)
                 {
                     if(innocence > 66)
                         w.append(t, (new StringBuilder(String.valueOf(HeShe()))).append(" absolutely hates it.").toString());
@@ -9437,7 +9525,7 @@ public class Forsaken
                 else
                     w.append(t, (new StringBuilder("In between being groped and fucked, ")).append(heShe()).append(" has to admire how ").append(hisHer()).append(" appearance alterations were calculated not only to degrade ").append(himHer()).append(", but also to drive everyone else into a frenzy.").toString());
             } else
-            if(deviancy < 20)
+            if(flavorDeviancy() < 20)
             {
                 if(innocence > 66)
                     w.append(t, (new StringBuilder(String.valueOf(HeShe()))).append("'s confused about how they can enjoy just looking at ").append(himHer()).append(" so much.").toString());
@@ -9689,7 +9777,7 @@ public class Forsaken
             w.append(t, "\n\n");
             if(orgasmsGiven < 1000 && consenting.booleanValue())
             {
-                if(hostility < 30)
+                if(flavorHostility() < 30)
                 {
                     if(morality > 66)
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" feels deeply conflicted about hurting people like this, but ").append(heShe()).append(" rationalizes it by telling ").append(himHer()).append("self that they're bad people and so they deserve to be hurt.  The more ").append(heShe()).append(" does it, the less it bothers ").append(himHer()).append(".").toString());
@@ -9725,7 +9813,7 @@ public class Forsaken
                     w.append(t, (new StringBuilder("There's a loud smack every time the one thrusting from behind ")).append(himHer()).append(" rams his hips forward.  ").toString());
                 else
                     w.append(t, (new StringBuilder("Even though ")).append(heShe()).append(" doesn't let them penetrate ").append(himHer()).append(" down below, they take turns fucking ").append(hisHer()).append(" throat with merciless force.  ").toString());
-                if(hostility < 30)
+                if(flavorHostility() < 30)
                 {
                     if(morality > 66)
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" didn't truly want to hurt them, but after seeing how cruel they can be, a part of ").append(himHer()).append(" wishes ").append(heShe()).append(" had punished them more severely.").toString());
@@ -9867,7 +9955,7 @@ public class Forsaken
             }
             if(currentTraining[8].booleanValue())
                 w.append(t, (new StringBuilder("The continuing telepathy lets the Thralls know exactly how much ")).append(mainName).append(" is suffering, but they don't show any mercy at all.  ").toString());
-            if(hostility < 40)
+            if(flavorHostility() < 40)
             {
                 if(morality > 66)
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is in complete disbelief that people could be so cruel.  It's only later, when ").append(heShe()).append(" has time to reflect, that ").append(heShe()).append("'ll start to wonder whether ").append(hisHer()).append(" faith in humanity was misplaced all along.").toString());
@@ -9936,7 +10024,7 @@ public class Forsaken
                 w.append(t, (new StringBuilder("The Thralls can tell exactly how much discomfort ")).append(heShe()).append("'s in.  Regardless of whether ").append(heShe()).append(" begs out loud, they can hear ").append(hisHer()).append(" inner voice wailing and praying for it to end.  Even so, they mock ").append(himHer()).append(", shouting that ").append(heShe()).append(" deserves even worse.  ").toString());
             else
                 w.append(t, (new StringBuilder(String.valueOf(HeShe()))).append(" knows that ").append(heShe()).append("'s at the Demon Lord's mercy, and ").append(heShe()).append(" mentally flinches away from every possible sign that there's more punishment in store.  ").append(HisHer()).append(" anticipation encourages the surrounding people to stick around in hopes of being able to participate in whatever you're planning.  ").toString());
-            if(hostility < 40)
+            if(flavorHostility() < 40)
             {
                 if(morality > 66)
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is shocked by their lack of emapthy, even when they have the deepest possible understanding of ").append(hisHer()).append(" true feelings.  On some level, ").append(heShe()).append(" had always believed that all cruelty only came about as a result of misunderstandings.").toString());
@@ -10058,7 +10146,7 @@ public class Forsaken
             if(timesOrgasmed == 0)
                 w.append(t, (new StringBuilder("Several intense shivers run through ")).append(hisHer()).append(" body, causing ").append(hisHer()).append(" eyes to roll into the back of ").append(hisHer()).append(" head.  But ").append(hisHer()).append(" body is still inexperienced with orgasm, and the peak isn't as high as it should be - ").append(heShe()).append("'s left whining and unsatisfied.").toString());
             else
-            if(deviancy < 35)
+            if(flavorDeviancy() < 35)
             {
                 if(innocence > 66)
                     w.append(t, (new StringBuilder("The orgasm is so intense that it scares ")).append(himHer()).append(", leaving ").append(himHer()).append(" sobbing even as ").append(heShe()).append(" craves another one.").toString());
@@ -10100,7 +10188,7 @@ public class Forsaken
                 w.append(t, (new StringBuilder("You spread word among your Thralls that they're all to help punish the resisting ")).append(mainName).append(".  Even though ").append(heShe()).append(" continues to kick and struggle, they're all eager to comply.  ").toString());
             else
                 w.append(t, (new StringBuilder("Your Thralls put up advertisements all across your domain that ")).append(mainName).append(" is helpless, ").append(hisHer()).append(" body is free for them to use, and soon there's a line stretching all around the block.  ").toString());
-            if(deviancy < 40)
+            if(flavorDeviancy() < 40)
             {
                 if(innocence > 66)
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is disbelieving, unable to comprehend just how many cocks ").append(heShe()).append("'s about to suck.  It's only when ").append(heShe()).append(" sees the size of the crowd that ").append(heShe()).append(" begins to pale.").toString());
@@ -10334,7 +10422,7 @@ public class Forsaken
                     w.append(t, (new StringBuilder(", creating a slight bulge in ")).append(hisHer()).append(" lower tummy as you press against ").append(hisHer()).append(" cervix.").toString());
             }
             w.append(t, "\n\n");
-            if(hostility < 50)
+            if(flavorHostility() < 50)
             {
                 if(morality > 66)
                     w.append(t, (new StringBuilder("A part of ")).append(mainName).append(" seems to be horrified that ").append(heShe()).append("'s having sex with a Demon Lord, the embodiment of human evil.  ").toString());
@@ -10355,7 +10443,7 @@ public class Forsaken
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" can't help but relish the fact that ").append(heShe()).append("'s become the Demon Lord's concubine, placing ").append(himHer()).append(" in direct opposition to the human public ").append(heShe()).append("'s come to hate so much.  ").toString());
                 w.append(t, "And ");
             }
-            if(deviancy < 50)
+            if(flavorDeviancy() < 50)
             {
                 w.append(t, (new StringBuilder("your shaft begins spurting potent psychoactive slime into ")).append(himHer()).append(" even as it continues thrusting in and out.  ").toString());
                 if(timesOrgasmed == 0)
@@ -10471,7 +10559,7 @@ public class Forsaken
                     w.append(t, (new StringBuilder(" almost hard enough to dislocate them.  The others take turns punching ")).append(himHer()).append(" in the belly as hard as they can, testing out their superhuman strength.  ").append(mainName).append(" chokes and heaves, unable to breathe.  ").toString());
                 Project.changePortrait(gender, type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.STRUGGLE, Project.Emotion.SHAME);
             }
-            if(hostility < 60)
+            if(flavorHostility() < 60)
             {
                 if(morality > 66)
                     w.append(t, (new StringBuilder(String.valueOf(HeShe()))).append(" tells ").append(himHer()).append("self that this shouldn't surprise ").append(himHer()).append(" after what ").append(heShe()).append(" went through as one of the Chosen, but the sheer difference in power between ").append(himHer()).append(" and them makes it feel even worse.").toString());
@@ -10500,7 +10588,7 @@ public class Forsaken
             {
                 Project.changePortrait(gender, type, Project.displayedCivilians[0], Boolean.valueOf(true), w, Project.displayedNames, 0, Project.Emotion.JOY, Project.Emotion.LEWD);
                 w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" smiles for the viewers who are suddenly seeing ").append(himHer()).append(" on their screen, promising them a show they won't soon forget.  ").toString());
-                if(hostility < 70)
+                if(flavorHostility() < 70)
                 {
                     if(morality > 66)
                         w.append(t, (new StringBuilder("A part of ")).append(himHer()).append(" takes a masochistic joy out of being able to provide this sort of salacious entertainment to so many people.").toString());
@@ -10520,7 +10608,7 @@ public class Forsaken
             } else
             {
                 w.append(t, (new StringBuilder("The unsuspecting viewers are shocked when their screens suddenly show ")).append(mainName).append(" struggling in vain against the tentacles coiling around ").append(himHer()).append(".  ").toString());
-                if(hostility < 70)
+                if(flavorHostility() < 70)
                 {
                     if(morality > 66)
                         w.append(t, (new StringBuilder(String.valueOf(HeShe()))).append(" knows that there are at least a few people out there who genuinely don't get any pleasure from seeing this, and ").append(heShe()).append(" doesn't want it to be forced on them.").toString());
@@ -10680,7 +10768,7 @@ public class Forsaken
             if(strongestOrgasm < 200)
                 w.append(t, (new StringBuilder(", a stronger orgasm than ")).append(heShe()).append("'s ever felt in ").append(hisHer()).append(" entire life, ").toString());
             w.append(t, (new StringBuilder("but the aphrodisiacs have put ")).append(himHer()).append(" in an excited state that won't be ended by cumming just once.  ").append(HeShe()).append(" cums again and again, the orgasms overlapping each other and leaving ").append(himHer()).append(" wailing and shuddering helplessly with ").append(hisHer()).append(" limbs splayed out.  ").toString());
-            if(deviancy < 70)
+            if(flavorDeviancy() < 70)
             {
                 if(innocence > 66)
                     w.append(t, (new StringBuilder(String.valueOf(HeShe()))).append("'s practically catatonic, eyes wide and staring").toString());
@@ -10729,7 +10817,7 @@ public class Forsaken
                 w.append(t, "Then, one of your most advanced bodies shambles onto the scene, a mass of tentacles with a wide variety of shapes meant to show off the full extent of your abilities.  ");
             if(consenting.booleanValue())
             {
-                if(deviancy < 60)
+                if(flavorDeviancy() < 60)
                 {
                     if(innocence > 66)
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" shifts in obvious discomfort as ").append(heShe()).append(" looks at them all, unable to imagine what some of them are used for.").toString());
@@ -10747,7 +10835,7 @@ public class Forsaken
                 else
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" opens ").append(hisHer()).append(" mouth for one of the tentacles, encouraging you to get started as quickly as possible.").toString());
             } else
-            if(deviancy < 60)
+            if(flavorDeviancy() < 60)
             {
                 if(innocence > 66)
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" struggles wildly, screaming in fear and disgust, until you plug ").append(hisHer()).append(" mouth with a thick tentacle that delves all the way into ").append(hisHer()).append(" stomach.").toString());
@@ -11291,6 +11379,11 @@ public class Forsaken
             styleDamage[1] = (styleDamage[1] * 3) / 2;
             styleDamage[3] = (styleDamage[3] * 3) / 2;
         }
+        if(defeatType == 6)
+        {
+            styleDamage[0] = (styleDamage[0] * 3) / 2;
+            styleDamage[2] = (styleDamage[2] * 3) / 2;
+        }
         for(int i = 0; i < 4; i++)
             baseDamage[i + 4] = styleDamage[i];
 
@@ -11423,6 +11516,14 @@ public class Forsaken
                                 c.say(t, (new StringBuilder(String.valueOf(originalName))).append("...  You were always stronger than me, better in every way.  That's exactly why... I need to bring you back!").toString());
                             c.say(t, "\"\n\n");
                             say(t, "\"");
+                            if(defeatType == 6)
+                            {
+                                Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.ANGER);
+                                if(mainName.equals(originalName))
+                                    say(t, (new StringBuilder("I'm not the arrogant ")).append(originalName).append(" you knew!  ").toString());
+                                else
+                                    say(t, (new StringBuilder("Don't you dare call me by that name!  I am ")).append(mainName).append("!  ").toString());
+                            } else
                             if(defeatType == 5)
                             {
                                 Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.FOCUS);
@@ -11456,6 +11557,14 @@ public class Forsaken
                             c.say(t, "\"\n\n");
                             say(t, "\"");
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.SHAME, Project.Emotion.SHAME);
+                            if(defeatType == 6)
+                            {
+                                Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.NEUTRAL);
+                                if(mainName.equals(originalName))
+                                    say(t, (new StringBuilder("Forget everything you ever knew about that '")).append(originalName).append("', ").append(c.mainName).append(".  I'm someone else.  ").toString());
+                                else
+                                    say(t, (new StringBuilder("I remember you, but I don't remember anyone named ")).append(originalName).append(".  ").toString());
+                            } else
                             if(defeatType == 5)
                             {
                                 Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.FOCUS);
@@ -11485,6 +11594,14 @@ public class Forsaken
                             c.say(t, "\"\n\n");
                             say(t, "\"");
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.SHAME, Project.Emotion.SHAME);
+                            if(defeatType == 6)
+                            {
+                                Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FEAR, Project.Emotion.FEAR);
+                                if(originalName.equals(mainName))
+                                    say(t, "Don't... Don't bring those memories back!  I'm not that person anymore!  I'm a great and evil Forsaken!  ");
+                                else
+                                    say(t, (new StringBuilder("Don't... Don't bring those memories back!  I am the great and evil Forsaken, ")).append(mainName).append("!  ").toString());
+                            } else
                             if(defeatType == 5)
                             {
                                 Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.ANGER);
@@ -11514,6 +11631,14 @@ public class Forsaken
                         c.say(t, "\"\n\n");
                         say(t, "\"");
                         Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.ANGER);
+                        if(defeatType == 6)
+                        {
+                            Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.ANGER);
+                            if(mainName.equals(originalName))
+                                say(t, (new StringBuilder("I'm not the arrogant ")).append(originalName).append(" you knew!  ").toString());
+                            else
+                                say(t, (new StringBuilder("Don't you dare call me by that name!  I am ")).append(mainName).append("!  ").toString());
+                        } else
                         if(defeatType == 5)
                         {
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.JOY);
@@ -11546,6 +11671,14 @@ public class Forsaken
                         c.say(t, "\"\n\n");
                         say(t, "\"");
                         Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.ANGER);
+                        if(defeatType == 6)
+                        {
+                            Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.NEUTRAL);
+                            if(mainName.equals(originalName))
+                                say(t, (new StringBuilder("Forget everything you ever knew about that '")).append(originalName).append("', ").append(c.mainName).append(".  I'm someone else.  ").toString());
+                            else
+                                say(t, (new StringBuilder("I remember you, but I don't remember anyone named ")).append(originalName).append(".  ").toString());
+                        } else
                         if(defeatType == 5)
                         {
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.FOCUS);
@@ -11573,6 +11706,14 @@ public class Forsaken
                         c.say(t, "\"\n\n");
                         say(t, "\"");
                         Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.ANGER);
+                        if(defeatType == 6)
+                        {
+                            Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FEAR, Project.Emotion.FEAR);
+                            if(originalName.equals(mainName))
+                                say(t, "Don't... Don't bring those memories back!  I'm not that person anymore!  I'm a great and evil Forsaken!  ");
+                            else
+                                say(t, (new StringBuilder("Don't... Don't bring those memories back!  I am the great and evil Forsaken, ")).append(mainName).append("!  ").toString());
+                        } else
                         if(defeatType == 5)
                         {
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.FOCUS);
@@ -11609,12 +11750,12 @@ public class Forsaken
                         }
                         c.say(t, "\"\n\n");
                         say(t, "\"");
-                        if(hostility > 66)
+                        if(flavorHostility() > 66)
                         {
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.ANGER);
                             say(t, "If you think you can afford to hold back, then you'll die.");
                         } else
-                        if(hostility >= 40)
+                        if(flavorHostility() >= 40)
                         {
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.ANGER);
                             say(t, "I don't want your pity!");
@@ -11636,12 +11777,12 @@ public class Forsaken
                             c.say(t, (new StringBuilder("Wait, isn't this ")).append(mainName).append("?  Why would they send out one of the weakest Forsaken?").toString());
                         c.say(t, "\"\n\n");
                         say(t, "\"");
-                        if(hostility > 66)
+                        if(flavorHostility() > 66)
                         {
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.ANGER);
                             say(t, "I'm still plenty strong enough to kill you!");
                         } else
-                        if(hostility >= 40)
+                        if(flavorHostility() >= 40)
                         {
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.ANGER);
                             say(t, "Don't take me lightly...");
@@ -11668,12 +11809,12 @@ public class Forsaken
                         }
                         c.say(t, "\"\n\n");
                         say(t, "\"");
-                        if(hostility > 66)
+                        if(flavorHostility() > 66)
                         {
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.ANGER);
                             say(t, "You don't even realize the danger you're in.");
                         } else
-                        if(hostility >= 40)
+                        if(flavorHostility() >= 40)
                         {
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.ANGER);
                             say(t, "You want to try me!?");
@@ -11704,12 +11845,12 @@ public class Forsaken
                         }
                         c.say(t, "\"\n\n");
                         say(t, "\"");
-                        if(hostility > 66)
+                        if(flavorHostility() > 66)
                         {
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.ANGER);
                             say(t, "Your self-righteousness makes me sick!");
                         } else
-                        if(hostility >= 40)
+                        if(flavorHostility() >= 40)
                         {
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.ANGER);
                             say(t, "Just try to defeat me!");
@@ -11731,12 +11872,12 @@ public class Forsaken
                             c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append(" seems desperate... I can't let my guard down.").toString());
                         c.say(t, "\"\n\n");
                         say(t, "\"");
-                        if(hostility > 66)
+                        if(flavorHostility() > 66)
                         {
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.ANGER);
                             say(t, "Shut up!  Just die!");
                         } else
-                        if(hostility >= 40)
+                        if(flavorHostility() >= 40)
                         {
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.ANGER);
                             say(t, "You don't have time to talk to yourself!");
@@ -11760,12 +11901,12 @@ public class Forsaken
                         String usedName = originalName;
                         if(flavorObedience() > 40)
                             usedName = mainName;
-                        if(hostility > 66)
+                        if(flavorHostility() > 66)
                         {
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.ANGER);
                             say(t, (new StringBuilder("My name is ")).append(usedName).append(", and I'm the one who will kill you!").toString());
                         } else
-                        if(hostility >= 40)
+                        if(flavorHostility() >= 40)
                         {
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.ANGER);
                             say(t, (new StringBuilder("I'm ")).append(usedName).append(", and you'd better remember it!").toString());
@@ -11794,12 +11935,12 @@ public class Forsaken
                     }
                     c.say(t, "\"\n\n");
                     say(t, "\"");
-                    if(hostility > 66)
+                    if(flavorHostility() > 66)
                     {
                         Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.FOCUS);
                         say(t, "And I've never been happier!");
                     } else
-                    if(hostility >= 40)
+                    if(flavorHostility() >= 40)
                     {
                         Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.ANGER);
                         say(t, "I was a fool, letting the public decide who I should be.");
@@ -11821,12 +11962,12 @@ public class Forsaken
                         c.say(t, (new StringBuilder("How is ")).append(heShe()).append(" so strong...!?").toString());
                     c.say(t, "\"\n\n");
                     say(t, "\"");
-                    if(hostility > 66)
+                    if(flavorHostility() > 66)
                     {
                         Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.FOCUS);
                         say(t, "Hahahah!  Fear and despair!");
                     } else
-                    if(hostility >= 40)
+                    if(flavorHostility() >= 40)
                     {
                         Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.FOCUS);
                         say(t, "Giving up already?");
@@ -11853,12 +11994,12 @@ public class Forsaken
                     }
                     c.say(t, "\"\n\n");
                     say(t, "\"");
-                    if(hostility > 66)
+                    if(flavorHostility() > 66)
                     {
                         Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.FOCUS);
                         say(t, "Beg!  Beg for your life!");
                     } else
-                    if(hostility >= 40)
+                    if(flavorHostility() >= 40)
                     {
                         Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.JOY);
                         say(t, "I'm glad I could make you show a little respect.");
@@ -11871,17 +12012,17 @@ public class Forsaken
                 w.append(t, "  ");
                 int reason = -1;
                 int highest = 39;
-                if(hostility > highest)
+                if(flavorHostility() > highest)
                 {
-                    highest = hostility;
+                    highest = flavorHostility();
                     reason = 0;
                 }
-                if(deviancy > highest)
+                if(flavorDeviancy() > highest)
                 {
-                    highest = deviancy;
+                    highest = flavorDeviancy();
                     reason = 1;
                 }
-                if(obedience > highest)
+                if(flavorObedience() > highest)
                 {
                     highest = flavorObedience();
                     reason = 2;
@@ -11978,7 +12119,7 @@ public class Forsaken
                         else
                             say(t, "I would obey the Demon Lord regardless, of course... but I am happy that I was sent against you.");
                 } else
-                if(hostility > 66)
+                if(flavorHostility() > 66)
                 {
                     if(c.getConfidence() > 66)
                     {
@@ -12074,7 +12215,7 @@ public class Forsaken
                             else
                                 say(t, "Th-The only value of people like us is to be the Demon Lord's playthings...");
                 } else
-                if(hostility >= 40)
+                if(flavorHostility() >= 40)
                 {
                     if(c.getConfidence() > 66)
                     {
@@ -12278,7 +12419,7 @@ public class Forsaken
             {
                 if(styleDamage[1] > 0)
                 {
-                    if(deviancy > 66)
+                    if(flavorDeviancy() > 66)
                     {
                         c.say(t, "\"");
                         if(knowsPersonally(c).booleanValue())
@@ -12387,7 +12528,7 @@ public class Forsaken
                         }
                         say(t, "\"");
                     } else
-                    if(deviancy > 33)
+                    if(flavorDeviancy() > 33)
                     {
                         c.say(t, "\"");
                         if(knowsPersonally(c).booleanValue())
@@ -12617,7 +12758,7 @@ public class Forsaken
                         say(t, "\"");
                     }
                 } else
-                if(hostility > 66)
+                if(flavorHostility() > 66)
                 {
                     say(t, "\"");
                     if(knowsPersonally(c).booleanValue())
@@ -12748,7 +12889,7 @@ public class Forsaken
                     }
                     c.say(t, "\"");
                 } else
-                if(hostility > 33)
+                if(flavorHostility() > 33)
                 {
                     say(t, "\"");
                     if(knowsPersonally(c).booleanValue())
@@ -13031,7 +13172,7 @@ public class Forsaken
                         say(t, "\"It's not foolish if I'm winning!");
                     }
                 } else
-                if(deviancy > 66)
+                if(flavorDeviancy() > 66)
                 {
                     c.say(t, "\"");
                     if(c.confidence > 66)
@@ -13110,7 +13251,7 @@ public class Forsaken
                     }
                     say(t, "\"");
                 } else
-                if(deviancy > 33)
+                if(flavorDeviancy() > 33)
                 {
                     c.say(t, "\"");
                     if(knowsPersonally(c).booleanValue())
@@ -13774,7 +13915,7 @@ public class Forsaken
                                 }
                             }
                         } else
-                        if(deviancy > 66)
+                        if(flavorDeviancy() > 66)
                         {
                             if(c.getInnocence() > 66)
                             {
@@ -13801,7 +13942,7 @@ public class Forsaken
                             else
                                 say(t, "Heh, are you scared of feeling good...?  You should be.");
                         } else
-                        if(deviancy > 33)
+                        if(flavorDeviancy() > 33)
                         {
                             if(c.getConfidence() > 66)
                             {
@@ -13909,12 +14050,12 @@ public class Forsaken
                         } else
                         if(c.getDignity() > 66)
                         {
-                            if(hostility > 66)
+                            if(flavorHostility() > 66)
                             {
                                 Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.SHAME);
                                 c.say(t, "It just... ngh... j-just hurts...!");
                             } else
-                            if(hostility > 33)
+                            if(flavorHostility() > 33)
                             {
                                 Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.ANGER);
                                 c.say(t, "I-I could stop you if I wanted to!");
@@ -13937,10 +14078,10 @@ public class Forsaken
                         if(c.getDignity() > 33)
                         {
                             Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.SHAME);
-                            if(deviancy > 66)
+                            if(flavorDeviancy() > 66)
                                 c.say(t, "Y-You're just... satisfying yourself...!");
                             else
-                            if(deviancy > 33)
+                            if(flavorDeviancy() > 33)
                                 c.say(t, "Ugh, you look like you're having a good time...");
                             else
                                 c.say(t, "You don't look like you're enjoying this, so why...?");
@@ -13962,12 +14103,12 @@ public class Forsaken
                             }
                         } else
                         {
-                            if(hostility > 66)
+                            if(flavorHostility() > 66)
                             {
                                 Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.FEAR);
                                 c.say(t, "Aaagh, it huuurts!");
                             } else
-                            if(hostility > 33)
+                            if(flavorHostility() > 33)
                             {
                                 Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.LEWD);
                                 c.say(t, "Ow... nnaaah, oooh!");
@@ -14037,7 +14178,7 @@ public class Forsaken
                                 }
                             }
                         } else
-                        if(hostility > 66)
+                        if(flavorHostility() > 66)
                         {
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.ANGER);
                             if(c.getInnocence() > 66)
@@ -14064,7 +14205,7 @@ public class Forsaken
                                 c.say(t, "Please, forgive meee!");
                             }
                         } else
-                        if(hostility > 33)
+                        if(flavorHostility() > 33)
                         {
                             if(c.getConfidence() > 66)
                             {
@@ -14126,7 +14267,7 @@ public class Forsaken
                         c.say(t, "\"");
                     }
                 } else
-                if(deviancy > 66)
+                if(flavorDeviancy() > 66)
                 {
                     c.say(t, "\"");
                     if(knowsPersonally(c).booleanValue())
@@ -14172,10 +14313,10 @@ public class Forsaken
                     if(c.getInnocence() > 66)
                     {
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
-                        if(hostility > 66)
+                        if(flavorHostility() > 66)
                             c.say(t, "S-Stop!  You're hurting me!");
                         else
-                        if(hostility > 33)
+                        if(flavorHostility() > 33)
                             c.say(t, "Th-This is really weird!");
                         else
                             c.say(t, "N-No!  I don't wanna feel good!");
@@ -14233,7 +14374,7 @@ public class Forsaken
                     }
                     say(t, "\"");
                 } else
-                if(deviancy > 33)
+                if(flavorDeviancy() > 33)
                 {
                     say(t, "\"");
                     if(knowsPersonally(c).booleanValue())
@@ -14303,12 +14444,12 @@ public class Forsaken
                     } else
                     if(c.getDignity() > 33)
                     {
-                        if(hostility > 66)
+                        if(flavorHostility() > 66)
                         {
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.LEWD);
                             say(t, "I still want to make you scream.");
                         } else
-                        if(hostility > 33)
+                        if(flavorHostility() > 33)
                         {
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.LEWD);
                             say(t, "Well, I enjoyed myself.");
@@ -14346,10 +14487,10 @@ public class Forsaken
                         say(t, "\"\n\n");
                         c.say(t, "\"");
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.LEWD);
-                        if(hostility > 66)
+                        if(flavorHostility() > 66)
                             c.say(t, "Ow...  You're... rough...");
                         else
-                        if(hostility > 33)
+                        if(flavorHostility() > 33)
                             c.say(t, "I... I need a break...");
                         else
                             c.say(t, "I'll admit... that felt good...");
@@ -14447,12 +14588,12 @@ public class Forsaken
                             c.say(t, "Ugh, coward...!");
                     } else
                     {
-                        if(hostility > 66)
+                        if(flavorHostility() > 66)
                         {
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.FOCUS);
                             say(t, "Disgusting.  Just die.");
                         } else
-                        if(hostility > 33)
+                        if(flavorHostility() > 33)
                         {
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
                             say(t, "Ugh, you pervert.");
@@ -14561,12 +14702,12 @@ public class Forsaken
                             c.say(t, "I should be able to win this, but...!");
                         c.say(t, "\"\n\n");
                         say(t, "\"");
-                        if(hostility > 66)
+                        if(flavorHostility() > 66)
                         {
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.FOCUS);
                             say(t, "Kill, kill, kill!");
                         } else
-                        if(hostility > 33)
+                        if(flavorHostility() > 33)
                         {
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.ANGER);
                             say(t, "Graaah!");
@@ -14578,10 +14719,10 @@ public class Forsaken
                     } else
                     {
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
-                        if(hostility > 66)
+                        if(flavorHostility() > 66)
                             c.say(t, "I-I'm actually going to die...!");
                         else
-                        if(hostility > 33)
+                        if(flavorHostility() > 33)
                             c.say(t, "Such... hatred...!");
                         else
                             c.say(t, "Even against one of the weaker Forsaken, I-I can't...");
@@ -14645,12 +14786,12 @@ public class Forsaken
                     } else
                     if(c.getConfidence() > 66)
                     {
-                        if(hostility > 66)
+                        if(flavorHostility() > 66)
                         {
                             Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.FOCUS);
                             c.say(t, "Face me, coward!");
                         } else
-                        if(hostility > 33)
+                        if(flavorHostility() > 33)
                         {
                             Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FOCUS, Project.Emotion.STRUGGLE);
                             c.say(t, "You won't have an easy time hurting me!");
@@ -14693,20 +14834,20 @@ public class Forsaken
                     } else
                     {
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
-                        if(deviancy > 66)
+                        if(flavorDeviancy() > 66)
                             c.say(t, "S-Stop... looking at me like that... please...!");
                         else
-                        if(deviancy > 33)
+                        if(flavorDeviancy() > 33)
                             c.say(t, (new StringBuilder("I-It's like... ")).append(heShe()).append("'s just enjoying it...!").toString());
                         else
                             c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append("'s... too strong...!").toString());
                         c.say(t, "\"\n\n");
                         say(t, "\"");
                         Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.FOCUS);
-                        if(hostility > 66)
+                        if(flavorHostility() > 66)
                             say(t, "I'm going to make you beg me to kill you before I'm done!");
                         else
-                        if(hostility > 33)
+                        if(flavorHostility() > 33)
                             say(t, "Hahah, you're already giving up!");
                         else
                             say(t, "You aren't giving up yet, are you?");
@@ -14790,12 +14931,12 @@ public class Forsaken
                             c.say(t, "Ugh...  Have you been working for the Demons all along...?");
                         c.say(t, "\"\n\n");
                         say(t, "\"");
-                        if(hostility > 66)
+                        if(flavorHostility() > 66)
                         {
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.FOCUS);
                             say(t, "I've just learned to enjoy hurting people!");
                         } else
-                        if(hostility > 33)
+                        if(flavorHostility() > 33)
                         {
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.FOCUS);
                             say(t, "Shut up and take it.");
@@ -14806,12 +14947,12 @@ public class Forsaken
                         }
                     } else
                     {
-                        if(hostility > 66)
+                        if(flavorHostility() > 66)
                         {
                             Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                             c.say(t, "P-Please, no more, no more, I'm begging you...!");
                         } else
-                        if(hostility > 33)
+                        if(flavorHostility() > 33)
                         {
                             Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                             c.say(t, "I c-can't, I can't take it anymore...!");
@@ -14891,12 +15032,12 @@ public class Forsaken
                 } else
                 if(c.getConfidence() > 66)
                 {
-                    if(hostility > 66)
+                    if(flavorHostility() > 66)
                     {
                         Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
                         say(t, "Pathetic!  Is that what you call an attack!?");
                     } else
-                    if(hostility > 33)
+                    if(flavorHostility() > 33)
                     {
                         Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.FOCUS);
                         say(t, "Getting tired yet?");
@@ -14960,12 +15101,12 @@ public class Forsaken
                     }
                     say(t, "\"\n\n");
                     c.say(t, "\"");
-                    if(hostility > 66)
+                    if(flavorHostility() > 66)
                     {
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.SHAME);
                         c.say(t, "Y-You're just looking for a way to hurt me, I know it!");
                     } else
-                    if(hostility > 33)
+                    if(flavorHostility() > 33)
                     {
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.ANGER);
                         c.say(t, "D-Don't rush me!");
@@ -15034,12 +15175,12 @@ public class Forsaken
                     }
                     c.say(t, "\"\n\n");
                     say(t, "\"");
-                    if(hostility > 66)
+                    if(flavorHostility() > 66)
                     {
                         Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
                         say(t, "Idiot.  I've got you right where I want you.");
                     } else
-                    if(hostility > 33)
+                    if(flavorHostility() > 33)
                     {
                         Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.FOCUS);
                         say(t, "You're so predictable.");
@@ -15084,10 +15225,10 @@ public class Forsaken
                 } else
                 {
                     Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                    if(hostility > 66)
+                    if(flavorHostility() > 66)
                         c.say(t, "I won't let you kill me!");
                     else
-                    if(hostility > 33)
+                    if(flavorHostility() > 33)
                         c.say(t, "I'm not your toy!");
                     else
                         c.say(t, "Stop looking down on me!");
@@ -15145,10 +15286,10 @@ public class Forsaken
                 if(c.getInnocence() > 66)
                 {
                     Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
-                    if(deviancy > 66)
+                    if(flavorDeviancy() > 66)
                         c.say(t, "Stay away from me, weirdo!");
                     else
-                    if(deviancy > 33)
+                    if(flavorDeviancy() > 33)
                         c.say(t, "What are you looking at me like that for!?  Get back!");
                     else
                         c.say(t, "Leave me alooone!");
@@ -15213,12 +15354,12 @@ public class Forsaken
                     }
                     c.say(t, "\"\n\n");
                     say(t, "\"");
-                    if(hostility > 66)
+                    if(flavorHostility() > 66)
                     {
                         Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
                         say(t, "I want you to feel completely hopeless...!");
                     } else
-                    if(hostility > 33)
+                    if(flavorHostility() > 33)
                     {
                         Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.NEUTRAL);
                         say(t, "I'm giving you a chance to beg for mercy.");
@@ -15284,7 +15425,7 @@ public class Forsaken
                         if(c.getDignity() > 66)
                         {
                             Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                            if(deviancy > 66)
+                            if(flavorDeviancy() > 66)
                                 c.say(t, "H-Hey, where are you touching!?");
                             else
                             if(deviancy > 33)
@@ -15310,12 +15451,12 @@ public class Forsaken
                         } else
                         if(c.getDignity() > 33)
                         {
-                            if(hostility > 66)
+                            if(flavorHostility() > 66)
                             {
                                 Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.SHAME);
                                 c.say(t, "I don't like that look in your eyes...");
                             } else
-                            if(hostility > 33)
+                            if(flavorHostility() > 33)
                             {
                                 Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                                 c.say(t, "What are you smirking about?");
@@ -15346,12 +15487,12 @@ public class Forsaken
                                 c.say(t, "What are you plotting?");
                             c.say(t, "\"\n\n");
                             say(t, "\"");
-                            if(deviancy > 66)
+                            if(flavorDeviancy() > 66)
                             {
                                 Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.LEWD);
                                 say(t, "Ah, it's showing, it's showiiing~!");
                             } else
-                            if(deviancy > 33)
+                            if(flavorDeviancy() > 33)
                             {
                                 Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.FOCUS);
                                 say(t, "Hm, not bad.");
@@ -15413,21 +15554,21 @@ public class Forsaken
                         if(c.getConfidence() > 66)
                         {
                             Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FOCUS, Project.Emotion.JOY);
-                            if(hostility > 66)
+                            if(flavorHostility() > 66)
                                 c.say(t, "This is finally my chance to go all-out!");
                             else
-                            if(hostility > 33)
+                            if(flavorHostility() > 33)
                                 c.say(t, "Now this is a fight!");
                             else
                                 c.say(t, "This is a chance to fight a worthy opponent!");
                             c.say(t, "\"\n\n");
                             say(t, "\"");
-                            if(deviancy > 66)
+                            if(flavorDeviancy() > 66)
                             {
                                 Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.LEWD);
                                 say(t, "W-Worth it...");
                             } else
-                            if(deviancy > 33)
+                            if(flavorDeviancy() > 33)
                             {
                                 Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.LEWD);
                                 say(t, "This is also a great show...");
@@ -15440,10 +15581,10 @@ public class Forsaken
                         if(c.getConfidence() > 33)
                         {
                             Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                            if(deviancy > 66)
+                            if(flavorDeviancy() > 66)
                                 c.say(t, "You complete pervert!");
                             else
-                            if(deviancy > 33)
+                            if(flavorDeviancy() > 33)
                                 c.say(t, "Stop messing around!");
                             else
                                 c.say(t, "I didn't think you were the type to do this.");
@@ -15536,12 +15677,12 @@ public class Forsaken
                         } else
                         if(c.getInnocence() > 66)
                         {
-                            if(hostility > 66)
+                            if(flavorHostility() > 66)
                             {
                                 Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.FOCUS);
                                 say(t, "Shut up!  Shut up, or I'll kill you!");
                             } else
-                            if(hostility > 33)
+                            if(flavorHostility() > 33)
                             {
                                 Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.FOCUS);
                                 say(t, "Hold still, you little shit!");
@@ -15563,12 +15704,12 @@ public class Forsaken
                         } else
                         if(c.getInnocence() > 33)
                         {
-                            if(deviancy > 66)
+                            if(flavorDeviancy() > 66)
                             {
                                 Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
                                 say(t, "Let's tear off a little extra~!");
                             } else
-                            if(deviancy > 33)
+                            if(flavorDeviancy() > 33)
                             {
                                 Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.NEUTRAL);
                                 say(t, "You do have a nice body.");
@@ -15605,12 +15746,12 @@ public class Forsaken
                                 say(t, "Giving up?  Or is this a tri- Ngh!");
                             say(t, "\"\n\n");
                             c.say(t, "\"");
-                            if(deviancy > 66)
+                            if(flavorDeviancy() > 66)
                             {
                                 Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
                                 c.say(t, "Hmph, I will need to wash my mouth out tonight.");
                             } else
-                            if(deviancy > 33)
+                            if(flavorDeviancy() > 33)
                             {
                                 Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
                                 c.say(t, "As if I'd offer myself to you!");
@@ -15669,21 +15810,21 @@ public class Forsaken
                     if(c.getConfidence() > 66)
                     {
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
-                        if(deviancy > 66)
+                        if(flavorDeviancy() > 66)
                             c.say(t, "Are you actually enjoying this!?");
                         else
-                        if(deviancy > 33)
+                        if(flavorDeviancy() > 33)
                             c.say(t, "You look like you're having a little less fun now!");
                         else
                             c.say(t, "You'll stay down, if you know what's good for you.");
                         c.say(t, "\"\n\n");
                         say(t, "\"");
-                        if(hostility > 66)
+                        if(flavorHostility() > 66)
                         {
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                             say(t, (new StringBuilder("I'm... I'm going to enjoy watching you break, ")).append(c.getMainName()).append("...").toString());
                         } else
-                        if(hostility > 33)
+                        if(flavorHostility() > 33)
                         {
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                             say(t, "You'll... regret... that...");
@@ -15715,12 +15856,12 @@ public class Forsaken
                             say(t, "Guh, why did the Demon Lord have to make me so weak!?");
                     } else
                     {
-                        if(hostility > 66)
+                        if(flavorHostility() > 66)
                         {
                             Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                             c.say(t, (new StringBuilder("I really thought... ")).append(heShe()).append(" was going to kill me...").toString());
                         } else
-                        if(hostility > 33)
+                        if(flavorHostility() > 33)
                         {
                             Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FOCUS, Project.Emotion.STRUGGLE);
                             c.say(t, "This is my chance!");
@@ -15851,10 +15992,10 @@ public class Forsaken
                         c.say(t, "\"\n\n");
                         say(t, "\"");
                         Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
-                        if(hostility > 66)
+                        if(flavorHostility() > 66)
                             say(t, "You think you can stop me from hurting you?");
                         else
-                        if(hostility > 33)
+                        if(flavorHostility() > 33)
                             say(t, "We'll see about that.");
                         else
                             say(t, "Good.");
@@ -15906,21 +16047,21 @@ public class Forsaken
                     if(c.getConfidence() > 66)
                     {
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
-                        if(hostility > 66)
+                        if(flavorHostility() > 66)
                             c.say(t, "You... monster...");
                         else
-                        if(hostility > 33)
+                        if(flavorHostility() > 33)
                             c.say(t, "I can still... stand up...!");
                         else
                             c.say(t, "I don't... understand you...");
                         c.say(t, "\"\n\n");
                         say(t, "\"");
-                        if(deviancy > 66)
+                        if(flavorDeviancy() > 66)
                         {
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.LEWD);
                             say(t, "Your broken body is so beautiful...");
                         } else
-                        if(deviancy > 33)
+                        if(flavorDeviancy() > 33)
                         {
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.LEWD);
                             say(t, "I'm not satisfied yet.");
@@ -15933,10 +16074,10 @@ public class Forsaken
                     if(c.getConfidence() > 33)
                     {
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
-                        if(deviancy > 66)
+                        if(flavorDeviancy() > 66)
                             c.say(t, (new StringBuilder("I can't let ")).append(himHer()).append(" find me again, or ").append(heShe()).append("'ll...").toString());
                         else
-                        if(deviancy > 33)
+                        if(flavorDeviancy() > 33)
                             c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append("'s just playing with me...!").toString());
                         else
                             c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append("'s too strong...!").toString());
@@ -15975,10 +16116,10 @@ public class Forsaken
                         c.say(t, "\"\n\n");
                         say(t, "\"");
                         Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
-                        if(hostility > 66)
+                        if(flavorHostility() > 66)
                             say(t, "No, no, you need to suffer much more than this...");
                         else
-                        if(hostility > 33)
+                        if(flavorHostility() > 33)
                             say(t, "Hm, what to do with you...?");
                         else
                             say(t, "You can't give up just yet.  I won't let you.");
@@ -15988,7 +16129,7 @@ public class Forsaken
             } else
             if(styleDamage[3] > 0)
             {
-                if(deviancy > 66)
+                if(flavorDeviancy() > 66)
                 {
                     c.say(t, "\"");
                     if(knowsPersonally(c).booleanValue())
@@ -16044,12 +16185,12 @@ public class Forsaken
                             c.say(t, "You sneaky little-");
                         c.say(t, "\"\n\n");
                         say(t, "\"");
-                        if(hostility > 66)
+                        if(flavorHostility() > 66)
                         {
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
                             say(t, "You're so easy to hurt!");
                         } else
-                        if(hostility > 33)
+                        if(flavorHostility() > 33)
                         {
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
                             say(t, "Come on, show me!");
@@ -16102,7 +16243,7 @@ public class Forsaken
                     }
                     say(t, "\"");
                 } else
-                if(deviancy > 33)
+                if(flavorDeviancy() > 33)
                 {
                     say(t, "\"");
                     if(knowsPersonally(c).booleanValue())
@@ -16154,10 +16295,10 @@ public class Forsaken
                         say(t, "\"\n\n");
                         c.say(t, "\"");
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                        if(hostility > 66)
+                        if(flavorHostility() > 66)
                             c.say(t, "I won't let you tear me down!");
                         else
-                        if(hostility > 33)
+                        if(flavorHostility() > 33)
                             c.say(t, "Wipe that smirk off your face!");
                         else
                             c.say(t, "You're just another pervert after all...!");
@@ -16190,12 +16331,12 @@ public class Forsaken
                         }
                     } else
                     {
-                        if(hostility > 66)
+                        if(flavorHostility() > 66)
                         {
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
                             say(t, "You won't be able to show your face in public after I'm done with you!");
                         } else
-                        if(hostility > 33)
+                        if(flavorHostility() > 33)
                         {
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.FOCUS);
                             say(t, "Come on, show some embarrassment!");
@@ -16268,10 +16409,10 @@ public class Forsaken
                     if(c.getConfidence() > 66)
                     {
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.FOCUS);
-                        if(hostility > 66)
+                        if(flavorHostility() > 66)
                             c.say(t, "You're doing a pretty bad job at killing me.");
                         else
-                        if(hostility > 33)
+                        if(flavorHostility() > 33)
                             c.say(t, "You still haven't put a scratch on me.");
                         else
                             c.say(t, "You're being careful not to hurt me.  That's annoying.");
@@ -16319,10 +16460,10 @@ public class Forsaken
                         c.say(t, "\"\n\n");
                         say(t, "\"");
                         Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.FOCUS);
-                        if(hostility > 66)
+                        if(flavorHostility() > 66)
                             say(t, "Give up!  Give in to despair!");
                         else
-                        if(hostility > 33)
+                        if(flavorHostility() > 33)
                             say(t, "You might have stood a chance if you weren't such a coward!");
                         else
                             say(t, "What did you expect to happen when you ran!?");
@@ -16330,7 +16471,7 @@ public class Forsaken
                     say(t, "\"");
                 }
             } else
-            if(hostility > 66)
+            if(flavorHostility() > 66)
             {
                 say(t, "\"");
                 if(knowsPersonally(c).booleanValue())
@@ -16424,7 +16565,7 @@ public class Forsaken
                 } else
                 {
                     Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
-                    if(deviancy > 66)
+                    if(flavorDeviancy() > 66)
                         say(t, "And wait until you hear what I'm gonna do with your warm corpse!");
                     else
                     if(disgrace > 33)
@@ -16444,7 +16585,7 @@ public class Forsaken
                 }
                 c.say(t, "\"");
             } else
-            if(hostility > 33)
+            if(flavorHostility() > 33)
             {
                 say(t, "\"");
                 if(knowsPersonally(c).booleanValue())
@@ -16542,10 +16683,10 @@ public class Forsaken
                     say(t, "\"\n\n");
                     c.say(t, "\"");
                     Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
-                    if(deviancy > 66)
+                    if(flavorDeviancy() > 66)
                         c.say(t, "You're completely twisted.");
                     else
-                    if(deviancy > 33)
+                    if(flavorDeviancy() > 33)
                         c.say(t, "You take a degree of sexual enjoyment from it as well.");
                     else
                         c.say(t, "You don't even feel guilty!");
@@ -16598,13 +16739,13 @@ public class Forsaken
                 if(c.getMorality() > 66)
                 {
                     Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
-                    if(deviancy > 66)
+                    if(flavorDeviancy() > 66)
                         c.say(t, (new StringBuilder("I know you're in there somewhere, ")).append(originalName).append("!  Wake up!").toString());
                     else
-                    if(deviancy > 33)
+                    if(flavorDeviancy() > 33)
                         c.say(t, (new StringBuilder("There's no way you actually enjoy doing this, ")).append(mainName).append("!  You can stop anytime!").toString());
                     else
-                        c.say(t, (new StringBuilder("I can tell that it's hurting you to do this, ")).append(mainName).append("!  You belong on the side of Good!").toString());
+                        c.say(t, (new StringBuilder("I can tell that it's hurtflavorflavorDeviancy()()to do this, ")).append(mainName).append("!  You belong on the side of Good!").toString());
                     c.say(t, "\"\n\n");
                     say(t, "\"");
                     if(flavorObedience() > 66)
@@ -16666,12 +16807,12 @@ public class Forsaken
                         c.say(t, "Just face me head-on!");
                     c.say(t, "\"\n\n");
                     say(t, "\"");
-                    if(deviancy > 66)
+                    if(flavorDeviancy() > 66)
                     {
                         Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.JOY);
                         say(t, "Yes, look at me like I'm walking garbage!");
                     } else
-                    if(deviancy > 33)
+                    if(flavorDeviancy() > 33)
                     {
                         Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.LEWD);
                         say(t, "Oh?  Are you going to hurt me?");
@@ -16757,22 +16898,22 @@ public class Forsaken
                             say(t, "\"\n\n");
                             c.say(t, "\"");
                             Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.ANGER);
-                            if(hostility > 66)
+                            if(flavorHostility() > 66)
                                 c.say(t, "Stop!  Please!");
                             else
-                            if(hostility > 33)
+                            if(flavorHostility() > 33)
                                 c.say(t, (new StringBuilder("L-Liar!  ")).append(HeShe()).append("'s lying!").toString());
                             else
                                 c.say(t, "Why are you doing this!?");
                         } else
                         if(c.getDignity() > 33)
                         {
-                            if(hostility > 66)
+                            if(flavorHostility() > 66)
                             {
                                 Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
                                 say(t, "Look at this worthless slut!");
                             } else
-                            if(hostility > 33)
+                            if(flavorHostility() > 33)
                             {
                                 Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.FOCUS);
                                 say(t, "Hah, you let me go!  Thanks a lot!");
@@ -16784,10 +16925,10 @@ public class Forsaken
                             say(t, "\"\n\n");
                             c.say(t, "\"");
                             Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.SHAME);
-                            if(deviancy > 66)
+                            if(flavorDeviancy() > 66)
                                 c.say(t, "I can't fight like this!");
                             else
-                            if(deviancy > 33)
+                            if(flavorDeviancy() > 33)
                                 c.say(t, "Ngh... guh...");
                             else
                                 c.say(t, "You're hard to pin down...");
@@ -16855,12 +16996,12 @@ public class Forsaken
                         } else
                         if(c.getConfidence() > 66)
                         {
-                            if(hostility > 66)
+                            if(flavorHostility() > 66)
                             {
                                 Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
                                 say(t, "Pathetic slut!  You're getting turned on by this!");
                             } else
-                            if(hostility > 33)
+                            if(flavorHostility() > 33)
                             {
                                 Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
                                 say(t, "The slut");
@@ -16886,12 +17027,12 @@ public class Forsaken
                         } else
                         if(c.getConfidence() > 33)
                         {
-                            if(deviancy > 66)
+                            if(flavorDeviancy() > 66)
                             {
                                 Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.JOY);
                                 say(t, "Mm, I like that expression...");
                             } else
-                            if(deviancy > 33)
+                            if(flavorDeviancy() > 33)
                             {
                                 Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.FOCUS);
                                 say(t, "Enjoying yourself without me?");
@@ -16923,10 +17064,10 @@ public class Forsaken
                             say(t, "\"\n\n");
                             c.say(t, "\"");
                             Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
-                            if(hostility > 66)
+                            if(flavorHostility() > 66)
                                 c.say(t, "I-It mostly just hurt...");
                             else
-                            if(hostility > 33)
+                            if(flavorHostility() > 33)
                                 c.say(t, "Y-You pinched me...");
                             else
                                 c.say(t, "I-I'm sorry...");
@@ -16973,12 +17114,12 @@ public class Forsaken
                         } else
                         if(c.getInnocence() > 66)
                         {
-                            if(deviancy > 66)
+                            if(flavorDeviancy() > 66)
                             {
                                 Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.JOY);
                                 say(t, "Ah, you really are too cute...");
                             } else
-                            if(deviancy > 33)
+                            if(flavorDeviancy() > 33)
                             {
                                 Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.FOCUS);
                                 say(t, "Let's have some more fun.");
@@ -16990,10 +17131,10 @@ public class Forsaken
                             say(t, "\"\n\n");
                             c.say(t, "\"");
                             Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
-                            if(hostility > 66)
+                            if(flavorHostility() > 66)
                                 c.say(t, "It hurts...  It hurts, but...");
                             else
-                            if(hostility > 33)
+                            if(flavorHostility() > 33)
                                 c.say(t, "Don't wanna feel good anymore...");
                             else
                                 c.say(t, "I feel... so weird...");
@@ -17027,10 +17168,10 @@ public class Forsaken
                         } else
                         {
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
-                            if(hostility > 66)
+                            if(flavorHostility() > 66)
                                 say(t, "I'm not finished with you yet.");
                             else
-                            if(hostility > 33)
+                            if(flavorHostility() > 33)
                                 say(t, "Ah, I got carried away...");
                             else
                                 say(t, "I'm glad that you managed to resist.");
@@ -17100,10 +17241,10 @@ public class Forsaken
                         say(t, "\"\n\n");
                         c.say(t, "\"");
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                        if(deviancy > 66)
+                        if(flavorDeviancy() > 66)
                             c.say(t, "Get your hands off me!");
                         else
-                        if(deviancy > 33)
+                        if(flavorDeviancy() > 33)
                             c.say(t, "Stop that!");
                         else
                             c.say(t, "I won't let go...!");
@@ -17121,20 +17262,20 @@ public class Forsaken
                         say(t, "\"\n\n");
                         c.say(t, "\"");
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
-                        if(hostility > 66)
+                        if(flavorHostility() > 66)
                             c.say(t, "Y-You're hurting me...!");
                         else
-                        if(hostility > 33)
+                        if(flavorHostility() > 33)
                             c.say(t, "Ngh!  Not so tight...!");
                         else
                             c.say(t, "Let... Let go...");
                     } else
                     {
                         Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.NEUTRAL);
-                        if(hostility > 66)
+                        if(flavorHostility() > 66)
                             say(t, "You can't pretend you're not afraid.");
                         else
-                        if(hostility > 33)
+                        if(flavorHostility() > 33)
                             say(t, "Now you've made me angry.");
                         else
                             say(t, "Let's see how determined you really are.");
@@ -17202,22 +17343,22 @@ public class Forsaken
                         say(t, "\"\n\n");
                         c.say(t, "\"");
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.FEAR);
-                        if(deviancy > 66)
+                        if(flavorDeviancy() > 66)
                             c.say(t, "Huh!?  What are you doing down there!?");
                         else
-                        if(deviancy > 33)
+                        if(flavorDeviancy() > 33)
                             c.say(t, "N-No fair!");
                         else
                             c.say(t, "N-Not there!");
                     } else
                     if(c.getInnocence() > 33)
                     {
-                        if(deviancy > 66)
+                        if(flavorDeviancy() > 66)
                         {
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.FOCUS);
                             say(t, "Mm, it's even more fun like this...");
                         } else
-                        if(deviancy > 33)
+                        if(flavorDeviancy() > 33)
                         {
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.LEWD);
                             say(t, "It's like you're asking me to touch you.");
@@ -17314,12 +17455,12 @@ public class Forsaken
                             c.say(t, "If they see me running away from such a weak-looking enemy, I'm done for...");
                         c.say(t, "\"\n\n");
                         say(t, "\"");
-                        if(hostility > 66)
+                        if(flavorHostility() > 66)
                         {
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.FOCUS);
                             say(t, "Idiot!  You think you get to decide how others see you!?");
                         } else
-                        if(hostility > 33)
+                        if(flavorHostility() > 33)
                         {
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
                             say(t, "Smile for the cameras!");
@@ -17332,10 +17473,10 @@ public class Forsaken
                     if(c.getDignity() > 33)
                     {
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                        if(deviancy > 66)
+                        if(flavorDeviancy() > 66)
                             c.say(t, "You- Nnngh!  Freak!");
                         else
-                        if(deviancy > 33)
+                        if(flavorDeviancy() > 33)
                             c.say(t, "You're sick!");
                         else
                             c.say(t, "You coward!  Let me up!");
@@ -17351,12 +17492,12 @@ public class Forsaken
                             say(t, "Is this how you cope with your own powerlessness?");
                     } else
                     {
-                        if(hostility > 66)
+                        if(flavorHostility() > 66)
                         {
                             Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.FEAR);
                             c.say(t, "Graaah, it huuurts!");
                         } else
-                        if(hostility > 33)
+                        if(flavorHostility() > 33)
                         {
                             Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
                             c.say(t, "Ah!  Aaah, nooo!");
@@ -17367,12 +17508,12 @@ public class Forsaken
                         }
                         c.say(t, "\"\n\n");
                         say(t, "\"");
-                        if(deviancy > 66)
+                        if(flavorDeviancy() > 66)
                         {
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.FOCUS);
                             say(t, "I love the way you scream so loud!");
                         } else
-                        if(deviancy > 33)
+                        if(flavorDeviancy() > 33)
                         {
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
                             say(t, "Whew, you're a loud one!");
@@ -17387,7 +17528,7 @@ public class Forsaken
             } else
             if(styleDamage[3] > 0)
             {
-                if(hostility > 66)
+                if(flavorHostility() > 66)
                 {
                     say(t, "\"");
                     if(knowsPersonally(c).booleanValue())
@@ -17466,10 +17607,10 @@ public class Forsaken
                         say(t, "\"\n\n");
                         c.say(t, "\"");
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.SHAME);
-                        if(deviancy > 66)
+                        if(flavorDeviancy() > 66)
                             c.say(t, "Hey!  Stay focused on me!  I'm the one whose body you want, right?");
                         else
-                        if(deviancy > 33)
+                        if(flavorDeviancy() > 33)
                             c.say(t, "I can't do anything like this...!");
                         else
                             c.say(t, "I'm sorry, everyone...");
@@ -17502,7 +17643,7 @@ public class Forsaken
                     }
                     c.say(t, "\"");
                 } else
-                if(hostility > 33)
+                if(flavorHostility() > 33)
                 {
                     c.say(t, "\"");
                     if(knowsPersonally(c).booleanValue())
@@ -17544,10 +17685,10 @@ public class Forsaken
                     if(c.getInnocence() > 66)
                     {
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.FOCUS);
-                        if(deviancy > 66)
+                        if(flavorDeviancy() > 66)
                             c.say(t, "Hold still, you weirdo!");
                         else
-                        if(deviancy > 33)
+                        if(flavorDeviancy() > 33)
                             c.say(t, "Quit it!");
                         else
                             c.say(t, "You jerk!");
@@ -17701,12 +17842,12 @@ public class Forsaken
                             c.say(t, "Stop trying to distract me!");
                     } else
                     {
-                        if(deviancy > 66)
+                        if(flavorDeviancy() > 66)
                         {
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.LEWD);
                             say(t, "You'd be a lot happier as my personal sex toy.");
                         } else
-                        if(deviancy > 33)
+                        if(flavorDeviancy() > 33)
                         {
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.JOY);
                             say(t, "You're just a cute little morsel, as far as the Demon Lord is concerned.");
@@ -17797,10 +17938,10 @@ public class Forsaken
                     c.say(t, "\"\n\n");
                     say(t, "\"");
                     Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.ANGER);
-                    if(hostility > 66)
+                    if(flavorHostility() > 66)
                         say(t, "I do this because I want to!");
                     else
-                    if(hostility > 33)
+                    if(flavorHostility() > 33)
                         say(t, "I don't need your forgiveness!");
                     else
                         say(t, "You haven't beaten me yet!");
@@ -17899,12 +18040,12 @@ public class Forsaken
                         c.say(t, (new StringBuilder("Hard to follow ")).append(hisHer()).append(" attacks...!").toString());
                 } else
                 {
-                    if(deviancy > 66)
+                    if(flavorDeviancy() > 66)
                     {
                         Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.JOY);
                         say(t, "Ah, the things I'm going to do to you...");
                     } else
-                    if(deviancy > 33)
+                    if(flavorDeviancy() > 33)
                     {
                         Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.FOCUS);
                         say(t, "You're such a cute little thing.");
@@ -17977,21 +18118,21 @@ public class Forsaken
                 if(c.getMorality() > 66)
                 {
                     Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.FOCUS);
-                    if(hostility > 66)
+                    if(flavorHostility() > 66)
                         c.say(t, "I can't let you hurt anyone else.");
                     else
-                    if(hostility > 33)
+                    if(flavorHostility() > 33)
                         c.say(t, "This is what you wanted, right?");
                     else
                         c.say(t, "I won't run anymore.");
                     c.say(t, "\"\n\n");
                     say(t, "\"");
-                    if(deviancy > 66)
+                    if(flavorDeviancy() > 66)
                     {
                         Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.JOY);
                         say(t, "That determination... nnngh, I love it!");
                     } else
-                    if(deviancy > 33)
+                    if(flavorDeviancy() > 33)
                     {
                         Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
                         say(t, "I like that expression.");
@@ -18003,12 +18144,12 @@ public class Forsaken
                 } else
                 if(c.getMorality() > 33)
                 {
-                    if(deviancy > 66)
+                    if(flavorDeviancy() > 66)
                     {
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                         c.say(t, "Shut up!  I don't want to hear any of this!");
                     } else
-                    if(deviancy > 33)
+                    if(flavorDeviancy() > 33)
                     {
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                         c.say(t, "Stop staring at me like that!");
@@ -18057,7 +18198,7 @@ public class Forsaken
             {
                 if(styleDamage[3] > 0)
                 {
-                    if(hostility > 66)
+                    if(flavorHostility() > 66)
                     {
                         say(t, "\"");
                         if(knowsPersonally(c).booleanValue())
@@ -18162,17 +18303,17 @@ public class Forsaken
                             say(t, "\"\n\n");
                             c.say(t, "\"");
                             Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                            if(deviancy > 66)
+                            if(flavorDeviancy() > 66)
                                 c.say(t, "Brainless slut!  Ride this!");
                             else
-                            if(deviancy > 33)
+                            if(flavorDeviancy() > 33)
                                 c.say(t, "You smug piece of shit!");
                             else
                                 c.say(t, "I'm putting you out of your misery right now!");
                         }
                         c.say(t, "\"");
                     } else
-                    if(hostility > 33)
+                    if(flavorHostility() > 33)
                     {
                         say(t, "\"");
                         if(knowsPersonally(c).booleanValue())
@@ -18217,10 +18358,10 @@ public class Forsaken
                         if(c.getInnocence() > 66)
                         {
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.JOY);
-                            if(deviancy > 66)
+                            if(flavorDeviancy() > 66)
                                 say(t, "By the way, I'm watching you through the cameras while I masturbate.");
                             else
-                            if(deviancy > 33)
+                            if(flavorDeviancy() > 33)
                                 say(t, "This camera has a really good view.");
                             else
                                 say(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s too stupid to even keep track of ").append(c.hisHer()).append(" enemy!").toString());
@@ -18254,10 +18395,10 @@ public class Forsaken
                             say(t, "\"\n\n");
                             c.say(t, "\"");
                             Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
-                            if(deviancy > 66)
+                            if(flavorDeviancy() > 66)
                                 c.say(t, "You're disgusting!");
                             else
-                            if(deviancy > 33)
+                            if(flavorDeviancy() > 33)
                                 c.say(t, "Laugh while you can!");
                             else
                                 c.say(t, "Just shut up!");
@@ -18329,10 +18470,10 @@ public class Forsaken
                         if(c.getDignity() > 66)
                         {
                             Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                            if(deviancy > 66)
+                            if(flavorDeviancy() > 66)
                                 c.say(t, "Excuse me!");
                             else
-                            if(deviancy > 33)
+                            if(flavorDeviancy() > 33)
                                 c.say(t, "I didn't give you permission to look!");
                             else
                                 c.say(t, "You could have warned me earlier!");
@@ -18359,12 +18500,12 @@ public class Forsaken
                                 c.say(t, "This is your fault!");
                             c.say(t, "\"\n\n");
                             say(t, "\"");
-                            if(deviancy > 66)
+                            if(flavorDeviancy() > 66)
                             {
                                 Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.JOY);
                                 say(t, "I wish I had a camera, too...");
                             } else
-                            if(deviancy > 33)
+                            if(flavorDeviancy() > 33)
                             {
                                 Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.LEWD);
                                 say(t, "Looking good!");
@@ -18397,7 +18538,7 @@ public class Forsaken
                         say(t, "\"");
                     }
                 } else
-                if(hostility > 66)
+                if(flavorHostility() > 66)
                 {
                     c.say(t, "\"");
                     if(knowsPersonally(c).booleanValue())
@@ -18445,10 +18586,10 @@ public class Forsaken
                     if(c.getInnocence() > 66)
                     {
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                        if(deviancy > 66)
+                        if(flavorDeviancy() > 66)
                             c.say(t, "Stay away from me, you freak!");
                         else
-                        if(deviancy > 33)
+                        if(flavorDeviancy() > 33)
                             c.say(t, "Stop messing with my body!");
                         else
                             c.say(t, "S-Stop saying those things!");
@@ -18506,7 +18647,7 @@ public class Forsaken
                     }
                     say(t, "\"");
                 } else
-                if(hostility > 33)
+                if(flavorHostility() > 33)
                 {
                     c.say(t, "\"");
                     if(knowsPersonally(c).booleanValue())
@@ -18556,10 +18697,10 @@ public class Forsaken
                     if(c.getConfidence() > 66)
                     {
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.FOCUS);
-                        if(deviancy > 66)
+                        if(flavorDeviancy() > 66)
                             c.say(t, "Ugh!  I'm shutting that disgusting mouth of yours right now!");
                         else
-                        if(deviancy > 33)
+                        if(flavorDeviancy() > 33)
                             c.say(t, "You don't have time to think about all that!");
                         else
                             c.say(t, "We'll see how smug you are after this!");
@@ -18685,12 +18826,12 @@ public class Forsaken
                     } else
                     if(c.getMorality() > 33)
                     {
-                        if(deviancy > 66)
+                        if(flavorDeviancy() > 66)
                         {
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
                             say(t, "That was... uck, guh... worth it...");
                         } else
-                        if(deviancy > 33)
+                        if(flavorDeviancy() > 33)
                         {
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.LEWD);
                             say(t, "You shake your butt when you're climbing.");
@@ -18735,7 +18876,7 @@ public class Forsaken
             } else
             if(styleDamage[3] > 0)
             {
-                if(deviancy > 66)
+                if(flavorDeviancy() > 66)
                 {
                     c.say(t, "\"");
                     if(knowsPersonally(c).booleanValue())
@@ -18817,12 +18958,12 @@ public class Forsaken
                             say(t, "Doing it in public feels so much better, doesn't it?");
                     } else
                     {
-                        if(hostility > 66)
+                        if(flavorHostility() > 66)
                         {
                             Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                             c.say(t, "Ow!  It hurts...!");
                         } else
-                        if(hostility > 33)
+                        if(flavorHostility() > 33)
                         {
                             Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                             c.say(t, "Please, not there!");
@@ -18844,7 +18985,7 @@ public class Forsaken
                     }
                     say(t, "\"");
                 } else
-                if(deviancy > 33)
+                if(flavorDeviancy() > 33)
                 {
                     say(t, "\"");
                     if(knowsPersonally(c).booleanValue())
@@ -18889,12 +19030,12 @@ public class Forsaken
                     } else
                     if(c.getDignity() > 66)
                     {
-                        if(hostility > 66)
+                        if(flavorHostility() > 66)
                         {
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.FOCUS);
                             say(t, "You'll just be remembered as a pretty set of legs!");
                         } else
-                        if(hostility > 33)
+                        if(flavorHostility() > 33)
                         {
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
                             say(t, "Everyone will know how weak you are!");
@@ -19036,10 +19177,10 @@ public class Forsaken
                     if(c.getInnocence() > 33)
                     {
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
-                        if(hostility > 66)
+                        if(flavorHostility() > 66)
                             c.say(t, (new StringBuilder("There's no way ")).append(heShe()).append(" can keep this up forever, right?").toString());
                         else
-                        if(hostility > 33)
+                        if(flavorHostility() > 33)
                             c.say(t, "Ow!");
                         else
                             c.say(t, "Close one...!");
@@ -19128,12 +19269,12 @@ public class Forsaken
                 } else
                 if(c.getConfidence() > 66)
                 {
-                    if(deviancy > 66)
+                    if(flavorDeviancy() > 66)
                     {
                         Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.JOY);
                         say(t, "You could rape me if you wanted to.  Don't you want to?");
                     } else
-                    if(deviancy > 33)
+                    if(flavorDeviancy() > 33)
                     {
                         Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.FOCUS);
                         say(t, "I didn't know that you were into this sort of thing.");
@@ -19155,12 +19296,12 @@ public class Forsaken
                 } else
                 if(c.getConfidence() > 33)
                 {
-                    if(hostility > 66)
+                    if(flavorHostility() > 66)
                     {
                         Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.FOCUS);
                         say(t, "I'm going to enjoy watching you die...!");
                     } else
-                    if(hostility > 33)
+                    if(flavorHostility() > 33)
                     {
                         Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
                         say(t, "I hope you're having as much fun as I am.");
@@ -19172,10 +19313,10 @@ public class Forsaken
                     say(t, "\"\n\n");
                     c.say(t, "\"");
                     Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                    if(deviancy > 66)
+                    if(flavorDeviancy() > 66)
                         c.say(t, "You're completely twisted!");
                     else
-                    if(deviancy > 33)
+                    if(flavorDeviancy() > 33)
                         c.say(t, "Stop moving around so much!");
                     else
                         c.say(t, "Guh!");
@@ -19191,12 +19332,12 @@ public class Forsaken
                         say(t, "Haaah!");
                     say(t, "\"\n\n");
                     c.say(t, "\"");
-                    if(hostility > 66)
+                    if(flavorHostility() > 66)
                     {
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                         c.say(t, "S-Stop, you're hurting me!");
                     } else
-                    if(hostility > 33)
+                    if(flavorHostility() > 33)
                     {
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                         c.say(t, "What?  N-No!");
@@ -19260,10 +19401,10 @@ public class Forsaken
                     say(t, "\"\n\n");
                     c.say(t, "\"");
                     Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
-                    if(hostility > 66)
+                    if(flavorHostility() > 66)
                         c.say(t, "Ow!  Stop!");
                     else
-                    if(hostility > 33)
+                    if(flavorHostility() > 33)
                         c.say(t, "Leave me alone!");
                     else
                         c.say(t, "You're crazy!");
@@ -19290,12 +19431,12 @@ public class Forsaken
                         c.say(t, "Gh, how!?");
                 } else
                 {
-                    if(hostility > 66)
+                    if(flavorHostility() > 66)
                     {
                         Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                         say(t, "Grrr...!");
                     } else
-                    if(hostility > 33)
+                    if(flavorHostility() > 33)
                     {
                         Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
                         say(t, "Haaah, yes...!");
@@ -19372,12 +19513,12 @@ public class Forsaken
                         c.say(t, "I don't know what you're planning, but I won't allow it!");
                     c.say(t, "\"\n\n");
                     say(t, "\"");
-                    if(hostility > 66)
+                    if(flavorHostility() > 66)
                     {
                         Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.FOCUS);
                         say(t, "You stupid little...!  I'll make you regret this!");
                     } else
-                    if(hostility > 33)
+                    if(flavorHostility() > 33)
                     {
                         Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.FOCUS);
                         say(t, "Are you actually asking me to hurt you?  Heh, alright then...");
@@ -19389,12 +19530,12 @@ public class Forsaken
                 } else
                 if(c.getMorality() > 33)
                 {
-                    if(hostility > 66)
+                    if(flavorHostility() > 66)
                     {
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                         c.say(t, "Ngh!  Aaah!");
                     } else
-                    if(hostility > 33)
+                    if(flavorHostility() > 33)
                     {
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.FEAR);
                         c.say(t, "I don't like that look in your eyes...");
@@ -19406,10 +19547,10 @@ public class Forsaken
                     c.say(t, "\"\n\n");
                     say(t, "\"");
                     Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
-                    if(deviancy > 66)
+                    if(flavorDeviancy() > 66)
                         say(t, "It's like you're on display for me...");
                     else
-                    if(deviancy > 33)
+                    if(flavorDeviancy() > 33)
                         say(t, "Should we spread your legs, too?");
                     else
                         say(t, "You can't move, can you?");
@@ -19448,7 +19589,7 @@ public class Forsaken
             {
                 if(styleDamage[2] > 0)
                 {
-                    if(hostility > 66)
+                    if(flavorHostility() > 66)
                     {
                         say(t, "\"");
                         if(knowsPersonally(c).booleanValue())
@@ -19516,14 +19657,14 @@ public class Forsaken
                         } else
                         if(c.getMorality() > 33)
                         {
-                            if(deviancy > 66)
+                            if(flavorDeviancy() > 66)
                             {
                                 Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.JOY);
                                 say(t, "Nnnaaah~!  Ah...  Done...");
                                 if(innocence < 67 || timesOrgasmed > 0)
                                     timesOrgasmed++;
                             } else
-                            if(deviancy > 33)
+                            if(flavorDeviancy() > 33)
                             {
                                 Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.LEWD);
                                 say(t, "That expression is so perfect...");
@@ -19571,7 +19712,7 @@ public class Forsaken
                         }
                         c.say(t, "\"");
                     } else
-                    if(hostility > 33)
+                    if(flavorHostility() > 33)
                     {
                         c.say(t, "\"");
                         if(knowsPersonally(c).booleanValue())
@@ -19674,12 +19815,12 @@ public class Forsaken
                                 c.say(t, "F-Fight me yourself!");
                             c.say(t, "\"\n\n");
                             say(t, "\"");
-                            if(deviancy > 66)
+                            if(flavorDeviancy() > 66)
                             {
                                 Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.FOCUS);
                                 say(t, "I'm gonna see if I can squirt it on you from here, okay~?");
                             } else
-                            if(deviancy > 33)
+                            if(flavorDeviancy() > 33)
                             {
                                 Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
                                 say(t, "I love that cute little grunt when you attack!");
@@ -19732,10 +19873,10 @@ public class Forsaken
                         if(c.getInnocence() > 66)
                         {
                             Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                            if(deviancy > 66)
+                            if(flavorDeviancy() > 66)
                                 c.say(t, "You're looking at me all pervy again!");
                             else
-                            if(deviancy > 33)
+                            if(flavorDeviancy() > 33)
                                 c.say(t, "You're smirking!  You're definitely smirking!");
                             else
                                 c.say(t, "That was your fault!");
@@ -19762,12 +19903,12 @@ public class Forsaken
                                 c.say(t, "Hey!  I thought you didn't want to do this!");
                             c.say(t, "\"\n\n");
                             say(t, "\"");
-                            if(deviancy > 66)
+                            if(flavorDeviancy() > 66)
                             {
                                 Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
                                 say(t, "I'm sorry, I... I can't... resist...");
                             } else
-                            if(deviancy > 33)
+                            if(flavorDeviancy() > 33)
                             {
                                 Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.ANGER);
                                 say(t, "I'm not satisfied yet!");
@@ -19800,7 +19941,7 @@ public class Forsaken
                         say(t, "\"");
                     }
                 } else
-                if(hostility > 66)
+                if(flavorHostility() > 66)
                 {
                     c.say(t, "\"");
                     if(knowsPersonally(c).booleanValue())
@@ -19882,12 +20023,12 @@ public class Forsaken
                             c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append(" really is a wimp at ").append(hisHer()).append(" core.").toString());
                         c.say(t, "\"\n\n");
                         say(t, "\"");
-                        if(deviancy > 66)
+                        if(flavorDeviancy() > 66)
                         {
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.ANGER);
                             say(t, "I can't stay hidden, I need to make you scream some more!");
                         } else
-                        if(deviancy > 33)
+                        if(flavorDeviancy() > 33)
                         {
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.FOCUS);
                             say(t, (new StringBuilder("Nnn...  ")).append(c.HisHer()).append(" throat's all exposed and vulnerable...").toString());
@@ -19899,10 +20040,10 @@ public class Forsaken
                     } else
                     {
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.NEUTRAL, Project.Emotion.FOCUS);
-                        if(deviancy > 66)
+                        if(flavorDeviancy() > 66)
                             c.say(t, "Either this is some sort of bizarre fetish play, or you're not permitted to kill me.");
                         else
-                        if(deviancy > 33)
+                        if(flavorDeviancy() > 33)
                             c.say(t, "You're enjoying this, but you'd be enjoying it even more if you had permission to kill me, right?");
                         else
                             c.say(t, "The thing that enrages you most is that you aren't allowed to kill me.  Am I correct?");
@@ -19918,7 +20059,7 @@ public class Forsaken
                     }
                     say(t, "\"");
                 } else
-                if(hostility > 33)
+                if(flavorHostility() > 33)
                 {
                     say(t, "\"");
                     if(knowsPersonally(c).booleanValue())
@@ -19975,10 +20116,10 @@ public class Forsaken
                         say(t, "\"\n\n");
                         c.say(t, "\"");
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FOCUS, Project.Emotion.ANGER);
-                        if(deviancy > 66)
+                        if(flavorDeviancy() > 66)
                             c.say(t, "You'd like that, wouldn't you?");
                         else
-                        if(deviancy > 33)
+                        if(flavorDeviancy() > 33)
                             c.say(t, "You won't be able to keep enjoying this for long!");
                         else
                             c.say(t, "I will defeat you!");
@@ -20005,12 +20146,12 @@ public class Forsaken
                             c.say(t, "Ugh, you're really gloating...");
                     } else
                     {
-                        if(deviancy > 66)
+                        if(flavorDeviancy() > 66)
                         {
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.JOY);
                             say(t, "Don't mind me, I'm just sizing you up for a collar.");
                         } else
-                        if(deviancy > 33)
+                        if(flavorDeviancy() > 33)
                         {
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.FOCUS);
                             say(t, "You really are a masochist, aren't you?");
@@ -20094,10 +20235,10 @@ public class Forsaken
                     if(c.getMorality() > 33)
                     {
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                        if(deviancy > 66)
+                        if(flavorDeviancy() > 66)
                             c.say(t, "That's disgusting!");
                         else
-                        if(deviancy > 33)
+                        if(flavorDeviancy() > 33)
                             c.say(t, "Stop talking about my body!");
                         else
                             c.say(t, "Keep your comments to yourself!");
@@ -20123,12 +20264,12 @@ public class Forsaken
                             c.say(t, "Just bleed already!");
                         c.say(t, "\"\n\n");
                         say(t, "\"");
-                        if(deviancy > 66)
+                        if(flavorDeviancy() > 66)
                         {
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.JOY);
                             say(t, "Ah, this passion~!");
                         } else
-                        if(deviancy > 33)
+                        if(flavorDeviancy() > 33)
                         {
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
                             say(t, "You're actually cuter when you're mad!");
@@ -20202,12 +20343,12 @@ public class Forsaken
                             c.say(t, "I'll let you finish.");
                         c.say(t, "\"\n\n");
                         say(t, "\"");
-                        if(hostility > 66)
+                        if(flavorHostility() > 66)
                         {
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.SHAME);
                             say(t, "Don't look at me like that!  I'd rather kill them, but the Demon Lord has other plans.");
                         } else
-                        if(hostility > 33)
+                        if(flavorHostility() > 33)
                         {
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
                             say(t, "Are you sure?  Most of them are going to end up becoming my allies, after all.");
@@ -20246,10 +20387,10 @@ public class Forsaken
                     } else
                     {
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
-                        if(hostility > 66)
+                        if(flavorHostility() > 66)
                             c.say(t, (new StringBuilder("Surprised ")).append(heShe()).append(" isn't killing any of them.").toString());
                         else
-                        if(hostility > 33)
+                        if(flavorHostility() > 33)
                             c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append(" seems to be enjoying this.").toString());
                         else
                             c.say(t, "Not my problem.");
@@ -20365,21 +20506,21 @@ public class Forsaken
                     } else
                     {
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
-                        if(hostility > 66)
+                        if(flavorHostility() > 66)
                             c.say(t, "Why do you keep hurting me!?");
                         else
-                        if(hostility > 33)
+                        if(flavorHostility() > 33)
                             c.say(t, "Ah!  Stop!");
                         else
                             c.say(t, "Please, tell them to let me go!");
                         c.say(t, "\"\n\n");
                         say(t, "\"");
-                        if(deviancy > 66)
+                        if(flavorDeviancy() > 66)
                         {
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.JOY);
                             say(t, (new StringBuilder("Ah, ")).append(c.getMainName()).append(", your screams are too beautiful...!").toString());
                         } else
-                        if(deviancy > 33)
+                        if(flavorDeviancy() > 33)
                         {
                             Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.FOCUS);
                             say(t, "Hm, it's easier to appreciate the whole scene this way.");
@@ -20446,10 +20587,10 @@ public class Forsaken
                         c.say(t, "\"\n\n");
                         say(t, "\"");
                         Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                        if(deviancy > 66)
+                        if(flavorDeviancy() > 66)
                             say(t, "I had the PERFECT scene set up!  And that Demon RUINED it!");
                         else
-                        if(deviancy > 33)
+                        if(flavorDeviancy() > 33)
                             say(t, "I just want to keep you all to myself!");
                         else
                             say(t, "I hate the Demons most of all.");
@@ -20457,30 +20598,30 @@ public class Forsaken
                     if(c.getInnocence() > 33)
                     {
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
-                        if(deviancy > 66)
+                        if(flavorDeviancy() > 66)
                             c.say(t, "You really are obsessed with me, aren't you?");
                         else
-                        if(deviancy > 33)
+                        if(flavorDeviancy() > 33)
                             c.say(t, "So, I guess you've really fallen for me.");
                         else
                             c.say(t, "You hate the Demons that much?");
                         c.say(t, "\"\n\n");
                         say(t, "\"");
                         Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
-                        if(hostility > 66)
+                        if(flavorHostility() > 66)
                             say(t, (new StringBuilder("I'm going to be the one who kills you, ")).append(c.getMainName()).append(".  No one else.").toString());
                         else
-                        if(hostility > 33)
+                        if(flavorHostility() > 33)
                             say(t, "That's right.");
                         else
                             say(t, "I'm not on the Demons' side in the first place.");
                     } else
                     {
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
-                        if(hostility > 66)
+                        if(flavorHostility() > 66)
                             c.say(t, "You even refuse their help.");
                         else
-                        if(hostility > 33)
+                        if(flavorHostility() > 33)
                             c.say(t, "You're sabotaging your supposed allies.");
                         else
                             c.say(t, "I see.  You want to deny the Demon Lord the additional resources.");
@@ -20498,7 +20639,7 @@ public class Forsaken
                     say(t, "\"");
                 }
             } else
-            if(deviancy > 66)
+            if(flavorDeviancy() > 66)
             {
                 say(t, "\"");
                 if(knowsPersonally(c).booleanValue())
@@ -20580,12 +20721,12 @@ public class Forsaken
                         say(t, "F-Feels... good...!");
                     say(t, "\"\n\n");
                     c.say(t, "\"");
-                    if(hostility > 66)
+                    if(flavorHostility() > 66)
                     {
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.NEUTRAL, Project.Emotion.STRUGGLE);
                         c.say(t, (new StringBuilder(String.valueOf(HeShe()))).append(" actually looks happy for once...").toString());
                     } else
-                    if(hostility > 33)
+                    if(flavorHostility() > 33)
                     {
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                         c.say(t, "Is this really all just a game to you?");
@@ -20596,12 +20737,12 @@ public class Forsaken
                     }
                 } else
                 {
-                    if(hostility > 66)
+                    if(flavorHostility() > 66)
                     {
                         Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.FOCUS);
                         say(t, "No!  You're supposed to blush and cover yourself and beg me to leave to alone!");
                     } else
-                    if(hostility > 33)
+                    if(flavorHostility() > 33)
                     {
                         Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.FOCUS);
                         say(t, "I need to get my hands on you even more...");
@@ -20623,7 +20764,7 @@ public class Forsaken
                 }
                 c.say(t, "\"");
             } else
-            if(deviancy > 33)
+            if(flavorDeviancy() > 33)
             {
                 say(t, "\"");
                 if(knowsPersonally(c).booleanValue())
@@ -20674,12 +20815,12 @@ public class Forsaken
                 } else
                 if(c.getConfidence() > 66)
                 {
-                    if(hostility > 66)
+                    if(flavorHostility() > 66)
                     {
                         Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.SHAME);
                         say(t, "You're so perfect that it's disgusting.");
                     } else
-                    if(hostility > 33)
+                    if(flavorHostility() > 33)
                     {
                         Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
                         say(t, "The way you fight is... beautiful.");
@@ -20738,10 +20879,10 @@ public class Forsaken
                     say(t, "\"\n\n");
                     c.say(t, "\"");
                     Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
-                    if(hostility > 66)
+                    if(flavorHostility() > 66)
                         c.say(t, "Even though I know you want to kill me...");
                     else
-                    if(hostility > 33)
+                    if(flavorHostility() > 33)
                         c.say(t, "You're holding back...");
                     else
                         c.say(t, "You don't hate me at all...");
@@ -20806,22 +20947,22 @@ public class Forsaken
                     say(t, "\"\n\n");
                     c.say(t, "\"");
                     Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.NEUTRAL, Project.Emotion.SHAME);
-                    if(hostility > 66)
+                    if(flavorHostility() > 66)
                         c.say(t, "Aren't you supposed to be super evil or something?");
                     else
-                    if(hostility > 33)
+                    if(flavorHostility() > 33)
                         c.say(t, "Are you really having fun?");
                     else
                         c.say(t, "You don't really seem like a bad guy...");
                 } else
                 if(c.getInnocence() > 33)
                 {
-                    if(hostility > 66)
+                    if(flavorHostility() > 66)
                     {
                         Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.STRUGGLE, Project.Emotion.SHAME);
                         say(t, "Ergh... need to control myself...");
                     } else
-                    if(hostility > 33)
+                    if(flavorHostility() > 33)
                     {
                         Project.changePortrait(gender, type, Boolean.valueOf(false), Boolean.valueOf(true), w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.NEUTRAL);
                         say(t, "Come on, let's do this.");
@@ -20874,7 +21015,7 @@ public class Forsaken
             {
                 if(styleDamage[1] > 0)
                 {
-                    if(deviancy > 66)
+                    if(flavorDeviancy() > 66)
                     {
                         if(c.innocence > 66)
                         {
@@ -20910,7 +21051,7 @@ public class Forsaken
                             w.append(t, (new StringBuilder("slams into ")).append(c.getMainName()).append(" and begins humping ").append(c.himHer()).append(" wildly.").toString());
                         }
                     } else
-                    if(deviancy > 33)
+                    if(flavorDeviancy() > 33)
                     {
                         if(c.innocence > 66)
                         {
@@ -20978,7 +21119,7 @@ public class Forsaken
                             w.append(t, (new StringBuilder("is completely focused on feeling up ")).append(c.getMainName()).append("'s body, a strategy ").append(c.heShe()).append("'s unprepared to fight against.").toString());
                     }
                 } else
-                if(hostility > 66)
+                if(flavorHostility() > 66)
                 {
                     if(c.getConfidence() > 66)
                     {
@@ -21013,7 +21154,7 @@ public class Forsaken
                         w.append(t, (new StringBuilder("and it's all ")).append(c.getMainName()).append(" can do to gasp and back away in horror.").toString());
                     }
                 } else
-                if(hostility > 33)
+                if(flavorHostility() > 33)
                 {
                     if(c.getConfidence() > 66)
                     {
@@ -21083,7 +21224,7 @@ public class Forsaken
             } else
             if(styleDamage[1] > 0)
             {
-                if(deviancy > 66)
+                if(flavorDeviancy() > 66)
                 {
                     if(c.innocence > 66)
                     {
@@ -21119,7 +21260,7 @@ public class Forsaken
                         w.append(t, (new StringBuilder("slams into ")).append(c.getMainName()).append(" and begins feverishly molesting ").append(c.himHer()).append(".").toString());
                     }
                 } else
-                if(deviancy > 33)
+                if(flavorDeviancy() > 33)
                 {
                     if(c.innocence > 66)
                     {
@@ -21316,10 +21457,10 @@ public class Forsaken
                         if(c.getConfidence() > 33)
                         {
                             w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" pushes ").append(mainName).append(" away over and over again, but ").toString());
-                            if(deviancy > 66)
+                            if(flavorDeviancy() > 66)
                                 w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" can't think about anything but ").append(c.getMainName()).append("'s ").append(lowerOrgan).toString());
                             else
-                            if(deviancy > 33)
+                            if(flavorDeviancy() > 33)
                                 w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is kinky enough that it just turns ").append(himHer()).append(" on even more").toString());
                             else
                                 w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" won't be dissuaded").toString());
@@ -21352,19 +21493,19 @@ public class Forsaken
                         if(c.getConfidence() > 33)
                         {
                             w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" and ").append(c.getMainName()).append(" grapple desperately, ").toString());
-                            if(hostility > 66)
+                            if(flavorHostility() > 66)
                                 w.append(t, (new StringBuilder("with ")).append(c.getMainName()).append(" crying out and giving up the advantage when ").append(mainName).append(" manages to seize and twist ").append(c.hisHer()).append(" ").append(organ).append(".").toString());
                             else
-                            if(hostility > 33)
+                            if(flavorHostility() > 33)
                                 w.append(t, (new StringBuilder("but while ")).append(c.getMainName()).append(" only knows how to fight conventionally, ").append(mainName).append(" is ruthless about kneeing and grinding against ").append(c.getMainName()).append("'s sensitive ").append(organ).append(".").toString());
                             else
                                 w.append(t, (new StringBuilder("but ")).append(mainName).append("'s surprisingly gentle hands on ").append(reference(c)).append("'s ").append(organ).append(" and ").append(lowerOrgan).append(" make it hard to focus on the fight.").toString());
                         } else
                         {
-                            if(deviancy > 66)
+                            if(flavorDeviancy() > 66)
                                 w.append(t, (new StringBuilder("Driven wild by ")).append(reference(c)).append("'s meek, vulnerable manner, ").toString());
                             else
-                            if(deviancy > 33)
+                            if(flavorDeviancy() > 33)
                                 w.append(t, (new StringBuilder("Taking some satisfaction from ")).append(reference(c)).append("'s shrill pleas, ").toString());
                             else
                                 w.append(t, (new StringBuilder("Taking advantage of ")).append(reference(c)).append("'s insecurities, ").toString());
@@ -21392,35 +21533,35 @@ public class Forsaken
                     if(c.getConfidence() > 33)
                     {
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" slams ").append(c.getMainName()).append(" halfway through a concrete wall so that ").append(c.hisHer()).append(" butt is hanging out, then rips open ").append(c.getMainName()).append("'s ").append(bottomDesc).toString());
-                        if(deviancy > 66)
+                        if(flavorDeviancy() > 66)
                             w.append(t, (new StringBuilder(" and starts eagerly licking ")).append(c.hisHer()).append(" ").append(organ).append(".").toString());
                         else
-                        if(deviancy > 33)
+                        if(flavorDeviancy() > 33)
                             w.append(t, (new StringBuilder(", plants a foot on ")).append(c.hisHer()).append(" organ, and starts moving it back and forth.").toString());
                         else
                             w.append(t, (new StringBuilder(" and uses one hand to firmly stimulate ")).append(c.hisHer()).append(" ").append(organ).append(".").toString());
                     } else
                     {
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" gives ").append(c.getMainName()).append("'s ").append(organ).append(" a slight tweak, ").toString());
-                        if(hostility > 66)
+                        if(flavorHostility() > 66)
                             w.append(t, "grinning with sadistic glee");
                         else
-                        if(hostility > 33)
+                        if(flavorHostility() > 33)
                             w.append(t, (new StringBuilder("looking down on ")).append(c.himHer()).append(" contemptfully").toString());
                         else
                             w.append(t, (new StringBuilder("shaking ")).append(hisHer()).append(" head with disappointment").toString());
                         w.append(t, (new StringBuilder(" when ")).append(c.getMainName()).append(" can only squirm and whine in response.").toString());
                     }
                 } else
-                if(deviancy > 66)
+                if(flavorDeviancy() > 66)
                 {
                     if(c.getConfidence() > 66)
                     {
                         w.append(t, (new StringBuilder("Overwhelmed by the sensation of ")).append(mainName).append("'s hands all over ").append(c.hisHer()).append(" body, ").append(c.getMainName()).append(" finally manages to deliver a mighty wallop to ").append(c.reference(this)).append("'s head.  ").append(c.getMainName()).append(" manages to escape and get some distance, ").toString());
-                        if(hostility > 66)
+                        if(flavorHostility() > 66)
                             w.append(t, (new StringBuilder("but the murderous sadism in ")).append(mainName).append("'s eyes as ").append(heShe()).append(" recovers promises even worse torment to come.").toString());
                         else
-                        if(hostility > 33)
+                        if(flavorHostility() > 33)
                             w.append(t, (new StringBuilder("but ")).append(mainName).append(" wastes no time in immediately starting to pursue ").append(c.himHer()).append(" again.").toString());
                         else
                             w.append(t, (new StringBuilder("and ")).append(mainName).append(" even briefly looks apologetic as ").append(heShe()).append(" recovers, but then ").append(hisHer()).append(" expression again melts into mindless lust.").toString());
@@ -21452,7 +21593,7 @@ public class Forsaken
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is cumming.  ").append(c.getMainName()).append(" blushes deeply and scrambles away, and both of the combatants take a moment to catch their breath.").toString());
                     }
                 } else
-                if(deviancy > 33)
+                if(flavorDeviancy() > 33)
                 {
                     if(c.getConfidence() > 66)
                     {
@@ -21576,10 +21717,10 @@ public class Forsaken
                     if(c.getMorality() > 66)
                     {
                         w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" tries to draw ").append(mainName).append(" away to an area further from any civilians, ").toString());
-                        if(hostility > 66)
+                        if(flavorHostility() > 66)
                             w.append(t, (new StringBuilder("but ")).append(mainName).append(" just grins and starts heading straight for the evacuation route, forcing ").append(c.getMainName()).append(" to tackle ").append(himHer()).append(" and open ").append(himHer()).append("self up to a punishing counterattack.").toString());
                         else
-                        if(hostility > 33)
+                        if(flavorHostility() > 33)
                             w.append(t, (new StringBuilder("and ")).append(mainName).append(" takes advantage by attacking ").append(reference(c)).append(" from behind with ").append(hisHer()).append(" ").append(weapon).append(".").toString());
                         else
                             w.append(t, (new StringBuilder("and ")).append(mainName).append(" is content to oblige, soon catching up to ").append(c.himHer()).append(" and engaging ").append(c.himHer()).append(" in a close-range grapple.").toString());
@@ -21640,10 +21781,10 @@ public class Forsaken
                     w.append(t, (new StringBuilder(", ")).append(c.getMainName()).append(" turns to flee, but ").append(mainName).append(" is fast enough to immediately catch up and slam ").append(c.himHer()).append(" down into the concrete so hard that it leaves a crater.").toString());
                 } else
                 {
-                    if(hostility > 66)
+                    if(flavorHostility() > 66)
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" fires an overwhelming blast of energy at a building with some civilians still inside").toString());
                     else
-                    if(hostility > 33)
+                    if(flavorHostility() > 33)
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" fires indiscriminate blasts of energy at the surrounding buildings").toString());
                     else
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" fires a few blasts of energy at nearby abandoned buildings").toString());
@@ -21670,10 +21811,10 @@ public class Forsaken
                 if(c.getConfidence() > 33)
                 {
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" fights defensively, not even using ").append(hisHer()).append(" ").append(weapon).toString());
-                    if(hostility > 66)
+                    if(flavorHostility() > 66)
                         w.append(t, (new StringBuilder(", laughing and cruelly taunting ")).append(c.getMainName()).append(" in lieu of actually trying to attack.").toString());
                     else
-                    if(hostility > 33)
+                    if(flavorHostility() > 33)
                         w.append(t, (new StringBuilder(", smirking with satisfaction at being able to hold ")).append(hisHer()).append(" ground against the more powerful ").append(c.getMainName()).append(".").toString());
                     else
                         w.append(t, (new StringBuilder(", knowing that ")).append(hisHer()).append(" powers have become weak enough that ").append(heShe()).append(" wouldn't even be able to leave a scratch on ").append(c.getMainName()).append(".").toString());
@@ -21693,10 +21834,10 @@ public class Forsaken
             {
                 if(c.getMorality() > 66)
                 {
-                    if(hostility > 66)
+                    if(flavorHostility() > 66)
                         w.append(t, "Eager for any excuse to cause some bloodshed, ");
                     else
-                    if(hostility > 33)
+                    if(flavorHostility() > 33)
                         w.append(t, "Threatening to put innocents in harm's way, ");
                     else
                         w.append(t, (new StringBuilder("Even though ")).append(heShe()).append(" has no intention of actually targeting innocents, ").toString());
@@ -21748,10 +21889,10 @@ public class Forsaken
             } else
             {
                 w.append(t, (new StringBuilder("After a few attacks, ")).append(c.getMainName()).append(" recognizes the futility of trying to fight ").append(mainName).toString());
-                if(hostility > 66)
+                if(flavorHostility() > 66)
                     w.append(t, (new StringBuilder(", and ")).append(c.hisHer()).append(" blood runs cold as ").append(c.heShe()).append(" realizes that ").append(c.heShe()).append("'s completely at ").append(c.reference(this)).append("'s mercy.").toString());
                 else
-                if(hostility > 33)
+                if(flavorHostility() > 33)
                     w.append(t, (new StringBuilder(", and ")).append(c.heShe()).append(" can only back off warily, alarmed at the palpable hatred pouring off ").append(c.reference(this)).append(".").toString());
                 else
                     w.append(t, (new StringBuilder(", but ")).append(c.heShe()).append("'s grateful for the fact that ").append(c.reference(this)).append(" doesn't seem to intend to hurt ").append(c.himHer()).append(".").toString());
@@ -21793,10 +21934,10 @@ public class Forsaken
                         } else
                         {
                             w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" and ").append(c.getMainName()).append(" roll around on the ground together, wrestling in a very undignified manner.  ").append(c.getMainName()).append("'s clothes are too fragile to handle this kind of fight, ").toString());
-                            if(deviancy > 66)
+                            if(flavorDeviancy() > 66)
                                 w.append(t, (new StringBuilder("and the distraction of seeing more and more of ")).append(reference(c)).append("'s skin slowly exposed makes ").append(mainName).append(" perform even more poorly.").toString());
                             else
-                            if(deviancy > 33)
+                            if(flavorDeviancy() > 33)
                                 w.append(t, (new StringBuilder("and ")).append(c.reference(this)).append(" enjoys the view.").toString());
                             else
                                 w.append(t, (new StringBuilder("but when ")).append(c.reference(this)).append(" points it out, ").append(mainName).append(" just makes an apathetic noise.").toString());
@@ -21807,10 +21948,10 @@ public class Forsaken
                         if(c.getConfidence() > 66)
                         {
                             w.append(t, (new StringBuilder("The flurry of blows exchanged between ")).append(mainName).append(" and ").append(c.getMainName()).append(" is so intense that it sends scraps of their clothes flying").toString());
-                            if(deviancy > 66)
+                            if(flavorDeviancy() > 66)
                                 w.append(t, (new StringBuilder(" - and ")).append(mainName).append("'s increasing distraction as ").append(heShe()).append(" sees more and more of ").append(reference(c)).append("'s bare skin eventually causes ").append(himHer()).append(" to take a punch right in the jaw.").toString());
                             else
-                            if(deviancy > 33)
+                            if(flavorDeviancy() > 33)
                                 w.append(t, (new StringBuilder(", much to ")).append(mainName).append("'s amusement.").toString());
                             else
                                 w.append(t, ", but both combatants are so caught up in the rush of combat that they don't even notice.");
@@ -21864,10 +22005,10 @@ public class Forsaken
                             w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" holds ").append(c.getMainName()).append(" down and deliberately tears apart ").append(c.hisHer()).append(" clothes in order to expose ").append(c.hisHer()).append(" sensitive spots for a brutal tickling").toString());
                         else
                             w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" holds ").append(c.getMainName()).append(" down and repeatedly punches ").append(c.himHer()).append(" so hard that it blasts ").append(c.hisHer()).append(" clothes off ").append(c.hisHer()).append(" body").toString());
-                        if(hostility > 66)
+                        if(flavorHostility() > 66)
                             w.append(t, ", grinning with sadistic glee.");
                         else
-                        if(hostility > 33)
+                        if(flavorHostility() > 33)
                             w.append(t, ", completely without mercy.");
                         else
                             w.append(t, (new StringBuilder(", though ")).append(heShe()).append(" doesn't seem to actually enjoy tormenting ").append(reference(c)).append(".").toString());
@@ -21879,10 +22020,10 @@ public class Forsaken
                         else
                             w.append(t, "pummeling");
                         w.append(t, (new StringBuilder(", ")).append(c.getMainName()).append(" ").toString());
-                        if(deviancy > 66)
+                        if(flavorDeviancy() > 66)
                             w.append(t, (new StringBuilder("abruptly kisses ")).append(c.reference(this)).append(" on the lips, and then when ").append(mainName).append(" starts to instinctively respond, ").append(c.getMainName()).append(" ").toString());
                         else
-                        if(deviancy > 33)
+                        if(flavorDeviancy() > 33)
                             w.append(t, (new StringBuilder("starts to spread ")).append(c.hisHer()).append(" legs, and when ").append(c.reference(this)).append(" lustfully looks downward, ").append(c.getMainName()).append(" ").toString());
                         else
                             w.append(t, (new StringBuilder("waits for ")).append(c.reference(this)).append(" to let ").append(hisHer()).append(" guard down, then ").toString());
@@ -21934,10 +22075,10 @@ public class Forsaken
                     if(c.getInnocence() > 66)
                     {
                         w.append(t, (new StringBuilder("Between ")).append(c.getMainName()).append("'s singlemindedness and ").toString());
-                        if(deviancy > 66)
+                        if(flavorDeviancy() > 66)
                             w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s overwhelming lust for ").append(reference(c)).toString());
                         else
-                        if(deviancy > 33)
+                        if(flavorDeviancy() > 33)
                             w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s anger").toString());
                         else
                             w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s focused determination").toString());
@@ -21973,10 +22114,10 @@ public class Forsaken
                 if(c.getConfidence() > 66)
                 {
                     w.append(t, (new StringBuilder("A powerful blast of energy knocks ")).append(c.getMainName()).append(" straight through several buildings.  ").toString());
-                    if(hostility > 66)
+                    if(flavorHostility() > 66)
                         w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" passes out for a fraction of a second, only to wake up to the screams of injured civilians and the silhouette of ").append(mainName).append(" slowly approaching ").append(c.himHer()).append(" through the flames.").toString());
                     else
-                    if(hostility > 33)
+                    if(flavorHostility() > 33)
                         w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" ends up at the center of a large crater, ").append(mainName).append(" hovering up above and looking down on ").append(c.himHer()).append(".").toString());
                     else
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" was careful to aim ").append(c.himHer()).append(" at an area without any remaining civilians, but the devastation is still immense.").toString());
@@ -21988,20 +22129,20 @@ public class Forsaken
                         w.append(t, (new StringBuilder("gasping for breath in the wake of ")).append(c.hisHer()).append(" tickling").toString());
                     else
                         w.append(t, "bleeding from several new wounds");
-                    if(hostility > 66)
+                    if(flavorHostility() > 66)
                         w.append(t, (new StringBuilder(" while ")).append(mainName).append(" gleefully follows, shouting promises of more suffering to come.").toString());
                     else
-                    if(hostility > 33)
+                    if(flavorHostility() > 33)
                         w.append(t, (new StringBuilder(" while ")).append(mainName).append(" launches random blasts of energy until one of them destroys ").append(c.getMainName()).append("'s cover.").toString());
                     else
                         w.append(t, (new StringBuilder(" while ")).append(mainName).append(" grimly tracks ").append(c.himHer()).append(" down.").toString());
                 } else
                 {
                     w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" lies motionless on the pavement, overwhelmed by ").append(mainName).append("'s superior power.  ").toString());
-                    if(hostility > 66)
+                    if(flavorHostility() > 66)
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" licks ").append(hisHer()).append(" lips, savoring the building dread within ").append(reference(c)).append(".").toString());
                     else
-                    if(hostility > 33)
+                    if(flavorHostility() > 33)
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" stands nearby and looks down on ").append(c.himHer()).append(", taking ").append(hisHer()).append(" time as ").append(heShe()).append(" decides what to do next.").toString());
                     else
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" sighs, clearly disappointed.").toString());
@@ -22009,7 +22150,7 @@ public class Forsaken
             } else
             if(styleDamage[3] > 0)
             {
-                if(deviancy > 66)
+                if(flavorDeviancy() > 66)
                 {
                     if(c.getDignity() > 66)
                     {
@@ -22045,7 +22186,7 @@ public class Forsaken
                         w.append(t, (new StringBuilder("So, ")).append(c.heShe()).append(" decides to provoke ").append(c.reference(this)).append(" into attacking by acting like ").append(c.heShe()).append("'s pulling off ").append(c.hisHer()).append(" own ").append(bottomDesc).append(".  ").append(mainName).append(" is too blinded by lust to resist lunging forward to finish the job.").toString());
                     }
                 } else
-                if(deviancy > 33)
+                if(flavorDeviancy() > 33)
                 {
                     if(c.getDignity() > 66)
                     {
@@ -22095,10 +22236,10 @@ public class Forsaken
                 if(c.getConfidence() > 33)
                 {
                     w.append(t, (new StringBuilder("The fighting so far has kicked up a cloud of smoke, and ")).append(mainName).append(" finds ").append(himHer()).append("self directly behind ").append(c.getMainName()).append(", in the perfect position for a sneak attack.  ").toString());
-                    if(hostility > 66)
+                    if(flavorHostility() > 66)
                         w.append(t, (new StringBuilder("Knowing that ")).append(c.heShe()).append("'ll suffer more if ").append(c.hisHer()).append(" public image is destroyed, ").toString());
                     else
-                    if(hostility > 33)
+                    if(flavorHostility() > 33)
                         w.append(t, (new StringBuilder("More interested in humiliating ")).append(c.himHer()).append(" than in actually wounding ").append(c.himHer()).append(", ").toString());
                     else
                         w.append(t, (new StringBuilder("Wanting to hinder ")).append(c.himHer()).append(" without wounding ").append(c.himHer()).append(", ").toString());
@@ -22106,16 +22247,16 @@ public class Forsaken
                 } else
                 {
                     w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" falters and starts to flee, questioning whether ").append(c.heShe()).append(" can really fight one of the Forsaken.  ").toString());
-                    if(hostility > 66)
+                    if(flavorHostility() > 66)
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" allows ").append(c.himHer()).append(" to think ").append(c.heShe()).append("'s escaped before abruptly dropping down from a rooftop, pinning ").append(c.himHer()).append(" to the ground and tearing at ").append(c.hisHer()).append(" clothes in hopes of adding to the humiliation.").toString());
                     else
-                    if(hostility > 33)
+                    if(flavorHostility() > 33)
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" enjoys running ").append(c.himHer()).append(" down, chasing ").append(c.himHer()).append(" with blasts of energy which fry ").append(c.hisHer()).append(" clothes before finally tackling ").append(c.himHer()).append(" to the ground.").toString());
                     else
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" tries to provoke ").append(c.himHer()).append(" into fighting back by firing several warning blasts of energy at ").append(c.hisHer()).append(" clothes, then finally sighs and starts chasing ").append(c.himHer()).append(", eventually managing to grab ").append(c.himHer()).append(" by the wrist.").toString());
                 }
             } else
-            if(hostility > 66)
+            if(flavorHostility() > 66)
             {
                 if(c.getConfidence() > 66)
                 {
@@ -22141,16 +22282,16 @@ public class Forsaken
                 } else
                 {
                     w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" backs away warily from ").append(mainName).append(", who stalks after ").append(c.himHer()).append(" and ").toString());
-                    if(deviancy > 66)
+                    if(flavorDeviancy() > 66)
                         w.append(t, (new StringBuilder("gibbers madly about all the sexual things ")).append(heShe()).append(" wants to do with ").append(reference(c)).append(".").toString());
                     else
-                    if(deviancy > 33)
+                    if(flavorDeviancy() > 33)
                         w.append(t, (new StringBuilder("licks ")).append(hisHer()).append(" lips as ").append(heShe()).append(" fantasizes about making ").append(reference(c)).append(" suffer.").toString());
                     else
                         w.append(t, (new StringBuilder("grimly promises to kill ")).append(c.himHer()).append(" along with everyone ").append(c.heShe()).append(" cares about.").toString());
                 }
             } else
-            if(hostility > 33)
+            if(flavorHostility() > 33)
             {
                 if(c.getInnocence() > 66)
                 {
@@ -22228,10 +22369,10 @@ public class Forsaken
                     {
                         if(c.getDignity() > 66)
                         {
-                            if(hostility > 66)
+                            if(flavorHostility() > 66)
                                 w.append(t, (new StringBuilder("Eager to humiliate ")).append(c.getMainName()).append(", ").toString());
                             else
-                            if(hostility > 33)
+                            if(flavorHostility() > 33)
                                 w.append(t, (new StringBuilder("Exploiting ")).append(c.getMainName()).append("'s reliance on ").append(c.hisHer()).append(" public image, ").toString());
                             else
                                 w.append(t, (new StringBuilder("Wanting to ensure that ")).append(c.getMainName()).append(" will follow ").append(himHer()).append(", ").toString());
@@ -22240,10 +22381,10 @@ public class Forsaken
                         if(c.getDignity() > 33)
                         {
                             w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" has ").append(mainName).append(" pinned and almost helpless, ").toString());
-                            if(deviancy > 66)
+                            if(flavorDeviancy() > 66)
                                 w.append(t, (new StringBuilder("but the way ")).append(mainName).append(" eagerly bucks ").append(hisHer()).append(" hips and coaxes ").append(reference(c)).append(" to take ").append(himHer()).append(" ").toString());
                             else
-                            if(deviancy > 33)
+                            if(flavorDeviancy() > 33)
                                 w.append(t, (new StringBuilder("but ")).append(mainName).append("'s lewd squirming against ").append(c.hisHer()).append(" body ").toString());
                             else
                                 w.append(t, (new StringBuilder("but ")).append(mainName).append("'s deliberate squirming to repeatedly put pressure against ").append(reference(c)).append("'s ").append(organ).append(" ").toString());
@@ -22268,10 +22409,10 @@ public class Forsaken
                         if(c.getConfidence() > 66)
                         {
                             w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" slams ").append(mainName).append(" hard enough to send ").append(himHer()).append(" tumbling down the street, but ").toString());
-                            if(deviancy > 66)
+                            if(flavorDeviancy() > 66)
                                 w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" very obviously considered it more than worthwhile for the chance to feel up ").append(reference(c)).append(".").toString());
                             else
-                            if(deviancy > 33)
+                            if(flavorDeviancy() > 33)
                                 w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" still got the chance to grope ").append(c.himHer()).append(" - and to announce it to the spectators.").toString());
                             else
                                 w.append(t, (new StringBuilder("as far as ")).append(mainName).append(" is concerned, the important thing is that the spectators know that ").append(heShe()).append(" got a chance to observe ").append(reference(c)).append("'s body's reactions up close.").toString());
@@ -22290,10 +22431,10 @@ public class Forsaken
                         } else
                         {
                             w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" squeezes ").append(c.getMainName()).append("'s ").append(lowerOrgan).append(", causing ").append(c.getMainName()).append(" to squeak and push ").append(himHer()).append(" away with surprising force.  As ").append(mainName).append(" recovers, ").toString());
-                            if(hostility > 66)
+                            if(flavorHostility() > 66)
                                 w.append(t, (new StringBuilder(String.valueOf(heShe()))).append(" wears a cruel grin as ").append(heShe()).append(" speaks.").toString());
                             else
-                            if(hostility > 33)
+                            if(flavorHostility() > 33)
                                 w.append(t, (new StringBuilder(String.valueOf(heShe()))).append(" masks ").append(hisHer()).append(" annoyance and raises ").append(hisHer()).append(" voice.").toString());
                             else
                                 w.append(t, (new StringBuilder(String.valueOf(heShe()))).append(" looks disappointed with ").append(reference(c)).append("'s reaction.").toString());
@@ -22302,10 +22443,10 @@ public class Forsaken
                     if(c.getInnocence() > 66)
                     {
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" holds ").append(c.getMainName()).append(" from behind, rubbing ").append(reference(c)).append("'s ").append(organ).append(" while ").append(c.heShe()).append(" kicks and squeals for the watching cameras, ").toString());
-                        if(deviancy > 66)
+                        if(flavorDeviancy() > 66)
                             w.append(t, (new StringBuilder("then slowly licks the side of ")).append(c.hisHer()).append(" face before pushing ").append(c.himHer()).append(" to the ground.").toString());
                         else
-                        if(deviancy > 33)
+                        if(flavorDeviancy() > 33)
                             w.append(t, (new StringBuilder("then pushes ")).append(c.himHer()).append(" away and leers at ").append(c.himHer()).append(" on the ground.").toString());
                         else
                             w.append(t, (new StringBuilder("then shoves ")).append(c.himHer()).append(" away with a huff of disgust.").toString());
@@ -22324,10 +22465,10 @@ public class Forsaken
                     } else
                     {
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" pins ").append(c.getMainName()).append(" down, ").toString());
-                        if(hostility > 66)
+                        if(flavorHostility() > 66)
                             w.append(t, (new StringBuilder("repeatedly stomping on ")).append(c.hisHer()).append(" ").append(lowerOrgan).append(", but the sadistic pleasure causes ").append(himHer()).append(" to let ").append(hisHer()).append(" guard down, and ").append(c.getMainName()).append(" sees an opportunity to ").toString());
                         else
-                        if(hostility > 33)
+                        if(flavorHostility() > 33)
                             w.append(t, (new StringBuilder("cruelly pinching and twisting ")).append(c.hisHer()).append(" ").append(organ).append(", but the fact that ").append(heShe()).append(" only has one free hand to hold ").append(reference(c)).append(" in place means that ").append(c.getMainName()).append(" can ").toString());
                         else
                             w.append(t, (new StringBuilder("gently stroking ")).append(c.hisHer()).append(" ").append(organ).append(" and ").append(lowerOrgan).append(".  ").append(HisHer()).append(" grip on ").append(reference(c)).append(" is light enough that eventually ").append(c.getMainName()).append(" is able to ").toString());
@@ -22339,10 +22480,10 @@ public class Forsaken
                     if(c.getConfidence() > 66)
                     {
                         w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" chases down ").append(mainName).append(" and grabs ").append(himHer()).append(" by the arm in order to stop ").append(himHer()).append(" from escaping again, ").toString());
-                        if(deviancy > 66)
+                        if(flavorDeviancy() > 66)
                             w.append(t, (new StringBuilder("but ")).append(mainName).append(" doesn't even try to get free, instead embracing ").append(reference(c)).append(" and eagerly running ").append(hisHer()).append(" hands all over ").append(c.hisHer()).append(" body.").toString());
                         else
-                        if(deviancy > 33)
+                        if(flavorDeviancy() > 33)
                             w.append(t, (new StringBuilder("and ")).append(mainName).append(" retaliates by turning around and immediately trying to make out with ").append(reference(c)).append(", using ").append(c.getMainName()).append(" preoccupation with holding ").append(himHer()).append(" in order to easily grope ").append(c.hisHer()).append(" ").append(lowerOrgan).append(".").toString());
                         else
                             w.append(t, (new StringBuilder("leaving ")).append(mainName).append(" no choice but to try to distract ").append(reference(c)).append(" by acting in an overtly sexual manner again, reaching down and rubbing ").append(c.hisHer()).append(" ").append(organ).append(".").toString());
@@ -22360,10 +22501,10 @@ public class Forsaken
                     } else
                     {
                         w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" had been chasing ").append(mainName).append(", but when ").append(mainName).append(" turns around ").toString());
-                        if(hostility > 66)
+                        if(flavorHostility() > 66)
                             w.append(t, (new StringBuilder("and fixes ")).append(c.himHer()).append(" with a murderous glare").toString());
                         else
-                        if(hostility > 33)
+                        if(flavorHostility() > 33)
                             w.append(t, (new StringBuilder("and suddenly starts approaching ")).append(c.himHer()).toString());
                         else
                             w.append(t, (new StringBuilder("and starts striding toward ")).append(c.himHer()).append(" with a sense of purpose").toString());
@@ -22375,10 +22516,10 @@ public class Forsaken
                     if(c.getInnocence() > 66)
                     {
                         w.append(t, (new StringBuilder("When ")).append(mainName).append(" rushes forward to launch some close-range attacks, ").append(c.getMainName()).append(" takes a defensive stance to protect ").append(c.himHer()).append("self, but ").append(c.heShe()).append("'s surprised and paralyzed by pleasurable sensations when ").toString());
-                        if(deviancy > 66)
+                        if(flavorDeviancy() > 66)
                             w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" drops to ").append(hisHer()).append(" knees and starts pawing at ").append(c.hisHer()).append(" crotch, drooling over the thought of licking ").append(c.himHer()).append(" down there.").toString());
                         else
-                        if(deviancy > 33)
+                        if(flavorDeviancy() > 33)
                             w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" practically pounces on ").append(c.himHer()).append(", forcing ").append(c.hisHer()).append(" legs apart and grinding their hips together.").toString());
                         else
                             w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" grapples ").append(c.himHer()).append(" instead, distracting ").append(c.himHer()).append(" with a hand rubbing between ").append(c.hisHer()).append(" legs.").toString());
@@ -22408,20 +22549,20 @@ public class Forsaken
                 if(c.getDignity() > 66)
                 {
                     w.append(t, (new StringBuilder("Caught in front of the spectators' cameras, ")).append(c.getMainName()).append(" refuses to flee from the approaching ").append(mainName).append(", ").toString());
-                    if(hostility > 66)
+                    if(flavorHostility() > 66)
                         w.append(t, (new StringBuilder("but ")).append(mainName).append(" still doesn't show any mercy whatsoever as ").append(heShe()).append(" throws ").append(reference(c)).append(" down to the pavement and starts stomping on ").append(c.hisHer()).append(" ").append(lowerOrgan).append(".").toString());
                     else
-                    if(hostility > 33)
+                    if(flavorHostility() > 33)
                         w.append(t, (new StringBuilder("but ")).append(mainName).append(" still manages to humiliate ").append(reference(c)).append(" by grabbing ").append(c.himHer()).append(" from behind and rubbing a palm against ").append(c.hisHer()).append(" ").append(organ).append(" in front of everyone.").toString());
                     else
                         w.append(t, (new StringBuilder("and ")).append(mainName).append(" responds by being almost gentle as ").append(heShe()).append(" pushes ").append(reference(c)).append(" onto ").append(c.hisHer()).append(" back and starts stroking ").append(c.hisHer()).append(" ").append(organ).append(".").toString());
                 } else
                 if(c.getDignity() > 33)
                 {
-                    if(deviancy > 66)
+                    if(flavorDeviancy() > 66)
                         w.append(t, (new StringBuilder("Eagerly using ")).append(hisHer()).append(" overwhelming power to satisfy ").append(himHer()).append("self, ").toString());
                     else
-                    if(deviancy > 33)
+                    if(flavorDeviancy() > 33)
                         w.append(t, (new StringBuilder("Toying with ")).append(hisHer()).append(" weaker opponent, ").toString());
                     else
                         w.append(t, (new StringBuilder("Though ")).append(heShe()).append(" doesn't exactly look like ").append(heShe()).append("'s enjoying what ").append(heShe()).append("'s doing, ").toString());
@@ -22440,7 +22581,7 @@ public class Forsaken
             } else
             if(styleDamage[3] > 0)
             {
-                if(hostility > 66)
+                if(flavorHostility() > 66)
                 {
                     if(c.getMorality() > 66)
                     {
@@ -22475,7 +22616,7 @@ public class Forsaken
                             w.append(t, (new StringBuilder("meek demeanor makes the spectators think it's completely ridiculous that ")).append(c.getMainName()).append(" is still struggling to land a solid hit on ").append(himHer()).append(".").toString());
                     }
                 } else
-                if(hostility > 33)
+                if(flavorHostility() > 33)
                 {
                     if(c.getInnocence() > 66)
                     {
@@ -22534,10 +22675,10 @@ public class Forsaken
                 } else
                 {
                     w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" hesitates, unable to approach ").append(mainName).append(" while ").toString());
-                    if(deviancy > 66)
+                    if(flavorDeviancy() > 66)
                         w.append(t, (new StringBuilder(String.valueOf(heShe()))).append(" leers at ").append(c.getMainName()).append(" and voices ").append(hisHer()).append(" perverted desires.").toString());
                     else
-                    if(deviancy > 33)
+                    if(flavorDeviancy() > 33)
                         w.append(t, (new StringBuilder(String.valueOf(heShe()))).append(" belittles ").append(c.getMainName()).append(" and points out the futility of ").append(hisHer()).append(" actions.").toString());
                     else
                         w.append(t, (new StringBuilder(String.valueOf(heShe()))).append(" calmly explains ").append(c.getMainName()).append("'s failings.").toString());
@@ -22548,10 +22689,10 @@ public class Forsaken
                 if(c.getMorality() > 66)
                 {
                     w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append("'s attempts to offer ").append(mainName).append(" a chance to surrender peacefully are interrupted when ").append(mainName).append(" abruptly charges at ").append(c.himHer()).append(", ").toString());
-                    if(hostility > 66)
+                    if(flavorHostility() > 66)
                         w.append(t, (new StringBuilder("too enraged to even consider ")).append(reference(c)).append("'s words.").toString());
                     else
-                    if(hostility > 33)
+                    if(flavorHostility() > 33)
                         w.append(t, (new StringBuilder("unwilling to accept ")).append(reference(c)).append("'s pity.").toString());
                     else
                         w.append(t, (new StringBuilder("knowing that ")).append(heShe()).append(" has to take any opening ").append(heShe()).append(" can.").toString());
@@ -22604,10 +22745,10 @@ public class Forsaken
                         w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" abruptly realizes that ").append(c.heShe()).append("'s been maneuvered into a corner, and an instant later, ").append(mainName).append(" darts directly at ").append(himHer()).append(" in order to take advantage of the positional advantage!").toString());
                 } else
                 {
-                    if(deviancy > 66)
+                    if(flavorDeviancy() > 66)
                         w.append(t, (new StringBuilder("Intimidated by ")).append(mainName).append(" obvious desire to violate ").append(c.himHer()).append(", ").toString());
                     else
-                    if(deviancy > 33)
+                    if(flavorDeviancy() > 33)
                         w.append(t, (new StringBuilder("Uneasy over the way ")).append(mainName).append(" leers at ").append(c.himHer()).append(", ").toString());
                     else
                         w.append(t, (new StringBuilder("Insecure about ")).append(c.hisHer()).append(" own strength, ").toString());
@@ -22617,10 +22758,10 @@ public class Forsaken
             if(c.getMorality() > 66)
             {
                 w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" has briefly managed to escape ").append(c.hisHer()).append(" opponent, but when ").append(c.heShe()).append(" realizes that there's no one else nearby to stop ").append(mainName).append(" from leading the Demons and breaching the evacuation perimeter, ").append(c.heShe()).append(" reluctantly turns around and willingly faces ").append(c.reference(this)).append(", ").toString());
-                if(hostility > 66)
+                if(flavorHostility() > 66)
                     w.append(t, (new StringBuilder("mentally bracing ")).append(c.himHer()).append("self for the torture that ").append(mainName).append(" no doubt has in store.").toString());
                 else
-                if(hostility > 33)
+                if(flavorHostility() > 33)
                     w.append(t, (new StringBuilder("much to ")).append(mainName).append("'s amusement.").toString());
                 else
                     w.append(t, (new StringBuilder("calling out ")).append(hisHer()).append(" name and jumping directly at ").append(himHer()).append(".").toString());
@@ -22628,10 +22769,10 @@ public class Forsaken
             if(c.getMorality() > 33)
             {
                 w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" follows the fleeing ").append(c.getMainName()).append(", ").toString());
-                if(deviancy > 66)
+                if(flavorDeviancy() > 66)
                     w.append(t, "calling out lewd suggestions");
                 else
-                if(deviancy > 33)
+                if(flavorDeviancy() > 33)
                     w.append(t, (new StringBuilder("enjoying the view of ")).append(c.hisHer()).append(" behind").toString());
                 else
                     w.append(t, (new StringBuilder("allowing ")).append(c.himHer()).append(" to exhaust ").append(c.himHer()).append("self").toString());
@@ -22654,7 +22795,7 @@ public class Forsaken
             {
                 if(styleDamage[3] > 0)
                 {
-                    if(hostility > 66)
+                    if(flavorHostility() > 66)
                     {
                         if(c.getMorality() > 66)
                         {
@@ -22689,7 +22830,7 @@ public class Forsaken
                             w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append("'s obvious impotent rage weakens both ").append(c.hisHer()).append(" emotional stability and ").append(c.hisHer()).append(" public image.").toString());
                         }
                     } else
-                    if(hostility > 33)
+                    if(flavorHostility() > 33)
                     {
                         if(c.getInnocence() > 66)
                         {
@@ -22705,10 +22846,10 @@ public class Forsaken
                         if(c.getInnocence() > 33)
                         {
                             w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" and ").append(c.getMainName()).append(" stare each other down, ").append(mainName).append(" ").toString());
-                            if(deviancy > 66)
+                            if(flavorDeviancy() > 66)
                                 w.append(t, "taking the opportunity to make several obscene taunts.  ");
                             else
-                            if(deviancy > 33)
+                            if(flavorDeviancy() > 33)
                                 w.append(t, (new StringBuilder("happily taking the opportunity to insult ")).append(c.getMainName()).append(" and try to provoke ").append(c.himHer()).append(".  ").toString());
                             else
                                 w.append(t, (new StringBuilder("venting ")).append(hisHer()).append(" irritation by harshly insulting ").append(reference(c)).append(".  ").toString());
@@ -22728,10 +22869,10 @@ public class Forsaken
                     if(c.getDignity() > 66)
                     {
                         w.append(t, (new StringBuilder("A sudden flurry of camera flashes reminds ")).append(c.getMainName()).append(" of how much damage ").append(c.hisHer()).append(" clothes have taken over the course of the fight.  ").append(c.HeShe()).append(" blushes and hurriedly rearranges them, then frowns at ").append(mainName).append(", ").toString());
-                        if(deviancy > 66)
+                        if(flavorDeviancy() > 66)
                             w.append(t, (new StringBuilder("whose lustful urges have overflowed and caused ")).append(c.himHer()).append(" to make lewd comments.").toString());
                         else
-                        if(deviancy > 33)
+                        if(flavorDeviancy() > 33)
                             w.append(t, (new StringBuilder("who is very obviously leering at ")).append(c.himHer()).append(".").toString());
                         else
                             w.append(t, "who flatly comments on how much was showing.");
@@ -22758,15 +22899,15 @@ public class Forsaken
                             w.append(t, (new StringBuilder("then turns around and angrily admonishes ")).append(c.getMainName()).append(" for not covering ").append(c.himHer()).append("self up better.").toString());
                     }
                 } else
-                if(hostility > 66)
+                if(flavorHostility() > 66)
                 {
                     if(c.getInnocence() > 66)
                     {
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" and ").append(c.getMainName()).append(" roll around on the ground together, wrestling for control, ").toString());
-                        if(deviancy > 66)
+                        if(flavorDeviancy() > 66)
                             w.append(t, (new StringBuilder("but the sexual moans ")).append(mainName).append(" releases as they do so are so disturbing to ").append(c.getMainName()).append(" that ").append(c.heShe()).append(" reflexively lets go and backs off, shivering with revulsion.").toString());
                         else
-                        if(deviancy > 33)
+                        if(flavorDeviancy() > 33)
                             w.append(t, (new StringBuilder("but ")).append(c.getMainName()).append(" is disgusted by the way that ").append(mainName).append(" is clearly enjoing the contact with ").append(c.hisHer()).append(" body.  ").append(c.getMainName()).append(" shifts ").append(c.hisHer()).append(" efforts into getting away, opening up some distance between ").append(c.himHer()).append("self and ").append(c.reference(this)).append(", then looks back at ").append(himHer()).append(" with revulsion.").toString());
                         else
                             w.append(t, (new StringBuilder("but the cold threats ")).append(mainName).append(" whispers into ").append(c.getMainName()).append("'s ear soon become too much to bear, and ").append(c.getMainName()).append(" recoils backward, trying to collect ").append(c.himHer()).append("self.").toString());
@@ -22790,15 +22931,15 @@ public class Forsaken
                     else
                         w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" is pinned on the ground, helpless underneath ").append(mainName).append(", but ").append(c.heShe()).append("'s suddenly surprised to find that ").append(mainName).append(" has released ").append(c.himHer()).append(".  A small group of civilians who are late to be evacuated has wandered by, and ").append(mainName).append(" wants to kill them before returning to finish off ").append(reference(c)).append(".").toString());
                 } else
-                if(hostility > 33)
+                if(flavorHostility() > 33)
                 {
                     if(c.getConfidence() > 66)
                     {
                         w.append(t, (new StringBuilder("Wearing an infuriating smirk, ")).append(mainName).append(" ").toString());
-                        if(deviancy > 66)
+                        if(flavorDeviancy() > 66)
                             w.append(t, (new StringBuilder("allows ")).append(c.getMainName()).append(" to graze ").append(himHer()).append(" with several attacks, moaning in sexual pleasure every time.  The sight unnverves ").append(c.getMainName()).append(" enough to slow ").append(c.hisHer()).append(" movements, and ").append(mainName).append(" backs off to focus on taunting ").append(c.himHer()).append(" even more.").toString());
                         else
-                        if(deviancy > 33)
+                        if(flavorDeviancy() > 33)
                             w.append(t, (new StringBuilder("deliberately makes ")).append(c.getMainName()).append(" uncomfortable with constant sexual talk as they fight, using ").append(c.hisHer()).append(" disgust to make ").append(c.himHer()).append(" grow increasingly careless and allow ").append(mainName).append(" to easily evade ").append(c.hisHer()).append(" attacks and get to a high ground position above ").append(c.himHer()).append(".").toString());
                         else
                             w.append(t, (new StringBuilder("keeps making derogatory remarks about ")).append(c.getMainName()).append(", calling ").append(c.himHer()).append(" weak and stupid, and claiming that ").append(c.heShe()).append("'s nowhere near strong enough to beat the Demon Lord.  ").append(c.getMainName()).append("'s determination to prove ").append(mainName).append(" wrong causes ").append(c.himHer()).append(" to become reckless, and ").append(mainName).append(" emphasizes the point by dodging around ").append(c.himHer()).append(" and leading ").append(c.himHer()).append(" on a chase.").toString());
@@ -22822,7 +22963,7 @@ public class Forsaken
                         if(dignity > 33)
                             w.append(t, (new StringBuilder("insulting ")).append(c.himHer()).append(" again and again.  ").toString());
                         else
-                            w.append(t, "unleashing a torrent of raw hostility.  ");
+                            w.append(t, "unleashing a torrent of raw flavorHostility().  ");
                         w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" ends up stumbling backwards, wiping tears out of ").append(c.hisHer()).append(" eyes and trying to remind ").append(c.himHer()).append("self that there's no need to care about the words spoken by an enemy.").toString());
                     }
                 } else
@@ -22840,10 +22981,10 @@ public class Forsaken
                 if(c.getMorality() > 33)
                 {
                     w.append(t, (new StringBuilder("A clash of energy between ")).append(mainName).append(" and ").append(c.getMainName()).append(" starts to collapse the building whose rooftop they're fighting on.  ").toString());
-                    if(deviancy > 66)
+                    if(flavorDeviancy() > 66)
                         w.append(t, (new StringBuilder("As they both clamber to safety, ")).append(mainName).append(" can't resist groping ").append(c.getMainName()).append(", causing them both to fall and land some distance apart.").toString());
                     else
-                    if(deviancy > 33)
+                    if(flavorDeviancy() > 33)
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" reaches the ground first, and ").append(heShe()).append(" can't resist making lewd comments as ").append(heShe()).append(" looks up at where ").append(c.getMainName()).append(" is climbing down.").toString());
                     else
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" berates ").append(c.getMainName()).append(" for not checking to make sure that the location was clear of civilians first, although ").append(heShe()).append(" also feels guilty for letting it happen.").toString());
@@ -22861,7 +23002,7 @@ public class Forsaken
             } else
             if(styleDamage[3] > 0)
             {
-                if(deviancy > 66)
+                if(flavorDeviancy() > 66)
                 {
                     if(c.getConfidence() > 66)
                     {
@@ -22887,17 +23028,17 @@ public class Forsaken
                         w.append(t, (new StringBuilder("starts tearing at ")).append(reference(c)).append("'s clothes, as turned on by the fact that they're being watched as ").append(heShe()).append(" is by ").append(c.getMainName()).append("'s increasingly exposed skin.").toString());
                     } else
                     {
-                        if(hostility > 66)
+                        if(flavorHostility() > 66)
                             w.append(t, (new StringBuilder("Determined to make the shy ")).append(c.getMainName()).append(" suffer, ").append(mainName).append(" tackles ").append(c.himHer()).append(" and ").toString());
                         else
-                        if(hostility > 33)
+                        if(flavorHostility() > 33)
                             w.append(t, (new StringBuilder("Becoming fixated on the thought of making ")).append(c.getMainName()).append(" squeal and cover ").append(c.himHer()).append("self, ").append(mainName).append(" tackles ").append(c.himHer()).append(" and ").toString());
                         else
                             w.append(t, (new StringBuilder("Unable to resist ")).append(hisHer()).append(" perverted desires, ").append(mainName).append(" tackles ").append(c.getMainName()).append(" and ").toString());
                         w.append(t, (new StringBuilder("starts pulling ")).append(c.hisHer()).append(" torn clothes out of the way for the benefit of the countless cameras watching the battle.").toString());
                     }
                 } else
-                if(deviancy > 33)
+                if(flavorDeviancy() > 33)
                 {
                     if(c.getDignity() > 66)
                     {
@@ -22945,10 +23086,10 @@ public class Forsaken
                 } else
                 if(c.getInnocence() > 33)
                 {
-                    if(hostility > 66)
+                    if(flavorHostility() > 66)
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" closes in on ").append(c.getMainName()).append(", attacking with a wild ferocity that shreds apart everything that's not protected by a Chosen's supernatural durability.  This applies not only to buildings, but to ").append(reference(c)).append("'s clothes as well.").toString());
                     else
-                    if(hostility > 33)
+                    if(flavorHostility() > 33)
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" closes in and grapples for control with ").append(c.getMainName()).append(", snarling in ").append(c.hisHer()).append(" face.  Both combatants try to seize control by grabbing and pulling on each other's clothes, but their garments aren't resilient enough to stand up to their supernatural strength for long.").toString());
                     else
                         w.append(t, (new StringBuilder("There's no anger behind ")).append(mainName).append("'s attacks, but ").append(heShe()).append(" still intends to debilitate ").append(c.getMainName()).append(".  ").append(HisHer()).append(" strikes are precise, and even when ").append(c.getMainName()).append(" dodges, ").append(c.hisHer()).append(" clothes are usually caught and partially torn away.").toString());
@@ -22981,10 +23122,10 @@ public class Forsaken
                 if(c.getConfidence() > 33)
                 {
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is weak enough that ").append(c.getMainName()).append(" is able to pin ").append(himHer()).append(" down, but ").toString());
-                    if(deviancy > 66)
+                    if(flavorDeviancy() > 66)
                         w.append(t, (new StringBuilder("the way that ")).append(mainName).append(" treats it as a kinky game and keeps trying to grope ").append(reference(c)).append(" at the same time makes it hard to focus on keeping ").append(himHer()).append(" under control.").toString());
                     else
-                    if(deviancy > 33)
+                    if(flavorDeviancy() > 33)
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" constantly squirms and contorts ").append(hisHer()).append(" body, even enjoying the way it causes ").append(himHer()).append(" to rub up against ").append(reference(c)).append(", and ").append(c.getMainName()).append(" can't completely keep ").append(hisHer()).append(" hands off ").append(c.himHer()).append(".").toString());
                     else
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is content to bide ").append(hisHer()).append(" time and look for an opening to kick ").append(hisHer()).append(" way free - which ").append(heShe()).append(" eventually finds.").toString());
@@ -23026,10 +23167,10 @@ public class Forsaken
                         w.append(t, "refuses to give up.");
                 } else
                 {
-                    if(hostility > 66)
+                    if(flavorHostility() > 66)
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" claws at ").append(c.getMainName()).append(" with singleminded fury, ").toString());
                     else
-                    if(hostility > 33)
+                    if(flavorHostility() > 33)
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is taking great satisfaction in the opportunity to fight ").append(c.getMainName()).append(" hand-to-hand, ").toString());
                     else
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" fights with firm determination against ").append(c.getMainName()).append(", ").toString());
@@ -23039,10 +23180,10 @@ public class Forsaken
             if(c.getMorality() > 66)
             {
                 w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" knows that ").append(c.heShe()).append("'s no match for ").append(mainName).append(", but ").toString());
-                if(hostility > 66)
+                if(flavorHostility() > 66)
                     w.append(t, (new StringBuilder(String.valueOf(c.heShe()))).append(" also knows that many civilian lives depend on keeping ").append(c.reference(this)).append(" occupied, ").toString());
                 else
-                if(hostility > 33)
+                if(flavorHostility() > 33)
                     w.append(t, (new StringBuilder(String.valueOf(c.heShe()))).append("'s willing to bear the brunt of ").append(c.reference(this)).append("'s assault ").append(c.himHer()).append("self, ").toString());
                 else
                     w.append(t, (new StringBuilder(String.valueOf(c.heShe()))).append(" isn't ready to give up on ").append(c.reference(this)).append(" yet, ").toString());
@@ -23051,10 +23192,10 @@ public class Forsaken
             if(c.getMorality() > 33)
             {
                 w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" easily seizes control in ").append(hisHer()).append(" grapple with ").append(c.getMainName()).append(", putting ").append(c.himHer()).append(" on ").append(c.hisHer()).append(" back and pinning ").append(c.hisHer()).append(" hands over ").append(c.hisHer()).append(" head").toString());
-                if(deviancy > 66)
+                if(flavorDeviancy() > 66)
                     w.append(t, (new StringBuilder(" while practically drooling over the sight of ")).append(c.hisHer()).append(" body.").toString());
                 else
-                if(deviancy > 33)
+                if(flavorDeviancy() > 33)
                     w.append(t, (new StringBuilder(", unable to resist the urge to make some sexual comments while ")).append(c.heShe()).append(" does so.").toString());
                 else
                     w.append(t, (new StringBuilder(" in order to make sure ")).append(c.heShe()).append(" understands how helpless ").append(c.heShe()).append(" is.").toString());
@@ -23076,7 +23217,7 @@ public class Forsaken
             {
                 if(styleDamage[2] > 0)
                 {
-                    if(hostility > 66)
+                    if(flavorHostility() > 66)
                     {
                         if(c.getMorality() > 66)
                         {
@@ -23092,10 +23233,10 @@ public class Forsaken
                         if(c.getMorality() > 33)
                         {
                             w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" begins drawing on as much Demonic energy as ").append(heShe()).append(" can, and before ").append(c.getMainName()).append(" can stop ").append(himHer()).append(", an enormous blast consumes their side of the district, slaughtering Thralls along with any nearby civilians who couldn't evaucate.  As the light fades, ").toString());
-                            if(deviancy > 66)
+                            if(flavorDeviancy() > 66)
                                 w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" stands in the middle of the destruction, an expression of sexual ecstasy on ").append(hisHer()).append(" face.").toString());
                             else
-                            if(deviancy > 33)
+                            if(flavorDeviancy() > 33)
                                 w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" grins at ").append(c.getMainName()).append(" before backing away into the cloud of dust.").toString());
                             else
                                 w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is already gone, coldly using ").append(c.getMainName()).append("'s stunned horror as an opportunity to maneuver around behind ").append(c.himHer()).append(".").toString());
@@ -23112,7 +23253,7 @@ public class Forsaken
                             w.append(t, (new StringBuilder("shrieking with incoherent rage at ")).append(c.getMainName()).append(" and lashing out in all directions.").toString());
                         }
                     } else
-                    if(hostility > 33)
+                    if(flavorHostility() > 33)
                     {
                         if(c.getConfidence() > 66)
                         {
@@ -23138,10 +23279,10 @@ public class Forsaken
                         } else
                         {
                             w.append(t, (new StringBuilder("A horde of Demons suddenly attacks ")).append(c.getMainName()).append(", and ").append(c.heShe()).append(" has trouble fending them off.  ").toString());
-                            if(deviancy > 66)
+                            if(flavorDeviancy() > 66)
                                 w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" takes a seat on a nearby rooftop and starts masturbating as ").append(heShe()).append(" watches, moaning loudly to make sure ").append(c.getMainName()).append(" notices ").append(himHer()).append(".").toString());
                             else
-                            if(deviancy > 33)
+                            if(flavorDeviancy() > 33)
                                 w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" laughs and steps back, calling out unhelpful advice as ").append(c.getMainName()).append(" struggles.").toString());
                             else
                                 w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" decides to take the opportunity to catch ").append(hisHer()).append(" breath and prepare for ").append(hisHer()).append(" next attack.").toString());
@@ -23161,10 +23302,10 @@ public class Forsaken
                     if(c.getInnocence() > 33)
                     {
                         w.append(t, (new StringBuilder("The flow of the battle has put some distance between ")).append(c.getMainName()).append(" and ").append(mainName).append(", but when ").append(c.getMainName()).append(" tries to turn away and put ").append(c.hisHer()).append(" focus back on fighting the Demons, ").append(mainName).append(" hits ").append(c.himHer()).append(" in the back with a long-range blast of energy").toString());
-                        if(deviancy > 66)
+                        if(flavorDeviancy() > 66)
                             w.append(t, (new StringBuilder(", suddenly overcome by an irresistable urge to make ")).append(reference(c)).append(" scream.").toString());
                         else
-                        if(deviancy > 33)
+                        if(flavorDeviancy() > 33)
                             w.append(t, (new StringBuilder(", smirking at the way ")).append(c.heShe()).append(" squeaks in indignation.").toString());
                         else
                             w.append(t, (new StringBuilder(", reminding ")).append(c.himHer()).append(" not to let ").append(c.hisHer()).append(" guard down around an opponent.").toString());
@@ -23181,7 +23322,7 @@ public class Forsaken
                         w.append(t, (new StringBuilder("and soon enough ")).append(heShe()).append(" starts to move toward ").append(c.getMainName()).append(" again.").toString());
                     }
                 } else
-                if(hostility > 66)
+                if(flavorHostility() > 66)
                 {
                     if(c.getInnocence() > 66)
                     {
@@ -23216,7 +23357,7 @@ public class Forsaken
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" still hasn't inflicted even a scratch on ").append(c.himHer()).append(".  ").append(c.getMainName()).append(" can only conclude that it must be because of the Demon Lord's orders.").toString());
                     }
                 } else
-                if(hostility > 33)
+                if(flavorHostility() > 33)
                 {
                     if(c.getConfidence() > 66)
                     {
@@ -23242,10 +23383,10 @@ public class Forsaken
                     } else
                     {
                         w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" finds ").append(c.himHer()).append("self briefly too intimidated to approach ").append(mainName).append(", ").toString());
-                        if(deviancy > 66)
+                        if(flavorDeviancy() > 66)
                             w.append(t, (new StringBuilder("deeply disturbed by the way that ")).append(c.reference(this)).append(" stares hungrily at ").append(c.himHer()).append(" like ").append(c.heShe()).append("'s a delicious piece of meat.").toString());
                         else
-                        if(deviancy > 33)
+                        if(flavorDeviancy() > 33)
                             w.append(t, (new StringBuilder("and the cruel taunts and laughter coming ")).append(c.hisHer()).append(" way from ").append(c.reference(this)).append(" don't help matters.").toString());
                         else
                             w.append(t, (new StringBuilder("sensing ")).append(c.reference(this)).append("'s sadistic nature.").toString());
@@ -23266,10 +23407,10 @@ public class Forsaken
                 if(c.getMorality() > 33)
                 {
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" has ended up some distance from ").append(hisHer()).append(" opponent, ").toString());
-                    if(deviancy > 66)
+                    if(flavorDeviancy() > 66)
                         w.append(t, (new StringBuilder("masturbating and moaning ")).append(c.getMainName()).append("'s name out loud.  ").toString());
                     else
-                    if(deviancy > 33)
+                    if(flavorDeviancy() > 33)
                         w.append(t, (new StringBuilder("calling out lewd backhanded compliments at ")).append(c.getMainName()).append(".  ").toString());
                     else
                         w.append(t, (new StringBuilder("coldly insulting ")).append(c.getMainName()).append("'s abilities.  ").toString());
@@ -23350,10 +23491,10 @@ public class Forsaken
                             w.append(t, (new StringBuilder("using ")).append(hisHer()).append(" keen tactical mind to let them fight at a greater effectiveness than ").append(c.getMainName()).append(" is used to.").toString());
                     } else
                     {
-                        if(deviancy > 66)
+                        if(flavorDeviancy() > 66)
                             w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" takes a voyeuristic thrill in watching ").append(c.getMainName()).append(" struggle against the Demons, ").toString());
                         else
-                        if(deviancy > 33)
+                        if(flavorDeviancy() > 33)
                             w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" decides that it's easier to appreciate ").append(c.getMainName()).append("'s crying face from a slight distance, ").toString());
                         else
                             w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" knows that ").append(c.getMainName()).append(" often has trouble fighting against Demons, ").toString());
@@ -23363,10 +23504,10 @@ public class Forsaken
                 if(c.getInnocence() > 66)
                 {
                     w.append(t, (new StringBuilder("A Demon attacks ")).append(c.getMainName()).append(" from behind, knocking ").append(c.himHer()).append(" down, but when it tries to hit ").append(c.himHer()).append(" again, ").toString());
-                    if(deviancy > 66)
+                    if(flavorDeviancy() > 66)
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" flies into a rage, tearing it apart in an instant.").toString());
                     else
-                    if(deviancy > 33)
+                    if(flavorDeviancy() > 33)
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" runs by, killing the Demon with a smirk.").toString());
                     else
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" coldly kills the Demon with a blast of energy.").toString());
@@ -23384,16 +23525,16 @@ public class Forsaken
                 } else
                 {
                     w.append(t, (new StringBuilder("As ")).append(mainName).append(" and ").append(c.getMainName()).append(" fight, ").toString());
-                    if(hostility > 66)
+                    if(flavorHostility() > 66)
                         w.append(t, (new StringBuilder("some Demons try to swarm at ")).append(c.getMainName()).append(", only to be immediately struck down by ").append(mainName).append(" before they can lay a finger on ").append(reference(c)).append(".").toString());
                     else
-                    if(hostility > 33)
+                    if(flavorHostility() > 33)
                         w.append(t, (new StringBuilder("some Demons come within view, but ")).append(mainName).append(" instantly incinerates them before returning ").append(hisHer()).append(" attention to ").append(reference(c)).append(".").toString());
                     else
                         w.append(t, (new StringBuilder("some Demons with captive civilians march by, but ")).append(mainName).append(" attacks in order to free the humans, and soon both ").append(heShe()).append(" and ").append(reference(c)).append(" are fighting the Demons off together.").toString());
                 }
             } else
-            if(deviancy > 66)
+            if(flavorDeviancy() > 66)
             {
                 if(c.getDignity() > 66)
                 {
@@ -23417,22 +23558,22 @@ public class Forsaken
                     else
                         w.append(t, (new StringBuilder(", because despite ")).append(hisHer()).append(" expertise on both subjects, ").append(heShe()).append(" finds it difficult to masturbate and fight at the same time.").toString());
                 } else
-                if(hostility > 66)
+                if(flavorHostility() > 66)
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" has been trying to anger ").append(c.getMainName()).append(" with ").append(hisHer()).append(" constant sexual behavior, but the more ").append(heShe()).append(" sees that ").append(reference(c)).append(" is able to mostly keep ").append(c.hisHer()).append(" composure, the more enraged ").append(mainName).append(" ").append(himHer()).append("self gets.").toString());
                 else
-                if(hostility > 33)
+                if(flavorHostility() > 33)
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is getting so turned on that ").append(heShe()).append("'s having a hard time doing much to ").append(c.getMainName()).append(" even when ").append(heShe()).append(" manages to get ").append(hisHer()).append(" hands on ").append(reference(c)).append(".  ").append(HeShe()).append("'s forced to duck away behind a wall of Demons in order to calm down so ").append(heShe()).append(" can fight again.").toString());
                 else
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" comments with complete honesty about how pleased ").append(heShe()).append(" is that ").append(c.getMainName()).append(" doesn't seem to be bothered by ").append(mainName).append("'s sexual playfulness.  ").append(c.getMainName()).append(" just shrugs ").append(hisHer()).append(" words off.").toString());
             } else
-            if(deviancy > 33)
+            if(flavorDeviancy() > 33)
             {
                 if(c.getConfidence() > 66)
                 {
-                    if(hostility > 66)
+                    if(flavorHostility() > 66)
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" rants angrily at ").append(c.getMainName()).append(", but the thing that's angering ").append(himHer()).append(" is ").append(hisHer()).append(" admiration of ").append(reference(c)).append(", and ").toString());
                     else
-                    if(hostility > 33)
+                    if(flavorHostility() > 33)
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" grudgingly compliments ").append(c.getMainName()).append(", acknowledging ").append(c.himHer()).append(" as a worthy (and especially attractive) opponent.  ").toString());
                     else
                         w.append(t, (new StringBuilder("During a standoff between ")).append(himHer()).append("self and ").append(c.getMainName()).append(", ").append(mainName).append(" takes the opportunity to describe in detail which of ").append(reference(c)).append("'s traits ").append(heShe()).append(" approves of.  ").toString());
@@ -23475,10 +23616,10 @@ public class Forsaken
             } else
             if(c.getInnocence() > 33)
             {
-                if(hostility > 66)
+                if(flavorHostility() > 66)
                     w.append(t, (new StringBuilder("Given ")).append(mainName).append("'s obvious murderous desires, ").append(heShe()).append("'s showing a surprising amount of restraint against ").append(c.getMainName()).append(".  ").toString());
                 else
-                if(hostility > 33)
+                if(flavorHostility() > 33)
                     w.append(t, (new StringBuilder("Although ")).append(mainName).append(" clearly takes a sort of mischievous pleasure out of tormenting ").append(c.getMainName()).append(", there's no actual malice behind it.  ").toString());
                 else
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" seems to be doing the things ").append(heShe()).append("'s doing out of a sense of obligation, rather than for ").append(hisHer()).append(" own personal pleasure.  ").toString());
@@ -23745,10 +23886,28 @@ public class Forsaken
         }
     }
 
+    public int flavorHostility()
+    {
+        if(defeatType == 6 && hostility < 75)
+            return 75;
+        else
+            return hostility;
+    }
+
+    public int flavorDeviancy()
+    {
+        if(defeatType == 6 && deviancy < 75)
+            return 75;
+        else
+            return deviancy;
+    }
+
     public int flavorObedience()
     {
         if(defeatType == 5 && obedience < 40)
             return 65;
+        if(defeatType == 6 && obedience < 75)
+            return 75;
         else
             return obedience;
     }

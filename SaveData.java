@@ -13,20 +13,20 @@ public class SaveData
         harem = new Forsaken[0];
         forsakenMade = 0;
         chosenMade = 0;
-        sceneText = new String[48][0][0];
-        sceneColor = new Color[48][0][0];
-        sceneUnderline = new Boolean[48][0][0];
+        sceneText = new String[49][0][0];
+        sceneColor = new Color[49][0][0];
+        sceneUnderline = new Boolean[49][0][0];
         currentText = new String[0];
         currentColor = new Color[0];
         currentUnderline = new Boolean[0];
-        sceneButtons = new String[48][0];
-        sceneSummaries = new String[48][0];
-        sceneEmotions = new Project.Emotion[48][0][5];
-        sceneFaces = new String[48][0][5];
-        sceneSpecs = new Chosen.Species[48][0][5];
-        sceneCivs = new Boolean[48][0][5];
-        sceneFallen = new Boolean[48][0][5];
-        sceneGenders = new Forsaken.Gender[48][0][5];
+        sceneButtons = new String[49][0];
+        sceneSummaries = new String[49][0];
+        sceneEmotions = new Project.Emotion[49][0][5];
+        sceneFaces = new String[49][0][5];
+        sceneSpecs = new Chosen.Species[49][0][5];
+        sceneCivs = new Boolean[49][0][5];
+        sceneFallen = new Boolean[49][0][5];
+        sceneGenders = new Forsaken.Gender[49][0][5];
         customRoster = new Chosen[0];
     }
 

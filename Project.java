@@ -139,6 +139,16 @@ public class Project extends JFrame
         }
         if(saves.harem == null)
             saves.harem = new Forsaken[0];
+        for(int i = 0; i < saves.harem.length; i++)
+            if(saves.harem[i].others.length > saves.harem[i].forsakenRelations.length)
+            {
+                Forsaken newOthers[] = new Forsaken[saves.harem[i].forsakenRelations.length];
+                for(int j = 0; j < newOthers.length; j++)
+                    newOthers[j] = saves.harem[i].others[j];
+
+                saves.harem[i].others = newOthers;
+            }
+
         saves.fillIDs();
         if(saves.harem != null && saves.harem.length > 0)
         {
@@ -239,10 +249,10 @@ public class Project extends JFrame
         if(saves.customRoster == null)
             saves.customRoster = new Chosen[0];
         if(saves.sceneText == null)
-            saves.organizeScenes(48);
+            saves.organizeScenes(49);
         else
-        if(saves.sceneText.length < 48)
-            saves.organizeScenes(48);
+        if(saves.sceneText.length < 49)
+            saves.organizeScenes(49);
         if(saves.harem == null)
         {
             saves.harem = new Forsaken[0];
@@ -459,7 +469,7 @@ public class Project extends JFrame
         }
         if(!t.getBackground().equals(w.BACKGROUND))
             w.toggleColors(t);
-        w.append(t, (new StringBuilder("Corrupted Saviors, Release 25: \"Reunion\"\n\nThis game contains content of an adult nature and should not be played by the underaged or by those unable to distinguish fantasy from reality.\n\n")).append(w.getSeparator()).append("\n\nJapan, mid-21st century.  The psychic energies of humanity have finally begun to coalesce into physical form.  The resulting beings are known as Demons.  Born from the base desires suppressed deep within the human mind, these creatures spread across the planet, leaving chaos and depravity in their wake.\n\nBut Demons do not represent the entirety of the human condition.  The hopes and determination of humanity have also risen up, gathering in the bodies of a few Chosen warriors in order to grant them the power to fight the Demons.  Although each of them was once an ordinary person, their new abilities place them at the center of the struggle for the soul of humanity.\n\nYou are a Demon Lord, the highest form of Demon, with your own mind and will, focused on the corruption of all that is good in the world.  The Chosen are the keystone of humanity's resistance to your goal, but to simply kill them would be meaningless.  Instead, shatter their notions of right and wrong, showing them the true darkness that hides within!").toString());
+        w.append(t, (new StringBuilder("Corrupted Saviors, Release 26b: \"Aversion\"\n\nThis game contains content of an adult nature and should not be played by the underaged or by those unable to distinguish fantasy from reality.\n\n")).append(w.getSeparator()).append("\n\nJapan, mid-21st century.  The psychic energies of humanity have finally begun to coalesce into physical form.  The resulting beings are known as Demons.  Born from the base desires suppressed deep within the human mind, these creatures spread across the planet, leaving chaos and depravity in their wake.\n\nBut Demons do not represent the entirety of the human condition.  The hopes and determination of humanity have also risen up, gathering in the bodies of a few Chosen warriors in order to grant them the power to fight the Demons.  Although each of them was once an ordinary person, their new abilities place them at the center of the struggle for the soul of humanity.\n\nYou are a Demon Lord, the highest form of Demon, with your own mind and will, focused on the corruption of all that is good in the world.  The Chosen are the keystone of humanity's resistance to your goal, but to simply kill them would be meaningless.  Instead, shatter their notions of right and wrong, showing them the true darkness that hides within!").toString());
         if(w.getCast()[0] == null)
         {
             Chosen newChosen = new Chosen();
@@ -695,7 +705,7 @@ public class Project extends JFrame
             p.add(Forsaken);
         }
         if(w.save.sceneText == null)
-            w.save.organizeScenes(48);
+            w.save.organizeScenes(49);
         for(int i = 0; i < w.save.sceneText.length; i++)
             if(w.save.sceneText[i].length > 0)
             {
@@ -731,7 +741,7 @@ public class Project extends JFrame
 
             public void actionPerformed(ActionEvent e)
             {
-                w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\nCopyright 2019-2021 by CSdev. Corrupted Saviors is licensed under the Creative Commons Attribution-ShareAlike 4.0 International License. To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/4.0/.\n\nDefault portrait set created by CSdev with the assistance of Artbreeder and dedicated to the public domain (CC0).  For more information, see https://creativecommons.org/publicdomain/zero/1.0/.\n\nIf you like this game, please share it and discuss it so that it can be further enjoyed and improved!  There is a good chance that the developer reads whatever forum you found it on.  Direct feedback can also be sent to corruptedsaviors@gmail.com\n\nNew versions are first posted to corruptedsaviors.blogspot.com\nThe developer's tip jar can be found at subscribestar.adult/csdev").toString());
+                w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\nCopyright 2019-2022 by CSdev. Corrupted Saviors is licensed under the Creative Commons Attribution-ShareAlike 4.0 International License. To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/4.0/.\n\nDefault portrait set created by CSdev with the assistance of Artbreeder and dedicated to the public domain (CC0).  For more information, see https://creativecommons.org/publicdomain/zero/1.0/.\n\nIf you like this game, please share it and discuss it so that it can be further enjoyed and improved!  There is a good chance that the developer reads whatever forum you found it on.  Direct feedback can also be sent to corruptedsaviors@gmail.com\n\nNew versions are first posted to corruptedsaviors.blogspot.com\nThe developer's tip jar can be found at subscribestar.adult/csdev").toString());
             }
 
             private final WorldState val$w;
@@ -5863,6 +5873,8 @@ public class Project extends JFrame
         w.append(t, (new StringBuilder(String.valueOf(x.condensedFormat(x.injuExp)))).append(" (x").append(x.expMultiplierDisplay(x.injuExp)).append(" dmg)\nEXPO: ").append(x.condensedFormat(x.expoExp)).append(" (x").append(x.expMultiplierDisplay(x.expoExp)).append(" dmg)\n").append(x.describeCombatStyle(w, Boolean.valueOf(true))).toString());
         if(x.defeatType == 5 && x.obedience < 40)
             w.append(t, "\n\nTrait: Eager Partner\nWhile Obedience remains below 40%, 1/4 Motivation cost to deploy and +50% PLEA and EXPO damage");
+        if(x.defeatType == 6)
+            w.append(t, "\n\nTrait: Dissociative Identity\nWhile consenting, training can only increase Disgrace.  +50% HATE and INJU damage");
         if(x.type == Chosen.Species.SUPERIOR)
             w.append(t, "\n\nTrait: Superior Forsaken\nx2 Motivation cost to deploy, +50% damage");
         w.append(t, "\n\nOrgasms given: ");
@@ -6464,17 +6476,18 @@ public class Project extends JFrame
 
         w.append(t, (new StringBuilder("Core Vulnerability Break: ")).append(types).append("/20\n").toString());
         w.append(t, "Core Vulnerability Distortions: ");
+        int found = 0;
         if(s.sceneText[21].length > 0)
-            w.append(t, "1");
-        else
-            w.append(t, "0");
-        w.append(t, "/1\n");
+            found++;
+        if(s.sceneText[22].length > 0)
+            found++;
+        w.append(t, (new StringBuilder(String.valueOf(found))).append("/2\n").toString());
         types = 0;
-        for(int i = 33; i < 48; i++)
+        for(int i = 33; i < 49; i++)
             if(s.sceneText[i].length > 0)
                 types++;
 
-        w.append(t, (new StringBuilder("Daily Vignettes: ")).append(types).append("/").append(15).toString());
+        w.append(t, (new StringBuilder("Daily Vignettes: ")).append(types).append("/").append(16).toString());
         w.append(t, "\n\nWhich type of scene would you like to view?");
     }
 
@@ -6595,6 +6608,9 @@ public class Project extends JFrame
                 if(i == 21)
                     sceneName = "First 'Tempt'";
                 else
+                if(i == 22)
+                    sceneName = "First Catatonia";
+                else
                 if(i == 33)
                     sceneName = "Perverted Donor";
                 else
@@ -6639,6 +6655,9 @@ public class Project extends JFrame
                 else
                 if(i == 47)
                     sceneName = "Relief Through Abuse";
+                else
+                if(i == 48)
+                    sceneName = "Endurance Match";
                 JButton PickScene = new JButton(sceneName);
                 final int sceneType = i;
                 PickScene.addActionListener(new ActionListener() {
@@ -7109,18 +7128,18 @@ public class Project extends JFrame
             ReadObject robj = new ReadObject();
             w.save = robj.deserializeSaveData((new StringBuilder(String.valueOf(path))).append(File.separator).append("saves.sav").toString());
             if(w.save.sceneText == null)
-                w.save.organizeScenes(48);
+                w.save.organizeScenes(49);
             else
-            if(w.save.sceneText.length < 48)
-                w.save.organizeScenes(48);
+            if(w.save.sceneText.length < 49)
+                w.save.organizeScenes(49);
         } else
         {
             w.save = new SaveData();
             if(w.save.sceneText == null)
-                w.save.organizeScenes(48);
+                w.save.organizeScenes(49);
             else
-            if(w.save.sceneText.length < 48)
-                w.save.organizeScenes(48);
+            if(w.save.sceneText.length < 49)
+                w.save.organizeScenes(49);
         }
         w.getCast()[0].world = w;
         String city = "the capital city";
@@ -7353,9 +7372,9 @@ public class Project extends JFrame
                         }
                         if(victim2 != null)
                         {
-                            if(w.getRelationship(killer1.getNumber(), victim1.getNumber()) == -4 || victim1.isImpregnated().booleanValue() || victim1.isHypnotized().booleanValue() || victim1.isDrained().booleanValue() || victim1.isParasitized().booleanValue() || victim1.temptReq < 0x186a0L || victim1.resolve < 50)
+                            if(w.getRelationship(killer1.getNumber(), victim1.getNumber()) == -4 || victim1.isImpregnated().booleanValue() || victim1.isHypnotized().booleanValue() || victim1.isDrained().booleanValue() || victim1.isParasitized().booleanValue() || victim1.temptReq < 0x186a0L || victim1.dissociationReq < 10 || victim1.resolve < 50)
                             {
-                                if(w.getRelationship(killer1.getNumber(), victim2.getNumber()) == -4 || victim2.isImpregnated().booleanValue() || victim2.isHypnotized().booleanValue() || victim2.isDrained().booleanValue() || victim2.isParasitized().booleanValue() || victim2.temptReq < 0x186a0L || victim2.resolve < 50)
+                                if(w.getRelationship(killer1.getNumber(), victim2.getNumber()) == -4 || victim2.isImpregnated().booleanValue() || victim2.isHypnotized().booleanValue() || victim2.isDrained().booleanValue() || victim2.isParasitized().booleanValue() || victim2.temptReq < 0x186a0L || victim2.dissociationReq < 10 || victim2.resolve < 50)
                                 {
                                     if(w.getTechs()[40].isOwned().booleanValue() && !killer1.hesitated.booleanValue() && (w.getRelationship(killer1.getNumber(), victim1.getNumber()) == 4 || w.getRelationship(killer1.getNumber(), victim2.getNumber()) == 4))
                                     {
@@ -7382,7 +7401,7 @@ public class Project extends JFrame
                                 else
                                     w.append(t, (new StringBuilder(String.valueOf(killer1.getMainName()))).append(" prepares to launch a devastating attack so that the battle can be finished after ").append(victim2.getMainName()).append(" escapes, even though ").append(victim1.getMainName()).append(" is in the way.").toString());
                             } else
-                            if(w.getRelationship(killer1.getNumber(), victim2.getNumber()) == -4 || victim2.isImpregnated().booleanValue() || victim2.isHypnotized().booleanValue() || victim2.isDrained().booleanValue() || victim2.isParasitized().booleanValue() || victim2.temptReq < 0x186a0L || victim2.resolve < 50)
+                            if(w.getRelationship(killer1.getNumber(), victim2.getNumber()) == -4 || victim2.isImpregnated().booleanValue() || victim2.isHypnotized().booleanValue() || victim2.isDrained().booleanValue() || victim2.isParasitized().booleanValue() || victim2.temptReq < 0x186a0L || victim2.dissociationReq < 10 || victim2.resolve < 50)
                             {
                                 if(duration1 > duration2)
                                     w.append(t, (new StringBuilder(String.valueOf(killer1.getMainName()))).append(" buys time for ").append(victim1.getMainName()).append(" to escape so that the two of them can work together to end this.").toString());
@@ -7398,7 +7417,7 @@ public class Project extends JFrame
                         } else
                         if(killer2 != null)
                         {
-                            if(victim1.isImpregnated().booleanValue() || victim1.isHypnotized().booleanValue() || victim1.isDrained().booleanValue() || victim1.isParasitized().booleanValue() || victim1.temptReq < 0x186a0L || victim1.resolve < 50)
+                            if(victim1.isImpregnated().booleanValue() || victim1.isHypnotized().booleanValue() || victim1.isDrained().booleanValue() || victim1.isParasitized().booleanValue() || victim1.temptReq < 0x186a0L || victim1.dissociationReq < 10 || victim1.resolve < 50)
                             {
                                 if(w.getTechs()[40].isOwned().booleanValue())
                                 {
@@ -7430,7 +7449,7 @@ public class Project extends JFrame
                             else
                                 w.append(t, (new StringBuilder(String.valueOf(victim1.getMainName()))).append("'s captivity is preventing the other Chosen from ending the battle, but ").append(killer1.getMainName()).append(" and ").append(killer2.getMainName()).append(" aren't willing to sacrifice ").append(victim1.hisHer()).append(" life just to finish things a little bit sooner.").toString());
                         } else
-                        if(w.getRelationship(killer1.getNumber(), victim1.getNumber()) == -4 || victim1.isImpregnated().booleanValue() || victim1.isHypnotized().booleanValue() || victim1.isDrained().booleanValue() || victim1.isParasitized().booleanValue() || victim1.temptReq < 0x186a0L || victim1.resolve < 50)
+                        if(w.getRelationship(killer1.getNumber(), victim1.getNumber()) == -4 || victim1.isImpregnated().booleanValue() || victim1.isHypnotized().booleanValue() || victim1.isDrained().booleanValue() || victim1.isParasitized().booleanValue() || victim1.temptReq < 0x186a0L || victim1.dissociationReq < 10 || victim1.resolve < 50)
                         {
                             if(w.getTechs()[40].isOwned().booleanValue() && !killer1.hesitated.booleanValue() && w.getRelationship(killer1.getNumber(), victim1.getNumber()) == 4)
                                 w.append(t, (new StringBuilder(String.valueOf(killer1.getMainName()))).append(" calls out to ").append(victim1.getMainName()).append(", urging ").append(victim1.himHer()).append(" to escape before ").append(victim1.heShe()).append(" gets caught up in ").append(killer1.getMainName()).append("'s final attack.").toString());
@@ -7559,9 +7578,20 @@ public class Project extends JFrame
                 if(w.finalBattle.booleanValue() && w.getCombatants()[i].resolve <= 0)
                     w.greenAppend(t, (new StringBuilder(String.valueOf(w.getCombatants()[i].getMainName()))).append(": Resolve Broken!").toString());
                 else
+                if(w.getCombatants()[i].dissociated.booleanValue())
+                {
+                    if(w.getCombatants()[0].dissociated.booleanValue() && w.getCombatants()[1].dissociated.booleanValue() && w.getCombatants()[2].dissociated.booleanValue())
+                        w.greenAppend(t, (new StringBuilder(String.valueOf(w.getCombatants()[i].getMainName()))).append(": Catatonic").toString());
+                    else
+                        w.greenAppend(t, (new StringBuilder(String.valueOf(w.getCombatants()[i].getMainName()))).append(": Fleeing").toString());
+                } else
                 if(w.getCombatants()[i].surroundPossible(w).booleanValue())
-                    w.purpleAppend(t, (new StringBuilder(String.valueOf(w.getCombatants()[i].getMainName()))).append(": Opening Level ").append(w.getCombatants()[i].getFEAROpening(w) + w.getCombatants()[i].getPAINOpening() + w.getCombatants()[i].getDISGOpening() + w.getCombatants()[i].getSHAMOpening(w)).append(" vs. Defense Level ").append(w.getCombatants()[i].getDefenseLevel()).toString());
-                else
+                {
+                    if(!w.dissociationSurroundPossible().booleanValue())
+                        w.purpleAppend(t, (new StringBuilder(String.valueOf(w.getCombatants()[i].getMainName()))).append(": Opening Level ").append(w.getCombatants()[i].getFEAROpening(w) + w.getCombatants()[i].getPAINOpening() + w.getCombatants()[i].getDISGOpening() + w.getCombatants()[i].getSHAMOpening(w)).append(" vs. Defense Level ").append(w.getCombatants()[i].getDefenseLevel()).toString());
+                    else
+                        w.purpleAppend(t, (new StringBuilder(String.valueOf(w.getCombatants()[i].getMainName()))).append(": Open to Surround").toString());
+                } else
                 if(w.getCombatants()[i].getDefenseLevel() > 9000)
                     w.append(t, (new StringBuilder(String.valueOf(w.getCombatants()[i].getMainName()))).append(": Flying Above Battlefield").toString());
                 else
@@ -7617,13 +7647,20 @@ public class Project extends JFrame
         int targets = 0;
         int targetFound = 0;
         int defeated = 0;
+        int dissociated = 0;
         int trapped = 0;
         for(int i = 0; i < 3; i++)
             if(w.getCombatants()[i] != null)
                 if(!w.finalBattle.booleanValue())
                 {
-                    targets++;
-                    targetFound = i;
+                    if(!w.getCombatants()[i].dissociated.booleanValue())
+                    {
+                        targets++;
+                        targetFound = i;
+                    } else
+                    {
+                        dissociated++;
+                    }
                 } else
                 if(w.getCombatants()[i].isCaptured().booleanValue() || w.getCombatants()[i].isSurrounded().booleanValue() && (w.getCombatants()[i].isDefiled().booleanValue() || w.getCombatants()[i].getHATELevel() < 3 && w.getCombatants()[i].getPLEALevel() < 3 && w.getCombatants()[i].getINJULevel() < 3 && w.getCombatants()[i].getEXPOLevel() < 3 && w.getCombatants()[i].grind.booleanValue() && w.getCombatants()[i].caress.booleanValue() && w.getCombatants()[i].pummel.booleanValue() && w.getCombatants()[i].humiliate.booleanValue()))
                     trapped++;
@@ -7653,20 +7690,23 @@ public class Project extends JFrame
             if(w.getCombatants()[1] == null)
                 w.append(t, (new StringBuilder("\n\n")).append(w.getCombatants()[0].getMainName()).append("'s allies haven't shown up yet!").toString());
             else
+            if(w.getCombatants()[0].dissociated.booleanValue())
+                w.append(t, "\n\nThe Chosen are too traumatized to notice anything done to them!");
+            else
                 w.append(t, "\n\nThe Chosen are struggling to escape the Demons' clutches!");
         } else
         {
             w.chatter(t);
             w.append(t, "\n\nWho will you target?");
         }
-        if(targets == 1 && (w.getCombatants()[1] == null || defeated == 2))
+        if(targets == 1 && (w.getCombatants()[1] == null || defeated == 2 || dissociated == 2))
         {
             PickAction(t, p, f, w, w.getCombatants()[targetFound], initiative);
         } else
         {
             p.removeAll();
             for(int i = 0; i < 3; i++)
-                if(w.getCombatants()[i] != null && (!w.finalBattle.booleanValue() || w.getCombatants()[i].resolve > 0 && w.getCombatants()[i].alive.booleanValue()))
+                if(w.getCombatants()[i] != null && (!w.finalBattle.booleanValue() || w.getCombatants()[i].resolve > 0 && w.getCombatants()[i].alive.booleanValue()) && !w.getCombatants()[i].dissociated.booleanValue())
                 {
                     int thisChosen = i;
                     class _cls1TargetButton extends AbstractAction
@@ -9008,6 +9048,8 @@ public class Project extends JFrame
                         {
                             ForceOrgasm.setBackground(YELLOWISH);
                         }
+                        if(c.dissociationReq < 10 && finalOrgasming != 2)
+                            ForceOrgasm.setBackground(REDDISH);
                         ForceOrgasm.setToolTipText((new StringBuilder("<html><center>Inflicts PLEA and ")).append(INJUname).append(" along with<br>DISG, ").append(PAINname).append(", SHAM, and FEAR<br>Causes tier-2 Innocence Break</center></html>").toString());
                         if(finalOrgasming == 1)
                             ForceOrgasm.setToolTipText((new StringBuilder("<html><center>Inflicts PLEA,")).append(INJUname).append(", and EXPO along with<br>DISG, ").append(PAINname).append(", SHAM, and FEAR<br>Causes tier-2 Innocence Break</center></html>").toString());
@@ -9108,6 +9150,8 @@ public class Project extends JFrame
                         {
                             Broadcast.setBackground(YELLOWISH);
                         }
+                        if(c.dissociationReq < 10 && finalBroadcasted != 2)
+                            Broadcast.setBackground(REDDISH);
                         Broadcast.setToolTipText((new StringBuilder("<html><center>Inflicts EXPO and HATE along with<br>SHAM, FEAR, DISG, and ")).append(PAINname).append("<br>Causes tier-2 Dignity Break</center></html>").toString());
                         if(finalBroadcasted == 1)
                             Broadcast.setToolTipText((new StringBuilder("<html><center>Inflicts EXPO, HATE, and PLEA along with<br>SHAM, FEAR, DISG, and ")).append(PAINname).append("<br>Causes tier-2 Dignity Break</center></html>").toString());
@@ -9543,6 +9587,8 @@ public class Project extends JFrame
                         {
                             ForceOrgasm.setBackground(YELLOWISH);
                         }
+                        if(c.dissociationReq < 10 && finalOrgasming != 2)
+                            ForceOrgasm.setBackground(REDDISH);
                         ForceOrgasm.setToolTipText((new StringBuilder("<html><center>Inflicts PLEA and ")).append(INJUname).append(" along with<br>DISG, ").append(PAINname).append(", SHAM, and FEAR<br>Causes tier-2 Innocence Break</center></html>").toString());
                         if(finalOrgasming == 1)
                             ForceOrgasm.setToolTipText((new StringBuilder("<html><center>Inflicts PLEA,")).append(INJUname).append(", and EXPO along with<br>DISG, ").append(PAINname).append(", SHAM, and FEAR<br>Causes tier-2 Innocence Break</center></html>").toString());
@@ -9643,6 +9689,8 @@ public class Project extends JFrame
                         {
                             Broadcast.setBackground(YELLOWISH);
                         }
+                        if(c.dissociationReq < 10 && finalBroadcasted != 2)
+                            Broadcast.setBackground(REDDISH);
                         Broadcast.setToolTipText((new StringBuilder("<html><center>Inflicts EXPO and HATE along with<br>SHAM, FEAR, DISG, and ")).append(PAINname).append("<br>Causes tier-2 Dignity Break</center></html>").toString());
                         if(finalBroadcasted == 1)
                             Broadcast.setToolTipText((new StringBuilder("<html><center>Inflicts EXPO, HATE, and PLEA along with<br>SHAM, FEAR, DISG, and ")).append(PAINname).append("<br>Causes tier-2 Dignity Break</center></html>").toString());
@@ -10165,6 +10213,8 @@ public class Project extends JFrame
                 {
                     ForceOrgasm.setBackground(YELLOWISH);
                 }
+                if(c.dissociationReq < 10 && orgasming != 2)
+                    ForceOrgasm.setBackground(REDDISH);
                 ForceOrgasm.setToolTipText((new StringBuilder("<html><center>Inflicts PLEA and ")).append(INJUname).append(" along with<br>DISG, ").append(PAINname).append(", SHAM, and FEAR<br>Causes tier-2 Innocence Break</center></html>").toString());
                 if(orgasming == 1)
                     ForceOrgasm.setToolTipText((new StringBuilder("<html><center>Inflicts PLEA,")).append(INJUname).append(", and EXPO along with<br>DISG, ").append(PAINname).append(", SHAM, and FEAR<br>Causes tier-2 Innocence Break</center></html>").toString());
@@ -10251,6 +10301,8 @@ public class Project extends JFrame
                 {
                     Broadcast.setBackground(YELLOWISH);
                 }
+                if(c.dissociationReq < 10 && broadcasted != 2)
+                    Broadcast.setBackground(REDDISH);
                 Broadcast.setToolTipText((new StringBuilder("<html><center>Inflicts EXPO and HATE along with<br>SHAM, FEAR, DISG, and ")).append(PAINname).append("<br>Causes tier-2 Dignity Break</center></html>").toString());
                 if(broadcasted == 1)
                     Broadcast.setToolTipText((new StringBuilder("<html><center>Inflicts EXPO, HATE, and PLEA along with<br>SHAM, FEAR, DISG, and ")).append(PAINname).append("<br>Causes tier-2 Dignity Break</center></html>").toString());
@@ -10758,16 +10810,20 @@ public class Project extends JFrame
             }
         }
         int defeated = 0;
+        int dissociated = 0;
         int targets = 0;
         for(int i = 0; i < 3; i++)
             if(w.getCombatants()[i] != null)
                 if(w.finalBattle.booleanValue() && (!w.getCombatants()[i].alive.booleanValue() || w.getCombatants()[i].resolve <= 0))
                     defeated++;
                 else
+                if(w.getCombatants()[i].dissociated.booleanValue())
+                    dissociated++;
+                else
                 if(!w.getCombatants()[i].isCaptured().booleanValue() && (!w.getCombatants()[i].isSurrounded().booleanValue() || !w.getCombatants()[i].isDefiled().booleanValue() && (w.getCombatants()[i].getHATELevel() >= 3 || w.getCombatants()[i].getPLEALevel() >= 3 || w.getCombatants()[i].getINJULevel() >= 3 || w.getCombatants()[i].getEXPOLevel() >= 3 || !w.getCombatants()[i].grind.booleanValue() || !w.getCombatants()[i].caress.booleanValue() || !w.getCombatants()[i].pummel.booleanValue() || !w.getCombatants()[i].humiliate.booleanValue())) && w.getCombatants()[i] != c)
                     targets++;
 
-        if(w.getCombatants()[1] != null && defeated < 2)
+        if(targets > 0)
         {
             class _cls1BackButton extends AbstractAction
             {
@@ -11114,6 +11170,8 @@ public class Project extends JFrame
         {
             endgame = Boolean.valueOf(false);
         }
+        if(w.finalBattle.booleanValue() && w.getCast()[2] != null && w.getCast()[0].dissociated.booleanValue() && w.getCast()[1].dissociated.booleanValue() && w.getCast()[2].dissociated.booleanValue())
+            endgame = Boolean.valueOf(true);
         if(endgame.booleanValue())
         {
             int captured = 0;
@@ -12815,6 +12873,38 @@ public class Project extends JFrame
                     }
                     w.distortionScene(t, broken, c, d, sceneType);
                 }
+            } else
+            if(sceneType == 17)
+            {
+                for(int i = 0; i < 3; i++)
+                    if(w.getCast()[i].dissociationReq < 10 && !w.getCast()[i].pastDissociated.booleanValue() && (w.getCast()[i].innocence > 66 || w.getCast()[i].dignity > 66))
+                        broken = w.getCast()[i];
+
+                if(broken == null)
+                {
+                    w.append(t, "One of the Chosen began to fall into despair over being forced into sexual situations while having no say in the matter, but managed to find a way to take ownership of what was happening in the end.");
+                    w.discardBreak();
+                } else
+                {
+                    if(broken.innocence > 66)
+                    {
+                        for(int i = 0; i < 3; i++)
+                            if(w.getCast()[i].innocence < 34)
+                                c = w.getCast()[i];
+
+                    }
+                    if(broken.dignity > 66)
+                    {
+                        for(int i = 0; i < 3; i++)
+                            if(w.getCast()[i].dignity < 34)
+                                if(c == null)
+                                    c = w.getCast()[i];
+                                else
+                                    d = w.getCast()[i];
+
+                    }
+                    w.distortionScene(t, broken, c, d, sceneType);
+                }
             }
         }
         if(w.getBreaks().length > 0)
@@ -12855,8 +12945,12 @@ public class Project extends JFrame
     public static void Downtime(final JTextPane t, final JPanel p, final JFrame f, final WorldState w)
     {
         for(int i = 0; i < 3; i++)
-            if(w.getCast()[i] != null && w.getCast()[i].temptReq < 0x186a0L)
-                w.getCast()[i].pastTempted = Boolean.valueOf(true);
+            if(w.getCast()[i] != null)
+                if(w.getCast()[i].temptReq < 0x186a0L)
+                    w.getCast()[i].pastTempted = Boolean.valueOf(true);
+                else
+                if(w.getCast()[i].dissociationReq < 10)
+                    w.getCast()[i].pastDissociated = Boolean.valueOf(true);
 
         Forsaken exhaustedTest[] = new Forsaken[0];
         if(w.usedForsaken != null)
@@ -12875,7 +12969,7 @@ public class Project extends JFrame
         w.incrementDay();
         w.clearCommander();
         int lastChosen = 0;
-        int totalActions = 22;
+        int totalActions = 23;
         Long actionWeights[][] = new Long[3][totalActions];
         final int chosenAction[] = {
             -1, -1, -1
@@ -13016,7 +13110,18 @@ public class Project extends JFrame
             {
                 actionWeights[i][21] = Long.valueOf(0L);
             }
+            if(w.getCast()[i].dissociated.booleanValue() && w.getCast()[i].dissociationReq < 10)
+            {
+                for(int j = 0; j < 22; j++)
+                    actionWeights[i][j] = Long.valueOf(0L);
+
+                actionWeights[i][22] = Long.valueOf(1000L);
+            } else
+            {
+                actionWeights[i][22] = Long.valueOf(0L);
+            }
             w.getCast()[i].betraying = Boolean.valueOf(false);
+            w.getCast()[i].dissociated = Boolean.valueOf(false);
             long highestWeight = 0L;
             for(int j = 0; j < actionWeights[i].length; j++)
                 if(actionWeights[i][j].compareTo(Long.valueOf(highestWeight)) > 0)
@@ -13550,18 +13655,18 @@ public class Project extends JFrame
             ReadObject robj = new ReadObject();
             w.save = robj.deserializeSaveData((new StringBuilder(String.valueOf(path))).append(File.separator).append("saves.sav").toString());
             if(w.save.sceneText == null)
-                w.save.organizeScenes(48);
+                w.save.organizeScenes(49);
             else
-            if(w.save.sceneText.length < 48)
-                w.save.organizeScenes(48);
+            if(w.save.sceneText.length < 49)
+                w.save.organizeScenes(49);
         } else
         {
             w.save = new SaveData();
             if(w.save.sceneText == null)
-                w.save.organizeScenes(48);
+                w.save.organizeScenes(49);
             else
-            if(w.save.sceneText.length < 48)
-                w.save.organizeScenes(48);
+            if(w.save.sceneText.length < 49)
+                w.save.organizeScenes(49);
         }
         if(w.save.harem == null)
             w.save.harem = new Forsaken[0];
@@ -14358,6 +14463,7 @@ public class Project extends JFrame
                 w.nextCities[i].returning = w.returning;
                 w.nextCities[i].deceased = w.deceased;
                 w.nextCities[i].formerChosen = w.formerChosen;
+                w.nextCities[i].campaignCustom = w.campaignCustom;
                 if(i == 1 && !w.earlyCheat.booleanValue())
                 {
                     int differences = 0;
@@ -14619,31 +14725,37 @@ public class Project extends JFrame
                     {
                         w.append(t, "   [");
                     }
-                    if(w.getCast()[i].isLustful())
-                        w.append(t, "X");
-                    else
-                        w.append(t, " ");
-                    w.append(t, "][");
-                    if(!w.getCast()[i].isCVirg())
-                        w.append(t, "X");
-                    else
-                        w.append(t, " ");
-                    w.append(t, "][");
-                    if(w.getCast()[i].timesFantasized() > 0)
-                        w.append(t, "X");
-                    else
-                    if(w.getCast()[i].usingFantasize.booleanValue())
-                        w.append(t, "/");
-                    else
-                        w.append(t, " ");
-                    w.append(t, "][");
-                    if(w.getCast()[i].isHypnotized().booleanValue())
-                        w.append(t, "X");
-                    else
-                    if(w.getCast()[i].getHypnosisEffectiveness() >= w.getCast()[i].hypnosisReq())
-                        w.append(t, "/");
-                    else
-                        w.append(t, " ");
+                    if(w.getCast()[i].dissociationReq == 10)
+                    {
+                        if(w.getCast()[i].isLustful())
+                            w.append(t, "X");
+                        else
+                            w.append(t, " ");
+                        w.append(t, "][");
+                        if(!w.getCast()[i].isCVirg())
+                            w.append(t, "X");
+                        else
+                            w.append(t, " ");
+                        w.append(t, "][");
+                        if(w.getCast()[i].timesFantasized() > 0)
+                            w.append(t, "X");
+                        else
+                        if(w.getCast()[i].usingFantasize.booleanValue())
+                            w.append(t, "/");
+                        else
+                            w.append(t, " ");
+                        w.append(t, "][");
+                        if(w.getCast()[i].isHypnotized().booleanValue())
+                            w.append(t, "X");
+                        else
+                        if(w.getCast()[i].getHypnosisEffectiveness() >= w.getCast()[i].hypnosisReq())
+                            w.append(t, "/");
+                        else
+                            w.append(t, " ");
+                    } else
+                    {
+                        w.append(t, "~][~][~][~");
+                    }
                     w.append(t, "]");
                     if(w.getCast()[i].getHypnosisEffectiveness() > 100)
                     {
@@ -14720,26 +14832,32 @@ public class Project extends JFrame
                     else
                         w.append(t, " ");
                     w.append(t, "][");
-                    if(!w.getCast()[i].isModest())
-                        w.append(t, "X");
-                    else
-                        w.append(t, " ");
-                    w.append(t, "][");
-                    if(w.getCast()[i].timesStripped() > 0)
-                        w.append(t, "X");
-                    else
-                    if(w.getCast()[i].usingStrip.booleanValue())
-                        w.append(t, "/");
-                    else
-                        w.append(t, " ");
-                    w.append(t, "][");
-                    if(w.getCast()[i].isParasitized().booleanValue())
-                        w.append(t, "X");
-                    else
-                    if(w.getCast()[i].getParasitismEffectiveness() >= w.getCast()[i].parasitismReq())
-                        w.append(t, "/");
-                    else
-                        w.append(t, " ");
+                    if(w.getCast()[i].dissociationReq == 10)
+                    {
+                        if(!w.getCast()[i].isModest())
+                            w.append(t, "X");
+                        else
+                            w.append(t, " ");
+                        w.append(t, "][");
+                        if(w.getCast()[i].timesStripped() > 0)
+                            w.append(t, "X");
+                        else
+                        if(w.getCast()[i].usingStrip.booleanValue())
+                            w.append(t, "/");
+                        else
+                            w.append(t, " ");
+                        w.append(t, "][");
+                        if(w.getCast()[i].isParasitized().booleanValue())
+                            w.append(t, "X");
+                        else
+                        if(w.getCast()[i].getParasitismEffectiveness() >= w.getCast()[i].parasitismReq())
+                            w.append(t, "/");
+                        else
+                            w.append(t, " ");
+                    } else
+                    {
+                        w.append(t, "~][~][~");
+                    }
                     w.append(t, "]");
                     if(w.getCast()[i].getParasitismEffectiveness() > 100)
                     {
@@ -15104,7 +15222,7 @@ public class Project extends JFrame
             } else
             if(i == 5)
             {
-                w.underlineAppend(t, "Temptation Specialty");
+                w.underlineAppend(t, "Tempting");
                 description = (new StringBuilder(String.valueOf(description))).append("Chosen Tempted: ").append(w.achievementHeld(i)[1]).append("\n").toString();
                 description = (new StringBuilder(String.valueOf(description))).append("Level: ").append(w.achievementHeld(i)[0]).toString();
                 if(w.achievementHeld(i)[0] == 0)
@@ -15126,6 +15244,28 @@ public class Project extends JFrame
                 description = (new StringBuilder(String.valueOf(description))).append("\nThe Chosen are carefully guided by their handlers and by society at large so that they don't even consider the possibility of turning to the side of the Demons.  But the more they see other Chosen being treated kindly by the Thralls, the more willing they'll be to think of you as a potential ally.").toString();
             } else
             if(i == 6)
+            {
+                w.underlineAppend(t, "Mindbreaker");
+                description = (new StringBuilder(String.valueOf(description))).append("Chosen with Aversion").toString();
+                description = (new StringBuilder(String.valueOf(description))).append("Level: ").append(w.achievementHeld(i)[0]).toString();
+                if(w.achievementHeld(i)[0] == 0)
+                    description = (new StringBuilder(String.valueOf(description))).append(" (Next: 2 with Aversion)\nBonus: N/A").toString();
+                else
+                if(w.achievementHeld(i)[0] == 1)
+                    description = (new StringBuilder(String.valueOf(description))).append(" (Next: 5 with Aversion)\nBonus: Aversion requirement decreases 2 rounds per use").toString();
+                else
+                if(w.achievementHeld(i)[0] == 2)
+                    description = (new StringBuilder(String.valueOf(description))).append(" (Next: 12 with Aversion)\nBonus: Aversion requirement decreases 3 rounds per use").toString();
+                else
+                if(w.achievementHeld(i)[0] == 3)
+                    description = (new StringBuilder(String.valueOf(description))).append(" (Next: 30 with Aversion)\nBonus: Aversion requirement decreases 4 rounds per use").toString();
+                else
+                if(w.achievementHeld(i)[0] == 4)
+                    description = (new StringBuilder(String.valueOf(description))).append(" (Next: 80 with Aversion)\nBonus: Aversion requirement decreases 5 rounds per use").toString();
+                else
+                    description = (new StringBuilder(String.valueOf(description))).append("\nBonus: Aversion requirement decreases 6 rounds per use").toString();
+            } else
+            if(i == 7)
             {
                 w.underlineAppend(t, "Heroine Hunter");
                 description = (new StringBuilder(String.valueOf(description))).append("Superior Chosen Broken: ").append(w.achievementHeld(i)[1]).append("\n").toString();
@@ -15615,40 +15755,46 @@ public class Project extends JFrame
         } else
         if(function.equals("export"))
         {
-            WorldState newWorld = new WorldState();
-            newWorld.copyInitial(w);
-            Chosen newChosen = new Chosen();
-            newChosen.setNumber(0);
-            newChosen.generate(newWorld);
-            newWorld.addChosen(newChosen);
-            String newSaveName = JOptionPane.showInputDialog("What would you like to name the exported file?");
-            Boolean blankName = Boolean.valueOf(false);
-            if(newSaveName == null)
-                blankName = Boolean.valueOf(true);
-            else
-            if(newSaveName.length() == 0)
-                blankName = Boolean.valueOf(true);
-            if(blankName.booleanValue())
+            if(w.campaign.booleanValue())
             {
-                DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-                Date date = new Date();
-                newSaveName = (new StringBuilder("Team of ")).append(dateFormat.format(date)).toString();
-            }
-            String editedName = "";
-            for(int i = 0; i < newSaveName.length(); i++)
-                if(newSaveName.charAt(i) == '/' || newSaveName.charAt(i) == ':')
-                    editedName = (new StringBuilder(String.valueOf(editedName))).append("-").toString();
+                WorldState newWorld = new WorldState();
+                newWorld.copyInitial(w);
+                Chosen newChosen = new Chosen();
+                newChosen.setNumber(0);
+                newChosen.generate(newWorld);
+                newWorld.addChosen(newChosen);
+                String newSaveName = JOptionPane.showInputDialog("What would you like to name the exported file?");
+                Boolean blankName = Boolean.valueOf(false);
+                if(newSaveName == null)
+                    blankName = Boolean.valueOf(true);
                 else
-                    editedName = (new StringBuilder(String.valueOf(editedName))).append(newSaveName.charAt(i)).toString();
+                if(newSaveName.length() == 0)
+                    blankName = Boolean.valueOf(true);
+                if(blankName.booleanValue())
+                {
+                    DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                    Date date = new Date();
+                    newSaveName = (new StringBuilder("Team of ")).append(dateFormat.format(date)).toString();
+                }
+                String editedName = "";
+                for(int i = 0; i < newSaveName.length(); i++)
+                    if(newSaveName.charAt(i) == '/' || newSaveName.charAt(i) == ':')
+                        editedName = (new StringBuilder(String.valueOf(editedName))).append("-").toString();
+                    else
+                        editedName = (new StringBuilder(String.valueOf(editedName))).append(newSaveName.charAt(i)).toString();
 
-            if(w.getHighScore() > 0L)
-                newWorld.setParScore(w.getHighScore());
-            if(w.getParScore() > newWorld.getParScore())
-                newWorld.setParScore(w.getParScore());
-            newWorld.copySettings(t, w);
-            newWorld.copyToggles(w);
-            wobj.exportFile(newWorld, editedName);
-            w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\nDay 1 start against this team saved to '").append(editedName).append(".par'.").toString());
+                if(w.getHighScore() > 0L)
+                    newWorld.setParScore(w.getHighScore());
+                if(w.getParScore() > newWorld.getParScore())
+                    newWorld.setParScore(w.getParScore());
+                newWorld.copySettings(t, w);
+                newWorld.copyToggles(w);
+                wobj.exportFile(newWorld, editedName);
+                w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\nDay 1 start against this team saved to '").append(editedName).append(".par'.").toString());
+            } else
+            {
+                w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\nUnable to export campaign save.").toString());
+            }
         } else
         if(function.equals("import"))
         {
@@ -19410,16 +19556,20 @@ public class Project extends JFrame
                         {
                             Forsaken newOthers[] = new Forsaken[w.getHarem()[i].others.length + 1];
                             int newTroublemaker[] = new int[w.getHarem()[i].troublemaker.length + 1];
+                            Forsaken.Relationship newRelations[] = new Forsaken.Relationship[w.getHarem()[i].forsakenRelations.length + 1];
                             for(int j = 0; j < w.getHarem()[i].others.length; j++)
                             {
                                 newOthers[j] = w.getHarem()[i].others[j];
                                 newTroublemaker[j] = w.getHarem()[i].troublemaker[j];
+                                newRelations[j] = w.getHarem()[i].forsakenRelations[j];
                             }
 
                             newOthers[newOthers.length - 1] = tantruming;
                             newTroublemaker[newTroublemaker.length - 1] = offense;
+                            newRelations[newRelations.length - 1] = null;
                             w.getHarem()[i].others = newOthers;
                             w.getHarem()[i].troublemaker = newTroublemaker;
+                            w.getHarem()[i].forsakenRelations = newRelations;
                         }
                     } else
                     {
@@ -19427,6 +19577,7 @@ public class Project extends JFrame
                             tantruming
                         });
                         w.getHarem()[i].troublemaker = new int[offense];
+                        w.getHarem()[i].forsakenRelations = new Forsaken.Relationship[1];
                     }
                 }
 
@@ -19853,8 +20004,8 @@ public class Project extends JFrame
     static final long trillion = 0xe8d4a51000L;
     static final long quadrillion = 0x38d7ea4c68000L;
     static final long quintillion = 0xde0b6b3a7640000L;
-    static final int scenesThisVersion = 48;
-    static final int vignettesThisVersion = 15;
+    static final int scenesThisVersion = 49;
+    static final int vignettesThisVersion = 16;
     public static JFrame window = new JFrame("Project");
     public static Container nestedcp = new Container();
     public static Container portraits;
