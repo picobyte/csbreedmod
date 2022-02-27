@@ -18338,7 +18338,17 @@ public class WorldState
                     }
             }
 
-        if((c.surroundDuration >= c.dissociationReq || c.dissociated.booleanValue()) && c.cVirg.booleanValue() && c.modest.booleanValue() && c.timesFantasized() == 0 && c.timesStripped() == 0 && (c.dissociationReq < 10 || !finalBattle.booleanValue()))
+        int seenDuration = c.surroundDuration;
+        for(int i = 0; i < 3; i++)
+            if(w.getCast()[i].confidence > c.confidence)
+            {
+                if(seenDuration > w.getCast()[i].surroundDuration + 1)
+                    seenDuration = w.getCast()[i].surroundDuration + 1;
+            } else
+            if(w.getCast()[i].confidence < c.confidence && seenDuration > w.getCast()[i].surroundDuration)
+                seenDuration = w.getCast()[i].surroundDuration;
+
+        if((seenDuration >= c.dissociationReq || c.dissociated.booleanValue()) && !c.lustful && c.cVirg.booleanValue() && c.modest.booleanValue() && c.timesFantasized() == 0 && c.timesStripped() == 0 && (c.dissociationReq < 10 || !finalBattle.booleanValue()))
             Dissociate(t, p, f, c, variant, solo, trio, loved, partner, lover);
         else
         if(c.confidence > 66)
@@ -22073,6 +22083,7 @@ public class WorldState
             adjusted = Boolean.valueOf(true);
         }
         for(int i = 0; i < getHarem().length; i++)
+        {
             if(getHarem()[i].others.length > getHarem()[i].forsakenRelations.length)
             {
                 Forsaken newOthers[] = new Forsaken[getHarem()[i].forsakenRelations.length];
@@ -22081,6 +22092,21 @@ public class WorldState
 
                 getHarem()[i].others = newOthers;
             }
+            if(getHarem()[i].others.length > getHarem()[i].troublemaker.length)
+            {
+                Forsaken newOthers[] = new Forsaken[getHarem()[i].troublemaker.length];
+                for(int j = 0; j < newOthers.length; j++)
+                    newOthers[j] = getHarem()[i].others[j];
+
+                getHarem()[i].others = newOthers;
+            }
+            if(getHarem()[i].demonLord == null)
+            {
+                getHarem()[i].rememberedDemonLordBody = new Body();
+                getHarem()[i].pickEpithet();
+                getHarem()[i].titled = Boolean.valueOf(false);
+            }
+        }
 
         if(getCast()[0] != null && getCast()[0].dissociated == null)
         {
@@ -34579,6 +34605,8 @@ public class WorldState
         loopComplete = Boolean.valueOf(false);
         achievementSeen = new int[8];
         types = new Chosen.Species[3];
+        sceneParticipants = new Body[0];
+        sceneDuration = 0;
     }
 
     private static final long serialVersionUID = 4L;
@@ -34742,4 +34770,9 @@ public class WorldState
     WorldState nextCities[];
     int achievementSeen[];
     Chosen.Species types[];
+    Body lordBody;
+    Body targetBody;
+    public Body sceneParticipants[];
+    int sceneDuration;
+    Activity.Location sceneLocation;
 }
