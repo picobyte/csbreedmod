@@ -8865,7 +8865,7 @@ public class WorldState
             append(t, "\n\n");
         }
         c.say(t, "\"");
-        if(!c.betraying.booleanValue() && c.temptReq == 0x15f90L)
+        if(!c.betraying.booleanValue() && !c.pastTempted.booleanValue())
         {
             Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.SHAME);
             if(c.morality > 66)
@@ -22082,7 +22082,7 @@ public class WorldState
                 getHarem()[i].others = newOthers;
             }
 
-        if(getCast()[0].dissociated == null)
+        if(getCast()[0] != null && getCast()[0].dissociated == null)
         {
             for(int i = 0; i < 3; i++)
                 if(getCast()[i] != null)
@@ -25441,10 +25441,13 @@ public class WorldState
                     Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.FOCUS, Project.Emotion.ANGER);
                     if(nextSpeaker.getInnocence() > 66)
                     {
-                        if(target.getGender().equals("male"))
-                            nextSpeaker.say(t, (new StringBuilder("Silly Thralls, ")).append(target.getMainName()).append(" can't be a mommy!").toString());
+                        if(target.impregnated.booleanValue())
+                            nextSpeaker.say(t, (new StringBuilder("Silly Thralls, ")).append(target.mainName).append(" is already pregnant!").toString());
                         else
-                            nextSpeaker.say(t, (new StringBuilder("Is ")).append(target.getMainName()).append(" gonna become a mommy?").toString());
+                        if(target.getGender().equals("male"))
+                            nextSpeaker.say(t, (new StringBuilder("Silly Thralls, you can't get ")).append(target.getMainName()).append(" pregnant!").toString());
+                        else
+                            nextSpeaker.say(t, (new StringBuilder("Is ")).append(target.getMainName()).append(" gonna get pregnant?").toString());
                     } else
                     if(nextSpeaker.getInnocence() > 33)
                         nextSpeaker.say(t, (new StringBuilder("Are you seriously having sex in the middle of battle, ")).append(target.getMainName()).append("?").toString());
@@ -25612,6 +25615,8 @@ public class WorldState
 
     public void setCaptureTarget(Chosen target)
     {
+        if(usedForsaken != null)
+            usedForsaken.defiling = Boolean.valueOf(false);
         nextCapture = target;
     }
 
@@ -26748,7 +26753,10 @@ public class WorldState
         currentCombatants = c;
         Project.changePortrait(c[0].convertGender(), c[0].type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), 0, Project.Emotion.NEUTRAL, Project.Emotion.FOCUS);
         if(usedForsaken != null)
+        {
+            usedForsaken.defiling = Boolean.valueOf(false);
             usedForsaken.injured = 0;
+        }
         battleRound = 1;
         evacuationProgress = 0;
         evacuationComplete = 100;
@@ -27609,6 +27617,7 @@ public class WorldState
                                 c.bonusINJU = Boolean.valueOf(true);
                             if(c.dignity > 66)
                                 c.bonusEXPO = Boolean.valueOf(true);
+                            c.globalID = save.assignChosenID();
                             loopChosen[i] = c;
                         }
                     }
