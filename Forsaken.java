@@ -3098,7 +3098,7 @@ public class Forsaken implements Serializable {
 		}
 	}
 	
-	public void trainingMenu(JTextPane t, JPanel p, JFrame f, WorldState w, SaveData s, Boolean[] currentTraining, int page, Boolean consenting) {
+	public void trainingMenu(final JTextPane t, final JPanel p, final JFrame f, final WorldState w, final SaveData s, final Boolean[] currentTraining, final int page, final Boolean consenting) {
 		p.removeAll();
 		int currentHostility = 0;
 		int currentDeviancy = 0;
@@ -3110,9 +3110,9 @@ public class Forsaken implements Serializable {
 		int obedienceCount = 0;
 		int disgraceCount = 0;
 		int[][] trainingIntensities = new int[currentTraining.length][4];
-		int[] trainingStaminas = new int[currentTraining.length];
-		int[] trainingMotivations = new int[currentTraining.length];
-		long[] trainingExpertises = new long[currentTraining.length];
+		final int[] trainingStaminas = new int[currentTraining.length];
+		final int[] trainingMotivations = new int[currentTraining.length];
+		final long[] trainingExpertises = new long[currentTraining.length];
 		Boolean[] bonus = new Boolean[currentTraining.length];
 		Boolean[] penalty = new Boolean[currentTraining.length];
 		for (int i = 0; i < currentTraining.length; i++) {
@@ -3440,8 +3440,8 @@ public class Forsaken implements Serializable {
 			p.add(Previous);
 		}
 		for (int i = 0; i < 6; i++) {
-			int trainingType = page*6 + i;
-			int[] threatenedIntensity = new int[4];
+			final int trainingType = page*6 + i;
+			final int[] threatenedIntensity = new int[4];
 			if (currentTraining[trainingType] == false) {
 				Boolean reqsMet = trainingType < 6 || w.active == false;
 				if ((trainingType == 6 || trainingType == 7 || trainingType == 8) && w.getTechs()[10].isOwned()) {
@@ -3600,7 +3600,7 @@ public class Forsaken implements Serializable {
 		}
 		if (types == 0) {
 			JButton Back = new JButton("Back");
-			Forsaken x = this;
+			final Forsaken x = this;
 			Back.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					WriteObject wobj = new WriteObject();
@@ -3643,7 +3643,7 @@ public class Forsaken implements Serializable {
 		p.repaint();
 	}
 	
-	public void trainingDescription(JTextPane t, JPanel p, JFrame f, WorldState w, SaveData s, Boolean[] currentTraining, int nextTraining, int[] threatenedIntensity, Boolean consenting, int lostStamina, int gainedMotivation, long gainedExpertise) {
+	public void trainingDescription(final JTextPane t, final JPanel p, final JFrame f, final WorldState w, final SaveData s, final Boolean[] currentTraining, final int nextTraining, int[] threatenedIntensity, final Boolean consenting, final int lostStamina, final int gainedMotivation, final long gainedExpertise) {
 		p.removeAll();
 		w.append(t, "\n\n" + w.getSeparator() + "\n\n");
 		Boolean firstTraining = true;
@@ -7154,7 +7154,7 @@ public class Forsaken implements Serializable {
 			}
 		}
 		say(t, "\"");
-		int[] increases = new int[]{0, 0, 0, 0};
+		final int[] increases = new int[]{0, 0, 0, 0};
 		if (consenting == false || lacksConsent == false || consentBlock == false) {
 			w.append(t, "\n\nCorruption Increase:");
 			for (int i = 0; i < 4; i++) {
@@ -7226,7 +7226,7 @@ public class Forsaken implements Serializable {
 		}
 		if (consenting == false || consentBlock == false || lacksConsent == false) {
 			JButton Proceed = new JButton("Proceed");
-			Boolean nowConsenting = consenting && lacksConsent == false;
+			final Boolean nowConsenting = consenting && lacksConsent == false;
 			Proceed.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					hostility += increases[0];
@@ -7266,7 +7266,7 @@ public class Forsaken implements Serializable {
 		p.repaint();
 	}
 	
-	public void executeTraining(JTextPane t, JPanel p, JFrame f, WorldState w, SaveData s, Boolean[] currentTraining, int nextTraining, Boolean consenting, long gainedExpertise) {
+	public void executeTraining(final JTextPane t, final JPanel p, final JFrame f, final WorldState w, final SaveData s, final Boolean[] currentTraining, int nextTraining, final Boolean consenting, long gainedExpertise) {
 		p.removeAll();
 		w.append(t, "\n\n" + w.getSeparator() + "\n\n");
 		Boolean tied = currentTraining[5];

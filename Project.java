@@ -382,7 +382,7 @@ public class Project extends JFrame {
 		}
 	}
 	
-	public static void IntroOne (JTextPane t, JPanel p, JFrame f, WorldState w) {
+	public static void IntroOne (final JTextPane t, final JPanel p, final JFrame f, final WorldState w) {
 		w.setGenders(w.getGenderBalance());
 		p.getInputMap().clear();
 		p.getActionMap().clear();
@@ -692,7 +692,7 @@ public class Project extends JFrame {
 		w.append(t, "\n\nPassage separator:\n" + w.getSeparator());
 	}
 	
-	public static void OptionsMenu(JTextPane t, JPanel p, JFrame f, WorldState w, Boolean earlyCheatVisible) {
+	public static void OptionsMenu(final JTextPane t, final JPanel p, final JFrame f, final WorldState w, Boolean earlyCheatVisible) {
 		p.removeAll();
 		if (earlyCheatVisible == null) {
 			String path = Project.class.getProtectionDomain().getCodeSource().getLocation().getPath();
@@ -870,7 +870,7 @@ public class Project extends JFrame {
 		p.repaint();
 	}
 	
-	public static void GenderMenu (JTextPane t, JPanel p, JFrame f, WorldState w, Boolean earlyCheatVisible) {
+	public static void GenderMenu (final JTextPane t, final JPanel p, final JFrame f, final WorldState w, final Boolean earlyCheatVisible) {
 		p.removeAll();
 		p.getInputMap().clear();
 		p.getActionMap().clear();
@@ -973,7 +973,7 @@ public class Project extends JFrame {
 		p.repaint();
 	}
 	
-	public static void ContentMenu(JTextPane t, JPanel p, JFrame f, WorldState w, Boolean earlyCheatVisible) {
+	public static void ContentMenu(final JTextPane t, final JPanel p, final JFrame f, final WorldState w, final Boolean earlyCheatVisible) {
 		p.removeAll();
 		p.getInputMap().clear();
 		p.getActionMap().clear();
@@ -1034,7 +1034,7 @@ public class Project extends JFrame {
 		p.repaint();
 	}
 	
-	public static void ForsakenMenu(JTextPane t, JPanel p, JFrame f, WorldState w, SaveData s, int page) {
+	public static void ForsakenMenu(final JTextPane t, final JPanel p, final JFrame f, final WorldState w, final SaveData s, final int page) {
 		p.removeAll();
 		if (page == 0) {
 			if (w.active) {
@@ -1069,7 +1069,7 @@ public class Project extends JFrame {
 		for (int i = 0; i < 5; i++) {
 			if (w.getHarem() != null) {
 				if (w.getHarem().length > i + page*5) {
-					Forsaken subject = w.getHarem()[i+(page*5)];
+					final Forsaken subject = w.getHarem()[i+(page*5)];
 					subject.textSize = w.textSize;
 					JButton ThisOne = new JButton(subject.mainName);
 					ThisOne.addActionListener(new ActionListener() {
@@ -1200,7 +1200,7 @@ public class Project extends JFrame {
 		p.repaint();
 	}
 	
-	public static void ForsakenChoice(JTextPane t, JPanel p, JFrame f, WorldState w, SaveData s, int page) {
+	public static void ForsakenChoice(final JTextPane t, final JPanel p, final JFrame f, final WorldState w, final SaveData s, final int page) {
 		p.removeAll();
 		if (page == 0) {
 			if (w.active) {
@@ -1246,7 +1246,7 @@ public class Project extends JFrame {
 					w.append(t, "N/A");
 				}
 				JButton Choice = new JButton(w.getHarem()[i].mainName);
-				Forsaken Spent = w.getHarem()[i];
+				final Forsaken Spent = w.getHarem()[i];
 				final int index = i;
 				Choice.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -1336,7 +1336,7 @@ public class Project extends JFrame {
 		p.repaint();
 	}
 	
-	public static void ForsakenInteraction(JTextPane t, JPanel p, JFrame f, WorldState w, SaveData s, Forsaken x) {
+	public static void ForsakenInteraction(final JTextPane t, final JPanel p, final JFrame f, final WorldState w, final SaveData s, final Forsaken x) {
 		p.removeAll();
 		clearPortraits();
 		String[] nameDisplay = new String[5];
@@ -1527,7 +1527,7 @@ public class Project extends JFrame {
 			}
 		});
 		//p.add(Life);
-		WriteObject wobj = new WriteObject();
+		final WriteObject wobj = new WriteObject();
 		JButton Others = new JButton("Other Forsaken");
 		Others.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -1563,8 +1563,8 @@ public class Project extends JFrame {
 				thirdColor = Integer.parseInt(JOptionPane.showInputDialog("Enter a value for blue (0-255)."));
 				if (firstColor >= 0 && firstColor <= 255 && secondColor >= 0 && secondColor <= 255 && thirdColor >= 0 && thirdColor <= 255) {
 					p.removeAll();
-					Color firstStorage = x.textColor;
-					Color secondStorage = x.darkColor;
+					final Color firstStorage = x.textColor;
+					final Color secondStorage = x.darkColor;
 					x.textColor = new Color(firstColor, secondColor, thirdColor);
 					x.darkColor = new Color(firstColor, secondColor, thirdColor);
 					w.append(t, "\n\n" + w.getSeparator() + "\n\n");
@@ -1719,7 +1719,7 @@ public class Project extends JFrame {
 		w.append(t, "\n\nWhich type of scene would you like to view?");
 	}
 	
-	public static void SceneViewer (JTextPane t, JPanel p, JFrame f, WorldState w, SaveData s, int starting) {
+	public static void SceneViewer (final JTextPane t, final JPanel p, final JFrame f, final WorldState w, final SaveData s, final int starting) {
 		p.removeAll();
 		int found = 0;
 		int highest = 0;
@@ -1730,7 +1730,7 @@ public class Project extends JFrame {
 			}
 		}
 		if (found > 0) {
-			int newStartPoint = highest;
+			final int newStartPoint = highest;
 			JButton Previous = new JButton("<");
 			Previous.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -1822,7 +1822,7 @@ public class Project extends JFrame {
 					sceneName = "Relief Through Abuse";
 				}
 				JButton PickScene = new JButton(sceneName);
-				int sceneType = i;
+				final int sceneType = i;
 				PickScene.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						SceneChoice(t, p, f, w, s, sceneType, starting, 0);
@@ -1834,7 +1834,7 @@ public class Project extends JFrame {
 		for (int i = highest+1; i < s.sceneText.length; i++) {
 			if (s.sceneText[i].length > 0) {
 				JButton Next = new JButton(">");
-				int newStartPoint = i;
+				final int newStartPoint = i;
 				Next.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						SceneViewer(t, p, f, w, s, newStartPoint);
@@ -1856,7 +1856,7 @@ public class Project extends JFrame {
 		p.repaint();
 	}
 	
-	public static void SceneChoice(JTextPane t, JPanel p, JFrame f, WorldState w, SaveData s, int type, int starting, int page) {
+	public static void SceneChoice(final JTextPane t, final JPanel p, final JFrame f, final WorldState w, final SaveData s, final int type, final int starting, final int page) {
 		p.removeAll();
 		w.append(t, "\n\n" + w.getSeparator() + "\n\nWhose scene would you like to replay?\n");
 		if (page > 0) {
@@ -1875,7 +1875,7 @@ public class Project extends JFrame {
 		for (int i = page; i < page+5 && i < s.sceneText[type].length; i++) {
 			w.append(t, "\n" + s.sceneButtons[type][i] + ": " + s.sceneSummaries[type][i]);
 			JButton PickScene = new JButton(s.sceneButtons[type][i]);
-			int sceneID = i;
+			final int sceneID = i;
 			PickScene.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					ReplayScene(t, p, f, w, s, type, starting, page, sceneID);
@@ -1904,7 +1904,7 @@ public class Project extends JFrame {
 		p.repaint();
 	}
 	
-	public static void ReplayScene(JTextPane t, JPanel p, JFrame f, WorldState w, SaveData s, int type, int starting, int page, int entry) {
+	public static void ReplayScene(final JTextPane t, final JPanel p, final JFrame f, final WorldState w, final SaveData s, final int type, final int starting, final int page, final int entry) {
 		p.removeAll();
 		w.append(t, "\n\n" + w.getSeparator() + "\n\n");
 		String[] shownFaces = new String[5];
@@ -2048,7 +2048,7 @@ public class Project extends JFrame {
 		PickTarget(t, p, f, w);
 	}
 	
-	public static void PickTarget (JTextPane t, JPanel p, JFrame f, WorldState w) {
+	public static void PickTarget (final JTextPane t, final JPanel p, final JFrame f, final WorldState w) {
 		Color YELLOWISH = new Color(255,225,125);
 		Color PURPLISH = new Color(225, 125, 255);
 		int inseminated = 0;
@@ -2056,7 +2056,7 @@ public class Project extends JFrame {
 		int sodomized = 0;
 		int broadcasted = 0;
 		p.removeAll();
-		Chosen[] initiative = new Chosen[3];
+		final Chosen[] initiative = new Chosen[3];
 		if (w.getCombatants()[2] != null) {
 			if (w.getCombatants()[0].getConfidence() > w.getCombatants()[1].getConfidence()) {
 				if (w.getCombatants()[0].getConfidence() > w.getCombatants()[2].getConfidence()) {
@@ -2892,8 +2892,8 @@ public class Project extends JFrame {
 		w.nextAction(action);
 	}
 	
-	public static void addWriteButton(JPanel p, WorldState w) {
-		JButton Comment = new JButton("Comment");
+	public static void addWriteButton(final JPanel p, final WorldState w) {
+		final JButton Comment = new JButton("Comment");
 		Comment.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String prompt = "Enter your comment here.  Leave blank to ";
@@ -2918,10 +2918,10 @@ public class Project extends JFrame {
 		p.add(Comment);
 	}
 	
-	public static void PickAction (JTextPane t, JPanel p, JFrame f, WorldState w, Chosen c, Chosen[] initiative) {
-		Color YELLOWISH = new Color(255,225,125);
-		Color PURPLISH = new Color(225, 125, 255);
-		Color REDDISH = new Color(255, 145, 145);
+	public static void PickAction (final JTextPane t, final JPanel p, final JFrame f, final WorldState w, final Chosen c, final Chosen[] initiative) {
+		final Color YELLOWISH = new Color(255,225,125);
+		final Color PURPLISH = new Color(225, 125, 255);
+		final Color REDDISH = new Color(255, 145, 145);
 		int inseminated = 0;
 		int orgasming = 0;
 		int sodomized = 0;
@@ -2948,7 +2948,7 @@ public class Project extends JFrame {
 				EnemyTurn(t, p, f, w, initiative, 0);
 			}
 		}
-		Action ContinueAction = new ContinueButton("Continue", "Hotkey:");
+		final Action ContinueAction = new ContinueButton("Continue", "Hotkey:");
 		class AttackButton extends AbstractAction {
 			public AttackButton(String text, String desc) {
 				super(text);
@@ -3080,7 +3080,7 @@ public class Project extends JFrame {
 				EnemyTurn(t, p, f, w, initiative, 0);
 			}
 		}
-		Action GrindAction = new GrindButton("Grind", "Use Grind");
+		final Action GrindAction = new GrindButton("Grind", "Use Grind");
 		class CaressButton extends AbstractAction {
 			public CaressButton(String text, String desc) {
 				super(text);
@@ -3092,7 +3092,7 @@ public class Project extends JFrame {
 				EnemyTurn(t, p, f, w, initiative, 0);
 			}
 		}
-		Action CaressAction = new CaressButton("Caress", "Use Caress");
+		final Action CaressAction = new CaressButton("Caress", "Use Caress");
 		class PummelButton extends AbstractAction {
 			public PummelButton(String text, String desc) {
 				super(text);
@@ -3108,7 +3108,7 @@ public class Project extends JFrame {
 		if (w.tickle()) {
 			pummelName = "Tickle";
 		}
-		Action PummelAction = new PummelButton(pummelName, "Use " + pummelName);
+		final Action PummelAction = new PummelButton(pummelName, "Use " + pummelName);
 		class HumiliateButton extends AbstractAction {
 			public HumiliateButton(String text, String desc) {
 				super(text);
@@ -3120,7 +3120,7 @@ public class Project extends JFrame {
 				EnemyTurn(t, p, f, w, initiative, 0);
 			}
 		}
-		Action HumiliateAction = new HumiliateButton("Humiliate", "Use Humiliate");
+		final Action HumiliateAction = new HumiliateButton("Humiliate", "Use Humiliate");
 		class InseminateButton extends AbstractAction {
 			public InseminateButton(String text, String desc) {
 				super(text);
@@ -3132,7 +3132,7 @@ public class Project extends JFrame {
 				EnemyTurn(t, p, f, w, initiative, 0);
 			}
 		}
-		Action InseminateAction = new InseminateButton("Inseminate", "Use Inseminate");
+		final Action InseminateAction = new InseminateButton("Inseminate", "Use Inseminate");
 		class ForceOrgasmButton extends AbstractAction {
 			public ForceOrgasmButton(String text, String desc) {
 				super(text);
@@ -3144,7 +3144,7 @@ public class Project extends JFrame {
 				EnemyTurn(t, p, f, w, initiative, 0);
 			}
 		}
-		Action ForceOrgasmAction = new ForceOrgasmButton("Force Orgasm", "Use Force Orgasm");
+		final Action ForceOrgasmAction = new ForceOrgasmButton("Force Orgasm", "Use Force Orgasm");
 		class SodomizeButton extends AbstractAction {
 			public SodomizeButton(String text, String desc) {
 				super(text);
@@ -3162,7 +3162,7 @@ public class Project extends JFrame {
 		} else if (c.getGender().equals("male")) {
 			SodomizeName = "Torture";
 		}
-		Action SodomizeAction = new SodomizeButton(SodomizeName, "Use " + SodomizeName);
+		final Action SodomizeAction = new SodomizeButton(SodomizeName, "Use " + SodomizeName);
 		class BroadcastButton extends AbstractAction {
 			public BroadcastButton(String text, String desc) {
 				super(text);
@@ -3174,7 +3174,7 @@ public class Project extends JFrame {
 				EnemyTurn(t, p, f, w, initiative, 0);
 			}
 		}
-		Action BroadcastAction = new BroadcastButton("Broadcast", "Use Broadcast");
+		final Action BroadcastAction = new BroadcastButton("Broadcast", "Use Broadcast");
 		class TemptButton extends AbstractAction{
 			public TemptButton(String text, String desc) {
 				super(text);
@@ -3205,7 +3205,7 @@ public class Project extends JFrame {
 				}
 			}
 		}
-		Action TemptAction = new TemptButton("Tempt", "Use Tempt");
+		final Action TemptAction = new TemptButton("Tempt", "Use Tempt");
 		final int finalInseminated = inseminated;
 		final int finalOrgasming = orgasming;
 		final int finalSodomized = sodomized;
@@ -4778,7 +4778,7 @@ public class Project extends JFrame {
 		p.repaint();
 	}
 	
-	public static void EnemyTurn(JTextPane t, JPanel p, JFrame f, WorldState w, Chosen[] initiative, int progress) {
+	public static void EnemyTurn(final JTextPane t, final JPanel p, final JFrame f, final WorldState w, final Chosen[] initiative, int progress) {
 		Boolean endgame = w.finalBattle;
 		Boolean actorFound = false;
 		while (actorFound == false && progress < initiative.length && initiative[progress] != null) {
@@ -5335,7 +5335,7 @@ public class Project extends JFrame {
 		}
 	}
 	
-	public static void PostBattle(JTextPane t, JPanel p, JFrame f, WorldState w) {
+	public static void PostBattle(final JTextPane t, final JPanel p, final JFrame f, final WorldState w) {
 		Boolean justContinue = true;
 		Boolean postScene = false;
 		int vignette = -1;
@@ -5345,7 +5345,7 @@ public class Project extends JFrame {
 		if (w.loopComplete) {
 			w.pendingBreaks = new int[0];
 		}
-		int chosenVignette = vignette;
+		final int chosenVignette = vignette;
 		for (int i = 0; i < 3; i++) {
 			if (w.getCast()[i] != null) {
 				if (w.getCast()[i].morality < 34 && w.getCast()[i].impregnated) {
@@ -5643,7 +5643,7 @@ public class Project extends JFrame {
 		}*/
 	}
 	
-	public static void DeploymentChain(JTextPane t, JPanel p, JFrame f, WorldState w) {
+	public static void DeploymentChain(final JTextPane t, final JPanel p, final JFrame f, final WorldState w) {
 		w.append(t, "\n\n" + w.getSeparator() + "\n\n");
 		Chosen moral = null;
 		Chosen innocent = null;
@@ -5755,7 +5755,7 @@ public class Project extends JFrame {
 		p.repaint();
 	}
 	
-	public static void VacationChain(JTextPane t, JPanel p, JFrame f, WorldState w) {
+	public static void VacationChain(final JTextPane t, final JPanel p, final JFrame f, final WorldState w) {
 		w.append(t, "\n\n" + w.getSeparator() + "\n\n");
 		Chosen moral = null;
 		Chosen innocent = null;
@@ -5867,7 +5867,7 @@ public class Project extends JFrame {
 		p.repaint();
 	}
 	
-	public static void InterviewChain(JTextPane t, JPanel p, JFrame f, WorldState w) {
+	public static void InterviewChain(final JTextPane t, final JPanel p, final JFrame f, final WorldState w) {
 		w.append(t, "\n\n" + w.getSeparator() + "\n\n");
 		Chosen first = null;
 		Chosen second = null;
@@ -5946,7 +5946,7 @@ public class Project extends JFrame {
 		p.repaint();
 	}
 	
-	public static void HandleBreaks(JTextPane t, JPanel p, JFrame f, WorldState w, JButton proceed) {
+	public static void HandleBreaks(final JTextPane t, final JPanel p, final JFrame f, final WorldState w, final JButton proceed) {
 		p.removeAll();
 		w.append(t, "\n\n" + w.getSeparator() + "\n\n");
 		int sceneType = w.getBreaks()[0];
@@ -6038,7 +6038,7 @@ public class Project extends JFrame {
 		p.repaint();
 	}
 	
-	public static void Downtime(JTextPane t, JPanel p, JFrame f, WorldState w) {
+	public static void Downtime(final JTextPane t, final JPanel p, final JFrame f, final WorldState w) {
 		for (int i = 0; i < 3; i++) {
 			if (w.getCast()[i] != null) {
 				if (w.getCast()[i].temptReq < 100000) {
@@ -6052,14 +6052,14 @@ public class Project extends JFrame {
 			w.usedForsaken.stamina -= 200;
 			exhaustedTest = new Forsaken[]{w.usedForsaken};
 		}
-		Forsaken[] exhausted = exhaustedTest;
+		final Forsaken[] exhausted = exhaustedTest;
 		t.setText("");
 		w.incrementDay();
 		w.clearCommander();
 		int lastChosen = 0;
 		int totalActions = 22;
 		Long[][] actionWeights = new Long[3][totalActions];
-		int[] chosenAction = new int[]{-1, -1, -1};
+		final int[] chosenAction = new int[]{-1, -1, -1};
 		if (w.getCast()[2] != null) {
 			lastChosen = 2;
 		} else if (w.getCast()[1] != null) {
@@ -6514,7 +6514,7 @@ public class Project extends JFrame {
 		}
 	}
 	
-	public static void Shop(JTextPane t, JPanel p, JFrame f, WorldState w) {
+	public static void Shop(final JTextPane t, final JPanel p, final JFrame f, final WorldState w) {
 		p.removeAll();
 		w.active = true;
 		String path = Project.class.getProtectionDomain().getCodeSource().getLocation().getPath();
@@ -6895,7 +6895,7 @@ public class Project extends JFrame {
 		w.readCommentary(t);
 	}
 	
-	public static void PickNextCity(JTextPane t, JPanel p, JFrame f, WorldState w) {
+	public static void PickNextCity(final JTextPane t, final JPanel p, final JFrame f, final WorldState w) {
 		p.removeAll();
 		w.append(t, "\n\n" + w.getSeparator() + "\n\nWhich city will you attack next?");
 		if (w.nextCities == null || w.nextCities.length == 0) {
@@ -7026,7 +7026,7 @@ public class Project extends JFrame {
 				w.append(t, "\nElites: " + superior + " Superior Chosen");
 			}
 			JButton ThisOne = new JButton(w.nextCities[i].cityName);
-			WorldState pickedWorld = w.nextCities[i];
+			final WorldState pickedWorld = w.nextCities[i];
 			ThisOne.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					p.removeAll();
@@ -7064,7 +7064,7 @@ public class Project extends JFrame {
 		p.repaint();
 	}
 	
-	public static void ShowInformation(JTextPane t, JPanel p, JFrame f, WorldState w) {
+	public static void ShowInformation(final JTextPane t, final JPanel p, final JFrame f, final WorldState w) {
 		p.removeAll();
 		w.append(t, "\n\n" + w.getSeparator());
 		if (w.getTechs()[0].isOwned() && w.loopComplete == false) {
@@ -7419,7 +7419,7 @@ public class Project extends JFrame {
 		p.repaint();
 	}
 	
-	public static void ViewAchievements(JTextPane t, JPanel p, JFrame f, WorldState w, int page) {
+	public static void ViewAchievements(final JTextPane t, final JPanel p, final JFrame f, final WorldState w, final int page) {
 		p.removeAll();
 		w.append(t, "\n\n" + w.getSeparator());
 		if (page > 0) {
@@ -7590,7 +7590,7 @@ public class Project extends JFrame {
 		p.repaint();
 	}
 	
-	public static void ViewUpgrades(JTextPane t, JPanel p, JFrame f, WorldState w, int page) {
+	public static void ViewUpgrades(final JTextPane t, final JPanel p, final JFrame f, final WorldState w, final int page) {
 		p.removeAll();
 		if (page > 0) {
 			JButton Previous = new JButton("<");
@@ -7602,7 +7602,7 @@ public class Project extends JFrame {
 			p.add(Previous);
 		}
 		for (int i = page*5; i < w.getTechs().length && i < page*5+5; i++) {
-			int id = i;
+			final int id = i;
 			JButton Upgrade = new JButton(w.getTechs()[i].name);
 			Upgrade.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -7635,7 +7635,7 @@ public class Project extends JFrame {
 		p.repaint();
 	}
 	
-	public static void Cheat(JTextPane t, JPanel p, JFrame f, WorldState w) {
+	public static void Cheat(final JTextPane t, final JPanel p, final JFrame f, final WorldState w) {
 		p.removeAll();
 		w.append(t, "\n\n" + w.getSeparator() + "\n\nWhich cheat would you like to use?\n\n+100 Evil Energy: Increases your Evil Energy by 100.\n\nChange Day: Allows you to skip closer to future events or revisit past ones with the team in its current state.  Range is limited to 1-50, and because events require all three Chosen to be present, this cheat cannot be activated until the full team has been encountered.\n\nDisable/Enable Adaptations: Prevents/Allows Chosen use of Slaughter, Fantasize, Detonate, and Striptease.  Note that use of these actions is required to reach later corruption stages.\n\nUnlock All Upgrades: Purchases every upgrade aside from Imago Quickening at no Evil Energy cost.");
 		JButton AddEnergy = new JButton("+100 Evil Energy");
@@ -7702,7 +7702,7 @@ public class Project extends JFrame {
 		p.repaint();
 	}
 	
-	public static void Data(JTextPane t, JPanel p, JFrame f, WorldState w, String function, int page, Boolean toShop) {
+	public static void Data(final JTextPane t, final JPanel p, final JFrame f, final WorldState w, final String function, final int page, final Boolean toShop) {
 		String path = Project.class.getProtectionDomain().getCodeSource().getLocation().getPath();
 		String fileName = "";
 		for (int i = path.length()-1; i >= 0; i--) {
@@ -7731,7 +7731,7 @@ public class Project extends JFrame {
 		for (int i = 0; i < saves.getSaves().length; i++) {
 			saves.getSaves()[i].repairSave();
 		}
-		WriteObject wobj = new WriteObject();
+		final WriteObject wobj = new WriteObject();
 		final SaveData saveFile = saves;
 		if (function.equals("newsave")) {
 			Boolean aborted = false;
@@ -8114,7 +8114,7 @@ public class Project extends JFrame {
 		}
 	}
 	
-	public static void Customize(JTextPane t, JPanel p, JFrame f, WorldState w) {
+	public static void Customize(final JTextPane t, final JPanel p, final JFrame f, final WorldState w) {
 		p.removeAll();
 		w.append(t, "\n\n" + w.getSeparator() + "\n\n");
 		if (w.getBodyStatus()[0] == false) {
@@ -8782,7 +8782,7 @@ public class Project extends JFrame {
 		w.nextAction(action);
 	}
 	
-	public static void pickStartingTarget(JTextPane t, JPanel p, JFrame f, WorldState w) {
+	public static void pickStartingTarget(final JTextPane t, final JPanel p, final JFrame f, final WorldState w) {
 		p.removeAll();
 		w.append(t, "\n\n" + w.getSeparator() + "\n\nWhich of the Chosen will you target?");
 		for (int i = 0; i < w.getCast().length; i++) {
@@ -8811,7 +8811,7 @@ public class Project extends JFrame {
 		p.repaint();
 	}
 	
-	public static void ConfirmBattle(JTextPane t, JPanel p, JFrame f, WorldState w, Chosen c) {
+	public static void ConfirmBattle(final JTextPane t, final JPanel p, final JFrame f, final WorldState w, final Chosen c) {
 		p.removeAll();
 		Boolean immediateAction = false;
 		w.append(t, "\n\n" + w.getSeparator() + "\n\n");
@@ -9186,7 +9186,7 @@ public class Project extends JFrame {
 		EndFinalBattle(t, p, f, w);
 	}
 	
-	public static void EndFinalBattle(JTextPane t, JPanel p, JFrame f, WorldState w) {
+	public static void EndFinalBattle(final JTextPane t, final JPanel p, final JFrame f, final WorldState w) {
 		Chosen escaped = null;
 		Chosen[] defeated = new Chosen[3];
 		int numberDefeated = 0;
@@ -9235,7 +9235,7 @@ public class Project extends JFrame {
 		}
 	}
 	
-	public static void ReportScore(JTextPane t, JPanel p, JFrame f, WorldState w) {
+	public static void ReportScore(final JTextPane t, final JPanel p, final JFrame f, final WorldState w) {
 		p.removeAll();
 		JButton Continue = new JButton("Continue");
 		Continue.addActionListener(new ActionListener() {
@@ -9551,10 +9551,10 @@ public class Project extends JFrame {
 		p.repaint();
 	}
 	
-	public static void WrapUpCampaign(JTextPane t, JPanel p, JFrame f, WorldState w, Boolean[] broughtConquered, Boolean[] broughtSacrificed) {
+	public static void WrapUpCampaign(final JTextPane t, final JPanel p, final JFrame f, final WorldState w, Boolean[] broughtConquered, Boolean[] broughtSacrificed) {
 		p.removeAll();
-		int conquered = w.conquered.length;
-		int sacrificed = w.sacrificed.length;
+		final int conquered = w.conquered.length;
+		final int sacrificed = w.sacrificed.length;
 		if (broughtConquered == null || broughtSacrificed == null) {
 			broughtConquered = new Boolean[conquered];
 			for (int i = 0; i < conquered; i++) {
@@ -9747,7 +9747,7 @@ public class Project extends JFrame {
 		p.repaint();
 	}
 	
-	public static void DecideKeptForsaken(JTextPane t, JPanel p, JFrame f, WorldState w, Boolean[] broughtConquered, Boolean[] broughtSacrificed, int position) {
+	public static void DecideKeptForsaken(final JTextPane t, final JPanel p, final JFrame f, final WorldState w, final Boolean[] broughtConquered, final Boolean[] broughtSacrificed, final int position) {
 		p.removeAll();
 		if (position < broughtConquered.length) {
 			w.append(t, "\n\n" + w.getSeparator() + "\n\nWhat will you do with " + w.conquered[position].mainName + "?");
@@ -9792,7 +9792,7 @@ public class Project extends JFrame {
 		p.repaint();
 	}
 	
-	public static void ForsakenDowntime(JTextPane t, JPanel p, JFrame f, WorldState w, SaveData s, Forsaken[] exhausted) {
+	public static void ForsakenDowntime(final JTextPane t, final JPanel p, final JFrame f, final WorldState w, final SaveData s, Forsaken[] exhausted) {
 		if (w.loopComplete == false) {
 			w.append(t, "\n\n" + w.getSeparator() + "\n\n");
 		}

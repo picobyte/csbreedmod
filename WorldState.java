@@ -18139,7 +18139,7 @@ public class WorldState implements Serializable {
 		nameGen(t, p, f);
 	}
 	
-	public void nameGen(JTextPane t, JPanel p, JFrame f) {
+	public void nameGen(final JTextPane t, final JPanel p, final JFrame f) {
 		p.removeAll();
 		Chosen dummy = new Chosen();
 		dummy.setNumber(0);
@@ -18295,7 +18295,7 @@ public class WorldState implements Serializable {
 			}
 		});
 		p.add(Randomize);
-		WorldState w = this;
+		final WorldState w = this;
 		JButton Quit = new JButton("Quit");
 		Quit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -18328,7 +18328,7 @@ public class WorldState implements Serializable {
 		p.repaint();
 	}
 	
-	public void personalityGen(JTextPane t, JPanel p, JFrame f, int progress) {
+	public void personalityGen(final JTextPane t, final JPanel p, final JFrame f, final int progress) {
 		p.removeAll();
 		append(t, "\n\n" + separator + "\n\n");
 		for (int i = 0; i < 3; i++) {
@@ -18454,7 +18454,7 @@ public class WorldState implements Serializable {
 		});
 		p.add(Back);
 		JButton Quit = new JButton("Quit");
-		WorldState w = this;
+		final WorldState w = this;
 		Quit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				p.removeAll();
@@ -18912,7 +18912,7 @@ public class WorldState implements Serializable {
 		vulnerabilityMenu(t, p, f, false);
 	}
 	
-	public void vulnerabilityMenu(JTextPane t, JPanel p, JFrame f, Boolean shown) {
+	public void vulnerabilityMenu(final JTextPane t, final JPanel p, final JFrame f, final Boolean shown) {
 		p.removeAll();
 		Boolean[][] allPurities = new Boolean[3][4];
 		for (int i = 0; i < 3; i++) {
@@ -18953,7 +18953,7 @@ public class WorldState implements Serializable {
 			append(t, "  Click 'Continue' once you're done.");
 		}
 		for (int i = 0; i < 3; i++) {
-			int thisChosen = i;
+			final int thisChosen = i;
 			JButton ThisOne = new JButton(customNames[thisChosen*2]);
 			ThisOne.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -18979,6 +18979,7 @@ public class WorldState implements Serializable {
 				newCosmetics(t, p, f);
 			}
 		});
+
 		p.add(Continue);
 		JButton Back = new JButton("Back");
 		Back.addActionListener(new ActionListener() {
@@ -19017,7 +19018,7 @@ public class WorldState implements Serializable {
 			}
 		});
 		p.add(Back);
-		WorldState w = this;
+		final WorldState w = this;
 		JButton Quit = new JButton("Quit");
 		Quit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -19051,7 +19052,7 @@ public class WorldState implements Serializable {
 		p.repaint();
 	}
 	
-	public void reviewVulnerabilities(JTextPane t, JPanel p, JFrame f, Boolean shown, int id, int progress) {
+	public void reviewVulnerabilities(final JTextPane t, final JPanel p, final JFrame f, final Boolean shown, final int id, final int progress) {
 		String hisHer = "her";
 		String himHer = "her";
 		String heShe = "she";
@@ -19561,7 +19562,7 @@ public class WorldState implements Serializable {
 		return cosmetics;
 	}
 	
-	public void cosmeticsGen(JTextPane t, JPanel p, JFrame f) {
+	public void cosmeticsGen(final JTextPane t, final JPanel p, final JFrame f) {
 		p.removeAll();
 		append(t, "The final step is to customize the appearances of the team.  None of the questions in this section will affect their combat performance.  Because the default appearances are connected to their personalities, players who wish to avoid spoiling themselves may prefer to skip this step.  Otherwise, click on the team member to be customized.  Clicking on a team member you've already customized will completely reset that member's customization process.");
 		for (int i = 0; i < 3; i++) {
@@ -19601,7 +19602,7 @@ public class WorldState implements Serializable {
 			}
 		});
 		p.add(Back);
-		WorldState w = this;
+		final WorldState w = this;
 		JButton Quit = new JButton("Quit");
 		Quit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -19659,7 +19660,7 @@ public class WorldState implements Serializable {
 				} else {
 					saves = new SaveData();
 				}
-				WriteObject wobj = new WriteObject();
+				final WriteObject wobj = new WriteObject();
 				final SaveData saveFile = saves;
 				if (w.getCast()[0] == null) {
 					Chosen newChosen = new Chosen();
@@ -19738,7 +19739,7 @@ public class WorldState implements Serializable {
 		p.repaint();
 	}
 	
-	public void aliasCustomize(JTextPane t, JPanel p, JFrame f, int i, String[] baseAesthetics) {
+	public void aliasCustomize(final JTextPane t, final JPanel p, final JFrame f, final int i, final String[] baseAesthetics) {
 		p.removeAll();
 		Chosen dummy = new Chosen();
 		String HeShe = "She";
@@ -19751,7 +19752,7 @@ public class WorldState implements Serializable {
 			himHer = "him";
 			heShe = "he";
 		}
-		String ownChoice = dummy.genMainName(statSeed[i*4], statSeed[i*4+1], statSeed[i*4+2], statSeed[i*4+3]);
+		final String ownChoice = dummy.genMainName(statSeed[i*4], statSeed[i*4+1], statSeed[i*4+2], statSeed[i*4+3]);
 		append(t, "\n\n" + separator + "\n\nThe first step is to decide what " + heShe + "'ll call " + himHer + "self.  " + HeShe + " likes the sound of '" + ownChoice + "', but the civilian identities of the Chosen are a matter of public record, so it wouldn't be too strange for " + himHer + " to go by " + hisHer + " real name.  Which should " + heShe + " choose?");
 		JButton Alias = new JButton(ownChoice);
 		Alias.addActionListener(new ActionListener() {
@@ -19817,7 +19818,7 @@ public class WorldState implements Serializable {
 		return gaijinStatus;
 	}
 	
-	public void titleCustomize(JTextPane t, JPanel p, JFrame f, int i, String[] baseAesthetics) {
+	public void titleCustomize(final JTextPane t, final JPanel p, final JFrame f, final int i, final String[] baseAesthetics) {
 		p.removeAll();
 		Chosen dummy = new Chosen();
 		String hisHer = "her";
@@ -19871,7 +19872,7 @@ public class WorldState implements Serializable {
 		return customTitles;
 	}
 	
-	public void incantationCustomize(JTextPane t, JPanel p, JFrame f, int i, String[] baseAesthetics) {
+	public void incantationCustomize(final JTextPane t, final JPanel p, final JFrame f, final int i, final String[] baseAesthetics) {
 		p.removeAll();
 		Chosen dummy = new Chosen();
 		String hisHer = "her";
@@ -19930,7 +19931,7 @@ public class WorldState implements Serializable {
 		return customIncantations;
 	}
 	
-	public void topCustomize(JTextPane t, JPanel p, JFrame f, int i, String[] baseAesthetics) {
+	public void topCustomize(final JTextPane t, final JPanel p, final JFrame f, final int i, final String[] baseAesthetics) {
 		p.removeAll();
 		String hisHer = "her";
 		String himHer = "her";
@@ -19998,7 +19999,7 @@ public class WorldState implements Serializable {
 		return customTop;
 	}
 	
-	public void topChange(JTextPane t, JPanel p, JFrame f, int i, String[] baseAesthetics, String input) {
+	public void topChange(final JTextPane t, final JPanel p, final JFrame f, final int i, final String[] baseAesthetics, final String input) {
 		p.removeAll();
 		String hisHer = "her";
 		String himHer = "her";
@@ -20046,7 +20047,7 @@ public class WorldState implements Serializable {
 		return customTopAccess;
 	}
 	
-	public void bottomCustomize(JTextPane t, JPanel p, JFrame f, int i, String[] baseAesthetics) {
+	public void bottomCustomize(final JTextPane t, final JPanel p, final JFrame f, final int i, final String[] baseAesthetics) {
 		p.removeAll();
 		String hisHer = "her";
 		String himHer = "her";
@@ -20102,7 +20103,7 @@ public class WorldState implements Serializable {
 		return customBottom;
 	}
 	
-	public void bottomChange(JTextPane t, JPanel p, JFrame f, int i, String[] baseAesthetics, String input) {
+	public void bottomChange(final JTextPane t, final JPanel p, final JFrame f, final int i, final String[] baseAesthetics, final String input) {
 		p.removeAll();
 		String hisHer = "her";
 		String himHer = "her";
@@ -20156,7 +20157,7 @@ public class WorldState implements Serializable {
 		return customFeet;
 	}
 	
-	public void feetCustomize(JTextPane t, JPanel p, JFrame f, int i, String[] baseAesthetics) {
+	public void feetCustomize(final JTextPane t, final JPanel p, final JFrame f, final int i, final String[] baseAesthetics) {
 		p.removeAll();
 		String hisHer = "her";
 		String himHer = "her";
@@ -20199,7 +20200,7 @@ public class WorldState implements Serializable {
 		p.repaint();
 	}
 	
-	public void colorCustomize(JTextPane t, JPanel p, JFrame f, int i, String[] baseAesthetics) {
+	public void colorCustomize(final JTextPane t, final JPanel p, final JFrame f, final int i, final String[] baseAesthetics) {
 		p.removeAll();
 		String hisHer = "her";
 		String himHer = "her";
@@ -20249,7 +20250,7 @@ public class WorldState implements Serializable {
 		return customAccessory;
 	}
 	
-	public void weaponCustomize(JTextPane t, JPanel p, JFrame f, int i, String[] baseAesthetics) {
+	public void weaponCustomize(final JTextPane t, final JPanel p, final JFrame f, final int i, final String[] baseAesthetics) {
 		p.removeAll();
 		String hisHer = "her";
 		String himHer = "her";
@@ -20300,7 +20301,7 @@ public class WorldState implements Serializable {
 		return customWeapons;
 	}
 	
-	public void weaponChange(JTextPane t, JPanel p, JFrame f, int i, String[] baseAesthetics, String input) {
+	public void weaponChange(final JTextPane t, final JPanel p, final JFrame f, final int i, final String[] baseAesthetics, final String input) {
 		p.removeAll();
 		String hisHer = "her";
 		String himHer = "her";
@@ -20351,7 +20352,7 @@ public class WorldState implements Serializable {
 		return customWeaponTypes;
 	}
 	
-	public void underwearCustomize(JTextPane t, JPanel p, JFrame f, int i, String[] baseAesthetics) {
+	public void underwearCustomize(final JTextPane t, final JPanel p, final JFrame f, final int i, final String[] baseAesthetics) {
 		p.removeAll();
 		String hisHer = "her";
 		String himHer = "her";
