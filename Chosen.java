@@ -210,12 +210,31 @@ public class Chosen implements Serializable {
 	public String replace_tags(String s, String pre) {
 		if (gender.equals("male")) {
 			s = s.replaceAll("\\{" + pre + "(?:([Hh]i[ms])Hers?|([hH]e)She)\\}", "$1$2");
+			s = s.replace("{" + pre + "hole}", "anus");
+			s = s.replace("{" + pre + "organ}", "penis");
 		} else {
 			s = s.replaceAll("\\{" + pre + "([Hh])i[ms]H(ers?)\\}", "$1$2");
 			s = s.replace("{" + pre +"heShe}", "she");
 			s = s.replace("{" + pre + "HeShe}", "She");
+			s = s.replace("{" + pre + "hole}", "pussy");
+			s = s.replace("{" + pre + "organ}", "clit");
 		}
+		if (topCover.equals("crop")) {
+			s = s.replace("{" + pre + "topDesc}", "crop top");
+		} else if (topCover.equals("strips")) {
+			s = s.replace("{" + pre + "topDesc}", "strips of cloth");
+		} else {
+			s = s.replace("{" + pre + "topDesc}", topCover);
+		}
+		if (bottomCover.equals("strips")) {
+			s = s.replace("{" + pre + "bottomDesc}", "strips of cloth");
+		} else {
+			s = s.replace("{" + pre + "bottomDesc}", bottomCover);
+		}
+		s = s.replace("{" + pre + "feetType}", feetType);
 		s = s.replace("{" + pre + "givenName}", givenName);
+		s = s.replace("{" + pre + "familyName}", familyName);
+		s = s.replace("{" + pre + "underType}", underType);
 		return s.replace("{" + pre + "mainName}", mainName);
 	}
 	public void w_append(WorldState w, JTextPane t, String s) {
