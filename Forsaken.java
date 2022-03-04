@@ -130,6 +130,17 @@ public class Forsaken implements Serializable {
 		FEMALE,
 		FUTANARI;
 	}
+	public String replace_tags(String s, String pre) {
+		if (gender.equals("male")) {
+			s = s.replaceAll("\\{" + pre + "(?:([Hh]i[ms])Hers?|([hH]e)She)\\}", "$1$2");
+		} else {
+			s = s.replaceAll("\\{" + pre + "([Hh])i[ms]H(ers?)\\}", "$1$2");
+			s = s.replace("{" + pre +"heShe}", "she");
+			s = s.replace("{" + pre + "HeShe}", "She");
+		}
+		s = s.replace("{" + pre + "givenName}", givenName);
+		return s.replace("{" + pre + "mainName}", mainName);
+	}
 	
 	public void initialize(WorldState w, Chosen c) {
 		formerSelf = c;

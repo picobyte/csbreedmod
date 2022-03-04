@@ -207,7 +207,26 @@ public class Chosen implements Serializable {
 			return Forsaken.Gender.FUTANARI;
 		}
 	}
-	
+	public String replace_tags(String s, String pre) {
+		if (gender.equals("male")) {
+			s = s.replaceAll("\\{" + pre + "(?:([Hh]i[ms])Hers?|([hH]e)She)\\}", "$1$2");
+		} else {
+			s = s.replaceAll("\\{" + pre + "([Hh])i[ms]H(ers?)\\}", "$1$2");
+			s = s.replace("{" + pre +"heShe}", "she");
+			s = s.replace("{" + pre + "HeShe}", "She");
+		}
+		s = s.replace("{" + pre + "givenName}", givenName);
+		return s.replace("{" + pre + "mainName}", mainName);
+	}
+	public void w_append(WorldState w, JTextPane t, String s) {
+		w.append(t, replace_tags(s, ""));
+	}
+	private void w_append(WorldState w, JTextPane t, Chosen c, String s) {
+		w_append(w, t, c.replace_tags(s, "c:"));
+	}
+	private void w_append(WorldState w, JTextPane t, Forsaken f, String s) {
+		w_append(w, t, f.replace_tags(s, "c:"));
+	}
 	public int impregnationReq() {
 		int result = 1000;
 		if (world.achievementHeld(1)[0] == 5) {
@@ -69045,6 +69064,7 @@ public class Chosen implements Serializable {
 		SimpleAttributeSet keyWord = new SimpleAttributeSet();
 		StyleConstants.setFontSize(keyWord, textSize);
 		Color usedColor = textColor;
+		s = replace_tags(s, "");
 		if (t.getBackground() == Color.BLACK) {
 			usedColor = darkColor;
 		}
@@ -69053,10 +69073,13 @@ public class Chosen implements Serializable {
 		StyleConstants.setBold(keyWord, true);
 		try
 		{
-		    doc.insertString(doc.getLength(), s, keyWord );
+			doc.insertString(doc.getLength(), s, keyWord );
 		}
 		catch(Exception e) { System.out.println(e); }
 		world.save.addLine(s, usedColor, false);
+	}
+	public void say(JTextPane t, Chosen c, String s) {
+		say(t, c.replace_tags(s, "c:"));
 	}
 	
 	public void transform(JTextPane t, WorldState w) {
