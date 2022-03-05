@@ -2680,11 +2680,7 @@ public class Chosen implements Serializable {
 					w_append(w, t, ", {hisHer} voice wavering as all the cameras pointed at {himHer} make {himHer} self-conscious.  {HisHer} pleas turn into desperate wails when ");
 				}
 				if (getHATELevel() < 3) {
-					if (gender.equals("male")) {
-						w_append(w, t, "they use their fingers to spread {hisHer} anus wide open.  ");
-					} else {
-						w_append(w, t, "they use their fingers to spread {hisHer} pussy wide open.  ");
-					}
+					 w_append(w, t, "they use their fingers to spread {hisHer} {hole} wide open.  ");
 					if (dignity > 66) {
 						w_append(w, t, "{HisHer} face burns with shame, not only at the humiliation, but at {hisHer} failure to save everyone before things could get this far.");
 					} else if (dignity > 33) {
@@ -2889,11 +2885,7 @@ public class Chosen implements Serializable {
 						w_append(w, t, "{HeShe} knows that they aren't responsible for their own actions, but {heShe} still has trouble controlling {hisHer} anger.");
 					}
 				} else {
-					if (gender.equals("male")) {
-						w_append(w, t, "as the masturbating Thralls aim their ejaculations onto {hisHer} face and hair, but when {heShe} sees how much of their cum landed on {hisHer} unprotected anus, {heShe} is unable to keep the angry frown off {hisHer} face.  ");
-					} else {
-						w_append(w, t, "as the masturbating Thralls aim their ejaculations onto {hisHer} face and hair, but when {heShe} sees how much of their cum landed on {hisHer} unprotected pussy, {heShe} is unable to keep the angry frown off {hisHer} face.  ");
-					}
+					 w_append(w, t, "as the masturbating Thralls aim their ejaculations onto {hisHer} face and hair, but when {heShe} sees how much of their cum landed on {hisHer} unprotected {hole}, {heShe} is unable to keep the angry frown off {hisHer} face.  ");
 					if (innocence > 66) {
 						w_append(w, t, "{HeShe} can't understand how people could do such disgusting things to someone.");
 					} else if (innocence > 33) {
@@ -22310,11 +22302,7 @@ public class Chosen implements Serializable {
 							c.say(t, "\"\n\n");
 							w_append(w, t, c, "{c:givenName} is forced to join the orgy, taking some of the pressure off {givenName} as the group of attackers eagerly samples each of {c:hisHer} holes.  The men quickly pick up on the animosity between the two Chosen, and they take sadistic enjoyment out of forcing {givenName} and {c:givenName} to suck the same cock together and lick the cum off each other's bodies.  By the time they're done, {givenName} and {c:givenName} are both completely exhausted, collapsed against each other and barely even conscious of the fact that the men have left.  After slowly coming to their senses, they quickly clean themselves off and part ways, neither of them wanting to be the one to tell " + d.getGivenName() + " about the incident.");
 						} else if (c.isModest() == false) {
-							if (gender.equals("male")) {
-								w_append(w, t, c, "The millionaire chuckles as he forces {givenName} to {hisHer} knees and rests his cock against {hisHer} face.\n\n\"We'll see.\"\n\nA short while later, {givenName} is desperately trying to satisfy one man with {hisHer} mouth and another two with {hisHer} hands before any of them can decide that they'd rather use {hisHer} virgin anus.  That's when {heShe} hears a commotion from the changing room.  {c:givenName} is pushed through the door, already naked and followed by several more men.  When {c:heShe} sees {givenName}, {c:hisHer} eyes narrow in annoyance.\n\n");
-							} else {
-								w_append(w, t, c, "The millionaire chuckles as he forces {givenName} to {hisHer} knees and rests his cock against {hisHer} face.\n\n\"We'll see.\"\n\nA short while later, {givenName} is desperately trying to satisfy one man with {hisHer} mouth and another two with {hisHer} hands before any of them can decide that they'd rather use {hisHer} virgin pussy.  That's when {heShe} hears a commotion from the changing room.  {c:givenName} is pushed through the door, already naked and followed by several more men.  When {c:heShe} sees {givenName}, {c:hisHer} eyes narrow in annoyance.\n\n");
-							}
+							 w_append(w, t, c, "The millionaire chuckles as he forces {givenName} to {hisHer} knees and rests his cock against {hisHer} face.\n\n\"We'll see.\"\n\nA short while later, {givenName} is desperately trying to satisfy one man with {hisHer} mouth and another two with {hisHer} hands before any of them can decide that they'd rather use {hisHer} virgin {hole}.  That's when {heShe} hears a commotion from the changing room.  {c:givenName} is pushed through the door, already naked and followed by several more men.  When {c:heShe} sees {givenName}, {c:hisHer} eyes narrow in annoyance.\n\n");
 							c.say(t, "\"");
 							if (c.getMorality() > 66) {
 								if (c.getConfidence() > 66) {
@@ -22592,11 +22580,7 @@ public class Chosen implements Serializable {
 							w_append(w, t, c, "{c:givenName} is forced to join the orgy, taking some of the pressure off {givenName} as the group of attackers eagerly samples each of {c:hisHer} holes.  The men quickly pick up on the animosity between the two Chosen, and they take sadistic enjoyment out of forcing {givenName} and {c:givenName} to lick each other clean in between fuckings.  By the time they're done, {givenName} and {c:givenName} are both completely exhausted, collapsed against each other and barely even conscious of the fact that the men have left.  After slowly coming to their senses, they quickly clean themselves off and part ways, neither of them wanting to be the one to tell " + d.getGivenName() + " about the incident.");
 						}
 					} else if (c.isModest() == false) {
-						if (gender.equals("male")) {
-							w_append(w, t, c, "The millionaire chuckles as he pushes the tip of his cock against {hisHer} anus.\n\n\"Wonderful.  Then let's start with this.\"\n\nA short while later, {givenName} is shuddering with disgust as the third man ejaculates inside {himHer} when {heShe} hears a commotion from the changing room.  {c:givenName} is pushed through the door, already naked and followed by several more men.  When {c:heShe} sees {givenName}, {c:hisHer} eyes narrow in annoyance.\n\n");
-						} else {
-							w_append(w, t, c, "The millionaire chuckles as he pushes the tip of his cock against {hisHer} pussy.\n\n\"Wonderful.  Then let's start with this.\"\n\nA short while later, {givenName} is shuddering with disgust as the third man ejaculates inside {himHer} when {heShe} hears a commotion from the changing room.  {c:givenName} is pushed through the door, already naked and followed by several more men.  When {c:heShe} sees {givenName}, {c:hisHer} eyes narrow in annoyance.\n\n");
-						}
+						 w_append(w, t, c, "The millionaire chuckles as he pushes the tip of his cock against {hisHer} {hole}.\n\n\"Wonderful.  Then let's start with this.\"\n\nA short while later, {givenName} is shuddering with disgust as the third man ejaculates inside {himHer} when {heShe} hears a commotion from the changing room.  {c:givenName} is pushed through the door, already naked and followed by several more men.  When {c:heShe} sees {givenName}, {c:hisHer} eyes narrow in annoyance.\n\n");
 						c.say(t, "\"");
 						if (c.getMorality() > 66) {
 							if (c.getConfidence() > 66) {
@@ -22645,11 +22629,7 @@ public class Chosen implements Serializable {
 						}
 						w_append(w, t, c, "{c:givenName} wastes no time in cleaning {c:himHer}self up, getting dressed, and heading back to {c:hisHer} room.  {givenName} is left naked and cum-splattered on the floor, too exhausted to move.");
 					} else {
-						if (gender.equals("male")) {
-							w_append(w, t, c, "The millionaire chuckles as he pushes the tip of his cock against {hisHer} anus.\n\n\"Wonderful.  Then let's start with this.\"\n\nHe rams himself inside {himHer}, and when {heShe} opens {hisHer} mouth to cry out at the sudden stimulation, another man forces a cock down {hisHer} throat.  As they approach their climaxes and their thrusting grows more vigorous, {c:givenName} abruptly walks in through the changing room");
-						} else {
-							w_append(w, t, c, "The millionaire chuckles as he pushes the tip of his cock against {hisHer} pussy.\n\n\"Wonderful.  Then let's start with this.\"\n\nHe rams himself inside {himHer}, and when {heShe} opens {hisHer} mouth to cry out at the sudden stimulation, another man forces a cock down {hisHer} throat.  As they approach their climaxes and their thrusting grows more vigorous, {c:givenName} abruptly walks in through the changing room");
-						}
+						 w_append(w, t, c, "The millionaire chuckles as he pushes the tip of his cock against {hisHer} {hole}.\n\n\"Wonderful.  Then let's start with this.\"\n\nHe rams himself inside {himHer}, and when {heShe} opens {hisHer} mouth to cry out at the sudden stimulation, another man forces a cock down {hisHer} throat.  As they approach their climaxes and their thrusting grows more vigorous, {c:givenName} abruptly walks in through the changing room");
 						if (c.getMorality() > 66) {
 							w_append(w, t, c, ", frowning and sighing into {c:hisHer} hand when {c:heShe} sees the orgy.\n\n");
 							c.say(t, "\"");
@@ -40950,11 +40930,7 @@ public class Chosen implements Serializable {
 				} else if (confidence > 33) {
 					w_append(w, t, "when they beg {himHer} to go further and do lewd things for them, {heShe} enjoys teasing and tantalizing them with the promise that {heShe}'ll do even more next time.  ");
 				} else {
-					if (gender.equals("male")) {
-						w_append(w, t, "when they grow impatient and flood {hisHer} chat with demands to go further, {heShe} can't resist, and ends up spreading {hisHer} anus wide open for them, a trembling smile on {hisHer} face.  ");
-					} else {
-						w_append(w, t, "when they grow impatient and flood {hisHer} chat with demands to go further, {heShe} can't resist, and ends up spreading {hisHer} pussy wide open for them, a trembling smile on {hisHer} face.  ");
-					}
+					 w_append(w, t, "when they grow impatient and flood {hisHer} chat with demands to go further, {heShe} can't resist, and ends up spreading {hisHer} {hole} wide open for them, a trembling smile on {hisHer} face.  ");
 				}
 			}
 			if (dignity > 66) {
