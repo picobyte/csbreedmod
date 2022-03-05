@@ -252,6 +252,12 @@ public class Chosen implements Serializable {
 		w.append(t, replace_tags(s, ""));
 	}
 	private void w_append(WorldState w, JTextPane t, Chosen c, String s) {
+        Boolean friendly = w.getRelationship(number, c.getNumber()) >= 0;
+		if (friendly) {
+			s = s.replace("{friendRival}", "friend");
+		} else {
+			s = s.replace("{friendRival}", "rival");
+        }
 		w_append(w, t, c.replace_tags(s, "c:"));
 	}
 	private void w_append(WorldState w, JTextPane t, Forsaken f, String s) {
@@ -710,11 +716,7 @@ public class Chosen implements Serializable {
 							w_append(w, t, "{mainName} can only moan into {hisHer} gag ");
 						}
 						w_append(w, t, c, "as an oblivious {c:mainName} is led over and forced to lick {c:hisHer} ");
-						if (friendly) {
-							w_append(w, t, "friend's {organ}");
-						} else {
-							w_append(w, t, "rival's {organ}");
-						}
+						 w_append(w, t, "{friendRival}'s {organ}");
 						if (getHATELevel() < 3 || vVirg) {
 							w.append(t, ".");
 						} else {
@@ -4765,11 +4767,7 @@ public class Chosen implements Serializable {
 							w.append(t, ", too demoralized to hold out any longer.");
 						}
 					} else {
-						if (friendly) {
-							w_append(w, t, c, "Distracted by {hisHer} friend " + screaming + " at the top of {c:hisHer} lungs");
-						} else {
-							w_append(w, t, c, "Distracted by {hisHer} rival " + screaming + " at the top of {c:hisHer} lungs");
-						}
+						 w_append(w, t, c, "Distracted by {hisHer} {friendRival} " + screaming + " at the top of {c:hisHer} lungs");
 						if (getEXPOLevel() < 3) {
 							w_append(w, t, ", {mainName}'s {bottomDesc} being shifted aside is the only warning {heShe} has before one of the Thralls ");
 						} else {
