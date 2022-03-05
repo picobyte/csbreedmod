@@ -1900,11 +1900,7 @@ public class Chosen implements Serializable {
 				} else {
 					if (w.tickle()) {
 						w_append(w, t, ", and in {hisHer} current state, moaning with exhaustion, {heShe}'s in no state to stop the Thralls from probing {hisHer} ");
-						if (gender.equals("male")) {
-							w.append(t, "ass");
-						} else {
-							w.append(t, "pussy");
-						}
+						 w_append (w, t, "{assPussy}");
 						w.append(t, " with their fingers.  ");
 					} else {
 						 w_append(w, t, ", and with {hisHer} severe wounds, {heShe}'s in no state to stop the Thralls from probing {hisHer} {assPussy} with their fingers.  ");
@@ -2741,11 +2737,7 @@ public class Chosen implements Serializable {
 				} else {
 					w_append(w, t, "but {hisHer} limbs seize up and {hisHer} eyes shoot open as {heShe} feels the Thralls spread {hisHer} ");
 				}
-				if (gender.equals("male")) {
-					w.append(t, "anus.  ");
-				} else {
-					w.append(t, "pussy.  ");
-				}
+				 w_append (w, t, "{hole}.  ");
 				if (getHATELevel() < 3) {
 					if (dignity > 66) {
 						w_append(w, t, "{HisHer} mind practically blanks out from shame, but {heShe} retains enough rationality to wonder how much further they'll be able to go before {heShe} can escape.");
@@ -2798,11 +2790,7 @@ public class Chosen implements Serializable {
 						w_append(w, t, " in a desperate effort not to look so weak.  {HeShe} still can't stop {himHer}self from whimpering in pain as they spread {hisHer} ");
 					}
 				}
-				if (gender.equals("male")) {
-					w.append(t, "anus open");
-				} else {
-					w.append(t, "pussy open");
-				}
+				 w_append (w, t, "{hole} open");
 				if (getHATELevel() < 3) {
 					if (dignity > 66) {
 						w_append(w, t, ", but what really stokes {hisHer} hatred is their smug laughter at {hisHer} expense.");
@@ -3341,11 +3329,7 @@ public class Chosen implements Serializable {
 				} else {
 					if (w.tickle()) {
 						w_append(w, t, ", and in {hisHer} current state, moaning with exhaustion, {heShe}'s in no state to stop the Thralls from probing {hisHer} ");
-						if (gender.equals("male")) {
-							w.append(t, "ass");
-						} else {
-							w.append(t, "pussy");
-						}
+						 w_append(w, t, "{assPussy}");
 						w.append(t, " with their fingers.  ");
 					} else {
 						 w_append(w, t, ", and with {hisHer} severe wounds, {heShe}'s in no state to stop the Thralls from probing {hisHer} {assPussy} with their fingers.  ");
@@ -5698,11 +5682,7 @@ public class Chosen implements Serializable {
 				} else {
 					if (w.tickle()) {
 						w_append(w, t, ", and in {hisHer} current state, moaning with exhaustion, {heShe}'s in no state to stop the Thralls from probing {hisHer} ");
-						if (gender.equals("male")) {
-							w.append(t, "ass");
-						} else {
-							w.append(t, "pussy");
-						}
+						 w_append (w, t, "{assPussy}");
 						w.append(t, " with their fingers.  ");
 					} else {
 						 w_append(w, t, ", and with {hisHer} severe wounds, {heShe}'s in no state to stop the Thralls from probing {hisHer} {assPussy} with their fingers.  ");
@@ -13782,11 +13762,7 @@ public class Chosen implements Serializable {
 						} else {
 							w_append(w, t, c, "the two Chosen are held face-to-face, almost as if they're going to have sex with each other, but before {mainName} can penetrate {c:mainName}, {heShe} feels one of the Thralls' cocks pressing against {hisHer} ");
 						}
-						if (gender.equals("male")) {
-							w.append(t, "anus");
-						} else {
-							w.append(t, "pussy");
-						}
+						 w_append (w, t, "{hole}");
 						w.append(t, ".  ");
 						if (dignity > 66) {
 							w_append(w, t, "{mainName} refuses to show any reaction right up until ");
@@ -14130,11 +14106,7 @@ public class Chosen implements Serializable {
 						} else {
 							w_append(w, t, c, "{c:mainName} trembles with mingled fear and arousal as {heShe} watches a trickle of cum drip from {mainName}'s ");
 						}
-						if (gender.equals("male")) {
-							w.append(t, "ass.");
-						} else {
-							w.append(t, "pussy.");
-						}
+						 w_append (w, t, "{assPussy}.");
 					}
 				}
 				/*if (getPLEALevel() < 3 || cVirg) {
@@ -14344,11 +14316,7 @@ public class Chosen implements Serializable {
 						w_append(w, t, "The Thrall fucking {mainName} finishes and pulls out, and {mainName} is too breathless from all the tickling to resist as another Thrall steps forward to take his turn");
 					} else {
 						w_append(w, t, c, "{mainName}'s squirming and thrashing with laughter finally causes {himHer} to buck {hisHer} hips enough that {c:mainName} slides out of {hisHer} ");
-						if (gender.equals("male")) {
-							w.append(t, "ass");
-						} else {
-							w.append(t, "pussy");
-						}
+						 w_append (w, t, "{assPussy}");
 						w_append(w, t, c, ", but one of the Thralls is quick to replace {c:himHer}");
 					}
 				} else if (gender.equals("male")) {
@@ -15166,11 +15134,7 @@ public class Chosen implements Serializable {
 								w_append(w, t, "in addition to the cock inside {hisHer} but, ");
 							}
 							w_append(w, t, "{heShe} feels a pressure against {hisHer} ");
-							if (gender.equals("male")) {
-								w.append(t, "anus");
-							} else {
-								w.append(t, "pussy");
-							}
+							 w_append (w, t, "{hole}");
 							w_append(w, t, " preventing {himHer} from pulling out.  ");
 							if (getPLEALevel() < 3 || cVirg) {
 								w_append(w, t, "{HeShe} can't fight against ");
@@ -15226,11 +15190,7 @@ public class Chosen implements Serializable {
 						}
 					}
 					w_append(w, t, "the Thrall that thrusts into {hisHer} ");
-					if (gender.equals("male")) {
-						w.append(t, "ass");
-					} else {
-						w.append(t, "pussy");
-					}
+					 w_append (w, t, "{assPussy}");
 					if (vVirg) {
 						if (gender.equals("male")) {
 							w_append(w, t, ", fucking {himHer} like a girl.");
@@ -15369,11 +15329,7 @@ public class Chosen implements Serializable {
 						}
 					}
 					w_append(w, t, "another Thrall thrusting into {hisHer} ");
-					if (gender.equals("male")) {
-						w.append(t, "ass");
-					} else {
-						w.append(t, "pussy");
-					}
+					 w_append (w, t, "{assPussy}");
 					if (vVirg) {
 						if (gender.equals("male")) {
 							w_append(w, t, ", denying {hisHer} masculinity in the most humiliating way possible.");
@@ -32170,19 +32126,11 @@ public class Chosen implements Serializable {
 			}
 			if (confidence > 66) {
 				w_append(w, t, "{HeShe} groans as a pair of hooks lowers down and grabs {hisHer} ");
-				if (gender.equals("male")) {
-					w.append(t, "anus");
-				} else {
-					w.append(t, "pussy");
-				}
+				 w_append (w, t, "{hole}");
 				w.append(t, ", spreading it wide open.");
 			} else if (confidence > 33) {
 				w_append(w, t, "Tattoos spread across {hisHer} belly and thighs, offering free use of {hisHer} ");
-				if (gender.equals("male")) {
-					w.append(t, "asshole.");
-				} else {
-					w.append(t, "pussy.");
-				}
+				 w_append (w, t, "{pussyAsshole}.");
 			} else {
 				w.append(t, "Offering a mockery of modesty, a chastity belt ");
 				if (gender.equals("female") == false) {
@@ -32545,19 +32493,11 @@ public class Chosen implements Serializable {
 							w_append(w, t, "{HisHer} mind retreats from the cruelty you're inflicting on {himHer}, falling into dreamless sleep as ");
 						} else if (getHATELevel() < 3 || vVirg) {
 							w_append(w, t, "rubs against the entrance to {hisHer} ");
-							if (gender.equals("male")) {
-								w.append(t, "anus");
-							} else {
-								w.append(t, "pussy");
-							}
+							 w_append (w, t, "{hole}");
 							w.append(t, ".  Every time you slide against it, ");
 						} else {
 							w_append(w, t, "pushes into {hisHer} ");
-							if (gender.equals("male")) {
-								w.append(t, "anus");
-							} else {
-								w.append(t, "pussy");
-							}
+							 w_append (w, t, "{hole}");
 							w.append(t, ".  With every thrust, ");
 						}
 					}
@@ -32747,19 +32687,11 @@ public class Chosen implements Serializable {
 							w_append(w, t, "More than the energy drain, the violation shakes {himHer} to {hisHer} core, and ");
 						} else if (getHATELevel() < 3 || vVirg) {
 							w_append(w, t, "rubs against the entrance to {hisHer} ");
-							if (gender.equals("male")) {
-								w.append(t, "anus");
-							} else {
-								w.append(t, "pussy");
-							}
+							 w_append (w, t, "{hole}");
 							w_append(w, t, ".  {HeShe} instinctively tries to buck {hisHer} hips out of the way, and ");
 						} else {
 							w_append(w, t, "pushes into {hisHer} ");
-							if (gender.equals("male")) {
-								w.append(t, "anus");
-							} else {
-								w.append(t, "pussy");
-							}
+							 w_append (w, t, "{hole}");
 							w_append(w, t, ".  The numbness isn't enough to protect {himHer} from the intense sensations, and ");
 						}
 					} else {
@@ -33005,11 +32937,7 @@ public class Chosen implements Serializable {
 				} else {
 					w_append(w, t, " and line your enormous cock up with {hisHer} bare ");
 				}
-				if (gender.equals("male")) {
-					w.append(t, "ass.  ");
-				} else {
-					w.append(t, "pussy.  ");
-				}
+				 w_append (w, t, "{assPussy}.  ");
 			} else if (underType.equals("shorts")) {
 				if (w.getBodyStatus()[5] && w.tickle().equals(false)) {
 					w_append(w, t, " and work one of your spined cocks up under {hisHer} undershorts until it presses against {hisHer} ");
@@ -33018,11 +32946,7 @@ public class Chosen implements Serializable {
 				} else {
 					w_append(w, t, " and work your enormous cock up under {hisHer} undershorts until it presses against {hisHer} ");
 				}
-				if (gender.equals("male")) {
-					w.append(t, "anus.  ");
-				} else {
-					w.append(t, "pussy.  ");
-				}
+				 w_append (w, t, "{hole}.  ");
 			} else if (underType.equals("straps")) {
 				if (w.getBodyStatus()[5] && w.tickle().equals(false)) {
 					w_append(w, t, " and use one of your spined cocks to push aside the leather strap {heShe} wears underneath so that you can press it against {hisHer} ");
@@ -33031,11 +32955,7 @@ public class Chosen implements Serializable {
 				} else {
 					w_append(w, t, " and use your enormous cock to push aside the leather strap {heShe} wears underneath so that you can press it against {hisHer} ");
 				}
-				if (gender.equals("male")) {
-					w.append(t, "anus.  ");
-				} else {
-					w.append(t, "pussy.  ");
-				}
+				 w_append (w, t, "{hole}.  ");
 			} else {
 				if (w.getBodyStatus()[5] && w.tickle().equals(false)) {
 					w_append(w, t, " and use one of your spined cocks to push aside {hisHer} panties so that you can press it against {hisHer} ");
@@ -33044,11 +32964,7 @@ public class Chosen implements Serializable {
 				} else {
 					w_append(w, t, " and use your enormous cock to push aside {hisHer} panties so that you can press it against {hisHer} ");
 				}
-				if (gender.equals("male")) {
-					w.append(t, "anus.  ");
-				} else {
-					w.append(t, "pussy.  ");
-				}
+				 w_append (w, t, "{hole}.  ");
 			}
 			if (getHATELevel() < 3) {
 				if (morality > 66) {
@@ -34797,11 +34713,7 @@ public class Chosen implements Serializable {
 					} else if (getHATELevel() > 2) {
 						if ((vVirg == false && damageDealt[4] > 0) || w.getBodyStatus()[11]) {
 							w_append(w, t, ", though given that the others are already fucking {hisHer} ");
-							if (gender.equals("male")) {
-								w.append(t, "ass");
-							} else {
-								w.append(t, "pussy");
-							}
+							 w_append (w, t, "{assPussy}");
 							w.append(t, ", it doesn't make much difference.");
 						} else {
 							w_append(w, t, ", and given that {hisHer} Sexual Barrier has broken, {heShe}'s worried about the ones down below, too.");
@@ -34877,11 +34789,7 @@ public class Chosen implements Serializable {
 								w_append(w, t, " pussy, spilling a trickle of blood as {hisHer} hymen is torn in an instant.");
 							}
 						} else {
-							if (gender.equals("male")) {
-								w.append(t, "anus.");
-							} else {
-								w.append(t, "pussy.");
-							}
+							 w_append (w, t, "{hole}.");
 						}
 					} else {
 						if (getHATELevel() > 3) {
@@ -35179,11 +35087,7 @@ public class Chosen implements Serializable {
 					}
 					if (getHATELevel() >= 3 && damageDealt[4] > 0 && defiler && vVirg == false && w.getBodyStatus()[14] == false) {
 						w_append(w, t, "With {hisHer} ");
-						if (gender.equals("male")) {
-							w.append(t, "ass");
-						} else {
-							w.append(t, "pussy");
-						}
+						 w_append (w, t, "{assPussy}");
 						w.append(t, " left completely defenseless, there's nothing to stop");
 						if (w.getBodyStatus()[11]) {
 							w_append(w, t, " you from thrusting your slime deep inside {himHer}.  ");
@@ -35251,11 +35155,7 @@ public class Chosen implements Serializable {
 							}
 							if (gender.equals("female")) {
 								w.append(t, "virgin pussy.");
-							} else if (gender.equals("male")) {
-								w.append(t, "penis and virgin asshole.");
-							} else {
-								w.append(t, "penis and virgin pussy.");
-							}
+							} else  w_append (w, t, "penis and virgin {pussyAsshole}.");
 						} else {
 							if (getHATELevel() < 3) {
 								if (gender.equals("female")) {
@@ -36134,11 +36034,7 @@ public class Chosen implements Serializable {
 						w.append(t, "  Your tentacles force their ");
 					}
 					w_append(w, t, "way into {hisHer} ");
-					if (gender.equals("male")) {
-						w.append(t, "ass");
-					} else {
-						w.append(t, "pussy");
-					}
+					 w_append (w, t, "{assPussy}");
 					if (vVirg) {
 						if (gender.equals("male")) {
 							w_append(w, t, ", making you the first one to violate {himHer} like this.");
@@ -36852,11 +36748,7 @@ public class Chosen implements Serializable {
 						}
 					} else if (w.getBodyStatus()[19] && getImpregnationEffectiveness() >= impregnationReq()) {
 						w_append(w, t, ".  The last remnants of {hisHer} Sexual Barrier fade, allowing you to thrust yourself more easily in and out of {hisHer} ");
-						if (gender.equals("male")) {
-							w.append(t, "ass.");
-						} else {
-							w.append(t, "pussy.");
-						}
+						 w_append (w, t, "{assPussy}.");
 					} else {
 						w_append(w, t, ".  You find that {hisHer} Sexual Barrier is broken, so you take the opportunity to thrust yourself ");
 						if (gender.equals("male")) {
@@ -65807,18 +65699,10 @@ public class Chosen implements Serializable {
 					} else if (newEXPO < 1000) {
 						w.append(t, "more exposed than usual");
 					} else if (newEXPO < 10000) {
-						if (gender.equals("male")) {
-							w.append(t, "chest");
-						} else {
-							w.append(t, "breasts");
-						}
+						 w_append (w, t, "{chest}");
 						w.append(t, " on full display");
 					} else if (newEXPO < 100000) {
-						if (gender.equals("male")) {
-							w.append(t, "asshole");
-						} else {
-							w.append(t, "pussy");
-						}
+						 w_append (w, t, "{pussyAsshole}");
 						w.append(t, " uncovered for easy access");
 					} else if (newEXPO < 1000000) {
 						w.append(t, "essentially naked");
