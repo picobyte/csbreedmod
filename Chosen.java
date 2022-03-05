@@ -595,9 +595,9 @@ public class Chosen implements Serializable {
 						}
 						w_append(w, t, c, "so {heShe} orders {c:mainName} to lick {mainName}'s {organ} next.  ");
 						if (friendly) {
-							w_append(w, t, c.getMainName() + " is much happier to service {c:hisHer} friend, completely failing to notice ");
+							w_append(w, t, c, "{c:mainName} is much happier to service {c:hisHer} friend, completely failing to notice ");
 						} else {
-							w_append(w, t, c.getMainName() + " is annoyed at first, but {c:heShe} starts to actually find it funny when {c:heShe} notices ");
+							w_append(w, t, c, "{c:mainName} is annoyed at first, but {c:heShe} starts to actually find it funny when {c:heShe} notices ");
 						}
 						if (getPLEALevel() < 3 || cVirg) {
 							w_append(w, t, "that {mainName} is having a hard time resisting the urge to orgasm.");
@@ -616,9 +616,9 @@ public class Chosen implements Serializable {
 							w_append(w, t, c, "they make {c:mainName} start licking {hisHer} {organ} in time with the cock thrusting into {hisHer} {hole}.  ");
 						}
 						if (friendly) {
-							w_append(w, t, c.getMainName() + " feels awful for being used against {c:hisHer} friend like this.");
+							w_append(w, t, c, "{c:mainName} feels awful for being used against {c:hisHer} friend like this.");
 						} else {
-							w_append(w, t, c.getMainName() + " is surprised and a bit disgusted at {c:hisHer} rival's reaction.");
+							w_append(w, t, c, "{c:mainName} is surprised and a bit disgusted at {c:hisHer} rival's reaction.");
 						}
 					} else {
 						if (getHATELevel() < 3 || vVirg) {
@@ -646,9 +646,9 @@ public class Chosen implements Serializable {
 							w_append(w, t, c, "The Thrall fucking {mainName} pushes {hisHer} crotch into {c:mainName}'s face, ordering {c:himHer} to lick {mainName}'s {organ}.  ");
 						}
 						if (friendly) {
-							w_append(w, t, c.getMainName() + " feels very awkward about doing this sort of thing when {c:hisHer} friend clearly doesn't want it, but the Thralls are threatening both of them, so {c:heShe} complies.  ");
+							w_append(w, t, c, "{c:mainName} feels very awkward about doing this sort of thing when {c:hisHer} friend clearly doesn't want it, but the Thralls are threatening both of them, so {c:heShe} complies.  ");
 						} else {
-							w_append(w, t, c.getMainName() + " really doesn't want to do this, but {c:heShe}'s flustered and frightened by the Thralls' threats, so {c:heShe} still complies.  ");
+							w_append(w, t, c, "{c:mainName} really doesn't want to do this, but {c:heShe}'s flustered and frightened by the Thralls' threats, so {c:heShe} still complies.  ");
 						}
 						if (getPLEALevel() < 3 || cVirg) {
 							w_append(w, t, "{mainName} isn't able to stifle {hisHer} moans of pleasure for long.");
@@ -737,9 +737,9 @@ public class Chosen implements Serializable {
 							w_append(w, t, "eyes are glazed over with pleasure as {heShe} cums again.  The stimulation becomes almost too much to bear when ");
 						}
 						if (friendly) {
-							w_append(w, t, c.getMainName() + " is forced to lick {hisHer} " + organ + ".");
+							w_append(w, t, c, "{c:mainName} is forced to lick {hisHer} " + organ + ".");
 						} else {
-							w_append(w, t, c.getMainName() + " is forced to reluctantly lick {hisHer} " + organ + ".");
+							w_append(w, t, c, "{c:mainName} is forced to reluctantly lick {hisHer} " + organ + ".");
 						}
 					}
 				}
@@ -799,11 +799,11 @@ public class Chosen implements Serializable {
 				} else if (dignity > 33) {
 					if (c.getMorality() > 66) {
 						if (getPLEALevel() < 3 || cVirg) {
-							w_append(w, t, c.getMainName() + " is so busy diligently trying to make {mainName} cum");
+							w_append(w, t, c, "{c:mainName} is so busy diligently trying to make {mainName} cum");
 						} else if (gender.equals("female")) {
-							w_append(w, t, c.getMainName() + " is so busy diligently licking {mainName}'s clit as {heShe} cums");
+							w_append(w, t, c, "{c:mainName} is so busy diligently licking {mainName}'s clit as {heShe} cums");
 						} else {
-							w_append(w, t, c.getMainName() + " is so busy diligently swallowing {mainName}'s cum");
+							w_append(w, t, c, "{c:mainName} is so busy diligently swallowing {mainName}'s cum");
 						}
 						if (getHATELevel() < 3 || vVirg) {
 							w_append(w, t, c, " that {c:heShe}'s caught off guard when the Thralls start ejaculating all over the both of them.  They force {c:mainName} to lick it off {mainName}'s body");
@@ -827,9 +827,9 @@ public class Chosen implements Serializable {
 							w_append(w, t, c, ", {c:mainName}'s tongue brings {himHer} to orgasm as well.  ");
 						}
 						if (friendly) {
-							w_append(w, t, c.getMainName() + " can tell that {c:hisHer} friend is disgusted by all this, but {c:heShe} feels {c:heShe} doesn't have any choice but to continue.");
+							w_append(w, t, c, "{c:mainName} can tell that {c:hisHer} friend is disgusted by all this, but {c:heShe} feels {c:heShe} doesn't have any choice but to continue.");
 						} else {
-							w_append(w, t, c.getMainName() + " clearly isn't enjoying this, but {c:heShe} continues out of fear of what will be done to punish both of them otherwise.");
+							w_append(w, t, c, "{c:mainName} clearly isn't enjoying this, but {c:heShe} continues out of fear of what will be done to punish both of them otherwise.");
 						}
 					} else {
 						if (friendly) {
@@ -878,13 +878,13 @@ public class Chosen implements Serializable {
 							w_append(w, t, "taking turns fucking {mainName}'s {hole} until it's gaping open and dripping a steady stream of cum.  ");
 						}
 						if (friendly) {
-							w_append(w, t, c.getMainName() + " bites {c:hisHer} lip as {c:heShe} watches, hands trembling as {c:heShe} covers {c:himHer}self.");
+							w_append(w, t, c, "{c:mainName} bites {c:hisHer} lip as {c:heShe} watches, hands trembling as {c:heShe} covers {c:himHer}self.");
 						} else {
-							w_append(w, t, c.getMainName() + " watches in fascinated horror, almost forgetting to cover {c:himHer}self with {c:hisHer} hands.");
+							w_append(w, t, c, "{c:mainName} watches in fascinated horror, almost forgetting to cover {c:himHer}self with {c:hisHer} hands.");
 						}
 					} else {
 						if (friendly) {
-							w_append(w, t, c.getMainName() + " tells {mainName} that it's just too humiliating to keep licking {hisHer} " + organ + " in public, and {mainName} tells {c:himHer} that it's alright to stop.  ");
+							w_append(w, t, c, "{c:mainName} tells {mainName} that it's just too humiliating to keep licking {hisHer} " + organ + " in public, and {mainName} tells {c:himHer} that it's alright to stop.  ");
 						} else {
 							w_append(w, t, c, "Finding it too humiliating to continue, {c:mainName} refuses to continue servicing {mainName}'s {organ}.  ");
 						}
@@ -921,9 +921,9 @@ public class Chosen implements Serializable {
 						}
 					} else {
 						if (friendly) {
-							w_append(w, t, c.getMainName() + " tries to appeal to their friendship as {c:heShe} calls for {mainName} to fight back, ");
+							w_append(w, t, c, "{c:mainName} tries to appeal to their friendship as {c:heShe} calls for {mainName} to fight back, ");
 						} else {
-							w_append(w, t, c.getMainName() + " puts as much strength as {c:heShe} can into {c:hisHer} voice as {c:heShe} harshly rebukes {mainName}, ");
+							w_append(w, t, c, "{c:mainName} puts as much strength as {c:heShe} can into {c:hisHer} voice as {c:heShe} harshly rebukes {mainName}, ");
 						}
 						if (getHATELevel() < 3 || vVirg) {
 							w_append(w, t, "but {mainName} is so overwhelmed by the pleasure of the Thralls touching {hisHer} {organ} that {heShe} can't immediately respond.  ");
@@ -990,9 +990,9 @@ public class Chosen implements Serializable {
 						}
 					} else {
 						if (friendly) {
-							w_append(w, t, c.getMainName() + " is frightened by the sight of {c:hisHer} friend ");
+							w_append(w, t, c, "{c:mainName} is frightened by the sight of {c:hisHer} friend ");
 						} else {
-							w_append(w, t, c.getMainName() + " is demoralized by the sight of {c:hisHer} stronger rival ");
+							w_append(w, t, c, "{c:mainName} is demoralized by the sight of {c:hisHer} stronger rival ");
 						}
 						if (getHATELevel() < 3 || vVirg) {
 							w_append(w, t, c, "being so helpless in the Thralls' grasp, but {mainName} assures {c:himHer} that this is all going according to plan.  ");
@@ -1049,7 +1049,7 @@ public class Chosen implements Serializable {
 						if (friendly) {
 							w_append(w, t, "{mainName} grovels in apology, promising to do better next time.");
 						} else {
-							w_append(w, t, c.getMainName() + "'s angry shouts hurt {mainName}'s conscience, and {heShe} gets down on {hisHer} hands and knees as {heShe} promises to do better next time.");
+							w_append(w, t, c, "{c:mainName}'s angry shouts hurt {mainName}'s conscience, and {heShe} gets down on {hisHer} hands and knees as {heShe} promises to do better next time.");
 						}
 						if (modest) {
 							w_append(w, t, "  " + broken);
@@ -1082,9 +1082,9 @@ public class Chosen implements Serializable {
 							w_append(w, t, c, "Angered by {c:hisHer} rival's weakness, ");
 						}
 						if (getHATELevel() < 3 || vVirg) {
-							w_append(w, t, c.getMainName() + " shouts at {mainName} to stop sucking the Thralls' cocks and just start fighting them");
+							w_append(w, t, c, "{c:mainName} shouts at {mainName} to stop sucking the Thralls' cocks and just start fighting them");
 						} else {
-							w_append(w, t, c.getMainName() + " shouts at {mainName} to stop letting the Thralls fuck {himHer} and just start fighting them");
+							w_append(w, t, c, "{c:mainName} shouts at {mainName} to stop letting the Thralls fuck {himHer} and just start fighting them");
 						}
 						if (getPLEALevel() < 3 || cVirg) {
 							w_append(w, t, c, ", but {mainName} doesn't want to be responsible for the punishment they've promised for {c:mainName} if {heShe} does so.");
@@ -1098,9 +1098,9 @@ public class Chosen implements Serializable {
 				} else {
 					if (c.getMorality() > 66) {
 						if (getHATELevel() < 3 || vVirg) {
-							w_append(w, t, c.getMainName() + " tells {mainName} that there's no need to let the Thralls violate {hisHer} mouth");
+							w_append(w, t, c, "{c:mainName} tells {mainName} that there's no need to let the Thralls violate {hisHer} mouth");
 						} else {
-							w_append(w, t, c.getMainName() + " tells {mainName} that there's no need to let the Thralls have sex with {himHer}");
+							w_append(w, t, c, "{c:mainName} tells {mainName} that there's no need to let the Thralls have sex with {himHer}");
 						}
 						if (friendly) {
 							w_append(w, t, c, ", but {mainName} still wants to distract them from {c:mainName}.  ");
@@ -1152,7 +1152,7 @@ public class Chosen implements Serializable {
 						} else {
 							w_append(w, t, ", and several more film {hisHer} penis spurting as {heShe} cums.  ");
 						}
-						w_append(w, t, c.getMainName() + " warns {himHer} that {heShe}'s being watched");
+						w_append(w, t, c, "{c:mainName} warns {himHer} that {heShe}'s being watched");
 						if (friendly) {
 							w_append(w, t, ", but {heShe} can't really do anything about it.");
 						} else {
@@ -1166,7 +1166,7 @@ public class Chosen implements Serializable {
 							w_append(w, t, "the spot where the Thrall's cock is penetrating {hisHer} {hole}.  ");
 						}
 						if (friendly) {
-							w_append(w, t, c.getMainName() + " asks {himHer} what's wrong");
+							w_append(w, t, c, "{c:mainName} asks {himHer} what's wrong");
 						} else {
 							w_append(w, t, c, "Annoyed and exasperated, {c:mainName} asks {himHer} what the problem is");
 						}
@@ -1277,9 +1277,9 @@ public class Chosen implements Serializable {
 						}
 						w_append(w, t, c, ", briefly forgetting to service {c:himHer}.  ");
 						if (friendly) {
-							w_append(w, t, c.getMainName() + " squeezes {c:hisHer} thighs around {mainName}'s head in hopes that they won't notice.");
+							w_append(w, t, c, "{c:mainName} squeezes {c:hisHer} thighs around {mainName}'s head in hopes that they won't notice.");
 						} else {
-							w_append(w, t, c.getMainName() + " tries to pretend that {mainName} is still continuing, gasping and sighing, but it's spoiled somewhat when {c:heShe} glares down at {mainName} and angrily whispers that {heShe} needs to start again or they'll both get punished.");
+							w_append(w, t, c, "{c:mainName} tries to pretend that {mainName} is still continuing, gasping and sighing, but it's spoiled somewhat when {c:heShe} glares down at {mainName} and angrily whispers that {heShe} needs to start again or they'll both get punished.");
 						}
 					} else {
 						if (getHATELevel() < 3 || vVirg) {
@@ -1293,7 +1293,7 @@ public class Chosen implements Serializable {
 							w_append(w, t, c, ", especially with orgasmic spasms running through {hisHer} body, but {heShe} just channels that passion into trying to make {c:mainName} cum.  ");
 						}
 						if (friendly) {
-							w_append(w, t, c.getMainName() + " is actually slightly intimidated by how much effort {heShe}'s putting in.");
+							w_append(w, t, c, "{c:mainName} is actually slightly intimidated by how much effort {heShe}'s putting in.");
 						} else {
 							w_append(w, t, c, "Meanwhile, as much as {c:mainName} finds this situation annoying, {c:heShe} does enjoy having {c:hisHer} rival on {hisHer} knees.");
 						}
@@ -1398,7 +1398,7 @@ public class Chosen implements Serializable {
 						if (friendly) {
 							w_append(w, t, c, "{HeShe} moans deliriously for {c:mainName}, who reassures {himHer} that everything will be okay.");
 						} else {
-							w_append(w, t, c.getMainName() + " just tries to ignore {hisHer} moans and focus on finding a way to escape.");
+							w_append(w, t, c, "{c:mainName} just tries to ignore {hisHer} moans and focus on finding a way to escape.");
 						}
 					}
 				} else {
@@ -1416,13 +1416,13 @@ public class Chosen implements Serializable {
 						if (friendly) {
 							w_append(w, t, c, "As {heShe} moans in defeat, {c:mainName} shouts angrily at the Thralls, threatening to kill them all if they don't leave {c:hisHer} friend alone.");
 						} else {
-							w_append(w, t, c.getMainName() + " doesn't even notice, too busy lashing out in an angry attempt to smash the Thralls' cameras or the Thralls themselves.");
+							w_append(w, t, c, "{c:mainName} doesn't even notice, too busy lashing out in an angry attempt to smash the Thralls' cameras or the Thralls themselves.");
 						}
 					} else if (c.getInnocence() > 33) {
 						if (friendly) {
-							w_append(w, t, c.getMainName() + " sternly calls for {mainName} to return to {hisHer} senses");
+							w_append(w, t, c, "{c:mainName} sternly calls for {mainName} to return to {hisHer} senses");
 						} else {
-							w_append(w, t, c.getMainName() + " angrily tells {mainName} to get ahold of {himHer}self");
+							w_append(w, t, c, "{c:mainName} angrily tells {mainName} to get ahold of {himHer}self");
 						}
 						if (getHATELevel() < 3 || vVirg) {
 							w_append(w, t, ", but the Thralls' hands all over {hisHer} body are hard to resist.  ");
@@ -1446,9 +1446,9 @@ public class Chosen implements Serializable {
 							w_append(w, t, ", moaning with {hisHer} tongue out as the Thralls take turns mounting {himHer}.  ");
 						}
 						if (friendly) {
-							w_append(w, t, c.getMainName() + " refuses to watch, but the noises alone are enough to make {c:himHer} blush.");
+							w_append(w, t, c, "{c:mainName} refuses to watch, but the noises alone are enough to make {c:himHer} blush.");
 						} else {
-							w_append(w, t, c.getMainName() + " shakes {c:hisHer} head and harshly chastises {mainName} for being so weak-willed.");
+							w_append(w, t, c, "{c:mainName} shakes {c:hisHer} head and harshly chastises {mainName} for being so weak-willed.");
 						}
 					}
 				}
@@ -3878,15 +3878,15 @@ public class Chosen implements Serializable {
 					if (c.getDignity() > 66) {
 						w_append(w, t, c, "When the Thralls start filming the scene on their phones, {c:mainName} tries to maintain a defiant expression even with {c:hisHer} hands forced above {c:hisHer} head.");
 					} else if (c.getDignity() > 33) {
-						w_append(w, t, c.getMainName() + " is forced to kneel with {c:hisHer} arms raised up, frowning at the Thralls' filming cameras.  ");
+						w_append(w, t, c, "{c:mainName} is forced to kneel with {c:hisHer} arms raised up, frowning at the Thralls' filming cameras.  ");
 					} else {
-						w_append(w, t, c.getMainName() + " hangs limp from {c:hisHer} wrists, not showing any reaction even when the Thralls start pulling out their phones to film the scene.  ");
+						w_append(w, t, c, "{c:mainName} hangs limp from {c:hisHer} wrists, not showing any reaction even when the Thralls start pulling out their phones to film the scene.  ");
 					}
 				} else {
 					if (c.getDignity() > 66) {
 						w_append(w, t, c, "At first, {c:mainName} tries to maintain a defiant expression, but {c:heShe} stiffens up with panic when the Thralls start to film {c:hisHer} body");
 					} else if (c.getDignity() > 33) {
-						w_append(w, t, c.getMainName() + "'s eyes go wide and {c:heShe} stammers a protest when the Thralls start filming {c:hisHer} body");
+						w_append(w, t, c, "{c:mainName}'s eyes go wide and {c:heShe} stammers a protest when the Thralls start filming {c:hisHer} body");
 					} else {
 						w_append(w, t, c, "Feeling weak and vulnerable, {c:mainName} cries for help even as the Thralls film {hisHer} body");
 					}
@@ -4036,7 +4036,7 @@ public class Chosen implements Serializable {
 						} else {
 							w_append(w, t, c, ", {c:heShe}'s desperate to distract the Thralls from abusing {hisHer} " + abused + ".  ");
 						}
-						w_append(w, t, c.getMainName() + " is so embarrassed {c:heShe} can barely move {c:hisHer} mouth, while {mainName} is so proactive about taking cocks down {hisHer} throat that ");
+						w_append(w, t, c, "{c:mainName} is so embarrassed {c:heShe} can barely move {c:hisHer} mouth, while {mainName} is so proactive about taking cocks down {hisHer} throat that ");
 						if (getEXPOLevel() < 3) {
 							w_append(w, t, "the Thralls barely have time to strip {himHer}.");
 						} else {
@@ -4050,9 +4050,9 @@ public class Chosen implements Serializable {
 						}
 						w_append(w, t, "by the hair and pulls their faces to {hisHer} cock.  ");
 						if (w.tickle()) {
-							w_append(w, t, c.getMainName() + " is laughing too hard to do more than rub {hisHer} face against it");
+							w_append(w, t, c, "{c:mainName} is laughing too hard to do more than rub {hisHer} face against it");
 						} else {
-							w_append(w, t, c.getMainName() + " is too caught up in {hisHer} moans of pain to do more than rub {hisHer} face against it");
+							w_append(w, t, c, "{c:mainName} is too caught up in {hisHer} moans of pain to do more than rub {hisHer} face against it");
 						}
 						if (friendly) {
 							w_append(w, t, ", so {mainName} takes the pressure off {himHer} by opening {hisHer} mouth");
@@ -4104,9 +4104,9 @@ public class Chosen implements Serializable {
 							w_append(w, t, c, "Annoyed by the fact that {mainName}'s Sexual Barrier continues to protect {c:hisHer} ass, one of the Thralls decides to fuck {c:mainName}'s mouth instead.  ");
 						}
 						if (w.tickle()) {
-							w_append(w, t, c.getMainName() + " is almost grateful to have something to muffle {c:hisHer} shameful laughter at being tickled.  ");
+							w_append(w, t, c, "{c:mainName} is almost grateful to have something to muffle {c:hisHer} shameful laughter at being tickled.  ");
 						} else {
-							w_append(w, t, c.getMainName() + " is almost grateful to have something to muffle {c:hisHer} pitful cries of pain at the abuse to {c:hisHer} " + abused + ".  ");
+							w_append(w, t, c, "{c:mainName} is almost grateful to have something to muffle {c:hisHer} pitful cries of pain at the abuse to {c:hisHer} " + abused + ".  ");
 						}
 						if (vaginal) {
 							w_append(w, t, "The Thralls around {mainName} get the same idea, savagely thrusting into {hisHer} pussy, ass, and mouth all at once as they ");
@@ -4181,9 +4181,9 @@ public class Chosen implements Serializable {
 				} else {
 					if (c.getDignity() > 66) {
 						if (friendly) {
-							w_append(w, t, c.getMainName() + "'s shame would normally make {c:himHer} an easy target, as {c:heShe}'s too embarrassed to move {c:hisHer} legs away from where {c:heShe}'s using them to cover {c:himHer}self.  However, {mainName} is violently defending {c:himHer}, ");
+							w_append(w, t, c, "{c:mainName}'s shame would normally make {c:himHer} an easy target, as {c:heShe}'s too embarrassed to move {c:hisHer} legs away from where {c:heShe}'s using them to cover {c:himHer}self.  However, {mainName} is violently defending {c:himHer}, ");
 						} else {
-							w_append(w, t, c.getMainName() + " is too embarrassed to stop covering {c:himHer}self with {c:hisHer} legs, but {mainName} has no such inhibitions.  {HeShe} is ");
+							w_append(w, t, c, "{c:mainName} is too embarrassed to stop covering {c:himHer}self with {c:hisHer} legs, but {mainName} has no such inhibitions.  {HeShe} is ");
 						}
 						if (getEXPOLevel() < 3) {
 							w.append(t, "kicking at any Thralls who approach too carelessly");
@@ -4225,7 +4225,7 @@ public class Chosen implements Serializable {
 							w_append(w, t, " starts spanking {himHer}.  ");
 						}
 						if (friendly) {
-							w_append(w, t, c.getMainName() + " tries to help, offering {c:hisHer} own mouth as well to take some pressure off {himHer}.");
+							w_append(w, t, c, "{c:mainName} tries to help, offering {c:hisHer} own mouth as well to take some pressure off {himHer}.");
 						} else {
 							w_append(w, t, c, "Unable to stand by while another Chosen is abused, {c:mainName} reluctantly offers {c:hisHer} own mouth as well in order to make things more bearable for {himHer}.");
 						}
@@ -4346,7 +4346,7 @@ public class Chosen implements Serializable {
 						} else {
 							w_append(w, t, "The few remaining scraps of {hisHer} clothes are soaked.  ");
 						}
-						w_append(w, t, c.getMainName() + " is faring even worse, ");
+						w_append(w, t, c, "{c:mainName} is faring even worse, ");
 						if (friendly) {
 							w_append(w, t, c, "but {c:heShe} reassures {mainName} that {c:heShe}'s not letting it get to {c:himHer}.");
 						} else {
@@ -4392,7 +4392,7 @@ public class Chosen implements Serializable {
 						if (friendly) {
 							w_append(w, t, c, "Neither of them is happy with this, but they recognize that it's their best shot at escape, and {c:mainName} ");
 						} else {
-							w_append(w, t, c.getMainName() + " hates being bossed around like this, but {c:heShe} recognizes that {mainName}'s greater strength is their best shot at escape, and {c:heShe}");
+							w_append(w, t, c, "{c:mainName} hates being bossed around like this, but {c:heShe} recognizes that {mainName}'s greater strength is their best shot at escape, and {c:heShe}");
 						}
 						w_append(w, t, c, "opens {c:hisHer} mouth wide enough for two Thralls to thrust inside at once.  ");
 						if (getEXPOLevel() < 3) {
@@ -4406,9 +4406,9 @@ public class Chosen implements Serializable {
 				if (innocence > 66) {
 					if (c.getMorality() > 66) {
 						if (w.tickle()) {
-							w_append(w, t, c.getMainName() + " squirms enticingly in a deliberate attempt to get the Thralls to focus their tickling on {c:himHer}");
+							w_append(w, t, c, "{c:mainName} squirms enticingly in a deliberate attempt to get the Thralls to focus their tickling on {c:himHer}");
 						} else {
-							w_append(w, t, c.getMainName() + " spreads {c:hisHer} legs in a deliberate move to entice the Thralls to focus even more abuse on {c:himHer}");
+							w_append(w, t, c, "{c:mainName} spreads {c:hisHer} legs in a deliberate move to entice the Thralls to focus even more abuse on {c:himHer}");
 						}
 						if (friendly) {
 							w_append(w, t, c, ", wanting to give {c:hisHer} stronger friend a chance to fight {hisHer} way free.  ");
@@ -4441,9 +4441,9 @@ public class Chosen implements Serializable {
 							w_append(w, t, ", {mainName} thrashes wildly, bare legs kicking with no thought for who might get hit.  ");
 						}
 						if (friendly) {
-							w_append(w, t, c.getMainName() + " urges {himHer} to calm down, and {mainName} complies as best {heShe} can, trying to ignore ");
+							w_append(w, t, c, "{c:mainName} urges {himHer} to calm down, and {mainName} complies as best {heShe} can, trying to ignore ");
 						} else {
-							w_append(w, t, c.getMainName() + " tries to urge {himHer} to calm down, but {mainName} is too caught up in ");
+							w_append(w, t, c, "{c:mainName} tries to urge {himHer} to calm down, but {mainName} is too caught up in ");
 						}
 						if (w.tickle()) {
 							w_append(w, t, "the tickling under {hisHer} raised arms.");
@@ -4515,9 +4515,9 @@ public class Chosen implements Serializable {
 							w.append(t, ".");
 						}
 						if (getEXPOLevel() < 3) {
-							w_append(w, t, c.getMainName() + " is in awe at {hisHer} fighting spirit");
+							w_append(w, t, c, "{c:mainName} is in awe at {hisHer} fighting spirit");
 						} else {
-							w_append(w, t, c.getMainName() + " still blushes when {c:heShe} sees the way {mainName}'s kicking flashes {hisHer} privates");
+							w_append(w, t, c, "{c:mainName} still blushes when {c:heShe} sees the way {mainName}'s kicking flashes {hisHer} privates");
 						}
 						if (friendly) {
 							w_append(w, t, c, ", completely entranced by {c:hisHer} friend.");
@@ -4589,7 +4589,7 @@ public class Chosen implements Serializable {
 						}
 						w_append(w, t, c, ", {mainName} advises {c:mainName} to calm down and conserve {c:hisHer} strength.  ");
 						if (friendly) {
-							w_append(w, t, c.getMainName() + " tries {c:hisHer} best to follow {c:hisHer} friend's advice, even though {c:heShe} has a hard time dealing with ");
+							w_append(w, t, c, "{c:mainName} tries {c:hisHer} best to follow {c:hisHer} friend's advice, even though {c:heShe} has a hard time dealing with ");
 						} else {
 							w_append(w, t, c, "But {c:mainName} doesn't have the willpower or the motivation to follow {hisHer} advice, and {heShe}'s too overwhelmed by ");
 						}
@@ -4620,7 +4620,7 @@ public class Chosen implements Serializable {
 						if (friendly) {
 							w_append(w, t, c, "However, when {c:mainName} cries for help, {mainName} abandons {hisHer} plan, driven to protect {hisHer} friend.");
 						} else {
-							w_append(w, t, c.getMainName() + " angrily calls for help, but {mainName} knows there's no point in trying to assist.");
+							w_append(w, t, c, "{c:mainName} angrily calls for help, but {mainName} knows there's no point in trying to assist.");
 						}
 					}
 				}
@@ -4636,9 +4636,9 @@ public class Chosen implements Serializable {
 				if (morality > 66) {
 					if (c.getDignity() > 66) {
 						if (w.tickle()) {
-							w_append(w, t, c.getMainName() + " is determinedly trying to get {c:hisHer} laughter back under control as the Thralls tickle {c:himHer} and {mainName}");
+							w_append(w, t, c, "{c:mainName} is determinedly trying to get {c:hisHer} laughter back under control as the Thralls tickle {c:himHer} and {mainName}");
 						} else {
-							w_append(w, t, c.getMainName() + " is determinedly trying to hold back {c:hisHer} screams of pain as the Thralls take turns kicking {c:hisHer} " + otherAbused);
+							w_append(w, t, c, "{c:mainName} is determinedly trying to hold back {c:hisHer} screams of pain as the Thralls take turns kicking {c:hisHer} " + otherAbused);
 						}
 						if (getEXPOLevel() < 3) {
 							w_append(w, t, " in a show of stubborn pride.  {mainName} is afraid of ");
@@ -4820,9 +4820,9 @@ public class Chosen implements Serializable {
 				} else {
 					if (c.getDignity() > 66) {
 						if (friendly) {
-							w_append(w, t, c.getMainName() + " is trying to maintain a defiant demeanor for {hisHer} friend's sake, but {mainName} is too panicked to do the same.  ");
+							w_append(w, t, c, "{c:mainName} is trying to maintain a defiant demeanor for {hisHer} friend's sake, but {mainName} is too panicked to do the same.  ");
 						} else {
-							w_append(w, t, c.getMainName() + " is trying to maintain a defiant demeanor so that any watching fans don't lose hope, but {mainName} can't be bothered.  ");
+							w_append(w, t, c, "{c:mainName} is trying to maintain a defiant demeanor so that any watching fans don't lose hope, but {mainName} can't be bothered.  ");
 						}
 						if (getEXPOLevel() < 3) {
 							w_append(w, t, "{HeShe} begs and bargains with the Thralls pulling aside {hisHer} {bottomDesc}");
@@ -4978,7 +4978,7 @@ public class Chosen implements Serializable {
 							w_append(w, t, "{hisHer} bare thighs.  ");
 						}
 						if (friendly) {
-							w_append(w, t, c.getMainName() + " winces at seeing {c:hisHer} friend in such a humiliating state.");
+							w_append(w, t, c, "{c:mainName} winces at seeing {c:hisHer} friend in such a humiliating state.");
 						} else {
 							w_append(w, t, c, "{HeShe} struggles to choke back a sob, but {c:mainName} is too busy fending off the Thralls masturbating with {c:hisHer} hair to offer any sympathy.");
 						}
@@ -5127,9 +5127,9 @@ public class Chosen implements Serializable {
 							w_append(w, t, " and making no effort to cover {hisHer} exposed body.  ");
 						}
 						if (friendly) {
-							w_append(w, t, c.getMainName() + " wears a dark glare, memorizing the Thralls' faces.");
+							w_append(w, t, c, "{c:mainName} wears a dark glare, memorizing the Thralls' faces.");
 						} else {
-							w_append(w, t, c.getMainName() + " smirks as {c:heShe} watches.");
+							w_append(w, t, c, "{c:mainName} smirks as {c:heShe} watches.");
 						}
 					}
 				} else if (innocence > 33) {
@@ -5182,9 +5182,9 @@ public class Chosen implements Serializable {
 						}
 					} else {
 						if (friendly) {
-							w_append(w, t, c.getMainName() + "'s enraged kicks force the Thralls away from {mainName}, who sags in relief");
+							w_append(w, t, c, "{c:mainName}'s enraged kicks force the Thralls away from {mainName}, who sags in relief");
 						} else {
-							w_append(w, t, c.getMainName() + "'s violent struggling demands the Thralls' attention, and they briefly leave {mainName} alone.  {HeShe} sags in relief");
+							w_append(w, t, c, "{c:mainName}'s violent struggling demands the Thralls' attention, and they briefly leave {mainName} alone.  {HeShe} sags in relief");
 						}
 						if (w.tickle()) {
 							w_append(w, t, ", catching {hisHer} breath after being forced to laugh so much.  ");
@@ -5223,7 +5223,7 @@ public class Chosen implements Serializable {
 						} else {
 							w_append(w, t, " and masturbate, directing their spurts of semen at {hisHer} asshole.  ");
 						}
-						w_append(w, t, c.getMainName() + ", determined to distract them in the only way {c:heShe} knows, spreads {c:hisHer} own legs wide open and calls for the Thrall's attention.  ");
+						w_append(w, t, c, "{c:mainName}, determined to distract them in the only way {c:heShe} knows, spreads {c:hisHer} own legs wide open and calls for the Thrall's attention.  ");
 						if (friendly) {
 							w_append(w, t, "Tears of gratitude come to {mainName}'s eyes.");
 						} else {
@@ -5251,7 +5251,7 @@ public class Chosen implements Serializable {
 						if (friendly) {
 							w_append(w, t, c, "But {c:mainName}'s voice cuts through the crowd, telling {himHer} not to lose hope.");
 						} else {
-							w_append(w, t, c.getMainName() + " just looks at {himHer} like {heShe}'s stupid and tells {himHer} that it was obvious all along.");
+							w_append(w, t, c, "{c:mainName} just looks at {himHer} like {heShe}'s stupid and tells {himHer} that it was obvious all along.");
 						}
 					} else {
 						w_append(w, t, "{mainName} tries to focus, ");
@@ -5260,7 +5260,7 @@ public class Chosen implements Serializable {
 						} else {
 							w_append(w, t, "struggling against the pain of the Thralls kicking {hisHer} " + abused + " and trying to help ");
 						}
-						w_append(w, t, c.getMainName() + ", but " + c.getMainName() + " ");
+						w_append(w, t, c, "{c:mainName}, but {c:mainName} ");
 						if (friendly) {
 							w_append(w, t, c, "tells {himHer} to stop being a hero and just look after {himHer}self for once.  {c:HeShe} can see ");
 						} else {
@@ -9228,7 +9228,7 @@ public class Chosen implements Serializable {
 					}
 				}
 				if (c.getDignity() > 66) {
-					w_append(w, t, c.getMainName() + "'s face is red ");
+					w_append(w, t, c, "{c:mainName}'s face is red ");
 					if (getEXPOLevel() < 3 && c.getEXPOLevel() < 3) {
 						w.append(t, "at the embarrassing way their limbs are tangled together");
 					} else if (getEXPOLevel() < 3) {
@@ -9251,7 +9251,7 @@ public class Chosen implements Serializable {
 					}
 					w.append(t, " to fight back properly");
 				} else {
-					w_append(w, t, c.getMainName() + "'s squirming discomfort ");
+					w_append(w, t, c, "{c:mainName}'s squirming discomfort ");
 					if (getEXPOLevel() < 3 && c.getEXPOLevel() < 3) {
 						w.append(t, "tangles their limbs together");
 					} else if (getEXPOLevel() < 3) {
@@ -9307,11 +9307,11 @@ public class Chosen implements Serializable {
 					}
 				}
 				if (gender.equals("female")) {
-					w_append(w, t, c.getMainName() + " can clearly feel the wetness suddenly dripping from {hisHer} pussy");
+					w_append(w, t, c, "{c:mainName} can clearly feel the wetness suddenly dripping from {hisHer} pussy");
 				} else if (gender.equals("male") && w.tickle() == false && getINJULevel() >= 3 && aVirg == false) {
-					w_append(w, t, c.getMainName() + " can clearly feel {c:hisHer} bound penis uselessly twitching against their bellies in a dry orgasm");
+					w_append(w, t, c, "{c:mainName} can clearly feel {c:hisHer} bound penis uselessly twitching against their bellies in a dry orgasm");
 				} else {
-					w_append(w, t, c.getMainName() + "'s eyes go wide as {c:heShe} feels {hisHer} cock spurting against their bellies");
+					w_append(w, t, c, "{c:mainName}'s eyes go wide as {c:heShe} feels {hisHer} cock spurting against their bellies");
 				}
 				if (dignity > 66) {
 					w_append(w, t, ", no matter how {mainName} tries to hide {hisHer} moans of pleasure.");
@@ -9384,9 +9384,9 @@ public class Chosen implements Serializable {
 						}
 					} else {
 						if (friendly) {
-							w_append(w, t, c.getMainName() + " doesn't want to make things worse for {hisHer} friend");
+							w_append(w, t, c, "{c:mainName} doesn't want to make things worse for {hisHer} friend");
 						} else {
-							w_append(w, t, c.getMainName() + " knows that distracting {hisHer} rival will just make it harder for either of them to escape");
+							w_append(w, t, c, "{c:mainName} knows that distracting {hisHer} rival will just make it harder for either of them to escape");
 						}
 						w_append(w, t, c, ", so {c:heShe} tries to control {c:hisHer} orgasmic spasms, but with the cables binding them so tightly together");
 						if (getEXPOLevel() < 3) {
@@ -9407,9 +9407,9 @@ public class Chosen implements Serializable {
 				} else if (dignity > 33) {
 					if (c.getInnocence() > 66) {
 						if (friendly) {
-							w_append(w, t, c.getMainName() + " carelessly bucks {c:hisHer} hips against {mainName} as {c:heShe} cums, while {mainName} tries to endure the accompanying stimulation through willpower alone.  ");
+							w_append(w, t, c, "{c:mainName} carelessly bucks {c:hisHer} hips against {mainName} as {c:heShe} cums, while {mainName} tries to endure the accompanying stimulation through willpower alone.  ");
 						} else {
-							w_append(w, t, c.getMainName() + " carelessly bucks {c:hisHer} hips against {mainName} as {c:heShe} cums, too overwhelmed by the pleasure to heed {mainName}'s demands that {c:heShe} stop.  ");
+							w_append(w, t, c, "{c:mainName} carelessly bucks {c:hisHer} hips against {mainName} as {c:heShe} cums, too overwhelmed by the pleasure to heed {mainName}'s demands that {c:heShe} stop.  ");
 						}
 						if (getINJULevel() < 3 || aVirg) {
 							w_append(w, t, "The pressure against {hisHer} {organ} makes {himHer} climax as well");
@@ -9432,7 +9432,7 @@ public class Chosen implements Serializable {
 							w.append(t, "their skin-to-skin contact.");
 						}
 					} else if (c.getInnocence() > 33) {
-						w_append(w, t, c.getMainName() + "'s orgasmic spasms cause {c:hisHer} thigh to grind against {mainName}'s ");
+						w_append(w, t, c, "{c:mainName}'s orgasmic spasms cause {c:hisHer} thigh to grind against {mainName}'s ");
 						if (getEXPOLevel() < 3) {
 							w_append(w, t, "{organ} through {hisHer} " + bottomDesc);
 						} else {
@@ -9498,9 +9498,9 @@ public class Chosen implements Serializable {
 						}
 					} else if (c.getInnocence() > 33) {
 						if (friendly) {
-							w_append(w, t, c.getMainName() + " tries to warn {mainName} that {c:heShe}'s about to cum, but {c:heShe} can't bring {c:himHer}self to say something so embarrassing in front of {c:hisHer} friend.  ");
+							w_append(w, t, c, "{c:mainName} tries to warn {mainName} that {c:heShe}'s about to cum, but {c:heShe} can't bring {c:himHer}self to say something so embarrassing in front of {c:hisHer} friend.  ");
 						} else {
-							w_append(w, t, c.getMainName() + " tries to warn {mainName} that {c:heShe}'s about to cum, but {c:heShe} can't bring {c:himHer}self to admit something so embarrassing to {c:hisHer} rival.  ");
+							w_append(w, t, c, "{c:mainName} tries to warn {mainName} that {c:heShe}'s about to cum, but {c:heShe} can't bring {c:himHer}self to admit something so embarrassing to {c:hisHer} rival.  ");
 						}
 						if (getINJULevel() < 3 || aVirg) {
 							w_append(w, t, "{mainName}, who was preoccupied with trying to break the cables binding them together");
@@ -9518,9 +9518,9 @@ public class Chosen implements Serializable {
 						}
 					} else {
 						if (friendly) {
-							w_append(w, t, c.getMainName() + "'s face is bright red with embarrassment as {c:heShe} tries in vain to hold back {c:hisHer} next orgasm");
+							w_append(w, t, c, "{c:mainName}'s face is bright red with embarrassment as {c:heShe} tries in vain to hold back {c:hisHer} next orgasm");
 						} else {
-							w_append(w, t, c.getMainName() + "'s face is bright red with embarrassment and self-loathing as {c:heShe} fails to keep {c:himHer}self from cumming against {c:hisHer} rival's body");
+							w_append(w, t, c, "{c:mainName}'s face is bright red with embarrassment and self-loathing as {c:heShe} fails to keep {c:himHer}self from cumming against {c:hisHer} rival's body");
 						}
 						if (getEXPOLevel() < 3) {
 							w_append(w, t, c, ", and {mainName} cries out in surprise as {heShe} feels {c:mainName} abruptly bucking against {himHer} through {hisHer} " + bottomDesc + ".  ");
@@ -9566,7 +9566,7 @@ public class Chosen implements Serializable {
 							w_append(w, t, "push {himHer} down and tie {himHer} up again, pulling out {hisHer} buttplug and replacing it with an even larger one.");
 						}
 					} else {
-						w_append(w, t, c.getMainName() + " angers the Thralls by kicking one of them in the face, ");
+						w_append(w, t, c, "{c:mainName} angers the Thralls by kicking one of them in the face, ");
 						if (friendly) {
 							w_append(w, t, "but when {mainName} asks that they punish {himHer} in {hisHer} friend's place, they're happy to comply.  ");
 						} else {
@@ -9626,9 +9626,9 @@ public class Chosen implements Serializable {
 							w_append(w, t, "As one of the Thralls adjusts {mainName}'s vibrating buttplug");
 						}
 						if (getEXPOLevel() < 3) {
-							w_append(w, t, c.getMainName() + " can clearly see the vibrator against {hisHer} " + organ + " around {hisHer} shifted-aside " + bottomDesc + ".");
+							w_append(w, t, c, "{c:mainName} can clearly see the vibrator against {hisHer} " + organ + " around {hisHer} shifted-aside " + bottomDesc + ".");
 						} else {
-							w_append(w, t, c.getMainName() + "'s eyes go wide at the close-up view of the vibrator against {hisHer} " + organ + ".");
+							w_append(w, t, c, "{c:mainName}'s eyes go wide at the close-up view of the vibrator against {hisHer} " + organ + ".");
 						}
 					}
 				} else {
@@ -9703,9 +9703,9 @@ public class Chosen implements Serializable {
 							w_append(w, t, c, ", prompting the Thralls to spank {hisHer} bare bottom as punishment as they tie {himHer} up again so that {heShe}'s face-to-face with {c:mainName}.  ");
 						}
 						if (friendly) {
-							w_append(w, t, c.getMainName() + " looks apologetic that {c:heShe} was unable to help once again.");
+							w_append(w, t, c, "{c:mainName} looks apologetic that {c:heShe} was unable to help once again.");
 						} else {
-							w_append(w, t, c.getMainName() + " frowns, unhappy at having to look {c:hisHer} rival in the eye again.");
+							w_append(w, t, c, "{c:mainName} frowns, unhappy at having to look {c:hisHer} rival in the eye again.");
 						}
 					} else if (c.getMorality() > 33) {
 						if (getEXPOLevel() < 3) {
@@ -9730,9 +9730,9 @@ public class Chosen implements Serializable {
 						}
 					} else {
 						if (friendly) {
-							w_append(w, t, c.getMainName() + " begs for {mainName} to hurry up and get them free, and the power of friendship motivates {himHer} to ");
+							w_append(w, t, c, "{c:mainName} begs for {mainName} to hurry up and get them free, and the power of friendship motivates {himHer} to ");
 						} else {
-							w_append(w, t, c.getMainName() + " bites {mainName}'s " + organ + ", and the jolt of pain causes {himHer} to ");
+							w_append(w, t, c, "{c:mainName} bites {mainName}'s " + organ + ", and the jolt of pain causes {himHer} to ");
 						}
 						if (getINJULevel() < 3 || aVirg) {
 							w_append(w, t, "overcome {hisHer} orgasmic spasms and snap several of the cables holding them together.  ");
@@ -9814,9 +9814,9 @@ public class Chosen implements Serializable {
 						}
 						w.append(t, "They adjust the bindings so that the two Chosen's legs are tangled together, their faces less than in inch apart");
 						if (friendly) {
-							w_append(w, t, c.getMainName() + " wears an expression of awe that {mainName} was almost strong enough to pull off {hisHer} plan.");
+							w_append(w, t, c, "{c:mainName} wears an expression of awe that {mainName} was almost strong enough to pull off {hisHer} plan.");
 						} else {
-							w_append(w, t, c.getMainName() + " smirks and remarks that this is what {mainName} gets for trying to play the hero all alone.");
+							w_append(w, t, c, "{c:mainName} smirks and remarks that this is what {mainName} gets for trying to play the hero all alone.");
 						}
 					}
 				} else {
@@ -9988,7 +9988,7 @@ public class Chosen implements Serializable {
 						if (friendly) {
 							w_append(w, t, c, "for {hisHer} own good, {c:mainName} hugs {himHer} so tightly that {heShe} can't move.");
 						} else {
-							w_append(w, t, c.getMainName() + " roughly pins {hisHer} limbs down out of fear of becoming even more exposed.");
+							w_append(w, t, c, "{c:mainName} roughly pins {hisHer} limbs down out of fear of becoming even more exposed.");
 						}
 					} else {
 						if (getINJULevel() < 3 || aVirg) {
@@ -10016,7 +10016,7 @@ public class Chosen implements Serializable {
 						} else {
 							w_append(w, t, c, "{HeShe} blushes deeply when {heShe} realizes that {heShe} tangled {hisHer} legs around {c:mainName} in the process, giving the filming Thralls a clear shot of {hisHer} bare butt.  ");
 						}
-						w_append(w, t, c.getMainName() + "'s continued determined struggling is only making it worse, ");
+						w_append(w, t, c, "{c:mainName}'s continued determined struggling is only making it worse, ");
 						if (friendly) {
 							w_append(w, t, "but {mainName} is too embarrassed to bring it up with {himHer}.");
 						} else {
@@ -10031,9 +10031,9 @@ public class Chosen implements Serializable {
 							w_append(w, t, "The Thralls happily film the way that {mainName}'s panicked thrashing causes {hisHer} bare bottom to sway provocatively.  ");
 						}
 						if (friendly) {
-							w_append(w, t, c.getMainName() + " eventually has to pin {himHer} down for {hisHer} own good");
+							w_append(w, t, c, "{c:mainName} eventually has to pin {himHer} down for {hisHer} own good");
 						} else {
-							w_append(w, t, c.getMainName() + " angrily pins {himHer} down to stop {himHer} from making things worse");
+							w_append(w, t, c, "{c:mainName} angrily pins {himHer} down to stop {himHer} from making things worse");
 						}
 						if (getINJULevel() < 3 || aVirg) {
 							w_append(w, t, ", but that just makes it easier for the Thralls to push a vibrating wand against {hisHer} {organ}");
@@ -10123,7 +10123,7 @@ public class Chosen implements Serializable {
 						}
 					} else if (c.getInnocence() > 33) {
 						if (friendly) {
-							w_append(w, t, c.getMainName() + " asks how {mainName} is holding up");
+							w_append(w, t, c, "{c:mainName} asks how {mainName} is holding up");
 						} else {
 							w_append(w, t, c, "Voice thick with annoyance, {c:mainName} tells {mainName} to try not to cum so that they can work together to escape");
 						}
@@ -10230,9 +10230,9 @@ public class Chosen implements Serializable {
 						}
 						w_append(w, t, c, ", {mainName} begs {c:himHer} to stop the Thralls from making {himHer} cum again.  ");
 						if (friendly) {
-							w_append(w, t, c.getMainName() + " tries to fend them off, but ");
+							w_append(w, t, c, "{c:mainName} tries to fend them off, but ");
 						} else {
-							w_append(w, t, c.getMainName() + " grudgingly lends {c:hisHer} help and tries to fend them off, but ");
+							w_append(w, t, c, "{c:mainName} grudgingly lends {c:hisHer} help and tries to fend them off, but ");
 						}
 						if (getINJULevel() < 3 || aVirg) {
 							w_append(w, t, "it only takes a few moments of one of the Thralls getting a vibrating wand in contact with {hisHer} {organ} to push {himHer} over the edge.");
@@ -10261,13 +10261,13 @@ public class Chosen implements Serializable {
 							w_append(w, t, c, ", and {hisHer} bare bottom humps against {c:mainName}, completely giving in to the pleasure.  ");
 						}
 						if (friendly) {
-							w_append(w, t, c.getMainName() + " caresses {himHer} back, feeling odd about doing something so naughty in public, but determined to help {c:hisHer} friend get this out of {hisHer} system.");
+							w_append(w, t, c, "{c:mainName} caresses {himHer} back, feeling odd about doing something so naughty in public, but determined to help {c:hisHer} friend get this out of {hisHer} system.");
 						} else {
 							w_append(w, t, c, "Likewise, {c:mainName} is so caught up in the pleasure that {c:heShe} holds {mainName} close and grinds against {himHer} in turn, completely forgetting their rivalry for the moment.");
 						}
 					} else if (c.getInnocence() > 33) {
 						if (friendly) {
-							w_append(w, t, c.getMainName() + " normally regards {c:himHer}self as the leader in their relationship");
+							w_append(w, t, c, "{c:mainName} normally regards {c:himHer}self as the leader in their relationship");
 						} else {
 							w_append(w, t, c, "Whenver they butt heads, {c:mainName} normally prevails over {c:hisHer} rival");
 						}
@@ -10361,9 +10361,9 @@ public class Chosen implements Serializable {
 						}
 					} else {
 						if (friendly) {
-							w_append(w, t, c.getMainName() + "'s violent demeanor suddenly turns very vulnerable and uncertain when {c:heShe} feels {mainName}");
+							w_append(w, t, c, "{c:mainName}'s violent demeanor suddenly turns very vulnerable and uncertain when {c:heShe} feels {mainName}");
 						} else {
-							w_append(w, t, c.getMainName() + " shouts in surprise and anger when {c:heShe} feels {mainName}");
+							w_append(w, t, c, "{c:mainName} shouts in surprise and anger when {c:heShe} feels {mainName}");
 						}
 						w_append(w, t, c, " mindlessly licking {c:hisHer} " + target);
 						if (getINJULevel() < 3 || aVirg) {
@@ -10405,7 +10405,7 @@ public class Chosen implements Serializable {
 							w_append(w, t, c, "The sudden change prompts {c:mainName} to ask whether {heShe}'s alright, {c:hisHer} cheek pressed against {mainName}'s {organ}.");
 						}
 					} else if (c.getMorality() > 33) {
-						w_append(w, t, c.getMainName() + " tries to form another escape plan with {mainName}, {c:hisHer} voice muffled by {mainName}'s ");
+						w_append(w, t, c, "{c:mainName} tries to form another escape plan with {mainName}, {c:hisHer} voice muffled by {mainName}'s ");
 						if (getEXPOLevel() < 3) {
 							w_append(w, t, "{bottomDesc}.  ");
 						} else {
@@ -13646,9 +13646,9 @@ public class Chosen implements Serializable {
 								if (c.getDignity() > 66) {
 									w_append(w, t, c, "Even though {c:mainName} is trying to be strong, {c:heShe} can't suppress a shiver of fear when {c:heShe} sees up-close what's happening to {mainName}, and {c:hisHer} eyes go wide with anticipation when {c:heShe} feels the tip of one of the Thralls' cocks teasing {c:hisHer} own pussy.  ");
 								} else if (c.getDignity() > 33) {
-									w_append(w, t, c.getMainName() + " is pushed down on {c:hisHer} hands and knees face-to-face with {mainName}, and {c:heShe}'s so stunned by the up-close view of the other Chosen's miserable state that {c:heShe} almost jumps in surprise when {c:heShe} feels one of the Thralls' cocks grinding between {c:hisHer} thighs.  ");
+									w_append(w, t, c, "{c:mainName} is pushed down on {c:hisHer} hands and knees face-to-face with {mainName}, and {c:heShe}'s so stunned by the up-close view of the other Chosen's miserable state that {c:heShe} almost jumps in surprise when {c:heShe} feels one of the Thralls' cocks grinding between {c:hisHer} thighs.  ");
 								} else {
-									w_append(w, t, c.getMainName() + " whimpers in fear and anticipation as {c:heShe} watches {mainName}'s abuse with wide eyes, then squeaks and starts struggling when {c:heShe} feels one of the Thralls' penises against {c:hisHer} pussy.  ");
+									w_append(w, t, c, "{c:mainName} whimpers in fear and anticipation as {c:heShe} watches {mainName}'s abuse with wide eyes, then squeaks and starts struggling when {c:heShe} feels one of the Thralls' penises against {c:hisHer} pussy.  ");
 								}
 							} else {
 								if (c.getDignity() > 66) {
@@ -13659,14 +13659,14 @@ public class Chosen implements Serializable {
 										w_append(w, t, "don't actually allow {mainName} inside");
 									}
 								} else if (c.getDignity() > 33) {
-									w_append(w, t, c.getMainName() + " is pushed down straddling {mainName}");
+									w_append(w, t, c, "{c:mainName} is pushed down straddling {mainName}");
 									if (getINJULevel() >= 3 && aVirg == false && w.tickle().equals(false) && gender.equals("male")) {
 										w_append(w, t, c, ", whose bound penis almost penetrates {c:himHer} before slipping limply to the side");
 									} else {
 										w_append(w, t, c, " so that {hisHer} cock almost penetrates {c:himHer}, sliding between {c:hisHer} thighs");
 									}
 								} else {
-									w_append(w, t, c.getMainName() + " whimpers in fear and anticipation as {c:hisHer} body is pressed against {mainName}'s, ");
+									w_append(w, t, c, "{c:mainName} whimpers in fear and anticipation as {c:hisHer} body is pressed against {mainName}'s, ");
 									if (getINJULevel() >= 3 && aVirg == false && w.tickle().equals(false) && gender.equals("male")) {
 										w_append(w, t, "{hisHer} tied penis trapped between them");
 									} else {
@@ -13679,9 +13679,9 @@ public class Chosen implements Serializable {
 								if (c.getDignity() > 66) {
 									w_append(w, t, c, "Even though {c:mainName} is trying to be strong, {c:heShe} can't suppress a shiver of fear when {c:heShe} sees up-close what's happening to {mainName}, and {c:heShe} cries out in pain when {c:heShe} feels a Thralls' cock forcing its way into {c:hisHer} own anus.  ");
 								} else if (c.getDignity() > 33) {
-									w_append(w, t, c.getMainName() + " is pushed down on {c:hisHer} hands and knees face-to-face with {mainName}, and {c:heShe}'s so stunned by the up-close view of the other Chosen's miserable state that {c:heShe} screams in pained surprise when one of the Thralls abruptly forces his cock into {c:hisHer} ass.  ");
+									w_append(w, t, c, "{c:mainName} is pushed down on {c:hisHer} hands and knees face-to-face with {mainName}, and {c:heShe}'s so stunned by the up-close view of the other Chosen's miserable state that {c:heShe} screams in pained surprise when one of the Thralls abruptly forces his cock into {c:hisHer} ass.  ");
 								} else {
-									w_append(w, t, c.getMainName() + " whimpers in fear and anticipation as {c:heShe} watches {mainName}'s abuse with wide eyes, then squeals and flails wildly when an eager Thrall thrusts himself into {c:hisHer} ass.  ");
+									w_append(w, t, c, "{c:mainName} whimpers in fear and anticipation as {c:heShe} watches {mainName}'s abuse with wide eyes, then squeals and flails wildly when an eager Thrall thrusts himself into {c:hisHer} ass.  ");
 								}
 							} else {
 								if (c.getDignity() > 66) {
@@ -13692,14 +13692,14 @@ public class Chosen implements Serializable {
 										w_append(w, t, "don't actually allow {mainName} inside");
 									}
 								} else if (c.getDignity() > 33) {
-									w_append(w, t, c.getMainName() + " is pushed down on {c:hisHer} hands and knees face-to-face with {mainName}, and {c:heShe}'s so stunned by the up-close view of the other Chosen's miserable state that {c:heShe}'s completely caught off-guard when one of the Thralls' cocks forces its way into {c:hisHer} ass.  The Thrall's weight atop {c:himHer} presses {c:himHer} against {mainName}");
+									w_append(w, t, c, "{c:mainName} is pushed down on {c:hisHer} hands and knees face-to-face with {mainName}, and {c:heShe}'s so stunned by the up-close view of the other Chosen's miserable state that {c:heShe}'s completely caught off-guard when one of the Thralls' cocks forces its way into {c:hisHer} ass.  The Thrall's weight atop {c:himHer} presses {c:himHer} against {mainName}");
 									if (getINJULevel() >= 3 && aVirg == false && w.tickle().equals(false) && gender.equals("male")) {
 										w_append(w, t, c, ", whose bound penis almost penetrates {c:himHer} before slipping limply to the side");
 									} else {
 										w_append(w, t, c, " so that {hisHer} cock almost penetrates {c:himHer}, sliding between {c:hisHer} thighs");
 									}
 								} else {
-									w_append(w, t, c.getMainName() + " whimpers in fear and anticipation as {c:heShe} watches {mainName}'s abuse with wide eyes, then squeals and flails wildly when an eager Thrall thrusts himself into {c:hisHer} ass.  {c:HeShe} reflexively clings to {mainName}");
+									w_append(w, t, c, "{c:mainName} whimpers in fear and anticipation as {c:heShe} watches {mainName}'s abuse with wide eyes, then squeals and flails wildly when an eager Thrall thrusts himself into {c:hisHer} ass.  {c:HeShe} reflexively clings to {mainName}");
 									if (getINJULevel() >= 3 && aVirg == false && w.tickle().equals(false) && gender.equals("male")) {
 										w.append(t, "whose tied penis is trapped between them");
 									} else {
@@ -13742,28 +13742,28 @@ public class Chosen implements Serializable {
 						}
 						if (c.isAVirg() || c.getINJULevel() < 3 || w.tickle()) {
 							if (c.getDignity() > 66) {
-								w_append(w, t, c.getMainName() + " is already blushing bright red in embarrassment at the way that seeing {mainName}'s predicament has caused {c:hisHer} penis to stand erect, and {c:hisHer} embarrassment turns to panic when the Thralls guide the tip to {mainName}'s " + hole + " and force {c:himHer} inside");
+								w_append(w, t, c, "{c:mainName} is already blushing bright red in embarrassment at the way that seeing {mainName}'s predicament has caused {c:hisHer} penis to stand erect, and {c:hisHer} embarrassment turns to panic when the Thralls guide the tip to {mainName}'s " + hole + " and force {c:himHer} inside");
 							} else if (c.getDignity() > 33) {
-								w_append(w, t, c.getMainName() + " squirms, arms pinned behind {c:hisHer} back, trying in vain to use {c:hisHer} thighs to hide {c:hisHer} erection.  The Thralls push {c:himHer} atop {mainName}, face-to-face, and {c:hisHer} penis slips into {mainName}'s used " + hole);
+								w_append(w, t, c, "{c:mainName} squirms, arms pinned behind {c:hisHer} back, trying in vain to use {c:hisHer} thighs to hide {c:hisHer} erection.  The Thralls push {c:himHer} atop {mainName}, face-to-face, and {c:hisHer} penis slips into {mainName}'s used " + hole);
 							} else {
-								w_append(w, t, c.getMainName() + " kicks and struggles, tears in {c:hisHer} eyes, as {c:heShe}'s pressed face-to-face with {mainName}.  But when {c:heShe} feels {mainName}'s warm " + hole + " against {c:hisHer} penis, {c:heShe} freezes up for just long enough that the Thralls can push {c:himHer} forward, forcing {c:himHer} to penetrate {mainName}");
+								w_append(w, t, c, "{c:mainName} kicks and struggles, tears in {c:hisHer} eyes, as {c:heShe}'s pressed face-to-face with {mainName}.  But when {c:heShe} feels {mainName}'s warm " + hole + " against {c:hisHer} penis, {c:heShe} freezes up for just long enough that the Thralls can push {c:himHer} forward, forcing {c:himHer} to penetrate {mainName}");
 							}
 						} else {
 							if (c.getGender().equals("male")) {
 								if (c.getDignity() > 66) {
-									w_append(w, t, c.getMainName() + " is already red-faced with humiliation at being held with {c:hisHer} legs high in the air, showing off {c:hisHer} abused cock's semi-erect state as it strains against the tight ring forced around it.  But {c:hisHer} embarrassment turns to panic when the Thralls guide the tip to {mainName}'s hole and force {c:himHer} inside");
+									w_append(w, t, c, "{c:mainName} is already red-faced with humiliation at being held with {c:hisHer} legs high in the air, showing off {c:hisHer} abused cock's semi-erect state as it strains against the tight ring forced around it.  But {c:hisHer} embarrassment turns to panic when the Thralls guide the tip to {mainName}'s hole and force {c:himHer} inside");
 								} else if (c.getDignity() > 33) {
-									w_append(w, t, c.getMainName() + " squirms in intense discomfort at the way {c:hisHer} cock has had a cord tight tightly around it.  It restricts the bloodflow enough to prevent {c:himHer} from cumming, but not enough to suppress its shamefully semi-erect state.  The Thralls push {c:himHer} atop {mainName}, face-to-face, and {c:hisHer} member slips into {mainName}'s used " + hole);
+									w_append(w, t, c, "{c:mainName} squirms in intense discomfort at the way {c:hisHer} cock has had a cord tight tightly around it.  It restricts the bloodflow enough to prevent {c:himHer} from cumming, but not enough to suppress its shamefully semi-erect state.  The Thralls push {c:himHer} atop {mainName}, face-to-face, and {c:hisHer} member slips into {mainName}'s used " + hole);
 								} else {
-									w_append(w, t, c.getMainName() + " kicks and struggles deliriously, crying with the pain of the tight leash wrapped around {c:hisHer} cock.  However, when {c:heShe} feels {mainName}'s warm " + hole + " against the tip, {c:heShe} instinctively thrusts {c:hisHer} hips forward, pushing {c:himHer}self inside without thinking");
+									w_append(w, t, c, "{c:mainName} kicks and struggles deliriously, crying with the pain of the tight leash wrapped around {c:hisHer} cock.  However, when {c:heShe} feels {mainName}'s warm " + hole + " against the tip, {c:heShe} instinctively thrusts {c:hisHer} hips forward, pushing {c:himHer}self inside without thinking");
 								}
 							} else {
 								if (c.getDignity() > 66) {
-									w_append(w, t, c.getMainName() + " is already red-faced with humiliation at being held with {c:hisHer} legs high in the air, showing off the spot where a Thrall's penis vanishes into {c:hisHer} anus.  Far worse, {c:hisHer} erection shows how much {c:heShe}'s enjoying it.  {c:HisHer} embarrassment turns to panic when the Thralls guide the tip to {mainName}'s hole and force {c:himHer} inside");
+									w_append(w, t, c, "{c:mainName} is already red-faced with humiliation at being held with {c:hisHer} legs high in the air, showing off the spot where a Thrall's penis vanishes into {c:hisHer} anus.  Far worse, {c:hisHer} erection shows how much {c:heShe}'s enjoying it.  {c:HisHer} embarrassment turns to panic when the Thralls guide the tip to {mainName}'s hole and force {c:himHer} inside");
 								} else if (c.getDignity() > 33) {
-									w_append(w, t, c.getMainName() + " squirms with intense discomfort as the Thrall behind {c:himHer} thrusts into {c:hisHer} ass.  It feels far better than {c:heShe}'d like to admit, and {c:hisHer} cock is fully erect, bobbing from side to side.  The Thralls push {c:himHer} atop {mainName}, face-to-face, and {c:hisHer} member slips into {mainName}'s used " + hole);
+									w_append(w, t, c, "{c:mainName} squirms with intense discomfort as the Thrall behind {c:himHer} thrusts into {c:hisHer} ass.  It feels far better than {c:heShe}'d like to admit, and {c:hisHer} cock is fully erect, bobbing from side to side.  The Thralls push {c:himHer} atop {mainName}, face-to-face, and {c:hisHer} member slips into {mainName}'s used " + hole);
 								} else {
-									w_append(w, t, c.getMainName() + " kicks and struggles deliriously, crying with the pain of the Thrall fucking {c:himHer} up {c:hisHer} ass.  However, when {c:heShe} feels {mainName}'s warm " + hole + " pressed against the tip of {c:hisHer} penis, {c:heShe} instinctively thrusts {c:hisHer} hips forward, pushing {c:himHer}self inside without thinking");
+									w_append(w, t, c, "{c:mainName} kicks and struggles deliriously, crying with the pain of the Thrall fucking {c:himHer} up {c:hisHer} ass.  However, when {c:heShe} feels {mainName}'s warm " + hole + " pressed against the tip of {c:hisHer} penis, {c:heShe} instinctively thrusts {c:hisHer} hips forward, pushing {c:himHer}self inside without thinking");
 								}
 							}
 						}
@@ -13776,19 +13776,19 @@ public class Chosen implements Serializable {
 						w.append(t, ".  ");
 						if (c.getGender().equals("female")) {
 							if (c.getDignity() > 66) {
-								w_append(w, t, c.getMainName() + " is trying to maintain a determined expression, but {c:heShe} winces when {c:heShe} sees {mainName} having {hisHer} " + bottomDesc + " pulled out of the way.  ");
+								w_append(w, t, c, "{c:mainName} is trying to maintain a determined expression, but {c:heShe} winces when {c:heShe} sees {mainName} having {hisHer} " + bottomDesc + " pulled out of the way.  ");
 							} else if (c.getDignity() > 33) {
-								w_append(w, t, c.getMainName() + " can't hide {c:hisHer} despairing expression as {c:heShe} sees that {mainName} has been caught as well, and it quickly turns into fascinated horror as {mainName} has {hisHer} " + bottomDesc + " pulled out of the way.  ");
+								w_append(w, t, c, "{c:mainName} can't hide {c:hisHer} despairing expression as {c:heShe} sees that {mainName} has been caught as well, and it quickly turns into fascinated horror as {mainName} has {hisHer} " + bottomDesc + " pulled out of the way.  ");
 							} else {
-								w_append(w, t, c.getMainName() + " is too busy sobbing to even notice until one of the Thralls grabs {c:hisHer} hair, forcing {c:himHer} to look up and see {mainName} having {hisHer} " + bottomDesc + " pulled out of the way.  ");
+								w_append(w, t, c, "{c:mainName} is too busy sobbing to even notice until one of the Thralls grabs {c:hisHer} hair, forcing {c:himHer} to look up and see {mainName} having {hisHer} " + bottomDesc + " pulled out of the way.  ");
 							}
 						} else {
 							if (c.getDignity() > 66) {
-								w_append(w, t, c.getMainName() + " is desperately maintaining a neutral expression as {c:heShe}'s fucked, but {c:heShe} can't hide the way {c:hisHer} cock twitches with anticipation when {c:heShe} sees {mainName}'s " + bottomDesc + " pulled to the side.  ");
+								w_append(w, t, c, "{c:mainName} is desperately maintaining a neutral expression as {c:heShe}'s fucked, but {c:heShe} can't hide the way {c:hisHer} cock twitches with anticipation when {c:heShe} sees {mainName}'s " + bottomDesc + " pulled to the side.  ");
 							} else if (c.getDignity() > 33) {
-								w_append(w, t, c.getMainName() + " gasps and tries to squirm away when the Thralls press the two of them together, but {c:heShe} can't escape the cock thrusting inside {c:himHer}, and {c:hisHer} efforts accomplish nothing more than working {c:hisHer} own penis under {mainName}'s  " + bottomDesc + ".  ");
+								w_append(w, t, c, "{c:mainName} gasps and tries to squirm away when the Thralls press the two of them together, but {c:heShe} can't escape the cock thrusting inside {c:himHer}, and {c:hisHer} efforts accomplish nothing more than working {c:hisHer} own penis under {mainName}'s  " + bottomDesc + ".  ");
 							} else {
-								w_append(w, t, c.getMainName() + " is so busy moaning and whimpering with every thrust of the cock inside {c:himHer} that {c:heShe} doesn't even notice what's happening until {c:heShe} feels {mainName}'s " + bottomDesc + " against {c:hisHer} own straining penis.  The Thralls quickly pull the garment out of the way.  ");
+								w_append(w, t, c, "{c:mainName} is so busy moaning and whimpering with every thrust of the cock inside {c:himHer} that {c:heShe} doesn't even notice what's happening until {c:heShe} feels {mainName}'s " + bottomDesc + " against {c:hisHer} own straining penis.  The Thralls quickly pull the garment out of the way.  ");
 							}
 						}
 					} else {
@@ -13797,9 +13797,9 @@ public class Chosen implements Serializable {
 							if (c.getDignity() > 66) {
 								w_append(w, t, c, "{c:hisHer} determined expression, already fragile with the discomfort of being filled so full, melts into a despairing moan when {c:heShe} sees {mainName} having {hisHer} " + bottomDesc + " pulled out of the way.  ");
 							} else if (c.getDignity() > 33) {
-								w_append(w, t, c.getMainName() + " can't suppress {c:hisHer} pathetic whimpers as {c:heShe}'s fucked, and the last bit of hope leaves {c:hisHer} eyes when {c:heShe} sees the Thralls pulling {mainName}'s " + bottomDesc + " out of the way.  ");
+								w_append(w, t, c, "{c:mainName} can't suppress {c:hisHer} pathetic whimpers as {c:heShe}'s fucked, and the last bit of hope leaves {c:hisHer} eyes when {c:heShe} sees the Thralls pulling {mainName}'s " + bottomDesc + " out of the way.  ");
 							} else {
-								w_append(w, t, c.getMainName() + " is too busy sobbing to even notice the other Chosen until one of the Thralls grabs {c:hisHer} hair, forcing {c:himHer} to look up and see {mainName} having {hisHer} " + bottomDesc + " pulled out of the way.  ");
+								w_append(w, t, c, "{c:mainName} is too busy sobbing to even notice the other Chosen until one of the Thralls grabs {c:hisHer} hair, forcing {c:himHer} to look up and see {mainName} having {hisHer} " + bottomDesc + " pulled out of the way.  ");
 							}
 						} else if (c.getGender().equals("male")) {
 							w_append(w, t, c, ".  {c:mainName} has already has a painfully-tight band fastened around the base of {c:hisHer} penis to hold back {c:hisHer} orgasm");
@@ -13813,11 +13813,11 @@ public class Chosen implements Serializable {
 						} else {
 							w_append(w, t, c, " in both holes at once, {c:hisHer} erect penis bobbing left and right with each thrust until one of the Thralls grabs it.  ");
 							if (c.getDignity() > 66) {
-								w_append(w, t, c.getMainName() + "'s eyes narrow at first, then shoot wide open when {c:heShe} sees the other Thralls pulling {mainName}'s " + bottomDesc + " aside.  ");
+								w_append(w, t, c, "{c:mainName}'s eyes narrow at first, then shoot wide open when {c:heShe} sees the other Thralls pulling {mainName}'s " + bottomDesc + " aside.  ");
 							} else if (c.getDignity() > 33) {
-								w_append(w, t, c.getMainName() + " gasps and shudders as the Thralls pull {mainName}'s " + bottomDesc + " out of the way and then start to guide {c:himHer} in.  ");
+								w_append(w, t, c, "{c:mainName} gasps and shudders as the Thralls pull {mainName}'s " + bottomDesc + " out of the way and then start to guide {c:himHer} in.  ");
 							} else {
-								w_append(w, t, c.getMainName() + "'s so busy moaning and whimpering with the alternating thrusts of the cocks inside {c:himHer} that {c:heShe} doesn't even notice what's happening until {c:heShe} feels {mainName}'s " + bottomDesc + " against {c:hisHer} own straining penis.  The Thralls quickly pull the garment out of the way.  ");
+								w_append(w, t, c, "{c:mainName}'s so busy moaning and whimpering with the alternating thrusts of the cocks inside {c:himHer} that {c:heShe} doesn't even notice what's happening until {c:heShe} feels {mainName}'s " + bottomDesc + " against {c:hisHer} own straining penis.  The Thralls quickly pull the garment out of the way.  ");
 							}
 						}
 					}
@@ -13935,11 +13935,11 @@ public class Chosen implements Serializable {
 							w_append(w, t, c, "{mainName} begins to struggle even harder, kicking and spitting at the Thralls attacking {c:mainName}.  ");
 						}
 						if (c.getMorality() > 66) {
-							w_append(w, t, c.getMainName() + " can tell how much this is hurting {himHer}, and {heShe} feels even more awful for it.  ");
+							w_append(w, t, c, "{c:mainName} can tell how much this is hurting {himHer}, and {heShe} feels even more awful for it.  ");
 						} else if (c.getMorality() > 33) {
 							w_append(w, t, c, "{HisHer} support doesn't do much to make {c:mainName} feel better.  ");
 						} else {
-							w_append(w, t, c.getMainName() + " is just angry at {c:himHer}self for getting caught.  ");
+							w_append(w, t, c, "{c:mainName} is just angry at {c:himHer}self for getting caught.  ");
 						}
 					} else {
 						if (morality > 66) {
@@ -13950,7 +13950,7 @@ public class Chosen implements Serializable {
 							w_append(w, t, "The fact that {hisHer} own friend is being used to rape {himHer} makes it harder for {mainName} to maintain {hisHer} violent resistance.  ");
 						}
 						if (c.getMorality() > 66) {
-							w_append(w, t, c.getMainName() + ", for {c:hisHer} part, looks dejected and guilty for what {c:heShe}'s being made to do.  ");
+							w_append(w, t, c, "{c:mainName}, for {c:hisHer} part, looks dejected and guilty for what {c:heShe}'s being made to do.  ");
 						} else if (c.getMorality() > 33) {
 							w_append(w, t, c, "Meanwhile, {c:mainName} is deeply conflicted about how good it feels inside {himHer}.  ");
 						} else {
@@ -13969,7 +13969,7 @@ public class Chosen implements Serializable {
 						if (c.getMorality() > 66) {
 							w_append(w, t, c, "Meanwhile, the sight of {mainName}'s strong-willed resistance makes {c:mainName} feel even more inadequate for allowing {c:himHer}self to be abused to easily.  ");
 						} else if (c.getMorality() > 33) {
-							w_append(w, t, c.getMainName() + " squirms with discomfort, as if sensing {hisHer} thoughts.  ");
+							w_append(w, t, c, "{c:mainName} squirms with discomfort, as if sensing {hisHer} thoughts.  ");
 						} else {
 							w_append(w, t, c, "At the same time, {c:mainName} glares resentfully back at {mainName}, blaming {himHer} for letting this happen despite {hisHer} greater strength.  ");
 						}
@@ -13984,9 +13984,9 @@ public class Chosen implements Serializable {
 						if (c.getMorality() > 66) {
 							w_append(w, t, c, "Meanwhile, {c:mainName} hates {c:himHer}self for enjoying this at all.  ");
 						} else if (c.getMorality() > 33) {
-							w_append(w, t, c.getMainName() + " squirms under {hisHer} gaze, but {c:heShe} can't help the way {c:hisHer} body is reacting.  ");
+							w_append(w, t, c, "{c:mainName} squirms under {hisHer} gaze, but {c:heShe} can't help the way {c:hisHer} body is reacting.  ");
 						} else {
-							w_append(w, t, c.getMainName() + ", for {c:hisHer} part, isn't quite able to hide how much {c:heShe}'s enjoying this, getting so caught up in the pleasurable sensations that {c:heShe} doesn't notice the Thralls gathering behind {c:himHer}.  ");
+							w_append(w, t, c, "{c:mainName}, for {c:hisHer} part, isn't quite able to hide how much {c:heShe}'s enjoying this, getting so caught up in the pleasurable sensations that {c:heShe} doesn't notice the Thralls gathering behind {c:himHer}.  ");
 						}
 					}
 				}
@@ -14095,13 +14095,13 @@ public class Chosen implements Serializable {
 						w.append(t, ".  ");
 						if (c.getPLEALevel() < 3) {
 							if (c.getConfidence() > 33) {
-								w_append(w, t, c.getMainName() + " shudders, trying to mentally prepare {c:himHer}self for another round of torment.");
+								w_append(w, t, c, "{c:mainName} shudders, trying to mentally prepare {c:himHer}self for another round of torment.");
 							} else {
-								w_append(w, t, c.getMainName() + " whimpers and looks away, unable to watch even though {c:heShe} knows {c:heShe} should be used to this sort of thing by now.");
+								w_append(w, t, c, "{c:mainName} whimpers and looks away, unable to watch even though {c:heShe} knows {c:heShe} should be used to this sort of thing by now.");
 							}
 						} else {
 							if (c.getConfidence() > 33) {
-								w_append(w, t, c.getMainName() + "'s ");
+								w_append(w, t, c, "{c:mainName}'s ");
 								if (gender.equals("male")) {
 									w.append(t, "penis");
 								} else {
@@ -14109,7 +14109,7 @@ public class Chosen implements Serializable {
 								}
 								w.append(t, " twitches with anticipation.");
 							} else {
-								w_append(w, t, c.getMainName() + " is unable to tear {c:hisHer} gaze away from the trickling cum, hating {c:himHer}self for getting even more turned on by the display.");
+								w_append(w, t, c, "{c:mainName} is unable to tear {c:hisHer} gaze away from the trickling cum, hating {c:himHer}self for getting even more turned on by the display.");
 							}
 						}
 					} else {
@@ -14162,7 +14162,7 @@ public class Chosen implements Serializable {
 								if (c.getGender().equals("female")) {
 									w_append(w, t, "the cock inside {himHer}.  ");
 								} else {
-									w_append(w, t, c.getMainName() + "'s cock.  ");
+									w_append(w, t, c, "{c:mainName}'s cock.  ");
 								}
 							}
 						} else if (getINJULevel() < 3 || aVirg) {
@@ -14179,9 +14179,9 @@ public class Chosen implements Serializable {
 					}
 					if (c.getGender().equals("female")) {
 						if (c.getPLEALevel() < 3 || cVirg) {
-							w_append(w, t, c.getMainName() + " can only watch in horror as a trickle of cum drips from {mainName}'s ");
+							w_append(w, t, c, "{c:mainName} can only watch in horror as a trickle of cum drips from {mainName}'s ");
 						} else {
-							w_append(w, t, c.getMainName() + " trembles with mingled fear and arousal as {heShe} watches a trickle of cum drip from {mainName}'s ");
+							w_append(w, t, c, "{c:mainName} trembles with mingled fear and arousal as {heShe} watches a trickle of cum drip from {mainName}'s ");
 						}
 						if (gender.equals("male")) {
 							w.append(t, "ass.");
@@ -14281,9 +14281,9 @@ public class Chosen implements Serializable {
 				if (innocence > 66) {
 					if (c.getDignity() > 66) {
 						if (friendly) {
-							w_append(w, t, c.getMainName() + " is very embarrassed about ");
+							w_append(w, t, c, "{c:mainName} is very embarrassed about ");
 						} else {
-							w_append(w, t, c.getMainName() + " is trying to hide ");
+							w_append(w, t, c, "{c:mainName} is trying to hide ");
 						}
 						if (c.getGender().equals("female")) {
 							w_append(w, t, c, "how much {c:heShe}'s getting turned on by the sight of what's being done to {mainName}");
@@ -14293,9 +14293,9 @@ public class Chosen implements Serializable {
 						w_append(w, t, ", and {mainName} is far too distracted to notice.  ");
 					} else if (c.getDignity() > 33) {
 						if (friendly) {
-							w_append(w, t, c.getMainName() + " shakes {c:hisHer} head, trying to dispel ");
+							w_append(w, t, c, "{c:mainName} shakes {c:hisHer} head, trying to dispel ");
 						} else {
-							w_append(w, t, c.getMainName() + " bites {c:hisHer} lip and tries to look away, angry at {c:himHer}self for ");
+							w_append(w, t, c, "{c:mainName} bites {c:hisHer} lip and tries to look away, angry at {c:himHer}self for ");
 						}
 						if (c.getGender().equals("female")) {
 							w_append(w, t, c, "{c:hisHer} perverted thoughts as {c:heShe} watches what's being done to {mainName}.  ");
@@ -14318,9 +14318,9 @@ public class Chosen implements Serializable {
 				} else if (innocence > 33) {
 					if (c.getDignity() > 66) {
 						if (c.getGender().equals("female")) {
-							w_append(w, t, c.getMainName() + " tries {c:hisHer} best to hide the pleasure {c:heShe}'s feeling from having a Thrall's cock inside {himHer}");
+							w_append(w, t, c, "{c:mainName} tries {c:hisHer} best to hide the pleasure {c:heShe}'s feeling from having a Thrall's cock inside {himHer}");
 						} else {
-							w_append(w, t, c.getMainName() + " tries {c:hisHer} best to hide the pleasure {c:heShe}'s feeling from being made to fuck {mainName}");
+							w_append(w, t, c, "{c:mainName} tries {c:hisHer} best to hide the pleasure {c:heShe}'s feeling from being made to fuck {mainName}");
 						}
 						if (friendly) {
 							w_append(w, t, c, ", fearful that {c:hisHer} friend will end up thinking less of {c:himHer}.  ");
@@ -14340,9 +14340,9 @@ public class Chosen implements Serializable {
 						}
 					} else {
 						if (c.getGender().equals("female")) {
-							w_append(w, t, c.getMainName() + " reflexively clings to the Thrall raping {c:himHer}");
+							w_append(w, t, c, "{c:mainName} reflexively clings to the Thrall raping {c:himHer}");
 						} else {
-							w_append(w, t, c.getMainName() + " reflexively clings to {mainName} as {c:heShe}'s forced to rape {himHer}");
+							w_append(w, t, c, "{c:mainName} reflexively clings to {mainName} as {c:heShe}'s forced to rape {himHer}");
 						}
 						if (friendly) {
 							w_append(w, t, c, ", and {mainName} stares down at {c:himHer} as if {c:heShe}'s gone insane.  ");
@@ -14353,9 +14353,9 @@ public class Chosen implements Serializable {
 				} else {
 					if (c.getDignity() > 66) {
 						if (c.getGender().equals("female")) {
-							w_append(w, t, c.getMainName() + " bites {c:hisHer} lip to stifle a moan of pleasure as {c:heShe}'s fucked");
+							w_append(w, t, c, "{c:mainName} bites {c:hisHer} lip to stifle a moan of pleasure as {c:heShe}'s fucked");
 						} else {
-							w_append(w, t, c.getMainName() + " bites {c:hisHer} lip to stifle a moan of pleasure as {c:heShe} fucks {mainName}");
+							w_append(w, t, c, "{c:mainName} bites {c:hisHer} lip to stifle a moan of pleasure as {c:heShe} fucks {mainName}");
 						}
 						if (friendly) {
 							w_append(w, t, ", grateful that {mainName} is too preoccupied with {hisHer} own situation to notice.  ");
@@ -14375,9 +14375,9 @@ public class Chosen implements Serializable {
 						}
 					} else {
 						if (c.getGender().equals("female")) {
-							w_append(w, t, c.getMainName() + " moans and cries out openly, bucking {c:hisHer} hips against the Thrall fucking {himHer}.  ");
+							w_append(w, t, c, "{c:mainName} moans and cries out openly, bucking {c:hisHer} hips against the Thrall fucking {himHer}.  ");
 						} else {
-							w_append(w, t, c.getMainName() + " gasps with pleasure, so caught up in the sensations that {c:heShe} begins to move {c:hisHer} hips to thrust inside {mainName} of {c:hisHer} own accord.  ");
+							w_append(w, t, c, "{c:mainName} gasps with pleasure, so caught up in the sensations that {c:heShe} begins to move {c:hisHer} hips to thrust inside {mainName} of {c:hisHer} own accord.  ");
 						}
 						if (friendly) {
 							w_append(w, t, "{mainName} briefly has trouble believing that this is really {hisHer} friend.  ");
@@ -14433,9 +14433,9 @@ public class Chosen implements Serializable {
 						}
 					} else {
 						if (getPLEALevel() < 3 || cVirg) {
-							w_append(w, t, c.getMainName() + " is surprised by how vulnerable {heShe} looks.");
+							w_append(w, t, c, "{c:mainName} is surprised by how vulnerable {heShe} looks.");
 						} else {
-							w_append(w, t, c.getMainName() + " watches in fascination as {heShe} cums.");
+							w_append(w, t, c, "{c:mainName} watches in fascination as {heShe} cums.");
 						}
 					}
 				} else if (innocence > 33) {
@@ -14497,7 +14497,7 @@ public class Chosen implements Serializable {
 						} else if (w.tickle()) {
 							w_append(w, t, c, "The feelings of {c:mainName}'s mouth, the relentless pounding of the Thrall fucking {himHer}, and the countless tickling hands combine to ");
 						} else if (gender.equals("male")) {
-							w_append(w, t, c.getMainName() + "'s mouth feels heavenly, but {mainName}'s penis is tied up to prevent ejaculation, and it combines with the Thrall's cock ramming against {hisHer} prostate to ");
+							w_append(w, t, c, "{c:mainName}'s mouth feels heavenly, but {mainName}'s penis is tied up to prevent ejaculation, and it combines with the Thrall's cock ramming against {hisHer} prostate to ");
 						} else {
 							w_append(w, t, c, "The feeling of {c:mainName}'s mouth outside combined with the cocks pistoning inside {hisHer} pussy and asshole to ");
 						}
@@ -14515,9 +14515,9 @@ public class Chosen implements Serializable {
 						}
 					} else if (c.getInnocence() > 33) {
 						if (friendly) {
-							w_append(w, t, c.getMainName() + "'s eyes look up at {mainName}, silently asking if {heShe}'s okay with {mainName} ");
+							w_append(w, t, c, "{c:mainName}'s eyes look up at {mainName}, silently asking if {heShe}'s okay with {mainName} ");
 						} else {
-							w_append(w, t, c.getMainName() + " wears a complicated expression as {c:heShe} services {mainName}.  {c:HeShe} doesn't like pleasuring {c:hisHer} rival, but {c:heShe} takes some satisfaction from the power {c:heShe} has over {himHer} as {c:heShe}'s ");
+							w_append(w, t, c, "{c:mainName} wears a complicated expression as {c:heShe} services {mainName}.  {c:HeShe} doesn't like pleasuring {c:hisHer} rival, but {c:heShe} takes some satisfaction from the power {c:heShe} has over {himHer} as {c:heShe}'s ");
 						}
 						if (gender.equals("female")) {
 							w_append(w, t, "licking {hisHer} clit.  ");
@@ -14610,9 +14610,9 @@ public class Chosen implements Serializable {
 						}
 					} else if (c.getInnocence() > 33) {
 						if (gender.equals("female")) {
-							w_append(w, t, c.getMainName() + " licks {mainName}'s clit ");
+							w_append(w, t, c, "{c:mainName} licks {mainName}'s clit ");
 						} else {
-							w_append(w, t, c.getMainName() + " sucks {mainName}'s cock ");
+							w_append(w, t, c, "{c:mainName} sucks {mainName}'s cock ");
 						}
 						if (friendly) {
 							w_append(w, t, c, "hesitantly, clearly worried about participating in the attack on {c:hisHer} friend.  {mainName} starts to reassure {c:himHer} that it's alright, then suddenly ");
@@ -14644,9 +14644,9 @@ public class Chosen implements Serializable {
 							w_append(w, t, "The combination of the one Thrall's cock ramming against {hisHer} cervix, another's against {hisHer} bowels, and ");
 						}
 						if (gender.equals("female")) {
-							w_append(w, t, c.getMainName() + " lapping at {hisHer} clit ");
+							w_append(w, t, c, "{c:mainName} lapping at {hisHer} clit ");
 						} else {
-							w_append(w, t, c.getMainName() + "'s tongue repeatedly circling {hisHer} glans ");
+							w_append(w, t, c, "{c:mainName}'s tongue repeatedly circling {hisHer} glans ");
 						}
 						if (getPLEALevel() < 3 || cVirg) {
 							w_append(w, t, "wears away at {mainName}'s willpower.  ");
@@ -14692,9 +14692,9 @@ public class Chosen implements Serializable {
 						}
 					} else if (c.getInnocence() > 33) {
 						if (friendly) {
-							w_append(w, t, c.getMainName() + ", not wanting to participate in {c:hisHer} friend's rape, tries to pull away from ");
+							w_append(w, t, c, "{c:mainName}, not wanting to participate in {c:hisHer} friend's rape, tries to pull away from ");
 						} else {
-							w_append(w, t, c.getMainName() + " angrily tries to pull away from ");
+							w_append(w, t, c, "{c:mainName} angrily tries to pull away from ");
 						}
 						if (gender.equals("female")) {
 							w_append(w, t, "{mainName}'s pussy");
@@ -14726,9 +14726,9 @@ public class Chosen implements Serializable {
 							w_append(w, t, "{mainName} squeezes down on the Thralls' cocks inside {hisHer} ass and pussy as ");
 						}
 						if (gender.equals("female")) {
-							w_append(w, t, c.getMainName() + " gently sucks {hisHer} clit.  ");
+							w_append(w, t, c, "{c:mainName} gently sucks {hisHer} clit.  ");
 						} else {
-							w_append(w, t, c.getMainName() + " gently licks up and down {hisHer} shaft.  ");
+							w_append(w, t, c, "{c:mainName} gently licks up and down {hisHer} shaft.  ");
 						}
 						if (getPLEALevel() < 3 || cVirg) {
 							w_append(w, t, "Deliriously trying to hold back the impending wave of pleasure, {mainName} desperately ");
@@ -14827,9 +14827,9 @@ public class Chosen implements Serializable {
 						} else {
 							w_append(w, t, c, ".  Then, they guide {c:hisHer} penis to {mainName}'s {hole} and push {c:himHer} inside once again.  ");
 							if (friendly) {
-								w_append(w, t, c.getMainName() + "'s guilt quickly melts away as {c:heShe} gets caught up in the pleasure of raping {c:hisHer} friend");
+								w_append(w, t, c, "{c:mainName}'s guilt quickly melts away as {c:heShe} gets caught up in the pleasure of raping {c:hisHer} friend");
 							} else {
-								w_append(w, t, c.getMainName() + " eagerly thrusts as deep as {c:heShe} can, clearly enjoying it more than {c:heShe} should");
+								w_append(w, t, c, "{c:mainName} eagerly thrusts as deep as {c:heShe} can, clearly enjoying it more than {c:heShe} should");
 							}
 							if (getPLEALevel() < 3 || cVirg) {
 								w_append(w, t, ", and {mainName} struggles to hold off {hisHer} impending climax.");
@@ -14863,7 +14863,7 @@ public class Chosen implements Serializable {
 							if (getPLEALevel() < 3 || cVirg) {
 								w_append(w, t, "{mainName} grunts at the insertion, barely managing to hold back {hisHer} orgasm.");
 							} else {
-								w_append(w, t, c.getMainName() + " watches {mainName}'s expression as {heShe} orgasms with a mixture of horror and fascination.");
+								w_append(w, t, c, "{c:mainName} watches {mainName}'s expression as {heShe} orgasms with a mixture of horror and fascination.");
 							}
 						} else {
 							w_append(w, t, c, " and push {c:hisHer} cock back into {mainName}'s {hole}.  ");
@@ -14907,9 +14907,9 @@ public class Chosen implements Serializable {
 						} else {
 							w_append(w, t, c, ", and {c:mainName}'s penis slips back into {mainName}'s {hole}.  ");
 							if (friendly) {
-								w_append(w, t, c.getMainName() + " gasps with pleasure, ");
+								w_append(w, t, c, "{c:mainName} gasps with pleasure, ");
 							} else {
-								w_append(w, t, c.getMainName() + " doesn't want to pull out, ");
+								w_append(w, t, c, "{c:mainName} doesn't want to pull out, ");
 							}
 							if (getPLEALevel() < 3 || cVirg) {
 								w_append(w, t, "even though {mainName}'s ruined opening is growing sore from all the abuse.");
@@ -14968,7 +14968,7 @@ public class Chosen implements Serializable {
 						if (c.getGender().equals("female")) {
 							w_append(w, t, "One of the Thralls is still pounding {mainName}'s {hole}");
 						} else {
-							w_append(w, t, c.getMainName() + "'s penis slips back into {mainName}'s " + hole);
+							w_append(w, t, c, "{c:mainName}'s penis slips back into {mainName}'s " + hole);
 						}
 						if (getPLEALevel() < 3 || cVirg) {
 							w_append(w, t, ", lubricated by the many internal ejaculations {heShe}'s taken today");
@@ -15184,7 +15184,7 @@ public class Chosen implements Serializable {
 							}
 						} else {
 							if (friendly) {
-								w_append(w, t, c.getMainName() + " manages to kick aside one of the Thralls to make a path for {mainName} to escape, ");
+								w_append(w, t, c, "{c:mainName} manages to kick aside one of the Thralls to make a path for {mainName} to escape, ");
 							} else {
 								w_append(w, t, c, "{mainName} is hopeful for a brief moment as one of {c:mainName}'s kicks catches a Thrall in the jaw and opens a path for {himHer} to escape, ");
 							}
@@ -15252,7 +15252,7 @@ public class Chosen implements Serializable {
 							}
 						} else {
 							if (friendly) {
-								w_append(w, t, c.getMainName() + " manages to kick aside one of the Thralls to make a path for {mainName} to escape, ");
+								w_append(w, t, c, "{c:mainName} manages to kick aside one of the Thralls to make a path for {mainName} to escape, ");
 							} else {
 								w_append(w, t, c, "{mainName} is hopeful for a brief moment as one of {c:mainName}'s kicks catches a Thrall in the jaw and opens a path for {himHer} to escape, ");
 							}
@@ -15522,7 +15522,7 @@ public class Chosen implements Serializable {
 						} else {
 							w_append(w, t, ", and while {heShe}'s disgusted by what they ask {himHer} to do in return, {heShe} figures it's better than the alternative.  ");
 						}
-						w_append(w, t, c.getMainName() + " cries out in surprised pleasure, looking down to see {mainName}");
+						w_append(w, t, c, "{c:mainName} cries out in surprised pleasure, looking down to see {mainName}");
 						if (c.getGender().equals("female")) {
 							w_append(w, t, c, " licking {c:hisHer} clit.  ");
 						} else {
@@ -15563,7 +15563,7 @@ public class Chosen implements Serializable {
 						if (friendly) {
 							w_append(w, t, c, "As {c:heShe} tries to help {mainName} escape the Thralls, {c:mainName} trips and ends up sitting on {hisHer} face.  ");
 						} else {
-							w_append(w, t, c.getMainName() + "'s reckless struggling causes {c:himHer} to tumble atop {mainName}, sitting on {hisHer} face.  ");
+							w_append(w, t, c, "{c:mainName}'s reckless struggling causes {c:himHer} to tumble atop {mainName}, sitting on {hisHer} face.  ");
 						}
 						if (getPLEALevel() < 3 || cVirg) {
 							w_append(w, t, "{mainName}, who was crying out at {hisHer} own rough fucking, ");
@@ -15597,14 +15597,14 @@ public class Chosen implements Serializable {
 						}
 						w_append(w, t, " and then guides {hisHer} mouth to ");
 						if (c.getGender().equals("female")) {
-							w_append(w, t, c.getMainName() + "'s pussy, ordering {himHer} to lick it.  {mainName} knows that it's unlikely that the Thralls brought along a female member for this raid, ");
+							w_append(w, t, c, "{c:mainName}'s pussy, ordering {himHer} to lick it.  {mainName} knows that it's unlikely that the Thralls brought along a female member for this raid, ");
 							if (friendly) {
 								w_append(w, t, c, "but the thought of servicing {c:mainName} doesn't really bother {himHer}, so {heShe} complies.  ");
 							} else {
 								w_append(w, t, c, "and {heShe} hates the thought of servicing {c:mainName}, but {c:heShe} still complies.  ");
 							}
 						} else {
-							w_append(w, t, c.getMainName() + "'s cock, ordering {himHer} to suck it.  {mainName} grudgingly complies, ");
+							w_append(w, t, c, "{c:mainName}'s cock, ordering {himHer} to suck it.  {mainName} grudgingly complies, ");
 							if (friendly) {
 								w_append(w, t, "not even knowing that {heShe}'s actively breaking down {hisHer} friend's resistance.  ");
 							} else {
@@ -15622,9 +15622,9 @@ public class Chosen implements Serializable {
 				if (dignity > 66) {
 					if (c.getMorality() > 66) {
 						if (c.getGender().equals("female")) {
-							w_append(w, t, c.getMainName() + " demands that the Thralls stop making {mainName} lick {c:hisHer} clit");
+							w_append(w, t, c, "{c:mainName} demands that the Thralls stop making {mainName} lick {c:hisHer} clit");
 						} else {
-							w_append(w, t, c.getMainName() + " demands that the Thralls stop making {mainName} suck {c:hisHer} cock");
+							w_append(w, t, c, "{c:mainName} demands that the Thralls stop making {mainName} suck {c:hisHer} cock");
 						}
 						if (friendly) {
 							w_append(w, t, ", but the fact that {hisHer} friend is shouting loudly about what's happening just makes {mainName} even more embarrassed.  ");
@@ -15679,9 +15679,9 @@ public class Chosen implements Serializable {
 						}
 					} else {
 						if (friendly) {
-							w_append(w, t, c.getMainName() + " tangles {c:hisHer} fingers in {mainName}'s hair, gasping breathlessly that ");
+							w_append(w, t, c, "{c:mainName} tangles {c:hisHer} fingers in {mainName}'s hair, gasping breathlessly that ");
 						} else {
-							w_append(w, t, c.getMainName() + " smirks down at {mainName}, allowing {c:himHer}self to enjoy the situation for a moment as {c:heShe} comments that ");
+							w_append(w, t, c, "{c:mainName} smirks down at {mainName}, allowing {c:himHer}self to enjoy the situation for a moment as {c:heShe} comments that ");
 						}
 						if (c.getGender().equals("female")) {
 							w_append(w, t, "{hisHer} tongue feels amazing.  ");
@@ -15709,7 +15709,7 @@ public class Chosen implements Serializable {
 					}
 				} else if (dignity > 33) {
 					if (c.getMorality() > 66) {
-						w_append(w, t, c.getMainName() + " puts a hand on {mainName}'s head, silently checking to make sure {heShe}'s okay, ");
+						w_append(w, t, c, "{c:mainName} puts a hand on {mainName}'s head, silently checking to make sure {heShe}'s okay, ");
 						if (friendly) {
 							w_append(w, t, "and {mainName} nods as best {heShe} can ");
 							if (c.getGender().equals("female")) {
@@ -15720,9 +15720,9 @@ public class Chosen implements Serializable {
 						} else {
 							w_append(w, t, "but {mainName} can only see it as a mocking gesture since ");
 							if (c.getGender().equals("female")) {
-								w_append(w, t, c.getMainName() + "'s thighs are still wrapped around {hisHer} head.");
+								w_append(w, t, c, "{c:mainName}'s thighs are still wrapped around {hisHer} head.");
 							} else {
-								w_append(w, t, c.getMainName() + "'s cock is still halfway down {hisHer} throat.");
+								w_append(w, t, c, "{c:mainName}'s cock is still halfway down {hisHer} throat.");
 							}
 						}
 						if (getINJULevel() < 3 || aVirg) {
@@ -15801,9 +15801,9 @@ public class Chosen implements Serializable {
 				} else {
 					if (c.getMorality() > 66) {
 						if (friendly) {
-							w_append(w, t, c.getMainName() + " is appreciative but a bit intimidated by how much {mainName} is enjoying ");
+							w_append(w, t, c, "{c:mainName} is appreciative but a bit intimidated by how much {mainName} is enjoying ");
 						} else {
-							w_append(w, t, c.getMainName() + " is both horrified and turned on by {mainName}'s singleminded technique as {heShe} continues ");
+							w_append(w, t, c, "{c:mainName} is both horrified and turned on by {mainName}'s singleminded technique as {heShe} continues ");
 						}
 						if (c.getGender().equals("female")) {
 							w_append(w, t, c, "running {hisHer} tongue up and down across {c:mainName}'s clit.  ");
@@ -15831,9 +15831,9 @@ public class Chosen implements Serializable {
 						}
 					} else if (c.getMorality() > 33) {
 						if (friendly) {
-							w_append(w, t, c.getMainName() + " is normally confident and self-assured, ");
+							w_append(w, t, c, "{c:mainName} is normally confident and self-assured, ");
 						} else {
-							w_append(w, t, c.getMainName() + " doesn't want to show shame before {c:hisHer} rival does, ");
+							w_append(w, t, c, "{c:mainName} doesn't want to show shame before {c:hisHer} rival does, ");
 						}
 						if (c.getGender().equals("female")) {
 							w_append(w, t, "but {mainName}'s tongue against {hisHer} clit is feeling too good to bear.  ");
@@ -15857,9 +15857,9 @@ public class Chosen implements Serializable {
 						w_append(w, t, ", {heShe}'s able to devote all {hisHer} attention to the service.");
 					} else {
 						if (friendly) {
-							w_append(w, t, c.getMainName() + " starts to instruct {mainName} to slow down, but {c:heShe}'s muffled by a Thrall's cock down {c:hisHer} throat, and ");
+							w_append(w, t, c, "{c:mainName} starts to instruct {mainName} to slow down, but {c:heShe}'s muffled by a Thrall's cock down {c:hisHer} throat, and ");
 						} else {
-							w_append(w, t, c.getMainName() + " starts to angrily demand that {mainName} slow down, but {c:heShe}'s muffled by a Thrall's cock down {c:hisHer} throat, and ");
+							w_append(w, t, c, "{c:mainName} starts to angrily demand that {mainName} slow down, but {c:heShe}'s muffled by a Thrall's cock down {c:hisHer} throat, and ");
 						}
 						if (c.getGender().equals("female")) {
 							w_append(w, t, c, "{mainName} escalates to gently nibbling {c:mainName}'s clit");
@@ -19429,26 +19429,26 @@ public class Chosen implements Serializable {
 				w_append(w, t, "After the meeting at the military base, {mainName} enters a trance and walks to the Demonic hive to report everything they talked about.  ");
 				if (c.isHypnotized()) {
 					if (d.isHypnotized()) {
-						w_append(w, t, c.getMainName() + " and " + d.getMainName() + " come as well, though they seem slightly more aware that they're doing something strange.  ");
+						w_append(w, t, c, "{c:mainName} and " + d.getMainName() + " come as well, though they seem slightly more aware that they're doing something strange.  ");
 					} else if (d.isDrained()) {
 						w_append(w, t, c, "The other two Chosen are there as well - {c:mainName} due to your compulsion, and " + d.getMainName() + " hoping to persuade you to kill " + d.himHer() + " now, before the final battle even starts.  ");
 					} else {
-						w_append(w, t, c.getMainName() + " is compelled to come as well, though {c:heShe} seems slightly more aware that {c:heShe}'s doing something strange.  Meanwhile, " + d.getMainName() + " has no idea that " + d.hisHer() + " partners are meeting with the enemy.  ");
+						w_append(w, t, c, "{c:mainName} is compelled to come as well, though {c:heShe} seems slightly more aware that {c:heShe}'s doing something strange.  Meanwhile, " + d.getMainName() + " has no idea that " + d.hisHer() + " partners are meeting with the enemy.  ");
 					}
 				} else if (d.isHypnotized()) {
 					if (c.isDrained()) {
 						w_append(w, t, c, "The other two Chosen are there as well - " + d.getMainName() + " due to your compulsion, and {c:mainName} hoping to persuade you to kill {c:himHer} now, before the final battle even starts.  ");
 					} else {
-						w_append(w, t, d.getMainName() + " is compelled to come as well, though " + d.heShe() + " seems slightly more aware that " + d.heShe() + "'s doing something strange.  Meanwhile, " + c.getMainName() + " has no idea that {c:hisHer} partners are meeting with the enemy.  ");
+						w_append(w, t, d, "{c:mainName} is compelled to come as well, though {c:heShe} seems slightly more aware that {c:heShe}'s doing something strange.  Meanwhile, " + c.getMainName() + " has no idea that {c:hisHer} partners are meeting with the enemy.  ");
 					}
 				} else if (c.isDrained()) {
 					if (d.isDrained()) {
-						w_append(w, t, c.getMainName() + " and " + d.getMainName() + " have also come of their own free will, hoping that you'll kill them immediately rather than risk facing them in the final battle.  ");
+						w_append(w, t, c, "{c:mainName} and " + d.getMainName() + " have also come of their own free will, hoping that you'll kill them immediately rather than risk facing them in the final battle.  ");
 					} else {
-						w_append(w, t, c.getMainName() + " has also come of {c:hisHer} own free will, hoping that you'll kill {c:himHer} immediately rather than risk facing {c:himHer} in the final battle.  Meanwhile, " + d.getMainName() + " has no idea that " + d.hisHer() + " partners are meeting with the enemy.  ");
+						w_append(w, t, c, "{c:mainName} has also come of {c:hisHer} own free will, hoping that you'll kill {c:himHer} immediately rather than risk facing {c:himHer} in the final battle.  Meanwhile, " + d.getMainName() + " has no idea that " + d.hisHer() + " partners are meeting with the enemy.  ");
 					}
 				} else if (d.isDrained()) {
-					w_append(w, t, d.getMainName() + " has also come of " + d.hisHer() + " own free will, hoping that you'll kill " + d.himHer() + " immediately rather than risk facing " + d.himHer() + " in the final battle.  Meanwhile, " + c.getMainName() + " has no idea that {c:hisHer} partners are meeting with the enemy.  ");
+					w_append(w, t, d, "{c:mainName} has also come of {c:hisHer} own free will, hoping that you'll kill {c:himHer} immediately rather than risk facing {c:himHer} in the final battle.  Meanwhile, " + c.getMainName() + " has no idea that {c:hisHer} partners are meeting with the enemy.  ");
 				} else {
 					w_append(w, t, c, "Meanwhile, {c:mainName} and " + d.getMainName() + " have no idea that their partner is meeting with the enemy.  ");
 				}
@@ -19581,12 +19581,12 @@ public class Chosen implements Serializable {
 				say(t, "\"\n\n");
 				if (c.isDrained() && (c.isHypnotized() == false || hypnotized)) {
 					if (d.isDrained() && (d.isHypnotized() == false || hypnotized)) {
-						w_append(w, t, c.getMainName() + " and " + d.getMainName() + " nod in agreement.  Emboldened, {mainName} steps forward to press the point.\n\n");
+						w_append(w, t, c, "{c:mainName} and " + d.getMainName() + " nod in agreement.  Emboldened, {mainName} steps forward to press the point.\n\n");
 					} else {
-						w_append(w, t, c.getMainName() + " nods in agreement.  Emboldened, {mainName} steps forward to press the point.\n\n");
+						w_append(w, t, c, "{c:mainName} nods in agreement.  Emboldened, {mainName} steps forward to press the point.\n\n");
 					}
 				} else if (d.isDrained() && (d.isHypnotized() == false || hypnotized)) {
-					w_append(w, t, d.getMainName() + " nods in agreement.  Emboldened, {mainName} steps forward to press the point.\n\n");
+					w_append(w, t, d, "{c:mainName} nods in agreement.  Emboldened, {mainName} steps forward to press the point.\n\n");
 				} else {
 					w_append(w, t, "When your monstrous body shows no signs of being intimidated, {mainName} steps forward out of desperation.\n\n");
 				}
@@ -19746,7 +19746,7 @@ public class Chosen implements Serializable {
 			if (confidence > 66) {
 				w_append(w, t, "{mainName} needs no prompting to launch into a grand speech.");
 			} else {
-				w_append(w, t, prompter, "At first, {c:mainName} talks at length as " + prompter.heShe() + " goes over the finer details of the planned operation, but " + prompter.heShe() + " soon starts to worry that {mainName} isn't listening, so " + prompter.heShe() + " asks {mainName} to recap the current situation.");
+				w_append(w, t, prompter, "At first, {c:mainName} talks at length as {c:heShe} goes over the finer details of the planned operation, but {c:heShe} soon starts to worry that {mainName} isn't listening, so {c:heShe} asks {mainName} to recap the current situation.");
 			}
 			if (hypnotized) {
 				w_append(w, t, "  However, as {heShe} opens {hisHer} mouth to talk, {hisHer} eyes glaze over and {heShe} forgets what {heShe} was about to say.\n\n");
@@ -19808,9 +19808,9 @@ public class Chosen implements Serializable {
 				}
 				say(t, "\"\n\n");
 				if (prompter.isDrained()) {
-					w_append(w, t, prompter.getMainName() + " nods in grim agreement, then gestures for {mainName} to continue.\n\n");
+					w_append(w, t, prompter, "{c:mainName} nods in grim agreement, then gestures for {mainName} to continue.\n\n");
 				} else {
-					w_append(w, t, prompter.getMainName() + " is clearly disturbed by how deep {mainName}'s despair runs, but " + prompter.heShe() + " still gestures for {himHer} to continue.\n\n");
+					w_append(w, t, prompter, "{c:mainName} is clearly disturbed by how deep {mainName}'s despair runs, but {c:heShe} still gestures for {himHer} to continue.\n\n");
 				}
 			} else {
 				if (confidence > 66) {
@@ -19878,9 +19878,9 @@ public class Chosen implements Serializable {
 					if (c.isImpregnated() && d.isImpregnated()) {
 						w_append(w, t, "The other two Chosen listen closely, quietly appreciating that {mainName} has also grown to distrust the rest of humanity.\n\n");
 					} else if (c.isImpregnated()) {
-						w_append(w, t, c.getMainName() + " nods slightly, understanding {hisHer} bitter feelings, but " + d.getMainName() + " is quietly disturbed that " + d.hisHer() + " partners see things the way they do.\n\n");
+						w_append(w, t, c, "{c:mainName} nods slightly, understanding {hisHer} bitter feelings, but " + d.getMainName() + " is quietly disturbed that " + d.hisHer() + " partners see things the way they do.\n\n");
 					} else if (d.isImpregnated()) {
-						w_append(w, t, d.getMainName() + " nods slightly, understanding {hisHer} bitter feelings, but " + c.getMainName() + " is quietly disturbed that {c:hisHer} partners see things the way they do.\n\n");
+						w_append(w, t, d, "{c:mainName} nods slightly, understanding {hisHer} bitter feelings, but " + c.getMainName() + " is quietly disturbed that {c:hisHer} partners see things the way they do.\n\n");
 					} else {
 						w_append(w, t, "The other two Chosen are uncomfortable with {mainName}'s proclamation, but {heShe} continues on regardless.\n\n");
 					}
@@ -20113,7 +20113,7 @@ public class Chosen implements Serializable {
 			}
 			reader.say(t, "\"\n\n");
 			if (parasitized) {
-				w_append(w, t, reader.getMainName() + " doesn't say {mainName}'s name or even look in {hisHer} direction, but {heShe} still feels like {heShe}'s being accused.\n\n");
+				w_append(w, t, reader, "{c:mainName} doesn't say {mainName}'s name or even look in {hisHer} direction, but {heShe} still feels like {heShe}'s being accused.\n\n");
 				say(t, "\"");
 				if (innocence > 66) {
 					if (morality > 66) {
@@ -20236,7 +20236,7 @@ public class Chosen implements Serializable {
 					}
 				}
 				say(t, "\"\n\n");
-				w_append(w, t, reader.getMainName() + " nods as {heShe} finishes the documents.\n\n");
+				w_append(w, t, reader, "{c:mainName} nods as {heShe} finishes the documents.\n\n");
 			}
 			reader.say(t, "\"");
 			if (reader.getMorality() > 66) {
@@ -24123,7 +24123,7 @@ public class Chosen implements Serializable {
 					say(t, "I... I'm sorry for how violent I have to be in order to bring you back.  I know that many of you end up with broken bones, or... or worse.  And I know it's not your fault for getting brainwashed.  So please, forgive me!");
 				}
 				say(t, "\"\n\n");
-				w_append(w, t, innocent, "The host is surprised by the outburst.  He figured that {c:mainName}'s pure kindness would make for a good soundbite, but he hadn't realized that it had also made it more difficult for " + innocent.himHer() + " to cope with the cruel reality of being one of the Chosen.  Before the audience can start to wonder whether the Chosen are actually equipped to save them, the host continues.\n\n\"G-Good advice, yes, but let's leave it at that!  ");
+				w_append(w, t, innocent, "The host is surprised by the outburst.  He figured that {c:mainName}'s pure kindness would make for a good soundbite, but he hadn't realized that it had also made it more difficult for {c:himHer} to cope with the cruel reality of being one of the Chosen.  Before the audience can start to wonder whether the Chosen are actually equipped to save them, the host continues.\n\n\"G-Good advice, yes, but let's leave it at that!  ");
 				bonusEE += 2;
 			} else {
 				if (confidence > 33) {
@@ -24422,7 +24422,7 @@ public class Chosen implements Serializable {
 				}
 				say(t, "\"\n\n");
 				if (innocence > 66) {
-					w_append(w, t, c.getMainName() + " sighs and rubs {c:hisHer} forehead.\n\n");
+					w_append(w, t, c, "{c:mainName} sighs and rubs {c:hisHer} forehead.\n\n");
 					c.say(t, "\"");
 					if (c.getDignity() > 66) {
 						c.say(t, "Heroes are... fictional.  ");
@@ -24439,7 +24439,7 @@ public class Chosen implements Serializable {
 						c.say(t, "Look, if I can wrap my head around this, then you should be able to as well.  ");
 					}
 				} else if (innocence > 33) {
-					w_append(w, t, c.getMainName() + " looks unusually sympathetic.\n\n");
+					w_append(w, t, c, "{c:mainName} looks unusually sympathetic.\n\n");
 					c.say(t, "\"");
 					if (c.getDignity() > 66) {
 						c.say(t, "You really do care too much.  ");
@@ -24456,7 +24456,7 @@ public class Chosen implements Serializable {
 						c.say(t, "You need to look out for yourself before worrying about any of that.  ");
 					}
 				} else {
-					w_append(w, t, c.getMainName() + " smirks, leaning forward.\n\n");
+					w_append(w, t, c, "{c:mainName} smirks, leaning forward.\n\n");
 					c.say(t, "\"");
 					if (c.getDignity() > 66) {
 						c.say(t, "You're smart to realize it so quickly.  ");
@@ -24667,7 +24667,7 @@ public class Chosen implements Serializable {
 						w_append(w, t, c, "If {c:mainName} is intimidated, {c:heShe} doesn't show it.\n\n");
 						c.say(t, "\"Shouts and insults won't change the facts.  ");
 					} else {
-						w_append(w, t, c.getMainName() + " shrinks back slightly, but {c:heShe} seems more annoyed than intimidated.\n\n");
+						w_append(w, t, c, "{c:mainName} shrinks back slightly, but {c:heShe} seems more annoyed than intimidated.\n\n");
 						c.say(t, "\"In the end, you're nothing but a bully after all...  ");
 					}
 				} else if (confidence > 33) {
@@ -24689,10 +24689,10 @@ public class Chosen implements Serializable {
 					}
 					say(t, "\"\n\n");
 					if (c.getConfidence() > 66) {
-						w_append(w, t, c.getMainName() + " wears a smug expression as {c:heShe} replies.\n\n");
+						w_append(w, t, c, "{c:mainName} wears a smug expression as {c:heShe} replies.\n\n");
 						c.say(t, "\"I guess this is your limit.  ");
 					} else {
-						w_append(w, t, c.getMainName() + " sighs and shakes {c:hisHer} head.\n\n");
+						w_append(w, t, c, "{c:mainName} sighs and shakes {c:hisHer} head.\n\n");
 						c.say(t, "\"And I thought I was pathetic.  ");
 					}
 				} else {
@@ -24717,7 +24717,7 @@ public class Chosen implements Serializable {
 						w_append(w, t, c, "Wearing a sadistic grin, {c:mainName} steps closer.\n\n");
 						c.say(t, "\"You think you can excuse your own weakness that easily?  ");
 					} else {
-						w_append(w, t, c.getMainName() + " turns away.\n\n");
+						w_append(w, t, c, "{c:mainName} turns away.\n\n");
 						c.say(t, "\"Pathetic.  Your weakness is your own fault, too.  ");
 					}
 				}
@@ -24797,7 +24797,7 @@ public class Chosen implements Serializable {
 					w_append(w, t, c, "The enmity between the two Chosen means that {c:mainName}'s criticism will only make {mainName} more stubborn in {hisHer} ways.  And ");
 				} else if (currentEnemy) {
 					EEGained = EEGained+2;
-					w_append(w, t, c.getMainName() + "'s inability to resist gloating has shattered the budding friendship between {c:himHer} and {mainName}.  And ");
+					w_append(w, t, c, "{c:mainName}'s inability to resist gloating has shattered the budding friendship between {c:himHer} and {mainName}.  And ");
 				} else {
 					w_append(w, t, c, "The friendship between {mainName} and {c:mainName} is too strong to be broken by a minor question of ethics.  But ");
 				}
@@ -24858,7 +24858,7 @@ public class Chosen implements Serializable {
 				}
 				say(t, "\"\n\n");
 				if (c.getConfidence() > 66) {
-					w_append(w, t, c.getMainName() + " replies with a confident smile.\n\n");
+					w_append(w, t, c, "{c:mainName} replies with a confident smile.\n\n");
 					c.say(t, "\"");
 					if (morality > 66) {
 						c.say(t, "I excel in all anti-Thrall tactics, both violent and otherwise.  ");
@@ -24875,7 +24875,7 @@ public class Chosen implements Serializable {
 						c.say(t, "Some ignorant fools disapprove, but they're irrelevant.");
 					}
 				} else if (c.getConfidence() > 33) {
-					w_append(w, t, c.getMainName() + "'s reply is curt, but not unfriendly.\n\n");
+					w_append(w, t, c, "{c:mainName}'s reply is curt, but not unfriendly.\n\n");
 					c.say(t, "\"");
 					if (morality > 66) {
 						c.say(t, "I'm not cruel.  Simply efficient.  ");
@@ -24892,7 +24892,7 @@ public class Chosen implements Serializable {
 						c.say(t, "I don't care what people call me, as long as I can save as many people as possible.");
 					}
 				} else {
-					w_append(w, t, c.getMainName() + " laughs nervously and glances away.\n\n");
+					w_append(w, t, c, "{c:mainName} laughs nervously and glances away.\n\n");
 					c.say(t, "\"");
 					if (morality > 66) {
 						c.say(t, "You know that I don't actually like fighting that much...  ");
@@ -24924,7 +24924,7 @@ public class Chosen implements Serializable {
 						say(t, "Now that I've realized how much fun this can be, I'd be happy to take over for you!");
 					}
 					say(t, "\"\n\n");
-					w_append(w, t, c.getMainName() + " is taken aback by the abrupt offer.\n\n");
+					w_append(w, t, c, "{c:mainName} is taken aback by the abrupt offer.\n\n");
 					c.say(t, "\"");
 					if (c.getMorality() > 66) {
 						c.say(t, "Oh!  I couldn't in good conscience put it all on your shoulders.  Instead...  ");
@@ -24951,7 +24951,7 @@ public class Chosen implements Serializable {
 						say(t, "Don't forget about your own happiness, dummy!");
 					}
 					say(t, "\"\n\n");
-					w_append(w, t, c.getMainName() + " is pleased to be praised, but {c:heShe} does {c:hisHer} best not to show it.\n\n");
+					w_append(w, t, c, "{c:mainName} is pleased to be praised, but {c:heShe} does {c:hisHer} best not to show it.\n\n");
 					c.say(t, "\"");
 					if (c.getMorality() > 66) {
 						c.say(t, "I'm doing my best, but there are some things I can't do alone.  ");
@@ -24978,7 +24978,7 @@ public class Chosen implements Serializable {
 						say(t, "I-I don't want to lose to you!  Teach me!");
 					}
 					say(t, "\"\n\n");
-					w_append(w, t, c.getMainName() + " is pleasantly surprised.\n\n");
+					w_append(w, t, c, "{c:mainName} is pleasantly surprised.\n\n");
 					c.say(t, "\"");
 					if (c.getMorality() > 66) {
 						c.say(t, "Of course, it goes without saying that I'll help you.  ");
@@ -25089,7 +25089,7 @@ public class Chosen implements Serializable {
 						say(t, "I was just getting to the good part!");
 					}
 					say(t, "\"\n\n");
-					w_append(w, t, c.getMainName() + " sighs deeply, then explains.\n\n");
+					w_append(w, t, c, "{c:mainName} sighs deeply, then explains.\n\n");
 				} else {
 					w_append(w, t, "{mainName} shrinks back.\n\n");
 					say(t, "\"");
@@ -25108,7 +25108,7 @@ public class Chosen implements Serializable {
 						say(t, "I thought you'd be happy that I was beating them without violence...");
 					}
 					say(t, "\"\n\n");
-					w_append(w, t, c.getMainName() + " advances on {himHer} sternly.\n\n");
+					w_append(w, t, c, "{c:mainName} advances on {himHer} sternly.\n\n");
 				}
 				c.say(t, "\"");
 				if (c.getMorality() > 66) {
@@ -25190,7 +25190,7 @@ public class Chosen implements Serializable {
 						say(t, "If I want to let them use my body, it's no one's business but mine!");
 					}
 					say(t, "\"\n\n");
-					w_append(w, t, c.getMainName() + " replies with a look of contempt.\n\n");
+					w_append(w, t, c, "{c:mainName} replies with a look of contempt.\n\n");
 					c.say(t, "\"");
 					if (c.getDignity() > 66) {
 						c.say(t, "Such naivete.  ");
@@ -25208,7 +25208,7 @@ public class Chosen implements Serializable {
 						say(t, "I'd rather be doing this than hurting them.");
 					}
 					say(t, "\"\n\n");
-					w_append(w, t, c.getMainName() + " replies coldly.\n\n");
+					w_append(w, t, c, "{c:mainName} replies coldly.\n\n");
 					c.say(t, "\"");
 					if (c.getDignity() > 66) {
 						c.say(t, "It looks like you're just going to ignore me.  ");
@@ -25226,7 +25226,7 @@ public class Chosen implements Serializable {
 						say(t, "You're funny when you get all riled up!");
 					}
 					say(t, "\"\n\n");
-					w_append(w, t, c.getMainName() + " looks hurt.\n\n");
+					w_append(w, t, c, "{c:mainName} looks hurt.\n\n");
 					c.say(t, "\"");
 					if (c.getDignity() > 66) {
 						c.say(t, "It seems like there's nothing I can say to convince you.  ");
@@ -25378,7 +25378,7 @@ public class Chosen implements Serializable {
 						say(t, "I am perfectly capable of taking care of myself!");
 					}
 					say(t, "\"\n\n");
-					w_append(w, t, c.getMainName() + " shrinks back at first, but at seeing clearly just how troubled {mainName} is, {c:heShe} refuses to be dissuaded.\n\n");
+					w_append(w, t, c, "{c:mainName} shrinks back at first, but at seeing clearly just how troubled {mainName} is, {c:heShe} refuses to be dissuaded.\n\n");
 					c.say(t, "\"");
 					if (c.getInnocence() > 66) {
 						c.say(t, "It's not like that, {mainName}!  I-I just want to tell you that I see how heroic you're being!  ");
@@ -25405,7 +25405,7 @@ public class Chosen implements Serializable {
 						say(t, "It's what I deserve for deluding myself into thinking I was better than you...");
 					}
 					say(t, "\"\n\n");
-					w_append(w, t, c.getMainName() + " nods with understanding.\n\n");
+					w_append(w, t, c, "{c:mainName} nods with understanding.\n\n");
 					c.say(t, "\"");
 					if (c.getInnocence() > 66) {
 						c.say(t, "It might sound kinda funny, but I think that just makes you more of a hero.  ");
@@ -25442,7 +25442,7 @@ public class Chosen implements Serializable {
 						c.say(t, "You're obviously... incredibly frustrated.  But if you calm down and think of this rationally, I believe you'll see that this has less to do with your own performance and more to do with the greater strength of the enemies we're up against.  ");
 					}
 					c.say(t, "You're still so much stronger than I am!\"\n\n");
-					w_append(w, t, c.getMainName() + "'s words give {mainName} pause.\n\n");
+					w_append(w, t, c, "{c:mainName}'s words give {mainName} pause.\n\n");
 					say(t, "\"");
 					if (innocence > 66) {
 						say(t, "You know, I never really thought about it that way.  Thanks!  ");
@@ -25510,7 +25510,7 @@ public class Chosen implements Serializable {
 				if (alreadyFriend) {
 					w.append(t, "The two Chosen grow closer over their shared personal understanding of how cruel the Demons can be.  But ");
 				} else if (currentFriend) {
-					w_append(w, t, c.getMainName() + "'s personal understanding of what {mainName} is going through is enough to bridge the gap between the two rival Chosen.  But ");
+					w_append(w, t, c, "{c:mainName}'s personal understanding of what {mainName} is going through is enough to bridge the gap between the two rival Chosen.  But ");
 				} else {
 					w_append(w, t, c, "Even though {c:mainName} understands what {mainName} is going through, the relationship between the two Chosen won't be so easily repaired.  And ");
 				}
@@ -25545,7 +25545,7 @@ public class Chosen implements Serializable {
 						w_append(w, t, "{mainName}'s first instinct is to completely brush aside the offered help.\n\n");
 						say(t, "\"Why would I of all people need your help?  ");
 					} else if (dignity > 33) {
-						w_append(w, t, c.getMainName() + "'s gentle manner makes {c:himHer} a convenient outlet for {mainName}'s anger and frustration.\n\n");
+						w_append(w, t, c, "{c:mainName}'s gentle manner makes {c:himHer} a convenient outlet for {mainName}'s anger and frustration.\n\n");
 						say(t, "\"Ugh.  Being offered help by you of all people is just insulting.  ");
 					} else {
 						w_append(w, t, c, "{mainName} bluntly turns {c:himHer} down.\n\n");
@@ -25611,7 +25611,7 @@ public class Chosen implements Serializable {
 						say(t, "Someone of inferior intelligence has no business second-guessing my aptitude.");
 					}
 					say(t, "\"\n\n");
-					w_append(w, t, c.getMainName() + " feels compelled to respond to the insult.\n\n");
+					w_append(w, t, c, "{c:mainName} feels compelled to respond to the insult.\n\n");
 					c.say(t, "\"");
 					if (c.getInnocence() > 66) {
 						c.say(t, "Hey!  Th-That's mean!  ");
@@ -25629,7 +25629,7 @@ public class Chosen implements Serializable {
 						say(t, "Ignorant weakling!");
 					}
 					say(t, "\"\n\n");
-					w_append(w, t, c.getMainName() + " is taken aback by the force of {mainName}'s rage.\n\n");
+					w_append(w, t, c, "{c:mainName} is taken aback by the force of {mainName}'s rage.\n\n");
 					c.say(t, "\"");
 					if (c.getInnocence() > 66) {
 						c.say(t, "Y-You really are acting weird, {mainName}!  ");
@@ -25666,7 +25666,7 @@ public class Chosen implements Serializable {
 						c.say(t, "I was just joking around!  It doesn't mean I don't want to help you...");
 					}
 					c.say(t, "\"\n\n");
-					w_append(w, t, c.getMainName() + "'s purehearted generosity only annoys {mainName} further.\n\n");
+					w_append(w, t, c, "{c:mainName}'s purehearted generosity only annoys {mainName} further.\n\n");
 					say(t, "\"");
 					if (morality > 66) {
 						say(t, "I don't want your help!  This is my responsibility!  ");
@@ -25700,7 +25700,7 @@ public class Chosen implements Serializable {
 						c.say(t, "Please don't take this personally, but insulting me won't solve anything.");
 					}
 					c.say(t, "\"\n\n");
-					w_append(w, t, c.getMainName() + "'s appeal to {mainName}'s rationality falls on deaf ears.\n\n");
+					w_append(w, t, c, "{c:mainName}'s appeal to {mainName}'s rationality falls on deaf ears.\n\n");
 					if (morality > 66) {
 						say(t, "I had no intention of relying on you for a solution in the first place!  ");
 					} else if (morality > 33) {
@@ -25750,7 +25750,7 @@ public class Chosen implements Serializable {
 				Project.changePortrait(c.convertGender(), c.type, false, false, w, nameDisplay, 1, Project.Emotion.SHAME, Project.Emotion.SHAME);
 				say(t, "\"\n\n");
 				if (alreadyEnemy) {
-					w_append(w, t, c.getMainName() + " already resented {mainName}'s confidence, and now {mainName} also resents " + c.getMainName() + "'s good fortune not to have been abused so cruelly by the Demons.  ");
+					w_append(w, t, c, "{c:mainName} already resented {mainName}'s confidence, and now {mainName} also resents {c:mainName}'s good fortune not to have been abused so cruelly by the Demons.  ");
 				} else if (currentEnemy) {
 					EEGained = 8;
 					w_append(w, t, c, "{mainName} and {c:mainName} had been settling into a comfortable relationship of leader and follower, but now {mainName}'s faith in {hisHer} own ability has been shattered.  ");
@@ -26295,18 +26295,18 @@ public class Chosen implements Serializable {
 				if (w.getRelationship(number, c.getNumber()) >= 0) {
 					if (gender.equals(w.getGenders()[number]) == false && w.getGenders()[number].equals("male")) {
 						if (c.getGender().equals(w.getGenders()[c.getNumber()]) == false) {
-							w_append(w, t, c.getMainName() + " winces in sympathy, remembering how {c:heShe} felt upon losing {c:hisHer} masculinity.\n\n");
+							w_append(w, t, c, "{c:mainName} winces in sympathy, remembering how {c:heShe} felt upon losing {c:hisHer} masculinity.\n\n");
 						} else {
-							w_append(w, t, c.getMainName() + " winces in sympathy, recognizing that {mainName}'s sense of violation at being changed like this must be even greater than what {c:heShe} felt the first time {c:heShe} was raped.\n\n");
+							w_append(w, t, c, "{c:mainName} winces in sympathy, recognizing that {mainName}'s sense of violation at being changed like this must be even greater than what {c:heShe} felt the first time {c:heShe} was raped.\n\n");
 						}
 					} else if (gender.equals("male") && c.getGender().equals("male")) {
-						w_append(w, t, c.getMainName() + " winces in sympathy, remembering how {c:heShe} felt - not only physically, but mentally as well - the first time {c:heShe} was forced to take a cock up {c:hisHer} ass.\n\n");
+						w_append(w, t, c, "{c:mainName} winces in sympathy, remembering how {c:heShe} felt - not only physically, but mentally as well - the first time {c:heShe} was forced to take a cock up {c:hisHer} ass.\n\n");
 					} else if (gender.equals("male") == false && c.getGender().equals("male") == false) {
-						w_append(w, t, c.getMainName() + " winces in sympathy that {heShe} had to lose {hisHer} virginity like this.\n\n");
+						w_append(w, t, c, "{c:mainName} winces in sympathy that {heShe} had to lose {hisHer} virginity like this.\n\n");
 					} else if (c.getGender().equals("male")) {
-						w_append(w, t, c.getMainName() + " winces in sympathy, remembering how {c:heShe} felt the first time {c:heShe} was raped by another man.\n\n");
+						w_append(w, t, c, "{c:mainName} winces in sympathy, remembering how {c:heShe} felt the first time {c:heShe} was raped by another man.\n\n");
 					} else {
-						w_append(w, t, c.getMainName() + " winces in sympathy, recognizing that {mainName} must be feeling much like {c:heShe} did when {c:heShe} lost {c:hisHer} virginity.\n\n");
+						w_append(w, t, c, "{c:mainName} winces in sympathy, recognizing that {mainName} must be feeling much like {c:heShe} did when {c:heShe} lost {c:hisHer} virginity.\n\n");
 					}
 					c.say(t, "\"");
 					if (c.getDignity() > 66) {
@@ -26317,7 +26317,7 @@ public class Chosen implements Serializable {
 						c.say(t, "Can't believe you still finished the mission.  You don't always have to act so tough, you know.  ");
 					}
 				} else {
-					w_append(w, t, c.getMainName() + " has some complicated feelings at seeing someone {heShe} dislikes suffering in a way {heShe} deeply sympathizes with.  {HisHer} tone is surprisingly soft.\n\n");
+					w_append(w, t, c, "{c:mainName} has some complicated feelings at seeing someone {heShe} dislikes suffering in a way {heShe} deeply sympathizes with.  {HisHer} tone is surprisingly soft.\n\n");
 					c.say(t, "\"");
 					if (c.getConfidence() > 66) {
 						c.say(t, "{mainName}.  You'd better not be blaming yourself.  Because if this is your fault, then what happened to me is my fault, and I won't accept that.  ");
@@ -26469,7 +26469,7 @@ public class Chosen implements Serializable {
 						say(t, "I'm... having difficulty coming to terms with this.  I feel... overwhelmingly angry.  To the point that it's impossible to remain rational.");
 					}
 					say(t, "\"\n\n");
-					w_append(w, t, c.getMainName() + " nods.\n\n");
+					w_append(w, t, c, "{c:mainName} nods.\n\n");
 					c.say(t, "\"");
 					if (c.getInnocence() > 66) {
 						c.say(t, "Well, yeah.  But just blowing everything up won't make you feel better.  Or at least... not that much better.  Look, the point is, you've got to get your feelings in order.  ");
@@ -26495,7 +26495,7 @@ public class Chosen implements Serializable {
 						}
 					}
 					say(t, "\"\n\n");
-					w_append(w, t, c.getMainName() + " shakes {c:hisHer} head.\n\n");
+					w_append(w, t, c, "{c:mainName} shakes {c:hisHer} head.\n\n");
 					c.say(t, "\"");
 					if (c.getInnocence() > 66) {
 						c.say(t, "Well, there's your problem!  Look, it's going to sound weird, but here's my plan for dealing with this kind of thing.  ");
@@ -26517,7 +26517,7 @@ public class Chosen implements Serializable {
 						say(t, "I am getting caught up in self-pity when you have suffered at least as much...");
 					}
 					say(t, "\"\n\n");
-					w_append(w, t, c.getMainName() + " sighs in exasperation.\n\n");
+					w_append(w, t, c, "{c:mainName} sighs in exasperation.\n\n");
 					c.say(t, "\"");
 					if (c.getInnocence() > 66) {
 						c.say(t, "Don't apologize, dummy!  You're the one who just lost something you really cared about!  Stop overthinking things and do what I say.  ");
@@ -26707,7 +26707,7 @@ public class Chosen implements Serializable {
 				}
 			} else {
 				if (w.getRelationship(number, c.getNumber()) >= 0) {
-					w_append(w, t, c.getMainName() + " frowns with annoyance.  {c:HeShe} had been starting to respect {mainName}, but this display of self-pity just looks pathetic to {c:himHer}.\n\n");
+					w_append(w, t, c, "{c:mainName} frowns with annoyance.  {c:HeShe} had been starting to respect {mainName}, but this display of self-pity just looks pathetic to {c:himHer}.\n\n");
 					c.say(t, "\"");
 					if (c.getConfidence() > 66) {
 						c.say(t, "Come on, {mainName}!  ");
@@ -26717,7 +26717,7 @@ public class Chosen implements Serializable {
 						c.say(t, "I thought you were stronger than that, {mainName}...  ");
 					}
 				} else {
-					w_append(w, t, c.getMainName() + " smirks with amusement.  {c:HeShe} always got the impression that {mainName} considered {himHer}self to be a better person than {c:himHer}, so it's satisfying to see {himHer} put in {hisHer} place.\n\n");
+					w_append(w, t, c, "{c:mainName} smirks with amusement.  {c:HeShe} always got the impression that {mainName} considered {himHer}self to be a better person than {c:himHer}, so it's satisfying to see {himHer} put in {hisHer} place.\n\n");
 					c.say(t, "\"");
 					if (c.getDignity() > 66) {
 						c.say(t, "Weren't you prepared to give up 'everything,' {mainName}?  ");
@@ -26819,7 +26819,7 @@ public class Chosen implements Serializable {
 						say(t, "I just got unlucky, that's all!");
 					}
 					say(t, "\"\n\n");
-					w_append(w, t, c.getMainName() + " gives {mainName} a condescending smile.\n\n");
+					w_append(w, t, c, "{c:mainName} gives {mainName} a condescending smile.\n\n");
 					c.say(t, "\"");
 					if (c.getDignity() > 66) {
 						c.say(t, "Yes, yes, it must have been very traumatizing to hit the limits of your power.  I suppose you can't be considered the strongest anymore.  ");
@@ -26841,7 +26841,7 @@ public class Chosen implements Serializable {
 						}
 					}
 					say(t, "\"\n\n");
-					w_append(w, t, c.getMainName() + " nods, looking almost sympathetic, but there's a cruel gleam in {c:hisHer} eye.\n\n");
+					w_append(w, t, c, "{c:mainName} nods, looking almost sympathetic, but there's a cruel gleam in {c:hisHer} eye.\n\n");
 					c.say(t, "\"");
 					if (c.getDignity() > 66) {
 						c.say(t, "Hm, all the more reason to protect what remains of the purity on our team.  Which would be... well, me, first of all.  ");
@@ -26859,7 +26859,7 @@ public class Chosen implements Serializable {
 						say(t, "I'm so useless...");
 					}
 					say(t, "\"\n\n");
-					w_append(w, t, c.getMainName() + " just finds {mainName}'s whining annoying, and {c:heShe} replies without a hint of mercy.\n\n");
+					w_append(w, t, c, "{c:mainName} just finds {mainName}'s whining annoying, and {c:heShe} replies without a hint of mercy.\n\n");
 					c.say(t, "\"");
 					if (c.getDignity() > 66) {
 						c.say(t, "If you really want to redeem yourself, you can do it by making yourself useful to me.  ");
@@ -26896,7 +26896,7 @@ public class Chosen implements Serializable {
 						c.say(t, "You aren't nearly as selfless as you think you are.");
 					}
 					c.say(t, "\"\n\n");
-					w_append(w, t, c.getMainName() + "'s casual apathy is too much for {mainName} to tolerate.  {HeShe} clenches {hisHer} fists in anger.\n\n");
+					w_append(w, t, c, "{c:mainName}'s casual apathy is too much for {mainName} to tolerate.  {HeShe} clenches {hisHer} fists in anger.\n\n");
 					say(t, "\"");
 					if (innocence > 66) {
 						say(t, "You're really, really not a nice person!  ");
@@ -26912,7 +26912,7 @@ public class Chosen implements Serializable {
 						c.say(t, "It wouldn't even be worth my time to beat you into shape.");
 					}
 					c.say(t, "\"\n\n");
-					w_append(w, t, c.getMainName() + " is so self-absorbed that it makes {mainName}'s composure crack.\n\n");
+					w_append(w, t, c, "{c:mainName} is so self-absorbed that it makes {mainName}'s composure crack.\n\n");
 					say(t, "\"");
 					if (innocence > 66) {
 						say(t, "Why does everything with you have to be about beating people up!?  ");
@@ -26963,7 +26963,7 @@ public class Chosen implements Serializable {
 				Project.changePortrait(this.convertGender(), this.type, false, false, w, nameDisplay, 0, Project.Emotion.ANGER, Project.Emotion.ANGER);
 				Project.changePortrait(c.convertGender(), c.type, false, false, w, nameDisplay, 1, Project.Emotion.FOCUS, Project.Emotion.FOCUS);
 				if (alreadyEnemy) {
-					w_append(w, t, c.getMainName() + "'s lack of compassion drives {mainName} even further away.  But without {c:hisHer} support, ");
+					w_append(w, t, c, "{c:mainName}'s lack of compassion drives {mainName} even further away.  But without {c:hisHer} support, ");
 				} else if (currentEnemy) {
 					EEGained = 10;
 					w_append(w, t, c, "{mainName} and {c:mainName} had begun to think of each other as friends, but {mainName} misjudged {c:mainName}'s ability to empathize with those in different situations, and now {heShe}'s on {hisHer} own.  ");
@@ -27026,7 +27026,7 @@ public class Chosen implements Serializable {
 							say(t, "Come over here and make me feel good!");
 						}
 						say(t, "\"\n\n");
-						w_append(w, t, c.getMainName() + " is a little bit intimidated by how abruptly {mainName} has embraced {hisHer} own sexuality, but {c:heShe} tries not let it get to {c:himHer}.\n\n");
+						w_append(w, t, c, "{c:mainName} is a little bit intimidated by how abruptly {mainName} has embraced {hisHer} own sexuality, but {c:heShe} tries not let it get to {c:himHer}.\n\n");
 						c.say(t, "\"");
 						if (c.getMorality() > 66) {
 							c.say(t, "Certainly!  ");
@@ -27044,7 +27044,7 @@ public class Chosen implements Serializable {
 							say(t, "I guess I was just too cute for you to resist joining in, huh?");
 						}
 						say(t, "\"\n\n");
-						w_append(w, t, c.getMainName() + " smiles as {c:heShe} pushes {c:hisHer} way through the groping Thralls toward {mainName}.\n\n");
+						w_append(w, t, c, "{c:mainName} smiles as {c:heShe} pushes {c:hisHer} way through the groping Thralls toward {mainName}.\n\n");
 						c.say(t, "\"");
 						if (c.getMorality() > 66) {
 							c.say(t, "I thought I'd offer my services.  ");
@@ -27062,7 +27062,7 @@ public class Chosen implements Serializable {
 							say(t, "Haah...  I c-can't take it anymore, p-please let me do it with you too, " + c.getMainName() + "...!");
 						}
 						say(t, "\"\n\n");
-						w_append(w, t, c.getMainName() + " smirks at {mainName} as {c:heShe} gently pushes one of the Thralls to the ground and sits on his back.\n\n");
+						w_append(w, t, c, "{c:mainName} smirks at {mainName} as {c:heShe} gently pushes one of the Thralls to the ground and sits on his back.\n\n");
 						c.say(t, "\"");
 						if (c.getMorality() > 66) {
 							c.say(t, "It's alright, {mainName}.  Come over here, I'll make you feel even better.  ");
@@ -27080,7 +27080,7 @@ public class Chosen implements Serializable {
 							say(t, "Hey, wait!  I'm the one using these Thralls, go find your own!");
 						}
 						say(t, "\"\n\n");
-						w_append(w, t, c.getMainName() + " sighs.\n\n");
+						w_append(w, t, c, "{c:mainName} sighs.\n\n");
 						c.say(t, "\"");
 						if (c.getMorality() > 66) {
 							c.say(t, "Why would I do that?  I was thinking that perhaps I could help out as a sort of peace offering...  ");
@@ -27098,7 +27098,7 @@ public class Chosen implements Serializable {
 							say(t, "If you admit you're a pervert, I'll get out of the way so you can have the Thralls all to yourself!");
 						}
 						say(t, "\"\n\n");
-						w_append(w, t, c.getMainName() + " holds up {hisHer} hand to stop {mainName}.\n\n");
+						w_append(w, t, c, "{c:mainName} holds up {hisHer} hand to stop {mainName}.\n\n");
 						c.say(t, "\"");
 						if (c.getMorality() > 66) {
 							c.say(t, "Wait, wait, there's no need to move - I simply decided that if this is something you're enjoying now, we might be able to mend the bridge between us by enjoying it together.  ");
@@ -27116,7 +27116,7 @@ public class Chosen implements Serializable {
 							say(t, "Um.  Wait, you don't mind if I call you a pervert, do you...?");
 						}
 						say(t, "\"\n\n");
-						w_append(w, t, c.getMainName() + " smirks and shakes {c:hisHer} head.\n\n");
+						w_append(w, t, c, "{c:mainName} smirks and shakes {c:hisHer} head.\n\n");
 						c.say(t, "\"");
 						if (c.getMorality() > 66) {
 							c.say(t, "Don't worry.  I've come to enjoy this sort of thing as well.  So we might as well enjoy it together, don't you think?  ");
@@ -27137,9 +27137,9 @@ public class Chosen implements Serializable {
 					}
 					c.say(t, "\"\n\n");
 					if (c.getGender().equals("female")) {
-						w_append(w, t, c.getMainName() + " starts to crawl toward {mainName}, but {c:heShe}'s caught off-guard when a Thrall pushes his face between {c:hisHer} thighs and starts licking.  Upon seeing " + c.getMainName() + "'s usual self-control crack under the pleasure, {mainName} impulsively leans forward and starts playfully licking at {c:hisHer} nipple.\n\n");
+						w_append(w, t, c, "{c:mainName} starts to crawl toward {mainName}, but {c:heShe}'s caught off-guard when a Thrall pushes his face between {c:hisHer} thighs and starts licking.  Upon seeing {c:mainName}'s usual self-control crack under the pleasure, {mainName} impulsively leans forward and starts playfully licking at {c:hisHer} nipple.\n\n");
 					} else {
-						w_append(w, t, c.getMainName() + " starts to crawl toward {mainName}, but {c:heShe}'s caught off-guard when a Thrall starts sucking {c:hisHer} cock.  Upon seeing " + c.getMainName() + "'s usual self-control crack under the pleasure, {mainName} impulsively leans forward and starts playfully licking at {c:hisHer} nipple.\n\n");
+						w_append(w, t, c, "{c:mainName} starts to crawl toward {mainName}, but {c:heShe}'s caught off-guard when a Thrall starts sucking {c:hisHer} cock.  Upon seeing {c:mainName}'s usual self-control crack under the pleasure, {mainName} impulsively leans forward and starts playfully licking at {c:hisHer} nipple.\n\n");
 					}
 					say(t, "\"");
 					if (dignity > 66) {
@@ -27158,7 +27158,7 @@ public class Chosen implements Serializable {
 						c.say(t, "Come on, let's rub up against each other and see who cums first...  Aah, h-hold on, when did you get so-!?");
 					}
 					c.say(t, "\"\n\n");
-					w_append(w, t, c.getMainName() + " is caught off-guard by {mainName}'s intensity as they grind their bodies against each other.  The surrounding Thralls join in, their hands groping and lightly pinching as the two Chosen pant with exertion.\n\n");
+					w_append(w, t, c, "{c:mainName} is caught off-guard by {mainName}'s intensity as they grind their bodies against each other.  The surrounding Thralls join in, their hands groping and lightly pinching as the two Chosen pant with exertion.\n\n");
 					say(t, "\"");
 					if (dignity > 66) {
 						say(t, "Haah... Surprised, " + c.getMainName() + "?  ");
@@ -27207,9 +27207,9 @@ public class Chosen implements Serializable {
 					}
 					say(t, "\"\n\n");
 					if (c.getGender().equals("female")) {
-						w_append(w, t, c.getMainName() + " shudders in climax, then takes a moment to catch {c:hisHer} breath before answering.\n\n");
+						w_append(w, t, c, "{c:mainName} shudders in climax, then takes a moment to catch {c:hisHer} breath before answering.\n\n");
 					} else {
-						w_append(w, t, c.getMainName() + " shudders as {c:heShe} cums, then takes a moment to catch {c:hisHer} breath before answering.\n\n");
+						w_append(w, t, c, "{c:mainName} shudders as {c:heShe} cums, then takes a moment to catch {c:hisHer} breath before answering.\n\n");
 					}
 					c.say(t, "\"");
 					if (c.getConfidence() > 66) {
@@ -27236,9 +27236,9 @@ public class Chosen implements Serializable {
 					}
 					say(t, "\"\n\n");
 					if (c.getGender().equals("female")) {
-						w_append(w, t, c.getMainName() + " tries to give {mainName} a reassuring smile, though it's spoiled somewhat by {c:hisHer} orgasmic spasms.\n\n");
+						w_append(w, t, c, "{c:mainName} tries to give {mainName} a reassuring smile, though it's spoiled somewhat by {c:hisHer} orgasmic spasms.\n\n");
 					} else {
-						w_append(w, t, c.getMainName() + " tries to give {mainName} a reassuring smile, though it's spoiled somewhat by {c:hisHer} orgasmic spasms as {c:hisHer} cock shoots its load.\n\n");
+						w_append(w, t, c, "{c:mainName} tries to give {mainName} a reassuring smile, though it's spoiled somewhat by {c:hisHer} orgasmic spasms as {c:hisHer} cock shoots its load.\n\n");
 					}
 					c.say(t, "\"");
 					if (c.getConfidence() > 66) {
@@ -27264,7 +27264,7 @@ public class Chosen implements Serializable {
 						say(t, "I, um... I k-kinda like being the one in control for once...");
 					}
 					say(t, "\"\n\n");
-					w_append(w, t, c.getMainName() + ", who's already recovering from {c:hisHer} orgasm, can't help but smile at {mainName}'s enthusiasm.\n\n");
+					w_append(w, t, c, "{c:mainName}, who's already recovering from {c:hisHer} orgasm, can't help but smile at {mainName}'s enthusiasm.\n\n");
 					c.say(t, "\"");
 					if (c.getConfidence() > 66) {
 						c.say(t, "Oh?  You must have a generous spirit after all.  ");
@@ -27295,7 +27295,7 @@ public class Chosen implements Serializable {
 				}
 				w.append(t, "while they're caught up in the afterglow, the Thralls quietly slip away to return to the Demonic hive, ready to participate in the next attack.  The Chosen are neglecting their duties for the sake of simple sexual pleasure.");
 			} else {
-				w_append(w, t, c.getMainName() + " frowns in annoyance and readies {c:hisHer} " + c.getWeapon() + ".  One very short skirmish later, the Thralls are being herded off to jail, while {mainName} angrily confronts " + c.getMainName() + ".\n\n");
+				w_append(w, t, c, "{c:mainName} frowns in annoyance and readies {c:hisHer} " + c.getWeapon() + ".  One very short skirmish later, the Thralls are being herded off to jail, while {mainName} angrily confronts {c:mainName}.\n\n");
 				say(t, "\"");
 				if (w.getRelationship(number, c.getNumber()) >= 0) {
 					if (dignity > 66) {
@@ -27371,7 +27371,7 @@ public class Chosen implements Serializable {
 						say(t, "It's none of your business what I do with Thralls before beating them up!");
 					}
 					say(t, "\"\n\n");
-					w_append(w, t, c.getMainName() + " sighs and speaks slowly.\n\n");
+					w_append(w, t, c, "{c:mainName} sighs and speaks slowly.\n\n");
 					c.say(t, "\"");
 					if (c.getMorality() > 66) {
 						c.say(t, "They're human beings, not toys.  ");
@@ -27389,7 +27389,7 @@ public class Chosen implements Serializable {
 						say(t, "I just wanted to feel good for awhile...");
 					}
 					say(t, "\"\n\n");
-					w_append(w, t, c.getMainName() + " wears a stern frown.\n\n");
+					w_append(w, t, c, "{c:mainName} wears a stern frown.\n\n");
 					c.say(t, "\"");
 					if (c.getMorality() > 66) {
 						c.say(t, "Can't you at least try to do your duty as one of the Chosen!?  ");
@@ -27549,9 +27549,9 @@ public class Chosen implements Serializable {
 					w_append(w, t, c, "The tension between the two Chosen prevents {c:mainName} from understanding why {mainName} behaves the way {heShe} does.  And without {c:mainName}'s support, ");
 				} else if (currentEnemy) {
 					EEGained = 10;
-					w_append(w, t, c.getMainName() + " isn't a squeamish person, but {mainName}'s behavior crosses a line that {c:heShe} can't tolerate.  And without " + c.getMainName() + "'s support, ");
+					w_append(w, t, c, "{c:mainName} isn't a squeamish person, but {mainName}'s behavior crosses a line that {c:heShe} can't tolerate.  And without {c:mainName}'s support, ");
 				} else {
-					w_append(w, t, c.getMainName() + " isn't an especially squeamish person, so even {mainName}'s depraved behavior isn't enough to drive them apart.  But " + c.getMainName() + " still doesn't understand the depth of {c:hisHer} friend's needs, and ");
+					w_append(w, t, c, "{c:mainName} isn't an especially squeamish person, so even {mainName}'s depraved behavior isn't enough to drive them apart.  But {c:mainName} still doesn't understand the depth of {c:hisHer} friend's needs, and ");
 				}
 				w_append(w, t, "{mainName} will continue to satisfy {hisHer} lust in the only way {heShe} knows.");
 			}
@@ -27766,7 +27766,7 @@ public class Chosen implements Serializable {
 							c.say(t, "Good thing I'm... used to it by now...");
 						}
 						c.say(t, "\"\n\n");
-						w_append(w, t, c, "{c:HisHer} words remind {mainName} that " + c.getMainName() + " has been subjected to all the same tortures that {heShe} has.  {mainName} had always considered " + c.getMainName() + " to be a coward, but seeing how much more willing {c:heShe} is to take punishment without complaint, it's almost enough to make {mainName} feel ashamed.\n\n");
+						w_append(w, t, c, "{c:HisHer} words remind {mainName} that {c:mainName} has been subjected to all the same tortures that {heShe} has.  {mainName} had always considered {c:mainName} to be a coward, but seeing how much more willing {c:heShe} is to take punishment without complaint, it's almost enough to make {mainName} feel ashamed.\n\n");
 						say(t, "\"");
 						if (innocence > 66) {
 							say(t, "Just dodge next time, dummy...  ");
@@ -27907,9 +27907,9 @@ public class Chosen implements Serializable {
 				if (alreadyFriend) {
 					w_append(w, t, c, "For the sake of their friendship, {mainName} is willing to stop the pointless destruction for the time being.  But {c:mainName} lacks the willpower to convince {himHer} to change {hisHer} ways completely, and {hisHer} behavior ");
 				} else if (currentFriend) {
-					w_append(w, t, c.getMainName() + "'s readiness to endure severe injury has won {c:himHer} {mainName}'s grudging respect.  But it's ultimately just {c:hisHer} own way of coming to terms with the tortures {c:heShe}'s endured, and both of them will find that their behavior ");
+					w_append(w, t, c, "{c:mainName}'s readiness to endure severe injury has won {c:himHer} {mainName}'s grudging respect.  But it's ultimately just {c:hisHer} own way of coming to terms with the tortures {c:heShe}'s endured, and both of them will find that their behavior ");
 				} else {
-					w_append(w, t, c.getMainName() + "'s sacrifice was enough to briefly unnerve and distract {mainName}, but the two Chosen are still bitter rivals, and this won't change anything in the long run.  {mainName}'s behavior ");
+					w_append(w, t, c, "{c:mainName}'s sacrifice was enough to briefly unnerve and distract {mainName}, but the two Chosen are still bitter rivals, and this won't change anything in the long run.  {mainName}'s behavior ");
 				}
 				w.append(t, "will become more and more extreme as the trauma escalates.");
 			} else {
@@ -27975,7 +27975,7 @@ public class Chosen implements Serializable {
 						c.say(t, "You weren't able to hold up under the strain.");
 					}
 					c.say(t, "\"\n\n");
-					w_append(w, t, c.getMainName() + "'s accusatory tone strikes a nerve in {mainName}.\n\n");
+					w_append(w, t, c, "{c:mainName}'s accusatory tone strikes a nerve in {mainName}.\n\n");
 					say(t, "\"");
 					if (innocence > 66) {
 						say(t, "I'm the same as I've always been!  I'm just showing off my full power now 'cause I feel like it.  ");
@@ -27992,7 +27992,7 @@ public class Chosen implements Serializable {
 						c.say(t, "I need to get out of here!");
 					}
 					c.say(t, "\"\n\n");
-					w_append(w, t, c.getMainName() + " turns and flees as fast as {c:heShe} can, while {mainName} stares contemptuously after {c:himHer}.\n\n");
+					w_append(w, t, c, "{c:mainName} turns and flees as fast as {c:heShe} can, while {mainName} stares contemptuously after {c:himHer}.\n\n");
 					say(t, "\"");
 					if (innocence > 66) {
 						say(t, "Yeah, you'd better run!  ");
@@ -28039,7 +28039,7 @@ public class Chosen implements Serializable {
 				}
 				say(t, "\"\n\n");
 				if (alreadyEnemy) {
-					w_append(w, t, c.getMainName() + " isn't inclined to forgive {mainName} for lashing out at {c:himHer}, and {mainName} isn't inclined to ask for forgiveness in the first place.  Furthermore, ");
+					w_append(w, t, c, "{c:mainName} isn't inclined to forgive {mainName} for lashing out at {c:himHer}, and {mainName} isn't inclined to ask for forgiveness in the first place.  Furthermore, ");
 				} else if (currentEnemy) {
 					w_append(w, t, c, "For {c:mainName}, the shock of {mainName} lashing out at {c:himHer} is enough to destroy whatever feelings of friendship were there before.  Furthermore, ");
 					EEGained = 10;
@@ -29110,11 +29110,11 @@ public class Chosen implements Serializable {
 			}
 			if (c.isVVirg()) {
 				if (c.getDignity() > 66) {
-					w_append(w, t, c.getMainName() + " squirms and gulps, trying and failing to hide {c:hisHer} growing fear.\n\n");
+					w_append(w, t, c, "{c:mainName} squirms and gulps, trying and failing to hide {c:hisHer} growing fear.\n\n");
 				} else if (c.getDignity() > 33) {
-					w_append(w, t, c.getMainName() + " tries to squirm away, wiggling {c:hisHer} hips from side to side.\n\n");
+					w_append(w, t, c, "{c:mainName} tries to squirm away, wiggling {c:hisHer} hips from side to side.\n\n");
 				} else {
-					w_append(w, t, c.getMainName() + " kicks and screams, stumbling over {c:hisHer} words as {c:heShe} protests.\n\n");
+					w_append(w, t, c, "{c:mainName} kicks and screams, stumbling over {c:hisHer} words as {c:heShe} protests.\n\n");
 				}
 				c.say(t, "\"");
 				if (c.getInnocence() > 66) {
@@ -29180,11 +29180,11 @@ public class Chosen implements Serializable {
 				}
 			} else {
 				if (c.getDignity() > 66) {
-					w_append(w, t, c.getMainName() + " grits {c:hisHer} teeth and glares sullenly up at {mainName}.\n\n");
+					w_append(w, t, c, "{c:mainName} grits {c:hisHer} teeth and glares sullenly up at {mainName}.\n\n");
 				} else if (c.getDignity() > 33) {
-					w_append(w, t, c.getMainName() + " realizes that there's no more point in struggling and huffs in annoyance, glaring up at {mainName}.\n\n");
+					w_append(w, t, c, "{c:mainName} realizes that there's no more point in struggling and huffs in annoyance, glaring up at {mainName}.\n\n");
 				} else {
-					w_append(w, t, c.getMainName() + " kicks and screams in rage, struggling right up to the very last moment.\n\n");
+					w_append(w, t, c, "{c:mainName} kicks and screams in rage, struggling right up to the very last moment.\n\n");
 				}
 				c.say(t, "\"");
 				if (c.getInnocence() > 66) {
@@ -29291,11 +29291,11 @@ public class Chosen implements Serializable {
 				}
 				w_append(w, t, c, "{c:himHer} over the edge, and ");
 				if (c.getGender().equals("female")) {
-					w_append(w, t, c.getMainName() + " reflexively clings to {mainName} as {c:heShe} shudders in orgasm.  ");
+					w_append(w, t, c, "{c:mainName} reflexively clings to {mainName} as {c:heShe} shudders in orgasm.  ");
 				} else if (c.getGender().equals("male") && c.isAVirg() == false) {
-					w_append(w, t, c.getMainName() + " shudders and bucks {c:hisHer} hips as a dribble of watery fluid drips from {c:hisHer} bound penis.  ");
+					w_append(w, t, c, "{c:mainName} shudders and bucks {c:hisHer} hips as a dribble of watery fluid drips from {c:hisHer} bound penis.  ");
 				} else {
-					w_append(w, t, c.getMainName() + "'s cock shoots its load all over {c:hisHer} own belly.  ");
+					w_append(w, t, c, "{c:mainName}'s cock shoots its load all over {c:hisHer} own belly.  ");
 				}
 				w_append(w, t, c, "{mainName} grins down at {c:himHer}.\n\n");
 				say(t, "\"");
@@ -29404,13 +29404,13 @@ public class Chosen implements Serializable {
 				}
 				c.say(t, "\"\n\n");
 				if (w.getRelationship(number, c.getNumber()) == -4) {
-					w_append(w, t, c.getMainName() + " is horrified and angry over the way {mainName} has come to treat {c:himHer}.  With {mainName}'s compassionate nature fading away, neither of them is interested in bridging the ");
+					w_append(w, t, c, "{c:mainName} is horrified and angry over the way {mainName} has come to treat {c:himHer}.  With {mainName}'s compassionate nature fading away, neither of them is interested in bridging the ");
 					w.underlineAppend(t, "irreparable rift");
 					w.append(t, " between them.  And ");
 				} else if (c.timesSlaughtered() > 0) {
 					w_append(w, t, c, "Hypocritical as it is, {c:mainName} is still annoyed by the way {mainName} has come to treat {c:himHer}.  And ");
 				} else {
-					w_append(w, t, c.getMainName() + " is horrified and angry over the way {mainName} has come to treat {c:himHer}.  And ");
+					w_append(w, t, c, "{c:mainName} is horrified and angry over the way {mainName} has come to treat {c:himHer}.  And ");
 				}
 			}
 			w.append(t, "now that the team's moral heart has blackened, the city's helpless denizens have no one left to defend them.");
@@ -29440,9 +29440,9 @@ public class Chosen implements Serializable {
 				}
 			}
 		} else if (type == 9) {
-			w_append(w, t, c.getMainName() + " is doing one last sweep of the battlefield, looking for straggler Demons, when {c:heShe} hears a lewd scream nearby.  {c:HeShe} rushes to the source and finds a large Demon, roughly the size of a cargo truck and shaped like a Venus flytrap.  Its internal walls are lined with thick, bumpy tentacles that it uses to capture humans and paralyze them with pleasure while it carries them back to the Demonic hive so that they can be Enthralled.  Several humans can be seen squirming helplessly in its jaws - and {mainName} is among them, writhing and moaning.  ");
+			w_append(w, t, c, "{c:mainName} is doing one last sweep of the battlefield, looking for straggler Demons, when {c:heShe} hears a lewd scream nearby.  {c:HeShe} rushes to the source and finds a large Demon, roughly the size of a cargo truck and shaped like a Venus flytrap.  Its internal walls are lined with thick, bumpy tentacles that it uses to capture humans and paralyze them with pleasure while it carries them back to the Demonic hive so that they can be Enthralled.  Several humans can be seen squirming helplessly in its jaws - and {mainName} is among them, writhing and moaning.  ");
 			if (startFriends) {
-				w_append(w, t, c.getMainName() + " immediately rushes forward to help.\n\n");
+				w_append(w, t, c, "{c:mainName} immediately rushes forward to help.\n\n");
 				c.say(t, "\"");
 				if (c.getMorality() > 66) {
 					c.say(t, "Don't worry, I'll save you!");
@@ -29452,7 +29452,7 @@ public class Chosen implements Serializable {
 					c.say(t, "I guess I'd better get you out of the way before I kill that thing.");
 				}
 			} else {
-				w_append(w, t, c.getMainName() + " sighs and mutters under {c:hisHer} breath as {c:heShe} approaches.\n\n");
+				w_append(w, t, c, "{c:mainName} sighs and mutters under {c:hisHer} breath as {c:heShe} approaches.\n\n");
 				c.say(t, "\"");
 				if (c.getMorality() > 66) {
 					c.say(t, "One of these days, I should just leave you to face the consequences of your actions...");
@@ -29484,7 +29484,7 @@ public class Chosen implements Serializable {
 			}
 			say(t, "\"\n\n");
 			if (c.isAVirg()) {
-				w_append(w, t, c.getMainName() + " struggles to escape, but with {mainName} hugging {c:himHer} and pinning down {c:hisHer} limbs, there's nothing {c:heShe} can do to stop the Demon from coiling its tentacles thoroughly around {c:hisHer} body.\n\n");
+				w_append(w, t, c, "{c:mainName} struggles to escape, but with {mainName} hugging {c:himHer} and pinning down {c:hisHer} limbs, there's nothing {c:heShe} can do to stop the Demon from coiling its tentacles thoroughly around {c:hisHer} body.\n\n");
 				c.say(t, "\"");
 				if (c.getConfidence() > 66) {
 					c.say(t, "Let go of me, damn it!  Let- Ngh!?");
@@ -29494,7 +29494,7 @@ public class Chosen implements Serializable {
 					c.say(t, "S-Stop!  We need... to help... the victims...!");
 				}
 			} else {
-				w_append(w, t, c.getMainName() + " freezes up in momentary panic as {mainName}'s hug pins {c:hisHer} arms to {c:hisHer} sides, and that provides an opening for the Demon to ");
+				w_append(w, t, c, "{c:mainName} freezes up in momentary panic as {mainName}'s hug pins {c:hisHer} arms to {c:hisHer} sides, and that provides an opening for the Demon to ");
 				if (c.getGender().equals("male")) {
 					w_append(w, t, c, "wind an especially durable tentacle around {c:hisHer} penis.  The more {c:heShe} tries to pull away, the more it tightens, strangling {c:hisHer} member and leaving it limp and flaccid even as {c:heShe} gets increasingly turned on.\n\n");
 				} else {
@@ -29554,7 +29554,7 @@ public class Chosen implements Serializable {
 					w_append(w, t, c, "{mainName} grinds {hisHer} pussy against {c:mainName}'s face, practically suffocating {c:himHer}.");
 				} else {
 					if (gender.equals("futanari") && w.getGenders()[number].equals("female")) {
-						w_append(w, t, c.getMainName() + " is shocked to see that {mainName} now sports a cock in addition to {hisHer} pussy.  When " + c.getMainName() + " opens {c:hisHer} lips to say something, ");
+						w_append(w, t, c, "{c:mainName} is shocked to see that {mainName} now sports a cock in addition to {hisHer} pussy.  When {c:mainName} opens {c:hisHer} lips to say something, ");
 					} else {
 						w_append(w, t, c, "when {c:mainName} opens {c:hisHer} lips to moan in pleasure, ");
 					}
@@ -29570,11 +29570,11 @@ public class Chosen implements Serializable {
 				if (gender.equals("female")) {
 					w.append(t, "grinds their bodies together, the Demon's slime lubricating them as ");
 					if (c.getGender().equals("male") && c.isAVirg() == false) {
-						w_append(w, t, c.getMainName() + "'s bound penis is trapped between them");
+						w_append(w, t, c, "{c:mainName}'s bound penis is trapped between them");
 					} else if (c.getGender().equals("female")) {
 						w_append(w, t, c, "{heShe} uses {hisHer} hand to guide one of its tentacles into {c:mainName}'s pussy");
 					} else {
-						w_append(w, t, c.getMainName() + "'s throbbing cock is trapped between them");
+						w_append(w, t, c, "{c:mainName}'s throbbing cock is trapped between them");
 					}
 					w.append(t, ".\n\n");
 					say(t, "\"");
@@ -29823,9 +29823,9 @@ public class Chosen implements Serializable {
 					w.underlineAppend(t, "irreparable rift");
 					w.append(t, " has formed between them.  It's a demonstration of how ");
 				} else if (c.timesFantasized() > 0) {
-					w_append(w, t, c.getMainName() + " is lying to {c:himHer}self, but the fact remains that the gap between the two of them is too great to be bridged by their shared madness.  And ");
+					w_append(w, t, c, "{c:mainName} is lying to {c:himHer}self, but the fact remains that the gap between the two of them is too great to be bridged by their shared madness.  And ");
 				} else {
-					w_append(w, t, c.getMainName() + "'s rational worldview leaves {c:himHer} no way to relate to the increasingly insane {mainName}.  It's a demonstration of how ");
+					w_append(w, t, c, "{c:mainName}'s rational worldview leaves {c:himHer} no way to relate to the increasingly insane {mainName}.  It's a demonstration of how ");
 				}
 			}
 			w.append(t, "as the Chosen learn to enjoy the things they're forced to endure, they begin to forget how other people experience the world.");
@@ -29844,7 +29844,7 @@ public class Chosen implements Serializable {
 					revenge = true;
 				}
 			}
-			w_append(w, t, c.getMainName() + " is finishing up {c:hisHer} post-battle patrol when {mainName} suddenly ");
+			w_append(w, t, c, "{c:mainName} is finishing up {c:hisHer} post-battle patrol when {mainName} suddenly ");
 			if (weapon.equals("boots")) {
 				w_append(w, t, c, "appears out of nowhere and hits {c:himHer} with a flying kick");
 			} else if (weapon.equals("gauntlets") || weapon.equals("fists")) {
@@ -30080,7 +30080,7 @@ public class Chosen implements Serializable {
 				} else if (c.timesDetonated() > 0) {
 					w_append(w, t, c, "Because {c:mainName} has also come to desire death, {c:heShe} understands {mainName}'s suffering.  However, ");
 				} else {
-					w_append(w, t, c.getMainName() + "'s bond with {mainName} is too strong to be broken by just one assault, no matter how cruel.  However, ");
+					w_append(w, t, c, "{c:mainName}'s bond with {mainName} is too strong to be broken by just one assault, no matter how cruel.  However, ");
 				}
 			} else {
 				Project.clearPortraits();
@@ -30141,7 +30141,7 @@ public class Chosen implements Serializable {
 					revenge = true;
 				}
 			}
-			w_append(w, t, c.getMainName() + " is attending a convention for {c:hisHer} fans, giving interviews and posing for photographs, when a bright spark appears in the sky and descends upon the crowd, sending people running from the heat and impact of its landing.  It's {mainName}, and {heShe} strides toward " + c.getMainName() + " with a manic glint in {hisHer} eyes, {hisHer} aura pulsing with gathered power.\n\n");
+			w_append(w, t, c, "{c:mainName} is attending a convention for {c:hisHer} fans, giving interviews and posing for photographs, when a bright spark appears in the sky and descends upon the crowd, sending people running from the heat and impact of its landing.  It's {mainName}, and {heShe} strides toward {c:mainName} with a manic glint in {hisHer} eyes, {hisHer} aura pulsing with gathered power.\n\n");
 			say(t, "\"");
 			if (repeat) {
 				if (morality > 66) {
@@ -30181,7 +30181,7 @@ public class Chosen implements Serializable {
 					c.say(t, "That's... incredibly kinky.  But...  Very well, I won't back down!");
 				}
 				c.say(t, "\"\n\n");
-				w_append(w, t, c.getMainName() + " does {c:hisHer} best to pretend to be surprised as {mainName} " + stripped + ".");
+				w_append(w, t, c, "{c:mainName} does {c:hisHer} best to pretend to be surprised as {mainName} " + stripped + ".");
 				if (c.isModest() || c.isDebased() == false) {
 					w.append(t, "\n\n");
 					w.underlineAppend(t, "Dignity Break");
@@ -30213,7 +30213,7 @@ public class Chosen implements Serializable {
 					c.say(t, "{mainName}, you bitch!  Are you trying to piss me off!?");
 				}
 				c.say(t, "\"\n\n");
-				w_append(w, t, c.getMainName() + " tries to struggle, but because {c:heShe} hadn't been gathering psychic energy in preparation for a fight, {c:heShe} doesn't have the strength.  To the fans who aren't familiar with how Chosen powers work, it appears as though {c:heShe}'s completely outmatched by {c:hisHer} rival.");
+				w_append(w, t, c, "{c:mainName} tries to struggle, but because {c:heShe} hadn't been gathering psychic energy in preparation for a fight, {c:heShe} doesn't have the strength.  To the fans who aren't familiar with how Chosen powers work, it appears as though {c:heShe}'s completely outmatched by {c:hisHer} rival.");
 			}
 			w_append(w, t, "  Several of them try to step forward to help, but the waves of power radiating off {mainName} push them back.  There's nothing they can do but watch as {mainName} starts to peel off {hisHer} own clothes as well.");
 			if (modest || debased == false) {
@@ -30281,7 +30281,7 @@ public class Chosen implements Serializable {
 							w_append(w, t, c, "{mainName} strokes {hisHer} cock with one hand while spreading {c:mainName} open with the other.  When {heShe} climaxes, {heShe} spurts {hisHer} cum all over {c:mainName}'s wide-open slit, and the watching cameras flash wildly as they capture the scene.");
 						}
 					} else {
-						w_append(w, t, c.getMainName() + "'s slit is spread open and {c:hisHer} clit fondled as the cameras all watch, and {c:heShe} can't do anything to stop them from capturing {c:hisHer} obvious climax as {c:hisHer} folds rhythmically contract and {c:hisHer} juices shoot out into the air.");
+						w_append(w, t, c, "{c:mainName}'s slit is spread open and {c:hisHer} clit fondled as the cameras all watch, and {c:heShe} can't do anything to stop them from capturing {c:hisHer} obvious climax as {c:hisHer} folds rhythmically contract and {c:hisHer} juices shoot out into the air.");
 					}
 				} else {
 					if (c.getGender().equals("male")) {
@@ -30328,7 +30328,7 @@ public class Chosen implements Serializable {
 				c.say(t, "\"\n\n");
 				if (c.isCVirg()) {
 					if (gender.equals("female")) {
-						w_append(w, t, c.getMainName() + "'s moans of discomfort are eclipsed by {mainName}'s cries of pleasure as the strap-on rubbing against {hisHer} clit and the feeling of absolute power over " + c.getMainName() + " drive {himHer} to the edge.  {HeShe} spasms in pleasure, driving the toy even deeper into " + c.getMainName() + " as {heShe} climaxes, then finally pulls out.");
+						w_append(w, t, c, "{c:mainName}'s moans of discomfort are eclipsed by {mainName}'s cries of pleasure as the strap-on rubbing against {hisHer} clit and the feeling of absolute power over {c:mainName} drive {himHer} to the edge.  {HeShe} spasms in pleasure, driving the toy even deeper into {c:mainName} as {heShe} climaxes, then finally pulls out.");
 					} else {
 						w_append(w, t, c, "It isn't long before {mainName} reaches orgasm, shooting {hisHer} seed deep inside {c:mainName}.  When {heShe} pulls out, a strand of cum briefly connects the tip of {hisHer} cock to {c:mainName}'s sloppy hole.");
 					}
@@ -30350,7 +30350,7 @@ public class Chosen implements Serializable {
 						} else {
 							w_append(w, t, c, "{mainName}'s cock repeatedly hammers {c:mainName}'s g-spot, driving them both closer and closer to climax.  ");
 							if (c.getGender().equals("female")) {
-								w_append(w, t, c.getMainName() + " is the first to cum, {c:hisHer} folds squeezing down rhythmically on {mainName}'s cock.  The stimulation is too much to bear, and {mainName} cums as well, filling up " + c.getMainName() + "'s womb.");
+								w_append(w, t, c, "{c:mainName} is the first to cum, {c:hisHer} folds squeezing down rhythmically on {mainName}'s cock.  The stimulation is too much to bear, and {mainName} cums as well, filling up {c:mainName}'s womb.");
 							} else {
 								w_append(w, t, c, "Finally, {c:mainName} can't bear it anymore, and {c:heShe} shoots {c:hisHer} load of cum onto {c:hisHer} own chest.  {c:HisHer} folds spasm rhythmically as {c:heShe} climaxes, coaxing {mainName}'s cock to start cumming inside {c:himHer} as well.");
 							}
@@ -30386,13 +30386,13 @@ public class Chosen implements Serializable {
 				}
 				say(t, "\"\n\n");
 				if (w.getRelationship(number, c.getNumber()) == 4) {
-					w_append(w, t, c.getMainName() + "'s willingness to sacrifice anything for {mainName}'s reputation is a sign of their ");
+					w_append(w, t, c, "{c:mainName}'s willingness to sacrifice anything for {mainName}'s reputation is a sign of their ");
 					w.underlineAppend(t, "unbreakable bond");
 					w.append(t, ".  But ");
 				} else if (c.timesStripped() > 0) {
 					w_append(w, t, c, "{mainName} and {c:mainName} have both become so desperate for control over their public images that they actually enjoy putting on this sort of show.  But ");
 				} else {
-					w_append(w, t, c.getMainName() + " isn't entirely comfortable with doing this sort of thing in public - {c:heShe} just went along with it for {mainName}'s sake.  Furthermore, ");
+					w_append(w, t, c, "{c:mainName} isn't entirely comfortable with doing this sort of thing in public - {c:heShe} just went along with it for {mainName}'s sake.  Furthermore, ");
 				}
 			} else {
 				Project.clearPortraits();
@@ -30557,7 +30557,7 @@ public class Chosen implements Serializable {
 				}
 				say(t, "\"\n\n");
 				if (c.isImpregnated()) {
-					w_append(w, t, c.getMainName() + " is obviously surprised, but {c:heShe} responds quickly.\n\n");
+					w_append(w, t, c, "{c:mainName} is obviously surprised, but {c:heShe} responds quickly.\n\n");
 					c.say(t, "\"");
 					if (c.getConfidence() > 66) {
 						c.say(t, "Yeah, humanity's afraid of what those kids would be capable of, so they'll try to hunt us down and seal us away unless we kill 'em all first.  ");
@@ -30567,7 +30567,7 @@ public class Chosen implements Serializable {
 						c.say(t, "Oh!  W-We're the same!  That's what you're saying, right?  That you're making it harder for them to lock you up and stop it from being born once they find out?  ");
 					}
 				} else {
-					w_append(w, t, c.getMainName() + " reponds slowly at first, only to shout in surprise when {c:heShe} realizes the implication.\n\n");
+					w_append(w, t, c, "{c:mainName} reponds slowly at first, only to shout in surprise when {c:heShe} realizes the implication.\n\n");
 					c.say(t, "\"");
 					if (c.getConfidence() > 66) {
 						c.say(t, "Well, of course they put the Chosen on ice in order to stop the monster from being born.  I kinda hope I get a chance to help with that at some point, since fighting another one of us in serious combat would be...  Oh, damn it, you're talking about yourself!?  ");
@@ -30586,7 +30586,7 @@ public class Chosen implements Serializable {
 					say(t, "I felt... something really weird... when the Demon Lord was inside me...");
 				}
 				say(t, "\"\n\n");
-				w_append(w, t, c.getMainName() + " understands the implication and quickly fills in the rest, {c:hisHer} tone thoughtful.\n\n");
+				w_append(w, t, c, "{c:mainName} understands the implication and quickly fills in the rest, {c:hisHer} tone thoughtful.\n\n");
 				c.say(t, "\"");
 				if (c.isImpregnated()) {
 					if (c.getConfidence() > 66) {
@@ -30857,7 +30857,7 @@ public class Chosen implements Serializable {
 						w_append(w, t, c, "Under your influence, {c:mainName} is made to believe that regular civilians are actually Thralls, and that {c:heShe} needs to capture them and turn them into the your Demons (who {c:heShe} perceives as being the police) so that they can be purified.  ");
 					} else if (c.getMorality() > 33) {
 						c.say(t, "I... must have forgotten about inviting you on this patrol, {mainName}.  But that's okay, your help will be appreciated.\"\n\n");
-						w_append(w, t, c.getMainName() + " leads the way, flying around the city outskirts.  Your influence causes {c:himHer} to perceive power plants, bridges, and other vital infrastructure as huge Demons that need to be destroyed.  ");
+						w_append(w, t, c, "{c:mainName} leads the way, flying around the city outskirts.  Your influence causes {c:himHer} to perceive power plants, bridges, and other vital infrastructure as huge Demons that need to be destroyed.  ");
 					} else {
 						c.say(t, "Hello, {mainName}.  Just follow my lead, okay?\"\n\n");
 						w_append(w, t, c, "As {c:heShe}'s been doing all night, {c:mainName} prowls the back alleys, assaulting civilians and dragging them to your waiting Demons so they can be brought back to the hive and be converted into Thralls.  Every victim {c:heShe} delivers causes {c:himHer} to be rewarded with a surge of mind-numbing pleasure, and {c:heShe} doesn't question what {c:heShe}'s doing.  ");
@@ -30907,7 +30907,7 @@ public class Chosen implements Serializable {
 						w_append(w, t, c, "Under your influence, {c:mainName} is made to believe that regular civilians are actually Thralls, and that {c:heShe} needs to capture them and turn them into the your Demons (who {c:heShe} perceives as being the police) so that they can be purified.  ");
 					} else if (c.getMorality() > 33) {
 						c.say(t, "I... I remember you saying something about how you wanted to help out with my patrol... right?  Well, fine, let's go.\"\n\n");
-						w_append(w, t, c.getMainName() + " leads the way, flying around the city outskirts.  Your influence causes {c:himHer} to perceive power plants, bridges, and other vital infrastructure as huge Demons that need to be destroyed.  ");
+						w_append(w, t, c, "{c:mainName} leads the way, flying around the city outskirts.  Your influence causes {c:himHer} to perceive power plants, bridges, and other vital infrastructure as huge Demons that need to be destroyed.  ");
 					} else {
 						c.say(t, "You wanted to get in on this too, right?  Well, I suppose having two of us might make it more interesting...  You may come along if you like.\"\n\n");
 						w_append(w, t, c, "As {c:heShe}'s been doing all night, {c:mainName} prowls the back alleys, assaulting civilians and dragging them to your waiting Demons so they can be brought back to the hive and be converted into Thralls.  Every victim {c:heShe} delivers causes {c:himHer} to be rewarded with a surge of mind-numbing pleasure, and {c:heShe} doesn't question what {c:heShe}'s doing.  ");
@@ -30938,7 +30938,7 @@ public class Chosen implements Serializable {
 							w.underlineAppend(t, "unbreakable bond");
 							w.append(t, " of friendship.  But ");
 						} else {
-							w_append(w, t, c.getMainName() + "'s mind is made of slightly sterner stuff, but {c:hisHer} compulsion to work with {mainName} also causes {c:himHer} to be open to the idea of friendship.\n\n");
+							w_append(w, t, c, "{c:mainName}'s mind is made of slightly sterner stuff, but {c:hisHer} compulsion to work with {mainName} also causes {c:himHer} to be open to the idea of friendship.\n\n");
 							c.say(t, "\"");
 							if (c.getConfidence() > 66) {
 								c.say(t, "I'm not going to forget your past foolishness so easily.  But you might be able to redeem yourself...");
@@ -30963,7 +30963,7 @@ public class Chosen implements Serializable {
 							say(t, "I... I won't lose to you anymore!");
 						}
 						say(t, "\"\n\n");
-						w_append(w, t, c.getMainName() + " frowns with annoyance.\n\n");
+						w_append(w, t, c, "{c:mainName} frowns with annoyance.\n\n");
 						c.say(t, "\"");
 						if (c.getConfidence() > 66) {
 							c.say(t, "{HeShe}'s as useless as ever...");
@@ -30986,7 +30986,7 @@ public class Chosen implements Serializable {
 			} else {
 				w_append(w, t, c, "{HeShe} starts prowling the alleyways in search of Thralls to subdue, but {heShe}'s made to perceive everyone {heShe} meets as a Thrall.  After knocking them unconscious, {heShe} brings them to one of your Demons' underground hideouts, which {heShe} perceives as being a police station.  But then, {c:mainName}'s patrol takes {c:himHer} nearby, and {c:heShe} catches {mainName} in the act.  ");
 				if (startFriends) {
-					w_append(w, t, c.getMainName() + " is horrified and confused.\n\n");
+					w_append(w, t, c, "{c:mainName} is horrified and confused.\n\n");
 					c.say(t, "\"");
 					if (c.getMorality() > 66) {
 						c.say(t, "{mainName}, stop!  You're hurting those innocent people!");
@@ -31007,7 +31007,7 @@ public class Chosen implements Serializable {
 						w_append(w, t, c, "Faced with {mainName}'s overwhelming strength, {c:mainName} is forced to flee.  As soon as {c:heShe}'s safe, {c:heShe} ");
 					} else if (confidence > 33) {
 						say(t, "I'll beat you up, Demon!\"\n\n");
-						w_append(w, t, c.getMainName() + " isn't mentally prepared to fight {c:hisHer} friend, and {c:heShe} ends up fleeing.  As soon as {c:heShe}'s safe, {c:heShe} ");
+						w_append(w, t, c, "{c:mainName} isn't mentally prepared to fight {c:hisHer} friend, and {c:heShe} ends up fleeing.  As soon as {c:heShe}'s safe, {c:heShe} ");
 					} else {
 						Project.changePortrait(this.convertGender(), this.type, false, false, w, nameDisplay, 0, Project.Emotion.FEAR, Project.Emotion.FEAR);
 						say(t, "Oh no!  I-I have to get out of here!\"\n\n");
@@ -31039,7 +31039,7 @@ public class Chosen implements Serializable {
 							c.say(t, "P-Perhaps... I just need to be there for {himHer}, and {hisHer} mental condition will sort itself out...");
 						}
 						c.say(t, "\"\n\n");
-						w_append(w, t, c.getMainName() + " clings to {c:hisHer} friendship with {mainName}, but only out of denial that {mainName} is truly lost.  And ");
+						w_append(w, t, c, "{c:mainName} clings to {c:hisHer} friendship with {mainName}, but only out of denial that {mainName} is truly lost.  And ");
 					} else {
 						w_append(w, t, c, "clenches {c:hisHer} teeth, overcome with grief and despair.\n\n");
 						if (morality > 66) {
@@ -31063,7 +31063,7 @@ public class Chosen implements Serializable {
 					String[] nameDisplay = new String[]{mainName, c.mainName, null, null, null};
 					Project.changePortrait(this.convertGender(), this.type, false, false, w, nameDisplay, 0, Project.Emotion.ANGER, Project.Emotion.ANGER);
 					Project.changePortrait(c.convertGender(), c.type, false, false, w, nameDisplay, 1, Project.Emotion.ANGER, Project.Emotion.ANGER);
-					w_append(w, t, c.getMainName() + " immediately rushes over and shoves {himHer}, trying to snap {himHer} out of it.\n\n");
+					w_append(w, t, c, "{c:mainName} immediately rushes over and shoves {himHer}, trying to snap {himHer} out of it.\n\n");
 					c.say(t, "\"");
 					if (c.getConfidence() > 66) {
 						c.say(t, "Wake up, idiot!");
@@ -31168,7 +31168,7 @@ public class Chosen implements Serializable {
 					}
 					c.say(t, "\"\n\n");
 					if (w.getRelationship(number, c.getNumber()) == 4) {
-						w_append(w, t, c.getMainName() + "'s acceptance of {hisHer} weakness only makes {mainName} feel worse.  Tears start leaking from {hisHer} eyes, but {heShe} still can't resist the urge to climb into your tentacles alongside the friend {heShe} failed.\n\n");
+						w_append(w, t, c, "{c:mainName}'s acceptance of {hisHer} weakness only makes {mainName} feel worse.  Tears start leaking from {hisHer} eyes, but {heShe} still can't resist the urge to climb into your tentacles alongside the friend {heShe} failed.\n\n");
 						say(t, "\"");
 						if (morality > 66) {
 							say(t, "You were driven to do such a desperate thing even though I promsied to protect you...  I am truly a failure on every level...");
@@ -31195,7 +31195,7 @@ public class Chosen implements Serializable {
 						w_append(w, t, c, "{mainName} and {c:mainName} grow closer over sharing the secret that they're willing to do this.  But ");
 					}
 				} else {
-					w_append(w, t, c.getMainName() + "'s eyes are bleary and unfocused, but {c:heShe} still wears a slightly twisted smirk as {c:heShe} looks up at {mainName}.\n\n");
+					w_append(w, t, c, "{c:mainName}'s eyes are bleary and unfocused, but {c:heShe} still wears a slightly twisted smirk as {c:heShe} looks up at {mainName}.\n\n");
 					c.say(t, "\"");
 					if (morality > 66) {
 						c.say(t, "Seems like... in the end... we were both weaklings...");
@@ -31280,7 +31280,7 @@ public class Chosen implements Serializable {
 				Project.changePortrait(c.convertGender(), c.type, false, false, w, nameDisplay, 1, Project.Emotion.ANGER, Project.Emotion.ANGER);
 				if (startFriends) {
 					if (w.getRelationship(number, c.getNumber()) == 4) {
-						w_append(w, t, c.getMainName() + "'s tears when {c:heShe}'s struck aren't of pain, but of guilt.\n\n");
+						w_append(w, t, c, "{c:mainName}'s tears when {c:heShe}'s struck aren't of pain, but of guilt.\n\n");
 						c.say(t, "\"");
 						Project.changePortrait(c.convertGender(), c.type, false, false, w, nameDisplay, 1, Project.Emotion.SHAME, Project.Emotion.SHAME);
 						if (c.getInnocence() > 66) {
@@ -31291,12 +31291,12 @@ public class Chosen implements Serializable {
 							c.say(t, "Oh... Oh no.  What have I done?  {mainName}, p-please forgive me, I had no idea that this was how you were coping!");
 						}
 						c.say(t, "\"\n\n");
-						w_append(w, t, c.getMainName() + "'s ");
+						w_append(w, t, c, "{c:mainName}'s ");
 						w.underlineAppend(t, "unbreakable bond");
 						w_append(w, t, c, "with {mainName} causes {c:himHer} to feel {hisHer} suffering.  And ");
 					} else if (w.getRelationship(number, c.getNumber()) >= 0) {
 						Project.changePortrait(c.convertGender(), c.type, false, false, w, nameDisplay, 1, Project.Emotion.FEAR, Project.Emotion.FEAR);
-						w_append(w, t, c.getMainName() + " is too shocked by the bizarre display to react to the punch.  When {c:heShe} finally speaks, {c:hisHer} voice is hesitant.\n\n");
+						w_append(w, t, c, "{c:mainName} is too shocked by the bizarre display to react to the punch.  When {c:heShe} finally speaks, {c:hisHer} voice is hesitant.\n\n");
 						c.say(t, "\"");
 						if (c.getInnocence() > 66) {
 							c.say(t, "What?  What are you saying?  I don't get it at all...  Let's just go home, okay?");
@@ -31306,9 +31306,9 @@ public class Chosen implements Serializable {
 							c.say(t, "You... You must be feeling very sick.  Yes, yes, I'm sure that after a good night's sleep, you'll be back to your mighty self.  S-So let's get you home immediately...");
 						}
 						c.say(t, "\"\n\n");
-						w_append(w, t, c.getMainName() + "'s faith in {mainName} is too strong to be broken by just one glimpse of weakness.  But ");
+						w_append(w, t, c, "{c:mainName}'s faith in {mainName} is too strong to be broken by just one glimpse of weakness.  But ");
 					} else {
-						w_append(w, t, c.getMainName() + " reflexively catches {hisHer} hand.  At first, {c:heShe} looks surprised, but then that expression fades away - replaced by one of contempt.\n\n");
+						w_append(w, t, c, "{c:mainName} reflexively catches {hisHer} hand.  At first, {c:heShe} looks surprised, but then that expression fades away - replaced by one of contempt.\n\n");
 						c.say(t, "\"");
 						if (c.getInnocence() > 66) {
 							c.say(t, "I... really am kinda dumb, aren't I?  I thought you were amazing.  I wanted to be like you.  But... you're actually kinda pathetic, aren't you?");
@@ -31327,7 +31327,7 @@ public class Chosen implements Serializable {
 						}
 					}
 				} else {
-					w_append(w, t, c.getMainName() + " easily catches {hisHer} punch, glaring down at {himHer} with open contempt.\n\n");
+					w_append(w, t, c, "{c:mainName} easily catches {hisHer} punch, glaring down at {himHer} with open contempt.\n\n");
 					c.say(t, "\"");
 					if (c.getInnocence() > 66) {
 						c.say(t, "Get lost, wimp...  H-Heh, I always wanted to say that...");
@@ -31342,7 +31342,7 @@ public class Chosen implements Serializable {
 						w.underlineAppend(t, "irreparable rift");
 						w_append(w, t, c, " between {himHer} and {c:mainName}.  And ");
 					} else {
-						w_append(w, t, c.getMainName() + " already hated {mainName}, but now {c:heShe} despises {himHer} too.  And ");
+						w_append(w, t, c, "{c:mainName} already hated {mainName}, but now {c:heShe} despises {himHer} too.  And ");
 					}
 				}
 				w_append(w, t, "even though the amount of energy produced by {mainName} is actually nothing exceptional, the fact that {heShe}'s willingly giving it to you is a very nourishing sin in itself.");
@@ -31600,7 +31600,7 @@ public class Chosen implements Serializable {
 						c.say(t, "\"\n\n");
 						w_append(w, t, c, "For the sake of their friendship, {c:mainName} isn't willing to give up on {mainName} yet.  But ");
 					} else {
-						w_append(w, t, c.getMainName() + " shakes {c:hisHer} head and turns away.\n\n");
+						w_append(w, t, c, "{c:mainName} shakes {c:hisHer} head and turns away.\n\n");
 						c.say(t, "\"");
 						if (c.getMorality() > 66) {
 							c.say(t, "Just for something like that, you're helping the Demons recruit new Thralls?  No, this is wrong, and there's no point talking about it anymore.");
@@ -37352,11 +37352,11 @@ public class Chosen implements Serializable {
 			}
 			first.say(t, "\"\n\n");
 			if (second.getInnocence() > 66) {
-				w_append(w, t, second.getMainName() + " beams happily at the praise.");
+				w_append(w, t, second, "{c:mainName} beams happily at the praise.");
 			} else if (second.getInnocence() > 33) {
-				w_append(w, t, second.getMainName() + " smiles and nods in acknowledgement.");
+				w_append(w, t, second, "{c:mainName} smiles and nods in acknowledgement.");
 			} else {
-				w_append(w, t, second.getMainName() + " looks momentarily flustered at the praise, and " + second.heShe() + " tries to mask it under a businesslike expression.");
+				w_append(w, t, second, "{c:mainName} looks momentarily flustered at the praise, and {c:heShe} tries to mask it under a businesslike expression.");
 			}
 		} else if (first.getDignity() > 33) {
 			first.say(t, "Hello!  I'm " + first.getMainName());
@@ -37369,11 +37369,11 @@ public class Chosen implements Serializable {
 			}
 			first.say(t, "\"\n\n");
 			if (second.getInnocence() > 66) {
-				w_append(w, t, second.getMainName() + " nods happily.");
+				w_append(w, t, second, "{c:mainName} nods happily.");
 			} else if (second.getInnocence() > 33) {
-				w_append(w, t, second.getMainName() + " nods in acknowledgement.");
+				w_append(w, t, second, "{c:mainName} nods in acknowledgement.");
 			} else {
-				w_append(w, t, second.getMainName() + " briskly cuts in.");
+				w_append(w, t, second, "{c:mainName} briskly cuts in.");
 			}
 		} else {
 			first.say(t, "Look what we have here!  So, I'm " + first.getMainName());
@@ -37386,11 +37386,11 @@ public class Chosen implements Serializable {
 			}
 			first.say(t, "\"\n\n");
 			if (second.getInnocence() > 66) {
-				w_append(w, t, second.getMainName() + " smiles broadly, not realizing that most people would find that description demeaning.");
+				w_append(w, t, second, "{c:mainName} smiles broadly, not realizing that most people would find that description demeaning.");
 			} else if (second.getInnocence() > 33) {
-				w_append(w, t, second.getMainName() + " nods uncertainly, opting not to comment on being referred to like that.");
+				w_append(w, t, second, "{c:mainName} nods uncertainly, opting not to comment on being referred to like that.");
 			} else {
-				w_append(w, t, second.getMainName() + " frowns at being referred to that way, but " + second.heShe() + " doesn't make an issue of it.");
+				w_append(w, t, second, "{c:mainName} frowns at being referred to that way, but {c:heShe} doesn't make an issue of it.");
 			}
 		}
 		Project.clearPortraits();
@@ -37530,7 +37530,7 @@ public class Chosen implements Serializable {
 		}
 		say(t, "\"\n\n");
 		if (first.getInnocence() > 66) {
-			w_append(w, t, first.getMainName() + " is beside " + first.himHer() + "self with enthusiasm.\n\n");
+			w_append(w, t, first, "{c:mainName} is beside {c:himHer}self with enthusiasm.\n\n");
 			first.say(t, "\"");
 			if (morality > 66) {
 				first.say(t, "Yes!  A real hero!  ");
@@ -37542,7 +37542,7 @@ public class Chosen implements Serializable {
 			first.say(t, "Let's do this!");
 			Project.changePortrait(first.convertGender(), first.type, false, false, w, nameDisplay, 1, Project.Emotion.FOCUS, Project.Emotion.FOCUS);
 		} else if (first.getInnocence() > 33) {
-			w_append(w, t, first.getMainName() + " looks happy.\n\n");
+			w_append(w, t, first, "{c:mainName} looks happy.\n\n");
 			first.say(t, "\"");
 			if (morality > 66) {
 				first.say(t, "I'll be in your care, {mainName}!  ");
@@ -37554,7 +37554,7 @@ public class Chosen implements Serializable {
 			first.say(t, "Onward, to victory!");
 			Project.changePortrait(first.convertGender(), first.type, false, false, w, nameDisplay, 1, Project.Emotion.FOCUS, Project.Emotion.FOCUS);
 		} else {
-			w_append(w, t, first.getMainName() + " smiles.\n\n");
+			w_append(w, t, first, "{c:mainName} smiles.\n\n");
 			first.say(t, "\"");
 			if (morality > 66) {
 				first.say(t, "You seem quite reliable.  ");
@@ -37643,29 +37643,29 @@ public class Chosen implements Serializable {
 		if (first.getInnocence() > 66) {
 			w.append(t, "After the battle, " + first.getMainName() + " strikes a pose, as if expecting applause.  ");
 			if (second.getMorality() > 66) {
-				w_append(w, t, second.getMainName() + " obliges, wearing an indulgent expression as {heShe} claps.");
+				w_append(w, t, second, "{c:mainName} obliges, wearing an indulgent expression as {heShe} claps.");
 			} else if (second.getMorality() > 33) {
-				w_append(w, t, second.getMainName() + " goes along with it, looking a bit awkward as {heShe} claps.");
+				w_append(w, t, second, "{c:mainName} goes along with it, looking a bit awkward as {heShe} claps.");
 			} else {
-				w_append(w, t, second.getMainName() + " shakes {hisHer} head, sighing with annoyance.");
+				w_append(w, t, second, "{c:mainName} shakes {hisHer} head, sighing with annoyance.");
 			}
 		} else if (first.getInnocence() > 33) {
 			w_append(w, t, "After the battle, " + first.getMainName() + " grabs " + second.getMainName() + " by the arm and drags {himHer} along for a private conversation.  ");
 			if (second.getMorality() > 66) {
-				w_append(w, t, second.getMainName() + " goes along with it without complaint.");
+				w_append(w, t, second, "{c:mainName} goes along with it without complaint.");
 			} else if (second.getMorality() > 33) {
-				w_append(w, t, second.getMainName() + ", seeming more bewildered than anything, goes along with it.");
+				w_append(w, t, second, "{c:mainName}, seeming more bewildered than anything, goes along with it.");
 			} else {
-				w_append(w, t, second.getMainName() + " looks annoyed, but {heShe} goes along with it.");
+				w_append(w, t, second, "{c:mainName} looks annoyed, but {heShe} goes along with it.");
 			}
 		} else {
-			w_append(w, t, first.getMainName() + " approaches " + second.getMainName() + " after the battle, full of questions and expecting answers to all of them.  ");
+			w_append(w, t, first, "{c:mainName} approaches " + second.getMainName() + " after the battle, full of questions and expecting answers to all of them.  ");
 			if (second.getMorality() > 66) {
-				w_append(w, t, second.getMainName() + " answers with enthusiasm, happy to have found a new friend.");
+				w_append(w, t, second, "{c:mainName} answers with enthusiasm, happy to have found a new friend.");
 			} else if (second.getMorality() > 33) {
-				w_append(w, t, second.getMainName() + " gets a bit flustered by the barrage.");
+				w_append(w, t, second, "{c:mainName} gets a bit flustered by the barrage.");
 			} else {
-				w_append(w, t, second.getMainName() + " quickly gets annoyed.");
+				w_append(w, t, second, "{c:mainName} quickly gets annoyed.");
 			}
 		}
 		second.say(t, "\n\n\"");
@@ -37696,7 +37696,7 @@ public class Chosen implements Serializable {
 		}
 		second.say(t, "\"\n\n");
 		if (second.getDignity() > 66) {
-			w_append(w, t, first.getMainName() + " nods in acknowledgement.\n\n");
+			w_append(w, t, first, "{c:mainName} nods in acknowledgement.\n\n");
 			first.say(t, "\"");
 			if (first.getMorality() > 66) {
 				first.say(t, "Oh, sorry, I got a bit carried away.");
@@ -37706,7 +37706,7 @@ public class Chosen implements Serializable {
 				first.say(t, "I don't really care, but alright.");
 			}
 		} else if (second.getDignity() > 33) {
-			w_append(w, t, first.getMainName() + " smiles with pride.\n\n");
+			w_append(w, t, first, "{c:mainName} smiles with pride.\n\n");
 			first.say(t, "\"");
 			if (first.getMorality() > 66) {
 				first.say(t, "I'm a hero, after all!");
@@ -37716,7 +37716,7 @@ public class Chosen implements Serializable {
 				first.say(t, "I do whatever I want!");
 			}
 		} else {
-			w_append(w, t, first.getMainName() + " wears a confident smile.\n\n");
+			w_append(w, t, first, "{c:mainName} wears a confident smile.\n\n");
 			first.say(t, "\"");
 			if (first.getMorality() > 66) {
 				first.say(t, "Don't worry.  When it comes down to it, I'll protect you.");
@@ -37775,7 +37775,7 @@ public class Chosen implements Serializable {
 		}
 		first.say(t, "\"\n\n");
 		if (first.getDignity() > 66) {
-			w_append(w, t, second.getMainName() + " hesitates, but then nods in acknowledgement.  ");
+			w_append(w, t, second, "{c:mainName} hesitates, but then nods in acknowledgement.  ");
 			if (second.getInnocence() > 66) {
 				w_append(w, t, second, "{c:HeShe}'s flattered to have been recognized");
 			} else if (second.getInnocence() > 33) {
@@ -37784,7 +37784,7 @@ public class Chosen implements Serializable {
 				w_append(w, t, second, "{c:HeShe}'s impressed that {c:heShe} was recognized");
 			}
 		} else if (first.getDignity() > 33) {
-			w_append(w, t, second.getMainName() + " nods, recognizing the name.  ");
+			w_append(w, t, second, "{c:mainName} nods, recognizing the name.  ");
 			if (second.getInnocence() > 66) {
 				w_append(w, t, "It makes {hisHer} heart flutter to meet another hero");
 			} else if (second.getInnocence() > 33) {
@@ -37793,7 +37793,7 @@ public class Chosen implements Serializable {
 				w_append(w, t, "{HisHer} mind is already running through the possibilities opened by having a potential ally");
 			}
 		} else {
-			w_append(w, t, second.getMainName() + " is taken by surprise.  ");
+			w_append(w, t, second, "{c:mainName} is taken by surprise.  ");
 			if (second.getInnocence() > 66) {
 				w_append(w, t, "{HeShe}'s always been weak against getting swept along with strong personalities");
 			} else if (second.getInnocence() > 33) {
@@ -42496,16 +42496,16 @@ public class Chosen implements Serializable {
 			}
 			nameDisplay[0] = initiator.mainName;
 			nameDisplay[1] = subject.mainName;
-			w_append(w, t, initiator.getMainName() + " ");
+			w_append(w, t, initiator, "{c:mainName} ");
 			if (initiator.getConfidence() > subject.getConfidence()) {
 				w.append(t, "drags " + subject.getMainName() + " along for extra patrol duty.  ");
 			} else {
 				w_append(w, t, "manages to convince " + subject.getMainName() + " to come along with " + initiator.himHer() + " for extra patrol duty.  ");
 			}
 			if (w.getRelationship(number, second.getNumber()) >= 0) {
-				w_append(w, t, subject.getMainName() + " complies for the sake of " + subject.hisHer() + " friendship with " + initiator.getMainName() + ".  ");
+				w_append(w, t, subject, "{c:mainName} complies for the sake of {c:hisHer} friendship with " + initiator.getMainName() + ".  ");
 			} else {
-				w_append(w, t, subject.getMainName() + " is annoyed, but " + subject.heShe() + " eventually relents just to shut " + initiator.getMainName() + " up.  ");
+				w_append(w, t, subject, "{c:mainName} is annoyed, but {c:heShe} eventually relents just to shut " + initiator.getMainName() + " up.  ");
 			}
 			if (initiator.getDignity() > subject.getDignity()) {
 				w_append(w, t, "The tedious work is hard on " + subject.getMainName());
@@ -42713,16 +42713,16 @@ public class Chosen implements Serializable {
 			}
 			nameDisplay[0] = initiator.mainName;
 			nameDisplay[1] = subject.mainName;
-			w_append(w, t, initiator.getMainName() + " challenges " + subject.getMainName() + " ");
+			w_append(w, t, initiator, "{c:mainName} challenges " + subject.getMainName() + " ");
 			if (w.getRelationship(number, second.getNumber()) >= 0) {
 				w.append(t, "to a friendly sparring match.  ");
 			} else {
 				w.append(t, "to a sparring match to help settle their rivalry.  ");
 			}
 			if (subject.getMorality() > initiator.getMorality()) {
-				w_append(w, t, subject.getMainName() + " isn't eager to fight an ally");
+				w_append(w, t, subject, "{c:mainName} isn't eager to fight an ally");
 			} else {
-				w_append(w, t, subject.getMainName() + " doesn't expect anything good to come of this");
+				w_append(w, t, subject, "{c:mainName} doesn't expect anything good to come of this");
 			}
 			if (subject.getInnocence() > initiator.getInnocence()) {
 				w.append(t, ", and ends up not taking it very seriously.  ");
@@ -42730,16 +42730,16 @@ public class Chosen implements Serializable {
 				w.append(t, ", only accepting in order to try out some new techniques.  ");
 			}
 			if (initiator.getMorality() > 66) {
-				w_append(w, t, initiator, "However, {c:mainName} handicaps " + initiator.himHer() + "self by fighting while carrying a pickup truck on one arm, and " + initiator.hisHer() + " opponent manages to eke out a victory.  ");
+				w_append(w, t, initiator, "However, {c:mainName} handicaps {c:himHer}self by fighting while carrying a pickup truck on one arm, and {c:hisHer} opponent manages to eke out a victory.  ");
 			} else if (initiator.getMorality() > 33) {
-				w_append(w, t, initiator.getMainName() + " wins a decisive victory.  ");
+				w_append(w, t, initiator, "{c:mainName} wins a decisive victory.  ");
 			} else {
-				w_append(w, t, initiator.getMainName() + " fights sadistically, beating " + subject.himHer() + " into the ground.  ");
+				w_append(w, t, initiator, "{c:mainName} fights sadistically, beating " + subject.himHer() + " into the ground.  ");
 			}
 			if (subject.getDignity() > initiator.getDignity()) {
-				w_append(w, t, subject.getMainName() + " doesn't hold it against " + initiator.himHer() + ", and ");
+				w_append(w, t, subject, "{c:mainName} doesn't hold it against " + initiator.himHer() + ", and ");
 			} else {
-				w_append(w, t, subject.getMainName() + " seems annoyed, but ");
+				w_append(w, t, subject, "{c:mainName} seems annoyed, but ");
 			}
 			w.append(t, "they both come away from their match feeling more confident that they won't get hurt so much in the future - a delusional hope.");
 			initiator.say(t, "\n\n\"");
@@ -42837,7 +42837,7 @@ public class Chosen implements Serializable {
 			}
 			nameDisplay[0] = initiator.mainName;
 			nameDisplay[1] = subject.mainName;
-			w_append(w, t, initiator.getMainName() + " decides to use " + initiator.hisHer() + " Chosen powers to fight crime across the city");
+			w_append(w, t, initiator, "{c:mainName} decides to use {c:hisHer} Chosen powers to fight crime across the city");
 			if (w.getRelationship(number, second.getNumber()) >= 0) {
 				if (initiator.getConfidence() > subject.getConfidence()) {
 					w_append(w, t, ", and " + initiator.heShe() + " drags " + subject.getMainName() + " along to be " + initiator.hisHer() + " sidekick.  ");
@@ -42845,9 +42845,9 @@ public class Chosen implements Serializable {
 					w.append(t, ".  " + subject.getMainName() + " finds out, decides that it sounds fun, and ends up coming along.  ");
 				}
 				if (initiator.getDignity() > subject.getDignity()) {
-					w_append(w, t, initiator.getMainName() + " claims that doing this sort of thing is also part of their duty as Chosen, but " + initiator.heShe() + " ");
+					w_append(w, t, initiator, "{c:mainName} claims that doing this sort of thing is also part of their duty as Chosen, but {c:heShe} ");
 				} else {
-					w_append(w, t, subject.getMainName() + " does like the idea of building a reputation as a mighty vigilante, but " + initiator.getMainName() + " ");
+					w_append(w, t, subject, "{c:mainName} does like the idea of building a reputation as a mighty vigilante, but " + initiator.getMainName() + " ");
 				}
 				if (initiator.getInnocence() > subject.getInnocence()) {
 					w.append(t, "actually doesn't know that much about the law, and the two of them end up just picking fights with random thuggish-looking people.  ");
@@ -42881,12 +42881,12 @@ public class Chosen implements Serializable {
 				if (initiator.getConfidence() > subject.getConfidence()) {
 					w_append(w, t, ", and " + initiator.heShe() + " challenges " + subject.getMainName() + " to see who can do the most over the course of the night.  ");
 				} else {
-					w_append(w, t, subject, ", but when {c:mainName} finds out, " + subject.heShe() + " challenges " + initiator.himHer() + " to make it into a competition.  ");
+					w_append(w, t, subject, ", but when {c:mainName} finds out, {c:heShe} challenges " + initiator.himHer() + " to make it into a competition.  ");
 				}
 				if (initiator.getDignity() > subject.getDignity()) {
-					w_append(w, t, subject.getMainName() + " decides that it sounds like fun, but ");
+					w_append(w, t, subject, "{c:mainName} decides that it sounds like fun, but ");
 				} else {
-					w_append(w, t, subject.getMainName() + " only bothers for the sake of " + subject.hisHer() + " reputation, but ");
+					w_append(w, t, subject, "{c:mainName} only bothers for the sake of {c:hisHer} reputation, but ");
 				}
 				if (initiator.getInnocence() > subject.getInnocence()) {
 					w.append(t, "when it comes time to judge the outcome, " + initiator.getMainName() + "'s lack of understanding of the law results in an angry shouting match over what counts as 'stopped crime.'  ");
@@ -42933,7 +42933,7 @@ public class Chosen implements Serializable {
 				if (initiator.getMorality() > subject.getMorality()) {
 					w_append(w, t, initiator, ", and " + subject.getGivenName() + " quickly takes a liking to one of {c:givenName}'s friends, so the two of them go to a private room together.  When {c:givenName} checks up on them, {c:heShe} finds " + subject.getGivenName() + " on " + subject.hisHer() + " knees.  ");
 				} else {
-					w_append(w, t, subject, ", but when {c:givenName} arrives, {c:heShe}'s dismayed to find that the other guests are doing drugs and having sex right out in the open.  One of the other guests grabs {c:givenName} and pushes " + subject.himHer() + " down to " + subject.hisHer() + " knees, and that's how " + initiator.getGivenName() + " finds them.  ");
+					w_append(w, t, subject, ", but when {c:givenName} arrives, {c:heShe}'s dismayed to find that the other guests are doing drugs and having sex right out in the open.  One of the other guests grabs {c:givenName} and pushes {c:himHer} down to {c:hisHer} knees, and that's how " + initiator.getGivenName() + " finds them.  ");
 				}
 				if (initiator.getConfidence() > subject.getConfidence()) {
 					w_append(w, t, subject.getGivenName() + " looks reluctant at first, but when the cock is thrust against " + subject.hisHer() + " face, " + subject.hisHer() + " eyes go wide and " + subject.hisHer() + " mouth opens in an involuntary moan.  ");
@@ -42941,7 +42941,7 @@ public class Chosen implements Serializable {
 					w_append(w, t, subject.getGivenName() + "'s head is bobbing up and down.  " + subject.HeShe() + " smirks around the cock filling " + subject.hisHer() + " mouth as " + subject.heShe() + " looks up at " + subject.hisHer() + " partner and enjoys his pleasured expression.  ");
 				}
 				if (initiator.getDignity() > subject.getDignity()) {
-					w_append(w, t, initiator, "However, when " + subject.heShe() + " notices {c:givenName} watching, " + subject.heShe() + "'s polite enough to offer to let " + initiator.himHer() + " join in.  " + initiator.getGivenName() + " eagerly accepts, and ");
+					w_append(w, t, initiator, "However, when " + subject.heShe() + " notices {c:givenName} watching, " + subject.heShe() + "'s polite enough to offer to let {c:himHer} join in.  " + initiator.getGivenName() + " eagerly accepts, and ");
 				} else {
 					w_append(w, t, subject, "They both look disappointed when " + initiator.getGivenName() + " interrupts, but it's only to ask permission to join in.  {c:givenName} happily moves aside for " + initiator.himHer() + " and ");
 				}
@@ -42982,7 +42982,7 @@ public class Chosen implements Serializable {
 				if (initiator.getMorality() > subject.getMorality()) {
 					w_append(w, t, ", but " + initiator.hisHer() + " plans are thrown into disarray when " + initiator.heShe() + " finds one of " + initiator.hisHer() + " friends making out with " + subject.getGivenName() + " in a back room.  Fearful of having " + initiator.hisHer() + " friend stolen, " + initiator.getGivenName() + " insists on joining in");
 				} else {
-					w_append(w, t, subject, ", so " + initiator.heShe() + " starts seducing {c:givenName}'s friends.  Before long, " + initiator.heShe() + "'s making out with one of them in a back room.  When " + subject.getGivenName() + " finds them, " + subject.heShe() + " insists on joining in");
+					w_append(w, t, subject, ", so " + initiator.heShe() + " starts seducing {c:givenName}'s friends.  Before long, " + initiator.heShe() + "'s making out with one of them in a back room.  When " + subject.getGivenName() + " finds them, {c:heShe} insists on joining in");
 				}
 				w.append(t, ", and the encounter soon turns into a competition between the two Chosen to determine whose sexual service feels better.  Afterward, they both feel more comfortable with their sexuality, but their spreading reputation will cause problems in the future.\n\n");
 				initiator.say(t, "\"");
@@ -43023,17 +43023,17 @@ public class Chosen implements Serializable {
 			}
 			nameDisplay[0] = initiator.mainName;
 			nameDisplay[1] = subject.mainName;
-			w_append(w, t, initiator.getMainName() + " decides to make an unannounced public appearance");
+			w_append(w, t, initiator, "{c:mainName} decides to make an unannounced public appearance");
 			if (w.getRelationship(number, second.getNumber()) >= 0) {
 				if (initiator.getDignity() > subject.getDignity()) {
 					w_append(w, t, ", and " + initiator.heShe() + " generously invites " + subject.getMainName() + " along so they can share the spotlight.  ");
 				} else {
-					w_append(w, t, subject, ", and when {c:mainName} finds out, " + subject.heShe() + " insists on coming along to help increase the impact.  ");
+					w_append(w, t, subject, ", and when {c:mainName} finds out, {c:heShe} insists on coming along to help increase the impact.  ");
 				}
 				if (initiator.getMorality() > subject.getMorality()) {
 					w.append(t, "At first, " + subject.getMainName() + " is annoyed that they're just transforming rather than doing anything interesting with their powers");
 				} else {
-					w_append(w, t, subject.getMainName() + " is concerned when their public transformation causes a minor panic");
+					w_append(w, t, subject, "{c:mainName} is concerned when their public transformation causes a minor panic");
 				}
 				if (initiator.getInnocence() > subject.getInnocence()) {
 					w_append(w, t, initiator, ", but {c:mainName} just tells " + subject.himHer() + " not to worry so much.  ");
@@ -43158,7 +43158,7 @@ public class Chosen implements Serializable {
 				initiator.say(t, "\"");
 			} else {
 				if (initiator.getInnocence() > subject.getInnocence()) {
-					w_append(w, t, initiator, ".  However, {c:givenName}'s hopes of using the experience to feel better about " + initiator.himHer() + "self are dashed when {c:heShe} realizes that {c:heShe} finds this sort of thing way more embarrassing than " + subject.getGivenName() + " does.  ");
+					w_append(w, t, initiator, ".  However, {c:givenName}'s hopes of using the experience to feel better about {c:himHer}self are dashed when {c:heShe} realizes that {c:heShe} finds this sort of thing way more embarrassing than " + subject.getGivenName() + " does.  ");
 				} else {
 					w.append(t, ".  However, the recordings " + initiator.getGivenName() + " ends up picking to watch all end up focusing exclusively on " + subject.getGivenName() + "'s humiliation.  ");
 				}
@@ -43251,16 +43251,16 @@ public class Chosen implements Serializable {
 				}
 				initiator.say(t, "\"");
 			} else {
-				w_append(w, t, initiator.getMainName() + " invites " + subject.getMainName() + " to a sparring match in hopes of working out the tension between the two of them.  ");
+				w_append(w, t, initiator, "{c:mainName} invites " + subject.getMainName() + " to a sparring match in hopes of working out the tension between the two of them.  ");
 				if (initiator.getConfidence() > subject.getConfidence()) {
-					w_append(w, t, initiator.getMainName() + " has the upper hand in combat, but " + initiator.heShe() + " has a harder time handling it when " + subject.getMainName() + " presses a kiss against " + initiator.hisHer() + " lips while their weapons are locked together.  " + initiator.getMainName() + " stumbles back and collapses, and " + subject.getMainName() + " climbs atop " + initiator.himHer() + " to seize the advantage.  ");
+					w_append(w, t, initiator, "{c:mainName} has the upper hand in combat, but {c:heShe} has a harder time handling it when " + subject.getMainName() + " presses a kiss against {c:hisHer} lips while their weapons are locked together.  {c:mainName} stumbles back and collapses, and " + subject.getMainName() + " climbs atop {c:himHer} to seize the advantage.  ");
 				} else {
-					w_append(w, t, initiator.getMainName() + " goes down even faster than usual, as " + initiator.hisHer() + " confused romantic feelings toward " + subject.getMainName() + " make it hard to focus.  " + subject.getMainName() + " has those same feelings, but " + subject.hisHer() + " way of dealing with them is to climb atop the prone " + initiator.getMainName() + " and put them into action.  ");
+					w_append(w, t, initiator, "{c:mainName} goes down even faster than usual, as {c:hisHer} confused romantic feelings toward " + subject.getMainName() + " make it hard to focus.  " + subject.getMainName() + " has those same feelings, but " + subject.hisHer() + " way of dealing with them is to climb atop the prone {c:mainName} and put them into action.  ");
 				}
 				if (initiator.getInnocence() > subject.getInnocence()) {
-					w_append(w, t, initiator.getMainName() + " quickly gives in to the pleasure of being dominated, and ");
+					w_append(w, t, initiator, "{c:mainName} quickly gives in to the pleasure of being dominated, and ");
 				} else {
-					w_append(w, t, initiator.getMainName() + " wanted this as well, so ");
+					w_append(w, t, initiator, "{c:mainName} wanted this as well, so ");
 				}
 				if (initiator.getDignity() > subject.getDignity()) {
 					w_append(w, t, "even though " + initiator.heShe() + " pretends not to like it, " + initiator.heShe() + "'s happy that things turned out like this.  ");
@@ -43274,7 +43274,7 @@ public class Chosen implements Serializable {
 				} else if (subject.getGender().equals("female")) {
 					w_append(w, t, "For over an hour, " + subject.getMainName() + " rides " + initiator.getMainName() + ", milking " + initiator.himHer() + " dry.  When " + initiator.getMainName() + " can't get hard anymore, " + subject.getMainName() + " shoves a vibrating dildo up " + initiator.hisHer() + " ass to keep " + initiator.himHer() + " going for another couple of rounds.");
 				} else {
-					w_append(w, t, subject.getMainName() + " puts a tight cock ring on " + initiator.getMainName() + " to stop " + initiator.himHer() + " from enjoying it too much");
+					w_append(w, t, subject, "{c:mainName} puts a tight cock ring on " + initiator.getMainName() + " to stop " + initiator.himHer() + " from enjoying it too much");
 					if (initiator.getGender().equals("male")) {
 						w_append(w, t, ", then spends the next hour fucking " + initiator.hisHer() + " ass until it overflows with semen.  ");
 					} else {
@@ -43318,16 +43318,16 @@ public class Chosen implements Serializable {
 			nameDisplay[0] = initiator.mainName;
 			nameDisplay[1] = subject.mainName;
 			if (w.getRelationship(initiator.getNumber(), subject.getNumber()) >= 0) {
-				w_append(w, t, initiator.getMainName() + " invites " + subject.getMainName() + " ");
+				w_append(w, t, initiator, "{c:mainName} invites " + subject.getMainName() + " ");
 				if (initiator.getDignity() > subject.getDignity()) {
 					w_append(w, t, "to go on a nighttime patrol together, but from the way " + initiator.heShe() + " blushes and fidgets as " + initiator.heShe() + " makes the suggestion, it's obvious that " + initiator.heShe() + "'s actually hoping to get defeated and molested.  ");
 				} else {
 					w.append(t, "to go find a gang of Thralls to molest them, since regular sexual encounters just don't feel good enough to compare.  ");
 				}
 				if (initiator.getMorality() > subject.getMorality()) {
-					w_append(w, t, subject.getMainName() + " likes the sound of this, so ");
+					w_append(w, t, subject, "{c:mainName} likes the sound of this, so ");
 				} else {
-					w_append(w, t, subject.getMainName() + " feels guilty about using their mission as a pretext for sexual depravity, but ");
+					w_append(w, t, subject, "{c:mainName} feels guilty about using their mission as a pretext for sexual depravity, but ");
 				}
 				if (initiator.getConfidence() > subject.getConfidence()) {
 					w_append(w, t, subject.heShe() + " goes along with it.  The two of them deliberately walk into an ambush, and ");
@@ -43366,14 +43366,14 @@ public class Chosen implements Serializable {
 				subject.say(t, "\"");
 			} else {
 				if (initiator.getConfidence() > subject.getConfidence()) {
-					w_append(w, t, initiator.getMainName() + " harasses " + subject.getMainName() + " until " + subject.heShe() + " agrees to face " + initiator.himHer() + " in a contest.  The terms are for them both to surrender to a mob of Thralls and let themselves be molested.  The winner is whoever manages to hold " + initiator.hisHer() + " voice in the longest.  ");
+					w_append(w, t, initiator, "{c:mainName} harasses " + subject.getMainName() + " until " + subject.heShe() + " agrees to face {c:himHer} in a contest.  The terms are for them both to surrender to a mob of Thralls and let themselves be molested.  The winner is whoever manages to hold {c:hisHer} voice in the longest.  ");
 				} else {
 					w_append(w, t, "Seeking to settle their rivalry, " + initiator.getMainName() + " challenges to " + subject.getMainName() + " to a contest " + initiator.heShe() + " thinks " + initiator.heShe() + " can win: to see who can endure being molested by the Thralls the longest without letting out " + initiator.hisHer() + " voice.  ");
 				}
 				if (initiator.getMorality() > subject.getMorality()) {
-					w_append(w, t, initiator.getMainName() + " wants to prove once and for all that " + initiator.heShe() + "'s a better person than " + subject.getMainName() + ".  The two of them head out to the slums and walk into an ambush by the Thralls.  " + initiator.getMainName() + " tries to focus on keeping calm as they grope " + initiator.himHer() + ".  ");
+					w_append(w, t, initiator, "{c:mainName} wants to prove once and for all that {c:heShe}'s a better person than " + subject.getMainName() + ".  The two of them head out to the slums and walk into an ambush by the Thralls.  {c:mainName} tries to focus on keeping calm as they grope {c:himHer}.  ");
 				} else {
-					w_append(w, t, initiator.getMainName() + " is intoxicated by the thought of seeing " + subject.getMainName() + " suffer and break.  The two of them head out to the slums and walk into an ambush by the Thralls.  " + initiator.getMainName() + " tries to ignore the Thralls groping " + initiator.himHer() + " as " + initiator.heShe() + " eagerly watches " + subject.getMainName() + ".  ");
+					w_append(w, t, initiator, "{c:mainName} is intoxicated by the thought of seeing " + subject.getMainName() + " suffer and break.  The two of them head out to the slums and walk into an ambush by the Thralls.  {c:mainName} tries to ignore the Thralls groping {c:himHer} as {c:heShe} eagerly watches " + subject.getMainName() + ".  ");
 				}
 				if (initiator.getDignity() > subject.getDignity()) {
 					if (subject.getGender().equals("female")) {
@@ -43425,9 +43425,9 @@ public class Chosen implements Serializable {
 			nameDisplay[1] = subject.mainName;
 			if (w.getRelationship(initiator.getNumber(), subject.getNumber()) >= 0) {
 				if (initiator.getDignity() > subject.getDignity()) {
-					w_append(w, t, initiator.getMainName() + " sweet-talks " + subject.getMainName() + " into helping " + initiator.himHer() + " with " + initiator.hisHer() + " plan to try blasting through the Earth's crust into the Demonic hive.  ");
+					w_append(w, t, initiator, "{c:mainName} sweet-talks " + subject.getMainName() + " into helping {c:himHer} with {c:hisHer} plan to try blasting through the Earth's crust into the Demonic hive.  ");
 				} else {
-					w_append(w, t, initiator.getMainName() + " lets " + subject.getMainName() + " know that " + initiator.heShe() + "'s going to make an attempt at blasting through the Earth's crust to reach the Demonic hive, and that " + initiator.heShe() + " expects " + subject.hisHer() + " help.  ");
+					w_append(w, t, initiator, "{c:mainName} lets " + subject.getMainName() + " know that {c:heShe}'s going to make an attempt at blasting through the Earth's crust to reach the Demonic hive, and that {c:heShe} expects " + subject.hisHer() + " help.  ");
 				}
 				if (initiator.getMorality() > subject.getMorality()) {
 					w_append(w, t, "The horror " + initiator.getMainName() + " feels over what's been done to " + initiator.himHer() + " has convinced " + initiator.himHer() + " that extreme measures are necessary to save others from the same fate.  " + subject.getMainName() + ", for " + subject.hisHer() + " part, just has a lot of pent-up aggression to release.  ");
@@ -43437,7 +43437,7 @@ public class Chosen implements Serializable {
 				if (initiator.getInnocence() > subject.getInnocence()) {
 					w.append(t, "The enormous crater they're able to make with their combined powers makes " + initiator.getMainName() + " feel a lot better, but " + subject.getMainName() + " knows that it was too small and took far too much time to make to have had any chance of piercing the hive.");
 				} else {
-					w_append(w, t, initiator.getMainName() + " always knew that this sort of method wouldn't be useful in the present circumstances, but " + initiator.heShe() + " feels better knowing that if truly desperate measures are ever called for, " + initiator.heShe() + "'ll have some practice making district-sized explosions.");
+					w_append(w, t, initiator, "{c:mainName} always knew that this sort of method wouldn't be useful in the present circumstances, but {c:heShe} feels better knowing that if truly desperate measures are ever called for, {c:heShe}'ll have some practice making district-sized explosions.");
 				}
 				w.append(t, "  The public panic over the two Chosen blasting apart large sections of the landscape outside the city is considerable, but the acknowledgement of their power also makes them feel better in a way.");
 				initiator.say(t, "\n\n\"");
@@ -43462,14 +43462,14 @@ public class Chosen implements Serializable {
 				subject.say(t, "\"");
 			} else {
 				if (initiator.getMorality() > subject.getMorality()) {
-					w_append(w, t, initiator.getMainName() + " decides that " + initiator.heShe() + "'s going to try to crack through the Earth's crust to reach the Demonic hive, and " + initiator.heShe() + " relentlessly hounds " + subject.getMainName() + " with demands and guilt trips until " + subject.heShe() + " agrees to help.  ");
+					w_append(w, t, initiator, "{c:mainName} decides that {c:heShe}'s going to try to crack through the Earth's crust to reach the Demonic hive, and {c:heShe} relentlessly hounds " + subject.getMainName() + " with demands and guilt trips until " + subject.heShe() + " agrees to help.  ");
 				} else {
-					w_append(w, t, initiator.getMainName() + " decides that " + initiator.heShe() + "'s going to try to crack through the Earth's crust to reach the Demonic hive, and " + initiator.heShe() + " grabs " + subject.getMainName() + " and makes angry threats at " + subject.himHer() + " until " + subject.heShe() + " agrees to help.  ");
+					w_append(w, t, initiator, "{c:mainName} decides that {c:heShe}'s going to try to crack through the Earth's crust to reach the Demonic hive, and {c:heShe} grabs " + subject.getMainName() + " and makes angry threats at " + subject.himHer() + " until " + subject.heShe() + " agrees to help.  ");
 				}
 				if (initiator.getInnocence() > subject.getInnocence()) {
-					w_append(w, t, subject.getMainName() + " resents being dragged along for a plan that probably won't even work, but in the end ");
+					w_append(w, t, subject, "{c:mainName} resents being dragged along for a plan that probably won't even work, but in the end ");
 				} else {
-					w_append(w, t, subject.getMainName() + " knows better than to try to stand up to " + initiator.getMainName() + ", but in the end ");
+					w_append(w, t, subject, "{c:mainName} knows better than to try to stand up to " + initiator.getMainName() + ", but in the end ");
 				}
 				if (initiator.getDignity() > 66) {
 					w_append(w, t, subject.heShe() + " actually finds it oddly satisfying to overcharge " + subject.hisHer() + " powers to make huge craters and watch the populace shrink away in awe.");
@@ -43512,19 +43512,19 @@ public class Chosen implements Serializable {
 			nameDisplay[1] = subject.mainName;
 			if (w.getRelationship(initiator.getNumber(), subject.getNumber()) >= 0) {
 				if (initiator.getConfidence() > subject.getConfidence()) {
-					w_append(w, t, initiator.getMainName() + " invites " + subject.getMainName() + " to join " + initiator.himHer() + " in a lewd camshow for their fans, and " + subject.getMainName() + " doesn't have the heart to turn down " + subject.hisHer() + " friend.  ");
+					w_append(w, t, initiator, "{c:mainName} invites " + subject.getMainName() + " to join {c:himHer} in a lewd camshow for their fans, and " + subject.getMainName() + " doesn't have the heart to turn down " + subject.hisHer() + " friend.  ");
 				} else {
-					w_append(w, t, initiator.getMainName() + " decides to give " + initiator.hisHer() + " fans a lewd camshow, and " + initiator.heShe() + " asks " + subject.getMainName() + " to help " + subject.himHer() + " out.  " + subject.HeShe() + " gladly agrees.  ");
+					w_append(w, t, initiator, "{c:mainName} decides to give {c:hisHer} fans a lewd camshow, and {c:heShe} asks " + subject.getMainName() + " to help " + subject.himHer() + " out.  " + subject.HeShe() + " gladly agrees.  ");
 				}
 				if (initiator.getMorality() > subject.getMorality()) {
-					w_append(w, t, initiator.getMainName() + "'s pretense was that " + initiator.heShe() + " was doing it for public morale, but it clearly becomes obvious that " + initiator.heShe() + "'s become addicted to the public's adulation every time " + initiator.heShe() + " strips off another piece of clothing.  ");
+					w_append(w, t, initiator, "{c:mainName}'s pretense was that {c:heShe} was doing it for public morale, but it clearly becomes obvious that {c:heShe}'s become addicted to the public's adulation every time {c:heShe} strips off another piece of clothing.  ");
 				} else {
 					w_append(w, t, "At first, " + subject.getMainName() + " had hoped to use the audience to raise money or promote recruitment for the war effort, but " + initiator.getMainName() + " hogs the spotlight, stripping naked and posing at the request of the users who flatter " + initiator.himHer() + " most.  ");
 				}
 				if (initiator.getInnocence() > subject.getInnocence()) {
-					w_append(w, t, subject.getMainName() + " can't help but be amused at how much " + initiator.getMainName() + " is enjoying " + initiator.himHer() + "self, and " + subject.heShe() + " decides to spice up the show by giving " + initiator.himHer() + " a long, sensual kiss for the audience's benefit.");
+					w_append(w, t, subject, "{c:mainName} can't help but be amused at how much " + initiator.getMainName() + " is enjoying " + initiator.himHer() + "self, and {c:heShe} decides to spice up the show by giving " + initiator.himHer() + " a long, sensual kiss for the audience's benefit.");
 				} else {
-					w_append(w, t, subject.getMainName() + " is just as entranced as the audience is, and " + subject.heShe() + " can't resist stripping naked " + subject.himHer() + "self and cuddling close to " + initiator.himHer() + ", much to the audience's delight.");
+					w_append(w, t, subject, "{c:mainName} is just as entranced as the audience is, and {c:heShe} can't resist stripping naked {c:himHer}self and cuddling close to " + initiator.himHer() + ", much to the audience's delight.");
 				}
 				subject.say(t, "\n\n\"");
 				Project.changePortrait(subject.convertGender(), subject.type, false, false, w, nameDisplay, 1, Project.Emotion.LEWD, Project.Emotion.JOY);
@@ -43548,19 +43548,19 @@ public class Chosen implements Serializable {
 				initiator.say(t, "\"");
 			} else {
 				if (initiator.getConfidence() > subject.getConfidence()) {
-					w_append(w, t, initiator.getMainName() + " challenges " + subject.getMainName() + " to do a camshow with " + initiator.himHer() + " and see whose fans turn out in bigger numbers.  " + subject.getMainName() + " feels like " + subject.heShe() + " has to accept.  ");
+					w_append(w, t, initiator, "{c:mainName} challenges " + subject.getMainName() + " to do a camshow with {c:himHer} and see whose fans turn out in bigger numbers.  " + subject.getMainName() + " feels like " + subject.heShe() + " has to accept.  ");
 				} else {
-					w_append(w, t, initiator.getMainName() + " soothes " + initiator.hisHer() + " insecurity over " + subject.getMainName() + "'s greater strength by challenging " + subject.himHer() + " to join " + initiator.himHer() + " for a camshow and see whose fans show up in greater number.  " + subject.getMainName() + " refuses to back down.  ");
+					w_append(w, t, initiator, "{c:mainName} soothes {c:hisHer} insecurity over " + subject.getMainName() + "'s greater strength by challenging " + subject.himHer() + " to join {c:himHer} for a camshow and see whose fans show up in greater number.  " + subject.getMainName() + " refuses to back down.  ");
 				}
 				if (initiator.getInnocence() > subject.getInnocence()) {
-					w_append(w, t, initiator.getMainName() + " knows " + initiator.heShe() + " has more fans overall, but " + initiator.heShe() + "'s shocked when " + subject.getMainName() + "'s sensual striptease manages to win over the majority of the current viewers.  ");
+					w_append(w, t, initiator, "{c:mainName} knows {c:heShe} has more fans overall, but {c:heShe}'s shocked when " + subject.getMainName() + "'s sensual striptease manages to win over the majority of the current viewers.  ");
 				} else {
-					w_append(w, t, initiator.getMainName() + " had meticulously prepared a strategy for charming the audience, but " + initiator.hisHer() + " plans are thrown into disarray when " + subject.getMainName() + " walks off the street and into the view of the camera completely naked from the start, displaying an open shamelessness that quickly wins over the viewers.  ");
+					w_append(w, t, initiator, "{c:mainName} had meticulously prepared a strategy for charming the audience, but {c:hisHer} plans are thrown into disarray when " + subject.getMainName() + " walks off the street and into the view of the camera completely naked from the start, displaying an open shamelessness that quickly wins over the viewers.  ");
 				}
 				if (initiator.getMorality() > subject.getMorality()) {
-					w_append(w, t, initiator.getMainName() + " only grudgingly accepts defeat, but afterward, ");
+					w_append(w, t, initiator, "{c:mainName} only grudgingly accepts defeat, but afterward, ");
 				} else {
-					w_append(w, t, initiator.getMainName() + " refuses to accept defeat, and soon the two Chosen are scuffling on camera, " + initiator.getMainName() + " pulling " + subject.getMainName() + "'s hair while " + subject.getMainName() + " tears at " + initiator.getMainName() + "'s clothes.  However, afterward, ");
+					w_append(w, t, initiator, "{c:mainName} refuses to accept defeat, and soon the two Chosen are scuffling on camera, {c:mainName} pulling " + subject.getMainName() + "'s hair while " + subject.getMainName() + " tears at {c:mainName}'s clothes.  However, afterward, ");
 				}
 				w.append(t, "the realization that so many people were watching and supporting them makes them both feel good about how things turned out.");
 				subject.say(t, "\n\n\"");
@@ -43600,17 +43600,17 @@ public class Chosen implements Serializable {
 			nameDisplay[1] = subject.mainName;
 			if (w.getRelationship(number, second.getNumber()) >= 0) {
 				if (initiator.getConfidence() > subject.getConfidence()) {
-					w_append(w, t, initiator.getMainName() + " invites " + subject.getMainName() + " to go punish the city's criminals together, and " + subject.getMainName() + " eagerly accepts.  ");
+					w_append(w, t, initiator, "{c:mainName} invites " + subject.getMainName() + " to go punish the city's criminals together, and " + subject.getMainName() + " eagerly accepts.  ");
 				} else {
-					w_append(w, t, subject.getMainName() + " wants to blow off some steam, and " + initiator.getMainName() + " suggests that they go out and punish some criminals together.  ");
+					w_append(w, t, subject, "{c:mainName} wants to blow off some steam, and " + initiator.getMainName() + " suggests that they go out and punish some criminals together.  ");
 				}
 				if (initiator.getInnocence() > subject.getInnocence()) {
 					w.append(t, "However, " + initiator.getMainName() + " soon gets swept up in " + subject.getMainName() + "'s aimless rage, and the two of them end up dealing out the death penalty to people committing crimes as innocuous as breaking curfew.  ");
 				} else {
-					w_append(w, t, subject.getMainName() + " is impressed with how cold and murderous " + initiator.getMainName() + " can be against people when " + initiator.heShe() + " has an acceptable justification.  ");
+					w_append(w, t, subject, "{c:mainName} is impressed with how cold and murderous " + initiator.getMainName() + " can be against people when " + initiator.heShe() + " has an acceptable justification.  ");
 				}
 				if (initiator.getDignity() > subject.getDignity()) {
-					w_append(w, t, initiator.getMainName() + " only stops when a news crew shows up, reigning " + subject.getMainName() + " back and returning to a sweet and innocent demeanor for the cameras.  ");
+					w_append(w, t, initiator, "{c:mainName} only stops when a news crew shows up, reigning " + subject.getMainName() + " back and returning to a sweet and innocent demeanor for the cameras.  ");
 				} else {
 					w.append(t, "When a news crew shows up, the two of them make their escape.  ");
 				}
@@ -43636,16 +43636,16 @@ public class Chosen implements Serializable {
 				}
 				initiator.say(t, "\"");
 			} else {
-				w_append(w, t, initiator.getMainName() + " and " + subject.getMainName() + " both decide to blow off some steam by killing criminals on the same night, and they end up running into each other.  ");
+				w_append(w, t, initiator, "{c:mainName} and " + subject.getMainName() + " both decide to blow off some steam by killing criminals on the same night, and they end up running into each other.  ");
 				if (initiator.getConfidence() > subject.getConfidence()) {
-					w_append(w, t, initiator.getMainName() + " berates " + subject.getMainName() + " for thinking that someone as physically and mentally weak as " + subject.himHer() + "self will be able to make a difference, ");
+					w_append(w, t, initiator, "{c:mainName} berates " + subject.getMainName() + " for thinking that someone as physically and mentally weak as " + subject.himHer() + "self will be able to make a difference, ");
 				} else {
-					w_append(w, t, subject.getMainName() + " challenges " + initiator.getMainName() + " to compete with " + subject.himHer() + ", confident in " + subject.hisHer() + " own victory.  " + initiator.getMainName() + " accepts because " + initiator.heShe() + " feels that sniffing out wrongdoing is one of " + initiator.hisHer() + " strong points, but ");
+					w_append(w, t, subject, "{c:mainName} challenges " + initiator.getMainName() + " to compete with {c:himHer}, confident in {c:hisHer} own victory.  " + initiator.getMainName() + " accepts because " + initiator.heShe() + " feels that sniffing out wrongdoing is one of " + initiator.hisHer() + " strong points, but ");
 				}
 				if (initiator.getInnocence() > subject.getInnocence()) {
-					w_append(w, t, subject, "but {c:mainName}'s greater willingness to be cold and merciless mean that " + subject.heShe() + " ends up with a far higher bodycount.  ");
+					w_append(w, t, subject, "but {c:mainName}'s greater willingness to be cold and merciless mean that {c:heShe} ends up with a far higher bodycount.  ");
 				} else {
-					w_append(w, t, subject, "but {c:mainName} is more concerned with getting a higher bodycount than with making sure that all " + subject.hisHer() + " targets actually deserve to die.  ");
+					w_append(w, t, subject, "but {c:mainName} is more concerned with getting a higher bodycount than with making sure that all {c:hisHer} targets actually deserve to die.  ");
 				}
 				if (initiator.getDignity() > subject.getDignity()) {
 					w_append(w, t, subject, "{c:HeShe} claims victory, laughing and taunting, and " + initiator.getMainName() + " can only huff and storm off.");
@@ -43779,19 +43779,19 @@ public class Chosen implements Serializable {
 			nameDisplay[1] = subject.mainName;
 			if (w.getRelationship(number, second.getNumber()) >= 0) {
 				if (initiator.getDignity() > subject.getDignity()) {
-					w_append(w, t, subject.getMainName() + " knows that " + initiator.getMainName() + " also wants to die, so " + subject.heShe() + " offers to try to kill " + initiator.himHer() + ".  " + initiator.getMainName() + " accepts on the condition that they take turns.  ");
+					w_append(w, t, subject, "{c:mainName} knows that " + initiator.getMainName() + " also wants to die, so {c:heShe} offers to try to kill " + initiator.himHer() + ".  " + initiator.getMainName() + " accepts on the condition that they take turns.  ");
 				} else {
-					w_append(w, t, subject.getMainName() + " asks " + initiator.getMainName() + " to try to kill " + subject.himHer() + ", but " + initiator.getMainName() + " wants to die too, so the two of them end up taking turns hitting each other with their strongest attacks.  ");
+					w_append(w, t, subject, "{c:mainName} asks " + initiator.getMainName() + " to try to kill {c:himHer}, but " + initiator.getMainName() + " wants to die too, so the two of them end up taking turns hitting each other with their strongest attacks.  ");
 				}
 				if (initiator.getInnocence() > subject.getInnocence()) {
-					w_append(w, t, subject, "It quickly becomes humiliatingly obvious to {c:mainName} that " + subject.hisHer() + " attacks stand no chance whatsoever of dealing serious damage to " + initiator.getMainName());
+					w_append(w, t, subject, "It quickly becomes humiliatingly obvious to {c:mainName} that {c:hisHer} attacks stand no chance whatsoever of dealing serious damage to " + initiator.getMainName());
 				} else {
-					w_append(w, t, subject.getMainName() + " lacks the willpower to truly use " + subject.hisHer() + " full strength against " + subject.hisHer() + " friend");
+					w_append(w, t, subject, "{c:mainName} lacks the willpower to truly use {c:hisHer} full strength against {c:hisHer} friend");
 				}
 				if (initiator.getMorality() > subject.getMorality()) {
 					w_append(w, t, initiator, ", but {c:mainName} reassures " + subject.himHer() + " that it's okay.");
 				} else {
-					w_append(w, t, subject, ", and {c:mainName} ends up breaking down in tears over being unable to do " + subject.hisHer() + " part.");
+					w_append(w, t, subject, ", and {c:mainName} ends up breaking down in tears over being unable to do {c:hisHer} part.");
 				}
 				subject.say(t, "\n\n\"");
 				Project.changePortrait(initiator.convertGender(), initiator.type, false, false, w, nameDisplay, 0, Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
@@ -43815,14 +43815,14 @@ public class Chosen implements Serializable {
 				initiator.say(t, "\"");
 			} else {
 				if (initiator.getInnocence() > subject.getInnocence()) {
-					w_append(w, t, subject.getMainName() + " ambushes " + initiator.getMainName() + " on patrol and attacks in hopes of provoking " + initiator.getMainName() + " to fight back and kill " + subject.himHer() + ".  ");
+					w_append(w, t, subject, "{c:mainName} ambushes " + initiator.getMainName() + " on patrol and attacks in hopes of provoking " + initiator.getMainName() + " to fight back and kill {c:himHer}.  ");
 				} else {
-					w_append(w, t, initiator.getMainName() + " ambushes " + subject.getMainName() + " on patrol, but when " + subject.heShe() + " fights back, " + subject.getMainName() + "'s surprised to find " + subject.himHer() + "self capable of holding " + subject.hisHer() + " own and even seizing the advantage over the stronger Chosen.  ");
+					w_append(w, t, initiator, "{c:mainName} ambushes " + subject.getMainName() + " on patrol, but when " + subject.heShe() + " fights back, " + subject.getMainName() + "'s surprised to find " + subject.himHer() + "self capable of holding " + subject.hisHer() + " own and even seizing the advantage over the stronger Chosen.  ");
 				}
 				if (initiator.getDignity() > subject.getDignity()) {
-					w_append(w, t, initiator.getMainName() + "'s fighting style is sloppier and less aggressive than usual, and when " + subject.getMainName() + " realizes that " + initiator.heShe() + "'s losing on purpose");
+					w_append(w, t, initiator, "{c:mainName}'s fighting style is sloppier and less aggressive than usual, and when " + subject.getMainName() + " realizes that {c:heShe}'s losing on purpose");
 				} else {
-					w_append(w, t, initiator, "It quickly becomes clear from {c:mainName}'s unusually subdued behavior that " + initiator.heShe() + "'s not fighting seriously, and when " + subject.getMainName() + " realizes that");
+					w_append(w, t, initiator, "It quickly becomes clear from {c:mainName}'s unusually subdued behavior that {c:heShe}'s not fighting seriously, and when " + subject.getMainName() + " realizes that");
 				}
 				if (initiator.getMorality() > subject.getMorality()) {
 					w_append(w, t, ", " + subject.heShe() + " gets angry and decides to use " + subject.hisHer() + " advantage to just torture " + initiator.himHer() + " rather than actually attempt to kill " + initiator.himHer() + ".");
@@ -43866,9 +43866,9 @@ public class Chosen implements Serializable {
 			nameDisplay[1] = subject.mainName;
 			if (w.getRelationship(number, second.getNumber()) >= 0) {
 				if (initiator.getInnocence() > subject.getInnocence()) {
-					w_append(w, t, initiator.getMainName() + " hosts a huge party for " + initiator.hisHer() + " fanbase and invites " + subject.getMainName() + " to attend.  " + subject.getMainName() + " gets carried away with having such a large audience for once and ends up inciting the crowd to ");
+					w_append(w, t, initiator, "{c:mainName} hosts a huge party for {c:hisHer} fanbase and invites " + subject.getMainName() + " to attend.  " + subject.getMainName() + " gets carried away with having such a large audience for once and ends up inciting the crowd to ");
 				} else {
-					w_append(w, t, initiator.getMainName() + " hosts a large event for " + initiator.hisHer() + " fanbase and invites " + subject.getMainName() + " to be the main attraction.  " + subject.getMainName() + " is giddy with all the attention " + subject.heShe() + "'s getting, and on a whim, " + subject.heShe() + " riles up the crowd to ");
+					w_append(w, t, initiator, "{c:mainName} hosts a large event for {c:hisHer} fanbase and invites " + subject.getMainName() + " to be the main attraction.  " + subject.getMainName() + " is giddy with all the attention " + subject.heShe() + "'s getting, and on a whim, " + subject.heShe() + " riles up the crowd to ");
 				}
 				if (initiator.getMorality() > subject.getMorality()) {
 					w.append(t, "riot through the city just for the fun of it.  " + initiator.getMainName() + " wouldn't ordinarily approve of the behavior, but ");
@@ -43902,19 +43902,19 @@ public class Chosen implements Serializable {
 				subject.say(t, "\"");
 			} else {
 				if (initiator.getMorality() > subject.getMorality()) {
-					w_append(w, t, initiator.getMainName() + " holds a large event for " + initiator.hisHer() + " fans in which " + initiator.heShe() + " delivers a speech demonizing " + subject.getMainName() + " and " + subject.hisHer() + " followers, calling for them to be exposed, shamed, and ruined.  Meanwhile, " + subject.getMainName() + " ");
+					w_append(w, t, initiator, "{c:mainName} holds a large event for {c:hisHer} fans in which {c:heShe} delivers a speech demonizing " + subject.getMainName() + " and " + subject.hisHer() + " followers, calling for them to be exposed, shamed, and ruined.  Meanwhile, " + subject.getMainName() + " ");
 				} else {
-					w_append(w, t, subject.getMainName() + " attends a small event for " + subject.hisHer() + " fans, but " + initiator.getMainName() + "'s followers catch word of the gathering and crash it, looting and burning the venue to the ground.  The attack is an escalation brought on by the way that " + subject.getMainName() + " self-righteously ");
+					w_append(w, t, subject, "{c:mainName} attends a small event for {c:hisHer} fans, but " + initiator.getMainName() + "'s followers catch word of the gathering and crash it, looting and burning the venue to the ground.  The attack is an escalation brought on by the way that {c:mainName} self-righteously ");
 				}
 				if (initiator.getInnocence() > subject.getInnocence()) {
-					w_append(w, t, initiator, "leads what amounts to a guerilla war against {c:mainName}, sabotaging " + initiator.hisHer() + " reputation at every turn.  ");
+					w_append(w, t, initiator, "leads what amounts to a guerilla war against {c:mainName}, sabotaging {c:hisHer} reputation at every turn.  ");
 				} else {
 					w_append(w, t, "refuses to keep " + subject.hisHer() + " own followers under control, remaining willfully ignorant of the things they do to " + initiator.getMainName() + "'s fanbase in turn.  ");
 				}
 				if (initiator.getConfidence() > subject.getConfidence()) {
-					w_append(w, t, initiator.getMainName() + " knows that " + initiator.heShe() + " could probably browbeat " + subject.getMainName() + " into ending their public feud at any time, but being able to leverage what remains of " + initiator.hisHer() + " popularity makes " + initiator.himHer() + " feel powerful.");
+					w_append(w, t, initiator, "{c:mainName} knows that {c:heShe} could probably browbeat " + subject.getMainName() + " into ending their public feud at any time, but being able to leverage what remains of {c:hisHer} popularity makes {c:himHer} feel powerful.");
 				} else {
-					w_append(w, t, initiator.getMainName() + " knows that " + initiator.heShe() + " isn't strong enough to stand up to " + subject.getMainName() + " alone, but " + initiator.heShe() + " can still feel powerful by leveraging what remains of " + initiator.hisHer() + " popularity to wage this kind of proxy war.");
+					w_append(w, t, initiator, "{c:mainName} knows that {c:heShe} isn't strong enough to stand up to " + subject.getMainName() + " alone, but {c:heShe} can still feel powerful by leveraging what remains of {c:hisHer} popularity to wage this kind of proxy war.");
 				}
 				initiator.say(t, "\n\n\"");
 				Project.changePortrait(initiator.convertGender(), initiator.type, false, false, w, nameDisplay, 0, Project.Emotion.JOY, Project.Emotion.FOCUS);
@@ -43952,14 +43952,14 @@ public class Chosen implements Serializable {
 			nameDisplay[0] = initiator.mainName;
 			nameDisplay[1] = subject.mainName;
 			if (w.getRelationship(number, second.getNumber()) >= 0) {
-				w_append(w, t, initiator.getMainName() + " and " + subject.getMainName() + " team up together to launch on attack on several local military bases.  ");
+				w_append(w, t, initiator, "{c:mainName} and " + subject.getMainName() + " team up together to launch on attack on several local military bases.  ");
 			} else {
-				w_append(w, t, initiator.getMainName() + " and " + subject.getMainName() + " are unpleasantly surprised to run into each other while attacking the same military base.  ");
+				w_append(w, t, initiator, "{c:mainName} and " + subject.getMainName() + " are unpleasantly surprised to run into each other while attacking the same military base.  ");
 			}
 			if (initiator.getDignity() > subject.getDignity()) {
-				w_append(w, t, subject.getMainName() + " almost lets " + subject.hisHer() + " frustration and bloodlust get the better of " + subject.himHer());
+				w_append(w, t, subject, "{c:mainName} almost lets {c:hisHer} frustration and bloodlust get the better of " + subject.himHer());
 			} else {
-				w_append(w, t, subject.getMainName() + " isn't content to just destroy their equipment, wanting to strike true terror into the hearts of the soldiers");
+				w_append(w, t, subject, "{c:mainName} isn't content to just destroy their equipment, wanting to strike true terror into the hearts of the soldiers");
 			}
 			if (initiator.getInnocence() > subject.getInnocence()) {
 				w_append(w, t, ", and " + subject.heShe() + " has to remind " + subject.himHer() + "self that " + subject.hisHer() + " real objective here is to make it harder for the government to put its containment protocols for impregnated Chosen into effect.  ");
@@ -44030,9 +44030,9 @@ public class Chosen implements Serializable {
 			nameDisplay[1] = subject.mainName;
 			w.append(t, "In order to get a powerful politician to oppose national defense legislation that would prove inconvenient to the Demons, you use post-hypnotic suggestion to whore out two of the Chosen to him.  ");
 			if (initiator.getMorality() > subject.getMorality()) {
-				w_append(w, t, initiator.getMainName() + " is made to believe that sexual behavior is perfectly normal, while " + subject.getMainName() + " is made to believe that " + subject.heShe() + "'s getting a fabulous reward afterward.  ");
+				w_append(w, t, initiator, "{c:mainName} is made to believe that sexual behavior is perfectly normal, while " + subject.getMainName() + " is made to believe that " + subject.heShe() + "'s getting a fabulous reward afterward.  ");
 			} else {
-				w_append(w, t, subject.getMainName() + " is made to believe that " + subject.heShe() + "'s in love with him, while " + initiator.getMainName() + " is made to believe that " + initiator.heShe() + " came up with the idea " + initiator.himHer() + "self to have some fun.  ");
+				w_append(w, t, subject, "{c:mainName} is made to believe that {c:heShe}'s in love with him, while " + initiator.getMainName() + " is made to believe that " + initiator.heShe() + " came up with the idea " + initiator.himHer() + "self to have some fun.  ");
 			}
 			if (w.getRelationship(initiator.getNumber(), subject.getNumber()) >= 0) {
 				w.append(t, "The two of them are happy to be doing this together, making the hypnosis even deeper and more effective than usual.  ");
@@ -44040,9 +44040,9 @@ public class Chosen implements Serializable {
 				w.append(t, "The hatred the two of them feel for each other is strong enough that it comes through even with their altered mental state.  ");
 			}
 			if (initiator.getConfidence() > subject.getConfidence()) {
-				w_append(w, t, initiator, "Even hypnotized, {c:mainName}'s headstrong nature causes " + initiator.himHer() + " to want to take charge, and the politician has " + initiator.himHer() + " ");
+				w_append(w, t, initiator, "Even hypnotized, {c:mainName}'s headstrong nature causes {c:himHer} to want to take charge, and the politician has {c:himHer} ");
 			} else {
-				w_append(w, t, subject.getMainName() + "'s dominant nature causes " + subject.himHer() + " to start to take charge, but the politician prefers to have " + initiator.getMainName() + " ");
+				w_append(w, t, subject, "{c:mainName}'s dominant nature causes {c:himHer} to start to take charge, but the politician prefers to have " + initiator.getMainName() + " ");
 			}
 			if (initiator.getDignity() > subject.getDignity()) {
 				w_append(w, t, "act like some sort of dominatrix, a caricature of " + initiator.hisHer() + " former indomitable public image.");
@@ -44107,7 +44107,7 @@ public class Chosen implements Serializable {
 			if (initiator.getMorality() > subject.getMorality()) {
 				w.append(t, "Out of fear of getting found out, " + subject.getMainName() + " waits until the late evening before heading to the Demonic hive");
 			} else {
-				w_append(w, t, subject.getMainName() + "'s conscience causes " + subject.himHer() + " to agonize over the decision, but " + subject.heShe() + " finally heads to the Demonic hive");
+				w_append(w, t, subject, "{c:mainName}'s conscience causes {c:himHer} to agonize over the decision, but {c:heShe} finally heads to the Demonic hive");
 			}
 			if (w.getRelationship(initiator.getNumber(), subject.getNumber()) >= 0) {
 				w.append(t, " together with " + initiator.getMainName() + " at the latter's urging.  ");
@@ -44115,14 +44115,14 @@ public class Chosen implements Serializable {
 				w_append(w, t, ", only to find much to " + subject.hisHer() + " annoyance that " + initiator.getMainName() + " is already there.  ");
 			}
 			if (initiator.getInnocence() > subject.getInnocence()) {
-				w_append(w, t, subject.getMainName() + " is certain that appealing to the Demon Lord is a viable way to get killed, but " + initiator.getMainName() + " figures that even if getting drained just allows them to pass out and not have any nightmares for awhile, it's still worth it.  ");
+				w_append(w, t, subject, "{c:mainName} is certain that appealing to the Demon Lord is a viable way to get killed, but " + initiator.getMainName() + " figures that even if getting drained just allows them to pass out and not have any nightmares for awhile, it's still worth it.  ");
 			} else {
-				w_append(w, t, initiator.getMainName() + " is confident that the Demon Lord has the power to kill them, and " + subject.getMainName() + " is swept along with " + initiator.hisHer() + " certainty.  ");
+				w_append(w, t, initiator, "{c:mainName} is confident that the Demon Lord has the power to kill them, and " + subject.getMainName() + " is swept along with {c:hisHer} certainty.  ");
 			}
 			if (initiator.getDignity() > subject.getDignity()) {
-				w_append(w, t, subject.getMainName() + " reflexively clings to " + initiator.getMainName() + " as they both sleep dreamlessly in your sea of tentacles, gaining temporary peace at the cost of empowering your army.");
+				w_append(w, t, subject, "{c:mainName} reflexively clings to " + initiator.getMainName() + " as they both sleep dreamlessly in your sea of tentacles, gaining temporary peace at the cost of empowering your army.");
 			} else {
-				w_append(w, t, initiator.getMainName() + "'s face finally relaxes, and " + subject.getMainName() + " shows no trace of fear, both of them peaceful and content as their minds slip away into oblivion and their life energy fuels the tentacles surrounding them.");
+				w_append(w, t, initiator, "{c:mainName}'s face finally relaxes, and " + subject.getMainName() + " shows no trace of fear, both of them peaceful and content as their minds slip away into oblivion and their life energy fuels the tentacles surrounding them.");
 			}
 			initiator.say(t, "\n\n\"");
 			if (w.getRelationship(initiator.getNumber(), subject.getNumber()) >= 0) {
@@ -44180,12 +44180,12 @@ public class Chosen implements Serializable {
 			nameDisplay[0] = initiator.mainName;
 			nameDisplay[1] = subject.mainName;
 			if (initiator.getInnocence() > subject.getInnocence()) {
-				w_append(w, t, initiator, "Some film-makers approach {c:mainName} about making a short movie together, and " + initiator.heShe() + " eagerly accepts, not realizing that it's going to be a recruitment video for the Demonic army.  ");
+				w_append(w, t, initiator, "Some film-makers approach {c:mainName} about making a short movie together, and {c:heShe} eagerly accepts, not realizing that it's going to be a recruitment video for the Demonic army.  ");
 			} else {
-				w_append(w, t, initiator.getMainName() + " agrees to appear in a short movie, even though " + initiator.heShe() + " suspects that the film-makers' intentions are impure, just because " + initiator.heShe() + "'s that desperate for a chance to present a new public image to the world.  ");
+				w_append(w, t, initiator, "{c:mainName} agrees to appear in a short movie, even though {c:heShe} suspects that the film-makers' intentions are impure, just because {c:heShe}'s that desperate for a chance to present a new public image to the world.  ");
 			}
 			if (w.getRelationship(initiator.getNumber(), subject.getNumber()) >= 0) {
-				w_append(w, t, subject.getMainName() + " also joins the project to help out " + subject.hisHer() + " friend.  ");
+				w_append(w, t, subject, "{c:mainName} also joins the project to help out {c:hisHer} friend.  ");
 			} else {
 				w_append(w, t, subject, "When it's revealed that {c:mainName} has also been recruited for the project, " + initiator.heShe() + " almost backs out, but " + initiator.heShe() + " ultimately decides to stick with it.  ");
 			}
@@ -44195,9 +44195,9 @@ public class Chosen implements Serializable {
 				w_append(w, t, subject, "Even when the plot dictates that {c:mainName} gets captured on a foolhardy overconfident raid and " + initiator.getMainName() + " is forced to give " + initiator.hisHer() + " body to the Demons in order to save {c:himHer}, ");
 			}
 			if (initiator.getMorality() > subject.getMorality()) {
-				w_append(w, t, initiator.getMainName() + " remains willfully ignorant that they're portraying the Chosen as helpless victims for anyone brave enough to voluntarily join the Thralls.");
+				w_append(w, t, initiator, "{c:mainName} remains willfully ignorant that they're portraying the Chosen as helpless victims for anyone brave enough to voluntarily join the Thralls.");
 			} else {
-				w_append(w, t, subject.getMainName() + " remains willfully ignorant that they're portraying the Chosen as helpless victims for anyone brave enough to voluntarily join the Thralls.");
+				w_append(w, t, subject, "{c:mainName} remains willfully ignorant that they're portraying the Chosen as helpless victims for anyone brave enough to voluntarily join the Thralls.");
 			}
 			initiator.say(t, "\n\n\"");
 			if (w.getRelationship(initiator.getNumber(), subject.getNumber()) >= 0) {
@@ -44462,7 +44462,7 @@ public class Chosen implements Serializable {
 		String[] nameDisplay = new String[5];
 		if (action == 0) {
 			removedANGST = 100;
-			w_append(w, t, confident.getMainName() + " declares that the team will be spending the evening doing an extra patrol, ");
+			w_append(w, t, confident, "{c:mainName} declares that the team will be spending the evening doing an extra patrol, ");
 			if (confident == moral) {
 				w_append(w, t, innocent, "and the self-appointed hero refuses to hear any objections.  {c:mainName} is excited to show off, and " + dignified.getMainName() + " is willing to go for the sake of " + dignified.hisHer() + " public image.  ");
 			} else if (moral == dignified) {
@@ -44472,7 +44472,7 @@ public class Chosen implements Serializable {
 			} else {
 				w_append(w, t, moral, "much to {c:mainName}'s delight.  ");
 				if (innocent == dignified) {
-					w_append(w, t, innocent.getMainName() + " doesn't want to look like the bad guy for objecting.  ");
+					w_append(w, t, innocent, "{c:mainName} doesn't want to look like the bad guy for objecting.  ");
 				} else if (innocent == confident) {
 					w.append(t, "With " + confident.getMainName() + " acting like it's a foregone conclusion, " + dignified.getMainName() + " want to look like the bad guy for objecting.  ");
 				} else {
@@ -44486,7 +44486,7 @@ public class Chosen implements Serializable {
 			} else if (hateful) {
 				w.append(t, "They soon start to get on each other's nerves and split up to patrol different areas, but it's still a productive evening.");
 			} else if (beloved == null) {
-				w_append(w, t, blacksheep, "While the other two work as a pair, {c:mainName} ends up left behind to work on " + blacksheep.hisHer() + " own.");
+				w_append(w, t, blacksheep, "While the other two work as a pair, {c:mainName} ends up left behind to work on {c:hisHer} own.");
 			} else {
 				w.append(t, "However, they don't end up getting that much done, as the other two Chosen get into a loud argument over who gets to be " + beloved.getMainName() + "'s partner.");
 			}
@@ -44723,9 +44723,9 @@ public class Chosen implements Serializable {
 			removedANGST = 200;
 			removedPAIN = 100;
 			addedEnergy = 3;
-			w_append(w, t, confident.getMainName() + " declares a joint training exercise between the three Chosen");
+			w_append(w, t, confident, "{c:mainName} declares a joint training exercise between the three Chosen");
 			if (confident == innocent) {
-				w_append(w, t, moral, ", challenging the others to double their power level by the end of the night.  {c:mainName} pledges to grow as strong as " + moral.heShe() + " can, and " + dignified.getMainName() + " decides that it's in " + dignified.hisHer() + " best interest to join as well.  ");
+				w_append(w, t, moral, ", challenging the others to double their power level by the end of the night.  {c:mainName} pledges to grow as strong as {c:heShe} can, and " + dignified.getMainName() + " decides that it's in " + dignified.hisHer() + " best interest to join as well.  ");
 			} else if (confident == moral) {
 				w_append(w, t, innocent, ", trying to shame them for being so weak.  {c:mainName} gets fired up, and " + dignified.getMainName() + " tries not to show it, but " + dignified.heShe() + " is as well.  ");
 			} else if (confident == dignified) {
@@ -44733,11 +44733,11 @@ public class Chosen implements Serializable {
 			} else {
 				w_append(w, t, ", determined to make " + confident.himHer() + "self stronger.  ");
 				if (moral == innocent) {
-					w_append(w, t, moral.getMainName() + " gets fired up by the possibility of becoming a better hero, and " + dignified.getMainName() + " gets dragged along as well.  ");
+					w_append(w, t, moral, "{c:mainName} gets fired up by the possibility of becoming a better hero, and " + dignified.getMainName() + " gets dragged along as well.  ");
 				} else if (moral == dignified) {
-					w_append(w, t, moral.getMainName() + " feels duty-bound to join " + confident.himHer() + ", and " + innocent.getMainName() + " ends up deciding that it sounds fun too.  ");
+					w_append(w, t, moral, "{c:mainName} feels duty-bound to join " + confident.himHer() + ", and " + innocent.getMainName() + " ends up deciding that it sounds fun too.  ");
 				} else {
-					w_append(w, t, innocent.getMainName() + " thinks that sounds cool, and " + moral.getMainName() + " wants to be able to help more people too.  ");
+					w_append(w, t, innocent, "{c:mainName} thinks that sounds cool, and " + moral.getMainName() + " wants to be able to help more people too.  ");
 				}
 			}
 			if (novel) {
@@ -44749,7 +44749,7 @@ public class Chosen implements Serializable {
 			} else if (blacksheep == null) {
 				w.append(t, "No one wants to hit " + beloved.getMainName() + ", but the others make up for it by venting their aggression against each other.  ");
 			} else {
-				w_append(w, t, blacksheep, "The training ends up involving {c:mainName} trying to escape while the other two try to land hits on " + blacksheep.himHer() + " - much to " + blacksheep.hisHer() + " chagrin.  ");
+				w_append(w, t, blacksheep, "The training ends up involving {c:mainName} trying to escape while the other two try to land hits on {c:himHer} - much to {c:hisHer} chagrin.  ");
 			}
 			w.append(t, "Needless to say, actual combat experience against the Demons would have been more effective, but the Chosen are subconsciously more concerned with boosting their own self-esteem than with actually getting stronger.");
 			confident.say(t, "\n\n\"");
@@ -44898,7 +44898,7 @@ public class Chosen implements Serializable {
 			removedFEAR = 1000;
 			removedPAIN = 500;
 			addedEnergy = 6;
-			w_append(w, t, confident.getMainName() + " declares that tonight, the three Chosen will head out together ");
+			w_append(w, t, confident, "{c:mainName} declares that tonight, the three Chosen will head out together ");
 			if (confident == innocent) {
 				w.append(t, "to beat up all the criminals in the city!  " + dignified.getMainName() + " points out that the goal is completely impossible, but " + moral.getMainName() + " feels that it's a noble enough idea that they might as well make an attempt.  ");
 			} else if (confident == moral) {
@@ -44908,9 +44908,9 @@ public class Chosen implements Serializable {
 			} else {
 				w.append(t, "to fight crime.  ");
 				if (innocent == moral) {
-					w_append(w, t, innocent.getMainName() + " is so enthusiastic about the idea of playing superheroes that " + dignified.getMainName() + " barely has time to voice any objections before being dragged along.  ");
+					w_append(w, t, innocent, "{c:mainName} is so enthusiastic about the idea of playing superheroes that " + dignified.getMainName() + " barely has time to voice any objections before being dragged along.  ");
 				} else if (innocent == dignified) {
-					w_append(w, t, innocent, "At first, {c:mainName} pretends that " + innocent.heShe() + " could take the idea or leave it, but when " + moral.getMainName() + " starts voicing concerns about collateral damage, " + innocent.heShe() + " hurriedly voices " + innocent.hisHer() + " support, declares the vote settled, and drags " + moral.getMainName() + " along.  ");
+					w_append(w, t, innocent, "At first, {c:mainName} pretends that {c:heShe} could take the idea or leave it, but when " + moral.getMainName() + " starts voicing concerns about collateral damage, {c:heShe} hurriedly voices {c:hisHer} support, declares the vote settled, and drags " + moral.getMainName() + " along.  ");
 				} else {
 					w.append(t, "The idea of cementing their reputation as heroes of justice appeals to " + moral.getMainName() + ", and " + innocent.getMainName() + " is of course enthusiastic about the idea of beating up bad guys together, so the plan gets unanimous agreement.  ");
 				}
@@ -44920,9 +44920,9 @@ public class Chosen implements Serializable {
 			} else if (hateful) {
 				w.append(t, "However, the friction between the three of them causes them to spend as much time bickering over the method they should use as they do fighting crime, and ");
 			} else if (blacksheep == null) {
-				w_append(w, t, beloved, "However, {c:mainName} finds " + beloved.himHer() + "self becoming the subject a fight between the other two Chosen, both of which want to partner up with " + beloved.himHer() + ".  And even after that's settled, ");
+				w_append(w, t, beloved, "However, {c:mainName} finds {c:himHer}self becoming the subject a fight between the other two Chosen, both of which want to partner up with {c:himHer}.  And even after that's settled, ");
 			} else {
-				w_append(w, t, blacksheep.getMainName() + " is more or less left on " + blacksheep.hisHer() + " own while the other two Chosen partner up together.  They bring down a fair number of gang members and other criminals, but ");
+				w_append(w, t, blacksheep, "{c:mainName} is more or less left on {c:hisHer} own while the other two Chosen partner up together.  They bring down a fair number of gang members and other criminals, but ");
 			}
 			w.append(t, "the fact that nothing approaching police procedure was being followed means that few of the evildoers actually face punishment for their crimes.  All they really accomplish is feeling better about themselves.\n\n");
 			nameDisplay[0] = innocent.mainName;
@@ -45009,7 +45009,7 @@ public class Chosen implements Serializable {
 			} else if (hateful) {
 				w.append(t, "Afterward, all three of them blame each other for things going too far.  ");
 			} else if (blacksheep == null) {
-				w_append(w, t, beloved, "Later that night, {c:givenName} ends up being pulled into an orgy along with the other two - who are both able to identify " + beloved.himHer() + " despite {c:hisHer} mask and take the opportunity to ravish {c:hisHer} body and compete to see who can make " + beloved.himHer() + " climax the most.  ");
+				w_append(w, t, beloved, "Later that night, {c:givenName} ends up being pulled into an orgy along with the other two - who are both able to identify {c:himHer} despite {c:hisHer} mask and take the opportunity to ravish {c:hisHer} body and compete to see who can make {c:himHer} climax the most.  ");
 			} else {
 				w_append(w, t, blacksheep, "As the party winds down, {c:givenName} ends up being forced to occupy the guests all by {c:himHer}self while the other two Chosen sneak into a private room together and make out.  ");
 			}
@@ -45076,21 +45076,21 @@ public class Chosen implements Serializable {
 			removedPAIN = 1000;
 			removedSHAM = 500;
 			addedEnergy = 6;
-			w_append(w, t, confident.getMainName() + " decides that the team should make an unannounced public appearance");
+			w_append(w, t, confident, "{c:mainName} decides that the team should make an unannounced public appearance");
 			if (confident == moral) {
-				w_append(w, t, innocent, " in order to remind everyone of the power and righteousness of the Chosen.  {c:mainName} takes this a bit too literally, knocking down several buildings just to show that " + innocent.heShe() + " can, and " + dignified.getMainName() + " is too busy posing for the cameras to stop " + innocent.himHer() + ".  ");
+				w_append(w, t, innocent, " in order to remind everyone of the power and righteousness of the Chosen.  {c:mainName} takes this a bit too literally, knocking down several buildings just to show that {c:heShe} can, and " + dignified.getMainName() + " is too busy posing for the cameras to stop {c:himHer}.  ");
 			} else if (confident == innocent) {
-				w_append(w, t, dignified, ", not realizing that the sight of transformed Chosen causes most civilians to assume that a Demon attack is happening.  {c:mainName} knows better, but " + dignified.heShe() + " still wants to boost their position in the public consciousness, and together they pressure a reluctant " + moral.getMainName() + " into coming along.  ");
+				w_append(w, t, dignified, ", not realizing that the sight of transformed Chosen causes most civilians to assume that a Demon attack is happening.  {c:mainName} knows better, but {c:heShe} still wants to boost their position in the public consciousness, and together they pressure a reluctant " + moral.getMainName() + " into coming along.  ");
 			} else if (confident == dignified) {
 				w.append(t, " in order to boost their name recognition.  " + innocent.getMainName() + " doesn't really understand the point, and " + moral.getMainName() + " worries about the panic that will be caused by the unexpected sight of transformed Chosen, but " + confident.getMainName() + " forces them to come along through sheer willpower.  ");
 			} else {
 				w.append(t, ".  ");
 				if (moral == innocent) {
-					w_append(w, t, moral, "At first, {c:mainName} is worried about the sight of transformed Chosen causing people to panic, but " + moral.heShe() + " unquestioningly accepts " + dignified.getMainName() + "'s argument that showing the people how powerful they are is important enough to be worth it.  ");
+					w_append(w, t, moral, "At first, {c:mainName} is worried about the sight of transformed Chosen causing people to panic, but {c:heShe} unquestioningly accepts " + dignified.getMainName() + "'s argument that showing the people how powerful they are is important enough to be worth it.  ");
 				} else if (moral == dignified) {
-					w_append(w, t, moral.getMainName() + " likes the idea of reminding the public of the existence of their mighty defenders, but " + innocent.getMainName() + " takes the demonstration of power too far and ends up knocking down several buildings.  ");
+					w_append(w, t, moral, "{c:mainName} likes the idea of reminding the public of the existence of their mighty defenders, but " + innocent.getMainName() + " takes the demonstration of power too far and ends up knocking down several buildings.  ");
 				} else {
-					w_append(w, t, innocent.getMainName() + " immediately falls in love with the idea of showing everyone how cool they are, and " + moral.getMainName() + "'s objections that the sight of transformed Chosen will cause a panic are overruled.  ");
+					w_append(w, t, innocent, "{c:mainName} immediately falls in love with the idea of showing everyone how cool they are, and " + moral.getMainName() + "'s objections that the sight of transformed Chosen will cause a panic are overruled.  ");
 				}
 			}
 			if (harmonious) {
@@ -45098,7 +45098,7 @@ public class Chosen implements Serializable {
 			} else if (hateful) {
 				w.append(t, "However, as much as the three Chosen try to present a unified face to the public, their animosity for each other is obvious, and ");
 			} else if (blacksheep == null) {
-				w_append(w, t, beloved, "Though the three Chosen want to put on a unified appearance, {c:mainName} finds that the other two only want to be seen with " + beloved.himHer() + " and not each other, and ");
+				w_append(w, t, beloved, "Though the three Chosen want to put on a unified appearance, {c:mainName} finds that the other two only want to be seen with {c:himHer} and not each other, and ");
 			} else {
 				w.append(t, "Though the initial plan had been for the three Chosen to put on a unified appearance, " + blacksheep.getMainName() + " ends up getting pushed off to the side while the other two hog the spotlight together, and ");
 			}
@@ -45165,7 +45165,7 @@ public class Chosen implements Serializable {
 			addedEnergy = 6;
 			w_append(w, t, moral.getGivenName() + " asks the other two Chosen to spend the night at " + moral.hisHer() + " house so they can review video of their prior defeats and come up with better strategies for the future.  ");
 			if (moral == confident) {
-				w_append(w, t, moral, "{c:HeShe} has no trouble overcoming " + moral.hisHer() + " embarrassment and showing off {c:hisHer} most humiliating moments, and {c:heShe} even convinces " + innocent.getGivenName() + " to follow suit, but " + dignified.getGivenName() + " is much more reluctant about " + dignified.hisHer() + " own shame being shown.  ");
+				w_append(w, t, moral, "{c:HeShe} has no trouble overcoming {c:hisHer} embarrassment and showing off {c:hisHer} most humiliating moments, and {c:heShe} even convinces " + innocent.getGivenName() + " to follow suit, but " + dignified.getGivenName() + " is much more reluctant about " + dignified.hisHer() + " own shame being shown.  ");
 			} else if (moral == innocent) {
 				w_append(w, t, moral, "{c:HeShe} is confused when, after {c:hisHer} own highlight reel of shame is done, " + confident.getGivenName() + " claims that " + confident.heShe() + " has no need to improve, and " + dignified.getGivenName() + " tries to duck out and go to bed early.  ");
 			} else if (moral == dignified) {
@@ -45185,7 +45185,7 @@ public class Chosen implements Serializable {
 			} else if (hateful) {
 				w.append(t, "By the end of the night, reliving the more sexual abuses causes all three of the Chosen to start getting turned on, and they distract themselves from that realization by accusing each other of masochism and perversion.  ");
 			} else if (blacksheep == null) {
-				w_append(w, t, beloved, "As the night goes on, the recordings of {c:givenName} at " + beloved.hisHer() + " most exposed and vulnerable begin to arouse the other two Chosen, who grow increasingly clingy and affectionate toward {c:himHer} until {c:heShe} hurriedly retreats to bed.  ");
+				w_append(w, t, beloved, "As the night goes on, the recordings of {c:givenName} at {c:hisHer} most exposed and vulnerable begin to arouse the other two Chosen, who grow increasingly clingy and affectionate toward {c:himHer} until {c:heShe} hurriedly retreats to bed.  ");
 			} else {
 				w_append(w, t, blacksheep, "Reliving the more sexual abuses causes the Chosen to start getting a bit turned on, and {c:givenName} ends up being left on {c:hisHer} own while the other two turn in early to cuddle and release their tension.  ");
 			}
@@ -45254,7 +45254,7 @@ public class Chosen implements Serializable {
 			} else if (confident == moral) {
 				w_append(w, t, dignified, " to talk strategy together.  " + confident.HeShe() + " and {c:givenName} do so while " + innocent.getGivenName() + " sits in the corner and plays with " + innocent.hisHer() + " phone.  ");
 			} else if (confident == dignified) {
-				w_append(w, t, innocent, " so " + confident.heShe() + " can give them a motivational speech.  {c:givenName} finds this idea boring, but " + moral.getGivenName() + " feels obligated to attend and drags " + innocent.himHer() + " along.  ");
+				w_append(w, t, innocent, " so " + confident.heShe() + " can give them a motivational speech.  {c:givenName} finds this idea boring, but " + moral.getGivenName() + " feels obligated to attend and drags {c:himHer} along.  ");
 			} else {
 				w.append(t, " to hang out, just the three of them.  ");
 				if (moral == dignified) {
@@ -45336,7 +45336,7 @@ public class Chosen implements Serializable {
 			removedDISG = 100*1000;
 			removedPAIN = 50*1000;
 			addedEnergy = 15;
-			w_append(w, t, confident.getMainName() + " gathers the team and declares that they're going to go on a night patrol without their weapons");
+			w_append(w, t, confident, "{c:mainName} gathers the team and declares that they're going to go on a night patrol without their weapons");
 			if (confident == innocent) {
 				w.append(t, " as a super hardcore training method.  " + moral.getMainName() + " and " + dignified.getMainName() + " both realize that this won't turn out well, but they don't object to it, because they're secretly looking forward to being captured.  ");
 			} else if (confident == moral) {
@@ -45346,11 +45346,11 @@ public class Chosen implements Serializable {
 			} else {
 				w.append(t, ".  ");
 				if (innocent == moral) {
-					w_append(w, t, innocent.getMainName() + " likes the idea of trying to win without fighting, and while " + dignified.getMainName() + " realizes that this is just going to get them captured and molested, " + dignified.heShe() + "'s okay with that.  ");
+					w_append(w, t, innocent, "{c:mainName} likes the idea of trying to win without fighting, and while " + dignified.getMainName() + " realizes that this is just going to get them captured and molested, " + dignified.heShe() + "'s okay with that.  ");
 				} else if (innocent == dignified) {
-					w_append(w, t, moral.getMainName() + " agrees to go along with this plan even though " + moral.heShe() + " knows that they'll just end up getting beaten and molested, and " + innocent.getMainName() + " goes along with it too because " + innocent.heShe() + " doesn't want to be left out.  ");
+					w_append(w, t, moral, "{c:mainName} agrees to go along with this plan even though {c:heShe} knows that they'll just end up getting beaten and molested, and " + innocent.getMainName() + " goes along with it too because " + innocent.heShe() + " doesn't want to be left out.  ");
 				} else {
-					w_append(w, t, innocent.getMainName() + " goes along with the idea without questioning it, and while " + dignified.getMainName() + " realizes that this is just going to get them captured and molested, " + dignified.heShe() + "'s okay with that.  ");
+					w_append(w, t, innocent, "{c:mainName} goes along with the idea without questioning it, and while " + dignified.getMainName() + " realizes that this is just going to get them captured and molested, " + dignified.heShe() + "'s okay with that.  ");
 				}
 			}
 			if (harmonious) {
@@ -45358,9 +45358,9 @@ public class Chosen implements Serializable {
 			} else if (hateful) {
 				w.append(t, "They go out and are defeated immediately, grabbed by Thralls and forced to cum over and over again.  Even though they're all privately enjoying themselves, they still ridicule each other for being slutty enough to show signs of pleasure at what's being done to them.");
 			} else if (blacksheep == null) {
-				w_append(w, t, beloved, "They go out and are defeated immediately, grabbed by Thralls and forced to cum over and over again.  But even though this is supposedly being done to them against their will, the other two Chosen still manage to struggle through their orgasmic spasms toward {c:mainName}, kissing " + beloved.himHer() + ", licking between " + beloved.hisHer() + " legs, and running their hands over " + beloved.hisHer() + " body along with those of the Thralls, making the experience even more intense for " + beloved.himHer() + ".");
+				w_append(w, t, beloved, "They go out and are defeated immediately, grabbed by Thralls and forced to cum over and over again.  But even though this is supposedly being done to them against their will, the other two Chosen still manage to struggle through their orgasmic spasms toward {c:mainName}, kissing {c:himHer}, licking between {c:hisHer} legs, and running their hands over {c:hisHer} body along with those of the Thralls, making the experience even more intense for {c:himHer}.");
 			} else {
-				w_append(w, t, blacksheep, "They go out and are defeated immediately, grabbed by Thralls and forced to cum over and over again.  However, {c:mainName} finds " + blacksheep.himHer() + "self somewhat neglected, as the Thralls are enticed by the way that the other two Chosen passionately make love with each other in the middle of the countless groping hands.");
+				w_append(w, t, blacksheep, "They go out and are defeated immediately, grabbed by Thralls and forced to cum over and over again.  However, {c:mainName} finds {c:himHer}self somewhat neglected, as the Thralls are enticed by the way that the other two Chosen passionately make love with each other in the middle of the countless groping hands.");
 			}
 			nameDisplay[0] = innocent.mainName;
 			Project.changePortrait(innocent.convertGender(), innocent.type, false, false, w, nameDisplay, 0, Project.Emotion.LEWD, Project.Emotion.JOY);
@@ -45432,21 +45432,21 @@ public class Chosen implements Serializable {
 			removedPAIN = 100*1000;
 			removedSHAM = 50*1000;
 			addedEnergy = 15;
-			w_append(w, t, confident.getMainName() + " ropes the other two Chosen into " + confident.hisHer() + " plan to shatter a path through the Earth's crust and into the Demonic hive");
+			w_append(w, t, confident, "{c:mainName} ropes the other two Chosen into {c:hisHer} plan to shatter a path through the Earth's crust and into the Demonic hive");
 			if (confident == innocent) {
 				w_append(w, t, dignified, ", reasoning that there's no problem that can't be solved with a big enough explosion.  {c:mainName} only reluctantly goes along, suspecting that it's pointless, and while " + moral.getMainName() + " shares {c:hisHer} suspicions, " + moral.heShe() + " feels that even the slimmest possibility of outright saving the city makes it worthwhile.  ");
 			} else if (confident == moral) {
-				w_append(w, t, dignified, ", knowing that it's most likely futile, but feeling obligated to try any plan that has even a slight chance of outright saving the city.  {c:mainName} shares " + confident.hisHer() + " misgivings, but keeps them to " + dignified.himHer() + "self, while " + innocent.getMainName() + " retains an attitude of blind optimism.  ");
+				w_append(w, t, dignified, ", knowing that it's most likely futile, but feeling obligated to try any plan that has even a slight chance of outright saving the city.  {c:mainName} shares " + confident.hisHer() + " misgivings, but keeps them to {c:himHer}self, while " + innocent.getMainName() + " retains an attitude of blind optimism.  ");
 			} else if (confident == dignified) {
 				w_append(w, t, innocent, ", more intent on putting on a show of force for the civilians than on actually accomplishing their stated goal.  {c:mainName} goes along with it, not realizing just how impossible their task is.  " + moral.getMainName() + " does realize it, but " + moral.heShe() + " figures that even a small chance of outright saving the city makes it worthwhile.  ");
 			} else {
 				w.append(t, ".  ");
 				if (moral == dignified) {
-					w_append(w, t, innocent.getMainName() + " thinks that this sounds awesome, and while " + moral.getMainName() + " lacks " + innocent.hisHer() + " enthusiasm, " + moral.heShe() + " figures that at least it should inspire some hope in the civilians to see the raw power of the Chosen on display.  ");
+					w_append(w, t, innocent, "{c:mainName} thinks that this sounds awesome, and while " + moral.getMainName() + " lacks {c:hisHer} enthusiasm, " + moral.heShe() + " figures that at least it should inspire some hope in the civilians to see the raw power of the Chosen on display.  ");
 				} else if (moral == innocent) {
-					w_append(w, t, moral.getMainName() + " is convinced that this will let them save the city right there and then, and while " + dignified.getMainName() + " has " + dignified.hisHer() + " doubts, " + dignified.heShe() + " isn't going to complain about a chance to make a powerful public appearance.  ");
+					w_append(w, t, moral, "{c:mainName} is convinced that this will let them save the city right there and then, and while " + dignified.getMainName() + " has " + dignified.hisHer() + " doubts, " + dignified.heShe() + " isn't going to complain about a chance to make a powerful public appearance.  ");
 				} else {
-					w_append(w, t, innocent.getMainName() + " thinks that this will be a great opportunity to look awesome in front of the cameras, while " + moral.getMainName() + " feels that even the slimmest possibility of outright saving the city makes it worthwhile.  ");
+					w_append(w, t, innocent, "{c:mainName} thinks that this will be a great opportunity to look awesome in front of the cameras, while " + moral.getMainName() + " feels that even the slimmest possibility of outright saving the city makes it worthwhile.  ");
 				}
 			}
 			if (harmonious) {
@@ -45456,7 +45456,7 @@ public class Chosen implements Serializable {
 			} else if (blacksheep == null) {
 				w.append(t, "The combined powers of the three Chosen are enough to reach the hive, but when they break through the ceiling and find it empty, " + beloved.getMainName() + " is put in the very awkward position of having to mediate between the other two Chosen as they each blame the other for slowing down the dig.  ");
 			} else {
-				w_append(w, t, blacksheep, "The combined powers of the three Chosen are enough to reach the hive, but when they break through the ceiling and find it empty, {c:mainName} finds " + blacksheep.himHer() + "self blamed by the other two Chosen for slowing down the dig.  ");
+				w_append(w, t, blacksheep, "The combined powers of the three Chosen are enough to reach the hive, but when they break through the ceiling and find it empty, {c:mainName} finds {c:himHer}self blamed by the other two Chosen for slowing down the dig.  ");
 			}
 			w.append(t, "In truth, it cost you quite a bit of energy to carve out a second hive and move your operations there on such short notice, but you made it all back and more from the Chosen's sin of causing so much destruction and chaos in their attempt to take the easy way out.");
 			nameDisplay[0] = confident.mainName;
@@ -45521,7 +45521,7 @@ public class Chosen implements Serializable {
 			removedSHAM = 100*1000;
 			removedFEAR = 50*1000;
 			addedEnergy = 15;
-			w_append(w, t, dignified.getMainName() + " asks the other two Chosen to join " + dignified.himHer() + " in a nude photoshoot");
+			w_append(w, t, dignified, "{c:mainName} asks the other two Chosen to join {c:himHer} in a nude photoshoot");
 			if (dignified == confident) {
 				w_append(w, t, innocent, " and makes it clear that refusal is not an option.  {c:mainName} thinks it sounds fun, and " + moral.getMainName() + " feels that " + moral.heShe() + " doesn't have any right to refuse.  ");
 			} else if (dignified == moral) {
@@ -45531,11 +45531,11 @@ public class Chosen implements Serializable {
 			} else {
 				w.append(t, ".  ");
 				if (confident == moral) {
-					w_append(w, t, innocent.getMainName() + " thinks that it sounds fun, while " + moral.getMainName() + " takes it as a chance to show off and make " + confident.hisHer() + " fans happy.  ");
+					w_append(w, t, innocent, "{c:mainName} thinks that it sounds fun, while " + moral.getMainName() + " takes it as a chance to show off and make " + confident.hisHer() + " fans happy.  ");
 				} else if (confident == innocent) {
-					w_append(w, t, moral.getMainName() + " figures that it could be a good opportunity to get " + moral.hisHer() + " message out there, while " + innocent.getMainName() + " just wants to show off and have some fun.  ");
+					w_append(w, t, moral, "{c:mainName} figures that it could be a good opportunity to get {c:hisHer} message out there, while " + innocent.getMainName() + " just wants to show off and have some fun.  ");
 				} else {
-					w_append(w, t, confident.getMainName() + " immediately agrees, eager for the chance to show off, and the two of them easily convince " + moral.getMainName() + " that seeing the photos will make people happy and raise morale.  ");
+					w_append(w, t, confident, "{c:mainName} immediately agrees, eager for the chance to show off, and the two of them easily convince " + moral.getMainName() + " that seeing the photos will make people happy and raise morale.  ");
 				}
 			}
 			if (harmonious) {
@@ -45543,9 +45543,9 @@ public class Chosen implements Serializable {
 			} else if (hateful) {
 				w.append(t, "In practice, it ends up being more like three separate photoshoots, as the Chosen have a hard time cooperating or even tolerating each other long enough to set up any group poses.");
 			} else if (blacksheep == null) {
-				w_append(w, t, beloved.getMainName() + " has an especially busy time of it, as the other two Chosen insist on being photographed with " + beloved.himHer() + " and not with each other.");
+				w_append(w, t, beloved, "{c:mainName} has an especially busy time of it, as the other two Chosen insist on being photographed with {c:himHer} and not with each other.");
 			} else {
-				w_append(w, t, blacksheep.getMainName() + " doesn't get many pictures taken, as the other two Chosen are much more intent on being photographed doing affectionate poses with each other.");
+				w_append(w, t, blacksheep, "{c:mainName} doesn't get many pictures taken, as the other two Chosen are much more intent on being photographed doing affectionate poses with each other.");
 			}
 			nameDisplay[0] = innocent.mainName;
 			Project.changePortrait(innocent.convertGender(), innocent.type, false, false, w, nameDisplay, 0, Project.Emotion.LEWD, Project.Emotion.JOY);
@@ -45610,7 +45610,7 @@ public class Chosen implements Serializable {
 			removedPAIN = 50*1000*1000;
 			removedDISG = 25*1000*1000;
 			addedEnergy = 45;
-			w_append(w, t, evil.getMainName() + " decides that " + evil.heShe() + " needs to let off some steam by going on a rampage throughout the city");
+			w_append(w, t, evil, "{c:mainName} decides that {c:heShe} needs to let off some steam by going on a rampage throughout the city");
 			if (evil == cunning) {
 				w_append(w, t, ", and " + evil.heShe() + " tricks the others into joining " + evil.himHer() + " by claiming that they'll only be hurting evildoers.  " + weak.getMainName() + " is stressed and twitchy enough that it's easy to startle " + weak.himHer() + " into committing the first kill, and then " + blunt.getMainName() + " follows suit.  ");
 			} else if (evil == weak) {
@@ -45620,11 +45620,11 @@ public class Chosen implements Serializable {
 			} else {
 				w.append(t, ", and it's not too hard to get the others to join in on the killing.  ");
 				if (cunning == weak) {
-					w_append(w, t, blunt.getMainName() + " comes along for the chance to crack some evildoers' skulls, and while " + cunning.getMainName() + " knows that this is wrong, " + cunning.heShe() + " folds under the pressure and reluctantly joins in.  ");
+					w_append(w, t, blunt, "{c:mainName} comes along for the chance to crack some evildoers' skulls, and while " + cunning.getMainName() + " knows that this is wrong, " + cunning.heShe() + " folds under the pressure and reluctantly joins in.  ");
 				} else if (cunning == blunt) {
-					w_append(w, t, blunt.getMainName() + " is eager for the chance to clean up the city's criminal element by force, and " + weak.getMainName() + " doesn't want to be left out.  ");
+					w_append(w, t, blunt, "{c:mainName} is eager for the chance to clean up the city's criminal element by force, and " + weak.getMainName() + " doesn't want to be left out.  ");
 				} else {
-					w_append(w, t, cunning.getMainName() + " refuses to consider that attempting to clean up the city's criminal element might cause more problems than it solves, and " + weak.getMainName() + " doesn't want to feel left out.  ");
+					w_append(w, t, cunning, "{c:mainName} refuses to consider that attempting to clean up the city's criminal element might cause more problems than it solves, and " + weak.getMainName() + " doesn't want to feel left out.  ");
 				}
 			}
 			if (harmonious) {
@@ -45634,7 +45634,7 @@ public class Chosen implements Serializable {
 			} else if (blacksheep == null) {
 				w.append(t, "Whenever they encounter a civilian that so much as looks at " + beloved.getMainName() + " funny, the other two Chosen compete over who can punish him the fastest.");
 			} else {
-				w_append(w, t, blacksheep.getMainName() + " is soon left to hunt on " + blacksheep.hisHer() + " own, as the other two Chosen take the opportunity to turn the event into a sort of gruesome date.");
+				w_append(w, t, blacksheep, "{c:mainName} is soon left to hunt on {c:hisHer} own, as the other two Chosen take the opportunity to turn the event into a sort of gruesome date.");
 			}
 			nameDisplay[0] = evil.mainName;
 			Project.changePortrait(evil.convertGender(), evil.type, false, false, w, nameDisplay, 0, Project.Emotion.FOCUS, Project.Emotion.JOY);
@@ -45699,9 +45699,9 @@ public class Chosen implements Serializable {
 			removedSHAM = 50*1000*1000;
 			removedFEAR = 25*1000*1000;
 			addedEnergy = 45;
-			w_append(w, t, cunning.getMainName() + " formulates a plan to capture and enjoy one of the large Demons that swallows civilian victims and disables them with overwhelming ecstasy in order to bring them to the Demonic hive");
+			w_append(w, t, cunning, "{c:mainName} formulates a plan to capture and enjoy one of the large Demons that swallows civilian victims and disables them with overwhelming ecstasy in order to bring them to the Demonic hive");
 			if (cunning == evil) {
-				w_append(w, t, blunt, ", hoping for a night of carefree hedonism.  {c:mainName} joins in because " + blunt.heShe() + " feels " + blunt.heShe() + " deserves a break, and " + weak.getMainName() + " has lost " + weak.hisHer() + " will to resist this sort of thing.  ");
+				w_append(w, t, blunt, ", hoping for a night of carefree hedonism.  {c:mainName} joins in because {c:heShe} feels {c:heShe} deserves a break, and " + weak.getMainName() + " has lost " + weak.hisHer() + " will to resist this sort of thing.  ");
 			} else if (cunning == weak) {
 				w_append(w, t, ", but " + cunning.heShe() + " isn't strong enough to enact it on " + cunning.hisHer() + " own.  " + blunt.getMainName() + " is happy to help out, and " + evil.getMainName() + " joins in too for the sake of getting to enjoy some hedonism.  ");
 			} else if (cunning == blunt) {
@@ -45709,11 +45709,11 @@ public class Chosen implements Serializable {
 			} else {
 				w.append(t, ".  ");
 				if (evil == weak) {
-					w_append(w, t, blunt.getMainName() + " is obviously up for the challenge, and " + evil.getMainName() + " figures that " + evil.heShe() + " can tag along and enjoy the benefits too.  ");
+					w_append(w, t, blunt, "{c:mainName} is obviously up for the challenge, and " + evil.getMainName() + " figures that " + evil.heShe() + " can tag along and enjoy the benefits too.  ");
 				} else if (evil == blunt) {
-					w_append(w, t, blunt.getMainName() + " likes both fighting and debauchery, so " + blunt.heShe() + "'s obviously in, and " + weak.getMainName() + " no longer has the willpower to resist an opportunity to give " + weak.himHer() + "self over to the pleasure.  ");
+					w_append(w, t, blunt, "{c:mainName} likes both fighting and debauchery, so {c:heShe}'s obviously in, and " + weak.getMainName() + " no longer has the willpower to resist an opportunity to give " + weak.himHer() + "self over to the pleasure.  ");
 				} else {
-					w_append(w, t, evil.getMainName() + " is obviously up for some debauchery, and " + weak.getMainName() + " is eager to forget " + weak.hisHer() + " troubles and give " + weak.himHer() + "self over to the pleasure for awhile.  ");
+					w_append(w, t, evil, "{c:mainName} is obviously up for some debauchery, and " + weak.getMainName() + " is eager to forget " + weak.hisHer() + " troubles and give " + weak.himHer() + "self over to the pleasure for awhile.  ");
 				}
 			}
 			if (harmonious) {
@@ -45721,9 +45721,9 @@ public class Chosen implements Serializable {
 			} else if (hateful) {
 				w.append(t, "The plan succeeds, and while it wouldn't have been possible without the three of them working together, the hostility between them means that they have less fun than they otherwise would.  The Demon's cramped stomach forces them all to grind together, prompting plenty of annoyed jostling as they try to ignore each other and just cum.  They're all physically and mentally exhausted by the time it's over.");
 			} else if (blacksheep == null) {
-				w_append(w, t, beloved, "Once they get into the Demon's stomach, {c:mainName} finds " + beloved.himHer() + "self overwhelmed, both by the tentacles and by the other two Chosen jostling for position as they try to make love with " + beloved.himHer() + " without interacting with each other.  They're all exhausted by the time it's over.");
+				w_append(w, t, beloved, "Once they get into the Demon's stomach, {c:mainName} finds {c:himHer}self overwhelmed, both by the tentacles and by the other two Chosen jostling for position as they try to make love with {c:himHer} without interacting with each other.  They're all exhausted by the time it's over.");
 			} else {
-				w_append(w, t, blacksheep, "Once they get into the Demon's stomach, {c:mainName} is pushed to one side of the cavity to be molested by the tentacles on " + blacksheep.hisHer() + " own, while the other two Chosen pleasure each other on the other side, making love among the writhing appendages.  They're all exhausted by the time it's over.");
+				w_append(w, t, blacksheep, "Once they get into the Demon's stomach, {c:mainName} is pushed to one side of the cavity to be molested by the tentacles on {c:hisHer} own, while the other two Chosen pleasure each other on the other side, making love among the writhing appendages.  They're all exhausted by the time it's over.");
 			}
 			w.append(t, "  The Demon spits them out and then carries the civilians it had already captured back to the Demonic hive in order to turn them into breeders.\n\n");
 			nameDisplay[0] = cunning.mainName;
@@ -45789,7 +45789,7 @@ public class Chosen implements Serializable {
 			removedDISG = 50*1000*1000;
 			removedSHAM = 25*1000*1000;
 			addedEnergy = 45;
-			w_append(w, t, cunning.getMainName() + " is aware of the theory that Chosen can only be killed by other Chosen");
+			w_append(w, t, cunning, "{c:mainName} is aware of the theory that Chosen can only be killed by other Chosen");
 			if (cunning == evil) {
 				w_append(w, t, ", and " + cunning.heShe() + " has no qualms about using " + cunning.hisHer() + " team members to test it out.  " + blunt.getMainName() + " has made no secret of the fact that " + blunt.heShe() + " wants to die, while " + weak.getMainName() + " is eager to seize any chance at all to escape this painful life.  ");
 			} else if (cunning == weak) {
@@ -45799,11 +45799,11 @@ public class Chosen implements Serializable {
 			} else {
 				w_append(w, t, ", but it's not the kind of thing " + cunning.heShe() + "'ll be able to put into practice on " + cunning.hisHer() + " own.  Fortunately for " + cunning.himHer() + ", ");
 				if (evil == weak) {
-					w_append(w, t, blunt.getMainName() + " has made no secret of the fact that " + blunt.heShe() + " wants to die, and " + evil.getMainName() + " just wants to end " + evil.hisHer() + " own suffering by any means necessary.  ");
+					w_append(w, t, blunt, "{c:mainName} has made no secret of the fact that {c:heShe} wants to die, and " + evil.getMainName() + " just wants to end " + evil.hisHer() + " own suffering by any means necessary.  ");
 				} else if (evil == blunt) {
-					w_append(w, t, weak.getMainName() + " is eager to escape " + weak.hisHer() + " life of suffering, and " + evil.getMainName() + " sees it as a good excuse to vent " + evil.hisHer() + " frustrations even if it doesn't work.  ");
+					w_append(w, t, weak, "{c:mainName} is eager to escape {c:hisHer} life of suffering, and " + evil.getMainName() + " sees it as a good excuse to vent " + evil.hisHer() + " frustrations even if it doesn't work.  ");
 				} else {
-					w_append(w, t, weak.getMainName() + " is desperate for death to the point of hysteria, and " + evil.getMainName() + " figures that even if it doesn't work, it's a good chance to vent " + evil.hisHer() + " frustrations.  ");
+					w_append(w, t, weak, "{c:mainName} is desperate for death to the point of hysteria, and " + evil.getMainName() + " figures that even if it doesn't work, it's a good chance to vent " + evil.hisHer() + " frustrations.  ");
 				}
 			}
 			if (harmonious) {
@@ -45811,9 +45811,9 @@ public class Chosen implements Serializable {
 			} else if (hateful) {
 				w.append(t, "The hostility between the three Chosen quickly causes the effort to turn into genuine combat to the death, each of them being more interested in hurting the others than in actually granting them the death they want.");
 			} else if (blacksheep == null) {
-				w_append(w, t, beloved.getMainName() + " has a hard time convincing the others to attack " + beloved.himHer() + ", but " + beloved.heShe() + " feels much more hopeful after seeing just how close to dying " + beloved.heShe() + " can get with the combined powers of two Chosen attacking " + beloved.himHer() + ".");
+				w_append(w, t, beloved, "{c:mainName} has a hard time convincing the others to attack {c:himHer}, but {c:heShe} feels much more hopeful after seeing just how close to dying {c:heShe} can get with the combined powers of two Chosen attacking {c:himHer}.");
 			} else {
-				w_append(w, t, blacksheep, "At first, {c:mainName} is left on " + blacksheep.hisHer() + " own since the other two Chosen have little interest in helping " + blacksheep.himHer() + ".  But when their efforts fail to bear fruit, they soothe their disappointment by turning around and hitting " + blacksheep.himHer() + " with everything they have.");
+				w_append(w, t, blacksheep, "At first, {c:mainName} is left on {c:hisHer} own since the other two Chosen have little interest in helping {c:himHer}.  But when their efforts fail to bear fruit, they soothe their disappointment by turning around and hitting {c:himHer} with everything they have.");
 			}
 			nameDisplay[0] = cunning.mainName;
 			Project.changePortrait(cunning.convertGender(), cunning.type, false, false, w, nameDisplay, 0, Project.Emotion.FOCUS, Project.Emotion.NEUTRAL);
@@ -45878,7 +45878,7 @@ public class Chosen implements Serializable {
 			removedFEAR = 50*1000*1000;
 			removedPAIN = 25*1000*1000;
 			addedEnergy = 45;
-			w_append(w, t, cunning.getMainName() + " challenges the other two Chosen to a citywide alternate reality game featuring their fans");
+			w_append(w, t, cunning, "{c:mainName} challenges the other two Chosen to a citywide alternate reality game featuring their fans");
 			if (cunning == evil) {
 				w_append(w, t, " as an excuse to put people in painful and humiliating situations for " + cunning.hisHer() + " own amusement.  " + weak.getMainName() + " latches on to the idea as a way to win at something that doesn't rely on " + weak.hisHer() + " strength, and it also appeals to " + blunt.getMainName() + "'s competitive nature.  ");
 			} else if (cunning == weak) {
@@ -45888,11 +45888,11 @@ public class Chosen implements Serializable {
 			} else {
 				w_append(w, t, ", soothing " + cunning.hisHer() + " subconscious insecurity about how " + cunning.hisHer() + " own fanbase has shrunk.  ");
 				if (evil == weak) {
-					w_append(w, t, evil.getMainName() + " proposes some lewd, humiliating elements in order to give " + evil.himHer() + "self a chance to look down on others, and " + blunt.getMainName() + " accepts because of " + blunt.hisHer() + " competitive nature.  ");
+					w_append(w, t, evil, "{c:mainName} proposes some lewd, humiliating elements in order to give {c:himHer}self a chance to look down on others, and " + blunt.getMainName() + " accepts because of " + blunt.hisHer() + " competitive nature.  ");
 				} else if (evil == blunt) {
-					w_append(w, t, evil.getMainName() + " proposes some lewd, humiliating elements because " + evil.heShe() + " thinks they sound funny, and " + weak.getMainName() + " accepts because " + weak.heShe() + " doesn't want to be left out.  ");
+					w_append(w, t, evil, "{c:mainName} proposes some lewd, humiliating elements because {c:heShe} thinks they sound funny, and " + weak.getMainName() + " accepts because " + weak.heShe() + " doesn't want to be left out.  ");
 				} else {
-					w_append(w, t, evil.getMainName() + " proposes some lewd, humiliating elements because " + evil.heShe() + " thinks they sound funny, and " + weak.getMainName() + " accepts because " + weak.heShe() + " doesn't want to feel left out.  ");
+					w_append(w, t, evil, "{c:mainName} proposes some lewd, humiliating elements because {c:heShe} thinks they sound funny, and " + weak.getMainName() + " accepts because " + weak.heShe() + " doesn't want to feel left out.  ");
 				}
 			}
 			if (harmonious) {
@@ -45900,9 +45900,9 @@ public class Chosen implements Serializable {
 			} else if (hateful) {
 				w.append(t, "The hostility between the three Chosen is reflected in their followers, and it doesn't take long for the game to escalate to the point that several of the players are killed.");
 			} else if (blacksheep == null) {
-				w_append(w, t, beloved.getMainName() + " easily wins, less by virtue of " + beloved.hisHer() + " team and more because the other two Chosen instruct their followers to get increasingly vicious with each other to the point that several of the players are killed.");
+				w_append(w, t, beloved, "{c:mainName} easily wins, less by virtue of {c:hisHer} team and more because the other two Chosen instruct their followers to get increasingly vicious with each other to the point that several of the players are killed.");
 			} else {
-				w_append(w, t, blacksheep, "The victory conditions are quickly forgotten as {c:mainName} finds that the other two Chosen are more interested in hurting " + blacksheep.himHer() + " by ruining " + blacksheep.hisHer() + " fans' homes and lives.");
+				w_append(w, t, blacksheep, "The victory conditions are quickly forgotten as {c:mainName} finds that the other two Chosen are more interested in hurting {c:himHer} by ruining {c:hisHer} fans' homes and lives.");
 			}
 			nameDisplay[0] = cunning.mainName;
 			Project.changePortrait(cunning.convertGender(), cunning.type, false, false, w, nameDisplay, 0, Project.Emotion.NEUTRAL, Project.Emotion.FOCUS);
@@ -45966,7 +45966,7 @@ public class Chosen implements Serializable {
 			removedPAIN = Project.trillion;
 			removedSHAM = 500*Project.billion;
 			addedEnergy = 150;
-			w_append(w, t, cunning.getMainName() + " formulates a plan for all three Chosen to perform a coordinated strike on nearby military bases");
+			w_append(w, t, cunning, "{c:mainName} formulates a plan for all three Chosen to perform a coordinated strike on nearby military bases");
 			if (cunning == evil) {
 				w.append(t, ", with a particular focus on killing officers and other vital personnel.  It's easy to pressure " + weak.getMainName() + " into joining, but " + blunt.getMainName() + " has to be persuaded with a reminder of what will happen to the three of them once their Demonic pregnancies are revealed.  ");
 			} else if (cunning == weak) {
@@ -45978,9 +45978,9 @@ public class Chosen implements Serializable {
 				if (evil == weak) {
 					w.append(t, "Even so, " + evil.getMainName() + " is eager to cripple their future foes while they still have the chance, and even " + blunt.getMainName() + " agrees that this is their only option.  ");
 				} else if (evil == blunt) {
-					w_append(w, t, weak.getMainName() + "'s feelings are conflicted, too, but " + evil.getMainName() + " has enough bloodlust for the three of them, and in any case they all know that refusing to fight now would only be delaying the inevitable.  ");
+					w_append(w, t, weak, "{c:mainName}'s feelings are conflicted, too, but " + evil.getMainName() + " has enough bloodlust for the three of them, and in any case they all know that refusing to fight now would only be delaying the inevitable.  ");
 				} else {
-					w_append(w, t, weak.getMainName() + " is even worse, crying and shaking " + weak.hisHer() + " head as " + weak.heShe() + " tries to refuse to go along with it, but " + evil.getMainName() + " declares that " + evil.heShe() + "ll go alone if neither of them do, and that shames them into agreeing to fight.  ");
+					w_append(w, t, weak, "{c:mainName} is even worse, crying and shaking {c:hisHer} head as {c:heShe} tries to refuse to go along with it, but " + evil.getMainName() + " declares that " + evil.heShe() + "ll go alone if neither of them do, and that shames them into agreeing to fight.  ");
 				}
 			}
 			if (harmonious) {
@@ -45988,9 +45988,9 @@ public class Chosen implements Serializable {
 			} else if (hateful) {
 				w.append(t, "Even though they don't really care about each other, they recognize that they'll be better off if they work together.");
 			} else if (blacksheep == null) {
-				w_append(w, t, beloved.getMainName() + " hopes that being forced to work together like this will help the other two reconcile their differences.");
+				w_append(w, t, beloved, "{c:mainName} hopes that being forced to work together like this will help the other two reconcile their differences.");
 			} else {
-				w_append(w, t, blacksheep.getMainName() + " isn't happy about working with the other two, but " + blacksheep.heShe() + " recognizes that it's in " + blacksheep.hisHer() + " best interests as well.");
+				w_append(w, t, blacksheep, "{c:mainName} isn't happy about working with the other two, but {c:heShe} recognizes that it's in {c:hisHer} best interests as well.");
 			}
 			nameDisplay[0] = cunning.mainName;
 			Project.changePortrait(cunning.convertGender(), cunning.type, false, false, w, nameDisplay, 0, Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
@@ -46058,18 +46058,18 @@ public class Chosen implements Serializable {
 			addedEnergy = 150;
 			w.append(t, "Obeying your post-hypnotic suggestion, the three Chosen meet at an underground brothel to offer free sexual service to all patrons while your Thralls use the event to recruit willing attendees to the Demonic cause.  ");
 			if (cunning == evil) {
-				w_append(w, t, blunt.getMainName() + " is made to believe that it's a perfectly normal morale rally for the human side of the war, and " + weak.getMainName() + " easily succumbs to the pressure to join.  " + evil.getMainName() + " is the only one who gets an inkling that something isn't right, but " + evil.heShe() + "'s feeling good, so " + evil.heShe() + " quickly stops caring.  ");
+				w_append(w, t, blunt, "{c:mainName} is made to believe that it's a perfectly normal morale rally for the human side of the war, and " + weak.getMainName() + " easily succumbs to the pressure to join.  " + evil.getMainName() + " is the only one who gets an inkling that something isn't right, but " + evil.heShe() + "'s feeling good, so " + evil.heShe() + " quickly stops caring.  ");
 			} else if (cunning == weak) {
-				w_append(w, t, blunt.getMainName() + " is made to believe that it's a perfectly normal morale rally for the human side, while " + evil.getMainName() + " just needs to be convinced that having sex with random strangers was " + evil.hisHer() + " own idea.  " + weak.getMainName() + " is the only one who gets an inkling that something isn't right, but " + weak.heShe() + " still succumbs to the pressure to go along with what the others are doing.  ");
+				w_append(w, t, blunt, "{c:mainName} is made to believe that it's a perfectly normal morale rally for the human side, while " + evil.getMainName() + " just needs to be convinced that having sex with random strangers was " + evil.hisHer() + " own idea.  " + weak.getMainName() + " is the only one who gets an inkling that something isn't right, but " + weak.heShe() + " still succumbs to the pressure to go along with what the others are doing.  ");
 			} else if (cunning == blunt) {
-				w_append(w, t, evil.getMainName() + " is made to believe that it was " + evil.hisHer() + " own idea, and " + weak.getMainName() + " is easily pressured to go along with it.  " + blunt.getMainName() + " is the only one who gets an inkling that something is wrong, but " + blunt.hisHer() + " competitive spirit won't let " + blunt.himHer() + " be outdone.  ");
+				w_append(w, t, evil, "{c:mainName} is made to believe that it was {c:hisHer} own idea, and " + weak.getMainName() + " is easily pressured to go along with it.  " + blunt.getMainName() + " is the only one who gets an inkling that something is wrong, but " + blunt.hisHer() + " competitive spirit won't let " + blunt.himHer() + " be outdone.  ");
 			} else {
 				if (evil == weak) {
-					w_append(w, t, blunt.getMainName() + ", made to believe that this sort of thing is a perfectly normal activity at morale rallies for the human side, throws " + blunt.himHer() + "self into " + blunt.hisHer() + " task completely.  Despite " + evil.getMainName() + "'s selfishness and " + cunning.getMainName() + "'s vague inkling that something is wrong, they're both quickly swept up in " + blunt.hisHer() + " enthusiasm.  ");
+					w_append(w, t, blunt, "{c:mainName}, made to believe that this sort of thing is a perfectly normal activity at morale rallies for the human side, throws {c:himHer}self into {c:hisHer} task completely.  Despite " + evil.getMainName() + "'s selfishness and " + cunning.getMainName() + "'s vague inkling that something is wrong, they're both quickly swept up in {c:hisHer} enthusiasm.  ");
 				} else if (evil == blunt) {
-					w_append(w, t, weak.getMainName() + ", made to believe that this sort of thing is a perfectly normal activity at morale rallies for the human side, is determined to do " + weak.hisHer() + " best.  Meanwhile, " + evil.getMainName() + " just wants to feel good.  Even though " + cunning.getMainName() + " has an inkling that something is wrong, " + cunning.heShe() + "'s swept up in the moment along with the others.  ");
+					w_append(w, t, weak, "{c:mainName}, made to believe that this sort of thing is a perfectly normal activity at morale rallies for the human side, is determined to do {c:hisHer} best.  Meanwhile, " + evil.getMainName() + " just wants to feel good.  Even though " + cunning.getMainName() + " has an inkling that something is wrong, " + cunning.heShe() + "'s swept up in the moment along with the others.  ");
 				} else if (weak == blunt) {
-					w_append(w, t, weak.getMainName() + ", made to believe that this sort of thing is a perfectly normal activity at morale rallies for the human side, is determined to do " + weak.hisHer() + " best.  Meanwhile, " + evil.getMainName() + " is tempted with the delusion that it will help " + evil.himHer() + " rebuild " + evil.hisHer() + " fanbase.  Even though " + cunning.getMainName() + " has an inkling that something is wrong, " + cunning.heShe() + "'s swept up in the moment along with the others.  ");
+					w_append(w, t, weak, "{c:mainName}, made to believe that this sort of thing is a perfectly normal activity at morale rallies for the human side, is determined to do {c:hisHer} best.  Meanwhile, " + evil.getMainName() + " is tempted with the delusion that it will help " + evil.himHer() + " rebuild " + evil.hisHer() + " fanbase.  Even though " + cunning.getMainName() + " has an inkling that something is wrong, " + cunning.heShe() + "'s swept up in the moment along with the others.  ");
 				}
 			}
 			if (harmonious) {
@@ -46077,9 +46077,9 @@ public class Chosen implements Serializable {
 			} else if (hateful) {
 				w.append(t, "Even hypnotized, their hatred for each other rises to the surface, and they refuse to work together, instead each pleasuring clients in separate rooms.");
 			} else if (blacksheep == null) {
-				w_append(w, t, beloved, "The other two Chosen guard {c:mainName} jealously, hurrying to satisfy each guest so that no one gets to touch " + beloved.himHer() + " for long.");
+				w_append(w, t, beloved, "The other two Chosen guard {c:mainName} jealously, hurrying to satisfy each guest so that no one gets to touch {c:himHer} for long.");
 			} else {
-				w_append(w, t, blacksheep, "While {c:mainName} is forced to pleasure guests alone in " + blacksheep.hisHer() + " own room, the other two Chosen together offer threesomes in another.");
+				w_append(w, t, blacksheep, "While {c:mainName} is forced to pleasure guests alone in {c:hisHer} own room, the other two Chosen together offer threesomes in another.");
 			}
 			nameDisplay[0] = evil.mainName;
 			Project.changePortrait(evil.convertGender(), evil.type, false, false, w, nameDisplay, 0, Project.Emotion.LEWD, Project.Emotion.JOY);
@@ -46146,19 +46146,19 @@ public class Chosen implements Serializable {
 			removedDISG = 500*Project.billion;
 			addedEnergy = 150;
 			if (weak == cunning) {
-				w_append(w, t, weak, "Hopeful that the Demon Lord might be willing to grant death in exchange for all three of the Chosen offering their energy together, {c:mainName} begs the other two to join " + weak.himHer() + ".  " + evil.getMainName() + " is quick to accept, and while " + blunt.getMainName() + " is still conflicted, the fact that the others are doing it makes it easier for " + blunt.himHer() + " to justify it to " + blunt.himHer() + "self.  ");
+				w_append(w, t, weak, "Hopeful that the Demon Lord might be willing to grant death in exchange for all three of the Chosen offering their energy together, {c:mainName} begs the other two to join {c:himHer}.  " + evil.getMainName() + " is quick to accept, and while " + blunt.getMainName() + " is still conflicted, the fact that the others are doing it makes it easier for " + blunt.himHer() + " to justify it to " + blunt.himHer() + "self.  ");
 			} else if (weak == evil) {
-				w_append(w, t, weak.getMainName() + " is feeling too afraid of getting caught and punished for treason to offer " + weak.hisHer() + " energy to the Demon Lord alone, so " + weak.heShe() + " begs the other two to become " + weak.hisHer() + " accomplices.  " + blunt.getMainName() + " is reluctant at first, but when " + cunning.getMainName() + " points out that it may be their best chance to die, " + blunt.heShe() + " accepts.  ");
+				w_append(w, t, weak, "{c:mainName} is feeling too afraid of getting caught and punished for treason to offer {c:hisHer} energy to the Demon Lord alone, so {c:heShe} begs the other two to become {c:hisHer} accomplices.  " + blunt.getMainName() + " is reluctant at first, but when " + cunning.getMainName() + " points out that it may be their best chance to die, " + blunt.heShe() + " accepts.  ");
 			} else if (weak == blunt) {
-				w_append(w, t, weak, "Annoyed by {c:mainName}'s constant crying that " + weak.heShe() + " wants to kill " + weak.himHer() + "self, " + evil.getMainName() + " suggests that they offer their life energy to the Demon Lord together and see if they can actually do something about it.  " + cunning.getMainName() + " agrees that this is the rational course of action and comes along.  ");
+				w_append(w, t, weak, "Annoyed by {c:mainName}'s constant crying that {c:heShe} wants to kill {c:himHer}self, " + evil.getMainName() + " suggests that they offer their life energy to the Demon Lord together and see if they can actually do something about it.  " + cunning.getMainName() + " agrees that this is the rational course of action and comes along.  ");
 			} else {
-				w_append(w, t, weak, "Paralyzed by indecision, {c:mainName} delays until late in the night before heading to the Demonic hive to offer " + weak.hisHer() + " life energy to the Demon Lord.  " + weak.heShe() + " finds the others already there, ");
+				w_append(w, t, weak, "Paralyzed by indecision, {c:mainName} delays until late in the night before heading to the Demonic hive to offer {c:hisHer} life energy to the Demon Lord.  {c:heShe} finds the others already there, ");
 				if (cunning == evil) {
-					w_append(w, t, evil.getMainName() + " having settled on the same plan with much fewer guilty feelings.  " + blunt.getMainName() + " feels more conflicted, but " + blunt.heShe() + "'s already committed to dying.  ");
+					w_append(w, t, evil, "{c:mainName} having settled on the same plan with much fewer guilty feelings.  " + blunt.getMainName() + " feels more conflicted, but " + blunt.heShe() + "'s already committed to dying.  ");
 				} else if (cunning == blunt) {
-					w_append(w, t, cunning.getMainName() + " having already overcome " + cunning.hisHer() + " own guilty feelings.  " + evil.getMainName() + ", of course, never felt guilty about this in the first place.  ");
+					w_append(w, t, cunning, "{c:mainName} having already overcome {c:hisHer} own guilty feelings.  " + evil.getMainName() + ", of course, never felt guilty about this in the first place.  ");
 				} else if (evil == blunt) {
-					w_append(w, t, cunning.getMainName() + " having already reluctantly concluded that this plan offers the highest chance of success.  " + evil.getMainName() + " is less sure, but " + evil.heShe() + " doesn't have any better ideas.  ");
+					w_append(w, t, cunning, "{c:mainName} having already reluctantly concluded that this plan offers the highest chance of success.  " + evil.getMainName() + " is less sure, but " + evil.heShe() + " doesn't have any better ideas.  ");
 				}
 			}
 			if (harmonious) {
@@ -46236,19 +46236,19 @@ public class Chosen implements Serializable {
 			addedEnergy = 150;
 			w.append(t, "You offer the Chosen a one-night truce in exchange for all three of them performing together at a sort of concert in the heart of the Demonic hive");
 			if (evil == cunning) {
-				w_append(w, t, evil, ", and while {c:mainName} is suspicious of your motives, " + evil.heShe() + " knows that the risk to you is at least as great as the risk to them.  " + evil.HeShe() + " pressures " + weak.getMainName() + " to join with force of personality, then uses deft manipulation to recruit " + blunt.getMainName() + " as well.  ");
+				w_append(w, t, evil, ", and while {c:mainName} is suspicious of your motives, {c:heShe} knows that the risk to you is at least as great as the risk to them.  {c:HeShe} pressures " + weak.getMainName() + " to join with force of personality, then uses deft manipulation to recruit " + blunt.getMainName() + " as well.  ");
 			} else if (evil == weak) {
-				w_append(w, t, evil, ", and with {c:mainName}'s growing fears that humanity will turn on " + evil.himHer() + ", " + evil.heShe() + " quickly accepts the chance to get friendly with the other side.  " + cunning.getMainName() + " also accepts for the rare opportunity to examine an active hive from the inside, and " + cunning.heShe() + " in turn manages to convince " + blunt.getMainName() + " to join in order to seal the deal.  ");
+				w_append(w, t, evil, ", and with {c:mainName}'s growing fears that humanity will turn on {c:himHer}, {c:heShe} quickly accepts the chance to get friendly with the other side.  " + cunning.getMainName() + " also accepts for the rare opportunity to examine an active hive from the inside, and " + cunning.heShe() + " in turn manages to convince " + blunt.getMainName() + " to join in order to seal the deal.  ");
 			} else if (evil == blunt) {
-				w_append(w, t, evil, ", and {c:mainName} finds the notion so amusing that " + evil.heShe() + " accepts without hesitation.  " + cunning.getMainName() + " is also interested in the rare chance to examine an active hive from the inside, and the two of them together are easily able to pressure " + weak.getMainName() + " into coming along.  ");
+				w_append(w, t, evil, ", and {c:mainName} finds the notion so amusing that {c:heShe} accepts without hesitation.  " + cunning.getMainName() + " is also interested in the rare chance to examine an active hive from the inside, and the two of them together are easily able to pressure " + weak.getMainName() + " into coming along.  ");
 			} else {
-				w_append(w, t, evil, ", and {c:mainName} is quick to accept in hopes of finding a new audience to give " + evil.himHer() + " the respect " + evil.heShe() + " believes " + evil.heShe() + " deserves.  ");
+				w_append(w, t, evil, ", and {c:mainName} is quick to accept in hopes of finding a new audience to give {c:himHer} the respect {c:heShe} believes {c:heShe} deserves.  ");
 				if (cunning == weak) {
-					w_append(w, t, cunning.getMainName() + ", too, is so desperate for validation that " + cunning.heShe() + "'s willing to do this, and " + blunt.getMainName() + "'s pride won't let " + blunt.himHer() + " stay behind while the other two go.  ");
+					w_append(w, t, cunning, "{c:mainName}, too, is so desperate for validation that {c:heShe}'s willing to do this, and " + blunt.getMainName() + "'s pride won't let " + blunt.himHer() + " stay behind while the other two go.  ");
 				} else if (cunning == blunt) {
-					w_append(w, t, weak.getMainName() + " is hungry enough for praise and approval that it's easy to convince " + weak.himHer() + " to come along.  " + cunning.getMainName() + " is much more ambivalent, but " + cunning.heShe() + " is interested in taking the rare chance to examine an active Demonic hive from the inside.  ");
+					w_append(w, t, weak, "{c:mainName} is hungry enough for praise and approval that it's easy to convince {c:himHer} to come along.  " + cunning.getMainName() + " is much more ambivalent, but " + cunning.heShe() + " is interested in taking the rare chance to examine an active Demonic hive from the inside.  ");
 				} else if (weak == blunt) {
-					w_append(w, t, cunning.getMainName() + " is also interested, as much in being able to examine an active Demonic hive from the inside as " + cunning.heShe() + " is in the fame.  Meanwhile, " + weak.getMainName() + " is openly terrified of going so deep into hostile territory, but " + weak.heShe() + " folds under the pressure from " + weak.hisHer() + " allies.  ");
+					w_append(w, t, cunning, "{c:mainName} is also interested, as much in being able to examine an active Demonic hive from the inside as {c:heShe} is in the fame.  Meanwhile, " + weak.getMainName() + " is openly terrified of going so deep into hostile territory, but " + weak.heShe() + " folds under the pressure from " + weak.hisHer() + " allies.  ");
 				}
 			}
 			if (harmonious) {
@@ -46258,7 +46258,7 @@ public class Chosen implements Serializable {
 			} else if (blacksheep == null) {
 				w.append(t, "Competing for attention both from the audience and from " + beloved.getMainName() + ", the other two Chosen go to further and further extremes of depravity on the stage, willingly debasing themselves and providing entertainment and comfort to the enemy.");
 			} else {
-				w_append(w, t, blacksheep.getMainName() + " attracts a small audience for " + blacksheep.himHer() + "self, while the other two Chosen attract a larger one together, all three of them so intoxicated by their renewed popularity that they don't even question how they're willingly bolstering the morale of their enemies.");
+				w_append(w, t, blacksheep, "{c:mainName} attracts a small audience for {c:himHer}self, while the other two Chosen attract a larger one together, all three of them so intoxicated by their renewed popularity that they don't even question how they're willingly bolstering the morale of their enemies.");
 			}
 			nameDisplay[0] = blunt.mainName;
 			Project.changePortrait(blunt.convertGender(), blunt.type, false, false, w, nameDisplay, 0, Project.Emotion.JOY, Project.Emotion.FOCUS);
@@ -52061,7 +52061,7 @@ public class Chosen implements Serializable {
 					if (companion == null) {
 						w_append(w, t, "{hisHer} allies'");
 					} else {
-						w_append(w, t, companion.getMainName() + "'s");
+						w_append(w, t, companion, "{c:mainName}'s");
 					}
 					w_append(w, t, " situation results in {himHer} ");
 				} else if (morality > 33) {
@@ -52077,7 +52077,7 @@ public class Chosen implements Serializable {
 					if (companion == null) {
 						w.append(t, " knows that it's necessary to rely on the other Chosen.  With them ");
 					} else if (w.getRelationship(number, companion.getNumber()) > 0) {
-						w_append(w, t, companion, " cares about {c:mainName}.  With " + companion.himHer() + " ");
+						w_append(w, t, companion, " cares about {c:mainName}.  With {c:himHer} ");
 					} else {
 						w.append(t, " grudgingly cooperates with the other Chosen.  Noticing that " + companion.getMainName() + " is ");
 					}
@@ -59620,13 +59620,13 @@ public class Chosen implements Serializable {
 			} else {
 				if (innocence > 66) {
 					if (friends) {
-						w_append(w, t, motivator, "{mainName} doesn't like most people, but {heShe} does care about {c:mainName}, so {heShe} really doesn't like it when the Thralls attack " + motivator.himHer() + ".  ");
+						w_append(w, t, motivator, "{mainName} doesn't like most people, but {heShe} does care about {c:mainName}, so {heShe} really doesn't like it when the Thralls attack {c:himHer}.  ");
 					} else {
 						w_append(w, t, "{mainName} doesn't really care about rescuing people, but {heShe} does find the Thralls really annoying.  ");
 					}
 				} else if (innocence > 33) {
 					if (friends) {
-						w_append(w, t, motivator, "{mainName} feels like {c:mainName} belongs to {himHer}, so seeing what the Thralls are doing to " + motivator.himHer() + " is too much to tolerate.  ");
+						w_append(w, t, motivator, "{mainName} feels like {c:mainName} belongs to {himHer}, so seeing what the Thralls are doing to {c:himHer} is too much to tolerate.  ");
 					} else {
 						w_append(w, t, "{mainName} feels like rescuing other people is beneath {himHer}, but {heShe} still hates the Thralls from the bottom of {hisHer} heart.  ");
 					}
