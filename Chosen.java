@@ -244,6 +244,7 @@ public class Chosen implements Serializable {
 		} else {
 			s = s.replace("{" + pre + "bottomDesc}", bottomCover);
 		}
+		s = s.replace("{" + pre + "weapon}", weapon);
 		s = s.replace("{" + pre + "feetType}", feetType);
 		s = s.replace("{" + pre + "givenName}", givenName);
 		s = s.replace("{" + pre + "familyName}", familyName);
@@ -18997,15 +18998,15 @@ public class Chosen implements Serializable {
 		if (getEXPOLevel() == 0 || getEXPOLevel() == 1) {
 			if (getINJULevel() == 0) {
 				if (weapon.equals("boots") || weapon.equals("fists") || weapon.equals("claws") || weapon.equals("gauntlets") || customWeaponType.equals("part")) {
-					w_append(w, t, "{HeShe}'s fighting at full strength, {hisHer} " + weapon + " crackling with energy.  ");
+					w_append(w, t, "{HeShe}'s fighting at full strength, {hisHer} {weapon} crackling with energy.  ");
 				} else if (weapon.equals("spirits") || weapon.equals("monster") || customWeaponType.equals("command")) {
 					if (w.tickle()) {
-						w_append(w, t, "{HeShe}'s still full of energy, allowing {hisHer} " + weapon + " to do the fighting for {himHer}.  ");
+						w_append(w, t, "{HeShe}'s still full of energy, allowing {hisHer} {weapon} to do the fighting for {himHer}.  ");
 					} else {
-						w_append(w, t, "{HeShe}'s uninjured, allowing {hisHer} " + weapon + " to do the fighting for {himHer}.  ");
+						w_append(w, t, "{HeShe}'s uninjured, allowing {hisHer} {weapon} to do the fighting for {himHer}.  ");
 					}
 				} else {
-					w_append(w, t, "{HeShe} fights with a firm grip on {hisHer} " + weapon + ".  ");
+					w_append(w, t, "{HeShe} fights with a firm grip on {hisHer} {weapon}.  ");
 				}
 			} else if (getINJULevel() == 1) {
 				if (w.tickle()) {
@@ -28743,9 +28744,9 @@ public class Chosen implements Serializable {
 			}
 			String appearance = "";
 			if (weapon.equals("boots") || weapon.equals("gauntlets") || weapon.equals("fists") || weapon.equals("mace") || weapon.equals("claws") || weapon.equals("sword") || weapon.equals("greatsword") || weapon.equals("scythe")) {
-				appearance = "{hisHer} " + weapon + " dripping with blood";
+				appearance = "{hisHer} {weapon} dripping with blood";
 			} else if (weapon.equals("monster")) {
-				appearance = "{hisHer} " + weapon + " climbing in behind {himHer}, its claws dripping with blood";
+				appearance = "{hisHer} {weapon} climbing in behind {himHer}, its claws dripping with blood";
 			} else {
 				appearance = "blood spattering {hisHer} clothes";
 			}
@@ -29732,19 +29733,19 @@ public class Chosen implements Serializable {
 			} else if (weapon.equals("gauntlets") || weapon.equals("fists")) {
 				w_append(w, t, c, "ambushes {c:himHer} from behind and punches {c:himHer} in the back of the head");
 			} else if (weapon.equals("mace") || customWeaponType.equals("swing") || customWeaponType.equals("part")) {
-				w_append(w, t, c, "ambushes {c:himHer} from behind and strikes {c:himHer} in the back of the head with {c:hisHer} " + weapon);
+				w_append(w, t, c, "ambushes {c:himHer} from behind and strikes {c:himHer} in the back of the head with {c:hisHer} {weapon}");
 			} else if (weapon.equals("claws") || weapon.equals("sword") || weapon.equals("greatsword") || weapon.equals("scythe")) {
-				w_append(w, t, c, "charges out from a side alley and slashes {c:himHer} down with {hisHer} " + weapon);
+				w_append(w, t, c, "charges out from a side alley and slashes {c:himHer} down with {hisHer} {weapon}");
 			} else if (weapon.equals("revolver") || weapon.equals("pistols") || weapon.equals("rifle") || weapon.equals("bow") || customWeaponType.equals("shoot")) {
-				w_append(w, t, c, "emerges on a nearby rooftop and starts shooting {c:himHer} with {hisHer} " + weapon);
+				w_append(w, t, c, "emerges on a nearby rooftop and starts shooting {c:himHer} with {hisHer} {weapon}");
 			} else if (weapon.equals("shurikens")) {
-				w_append(w, t, c, "emerges on a nearby rooftop and flings a handful of " + weapon + " at {c:himHer}");
+				w_append(w, t, c, "emerges on a nearby rooftop and flings a handful of {weapon} at {c:himHer}");
 			} else if (weapon.equals("staff") || weapon.equals("spirits")) {
-				w_append(w, t, c, "emerges on a nearby rooftop and starts blasting {c:himHer} with {hisHer} " + weapon);
+				w_append(w, t, c, "emerges on a nearby rooftop and starts blasting {c:himHer} with {hisHer} {weapon}");
 			} else if (weapon.equals("monster")) {
 				w_append(w, t, c, "charges around the corner riding {hisHer} monster and violently pounces on {c:himHer}");
 			} else if (weapon.equals("command")) {
-				w_append(w, t, c, "emerges on a nearby rooftop and commands {hisHer} " + weapon + " to attack {c:himHer}");
+				w_append(w, t, c, "emerges on a nearby rooftop and commands {hisHer} {weapon} to attack {c:himHer}");
 			}
 			w_append(w, t, c, ".  {mainName} is already overall stronger than {c:mainName}, so with the element of surprise on {hisHer} side, the fight is decided with the first attack.\n\n");
 			c.say(t, "\"");
@@ -46931,13 +46932,13 @@ public class Chosen implements Serializable {
 				} else if (captureProgression == 2) {
 					w_append(w, t, "{mainName} ");
 					if (weapon.equals("revolver") || weapon.equals("pistols") || weapon.equals("rifle") || weapon.equals("shurikens") || weapon.equals("bow") || weapon.equals("staff") || customWeaponType.equals("shoot")) {
-						w_append(w, t, "tries to turn {himHer}self around so that {heShe} can land a clear shot on you with {hisHer} " + weapon);
+						w_append(w, t, "tries to turn {himHer}self around so that {heShe} can land a clear shot on you with {hisHer} {weapon}");
 					} else if (weapon.equals("spirits") || weapon.equals("monster") || customWeaponType.equals("command")) {
-						w_append(w, t, "tries to command {hisHer} " + weapon + " to attack you");
+						w_append(w, t, "tries to command {hisHer} {weapon} to attack you");
 					} else if (customWeaponType.equals("part")) {
-						w_append(w, t, "tries to gather energy in {hisHer} " + weapon);
+						w_append(w, t, "tries to gather energy in {hisHer} {weapon}");
 					} else {
-						w_append(w, t, "tries to swing {hisHer} " + weapon + " at you");
+						w_append(w, t, "tries to swing {hisHer} {weapon} at you");
 					}
 					w_append(w, t, ", but you stop {himHer} with your tongues around {hisHer} wrists, ankles, and neck, twisting them backward until {hisHer} joints start to pop.  ");
 					if (confidence > 66) {
@@ -52139,24 +52140,24 @@ public class Chosen implements Serializable {
 		surrounded = true;
 		w.setSurroundTarget(null);
 		if (weapon.equals("mace") || weapon.equals("sword") || weapon.equals("greatsword") || weapon.equals("scythe") || weapon.equals("revolver") || weapon.equals("rifle") || weapon.equals("bow") || weapon.equals("staff")) {
-			w_append(w, t, "{mainName}'s " + weapon + " is knocked out of {hisHer} hands and sent clattering down an alleyway.");
+			w_append(w, t, "{mainName}'s {weapon} is knocked out of {hisHer} hands and sent clattering down an alleyway.");
 		} else if (weapon.equals("boots") || weapon.equals("gauntlets")) {
-			w_append(w, t, "{mainName}'s " + weapon + " are pulled off and tossed away, leaving {himHer} with diminished physical capabilities.");
+			w_append(w, t, "{mainName}'s {weapon} are pulled off and tossed away, leaving {himHer} with diminished physical capabilities.");
 		} else if (weapon.equals("pistols")) {
-			w_append(w, t, "{mainName}'s " + weapon + " are pulled away, one-by-one, and tossed onto nearby rooftops.");
+			w_append(w, t, "{mainName}'s {weapon} are pulled away, one-by-one, and tossed onto nearby rooftops.");
 		} else if (weapon.equals("monster")) {
-			w_append(w, t, "{mainName} calls for {hisHer} " + weapon + "'s help, but it's too far away to hear.");
+			w_append(w, t, "{mainName} calls for {hisHer} {weapon}'s help, but it's too far away to hear.");
 		} else if (weapon.equals("fists") || weapon.equals("claws") || weapon.equals("shurikens") || weapon.equals("spirits") || customWeaponType.equals("part") || customWeaponType.equals("command")) {
 			w_append(w, t, "{mainName}'s concentration is broken, preventing {himHer} from ");
 			if (weapon.equals("fists") || customWeaponType.equals("part")) {
-				w_append(w, t, "empowering {hisHer} " + weapon + ".");
+				w_append(w, t, "empowering {hisHer} {weapon}.");
 			} else if (weapon.equals("shurikens")) {
-				w_append(w, t, "throwing {hisHer} " + weapon + ".");
+				w_append(w, t, "throwing {hisHer} {weapon}.");
 			} else {
-				w_append(w, t, "directing {hisHer} " + weapon + ".");
+				w_append(w, t, "directing {hisHer} {weapon}.");
 			}
 		} else {
-			w_append(w, t, "{mainName} is helpless to stop {hisHer} " + weapon + " from being taken and thrown some distance away.");
+			w_append(w, t, "{mainName} is helpless to stop {hisHer} {weapon} from being taken and thrown some distance away.");
 		}
 		if (w.getTechs()[31].isOwned() == false) {
 			printSurroundedLine(t, w, thisAttack);
@@ -59478,25 +59479,25 @@ public class Chosen implements Serializable {
 		w.append(t, "\n\n");
 		if (getHATELevel() < 4) {
 			if (weapon.equals("boots") || weapon.equals("gauntlets") || weapon.equals("fists") || weapon.equals("mace") || customWeaponType.equals("swing")) {
-				w_append(w, t, "{mainName} sends the Thralls flying with {hisHer} " + weapon);
+				w_append(w, t, "{mainName} sends the Thralls flying with {hisHer} {weapon}");
 			} else if (weapon.equals("claws") || weapon.equals("sword") || weapon.equals("greatsword") || weapon.equals("scythe")) {
-				w_append(w, t, "{mainName} slices a wide swath through the Thralls with {hisHer} " + weapon);
+				w_append(w, t, "{mainName} slices a wide swath through the Thralls with {hisHer} {weapon}");
 			} else if (weapon.equals("revolver") || weapon.equals("pistols") || weapon.equals("rifle") || customWeaponType.equals("shoot")) {
-				w_append(w, t, "Shots from {mainName}'s " + weapon + " tear through the Thralls");
+				w_append(w, t, "Shots from {mainName}'s {weapon} tear through the Thralls");
 			} else if (weapon.equals("shurikens")) {
-				w_append(w, t, "{mainName} flings countless " + weapon + " into the Thralls");
+				w_append(w, t, "{mainName} flings countless {weapon} into the Thralls");
 			} else if (weapon.equals("bow")) {
 				w_append(w, t, "{mainName} fires a steady stream of arrows into the Thralls");
 			} else if (weapon.equals("spirits")) {
-				w_append(w, t, "{mainName} sends {hisHer} " + weapon + " to drain the life from the crowd of Thralls");
+				w_append(w, t, "{mainName} sends {hisHer} {weapon} to drain the life from the crowd of Thralls");
 			} else if (weapon.equals("staff")) {
 				w_append(w, t, "Blasts of energy from {mainName}'s staff rain down among the Thralls");
 			} else if (weapon.equals("monster")) {
-				w_append(w, t, "{mainName} sends {hisHer} " + weapon + " to rampage through the crowd of Thralls");
+				w_append(w, t, "{mainName} sends {hisHer} {weapon} to rampage through the crowd of Thralls");
 			} else if (customWeaponType.equals("command")) {
-				w_append(w, t, "{mainName} sends {hisHer} " + weapon + " into the Thralls");
+				w_append(w, t, "{mainName} sends {hisHer} {weapon} into the Thralls");
 			} else if (customWeaponType.equals("part")) {
-				w_append(w, t, "{mainName} empowers {hisHer} " + weapon + " and attacks the crowd of Thralls");
+				w_append(w, t, "{mainName} empowers {hisHer} {weapon} and attacks the crowd of Thralls");
 			}
 			if (getHATELevel() == 0) {
 				w_append(w, t, ", and while {hisHer} attacks are usually less lethal against other humans, they grow more and more deadly as {hisHer} negative emotions build.");
@@ -59508,7 +59509,7 @@ public class Chosen implements Serializable {
 				w_append(w, t, ", flecks of pitch-black Demonic energy surrounding {himHer} as {heShe} screams in rage.");
 			}
 		} else {
-			w_append(w, t, "Not even bothering to use {hisHer} " + weapon + ", {mainName} sends out waves of pitch-black Demonic energy with every swing of {hisHer} arm, striking countless Thralls dead on the spot.");
+			w_append(w, t, "Not even bothering to use {hisHer} {weapon}, {mainName} sends out waves of pitch-black Demonic energy with every swing of {hisHer} arm, striking countless Thralls dead on the spot.");
 		}
 		w.append(t, "\n\n");
 		damage(t, w, new int[]{0, 0, 0, 0, -101, 0, 0, 0});
@@ -59531,7 +59532,7 @@ public class Chosen implements Serializable {
 			if (getPLEALevel() < 1) {
 				w_append(w, t, "{mainName} regards {hisHer} victims with cold indifference.  ");
 			} else if (getPLEALevel() > 1) {
-				w_append(w, t, "With intense sexual arousal clouding {hisHer} mind, {mainName} finds {himHer}self experiencing a sadistic joy at using {hisHer} " + weapon + " to kill people.  ");
+				w_append(w, t, "With intense sexual arousal clouding {hisHer} mind, {mainName} finds {himHer}self experiencing a sadistic joy at using {hisHer} {weapon} to kill people.  ");
 			} else {
 				w_append(w, t, "{mainName}'s cheeks are red with equal parts arousal and anger.  ");
 			}
@@ -59959,17 +59960,17 @@ public class Chosen implements Serializable {
 			if (weapon.equals("boots")) {
 				w_append(w, t, "{mainName} directs several high kicks at the air");
 			} else if (weapon.equals("gauntlets") || weapon.equals("fists") || weapon.equals("mace") || weapon.equals("claws") || weapon.equals("sword") || weapon.equals("greatsword") || weapon.equals("scythe") || customWeaponType.equals("swing")) {
-				w_append(w, t, "{mainName} swings {hisHer} " + weapon + " in wide arcs as {heShe} twirls rapidly");
+				w_append(w, t, "{mainName} swings {hisHer} {weapon} in wide arcs as {heShe} twirls rapidly");
 			} else if (weapon.equals("revolver") || weapon.equals("pistols") || weapon.equals("rifle") || weapon.equals("shurikens") || weapon.equals("bow") || customWeaponType.equals("shoot")) {
-				w_append(w, t, "{mainName} brandishes {hisHer} " + weapon + " and poses on a rooftop");
+				w_append(w, t, "{mainName} brandishes {hisHer} {weapon} and poses on a rooftop");
 			} else if (weapon.equals("spirits") || weapon.equals("staff")) {
-				w_append(w, t, "{mainName} creates a powerful wind around {himHer}self with {hisHer} " + weapon);
+				w_append(w, t, "{mainName} creates a powerful wind around {himHer}self with {hisHer} {weapon}");
 			} else if (weapon.equals("monster")) {
-				w_append(w, t, "{mainName} stands atop {hisHer} " + weapon + " and strikes a pose");
+				w_append(w, t, "{mainName} stands atop {hisHer} {weapon} and strikes a pose");
 			} else if (customWeaponType.equals("command")) {
-				w_append(w, t, "{mainName} commands {hisHer} " + weapon + " to draw attention to {himHer} as {heShe} poses on a rooftop");
+				w_append(w, t, "{mainName} commands {hisHer} {weapon} to draw attention to {himHer} as {heShe} poses on a rooftop");
 			} else if (customWeaponType.equals("part")) {
-				w_append(w, t, "{mainName} fills {hisHer} " + weapon + " with glowing energy to draw attention as {heShe} poses on a rooftop");
+				w_append(w, t, "{mainName} fills {hisHer} {weapon} with glowing energy to draw attention as {heShe} poses on a rooftop");
 			}
 			if (modest == false) {
 				if (currentEXPO > 999999) {
@@ -60535,21 +60536,21 @@ public class Chosen implements Serializable {
 			}
 		} else if (thisAttack == 1) {
 			if (weapon.equals("boots") || weapon.equals("gauntlets") || weapon.equals("fists") || weapon.equals("mace")) {
-				w_append(w, t, "{mainName} pounds {hisHer} " + weapon + " into the ground");
+				w_append(w, t, "{mainName} pounds {hisHer} {weapon} into the ground");
 			} else if (weapon.equals("claws") || weapon.equals("sword") || weapon.equals("greatsword") || weapon.equals("scythe")) {
-				w_append(w, t, "{mainName} slices the air with {hisHer} " + weapon);
+				w_append(w, t, "{mainName} slices the air with {hisHer} {weapon}");
 			} else if (weapon.equals("revolver") || weapon.equals("pistols") || weapon.equals("rifle") || customWeaponType.equals("swing") || customWeaponType.equals("shoot")) {
-				w_append(w, t, "{mainName} brandishes {hisHer} " + weapon);
+				w_append(w, t, "{mainName} brandishes {hisHer} {weapon}");
 			} else if (weapon.equals("shurikens")) {
-				w_append(w, t, "{mainName} brandishes {hisHer} " + weapon);
+				w_append(w, t, "{mainName} brandishes {hisHer} {weapon}");
 			} else if (weapon.equals("bow")) {
-				w_append(w, t, "{mainName} nocks an arrow into {hisHer} " + weapon);
+				w_append(w, t, "{mainName} nocks an arrow into {hisHer} {weapon}");
 			} else if (weapon.equals("spirits") || customWeaponType.equals("command")) {
-				w_append(w, t, "{mainName} gathers {hisHer} " + weapon + " around {himHer}");
+				w_append(w, t, "{mainName} gathers {hisHer} {weapon} around {himHer}");
 			} else if (weapon.equals("staff") || customWeaponType.equals("part")) {
-				w_append(w, t, "{mainName} gathers a cloud of energy around {hisHer} " + weapon);
+				w_append(w, t, "{mainName} gathers a cloud of energy around {hisHer} {weapon}");
 			} else if (weapon.equals("monster")) {
-				w_append(w, t, "{mainName}'s " + weapon + " roars");
+				w_append(w, t, "{mainName}'s {weapon} roars");
 			}
 			w.append(t, " in a demonstration of power, showing everyone that it's too soon to give up hope");
 			if (detonated > 0) {
@@ -61815,25 +61816,25 @@ public class Chosen implements Serializable {
 			}
 		} else if (thisAttack == 1) {
 			if (weapon.equals("boots") || weapon.equals("gauntlets") || weapon.equals("fists") || weapon.equals("mace") || customWeaponType.equals("swing")) {
-				w_append(w, t, "{mainName} slams {hisHer} " + weapon + " into the Demons");
+				w_append(w, t, "{mainName} slams {hisHer} {weapon} into the Demons");
 			} else if (weapon.equals("claws") || weapon.equals("sword") || weapon.equals("greatsword") || weapon.equals("scythe")) {
-				w_append(w, t, "{mainName} slices through the Demons with {hisHer} " + weapon);
+				w_append(w, t, "{mainName} slices through the Demons with {hisHer} {weapon}");
 			} else if (weapon.equals("revolver") || weapon.equals("pistols") || weapon.equals("rifle") || customWeaponType.equals("shoot")) {
-				w_append(w, t, "Shots from {mainName}'s " + weapon + " tear through the Demons");
+				w_append(w, t, "Shots from {mainName}'s {weapon} tear through the Demons");
 			} else if (weapon.equals("shurikens")) {
-				w_append(w, t, "{mainName} flings countless " + weapon + " into the Demons");
+				w_append(w, t, "{mainName} flings countless {weapon} into the Demons");
 			} else if (weapon.equals("bow")) {
-				w_append(w, t, "{mainName} fires a steady stream of arrows from {hisHer} " + weapon);
+				w_append(w, t, "{mainName} fires a steady stream of arrows from {hisHer} {weapon}");
 			} else if (weapon.equals("spirits")) {
 				w_append(w, t, "Demons begin collapsing as they fall victim to the curse of {mainName}'s spirits");
 			} else if (weapon.equals("staff")) {
 				w_append(w, t, "Blasts of energy from {mainName}'s staff rain down among the Demons");
 			} else if (weapon.equals("monster")) {
-				w_append(w, t, "{mainName}'s " + weapon + " rampages through the Demons");
+				w_append(w, t, "{mainName}'s {weapon} rampages through the Demons");
 			} else if (customWeaponType.equals("command")) {
-				w_append(w, t, "{mainName} sends {hisHer} " + weapon + " into the Demons");
+				w_append(w, t, "{mainName} sends {hisHer} {weapon} into the Demons");
 			} else if (customWeaponType.equals("part")) {
-				w_append(w, t, "{mainName} empowers {hisHer} " + weapon + " and attacks the Demons");
+				w_append(w, t, "{mainName} empowers {hisHer} {weapon} and attacks the Demons");
 			}
 			w_append(w, t, ", enhanced by the power of {hisHer} purity");
 			if (slaughtered > 0) {
@@ -68924,13 +68925,13 @@ public class Chosen implements Serializable {
 			corruptTransformation(t, w);
 			w.append(t, "\n\n");
 			if (weapon.equals("boots") || weapon.equals("scythe") || weapon.equals("greatsword") || weapon.equals("sword") || weapon.equals("gauntlets") || weapon.equals("mace") || weapon.equals("claws") || customWeaponType.equals("swing")) {
-				w_append(w, t, "{mainName} jumps off the rooftop, " + weapon + " materializing as {heShe} falls, and then starts swinging at the surrounding Demons as soon as {heShe} hits the ground!");
+				w_append(w, t, "{mainName} jumps off the rooftop, {weapon} materializing as {heShe} falls, and then starts swinging at the surrounding Demons as soon as {heShe} hits the ground!");
 			} else if (weapon.equals("revolver") || weapon.equals("staff") || weapon.equals("bow") || weapon.equals("rifle") || weapon.equals("pistols") || customWeaponType.equals("shoot")) {
-				w_append(w, t, "{mainName} holds out {hisHer} hands to catch {hisHer} materializing " + weapon + ", then starts shooting down at the Demons from {hisHer} rooftop perch!");
+				w_append(w, t, "{mainName} holds out {hisHer} hands to catch {hisHer} materializing {weapon}, then starts shooting down at the Demons from {hisHer} rooftop perch!");
 			} else if (weapon.equals("spirits") || weapon.equals("monster") || customWeaponType.equals("command")) {
-				w_append(w, t, "{mainName} points down at the Demons, materializing {hisHer} " + weapon + " which {heShe} immediately sends down to attack!");
+				w_append(w, t, "{mainName} points down at the Demons, materializing {hisHer} {weapon} which {heShe} immediately sends down to attack!");
 			} else if (weapon.equals("fists") || weapon.equals("shurikens") || customWeaponType.equals("part")) {
-				w_append(w, t, "{mainName} gathers {hisHer} power in {hisHer} " + weapon + ", then launches {hisHer} attack!");
+				w_append(w, t, "{mainName} gathers {hisHer} power in {hisHer} {weapon}, then launches {hisHer} attack!");
 			}
 		} else if (accessory.equals("none")) {
 			String topDesc = topCover;
@@ -68974,15 +68975,15 @@ public class Chosen implements Serializable {
 			}
 			w.append(t, "\n\n");
 			if (customWeaponType.equals("swing")) {
-				w_append(w, t, "{mainName} jumps off the rooftop, " + weapon + " materializing as {heShe} falls, and then starts swinging at the surrounding Demons as soon as {heShe} hits the ground!");
+				w_append(w, t, "{mainName} jumps off the rooftop, {weapon} materializing as {heShe} falls, and then starts swinging at the surrounding Demons as soon as {heShe} hits the ground!");
 			} else if (customWeaponType.equals("shoot")) {
-				w_append(w, t, "{mainName} holds out {hisHer} hands to catch {hisHer} materializing " + weapon + ", then starts shooting down at the Demons from {hisHer} rooftop perch!");
+				w_append(w, t, "{mainName} holds out {hisHer} hands to catch {hisHer} materializing {weapon}, then starts shooting down at the Demons from {hisHer} rooftop perch!");
 			} else if (customWeaponType.equals("command")) {
-				w_append(w, t, "{mainName} points down at the Demons, materializing {hisHer} " + weapon + " which {heShe} immediately sends down to attack!");
+				w_append(w, t, "{mainName} points down at the Demons, materializing {hisHer} {weapon} which {heShe} immediately sends down to attack!");
 			} else if (customWeaponType.equals("part")) {
-				w_append(w, t, "{mainName} gathers {hisHer} power in {hisHer} " + weapon + ", then launches {hisHer} attack!");
+				w_append(w, t, "{mainName} gathers {hisHer} power in {hisHer} {weapon}, then launches {hisHer} attack!");
 			} else {
-				w_append(w, t, "{mainName} readies {hisHer} " + weapon + ", then leaps down from the rooftops!");
+				w_append(w, t, "{mainName} readies {hisHer} {weapon}, then leaps down from the rooftops!");
 			}
 		} else {
 			if (innocence > 75) {
