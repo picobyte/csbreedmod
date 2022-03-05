@@ -212,12 +212,14 @@ public class Chosen implements Serializable {
 			s = s.replaceAll("\\{" + pre + "(?:([Hh]i[ms])Hers?|([hH]e)She)\\}", "$1$2");
 			s = s.replace("{" + pre + "hole}", "anus");
 			s = s.replace("{" + pre + "organ}", "penis");
+			s = s.replace("{" + pre + "chest}", "chest");
 		} else {
 			s = s.replaceAll("\\{" + pre + "([Hh])i[ms]H(ers?)\\}", "$1$2");
 			s = s.replace("{" + pre +"heShe}", "she");
 			s = s.replace("{" + pre + "HeShe}", "She");
 			s = s.replace("{" + pre + "hole}", "pussy");
 			s = s.replace("{" + pre + "organ}", "clit");
+			s = s.replace("{" + pre + "chest}", "breasts");
 		}
 		if (topCover.equals("crop")) {
 			s = s.replace("{" + pre + "topDesc}", "crop top");
@@ -35001,11 +35003,7 @@ public class Chosen implements Serializable {
 							w_append(w, t, "{mainName}'s bare breasts heave with {hisHer} uncontrollable screams of pleasure");
 						}
 					} else {
-						if (gender.equals("male")) {
-							w_append(w, t, "{mainName}'s orgasmic spasms emphasize {hisHer} bare chest and fully erect nipples");
-						} else {
-							w_append(w, t, "{mainName}'s orgasmic spasms emphasize {hisHer} bare breasts and fully erect nipples");
-						}
+						 w_append(w, t, "{mainName}'s orgasmic spasms emphasize {hisHer} bare {chest} and fully erect nipples");
 					}
 					//w_append(w, t, ", and the remaining scraps of {hisHer} {bottomDesc} do nothing to hide {hisHer} pussy from view.  ");
 					if (bottomCover.equals("skirt")) {
@@ -35427,11 +35425,7 @@ public class Chosen implements Serializable {
 							w_append(w, t, "{mainName}'s bare breasts heave with {hisHer} uncontrollable screams of pleasure, ");
 						}
 					} else {
-						if (gender.equals("male")) {
-							w_append(w, t, "{mainName}'s orgasmic spasms emphasize {hisHer} bare chest and fully erect nipples, ");
-						} else {
-							w_append(w, t, "{mainName}'s orgasmic spasms emphasize {hisHer} bare breasts and fully erect nipples, ");
-						}
+						 w_append(w, t, "{mainName}'s orgasmic spasms emphasize {hisHer} bare {chest} and fully erect nipples, ");
 					}
 					//w_append(w, t, ", and the remaining scraps of {hisHer} {bottomDesc} do nothing to hide {hisHer} pussy from view.  ");
 					if (bottomCover.equals("skirt")) {
@@ -47147,11 +47141,7 @@ public class Chosen implements Serializable {
 				if (captureProgression == 1) {
 					w.append(t, "Thin, strong tentacles work their way ");
 					if (currentEXPO > 999999) {
-						if (gender.equals("male")) {
-							w_append(w, t, "around {mainName}'s chest");
-						} else {
-							w_append(w, t, "around {mainName}'s breasts");
-						}
+						 w_append(w, t, "around {mainName}'s {chest}");
 					} else {
 						w_append(w, t, "under {mainName}'s {topDesc}");
 					}
@@ -56781,11 +56771,7 @@ public class Chosen implements Serializable {
 						w_append(w, t, "{mainName}'s bare breasts heave with {hisHer} uncontrollable screams of pleasure, ");
 					}
 				} else {
-					if (gender.equals("male")) {
-						w_append(w, t, "{mainName}'s orgasmic spasms emphasize {hisHer} bare chest and fully erect nipples, ");
-					} else {
-						w_append(w, t, "{mainName}'s orgasmic spasms emphasize {hisHer} bare breasts and fully erect nipples, ");
-					}
+					 w_append(w, t, "{mainName}'s orgasmic spasms emphasize {hisHer} bare {chest} and fully erect nipples, ");
 				}
 				//w_append(w, t, ", and the remaining scraps of {hisHer} {bottomDesc} do nothing to hide {hisHer} pussy from view.  ");
 				if (bottomCover.equals("skirt")) {
@@ -58094,11 +58080,7 @@ public class Chosen implements Serializable {
 					w_append(w, t, "{mainName}'s bare breasts heave with {hisHer} uncontrollable screams of pleasure");
 				}
 			} else {
-				if (gender.equals("male")) {
-					w_append(w, t, "{mainName}'s orgasmic spasms emphasize {hisHer} bare chest and fully erect nipples");
-				} else {
-					w_append(w, t, "{mainName}'s orgasmic spasms emphasize {hisHer} bare breasts and fully erect nipples");
-				}
+				 w_append(w, t, "{mainName}'s orgasmic spasms emphasize {hisHer} bare {chest} and fully erect nipples");
 			}
 			//w_append(w, t, ", and the remaining scraps of {hisHer} {bottomDesc} do nothing to hide {hisHer} pussy from view.  ");
 			if (bottomCover.equals("skirt")) {
