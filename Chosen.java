@@ -2788,9 +2788,9 @@ public class Chosen implements Serializable {
 					}
 				} else {
 					if (w.tickle()) {
-						w_append(w, t, " in a desperate effort not to look so weak.  {HeShe} still can't stop {himHer}self from whimpering as they {hisHer} ");
+						w_append(w, t, " in a desperate effort not to look so weak.  {HeShe} still can't stop {himHer}self from whimpering as they spread {hisHer} ");
 					} else {
-						w_append(w, t, " in a desperate effort not to look so weak.  {HeShe} still can't stop {himHer}self from whimpering in pain as they {hisHer} ");
+						w_append(w, t, " in a desperate effort not to look so weak.  {HeShe} still can't stop {himHer}self from whimpering in pain as they spread {hisHer} ");
 					}
 				}
 				if (gender.equals("male")) {
