@@ -256,10 +256,12 @@ public class Chosen implements Serializable {
 			s = s.replace("{exhaution}", "exhaution");
 			s = s.replace("{exhausted}", "exhausted");
 			s = s.replace("{discomfort}", "discomfort");
+			s = s.replace("{criesOutInPain}", "cries out");
 		} else {
 			s = s.replace("{exhaution}", "pain");
 			s = s.replace("{exhausted}", "badly hurt");
 			s = s.replace("{discomfort}", "pain");
+			s = s.replace("{criesOutInPain}", "cries out in pain");
 		}
 		Boolean friendly = w.getRelationship(number, c.getNumber()) >= 0;
 		if (friendly) {
@@ -13623,7 +13625,7 @@ public class Chosen implements Serializable {
 						} else {
 							if (gender.equals("female")) {
 								if (c.getDignity() > 66) {
-									w_append(w, t, c, "Even though {c:mainName} is trying to be strong, {c:heShe} can't suppress a shiver of fear when {c:heShe} sees up-close what's happening to {mainName}, and {c:heShe} cries out in pain when {c:heShe} feels a Thralls' cock forcing its way into {c:hisHer} own anus.  ");
+									w_append(w, t, c, "Even though {c:mainName} is trying to be strong, {c:heShe} can't suppress a shiver of fear when {c:heShe} sees up-close what's happening to {mainName}, and {c:heShe} {criesOutInPain} when {c:heShe} feels a Thralls' cock forcing its way into {c:hisHer} own anus.  ");
 								} else if (c.getDignity() > 33) {
 									w_append(w, t, c, "{c:mainName} is pushed down on {c:hisHer} hands and knees face-to-face with {mainName}, and {c:heShe}'s so stunned by the up-close view of the other Chosen's miserable state that {c:heShe} screams in pained surprise when one of the Thralls abruptly forces his cock into {c:hisHer} ass.  ");
 								} else {
@@ -13631,7 +13633,7 @@ public class Chosen implements Serializable {
 								}
 							} else {
 								if (c.getDignity() > 66) {
-									w_append(w, t, c, "Even though {c:mainName} is trying to be strong, {c:heShe} can't suppress a shiver of fear when {c:heShe} sees up-close what's happening to {mainName}, and {c:heShe} cries out in pain when {c:heShe} feels a Thralls' cock forcing its way into {c:hisHer} own anus.  The Thralls press {c:hisHer} body against {mainName}'s, their crotches grinding together, but ");
+									w_append(w, t, c, "Even though {c:mainName} is trying to be strong, {c:heShe} can't suppress a shiver of fear when {c:heShe} sees up-close what's happening to {mainName}, and {c:heShe} {criesOutInPain} when {c:heShe} feels a Thralls' cock forcing its way into {c:hisHer} own anus.  The Thralls press {c:hisHer} body against {mainName}'s, their crotches grinding together, but ");
 									if (getINJULevel() >= 3 && aVirg == false && w.tickle().equals(false) && gender.equals("male")) {
 										w_append(w, t, "{mainName}'s penis is forced limp by its bindings");
 									} else {
@@ -15263,7 +15265,7 @@ public class Chosen implements Serializable {
 								w_append(w, t, " - it's enjoyable enough that {heShe} can almost ignore the Thrall fucking {hisHer} own ass.  ");
 							}
 							if (getPLEALevel() < 3 || cVirg) {
-								w_append(w, t, "{HeShe} cries out in pain and surprise at the abrupt feeling of ");
+								w_append(w, t, "{HeShe} {criesOutInPain} and surprise at the abrupt feeling of ");
 							} else {
 								w_append(w, t, "{HeShe} cries out abruptly in orgasm at the feeling of ");
 							}
@@ -15321,7 +15323,7 @@ public class Chosen implements Serializable {
 								w_append(w, t, " - it's enjoyable enough that {heShe} can almost ignore the Thrall fucking {hisHer} own ass.  ");
 							}
 							if (getPLEALevel() < 3 || cVirg) {
-								w_append(w, t, "{HeShe} cries out in pain and surprise at the abrupt feeling of ");
+								w_append(w, t, "{HeShe} {criesOutInPain} and surprise at the abrupt feeling of ");
 							} else {
 								w_append(w, t, "{HeShe} cries out abruptly in orgasm at the feeling of ");
 							}
@@ -34386,7 +34388,7 @@ public class Chosen implements Serializable {
 						} else if (confidence > 33) {
 							w_append(w, t, "{HeShe} tries to resist the tentacles groping {hisHer} body, but they're strong enough to overpower {himHer}, twisting {hisHer} arms and choking {hisHer} neck every time {heShe} squirms too much.");
 						} else {
-							w_append(w, t, "{HeShe} gasps with shock at how strong the tentacles are, then cries out in pain as they twist {hisHer} limbs to the breaking point.  {HeShe} can't resist at all as they begin probing between {hisHer} legs.");
+							w_append(w, t, "{HeShe} gasps with shock at how strong the tentacles are, then {criesOutInPain} as they twist {hisHer} limbs to the breaking point.  {HeShe} can't resist at all as they begin probing between {hisHer} legs.");
 						}
 					}
 				} else if (w.getBodyStatus()[6]) {
