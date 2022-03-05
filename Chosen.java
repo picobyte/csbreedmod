@@ -252,12 +252,21 @@ public class Chosen implements Serializable {
 		w.append(t, replace_tags(s, ""));
 	}
 	private void w_append(WorldState w, JTextPane t, Chosen c, String s) {
-        Boolean friendly = w.getRelationship(number, c.getNumber()) >= 0;
+		if (w.tickle()) {
+			s = s.replace("{exhaution}", "exhaution");
+			s = s.replace("{exhausted}", "exhausted");
+			s = s.replace("{discomfort}", "discomfort");
+		} else {
+			s = s.replace("{exhaution}", "pain");
+			s = s.replace("{exhausted}", "badly hurt");
+			s = s.replace("{discomfort}", "pain");
+		}
+		Boolean friendly = w.getRelationship(number, c.getNumber()) >= 0;
 		if (friendly) {
 			s = s.replace("{friendRival}", "friend");
 		} else {
 			s = s.replace("{friendRival}", "rival");
-        }
+		}
 		w_append(w, t, c.replace_tags(s, "c:"));
 	}
 	private void w_append(WorldState w, JTextPane t, Forsaken f, String s) {
@@ -1585,11 +1594,7 @@ public class Chosen implements Serializable {
 				if (getINJULevel() < 1) {
 					w_append(w, t, "With {hisHer} disturbed state of mind, {hisHer} body is deprived of its usual magical protection.");
 				} else if (getINJULevel() > 1) {
-					if (w.tickle()) {
-						w_append(w, t, "{HeShe}'s far too exhausted to stop {hisHer} attackers from doing as they please.");
-					} else {
-						w_append(w, t, "{HeShe}'s far too badly hurt to stop {hisHer} attackers from doing as they please.");
-					}
+					 w_append(w, t, "{HeShe}'s far too {exhausted} to stop {hisHer} attackers from doing as they please.");
 				} else {
 					if (w.tickle()) {
 						w_append(w, t, "{HeShe}'s barely able to keep {hisHer} composure, let alone actually stop {hisHer} attackers from doing as they please.");
@@ -1699,11 +1704,7 @@ public class Chosen implements Serializable {
 					if (getINJULevel() < 3) {
 						w.append(t, ".  ");
 					} else if (getINJULevel() > 3) {
-						if (w.tickle()) {
-							w_append(w, t, ".  {HeShe}'s too exhausted to do anything but twitch and moan.  ");
-						} else {
-							w_append(w, t, ".  {HeShe}'s too badly hurt to do anything but twitch and moan.  ");
-						}
+						 w_append(w, t, ".  {HeShe}'s too {exhausted} to do anything but twitch and moan.  ");
 					} else {
 						if (w.tickle()) {
 							w_append(w, t, ".  Already exhausted and gasping for breath, {heShe} can't afford to waste the energy to fight it.  ");
@@ -1734,11 +1735,7 @@ public class Chosen implements Serializable {
 					if (getINJULevel() < 3) {
 						w.append(t, ".  ");
 					} else if (getINJULevel() > 3) {
-						if (w.tickle()) {
-							w_append(w, t, ".  {HeShe}'s too exhausted to do anything but unwillingly milk the semen from {hisHer} attacker.  ");
-						} else {
-							w_append(w, t, ".  {HeShe}'s too badly hurt to do anything but unwillingly milk the semen from {hisHer} attacker.  ");
-						}
+						 w_append(w, t, ".  {HeShe}'s too {exhausted} to do anything but unwillingly milk the semen from {hisHer} attacker.  ");
 					} else {
 						if (w.tickle()) {
 							w_append(w, t, ".  Already exhausted and gasping for breath, {heShe} can't afford to waste the energy to fight it.  ");
@@ -2735,11 +2732,7 @@ public class Chosen implements Serializable {
 				if (confidence > 66) {
 					w_append(w, t, "but {hisHer} defiant manner falters at the feeling of the Thralls spreading {hisHer} ");
 				} else if (confidence > 33) {
-					if (w.tickle()) {
-						w_append(w, t, "but {heShe} can't resist crying out in discomfort as the Thralls reach down and spread {hisHer} ");
-					} else {
-						w_append(w, t, "but {heShe} can't resist crying out in pain as the Thralls reach down and spread {hisHer} ");
-					}
+					 w_append(w, t, "but {heShe} can't resist crying out in {discomfort} as the Thralls reach down and spread {hisHer} ");
 				} else {
 					w_append(w, t, "but {hisHer} limbs seize up and {hisHer} eyes shoot open as {heShe} feels the Thralls spread {hisHer} ");
 				}
@@ -2985,17 +2978,9 @@ public class Chosen implements Serializable {
 						w_append(w, t, "{heShe} screams with disgust, desperately trying to shift away.");
 					} else if (innocence > 33) {
 						if (gender.equals("male")) {
-							if (w.tickle()) {
-								w_append(w, t, "{heShe} winces in discomfort at the rough treatment.");
-							} else {
-								w_append(w, t, "{heShe} winces in pain at the rough treatment.");
-							}
+							 w_append(w, t, "{heShe} winces in {discomfort} at the rough treatment.");
 						} else {
-							if (w.tickle()) {
-								w_append(w, t, "{heShe} winces, both in discomfort at the rough treatment and in fear at getting pregnant");
-							} else {
-								w_append(w, t, "{heShe} winces, both in pain at the rough treatment and in fear at getting pregnant");
-							}
+							 w_append(w, t, "{heShe} winces, both in {discomfort} at the rough treatment and in fear at getting pregnant");
 						}
 					} else {
 						w_append(w, t, "{heShe} spits in his face.");
@@ -3109,11 +3094,7 @@ public class Chosen implements Serializable {
 							w_append(w, t, "{mainName} thrashes with discomfort, {hisHer} voice coming out in pained gasps.");
 						}
 					} else {
-						if (w.tickle()) {
-							w_append(w, t, "{mainName} releases a sob of discomfort, glaring resentfully down at him.");
-						} else {
-							w_append(w, t, "{mainName} releases a sob of pain, glaring resentfully down at him.");
-						}
+						 w_append(w, t, "{mainName} releases a sob of {discomfort}, glaring resentfully down at him.");
 					}
 				}
 			} else {
@@ -3174,17 +3155,9 @@ public class Chosen implements Serializable {
 					if (confidence > 66) {
 						w_append(w, t, "{mainName} pretends to cooperate long enough that they release {hisHer} arms, then frantically tries to escape - only for the Thralls to pin {himHer} down and force their own fingers inside anyway.");
 					} else if (confidence > 33) {
-						if (w.tickle()) {
-							w_append(w, t, "{mainName} complies, wincing in discomfort and glaring back at the cameras with pure hatred in {hisHer} eyes.");
-						} else {
-							w_append(w, t, "{mainName} complies, wincing in pain and glaring back at the cameras with pure hatred in {hisHer} eyes.");
-						}
+						 w_append(w, t, "{mainName} complies, wincing in {discomfort} and glaring back at the cameras with pure hatred in {hisHer} eyes.");
 					} else {
-						if (w.tickle()) {
-							w_append(w, t, "{mainName} complies, gently and hesitantly at first, but when the Thralls threaten to take over for {himHer}, {heShe} pushes {hisHer} fingers in much deeper, wincing in discomfort as {heShe} forces {himHer}self open for the cameras.");
-						} else {
-							w_append(w, t, "{mainName} complies, gently and hesitantly at first, but when the Thralls threaten to take over for {himHer}, {heShe} pushes {hisHer} fingers in much deeper, wincing in pain as {heShe} forces {himHer}self open for the cameras.");
-						}
+						 w_append(w, t, "{mainName} complies, gently and hesitantly at first, but when the Thralls threaten to take over for {himHer}, {heShe} pushes {hisHer} fingers in much deeper, wincing in {discomfort} as {heShe} forces {himHer}self open for the cameras.");
 					}
 				}
 			}
@@ -15964,11 +15937,7 @@ public class Chosen implements Serializable {
 				if (getINJULevel() < 1) {
 					w_append(w, t, "With {hisHer} disturbed state of mind, {hisHer} body is deprived of its usual magical protection.");
 				} else if (getINJULevel() > 1) {
-					if (w.tickle()) {
-						w_append(w, t, "{HeShe}'s far too exhausted to stop {hisHer} attackers from doing as they please.");
-					} else {
-						w_append(w, t, "{HeShe}'s far too badly hurt to stop {hisHer} attackers from doing as they please.");
-					}
+					 w_append(w, t, "{HeShe}'s far too {exhausted} to stop {hisHer} attackers from doing as they please.");
 				} else {
 					if (w.tickle()) {
 						w_append(w, t, "{HeShe}'s barely able to keep {hisHer} composure, let alone actually stop {hisHer} attackers from doing as they please.");
@@ -16069,11 +16038,7 @@ public class Chosen implements Serializable {
 				if (getINJULevel() < 3) {
 					w.append(t, ".  ");
 				} else if (getINJULevel() > 3) {
-					if (w.tickle()) {
-						w_append(w, t, ".  {HeShe}'s too exhausted to do anything but let {himHer}self be fucked.  ");
-					} else {
-						w_append(w, t, ".  {HeShe}'s too badly hurt to do anything but let {himHer}self be fucked.  ");
-					}
+					 w_append(w, t, ".  {HeShe}'s too {exhausted} to do anything but let {himHer}self be fucked.  ");
 				} else {
 					if (w.tickle()) {
 						w_append(w, t, ".  Already exhausted and gasping for breath, {heShe} can't afford to waste the energy to fight it.  ");
@@ -17517,11 +17482,7 @@ public class Chosen implements Serializable {
 				if (confidence > 66) {
 					w_append(w, t, "in {hisHer} stubbornness, {heShe}'s already pushed {hisHer} body far past its limit.");
 				} else if (confidence > 33) {
-					if (w.tickle()) {
-						w_append(w, t, "{heShe}'s just too exhausted to move.");
-					} else {
-						w_append(w, t, "{heShe}'s just too badly hurt to move.");
-					}
+					 w_append(w, t, "{heShe}'s just too {exhausted} to move.");
 				} else {
 					if (w.tickle()) {
 						w_append(w, t, "{heShe} quickly gives up with an exhausted sob.");
@@ -18144,11 +18105,7 @@ public class Chosen implements Serializable {
 				if (getINJULevel() < 1) {
 					w_append(w, t, "With {hisHer} disturbed state of mind, {hisHer} body is deprived of its usual magical protection.");
 				} else if (getINJULevel() > 1) {
-					if (w.tickle()) {
-						w_append(w, t, "{HeShe}'s far too exhausted to stop {hisHer} attackers from doing as they please.");
-					} else {
-						w_append(w, t, "{HeShe}'s far too badly hurt to stop {hisHer} attackers from doing as they please.");
-					}
+					 w_append(w, t, "{HeShe}'s far too {exhausted} to stop {hisHer} attackers from doing as they please.");
 				} else {
 					if (w.tickle()) {
 						w_append(w, t, "{HeShe}'s barely able to keep {hisHer} composure, let alone actually stop {hisHer} attackers from doing as they please.");
@@ -18249,11 +18206,7 @@ public class Chosen implements Serializable {
 				if (getINJULevel() < 3) {
 					w.append(t, ".  ");
 				} else if (getINJULevel() > 3) {
-					if (w.tickle()) {
-						w_append(w, t, ".  {HeShe}'s too exhausted to do anything but unwillingly milk the semen from {hisHer} attacker.  ");
-					} else {
-						w_append(w, t, ".  {HeShe}'s too badly hurt to do anything but unwillingly milk the semen from {hisHer} attacker.  ");
-					}
+					 w_append(w, t, ".  {HeShe}'s too {exhausted} to do anything but unwillingly milk the semen from {hisHer} attacker.  ");
 				} else {
 					if (w.tickle()) {
 						w_append(w, t, ".  Already exhausted and gasping for breath, {heShe} can't afford to waste the energy to fight it.  ");
@@ -35516,11 +35469,7 @@ public class Chosen implements Serializable {
 					if (getINJULevel() < 2) {
 						w_append(w, t, "{HeShe} moans softly with each breath");
 					} else if (getINJULevel() > 2) {
-						if (w.tickle()) {
-							w_append(w, t, "{HisHer} moans of exhaustion begin to take on a pleasured undertone");
-						} else {
-							w_append(w, t, "{HisHer} moans of pain begin to take on a pleasured undertone");
-						}
+						 w_append(w, t, "{HisHer} moans of {exhaustion} begin to take on a pleasured undertone");
 					} else {
 						if (w.tickle()) {
 							w_append(w, t, "{HisHer} tense expression melts into a lewd smile");
@@ -35736,11 +35685,7 @@ public class Chosen implements Serializable {
 						if (getINJULevel() < 1) {
 							w_append(w, t, "no matter how hard {heShe} fights, it's impossible to completely fend off the pleasure.");
 						} else if (getINJULevel() > 1) {
-							if (w.tickle()) {
-								w_append(w, t, "{heShe}'s far too exhausted to fend off the assault.");
-							} else {
-								w_append(w, t, "{heShe}'s far too badly hurt to fend off the assault.");
-							}
+							 w_append(w, t, "{heShe}'s far too {exhausted} to fend off the assault.");
 						} else {
 							if (w.tickle()) {
 								w_append(w, t, "{hisHer} growing tiredness and distraction prevent {himHer} from fending off the assault.");
@@ -35910,31 +35855,15 @@ public class Chosen implements Serializable {
 							} else {
 								if (w.getBodyStatus()[6] == false || w.getBodyStatus()[26]) {
 									if (gender.equals("female")) {
-										if (w.tickle()) {
-											w_append(w, t, "amounts to nothing, as {heShe}'s too exhausted to stop the tentacles from coaxing out an orgasm.");
-										} else {
-											w_append(w, t, "amounts to nothing, as {heShe}'s too badly hurt to stop the tentacles from coaxing out an orgasm.");
-										}
+										 w_append(w, t, "amounts to nothing, as {heShe}'s too {exhausted} to stop the tentacles from coaxing out an orgasm.");
 									} else {
-										if (w.tickle()) {
-											w_append(w, t, "amounts to nothing, as {heShe}'s too exhausted to stop the tentacles from milking an agonizingly sweet orgasm out of {hisHer} cock.");
-										} else {
-											w_append(w, t, "amounts to nothing, as {heShe}'s too badly hurt to stop the tentacles from milking an agonizingly sweet orgasm out of {hisHer} cock.");
-										}
+										 w_append(w, t, "amounts to nothing, as {heShe}'s too {exhausted} to stop the tentacles from milking an agonizingly sweet orgasm out of {hisHer} cock.");
 									}
 								} else {
 									if (gender.equals("female")) {
-										if (w.tickle()) {
-											w_append(w, t, "amounts to nothing, as {heShe}'s too exhausted to stop the slime's rhythmic movements from coaxing out an orgasm.");
-										} else {
-											w_append(w, t, "amounts to nothing, as {heShe}'s too badly hurt to stop the slime's rhythmic movements from coaxing out an orgasm.");
-										}
+										 w_append(w, t, "amounts to nothing, as {heShe}'s too {exhausted} to stop the slime's rhythmic movements from coaxing out an orgasm.");
 									} else {
-										if (w.tickle()) {
-											w_append(w, t, "amounts to nothing, as {heShe}'s too exhausted to stop the slime's rhythmic movements from milking an agonizingly sweet orgasm out of {hisHer} cock.");
-										} else {
-											w_append(w, t, "amounts to nothing, as {heShe}'s too badly hurt to stop the slime's rhythmic movements from milking an agonizingly sweet orgasm out of {hisHer} cock.");
-										}
+										 w_append(w, t, "amounts to nothing, as {heShe}'s too {exhausted} to stop the slime's rhythmic movements from milking an agonizingly sweet orgasm out of {hisHer} cock.");
 									}
 								}
 							}
@@ -56815,11 +56744,7 @@ public class Chosen implements Serializable {
 				if (getINJULevel() < 1) {
 					w_append(w, t, "no matter how hard {heShe} fights, it's impossible to completely fend off the pleasure.");
 				} else if (getINJULevel() > 1) {
-					if (w.tickle()) {
-						w_append(w, t, "{heShe}'s far too exhausted to fend off the assault.");
-					} else {
-						w_append(w, t, "{heShe}'s far too badly hurt to fend off the assault.");
-					}
+					 w_append(w, t, "{heShe}'s far too {exhausted} to fend off the assault.");
 				} else {
 					if (w.tickle()) {
 						w_append(w, t, "{hisHer} growing tiredness and distraction prevent {himHer} from fending off the assault.");
@@ -59127,11 +59052,7 @@ public class Chosen implements Serializable {
 			if (getINJULevel() < 2) {
 				w_append(w, t, "{HeShe} moans softly with each breath");
 			} else if (getINJULevel() > 2) {
-				if (w.tickle()) {
-					w_append(w, t, "{HisHer} moans of exhaustion begin to take on a pleasured undertone");
-				} else {
-					w_append(w, t, "{HisHer} moans of pain begin to take on a pleasured undertone");
-				}
+				 w_append(w, t, "{HisHer} moans of {exhaustion} begin to take on a pleasured undertone");
 			} else {
 				if (w.tickle()) {
 					w_append(w, t, "{HisHer} tense expression melts into a lewd smile");
@@ -61483,11 +61404,7 @@ public class Chosen implements Serializable {
 				if (getINJULevel() < 2) {
 					w_append(w, t, "{HeShe} moans softly with each breath");
 				} else if (getINJULevel() > 2) {
-					if (w.tickle()) {
-						w_append(w, t, "{HisHer} moans of exhaustion begin to take on a pleasured undertone");
-					} else {
-						w_append(w, t, "{HisHer} moans of pain begin to take on a pleasured undertone");
-					}
+					 w_append(w, t, "{HisHer} moans of {exhaustion} begin to take on a pleasured undertone");
 				} else {
 					if (w.tickle()) {
 						w_append(w, t, "{HisHer} tense expression melts into a lewd smile");
