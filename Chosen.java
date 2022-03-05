@@ -219,7 +219,8 @@ public class Chosen implements Serializable {
 			s = s.replace("{" + pre + "assFolds}", "ass");
 			s = s.replace("{" + pre + "bowelsWomb}", "bowels");
 			s = s.replace("{" + pre + "penisBelly}", "penis");
-		} else {
+			s = s.replace("{" + pre + "penisVagina}", "penis");
+		} else if (gender.equals("female")) {
 			s = s.replaceAll("\\{" + pre + "([Hh])i[ms]H(ers?)\\}", "$1$2");
 			s = s.replace("{" + pre +"heShe}", "she");
 			s = s.replace("{" + pre + "HeShe}", "She");
@@ -231,7 +232,26 @@ public class Chosen implements Serializable {
 			s = s.replace("{" + pre + "assFolds}", "folds");
 			s = s.replace("{" + pre + "bowelsWomb}", "womb");
 			s = s.replace("{" + pre + "penisBelly}", "belly");
-		}
+			s = s.replace("{" + pre + "penisVagina}", "vagina");
+		} else {
+			s = s.replace("{" + pre + "hisHer}", hisHer());
+			s = s.replace("{" + pre + "himHer}", himHer());
+			s = s.replace("{" + pre + "hisHers}", hisHers());
+			s = s.replace("{" + pre +"heShe}", heShe());
+			s = s.replace("{" + pre + "HisHer}", HisHer());
+			s = s.replace("{" + pre + "HimHer}", HimHer());
+			s = s.replace("{" + pre + "HisHers}", HisHers());
+			s = s.replace("{" + pre + "HeShe}", HeShe());
+			s = s.replace("{" + pre + "hole}", "pussy");
+			s = s.replace("{" + pre + "organ}", "penis");
+			s = s.replace("{" + pre + "chest}", "breasts");
+			s = s.replace("{" + pre + "buttSlit}", "slit");
+			s = s.replace("{" + pre + "assPussy}", "pussy");
+			s = s.replace("{" + pre + "assFolds}", "folds");
+			s = s.replace("{" + pre + "bowelsWomb}", "womb");
+			s = s.replace("{" + pre + "penisBelly}", "belly");
+			s = s.replace("{" + pre + "penisVagina}", "hermaphroditic genitals");
+        }
 		if (topCover.equals("crop")) {
 			s = s.replace("{" + pre + "topDesc}", "crop top");
 		} else if (topCover.equals("strips")) {
@@ -2569,13 +2589,7 @@ public class Chosen implements Serializable {
 						w_append(w, t, "{HisHer} genitals, pussy and penis both, are completely uncovered and visible to the spectators and their cameras.  ");
 					}
 				} else {
-					if (gender.equals("female")) {
-						w_append(w, t, "{HeShe} tries to tell {himHer}self that there's nothing to be ashamed of, but having so many people see {hisHer} bared vagina is incredibly demeaning.  ");
-					} else if (gender.equals("male")) {
-						w_append(w, t, "{HeShe} tries to tell {himHer}self that there's nothing to be ashamed of, but having so many people see {hisHer} bared penis is incredibly demeaning.  ");
-					} else {
-						w_append(w, t, "{HeShe} tries to tell {himHer}self that there's nothing to be ashamed of, but having so many people see {hisHer} hermaphroditic genitals is incredibly demeaning.  ");
-					}
+					w_append(w, t, "{HeShe} tries to tell {himHer}self that there's nothing to be ashamed of, but having so many people see {hisHer} bared {penisVagina} is incredibly demeaning.  ");
 				}
 			} else {
 				if (innocence > 66) {
@@ -3888,10 +3902,6 @@ public class Chosen implements Serializable {
 					}
 					w_append(w, t, "To push {himHer} even further, one of the Thralls ");
 				} else {
-					String hole = "pussy";
-					if (gender.equals("male")) {
-						hole = "asshole";
-					}
 					if (morality > 66) {
 						w_append(w, t, "With {mainName}'s Sexual Barrier already broken, one of the Thralls is able to step forward and start violating {hisHer} {hole} in front of everyone.  ");
 					} else if (morality > 33) {
