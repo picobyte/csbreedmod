@@ -218,6 +218,7 @@ public class Chosen implements Serializable {
 			s = s.replace("{" + pre + "assPussy}", "ass");
 			s = s.replace("{" + pre + "assFolds}", "ass");
 			s = s.replace("{" + pre + "bowelsWomb}", "bowels");
+			s = s.replace("{" + pre + "penisBelly}", "penis");
 		} else {
 			s = s.replaceAll("\\{" + pre + "([Hh])i[ms]H(ers?)\\}", "$1$2");
 			s = s.replace("{" + pre +"heShe}", "she");
@@ -229,6 +230,7 @@ public class Chosen implements Serializable {
 			s = s.replace("{" + pre + "assPussy}", "pussy");
 			s = s.replace("{" + pre + "assFolds}", "folds");
 			s = s.replace("{" + pre + "bowelsWomb}", "womb");
+			s = s.replace("{" + pre + "penisBelly}", "belly");
 		}
 		if (topCover.equals("crop")) {
 			s = s.replace("{" + pre + "topDesc}", "crop top");
@@ -3786,13 +3788,9 @@ public class Chosen implements Serializable {
 	public void DoubleSodomize(JTextPane t, JPanel p, JFrame f, WorldState w, Chosen c) {
 		Boolean anal = (gender.equals("male") == false || (getHATELevel() >= 3 && vVirg == false));
 		Boolean vaginal = gender.equals("male") == false && getHATELevel() >= 3 && vVirg == false;
-		String abused = "penis";
 		String screaming = "screaming";
 		if (w.tickle()) {
 			screaming = "laughing";
-		}
-		if (gender.equals("female")) {
-			abused = "belly";
 		}
 		String otherAbused = "cock";
 		if (c.getGender().equals("female")) {
@@ -3990,7 +3988,7 @@ public class Chosen implements Serializable {
 						if (w.tickle()) {
 							w_append(w, t, c, ", {c:heShe} hopes it will distract the Thralls from all the tickling.  ");
 						} else {
-							w_append(w, t, c, ", {c:heShe}'s desperate to distract the Thralls from abusing {hisHer} " + abused + ".  ");
+							w_append(w, t, c, ", {c:heShe}'s desperate to distract the Thralls from abusing {hisHer} {penisBelly}.  ");
 						}
 						w_append(w, t, c, "{c:mainName} is so embarrassed {c:heShe} can barely move {c:hisHer} mouth, while {mainName} is so proactive about taking cocks down {hisHer} throat that ");
 						if (getEXPOLevel() < 3) {
@@ -4062,7 +4060,7 @@ public class Chosen implements Serializable {
 						if (w.tickle()) {
 							w_append(w, t, c, "{c:mainName} is almost grateful to have something to muffle {c:hisHer} shameful laughter at being tickled.  ");
 						} else {
-							w_append(w, t, c, "{c:mainName} is almost grateful to have something to muffle {c:hisHer} pitful cries of pain at the abuse to {c:hisHer} " + abused + ".  ");
+							w_append(w, t, c, "{c:mainName} is almost grateful to have something to muffle {c:hisHer} pitful cries of pain at the abuse to {c:hisHer} {penisBelly}.  ");
 						}
 						if (vaginal) {
 							w_append(w, t, "The Thralls around {mainName} get the same idea, savagely thrusting into {hisHer} pussy, ass, and mouth all at once as they ");
@@ -4100,7 +4098,7 @@ public class Chosen implements Serializable {
 						if (w.tickle()) {
 							w_append(w, t, " and poke {hisHer} sensitive armpits, still vulnerable due to {hisHer} hands being cuffed above {hisHer} head.  ");
 						} else {
-							w_append(w, t, " and kick {hisHer} already-bruised " + abused + ".  ");
+							w_append(w, t, " and kick {hisHer} already-bruised {penisBelly}.  ");
 						}
 						w.append(t, "Meanwhile, ");
 						if (vaginal) {
@@ -4116,7 +4114,7 @@ public class Chosen implements Serializable {
 						if (w.tickle()) {
 							w_append(w, t, ", {mainName} is caught off-guard when {hisHer} own open-mouthed laughter allows a Thrall to force a cock down {hisHer} throat.  ");
 						} else {
-							w_append(w, t, ", {mainName} is caught off-guard when a Thrall kicks {hisHer} " + abused + ", then uses {hisHer} cry of pain as an opening to force a cock down {hisHer} throat.  ");
+							w_append(w, t, ", {mainName} is caught off-guard when a Thrall kicks {hisHer} {penisBelly}, then uses {hisHer} cry of pain as an opening to force a cock down {hisHer} throat.  ");
 						}
 						if (vaginal) {
 							w_append(w, t, "With this, {heShe}'s being triple-penetrated, and the Thrall's ");
@@ -4154,7 +4152,7 @@ public class Chosen implements Serializable {
 						if (w.tickle()) {
 							w_append(w, t, "{HeShe} falters when one of the Thralls sneaks up behind {himHer} and starts tickling {hisHer} armpits");
 						} else {
-							w_append(w, t, "{HeShe} falters when one of the Thralls lands a solid kick at {hisHer} " + abused);
+							w_append(w, t, "{HeShe} falters when one of the Thralls lands a solid kick at {hisHer} {penisBelly}");
 						}
 						if (anal) {
 							w_append(w, t, ", allowing another to thrust especially deeply into {hisHer} asshole while several more start masturbating inches away from {hisHer} clenched teeth.");
@@ -4165,7 +4163,7 @@ public class Chosen implements Serializable {
 						if (w.tickle()) {
 							w_append(w, t, "In between pained gasps of laughter, {mainName} manages to curse, threaten, and abuse the Thralls ");
 						} else {
-							w_append(w, t, "Even while being repeatedly kicked in the " + abused + ", {mainName} manages to curse, threaten, and insult the surrounding Thralls ");
+							w_append(w, t, "Even while being repeatedly kicked in the {penisBelly}, {mainName} manages to curse, threaten, and insult the surrounding Thralls ");
 						}
 						w_append(w, t, "right up until they force a steel ring gag into {hisHer} mouth.  One of them rams his cock inside, and {mainName} can only moan around it ");
 						if (getEXPOLevel() < 3) {
@@ -4216,7 +4214,7 @@ public class Chosen implements Serializable {
 						if (w.tickle()) {
 							w_append(w, t, "{mainName} is so distracted by the tickling");
 						} else {
-							w_append(w, t, "{mainName} is so distracted by the Thralls kicking {hisHer} already-bruised " + abused);
+							w_append(w, t, "{mainName} is so distracted by the Thralls kicking {hisHer} already-bruised {penisBelly}");
 						}
 						if (vaginal) {
 							w_append(w, t, " that it's hard to be disgusted by the semen filling {hisHer} womb and bowels.  ");
@@ -4246,7 +4244,7 @@ public class Chosen implements Serializable {
 						if (w.tickle()) {
 							w_append(w, t, ", some content themselves by tickling {himHer} more");
 						} else {
-							w_append(w, t, ", some content themselves by kicking {hisHer} already-bruised " + abused + " even more");
+							w_append(w, t, ", some content themselves by kicking {hisHer} already-bruised {penisBelly} even more");
 						}
 						w_append(w, t, ", but more of them prefer to masturbate at {himHer}");
 						if (getEXPOLevel() < 3) {
@@ -4404,7 +4402,7 @@ public class Chosen implements Serializable {
 						if (w.tickle()) {
 							w_append(w, t, "the tickling under {hisHer} raised arms.");
 						} else {
-							w_append(w, t, "the constant pummeling of {hisHer} " + abused + ".");
+							w_append(w, t, "the constant pummeling of {hisHer} {penisBelly}.");
 						}
 					} else {
 						if (w.tickle()) {
@@ -4489,7 +4487,7 @@ public class Chosen implements Serializable {
 						if (w.tickle()) {
 							w_append(w, t, ", though it quickly comes out as a gasp of laughter as the Thralls continue tickling {himHer}.  ");
 						} else {
-							w_append(w, t, ", though it quickly comes out as a gasp of pain as the Thralls continue to beat on {hisHer} bruised " + abused + ".  ");
+							w_append(w, t, ", though it quickly comes out as a gasp of pain as the Thralls continue to beat on {hisHer} bruised {penisBelly}.  ");
 						}
 						if (getEXPOLevel() < 3) {
 							w_append(w, t, "{HeShe}'s able to ignore the Thralls pulling at {hisHer} {bottomDesc}");
@@ -4552,7 +4550,7 @@ public class Chosen implements Serializable {
 						if (w.tickle()) {
 							w.append(t, "the incessant tickling.");
 						} else {
-							w_append(w, t, c, "the constant kicks and punches delivered to {c:hisHer} " + abused + ".");
+							w_append(w, t, c, "the constant kicks and punches delivered to {c:hisHer} {penisBelly}.");
 						}
 					} else {
 						if (vaginal) {
@@ -4571,7 +4569,7 @@ public class Chosen implements Serializable {
 						if (w.tickle()) {
 							w_append(w, t, ", {heShe} even stops struggling against the urge to laugh as {heShe}'s tickled.  ");
 						} else {
-							w_append(w, t, ", {heShe} even manages to endure the Thralls kicking {hisHer} bruised " + abused + ".  ");
+							w_append(w, t, ", {heShe} even manages to endure the Thralls kicking {hisHer} bruised {penisBelly}.  ");
 						}
 						if (friendly) {
 							w_append(w, t, c, "However, when {c:mainName} cries for help, {mainName} abandons {hisHer} plan, driven to protect {hisHer} friend.");
@@ -4617,7 +4615,7 @@ public class Chosen implements Serializable {
 						if (w.tickle()) {
 							w_append(w, t, "starts tickling {hisHer} armpits, left vulnerable due to the way {hisHer} hands are held above {hisHer} head.  ");
 						} else {
-							w_append(w, t, "starts stomping on {hisHer} " + abused + ".");
+							w_append(w, t, "starts stomping on {hisHer} {penisBelly}.");
 						}
 						if (aVirg) {
 							w_append(w, t, "  It's a level of torture {heShe} " + broken + ".");
@@ -4641,7 +4639,7 @@ public class Chosen implements Serializable {
 						if (w.tickle()) {
 							w_append(w, t, ", tickling {hisHer} armpits until {heShe} laughs out loud and squeezes down on {himHer} with every spasm.");
 						} else {
-							w_append(w, t, ", punching {himHer} in the " + abused + " over and over again.");
+							w_append(w, t, ", punching {himHer} in the {penisBelly} over and over again.");
 						}
 						if (anal) {
 							w_append(w, t, "  Another presses his cock against {mainName}'s anus and then slowly pushes it inside.");
@@ -4669,7 +4667,7 @@ public class Chosen implements Serializable {
 						if (w.tickle()) {
 							w_append(w, t, c, "tickle {mainName}, and soon {hisHer} voice joins {c:mainName}'s, their laughter mingling together");
 						} else {
-							w_append(w, t, c, "pummel {mainName}'s " + abused + ", and soon {hisHer} voice joins {c:mainName}'s, their screams ringing out together");
+							w_append(w, t, c, "pummel {mainName}'s {penisBelly}, and soon {hisHer} voice joins {c:mainName}'s, their screams ringing out together");
 						}
 						if (aVirg) {
 							w_append(w, t, " as {heShe} is subjected to a punishment " + broken + ".");
@@ -4698,7 +4696,7 @@ public class Chosen implements Serializable {
 						if (w.tickle()) {
 							w_append(w, t, "{hisHer} willpower has been worn down enough that the tickling hands that emerge from the crowd quickly start to have an effect.  ");
 						} else {
-							w_append(w, t, "with several members of the crowd kicking and stomping on {hisHer} " + abused + ", the pain quickly starts to get to {himHer}.  ");
+							w_append(w, t, "with several members of the crowd kicking and stomping on {hisHer} {penisBelly}, the pain quickly starts to get to {himHer}.  ");
 						}
 						if (anal) {
 							w_append(w, t, "{HisHer} resistance quickly breaks when a Thrall behind {himHer} abruptly rams his cock up {mainName}'s asshole");
@@ -4729,7 +4727,7 @@ public class Chosen implements Serializable {
 						if (w.tickle()) {
 							w_append(w, t, "Struggling to stifle {hisHer} voice as several others tickle beneath {hisHer} raised arms");
 						} else {
-							w_append(w, t, "Wincing and gasping as several others kick {himHer} in the " + abused);
+							w_append(w, t, "Wincing and gasping as several others kick {himHer} in the {penisBelly}");
 						}
 						if (anal) {
 							w_append(w, t, ", {heShe} completely submits and starts " + screaming + " outright when one behind {himHer} thrusts himself into {hisHer} ass");
@@ -4756,7 +4754,7 @@ public class Chosen implements Serializable {
 						if (w.tickle()) {
 							w_append(w, t, "tickle {hisHer} sides, armpits, and thighs until {hisHer} laughter forces its way out.  ");
 						} else {
-							w_append(w, t, "repeatedly kick {himHer} in the " + abused + ".  ");
+							w_append(w, t, "repeatedly kick {himHer} in the {penisBelly}.  ");
 						}
 						if (aVirg) {
 							w_append(w, t, "Overwhelmed by a torture {heShe} " + broken);
@@ -4789,7 +4787,7 @@ public class Chosen implements Serializable {
 						if (w.tickle()) {
 							w_append(w, t, "It doesn't stop them from tickling {hisHer} thighs and armpits until {heShe} bursts into helpless laughter, and {hisHer} voice only grows louder and more desperate");
 						} else {
-							w_append(w, t, "It doesn't stop them from savagely kicking and stomping on {hisHer} " + abused + ", and {hisHer} screams only grow louder");
+							w_append(w, t, "It doesn't stop them from savagely kicking and stomping on {hisHer} {penisBelly}, and {hisHer} screams only grow louder");
 						}
 						if (anal) {
 							w_append(w, t, " when one of them starts fucking {hisHer} ass");
@@ -4815,7 +4813,7 @@ public class Chosen implements Serializable {
 						if (w.tickle()) {
 							w_append(w, t, "{HeShe} becomes much more meek when they start tickling {himHer} at the same time, and {heShe} lacks the willpower to stop {hisHer} laughter from coming out");
 						} else {
-							w_append(w, t, "{HeShe} becomes much more meek when they start kicking and stomping on {hisHer} " + abused + ", reflexively trying to curl up");
+							w_append(w, t, "{HeShe} becomes much more meek when they start kicking and stomping on {hisHer} {penisBelly}, reflexively trying to curl up");
 						}
 						if (anal) {
 							w_append(w, t, " even as {heShe} feels the tip of one of the Thralls' cocks against {hisHer} anus.  It thrusts inside, and {heShe} starts cursing and sobbing");
@@ -4847,7 +4845,7 @@ public class Chosen implements Serializable {
 						if (w.tickle()) {
 							w_append(w, t, "starts laughing immediately when the Thralls begin tickling {hisHer} thighs, sides, and armpits");
 						} else {
-							w_append(w, t, "starts sobbing immediately when the Thralls begin kicking {himHer} in the " + abused);
+							w_append(w, t, "starts sobbing immediately when the Thralls begin kicking {himHer} in the {penisBelly}");
 						}
 						if (anal) {
 							w_append(w, t, ", {hisHer} voice rising to a scream when the Thrall behind {himHer} rams himself into {hisHer} ass.");
@@ -4921,7 +4919,7 @@ public class Chosen implements Serializable {
 						if (w.tickle()) {
 							w.append(t, "getting constantly tickled");
 						} else {
-							w_append(w, t, "getting kicked in the " + abused);
+							w_append(w, t, "getting kicked in the {penisBelly}");
 						}
 						w_append(w, t, ", a Thrall grabs {mainName}'s tongue and pulls it out for several others to ejaculate onto it and into {hisHer} mouth.  Plenty of them miss, and the excess drips down onto ");
 						if (getEXPOLevel() < 3) {
@@ -4939,7 +4937,7 @@ public class Chosen implements Serializable {
 						if (w.tickle()) {
 							w.append(t, "choking with laughter");
 						} else {
-							w_append(w, t, "opening {hisHer} lips to cry out with pain at being kicked in the " + abused);
+							w_append(w, t, "opening {hisHer} lips to cry out with pain at being kicked in the {penisBelly}");
 						}
 						w_append(w, t, ", forces {himHer} to kiss {hisHer} ");
 						if (friendly) {
@@ -4973,7 +4971,7 @@ public class Chosen implements Serializable {
 						if (w.tickle()) {
 							w_append(w, t, ", and combined with {hisHer} lightheadedness at being tickled and forced to laugh so much");
 						} else {
-							w_append(w, t, ", and combined with the pain of having {hisHer} " + abused + " repeatedly kicked");
+							w_append(w, t, ", and combined with the pain of having {hisHer} {penisBelly} repeatedly kicked");
 						}
 						w_append(w, t, ", {heShe}'s starting to feel sick.  {HeShe} coughs up semen ");
 						if (getEXPOLevel() < 3) {
@@ -5000,7 +4998,7 @@ public class Chosen implements Serializable {
 						if (w.tickle()) {
 							w_append(w, t, "release muffled moans of laughter as {heShe}'s tickled ");
 						} else {
-							w_append(w, t, "release muffled moans of pain as {heShe}'s kicked in the " + abused + " ");
+							w_append(w, t, "release muffled moans of pain as {heShe}'s kicked in the {penisBelly} ");
 						}
 						w.append(t, "and takes cumshot after cumshot");
 						if (vaginal) {
@@ -5210,7 +5208,7 @@ public class Chosen implements Serializable {
 						if (w.tickle()) {
 							w_append(w, t, "struggling to suppress {hisHer} laughter and help ");
 						} else {
-							w_append(w, t, "struggling against the pain of the Thralls kicking {hisHer} " + abused + " and trying to help ");
+							w_append(w, t, "struggling against the pain of the Thralls kicking {hisHer} {penisBelly} and trying to help ");
 						}
 						w_append(w, t, c, "{c:mainName}, but {c:mainName} ");
 						if (friendly) {
