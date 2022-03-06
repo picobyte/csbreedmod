@@ -23159,7 +23159,7 @@ public class Chosen implements Serializable {
 			result = adjectiveName + " " + result;
 		}
 		w_append(w, t, result + "!\"\n\n");
-		w.grayAppend(t, "\"R-Really?  Wow!  {mainName}, I've always wanted to know, what was your biggest defeat!?\"\n\n");
+		w.grayAppend(t, "\"R-Really?  Wow!  " + getMainName() + ", I've always wanted to know, what was your biggest defeat!?\"\n\n");
 		say(t, "\"");
 		if (confidence > 66) {
 			if (meek) {
@@ -23220,7 +23220,7 @@ public class Chosen implements Serializable {
 		}
 		w.append(t, "\"\n\n");
 		if (lustful) {
-			w.grayAppend(t, "\"{mainName}, y-you saved my life the other day, and I haven't been able to stop thinking about you since.  I... I need to feel it again!  Your fingers trailing across my chest, your eyes looking into mine, your lips around my-\"\n\n");
+			w.grayAppend(t, "\"" + getMainName() + ", y-you saved my life the other day, and I haven't been able to stop thinking about you since.  I... I need to feel it again!  Your fingers trailing across my chest, your eyes looking into mine, your lips around my-\"\n\n");
 			if (innocence > 33) {
 				w_append(w, t, "{mainName}'s expression of surprise might have been enough to convince the audience that the caller was lying, but {hisHer} flustered response would suggest otherwise.\n\n");
 				say(t, "\"");
@@ -23247,7 +23247,7 @@ public class Chosen implements Serializable {
 				w.append(t, "\"Er...  Harsh!  Anyway, next caller!");
 			}
 		} else {
-			w.grayAppend(t, "\"{mainName}, I love you!  Please marry me!\"\n\n");
+			w.grayAppend(t, "\"" + getMainName() + ", I love you!  Please marry me!\"\n\n");
 			say(t, "\"");
 			if (innocence > 33) {
 				if (confidence > 66) {
@@ -23300,7 +23300,7 @@ public class Chosen implements Serializable {
 				w.append(t, "\"You...  Um, I mean, yes, next caller!");
 			}
 		} else {
-			w.grayAppend(t, "\"{mainName}, you saved my life!  Thank you so much!\"\n\n");
+			w.grayAppend(t, "\"" + getMainName() + ", you saved my life!  Thank you so much!\"\n\n");
 			say(t, "\"");
 			if (morality > 33) {
 				if (confidence > 66) {
@@ -23341,7 +23341,7 @@ public class Chosen implements Serializable {
 			}
 			w_append(w, t, "The network cuts the feed so that the audience won't see the entirety of {hisHer} reaction, but the damage is already done.  {mainName} storms off the set, and the other two Chosen follow.  The interview is over.");
 		} else {
-			w.grayAppend(t, "\"{mainName}, I'm your biggest fan!  Please, tell us how to be more like you!\"\n\n");
+			w.grayAppend(t, "\"" + getMainName() + ", I'm your biggest fan!  Please, tell us how to be more like you!\"\n\n");
 			say(t, "\"");
 			if (innocence > 33) {
 				Project.changePortrait(convertGender(), type, false, false, w, nameDisplay, 0, Project.Emotion.JOY, Project.Emotion.JOY);
@@ -38073,7 +38073,7 @@ public class Chosen implements Serializable {
 		if (broken >= 0) {
 			w.append(t, "\n\n");
 			if (nameTag) {
-				w.underlineAppend(t, "{mainName}: ");
+				w.underlineAppend(t, "" + getMainName() + ": ");
 			}
 			w.underlineAppend(t, "Over " + condensedFormat(nextAdaptation)+ " Unresolved ");
 			if (broken == 0) {
@@ -38133,7 +38133,7 @@ public class Chosen implements Serializable {
 					w_append(w, t, "{mainName} cares less than most about what others think of {himHer}, but {heShe} still has the basic human need for acceptance.  The constant derision from the public has started to give {himHer} a complex.");
 				}
 				w_append(w, t, "  The next time {heShe} ");
-				w.underlineAppend(t, "is exposed with some of {hisHer} allies surrounded");
+				w.underlineAppend(t, "is exposed with some of " + hisHer() + " allies surrounded");
 				w_append(w, t, ", {heShe}'ll likely do something extreme in order to take back control of how people see {himHer}.");
 				usingStrip = true;
 			}
@@ -57252,7 +57252,7 @@ public class Chosen implements Serializable {
 			}
 			w.append(t, "\n\n");
 		}
-		w.underlineAppend(t, "{mainName}'s Action: ");
+		w.underlineAppend(t, "" + getMainName() + "'s Action: ");
 		if (type == Species.SUPERIOR) {
 			w.underlineAppend(t, "Superior ");
 		}
@@ -57827,7 +57827,7 @@ public class Chosen implements Serializable {
 			}
 			w.append(t, "\n\n");
 		}
-		w.underlineAppend(t, "{mainName}'s Action: ");
+		w.underlineAppend(t, "" + getMainName() + "'s Action: ");
 		if (type == Species.SUPERIOR) {
 			w.underlineAppend(t, "Superior ");
 		}
@@ -58342,7 +58342,7 @@ public class Chosen implements Serializable {
 			}
 			w.append(t, "\n\n");
 		}
-		w.underlineAppend(t, "{mainName}'s Action: ");
+		w.underlineAppend(t, "" + getMainName() + "'s Action: ");
 		if (type == Species.SUPERIOR) {
 			w.underlineAppend(t, "Superior ");
 		}
@@ -59017,7 +59017,7 @@ public class Chosen implements Serializable {
 			}
 			w.append(t, "\n\n");
 		}
-		w.underlineAppend(t, "{mainName}'s Action: ");
+		w.underlineAppend(t, "" + getMainName() + "'s Action: ");
 		if (type == Species.SUPERIOR) {
 			w.underlineAppend(t, "Superior ");
 		}
@@ -59414,7 +59414,7 @@ public class Chosen implements Serializable {
 	public void PerformDistract(JTextPane t, JPanel p, JFrame f, WorldState w) {
 		lastAction = 4;
 		w.append(t, "\n\n" + w.getSeparator() + "\n\n");
-		w.underlineAppend(t, "{mainName}'s Action: Distract");
+		w.underlineAppend(t, "" + getMainName() + "'s Action: Distract");
 		w.append(t, "\n\n");
 		int thisAttack = nextAttack[0];
 		nextAttack[0] = nextAttack[1];
@@ -60035,7 +60035,7 @@ public class Chosen implements Serializable {
 	public void PerformRally(JTextPane t, JPanel p, JFrame f, WorldState w) {
 		lastAction = 3;
 		w.append(t, "\n\n" + w.getSeparator() + "\n\n");
-		w.underlineAppend(t, "{mainName}'s Action: Rally");
+		w.underlineAppend(t, "" + getMainName() + "'s Action: Rally");
 		w.append(t, "\n\n");
 		int thisAttack = nextAttack[0];
 		nextAttack[0] = nextAttack[1];
@@ -60726,7 +60726,7 @@ public class Chosen implements Serializable {
 	public void PerformRegen(JTextPane t, JPanel p, JFrame f, WorldState w) {
 		lastAction = 2;
 		w.append(t, "\n\n" + w.getSeparator() + "\n\n");
-		w.underlineAppend(t, "{mainName}'s Action: Regenerate");
+		w.underlineAppend(t, "" + getMainName() + "'s Action: Regenerate");
 		w.append(t, "\n\n");
 		int thisAttack = nextAttack[0];
 		nextAttack[0] = nextAttack[1];
@@ -61310,7 +61310,7 @@ public class Chosen implements Serializable {
 	public void PerformBlast(JTextPane t, JPanel p, JFrame f, WorldState w) {
 		lastAction = 1;
 		w.append(t, "\n\n" + w.getSeparator() + "\n\n");
-		w.underlineAppend(t, "{mainName}'s Action: Blast");
+		w.underlineAppend(t, "" + getMainName() + "'s Action: Blast");
 		w.append(t, "\n\n");
 		int thisAttack = nextAttack[0];
 		nextAttack[0] = nextAttack[1];
