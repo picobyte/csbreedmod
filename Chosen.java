@@ -221,6 +221,7 @@ public class Chosen implements Serializable {
 			s = s.replace("{" + pre + "penisBelly}", "penis");
 			s = s.replace("{" + pre + "penisVagina}", "penis");
 			s = s.replace("{" + pre + "penisPussy}", "penis");
+			s = s.replace("{" + pre + "genitalsAnus}", "genitals");
 		} else if (gender.equals("female")) {
 			s = s.replaceAll("\\{" + pre + "([Hh])i[ms]H(ers?)\\}", "$1$2");
 			s = s.replace("{" + pre +"heShe}", "she");
@@ -235,6 +236,7 @@ public class Chosen implements Serializable {
 			s = s.replace("{" + pre + "penisBelly}", "belly");
 			s = s.replace("{" + pre + "penisVagina}", "vagina");
 			s = s.replace("{" + pre + "penisPussy}", "pussy");
+			s = s.replace("{" + pre + "genitalsAnus}", "anus");
 		} else {
 			s = s.replace("{" + pre + "hisHer}", hisHer());
 			s = s.replace("{" + pre + "himHer}", himHer());
@@ -254,6 +256,7 @@ public class Chosen implements Serializable {
 			s = s.replace("{" + pre + "penisBelly}", "belly");
 			s = s.replace("{" + pre + "penisVagina}", "hermaphroditic genitals");
 			s = s.replace("{" + pre + "penisPussy}", "penis and pussy");
+			s = s.replace("{" + pre + "genitalsAnus}", "genitals");
         }
 		if (topCover.equals("crop")) {
 			s = s.replace("{" + pre + "topDesc}", "crop top");
@@ -6560,11 +6563,7 @@ public class Chosen implements Serializable {
 					} else {
 						w_append(w, t, " and tugging {hisHer} panties down around {hisHer} thighs");
 					}
-					if (gender.equals("male")) {
-						w_append(w, t, " to expose {hisHer} genitals.  ");
-					} else {
-						w_append(w, t, " to expose {hisHer} anus.  ");
-					}
+					 w_append(w, t, " to expose {hisHer} {genitalsAnus}.  ");
 				} else if (getEXPOLevel() == 1) {
 					w_append(w, t, "The damage to {mainName}'s {bottomDesc} gives the Thralls easy access");
 					if (underType.equals("shorts")) {
@@ -6576,11 +6575,7 @@ public class Chosen implements Serializable {
 					} else {
 						w_append(w, t, " to tug {hisHer} panties down around {hisHer} thighs");
 					}
-					if (gender.equals("male")) {
-						w_append(w, t, " to expose {hisHer} genitals.  ");
-					} else {
-						w_append(w, t, " to expose {hisHer} anus.  ");
-					}
+					 w_append(w, t, " to expose {hisHer} {genitalsAnus}.  ");
 				} else if (getEXPOLevel() == 2) {
 					if (gender.equals("male")) {
 						w_append(w, t, "While {mainName} is distracted by the Thralls pinching and twisting {hisHer} nipples through {hisHer} torn {topDesc}, several others reach up");
@@ -6599,11 +6594,7 @@ public class Chosen implements Serializable {
 					} else {
 						w_append(w, t, " and tug {hisHer} panties down around {hisHer} thighs");
 					}
-					if (gender.equals("male")) {
-						w_append(w, t, " to expose {hisHer} genitals.  ");
-					} else {
-						w_append(w, t, " to expose {hisHer} anus.  ");
-					}
+					 w_append(w, t, " to expose {hisHer} {genitalsAnus}.  ");
 				}
 				if (getEXPOLevel() < 3) {
 					if (dignity > 66) {
