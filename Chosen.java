@@ -6429,9 +6429,9 @@ public class Chosen implements Serializable {
 					if (dignity > 66) {
 						w_append(w, t, "{mainName}'s face is already red with embarrassment at the Thralls filming {hisHer} pantiless state, but then they pile on even more humiliation by tickling {hisHer} exposed armpits.  Tears stream down {hisHer} face as {hisHer} laughter forces its way out");
 					} else if (dignity > 33) {
-						w_append(w, t, "The Thralls grab {mainName}'s limbs and pull in all directions.  In {hisHer} exposed state, this lets them record good footage of {hisHer} naked {penisClit}, but it also leaves {hisHer} armpits completely defenseless against their sudden focused tickling.  {HeShe}'s unable to stop {himHer}self from bursting into open laughter");
+						w_append(w, t, "The Thralls grab {mainName}'s limbs and pull in all directions.  In {hisHer} exposed state, this lets them record good footage of {hisHer} naked {penisPussy}, but it also leaves {hisHer} armpits completely defenseless against their sudden focused tickling.  {HeShe}'s unable to stop {himHer}self from bursting into open laughter");
 					} else {
-						w_append(w, t, "{mainName} is so caught up in trying to escape that {heShe} barely notices the Thralls filming {hisHer} blatantly exposed {penisClit}, but {heShe} can't ignore them attacking {hisHer} exposed armpits, jabbing their fingers in and tickling until {heShe} cracks up in laughter");
+						w_append(w, t, "{mainName} is so caught up in trying to escape that {heShe} barely notices the Thralls filming {hisHer} blatantly exposed {penisPussy}, but {heShe} can't ignore them attacking {hisHer} exposed armpits, jabbing their fingers in and tickling until {heShe} cracks up in laughter");
 					}
 				}
 				if (aVirg) {
