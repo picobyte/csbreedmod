@@ -5250,7 +5250,7 @@ public class Chosen implements Serializable {
 		}
 		if (getINJULevel() > previousINJU) {
 			priorities[2]++;
-			w.purpleAppend(t, w.tickle() ? "ANTI up!  " : "INJU up!  ");
+			w.purpleAppend(t, "{INJU} up!  ");
 		}
 		if (getEXPOLevel() > previousEXPO) {
 			priorities[3]++;
@@ -7892,7 +7892,7 @@ public class Chosen implements Serializable {
 		}
 		if (getEXPOLevel() > previousEXPO) {
 			if (getINJULevel() > previousINJU) {
-				w.purpleAppend(t, w.tickle() ? "ANTI up!  " : "INJU up!  ");
+				w.purpleAppend(t, "{INJU} up!  ");
 			}
 			w.purpleAppend(t, "EXPO up!  ");
 			if (getEXPOLevel() == 1) {
@@ -8135,7 +8135,7 @@ public class Chosen implements Serializable {
 			}
 			w.append(t, "\n\n");
 		} else if (getINJULevel() > previousINJU) {
-			w.purpleAppend(t, w.tickle() ? "ANTI up!  " : "INJU up!  ");
+			w.purpleAppend(t, "{INJU} up!  ");
 			if (getINJULevel() == 4) {
 				if (w.tickle()) {
 					if (confidence > 66) {
@@ -10378,7 +10378,7 @@ public class Chosen implements Serializable {
 				w.purpleAppend(t, "PLEA up!  ");
 			}
 			if (getINJULevel() > previousINJU) {
-				w.purpleAppend(t, w.tickle() ? "ANTI up!  " : "INJU up!  ");
+				w.purpleAppend(t, "{INJU} up!  ");
 			}
 			w.purpleAppend(t, "EXPO up!  ");
 			if (getEXPOLevel() == 1) {
@@ -10626,7 +10626,7 @@ public class Chosen implements Serializable {
 		} else if (highest == 1) {
 			w.purpleAppend(t, "PLEA up!  ");
 			if (getINJULevel() > previousINJU) {
-				w.purpleAppend(t, w.tickle() ? "ANTI up!  " : "INJU up!  ");
+				w.purpleAppend(t, "{INJU} up!  ");
 			}
 			if (getEXPOLevel() > previousEXPO) {
 				w.purpleAppend(t, "EXPO up!  ");
@@ -10652,7 +10652,7 @@ public class Chosen implements Serializable {
 			if (getPLEALevel() > previousPLEA) {
 				w.purpleAppend(t, "PLEA up!  ");
 			}
-			w.purpleAppend(t, w.tickle() ? "ANTI up!  " : "INJU up!  ");
+			w.purpleAppend(t, "{INJU} up!  ");
 			if (getEXPOLevel() > previousEXPO) {
 				w.purpleAppend(t, "EXPO up!  ");
 			}
@@ -12580,7 +12580,7 @@ public class Chosen implements Serializable {
 		if (getPLEALevel() > previousPLEA) {
 			w.purpleAppend(t, "PLEA up!  ");
 			if (getINJULevel() > previousINJU) {
-				w.purpleAppend(t, w.tickle() ? "ANTI up!  " : "INJU up!  ");
+				w.purpleAppend(t, "{INJU} up!  ");
 			}
 			if (getPLEALevel() == 4) {
 				if (innocence > 66) {
@@ -12600,7 +12600,7 @@ public class Chosen implements Serializable {
 			}
 			w.append(t, "\n\n");
 		} else if (getINJULevel() > previousINJU) {
-			w.purpleAppend(t, w.tickle() ? "ANTI up!  " : "INJU up!  ");
+			w.purpleAppend(t, "{INJU} up!  ");
 			if (getINJULevel() == 1) {
 				if (multiplyEXPO(1, w) >= 2) {
 					append(w, t, "{mainName} is distracted by what's happening to the other Chosen");
@@ -15671,7 +15671,7 @@ public class Chosen implements Serializable {
 			}
 			w.purpleAppend(t, "PLEA up!  ");
 			if (getINJULevel() > previousINJU) {
-				w.purpleAppend(t, w.tickle() ? "ANTI up!  " : "INJU up!  ");
+				w.purpleAppend(t, "{INJU} up!  ");
 			}
 			if (getPLEALevel() == 1) {
 				if (getHATELevel() == 3) {
@@ -15823,7 +15823,7 @@ public class Chosen implements Serializable {
 				w.purpleAppend(t, "PLEA up!  ");
 			}
 			if (getINJULevel() > previousINJU) {
-				w.purpleAppend(t, w.tickle() ? "ANTI up!  " : "INJU up!  ");
+				w.purpleAppend(t, "{INJU} up!  ");
 			}
 			if (getHATELevel() == 4) {
 				if (morality > 66) {
@@ -15845,7 +15845,7 @@ public class Chosen implements Serializable {
 			if (getPLEALevel() > previousPLEA) {
 				w.purpleAppend(t, "PLEA up!  ");
 			}
-			w.purpleAppend(t, w.tickle() ? "ANTI up!  " : "INJU up!  ");
+			w.purpleAppend(t, "{INJU} up!  ");
 			if (getINJULevel() == 1) {
 				if (c.getEXPOLevel() >= 1) {
 					append(w, t, c, "{mainName} is distracted by {c:mainName}'s pathetic state");
@@ -34324,7 +34324,7 @@ public class Chosen implements Serializable {
 				w.purpleAppend(t, "PLEA up!  ");
 			}
 			if (getINJULevel() > previousINJU) {
-				w.purpleAppend(t, w.tickle() ? "ANTI up!  " : "INJU up!  ");
+				w.purpleAppend(t, "{INJU} up!  ");
 			}
 			w.purpleAppend(t, "EXPO up!  ");
 			if (w.getBodyStatus()[22]) {
@@ -35027,7 +35027,7 @@ public class Chosen implements Serializable {
 			}
 			w.purpleAppend(t, "PLEA up!  ");
 			if (getINJULevel() > previousINJU) {
-				w.purpleAppend(t, w.tickle() ? "ANTI up!  " : "INJU up!  ");
+				w.purpleAppend(t, "{INJU} up!  ");
 			}
 			if (getEXPOLevel() > previousEXPO) {
 				w.purpleAppend(t, "EXPO up!  ");
@@ -35726,7 +35726,7 @@ public class Chosen implements Serializable {
 				w.purpleAppend(t, "PLEA up!  ");
 			}
 			if (getINJULevel() > previousINJU) {
-				w.purpleAppend(t, w.tickle() ? "ANTI up!  " : "INJU up!  ");
+				w.purpleAppend(t, "{INJU} up!  ");
 			}
 			if (getEXPOLevel() > previousEXPO) {
 				w.purpleAppend(t, "EXPO up!  ");
@@ -36248,7 +36248,7 @@ public class Chosen implements Serializable {
 				w.purpleAppend(t, "PLEA up!  ");
 			}
 			if (getINJULevel() > previousINJU) {
-				w.purpleAppend(t, w.tickle() ? "ANTI up!  " : "INJU up!  ");
+				w.purpleAppend(t, "{INJU} up!  ");
 			}
 			if (getEXPOLevel() > previousEXPO) {
 				w.purpleAppend(t, "EXPO up!  ");
@@ -55984,7 +55984,7 @@ public class Chosen implements Serializable {
 				w.purpleAppend(t, "PLEA up!  ");
 			}
 			if (getINJULevel() > previousINJU) {
-				w.purpleAppend(t, w.tickle() ? "ANTI up!  " : "INJU up!  ");
+				w.purpleAppend(t, "{INJU} up!  ");
 			}
 			w.purpleAppend(t, "EXPO up!  ");
 			if (getEXPOLevel() == 1) {
@@ -56290,7 +56290,7 @@ public class Chosen implements Serializable {
 			}
 			w.purpleAppend(t, "PLEA up!  ");
 			if (getINJULevel() > previousINJU) {
-				w.purpleAppend(t, w.tickle() ? "ANTI up!  " : "INJU up!  ");
+				w.purpleAppend(t, "{INJU} up!  ");
 			}
 			if (getPLEALevel() == 1) {
 				if (getHATELevel() < 1) {
@@ -56468,7 +56468,7 @@ public class Chosen implements Serializable {
 			if (getHATELevel() > previousHATE) {
 				w.purpleAppend(t, "HATE up!  ");
 			}
-			w.purpleAppend(t, w.tickle() ? "ANTI up!  " : "INJU up!  ");
+			w.purpleAppend(t, "{INJU} up!  ");
 			if (getINJULevel() == 1) {
 				if (getEXPOLevel() < 1) {
 					append(w, t, "{mainName} is still trying to put on a brave face, but ");
@@ -57943,7 +57943,7 @@ public class Chosen implements Serializable {
 			ConfidenceBreakZero(t, w);
 			w.append(t, "\n\n");
 		}
-		w.purpleAppend(t, w.tickle() ? "ANTI up!  " : "INJU up!  ");
+		w.purpleAppend(t, "{INJU} up!  ");
 		if (getINJULevel() == 1) {
 			if (confidence > 66) {
 				append(w, t, "{mainName} grits {hisHer} teeth as the explosion knocks {himHer} back");
@@ -60196,7 +60196,7 @@ public class Chosen implements Serializable {
 			} else if (topDesc.equals("crop")) {
 				topDesc = "crop top";
 			}
-			w.purpleAppend(t, w.tickle() ? "ANTI up!  " : "INJU up!  ");
+			w.purpleAppend(t, "{INJU} up!  ");
 			if (getINJULevel() == 1) {
 				if (w.tickle()) {
 					if (confidence > 66) {
