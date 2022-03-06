@@ -284,17 +284,6 @@ public class Chosen implements Serializable {
 		w.append(t, replace_tags(s, ""));
 	}
 	private void w_append(WorldState w, JTextPane t, Chosen c, String s) {
-		if (w.tickle()) {
-			s = s.replace("{exhaution}", "exhaution");
-			s = s.replace("{exhausted}", "exhausted");
-			s = s.replace("{discomfort}", "discomfort");
-			s = s.replace("{criesOutInPain}", "cries out");
-		} else {
-			s = s.replace("{exhaution}", "pain");
-			s = s.replace("{exhausted}", "badly hurt");
-			s = s.replace("{discomfort}", "pain");
-			s = s.replace("{criesOutInPain}", "cries out in pain");
-		}
 		Boolean friendly = w.getRelationship(number, c.getNumber()) >= 0;
 		if (friendly) {
 			s = s.replace("{friendRival}", "friend");
