@@ -141,6 +141,21 @@ public class Forsaken implements Serializable {
 		s = s.replace("{" + pre + "givenName}", givenName);
 		return s.replace("{" + pre + "mainName}", mainName);
 	}
+	public void append(WorldState w, JTextPane t, String s) {
+		w.append(t, replaceTags(s, ""));
+	}
+	private void append(WorldState w, JTextPane t, Chosen c, String s) {
+		Boolean friendly = w.getRelationship(number, c.getNumber()) >= 0;
+		if (friendly) {
+			s = s.replace("{friendRival}", "friend");
+		} else {
+			s = s.replace("{friendRival}", "rival");
+		}
+		append(w, t, c.replaceTags(s, "c:"));
+	}
+	private void append(WorldState w, JTextPane t, Forsaken f, String s) {
+		append(w, t, f.replaceTags(s, "c:"));
+	}
 	
 	public void initialize(WorldState w, Chosen c) {
 		formerSelf = c;
