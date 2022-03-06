@@ -395,15 +395,15 @@ public class Forsaken implements Serializable {
 		if (flavorObedience() < 20) {
 			if (confidence > 66) {
 				if (originalName.equals(mainName) == false && givenName.equals(mainName) == false && familyName.equals(mainName) == false) {
-					say(t, "My name is " + originalName + "!  And I won't respond to '" + mainName + "', no matter what you do to me.  ");
+					say(t, "My name is {originalName}!  And I won't respond to '{mainName}', no matter what you do to me.  ");
 				} else {
-					say(t, "You know who I am!  I'm " + mainName + ", but you're probably expecting me to say more than that.  ");
+					say(t, "You know who I am!  I'm {mainName}, but you're probably expecting me to say more than that.  ");
 				}
 			} else {
 				if (originalName.equals(mainName) == false && givenName.equals(mainName) == false && familyName.equals(mainName) == false) {
-					say(t, "I'm still " + originalName + " - even if you prefer to call me " + mainName + ".  ");
+					say(t, "I'm still {originalName} - even if you prefer to call me {mainName}.  ");
 				} else {
-					say(t, "This is a waste of time, but fine.  I'm " + mainName + ".  ");
+					say(t, "This is a waste of time, but fine.  I'm {mainName}.  ");
 				}
 			}
 			if (defeatType == 0) {
@@ -480,11 +480,11 @@ public class Forsaken implements Serializable {
 				dots = "";
 			}
 			if (confidence > 66) {
-				say(t, "Hmph.  I'm" + dots + " " + mainName + ".  ");
+				say(t, "Hmph.  I'm" + dots + " {mainName}.  ");
 			} else if (confidence > 33) {
-				say(t, "I'm" + dots + " " + mainName + ".  ");
+				say(t, "I'm" + dots + " {mainName}.  ");
 			} else {
-				say(t, "I-I'm" + dots + " " + mainName + "...  ");
+				say(t, "I-I'm" + dots + " {mainName}...  ");
 			}
 			if (defeatType == 0) {
 				if (innocence > 66) {
@@ -556,11 +556,11 @@ public class Forsaken implements Serializable {
 			}
 		} else if (flavorObedience() < 61) {
 			if (confidence > 66) {
-				say(t, "I'm " + mainName + ".  ");
+				say(t, "I'm {mainName}.  ");
 			} else if (confidence > 33) {
-				say(t, "I'm " + mainName + ", one of your servants.  ");
+				say(t, "I'm {mainName}, one of your servants.  ");
 			} else {
-				say(t, "I'm " + mainName + ", y-your loyal servant.  ");
+				say(t, "I'm {mainName}, y-your loyal servant.  ");
 			}
 			if (defeatType == 0) {
 				if (innocence > 66) {
@@ -638,11 +638,11 @@ public class Forsaken implements Serializable {
 			}
 		} else if (flavorObedience() < 81) {
 			if (confidence > 66) {
-				say(t, "I'm " + mainName + ", your greatest servant!  ");
+				say(t, "I'm {mainName}, your greatest servant!  ");
 			} else if (confidence > 33) {
 				say(t, mainName + ", reporting for duty!  ");
 			} else {
-				say(t, "I'm... nothing but your servant.  You can call me " + mainName + ", or whatever else you wish...  ");
+				say(t, "I'm... nothing but your servant.  You can call me {mainName}, or whatever else you wish...  ");
 			}
 			if (defeatType == 0) {
 				if (confidence > 66) {
@@ -650,7 +650,7 @@ public class Forsaken implements Serializable {
 				} else if (confidence > 33) {
 					say(t, "I originally surrendered in order to avoid being killed, but now I understand that my place is beneath you.  ");
 				} else {
-					say(t, "I was... an idiot who thought " + heShe() + " had a chance to beat you.  I know better now...  ");
+					say(t, "I was... an idiot who thought {heShe} had a chance to beat you.  I know better now...  ");
 				}
 			} else if (defeatType == 1) {
 				if (morality > 66) {
@@ -750,11 +750,11 @@ public class Forsaken implements Serializable {
 			}
 		} else {
 			if (confidence > 66) {
-				say(t, "I'm just the Demon Lord's tool.  I don't really want a name anymore, but people still call me '" + mainName + "'.  ");
+				say(t, "I'm just the Demon Lord's tool.  I don't really want a name anymore, but people still call me '{mainName}'.  ");
 			} else if (confidence > 33) {
-				say(t, "I used to be called... " + mainName + ".  ");
+				say(t, "I used to be called... {mainName}.  ");
 			} else {
-				say(t, "I'm... " + mainName + "... I think...  ");
+				say(t, "I'm... {mainName}... I think...  ");
 			}
 			if (defeatType == 0) {
 				say(t, "I used to be so attached to my life.  But you showed me that it's worthless on its own.  I can't thank you enough.  ");
@@ -1253,7 +1253,7 @@ public class Forsaken implements Serializable {
 							}
 						} else if (x.hostility < 40) {
 							if (x.confidence > 66) {
-								say(t, "Even though " + x.mainName + " can seem scary at first, " + x.heShe() + "'s not that bad.  ");
+								say(t, x, "Even though " + x.mainName + " can seem scary at first, {c:heShe}'s not that bad.  ");
 							} else if (x.confidence > 33) {
 								say(t, x.mainName + " isn't actually a bad person at all!  ");
 							} else {
@@ -1261,7 +1261,7 @@ public class Forsaken implements Serializable {
 							}
 						} else if (x.hostility < 61) {
 							if (x.confidence > 66) {
-								say(t, "As long as you don't make " + x.himHer() + " angry, " + x.mainName + " is really fun!  ");
+								say(t, x, "As long as you don't make {c:himHer} angry, " + x.mainName + " is really fun!  ");
 							} else if (x.confidence > 33) {
 								say(t, x.mainName + " can get really, really grumpy sometimes, but that doesn't mean " + x.heShe() + "'s a bad person!  ");
 							} else {
@@ -1269,9 +1269,9 @@ public class Forsaken implements Serializable {
 							}
 						} else if (x.hostility < 81) {
 							if (x.confidence > 66) {
-								say(t, "Even though " + x.mainName + " seems really angry all the time, I still like " + x.himHer() + "!  ");
+								say(t, x, "Even though " + x.mainName + " seems really angry all the time, I still like {c:himHer}!  ");
 							} else if (x.confidence > 33) {
-								say(t, "I know " + x.mainName + " basically hates everyone, but that doesn't mean I have to hate " + x.himHer() + "!  ");
+								say(t, x, "I know " + x.mainName + " basically hates everyone, but that doesn't mean I have to hate {c:himHer}!  ");
 							} else {
 								say(t, x.mainName + " really seems like " + x.heShe() + " hates everyone, even " + x.himHer() + "self.  But I definitely don't hate " + x.himHer() + "!  ");
 							}
@@ -1279,9 +1279,9 @@ public class Forsaken implements Serializable {
 							if (x.confidence > 66) {
 								say(t, x.mainName + " kinda seems like " + x.heShe() + " wants to kill everybody, even me... but I don't really hold it against " + x.himHer() + "!  ");
 							} else if (x.confidence > 33) {
-								say(t, "Is it weird that I like " + x.mainName + " even though " + x.heShe() + " wants everyone, including me and " + x.himHer() + " both, to die?  ");
+								say(t, x, "Is it weird that I like " + x.mainName + " even though {c:heShe} wants everyone, including me and {c:himHer} both, to die?  ");
 							} else {
-								say(t, "I wish that " + x.mainName + " wasn't always so depressed and wanting the world to end and stuff, because I actually really like " + x.himHer() + "!  ");
+								say(t, x, "I wish that " + x.mainName + " wasn't always so depressed and wanting the world to end and stuff, because I actually really like {c:himHer}!  ");
 							}
 						}
 					} else if (innocence > 33) {
@@ -1297,9 +1297,9 @@ public class Forsaken implements Serializable {
 							if (x.confidence > 66) {
 								say(t, x.mainName + " is a strong person who doesn't give an inch.  ");
 							} else if (x.confidence > 33) {
-								say(t, "I like " + x.mainName + ".  " + x.HeShe() + "'s had a rough time of life, but " + x.heShe() + "'s made the best of it.  ");
+								say(t, x, "I like " + x.mainName + ".  {c:HeShe}'s had a rough time of life, but {c:heShe}'s made the best of it.  ");
 							} else {
-								say(t, "I can tell that " + x.mainName + " has been hurt in the past, and it makes me want to protect " + x.himHer() + ".  ");
+								say(t, x, "I can tell that " + x.mainName + " has been hurt in the past, and it makes me want to protect {c:himHer}.  ");
 							}
 						} else if (x.hostility < 61) {
 							if (x.confidence > 66) {
@@ -1315,13 +1315,13 @@ public class Forsaken implements Serializable {
 							} else if (x.confidence > 33) {
 								say(t, x.mainName + " hates people in general, but that doesn't mean I have to hate " + x.himHer() + ".  ");
 							} else {
-								say(t, "I hope that as long as I keep showing " + x.mainName + " how much I like " + x.himHer() + ", " + x.heShe() + "'ll stop hating " + x.himHer() + "self so much.  ");
+								say(t, x, "I hope that as long as I keep showing " + x.mainName + " how much I like {c:himHer}, {c:heShe}'ll stop hating {c:himHer}self so much.  ");
 							}
 						} else {
 							if (x.confidence > 66) {
 								say(t, x.mainName + " wants to destroy the world, but I don't think " + x.heShe() + " can manage it.  Probably.  ");
 							} else if (x.confidence > 33) {
-								say(t, "The only thing keeping " + x.mainName + " going is pure spite.  I still like " + x.himHer() + ", though.  ");
+								say(t, x, "The only thing keeping " + x.mainName + " going is pure spite.  I still like {c:himHer}, though.  ");
 							} else {
 								say(t, x.mainName + " wants to destroy everything and everyone, including " + x.himHer() + "self.  It's hard to cheer " + x.himHer() + " up.  ");
 							}
@@ -1331,7 +1331,7 @@ public class Forsaken implements Serializable {
 							if (x.confidence > 66) {
 								say(t, x.mainName + " has held onto " + x.hisHer() + " heroic ideals with a stubbornness I can't help but respect.  ");
 							} else if (x.confidence > 33) {
-								say(t, "Despite becoming one of the Forsaken, " + x.mainName + " still retains the mindset of an upstanding member of society.  I find " + x.himHer() + " refreshing.  ");
+								say(t, x, "Despite becoming one of the Forsaken, " + x.mainName + " still retains the mindset of an upstanding member of society.  I find {c:himHer} refreshing.  ");
 							} else {
 								say(t, x.mainName + " is timid, but I can appreciate " + x.hisHer() + " adherence to " + x.hisHer() + " morality even after being subjected to such extreme circumstances.  ");
 							}
@@ -1355,7 +1355,7 @@ public class Forsaken implements Serializable {
 							if (x.confidence > 66) {
 								say(t, x.mainName + " has developed some severe murderous tendencies, but I don't see this as being an unreasonable reaction to " + x.hisHer() + " circumstances.  ");
 							} else if (x.confidence > 33) {
-								say(t, "Consumed by hatred as " + x.heShe() + " is, I find " + x.mainName + "'s perspective interesting, and I enjoy talking with " + x.himHer() + ".  ");
+								say(t, x, "Consumed by hatred as {c:heShe} is, I find " + x.mainName + "'s perspective interesting, and I enjoy talking with {c:himHer}.  ");
 							} else {
 								say(t, x.mainName + " hates all of humanity, and " + x.heShe() + " includes " + x.himHer() + "self in that category, but I believe that " + x.heShe() + " doesn't give " + x.himHer() + "self enough credit.  ");
 							}
@@ -1365,7 +1365,7 @@ public class Forsaken implements Serializable {
 							} else if (x.confidence > 33) {
 								say(t, x.mainName + " is so bent on the destruction of humanity that I suspect " + x.heShe() + "'d be willing to destroy me as well, but I don't hold it against " + x.himHer() + ".  ");
 							} else {
-								say(t, "I believe that the only thing keeping " + x.mainName + " from trying to kill " + x.himHer() + "self is a stubborn desire to see the rest of the species die first.  I don't look down on " + x.himHer() + " at all.  ");
+								say(t, x, "I believe that the only thing keeping " + x.mainName + " from trying to kill {c:himHer}self is a stubborn desire to see the rest of the species die first.  I don't look down on {c:himHer} at all.  ");
 							}
 						}
 					}
@@ -1375,37 +1375,37 @@ public class Forsaken implements Serializable {
 								if (otherOpinionOfDead >= 0) {
 									if (x.opinion(this) > 100) {
 										if (x.morality > 66) {
-											say(t, "I know that " + x.heShe() + " didn't want to kill " + x.kills[0].mainName + ".  " + x.HeShe() + "'s not the sort of person who does that sort of thing unless there was no choice.  ");
+											say(t, x, "I know that {c:heShe} didn't want to kill " + x.kills[0].mainName + ".  {c:HeShe}'s not the sort of person who does that sort of thing unless there was no choice.  ");
 										} else if (x.morality > 33) {
-											say(t, "I never thought I'd be friends with " + x.kills[0].mainName + "'s killer...  Still, I can't blame " + x.mainName + " for doing what " + x.heShe() + " thought " + x.heShe() + " had to do.  ");
+											say(t, x, "I never thought I'd be friends with " + x.kills[0].mainName + "'s killer...  Still, I can't blame " + x.mainName + " for doing what {c:heShe} thought {c:heShe} had to do.  ");
 										} else {
-											say(t, "I feel guilty about not being able to stop " + x.himHer() + " from having to kill " + x.kills[0].mainName + ".  It would have been nice if we all could have survived together...  ");
+											say(t, x, "I feel guilty about not being able to stop {c:himHer} from having to kill " + x.kills[0].mainName + ".  It would have been nice if we all could have survived together...  ");
 										}
 									} else {
 										if (x.morality > 66) {
-											say(t, "We used to be a lot closer, before " + x.heShe() + " killed " + x.kills[0].mainName + ".  ");
+											say(t, x, "We used to be a lot closer, before {c:heShe} killed " + x.kills[0].mainName + ".  ");
 										} else if (x.morality > 33) {
-											say(t, "I think " + x.heShe() + " just hates being around me because it reminds " + x.himHer() + " of what " + x.heShe() + " did to " + x.kills[0].mainName + ".  ");
+											say(t, x, "I think {c:heShe} just hates being around me because it reminds {c:himHer} of what {c:heShe} did to " + x.kills[0].mainName + ".  ");
 										} else {
-											say(t, "I know that " + x.heShe() + " still blames me for not being able to stop " + x.himHer() + " from killing " + x.kills[0].mainName + "...  Hopefully " + x.heShe() + "'ll let it go eventually.  ");
+											say(t, x, "I know that {c:heShe} still blames me for not being able to stop {c:himHer} from killing " + x.kills[0].mainName + "...  Hopefully {c:heShe}'ll let it go eventually.  ");
 										}
 									}
 								} else {
 									if (x.opinion(this) > 100) {
 										if (x.morality > 66) {
-											say(t, "Now that " + x.kills[0].mainName + "'s gone, " + x.heShe() + "'s the one who's closest to me.  ");
+											say(t, x, "Now that " + x.kills[0].mainName + "'s gone, {c:heShe}'s the one who's closest to me.  ");
 										} else if (x.morality > 33) {
-											say(t, "We need to stick together, even if " + x.heShe() + " is the one who killed " + x.kills[0].mainName + ".  ");
+											say(t, x, "We need to stick together, even if {c:heShe} is the one who killed " + x.kills[0].mainName + ".  ");
 										} else {
-											say(t, "Sometimes I think " + x.heShe() + " killed " + x.kills[0].mainName + " just to get closer to me...  but no, that's ridiculous.  ");
+											say(t, x, "Sometimes I think {c:heShe} killed " + x.kills[0].mainName + " just to get closer to me...  but no, that's ridiculous.  ");
 										}
 									} else {
 										if (x.morality > 66) {
-											say(t, "I think " + x.heShe() + "'s uncomfortable around me because " + x.heShe() + " still feels guilty about how " + x.heShe() + " didn't really have a good reason for killing " + x.kills[0].mainName + "...  Anyway, I don't live in the past.  ");
+											say(t, x, "I think {c:heShe}'s uncomfortable around me because {c:heShe} still feels guilty about how {c:heShe} didn't really have a good reason for killing " + x.kills[0].mainName + "...  Anyway, I don't live in the past.  ");
 										} else if (x.morality > 33) {
-											say(t, "It seems like " + x.heShe() + " thinks we have to be enemies because " + x.heShe() + " killed " + x.kills[0].mainName + ", who I cared about a lot...  That's all in the past, though.  ");
+											say(t, x, "It seems like {c:heShe} thinks we have to be enemies because {c:heShe} killed " + x.kills[0].mainName + ", who I cared about a lot...  That's all in the past, though.  ");
 										} else {
-											say(t, x.HeShe() + "... definitely enjoyed killing " + x.kills[0].mainName + ".  Still, I forgive " + x.himHer() + ", so I wish " + x.heShe() + " wouldn't be so hostile!  ");
+											say(t, x, "{c:HeShe}... definitely enjoyed killing " + x.kills[0].mainName + ".  Still, I forgive {c:himHer}, so I wish {c:heShe} wouldn't be so hostile!  ");
 										}
 									}
 								}
@@ -1413,37 +1413,37 @@ public class Forsaken implements Serializable {
 								if (otherOpinionOfDead >= 0) {
 									if (x.opinion(this) >= 0) {
 										if (x.morality > 66) {
-											say(t, "Killing " + x.kills[0].mainName + " really messed " + x.himHer() + " up inside... and drove " + x.himHer() + " into my arms, heh.  ");
+											say(t, x, "Killing " + x.kills[0].mainName + " really messed {c:himHer} up inside... and drove {c:himHer} into my arms, heh.  ");
 										} else if (x.morality > 33) {
-											say(t, "We get along better ever since " + x.heShe() + " killed " + x.kills[0].mainName + ", and now " + x.heShe() + " spends all " + x.hisHer() + " time with me.  ");
+											say(t, x, "We get along better ever since {c:heShe} killed " + x.kills[0].mainName + ", and now {c:heShe} spends all {c:hisHer} time with me.  ");
 										} else {
-											say(t, "It may seem harsh, but I think that being forced to kill " + x.kills[0].mainName + " is the best thing that could have happened to " + x.himHer() + ".  We're closer now.  ");
+											say(t, x, "It may seem harsh, but I think that being forced to kill " + x.kills[0].mainName + " is the best thing that could have happened to {c:himHer}.  We're closer now.  ");
 										}
 									} else {
 										if (x.morality > 66) {
-											say(t, x.HeShe() + " seems really offended that I'm not more sad about what happened to " + x.kills[0].mainName + ".  Guilty conscience, I guess.  ");
+											say(t, x, "{c:HeShe} seems really offended that I'm not more sad about what happened to " + x.kills[0].mainName + ".  Guilty conscience, I guess.  ");
 										} else if (x.morality > 33) {
-											say(t, x.HeShe() + "'s still obsessed with " + x.kills[0].mainName + ", though, and doesn't have any time for me.  It must be the guilt.  ");
+											say(t, x, "{c:HeShe}'s still obsessed with " + x.kills[0].mainName + ", though, and doesn't have any time for me.  It must be the guilt.  ");
 										} else {
-											say(t, x.HeShe() + " thinks I set " + x.himHer() + " up to kill " + x.kills[0].mainName + ", though, and " + x.heShe() + " hates me for it.  ");
+											say(t, x, "{c:HeShe} thinks I set {c:himHer} up to kill " + x.kills[0].mainName + ", though, and {c:heShe} hates me for it.  ");
 										}
 									}
 								} else {
 									if (x.opinion(this) >= 0) {
 										if (x.morality > 66) {
-											say(t, "I'm really happy " + x.heShe() + " finally worked up the nerve to kill " + x.kills[0].mainName + ", so it can just be the two of us together.  ");
+											say(t, x, "I'm really happy {c:heShe} finally worked up the nerve to kill " + x.kills[0].mainName + ", so it can just be the two of us together.  ");
 										} else if (x.morality > 33) {
-											say(t, x.HeShe() + " still feels a little bit guilty about killing " + x.kills[0].mainName + ".  Fortunately, I never have any trouble cheering " + x.himHer() + " up.  ");
+											say(t, x, "{c:HeShe} still feels a little bit guilty about killing " + x.kills[0].mainName + ".  Fortunately, I never have any trouble cheering {c:himHer} up.  ");
 										} else {
-											say(t, x.HeShe() + " probably enjoyed killing " + x.kills[0].mainName + " too much... not that I can complain, since it means the two of us can be together with no distractions.  ");
+											say(t, x, "{c:HeShe} probably enjoyed killing " + x.kills[0].mainName + " too much... not that I can complain, since it means the two of us can be together with no distractions.  ");
 										}
 									} else {
 										if (x.morality > 66) {
-											say(t, x.HeShe() + " always gets offended when I try to congratulate " + x.himHer() + " on getting rid of " + x.kills[0].mainName + " for us, though.  I guess we aren't exactly close anymore.  ");
+											say(t, x, "{c:HeShe} always gets offended when I try to congratulate {c:himHer} on getting rid of " + x.kills[0].mainName + " for us, though.  I guess we aren't exactly close anymore.  ");
 										} else if (x.morality > 33) {
-											say(t, x.HeShe() + " doesn't like spending time around me, though.  Maybe being around an old teammate reminds " + x.himHer() + " about how " + x.heShe() + " killed " + x.kills[0].mainName + "...  or about how much " + x.heShe() + " clearly enjoyed it.  ");
+											say(t, x, "{c:HeShe} doesn't like spending time around me, though.  Maybe being around an old teammate reminds {c:himHer} about how {c:heShe} killed " + x.kills[0].mainName + "...  or about how much {c:heShe} clearly enjoyed it.  ");
 										} else {
-											say(t, "I don't think " + x.heShe() + " really means it when " + x.heShe() + " says " + x.heShe() + " wishes " + x.heShe() + " killed me along with " + x.kills[0].mainName + ".  ");
+											say(t, x, "I don't think {c:heShe} really means it when {c:heShe} says {c:heShe} wishes {c:heShe} killed me along with " + x.kills[0].mainName + ".  ");
 										}
 									}
 								}
@@ -1453,37 +1453,37 @@ public class Forsaken implements Serializable {
 								if (otherOpinionOfDead >= 0) {
 									if (x.opinion(this) > 100) {
 										if (x.morality > 66) {
-											say(t, x.HeShe() + " doesn't blame me for killing " + kills[0].mainName + ".  " + x.HeShe() + " says that " + x.heShe() + " knows it hurts me more than it hurts " + x.himHer() + ".  ");
+											say(t, x, "{c:HeShe} doesn't blame me for killing " + kills[0].mainName + ".  {c:HeShe} says that {c:heShe} knows it hurts me more than it hurts {c:himHer}.  ");
 										} else if (x.morality > 33) {
-											say(t, "It's really surprising that " + x.heShe() + " doesn't hate me after... what I did to " + kills[0].mainName + ".  ");
+											say(t, x, "It's really surprising that {c:heShe} doesn't hate me after... what I did to " + kills[0].mainName + ".  ");
 										} else {
-											say(t, "I know " + x.heShe() + " never forgave me for killing " + kills[0].mainName + "...  Still, we've stayed close.  ");
+											say(t, x, "I know {c:heShe} never forgave me for killing " + kills[0].mainName + "...  Still, we've stayed close.  ");
 										}
 									} else {
 										if (x.morality > 66) {
-											say(t, x.HeShe() + " says " + x.heShe() + " forgives me for killing " + kills[0].mainName + "... which I'm pretty sure is a lie.  ");
+											say(t, x, "{c:HeShe} says {c:heShe} forgives me for killing " + kills[0].mainName + "... which I'm pretty sure is a lie.  ");
 										} else if (x.morality > 33) {
 											say(t, "Of course, we're not friends.  How could we be, after I killed " + kills[0].mainName + "?  ");
 										} else {
-											say(t, x.HeShe() + " hates me for killing " + kills[0].mainName + ", though...  I can't really blame " + x.himHer() + ".  ");
+											say(t, x, "{c:HeShe} hates me for killing " + kills[0].mainName + ", though...  I can't really blame {c:himHer}.  ");
 										}
 									}
 								} else {
 									if (x.opinion(this) > 100) {
 										if (x.morality > 66) {
-											say(t, "It's a little annoying how quick " + x.heShe() + " was to 'forgive' me for killing " + kills[0].mainName + "... not that that really matters.  ");
+											say(t, x, "It's a little annoying how quick {c:heShe} was to 'forgive' me for killing " + kills[0].mainName + "... not that that really matters.  ");
 										} else if (x.morality > 33) {
 											say(t, "As much as I miss " + kills[0].mainName + ", at least " + x.mainName + " was there to comfort me.  ");
 										} else {
-											say(t, "I have to admit that I'm a little uncomfortable about how little " + x.heShe() + " respects " + kills[0].mainName + "'s memory, though...  Still, I won't let that come between us.  ");
+											say(t, x, "I have to admit that I'm a little uncomfortable about how little {c:heShe} respects " + kills[0].mainName + "'s memory, though...  Still, I won't let that come between us.  ");
 										}
 									} else {
 										if (x.morality > 66) {
 											say(t, "Maybe I'm just lonely after killing " + kills[0].mainName + ".  If only " + x.mainName + " wanted anything to do with me...  ");
 										} else if (x.morality > 33) {
-											say(t, x.HeShe() + " doesn't want anything to do with me, though.  I know " + x.heShe() + " hated " + kills[0].mainName + ", so it's not like " + x.heShe() + " hates me for killing " + kills[0].himHer() + ".  ");
+											say(t, x, "{c:HeShe} doesn't want anything to do with me, though.  I know {c:heShe} hated " + kills[0].mainName + ", so it's not like {c:heShe} hates me for killing " + kills[0].himHer() + ".  ");
 										} else {
-											say(t, "I think the only major thing standing between us is that " + x.heShe() + "'s angry at me for killing " + kills[0].mainName + " before " + x.heShe() + " could do it first.  ");
+											say(t, x, "I think the only major thing standing between us is that {c:heShe}'s angry at me for killing " + kills[0].mainName + " before {c:heShe} could do it first.  ");
 										}
 									}
 								}
@@ -1493,35 +1493,35 @@ public class Forsaken implements Serializable {
 										if (x.morality > 66) {
 											say(t, "I'm glad I killed " + kills[0].mainName + " so that there wouldn't be anything to come between the two of us.  ");
 										} else if (x.morality > 33) {
-											say(t, x.HeShe() + " forgave me for killing " + kills[0].mainName + ", fortunately.  ");
+											say(t, x, "{c:HeShe} forgave me for killing " + kills[0].mainName + ", fortunately.  ");
 										} else {
-											say(t, "By the way, I definitely didn't kill " + kills[0].mainName + " just to get closer to " + x.himHer() + ", alright?  ");
+											say(t, x, "By the way, I definitely didn't kill " + kills[0].mainName + " just to get closer to {c:himHer}, alright?  ");
 										}
 									} else {
 										if (x.morality > 66) {
 											say(t, "I was really hoping that we'd be able to get closer without " + kills[0].mainName + " in the way...  ");
 										} else if (x.morality > 33) {
-											say(t, x.HeShe() + " still hasn't forgiven me for killing " + kills[0].mainName + ", though.  ");
+											say(t, x, "{c:HeShe} still hasn't forgiven me for killing " + kills[0].mainName + ", though.  ");
 										} else {
-											say(t, x.HeShe() + ", on the other hand, has sworn to kill me in order to avenge " + kills[0].mainName + "... which is really sad.  Well, anyway...  ");
+											say(t, x, "{c:HeShe}, on the other hand, has sworn to kill me in order to avenge " + kills[0].mainName + "... which is really sad.  Well, anyway...  ");
 										}
 									}
 								} else {
 									if (x.opinion(this) >= 0) {
 										if (x.morality > 66) {
-											say(t, "I think " + x.heShe() + "'s secretly grateful that I killed " + kills[0].mainName + " so that " + x.heShe() + " wouldn't have to.  ");
+											say(t, x, "I think {c:heShe}'s secretly grateful that I killed " + kills[0].mainName + " so that {c:heShe} wouldn't have to.  ");
 										} else if (x.morality > 33) {
 											say(t, "We're both a lot happier without " + kills[0].mainName + " around.  ");
 										} else {
-											say(t, x.HeShe() + "'s always thanking me for killing " + kills[0].mainName + "... which makes me a little uncomfortable, not that I liked " + kills[0].himHer() + " much either.  ");
+											say(t, x, "{c:HeShe}'s always thanking me for killing " + kills[0].mainName + "... which makes me a little uncomfortable, not that I liked " + kills[0].himHer() + " much either.  ");
 										}
 									} else {
 										if (x.morality > 66) {
-											say(t, x.HeShe() + " thinks I should be more sorry about killing " + kills[0].mainName + ", though.  Which is ridiculous, since " + x.heShe() + " hated " + kills[0].himHer() + ", too.  ");
+											say(t, x, "{c:HeShe} thinks I should be more sorry about killing " + kills[0].mainName + ", though.  Which is ridiculous, since {c:heShe} hated " + kills[0].himHer() + ", too.  ");
 										} else if (x.morality > 33) {
 											say(t, "Even without " + kills[0].mainName + " in the way, our relationship still hasn't gotten much better, though.  ");
 										} else {
-											say(t, x.HeShe() + " doesn't like me, though, and " + x.heShe() + " says I should have let " + x.himHer() + " be the one to kill " + kills[0].mainName + ".  ");
+											say(t, x, "{c:HeShe} doesn't like me, though, and {c:heShe} says I should have let {c:himHer} be the one to kill " + kills[0].mainName + ".  ");
 										}
 									}
 								}
@@ -1531,53 +1531,53 @@ public class Forsaken implements Serializable {
 								if (x.opinion(this) > 100) {
 									if (confidence > 66) {
 										if (x.morality > 66) {
-											say(t, x.HeShe() + "'s still my minion, same as ever.  ");
+											say(t, x, "{c:HeShe}'s still my minion, same as ever.  ");
 										} else if (x.morality > 33) {
-											say(t, "Even though we were defeated together, " + x.heShe() + " still looks up to me.  ");
+											say(t, x, "Even though we were defeated together, {c:heShe} still looks up to me.  ");
 										} else {
-											say(t, x.HeShe() + " still relies on me to protect " + x.himHer() + ", just like when we were still Chosen.  ");
+											say(t, x, "{c:HeShe} still relies on me to protect {c:himHer}, just like when we were still Chosen.  ");
 										}
 									} else if (confidence > 33) {
 										if (x.morality > 66) {
-											say(t, x.HeShe() + "'s always been kinder to me than to anyone else, though...  ");
+											say(t, x, "{c:HeShe}'s always been kinder to me than to anyone else, though...  ");
 										} else if (x.morality > 33) {
 											say(t, "We've always been close.  ");
 										} else {
-											say(t, "I think " + x.heShe() + " gets jealous when I spend time with the Forsaken from other teams.  ");
+											say(t, x, "I think {c:heShe} gets jealous when I spend time with the Forsaken from other teams.  ");
 										}
 									} else {
 										if (x.morality > 66) {
-											say(t, x.HeShe() + " still protects me, even now...  ");
+											say(t, x, "{c:HeShe} still protects me, even now...  ");
 										} else if (x.morality > 33) {
-											say(t, "I-I'm so happy " + x.heShe() + " doesn't blame me for being too weak to help " + x.himHer() + " beat you...  ");
+											say(t, x, "I-I'm so happy {c:heShe} doesn't blame me for being too weak to help {c:himHer} beat you...  ");
 										} else {
-											say(t, "Even now that I serve you, I still... b-belong to " + x.himHer() + "...  ");
+											say(t, x, "Even now that I serve you, I still... b-belong to {c:himHer}...  ");
 										}
 									}
 								} else {
 									if (confidence > 66) {
 										if (x.morality > 66) {
-											say(t, x.HeShe() + "'s defying me for now...  Don't worry, " + x.heShe() + "'ll be mine again soon.  ");
+											say(t, x, "{c:HeShe}'s defying me for now...  Don't worry, {c:heShe}'ll be mine again soon.  ");
 										} else if (x.morality > 33) {
-											say(t, "Ever since we were defeated together, " + x.heShe() + " doesn't look up to me so much.  ");
+											say(t, x, "Ever since we were defeated together, {c:heShe} doesn't look up to me so much.  ");
 										} else {
-											say(t, x.HeShe() + "... blames me for being unable to protect " + x.himHer() + ".  Maybe I deserve it.  ");
+											say(t, x, "{c:HeShe}... blames me for being unable to protect {c:himHer}.  Maybe I deserve it.  ");
 										}
 									} else if (confidence > 33) {
 										if (x.morality > 66) {
-											say(t, x.HeShe() + " gives me the cold shoulder nowadays, though.  ");
+											say(t, x, "{c:HeShe} gives me the cold shoulder nowadays, though.  ");
 										} else if (x.morality > 33) {
 											say(t, "We used to be so close...  ");
 										} else {
-											say(t, "Now " + x.heShe() + " feels the same way about me as " + x.heShe() + " does about everyone else.  ");
+											say(t, x, "Now {c:heShe} feels the same way about me as {c:heShe} does about everyone else.  ");
 										}
 									} else {
 										if (x.morality > 66) {
-											say(t, x.HeShe() + " doesn't seem interested in protecting me anymore, though...  ");
+											say(t, x, "{c:HeShe} doesn't seem interested in protecting me anymore, though...  ");
 										} else if (x.morality > 33) {
-											say(t, "A-Although...  ever since I failed to help " + x.himHer() + " beat you... I think " + x.heShe() + " doesn't have the patience to put up with me anymore...  ");
+											say(t, x, "A-Although...  ever since I failed to help {c:himHer} beat you... I think {c:heShe} doesn't have the patience to put up with me anymore...  ");
 										} else {
-											say(t, "I used to belong to " + x.himHer() + ", b-but now " + x.heShe() + " says... th-that I'm not worthy to be with " + x.himHer() + "...  S-Still!  ");
+											say(t, x, "I used to belong to {c:himHer}, b-but now {c:heShe} says... th-that I'm not worthy to be with {c:himHer}...  S-Still!  ");
 										}
 									}
 								}
@@ -1585,53 +1585,53 @@ public class Forsaken implements Serializable {
 								if (x.opinion(this) > 100) {
 									if (confidence > 66) {
 										if (x.morality > 66) {
-											say(t, "Ever since you broke " + x.hisHer() + " will, " + x.heShe() + "'s been much more content to follow my orders, too.  ");
+											say(t, x, "Ever since you broke {c:hisHer} will, {c:heShe}'s been much more content to follow my orders, too.  ");
 										} else if (x.morality > 33) {
-											say(t, x.HeShe() + " started being much nicer to me after we lost our fight against you.  I think " + x.heShe() + " was guilty about not being able to do more to help.  ");
+											say(t, x, "{c:HeShe} started being much nicer to me after we lost our fight against you.  I think {c:heShe} was guilty about not being able to do more to help.  ");
 										} else {
-											say(t, "Ever since we were both defeated, " + x.heShe() + " doesn't seem to resent me nearly as much.  ");
+											say(t, x, "Ever since we were both defeated, {c:heShe} doesn't seem to resent me nearly as much.  ");
 										}
 									} else if (confidence > 33) {
 										if (x.morality > 66) {
-											say(t, x.HeShe() + " became a lot less self-righteous after you captured us.  ");
+											say(t, x, "{c:HeShe} became a lot less self-righteous after you captured us.  ");
 										} else if (x.morality > 33) {
 											say(t, "We get along much better than we used to.  ");
 										} else {
-											say(t, "Being beaten by you helped me understand " + x.himHer() + " better, and now we actually get along.  ");
+											say(t, x, "Being beaten by you helped me understand {c:himHer} better, and now we actually get along.  ");
 										}
 									} else {
 										if (x.morality > 66) {
-											say(t, "I'm letting " + x.himHer() + " protect me now, a-and... it's actually not so bad...  ");
+											say(t, x, "I'm letting {c:himHer} protect me now, a-and... it's actually not so bad...  ");
 										} else if (x.morality > 33) {
-											say(t, "I think that... after getting beaten by you... " + x.heShe() + " realized that " + x.heShe() + "'s actually not that much stronger than me...  ");
+											say(t, x, "I think that... after getting beaten by you... {c:heShe} realized that {c:heShe}'s actually not that much stronger than me...  ");
 										} else {
-											say(t, "A-As long as I do whatever " + x.heShe() + " tells me to, " + x.heShe() + "'s willing to protect me now...  ");
+											say(t, x, "A-As long as I do whatever {c:heShe} tells me to, {c:heShe}'s willing to protect me now...  ");
 										}
 									}
 								} else {
 									if (confidence > 66) {
 										if (x.morality > 66) {
-											say(t, x.HeShe() + " still resists my will, of course.  " + x.HeShe() + "'ll give " + x.himHer() + "self to me eventually.  I can wait.  ");
+											say(t, x, "{c:HeShe} still resists my will, of course.  {c:HeShe}'ll give {c:himHer}self to me eventually.  I can wait.  ");
 										} else if (x.morality > 33) {
-											say(t, x.HeShe() + " won't be able to hold onto " + x.hisHer() + " old hatred of me for much longer.  ");
+											say(t, x, "{c:HeShe} won't be able to hold onto {c:hisHer} old hatred of me for much longer.  ");
 										} else {
-											say(t, "It really doesn't bother me if " + x.heShe() + " still hates me.  ");
+											say(t, x, "It really doesn't bother me if {c:heShe} still hates me.  ");
 										}
 									} else if (confidence > 33) {
 										if (x.morality > 66) {
-											say(t, x.HeShe() + "'s the forgiving type, so I'm sure we'll be able to put our grudges behind us soon.  ");
+											say(t, x, "{c:HeShe}'s the forgiving type, so I'm sure we'll be able to put our grudges behind us soon.  ");
 										} else if (x.morality > 33) {
-											say(t, "If only " + x.heShe() + " liked me back...  ");
+											say(t, x, "If only {c:heShe} liked me back...  ");
 										} else {
-											say(t, "It was partly my fault that we never got along, so I don't blame " + x.himHer() + " for still being angry at me.  ");
+											say(t, x, "It was partly my fault that we never got along, so I don't blame {c:himHer} for still being angry at me.  ");
 										}
 									} else {
 										if (x.morality > 66) {
-											say(t, x.HeShe() + " still thinks of me as trash, of course...  A-And it's not like " + x.heShe() + "'s wrong...  ");
+											say(t, x, "{c:HeShe} still thinks of me as trash, of course...  A-And it's not like {c:heShe}'s wrong...  ");
 										} else if (x.morality > 33) {
-											say(t, "I k-keep begging " + x.himHer() + " to forgive me for being ungrateful to " + x.himHer() + " in the past...  ");
+											say(t, x, "I k-keep begging {c:himHer} to forgive me for being ungrateful to {c:himHer} in the past...  ");
 										} else {
-											say(t, "I-I don't really deserve to be liked, so it doesn't bother me that " + x.heShe() + " still hates me... really...  ");
+											say(t, x, "I-I don't really deserve to be liked, so it doesn't bother me that {c:heShe} still hates me... really...  ");
 										}
 									}
 								}
@@ -1640,53 +1640,53 @@ public class Forsaken implements Serializable {
 					} else if (x.opinion(this) > 100) {
 						if (confidence > 66) {
 							if (x.morality > 66) {
-								say(t, x.HeShe() + "'s loyal to me.  ");
+								say(t, x, "{c:HeShe}'s loyal to me.  ");
 							} else if (x.morality > 33) {
-								say(t, "I think " + x.heShe() + " looks up to me.  ");
+								say(t, x, "I think {c:heShe} looks up to me.  ");
 							} else {
-								say(t, x.HeShe() + " relies on me to protect " + x.himHer() + ".  ");
+								say(t, x, "{c:HeShe} relies on me to protect {c:himHer}.  ");
 							}
 						} else if (confidence > 33) {
 							if (x.morality > 66) {
-								say(t, "I think " + x.heShe() + "'s a naturally friendly person, deep down inside.  ");
+								say(t, x, "I think {c:heShe}'s a naturally friendly person, deep down inside.  ");
 							} else if (x.morality > 33) {
 								say(t, "We've gotten pretty close.  ");
 							} else {
-								say(t, x.HeShe() + " always gets jealous when I spend time with anyone else.  ");
+								say(t, x, "{c:HeShe} always gets jealous when I spend time with anyone else.  ");
 							}
 						} else {
 							if (x.morality > 66) {
-								say(t, x.HeShe() + " goes out of " + x.hisHer() + " way to protect me.  ");
+								say(t, x, "{c:HeShe} goes out of {c:hisHer} way to protect me.  ");
 							} else if (x.morality > 33) {
-								say(t, "I-I'm really grateful that " + x.heShe() + " doesn't look down on me for being so much weaker than " + x.himHer() + "...  ");
+								say(t, x, "I-I'm really grateful that {c:heShe} doesn't look down on me for being so much weaker than {c:himHer}...  ");
 							} else {
-								say(t, "U-Um, I know I belong to you, but... " + x.heShe() + " also makes sure I understand that I should spend all my free time serving " + x.himHer() + ".  ");
+								say(t, x, "U-Um, I know I belong to you, but... {c:heShe} also makes sure I understand that I should spend all my free time serving {c:himHer}.  ");
 							}
 						}
 					} else {
 						if (confidence > 66) {
 							if (x.morality > 66) {
-								say(t, x.HeShe() + "'s defying me for now...  Don't worry, " + x.heShe() + "'ll figure out that " + x.heShe() + " should be mine soon enough.  ");
+								say(t, x, "{c:HeShe}'s defying me for now...  Don't worry, {c:heShe}'ll figure out that {c:heShe} should be mine soon enough.  ");
 							} else if (x.morality > 33) {
-								say(t, x.HeShe() + " calls me arrogant, though.  ");
+								say(t, x, "{c:HeShe} calls me arrogant, though.  ");
 							} else {
-								say(t, x.HeShe() + "... says that I'm useless if I can't protect " + x.himHer() + ".  " + x.HeShe() + " could at least let me try.  ");
+								say(t, x, "{c:HeShe}... says that I'm useless if I can't protect {c:himHer}.  {c:HeShe} could at least let me try.  ");
 							}
 						} else if (confidence > 33) {
 							if (x.morality > 66) {
-								say(t, x.HeShe() + " isn't interested in spending time around me, though.  ");
+								say(t, x, "{c:HeShe} isn't interested in spending time around me, though.  ");
 							} else if (x.morality > 33) {
-								say(t, "I wish " + x.heShe() + "'d let me get closer to " + x.himHer() + ".  ");
+								say(t, x, "I wish {c:heShe}'d let me get closer to {c:himHer}.  ");
 							} else {
-								say(t, x.HeShe() + " doesn't trust anyone, even me.  ");
+								say(t, x, "{c:HeShe} doesn't trust anyone, even me.  ");
 							}
 						} else {
 							if (x.morality > 66) {
-								say(t, "I've been trying to convince " + x.himHer() + " to protect me...  No luck yet.  ");
+								say(t, x, "I've been trying to convince {c:himHer} to protect me...  No luck yet.  ");
 							} else if (x.morality > 33) {
-								say(t, "A-Although... " + x.heShe() + " says I'm not worth " + x.hisHer() + " time.  ");
+								say(t, x, "A-Although... {c:heShe} says I'm not worth {c:hisHer} time.  ");
 							} else {
-								say(t, x.HeShe() + " always just insults me whenever I try to talk to " + x.himHer() + "...  S-Still!  ");
+								say(t, x, "{c:HeShe} always just insults me whenever I try to talk to {c:himHer}...  S-Still!  ");
 							}
 						}
 					}
@@ -1826,31 +1826,31 @@ public class Forsaken implements Serializable {
 							if (x.innocence > 66) {
 								say(t, "It's nice to have someone else who agrees with me that all the weird sexual stuff Demons do is just completely gross.  ");
 							} else if (x.innocence > 33) {
-								say(t, x.HeShe() + " hasn't let the Demons turn " + x.himHer() + " into a pervert, which is apparently really rare!  ");
+								say(t, x, "{c:HeShe} hasn't let the Demons turn {c:himHer} into a pervert, which is apparently really rare!  ");
 							} else {
-								say(t, x.HeShe() + " doesn't let any of the weird sexual stuff get to " + x.himHer() + ", and always just stays calm and smart as always.  ");
+								say(t, x, "{c:HeShe} doesn't let any of the weird sexual stuff get to {c:himHer}, and always just stays calm and smart as always.  ");
 							}
 						} else if (deviancy < 40) {
 							if (x.innocence > 66) {
-								say(t, x.HeShe() + "'s done decently well in coping with all the deviant stuff " + x.heShe() + " never could have imagined back before " + x.heShe() + " became one of the Chosen.  ");
+								say(t, x, "{c:HeShe}'s done decently well in coping with all the deviant stuff {c:heShe} never could have imagined back before {c:heShe} became one of the Chosen.  ");
 							} else if (x.innocence > 33) {
-								say(t, x.HeShe() + " has managed to stay mostly sane even with all the things that have been done to " + x.himHer() + ".  ");
+								say(t, x, "{c:HeShe} has managed to stay mostly sane even with all the things that have been done to {c:himHer}.  ");
 							} else {
-								say(t, x.HeShe() + "'s very smart, even when it comes to all the sexual stuff we end up having to do.  ");
+								say(t, x, "{c:HeShe}'s very smart, even when it comes to all the sexual stuff we end up having to do.  ");
 							}
 						} else if (deviancy < 61) {
 							if (x.innocence > 66) {
-								say(t, x.HeShe() + " is clueless when it comes to our 'carnal duties', but that's alright, since I like helping " + x.himHer() + " out.  ");
+								say(t, x, "{c:HeShe} is clueless when it comes to our 'carnal duties', but that's alright, since I like helping {c:himHer} out.  ");
 							} else if (x.innocence > 33) {
-								say(t, "Sometimes I worry about making " + x.himHer() + " uncomfortable with my perversions... but " + x.heShe() + " should understand that I have my needs, too!  ");
+								say(t, x, "Sometimes I worry about making {c:himHer} uncomfortable with my perversions... but {c:heShe} should understand that I have my needs, too!  ");
 							} else {
-								say(t, x.HeShe() + " can be a bit stiff about the sexual stuff we have to do, but that just makes it more satisfying to show " + x.himHer() + " the ropes on one of the subjects I know more about.  ");
+								say(t, x, "{c:HeShe} can be a bit stiff about the sexual stuff we have to do, but that just makes it more satisfying to show {c:himHer} the ropes on one of the subjects I know more about.  ");
 							}
 						} else if (deviancy < 81) {
 							if (x.innocence > 66) {
-								say(t, "It's really adorable, the way " + x.heShe() + " has no idea what to do when we end up in really deviant situations.  ");
+								say(t, x, "It's really adorable, the way {c:heShe} has no idea what to do when we end up in really deviant situations.  ");
 							} else if (x.innocence > 33) {
-								say(t, "I wonder what " + x.heShe() + "'d say if " + x.heShe() + " knew about all the naughty stuff I want to do to " + x.himHer() + " someday...  ");
+								say(t, x, "I wonder what {c:heShe}'d say if {c:heShe} knew about all the naughty stuff I want to do to {c:himHer} someday...  ");
 							} else {
 								say(t, "I always dream of melting that firm, rational mind of ");
 								if (x.gender.equals(Gender.MALE)) {
@@ -1862,11 +1862,11 @@ public class Forsaken implements Serializable {
 							}
 						} else {
 							if (x.innocence > 66) {
-								say(t, "I live for those moments when I can trick " + x.himHer() + " into helping me get off in ways " + x.heShe() + " can't even understand...  ");
+								say(t, x, "I live for those moments when I can trick {c:himHer} into helping me get off in ways {c:heShe} can't even understand...  ");
 							} else if (x.innocence > 33) {
-								say(t, "I pretty much can't stop myself from masturbating when " + x.heShe() + "'s around.  ");
+								say(t, x, "I pretty much can't stop myself from masturbating when {c:heShe}'s around.  ");
 							} else {
-								say(t, "I know " + x.heShe() + "'s uncomfortable with how much I lust after " + x.himHer() + ", but that just turns me on even more...  ");
+								say(t, x, "I know {c:heShe}'s uncomfortable with how much I lust after {c:himHer}, but that just turns me on even more...  ");
 							}
 						}
 					} else {
@@ -1880,41 +1880,41 @@ public class Forsaken implements Serializable {
 								}
 								append(w, t, x, " being so sexually forward, but I know it's not {c:hisHer} fault.  ");
 							} else if (x.innocence > 33) {
-								say(t, x.HeShe() + "'s a bit too interested in sex, but considering what " + x.heShe() + "'s been through, I can't blame " + x.himHer() + ".  ");
+								say(t, x, "{c:HeShe}'s a bit too interested in sex, but considering what {c:heShe}'s been through, I can't blame {c:himHer}.  ");
 							} else {
-								say(t, x.HeShe() + " can be a bit... perverted, sometimes, but maybe I'm just too sensitive to that sort of thing.  ");
+								say(t, x, "{c:HeShe} can be a bit... perverted, sometimes, but maybe I'm just too sensitive to that sort of thing.  ");
 							}
 						} else if (deviancy < 40) {
 							if (x.innocence > 66) {
-								say(t, "I suppose it's a bit strange that " + x.heShe() + " doesn't see anything wrong with being completely open about how much sex " + x.heShe() + " wants to have.  ");
+								say(t, x, "I suppose it's a bit strange that {c:heShe} doesn't see anything wrong with being completely open about how much sex {c:heShe} wants to have.  ");
 							} else if (x.innocence > 33) {
-								say(t, x.HeShe() + "'s always doing sexual stuff with different people, but I guess " + x.hisHer() + " constant lust leaves " + x.himHer() + " no choice.  ");
+								say(t, x, "{c:HeShe}'s always doing sexual stuff with different people, but I guess {c:hisHer} constant lust leaves {c:himHer} no choice.  ");
 							} else {
-								say(t, "I do get a little... uncomfortable when " + x.heShe() + " talks about " + x.hisHer() + " sexual fetishes.  Some of them are so weird.  ");
+								say(t, x, "I do get a little... uncomfortable when {c:heShe} talks about {c:hisHer} sexual fetishes.  Some of them are so weird.  ");
 							}
 						} else if (deviancy < 61) {
 							if (x.innocence > 66) {
-								say(t, "It does disturb me when " + x.heShe() + " talks about all the messed up things " + x.heShe() + " wants to do to other people, as if those kinds of desires are completely normal.  ");
+								say(t, x, "It does disturb me when {c:heShe} talks about all the messed up things {c:heShe} wants to do to other people, as if those kinds of desires are completely normal.  ");
 							} else if (x.innocence > 33) {
-								say(t, "I've heard rumors about what " + x.heShe() + " does with some of " + x.hisHer() + " sexual partners, but I'm pretty sure they're exaggerations.  They have to be.  ");
+								say(t, x, "I've heard rumors about what {c:heShe} does with some of {c:hisHer} sexual partners, but I'm pretty sure they're exaggerations.  They have to be.  ");
 							} else {
-								say(t, "I've learned not to talk to " + x.himHer() + " about " + x.hisHer() + " sexual fetishes.  It always made me feel a bit sick, so I just don't do it anymore.  ");
+								say(t, x, "I've learned not to talk to {c:himHer} about {c:hisHer} sexual fetishes.  It always made me feel a bit sick, so I just don't do it anymore.  ");
 							}
 						} else if (deviancy < 81) {
 							if (x.innocence > 66) {
-								say(t, "I wish " + x.heShe() + "'d stop masturbating all the time, but whenever I point it out to " + x.himHer() + ", " + x.heShe() + "'s always surprised, like " + x.heShe() + " was doing it without thinking.  ");
+								say(t, x, "I wish {c:heShe}'d stop masturbating all the time, but whenever I point it out to {c:himHer}, {c:heShe}'s always surprised, like {c:heShe} was doing it without thinking.  ");
 							} else if (x.innocence > 33) {
-								say(t, "In any case, " + x.heShe() + "'s completely obsessed with sex, so talking to " + x.himHer() + " about anything else can be difficult.  ");
+								say(t, x, "In any case, {c:heShe}'s completely obsessed with sex, so talking to {c:himHer} about anything else can be difficult.  ");
 							} else {
-								say(t, "It can be a little bit difficult to talk to " + x.himHer() + ", since " + x.hisHer() + " mind is always focused on seeking out " + x.hisHer() + " next orgasm.  ");
+								say(t, x, "It can be a little bit difficult to talk to {c:himHer}, since {c:hisHer} mind is always focused on seeking out {c:hisHer} next orgasm.  ");
 							}
 						} else {
 							if (x.innocence > 66) {
-								say(t, "It's hard to imagine, but I think " + x.heShe() + " might be an even bigger pervert than me.  ");
+								say(t, x, "It's hard to imagine, but I think {c:heShe} might be an even bigger pervert than me.  ");
 							} else if (x.innocence > 33) {
 								say(t, "We do agree that sex is the most important thing about being alive.  ");
 							} else {
-								say(t, x.HisHer() + " sexual techniques are amazing.  I have to admire them.  ");
+								say(t, x, "{c:HisHer} sexual techniques are amazing.  I have to admire them.  ");
 							}
 						}
 					}
@@ -1923,83 +1923,83 @@ public class Forsaken implements Serializable {
 							if (x.confidence > 66) {
 								say(t, "I'll never forgive you for what you did to such a strong, beautiful person.  ");
 							} else if (x.confidence > 33) {
-								say(t, "If I can find a way to defeat you, I know " + x.heShe() + "'ll come to " + x.hisHer() + " senses and help me do it.  ");
+								say(t, x, "If I can find a way to defeat you, I know {c:heShe}'ll come to {c:hisHer} senses and help me do it.  ");
 							} else {
-								say(t, "More importantly, even if " + x.heShe() + " doesn't have the willpower to resist you, I can resist on " + x.hisHer() + " behalf.  ");
+								say(t, x, "More importantly, even if {c:heShe} doesn't have the willpower to resist you, I can resist on {c:hisHer} behalf.  ");
 							}
 						} else if (flavorObedience() < 40) {
 							if (x.confidence > 66) {
-								say(t, "The thing that bothers me most is seeing such a strong-willed person forced to humiliate " + x.himHer() + "self for you.  ");
+								say(t, x, "The thing that bothers me most is seeing such a strong-willed person forced to humiliate {c:himHer}self for you.  ");
 							} else if (x.confidence > 33) {
-								say(t, "You should really go easier on " + x.himHer() + ".  " + x.HeShe() + " doesn't deserve this.  ");
+								say(t, x, "You should really go easier on {c:himHer}.  {c:HeShe} doesn't deserve this.  ");
 							} else {
-								say(t, "I just wish " + x.heShe() + " were able to put up a little more resistance against you.  ");
+								say(t, x, "I just wish {c:heShe} were able to put up a little more resistance against you.  ");
 							}
 						} else if (flavorObedience() < 61) {
 							if (x.confidence > 66) {
-								say(t, "The fact that you were able to break someone like " + x.himHer() + " makes me feel less bad about being unable to resist.  ");
+								say(t, x, "The fact that you were able to break someone like {c:himHer} makes me feel less bad about being unable to resist.  ");
 							} else if (x.confidence > 33) {
-								say(t, "We're both going through the same stuff, and that helps me feel closer to " + x.himHer() + ".  ");
+								say(t, x, "We're both going through the same stuff, and that helps me feel closer to {c:himHer}.  ");
 							} else {
-								say(t, "I sort of envy the way that " + x.heShe() + "'s able to handle doing anything for you, no matter how demeaning.  ");
+								say(t, x, "I sort of envy the way that {c:heShe}'s able to handle doing anything for you, no matter how demeaning.  ");
 							}
 						} else if (flavorObedience() < 81) {
 							if (x.confidence > 66) {
-								say(t, "I really admire " + x.hisHer() + " devotion to you.  " + x.HeShe() + "'s amazing...  ");
+								say(t, x, "I really admire {c:hisHer} devotion to you.  {c:HeShe}'s amazing...  ");
 							} else if (x.confidence > 33) {
 								say(t, "I'm really happy that we're able to serve you together.  ");
 							} else {
-								say(t, "If " + x.heShe() + " were actually a weak person, though, " + x.heShe() + " wouldn't be able to devote " + x.himHer() + "self so much to serving you.  ");
+								say(t, x, "If {c:heShe} were actually a weak person, though, {c:heShe} wouldn't be able to devote {c:himHer}self so much to serving you.  ");
 							}
 						} else {
 							if (x.confidence > 66) {
-								say(t, "I'm glad that if I ever come up short in serving you, " + x.heShe() + "'ll be quick to strike me down.  ");
+								say(t, x, "I'm glad that if I ever come up short in serving you, {c:heShe}'ll be quick to strike me down.  ");
 							} else if (x.confidence > 33) {
-								say(t, x.HeShe() + "'s a great servant.  I'm ashamed to admit it, but " + x.heShe() + " might even be a better servant than I am...  ");
+								say(t, x, "{c:HeShe}'s a great servant.  I'm ashamed to admit it, but {c:heShe} might even be a better servant than I am...  ");
 							} else {
-								say(t, x.HeShe() + " seems so happy to finally be able to surrender " + x.hisHer() + " will completely to a master like you.  ");
+								say(t, x, "{c:HeShe} seems so happy to finally be able to surrender {c:hisHer} will completely to a master like you.  ");
 							}
 						}
 					} else {
 						if (flavorObedience() < 20) {
 							if (x.confidence > 66) {
-								say(t, "Seeing " + x.himHer() + " resist you gives me the strength to do the same.  ");
+								say(t, x, "Seeing {c:himHer} resist you gives me the strength to do the same.  ");
 							} else if (x.confidence > 33) {
 								say(t, "In any case, we're united in our resistance against you.  ");
 							} else {
-								say(t, "Still, I think that " + x.heShe() + " hasn't completely given up on resisting you, and I'm definitely not giving up before " + x.himHer() + ".  ");
+								say(t, x, "Still, I think that {c:heShe} hasn't completely given up on resisting you, and I'm definitely not giving up before {c:himHer}.  ");
 							}
 						} else if (flavorObedience() < 40) {
 							if (x.confidence > 66) {
-								say(t, "My only complaint is really shameful...  I'm envious of the way " + x.heShe() + "'s able to keep resisting you so bravely.  ");
+								say(t, x, "My only complaint is really shameful...  I'm envious of the way {c:heShe}'s able to keep resisting you so bravely.  ");
 							} else if (x.confidence > 33) {
-								say(t, "The closest thing to a real complaint I have about " + x.himHer() + " is that the way " + x.heShe() + " resists you makes me look bad.  ");
+								say(t, x, "The closest thing to a real complaint I have about {c:himHer} is that the way {c:heShe} resists you makes me look bad.  ");
 							} else {
-								say(t, "I guess I'm just... a little bit annoyed that " + x.heShe() + " of all people has managed to keep resisting you when I've failed.  ");
+								say(t, x, "I guess I'm just... a little bit annoyed that {c:heShe} of all people has managed to keep resisting you when I've failed.  ");
 							}
 						} else if (flavorObedience() < 61) {
 							if (x.confidence > 66) {
-								say(t, "I just wish " + x.heShe() + "'d stop fighting you so much.  " + x.HeShe() + "'s going to get us all punished...  ");
+								say(t, x, "I just wish {c:heShe}'d stop fighting you so much.  {c:HeShe}'s going to get us all punished...  ");
 							} else if (x.confidence > 33) {
-								say(t, "The only real issue I have with " + x.himHer() + " is that it's annoying to see " + x.himHer() + " keep fighting the inevitable.  ");
+								say(t, x, "The only real issue I have with {c:himHer} is that it's annoying to see {c:himHer} keep fighting the inevitable.  ");
 							} else {
-								say(t, "I do have a weird feeling about the fact that you haven't broken " + x.himHer() + " as hard as me yet...  Is that on purpose?  ");
+								say(t, x, "I do have a weird feeling about the fact that you haven't broken {c:himHer} as hard as me yet...  Is that on purpose?  ");
 							}
 						} else if (flavorObedience() < 81) {
 							if (x.confidence > 66) {
-								say(t, "My only worry is that... if " + x.heShe() + " doesn't completely give up on resisting you, it won't turn out well for " + x.himHer() + ".  ");
+								say(t, x, "My only worry is that... if {c:heShe} doesn't completely give up on resisting you, it won't turn out well for {c:himHer}.  ");
 							} else if (x.confidence > 33) {
-								say(t, "I just wish " + x.heShe() + " were more devoted to you.  ");
+								say(t, x, "I just wish {c:heShe} were more devoted to you.  ");
 							} else {
-								say(t, "If I had to come up with a serious complaint... it'd be that " + x.heShe() + "'s afraid of completely giving " + x.himHer() + "self to you.  ");
+								say(t, x, "If I had to come up with a serious complaint... it'd be that {c:heShe}'s afraid of completely giving {c:himHer}self to you.  ");
 							}
 						} else {
 							if (x.confidence > 66) {
-								say(t, "I have to admit that it's a bit funny to see " + x.himHer() + " pretend that " + x.hisHer() + " desires matter at all next to your greatness.  ");
+								say(t, x, "I have to admit that it's a bit funny to see {c:himHer} pretend that {c:hisHer} desires matter at all next to your greatness.  ");
 							} else if (x.confidence > 33) {
 								say(t, "Of course, my devotion to you is still greater than anything I could possibly feel about anyone else.  But as long as we're talking about mere humans...  ");
 							} else {
-								say(t, "Oh, and this should go without saying, but if you decide to get rid of " + x.himHer() + ", I'll still happily do it for you.  But otherwise...  ");
+								say(t, x, "Oh, and this should go without saying, but if you decide to get rid of {c:himHer}, I'll still happily do it for you.  But otherwise...  ");
 							}
 						}
 					}
@@ -2009,79 +2009,79 @@ public class Forsaken implements Serializable {
 								if (troublemaker[j] < 70) {
 									if (morality > 66) {
 										if (x.dignity > 66) {
-											say(t, "I think " + x.heShe() + "'s actually sorry about hurting the rest of us in the past.  ");
+											say(t, x, "I think {c:heShe}'s actually sorry about hurting the rest of us in the past.  ");
 										} else if (x.dignity > 33) {
-											say(t, x.HeShe() + " seems a lot happier, lately.  ");
+											say(t, x, "{c:HeShe} seems a lot happier, lately.  ");
 										} else {
-											say(t, x.HeShe() + " doesn't seem like " + x.heShe() + " wants to cause trouble for the rest of us anymore.  ");
+											say(t, x, "{c:HeShe} doesn't seem like {c:heShe} wants to cause trouble for the rest of us anymore.  ");
 										}
 									} else if (morality > 33) {
 										if (x.dignity > 66) {
-											say(t, x.HeShe() + " says " + x.heShe() + "'ll stop causing trouble for the other Forsaken, too.  ");
+											say(t, x, "{c:HeShe} says {c:heShe}'ll stop causing trouble for the other Forsaken, too.  ");
 										} else if (x.dignity > 33) {
-											say(t, x.HeShe() + "'s stopped causing trouble for the rest of us so often.  ");
+											say(t, x, "{c:HeShe}'s stopped causing trouble for the rest of us so often.  ");
 										} else {
-											say(t, "I'm glad " + x.heShe() + " hasn't been lashing out randomly as often.  ");
+											say(t, x, "I'm glad {c:heShe} hasn't been lashing out randomly as often.  ");
 										}
 									} else {
 										if (x.dignity > 66) {
-											say(t, x.HeShe() + "'s promised to stop attacking the other Forsaken, so you shouldn't have any problem with " + x.himHer() + ", right?  ");
+											say(t, x, "{c:HeShe}'s promised to stop attacking the other Forsaken, so you shouldn't have any problem with {c:himHer}, right?  ");
 										} else if (x.dignity > 33) {
-											say(t, x.HisHer() + " acting out used to be annoying, but " + x.heShe() + "'s toned it down lately.  ");
+											say(t, x, "{c:HisHer} acting out used to be annoying, but {c:heShe}'s toned it down lately.  ");
 										} else {
-											say(t, x.HeShe() + " knows it'd be a bad idea to cause trouble again the way " + x.heShe() + " used to.  ");
+											say(t, x, "{c:HeShe} knows it'd be a bad idea to cause trouble again the way {c:heShe} used to.  ");
 										}
 									}
 								} else if (troublemaker[j] < 200) {
 									if (morality > 66) {
 										if (x.dignity > 66) {
-											say(t, x.HeShe() + " pretends otherwise, but I'm sure " + x.heShe() + " knows that " + x.heShe() + " shouldn't be attacking other Forsaken.  ");
+											say(t, x, "{c:HeShe} pretends otherwise, but I'm sure {c:heShe} knows that {c:heShe} shouldn't be attacking other Forsaken.  ");
 										} else if (x.dignity > 33) {
-											say(t, x.HeShe() + " doesn't seem to actually enjoy hurting the rest of us.  ");
+											say(t, x, "{c:HeShe} doesn't seem to actually enjoy hurting the rest of us.  ");
 										} else {
-											say(t, x.HeShe() + " isn't actually trying to cause trouble for the other Forsaken.  ");
+											say(t, x, "{c:HeShe} isn't actually trying to cause trouble for the other Forsaken.  ");
 										}
 									} else if (morality > 33) {
 										if (x.dignity > 66) {
-											say(t, "I think " + x.heShe() + "'s only causing trouble because " + x.heShe() + " feels like " + x.heShe() + " needs to put on a tough face.  ");
+											say(t, x, "I think {c:heShe}'s only causing trouble because {c:heShe} feels like {c:heShe} needs to put on a tough face.  ");
 										} else if (x.dignity > 33) {
-											say(t, "I'm trying to convince " + x.himHer() + " to stop attacking the other Forsaken so much, too.  ");
+											say(t, x, "I'm trying to convince {c:himHer} to stop attacking the other Forsaken so much, too.  ");
 										} else {
-											say(t, x.HisHer() + " random outbursts lately aren't that bad.  ");
+											say(t, x, "{c:HisHer} random outbursts lately aren't that bad.  ");
 										}
 									} else {
 										if (x.dignity > 66) {
-											say(t, "Even if " + x.heShe() + " cares way too much about looking tough by causing trouble for the rest of us, that's just who " + x.heShe() + " is.  ");
+											say(t, x, "Even if {c:heShe} cares way too much about looking tough by causing trouble for the rest of us, that's just who {c:heShe} is.  ");
 										} else if (x.dignity > 33) {
-											say(t, "I know that the trouble " + x.heShe() + " causes isn't actually serious enough to affect your plans.  ");
+											say(t, x, "I know that the trouble {c:heShe} causes isn't actually serious enough to affect your plans.  ");
 										} else {
-											say(t, "The way " + x.heShe() + " randomly attacks other Forsaken can be annoying, but you find " + x.hisHer() + " fierceness useful, right?  ");
+											say(t, x, "The way {c:heShe} randomly attacks other Forsaken can be annoying, but you find {c:hisHer} fierceness useful, right?  ");
 										}
 									}
 								} else {
 									if (morality > 66) {
 										if (x.dignity > 66) {
-											say(t, "I'm going to keep trying to convince " + x.himHer() + " to tone down the attacks on the other Forsaken.  ");
+											say(t, x, "I'm going to keep trying to convince {c:himHer} to tone down the attacks on the other Forsaken.  ");
 										} else if (x.dignity > 33) {
-											say(t, "As long as " + x.heShe() + " isn't actually killing the rest of us, I can forgive " + x.himHer() + " for " + x.hisHer() + " violent outbursts.  ");
+											say(t, x, "As long as {c:heShe} isn't actually killing the rest of us, I can forgive {c:himHer} for {c:hisHer} violent outbursts.  ");
 										} else {
-											say(t, "I know that the way " + x.heShe() + " randomly attacks other Forsaken is bad, and I won't try to defend it.  " + x.HeShe() + "'s just...  ");
+											say(t, x, "I know that the way {c:heShe} randomly attacks other Forsaken is bad, and I won't try to defend it.  {c:HeShe}'s just...  ");
 										}
 									} else if (morality > 33) {
 										if (x.dignity > 66) {
-											say(t, "After " + x.heShe() + "'s made it clear that " + x.heShe() + " has the power to hurt the rest of us, I'm sure " + x.heShe() + "'ll tone down the constant attacks.  ");
+											say(t, x, "After {c:heShe}'s made it clear that {c:heShe} has the power to hurt the rest of us, I'm sure {c:heShe}'ll tone down the constant attacks.  ");
 										} else if (x.dignity > 33) {
-											say(t, "I have to admit that the way " + x.heShe() + " keeps attacking the other Forsaken is annoying, but it doesn't change the rest.  ");
+											say(t, x, "I have to admit that the way {c:heShe} keeps attacking the other Forsaken is annoying, but it doesn't change the rest.  ");
 										} else {
-											say(t, "I just wish " + x.heShe() + " wouldn't randomly attack the rest of us so often...  ");
+											say(t, x, "I just wish {c:heShe} wouldn't randomly attack the rest of us so often...  ");
 										}
 									} else {
 										if (x.dignity > 66) {
-											say(t, "And even if it's annoying in the moment, I have to appreciate the way " + x.heShe() + " always gets away with causing trouble for the rest of us.  ");
+											say(t, x, "And even if it's annoying in the moment, I have to appreciate the way {c:heShe} always gets away with causing trouble for the rest of us.  ");
 										} else if (x.dignity > 33) {
-											say(t, "And if you really wanted to stop " + x.himHer() + " from attacking the rest of us all the time, I'm sure you would've stopped it by now.  ");
+											say(t, x, "And if you really wanted to stop {c:himHer} from attacking the rest of us all the time, I'm sure you would've stopped it by now.  ");
 										} else {
-											say(t, x.HisHer() + " fierceness, the way " + x.heShe() + "'s always attacking other Forsaken whenever " + x.heShe() + "'s not on a mission, is part of what makes " + x.himHer() + " valuable to you, right?  ");
+											say(t, x, "{c:HisHer} fierceness, the way {c:heShe}'s always attacking other Forsaken whenever {c:heShe}'s not on a mission, is part of what makes {c:himHer} valuable to you, right?  ");
 										}
 									}
 								}
@@ -2091,53 +2091,53 @@ public class Forsaken implements Serializable {
 					if (opinion(x) < 401) {
 						if (confidence > 66) {
 							if (x.morality > 66) {
-								say(t, x.HeShe() + "'s someone I can trust to stand behind me.");
+								say(t, x, "{c:HeShe}'s someone I can trust to stand behind me.");
 							} else if (x.morality > 33) {
-								say(t, "Overall, I enjoy " + x.himHer() + ".");
+								say(t, x, "Overall, I enjoy {c:himHer}.");
 							} else {
-								say(t, "I want to protect " + x.himHer() + ".");
+								say(t, x, "I want to protect {c:himHer}.");
 							}
 						} else if (confidence > 33) {
 							if (x.morality > 66) {
-								say(t, "I just like " + x.himHer() + ".");
+								say(t, x, "I just like {c:himHer}.");
 							} else if (x.morality > 33) {
 								say(t, "It would be nice if we could spend more time together.");
 							} else {
-								say(t, "I want " + x.himHer() + " to be happy.");
+								say(t, x, "I want {c:himHer} to be happy.");
 							}
 						} else {
 							if (x.morality > 66) {
-								say(t, x.HeShe() + " makes me want to live up to " + x.hisHer() + " expectations.");
+								say(t, x, "{c:HeShe} makes me want to live up to {c:hisHer} expectations.");
 							} else if (x.morality > 33) {
-								say(t, "I admire " + x.himHer() + " a lot.");
+								say(t, x, "I admire {c:himHer} a lot.");
 							} else {
-								say(t, "I want to be useful to " + x.himHer() + "...");
+								say(t, x, "I want to be useful to {c:himHer}...");
 							}
 						}
 					} else {
 						if (confidence > 66) {
 							if (x.morality > 66) {
-								say(t, "I want " + x.himHer() + " to look at me and no one else!");
+								say(t, x, "I want {c:himHer} to look at me and no one else!");
 							} else if (x.morality > 33) {
-								say(t, "It's fair to say that I love " + x.himHer() + ".");
+								say(t, x, "It's fair to say that I love {c:himHer}.");
 							} else {
-								say(t, "I want to protect " + x.himHer() + " forever!");
+								say(t, x, "I want to protect {c:himHer} forever!");
 							}
 						} else if (confidence > 33) {
 							if (x.morality > 66) {
-								say(t, "I just... love " + x.himHer() + " with all my heart.");
+								say(t, x, "I just... love {c:himHer} with all my heart.");
 							} else if (x.morality > 33) {
 								say(t, "I live for the times we can spend together.");
 							} else {
-								say(t, "I'd give anything to help " + x.himHer() + " be happy.");
+								say(t, x, "I'd give anything to help {c:himHer} be happy.");
 							}
 						} else {
 							if (x.morality > 66) {
-								say(t, "I'll never be as great as " + x.himHer() + ", but I have to try...");
+								say(t, x, "I'll never be as great as {c:himHer}, but I have to try...");
 							} else if (x.morality > 33) {
-								say(t, "I can't even think straight when " + x.heShe() + "'s around.");
+								say(t, x, "I can't even think straight when {c:heShe}'s around.");
 							} else {
-								say(t, "I want to belong to " + x.himHer() + " completely...");
+								say(t, x, "I want to belong to {c:himHer} completely...");
 							}
 						}
 					}
@@ -2277,37 +2277,37 @@ public class Forsaken implements Serializable {
 								if (otherOpinionOfDead >= 0) {
 									if (x.opinion(this) > 100) {
 										if (x.morality > 66) {
-											say(t, x.HeShe() + " cared more about trying to be a hero than about saving " + x.kills[0].mainName + "'s life.  ");
+											say(t, x, "{c:HeShe} cared more about trying to be a hero than about saving " + x.kills[0].mainName + "'s life.  ");
 										} else if (x.morality > 33) {
-											say(t, "I can't forgive " + x.himHer() + " for killing " + x.kills[0].mainName + ".  ");
+											say(t, x, "I can't forgive {c:himHer} for killing " + x.kills[0].mainName + ".  ");
 										} else {
-											say(t, x.HeShe() + " has never properly apologized for killing " + x.kills[0].mainName + ".  ");
+											say(t, x, "{c:HeShe} has never properly apologized for killing " + x.kills[0].mainName + ".  ");
 										}
 									} else {
 										if (x.morality > 66) {
-											say(t, x.HeShe() + " probably killed " + x.kills[0].mainName + " because " + x.heShe() + " was jealous about how close the two of us were.  ");
+											say(t, x, "{c:HeShe} probably killed " + x.kills[0].mainName + " because {c:heShe} was jealous about how close the two of us were.  ");
 										} else if (x.morality > 33) {
-											say(t, x.HeShe() + " fooled " + x.kills[0].mainName + " into thinking " + x.heShe() + " cared about " + x.kills[0].himHer() + " - and then " + x.heShe() + " killed " + x.kills[0].himHer() + ".  ");
+											say(t, x, "{c:HeShe} fooled " + x.kills[0].mainName + " into thinking {c:heShe} cared about " + x.kills[0].himHer() + " - and then {c:heShe} killed " + x.kills[0].himHer() + ".  ");
 										} else {
-											say(t, "I used to think " + x.heShe() + " cared about " + x.kills[0].mainName + ", but then " + x.heShe() + " killed " + x.kills[0].himHer() + ".  ");
+											say(t, x, "I used to think {c:heShe} cared about " + x.kills[0].mainName + ", but then {c:heShe} killed " + x.kills[0].himHer() + ".  ");
 										}
 									}
 								} else {
 									if (x.opinion(this) > 100) {
 										if (x.morality > 66) {
-											say(t, "The way " + x.heShe() + " acts so sweet toward me just makes me sick, especially after " + x.heShe() + " so eagerly killed " + x.kills[0].mainName + ".  ");
+											say(t, x, "The way {c:heShe} acts so sweet toward me just makes me sick, especially after {c:heShe} so eagerly killed " + x.kills[0].mainName + ".  ");
 										} else if (x.morality > 33) {
-											say(t, x.HeShe() + " says " + x.heShe() + " wants to be friends, but I still remember how happy " + x.heShe() + " was to kill " + x.kills[0].mainName + ".  ");
+											say(t, x, "{c:HeShe} says {c:heShe} wants to be friends, but I still remember how happy {c:heShe} was to kill " + x.kills[0].mainName + ".  ");
 										} else {
-											say(t, x.HeShe() + " killed " + x.kills[0].mainName + ", just because " + x.heShe() + " was jealous of " + x.kills[0].himHer() + " for getting close to me.  ");
+											say(t, x, "{c:HeShe} killed " + x.kills[0].mainName + ", just because {c:heShe} was jealous of " + x.kills[0].himHer() + " for getting close to me.  ");
 										}
 									} else {
 										if (x.morality > 66) {
-											say(t, x.HeShe() + " claims that " + x.heShe() + "'s sorry about 'needing' to kill " + x.kills[0].mainName + ", but I can tell that " + x.heShe() + "'s lying.  ");
+											say(t, x, "{c:HeShe} claims that {c:heShe}'s sorry about 'needing' to kill " + x.kills[0].mainName + ", but I can tell that {c:heShe}'s lying.  ");
 										} else if (x.morality > 33) {
-											say(t, x.HeShe() + " took the first excuse " + x.heShe() + " could find to kill " + x.kills[0].mainName + ".  ");
+											say(t, x, "{c:HeShe} took the first excuse {c:heShe} could find to kill " + x.kills[0].mainName + ".  ");
 										} else {
-											say(t, x.HeShe() + " killed " + x.kills[0].mainName + ", and I know it's just a matter of time until " + x.heShe() + " comes after me.  ");
+											say(t, x, "{c:HeShe} killed " + x.kills[0].mainName + ", and I know it's just a matter of time until {c:heShe} comes after me.  ");
 										}
 									}
 								}
@@ -2315,37 +2315,37 @@ public class Forsaken implements Serializable {
 								if (otherOpinionOfDead >= 0) {
 									if (x.opinion(this) > 100) {
 										if (x.morality > 66) {
-											say(t, x.HeShe() + " says that " + x.heShe() + " doesn't want to be enemies, but if " + x.heShe() + " does to all " + x.hisHer() + " friends what " + x.heShe() + " did to " + x.kills[0].mainName + ", then I'm not interested.  ");
+											say(t, x, "{c:HeShe} says that {c:heShe} doesn't want to be enemies, but if {c:heShe} does to all {c:hisHer} friends what {c:heShe} did to " + x.kills[0].mainName + ", then I'm not interested.  ");
 										} else if (x.morality > 33) {
-											say(t, x.HeShe() + "'s obsessed with using me to fill the hole in " + x.hisHer() + " heart after killing " + x.kills[0].mainName + ".  ");
+											say(t, x, "{c:HeShe}'s obsessed with using me to fill the hole in {c:hisHer} heart after killing " + x.kills[0].mainName + ".  ");
 										} else {
-											say(t, x.HeShe() + " got over killing " + x.kills[0].mainName + " much too quickly, and now " + x.heShe() + "'s stalking me.  ");
+											say(t, x, "{c:HeShe} got over killing " + x.kills[0].mainName + " much too quickly, and now {c:heShe}'s stalking me.  ");
 										}
 									} else {
 										if (x.morality > 66) {
-											say(t, "I never liked " + x.kills[0].mainName + ", but I still can't understand how " + x.mainName + " could throw " + x.hisHer() + " friend's life away so easily.  ");
+											say(t, x, "I never liked " + x.kills[0].mainName + ", but I still can't understand how " + x.mainName + " could throw {c:hisHer} friend's life away so easily.  ");
 										} else if (x.morality > 33) {
-											say(t, "Considering how willing " + x.heShe() + " was to kill " + x.kills[0].mainName + ", " + x.hisHer() + " closest friend, I'm glad that there's no connection between us anymore.  ");
+											say(t, x, "Considering how willing {c:heShe} was to kill " + x.kills[0].mainName + ", {c:hisHer} closest friend, I'm glad that there's no connection between us anymore.  ");
 										} else {
-											say(t, "Something broke inside " + x.himHer() + " after " + x.heShe() + " ended up killing " + x.kills[0].mainName + ", and " + x.heShe() + " hates me for continuing to live on.  ");
+											say(t, x, "Something broke inside {c:himHer} after {c:heShe} ended up killing " + x.kills[0].mainName + ", and {c:heShe} hates me for continuing to live on.  ");
 										}
 									}
 								} else {
 									if (x.opinion(this) > 100) {
 										if (x.morality > 66) {
-											say(t, "It's probably good that " + x.heShe() + " killed " + x.kills[0].mainName + ", but that doesn't mean I'm interested in being friends with " + x.himHer() + ".  ");
+											say(t, x, "It's probably good that {c:heShe} killed " + x.kills[0].mainName + ", but that doesn't mean I'm interested in being friends with {c:himHer}.  ");
 										} else if (x.morality > 33) {
-											say(t, "I don't blame " + x.himHer() + " for killing " + x.kills[0].mainName + ", but now that our time as a team is over, I'm not interested in being friends anymore.  ");
+											say(t, x, "I don't blame {c:himHer} for killing " + x.kills[0].mainName + ", but now that our time as a team is over, I'm not interested in being friends anymore.  ");
 										} else {
-											say(t, x.HeShe() + " thought I'd be grateful to " + x.himHer() + " for killing " + x.kills[0].mainName + ".  Unbelievable.  ");
+											say(t, x, "{c:HeShe} thought I'd be grateful to {c:himHer} for killing " + x.kills[0].mainName + ".  Unbelievable.  ");
 										}
 									} else {
 										if (x.morality > 66) {
-											say(t, "The only useful thing " + x.heShe() + "'s ever done was killing " + x.kills[0].mainName + ".  ");
+											say(t, x, "The only useful thing {c:heShe}'s ever done was killing " + x.kills[0].mainName + ".  ");
 										} else if (x.morality > 33) {
-											say(t, "We used to be a team, but ever since " + x.heShe() + " killed " + x.kills[0].mainName + ", there's no connection between us.  ");
+											say(t, x, "We used to be a team, but ever since {c:heShe} killed " + x.kills[0].mainName + ", there's no connection between us.  ");
 										} else {
-											say(t, "I can't blame " + x.himHer() + " for killing " + x.kills[0].mainName + ", but I can tell you that " + x.heShe() + " did it for the wrong reasons.  ");
+											say(t, x, "I can't blame {c:himHer} for killing " + x.kills[0].mainName + ", but I can tell you that {c:heShe} did it for the wrong reasons.  ");
 										}
 									}
 								}
@@ -2355,37 +2355,37 @@ public class Forsaken implements Serializable {
 								if (otherOpinionOfDead >= 0) {
 									if (x.opinion(this) > 100) {
 										if (x.morality > 66) {
-											say(t, x.HeShe() + " was way too quick to forgive me for killing " + kills[0].mainName + ".  It makes me sick.  ");
+											say(t, x, "{c:HeShe} was way too quick to forgive me for killing " + kills[0].mainName + ".  It makes me sick.  ");
 										} else if (x.morality > 33) {
-											say(t, x.HeShe() + " doesn't blame me for killing " + kills[0].mainName + "... but I don't want forgiveness from " + x.himHer() + ".  ");
+											say(t, x, "{c:HeShe} doesn't blame me for killing " + kills[0].mainName + "... but I don't want forgiveness from {c:himHer}.  ");
 										} else {
-											say(t, x.HeShe() + " just wants to go back to how things were before I killed " + kills[0].mainName + "... but I refuse.  ");
+											say(t, x, "{c:HeShe} just wants to go back to how things were before I killed " + kills[0].mainName + "... but I refuse.  ");
 										}
 									} else {
 										if (x.morality > 66) {
-											say(t, x.HeShe() + "'s hung up on the fact that I killed " + kills[0].mainName + " - not even considering how much worse it feels for me!  ");
+											say(t, x, "{c:HeShe}'s hung up on the fact that I killed " + kills[0].mainName + " - not even considering how much worse it feels for me!  ");
 										} else if (x.morality > 33) {
-											say(t, x.HeShe() + " hates me for killing " + kills[0].mainName + ", even though I'm sure " + x.heShe() + " would've done the same in my situation.  ");
+											say(t, x, "{c:HeShe} hates me for killing " + kills[0].mainName + ", even though I'm sure {c:heShe} would've done the same in my situation.  ");
 										} else {
-											say(t, "The only good thing I can say about " + x.himHer() + " is that " + x.heShe() + " properly hates me for murdering " + kills[0].mainName + ".  ");
+											say(t, x, "The only good thing I can say about {c:himHer} is that {c:heShe} properly hates me for murdering " + kills[0].mainName + ".  ");
 										}
 									}
 								} else {
 									if (x.opinion(this) > 100) {
 										if (x.morality > 66) {
-											say(t, "Whenever I see " + x.himHer() + " smiling at me, I get so angry that I had to kill " + kills[0].mainName + " but " + x.heShe() + "'s still around.  ");
+											say(t, x, "Whenever I see {c:himHer} smiling at me, I get so angry that I had to kill " + kills[0].mainName + " but {c:heShe}'s still around.  ");
 										} else if (x.morality > 33) {
-											say(t, x.HeShe() + " doesn't mind that I killed " + kills[0].mainName + ", of course, but that just makes me hate " + x.himHer() + " even more.  ");
+											say(t, x, "{c:HeShe} doesn't mind that I killed " + kills[0].mainName + ", of course, but that just makes me hate {c:himHer} even more.  ");
 										} else {
-											say(t, x.HeShe() + "... laughed and thanked me when " + x.heShe() + " heard that I killed " + kills[0].mainName + ".  " + x.HeShe() + "'s awful.  ");
+											say(t, x, "{c:HeShe}... laughed and thanked me when {c:heShe} heard that I killed " + kills[0].mainName + ".  {c:HeShe}'s awful.  ");
 										}
 									} else {
 										if (x.morality > 66) {
-											say(t, "It's " + x.hisHer() + " fault that I was forced to kill " + kills[0].mainName + ".  ");
+											say(t, x, "It's {c:hisHer} fault that I was forced to kill " + kills[0].mainName + ".  ");
 										} else if (x.morality > 33) {
-											say(t, "For " + kills[0].mainName + "'s sake, I won't let " + x.himHer() + " win.  ");
+											say(t, x, "For " + kills[0].mainName + "'s sake, I won't let {c:himHer} win.  ");
 										} else {
-											say(t, x.HeShe() + " says that if I hadn't killed " + kills[0].mainName + ", " + x.heShe() + "'d have done it instead.  ");
+											say(t, x, "{c:HeShe} says that if I hadn't killed " + kills[0].mainName + ", {c:heShe}'d have done it instead.  ");
 										}
 									}
 								}
@@ -2393,35 +2393,35 @@ public class Forsaken implements Serializable {
 								if (otherOpinionOfDead >= 0) {
 									if (x.opinion(this) > 100) {
 										if (x.morality > 66) {
-											say(t, x.HeShe() + " says " + x.heShe() + "'s willing to forgive me for killing " + kills[0].mainName + ", but " + x.heShe() + "'s probably just trying to trick me into letting " + x.himHer() + " get close enough to get revenge.  ");
+											say(t, x, "{c:HeShe} says {c:heShe}'s willing to forgive me for killing " + kills[0].mainName + ", but {c:heShe}'s probably just trying to trick me into letting {c:himHer} get close enough to get revenge.  ");
 										} else if (x.morality > 33) {
-											say(t, "I killed " + x.hisHer() + " friend, " + kills[0].mainName + ", but " + x.heShe() + " still keeps trying to get close to me for some reason.  ");
+											say(t, x, "I killed {c:hisHer} friend, " + kills[0].mainName + ", but {c:heShe} still keeps trying to get close to me for some reason.  ");
 										} else {
-											say(t, "For all " + x.heShe() + " supposedly cared about " + kills[0].mainName + ", " + x.heShe() + " doesn't even seem to care that I killed " + kills[0].himHer() + ".  ");
+											say(t, x, "For all {c:heShe} supposedly cared about " + kills[0].mainName + ", {c:heShe} doesn't even seem to care that I killed " + kills[0].himHer() + ".  ");
 										}
 									} else {
 										if (x.morality > 66) {
-											say(t, x.HeShe() + "'s always angry with me, probably because I killed " + kills[0].mainName + ".  ");
+											say(t, x, "{c:HeShe}'s always angry with me, probably because I killed " + kills[0].mainName + ".  ");
 										} else if (x.morality > 33) {
-											say(t, x.HeShe() + " never did forgive me for killing " + kills[0].mainName + ".  ");
+											say(t, x, "{c:HeShe} never did forgive me for killing " + kills[0].mainName + ".  ");
 										} else {
-											say(t, "My reasons for killing " + kills[0].mainName + " honestly weren't personal, but it's pointless to tell " + x.himHer() + " that.  ");
+											say(t, x, "My reasons for killing " + kills[0].mainName + " honestly weren't personal, but it's pointless to tell {c:himHer} that.  ");
 										}
 									}
 								} else {
 									if (x.opinion(this) > 100) {
 										if (x.morality > 66) {
-											say(t, "I killed " + kills[0].mainName + ", and if " + x.heShe() + " keeps stalking me, " + x.heShe() + "'d better be prepared for me to do the same to " + x.himHer() + ".  ");
+											say(t, x, "I killed " + kills[0].mainName + ", and if {c:heShe} keeps stalking me, {c:heShe}'d better be prepared for me to do the same to {c:himHer}.  ");
 										} else if (x.morality > 33) {
-											say(t, x.HeShe() + " seems convinced that I killed " + kills[0].mainName + " for " + x.hisHer() + " sake.  ");
+											say(t, x, "{c:HeShe} seems convinced that I killed " + kills[0].mainName + " for {c:hisHer} sake.  ");
 										} else {
-											say(t, x.HeShe() + " actually thanked me for getting rid of " + kills[0].mainName + ".  I don't want to be thanked for something like that!  ");
+											say(t, x, "{c:HeShe} actually thanked me for getting rid of " + kills[0].mainName + ".  I don't want to be thanked for something like that!  ");
 										}
 									} else {
 										if (x.morality > 66) {
-											say(t, "I killed " + kills[0].mainName + " so that " + x.heShe() + " wouldn't whine about having to get " + x.hisHer() + " hands dirty, but " + x.heShe() + " never showed a bit of gratitude for it.  ");
+											say(t, x, "I killed " + kills[0].mainName + " so that {c:heShe} wouldn't whine about having to get {c:hisHer} hands dirty, but {c:heShe} never showed a bit of gratitude for it.  ");
 										} else if (x.morality > 33) {
-											say(t, x.HeShe() + " doesn't seem to blame me for killing " + kills[0].mainName + ", but we still definitely don't get along.  ");
+											say(t, x, "{c:HeShe} doesn't seem to blame me for killing " + kills[0].mainName + ", but we still definitely don't get along.  ");
 										} else {
 											say(t, "I gave " + kills[0].mainName + " a quick death, but " + x.mainName + " definitely would have done worse.  ");
 										}
@@ -2433,53 +2433,53 @@ public class Forsaken implements Serializable {
 								if (x.opinion(this) > 100) {
 									if (confidence > 66) {
 										if (x.morality > 66) {
-											say(t, x.HeShe() + " still trails after me like a lost puppy, sometimes.  Pathetic.  ");
+											say(t, x, "{c:HeShe} still trails after me like a lost puppy, sometimes.  Pathetic.  ");
 										} else if (x.morality > 33) {
-											say(t, x.HeShe() + "'s even weaker than " + x.heShe() + " used to be, and I don't have time for " + x.himHer() + " anymore.  ");
+											say(t, x, "{c:HeShe}'s even weaker than {c:heShe} used to be, and I don't have time for {c:himHer} anymore.  ");
 										} else {
-											say(t, x.HeShe() + " claims that " + x.heShe() + " wants to be friends, but " + x.heShe() + "'s just a coward who wants someone to fight for " + x.himHer() + ".  ");
+											say(t, x, "{c:HeShe} claims that {c:heShe} wants to be friends, but {c:heShe}'s just a coward who wants someone to fight for {c:himHer}.  ");
 										}
 									} else if (confidence > 33) {
 										if (x.morality > 66) {
-											say(t, "It's " + x.hisHer() + " fault that we lost, and I'm not going to make the mistake of relying on " + x.himHer() + " again.  ");
+											say(t, x, "It's {c:hisHer} fault that we lost, and I'm not going to make the mistake of relying on {c:himHer} again.  ");
 										} else if (x.morality > 33) {
-											say(t, "I'm not interested in being " + x.hisHer() + " friend anymore.  ");
+											say(t, x, "I'm not interested in being {c:hisHer} friend anymore.  ");
 										} else {
-											say(t, x.HeShe() + " claims " + x.heShe() + " can make it worth my while to stick with " + x.himHer() + ", but I don't believe " + x.himHer() + ".  ");
+											say(t, x, "{c:HeShe} claims {c:heShe} can make it worth my while to stick with {c:himHer}, but I don't believe {c:himHer}.  ");
 										}
 									} else {
 										if (x.morality > 66) {
-											say(t, x.HeShe() + " f-failed to protect me, and I won't forgive " + x.himHer() + "!  ");
+											say(t, x, "{c:HeShe} f-failed to protect me, and I won't forgive {c:himHer}!  ");
 										} else if (x.morality > 33) {
-											say(t, "I-I'm done being led around by " + x.himHer() + ", no matter what " + x.heShe() + " says!  ");
+											say(t, x, "I-I'm done being led around by {c:himHer}, no matter what {c:heShe} says!  ");
 										} else {
-											say(t, x.HeShe() + " thinks I belong to " + x.himHer() + ", b-but those days are over!  ");
+											say(t, x, "{c:HeShe} thinks I belong to {c:himHer}, b-but those days are over!  ");
 										}
 									}
 								} else {
 									if (confidence > 66) {
 										if (x.morality > 66) {
-											say(t, "I'm better off without " + x.himHer() + " trailing after me like a lost puppy.  ");
+											say(t, x, "I'm better off without {c:himHer} trailing after me like a lost puppy.  ");
 										} else if (x.morality > 33) {
-											say(t, x.HeShe() + "'s even weaker than " + x.heShe() + " used to be, and I'm glad not to be stuck on a team with " + x.himHer() + " anymore.  ");
+											say(t, x, "{c:HeShe}'s even weaker than {c:heShe} used to be, and I'm glad not to be stuck on a team with {c:himHer} anymore.  ");
 										} else {
-											say(t, x.HeShe() + "'s a coward, but knows better than to try to convince me to protect " + x.himHer() + " now.  ");
+											say(t, x, "{c:HeShe}'s a coward, but knows better than to try to convince me to protect {c:himHer} now.  ");
 										}
 									} else if (confidence > 33) {
 										if (x.morality > 66) {
-											say(t, "I still need to give " + x.himHer() + " payback for making us lose against you.  ");
+											say(t, x, "I still need to give {c:himHer} payback for making us lose against you.  ");
 										} else if (x.morality > 33) {
 											say(t, "We aren't friends anymore.  ");
 										} else {
-											say(t, x.HeShe() + " was never a good friend.  ");
+											say(t, x, "{c:HeShe} was never a good friend.  ");
 										}
 									} else {
 										if (x.morality > 66) {
-											say(t, x.HeShe() + " failed to protect me, a-and " + x.heShe() + " won't even try to make it up to me!  ");
+											say(t, x, "{c:HeShe} failed to protect me, a-and {c:heShe} won't even try to make it up to me!  ");
 										} else if (x.morality > 33) {
-											say(t, x.HeShe() + " says I'm not worth " + x.hisHer() + " time anymore, b-but I don't want to follow " + x.himHer() + " anyway!  ");
+											say(t, x, "{c:HeShe} says I'm not worth {c:hisHer} time anymore, b-but I don't want to follow {c:himHer} anyway!  ");
 										} else {
-											say(t, x.HeShe() + " used to tell me that I belonged to " + x.himHer() + "... b-but those days are over!  ");
+											say(t, x, "{c:HeShe} used to tell me that I belonged to {c:himHer}... b-but those days are over!  ");
 										}
 									}
 								}
@@ -2487,53 +2487,53 @@ public class Forsaken implements Serializable {
 								if (x.opinion(this) > 100) {
 									if (confidence > 66) {
 										if (x.morality > 66) {
-											say(t, x.HeShe() + " says " + x.heShe() + " wants to put our rivalry behind us, but " + x.heShe() + " just knows " + x.heShe() + "'s doomed without my help!  ");
+											say(t, x, "{c:HeShe} says {c:heShe} wants to put our rivalry behind us, but {c:heShe} just knows {c:heShe}'s doomed without my help!  ");
 										} else if (x.morality > 33) {
-											say(t, x.HeShe() + "'s even weaker than " + x.heShe() + " used to be, but I'm not going to let " + x.himHer() + " act like we're old friends.  ");
+											say(t, x, "{c:HeShe}'s even weaker than {c:heShe} used to be, but I'm not going to let {c:himHer} act like we're old friends.  ");
 										} else {
-											say(t, x.HeShe() + "'s always been a coward, and now that we're in this situation, " + x.heShe() + "'s trying to act like we can be friends.  ");
+											say(t, x, "{c:HeShe}'s always been a coward, and now that we're in this situation, {c:heShe}'s trying to act like we can be friends.  ");
 										}
 									} else if (confidence > 33) {
 										if (x.morality > 66) {
-											say(t, "If " + x.heShe() + " had just done what I said, we never would have lost, and I'm not going to forgive " + x.himHer() + " for that.  ");
+											say(t, x, "If {c:heShe} had just done what I said, we never would have lost, and I'm not going to forgive {c:himHer} for that.  ");
 										} else if (x.morality > 33) {
-											say(t, "I won't forgive " + x.himHer() + " for what " + x.heShe() + " did during our time as Chosen.  ");
+											say(t, x, "I won't forgive {c:himHer} for what {c:heShe} did during our time as Chosen.  ");
 										} else {
-											say(t, x.HeShe() + " claims that " + x.heShe() + " can make it worth my while to cooperate with " + x.himHer() + ", but " + x.heShe() + "'s always been a liar.  ");
+											say(t, x, "{c:HeShe} claims that {c:heShe} can make it worth my while to cooperate with {c:himHer}, but {c:heShe}'s always been a liar.  ");
 										}
 									} else {
 										if (x.morality > 66) {
-											say(t, x.HeShe() + " n-never... never cared about me before.  I don't believe " + x.himHer() + " when " + x.heShe() + " says " + x.heShe() + " does now.  ");
+											say(t, x, "{c:HeShe} n-never... never cared about me before.  I don't believe {c:himHer} when {c:heShe} says {c:heShe} does now.  ");
 										} else if (x.morality > 33) {
-											say(t, "I hated every minute of following " + x.hisHer() + " orders, a-and I'm not about to start again now!  ");
+											say(t, x, "I hated every minute of following {c:hisHer} orders, a-and I'm not about to start again now!  ");
 										} else {
-											say(t, x.HeShe() + " was awful to me back when we were Chosen, a-and now " + x.heShe() + "'s actually trying to make me submit to " + x.himHer() + "!  ");
+											say(t, x, "{c:HeShe} was awful to me back when we were Chosen, a-and now {c:heShe}'s actually trying to make me submit to {c:himHer}!  ");
 										}
 									}
 								} else {
 									if (confidence > 66) {
 										if (x.morality > 66) {
-											say(t, "I was always better than " + x.himHer() + ".  ");
+											say(t, x, "I was always better than {c:himHer}.  ");
 										} else if (x.morality > 33) {
-											say(t, x.HeShe() + " never could pull " + x.hisHer() + " own weight on the team.  ");
+											say(t, x, "{c:HeShe} never could pull {c:hisHer} own weight on the team.  ");
 										} else {
-											say(t, x.HeShe() + " was always a coward.  ");
+											say(t, x, "{c:HeShe} was always a coward.  ");
 										}
 									} else if (confidence > 33) {
 										if (x.morality > 66) {
-											say(t, "If " + x.heShe() + " had just done what I said, we never would have lost, but " + x.heShe() + " probably won't admit it.  ");
+											say(t, x, "If {c:heShe} had just done what I said, we never would have lost, but {c:heShe} probably won't admit it.  ");
 										} else if (x.morality > 33) {
 											say(t, "We've always been enemies, even during our time as Chosen.  ");
 										} else {
-											say(t, x.HeShe() + "'s always been a pain to work with.  ");
+											say(t, x, "{c:HeShe}'s always been a pain to work with.  ");
 										}
 									} else {
 										if (x.morality > 66) {
-											say(t, x.HeShe() + " always claimed to be a hero... b-but " + x.heShe() + " never cared enough to help me...  ");
+											say(t, x, "{c:HeShe} always claimed to be a hero... b-but {c:heShe} never cared enough to help me...  ");
 										} else if (x.morality > 33) {
-											say(t, "I h-hated every minute of following " + x.hisHer() + " orders, and I'm glad I don't have to do it anymore!  ");
+											say(t, x, "I h-hated every minute of following {c:hisHer} orders, and I'm glad I don't have to do it anymore!  ");
 										} else {
-											say(t, x.HeShe() + "'s... obsessed with making me s-suffer...  ");
+											say(t, x, "{c:HeShe}'s... obsessed with making me s-suffer...  ");
 										}
 									}
 								}
@@ -2543,53 +2543,53 @@ public class Forsaken implements Serializable {
 						if (x.opinion(this) > 100) {
 							if (confidence > 66) {
 								if (x.morality > 66) {
-									say(t, x.HeShe() + "'s much too nice to me - trying to get on my good side, I suppose.  ");
+									say(t, x, "{c:HeShe}'s much too nice to me - trying to get on my good side, I suppose.  ");
 								} else if (x.morality > 33) {
-									say(t, x.HeShe() + " seems to want to be friends with me, but I'm not interested.  ");
+									say(t, x, "{c:HeShe} seems to want to be friends with me, but I'm not interested.  ");
 								} else {
-									say(t, x.HeShe() + "'s weak, but " + x.heShe() + "'s always trying to get other people to fight " + x.hisHer() + " battles for " + x.himHer() + ".  ");
+									say(t, x, "{c:HeShe}'s weak, but {c:heShe}'s always trying to get other people to fight {c:hisHer} battles for {c:himHer}.  ");
 								}
 							} else if (confidence > 33) {
 								if (x.morality > 66) {
-									say(t, x.HeShe() + "'s sometimes so sweet towards me that it's creepy.  ");
+									say(t, x, "{c:HeShe}'s sometimes so sweet towards me that it's creepy.  ");
 								} else if (x.morality > 33) {
-									say(t, x.HeShe() + " might like me, but I definitely don't feel the same way in return.  ");
+									say(t, x, "{c:HeShe} might like me, but I definitely don't feel the same way in return.  ");
 								} else {
-									say(t, x.HeShe() + " doesn't seem like the sort of person who you want to be friends with.  ");
+									say(t, x, "{c:HeShe} doesn't seem like the sort of person who you want to be friends with.  ");
 								}
 							} else {
 								if (x.morality > 66) {
-									say(t, x.HeShe() + "'s always trying to figure out what I want and give it to me, I-I really don't like it!  ");
+									say(t, x, "{c:HeShe}'s always trying to figure out what I want and give it to me, I-I really don't like it!  ");
 								} else if (x.morality > 33) {
-									say(t, x.HeShe() + " says " + x.heShe() + " can protect me... b-but I don't believe " + x.himHer() + "...  ");
+									say(t, x, "{c:HeShe} says {c:heShe} can protect me... b-but I don't believe {c:himHer}...  ");
 								} else {
-									say(t, x.HeShe() + " keeps talking about how " + x.heShe() + " wants me to belong to " + x.himHer() + "...  I-It's a little bit scary...  ");
+									say(t, x, "{c:HeShe} keeps talking about how {c:heShe} wants me to belong to {c:himHer}...  I-It's a little bit scary...  ");
 								}
 							}
 						} else {
 							if (confidence > 66) {
 								if (x.morality > 66) {
-									say(t, x.HeShe() + "' just hates seeing people stronger than " + x.himHer() + " - like me.  ");
+									say(t, x, "{c:HeShe}' just hates seeing people stronger than {c:himHer} - like me.  ");
 								} else if (x.morality > 33) {
-									say(t, "I've heard that " + x.heShe() + " doesn't like me, but I don't really care.  ");
+									say(t, x, "I've heard that {c:heShe} doesn't like me, but I don't really care.  ");
 								} else {
-									say(t, x.HeShe() + " seems envious of me, and " + x.heShe() + " has trouble dealing with it.  ");
+									say(t, x, "{c:HeShe} seems envious of me, and {c:heShe} has trouble dealing with it.  ");
 								}
 							} else if (confidence > 33) {
 								if (x.morality > 66) {
-									say(t, x.HisHer() + " way of thinking doesn't make any sense at all.  ");
+									say(t, x, "{c:HisHer} way of thinking doesn't make any sense at all.  ");
 								} else if (x.morality > 33) {
 									say(t, "We really don't get along.  ");
 								} else {
-									say(t, x.HeShe() + "'s especially nasty toward me.  ");
+									say(t, x, "{c:HeShe}'s especially nasty toward me.  ");
 								}
 							} else {
 								if (x.morality > 66) {
-									say(t, x.HeShe() + "'s c-completely delusional...  ");
+									say(t, x, "{c:HeShe}'s c-completely delusional...  ");
 								} else if (x.morality > 33) {
-									say(t, "I d-don't like having to work with " + x.himHer() + "...  ");
+									say(t, x, "I d-don't like having to work with {c:himHer}...  ");
 								} else {
-									say(t, x.HeShe() + "'s... e-especially bad toward me, because " + x.heShe() + " knows I can't fight back...  ");
+									say(t, x, "{c:HeShe}'s... e-especially bad toward me, because {c:heShe} knows I can't fight back...  ");
 								}
 							}
 						}
@@ -2597,201 +2597,201 @@ public class Forsaken implements Serializable {
 					if (x.disgrace < 20) {
 						if (morality > 66) {
 							if (x.confidence > 66) {
-								say(t, x.HeShe() + " thinks " + x.heShe() + "'s the center of the world!  ");
+								say(t, x, "{c:HeShe} thinks {c:heShe}'s the center of the world!  ");
 							} else if (x.confidence > 33) {
-								say(t, "And " + x.heShe() + " doesn't see anything wrong with presenting " + x.himHer() + "self as some sort of hero.  ");
+								say(t, x, "And {c:heShe} doesn't see anything wrong with presenting {c:himHer}self as some sort of hero.  ");
 							} else {
-								say(t, x.HeShe() + " doesn't deserve the respect that people still somehow have for " + x.himHer() + ".  ");
+								say(t, x, "{c:HeShe} doesn't deserve the respect that people still somehow have for {c:himHer}.  ");
 							}
 						} else if (morality > 33) {
 							if (x.confidence > 66) {
-								say(t, x.HeShe() + " and all " + x.hisHer() + " fans are in denial about " + x.himHer() + " completely failing to put up a fight against you.  ");
+								say(t, x, "{c:HeShe} and all {c:hisHer} fans are in denial about {c:himHer} completely failing to put up a fight against you.  ");
 							} else if (x.confidence > 33) {
-								say(t, x.HeShe() + "'s not nearly as strong as " + x.heShe() + " pretends to be.  ");
+								say(t, x, "{c:HeShe}'s not nearly as strong as {c:heShe} pretends to be.  ");
 							} else {
-								say(t, "It's ridiculous that anyone still respects " + x.himHer() + ".  ");
+								say(t, x, "It's ridiculous that anyone still respects {c:himHer}.  ");
 							}
 						} else {
 							if (x.confidence > 66) {
-								say(t, "You should really knock " + x.himHer() + " down a peg, remind everyone that " + x.heShe() + "'s still weaker than the Demon Lord.  ");
+								say(t, x, "You should really knock {c:himHer} down a peg, remind everyone that {c:heShe}'s still weaker than the Demon Lord.  ");
 							} else if (x.confidence > 33) {
-								say(t, "It wouldn't take much to show everyone that " + x.heShe() + "'s not a hero at all.  ");
+								say(t, x, "It wouldn't take much to show everyone that {c:heShe}'s not a hero at all.  ");
 							} else {
-								say(t, "I want to show everyone what a weakling " + x.heShe() + " really is.  ");
+								say(t, x, "I want to show everyone what a weakling {c:heShe} really is.  ");
 							}
 						}
 					} else if (x.disgrace < 40) {
 						if (morality > 66) {
 							if (x.confidence > 66) {
-								say(t, x.HeShe() + "'s too proud to admit what everyone knows - that " + x.heShe() + " was never a real hero.  ");
+								say(t, x, "{c:HeShe}'s too proud to admit what everyone knows - that {c:heShe} was never a real hero.  ");
 							} else if (x.confidence > 33) {
-								say(t, "At least the most of your other minions know that there's no need to respect " + x.himHer() + ".  ");
+								say(t, x, "At least the most of your other minions know that there's no need to respect {c:himHer}.  ");
 							} else {
-								say(t, x.HeShe() + " doesn't even take responsibility for " + x.hisHer() + " own weakness.  ");
+								say(t, x, "{c:HeShe} doesn't even take responsibility for {c:hisHer} own weakness.  ");
 							}
 						} else if (morality > 33) {
 							if (x.confidence > 66) {
-								say(t, "You'd think " + x.heShe() + "'d be more humble after getting humiliated by you.  ");
+								say(t, x, "You'd think {c:heShe}'d be more humble after getting humiliated by you.  ");
 							} else if (x.confidence > 33) {
-								say(t, "Everyone knows that " + x.heShe() + "'s no better than any of the rest of us Forsaken.  ");
+								say(t, x, "Everyone knows that {c:heShe}'s no better than any of the rest of us Forsaken.  ");
 							} else {
-								say(t, x.HeShe() + " doesn't have any willpower at all.  ");
+								say(t, x, "{c:HeShe} doesn't have any willpower at all.  ");
 							}
 						} else {
 							if (x.confidence > 66) {
-								say(t, "It's almost funny to see " + x.himHer() + " still pretending to be some sort of hero when " + x.heShe() + "'s just a failure.  ");
+								say(t, x, "It's almost funny to see {c:himHer} still pretending to be some sort of hero when {c:heShe}'s just a failure.  ");
 							} else if (x.confidence > 33) {
-								say(t, "I'm glad you humiliated " + x.himHer() + " and showed everyone how weak " + x.heShe() + " is.  ");
+								say(t, x, "I'm glad you humiliated {c:himHer} and showed everyone how weak {c:heShe} is.  ");
 							} else {
-								say(t, x.HeShe() + " practically exists to be prey for people stronger than " + x.himHer() + ".  ");
+								say(t, x, "{c:HeShe} practically exists to be prey for people stronger than {c:himHer}.  ");
 							}
 						}
 					} else if (x.disgrace < 61) {
 						if (morality > 66) {
 							if (x.confidence > 66) {
-								say(t, "When " + x.heShe() + " can't get what " + x.heShe() + " wants with violence, " + x.heShe() + " sees nothing wrong with using " + x.hisHer() + " sex appeal instead.  ");
+								say(t, x, "When {c:heShe} can't get what {c:heShe} wants with violence, {c:heShe} sees nothing wrong with using {c:hisHer} sex appeal instead.  ");
 							} else if (x.confidence > 33) {
-								say(t, "And " + x.hisHer() + " fans are the worst sort of people, just following whatever makes them horny, not even thinking for themselves.  ");
+								say(t, x, "And {c:hisHer} fans are the worst sort of people, just following whatever makes them horny, not even thinking for themselves.  ");
 							} else {
-								say(t, x.HeShe() + "'s a weak-willed slut.  ");
+								say(t, x, "{c:HeShe}'s a weak-willed slut.  ");
 							}
 						} else if (morality > 33) {
 							if (x.confidence > 66) {
-								say(t, x.HeShe() + "'s really only dangerous because so many of your minions are willing to do what " + x.heShe() + " says in hopes of having sex with " + x.himHer() + ".  ");
+								say(t, x, "{c:HeShe}'s really only dangerous because so many of your minions are willing to do what {c:heShe} says in hopes of having sex with {c:himHer}.  ");
 							} else if (x.confidence > 33) {
-								say(t, "Everyone knows that the only good thing about " + x.himHer() + " is " + x.hisHer() + " body.  ");
+								say(t, x, "Everyone knows that the only good thing about {c:himHer} is {c:hisHer} body.  ");
 							} else {
-								say(t, "The only reason anyone even cares about " + x.himHer() + " is that " + x.heShe() + "'s cute.  ");
+								say(t, x, "The only reason anyone even cares about {c:himHer} is that {c:heShe}'s cute.  ");
 							}
 						} else {
 							if (x.confidence > 66) {
-								say(t, x.HeShe() + " relies too much on " + x.hisHer() + " pathetic fans.  Most of them don't even want sex, they just dream of having " + x.himHer() + " step on them.  ");
+								say(t, x, "{c:HeShe} relies too much on {c:hisHer} pathetic fans.  Most of them don't even want sex, they just dream of having {c:himHer} step on them.  ");
 							} else if (x.confidence > 33) {
-								say(t, x.HeShe() + " usually surrounds " + x.himHer() + "self with 'fans' who just want to have sex with " + x.himHer() + ", but " + x.heShe() + "'s vulnerable without them...  ");
+								say(t, x, "{c:HeShe} usually surrounds {c:himHer}self with 'fans' who just want to have sex with {c:himHer}, but {c:heShe}'s vulnerable without them...  ");
 							} else {
-								say(t, x.HeShe() + " should just stick with the few fans who have low enough standards to want " + x.hisHer() + " body.  ");
+								say(t, x, "{c:HeShe} should just stick with the few fans who have low enough standards to want {c:hisHer} body.  ");
 							}
 						}
 					} else if (x.disgrace < 81) {
 						if (morality > 66) {
 							if (x.confidence > 66) {
-								say(t, x.HeShe() + "'s always getting booed and jeered on the streets, but that just makes " + x.himHer() + " act out even more to compensate.  ");
+								say(t, x, "{c:HeShe}'s always getting booed and jeered on the streets, but that just makes {c:himHer} act out even more to compensate.  ");
 							} else if (x.confidence > 33) {
-								say(t, x.HisHer() + " behavior has made " + x.himHer() + " plenty of enemies besides me, too.  ");
+								say(t, x, "{c:HisHer} behavior has made {c:himHer} plenty of enemies besides me, too.  ");
 							} else {
-								say(t, "From the way that " + x.heShe() + "'s hated by everyone, I would've expected " + x.himHer() + " to learn from " + x.hisHer() + " mistakes, but it hasn't happened yet.  ");
+								say(t, x, "From the way that {c:heShe}'s hated by everyone, I would've expected {c:himHer} to learn from {c:hisHer} mistakes, but it hasn't happened yet.  ");
 							}
 						} else if (morality > 33) {
 							if (x.confidence > 66) {
-								say(t, x.HeShe() + " won't stop trying to boss people around, even though we all hate " + x.himHer() + ".  ");
+								say(t, x, "{c:HeShe} won't stop trying to boss people around, even though we all hate {c:himHer}.  ");
 							} else if (x.confidence > 33) {
-								say(t, "I know that I'm not the only one who thinks we'd be better off without " + x.himHer() + ".  ");
+								say(t, x, "I know that I'm not the only one who thinks we'd be better off without {c:himHer}.  ");
 							} else {
-								say(t, "The only reason " + x.heShe() + " isn't hated by more people is that it's so easy to forget " + x.heShe() + " exists.  ");
+								say(t, x, "The only reason {c:heShe} isn't hated by more people is that it's so easy to forget {c:heShe} exists.  ");
 							}
 						} else {
 							if (x.confidence > 66) {
-								say(t, x.HeShe() + "'s too full of " + x.himHer() + "self to get along with the rest of your minions, so you should just put " + x.himHer() + " down already.  ");
+								say(t, x, "{c:HeShe}'s too full of {c:himHer}self to get along with the rest of your minions, so you should just put {c:himHer} down already.  ");
 							} else if (x.confidence > 33) {
-								say(t, "You should just get rid of " + x.himHer() + ".  No one would miss " + x.himHer() + ".  ");
+								say(t, x, "You should just get rid of {c:himHer}.  No one would miss {c:himHer}.  ");
 							} else {
-								say(t, "Don't you agree that " + x.heShe() + "'s too weak to be worth keeping around here?  ");
+								say(t, x, "Don't you agree that {c:heShe}'s too weak to be worth keeping around here?  ");
 							}
 						}
 					} else {
 						if (morality > 66) {
 							if (x.confidence > 66) {
-								say(t, x.HeShe() + " knows that " + x.heShe() + "'ll provoke a lustful crowd into attacking " + x.himHer() + " whenever " + x.heShe() + " goes out, but " + x.heShe() + "'s too prideful to hide.  ");
+								say(t, x, "{c:HeShe} knows that {c:heShe}'ll provoke a lustful crowd into attacking {c:himHer} whenever {c:heShe} goes out, but {c:heShe}'s too prideful to hide.  ");
 							} else if (x.confidence > 33) {
-								say(t, x.HeShe() + " can't even protect " + x.himHer() + "self from the regular humans that lust after " + x.himHer() + ".  ");
+								say(t, x, "{c:HeShe} can't even protect {c:himHer}self from the regular humans that lust after {c:himHer}.  ");
 							} else {
-								say(t, x.HeShe() + " regularly tempts crowds into abusing " + x.himHer() + ", then pretends that " + x.heShe() + " doesn't like it.  ");
+								say(t, x, "{c:HeShe} regularly tempts crowds into abusing {c:himHer}, then pretends that {c:heShe} doesn't like it.  ");
 							}
 						} else if (morality > 33) {
 							if (x.confidence > 66) {
-								say(t, "Because no one's scared of " + x.himHer() + " anymore, there are plenty of times that " + x.heShe() + "'s been attacked by crowds of horny 'fans'.  It's what " + x.heShe() + " deserves.  ");
+								say(t, x, "Because no one's scared of {c:himHer} anymore, there are plenty of times that {c:heShe}'s been attacked by crowds of horny 'fans'.  It's what {c:heShe} deserves.  ");
 							} else if (x.confidence > 33) {
-								say(t, "Ask any of your other minions, they'll tell you that " + x.hisHer() + " only redeeming quality is that " + x.heShe() + "'s a good sex toy.  ");
+								say(t, x, "Ask any of your other minions, they'll tell you that {c:hisHer} only redeeming quality is that {c:heShe}'s a good sex toy.  ");
 							} else {
-								say(t, x.HeShe() + "'s so pathetic that " + x.heShe() + " has to hide from your other minions, even the regular humans, or else they'll just gangrape " + x.himHer() + ".  ");
+								say(t, x, "{c:HeShe}'s so pathetic that {c:heShe} has to hide from your other minions, even the regular humans, or else they'll just gangrape {c:himHer}.  ");
 							}
 						} else {
 							if (x.confidence > 66) {
-								say(t, "I do really enjoy it when " + x.heShe() + " gets attacked by a lustful mob to help put " + x.himHer() + " in " + x.hisHer() + " place.  ");
+								say(t, x, "I do really enjoy it when {c:heShe} gets attacked by a lustful mob to help put {c:himHer} in {c:hisHer} place.  ");
 							} else if (x.confidence > 33) {
-								say(t, "I get back at " + x.himHer() + " by letting " + x.hisHer() + " other enemies here know where " + x.heShe() + "'s staying so that they can ambush " + x.himHer() + " while " + x.heShe() + "'s asleep.  ");
+								say(t, x, "I get back at {c:himHer} by letting {c:hisHer} other enemies here know where {c:heShe}'s staying so that they can ambush {c:himHer} while {c:heShe}'s asleep.  ");
 							} else {
-								say(t, "At least it can be fun to blend into the crowds that chase " + x.himHer() + " down to have fun with " + x.himHer() + " whenever " + x.heShe() + " shows " + x.hisHer() + " pathetic face outside.  ");
+								say(t, x, "At least it can be fun to blend into the crowds that chase {c:himHer} down to have fun with {c:himHer} whenever {c:heShe} shows {c:hisHer} pathetic face outside.  ");
 							}
 						}
 					}
 					if (x.deviancy - deviancy >= 15) {
 						if (deviancy < 20) {
 							if (x.innocence > 66) {
-								say(t, x.HeShe() + "'s always talking about perverted stuff like it's completely normal.  ");
+								say(t, x, "{c:HeShe}'s always talking about perverted stuff like it's completely normal.  ");
 							} else if (x.innocence > 33) {
-								say(t, x.HeShe() + "'s a huge pervert, too.  ");
+								say(t, x, "{c:HeShe}'s a huge pervert, too.  ");
 							} else {
-								say(t, "I hate the way " + x.heShe() + " looks at me, like " + x.heShe() + "'s thinking about something perverted.  ");
+								say(t, x, "I hate the way {c:heShe} looks at me, like {c:heShe}'s thinking about something perverted.  ");
 							}
 						} else if (deviancy < 40) {
 							if (x.innocence > 66) {
-								say(t, x.HeShe() + " can't stop talking about all the bizarre fetishes " + x.heShe() + " has.  It's not normal.  ");
+								say(t, x, "{c:HeShe} can't stop talking about all the bizarre fetishes {c:heShe} has.  It's not normal.  ");
 							} else if (x.innocence > 33) {
-								say(t, "And " + x.heShe() + " has a long list of disgusting fetishes, too.  ");
+								say(t, x, "And {c:heShe} has a long list of disgusting fetishes, too.  ");
 							} else {
-								say(t, x.HeShe() + "'s not stupid, but that just makes it even worse when you realize that " + x.heShe() + "'s spending all " + x.hisHer() + " time planning out how to satisfy " + x.hisHer() + " twisted sexual desires.  ");
+								say(t, x, "{c:HeShe}'s not stupid, but that just makes it even worse when you realize that {c:heShe}'s spending all {c:hisHer} time planning out how to satisfy {c:hisHer} twisted sexual desires.  ");
 							}
 						} else if (deviancy < 61) {
 							if (x.innocence > 66) {
-								say(t, "It's a good thing " + x.heShe() + "'s so stupid, because it means " + x.heShe() + " has no chance of getting ahold of me in order to do one of the sickening acts " + x.hisHer() + " little mind is obsessed with.  ");
+								say(t, x, "It's a good thing {c:heShe}'s so stupid, because it means {c:heShe} has no chance of getting ahold of me in order to do one of the sickening acts {c:hisHer} little mind is obsessed with.  ");
 							} else if (x.innocence > 33) {
-								say(t, "I think " + x.heShe() + " wants to use me to satisfy some of " + x.hisHer() + " more twisted fantasies.  ");
+								say(t, x, "I think {c:heShe} wants to use me to satisfy some of {c:hisHer} more twisted fantasies.  ");
 							} else {
-								say(t, "If " + x.heShe() + " were to somehow get " + x.hisHer() + " hands on me... I'd rather die than let " + x.himHer() + " put me through the kind of twisted stuff " + x.heShe() + "'s interested in.  ");
+								say(t, x, "If {c:heShe} were to somehow get {c:hisHer} hands on me... I'd rather die than let {c:himHer} put me through the kind of twisted stuff {c:heShe}'s interested in.  ");
 							}
 						} else {
 							if (x.innocence > 66) {
-								say(t, x.HeShe() + " doesn't even have control over " + x.hisHer() + " own body, always masturbating without even realizing it.  ");
+								say(t, x, "{c:HeShe} doesn't even have control over {c:hisHer} own body, always masturbating without even realizing it.  ");
 							} else if (x.innocence > 33) {
-								say(t, "All " + x.heShe() + " cares about is " + x.hisHer() + " own pleasure.  Nothing else matters to " + x.himHer() + ".  ");
+								say(t, x, "All {c:heShe} cares about is {c:hisHer} own pleasure.  Nothing else matters to {c:himHer}.  ");
 							} else {
-								say(t, "Everything " + x.heShe() + " does - absolutely everything - is all about getting " + x.himHer() + " closer to cumming again.  ");
+								say(t, x, "Everything {c:heShe} does - absolutely everything - is all about getting {c:himHer} closer to cumming again.  ");
 							}
 						}
 					}
 					if (flavorObedience() - x.flavorObedience() >= 15) {
 						if (flavorObedience() < 40) {
 							if (x.confidence > 66) {
-								say(t, x.HeShe() + "'s defiant to the point of stupidity, pointlessly fighting back when it's obvious that " + x.heShe() + "'s only doing it for the sake of " + x.hisHer() + " own pride.  ");
+								say(t, x, "{c:HeShe}'s defiant to the point of stupidity, pointlessly fighting back when it's obvious that {c:heShe}'s only doing it for the sake of {c:hisHer} own pride.  ");
 							} else if (x.confidence > 33) {
-								say(t, x.HeShe() + "'s still convinced that it's possible to disobey you and survive the consequences.  ");
+								say(t, x, "{c:HeShe}'s still convinced that it's possible to disobey you and survive the consequences.  ");
 							} else {
-								say(t, x.HeShe() + " acts meek, but " + x.heShe() + " actually looks down on everyone else who works for you.  ");
+								say(t, x, "{c:HeShe} acts meek, but {c:heShe} actually looks down on everyone else who works for you.  ");
 							}
 						} else if (flavorObedience() < 61) {
 							if (x.confidence > 66) {
-								say(t, x.HeShe() + " still isn't afraid of you... " + x.heShe() + "'s really an idiot.  ");
+								say(t, x, "{c:HeShe} still isn't afraid of you... {c:heShe}'s really an idiot.  ");
 							} else if (x.confidence > 33) {
-								say(t, x.HeShe() + " still doesn't completely understand how much stronger you are than all of us put together.  ");
+								say(t, x, "{c:HeShe} still doesn't completely understand how much stronger you are than all of us put together.  ");
 							} else {
-								say(t, x.HeShe() + " pretends to be broken, but " + x.heShe() + "'s just looking for a chance to resist, and we'll all suffer for it eventually.  ");
+								say(t, x, "{c:HeShe} pretends to be broken, but {c:heShe}'s just looking for a chance to resist, and we'll all suffer for it eventually.  ");
 							}
 						} else if (flavorObedience() < 81) {
 							if (x.confidence > 66) {
-								say(t, "And " + x.heShe() + "'s far too full of pride to completely submit " + x.himHer() + "self to you.  ");
+								say(t, x, "And {c:heShe}'s far too full of pride to completely submit {c:himHer}self to you.  ");
 							} else if (x.confidence > 33) {
-								say(t, x.HeShe() + " doesn't yet realize that it'd be for the best if you defeated the forces of humanity.  ");
+								say(t, x, "{c:HeShe} doesn't yet realize that it'd be for the best if you defeated the forces of humanity.  ");
 							} else {
-								say(t, x.HeShe() + " doesn't love you - " + x.heShe() + " only obeys out of fear.  ");
+								say(t, x, "{c:HeShe} doesn't love you - {c:heShe} only obeys out of fear.  ");
 							}
 						} else {
 							if (x.confidence > 66) {
-								say(t, "The way " + x.heShe() + " speaks to you is unforgivably insulting!  ");
+								say(t, x, "The way {c:heShe} speaks to you is unforgivably insulting!  ");
 							} else if (x.confidence > 33) {
-								say(t, x.HeShe() + " still thinks for " + x.himHer() + "self!  Ridiculous!  ");
+								say(t, x, "{c:HeShe} still thinks for {c:himHer}self!  Ridiculous!  ");
 							} else {
-								say(t, "If only " + x.heShe() + " were willing to devote " + x.himHer() + "self to you completely, " + x.heShe() + " wouldn't be so pathetic.  ");
+								say(t, x, "If only {c:heShe} were willing to devote {c:himHer}self to you completely, {c:heShe} wouldn't be so pathetic.  ");
 							}
 						}
 					}
@@ -2801,79 +2801,79 @@ public class Forsaken implements Serializable {
 								if (troublemaker[j] < 70) {
 									if (morality > 66) {
 										if (x.dignity > 66) {
-											say(t, "If " + x.hisHer() + " past attacks on the rest of us aren't punished, then it's only a matter of time until " + x.heShe() + " attacks us again.  ");
+											say(t, x, "If {c:hisHer} past attacks on the rest of us aren't punished, then it's only a matter of time until {c:heShe} attacks us again.  ");
 										} else if (x.dignity > 33) {
-											say(t, "I still can't forgive " + x.himHer() + " for all the trouble " + x.heShe() + "'s caused in the past.  ");
+											say(t, x, "I still can't forgive {c:himHer} for all the trouble {c:heShe}'s caused in the past.  ");
 										} else {
-											say(t, "I don't think " + x.heShe() + "'s even sorry about how " + x.heShe() + " used to abuse your weaker minions.  ");
+											say(t, x, "I don't think {c:heShe}'s even sorry about how {c:heShe} used to abuse your weaker minions.  ");
 										}
 									} else if (morality > 33) {
 										if (x.dignity > 66) {
-											say(t, "I don't believe " + x.himHer() + " for a moment when " + x.heShe() + " says " + x.heShe() + "'s done causing trouble for the rest of us.  ");
+											say(t, x, "I don't believe {c:himHer} for a moment when {c:heShe} says {c:heShe}'s done causing trouble for the rest of us.  ");
 										} else if (x.dignity > 33) {
-											say(t, "I'm sure that " + x.heShe() + "'ll start attacking your other minions again once " + x.heShe() + " thinks " + x.heShe() + " can get away with it.  ");
+											say(t, x, "I'm sure that {c:heShe}'ll start attacking your other minions again once {c:heShe} thinks {c:heShe} can get away with it.  ");
 										} else {
-											say(t, "The only reason " + x.heShe() + "'s behaving better lately is that you've been going easy on " + x.himHer() + ".  ");
+											say(t, x, "The only reason {c:heShe}'s behaving better lately is that you've been going easy on {c:himHer}.  ");
 										}
 									} else {
 										if (x.dignity > 66) {
-											say(t, x.HeShe() + "'s trying to fool you, just pretending that " + x.heShe() + "'s done making trouble.  ");
+											say(t, x, "{c:HeShe}'s trying to fool you, just pretending that {c:heShe}'s done making trouble.  ");
 										} else if (x.dignity > 33) {
-											say(t, "I don't know why you let " + x.himHer() + " off so lightly for what " + x.heShe() + "'s done to the rest of us.  ");
+											say(t, x, "I don't know why you let {c:himHer} off so lightly for what {c:heShe}'s done to the rest of us.  ");
 										} else {
-											say(t, "If you don't come down on " + x.himHer() + " hard, " + x.heShe() + "'ll be back to causing problems for your other minions soon enough.  ");
+											say(t, x, "If you don't come down on {c:himHer} hard, {c:heShe}'ll be back to causing problems for your other minions soon enough.  ");
 										}
 									}
 								} else if (troublemaker[j] < 200) {
 									if (morality > 66) {
 										if (x.dignity > 66) {
-											say(t, x.HeShe() + "'s probably going to keep attacking the rest of us until " + x.heShe() + "'s punished.  ");
+											say(t, x, "{c:HeShe}'s probably going to keep attacking the rest of us until {c:heShe}'s punished.  ");
 										} else if (x.dignity > 33) {
-											say(t, "I won't forgive " + x.himHer() + " for the things " + x.heShe() + "'s done and the things " + x.heShe() + " keeps doing.  ");
+											say(t, x, "I won't forgive {c:himHer} for the things {c:heShe}'s done and the things {c:heShe} keeps doing.  ");
 										} else {
-											say(t, x.HeShe() + " doesn't even seem to need a reason to abuse your weaker minions.  ");
+											say(t, x, "{c:HeShe} doesn't even seem to need a reason to abuse your weaker minions.  ");
 										}
 									} else if (morality > 33) {
 										if (x.dignity > 66) {
-											say(t, "And " + x.heShe() + "'s always saying " + x.heShe() + "'ll stop causing trouble for the rest of us, but " + x.heShe() + " keeps doing it anyway.  ");
+											say(t, x, "And {c:heShe}'s always saying {c:heShe}'ll stop causing trouble for the rest of us, but {c:heShe} keeps doing it anyway.  ");
 										} else if (x.dignity > 33) {
-											say(t, "And " + x.heShe() + " thinks " + x.heShe() + " can get away with attacking your other minions.  ");
+											say(t, x, "And {c:heShe} thinks {c:heShe} can get away with attacking your other minions.  ");
 										} else {
-											say(t, "If you don't stop going so easy on " + x.himHer() + ", " + x.heShe() + "'s going to keep behaving badly.  ");
+											say(t, x, "If you don't stop going so easy on {c:himHer}, {c:heShe}'s going to keep behaving badly.  ");
 										}
 									} else {
 										if (x.dignity > 66) {
-											say(t, x.HeShe() + "'s trying to hide it from you, but " + x.heShe() + "'s still being a troublemaker.  ");
+											say(t, x, "{c:HeShe}'s trying to hide it from you, but {c:heShe}'s still being a troublemaker.  ");
 										} else if (x.dignity > 33) {
-											say(t, "I don't know why you let " + x.himHer() + " get away with what " + x.heShe() + "'s doing to the rest of us.  ");
+											say(t, x, "I don't know why you let {c:himHer} get away with what {c:heShe}'s doing to the rest of us.  ");
 										} else {
-											say(t, x.HeShe() + "'s causing problems for your other minions, and the best way to stop " + x.himHer() + " is to come down on " + x.himHer() + " hard.  ");
+											say(t, x, "{c:HeShe}'s causing problems for your other minions, and the best way to stop {c:himHer} is to come down on {c:himHer} hard.  ");
 										}
 									}
 								} else {
 									if (morality > 66) {
 										if (x.dignity > 66) {
-											say(t, "It's past time that " + x.heShe() + " was punished for constantly attacking the rest of us.  ");
+											say(t, x, "It's past time that {c:heShe} was punished for constantly attacking the rest of us.  ");
 										} else if (x.dignity > 33) {
-											say(t, x.HeShe() + "'s always doing terrible things - we never get a break from " + x.himHer() + "!  ");
+											say(t, x, "{c:HeShe}'s always doing terrible things - we never get a break from {c:himHer}!  ");
 										} else {
-											say(t, x.HeShe() + " abuses your weaker minions on a daily basis, too!  ");
+											say(t, x, "{c:HeShe} abuses your weaker minions on a daily basis, too!  ");
 										}
 									} else if (morality > 33) {
 										if (x.dignity > 66) {
-											say(t, x.HeShe() + "'s constantly causing trouble, and " + x.heShe() + " barely even tries to hide it!  ");
+											say(t, x, "{c:HeShe}'s constantly causing trouble, and {c:heShe} barely even tries to hide it!  ");
 										} else if (x.dignity > 33) {
-											say(t, x.HeShe() + " attacks your other minions on a daily basis, too.  ");
+											say(t, x, "{c:HeShe} attacks your other minions on a daily basis, too.  ");
 										} else {
-											say(t, "It seems like " + x.heShe() + "'s getting worse and worse, always behaving badly toward everyone else here.  ");
+											say(t, x, "It seems like {c:heShe}'s getting worse and worse, always behaving badly toward everyone else here.  ");
 										}
 									} else {
 										if (x.dignity > 66) {
-											say(t, x.HeShe() + " tries to blame everyone else for the trouble " + x.heShe() + " constantly causes, but I think it's obvious by this point who's really at fault.  ");
+											say(t, x, "{c:HeShe} tries to blame everyone else for the trouble {c:heShe} constantly causes, but I think it's obvious by this point who's really at fault.  ");
 										} else if (x.dignity > 33) {
-											say(t, "Are you really going to let " + x.himHer() + " get away with attacking the rest of us so often?  ");
+											say(t, x, "Are you really going to let {c:himHer} get away with attacking the rest of us so often?  ");
 										} else {
-											say(t, "It's obvious that " + x.heShe() + "'s going to keep causing problems for your other minions all the time until you really make " + x.himHer() + " regret it.  ");
+											say(t, x, "It's obvious that {c:heShe}'s going to keep causing problems for your other minions all the time until you really make {c:himHer} regret it.  ");
 										}
 									}
 								}
@@ -2883,77 +2883,77 @@ public class Forsaken implements Serializable {
 					if (opinion(x) >= -100) {
 						if (confidence > 66) {
 							if (x.morality > 66) {
-								say(t, "If you're going to have me work with " + x.himHer() + ", at least tell " + x.himHer() + " to shut up first.");
+								say(t, x, "If you're going to have me work with {c:himHer}, at least tell {c:himHer} to shut up first.");
 							} else if (x.morality > 33) {
-								say(t, "I definitely don't need " + x.hisHer() + " help with any of the work you have me do.");
+								say(t, x, "I definitely don't need {c:hisHer} help with any of the work you have me do.");
 							} else {
-								say(t, "I don't want to work with " + x.himHer() + ".  " + x.HeShe() + "'s impossible to control.");
+								say(t, x, "I don't want to work with {c:himHer}.  {c:HeShe}'s impossible to control.");
 							}
 						} else if (confidence > 33) {
 							if (x.morality > 66) {
-								say(t, x.HeShe() + "'s really annoying.  I think that sums " + x.himHer() + " up pretty well.");
+								say(t, x, "{c:HeShe}'s really annoying.  I think that sums {c:himHer} up pretty well.");
 							} else if (x.morality > 33) {
-								say(t, "I really don't like working with " + x.himHer() + ".");
+								say(t, x, "I really don't like working with {c:himHer}.");
 							} else {
-								say(t, x.HeShe() + "'s just impossible to work with.");
+								say(t, x, "{c:HeShe}'s just impossible to work with.");
 							}
 						} else {
 							if (x.morality > 66) {
-								say(t, "I don't want to let " + x.himHer() + " t-tell me what to do...");
+								say(t, x, "I don't want to let {c:himHer} t-tell me what to do...");
 							} else if (x.morality > 33) {
-								say(t, "If you're asking me about " + x.himHer() + ", th-then does that mean I can ask not to be forced to work with " + x.himHer() + "?");
+								say(t, x, "If you're asking me about {c:himHer}, th-then does that mean I can ask not to be forced to work with {c:himHer}?");
 							} else {
-								say(t, "I-I'm afraid of what " + x.heShe() + " might do to me if you make us work together...");
+								say(t, x, "I-I'm afraid of what {c:heShe} might do to me if you make us work together...");
 							}
 						}
 					} else if (opinion(x) >= -400) {
 						if (confidence > 66) {
 							if (x.morality > 66) {
-								say(t, "The only thing stopping me from getting violent with " + x.himHer() + " is the fact that we're pretty much forced to live together.");
+								say(t, x, "The only thing stopping me from getting violent with {c:himHer} is the fact that we're pretty much forced to live together.");
 							} else if (x.morality > 33) {
-								say(t, "Even just looking at " + x.himHer() + " makes me so angry...");
+								say(t, x, "Even just looking at {c:himHer} makes me so angry...");
 							} else {
-								say(t, "I'll try to control myself around " + x.himHer() + ", but I can't promise that I'll succeed.");
+								say(t, x, "I'll try to control myself around {c:himHer}, but I can't promise that I'll succeed.");
 							}
 						} else if (confidence > 33) {
 							if (x.morality > 66) {
-								say(t, "I hate " + x.himHer() + " more and more every time " + x.heShe() + " opens " + x.hisHer() + " mouth.");
+								say(t, x, "I hate {c:himHer} more and more every time {c:heShe} opens {c:hisHer} mouth.");
 							} else if (x.morality > 33) {
-								say(t, "Ugh, I really hate " + x.himHer() + ".");
+								say(t, x, "Ugh, I really hate {c:himHer}.");
 							} else {
-								say(t, "I think it's fair to say that I hate " + x.himHer() + " from the bottom of my heart.");
+								say(t, x, "I think it's fair to say that I hate {c:himHer} from the bottom of my heart.");
 							}
 						} else {
 							if (x.morality > 66) {
-								say(t, "I wish " + x.heShe() + "'d just disappear...");
+								say(t, x, "I wish {c:heShe}'d just disappear...");
 							} else if (x.morality > 33) {
-								say(t, "I hate " + x.himHer() + "...  I-I hate " + x.himHer() + " so much...!");
+								say(t, x, "I hate {c:himHer}...  I-I hate {c:himHer} so much...!");
 							} else {
-								say(t, x.HeShe() + "'s the worst...");
+								say(t, x, "{c:HeShe}'s the worst...");
 							}
 						}
 					} else {
 						if (confidence > 66) {
 							if (x.morality > 66) {
-								say(t, "Sometimes I have dreams about killing " + x.himHer() + ".  They're good dreams.");
+								say(t, x, "Sometimes I have dreams about killing {c:himHer}.  They're good dreams.");
 							} else if (x.morality > 33) {
-								say(t, "Whenever " + x.heShe() + " opens " + x.hisHer() + " worthless mouth, it takes all my self-control to not attack " + x.himHer() + ".");
+								say(t, x, "Whenever {c:heShe} opens {c:hisHer} worthless mouth, it takes all my self-control to not attack {c:himHer}.");
 							} else {
 								say(t, "I have to tell you, the next time the two of us end up in a room together, I might not be able to hold myself back.");
 							}
 						} else if (confidence > 33) {
 							if (x.morality > 66) {
-								say(t, "I want to stop " + x.himHer() + " from getting what " + x.heShe() + " wants, no matter what.");
+								say(t, x, "I want to stop {c:himHer} from getting what {c:heShe} wants, no matter what.");
 							} else if (x.morality > 33) {
-								say(t, "I don't think it's possible to hate someone more than I hate " + x.himHer() + ".");
+								say(t, x, "I don't think it's possible to hate someone more than I hate {c:himHer}.");
 							} else {
 								say(t, "There's no chance that we'll ever be friends.");
 							}
 						} else {
 							if (x.morality > 66) {
-								say(t, "I can't stand being around " + x.himHer() + "!  I-If you make me, I might do something crazy!");
+								say(t, x, "I can't stand being around {c:himHer}!  I-If you make me, I might do something crazy!");
 							} else if (x.morality > 33) {
-								say(t, "I'll never forgive " + x.himHer() + "...  Never...");
+								say(t, x, "I'll never forgive {c:himHer}...  Never...");
 							} else {
 								say(t, x.HeShe().substring(0,1) + "-" + x.HeShe() + "'s actually a worse person than me!");
 							}
@@ -5216,7 +5216,7 @@ public class Forsaken implements Serializable {
 				} else if (disgrace < 30) {
 					Project.changePortrait(gender, type, Project.displayedCivilians[0], true, w, Project.displayedNames, 0, Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
 					if (dignity > 66) {
-						say(t, "The notorious " + originalName + " having sex with the public?  Unthinkable!  ");
+						say(t, "The notorious {originalName} having sex with the public?  Unthinkable!  ");
 					} else if (dignity > 33) {
 						say(t, "Hey, I still have a reputation to uphold!  ");
 					} else {
@@ -5738,7 +5738,7 @@ public class Forsaken implements Serializable {
 					}
 					if (disgrace < 30) {
 						if (dignity > 66) {
-							say(t, "The great " + originalName + " would never be seen doing that!");
+							say(t, "The great {originalName} would never be seen doing that!");
 						} else if (dignity > 33) {
 							say(t, "I don't want people to think you have that kind of power over me.");
 						} else {
@@ -10578,13 +10578,13 @@ public class Forsaken implements Serializable {
 						}
 						if (hostility > 66) {
 							Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.ANGER);
-							say(t, "My name is " + usedName + ", and I'm the one who will kill you!");
+							say(t, "My name is {usedName}, and I'm the one who will kill you!");
 						} else if (hostility >= 40) {
 							Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.ANGER);
-							say(t, "I'm " + usedName + ", and you'd better remember it!");
+							say(t, "I'm {usedName}, and you'd better remember it!");
 						} else {
 							Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.NEUTRAL);
-							say(t, "I'm " + usedName + ".");
+							say(t, "I'm {usedName}.");
 						}
 					}
 				} else {
@@ -11245,7 +11245,7 @@ public class Forsaken implements Serializable {
 						} else {
 							Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
 							if (innocence > 66) {
-								say(t, "Aw, is wittle " + c.getMainName() + " gonna cry?");
+								say(t, c, "Aw, is wittle {c:mainName} gonna cry?");
 							} else if (innocence > 33) {
 								say(t, "You weakling!  What are you even doing here!?");
 							} else {
@@ -11595,7 +11595,7 @@ public class Forsaken implements Serializable {
 						say(t, "\"");
 						Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
 						if (innocence > 66) {
-							say(t, "Wow, I actually scared " + c.himHer() + "!");
+							say(t, c, "Wow, I actually scared {c:himHer}!");
 						} else if (innocence > 33) {
 							say(t, "Heh.  This is actually working.");
 						} else {
@@ -11662,9 +11662,9 @@ public class Forsaken implements Serializable {
 						if (confidence > 66) {
 							say(t, "You can run, but you can't hide.");
 						} else if (confidence > 33) {
-							say(t, "Looks like " + c.heShe() + "'s not fighting back.");
+							say(t, c, "Looks like {c:heShe}'s not fighting back.");
 						} else {
-							say(t, "I-I've got " + c.himHer() + " on the run!");
+							say(t, c, "I-I've got {c:himHer} on the run!");
 						}
 					}
 					say(t, "\"");
@@ -12290,7 +12290,7 @@ public class Forsaken implements Serializable {
 						say(t, "\"");
 						Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.FOCUS);
 						if (confidence > 66) {
-							say(t, "Of course.  I'm " + usedName + ".");
+							say(t, "Of course.  I'm {usedName}.");
 						} else if (confidence > 33) {
 							say(t, "I can't hold back.");
 						} else {
@@ -12699,7 +12699,7 @@ public class Forsaken implements Serializable {
 								say(t, "Hold still, you little shit!");
 							} else {
 								Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.STRUGGLE, Project.Emotion.NEUTRAL);
-								say(t, "Ergh, " + c.heShe() + "'s desperate...!");
+								say(t, c, "Ergh, {c:heShe}'s desperate...!");
 							}
 							say(t, "\"\n\n");
 							c.say(t, "\"");
@@ -12774,7 +12774,7 @@ public class Forsaken implements Serializable {
 							say(t, "\"");
 							if (hostility > 66) {
 								Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-								say(t, "I'm... I'm going to enjoy watching you break, " + c.getMainName() + "...");
+								say(t, c, "I'm... I'm going to enjoy watching you break, {c:mainName}...");
 							} else if (hostility > 33) {
 								Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
 								say(t, "You'll... regret... that...");
@@ -13353,16 +13353,16 @@ public class Forsaken implements Serializable {
 						if (c.getDignity() > 66) {
 							Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
 							if (innocence > 66) {
-								say(t, c.HeShe() + "'s totally feeling good!  " + c.HeShe() + "'s a huge pervert!");
+								say(t, c, "{c:HeShe}'s totally feeling good!  {c:HeShe}'s a huge pervert!");
 							} else if (innocence > 33) {
 								if (c.gender.equals("female")) {
-									say(t, c.HeShe() + "'s sopping wet!  ");
+									say(t, c, "{c:HeShe}'s sopping wet!  ");
 								} else {
-									say(t, c.HeShe() + "'s rock hard!  ");
+									say(t, c, "{c:HeShe}'s rock hard!  ");
 								}
-								say(t, "Take a good look with your cameras when " + c.heShe() + " comes around!");
+								say(t, c, "Take a good look with your cameras when {c:heShe} comes around!");
 							} else {
-								say(t, c.HeShe() + "'s trying to rape me!  Look, here " + c.heShe() + " comes now!");
+								say(t, c, "{c:HeShe}'s trying to rape me!  Look, here {c:heShe} comes now!");
 							}
 							say(t, "\"\n\n");
 							c.say(t, "\"");
@@ -13398,7 +13398,7 @@ public class Forsaken implements Serializable {
 						} else {
 							Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.NEUTRAL);
 							if (flavorObedience() > 66) {
-								say(t, "I should lead " + c.himHer() + " past as many cameras as possible.");
+								say(t, c, "I should lead {c:himHer} past as many cameras as possible.");
 							} else if (flavorObedience() > 33) {
 								say(t, "Let's show this to your teammates.");
 							} else {
@@ -13518,7 +13518,7 @@ public class Forsaken implements Serializable {
 								say(t, "Where do you think you're going?");
 							} else {
 								Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
-								say(t, "I must allow " + c.himHer() + " a moment to regain " + c.hisHer() + " senses, or there's no point.");
+								say(t, c, "I must allow {c:himHer} a moment to regain {c:hisHer} senses, or there's no point.");
 							}
 							say(t, "\"\n\n");
 							c.say(t, "\"");
@@ -13755,7 +13755,7 @@ public class Forsaken implements Serializable {
 						} else if (innocence > 33) {
 							say(t, "As long as you keep stripping your clothes off, I won't hurt him.  How does that sound?");
 						} else {
-							say(t, "Yes, " + c.getMainName() + ", come and save him from me!  Can't you manage that much?");
+							say(t, c, "Yes, {c:mainName}, come and save him from me!  Can't you manage that much?");
 						}
 						say(t, "\"\n\n");
 						c.say(t, "\"");
@@ -13772,7 +13772,7 @@ public class Forsaken implements Serializable {
 					} else if (c.getMorality() > 33) {
 						Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
 						if (flavorObedience() > 66) {
-							say(t, c.HeShe() + " can't save you from the Demon Lord!  No one can!");
+							say(t, c, "{c:HeShe} can't save you from the Demon Lord!  No one can!");
 						} else if (flavorObedience() > 33) {
 							say(t, "Go on, give me an excuse to kill them.");
 						} else {
@@ -14071,7 +14071,7 @@ public class Forsaken implements Serializable {
 						} else if (confidence > 33) {
 							say(t, "That's far enough!");
 						} else {
-							say(t, "This time, I need to face " + c.himHer() + " down without hesitating...");
+							say(t, c, "This time, I need to face {c:himHer} down without hesitating...");
 						}
 					} else {
 						Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
@@ -14171,7 +14171,7 @@ public class Forsaken implements Serializable {
 							} else if (deviancy > 33) {
 								say(t, "This camera has a really good view.");
 							} else {
-								say(t, c.HeShe() + "'s too stupid to even keep track of " + c.hisHer() + " enemy!");
+								say(t, c, "{c:HeShe}'s too stupid to even keep track of {c:hisHer} enemy!");
 							}
 							say(t, "\"\n\n");
 							c.say(t, "\"");
@@ -14207,11 +14207,11 @@ public class Forsaken implements Serializable {
 						} else {
 							Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.FOCUS);
 							if (disgrace > 66) {
-								say(t, c.HeShe() + "'s actually letting me go because I bribed " + c.himHer() + ".");
+								say(t, c, "{c:HeShe}'s actually letting me go because I bribed {c:himHer}.");
 							} else if (disgrace > 33) {
-								say(t, c.HeShe() + " isn't even trying to fight me!");
+								say(t, c, "{c:HeShe} isn't even trying to fight me!");
 							} else {
-								say(t, c.HeShe() + " only cares about protecting " + c.himHer() + "self.");
+								say(t, c, "{c:HeShe} only cares about protecting {c:himHer}self.");
 							}
 							say(t, "\"\n\n");
 							c.say(t, "\"");
@@ -14385,7 +14385,7 @@ public class Forsaken implements Serializable {
 							say(t, "\"");
 							Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.FOCUS);
 							if (innocence > 66) {
-								say(t, "Ooh, " + c.heShe() + "'s getting mad!");
+								say(t, c, "Ooh, {c:heShe}'s getting mad!");
 							} else if (innocence > 33) {
 								say(t, "Hah!");
 							} else {
@@ -14960,7 +14960,7 @@ public class Forsaken implements Serializable {
 							say(t, "\"");
 							Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
 							if (disgrace > 66) {
-								say(t, "I'll go fight " + c.himHer() + "... after I catch my breath...");
+								say(t, c, "I'll go fight {c:himHer}... after I catch my breath...");
 							} else if (disgrace > 33) {
 								say(t, "Don't flatter yourself.");
 							} else {
@@ -14979,10 +14979,10 @@ public class Forsaken implements Serializable {
 							say(t, "\"");
 							if (innocence > 66) {
 								Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-								say(t, "Darn it, where'd " + c.heShe() + " go!?");
+								say(t, c, "Darn it, where'd {c:heShe} go!?");
 							} else if (innocence > 33) {
 								Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
-								say(t, "I can't leave " + c.himHer() + " alone for a minute.");
+								say(t, c, "I can't leave {c:himHer} alone for a minute.");
 							} else {
 								Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
 								say(t, "And now you're completely defenseless...");
@@ -15006,7 +15006,7 @@ public class Forsaken implements Serializable {
 								say(t, "I love that cute little grunt when you attack!");
 							} else {
 								Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.FOCUS);
-								say(t, c.HeShe() + "'ll only get weaker from here on.");
+								say(t, c, "{c:HeShe}'ll only get weaker from here on.");
 							}
 						}
 						say(t, "\"");
@@ -15112,7 +15112,7 @@ public class Forsaken implements Serializable {
 								say(t, "I can't stay hidden, I need to make you scream some more!");
 							} else if (deviancy > 33) {
 								Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.FOCUS);
-								say(t, "Nnn...  " + c.HisHer() + " throat's all exposed and vulnerable...");
+								say(t, c, "Nnn...  {c:HisHer} throat's all exposed and vulnerable...");
 							} else {
 								Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.JOY);
 								say(t, "Enjoy this break, because things are about to get a lot more painful...");
@@ -15323,9 +15323,9 @@ public class Forsaken implements Serializable {
 						say(t, "\"");
 						Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.NEUTRAL);
 						if (innocence > 66) {
-							say(t, "Oh, right!  I'm supposed to be fighting " + c.getMainName() + "!");
+							say(t, c, "Oh, right!  I'm supposed to be fighting {c:mainName}!");
 						} else if (innocence > 33) {
-							say(t, "Alright, now what's " + c.getMainName() + " doing?");
+							say(t, c, "Alright, now what's {c:mainName} doing?");
 						} else {
 							say(t, "I must ensure that the mission as a whole is successful.");
 						}
@@ -15386,7 +15386,7 @@ public class Forsaken implements Serializable {
 						say(t, "\"");
 						if (deviancy > 66) {
 							Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.JOY);
-							say(t, "Ah, " + c.getMainName() + ", your screams are too beautiful...!");
+							say(t, c, "Ah, {c:mainName}, your screams are too beautiful...!");
 						} else if (deviancy > 33) {
 							Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.FOCUS);
 							say(t, "Hm, it's easier to appreciate the whole scene this way.");
@@ -15430,7 +15430,7 @@ public class Forsaken implements Serializable {
 						say(t, "\"");
 						Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
 						if (hostility > 66) {
-							say(t, "I'm going to be the one who kills you, " + c.getMainName() + ".  No one else.");
+							say(t, c, "I'm going to be the one who kills you, {c:mainName}.  No one else.");
 						} else if (hostility > 33) {
 							say(t, "That's right.");
 						} else {
@@ -15797,7 +15797,7 @@ public class Forsaken implements Serializable {
 							} else if (innocence > 33) {
 								append(w, t, c, "{mainName} takes the opportunity to lead {c:himHer} further and further from the main battlefield.");
 							} else {
-								w.append(t, c.heShe() + " finds that " + mainName + " already planned in advance, and " + c.heShe() + " can't seem to catch up.");
+								append(w, t, c, "{c:heShe} finds that {mainName} already planned in advance, and {c:heShe} can't seem to catch up.");
 							}
 						} else {
 							append(w, t, c, "{mainName} confronts {c:mainName} on the battlefield, but rather than immediately attacking, {heShe} ");
@@ -16000,7 +16000,7 @@ public class Forsaken implements Serializable {
 						}
 						append(w, t, c, "{mainName} hurls an enormous blast of dark energy at {c:mainName}, who is shocked to find {c:himHer}self laying on the ground afterward, trails of smoke rising from ");
 						if (c.getEXPOLevel() < 2) {
-							w.append(t, c.hisHer() + " clothes.");
+							append(w, t, c, "{c:hisHer} clothes.");
 						} else {
 							append(w, t, c, "the remains of {c:hisHer} clothes.");
 						}
@@ -16182,9 +16182,9 @@ public class Forsaken implements Serializable {
 						} else {
 							append(w, t, c, "{c:name} sighs with relief as {c:heShe} feels {mainName}'s molesting hands retreat, but then {c:heShe} gasps and desperately scrambles away when ");
 							if (innocence > 66) {
-								w.append(t, c.heShe() + " hears " + c.reference(this) + " trying to persuade a nearby Demon to abandon the fight and help rape " + c.himHer() + ".");
+								append(w, t, c, "{c:heShe} hears " + c.reference(this) + " trying to persuade a nearby Demon to abandon the fight and help rape {c:himHer}.");
 							} else if (innocence > 33) {
-								w.append(t, c.heShe() + " sees " + c.reference(this) + " approaching again with the bag of sex toys " + heShe() + " had stashed nearby.");
+								append(w, t, c, "{c:heShe} sees " + c.reference(this) + " approaching again with the bag of sex toys {heShe} had stashed nearby.");
 							} else {
 								w.append(t, c.reference(this) + " starts trying to tie " + c.himHer() + " up with heavy-duty restraints.");
 							}
@@ -16626,9 +16626,9 @@ public class Forsaken implements Serializable {
 						if (c.getConfidence() > 66) {
 							append(w, t, c, "A powerful blast of energy knocks {c:mainName} straight through several buildings.  ");
 							if (hostility > 66) {
-								w.append(t, c.HeShe() + " passes out for a fraction of a second, only to wake up to the screams of injured civilians and the silhouette of " + mainName + " slowly approaching " + c.himHer() + " through the flames.");
+								append(w, t, c, "{c:HeShe} passes out for a fraction of a second, only to wake up to the screams of injured civilians and the silhouette of {mainName} slowly approaching {c:himHer} through the flames.");
 							} else if (hostility > 33) {
-								w.append(t, c.HeShe() + " ends up at the center of a large crater, " + mainName + " hovering up above and looking down on " + c.himHer() + ".");
+								append(w, t, c, "{c:HeShe} ends up at the center of a large crater, {mainName} hovering up above and looking down on {c:himHer}.");
 							} else {
 								append(w, t, c, "{mainName} was careful to aim {c:himHer} at an area without any remaining civilians, but the devastation is still immense.");
 							}
@@ -16802,9 +16802,9 @@ public class Forsaken implements Serializable {
 					} else {
 						append(w, t, c, "During a pause in the combat, {c:mainName} tries to get {mainName} to explain more about why {heShe}'s fighting, but ");
 						if (flavorObedience() > 66) {
-							w.append(t, c.heShe() + "'s disgusted to hear " + c.reference(this) + " reverently praising the Demon Lord.");
+							append(w, t, c, "{c:heShe}'s disgusted to hear " + c.reference(this) + " reverently praising the Demon Lord.");
 						} else if (flavorObedience() > 33) {
-							w.append(t, c.heShe() + "'s annoyed by " + c.reference(this) + "'s insistence that " + heShe() + " has no choice but to follow the Demon Lord's orders.");
+							append(w, t, c, "{c:heShe}'s annoyed by " + c.reference(this) + "'s insistence that {heShe} has no choice but to follow the Demon Lord's orders.");
 						} else {
 							append(w, t, "it quickly becomes clear that " + c.reference(this) + " is just looking for an excuse to satisfy {hisHer} sadism.");
 						}
@@ -16871,9 +16871,9 @@ public class Forsaken implements Serializable {
 								append(w, t, c, "{mainName} knows that {c:mainName}'s inability to stifle {c:hisHer} lewd moans will distract {c:hisHer} allies and make {mainName}'s mission easier.");
 							} else {
 								if (c.gender.equals("female")) {
-									w.append(t, c.hisHer() + " disheveled clothes draw every eye on the battlefield.");
+									append(w, t, c, "{c:hisHer} disheveled clothes draw every eye on the battlefield.");
 								} else {
-									w.append(t, c.hisHer() + " erection is obvious to everyone who looks.");
+									append(w, t, c, "{c:hisHer} erection is obvious to everyone who looks.");
 								}
 							}
 						}
@@ -17207,7 +17207,7 @@ public class Forsaken implements Serializable {
 						} else {
 							append(w, t, c, "{c:name} thinks {c:heShe}'s managed to hide from {mainName}, but ");
 						}
-						w.append(t, c.heShe() + " rounds a corner to find " + mainName + " standing right there.  " + c.getMainName() + " tries to turn away again, but " + mainName + " grabs " + c.himHer() + " by the hair.");
+						append(w, t, c, "{c:heShe} rounds a corner to find {mainName} standing right there.  {c:mainName} tries to turn away again, but {mainName} grabs {c:himHer} by the hair.");
 					}
 				}
 			}
@@ -17291,7 +17291,7 @@ public class Forsaken implements Serializable {
 							} else {
 								append(w, t, c, "{c:name} knows that {c:heShe}'s doing a very poor job at fighting {mainName}, and ");
 							}
-							w.append(t, c.hisHer() + " lips tighten with irritation when " + c.heShe() + " hears nearby spectators commenting on " + c.hisHer() + " torn clothes and taking pictures.");
+							append(w, t, c, "{c:hisHer} lips tighten with irritation when {c:heShe} hears nearby spectators commenting on {c:hisHer} torn clothes and taking pictures.");
 						} else {
 							append(w, t, c, "{mainName} leads the half-clothed {c:mainName} through a crowd of flashing cameras, ");
 							if (flavorObedience() > 66) {
@@ -17547,11 +17547,11 @@ public class Forsaken implements Serializable {
 					if (c.getMorality() > 66) {
 						append(w, t, c, "{c:name} knows that {c:heShe}'s no match for {mainName}, but ");
 						if (hostility > 66) {
-							w.append(t, c.heShe() + " also knows that many civilian lives depend on keeping " + c.reference(this) + " occupied, ");
+							append(w, t, c, "{c:heShe} also knows that many civilian lives depend on keeping " + c.reference(this) + " occupied, ");
 						} else if (hostility > 33) {
-							w.append(t, c.heShe() + "'s willing to bear the brunt of " + c.reference(this) + "'s assault " + c.himHer() + "self, ");
+							append(w, t, c, "{c:heShe}'s willing to bear the brunt of " + c.reference(this) + "'s assault {c:himHer}self, ");
 						} else {
-							w.append(t, c.heShe() + " isn't ready to give up on " + c.reference(this) + " yet, ");
+							append(w, t, c, "{c:heShe} isn't ready to give up on " + c.reference(this) + " yet, ");
 						}
 						append(w, t, c, "so {c:heShe} clings to {mainName} with all {c:hisHer} strength, forcing {himHer} to deal with {c:mainName} {c:himHer}self before leaving.");
 					} else if (c.getMorality() > 33) {
@@ -17882,7 +17882,7 @@ public class Forsaken implements Serializable {
 						} else if (hostility > 33) {
 							append(w, t, c, "{mainName} is getting so turned on that {heShe}'s having a hard time doing much to {c:mainName} even when {heShe} manages to get {hisHer} hands on " + reference(c) + ".  {HeShe}'s forced to duck away behind a wall of Demons in order to calm down so {heShe} can fight again.");
 						} else {
-							append(w, t, c, "{mainName} comments with complete honesty about how pleased {heShe} is that " + c.getMainName() + " doesn't seem to be bothered by {mainName}'s sexual playfulness.  {c:mainName} just shrugs {hisHer} words off.");
+							append(w, t, c, "{mainName} comments with complete honesty about how pleased {heShe} is that {c:mainName} doesn't seem to be bothered by {mainName}'s sexual playfulness.  {c:mainName} just shrugs {hisHer} words off.");
 						}
 					}
 				} else if (deviancy > 33) {
