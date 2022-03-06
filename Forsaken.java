@@ -3844,7 +3844,7 @@ public class Forsaken implements Serializable {
 			} else {
 				w.append(t, "You will create a short-term Commander body specialized for torture beyond what most humans or even Demons can perform");
 			}
-			w.append(t, ", then use it to punish " + mainName);
+			append(w, t, ", then use it to punish {mainName}");
 			if (inPublic) {
 				w.append(t, " in front of everyone.");
 			} else {
@@ -8787,16 +8787,16 @@ public class Forsaken implements Serializable {
 			} else {
 				if (helpless) {
 					if (inPublic) {
-						w.append(t, "The surrounding Thralls mob " + mainName);
+						append(w, t, "The surrounding Thralls mob {mainName}");
 					} else {
 						append(w, t, "After you inform them of the helpless {mainName}'s location, a mob of Thralls bursts into " + hisHer() + " room");
 					}
 					w.append(t, ", eagerly pulling " + hisHer() + " legs apart and shoving each other aside as they compete to see who gets to violate " + himHer() + ".  However, " + heShe() + "'s still able to fight back, ");
 				} else {
 					if (inPublic) {
-						w.append(t, "The surrounding Thralls mob " + mainName);
+						append(w, t, "The surrounding Thralls mob {mainName}");
 					} else {
-						w.append(t, "A mob of Thralls ambushes " + mainName);
+						append(w, t, "A mob of Thralls ambushes {mainName}");
 					}
 					w.append(t, ", and while " + heShe() + "'s able to hold them off at first, their sheer numbers are too much for " + himHer() + " to handle.  Soon, " + heShe() + "'s reduced to ");
 				}
@@ -8912,7 +8912,7 @@ public class Forsaken implements Serializable {
 				if (consenting && helpless == false) {
 					w.append(t, mainName + " heads out into public, knowing what awaits " + himHer() + ".  The Thralls have already been given their orders, and they descend on " + himHer() + " in a violent mob.  ");
 				} else {
-					w.append(t, "The Thralls launch a manhunt for " + mainName);
+					append(w, t, "The Thralls launch a manhunt for {mainName}");
 					if (helpless) {
 						w.append(t, ", and they soon stumble upon " + hisHer() + " helpless form.  Some of the Thralls head out to notify the others of " + hisHer() + " location, while the others get an early start on tormenting " + himHer() + ".  ");
 					} else {
