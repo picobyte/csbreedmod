@@ -7367,7 +7367,7 @@ public class Forsaken implements Serializable {
 			} else if (inPublic) {
 				append(w, t, "A shudder runs through the crowd of people surrounding {mainName}.  ");
 			} else if (helpless) {
-				append(w, t, "Subconsciously drawn in by the potent pheromones wafting off {hisHer} body, it's not long before several people loitering in the slums come across the room where " + mainName + " lays helpless.  ");
+				append(w, t, "Subconsciously drawn in by the potent pheromones wafting off {hisHer} body, it's not long before several people loitering in the slums come across the room where {mainName} lays helpless.  ");
 			} else {
 				w.append(t, mainName + " knows the effect the pheromones will have on those around " + himHer() + ", but " + heShe() + " still goes out in public.  It isn't long before " + heShe() + "'s attracted a crowd.  ");
 			}
@@ -7395,7 +7395,7 @@ public class Forsaken implements Serializable {
 					append(w, t, "One of the men immediately pulls out his cock and grabs {mainName} by the hair, but {mainName} snaps {hisHer} teeth shut, and the would-be attacker quickly rethinks his plan.  ");
 					servicing = true;
 				} else if (helpless) {
-					append(w, t, "One of the men grabs {mainName} by the hair and lifts {hisHer} face up so that it's level with the man's cock.  When " + mainName + " feels the shaft pressing against {hisHer} lips, {heShe} reflexively opens them and allows it inside.  ");
+					append(w, t, "One of the men grabs {mainName} by the hair and lifts {hisHer} face up so that it's level with the man's cock.  When {mainName} feels the shaft pressing against {hisHer} lips, {heShe} reflexively opens them and allows it inside.  ");
 					oral = true;
 					penetrations++;
 					servicing = true;
@@ -7534,7 +7534,7 @@ public class Forsaken implements Serializable {
 					} else if (morality > 33) {
 						w.append(t, mainName + "'s body is especially sensitive in the afterglow, but " + heShe() + " knows that the crowd won't spare any thought to " + hisHer() + " own desires.  All " + heShe() + " can do is prepare " + himHer() + "self to be taken again.");
 					} else {
-						append(w, t, "When the next man steps forward to fuck {himHer}, " + mainName + " plants {hisHer} foot against {hisHer} prospective partner's chest, holding {himHer} at bay for a moment while {heShe} tries to recover.");
+						append(w, t, "When the next man steps forward to fuck {himHer}, {mainName} plants {hisHer} foot against {hisHer} prospective partner's chest, holding {himHer} at bay for a moment while {heShe} tries to recover.");
 					}
 				}
 				if (currentTraining[9]) {
@@ -7591,7 +7591,7 @@ public class Forsaken implements Serializable {
 						}
 					} else if (currentTraining[9]) {
 						if (innocence > 66) {
-							append(w, t, "However, even as {heShe} refuses to couple with the men, the lust caused by the aphrodisiac is unbearable, and " + mainName + " tries to discreetly reach underneath {hisHer} clothes, utterly failing to hide the fact that {heShe}'s started to rub {himHer}self down there.");
+							append(w, t, "However, even as {heShe} refuses to couple with the men, the lust caused by the aphrodisiac is unbearable, and {mainName} tries to discreetly reach underneath {hisHer} clothes, utterly failing to hide the fact that {heShe}'s started to rub {himHer}self down there.");
 						} else if (innocence > 33) {
 							append(w, t, "With the effects of the aphrodisiac, however, even the rubbing of {hisHer} clothes against {hisHer} sensitive places is too much to bear.");
 						} else {
@@ -7668,15 +7668,15 @@ public class Forsaken implements Serializable {
 					} else if (morality > 66) {
 						w.append(t, mainName + " endures having " + hisHer() + " throat violently raped until " + hisHer() + " partner finishes, then tries to use the brief period while " + hisHer() + " mouth is empty to ask for gentler treatment.  However, the next man cuts " + himHer() + " off by thrusting inside.");
 					} else if (morality > 33) {
-						append(w, t, "The pain of having {hisHer} throat fucked causes " + mainName + " to wince and choke.  {HeShe} desperately tries to signal for {hisHer} partner to slow down, but {hisHer} frantic movements accomplish nothing more than drawing a few chuckles from the watching crowd.");
+						append(w, t, "The pain of having {hisHer} throat fucked causes {mainName} to wince and choke.  {HeShe} desperately tries to signal for {hisHer} partner to slow down, but {hisHer} frantic movements accomplish nothing more than drawing a few chuckles from the watching crowd.");
 					}
 				} else {
 					if (currentTraining[6] && consenting) {
 						w.append(t, mainName + " moves " + hisHer() + " lips more and more slowly across the cock in " + hisHer() + " mouth, refusing to push its owner over the edge into orgasm.");
 					}else if (morality > 66) {
-						append(w, t, "With the cock pushing down {hisHer} throat, " + mainName + " is starting to have trouble breathing.  {HeShe} frantically tries to bob {hisHer} head and work {hisHer} tongue along the shaft, desperate for the man to finish so that {heShe} can have a chance to come up for air.");
+						append(w, t, "With the cock pushing down {hisHer} throat, {mainName} is starting to have trouble breathing.  {HeShe} frantically tries to bob {hisHer} head and work {hisHer} tongue along the shaft, desperate for the man to finish so that {heShe} can have a chance to come up for air.");
 					} else if (morality > 33) {
-						append(w, t, "Having a cock repeatedly thrust down {hisHer} throat doesn't feel good at all, but " + mainName + " just endures it, {hisHer} eyes glazed over.  {HeShe} knows that there's no point in protesting.");
+						append(w, t, "Having a cock repeatedly thrust down {hisHer} throat doesn't feel good at all, but {mainName} just endures it, {hisHer} eyes glazed over.  {HeShe} knows that there's no point in protesting.");
 					} else {
 						append(w, t, "The lust amplification causes the man thrusting down {mainName}'s throat to be exceptionally rough and merciless, prompting {mainName} to glare up at him with resentful fury.  {mainName} briefly considers biting down, but {heShe} knows that it would only make things much worse for {himHer}.");
 					}
@@ -7746,7 +7746,7 @@ public class Forsaken implements Serializable {
 					if (confidence > 66) {
 						w.append(t, mainName + "'s struggles grow increasingly frantic and disjointed as " + hisHer() + " mind buckles under the weight of dozens upon dozens of other people's thoughts and perceptions.  ");
 					} else if (confidence > 33) {
-						append(w, t, "The flood of thoughts and sensations that aren't {hisHer} own paralyzes " + mainName + "'s mind, and {hisHer} struggles to escape abruptly come to a complete halt.  ");
+						append(w, t, "The flood of thoughts and sensations that aren't {hisHer} own paralyzes {mainName}'s mind, and {hisHer} struggles to escape abruptly come to a complete halt.  ");
 					} else {
 						w.append(t, mainName + "'s struggles, already feeble in the first place, come to a complete stop when foreign thoughts and feelings begin forcing their way into " + hisHer() + " mind.  ");
 					}
@@ -7811,7 +7811,7 @@ public class Forsaken implements Serializable {
 						oral = true;
 					}
 					if (anal) {
-						append(w, t, "One attacker grabs {himHer} from behind, lifting {himHer} up with {hisHer} legs in the air.  Then, he lowers " + mainName + " down, ");
+						append(w, t, "One attacker grabs {himHer} from behind, lifting {himHer} up with {hisHer} legs in the air.  Then, he lowers {mainName} down, ");
 						if (hostility < 20) {
 							if (morality > 66) {
 								append(w, t, "and {mainName}'s pleas for {hisHer} attackers to stop this turn into a strangled cry as the man's cock slams into {hisHer} ass.  ");
@@ -7870,7 +7870,7 @@ public class Forsaken implements Serializable {
 							if (morality > 66) {
 								w.append(t, mainName + " holds " + hisHer() + " head high in defiance, knowing that the chastity belt you forced on " + himHer() + " will protect " + himHer() + " from being raped, but " + heShe() + " knows that the crowd won't just give up and leave " + himHer() + " alone.  ");
 							} else if (morality > 33) {
-								append(w, t, "Even though {heShe}'s protected by a chastity belt, " + mainName + " knows that the crowd will find a way to hurt {himHer}.  ");
+								append(w, t, "Even though {heShe}'s protected by a chastity belt, {mainName} knows that the crowd will find a way to hurt {himHer}.  ");
 							} else {
 								w.append(t, mainName + " manages a cheeky smirk as " + heShe() + " taunts them about being foiled by the chastity belt you put on " + himHer() + ", but they're quick to punish " + himHer() + " for " + hisHer() + " insolence.  ");
 							}
@@ -7906,7 +7906,7 @@ public class Forsaken implements Serializable {
 						if (w.tickle()) {
 							append(w, t, "Tickling hands emerge from all directions, and it's all {heShe} can do to suppress {hisHer} laughter through gritted teeth, unwilling to allow {hisHer} attackers to rape {hisHer} mouth.");
 						} else {
-							append(w, t, "Rough hands emerge from all directions to twist {hisHer} limbs and pummel {hisHer} body.  When {heShe} opens {hisHer} mouth to cry out in pain, one of {hisHer} attackers almost manages to force his cock inside, but " + mainName + "'s teeth snap shut quickly enough to make him rethink his priorities.");
+							append(w, t, "Rough hands emerge from all directions to twist {hisHer} limbs and pummel {hisHer} body.  When {heShe} opens {hisHer} mouth to cry out in pain, one of {hisHer} attackers almost manages to force his cock inside, but {mainName}'s teeth snap shut quickly enough to make him rethink his priorities.");
 						}
 					}
 				} else if (inPublic) {
@@ -7924,13 +7924,13 @@ public class Forsaken implements Serializable {
 			if ((vaginal || anal || oral) && servicing) {
 				if (obedience < 20) {
 					if (confidence > 66) {
-						append(w, t, "Looking down at {himHer}self from the perspective of each man who fucks {himHer}, " + mainName + " is horrified and disturbed at how pathetic {heShe} looks.  ");
+						append(w, t, "Looking down at {himHer}self from the perspective of each man who fucks {himHer}, {mainName} is horrified and disturbed at how pathetic {heShe} looks.  ");
 					} else if (confidence > 33) {
-						append(w, t, "As {heShe} shares the senses of the ones fucking {himHer} in turn, " + mainName + " can't help but notice {hisHer} own small and fragile appearance.  ");
+						append(w, t, "As {heShe} shares the senses of the ones fucking {himHer} in turn, {mainName} can't help but notice {hisHer} own small and fragile appearance.  ");
 					}
 				} else {
 					if (confidence > 66) {
-						append(w, t, "As {heShe} focuses on one of the people fucking {himHer}, " + mainName + " can feel how feeble {hisHer} reflexive struggles are, and {heShe} realizes once again that {heShe} was never as strong as {heShe} thought {heShe} was.  ");
+						append(w, t, "As {heShe} focuses on one of the people fucking {himHer}, {mainName} can feel how feeble {hisHer} reflexive struggles are, and {heShe} realizes once again that {heShe} was never as strong as {heShe} thought {heShe} was.  ");
 					} else if (confidence > 33) {
 						append(w, t, "By this point, {mainName} has already acknowledged {hisHer} own weakness, but feeling what it's like to fuck {hisHer} helpless body from the shared senses of the crowd drives the point home even further.  ");
 					} else {
@@ -7954,7 +7954,7 @@ public class Forsaken implements Serializable {
 					} else if (innocence > 66) {
 						append(w, t, "The psychically-transmitted pleasure felt by the crowd is more disorienting than arousing, but {heShe}'s still dumbfounded by how much everyone seems to be enjoying {hisHer} body.");
 					} else if (innocence > 33) {
-						append(w, t, "With the stimulation to {hisHer} own body amplified by the arousal felt by all those around {himHer}, " + mainName + " is forced to cum again and again.");
+						append(w, t, "With the stimulation to {hisHer} own body amplified by the arousal felt by all those around {himHer}, {mainName} is forced to cum again and again.");
 					} else {
 						append(w, t, "At first, {mainName}'s disgust prevents {hisHer} body from showing any signs of arousal, but the pleasure felt by all those {heShe}'s psychically connected to continues to seep into {hisHer} mind.  {HeShe} can't hold back the tide, and after the first time {heShe} cums, {heShe} starts to feel genuine arousal that makes it even easier to cum again and again.");
 					}
@@ -7969,13 +7969,13 @@ public class Forsaken implements Serializable {
 			} else if (inPublic) {
 				if (obedience < 20) {
 					if (confidence > 66) {
-						append(w, t, "Looking down at {himHer}self from the perspective of the crowd, " + mainName + " is horrified and disturbed at how pathetic {heShe} looks.  ");
+						append(w, t, "Looking down at {himHer}self from the perspective of the crowd, {mainName} is horrified and disturbed at how pathetic {heShe} looks.  ");
 					} else if (confidence > 33) {
-						append(w, t, "As {heShe} shares the senses of the crowd, " + mainName + " can't help but notice {hisHer} own small and fragile appearance.  ");
+						append(w, t, "As {heShe} shares the senses of the crowd, {mainName} can't help but notice {hisHer} own small and fragile appearance.  ");
 					}
 				} else {
 					if (confidence > 66) {
-						append(w, t, "As looks down at {himHer}self from other people's eyes, " + mainName + " can see how feeble {hisHer} reflexive struggles are, and {heShe} realizes once again that {heShe} was never as strong as {heShe} thought {heShe} was.  ");
+						append(w, t, "As looks down at {himHer}self from other people's eyes, {mainName} can see how feeble {hisHer} reflexive struggles are, and {heShe} realizes once again that {heShe} was never as strong as {heShe} thought {heShe} was.  ");
 					} else if (confidence > 33) {
 						append(w, t, "By this point, {mainName} has already acknowledged {hisHer} own weakness, but seeing how helpless {heShe} is from an outside perspective drives the point home even further.  ");
 					} else {
@@ -7988,7 +7988,7 @@ public class Forsaken implements Serializable {
 					} else if (dignity > 33) {
 						append(w, t, "{HeShe} was able to ignore {hisHer} embarrassing outfit easily enough before, but now that {heShe} sees {himHer}self from outside, it's far worse.");
 					} else {
-						append(w, t, "Forced to hear the crowd's internal monologues about how ridiculous {heShe} looks in the outfit you forced upon {himHer}, " + mainName + " feels even more uncomfortable.");
+						append(w, t, "Forced to hear the crowd's internal monologues about how ridiculous {heShe} looks in the outfit you forced upon {himHer}, {mainName} feels even more uncomfortable.");
 					}
 				} else {
 					if (dignity > 66) {
@@ -8094,9 +8094,9 @@ public class Forsaken implements Serializable {
 				} else if (inPublic) {
 					append(w, t, "When you order {mainName} to humiliate {himHer}self for the crowd, {heShe} just starts struggling, attempting to do the opposite out of pure spite.  ");
 				} else if (bodyPresent) {
-					append(w, t, "You drag {mainName}'s weakly struggling form out into public.  A crowd quickly gathers around {himHer}, gawking curiously, but " + mainName + " tries to stand up for {himHer}self despite the humiliating situation.  ");
+					append(w, t, "You drag {mainName}'s weakly struggling form out into public.  A crowd quickly gathers around {himHer}, gawking curiously, but {mainName} tries to stand up for {himHer}self despite the humiliating situation.  ");
 				} else {
-					append(w, t, "You send your Thralls to drag {mainName}'s helpless form out into public.  A crowd quickly gathers around {himHer}, gawking curiously, but " + mainName + " tries to stand up for {himHer}self despite the humiliating situation.  ");
+					append(w, t, "You send your Thralls to drag {mainName}'s helpless form out into public.  A crowd quickly gathers around {himHer}, gawking curiously, but {mainName} tries to stand up for {himHer}self despite the humiliating situation.  ");
 				}
 				if (disgrace < 20) {
 					if (dignity > 66) {
@@ -8131,7 +8131,7 @@ public class Forsaken implements Serializable {
 					if (innocence > 66) {
 						w.append(t, mainName + "'s voice becomes weaker and less coherent as the pace increases, and soon " + heShe() + "'s just squealing and moaning in " + hisHer() + " own pitiful orgasm.");
 					} else if (innocence > 33) {
-						append(w, t, "With all the training {hisHer} body has experienced, " + mainName + " can't resist the pleasure for long, and {heShe} quickly ends up forgetting all about the crowd, entirely focused on trying to cum as much as possible.");
+						append(w, t, "With all the training {hisHer} body has experienced, {mainName} can't resist the pleasure for long, and {heShe} quickly ends up forgetting all about the crowd, entirely focused on trying to cum as much as possible.");
 					} else {
 						append(w, t, "The more the pleasure mounts, the more difficulty {mainName} has controlling {hisHer} voice.  At first, {heShe} falls silent in an attempt to collect {himHer}self again, but soon {heShe}'s openly crying out in orgasm.");
 					}
@@ -8310,7 +8310,7 @@ public class Forsaken implements Serializable {
 				if (confidence > 66) {
 					append(w, t, "Even though {mainName} has come to submit {himHer}self to your will, {heShe}'s still put mentally off-balance by this kind of vulnerability.  ");
 				} else if (confidence > 33) {
-					append(w, t, "Even more than the vibrating toys, the fact that {heShe}'s completely powerless now turns " + mainName + " on.  ");
+					append(w, t, "Even more than the vibrating toys, the fact that {heShe}'s completely powerless now turns {mainName} on.  ");
 				} else {
 					append(w, t, "For the naturally-submissive {mainName}, this kind of situation is inherently arousing.  ");
 				}
@@ -8406,7 +8406,7 @@ public class Forsaken implements Serializable {
 					w.append(t, mainName + " heads out into public, gathers the attention of a crowd, and then transforms.  However, under the influence of your power, not even " + heShe() + " can predict what form " + hisHer() + " outfit will take.  ");
 				}
 			} else {
-				append(w, t, "In {hisHer} efforts to escape, " + mainName + " has transformed into {hisHer} Forsaken form, hoping to draw on whatever residual psychic energy {heShe} can.  However, under the influence of your power, the psychic energy which forms {hisHer} garb begins to shift and warp.  ");
+				append(w, t, "In {hisHer} efforts to escape, {mainName} has transformed into {hisHer} Forsaken form, hoping to draw on whatever residual psychic energy {heShe} can.  However, under the influence of your power, the psychic energy which forms {hisHer} garb begins to shift and warp.  ");
 				if (inPublic == false) {
 					append(w, t, "The commotion caused by {hisHer} struggles quickly draws a curious crowd, and they're surprised by what they see.  ");
 				}
@@ -8476,7 +8476,7 @@ public class Forsaken implements Serializable {
 					}
 				} else {
 					if (dignity > 66) {
-						append(w, t, "Rather than trying to cover {hisHer} body, " + mainName + " just turns {hisHer} face away from the crowd.  At this point, the exposure bothers {himHer} less than the show of submission itself.  ");
+						append(w, t, "Rather than trying to cover {hisHer} body, {mainName} just turns {hisHer} face away from the crowd.  At this point, the exposure bothers {himHer} less than the show of submission itself.  ");
 					} else if (dignity > 33) {
 						w.append(t, mainName + "'s face goes red with humiliation, less at the fact that " + heShe() + "'s exposing everything and more at the particular way " + heShe() + "'s being forced to expose " + himHer() + "self.  ");
 					} else {
@@ -8670,7 +8670,7 @@ public class Forsaken implements Serializable {
 					}
 				} else {
 					if (confidence > 66) {
-						append(w, t, "Far from {hisHer} once defiant nature, " + mainName + " just hangs limp, not even attempting to escape.");
+						append(w, t, "Far from {hisHer} once defiant nature, {mainName} just hangs limp, not even attempting to escape.");
 					} else if (confidence > 33) {
 						append(w, t, "Having known that this was coming, {mainName} cooperates fully, entrusting {hisHer} body to your training.");
 					} else {
@@ -8983,7 +8983,7 @@ public class Forsaken implements Serializable {
 						append(w, t, "{hisHer} pussy is spread wide open to make way for a Thrall's cock.  ");
 					}
 				} else if (oral) {
-					append(w, t, "By locking {hisHer} arms around {hisHer} knees, " + mainName + " is able to keep {hisHer} legs tightly shut despite the Thralls' attempts to pry them open.  However, {heShe}'s too afraid to bite down on the cock forced past {hisHer} lips and down {hisHer} throat, moaning helplessly around it as ");
+					append(w, t, "By locking {hisHer} arms around {hisHer} knees, {mainName} is able to keep {hisHer} legs tightly shut despite the Thralls' attempts to pry them open.  However, {heShe}'s too afraid to bite down on the cock forced past {hisHer} lips and down {hisHer} throat, moaning helplessly around it as ");
 					if (w.tickle()) {
 						append(w, t, "the Thralls' fingers dig into {hisHer} armpits and ribs.");
 					} else {
@@ -9044,7 +9044,7 @@ public class Forsaken implements Serializable {
 				if (dignity > 66) {
 					append(w, t, "There's a wave of disbelief and dawning comprehension among many of the bystanders as they realize that {heShe}'s not nearly so fearless as they had been led to believe.");
 				} else if (dignity > 33) {
-					append(w, t, "Some of the bystanders are diehard fans who were willing to overlook all the failures that led {himHer} to this point, but " + mainName + "'s own thoughts are a proof of weakness which even they can't deny.");
+					append(w, t, "Some of the bystanders are diehard fans who were willing to overlook all the failures that led {himHer} to this point, but {mainName}'s own thoughts are a proof of weakness which even they can't deny.");
 				} else {
 					append(w, t, "{HeShe} isn't used to managing {hisHer} words in public, let alone {hisHer} thoughts, and everyone quickly picks up on {hisHer} most intimate secrets and weaknesses.");
 				}
@@ -9155,7 +9155,7 @@ public class Forsaken implements Serializable {
 					oral = true;
 				}
 				if (vaginal || anal) {
-					append(w, t, "Before {heShe} even realizes it, " + mainName + " is eagerly arching {hisHer} back, presenting {hisHer} bottom to the Thralls.  The closest one wastes no time before thrusting ");
+					append(w, t, "Before {heShe} even realizes it, {mainName} is eagerly arching {hisHer} back, presenting {hisHer} bottom to the Thralls.  The closest one wastes no time before thrusting ");
 					if (vaginal) {
 						w.append(t, "inside.  ");
 					} else {
@@ -9252,7 +9252,7 @@ public class Forsaken implements Serializable {
 				} else if (dignity > 33) {
 					append(w, t, "By this point, chances to humiliate {mainName} aren't even viewed as particularly special.  The Thralls each approach in turn, expecting their cocks to be sucked and knowing that {mainName} won't be able to resist.  ");
 				} else {
-					append(w, t, "Even though {heShe} was once considered to be something of a celebrity, the novelty of violating " + mainName + " has long since worn off.  The Thralls now just view {himHer} as another interchangeable piece of meat.  ");
+					append(w, t, "Even though {heShe} was once considered to be something of a celebrity, the novelty of violating {mainName} has long since worn off.  The Thralls now just view {himHer} as another interchangeable piece of meat.  ");
 				}
 			}
 			if (timesHadSex > 0) {
@@ -9357,7 +9357,7 @@ public class Forsaken implements Serializable {
 				}
 			} else {
 				if (confidence > 66) {
-					append(w, t, "For the sake of {hisHer} own pride, " + mainName + " tries to make a show of it, but now {heShe} knows better than to actually aim for victory.  {HeShe} collapses to the ground, and the Demon picks {himHer}up.  ");
+					append(w, t, "For the sake of {hisHer} own pride, {mainName} tries to make a show of it, but now {heShe} knows better than to actually aim for victory.  {HeShe} collapses to the ground, and the Demon picks {himHer}up.  ");
 				} else if (confidence > 33) {
 					append(w, t, "Almost before it's had a chance to start, the fight is over.  {mainName} surrenders to the Demon, but of course the crowd won't be satisfied with just that.  ");
 				} else {
@@ -9393,7 +9393,7 @@ public class Forsaken implements Serializable {
 					if (oral) {
 						append(w, t, "When it pulls out, {mainName} tries to gasp for breath, only to choke on the cock of the quickest Thrall to run forward and make use of the newly-freed hole.  Plenty more are lined up behind him.");
 					} else {
-						append(w, t, "After it's done with {himHer}, the Demon pulls out in order to offer {hisHer} mouth to the lustful crowd.  However, after seeing the way that " + mainName + " kept biting down on the Demon's appendage, they unanimously decide to keep their distance, masturbating and ejaculating at {hisHer} feet and onto {hisHer} body.");
+						append(w, t, "After it's done with {himHer}, the Demon pulls out in order to offer {hisHer} mouth to the lustful crowd.  However, after seeing the way that {mainName} kept biting down on the Demon's appendage, they unanimously decide to keep their distance, masturbating and ejaculating at {hisHer} feet and onto {hisHer} body.");
 					}
 				}
 				if (currentTraining[10]) {
@@ -9462,7 +9462,7 @@ public class Forsaken implements Serializable {
 				if (morality > 66) {
 					w.append(t, mainName + " no longer feels any guilt whatsoever about doing this sort of thing with the supposed enemy of humanity.  ");
 				} else if (morality > 33) {
-					append(w, t, "Even if the cock inside {himHer} is much longer, " + mainName + " doesn't feel any differently about having sex with the Demon Lord than {heShe} does about doing similar activities with the Thralls.  ");
+					append(w, t, "Even if the cock inside {himHer} is much longer, {mainName} doesn't feel any differently about having sex with the Demon Lord than {heShe} does about doing similar activities with the Thralls.  ");
 				} else {
 					w.append(t, mainName + " can't help but relish the fact that " + heShe() + "'s become the Demon Lord's concubine, placing " + himHer() + " in direct opposition to the human public " + heShe() + "'s come to hate so much.  ");
 				}
@@ -9555,7 +9555,7 @@ public class Forsaken implements Serializable {
 				}
 				append(w, t, "Now that {mainName} can't fight back, the Thralls are merciless about satisfying their lust with {hisHer} body.  ");
 				if (oral) {
-					append(w, t, "One of them grabs {himHer} by the hair and stuffs his thick cock down " + mainName + "'s narrow throat, jackhammering in and out, suffocating {himHer} even as ");
+					append(w, t, "One of them grabs {himHer} by the hair and stuffs his thick cock down {mainName}'s narrow throat, jackhammering in and out, suffocating {himHer} even as ");
 				} else if (w.tickle()) {
 					append(w, t, "Four of them pin {hisHer} limbs down, preventing {himHer} from protecting {himHer}self even a little from the others jabbing their fingers into {hisHer} sides and armpits in an especially sadistic bout of tickling.  Then, when {heShe}'s too exhausted to stand, ");
 				} else {
@@ -9575,9 +9575,9 @@ public class Forsaken implements Serializable {
 			} else {
 				append(w, t, "Two of the Thralls grab {hisHer} arms and pull them apart");
 				if (w.tickle()) {
-					append(w, t, " while another two grab {hisHer} legs, and the rest begin tickling {himHer} all over, digging into {hisHer} armpits and sides with superhuman strength.  Soon, " + mainName + " is outright crying at the borderline painful level of stimulation.  ");
+					append(w, t, " while another two grab {hisHer} legs, and the rest begin tickling {himHer} all over, digging into {hisHer} armpits and sides with superhuman strength.  Soon, {mainName} is outright crying at the borderline painful level of stimulation.  ");
 				} else {
-					append(w, t, " almost hard enough to dislocate them.  The others take turns punching {himHer} in the belly as hard as they can, testing out their superhuman strength.  " + mainName + " chokes and heaves, unable to breathe.  ");
+					append(w, t, " almost hard enough to dislocate them.  The others take turns punching {himHer} in the belly as hard as they can, testing out their superhuman strength.  {mainName} chokes and heaves, unable to breathe.  ");
 				}
 				Project.changePortrait(gender, type, Project.displayedCivilians[0], true, w, Project.displayedNames, 0, Project.Emotion.STRUGGLE, Project.Emotion.SHAME);
 			}
@@ -9655,7 +9655,7 @@ public class Forsaken implements Serializable {
 				} else if (vaginal) {
 					append(w, t, " fucking {himHer}.  After he finishes, the viewers get a brief glimpse of {hisHer} folds gaping open and overflowing with cum ");
 				} else {
-					append(w, t, " penetrating {hisHer} ass.  After he finishes, the viewers get a brief glimpse of " + mainName + "'s ass gaping open and overflowing with cum ");
+					append(w, t, " penetrating {hisHer} ass.  After he finishes, the viewers get a brief glimpse of {mainName}'s ass gaping open and overflowing with cum ");
 				}
 				append(w, t, "before another Thrall's cock comes into view, and then another, and then even more.  It's made clear that {mainName} has become little more than an outlet for men's desires.  ");
 			} else {
@@ -9689,7 +9689,7 @@ public class Forsaken implements Serializable {
 				} else if (dignity > 33) {
 					append(w, t, "Many of the viewers aren't convinced that {mainName} was ever one of the Chosen.");
 				} else {
-					append(w, t, "Footage of {mainName} being humiliated during {hisHer} time as one of the Chosen is already popular on certain websites, and many of the viewers eagerly save this new video to add it to their existing collection of " + mainName + " porn.");
+					append(w, t, "Footage of {mainName} being humiliated during {hisHer} time as one of the Chosen is already popular on certain websites, and many of the viewers eagerly save this new video to add it to their existing collection of {mainName} porn.");
 				}
 			}
 			int views = 300000 + (int)(Math.random()*300000);
@@ -9903,7 +9903,7 @@ public class Forsaken implements Serializable {
 						append(w, t, "Tentacles with pinchers attack {hisHer} nipples, tentacles as strong as steel cable constrict {hisHer} penis and crush {hisHer} balls, and an especially fine tentacle penetrates {hisHer} urethra, sliding and squirming while {heShe} squeals around the tentacle going down {hisHer} throat.  ");
 					}
 				} else {
-					append(w, t, "An unusual hollow tentacle, transparent to show what's happening, envelops {hisHer} penis and begins applying powerful suction, sliding up and down its length, persistently milking the shaft.  " + mainName + "'s eyes glaze over as {heShe} moans into the tentacle going down {hisHer} throat.  ");
+					append(w, t, "An unusual hollow tentacle, transparent to show what's happening, envelops {hisHer} penis and begins applying powerful suction, sliding up and down its length, persistently milking the shaft.  {mainName}'s eyes glaze over as {heShe} moans into the tentacle going down {hisHer} throat.  ");
 				}
 			}
 			if ((gender != Gender.MALE && timesTortured > 0) || (gender == Gender.MALE && timesHadSex > 0)) {
@@ -9963,7 +9963,7 @@ public class Forsaken implements Serializable {
 				if (gender == Gender.MALE) {
 					append(w, t, "The one coiled around {hisHer} penis almost pulls it out by the root.  ");
 				} else {
-					append(w, t, "A tentacle with a slender tip but a base thicker than {hisHer} waist pushes into {hisHer} anus, and the further it goes in, the further the orifice is stretched.  A normal human would have {hisHer} organs crushed, but " + mainName + "'s belly just swells up from the impossible insertion, {hisHer} mouth gaping open as {heShe} struggles to breathe.  ");
+					append(w, t, "A tentacle with a slender tip but a base thicker than {hisHer} waist pushes into {hisHer} anus, and the further it goes in, the further the orifice is stretched.  A normal human would have {hisHer} organs crushed, but {mainName}'s belly just swells up from the impossible insertion, {hisHer} mouth gaping open as {heShe} struggles to breathe.  ");
 				}
 				if (obedience < 70) {
 					if (confidence > 66) {
@@ -9994,7 +9994,7 @@ public class Forsaken implements Serializable {
 				}
 			} else {
 				if (dignity > 66) {
-					append(w, t, "Even back when {heShe} was a hero with worldwide renown, " + mainName + " wouldn't have been able to endure this kind of treatment with a stoic face.  But from the outside, it looks like {heShe}'s fallen far.  ");
+					append(w, t, "Even back when {heShe} was a hero with worldwide renown, {mainName} wouldn't have been able to endure this kind of treatment with a stoic face.  But from the outside, it looks like {heShe}'s fallen far.  ");
 				} else if (dignity > 33) {
 					append(w, t, "No one is surprised by the display.  By this point, it's expected that {mainName} won't even be able to put up the slightest bit of token resistance.  ");
 				} else {
@@ -15715,7 +15715,7 @@ public class Forsaken implements Serializable {
 							if (innocence > 66) {
 								append(w, t, "In the process of the grapple, their legs get tangled with each other, and {mainName} gasps with pleasure, enjoying " + reference(c) + "'s struggling.");
 							} else if (innocence > 33) {
-								append(w, t, "Then, {heShe} positions {himHer}self between " + c.getMainName() + "'s legs, smirking with feigned innocence as " + reference(c) + "'s struggles stimulate them both.");
+								append(w, t, c, "Then, {heShe} positions {himHer}self between {c:mainName}'s legs, smirking with feigned innocence as " + reference(c) + "'s struggles stimulate them both.");
 							} else {
 								append(w, t, c, "This would normally be a poor strategy against one of the Chosen, but {mainName} has cunningly positioned their crotches against each other, and {c:mainName} has trouble keeping " + c.hisHer() + " composure as " + c.heShe() + " unavoidably stimulates " + c.himHer() + "self as " + c.heShe() + " tries to escape.");
 							}
@@ -15764,7 +15764,7 @@ public class Forsaken implements Serializable {
 						} else if (c.getConfidence() > 33) {
 							append(w, t, "A blast of malevolent energy rips through one edge of the battlefield, tearing apart Demons, Thralls, and innocent civilians alike.  When the dust clears, {mainName} is standing in the epicenter, ");
 							if (innocence > 66) {
-								append(w, t, "wearing a bloodstained deranged grin as {heShe} stares at the nearby " + c.getMainName() + ".");
+								append(w, t, c, "wearing a bloodstained deranged grin as {heShe} stares at the nearby {c:mainName}.");
 							} else if (innocence > 33) {
 								append(w, t, c, "having used it to clear a path to {c:mainName}.");
 							} else {
@@ -15895,7 +15895,7 @@ public class Forsaken implements Serializable {
 						if (innocence > 66) {
 							append(w, t, c, "In the process of the grapple, their legs get tangled with each other, and {c:mainName} ends up being forced to gasp with pleasure, much to " + mainName + "'s satisfaction.");
 						} else if (innocence > 33) {
-							append(w, t, "Then, {heShe} slowly pries " + c.getMainName() + "'s legs apart, and uses {hisHer} foot to stimulate " + reference(c) + ".");
+							append(w, t, c, "Then, {heShe} slowly pries {c:mainName}'s legs apart, and uses {hisHer} foot to stimulate " + reference(c) + ".");
 						} else {
 							append(w, t, c, "This would normally be a poor strategy against one of the Chosen, but {mainName} has cunningly positioned {c:mainName}'s crotch against the corner of a piece of rubble, and " + c.heShe() + " has trouble keeping " + c.hisHer() + " composure as " + c.heShe() + " unavoidably stimulates " + c.himHer() + "self as " + c.heShe() + " tries to escape.");
 						}
@@ -15935,7 +15935,7 @@ public class Forsaken implements Serializable {
 					if (c.getConfidence() > 66) {
 						w.append(t, mainName + " and " + c.getMainName() + " meet each other in combat in the middle of the battlefield, ");
 						if (confidence > 66) {
-							append(w, t, "but despite {hisHer} former strength, " + mainName + " is forced onto the defensive, barely holding {hisHer} own.");
+							append(w, t, "but despite {hisHer} former strength, {mainName} is forced onto the defensive, barely holding {hisHer} own.");
 						} else if (confidence > 33) {
 							append(w, t, c, "and although {c:mainName} has the clear upper hand, it still distracts " + c.himHer() + " from the Demons and forces " + c.himHer() + " to spend " + c.hisHer() + " valuable energy.");
 						} else {
@@ -16138,7 +16138,7 @@ public class Forsaken implements Serializable {
 						} else if (c.getConfidence() > 33) {
 							w.append(t, mainName + " ");
 							if (c.gender.equals("male")) {
-								append(w, t, "runs {hisHer} hands all over " + c.getMainName() + "'s chest");
+								append(w, t, c, "runs {hisHer} hands all over {c:mainName}'s chest");
 							} else {
 								append(w, t, c, "eagerly gropes {c:mainName}'s breasts");
 							}
@@ -16293,7 +16293,7 @@ public class Forsaken implements Serializable {
 						} else if (confidence > 33) {
 							append(w, t, "but {mainName} refuses to be intimidated, and {heShe} even takes the chance to land a quick attack with {hisHer} " + weapon + ".");
 						} else {
-							append(w, t, "and while {mainName} initially flees, {heShe} fights ferociously once cornered, rounding on " + c.getMainName() + " to ");
+							append(w, t, c, "and while {mainName} initially flees, {heShe} fights ferociously once cornered, rounding on {c:mainName} to ");
 							if (w.tickle()) {
 								w.append(t, "desperately try to tickle " + c.himHer() + ".");
 							} else {
@@ -16357,9 +16357,9 @@ public class Forsaken implements Serializable {
 						if (hostility > 66) {
 							append(w, t, c, ", laughing and cruelly taunting {c:mainName} in lieu of actually trying to attack.");
 						} else if (hostility > 33) {
-							append(w, t, ", smirking with satisfaction at being able to hold {hisHer} ground against the more powerful " + c.getMainName() + ".");
+							append(w, t, c, ", smirking with satisfaction at being able to hold {hisHer} ground against the more powerful {c:mainName}.");
 						} else {
-							append(w, t, ", knowing that {hisHer} powers have become weak enough that {heShe} wouldn't even be able to leave a scratch on " + c.getMainName() + ".");
+							append(w, t, c, ", knowing that {hisHer} powers have become weak enough that {heShe} wouldn't even be able to leave a scratch on {c:mainName}.");
 						}
 					} else {
 						w.append(t, mainName + " and " + c.getMainName() + " have a tense standoff.  " + c.getMainName() + " lacks the confidence to actively attack one of the Forsaken, while " + mainName);
@@ -16387,7 +16387,7 @@ public class Forsaken implements Serializable {
 						} else if (confidence > 33) {
 							w.append(t, mainName + " and " + c.getMainName() + " are evenly-matched in power, but their fight still can't come to a decisive conclusion due to " + mainName + " ");
 						} else {
-							append(w, t, "Even though {mainName} feels like {heShe} would have a decent chance in a straight fight against " + c.getMainName() + ", {heShe} still prefers ");
+							append(w, t, c, "Even though {mainName} feels like {heShe} would have a decent chance in a straight fight against {c:mainName}, {heShe} still prefers ");
 						}
 						w.append(t, "fighting completely on the defensive, barely even trying to attack at all.");
 					} else {
@@ -16441,7 +16441,7 @@ public class Forsaken implements Serializable {
 							} else if (innocence > 33) {
 								append(w, t, c, "Taking advantage of the way that {c:mainName} reflexively tries to look strong in front of the public, " + mainName + " ");
 							} else {
-								append(w, t, "Using {hisHer} cunning to defeat {hisHer} stronger opponent, " + mainName + " exploits " + c.getMainName() + "'s obsession with " + c.hisHer() + " own public image and ");
+								append(w, t, "Using {hisHer} cunning to defeat {hisHer} stronger opponent, {mainName} exploits " + c.getMainName() + "'s obsession with " + c.hisHer() + " own public image and ");
 							}
 							w.append(t, "grabs " + reference(c) + "'s " + bottomDesc + ", distracting " + c.himHer() + " enough that " + mainName + " can ");
 							if (w.tickle()) {
@@ -16570,7 +16570,7 @@ public class Forsaken implements Serializable {
 							} else {
 								w.append(t, "out of fear of being truly injured or even killed");
 							}
-							append(w, t, ", {heShe} retreats, giving " + c.getMainName() + " some breathing room.");
+							append(w, t, c, ", {heShe} retreats, giving {c:mainName} some breathing room.");
 						} else {
 							if (innocence > 66) {
 								w.append(t, c.getMainName() + " sees a chance to get some distance between " + c.himHer() + "self and " + c.hisHer() + " opponent, and with a carefully-placed kick, " + heShe() + " ");
@@ -16663,7 +16663,7 @@ public class Forsaken implements Serializable {
 					if (c.getDignity() > 66) {
 						append(w, t, c, "Overwhelmed with lust, {mainName} charges at {c:mainName} with {hisHer} hands outstretched, ");
 						if (disgrace > 66) {
-							append(w, t, "and while {heShe}'s too weak to threaten " + c.getMainName() + " directly, {heShe}'s more than capable of tearing off " + c.hisHer() + " clothes.");
+							append(w, t, c, "and while {heShe}'s too weak to threaten {c:mainName} directly, {heShe}'s more than capable of tearing off " + c.hisHer() + " clothes.");
 						} else if (disgrace > 33) {
 							append(w, t, c, "but while {c:mainName} is prepared to fend off a direct attack, " + c.heShe() + " isn't able to stop {himHer} from grabbing " + c.hisHer() + " clothes and starting to tear them off.");
 						} else {
@@ -16707,7 +16707,7 @@ public class Forsaken implements Serializable {
 						} else {
 							w.append(t, mainName + " knows that tarnishing " + hisHer() + " opponent's image will be more effective in the long term");
 						}
-						append(w, t, ", and {heShe} advances to point-blank range so that {heShe} can precisely target " + c.getMainName() + "'s clothes and blast them away.");
+						append(w, t, c, ", and {heShe} advances to point-blank range so that {heShe} can precisely target {c:mainName}'s clothes and blast them away.");
 					} else {
 						w.append(t, mainName + " notices that " + c.getMainName() + " pays practically no mind at all to protecting " + c.hisHer() + " own clothes, and ");
 						if (flavorObedience() > 66) {
@@ -16730,7 +16730,7 @@ public class Forsaken implements Serializable {
 						}
 						append(w, t, c, "tear {c:mainName}'s clothes apart.");
 					} else if (c.getConfidence() > 33) {
-						append(w, t, "The fighting so far has kicked up a cloud of smoke, and {mainName} finds {himHer}self directly behind " + c.getMainName() + ", in the perfect position for a sneak attack.  ");
+						append(w, t, c, "The fighting so far has kicked up a cloud of smoke, and {mainName} finds {himHer}self directly behind {c:mainName}, in the perfect position for a sneak attack.  ");
 						if (hostility > 66) {
 							w.append(t, "Knowing that " + c.heShe() + "'ll suffer more if " + c.hisHer() + " public image is destroyed, ");
 						} else if (hostility > 33) {
@@ -17053,9 +17053,9 @@ public class Forsaken implements Serializable {
 					} else {
 						w.append(t, c.getMainName() + " becomes more and more annoyed as " + c.heShe() + " tries to chase and strike down " + mainName + ", whose ");
 						if (confidence > 66) {
-							append(w, t, "boastful, confident manner makes the spectators think {heShe}'s completely out of " + c.getMainName() + "'s league.");
+							append(w, t, c, "boastful, confident manner makes the spectators think {heShe}'s completely out of {c:mainName}'s league.");
 						} else if (confidence > 33) {
-							append(w, t, "showy evasive maneuvers catch the spectators' eyes, making {himHer} look like {heShe}'s easily beating " + c.getMainName() + " even without directly fighting " + c.himHer() + ".");
+							append(w, t, c, "showy evasive maneuvers catch the spectators' eyes, making {himHer} look like {heShe}'s easily beating {c:mainName} even without directly fighting " + c.himHer() + ".");
 						} else {
 							append(w, t, c, "meek demeanor makes the spectators think it's completely ridiculous that {c:mainName} is still struggling to land a solid hit on {himHer}.");
 						}
@@ -17102,7 +17102,7 @@ public class Forsaken implements Serializable {
 					} else if (c.getConfidence() > 33) {
 						w.append(t, mainName + " spends some time focusing on talking rather than fighting, constantly dodging backward ");
 						if (flavorObedience() > 66) {
-							append(w, t, "as {heShe} tries to convince " + c.getMainName() + " to switch sides.");
+							append(w, t, c, "as {heShe} tries to convince {c:mainName} to switch sides.");
 						} else if (flavorObedience() > 33) {
 							append(w, t, c, "and warning {c:mainName} that " + c.hisHer() + " strength still isn't enough to stand up to the Demon Lord.");
 						} else {
@@ -17111,11 +17111,11 @@ public class Forsaken implements Serializable {
 					} else {
 						w.append(t, c.getMainName() + " hesitates, unable to approach " + mainName + " while ");
 						if (deviancy > 66) {
-							append(w, t, "{heShe} leers at " + c.getMainName() + " and voices {hisHer} perverted desires.");
+							append(w, t, c, "{heShe} leers at {c:mainName} and voices {hisHer} perverted desires.");
 						} else if (deviancy > 33) {
-							append(w, t, "{heShe} belittles " + c.getMainName() + " and points out the futility of {hisHer} actions.");
+							append(w, t, c, "{heShe} belittles {c:mainName} and points out the futility of {hisHer} actions.");
 						} else {
-							append(w, t, "{heShe} calmly explains " + c.getMainName() + "'s failings.");
+							append(w, t, c, "{heShe} calmly explains {c:mainName}'s failings.");
 						}
 					}
 				}
@@ -17226,7 +17226,7 @@ public class Forsaken implements Serializable {
 							append(w, t, c, "For {c:mainName}, protecting the people's hope is just as important as striking down " + c.reference(this) + ", and {heShe} feels obligated to try to reassure everyone.");
 						} else if (c.getMorality() > 33) {
 							if (disgrace > 66) {
-								append(w, t, "Even though {heShe} barely has the energy to stand, " + mainName + "'s hatred gives {himHer} the strength to keep fighting and ");
+								append(w, t, "Even though {heShe} barely has the energy to stand, {mainName}'s hatred gives {himHer} the strength to keep fighting and ");
 							} else if (disgrace > 33) {
 								append(w, t, c, "They might be evenly-matched, but {mainName} is far more bloodthirsty than {c:mainName}, and {heShe} keeps ");
 							} else {
@@ -17271,7 +17271,7 @@ public class Forsaken implements Serializable {
 							} else {
 								w.append(t, c.getMainName() + " is too smart to carelessly approach the stronger " + mainName + ", but " + mainName + " tries to force " + c.hisHer() + " hand, ");
 							}
-							append(w, t, "addressing the filming spectators.  {HeShe} calls " + c.getMainName() + " a coward and a fake hero, watching closely for a reaction.");
+							append(w, t, c, "addressing the filming spectators.  {HeShe} calls {c:mainName} a coward and a fake hero, watching closely for a reaction.");
 						}
 					} else {
 						if (c.getDignity() > 66) {
@@ -17346,7 +17346,7 @@ public class Forsaken implements Serializable {
 							if (disgrace > 66) {
 								append(w, t, c, "Even as {c:mainName}'s attacks take their toll, ");
 							} else if (disgrace > 33) {
-								append(w, t, "As {heShe} exchanges blows with " + c.getMainName() + ", ");
+								append(w, t, c, "As {heShe} exchanges blows with {c:mainName}, ");
 							} else {
 								append(w, t, c, "Shrugging off {c:mainName}'s attacks like they're nothing, ");
 							}
@@ -17389,7 +17389,7 @@ public class Forsaken implements Serializable {
 							} else {
 								w.append(t, mainName + " flings " + c.getMainName() + " away, then begins self-righteously preaching at " + c.himHer() + ", and ");
 							}
-							append(w, t, "{hisHer} claim that " + c.getMainName() + "'s anger will just weaken " + c.himHer() + " in the long run only irritates " + reference(c) + " even more.");
+							append(w, t, c, "{hisHer} claim that {c:mainName}'s anger will just weaken " + c.himHer() + " in the long run only irritates " + reference(c) + " even more.");
 						}
 					}
 				}
@@ -17409,7 +17409,7 @@ public class Forsaken implements Serializable {
 						if (disgrace > 66) {
 							append(w, t, c, "The fleeing {mainName} leads {c:mainName} into a central plaza in plain view of many distant cameras, then abruptly rounds on " + c.himHer() + " and ");
 						} else if (disgrace > 33) {
-							append(w, t, "When {mainName} realizes that {hisHer} battle with " + c.getMainName() + " has led them into view of several nearby spectators' cameras, {heShe} immediately rushes in close and ");
+							append(w, t, c, "When {mainName} realizes that {hisHer} battle with {c:mainName} has led them into view of several nearby spectators' cameras, {heShe} immediately rushes in close and ");
 						} else {
 							w.append(t, mainName + " charges at " + c.getMainName() + ", and picks " + c.himHer() + " up bodily, hauling " + c.himHer() + " out of the alleyways and into the open, then ");
 						}
@@ -17420,7 +17420,7 @@ public class Forsaken implements Serializable {
 						} else if (hostility > 33) {
 							append(w, t, c, "Becoming fixated on the thought of making {c:mainName} squeal and cover " + c.himHer() + "self, " + mainName + " tackles " + c.himHer() + " and ");
 						} else {
-							append(w, t, "Unable to resist {hisHer} perverted desires, " + mainName + " tackles " + c.getMainName() + " and ");
+							append(w, t, "Unable to resist {hisHer} perverted desires, {mainName} tackles " + c.getMainName() + " and ");
 						}
 						w.append(t, "starts pulling " + c.hisHer() + " torn clothes out of the way for the benefit of the countless cameras watching the battle.");
 					}
@@ -17429,7 +17429,7 @@ public class Forsaken implements Serializable {
 						if (innocence > 66) {
 							w.append(t, mainName + " finds it incredibly funny that " + c.getMainName() + " tries so hard to control how much skin " + c.heShe() + "'s showing the spectators, ");
 						} else if (innocence > 33) {
-							append(w, t, "Whenever {heShe} watched recordings of " + c.getMainName() + "'s battles, " + mainName + " would always getting turned on by the sight of " + c.hisHer() + " embarrassment, ");
+							append(w, t, c, "Whenever {heShe} watched recordings of {c:mainName}'s battles, " + mainName + " would always getting turned on by the sight of " + c.hisHer() + " embarrassment, ");
 						} else {
 							append(w, t, c, "It hasn't escaped {mainName}'s notice that {c:mainName} gets more careful around cameras the more " + c.hisHer() + " clothes are torn, ");
 						}
@@ -17448,7 +17448,7 @@ public class Forsaken implements Serializable {
 						if (flavorObedience() > 66) {
 							append(w, t, "happy that {heShe}'s found an opponent who doesn't realize how valuable it is for the Demons when the Chosen are made to look vulnerable to the public.");
 						} else if (flavorObedience() > 33) {
-							append(w, t, "relieved that {hisHer} orders to humiliate " + c.getMainName() + " will be relatively easy to execute.");
+							append(w, t, c, "relieved that {hisHer} orders to humiliate {c:mainName} will be relatively easy to execute.");
 						} else {
 							append(w, t, "enjoying feeling like {heShe}'s playing a prank on " + c.himHer() + ".");
 						}
@@ -17469,7 +17469,7 @@ public class Forsaken implements Serializable {
 						} else if (hostility > 33) {
 							w.append(t, mainName + " closes in and grapples for control with " + c.getMainName() + ", snarling in " + c.hisHer() + " face.  Both combatants try to seize control by grabbing and pulling on each other's clothes, but their garments aren't resilient enough to stand up to their supernatural strength for long.");
 						} else {
-							append(w, t, "There's no anger behind {mainName}'s attacks, but {heShe} still intends to debilitate " + c.getMainName() + ".  {HisHer} strikes are precise, and even when " + c.getMainName() + " dodges, " + c.hisHer() + " clothes are usually caught and partially torn away.");
+							append(w, t, c, "There's no anger behind {mainName}'s attacks, but {heShe} still intends to debilitate {c:mainName}.  {HisHer} strikes are precise, and even when " + c.getMainName() + " dodges, " + c.hisHer() + " clothes are usually caught and partially torn away.");
 						}
 					} else {
 						w.append(t, c.getMainName() + "'s clothes have taken significant damage, and while " + mainName + " isn't interested in ogling " + c.himHer() + ", ");
@@ -17478,9 +17478,9 @@ public class Forsaken implements Serializable {
 						} else if (flavorObedience() > 33) {
 							append(w, t, "{heShe} knows that the fight will become easier as the Chosen begin to look more exposed and vulnerable to the public and each other.  ");
 						} else {
-							append(w, t, "{heShe} knows that " + c.getMainName() + " doesn't want to be exposed.  ");
+							append(w, t, c, "{heShe} knows that {c:mainName} doesn't want to be exposed.  ");
 						}
-						append(w, t, "{HeShe} charges forward, forcing " + c.getMainName() + " to choose between fighting effectively and keeping " + c.hisHer() + " movements minimal in order to protect " + c.hisHer() + " modesty in front of the watching cameras.");
+						append(w, t, c, "{HeShe} charges forward, forcing {c:mainName} to choose between fighting effectively and keeping " + c.hisHer() + " movements minimal in order to protect " + c.hisHer() + " modesty in front of the watching cameras.");
 					}
 				}
 			} else {
@@ -17493,7 +17493,7 @@ public class Forsaken implements Serializable {
 						} else {
 							w.append(t, mainName + " knows how prideful and headstrong " + c.getMainName() + " is, and " + heShe() + " exploits those traits to the fullest, playing up " + hisHer() + " own weakness so that " + reference(c) + " will try to quickly finish " + himHer() + " off at hand-to-hand range.  ");
 						}
-						append(w, t, "This allows {mainName} to use the opportunity to get {hisHer} hands on " + c.getMainName() + " as well.");
+						append(w, t, c, "This allows {mainName} to use the opportunity to get {hisHer} hands on {c:mainName} as well.");
 					} else if (c.getConfidence() > 33) {
 						w.append(t, mainName + " is weak enough that " + c.getMainName() + " is able to pin " + himHer() + " down, but ");
 						if (deviancy > 66) {
@@ -17606,7 +17606,7 @@ public class Forsaken implements Serializable {
 							} else if (innocence > 33) {
 								append(w, t, "and {mainName} doesn't take losing sight of the object of {hisHer} sadism well, ");
 							} else {
-								append(w, t, "and the disruption to {hisHer} plans causes " + mainName + " to abruptly snap, ");
+								append(w, t, "and the disruption to {hisHer} plans causes {mainName} to abruptly snap, ");
 							}
 							append(w, t, c, "shrieking with incoherent rage at {c:mainName} and lashing out in all directions.");
 						}
@@ -17669,7 +17669,7 @@ public class Forsaken implements Serializable {
 							} else {
 								w.append(t, mainName + " shows no signs of stopping, ");
 							}
-							append(w, t, "and soon enough {heShe} starts to move toward " + c.getMainName() + " again.");
+							append(w, t, c, "and soon enough {heShe} starts to move toward {c:mainName} again.");
 						}
 					}
 				} else {
@@ -17682,7 +17682,7 @@ public class Forsaken implements Serializable {
 							} else {
 								w.append(t, mainName + "'s hatred wouldn't be satisfied by giving " + hisHer() + " oppoent a kick death, ");
 							}
-							append(w, t, "but {heShe} would still prefer to be directly attacking " + c.getMainName() + ".  However, " + mainName + " worries that " + c.getMainName() + "'s oblivious nature would lead " + c.himHer() + " to get " + c.himHer() + "self killed even by an attack that's not intended to be fatal, and so " + mainName + " contents {himHer}self with causing emotional pain.");
+							append(w, t, c, "but {heShe} would still prefer to be directly attacking {c:mainName}.  However, " + mainName + " worries that " + c.getMainName() + "'s oblivious nature would lead " + c.himHer() + " to get " + c.himHer() + "self killed even by an attack that's not intended to be fatal, and so " + mainName + " contents {himHer}self with causing emotional pain.");
 						} else if (c.getInnocence() > 33) {
 							w.append(t, c.getMainName() + " loses sight of " + mainName + " in the chaotic battlefield, ");
 							if (innocence > 66) {
@@ -17696,9 +17696,9 @@ public class Forsaken implements Serializable {
 							if (disgrace > 66) {
 								append(w, t, "Despite all {hisHer} impotent rage, ");
 							} else if (disgrace > 33) {
-								append(w, t, "Even though {hisHer} desire to kill " + c.getMainName() + " is very sincere, ");
+								append(w, t, c, "Even though {hisHer} desire to kill {c:mainName} is very sincere, ");
 							} else {
-								append(w, t, "Even though {heShe} might well be capable of killing " + c.getMainName() + ", ");
+								append(w, t, c, "Even though {heShe} might well be capable of killing {c:mainName}, ");
 							}
 							w.append(t, mainName + " still hasn't inflicted even a scratch on " + c.himHer() + ".  " + c.getMainName() + " can only conclude that it must be because of the Demon Lord's orders.");
 						}
@@ -17711,11 +17711,11 @@ public class Forsaken implements Serializable {
 							} else {
 								w.append(t, c.getMainName() + " wants to charge at " + mainName + ", but instead " + c.heShe() + "'s left gasping for breath after the exertion of their battle, and ");
 							}
-							append(w, t, "{hisHer} insults enrage " + c.getMainName() + " to the point that it's hard to see where " + c.heShe() + "'s going.");
+							append(w, t, c, "{hisHer} insults enrage {c:mainName} to the point that it's hard to see where " + c.heShe() + "'s going.");
 						} else if (c.getConfidence() > 33) {
 							w.append(t, mainName + " laughs and taunts " + c.getMainName() + " from a distance, and ");
 							if (innocence > 66) {
-								append(w, t, "while {heShe} isn't smart enough to make the insults actually sting, the fact that {heShe}'s having such a good time is enough on its own to infuriate " + c.getMainName() + ".");
+								append(w, t, c, "while {heShe} isn't smart enough to make the insults actually sting, the fact that {heShe}'s having such a good time is enough on its own to infuriate {c:mainName}.");
 							} else if (innocence > 33) {
 								append(w, t, c, "due to the Demons and piles of rubble between them, {c:mainName} has no choice but to grit " + c.hisHer() + " teeth and take it.");
 							} else {
@@ -17813,7 +17813,7 @@ public class Forsaken implements Serializable {
 						} else if (innocence > 33) {
 							w.append(t, "staying out of the way while they fight.");
 						} else {
-							append(w, t, "using {hisHer} keen tactical mind to let them fight at a greater effectiveness than " + c.getMainName() + " is used to.");
+							append(w, t, c, "using {hisHer} keen tactical mind to let them fight at a greater effectiveness than {c:mainName} is used to.");
 						}
 					} else {
 						if (deviancy > 66) {
@@ -17823,7 +17823,7 @@ public class Forsaken implements Serializable {
 						} else {
 							w.append(t, mainName + " knows that " + c.getMainName() + " often has trouble fighting against Demons, ");
 						}
-						append(w, t, "and {heShe} commands any Demons within range to charge at " + c.getMainName() + " all at once.");
+						append(w, t, c, "and {heShe} commands any Demons within range to charge at {c:mainName} all at once.");
 					}
 				} else {
 					//fighting Demons together!!
@@ -17892,14 +17892,14 @@ public class Forsaken implements Serializable {
 						} else if (hostility > 33) {
 							w.append(t, mainName + " grudgingly compliments " + c.getMainName() + ", acknowledging " + c.himHer() + " as a worthy (and especially attractive) opponent.  ");
 						} else {
-							append(w, t, "During a standoff between {himHer}self and " + c.getMainName() + ", " + mainName + " takes the opportunity to describe in detail which of " + reference(c) + "'s traits {heShe} approves of.  ");
+							append(w, t, c, "During a standoff between {himHer}self and {c:mainName}, " + mainName + " takes the opportunity to describe in detail which of " + reference(c) + "'s traits {heShe} approves of.  ");
 						}
 						w.append(t, c.getMainName() + " preens as " + c.heShe() + "'s praised.");
 					} else if (c.getConfidence() > 33) {
 						if (confidence > 66) {
 							w.append(t, mainName + " starts trying to seduce " + c.getMainName() + " right in the middle of the battle, using " + hisHer() + " best pickup lines.  ");
 						} else if (confidence > 33) {
-							append(w, t, "Now that {heShe}'s gotten a chance to examine " + c.getMainName() + "'s body very closely, " + mainName + " compliments it, using very detailed language.  ");
+							append(w, t, c, "Now that {heShe}'s gotten a chance to examine {c:mainName}'s body very closely, " + mainName + " compliments it, using very detailed language.  ");
 						} else {
 							w.append(t, mainName + " comments on how much " + heShe() + " admires " + c.getMainName() + "'s figure, disparaging " + hisHer() + " own in the process.  ");
 						}
@@ -17928,7 +17928,7 @@ public class Forsaken implements Serializable {
 						w.append(t, "  The molestation is unpleasant, but not to the point of provoking " + c.himHer() + ".");
 					} else if (c.getInnocence() > 33) {
 						if (hostility > 66) {
-							append(w, t, "Given {mainName}'s obvious murderous desires, {heShe}'s showing a surprising amount of restraint against " + c.getMainName() + ".  ");
+							append(w, t, c, "Given {mainName}'s obvious murderous desires, {heShe}'s showing a surprising amount of restraint against {c:mainName}.  ");
 						} else if (hostility > 33) {
 							append(w, t, c, "Although {mainName} clearly takes a sort of mischievous pleasure out of tormenting {c:mainName}, there's no actual malice behind it.  ");
 						} else {
