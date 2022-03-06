@@ -207,7 +207,7 @@ public class Chosen implements Serializable {
 			return Forsaken.Gender.FUTANARI;
 		}
 	}
-	public String replace_tags(String s, String pre) {
+	public String replaceTags(String s, String pre) {
 		if (gender.equals("male")) {
 			s = s.replace("{" + pre + "upInto} {hisHer} {pussyAsshole}", "up her pussy");
 			s = s.replace("{" + pre + "chest} heave{s}", "breasts heave");
@@ -281,7 +281,7 @@ public class Chosen implements Serializable {
 		return s.replace("{" + pre + "mainName}", mainName);
 	}
 	public void append(WorldState w, JTextPane t, String s) {
-		w.append(t, replace_tags(s, ""));
+		w.append(t, replaceTags(s, ""));
 	}
 	private void append(WorldState w, JTextPane t, Chosen c, String s) {
 		Boolean friendly = w.getRelationship(number, c.getNumber()) >= 0;
@@ -290,10 +290,10 @@ public class Chosen implements Serializable {
 		} else {
 			s = s.replace("{friendRival}", "rival");
 		}
-		append(w, t, c.replace_tags(s, "c:"));
+		append(w, t, c.replaceTags(s, "c:"));
 	}
 	private void append(WorldState w, JTextPane t, Forsaken f, String s) {
-		append(w, t, f.replace_tags(s, "c:"));
+		append(w, t, f.replaceTags(s, "c:"));
 	}
 	public int impregnationReq() {
 		int result = 1000;
@@ -20781,9 +20781,9 @@ public class Chosen implements Serializable {
 					if (c.isVVirg() == false && vVirg == false) {
 						if (c.getConfidence() > 66) {
 							if (c.getGender().equals("female")) {
-								append(w, t, "{givenName} almost jumps out of bed in shock.  {HeShe} rolls over to see " + c.getGivenName() + " looming over {hisHer} bedside, naked body slick with sweat, a curved double-dildo protruding from {c:hisHer} pussy.\n\n");
+								append(w, t, c, "{givenName} almost jumps out of bed in shock.  {HeShe} rolls over to see {c:givenName} looming over {hisHer} bedside, naked body slick with sweat, a curved double-dildo protruding from {c:hisHer} pussy.\n\n");
 							} else {
-								append(w, t, "{givenName} almost jumps out of bed in shock.  {HeShe} rolls over to see " + c.getGivenName() + " looming over {hisHer} bedside, naked body slick with sweat, {c:hisHer} cock standing proudly erect.\n\n");
+								append(w, t, c, "{givenName} almost jumps out of bed in shock.  {HeShe} rolls over to see {c:givenName} looming over {hisHer} bedside, naked body slick with sweat, {c:hisHer} cock standing proudly erect.\n\n");
 							}
 							c.say(t, "\"");
 							if (c.getMorality() > 66) {
@@ -21035,7 +21035,7 @@ public class Chosen implements Serializable {
 						} else if (morality > 33) {
 							append(w, t, "{givenName} stops, but only briefly.  {HisHer} arousal is too intense to ignore, and soon {heShe} starts masturbating again, using smaller, quieter movements in an attempt to avoid detection.  This makes it impossible for {himHer} to get off, however, and {heShe} spends the rest of the night in {hisHer} futile attempt at self-satisfaction.  {HeShe}'s exhausted the next morning.");
 						} else {
-							append(w, t, "{givenName} stops briefly, thinks about it, then shrugs and starts masturbating again.  " + c.getGivenName() + " sighs and gives up, pressing a pillow against {c:hisHer} own ear to block out the noise.  But it doesn't change the fact that {givenName} can't seem to satisfy {himHer}self.  {HeShe} tries all night and ends up with nothing to show for it but {hisHer} exhaustion the next morning.");
+							append(w, t, c, "{givenName} stops briefly, thinks about it, then shrugs and starts masturbating again.  {c:givenName} sighs and gives up, pressing a pillow against {c:hisHer} own ear to block out the noise.  But it doesn't change the fact that {givenName} can't seem to satisfy {himHer}self.  {HeShe} tries all night and ends up with nothing to show for it but {hisHer} exhaustion the next morning.");
 						}
 						Project.changePortrait(c.convertGender(), c.type, true, false, w, nameDisplay, 1, Project.Emotion.ANGER, Project.Emotion.ANGER);
 					}
@@ -21645,7 +21645,7 @@ public class Chosen implements Serializable {
 							} else if (morality > 33) {
 								append(w, t, "{givenName} is too exhausted to answer, or even to open {hisHer} eyes.  " + c.getGivenName() + " cleans {himHer} up with shaking hands, then carries {himHer} back to their room.");
 							} else {
-								append(w, t, "{givenName} grits {hisHer} teeth, covering {hisHer} face in order to hide {hisHer} tears.  {HeShe} wordlessly tries to force {himHer}self to {hisHer} feet, refusing to take " + c.getGivenName() + "'s help at first.  But when {c:heShe} stumbles, " + c.getGivenName() + " catches {himHer}, and {heShe} is privately grateful for the support as {heShe} cleans {himHer}self up, gets dressed, and limps back to their room.");
+								append(w, t, c, "{givenName} grits {hisHer} teeth, covering {hisHer} face in order to hide {hisHer} tears.  {HeShe} wordlessly tries to force {himHer}self to {hisHer} feet, refusing to take {c:givenName}'s help at first.  But when {c:heShe} stumbles, " + c.getGivenName() + " catches {himHer}, and {heShe} is privately grateful for the support as {heShe} cleans {himHer}self up, gets dressed, and limps back to their room.");
 							}
 						}
 					} else {
@@ -21835,9 +21835,9 @@ public class Chosen implements Serializable {
 							}
 							c.say(t, "\"\n\n");
 							if (gender.equals("male")) {
-								append(w, t, "{givenName} is immensely grateful for " + c.getGivenName() + "'s help, but it comes at a cost.  " + c.getGivenName() + " drives the men into a frenzy, and soon they're enthusiastically ruining {c:hisHer} ass and {c:hisHer} throat at the same time");
+								append(w, t, c, "{givenName} is immensely grateful for {c:givenName}'s help, but it comes at a cost.  {c:givenName} drives the men into a frenzy, and soon they're enthusiastically ruining {c:hisHer} ass and {c:hisHer} throat at the same time");
 							} else {
-								append(w, t, "{givenName} is immensely grateful for " + c.getGivenName() + "'s help, but it comes at a cost.  " + c.getGivenName() + " drives the men into a frenzy, and soon they're enthusiastically ruining {c:hisHer} pussy, asshole, and throat all at once");
+								append(w, t, c, "{givenName} is immensely grateful for {c:givenName}'s help, but it comes at a cost.  {c:givenName} drives the men into a frenzy, and soon they're enthusiastically ruining {c:hisHer} pussy, asshole, and throat all at once");
 							}
 							append(w, t, c, ", slamming their hips against {c:himHer} with merciless ferocity.  By the time they're satisfied, {c:heShe}'s too sore and exhausted to move.  {givenName} does {hisHer} best to comfort {c:himHer}, clean {c:himHer} up, and carry {c:himHer} back to their room.");
 						} else if (c.isModest() == false) {
@@ -21871,9 +21871,9 @@ public class Chosen implements Serializable {
 							}
 							c.say(t, "\"\n\n");
 							if (gender.equals("male") || c.getGender().equals("male")) {
-								append(w, t, "{givenName} is immensely grateful for " + c.getGivenName() + "'s help, but {c:heShe}'s an anal virgin as well, and {heShe} knows they'll both have to work hard in order to keep it that way.\n\nBy the time the men leave, both of the Chosen are utterly exhausted, collapsed against each other with copious amounts of cum streaming from their lips and caking their hair and body.  They struggle to clean and dress each other, then limp off to their room, leaning together for support.");
+								append(w, t, c, "{givenName} is immensely grateful for {c:givenName}'s an anal virgin as well, and {heShe} knows they'll both have to work hard in order to keep it that way.\n\nBy the time the men leave, both of the Chosen are utterly exhausted, collapsed against each other with copious amounts of cum streaming from their lips and caking their hair and body.  They struggle to clean and dress each other, then limp off to their room, leaning together for support.");
 							} else {
-								append(w, t, "{givenName} is immensely grateful for " + c.getGivenName() + "'s help, but {c:heShe}'s a virgin as well, and {heShe} knows they'll both have to work hard in order to keep it that way.\n\nBy the time the men leave, both of the Chosen are utterly exhausted, collapsed against each other with copious amounts of cum streaming from their lips and their ruined assholes.  They struggle to clean and dress each other, then limp off to their room, leaning together for support.");
+								append(w, t, c, "{givenName} is immensely grateful for {c:givenName}'s help, but {c:heShe}'s a virgin as well, and {heShe} knows they'll both have to work hard in order to keep it that way.\n\nBy the time the men leave, both of the Chosen are utterly exhausted, collapsed against each other with copious amounts of cum streaming from their lips and their ruined assholes.  They struggle to clean and dress each other, then limp off to their room, leaning together for support.");
 							}
 						} else {
 							if (gender.equals("male")) {
@@ -21920,7 +21920,7 @@ public class Chosen implements Serializable {
 							} else if (morality > 33) {
 								append(w, t, "{givenName} is too exhausted to answer, or even to open {hisHer} eyes.  " + c.getGivenName() + " cleans {himHer} up with shaking hands, then carries {himHer} back to their room.");
 							} else {
-								append(w, t, "{givenName} grits {hisHer} teeth, covering {hisHer} face in order to hide {hisHer} tears.  {HeShe} wordlessly tries to force {himHer}self to {hisHer} feet, refusing to take " + c.getGivenName() + "'s help at first.  But when {c:heShe} stumbles, " + c.getGivenName() + " catches {himHer}, and {heShe} is privately grateful for the support as {heShe} cleans {himHer}self up, gets dressed, and limps back to their room.");
+								append(w, t, c, "{givenName} grits {hisHer} teeth, covering {hisHer} face in order to hide {hisHer} tears.  {HeShe} wordlessly tries to force {himHer}self to {hisHer} feet, refusing to take {c:givenName}'s help at first.  But when {c:heShe} stumbles, " + c.getGivenName() + " catches {himHer}, and {heShe} is privately grateful for the support as {heShe} cleans {himHer}self up, gets dressed, and limps back to their room.");
 							}
 						}
 					} else {
@@ -22188,7 +22188,7 @@ public class Chosen implements Serializable {
 						} else if (morality > 33) {
 							append(w, t, "{givenName} is too exhausted to answer, or even to open {hisHer} eyes.  " + c.getGivenName() + " cleans {himHer} up with shaking hands, then carries {himHer} back to their room.");
 						} else {
-							append(w, t, "{givenName} grits {hisHer} teeth, covering {hisHer} face in order to hide {hisHer} tears.  {HeShe} wordlessly tries to force {himHer}self to {hisHer} feet, refusing to take " + c.getGivenName() + "'s help at first.  But when {c:heShe} stumbles, " + c.getGivenName() + " catches {himHer}, and {heShe} is privately grateful for the support as {heShe} cleans {himHer}self up, gets dressed, and limps back to their room.");
+							append(w, t, c, "{givenName} grits {hisHer} teeth, covering {hisHer} face in order to hide {hisHer} tears.  {HeShe} wordlessly tries to force {himHer}self to {hisHer} feet, refusing to take {c:givenName}'s help at first.  But when {c:heShe} stumbles, {c:givenName} catches {himHer}, and {heShe} is privately grateful for the support as {heShe} cleans {himHer}self up, gets dressed, and limps back to their room.");
 						}
 					}
 				} else {
@@ -22940,7 +22940,7 @@ public class Chosen implements Serializable {
 					}
 					say(t, "\"\n\n");
 					Project.changePortrait(convertGender(), type, true, false, w, nameDisplay, 0, Project.Emotion.JOY, Project.Emotion.JOY);
-					append(w, t, "{givenName} smiles back at " + c.getGivenName() + " and takes {c:hisHer} hand.  Now outnumbered, the heckler wisely reconsiders his choice of target and hurriedly flees down the sidewalk, scowling back at the Chosen.  " + c.getGivenName() + " seems relieved, and {c:heShe} clings to {givenName}'s hand until the limousine arrives.  They climb inside together, followed close behind by " + d.getGivenName() + ".");
+					append(w, t, c, "{givenName} smiles back at {c:givenName} and takes {c:hisHer} hand.  Now outnumbered, the heckler wisely reconsiders his choice of target and hurriedly flees down the sidewalk, scowling back at the Chosen.  " + c.getGivenName() + " seems relieved, and {c:heShe} clings to {givenName}'s hand until the limousine arrives.  They climb inside together, followed close behind by " + d.getGivenName() + ".");
 				}
 			} else {
 				if (c.isAVirg()) {
@@ -22969,7 +22969,7 @@ public class Chosen implements Serializable {
 						}
 					}
 					c.say(t, "We weren't even given the option of turning down this vacation.\"\n\n");
-					append(w, t, "{givenName} turns back to glare at " + c.getGivenName() + ", clearly preferring to get by without {c:hisHer} help.  The two Chosen stare at each other, hostility crackling between them, and the heckler wisely decides that this is as good an excuse as any to escape.  When the limousine finally arrives, {givenName} and " + c.getGivenName() + " sit on opposite sides, forcing " + d.getGivenName() + " to awkwardly place " + d.himHer() + "self between them.");
+					append(w, t, c, "{givenName} turns back to glare at {c:givenName}, clearly preferring to get by without {c:hisHer} help.  The two Chosen stare at each other, hostility crackling between them, and the heckler wisely decides that this is as good an excuse as any to escape.  When the limousine finally arrives, {givenName} and " + c.getGivenName() + " sit on opposite sides, forcing " + d.getGivenName() + " to awkwardly place " + d.himHer() + "self between them.");
 					Project.changePortrait(convertGender(), type, true, false, w, nameDisplay, 0, Project.Emotion.ANGER, Project.Emotion.ANGER);
 					Project.changePortrait(c.convertGender(), c.type, true, false, w, nameDisplay, 1, Project.Emotion.ANGER, Project.Emotion.ANGER);
 				} else {
@@ -27910,7 +27910,7 @@ public class Chosen implements Serializable {
 							say(t, "D-Do you have any idea how embarrassing this is...?");
 						}
 						say(t, "\"\n\n");
-						append(w, t, "{givenName} had expected " + c.getGivenName() + " to falter, but {c:hisHer} response is surprising.\n\n");
+						append(w, t, c, "{givenName} had expected {c:givenName} to falter, but {c:hisHer} response is surprising.\n\n");
 						c.say(t, "\"");
 						if (c.getConfidence() > 66) {
 							c.say(t, "Sure.  I mean, it felt a little weird the first time I posed naked, but I got over it pretty quickly.  ");
@@ -68428,7 +68428,7 @@ public class Chosen implements Serializable {
 		SimpleAttributeSet keyWord = new SimpleAttributeSet();
 		StyleConstants.setFontSize(keyWord, textSize);
 		Color usedColor = textColor;
-		s = replace_tags(s, "");
+		s = replaceTags(s, "");
 		if (t.getBackground() == Color.BLACK) {
 			usedColor = darkColor;
 		}
@@ -68443,7 +68443,7 @@ public class Chosen implements Serializable {
 		world.save.addLine(s, usedColor, false);
 	}
 	public void say(JTextPane t, Chosen c, String s) {
-		say(t, c.replace_tags(s, "c:"));
+		say(t, c.replaceTags(s, "c:"));
 	}
 	
 	public void transform(JTextPane t, WorldState w) {

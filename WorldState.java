@@ -17086,7 +17086,7 @@ public class WorldState implements Serializable {
 			c.setNumber(2);
 		}
 	}
-	public String replace_tags(String s) {
+	public String replaceTags(String s) {
 		if (tickle()) {
 			s = s.replace("{exhaution}", "exhaution");
 			s = s.replace("{exhausted}", "exhausted");
@@ -17113,7 +17113,7 @@ public class WorldState implements Serializable {
 		StyleConstants.setBold(keyWord, true);
 		try
 		{
-			doc.insertString(doc.getLength(), replace_tags(s), keyWord );
+			doc.insertString(doc.getLength(), replaceTags(s), keyWord );
 		}
 		catch(Exception e) { System.out.println(e); }
 		t.setCaretPosition(t.getDocument().getLength());
@@ -17130,7 +17130,7 @@ public class WorldState implements Serializable {
 		StyleConstants.setBold(keyWord, true);
 		try
 		{
-			doc.insertString(doc.getLength(), replace_tags(s), keyWord );
+			doc.insertString(doc.getLength(), replaceTags(s), keyWord );
 		}
 		catch(Exception e) { System.out.println(e); }
 		t.setCaretPosition(t.getDocument().getLength());
@@ -17147,7 +17147,7 @@ public class WorldState implements Serializable {
 		StyleConstants.setBold(keyWord, true);
 		try
 		{
-			doc.insertString(doc.getLength(), replace_tags(s), keyWord );
+			doc.insertString(doc.getLength(), replaceTags(s), keyWord );
 		}
 		catch(Exception e) { System.out.println(e); }
 		t.setCaretPosition(t.getDocument().getLength());
@@ -17164,7 +17164,7 @@ public class WorldState implements Serializable {
 		StyleConstants.setBold(keyWord, true);
 		try
 		{
-			doc.insertString(doc.getLength(), replace_tags(s), keyWord );
+			doc.insertString(doc.getLength(), replaceTags(s), keyWord );
 		}
 		catch(Exception e) { System.out.println(e); }
 		t.setCaretPosition(t.getDocument().getLength());
@@ -17182,7 +17182,7 @@ public class WorldState implements Serializable {
 		StyleConstants.setUnderline(keyWord, true);
 		try
 		{
-			doc.insertString(doc.getLength(), replace_tags(s), keyWord );
+			doc.insertString(doc.getLength(), replaceTags(s), keyWord );
 		}
 		catch(Exception e) { System.out.println(e); }
 		t.setCaretPosition(t.getDocument().getLength());
@@ -17199,7 +17199,7 @@ public class WorldState implements Serializable {
 		StyleConstants.setBold(keyWord, true);
 		try
 		{
-			doc.insertString(doc.getLength(), replace_tags(s), keyWord );
+			doc.insertString(doc.getLength(), replaceTags(s), keyWord );
 		}
 		catch(Exception e) { System.out.println(e); }
 		t.setCaretPosition(t.getDocument().getLength());
@@ -17216,7 +17216,7 @@ public class WorldState implements Serializable {
 		StyleConstants.setBold(keyWord, true);
 		try
 		{
-			doc.insertString(doc.getLength(), replace_tags(s), keyWord );
+			doc.insertString(doc.getLength(), replaceTags(s), keyWord );
 		}
 		catch(Exception e) { System.out.println(e); }
 		t.setCaretPosition(t.getDocument().getLength());
@@ -17233,7 +17233,7 @@ public class WorldState implements Serializable {
 		StyleConstants.setBold(keyWord, true);
 		try
 		{
-			doc.insertString(doc.getLength(), replace_tags(s), keyWord );
+			doc.insertString(doc.getLength(), replaceTags(s), keyWord );
 		}
 		catch(Exception e) { System.out.println(e); }
 		t.setCaretPosition(t.getDocument().getLength());
@@ -17250,7 +17250,7 @@ public class WorldState implements Serializable {
 		StyleConstants.setBold(keyWord, true);
 		try
 		{
-			doc.insertString(doc.getLength(), replace_tags(s), keyWord );
+			doc.insertString(doc.getLength(), replaceTags(s), keyWord );
 		}
 		catch(Exception e) { System.out.println(e); }
 		t.setCaretPosition(t.getDocument().getLength());
@@ -17267,7 +17267,7 @@ public class WorldState implements Serializable {
 		StyleConstants.setBold(keyWord, true);
 		try
 		{
-			doc.insertString(doc.getLength(), replace_tags(s), keyWord );
+			doc.insertString(doc.getLength(), replaceTags(s), keyWord );
 		}
 		catch(Exception e) { System.out.println(e); }
 		t.setCaretPosition(t.getDocument().getLength());
@@ -17285,7 +17285,7 @@ public class WorldState implements Serializable {
 		StyleConstants.setUnderline(keyWord, underline);
 		try
 		{
-			doc.insertString(doc.getLength(), replace_tags(s), keyWord );
+			doc.insertString(doc.getLength(), replaceTags(s), keyWord );
 		}
 		catch(Exception e) { System.out.println(e); }
 		t.setCaretPosition(t.getDocument().getLength());
