@@ -18253,6 +18253,12 @@ public class Forsaken implements Serializable {
 		}
 		catch(Exception e) { System.out.println(e); }
 	}
+    public void say(JTextPane t, Forsaken f, String s) {
+		say(t, f.replaceTags(s, "c:"));
+	}
+    public void say(JTextPane t, Chosen c, String s) {
+		say(t, c.replaceTags(s, "c:"));
+	}
 	
 	public String fixedFormat(long amount) {
 		if (amount < 0) {
