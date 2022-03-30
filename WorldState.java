@@ -18,6 +18,15 @@ public class WorldState
     implements Serializable
 {
 
+    public Boolean truceEnforced()
+    {
+        for(int i = 0; i < 3; i++)
+            if(getCast()[i] != null && getCast()[i].truce.booleanValue())
+                return Boolean.valueOf(true);
+
+        return Boolean.valueOf(false);
+    }
+
     public void printCapturedLine(JTextPane t, WorldState w, int thisAttack, Chosen c)
     {
         Chosen.Species type = c.type;
@@ -6354,13 +6363,13 @@ public class WorldState
 
     public int threatenResolve()
     {
-        int amount = 3 + achievementHeld(7)[0];
+        int amount = 3 + achievementHeld(8)[0];
         return amount;
     }
 
     public int slimeResolve()
     {
-        int amount = 4 + achievementHeld(7)[0] * 2;
+        int amount = 4 + achievementHeld(8)[0] * 2;
         if(amount == 14)
             amount++;
         return amount;
@@ -6368,17 +6377,17 @@ public class WorldState
 
     public int attackResolve()
     {
-        int amount = 3 + achievementHeld(7)[0];
-        if(achievementHeld(7)[0] > 1)
-            amount += achievementHeld(7)[0] - 1;
+        int amount = 3 + achievementHeld(8)[0];
+        if(achievementHeld(8)[0] > 1)
+            amount += achievementHeld(8)[0] - 1;
         return amount;
     }
 
     public int tauntResolve()
     {
-        int amount = 5 + achievementHeld(7)[0] * 2;
-        if(achievementHeld(7)[0] > 2)
-            amount += achievementHeld(7)[0] - 2;
+        int amount = 5 + achievementHeld(8)[0] * 2;
+        if(achievementHeld(8)[0] > 2)
+            amount += achievementHeld(8)[0] - 2;
         return amount;
     }
 
@@ -6607,6 +6616,39 @@ public class WorldState
                 result = 1;
         } else
         if(index == 7)
+        {
+            for(int i = 0; i < 3 && !loopComplete.booleanValue(); i++)
+                if(getCast()[i] != null && getCast()[i].pastNegotiated.booleanValue())
+                {
+                    stat++;
+                    if(getCast()[i].type == Chosen.Species.SUPERIOR)
+                        stat++;
+                }
+
+            for(int i = 0; i < checkedChosen.length; i++)
+                if(checkedChosen[i].pastNegotiated.booleanValue())
+                {
+                    stat++;
+                    if(checkedChosen[i].type == Chosen.Species.SUPERIOR)
+                        stat++;
+                }
+
+            if(stat > 79)
+                result = 5;
+            else
+            if(stat > 29)
+                result = 4;
+            else
+            if(stat > 11)
+                result = 3;
+            else
+            if(stat > 4)
+                result = 2;
+            else
+            if(stat > 1)
+                result = 1;
+        } else
+        if(index == 8)
         {
             for(int i = 0; i < checkedChosen.length; i++)
                 if(checkedChosen[i].type == Chosen.Species.SUPERIOR)
@@ -6951,6 +6993,11 @@ public class WorldState
                     append(t, (new StringBuilder(String.valueOf(leader.mainName))).append(" stares at ").append(subject.mainName).append(" for a moment, then snorts with laughter and makes a placating gesture.\n\n").toString());
                     leader.say(t, "\"I never would have expected you to come around to this way of thinking.  But I'm not complaining.  ");
                 } else
+                if(leader.negotiations > 0)
+                {
+                    append(t, (new StringBuilder(String.valueOf(subject.mainName))).append("'s words only make ").append(leader.mainName).append(" angrier, and ").append(leader.heShe()).append(" shakes ").append(leader.hisHer()).append(" violenty as ").append(leader.heShe()).append(" replies.\n\n").toString());
+                    leader.say(t, "\"Why would that matter!?  They're just Thralls!  ");
+                } else
                 {
                     append(t, (new StringBuilder(String.valueOf(subject.mainName))).append("'s words only make ").append(leader.mainName).append(" angrier, and ").append(leader.heShe()).append(" shakes ").append(leader.hisHer()).append(" violenty as ").append(leader.heShe()).append(" replies.\n\n").toString());
                     leader.say(t, "\"Why would that matter!?  They're our enemies!  ");
@@ -6964,6 +7011,11 @@ public class WorldState
                     append(t, (new StringBuilder("But instead of pressing onward, ")).append(leader.mainName).append(" sighs in relief.\n\n").toString());
                     leader.say(t, "\"I was hoping you'd say that.  I have some Thrall friends too, but I haven't said anything until now because I was worried you'd try to purify them.  ");
                 } else
+                if(leader.negotiations > 0)
+                {
+                    append(t, (new StringBuilder(String.valueOf(leader.mainName))).append(" obediently shrinks backward, but the sullen frown on ").append(leader.hisHer()).append(" face shows that ").append(leader.heShe()).append(" hasn't given up.\n\n").toString());
+                    leader.say(t, "\"This war isn't pointless!  Using nonviolent methods is fine, but you can't just give up!  ");
+                } else
                 {
                     append(t, (new StringBuilder(String.valueOf(leader.mainName))).append(" obediently shrinks backward, but the sullen frown on ").append(leader.hisHer()).append(" face shows that ").append(leader.heShe()).append(" hasn't given up.\n\n").toString());
                     leader.say(t, "\"This war isn't pointless!  We have to keep fighting!  ");
@@ -6975,6 +7027,11 @@ public class WorldState
                 {
                     append(t, (new StringBuilder(String.valueOf(leader.mainName))).append(" is clearly intimidated, but ").append(leader.heShe()).append(" manages to put on an unsteady smile.\n\n").toString());
                     leader.say(t, "\"Don't worry, I'm not going to try to take what's yours.  I already have my own... um, friends among the Thralls.  ");
+                } else
+                if(leader.negotiations > 0)
+                {
+                    append(t, (new StringBuilder(String.valueOf(leader.mainName))).append(" flinches, but ").append(leader.heShe()).append(" doesn't keep ").append(leader.hisHer()).append(" silence, a stubborn set to ").append(leader.hisHer()).append(" jaw.\n\n").toString());
+                    leader.say(t, "\"If you're going to sleep with the enemy, you could at least pick one who can do something to help the city in exchange.  Sleeping with Thralls is just... perversion...  ");
                 } else
                 {
                     append(t, (new StringBuilder(String.valueOf(leader.mainName))).append(" flinches, eyes widening in horror.\n\n").toString());
@@ -7219,7 +7276,10 @@ public class WorldState
                 {
                     Project.changePortrait(follower.convertGender(), follower.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 2, Project.Emotion.SHAME, Project.Emotion.SHAME);
                     append(t, (new StringBuilder("There are tears in ")).append(follower.hisHer()).append(" eyes as ").append(follower.mainName).append(" stares with disbelief at ").append(subject.mainName).append(".\n\n").toString());
-                    follower.say(t, "\"Weren't you supposed to be a hero?  H-How could you betray us like this...?\"\n\n");
+                    if(follower.negotiations == 0)
+                        follower.say(t, "\"Weren't you supposed to be a hero?  H-How could you betray us like this...?\"\n\n");
+                    else
+                        follower.say(t, "\"You're just... giving up?  How could you?  Don't you know what I've been through in order to let you two focus on fighting?\"\n\n");
                     append(t, (new StringBuilder("For a moment, ")).append(subject.mainName).append(" looks hurt by their rejection.  But then ").append(subject.hisHer()).append(" expression grows hard.\n\n").toString());
                     subject.say(t, "\"If you don't believe in this, then go home.  Because if you try to go after my friends...  I don't want to hurt you.\"\n\n");
                     if(getRelationship(subject.number, leader.number) == -4)
@@ -7598,7 +7658,7 @@ public class WorldState
                 }
             } else
             {
-                append(t, (new StringBuilder(String.valueOf(leader.mainName))).append(" grabs ").append(subject.himHer()).append(" by the shoulders and tries to shake ").append(subject.himHer()).append(" awake").toString());
+                append(t, (new StringBuilder("When ")).append(leader.mainName).append(" catches up, ").append(leader.heShe()).append(" grabs ").append(subject.mainName).append(" by the shoulders and tries to shake ").append(subject.himHer()).append(" awake").toString());
                 if(startOne.booleanValue() && leader == c || startTwo.booleanValue() && leader == d)
                 {
                     append(t, (new StringBuilder(".  ")).append(leader.HeShe()).append("'s concerned for ").append(leader.hisHer()).append(" friend, but ").append(leader.hisHer()).append(" frustration and confusion as to what's happened to ").append(subject.himHer()).append(" causes ").append(leader.himHer()).append(" to get rough.\n\n").toString());
@@ -7819,10 +7879,892 @@ public class WorldState
                     {
                         append(t, (new StringBuilder(String.valueOf(subject.mainName))).append(" isn't willing to forgive ").append(leader.mainName).append(" for ").append(leader.hisHer()).append(" lack of sympathy.  And ").toString());
                     }
-                    append(t, " breaking one of the Chosen so thoroughly will make capturing the city much easier for the Demons.");
+                    append(t, "breaking one of the Chosen so thoroughly will make capturing the city much easier for the Demons.");
                     save.saveScene(22, (new StringBuilder(String.valueOf(subject.mainName))).append("/").append(leader.mainName).toString(), (new StringBuilder(String.valueOf(subject.mainName))).append(" violently pushes ").append(leader.mainName).append(" away after developing an aversion to sexual matters.").toString());
                 }
             }
+        } else
+        if(sceneType == 18)
+        {
+            subject.pastNegotiated = Boolean.valueOf(true);
+            Boolean startOne = Boolean.valueOf(false);
+            if(getRelationship(subject.number, c.number) >= 0)
+                startOne = Boolean.valueOf(true);
+            if(subject.dignity > 66 && c.dignity < 34)
+                if(c.negotiations > 0)
+                {
+                    addFriendship(subject.number, c.number, 49);
+                } else
+                {
+                    addFriction(subject.number, c.number, 49);
+                    EEGained += 15;
+                }
+            if(subject.morality > 66 && c.morality < 34)
+                if(c.negotiations > 0)
+                {
+                    addFriendship(subject.number, c.number, 39);
+                } else
+                {
+                    addFriction(subject.number, c.number, 39);
+                    EEGained += 15;
+                }
+            Boolean endOne = Boolean.valueOf(false);
+            if(getRelationship(subject.number, c.number) >= 0)
+                endOne = Boolean.valueOf(true);
+            else
+            if(startOne.booleanValue())
+            {
+                if(subject.morality > 66 && c.morality < 34)
+                    EEGained += 15;
+                if(subject.dignity > 66 && c.dignity < 34)
+                    EEGained += 15;
+            }
+            Boolean startTwo = Boolean.valueOf(false);
+            Boolean endTwo = Boolean.valueOf(false);
+            if(d != null)
+            {
+                if(getRelationship(subject.number, d.number) >= 0)
+                    startTwo = Boolean.valueOf(true);
+                if(subject.dignity > 66 && d.dignity < 34)
+                    if(d.negotiations > 0)
+                    {
+                        addFriendship(subject.number, d.number, 49);
+                    } else
+                    {
+                        addFriction(subject.number, d.number, 49);
+                        EEGained += 15;
+                    }
+                if(subject.morality > 66 && d.morality < 34)
+                    if(d.negotiations > 0)
+                    {
+                        addFriendship(subject.number, d.number, 39);
+                    } else
+                    {
+                        addFriction(subject.number, d.number, 39);
+                        EEGained += 15;
+                    }
+                if(getRelationship(subject.number, d.number) >= 0)
+                    endTwo = Boolean.valueOf(true);
+                else
+                if(startTwo.booleanValue())
+                {
+                    if(subject.morality > 66 && d.morality < 34)
+                        EEGained += 15;
+                    if(subject.dignity > 66 && d.dignity < 34)
+                        EEGained += 15;
+                }
+            }
+            String nameDisplay[] = {
+                subject.mainName, 0, 0, 0, 0
+            };
+            Chosen leader = c;
+            Chosen follower = d;
+            if(d != null)
+            {
+                if(d.confidence > c.confidence)
+                {
+                    leader = d;
+                    follower = c;
+                } else
+                {
+                    follower = d;
+                }
+                nameDisplay[1] = leader.mainName;
+                nameDisplay[2] = follower.mainName;
+            } else
+            {
+                nameDisplay[1] = c.mainName;
+            }
+            if(subject.innocence > 66)
+                append(t, (new StringBuilder("Since ")).append(subject.heShe()).append(" knows that the Demons won't be attacking, ").append(subject.givenName).append(" has decided to spend the day enjoying ").append(subject.himHer()).append("self at an amusement park.  While ").append(subject.heShe()).append("'s riding the Ferris wheel, ").toString());
+            else
+            if(subject.innocence > 33)
+                append(t, (new StringBuilder("In order to reward ")).append(subject.himHer()).append("self for reaching an understanding with the Demon Lord, ").append(subject.givenName).append(" is having a leisurely day shopping for trinkets.  As ").append(subject.heShe()).append(" leaves the shopping mall, ").toString());
+            else
+                append(t, (new StringBuilder("With the threat of the Demons already dealt with for the day, ")).append(subject.givenName).append(" has seen no reason not to stay home for the day.  ").append(subject.HeShe()).append("'s reclining on ").append(subject.hisHer()).append(" balcony when ").toString());
+            if(d != null)
+                append(t, (new StringBuilder(String.valueOf(leader.mainName))).append(" and ").append(follower.mainName).append(" fly by on their patrol.  They recognize ").append(subject.himHer()).append(" and fly down to investigate.\n\n").toString());
+            else
+                append(t, (new StringBuilder(String.valueOf(leader.mainName))).append(" flies by on ").append(leader.hisHer()).append(" patrol.  ").append(leader.HeShe()).append(" recognizes ").append(subject.givenName).append(" and flies down to investigate.\n\n").toString());
+            Boolean sameDay = Boolean.valueOf(false);
+            if(leader.truce.booleanValue() && leader.negotiations == 1 && leader.pastNegotiated.booleanValue())
+                sameDay = Boolean.valueOf(true);
+            leader.say(t, "\"");
+            if(startOne.booleanValue())
+            {
+                if(sameDay.booleanValue())
+                {
+                    leader.say(t, "\"There, now they've seen me a little, too.  But now I'm done for the day.  Let's hang out.\"\n\n");
+                    subject.say(t, "\"That's fine by me!\"\n\n");
+                } else
+                {
+                    if(leader.innocence > 66)
+                        leader.say(t, (new StringBuilder("Oh!  ")).append(leader.givenName).append("!  It's patrol time!  Don't worry, sometimes I forget too.").toString());
+                    else
+                    if(leader.innocence > 33)
+                        leader.say(t, (new StringBuilder("What are you doing here, ")).append(leader.givenName).append("?  Why aren't you on patrol?").toString());
+                    else
+                        leader.say(t, (new StringBuilder("I do not mind taking over your patrol for you, ")).append(leader.givenName).append(", if it becomes too stressful and you need a break.  But I expect you to warn me first.").toString());
+                    leader.say(t, "\"\n\n");
+                    append(t, (new StringBuilder(String.valueOf(subject.givenName))).append(" smiles at ").append(leader.givenName).append(", eager to share the good news.\n\n").toString());
+                    subject.say(t, "\"");
+                    if(subject.confidence > 66)
+                        subject.say(t, (new StringBuilder("Don't worry, ")).append(leader.mainName).append(".  I just got done wrapping the Demon Lord around my finger.  It turns out that ").append(subject.rememberedBodies[0].heShe()).append("'s willing to hold off on attacking as long as I spend a few minutes with ").append(subject.rememberedBodies[0].himHer()).append(".").toString());
+                    else
+                    if(subject.confidence > 33)
+                        subject.say(t, (new StringBuilder("It's alright for you to take a break too, ")).append(leader.mainName).append(".  The Demon Lord decided not to attack today, in exchange for me doing ").append(subject.rememberedBodies[0].himHer()).append(" some... favors.").toString());
+                    else
+                        subject.say(t, (new StringBuilder("The Demons won't be attacking today, ")).append(leader.mainName).append(".  The Demon Lord said as much after I, um... s-slept with ").append(subject.rememberedBodies[0].himHer()).append("...").toString());
+                }
+            } else
+            {
+                if(leader.innocence > 66)
+                    leader.say(t, (new StringBuilder(String.valueOf(subject.givenName))).append(", you dummy!  We're supposed to be patrolling right now!").toString());
+                else
+                if(leader.innocence > 33)
+                    leader.say(t, (new StringBuilder("What are you thinking, ")).append(subject.givenName).append("!?  You can't just slack off and leave all the work to us!").toString());
+                else
+                    leader.say(t, (new StringBuilder(String.valueOf(subject.givenName))).append(", you imbecile!  Have you forgotten that it's time for our patrol!?").toString());
+                leader.say(t, "\"\n\n");
+                append(t, (new StringBuilder(String.valueOf(subject.givenName))).append(" barely acknowledges ").append(leader.mainName).append(", glancing in ").append(leader.hisHer()).append(" direction before giving an offhand reply.\n\n").toString());
+                subject.say(t, "\"");
+                if(subject.morality > 66)
+                    subject.say(t, "The Demons won't be attacking today.  I made sure of that.  It just took being willing to sacrifice my body to the Demons... in a more direct way.");
+                else
+                if(subject.morality > 33)
+                {
+                    subject.say(t, "Don't underestimate a world-class Chosen.  ");
+                    if(subject.gender.equals("male"))
+                    {
+                        if(subject.rememberedBodies[0].ownAppearanceGender() == Forsaken.Gender.MALE)
+                            subject.say(t, "This Demon Lord is interested in other guys.  I... took advantage of that.");
+                        else
+                            subject.say(t, "This Demon Lord is a woman, and I think she's fallen for me.");
+                    } else
+                    if(subject.rememberedBodies[0].parts[Body.PENIS] > 0)
+                        subject.say(t, (new StringBuilder("The Demon Lord thinks with ")).append(subject.rememberedBodies[0].hisHer()).append(" cock.").toString());
+                    else
+                        subject.say(t, "This Demon Lord...  She's interested in other girls.  I took advantage of that.");
+                    append(t, "  There won't be an attack today.");
+                } else
+                {
+                    subject.say(t, (new StringBuilder("I've already taken care of the Demon Lord.  ")).append(subject.rememberedBodies[0].HeShe()).append("'s just as excited to get ").append(subject.rememberedBodies[0].hisHer()).append(" hands on a celebrity's body as anyone else.").toString());
+                }
+            }
+            subject.say(t, "\"\n\n");
+            Project.clearPortraits();
+            Project.changePortrait(subject.convertGender(), subject.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 0, Project.Emotion.ANGER, Project.Emotion.ANGER);
+            Project.changePortrait(leader.convertGender(), leader.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 1, Project.Emotion.ANGER, Project.Emotion.ANGER);
+            if(follower != null)
+                Project.changePortrait(follower.convertGender(), follower.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 2, Project.Emotion.ANGER, Project.Emotion.ANGER);
+            if(leader.negotiations > 0)
+            {
+                if(sameDay.booleanValue())
+                    append(t, (new StringBuilder(String.valueOf(leader.mainName))).append(" sits down near ").append(subject.givenName).append(".\n\n").toString());
+                else
+                    append(t, (new StringBuilder(String.valueOf(leader.mainName))).append(" pauses for a moment, tilting ").append(leader.hisHer()).append(" head to the side.\n\n").toString());
+                leader.say(t, "\"");
+                if(sameDay.booleanValue())
+                    leader.say(t, "You were right, it can be even more fun to have everyone cheer for you, when you know that you won't actually have to fight.");
+                else
+                if(leader.dignity > 66)
+                    leader.say(t, (new StringBuilder("But if we aren't seen flying around on patrol, how will we claim credit for protecting the city?  That's my only reason for letting the Demon Lord have ")).append(leader.rememberedDemonLordBody.hisHer()).append(" way with me, at least.").toString());
+                else
+                if(leader.dignity > 33)
+                    leader.say(t, "Don't you enjoy flying around and having people cheer for you?  That's why I've still been patrolling.");
+                else
+                    leader.say(t, "Oh...  I was so used to my daily patrols that I haven't even been thinking about it that way.  I suppose I might as well join you.");
+                leader.say(t, "\"\n\n");
+                if(follower == null)
+                {
+                    if(endOne.booleanValue())
+                    {
+                        Project.changePortrait(subject.convertGender(), subject.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 0, Project.Emotion.JOY, Project.Emotion.JOY);
+                        Project.changePortrait(leader.convertGender(), leader.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 1, Project.Emotion.JOY, Project.Emotion.JOY);
+                        if(sameDay.booleanValue())
+                            append(t, (new StringBuilder(String.valueOf(subject.givenName))).append(" nods in agreement.\n\n").toString());
+                        else
+                            append(t, (new StringBuilder(String.valueOf(subject.givenName))).append(" lets out a carefree laugh.\n\n").toString());
+                        subject.say(t, "\"");
+                        if(subject.dignity > 66)
+                            subject.say(t, "Well, I have to admit that being praised as the public's saviors is nice.  It's even true, though not in the way they think it is.  We're saving them together.");
+                        else
+                        if(subject.dignity > 33)
+                            subject.say(t, "If you don't tell the public how we're saving them from the Demons, I won't either, and we can enjoy them cheering for us together.  We can work together on this, right?");
+                        else
+                            subject.say(t, "You can take all the credit.  Me, I'm just happy to be able to stop the attack before it even starts.");
+                        subject.say(t, "\"\n\n");
+                        if(startOne.booleanValue())
+                        {
+                            if(sameDay.booleanValue())
+                                append(t, (new StringBuilder(String.valueOf(leader.mainName))).append(" smiles broadly at ").append(subject.givenName).append(".\n\n").toString());
+                            else
+                                append(t, (new StringBuilder(String.valueOf(leader.mainName))).append(" gets caught up in the good mood, giving ").append(subject.givenName).append(" a one-armed hug.\n\n").toString());
+                            if(leader.morality > 66)
+                                leader.say(t, (new StringBuilder("The public might not understand, ")).append(subject.givenName).append(".  But I know that we're doing the right thing... and that you're a good person, too.").toString());
+                            else
+                            if(leader.morality > 33)
+                                leader.say(t, "You can take all the credit.  They're happy and we're happy.  That's all that matters.");
+                            else
+                                leader.say(t, "Who cares about any of that?  As long as we're having fun, that's all that matters.");
+                        } else
+                        {
+                            append(t, (new StringBuilder(String.valueOf(leader.mainName))).append(" nods with satisfaction, accepting ").append(subject.givenName).append("'s words as a peace offering.\n\n").toString());
+                            leader.say(t, "\"");
+                            if(leader.confidence > 66)
+                                leader.say(t, "I suppose you can cover for me on days when I don't feel like dealing with the Demon Lord.  Just don't mess this up for us.");
+                            else
+                            if(leader.confidence > 33)
+                                leader.say(t, (new StringBuilder("I like the sound of that, ")).append(subject.givenName).append(".  Maybe we can get along after all.").toString());
+                            else
+                                leader.say(t, "We can work... together.  As equals, from now on.  Yes, I'd like that...");
+                        }
+                        leader.say(t, "\"\n\n");
+                        if(!sameDay.booleanValue())
+                            if(getRelationship(subject.number, leader.number) == 4)
+                            {
+                                append(t, (new StringBuilder(String.valueOf(subject.mainName))).append(" and ").append(leader.mainName).append(" both feel good about how they're protecting the city, and their work together is causing them to build an ").toString());
+                                underlineAppend(t, "unbreakable bond");
+                                append(t, ".  However, ");
+                            } else
+                            {
+                                append(t, (new StringBuilder(String.valueOf(subject.mainName))).append(" and ").append(leader.mainName).append(" both feel good about how they're protecting the city, and their work together has become a solid foundation for friendship.  However, ").toString());
+                            }
+                    } else
+                    {
+                        append(t, (new StringBuilder(String.valueOf(subject.givenName))).append(" shakes ").append(subject.hisHer()).append(" head in annoyance.\n\n").toString());
+                        subject.say(t, "\"");
+                        if(subject.innocence > 66)
+                            subject.say(t, (new StringBuilder("Don't think that this makes us friends, ")).append(leader.mainName).append(".  I'm still really mad at you!").toString());
+                        else
+                        if(subject.innocence > 33)
+                            subject.say(t, (new StringBuilder("Just keep flying, ")).append(leader.mainName).append(".  I'm trying to enjoy my day off, and you aren't helping.").toString());
+                        else
+                            subject.say(t, (new StringBuilder("I recommend that you stop seeing the Demon Lord.  Knowing you, it's only a matter of time until you offend ")).append(subject.rememberedDemonLordBody.himHer()).append(" somehow, and then we'd be back where we started.  Just leave this to me.").toString());
+                        subject.say(t, "\"\n\n");
+                        append(t, (new StringBuilder(String.valueOf(leader.mainName))).append("'s good mood evaporates instantly in the heat of ").append(subject.givenName).append("'s hostility.\n\n").toString());
+                        leader.say(t, "\"");
+                        if(leader.morality > 66)
+                            leader.say(t, (new StringBuilder("Relax all you like, ")).append(subject.givenName).append(".  I'm going to keep helping people however I can.  Even if the Demons aren't attacking today, there are still people in danger I can save.  And the next time the Demon Lord wants me... I'll be ready.").toString());
+                        else
+                        if(leader.morality > 33)
+                            leader.say(t, (new StringBuilder("I don't know what the Demon Lord sees in you, ")).append(subject.givenName).append(".  I'm leaving.  I have better things to do than listen to you.").toString());
+                        else
+                            leader.say(t, (new StringBuilder("You're trying to steal the Demon Lord from me, aren't you!?  I won't let you!  I'll make sure I stay ")).append(leader.rememberedDemonLordBody.hisHer()).append(" favorite, and ").append(leader.rememberedDemonLordBody.heShe()).append("'ll forget all about you!").toString());
+                        leader.say(t, "\"\n\n");
+                        if(getRelationship(subject.number, leader.number) == -4)
+                        {
+                            append(t, "Even though they no longer disagree as much about how they should deal with the Demons, there's still an ");
+                            underlineAppend(t, "irreparable rift");
+                            append(t, (new StringBuilder(" between ")).append(subject.mainName).append(" and ").append(leader.mainName).append(".  And ").toString());
+                        } else
+                        {
+                            append(t, (new StringBuilder("Even though they no longer disagree as much about how they should deal with the Demons, ")).append(subject.mainName).append(" and ").append(leader.mainName).append(" still can't forgive each other for their arguments in the past.  And ").toString());
+                        }
+                    }
+                    append(t, "the trust they're both building with the Demon Lord will only make it harder to carry out their mission in the end.");
+                } else
+                {
+                    Project.changePortrait(leader.convertGender(), leader.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 1, Project.Emotion.FOCUS, Project.Emotion.FOCUS);
+                    if(follower.negotiations > 0)
+                    {
+                        Project.clearPortraits();
+                        Project.changePortrait(subject.convertGender(), subject.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 0, Project.Emotion.JOY, Project.Emotion.JOY);
+                        Project.changePortrait(leader.convertGender(), leader.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 1, Project.Emotion.JOY, Project.Emotion.JOY);
+                        Project.changePortrait(follower.convertGender(), follower.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 2, Project.Emotion.JOY, Project.Emotion.JOY);
+                        append(t, (new StringBuilder(String.valueOf(follower.mainName))).append(" steps forward alongside ").append(leader.mainName).append(", beaming at ").append(subject.mainName).append(".\n\n").toString());
+                        follower.say(t, "\"");
+                        if(follower.innocence > 66)
+                            follower.say(t, "Wow!  I didn't know that you were doing it with the Demon Lord too!");
+                        else
+                        if(follower.innocence > 33)
+                            follower.say(t, "That's great!  With all three of us working on the Demon Lord together, we might not have to fight anymore at all.");
+                        else
+                            follower.say(t, "Excellent.  I'm quite pleased that you're helping to pacify the Demon Lord as well.");
+                        follower.say(t, "\"\n\n");
+                        if(getRelationship(subject.number, leader.number) >= 0)
+                        {
+                            if(getRelationship(subject.number, follower.number) >= 0)
+                            {
+                                append(t, (new StringBuilder(String.valueOf(subject.givenName))).append(" gestures for the other two Chosen to join ").append(subject.himHer()).append(".\n\n").toString());
+                                subject.say(t, "\"");
+                                if(subject.innocence > 66)
+                                    subject.say(t, "Why don't we go on the rides together?  We've basically already won, so it's time to celebrate!");
+                                else
+                                if(subject.innocence > 33)
+                                    subject.say(t, "Let me bring these bags home, and then I'll join you.  Flying around together without having to worry about Demons showing up... sounds really nice.");
+                                else
+                                    subject.say(t, "Come inside, let me off you some hospitality.  Some relaxation would do us all good.");
+                                subject.say(t, "\"\n\n");
+                                if(getRelationship(subject.number, leader.number) == 4)
+                                {
+                                    if(getRelationship(subject.number, follower.number) == 4)
+                                    {
+                                        append(t, (new StringBuilder("As they all work together toward the same purpose, ")).append(subject.mainName).append(" develops an ").toString());
+                                        underlineAppend(t, "unbreakable bond");
+                                        append(t, (new StringBuilder(" with ")).append(subject.hisHer()).append(" partners.  But ").toString());
+                                    } else
+                                    {
+                                        append(t, (new StringBuilder("As they all work together toward the same purpose, ")).append(subject.mainName).append(" develops a deep friendship with ").append(follower.mainName).append(" and an ").toString());
+                                        underlineAppend(t, "unbreakable bond");
+                                        append(t, (new StringBuilder(" with ")).append(leader.mainName).append(".  But ").toString());
+                                    }
+                                } else
+                                if(getRelationship(subject.number, follower.number) == 4)
+                                {
+                                    append(t, (new StringBuilder("As they all work together toward the same purpose, ")).append(subject.mainName).append(" develops a deep friendship with ").append(leader.mainName).append(" and an ").toString());
+                                    underlineAppend(t, "unbreakable bond");
+                                    append(t, (new StringBuilder(" with ")).append(follower.mainName).append(".  But ").toString());
+                                } else
+                                {
+                                    append(t, (new StringBuilder("As they all work together toward the same purpose, ")).append(subject.mainName).append(" develops a deep friendship with ").append(subject.hisHer()).append(" partners.  But ").toString());
+                                }
+                            } else
+                            {
+                                append(t, (new StringBuilder(String.valueOf(subject.givenName))).append(" pointedly ignores ").append(follower.mainName).append(", responding only to ").append(leader.mainName).append(".\n\n").toString());
+                                subject.say(t, "\"");
+                                if(subject.innocence > 66)
+                                    subject.say(t, (new StringBuilder("Why don't we go on the rides together, ")).append(leader.mainName).append(".  Just the two of us having lots of fun!  Doesn't it sound great?").toString());
+                                else
+                                if(subject.innocence > 33)
+                                    subject.say(t, (new StringBuilder("You've done some patrolling with ")).append(follower.mainName).append(", so why not do some with me next, ").append(leader.mainName).append("?  Just the two of us.").toString());
+                                else
+                                    subject.say(t, (new StringBuilder("Come inside, ")).append(leader.mainName).append(", let me offer you some hospitality.  ").append(follower.mainName).append(" can finish ").append(follower.hisHer()).append(" patrol by ").append(follower.himHer()).append("self.").toString());
+                                subject.say(t, "\"\n\n");
+                                if(getRelationship(subject.number, leader.number) == 4)
+                                {
+                                    if(getRelationship(subject.number, follower.number) == -4)
+                                    {
+                                        append(t, (new StringBuilder("Working together toward the same purpose develops ")).append(subject.mainName).append("'s friendship with ").append(leader.mainName).append(" into an ").toString());
+                                        underlineAppend(t, "unbreakable bond");
+                                        append(t, ", but there's still an ");
+                                        underlineAppend(t, "irreparable rift");
+                                        append(t, (new StringBuilder(" between ")).append(subject.himHer()).append(" and ").append(follower.mainName).append(".  And ").toString());
+                                    } else
+                                    {
+                                        append(t, (new StringBuilder("Working together toward the same purpose develops ")).append(subject.mainName).append("'s friendship with ").append(leader.mainName).append(" into an ").toString());
+                                        underlineAppend(t, "unbreakable bond");
+                                        append(t, (new StringBuilder(", but ")).append(subject.heShe()).append(" still doesn't get along with ").append(follower.mainName).append(".  And ").toString());
+                                    }
+                                } else
+                                if(getRelationship(subject.number, follower.number) == -4)
+                                {
+                                    append(t, (new StringBuilder("Working together toward the same purpose deepens ")).append(subject.mainName).append("'s friendship with ").append(leader.mainName).append(", but there's still an ").toString());
+                                    underlineAppend(t, "irreparable rift");
+                                    append(t, (new StringBuilder(" between ")).append(subject.himHer()).append(" and ").append(follower.mainName).append(".  And ").toString());
+                                } else
+                                {
+                                    append(t, (new StringBuilder("Working together toward the same purpose deepens ")).append(subject.mainName).append("'s friendship with ").append(leader.mainName).append(", but ").append(subject.heShe()).append(" still doesn't get along with ").append(follower.mainName).append(".  And ").toString());
+                                }
+                            }
+                        } else
+                        if(getRelationship(subject.number, follower.number) >= 0)
+                        {
+                            append(t, (new StringBuilder(String.valueOf(subject.givenName))).append(" responds to ").append(follower.mainName).append(", pointedly ignoring ").append(leader.mainName).append(".\n\n").toString());
+                            subject.say(t, "\"");
+                            if(subject.innocence > 66)
+                                subject.say(t, (new StringBuilder("Why don't we go on the rides together, ")).append(follower.mainName).append(".  Just the two of us having lots of fun!  Doesn't it sound great?").toString());
+                            else
+                            if(subject.innocence > 33)
+                                subject.say(t, (new StringBuilder("You've done some patrolling with ")).append(leader.mainName).append(", so why not do some with me next, ").append(follower.mainName).append("?  Just the two of us.").toString());
+                            else
+                                subject.say(t, (new StringBuilder("Come inside, ")).append(follower.mainName).append(", let me offer you some hospitality.  ").append(leader.mainName).append(" can finish ").append(leader.hisHer()).append(" patrol by ").append(leader.himHer()).append("self.").toString());
+                            subject.say(t, "\"\n\n");
+                            if(getRelationship(subject.number, follower.number) == 4)
+                            {
+                                if(getRelationship(subject.number, leader.number) == -4)
+                                {
+                                    append(t, (new StringBuilder("Working together toward the same purpose develops ")).append(subject.mainName).append("'s friendship with ").append(follower.mainName).append(" into an ").toString());
+                                    underlineAppend(t, "unbreakable bond");
+                                    append(t, ", but there's still an ");
+                                    underlineAppend(t, "irreparable rift");
+                                    append(t, (new StringBuilder(" between ")).append(subject.himHer()).append(" and ").append(leader.mainName).append(".  And ").toString());
+                                } else
+                                {
+                                    append(t, (new StringBuilder("Working together toward the same purpose develops ")).append(subject.mainName).append("'s friendship with ").append(follower.mainName).append(" into an ").toString());
+                                    underlineAppend(t, "unbreakable bond");
+                                    append(t, (new StringBuilder(", but ")).append(subject.heShe()).append(" still doesn't get along with ").append(leader.mainName).append(".  And ").toString());
+                                }
+                            } else
+                            if(getRelationship(subject.number, leader.number) == -4)
+                            {
+                                append(t, (new StringBuilder("Working together toward the same purpose deepens ")).append(subject.mainName).append("'s friendship with ").append(follower.mainName).append(", but there's still an ").toString());
+                                underlineAppend(t, "irreparable rift");
+                                append(t, (new StringBuilder(" between ")).append(subject.himHer()).append(" and ").append(leader.mainName).append(".  And ").toString());
+                            } else
+                            {
+                                append(t, (new StringBuilder("Working together toward the same purpose deepens ")).append(subject.mainName).append("'s friendship with ").append(follower.mainName).append(", but ").append(subject.heShe()).append(" still doesn't get along with ").append(leader.mainName).append(".  And ").toString());
+                            }
+                        } else
+                        {
+                            append(t, (new StringBuilder(String.valueOf(subject.givenName))).append(" shakes ").append(subject.hisHer()).append(" head in annoyance.\n\n").toString());
+                            subject.say(t, "\"");
+                            if(subject.innocence > 66)
+                                subject.say(t, "Don't think that this makes us friends.  I'm still really mad at both of you!");
+                            else
+                            if(subject.innocence > 33)
+                                subject.say(t, "Just keep flying, you two.  I'm trying to enjoy my day off, and you aren't helping.");
+                            else
+                                subject.say(t, (new StringBuilder("I recommend that you both stop seeing the Demon Lord.  Knowing you, it's only a matter of time until you offend ")).append(subject.rememberedDemonLordBody.himHer()).append(" somehow, and then we'd be back where we started.  Just leave this to me.").toString());
+                            subject.say(t, "\"\n\n");
+                            if(getRelationship(subject.number, leader.number) == -4)
+                            {
+                                if(getRelationship(subject.number, follower.number) == -4)
+                                {
+                                    append(t, "Their shared experiences aren't enough to bridge the ");
+                                    underlineAppend(t, "irreparable rift");
+                                    append(t, (new StringBuilder(" between ")).append(subject.mainName).append(" and ").append(subject.hisHer()).append(" partners.  And ").toString());
+                                } else
+                                {
+                                    append(t, (new StringBuilder(String.valueOf(subject.mainName))).append("'s shared experiences with ").append(leader.mainName).append(" aren't enough to bridge the ").toString());
+                                    underlineAppend(t, "irreparable rift");
+                                    append(t, (new StringBuilder(" between them, and ")).append(subject.heShe()).append(" still doesn't like ").append(follower.mainName).append(" either.  Furthermore, ").toString());
+                                }
+                            } else
+                            if(getRelationship(subject.number, follower.number) == -4)
+                            {
+                                append(t, (new StringBuilder(String.valueOf(subject.mainName))).append("'s shared experiences with ").append(follower.mainName).append(" aren't enough to bridge the ").toString());
+                                underlineAppend(t, "irreparable rift");
+                                append(t, (new StringBuilder(" between them, and ")).append(subject.heShe()).append(" still doesn't like ").append(leader.mainName).append(" either.  Furthermore, ").toString());
+                            } else
+                            {
+                                append(t, (new StringBuilder("Their shared experiences aren't enough to outweigh the animosity built up between ")).append(subject.mainName).append(" and ").append(subject.hisHer()).append(" partners.  And ").toString());
+                            }
+                        }
+                        append(t, "the trust they're all building with the Demon Lord will only make it harder to carry out their mission in the end.");
+                    } else
+                    {
+                        append(t, (new StringBuilder(String.valueOf(follower.mainName))).append("'s eyes narrow in confusion, then widen in horror as ").append(follower.heShe()).append(" looks between ").append(follower.hisHer()).append(" two partners.\n\n").toString());
+                        follower.say(t, "\"");
+                        if(follower.innocence > 66)
+                            follower.say(t, "Wait...  You're... you're both doing naughty stuff with the Demon Lord?  But... But the Demon Lord's our enemy!  This doesn't make any sense at all!");
+                        else
+                        if(follower.innocence > 33)
+                            follower.say(t, "Tell me if I'm wrong, but... are you saying that you're both... what, giving the Demon Lord blowjobs or something?  What's wrong with you!?");
+                        else
+                            follower.say(t, "Have you both gone completely insane?  Willingly engaging in sexual relations with the Demon Lord?  For nothing more than a temporary promise?  An unenforceable one at that!");
+                        follower.say(t, "\"\n\n");
+                        if(getRelationship(subject.number, follower.number) >= 0)
+                        {
+                            Project.changePortrait(subject.convertGender(), subject.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 0, Project.Emotion.SHAME, Project.Emotion.SHAME);
+                            append(t, (new StringBuilder(String.valueOf(subject.givenName))).append(" winces, not expecting such a violent reaction from ").append(subject.hisHer()).append(" friend.\n\n").toString());
+                            subject.say(t, "\"");
+                            if(subject.confidence > 33)
+                                subject.say(t, (new StringBuilder("Just... Just pretend you didn't hear any of this, alright, ")).append(follower.mainName).append("?  I want to protect you, that's all...").toString());
+                            else
+                                subject.say(t, (new StringBuilder("I... I was doing it for your sake, too, ")).append(follower.mainName).append("...  A-And I'm not going to stop.").toString());
+                            subject.say(t, "\"\n\n");
+                            if(getRelationship(subject.number, follower.number) == 4)
+                            {
+                                if(getRelationship(subject.number, leader.number) == 4)
+                                {
+                                    append(t, "The revelation isn't enough to endanger the ");
+                                    underlineAppend(t, "unbreakable bond");
+                                    append(t, (new StringBuilder(String.valueOf(subject.mainName))).append(" shares with ").append(subject.hisHer()).append(" teammates.  But ").toString());
+                                } else
+                                if(getRelationship(subject.number, leader.number) >= 0)
+                                {
+                                    append(t, "The revelation isn't enough to endanger the ");
+                                    underlineAppend(t, "unbreakable bond");
+                                    append(t, (new StringBuilder(String.valueOf(subject.mainName))).append(" shares with ").append(follower.mainName).append(", and ").append(subject.heShe()).append(" becomes closer with ").append(leader.mainName).append(" than ever.  But ").toString());
+                                } else
+                                if(getRelationship(subject.number, leader.number) > -4)
+                                {
+                                    append(t, (new StringBuilder("Even after the revelation, ")).append(subject.mainName).append(" continues to share an ").toString());
+                                    underlineAppend(t, "unbreakable bond");
+                                    append(t, (new StringBuilder(" with ")).append(follower.mainName).append(", and ").append(subject.heShe()).append(" still doesn't get along with ").append(leader.mainName).append(".  But ").toString());
+                                } else
+                                {
+                                    append(t, (new StringBuilder("Even after the revelation, ")).append(subject.mainName).append(" continues to share an ").toString());
+                                    underlineAppend(t, "unbreakable bond");
+                                    append(t, (new StringBuilder(" with ")).append(follower.mainName).append(", and the ").toString());
+                                    underlineAppend(t, "irreparable rift");
+                                    append(t, (new StringBuilder(" separating ")).append(subject.himHer()).append(" from ").append(leader.mainName).append(" isn't changed by their shared tactics either.  But ").toString());
+                                }
+                            } else
+                            if(getRelationship(subject.number, leader.number) == 4)
+                            {
+                                append(t, (new StringBuilder("The revelation isn't quite enough to break ")).append(subject.mainName).append("'s friendship with ").append(follower.mainName).append(", and it outright helps build an ").toString());
+                                underlineAppend(t, "unbreakable bond");
+                                append(t, (new StringBuilder(" with ")).append(leader.mainName).append(".  But ").toString());
+                            } else
+                            if(getRelationship(subject.number, leader.number) >= 0)
+                                append(t, (new StringBuilder("The revelation isn't enough to endanger the friendship ")).append(subject.mainName).append(" shares with ").append(follower.mainName).append(", and ").append(subject.heShe()).append(" becomes closer with ").append(leader.mainName).append(" than ever.  But ").toString());
+                            else
+                            if(getRelationship(subject.number, leader.number) > -4)
+                            {
+                                append(t, (new StringBuilder("Even after the revelation, ")).append(subject.mainName).append(" continues to be friends with with ").append(follower.mainName).append(", and ").append(subject.heShe()).append(" still doesn't get along with ").append(leader.mainName).append(".  But ").toString());
+                            } else
+                            {
+                                append(t, (new StringBuilder("Even after the revelation, ")).append(subject.mainName).append(" continues to be friends with ").append(follower.mainName).append(", and the ").toString());
+                                underlineAppend(t, "irreparable rift");
+                                append(t, (new StringBuilder(" separating ")).append(subject.himHer()).append(" from ").append(leader.mainName).append(" isn't changed by their shared tactics either.  But ").toString());
+                            }
+                        } else
+                        {
+                            append(t, (new StringBuilder(String.valueOf(subject.mainName))).append(" is angered by how little ").append(follower.mainName).append(" appreciates ").append(subject.hisHer()).append(" sacrifice.\n\n").toString());
+                            subject.say(t, "\"");
+                            if(subject.getConfidence() > 33)
+                                subject.say(t, "How ungrateful!  Fortunately for you, I plan on continuing to pacify the Demon Lord using my own methods, for the sake of the civilians.  You're no longer needed.");
+                            else
+                                subject.say(t, "I-I'm... I'm doing this the only way I can!  Someone strong like you would never understand...  Just go away...");
+                            subject.say(t, "\"\n\n");
+                            if(getRelationship(subject.number, follower.number) == -4)
+                            {
+                                if(getRelationship(subject.number, leader.number) == 4)
+                                {
+                                    append(t, "In the coming days, their shared work will lead to an ");
+                                    underlineAppend(t, "unbreakable bond");
+                                    append(t, (new StringBuilder(" between ")).append(subject.mainName).append(" and ").append(leader.mainName).append(", even as it creates an ").toString());
+                                    underlineAppend(t, "irreparable rift");
+                                    append(t, (new StringBuilder(" between ")).append(subject.mainName).append(" and ").append(follower.mainName).append(".  Furthermore, ").toString());
+                                } else
+                                if(getRelationship(subject.number, leader.number) >= 0)
+                                {
+                                    append(t, (new StringBuilder("In the coming days, their shared work will lead to a deepening of the friendship between ")).append(subject.mainName).append(" and ").append(leader.mainName).append(", even as it creates an ").toString());
+                                    underlineAppend(t, "irreparable rift");
+                                    append(t, (new StringBuilder(" between ")).append(subject.mainName).append(" and ").append(follower.mainName).append(".  Furthermore, ").toString());
+                                } else
+                                if(getRelationship(subject.number, leader.number) > -4)
+                                {
+                                    append(t, (new StringBuilder(String.valueOf(follower.mainName))).append("'s disapproval of ").append(subject.mainName).append("'s tactics creates an ").toString());
+                                    underlineAppend(t, "irreparable rift");
+                                    append(t, (new StringBuilder(" between them, while ")).append(subject.mainName).append(" and ").append(leader.mainName).append(" dislike each other too much to truly bond over their shared work.  Furthermore, ").toString());
+                                } else
+                                {
+                                    append(t, (new StringBuilder("With ")).append(follower.mainName).append("'s disapproval of ").append(subject.hisHer()).append(" tactics, an ").toString());
+                                    underlineAppend(t, "irreparable rift");
+                                    append(t, (new StringBuilder(" now separates ")).append(subject.mainName).append(" from both ").append(subject.hisHer()).append(" teammates.  And ").toString());
+                                }
+                            } else
+                            if(getRelationship(subject.number, leader.number) == 4)
+                            {
+                                append(t, "In the coming days, their shared work will lead to an ");
+                                underlineAppend(t, "unbreakable bond");
+                                append(t, (new StringBuilder(" between ")).append(subject.mainName).append(" and ").append(leader.mainName).append(", even as it creates enmity between ").append(subject.mainName).append(" and ").append(follower.mainName).append(".  Furthermore, ").toString());
+                            } else
+                            if(getRelationship(subject.number, leader.number) >= 0)
+                                append(t, (new StringBuilder("In the coming days, their shared work will lead to a deepening of the friendship between ")).append(subject.mainName).append(" and ").append(leader.mainName).append(", even as it creates enmity between ").append(subject.mainName).append(" and ").append(follower.mainName).append(".  Furthermore, ").toString());
+                            else
+                            if(getRelationship(subject.number, leader.number) > -4)
+                            {
+                                append(t, (new StringBuilder(String.valueOf(follower.mainName))).append("'s disapproval of ").append(subject.mainName).append("'s tactics fosters an intense rivalry between them, while ").append(subject.mainName).append(" and ").append(leader.mainName).append(" dislike each other too much to truly bond over their shared work.  Furthermore, ").toString());
+                            } else
+                            {
+                                append(t, (new StringBuilder(String.valueOf(subject.mainName))).append(" and ").append(follower.mainName).append(" are driven apart by the revelation of ").append(subject.mainName).append("'s new tactics, and there's still an ").toString());
+                                underlineAppend(t, "irreparable rift");
+                                append(t, (new StringBuilder(" between ")).append(subject.himHer()).append(" and ").append(leader.mainName).append(".  Furthermore, ").toString());
+                            }
+                        }
+                        append(t, (new StringBuilder("with ")).append(follower.mainName).append(" now the only member of the team who remains hostile to the Demon Lord, the city's fate looks more dire than ever.").toString());
+                    }
+                }
+            } else
+            {
+                append(t, (new StringBuilder(String.valueOf(leader.mainName))).append(" stares blankly for a moment, uncomprehending.  But once ").append(leader.heShe()).append(" realizes what ").append(subject.givenName).append(" is saying, ").append(subject.heShe()).append(" gasps.\n\n").toString());
+                if(follower == null)
+                {
+                    leader.say(t, "\"");
+                    if(leader.innocence > 66)
+                        leader.say(t, "You're doing naughty stuff with the Demon Lord!  Willingly, I mean!  But... But the Demon Lord is a bad guy!  The baddest guy of all!");
+                    else
+                    if(leader.innocence > 33)
+                        leader.say(t, "How could you give in to the Demon Lord?  Giving the Demon Lord exactly what he wants...!");
+                    else
+                        leader.say(t, "I don't want to believe it.  You're betraying us.  How could you be so gullible as to accept promises from the Demon Lord!?");
+                    leader.say(t, "\"\n\n");
+                    if(startOne.booleanValue())
+                    {
+                        append(t, (new StringBuilder(String.valueOf(subject.givenName))).append(" looks hurt by ").append(leader.mainName).append("'s lack of gratitude.\n\n").toString());
+                        subject.say(t, "\"");
+                        if(subject.dignity > 66)
+                            subject.say(t, "You can't be a world-famous hero without making some sacrifices!  Can't you just say 'thank you'?");
+                        else
+                        if(subject.dignity > 33)
+                            subject.say(t, (new StringBuilder("I was doing this for your sake, too, ")).append(leader.mainName).append(".  I know that you've been having a hard time lately, and-").toString());
+                        else
+                            subject.say(t, "It's fine if you hate me for it.  But... I can't stop.  This is the only way I can protect the city.");
+                    } else
+                    {
+                        append(t, (new StringBuilder(String.valueOf(subject.mainName))).append(" is clearly unbothered by ").append(leader.mainName).append("'s disapproval.\n\n").toString());
+                        subject.say(t, "\"");
+                        if(subject.dignity > 66)
+                            subject.say(t, "I didn't expect you to understand.  But I don't really care.  Go on, keep patrolling if you want to, it doesn't make any difference to me.");
+                        else
+                        if(subject.dignity > 33)
+                            subject.say(t, (new StringBuilder("Heroes have to make sacrifices, ")).append(leader.mainName).append(".  But I suppose you wouldn't know anything about that.").toString());
+                        else
+                            subject.say(t, "Why are you complaining?  Go tell everyone that you're the reason the Demons aren't attacking.  Just lie to them, you're good at that.");
+                    }
+                    subject.say(t, "\"\n\n");
+                    if(endOne.booleanValue())
+                    {
+                        append(t, (new StringBuilder(String.valueOf(leader.mainName))).append("'s expression softens at seeing ").append(subject.givenName).append("'s pain, but the disapproval remains.\n\n").toString());
+                        leader.say(t, "\"");
+                        if(leader.confidence > 66)
+                            leader.say(t, (new StringBuilder("I'll give you some time to think about it, ")).append(subject.givenName).append(".  But I won't let you keep doing this forever.").toString());
+                        else
+                        if(leader.confidence > 33)
+                            leader.say(t, "I know that you're doing what you think is right.  We can talk about this later.");
+                        else
+                            leader.say(t, (new StringBuilder("I-If you think it's best, I'll... I'll try to deal with it.  But I still think you should stop, ")).append(subject.givenName).append("...").toString());
+                        leader.say(t, "\"\n\n");
+                        if(getRelationship(subject.number, leader.number) == 4)
+                        {
+                            append(t, "The ");
+                            underlineAppend(t, "unbreakable bond");
+                            append(t, (new StringBuilder(" between ")).append(subject.mainName).append(" and ").append(leader.mainName).append(" is too strong to be threatened by any disagreement.  But ").toString());
+                        } else
+                        {
+                            append(t, (new StringBuilder("The friendship between ")).append(subject.mainName).append(" and ").append(leader.mainName).append(" is too strong to be broken by this disagreement.  But ").toString());
+                        }
+                    } else
+                    {
+                        append(t, (new StringBuilder(String.valueOf(leader.mainName))).append(" angrily turns ").append(leader.hisHer()).append(" back on ").append(subject.givenName).append(".\n\n").toString());
+                        leader.say(t, "\"");
+                        if(leader.confidence > 66)
+                            leader.say(t, (new StringBuilder("You'd better stop now, ")).append(subject.givenName).append(".  Or I'll... I'll make you stop!  Do you understand!?").toString());
+                        else
+                        if(leader.confidence > 33)
+                            leader.say(t, "I should go tell everyone exactly what you're doing.  Maybe I will.  Think about that, next time you're sleeping with the Demon Lord.");
+                        else
+                            leader.say(t, (new StringBuilder("Even I can see that this is evil, ")).append(subject.givenName).append("!  And if you can't... th-then you're evil too!").toString());
+                        leader.say(t, "\"\n\n");
+                        if(getRelationship(subject.number, leader.number) == -4)
+                        {
+                            append(t, (new StringBuilder(String.valueOf(subject.mainName))).append("'s willingness to compromise with the enemy has created an ").toString());
+                            underlineAppend(t, "irreparable rift");
+                            append(t, (new StringBuilder(" between ")).append(subject.himHer()).append(" and ").append(leader.mainName).append(".  Furthermore, ").toString());
+                        } else
+                        {
+                            append(t, (new StringBuilder(String.valueOf(subject.mainName))).append("'s willingness to compromise with the enemy drives ").append(subject.himHer()).append(" and ").append(leader.mainName).append(" apart.  Furthermore, ").toString());
+                        }
+                    }
+                    append(t, (new StringBuilder("the trust ")).append(subject.mainName).append(" is building with the Demon Lord will only make it harder to carry out ").append(subject.hisHer()).append(" mission in the end.").toString());
+                } else
+                {
+                    leader.say(t, "\"");
+                    if(leader.innocence > 66)
+                        leader.say(t, (new StringBuilder("You can't just do that sort of stuff with the enemy leader!  ")).append(follower.mainName).append(", make ").append(subject.himHer()).append(" stop!").toString());
+                    else
+                    if(leader.innocence > 33)
+                        leader.say(t, (new StringBuilder("That's...  That's crazy!  Sleeping with the Demon Lord...  ")).append(follower.mainName).append(", you think it's crazy too, right?").toString());
+                    else
+                        leader.say(t, (new StringBuilder("This is ridiculous.  You must be suffering from stress-induced insanity.  I can't imagine anyone in ")).append(subject.hisHer()).append(" right mind being willing to make such an agreement, especially not with the Demon Lord.").toString());
+                    leader.say(t, "\"\n\n");
+                    if(follower.negotiations > 0)
+                    {
+                        Project.changePortrait(subject.convertGender(), subject.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 0, Project.Emotion.JOY, Project.Emotion.JOY);
+                        Project.changePortrait(follower.convertGender(), follower.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 2, Project.Emotion.SHAME, Project.Emotion.SHAME);
+                        append(t, (new StringBuilder(String.valueOf(follower.mainName))).append(" winces at ").append(leader.mainName).append("'s tone, then hesitantly speaks up.\n\n").toString());
+                        follower.say(t, "\"");
+                        if(follower.morality > 66)
+                            follower.say(t, "I, um...  I should confess.  I'm doing the same thing...");
+                        else
+                        if(follower.morality > 33)
+                            follower.say(t, "I told you that we didn't need to patrol today, because of something I did with the Demon Lord... but I suppose you weren't listening...");
+                        else
+                            follower.say(t, "I don't think it's wrong at all...  Stop trying to make me feel bad...");
+                        follower.say(t, "\"\n\n");
+                        append(t, (new StringBuilder(String.valueOf(leader.mainName))).append(" is stunned by ").append(follower.mainName).append("'s words, and while ").append(leader.heShe()).append(" tries to come up with a reply, ").append(subject.givenName).append(" steps forward triumphantly.\n\n").toString());
+                        subject.say(t, "\"");
+                        if(subject.innocence > 66)
+                            subject.say(t, (new StringBuilder("See?  It's two against one!  That means that me and ")).append(follower.mainName).append(" can keep doing this, and you can't stop us.").toString());
+                        else
+                        if(subject.innocence > 33)
+                            subject.say(t, (new StringBuilder("Looks like you're the odd one out, ")).append(leader.mainName).append(".  While ").append(follower.mainName).append(" and I keep the Demon Lord busy, you're just patrolling for no reason.").toString());
+                        else
+                            subject.say(t, (new StringBuilder("I believe you owe ")).append(follower.mainName).append(" an apology, and perhaps some gratitude as well, since we're responsible for giving you the day off.  You should go enjoy it.  I certainly will.").toString());
+                        subject.say(t, "\"\n\n");
+                        if(getRelationship(subject.number, leader.number) == -4)
+                        {
+                            if(getRelationship(subject.number, follower.number) == 4)
+                            {
+                                append(t, "In the coming days, their shared work will lead to an ");
+                                underlineAppend(t, "unbreakable bond");
+                                append(t, (new StringBuilder(" between ")).append(subject.mainName).append(" and ").append(follower.mainName).append(", even as it creates an ").toString());
+                                underlineAppend(t, "irreparable rift");
+                                append(t, (new StringBuilder(" between ")).append(subject.mainName).append(" and ").append(leader.mainName).append(".  Furthermore, ").toString());
+                            } else
+                            if(getRelationship(subject.number, follower.number) >= 0)
+                            {
+                                append(t, (new StringBuilder("In the coming days, their shared work will lead to a deepening of the friendship between ")).append(subject.mainName).append(" and ").append(follower.mainName).append(", even as it creates an ").toString());
+                                underlineAppend(t, "irreparable rift");
+                                append(t, (new StringBuilder(" between ")).append(subject.mainName).append(" and ").append(leader.mainName).append(".  Furthermore, ").toString());
+                            } else
+                            if(getRelationship(subject.number, follower.number) > -4)
+                            {
+                                append(t, (new StringBuilder(String.valueOf(leader.mainName))).append("'s disapproval of ").append(subject.mainName).append("'s tactics creates an ").toString());
+                                underlineAppend(t, "irreparable rift");
+                                append(t, (new StringBuilder(" between them, while ")).append(subject.mainName).append(" and ").append(follower.mainName).append(" dislike each other too much to truly bond over their shared work.  Furthermore, ").toString());
+                            } else
+                            {
+                                append(t, (new StringBuilder("With ")).append(leader.mainName).append("'s disapproval of ").append(subject.hisHer()).append(" tactics, an ").toString());
+                                underlineAppend(t, "irreparable rift");
+                                append(t, (new StringBuilder(" now separates ")).append(subject.mainName).append(" from both ").append(subject.hisHer()).append(" teammates.  And ").toString());
+                            }
+                        } else
+                        if(getRelationship(subject.number, follower.number) == 4)
+                        {
+                            append(t, "In the coming days, their shared work will lead to an ");
+                            underlineAppend(t, "unbreakable bond");
+                            append(t, (new StringBuilder(" between ")).append(subject.mainName).append(" and ").append(follower.mainName).append(", even as it creates enmity between ").append(subject.mainName).append(" and ").append(leader.mainName).append(".  Furthermore, ").toString());
+                        } else
+                        if(getRelationship(subject.number, follower.number) >= 0)
+                            append(t, (new StringBuilder("In the coming days, their shared work will lead to a deepening of the friendship between ")).append(subject.mainName).append(" and ").append(follower.mainName).append(", even as it creates enmity between ").append(subject.mainName).append(" and ").append(leader.mainName).append(".  Furthermore, ").toString());
+                        else
+                        if(getRelationship(subject.number, follower.number) > -4)
+                        {
+                            append(t, (new StringBuilder(String.valueOf(leader.mainName))).append("'s disapproval of ").append(subject.mainName).append("'s tactics fosters an intense rivalry between them, while ").append(subject.mainName).append(" and ").append(follower.mainName).append(" dislike each other too much to truly bond over their shared work.  Furthermore, ").toString());
+                        } else
+                        {
+                            append(t, (new StringBuilder(String.valueOf(subject.mainName))).append(" and ").append(leader.mainName).append(" are driven apart by the revelation of ").append(subject.mainName).append("'s new tactics, and there's still an ").toString());
+                            underlineAppend(t, "irreparable rift");
+                            append(t, (new StringBuilder(" between ")).append(subject.himHer()).append(" and ").append(follower.mainName).append(".  Furthermore, ").toString());
+                        }
+                        append(t, (new StringBuilder("with ")).append(leader.mainName).append(" now the only member of the team who remains hostile to the Demon Lord, the city's fate looks more dire than ever.").toString());
+                    } else
+                    {
+                        append(t, (new StringBuilder(String.valueOf(follower.mainName))).append(" just looks angry.\n\n").toString());
+                        follower.say(t, "\"");
+                        if(follower.morality > 66)
+                            follower.say(t, "Serving the Demon Lord...  That's... That's the one thing that's hardest to forgive!");
+                        else
+                        if(follower.morality > 33)
+                            follower.say(t, "I can't believe you'd do something like that...  What is wrong with you...?");
+                        else
+                            follower.say(t, "Do you realize how much trouble it'll cause for the rest of us if everyone finds out!?  Even if it means we don't have to fight, this is too much!");
+                        follower.say(t, "\"\n\n");
+                        append(t, (new StringBuilder("Facing disapproval from ")).append(leader.mainName).append(" and ").append(follower.mainName).append(" at once, ").append(subject.givenName).append("'s composure breaks.\n\n").toString());
+                        subject.say(t, "\"");
+                        if(subject.confidence > 33)
+                            subject.say(t, "Why aren't you grateful!?  None of us have to fight now!  I was doing this for your sake too!  You'll see!");
+                        else
+                            subject.say(t, "E-Even if you don't like it, the city is peaceful now!  You should go enjoy it!  As for me, I'm... I'm going somewhere else.");
+                        subject.say(t, "\"\n\n");
+                        if(getRelationship(subject.number, leader.number) == 4)
+                        {
+                            if(getRelationship(subject.number, follower.number) == 4)
+                            {
+                                append(t, "This disagreement isn't nearly enough to threaten the ");
+                                underlineAppend(t, "unbreakable bond");
+                                append(t, (new StringBuilder(String.valueOf(subject.mainName))).append(" shares with ").append(subject.hisHer()).append(" partners.  But ").toString());
+                            } else
+                            if(getRelationship(subject.number, follower.number) >= 0)
+                            {
+                                append(t, (new StringBuilder(String.valueOf(subject.mainName))).append(" still has an ").toString());
+                                underlineAppend(t, "unbreakable bond");
+                                append(t, (new StringBuilder(" with ")).append(leader.mainName).append(", and ").append(subject.heShe()).append(" remains friends with ").append(follower.mainName).append(" as well.  But ").toString());
+                            } else
+                            if(getRelationship(subject.number, follower.number) > -4)
+                            {
+                                append(t, "This disagreement isn't nearly enough to threaten the ");
+                                underlineAppend(t, "unbreakable bond");
+                                append(t, (new StringBuilder(String.valueOf(subject.mainName))).append(" shares with ").append(leader.mainName).append(".  But ").append(follower.mainName).append(" can't accept ").append(subject.hisHer()).append(" decision, and ").toString());
+                            } else
+                            {
+                                append(t, "This disagreement isn't nearly enough to threaten the ");
+                                underlineAppend(t, "unbreakable bond");
+                                append(t, (new StringBuilder(String.valueOf(subject.mainName))).append(" shares with ").append(leader.mainName).append(".  But it creates an ").toString());
+                                underlineAppend(t, "irreparable rift");
+                                append(t, (new StringBuilder(" between ")).append(subject.himHer()).append(" and ").append(follower.mainName).append(", and ").toString());
+                            }
+                        } else
+                        if(getRelationship(subject.number, leader.number) >= 0)
+                        {
+                            if(getRelationship(subject.number, follower.number) == 4)
+                            {
+                                append(t, (new StringBuilder(String.valueOf(subject.mainName))).append(" still has an ").toString());
+                                underlineAppend(t, "unbreakable bond");
+                                append(t, (new StringBuilder(" with ")).append(follower.mainName).append(", and ").append(subject.heShe()).append(" remains friends with ").append(leader.mainName).append(" as well.  But ").toString());
+                            } else
+                            if(getRelationship(subject.number, follower.number) >= 0)
+                                append(t, (new StringBuilder("This disagreement isn't quite enough to break the friendship between ")).append(subject.mainName).append(" and ").append(subject.hisHer()).append(" partners.  But ").toString());
+                            else
+                            if(getRelationship(subject.number, follower.number) > -4)
+                            {
+                                append(t, (new StringBuilder("This disagreement isn't quite enough to drive ")).append(subject.mainName).append(" and ").append(leader.mainName).append(" apart.  But ").append(follower.mainName).append(" can't accept ").append(subject.hisHer()).append(" decision, and ").toString());
+                            } else
+                            {
+                                append(t, (new StringBuilder("This disagreement isn't quite enough to drive ")).append(subject.mainName).append(" and ").append(leader.mainName).append(" apart.  But it creates an ").toString());
+                                underlineAppend(t, "irreparable rift");
+                                append(t, (new StringBuilder(" between ")).append(subject.himHer()).append(" and ").append(follower.mainName).append(", and ").toString());
+                            }
+                        } else
+                        if(getRelationship(subject.number, leader.number) > -4)
+                        {
+                            if(getRelationship(subject.number, follower.number) == 4)
+                            {
+                                append(t, "This disagreement isn't nearly enough to threaten the ");
+                                underlineAppend(t, "unbreakable bond");
+                                append(t, (new StringBuilder(String.valueOf(subject.mainName))).append(" shares with ").append(follower.mainName).append(".  But ").append(leader.mainName).append(" can't accept ").append(subject.hisHer()).append(" decision, and ").toString());
+                            } else
+                            if(getRelationship(subject.number, follower.number) >= 0)
+                                append(t, (new StringBuilder("This disagreement isn't quite enough to drive ")).append(subject.mainName).append(" and ").append(follower.mainName).append(" apart.  But ").append(leader.mainName).append(" can't accept ").append(subject.hisHer()).append(" decision, and ").toString());
+                            else
+                            if(getRelationship(subject.number, follower.number) > -4)
+                            {
+                                append(t, (new StringBuilder(String.valueOf(subject.mainName))).append("'s decision to give in to the Demon Lord's demands drives ").append(subject.himHer()).append(" apart from ").append(subject.hisHer()).append(" partners.  And ").toString());
+                            } else
+                            {
+                                append(t, (new StringBuilder(String.valueOf(subject.mainName))).append("'s decision to give in to the Demon Lord's demands drives ").append(leader.mainName).append(" away from ").append(subject.himHer()).append(", and it creates an outright ").toString());
+                                underlineAppend(t, "irreparable rift");
+                                append(t, (new StringBuilder(" with ")).append(follower.mainName).append(".  Furthermore, ").toString());
+                            }
+                        } else
+                        if(getRelationship(subject.number, follower.number) == 4)
+                        {
+                            append(t, "This disagreement isn't nearly enough to threaten the ");
+                            underlineAppend(t, "unbreakable bond");
+                            append(t, (new StringBuilder(String.valueOf(subject.mainName))).append(" shares with ").append(follower.mainName).append(".  But it creates an ").toString());
+                            underlineAppend(t, "irreparable rift");
+                            append(t, (new StringBuilder(" between ")).append(subject.himHer()).append(" and ").append(leader.mainName).append(", and ").toString());
+                        } else
+                        if(getRelationship(subject.number, follower.number) >= 0)
+                        {
+                            append(t, (new StringBuilder("This disagreement isn't quite enough to drive ")).append(subject.mainName).append(" and ").append(follower.mainName).append(" apart.  But it creates an ").toString());
+                            underlineAppend(t, "irreparable rift");
+                            append(t, (new StringBuilder(" between ")).append(subject.himHer()).append(" and ").append(leader.mainName).append(", and ").toString());
+                        } else
+                        if(getRelationship(subject.number, follower.number) > -4)
+                        {
+                            append(t, (new StringBuilder(String.valueOf(subject.mainName))).append("'s decision to give in to the Demon Lord's demands drives ").append(follower.mainName).append(" away from ").append(subject.himHer()).append(", and it creates an outright ").toString());
+                            underlineAppend(t, "irreparable rift");
+                            append(t, (new StringBuilder(" with ")).append(leader.mainName).append(".  Furthermore, ").toString());
+                        } else
+                        {
+                            append(t, (new StringBuilder(String.valueOf(subject.mainName))).append("'s decision to give in to the Demon Lord's demands creates an ").toString());
+                            underlineAppend(t, "irreparable rift");
+                            append(t, (new StringBuilder(" between ")).append(subject.himHer()).append(" and ").append(subject.hisHer()).append(" partners.  Furthermore, ").toString());
+                        }
+                        append(t, (new StringBuilder("the trust ")).append(subject.mainName).append(" is building with the Demon Lord will only make it harder to carry out ").append(subject.hisHer()).append(" mission in the end.").toString());
+                    }
+                }
+            }
+            if(follower == null)
+            {
+                if(leader.negotiations > 0)
+                {
+                    if(endOne.booleanValue())
+                        save.saveScene(23, (new StringBuilder(String.valueOf(subject.mainName))).append("/").append(leader.mainName).toString(), (new StringBuilder(String.valueOf(subject.mainName))).append(" and ").append(leader.mainName).append(" bond over their shared decision to sleep with the Demon Lord in exchange for a truce.").toString());
+                    else
+                        save.saveScene(23, (new StringBuilder(String.valueOf(subject.mainName))).append("/").append(leader.mainName).toString(), (new StringBuilder(String.valueOf(subject.mainName))).append("'s and ").append(leader.mainName).append("'s extends to their desire to be the only one sleeping with the Demon Lord in exchange for a truce.").toString());
+                } else
+                {
+                    save.saveScene(23, (new StringBuilder(String.valueOf(subject.mainName))).append("/").append(leader.mainName).toString(), (new StringBuilder(String.valueOf(subject.mainName))).append(" and ").append(leader.mainName).append(" are driven apart by ").append(subject.mainName).append("'s decision to service the Demon Lord in exchange for a truce.").toString());
+                }
+            } else
+            if(leader.negotiations > 0)
+            {
+                if(follower.negotiations > 0)
+                    save.saveScene(23, (new StringBuilder(String.valueOf(subject.mainName))).append("/").append(leader.mainName).append("/").append(follower.mainName).toString(), (new StringBuilder(String.valueOf(subject.mainName))).append(", ").append(leader.mainName).append(", and ").append(follower.mainName).append(" bond over their shared decision to sleep with the Demon Lord in exchange for a truce.").toString());
+                else
+                    save.saveScene(23, (new StringBuilder(String.valueOf(subject.mainName))).append("/").append(leader.mainName).append("/").append(follower.mainName).toString(), (new StringBuilder(String.valueOf(subject.mainName))).append(" and ").append(leader.mainName).append(" reveal to ").append(follower.mainName).append("'s horror that they're sleeping with the Demon Lord in exchange for a truce.").toString());
+            } else
+            if(follower.negotiations > 0)
+                save.saveScene(23, (new StringBuilder(String.valueOf(subject.mainName))).append("/").append(leader.mainName).append("/").append(follower.mainName).toString(), (new StringBuilder(String.valueOf(subject.mainName))).append(" and ").append(follower.mainName).append(" reveal to ").append(leader.mainName).append("'s horror that they're sleeping with the Demon Lord in exchange for a truce.").toString());
+            else
+                save.saveScene(23, (new StringBuilder(String.valueOf(subject.mainName))).append("/").append(leader.mainName).append("/").append(follower.mainName).toString(), (new StringBuilder(String.valueOf(subject.mainName))).append(" clashes with ").append(leader.mainName).append(" and ").append(follower.mainName).append(" over ").append(subject.hisHer()).append(" decision to sleep with the Demon Lord in exchange for a truce.").toString());
         }
         if(EEGained > 0)
         {
@@ -10543,7 +11485,7 @@ public class WorldState
                 else
                     append(t, (new StringBuilder(String.valueOf(c.mainName))).append("'s cock ").toString());
                 append(t, (new StringBuilder("against ")).append(d.hisHer()).append(" thigh.\n\n").toString());
-                d.say(t, (new StringBuilder("\"")).append(c.mainName).append("!?  S-Slow down, we didn't talk about doing this!\"").toString());
+                d.say(t, (new StringBuilder("\"")).append(c.mainName).append("!?  S-Slow down, we didn't talk about doing this!\"\n\n").toString());
                 c.say(t, "\"");
                 if(c.innocence > 66)
                     c.say(t, "Don't wanna slow down!  Being this close has got me super turned on!");
@@ -17054,22 +17996,41 @@ public class WorldState
         w.append(t, c.mainName);
         if(c.captured.booleanValue())
         {
+            if(usedForsaken == null)
+            {
+                if(c.getHATELevel() == 0)
+                    w.append(t, " is struggling to escape the clutches of your Commander body.  ");
+                else
+                if(c.getHATELevel() == 1)
+                    w.append(t, (new StringBuilder("'s eyes are narrowed with annoyance as ")).append(c.heShe()).append(" struggles to escape your Commander body.  ").toString());
+                else
+                if(c.getHATELevel() == 2)
+                    w.append(t, (new StringBuilder(" is fuming with anger as ")).append(c.heShe()).append(" struggles to escape your Commander body.  ").toString());
+                else
+                if(c.getHATELevel() == 3)
+                    w.append(t, (new StringBuilder(" is violently lashing out at anyone who strays too close to ")).append(c.hisHer()).append(" struggle with your Commander body.  ").toString());
+                else
+                if(c.getHATELevel() == 4)
+                    w.append(t, (new StringBuilder(" is screaming madly, overwhelmed by emotion, as ")).append(c.heShe()).append(" struggles to escape your Commander body.  ").toString());
+                else
+                    w.append(t, (new StringBuilder("'s body is erupting with Demonic energy, a sign of ")).append(c.hisHer()).append(" hateful state of mind, as ").append(c.heShe()).append(" struggles to escape your Commander.  ").toString());
+            } else
             if(c.getHATELevel() == 0)
-                w.append(t, " is struggling to escape the clutches of your Commander body.  ");
+                w.append(t, (new StringBuilder(" is struggling to escape ")).append(usedForsaken.mainName).append("'s clutches.  ").toString());
             else
             if(c.getHATELevel() == 1)
-                w.append(t, (new StringBuilder("'s eyes are narrowed with annoyance as ")).append(c.heShe()).append(" struggles to escape your Commander body.  ").toString());
+                w.append(t, (new StringBuilder("'s eyes are narrowed with annoyance as ")).append(c.heShe()).append(" struggles to escape ").append(usedForsaken.mainName).append(".  ").toString());
             else
             if(c.getHATELevel() == 2)
-                w.append(t, (new StringBuilder(" is fuming with anger as ")).append(c.heShe()).append(" struggles to escape your Commander body.  ").toString());
+                w.append(t, (new StringBuilder(" is fuming with anger as ")).append(c.heShe()).append(" struggles to escape ").append(usedForsaken.mainName).append(".  ").toString());
             else
             if(c.getHATELevel() == 3)
-                w.append(t, (new StringBuilder(" is violently lashing out at anyone who strays too close to ")).append(c.hisHer()).append(" struggle with your Commander body.  ").toString());
+                w.append(t, (new StringBuilder(" is violently lashing out at anyone who strays too close to ")).append(c.hisHer()).append(" struggle with ").append(usedForsaken.mainName).append(".  ").toString());
             else
             if(c.getHATELevel() == 4)
-                w.append(t, (new StringBuilder(" is screaming madly, overwhelmed by emotion, as ")).append(c.heShe()).append(" struggles to escape your Commander body.  ").toString());
+                w.append(t, (new StringBuilder(" is screaming madly, overwhelmed by emotion, as ")).append(c.heShe()).append(" struggles to escape ").append(usedForsaken.mainName).append(".  ").toString());
             else
-                w.append(t, (new StringBuilder("'s body is erupting with Demonic energy, a sign of ")).append(c.hisHer()).append(" hateful state of mind, as ").append(c.heShe()).append(" struggles to escape your Commander.  ").toString());
+                w.append(t, (new StringBuilder("'s body is erupting with Demonic energy, a sign of ")).append(c.hisHer()).append(" hateful state of mind, as ").append(c.heShe()).append(" struggles to escape ").append(usedForsaken.mainName).append(".  ").toString());
         } else
         if(c.surrounded.booleanValue())
         {
@@ -21889,6 +22850,17 @@ public class WorldState
             }
             c.say(t, "\"");
         }
+        if(finalBattle.booleanValue() && c.confidence < 34 && (getCast()[0].resolve == 0 || getCast()[1].resolve == 0 || getCast()[2].resolve == 0))
+        {
+            for(int i = 0; i < 3; i++)
+            {
+                getCast()[i].inseminated = Boolean.valueOf(false);
+                getCast()[i].orgasming = Boolean.valueOf(false);
+                getCast()[i].sodomized = Boolean.valueOf(false);
+                getCast()[i].broadcasted = Boolean.valueOf(false);
+            }
+
+        }
     }
 
     public int[] getLastOrgyStage()
@@ -22084,6 +23056,11 @@ public class WorldState
         }
         for(int i = 0; i < getHarem().length; i++)
         {
+            if(getHarem()[i].formerSelf.pastNegotiated == null)
+            {
+                getHarem()[i].formerSelf.pastNegotiated = Boolean.valueOf(false);
+                getHarem()[i].formerSelf.truce = Boolean.valueOf(false);
+            }
             if(getHarem()[i].others.length > getHarem()[i].forsakenRelations.length)
             {
                 Forsaken newOthers[] = new Forsaken[getHarem()[i].forsakenRelations.length];
@@ -22108,54 +23085,97 @@ public class WorldState
             }
         }
 
-        if(getCast()[0] != null && getCast()[0].dissociated == null)
+        if(getCast()[0] != null)
         {
-            for(int i = 0; i < 3; i++)
-                if(getCast()[i] != null)
-                {
-                    getCast()[i].dissociated = Boolean.valueOf(false);
-                    getCast()[i].pastDissociated = Boolean.valueOf(false);
-                    getCast()[i].dissociationOpening = Boolean.valueOf(false);
-                    getCast()[i].dissociationReq = 10;
-                }
-
-            if(campaign.booleanValue())
+            if(getCast()[0].pastNegotiated == null)
             {
-                if(loopChosen != null)
-                {
-                    for(int i = 0; i < 3; i++)
+                for(int i = 0; i < 3; i++)
+                    if(getCast()[i] != null)
                     {
-                        loopChosen[i].dissociated = Boolean.valueOf(false);
-                        loopChosen[i].pastDissociated = Boolean.valueOf(false);
-                        loopChosen[i].dissociationOpening = Boolean.valueOf(false);
-                        loopChosen[i].dissociationReq = 10;
+                        getCast()[i].pastNegotiated = Boolean.valueOf(false);
+                        getCast()[i].truce = Boolean.valueOf(false);
+                    }
+
+                if(campaign.booleanValue())
+                {
+                    if(loopChosen != null)
+                    {
+                        for(int i = 0; i < 3; i++)
+                        {
+                            loopChosen[i].pastNegotiated = Boolean.valueOf(false);
+                            loopChosen[i].truce = Boolean.valueOf(false);
+                        }
+
+                    }
+                    for(int i = 0; i < returning.length; i++)
+                    {
+                        returning[i].pastNegotiated = Boolean.valueOf(false);
+                        returning[i].truce = Boolean.valueOf(false);
+                    }
+
+                    for(int i = 0; i < deceased.length; i++)
+                    {
+                        deceased[i].pastNegotiated = Boolean.valueOf(false);
+                        deceased[i].truce = Boolean.valueOf(false);
+                    }
+
+                    for(int i = 0; i < formerChosen.length; i++)
+                    {
+                        formerChosen[i].pastNegotiated = Boolean.valueOf(false);
+                        formerChosen[i].truce = Boolean.valueOf(false);
                     }
 
                 }
-                for(int i = 0; i < returning.length; i++)
-                {
-                    returning[i].dissociated = Boolean.valueOf(false);
-                    returning[i].pastDissociated = Boolean.valueOf(false);
-                    returning[i].dissociationOpening = Boolean.valueOf(false);
-                    returning[i].dissociationReq = 10;
-                }
+            }
+            if(getCast()[0].dissociated == null)
+            {
+                for(int i = 0; i < 3; i++)
+                    if(getCast()[i] != null)
+                    {
+                        getCast()[i].dissociated = Boolean.valueOf(false);
+                        getCast()[i].pastDissociated = Boolean.valueOf(false);
+                        getCast()[i].dissociationOpening = Boolean.valueOf(false);
+                        getCast()[i].dissociationReq = 10;
+                    }
 
-                for(int i = 0; i < deceased.length; i++)
+                if(campaign.booleanValue())
                 {
-                    deceased[i].dissociated = Boolean.valueOf(false);
-                    deceased[i].pastDissociated = Boolean.valueOf(false);
-                    deceased[i].dissociationOpening = Boolean.valueOf(false);
-                    deceased[i].dissociationReq = 10;
-                }
+                    if(loopChosen != null)
+                    {
+                        for(int i = 0; i < 3; i++)
+                        {
+                            loopChosen[i].dissociated = Boolean.valueOf(false);
+                            loopChosen[i].pastDissociated = Boolean.valueOf(false);
+                            loopChosen[i].dissociationOpening = Boolean.valueOf(false);
+                            loopChosen[i].dissociationReq = 10;
+                        }
 
-                for(int i = 0; i < formerChosen.length; i++)
-                {
-                    formerChosen[i].dissociated = Boolean.valueOf(false);
-                    formerChosen[i].pastDissociated = Boolean.valueOf(false);
-                    formerChosen[i].dissociationOpening = Boolean.valueOf(false);
-                    formerChosen[i].dissociationReq = 10;
-                }
+                    }
+                    for(int i = 0; i < returning.length; i++)
+                    {
+                        returning[i].dissociated = Boolean.valueOf(false);
+                        returning[i].pastDissociated = Boolean.valueOf(false);
+                        returning[i].dissociationOpening = Boolean.valueOf(false);
+                        returning[i].dissociationReq = 10;
+                    }
 
+                    for(int i = 0; i < deceased.length; i++)
+                    {
+                        deceased[i].dissociated = Boolean.valueOf(false);
+                        deceased[i].pastDissociated = Boolean.valueOf(false);
+                        deceased[i].dissociationOpening = Boolean.valueOf(false);
+                        deceased[i].dissociationReq = 10;
+                    }
+
+                    for(int i = 0; i < formerChosen.length; i++)
+                    {
+                        formerChosen[i].dissociated = Boolean.valueOf(false);
+                        formerChosen[i].pastDissociated = Boolean.valueOf(false);
+                        formerChosen[i].dissociationOpening = Boolean.valueOf(false);
+                        formerChosen[i].dissociationReq = 10;
+                    }
+
+                }
             }
         }
         if(save != null)
@@ -22382,9 +23402,9 @@ public class WorldState
         }
         if(portraits == null)
             portraits = Boolean.valueOf(true);
-        if(achievementSeen == null || achievementSeen.length < 7)
+        if(achievementSeen == null || achievementSeen.length < 9)
         {
-            achievementSeen = new int[7];
+            achievementSeen = new int[9];
             for(int i = 0; i < achievementSeen.length; i++)
                 achievementSeen[i] = 0;
 
@@ -24062,6 +25082,8 @@ public class WorldState
                 }
         }
 
+        if(nextSpeaker.dissociated.booleanValue())
+            nextLine = lastLine;
         if(nextSpeaker.isSurrounded().booleanValue() || nextSpeaker.isCaptured().booleanValue())
             nextLine = lastLine;
         if(!nextSpeaker.isIntroduced().booleanValue() || !target.isIntroduced().booleanValue())
@@ -27564,13 +28586,13 @@ public class WorldState
                                 ai[1] = (int)(Math.random() * 26D);
                                 String names[] = c.genName(this, ai);
                                 for(int j = 0; j < i; j++)
-                                    if(loopChosen[j].givenName.equals(names[1]) || loopChosen[j].familyName.equals(names[0]))
+                                    if(loopChosen[j].givenName.equals(names[0]) || loopChosen[j].familyName.equals(names[1]))
                                         uniqueName = Boolean.valueOf(false);
 
                                 if(uniqueName.booleanValue())
                                 {
-                                    c.givenName = names[1];
-                                    c.familyName = names[0];
+                                    c.givenName = names[0];
+                                    c.familyName = names[1];
                                 }
                             }
 
@@ -28192,9 +29214,9 @@ public class WorldState
                             readyToEnd = Boolean.valueOf(true);
                             if(victim2 != null)
                             {
-                                if(getRelationship(killer1.getNumber(), victim1.getNumber()) == -4 || victim1.isImpregnated().booleanValue() || victim1.isHypnotized().booleanValue() || victim1.isDrained().booleanValue() || victim1.isParasitized().booleanValue() || victim1.temptReq < 0x186a0L || victim1.dissociationReq < 10 || victim1.resolve < 50)
+                                if(getRelationship(killer1.getNumber(), victim1.getNumber()) == -4 || victim1.isImpregnated().booleanValue() || victim1.isHypnotized().booleanValue() || victim1.isDrained().booleanValue() || victim1.isParasitized().booleanValue() || victim1.temptReq < 0x186a0L || victim1.dissociationReq < 10 || victim1.negotiations > 0 || victim1.resolve < 50)
                                 {
-                                    if(getRelationship(killer1.getNumber(), victim2.getNumber()) == -4 || victim2.isImpregnated().booleanValue() || victim2.isHypnotized().booleanValue() || victim2.isDrained().booleanValue() || victim2.isParasitized().booleanValue() || victim2.temptReq < 0x186a0L || victim2.dissociationReq < 10 || victim2.resolve < 50)
+                                    if(getRelationship(killer1.getNumber(), victim2.getNumber()) == -4 || victim2.isImpregnated().booleanValue() || victim2.isHypnotized().booleanValue() || victim2.isDrained().booleanValue() || victim2.isParasitized().booleanValue() || victim2.temptReq < 0x186a0L || victim2.dissociationReq < 10 || victim2.negotiations > 0 || victim2.resolve < 50)
                                     {
                                         if(getTechs()[40].isOwned().booleanValue() && !killer1.hesitated.booleanValue() && (getRelationship(killer1.getNumber(), victim1.getNumber()) == 4 || getRelationship(killer1.getNumber(), victim2.getNumber()) == 4) && getRelationship(killer1.getNumber(), victim1.getNumber()) == 4)
                                             getRelationship(killer1.getNumber(), victim2.getNumber());
@@ -28205,7 +29227,7 @@ public class WorldState
                                     if(getTechs()[40].isOwned().booleanValue() && !killer1.hesitated.booleanValue())
                                         getRelationship(killer1.getNumber(), victim1.getNumber());
                                 } else
-                                if(getRelationship(killer1.getNumber(), victim2.getNumber()) == -4 || victim2.isImpregnated().booleanValue() || victim2.isHypnotized().booleanValue() || victim2.isDrained().booleanValue() || victim2.isParasitized().booleanValue() || victim2.temptReq < 0x186a0L || victim2.dissociationReq < 10 || victim2.resolve < 50)
+                                if(getRelationship(killer1.getNumber(), victim2.getNumber()) == -4 || victim2.isImpregnated().booleanValue() || victim2.isHypnotized().booleanValue() || victim2.isDrained().booleanValue() || victim2.isParasitized().booleanValue() || victim2.temptReq < 0x186a0L || victim2.dissociationReq < 10 || victim2.negotiations > 0 || victim2.resolve < 50)
                                 {
                                     if(duration1 > duration2)
                                         readyToEnd = Boolean.valueOf(false);
@@ -28219,7 +29241,7 @@ public class WorldState
                             } else
                             if(killer2 != null)
                             {
-                                if(victim1.isImpregnated().booleanValue() || victim1.isHypnotized().booleanValue() || victim1.isDrained().booleanValue() || victim1.isParasitized().booleanValue() || victim1.temptReq < 0x186a0L || victim1.dissociationReq < 10 || victim1.resolve < 50)
+                                if(victim1.isImpregnated().booleanValue() || victim1.isHypnotized().booleanValue() || victim1.isDrained().booleanValue() || victim1.isParasitized().booleanValue() || victim1.temptReq < 0x186a0L || victim1.dissociationReq < 10 || victim1.negotiations > 0 || victim1.resolve < 50)
                                 {
                                     if(getTechs()[40].isOwned().booleanValue())
                                         if(getRelationship(killer1.getNumber(), victim1.getNumber()) == 4 && !killer1.hesitated.booleanValue())
@@ -28236,7 +29258,7 @@ public class WorldState
                                 if(getRelationship(killer2.getNumber(), victim1.getNumber()) != -4)
                                     readyToEnd = Boolean.valueOf(false);
                             } else
-                            if(getRelationship(killer1.getNumber(), victim1.getNumber()) == -4 || victim1.isImpregnated().booleanValue() || victim1.isHypnotized().booleanValue() || victim1.isDrained().booleanValue() || victim1.isParasitized().booleanValue() || victim1.temptReq < 0x186a0L || victim1.dissociationReq < 10 || victim1.resolve < 50)
+                            if(getRelationship(killer1.getNumber(), victim1.getNumber()) == -4 || victim1.isImpregnated().booleanValue() || victim1.isHypnotized().booleanValue() || victim1.isDrained().booleanValue() || victim1.isParasitized().booleanValue() || victim1.temptReq < 0x186a0L || victim1.dissociationReq < 10 || victim1.negotiations > 0 || victim1.resolve < 50)
                             {
                                 if(getTechs()[40].isOwned().booleanValue() && !killer1.hesitated.booleanValue())
                                     getRelationship(killer1.getNumber(), victim1.getNumber());
@@ -28345,7 +29367,7 @@ public class WorldState
         if(difference > 0 && difference < undecided)
             value = 2;
         else
-        if(difference < 0 && 0 - difference < undecided)
+        if(difference < 0 && 0 - difference <= undecided)
             value = -2;
         else
         if(difference > 0)
@@ -32334,6 +33356,15 @@ public class WorldState
         int type = 0;
         for(int i = 0; i < 12; i++)
         {
+            if(c.temptReq < 0x186a0L)
+                type = 5;
+            else
+            if(c.dissociationReq < 10)
+                type = 6;
+            else
+            if(c.negotiations >= 3)
+                type = 7;
+            else
             if(i % 4 == 0)
             {
                 if(c.getConfidence() > 66 - 33 * (i / 4) && c.isDrained().booleanValue())
@@ -32355,6 +33386,137 @@ public class WorldState
                 i = 12;
         }
 
+        if(type == 5)
+        {
+            if(c.morality > 66)
+            {
+                Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.SHAME);
+                if(c.innocence > 66)
+                    c.say(t, "Friendship is supposed to be the most important thing... so why am I having to fight against my new Thrall friends?  It feels really bad...");
+                else
+                if(c.innocence > 33)
+                    c.say(t, "I never should have let myself become friendly with the Thralls.  Now... agh... I can't stop doubting myself...!");
+                else
+                    c.say(t, "To be forced to fight against the friends I only just made...  This is truly tragic.");
+            } else
+            if(c.morality > 33)
+            {
+                Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.SHAME);
+                if(c.innocence > 66)
+                    c.say(t, "I don't wanna fight my new friends...");
+                else
+                if(c.innocence > 33)
+                    c.say(t, "I'm not happy about having to fight the Thralls... but what can I do about it?");
+                else
+                    c.say(t, "The fact that I have become close with the Thralls... decreases my desire to fight.  Was this also the Demon Lord's plan...?");
+            } else
+            if(c.innocence > 66)
+            {
+                Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.ANGER);
+                c.say(t, "This sucks.  I just wanted to have fun with my friends, but now I have to fight them.  Or I guess I could just give up...");
+            } else
+            if(c.innocence > 33)
+            {
+                Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.SHAME);
+                c.say(t, "I was hoping that the Thralls would side with me against the Demon Lord.  Ugh, are they trying to make me give up instead...?");
+            } else
+            {
+                Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.NEUTRAL);
+                c.say(t, "I have no particular reason to fight anymore... but I do hate losing.  Let us see how this turns out.");
+            }
+        } else
+        if(type == 6)
+        {
+            if(c.morality > 66)
+            {
+                if(c.confidence > 66)
+                {
+                    Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.SHAME);
+                    c.say(t, "I... I can't stop shaking...  I've become a nervous wreck... I'm too weak to defend this city...");
+                } else
+                if(c.confidence > 33)
+                {
+                    Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.SHAME);
+                    c.say(t, "I know it's wrong, but... I want to run... and never look back...");
+                } else
+                {
+                    Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.FEAR);
+                    c.say(t, "This is... t-too much pressure!  I'm going to go crazy...!");
+                }
+            } else
+            if(c.morality > 33)
+            {
+                Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.FEAR);
+                if(c.confidence > 66)
+                    c.say(t, "I'm... a weakling... after all...  Too scared to even run away...");
+                else
+                if(c.confidence > 33)
+                    c.say(t, "They're going to do... awful things to me...  I just know it...!");
+                else
+                    c.say(t, "P-Please... not now...  I-I can't do this...!");
+            } else
+            {
+                Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.FEAR);
+                if(c.confidence > 66)
+                    c.say(t, "I'm sorry that I ever pretended to be strong...  So please, please, let me wake up from this nightmare...!");
+                else
+                if(c.confidence > 33)
+                    c.say(t, "I never even wanted to be a hero... so how did it end up like this...?  I wish I could just give up...");
+                else
+                    c.say(t, "I don't wanna fight!  I don't!  But I can't run either...  What can I do, what can I do!?");
+            }
+        } else
+        if(type == 7)
+        {
+            if(c.innocence > 66)
+            {
+                if(c.confidence > 66)
+                {
+                    Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.ANGER);
+                    c.say(t, "Stupid Demon Lord...  Tricking me into liking you...  I'm not gonna hold back, got it!?");
+                } else
+                if(c.confidence > 33)
+                {
+                    Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.SHAME);
+                    c.say(t, (new StringBuilder("Whenever I think of the Demon Lord, I feel... really weird.  I wish I didn't have to fight ")).append(c.rememberedDemonLordBody.himHer()).append("...").toString());
+                } else
+                {
+                    Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.SHAME);
+                    c.say(t, (new StringBuilder("The Demon Lord is... really amazing.  Maybe it would be better if we didn't end up killing ")).append(c.rememberedDemonLordBody.himHer()).append("...").toString());
+                }
+            } else
+            if(c.innocence > 33)
+            {
+                if(c.confidence > 66)
+                {
+                    Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.ANGER);
+                    c.say(t, "Demon Lord!  You think I'll hold back just because... just because we met in person once or twice, and it wasn't so bad!?  Think again!  Here I come!");
+                } else
+                if(c.confidence > 33)
+                {
+                    Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.SHAME);
+                    c.say(t, (new StringBuilder("The Demon Lord... is just another Demon!  I can kill ")).append(c.rememberedDemonLordBody.himHer()).append("!  I can!").toString());
+                } else
+                {
+                    Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.SHAME);
+                    c.say(t, (new StringBuilder("I really am an idiot.  Letting the Demon Lord charm me.  But even if I know it was just a Demonic trick...  I... I wish I could believe that ")).append(c.rememberedDemonLordBody.heShe()).append(" really does like me...").toString());
+                }
+            } else
+            if(c.confidence > 66)
+            {
+                Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.FEAR);
+                c.say(t, (new StringBuilder("I... see.  It seems I'm beginning to develop an emotional attachment to the Demon Lord.  If I don't kill ")).append(c.rememberedDemonLordBody.himHer()).append("...  No, if I don't kill it now, I'll become ensnared for the rest of my life.").toString());
+            } else
+            if(c.confidence > 33)
+            {
+                Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.SHAME);
+                c.say(t, (new StringBuilder("It's only now, when I'm about to try to kill ")).append(c.rememberedDemonLordBody.himHer()).append("... that I realize I might have feelings for the Demon Lord...").toString());
+            } else
+            {
+                Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.SHAME);
+                c.say(t, (new StringBuilder("I never knew that the Demon Lord was a person like me, with ")).append(c.rememberedDemonLordBody.hisHer()).append(" own thoughts and feelings...  C-Can I truly take ").append(c.rememberedDemonLordBody.hisHer()).append(" life...?").toString());
+            }
+        } else
         if(type == 3)
         {
             if(c.getConfidence() > 66)
@@ -32554,6 +33716,234 @@ public class WorldState
                 c.say(t, "Let's just get this over with.");
         }
         c.say(t, "\"");
+    }
+
+    public void finalAppeal(JTextPane t, WorldState w, Chosen c)
+    {
+        append(t, (new StringBuilder("\n\n")).append(getSeparator()).append("\n\n").toString());
+        if(c.finalAppealed == 0)
+        {
+            if(c.morality > 66)
+                append(t, (new StringBuilder(String.valueOf(c.mainName))).append(" has come to feel sympathy for the Demon Lord, and ").append(c.hisHer()).append(" mind grasps for any justification that ").append(c.heShe()).append(" can use to stop fighting.  When you start sending telepathic messages offering to curb your evil ways in exchange for ").append(c.hisHer()).append(" service, ").append(c.heShe()).append("'s subconsciously happy for the excuse to frame surrender as something heroic.  After all, if ").append(c.heShe()).append(" loses without making a deal with you, then all ").append(c.hisHer()).append(" efforts will have been for nothing.").toString());
+            else
+            if(c.morality > 33)
+                append(t, (new StringBuilder(String.valueOf(c.mainName))).append(" trusts you now, at least somewhat, and ").append(c.heShe()).append(" doesn't dislike you either.  ").append(c.HeShe()).append("'s only fighting because the idea of going over to the Demons has always been unthinkable to ").append(c.himHer()).append(".  However, because of the relationship you've built up, when you tell ").append(c.himHer()).append(" that the world ").append(c.heShe()).append(" wants and the world you're building aren't so different, ").append(c.heShe()).append(" listens.").toString());
+            else
+                append(t, (new StringBuilder(String.valueOf(c.mainName))).append(" has long since accepted that ").append(c.hisHer()).append(" victory over the Demon Lord is anything but inevitable.  ").append(c.HeShe()).append(" only kept fighting because ").append(c.heShe()).append(" thought that losing or fleeing would only result in a worse outcome for ").append(c.himHer()).append("self.  But now that you've built up some trust (and shown ").append(c.himHer()).append(" that you won't be defeated easily), your telepathic offers to give ").append(c.himHer()).append(" a comfortable position among your minions are enough to make ").append(c.himHer()).append(" pause thoughtfully.").toString());
+        } else
+        if(c.morality > 66)
+            append(t, (new StringBuilder(String.valueOf(c.mainName))).append(" replies frantically to your telepathic messages, seeking assurances that you really will change your ways, at least a little bit, if ").append(c.heShe()).append(" joins your side.").toString());
+        else
+        if(c.morality > 33)
+            append(t, (new StringBuilder("You telepathically point out to ")).append(c.mainName).append(" that the battle isn't going in ").append(c.hisHer()).append(" favor, and ").append(c.heShe()).append(" struggles with the question of whether dying pointlessly is really better than joining the Demons.").toString());
+        else
+            append(t, (new StringBuilder("Even as the battle rages around ")).append(c.himHer()).append(", ").append(c.mainName).append(" focuses on responding to your telepathic messages, haggling over the exact terms of ").append(c.hisHer()).append(" treatment as one of the Forsaken.").toString());
+        append(t, "\n\n");
+        c.resolve -= c.appealDamage(this);
+        if(c.resolve <= 0)
+        {
+            c.defeatType = 7;
+            append(t, (new StringBuilder("-")).append(c.appealDamage(this)).append("% Resolve\n\n").toString());
+            underlineAppend(t, "Resolve Broken");
+            append(t, "\n\n");
+            if(c.morality > 66)
+                append(t, (new StringBuilder(String.valueOf(c.mainName))).append(" is convinced, and ").append(c.heShe()).append(" immediately surrenders to the nearest group of Thralls ").append(c.heShe()).append(" can find.  ").append(c.HeShe()).append(" allows them to escort ").append(c.himHer()).append(" away, walking with a light step as if a great weight had been liften from ").append(c.hisHer()).append(" shoulders.").toString());
+            else
+            if(c.morality > 33)
+                append(t, (new StringBuilder(String.valueOf(c.mainName))).append(" gives up on beating you, and ").append(c.heShe()).append("'s clearly a bit relieved that your battle has come to a conclusion without either of you needing to be killed.  ").append(c.HeShe()).append(" starts looking for an entrance to the hive so that ").append(c.heShe()).append(" can present ").append(c.himHer()).append("self to you as your newest servant.").toString());
+            else
+                append(t, (new StringBuilder("You and ")).append(c.mainName).append(" finally reach an agreement.  ").append(c.HeShe()).append(" immediately stops fighting, heading a short distance away to watch how the rest of the fight plays out.").toString());
+            append(t, "\n\n");
+            Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(true), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.JOY, Project.Emotion.JOY);
+            c.say(t, "\"");
+            if(c.morality > 66)
+            {
+                if(c.innocence > 66)
+                {
+                    c.say(t, "The Demon Lord is actually a good person deep down inside... ");
+                    corruptColors(c);
+                    c.say(t, "better than me, at least.");
+                } else
+                if(c.innocence > 33)
+                {
+                    c.say(t, "By doing this, I can try to help the Demon Lord become a better person... ");
+                    corruptColors(c);
+                    c.say(t, "I hope I don't regret it.");
+                } else
+                {
+                    c.say(t, "I will redeem you, Demon Lord... ");
+                    corruptColors(c);
+                    c.say(t, "even if it means condemning myself.");
+                }
+            } else
+            if(c.morality > 33)
+            {
+                if(c.innocence > 66)
+                {
+                    c.say(t, "Maybe I can actually get along... ");
+                    corruptColors(c);
+                    c.say(t, "with the Demon Lord...");
+                } else
+                if(c.innocence > 33)
+                {
+                    c.say(t, "I can't defeat the Demon Lord... ");
+                    corruptColors(c);
+                    c.say(t, "but maybe that's alright.");
+                } else
+                {
+                    c.say(t, "I was too quick to treat all Demons as the enemy.  ");
+                    corruptColors(c);
+                    c.say(t, "This should prove interesting.");
+                }
+            } else
+            if(c.innocence > 66)
+            {
+                c.say(t, "Now that I'm on the Demon Lord's side... ");
+                corruptColors(c);
+                c.say(t, "we're going to have lots of fun together...");
+            } else
+            if(c.innocence > 33)
+            {
+                c.say(t, "Fighting for humanity never gave me what I really wanted... ");
+                corruptColors(c);
+                c.say(t, "but fighting for the Demon Lord will.");
+            } else
+            {
+                c.say(t, "Very well.  ");
+                corruptColors(c);
+                c.say(t, "We have a deal.");
+            }
+        } else
+        {
+            w.append(t, (new StringBuilder("-")).append(c.appealDamage(this)).append("% Resolve (").append(c.resolve).append("% remaining)\n\n").toString());
+            c.say(t, "\"");
+            if(c.morality > 66)
+            {
+                if(c.finalAppealed % 3 == 0)
+                {
+                    if(c.innocence > 66)
+                    {
+                        Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
+                        c.say(t, "I don't want you to do bad stuff... but sometimes it's really hard to tell what stuff is bad...");
+                    } else
+                    if(c.innocence > 33)
+                    {
+                        Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.FOCUS);
+                        c.say(t, "I know that I don't have much leverage here... but I want you to change your ways, at least a little.");
+                    } else
+                    {
+                        Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.FOCUS);
+                        c.say(t, "Of course, I will only join you if I believe that it's the course of action which results in the most good.");
+                    }
+                } else
+                if(c.finalAppealed % 3 == 1)
+                {
+                    if(c.confidence > 66)
+                    {
+                        Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
+                        c.say(t, "If you're just going to use me to do more evil... then I'm prepared to die instead.  Remember that.");
+                    } else
+                    if(c.confidence > 33)
+                    {
+                        Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.SHAME);
+                        c.say(t, "I want to be able to help more people, even if I do become one of the Forsaken.");
+                    } else
+                    {
+                        Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.NEUTRAL);
+                        c.say(t, "A-As long as you aren't using me to hurt people... I suppose it might be okay...");
+                    }
+                } else
+                if(c.dignity > 66)
+                {
+                    Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
+                    c.say(t, "I'm prepared... to have the people call me a traitor.  Even if it hurts...");
+                } else
+                if(c.dignity > 33)
+                {
+                    Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.JOY, Project.Emotion.FOCUS);
+                    c.say(t, "It's alright if I have to... service you sexually.  After all, that doesn't hurt anyone.");
+                } else
+                {
+                    Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.JOY);
+                    c.say(t, "I trust you, Demon Lord.  You've earned that much...");
+                }
+            } else
+            if(c.morality > 33)
+            {
+                if(c.finalAppealed % 3 == 0)
+                {
+                    Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.SHAME);
+                    if(c.innocence > 66)
+                        c.say(t, "I don't wanna die...  And I guess serving you wouldn't be too bad...");
+                    else
+                    if(c.innocence > 33)
+                        c.say(t, "So, you don't want to kill me either?  That's good, at least...");
+                    else
+                        c.say(t, "Yes... I'm aware that continuing to oppose you would likely be fruitless.");
+                } else
+                if(c.finalAppealed % 3 == 1)
+                {
+                    if(c.confidence > 66)
+                    {
+                        Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FOCUS, Project.Emotion.ANGER);
+                        c.say(t, "I'm giving you a chance to convince me to join you, so you'd better make it good.");
+                    } else
+                    if(c.confidence > 33)
+                    {
+                        Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.JOY);
+                        c.say(t, "I never... really thought of this as an option...");
+                    } else
+                    {
+                        Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.NEUTRAL);
+                        c.say(t, "You really... want me on your side?  Why me...?");
+                    }
+                } else
+                {
+                    Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.SHAME);
+                    if(c.dignity > 66)
+                        c.say(t, "What will my fans think if they hear I went over to the Demons...?");
+                    else
+                    if(c.dignity > 33)
+                        c.say(t, "I want to keep doing what I think is best.  If I can do that while serving you at the same time, then...");
+                    else
+                        c.say(t, "Will everyone be happier if I join you?  Will I be happier...?");
+                }
+            } else
+            if(c.finalAppealed % 3 == 0)
+            {
+                Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FOCUS, Project.Emotion.JOY);
+                if(c.innocence > 66)
+                    c.say(t, "I wanna be your favorite!  And you have to go on dates with me whenever I ask!");
+                else
+                if(c.innocence > 33)
+                    c.say(t, "So... you want me to work for you?  I'm listening...");
+                else
+                    c.say(t, "Finally, it's come to this.  I will listen to your terms.");
+            } else
+            if(c.finalAppealed % 3 == 1)
+            {
+                Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FOCUS, Project.Emotion.JOY);
+                if(c.confidence > 66)
+                    c.say(t, "I want to be your second-in-command!  Absolute power over all your other minions!");
+                else
+                if(c.confidence > 33)
+                    c.say(t, "I want some Thralls to act as my servants.  And if I use them up, I want you to replace them for me.");
+                else
+                    c.say(t, "I want your other minions to leave me alone...  U-Um, except when I want to have some fun with them, of course...");
+            } else
+            {
+                Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.FOCUS);
+                if(c.dignity > 66)
+                    c.say(t, "I don't want the public to see this as me being defeated.  Maybe we can say it's an equal partnership...");
+                else
+                if(c.dignity > 33)
+                    c.say(t, "I'm fine with sexual stuff, but it has to be on my terms.  And nothing in public unless I get to be the dominant one.");
+                else
+                    c.say(t, "I want to be able to have some fun with the other Chosen who come to fight you.  But don't send me after any who are strong enough to beat me!");
+            }
+        }
+        c.say(t, "\"");
+        c.finalAppealed++;
     }
 
     public void finalThreaten(JTextPane t, WorldState w, Chosen c)
@@ -34603,7 +35993,7 @@ public class WorldState
         cityName = "";
         campaignRand = new Random();
         loopComplete = Boolean.valueOf(false);
-        achievementSeen = new int[8];
+        achievementSeen = new int[9];
         types = new Chosen.Species[3];
         sceneParticipants = new Body[0];
         sceneDuration = 0;
@@ -34771,6 +36161,7 @@ public class WorldState
     int achievementSeen[];
     Chosen.Species types[];
     Body lordBody;
+    Body actingBody;
     Body targetBody;
     public Body sceneParticipants[];
     int sceneDuration;

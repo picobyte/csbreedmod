@@ -220,7 +220,7 @@ public class Forsaken
                         });
                         p.add(Personal);
                         JButton Title = new JButton((new StringBuilder("the ")).append(demonLord).toString());
-                        Personal.addActionListener(new ActionListener() {
+                        Title.addActionListener(new ActionListener() {
 
                             public void actionPerformed(ActionEvent e)
                             {
@@ -668,6 +668,15 @@ public class Forsaken
             hateExp = (hateExp * 3L) / 2L;
             injuExp = (injuExp * 3L) / 2L;
             disgrace = (disgrace * 9) / 10;
+        } else
+        if(defeatType == 7)
+        {
+            pleaExp = (pleaExp * 3L) / 2L;
+            injuExp = (injuExp * 3L) / 2L;
+            hostility = (hostility * 9) / 10;
+            obedience += 10 + c.negotiations;
+            if(obedience > 100)
+                obedience = 100;
         }
         type = c.type;
         chooseCombatStyle();
@@ -825,6 +834,7 @@ public class Forsaken
                         say(t, "I can't transform on my own anymore, so I don't have any choice other than to work for you.  ");
                 } else
                 if(defeatType == 5)
+                {
                     if(morality > 66)
                         say(t, "I used to think that you just wanted to make everyone happy... but not anymore.  ");
                     else
@@ -832,6 +842,15 @@ public class Forsaken
                         say(t, "I used to think that you wanted to be... friends.  ");
                     else
                         say(t, "You told me that if I served you, you'd make me feel good...  ");
+                } else
+                if(defeatType == 7)
+                    if(morality > 66)
+                        say(t, "I'm only working with you to give you a reason to be less evil, so if you go too far, I'll leave you right away.  ");
+                    else
+                    if(morality > 33)
+                        say(t, "I'm working with you because I trust you more than I trust my old handlers from the government.  That's not saying much.  ");
+                    else
+                        say(t, "I'm only working with you because it looks like it might be in my best interests.  But I'm not convinced yet, so don't take me for granted.  ");
             if(flavorHostility() > 66)
             {
                 if(morality > 66)
@@ -920,6 +939,7 @@ public class Forsaken
                     say(t, "Now that I've lost my powers, I know that the only way I can transform... the only way I can do anything... is if I do whatever you want me to.  ");
             } else
             if(defeatType == 5)
+            {
                 if(morality > 66)
                     say(t, "I joined you because I wanted to make your other minions happy.  That much hasn't changed.  ");
                 else
@@ -927,6 +947,15 @@ public class Forsaken
                     say(t, "I joined you because the Thralls were my friends.  I didn't know what I was getting into, but... I guess it's fine.  ");
                 else
                     say(t, "I joined you because I thought you'd give me pleasure.  It... hasn't exactly been what I expected.  ");
+            } else
+            if(defeatType == 7)
+                if(morality > 66)
+                    say(t, "I joined you because I don't think you're a bad person.  And maybe by being here and showing you that I'm willing to fight for you... I might be able to help you be better.  ");
+                else
+                if(morality > 33)
+                    say(t, "I joined you because... you showed mercy on me when I was one of the Chosen.  Once I was willing to stop fighting, you were too.  I appreciate that...  ");
+                else
+                    say(t, "I joined you because I'd rather be on your side.  You're strong, and... you treat me pretty well.  ");
             if(flavorHostility() > 66)
             {
                 if(morality > 66)
@@ -1061,6 +1090,7 @@ public class Forsaken
                     say(t, "I used to be angry about how you hurt me after promising to just give me pleasure, but now I'm even happier than before!  ");
             } else
             if(defeatType == 6)
+            {
                 if(morality > 66)
                     say(t, "I've never cared about other people, and you've always been so kind to me, so why wouldn't I join you?  ");
                 else
@@ -1075,6 +1105,15 @@ public class Forsaken
                 {
                     say(t, "I'm happy to be working with Demons and commanding Thralls.  After all, I can't remember them ever doing anything I didn't like.  ");
                 }
+            } else
+            if(defeatType == 7)
+                if(morality > 66)
+                    say(t, "I'm here because I really love and admire you.  ");
+                else
+                if(morality > 33)
+                    say(t, "I'm just happy to be close to you... and I'm happy to do whatever I have to in order to get even closer.  ");
+                else
+                    say(t, "I want to be the only Forsaken you need, the only one you care about.  ");
             if(flavorHostility() > 66)
             {
                 if(morality > 66)
@@ -1134,6 +1173,22 @@ public class Forsaken
                 say(t, "I'll kill whoever you want me to, torture whoever you want me to, and I won't feel a thing...");
         } else
         {
+            if(defeatType == 7 && hostility < 67)
+            {
+                if(innocence > 66)
+                    say(t, (new StringBuilder("I'm ")).append(mainName).append(", and I love you more than anyone else!  ").toString());
+                else
+                if(innocence > 33)
+                {
+                    say(t, (new StringBuilder("I'm still ")).append(mainName).append(", unless you feel like changing my name ").toString());
+                    if(!mainName.equals(originalName))
+                        say(t, "again");
+                    say(t, ".  ");
+                } else
+                {
+                    say(t, (new StringBuilder("I am ")).append(mainName).append(", your humble but exceptionally devoted servant.  ").toString());
+                }
+            } else
             if(confidence > 66)
                 say(t, (new StringBuilder("I'm just ")).append(theDemonLord()).append("'s tool.  I don't really want a name anymore, but people still call me '").append(mainName).append("'.  ").toString());
             else
@@ -1156,11 +1211,20 @@ public class Forsaken
             if(defeatType == 4)
                 say(t, "I'm just another part of the masses that serve you.  It feels really nice, not having to be alone...  ");
             else
-            if(defeatType == 5)
+            if(defeatType == 5 || defeatType == 7 && hostility > 66)
                 say(t, "I joined you because you made me feel good, but you don't have to worry about doing that anymore.  I'm all yours regardless.  ");
             else
             if(defeatType == 6)
                 say(t, "I think... you created me.  As your tool.  To hurt people.  ");
+            else
+            if(defeatType == 7)
+                if(confidence > 66)
+                    say(t, "You broke my pride when I was one of the Chosen, but then you offered me a chance to have a happier life here.  I think that's when I fell for you.  ");
+                else
+                if(confidence > 33)
+                    say(t, "I had already fallen in love with you when I was one of the Chosen.  I'm glad that things worked out the way they did.  ");
+                else
+                    say(t, "I was so stupid to ever fight you...  But you forgave me for it, and you accepted me...  ");
             if(flavorHostility() > 66)
             {
                 if(morality > 66)
@@ -4153,7 +4217,7 @@ public class Forsaken
                     reqsMet = Boolean.valueOf(true);
                 if(trainingType > 17 && types == 0)
                 {
-                    if(trainingType == 18 && (w.getTechs()[34].isOwned().booleanValue() || !w.active.booleanValue()))
+                    if(trainingType == 18 && (w.getTechs()[34].isOwned().booleanValue() || !w.active.booleanValue()) && !w.truceEnforced().booleanValue())
                         reqsMet = Boolean.valueOf(true);
                     if(trainingType == 19 && (w.getTechs()[35].isOwned().booleanValue() || !w.active.booleanValue()))
                         reqsMet = Boolean.valueOf(true);
@@ -4261,8 +4325,11 @@ public class Forsaken
                         if(defilerType == 0)
                             w.append(t, ", New Trait");
                         else
-                        if(trainingType == 18 && (defilerType != 1 || defeatType == 6) || trainingType == 19 && (defilerType != 2 || defeatType == 5) || trainingType == 20 && (defilerType != 3 || defeatType == 6) || trainingType == 21 && (defilerType != 4 || defeatType == 5))
+                        if(trainingType == 18 && (defilerType != 1 || defeatType == 6) || trainingType == 19 && (defilerType != 2 || defeatType == 5 || defeatType == 7) || trainingType == 20 && (defilerType != 3 || defeatType == 6 || defeatType == 7) || trainingType == 21 && (defilerType != 4 || defeatType == 5))
                             w.append(t, ", Replace Trait");
+                        if(trainingType == 21)
+                            w.append(t, ", Bonus Stamina and Motivation for other Forsaken");
+                        else
                         if(w.active.booleanValue() && !w.loopComplete.booleanValue())
                             if(trainingType == 18)
                                 w.append(t, ", Bonus Chosen ANGST");
@@ -4272,9 +4339,6 @@ public class Forsaken
                             else
                             if(trainingType == 20)
                                 w.append(t, ", Bonus Evil Energy");
-                            else
-                            if(trainingType == 21)
-                                w.append(t, ", Bonus Stamina and Motivation for other Forsaken");
                     }
                 } else
                 {
@@ -4319,8 +4383,12 @@ public class Forsaken
                         w.grayAppend(t, "Must be first training of the session");
                     else
                     if(trainingType == 18)
-                        w.grayAppend(t, "Requires Impregnation");
-                    else
+                    {
+                        if(w.truceEnforced().booleanValue())
+                            w.grayAppend(t, "Would violate truce with Chosen");
+                        else
+                            w.grayAppend(t, "Requires Impregnation");
+                    } else
                     if(trainingType == 19)
                         w.grayAppend(t, "Requires Hypnosis");
                     else
@@ -4845,8 +4913,11 @@ public class Forsaken
                             if(others[i].obedience > obedience)
                                 opinionClamp = (opinionClamp * ((20 + obedience / 2) - others[i].obedience / 2)) / 500;
                             else
+                            if(others[i].defeatType == 7)
+                                opinionClamp = 0;
+                            else
                                 opinionClamp = (opinionClamp * 20) / 500;
-                            if(opinionClamp > 0)
+                            if(opinionClamp >= 0)
                             {
                                 w.append(t, (new StringBuilder("+")).append(opinionClamp).append(" (").toString());
                                 if(others[i].obedience > obedience)
@@ -9006,6 +9077,16 @@ public class Forsaken
                     }
 
             }
+            if(nextTraining == 21 || currentTraining[21].booleanValue())
+            {
+                if(increases[3] > 0)
+                {
+                    int bonusRestoration = increases[3] * 30;
+                    if(bonusRestoration > 100)
+                        bonusRestoration = 100;
+                    w.append(t, (new StringBuilder("\n\nWill restore ")).append(bonusRestoration).append("% Stamina and Motivation for all other Forsaken").toString());
+                }
+            } else
             if(w.active.booleanValue() && !w.loopComplete.booleanValue())
                 if(nextTraining == 18 || currentTraining[18].booleanValue())
                 {
@@ -9042,18 +9123,8 @@ public class Forsaken
                     if(newObsessions.length == 3)
                         w.append(t, (new StringBuilder("\n\nWill cause obsession with ")).append(newObsessions[0].mainName).append(", ").append(newObsessions[1].mainName).append(", and ").append(newObsessions[2].mainName).append(".").toString());
                 } else
-                if(nextTraining == 20 || currentTraining[20].booleanValue())
-                {
-                    if(increases[2] > 0)
-                        w.append(t, (new StringBuilder("\n\nWill grant ")).append(increases[2]).append(" Evil Energy").toString());
-                } else
-                if((nextTraining == 21 || currentTraining[21].booleanValue()) && increases[3] > 0)
-                {
-                    int bonusRestoration = increases[3] * 30;
-                    if(bonusRestoration > 100)
-                        bonusRestoration = 100;
-                    w.append(t, (new StringBuilder("\n\nWill restore ")).append(bonusRestoration).append("% Stamina and Motivation for all other Forsaken").toString());
-                }
+                if((nextTraining == 20 || currentTraining[20].booleanValue()) && increases[2] > 0)
+                    w.append(t, (new StringBuilder("\n\nWill grant ")).append(increases[2]).append(" Evil Energy").toString());
         }
         Boolean helpless = Boolean.valueOf(false);
         for(int i = 1; i < currentTraining.length; i += 2)
@@ -9113,6 +9184,27 @@ public class Forsaken
                     if(disgrace > 100)
                         disgrace = 100;
                     executeTraining(t, p, f, w, s, currentTraining, nextTraining, nowConsenting, gainedExpertise);
+                    if(nextTraining == 21 || currentTraining[21].booleanValue())
+                    {
+                        if(increases[3] > 0)
+                        {
+                            int bonusRestored = 30 * increases[3];
+                            if(bonusRestored > 100)
+                                bonusRestored = 100;
+                            for(int i = 0; i < w.getHarem().length; i++)
+                                if(w.getHarem()[i].forsakenID != forsakenID)
+                                {
+                                    w.getHarem()[i].stamina += bonusRestored * 10;
+                                    w.getHarem()[i].motivation += bonusRestored * 10;
+                                    if(w.getHarem()[i].stamina > 1000)
+                                        w.getHarem()[i].stamina = 1000;
+                                    if(w.getHarem()[i].motivation > 1000)
+                                        w.getHarem()[i].motivation = 1000;
+                                }
+
+                            w.append(t, (new StringBuilder("\n\n+")).append(bonusRestored).append("% Stamina and Motivation for all other Forsaken").toString());
+                        }
+                    } else
                     if(w.active.booleanValue() && !w.loopComplete.booleanValue())
                     {
                         if((nextTraining == 18 || currentTraining[18].booleanValue()) && increases[0] > 0)
@@ -9146,24 +9238,6 @@ public class Forsaken
                         {
                             w.append(t, (new StringBuilder("\n\n+")).append(increases[2]).append(" Evil Energy").toString());
                             w.addEnergy(increases[2]);
-                        }
-                        if((nextTraining == 21 || currentTraining[21].booleanValue()) && increases[3] > 0)
-                        {
-                            int bonusRestored = 30 * increases[3];
-                            if(bonusRestored > 100)
-                                bonusRestored = 100;
-                            for(int i = 0; i < w.getHarem().length; i++)
-                                if(w.getHarem()[i].forsakenID != forsakenID)
-                                {
-                                    w.getHarem()[i].stamina += bonusRestored * 10;
-                                    w.getHarem()[i].motivation += bonusRestored * 10;
-                                    if(w.getHarem()[i].stamina > 1000)
-                                        w.getHarem()[i].stamina = 1000;
-                                    if(w.getHarem()[i].motivation > 1000)
-                                        w.getHarem()[i].motivation = 1000;
-                                }
-
-                            w.append(t, (new StringBuilder("\n\n+")).append(bonusRestored).append("% Stamina and Motivation for all Forsaken").toString());
                         }
                     }
                 }
@@ -12515,12 +12589,18 @@ public class Forsaken
             if(defeatType == 5 && defilerType != 5)
                 defilerType = 5;
             else
+            if(defeatType == 7 && defilerType != 7)
+                defilerType = 7;
+            else
                 defilerType = 2;
         } else
         if(nextTraining == 20)
         {
             if(defeatType == 6 && defilerType != 6)
                 defilerType = 6;
+            else
+            if(defeatType == 7 && defilerType != 7)
+                defilerType = 7;
             else
                 defilerType = 3;
         } else
@@ -12896,6 +12976,9 @@ public class Forsaken
         String INJU = "INJU";
         if(w.tickleOn.booleanValue())
             INJU = "ANTI";
+        String PAIN = "PAIN";
+        if(w.tickleOn.booleanValue())
+            PAIN = "TICK";
         String message = "Defiler: ";
         if(defilerType == 1)
         {
@@ -12932,6 +13015,12 @@ public class Forsaken
             message = (new StringBuilder(String.valueOf(message))).append("Orgy (all)").toString();
             if(full.booleanValue())
                 message = (new StringBuilder(String.valueOf(message))).append("\nCan throw a target into an existing Defiler+ action to create an Orgy, so long as the target has at least 10k HATE or ").append(INJU).toString();
+        } else
+        if(defilerType == 7)
+        {
+            message = (new StringBuilder(String.valueOf(message))).append("Traumatize (none)").toString();
+            if(full.booleanValue())
+                message = (new StringBuilder(String.valueOf(message))).append("\nCan stop dealing circumstance damage in order to greatly increase DISG and ").append(PAIN).append(" dealt").toString();
         }
         return message;
     }
@@ -13045,6 +13134,15 @@ public class Forsaken
                 baseDamage[1] = 0;
                 baseDamage[2] = 0;
                 baseDamage[3] = 0;
+            } else
+            if(defilerType == 7)
+            {
+                baseDamage[1] = powerConstant * 10;
+                baseDamage[2] = powerConstant * 10;
+                styleDamage[0] = 0;
+                styleDamage[1] = 0;
+                styleDamage[2] = 0;
+                styleDamage[3] = 0;
             }
         styleDamage[0] = styleDamage[0] * (int)(expMultiplier(hateExp) / 1000L);
         styleDamage[1] = styleDamage[1] * (int)(expMultiplier(pleaExp) / 1000L);
@@ -13060,9 +13158,16 @@ public class Forsaken
             styleDamage[0] = (styleDamage[0] * 3) / 2;
             styleDamage[2] = (styleDamage[2] * 3) / 2;
         }
+        if(defeatType == 7)
+        {
+            styleDamage[1] = (styleDamage[1] * 3) / 2;
+            styleDamage[2] = (styleDamage[2] * 3) / 2;
+        }
         for(int i = 0; i < 4; i++)
             baseDamage[i + 4] = styleDamage[i];
 
+        if(defiling.booleanValue() && defilerType == 7)
+            styleDamage[2] = 1;
         if(c.captureProgression == 0 && w.progressExtermination(0))
             c.defenseLevel += 9000;
         Boolean breakCapture = Boolean.valueOf(false);
@@ -13116,7 +13221,7 @@ public class Forsaken
         }
         if(!breakCapture.booleanValue())
         {
-            if(defiling.booleanValue())
+            if(defiling.booleanValue() && defilerType != 7)
                 defileChosenFlavor(t, w, c, styleDamage, bottomDesc, topDesc, organ, lowerOrgan);
             else
                 captureChosenFlavor(t, w, c, styleDamage, bottomDesc, topDesc, organ, lowerOrgan);
@@ -13146,6 +13251,9 @@ public class Forsaken
                 else
                 if(defilerType == 5)
                     w.append(t, "temptation)\n\n");
+                else
+                if(defilerType == 7)
+                    w.append(t, "trauma focus)\n\n");
             }
             if(c.bonusHATE.booleanValue() && c.getHATELevel() == 2)
             {
@@ -14222,7 +14330,7 @@ public class Forsaken
                             say(t, (new StringBuilder("I wonder if ")).append(theDemonLord()).append(" is actually going to go to the trouble of taking you.").toString());
                 say(t, "\"");
             } else
-            if(defiling.booleanValue())
+            if(defiling.booleanValue() && defilerType != 7)
                 defiledChosenLine(t, w, c, styleDamage);
             else
             if(c.captureProgression % 6 < 3)
@@ -30431,25 +30539,28 @@ public class Forsaken
     public int staminaRegen()
     {
         int value = 0;
-        if(obedience < 40)
-            value = 800 - obedience * 10;
+        int stat = obedience;
+        if(defeatType == 7 && hostility < obedience)
+            stat = hostility;
+        if(stat < 40)
+            value = 800 - stat * 10;
         else
-        if(obedience < 50)
-            value = 310 + (50 - obedience) * 9;
+        if(stat < 50)
+            value = 310 + (50 - stat) * 9;
         else
-        if(obedience < 60)
-            value = 230 + (60 - obedience) * 8;
+        if(stat < 60)
+            value = 230 + (60 - stat) * 8;
         else
-        if(obedience < 70)
-            value = 160 + (70 - obedience) * 7;
+        if(stat < 70)
+            value = 160 + (70 - stat) * 7;
         else
-        if(obedience < 80)
-            value = 100 + (80 - obedience) * 6;
+        if(stat < 80)
+            value = 100 + (80 - stat) * 6;
         else
-        if(obedience < 90)
-            value = 50 + (90 - obedience) * 5;
+        if(stat < 90)
+            value = 50 + (90 - stat) * 5;
         else
-            value = 10 + (100 - obedience) * 4;
+            value = 10 + (100 - stat) * 4;
         return value;
     }
 
