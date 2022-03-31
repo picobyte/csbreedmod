@@ -3,42 +3,34 @@ import javax.swing.JTextPane;
 
 public class Activity
 {
-    public static final class Location extends Enum
-    {
-
-        public static Location[] values()
-        {
-            Location alocation[];
-            int i;
-            Location alocation1[];
-            System.arraycopy(alocation = ENUM$VALUES, 0, alocation1 = new Location[i = alocation.length], 0, i);
-            return alocation1;
-        }
-
-        public static Location valueOf(String s)
-        {
-            return (Location)Enum.valueOf(Activity$Location, s);
-        }
-
-        public static final Location CHAMBER;
-        public static final Location STAGE;
-        private static final Location ENUM$VALUES[];
-
-        static 
-        {
-            CHAMBER = new Location("CHAMBER", 0);
-            STAGE = new Location("STAGE", 1);
-            ENUM$VALUES = (new Location[] {
-                CHAMBER, STAGE
-            });
-        }
-
-        private Location(String s, int i)
-        {
-            super(s, i);
-        }
+    public enum Location {
+        CHAMBER, STAGE
     }
 
+    public int sendReqs[];
+    public static int MOUTH = 0;
+    public static int HAND = 1;
+    public static int CLEAVAGE = 2;
+    public static int PENIS = 3;
+    public static int CLIT = 4;
+    public static int PUSSY = 5;
+    public static int BALLS = 6;
+    public static int ASS = 7;
+    public static int FOOT = 8;
+    public static int ARMPIT = 9;
+    public static int KNEEPIT = 10;
+    public static int HAIR = 11;
+    public static int HIPS = 12;
+    public static int BACK = 13;
+    public Boolean shares;
+    public Boolean nonBlocking;
+    public Boolean targeted;
+    public Activity counterpart;
+    public Activity enders[];
+    public Boolean endsSelf;
+    public Boolean pickable;
+    public Boolean hostile;
+    public Boolean causesOrgasm;
 
     public String activityName(Body partner)
     {
@@ -189,7 +181,7 @@ public class Activity
                 input[2] += 20L;
                 input[4] += 10L;
             }
-            if(subject.isVVirg().booleanValue())
+            if(subject.isVVirg())
             {
                 input[2] += 200L;
                 input[4] += 30L;
@@ -210,9 +202,9 @@ public class Activity
             input[2] += 8L;
             input[3] += 10L;
             input[4] += 10L;
-            if(subject.parts[PUSSY] == 0 && subject.isVVirg().booleanValue())
+            if(subject.parts[PUSSY] == 0 && subject.isVVirg())
                 input[4] += 30L;
-            if(!Project.BeLubricated.isInProgress(subject, null).booleanValue())
+            if(!Project.BeLubricated.isInProgress(subject, null))
             {
                 input[4] += 20L;
                 input[2] += 200L;
@@ -241,25 +233,25 @@ public class Activity
     public void activityTalk(JTextPane t, WorldState w, Body sender, Body receiver)
     {
         String shownNames[] = {
-            sender.ownerName(), 0, 0, 0, 0
+            sender.ownerName(), null, null, null, null
         };
-        if(Project.PenetratedVaginally.isInProgress(sender, receiver).booleanValue() && (sender.forsakenOwner != null && sender.forsakenOwner.timesHadSex == 0 || sender.chosenOwner != null && sender.chosenOwner.vVirg.booleanValue()))
+        if(Project.PenetratedVaginally.isInProgress(sender, receiver) && (sender.forsakenOwner != null && sender.forsakenOwner.timesHadSex == 0 || sender.chosenOwner != null && sender.chosenOwner.vVirg))
             sender.specialLine = 1;
-        if(Project.PenetratedAnally.isInProgress(sender, receiver).booleanValue())
+        if(Project.PenetratedAnally.isInProgress(sender, receiver))
         {
-            if(sender.forsakenOwner != null && sender.forsakenOwner.gender == Forsaken.Gender.MALE && sender.forsakenOwner.timesHadSex == 0 || sender.chosenOwner != null && sender.chosenOwner.gender.equals("male") && sender.chosenOwner.vVirg.booleanValue())
+            if(sender.forsakenOwner != null && sender.forsakenOwner.gender == Forsaken.Gender.MALE && sender.forsakenOwner.timesHadSex == 0 || sender.chosenOwner != null && sender.chosenOwner.gender.equals("male") && sender.chosenOwner.vVirg)
                 sender.specialLine = 1;
             else
-            if(!Project.BeLubricated.isInProgress(sender, null).booleanValue() && sender.forsakenOwner != null && sender.forsakenOwner.timesTortured == 0)
+            if(!Project.BeLubricated.isInProgress(sender, null) && sender.forsakenOwner != null && sender.forsakenOwner.timesTortured == 0)
                 sender.specialLine = 3;
             if(sender.forsakenOwner != null)
                 if(sender.forsakenOwner.gender == Forsaken.Gender.MALE)
                 {
                     sender.forsakenOwner.timesHadSex++;
-                    if(!Project.BeLubricated.isInProgress(sender, null).booleanValue())
+                    if(!Project.BeLubricated.isInProgress(sender, null))
                         sender.forsakenOwner.timesTortured++;
                 } else
-                if(Project.BeLubricated.isInProgress(sender, null).booleanValue())
+                if(Project.BeLubricated.isInProgress(sender, null))
                     sender.forsakenOwner.enjoyedAnal++;
                 else
                     sender.forsakenOwner.timesTortured++;
@@ -269,7 +261,7 @@ public class Activity
         {
             if(sender.getGender() == Forsaken.Gender.MALE)
             {
-                if(Project.BeLubricated.isInProgress(sender, null).booleanValue())
+                if(Project.BeLubricated.isInProgress(sender, null))
                 {
                     if(sender.getObedience() > 66)
                     {
@@ -1023,7 +1015,7 @@ public class Activity
         } else
         if(this == Project.VaginalPenetrate)
         {
-            if(Project.PushDown.isInProgress(sender, receiver).booleanValue())
+            if(Project.PushDown.isInProgress(sender, receiver))
             {
                 if(sender.getDeviancy() > 66)
                 {
@@ -1107,7 +1099,7 @@ public class Activity
         } else
         if(this == Project.PenetratedVaginally)
         {
-            if(Project.PushDown.isInProgress(sender, receiver).booleanValue())
+            if(Project.PushDown.isInProgress(sender, receiver))
             {
                 if(sender.getDeviancy() > 66)
                 {
@@ -1199,7 +1191,7 @@ public class Activity
         } else
         if(this == Project.AnalPenetrate)
         {
-            if(Project.PushDown.isInProgress(sender, receiver).booleanValue())
+            if(Project.PushDown.isInProgress(sender, receiver))
             {
                 if(sender.getDeviancy() > 66)
                 {
@@ -1282,7 +1274,7 @@ public class Activity
             }
         } else
         if(this == Project.PenetratedAnally)
-            if(Project.PushDown.isInProgress(sender, receiver).booleanValue())
+            if(Project.PushDown.isInProgress(sender, receiver))
             {
                 if(sender.getDeviancy() > 66)
                 {
@@ -1329,7 +1321,7 @@ public class Activity
                         sender.say(t, "Ow...");
                 }
             } else
-            if(Project.BeLubricated.isInProgress(sender, null).booleanValue())
+            if(Project.BeLubricated.isInProgress(sender, null))
             {
                 if(sender.getObedience() > 66)
                 {
@@ -2026,7 +2018,7 @@ public class Activity
         } else
         if(this == Project.VaginalPenetrate)
         {
-            if(Project.PushDown.isInProgress(sender, receiver).booleanValue())
+            if(Project.PushDown.isInProgress(sender, receiver))
             {
                 if(sender == w.lordBody)
                     w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" puts the tip of ").append(sender.hisHer()).append(" cock against ").append(receiver.ownerName()).append("'s pussy, then thrusts inside.").toString());
@@ -2092,7 +2084,7 @@ public class Activity
         } else
         if(this == Project.PenetratedVaginally)
         {
-            if(Project.PushDown.isInProgress(sender, receiver).booleanValue())
+            if(Project.PushDown.isInProgress(sender, receiver))
             {
                 if(sender == w.lordBody)
                     w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" mounts ").append(receiver.ownerName()).append(" and lowers ").append(sender.himHer()).append("self until ").append(sender.hisHer()).append(" pussy envelops ").append(receiver.ownerName()).append("'s cock.").toString());
@@ -2124,7 +2116,7 @@ public class Activity
                     w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" delays as long as possible before taking ").append(receiver.ownerName()).append("'s cock into ").append(sender.hisHer()).append(" pussy.  ").append(sender.HeShe()).append(" tries various angles, slides ").append(sender.himHer()).append("self against it several times, and only then does ").append(sender.heShe()).append(" finally lower ").append(sender.himHer()).append("self onto it.  When ").append(sender.heShe()).append(" does, ").append(sender.heShe()).append(" lets out a little moan, uncomfortable with just how intense the pleasure is.").toString());
                 else
                     w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" doesn't waste any time before slamming ").append(sender.hisHer()).append(" hips down onto ").append(receiver.ownerName()).append("'s cock.  However, ").append(sender.heShe()).append(" groans with discomfort at the sudden insertion, and ").append(sender.heShe()).append(" needs a few moments to recover before ").append(sender.heShe()).append(" can start moving.").toString());
-                if(sender.isVVirg().booleanValue())
+                if(sender.isVVirg())
                     if(sender.getObedience() > 66)
                         w.append(t, (new StringBuilder("  ")).append(sender.HeShe()).append(" embraces the pain of ").append(sender.hisHer()).append(" first vaginal penetration, ecstatic to have received it from ").append(receiver.ownerName()).append(".").toString());
                     else
@@ -2164,7 +2156,7 @@ public class Activity
                     w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" attempts to deny ").append(receiver.ownerName()).append(" the satisfaction of seeing ").append(sender.hisHer()).append(" reactions, but the longer the fucking continues, the more difficult it is.  Soon ").append(sender.heShe()).append("'s reduced to covering ").append(sender.hisHer()).append(" face and biting ").append(sender.hisHer()).append(" lip to stifle ").append(sender.hisHer()).append(" moans.").toString());
                 else
                     w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" glares up at ").append(receiver.ownerName()).append(", and ").append(sender.hisHer()).append(" comes through clearly even as ").append(sender.heShe()).append(" winces and groans at the stimulation to ").append(sender.hisHer()).append(" most sensitive inner places.").toString());
-                if(sender.isVVirg().booleanValue())
+                if(sender.isVVirg())
                     if(sender.getObedience() > 66)
                         w.append(t, (new StringBuilder("  ")).append(sender.HeShe()).append(" smiles broadly up at ").append(receiver.ownerName()).append(", tears of joy leaking from ").append(sender.hisHer()).append(" eyes at being able to give ").append(sender.hisHer()).append(" first time to the one ").append(sender.heShe()).append(" loves.").toString());
                     else
@@ -2176,7 +2168,7 @@ public class Activity
         } else
         if(this == Project.AnalPenetrate)
         {
-            if(Project.PushDown.isInProgress(sender, receiver).booleanValue())
+            if(Project.PushDown.isInProgress(sender, receiver))
             {
                 if(sender == w.lordBody)
                     w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" puts the tip of ").append(sender.hisHer()).append(" cock against ").append(receiver.ownerName()).append("'s anus, then thrusts inside.").toString());
@@ -2242,14 +2234,14 @@ public class Activity
         } else
         if(this == Project.PenetratedAnally)
         {
-            if(Project.PushDown.isInProgress(sender, receiver).booleanValue())
+            if(Project.PushDown.isInProgress(sender, receiver))
             {
                 if(sender == w.lordBody)
                 {
                     w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" mounts ").append(receiver.ownerName()).append(" and lowers ").append(sender.himHer()).append("self until ").append(sender.hisHer()).append(" anus envelops ").append(receiver.ownerName()).append("'s cock.").toString());
                 } else
                 {
-                    if(!Project.BeLubricated.isInProgress(sender, null).booleanValue())
+                    if(!Project.BeLubricated.isInProgress(sender, null))
                     {
                         if(sender.getInnocence() > 66)
                             w.append(t, (new StringBuilder("Full of eager lust, ")).append(sender.ownerName()).append(" almost forgets to lubricate ").append(sender.himHer()).append("self back there before continuing.").toString());
@@ -2289,7 +2281,7 @@ public class Activity
                     else
                         w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" doesn't waste any time before slamming ").append(sender.hisHer()).append(" ass down onto ").append(receiver.ownerName()).append("'s cock.  However, ").append(sender.heShe()).append(" groans with discomfort at the sudden insertion, and ").append(sender.heShe()).append(" needs a few moments to recover before ").append(sender.heShe()).append(" can start moving.").toString());
                 }
-                if(sender.isVVirg().booleanValue())
+                if(sender.isVVirg())
                     if(sender.getObedience() > 66)
                         w.append(t, (new StringBuilder("  ")).append(sender.HeShe()).append(" embraces the pain of ").append(sender.hisHer()).append(" first vaginal penetration, ecstatic to have received it from ").append(receiver.ownerName()).append(".").toString());
                     else
@@ -2298,7 +2290,7 @@ public class Activity
                     else
                         w.append(t, (new StringBuilder("  ")).append(sender.HeShe()).append(" lifts ").append(sender.himHer()).append("self up enough to look down and see the blood on ").append(receiver.ownerName()).append("'s cock, then grits ").append(sender.hisHer()).append(" teeth.").toString());
             } else
-            if(Project.BeLubricated.isInProgress(sender, null).booleanValue() || sender == w.lordBody)
+            if(Project.BeLubricated.isInProgress(sender, null) || sender == w.lordBody)
             {
                 if(sender == w.lordBody)
                     w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append("'s asshole tightens around ").append(receiver.ownerName()).append("'s cock as though trying to milk it dry.").toString());
@@ -2330,7 +2322,7 @@ public class Activity
                     w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" attempts to deny ").append(receiver.ownerName()).append(" the satisfaction of seeing ").append(sender.hisHer()).append(" reactions, but the longer the fucking continues, the more difficult it is.  Soon ").append(sender.heShe()).append("'s reduced to covering ").append(sender.hisHer()).append(" face and biting ").append(sender.hisHer()).append(" lip to stifle ").append(sender.hisHer()).append(" moans.").toString());
                 else
                     w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" glares up at ").append(receiver.ownerName()).append(", and ").append(sender.hisHer()).append(" comes through clearly even as ").append(sender.heShe()).append(" winces and groans at the stimulation through ").append(sender.hisHer()).append(" anal walls.").toString());
-                if(sender.getGender() == Forsaken.Gender.MALE && sender.isVVirg().booleanValue())
+                if(sender.getGender() == Forsaken.Gender.MALE && sender.isVVirg())
                     if(sender.getObedience() > 66)
                         w.append(t, (new StringBuilder("  ")).append(sender.HeShe()).append(" smiles broadly up at ").append(receiver.ownerName()).append(", tears of joy leaking from ").append(sender.hisHer()).append(" eyes at receiving ").append(sender.hisHer()).append(" first anal penetration from the one ").append(sender.heShe()).append(" loves.").toString());
                     else
@@ -2367,7 +2359,7 @@ public class Activity
                     w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" whimpers, trying to curl up and protect ").append(sender.himHer()).append("self, but ").append(sender.heShe()).append(" can't hide from the painful friction of the shaft invading ").append(sender.hisHer()).append(" unprepared hole.  ").append(sender.HisHer()).append(" moans aren't entirely from pain, as ").append(sender.heShe()).append(" feels a hint of shameful pleasure as well.").toString());
                 else
                     w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" screams, crying and sobbing at the explosion of agony ").append(sender.heShe()).append(" feels from the unlubricated insertion.  The pain far outweighs the pleasure.").toString());
-                if(sender.getGender() == Forsaken.Gender.MALE && sender.isVVirg().booleanValue())
+                if(sender.getGender() == Forsaken.Gender.MALE && sender.isVVirg())
                     if(sender.getObedience() > 66)
                         w.append(t, (new StringBuilder("  Afterward, ")).append(sender.heShe()).append("'ll be full of joyful pride that ").append(receiver.ownerName()).append(" saw fit to break ").append(sender.himHer()).append(" in with such a memorable fucking, but for now, ").append(sender.heShe()).append("'s in too much pain to think about it in those terms.").toString());
                     else
@@ -2461,11 +2453,11 @@ public class Activity
                 if(receiver.inProgress[i] == counterpart && receiver.targets[i] == sender)
                     found = Boolean.valueOf(true);
 
-            if(!found.booleanValue())
+            if(!found)
             {
                 w.append(t, "\n\n");
                 Body actualTarget = sender;
-                if(!counterpart.targeted.booleanValue())
+                if(!counterpart.targeted)
                     actualTarget = null;
                 counterpart.startActivity(t, w, receiver, actualTarget);
             }
@@ -2564,7 +2556,7 @@ public class Activity
             result += (sender.getDeviancy() - 40) / 2;
             result += (sender.getObedience() - 30) / 2;
             result += (sender.getConfidence() - 50) / 3;
-            if(sender.isVVirg().booleanValue())
+            if(sender.isVVirg())
                 result -= 30;
         } else
         if(this != Project.Escape)
@@ -2601,7 +2593,7 @@ public class Activity
             } else
             if(this == Project.PenetratedVaginally)
             {
-                if(Project.PullDown.isInProgress(sender, receiver).booleanValue())
+                if(Project.PullDown.isInProgress(sender, receiver))
                     result += sender.getFEARLevel() * 20;
                 result -= sender.getDISGLevel() * 20;
                 result -= sender.getHATELevel() * 20;
@@ -2609,7 +2601,7 @@ public class Activity
                 result += (sender.getDeviancy() - 50) / 2;
                 result += (sender.getObedience() - 70) / 2;
                 result -= (sender.getMorality() - 50) / 3;
-                if(sender.isVVirg().booleanValue())
+                if(sender.isVVirg())
                     result += sender.getObedience() - 60;
             } else
             if(this == Project.AnalPenetrate)
@@ -2624,16 +2616,16 @@ public class Activity
             } else
             if(this == Project.PenetratedAnally)
             {
-                if(Project.PullDown.isInProgress(sender, receiver).booleanValue())
+                if(Project.PullDown.isInProgress(sender, receiver))
                     result += sender.getFEARLevel() * 20;
-                if(!Project.BeLubricated.isInProgress(sender, null).booleanValue() && !Project.PushDown.isInProgress(sender, receiver).booleanValue())
+                if(!Project.BeLubricated.isInProgress(sender, null) && !Project.PushDown.isInProgress(sender, receiver))
                     result -= 30;
                 result -= sender.getDISGLevel() * 30;
                 result -= sender.getHATELevel() * 20;
                 result += sender.getPLEALevel() * 20;
                 result += (sender.getDeviancy() - 50) / 2;
                 result += (sender.getObedience() - 70) / 2;
-                if(sender.parts[PUSSY] == 0 && sender.isVVirg().booleanValue())
+                if(sender.parts[PUSSY] == 0 && sender.isVVirg())
                 {
                     result += sender.getObedience() - 60;
                     result -= (sender.getMorality() - 50) / 3;
@@ -2646,7 +2638,7 @@ public class Activity
                 if(w.sceneLocation == Location.STAGE)
                 {
                     result -= sender.getSHAMLevel() * 10;
-                    if(sender.forsakenOwner != null && sender.forsakenOwner.timesExposed < 0x493e0 || sender.chosenOwner != null && sender.chosenOwner.modest.booleanValue())
+                    if(sender.forsakenOwner != null && sender.forsakenOwner.timesExposed < 0x493e0 || sender.chosenOwner != null && sender.chosenOwner.modest)
                         result -= 30;
                 }
                 result -= sender.getHATELevel() * 10;
@@ -2657,12 +2649,12 @@ public class Activity
                 result += (sender.getConfidence() - 60) / 2;
                 result -= (sender.getDignity() - 30) / 2;
             }
-        if(isInProgress(sender, receiver).booleanValue())
+        if(isInProgress(sender, receiver))
         {
             result += sender.getFEARLevel() * 15;
             result += sender.getObedience() / 2;
         }
-        if(hostile.booleanValue())
+        if(hostile)
         {
             result -= sender.obedienceMod(w, receiver);
             result -= sender.friendsMod(w, receiver);
@@ -2693,13 +2685,13 @@ public class Activity
 
     public Boolean valid(Body sender, Body receiver)
     {
-        if(this == Project.Lubricate && !Project.PushDown.isInProgress(sender, receiver).booleanValue())
+        if(this == Project.Lubricate && !Project.PushDown.isInProgress(sender, receiver))
             return Boolean.valueOf(false);
         if(this == Project.VaginalPenetrate || this == Project.PenetratedVaginally || this == Project.AnalPenetrate || this == Project.PenetratedAnally)
         {
-            if(!Project.PushDown.isInProgress(sender, receiver).booleanValue())
+            if(!Project.PushDown.isInProgress(sender, receiver))
                 return Boolean.valueOf(false);
-            if(Project.VaginalPenetrate.isInProgress(receiver, sender).booleanValue() || Project.PenetratedVaginally.isInProgress(receiver, sender).booleanValue() || Project.AnalPenetrate.isInProgress(receiver, sender).booleanValue() || Project.PenetratedAnally.isInProgress(receiver, sender).booleanValue())
+            if(Project.VaginalPenetrate.isInProgress(receiver, sender) || Project.PenetratedVaginally.isInProgress(receiver, sender) || Project.AnalPenetrate.isInProgress(receiver, sender) || Project.PenetratedAnally.isInProgress(receiver, sender))
                 return Boolean.valueOf(false);
         }
         for(int i = 0; i < sender.inProgress.length; i++)
@@ -2719,7 +2711,7 @@ public class Activity
                     return Boolean.valueOf(false);
                 int remaining = sender.parts[i];
                 for(int j = 0; j < sender.inProgress.length; j++)
-                    if(sender.inProgress[j].sendReqs[i] > 0 && !sender.inProgress[j].nonBlocking.booleanValue() && (!shares.booleanValue() || sender.inProgress[j] != this))
+                    if(sender.inProgress[j].sendReqs[i] > 0 && !sender.inProgress[j].nonBlocking && (!shares || sender.inProgress[j] != this))
                         remaining -= sender.inProgress[j].sendReqs[i];
 
                 if(remaining < sendReqs[i])
@@ -2735,7 +2727,7 @@ public class Activity
                         return Boolean.valueOf(false);
                     int remaining = receiver.parts[i];
                     for(int j = 0; j < receiver.inProgress.length; j++)
-                        if(receiver.inProgress[j].sendReqs[i] > 0 && !receiver.inProgress[j].nonBlocking.booleanValue() && (!counterpart.shares.booleanValue() || receiver.inProgress[j] != counterpart))
+                        if(receiver.inProgress[j].sendReqs[i] > 0 && !receiver.inProgress[j].nonBlocking && (!counterpart.shares || receiver.inProgress[j] != counterpart))
                             remaining -= receiver.inProgress[j].sendReqs[i];
 
                     if(remaining < counterpart.sendReqs[i])
@@ -2743,9 +2735,9 @@ public class Activity
                 }
 
             Body actualTarget = sender;
-            if(!counterpart.targeted.booleanValue())
+            if(!counterpart.targeted)
                 actualTarget = null;
-            if(counterpart.isInProgress(receiver, actualTarget).booleanValue())
+            if(counterpart.isInProgress(receiver, actualTarget))
                 return Boolean.valueOf(false);
         }
         return Boolean.valueOf(true);
@@ -2763,30 +2755,4 @@ public class Activity
         hostile = Boolean.valueOf(false);
         causesOrgasm = Boolean.valueOf(false);
     }
-
-    public int sendReqs[];
-    public static int MOUTH = 0;
-    public static int HAND = 1;
-    public static int CLEAVAGE = 2;
-    public static int PENIS = 3;
-    public static int CLIT = 4;
-    public static int PUSSY = 5;
-    public static int BALLS = 6;
-    public static int ASS = 7;
-    public static int FOOT = 8;
-    public static int ARMPIT = 9;
-    public static int KNEEPIT = 10;
-    public static int HAIR = 11;
-    public static int HIPS = 12;
-    public static int BACK = 13;
-    public Boolean shares;
-    public Boolean nonBlocking;
-    public Boolean targeted;
-    public Activity counterpart;
-    public Activity enders[];
-    public Boolean endsSelf;
-    public Boolean pickable;
-    public Boolean hostile;
-    public Boolean causesOrgasm;
-
 }

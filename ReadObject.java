@@ -1,339 +1,175 @@
-
 import java.io.*;
-import java.net.URL;
 import java.net.URLDecoder;
-import java.security.CodeSource;
-import java.security.ProtectionDomain;
 
-public class ReadObject
+public class ReadObject {
+	
+public WorldState[] importFiles() {
+	WorldState[] worlds = {};
+	
+	FileInputStream fin = null;
+	ObjectInputStream ois = null;
+	
+	String path = Project.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+	String fileName = "";
+	for (int i = path.length()-1; i >= 0; i--) {
+		if (path.charAt(i) != '/') {
+			fileName = path.charAt(i) + fileName;
+		} else {
+			i = -1;
+		}
+	}
+	path = path.substring(0, path.length() - fileName.length() - 1);
+	try {
+		path = URLDecoder.decode(path,"UTF-8");
+	} catch (Exception ex) {
+		ex.printStackTrace();
+	}
+	path = path.replaceAll("file:/", "");
+	path = path.replaceAll(java.io.File.separator + "u0020", java.io.File.separator + " ");
+	
+	File f = new File(path);
+	File[] matchingFiles = f.listFiles(new FilenameFilter() {
+		public boolean accept(File dir, String name) {
+			return name.endsWith("par");
+		}
+	});
+	
+	try {
+		WorldState[] newWorlds = new WorldState[matchingFiles.length];
+		for (int i = 0; i < matchingFiles.length; i++) {
+			fin = new FileInputStream(matchingFiles[i]);
+			ois = new ObjectInputStream(fin);
+			newWorlds[i] = (WorldState) ois.readObject();
+		}
+		worlds = newWorlds;
+
+	} catch (Exception ex) {
+		ex.printStackTrace();
+	} finally {
+
+		if (fin != null) {
+			try {
+				fin.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+		if (ois != null) {
+			try {
+				ois.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+	
+	return worlds;
+}
+public Chosen[][] importRoster()
 {
+	Chosen additions[][] = {};
 
-    public ReadObject()
-    {
-    }
+	FileInputStream fin = null;
+	ObjectInputStream ois = null;
+ 
+	String path = Project.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+	String fileName = "";
+	for(int i = path.length() - 1; i >= 0; i--) {
+		if(path.charAt(i) != '/') {
+			fileName = (new StringBuilder(String.valueOf(path.charAt(i)))).append(fileName).toString();
+		} else {
+			i = -1;
+		}
+	}
 
-    public WorldState[] importFiles()
-    {
-        WorldState worlds[];
-        FileInputStream fin;
-        ObjectInputStream ois;
-        File matchingFiles[];
-        worlds = new WorldState[0];
-        fin = null;
-        ois = null;
-        String path = Project.getProtectionDomain().getCodeSource().getLocation().getPath();
-        String fileName = "";
-        for(int i = path.length() - 1; i >= 0; i--)
-            if(path.charAt(i) != '/')
-                fileName = (new StringBuilder(String.valueOf(path.charAt(i)))).append(fileName).toString();
-            else
-                i = -1;
+	path = path.substring(0, path.length() - fileName.length() - 1);
+	try {
+		path = URLDecoder.decode(path, "UTF-8");
+	} catch(Exception ex) {
+		ex.printStackTrace();
+	}
+	path = path.replaceAll("file:/", "");
+	path = path.replaceAll(java.io.File.separator + "u0020", java.io.File.separator + " ");
+	File f = new File(path);
+	File[] matchingFiles = f.listFiles(new FilenameFilter() {
 
-        path = path.substring(0, path.length() - fileName.length() - 1);
-        try
-        {
-            path = URLDecoder.decode(path, "UTF-8");
-        }
-        catch(Exception ex)
-        {
-            ex.printStackTrace();
-        }
-        path = path.replaceAll("file:/", "");
-        path = path.replaceAll((new StringBuilder(String.valueOf(File.separator))).append("u0020").toString(), (new StringBuilder(String.valueOf(File.separator))).append(" ").toString());
-        File f = new File(path);
-        matchingFiles = f.listFiles(new FilenameFilter() {
+		public boolean accept(File dir, String name) {
+			return name.endsWith("ros");
+		}
+	});
+ 
+	try {
+		Chosen newAdditions[][] = new Chosen[matchingFiles.length][0];
+		for(int i = 0; i < matchingFiles.length; i++) {
+			fin = new FileInputStream(matchingFiles[i]);
+ 			ois = new ObjectInputStream(fin);
+			newAdditions[i] = (Chosen[])ois.readObject();
+		}
+		additions = newAdditions;
 
-            public boolean accept(File dir, String name)
-            {
-                return name.endsWith("par");
-            }
+	} catch(Exception ex) {
+		ex.printStackTrace();
+	} finally {
+		if(fin != null) {
+			try {
+				fin.close();
+			} catch(IOException e) {
+				e.printStackTrace();
+ 			}
+		}
+ 
+		if(ois != null) {
+			try {
+				ois.close();
+			} catch(IOException e) {
+				e.printStackTrace();
+ 			}
+		}
+	}
+	return additions;
+}
 
-            final ReadObject this$0;
+public SaveData deserializeSaveData(String filename) {
+		
+		SaveData s = null;
+		
+		FileInputStream fin = null;
+		ObjectInputStream ois = null;
 
-            
-            {
-                this$0 = ReadObject.this;
-                super();
-            }
-        });
-        try
-        {
-            WorldState newWorlds[] = new WorldState[matchingFiles.length];
-            for(int i = 0; i < matchingFiles.length; i++)
-            {
-                fin = new FileInputStream(matchingFiles[i]);
-                ois = new ObjectInputStream(fin);
-                newWorlds[i] = (WorldState)ois.readObject();
-            }
+		try {
 
-            worlds = newWorlds;
-            break MISSING_BLOCK_LABEL_372;
-        }
-        catch(Exception ex)
-        {
-            ex.printStackTrace();
-        }
-        if(fin != null)
-            try
-            {
-                fin.close();
-            }
-            catch(IOException e)
-            {
-                e.printStackTrace();
-            }
-        if(ois != null)
-            try
-            {
-                ois.close();
-            }
-            catch(IOException e)
-            {
-                e.printStackTrace();
-            }
-        break MISSING_BLOCK_LABEL_408;
-        Exception exception;
-        exception;
-        if(fin != null)
-            try
-            {
-                fin.close();
-            }
-            catch(IOException e)
-            {
-                e.printStackTrace();
-            }
-        if(ois != null)
-            try
-            {
-                ois.close();
-            }
-            catch(IOException e)
-            {
-                e.printStackTrace();
-            }
-        throw exception;
-        if(fin != null)
-            try
-            {
-                fin.close();
-            }
-            catch(IOException e)
-            {
-                e.printStackTrace();
-            }
-        if(ois != null)
-            try
-            {
-                ois.close();
-            }
-            catch(IOException e)
-            {
-                e.printStackTrace();
-            }
-        return worlds;
-    }
+			fin = new FileInputStream(filename);
+			ois = new ObjectInputStream(fin);
+			s = (SaveData) ois.readObject();
 
-    public Chosen[][] importRoster()
-    {
-        Chosen additions[][];
-        FileInputStream fin;
-        ObjectInputStream ois;
-        File matchingFiles[];
-        additions = new Chosen[0][0];
-        fin = null;
-        ois = null;
-        String path = Project.getProtectionDomain().getCodeSource().getLocation().getPath();
-        String fileName = "";
-        for(int i = path.length() - 1; i >= 0; i--)
-            if(path.charAt(i) != '/')
-                fileName = (new StringBuilder(String.valueOf(path.charAt(i)))).append(fileName).toString();
-            else
-                i = -1;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
 
-        path = path.substring(0, path.length() - fileName.length() - 1);
-        try
-        {
-            path = URLDecoder.decode(path, "UTF-8");
-        }
-        catch(Exception ex)
-        {
-            ex.printStackTrace();
-        }
-        path = path.replaceAll("file:/", "");
-        path = path.replaceAll((new StringBuilder(String.valueOf(File.separator))).append("u0020").toString(), (new StringBuilder(String.valueOf(File.separator))).append(" ").toString());
-        File f = new File(path);
-        matchingFiles = f.listFiles(new FilenameFilter() {
+			if (fin != null) {
+				try {
+					fin.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
 
-            public boolean accept(File dir, String name)
-            {
-                return name.endsWith("ros");
-            }
+			if (ois != null) {
+				try {
+					ois.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
 
-            final ReadObject this$0;
+		}
+		
+		s.organizeScenes(Project.scenesThisVersion);
+		
+		return s;
+		
+	}
 
-            
-            {
-                this$0 = ReadObject.this;
-                super();
-            }
-        });
-        try
-        {
-            Chosen newAdditions[][] = new Chosen[matchingFiles.length][0];
-            for(int i = 0; i < matchingFiles.length; i++)
-            {
-                fin = new FileInputStream(matchingFiles[i]);
-                ois = new ObjectInputStream(fin);
-                newAdditions[i] = (Chosen[])ois.readObject();
-            }
-
-            additions = newAdditions;
-            break MISSING_BLOCK_LABEL_376;
-        }
-        catch(Exception ex)
-        {
-            ex.printStackTrace();
-        }
-        if(fin != null)
-            try
-            {
-                fin.close();
-            }
-            catch(IOException e)
-            {
-                e.printStackTrace();
-            }
-        if(ois != null)
-            try
-            {
-                ois.close();
-            }
-            catch(IOException e)
-            {
-                e.printStackTrace();
-            }
-        break MISSING_BLOCK_LABEL_412;
-        Exception exception;
-        exception;
-        if(fin != null)
-            try
-            {
-                fin.close();
-            }
-            catch(IOException e)
-            {
-                e.printStackTrace();
-            }
-        if(ois != null)
-            try
-            {
-                ois.close();
-            }
-            catch(IOException e)
-            {
-                e.printStackTrace();
-            }
-        throw exception;
-        if(fin != null)
-            try
-            {
-                fin.close();
-            }
-            catch(IOException e)
-            {
-                e.printStackTrace();
-            }
-        if(ois != null)
-            try
-            {
-                ois.close();
-            }
-            catch(IOException e)
-            {
-                e.printStackTrace();
-            }
-        return additions;
-    }
-
-    public SaveData deserializeSaveData(String filename)
-    {
-        SaveData s;
-        FileInputStream fin;
-        ObjectInputStream ois;
-        s = null;
-        fin = null;
-        ois = null;
-        try
-        {
-            fin = new FileInputStream(filename);
-            ois = new ObjectInputStream(fin);
-            s = (SaveData)ois.readObject();
-            break MISSING_BLOCK_LABEL_129;
-        }
-        catch(Exception ex)
-        {
-            ex.printStackTrace();
-        }
-        if(fin != null)
-            try
-            {
-                fin.close();
-            }
-            catch(IOException e)
-            {
-                e.printStackTrace();
-            }
-        if(ois != null)
-            try
-            {
-                ois.close();
-            }
-            catch(IOException e)
-            {
-                e.printStackTrace();
-            }
-        break MISSING_BLOCK_LABEL_167;
-        Exception exception;
-        exception;
-        if(fin != null)
-            try
-            {
-                fin.close();
-            }
-            catch(IOException e)
-            {
-                e.printStackTrace();
-            }
-        if(ois != null)
-            try
-            {
-                ois.close();
-            }
-            catch(IOException e)
-            {
-                e.printStackTrace();
-            }
-        throw exception;
-        if(fin != null)
-            try
-            {
-                fin.close();
-            }
-            catch(IOException e)
-            {
-                e.printStackTrace();
-            }
-        if(ois != null)
-            try
-            {
-                ois.close();
-            }
-            catch(IOException e)
-            {
-                e.printStackTrace();
-            }
-        s.organizeScenes(49);
-        return s;
-    }
 }

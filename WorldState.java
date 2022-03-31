@@ -22,7 +22,7 @@ public class WorldState
     {
         Chosen.Species type = c.type;
         Boolean paren = Boolean.valueOf(false);
-        if(w.getBodyStatus()[12].booleanValue() && thisAttack != 0 || w.getBodyStatus()[21].booleanValue() && (c.getDrainEffectiveness() >= c.drainReq() && !c.drained.booleanValue() || c.drained.booleanValue() && thisAttack != 0))
+        if(w.getBodyStatus()[12] && thisAttack != 0 || w.getBodyStatus()[21] && (c.getDrainEffectiveness() >= c.drainReq() && !c.drained || c.drained && thisAttack != 0))
         {
             c.say(t, "(");
             paren = Boolean.valueOf(true);
@@ -31,67 +31,67 @@ public class WorldState
             c.say(t, "\"");
         }
         int greatest = 0;
-        if(w.getBodyStatus()[10].booleanValue())
+        if(w.getBodyStatus()[10])
         {
-            if(w.getBodyStatus()[3].booleanValue() || w.getBodyStatus()[11].booleanValue())
+            if(w.getBodyStatus()[3] || w.getBodyStatus()[11])
             {
-                if(w.getBodyStatus()[4].booleanValue())
+                if(w.getBodyStatus()[4])
                 {
                     if(c.morality < c.innocence)
                         greatest = 0;
                     else
                         greatest = 1;
                 } else
-                if(w.getBodyStatus()[5].booleanValue())
+                if(w.getBodyStatus()[5])
                 {
                     if(c.morality < c.confidence)
                         greatest = 0;
                     else
                         greatest = 2;
                 } else
-                if(w.getBodyStatus()[6].booleanValue())
+                if(w.getBodyStatus()[6])
                     if(c.morality < c.dignity)
                         greatest = 0;
                     else
                         greatest = 3;
             } else
-            if(w.getBodyStatus()[4].booleanValue())
+            if(w.getBodyStatus()[4])
             {
-                if(w.getBodyStatus()[5].booleanValue())
+                if(w.getBodyStatus()[5])
                 {
                     if(c.innocence < c.confidence)
                         greatest = 1;
                     else
                         greatest = 2;
                 } else
-                if(w.getBodyStatus()[6].booleanValue())
+                if(w.getBodyStatus()[6])
                     if(c.innocence < c.dignity)
                         greatest = 1;
                     else
                         greatest = 3;
             } else
-            if(w.getBodyStatus()[5].booleanValue() && w.getBodyStatus()[6].booleanValue())
+            if(w.getBodyStatus()[5] && w.getBodyStatus()[6])
                 if(c.confidence < c.dignity)
                     greatest = 2;
                 else
                     greatest = 3;
         } else
-        if(w.getBodyStatus()[3].booleanValue())
+        if(w.getBodyStatus()[3])
             greatest = 0;
         else
-        if(w.getBodyStatus()[4].booleanValue())
+        if(w.getBodyStatus()[4])
             greatest = 1;
         else
-        if(w.getBodyStatus()[5].booleanValue())
+        if(w.getBodyStatus()[5])
             greatest = 2;
         else
-        if(w.getBodyStatus()[6].booleanValue())
+        if(w.getBodyStatus()[6])
             greatest = 3;
-        if(w.getBodyStatus()[19].booleanValue() && (!w.getBodyStatus()[26].booleanValue() || c.getImpregnationEffectiveness() >= c.impregnationReq() && !c.impregnated.booleanValue()))
+        if(w.getBodyStatus()[19] && (!w.getBodyStatus()[26] || c.getImpregnationEffectiveness() >= c.impregnationReq() && !c.impregnated))
         {
             if(c.getImpregnationEffectiveness() >= c.impregnationReq())
             {
-                if(!c.impregnated.booleanValue())
+                if(!c.impregnated)
                 {
                     c.impregnated = Boolean.valueOf(true);
                     Project.changePortrait(c.convertGender(), type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.FEAR);
@@ -285,11 +285,11 @@ public class WorldState
                     c.say(t, "You'll pay for this...!");
                 }
         } else
-        if(w.getBodyStatus()[20].booleanValue() && (!w.getBodyStatus()[26].booleanValue() || c.getHypnosisEffectiveness() >= c.hypnosisReq() && !c.hypnotized.booleanValue()))
+        if(w.getBodyStatus()[20] && (!w.getBodyStatus()[26] || c.getHypnosisEffectiveness() >= c.hypnosisReq() && !c.hypnotized))
         {
             if(c.getHypnosisEffectiveness() >= c.hypnosisReq())
             {
-                if(!c.hypnotized.booleanValue())
+                if(!c.hypnotized)
                 {
                     c.hypnotized = Boolean.valueOf(true);
                     Project.changePortrait(c.convertGender(), type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.LEWD);
@@ -460,11 +460,11 @@ public class WorldState
                     c.say(t, "I don't like this...");
                 }
         } else
-        if(w.getBodyStatus()[21].booleanValue())
+        if(w.getBodyStatus()[21])
         {
             if(c.getDrainEffectiveness() >= c.drainReq())
             {
-                if(!c.drained.booleanValue())
+                if(!c.drained)
                 {
                     c.drained = Boolean.valueOf(true);
                     Project.changePortrait(c.convertGender(), type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.SHAME);
@@ -636,11 +636,11 @@ public class WorldState
                     c.say(t, "L-Let go of me!");
                 }
         } else
-        if(w.getBodyStatus()[22].booleanValue())
+        if(w.getBodyStatus()[22])
         {
             if(c.getParasitismEffectiveness() >= c.parasitismReq())
             {
-                if(!c.parasitized.booleanValue())
+                if(!c.parasitized)
                 {
                     c.parasitized = Boolean.valueOf(true);
                     if(c.dignity > 66)
@@ -844,13 +844,13 @@ public class WorldState
                     c.say(t, "An attack on the public's perceptions.  Ngh... Devious.");
                 }
         } else
-        if(w.getBodyStatus()[11].booleanValue())
+        if(w.getBodyStatus()[11])
         {
-            if(c.vVirg.booleanValue())
+            if(c.vVirg)
             {
                 if(c.getHATELevel() < 3)
                 {
-                    if(c.getPLEALevel() < 3 || c.cVirg.booleanValue())
+                    if(c.getPLEALevel() < 3 || c.cVirg)
                     {
                         if(c.innocence > 66)
                         {
@@ -1204,7 +1204,7 @@ public class WorldState
             } else
             if(c.getHATELevel() < 3)
             {
-                if(c.getPLEALevel() < 3 || c.cVirg.booleanValue())
+                if(c.getPLEALevel() < 3 || c.cVirg)
                 {
                     if(c.innocence > 66)
                     {
@@ -1486,7 +1486,7 @@ public class WorldState
                         c.say(t, "This is my fault...");
                     }
             } else
-            if(c.getPLEALevel() < 3 || c.cVirg.booleanValue())
+            if(c.getPLEALevel() < 3 || c.cVirg)
             {
                 if(c.innocence > 66)
                 {
@@ -1765,13 +1765,13 @@ public class WorldState
                     c.say(t, "Nn...  I'm... enjoying this...");
                 }
         } else
-        if(w.getBodyStatus()[12].booleanValue())
+        if(w.getBodyStatus()[12])
         {
-            if(c.cVirg.booleanValue())
+            if(c.cVirg)
             {
                 if(c.getPLEALevel() < 3)
                 {
-                    if(c.getINJULevel() < 3 || c.aVirg.booleanValue())
+                    if(c.getINJULevel() < 3 || c.aVirg)
                     {
                         if(c.confidence > 66)
                         {
@@ -1817,7 +1817,7 @@ public class WorldState
                                 } else
                                 if(c.dignity > 33)
                                 {
-                                    if(w.tickle().booleanValue())
+                                    if(w.tickle())
                                     {
                                         Project.changePortrait(c.convertGender(), type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.LEWD);
                                         c.say(t, "Don't stop there...!");
@@ -1924,7 +1924,7 @@ public class WorldState
                                 c.say(t, "What's... happening...?");
                             }
                     } else
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                     {
                         if(c.confidence > 66)
                         {
@@ -2224,7 +2224,7 @@ public class WorldState
             } else
             if(c.getPLEALevel() < 3)
             {
-                if(c.getINJULevel() < 3 || c.aVirg.booleanValue())
+                if(c.getINJULevel() < 3 || c.aVirg)
                 {
                     if(c.confidence > 66)
                     {
@@ -2270,7 +2270,7 @@ public class WorldState
                             } else
                             if(c.dignity > 33)
                             {
-                                if(w.tickle().booleanValue())
+                                if(w.tickle())
                                 {
                                     Project.changePortrait(c.convertGender(), type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.LEWD);
                                     c.say(t, "Don't stop there...!");
@@ -2377,7 +2377,7 @@ public class WorldState
                             c.say(t, "What's... happening...?");
                         }
                 } else
-                if(w.tickle().booleanValue())
+                if(w.tickle())
                 {
                     if(c.confidence > 66)
                     {
@@ -2643,7 +2643,7 @@ public class WorldState
                         c.say(t, "Why are they doing this to me...?");
                     }
             } else
-            if(c.getINJULevel() < 3 || c.aVirg.booleanValue())
+            if(c.getINJULevel() < 3 || c.aVirg)
             {
                 if(c.confidence > 66)
                 {
@@ -2763,7 +2763,7 @@ public class WorldState
                         c.say(t, "I'm so pathetic...");
                 }
             } else
-            if(w.tickle().booleanValue())
+            if(w.tickle())
             {
                 if(c.confidence > 66)
                 {
@@ -3109,13 +3109,13 @@ public class WorldState
                         c.say(t, "Please, punish me more!");
                 }
         } else
-        if(w.getBodyStatus()[13].booleanValue())
+        if(w.getBodyStatus()[13])
         {
-            if(w.tickle().booleanValue())
+            if(w.tickle())
             {
                 if(c.getINJULevel() < 3)
                 {
-                    if(c.getEXPOLevel() < 3 || c.modest.booleanValue())
+                    if(c.getEXPOLevel() < 3 || c.modest)
                     {
                         if(c.dignity > 66)
                         {
@@ -3373,7 +3373,7 @@ public class WorldState
                             c.say(t, "Ergh...  Screw this!");
                         }
                 } else
-                if(c.aVirg.booleanValue())
+                if(c.aVirg)
                 {
                     c.aVirg = Boolean.valueOf(false);
                     Project.changePortrait(c.convertGender(), type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.LEWD);
@@ -3405,7 +3405,7 @@ public class WorldState
                     else
                         c.say(t, "Ah, pleeease!  I'm gonna- Pfftahahahah, aaah!");
                 } else
-                if(c.getEXPOLevel() < 3 || c.modest.booleanValue())
+                if(c.getEXPOLevel() < 3 || c.modest)
                 {
                     if(c.dignity > 66)
                     {
@@ -3643,11 +3643,11 @@ public class WorldState
                         c.say(t, "Gahahahah, aghahahah, hahahahah!");
                 }
             } else
-            if(c.aVirg.booleanValue())
+            if(c.aVirg)
             {
                 if(c.getINJULevel() < 3)
                 {
-                    if(c.getEXPOLevel() < 3 || c.modest.booleanValue())
+                    if(c.getEXPOLevel() < 3 || c.modest)
                     {
                         if(c.dignity > 66)
                         {
@@ -3951,7 +3951,7 @@ public class WorldState
             } else
             if(c.getINJULevel() < 3)
             {
-                if(c.getEXPOLevel() < 3 || c.modest.booleanValue())
+                if(c.getEXPOLevel() < 3 || c.modest)
                 {
                     if(c.dignity > 66)
                     {
@@ -4215,7 +4215,7 @@ public class WorldState
                         c.say(t, "Ergh...  Screw this!");
                     }
             } else
-            if(c.getEXPOLevel() < 3 || c.modest.booleanValue())
+            if(c.getEXPOLevel() < 3 || c.modest)
             {
                 if(c.dignity > 66)
                 {
@@ -4511,13 +4511,13 @@ public class WorldState
                     c.say(t, "Stop!  I give up!  You win!  Please!");
             }
         } else
-        if(w.getBodyStatus()[14].booleanValue())
+        if(w.getBodyStatus()[14])
         {
-            if(c.modest.booleanValue())
+            if(c.modest)
             {
                 if(c.getEXPOLevel() < 3)
                 {
-                    if(c.getHATELevel() < 3 || c.vVirg.booleanValue())
+                    if(c.getHATELevel() < 3 || c.vVirg)
                     {
                         if(c.morality > 66)
                         {
@@ -4832,7 +4832,7 @@ public class WorldState
             } else
             if(c.getEXPOLevel() < 3)
             {
-                if(c.getHATELevel() < 3 || c.vVirg.booleanValue())
+                if(c.getHATELevel() < 3 || c.vVirg)
                 {
                     if(c.morality > 66)
                     {
@@ -5096,7 +5096,7 @@ public class WorldState
                             c.say(t, "I will make it my mission to track all of you down and punish you for this...");
                 }
             } else
-            if(c.getHATELevel() < 3 || c.vVirg.booleanValue())
+            if(c.getHATELevel() < 3 || c.vVirg)
             {
                 if(c.morality > 66)
                 {
@@ -5712,7 +5712,7 @@ public class WorldState
                     if(c.dignity > 66)
                     {
                         Project.changePortrait(c.convertGender(), type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.FEAR);
-                        if(w.tickle().booleanValue())
+                        if(w.tickle())
                             c.say(t, "Kh...!  I will not laugh!");
                         else
                             c.say(t, "Kh...!  I will not scream!");
@@ -5756,7 +5756,7 @@ public class WorldState
                     if(c.innocence > 33)
                     {
                         Project.changePortrait(c.convertGender(), type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.SHAME);
-                        if(w.tickle().booleanValue())
+                        if(w.tickle())
                             c.say(t, "Gh, f-fuck...!");
                         else
                             c.say(t, "Ow, fuck...");
@@ -5770,7 +5770,7 @@ public class WorldState
                     if(c.dignity > 66)
                     {
                         Project.changePortrait(c.convertGender(), type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.ANGER);
-                        if(w.tickle().booleanValue())
+                        if(w.tickle())
                             c.say(t, "Y-You're wasting your time...!");
                         else
                             c.say(t, "B-Barely hurts at all...!");
@@ -5782,7 +5782,7 @@ public class WorldState
                     } else
                     {
                         Project.changePortrait(c.convertGender(), type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
-                        if(w.tickle().booleanValue())
+                        if(w.tickle())
                             c.say(t, "Ah, it tickles!");
                         else
                             c.say(t, "It hurts!");
@@ -5970,26 +5970,26 @@ public class WorldState
                     Project.changePortrait(c.convertGender(), type, Boolean.valueOf(false), Boolean.valueOf(false), w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                     c.say(t, "I-It's gonna strip me naked!");
                 }
-        if(paren.booleanValue())
+        if(paren)
             c.say(t, ")");
         else
             c.say(t, "\"");
-        if(c.vVirg.booleanValue() && w.getBodyStatus()[11].booleanValue() && c.getHATELevel() >= 3)
+        if(c.vVirg && w.getBodyStatus()[11] && c.getHATELevel() >= 3)
         {
             c.vVirg = Boolean.valueOf(false);
             c.vTaker = 1;
         }
-        if(c.cVirg.booleanValue() && w.getBodyStatus()[12].booleanValue() && c.getPLEALevel() >= 3)
+        if(c.cVirg && w.getBodyStatus()[12] && c.getPLEALevel() >= 3)
         {
             c.cVirg = Boolean.valueOf(false);
             c.cTaker = 1;
         }
-        if(c.aVirg.booleanValue() && w.getBodyStatus()[13].booleanValue() && c.getINJULevel() >= 3)
+        if(c.aVirg && w.getBodyStatus()[13] && c.getINJULevel() >= 3)
         {
             c.aVirg = Boolean.valueOf(false);
             c.aTaker = 1;
         }
-        if(c.modest.booleanValue() && w.getBodyStatus()[14].booleanValue() && c.getEXPOLevel() >= 3)
+        if(c.modest && w.getBodyStatus()[14] && c.getEXPOLevel() >= 3)
         {
             c.modest = Boolean.valueOf(false);
             c.mTaker = 1;
@@ -6007,7 +6007,7 @@ public class WorldState
         c.nextAttack[2] = thisAttack;
         int startDamage[] = new int[8];
         int ai[];
-        if(w.getBodyStatus()[3].booleanValue())
+        if(w.getBodyStatus()[3])
         {
             ai = new int[8];
             ai[0] = 100;
@@ -6018,7 +6018,7 @@ public class WorldState
             startDamage = c.addArray(startDamage, ai);
         }
         int ai1[];
-        if(w.getBodyStatus()[4].booleanValue())
+        if(w.getBodyStatus()[4])
         {
             ai1 = new int[8];
             ai1[0] = 25;
@@ -6029,7 +6029,7 @@ public class WorldState
             startDamage = c.addArray(startDamage, ai1);
         }
         int ai2[];
-        if(w.getBodyStatus()[5].booleanValue())
+        if(w.getBodyStatus()[5])
         {
             ai2 = new int[8];
             ai2[0] = 50;
@@ -6039,12 +6039,12 @@ public class WorldState
             ai2[6] = 200;
             startDamage = c.addArray(startDamage, ai2);
         }
-        if(w.getBodyStatus()[6].booleanValue())
+        if(w.getBodyStatus()[6])
             startDamage = c.addArray(startDamage, new int[] {
                 75, 50, 25, 100, 0, 0, 0, 200
             });
         int ai3[];
-        if(w.getBodyStatus()[11].booleanValue())
+        if(w.getBodyStatus()[11])
         {
             ai3 = new int[8];
             ai3[0] = 200;
@@ -6056,7 +6056,7 @@ public class WorldState
             startDamage = c.addArray(startDamage, ai3);
         }
         int ai4[];
-        if(w.getBodyStatus()[12].booleanValue())
+        if(w.getBodyStatus()[12])
         {
             ai4 = new int[8];
             ai4[0] = 25;
@@ -6067,16 +6067,16 @@ public class WorldState
             ai4[6] = 150;
             startDamage = c.addArray(startDamage, ai4);
         }
-        if(w.getBodyStatus()[13].booleanValue())
+        if(w.getBodyStatus()[13])
             startDamage = c.addArray(startDamage, new int[] {
                 50, 25, 200, 100, 0, 0, 300, 150
             });
-        if(w.getBodyStatus()[14].booleanValue())
+        if(w.getBodyStatus()[14])
             startDamage = c.addArray(startDamage, new int[] {
                 100, 50, 25, 200, 150, 0, 0, 300
             });
         int ai5[];
-        if(w.getBodyStatus()[19].booleanValue())
+        if(w.getBodyStatus()[19])
         {
             ai5 = new int[8];
             ai5[0] = 1000;
@@ -6088,7 +6088,7 @@ public class WorldState
             startDamage = c.multiplyArray(startDamage, c.getImpregnationEffectiveness());
         }
         int ai6[];
-        if(w.getBodyStatus()[20].booleanValue())
+        if(w.getBodyStatus()[20])
         {
             ai6 = new int[8];
             ai6[0] = 30;
@@ -6100,7 +6100,7 @@ public class WorldState
             startDamage = c.multiplyArray(startDamage, c.getHypnosisEffectiveness());
         }
         int ai7[];
-        if(w.getBodyStatus()[21].booleanValue())
+        if(w.getBodyStatus()[21])
         {
             ai7 = new int[8];
             ai7[0] = 100;
@@ -6111,7 +6111,7 @@ public class WorldState
             startDamage = c.addArray(startDamage, ai7);
             startDamage = c.multiplyArray(startDamage, c.getDrainEffectiveness());
         }
-        if(w.getBodyStatus()[22].booleanValue())
+        if(w.getBodyStatus()[22])
         {
             startDamage = c.addArray(startDamage, new int[] {
                 300, 100, 30, 1000, 0, 0, 0, 3000
@@ -6125,7 +6125,7 @@ public class WorldState
             c.defenseLevel += 9000;
         }
         Boolean breakCapture = Boolean.valueOf(false);
-        if(c.usingDetonate.booleanValue() && c.captureProgression + c.getINJULevel() + 1 >= w.getCaptureDuration() && !w.adaptationsDisabled().booleanValue())
+        if(c.usingDetonate && c.captureProgression + c.getINJULevel() + 1 >= w.getCaptureDuration() && !w.adaptationsDisabled())
         {
             breakCapture = Boolean.valueOf(true);
             if(c.captureProgression == 0)
@@ -6135,41 +6135,41 @@ public class WorldState
         if(c.captureProgression == 0)
         {
             w.setCaptureTarget(null);
-            if(w.finalBattle.booleanValue())
+            if(w.finalBattle)
             {
                 Boolean otherTarget = Boolean.valueOf(false);
                 Boolean otherKiller = Boolean.valueOf(false);
                 for(int i = 0; i < 3; i++)
                     if(w.getCombatants()[i] != null && w.getCombatants()[i] != c)
-                        if(!w.getCombatants()[i].isSurrounded().booleanValue() && !w.getCombatants()[i].isCaptured().booleanValue() && w.getCombatants()[i].alive.booleanValue() && w.getCombatants()[i].resolve > 0 && w.getCombatants()[i].getConfidence() < c.confidence)
+                        if(!w.getCombatants()[i].isSurrounded() && !w.getCombatants()[i].isCaptured() && w.getCombatants()[i].alive && w.getCombatants()[i].resolve > 0 && w.getCombatants()[i].getConfidence() < c.confidence)
                             otherKiller = Boolean.valueOf(true);
                         else
-                        if(w.getCombatants()[i].isSurrounded().booleanValue() || w.getCombatants()[i].isCaptured().booleanValue())
+                        if(w.getCombatants()[i].isSurrounded() || w.getCombatants()[i].isCaptured())
                             otherTarget = Boolean.valueOf(true);
 
-                if(otherKiller.booleanValue() && !otherTarget.booleanValue())
+                if(otherKiller && !otherTarget)
                     w.readyToEnd = Boolean.valueOf(false);
             }
             c.announceCapture(t, w);
         } else
-        if(!w.getBodyStatus()[26].booleanValue() && (w.getBodyStatus()[19].booleanValue() || w.getBodyStatus()[20].booleanValue()) || w.getBodyStatus()[21].booleanValue() || w.getBodyStatus()[22].booleanValue())
+        if(!w.getBodyStatus()[26] && (w.getBodyStatus()[19] || w.getBodyStatus()[20]) || w.getBodyStatus()[21] || w.getBodyStatus()[22])
             w.punisherFlavor(t, w, thisAttack, c);
         else
-        if(w.getBodyStatus()[11].booleanValue() || w.getBodyStatus()[12].booleanValue() || w.getBodyStatus()[13].booleanValue() || w.getBodyStatus()[14].booleanValue())
+        if(w.getBodyStatus()[11] || w.getBodyStatus()[12] || w.getBodyStatus()[13] || w.getBodyStatus()[14])
             w.defilerFlavor(t, w, thisAttack, c);
         else
             c.suppressorFlavor(t, w, thisAttack);
-        if(!breakCapture.booleanValue())
+        if(!breakCapture)
         {
             w.append(t, "\n\n");
             c.captureDamage(t, w, startDamage);
         }
-        if(c.captureProgression >= w.getCaptureDuration() || breakCapture.booleanValue())
+        if(c.captureProgression >= w.getCaptureDuration() || breakCapture)
         {
             c.removeSurround = Boolean.valueOf(true);
-            if(!breakCapture.booleanValue())
+            if(!breakCapture)
             {
-                if(w.getBodyStatus()[19].booleanValue() && !w.getBodyStatus()[26].booleanValue())
+                if(w.getBodyStatus()[19] && !w.getBodyStatus()[26])
                 {
                     w.append(t, (new StringBuilder("Finally, ")).append(c.mainName).toString());
                     if(c.weapon.equals("revolver") || c.weapon.equals("pistols") || c.weapon.equals("rifle") || c.weapon.equals("shurikens") || c.weapon.equals("bow") || c.weapon.equals("staff") || c.weapon.equals("spirits") || c.customWeaponType.equals("shoot") || c.customWeaponType.equals("command"))
@@ -6180,9 +6180,9 @@ public class WorldState
                     else
                         w.append(t, (new StringBuilder(" lands a solid blow with ")).append(c.hisHer()).append(" ").append(c.weapon).append(" into the narrowest part of your form - your neck.").toString());
                 } else
-                if(w.getBodyStatus()[20].booleanValue() && !w.getBodyStatus()[26].booleanValue())
+                if(w.getBodyStatus()[20] && !w.getBodyStatus()[26])
                 {
-                    if(c.hypnotized.booleanValue())
+                    if(c.hypnotized)
                         w.append(t, (new StringBuilder("Finally, ")).append(c.mainName).append(" manages to come to ").append(c.hisHer()).append(" senses, blast a hole in your dome, and crawl outside.  ").toString());
                     else
                         w.append(t, (new StringBuilder("Finally, ")).append(c.mainName).append(" manages to blast a hole in your dome and crawl outside.  ").toString());
@@ -6194,7 +6194,7 @@ public class WorldState
                     else
                         w.append(t, (new StringBuilder("With nothing deceiving ")).append(c.hisHer()).append(" senses, ").append(c.heShe()).append(" quickly lands a mighty blow with ").append(c.hisHer()).append(" ").append(c.weapon).append(".").toString());
                 } else
-                if(w.getBodyStatus()[21].booleanValue())
+                if(w.getBodyStatus()[21])
                 {
                     w.append(t, (new StringBuilder("Finally, ")).append(c.mainName).append(" manages to break free of the tentacles and climb away from your body.  ").toString());
                     if(c.weapon.equals("revolver") || c.weapon.equals("pistols") || c.weapon.equals("rifle") || c.weapon.equals("shurikens") || c.weapon.equals("bow") || c.weapon.equals("staff") || c.weapon.equals("spirits") || c.customWeaponType.equals("shoot") || c.customWeaponType.equals("command"))
@@ -6205,15 +6205,15 @@ public class WorldState
                     else
                         w.append(t, (new StringBuilder("With ")).append(c.hisHer()).append(" limbs freed, there's nothing stopping ").append(c.himHer()).append(" from landing a mighty blow with ").append(c.hisHer()).append(" ").append(c.weapon).append(".").toString());
                 } else
-                if(w.getBodyStatus()[22].booleanValue())
+                if(w.getBodyStatus()[22])
                 {
                     w.append(t, (new StringBuilder("Finally, ")).append(c.mainName).append("'s own psychic energy surges strong enough to expel you from ").append(c.hisHer()).append(" clothes.  ").toString());
-                    if(c.parasitized.booleanValue())
+                    if(c.parasitized)
                         w.append(t, (new StringBuilder("However, now that the public has seen ")).append(c.hisHer()).append(" new outfit, the only effect is that new tentacles stop emerging and trying to strip ").append(c.himHer()).append(".  ").toString());
                     else
                         w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" clothes quickly return to normal.  ").toString());
                 } else
-                if(w.getBodyStatus()[11].booleanValue())
+                if(w.getBodyStatus()[11])
                 {
                     w.append(t, (new StringBuilder("Finally, ")).append(c.mainName).append(" manages to escape out from under your body.  ").toString());
                     if(c.weapon.equals("revolver") || c.weapon.equals("pistols") || c.weapon.equals("rifle") || c.weapon.equals("shurikens") || c.weapon.equals("bow") || c.weapon.equals("staff") || c.weapon.equals("spirits") || c.customWeaponType.equals("shoot") || c.customWeaponType.equals("command"))
@@ -6224,7 +6224,7 @@ public class WorldState
                     else
                         w.append(t, (new StringBuilder("With nothing pinning ")).append(c.himHer()).append(" down, ").append(c.heShe()).append(" quickly lands a mighty blow with ").append(c.hisHer()).append(" ").append(c.weapon).append(".").toString());
                 } else
-                if(w.getBodyStatus()[12].booleanValue())
+                if(w.getBodyStatus()[12])
                 {
                     w.append(t, (new StringBuilder("Finally, ")).append(c.mainName).append(" manages to break free of the tentacles and climb out of your body.  ").toString());
                     if(c.weapon.equals("revolver") || c.weapon.equals("pistols") || c.weapon.equals("rifle") || c.weapon.equals("shurikens") || c.weapon.equals("bow") || c.weapon.equals("staff") || c.weapon.equals("spirits") || c.customWeaponType.equals("shoot") || c.customWeaponType.equals("command"))
@@ -6235,7 +6235,7 @@ public class WorldState
                     else
                         w.append(t, (new StringBuilder("With ")).append(c.hisHer()).append(" limbs freed, there's nothing stopping ").append(c.himHer()).append(" from landing a mighty blow with ").append(c.hisHer()).append(" ").append(c.weapon).append(".").toString());
                 } else
-                if(w.getBodyStatus()[13].booleanValue())
+                if(w.getBodyStatus()[13])
                 {
                     w.append(t, (new StringBuilder("Finally, ")).append(c.mainName).toString());
                     if(c.weapon.equals("revolver") || c.weapon.equals("pistols") || c.weapon.equals("rifle") || c.weapon.equals("shurikens") || c.weapon.equals("bow") || c.weapon.equals("staff") || c.weapon.equals("spirits") || c.customWeaponType.equals("shoot") || c.customWeaponType.equals("command"))
@@ -6246,7 +6246,7 @@ public class WorldState
                     else
                         w.append(t, (new StringBuilder(" lands a solid blow with ")).append(c.hisHer()).append(" ").append(c.weapon).append(" into the narrowest part of your muscled form - your neck.").toString());
                 } else
-                if(w.getBodyStatus()[14].booleanValue())
+                if(w.getBodyStatus()[14])
                 {
                     w.append(t, (new StringBuilder("Finally, ")).append(c.mainName).append(" manages to break free of the cables holding ").append(c.himHer()).append(" in place.  ").toString());
                     if(c.weapon.equals("revolver") || c.weapon.equals("pistols") || c.weapon.equals("rifle") || c.weapon.equals("shurikens") || c.weapon.equals("bow") || c.weapon.equals("staff") || c.weapon.equals("spirits") || c.customWeaponType.equals("shoot") || c.customWeaponType.equals("command"))
@@ -6257,7 +6257,7 @@ public class WorldState
                     else
                         w.append(t, (new StringBuilder("With ")).append(c.hisHer()).append(" limbs freed, there's nothing stopping ").append(c.himHer()).append(" from landing a mighty blow with ").append(c.hisHer()).append(" ").append(c.weapon).append(".").toString());
                 } else
-                if(w.getBodyStatus()[3].booleanValue())
+                if(w.getBodyStatus()[3])
                 {
                     w.append(t, (new StringBuilder("Finally, ")).append(c.mainName).toString());
                     if(c.weapon.equals("revolver") || c.weapon.equals("pistols") || c.weapon.equals("rifle") || c.weapon.equals("shurikens") || c.weapon.equals("bow") || c.weapon.equals("staff") || c.customWeaponType.equals("shoot"))
@@ -6274,7 +6274,7 @@ public class WorldState
                     else
                         w.append(t, (new StringBuilder(" lands a solid blow with ")).append(c.hisHer()).append(" ").append(c.weapon).append(" into the largest mouth on your chest.").toString());
                 } else
-                if(w.getBodyStatus()[4].booleanValue())
+                if(w.getBodyStatus()[4])
                 {
                     w.append(t, (new StringBuilder("Finally, ")).append(c.mainName).append(" manages to break free of the tentacles.  ").toString());
                     if(c.weapon.equals("revolver") || c.weapon.equals("pistols") || c.weapon.equals("rifle") || c.weapon.equals("shurikens") || c.weapon.equals("bow") || c.weapon.equals("staff") || c.weapon.equals("spirits") || c.customWeaponType.equals("shoot") || c.customWeaponType.equals("command"))
@@ -6285,7 +6285,7 @@ public class WorldState
                     else
                         w.append(t, (new StringBuilder("With ")).append(c.hisHer()).append(" limbs freed, there's nothing stopping ").append(c.himHer()).append(" from landing a mighty blow with ").append(c.hisHer()).append(" ").append(c.weapon).append(".").toString());
                 } else
-                if(w.getBodyStatus()[5].booleanValue())
+                if(w.getBodyStatus()[5])
                 {
                     w.append(t, (new StringBuilder("Finally, ")).append(c.mainName).toString());
                     if(c.weapon.equals("revolver") || c.weapon.equals("pistols") || c.weapon.equals("rifle") || c.weapon.equals("shurikens") || c.weapon.equals("bow") || c.weapon.equals("staff") || c.weapon.equals("spirits") || c.customWeaponType.equals("shoot") || c.customWeaponType.equals("command"))
@@ -6296,7 +6296,7 @@ public class WorldState
                     else
                         w.append(t, (new StringBuilder(" lands a solid blow with ")).append(c.hisHer()).append(" ").append(c.weapon).append(" into the narrowest part of your muscled form - your neck.").toString());
                 } else
-                if(w.getBodyStatus()[6].booleanValue())
+                if(w.getBodyStatus()[6])
                 {
                     w.append(t, (new StringBuilder("Finally, ")).append(c.mainName).toString());
                     if(c.weapon.equals("revolver") || c.weapon.equals("pistols") || c.weapon.equals("rifle") || c.weapon.equals("shurikens") || c.weapon.equals("bow") || c.weapon.equals("staff") || c.weapon.equals("spirits") || c.customWeaponType.equals("shoot") || c.customWeaponType.equals("command"))
@@ -6307,23 +6307,23 @@ public class WorldState
                     else
                         w.append(t, (new StringBuilder(" lands a solid blow with ")).append(c.hisHer()).append(" ").append(c.weapon).append(" into the core of your body.  The embedded machinery bursts into intense flames, melting the chains connecting you to ").append(c.himHer()).append(".").toString());
                 }
-                if(w.spendCapture().booleanValue())
+                if(w.spendCapture())
                 {
-                    if(w.getBodyStatus()[22].booleanValue())
+                    if(w.getBodyStatus()[22])
                         w.append(t, "  You're still energized enough to do this again.");
                     else
                         w.append(t, "  You stumble backward, your body badly injured but still functional.");
                 } else
-                if(w.getBodyStatus()[22].booleanValue())
+                if(w.getBodyStatus()[22])
                     w.append(t, "  Completely exhausted, the parasitic energy field dissipates.");
                 else
                     w.append(t, "  The mortal wound causes your body to crumble to ash.");
                 w.append(t, "\n\n");
-                if(w.getBodyStatus()[11].booleanValue() && (c.getHATELevel() >= 3 || c.getPLEALevel() >= 3 && !c.cVirg.booleanValue()) || w.getBodyStatus()[12].booleanValue() && (c.getPLEALevel() >= 3 || c.getINJULevel() >= 3 && !c.aVirg.booleanValue()) || w.getBodyStatus()[13].booleanValue() && (c.getINJULevel() >= 3 || c.getEXPOLevel() >= 3 && !c.modest.booleanValue()) || w.getBodyStatus()[14].booleanValue() && (c.getEXPOLevel() >= 3 || c.getHATELevel() >= 3 && !c.vVirg.booleanValue()))
+                if(w.getBodyStatus()[11] && (c.getHATELevel() >= 3 || c.getPLEALevel() >= 3 && !c.cVirg) || w.getBodyStatus()[12] && (c.getPLEALevel() >= 3 || c.getINJULevel() >= 3 && !c.aVirg) || w.getBodyStatus()[13] && (c.getINJULevel() >= 3 || c.getEXPOLevel() >= 3 && !c.modest) || w.getBodyStatus()[14] && (c.getEXPOLevel() >= 3 || c.getHATELevel() >= 3 && !c.vVirg))
                 {
                     if(c.battleSeriousness < 2)
                         c.battleSeriousness = 2;
-                    if(w.getBodyStatus()[11].booleanValue() && c.getHATELevel() >= 3 && c.vVirg.booleanValue() || w.getBodyStatus()[12].booleanValue() && c.getPLEALevel() >= 3 && c.cVirg.booleanValue() || w.getBodyStatus()[13].booleanValue() && c.getINJULevel() >= 3 && c.aVirg.booleanValue() || w.getBodyStatus()[14].booleanValue() && c.getEXPOLevel() >= 3 && c.modest.booleanValue())
+                    if(w.getBodyStatus()[11] && c.getHATELevel() >= 3 && c.vVirg || w.getBodyStatus()[12] && c.getPLEALevel() >= 3 && c.cVirg || w.getBodyStatus()[13] && c.getINJULevel() >= 3 && c.aVirg || w.getBodyStatus()[14] && c.getEXPOLevel() >= 3 && c.modest)
                         w.printCapturedLine(t, w, thisAttack, c);
                     else
                         c.printEscape(t, w, thisAttack);
@@ -6419,8 +6419,8 @@ public class WorldState
         if(index == 1)
         {
             int impregnated = 0;
-            for(int i = 0; i < 3 && !loopComplete.booleanValue(); i++)
-                if(getCast()[i] != null && getCast()[i].impregnated.booleanValue())
+            for(int i = 0; i < 3 && !loopComplete; i++)
+                if(getCast()[i] != null && getCast()[i].impregnated)
                 {
                     impregnated++;
                     if(getCast()[i].type == Chosen.Species.SUPERIOR)
@@ -6428,7 +6428,7 @@ public class WorldState
                 }
 
             for(int i = 0; i < checkedChosen.length; i++)
-                if(checkedChosen[i].impregnated.booleanValue())
+                if(checkedChosen[i].impregnated)
                 {
                     impregnated++;
                     if(checkedChosen[i].type == Chosen.Species.SUPERIOR)
@@ -6450,8 +6450,8 @@ public class WorldState
         if(index == 2)
         {
             int hypnotized = 0;
-            for(int i = 0; i < 3 && !loopComplete.booleanValue(); i++)
-                if(getCast()[i] != null && getCast()[i].hypnotized.booleanValue())
+            for(int i = 0; i < 3 && !loopComplete; i++)
+                if(getCast()[i] != null && getCast()[i].hypnotized)
                 {
                     hypnotized++;
                     if(getCast()[i].type == Chosen.Species.SUPERIOR)
@@ -6459,7 +6459,7 @@ public class WorldState
                 }
 
             for(int i = 0; i < checkedChosen.length; i++)
-                if(checkedChosen[i].hypnotized.booleanValue())
+                if(checkedChosen[i].hypnotized)
                 {
                     hypnotized++;
                     if(checkedChosen[i].type == Chosen.Species.SUPERIOR)
@@ -6481,8 +6481,8 @@ public class WorldState
         if(index == 3)
         {
             int drained = 0;
-            for(int i = 0; i < 3 && !loopComplete.booleanValue(); i++)
-                if(getCast()[i] != null && getCast()[i].drained.booleanValue())
+            for(int i = 0; i < 3 && !loopComplete; i++)
+                if(getCast()[i] != null && getCast()[i].drained)
                 {
                     drained++;
                     if(getCast()[i].type == Chosen.Species.SUPERIOR)
@@ -6490,7 +6490,7 @@ public class WorldState
                 }
 
             for(int i = 0; i < checkedChosen.length; i++)
-                if(checkedChosen[i].drained.booleanValue())
+                if(checkedChosen[i].drained)
                 {
                     drained++;
                     if(checkedChosen[i].type == Chosen.Species.SUPERIOR)
@@ -6512,8 +6512,8 @@ public class WorldState
         if(index == 4)
         {
             int parasitized = 0;
-            for(int i = 0; i < 3 && !loopComplete.booleanValue(); i++)
-                if(getCast()[i] != null && getCast()[i].parasitized.booleanValue())
+            for(int i = 0; i < 3 && !loopComplete; i++)
+                if(getCast()[i] != null && getCast()[i].parasitized)
                 {
                     parasitized++;
                     if(getCast()[i].type == Chosen.Species.SUPERIOR)
@@ -6521,7 +6521,7 @@ public class WorldState
                 }
 
             for(int i = 0; i < checkedChosen.length; i++)
-                if(checkedChosen[i].parasitized.booleanValue())
+                if(checkedChosen[i].parasitized)
                 {
                     parasitized++;
                     if(checkedChosen[i].type == Chosen.Species.SUPERIOR)
@@ -6542,8 +6542,8 @@ public class WorldState
         } else
         if(index == 5)
         {
-            for(int i = 0; i < 3 && !loopComplete.booleanValue(); i++)
-                if(getCast()[i] != null && getCast()[i].pastTempted.booleanValue())
+            for(int i = 0; i < 3 && !loopComplete; i++)
+                if(getCast()[i] != null && getCast()[i].pastTempted)
                 {
                     stat++;
                     if(getCast()[i].type == Chosen.Species.SUPERIOR)
@@ -6551,7 +6551,7 @@ public class WorldState
                 }
 
             for(int i = 0; i < checkedChosen.length; i++)
-                if(checkedChosen[i].pastTempted.booleanValue())
+                if(checkedChosen[i].pastTempted)
                 {
                     stat++;
                     if(checkedChosen[i].type == Chosen.Species.SUPERIOR)
@@ -6575,8 +6575,8 @@ public class WorldState
         } else
         if(index == 6)
         {
-            for(int i = 0; i < 3 && !loopComplete.booleanValue(); i++)
-                if(getCast()[i] != null && getCast()[i].pastDissociated.booleanValue())
+            for(int i = 0; i < 3 && !loopComplete; i++)
+                if(getCast()[i] != null && getCast()[i].pastDissociated)
                 {
                     stat++;
                     if(getCast()[i].type == Chosen.Species.SUPERIOR)
@@ -6584,7 +6584,7 @@ public class WorldState
                 }
 
             for(int i = 0; i < checkedChosen.length; i++)
-                if(checkedChosen[i].pastDissociated.booleanValue())
+                if(checkedChosen[i].pastDissociated)
                 {
                     stat++;
                     if(checkedChosen[i].type == Chosen.Species.SUPERIOR)
@@ -6623,7 +6623,7 @@ public class WorldState
             if(stat > 39)
                 result = 5;
         }
-        if(!campaign.booleanValue())
+        if(!campaign)
             result = 0;
         return (new int[] {
             result, stat
@@ -6789,7 +6789,7 @@ public class WorldState
 
     public Forsaken[] getHarem()
     {
-        if(campaign.booleanValue())
+        if(campaign)
             return conquered;
         if(save != null)
             return save.harem;
@@ -6829,7 +6829,7 @@ public class WorldState
             if(getRelationship(subject.number, c.number) >= 0)
                 endOne = Boolean.valueOf(true);
             else
-            if(startOne.booleanValue())
+            if(startOne)
             {
                 if(subject.morality > 66 && c.morality < 34)
                     EEGained += 15;
@@ -6863,7 +6863,7 @@ public class WorldState
                 if(getRelationship(subject.number, d.number) >= 0)
                     endTwo = Boolean.valueOf(true);
                 else
-                if(startTwo.booleanValue())
+                if(startTwo)
                 {
                     if(subject.morality > 66 && d.morality < 34)
                         EEGained += 15;
@@ -6872,7 +6872,7 @@ public class WorldState
                 }
             }
             String nameDisplay[] = {
-                subject.mainName, 0, 0, 0, 0
+                subject.mainName, null, null, null, null
             };
             Chosen leader = c;
             Chosen follower = d;
@@ -6925,7 +6925,7 @@ public class WorldState
                 }
             }
             append(t, "\n\n");
-            if(leader.cVirg.booleanValue())
+            if(leader.cVirg)
             {
                 if(leader.confidence > 66)
                     append(t, (new StringBuilder("For a moment, ")).append(leader.mainName).append(" is tempted to join them.  But ").append(leader.heShe()).append(" wants to finish up and go home, so ").append(leader.heShe()).append(" steps forward.  However, ").append(leader.heShe()).append("'s surprised when ").append(subject.mainName).append(" abruptly stands up, putting ").append(subject.hisHer()).append(" sexual pleasure aside for the moment in order to stand in ").append(leader.mainName).append("'s path, blocking ").append(leader.hisHer()).append(" way and protesting in an unusually determined voice.").toString());
@@ -6993,7 +6993,7 @@ public class WorldState
                     leader.say(t, "Actually, it might be fun to join you.\"\n\n");
                     append(t, (new StringBuilder(String.valueOf(leader.mainName))).append(" accompanies ").append(subject.mainName).append(" to one of the Thralls' hidden safe havens in the district.  There, the two of them participate in a wild orgy together with a large crowd of Thralls.  Eventually, the two of them are left relaxing in the afterglow together, dozens of exhausted Thralls sprawled out before them.\n\n").toString());
                     subject.say(t, "\"");
-                    if(startOne.booleanValue())
+                    if(startOne)
                     {
                         if(subject.confidence > 66)
                             subject.say(t, (new StringBuilder("Sometimes I'm a little too eager to fight.  You were right all along about how nice it can be to make peace, ")).append(leader.mainName).append(".").toString());
@@ -7138,7 +7138,7 @@ public class WorldState
                 else
                     subject.say(t, (new StringBuilder("You can take me down if you want, ")).append(leader.mainName).append(".  But... I-I'll still stall you long enough for the Thralls here to escape!").toString());
                 subject.say(t, "\"\n\n");
-                if(startOne.booleanValue())
+                if(startOne)
                 {
                     append(t, (new StringBuilder(String.valueOf(leader.mainName))).append(" tenses up, gritting ").append(leader.hisHer()).append(" teeth, but then ").append(leader.heShe()).append(" lets it out with a sigh, hanging ").append(leader.hisHer()).append(" head.\n\n").toString());
                     leader.say(t, "\"");
@@ -7278,7 +7278,7 @@ public class WorldState
             if(getRelationship(subject.number, c.number) >= 0)
                 endOne = Boolean.valueOf(true);
             else
-            if(startOne.booleanValue())
+            if(startOne)
             {
                 if(subject.innocence > 66 && c.innocence < 34)
                     EEGained += 15;
@@ -7312,7 +7312,7 @@ public class WorldState
                 if(getRelationship(subject.number, d.number) >= 0)
                     endTwo = Boolean.valueOf(true);
                 else
-                if(startTwo.booleanValue())
+                if(startTwo)
                 {
                     if(subject.innocence > 66 && d.innocence < 34)
                         EEGained += 15;
@@ -7321,7 +7321,7 @@ public class WorldState
                 }
             }
             String nameDisplay[] = {
-                subject.mainName, 0, 0, 0, 0
+                subject.mainName, null, null, null, null
             };
             Chosen leader = c;
             Chosen follower = d;
@@ -7357,7 +7357,7 @@ public class WorldState
             if(leader.dissociationReq < 10)
             {
                 append(t, (new StringBuilder(String.valueOf(leader.mainName))).append(", knowing that ").append(subject.mainName).append("'s burst of energy would surely be short-lived, follows at a distance and eventually catches up.  ").toString());
-                if(startOne.booleanValue() && leader == c || startTwo.booleanValue() && leader == d)
+                if(startOne && leader == c || startTwo && leader == d)
                 {
                     append(t, (new StringBuilder(String.valueOf(leader.HeShe()))).append(" kneels down and gently cradles ").append(subject.mainName).append("'s head.\n\n").toString());
                     leader.say(t, "\"");
@@ -7424,7 +7424,7 @@ public class WorldState
                             subject.say(t, (new StringBuilder("\"Help!  ")).append(leader.mainName).append("!  ").append(subject.mainName).append("!  Help meee!").toString());
                         }
                         subject.say(t, "\"\n\n");
-                        if(startOne.booleanValue() && leader == c || startTwo.booleanValue() && leader == d)
+                        if(startOne && leader == c || startTwo && leader == d)
                         {
                             append(t, (new StringBuilder(String.valueOf(leader.mainName))).append(" calms ").append(subject.himHer()).append(" down with a gentle voice and a hand running through ").append(subject.hisHer()).append(" hair.\n\n").toString());
                             leader.say(t, "\"");
@@ -7556,7 +7556,7 @@ public class WorldState
                     subject.say(t, "\"\n\n");
                     append(t, (new StringBuilder(String.valueOf(leader.mainName))).append(" backs off, giving ").append(subject.himHer()).append(" some space so that ").append(subject.heShe()).append(" doesn't feel the need to flee again.  As ").append(subject.mainName).append(" calms down, ").append(leader.mainName).append(" decides to try speaking to ").append(subject.himHer()).append(".\n\n").toString());
                     leader.say(t, "\"");
-                    if(startOne.booleanValue() && leader == c || startTwo.booleanValue() && leader == d)
+                    if(startOne && leader == c || startTwo && leader == d)
                     {
                         if(leader.morality > 66)
                             leader.say(t, "I'm sorry that I couldn't stop them from doing that to us.  Just... let me know if I can do anything to help.");
@@ -7599,7 +7599,7 @@ public class WorldState
             } else
             {
                 append(t, (new StringBuilder(String.valueOf(leader.mainName))).append(" grabs ").append(subject.himHer()).append(" by the shoulders and tries to shake ").append(subject.himHer()).append(" awake").toString());
-                if(startOne.booleanValue() && leader == c || startTwo.booleanValue() && leader == d)
+                if(startOne && leader == c || startTwo && leader == d)
                 {
                     append(t, (new StringBuilder(".  ")).append(leader.HeShe()).append("'s concerned for ").append(leader.hisHer()).append(" friend, but ").append(leader.hisHer()).append(" frustration and confusion as to what's happened to ").append(subject.himHer()).append(" causes ").append(leader.himHer()).append(" to get rough.\n\n").toString());
                     leader.say(t, "\"");
@@ -7631,7 +7631,7 @@ public class WorldState
                         Project.changePortrait(follower.convertGender(), follower.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 2, Project.Emotion.FEAR, Project.Emotion.FEAR);
                         append(t, (new StringBuilder("When ")).append(follower.mainName).append(" arrives, ").append(follower.heShe()).append("'s horrified to see how ").append(subject.mainName).append(" is being treated.\n\n").toString());
                         follower.say(t, "\"");
-                        if(startOne.booleanValue() && follower == c || startTwo.booleanValue() && follower == d)
+                        if(startOne && follower == c || startTwo && follower == d)
                         {
                             if(follower.morality > 66)
                                 follower.say(t, "No!  Y-you can't do that!");
@@ -7835,7 +7835,7 @@ public class WorldState
     public void beTempted(JTextPane t, JPanel p, JFrame f, Chosen c)
     {
         c.battleSeriousness = 0;
-        if(!c.betraying.booleanValue())
+        if(!c.betraying)
         {
             if(c.temptReq == 0x186a0L)
             {
@@ -7947,7 +7947,7 @@ public class WorldState
                     append(t, (new StringBuilder(".  ")).append(c.HeShe()).append("'s afraid that they're only setting ").append(c.himHer()).append(" up for even more torture, but ").append(c.hisHer()).append(" growing masochistic side wouldn't be entirely disappointed by that outcome.  ").toString());
                 if(c.getINJULevel() > 2)
                 {
-                    if(tickle().booleanValue())
+                    if(tickle())
                     {
                         if(c.morality > 66)
                             append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" tells ").append(c.himHer()).append("self that there's nothing wrong with doing this in order to have a chance to calm down and gather ").append(c.hisHer()).append(" power.  ").toString());
@@ -8061,7 +8061,7 @@ public class WorldState
                     hole = "anus";
                 if(c.temptReq >= 60000L)
                 {
-                    if(c.parasitized.booleanValue())
+                    if(c.parasitized)
                     {
                         if(c.innocence > 66)
                             append(t, (new StringBuilder("When the Thralls ask ")).append(c.mainName).append(" to spread ").append(c.hisHer()).append(" hole so they can take some close-up pictures, ").append(c.heShe()).append(" almost complies without thinking, but then it occurs to ").append(c.himHer()).append(" that ").append(c.heShe()).append(" can make use of their request.  ").toString());
@@ -8123,7 +8123,7 @@ public class WorldState
                             append(t, (new StringBuilder("But ")).append(c.heShe()).append(" does dangle the promise of playing along later if they make ").append(c.himHer()).append(" happy enough.").toString());
                     }
                 } else
-                if(c.parasitized.booleanValue())
+                if(c.parasitized)
                 {
                     if(c.innocence > 66)
                         append(t, (new StringBuilder("As ")).append(c.heShe()).append(" gets more and more turned on, ").append(c.mainName).append(" loses the concentration necessary to form coherent words for the filming cameras.  ").toString());
@@ -8587,7 +8587,7 @@ public class WorldState
         c.damage(t, this, new int[] {
             0, 0, 0, 0, 0, 0x186a0, 0, 0x186a0
         });
-        if(c.bonusEXPO.booleanValue() && c.getEXPOLevel() >= 2)
+        if(c.bonusEXPO && c.getEXPOLevel() >= 2)
         {
             c.DignityBreakZero(t, this);
             append(t, "\n\n");
@@ -8656,7 +8656,7 @@ public class WorldState
                     append(t, (new StringBuilder("tears open the crotch of ")).append(c.hisHer()).append(" shorts so that they turn into more of a miniskirt.  ").toString());
                 else
                     append(t, (new StringBuilder("rips open ")).append(c.hisHer()).append(" own ").append(c.bottomDesc()).append(" all the way up to ").append(c.hisHer()).append(" hip.   ").toString());
-                if(tickle().booleanValue())
+                if(tickle())
                 {
                     if(c.feetType.equals("none"))
                         append(t, (new StringBuilder("It's nothing ")).append(c.heShe()).append(" hasn't shown off before, but ").toString());
@@ -8670,7 +8670,7 @@ public class WorldState
                 }
                 if(c.getPLEALevel() < 1)
                 {
-                    if(tickle().booleanValue())
+                    if(tickle())
                         append(t, (new StringBuilder("seeing the Thralls' eagerness is part of what makes ")).append(c.himHer()).append(" want to strip in the first place.").toString());
                     else
                         append(t, (new StringBuilder("the Thralls still watch eagerly in hopes that ")).append(c.heShe()).append("'ll reveal more.").toString());
@@ -8865,7 +8865,7 @@ public class WorldState
             append(t, "\n\n");
         }
         c.say(t, "\"");
-        if(!c.betraying.booleanValue() && !c.pastTempted.booleanValue())
+        if(!c.betraying && !c.pastTempted)
         {
             Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.SHAME);
             if(c.morality > 66)
@@ -9059,7 +9059,7 @@ public class WorldState
                     hole = "butt";
                 if(c.temptReq >= 60000L)
                 {
-                    if(c.parasitized.booleanValue())
+                    if(c.parasitized)
                     {
                         if(c.morality > 66)
                         {
@@ -9091,7 +9091,7 @@ public class WorldState
                         c.say(t, (new StringBuilder("P-Please... just leave my ")).append(hole).append(" alone...").toString());
                     }
                 } else
-                if(c.parasitized.booleanValue())
+                if(c.parasitized)
                 {
                     if(c.dignity > 66)
                     {
@@ -9248,12 +9248,12 @@ public class WorldState
         c.cKnown = Boolean.valueOf(true);
         c.mKnown = Boolean.valueOf(true);
         c.betraying = Boolean.valueOf(true);
-        if(c.usingSlaughter.booleanValue())
+        if(c.usingSlaughter)
         {
             c.usingSlaughter = Boolean.valueOf(false);
             c.nextAdaptation = c.nextAdaptation / 10L;
         }
-        if(c.usingDetonate.booleanValue())
+        if(c.usingDetonate)
         {
             c.usingDetonate = Boolean.valueOf(false);
             c.nextAdaptation = c.nextAdaptation / 10L;
@@ -9274,13 +9274,13 @@ public class WorldState
                     c = getCast()[i];
 
             String nameDisplay[] = {
-                c.mainName, 0, 0, 0, 0
+                c.mainName, null, null, null, null
             };
             append(t, (new StringBuilder("As public figures, the Chosen have the ability to exert a great deal of influence simply by choosing where to make appearances.  Some Chosen use that power for purely selfish reasons, but ")).append(c.mainName).append(" is always on the lookout for ways ").append(c.heShe()).append(" can help people.  When ").append(c.heShe()).append(" receives an invitation to be the guest of honor at an upcoming charity dinner in order to attract more donors, ").append(c.heShe()).append("'s overnjoyed.\n\n").toString());
             append(t, (new StringBuilder("The first indication that not everything was as it seemed was the formal attire ")).append(c.heShe()).append(" was sent, 'as a courtesy', after accepting the invitation.  It was a strapless, low-cut, practically transparent black dress which would normally be considered insufficient to protect the wearer's modesty without a bra, and yet was clearly intended to be worn without one.  ").toString());
             if(getGenders()[c.number].equals("male"))
             {
-                if(c.getDignityBreakage() == 0 && c.vVirg.booleanValue())
+                if(c.getDignityBreakage() == 0 && c.vVirg)
                     append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" still isn't comfortable with dressing like a girl, and especially not with actively encouraging men to lust after ").append(c.himHer()).append(".  But at the same time, ").append(c.heShe()).append(" wants to respect ").append(c.hisHer()).append(" hosts' wishes.").toString());
                 else
                     append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s become comfortable by now with the notion that men lust after ").append(c.himHer()).append(", but still, this doesn't seem like the time or place.").toString());
@@ -9369,7 +9369,7 @@ public class WorldState
                     c = getCast()[i];
 
             String nameDisplay[] = {
-                c.mainName, 0, 0, 0, 0
+                c.mainName, null, null, null, null
             };
             if(c.morality > 66)
             {
@@ -9401,7 +9401,7 @@ public class WorldState
                 append(t, (new StringBuilder("In order to finish him off, ")).append(c.givenName).append(" decides to go all-out.  ").append(c.HeShe()).append(" starts to tease the guy's anus with one finger, pressing on it in time with every pump of his cock.  Then, abruptly, ").append(c.heShe()).append(" pushes it inside.\n\n").toString());
                 c.say(t, "\"My finger isn't long enough to reach your prostate, but it seems that even this much pressure is enough.\"");
             }
-            if(c.timesFantasized() > 0 && !c.cVirg.booleanValue())
+            if(c.timesFantasized() > 0 && !c.cVirg)
             {
                 append(t, (new StringBuilder("\n\nWhen ")).append(c.givenName).append(" sees the pre-cum dribbling from the cock's tip, ").append(c.hisHer()).append(" eyes glaze over and ").append(c.hisHer()).append(" lust begins to grow, soon overwhelming ").append(c.hisHer()).append(" ability to contain it.  ").append(c.HeShe()).append(" slides back down to the floor, guides the spasming cock into ").append(c.hisHer()).append(" mouth, then uses ").append(c.hisHer()).append(" newly-freed hand to ").toString());
                 if(c.gender.equals("female"))
@@ -9448,7 +9448,7 @@ public class WorldState
                     c = getCast()[i];
 
             String nameDisplay[] = {
-                c.mainName, 0, 0, 0, 0
+                c.mainName, null, null, null, null
             };
             append(t, (new StringBuilder("Backstage at a public event, ")).append(c.mainName).append(" has been cornered alone in a room with an overly pushy fan.  Under normal circumstances, ").append(c.heShe()).append(" could have called for security, or simply used ").append(c.hisHer()).append(" Chosen powers to fend the regular human off.  However, the fan is brandishing his phone at ").append(c.himHer()).append(", and the video being played on it gives ").append(c.mainName).append(" pause.\n\n").toString());
             append(t, "\"");
@@ -9483,7 +9483,7 @@ public class WorldState
             String hole = "pussy";
             if(c.gender.equals("male"))
                 hole = "anus";
-            if(c.vVirg.booleanValue())
+            if(c.vVirg)
             {
                 if(c.gender.equals("male"))
                     append(t, (new StringBuilder(String.valueOf(c.mainName))).append("'s blood runs cold at the thought of another guy's cock inside ").append(c.himHer()).toString());
@@ -9531,10 +9531,10 @@ public class WorldState
                 c.say(t, "If you didn't have that video... I-I'd...!");
             c.say(t, "\"\n\n");
             append(t, (new StringBuilder("One last spank causes ")).append(c.mainName).append(" to whine and shudder, limbs seizing up.  ").toString());
-            if(!c.vVirg.booleanValue() && !c.gender.equals("male"))
+            if(!c.vVirg && !c.gender.equals("male"))
                 append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" hand slips away, and the man takes the opportunity to ram himself balls-deep inside ").append(c.himHer()).append(".  With ").append(c.hisHer()).append(" folds squeezing down on it, the man's cock cums instantly, shooting spurt after spurt of hot cum directly into ").append(c.hisHer()).append(" womb.  ").toString());
             else
-            if(!c.vVirg.booleanValue() || !c.aVirg.booleanValue() && !c.gender.equals("male"))
+            if(!c.vVirg || !c.aVirg && !c.gender.equals("male"))
                 append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" hand slips away, and the man takes the opportunity to bury himself deep inside ").append(c.mainName).append("'s loosened, experienced asshole.  He climaxes instantly, filling ").append(c.mainName).append("'s belly with a torrent of pungent cum.  ").toString());
             else
                 append(t, (new StringBuilder("The extra stimulation causes the man to climax.  He pulls back as his cock erupts, shooting spurts of white cum all over ")).append(c.mainName).append("'s ass.  ").toString());
@@ -9572,7 +9572,7 @@ public class WorldState
                     c = getCast()[i];
 
             String nameDisplay[] = {
-                c.mainName, 0, 0, 0, 0
+                c.mainName, null, null, null, null
             };
             if(c.dignity > 66)
             {
@@ -9585,7 +9585,7 @@ public class WorldState
                 c.say(t, "\"It covers more than some other swimsuits I've worn, so it should be totally fine!");
             } else
             {
-                if(c.mStart.booleanValue())
+                if(c.mStart)
                     append(t, (new StringBuilder(String.valueOf(c.mainName))).append(" has never paid much attention to ").append(c.hisHer()).append(" public image, but ").append(c.heShe()).append(" still noticed the change when photographs of ").append(c.hisHer()).append(" private places started getting spread around online.  The sudden increase in sexual harassment ").append(c.heShe()).append(" started receiving at public events was annoying enough to make ").append(c.himHer()).append(" try to figure out some way of stopping it.  On a whim, ").append(c.heShe()).append(" decides to try using paint to draw a swimsuit under ").append(c.hisHer()).append(" clothes, and ").append(c.heShe()).append(" likes the result.\n\n").toString());
                 else
                     append(t, (new StringBuilder(String.valueOf(c.mainName))).append(" has never really minded the way that the public views ").append(c.himHer()).append(" as a sex object.  However, with ").append(c.hisHer()).append(" recent string of humiliating showings in battle, they've also been looking down on ").append(c.himHer()).append(" and even trying to sexually harass ").append(c.himHer()).append(" at public events.  It's become annoying enough to make ").append(c.himHer()).append(" try to figure out some way of stopping it.  On a whim, ").append(c.heShe()).append(" decides to try using paint to draw a swimsuit under ").append(c.hisHer()).append(" clothes so that it's not so obvious when ").append(c.heShe()).append("'s been stripped, and ").append(c.heShe()).append(" likes the result.\n\n").toString());
@@ -9677,9 +9677,9 @@ public class WorldState
                     c = getCast()[i];
 
             String nameDisplay[] = {
-                c.mainName, 0, 0, 0, 0
+                c.mainName, null, null, null, null
             };
-            if(c.mStart.booleanValue())
+            if(c.mStart)
                 append(t, (new StringBuilder("Until recently, ")).append(c.mainName).append(" didn't listen at all when ").append(c.hisHer()).append(" publicity team advised ").append(c.himHer()).append(" to win more fans by playing up ").append(c.hisHer()).append(" sex appeal.  However, now that the pictures of ").append(c.himHer()).append(" being stripped during battle are a common topic of conversation among ").append(c.hisHer()).append(" fans already, ").append(c.heShe()).append(" figures that ").append(c.heShe()).append(" has nothing more to lose by scheduling a risque photoshoot with a professional propaganda agency.  ").toString());
             else
                 append(t, (new StringBuilder(String.valueOf(c.mainName))).append(" has always embraced the way that the public views ").append(c.himHer()).append(" as a sex symbol, but until recently, ").append(c.heShe()).append("'s always insisted on showing ").append(c.himHer()).append("self off on ").append(c.hisHer()).append(" own terms.  It's only recently that the public's ridicule has started to have any effect at all on ").append(c.himHer()).append(", prompting ").append(c.himHer()).append(" to consent to a professional photoshoot handled by a propaganda agency.  ").toString());
@@ -9740,7 +9740,7 @@ public class WorldState
                 c.say(t, "\"If you want to see more, you'll have to ask politely.\"\n\n");
             }
             append(t, (new StringBuilder("At the end of the photoshoot, several of the photographers gather around ")).append(c.mainName).append(", asking if ").append(c.heShe()).append("'d like to accompany them to a bar or a club or something to wind down.  They don't even hide the fact that they're hungry for some hands-on experience with the body they've been photographing.  ").toString());
-            if(!c.vVirg.booleanValue() || c.lustful)
+            if(!c.vVirg || c.lustful)
             {
                 Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 0, Project.Emotion.FOCUS, Project.Emotion.FOCUS);
                 append(t, (new StringBuilder(String.valueOf(c.mainName))).append(" licks ").append(c.hisHer()).append(" lips.\n\n").toString());
@@ -9783,7 +9783,7 @@ public class WorldState
                     c = getCast()[i];
 
             String nameDisplay[] = {
-                c.mainName, 0, 0, 0, 0
+                c.mainName, null, null, null, null
             };
             append(t, (new StringBuilder("That evening, ")).append(c.mainName).append(" is scheduled to appear at a celebrity event in order to produce positive publicity for the Chosen and reassure the public that everything is under control.  ").toString());
             if(c.dignity > 66)
@@ -9872,7 +9872,7 @@ public class WorldState
                     c = getCast()[i];
 
             String nameDisplay[] = {
-                c.mainName, d.mainName, 0, 0, 0
+                c.mainName, d.mainName, null, null, null
             };
             append(t, (new StringBuilder(String.valueOf(c.mainName))).append(" and ").append(d.mainName).append(" spend the evening relaxing together in their civilian identities").toString());
             if(c.mainName.equals(c.givenName) && d.mainName.equals(d.givenName))
@@ -9988,7 +9988,7 @@ public class WorldState
                     c.say(t, "You'd better be.");
                 c.say(t, "\"\n\n");
             }
-            if(c.gender.equals("female") && !d.gender.equals("female") && (!c.vVirg.booleanValue() || !c.aVirg.booleanValue() || c.pastTempted.booleanValue()) || d.vVirg.booleanValue() && (d.gender.equals("male") || d.aVirg.booleanValue() && d.pastTempted.booleanValue()))
+            if(c.gender.equals("female") && !d.gender.equals("female") && (!c.vVirg || !c.aVirg || c.pastTempted) || d.vVirg && (d.gender.equals("male") || d.aVirg && d.pastTempted))
             {
                 if(c.underType.equals("none"))
                     append(t, (new StringBuilder(String.valueOf(c.givenName))).append(" isn't wearing any panties under ").append(c.hisHer()).append(" skirt, and ").append(c.heShe()).append("'s wet enough that foreplay won't be necessary.  ").toString());
@@ -10000,7 +10000,7 @@ public class WorldState
                 else
                     append(t, (new StringBuilder("uses one hand to guide ")).append(d.givenName).append("'s penis").toString());
                 append(t, (new StringBuilder(" as ")).append(c.heShe()).append(" straddles ").append(d.himHer()).append(" and lifts up ").append(c.hisHer()).append(" own skirt").toString());
-                if(c.gender.equals("male") || c.vVirg.booleanValue())
+                if(c.gender.equals("male") || c.vVirg)
                     append(t, (new StringBuilder(" in order to position the tip against ")).append(c.hisHer()).append(" anus").toString());
                 append(t, (new StringBuilder(".  ")).append(d.givenName).append(" gasps ").toString());
                 if(d.gender.equals("female"))
@@ -10030,7 +10030,7 @@ public class WorldState
                     c.say(t, "\"It's alright, you can let it out anytime.\"\n\n");
                     append(t, (new StringBuilder("Despite ")).append(c.givenName).append("'s reassurance, ").append(d.givenName).append(" doesn't want this moment to end too quickly.  ").toString());
                 }
-                if(c.gender.equals("male") || c.vVirg.booleanValue())
+                if(c.gender.equals("male") || c.vVirg)
                     append(t, (new StringBuilder(String.valueOf(c.givenName))).append("'s asshole squeezes ").toString());
                 else
                     append(t, (new StringBuilder(String.valueOf(c.givenName))).append("'s folds squeeze ").toString());
@@ -10074,7 +10074,7 @@ public class WorldState
                 if(c.gender.equals("female"))
                 {
                     append(t, (new StringBuilder(String.valueOf(c.givenName))).append(" doesn't bother getting undressed.  ").append(c.HeShe()).append(" just pulls down ").append(c.hisHer()).append(" panties and ").toString());
-                    if(c.vVirg.booleanValue())
+                    if(c.vVirg)
                         append(t, (new StringBuilder("grabs a strap-on dildo from ")).append(c.hisHer()).append(" nightstand.  Motivated by ").append(c.hisHer()).append(" own lust, ").append(c.heShe()).append(" very quickly manages to buckle it on before ").toString());
                     else
                         append(t, (new StringBuilder("grabs a U-shaped double dildo from ")).append(c.hisHer()).append(" nightstand.  ").append(c.HisHer()).append(" pussy already feels soaked and needy, and ").append(c.heShe()).append(" has no trouble inserting one end into ").append(c.himHer()).append("self before gently ").toString());
@@ -10084,7 +10084,7 @@ public class WorldState
                     append(t, (new StringBuilder(String.valueOf(c.givenName))).append(" doesn't bother getting undressed.  ").append(c.HeShe()).append(" just pulls out ").append(c.hisHer()).append(" cock, already erect, and gently pushes ").append(d.givenName).append("'s back against the nearest wall.  ").toString());
                 }
                 append(t, (new StringBuilder("Eyes fixated on the incoming shaft, ")).append(d.givenName).append(" eagerly reaches down and spreads ").toString());
-                if(d.gender.equals("male") || d.vVirg.booleanValue())
+                if(d.gender.equals("male") || d.vVirg)
                     append(t, (new StringBuilder(String.valueOf(d.hisHer()))).append(" well-loosened anus").toString());
                 else
                     append(t, (new StringBuilder(String.valueOf(d.hisHer()))).append(" lower lips").toString());
@@ -10187,7 +10187,7 @@ public class WorldState
                     d = getCast()[i];
 
             String nameDisplay[] = {
-                c.mainName, d.mainName, 0, 0, 0
+                c.mainName, d.mainName, null, null, null
             };
             append(t, (new StringBuilder("After another hard-fought battle against the Demons, ")).append(d.mainName).append(" is left feeling exhausted and discouraged, but ").append(d.hisHer()).append(" spirits brighten when ").append(c.mainName).append(" tells ").append(d.himHer()).append(" that ").append(c.heShe()).append(" has a gift at home to give to ").append(d.himHer()).append(".  They fly back to ").append(c.mainName).append("'s place, transform back into their civilian identities").toString());
             if(!c.mainName.equals(c.givenName) && !d.mainName.equals(d.givenName))
@@ -10238,7 +10238,7 @@ public class WorldState
                 append(t, (new StringBuilder(String.valueOf(d.mainName))).append(" turns the items over in ").append(d.hisHer()).append(" hands.  ").toString());
             }
             append(t, (new StringBuilder("There's a leash connected to a collar with ")).append(d.givenName).append("'s name on it, a headband with animal ears sprouting off the top, and a tail to go with it.  Most concerningly, the tail ").toString());
-            if(d.gender.equals("male") || !d.aVirg.booleanValue())
+            if(d.gender.equals("male") || !d.aVirg)
                 append(t, (new StringBuilder("is connected to a large vibrating buttplug, big enough to fill even ")).append(d.givenName).append("'s rather stretched orifice.  ").toString());
             else
                 append(t, "is connected to a tiny buttplug with a powerful vibrator inside.  ");
@@ -10289,7 +10289,7 @@ public class WorldState
             } else
             {
                 append(t, (new StringBuilder("However, as the world around ")).append(d.givenName).append(" seems to shrink to the pavement in front of ").append(d.hisHer()).append(" face and the vibration in ").append(d.hisHer()).append(" butt, ").append(d.heShe()).append(" starts to feel more and more calm and happy.  ").toString());
-                if(d.modest.booleanValue())
+                if(d.modest)
                     append(t, (new StringBuilder(String.valueOf(d.HeShe()))).append(" should be afraid of being discovered and photographed like this, but ").append(c.hisHer()).append("master's presence right behind ").append(c.himHer()).append(" makes ").append(c.himHer()).append(" feel completely safe.  ").toString());
                 else
                     append(t, (new StringBuilder(String.valueOf(d.HeShe()))).append(" realizes that ").append(d.heShe()).append(" doesn't need to worry about being photographed like this anymore, so ").append(d.heShe()).append(" might as well just do whatever makes ").append(d.hisHer()).append(" master happy.  ").toString());
@@ -10301,7 +10301,7 @@ public class WorldState
             append(t, (new StringBuilder("When they get back inside ")).append(c.givenName).append("'s place, ").append(d.givenName).append(" immediately slumps down onto ").append(d.hisHer()).append(" chest in exhaustion, ").append(d.hisHer()).append(" butt high in the air.  ").toString());
             if(c.gender.equals("female"))
             {
-                if(c.vVirg.booleanValue())
+                if(c.vVirg)
                     append(t, (new StringBuilder("The break lasts only long enough for ")).append(c.givenName).append(" to get undressed and wear a strap-on dildo.  ").toString());
                 else
                     append(t, (new StringBuilder("The break lasts only long enough for ")).append(c.givenName).append(" to get undressed and slip one end of a double dildo into ").append(c.hisHer()).append(" wet slit.  ").toString());
@@ -10310,14 +10310,14 @@ public class WorldState
             {
                 append(t, (new StringBuilder(String.valueOf(c.givenName))).append(" wastes no time at all in pulling out ").append(c.hisHer()).append(" erect cock.  ").append(c.HeShe()).append(" steps forward").toString());
             }
-            if(d.gender.equals("male") || d.vVirg.booleanValue())
+            if(d.gender.equals("male") || d.vVirg)
                 append(t, (new StringBuilder(", pulls the tail out of ")).append(d.givenName).append("'s ass in one swift motion, and then immediately thrusts ").append(d.himHer()).append("self into the vacant hole.\n\n").toString());
             else
                 append(t, (new StringBuilder(" to line ")).append(c.himHer()).append("self up with ").append(d.givenName).append("'s soaked pussy and ram inside, so that ").append(d.givenName).append("'s having both ").append(d.hisHer()).append(" holes filled at once.\n\n").toString());
             append(t, (new StringBuilder(String.valueOf(d.givenName))).append(" was already almost ready to cum, and the sudden penetration pushes ").append(d.himHer()).append(" over the edge, ").toString());
             if(d.gender.equals("female"))
             {
-                if(d.vVirg.booleanValue())
+                if(d.vVirg)
                     append(t, (new StringBuilder("causing ")).append(d.himHer()).append(" to scream out loud as ").append(d.hisHer()).append(" ass squeezes tightly on the invader and ").append(d.hisHer()).append(" virgin pussy trickles a rush of wetness onto ").append(c.givenName).append("'s carpet.  ").toString());
                 else
                     append(t, (new StringBuilder("causing ")).append(d.himHer()).append(" to scream out loud as ").append(d.hisHer()).append(" pussy squeezes down tight on the invader.  ").toString());
@@ -10326,7 +10326,7 @@ public class WorldState
                 append(t, (new StringBuilder("and ")).append(d.heShe()).append(" screams out loud as ").append(d.heShe()).append(" shoots ").append(d.hisHer()).append(" load all over ").append(c.givenName).append("'s carpet.  ").toString());
             }
             append(t, (new StringBuilder("But ")).append(c.givenName).append(" is determined to give ").append(d.himHer()).append(" a good fucking, and ").append(c.heShe()).append(" savagely thrusts into ").append(d.hisHer()).append(" deepest places over and over again, one hand holding ").append(d.givenName).append("'s ass while the other ").toString());
-            if(d.gender.equals("male") || d.vVirg.booleanValue())
+            if(d.gender.equals("male") || d.vVirg)
                 append(t, (new StringBuilder("spanks ")).append(d.himHer()).append(" in time with their lovemaking.  ").toString());
             else
                 append(t, (new StringBuilder("tugs on ")).append(d.hisHer()).append(" tail.  ").toString());
@@ -10334,7 +10334,7 @@ public class WorldState
             append(t, (new StringBuilder("Finally, when ")).append(d.givenName).append(" cums again, ").append(c.givenName).append(" cums with ").append(d.himHer()).append(", ").toString());
             if(c.gender.equals("female"))
             {
-                if(c.vVirg.booleanValue())
+                if(c.vVirg)
                     append(t, (new StringBuilder("the erratic movements of ")).append(c.hisHer()).append(" hips causing the dildo to fuck ").append(d.givenName).append(" even more roughly.  ").toString());
                 else
                     append(t, (new StringBuilder("squeezing down on ")).append(c.hisHer()).append(" own end of the dildo while ").append(c.heShe()).append(" clutches ").append(d.givenName).append(" from behind and pushes it as deep inside ").append(d.himHer()).append(" as ").append(c.heShe()).append(" can.  ").toString());
@@ -10398,7 +10398,7 @@ public class WorldState
                     c = getCast()[i];
 
             String nameDisplay[] = {
-                c.mainName, 0, 0, 0, 0
+                c.mainName, null, null, null, null
             };
             append(t, (new StringBuilder(String.valueOf(c.mainName))).append(" had scheduled an appearance today at one of the city's children's hospitals, and although a part of ").append(c.himHer()).append(" wants to cancel it and just go home to rest, ").append(c.heShe()).append(" feels like ").append(c.heShe()).append("'s obligated to keep ").append(c.hisHer()).append(" word and show up.  In order to avoid any chance that the paparazzi might follow ").append(c.himHer()).append(" and disrupt the event, ").append(c.heShe()).append(" heads there in ").append(c.hisHer()).append(" civilian form").toString());
             if(!c.mainName.equals(c.givenName))
@@ -10492,7 +10492,7 @@ public class WorldState
                         d = getCast()[i];
 
             String nameDisplay[] = {
-                c.mainName, d.mainName, 0, 0, 0
+                c.mainName, d.mainName, null, null, null
             };
             append(t, (new StringBuilder("Neither ")).append(c.mainName).append(" nor ").append(d.mainName).append(" have anything scheduled for after the battle, ").toString());
             if(c.innocence > 66)
@@ -10598,7 +10598,7 @@ public class WorldState
             else
                 append(t, "cock");
             append(t, (new StringBuilder(" closer to ")).append(d.mainName).append("'s ").toString());
-            if(d.gender.equals("male") || d.vVirg.booleanValue())
+            if(d.gender.equals("male") || d.vVirg)
                 append(t, "anus.\n\n");
             else
                 append(t, "pussy.\n\n");
@@ -10677,7 +10677,7 @@ public class WorldState
                     c = getCast()[i];
 
             String nameDisplay[] = {
-                c.mainName, 0, 0, 0, 0
+                c.mainName, null, null, null, null
             };
             append(t, (new StringBuilder("The government provides the Chosen with servants to fulfill their every need, from chauffers to chefs, but ")).append(c.givenName).append(" has always felt that ").append(c.heShe()).append(" should handle ").append(c.hisHer()).append(" own chores and live humbly.  ").toString());
             if(c.debased)
@@ -10750,7 +10750,7 @@ public class WorldState
             }
             append(t, (new StringBuilder("The repeated spanking causes ")).append(c.givenName).append("'s ass cheeks to begin to turn red.  And as the former Thrall shows no sign of tiring, ").append(c.givenName).append("'s own endurance is put to the test.  ").append(c.HeShe()).append("'s unable to stop ").append(c.hisHer()).append(" soft cries from joining the slap of flesh on flesh, ").append(c.hisHer()).append(" whole body jerking with every hit.  In this position, the former Thrall's knee digs into ").append(c.givenName).append("'s crotch, and ").append(c.givenName).append("'s movements amount to unwillingly humping ").append(c.himHer()).append("self against it.  ").append(c.HeShe()).append("'s soon moaning out loud even in between spanks.  Meanwhile, the former Thrall's pants are still undone from his prior masturbation, and his cock slips out and starts grinding against ").append(c.givenName).append("'s bare thigh.\n\n").toString());
             append(t, (new StringBuilder("It's not much stimulation, but as he enjoys ")).append(c.givenName).append("'s cries and the way their bodies squirm against each other, the former Thrall's ecstatic expression goes slack, and his cock starts spurting its load against ").append(c.givenName).append("'s unprotected groin.  He doesn't stop spanking, even as he cums, and ").toString());
-            if(c.cVirg.booleanValue())
+            if(c.cVirg)
             {
                 append(t, (new StringBuilder(String.valueOf(c.givenName))).append(" is almost at the point of climax ").append(c.himHer()).append("self before the former Thrall loses his grip and ").append(c.heShe()).append(" tumbles onto the ground in front of him.  They both take several moments to recover, gasping for breath").toString());
             } else
@@ -10796,7 +10796,7 @@ public class WorldState
                     c = getCast()[i];
 
             String nameDisplay[] = {
-                c.mainName, 0, 0, 0, 0
+                c.mainName, null, null, null, null
             };
             append(t, (new StringBuilder("As the Demons have grown stronger, the stress of battle has become harder and harder for ")).append(c.mainName).append(" to bear.  ").append(c.HeShe()).append("'s already exhausted by the time ").append(c.heShe()).append(" comes home from each fight, and on top of that, ").append(c.hisHer()).append(" schedule is packed with training sessions and public appearances.  The burden is too much for ").append(c.hisHer()).append(" body and mind to bear, and eventually, after an event spent mingling and signing autographs for ").append(c.hisHer()).append(" fans, ").append(c.heShe()).append(" returns to ").append(c.hisHer()).append(" dressing room and falls asleep in ").append(c.hisHer()).append(" chair.\n\n").toString());
             append(t, (new StringBuilder("For superhumans like the Chosen, there's no need for private security details, and the only thing protecting ")).append(c.mainName).append("'s rest is the dressing room door ").append(c.heShe()).append(" forgot to lock.  A male fan trespassing backstage pushes open the door and is shocked by what he sees inside.  ").toString());
@@ -10878,7 +10878,7 @@ public class WorldState
                         d = getCast()[i];
 
             String nameDisplay[] = {
-                c.mainName, d.mainName, 0, 0, 0
+                c.mainName, d.mainName, null, null, null
             };
             append(t, (new StringBuilder("Tonight, both ")).append(c.mainName).append(" and ").append(d.mainName).append(" have been assigned an evening patrol.  They split up and search separately, planning to rendezvous later on.  ").append(c.mainName).append(" is delayed by the appearance of a large Demon on ").append(c.hisHer()).append(" patrol, and ").append(c.heShe()).append(" ends up running late.  But when ").append(c.heShe()).append(" finally arrives, ").append(c.heShe()).append(" sees that the rendezvous area is already swarming with Thralls, and ").append(c.heShe()).append(" realizes that something must be wrong.\n\n").toString());
             append(t, (new StringBuilder("The Thralls seem to be expecting ")).append(c.himHer()).append(", and they don't appear to be afraid in the slightest.  Laughing and jeering at ").append(c.himHer()).append(", the crowd parts to give ").append(c.himHer()).append(" a view of what's at the center.  ").toString());
@@ -10918,7 +10918,7 @@ public class WorldState
             append(t, (new StringBuilder("One Thrall grabs ")).append(c.mainName).append(" by the wrist and pulls ").append(c.himHer()).append(" forward at the same time as another kicks ").append(c.hisHer()).append(" leg out from under ").append(c.himHer()).append(".  ").append(c.HeShe()).append(" falls to ").append(c.hisHer()).append(" knees, ").append(c.hisHer()).append(" head at waist level, and suddenly three different cocks are thrust against ").append(c.hisHer()).append(" face.  ").append(c.HeShe()).append(" turns away and reflexively closes ").append(c.hisHer()).append(" eyes in order to avoid having them poked out, but a rough hand in ").append(c.hisHer()).append(" hair jerks ").append(c.himHer()).append(" back into position, and one of the Thralls pinches ").append(c.hisHer()).append(" nose shut.  ").append(c.HisHer()).append(" lungs soon start burning for air, and when ").append(c.heShe()).append(" gasps for breath, a Thrall's thick shaft is rammed down ").append(c.hisHer()).append(" throat.\n\n").toString());
             append(t, (new StringBuilder(String.valueOf(c.mainName))).append("'s efforts to pull away from the cock in ").append(c.hisHer()).append(" mouth just cause ").append(c.hisHer()).append(" lips to slide back and forth along its length.  ").append(c.HeShe()).append(" can't resist too firmly for fear of what will happen to ").append(d.mainName).append(".  ").append(c.HisHer()).append(" hands, clenched into fists, are pulled out to either side, and ").append(c.hisHer()).append(" soft fingers are pried apart so that another penis can be rubbed against each of ").append(c.hisHer()).append(" palms.  Even though ").append(c.heShe()).append(" refuses to actively stroke them, the Thralls seem plenty happy to just thrust against ").append(c.hisHer()).append(" skin.  ").append(c.HisHer()).append(" attempts to pull ").append(c.hisHer()).append(" hands away are interrupted when ").append(c.heShe()).append(" starts choking on the cum abruptly spurted down ").append(c.hisHer()).append(" throat, but before ").append(c.heShe()).append(" can catch ").append(c.hisHer()).append(" breath, the Thrall pulls out and is replaced by another cock big enough to make ").append(c.hisHer()).append(" jaw ache.\n\n").toString());
             append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" resistance grows weaker and weaker as the other Thralls cum on ").append(c.hisHer()).append(" hands and more approach to use ").append(c.hisHer()).append(" body, thrusting against ").append(c.hisHer()).append(" hair, against ").append(c.hisHer()).append(" clothes, and starting to undress ").append(c.himHer()).append(" in order to prepare ").append(c.himHer()).append(" for further violation.  ").append(c.HisHer()).append(" eyes start to glaze over, and only ").append(c.hisHer()).append(" determination to rescue ").append(c.hisHer()).append(" teammate keeps ").append(c.himHer()).append(" lucid.  ").toString());
-            if(!c.vVirg.booleanValue() && !c.gender.equals("male"))
+            if(!c.vVirg && !c.gender.equals("male"))
             {
                 append(t, (new StringBuilder("It's not long before they start using ")).append(c.hisHer()).append(" pussy as well, ramming themselves inside and cumming quickly between ").append(c.hisHer()).append(" squeezing folds until rivulets of semen are constantly streaming down ").append(c.hisHer()).append(" thighs.  ").append(c.HeShe()).append(" barely notices when ").toString());
                 if(d.gender.equals("female"))
@@ -10927,7 +10927,7 @@ public class WorldState
                     append(t, (new StringBuilder("a particularly strong Thrall starts raping ")).append(c.himHer()).append(" with deep, cruel, merciless thrusts").toString());
                 append(t, (new StringBuilder(".  However, when ")).append(c.heShe()).append(" opens ").append(c.hisHer()).append(" eyes, ").append(c.heShe()).append(" sees ").toString());
             } else
-            if(c.gender.equals("male") && !c.vVirg.booleanValue() || !c.gender.equals("male") && (!c.aVirg.booleanValue() || c.pastTempted.booleanValue()))
+            if(c.gender.equals("male") && !c.vVirg || !c.gender.equals("male") && (!c.aVirg || c.pastTempted))
             {
                 append(t, (new StringBuilder("It's not long before they start using ")).append(c.hisHer()).append(" asshole as well, ramming themselves inside and cumming quickly in ").append(c.hisHer()).append(" bowels until rivulets of semen are constantly streaming down ").append(c.hisHer()).append(" thighs.  ").append(c.HeShe()).append(" barely notices when ").toString());
                 if(d.gender.equals("female"))
@@ -10984,7 +10984,7 @@ public class WorldState
             } else
             {
                 append(t, (new StringBuilder(String.valueOf(c.mainName))).append(" squeaks and tries to squirm away, but ").append(d.mainName).append(" just pushes ").append(c.himHer()).append(" down harder, ").toString());
-                if(c.vVirg.booleanValue() && (c.aVirg.booleanValue() && !c.pastTempted.booleanValue() || c.gender.equals("male")))
+                if(c.vVirg && (c.aVirg && !c.pastTempted || c.gender.equals("male")))
                     append(t, (new StringBuilder("and ")).append(c.mainName).append(" whimpers under the feeling of ").append(d.mainName).append("'s shaft almost penetrating ").append(c.himHer()).append(".\n\n").toString());
                 else
                     append(t, (new StringBuilder(String.valueOf(d.hisHer()))).append(" shaft bottoming out inside ").append(c.mainName).append(".\n\n").toString());
@@ -11074,7 +11074,7 @@ public class WorldState
                     d = getCast()[i];
 
             String nameDisplay[] = {
-                c.mainName, d.mainName, 0, 0, 0
+                c.mainName, d.mainName, null, null, null
             };
             append(t, (new StringBuilder(String.valueOf(c.givenName))).append(" and ").append(d.givenName).append(" each want to outdo the other in fulfilling their Chosen duties.  Because both of them have come to believe that sexual skills are a valuable tool when fighting the Demons, they also each insist that the other's techniques for giving pleasure to the Thralls aren't as good.  In order to settle their dispute, they enlist a mutual friend, a boy who's known ").append(c.givenName).append(" for longer but who also has a lot of respect for ").append(d.givenName).append(".  Even after being brought to a hotel room, he's still not entirely sure what the two Chosen want him for, so he gasps in shock when they pull his pants down and shove him down onto the bed.  ").toString());
             if(d.confidence > 66)
@@ -11219,7 +11219,7 @@ public class WorldState
             {
                 append(t, (new StringBuilder("Just then, ")).append(d.givenName).append(" elbows ").append(c.givenName).append(" in the ribs, and while ").append(c.givenName).append(" recoils, ").append(d.givenName).append(" starts deepthroating their friend's cock.  He cums inside ").append(d.hisHer()).append(" mouth, then immediately goes limp, clearly incapable of cumming again anytime soon.  ").append(c.givenName).append(" sighs and inclines ").append(c.hisHer()).append(" head, acknowledging that ").append(c.heShe()).append(" lost their bet, and that ").append(c.heShe()).append("'ll have to do whatever ").append(d.givenName).append(" says.\n\n").toString());
                 append(t, (new StringBuilder("One hour later, the friend has been chased out and ")).append(c.givenName).append(" is on ").append(c.hisHer()).append(" knees, arms bound behind ").append(c.hisHer()).append(" back").toString());
-                if(!c.vVirg.booleanValue() && !c.aVirg.booleanValue())
+                if(!c.vVirg && !c.aVirg)
                 {
                     if(c.gender.equals("male"))
                     {
@@ -11233,14 +11233,14 @@ public class WorldState
                             append(t, "straining penis.  ");
                     }
                 } else
-                if(!c.vVirg.booleanValue())
+                if(!c.vVirg)
                 {
                     if(c.gender.equals("male"))
                         append(t, (new StringBuilder(", ")).append(c.hisHer()).append(" asshole stuffed with a large vibrating dildo.  ").toString());
                     else
                         append(t, (new StringBuilder(", a large vibrating dildo humming inside ")).append(c.hisHer()).append(" pussy.  ").toString());
                 } else
-                if(!c.aVirg.booleanValue())
+                if(!c.aVirg)
                 {
                     if(c.gender.equals("male"))
                         append(t, (new StringBuilder(", ")).append(c.hisHer()).append(" penis locked in a painfully tight chastity cage.  ").toString());
@@ -11261,10 +11261,10 @@ public class WorldState
                     append(t, (new StringBuilder(String.valueOf(d.hisHer()))).append(" cock down ").append(c.givenName).append("'s throat with only a few brief breaks for breath.\n\n").toString());
                 d.say(t, "\"Aren't you pleased?  This is your chance to learn to do better so that you won't lose again.\"\n\n");
                 c.say(t, "\"");
-                if(c.innocence > 66 && c.cVirg.booleanValue())
+                if(c.innocence > 66 && c.cVirg)
                     c.say(t, "F-F-Feels weeeird!");
                 else
-                if(c.gender.equals("male") && !c.aVirg.booleanValue())
+                if(c.gender.equals("male") && !c.aVirg)
                     c.say(t, "Pleeease, let me cuuum!");
                 else
                 if(c.dignity > 66)
@@ -11300,7 +11300,7 @@ public class WorldState
                     c = getCast()[i];
 
             String nameDisplay[] = {
-                c.mainName, 0, 0, 0, 0
+                c.mainName, null, null, null, null
             };
             append(t, (new StringBuilder(String.valueOf(c.givenName))).append(", with ").append(c.hisHer()).append(" twisted personality, has attracted a group of 'friends' that are more like a gang of thugs and hooligans.  Today, they're gathered in their hideout, formed in a circle around one unlucky fanboy who's already bruised and bleeding.  ").toString());
             if(c.confidence > 66)
@@ -11374,7 +11374,7 @@ public class WorldState
                         d = getCast()[i];
 
             String nameDisplay[] = {
-                c.mainName, d.mainName, 0, 0, 0
+                c.mainName, d.mainName, null, null, null
             };
             append(t, (new StringBuilder("Late that night, ")).append(c.givenName).append(" can be seen loitering outside one of the most notorious hardcore BDSM clubs in the city.  Earlier that evening, ").append(c.heShe()).append(" had been sent a video of ").append(c.himHer()).append("self during battle").toString());
             if(!c.givenName.equals(c.mainName))
@@ -11424,14 +11424,14 @@ public class WorldState
             append(t, (new StringBuilder("The devices all start vibrating and moving at once, and ")).append(d.mainName).append(" lets out a sharp gasp.  ").toString());
             if(d.gender.equals("male"))
             {
-                if(d.vVirg.booleanValue())
+                if(d.vVirg)
                     append(t, (new StringBuilder("The stimulation from the wedge-shaped vibrator ")).append(d.heShe()).append("'s sitting on doesn't reach any of ").append(d.hisHer()).append(" most sensitive places, but ").append(d.heShe()).append(" still feels uncomfortable with the way it digs into ").append(d.hisHer()).append(" anus, especially when the machine bucks under ").append(d.himHer()).append(".  It makes ").append(d.himHer()).append(" wonder how it would feel to have something vibrating even more deeply inside ").append(d.himHer()).append(".  To make matters worse, ").toString());
                 else
                     append(t, (new StringBuilder("The wedge-shaped vibrator under ")).append(d.himHer()).append(" only stimulates the entrance to ").append(d.hisHer()).append(" anus, and while it isn't particularly strong, it makes ").append(d.hisHer()).append(" body crave deeper penetration.  ").append(d.HeShe()).append(" reflexively humps against the bull whenever it bucks.  Alone, that would leave ").append(d.himHer()).append(" unsatisfied, but ").toString());
             } else
             {
                 append(t, (new StringBuilder(String.valueOf(d.HeShe()))).append(" hurriedly leans back in order to avoid pressing ").append(d.hisHer()).append(" sensitive lower lips against the vibrating wedge, ").toString());
-                if(d.vVirg.booleanValue())
+                if(d.vVirg)
                     append(t, (new StringBuilder("and although it doesn't have any protrusions that might deflower ")).append(d.hisHer()).append(" virgin pussy, the way that the vibrations seem to hum all the way into ").append(d.hisHer()).append(" abdomen makes ").append(d.himHer()).append(" wonder just how much more intense it would have felt if ").append(d.heShe()).append(" had allowed the fans to mount a dildo there instead.  ").toString());
                 else
                     append(t, (new StringBuilder("but the brief surge of pleasure is already enough to make ")).append(d.himHer()).append(" wish ").append(d.heShe()).append(" had allowed the fans to mount a dildo there instead.  ").toString());
@@ -11445,26 +11445,26 @@ public class WorldState
             append(t, (new StringBuilder("For ")).append(c.hisHer()).append(" part, ").append(c.mainName).append(" appears at first glance to be holding up better, but ").append(c.heShe()).append("'s having more difficulty than ").append(c.heShe()).append("'s willing to show.  ").toString());
             if(c.gender.equals("male"))
             {
-                if(c.vVirg.booleanValue())
+                if(c.vVirg)
                 {
-                    if(d.gender.equals("male") && d.vVirg.booleanValue())
+                    if(d.gender.equals("male") && d.vVirg)
                         append(t, (new StringBuilder("The anal stimulation is just as troubling to ")).append(c.himHer()).append(", and ").append(c.heShe()).append("'s even more worried about being seen to enjoy it.  ").toString());
                     else
                         append(t, (new StringBuilder("For ")).append(c.himHer()).append(", the seat's vibration doesn't reach any of ").append(d.hisHer()).append(" most sensitive places, but ").append(d.heShe()).append(" still feels uncomfortable with the way it digs into ").append(d.hisHer()).append(" anus, especially when the machine bucks under ").append(d.himHer()).append(".  It makes ").append(d.himHer()).append(" wonder how it would feel to have something vibrating even more deeply inside ").append(d.himHer()).append(".  ").toString());
                 } else
-                if(d.gender.equals("male") && !d.vVirg.booleanValue())
+                if(d.gender.equals("male") && !d.vVirg)
                     append(t, (new StringBuilder("The urge to be filled is just as troubling to ")).append(c.himHer()).append(", and ").append(c.heShe()).append("'s even more embarrassed about showing any signs of ").append(c.hisHer()).append(" lust.  ").toString());
                 else
                     append(t, (new StringBuilder("For ")).append(c.himHer()).append(", the vibration against the entrance to ").append(c.hisHer()).append(" anus only makes ").append(c.himHer()).append(" crave an even deeper anal penetration.  ").toString());
             } else
-            if(c.vVirg.booleanValue())
+            if(c.vVirg)
             {
-                if(!d.gender.equals("male") && d.vVirg.booleanValue())
+                if(!d.gender.equals("male") && d.vVirg)
                     append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" finds the vibrations just as troubling as they seem to reach places never touched by any man, and ").append(c.heShe()).append("'s sure that the audience is enjoying ").append(c.hisHer()).append(" reactions.  ").toString());
                 else
                     append(t, (new StringBuilder("The seat doesn't have any protrusions that might deflower ")).append(c.hisHer()).append(" virgin pussy, but the way that the vibrations seem to hum all the way into ").append(d.hisHer()).append(" abdomen makes ").append(d.himHer()).append(" wonder just how much more intense it would have felt if ").append(d.heShe()).append(" had allowed the fans to mount a dildo there instead.  ").toString());
             } else
-            if(!d.gender.equals("male") && !d.vVirg.booleanValue())
+            if(!d.gender.equals("male") && !d.vVirg)
                 append(t, (new StringBuilder("The urge to be filled is just as troubling to ")).append(c.himHer()).append(", and ").append(c.heShe()).append("'s even more embarrassed about showing any signs of ").append(c.hisHer()).append(" lust.  ").toString());
             else
                 append(t, (new StringBuilder("For ")).append(c.himHer()).append(", the vibration against ").append(c.hisHer()).append(" sensitive lower lips only makes ").append(c.himHer()).append(" long to be penetrated.  ").toString());
@@ -11483,7 +11483,7 @@ public class WorldState
             String description = "";
             Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 0, Project.Emotion.ANGER, Project.Emotion.ANGER);
             Project.changePortrait(d.convertGender(), d.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 1, Project.Emotion.JOY, Project.Emotion.JOY);
-            if(c.timesFantasized() > 0 && d.timesFantasized() > 0 && (c.innocence < 67 || !c.cVirg.booleanValue()) && (d.innocence < 67 || !d.cVirg.booleanValue()))
+            if(c.timesFantasized() > 0 && d.timesFantasized() > 0 && (c.innocence < 67 || !c.cVirg) && (d.innocence < 67 || !d.cVirg))
             {
                 d.say(t, "\"Nnnaaah, nooo!\"\n\n");
                 c.say(t, "\"Aaah, ah!  Yaaah, mmm!\"\n\n");
@@ -11515,7 +11515,7 @@ public class WorldState
                 d.say(t, "\"");
                 description = (new StringBuilder(String.valueOf(c.mainName))).append(" and ").append(d.mainName).append(" have a match to determine who can endure pleasure the longest, but they've both become so lustful that they climax instantly.").toString();
             } else
-            if(c.timesFantasized() > 0 && (c.innocence < 67 || !c.cVirg.booleanValue()))
+            if(c.timesFantasized() > 0 && (c.innocence < 67 || !c.cVirg))
             {
                 c.say(t, "\"Ah!  Aaah!  Nnnaaah, aaah!\"\n\n");
                 append(t, (new StringBuilder("For ")).append(c.mainName).append(", whose body and mind have been trained thoroughly during ").append(c.hisHer()).append(" battles against you, the embarrassment only turns ").append(c.himHer()).append(" on even more.  ").append(c.HeShe()).append(" cums quickly, legs spasming and head thrown back, and the paralyzing pleasure combined with the awkwardness of ").append(c.hisHer()).append(" seat on the machine means that ").append(c.heShe()).append(" isn't able to dismount before the next orgasm hits, and the one after as well.  Much to ").append(c.hisHer()).append(" humiliation, ").append(c.heShe()).append("'s still stuck cumming on the machine even after ").append(d.mainName).append(" dismounts, and ").append(d.mainName).append("'s taunting voice joins the cheering crowd as everyone stops what they're doing to watch ").append(c.hisHer()).append(" unwilling show.\n\n").toString());
@@ -11540,11 +11540,11 @@ public class WorldState
                 c.say(t, "\"");
                 description = (new StringBuilder(String.valueOf(c.mainName))).append(" and ").append(d.mainName).append(" have a match to determine who can endure pleasure the longest, but the public venue and ").append(c.mainName).append("'s exhibitionist tendencies give ").append(d.mainName).append(" an easy win.").toString();
             } else
-            if(d.timesFantasized() > 0 && (d.innocence < 67 || !d.cVirg.booleanValue()))
+            if(d.timesFantasized() > 0 && (d.innocence < 67 || !d.cVirg))
             {
                 d.say(t, "\"Ah!  Aaah!  Yes!  Yes!  Cumming, cumming, cummiiing!\"\n\n");
                 append(t, (new StringBuilder("For ")).append(d.mainName).append(", whose body and mind have been trained thoroughly during ").append(d.hisHer()).append(" battles against you, it's inevitable that the stimulation would break ").append(d.himHer()).append(" quickly.  ").append(d.HeShe()).append(" cums almost instantly - and in the process, ").append(d.heShe()).append(" begins to vigorously grind ").append(d.himHer()).append("self against ").append(c.mainName).append(", happily kissing ").append(c.himHer()).append(" on the lips and using their bindings to hold ").append(c.himHer()).append(" in place.  ").toString());
-                if(c.cVirg.booleanValue())
+                if(c.cVirg)
                     append(t, (new StringBuilder("The disgusted ")).append(c.mainName).append(" tries to cry out in protest, but it's muffled by ").append(d.mainName).append("'s kiss, and there's nothing ").append(c.heShe()).append(" can do but allow ").append(c.himHer()).append("self to be used for ").append(d.mainName).append("'s pleasure as ").append(d.heShe()).append(" cums several times in a row.\n\n").toString());
                 else
                     append(t, (new StringBuilder("The added stimulation is enough to push ")).append(c.mainName).append(" over the edge as well, but ").append(c.heShe()).append(" retains enough sanity to be angry about it, crying out ").append(c.hisHer()).append(" muffled protests into ").append(c.mainName).append("'s mouth even as ").append(c.hisHer()).append(" body jerks in its climax.\n\n").toString());
@@ -11569,7 +11569,7 @@ public class WorldState
                 c.say(t, "\"");
                 description = (new StringBuilder(String.valueOf(c.mainName))).append(" and ").append(d.mainName).append(" have a match to determine who can endure pleasure the longest, but ").append(d.mainName).append(" just uses it as an excuse to cum while molesting ").append(c.mainName).append(".").toString();
             } else
-            if(!d.cVirg.booleanValue())
+            if(!d.cVirg)
             {
                 d.say(t, "\"Nnnaaah!  C-Cummiiing!\"\n\n");
                 append(t, (new StringBuilder(String.valueOf(c.mainName))).append("'s embarrassment gives ").append(c.himHer()).append(" the slight extra bit of resolve ").append(c.heShe()).append(" needs in order to beat ").append(d.mainName).append(".  As soon as ").append(d.mainName).append(" announces ").append(d.hisHer()).append(" defeat, ").append(c.mainName).append(" scrambles off the machine, hoping that the crowd will be distracted by the way that ").append(d.mainName).append(" is thrashing and crying out, humping ").append(d.hisHer()).append(" crotch against vibrating wedge as the waves of orgasm wash over ").append(d.himHer()).append(".  However, several of the spectators are more interested in watching ").append(c.mainName).append(" dress, and ").append(c.heShe()).append(" can't hide ").toString());
@@ -11675,34 +11675,34 @@ public class WorldState
                     } else
                     if(j == 2)
                     {
-                        if(c.dignity > 66 && c.lustful && c.totalDISG >= 0x186a0L && c.modest.booleanValue())
+                        if(c.dignity > 66 && c.lustful && c.totalDISG >= 0x186a0L && c.modest)
                             valid[j] = Boolean.valueOf(true);
                     } else
                     if(j == 3)
                     {
-                        if(c.innocence > 66 && !c.modest.booleanValue() && c.totalSHAM >= 0x989680L && c.timesStripped() == 0)
+                        if(c.innocence > 66 && !c.modest && c.totalSHAM >= 0x989680L && c.timesStripped() == 0)
                             valid[j] = Boolean.valueOf(true);
                     } else
                     if(j == 4)
                     {
-                        if(c.confidence > 66 && !c.modest.booleanValue() && c.totalSHAM >= 0x989680L)
+                        if(c.confidence > 66 && !c.modest && c.totalSHAM >= 0x989680L)
                             valid[j] = Boolean.valueOf(true);
                     } else
                     if(j == 5)
                     {
-                        if(c.morality > 66 && !c.modest.booleanValue() && c.totalSHAM >= 0x989680L)
+                        if(c.morality > 66 && !c.modest && c.totalSHAM >= 0x989680L)
                             valid[j] = Boolean.valueOf(true);
                     } else
                     if(j == 6)
                     {
-                        if(!c.cVirg.booleanValue() && c.confidence < 34 && c.totalDISG >= 0x4c4b40L)
+                        if(!c.cVirg && c.confidence < 34 && c.totalDISG >= 0x4c4b40L)
                         {
                             Chosen d = null;
                             for(int k = 0; k < 3; k++)
                                 if(k != i && getCast()[k] != null)
                                 {
                                     d = getCast()[k];
-                                    if(!d.cVirg.booleanValue() && d.confidence < 67 && d.totalDISG >= 0x4c4b40L && getRelationship(i, k) > 0 && (!c.vVirg.booleanValue() || !c.gender.equals("male") && (!c.aVirg.booleanValue() || c.pastTempted.booleanValue()) || !d.vVirg.booleanValue() || !d.gender.equals("male") && (!d.aVirg.booleanValue() || d.pastTempted.booleanValue())))
+                                    if(!d.cVirg && d.confidence < 67 && d.totalDISG >= 0x4c4b40L && getRelationship(i, k) > 0 && (!c.vVirg || !c.gender.equals("male") && (!c.aVirg || c.pastTempted) || !d.vVirg || !d.gender.equals("male") && (!d.aVirg || d.pastTempted)))
                                         valid[j] = Boolean.valueOf(true);
                                 }
 
@@ -11710,14 +11710,14 @@ public class WorldState
                     } else
                     if(j == 7)
                     {
-                        if((!c.vVirg.booleanValue() || !c.gender.equals("male") && (!c.aVirg.booleanValue() || c.pastTempted.booleanValue())) && !c.cVirg.booleanValue() && c.confidence < 34 && c.totalDISG >= 0x4c4b40L)
+                        if((!c.vVirg || !c.gender.equals("male") && (!c.aVirg || c.pastTempted)) && !c.cVirg && c.confidence < 34 && c.totalDISG >= 0x4c4b40L)
                         {
                             Chosen d = null;
                             for(int k = 0; k < 3; k++)
                                 if(k != i && getCast()[k] != null)
                                 {
                                     d = getCast()[k];
-                                    if(!d.cVirg.booleanValue() && d.confidence > 66 && d.totalDISG >= 0x4c4b40L && getRelationship(i, k) > 0)
+                                    if(!d.cVirg && d.confidence > 66 && d.totalDISG >= 0x4c4b40L && getRelationship(i, k) > 0)
                                         valid[j] = Boolean.valueOf(true);
                                 }
 
@@ -11730,14 +11730,14 @@ public class WorldState
                     } else
                     if(j == 9)
                     {
-                        if((!c.vVirg.booleanValue() || !c.gender.equals("male") && (!c.aVirg.booleanValue() || c.pastTempted.booleanValue())) && !c.cVirg.booleanValue() && c.confidence < 67 && c.confidence > 33 && c.totalDISG >= 0x4c4b40L)
+                        if((!c.vVirg || !c.gender.equals("male") && (!c.aVirg || c.pastTempted)) && !c.cVirg && c.confidence < 67 && c.confidence > 33 && c.totalDISG >= 0x4c4b40L)
                         {
                             Chosen d = null;
                             for(int k = 0; k < 3; k++)
                                 if(k != i && getCast()[k] != null)
                                 {
                                     d = getCast()[k];
-                                    if(!d.cVirg.booleanValue() && d.confidence > 66 && d.totalDISG >= 0x4c4b40L && getRelationship(i, k) > 0)
+                                    if(!d.cVirg && d.confidence > 66 && d.totalDISG >= 0x4c4b40L && getRelationship(i, k) > 0)
                                         valid[j] = Boolean.valueOf(true);
                                 }
 
@@ -11788,26 +11788,26 @@ public class WorldState
                         if(c.morality < 34 && c.totalFEAR + c.totalDISG + c.totalPAIN + c.totalSHAM >= 0x186a0L)
                             valid[j] = Boolean.valueOf(true);
                     } else
-                    if(j == 15 && c.dignity > 66 && !c.modest.booleanValue() && c.totalSHAM >= 0x4c4b40L)
+                    if(j == 15 && c.dignity > 66 && !c.modest && c.totalSHAM >= 0x4c4b40L)
                     {
                         Chosen d = null;
                         for(int k = 0; k < 3; k++)
                             if(k != i && getCast()[k] != null)
                             {
                                 d = getCast()[k];
-                                if(d.dignity < 34 && !d.modest.booleanValue() && d.totalSHAM >= 0x4c4b40L && getRelationship(i, k) < 0 && (!c.cVirg.booleanValue() || !d.cVirg.booleanValue()))
+                                if(d.dignity < 34 && !d.modest && d.totalSHAM >= 0x4c4b40L && getRelationship(i, k) < 0 && (!c.cVirg || !d.cVirg))
                                     valid[j] = Boolean.valueOf(true);
                             }
 
                     }
-                    if(vignetteSeen[j].booleanValue())
+                    if(vignetteSeen[j])
                         valid[j] = Boolean.valueOf(false);
                 }
 
             }
 
         for(int i = 0; i < valid.length; i++)
-            if(valid[i].booleanValue())
+            if(valid[i])
                 options++;
 
         if(options > 0)
@@ -11815,7 +11815,7 @@ public class WorldState
             options = (int)(Math.random() * (double)options);
             int found = 0;
             for(int i = 0; i < valid.length; i++)
-                if(valid[i].booleanValue())
+                if(valid[i])
                     if(found == options)
                     {
                         choice = i;
@@ -11837,7 +11837,7 @@ public class WorldState
         if(c.getPLEALevel() > previousPLEA)
             w.purpleAppend(t, "PLEA up!  ");
         if(c.getINJULevel() > previousINJU)
-            if(w.tickle().booleanValue())
+            if(w.tickle())
                 w.purpleAppend(t, "ANTI up!  ");
             else
                 w.purpleAppend(t, "INJU up!  ");
@@ -11904,12 +11904,12 @@ public class WorldState
                     else
                     if(c.getINJULevel() > 1)
                     {
-                        if(w.tickle().booleanValue())
+                        if(w.tickle())
                             w.append(t, (new StringBuilder("Flustered and demoralized, there's nothing ")).append(c.heShe()).append(" can do to resist the stripping, and ").toString());
                         else
                             w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" bloodied body is in no state to resist the stripping, and ").toString());
                     } else
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                         w.append(t, (new StringBuilder("The effects of exhaustion are starting to set in, slowing ")).append(c.hisHer()).append(" efforts to resist the stripping, and ").toString());
                     else
                         w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" bruised body is in no state to resist the stripping, and ").toString());
@@ -11927,12 +11927,12 @@ public class WorldState
                     else
                     if(c.getINJULevel() > 1)
                     {
-                        if(w.tickle().booleanValue())
+                        if(w.tickle())
                             w.append(t, (new StringBuilder("Then, while ")).append(c.heShe()).append("'s surprised and flustered, ").append(c.reference(x)).append(" pulls off ").append(c.hisHer()).append(" ").append(feetType).append(" too").toString());
                         else
                             w.append(t, (new StringBuilder("Bruised and bloodied as ")).append(c.heShe()).append(" is, ").append(c.reference(x)).append(" has no trouble pulling off ").append(c.hisHer()).append(" ").append(feetType).append(" too").toString());
                     } else
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                         w.append(t, (new StringBuilder("With the effects of exhaustion starting to set in, ")).append(c.heShe()).append("'s too slow to stop ").append(c.reference(x)).append(" from pulling off ").append(c.hisHer()).append(" ").append(feetType).append(" as well").toString());
                     else
                         w.append(t, (new StringBuilder("With bruises accumulating on ")).append(c.hisHer()).append(" body, ").append(c.heShe()).append("'s too slow to stop ").append(c.reference(x)).append(" from pulling off ").append(c.hisHer()).append(" ").append(feetType).append(" as well").toString());
@@ -12000,7 +12000,7 @@ public class WorldState
                 } else
                 if(c.getINJULevel() > 2)
                 {
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                         w.append(t, (new StringBuilder(", and ")).append(c.heShe()).append("'s exhausted enough that ").append(c.heShe()).append(" can't even spare the effort to keep ").append(c.hisHer()).append(" chest covered.  ").toString());
                     else
                     if(c.gender.equals("male"))
@@ -12008,7 +12008,7 @@ public class WorldState
                     else
                         w.append(t, (new StringBuilder(", and with one of ")).append(c.hisHer()).append(" arms broken, ").append(c.heShe()).append(" has a hard time keeping everything covered.  ").toString());
                 } else
-                if(w.tickle().booleanValue())
+                if(w.tickle())
                     w.append(t, (new StringBuilder(", but ")).append(c.heShe()).append("'s too flustered and occupied trying to fend you off to have any hope of keeping ").append(c.himHer()).append("self covered.  ").toString());
                 else
                 if(c.gender.equals("male"))
@@ -12079,12 +12079,12 @@ public class WorldState
                 else
                 if(c.getINJULevel() > 3)
                 {
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                         w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" spasms wildly, wasting the last of ").append(c.hisHer()).append(" energy, ").toString());
                     else
                         w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" shrieks in pain as ").append(c.hisHer()).append(" shattered limbs are manhandled, ").toString());
                 } else
-                if(w.tickle().booleanValue())
+                if(w.tickle())
                     w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" moans in desperation, ").toString());
                 else
                     w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" cries out in pain at the pressure put on ").append(c.hisHer()).append(" fractured leg, ").toString());
@@ -12178,12 +12178,12 @@ public class WorldState
                 else
                 if(c.getINJULevel() > 4)
                 {
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                         w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" splayed-out form, gasping for breath, makes for a pathetic sight, ").toString());
                     else
                         w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" mortally-wounded body makes for a pathetic sight, ").toString());
                 } else
-                if(w.tickle().booleanValue())
+                if(w.tickle())
                     w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s too worn out to even have the coordination to cover ").append(c.himHer()).append("self, ").toString());
                 else
                     w.append(t, (new StringBuilder("With ")).append(c.hisHer()).append(" body shattered, ").append(c.heShe()).append(" has no strength to cover ").append(c.himHer()).append(" self, ").toString());
@@ -12230,12 +12230,12 @@ public class WorldState
                 else
                 if(c.getINJULevel() > 1)
                 {
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                         w.append(t, (new StringBuilder(String.valueOf(c.heShe()))).append("'s far too exhausted to fend off the assault.").toString());
                     else
                         w.append(t, (new StringBuilder(String.valueOf(c.heShe()))).append("'s far too badly hurt to fend off the assault.").toString());
                 } else
-                if(w.tickle().booleanValue())
+                if(w.tickle())
                     w.append(t, (new StringBuilder(String.valueOf(c.hisHer()))).append(" growing tiredness and distraction prevent ").append(c.himHer()).append(" from fending off the assault.").toString());
                 else
                     w.append(t, (new StringBuilder(String.valueOf(c.hisHer()))).append(" bruised limbs lack the strength to completely fend off the assault.").toString());
@@ -12247,12 +12247,12 @@ public class WorldState
                 else
                 if(c.getINJULevel() > 2)
                 {
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" moans helplessly ").toString());
                     else
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" cries out in pain as ").append(c.hisHer()).append(" fractured limbs are jostled, but there's pleasure in ").append(c.hisHer()).append(" voice too ").toString());
                 } else
-                if(w.tickle().booleanValue())
+                if(w.tickle())
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is barely able to suppress ").append(c.hisHer()).append(" moans of pleasure ").toString());
                 else
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s grunts of pain turn into moans of pleasure ").toString());
@@ -12318,12 +12318,12 @@ public class WorldState
                 else
                 if(c.getINJULevel() > 3)
                 {
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                         w.append(t, (new StringBuilder("is completely irrelevant in the face of ")).append(c.hisHer()).append(" extreme exhaustion.").toString());
                     else
                         w.append(t, (new StringBuilder("and broken bones aren't enough to drown out the pleasure as ")).append(c.heShe()).append(" approaches orgasm.").toString());
                 } else
-                if(w.tickle().booleanValue())
+                if(w.tickle())
                     w.append(t, (new StringBuilder("isn't enough to stop ")).append(c.hisHer()).append(" breathless moans from coming out.").toString());
                 else
                     w.append(t, (new StringBuilder("isn't enough to stop the pain of ")).append(c.hisHer()).append(" injuries from being overwhelmed by surging, borderline-orgasmic pleasure.").toString());
@@ -12353,12 +12353,12 @@ public class WorldState
                 else
                 if(c.getINJULevel() > 4)
                 {
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                         w.append(t, (new StringBuilder(", even as ")).append(c.heShe()).append(" almost blacks out from exhaustion.  ").toString());
                     else
                         w.append(t, (new StringBuilder(", the sensations somehow bypassing the missing nerves from ")).append(c.hisHer()).append(" mortal wounds.  ").toString());
                 } else
-                if(w.tickle().booleanValue())
+                if(w.tickle())
                     w.append(t, (new StringBuilder(", ")).append(c.hisHer()).append(" movements weak and uncoordinated with exhaustion.  ").toString());
                 else
                     w.append(t, (new StringBuilder(", each buck of ")).append(c.hisHer()).append(" hips causing a spike of pain to shoot through ").append(c.hisHer()).append(" shattered limbs.  ").toString());
@@ -12394,7 +12394,7 @@ public class WorldState
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s clothes are badly torn and ").toString());
                 else
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" has had ").append(c.hisHer()).append(" ").append(bottomDesc).append(" torn off ").append(c.hisHer()).append(" legs and ").toString());
-                if(w.tickle().booleanValue())
+                if(w.tickle())
                 {
                     if(confidence > 66)
                         w.append(t, (new StringBuilder(String.valueOf(c.heShe()))).append("'s forced to acknowledge that the fight is taking its toll on ").append(c.himHer()).append(".  ").toString());
@@ -12428,7 +12428,7 @@ public class WorldState
             } else
             if(c.getINJULevel() == 2)
             {
-                if(w.tickle().booleanValue())
+                if(w.tickle())
                 {
                     if(c.getPLEALevel() < 2)
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" reels").toString());
@@ -12485,7 +12485,7 @@ public class WorldState
             } else
             if(c.getINJULevel() == 3)
             {
-                if(w.tickle().booleanValue())
+                if(w.tickle())
                 {
                     if(confidence > 66)
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" has been stubbornly concealing just how much all the fighting has been affecting ").append(c.himHer()).append(", but it's obvious that ").append(c.heShe()).append("'s having trouble completely suppressing ").append(c.hisHer()).append(" gasps of exhaustion").toString());
@@ -12504,25 +12504,25 @@ public class WorldState
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" has been desperately trying to protect ").append(c.himHer()).append("self from your assault, but the sound of bone breaking indicates that ").append(c.heShe()).append("'s being overwhelmed").toString());
                 if(c.getEXPOLevel() < 3)
                 {
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                         w.append(t, (new StringBuilder(", and even though ")).append(c.hisHer()).append(" body isn't actually sustaining any lasting damage, ").toString());
                     else
                         w.append(t, (new StringBuilder(", and even though ")).append(c.hisHer()).append(" body is quickly regenerating the damage, ").toString());
                 } else
                 if(c.getEXPOLevel() > 3)
                 {
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                         w.append(t, (new StringBuilder(", and even though ")).append(c.hisHer()).append(" body remains unhurt beneath ").append(c.hisHer()).append(" shredded clothes, ").toString());
                     else
                         w.append(t, (new StringBuilder(", and even though ")).append(c.hisHer()).append(" shredded clothes expose the way that ").append(c.hisHer()).append(" body is repairing itself by the second, ").toString());
                 } else
-                if(w.tickle().booleanValue())
+                if(w.tickle())
                     w.append(t, (new StringBuilder(", and for just a moment, the arm ")).append(c.heShe()).append(" was using to cover the gap in ").append(c.hisHer()).append(" ").append(bottomDesc).append(" that showed ").append(c.hisHer()).append(" lack of panties falls limp from exhaustion.  ").append(c.HeShe()).append(" quickly moves it back into position, but ").toString());
                 else
                     w.append(t, (new StringBuilder(", and for just a moment, the arm ")).append(c.heShe()).append(" was using to cover the gap in ").append(c.hisHer()).append(" ").append(bottomDesc).append(" that showed ").append(c.hisHer()).append(" lack of panties falls limp at ").append(c.hisHer()).append(" side.  ").append(c.HeShe()).append(" quickly starts to regenerate, but ").toString());
                 if(c.getHATELevel() < 3)
                 {
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                         w.append(t, (new StringBuilder("it's unpleasant enough that ")).append(c.heShe()).append(" desperately wants to escape.  ").toString());
                     else
                         w.append(t, (new StringBuilder("it's painful enough that ")).append(c.heShe()).append(" obviously wants to stop it from happening again.  ").toString());
@@ -12530,13 +12530,13 @@ public class WorldState
                 if(c.getHATELevel() > 3)
                     w.append(t, (new StringBuilder(String.valueOf(c.heShe()))).append(" shrieks promises of vengeance at the top of ").append(c.hisHer()).append(" lungs.  ").toString());
                 else
-                if(w.tickle().booleanValue())
+                if(w.tickle())
                     w.append(t, (new StringBuilder(String.valueOf(c.heShe()))).append("'s still in a blind rage as ").append(c.heShe()).append(" attempts to retaliate.  ").toString());
                 else
                     w.append(t, (new StringBuilder("even before the limb is repaired, ")).append(c.heShe()).append("'s trying to retaliate in a blind rage.  ").toString());
                 if(c.getPLEALevel() < 3)
                 {
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                         w.append(t, (new StringBuilder("The accumulating exhaustion will make it hard for ")).append(c.himHer()).append(" to do anything, though.").toString());
                     else
                         w.append(t, (new StringBuilder("The accumulating damage will make it hard for ")).append(c.himHer()).append(" to do anything, though.").toString());
@@ -12556,7 +12556,7 @@ public class WorldState
             {
                 if(c.getHATELevel() < 4)
                 {
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" cries out helplessly").toString());
                     else
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" cries out in pain").toString());
@@ -12564,11 +12564,11 @@ public class WorldState
                 if(c.getHATELevel() > 4)
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" erupts with tendrils of Demonic energy").toString());
                 else
-                if(w.tickle().booleanValue())
+                if(w.tickle())
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" shrieks in helpless rage").toString());
                 else
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" shrieks in rage and pain").toString());
-                if(w.tickle().booleanValue())
+                if(w.tickle())
                 {
                     if(confidence > 66)
                         w.append(t, (new StringBuilder(", still thrashing wildly as ")).append(c.heShe()).append(" tries to fight, but too exhausted for it to do ").append(c.himHer()).append(" any good.  ").toString());
@@ -12609,7 +12609,7 @@ public class WorldState
                 else
                     w.append(t, (new StringBuilder(" and cause the remaining scraps of ")).append(c.hisHer()).append(" ").append(bottomDesc).append(" to shift so that they don't cover anything at all.").toString());
             } else
-            if(w.tickle().booleanValue())
+            if(w.tickle())
                 w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is completely out of breath from fighting so much, and a regular person would have passed out already.  However, ").append(c.hisHer()).append(" Chosen powers force ").append(c.himHer()).append(" to remain awake and alert, no matter how heavy ").append(c.hisHer()).append(" limbs feel or how much ").append(c.heShe()).append(" just wants to give up.").toString());
             else
                 w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is being continually dealt wounds that ought to be fatal, but ").append(c.hisHer()).append(" Chosen powers don't permit ").append(c.himHer()).append(" to die or even pass out.  However, they do make it harder and harder for ").append(c.himHer()).append(" to defend ").append(c.himHer()).append("self.").toString());
@@ -12638,12 +12638,12 @@ public class WorldState
                 else
                 if(c.getINJULevel() > 1)
                 {
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                         w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" subconsciously compensates for ").append(c.hisHer()).append(" feelings of helplessness by blaming others, and ").append(c.heShe()).append("'s ").toString());
                     else
                         w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s bleding from various wounds, putting ").append(c.himHer()).append(" in a desperate state of mind, and ").append(c.heShe()).append("'s ").toString());
                 } else
-                if(w.tickle().booleanValue())
+                if(w.tickle())
                     w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s starting to get worried about how easy it seems to be for ").append(c.reference(x)).append(" to toy with ").append(c.himHer()).append(", and ").append(c.heShe()).append("'s ").toString());
                 else
                     w.append(t, (new StringBuilder("The pain of ")).append(c.hisHer()).append(" bruises fuels ").append(c.hisHer()).append(" anger, and ").append(c.heShe()).append("'s ").toString());
@@ -12676,12 +12676,12 @@ public class WorldState
                 else
                 if(c.getINJULevel() > 2)
                 {
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                         w.append(t, "Showing obvious signs of exhaustion, ");
                     else
                         w.append(t, (new StringBuilder("With the pain of ")).append(c.hisHer()).append(" severe injuries, ").toString());
                 } else
-                if(w.tickle().booleanValue())
+                if(w.tickle())
                     w.append(t, "Reflexively flinching away from every touch, ");
                 else
                     w.append(t, (new StringBuilder("With ")).append(c.hisHer()).append(" fight-or-flight response stimulated by the cuts covering ").append(c.hisHer()).append(" body, ").toString());
@@ -12700,12 +12700,12 @@ public class WorldState
                 else
                 if(c.getINJULevel() > 3)
                 {
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                         w.append(t, (new StringBuilder("Desperately struggling against ")).append(c.hisHer()).append(" overwhelming exhaustion, ").toString());
                     else
                         w.append(t, (new StringBuilder("Desperately struggling despite ")).append(c.hisHer()).append(" shattered body, ").toString());
                 } else
-                if(w.tickle().booleanValue())
+                if(w.tickle())
                     w.append(t, "Gasping and moaning with exhaustion, ");
                 else
                     w.append(t, (new StringBuilder("Made desperate by ")).append(c.hisHer()).append(" serious wounds, ").toString());
@@ -12745,12 +12745,12 @@ public class WorldState
                 else
                 if(c.getINJULevel() > 4)
                 {
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                         w.append(t, ", struggling for breath.  ");
                     else
                         w.append(t, (new StringBuilder(", barely even acknowledging the mortal wounds covering ")).append(c.hisHer()).append(" body.  ").toString());
                 } else
-                if(w.tickle().booleanValue())
+                if(w.tickle())
                     w.append(t, ", twitching wildly at the slightest touch.  ");
                 else
                     w.append(t, (new StringBuilder(", barely even acknowledging ")).append(c.hisHer()).append(" shattered body.  ").toString());
@@ -12853,7 +12853,7 @@ public class WorldState
                 if(killer.getConfidence() > 66)
                 {
                     w.append(t, (new StringBuilder(String.valueOf(victim1.getMainName()))).append(" is ").toString());
-                    if(victim1.isSurrounded().booleanValue())
+                    if(victim1.isSurrounded())
                         w.append(t, "surrounded by enemies, disarmed and unable to get out of the way.");
                     else
                         w.append(t, "caught by your Commander body, unable to get out of the way.");
@@ -12899,7 +12899,7 @@ public class WorldState
         Boolean thirdSane = Boolean.valueOf(true);
         for(int i = 0; i < 3; i++)
             if(i != killer.getNumber() && i != victim.getNumber())
-                if(!w.getCast()[i].alive.booleanValue())
+                if(!w.getCast()[i].alive)
                     thirdAlive = Boolean.valueOf(false);
                 else
                 if(w.getCast()[i].resolve <= 0)
@@ -12912,7 +12912,7 @@ public class WorldState
                 if(victim.getConfidence() > 66)
                 {
                     w.append(t, (new StringBuilder(String.valueOf(killer.getMainName()))).append(" closes ").append(killer.hisHer()).append(" eyes and swings ").append(killer.hisHer()).append(" arm, sweeping a wave of destructive energy across the battlefield.  When ").append(killer.heShe()).append(" opens ").append(killer.hisHer()).append(" eyes, ").append(killer.heShe()).append("'s shocked and horrified to see that ").append(victim.getMainName()).append(" lies on the ground, ").append(victim.hisHer()).append(" life quickly fading away ").toString());
-                    if(victim.isSurrounded().booleanValue())
+                    if(victim.isSurrounded())
                         w.append(t, (new StringBuilder("among the bodies of the Thralls who had been tormenting ")).append(victim.himHer()).append(".").toString());
                     else
                     if(usedForsaken != null)
@@ -12924,7 +12924,7 @@ public class WorldState
                         w.append(t, "near the smoldering remains of your Commander body.");
                     Project.changePortrait(killer.convertGender(), killer.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), killer.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.FEAR);
                     killer.say(t, "\n\n\"No!  Th-This can't be happening!  ");
-                    if(thirdAlive.booleanValue())
+                    if(thirdAlive)
                         killer.say(t, (new StringBuilder(String.valueOf(victim.getMainName()))).append(", you were supposed to be the one who would definitely survive the longest!  Get up, get up!").toString());
                     else
                         killer.say(t, (new StringBuilder("I can't do this alone, ")).append(victim.getMainName()).append("!  Come on, get up, get up!").toString());
@@ -12932,7 +12932,7 @@ public class WorldState
                 if(victim.getConfidence() > 33)
                 {
                     w.append(t, (new StringBuilder(String.valueOf(killer.getMainName()))).append(" launches countless desperate blasts of energy onto the battlefield, trying to avoid ").append(victim.getMainName()).append("'s position, but failing to account for the large blast radius.  When the dust clears, ").append(killer.heShe()).append(" gasps and covers ").append(killer.hisHer()).append(" mouth.  ").toString());
-                    if(victim.isSurrounded().booleanValue())
+                    if(victim.isSurrounded())
                         w.append(t, "In the midst of the scorched remains of a crowd of Thralls, ");
                     else
                     if(usedForsaken != null)
@@ -12948,7 +12948,7 @@ public class WorldState
                 } else
                 {
                     w.append(t, (new StringBuilder("Caught up in ")).append(killer.hisHer()).append(" eagerness to defeat the Demon Lord once and for all, ").append(killer.getMainName()).append(" lashes out wildly with tremendously destructive bursts of energy.  ").toString());
-                    if(victim.isSurrounded().booleanValue())
+                    if(victim.isSurrounded())
                         w.append(t, (new StringBuilder("However, as ")).append(killer.heShe()).append(" steps over a Thrall's body, ").append(killer.hisHer()).append(" eyes widen in shock when ").append(killer.heShe()).append(" realizes that it's actually ").append(victim.getMainName()).append(".").toString());
                     else
                     if(usedForsaken != null)
@@ -12963,7 +12963,7 @@ public class WorldState
                 }
                 killer.say(t, "\"\n\n");
                 victim.say(t, "\"");
-                if(victim.isDrained().booleanValue())
+                if(victim.isDrained())
                 {
                     if(victim.getMorality() > 66)
                         victim.say(t, "It may be... cowardly... but I'm happy... that you freed me... from all this...");
@@ -12986,7 +12986,7 @@ public class WorldState
                 if(victim.getConfidence() > 66)
                 {
                     w.append(t, (new StringBuilder("After launching ")).append(killer.hisHer()).append(" all-out attack, ").append(killer.getMainName()).append(" blinks away ").append(killer.hisHer()).append(" tears, rushing forward and hoping against hope that ").append(killer.heShe()).append(" won't find ").append(killer.hisHer()).append(" friend's body.  But it's not long until ").append(killer.heShe()).append(" spots ").append(victim.getMainName()).toString());
-                    if(victim.isSurrounded().booleanValue())
+                    if(victim.isSurrounded())
                         w.append(t, (new StringBuilder(" lying among the remains of the Thralls who had been attacking ")).append(victim.himHer()).append(".").toString());
                     else
                     if(usedForsaken != null)
@@ -13002,7 +13002,7 @@ public class WorldState
                 if(victim.getConfidence() > 33)
                 {
                     w.append(t, (new StringBuilder(String.valueOf(killer.getMainName()))).append(" fires blasts of energy into the enemy formation, being as careful as ").append(killer.heShe()).append(" can to avoid ").append(victim.getMainName()).append("'s position, but it's a futile effort.  After it's over, ").append(killer.heShe()).append(" ").toString());
-                    if(victim.isSurrounded().booleanValue())
+                    if(victim.isSurrounded())
                         w.append(t, (new StringBuilder("reluctantly approaches the bodies of the dead Thralls, knowing who ")).append(killer.heShe()).append("'ll find among them.").toString());
                     else
                     if(usedForsaken != null)
@@ -13017,7 +13017,7 @@ public class WorldState
                 } else
                 {
                     w.append(t, (new StringBuilder(String.valueOf(killer.getMainName()))).append(" sobs in helpless rage as ").append(killer.heShe()).append(" lashes out at your forces, blasting them apart with pure energy, knowing that ").append(victim.getMainName()).append(" is among them but also that ").append(killer.heShe()).append(" has no choice but to use ").append(killer.hisHer()).append(" full power.  Once all the Demons in the area are dead, ").append(killer.getMainName()).append(" rushes over to ").append(victim.getMainName()).append("'s side, ").toString());
-                    if(victim.isSurrounded().booleanValue())
+                    if(victim.isSurrounded())
                         w.append(t, (new StringBuilder("stepping over the dead Thralls all around ")).append(victim.himHer()).append(" and picking ").toString());
                     else
                     if(usedForsaken != null)
@@ -13033,7 +13033,7 @@ public class WorldState
                 }
                 killer.say(t, "\"\n\n");
                 victim.say(t, "\"");
-                if(victim.isDrained().booleanValue())
+                if(victim.isDrained())
                 {
                     if(victim.getMorality() > 66)
                         victim.say(t, (new StringBuilder(String.valueOf(killer.getMainName()))).append("...  Thank... you...").toString());
@@ -13055,7 +13055,7 @@ public class WorldState
                 if(victim.getConfidence() > 66)
                 {
                     w.append(t, (new StringBuilder("After launching powerful flurry of attacks to wipe out one of the last remaining groups of Demons, ")).append(killer.getMainName()).append(" knows that ").append(victim.getMainName()).append(" couldn't have possibly survived.  However, ").append(killer.hisHer()).append(" heart still jumps when ").append(killer.heShe()).append(" hears a gasp from ").toString());
-                    if(victim.isSurrounded().booleanValue())
+                    if(victim.isSurrounded())
                         w.append(t, "a pile of Thralls' bodies");
                     else
                     if(usedForsaken != null)
@@ -13072,7 +13072,7 @@ public class WorldState
                 if(victim.getConfidence() > 33)
                 {
                     w.append(t, (new StringBuilder("Having reached ")).append(killer.hisHer()).append(" decision, ").append(killer.getMainName()).append(" attacks the Demonic formation with cold ruthlessness, perfectly aware that each of ").append(killer.hisHer()).append(" blasts could be the one that ends the trapped ").append(victim.getMainName()).append("'s life.  Only the tears staining ").append(killer.hisHer()).append(" cheeks are a sign ").append(killer.heShe()).append("'s feeling anything at all.  ").append(killer.HeShe()).append(" prepares to go after the next group of Demons, but ").append(killer.heShe()).append(" can't help hesitating when ").append(killer.heShe()).append(" spots ").append(victim.getMainName()).toString());
-                    if(victim.isSurrounded().booleanValue())
+                    if(victim.isSurrounded())
                         w.append(t, (new StringBuilder(" taking ")).append(victim.hisHer()).append(" last breaths among the remains of the Thralls who had been surrounding ").append(victim.himHer()).append(".").toString());
                     else
                     if(usedForsaken != null)
@@ -13087,7 +13087,7 @@ public class WorldState
                 } else
                 {
                     w.append(t, (new StringBuilder(String.valueOf(killer.getMainName()))).append(" knows that it's no longer possible to save ").append(victim.getMainName()).append(", so ").append(killer.heShe()).append(" tries to at least give ").append(victim.getMainName()).append(" a quick death.  Blasts of overwhelmingly powerful energy rip through the Demonic formation, ").toString());
-                    if(victim.isSurrounded().booleanValue())
+                    if(victim.isSurrounded())
                         w.append(t, (new StringBuilder("including the group of Thralls holding ")).append(victim.getMainName()).append(" captive.").toString());
                     else
                     if(usedForsaken != null)
@@ -13103,7 +13103,7 @@ public class WorldState
                 }
                 killer.say(t, "\"\n\n");
                 victim.say(t, "\"");
-                if(victim.isDrained().booleanValue())
+                if(victim.isDrained())
                 {
                     if(victim.getMorality() > 66)
                         victim.say(t, "Ah... I thought dying... would hurt more...");
@@ -13130,7 +13130,7 @@ public class WorldState
                     if(victim.getConfidence() > 66)
                     {
                         w.append(t, (new StringBuilder(String.valueOf(killer.getMainName()))).append(" is trembling with apprehension at what ").append(killer.heShe()).append(" has to do, but ").append(killer.heShe()).append(" still doesn't hesitate.  Blasts of destructive energy fly from ").append(killer.hisHer()).append(" hands, ").toString());
-                        if(victim.isSurrounded().booleanValue())
+                        if(victim.isSurrounded())
                             w.append(t, (new StringBuilder("tearing through one of the last Demonic formations, the nearby Thralls, and ")).append(victim.getMainName()).append(", who they hold captive.").toString());
                         else
                         if(usedForsaken != null)
@@ -13146,7 +13146,7 @@ public class WorldState
                     if(victim.getConfidence() > 33)
                     {
                         w.append(t, (new StringBuilder(String.valueOf(killer.getMainName()))).append(" levels ").append(killer.hisHer()).append(" hand at the mass of Demons ").toString());
-                        if(victim.isSurrounded().booleanValue())
+                        if(victim.isSurrounded())
                             w.append(t, (new StringBuilder("and Thralls where ")).append(victim.getMainName()).append(" is held captive").toString());
                         else
                         if(usedForsaken != null)
@@ -13159,7 +13159,7 @@ public class WorldState
                     } else
                     {
                         w.append(t, (new StringBuilder(String.valueOf(killer.getMainName()))).append(" fights ").append(killer.hisHer()).append(" way into the heart of the Demonic formation, launching blasts of destructive energy in all directions.  ").append(killer.HeShe()).append(" knows that ").toString());
-                        if(victim.isSurrounded().booleanValue())
+                        if(victim.isSurrounded())
                             w.append(t, (new StringBuilder(String.valueOf(victim.getMainName()))).append(" is being held by the Thralls there").toString());
                         else
                         if(usedForsaken != null)
@@ -13176,7 +13176,7 @@ public class WorldState
                     if(victim.getConfidence() > 66)
                     {
                         w.append(t, (new StringBuilder(String.valueOf(killer.getMainName()))).append(" is surrounded by Demons, and ").append(killer.heShe()).append(" flings blasts of energy in all directions to defend ").append(killer.himHer()).append("self.  Through a gap in the crowd, ").append(killer.heShe()).append(" ").toString());
-                        if(victim.isSurrounded().booleanValue())
+                        if(victim.isSurrounded())
                             w.append(t, (new StringBuilder("sees ")).append(victim.getMainName()).append(" being mobbed by the Thralls.  The two Chosen lock eyes for a moment, and then ").toString());
                         else
                         if(usedForsaken != null)
@@ -13190,7 +13190,7 @@ public class WorldState
                     if(victim.getConfidence() > 33)
                     {
                         w.append(t, (new StringBuilder(String.valueOf(killer.getMainName()))).append(" fights desperately, backed into a corner by the last remaining swarm of Demons.  ").append(killer.HisHer()).append(" only way out is through the ").toString());
-                        if(victim.isSurrounded().booleanValue())
+                        if(victim.isSurrounded())
                             w.append(t, (new StringBuilder("crowd of Thralls abusing ")).append(victim.getMainName()).toString());
                         else
                         if(usedForsaken != null)
@@ -13203,7 +13203,7 @@ public class WorldState
                     } else
                     {
                         w.append(t, (new StringBuilder(String.valueOf(killer.getMainName()))).append(" hunts down the last few groups of Demons with ruthless efficiency.  ").toString());
-                        if(victim.isSurrounded().booleanValue())
+                        if(victim.isSurrounded())
                             w.append(t, (new StringBuilder("Some of those Demons are intermingled with Thralls, and some of those Thralls are holding ")).append(victim.getMainName()).append(" captive, but ").append(killer.getMainName()).append(" refuses to hold back.  ").toString());
                         else
                         if(usedForsaken != null)
@@ -13221,7 +13221,7 @@ public class WorldState
                 if(victim.getConfidence() > 66)
                 {
                     w.append(t, (new StringBuilder(String.valueOf(victim.getMainName()))).append(" grits ").append(victim.hisHer()).append(" teeth, ").toString());
-                    if(victim.isSurrounded().booleanValue())
+                    if(victim.isSurrounded())
                         w.append(t, (new StringBuilder("struggling against the Thralls holding ")).append(victim.himHer()).append(" down, ").toString());
                     else
                     if(usedForsaken != null)
@@ -13235,7 +13235,7 @@ public class WorldState
                 if(victim.getConfidence() > 33)
                 {
                     w.append(t, (new StringBuilder(String.valueOf(killer.getMainName()))).append(" climbs to the rooftop of a tall office building, intending to use it to rain destructive energy on enemies who can't fight back.  ").append(killer.HeShe()).append(" carelessly shoots glowing arcs down at the city below, ").toString());
-                    if(victim.isSurrounded().booleanValue())
+                    if(victim.isSurrounded())
                         w.append(t, (new StringBuilder("not caring if ")).append(killer.heShe()).append(" hits any Thralls, or even if ").append(killer.heShe()).append(" hits ").append(victim.getMainName()).append(", who they hold captive.  ").toString());
                     else
                     if(usedForsaken != null)
@@ -13248,7 +13248,7 @@ public class WorldState
                 } else
                 {
                     w.append(t, (new StringBuilder("When ")).append(killer.getMainName()).append(" approaches, ").toString());
-                    if(victim.isSurrounded().booleanValue())
+                    if(victim.isSurrounded())
                         w.append(t, (new StringBuilder("the Thralls surrounding ")).append(victim.getMainName()).append(" leave ").append(victim.himHer()).append(" behind and try to escape.  ").toString());
                     else
                     if(usedForsaken != null)
@@ -13256,7 +13256,7 @@ public class WorldState
                     else
                         w.append(t, (new StringBuilder("you cast aside ")).append(victim.getMainName()).append(" and attempt to retreat your Commander body so it can be used again.  ").toString());
                     w.append(t, (new StringBuilder("But ")).append(killer.getMainName()).append(" blasts the entire area with ").toString());
-                    if(victim.isSurrounded().booleanValue() || capturesPossible == 0)
+                    if(victim.isSurrounded() || capturesPossible == 0)
                         w.append(t, (new StringBuilder("an overwhelmingly excessive barrage of destructive energy, mostly centered around ")).append(victim.getMainName()).append(".").toString());
                     else
                     if(usedForsaken != null)
@@ -13272,7 +13272,7 @@ public class WorldState
                 if(victim.getConfidence() > 66)
                 {
                     w.append(t, (new StringBuilder(String.valueOf(killer.getMainName()))).append(" is trembling with apprehension at what ").append(killer.heShe()).append(" has to do, but when ").append(killer.heShe()).append(" sees ").append(victim.getMainName()).append(", ").append(killer.hisHer()).append(" expression hardens.  Blasts of destructive energy fly from ").append(killer.hisHer()).append(" hands, ").toString());
-                    if(victim.isSurrounded().booleanValue())
+                    if(victim.isSurrounded())
                         w.append(t, (new StringBuilder("tearing through one of the last Demonic formations, the nearby Thralls, and ")).append(victim.getMainName()).append(", who they hold captive.").toString());
                     else
                     if(usedForsaken != null)
@@ -13288,7 +13288,7 @@ public class WorldState
                 if(victim.getConfidence() > 33)
                 {
                     w.append(t, (new StringBuilder(String.valueOf(killer.getMainName()))).append(" levels ").append(killer.hisHer()).append(" hand at the mass of Demons ").toString());
-                    if(victim.isSurrounded().booleanValue())
+                    if(victim.isSurrounded())
                         w.append(t, (new StringBuilder("and Thralls where ")).append(victim.getMainName()).append(" is held captive").toString());
                     else
                     if(usedForsaken != null)
@@ -13301,7 +13301,7 @@ public class WorldState
                 } else
                 {
                     w.append(t, (new StringBuilder(String.valueOf(killer.getMainName()))).append(" fights ").append(killer.hisHer()).append(" way into the heart of the Demonic formation, launching blasts of destructive energy in all directions.  ").append(killer.HeShe()).append(" knows that ").toString());
-                    if(victim.isSurrounded().booleanValue())
+                    if(victim.isSurrounded())
                         w.append(t, (new StringBuilder(String.valueOf(victim.getMainName()))).append(" is being held by the Thralls there").toString());
                     else
                     if(usedForsaken != null)
@@ -13318,7 +13318,7 @@ public class WorldState
                 if(victim.getConfidence() > 66)
                 {
                     w.append(t, (new StringBuilder(String.valueOf(killer.getMainName()))).append(" is surrounded by Demons, and ").append(killer.heShe()).append(" flings blasts of energy in all directions to defend ").append(killer.himHer()).append("self.  Through a gap in the crowd, ").append(killer.heShe()).append(" ").toString());
-                    if(victim.isSurrounded().booleanValue())
+                    if(victim.isSurrounded())
                         w.append(t, (new StringBuilder("sees ")).append(victim.getMainName()).append(" being mobbed by the Thralls.  The two Chosen lock eyes for a moment, and then ").toString());
                     else
                     if(usedForsaken != null)
@@ -13332,7 +13332,7 @@ public class WorldState
                 if(victim.getConfidence() > 33)
                 {
                     w.append(t, (new StringBuilder(String.valueOf(killer.getMainName()))).append(" fights desperately, backed into a corner by the last remaining swarm of Demons.  ").append(killer.HisHer()).append(" only way out is through the ").toString());
-                    if(victim.isSurrounded().booleanValue())
+                    if(victim.isSurrounded())
                         w.append(t, (new StringBuilder("crowd of Thralls abusing ")).append(victim.getMainName()).toString());
                     else
                     if(usedForsaken != null)
@@ -13345,7 +13345,7 @@ public class WorldState
                 } else
                 {
                     w.append(t, (new StringBuilder(String.valueOf(killer.getMainName()))).append(" hunts down the last few groups of Demons with ruthless efficiency.  ").toString());
-                    if(victim.isSurrounded().booleanValue())
+                    if(victim.isSurrounded())
                         w.append(t, (new StringBuilder("Some of those Demons are intermingled with Thralls, and some of those Thralls are holding ")).append(victim.getMainName()).append(" captive, but ").append(killer.getMainName()).append(" refuses to hold back.  ").toString());
                     else
                     if(usedForsaken != null)
@@ -13363,7 +13363,7 @@ public class WorldState
             if(victim.getConfidence() > 66)
             {
                 w.append(t, (new StringBuilder(String.valueOf(victim.getMainName()))).append(" grits ").append(victim.hisHer()).append(" teeth, ").toString());
-                if(victim.isSurrounded().booleanValue())
+                if(victim.isSurrounded())
                     w.append(t, (new StringBuilder("struggling against the Thralls holding ")).append(victim.himHer()).append(" down, ").toString());
                 else
                 if(usedForsaken != null)
@@ -13377,7 +13377,7 @@ public class WorldState
             if(victim.getConfidence() > 33)
             {
                 w.append(t, (new StringBuilder(String.valueOf(killer.getMainName()))).append(" climbs to the rooftop of a tall office building, using it as a vantage point to locate ").append(victim.getMainName()).append(".  ").append(killer.HeShe()).append(" finds ").append(killer.hisHer()).append(" target and immediately begins launching glowing arcs of destructive energy at the city below, ").toString());
-                if(victim.isSurrounded().booleanValue())
+                if(victim.isSurrounded())
                     w.append(t, (new StringBuilder("aiming at the group of Thralls holding ")).append(victim.getMainName()).append(" captive.  ").toString());
                 else
                 if(usedForsaken != null)
@@ -13390,14 +13390,14 @@ public class WorldState
             } else
             {
                 w.append(t, (new StringBuilder("When ")).append(killer.getMainName()).append(" approaches, ").toString());
-                if(victim.isSurrounded().booleanValue())
+                if(victim.isSurrounded())
                     w.append(t, (new StringBuilder("the Thralls surrounding ")).append(victim.getMainName()).append(" leave ").append(victim.himHer()).append(" behind and try to escape.  ").toString());
                 else
                 if(usedForsaken != null)
                     w.append(t, (new StringBuilder(String.valueOf(usedForsaken.mainName))).append(" abandons the weakened ").append(victim.mainName).append(" and flees.  ").toString());
                 else
                     w.append(t, (new StringBuilder("you cast aside ")).append(victim.getMainName()).append(" and attempt to retreat your Commander body so it can be used again.  ").toString());
-                if(!victim.isSurrounded().booleanValue() && capturesPossible == 0 && usedForsaken == null)
+                if(!victim.isSurrounded() && capturesPossible == 0 && usedForsaken == null)
                     w.append(t, (new StringBuilder("But ")).append(killer.getMainName()).append(" casually blasts your body apart, then grabs the wounded ").append(victim.getMainName()).append(" by the throat and lifts ").append(victim.himHer()).append(" up.  ").toString());
                 else
                     w.append(t, (new StringBuilder(String.valueOf(killer.getMainName()))).append(" doesn't bother to interfere, walking over to ").append(victim.getMainName()).append(" and picking ").append(victim.himHer()).append(" up by the throat.  ").toString());
@@ -13407,7 +13407,7 @@ public class WorldState
             }
             killer.say(t, "\"\n\n");
             victim.say(t, "\"");
-            if(victim.isDrained().booleanValue())
+            if(victim.isDrained())
             {
                 if(killer.getMorality() > 66)
                 {
@@ -13491,7 +13491,7 @@ public class WorldState
 
     public void toggleAdaptations()
     {
-        disableAdaptations = Boolean.valueOf(!disableAdaptations.booleanValue());
+        disableAdaptations = Boolean.valueOf(!disableAdaptations);
     }
 
     public Boolean adaptationsDisabled()
@@ -13529,7 +13529,7 @@ public class WorldState
         String bottomDesc = c.bottomCover;
         if(bottomDesc.equals("strips"))
             bottomDesc = "strips of cloth";
-        if(w.getBodyStatus()[19].booleanValue() && !w.getBodyStatus()[26].booleanValue())
+        if(w.getBodyStatus()[19] && !w.getBodyStatus()[26])
         {
             if(captureProgression % 3 == 1)
             {
@@ -13540,7 +13540,7 @@ public class WorldState
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" squirms in obvious disgust").toString());
                 else
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" visibly recoils and cries out in disgust").toString());
-                if(c.getImpregnationEffectiveness() >= c.impregnationReq() || c.getHATELevel() >= 3 && !vVirg.booleanValue())
+                if(c.getImpregnationEffectiveness() >= c.impregnationReq() || c.getHATELevel() >= 3 && !vVirg)
                 {
                     if(morality > 66)
                         w.append(t, (new StringBuilder(", despairing over the fact that ")).append(c.hisHer()).append(" body is being defiled by the Demon Lord's seed").toString());
@@ -13610,7 +13610,7 @@ public class WorldState
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is completely helpless to stop you when you begin ").toString());
                 else
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" takes a deep breath to brace ").append(c.himHer()).append("self before you start ").toString());
-                if(c.getImpregnationEffectiveness() >= c.impregnationReq() || c.getHATELevel() >= 3 && !vVirg.booleanValue())
+                if(c.getImpregnationEffectiveness() >= c.impregnationReq() || c.getHATELevel() >= 3 && !vVirg)
                 {
                     if(gender.equals("male"))
                         w.append(t, (new StringBuilder("thrusting so deep into ")).append(c.hisHer()).append(" ass that it makes a visible bulge in ").append(c.hisHer()).append(" lower abdomen").toString());
@@ -13682,7 +13682,7 @@ public class WorldState
                     w.append(t, (new StringBuilder("Telepathically telling ")).append(mainName).append(" that ").append(c.heShe()).append("'ll never be able to go back to normal after this, ").toString());
                 else
                     w.append(t, (new StringBuilder("Aiming to further provoke ")).append(mainName).append("'s anger, ").toString());
-                if(c.getImpregnationEffectiveness() >= c.impregnationReq() || c.getHATELevel() >= 3 && !vVirg.booleanValue())
+                if(c.getImpregnationEffectiveness() >= c.impregnationReq() || c.getHATELevel() >= 3 && !vVirg)
                 {
                     w.append(t, (new StringBuilder("you briefly withdraw your shaft from ")).append(c.hisHer()).append(" ").toString());
                     if(gender.equals("male"))
@@ -13748,7 +13748,7 @@ public class WorldState
                     else
                         w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" retains the presence of mind to brace ").append(c.himHer()).append("self before you ").toString());
                 }
-                if(c.getImpregnationEffectiveness() >= c.impregnationReq() || c.getHATELevel() >= 3 && !vVirg.booleanValue())
+                if(c.getImpregnationEffectiveness() >= c.impregnationReq() || c.getHATELevel() >= 3 && !vVirg)
                 {
                     w.append(t, (new StringBuilder("slam ")).append(c.himHer()).append(" down onto the pavement, forcing yourself back inside ").append(c.himHer()).append(" all at once, enveloping ").append(c.hisHer()).append(" body with your own.  ").toString());
                     if(dignity > 66)
@@ -13775,7 +13775,7 @@ public class WorldState
                 }
             }
         } else
-        if(w.getBodyStatus()[20].booleanValue() && !w.getBodyStatus()[26].booleanValue())
+        if(w.getBodyStatus()[20] && !w.getBodyStatus()[26])
         {
             if(captureProgression % 3 == 1)
             {
@@ -14006,7 +14006,7 @@ public class WorldState
                 }
             }
         } else
-        if(w.getBodyStatus()[21].booleanValue())
+        if(w.getBodyStatus()[21])
         {
             if(captureProgression % 3 == 1)
             {
@@ -14015,7 +14015,7 @@ public class WorldState
                 else
                 if(innocence > 33)
                 {
-                    if(w.getBodyStatus()[26].booleanValue())
+                    if(w.getBodyStatus()[26])
                         w.append(t, (new StringBuilder("With ")).append(c.hisHer()).append(" vital energy being drained away, ").append(mainName).append(" is having trouble forming coherent thoughts").toString());
                     else
                         w.append(t, (new StringBuilder("The pulses of light running through the tentacles wrapped around ")).append(mainName).append("'s head are leaving ").append(c.himHer()).append(" unable to form coherent thoughts").toString());
@@ -14046,13 +14046,13 @@ public class WorldState
                         w.append(t, (new StringBuilder(String.valueOf(c.heShe()))).append(" slumbers deeply.").toString());
                     else
                         w.append(t, (new StringBuilder(String.valueOf(c.heShe()))).append(" sleeps without even a trace of fear.").toString());
-                    if(w.getBodyStatus()[26].booleanValue())
+                    if(w.getBodyStatus()[26])
                     {
-                        if(c.getEXPOLevel() >= 3 && !modest.booleanValue() && (w.getBodyStatus()[13].booleanValue() || w.getBodyStatus()[14].booleanValue() || w.getBodyStatus()[6].booleanValue()))
+                        if(c.getEXPOLevel() >= 3 && !modest && (w.getBodyStatus()[13] || w.getBodyStatus()[14] || w.getBodyStatus()[6]))
                             w.append(t, "  The filming spectators can capture footage of how ");
                         else
                             w.append(t, (new StringBuilder("  ")).append(c.HeShe()).append(" isn't consciously aware of how ").toString());
-                        if(c.getHATELevel() >= 3 && !vVirg.booleanValue() && (w.getBodyStatus()[11].booleanValue() || w.getBodyStatus()[14].booleanValue() || w.getBodyStatus()[3].booleanValue()))
+                        if(c.getHATELevel() >= 3 && !vVirg && (w.getBodyStatus()[11] || w.getBodyStatus()[14] || w.getBodyStatus()[3]))
                         {
                             w.append(t, (new StringBuilder("you're fucking ")).append(c.hisHer()).append(" ").toString());
                             if(gender.equals("male"))
@@ -14061,7 +14061,7 @@ public class WorldState
                                 w.append(t, "pussy");
                             w.append(t, ",  making use of the fact that ");
                         }
-                        if(c.getPLEALevel() >= 3 && !cVirg.booleanValue() && (w.getBodyStatus()[11].booleanValue() || w.getBodyStatus()[12].booleanValue() || w.getBodyStatus()[4].booleanValue()))
+                        if(c.getPLEALevel() >= 3 && !cVirg && (w.getBodyStatus()[11] || w.getBodyStatus()[12] || w.getBodyStatus()[4]))
                             w.append(t, (new StringBuilder(String.valueOf(c.hisHer()))).append(" hips are instinctively bucking in orgasm at your stimulation.").toString());
                         else
                             w.append(t, (new StringBuilder(String.valueOf(c.hisHer()))).append(" own desire to be defeated is making you stronger.").toString());
@@ -14108,17 +14108,17 @@ public class WorldState
                         else
                             w.append(t, (new StringBuilder(", tears of defiance coming to ")).append(c.hisHer()).append(" eyes.").toString());
                     }
-                    if(w.getBodyStatus()[26].booleanValue())
+                    if(w.getBodyStatus()[26])
                     {
-                        if(c.getEXPOLevel() >= 3 && !modest.booleanValue() && (w.getBodyStatus()[14].booleanValue() || w.getBodyStatus()[13].booleanValue() || w.getBodyStatus()[6].booleanValue()))
+                        if(c.getEXPOLevel() >= 3 && !modest && (w.getBodyStatus()[14] || w.getBodyStatus()[13] || w.getBodyStatus()[6]))
                             w.append(t, (new StringBuilder("  To the spectators, it still looks like ")).append(c.heShe()).append("'s begin defeated, ").toString());
                         else
                             w.append(t, (new StringBuilder("  ")).append(c.HeShe()).append("'s still having trouble fighting back, ").toString());
-                        if(c.getHATELevel() >= 3 && !vVirg.booleanValue() && (w.getBodyStatus()[11].booleanValue() || w.getBodyStatus()[14].booleanValue() || w.getBodyStatus()[3].booleanValue()))
+                        if(c.getHATELevel() >= 3 && !vVirg && (w.getBodyStatus()[11] || w.getBodyStatus()[14] || w.getBodyStatus()[3]))
                             w.append(t, (new StringBuilder("as you're still fucking ")).append(c.himHer()).append(" hard at the same time").toString());
                         else
                             w.append(t, "as this body's drain abilities still make it highly effective against the Chosen");
-                        if(c.getPLEALevel() >= 3 && !cVirg.booleanValue() && (w.getBodyStatus()[12].booleanValue() || w.getBodyStatus()[11].booleanValue() || w.getBodyStatus()[4].booleanValue()))
+                        if(c.getPLEALevel() >= 3 && !cVirg && (w.getBodyStatus()[12] || w.getBodyStatus()[11] || w.getBodyStatus()[4]))
                             w.append(t, (new StringBuilder(", not to mention that ")).append(c.heShe()).append(" can't stop bucking ").append(c.hisHer()).append(" hips in orgasm.").toString());
                         else
                             w.append(t, ".");
@@ -14136,7 +14136,7 @@ public class WorldState
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s timid soul is failing before the might of your draining feelers").toString());
                 if(c.getDrainEffectiveness() >= c.drainReq())
                 {
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                     {
                         if(innocence > 66)
                             w.append(t, (new StringBuilder(", but in ")).append(c.hisHer()).append(" eagerness to have you kill ").append(c.himHer()).append(", ").append(c.heShe()).append(" neglected to consider that you'd be able to tickle all ").append(c.hisHer()).append(" most sensitive spots while ").append(c.heShe()).append("'s unable to squirm away.  ").toString());
@@ -14176,24 +14176,24 @@ public class WorldState
                         w.append(t, (new StringBuilder(", and ")).append(c.hisHer()).append(" moment of weakness will make things even worse for ").append(c.himHer()).append(".").toString());
                     else
                         w.append(t, (new StringBuilder(", and ")).append(c.heShe()).append("'ll be reminded that the Demons have ").append(c.himHer()).append(" outmatched in cunning and cruelty as well.").toString());
-                    if(w.getBodyStatus()[26].booleanValue())
+                    if(w.getBodyStatus()[26])
                     {
-                        if(c.getPLEALevel() >= 3 && !cVirg.booleanValue() && (w.getBodyStatus()[12].booleanValue() || w.getBodyStatus()[11].booleanValue() || w.getBodyStatus()[4].booleanValue()))
+                        if(c.getPLEALevel() >= 3 && !cVirg && (w.getBodyStatus()[12] || w.getBodyStatus()[11] || w.getBodyStatus()[4]))
                             w.append(t, (new StringBuilder("Combined with the humiliation of realizing ")).append(c.heShe()).append("'s been cumming from what you've been doing to ").append(c.himHer()).toString());
                         else
                             w.append(t, (new StringBuilder("Combined with the realization that ")).append(c.heShe()).append("'s gained nothing from surrendering to you").toString());
-                        if(c.getEXPOLevel() >= 3 && !modest.booleanValue() && (w.getBodyStatus()[14].booleanValue() || w.getBodyStatus()[13].booleanValue() || w.getBodyStatus()[6].booleanValue()))
+                        if(c.getEXPOLevel() >= 3 && !modest && (w.getBodyStatus()[14] || w.getBodyStatus()[13] || w.getBodyStatus()[6]))
                             w.append(t, " on camera, ");
                         else
                             w.append(t, ", ");
-                        if(c.getHATELevel() >= 3 && !vVirg.booleanValue() && (w.getBodyStatus()[11].booleanValue() || w.getBodyStatus()[14].booleanValue() || w.getBodyStatus()[3].booleanValue()))
+                        if(c.getHATELevel() >= 3 && !vVirg && (w.getBodyStatus()[11] || w.getBodyStatus()[14] || w.getBodyStatus()[3]))
                             w.append(t, (new StringBuilder(String.valueOf(c.hisHer()))).append(" sense of violation from being raped like this should grow even greater.").toString());
                         else
                             w.append(t, (new StringBuilder(String.valueOf(c.hisHer()))).append(" self-esteem will grow even weaker.").toString());
                     }
                 } else
                 {
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                     {
                         if(innocence > 66)
                             w.append(t, (new StringBuilder(", and while ")).append(c.heShe()).append("'s relieved at the numbness giving ").append(c.himHer()).append(" a break from the tickling, that'll only make ").append(c.himHer()).append(" feel it even stronger when it wears off.  ").toString());
@@ -14243,20 +14243,20 @@ public class WorldState
                         else
                             w.append(t, (new StringBuilder(", reminding ")).append(c.himHer()).append("self that ").append(c.heShe()).append(" can't get revenge on you if ").append(c.heShe()).append(" dies here.").toString());
                     }
-                    if(w.getBodyStatus()[26].booleanValue())
+                    if(w.getBodyStatus()[26])
                     {
-                        if(c.getPLEALevel() >= 3 && !cVirg.booleanValue() && (w.getBodyStatus()[12].booleanValue() || w.getBodyStatus()[11].booleanValue() || w.getBodyStatus()[4].booleanValue()))
+                        if(c.getPLEALevel() >= 3 && !cVirg && (w.getBodyStatus()[12] || w.getBodyStatus()[11] || w.getBodyStatus()[4]))
                             w.append(t, (new StringBuilder("  ")).append(c.HeShe()).append(" still can't stop ").append(c.himHer()).append("self from cumming again, ").toString());
                         else
                             w.append(t, (new StringBuilder("  ")).append(c.HeShe()).append(" renews ").append(c.hisHer()).append(" attempts to escape, ").toString());
-                        if(c.getEXPOLevel() >= 3 && !modest.booleanValue() && (w.getBodyStatus()[14].booleanValue() || w.getBodyStatus()[13].booleanValue() || w.getBodyStatus()[6].booleanValue()))
+                        if(c.getEXPOLevel() >= 3 && !modest && (w.getBodyStatus()[14] || w.getBodyStatus()[13] || w.getBodyStatus()[6]))
                             w.append(t, (new StringBuilder("giving quite a show to the cameras trained on ")).append(c.hisHer()).append(" bare lower half but not ").toString());
                         else
                             w.append(t, "kicking desperately without ");
-                        if(c.getHATELevel() >= 3 && !vVirg.booleanValue() && (w.getBodyStatus()[11].booleanValue() || w.getBodyStatus()[14].booleanValue() || w.getBodyStatus()[3].booleanValue()))
+                        if(c.getHATELevel() >= 3 && !vVirg && (w.getBodyStatus()[11] || w.getBodyStatus()[14] || w.getBodyStatus()[3]))
                         {
                             w.append(t, (new StringBuilder("making much progress sliding ")).append(c.himHer()).append("self off the ").toString());
-                            if(w.getBodyStatus()[11].booleanValue() || w.getBodyStatus()[13].booleanValue())
+                            if(w.getBodyStatus()[11] || w.getBodyStatus()[13])
                                 w.append(t, "monstrous cock");
                             else
                                 w.append(t, "tentacles");
@@ -14343,12 +14343,12 @@ public class WorldState
                             w.append(t, (new StringBuilder(", reminding ")).append(c.himHer()).append("self that there's no danger as long as ").append(c.heShe()).append(" remains resolute.").toString());
                     }
                 }
-                if(w.getBodyStatus()[26].booleanValue())
+                if(w.getBodyStatus()[26])
                 {
-                    if(c.getHATELevel() >= 3 && !vVirg.booleanValue() && (w.getBodyStatus()[11].booleanValue() || w.getBodyStatus()[14].booleanValue() || w.getBodyStatus()[3].booleanValue()))
+                    if(c.getHATELevel() >= 3 && !vVirg && (w.getBodyStatus()[11] || w.getBodyStatus()[14] || w.getBodyStatus()[3]))
                     {
                         w.append(t, (new StringBuilder("  You continue to punish ")).append(c.himHer()).append(" by sliding your ").toString());
-                        if(w.getBodyStatus()[11].booleanValue() || w.getBodyStatus()[13].booleanValue())
+                        if(w.getBodyStatus()[11] || w.getBodyStatus()[13])
                             w.append(t, "member");
                         else
                             w.append(t, "tentacles");
@@ -14357,18 +14357,18 @@ public class WorldState
                     {
                         w.append(t, (new StringBuilder("  You continue to torment ")).append(c.hisHer()).append(" body, ").toString());
                     }
-                    if(c.getPLEALevel() >= 3 && !cVirg.booleanValue() && (w.getBodyStatus()[12].booleanValue() || w.getBodyStatus()[11].booleanValue() || w.getBodyStatus()[4].booleanValue()))
+                    if(c.getPLEALevel() >= 3 && !cVirg && (w.getBodyStatus()[12] || w.getBodyStatus()[11] || w.getBodyStatus()[4]))
                         w.append(t, (new StringBuilder("making ")).append(c.himHer()).append(" cum over and over again").toString());
                     else
                         w.append(t, (new StringBuilder("taking advantage of how weakened ")).append(c.heShe()).append(" is").toString());
-                    if(c.getEXPOLevel() >= 3 && !modest.booleanValue() && (w.getBodyStatus()[14].booleanValue() || w.getBodyStatus()[13].booleanValue() || w.getBodyStatus()[6].booleanValue()))
+                    if(c.getEXPOLevel() >= 3 && !modest && (w.getBodyStatus()[14] || w.getBodyStatus()[13] || w.getBodyStatus()[6]))
                         w.append(t, (new StringBuilder(", and ")).append(c.heShe()).append(" can see the flash of the cameras capturing ").append(c.hisHer()).append(" defeat.").toString());
                     else
                         w.append(t, ".");
                 }
             }
         } else
-        if(w.getBodyStatus()[22].booleanValue())
+        if(w.getBodyStatus()[22])
             if(captureProgression % 3 == 1)
             {
                 if(confidence > 66)
@@ -14399,18 +14399,18 @@ public class WorldState
                     w.append(t, (new StringBuilder(", doing ")).append(c.hisHer()).append(" best to stay motivated.").toString());
                 else
                     w.append(t, (new StringBuilder(", but ")).append(c.heShe()).append(" knows it's not true.").toString());
-                if(w.getBodyStatus()[26].booleanValue())
+                if(w.getBodyStatus()[26])
                 {
-                    if(c.getHATELevel() >= 3 && !vVirg.booleanValue() && (w.getBodyStatus()[11].booleanValue() || w.getBodyStatus()[14].booleanValue() || w.getBodyStatus()[3].booleanValue()))
+                    if(c.getHATELevel() >= 3 && !vVirg && (w.getBodyStatus()[11] || w.getBodyStatus()[14] || w.getBodyStatus()[3]))
                         w.append(t, "  Even aside from the humiliation of being raped in public");
                     else
                         w.append(t, "  Even aside from the fact that this is happening in public");
-                    if(c.getPLEALevel() >= 3 && !cVirg.booleanValue() && (w.getBodyStatus()[12].booleanValue() || w.getBodyStatus()[11].booleanValue() || w.getBodyStatus()[4].booleanValue()))
+                    if(c.getPLEALevel() >= 3 && !cVirg && (w.getBodyStatus()[12] || w.getBodyStatus()[11] || w.getBodyStatus()[4]))
                         w.append(t, (new StringBuilder(", the fact that ")).append(c.heShe()).append("'s actually cumming from the molestation").toString());
                     else
                         w.append(t, (new StringBuilder(", the fact that there's so little ")).append(c.heShe()).append(" can do").toString());
-                    if(c.getINJULevel() >= 3 && !aVirg.booleanValue() && (w.getBodyStatus()[13].booleanValue() || w.getBodyStatus()[12].booleanValue() || w.getBodyStatus()[5].booleanValue()))
-                        if(w.tickle().booleanValue())
+                    if(c.getINJULevel() >= 3 && !aVirg && (w.getBodyStatus()[13] || w.getBodyStatus()[12] || w.getBodyStatus()[5]))
+                        if(w.tickle())
                             w.append(t, ", along with how pathetic it seems to give in to the tentacles' tickling, ");
                         else
                         if(gender.equals("male"))
@@ -14450,15 +14450,15 @@ public class WorldState
                     w.append(t, ".");
                 else
                     w.append(t, (new StringBuilder(", and while ")).append(c.heShe()).append(" has never paid much mind to what others think of ").append(c.himHer()).append(", it still hurts.").toString());
-                if(w.getBodyStatus()[26].booleanValue())
+                if(w.getBodyStatus()[26])
                 {
-                    if(c.getPLEALevel() >= 3 && !cVirg.booleanValue() && (w.getBodyStatus()[12].booleanValue() || w.getBodyStatus()[11].booleanValue() || w.getBodyStatus()[4].booleanValue()))
+                    if(c.getPLEALevel() >= 3 && !cVirg && (w.getBodyStatus()[12] || w.getBodyStatus()[11] || w.getBodyStatus()[4]))
                         w.append(t, (new StringBuilder("  No matter how much ")).append(c.hisHer()).append(" body enjoys the orgasms inflicted on ").append(c.himHer()).append(", ").toString());
                     else
                         w.append(t, (new StringBuilder("  No matter how much ")).append(c.heShe()).append(" tries to ignore it, ").toString());
-                    if(c.getINJULevel() >= 3 && !aVirg.booleanValue() && (w.getBodyStatus()[13].booleanValue() || w.getBodyStatus()[12].booleanValue() || w.getBodyStatus()[5].booleanValue()))
+                    if(c.getINJULevel() >= 3 && !aVirg && (w.getBodyStatus()[13] || w.getBodyStatus()[12] || w.getBodyStatus()[5]))
                     {
-                        if(w.tickle().booleanValue())
+                        if(w.tickle())
                             w.append(t, "the tickle torture is even worse");
                         else
                         if(gender.equals("male"))
@@ -14469,7 +14469,7 @@ public class WorldState
                     {
                         w.append(t, (new StringBuilder(", the way the spectators are looking at ")).append(c.himHer()).append(" is awful").toString());
                     }
-                    if(c.getHATELevel() >= 3 && !vVirg.booleanValue() && (w.getBodyStatus()[11].booleanValue() || w.getBodyStatus()[14].booleanValue() || w.getBodyStatus()[3].booleanValue()))
+                    if(c.getHATELevel() >= 3 && !vVirg && (w.getBodyStatus()[11] || w.getBodyStatus()[14] || w.getBodyStatus()[3]))
                     {
                         w.append(t, (new StringBuilder(", and the sensation of the feelers probing inside ")).append(c.hisHer()).append(" ").toString());
                         if(gender.equals("male"))
@@ -14513,11 +14513,11 @@ public class WorldState
                     w.append(t, "it's impossible to look dignified when fighting against one's own clothing.");
                 else
                     w.append(t, (new StringBuilder("resistance seems so hopeless that ")).append(c.heShe()).append(" finds ").append(c.himHer()).append("self surrendering to the tentacles pouring out of the remaining scraps of ").append(c.hisHer()).append(" clothing.").toString());
-                if(w.getBodyStatus()[26].booleanValue())
+                if(w.getBodyStatus()[26])
                 {
-                    if(c.getINJULevel() >= 3 && !aVirg.booleanValue() && (w.getBodyStatus()[13].booleanValue() || w.getBodyStatus()[12].booleanValue() || w.getBodyStatus()[5].booleanValue()))
+                    if(c.getINJULevel() >= 3 && !aVirg && (w.getBodyStatus()[13] || w.getBodyStatus()[12] || w.getBodyStatus()[5]))
                     {
-                        if(w.tickle().booleanValue())
+                        if(w.tickle())
                             w.append(t, (new StringBuilder("  ")).append(c.HisHer()).append(" words can barely be understood through the unwilling laughter inflicted by your tickling tendrils").toString());
                         else
                         if(gender.equals("male"))
@@ -14528,7 +14528,7 @@ public class WorldState
                     {
                         w.append(t, (new StringBuilder("  ")).append(c.HeShe()).append(" struggles to concentrate on ").append(c.hisHer()).append(" words in the midst of struggling against your tentacles").toString());
                     }
-                    if(c.getHATELevel() >= 3 && !vVirg.booleanValue() && (w.getBodyStatus()[11].booleanValue() || w.getBodyStatus()[14].booleanValue() || w.getBodyStatus()[3].booleanValue()))
+                    if(c.getHATELevel() >= 3 && !vVirg && (w.getBodyStatus()[11] || w.getBodyStatus()[14] || w.getBodyStatus()[3]))
                     {
                         w.append(t, (new StringBuilder(", losing ")).append(c.hisHer()).append(" ability to speak completely when ").append(c.heShe()).append(" feels the one in ").append(c.hisHer()).append(" ").toString());
                         if(gender.equals("male"))
@@ -14540,7 +14540,7 @@ public class WorldState
                     {
                         w.append(t, ".");
                     }
-                    if(c.getPLEALevel() >= 3 && !cVirg.booleanValue() && (w.getBodyStatus()[12].booleanValue() || w.getBodyStatus()[11].booleanValue() || w.getBodyStatus()[4].booleanValue()))
+                    if(c.getPLEALevel() >= 3 && !cVirg && (w.getBodyStatus()[12] || w.getBodyStatus()[11] || w.getBodyStatus()[4]))
                     {
                         w.append(t, (new StringBuilder("  Then, ")).append(c.heShe()).append(" cries out openly in orgasm as another ").toString());
                         if(gender.equals("female"))
@@ -14582,9 +14582,9 @@ public class WorldState
         String bottomDesc = c.bottomCover;
         if(bottomDesc.equals("strips"))
             bottomDesc = "strips of cloth";
-        if(w.getBodyStatus()[11].booleanValue())
+        if(w.getBodyStatus()[11])
         {
-            Boolean penetrated = Boolean.valueOf(c.getHATELevel() >= 3 || c.getImpregnationEffectiveness() >= c.impregnationReq() && w.getBodyStatus()[19].booleanValue());
+            Boolean penetrated = Boolean.valueOf(c.getHATELevel() >= 3 || c.getImpregnationEffectiveness() >= c.impregnationReq() && w.getBodyStatus()[19]);
             if(captureProgression % 3 == 1)
             {
                 if(innocence > 66)
@@ -14594,14 +14594,14 @@ public class WorldState
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" moans helplessly as ").append(c.heShe()).append(" feels ").toString());
                 else
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s eyes go wide with fear as ").append(c.heShe()).append(" feels ").toString());
-                if(w.getBodyStatus()[3].booleanValue())
+                if(w.getBodyStatus()[3])
                     w.append(t, (new StringBuilder("you nibble on ")).append(c.hisHer()).append(" ear while your monstrous cock twitches").toString());
                 else
-                if(w.getBodyStatus()[6].booleanValue())
+                if(w.getBodyStatus()[6])
                     w.append(t, "your slime flowing");
                 else
                     w.append(t, "your monstrous cock begin spurting");
-                if(!penetrated.booleanValue())
+                if(!penetrated)
                 {
                     w.append(t, (new StringBuilder(" against ")).append(c.hisHer()).append(" belly").toString());
                     if(dignity > 66)
@@ -14624,9 +14624,9 @@ public class WorldState
                 }
                 if(c.getPLEALevel() < 3)
                 {
-                    if(!penetrated.booleanValue())
+                    if(!penetrated)
                     {
-                        if(w.getBodyStatus()[4].booleanValue())
+                        if(w.getBodyStatus()[4])
                         {
                             w.append(t, (new StringBuilder("With your tentacles fondling ")).append(c.hisHer()).append(" ").toString());
                             if(gender.equals("male"))
@@ -14640,7 +14640,7 @@ public class WorldState
                         }
                     } else
                     {
-                        if(w.getBodyStatus()[6].booleanValue())
+                        if(w.getBodyStatus()[6])
                             w.append(t, "your amorphous shape filling ");
                         else
                             w.append(t, "the foul seed polluting ");
@@ -14648,7 +14648,7 @@ public class WorldState
                             w.append(t, (new StringBuilder(String.valueOf(c.hisHer()))).append(" bowels").toString());
                         else
                             w.append(t, (new StringBuilder(String.valueOf(c.hisHer()))).append(" womb").toString());
-                        if(w.getBodyStatus()[4].booleanValue())
+                        if(w.getBodyStatus()[4])
                             if(gender.equals("female"))
                                 w.append(t, (new StringBuilder(" while your tentacles molest ")).append(c.hisHer()).append(" clit").toString());
                             else
@@ -14660,7 +14660,7 @@ public class WorldState
                         if(gender.equals("male"))
                             w.append(t, (new StringBuilder("the thought that ")).append(c.heShe()).append(" might be influenced by the corrupt substance is too terrible to bear.").toString());
                         else
-                        if(!impregnated.booleanValue())
+                        if(!impregnated)
                             w.append(t, (new StringBuilder("the thought that ")).append(c.hisHer()).append(" own body might be used to breed an enemy of the human race is too terrible to bear.").toString());
                         else
                             w.append(t, (new StringBuilder("the reminder that ")).append(c.hisHer()).append(" body is being used to breed an enemy of the human race is too terrible to bear.").toString());
@@ -14670,7 +14670,7 @@ public class WorldState
                         if(gender.equals("male"))
                             w.append(t, (new StringBuilder("the thought of that this might alter ")).append(c.hisHer()).append(" body somehow horrifies ").append(c.himHer()).append(".").toString());
                         else
-                        if(!impregnated.booleanValue())
+                        if(!impregnated)
                             w.append(t, (new StringBuilder("the thought of being forced to bear a Demon Lord's child horrifies ")).append(c.himHer()).append(".").toString());
                         else
                             w.append(t, (new StringBuilder("the reminder that ")).append(c.heShe()).append("'s already bearing a Demon Lord's child horrifies ").append(c.himHer()).append(".").toString());
@@ -14678,22 +14678,22 @@ public class WorldState
                     if(gender.equals("male"))
                         w.append(t, (new StringBuilder("the fact that you're using ")).append(c.hisHer()).append(" body as if ").append(c.heShe()).append(" were female breeding stock enrages ").append(c.himHer()).append(".").toString());
                     else
-                    if(!impregnated.booleanValue())
+                    if(!impregnated)
                         w.append(t, (new StringBuilder("the fact that you're attempting to use ")).append(c.hisHer()).append(" body as breeding stock enrages ").append(c.himHer()).append(".").toString());
                     else
                         w.append(t, (new StringBuilder("the reminder that ")).append(c.hisHer()).append(" body is being used as breeding stock enrages ").append(c.himHer()).append(".").toString());
                 } else
-                if(cVirg.booleanValue())
+                if(cVirg)
                 {
-                    if(!penetrated.booleanValue())
+                    if(!penetrated)
                     {
-                        if(w.getBodyStatus()[4].booleanValue())
+                        if(w.getBodyStatus()[4])
                             w.append(t, "Your attached sucker tentacle tugs on ");
                         else
-                        if(w.getBodyStatus()[5].booleanValue() && w.tickle().equals(Boolean.valueOf(false)))
+                        if(w.getBodyStatus()[5] && w.tickle().equals(Boolean.valueOf(false)))
                             w.append(t, "The spines covering your member rub against ");
                         else
-                        if(w.getBodyStatus()[6].booleanValue())
+                        if(w.getBodyStatus()[6])
                             w.append(t, "The substance forms into ridges that rub against ");
                         else
                             w.append(t, "The bumpy skin of your member rubs against ");
@@ -14702,7 +14702,7 @@ public class WorldState
                         else
                             w.append(t, (new StringBuilder(String.valueOf(c.hisHer()))).append(" own penis with each thrust, but ").append(c.heShe()).append(" resists the near-orgasmic pleasure ").toString());
                     } else
-                    if(w.getBodyStatus()[4].booleanValue())
+                    if(w.getBodyStatus()[4])
                     {
                         w.append(t, (new StringBuilder("the near-orgasmic pleasure as ")).append(c.heShe()).append("'s stimulated from the inside by your cock and from the outside by the sucker tentacle attached to ").append(c.hisHer()).append(" ").toString());
                         if(gender.equals("femae"))
@@ -14711,7 +14711,7 @@ public class WorldState
                             w.append(t, "penis");
                         w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" only resists the sensations ").toString());
                     } else
-                    if(w.getBodyStatus()[6].booleanValue())
+                    if(w.getBodyStatus()[6])
                         w.append(t, (new StringBuilder("the near-orgasmic pleasure as every undulation of the pseudopod stimulates ")).append(c.hisHer()).append(" deepest parts.  ").append(c.HeShe()).append(" desperately resists the sensations ").toString());
                     else
                         w.append(t, (new StringBuilder("the near-orgasmic pleasure as every twitch of your member stimulates ")).append(c.hisHer()).append(" deepest parts.  ").append(c.HeShe()).append(" desperately resists the sensations ").toString());
@@ -14720,7 +14720,7 @@ public class WorldState
                         if(gender.equals("male"))
                             w.append(t, (new StringBuilder("by reminding ")).append(c.himHer()).append("self that ").append(c.heShe()).append(" needs to escape before your influence can corrupt ").append(c.himHer()).append(".").toString());
                         else
-                        if(!impregnated.booleanValue())
+                        if(!impregnated)
                             w.append(t, (new StringBuilder("by reminding ")).append(c.himHer()).append("self that ").append(c.heShe()).append(" needs to escape before you impregnate ").append(c.himHer()).append(" with an enemy of the human race.").toString());
                         else
                             w.append(t, (new StringBuilder("by reminding ")).append(c.himHer()).append("self that if ").append(c.heShe()).append(" doesn't escape soon, it's entirely possible that your potent seed might even be able to put a second Demonic child inside ").append(c.himHer()).append(".").toString());
@@ -14729,12 +14729,12 @@ public class WorldState
                     {
                         if(gender.equals("male"))
                         {
-                            if(w.getBodyStatus()[6].booleanValue())
+                            if(w.getBodyStatus()[6])
                                 w.append(t, (new StringBuilder("by focusing on how horrifying it would for ")).append(c.hisHer()).append(" body to be altered by such intimate contact with the Demon Lord.").toString());
                             else
                                 w.append(t, (new StringBuilder("by focusing on how horrifying it would for ")).append(c.hisHer()).append(" body to be altered by the Demon Lord's cum.").toString());
                         } else
-                        if(impregnated.booleanValue())
+                        if(impregnated)
                             w.append(t, (new StringBuilder("by focusing on ")).append(c.hisHer()).append(" revulsion at the fact that ").append(c.heShe()).append("'s already bearing your child.").toString());
                         else
                             w.append(t, "by focusing on how horrifying it would be to bear a Demon Lord's child.");
@@ -14742,25 +14742,25 @@ public class WorldState
                     if(gender.equals("male"))
                         w.append(t, (new StringBuilder("by focusing on ")).append(c.hisHer()).append(" rage at the way you're using ").append(c.hisHer()).append(" body as if ").append(c.heShe()).append(" were female breeding stock.").toString());
                     else
-                    if(!impregnated.booleanValue())
+                    if(!impregnated)
                         w.append(t, (new StringBuilder("by focusing on ")).append(c.hisHer()).append(" rage at the way you're attempting to use ").append(c.hisHer()).append(" body as breeding stock.").toString());
                     else
                         w.append(t, (new StringBuilder("by focusing on ")).append(c.hisHer()).append(" rage at the way that you're continuing to use ").append(c.himHer()).append(" as breeding stock.").toString());
                 } else
                 {
-                    if(!penetrated.booleanValue())
+                    if(!penetrated)
                     {
                         if(gender.equals("female"))
                             w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" spasms in helpless orgasm as ").toString());
                         else
                             w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" cums as ").toString());
-                        if(w.getBodyStatus()[4].booleanValue())
+                        if(w.getBodyStatus()[4])
                             w.append(t, "one your tentacles rubs");
                         else
-                        if(w.getBodyStatus()[5].booleanValue() && w.tickle().equals(Boolean.valueOf(false)))
+                        if(w.getBodyStatus()[5] && w.tickle().equals(Boolean.valueOf(false)))
                             w.append(t, "your spined member rubs");
                         else
-                        if(w.getBodyStatus()[6].booleanValue())
+                        if(w.getBodyStatus()[6])
                             w.append(t, "the ridges you form along your pseudopod rub");
                         else
                             w.append(t, "your bumpy-skinned member rubs");
@@ -14768,11 +14768,11 @@ public class WorldState
                             w.append(t, (new StringBuilder(" against ")).append(c.hisHer()).append(" clit, unable to control ").append(c.himHer()).append("self ").toString());
                         else
                             w.append(t, (new StringBuilder(" against ")).append(c.hisHer()).append(" own penis, unable to control ").append(c.himHer()).append("self ").toString());
-                        if(w.getBodyStatus()[4].booleanValue())
+                        if(w.getBodyStatus()[4])
                             w.append(t, (new StringBuilder("even as your enormous member continues to push against ")).append(c.hisHer()).append(" entrance.  ").append(c.HeShe()).append(" subconsciously wants this to continue forever, ").toString());
                     } else
                     {
-                        if(w.getBodyStatus()[6].booleanValue())
+                        if(w.getBodyStatus()[6])
                             w.append(t, (new StringBuilder("the sensation of your pseudopod plumbing ")).append(c.hisHer()).append(" depths.  ").toString());
                         else
                             w.append(t, (new StringBuilder("the sensation of you cumming inside ")).append(c.himHer()).append(".  ").toString());
@@ -14783,7 +14783,7 @@ public class WorldState
                             w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" involuntarily bucks ").append(c.hisHer()).append(" hips, ").append(c.hisHer()).append(" folds ").toString());
                         else
                             w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" spurts ").append(c.hisHer()).append(" own cum onto the ground, ").append(c.hisHer()).append(" folds ").toString());
-                        if(w.getBodyStatus()[4].booleanValue())
+                        if(w.getBodyStatus()[4])
                         {
                             w.append(t, (new StringBuilder("squeezing down every time your sucker tentacle pulls on ")).append(c.hisHer()).append(" ").toString());
                             if(gender.equals("female"))
@@ -14791,7 +14791,7 @@ public class WorldState
                             else
                                 w.append(t, "penis ");
                         } else
-                        if(w.getBodyStatus()[6].booleanValue())
+                        if(w.getBodyStatus()[6])
                             w.append(t, "squeezing as if trying to trap you inside ");
                         else
                             w.append(t, "squeezing every last drop of seed out of your member ");
@@ -14800,12 +14800,12 @@ public class WorldState
                     {
                         if(gender.equals("male"))
                         {
-                            if(w.getBodyStatus()[6].booleanValue())
+                            if(w.getBodyStatus()[6])
                                 w.append(t, (new StringBuilder("despite the danger that taking a part of the Demon Lord inside ")).append(c.himHer()).append(" might change ").append(c.hisHer()).append(" body somehow.").toString());
                             else
                                 w.append(t, (new StringBuilder("despite the danger of the Demon Lord's potent semen changing ")).append(c.hisHer()).append(" body somehow.").toString());
                         } else
-                        if(!impregnated.booleanValue())
+                        if(!impregnated)
                             w.append(t, (new StringBuilder("despite the fact that ")).append(c.heShe()).append(" is in danger of being impregnated with an enemy of humanity.").toString());
                         else
                             w.append(t, (new StringBuilder("despite the fact that you're threatening to impregnate ")).append(c.himHer()).append(" with yet another enemy of humanity.").toString());
@@ -14814,12 +14814,12 @@ public class WorldState
                     {
                         if(gender.equals("male"))
                         {
-                            if(w.getBodyStatus()[6].booleanValue())
+                            if(w.getBodyStatus()[6])
                                 w.append(t, (new StringBuilder("despite ")).append(c.hisHer()).append(" horror at what having a part of the Demon Lord inside ").append(c.himHer()).append("  might do to ").append(c.hisHer()).append(" body.").toString());
                             else
                                 w.append(t, (new StringBuilder("despite ")).append(c.hisHer()).append(" horror at what the Demon Lord's semen might do to ").append(c.hisHer()).append(" body.").toString());
                         } else
-                        if(!impregnated.booleanValue())
+                        if(!impregnated)
                             w.append(t, (new StringBuilder("despite ")).append(c.hisHer()).append(" horror at the possibility of bearing a Demon Lord's child.").toString());
                         else
                             w.append(t, (new StringBuilder("despite ")).append(c.hisHer()).append(" horror at what your semen has already done to ").append(c.himHer()).append(".").toString());
@@ -14829,45 +14829,45 @@ public class WorldState
                     else
                         w.append(t, (new StringBuilder("despite ")).append(c.hisHer()).append(" rage at being used as breeding stock.").toString());
                 }
-                if(w.getBodyStatus()[5].booleanValue())
+                if(w.getBodyStatus()[5])
                 {
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                     {
                         w.append(t, (new StringBuilder("  You force ")).append(c.himHer()).append(" face-down into a stray puddle your ejaculate").toString());
-                        if(c.getINJULevel() < 3 || aVirg.booleanValue())
+                        if(c.getINJULevel() < 3 || aVirg)
                             w.append(t, (new StringBuilder(", and ")).append(c.heShe()).append(" frantically shakes ").append(c.hisHer()).append(" head, mouth tightly closed as you tickle ").append(c.himHer()).append(" in an effort to make ").append(c.himHer()).append(" open up.").toString());
                         else
                             w.append(t, (new StringBuilder(", then abruptly tickle ")).append(c.himHer()).append(" some more.  When ").append(c.heShe()).append(" opens ").append(c.hisHer()).append(" mouth in laughter, some of your slime gets inside.").toString());
                     } else
                     {
                         w.append(t, "  Your other cock begins spurting as well, ");
-                        if(gender.equals("male") || c.getINJULevel() < 3 || aVirg.booleanValue())
+                        if(gender.equals("male") || c.getINJULevel() < 3 || aVirg)
                             w.append(t, (new StringBuilder("smearing ")).append(c.hisHer()).append(" back and ").append(c.hisHer()).append(" hair with your semen.").toString());
                         else
                             w.append(t, (new StringBuilder("filling ")).append(c.hisHer()).append(" bowels.").toString());
                     }
                 } else
-                if(w.getBodyStatus()[6].booleanValue())
+                if(w.getBodyStatus()[6])
                     if(c.getHATELevel() >= 3)
                     {
-                        if(c.getEXPOLevel() >= 3 && !modest.booleanValue())
+                        if(c.getEXPOLevel() >= 3 && !modest)
                             w.append(t, (new StringBuilder("  With the penetration pinning ")).append(c.himHer()).append(" in place, ").append(c.heShe()).append(" can't do anything at all to stop you from dissolving ").append(c.hisHer()).append(" clothes.").toString());
                         else
                             w.append(t, (new StringBuilder("  With ")).append(c.hisHer()).append(" clothes mostly gone, the bulge of your slime filling ").append(c.hisHer()).append(" belly is humiliatingly obvious to the filming spectators.").toString());
                     } else
-                    if(c.getEXPOLevel() >= 3 && !modest.booleanValue())
+                    if(c.getEXPOLevel() >= 3 && !modest)
                         w.append(t, (new StringBuilder("  The struggling of ")).append(c.hisHer()).append(" nearly-naked body against the transparent slime captivates the filming spectators.").toString());
                     else
                         w.append(t, (new StringBuilder("  Your slime flows around ")).append(c.hisHer()).append(" body, dissolving ").append(c.hisHer()).append(" clothes as you wait for an opportunity to penetrate.").toString());
-                if(w.getBodyStatus()[20].booleanValue())
-                    if(hypnotized.booleanValue())
+                if(w.getBodyStatus()[20])
+                    if(hypnotized)
                         w.append(t, (new StringBuilder("  Meanwhile, even the smell of the copious fluids is deepening ")).append(c.hisHer()).append(" hypnotic conditioning.").toString());
                     else
                         w.append(t, "  Meanwhile, even the smell of the copious fluids is making it harder and harder to avoid falling into a hypnotic trance.");
             } else
             if(captureProgression % 3 == 2)
             {
-                if(w.getBodyStatus()[3].booleanValue())
+                if(w.getBodyStatus()[3])
                     w.append(t, (new StringBuilder("You tell ")).append(mainName).append(" to look down at ").append(c.hisHer()).append(" body, and ").append(c.heShe()).toString());
                 else
                     w.append(t, mainName);
@@ -14878,12 +14878,12 @@ public class WorldState
                     w.append(t, " struggles to escape, screaming in ");
                 else
                     w.append(t, " thrashes wildly and screams in ");
-                if(!penetrated.booleanValue())
+                if(!penetrated)
                 {
-                    if(w.getBodyStatus()[5].booleanValue() && w.tickle().equals(Boolean.valueOf(false)))
+                    if(w.getBodyStatus()[5] && w.tickle().equals(Boolean.valueOf(false)))
                         w.append(t, (new StringBuilder("disgust as the pool of fluid from your spurting cocks inches toward ")).append(c.hisHer()).append(" face against the pavement.  ").toString());
                     else
-                    if(w.getBodyStatus()[6].booleanValue())
+                    if(w.getBodyStatus()[6])
                         w.append(t, (new StringBuilder("disgust as your slime threatens to envelop ")).append(c.hisHer()).append(" entire body, inching toward ").append(c.hisHer()).append(" face against the pavement.  ").toString());
                     else
                         w.append(t, (new StringBuilder("disgust as the pool of fluid from your spurting cock inches toward ")).append(c.hisHer()).append(" face against the pavement.  ").toString());
@@ -14893,7 +14893,7 @@ public class WorldState
                     if(innocence > 33)
                         w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" is trying to stay composed, but ").toString());
                     else
-                    if(w.getBodyStatus()[6].booleanValue())
+                    if(w.getBodyStatus()[6])
                         w.append(t, (new StringBuilder("On a rational level, ")).append(c.heShe()).append(" knows ").append(c.heShe()).append(" should just be happy that none of it has gotten inside ").append(c.himHer()).append(" yet, but ").toString());
                     else
                     if(gender.equals("male"))
@@ -14902,7 +14902,7 @@ public class WorldState
                         w.append(t, (new StringBuilder("On a rational level, ")).append(c.heShe()).append("'d rather have it there than in ").append(c.hisHer()).append(" womb, but ").toString());
                 } else
                 {
-                    if(w.getBodyStatus()[5].booleanValue() || w.getBodyStatus()[6].booleanValue())
+                    if(w.getBodyStatus()[5] || w.getBodyStatus()[6])
                         w.append(t, (new StringBuilder("pain as you force yourself even deeper inside ")).append(c.himHer()).append(", insistently pressing against ").append(c.hisHer()).append(" ").toString());
                     else
                         w.append(t, (new StringBuilder("pain as you force your spurting cock even deeper inside ")).append(c.himHer()).append(", insistently pressing against ").append(c.hisHer()).append(" ").toString());
@@ -14920,21 +14920,21 @@ public class WorldState
                 }
                 if(c.getPLEALevel() < 3)
                 {
-                    if(!penetrated.booleanValue())
+                    if(!penetrated)
                     {
-                        if(w.getBodyStatus()[4].booleanValue())
+                        if(w.getBodyStatus()[4])
                             w.append(t, (new StringBuilder("the tentacles crawling all over ")).append(c.hisHer()).append(" body only make it harder to focus.  ").toString());
                         else
                             w.append(t, "the added violation only makes it harder to focus.  ");
                     } else
                     {
-                        if(w.getBodyStatus()[6].booleanValue())
+                        if(w.getBodyStatus()[6])
                         {
                             w.append(t, "leaving your potent slime");
                             if(gender.equals("male"))
                                 w.append(t, (new StringBuilder(" as deep inside ")).append(c.himHer()).append(" as possible in order to hasten the corruption of ").append(c.hisHer()).append(" body.  ").toString());
                             else
-                            if(!impregnated.booleanValue())
+                            if(!impregnated)
                                 w.append(t, (new StringBuilder(" as deep as possible in ")).append(c.hisHer()).append(" womb in order to maximize the slim chance of impregnation.  ").toString());
                             else
                                 w.append(t, (new StringBuilder(" as deep as possible in ")).append(c.hisHer()).append(" womb in order to hasten its transformation into a tool for breeding Demons.  ").toString());
@@ -14942,11 +14942,11 @@ public class WorldState
                         if(gender.equals("male"))
                             w.append(t, (new StringBuilder("ejaculating your seed as deep inside ")).append(c.himHer()).append(" as possible in order to hasten the corruption of ").append(c.hisHer()).append(" body.  ").toString());
                         else
-                        if(!impregnated.booleanValue())
+                        if(!impregnated)
                             w.append(t, (new StringBuilder("ejaculating your seed directly into ")).append(c.hisHer()).append(" womb to maximize the slim chance of conception.  ").toString());
                         else
                             w.append(t, (new StringBuilder("ejaculating your seed directly into ")).append(c.hisHer()).append(" womb in order to hasten its transformation into a tool for breeding Demons.  ").toString());
-                        if(w.getBodyStatus()[4].booleanValue())
+                        if(w.getBodyStatus()[4])
                             w.append(t, (new StringBuilder("The tentacles binding and stroking ")).append(c.hisHer()).append(" whole body make it impossible to resist.  ").toString());
                     }
                     if(confidence > 66)
@@ -14957,11 +14957,11 @@ public class WorldState
                     else
                         w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" just sobs and doesn't fight it.").toString());
                 } else
-                if(cVirg.booleanValue())
+                if(cVirg)
                 {
-                    if(!penetrated.booleanValue())
+                    if(!penetrated)
                     {
-                        if(w.getBodyStatus()[4].booleanValue())
+                        if(w.getBodyStatus()[4])
                         {
                             if(gender.equals("female"))
                                 w.append(t, (new StringBuilder("combined with the difficulty of resisting the overwhelming pleasure ")).append(c.heShe()).append(" feels every time your tentacles caress ").append(c.hisHer()).append(" clit, it's impossible to think straight.  ").toString());
@@ -14971,12 +14971,12 @@ public class WorldState
                         if(gender.equals("female"))
                             w.append(t, (new StringBuilder("combined with the difficulty of resisting the overwhelming pleasure ")).append(c.heShe()).append(" feels every time you grind against ").append(c.hisHer()).append(" clit, it's impossible to think straight.  ").toString());
                         else
-                        if(w.getBodyStatus()[6].booleanValue())
+                        if(w.getBodyStatus()[6])
                             w.append(t, (new StringBuilder("combined with the difficulty of resisting the overwhelming pleasure of your slime enveloping ")).append(c.hisHer()).append(" penis, it's impossible to think straight.  ").toString());
                         else
                             w.append(t, (new StringBuilder("combined with the difficulty of resisting the overwhelming pleasure ")).append(c.heShe()).append(" feels every time your penises grind together, it's impossible to think straight.  ").toString());
                     } else
-                    if(w.getBodyStatus()[4].booleanValue())
+                    if(w.getBodyStatus()[4])
                     {
                         if(gender.equals("female"))
                             w.append(t, (new StringBuilder(" grinding your tentacles against ")).append(c.hisHer()).append(" clit.  ").toString());
@@ -14995,32 +14995,32 @@ public class WorldState
                         w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" just goes limp, trying to escape into ").append(c.hisHer()).append(" own thoughts.").toString());
                 } else
                 {
-                    if(!penetrated.booleanValue())
+                    if(!penetrated)
                     {
                         if(gender.equals("female"))
                         {
-                            if(w.getBodyStatus()[4].booleanValue())
+                            if(w.getBodyStatus()[4])
                                 w.append(t, (new StringBuilder("with orgasm wracking ")).append(c.hisHer()).append(" body, it's hard to think of anything but your tentacles pinching and fondling ").append(c.hisHer()).append(" clit.").toString());
                             else
-                            if(w.getBodyStatus()[6].booleanValue())
+                            if(w.getBodyStatus()[6])
                                 w.append(t, (new StringBuilder("with orgasm wracking ")).append(c.hisHer()).append(" body, it's hard to think of anything but your slime undulating against ").append(c.hisHer()).append(" clit.").toString());
                             else
                                 w.append(t, (new StringBuilder("with orgasm wracking ")).append(c.hisHer()).append(" body, it's hard to think of anything but your cock grinding against ").append(c.himHer()).append(".").toString());
                         } else
-                        if(w.getBodyStatus()[4].booleanValue())
+                        if(w.getBodyStatus()[4])
                             w.append(t, (new StringBuilder("with your tentacles milking ")).append(c.hisHer()).append(" cock, it's hard to think of anything but how good each orgasmic spurt feels.").toString());
                         else
                             w.append(t, (new StringBuilder("with ")).append(c.hisHer()).append(" cock spurting in orgasm, it's hard to think of anything but the way you're frotting against ").append(c.himHer()).append(".").toString());
                     } else
                     {
-                        if(w.getBodyStatus()[4].booleanValue())
+                        if(w.getBodyStatus()[4])
                         {
                             if(gender.equals("female"))
                                 w.append(t, (new StringBuilder("abusing ")).append(c.hisHer()).append(" clit with your tentacles and using ").append(c.hisHer()).append(" orgasmic spasms to usher your vile seed ").toString());
                             else
                                 w.append(t, (new StringBuilder("milking ")).append(c.hisHer()).append(" cock with your tentacles and using ").append(c.hisHer()).append(" orgasmic spasms to usher your vile seed ").toString());
                         } else
-                        if(w.getBodyStatus()[6].booleanValue())
+                        if(w.getBodyStatus()[6])
                             w.append(t, (new StringBuilder("using ")).append(c.hisHer()).append(" orgasmic spasms to usher your slime ").toString());
                         else
                             w.append(t, (new StringBuilder("using ")).append(c.hisHer()).append(" orgasmic spasms to usher your vile seed ").toString());
@@ -15037,17 +15037,17 @@ public class WorldState
                     else
                         w.append(t, (new StringBuilder("  ")).append(c.HeShe()).append(" gives in to the pleasure, moaning and sobbing in defeat.").toString());
                 }
-                if(w.getBodyStatus()[5].booleanValue())
+                if(w.getBodyStatus()[5])
                 {
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                     {
                         w.append(t, "  Pinned in place like this");
-                        if(c.getINJULevel() >= 3 && !aVirg.booleanValue())
+                        if(c.getINJULevel() >= 3 && !aVirg)
                             w.append(t, (new StringBuilder(" with your claws continuing to mercilessly tickle ")).append(c.himHer()).append(", ").append(c.heShe()).append(" feels like ").append(c.heShe()).append(" can barely breathe, ").append(c.hisHer()).append(" laughter coming in exhausted gasps.").toString());
                         else
                             w.append(t, (new StringBuilder(", ")).append(c.heShe()).append(" can't even squirm away from your tickling claws.").toString());
                     } else
-                    if(c.getINJULevel() >= 3 && !aVirg.booleanValue() && !gender.equals("male"))
+                    if(c.getINJULevel() >= 3 && !aVirg && !gender.equals("male"))
                     {
                         w.append(t, (new StringBuilder("  Your second cock in ")).append(c.hisHer()).append(" ass anchors ").append(c.himHer()).append(" in place, ensuring that ").append(c.heShe()).append(" can't escape.").toString());
                     } else
@@ -15060,8 +15060,8 @@ public class WorldState
                         w.append(t, ", driving out all rational thought.");
                     }
                 } else
-                if(w.getBodyStatus()[6].booleanValue())
-                    if(c.getEXPOLevel() >= 3 && !modest.booleanValue())
+                if(w.getBodyStatus()[6])
+                    if(c.getEXPOLevel() >= 3 && !modest)
                     {
                         if(c.getHATELevel() >= 3)
                             w.append(t, (new StringBuilder("  Pinned down and anchored in place by your transparent pseudopod inside ")).append(c.himHer()).append(", there's nothing ").append(c.heShe()).append(" can do to retain any semblance of modesty.").toString());
@@ -15071,8 +15071,8 @@ public class WorldState
                     {
                         w.append(t, (new StringBuilder("  And even as your amorphous body pins ")).append(c.himHer()).append(" down, the slime continues to dissolve ").append(c.hisHer()).append(" clothes.").toString());
                     }
-                if(w.getBodyStatus()[20].booleanValue())
-                    if(hypnotized.booleanValue())
+                if(w.getBodyStatus()[20])
+                    if(hypnotized)
                         w.append(t, (new StringBuilder("  The longer you hold ")).append(c.himHer()).append(" like this, the more deeply the substance can influence ").append(c.hisHer()).append(" mind.").toString());
                     else
                         w.append(t, (new StringBuilder("  The longer you hold ")).append(c.himHer()).append(" like this, the more difficult it will be for ").append(c.himHer()).append(" to resist the substance's mental effects.").toString());
@@ -15086,21 +15086,21 @@ public class WorldState
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" manages to escape you for a moment and start to crawl away, but you quickly catch up").toString());
                 else
                     w.append(t, (new StringBuilder("You toy with ")).append(mainName).append(", stoking ").append(c.hisHer()).append(" hate by allowing ").append(c.himHer()).append(" to escape and crawl away for a moment before you leap onto ").append(c.himHer()).append(" again").toString());
-                if(w.getBodyStatus()[3].booleanValue())
+                if(w.getBodyStatus()[3])
                     w.append(t, ", laughing derisively,");
-                if(!penetrated.booleanValue())
+                if(!penetrated)
                 {
                     if(gender.equals("male"))
                     {
-                        if(w.getBodyStatus()[6].booleanValue())
+                        if(w.getBodyStatus()[6])
                             w.append(t, (new StringBuilder(" and slam ")).append(c.himHer()).append(" into the pavement.  Your slime envelops ").append(c.hisHer()).append(" hips once again").toString());
                         else
                             w.append(t, (new StringBuilder(" and slam ")).append(c.himHer()).append(" into the pavement.  Your cocks press against each other once again").toString());
                     } else
-                    if(w.getBodyStatus()[5].booleanValue() && w.tickle().equals(Boolean.valueOf(false)))
+                    if(w.getBodyStatus()[5] && w.tickle().equals(Boolean.valueOf(false)))
                         w.append(t, (new StringBuilder(" and slam ")).append(c.himHer()).append(" into the pavement.  Your twin cocks resume rubbing against ").append(c.hisHer()).append(" holes").toString());
                     else
-                    if(w.getBodyStatus()[6].booleanValue())
+                    if(w.getBodyStatus()[6])
                         w.append(t, (new StringBuilder(" and slam ")).append(c.himHer()).append(" into the pavement.  Your slime quickly resumes pressing against ").append(c.hisHer()).append(" slit").toString());
                     else
                         w.append(t, (new StringBuilder(" and slam ")).append(c.himHer()).append(" into the pavement.  Your cock resumes persistently rubbing against ").append(c.hisHer()).append(" slit").toString());
@@ -15113,10 +15113,10 @@ public class WorldState
                         w.append(t, (new StringBuilder(" as ")).append(c.heShe()).append(" bitterly hangs ").append(c.hisHer()).append(" head, demoralized by ").append(c.hisHer()).append(" brief glimpse of freedom.  ").toString());
                 } else
                 {
-                    if(w.getBodyStatus()[6].booleanValue())
+                    if(w.getBodyStatus()[6])
                         w.append(t, (new StringBuilder(" and easily push your slime back inside ")).append(c.himHer()).append(" before ").append(c.heShe()).append(" can stop you.  ").toString());
                     else
-                    if(w.getBodyStatus()[5].booleanValue() && !gender.equals("male") && w.tickle().equals(Boolean.valueOf(false)))
+                    if(w.getBodyStatus()[5] && !gender.equals("male") && w.tickle().equals(Boolean.valueOf(false)))
                         w.append(t, (new StringBuilder(" and slam your first cock into ")).append(c.hisHer()).append(" pussy with one mighty thrust.  ").toString());
                     else
                         w.append(t, (new StringBuilder(" and slam your cock into ")).append(c.himHer()).append(" with one mighty thrust.  ").toString());
@@ -15130,7 +15130,7 @@ public class WorldState
                 }
                 if(c.getPLEALevel() < 3)
                 {
-                    if(!penetrated.booleanValue())
+                    if(!penetrated)
                         w.append(t, (new StringBuilder("Your treatment of ")).append(c.himHer()).append(" is far from gentle, but ").toString());
                     else
                         w.append(t, "");
@@ -15142,9 +15142,9 @@ public class WorldState
                     else
                         w.append(t, (new StringBuilder(String.valueOf(c.hisHer()))).append(" screams of pain are mingled with anger.").toString());
                 } else
-                if(cVirg.booleanValue())
+                if(cVirg)
                 {
-                    if(!penetrated.booleanValue())
+                    if(!penetrated)
                         w.append(t, (new StringBuilder("The pleasure almost makes ")).append(c.himHer()).append(" want to allow you inside, but ").toString());
                     else
                         w.append(t, "");
@@ -15159,12 +15159,12 @@ public class WorldState
                 {
                     if(!gender.equals("female"))
                     {
-                        if(!penetrated.booleanValue())
+                        if(!penetrated)
                             w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" can't stop ").append(c.hisHer()).append(" cock from spurting onto the ground, ").toString());
                         else
                             w.append(t, (new StringBuilder(String.valueOf(c.heShe()))).append(" can't stop ").append(c.hisHer()).append(" cock from spurting onto the ground, ").toString());
                     } else
-                    if(!penetrated.booleanValue())
+                    if(!penetrated)
                         w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" can't stop ").append(c.himHer()).append("self from cumming, ").toString());
                     else
                         w.append(t, (new StringBuilder(String.valueOf(c.heShe()))).append(" can't stop ").append(c.himHer()).append("self from cumming, ").toString());
@@ -15176,7 +15176,7 @@ public class WorldState
                     else
                         w.append(t, "and the moans of pleasure come out freely.");
                 }
-                if(w.getBodyStatus()[4].booleanValue())
+                if(w.getBodyStatus()[4])
                 {
                     w.append(t, "  The tentacles lining your underside quickly ");
                     if(gender.equals("female"))
@@ -15184,34 +15184,34 @@ public class WorldState
                     else
                         w.append(t, (new StringBuilder("wrap themselves around ")).append(c.hisHer()).append(" cock and continue stroking.").toString());
                 } else
-                if(w.getBodyStatus()[5].booleanValue())
+                if(w.getBodyStatus()[5])
                 {
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                     {
                         w.append(t, (new StringBuilder("  You continue ")).append(c.hisHer()).append(" tickle punishment with a vengeance").toString());
-                        if(c.getINJULevel() >= 3 && !aVirg.booleanValue())
+                        if(c.getINJULevel() >= 3 && !aVirg)
                             w.append(t, (new StringBuilder(", and there's despair and exhaustion in ")).append(c.hisHer()).append(" voice as ").append(c.heShe()).append(" gives in once again.").toString());
                         else
                             w.append(t, (new StringBuilder(", and you can tell that ")).append(c.hisHer()).append(" resistance is wearing thin.").toString());
                     } else
-                    if(c.getINJULevel() >= 3 && !gender.equals("male") && !aVirg.booleanValue())
+                    if(c.getINJULevel() >= 3 && !gender.equals("male") && !aVirg)
                         w.append(t, (new StringBuilder("  It's not long before your second cock manages to force its way back inside ")).append(c.hisHer()).append(" ass.").toString());
                     else
                         w.append(t, (new StringBuilder("  The spines on your cocks continue to grind maddeningly against ")).append(c.himHer()).append(".").toString());
                 } else
-                if(w.getBodyStatus()[6].booleanValue())
-                    if(c.getEXPOLevel() >= 3 && !modest.booleanValue())
+                if(w.getBodyStatus()[6])
+                    if(c.getEXPOLevel() >= 3 && !modest)
                         w.append(t, (new StringBuilder("  The feelings of helplessness and humiliation are enhanced by the way that everyone can see ")).append(c.hisHer()).append(" fruitless struggling underneath your transparent body.").toString());
                     else
                         w.append(t, (new StringBuilder("  In the end, ")).append(c.hisHer()).append(" shortlived escape accomplished nothing beyond leaving even more of ").append(c.hisHer()).append(" clothes behind in your slime body.").toString());
-                if(w.getBodyStatus()[20].booleanValue())
-                    if(hypnotized.booleanValue())
+                if(w.getBodyStatus()[20])
+                    if(hypnotized)
                         w.append(t, (new StringBuilder("  Your hypnotic conditioning ensured that ")).append(c.heShe()).append(" would fail.").toString());
                     else
                         w.append(t, (new StringBuilder("  Even if ")).append(c.heShe()).append(" had managed to get away, the disorientation caused by your mind-affecting fluids would make it hard to get far.").toString());
             }
         } else
-        if(w.getBodyStatus()[12].booleanValue())
+        if(w.getBodyStatus()[12])
         {
             if(captureProgression % 3 == 1)
             {
@@ -15224,10 +15224,10 @@ public class WorldState
                     w.append(t, (new StringBuilder("With a startled scream, ")).append(mainName).append(" is pulled all the way into your body").toString());
                 if(c.getPLEALevel() < 3)
                 {
-                    if(w.getBodyStatus()[19].booleanValue())
+                    if(w.getBodyStatus()[19])
                         w.append(t, (new StringBuilder(", where ")).append(c.heShe()).append("'s completely submerged in your Demon-cum.  ").toString());
                     else
-                    if(w.getBodyStatus()[6].booleanValue())
+                    if(w.getBodyStatus()[6])
                         w.append(t, (new StringBuilder(", where ")).append(c.heShe()).append("'s completely submerged in slime.  ").toString());
                     else
                         w.append(t, (new StringBuilder(", where ")).append(c.heShe()).append("'s completely submerged in aphrodisiac liquid.  ").toString());
@@ -15240,10 +15240,10 @@ public class WorldState
                         w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" tries to fight back, but it's hard to move through the viscous substance, and the tendrils between ").append(c.hisHer()).append(" legs continue their assault uninterrupted.  ").toString());
                 } else
                 {
-                    if(w.getBodyStatus()[19].booleanValue())
+                    if(w.getBodyStatus()[19])
                         w.append(t, (new StringBuilder(", completely submerging ")).append(c.himHer()).append(" in aphrodisiac Demon-cum that ").toString());
                     else
-                    if(w.getBodyStatus()[6].booleanValue())
+                    if(w.getBodyStatus()[6])
                         w.append(t, (new StringBuilder(", completely submerging ")).append(c.himHer()).append(" in aphrosisiac slime that ").toString());
                     else
                         w.append(t, (new StringBuilder(", completely submerging ")).append(c.himHer()).append(" in aphrosisiac liquid that ").toString());
@@ -15266,11 +15266,11 @@ public class WorldState
                     else
                         w.append(t, (new StringBuilder("makes it easier for ")).append(c.himHer()).append(" to convince ").append(c.himHer()).append("self that ").append(c.heShe()).append(" might as well just give in and let out all ").append(c.hisHer()).append(" cum.  ").toString());
                 }
-                if(w.tickle().booleanValue())
+                if(w.tickle())
                 {
-                    if(c.getINJULevel() < 3 || aVirg.booleanValue())
+                    if(c.getINJULevel() < 3 || aVirg)
                     {
-                        if(w.getBodyStatus()[5].booleanValue())
+                        if(w.getBodyStatus()[5])
                         {
                             if(c.getPLEALevel() < 3)
                                 w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" manages to hold ").append(c.hisHer()).append(" breath right up until you slide a pair of specialized tentacles right into ").append(c.hisHer()).append(" ear canals.  The burst of pleasurable sensations transmitted directly to ").append(c.hisHer()).append(" brain makes ").append(c.hisHer()).append(" face go slack, and when ").append(c.heShe()).append(" unthinkingly breathes in the aphrodisiac, ").toString());
@@ -15290,7 +15290,7 @@ public class WorldState
                             w.append(t, (new StringBuilder(String.valueOf(c.hisHer()))).append(" rational mind quickly begins to melt into a haze of animalistic desires.").toString());
                     } else
                     {
-                        if(w.getBodyStatus()[5].booleanValue())
+                        if(w.getBodyStatus()[5])
                         {
                             if(c.getPLEALevel() < 3)
                                 w.append(t, (new StringBuilder("A pair of specialized tentacles finds its way into ")).append(c.hisHer()).append(" ears, hijacking ").append(c.hisHer()).append(" brain and increasing ").append(c.hisHer()).append(" sensitivity severalfold so that even the slightest touch has ").append(c.himHer()).append(" squealing in laughter.  Because ").append(c.heShe()).append("'s submerged in aphrodisiac, this causes ").append(c.himHer()).append(" to breathe it in").toString());
@@ -15312,7 +15312,7 @@ public class WorldState
                 } else
                 if(c.getINJULevel() < 3)
                 {
-                    if(w.getBodyStatus()[5].booleanValue())
+                    if(w.getBodyStatus()[5])
                     {
                         if(c.getPLEALevel() < 3)
                         {
@@ -15339,9 +15339,9 @@ public class WorldState
                     else
                         w.append(t, (new StringBuilder(".  ")).append(c.HeShe()).append(" knows that the Chosen can survive without breathing, but the lack of oxygen will still damage and weaken ").append(c.hisHer()).append(" body.").toString());
                 } else
-                if(aVirg.booleanValue())
+                if(aVirg)
                 {
-                    if(w.getBodyStatus()[5].booleanValue())
+                    if(w.getBodyStatus()[5])
                     {
                         if(c.getPLEALevel() < 3)
                         {
@@ -15372,14 +15372,14 @@ public class WorldState
                     if(c.getPLEALevel() < 3)
                     {
                         String tentacle = "";
-                        if(w.getBodyStatus()[5].booleanValue())
+                        if(w.getBodyStatus()[5])
                             w.append(t, "wickedly spined ");
                         if(gender.equals("male"))
                             w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" holds ").append(c.hisHer()).append(" breath as long as ").append(c.heShe()).append(" can, but an abrupt, savage twist from your ").append(tentacle).append("tendrils around ").append(c.hisHer()).append(" balls causes ").append(c.himHer()).append(" to cry out").toString());
                         else
                             w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" holds ").append(c.hisHer()).append(" breath as long as ").append(c.heShe()).append(" can, but a particularly savage thrust from the ").append("tentacle in ").append(c.hisHer()).append(" ass causes ").append(c.himHer()).append(" to cry out").toString());
                     } else
-                    if(w.getBodyStatus()[5].booleanValue())
+                    if(w.getBodyStatus()[5])
                     {
                         if(gender.equals("male"))
                             w.append(t, (new StringBuilder("Crying out in agonized climax as you use a toothed sucker tentacle to bite down on ")).append(c.hisHer()).append(" penis, ").append(c.heShe()).append(" immediately takes in a lungful of aphrodisiac").toString());
@@ -15398,16 +15398,16 @@ public class WorldState
                     else
                         w.append(t, (new StringBuilder(" no matter how much ")).append(c.heShe()).append(" tries to stop it.  ").append(c.HisHer()).append(" vision darkens as ").append(c.heShe()).append(" begins to drown.").toString());
                 }
-                if(w.getBodyStatus()[6].booleanValue())
+                if(w.getBodyStatus()[6])
                 {
-                    if(c.getEXPOLevel() >= 3 && !modest.booleanValue())
+                    if(c.getEXPOLevel() >= 3 && !modest)
                         w.append(t, (new StringBuilder("  ")).append(c.HeShe()).append(" looks almost comical, nearly naked and spasming wildly in your transparent body.").toString());
                     else
                         w.append(t, (new StringBuilder("  At the same time, ")).append(c.hisHer()).append(" head-to-toe submersion means that ").append(c.hisHer()).append(" clothes are dissolving away even more quickly.").toString());
                 } else
-                if(w.getBodyStatus()[3].booleanValue())
+                if(w.getBodyStatus()[3])
                 {
-                    if(c.getHATELevel() >= 3 && !vVirg.booleanValue())
+                    if(c.getHATELevel() >= 3 && !vVirg)
                     {
                         w.append(t, (new StringBuilder("  The tentacle in ")).append(c.hisHer()).append(" ").toString());
                         if(gender.equals("male"))
@@ -15420,8 +15420,8 @@ public class WorldState
                         w.append(t, (new StringBuilder("  The hallucinogens cause ")).append(c.himHer()).append(" to hear derisive laughter and feel rough fingers in ").append(c.hisHer()).append(" hair holding ").append(c.himHer()).append(" under the surface.").toString());
                     }
                 } else
-                if(w.getBodyStatus()[4].booleanValue())
-                    if(w.tickle().booleanValue())
+                if(w.getBodyStatus()[4])
+                    if(w.tickle())
                         w.append(t, "  The potent substance even blocks out the discomfort that someone drowning in a liquid would normally feel.");
                     else
                         w.append(t, (new StringBuilder("  The pain quickly fades into a haze of pleasure that blocks out the unpleasant feelings of ")).append(c.hisHer()).append(" injuries and replaces them with pure bliss.").toString());
@@ -15444,7 +15444,7 @@ public class WorldState
                     w.append(t, (new StringBuilder("With ")).append(c.hisHer()).append(" mind addled by the aphrodisiac filling your body, ").append(mainName).append(" finds it difficult to discern whether the image ").append(c.heShe()).append(" sees of ").append(otherOne).append(" and ").append(otherTwo).append(" running their hands over ").append(c.hisHer()).append(" body is real or not.  ").toString());
                 else
                     w.append(t, (new StringBuilder("The liquid inside your body causes ")).append(mainName).append(" to hallucinate that ").append(c.heShe()).append("'s being groped by ").append(otherOne).append(" and ").append(otherTwo).append(", and while ").append(c.heShe()).append(" knows that's impossible, it still has a subconscious effect on the way that ").append(c.heShe()).append(" thinks.  ").toString());
-                if(w.getBodyStatus()[4].booleanValue())
+                if(w.getBodyStatus()[4])
                     w.append(t, (new StringBuilder("The warm, fuzzy feelings running through ")).append(c.hisHer()).append(" head make it hard to remember that ").append(c.heShe()).append("'s supposed to be fighting right now.  ").toString());
                 if(c.getPLEALevel() < 3)
                 {
@@ -15468,7 +15468,7 @@ public class WorldState
                 } else
                 if(dignity > 66)
                 {
-                    if(w.getBodyStatus()[6].booleanValue())
+                    if(w.getBodyStatus()[6])
                         w.append(t, (new StringBuilder("With ")).append(c.hisHer()).append(" mind and ").append(c.hisHer()).append(" view of the outside world distorted by your hallucinogens, ").append(c.heShe()).append(" briefly forgets just how visible ").append(c.heShe()).append(" is to everyone watching, and ").append(c.heShe()).append(" freely bucks ").append(c.hisHer()).append(" hips in obvious pleasure.  ").toString());
                     else
                         w.append(t, (new StringBuilder("Here, shielded from the eyes of the public, ")).append(c.heShe()).append(" sees no reason not to give in to the pleasure, bucking ").append(c.hisHer()).append(" hips wildly.  ").toString());
@@ -15477,11 +15477,11 @@ public class WorldState
                     w.append(t, (new StringBuilder("In ")).append(c.hisHer()).append(" eagerness to feel another orgasm, ").append(c.heShe()).append(" allows ").append(c.hisHer()).append(" legs to be spread wide open.  ").toString());
                 else
                     w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" can't find the willpower to resist, embracing the illusions and shamelessly grinding ").append(c.hisHer()).append(" body against them.  ").toString());
-                if(w.tickle().booleanValue())
+                if(w.tickle())
                 {
-                    if(c.getINJULevel() < 3 || aVirg.booleanValue())
+                    if(c.getINJULevel() < 3 || aVirg)
                     {
-                        if(w.getBodyStatus()[5].booleanValue())
+                        if(w.getBodyStatus()[5])
                         {
                             if(c.getPLEALevel() < 3)
                             {
@@ -15517,7 +15517,7 @@ public class WorldState
                             w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" tries to rely on ").append(c.hisHer()).append(" annoyance at being treated so lightly in order to resist, but ").append(c.heShe()).append("'s already starting to break.").toString());
                     } else
                     {
-                        if(w.getBodyStatus()[5].booleanValue())
+                        if(w.getBodyStatus()[5])
                         {
                             if(c.getPLEALevel() < 3)
                             {
@@ -15562,12 +15562,12 @@ public class WorldState
                 {
                     if(c.getPLEALevel() < 3)
                     {
-                        if(w.getBodyStatus()[5].booleanValue())
+                        if(w.getBodyStatus()[5])
                             w.append(t, (new StringBuilder("With ")).append(c.hisHer()).append(" guard down, the tentacles have a much easier time abusing ").append(c.hisHer()).append(" body.  ").toString());
                         w.append(t, "The vision exploits ");
                     } else
                     {
-                        if(w.getBodyStatus()[5].booleanValue())
+                        if(w.getBodyStatus()[5])
                             w.append(t, (new StringBuilder("Feeling ")).append(otherOne).append(" biting one nipple while ").append(otherTwo).append(" nibbles the other").toString());
                         else
                             w.append(t, (new StringBuilder("Feeling ")).append(otherOne).append(" sucking one nipple while ").append(otherTwo).append(" licks the other").toString());
@@ -15584,20 +15584,20 @@ public class WorldState
                     else
                         w.append(t, (new StringBuilder(String.valueOf(c.hisHer()))).append(" fantasies about having the others serve ").append(c.himHer()).append(".").toString());
                 } else
-                if(aVirg.booleanValue())
+                if(aVirg)
                 {
                     if(c.getPLEALevel() < 3)
                     {
-                        if(w.getBodyStatus()[5].booleanValue())
+                        if(w.getBodyStatus()[5])
                             w.append(t, (new StringBuilder("The pain of ")).append(c.hisHer()).append(" injuries is strong enough to be felt even now, but ").append(c.hisHer()).append(" fantasy just incorporates it as being treated roughly").toString());
                         else
                             w.append(t, (new StringBuilder("The pain of ")).append(c.hisHer()).append(" injuries plays into ").append(c.hisHer()).append(" fantasy").toString());
                     } else
                     {
-                        if(w.getBodyStatus()[3].booleanValue())
+                        if(w.getBodyStatus()[3])
                             w.append(t, "Finally, ");
                         else
-                        if(w.getBodyStatus()[5].booleanValue())
+                        if(w.getBodyStatus()[5])
                             w.append(t, (new StringBuilder("In reality, tentacles with blunt teeth are biting down and savaging ")).append(c.hisHer()).append(" erogenous zones.  But ").append(c.heShe()).append(" feels only pleasure, and ").toString());
                         else
                             w.append(t, "The stimulation seems to become more and more cruel, until finally, ");
@@ -15619,12 +15619,12 @@ public class WorldState
                     {
                         if(gender.equals("male"))
                         {
-                            if(w.getBodyStatus()[5].booleanValue())
+                            if(w.getBodyStatus()[5])
                                 w.append(t, (new StringBuilder("When ")).append(c.heShe()).append(" feels ").append(otherOne).append(" sharply knee ").append(c.himHer()).append(" between the legs, ").append(c.heShe()).append(" screams into ").append(otherTwo).append("'s mouth.  ").toString());
                             else
                                 w.append(t, (new StringBuilder("When ")).append(c.heShe()).append(" feels ").append(otherOne).append(" nibble on ").append(c.hisHer()).append(" scrotum, ").append(c.heShe()).append(" moans into ").append(otherTwo).append("'s mouth.  ").toString());
                         } else
-                        if(w.getBodyStatus()[5].booleanValue())
+                        if(w.getBodyStatus()[5])
                             w.append(t, (new StringBuilder("When ")).append(c.heShe()).append(" feels ").append(otherOne).append("'s entire fist begin to force its way into ").append(c.hisHer()).append(" anus, ").append(c.heShe()).append(" screams into ").append(otherTwo).append("'s mouth. ").toString());
                         else
                             w.append(t, (new StringBuilder("When ")).append(c.heShe()).append(" feels ").append(otherOne).append("'s tongue invade ").append(c.hisHer()).append(" anus, ").append(c.heShe()).append(" moans into ").append(otherTwo).append("'s mouth.  ").toString());
@@ -15637,7 +15637,7 @@ public class WorldState
                             w.append(t, (new StringBuilder("The feeling of ")).append(otherOne).append(" deepthroating ").append(c.hisHer()).append(" cock makes ").append(mainName).append(" start to cum, but then ").append(otherTwo).append(" cruelly pinches the base of ").append(c.hisHer()).append(" cock, giggling and nibbling ").append(c.hisHer()).append(" ear as the release ").append(c.heShe()).append(" craves remains out of reach.  ").toString());
                         else
                             w.append(t, (new StringBuilder("The feeling of ")).append(otherOne).append("'s fingers invading ").append(c.hisHer()).append(" anus forces out another orgasm, and ").append(otherTwo).append(" deepthroats ").append(c.hisHer()).append(" cock to suck out every last drop of cum.  ").toString());
-                        if(w.getBodyStatus()[5].booleanValue())
+                        if(w.getBodyStatus()[5])
                             w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" eyes roll into the back of ").append(c.hisHer()).append(" head as the conflicting sensations overwhelm ").append(c.himHer()).append(".  ").toString());
                     }
                     w.append(t, (new StringBuilder("The rough treatment plays into ")).append(c.hisHer()).append(" psychological weaknesses, as ").toString());
@@ -15649,16 +15649,16 @@ public class WorldState
                     else
                         w.append(t, (new StringBuilder(String.valueOf(c.heShe()))).append(" knows deep down inside that ").append(c.heShe()).append(" deserves far worse.").toString());
                 }
-                if(w.getBodyStatus()[3].booleanValue() || w.getBodyStatus()[19].booleanValue())
+                if(w.getBodyStatus()[3] || w.getBodyStatus()[19])
                 {
                     w.append(t, (new StringBuilder("  The scenario seems to become more and more nightmarish, ")).append(otherOne).append(" and ").append(otherTwo).append(" growing Demonic features and being joined by countless Thralls who ").toString());
-                    if(c.getHATELevel() < 3 || vVirg.booleanValue())
+                    if(c.getHATELevel() < 3 || vVirg)
                         w.append(t, (new StringBuilder("abuse ")).append(c.himHer()).append(" as ").append(c.hisHer()).append(" allies watch and laugh").toString());
                     else
                         w.append(t, (new StringBuilder("start to gangbang ")).append(c.himHer()).append(" while ").append(c.hisHer()).append(" allies watch and play with themselves").toString());
-                    if(w.getBodyStatus()[19].booleanValue())
+                    if(w.getBodyStatus()[19])
                     {
-                        if(impregnated.booleanValue())
+                        if(impregnated)
                             w.append(t, (new StringBuilder(", reflecting ")).append(c.hisHer()).append(" insecurity about being used by the Demons as breeding stock.").toString());
                         else
                             w.append(t, (new StringBuilder(", reflecting ")).append(c.hisHer()).append(" fears that the seed inside this body will be able to turn ").append(c.himHer()).append(" into nothing more than breeding stock.").toString());
@@ -15667,8 +15667,8 @@ public class WorldState
                         w.append(t, ".");
                     }
                 }
-                if(w.getBodyStatus()[6].booleanValue())
-                    if(c.getEXPOLevel() >= 3 && !modest.booleanValue())
+                if(w.getBodyStatus()[6])
+                    if(c.getEXPOLevel() >= 3 && !modest)
                         w.append(t, (new StringBuilder("  To the people watching ")).append(c.himHer()).append(" through your transparent body, ").append(c.heShe()).append(" looks completely delirious.").toString());
                     else
                         w.append(t, (new StringBuilder("  ")).append(c.HeShe()).append(" can't muster the willpower to fight back as they undress ").append(c.himHer()).append(".").toString());
@@ -15682,14 +15682,14 @@ public class WorldState
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" manages to struggle to the surface of the aphrodisiac fluid and start climbing out of your body").toString());
                 else
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" fights ").append(c.hisHer()).append(" way to the surface of the aphrodisiac fluid, aiming to escape and launch a counterattack against your body").toString());
-                if(w.getBodyStatus()[20].booleanValue())
+                if(w.getBodyStatus()[20])
                 {
-                    if(hypnotized.booleanValue())
+                    if(hypnotized)
                         w.append(t, (new StringBuilder(".  The breath of fresh air only gives ")).append(c.himHer()).append(" the false impression of mental clarity, and ").toString());
                     else
                         w.append(t, ".  The breath of fresh air isn't enough to fully dispel your powerful hypnotic effects, and ");
                 } else
-                if(w.getBodyStatus()[4].booleanValue())
+                if(w.getBodyStatus()[4])
                     w.append(t, (new StringBuilder(".  The breath of fresh air quickly dispels ")).append(c.hisHer()).append(" aphrodisiac-induced mental haze, but ").toString());
                 else
                     w.append(t, ", but ");
@@ -15701,7 +15701,7 @@ public class WorldState
                     if(confidence > 33)
                         w.append(t, (new StringBuilder(String.valueOf(c.heShe()))).append(" stops short").toString());
                     else
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                         w.append(t, (new StringBuilder(String.valueOf(c.heShe()))).append(" abruptly stops with an undignified yelp").toString());
                     else
                         w.append(t, (new StringBuilder(String.valueOf(c.heShe()))).append(" stops abruptly with a cry of pain").toString());
@@ -15713,11 +15713,11 @@ public class WorldState
                     w.append(t, (new StringBuilder("then ")).append(c.heShe()).append(" abruptly stops, trembling and moaning in orgasm").toString());
                 else
                     w.append(t, (new StringBuilder(String.valueOf(c.heShe()))).append(" stops with a pathetic scream, orgasming").toString());
-                if(w.tickle().booleanValue())
+                if(w.tickle())
                 {
-                    if(c.getINJULevel() < 3 || aVirg.booleanValue())
+                    if(c.getINJULevel() < 3 || aVirg)
                     {
-                        if(w.getBodyStatus()[5].booleanValue())
+                        if(w.getBodyStatus()[5])
                         {
                             if(c.getPLEALevel() < 3)
                             {
@@ -15754,7 +15754,7 @@ public class WorldState
                             w.append(t, (new StringBuilder("there's no way ")).append(c.heShe()).append(" can fight you off like this, but ").append(c.heShe()).append(" keeps trying, making a fool of ").append(c.himHer()).append("self in the process.").toString());
                     } else
                     {
-                        if(w.getBodyStatus()[5].booleanValue())
+                        if(w.getBodyStatus()[5])
                         {
                             if(c.getPLEALevel() < 3)
                             {
@@ -15793,7 +15793,7 @@ public class WorldState
                 } else
                 if(c.getINJULevel() < 3)
                 {
-                    if(w.getBodyStatus()[5].booleanValue())
+                    if(w.getBodyStatus()[5])
                     {
                         if(gender.equals("female"))
                             w.append(t, (new StringBuilder(" as the thorned tentacle wrapped around ")).append(c.hisHer()).append(" body is pulled tight at the crotch.  ").toString());
@@ -15815,9 +15815,9 @@ public class WorldState
                     else
                         w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" tries to fight the pleasure and get away, but ").append(c.hisHer()).append(" body won't obey ").append(c.himHer()).append(", and you have no trouble wrapping more tendrils around ").append(c.hisHer()).append(" body to recapture ").append(c.himHer()).append(".").toString());
                 } else
-                if(aVirg.booleanValue())
+                if(aVirg)
                 {
-                    if(w.getBodyStatus()[5].booleanValue())
+                    if(w.getBodyStatus()[5])
                     {
                         if(gender.equals("female"))
                             w.append(t, (new StringBuilder(" as the thorned tentacle wrapped around ")).append(c.hisHer()).append(" body is pulled tight at the crotch.  ").toString());
@@ -15840,7 +15840,7 @@ public class WorldState
                         w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" struggles to pull away, but with ").append(c.hisHer()).append(" injuries weakening ").append(c.himHer()).append(", ").append(c.heShe()).append(" accomplishes little more than stimulating ").append(c.himHer()).append("self further as you pull ").append(c.himHer()).append(" back toward you.").toString());
                 } else
                 {
-                    if(w.getBodyStatus()[5].booleanValue())
+                    if(w.getBodyStatus()[5])
                     {
                         if(gender.equals("male"))
                         {
@@ -15883,9 +15883,9 @@ public class WorldState
                     else
                         w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" grunts and moans as ").append(c.heShe()).append(" tries to resist the stimulation and pull the others out, but by the time ").append(c.heShe()).append("'s halfway done, you've already wrapped more tendrils around ").append(c.hisHer()).append(" limbs and dragged ").append(c.himHer()).append(" back to your entrance.").toString());
                 }
-                if(w.getBodyStatus()[3].booleanValue())
+                if(w.getBodyStatus()[3])
                 {
-                    if(c.getHATELevel() >= 3 && !vVirg.booleanValue())
+                    if(c.getHATELevel() >= 3 && !vVirg)
                     {
                         w.append(t, (new StringBuilder("  Finally, you cement ")).append(c.hisHer()).append(" recapture by ramming another of your tentacles into ").append(c.hisHer()).append(" ").toString());
                         if(gender.equals("male"))
@@ -15898,42 +15898,42 @@ public class WorldState
                         w.append(t, (new StringBuilder("  Before long, ")).append(c.hisHer()).append(" struggles weaken once again as your hallucinogenic aphrodisiac takes hold.").toString());
                     }
                 } else
-                if(w.getBodyStatus()[6].booleanValue())
-                    if(c.getEXPOLevel() >= 3 && !modest.booleanValue())
+                if(w.getBodyStatus()[6])
+                    if(c.getEXPOLevel() >= 3 && !modest)
                         w.append(t, (new StringBuilder("  Through your transparent body, ")).append(c.hisHer()).append(" embarrassing predicament is completely visible.").toString());
                     else
                         w.append(t, (new StringBuilder("  ")).append(c.HisHer()).append(" brief defiance accomplished nothing more than tearing apart the clothes weakened by exposure to your slime.").toString());
             }
         } else
-        if(w.getBodyStatus()[13].booleanValue())
+        if(w.getBodyStatus()[13])
         {
             String hand = "hand";
             String fist = "fist";
-            if(w.getBodyStatus()[3].booleanValue())
+            if(w.getBodyStatus()[3])
             {
                 hand = "tongue";
                 fist = "tongue";
             } else
-            if(w.getBodyStatus()[5].booleanValue())
+            if(w.getBodyStatus()[5])
             {
                 hand = "claw";
                 fist = "clawed fist";
             }
             if(captureProgression % 3 == 1)
             {
-                if(w.getBodyStatus()[5].booleanValue())
+                if(w.getBodyStatus()[5])
                 {
                     if(confidence > 66)
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" bites ").append(c.hisHer()).append(" lip and fights to free ").append(c.himHer()).append("self from your claws, determined to ").toString());
                     else
                     if(confidence > 33)
                     {
-                        if(w.tickle().booleanValue())
+                        if(w.tickle())
                             w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" gasps and thrashes as your claws dig into ").append(c.hisHer()).append(" skin, finding it difficult to ").toString());
                         else
                             w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" gasps and thrashes in pain as your claws dig into ").append(c.hisHer()).append(" skin, finding it difficult to ").toString());
                     } else
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" pulls weakly at the claws holding ").append(c.himHer()).append(" down, ashamed at ").append(c.hisHer()).append(" inability to ").toString());
                     else
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" sobs in pain at your sharp claws and in shame at ").append(c.hisHer()).append(" inability to resist them, desperately wanting to ").toString());
@@ -15943,7 +15943,7 @@ public class WorldState
                 else
                 if(confidence > 33)
                 {
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" gasps and thrashes, finding it difficult to ").toString());
                     else
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" gasps and thrashes in pain, finding it difficult to ").toString());
@@ -15959,14 +15959,14 @@ public class WorldState
                     if(morality > 33)
                         w.append(t, (new StringBuilder("escape the torture you're inflicting on ")).append(c.himHer()).append(".  ").toString());
                     else
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                         w.append(t, (new StringBuilder("get you back for toying with ")).append(c.himHer()).append(" like this.  ").toString());
                     else
                         w.append(t, (new StringBuilder("get you back for hurting ")).append(c.himHer()).append(" like this.  ").toString());
                 } else
                 if(morality > 66)
                 {
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                         w.append(t, "stop laughing and go help the innocents who are in danger.  ");
                     else
                     if(gender.equals("male"))
@@ -15976,18 +15976,18 @@ public class WorldState
                 } else
                 if(morality > 33)
                 {
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                         w.append(t, (new StringBuilder("control ")).append(c.hisHer()).append(" laughter.  ").toString());
                     else
                     if(gender.equals("male"))
                         w.append(t, (new StringBuilder("escape your grip on ")).append(c.hisHer()).append(" nether regions.  ").toString());
                     else
-                    if(w.getBodyStatus()[3].booleanValue())
+                    if(w.getBodyStatus()[3])
                         w.append(t, (new StringBuilder("escape your brutal violation of ")).append(c.hisHer()).append(" ass.  ").toString());
                     else
                         w.append(t, "escape your brutal fisting.  ");
                 } else
-                if(w.tickle().booleanValue())
+                if(w.tickle())
                     w.append(t, "escape and get revenge for the humiliation of being forced to laugh like this.  ");
                 else
                 if(gender.equals("male"))
@@ -15999,14 +15999,14 @@ public class WorldState
                     if(c.getINJULevel() < 3)
                         w.append(t, (new StringBuilder("You pull ")).append(c.hisHer()).append(" legs in different directions").toString());
                     else
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                         w.append(t, (new StringBuilder("You pull ")).append(c.hisHer()).append(" limbs in different directions, overpowering ").append(c.hisHer()).append(" reflexive efforts to curl up and protect ").append(c.himHer()).append("self").toString());
                     else
                     if(gender.equals("male"))
                         w.append(t, (new StringBuilder("You spread ")).append(c.hisHer()).append(" legs further apart and pull even harder on ").append(c.hisHer()).append(" testicles").toString());
                     else
                         w.append(t, (new StringBuilder("You pull ")).append(c.hisHer()).append(" legs further apart in order to push yourself even deeper").toString());
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                     {
                         if(innocence > 66)
                             w.append(t, (new StringBuilder(", and ")).append(c.heShe()).append(" squirms uselessly in an effort to escape the vulnerable position.").toString());
@@ -16023,22 +16023,22 @@ public class WorldState
                         w.append(t, (new StringBuilder(", and another wave of agony causes ")).append(c.himHer()).append(" to choke and sputter.").toString());
                     else
                         w.append(t, (new StringBuilder(", and even though ")).append(c.heShe()).append(" knows that something like this can't kill one of the Chosen, a part of ").append(c.himHer()).append(" wishes that it would.").toString());
-                    if(w.getBodyStatus()[6].booleanValue())
+                    if(w.getBodyStatus()[6])
                         w.append(t, (new StringBuilder("  Furthermore, contact with your slimy body is dissolving ")).append(c.hisHer()).append(" clothes, which has the potential to make the position incredibly embarrassing.").toString());
                 } else
-                if(modest.booleanValue())
+                if(modest)
                 {
                     if(c.getINJULevel() < 3)
                         w.append(t, (new StringBuilder("You pull ")).append(c.hisHer()).append(" legs in different directions").toString());
                     else
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                         w.append(t, (new StringBuilder("You pull ")).append(c.hisHer()).append(" limbs in different directions, overpowering ").append(c.hisHer()).append(" reflexive efforts to curl up and protect ").append(c.himHer()).append("self").toString());
                     else
                     if(gender.equals("male"))
                         w.append(t, (new StringBuilder("You spread ")).append(c.hisHer()).append(" legs further apart and pull even harder on ").append(c.hisHer()).append(" testicles").toString());
                     else
                         w.append(t, (new StringBuilder("You pull ")).append(c.hisHer()).append(" legs further apart in order to push yourself even deeper").toString());
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                     {
                         if(innocence > 66)
                             w.append(t, (new StringBuilder(", and ")).append(c.heShe()).append(" finds the position so distracting that ").append(c.heShe()).append(" doesn't even mentally register that ").append(c.hisHer()).append(" shredded ").append(bottomDesc).append(" and lack of panties mean that ").append(c.heShe()).append("'s completely exposed to anyone watching below.").toString());
@@ -16055,21 +16055,21 @@ public class WorldState
                         w.append(t, (new StringBuilder(", and with ")).append(c.hisHer()).append(" shredded ").append(bottomDesc).append(" and lack of panties, the position is especially humiliating.").toString());
                     else
                         w.append(t, (new StringBuilder(", and while ")).append(c.heShe()).append(" knows that ").append(c.hisHer()).append(" shredded ").append(bottomDesc).append(" and lack of panties mean that the spectators below can see everything, ").append(c.heShe()).append("'s in too much agony to care.").toString());
-                    if(w.getBodyStatus()[6].booleanValue())
+                    if(w.getBodyStatus()[6])
                         w.append(t, "  Your slime is dissolving what's left by the moment.");
                 } else
                 {
                     if(c.getINJULevel() < 3)
                         w.append(t, (new StringBuilder("You pull ")).append(c.hisHer()).append(" legs in different directions in order to give the watching cameras a clear shot of ").append(c.hisHer()).append(" bared pussy").toString());
                     else
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                         w.append(t, (new StringBuilder("You pull ")).append(c.hisHer()).append(" spasming legs further apart so that the watching cameras can see everything").toString());
                     else
                     if(gender.equals("male"))
                         w.append(t, (new StringBuilder("You pull ")).append(c.hisHer()).append(" legs further apart so that the watching cameras get a good look at how you're pulling on ").append(c.hisHer()).append(" testicles hard enough to stretch them out").toString());
                     else
                         w.append(t, (new StringBuilder("You pull ")).append(c.hisHer()).append(" legs further apart so that the watching cameras get a good look at how you've pushed yourself inside ").append(c.himHer()).toString());
-                    if(w.getBodyStatus()[6].booleanValue())
+                    if(w.getBodyStatus()[6])
                     {
                         if(innocence > 66)
                             w.append(t, (new StringBuilder(", and since your slime has dissolved ")).append(c.hisHer()).append(" ").append(bottomDesc).append(", the feeling of so many eyes watching makes it all even worse.").toString());
@@ -16087,11 +16087,11 @@ public class WorldState
                     else
                         w.append(t, (new StringBuilder(", and the realization of just how pathetic ")).append(c.heShe()).append(" must look makes ").append(c.himHer()).append(" shudder.").toString());
                 }
-                if(w.getBodyStatus()[3].booleanValue() || w.getBodyStatus()[19].booleanValue())
+                if(w.getBodyStatus()[3] || w.getBodyStatus()[19])
                 {
-                    if(c.getHATELevel() >= 3 && !vVirg.booleanValue() || w.getBodyStatus()[19].booleanValue() && c.getImpregnationEffectiveness() >= c.impregnationReq())
+                    if(c.getHATELevel() >= 3 && !vVirg || w.getBodyStatus()[19] && c.getImpregnationEffectiveness() >= c.impregnationReq())
                     {
-                        if(c.getINJULevel() < 3 || gender.equals("male") || w.tickle().booleanValue())
+                        if(c.getINJULevel() < 3 || gender.equals("male") || w.tickle())
                         {
                             w.append(t, (new StringBuilder("  The position allows you to fuck ")).append(c.hisHer()).append(" ").toString());
                             if(gender.equals("male"))
@@ -16099,17 +16099,17 @@ public class WorldState
                             else
                                 w.append(t, "pussy");
                             w.append(t, " even more deeply with your ");
-                            if(w.getBodyStatus()[19].booleanValue())
+                            if(w.getBodyStatus()[19])
                                 w.append(t, "oversized cock.");
                             else
                                 w.append(t, "oversized tongue.");
                         } else
-                        if(w.getBodyStatus()[19].booleanValue())
+                        if(w.getBodyStatus()[19])
                             w.append(t, (new StringBuilder("  Your move your hand inside ")).append(c.hisHer()).append(" ass to further stimulate your cock ejaculating into ").append(c.hisHer()).append(" womb through ").append(c.hisHer()).append(" internal walls.").toString());
                         else
                             w.append(t, (new StringBuilder("  Your tongues in ")).append(c.hisHer()).append(" ass and pussy both thrash against each other through ").append(c.hisHer()).append(" internal walls.").toString());
                     } else
-                    if(w.getBodyStatus()[3].booleanValue())
+                    if(w.getBodyStatus()[3])
                     {
                         w.append(t, (new StringBuilder("  The humiliation is enhanced by the way that your mouths laugh at ")).append(c.himHer()).append(" and run their tongues across ").append(c.hisHer()).append(" body until ").append(c.hisHer()).append(" exposed skin glistens with sweat and saliva.").toString());
                     } else
@@ -16121,10 +16121,10 @@ public class WorldState
                             w.append(t, (new StringBuilder("against ")).append(c.hisHer()).append(" slit.").toString());
                     }
                 } else
-                if(w.getBodyStatus()[4].booleanValue() || w.getBodyStatus()[20].booleanValue())
+                if(w.getBodyStatus()[4] || w.getBodyStatus()[20])
                 {
                     w.append(t, (new StringBuilder("  ")).append(c.HeShe()).append("'s completely unable to hide ").toString());
-                    if(c.getPLEALevel() >= 3 && !cVirg.booleanValue())
+                    if(c.getPLEALevel() >= 3 && !cVirg)
                     {
                         if(c.getEXPOLevel() >= 3)
                         {
@@ -16144,7 +16144,7 @@ public class WorldState
                     {
                         w.append(t, (new StringBuilder("the pleasure ")).append(c.heShe()).append("'s feeling from your rough fondling").toString());
                     }
-                    if(w.getBodyStatus()[20].booleanValue())
+                    if(w.getBodyStatus()[20])
                         w.append(t, ", enhanced by your hypnotic spores.");
                     else
                         w.append(t, ".");
@@ -16170,7 +16170,7 @@ public class WorldState
                     else
                         w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" goes limp, stunned.  ").append(c.HeShe()).append(" makes no attempt to get up, too desperate for a moment's rest to bother to ").toString());
                 } else
-                if(w.tickle().booleanValue())
+                if(w.tickle())
                 {
                     w.append(t, (new StringBuilder("you pin ")).append(c.himHer()).append(" down against the pavement, holding ").append(c.himHer()).append(" firmly enough that ").append(c.heShe()).append(" can't even squirm an inch while you tickle ").append(c.hisHer()).append(" armpits and feet.  ").toString());
                     if(dignity > 66)
@@ -16184,7 +16184,7 @@ public class WorldState
                 {
                     if(gender.equals("male"))
                     {
-                        if(w.getBodyStatus()[3].booleanValue())
+                        if(w.getBodyStatus()[3])
                             w.append(t, (new StringBuilder("you slam ")).append(c.himHer()).append(" into the pavement, then follow it up with a brutal strike right between ").append(c.hisHer()).append(" legs, strong enough to steal ").append(c.hisHer()).append(" breath away.  ").toString());
                         else
                             w.append(t, (new StringBuilder("you slam ")).append(c.himHer()).append(" into the pavement, then follow it up with a heavy punch right between ").append(c.hisHer()).append(" legs, strong enough to steal ").append(c.hisHer()).append(" breath away.  ").toString());
@@ -16210,7 +16210,7 @@ public class WorldState
                     else
                         w.append(t, "look strong enough to take this sort of punishment.");
                 } else
-                if(modest.booleanValue())
+                if(modest)
                 {
                     w.append(t, (new StringBuilder("counteract the humiliation of ")).append(c.hisHer()).append(" effective nudity by ").toString());
                     if(morality > 66)
@@ -16231,12 +16231,12 @@ public class WorldState
                     else
                         w.append(t, "looking strong enough to take this treatment.");
                 }
-                if(w.getBodyStatus()[3].booleanValue() || w.getBodyStatus()[19].booleanValue())
+                if(w.getBodyStatus()[3] || w.getBodyStatus()[19])
                 {
-                    if(c.getHATELevel() >= 3 && !vVirg.booleanValue() || w.getBodyStatus()[19].booleanValue() && c.getImpregnationEffectiveness() >= c.impregnationReq())
+                    if(c.getHATELevel() >= 3 && !vVirg || w.getBodyStatus()[19] && c.getImpregnationEffectiveness() >= c.impregnationReq())
                     {
                         w.append(t, (new StringBuilder("  ")).append(c.HeShe()).append(" barely even has the energy to scream as you shove ").toString());
-                        if(w.getBodyStatus()[19].booleanValue())
+                        if(w.getBodyStatus()[19])
                             w.append(t, "your cock back ");
                         else
                             w.append(t, "one of your tongues back ");
@@ -16245,17 +16245,17 @@ public class WorldState
                         else
                             w.append(t, (new StringBuilder("into ")).append(c.hisHer()).append(" pussy.").toString());
                     } else
-                    if(w.getBodyStatus()[3].booleanValue())
+                    if(w.getBodyStatus()[3])
                         w.append(t, (new StringBuilder("  ")).append(c.HeShe()).append(" barely even has the energy to struggle as your mouths resume biting down on ").append(c.himHer()).append(".").toString());
                     else
                         w.append(t, (new StringBuilder("  ")).append(c.HeShe()).append(" barely even has the energy to struggle as you position your cock between ").append(c.hisHer()).append(" legs.").toString());
                 } else
-                if(w.getBodyStatus()[4].booleanValue() || w.getBodyStatus()[20].booleanValue())
+                if(w.getBodyStatus()[4] || w.getBodyStatus()[20])
                 {
                     w.append(t, "  Meanwhile your spores continue to take effect.");
-                    if(c.getPLEALevel() >= 3 && !cVirg.booleanValue())
+                    if(c.getPLEALevel() >= 3 && !cVirg)
                     {
-                        if(w.tickle().booleanValue())
+                        if(w.tickle())
                             w.append(t, "  All eyes are drawn to ");
                         else
                             w.append(t, (new StringBuilder("  ")).append(c.HisHer()).append(" only movement is ").toString());
@@ -16272,14 +16272,14 @@ public class WorldState
                             w.append(t, (new StringBuilder("roughly playing with ")).append(c.hisHer()).append(" penis.").toString());
                     }
                 } else
-                if(w.getBodyStatus()[5].booleanValue())
+                if(w.getBodyStatus()[5])
                 {
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                         w.append(t, (new StringBuilder("  Tears streaming down ")).append(c.hisHer()).append(" cheeks, ").append(c.heShe()).append(" makes for a pitiful sight.").toString());
                     else
                         w.append(t, (new StringBuilder("  Covered in bruises and claw marks, ")).append(c.heShe()).append(" makes for a pitiful sight.").toString());
                 } else
-                if(w.getBodyStatus()[6].booleanValue())
+                if(w.getBodyStatus()[6])
                     w.append(t, (new StringBuilder("  You take the opportunity to spit more slime onto ")).append(c.hisHer()).append(" defenseless body.").toString());
             } else
             if(captureProgression % 3 == 0)
@@ -16293,7 +16293,7 @@ public class WorldState
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" doesn't outwardly react as you lift ").append(c.himHer()).append(" up above your head, but ").append(c.heShe()).append(" still cries out at the sensation of ").toString());
                 if(c.getINJULevel() < 3)
                 {
-                    if(w.getBodyStatus()[6].booleanValue())
+                    if(w.getBodyStatus()[6])
                         w.append(t, (new StringBuilder("your many hands spreading more slime across ")).append(c.hisHer()).append(" body in order to dissolve ").append(c.hisHer()).append(" clothes and give the spectators a better look at ").append(c.hisHer()).append(" body.  ").toString());
                     else
                         w.append(t, (new StringBuilder("your many ")).append(hand).append("s roughly tearing the clothes from ").append(c.hisHer()).append(" body to give the spectators a better look.  ").toString());
@@ -16306,10 +16306,10 @@ public class WorldState
                         w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" knows that they'll be thinking about how ").toString());
                 } else
                 {
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                     {
                         w.append(t, (new StringBuilder("your ")).append(hand).append("s tickling ").append(c.hisHer()).append(" stretched-out belly.  ").toString());
-                        if(w.getBodyStatus()[6].booleanValue())
+                        if(w.getBodyStatus()[6])
                             if(c.getEXPOLevel() >= 3)
                                 w.append(t, (new StringBuilder("With ")).append(c.hisHer()).append(" clothes dissolved by your slime, ").append(c.heShe()).append(" doesn't have any protection at all.  ").toString());
                             else
@@ -16317,28 +16317,28 @@ public class WorldState
                     } else
                     if(gender.equals("male"))
                     {
-                        if(w.getBodyStatus()[3].booleanValue())
+                        if(w.getBodyStatus()[3])
                             w.append(t, (new StringBuilder("your tongues whipping ")).append(c.hisHer()).append(" bruised testicles over and over again.  ").toString());
                         else
-                        if(w.getBodyStatus()[5].booleanValue())
+                        if(w.getBodyStatus()[5])
                             w.append(t, (new StringBuilder("your pointed claws closing more and more tightly around ")).append(c.hisHer()).append(" testicles.  ").toString());
                         else
                             w.append(t, (new StringBuilder("your fingers closing more and more tightly around ")).append(c.hisHer()).append(" testicles.  ").toString());
-                        if(w.getBodyStatus()[6].booleanValue())
+                        if(w.getBodyStatus()[6])
                             if(c.getEXPOLevel() >= 3)
                                 w.append(t, (new StringBuilder("With ")).append(c.hisHer()).append(" clothes dissolved by your slime, ").append(c.heShe()).append(" doesn't have any protection at all.  ").toString());
                             else
                                 w.append(t, (new StringBuilder("And with your slime dissolving ")).append(c.hisHer()).append(" clothes, ").append(c.heShe()).append("'s only getting more vulnerable by the moment.  ").toString());
                     } else
                     {
-                        if(w.getBodyStatus()[3].booleanValue())
+                        if(w.getBodyStatus()[3])
                             w.append(t, (new StringBuilder("your tongues writhing inside ")).append(c.hisHer()).append(" belly").toString());
                         else
-                        if(w.getBodyStatus()[5].booleanValue())
+                        if(w.getBodyStatus()[5])
                             w.append(t, (new StringBuilder("your sharp claws flexing inside ")).append(c.hisHer()).append(" belly").toString());
                         else
                             w.append(t, (new StringBuilder("your fingers flexing inside ")).append(c.hisHer()).append(" belly").toString());
-                        if(w.getBodyStatus()[6].booleanValue())
+                        if(w.getBodyStatus()[6])
                         {
                             if(c.getEXPOLevel() >= 3)
                                 w.append(t, ", causing visible bumps to move on the slime-slick surface.  ");
@@ -16351,7 +16351,7 @@ public class WorldState
                     }
                     if(innocence > 66)
                     {
-                        if(w.tickle().booleanValue())
+                        if(w.tickle())
                             w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" giggles girlishly, too caught up in the moment to realize that ").toString());
                         else
                         if(gender.equals("male"))
@@ -16361,7 +16361,7 @@ public class WorldState
                     } else
                     if(innocence > 33)
                     {
-                        if(w.tickle().booleanValue())
+                        if(w.tickle())
                             w.append(t, (new StringBuilder("It's too much for ")).append(c.himHer()).append(" to bear without laughing out loud, even though ").append(c.heShe()).append(" knows that ").toString());
                         else
                         if(gender.equals("male"))
@@ -16369,7 +16369,7 @@ public class WorldState
                         else
                             w.append(t, (new StringBuilder("It's too much for ")).append(c.himHer()).append(" to bear without moaning out loud, even though ").append(c.heShe()).append(" knows that ").toString());
                     } else
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                         w.append(t, (new StringBuilder("Though ")).append(c.heShe()).append(" tries to remain rational, the sensations distract ").append(c.himHer()).append(" from the fact that ").toString());
                     else
                     if(gender.equals("male"))
@@ -16380,7 +16380,7 @@ public class WorldState
                 if(c.getEXPOLevel() < 3)
                 {
                     if(c.getINJULevel() >= 3)
-                        if(w.tickle().booleanValue())
+                        if(w.tickle())
                             w.append(t, (new StringBuilder("civilians are witnessing ")).append(c.hisHer()).append(" failure.  Some of them whisper to each other that ").toString());
                         else
                             w.append(t, (new StringBuilder("civilians are witnessing ")).append(c.hisHer()).append(" pained reaction.  Some of them whisper to each other that ").toString());
@@ -16392,7 +16392,7 @@ public class WorldState
                     else
                         w.append(t, "such a weak-willed person should never have become one of the Chosen.");
                 } else
-                if(modest.booleanValue())
+                if(modest)
                 {
                     if(c.getINJULevel() >= 3)
                         w.append(t, (new StringBuilder("with ")).append(c.hisHer()).append(" state of undress, the spectators can see exactly what's happening to ").append(c.himHer()).append(".  Some of them whisper to each other that ").toString());
@@ -16415,9 +16415,9 @@ public class WorldState
                     else
                         w.append(t, (new StringBuilder(String.valueOf(c.heShe()))).append("'s a pathetic failure whose only value is to be recorded for masturbation material.").toString());
                 }
-                if(w.getBodyStatus()[3].booleanValue() || w.getBodyStatus()[19].booleanValue())
+                if(w.getBodyStatus()[3] || w.getBodyStatus()[19])
                 {
-                    if(c.getHATELevel() >= 3 && !vVirg.booleanValue() || w.getBodyStatus()[19].booleanValue() && c.getImpregnationEffectiveness() >= c.impregnationReq())
+                    if(c.getHATELevel() >= 3 && !vVirg || w.getBodyStatus()[19] && c.getImpregnationEffectiveness() >= c.impregnationReq())
                     {
                         if(c.getINJULevel() >= 3 && !gender.equals("male") && w.tickle().equals(Boolean.valueOf(false)))
                         {
@@ -16425,7 +16425,7 @@ public class WorldState
                         } else
                         {
                             w.append(t, (new StringBuilder("  Several make judgmental comments about how ")).append(c.heShe()).append(" should've kept ").append(c.hisHer()).append(" legs closed instead of letting ").append(c.himHer()).append("self get fucked").toString());
-                            if(w.getBodyStatus()[19].booleanValue())
+                            if(w.getBodyStatus()[19])
                                 w.append(t, ".");
                             else
                                 w.append(t, " by your tongues.");
@@ -16433,17 +16433,17 @@ public class WorldState
                     } else
                     {
                         w.append(t, (new StringBuilder("  Several can't help but laugh at ")).append(c.hisHer()).append(" predicament").toString());
-                        if(w.getBodyStatus()[3].booleanValue())
+                        if(w.getBodyStatus()[3])
                             w.append(t, ", and your mouths laugh with them.");
                         else
                             w.append(t, (new StringBuilder(" as ")).append(c.heShe()).append(" struggles to avoid your massive cock.").toString());
                     }
                 } else
-                if(w.getBodyStatus()[4].booleanValue() || w.getBodyStatus()[20].booleanValue())
-                    if(c.getPLEALevel() >= 3 && !cVirg.booleanValue())
+                if(w.getBodyStatus()[4] || w.getBodyStatus()[20])
+                    if(c.getPLEALevel() >= 3 && !cVirg)
                     {
                         w.append(t, "  When your stroking fingers");
-                        if(w.getBodyStatus()[20].booleanValue())
+                        if(w.getBodyStatus()[20])
                             w.append(t, ", aided by your hypnotic spores,");
                         if(gender.equals("female"))
                             w.append(t, (new StringBuilder(" cause ")).append(c.himHer()).append(" to start spasming in orgasm, shocked gasps and amused laughter ring out from the viewers.").toString());
@@ -16455,18 +16455,18 @@ public class WorldState
                     } else
                     {
                         w.append(t, "  When your stroking fingers");
-                        if(w.getBodyStatus()[20].booleanValue())
+                        if(w.getBodyStatus()[20])
                             w.append(t, ", aided by your hypnotic spores,");
                         w.append(t, " force out a moan of pleasure, the whispers turn into judgmental murmuring.");
                     }
             }
         } else
-        if(w.getBodyStatus()[14].booleanValue())
+        if(w.getBodyStatus()[14])
         {
-            Boolean penetrated = Boolean.valueOf(c.getHATELevel() >= 3 && !vVirg.booleanValue() || w.getBodyStatus()[19].booleanValue() && c.getImpregnationEffectiveness() >= c.impregnationReq());
+            Boolean penetrated = Boolean.valueOf(c.getHATELevel() >= 3 && !vVirg || w.getBodyStatus()[19] && c.getImpregnationEffectiveness() >= c.impregnationReq());
             if(captureProgression % 3 == 1)
             {
-                if(w.getBodyStatus()[3].booleanValue())
+                if(w.getBodyStatus()[3])
                 {
                     w.append(t, "You give your viewers free reign to remotely control your tentacles however they please");
                     if(dignity > 66)
@@ -16521,18 +16521,18 @@ public class WorldState
                     else
                         w.append(t, " isn't surprised at all when they instead vote to ");
                 }
-                if(c.getHATELevel() < 3 && !penetrated.booleanValue())
+                if(c.getHATELevel() < 3 && !penetrated)
                 {
                     if(c.getEXPOLevel() < 3)
                     {
-                        if(w.getBodyStatus()[6].booleanValue())
+                        if(w.getBodyStatus()[6])
                             w.append(t, (new StringBuilder("Buzzsaws and laser beams emerge from your body, shredding ")).append(c.hisHer()).append(" clothes with rapid efficiency as ").toString());
                         else
                             w.append(t, (new StringBuilder("Your cables lash across ")).append(c.hisHer()).append(" body, hooking ").append(c.hisHer()).append(" clothes and pulling them away as ").toString());
                     } else
                     {
                         String cameras = "the cameras";
-                        if(w.getBodyStatus()[6].booleanValue())
+                        if(w.getBodyStatus()[6])
                             cameras = "your high-definition cameras";
                         w.append(t, (new StringBuilder("electrically shock ")).append(c.himHer()).append(".  Each surge of voltage through your cables causes ").append(c.hisHer()).append(" nearly-naked body to squirm, showing off everything to ").append(cameras).append(" as ").toString());
                     }
@@ -16544,25 +16544,25 @@ public class WorldState
                     else
                         w.append(t, (new StringBuilder(String.valueOf(c.heShe()))).append(" sobs and begs them to go easy on ").append(c.himHer()).append(".").toString());
                 } else
-                if(vVirg.booleanValue() && !penetrated.booleanValue())
+                if(vVirg && !penetrated)
                 {
                     if(c.getEXPOLevel() < 3)
                     {
-                        if(w.getBodyStatus()[6].booleanValue())
+                        if(w.getBodyStatus()[6])
                             w.append(t, (new StringBuilder("Buzzsaws and laser beams emerge from your body, shredding ")).append(c.hisHer()).append(" clothes with rapid efficiency as ").toString());
                         else
                             w.append(t, (new StringBuilder("Your cables lash across ")).append(c.hisHer()).append(" body, hooking ").append(c.hisHer()).append(" clothes and pulling them away as ").append(c.heShe()).append(" ").toString());
                     } else
                     {
                         String addition = "";
-                        if(w.getBodyStatus()[6].booleanValue())
+                        if(w.getBodyStatus()[6])
                             addition = " through your many high-definition cameras";
                         if(gender.equals("female"))
                             w.append(t, (new StringBuilder("spread ")).append(c.hisHer()).append(" virgin pussy so they can get a good look at ").append(c.hisHer()).append(" hymen").append(addition).append(".  ").append(c.HeShe()).append(" ").toString());
                         else
                         if(gender.equals("male"))
                         {
-                            if(w.getBodyStatus()[6].booleanValue())
+                            if(w.getBodyStatus()[6])
                                 addition = (new StringBuilder(" so they can get a good look inside")).append(addition).toString();
                             w.append(t, (new StringBuilder("spread ")).append(c.hisHer()).append(" virgin anus as much as possible").append(addition).append(".  ").append(c.HeShe()).append(" ").toString());
                         }
@@ -16579,7 +16579,7 @@ public class WorldState
                     if(c.getEXPOLevel() < 3)
                     {
                         String addition = "";
-                        if(w.getBodyStatus()[6].booleanValue())
+                        if(w.getBodyStatus()[6])
                             addition = " high-definition";
                         if(gender.equals("male"))
                             w.append(t, (new StringBuilder("Your cables tear apart ")).append(c.hisHer()).append(" clothes on the way to ").append(c.hisHer()).append(" asshole, inserting probing").append(addition).append(" cameras that give the viewers an internal view.  ").append(c.HeShe()).append(" ").toString());
@@ -16588,9 +16588,9 @@ public class WorldState
                     } else
                     {
                         String addition = "";
-                        if(w.getBodyStatus()[6].booleanValue())
+                        if(w.getBodyStatus()[6])
                             addition = " in high-definition detail";
-                        if(w.getBodyStatus()[19].booleanValue())
+                        if(w.getBodyStatus()[19])
                             w.append(t, (new StringBuilder(" pump even more Demonic cum inside ")).append(c.himHer()).append(".  ").append(c.HeShe()).append(" ").toString());
                         else
                         if(gender.equals("female"))
@@ -16609,19 +16609,19 @@ public class WorldState
                     else
                         w.append(t, (new StringBuilder("winces in pain, but ")).append(c.heShe()).append("'s too timid to fight back.").toString());
                 }
-                if(w.getBodyStatus()[5].booleanValue())
-                    if(w.tickle().booleanValue())
+                if(w.getBodyStatus()[5])
+                    if(w.tickle())
                     {
                         if(c.getEXPOLevel() >= 3)
                             w.append(t, (new StringBuilder("  As the next set of votes come in, it becomes clear that the viewers want you to make ")).append(c.himHer()).append(" laugh more, ").toString());
                         else
                             w.append(t, (new StringBuilder("  The viewers prioritize exposing ")).append(c.hisHer()).append(" armpits and feet for further tickling, ").toString());
-                        if(c.getINJULevel() >= 3 && !aVirg.booleanValue())
+                        if(c.getINJULevel() >= 3 && !aVirg)
                             w.append(t, (new StringBuilder("and ")).append(c.heShe()).append("'s already unable to stifle ").append(c.hisHer()).append(" nervous giggles of anticipation.").toString());
                         else
                             w.append(t, (new StringBuilder("and ")).append(c.hisHer()).append(" face pales as ").append(c.heShe()).append(" realizes what's coming next.").toString());
                     } else
-                    if(c.getINJULevel() >= 3 && !aVirg.booleanValue())
+                    if(c.getINJULevel() >= 3 && !aVirg)
                     {
                         if(gender.equals("male"))
                         {
@@ -16631,7 +16631,7 @@ public class WorldState
                                 w.append(t, (new StringBuilder("  The cage around ")).append(c.hisHer()).append(" penis abruptly tightens, and ").append(c.hisHer()).append(" reflexive yelp of discomfort").toString());
                             w.append(t, " draws a wave of derisive laughter.");
                         } else
-                        if(penetrated.booleanValue())
+                        if(penetrated)
                             w.append(t, (new StringBuilder("  At the same time, more cables give the same treatment to ")).append(c.hisHer()).append(" ass.").toString());
                         else
                             w.append(t, (new StringBuilder("  Meanwhile, more camera cables snake under ")).append(c.hisHer()).append(" clothes to penetrate ").append(c.hisHer()).append(" ass, giving the viewers a deep internal view.").toString());
@@ -16639,23 +16639,23 @@ public class WorldState
                     {
                         w.append(t, (new StringBuilder("  The rough treatment damages not only ")).append(c.hisHer()).append(" clothes, but ").append(c.hisHer()).append(" body as well.").toString());
                     }
-                if(w.getBodyStatus()[20].booleanValue())
+                if(w.getBodyStatus()[20])
                 {
                     w.append(t, (new StringBuilder("  Meanwhile, the hypnotic images being displayed to ")).append(c.himHer()).append(" ").toString());
-                    if(c.getPLEALevel() >= 3 && !cVirg.booleanValue())
+                    if(c.getPLEALevel() >= 3 && !cVirg)
                     {
-                        if(hypnotized.booleanValue())
+                        if(hypnotized)
                             w.append(t, (new StringBuilder("make ")).append(c.himHer()).append(" continue to masturbate, cumming for ").append(c.hisHer()).append(" audience.").toString());
                         else
                             w.append(t, (new StringBuilder("enhance the stimulation ")).append(c.heShe()).append(" feels from the abuse, causing ").append(c.himHer()).append(" to cum again.").toString());
                     } else
-                    if(hypnotized.booleanValue())
+                    if(hypnotized)
                         w.append(t, (new StringBuilder("make ")).append(c.himHer()).append(" continue to masturbate, still straining in search of orgasm.").toString());
                     else
                         w.append(t, (new StringBuilder("subtly alter ")).append(c.hisHer()).append(" mental state, causing the abuse to feel far more pleasurable than it should.").toString());
                 } else
-                if(w.getBodyStatus()[4].booleanValue())
-                    if(c.getPLEALevel() >= 3 && !cVirg.booleanValue())
+                if(w.getBodyStatus()[4])
+                    if(c.getPLEALevel() >= 3 && !cVirg)
                     {
                         w.append(t, (new StringBuilder("  The stimulation soon causes ")).append(c.himHer()).append(" to climax again").toString());
                         if(gender.equals("female"))
@@ -16669,7 +16669,7 @@ public class WorldState
             } else
             if(captureProgression % 3 == 2)
             {
-                if(w.getBodyStatus()[3].booleanValue())
+                if(w.getBodyStatus()[3])
                 {
                     if(confidence > 66)
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" glares at the viewers tormenting ").append(c.himHer()).toString());
@@ -16697,7 +16697,7 @@ public class WorldState
                     else
                     if(morality > 33)
                     {
-                        if(w.getBodyStatus()[3].booleanValue())
+                        if(w.getBodyStatus()[3])
                             w.append(t, (new StringBuilder("the idiots in control should hurry up and finish stripping ")).append(c.himHer()).toString());
                         else
                             w.append(t, (new StringBuilder("they hope you hurry and finish stripping ")).append(c.himHer()).append(" soon").toString());
@@ -16733,16 +16733,16 @@ public class WorldState
                     w.append(t, (new StringBuilder("nice it is to see the evil bitch get the humiliation ")).append(c.heShe()).append(" deserves").toString());
                 else
                     w.append(t, (new StringBuilder(String.valueOf(c.heShe()))).append(" must be such a bitch because of ").append(c.hisHer()).append(" insecurity about having a dick").toString());
-                if(c.getHATELevel() < 3 && !penetrated.booleanValue())
+                if(c.getHATELevel() < 3 && !penetrated)
                 {
                     if(c.getEXPOLevel() < 3)
                     {
-                        if(w.getBodyStatus()[6].booleanValue())
+                        if(w.getBodyStatus()[6])
                             w.append(t, (new StringBuilder(".  As your various tools disintegrate more and more of ")).append(c.hisHer()).append(" clothes, the comments become increasingly sexual").toString());
                         else
                             w.append(t, (new StringBuilder(".  As your cables strip off more and more of ")).append(c.hisHer()).append(" clothes, the comments become increasingly sexual").toString());
                     } else
-                    if(w.getBodyStatus()[6].booleanValue())
+                    if(w.getBodyStatus()[6])
                         w.append(t, (new StringBuilder(".  As your cameras capture ")).append(c.hisHer()).append(" exposed body from every angle, the comments become even more sexual").toString());
                     else
                         w.append(t, (new StringBuilder(".  As your cables pull ")).append(c.hisHer()).append(" legs apart, the comments become even more sexual").toString());
@@ -16754,18 +16754,18 @@ public class WorldState
                     else
                         w.append(t, (new StringBuilder(", crude enough to make ")).append(c.himHer()).append(" frown in distaste.").toString());
                 } else
-                if(vVirg.booleanValue() && !penetrated.booleanValue())
+                if(vVirg && !penetrated)
                 {
                     if(c.getEXPOLevel() < 3)
                     {
-                        if(w.getBodyStatus()[6].booleanValue())
+                        if(w.getBodyStatus()[6])
                             w.append(t, (new StringBuilder(".  As your various tools disintegrate more and more of ")).append(c.hisHer()).append(" clothes, the comments become increasingly sexual").toString());
                         else
                             w.append(t, (new StringBuilder(".  As your cables strip off more and more of ")).append(c.hisHer()).append(" clothes, the comments become increasingly sexual").toString());
                     } else
                     {
                         String addition = "";
-                        if(w.getBodyStatus()[6].booleanValue())
+                        if(w.getBodyStatus()[6])
                             addition = " so that you can shine a bright light inside and zoom in with your cameras";
                         if(gender.equals("male"))
                             w.append(t, (new StringBuilder(".  As your cables latch on to ")).append(c.hisHer()).append(" virgin anus and spread it open").append(addition).append(", the comments become even more sexual").toString());
@@ -16784,7 +16784,7 @@ public class WorldState
                     if(c.getEXPOLevel() < 3)
                     {
                         String start = ".  As another cable with a camera on the end roughly shoves its ";
-                        if(w.getBodyStatus()[6].booleanValue())
+                        if(w.getBodyStatus()[6])
                             start = ".  As several more cables with bulky cameras attached force their ";
                         if(gender.equals("male"))
                             w.append(t, (new StringBuilder(String.valueOf(start))).append("way into ").append(c.hisHer()).append(" asshole, the comments become increasingly sexual").toString());
@@ -16793,7 +16793,7 @@ public class WorldState
                     } else
                     {
                         String addition = "";
-                        if(w.getBodyStatus()[6].booleanValue())
+                        if(w.getBodyStatus()[6])
                             addition = " so that you can shine a bright light inside and zoom in with your cameras";
                         if(gender.equals("male"))
                             w.append(t, (new StringBuilder(".  As your cables spread ")).append(c.hisHer()).append(" asshole painfully wide").append(addition).append(", the comments become even more sexual").toString());
@@ -16808,13 +16808,13 @@ public class WorldState
                     else
                         w.append(t, (new StringBuilder(", and the obvious amusement they show at ")).append(c.hisHer()).append(" pain makes it impossible for ").append(c.himHer()).append(" to stay calm and rational.").toString());
                 }
-                if(w.getBodyStatus()[4].booleanValue() || w.getBodyStatus()[20].booleanValue())
-                    if(c.getPLEALevel() >= 3 && !cVirg.booleanValue())
+                if(w.getBodyStatus()[4] || w.getBodyStatus()[20])
+                    if(c.getPLEALevel() >= 3 && !cVirg)
                     {
-                        if(w.getBodyStatus()[20].booleanValue())
+                        if(w.getBodyStatus()[20])
                         {
                             w.append(t, (new StringBuilder("  ")).append(c.HisHer()).append(" voice is dull and distracted as ").toString());
-                            if(hypnotized.booleanValue())
+                            if(hypnotized)
                                 w.append(t, "the cruel words only briefly break the lull of the hypnotism");
                             else
                                 w.append(t, (new StringBuilder(String.valueOf(c.heShe()))).append(" struggles to shake off the hypnotic imagery").toString());
@@ -16832,9 +16832,9 @@ public class WorldState
                         else
                             w.append(t, (new StringBuilder(" in ")).append(c.hisHer()).append(" ").append(bottomDesc).append(".").toString());
                     } else
-                    if(w.getBodyStatus()[20].booleanValue())
+                    if(w.getBodyStatus()[20])
                     {
-                        if(hypnotized.booleanValue())
+                        if(hypnotized)
                             w.append(t, "The cruel words briefly break the lull of the hypnotism.");
                         else
                             w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" voice is dull and distracted as ").append(c.heShe()).append(" struggles to shake off the hypnotic imagery being shown to ").append(c.himHer()).append(".").toString());
@@ -16842,10 +16842,10 @@ public class WorldState
                     {
                         w.append(t, (new StringBuilder("  ")).append(c.HeShe()).append(" struggles to answer through the stimulation of your vibrators.").toString());
                     }
-                if(w.getBodyStatus()[5].booleanValue())
-                    if(c.getINJULevel() >= 3 && !aVirg.booleanValue())
+                if(w.getBodyStatus()[5])
+                    if(c.getINJULevel() >= 3 && !aVirg)
                     {
-                        if(w.tickle().booleanValue())
+                        if(w.tickle())
                             w.append(t, (new StringBuilder("  You give ")).append(c.himHer()).append(" a brief break from the tickling in order to give an answer that satisfies the viewers, then go right back to forcing ").append(c.himHer()).append(" to laugh some more.").toString());
                         else
                         if(gender.equals("male"))
@@ -16853,7 +16853,7 @@ public class WorldState
                         else
                             w.append(t, (new StringBuilder("  ")).append(c.HeShe()).append(" has a hard time speaking, voice thick with pain due to your cables exploring ").append(c.hisHer()).append(" ass.").toString());
                     } else
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                         w.append(t, (new StringBuilder("  ")).append(c.HeShe()).append(" has a hard time answering through your incessant tickle torture.").toString());
                     else
                         w.append(t, (new StringBuilder("  Your cables torture ")).append(c.himHer()).append(" with periodic shocks of electricity as ").append(c.heShe()).append(" tries to answer.").toString());
@@ -16867,9 +16867,9 @@ public class WorldState
                     w.append(t, (new StringBuilder("You display a message to ")).append(mainName).append(" and the viewers of ").append(c.hisHer()).append(" predicament showing ").toString());
                 else
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" glares at the people viewing ").append(c.himHer()).append(" through your screens as you display a message telling them ").toString());
-                if(c.getHATELevel() < 3 && !penetrated.booleanValue())
+                if(c.getHATELevel() < 3 && !penetrated)
                 {
-                    if(w.getBodyStatus()[3].booleanValue())
+                    if(w.getBodyStatus()[3])
                         w.append(t, "the number of orgasms experienced by the people controlling your cables since the start of the broadcast.  ");
                     else
                         w.append(t, "the number of orgasms experienced by the people watching since the start of the broadcast.  ");
@@ -16881,9 +16881,9 @@ public class WorldState
                     else
                         w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" doesn't normally care about what people think of ").append(c.himHer()).append(", but ").append(c.heShe()).append("'s still stunned to see ").toString());
                 } else
-                if(vVirg.booleanValue() && !penetrated.booleanValue())
+                if(vVirg && !penetrated)
                 {
-                    if(w.getBodyStatus()[3].booleanValue())
+                    if(w.getBodyStatus()[3])
                         w.append(t, (new StringBuilder("that in a few moments, you'll be conjuring spacial portals that they can stick their cocks through in order to ejaculate directly onto ")).append(c.hisHer()).append(" body.  ").toString());
                     else
                         w.append(t, (new StringBuilder("that in a few moments, your magic will cause their screens to become permeable to their semen, allowing them to ejaculate directly onto ")).append(c.hisHer()).append(" body.  ").toString());
@@ -16896,7 +16896,7 @@ public class WorldState
                         w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" shouts in disgust, squirming and struggling up to the very last moment.  ").toString());
                 } else
                 {
-                    if(w.getBodyStatus()[3].booleanValue())
+                    if(w.getBodyStatus()[3])
                         w.append(t, (new StringBuilder("that in a few moments, you'll be conjuring spacial portals that they'll be able to stick their cocks into in order to directly fuck ")).append(c.hisHer()).append(" ").toString());
                     else
                         w.append(t, "that in a few moments, your magic will collect any semen shot onto their screens and pump it through a tube you've inserted into ");
@@ -16904,7 +16904,7 @@ public class WorldState
                         w.append(t, "anus.  ");
                     else
                         w.append(t, "pussy.  ");
-                    if(w.getBodyStatus()[3].booleanValue())
+                    if(w.getBodyStatus()[3])
                     {
                         if(dignity > 66)
                             w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" tries not to show a reaction, but the countdown makes ").append(c.himHer()).append(" tremble with anticipation, and when it hits zero, ").append(c.hisHer()).append(" composure breaks.  ").toString());
@@ -16924,13 +16924,13 @@ public class WorldState
                 }
                 if(c.getEXPOLevel() < 3)
                 {
-                    if(c.getHATELevel() < 3 && !penetrated.booleanValue())
+                    if(c.getHATELevel() < 3 && !penetrated)
                         w.append(t, (new StringBuilder("just how many people have pleasured themselves to ")).append(c.hisHer()).append(" suffering.  The realization makes ").append(c.himHer()).append(" ").toString());
                     else
-                    if(vVirg.booleanValue() && !penetrated.booleanValue())
+                    if(vVirg && !penetrated)
                         w.append(t, (new StringBuilder("In a matter of seconds, ")).append(c.hisHer()).append(" face, hair, and clothes are covered in the semen of hundreds of different men, and ").append(c.heShe()).append(" can only ").toString());
                     else
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                         w.append(t, (new StringBuilder("The semen of hundreds of ejaculations is pumped inside ")).append(c.himHer()).append(", swelling ").append(c.hisHer()).append(" belly and overflowing to soak ").append(c.hisHer()).append(" ").append(bottomDesc).append(".  The sense of violation is enough to make ").append(c.himHer()).append(" ").toString());
                     else
                         w.append(t, (new StringBuilder("The semen of hundreds of ejaculations is pumped inside ")).append(c.himHer()).append(", swelling ").append(c.hisHer()).append(" belly and overflowing to soak ").append(c.hisHer()).append(" ").append(bottomDesc).append(".  The pain is enough to make ").append(c.himHer()).append(" ").toString());
@@ -16943,13 +16943,13 @@ public class WorldState
                         w.append(t, (new StringBuilder("cry outright, tears streaming down ")).append(c.hisHer()).append(" flushed red cheeks.").toString());
                 } else
                 {
-                    if(c.getHATELevel() < 3 && !penetrated.booleanValue())
+                    if(c.getHATELevel() < 3 && !penetrated)
                         w.append(t, (new StringBuilder("that the counter is still increasing at an alarming rate as the viewers enjoy ")).append(c.hisHer()).append(" effective nudity.  ").append(c.HeShe()).append(" can't help but ").toString());
                     else
-                    if(vVirg.booleanValue() && !penetrated.booleanValue())
+                    if(vVirg && !penetrated)
                         w.append(t, (new StringBuilder("In a matter of seconds, ")).append(c.hisHer()).append(" whole body is covered in the semen, ").append(c.hisHer()).append(" skin glistening wetly.  The disgusting feeling makes ").append(c.himHer()).append(" ").toString());
                     else
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                     {
                         if(gender.equals("female"))
                             w.append(t, (new StringBuilder("The semen of hundreds of ejaculations is pumped inside ")).append(c.himHer()).append(", swelling ").append(c.hisHer()).append(" belly and quickly overflowing in a violent spray that gets spatters on the rest of ").append(c.hisHer()).append(" exposed body as well.  The sense of violation is enough to make ").append(c.himHer()).append(" ").toString());
@@ -16968,9 +16968,9 @@ public class WorldState
                     else
                         w.append(t, (new StringBuilder("cry outright, tears streaming down ")).append(c.hisHer()).append(" flushed red cheeks.").toString());
                 }
-                if(w.getBodyStatus()[4].booleanValue() || w.getBodyStatus()[20].booleanValue())
+                if(w.getBodyStatus()[4] || w.getBodyStatus()[20])
                 {
-                    if(penetrated.booleanValue())
+                    if(penetrated)
                     {
                         w.append(t, (new StringBuilder("  The tentacle fucks ")).append(c.himHer()).append(" even as it fills ").append(c.himHer()).append(" up").toString());
                     } else
@@ -16982,7 +16982,7 @@ public class WorldState
                             w.append(t, "cock");
                         w.append(t, " surges at the same time, ");
                     }
-                    if(c.getPLEALevel() >= 3 && !cVirg.booleanValue())
+                    if(c.getPLEALevel() >= 3 && !cVirg)
                     {
                         if(gender.equals("female"))
                             w.append(t, (new StringBuilder("forcing out another orgasm despite ")).append(c.hisHer()).append(" disgust.").toString());
@@ -16993,11 +16993,11 @@ public class WorldState
                         w.append(t, (new StringBuilder("and ")).append(c.heShe()).append(" hates how good it feels.").toString());
                     }
                 } else
-                if(w.getBodyStatus()[5].booleanValue())
+                if(w.getBodyStatus()[5])
                 {
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                     {
-                        if(c.getINJULevel() >= 3 && !aVirg.booleanValue())
+                        if(c.getINJULevel() >= 3 && !aVirg)
                         {
                             w.append(t, (new StringBuilder("  But no matter how awful it feels, your tickling is still forcing ")).append(c.himHer()).append(" to grin and laugh, each spasm shooting a little spurt of cum out of ").append(c.hisHer()).append(" ruined ").toString());
                             if(gender.equals("male"))
@@ -17009,10 +17009,10 @@ public class WorldState
                             w.append(t, (new StringBuilder("  Lubricated by the copious amounts of semen, your cables continue to tickle all over ")).append(c.hisHer()).append(" body, testing the limits of ").append(c.hisHer()).append(" willpower.").toString());
                         }
                     } else
-                    if(c.getHATELevel() >= 3 && !vVirg.booleanValue())
+                    if(c.getHATELevel() >= 3 && !vVirg)
                     {
                         w.append(t, (new StringBuilder("  Afterward, the cables coiled around ")).append(c.hisHer()).append(" midsection squeeze down").toString());
-                        if(c.getINJULevel() >= 3 && !aVirg.booleanValue())
+                        if(c.getINJULevel() >= 3 && !aVirg)
                             if(gender.equals("male"))
                                 w.append(t, (new StringBuilder(" while your cage tortures ")).append(c.hisHer()).append(" penis with electric shocks").toString());
                             else
@@ -17024,7 +17024,7 @@ public class WorldState
                             w.append(t, "pussy.");
                     }
                 } else
-                if(w.getBodyStatus()[6].booleanValue())
+                if(w.getBodyStatus()[6])
                     w.append(t, (new StringBuilder("  There are rapid flashes of light as your cameras take detailed photographs of ")).append(c.hisHer()).append(" humiliation from every possible angle.").toString());
             }
         }
@@ -17037,22 +17037,22 @@ public class WorldState
         if(c.gender.equals("male"))
             breasts = "nipples";
         w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\n").toString());
-        if((c.surrounded.booleanValue() || c.captured.booleanValue()) && (c.previousFEAR > 0L || c.previousDISG > 0L || c.previousPAIN > 0L || c.previousSHAM > 0L || c.previousHATE > 0L || c.previousPLEA > 0L || c.previousINJU > 0L || c.previousEXPO > 0L))
+        if((c.surrounded || c.captured) && (c.previousFEAR > 0L || c.previousDISG > 0L || c.previousPAIN > 0L || c.previousSHAM > 0L || c.previousHATE > 0L || c.previousPLEA > 0L || c.previousINJU > 0L || c.previousEXPO > 0L))
         {
             w.append(t, "Previous ");
-            if(c.surrounded.booleanValue())
+            if(c.surrounded)
                 w.append(t, "Surround");
             else
                 w.append(t, "Capture");
             w.append(t, (new StringBuilder(" Damage\nFEAR: ")).append(c.fixedFormat(c.previousFEAR)).append("  HATE: ").append(c.fixedFormat(c.previousHATE)).append("\nDISG: ").append(c.fixedFormat(c.previousDISG)).append("  PLEA: ").append(c.fixedFormat(c.previousPLEA)).append("\n").toString());
-            if(w.tickle().booleanValue())
+            if(w.tickle())
                 w.append(t, (new StringBuilder("TICK: ")).append(c.fixedFormat(c.previousPAIN)).append("  ANTI: ").append(c.fixedFormat(c.previousINJU)).append("\n").toString());
             else
                 w.append(t, (new StringBuilder("PAIN: ")).append(c.fixedFormat(c.previousPAIN)).append("  INJU: ").append(c.fixedFormat(c.previousINJU)).append("\n").toString());
             w.append(t, (new StringBuilder("SHAM: ")).append(c.fixedFormat(c.previousSHAM)).append("  EXPO: ").append(c.fixedFormat(c.previousEXPO)).append("\n\n").toString());
         }
         w.append(t, c.mainName);
-        if(c.captured.booleanValue())
+        if(c.captured)
         {
             if(c.getHATELevel() == 0)
                 w.append(t, " is struggling to escape the clutches of your Commander body.  ");
@@ -17071,7 +17071,7 @@ public class WorldState
             else
                 w.append(t, (new StringBuilder("'s body is erupting with Demonic energy, a sign of ")).append(c.hisHer()).append(" hateful state of mind, as ").append(c.heShe()).append(" struggles to escape your Commander.  ").toString());
         } else
-        if(c.surrounded.booleanValue())
+        if(c.surrounded)
         {
             if(c.getHATELevel() == 0)
                 w.append(t, (new StringBuilder(" is struggling to escape the Thralls surrounding ")).append(c.himHer()).append(".  ").toString());
@@ -17115,7 +17115,7 @@ public class WorldState
                 else
                 if(c.weapon.equals("spirits") || c.weapon.equals("monster") || c.customWeaponType.equals("command"))
                 {
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                         w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s still full of energy, allowing ").append(c.hisHer()).append(" ").append(c.weapon).append(" to do the fighting for ").append(c.himHer()).append(".  ").toString());
                     else
                         w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s uninjured, allowing ").append(c.hisHer()).append(" ").append(c.weapon).append(" to do the fighting for ").append(c.himHer()).append(".  ").toString());
@@ -17126,33 +17126,33 @@ public class WorldState
             } else
             if(c.getINJULevel() == 1)
             {
-                if(w.tickle().booleanValue())
+                if(w.tickle())
                     w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s grimacing with the effort of continuing to fight, especially when ").append(c.heShe()).append("'s poked some place sensitive.  ").toString());
                 else
                     w.append(t, (new StringBuilder("Some bruises show on ")).append(c.hisHer()).append(" skin where they aren't covered by ").append(c.hisHer()).append(" ").append(c.topDesc()).append(".  ").toString());
             } else
             if(c.getINJULevel() == 2)
             {
-                if(w.tickle().booleanValue())
+                if(w.tickle())
                     w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s demoralized by how the fight has gone so far, flinching reflexively from the Demons' attacks.  ").toString());
                 else
                     w.append(t, (new StringBuilder("Blood is dripping from beneath ")).append(c.hisHer()).append(" ").append(c.topDesc()).append(".  ").toString());
             } else
             if(c.getINJULevel() == 3)
             {
-                if(w.tickle().booleanValue())
+                if(w.tickle())
                     w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s gasping with exhaustion, chest heaving under ").append(c.hisHer()).append(" ").append(c.topDesc()).append(".  ").toString());
                 else
                     w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" body is covered with deep wounds, though it's hard to see the full extent of them under ").append(c.hisHer()).append(" ").append(c.topDesc()).append(".  ").toString());
             } else
             if(c.getINJULevel() == 4)
             {
-                if(w.tickle().booleanValue())
+                if(w.tickle())
                     w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s still spasming reflexively due to the intense stimulation ").append(c.heShe()).append("'s faced over the course of the battle.  ").toString());
                 else
                     w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" body is shattered, and ").append(c.heShe()).append("'s only able to stay upright due to the magical power flowing through ").append(c.himHer()).append(".  ").toString());
             } else
-            if(w.tickle().booleanValue())
+            if(w.tickle())
                 w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s gasping with exhaustion due to the intense tickle torture ").append(c.heShe()).append("'s faced, only remaining conscious due to the magical power flowing through ").append(c.himHer()).append(".  ").toString());
             else
                 w.append(t, (new StringBuilder("Moral wounds cover ")).append(c.hisHer()).append(" body, which only remains alive due to the magical power flowing through ").append(c.himHer()).append(".  ").toString());
@@ -17242,26 +17242,26 @@ public class WorldState
             else
             if(c.getINJULevel() == 1)
             {
-                if(w.tickle().booleanValue())
+                if(w.tickle())
                     w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" frowns with the effort required to maintain ").append(c.hisHer()).append(" composure as ").append(c.heShe()).append(" holds ").append(c.hisHer()).append(" torn ").append(c.topDesc()).append(" closed to cover ").append(c.hisHer()).append(" ").append(breasts).toString());
                 else
                     w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" needs to devote one bruised arm toward holding ").append(c.hisHer()).append(" torn ").append(c.topDesc()).append(" closed in order to keep ").append(c.hisHer()).append(" ").append(breasts).append(" covered").toString());
             } else
             if(c.getINJULevel() == 2)
             {
-                if(w.tickle().booleanValue())
+                if(w.tickle())
                     w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" makes for a sad sight with ").append(c.hisHer()).append(" torn ").append(c.topDesc()).append(", flinching away from the Demons' attacks and crossing ").append(c.hisHer()).append(" arms in front of ").append(c.hisHer()).append(" bare ").append(breasts).toString());
                 else
                     w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" bloodied arm holds ").append(c.hisHer()).append(" torn ").append(c.topDesc()).append(" closed with a weakening grip in order to keep ").append(c.hisHer()).append(" ").append(breasts).append(" covered").toString());
             } else
             if(c.getINJULevel() == 3)
             {
-                if(w.tickle().booleanValue())
+                if(w.tickle())
                     w.append(t, (new StringBuilder("Moaning with exhaustion, ")).append(c.heShe()).append(" has trouble holding ").append(c.hisHer()).append(" torn ").append(c.topDesc()).append(" closed to cover ").append(c.hisHer()).append(" ").append(breasts).toString());
                 else
                     w.append(t, (new StringBuilder("With one arm fractured, ")).append(c.heShe()).append(" has trouble holding ").append(c.hisHer()).append(" torn ").append(c.topDesc()).append(" closed to cover ").append(c.hisHer()).append(" ").append(breasts).toString());
             } else
-            if(w.tickle().booleanValue())
+            if(w.tickle())
                 w.append(t, (new StringBuilder("Twitching reflexively at the lightest touch, ")).append(c.heShe()).append(" has no hope of holding ").append(c.hisHer()).append(" torn ").append(c.topDesc()).append(" closed to conceal ").append(c.hisHer()).append(" ").append(breasts).toString());
             else
                 w.append(t, (new StringBuilder("With ")).append(c.hisHer()).append(" shattered body, ").append(c.heShe()).append(" has no hope of holding ").append(c.hisHer()).append(" torn ").append(c.topDesc()).append(" closed to conceal ").append(c.hisHer()).append(" ").append(breasts).toString());
@@ -17370,26 +17370,26 @@ public class WorldState
             else
             if(c.getINJULevel() == 1)
             {
-                if(w.tickle().booleanValue())
+                if(w.tickle())
                     w.append(t, (new StringBuilder("and ")).append(c.heShe()).append(" frowns with the effort of fighting while remembering to keep ").append(c.hisHer()).append(" ").append(breasts).append(" covered").toString());
                 else
                     w.append(t, (new StringBuilder("exposing ")).append(c.hisHer()).append(" bruises and ").append(c.hisHer()).append(" ").append(breasts).append(" when ").append(c.heShe()).append(" isn't careful enough to cover them").toString());
             } else
             if(c.getINJULevel() == 2)
             {
-                if(w.tickle().booleanValue())
+                if(w.tickle())
                     w.append(t, (new StringBuilder("forcing ")).append(c.himHer()).append(" to flinch away whenever the Demons try to force ").append(c.himHer()).append(" to stop covering ").append(c.hisHer()).append(" bare ").append(breasts).toString());
                 else
                     w.append(t, (new StringBuilder("forcing ")).append(c.himHer()).append(" to use one bloodied arm to weakly cover ").append(c.hisHer()).append(" bare ").append(breasts).toString());
             } else
             if(c.getINJULevel() == 3)
             {
-                if(w.tickle().booleanValue())
+                if(w.tickle())
                     w.append(t, (new StringBuilder("and ")).append(c.heShe()).append("'s so out of breath that it's difficult for ").append(c.himHer()).append(" to remember to cover ").append(c.hisHer()).append(" bare ").append(breasts).toString());
                 else
                     w.append(t, (new StringBuilder("and ")).append(c.hisHer()).append(" fractured arm makes it difficult for ").append(c.himHer()).append(" to cover ").append(c.hisHer()).append(" bare ").append(breasts).toString());
             } else
-            if(w.tickle().booleanValue())
+            if(w.tickle())
                 w.append(t, (new StringBuilder("and with the way ")).append(c.hisHer()).append(" sensitive body reacts to the lightest touch, ").append(c.heShe()).append(" has little hope of keeping ").append(c.hisHer()).append(" bare ").append(breasts).append(" hidden").toString());
             else
                 w.append(t, (new StringBuilder("and with ")).append(c.hisHer()).append(" body shattered, ").append(c.heShe()).append(" has little hope of keeping ").append(c.hisHer()).append(" bare ").append(breasts).append(" hidden").toString());
@@ -17438,19 +17438,19 @@ public class WorldState
                 w.append(t, (new StringBuilder(", and ")).append(c.hisHer()).append(" orgasmic spasms only make ").append(c.hisHer()).append(" humiliation more complete.").toString());
             }
         }
-        if(w.getTechs()[0].isOwned().booleanValue())
+        if(w.getTechs()[0].isOwned())
             c.printProfile(t, p, f, w);
-        if(w.tutorialResponse().booleanValue())
+        if(w.tutorialResponse())
             if(w.getBattleRound() == 1)
             {
-                if(w.tickle().booleanValue())
+                if(w.tickle())
                     w.grayAppend(t, "\n\n(Most of the information here only shows up when the player has the Psychic Reading upgrade, which can be very useful for new players.  When breaking vulnerabilities, the circumstances listed on the right side are the most important thing to consider.  Looks like Miracle is weakest to ANTIcipation and strongest against HATE.  To make use of that, let's create an opening.  Threaten and Taunt only create openings when certain conditions hold, and she doesn't take much TICKle damage, so let's use Slime.)");
                 else
                     w.grayAppend(t, "\n\n(Most of the information here only shows up when the player has the Psychic Reading upgrade, which can be very useful for new players.  When breaking vulnerabilities, the circumstances listed on the right side are the most important thing to consider.  Looks like Miracle is weakest to INJUry and strongest against HATE.  To make use of that, let's create an opening.  Threaten and Taunt only create openings when certain conditions hold, and she doesn't take much PAIN damage, so let's use Slime.)");
             } else
             if(w.getBattleRound() == 6 && c == w.getCast()[2])
             {
-                if(w.tickle().booleanValue())
+                if(w.tickle())
                     w.grayAppend(t, "\n\n(You can see that if we had started the battle by going after Axiom instead, Miracle would have shown up on round 7.  Anyway, Axiom isn't very weak against FEAR, DISG, ANTI, or SHAM.  It would take two turns to set up an opening against her, and that time would be better spent working on our main target, Miracle.  Go back to the target selection screen.)");
                 else
                     w.grayAppend(t, "\n\n(You can see that if we had started the battle by going after Axiom instead, Miracle would have shown up on round 7.  Anyway, Axiom isn't very weak against FEAR, DISG, PAIN, or SHAM.  It would take two turns to set up an opening against her, and that time would be better spent working on our main target, Miracle.  Go back to the target selection screen.)");
@@ -17462,7 +17462,7 @@ public class WorldState
     public Boolean dissociationSurroundPossible()
     {
         for(int i = 0; i < 3; i++)
-            if(getCast()[i] != null && getCast()[i].dissociationOpening.booleanValue())
+            if(getCast()[i] != null && getCast()[i].dissociationOpening)
                 return Boolean.valueOf(true);
 
         return Boolean.valueOf(false);
@@ -17497,12 +17497,12 @@ public class WorldState
             if(c.innocence > 66 || c.dignity > 66)
                 addBreak(17);
             w.append(t, "\n\n");
-            if(c.usingFantasize.booleanValue())
+            if(c.usingFantasize)
             {
                 c.usingFantasize = Boolean.valueOf(false);
                 c.nextAdaptation = c.nextAdaptation / 10L;
             }
-            if(c.usingStrip.booleanValue())
+            if(c.usingStrip)
             {
                 c.usingStrip = Boolean.valueOf(false);
                 c.nextAdaptation = c.nextAdaptation / 10L;
@@ -17586,12 +17586,12 @@ public class WorldState
             }
             w.append(t, "\n\n");
         }
-        if(finalBattle.booleanValue())
+        if(finalBattle)
         {
             c.removeSurround = Boolean.valueOf(true);
             c.resolve = 0;
             c.defeatType = 6;
-            if(c.drained.booleanValue())
+            if(c.drained)
             {
                 if(c.innocence > 66)
                     append(t, (new StringBuilder(String.valueOf(c.mainName))).append(" had a plan to try to get the Demon Lord to kill ").append(c.himHer()).append(", but with the familiar terror gripping ").append(c.hisHer()).append(" heart as the Thralls close in, ").append(c.heShe()).append(" can't remember it.  ").append(c.HeShe()).append(" can't remember much of anything, and ").append(c.heShe()).append(" can only think of how nice it would be if ").append(c.heShe()).append(" were someone else, someone who isn't bothered by this sort of thing.  Then, ").append(c.heShe()).append(" begins to delusionally believe that those wishes are reality.").toString());
@@ -17611,7 +17611,7 @@ public class WorldState
             w.append(t, "\n\n");
             w.underlineAppend(t, "Resolve Broken");
             w.append(t, "\n\n");
-            if(c.impregnated.booleanValue())
+            if(c.impregnated)
             {
                 if(c.confidence > 66)
                     append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" self-confidence surges, even stronger than it was at ").append(c.hisHer()).append(" peak, and ").append(c.heShe()).append(" goes on a rampage with ").append(c.hisHer()).append(" ").append(c.weapon).append(", slaughtering the Thralls in every direction.  But rather than acting to rescue ").append(c.hisHer()).append(" allies, ").append(c.heShe()).append(" only kills enough to satisfy ").append(c.hisHer()).append(" sudden sadistic urges before beginning to purposefully stride toward the Demonic spire in order to offer ").append(c.hisHer()).append(" services to the Demon Lord.  ").toString());
@@ -17696,7 +17696,7 @@ public class WorldState
             c.say(t, "\"");
             Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(true), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.JOY, Project.Emotion.JOY);
         } else
-        if(!c.dissociated.booleanValue())
+        if(!c.dissociated)
         {
             if(c.dissociationReq >= 8)
             {
@@ -17718,7 +17718,7 @@ public class WorldState
                 } else
                 if(c.confidence > 33)
                 {
-                    if(high.dissociated.booleanValue())
+                    if(high.dissociated)
                         w.append(t, (new StringBuilder("Seeing ")).append(high.mainName).append("'s defeat, the last bit of hope drains out of ").append(c.mainName).append(".  ").toString());
                     else
                         w.append(t, (new StringBuilder("While ")).append(high.mainName).append(" tries to escape, ").append(c.mainName).append(" is losing ").append(c.hisHer()).append(" will to fight.  ").toString());
@@ -17732,13 +17732,13 @@ public class WorldState
                     w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" goes completely limp, and the Thralls are quick to seize the opportunity to use ").append(c.hisHer()).append(" body even more thoroughly.").toString());
                 } else
                 {
-                    if(high.dissociated.booleanValue() && mid.dissociated.booleanValue())
+                    if(high.dissociated && mid.dissociated)
                         w.append(t, (new StringBuilder("Even before ")).append(high.mainName).append("'s and ").append(mid.mainName).append("'s struggles cease, ").append(c.mainName).append(" has already completely surrendered.  ").toString());
                     else
-                    if(high.dissociated.booleanValue())
+                    if(high.dissociated)
                         w.append(t, (new StringBuilder("Even though ")).append(mid.mainName).append(" is able to keep fighting without ").append(high.mainName).append(", ").append(c.mainName).append(" can't manage it.  ").toString());
                     else
-                    if(mid.dissociated.booleanValue())
+                    if(mid.dissociated)
                         w.append(t, (new StringBuilder("Even before ")).append(mid.mainName).append("'s struggles cease, ").append(c.mainName).append(" has already completely surrendered.  ").toString());
                     else
                         w.append(t, (new StringBuilder("Even as the other two Chosen try to escape, ")).append(c.mainName).append(" has already completely surrendered.  ").toString());
@@ -17769,7 +17769,7 @@ public class WorldState
             } else
             if(c.confidence > 33)
             {
-                if(high.dissociated.booleanValue())
+                if(high.dissociated)
                     w.append(t, (new StringBuilder("With ")).append(high.mainName).append(" having been broken so thoroughly, the Thralls aren't concerned in the slightest about ").append(c.mainName).append("'s resistance.  ").toString());
                 else
                     w.append(t, (new StringBuilder("While ")).append(high.mainName).append(" continues to fight as hard as ").append(c.heShe()).append(" can, there's not even a scrap of resistance left in ").append(c.mainName).append(".  ").toString());
@@ -17783,13 +17783,13 @@ public class WorldState
                 w.append(t, (new StringBuilder("The Thralls jostle for position, eager to be the first one to break ")).append(c.himHer()).append(" in today.").toString());
             } else
             {
-                if(high.dissociated.booleanValue() && mid.dissociated.booleanValue())
+                if(high.dissociated && mid.dissociated)
                     w.append(t, (new StringBuilder("Even compared to ")).append(high.mainName).append(" and ").append(mid.mainName).append(", ").append(c.mainName).append(" seems like nothing more than a doll with ").append(c.hisHer()).append(" strings cut.  ").toString());
                 else
-                if(high.dissociated.booleanValue())
+                if(high.dissociated)
                     w.append(t, (new StringBuilder(String.valueOf(c.mainName))).append(", even moreso than ").append(high.mainName).append(", seems like nothing more than a doll with ").append(c.hisHer()).append(" strings cut.  ").toString());
                 else
-                if(mid.dissociated.booleanValue())
+                if(mid.dissociated)
                     w.append(t, (new StringBuilder(String.valueOf(c.mainName))).append(", even moreso than ").append(mid.mainName).append(", seems like nothing more than a doll with ").append(c.hisHer()).append(" strings cut.  ").toString());
                 else
                     w.append(t, (new StringBuilder("While ")).append(high.mainName).append(" and ").append(mid.mainName).append(" continue to fight, ").append(c.mainName).append(" seems like nothing more than a doll with ").append(c.hisHer()).append(" string cut.  ").toString());
@@ -17817,22 +17817,22 @@ public class WorldState
             {
                 if(c.confidence > 66)
                 {
-                    if(solo.booleanValue())
+                    if(solo)
                         append(t, (new StringBuilder(String.valueOf(c.mainName))).append(", once the mightiest of the three Chosen, is now allowing the Thralls to do whatever they want with ").append(c.himHer()).append(".  It's only natural that they'd take advantage.  ").append(c.HeShe()).append(" ").toString());
                     else
-                    if(trio.booleanValue())
+                    if(trio)
                     {
-                        if(mid.dissociated.booleanValue() && low.dissociated.booleanValue())
+                        if(mid.dissociated && low.dissociated)
                             append(t, "The three Chosen have been gathered together, laying lifeless side-by-side.  ");
                         else
                             append(t, (new StringBuilder("Shouts and grunts of effort speak of continued struggling elsewhere in the crowd of Thralls, but ")).append(c.mainName).append(", who once fought hardest of all, isn't resisting the Thralls fucking ").append(c.himHer()).append(" in the slightest.  ").toString());
                         append(t, (new StringBuilder(String.valueOf(c.mainName))).append(" ").toString());
                     } else
                     {
-                        if(partner.dissociated.booleanValue())
+                        if(partner.dissociated)
                             append(t, (new StringBuilder("With their partner is still resisting, ")).append(c.mainName).append(" and ").append(partner.mainName).append(" have become the focus of the Thralls' attentions, as neither makes a move to push back the Thralls fucking them.  ").toString());
                         else
-                        if(loved.booleanValue() || partner == lover)
+                        if(loved || partner == lover)
                             append(t, (new StringBuilder(String.valueOf(partner.mainName))).append(" cries out for ").append(c.mainName).append(" to save ").append(partner.himHer()).append(", ").append(partner.hisHer()).append(" voice rising in pitch as ").append(partner.heShe()).append(" endures the rough penetration of the Thrall fucking ").append(partner.himHer()).append(", but there's no response.  ").toString());
                         else
                             append(t, (new StringBuilder(String.valueOf(partner.mainName))).append(" shouts ").append(c.mainName).append("'s name, anger turning to desperation as it becomes clear that ").append(c.heShe()).append("'s not making a move to help ").append(partner.himHer()).append(".  ").toString());
@@ -17842,21 +17842,21 @@ public class WorldState
                 } else
                 if(c.confidence > 33)
                 {
-                    if(solo.booleanValue())
+                    if(solo)
                         append(t, (new StringBuilder(String.valueOf(c.mainName))).append(", meanwhile, is putting up no resistance whatsoever, and the Thralls are happily taking turns fucking ").append(c.himHer()).append(" in between efforts to fully break the other two Chosen as well.  ").append(c.HisHer()).append(" ").toString());
                     else
-                    if(trio.booleanValue())
+                    if(trio)
                     {
-                        if(high.dissociated.booleanValue() && low.dissociated.booleanValue())
+                        if(high.dissociated && low.dissociated)
                             append(t, (new StringBuilder(String.valueOf(c.mainName))).append(", too, isn't putting up any resistance whatsoever against the Thralls taking turns fucking ").append(c.himHer()).append(".  ").toString());
                         else
                             append(t, (new StringBuilder("With the other two Chosen still resisting, ")).append(c.mainName).append(" is the most popular target for the Thralls who just want an easy fuck.  ").toString());
                         append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" ").toString());
                     } else
-                    if(partner.dissociated.booleanValue())
+                    if(partner.dissociated)
                         append(t, (new StringBuilder("As some of the Thralls tire of enjoying ")).append(partner.mainName).append("'s nonresisting body, they join the group around ").append(c.mainName).append(", waiting their turn to fuck ").append(c.himHer()).append(" as well.  ").append(c.HisHer()).append(" ").toString());
                     else
-                    if(loved.booleanValue() || partner == lover)
+                    if(loved || partner == lover)
                     {
                         append(t, (new StringBuilder(String.valueOf(partner.mainName))).append(" fights harder than ever, desperately trying to distract the Thralls from taking advantage of ").append(partner.hisHer()).append(" comatose friend, even if it means they're fucking ").append(partner.himHer()).append(" instead.  But it's no use.  ").append(c.mainName).append("'s ").toString());
                     } else
@@ -17871,18 +17871,18 @@ public class WorldState
                     append(t, (new StringBuilder("broken state of mind is still relatively new, and the Thralls are enjoying the unprecedented opportunity to use ")).append(c.hisHer()).append(" body however they please.").toString());
                 } else
                 {
-                    if(solo.booleanValue())
+                    if(solo)
                         append(t, (new StringBuilder("In contrast to the suffering of the other Chosen, ")).append(c.mainName).append("'s comatose state makes ").append(c.himHer()).append(" seem positively serene.  ").append(c.HeShe()).append(" ").toString());
                     else
-                    if(trio.booleanValue())
+                    if(trio)
                     {
-                        if(high.dissociated.booleanValue() && mid.dissociated.booleanValue())
+                        if(high.dissociated && mid.dissociated)
                             append(t, (new StringBuilder(String.valueOf(c.mainName))).append(" is the member of the team who accepted ").append(c.hisHer()).append(" defeat most readily, and ").append(c.heShe()).append(" seems even more peaceful than the other two even as they're all abused together.  ").toString());
                         else
                             append(t, (new StringBuilder(String.valueOf(c.mainName))).append(" remains utterly peaceful and serene in ").append(c.hisHer()).append(" comatose state, even as resistance continues elsewhere in the crowd of Thralls.  ").toString());
                         append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" ").toString());
                     } else
-                    if(partner.dissociated.booleanValue())
+                    if(partner.dissociated)
                         append(t, (new StringBuilder(String.valueOf(c.mainName))).append("'s comatose state is less of a departure from ").append(c.hisHer()).append(" usual meek demeanor compared to ").append(c.hisHer()).append(" allies, and most (but not all) of the Thralls are more interested in taking the chance to fuck ").append(partner.mainName).append(".  ").append(c.mainName).append(" ").toString());
                     else
                     if(partner == lover)
@@ -17894,20 +17894,20 @@ public class WorldState
             } else
             if(c.confidence > 66)
             {
-                if(solo.booleanValue())
+                if(solo)
                     append(t, (new StringBuilder(String.valueOf(c.mainName))).append("'s regenerative powers were once among the strongest of all Chosen, fueled by ").append(c.hisHer()).append(" self-confidence.  But now that ").append(c.heShe()).append("'s been broken so thoroughly, they're beginning to fade.  ").append(c.HisHer()).append(" ").toString());
                 else
-                if(trio.booleanValue())
+                if(trio)
                 {
-                    if(mid.dissociated.booleanValue() && low.dissociated.booleanValue())
+                    if(mid.dissociated && low.dissociated)
                         append(t, (new StringBuilder("The regenerative powers of the Chosen are fueled by their self-confidence, and with the entire team so thoroughly broken, the effects are becoming clear, in ")).append(c.mainName).append(" most of all.  ").append(c.HisHer()).append(" ").toString());
                     else
                         append(t, (new StringBuilder(String.valueOf(c.mainName))).append(", whose self-confidence once made ").append(c.himHer()).append(" the most resilient of the Chosen, is now showing the signs of ").append(c.hisHer()).append(" continued rape even moreso than ").append(c.hisHer()).append(" partners.  ").append(c.HisHer()).append(" ").toString());
                 } else
-                if(partner.dissociated.booleanValue())
+                if(partner.dissociated)
                     append(t, (new StringBuilder("The Thralls are very rough with both ")).append(c.mainName).append("'s and ").append(partner.mainName).append("'s unresisting bodies as they fuck them, but perhaps due to ").append(c.hisHer()).append(" prior headstrong behavior, ").append(c.mainName).append(" gets the worst of the treatment.  ").append(c.HisHer()).append(" ").toString());
                 else
-                if(loved.booleanValue() || partner == lover)
+                if(loved || partner == lover)
                     append(t, (new StringBuilder("Even when the crowd of Thralls fucking them pushes the two of them together, ")).append(partner.mainName).append(" can't bear to look at what's become of the partner ").append(partner.heShe()).append(" admired so much.  ").append(c.mainName).append("'s ").toString());
                 else
                     append(t, (new StringBuilder("As the crowd of Thralls fucking them presses their bodies together, even ")).append(partner.mainName).append(" is horrified by what's become of ").append(c.mainName).append(".  ").append(c.HisHer()).append(" ").toString());
@@ -17919,45 +17919,45 @@ public class WorldState
             } else
             if(c.confidence > 33)
             {
-                if(solo.booleanValue())
+                if(solo)
                     append(t, (new StringBuilder("Meanwhile, now that the Thralls know that ")).append(c.mainName).append(" won't be resisting anymore, ").append(c.heShe()).append("'s become the most popular target for them to release their lust.  ").append(c.HisHer()).append(" ").toString());
                 else
-                if(trio.booleanValue())
+                if(trio)
                 {
-                    if(high.dissociated.booleanValue() && low.dissociated.booleanValue())
+                    if(high.dissociated && low.dissociated)
                         append(t, (new StringBuilder("With ")).append(c.hisHer()).append(" will broken, ").append(c.mainName).append("'s body has even less protection from the Thralls' depredations than that of ").append(high.mainName).append(".  ").toString());
                     else
                         append(t, (new StringBuilder(String.valueOf(high.mainName))).append(" and ").append(low.mainName).append(" are spared the worst of the gangbang, as most of the Thralls are focused on ").append(c.mainName).append("'s limp, unresisting form.  ").toString());
                     append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" ").toString());
                 } else
-                if(partner.dissociated.booleanValue())
+                if(partner.dissociated)
                     append(t, (new StringBuilder("The Thralls switch between fucking ")).append(c.mainName).append(" and ").append(partner.mainName).append(", comparing the qualities of their holes while the Chosen in question both continue to stare off into space with empty eyes.  ").append(c.mainName).append("'s ").toString());
                 else
-                if(loved.booleanValue() || partner == lover)
+                if(loved || partner == lover)
                     append(t, (new StringBuilder("Fucking the comatose ")).append(c.mainName).append(" has started to lose its novelty, and ").append(partner.mainName).append(" is actually able to entice some of them to use ").append(partner.himHer()).append(" instead.  However, the damage to ").append(c.mainName).append(" has already been done.  ").append(c.HisHer()).append(" ").toString());
                 else
                     append(t, (new StringBuilder("Even though both ")).append(c.mainName).append(" and ").append(partner.mainName).append(" are being fucked side-by-side by an endless train of Thralls, ").append(c.mainName).append("'s fading willpower is evident in how much worse ").append(c.hisHer()).append(" body is handling the treatment.  ").append(c.HisHer()).append(" ").toString());
                 append(t, "belly is swollen with cum, stretched to the point of bursting.  It will take hours to return to normal.");
             } else
             {
-                if(solo.booleanValue())
+                if(solo)
                     append(t, (new StringBuilder(String.valueOf(c.mainName))).append("'s lack of resistance when the Thralls abuse ").append(c.himHer()).append(" is starting to take its toll on ").append(c.hisHer()).append(" body.  ").toString());
                 else
-                if(trio.booleanValue())
+                if(trio)
                 {
-                    if(high.dissociated.booleanValue() && mid.dissociated.booleanValue())
+                    if(high.dissociated && mid.dissociated)
                         append(t, (new StringBuilder("Even more than ")).append(high.mainName).append(" and ").append(mid.mainName).append(", ").append(c.mainName).append("'s lack of resistance when the Thralls abuse ").append(c.himHer()).append(" is starting to take its toll on ").append(c.hisHer()).append(" body.  ").toString());
                     else
                         append(t, (new StringBuilder(String.valueOf(c.mainName))).append(" isn't visibly suffering as ").append(c.heShe()).append("'s raped, but ").append(c.hisHer()).append(" body is paying the price for ").append(c.hisHer()).append(" lack of resistance.  ").toString());
                 } else
-                if(partner.dissociated.booleanValue())
+                if(partner.dissociated)
                     append(t, (new StringBuilder("As the Thralls fuck ")).append(c.mainName).append(" and ").append(partner.mainName).append(" side-by-side, it's clear that ").append(partner.mainName).append("'s body isn't holding up well to the repeated abuse, and ").append(c.mainName).append("'s is even worse.  ").toString());
                 else
-                if(loved.booleanValue() || partner == lover)
+                if(loved || partner == lover)
                     append(t, (new StringBuilder("Deciding that raping ")).append(partner.himHer()).append(" isn't enough, the Thralls have taken to torturing ").append(partner.himHer()).append(" at the same time by making ").append(partner.himHer()).append(" watch them abuse ").append(c.mainName).append("'s comatose body, pushing it to its very limits.  ").toString());
                 else
                     append(t, (new StringBuilder("While ")).append(partner.mainName).append(" is still willful and resisting ").append(partner.hisHer()).append(" rape, ").append(c.mainName).append(" has completely given up, mind and body both failing under the repeated abuse.  ").toString());
-                if(w.tickleOn.booleanValue())
+                if(w.tickleOn)
                     append(t, (new StringBuilder("Despite being unconscious, ")).append(c.heShe()).append("'s still gasping with exertion, struggling to withstand the marathon orgies ").append(c.heShe()).append("'s forced to endure.").toString());
                 else
                     append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" skin was dark with lingering bruises even before the Thralls began today's session, and it only gets worse from there.").toString());
@@ -17968,24 +17968,24 @@ public class WorldState
             {
                 if(c.confidence > 66)
                 {
-                    if(solo.booleanValue())
+                    if(solo)
                         append(t, (new StringBuilder("Wanting revenge for ")).append(c.mainName).append("'s past actions, the Thralls ignore ").append(c.hisHer()).append(" allies for a moment and just try to make ").append(c.himHer()).append(" scream.  ").toString());
                     else
-                    if(trio.booleanValue())
+                    if(trio)
                     {
-                        if(mid.dissociated.booleanValue() && low.dissociated.booleanValue())
+                        if(mid.dissociated && low.dissociated)
                             append(t, (new StringBuilder("With all three Chosen comatose, the Thralls are free to focus on punishing the one who gave them the most trouble: ")).append(c.mainName).append(".  ").toString());
                         else
                             append(t, (new StringBuilder("Even though they could in principle safely ignore ")).append(c.mainName).append(", the Thralls are too intent on punishing ").append(c.himHer()).append(" for the trouble ").append(c.heShe()).append("'s given them in the past.  ").toString());
                     } else
-                    if(partner.dissociated.booleanValue())
+                    if(partner.dissociated)
                         append(t, (new StringBuilder("With ")).append(partner.mainName).append(" no longer resisting, more Thralls are able to join the effort to punish ").append(c.mainName).append(" for the trouble ").append(c.heShe()).append("'s given them in the past.  ").toString());
                     else
-                    if(loved.booleanValue() || partner == lover)
+                    if(loved || partner == lover)
                         append(t, (new StringBuilder(String.valueOf(partner.mainName))).append(" sighs with relief as the Thralls take a break from torturing ").append(partner.himHer()).append(", only to gasp with horror when ").append(partner.heShe()).append(" sees that they've shifted their focus to trying to wake ").append(c.mainName).append(" up so they can hurt ").append(c.himHer()).append(" more.  ").toString());
                     else
                         append(t, (new StringBuilder(String.valueOf(partner.mainName))).append(" sighs with relief as the Thralls take a break from torturing ").append(partner.himHer()).append(" in order to focus their efforts on waking ").append(c.mainName).append(" up so they can hurt ").append(c.himHer()).append(" more.  ").toString());
-                    if(w.tickleOn.booleanValue())
+                    if(w.tickleOn)
                         append(t, (new StringBuilder("They tickle ")).append(c.himHer()).append(" even more mercilessly than usual, digging their fingers deep enough that any normal human would be badly bruised, until they finally force a brief whimper of laughter out of ").append(c.himHer()).append(" ").toString());
                     else
                         append(t, (new StringBuilder("They shove progressively larger and larger objects up ")).append(c.hisHer()).append(" ass until finally a large rubber ball from a nearby sports shop draws a brief whimper out of ").append(c.himHer()).append(" ").toString());
@@ -17994,20 +17994,20 @@ public class WorldState
                 if(c.confidence > 33)
                 {
                     append(t, (new StringBuilder("The Thralls trick ")).append(c.mainName).append(" into returning to consciousness by ignoring ").append(c.himHer()).append(" for awhile").toString());
-                    if(solo.booleanValue())
+                    if(solo)
                         append(t, (new StringBuilder(", but as soon as the light returns to ")).append(c.hisHer()).append(" eyes, they resume ").append(c.hisHer()).append(" torture, and after a few brief screams of despair, ").append(c.heShe()).append("'s gone once again.").toString());
                     else
-                    if(trio.booleanValue())
+                    if(trio)
                     {
-                        if(high.dissociated.booleanValue() && low.dissociated.booleanValue())
+                        if(high.dissociated && low.dissociated)
                             append(t, (new StringBuilder(" in favor of playing with ")).append(c.hisHer()).append(" similarly comatose partners.  As soon as the light returns to ").append(c.hisHer()).append(" eyes, they resume ").append(c.hisHer()).append(" torture, and after a few brief screams of despair, ").append(c.heShe()).append("'s gone once again.").toString());
                         else
                             append(t, (new StringBuilder(" and focusing on subduing ")).append(c.hisHer()).append(" allies, but as soon as the light returns to ").append(c.hisHer()).append(" eyes, they return and resume ").append(c.hisHer()).append(" torture.  After a few brief screams of despair, ").append(c.heShe()).append("'s gone once again.").toString());
                     } else
-                    if(partner.dissociated.booleanValue())
+                    if(partner.dissociated)
                         append(t, (new StringBuilder(" in favor of playing with the similarly comatose ")).append(partner.mainName).append(".  As soon as the light returns t ").append(c.hisHer()).append(" eyes, they resume ").append(c.hisHer()).append(" torture, and after a few brief screams of despair, ").append(c.heShe()).append("'s gone once again.").toString());
                     else
-                    if(loved.booleanValue() || partner == lover)
+                    if(loved || partner == lover)
                         append(t, (new StringBuilder(", and ")).append(c.heShe()).append(" wakes to the sound of ").append(partner.mainName).append("'s screams.  A wave of despair washes over ").append(c.himHer()).append(", and ").append(c.hisHer()).append(" mind is already gone by the time the Thralls return their attentions to ").append(c.himHer()).append(".").toString());
                     else
                         append(t, (new StringBuilder(", and ")).append(c.heShe()).append(" wakes to the sound of ").append(partner.mainName).append(" screaming at ").append(c.himHer()).append(" to get up and help ").append(partner.himHer()).append(".  When the Thralls turn back toward ").append(c.mainName).append(", ").append(c.hisHer()).append(" eyes widen with fear, and then ").append(c.heShe()).append(" faints once again.").toString());
@@ -18018,20 +18018,20 @@ public class WorldState
                         append(t, "clit.  ");
                     else
                         append(t, "penis.  ");
-                    if(solo.booleanValue())
+                    if(solo)
                         append(t, (new StringBuilder("Much to their satisfaction, ")).append(c.hisHer()).append(" face still contorts and a single tear leaks down ").append(c.hisHer()).append(" cheek.").toString());
                     else
-                    if(trio.booleanValue())
+                    if(trio)
                     {
-                        if(mid.dissociated.booleanValue() && high.dissociated.booleanValue())
+                        if(mid.dissociated && high.dissociated)
                             append(t, (new StringBuilder(String.valueOf(high.mainName))).append(" and ").append(mid.mainName).append(" showed no reaction to similar treatment, but the Thralls are satisfied by the way that ").append(c.mainName).append(" still groans slightly, tears leaking from ").append(c.hisHer()).append(" eyes.").toString());
                         else
                             append(t, (new StringBuilder("Compared to the screams from elsewhere in the crowd, ")).append(c.hisHer()).append(" reaction is barely noticeable, but the Thralls are still satsified to see ").append(c.himHer()).append(" grimace, tears leaking down ").append(c.hisHer()).append(" cheeks.").toString());
                     } else
-                    if(partner.dissociated.booleanValue())
+                    if(partner.dissociated)
                         append(t, (new StringBuilder(String.valueOf(partner.mainName))).append(" showed no reaction to similar treatment, but the Thralls are satisfied by the way that ").append(c.mainName).append(" still groans slightly, tears leaking from ").append(c.hisHer()).append(" eyes.").toString());
                     else
-                    if(loved.booleanValue() || partner == lover)
+                    if(loved || partner == lover)
                         append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" groans, tears leaking down ").append(c.hisHer()).append(" cheeks as ").append(c.heShe()).append(" almost regains consciousness, and ").append(partner.mainName).append(" can only try to stifle ").append(partner.hisHer()).append(" own screams and hope that ").append(c.mainName).append(" returns to ").append(c.hisHer()).append(" blissfully comatose state soon.").toString());
                     else
                         append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" groans, tears leaking down ").append(c.hisHer()).append(" cheeks, and ").append(partner.mainName).append(" can't help but feel a bit satisfied that ").append(partner.hisHer()).append(" rival isn't able to completely escape the consequences of ").append(c.hisHer()).append(" weakness.").toString());
@@ -18039,24 +18039,24 @@ public class WorldState
             } else
             if(c.confidence > 66)
             {
-                if(w.tickleOn.booleanValue())
+                if(w.tickleOn)
                     append(t, (new StringBuilder("The Thralls do their best to mercilessly tickle ")).append(c.mainName).append(", jabbing their fingers into ").append(c.hisHer()).append(" armpits, sides, and every other sensitive spot, but ").toString());
                 else
                     append(t, (new StringBuilder("The Thralls torture ")).append(c.mainName).append(" inside and out, beating ").append(c.himHer()).append(" with blunt instruments and shoving others up ").append(c.hisHer()).append(" ass, but ").toString());
-                if(solo.booleanValue())
+                if(solo)
                     append(t, (new StringBuilder(String.valueOf(c.hisHer()))).append(" consciousness has been shattered so thoroughly that not even that much will wake ").append(c.himHer()).append(" anymore.").toString());
                 else
-                if(trio.booleanValue())
+                if(trio)
                 {
-                    if(mid.dissociated.booleanValue() && low.dissociated.booleanValue())
+                    if(mid.dissociated && low.dissociated)
                         append(t, (new StringBuilder(String.valueOf(c.heShe()))).append(" shows no more sign of waking up than ").append(c.hisHer()).append(" partners do.").toString());
                     else
                         append(t, "they only succeed in distracting themselves from the other Chosen's escape attempts.");
                 } else
-                if(partner.dissociated.booleanValue())
+                if(partner.dissociated)
                     append(t, (new StringBuilder(String.valueOf(c.heShe()))).append(" shows no more sign of waking up than ").append(partner.mainName).append(" does.").toString());
                 else
-                if(loved.booleanValue() || partner == lover)
+                if(loved || partner == lover)
                     append(t, (new StringBuilder(String.valueOf(partner.mainName))).append(" is the only one who reacts, sobbing and begging for them to stop.").toString());
                 else
                     append(t, (new StringBuilder(String.valueOf(c.heShe()))).append(" shows no sign of waking up, and they go back to torturing the much more repsonsive ").append(partner.mainName).append(".").toString());
@@ -18064,40 +18064,40 @@ public class WorldState
             if(c.confidence > 33)
             {
                 append(t, (new StringBuilder("The Thralls temporarily stop their torture of ")).append(c.mainName).append(", hoping that ").append(c.heShe()).append("'ll wake up and entertain them with ").append(c.hisHer()).append(" reactions.  ").toString());
-                if(solo.booleanValue())
+                if(solo)
                     append(t, (new StringBuilder("However, ")).append(c.hisHer()).append(" comatose state is too deep to be broken so easily.").toString());
                 else
-                if(trio.booleanValue())
+                if(trio)
                 {
-                    if(high.dissociated.booleanValue() && low.dissociated.booleanValue())
+                    if(high.dissociated && low.dissociated)
                         append(t, (new StringBuilder("However, like ")).append(high.mainName).append(" and ").append(low.mainName).append(", ").append(c.heShe()).append(" shows no signs of waking anytime soon.").toString());
                     else
                         append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" shows no signs of waking anytime soon, but that just makes it easier for the Thralls to focus on ").append(high.mainName).append(" and ").append(low.mainName).append(".").toString());
                 } else
-                if(partner.dissociated.booleanValue())
+                if(partner.dissociated)
                     append(t, (new StringBuilder("However, like ")).append(partner.mainName).append(", ").append(c.heShe()).append(" shows no signs of waking up anytime soon.").toString());
                 else
-                if(loved.booleanValue() || partner == lover)
+                if(loved || partner == lover)
                     append(t, (new StringBuilder("However, ")).append(c.hisHer()).append(" comatose state is so deep that even ").append(partner.mainName).append("'s screams and pleas for help can't reach ").append(c.himHer()).append(".").toString());
                 else
                     append(t, (new StringBuilder("However, ")).append(c.hisHer()).append(" comatose state is so deep that even ").append(partner.mainName).append("'s angry cries for help can't reach ").append(c.himHer()).append(".").toString());
             } else
             {
                 append(t, (new StringBuilder("The Thralls are growing bored with that way that ")).append(c.mainName).append(" has stopped showing any reaction, far from ").append(c.hisHer()).append(" usual whimpering self.  They escalate the torture further and further, but ").toString());
-                if(solo.booleanValue())
+                if(solo)
                     append(t, (new StringBuilder("by now ")).append(c.heShe()).append("'s reached a mental place where they can't touch ").append(c.himHer()).append(" anymore.").toString());
                 else
-                if(trio.booleanValue())
+                if(trio)
                 {
-                    if(mid.dissociated.booleanValue() && high.dissociated.booleanValue())
+                    if(mid.dissociated && high.dissociated)
                         append(t, (new StringBuilder("they're no more able to get a reaction out of ")).append(c.himHer()).append(" than they are out of the others.").toString());
                     else
                         append(t, "soon they give up and go back to torturing the others.");
                 } else
-                if(partner.dissociated.booleanValue())
+                if(partner.dissociated)
                     append(t, (new StringBuilder("they're no more able to get a reaction out of ")).append(c.himHer()).append(" than they are out of ").append(partner.mainName).append(".").toString());
                 else
-                if(loved.booleanValue() || partner == lover)
+                if(loved || partner == lover)
                     append(t, (new StringBuilder(String.valueOf(c.heShe()))).append(" shows no reaction, and ").append(partner.mainName).append(" is grateful that ").append(partner.hisHer()).append(" friend, at least, has escaped the Thralls in ").append(c.hisHer()).append(" own way.").toString());
                 else
                     append(t, (new StringBuilder("soon they give up and go back to torturing ")).append(partner.mainName).append(".").toString());
@@ -18113,7 +18113,7 @@ public class WorldState
         c.nextAttack[2] = thisAttack;
         append(t, (new StringBuilder("\n\n")).append(getSeparator()).append("\n\n").toString());
         underlineAppend(t, (new StringBuilder(String.valueOf(c.mainName))).append("'s Action: ").toString());
-        if(getCast()[0].dissociated.booleanValue() && getCast()[1].dissociated.booleanValue() && getCast()[2].dissociated.booleanValue())
+        if(getCast()[0].dissociated && getCast()[1].dissociated && getCast()[2].dissociated)
         {
             underlineAppend(t, "Catatonic");
             append(t, "\n\n");
@@ -18294,13 +18294,13 @@ public class WorldState
             w.cycleOrgyStage();
             variant = w.getOrgyStage();
         }
-        for(Boolean variantFound = Boolean.valueOf(false); !variantFound.booleanValue();)
-            if((c.vVirg.booleanValue() || c.getHATELevel() < 3) && (c.cVirg.booleanValue() || c.getPLEALevel() < 3) && (c.aVirg.booleanValue() || c.getINJULevel() < 3) && (c.modest.booleanValue() || c.getEXPOLevel() < 3))
+        for(Boolean variantFound = Boolean.valueOf(false); !variantFound;)
+            if((c.vVirg || c.getHATELevel() < 3) && (c.cVirg || c.getPLEALevel() < 3) && (c.aVirg || c.getINJULevel() < 3) && (c.modest || c.getEXPOLevel() < 3))
             {
                 variant = 4;
                 variantFound = Boolean.valueOf(true);
             } else
-            if(variant == 0 && !c.vVirg.booleanValue() && c.getHATELevel() >= 3 || variant == 1 && !c.cVirg.booleanValue() && c.getPLEALevel() >= 3 || variant == 2 && !c.aVirg.booleanValue() && c.getINJULevel() >= 3 || variant == 3 && !c.modest.booleanValue() && c.getEXPOLevel() >= 3)
+            if(variant == 0 && !c.vVirg && c.getHATELevel() >= 3 || variant == 1 && !c.cVirg && c.getPLEALevel() >= 3 || variant == 2 && !c.aVirg && c.getINJULevel() >= 3 || variant == 3 && !c.modest && c.getEXPOLevel() >= 3)
             {
                 variantFound = Boolean.valueOf(true);
             } else
@@ -18348,14 +18348,14 @@ public class WorldState
             if(w.getCast()[i].confidence < c.confidence && seenDuration > w.getCast()[i].surroundDuration)
                 seenDuration = w.getCast()[i].surroundDuration;
 
-        if((seenDuration >= c.dissociationReq || c.dissociated.booleanValue()) && !c.lustful && c.cVirg.booleanValue() && c.modest.booleanValue() && c.timesFantasized() == 0 && c.timesStripped() == 0 && (c.dissociationReq < 10 || !finalBattle.booleanValue()))
+        if((seenDuration >= c.dissociationReq || c.dissociated) && !c.lustful && c.cVirg && c.modest && c.timesFantasized() == 0 && c.timesStripped() == 0 && (c.dissociationReq < 10 || !finalBattle))
             Dissociate(t, p, f, c, variant, solo, trio, loved, partner, lover);
         else
         if(c.confidence > 66)
         {
             if(variant == 0)
             {
-                if(c.getEXPOLevel() < 3 || c.modest.booleanValue())
+                if(c.getEXPOLevel() < 3 || c.modest)
                 {
                     if(dignity > 66)
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" glares indignantly at the Thralls pulling aside ").append(c.hisHer()).append(" ").append(bottomDesc).toString());
@@ -18373,7 +18373,7 @@ public class WorldState
                 else
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" kicks and screams at the Thralls bringing their cameras close to ").append(c.hisHer()).append(" crotch").toString());
                 String another = "one of the Thralls ";
-                if(c.getINJULevel() < 3 || aVirg.booleanValue())
+                if(c.getINJULevel() < 3 || aVirg)
                 {
                     if(morality > 66)
                         w.append(t, (new StringBuilder(", eyes focused and determined.  However, ")).append(c.heShe()).append(" ").toString());
@@ -18383,7 +18383,7 @@ public class WorldState
                     else
                         w.append(t, (new StringBuilder(", eyes full of rage and hatred.  However, ")).append(c.heShe()).append(" ").toString());
                 } else
-                if(w.tickle().booleanValue())
+                if(w.tickle())
                 {
                     if(morality > 66)
                         w.append(t, (new StringBuilder(", but ")).append(c.hisHer()).append(" heroic demeanor is shattered when the Thralls start tickling ").append(c.himHer()).append(", drawing out shrieks of laughter.  ").toString());
@@ -18416,7 +18416,7 @@ public class WorldState
                     w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" ").toString());
                     another = "another Thrall ";
                 }
-                if(c.getPLEALevel() < 3 || cVirg.booleanValue())
+                if(c.getPLEALevel() < 3 || cVirg)
                 {
                     if(innocence > 66)
                         w.append(t, (new StringBuilder("screams as ")).append(another).append("penetrates ").append(c.hisHer()).append(" ").append(hole).append(", vainly calling him names and trying to push him away.  ").toString());
@@ -18433,10 +18433,10 @@ public class WorldState
                     w.append(t, (new StringBuilder("can only grit ")).append(c.hisHer()).append(" teeth against the pleasure when ").append(another).append("starts fucking ").append(c.hisHer()).append(" ").append(hole).append(", and it's not long before ").append(c.heShe()).append("'s moaning in an unwilling climax.  ").toString());
                 else
                     w.append(t, (new StringBuilder("stifles a desperate moan when ")).append(another).append("penetrates ").append(c.hisHer()).append(" ").append(hole).append(", clinging to ").append(c.hisHer()).append(" sanity for only a few moments before the overwhelming pleasure forces ").append(c.himHer()).append(" to cum.  ").toString());
-                if(mid.dissociated.booleanValue() || low.dissociated.booleanValue())
+                if(mid.dissociated || low.dissociated)
                     w.append(t, (new StringBuilder("The Thralls eagerly gather around to put ")).append(c.mainName).append(" in ").append(c.hisHer()).append(" place.").toString());
                 else
-                if(solo.booleanValue())
+                if(solo)
                 {
                     if(mid.getHATELevel() < 3)
                     {
@@ -18450,24 +18450,24 @@ public class WorldState
                     else
                         w.append(t, (new StringBuilder("With ")).append(mid.getMainName()).append(" still managing to fend off ").append(mid.hisHer()).append(" attackers and ").append(low.getMainName()).append(" occupied by other tortures, the Thralls eagerly gather around to put ").append(mainName).append(" in ").append(c.hisHer()).append(" place.").toString());
                 } else
-                if(trio.booleanValue())
+                if(trio)
                 {
-                    if(hated.booleanValue())
+                    if(hated)
                         w.append(t, (new StringBuilder(String.valueOf(mid.getMainName()))).append(" and ").append(low.getMainName()).append(", who are also being raped by the Thralls, glare angrily at ").append(mainName).append(" - silently blaming ").append(c.himHer()).append(" for not using ").append(c.hisHer()).append(" greater strength to stop this.").toString());
                     else
-                    if(loved.booleanValue())
+                    if(loved)
                         w.append(t, (new StringBuilder("The Thralls raping ")).append(mid.getMainName()).append(" and ").append(low.getMainName()).append(" threaten to hurt them worse unless ").append(mainName).append(" moves ").append(c.hisHer()).append(" hips on ").append(c.hisHer()).append(" own, and ").append(c.heShe()).append(" tries to focus and go along with it.").toString());
                     else
                         w.append(t, (new StringBuilder("The Thralls raping ")).append(mid.getMainName()).append(" and ").append(low.getMainName()).append(" threaten to hurt them worse unless ").append(mainName).append(" moves ").append(c.hisHer()).append(" hips on ").append(c.hisHer()).append(" own, and ").append(c.heShe()).append(" complies - mostly for ").append(lover.getMainName()).append("'s sake.").toString());
                 } else
-                if(loved.booleanValue() || partner == lover)
+                if(loved || partner == lover)
                     w.append(t, (new StringBuilder("At the sight of ")).append(partner.getMainName()).append(" breaking under ").append(partner.hisHer()).append(" own rape, ").append(mainName).append(" challenges the Thralls to come after ").append(c.himHer()).append(", taking some of the pressure off ").append(c.hisHer()).append(" friend.").toString());
                 else
                     w.append(t, (new StringBuilder("The Thrall raping ")).append(partner.getMainName()).append(" pushes ").append(partner.hisHer()).append(" crotch against ").append(mainName).append("'s, forcing ").append(partner.getMainName()).append(" to grind against ").append(c.himHer()).append(".  The other Thralls laugh at the anger that's obvious on their faces.").toString());
             } else
             if(variant == 1)
             {
-                if(c.getEXPOLevel() < 3 || modest.booleanValue())
+                if(c.getEXPOLevel() < 3 || modest)
                 {
                     if(dignity > 66)
                         w.append(t, (new StringBuilder("Full of indignant fury, ")).append(mainName).append(" tries to fend off the Thralls in the process of stripping ").append(c.himHer()).append(", but ").toString());
@@ -18488,7 +18488,7 @@ public class WorldState
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s bare legs kick wildly as ").append(c.heShe()).append(" tries to escape, flashing the Thralls and their cameras, but ").toString());
                     w.append(t, (new StringBuilder(String.valueOf(c.heShe()))).append(" has no protection whatsoever from the Thrall ").toString());
                 }
-                if(c.getINJULevel() < 3 || aVirg.booleanValue())
+                if(c.getINJULevel() < 3 || aVirg)
                 {
                     if(innocence > 66)
                         w.append(t, (new StringBuilder("fondling ")).append(c.hisHer()).append(" ").append(organ).append(" until the pleasure makes it hard for ").append(c.himHer()).append(" to remember that ").append(c.heShe()).append("'s supposed to resist.  ").toString());
@@ -18498,7 +18498,7 @@ public class WorldState
                     else
                         w.append(t, (new StringBuilder("fondling ")).append(c.hisHer()).append(" ").append(organ).append(" until it becomes difficult for ").append(c.himHer()).append(" to maintain ").append(c.hisHer()).append(" rationality.  ").toString());
                 } else
-                if(w.tickle().booleanValue())
+                if(w.tickle())
                 {
                     if(innocence > 66)
                         w.append(t, (new StringBuilder("tickling ")).append(c.himHer()).append(" until ").append(c.hisHer()).append(" squirming laughter leaves ").append(c.hisHer()).append(" ").append(organ).append(" wide open to the others' fondling.  ").toString());
@@ -18525,7 +18525,7 @@ public class WorldState
                     w.append(t, (new StringBuilder("ramming up ")).append(c.hisHer()).append(" ass, breaking ").append(c.hisHer()).append(" will to fight with the combination of pain and pleasure deep inside.  ").toString());
                 else
                     w.append(t, (new StringBuilder("repeatedly sliding his cock in and out of ")).append(c.hisHer()).append(" asshole until ").append(c.hisHer()).append(" willpower finally breaks and ").append(c.heShe()).append(" starts groaning at the intense stimulation.  ").toString());
-                if(c.getHATELevel() < 3 || vVirg.booleanValue())
+                if(c.getHATELevel() < 3 || vVirg)
                 {
                     if(morality > 66)
                         w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" heroic effort to hold back only delays the inevitable for a few moments before ").append(c.heShe()).append(" cums, ").toString());
@@ -18542,37 +18542,37 @@ public class WorldState
                     w.append(t, (new StringBuilder("When another Thrall's cock pushes into ")).append(c.hisHer()).append(" ").append(hole).append(", ").append(c.heShe()).append(" cums hard, ").toString());
                 else
                     w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" bloodthirsty rage has left ").append(c.hisHer()).append(" Sexual Barrier completely broken, allowing another Thrall's cock to plunge into ").append(c.hisHer()).append(" ").append(hole).append(".  The penetration makes ").append(c.himHer()).append(" cum instantly, ").toString());
-                if(solo.booleanValue() || mid.dissociated.booleanValue() || low.dissociated.booleanValue())
+                if(solo || mid.dissociated || low.dissociated)
                 {
-                    if(mid.dissociated.booleanValue() || low.dissociated.booleanValue())
+                    if(mid.dissociated || low.dissociated)
                         w.append(t, "moaning out loud.");
                     else
-                    if(hated.booleanValue())
+                    if(hated)
                         w.append(t, (new StringBuilder("moaning out loud while ")).append(mid.getMainName()).append(" and ").append(low.getMainName()).append(" look on in disappointment.").toString());
                     else
-                    if(loved.booleanValue())
+                    if(loved)
                         w.append(t, (new StringBuilder("moaning out loud while ")).append(mid.getMainName()).append(" and ").append(low.getMainName()).append(" blush and look away.").toString());
                     else
                         w.append(t, (new StringBuilder("moaning ")).append(lover.getMainName()).append("'s name.").toString());
                 } else
-                if(trio.booleanValue())
+                if(trio)
                 {
-                    if(loved.booleanValue())
+                    if(loved)
                         w.append(t, (new StringBuilder("turned on even more by ")).append(mid.getMainName()).append("'s and ").append(low.getMainName()).append("'s own orgasmic moans.").toString());
                     else
-                    if(hated.booleanValue())
+                    if(hated)
                         w.append(t, (new StringBuilder("and while ")).append(c.heShe()).append(" hates to admit it to ").append(c.himHer()).append("self, the sound of ").append(mid.getMainName()).append("'s and ").append(low.getMainName()).append("'s own moans of orgasm are turning ").append(c.himHer()).append(" on even more.").toString());
                     else
                         w.append(t, (new StringBuilder(String.valueOf(c.hisHer()))).append(" orgasmic moans joining those of ").append(mid.getMainName()).append(" and ").append(low.getMainName()).append(".").toString());
                 } else
-                if(loved.booleanValue() || lover == partner)
+                if(loved || lover == partner)
                     w.append(t, (new StringBuilder("the sound of ")).append(c.hisHer()).append(" moans pushing ").append(partner.getMainName()).append(" over the edge into ").append(partner.hisHer()).append(" own orgasm as well.").toString());
                 else
                     w.append(t, (new StringBuilder("moaning out loud until the Thralls force ")).append(c.hisHer()).append(" mouth against ").append(partner.getMainName()).append("'s.  The two Chosen find themselves muffling each other's orgasmic cries with an unwilling kiss.").toString());
             } else
             if(variant == 2)
             {
-                if(c.getEXPOLevel() < 3 || modest.booleanValue())
+                if(c.getEXPOLevel() < 3 || modest)
                 {
                     if(dignity > 66)
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s expression of cold rage breaks with a ").toString());
@@ -18589,14 +18589,14 @@ public class WorldState
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" tries to ignore the cameras filming ").append(c.himHer()).append(" in ").append(c.hisHer()).append(" near-nude state, but the distraction weakens ").append(c.hisHer()).append(" usual strong will, and ").append(c.heShe()).append(" finds ").append(c.himHer()).append("self unable to keep in ").append(c.hisHer()).append(" ").toString());
                 else
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" struggles without regard for how ").append(c.hisHer()).append(" near-nudity is resulting in an erotic show for the cameras, letting out a ").toString());
-                if(w.tickle().booleanValue())
+                if(w.tickle())
                     w.append(t, (new StringBuilder("cry of high-pitched laughter as the Thralls tickle ")).append(c.himHer()).append(".  ").toString());
                 else
                 if(c.getGender().equals("male"))
                     w.append(t, (new StringBuilder("cry of pain as a Thrall's boot crushes ")).append(c.hisHer()).append(" testicles.  ").toString());
                 else
                     w.append(t, (new StringBuilder("breathless groan as the Thrall behind ")).append(c.himHer()).append(" thrusts in and out of ").append(c.hisHer()).append(" ass.  ").toString());
-                if(c.getPLEALevel() < 3 || cVirg.booleanValue())
+                if(c.getPLEALevel() < 3 || cVirg)
                 {
                     if(innocence > 66)
                         w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s confused about how ").append(c.heShe()).append(" can be so weak to something so simple, ").toString());
@@ -18613,7 +18613,7 @@ public class WorldState
                     w.append(t, (new StringBuilder("Confused by the overwhelming sensations, ")).append(c.hisHer()).append(" body orgasms against ").append(c.hisHer()).append(" will, ").toString());
                 else
                     w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" has been trying to mentally train ").append(c.himHer()).append("self to endure this sort of thing, but ").append(c.heShe()).append(" still reaches climax as quickly as ever, ").toString());
-                if(c.getHATELevel() < 3 || vVirg.booleanValue())
+                if(c.getHATELevel() < 3 || vVirg)
                 {
                     if(morality > 66)
                         w.append(t, (new StringBuilder("and ")).append(c.heShe()).append(" can't help but wonder whether ").append(c.heShe()).append(" was ever truly strong at all.  ").toString());
@@ -18630,38 +18630,38 @@ public class WorldState
                     w.append(t, (new StringBuilder("leaving ")).append(c.himHer()).append(" completely helpless as the other Thralls take turns fucking ").append(c.hisHer()).append(" ").append(hole).append(".  ").toString());
                 else
                     w.append(t, (new StringBuilder("leaving ")).append(c.himHer()).append(" helpless to do anything but scream in rage as another Thrall penetrates ").append(c.hisHer()).append(" ").append(hole).append(".  ").toString());
-                if(mid.dissociated.booleanValue() || low.dissociated.booleanValue())
+                if(mid.dissociated || low.dissociated)
                     w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" voice rises above the chatter and cruel laughter of the crowd.").toString());
                 else
-                if(solo.booleanValue())
+                if(solo)
                 {
-                    if(loved.booleanValue())
+                    if(loved)
                         w.append(t, (new StringBuilder(String.valueOf(mid.getMainName()))).append(" and ").append(low.getMainName()).append(" are horrified and heartbroken at seeing their stronger friend abused so savagely.").toString());
                     else
-                    if(hated.booleanValue())
+                    if(hated)
                         w.append(t, (new StringBuilder("Despite their rivalry, ")).append(mid.getMainName()).append(" and ").append(low.getMainName()).append(" are both horrified at the sight of their stronger teammate being so savagely abused.").toString());
                     else
                         w.append(t, (new StringBuilder("Despite their very different opinions of ")).append(c.himHer()).append(", ").append(mid.getMainName()).append(" and ").append(low.getMainName()).append(" are both horrified by the display.").toString());
                 } else
-                if(trio.booleanValue())
+                if(trio)
                 {
                     w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" louder voice rises above ").append(mid.getMainName()).append("'s and ").append(low.getMainName()).append("'s own ").toString());
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                         w.append(t, "unwilling laughter.");
                     else
                         w.append(t, "moans of pain.");
                 } else
-                if(loved.booleanValue() || lover == partner)
+                if(loved || lover == partner)
                 {
                     w.append(t, (new StringBuilder("For ")).append(partner.getMainName()).append(", who had been relying on ").append(mainName).append("'s strength, the sight saps ").append(c.hisHer()).append(" drive to resist").toString());
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                         w.append(t, (new StringBuilder(", causing ")).append(c.himHer()).append(" to let out ").append(c.hisHer()).append(" own unwilling laughter out as well.").toString());
                     else
                         w.append(t, (new StringBuilder(", causing ")).append(c.himHer()).append(" to sob softly in despair.").toString());
                 } else
                 {
                     w.append(t, (new StringBuilder("The Thralls taunt ")).append(mainName).append(" with the fact that ").append(c.heShe()).append("'s faring no better than ").append(partner.getMainName()).append(", who's ").toString());
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                         w.append(t, "also caught up in unwilling laughter.");
                     else
                         w.append(t, "squirming uselessly and moaning in pain as well.");
@@ -18669,7 +18669,7 @@ public class WorldState
             } else
             if(variant == 3)
             {
-                if(c.getINJULevel() < 3 || aVirg.booleanValue())
+                if(c.getINJULevel() < 3 || aVirg)
                 {
                     if(dignity > 66)
                         w.append(t, (new StringBuilder("Bringing their cameras close, the Thralls demand that ")).append(mainName).append(" apologize for being such a bitch").toString());
@@ -18679,7 +18679,7 @@ public class WorldState
                     else
                         w.append(t, (new StringBuilder("The Thralls demand that ")).append(mainName).append(" suck their cocks in order to provide a sexy show for the cameras").toString());
                 } else
-                if(w.tickle().booleanValue())
+                if(w.tickle())
                 {
                     if(dignity > 66)
                         w.append(t, (new StringBuilder("The filming Thralls capture a close-up of ")).append(mainName).append("'s laughing, tear-streaked face.  They tell ").append(c.himHer()).append(" that they won't let up on the tickling unless ").append(c.heShe()).append(" apologizes for being such a bitch").toString());
@@ -18706,7 +18706,7 @@ public class WorldState
                     w.append(t, (new StringBuilder("The Thralls demand that ")).append(mainName).append(" acknowledge in front of the cameras that ").append(c.heShe()).append("'s a pervert who's enjoying being fucked up the ass").toString());
                 else
                     w.append(t, (new StringBuilder("Bringing their cameras close, the Thralls try to get ")).append(mainName).append(" to suck their cocks while ").append(c.heShe()).append("'s distracted by the cock up ").append(c.hisHer()).append(" ass").toString());
-                if(c.getPLEALevel() < 3 || cVirg.booleanValue())
+                if(c.getPLEALevel() < 3 || cVirg)
                 {
                     if(innocence > 66)
                         w.append(t, (new StringBuilder(", but when ")).append(c.heShe()).append(" doesn't stop ").append(c.hisHer()).append(" wild attempts to punch and bite them, they ").toString());
@@ -18726,7 +18726,7 @@ public class WorldState
                         w.append(t, (new StringBuilder(", but even though ")).append(c.heShe()).append("'s constantly cumming from their fingers on ").append(c.hisHer()).append(" ").append(organ).append(", ").append(c.heShe()).append(" still manages to stammer out a flat refusal.  ").toString());
                     w.append(t, "They ");
                 }
-                if(c.getHATELevel() < 3 || vVirg.booleanValue())
+                if(c.getHATELevel() < 3 || vVirg)
                 {
                     if(morality > 66)
                         w.append(t, (new StringBuilder("force ")).append(c.himHer()).append(" to comply by threatening the others.  ").toString());
@@ -18743,16 +18743,16 @@ public class WorldState
                     w.append(t, (new StringBuilder("punish ")).append(c.himHer()).append(" by fucking ").append(c.hisHer()).append(" ").append(hole).append(" at the same time.  ").toString());
                 else
                     w.append(t, (new StringBuilder("punish ")).append(c.himHer()).append(" by violating ").append(c.hisHer()).append(" ").append(hole).append(" at the same time, pinning ").append(c.himHer()).append(" down so ").append(c.heShe()).append(" can't fight back.  ").toString());
-                if(mid.dissociated.booleanValue() || low.dissociated.booleanValue())
+                if(mid.dissociated || low.dissociated)
                     w.append(t, (new StringBuilder("The broadcasted display of weakness is a shock to ")).append(c.hisHer()).append(" fans.").toString());
                 else
-                if(solo.booleanValue())
+                if(solo)
                 {
                     w.append(t, (new StringBuilder("The broadcasted display of weakness is not only a shock to ")).append(c.hisHer()).append(" fans, ").toString());
-                    if(loved.booleanValue())
+                    if(loved)
                         w.append(t, (new StringBuilder("but a despair-inducing sight for ")).append(mid.getMainName()).append(" and ").append(low.getMainName()).append(" as well.").toString());
                     else
-                    if(hated.booleanValue())
+                    if(hated)
                     {
                         w.append(t, (new StringBuilder("but to ")).append(c.hisHer()).append(" watching rivals as well.").toString());
                     } else
@@ -18764,17 +18764,17 @@ public class WorldState
                             w.append(t, (new StringBuilder(String.valueOf(low.getMainName()))).append(" and even ").append(mid.getMainName()).append(" as well.").toString());
                     }
                 } else
-                if(trio.booleanValue())
+                if(trio)
                 {
-                    if(loved.booleanValue())
+                    if(loved)
                         w.append(t, (new StringBuilder("Even though it means the Thralls aren't paying so much attention to ")).append(mid.getMainName()).append(" and ").append(low.getMainName()).append(", they both find it somehow even worse to watch ").append(mainName).append(" suffer.").toString());
                     else
-                    if(hated.booleanValue())
+                    if(hated)
                         w.append(t, (new StringBuilder(String.valueOf(mid.getMainName()))).append(" and ").append(low.getMainName()).append(" can't help but feel relieved on some level that ").append(mainName).append(" is bearing the brunt of the Thralls' attention for the moment.").toString());
                     else
                         w.append(t, (new StringBuilder("While it means that the Thralls aren't paying so much attention to the other Chosen, ")).append(lover.getMainName()).append(" still finds this painful to watch.").toString());
                 } else
-                if(loved.booleanValue() || lover == partner)
+                if(loved || lover == partner)
                     w.append(t, (new StringBuilder("While it means that the Thralls aren't paying so much attention to ")).append(partner.getMainName()).append(", ").append(partner.heShe()).append(" still finds it painful to watch.").toString());
                 else
                     w.append(t, (new StringBuilder(String.valueOf(partner.getMainName()))).append(" can't help but be relieved that the Thralls are distracted from torturing ").append(partner.himHer()).append(".").toString());
@@ -18784,7 +18784,7 @@ public class WorldState
         {
             if(variant == 0)
             {
-                if(c.getINJULevel() < 3 || aVirg.booleanValue())
+                if(c.getINJULevel() < 3 || aVirg)
                 {
                     if(morality > 66)
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" closes ").append(c.hisHer()).append(" eyes and tries to focus as the Thralls ").toString());
@@ -18794,7 +18794,7 @@ public class WorldState
                     else
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" glares and desperately clenches ").append(c.hisHer()).append(" teeth as the Thralls ").toString());
                 } else
-                if(w.tickle().booleanValue())
+                if(w.tickle())
                 {
                     if(morality > 66)
                         w.append(t, (new StringBuilder("Despite ")).append(c.hisHer()).append(" heroic effort, ").append(mainName).append(" still ends up laughing helplessly as the Thralls tickle ").append(c.himHer()).append(" and ").toString());
@@ -18821,7 +18821,7 @@ public class WorldState
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is unable to contain ").append(c.hisHer()).append(" cries of pain as one of the Thralls thrusts into ").append(c.hisHer()).append(" ass.  The others ").toString());
                 else
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s attempt to intimidate the Thralls falls apart with a pathetic cry as one of them thrusts into ").append(c.hisHer()).append(" ass.  The others ").toString());
-                if(c.getEXPOLevel() < 3 || modest.booleanValue())
+                if(c.getEXPOLevel() < 3 || modest)
                 {
                     if(dignity > 66)
                         w.append(t, (new StringBuilder("start trying to strip ")).append(c.himHer()).append(", ignoring ").append(c.hisHer()).append(" indignant protests.  ").toString());
@@ -18838,13 +18838,13 @@ public class WorldState
                     w.append(t, (new StringBuilder("force ")).append(c.hisHer()).append(" bare legs apart and bring their cameras in close.  ").toString());
                 else
                     w.append(t, (new StringBuilder("grab ")).append(c.hisHer()).append(" kicking ankles and pull them apart in order to more easily film ").append(c.himHer()).append(" down there.  ").toString());
-                if(solo.booleanValue() || high.dissociated.booleanValue() || low.dissociated.booleanValue())
+                if(solo || high.dissociated || low.dissociated)
                     w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s so distracted that ").append(c.heShe()).append(" can't even defend ").append(c.himHer()).append("self when one of ").append(c.hisHer()).append(" attackers mounts ").append(c.himHer()).append(" and thrusts into ").append(c.hisHer()).append(" ").append(hole).append(".  Being taken right in front of ").append(high.getMainName()).append(" and ").append(low.getMainName()).append(", ").toString());
                 else
-                if(trio.booleanValue())
+                if(trio)
                 {
                     w.append(t, "The three Chosen are all laid on their backs and fucked side-by-side.  ");
-                    if(loved.booleanValue())
+                    if(loved)
                     {
                         w.append(t, (new StringBuilder(String.valueOf(high.getMainName()))).append(" grasps one of ").append(mid.getMainName()).append("'s hands and ").append(low.getMainName()).append(" takes the other as they endure their punishment together.  Grip tightening with every thrust against ").append(c.hisHer()).append(" ").toString());
                         if(c.getGender().equals("male"))
@@ -18852,7 +18852,7 @@ public class WorldState
                         else
                             w.append(t, "cervix, ");
                     } else
-                    if(hated.booleanValue())
+                    if(hated)
                         w.append(t, (new StringBuilder("Staring straight ahead and refusing to meet ")).append(high.getMainName()).append("'s and ").append(low.getMainName()).append("'s eyes, ").toString());
                     else
                     if(lover == high)
@@ -18867,7 +18867,7 @@ public class WorldState
                     else
                         w.append(t, (new StringBuilder("Trying in vain to keep ")).append(partner.getMainName()).append("'s body from rubbing against ").append(c.himHer()).append(", ").toString());
                 }
-                if(c.getPLEALevel() < 3 || cVirg.booleanValue())
+                if(c.getPLEALevel() < 3 || cVirg)
                 {
                     if(innocence > 66)
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" squeals in mingled disgust and arousal as ").append(c.heShe()).append(" feels the Thrall cum inside.").toString());
@@ -18893,7 +18893,7 @@ public class WorldState
             } else
             if(variant == 1)
             {
-                if(c.getINJULevel() < 3 || aVirg.booleanValue())
+                if(c.getINJULevel() < 3 || aVirg)
                 {
                     if(innocence > 66)
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is dazed and confused by the pleasure inflicted by the Thralls stroking ").append(c.hisHer()).append(" ").append(organ).toString());
@@ -18903,7 +18903,7 @@ public class WorldState
                     else
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" tries to focus, but the pleasure of the Thralls stroking ").append(c.hisHer()).append(" ").append(organ).append(" is too strong").toString());
                 } else
-                if(w.tickle().booleanValue())
+                if(w.tickle())
                 {
                     if(innocence > 66)
                         w.append(t, (new StringBuilder("The combination of the Thralls tickling ")).append(c.himHer()).append(" and stroking ").append(c.hisHer()).append(" ").append(organ).append(" has left ").append(mainName).append(" barely aware of ").append(c.hisHer()).append(" surroundings").toString());
@@ -18930,7 +18930,7 @@ public class WorldState
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is unable to resist the Thrall's cock thrusting up ").append(c.hisHer()).append(" ass as the others stroke ").append(c.hisHer()).append(" ").append(organ).toString());
                 else
                     w.append(t, (new StringBuilder("The repeated thrusting of the Thrall's cock up ")).append(c.hisHer()).append(" ass has left ").append(mainName).append(" lightheaded and unable to focus, vulnerable to the hands stroking ").append(c.hisHer()).append(" ").append(organ).toString());
-                if(c.getEXPOLevel() > 3 || modest.booleanValue())
+                if(c.getEXPOLevel() > 3 || modest)
                 {
                     if(dignity > 66)
                         w.append(t, (new StringBuilder(", but ")).append(c.heShe()).append(" still reflexively tries to pull ").append(c.hisHer()).append(" ").append(bottomDesc).append(" back into place in order to hide ").append(c.hisHer()).append(" ").toString());
@@ -18951,18 +18951,18 @@ public class WorldState
                     w.append(t, "dripping wet slit.  ");
                 else
                     w.append(t, "pre-cum dripping out the tip.  ");
-                if(high.dissociated.booleanValue() || low.dissociated.booleanValue())
+                if(high.dissociated || low.dissociated)
                     append(t, "More Thralls step forward to ");
                 else
-                if(solo.booleanValue())
+                if(solo)
                     w.append(t, (new StringBuilder(String.valueOf(high.getMainName()))).append(" and ").append(low.getMainName()).append(" both find it increasingly hard not to get turned on as they watch more Thralls step forward to ").toString());
                 else
-                if(trio.booleanValue())
+                if(trio)
                 {
-                    if(loved.booleanValue())
+                    if(loved)
                         w.append(t, (new StringBuilder("Using ")).append(high.getMainName()).append("'s and ").append(low.getMainName()).append("'s feelings against them, ").toString());
                     else
-                    if(hated.booleanValue())
+                    if(hated)
                         w.append(t, (new StringBuilder("Savoring how much ")).append(high.getMainName()).append(" and ").append(low.getMainName()).append(" hate this, ").toString());
                     else
                     if(lover == high)
@@ -18983,17 +18983,17 @@ public class WorldState
                 if(partner.getGender().equals("female"))
                 {
                     w.append(t, (new StringBuilder("The Thralls force ")).append(mainName).append(" and ").append(partner.getMainName()).append(" to grind their bodies together until they're both close to climax again, ").toString());
-                    if(loved.booleanValue() || lover == partner)
+                    if(loved || lover == partner)
                         w.append(t, "using their mutual affection to make it more difficult for them to resist");
                     else
                         w.append(t, "enjoying how much they obviously hate it");
                     w.append(t, ", then the Thralls themselves join in and ");
                 } else
-                if(loved.booleanValue() || lover == partner)
+                if(loved || lover == partner)
                     w.append(t, (new StringBuilder("Forcing ")).append(partner.getMainName()).append(" to join the abuse of ").append(partner.hisHer()).append(" friend, the Thralls ").toString());
                 else
                     w.append(t, (new StringBuilder("The Thralls force ")).append(partner.getMainName()).append(" to participate in the punishment, and together they start to ").toString());
-                if(c.getHATELevel() < 3 || vVirg.booleanValue())
+                if(c.getHATELevel() < 3 || vVirg)
                 {
                     w.append(t, (new StringBuilder("push their cocks into ")).append(mainName).append("'s mouth, ").append(c.hisHer()).append(" lips stretching to accommodate two at once.  ").toString());
                     if(morality > 66)
@@ -19017,14 +19017,14 @@ public class WorldState
             } else
             if(variant == 2)
             {
-                if(w.tickle().booleanValue())
+                if(w.tickle())
                     w.append(t, (new StringBuilder("The Thralls aren't content with just tickling ")).append(mainName).append(" and ").toString());
                 else
                 if(c.getGender().equals("male"))
                     w.append(t, (new StringBuilder("The Thralls aren't content with just torturing ")).append(mainName).append("'s penis and ").toString());
                 else
                     w.append(t, (new StringBuilder("Only one Thrall at a time can fit himself into ")).append(mainName).append("'s asshole, and the others aren't content with just ").toString());
-                if(c.getEXPOLevel() < 3 || modest.booleanValue())
+                if(c.getEXPOLevel() < 3 || modest)
                 {
                     if(dignity > 66)
                         w.append(t, (new StringBuilder("pulling off ")).append(c.hisHer()).append(" clothes, even though ").append(c.hisHer()).append(" clear embarrassment is somewhat satisfying.  ").toString());
@@ -19041,27 +19041,27 @@ public class WorldState
                     w.append(t, (new StringBuilder("filming ")).append(c.hisHer()).append(" exposed body.  ").toString());
                 else
                     w.append(t, (new StringBuilder("filming the places exposed by ")).append(c.hisHer()).append(" torn clothes and splayed out limbs as ").append(c.heShe()).append(" struggles wildly to escape.  ").toString());
-                if(high.dissociated.booleanValue() || low.dissociated.booleanValue())
+                if(high.dissociated || low.dissociated)
                     append(t, "The Thralls close in and ");
                 else
-                if(solo.booleanValue())
+                if(solo)
                 {
-                    if(loved.booleanValue())
+                    if(loved)
                         w.append(t, (new StringBuilder("Ignoring ")).append(high.getMainName()).append("'s demands that they stop, they pull out their cocks, and ").append(low.getMainName()).append(" winces and averts ").append(low.hisHer()).append(" eyes.  ").toString());
                     else
-                    if(hated.booleanValue())
+                    if(hated)
                         w.append(t, (new StringBuilder(String.valueOf(high.getMainName()))).append(" and ").append(low.getMainName()).append(" watch without much of a reaction as the Thralls around ").append(mainName).append(" pull out their cocks.  ").toString());
                     else
                         w.append(t, (new StringBuilder(String.valueOf(lover.getMainName()))).append(" raises ").append(c.hisHer()).append(" voice, trying to get the Thralls to stop, but they ignore ").append(c.himHer()).append(" and pull out their cocks.  ").toString());
                     w.append(t, "They close in and ");
                 } else
-                if(trio.booleanValue())
+                if(trio)
                 {
                     w.append(t, "The three Chosen are forced to kneel facing toward each other with their butts all facing outward toward the crowd");
-                    if(loved.booleanValue())
+                    if(loved)
                         w.append(t, ", whispering reassurances to each other ");
                     else
-                    if(hated.booleanValue())
+                    if(hated)
                         w.append(t, ", glaring at each other ");
                     else
                         w.append(t, ", their breath hot on each other's faces ");
@@ -19079,7 +19079,7 @@ public class WorldState
                 } else
                 {
                     w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s forced to lay atop ").append(partner.getMainName()).toString());
-                    if(loved.booleanValue() || partner == lover)
+                    if(loved || partner == lover)
                         w.append(t, ", who tries to say something supportive but stops with a gasp");
                     else
                         w.append(t, (new StringBuilder(", who winces and frowns at ")).append(c.himHer()).toString());
@@ -19098,7 +19098,7 @@ public class WorldState
                     }
                     w.append(t, (new StringBuilder("Crowding around the both of them, the Thralls on ")).append(mainName).append("'s side pull out their cocks and ").toString());
                 }
-                if(c.getHATELevel() < 3 || vVirg.booleanValue())
+                if(c.getHATELevel() < 3 || vVirg)
                 {
                     if(morality > 66)
                         w.append(t, (new StringBuilder("grind against ")).append(c.hisHer()).append(" whole body, taunting ").append(c.himHer()).append(" all the while in an effort to awaken ").append(c.hisHer()).append(" hatred.  ").toString());
@@ -19130,7 +19130,7 @@ public class WorldState
                     w.append(t, (new StringBuilder("take turns fucking ")).append(c.hisHer()).append(" ").append(hole).append(".  The sensation of them cumming inside ").toString());
                 else
                     w.append(t, (new StringBuilder("take turns riding ")).append(c.himHer()).append(", penetrating ").append(c.hisHer()).append(" ").append(hole).append(" as ").append(c.heShe()).append(" angrily tries to buck them off.  It's infuriating, but it also ").toString());
-                if(c.getPLEALevel() < 3 || cVirg.booleanValue())
+                if(c.getPLEALevel() < 3 || cVirg)
                 {
                     if(innocence > 66)
                         w.append(t, (new StringBuilder("gives ")).append(c.himHer()).append(" a sense of butterflies in ").append(c.hisHer()).append(" belly.").toString());
@@ -19150,7 +19150,7 @@ public class WorldState
             } else
             if(variant == 3)
             {
-                if(c.getINJULevel() < 3 || aVirg.booleanValue())
+                if(c.getINJULevel() < 3 || aVirg)
                 {
                     if(dignity > 66)
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" struggles not to show any reaction as the Thralls ").toString());
@@ -19160,7 +19160,7 @@ public class WorldState
                     else
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" shouts for the Thralls to stop as they ").toString());
                 } else
-                if(w.tickle().booleanValue())
+                if(w.tickle())
                 {
                     if(dignity > 66)
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" struggles vainly to keep a straight face and suppress ").append(c.hisHer()).append(" laughter as the Thralls tickle ").append(c.hisHer()).append(" bare feet and ").toString());
@@ -19187,7 +19187,7 @@ public class WorldState
                     w.append(t, (new StringBuilder("Even as ")).append(c.heShe()).append(" moans in mingled pain and pleasure at being fucked up the ass, ").append(mainName).append(" tries to tell the Thralls to leave ").append(c.himHer()).append(" alone, but they only move on to ").toString());
                 else
                     w.append(t, (new StringBuilder("Squealing as the Thralls fuck ")).append(c.himHer()).append(" up the ass, ").append(mainName).append(" tries to tell them to stop, but they only torment ").append(c.himHer()).append(" even more, starting to ").toString());
-                if(c.getHATELevel() < 3 || vVirg.booleanValue())
+                if(c.getHATELevel() < 3 || vVirg)
                 {
                     if(morality > 66)
                         w.append(t, (new StringBuilder("force ")).append(c.himHer()).append(" to suck their cocks as they tease ").append(c.hisHer()).append(" nipples and ").append(organ).append(".  ").toString());
@@ -19204,16 +19204,16 @@ public class WorldState
                     w.append(t, (new StringBuilder("penetrate ")).append(c.hisHer()).append(" ").append(hole).append(" and push vibrating rotors against ").append(c.hisHer()).append(" nipples and ").append(organ).append(" at the same time.  ").toString());
                 else
                     w.append(t, (new StringBuilder("push their cocks into ")).append(c.hisHer()).append(" ").append(hole).append(", ignoring ").append(c.hisHer()).append(" demands that they not cum inside.  ").toString());
-                if(high.dissociated.booleanValue() || low.dissociated.booleanValue())
+                if(high.dissociated || low.dissociated)
                     w.append(t, (new StringBuilder("The Thralls push their cameras close from all angles, intending to make it so that the public is disappointed in ")).append(c.hisHer()).append(" weakness when ").toString());
                 else
-                if(solo.booleanValue())
+                if(solo)
                 {
                     w.append(t, "The Thralls push their cameras close from all angles, ");
-                    if(loved.booleanValue())
+                    if(loved)
                         w.append(t, (new StringBuilder("forcing ")).append(high.getMainName()).append(" and ").append(low.getMainName()).append(" to watch as well.  The stimulation continues until ").toString());
                     else
-                    if(hated.booleanValue())
+                    if(hated)
                     {
                         w.append(t, (new StringBuilder("intending to make it so that the public as well as the watching ")).append(high.getMainName()).append(" and ").append(low.getMainName()).append(" are disappointed in ").append(c.hisHer()).append(" weakness when ").toString());
                     } else
@@ -19225,26 +19225,26 @@ public class WorldState
                             w.append(t, (new StringBuilder(String.valueOf(low.getMainName()))).append("'s fear and ").append(high.getMainName()).append("'s contempt are obvious as the Thralls escalate the stimulation until ").toString());
                     }
                 } else
-                if(trio.booleanValue())
+                if(trio)
                 {
                     w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(", ").append(high.getMainName()).append(", and ").append(low.getMainName()).append(" are all forced together, tangling their bare limbs around each other as the pleasure escalates and the Thralls pull out their cameras to film their mutual lust.  ").toString());
-                    if(loved.booleanValue())
+                    if(loved)
                         w.append(t, (new StringBuilder("The feeling of ")).append(c.hisHer()).append(" friends' bodies trembling as they approach their own orgasms stimulates ").append(c.himHer()).append(" until ").toString());
                     else
-                    if(hated.booleanValue())
+                    if(hated)
                         w.append(t, (new StringBuilder("The taboo pleasure of being forced to grind against ")).append(c.hisHer()).append(" rivals grows stronger and stronger until ").toString());
                     else
                         w.append(t, (new StringBuilder("In the midst of the orgy, ")).append(c.heShe()).append(" and ").append(lover.getMainName()).append(" can clearly feel each other approaching orgasm, and that knowledge is so stimulating that ").toString());
                 } else
                 {
                     w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" and ").append(partner.getMainName()).append(" are pushed together, bare limbs tangled around each other's stripped bodies, ").toString());
-                    if(loved.booleanValue() || partner == lover)
+                    if(loved || partner == lover)
                         w.append(t, "close enough to feel each other's breath on their faces");
                     else
                         w.append(t, "refusing to meet each other's gaze as they deny their shared passion");
                     w.append(t, ".  The Thralls close in with their cameras to film as ");
                 }
-                if(c.getPLEALevel() < 3 || cVirg.booleanValue())
+                if(c.getPLEALevel() < 3 || cVirg)
                 {
                     if(innocence > 66)
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" gasps and squirms against the warmth building in ").append(c.hisHer()).append(" loins.").toString());
@@ -19265,10 +19265,10 @@ public class WorldState
         } else
         if(variant == 0)
         {
-            if(high.dissociated.booleanValue() || mid.dissociated.booleanValue())
+            if(high.dissociated || mid.dissociated)
                 append(t, (new StringBuilder("The Thralls focus their efforts on ")).append(mainName).append(".  Some force ").append(c.himHer()).append(" to suck their cocks while others prefer ").toString());
             else
-            if(solo.booleanValue())
+            if(solo)
             {
                 if(high.getHATELevel() < 3 && mid.getHATELevel() < 3)
                     w.append(t, (new StringBuilder("With ")).append(high.getMainName()).append("'s and ").append(mid.getMainName()).append("'s Sexual Barriers still intact, ").toString());
@@ -19282,7 +19282,7 @@ public class WorldState
                     w.append(t, (new StringBuilder("With ")).append(high.getMainName()).append(" and ").append(mid.getMainName()).append(" fending off their attackers, ").toString());
                 w.append(t, (new StringBuilder("the Thralls focus their efforts on ")).append(mainName).append(".  Some force ").append(c.himHer()).append(" to suck their cocks while others prefer ").toString());
             } else
-            if(trio.booleanValue())
+            if(trio)
             {
                 if(high.getGender().equals("female") && mid.getGender().equals("female"))
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" alternates between licking ").append(high.getMainName()).append("'s and ").append(mid.getMainName()).append("'s clits as their pussies are pounded by the Thralls, ").toString());
@@ -19294,10 +19294,10 @@ public class WorldState
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" alternates between sucking ").append(high.getMainName()).append("'s cock and licking ").append(mid.getMainName()).append("'s clit as they're both fucked by the Thralls, ").toString());
                 else
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" takes ").append(high.getMainName()).append("'s and ").append(mid.getMainName()).append("'s cocks into ").append(c.hisHer()).append(" mouth at once as they're both fucked from behind by the Thralls, ").toString());
-                if(loved.booleanValue())
+                if(loved)
                     w.append(t, (new StringBuilder("deliriously trying to soothe ")).append(c.hisHer()).append(" friends' suffering.  ").toString());
                 else
-                if(hated.booleanValue())
+                if(hated)
                     w.append(t, (new StringBuilder("forced to move ")).append(c.hisHer()).append(" head back and forth by ").append(c.hisHer()).append(" attackers' hands gripping ").append(c.hisHer()).append(" hair.  ").toString());
                 else
                     w.append(t, (new StringBuilder("being forced against ")).append(c.hisHer()).append(" will but clearly less bothered by servicing ").append(lover.getMainName()).append(".  ").toString());
@@ -19308,13 +19308,13 @@ public class WorldState
                     w.append(t, (new StringBuilder("As one of the Thralls pounds ")).append(partner.getMainName()).append(", ").append(mainName).append(" licks ").append(partner.hisHer()).append(" clit").toString());
                 else
                     w.append(t, (new StringBuilder("As one of the Thralls fucks ")).append(partner.getMainName()).append(", ").append(mainName).append(" sucks ").append(partner.hisHer()).append(" cock").toString());
-                if(loved.booleanValue() || lover == partner)
+                if(loved || lover == partner)
                     w.append(t, (new StringBuilder(", obeying the Thralls' orders while also soothing ")).append(c.hisHer()).append(" friend.  ").toString());
                 else
                     w.append(t, ".  ");
                 w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is completely distracted and defenseless when the Thralls start ").toString());
             }
-            if(c.getINJULevel() < 3 || aVirg.booleanValue())
+            if(c.getINJULevel() < 3 || aVirg)
             {
                 if(morality > 66)
                     w.append(t, (new StringBuilder("violating ")).append(c.hisHer()).append(" ").append(hole).append(" as ").append(c.heShe()).append(" shudders in self-disgust.  ").toString());
@@ -19324,7 +19324,7 @@ public class WorldState
                 else
                     w.append(t, (new StringBuilder("thrusting in and out of ")).append(c.hisHer()).append(" ").append(hole).append(" as ").append(c.heShe()).append(" sobs in helpless fury.  ").toString());
             } else
-            if(w.tickle().booleanValue())
+            if(w.tickle())
             {
                 if(morality > 66)
                     w.append(t, (new StringBuilder("tickling ")).append(c.himHer()).append(" and violating ").append(c.hisHer()).append(" ").append(hole).append(" at the same time.  The fact that ").append(c.heShe()).append(" can't contain ").append(c.hisHer()).append(" sobs of laughter makes ").append(c.himHer()).append(" feel like an utter failure.  ").toString());
@@ -19351,7 +19351,7 @@ public class WorldState
                 w.append(t, (new StringBuilder("penetrating ")).append(c.hisHer()).append(" pussy and asshole in turn as ").append(c.heShe()).append(" sobs and shakes ").append(c.hisHer()).append(" head.  ").toString());
             else
                 w.append(t, (new StringBuilder("thrusting in and out of ")).append(c.hisHer()).append(" pussy and asshole in turn as ").append(c.heShe()).append(" sobs in helpless fury.  ").toString());
-            if(c.getPLEALevel() < 3 || cVirg.booleanValue())
+            if(c.getPLEALevel() < 3 || cVirg)
             {
                 if(innocence > 66)
                     w.append(t, (new StringBuilder("The feeling of the Thrall cumming inside is so awful that ")).append(mainName).append(" barely even notices the Thralls ").toString());
@@ -19371,7 +19371,7 @@ public class WorldState
             String girl = "girl";
             if(c.getGender().equals("male"))
                 girl = "boy";
-            if(c.getEXPOLevel() < 3 || modest.booleanValue())
+            if(c.getEXPOLevel() < 3 || modest)
             {
                 if(dignity > 66)
                     w.append(t, (new StringBuilder("tearing at ")).append(c.hisHer()).append(" ").append(bottomDesc).append(" in order to expose the shy ").append(girl).append("'s body to the world.").toString());
@@ -19391,34 +19391,34 @@ public class WorldState
         } else
         if(variant == 1)
         {
-            if(high.dissociated.booleanValue() || mid.dissociated.booleanValue())
+            if(high.dissociated || mid.dissociated)
                 append(t, (new StringBuilder(String.valueOf(c.mainName))).append(" hates ").append(c.himHer()).append("self for ").toString());
             else
-            if(solo.booleanValue())
+            if(solo)
             {
-                if(loved.booleanValue())
+                if(loved)
                     w.append(t, (new StringBuilder("Turned on by the way ")).append(high.getMainName()).append(" and ").append(mid.getMainName()).append(" are watching ").append(c.himHer()).append(", ").append(mainName).append(" hates ").append(c.himHer()).append("self for ").toString());
                 else
-                if(hated.booleanValue())
+                if(hated)
                     w.append(t, (new StringBuilder(String.valueOf(high.getMainName()))).append(" and ").append(mid.getMainName()).append(" are obviously contemptful toward ").append(mainName).append(" for ").toString());
                 else
                     w.append(t, (new StringBuilder("Turned on by the feeling of ")).append(lover.getMainName()).append("'s eyes on ").append(c.himHer()).append(", ").append(mainName).append(" hates ").append(c.himHer()).append("self for ").toString());
             } else
-            if(trio.booleanValue())
+            if(trio)
             {
-                if(loved.booleanValue())
+                if(loved)
                     w.append(t, (new StringBuilder("The sight of ")).append(high.getMainName()).append(" and ").append(mid.getMainName()).append(" squirming and moaning in orgasm turns ").append(mainName).append(" on so much that ").append(c.heShe()).append(" has no chance to resist ").toString());
                 else
-                if(hated.booleanValue())
+                if(hated)
                     w.append(t, (new StringBuilder("The sight of ")).append(high.getMainName()).append(" and ").append(mid.getMainName()).append(" squirming and moaning in orgasm makes ").append(mainName).append(" feel like there's nothing wrong with ").toString());
                 else
                     w.append(t, (new StringBuilder("Feeling turned on and a little jealous as ")).append(c.heShe()).append(" watches ").append(high.getMainName()).append(" and ").append(mid.getMainName()).append(" forced to grind against each other as they reach orgasm, ").append(mainName).append(" can't resist ").toString());
             } else
-            if(lover == partner || loved.booleanValue())
+            if(lover == partner || loved)
                 w.append(t, (new StringBuilder("In the press of bodies around the three Chosen, ")).append(partner.getMainName()).append("'s orgasmic spasms cause ").append(partner.himHer()).append(" to grind against ").append(mainName).append(", who is so turned on by the contact that ").append(c.heShe()).append(" has no chance to resist ").toString());
             else
                 w.append(t, (new StringBuilder("In the press of bodies around the three Chosen, ")).append(partner.getMainName()).append("'s orgasmic spasms cause ").append(partner.himHer()).append(" to grind against ").append(mainName).append(".  Even though ").append(mainName).append(" tries to be strong, the stimulation is still too much to bear, and ").append(c.heShe()).append(" ends up ").toString());
-            if(c.getINJULevel() < 3 || aVirg.booleanValue())
+            if(c.getINJULevel() < 3 || aVirg)
             {
                 if(innocence > 66)
                     w.append(t, (new StringBuilder("surrendering to the pleasure of the Thralls' hands on ")).append(c.hisHer()).append(" ").append(organ).append(".  ").toString());
@@ -19428,7 +19428,7 @@ public class WorldState
                 else
                     w.append(t, (new StringBuilder("reaching climax due to the Thralls' stimulation of ")).append(c.hisHer()).append(" ").append(organ).append(".  ").toString());
             } else
-            if(w.tickle().booleanValue())
+            if(w.tickle())
             {
                 if(innocence > 66)
                     w.append(t, (new StringBuilder("surrendering to the pleasure, whimpering with delirious laughter as the Thralls' tickling hands make their way to ")).append(c.hisHer()).append(" ").append(organ).append(".  ").toString());
@@ -19455,7 +19455,7 @@ public class WorldState
                 w.append(t, (new StringBuilder("cumming and whimpering in pain at the same time, helpless against the rough handling of ")).append(c.hisHer()).append(" ").append(organ).append(" from the outside and the fist ravaging ").append(c.hisHer()).append(" ass from the inside.  ").toString());
             else
                 w.append(t, (new StringBuilder("reaching climax as the Thralls combine stimulating ")).append(c.hisHer()).append(" ").append(organ).append(" with fisting ").append(c.hisHer()).append(" ass.  ").toString());
-            if(c.getHATELevel() < 3 || vVirg.booleanValue())
+            if(c.getHATELevel() < 3 || vVirg)
             {
                 if(morality > 66)
                     w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" still has the presence of mind to be disgusted by the Thralls grinding against ").append(c.himHer()).append(" in pursuit of their own orgasms, but ").append(c.heShe()).append(" feels ").append(c.heShe()).append(" deserves the degrading treatment for enjoying ").append(c.himHer()).append("self this much").toString());
@@ -19472,7 +19472,7 @@ public class WorldState
                 w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" ").append(hole).append(" squeezes down on a Thrall's invading cock, and ").append(c.heShe()).append(" realizes with detached disgust that it's cumming inside ").append(c.himHer()).toString());
             else
                 w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" tries to threaten retribution if the Thrall fucking ").append(c.hisHer()).append(" ").append(hole).append(" cums inside, but ").append(c.heShe()).append(" can't form the words.  ").append(c.HeShe()).append(" groans as ").append(c.heShe()).append(" feels the invading cock spurting inside ").append(c.himHer()).toString());
-            if(c.getEXPOLevel() < 3 || modest.booleanValue())
+            if(c.getEXPOLevel() < 3 || modest)
             {
                 if(dignity > 66)
                     w.append(t, (new StringBuilder(".  No matter how embarrassing it is, ")).append(c.heShe()).append(" doesn't have the willpower to stop the others from stripping ").append(c.himHer()).append(".").toString());
@@ -19492,12 +19492,12 @@ public class WorldState
         } else
         if(variant == 2)
         {
-            if(solo.booleanValue() || high.dissociated.booleanValue() || mid.dissociated.booleanValue())
+            if(solo || high.dissociated || mid.dissociated)
             {
-                if(loved.booleanValue() || high.dissociated.booleanValue() || mid.dissociated.booleanValue())
+                if(loved || high.dissociated || mid.dissociated)
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" sobs for ").append(high.getMainName()).append(" and ").append(mid.getMainName()).append(" to save ").append(c.himHer()).append(", but they're both held back by their captors.  ").toString());
                 else
-                if(hated.booleanValue())
+                if(hated)
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" sobs at the helplessness of ").append(c.hisHer()).append(" situation, earning contemptful glances from ").append(high.getMainName()).append(" and ").append(mid.getMainName()).append(".  ").toString());
                 else
                 if(lover == high)
@@ -19505,16 +19505,16 @@ public class WorldState
                 else
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" sobs openly for ").append(lover.getMainName()).append(" to help ").append(c.himHer()).append(", earning a contemptful glance from ").append(high.getMainName()).append(".  ").toString());
             } else
-            if(trio.booleanValue())
+            if(trio)
             {
-                if(!loved.booleanValue() && !hated.booleanValue())
+                if(!loved && !hated)
                     w.append(t, (new StringBuilder("Even though ")).append(lover.getMainName()).append(" is dealing with ").append(lover.hisHer()).append(" own torture, ").toString());
                 else
                     w.append(t, "Even though they're dealing with their own torture, ");
-                if(loved.booleanValue())
+                if(loved)
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" still sobs for ").append(high.getMainName()).append(" and ").append(mid.getMainName()).append(" to help ").append(c.himHer()).append(", which only makes them feel even worse.  ").toString());
                 else
-                if(hated.booleanValue())
+                if(hated)
                 {
                     w.append(t, (new StringBuilder(String.valueOf(high.getMainName()))).append(" and ").append(mid.getMainName()).append(" aren't sobbing pathetically like ").append(mainName).append(" is.  ").toString());
                 } else
@@ -19526,18 +19526,18 @@ public class WorldState
                         w.append(t, (new StringBuilder("while ")).append(high.getMainName()).append(" tries to fight ").append(high.hisHer()).append(" way free.  ").toString());
                 }
             } else
-            if(loved.booleanValue() || lover == partner)
+            if(loved || lover == partner)
                 w.append(t, (new StringBuilder("Even though ")).append(partner.getMainName()).append(" is dealing with ").append(partner.hisHer()).append(" own torture, ").append(mainName).append(" still sobs for ").append(partner.hisHer()).append(" help.  ").toString());
             else
                 w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" sobs openly for someone to save ").append(c.himHer()).append(" while ").append(partner.getMainName()).append(" clenches ").append(c.hisHer()).append(" teeth and tries to hold back ").append(c.hisHer()).append(" own voice.  ").toString());
-            if(w.tickle().booleanValue())
+            if(w.tickle())
                 w.append(t, (new StringBuilder("The Thrall's tickling is driving ")).append(mainName).append(" crazy, ").toString());
             else
             if(c.getGender().equals("male"))
                 w.append(t, (new StringBuilder("The pain of the Thralls crushing and twisting ")).append(mainName).append("'s testicles is driving ").append(c.himHer()).append(" crazy, ").toString());
             else
                 w.append(t, (new StringBuilder("The repeated impacts of the Thrall fucking ")).append(c.himHer()).append(" up the ass are driving ").append(c.himHer()).append(" crazy, ").toString());
-            if(c.getHATELevel() < 3 || vVirg.booleanValue())
+            if(c.getHATELevel() < 3 || vVirg)
             {
                 if(morality > 66)
                     w.append(t, (new StringBuilder("and ")).append(c.heShe()).append("'s ashamed of ").append(c.himHer()).append("self for feeling pleasure from the way they tug ").append(c.hisHer()).append(" ").append(organ).append(" at the same time.  ").toString());
@@ -19554,7 +19554,7 @@ public class WorldState
                 w.append(t, (new StringBuilder("and ")).append(c.hisHer()).append(" efforts to deny the pleasure from the Thrall tugging ").append(c.hisHer()).append(" ").append(organ).append(" fall to pieces when another penetrates ").append(c.hisHer()).append(" ").append(hole).append(" and cums inside.  ").toString());
             else
                 w.append(t, (new StringBuilder("and even as ")).append(c.heShe()).append(" deliriously tries to threaten the Thrall penetrating ").append(c.hisHer()).append(" ").append(hole).append(", ").append(c.heShe()).append(" can't help but buck ").append(c.hisHer()).append(" hips at the same time.  ").toString());
-            if(c.getPLEALevel() < 3 || cVirg.booleanValue())
+            if(c.getPLEALevel() < 3 || cVirg)
             {
                 if(innocence > 66)
                     w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" still manages to not completely give ").append(c.himHer()).append("self over to the feelings, focusing on ").toString());
@@ -19571,7 +19571,7 @@ public class WorldState
                 w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" cums quickly despite ").toString());
             else
                 w.append(t, (new StringBuilder("Tears of humiliation leak out of ")).append(c.hisHer()).append(" eyes as ").append(c.heShe()).append("'s forced to climax, unable to stop dwelling on ").toString());
-            if(c.getEXPOLevel() < 3 || modest.booleanValue())
+            if(c.getEXPOLevel() < 3 || modest)
             {
                 if(dignity > 66)
                     w.append(t, (new StringBuilder(String.valueOf(c.hisHer()))).append(" horror at the fact that the Thralls are stripping ").append(c.himHer()).append(" at the same time.").toString());
@@ -19591,40 +19591,40 @@ public class WorldState
         } else
         if(variant == 3)
         {
-            if(solo.booleanValue() || high.dissociated.booleanValue() || mid.dissociated.booleanValue())
+            if(solo || high.dissociated || mid.dissociated)
             {
                 w.append(t, (new StringBuilder("The Thralls order ")).append(mainName).append(" to spread ").append(c.hisHer()).append(" own ").append(hole).append(" wide open for the cameras").toString());
-                if(high.dissociated.booleanValue() || mid.dissociated.booleanValue())
+                if(high.dissociated || mid.dissociated)
                     append(t, (new StringBuilder(", and neither ")).append(high.mainName).append(" nor ").append(mid.mainName).append(" is in any position to help.  ").toString());
                 else
-                if(loved.booleanValue())
+                if(loved)
                     w.append(t, (new StringBuilder(", ignoring ")).append(high.getMainName()).append("'s and ").append(mid.getMainName()).append("'s attempts to distract them and protect ").append(c.himHer()).append(".  ").toString());
                 else
-                if(hated.booleanValue())
+                if(hated)
                     w.append(t, (new StringBuilder(", and since ")).append(c.heShe()).append("'s the one that allowed ").append(c.himHer()).append("self to get stripped, neither ").append(high.getMainName()).append(" nor ").append(mid.getMainName()).append(" feel much sympathy.  ").toString());
                 else
                     w.append(t, (new StringBuilder(", ignoring ")).append(lover.getMainName()).append("'s attempts to divert their attention onto ").append(lover.himHer()).append("self.  ").toString());
             } else
-            if(trio.booleanValue())
+            if(trio)
             {
                 w.append(t, "The three Chosen are laid on their backs with their legs lifted up into the air in order to display their bare lower halves to the cameras");
-                if(loved.booleanValue())
+                if(loved)
                     w.append(t, (new StringBuilder(", but ")).append(high.getMainName()).append(" and ").append(mid.getMainName()).append(" both look worried when the crowd turns its attention to their friend.  ").toString());
                 else
-                if(hated.booleanValue())
+                if(hated)
                     w.append(t, ", obviously all angry with each other for allowing this to happen.  ");
                 else
                     w.append(t, (new StringBuilder(", and although ")).append(lover.getMainName()).append(" tries to get the Thralls to focus on ").append(lover.himHer()).append(", they have a different target in mind.  ").toString());
                 w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is ordered to use ").append(c.hisHer()).append(" own fingers to spread ").append(c.hisHer()).append(" ").append(hole).append(".  ").toString());
             } else
             {
-                if(loved.booleanValue() || lover == partner)
+                if(loved || lover == partner)
                     w.append(t, (new StringBuilder("Even though they've both been stripped, ")).append(partner.getMainName()).append(" tries to use ").append(partner.hisHer()).append(" body to hide ").append(mainName).append(" from the cameras, but the Thralls pull them apart.  ").toString());
                 else
                     w.append(t, (new StringBuilder("Neither ")).append(mainName).append(" nor ").append(partner.getMainName()).append(" are happy about being forced to sit side-by-side with their legs lifted up into the air in order to expose their bare lower halves to the cameras.  ").toString());
                 w.append(t, (new StringBuilder("The Thralls order ")).append(mainName).append(" to use ").append(c.hisHer()).append(" own fingers to spread ").append(c.hisHer()).append(" ").append(hole).append(".  ").toString());
             }
-            if(c.getINJULevel() < 3 || aVirg.booleanValue())
+            if(c.getINJULevel() < 3 || aVirg)
             {
                 if(dignity > 66)
                     w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" freezes up, stammering incoherently until the Thralls reach down to do it themselves.  ").toString());
@@ -19634,7 +19634,7 @@ public class WorldState
                 else
                     w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" hurriedly complies for fear of being punished.  ").toString());
             } else
-            if(w.tickle().booleanValue())
+            if(w.tickle())
             {
                 if(dignity > 66)
                     w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s already practically delirious with embarrassment at being filmed while practically naked and flailing in helpless laughter, so ").append(c.heShe()).append(" doesn't even notice the request until the Thralls reach down to do it for ").append(c.himHer()).append(".  ").toString());
@@ -19661,7 +19661,7 @@ public class WorldState
                 w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" complies as best ").append(c.heShe()).append(" can while being fucked up the ass at the same time, practically delirious with shame over having ").append(c.hisHer()).append(" privates seen in such a state.  ").toString());
             else
                 w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" complies without hesitation, the cock thrusting in and out of ").append(c.hisHer()).append(" asshole making the image even more lewd.  ").toString());
-            if(c.getHATELevel() < 3 || vVirg.booleanValue())
+            if(c.getHATELevel() < 3 || vVirg)
             {
                 if(c.getHATELevel() < 3)
                     w.append(t, "In order to assert their dominance even more, ");
@@ -19686,7 +19686,7 @@ public class WorldState
                 else
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" starts to move ").append(c.hisHer()).append(" hips by reflex, ").toString());
             }
-            if(c.getPLEALevel() < 3 || cVirg.booleanValue())
+            if(c.getPLEALevel() < 3 || cVirg)
             {
                 if(innocence > 66)
                     w.append(t, (new StringBuilder("but ")).append(c.heShe()).append("'s too scared to effectively perform.").toString());
@@ -19722,13 +19722,13 @@ public class WorldState
                 otherOne = high;
                 otherTwo = mid;
             }
-            if(otherOne.dissociated.booleanValue() || otherTwo.dissociated.booleanValue())
+            if(otherOne.dissociated || otherTwo.dissociated)
             {
                 append(t, (new StringBuilder("While the orgy is extremely unpleasant for ")).append(c.mainName).append(", ").append(c.heShe()).append("'s still able to escape the worst of the abuses due to ").toString());
-                if(otherOne.dissociated.booleanValue() && otherTwo.dissociated.booleanValue())
+                if(otherOne.dissociated && otherTwo.dissociated)
                     append(t, "the other two Chosen being far easier targets.");
                 else
-                if(otherOne.dissociated.booleanValue())
+                if(otherOne.dissociated)
                     append(t, (new StringBuilder(String.valueOf(otherOne.mainName))).append(" being a far easier target.").toString());
                 else
                     append(t, (new StringBuilder(String.valueOf(otherTwo.mainName))).append(" being a far easier target.").toString());
@@ -19795,9 +19795,9 @@ public class WorldState
                     w.append(t, (new StringBuilder("While ")).append(otherTwo.getMainName()).append(" somehow holds on, ").append(otherOne.getMainName()).append(" is forced to scream ").toString());
                 else
                     w.append(t, (new StringBuilder("Utterly defeated, ")).append(otherOne.getMainName()).append(" and ").append(otherTwo.getMainName()).append(" cry out ").toString());
-                if(w.tickle().booleanValue())
+                if(w.tickle())
                 {
-                    if(allResist.booleanValue())
+                    if(allResist)
                         w.append(t, "as they're tickled.  ");
                     else
                         w.append(t, "in helpless laughter at the Thralls' tickling.  ");
@@ -19807,7 +19807,7 @@ public class WorldState
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is only spared the indignity of laughing out loud by the Thrall's cock shoved down ").append(c.hisHer()).append(" throat.").toString());
                 } else
                 {
-                    if(allResist.booleanValue())
+                    if(allResist)
                         w.append(t, "as the Thralls pummel them and twist their limbs.  ");
                     else
                         w.append(t, "in pain at the Thralls' savage abuse.  ");
@@ -19829,32 +19829,32 @@ public class WorldState
                 else
                     w.append(t, (new StringBuilder("The orgy is so densely-packed that ")).append(mainName).append(", who's currently at its center, can't be clearly seen.  Meanwhile, ").append(otherOne.getMainName()).append(" and ").append(otherTwo.getMainName()).append(" have been pulled to the edge and forced to bend over, showing their bare bottoms to the watching cameras.").toString());
         }
-        if(!finalBattle.booleanValue() || c.resolve > 0)
+        if(!finalBattle || c.resolve > 0)
         {
             w.append(t, (new StringBuilder("\n\n")).append(mainName).append(":\n").toString());
             int totalDamage[] = {
                 200, 200, 200, 200, 200, 200, 200, 200
             };
             Boolean penetrationBonus = Boolean.valueOf(false);
-            if(!vVirg.booleanValue() && c.getHATELevel() >= 3)
+            if(!vVirg && c.getHATELevel() >= 3)
             {
                 penetrationBonus = Boolean.valueOf(true);
                 totalDamage = c.multiplyArray(totalDamage, 200);
             }
             Boolean orgasmBonus = Boolean.valueOf(false);
-            if(!cVirg.booleanValue() && c.getPLEALevel() >= 3)
+            if(!cVirg && c.getPLEALevel() >= 3)
             {
                 orgasmBonus = Boolean.valueOf(true);
                 totalDamage = c.multiplyArray(totalDamage, 200);
             }
             Boolean analBonus = Boolean.valueOf(false);
-            if(!aVirg.booleanValue() && c.getINJULevel() >= 3)
+            if(!aVirg && c.getINJULevel() >= 3)
             {
                 analBonus = Boolean.valueOf(true);
                 totalDamage = c.multiplyArray(totalDamage, 200);
             }
             Boolean broadcastBonus = Boolean.valueOf(false);
-            if(!modest.booleanValue() && c.getEXPOLevel() >= 3)
+            if(!modest && c.getEXPOLevel() >= 3)
             {
                 broadcastBonus = Boolean.valueOf(true);
                 totalDamage = c.multiplyArray(totalDamage, 200);
@@ -19902,22 +19902,22 @@ public class WorldState
             int previousINJU = c.getINJULevel();
             int previousEXPO = c.getEXPOLevel();
             c.damage(t, w, totalDamage);
-            if(penetrationBonus.booleanValue())
+            if(penetrationBonus)
                 if(c.getGender().equals("male"))
                     w.append(t, "(x2 damage due to penetration)\n\n");
                 else
                     w.append(t, "(x2 damage due to vaginal penetration)\n\n");
-            if(orgasmBonus.booleanValue())
+            if(orgasmBonus)
                 w.append(t, "(x2 damage due to orgasm)\n\n");
-            if(analBonus.booleanValue())
-                if(w.tickle().booleanValue())
+            if(analBonus)
+                if(w.tickle())
                     w.append(t, "(x2 damage due to forced laughter)\n\n");
                 else
                 if(c.getGender().equals("male"))
                     w.append(t, "(x2 damage due to genital torture)\n\n");
                 else
                     w.append(t, "(x2 damage due to anal penetration)\n\n");
-            if(broadcastBonus.booleanValue())
+            if(broadcastBonus)
                 w.append(t, "(x2 damage due to broadcasted humiliation)\n\n");
             w.append(t, (new StringBuilder(String.valueOf(firstRelation))).append(secondRelation).toString());
             w.rememberOrgyStage(order);
@@ -19926,23 +19926,23 @@ public class WorldState
             if(c.getHATELevel() > previousHATE)
             {
                 priorities[0]++;
-                if(c.getHATELevel() == 3 && !vVirg.booleanValue())
+                if(c.getHATELevel() == 3 && !vVirg)
                     priorities[0]++;
                 w.purpleAppend(t, "HATE up!  ");
             }
             if(c.getPLEALevel() > previousPLEA)
             {
                 priorities[1]++;
-                if(c.getPLEALevel() == 3 && !cVirg.booleanValue())
+                if(c.getPLEALevel() == 3 && !cVirg)
                     priorities[1]++;
                 w.purpleAppend(t, "PLEA up!  ");
             }
             if(c.getINJULevel() > previousINJU)
             {
                 priorities[2]++;
-                if(c.getINJULevel() == 3 && !aVirg.booleanValue())
+                if(c.getINJULevel() == 3 && !aVirg)
                     priorities[2]++;
-                if(w.tickle().booleanValue())
+                if(w.tickle())
                     w.purpleAppend(t, "ANTI up!  ");
                 else
                     w.purpleAppend(t, "INJU up!  ");
@@ -19950,7 +19950,7 @@ public class WorldState
             if(c.getEXPOLevel() > previousEXPO)
             {
                 priorities[3]++;
-                if(c.getEXPOLevel() == 3 && !modest.booleanValue())
+                if(c.getEXPOLevel() == 3 && !modest)
                     priorities[3]++;
                 w.purpleAppend(t, "EXPO up!  ");
             }
@@ -20018,12 +20018,12 @@ public class WorldState
                         else
                         if(c.getINJULevel() > 1)
                         {
-                            if(w.tickle().booleanValue())
+                            if(w.tickle())
                                 w.append(t, (new StringBuilder("Flustered and demoralized, there's nothing ")).append(c.heShe()).append(" can do to resist the stripping, and ").toString());
                             else
                                 w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" bloodied body is in no state to resist the stripping, and ").toString());
                         } else
-                        if(w.tickle().booleanValue())
+                        if(w.tickle())
                             w.append(t, (new StringBuilder("The effects of exhaustion are starting to set in, slowing ")).append(c.hisHer()).append(" efforts to resist the stripping, and ").toString());
                         else
                             w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" bruised body is in no state to resist the stripping, and ").toString());
@@ -20041,12 +20041,12 @@ public class WorldState
                         else
                         if(c.getINJULevel() > 1)
                         {
-                            if(w.tickle().booleanValue())
+                            if(w.tickle())
                                 w.append(t, (new StringBuilder("Then, while ")).append(c.heShe()).append("'s surprised and flustered, they pull off ").append(c.hisHer()).append(" ").append(feetType).append(" too").toString());
                             else
                                 w.append(t, (new StringBuilder("Bruised and bloodied as ")).append(c.heShe()).append(" is, they have no trouble pulling off ").append(c.hisHer()).append(" ").append(feetType).append(" too").toString());
                         } else
-                        if(w.tickle().booleanValue())
+                        if(w.tickle())
                             w.append(t, (new StringBuilder("With the effects of exhaustion starting to set in, ")).append(c.heShe()).append("'s too slow to stop them from pulling off ").append(c.hisHer()).append(" ").append(feetType).append(" as well").toString());
                         else
                             w.append(t, (new StringBuilder("With bruises accumulating on ")).append(c.hisHer()).append(" body, ").append(c.heShe()).append("'s too slow to stop them from pulling off ").append(c.hisHer()).append(" ").append(feetType).append(" as well").toString());
@@ -20113,14 +20113,14 @@ public class WorldState
                     } else
                     if(c.getINJULevel() > 2)
                     {
-                        if(aVirg.booleanValue())
+                        if(aVirg)
                         {
-                            if(w.tickle().booleanValue())
+                            if(w.tickle())
                                 w.append(t, (new StringBuilder(", and when they see that ")).append(c.heShe()).append("'s exhausted enough to have a hard time covering ").append(c.himHer()).append("self to compensate, they grin darkly and prepare to punish ").append(c.himHer()).append(" even more.  ").toString());
                             else
                                 w.append(t, (new StringBuilder(", and when they see that ")).append(c.heShe()).append("'s badly-hurt enough to have a hard time covering ").append(c.himHer()).append("self to compensate, they grin darkly and prepare to punish ").append(c.himHer()).append(" even more.  ").toString());
                         } else
-                        if(w.tickle().booleanValue())
+                        if(w.tickle())
                             w.append(t, (new StringBuilder(", making it even easier to tickle under ")).append(c.hisHer()).append(" armpits.  ").toString());
                         else
                         if(c.getGender().equals("male"))
@@ -20130,12 +20130,12 @@ public class WorldState
                     } else
                     if(c.getGender().equals("male"))
                     {
-                        if(w.tickle().booleanValue())
+                        if(w.tickle())
                             w.append(t, (new StringBuilder(", and with how worried ")).append(c.heShe()).append(" is by the direction the battle is going, ").append(c.heShe()).append(" can't even spare the effort of covering ").append(c.hisHer()).append(" smooth chest.  ").toString());
                         else
                             w.append(t, (new StringBuilder(", and in ")).append(c.hisHer()).append(" injured state, ").append(c.heShe()).append(" doesn't care at all about having ").append(c.hisHer()).append(" smooth chest exposed.  ").toString());
                     } else
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                         w.append(t, (new StringBuilder(", and there's obvious tiredness in ")).append(c.hisHer()).append(" expression as ").append(c.heShe()).append(" uses one arm to keep everything covered.  ").toString());
                     else
                         w.append(t, (new StringBuilder(", and ")).append(c.heShe()).append(" has to use one bloodied arm to keep everything covered.  ").toString());
@@ -20144,7 +20144,7 @@ public class WorldState
                     else
                     if(c.getPLEALevel() > 2)
                     {
-                        if(cVirg.booleanValue())
+                        if(cVirg)
                         {
                             if(c.getGender().equals("male"))
                                 w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" legs wobble as ").append(c.heShe()).append(" suppresses ").append(c.hisHer()).append(" arousal").toString());
@@ -20165,7 +20165,7 @@ public class WorldState
                     else
                     if(c.getHATELevel() > 2)
                     {
-                        if(vVirg.booleanValue())
+                        if(vVirg)
                             w.append(t, (new StringBuilder(", keenly aware that ")).append(c.hisHer()).append(" Sexual Barrier has broken.").toString());
                         else
                             w.append(t, (new StringBuilder(" and the sensation of the shaft thrusting in and out of ")).append(c.hisHer()).append(" ").append(hole).append(".").toString());
@@ -20209,10 +20209,10 @@ public class WorldState
                     if(c.getPLEALevel() < 3)
                         w.append(t, "thighs.  ");
                     else
-                    if(c.getPLEALevel() > 3 && cVirg.booleanValue())
+                    if(c.getPLEALevel() > 3 && cVirg)
                         w.append(t, "thighs as they uncontrollably spasm with pleasure.  ");
                     else
-                    if(cVirg.booleanValue())
+                    if(cVirg)
                     {
                         if(c.getGender().equals("female"))
                             w.append(t, (new StringBuilder("thighs, driven wild by the way that ")).append(c.hisHer()).append(" flowing love juices signal ").append(c.hisHer()).append(" readiness for orgasm.  ").toString());
@@ -20223,26 +20223,26 @@ public class WorldState
                         w.append(t, (new StringBuilder("thighs, driven wild by the clear view of the juices streaming from ")).append(c.hisHer()).append(" orgasmically clenching pussy.  ").toString());
                     else
                         w.append(t, (new StringBuilder("thighs, driven wild by the clear view of ")).append(c.hisHer()).append(" repeatedly spurting cock.  ").toString());
-                    if(!modest.booleanValue())
+                    if(!modest)
                         w.append(t, (new StringBuilder("Cameras flash from all directions as the spectators eagerly capture ")).append(c.hisHer()).append(" most recent humiliation.  ").toString());
                     if(c.getINJULevel() < 3)
                         w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" struggles against them").toString());
                     else
-                    if(c.getINJULevel() > 3 && aVirg.booleanValue())
+                    if(c.getINJULevel() > 3 && aVirg)
                     {
-                        if(w.tickle().booleanValue())
+                        if(w.tickle())
                             w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" spasms wildly, wasting the last of ").append(c.hisHer()).append(" energy").toString());
                         else
                             w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" shrieks in pain as ").append(c.hisHer()).append(" shattered limbs are manhandled").toString());
                     } else
-                    if(aVirg.booleanValue())
+                    if(aVirg)
                     {
-                        if(w.tickle().booleanValue())
+                        if(w.tickle())
                             w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" can't hold back ").append(c.hisHer()).append(" desperate moans").toString());
                         else
                             w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" cries out in pain as ").append(c.hisHer()).append(" weakened body is prepared for even more extreme abuses").toString());
                     } else
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                         w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" can't hold back ").append(c.hisHer()).append(" exhausted gasps of laughter as ").append(c.heShe()).append("'s tickled").toString());
                     else
                     if(c.getGender().equals("male"))
@@ -20252,10 +20252,10 @@ public class WorldState
                     if(c.getHATELevel() < 3)
                         w.append(t, (new StringBuilder(", now protected only by the magic of ")).append(c.hisHer()).append(" Sexual Barrier.").toString());
                     else
-                    if(c.getHATELevel() > 3 && vVirg.booleanValue())
+                    if(c.getHATELevel() > 3 && vVirg)
                         w.append(t, ", cursing and sobbing with rage.");
                     else
-                    if(vVirg.booleanValue())
+                    if(vVirg)
                         w.append(t, (new StringBuilder(", completely defenseless now that ")).append(c.hisHer()).append(" Sexual Barrier has also failed.").toString());
                     else
                         w.append(t, (new StringBuilder(", ")).append(c.hisHer()).append(" voice rising even higher as another Thrall penetrates ").append(c.hisHer()).append(" ").append(hole).append(".").toString());
@@ -20342,12 +20342,12 @@ public class WorldState
                     else
                     if(c.getINJULevel() > 4)
                     {
-                        if(w.tickle().booleanValue())
+                        if(w.tickle())
                             w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" splayed-out form, gasping for breath, makes for a pathetic sight, ").toString());
                         else
                             w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" mortally-wounded body makes for a pathetic sight, ").toString());
                     } else
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                         w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s too worn out to even have the coordination to cover ").append(c.himHer()).append("self, ").toString());
                     else
                         w.append(t, (new StringBuilder("With ")).append(c.hisHer()).append(" body shattered, ").append(c.heShe()).append(" has no strength to cover ").append(c.himHer()).append(" self, ").toString());
@@ -20394,12 +20394,12 @@ public class WorldState
                     else
                     if(c.getINJULevel() > 1)
                     {
-                        if(w.tickle().booleanValue())
+                        if(w.tickle())
                             w.append(t, (new StringBuilder(String.valueOf(c.heShe()))).append("'s far too exhausted to fend off the assault.").toString());
                         else
                             w.append(t, (new StringBuilder(String.valueOf(c.heShe()))).append("'s far too badly hurt to fend off the assault.").toString());
                     } else
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                         w.append(t, (new StringBuilder(String.valueOf(c.hisHer()))).append(" growing tiredness and distraction prevent ").append(c.himHer()).append(" from fending off the assault.").toString());
                     else
                         w.append(t, (new StringBuilder(String.valueOf(c.hisHer()))).append(" bruised limbs lack the strength to completely fend off the assault.").toString());
@@ -20411,14 +20411,14 @@ public class WorldState
                     else
                     if(c.getINJULevel() > 2)
                     {
-                        if(aVirg.booleanValue())
+                        if(aVirg)
                         {
-                            if(w.tickle().booleanValue())
+                            if(w.tickle())
                                 w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" moans helplessly ").toString());
                             else
                                 w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" cries out in pain as the Thralls manhandle ").append(c.himHer()).append(", but there's pleasure in ").append(c.hisHer()).append(" voice too ").toString());
                         } else
-                        if(w.tickle().booleanValue())
+                        if(w.tickle())
                             w.append(t, (new StringBuilder("The tickling, groping hands make ")).append(mainName).append(" laugh helplessly ").toString());
                         else
                         if(c.getGender().equals("male"))
@@ -20426,7 +20426,7 @@ public class WorldState
                         else
                             w.append(t, (new StringBuilder("The cock thrusting into ")).append(mainName).append("'s ass makes ").append(c.himHer()).append(" moan in mingled pleasure and pain ").toString());
                     } else
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is barely able to suppress ").append(c.hisHer()).append(" moans of pleasure ").toString());
                     else
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s grunts of pain turn into moans of pleasure ").toString());
@@ -20442,7 +20442,7 @@ public class WorldState
                     else
                     if(c.getEXPOLevel() > 2)
                     {
-                        if(modest.booleanValue())
+                        if(modest)
                             w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" can only desperately try to cover ").append(c.hisHer()).append(" exposed body").toString());
                         else
                             w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" can only look back at the cameras zooming in on ").append(c.hisHer()).append(" bare crotch").toString());
@@ -20455,7 +20455,7 @@ public class WorldState
                     else
                     if(c.getHATELevel() > 2)
                     {
-                        if(vVirg.booleanValue())
+                        if(vVirg)
                             w.append(t, (new StringBuilder(" and try ")).append(c.hisHer()).append(" best not to think about how ").append(c.hisHer()).append(" Sexual Barrier has come undone.").toString());
                         else
                             w.append(t, (new StringBuilder(" and endure having ")).append(c.hisHer()).append(" ").append(organ).append(" played with as one of the Thralls thrusts into ").append(c.hisHer()).append(" ").append(hole).append(" at the same time.").toString());
@@ -20469,14 +20469,14 @@ public class WorldState
                     if(c.getEXPOLevel() < 3)
                         w.append(t, (new StringBuilder("As the battle rages around ")).append(mainName).toString());
                     else
-                    if(c.getEXPOLevel() > 3 && modest.booleanValue())
+                    if(c.getEXPOLevel() > 3 && modest)
                         w.append(t, (new StringBuilder("With ")).append(mainName).append("'s clothes essentially stripped from ").append(c.hisHer()).append(" body").toString());
                     else
-                    if(modest.booleanValue())
+                    if(modest)
                         w.append(t, (new StringBuilder("With ")).append(mainName).append("'s shredded ").append(bottomDesc).append(" and lack of panties").toString());
                     else
                         w.append(t, (new StringBuilder("With ")).append(mainName).append(" stripped and being filmed from every angle").toString());
-                    if(cVirg.booleanValue())
+                    if(cVirg)
                     {
                         if(innocence > 66)
                         {
@@ -20518,31 +20518,31 @@ public class WorldState
                     if(c.getHATELevel() < 3)
                         w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" effort to stay focused ").toString());
                     else
-                    if(c.getHATELevel() > 3 && vVirg.booleanValue())
+                    if(c.getHATELevel() > 3 && vVirg)
                         w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" shrieking rage ").toString());
                     else
-                    if(vVirg.booleanValue())
+                    if(vVirg)
                         w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" violent anger ").toString());
                     else
                         w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" sense of violation over the Thralls penetrating ").append(c.hisHer()).append(" ").append(hole).append(" ").toString());
                     if(c.getINJULevel() < 3)
                         w.append(t, "isn't enough to stop the pleasure from growing stronger and stronger.");
                     else
-                    if(c.getINJULevel() > 3 && aVirg.booleanValue())
+                    if(c.getINJULevel() > 3 && aVirg)
                     {
-                        if(w.tickle().booleanValue())
+                        if(w.tickle())
                             w.append(t, (new StringBuilder("is completely irrelevant in the face of ")).append(c.hisHer()).append(" extreme exhaustion.").toString());
                         else
                             w.append(t, "and broken bones aren't enough to drown out the pleasure.");
                     } else
-                    if(aVirg.booleanValue())
+                    if(aVirg)
                     {
-                        if(w.tickle().booleanValue())
+                        if(w.tickle())
                             w.append(t, (new StringBuilder("isn't enough to stop ")).append(c.hisHer()).append(" breathless moans from coming out.").toString());
                         else
                             w.append(t, (new StringBuilder("isn't enough to stop the pain of ")).append(c.hisHer()).append(" injuries from being overwhelmed by surging pleasure.").toString());
                     } else
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                         w.append(t, (new StringBuilder("isn't enough to stop ")).append(c.hisHer()).append(" laughter from growing whiny and desperate as the pleasure mounts.").toString());
                     else
                     if(c.getGender().equals("male"))
@@ -20575,12 +20575,12 @@ public class WorldState
                     else
                     if(c.getINJULevel() > 4)
                     {
-                        if(w.tickle().booleanValue())
+                        if(w.tickle())
                             w.append(t, (new StringBuilder(", even as ")).append(c.heShe()).append(" almost blacks out from exhaustion.  ").toString());
                         else
                             w.append(t, (new StringBuilder(", the sensations somehow bypassing the missing nerves from ")).append(c.hisHer()).append(" moral wounds.  ").toString());
                     } else
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                         w.append(t, (new StringBuilder(", ")).append(c.hisHer()).append(" movements weak and uncoordinated with exhaustion.  ").toString());
                     else
                         w.append(t, (new StringBuilder(", each movement causing a spike of pain to shoot through ")).append(c.hisHer()).append(" shattered limbs.  ").toString());
@@ -20614,11 +20614,11 @@ public class WorldState
                     if(c.getEXPOLevel() > 1)
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s clothes are badly torn and ").toString());
                     else
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s bare feet are being ruthlessly exploited by the Thralls, and ").toString());
                     else
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" has had ").append(c.hisHer()).append(" ").append(bottomDesc).append(" torn off ").append(c.hisHer()).append(" legs, and ").toString());
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                     {
                         if(confidence > 66)
                             w.append(t, (new StringBuilder(String.valueOf(c.heShe()))).append("'s forced to acknowledge that the tickling is starting to affect ").append(c.himHer()).append(".  ").toString());
@@ -20652,14 +20652,14 @@ public class WorldState
                 } else
                 if(c.getINJULevel() == 2)
                 {
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                     {
                         if(c.getPLEALevel() < 2)
                             w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" reels").toString());
                         else
                         if(c.getPLEALevel() > 2)
                         {
-                            if(cVirg.booleanValue())
+                            if(cVirg)
                                 w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s near-orgasmic pleasure is interrupted by a spike of unpleasant stimulation").toString());
                             else
                                 w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s orgasm is interrupted by a spike of unpleasant stimulation").toString());
@@ -20680,7 +20680,7 @@ public class WorldState
                         if(c.getEXPOLevel() > 2)
                         {
                             w.append(t, (new StringBuilder("The damage to ")).append(c.hisHer()).append(" clothes means that ").append(c.hisHer()).append(" reflexive movements threaten to expose everything").toString());
-                            if(!modest.booleanValue())
+                            if(!modest)
                                 w.append(t, " to the cameras");
                         } else
                         {
@@ -20693,7 +20693,7 @@ public class WorldState
                         else
                         if(c.getPLEALevel() > 2)
                         {
-                            if(cVirg.booleanValue())
+                            if(cVirg)
                                 w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s near-orgasmic pleasure is interrupted by a spike of intense pain").toString());
                             else
                                 w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s orgasm is interrupted by a spike of intense pain").toString());
@@ -20713,7 +20713,7 @@ public class WorldState
                         else
                         if(c.getEXPOLevel() > 2)
                         {
-                            if(modest.booleanValue())
+                            if(modest)
                                 w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" clothes are too damaged to hide the wounds").toString());
                             else
                                 w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" stripped, pitiful state is captured by the watching cameras").toString());
@@ -20727,7 +20727,7 @@ public class WorldState
                     else
                     if(c.getHATELevel() > 2)
                     {
-                        if(vVirg.booleanValue())
+                        if(vVirg)
                             w.append(t, (new StringBuilder(", and with ")).append(c.hisHer()).append(" Sexual Barrier broken, ").append(c.heShe()).append("'s especially vulnerable.").toString());
                         else
                             w.append(t, (new StringBuilder(", and with one of the Thralls fucking ")).append(c.hisHer()).append(" ").append(hole).append(" even as ").append(c.heShe()).append("'s tortured, ").append(c.hisHer()).append(" defeat is undeniable.").toString());
@@ -20738,9 +20738,9 @@ public class WorldState
                 } else
                 if(c.getINJULevel() == 3)
                 {
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                     {
-                        if(aVirg.booleanValue())
+                        if(aVirg)
                         {
                             if(confidence > 66)
                                 w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" has been stubbornly concealing just how much all the tickling has been affecting ").append(c.himHer()).append(", but the Thralls are starting to notice ").append(c.hisHer()).append(" inability to completely suppress ").append(c.hisHer()).append(" voice").toString());
@@ -20758,7 +20758,7 @@ public class WorldState
                         else
                             w.append(t, (new StringBuilder(String.valueOf(mainName))).append("'s voice comes out in whimpering giggles every time the Thralls tickle ").append(c.himHer()).append(".  ").append(c.HeShe()).append(" knows ").append(c.heShe()).append(" never had a chance").toString());
                     } else
-                    if(aVirg.booleanValue())
+                    if(aVirg)
                     {
                         if(confidence > 66)
                             w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" has been stubbornly concealing just how hurt ").append(c.heShe()).append(" is, but the Thralls can feel the way that ").append(c.hisHer()).append(" previously unyielding flesh is becoming soft under their fingers").toString());
@@ -20788,12 +20788,12 @@ public class WorldState
                     if(c.getHATELevel() < 3)
                         w.append(t, (new StringBuilder(", and even though ")).append(c.hisHer()).append(" Sexual Barrier remains intact, there are other ways for them to enjoy ").append(c.hisHer()).append(" body.  ").toString());
                     else
-                    if(c.getHATELevel() > 3 && vVirg.booleanValue())
+                    if(c.getHATELevel() > 3 && vVirg)
                         w.append(t, (new StringBuilder(", and ")).append(c.hisHer()).append(" sobs of rage do nothing to deter them from using ").append(c.himHer()).append(" as they please.  ").toString());
                     else
-                    if(vVirg.booleanValue())
+                    if(vVirg)
                     {
-                        if(w.tickle().booleanValue())
+                        if(w.tickle())
                             w.append(t, (new StringBuilder(", and with ")).append(c.hisHer()).append(" Sexual Barrier broken, ").append(c.heShe()).append(" feels especially vulnerable.  ").toString());
                         else
                             w.append(t, (new StringBuilder(", and with ")).append(c.hisHer()).append(" Sexual Barrier broken, they have multiple ways they might enjoy that fact.  ").toString());
@@ -20804,20 +20804,20 @@ public class WorldState
                     if(c.getEXPOLevel() < 3)
                         w.append(t, (new StringBuilder("They're tearing apart ")).append(c.hisHer()).append(" ").append(bottomDesc).append(" in the process").toString());
                     else
-                    if(c.getEXPOLevel() > 3 && modest.booleanValue())
+                    if(c.getEXPOLevel() > 3 && modest)
                         w.append(t, (new StringBuilder("They aren't hindered in the slightest by ")).append(c.hisHer()).append(" shredded ").append(bottomDesc).toString());
                     else
-                    if(modest.booleanValue())
+                    if(modest)
                         w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" lack of panties leaves ").append(c.himHer()).append(" especially vulnerable").toString());
                     else
                         w.append(t, "The abuse is being filmed by countless cameras");
                     if(c.getPLEALevel() < 3)
                         w.append(t, ".");
                     else
-                    if(c.getPLEALevel() > 3 && cVirg.booleanValue())
+                    if(c.getPLEALevel() > 3 && cVirg)
                         w.append(t, (new StringBuilder(", and the pleasurable spasms in ")).append(c.hisHer()).append(" body intensify as ").append(c.heShe()).append(" can't help but anticipate what they're about to do.").toString());
                     else
-                    if(cVirg.booleanValue())
+                    if(cVirg)
                         w.append(t, (new StringBuilder(", and ")).append(c.hisHer()).append(" fluid-soaked thighs tremble with approaching orgasm.").toString());
                     else
                         w.append(t, (new StringBuilder(", and ")).append(c.heShe()).append(" can't stop cumming as they stroke ").append(c.hisHer()).append(" ").append(organ).append(" at the same time.").toString());
@@ -20826,7 +20826,7 @@ public class WorldState
                 {
                     if(c.getHATELevel() < 4)
                     {
-                        if(w.tickle().booleanValue())
+                        if(w.tickle())
                             w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" cries out helplessly").toString());
                         else
                             w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" cries out in pain").toString());
@@ -20834,11 +20834,11 @@ public class WorldState
                     if(c.getHATELevel() > 4)
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" erupts with tendrils of Demonic energy").toString());
                     else
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" shrieks in helpless rage").toString());
                     else
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" shrieks in rage and pain").toString());
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                     {
                         if(confidence > 66)
                             w.append(t, (new StringBuilder(", still thrashing wildly as ")).append(c.heShe()).append("'s tickled, but too exhausted for it to do ").append(c.himHer()).append(" any good.  ").toString());
@@ -20879,7 +20879,7 @@ public class WorldState
                     else
                         w.append(t, (new StringBuilder(" and cause the remaining scraps of ")).append(c.hisHer()).append(" ").append(bottomDesc).append(" to shift so that they don't cover anything at all.").toString());
                 } else
-                if(w.tickle().booleanValue())
+                if(w.tickle())
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is completely out of breath from being forced to laugh so much, and a regular person would have passed out already.  However, ").append(c.hisHer()).append(" Chosen powers force ").append(c.himHer()).append(" to remain awake and alert, no matter how heavy ").append(c.hisHer()).append(" limbs feel or how much ").append(c.heShe()).append(" just wants to give up.").toString());
                 else
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" is being continually dealt wounds that ought to be fatal, but ").append(c.hisHer()).append(" Chosen powers don't permit ").append(c.himHer()).append(" to die or even pass out.  However, they do make it harder and harder for ").append(c.himHer()).append(" to defend ").append(c.himHer()).append("self.").toString());
@@ -20908,12 +20908,12 @@ public class WorldState
                     else
                     if(c.getINJULevel() > 1)
                     {
-                        if(w.tickle().booleanValue())
+                        if(w.tickle())
                             w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" subconsciously compensates for ").append(c.hisHer()).append(" feelings of helplessness by blaming others, and ").append(c.heShe()).append("'s ").toString());
                         else
                             w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s bleding from various wounds, putting ").append(c.himHer()).append(" in a desperate state of mind, and ").append(c.heShe()).append("'s ").toString());
                     } else
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                         w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s starting to get worried about how easy it seems to be for the Thralls to toy with ").append(c.himHer()).append(", and ").append(c.heShe()).append("'s ").toString());
                     else
                         w.append(t, (new StringBuilder("The pain of ")).append(c.hisHer()).append(" bruises fuels ").append(c.hisHer()).append(" anger, and ").append(c.heShe()).append("'s ").toString());
@@ -20932,7 +20932,7 @@ public class WorldState
                     else
                     if(c.getEXPOLevel() > 2)
                     {
-                        if(modest.booleanValue())
+                        if(modest)
                             w.append(t, (new StringBuilder("As ")).append(mainName).append(" tries to cover ").append(c.hisHer()).append(" stripped body, ").toString());
                         else
                             w.append(t, (new StringBuilder("As the Thralls film ")).append(mainName).append("'s stripped body, ").toString());
@@ -20952,14 +20952,14 @@ public class WorldState
                     else
                     if(c.getINJULevel() > 2)
                     {
-                        if(aVirg.booleanValue())
+                        if(aVirg)
                         {
-                            if(w.tickle().booleanValue())
+                            if(w.tickle())
                                 w.append(t, "Showing obvious signs of exhaustion, ");
                             else
                                 w.append(t, (new StringBuilder("With the pain of ")).append(c.hisHer()).append(" severe injuries, ").toString());
                         } else
-                        if(w.tickle().booleanValue())
+                        if(w.tickle())
                             w.append(t, (new StringBuilder("Even so, ")).append(c.heShe()).append(" still ends up squealing with laughter whenever they tickle ").append(c.himHer()).append(", and ").toString());
                         else
                         if(c.getGender().equals("male"))
@@ -20967,7 +20967,7 @@ public class WorldState
                         else
                             w.append(t, (new StringBuilder("Enduring a Thrall's cock up ")).append(c.hisHer()).append(" ass, ").toString());
                     } else
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                         w.append(t, "Reflexively flinching away from every touch, ");
                     else
                         w.append(t, (new StringBuilder("With ")).append(c.hisHer()).append(" fight-or-flight response stimulated by the cuts covering ").append(c.hisHer()).append(" body, ").toString());
@@ -20976,7 +20976,7 @@ public class WorldState
                     else
                     if(c.getPLEALevel() > 2)
                     {
-                        if(cVirg.booleanValue())
+                        if(cVirg)
                             w.append(t, (new StringBuilder("the way ")).append(c.hisHer()).append(" nerves have been overstimulated by pleasure makes it impossible for ").append(c.himHer()).append(" to shut everything out and calm down.").toString());
                         else
                             w.append(t, (new StringBuilder("the countless hands stroking ")).append(c.hisHer()).append(" ").append(organ).append(" still bring ").append(c.himHer()).append(" to another orgasm.").toString());
@@ -20990,28 +20990,28 @@ public class WorldState
                     if(c.getINJULevel() < 3)
                         w.append(t, (new StringBuilder("Unable to contain ")).append(c.hisHer()).append(" emotions anymore, ").toString());
                     else
-                    if(c.getINJULevel() > 3 && aVirg.booleanValue())
+                    if(c.getINJULevel() > 3 && aVirg)
                     {
-                        if(w.tickle().booleanValue())
+                        if(w.tickle())
                             w.append(t, (new StringBuilder("Desperately struggling against ")).append(c.hisHer()).append(" overwhelming exhaustion, ").toString());
                         else
                             w.append(t, (new StringBuilder("Desperately struggling despite ")).append(c.hisHer()).append(" shattered body, ").toString());
                     } else
-                    if(aVirg.booleanValue())
+                    if(aVirg)
                     {
-                        if(w.tickle().booleanValue())
+                        if(w.tickle())
                             w.append(t, "Gasping and moaning with exhaustion, ");
                         else
                             w.append(t, (new StringBuilder("Made desperate by ")).append(c.hisHer()).append(" serious wounds, ").toString());
                     } else
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                         w.append(t, "Gasping with unwilling laughter, ");
                     else
                     if(c.getGender().equals("male"))
                         w.append(t, (new StringBuilder("Made desperate by the pain from the Thralls stomping on ")).append(c.hisHer()).append(" testicles, ").toString());
                     else
                         w.append(t, (new StringBuilder("Desperately struggling against the Thrall fucking ")).append(c.himHer()).append(" up the ass, ").toString());
-                    if(vVirg.booleanValue())
+                    if(vVirg)
                     {
                         if(morality > 66)
                             w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" lashes out, paying less mind than ").append(c.heShe()).append(" should to any innocents who might be close enough to get hurt.  ").toString());
@@ -21034,20 +21034,20 @@ public class WorldState
                     if(c.getPLEALevel() < 3)
                         w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" just wants this all to be over").toString());
                     else
-                    if(c.getPLEALevel() > 3 && cVirg.booleanValue())
+                    if(c.getPLEALevel() > 3 && cVirg)
                         w.append(t, (new StringBuilder(String.valueOf(c.HisHer()))).append(" body is uncontrollably writhing in pleasure, and ").append(c.hisHer()).append(" mind has been affected too").toString());
                     else
-                    if(cVirg.booleanValue())
+                    if(cVirg)
                         w.append(t, (new StringBuilder("The pleasure has left ")).append(c.himHer()).append(" incapable of thinking straight").toString());
                     else
                         w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append("'s already cumming again").toString());
                     if(c.getEXPOLevel() < 3)
                         w.append(t, ".");
                     else
-                    if(c.getEXPOLevel() > 3 && modest.booleanValue())
+                    if(c.getEXPOLevel() > 3 && modest)
                         w.append(t, (new StringBuilder(", ")).append(c.heShe()).append(" has practically forgotten just how exposed ").append(c.hisHer()).append(" body is.").toString());
                     else
-                    if(modest.booleanValue())
+                    if(modest)
                         w.append(t, (new StringBuilder(", ")).append(c.heShe()).append(" can't even muster the composure to cover ").append(c.hisHer()).append(" torn ").append(bottomDesc).append(" and maintain some level of modesty.").toString());
                     else
                         w.append(t, (new StringBuilder(", and ")).append(c.heShe()).append(" barely notices when ").append(c.hisHer()).append(" bare legs are forced wide apart for the benefit of the cameras.").toString());
@@ -21066,12 +21066,12 @@ public class WorldState
                     else
                     if(c.getINJULevel() > 4)
                     {
-                        if(w.tickle().booleanValue())
+                        if(w.tickle())
                             w.append(t, ", struggling for breath.  ");
                         else
                             w.append(t, (new StringBuilder(", barely even acknowledging the mortal wounds covering ")).append(c.hisHer()).append(" body.  ").toString());
                     } else
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                         w.append(t, ", twitching wildly at the slightest touch.  ");
                     else
                         w.append(t, (new StringBuilder(", barely even acknowledging ")).append(c.hisHer()).append(" shattered body.  ").toString());
@@ -21096,7 +21096,7 @@ public class WorldState
                 w.append(t, "\n\n");
             }
             c.say(t, "\"");
-            if(c.dissociated.booleanValue())
+            if(c.dissociated)
             {
                 Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SWOON, Project.Emotion.SWOON);
                 c.say(t, "...");
@@ -21107,7 +21107,7 @@ public class WorldState
                 {
                     if(variant == 0)
                     {
-                        if(c.getPLEALevel() < 3 || cVirg.booleanValue())
+                        if(c.getPLEALevel() < 3 || cVirg)
                         {
                             Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.STRUGGLE, Project.Emotion.ANGER);
                             c.say(t, "Ergh, no, take it out!");
@@ -21120,24 +21120,24 @@ public class WorldState
                     if(variant == 1)
                     {
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
-                        if(c.getHATELevel() < 3 || vVirg.booleanValue())
+                        if(c.getHATELevel() < 3 || vVirg)
                             c.say(t, "Need to... hold... aaah, ah, I'm-");
                         else
                             c.say(t, "P-Pull out or I'll- ah, ah, nnnaaah!");
                     } else
                     if(variant == 2)
                     {
-                        if(w.tickle().booleanValue())
+                        if(w.tickle())
                         {
                             Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
-                            if(c.getHATELevel() < 3 || vVirg.booleanValue())
+                            if(c.getHATELevel() < 3 || vVirg)
                                 c.say(t, "Hahah, ahahah, stop, don't touch meee!");
                             else
                                 c.say(t, "Ahahah, no, not while you're insiiide, hahahahah!");
                         } else
                         {
                             Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
-                            if(c.getHATELevel() < 3 || vVirg.booleanValue())
+                            if(c.getHATELevel() < 3 || vVirg)
                                 c.say(t, "Ah!  No!  No more!");
                             else
                                 c.say(t, "Agh!  Ow!  No, no, take it out!");
@@ -21146,17 +21146,17 @@ public class WorldState
                     if(variant == 3)
                     {
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                        if(c.getHATELevel() < 3 || vVirg.booleanValue())
+                        if(c.getHATELevel() < 3 || vVirg)
                             c.say(t, "Don't make me join in this disgusting stuff...");
                         else
                             c.say(t, "You'd better pull out...");
                     } else
-                    if(loved.booleanValue())
+                    if(loved)
                     {
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                         c.say(t, "No!  Leave them alone!");
                     } else
-                    if(hated.booleanValue())
+                    if(hated)
                     {
                         if(morality > 66)
                         {
@@ -21182,12 +21182,12 @@ public class WorldState
                 {
                     if(variant == 0)
                     {
-                        if(c.getINJULevel() < 3 || aVirg.booleanValue())
+                        if(c.getINJULevel() < 3 || aVirg)
                         {
                             Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.STRUGGLE, Project.Emotion.ANGER);
                             c.say(t, "I won't... give in...!");
                         } else
-                        if(w.tickle().booleanValue())
+                        if(w.tickle())
                         {
                             Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
                             c.say(t, "Ahahah, gaaah, take it ooout, hahahahah!");
@@ -21205,19 +21205,19 @@ public class WorldState
                     if(variant == 1)
                     {
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
-                        if(c.getINJULevel() < 3 || aVirg.booleanValue())
+                        if(c.getINJULevel() < 3 || aVirg)
                             c.say(t, "D-Don't touch me theeere!");
                         else
-                        if(w.tickle().booleanValue())
+                        if(w.tickle())
                             c.say(t, "Ahahah, no, no, I don't want to- naaahahahah!");
                         else
                             c.say(t, "This... This shouldn't... feel goood...!");
                     } else
                     if(variant == 2)
                     {
-                        if(w.tickle().booleanValue())
+                        if(w.tickle())
                         {
-                            if(c.getPLEALevel() < 3 || cVirg.booleanValue())
+                            if(c.getPLEALevel() < 3 || cVirg)
                             {
                                 Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.SHAME);
                                 c.say(t, "Ahah... ahah... why can't I...?");
@@ -21227,7 +21227,7 @@ public class WorldState
                                 c.say(t, "Ahahah, nooo, not while I'm- Hahahah, aaahnnn!");
                             }
                         } else
-                        if(c.getPLEALevel() < 3 || cVirg.booleanValue())
+                        if(c.getPLEALevel() < 3 || cVirg)
                         {
                             Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
                             c.say(t, "Ow...  Why...  Why can't I beat this...?");
@@ -21239,7 +21239,7 @@ public class WorldState
                     } else
                     if(variant == 3)
                     {
-                        if(c.getPLEALevel() < 3 || cVirg.booleanValue())
+                        if(c.getPLEALevel() < 3 || cVirg)
                         {
                             Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                             c.say(t, "I won't play along!");
@@ -21249,12 +21249,12 @@ public class WorldState
                             c.say(t, "I won't... nnn... no, not there...!");
                         }
                     } else
-                    if(loved.booleanValue())
+                    if(loved)
                     {
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.ANGER);
                         c.say(t, "They don't deserve this!");
                     } else
-                    if(hated.booleanValue())
+                    if(hated)
                     {
                         if(morality > 66)
                         {
@@ -21278,7 +21278,7 @@ public class WorldState
                 } else
                 if(variant == 0)
                 {
-                    if(c.getEXPOLevel() < 3 || modest.booleanValue())
+                    if(c.getEXPOLevel() < 3 || modest)
                     {
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                         c.say(t, "Y-You think I'll be bothered by getting stripped when you're already doing this!?");
@@ -21290,7 +21290,7 @@ public class WorldState
                 } else
                 if(variant == 1)
                 {
-                    if(c.getEXPOLevel() < 3 || modest.booleanValue())
+                    if(c.getEXPOLevel() < 3 || modest)
                     {
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.LEWD);
                         c.say(t, "I won't let you- Hng!?  Ah, ah, no, stooop!");
@@ -21302,15 +21302,15 @@ public class WorldState
                 } else
                 if(variant == 2)
                 {
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                     {
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
-                        if(c.getEXPOLevel() < 3 || modest.booleanValue())
+                        if(c.getEXPOLevel() < 3 || modest)
                             c.say(t, "Hmph...  Ngah!?  Hahahahah, aaagh!");
                         else
                             c.say(t, "Aaahahah, no, no, not my feeet!");
                     } else
-                    if(c.getEXPOLevel() < 3 || modest.booleanValue())
+                    if(c.getEXPOLevel() < 3 || modest)
                     {
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                         c.say(t, "Hmph...  Ngah, ow, ow, no, not there!");
@@ -21322,12 +21322,12 @@ public class WorldState
                 } else
                 if(variant == 3)
                 {
-                    if(c.getINJULevel() < 3 || aVirg.booleanValue())
+                    if(c.getINJULevel() < 3 || aVirg)
                     {
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.ANGER);
                         c.say(t, "Ugh, leave me alone...");
                     } else
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                     {
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
                         c.say(t, "Hahah, ahahah, j-just stop, stop it already!  Hahahahah!");
@@ -21337,12 +21337,12 @@ public class WorldState
                         c.say(t, "Just- ow!  J-Just stop!");
                     }
                 } else
-                if(loved.booleanValue())
+                if(loved)
                 {
                     Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.FEAR);
                     c.say(t, "Come on, focus on me instead!");
                 } else
-                if(hated.booleanValue())
+                if(hated)
                 {
                     if(morality > 66)
                     {
@@ -21370,7 +21370,7 @@ public class WorldState
                 {
                     if(variant == 0)
                     {
-                        if(c.getPLEALevel() < 3 || cVirg.booleanValue())
+                        if(c.getPLEALevel() < 3 || cVirg)
                         {
                             Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.SHAME);
                             c.say(t, "Ugh, this is disgusting...");
@@ -21383,24 +21383,24 @@ public class WorldState
                     if(variant == 1)
                     {
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
-                        if(c.getHATELevel() < 3 || vVirg.booleanValue())
+                        if(c.getHATELevel() < 3 || vVirg)
                             c.say(t, "Aaah, d-don't- Mmf!  Nn nn!");
                         else
                             c.say(t, "Aaah, no, I'm gonna breaaak!");
                     } else
                     if(variant == 2)
                     {
-                        if(w.tickle().booleanValue())
+                        if(w.tickle())
                         {
                             Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
-                            if(c.getHATELevel() < 3 || vVirg.booleanValue())
+                            if(c.getHATELevel() < 3 || vVirg)
                                 c.say(t, "Ahahah, w-wait, don't tickle me with your- Ahahahahah!");
                             else
                                 c.say(t, "Ahahah, w-wait, don't put it- Agh!  Ahahahah!");
                         } else
                         if(c.getGender().equals("male"))
                         {
-                            if(c.getHATELevel() < 3 || vVirg.booleanValue())
+                            if(c.getHATELevel() < 3 || vVirg)
                             {
                                 Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                                 c.say(t, "They're all... so much bigger...");
@@ -21412,7 +21412,7 @@ public class WorldState
                         } else
                         {
                             Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.LEWD);
-                            if(c.getHATELevel() < 3 || vVirg.booleanValue())
+                            if(c.getHATELevel() < 3 || vVirg)
                                 c.say(t, "They're... getting it all over me...");
                             else
                                 c.say(t, "Urgh... They're filling me up...");
@@ -21420,7 +21420,7 @@ public class WorldState
                     } else
                     if(variant == 3)
                     {
-                        if(c.getHATELevel() < 3 || vVirg.booleanValue())
+                        if(c.getHATELevel() < 3 || vVirg)
                         {
                             Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
                             c.say(t, "Nn...!  Gh!");
@@ -21430,12 +21430,12 @@ public class WorldState
                             c.say(t, "Ugh!  Not... inside...!  Mmf!");
                         }
                     } else
-                    if(loved.booleanValue())
+                    if(loved)
                     {
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.FEAR);
                         c.say(t, "I don't want to see what's happening to them...");
                     } else
-                    if(hated.booleanValue())
+                    if(hated)
                     {
                         if(morality > 66)
                         {
@@ -21461,12 +21461,12 @@ public class WorldState
                 {
                     if(variant == 0)
                     {
-                        if(c.getINJULevel() < 3 || aVirg.booleanValue())
+                        if(c.getINJULevel() < 3 || aVirg)
                         {
                             Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                             c.say(t, "Ah!  It's going inside...!");
                         } else
-                        if(w.tickle().booleanValue())
+                        if(w.tickle())
                         {
                             Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
                             c.say(t, "Ahah!  Ahahah, no, i-it's too deep, I'm- Hahahahahah!");
@@ -21484,10 +21484,10 @@ public class WorldState
                     if(variant == 1)
                     {
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
-                        if(c.getINJULevel() < 3 || aVirg.booleanValue())
+                        if(c.getINJULevel() < 3 || aVirg)
                             c.say(t, "I can't... ah... can't resist...!");
                         else
-                        if(w.tickle().booleanValue())
+                        if(w.tickle())
                             c.say(t, "Ahahah, ahn, if you tickle me at the same time, I-I can't- Hahahahah, oooh!");
                         else
                         if(c.getGender().equals("male"))
@@ -21498,28 +21498,28 @@ public class WorldState
                     if(variant == 2)
                     {
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
-                        if(w.tickle().booleanValue())
+                        if(w.tickle())
                         {
-                            if(c.getPLEALevel() < 3 || cVirg.booleanValue())
+                            if(c.getPLEALevel() < 3 || cVirg)
                                 c.say(t, "Ahah, ahahah, wh-where are you touching- Hahahahah!");
                             else
                                 c.say(t, "Aaahahah, nn, no, I'm going to- Hahahahah, ah, ah, aaah!");
                         } else
                         if(c.getGender().equals("male"))
                         {
-                            if(c.getPLEALevel() < 3 || cVirg.booleanValue())
+                            if(c.getPLEALevel() < 3 || cVirg)
                                 c.say(t, "It... hurts... but...!");
                             else
                                 c.say(t, "Ow, ooow, no, it's coming ooout!");
                         } else
-                        if(c.getPLEALevel() < 3 || cVirg.booleanValue())
+                        if(c.getPLEALevel() < 3 || cVirg)
                             c.say(t, "Ugh...!  Ugh!  Deep...!");
                         else
                             c.say(t, "Ugh!  Ugh!  Nooo, even from my buuutt!");
                     } else
                     if(variant == 3)
                     {
-                        if(c.getPLEALevel() < 3 || cVirg.booleanValue())
+                        if(c.getPLEALevel() < 3 || cVirg)
                         {
                             Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.STRUGGLE, Project.Emotion.SHAME);
                             c.say(t, "Have to... ignore it...!");
@@ -21529,12 +21529,12 @@ public class WorldState
                             c.say(t, "Ah!  Th-They're... watchiiing!");
                         }
                     } else
-                    if(loved.booleanValue())
+                    if(loved)
                     {
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.FEAR);
                         c.say(t, "I know this is even harder for them...");
                     } else
-                    if(hated.booleanValue())
+                    if(hated)
                     {
                         if(morality > 66)
                         {
@@ -21558,7 +21558,7 @@ public class WorldState
                 } else
                 if(variant == 0)
                 {
-                    if(c.getEXPOLevel() < 3 || modest.booleanValue())
+                    if(c.getEXPOLevel() < 3 || modest)
                     {
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                         c.say(t, "Let go of me!");
@@ -21571,24 +21571,24 @@ public class WorldState
                 if(variant == 1)
                 {
                     Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.FEAR);
-                    if(c.getEXPOLevel() < 3 || modest.booleanValue())
+                    if(c.getEXPOLevel() < 3 || modest)
                         c.say(t, "I'm... nn... a-again...  ah, wooow!");
                     else
                         c.say(t, "Everyone is... aaah... w-watchiiing...!");
                 } else
                 if(variant == 2)
                 {
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                     {
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.FEAR);
-                        if(c.getEXPOLevel() < 3 || modest.booleanValue())
+                        if(c.getEXPOLevel() < 3 || modest)
                             c.say(t, "Ahahah, i-if they strip me, it'll make it even easier to- Hahahahah!");
                         else
                             c.say(t, "Ahahah, nooo, I-I'm completely...!");
                     } else
                     {
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.STRUGGLE, Project.Emotion.FEAR);
-                        if(c.getEXPOLevel() < 3 || modest.booleanValue())
+                        if(c.getEXPOLevel() < 3 || modest)
                             c.say(t, "Ergh!  Even my clothes...!");
                         else
                             c.say(t, "Ergh!  Let... go...!");
@@ -21596,12 +21596,12 @@ public class WorldState
                 } else
                 if(variant == 3)
                 {
-                    if(c.getINJULevel() < 3 || aVirg.booleanValue())
+                    if(c.getINJULevel() < 3 || aVirg)
                     {
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.SHAME);
                         c.say(t, "Don't!");
                     } else
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                     {
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.FEAR);
                         c.say(t, "Ahah, ahahah, dooon't!");
@@ -21616,12 +21616,12 @@ public class WorldState
                         c.say(t, "Nn!  Nn!  Stop... this...!");
                     }
                 } else
-                if(loved.booleanValue())
+                if(loved)
                 {
                     Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
                     c.say(t, "I need to... become stronger... for them...!");
                 } else
-                if(hated.booleanValue())
+                if(hated)
                 {
                     if(morality > 66)
                     {
@@ -21647,7 +21647,7 @@ public class WorldState
             {
                 if(variant == 0)
                 {
-                    if(c.getPLEALevel() < 3 || cVirg.booleanValue())
+                    if(c.getPLEALevel() < 3 || cVirg)
                     {
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
                         c.say(t, "Mmf, mmf...  Mm...");
@@ -21660,24 +21660,24 @@ public class WorldState
                 if(variant == 1)
                 {
                     Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.SHAME);
-                    if(c.getHATELevel() < 3 || vVirg.booleanValue())
+                    if(c.getHATELevel() < 3 || vVirg)
                         c.say(t, "They're... rubbing... aaah...!");
                     else
                         c.say(t, "Aaahn...!  A-Ah, no... how could I enjoy something like this...?");
                 } else
                 if(variant == 2)
                 {
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                     {
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
-                        if(c.getHATELevel() < 3 || vVirg.booleanValue())
+                        if(c.getHATELevel() < 3 || vVirg)
                             c.say(t, "Ahahah, ahah, th-they're touching my- Nn!  Hahahah!");
                         else
                             c.say(t, "Ah!  Ahah!  Ahah!  It's... in...!  Ahah!");
                     } else
                     {
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
-                        if(c.getHATELevel() < 3 || vVirg.booleanValue())
+                        if(c.getHATELevel() < 3 || vVirg)
                             c.say(t, "Nn!  So... rough...!");
                         else
                             c.say(t, "Y-You're... ripping me in half...!");
@@ -21686,17 +21686,17 @@ public class WorldState
                 if(variant == 3)
                 {
                     Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.LEWD);
-                    if(c.getHATELevel() < 3 || vVirg.booleanValue())
+                    if(c.getHATELevel() < 3 || vVirg)
                         c.say(t, "Um... P-Please... use my mouth...  Mm...");
                     else
                         c.say(t, "Nn... O-Okay... I'm moving...");
                 } else
-                if(loved.booleanValue())
+                if(loved)
                 {
                     Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.FEAR);
                     c.say(t, "It's my fault that this is happening to them...");
                 } else
-                if(hated.booleanValue())
+                if(hated)
                 {
                     if(morality > 66)
                     {
@@ -21722,12 +21722,12 @@ public class WorldState
             {
                 if(variant == 0)
                 {
-                    if(c.getINJULevel() < 3 || aVirg.booleanValue())
+                    if(c.getINJULevel() < 3 || aVirg)
                     {
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
                         c.say(t, "Mm.  Mm...");
                     } else
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                     {
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.SHAME);
                         c.say(t, "Hahahahammf!  Mm mm mm mm!");
@@ -21740,10 +21740,10 @@ public class WorldState
                 if(variant == 1)
                 {
                     Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
-                    if(c.getINJULevel() < 3 || aVirg.booleanValue())
+                    if(c.getINJULevel() < 3 || aVirg)
                         c.say(t, "Nooo... my body is...");
                     else
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                         c.say(t, "Ahahah, p-please, n-not while tickling me, i-it's going to make me- Aaaahahah, aaah!");
                     else
                         c.say(t, "Ah, p-please, not so rough, it's- Ooow, nooo!");
@@ -21751,21 +21751,21 @@ public class WorldState
                 if(variant == 2)
                 {
                     Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
-                    if(w.tickle().booleanValue())
+                    if(w.tickle())
                     {
-                        if(c.getPLEALevel() < 3 || cVirg.booleanValue())
+                        if(c.getPLEALevel() < 3 || cVirg)
                             c.say(t, "Hahah, ahahah, this shouldn't, ahah, feel good, hahahah!");
                         else
                             c.say(t, "Hahah, ahahah, no, I don't want to feel goood, hahahahah!");
                     } else
-                    if(c.getPLEALevel() < 3 || cVirg.booleanValue())
+                    if(c.getPLEALevel() < 3 || cVirg)
                         c.say(t, "Ah, please!  Please, stop trying to make me feel good!");
                     else
                         c.say(t, "No, no, nooo, I don't want this to feel goood!");
                 } else
                 if(variant == 3)
                 {
-                    if(c.getPLEALevel() < 3 || cVirg.booleanValue())
+                    if(c.getPLEALevel() < 3 || cVirg)
                     {
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.FEAR);
                         c.say(t, "Please... go easy on me...");
@@ -21775,12 +21775,12 @@ public class WorldState
                         c.say(t, "Aaah, pleeease, not theeere!  Mmm!");
                     }
                 } else
-                if(loved.booleanValue())
+                if(loved)
                 {
                     Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                     c.say(t, "P-Please, I'll do anything, but leave them alone!");
                 } else
-                if(hated.booleanValue())
+                if(hated)
                 {
                     if(morality > 66)
                     {
@@ -21804,7 +21804,7 @@ public class WorldState
             } else
             if(variant == 0)
             {
-                if(c.getEXPOLevel() < 3 || modest.booleanValue())
+                if(c.getEXPOLevel() < 3 || modest)
                 {
                     Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
                     c.say(t, "Mmf!?  Nn...");
@@ -21816,7 +21816,7 @@ public class WorldState
             } else
             if(variant == 1)
             {
-                if(c.getEXPOLevel() < 3 || modest.booleanValue())
+                if(c.getEXPOLevel() < 3 || modest)
                 {
                     Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
                     c.say(t, "Nn... I can't... do anything...");
@@ -21828,17 +21828,17 @@ public class WorldState
             } else
             if(variant == 2)
             {
-                if(w.tickle().booleanValue())
+                if(w.tickle())
                 {
                     Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.FEAR);
-                    if(c.getEXPOLevel() < 3 || modest.booleanValue())
+                    if(c.getEXPOLevel() < 3 || modest)
                         c.say(t, "Ahah, ahahah, th-they're going to see...!");
                     else
                         c.say(t, "Ahahah, nooo, don't loook!");
                 } else
                 {
                     Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
-                    if(c.getEXPOLevel() < 3 || modest.booleanValue())
+                    if(c.getEXPOLevel() < 3 || modest)
                         c.say(t, "I don't want... this...");
                     else
                         c.say(t, "I'm... completely defeated...");
@@ -21846,12 +21846,12 @@ public class WorldState
             } else
             if(variant == 3)
             {
-                if(c.getINJULevel() < 3 || aVirg.booleanValue())
+                if(c.getINJULevel() < 3 || aVirg)
                 {
                     Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                     c.say(t, "Ah, I-I, um, really- AH!");
                 } else
-                if(w.tickle().booleanValue())
+                if(w.tickle())
                 {
                     Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
                     c.say(t, "Ahahah, hah, nnn, hahahahah, nooo!");
@@ -21861,12 +21861,12 @@ public class WorldState
                     c.say(t, "I'm... I'm doing my best, so...");
                 }
             } else
-            if(loved.booleanValue())
+            if(loved)
             {
                 Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                 c.say(t, "A-Are you two alright!?");
             } else
-            if(hated.booleanValue())
+            if(hated)
             {
                 if(morality > 66)
                 {
@@ -21965,7 +21965,7 @@ public class WorldState
     {
         int durations[] = new int[c.length];
         for(int i = 0; i < c.length; i++)
-            if(c[i].isSurrounded().booleanValue())
+            if(c[i].isSurrounded())
                 durations[i] = c[i].getSurroundDuration();
             else
             if(c[i].getFEAROpening(this) + c[i].getDISGOpening() + c[i].getPAINOpening() + c[i].getSHAMOpening(this) >= c[i].getDefenseLevel())
@@ -21985,7 +21985,7 @@ public class WorldState
 
     public void toggleTickle()
     {
-        tickleOn = Boolean.valueOf(!tickleOn.booleanValue());
+        tickleOn = Boolean.valueOf(!tickleOn);
     }
 
     public Boolean tickle()
@@ -22119,7 +22119,7 @@ public class WorldState
                     getCast()[i].dissociationReq = 10;
                 }
 
-            if(campaign.booleanValue())
+            if(campaign)
             {
                 if(loopChosen != null)
                 {
@@ -22321,7 +22321,7 @@ public class WorldState
                     {
                         conquered[i].forsakenRelations = new Forsaken.Relationship[conquered[i].others.length];
                         for(int j = 0; j < conquered[i].others.length; j++)
-                            if(conquered[i].others[j].equals(conquered[i].firstPartner).booleanValue() || conquered[i].others[j].equals(conquered[i].secondPartner).booleanValue())
+                            if(conquered[i].others[j].equals(conquered[i].firstPartner) || conquered[i].others[j].equals(conquered[i].secondPartner))
                                 conquered[i].forsakenRelations[j] = Forsaken.Relationship.PARTNER;
 
                     } else
@@ -22337,14 +22337,14 @@ public class WorldState
                             checkedForsaken[j] = getHarem()[j];
                         else
                             checkedForsaken[j] = sacrificed[j - getHarem().length];
-                        if(checkedForsaken[j].equals(conquered[i].firstPartner).booleanValue() || checkedForsaken[j].equals(conquered[i].secondPartner).booleanValue())
+                        if(checkedForsaken[j].equals(conquered[i].firstPartner) || checkedForsaken[j].equals(conquered[i].secondPartner))
                         {
                             Boolean alreadyThere = Boolean.valueOf(false);
                             for(int k = 0; k < conquered[i].others.length; k++)
-                                if(conquered[i].others[k].equals(checkedForsaken[j]).booleanValue())
+                                if(conquered[i].others[k].equals(checkedForsaken[j]))
                                     alreadyThere = Boolean.valueOf(true);
 
-                            if(!alreadyThere.booleanValue())
+                            if(!alreadyThere)
                             {
                                 Forsaken newOthers[] = new Forsaken[conquered[i].others.length + 1];
                                 Forsaken.Relationship newRelationships[] = new Forsaken.Relationship[conquered[i].forsakenRelations.length + 1];
@@ -22427,7 +22427,7 @@ public class WorldState
                 techs[i] = new Tech();
                 techs[i].initialize(i, this);
                 techs[i].assignTooltip(i, this);
-                if(i < oldTechs.length && oldTechs[i].isOwned().booleanValue())
+                if(i < oldTechs.length && oldTechs[i].isOwned())
                     techs[i].owned = Boolean.valueOf(true);
             }
 
@@ -22440,7 +22440,7 @@ public class WorldState
         else
         if(recordedCommanders.length > 0 && recordedCommanders[0].length < commanderUpgradesThisVersion)
             commanderUpdate = Boolean.valueOf(true);
-        if(commanderUpdate.booleanValue())
+        if(commanderUpdate)
         {
             Boolean newUpgrades[] = new Boolean[commanderUpgradesThisVersion];
             Boolean newRecordedCommanders[][] = new Boolean[recordedCommanders.length][commanderUpgradesThisVersion];
@@ -22570,7 +22570,7 @@ public class WorldState
 
             vignetteSeen = newVignettes;
         }
-        if(adjusted.booleanValue())
+        if(adjusted)
         {
             if(day > 1)
             {
@@ -22628,7 +22628,7 @@ public class WorldState
 
     public boolean getRepeatShift()
     {
-        return repeatShift.booleanValue();
+        return repeatShift;
     }
 
     public void changeFemaleShift()
@@ -22648,7 +22648,7 @@ public class WorldState
 
     public void changeRepeatShift()
     {
-        repeatShift = Boolean.valueOf(!repeatShift.booleanValue());
+        repeatShift = Boolean.valueOf(!repeatShift);
     }
 
     public void toggleGenderRandomness()
@@ -22829,7 +22829,7 @@ public class WorldState
 
     public void archiveCommander(int day)
     {
-        if(!cheater.booleanValue())
+        if(!cheater)
         {
             Boolean difference = Boolean.valueOf(false);
             if(recordedCommanders.length < day - 1)
@@ -22842,7 +22842,7 @@ public class WorldState
                         difference = Boolean.valueOf(true);
 
             }
-            if(difference.booleanValue())
+            if(difference)
             {
                 Boolean newRecordedCommanders[][] = new Boolean[day - 1][bodyStatus.length];
                 for(int i = 0; i < day - 2; i++)
@@ -22872,12 +22872,12 @@ public class WorldState
                 onTrack = Boolean.valueOf(false);
             }
         } else
-        if(!tutorial.booleanValue())
+        if(!tutorial)
         {
             newArray = Boolean.valueOf(true);
             onTrack = Boolean.valueOf(false);
         }
-        if(newArray.booleanValue())
+        if(newArray)
         {
             int newActions[] = new int[currentAction + 1];
             for(int i = 0; i < currentAction; i++)
@@ -22906,7 +22906,7 @@ public class WorldState
 
     public Boolean writePossible()
     {
-        if(currentAction <= commentary.length && commentaryWrite.booleanValue())
+        if(currentAction <= commentary.length && commentaryWrite)
             return Boolean.valueOf(true);
         else
             return Boolean.valueOf(false);
@@ -22914,8 +22914,8 @@ public class WorldState
 
     public void readCommentary(JTextPane t)
     {
-        if(!tutorial.booleanValue())
-            if(commentaryRead.booleanValue() && onTrack.booleanValue())
+        if(!tutorial)
+            if(commentaryRead && onTrack)
             {
                 if(commentary.length > currentAction)
                     grayAppend(t, (new StringBuilder("\n\n")).append(commentary[currentAction]).toString());
@@ -22929,7 +22929,7 @@ public class WorldState
 
     public void truncateCommentary(int lastAction)
     {
-        if(!tutorial.booleanValue())
+        if(!tutorial)
         {
             onTrack = Boolean.valueOf(false);
             String newCommentary[] = new String[lastAction];
@@ -23144,7 +23144,7 @@ public class WorldState
             "Sliming is more effective against more naive Chosen, especially those who have come to associate battle with sexual pleasure.", "Threatening allies is more effective against more compassionate Chosen, especially those whose consciences aren't clean.", "It isn't possible to raise a circumstance by more than one level with a single instance of damage.  This limitation does not apply to trauma.", "Each of the actions the Chosen can perform in battle is linked with one of the four vulnerabilities.  The Chosen are better at performing actions associated with their greater vulnerabilities.", "Chosen who are surrounded or captured do not contribute to extermination progress until they escape.", "When a surrounded Chosen uses a tactic that decreases the effectiveness of Grind, Caress, Pummel, or Humiliate, the damage from that source is decreased to 3/5.  When both tactics against the source are used at once, the damage becomes 2/5.", "The main benefit of Suppressor-class upgrades is that they ignore defensive tactics.  Against Chosen who have not yet begun to use any defensive tactics, a Commander without Suppressor-class upgrades can actually more effective.", "When two of the Chosen have a hostile interaction with each other, Evil Energy is generated, especially when the interaction turns them from friends into enemies.", "Any action that deals circumstance damage also deals all four types of trauma damage, especially the one corresponding to the circumstance.", "An action's tooltip lists its damage types in descending order of how much is dealt.", 
             "From a gameplay perspective, there are no differences between male, female, and futanari Chosen.", "It isn't possible for one of the Chosen to use \"Slaughter,\" \"Fantasize,\" or \"Striptease\" twice in a row.", "Even when \"Slaughter\" causes a surround duration to go below 0, it will never cause a surrounded Chosen to escape on the same turn.", "Because all circumstance damage is penalized by the highest level among the circumstance damage types, it's harder to raise other circumstance damage types after the first.", "When your Commander has no extra captures remaining, the extra capture depletion from Chosen using \"Detonate\" does nothing.", "\"Striptease\" decreases damage to surrounded Chosen in the short term, but the fact that it increases the user's EXPO level means that it can increase the overall damage taken during the battle.", "Even after the critical trauma level is reached, a third-tier Vulnerability is not actually broken until the Chosen uses the unlocked move for the first time.", "When two Chosen are targeted by the same defiler action, they both take greatly increased damage, but as soon as one of them escapes, the other does too."
         });
-        if(tickleOn.booleanValue())
+        if(tickleOn)
         {
             tips[14] = "The traumas are FEAR, DISG, TICK, and SHAM.  The circumstances are HATE, PLEA, ANTI, and EXPO.";
             tips[41] = "Prideful Chosen refuse to acknowledge that they're bothered by something as trivial as tickling, but they have the confidence to not overly dwell on anticipating what torments you have in store for them.";
@@ -23191,7 +23191,7 @@ public class WorldState
             Chosen c = getCast()[i];
             long cCorruption = 0L;
             append(t, (new StringBuilder("\n")).append(c.getMainName()).append("'s Corruption: ").toString());
-            if((!c.isVVirg() || c.isRuthless()) && c.vStart.booleanValue() || c.timesSlaughtered() > 0)
+            if((!c.isVVirg() || c.isRuthless()) && c.vStart || c.timesSlaughtered() > 0)
             {
                 long added = 0L;
                 if(c.isRuthless())
@@ -23248,7 +23248,7 @@ public class WorldState
                         cCorruption += amount;
                         added += amount;
                     }
-                if(c.isImpregnated().booleanValue())
+                if(c.isImpregnated())
                     if(c.getMorality() > 66)
                     {
                         long amount = 0x1633c600f176000L;
@@ -23268,7 +23268,7 @@ public class WorldState
                     }
                 append(t, (new StringBuilder(String.valueOf(c.condensedFormat(added)))).append(" (Morality)").toString());
             }
-            if((!c.isCVirg() || c.isLustful()) && c.cStart.booleanValue() || c.timesFantasized() > 0)
+            if((!c.isCVirg() || c.isLustful()) && c.cStart || c.timesFantasized() > 0)
             {
                 if(cCorruption > 0L)
                     append(t, " + ");
@@ -23327,7 +23327,7 @@ public class WorldState
                         cCorruption += amount;
                         added += amount;
                     }
-                if(c.isHypnotized().booleanValue())
+                if(c.isHypnotized())
                     if(c.getInnocence() > 66)
                     {
                         long amount = 0x1633c600f176000L;
@@ -23347,7 +23347,7 @@ public class WorldState
                     }
                 append(t, (new StringBuilder(String.valueOf(c.condensedFormat(added)))).append(" (Innocence)").toString());
             }
-            if((!c.isAVirg() || c.isMeek()) && c.aStart.booleanValue() || c.timesDetonated() > 0)
+            if((!c.isAVirg() || c.isMeek()) && c.aStart || c.timesDetonated() > 0)
             {
                 if(cCorruption > 0L)
                     append(t, " + ");
@@ -23406,7 +23406,7 @@ public class WorldState
                         cCorruption += amount;
                         added += amount;
                     }
-                if(c.isDrained().booleanValue())
+                if(c.isDrained())
                     if(c.getConfidence() > 66)
                     {
                         long amount = 0x1633c600f176000L;
@@ -23426,7 +23426,7 @@ public class WorldState
                     }
                 append(t, (new StringBuilder(String.valueOf(c.condensedFormat(added)))).append(" (Confidence)").toString());
             }
-            if((!c.isModest() || c.isDebased()) && c.mStart.booleanValue() || c.timesStripped() > 0)
+            if((!c.isModest() || c.isDebased()) && c.mStart || c.timesStripped() > 0)
             {
                 if(cCorruption > 0L)
                     append(t, " + ");
@@ -23485,7 +23485,7 @@ public class WorldState
                         cCorruption += amount;
                         added += amount;
                     }
-                if(c.isParasitized().booleanValue())
+                if(c.isParasitized())
                     if(c.getDignity() > 66)
                     {
                         long amount = 0x1633c600f176000L;
@@ -23550,7 +23550,7 @@ public class WorldState
                 fallen++;
                 defeated++;
             } else
-            if(!getCast()[i].alive.booleanValue())
+            if(!getCast()[i].alive)
                 defeated++;
 
         long victoryBonus = 0L;
@@ -23572,7 +23572,7 @@ public class WorldState
             highScore = totalScore;
         try
         {
-            String path = Project.getProtectionDomain().getCodeSource().getLocation().getPath();
+            String path = Project.class.getProtectionDomain().getCodeSource().getLocation().getPath();
             String fileName = "";
             for(int i = path.length() - 1; i >= 0; i--)
                 if(path.charAt(i) != '/')
@@ -23686,7 +23686,7 @@ public class WorldState
     {
         Boolean conclusion = Boolean.valueOf(true);
         for(int i = 0; i < 3; i++)
-            if(getCombatants()[i] != null && getCombatants()[i].isCaptured().booleanValue())
+            if(getCombatants()[i] != null && getCombatants()[i].isCaptured())
                 conclusion = Boolean.valueOf(false);
 
         return conclusion;
@@ -23695,9 +23695,9 @@ public class WorldState
     public void applyCompletion()
     {
         int completionCost = 60;
-        if(bodyStatus[26].booleanValue())
+        if(bodyStatus[26])
             completionCost = 0;
-        if(bodyStatus[18].booleanValue())
+        if(bodyStatus[18])
         {
             evilEnergy -= completionCost;
             evilEnergy += 10;
@@ -23817,7 +23817,7 @@ public class WorldState
 
     public void toggleAmbush()
     {
-        bodyStatus[2] = Boolean.valueOf(!bodyStatus[2].booleanValue());
+        bodyStatus[2] = Boolean.valueOf(!bodyStatus[2]);
     }
 
     public void enhanceFive()
@@ -23881,41 +23881,41 @@ public class WorldState
         Chosen nextSpeaker = null;
         Chosen target = nextSpeaker;
         int nextLine;
-        for(nextLine = lastLine; attempts < 20 && !validLine(nextLine).booleanValue();)
+        for(nextLine = lastLine; attempts < 20 && !validLine(nextLine);)
         {
             attempts++;
             for(; nextSpeaker == null; nextSpeaker = currentCombatants[(int)(Math.random() * 3D)]);
             for(; target == nextSpeaker || target == null; target = currentCombatants[(int)(Math.random() * 3D)]);
-            if(target.isSurrounded().booleanValue() || target.isCaptured().booleanValue())
+            if(target.isSurrounded() || target.isCaptured())
             {
-                if(!target.getViolence().booleanValue() && !target.getService().booleanValue() && !target.getBeg().booleanValue() && !target.getCover().booleanValue() && !target.isDefiled().booleanValue() && validLine(5).booleanValue())
+                if(!target.getViolence() && !target.getService() && !target.getBeg() && !target.getCover() && !target.isDefiled() && validLine(5))
                     nextLine = 5;
                 else
-                if(target.getViolence().booleanValue() && validLine(6).booleanValue())
+                if(target.getViolence() && validLine(6))
                     nextLine = 6;
                 else
-                if(target.getService().booleanValue() && validLine(7).booleanValue())
+                if(target.getService() && validLine(7))
                     nextLine = 7;
                 else
-                if(target.getBeg().booleanValue() && validLine(8).booleanValue())
+                if(target.getBeg() && validLine(8))
                     nextLine = 8;
                 else
-                if(target.getCover().booleanValue() && validLine(9).booleanValue())
+                if(target.getCover() && validLine(9))
                     nextLine = 9;
                 else
-                if(target.isInseminated().booleanValue() && validLine(18).booleanValue())
+                if(target.isInseminated() && validLine(18))
                     nextLine = 18;
                 else
-                if(target.isOrgasming().booleanValue() && validLine(19).booleanValue())
+                if(target.isOrgasming() && validLine(19))
                     nextLine = 19;
                 else
-                if(target.isSodomized().booleanValue() && validLine(20).booleanValue())
+                if(target.isSodomized() && validLine(20))
                     nextLine = 20;
                 else
-                if(target.isBroadcasted().booleanValue() && validLine(21).booleanValue())
+                if(target.isBroadcasted() && validLine(21))
                     nextLine = 21;
             } else
-            if(target.getLastAction() < 5 && validLine(target.getLastAction()).booleanValue())
+            if(target.getLastAction() < 5 && validLine(target.getLastAction()))
                 nextLine = target.getLastAction();
             if(getRelationship(nextSpeaker.getNumber(), target.getNumber()) >= 0)
             {
@@ -24026,49 +24026,49 @@ public class WorldState
             } else
             if(nextLine == 21 && nextSpeaker.getDignityBreakage() >= 2)
                 nextLine = lastLine;
-            if(!validLine(nextLine).booleanValue())
-                if(target.getHATELevel() > nextSpeaker.getHATELevel() && target.getHATELevel() >= target.getPLEALevel() && target.getHATELevel() >= target.getINJULevel() && target.getHATELevel() >= target.getEXPOLevel() && validLine(10).booleanValue())
+            if(!validLine(nextLine))
+                if(target.getHATELevel() > nextSpeaker.getHATELevel() && target.getHATELevel() >= target.getPLEALevel() && target.getHATELevel() >= target.getINJULevel() && target.getHATELevel() >= target.getEXPOLevel() && validLine(10))
                     nextLine = 10;
                 else
-                if(target.getPLEALevel() > nextSpeaker.getPLEALevel() && target.getPLEALevel() >= target.getHATELevel() && target.getPLEALevel() >= target.getINJULevel() && target.getPLEALevel() >= target.getEXPOLevel() && validLine(11).booleanValue())
+                if(target.getPLEALevel() > nextSpeaker.getPLEALevel() && target.getPLEALevel() >= target.getHATELevel() && target.getPLEALevel() >= target.getINJULevel() && target.getPLEALevel() >= target.getEXPOLevel() && validLine(11))
                     nextLine = 11;
                 else
-                if(target.getINJULevel() > nextSpeaker.getINJULevel() && target.getINJULevel() >= target.getHATELevel() && target.getINJULevel() >= target.getPLEALevel() && target.getINJULevel() >= target.getEXPOLevel() && validLine(12).booleanValue())
+                if(target.getINJULevel() > nextSpeaker.getINJULevel() && target.getINJULevel() >= target.getHATELevel() && target.getINJULevel() >= target.getPLEALevel() && target.getINJULevel() >= target.getEXPOLevel() && validLine(12))
                     nextLine = 12;
                 else
-                if(target.getEXPOLevel() > nextSpeaker.getEXPOLevel() && target.getEXPOLevel() >= target.getHATELevel() && target.getEXPOLevel() >= target.getPLEALevel() && target.getEXPOLevel() >= target.getINJULevel() && validLine(13).booleanValue())
+                if(target.getEXPOLevel() > nextSpeaker.getEXPOLevel() && target.getEXPOLevel() >= target.getHATELevel() && target.getEXPOLevel() >= target.getPLEALevel() && target.getEXPOLevel() >= target.getINJULevel() && validLine(13))
                     nextLine = 13;
-            if(!validLine(nextLine).booleanValue())
-                if(nextSpeaker.getFEARLevel() > target.getFEARLevel() && nextSpeaker.getFEARLevel() >= nextSpeaker.getDISGLevel() && nextSpeaker.getFEARLevel() >= nextSpeaker.getPAINLevel() && nextSpeaker.getFEARLevel() >= nextSpeaker.getSHAMLevel() && validLine(14).booleanValue())
+            if(!validLine(nextLine))
+                if(nextSpeaker.getFEARLevel() > target.getFEARLevel() && nextSpeaker.getFEARLevel() >= nextSpeaker.getDISGLevel() && nextSpeaker.getFEARLevel() >= nextSpeaker.getPAINLevel() && nextSpeaker.getFEARLevel() >= nextSpeaker.getSHAMLevel() && validLine(14))
                     nextLine = 14;
                 else
-                if(nextSpeaker.getSHAMLevel() > target.getSHAMLevel() && nextSpeaker.getSHAMLevel() >= nextSpeaker.getFEARLevel() && nextSpeaker.getSHAMLevel() >= nextSpeaker.getDISGLevel() && nextSpeaker.getSHAMLevel() >= nextSpeaker.getPAINLevel() && validLine(17).booleanValue())
+                if(nextSpeaker.getSHAMLevel() > target.getSHAMLevel() && nextSpeaker.getSHAMLevel() >= nextSpeaker.getFEARLevel() && nextSpeaker.getSHAMLevel() >= nextSpeaker.getDISGLevel() && nextSpeaker.getSHAMLevel() >= nextSpeaker.getPAINLevel() && validLine(17))
                 {
                     nextLine = 17;
-                    if(target.isSurrounded().booleanValue() || target.isCaptured().booleanValue())
+                    if(target.isSurrounded() || target.isCaptured())
                         nextLine = lastLine;
                 } else
-                if(nextSpeaker.getDISGLevel() > target.getDISGLevel() && nextSpeaker.getDISGLevel() >= nextSpeaker.getFEARLevel() && nextSpeaker.getDISGLevel() >= nextSpeaker.getPAINLevel() && nextSpeaker.getDISGLevel() >= nextSpeaker.getSHAMLevel() && validLine(15).booleanValue())
+                if(nextSpeaker.getDISGLevel() > target.getDISGLevel() && nextSpeaker.getDISGLevel() >= nextSpeaker.getFEARLevel() && nextSpeaker.getDISGLevel() >= nextSpeaker.getPAINLevel() && nextSpeaker.getDISGLevel() >= nextSpeaker.getSHAMLevel() && validLine(15))
                 {
                     nextLine = 15;
-                    if(target.isSurrounded().booleanValue() || target.isCaptured().booleanValue())
+                    if(target.isSurrounded() || target.isCaptured())
                         nextLine = lastLine;
                 } else
-                if(nextSpeaker.getPAINLevel() > target.getPAINLevel() && nextSpeaker.getPAINLevel() >= nextSpeaker.getFEARLevel() && nextSpeaker.getPAINLevel() >= nextSpeaker.getDISGLevel() && nextSpeaker.getPAINLevel() >= nextSpeaker.getSHAMLevel() && validLine(16).booleanValue())
+                if(nextSpeaker.getPAINLevel() > target.getPAINLevel() && nextSpeaker.getPAINLevel() >= nextSpeaker.getFEARLevel() && nextSpeaker.getPAINLevel() >= nextSpeaker.getDISGLevel() && nextSpeaker.getPAINLevel() >= nextSpeaker.getSHAMLevel() && validLine(16))
                 {
                     nextLine = 15;
-                    if(target.isSurrounded().booleanValue() || target.isCaptured().booleanValue())
+                    if(target.isSurrounded() || target.isCaptured())
                         nextLine = lastLine;
                 }
         }
 
-        if(nextSpeaker.isSurrounded().booleanValue() || nextSpeaker.isCaptured().booleanValue())
+        if(nextSpeaker.isSurrounded() || nextSpeaker.isCaptured())
             nextLine = lastLine;
-        if(!nextSpeaker.isIntroduced().booleanValue() || !target.isIntroduced().booleanValue())
+        if(!nextSpeaker.isIntroduced() || !target.isIntroduced())
             nextLine = lastLine;
-        if(finalBattle.booleanValue() && (!nextSpeaker.alive.booleanValue() || !target.alive.booleanValue() || nextSpeaker.resolve <= 0 || target.resolve <= 0))
+        if(finalBattle && (!nextSpeaker.alive || !target.alive || nextSpeaker.resolve <= 0 || target.resolve <= 0))
             nextLine = lastLine;
-        if(validLine(nextLine).booleanValue())
+        if(validLine(nextLine))
         {
             nextSpeaker.say(t, "\n\n\"");
             if(getRelationship(nextSpeaker.getNumber(), target.getNumber()) >= 0)
@@ -24699,7 +24699,7 @@ public class WorldState
                     {
                         if(nextSpeaker.getMorality() > 66)
                         {
-                            if(tickleOn.booleanValue())
+                            if(tickleOn)
                                 nextSpeaker.say(t, (new StringBuilder(String.valueOf(target.getMainName()))).append("...  The way they're treating ").append(target.himHer()).append("...").toString());
                             else
                                 nextSpeaker.say(t, (new StringBuilder(String.valueOf(target.getMainName()))).append("...  Those wounds...").toString());
@@ -24714,7 +24714,7 @@ public class WorldState
                     else
                     if(nextSpeaker.getMorality() > 33)
                     {
-                        if(tickleOn.booleanValue())
+                        if(tickleOn)
                             nextSpeaker.say(t, (new StringBuilder(String.valueOf(target.getMainName()))).append("!  A-Are you okay?").toString());
                         else
                             nextSpeaker.say(t, (new StringBuilder(String.valueOf(target.getMainName()))).append("!  Y-You're bleeding!").toString());
@@ -25467,7 +25467,7 @@ public class WorldState
                     Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.FOCUS, Project.Emotion.ANGER);
                     if(nextSpeaker.getInnocence() > 66)
                     {
-                        if(target.impregnated.booleanValue())
+                        if(target.impregnated)
                             nextSpeaker.say(t, (new StringBuilder("Silly Thralls, ")).append(target.mainName).append(" is already pregnant!").toString());
                         else
                         if(target.getGender().equals("male"))
@@ -25532,12 +25532,12 @@ public class WorldState
                     else
                     if(nextSpeaker.getMorality() > 33)
                     {
-                        if(tickleOn.booleanValue())
+                        if(tickleOn)
                             nextSpeaker.say(t, (new StringBuilder("Stop laughing, ")).append(target.getMainName()).append(", it's distracting.").toString());
                         else
                             nextSpeaker.say(t, (new StringBuilder("Stop screaming, ")).append(target.getMainName()).append(", it's distracting.").toString());
                     } else
-                    if(tickleOn.booleanValue())
+                    if(tickleOn)
                         nextSpeaker.say(t, (new StringBuilder("Are you really so weak that tickling is enough to break you, ")).append(target.getMainName()).append("?").toString());
                     else
                         nextSpeaker.say(t, (new StringBuilder("Scream all you like, ")).append(target.getMainName()).append(", I'm still not going to help you.").toString());
@@ -25546,7 +25546,7 @@ public class WorldState
                 {
                     if(nextSpeaker.getMorality() > 66)
                     {
-                        if(tickleOn.booleanValue())
+                        if(tickleOn)
                             nextSpeaker.say(t, (new StringBuilder("Is it really that hard not to laugh when we're doing something like this, ")).append(target.getMainName()).append("?").toString());
                         else
                             nextSpeaker.say(t, (new StringBuilder("Is it really that painful, ")).append(target.getMainName()).append("?").toString());
@@ -25671,33 +25671,33 @@ public class WorldState
     public int getCommanderValue()
     {
         int value = 1;
-        if(bodyStatus[1].booleanValue())
+        if(bodyStatus[1])
             value++;
-        if(bodyStatus[7].booleanValue())
+        if(bodyStatus[7])
             value++;
-        if(bodyStatus[8].booleanValue())
+        if(bodyStatus[8])
             value += 2;
-        if(bodyStatus[9].booleanValue())
+        if(bodyStatus[9])
             value += 2;
-        if(bodyStatus[10].booleanValue())
+        if(bodyStatus[10])
             value += 5;
-        if(bodyStatus[11].booleanValue() || bodyStatus[12].booleanValue() || bodyStatus[13].booleanValue() || bodyStatus[14].booleanValue())
+        if(bodyStatus[11] || bodyStatus[12] || bodyStatus[13] || bodyStatus[14])
             value += 6;
-        if(bodyStatus[15].booleanValue())
+        if(bodyStatus[15])
             value += 2;
-        if(bodyStatus[16].booleanValue())
+        if(bodyStatus[16])
             value += 5;
-        if(bodyStatus[17].booleanValue())
+        if(bodyStatus[17])
             value += 10;
-        if(bodyStatus[18].booleanValue())
+        if(bodyStatus[18])
             value += 10;
-        if(bodyStatus[23].booleanValue())
+        if(bodyStatus[23])
             value += 20;
-        if(bodyStatus[24].booleanValue())
+        if(bodyStatus[24])
             value += 10;
-        if(bodyStatus[25].booleanValue())
+        if(bodyStatus[25])
             value += 30;
-        if(bodyStatus[26].booleanValue())
+        if(bodyStatus[26])
             value += 60;
         return value;
     }
@@ -25705,28 +25705,28 @@ public class WorldState
     public void printCommanderSummary(JTextPane t, Chosen c)
     {
         int suppressors = 0;
-        if(bodyStatus[3].booleanValue())
+        if(bodyStatus[3])
             suppressors++;
-        if(bodyStatus[4].booleanValue())
+        if(bodyStatus[4])
             suppressors++;
-        if(bodyStatus[5].booleanValue())
+        if(bodyStatus[5])
             suppressors++;
-        if(bodyStatus[6].booleanValue())
+        if(bodyStatus[6])
             suppressors++;
         Boolean defiler = Boolean.valueOf(false);
-        if(bodyStatus[11].booleanValue() || bodyStatus[12].booleanValue() || bodyStatus[13].booleanValue() || bodyStatus[14].booleanValue())
+        if(bodyStatus[11] || bodyStatus[12] || bodyStatus[13] || bodyStatus[14])
             defiler = Boolean.valueOf(true);
         Boolean punisher = Boolean.valueOf(false);
-        if(bodyStatus[19].booleanValue() || bodyStatus[20].booleanValue() || bodyStatus[21].booleanValue() || bodyStatus[22].booleanValue())
+        if(bodyStatus[19] || bodyStatus[20] || bodyStatus[21] || bodyStatus[22])
             punisher = Boolean.valueOf(true);
         int reportedDuration = 2;
-        if(c == null && (techs[8].isOwned().booleanValue() || techs[9].isOwned().booleanValue() || techs[10].isOwned().booleanValue() || techs[11].isOwned().booleanValue() || techs[12].isOwned().booleanValue() || techs[13].isOwned().booleanValue() || techs[14].isOwned().booleanValue() || techs[15].isOwned().booleanValue()))
+        if(c == null && (techs[8].isOwned() || techs[9].isOwned() || techs[10].isOwned() || techs[11].isOwned() || techs[12].isOwned() || techs[13].isOwned() || techs[14].isOwned() || techs[15].isOwned()))
         {
-            if(techs[8].isOwned().booleanValue())
+            if(techs[8].isOwned())
             {
                 int durationCost = 0;
                 append(t, "[X][X][");
-                if(bodyStatus[1].booleanValue())
+                if(bodyStatus[1])
                 {
                     append(t, "X");
                 } else
@@ -25735,10 +25735,10 @@ public class WorldState
                     append(t, " ");
                 }
                 append(t, "]");
-                if(techs[14].isOwned().booleanValue())
+                if(techs[14].isOwned())
                 {
                     append(t, "[");
-                    if(bodyStatus[7].booleanValue())
+                    if(bodyStatus[7])
                     {
                         append(t, "X");
                     } else
@@ -25748,10 +25748,10 @@ public class WorldState
                             durationCost = 1;
                     }
                     append(t, "]");
-                    if(techs[20].isOwned().booleanValue())
+                    if(techs[20].isOwned())
                     {
                         append(t, "[");
-                        if(bodyStatus[9].booleanValue())
+                        if(bodyStatus[9])
                         {
                             append(t, "X");
                         } else
@@ -25761,10 +25761,10 @@ public class WorldState
                                 durationCost = 2;
                         }
                         append(t, "]");
-                        if(techs[26].isOwned().booleanValue())
+                        if(techs[26].isOwned())
                         {
                             append(t, "[");
-                            if(bodyStatus[15].booleanValue())
+                            if(bodyStatus[15])
                             {
                                 append(t, "X");
                             } else
@@ -25774,10 +25774,10 @@ public class WorldState
                                     durationCost = 2;
                             }
                             append(t, "]");
-                            if(techs[46].isOwned().booleanValue())
+                            if(techs[46].isOwned())
                             {
                                 append(t, "[");
-                                if(bodyStatus[25].booleanValue())
+                                if(bodyStatus[25])
                                 {
                                     append(t, "X  X");
                                 } else
@@ -25799,11 +25799,11 @@ public class WorldState
                     append(t, (new StringBuilder(" (Next: ")).append(durationCost).append(" EE)").toString());
                 append(t, "\n");
             }
-            if(techs[15].isOwned().booleanValue())
+            if(techs[15].isOwned())
             {
                 int captureCost = 0;
                 append(t, "[");
-                if(bodyStatus[8].booleanValue())
+                if(bodyStatus[8])
                 {
                     append(t, "X");
                 } else
@@ -25812,10 +25812,10 @@ public class WorldState
                     captureCost = 2;
                 }
                 append(t, "]");
-                if(techs[27].isOwned().booleanValue())
+                if(techs[27].isOwned())
                 {
                     append(t, "[");
-                    if(bodyStatus[16].booleanValue())
+                    if(bodyStatus[16])
                     {
                         append(t, "X");
                     } else
@@ -25825,10 +25825,10 @@ public class WorldState
                             captureCost = 5;
                     }
                     append(t, "]");
-                    if(techs[32].isOwned().booleanValue())
+                    if(techs[32].isOwned())
                     {
                         append(t, "[");
-                        if(bodyStatus[17].booleanValue())
+                        if(bodyStatus[17])
                         {
                             append(t, "X");
                         } else
@@ -25838,10 +25838,10 @@ public class WorldState
                                 captureCost = 10;
                         }
                         append(t, "]");
-                        if(techs[38].isOwned().booleanValue())
+                        if(techs[38].isOwned())
                         {
                             append(t, "[");
-                            if(bodyStatus[23].booleanValue())
+                            if(bodyStatus[23])
                             {
                                 append(t, "X");
                             } else
@@ -25859,57 +25859,57 @@ public class WorldState
                     append(t, (new StringBuilder(" (Next: ")).append(captureCost).append(" EE)").toString());
                 append(t, "\n");
             }
-            if(techs[9].isOwned().booleanValue())
+            if(techs[9].isOwned())
             {
                 append(t, "[");
-                if(bodyStatus[2].booleanValue())
+                if(bodyStatus[2])
                     append(t, " ");
                 else
                     append(t, "X");
                 append(t, "] Ambush (free)\n");
             }
-            if(techs[39].isOwned().booleanValue())
+            if(techs[39].isOwned())
             {
                 append(t, "[");
-                if(bodyStatus[24].booleanValue())
+                if(bodyStatus[24])
                     append(t, "X");
                 else
                     append(t, " ");
                 append(t, "] Flight");
-                if(!bodyStatus[24].booleanValue())
+                if(!bodyStatus[24])
                     append(t, " (Cost: 10 EE)");
                 append(t, "\n");
             }
-            if(techs[10].isOwned().booleanValue() || techs[11].isOwned().booleanValue() || techs[12].isOwned().booleanValue() || techs[13].isOwned().booleanValue())
+            if(techs[10].isOwned() || techs[11].isOwned() || techs[12].isOwned() || techs[13].isOwned())
             {
                 append(t, "Suppressor: ");
                 if(suppressors == 1)
                 {
-                    if(bodyStatus[3].booleanValue())
+                    if(bodyStatus[3])
                         append(t, "Hunger [HATE]");
                     else
-                    if(bodyStatus[4].booleanValue())
+                    if(bodyStatus[4])
                         append(t, "Lust [PLEA]");
                     else
-                    if(bodyStatus[5].booleanValue())
+                    if(bodyStatus[5])
                     {
-                        if(tickleOn.booleanValue())
+                        if(tickleOn)
                             append(t, "Anger [ANTI]");
                         else
                             append(t, "Anger [INJU]");
                     } else
-                    if(bodyStatus[6].booleanValue())
+                    if(bodyStatus[6])
                         append(t, "Mania [EXPO]");
-                    if(techs[21].isOwned().booleanValue() && !defiler.booleanValue())
+                    if(techs[21].isOwned() && !defiler)
                         append(t, " (Next: 5 EE)");
                 } else
                 if(suppressors == 2)
                 {
                     String first = "";
                     String second = "";
-                    if(bodyStatus[3].booleanValue())
+                    if(bodyStatus[3])
                         first = "Hunger [HATE]";
-                    if(bodyStatus[4].booleanValue())
+                    if(bodyStatus[4])
                     {
                         String status = "Lust [PLEA]";
                         if(first.length() > 0)
@@ -25917,95 +25917,95 @@ public class WorldState
                         else
                             first = status;
                     }
-                    if(bodyStatus[5].booleanValue())
+                    if(bodyStatus[5])
                     {
                         String status = "Anger [INJU]";
-                        if(tickleOn.booleanValue())
+                        if(tickleOn)
                             status = "Anger [ANTI]";
                         if(first.length() > 0)
                             second = status;
                         else
                             first = status;
                     }
-                    if(bodyStatus[6].booleanValue())
+                    if(bodyStatus[6])
                         second = "Mania [EXPO]";
                     append(t, (new StringBuilder(String.valueOf(first))).append(", ").append(second).toString());
                 } else
-                if(punisher.booleanValue() && techs[47].isOwned().booleanValue())
+                if(punisher && techs[47].isOwned())
                 {
-                    if(defiler.booleanValue())
+                    if(defiler)
                         append(t, "None (REQUIRED)");
                     else
                         append(t, "None (Cost: 60 EE plus 6 EE for Defiler)");
                 } else
-                if(defiler.booleanValue())
+                if(defiler)
                 {
-                    if(techs[33].isOwned().booleanValue())
+                    if(techs[33].isOwned())
                         append(t, "None (Cost: 10 EE)");
                     else
                         append(t, "(LOCKED)");
                 } else
-                if(punisher.booleanValue())
+                if(punisher)
                     append(t, "(LOCKED)");
                 else
                     append(t, "None (free)");
                 append(t, "\n");
             }
-            if(techs[22].isOwned().booleanValue() || techs[23].isOwned().booleanValue() || techs[24].isOwned().booleanValue() || techs[25].isOwned().booleanValue())
+            if(techs[22].isOwned() || techs[23].isOwned() || techs[24].isOwned() || techs[25].isOwned())
             {
                 append(t, "Defiler: ");
-                if(punisher.booleanValue() && techs[47].isOwned().booleanValue() && !defiler.booleanValue())
+                if(punisher && techs[47].isOwned() && !defiler)
                 {
                     if(suppressors == 1)
                         append(t, "None (REQUIRED: 6 EE)");
                     else
                         append(t, "None (Cost: 66 EE)");
                 } else
-                if(suppressors == 2 || punisher.booleanValue() && !techs[47].isOwned().booleanValue())
+                if(suppressors == 2 || punisher && !techs[47].isOwned())
                     append(t, "(LOCKED)");
                 else
-                if(suppressors == 1 && !defiler.booleanValue())
+                if(suppressors == 1 && !defiler)
                 {
-                    if(techs[33].isOwned().booleanValue())
+                    if(techs[33].isOwned())
                         append(t, "None (Cost: 16 EE)");
                     else
                         append(t, "(LOCKED)");
                 } else
-                if(!defiler.booleanValue())
+                if(!defiler)
                     append(t, "None (Cost: 6 EE)");
                 else
-                if(bodyStatus[11].booleanValue())
+                if(bodyStatus[11])
                     append(t, "Ambition [HATE, PLEA]");
                 else
-                if(bodyStatus[12].booleanValue())
+                if(bodyStatus[12])
                 {
-                    if(tickleOn.booleanValue())
+                    if(tickleOn)
                         append(t, "Dominance [PLEA, ANTI]");
                     else
                         append(t, "Dominance [PLEA, INJU]");
                 } else
-                if(bodyStatus[13].booleanValue())
+                if(bodyStatus[13])
                 {
-                    if(tickleOn.booleanValue())
+                    if(tickleOn)
                         append(t, "Spite [ANTI, EXPO]");
                     else
                         append(t, "Spite [INJU, EXPO]");
                 } else
-                if(bodyStatus[14].booleanValue())
+                if(bodyStatus[14])
                     append(t, "Vanity [EXPO, HATE]");
                 append(t, "\n");
             }
-            if(techs[34].isOwned().booleanValue() || techs[35].isOwned().booleanValue() || techs[36].isOwned().booleanValue() || techs[37].isOwned().booleanValue())
+            if(techs[34].isOwned() || techs[35].isOwned() || techs[36].isOwned() || techs[37].isOwned())
             {
                 append(t, "Punisher: ");
-                if((suppressors > 0 || defiler.booleanValue()) && !punisher.booleanValue())
+                if((suppressors > 0 || defiler) && !punisher)
                 {
-                    if(techs[47].isOwned().booleanValue())
+                    if(techs[47].isOwned())
                     {
-                        if(defiler.booleanValue() && suppressors > 0)
+                        if(defiler && suppressors > 0)
                             append(t, "None (Cost: 50 EE)");
                         else
-                        if(defiler.booleanValue())
+                        if(defiler)
                             append(t, "None (Cost: 60 EE)");
                         else
                             append(t, "None (Cost: 60 EE plus 6 EE for Defiler)");
@@ -26014,106 +26014,106 @@ public class WorldState
                         append(t, "(LOCKED)");
                     }
                 } else
-                if(bodyStatus[19].booleanValue())
+                if(bodyStatus[19])
                     append(t, "Impregnation [HATE]");
                 else
-                if(bodyStatus[20].booleanValue())
+                if(bodyStatus[20])
                     append(t, "Hypnosis [PLEA]");
                 else
-                if(bodyStatus[21].booleanValue())
+                if(bodyStatus[21])
                 {
                     append(t, "Drain ");
-                    if(tickleOn.booleanValue())
+                    if(tickleOn)
                         append(t, "[ANTI]");
                     else
                         append(t, "[INJU]");
                 } else
-                if(bodyStatus[22].booleanValue())
+                if(bodyStatus[22])
                     append(t, "Parasitism [EXPO]");
                 else
                     append(t, "None (free)");
                 append(t, "\n");
             }
             append(t, "\n");
-            if(bodyStatus[26].booleanValue())
+            if(bodyStatus[26])
             {
-                if(bodyStatus[21].booleanValue())
+                if(bodyStatus[21])
                 {
-                    if(bodyStatus[11].booleanValue())
+                    if(bodyStatus[11])
                         append(t, "Your Commander is a bestial Demon with an enormous cock which ");
                     else
-                    if(bodyStatus[12].booleanValue())
+                    if(bodyStatus[12])
                         append(t, "Your Commander is a shambling mass which uses tentacles to pull victims into an internal chamber filled which fluid which has an aphrodisiac effect and also ");
                     else
-                    if(bodyStatus[13].booleanValue())
+                    if(bodyStatus[13])
                         append(t, "Your Commander is a huge, vaguely-humanoid titan of a Demon whose mighty grasp ");
                     else
-                    if(bodyStatus[14].booleanValue())
+                    if(bodyStatus[14])
                         append(t, "Your Commander is a huge, biomechanical Demon with electrified tentacles which both hijacks communications infrastructure and ");
                     append(t, "drains the vital energy of the Chosen.  It attempts to drain enough energy to cause unconsciousness in order to make it easier to ");
-                    if(bodyStatus[3].booleanValue())
+                    if(bodyStatus[3])
                         append(t, "rape them, exploiting their anger at the violation after they wake up to weaken their powers even further.");
                     else
-                    if(bodyStatus[4].booleanValue())
+                    if(bodyStatus[4])
                         append(t, "make them repeatedly orgasm, ensuring that their bodies remember your domination even if their minds don't.");
                     else
-                    if(bodyStatus[5].booleanValue())
+                    if(bodyStatus[5])
                     {
-                        if(tickleOn.booleanValue())
+                        if(tickleOn)
                             append(t, "tickle them, so that the stimulation hits them all at once after they wake up and renders them helpless with laughter.");
                         else
                             append(t, "mangle their bodies.");
                     } else
-                    if(bodyStatus[6].booleanValue())
+                    if(bodyStatus[6])
                         append(t, "tear off their clothes and force them into embarrassing positions for the watching crowd.");
                     append(t, "  Your Commander ");
                 } else
-                if(bodyStatus[22].booleanValue())
+                if(bodyStatus[22])
                 {
                     append(t, "Your Commander is a mostly-transparent cloud which drifts across the battlefield until it comes into contact with one of the Chosen.  After flowing into its targets, it can merge with and influence the clothes created by their transformations.  It's especially proficient at ");
-                    if(bodyStatus[11].booleanValue())
+                    if(bodyStatus[11])
                         append(t, "creating phallic protrusions on the inside of the clothing to penetrate them as they try to fight");
                     else
-                    if(bodyStatus[12].booleanValue())
+                    if(bodyStatus[12])
                         append(t, "creating small, nimble tentacles on the inside of the clothing which stimulate them as they try to fight");
                     else
-                    if(bodyStatus[13].booleanValue())
+                    if(bodyStatus[13])
                     {
-                        if(tickleOn.booleanValue())
+                        if(tickleOn)
                             append(t, "tickling its wearers as they try to fight");
                         else
                             append(t, "painfully binding and torturing its wearers");
                     } else
-                    if(bodyStatus[14].booleanValue())
+                    if(bodyStatus[14])
                         append(t, "forcing its wearers into humiliating positions that expose everything");
-                    if(bodyStatus[3].booleanValue())
+                    if(bodyStatus[3])
                         append(t, ", provoking their rage with the deep violation.  ");
                     else
-                    if(bodyStatus[4].booleanValue())
+                    if(bodyStatus[4])
                         append(t, ", training them to enjoy the abuse.  ");
                     else
-                    if(bodyStatus[5].booleanValue())
+                    if(bodyStatus[5])
                         append(t, ", exhausting and weakening them.  ");
                     else
                         append(t, ", ensuring that everyone can see the effect it's having on them.  ");
                     append(t, "Your Commander ");
                 } else
-                if(bodyStatus[11].booleanValue())
+                if(bodyStatus[11])
                 {
                     append(t, "Your Commander is a huge Demon which prowls about on all fours with a foot-long flared penis slung under its massive body.  Its ejaculate ");
-                    if(bodyStatus[19].booleanValue())
+                    if(bodyStatus[19])
                         append(t, "is extremely potent, capable of impregnating even one of the Chosen provided that their soul's resistance to corruption has been worn down enough.  ");
                     else
                         append(t, "acts as a strong neurotoxin, putting its victims into a hypnotically suggestible state.  ");
-                    if(bodyStatus[3].booleanValue())
+                    if(bodyStatus[3])
                         append(t, "The body's humanoid face and mouth allow it to taunt and provoke the Chosen even as it violates them.  ");
                     else
-                    if(bodyStatus[4].booleanValue())
+                    if(bodyStatus[4])
                         append(t, "The body's underside is lined with tentacles which stimulate its victims at the same time.  ");
                     else
-                    if(bodyStatus[5].booleanValue())
+                    if(bodyStatus[5])
                     {
-                        if(tickleOn.booleanValue())
+                        if(tickleOn)
                             append(t, "An extra pair of arms sprouting from the sides of the body serve to let you tickle your victims to break their resistance as you fill them up.  ");
                         else
                             append(t, "The penis is forked and covered in protrusions which make penetration an especially uncomfortable ordeal.  ");
@@ -26123,160 +26123,160 @@ public class WorldState
                     }
                     append(t, "Your Commander ");
                 } else
-                if(bodyStatus[12].booleanValue())
+                if(bodyStatus[12])
                 {
                     append(t, "Your Commander is a huge, shambling mass which uses long tentacles to pull its prey into an internal chamber full of fluid.  This fluid has aphrodisiac effects, but more importantly, ");
-                    if(bodyStatus[19].booleanValue())
+                    if(bodyStatus[19])
                         append(t, "it's filled with your seed, putting even the Chosen at risk of becoming impregnated while they swim inside.  ");
                     else
-                    if(bodyStatus[20].booleanValue())
+                    if(bodyStatus[20])
                         append(t, "it puts those influenced by it into a mental state where they're highly susceptible to hypnotic suggestion.  ");
-                    if(bodyStatus[3].booleanValue())
+                    if(bodyStatus[3])
                         append(t, "Meanwhile, the tentacles inside the chamber will try to squirm their way into every orifice in order to violate them even more deeply.  ");
                     else
-                    if(bodyStatus[4].booleanValue())
+                    if(bodyStatus[4])
                         append(t, "In order to give the fluid time to work, the tentacles inside the chamber try to inflict so much pleasure that the target's can't even think of escape.  ");
                     else
-                    if(bodyStatus[5].booleanValue())
+                    if(bodyStatus[5])
                     {
-                        if(tickleOn.booleanValue())
+                        if(tickleOn)
                             append(t, "Any attempts to escape are sabotaged by the tickling of the tentacles inside the chamber.  ");
                         else
                             append(t, "In order to make it impossible to escape, the tentacles inside the chamber are brutal in their efforts to immobilize and penetrate the Chosen, anchoring them in place.  ");
                     } else
-                    if(bodyStatus[6].booleanValue())
+                    if(bodyStatus[6])
                         append(t, "The fluid also dissolves clothing, and the body is transparent, making capture an especially humiliating ordeal.  ");
                     append(t, "Your Commander ");
                 } else
-                if(bodyStatus[13].booleanValue())
+                if(bodyStatus[13])
                 {
                     append(t, "Your Commander is a huge, vaguely-humanoid titan of a Demon capable of restraining its prey and inflicting various tortures and humiliations.  ");
-                    if(bodyStatus[19].booleanValue())
+                    if(bodyStatus[19])
                         append(t, "After immobilizing its victims, it tries to penetrate them with its enormous cock, ejaculating a super-potent seed with the potential to impregnate even one of the Chosen.  ");
                     else
-                    if(bodyStatus[20].booleanValue())
+                    if(bodyStatus[20])
                         append(t, "Its imposing size serves to distract from its true weapon - its cloud of mind-influencing hypnotic spores which quickly take effect while its victims are immobilized.  ");
-                    if(bodyStatus[3].booleanValue())
+                    if(bodyStatus[3])
                         append(t, "In place of arms, its torso is covered in mouths whose long tongues are incredibly flexible and powerful.  ");
                     else
-                    if(bodyStatus[4].booleanValue())
+                    if(bodyStatus[4])
                         append(t, "It many hands are nimble enough to stimulate their erogenous zones at the same time, forcing them to climax.  ");
                     else
-                    if(bodyStatus[5].booleanValue())
+                    if(bodyStatus[5])
                     {
-                        if(tickleOn.booleanValue())
+                        if(tickleOn)
                             append(t, "Its many hands are nimble enough to tickle their most sensitive places at the same time, forcing out unwilling laughter.  ");
                         else
                             append(t, "Its many hands are put to work pummeling them at the same time, making it even more difficult to resist.  ");
                     } else
-                    if(bodyStatus[6].booleanValue())
+                    if(bodyStatus[6])
                         append(t, "It has countless powerful arms and its skin is covered in clothes-dissolving slime.  ");
                     append(t, "Your Commander ");
                 } else
-                if(bodyStatus[14].booleanValue())
+                if(bodyStatus[14])
                 {
                     append(t, "Your Commander is a huge, biomechanical Demon with electrified tentacles capable of hijacking communications infrastructure and using it to show unsuspecting people footage of how it torments its prey.  It entices viewers ");
-                    if(bodyStatus[19].booleanValue())
+                    if(bodyStatus[19])
                         append(t, "by offering the rare opportunity to watch as the Chosen are impregnated by the reservoir of extremely potent artificial seed stored inside.  ");
                     else
-                    if(bodyStatus[20].booleanValue())
+                    if(bodyStatus[20])
                         append(t, "by subjecting its victims to hypnotic sounds and imagery, compelling them to seek out a few lucky audience members and service them after the battle.  ");
-                    if(bodyStatus[3].booleanValue())
+                    if(bodyStatus[3])
                         append(t, "In turn, the viewers' reactions are shown to the victims in order to make them resent the rest of humanity.  ");
                     else
-                    if(bodyStatus[4].booleanValue())
+                    if(bodyStatus[4])
                         append(t, "The humiliation is enhanced by the countless sex toys integrated into the body, capable of forcing out orgasms from the unwilling.  ");
                     else
-                    if(bodyStatus[5].booleanValue())
+                    if(bodyStatus[5])
                     {
                         append(t, "In order to punish and deter any attempts to resist, various ");
-                        if(tickleOn.booleanValue())
+                        if(tickleOn)
                             append(t, "tickle ");
                         append(t, "torture implements are integrated into the body.  ");
                     } else
-                    if(bodyStatus[6].booleanValue())
+                    if(bodyStatus[6])
                         append(t, "Various specialized diagnostic devices are integrated into the body in order to show the viewers exactly how the victim's violation is progressing.  ");
                     append(t, "Your Commander ");
                 }
             } else
-            if(bodyStatus[19].booleanValue())
+            if(bodyStatus[19])
                 append(t, "Your Commander is a regular-sized humanoid Demon whose only distinguishing feature is its abnormally large genitals, capable of delivering extra-potent seed into the bodies of the Chosen.  It ");
             else
-            if(bodyStatus[20].booleanValue())
+            if(bodyStatus[20])
                 append(t, "Your Commander is a large, dome-shaped, hollow Demon which can engulf the Chosen, subjecting them to hypnotic patterns and sounds in order to manipulate their mental state.  It ");
             else
-            if(bodyStatus[21].booleanValue())
+            if(bodyStatus[21])
                 append(t, "Your Commander is a chaotic mass of tentacles which absorb the psychic energy of anything they come into contact with, especially if the target isn't resisting.  It ");
             else
-            if(bodyStatus[22].booleanValue())
+            if(bodyStatus[22])
                 append(t, "Your Commander is a mostly-transparent cloud which drifts across the battlefield until it comes into contact with a suitable host.  After flowing into its targets, it can merge with and influence the psychic energy within them.  Your Commander ");
             else
-            if(bodyStatus[18].booleanValue())
+            if(bodyStatus[18])
             {
-                if(bodyStatus[11].booleanValue())
+                if(bodyStatus[11])
                 {
-                    if(bodyStatus[3].booleanValue())
+                    if(bodyStatus[3])
                         append(t, "Your Commander is a huge, Sphinx-like Demon, a beast with a human face, which prowls about on all fours.  Capable of speaking to the Chosen, it taunts them in order to pollute their minds with hateful feelings so that their defenses weaken enough to let it fuck them with its foot-long flared penis.  It ");
                     else
-                    if(bodyStatus[4].booleanValue())
+                    if(bodyStatus[4])
                         append(t, "Your Commander is a huge Demon which prowls about on all fours, its underside lined with tentacles that capture and stimulate the Chosen in order to prepare them to be fucked by its foot-long flared penis.  Your Commander ");
                     else
-                    if(bodyStatus[5].booleanValue())
+                    if(bodyStatus[5])
                     {
-                        if(tickleOn.booleanValue())
+                        if(tickleOn)
                             append(t, "Your Commander is a huge Demon which prowls about on six legs, the middle pair ending in nimble claws meant for further stimulating and tormenting captured prey.  Slung under its body is a foot-long flared penis.  Your Commander ");
                         else
                             append(t, "Your Commander is a huge Demon which prowls about on all fours.  Slung under its body is an enormous double penis, each shaft almost two feet long and covered in rough barbs which inflict as much pain as pleasure.  It ");
                     } else
-                    if(bodyStatus[6].booleanValue())
+                    if(bodyStatus[6])
                         append(t, "Your Commander is a huge Demon made of transparent, clothes-dissolving slime.  It pounces on Chosen and then rapes them with a huge pseudopod, its see-through nature ensuring that spectators can see every humiliating detail.  Your Commander ");
                 } else
-                if(bodyStatus[12].booleanValue())
+                if(bodyStatus[12])
                 {
-                    if(bodyStatus[3].booleanValue())
+                    if(bodyStatus[3])
                         append(t, "Your Commander is a huge, shambling mass which uses long tentacles to pull its prey into an internal chamber full of hallucinogenic aphrodisiac and smaller pleasure-inducing tentacles.  The potent fluid allows you to form a psychic link with the captives' minds, inducing hateful thoughts in order to break their Sexual Barriers.  Your Commander ");
                     else
-                    if(bodyStatus[4].booleanValue())
+                    if(bodyStatus[4])
                         append(t, "Your Commander is a huge, shambling mass which uses long tentacles to pull its prey into an internal chamber full of mind-breakingly powerful aphrodisiac and advanced pleasure-inducing tentacles.  It ");
                     else
-                    if(bodyStatus[5].booleanValue())
+                    if(bodyStatus[5])
                     {
-                        if(tickleOn.booleanValue())
+                        if(tickleOn)
                             append(t, "Your Commander is a huge, shambling mass which uses long tentacles to pull its prey into an internal chamber full of aphrodisiac and smaller tentacles specialized to mercilessly tickle its victims even as it forces them to cum.  Your Commander ");
                         else
                             append(t, "Your Commander is a huge, shambling mass which uses long tentacles to pull its prey into an internal chamber full of aphrodisiac and smaller tentacles shaped like various torture implements to induce mind-breaking pleasure and pain.  It ");
                     } else
-                    if(bodyStatus[6].booleanValue())
+                    if(bodyStatus[6])
                         append(t, "Your Commander is a huge, shambling mass made of transparent slime.  It's capable of shaping itself into powerful pseudopods in order to capture and pull the Chosen inside, and its body contains substances that dissolve clothes and induce sexual pleasure.  Your Commander ");
                 } else
-                if(bodyStatus[13].booleanValue())
+                if(bodyStatus[13])
                 {
-                    if(bodyStatus[3].booleanValue())
+                    if(bodyStatus[3])
                         append(t, "Your Commander is a huge, vaguely-humanoid titan of a Demon covered in mouths that constantly gibber madness, conveying your hateful thoughts.  Their teeth inflict painful bites, and their tongues constantly writhe in search of orifices to violate.  Your Commander ");
                     else
-                    if(bodyStatus[4].booleanValue())
+                    if(bodyStatus[4])
                         append(t, "Your Commander is a huge, vaguely-humanoid titan of a Demon with countless nimble arms that are capable of restraining your prey and inflicting various humiliations and tortures in addition to more pleasurable stimualations.  It ");
                     else
-                    if(bodyStatus[5].booleanValue())
+                    if(bodyStatus[5])
                     {
-                        if(tickleOn.booleanValue())
+                        if(tickleOn)
                             append(t, "Your Commander is a huge, vaguely-humanoid titan of a Demon with countless arms and fine-pointed claws capable of precisely tickling every single vulnerable spot of its victims' bodies at once.  It ");
                         else
                             append(t, "Your Commander is a huge, vaguely-humanoid titan of a Demon with several bestial arms equipped with razor-sharp claws capable of restraining your prey and inflicting various tortures and humiliations.  It ");
                     } else
-                    if(bodyStatus[6].booleanValue())
+                    if(bodyStatus[6])
                         append(t, "Your Commander is a huge, vaguely-humanoid titan of a Demon with several extra muscular arms capable of restraining its prey and inflicting various tortures and humiliations.  It's aided in its task by the fact that its skin is coated in clothes-dissolving slime.  Your Commander ");
                 } else
-                if(bodyStatus[14].booleanValue())
-                    if(bodyStatus[3].booleanValue())
+                if(bodyStatus[14])
+                    if(bodyStatus[3])
                         append(t, "Your Commander is a huge, biomechanical Demon with electrified tentacles capable of hijacking communications infrastructure and using it to show unsuspecting people footage of how it torments its prey.  At the same time, it uses advanced technology to allow the audience to take part in the violation.  Your Commander ");
                     else
-                    if(bodyStatus[4].booleanValue())
+                    if(bodyStatus[4])
                         append(t, "Your Commander is a huge, biomechanical Demon with electrified tentacles capable of hijacking communications infrastructure and using it to show unsuspecting people footage of how it torments its prey.  It's equipped with vibrators and other sex toys for maximum humiliation.  Your Commander ");
                     else
-                    if(bodyStatus[5].booleanValue())
+                    if(bodyStatus[5])
                     {
-                        if(tickleOn.booleanValue())
+                        if(tickleOn)
                             append(t, "Your Commander is a huge, biomechanical Demon with electrified tentacles capable of hijacking communications infrastructure and using it to show unsuspecting people footage of how it torments its prey.  It's equipped with various tickle torture implements in order to emphasize its captives' helplessness.  Your Commander ");
                         else
                             append(t, "Your Commander is a huge, biomechanical Demon with electrified tentacles capable of hijacking communications infrastructure and using it to show unsuspecting people footage of how it torments its prey.  It's equipped with weapons and torture implements in order to emphasize its captives' helplessness.  Your Commander ");
@@ -26285,18 +26285,18 @@ public class WorldState
                         append(t, "Your Commander is a huge, biomechanical Demon with electrified tentacles capable of hijacking communications infrastructure and using it to show unsuspecting people footage of how it torments its prey.  It's equipped with various clothes-destroying implements and high-quality cameras in order to prioritize exposing and humiliating its captives as efficiently as possible.  Your Commander ");
                     }
             } else
-            if(defiler.booleanValue())
+            if(defiler)
             {
-                if(bodyStatus[11].booleanValue())
+                if(bodyStatus[11])
                     append(t, "Your Commander is a huge Demon which prowls about on all fours with a foot-long flared penis slung under its massive body.  It ");
                 else
-                if(bodyStatus[12].booleanValue())
+                if(bodyStatus[12])
                     append(t, "Your Commander is a huge, shambling mass which uses long tentacles to pull its prey into an internal chamber full of aphrodisiac and smaller pleasure-inducing tentacles.  It ");
                 else
-                if(bodyStatus[13].booleanValue())
+                if(bodyStatus[13])
                     append(t, "Your Commander is a huge, vaguely-humanoid titan of a Demon with several extra muscular arms capable of restraining its prey and inflicting various tortures and humiliations.  It ");
                 else
-                if(bodyStatus[14].booleanValue())
+                if(bodyStatus[14])
                     append(t, "Your Commander is a huge, biomechanical Demon with electrified tentacles capable of hijacking communications infrastructure and using it to show unsuspecting people footage of how it torments its prey.  It ");
             } else
             if(suppressors == 0)
@@ -26304,54 +26304,54 @@ public class WorldState
             else
             if(suppressors == 1)
             {
-                if(bodyStatus[3].booleanValue())
+                if(bodyStatus[3])
                     append(t, "Your Commander is an oversized humanoid Demon covered with gaping mouths which allow you to speak your hateful will directly to the Chosen.  It ");
                 else
-                if(bodyStatus[4].booleanValue())
+                if(bodyStatus[4])
                     append(t, "Your Commander is an oversized humanoid Demon covered with various tentacles which seek out the most sensitive places on captured Chosen and force pleasure upon them.  It ");
                 else
-                if(bodyStatus[5].booleanValue())
+                if(bodyStatus[5])
                 {
-                    if(tickleOn.booleanValue())
+                    if(tickleOn)
                         append(t, "Your Commander is an oversized humanoid Demon with disproportionately large muscles which can pin the Chosen and hold them still enough to tickle them with brutal efficiency.  It ");
                     else
                         append(t, "Your Commander is an oversized humanoid Demon with disproportionately large muscles which can deal grievous injuries even to the supernaturally-durable bodies of the Chosen.  It ");
                 } else
-                if(bodyStatus[6].booleanValue())
+                if(bodyStatus[6])
                     append(t, "Your Commander is an oversized humanoid Demon with various human tools embedded in its body for the purpose of exposing the Chosen.  It ");
             } else
             if(suppressors == 2)
             {
-                if(bodyStatus[3].booleanValue())
+                if(bodyStatus[3])
                 {
                     append(t, "Your Commander is a giant humanoid Demon whose body is covered in gaping mouths which allow you to speak your hateful will directly to the Chosen.  ");
-                    if(bodyStatus[4].booleanValue())
+                    if(bodyStatus[4])
                         append(t, "Their tongues function as tentacles, capable of working their way under the Chosen's clothes and stimulating their erogenous zones.  ");
                     else
-                    if(bodyStatus[5].booleanValue())
+                    if(bodyStatus[5])
                     {
-                        if(tickleOn.booleanValue())
+                        if(tickleOn)
                             append(t, "They drip with saliva that acts as a powerful drug, weakening and confusing their victims.  ");
                         else
                             append(t, "They're filled with razor-sharp teeth for chewing on their victims, injuring and further aggravating them.  ");
                     } else
-                    if(bodyStatus[6].booleanValue())
+                    if(bodyStatus[6])
                         append(t, "They drip with acidic saliva, and while this substance lacks the potency to injure the Chosen themselves, it will dissolve and weaken their clothes.  ");
                 } else
-                if(bodyStatus[4].booleanValue())
+                if(bodyStatus[4])
                 {
                     append(t, "Your Commander is a giant humanoid Demon covered with various tentacles which seek out the most sensitive places on captured Chosen and force pleasure upon them.  ");
-                    if(bodyStatus[5].booleanValue())
+                    if(bodyStatus[5])
                     {
-                        if(tickleOn.booleanValue())
+                        if(tickleOn)
                             append(t, "They're filled with a specialized slime which acts as a powerful drug for weakening and confusing the Chosen.  ");
                         else
                             append(t, "Some are small and nimble, but others are thick and incredibly strong, capable of punching through solid brick and twisting steel beams apart.  ");
                     } else
-                    if(bodyStatus[6].booleanValue())
+                    if(bodyStatus[6])
                         append(t, "They secrete an acidic fluid, and while this substance lacks the potency to injure the Chosen themselves, it will dissolve and weaken their clothes.  ");
                 } else
-                if(tickleOn.booleanValue())
+                if(tickleOn)
                     append(t, "Your Commander is a giant humanoid Demon with various human tools embedded in its body.  Some are specialized for clothes removal, while the others are used to deliver a potent cocktail of psychoactive drugs which can weaken and disorient even the Chosen.  ");
                 else
                     append(t, "Your Commander is a giant humanoid Demon with various human tools embedded in its body.  These tools include tanks of acid, spinning saws, chains, guns, and even flamethrowers.  They have been magically reinforced to deal significant damage to both the Chosen and their clothes.  ");
@@ -26361,7 +26361,7 @@ public class WorldState
         {
             append(t, "Your Commander ");
         }
-        if(bodyStatus[2].booleanValue())
+        if(bodyStatus[2])
         {
             append(t, "will accompany your Demons ");
             if(c != null)
@@ -26372,23 +26372,23 @@ public class WorldState
             append(t, "will lead your Demons into combat, ");
         }
         append(t, "allowing you to ambush ");
-        if(c == null || bodyStatus[2].booleanValue())
+        if(c == null || bodyStatus[2])
             append(t, "your target and capture her");
         else
             append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" and capture ").append(c.himHer()).toString());
-        if(bodyStatus[25].booleanValue())
+        if(bodyStatus[25])
             reportedDuration += 6;
         else
-        if(bodyStatus[15].booleanValue())
+        if(bodyStatus[15])
             reportedDuration += 4;
         else
-        if(bodyStatus[9].booleanValue())
+        if(bodyStatus[9])
             reportedDuration += 3;
         else
-        if(bodyStatus[7].booleanValue())
+        if(bodyStatus[7])
             reportedDuration += 2;
         else
-        if(bodyStatus[1].booleanValue())
+        if(bodyStatus[1])
             reportedDuration++;
         if(reportedDuration == 2)
             append(t, " for two rounds");
@@ -26407,101 +26407,101 @@ public class WorldState
         else
         if(reportedDuration == 8)
             append(t, " for eight rounds");
-        if(bodyStatus[2].booleanValue())
+        if(bodyStatus[2])
         {
             append(t, " once you give the order");
-            if(bodyStatus[23].booleanValue())
+            if(bodyStatus[23])
                 append(t, ", up to five times");
             else
-            if(bodyStatus[17].booleanValue())
+            if(bodyStatus[17])
                 append(t, ", up to four times");
             else
-            if(bodyStatus[16].booleanValue())
+            if(bodyStatus[16])
                 append(t, ", up to three times");
             else
-            if(bodyStatus[8].booleanValue())
+            if(bodyStatus[8])
                 append(t, ", up to twice");
-            if(bodyStatus[24].booleanValue())
+            if(bodyStatus[24])
                 append(t, ", even against a flying target");
         } else
         {
             append(t, " at the start of battle");
-            if(bodyStatus[23].booleanValue())
+            if(bodyStatus[23])
                 append(t, ", and then four more times whenever you give the order");
             else
-            if(bodyStatus[17].booleanValue())
+            if(bodyStatus[17])
                 append(t, ", and then three more times whenever you give the order");
             else
-            if(bodyStatus[16].booleanValue())
+            if(bodyStatus[16])
                 append(t, ", and then two more times whenever you give the order");
             else
-            if(bodyStatus[8].booleanValue())
+            if(bodyStatus[8])
                 append(t, ", and then one more time once you give the order");
-            if(bodyStatus[24].booleanValue())
+            if(bodyStatus[24])
                 append(t, ", even against a flying target");
         }
         if(c == null)
             append(t, (new StringBuilder(".  It is worth ")).append(getCommanderValue()).append(" Evil Energy.  You have ").append(evilEnergy).append(" Evil Energy remaining.").toString());
         else
-        if(bodyStatus[26].booleanValue())
+        if(bodyStatus[26])
         {
             int types = 2;
             String damages[] = new String[4];
-            if(bodyStatus[19].booleanValue())
+            if(bodyStatus[19])
                 damages[0] = "HATE";
             else
-            if(bodyStatus[20].booleanValue())
+            if(bodyStatus[20])
                 damages[0] = "PLEA";
             else
-            if(bodyStatus[21].booleanValue())
+            if(bodyStatus[21])
             {
-                if(tickle().booleanValue())
+                if(tickle())
                     damages[0] = "ANTI";
                 else
                     damages[0] = "INJU";
             } else
-            if(bodyStatus[22].booleanValue())
+            if(bodyStatus[22])
                 damages[0] = "EXPO";
-            if(bodyStatus[11].booleanValue())
+            if(bodyStatus[11])
             {
                 damages[1] = "HATE";
                 damages[2] = "PLEA";
             } else
-            if(bodyStatus[12].booleanValue())
+            if(bodyStatus[12])
             {
                 damages[1] = "PLEA";
-                if(tickle().booleanValue())
+                if(tickle())
                     damages[2] = "ANTI";
                 else
                     damages[2] = "INJU";
             } else
-            if(bodyStatus[13].booleanValue())
+            if(bodyStatus[13])
             {
-                if(tickleOn.booleanValue())
+                if(tickleOn)
                     damages[1] = "ANTI";
                 else
                     damages[1] = "INJU";
                 damages[2] = "EXPO";
             } else
-            if(bodyStatus[14].booleanValue())
+            if(bodyStatus[14])
             {
                 damages[1] = "EXPO";
                 damages[2] = "HATE";
             }
-            if(bodyStatus[3].booleanValue())
+            if(bodyStatus[3])
                 damages[3] = "HATE";
             else
-            if(bodyStatus[4].booleanValue())
+            if(bodyStatus[4])
                 damages[3] = "PLEA";
             else
-            if(bodyStatus[5].booleanValue())
+            if(bodyStatus[5])
             {
-                if(tickleOn.booleanValue())
+                if(tickleOn)
                     damages[3] = "ANTI";
                 else
                     damages[3] = "INJU";
             } else
-            if(bodyStatus[6].booleanValue())
+            if(bodyStatus[6])
                 damages[3] = "EXPO";
             if(!damages[1].equals(damages[0]) && !damages[2].equals(damages[0]))
                 types++;
@@ -26532,102 +26532,102 @@ public class WorldState
             {
                 append(t, (new StringBuilder(", inflicting supreme levels of ")).append(damages[0]).append(", ").append(damages[1]).append(", ").append(damages[3]).append(", and ").append(damages[2]).toString());
             }
-            if(bodyStatus[11].booleanValue())
+            if(bodyStatus[11])
                 append(t, ", causing tier-2 Morality Break when the target's HATE is at least 10k");
             else
-            if(bodyStatus[12].booleanValue())
+            if(bodyStatus[12])
                 append(t, ", causing tier-2 Innocence Break when the target's PLEA is at least 10k");
             else
-            if(bodyStatus[13].booleanValue())
+            if(bodyStatus[13])
             {
                 append(t, ", causing tier-2 Confidence Break when the target's ");
-                if(tickleOn.booleanValue())
+                if(tickleOn)
                     append(t, "ANTI");
                 else
                     append(t, "INJU");
                 append(t, " is at least 10k");
             } else
-            if(bodyStatus[14].booleanValue())
+            if(bodyStatus[14])
                 append(t, ", causing tier-2 Dignity Break when the target's EXPO is at least 10k");
             append(t, ", and causing Total ");
-            if(bodyStatus[19].booleanValue())
+            if(bodyStatus[19])
                 append(t, "Morality Break when the target's Impregnation");
             else
-            if(bodyStatus[20].booleanValue())
+            if(bodyStatus[20])
                 append(t, "Innocence Break when the target's Hypnosis");
             else
-            if(bodyStatus[21].booleanValue())
+            if(bodyStatus[21])
                 append(t, "Confidence Break when the target's Drain");
             else
-            if(bodyStatus[22].booleanValue())
+            if(bodyStatus[22])
                 append(t, "Dignity Break when the target's Parasitism");
             append(t, " effectiveness is high enough.");
         } else
-        if(bodyStatus[19].booleanValue())
+        if(bodyStatus[19])
             append(t, ", inflicting extreme levels of HATE and FEAR, and causing Total Morality Break when the target's Impregnation effectiveness is high enough.");
         else
-        if(bodyStatus[20].booleanValue())
+        if(bodyStatus[20])
             append(t, ", inflicting extreme levels of PLEA and DISG, and causing Total Innocence Break when the target's Hypnosis effectiveness is high enough.");
         else
-        if(bodyStatus[21].booleanValue())
+        if(bodyStatus[21])
         {
             append(t, ", inflicting extreme levels of ");
-            if(tickleOn.booleanValue())
+            if(tickleOn)
                 append(t, "ANTI and TICK");
             else
                 append(t, "INJU and PAIN");
             append(t, ", and causing Total Confidence Break when the target's Drain effectiveness is high enough.");
         } else
-        if(bodyStatus[22].booleanValue())
+        if(bodyStatus[22])
             append(t, ", inflicting extreme levels of EXPO and SHAM, and causing Total Dignity Break when the target's Parasitism effectiveness is high enough.");
         else
-        if(bodyStatus[18].booleanValue())
+        if(bodyStatus[18])
         {
             String damages[] = new String[3];
             String breakType = "";
-            if(bodyStatus[3].booleanValue())
+            if(bodyStatus[3])
                 damages[1] = "HATE";
             else
-            if(bodyStatus[4].booleanValue())
+            if(bodyStatus[4])
                 damages[1] = "PLEA";
             else
-            if(bodyStatus[5].booleanValue())
+            if(bodyStatus[5])
             {
-                if(tickleOn.booleanValue())
+                if(tickleOn)
                     damages[1] = "ANTI";
                 else
                     damages[1] = "INJU";
             } else
-            if(bodyStatus[6].booleanValue())
+            if(bodyStatus[6])
                 damages[1] = "EXPO";
-            if(bodyStatus[11].booleanValue())
+            if(bodyStatus[11])
             {
                 damages[0] = "HATE";
                 damages[2] = "PLEA";
                 breakType = "Morality Break above 10k HATE";
             } else
-            if(bodyStatus[12].booleanValue())
+            if(bodyStatus[12])
             {
                 damages[0] = "PLEA";
-                if(tickleOn.booleanValue())
+                if(tickleOn)
                     damages[2] = "ANTI";
                 else
                     damages[2] = "INJU";
                 breakType = "Innocence Break above 10k PLEA";
             } else
-            if(bodyStatus[13].booleanValue())
+            if(bodyStatus[13])
             {
-                if(tickleOn.booleanValue())
+                if(tickleOn)
                     damages[0] = "ANTI";
                 else
                     damages[0] = "INJU";
                 damages[2] = "EXPO";
-                if(tickleOn.booleanValue())
+                if(tickleOn)
                     breakType = "Confidence Break above 10k ANTI";
                 else
                     breakType = "Confidence Break above 10k INJU";
             } else
-            if(bodyStatus[14].booleanValue())
+            if(bodyStatus[14])
             {
                 damages[0] = "EXPO";
                 damages[2] = "HATE";
@@ -26641,26 +26641,26 @@ public class WorldState
             else
                 append(t, (new StringBuilder(", inflicting overwhelming levels of ")).append(damages[0]).append(", ").append(damages[1]).append(", and ").append(damages[2]).append(", and potentially causing ").append(breakType).append(".").toString());
         } else
-        if(defiler.booleanValue())
+        if(defiler)
         {
-            if(bodyStatus[11].booleanValue())
+            if(bodyStatus[11])
                 append(t, ", inflicting overwhelming levels of HATE and PLEA, and potentially causing Morality Break above 10k HATE.");
             else
-            if(bodyStatus[12].booleanValue())
+            if(bodyStatus[12])
             {
-                if(tickleOn.booleanValue())
+                if(tickleOn)
                     append(t, ", inflicting overwhelming levels of PLEA and ANTI, and potentially causing Innocence Break above 10k PLEA.");
                 else
                     append(t, ", inflicting overwhelming levels of PLEA and INJU, and potentially causing Innocence Break above 10k PLEA.");
             } else
-            if(bodyStatus[13].booleanValue())
+            if(bodyStatus[13])
             {
-                if(tickleOn.booleanValue())
+                if(tickleOn)
                     append(t, ", inflicting overwhelming levels of ANTI and EXPO, and potentially causing Confidence Break above 10k ANTI.");
                 else
                     append(t, ", inflicting overwhelming levels of INJU and EXPO, and potentially causing Confidence Break above 10k INJU.");
             } else
-            if(bodyStatus[14].booleanValue())
+            if(bodyStatus[14])
                 append(t, ", inflicting overwhelming levels of EXPO and HATE, and potentially causing Dignity Break above 10k EXPO.");
         } else
         if(suppressors == 0)
@@ -26672,22 +26672,22 @@ public class WorldState
             String damages[] = new String[2];
             if(suppressors == 2)
                 damages = new String[4];
-            if(bodyStatus[3].booleanValue())
+            if(bodyStatus[3])
             {
                 damages[place] = "FEAR";
                 place++;
                 damages[place] = "HATE";
                 place++;
             }
-            if(bodyStatus[4].booleanValue())
+            if(bodyStatus[4])
             {
                 damages[place] = "DISG";
                 place++;
                 damages[place] = "PLEA";
                 place++;
             }
-            if(bodyStatus[5].booleanValue())
-                if(tickleOn.booleanValue())
+            if(bodyStatus[5])
+                if(tickleOn)
                 {
                     damages[place] = "TICK";
                     place++;
@@ -26700,7 +26700,7 @@ public class WorldState
                     damages[place] = "INJU";
                     place++;
                 }
-            if(bodyStatus[6].booleanValue())
+            if(bodyStatus[6])
             {
                 damages[place] = "SHAM";
                 place++;
@@ -26767,7 +26767,7 @@ public class WorldState
 
     public Boolean upgradedCommander()
     {
-        if(!bodyStatus[3].booleanValue() && !bodyStatus[4].booleanValue() && !bodyStatus[5].booleanValue() && !bodyStatus[6].booleanValue() && !bodyStatus[11].booleanValue() && !bodyStatus[12].booleanValue() && !bodyStatus[13].booleanValue() && !bodyStatus[14].booleanValue() && !bodyStatus[19].booleanValue() && !bodyStatus[20].booleanValue() && !bodyStatus[21].booleanValue() && !bodyStatus[22].booleanValue() && usedForsaken == null)
+        if(!bodyStatus[3] && !bodyStatus[4] && !bodyStatus[5] && !bodyStatus[6] && !bodyStatus[11] && !bodyStatus[12] && !bodyStatus[13] && !bodyStatus[14] && !bodyStatus[19] && !bodyStatus[20] && !bodyStatus[21] && !bodyStatus[22] && usedForsaken == null)
             return Boolean.valueOf(false);
         else
             return Boolean.valueOf(true);
@@ -26786,55 +26786,55 @@ public class WorldState
         battleRound = 1;
         evacuationProgress = 0;
         evacuationComplete = 100;
-        if(w.getTechs()[1].isOwned().booleanValue())
+        if(w.getTechs()[1].isOwned())
             evacuationComplete += 20;
-        if(w.getTechs()[4].isOwned().booleanValue())
+        if(w.getTechs()[4].isOwned())
             evacuationComplete += 20;
-        if(w.getTechs()[16].isOwned().booleanValue())
+        if(w.getTechs()[16].isOwned())
             evacuationComplete += 20;
-        if(w.getTechs()[28].isOwned().booleanValue())
+        if(w.getTechs()[28].isOwned())
             evacuationComplete += 40;
         exterminationProgress = 0;
         exterminationComplete = 100;
-        if(w.getTechs()[2].isOwned().booleanValue())
+        if(w.getTechs()[2].isOwned())
             exterminationComplete += 40;
-        if(w.getTechs()[5].isOwned().booleanValue())
+        if(w.getTechs()[5].isOwned())
             exterminationComplete += 60;
-        if(w.getTechs()[17].isOwned().booleanValue())
+        if(w.getTechs()[17].isOwned())
             exterminationComplete += 100;
-        if(w.getTechs()[29].isOwned().booleanValue())
+        if(w.getTechs()[29].isOwned())
             exterminationComplete += 200;
         exterminationMultiplier = 100;
         captureDuration = 2;
-        if(bodyStatus[25].booleanValue())
+        if(bodyStatus[25])
             captureDuration = 8;
         else
-        if(bodyStatus[15].booleanValue())
+        if(bodyStatus[15])
             captureDuration = 6;
         else
-        if(bodyStatus[9].booleanValue())
+        if(bodyStatus[9])
             captureDuration = 5;
         else
-        if(bodyStatus[7].booleanValue())
+        if(bodyStatus[7])
             captureDuration = 4;
         else
-        if(bodyStatus[1].booleanValue())
+        if(bodyStatus[1])
             captureDuration = 3;
         else
             captureDuration = 2;
         capturesPossible = 0;
-        if(bodyStatus[2].booleanValue() || upgradedCommander().booleanValue() || techs[31].isOwned().booleanValue() && bodyStatus[0].booleanValue())
+        if(bodyStatus[2] || upgradedCommander() || techs[31].isOwned() && bodyStatus[0])
             capturesPossible++;
-        if(bodyStatus[23].booleanValue())
+        if(bodyStatus[23])
             capturesPossible += 4;
         else
-        if(bodyStatus[17].booleanValue())
+        if(bodyStatus[17])
             capturesPossible += 3;
         else
-        if(bodyStatus[16].booleanValue())
+        if(bodyStatus[16])
             capturesPossible += 2;
         else
-        if(bodyStatus[8].booleanValue())
+        if(bodyStatus[8])
             capturesPossible++;
         nextCapture = null;
         nextSurround = null;
@@ -26852,7 +26852,7 @@ public class WorldState
             }
         }
 
-        if(day == 50 - eventOffset * 3 || techs[48].isOwned().booleanValue())
+        if(day == 50 - eventOffset * 3 || techs[48].isOwned())
         {
             finalBattle = Boolean.valueOf(true);
             for(int i = 0; i < 3; i++)
@@ -27123,7 +27123,7 @@ public class WorldState
         StyleConstants.setForeground(keyWord, usedColor);
         StyleConstants.setFontFamily(keyWord, "DialogInput");
         StyleConstants.setBold(keyWord, true);
-        StyleConstants.setUnderline(keyWord, underline.booleanValue());
+        StyleConstants.setUnderline(keyWord, underline);
         try
         {
             doc.insertString(doc.getLength(), s, keyWord);
@@ -27250,7 +27250,7 @@ public class WorldState
         initializeTips();
         for(int i = 0; i < 6; i++)
         {
-            for(Boolean proceed = Boolean.valueOf(false); !proceed.booleanValue();)
+            for(Boolean proceed = Boolean.valueOf(false); !proceed;)
             {
                 nameSeed[i] = (int)(Math.random() * 26D);
                 proceed = Boolean.valueOf(true);
@@ -27286,7 +27286,7 @@ public class WorldState
         }
 
         int ai[];
-        if(campaign.booleanValue())
+        if(campaign)
         {
             Boolean twoHigh = Boolean.valueOf(false);
             Boolean twoMid = Boolean.valueOf(false);
@@ -27316,80 +27316,80 @@ public class WorldState
                 for(int j = 0; j < candidates.length; j++)
                 {
                     Boolean compatible = Boolean.valueOf(true);
-                    if(candidates[j].morality > 66 && morHigh.booleanValue())
+                    if(candidates[j].morality > 66 && morHigh)
                         compatible = Boolean.valueOf(false);
-                    if(candidates[j].morality > 33 && candidates[j].morality < 67 && morMid.booleanValue())
+                    if(candidates[j].morality > 33 && candidates[j].morality < 67 && morMid)
                         compatible = Boolean.valueOf(false);
-                    if(candidates[j].morality < 34 && morLow.booleanValue())
+                    if(candidates[j].morality < 34 && morLow)
                         compatible = Boolean.valueOf(false);
                     if(candidates[j].innocence > 66)
                     {
-                        if(innHigh.booleanValue())
+                        if(innHigh)
                             compatible = Boolean.valueOf(false);
-                        if(candidates[j].morality > 66 && twoHigh.booleanValue())
+                        if(candidates[j].morality > 66 && twoHigh)
                             compatible = Boolean.valueOf(false);
                     }
                     if(candidates[j].innocence > 33 && candidates[j].innocence < 67)
                     {
-                        if(innMid.booleanValue())
+                        if(innMid)
                             compatible = Boolean.valueOf(false);
-                        if(candidates[j].morality > 33 && candidates[j].morality < 67 && twoMid.booleanValue())
+                        if(candidates[j].morality > 33 && candidates[j].morality < 67 && twoMid)
                             compatible = Boolean.valueOf(false);
                     }
                     if(candidates[j].innocence < 34)
                     {
-                        if(innLow.booleanValue())
+                        if(innLow)
                             compatible = Boolean.valueOf(false);
-                        if(candidates[j].morality < 34 && twoLow.booleanValue())
+                        if(candidates[j].morality < 34 && twoLow)
                             compatible = Boolean.valueOf(false);
                     }
                     if(candidates[j].confidence > 66)
                     {
-                        if(conHigh.booleanValue())
+                        if(conHigh)
                             compatible = Boolean.valueOf(false);
-                        if((candidates[j].morality > 66 || candidates[j].innocence > 66) && twoHigh.booleanValue())
+                        if((candidates[j].morality > 66 || candidates[j].innocence > 66) && twoHigh)
                             compatible = Boolean.valueOf(false);
                     }
                     if(candidates[j].confidence > 33 && candidates[j].confidence < 67)
                     {
-                        if(conMid.booleanValue())
+                        if(conMid)
                             compatible = Boolean.valueOf(false);
-                        if((candidates[j].morality > 33 && candidates[j].morality < 67 || candidates[j].innocence > 33 && candidates[j].innocence < 67) && twoMid.booleanValue())
+                        if((candidates[j].morality > 33 && candidates[j].morality < 67 || candidates[j].innocence > 33 && candidates[j].innocence < 67) && twoMid)
                             compatible = Boolean.valueOf(false);
                     }
                     if(candidates[j].confidence < 34)
                     {
-                        if(conLow.booleanValue())
+                        if(conLow)
                             compatible = Boolean.valueOf(false);
-                        if((candidates[j].morality < 34 || candidates[j].innocence < 34) && twoLow.booleanValue())
+                        if((candidates[j].morality < 34 || candidates[j].innocence < 34) && twoLow)
                             compatible = Boolean.valueOf(false);
                     }
                     if(candidates[j].dignity > 66)
                     {
-                        if(digHigh.booleanValue())
+                        if(digHigh)
                             compatible = Boolean.valueOf(false);
-                        if((candidates[j].morality > 66 || candidates[j].innocence > 66 || candidates[j].confidence > 66) && twoHigh.booleanValue())
+                        if((candidates[j].morality > 66 || candidates[j].innocence > 66 || candidates[j].confidence > 66) && twoHigh)
                             compatible = Boolean.valueOf(false);
                     }
                     if(candidates[j].dignity > 33 && candidates[j].dignity < 67)
                     {
-                        if(digMid.booleanValue())
+                        if(digMid)
                             compatible = Boolean.valueOf(false);
-                        if((candidates[j].morality > 33 && candidates[j].morality < 67 || candidates[j].innocence > 33 && candidates[j].innocence < 67 || candidates[j].confidence > 33 && candidates[j].confidence < 67) && twoMid.booleanValue())
+                        if((candidates[j].morality > 33 && candidates[j].morality < 67 || candidates[j].innocence > 33 && candidates[j].innocence < 67 || candidates[j].confidence > 33 && candidates[j].confidence < 67) && twoMid)
                             compatible = Boolean.valueOf(false);
                     }
                     if(candidates[j].dignity < 34)
                     {
-                        if(digLow.booleanValue())
+                        if(digLow)
                             compatible = Boolean.valueOf(false);
-                        if((candidates[j].morality < 34 || candidates[j].innocence < 34 || candidates[j].confidence < 34) && twoLow.booleanValue())
+                        if((candidates[j].morality < 34 || candidates[j].innocence < 34 || candidates[j].confidence < 34) && twoLow)
                             compatible = Boolean.valueOf(false);
                     }
                     if(candidates[j].type != types[2 - i] && (candidates[j].type != null || types[2 - i] != Chosen.Species.SUPERIOR))
                         compatible = Boolean.valueOf(false);
                     if(candidates[j].lastLoop > loops - 2 && j < returning.length)
                         compatible = Boolean.valueOf(false);
-                    if(compatible.booleanValue())
+                    if(compatible)
                     {
                         Chosen newValid[] = new Chosen[valid.length + 1];
                         for(int k = 0; k < valid.length; k++)
@@ -27406,7 +27406,7 @@ public class WorldState
                     loopChosen[i] = valid[picked];
                     int index = 0;
                     for(int j = 0; j < candidates.length; j++)
-                        if(candidates[j].equals(valid[picked]).booleanValue())
+                        if(candidates[j].equals(valid[picked]))
                             index = j;
 
                     if(index < returning.length)
@@ -27434,7 +27434,7 @@ public class WorldState
                     }
                 } else
                 {
-                    for(Boolean compatible = Boolean.valueOf(false); !compatible.booleanValue();)
+                    for(Boolean compatible = Boolean.valueOf(false); !compatible;)
                     {
                         compatible = Boolean.valueOf(true);
                         int stats[] = new int[4];
@@ -27455,65 +27455,65 @@ public class WorldState
 
                         if(highCount == 0 || midCount == 0 || lowCount == 0)
                             compatible = Boolean.valueOf(false);
-                        if(highCount == 2 && twoHigh.booleanValue() || midCount == 2 && twoMid.booleanValue() || lowCount == 2 && twoLow.booleanValue())
+                        if(highCount == 2 && twoHigh || midCount == 2 && twoMid || lowCount == 2 && twoLow)
                             compatible = Boolean.valueOf(false);
                         if(stats[0] > 66)
                         {
-                            if(morHigh.booleanValue())
+                            if(morHigh)
                                 compatible = Boolean.valueOf(false);
                         } else
                         if(stats[0] > 33)
                         {
-                            if(morMid.booleanValue())
+                            if(morMid)
                                 compatible = Boolean.valueOf(false);
                         } else
-                        if(morLow.booleanValue())
+                        if(morLow)
                             compatible = Boolean.valueOf(false);
                         if(stats[1] > 66)
                         {
-                            if(innHigh.booleanValue())
+                            if(innHigh)
                                 compatible = Boolean.valueOf(false);
                         } else
                         if(stats[1] > 33)
                         {
-                            if(innMid.booleanValue())
+                            if(innMid)
                                 compatible = Boolean.valueOf(false);
                         } else
-                        if(innLow.booleanValue())
+                        if(innLow)
                             compatible = Boolean.valueOf(false);
                         if(stats[2] > 66)
                         {
-                            if(conHigh.booleanValue())
+                            if(conHigh)
                                 compatible = Boolean.valueOf(false);
                         } else
                         if(stats[2] > 33)
                         {
-                            if(conMid.booleanValue())
+                            if(conMid)
                                 compatible = Boolean.valueOf(false);
                         } else
-                        if(conLow.booleanValue())
+                        if(conLow)
                             compatible = Boolean.valueOf(false);
                         if(stats[3] > 66)
                         {
-                            if(digHigh.booleanValue())
+                            if(digHigh)
                                 compatible = Boolean.valueOf(false);
                         } else
                         if(stats[3] > 33)
                         {
-                            if(digMid.booleanValue())
+                            if(digMid)
                                 compatible = Boolean.valueOf(false);
                         } else
-                        if(digLow.booleanValue())
+                        if(digLow)
                             compatible = Boolean.valueOf(false);
                         if(i == 1)
-                            if(determineVVirg(stats[0], stats[1], stats[2], stats[3]).booleanValue() && determineCVirg(stats[0], stats[1], stats[2], stats[3]).booleanValue() && determineAVirg(stats[0], stats[1], stats[2], stats[3]).booleanValue() && determineModest(stats[0], stats[1], stats[2], stats[3]).booleanValue())
+                            if(determineVVirg(stats[0], stats[1], stats[2], stats[3]) && determineCVirg(stats[0], stats[1], stats[2], stats[3]) && determineAVirg(stats[0], stats[1], stats[2], stats[3]) && determineModest(stats[0], stats[1], stats[2], stats[3]))
                             {
-                                if(loopChosen[0].vVirg.booleanValue() && loopChosen[0].cVirg.booleanValue() && loopChosen[0].aVirg.booleanValue() && loopChosen[0].modest.booleanValue())
+                                if(loopChosen[0].vVirg && loopChosen[0].cVirg && loopChosen[0].aVirg && loopChosen[0].modest)
                                     compatible = Boolean.valueOf(false);
                             } else
-                            if(!loopChosen[0].vVirg.booleanValue() || !loopChosen[0].cVirg.booleanValue() || !loopChosen[0].aVirg.booleanValue() || !loopChosen[0].modest.booleanValue())
+                            if(!loopChosen[0].vVirg || !loopChosen[0].cVirg || !loopChosen[0].aVirg || !loopChosen[0].modest)
                                 compatible = Boolean.valueOf(false);
-                        if(compatible.booleanValue())
+                        if(compatible)
                         {
                             Chosen c = new Chosen();
                             c.world = this;
@@ -27556,7 +27556,7 @@ public class WorldState
                                 c.gender = "female";
                             }
                             c.originalGender = c.gender;
-                            for(Boolean uniqueName = Boolean.valueOf(false); !uniqueName.booleanValue();)
+                            for(Boolean uniqueName = Boolean.valueOf(false); !uniqueName;)
                             {
                                 uniqueName = Boolean.valueOf(true);
                                 ai = new int[6];
@@ -27567,7 +27567,7 @@ public class WorldState
                                     if(loopChosen[j].givenName.equals(names[1]) || loopChosen[j].familyName.equals(names[0]))
                                         uniqueName = Boolean.valueOf(false);
 
-                                if(uniqueName.booleanValue())
+                                if(uniqueName)
                                 {
                                     c.givenName = names[1];
                                     c.familyName = names[0];
@@ -27592,28 +27592,28 @@ public class WorldState
                                 c.textColor = new Color(180, 0, 0);
                                 c.darkColor = new Color(220, 90, 90);
                             }
-                            if(!determineVVirg(stats[0], stats[1], stats[2], stats[3]).booleanValue())
+                            if(!determineVVirg(stats[0], stats[1], stats[2], stats[3]))
                             {
                                 c.vVirg = Boolean.valueOf(false);
                                 c.vStart = Boolean.valueOf(false);
                                 c.ruthless = true;
                                 c.vTaker = 0;
                             }
-                            if(!determineCVirg(stats[0], stats[1], stats[2], stats[3]).booleanValue())
+                            if(!determineCVirg(stats[0], stats[1], stats[2], stats[3]))
                             {
                                 c.cVirg = Boolean.valueOf(false);
                                 c.cStart = Boolean.valueOf(false);
                                 c.lustful = true;
                                 c.cTaker = 0;
                             }
-                            if(!determineAVirg(stats[0], stats[1], stats[2], stats[3]).booleanValue())
+                            if(!determineAVirg(stats[0], stats[1], stats[2], stats[3]))
                             {
                                 c.aVirg = Boolean.valueOf(false);
                                 c.aStart = Boolean.valueOf(false);
                                 c.meek = true;
                                 c.aTaker = 0;
                             }
-                            if(!determineModest(stats[0], stats[1], stats[2], stats[3]).booleanValue())
+                            if(!determineModest(stats[0], stats[1], stats[2], stats[3]))
                             {
                                 c.modest = Boolean.valueOf(false);
                                 c.mStart = Boolean.valueOf(false);
@@ -27717,26 +27717,26 @@ public class WorldState
 
         } else
         {
-            for(Boolean goodStats = Boolean.valueOf(false); !goodStats.booleanValue();)
+            for(Boolean goodStats = Boolean.valueOf(false); !goodStats;)
             {
                 goodStats = Boolean.valueOf(true);
                 for(int i = 0; i < statSeed.length; i++)
-                    if(campaign.booleanValue())
+                    if(campaign)
                         statSeed[i] = (int)(campaignRand.nextDouble() * 101D);
                     else
                         statSeed[i] = (int)(Math.random() * 101D);
 
-                if(!legalSpread(statSeed, Boolean.valueOf(false)).booleanValue())
+                if(!legalSpread(statSeed, Boolean.valueOf(false)))
                     goodStats = Boolean.valueOf(false);
                 Boolean pureTarget = Boolean.valueOf(false);
                 Boolean corruptTarget = Boolean.valueOf(false);
                 for(int i = 0; i < 3; i++)
-                    if(determinePurity(statSeed[i * 4], statSeed[1 + i * 4], statSeed[2 + i * 4], statSeed[3 + i * 4]).booleanValue())
+                    if(determinePurity(statSeed[i * 4], statSeed[1 + i * 4], statSeed[2 + i * 4], statSeed[3 + i * 4]))
                         pureTarget = Boolean.valueOf(true);
                     else
                         corruptTarget = Boolean.valueOf(true);
 
-                if(!pureTarget.booleanValue() || !corruptTarget.booleanValue())
+                if(!pureTarget || !corruptTarget)
                     goodStats = Boolean.valueOf(false);
             }
 
@@ -27777,7 +27777,7 @@ public class WorldState
                 goodStats = Boolean.valueOf(false);
         }
 
-        for(int i = 0; i < 4 && !customized.booleanValue(); i++)
+        for(int i = 0; i < 4 && !customized; i++)
         {
             int first = statSeed[i] / 25 + (statSeed[i] % 25 != 0 ? 1 : 0);
             if(first < 1)
@@ -27804,7 +27804,7 @@ public class WorldState
             else
                 midValue = Boolean.valueOf(true);
 
-        if(!extremeLow.booleanValue() || !extremeHigh.booleanValue() || !midValue.booleanValue())
+        if(!extremeLow || !extremeHigh || !midValue)
             goodStats = Boolean.valueOf(false);
         extremeLow = Boolean.valueOf(false);
         extremeHigh = Boolean.valueOf(false);
@@ -27818,7 +27818,7 @@ public class WorldState
             else
                 midValue = Boolean.valueOf(true);
 
-        if(!extremeLow.booleanValue() || !extremeHigh.booleanValue() || !midValue.booleanValue())
+        if(!extremeLow || !extremeHigh || !midValue)
             goodStats = Boolean.valueOf(false);
         extremeLow = Boolean.valueOf(false);
         extremeHigh = Boolean.valueOf(false);
@@ -27832,7 +27832,7 @@ public class WorldState
             else
                 midValue = Boolean.valueOf(true);
 
-        if(!extremeLow.booleanValue() || !extremeHigh.booleanValue() || !midValue.booleanValue())
+        if(!extremeLow || !extremeHigh || !midValue)
             goodStats = Boolean.valueOf(false);
         return goodStats;
     }
@@ -27871,7 +27871,7 @@ public class WorldState
 
     public Boolean determinePurity(int morality, int innocence, int confidence, int dignity)
     {
-        if(determineVVirg(morality, innocence, confidence, dignity).booleanValue() && determineCVirg(morality, innocence, confidence, dignity).booleanValue() && determineAVirg(morality, innocence, confidence, dignity).booleanValue() && determineModest(morality, innocence, confidence, dignity).booleanValue())
+        if(determineVVirg(morality, innocence, confidence, dignity) && determineCVirg(morality, innocence, confidence, dignity) && determineAVirg(morality, innocence, confidence, dignity) && determineModest(morality, innocence, confidence, dignity))
             return Boolean.valueOf(true);
         else
             return Boolean.valueOf(false);
@@ -27921,7 +27921,7 @@ public class WorldState
     {
         int percentage = (evacuationProgress * 100) / evacuationComplete;
         String result = (new StringBuilder(String.valueOf(evacuationProgress))).append("/").append(evacuationComplete).append(" (").append(percentage).append("%)").toString();
-        if(bar.booleanValue())
+        if(bar)
         {
             for(int charCount = result.length(); charCount < 17;)
             {
@@ -27933,7 +27933,7 @@ public class WorldState
             int base = 20;
             int possible = 0;
             for(int i = 0; i < 3; i++)
-                if(getCombatants()[i] != null && !currentCombatants[i].isSurrounded().booleanValue() && !currentCombatants[i].isCaptured().booleanValue())
+                if(getCombatants()[i] != null && !currentCombatants[i].isSurrounded() && !currentCombatants[i].isCaptured())
                     possible += currentCombatants[i].FEARMulti() / 12;
 
             for(int i = 1; i < 21; i++)
@@ -27957,7 +27957,7 @@ public class WorldState
     {
         int percentage = (exterminationProgress * 100) / exterminationComplete;
         String result = (new StringBuilder(String.valueOf(exterminationProgress))).append("/").append(exterminationComplete).append(" (").append(percentage).append("%)").toString();
-        if(bar.booleanValue())
+        if(bar)
         {
             for(int charCount = result.length(); charCount < 14;)
             {
@@ -27970,18 +27970,18 @@ public class WorldState
             int possible = 0;
             for(int i = 0; i < 3; i++)
                 if(getCombatants()[i] != null)
-                    if(!currentCombatants[i].isSurrounded().booleanValue() && !currentCombatants[i].isCaptured().booleanValue())
+                    if(!currentCombatants[i].isSurrounded() && !currentCombatants[i].isCaptured())
                     {
                         Boolean contribute = Boolean.valueOf(true);
-                        if(finalBattle.booleanValue() && (!currentCombatants[i].alive.booleanValue() || currentCombatants[i].resolve <= 0))
+                        if(finalBattle && (!currentCombatants[i].alive || currentCombatants[i].resolve <= 0))
                             contribute = Boolean.valueOf(false);
-                        if(contribute.booleanValue())
+                        if(contribute)
                         {
                             base += (exterminationPerChosen * exterminationMultiplier) / 100;
                             possible += currentCombatants[i].FEARMulti() / 12;
                         }
                     } else
-                    if(currentCombatants[i].getSurroundDuration() == 1 || currentCombatants[i].isCaptured().booleanValue() && (currentCombatants[i].getCaptureProgression() == captureDuration || currentCombatants[i].timesDetonated() > 0 && currentCombatants[i].getCaptureProgression() + currentCombatants[i].getINJULevel() + 1 >= captureDuration))
+                    if(currentCombatants[i].getSurroundDuration() == 1 || currentCombatants[i].isCaptured() && (currentCombatants[i].getCaptureProgression() == captureDuration || currentCombatants[i].timesDetonated() > 0 && currentCombatants[i].getCaptureProgression() + currentCombatants[i].getINJULevel() + 1 >= captureDuration))
                         base += (exterminationPerChosen * exterminationMultiplier) / 100;
 
             for(int i = 1; i < 21; i++)
@@ -28070,12 +28070,12 @@ public class WorldState
             if(getCombatants()[i] != null)
             {
                 getCombatants()[i].updateSurround();
-                if(!getCombatants()[i].isSurrounded().booleanValue() && !getCombatants()[i].isCaptured().booleanValue())
+                if(!getCombatants()[i].isSurrounded() && !getCombatants()[i].isCaptured())
                 {
                     Boolean contribute = Boolean.valueOf(true);
-                    if(finalBattle.booleanValue() && (!getCombatants()[i].alive.booleanValue() || getCombatants()[i].resolve <= 0))
+                    if(finalBattle && (!getCombatants()[i].alive || getCombatants()[i].resolve <= 0))
                         contribute = Boolean.valueOf(false);
-                    if(contribute.booleanValue())
+                    if(contribute)
                         progressExtermination((exterminationPerChosen * exterminationMultiplier) / 100);
                 } else
                 {
@@ -28084,21 +28084,21 @@ public class WorldState
                 }
             }
 
-        if((exterminationProgress < exterminationComplete || haltEnding.booleanValue()) && getTechs()[18].isOwned().booleanValue())
+        if((exterminationProgress < exterminationComplete || haltEnding) && getTechs()[18].isOwned())
             readyToEnd = Boolean.valueOf(false);
-        if((exterminationProgress < exterminationComplete || haltEnding.booleanValue() || getTechs()[18].isOwned().booleanValue() && !readyToEnd.booleanValue()) && exterminationProgress >= 0)
+        if((exterminationProgress < exterminationComplete || haltEnding || getTechs()[18].isOwned() && !readyToEnd) && exterminationProgress >= 0)
         {
             if(evacuationProgress >= evacuationComplete)
             {
                 Chosen c = null;
                 Boolean allGrabbed = Boolean.valueOf(true);
                 if(getCombatants()[0] != null)
-                    if(getCombatants()[0].isSurrounded().booleanValue() || getCombatants()[0].isCaptured().booleanValue() || finalBattle.booleanValue() && (!getCombatants()[0].alive.booleanValue() || getCombatants()[0].resolve <= 0))
+                    if(getCombatants()[0].isSurrounded() || getCombatants()[0].isCaptured() || finalBattle && (!getCombatants()[0].alive || getCombatants()[0].resolve <= 0))
                     {
                         if(getCombatants()[1] != null)
-                            if(getCombatants()[1].isSurrounded().booleanValue() || getCombatants()[1].isCaptured().booleanValue() || finalBattle.booleanValue() && (!getCombatants()[1].alive.booleanValue() || getCombatants()[1].resolve <= 0))
+                            if(getCombatants()[1].isSurrounded() || getCombatants()[1].isCaptured() || finalBattle && (!getCombatants()[1].alive || getCombatants()[1].resolve <= 0))
                             {
-                                if(getCombatants()[2] != null && !getCombatants()[2].isSurrounded().booleanValue() && !getCombatants()[2].isCaptured().booleanValue() && (!finalBattle.booleanValue() || getCombatants()[2].alive.booleanValue() && getCombatants()[2].resolve > 0))
+                                if(getCombatants()[2] != null && !getCombatants()[2].isSurrounded() && !getCombatants()[2].isCaptured() && (!finalBattle || getCombatants()[2].alive && getCombatants()[2].resolve > 0))
                                     allGrabbed = Boolean.valueOf(false);
                             } else
                             {
@@ -28108,7 +28108,7 @@ public class WorldState
                     {
                         allGrabbed = Boolean.valueOf(false);
                     }
-                if(allGrabbed.booleanValue())
+                if(allGrabbed)
                 {
                     if(exterminationProgress < exterminationComplete)
                         exterminationMultiplier = (exterminationMultiplier * 3) / 2;
@@ -28116,50 +28116,50 @@ public class WorldState
                 if(exterminationProgress >= exterminationComplete)
                 {
                     Boolean allFree = Boolean.valueOf(true);
-                    if(getCombatants()[0].isSurrounded().booleanValue() || getCombatants()[0].isCaptured().booleanValue())
+                    if(getCombatants()[0].isSurrounded() || getCombatants()[0].isCaptured())
                         allFree = Boolean.valueOf(false);
                     else
                     if(getCombatants()[1] != null)
-                        if(getCombatants()[1].isSurrounded().booleanValue() || getCombatants()[1].isCaptured().booleanValue())
+                        if(getCombatants()[1].isSurrounded() || getCombatants()[1].isCaptured())
                             allFree = Boolean.valueOf(false);
                         else
-                        if(getCombatants()[2] != null && (getCombatants()[2].isSurrounded().booleanValue() || getCombatants()[2].isCaptured().booleanValue()))
+                        if(getCombatants()[2] != null && (getCombatants()[2].isSurrounded() || getCombatants()[2].isCaptured()))
                             allFree = Boolean.valueOf(false);
-                    if(allFree.booleanValue())
+                    if(allFree)
                     {
                         readyToEnd = Boolean.valueOf(true);
                         int defeated = 0;
                         Chosen survivor = null;
                         for(int i = 0; i < 3; i++)
-                            if(finalBattle.booleanValue())
-                                if(!getCast()[i].alive.booleanValue() || getCast()[i].resolve <= 0)
+                            if(finalBattle)
+                                if(!getCast()[i].alive || getCast()[i].resolve <= 0)
                                     defeated++;
                                 else
                                     survivor = getCast()[i];
 
                     } else
-                    if(finalBattle.booleanValue())
+                    if(finalBattle)
                     {
                         Chosen killer1 = null;
                         Chosen killer2 = null;
                         Chosen victim1 = null;
                         Chosen victim2 = null;
                         for(int i = 0; i < 3; i++)
-                            if(getCast()[i].isSurrounded().booleanValue() || getCast()[i].isCaptured().booleanValue())
+                            if(getCast()[i].isSurrounded() || getCast()[i].isCaptured())
                             {
                                 if(victim1 == null)
                                     victim1 = getCast()[i];
                                 else
                                     victim2 = getCast()[i];
                             } else
-                            if(getCast()[i].alive.booleanValue() && getCast()[i].resolve > 0)
+                            if(getCast()[i].alive && getCast()[i].resolve > 0)
                                 if(killer1 == null)
                                     killer1 = getCast()[i];
                                 else
                                     killer2 = getCast()[i];
 
                         int duration1 = 0;
-                        if(victim1.isSurrounded().booleanValue())
+                        if(victim1.isSurrounded())
                         {
                             duration1 = victim1.getSurroundDuration();
                         } else
@@ -28170,7 +28170,7 @@ public class WorldState
                         }
                         int duration2 = 0;
                         if(victim2 != null)
-                            if(victim2.isSurrounded().booleanValue())
+                            if(victim2.isSurrounded())
                             {
                                 duration2 = victim2.getSurroundDuration();
                             } else
@@ -28192,25 +28192,25 @@ public class WorldState
                             readyToEnd = Boolean.valueOf(true);
                             if(victim2 != null)
                             {
-                                if(getRelationship(killer1.getNumber(), victim1.getNumber()) == -4 || victim1.isImpregnated().booleanValue() || victim1.isHypnotized().booleanValue() || victim1.isDrained().booleanValue() || victim1.isParasitized().booleanValue() || victim1.temptReq < 0x186a0L || victim1.dissociationReq < 10 || victim1.resolve < 50)
+                                if(getRelationship(killer1.getNumber(), victim1.getNumber()) == -4 || victim1.isImpregnated() || victim1.isHypnotized() || victim1.isDrained() || victim1.isParasitized() || victim1.temptReq < 0x186a0L || victim1.dissociationReq < 10 || victim1.resolve < 50)
                                 {
-                                    if(getRelationship(killer1.getNumber(), victim2.getNumber()) == -4 || victim2.isImpregnated().booleanValue() || victim2.isHypnotized().booleanValue() || victim2.isDrained().booleanValue() || victim2.isParasitized().booleanValue() || victim2.temptReq < 0x186a0L || victim2.dissociationReq < 10 || victim2.resolve < 50)
+                                    if(getRelationship(killer1.getNumber(), victim2.getNumber()) == -4 || victim2.isImpregnated() || victim2.isHypnotized() || victim2.isDrained() || victim2.isParasitized() || victim2.temptReq < 0x186a0L || victim2.dissociationReq < 10 || victim2.resolve < 50)
                                     {
-                                        if(getTechs()[40].isOwned().booleanValue() && !killer1.hesitated.booleanValue() && (getRelationship(killer1.getNumber(), victim1.getNumber()) == 4 || getRelationship(killer1.getNumber(), victim2.getNumber()) == 4) && getRelationship(killer1.getNumber(), victim1.getNumber()) == 4)
+                                        if(getTechs()[40].isOwned() && !killer1.hesitated && (getRelationship(killer1.getNumber(), victim1.getNumber()) == 4 || getRelationship(killer1.getNumber(), victim2.getNumber()) == 4) && getRelationship(killer1.getNumber(), victim1.getNumber()) == 4)
                                             getRelationship(killer1.getNumber(), victim2.getNumber());
                                     } else
                                     if(duration2 > duration1)
                                         readyToEnd = Boolean.valueOf(false);
                                     else
-                                    if(getTechs()[40].isOwned().booleanValue() && !killer1.hesitated.booleanValue())
+                                    if(getTechs()[40].isOwned() && !killer1.hesitated)
                                         getRelationship(killer1.getNumber(), victim1.getNumber());
                                 } else
-                                if(getRelationship(killer1.getNumber(), victim2.getNumber()) == -4 || victim2.isImpregnated().booleanValue() || victim2.isHypnotized().booleanValue() || victim2.isDrained().booleanValue() || victim2.isParasitized().booleanValue() || victim2.temptReq < 0x186a0L || victim2.dissociationReq < 10 || victim2.resolve < 50)
+                                if(getRelationship(killer1.getNumber(), victim2.getNumber()) == -4 || victim2.isImpregnated() || victim2.isHypnotized() || victim2.isDrained() || victim2.isParasitized() || victim2.temptReq < 0x186a0L || victim2.dissociationReq < 10 || victim2.resolve < 50)
                                 {
                                     if(duration1 > duration2)
                                         readyToEnd = Boolean.valueOf(false);
                                     else
-                                    if(getTechs()[40].isOwned().booleanValue() && !killer1.hesitated.booleanValue())
+                                    if(getTechs()[40].isOwned() && !killer1.hesitated)
                                         getRelationship(killer1.getNumber(), victim2.getNumber());
                                 } else
                                 {
@@ -28219,16 +28219,16 @@ public class WorldState
                             } else
                             if(killer2 != null)
                             {
-                                if(victim1.isImpregnated().booleanValue() || victim1.isHypnotized().booleanValue() || victim1.isDrained().booleanValue() || victim1.isParasitized().booleanValue() || victim1.temptReq < 0x186a0L || victim1.dissociationReq < 10 || victim1.resolve < 50)
+                                if(victim1.isImpregnated() || victim1.isHypnotized() || victim1.isDrained() || victim1.isParasitized() || victim1.temptReq < 0x186a0L || victim1.dissociationReq < 10 || victim1.resolve < 50)
                                 {
-                                    if(getTechs()[40].isOwned().booleanValue())
-                                        if(getRelationship(killer1.getNumber(), victim1.getNumber()) == 4 && !killer1.hesitated.booleanValue())
+                                    if(getTechs()[40].isOwned())
+                                        if(getRelationship(killer1.getNumber(), victim1.getNumber()) == 4 && !killer1.hesitated)
                                         {
-                                            if(getRelationship(killer2.getNumber(), victim1.getNumber()) == 4)
-                                                killer2.hesitated.booleanValue();
+                                            if(getRelationship(killer2.getNumber(), victim1.getNumber()) == 4 && killer2.hesitated == false) {
+                                            }
                                         } else
-                                        if(getRelationship(killer2.getNumber(), victim1.getNumber()) == 4)
-                                            killer2.hesitated.booleanValue();
+                                        if(getRelationship(killer2.getNumber(), victim1.getNumber()) == 4 && killer2.hesitated == false) {
+                                        }
                                 } else
                                 if(getRelationship(killer1.getNumber(), victim1.getNumber()) == -4)
                                     getRelationship(killer2.getNumber(), victim1.getNumber());
@@ -28236,9 +28236,9 @@ public class WorldState
                                 if(getRelationship(killer2.getNumber(), victim1.getNumber()) != -4)
                                     readyToEnd = Boolean.valueOf(false);
                             } else
-                            if(getRelationship(killer1.getNumber(), victim1.getNumber()) == -4 || victim1.isImpregnated().booleanValue() || victim1.isHypnotized().booleanValue() || victim1.isDrained().booleanValue() || victim1.isParasitized().booleanValue() || victim1.temptReq < 0x186a0L || victim1.dissociationReq < 10 || victim1.resolve < 50)
+                            if(getRelationship(killer1.getNumber(), victim1.getNumber()) == -4 || victim1.isImpregnated() || victim1.isHypnotized() || victim1.isDrained() || victim1.isParasitized() || victim1.temptReq < 0x186a0L || victim1.dissociationReq < 10 || victim1.resolve < 50)
                             {
-                                if(getTechs()[40].isOwned().booleanValue() && !killer1.hesitated.booleanValue())
+                                if(getTechs()[40].isOwned() && !killer1.hesitated)
                                     getRelationship(killer1.getNumber(), victim1.getNumber());
                             } else
                             {
@@ -28250,7 +28250,7 @@ public class WorldState
                         while(c == null) 
                         {
                             c = getCombatants()[(int)(Math.random() * 3D)];
-                            if(c != null && (c.isSurrounded().booleanValue() || c.isCaptured().booleanValue()))
+                            if(c != null && (c.isSurrounded() || c.isCaptured()))
                                 c = null;
                         }
                     }
@@ -28261,15 +28261,17 @@ public class WorldState
                     while(c == null) 
                     {
                         c = getCombatants()[(int)(Math.random() * 3D)];
-                        if(c != null && (c.isSurrounded().booleanValue() || c.isCaptured().booleanValue()))
+                        if(c != null && (c.isSurrounded() || c.isCaptured()))
                             c = null;
                     }
                     Boolean plural = Boolean.valueOf(false);
                     if(getCombatants()[1] != null)
-                        plural = Boolean.valueOf(true);
-                    if(exterminationMultiplier == 100)
-                        plural.booleanValue();
-                    else
+                        plural = true;
+                    if(exterminationMultiplier == 100) {
+                        if (plural) {
+                        } else {
+                        }
+                    }else
                     if(exterminationMultiplier != 150 && exterminationMultiplier != 225 && exterminationMultiplier != 337)
                         if(exterminationMultiplier == 505);
                     if((exterminationMultiplier * 3) / 2 > exterminationMultiplier)
@@ -28357,7 +28359,7 @@ public class WorldState
 
     public Boolean tutorialResponse()
     {
-        if(onTrack.booleanValue())
+        if(onTrack)
             return tutorial;
         else
             return Boolean.valueOf(false);
@@ -28378,7 +28380,7 @@ public class WorldState
         initializeTips();
         for(int i = 0; i < 6; i++)
         {
-            for(Boolean proceed = Boolean.valueOf(false); !proceed.booleanValue();)
+            for(Boolean proceed = Boolean.valueOf(false); !proceed;)
             {
                 nameSeed[i] = (int)(Math.random() * 26D);
                 proceed = Boolean.valueOf(true);
@@ -28442,7 +28444,7 @@ public class WorldState
             customNames[5] = dummy.genName(this, nameSeed)[1];
         }
         append(t, (new StringBuilder("\n\n")).append(separator).append("\n\nGenerating a custom team of Chosen.  Their real names are (in order of appearance):\n\n").toString());
-        if(gaijinStatus[0].booleanValue())
+        if(gaijinStatus[0])
         {
             append(t, customNames[0]);
             if(customNames[1].length() > 0)
@@ -28456,7 +28458,7 @@ public class WorldState
         if(genderBalance[0] != 0 || genderBalance[1] != 3 && genderBalance[2] != 3 && genderBalance[3] != 3)
             append(t, (new StringBuilder(" (")).append(genders[0]).append(")").toString());
         append(t, "\n");
-        if(gaijinStatus[1].booleanValue())
+        if(gaijinStatus[1])
         {
             append(t, customNames[2]);
             if(customNames[3].length() > 0)
@@ -28470,7 +28472,7 @@ public class WorldState
         if(genderBalance[0] != 0 || genderBalance[1] != 3 && genderBalance[2] != 3 && genderBalance[3] != 3)
             append(t, (new StringBuilder(" (")).append(genders[1]).append(")").toString());
         append(t, "\n");
-        if(gaijinStatus[2].booleanValue())
+        if(gaijinStatus[2])
         {
             append(t, customNames[4]);
             if(customNames[5].length() > 0)
@@ -28489,7 +28491,7 @@ public class WorldState
             final int thisChosen = i;
             JButton Change = new JButton(customNames[2 * i]);
             Change.addActionListener(new ActionListener() {
-
+                @Override
                 public void actionPerformed(ActionEvent e)
                 {
                     p.removeAll();
@@ -28515,54 +28517,22 @@ public class WorldState
                         append(t, (new StringBuilder("\n\n")).append(separator).append("\n\nDoes ").append(heShe).append(" use Eastern name order (").append(customNames[thisChosen * 2 + 1]).append(" ").append(customNames[thisChosen * 2]).append(") or Western name order (").append(customNames[thisChosen * 2]).append(" ").append(customNames[thisChosen * 2 + 1]).append(")?").toString());
                         JButton Eastern = new JButton("Eastern");
                         Eastern.addActionListener(new ActionListener() {
-
+                            @Override
                             public void actionPerformed(ActionEvent e)
                             {
                                 gaijinStatus[thisChosen] = Boolean.valueOf(false);
                                 nameGen(t, p, f);
                             }
-
-                            final _cls1 this$1;
-                            private final int val$thisChosen;
-                            private final JTextPane val$t;
-                            private final JPanel val$p;
-                            private final JFrame val$f;
-
-                    
-                    {
-                        this$1 = _cls1.this;
-                        thisChosen = i;
-                        t = jtextpane;
-                        p = jpanel;
-                        f = jframe;
-                        super();
-                    }
                         });
                         p.add(Eastern);
                         JButton Western = new JButton("Western");
                         Western.addActionListener(new ActionListener() {
-
+                            @Override
                             public void actionPerformed(ActionEvent e)
                             {
                                 gaijinStatus[thisChosen] = Boolean.valueOf(true);
                                 nameGen(t, p, f);
                             }
-
-                            final _cls1 this$1;
-                            private final int val$thisChosen;
-                            private final JTextPane val$t;
-                            private final JPanel val$p;
-                            private final JFrame val$f;
-
-                    
-                    {
-                        this$1 = _cls1.this;
-                        thisChosen = i;
-                        t = jtextpane;
-                        p = jpanel;
-                        f = jframe;
-                        super();
-                    }
                         });
                         p.add(Western);
                         p.validate();
@@ -28572,107 +28542,62 @@ public class WorldState
                         nameGen(t, p, f);
                     }
                 }
-
-                final WorldState this$0;
-                private final JPanel val$p;
-                private final int val$thisChosen;
-                private final JTextPane val$t;
-                private final JFrame val$f;
-
-
-            
-            {
-                this$0 = WorldState.this;
-                p = jpanel;
-                thisChosen = i;
-                t = jtextpane;
-                f = jframe;
-                super();
-            }
             });
             p.add(Change);
         }
 
         JButton Continue = new JButton("Continue");
         Continue.addActionListener(new ActionListener() {
-
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 personalityGen(t, p, f, 0);
-            }
-
-            final WorldState this$0;
-            private final JTextPane val$t;
-            private final JPanel val$p;
-            private final JFrame val$f;
-
-            
-            {
-                this$0 = WorldState.this;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                super();
             }
         });
         p.add(Continue);
         JButton Randomize = new JButton("Full Random");
         Randomize.addActionListener(new ActionListener() {
-
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 for(int i = 0; i < 24; i++)
                     quizAnswers[i] = null;
 
-                for(Boolean goodStats = Boolean.valueOf(false); !goodStats.booleanValue();)
+                for(Boolean goodStats = Boolean.valueOf(false); !goodStats;)
                 {
                     goodStats = Boolean.valueOf(true);
                     for(int i = 0; i < statSeed.length; i++)
                         statSeed[i] = (int)(Math.random() * 101D);
 
-                    if(!legalSpread(statSeed, Boolean.valueOf(false)).booleanValue())
+                    if(!legalSpread(statSeed, Boolean.valueOf(false)))
                         goodStats = Boolean.valueOf(false);
                     Boolean pureTarget = Boolean.valueOf(false);
                     Boolean corruptTarget = Boolean.valueOf(false);
                     for(int i = 0; i < 3; i++)
-                        if(determinePurity(statSeed[i * 4], statSeed[1 + i * 4], statSeed[2 + i * 4], statSeed[3 + i * 4]).booleanValue())
+                        if(determinePurity(statSeed[i * 4], statSeed[1 + i * 4], statSeed[2 + i * 4], statSeed[3 + i * 4]))
                             pureTarget = Boolean.valueOf(true);
                         else
                             corruptTarget = Boolean.valueOf(true);
 
-                    if(!pureTarget.booleanValue() || !corruptTarget.booleanValue())
+                    if(!pureTarget || !corruptTarget)
                         goodStats = Boolean.valueOf(false);
                 }
 
                 newVulnerabilities(t, p, f);
-            }
-
-            final WorldState this$0;
-            private final JTextPane val$t;
-            private final JPanel val$p;
-            private final JFrame val$f;
-
-            
-            {
-                this$0 = WorldState.this;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                super();
             }
         });
         p.add(Randomize);
         final WorldState w = this;
         JButton Quit = new JButton("Quit");
         Quit.addActionListener(new ActionListener() {
-
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 p.removeAll();
                 append(t, (new StringBuilder("\n\n")).append(separator).append("\n\nReally quit?  All customization of this team will be lost.").toString());
                 JButton ReallyQuit = new JButton("Quit");
                 ReallyQuit.addActionListener(new ActionListener() {
-
+                    @Override
                     public void actionPerformed(ActionEvent e)
                     {
                         append(t, (new StringBuilder("\n\n")).append(separator).append("\n\n").toString());
@@ -28681,66 +28606,19 @@ public class WorldState
                         x.copyToggles(w);
                         Project.IntroOne(t, p, f, x);
                     }
-
-                    final _cls4 this$1;
-                    private final JTextPane val$t;
-                    private final WorldState val$w;
-                    private final JPanel val$p;
-                    private final JFrame val$f;
-
-                    
-                    {
-                        this$1 = _cls4.this;
-                        t = jtextpane;
-                        w = worldstate;
-                        p = jpanel;
-                        f = jframe;
-                        super();
-                    }
                 });
                 p.add(ReallyQuit);
                 JButton Back = new JButton("Cancel");
                 Back.addActionListener(new ActionListener() {
-
+                    @Override
                     public void actionPerformed(ActionEvent e)
                     {
                         nameGen(t, p, f);
-                    }
-
-                    final _cls4 this$1;
-                    private final JTextPane val$t;
-                    private final JPanel val$p;
-                    private final JFrame val$f;
-
-                    
-                    {
-                        this$1 = _cls4.this;
-                        t = jtextpane;
-                        p = jpanel;
-                        f = jframe;
-                        super();
                     }
                 });
                 p.add(Back);
                 p.validate();
                 p.repaint();
-            }
-
-            final WorldState this$0;
-            private final JPanel val$p;
-            private final JTextPane val$t;
-            private final WorldState val$w;
-            private final JFrame val$f;
-
-
-            
-            {
-                this$0 = WorldState.this;
-                p = jpanel;
-                t = jtextpane;
-                w = worldstate1;
-                f = jframe;
-                super();
             }
         });
         p.add(Quit);
@@ -28936,7 +28814,7 @@ public class WorldState
             final int thisChosen = i;
             JButton Pick = new JButton(customNames[i * 2]);
             Pick.addActionListener(new ActionListener() {
-
+                @Override
                 public void actionPerformed(ActionEvent e)
                 {
                     personalityWeights[progress][thisChosen] = finalImpact;
@@ -28946,33 +28824,13 @@ public class WorldState
                     else
                         determineStats(t, p, f);
                 }
-
-                final WorldState this$0;
-                private final int val$progress;
-                private final int val$thisChosen;
-                private final int val$finalImpact[];
-                private final JTextPane val$t;
-                private final JPanel val$p;
-                private final JFrame val$f;
-
-            
-            {
-                this$0 = WorldState.this;
-                progress = i;
-                thisChosen = j;
-                finalImpact = ai;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                super();
-            }
             });
             p.add(Pick);
         }
 
         JButton Pass = new JButton("Pass");
         Pass.addActionListener(new ActionListener() {
-
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 quizAnswers[progress] = "pass";
@@ -28981,27 +28839,11 @@ public class WorldState
                 else
                     determineStats(t, p, f);
             }
-
-            final WorldState this$0;
-            private final int val$progress;
-            private final JTextPane val$t;
-            private final JPanel val$p;
-            private final JFrame val$f;
-
-            
-            {
-                this$0 = WorldState.this;
-                progress = i;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                super();
-            }
         });
         p.add(Pass);
         JButton Back = new JButton("Back");
         Back.addActionListener(new ActionListener() {
-
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 if(progress > 0)
@@ -29009,35 +28851,19 @@ public class WorldState
                 else
                     nameGen(t, p, f);
             }
-
-            final WorldState this$0;
-            private final int val$progress;
-            private final JTextPane val$t;
-            private final JPanel val$p;
-            private final JFrame val$f;
-
-            
-            {
-                this$0 = WorldState.this;
-                progress = i;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                super();
-            }
         });
         p.add(Back);
         JButton Quit = new JButton("Quit");
         final WorldState w = this;
         Quit.addActionListener(new ActionListener() {
-
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 p.removeAll();
                 append(t, (new StringBuilder("\n\n")).append(separator).append("\n\nReally quit?  All customization of this team will be lost.").toString());
                 JButton ReallyQuit = new JButton("Quit");
                 ReallyQuit.addActionListener(new ActionListener() {
-
+                    @Override
                     public void actionPerformed(ActionEvent e)
                     {
                         append(t, (new StringBuilder("\n\n")).append(separator).append("\n\n").toString());
@@ -29046,70 +28872,19 @@ public class WorldState
                         x.copyToggles(w);
                         Project.IntroOne(t, p, f, x);
                     }
-
-                    final _cls8 this$1;
-                    private final JTextPane val$t;
-                    private final WorldState val$w;
-                    private final JPanel val$p;
-                    private final JFrame val$f;
-
-                    
-                    {
-                        this$1 = _cls8.this;
-                        t = jtextpane;
-                        w = worldstate;
-                        p = jpanel;
-                        f = jframe;
-                        super();
-                    }
                 });
                 p.add(ReallyQuit);
                 JButton Back = new JButton("Cancel");
                 Back.addActionListener(new ActionListener() {
-
+                    @Override
                     public void actionPerformed(ActionEvent e)
                     {
                         personalityGen(t, p, f, progress);
-                    }
-
-                    final _cls8 this$1;
-                    private final JTextPane val$t;
-                    private final JPanel val$p;
-                    private final JFrame val$f;
-                    private final int val$progress;
-
-                    
-                    {
-                        this$1 = _cls8.this;
-                        t = jtextpane;
-                        p = jpanel;
-                        f = jframe;
-                        progress = i;
-                        super();
                     }
                 });
                 p.add(Back);
                 p.validate();
                 p.repaint();
-            }
-
-            final WorldState this$0;
-            private final JPanel val$p;
-            private final JTextPane val$t;
-            private final WorldState val$w;
-            private final JFrame val$f;
-            private final int val$progress;
-
-
-            
-            {
-                this$0 = WorldState.this;
-                p = jpanel;
-                t = jtextpane;
-                w = worldstate1;
-                f = jframe;
-                progress = i;
-                super();
             }
         });
         p.add(Quit);
@@ -29288,7 +29063,7 @@ public class WorldState
         }
 
         int attempts;
-        for(attempts = 0; !legalSpread(statSeed, Boolean.valueOf(true)).booleanValue() && attempts < 1000; attempts++)
+        for(attempts = 0; !legalSpread(statSeed, Boolean.valueOf(true)) && attempts < 1000; attempts++)
         {
             int counts[][] = new int[3][3];
             for(int i = 0; i < 3; i++)
@@ -29407,7 +29182,7 @@ public class WorldState
                         for(int j = 0; j < 4; j++)
                         {
                             Boolean legalTrade = Boolean.valueOf(false);
-                            if(tradeHigherForLower.booleanValue())
+                            if(tradeHigherForLower)
                             {
                                 if(tradeRangeIndex == 1)
                                 {
@@ -29424,13 +29199,13 @@ public class WorldState
                             } else
                             if(statSeed[m * 4 + j] < 34)
                                 legalTrade = Boolean.valueOf(true);
-                            if(flexibilities[m][j] + flexibilities[n][j] > highestSum && legalTrade.booleanValue() && statSeed[n * 4 + j] >= tradeLowerRange && statSeed[n * 4 + j] <= tradeUpperRange)
+                            if(flexibilities[m][j] + flexibilities[n][j] > highestSum && legalTrade && statSeed[n * 4 + j] >= tradeLowerRange && statSeed[n * 4 + j] <= tradeUpperRange)
                             {
                                 highestSum = flexibilities[m][j] + flexibilities[n][j];
                                 traded = j;
                                 subject = n;
                             }
-                            if(flexibilities[m][j] + flexibilities[q][j] > highestSum && legalTrade.booleanValue() && statSeed[q * 4 + j] >= tradeLowerRange && statSeed[q * 4 + j] <= tradeUpperRange)
+                            if(flexibilities[m][j] + flexibilities[q][j] > highestSum && legalTrade && statSeed[q * 4 + j] >= tradeLowerRange && statSeed[q * 4 + j] <= tradeUpperRange)
                             {
                                 highestSum = flexibilities[m][j] + flexibilities[q][j];
                                 traded = j;
@@ -29446,7 +29221,7 @@ public class WorldState
                         {
                             Boolean legalTrade = Boolean.valueOf(false);
                             if(statSeed[subject * 4 + j] >= tradeLowerRange && statSeed[subject * 4 + j] <= tradeUpperRange)
-                                if(tradeHigherForLower.booleanValue())
+                                if(tradeHigherForLower)
                                 {
                                     if(tradeRangeIndex == 1)
                                     {
@@ -29463,7 +29238,7 @@ public class WorldState
                                 } else
                                 if(statSeed[m * 4 + j] < 34)
                                     legalTrade = Boolean.valueOf(true);
-                            if(flexibilities[m][j] + flexibilities[subject][j] > highestSum && legalTrade.booleanValue())
+                            if(flexibilities[m][j] + flexibilities[subject][j] > highestSum && legalTrade)
                             {
                                 highestSum = flexibilities[m][j] + flexibilities[subject][j];
                                 traded = j;
@@ -29472,7 +29247,7 @@ public class WorldState
 
                     }
                     if(traded >= 0)
-                        if(tradeHigherForLower.booleanValue())
+                        if(tradeHigherForLower)
                         {
                             statSeed[m * 4 + traded] = (tradeUpperRange + 2) - flexibilities[m][traded] * 2;
                             statSeed[subject * 4 + traded] = tradeUpperRange + flexibilities[subject][traded] * 2;
@@ -29533,7 +29308,7 @@ public class WorldState
         }
 
         append(t, "If you like, you can review the Vulnerabilities of the team you've created here, and you may determine whether they start broken or not.  The Chosen take more damage of types associated with broken Vulnerabilities, but breaking Vulnerabilities during play grants bonus Evil Energy and can cause tension within the team.");
-        if(shown.booleanValue())
+        if(shown)
         {
             append(t, "  Click 'Continue' once you're done.");
             for(int i = 0; i < 3; i++)
@@ -29557,7 +29332,7 @@ public class WorldState
                         greenAppend(t, (new StringBuilder("\n")).append(type).append(": Significant").toString());
                     else
                         redAppend(t, (new StringBuilder("\n")).append(type).append(": Minor").toString());
-                    if(!allPurities[i][j].booleanValue())
+                    if(!allPurities[i][j])
                         redAppend(t, " (BROKEN)");
                 }
 
@@ -29573,185 +29348,88 @@ public class WorldState
             final int thisChosen = i;
             JButton ThisOne = new JButton(customNames[thisChosen * 2]);
             ThisOne.addActionListener(new ActionListener() {
-
+                @Override
                 public void actionPerformed(ActionEvent e)
                 {
                     reviewVulnerabilities(t, p, f, shown, thisChosen, 0);
                 }
-
-                final WorldState this$0;
-                private final JTextPane val$t;
-                private final JPanel val$p;
-                private final JFrame val$f;
-                private final Boolean val$shown;
-                private final int val$thisChosen;
-
-            
-            {
-                this$0 = WorldState.this;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                shown = boolean1;
-                thisChosen = i;
-                super();
-            }
             });
             p.add(ThisOne);
         }
 
         JButton ShowAll = new JButton("Show All");
-        if(shown.booleanValue())
+        if(shown)
             ShowAll.setText("Hide All");
         ShowAll.addActionListener(new ActionListener() {
-
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 append(t, (new StringBuilder("\n\n")).append(separator).append("\n\n").toString());
-                vulnerabilityMenu(t, p, f, Boolean.valueOf(!shown.booleanValue()));
-            }
-
-            final WorldState this$0;
-            private final JTextPane val$t;
-            private final JPanel val$p;
-            private final JFrame val$f;
-            private final Boolean val$shown;
-
-            
-            {
-                this$0 = WorldState.this;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                shown = boolean1;
-                super();
+                vulnerabilityMenu(t, p, f, Boolean.valueOf(!shown));
             }
         });
         p.add(ShowAll);
         JButton Continue = new JButton("Continue");
         Continue.addActionListener(new ActionListener() {
-
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 newCosmetics(t, p, f);
-            }
-
-            final WorldState this$0;
-            private final JTextPane val$t;
-            private final JPanel val$p;
-            private final JFrame val$f;
-
-            
-            {
-                this$0 = WorldState.this;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                super();
             }
         });
         p.add(Continue);
         JButton Back = new JButton("Back");
         Back.addActionListener(new ActionListener() {
-
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 p.removeAll();
                 final Boolean toQuiz = Boolean.valueOf(quizAnswers[23] != null);
                 append(t, (new StringBuilder("\n\n")).append(separator).append("\n\nReally go back to ").toString());
-                if(toQuiz.booleanValue())
+                if(toQuiz)
                     append(t, "the personality quiz");
                 else
                     append(t, "name settings");
                 append(t, "?  The Vulnerability adjustments set on this screen will be reset.");
                 JButton ReallyQuit = new JButton("Back");
                 ReallyQuit.addActionListener(new ActionListener() {
-
+                    @Override
                     public void actionPerformed(ActionEvent e)
                     {
                         append(t, (new StringBuilder("\n\n")).append(separator).append("\n\n").toString());
-                        if(toQuiz.booleanValue())
+                        if(toQuiz)
                             personalityGen(t, p, f, 23);
                         else
                             nameGen(t, p, f);
-                    }
-
-                    final _cls12 this$1;
-                    private final JTextPane val$t;
-                    private final Boolean val$toQuiz;
-                    private final JPanel val$p;
-                    private final JFrame val$f;
-
-                    
-                    {
-                        this$1 = _cls12.this;
-                        t = jtextpane;
-                        toQuiz = boolean1;
-                        p = jpanel;
-                        f = jframe;
-                        super();
                     }
                 });
                 p.add(ReallyQuit);
                 JButton Back = new JButton("Cancel");
                 Back.addActionListener(new ActionListener() {
-
+                    @Override
                     public void actionPerformed(ActionEvent e)
                     {
                         append(t, (new StringBuilder("\n\n")).append(separator).append("\n\n").toString());
                         vulnerabilityMenu(t, p, f, shown);
-                    }
-
-                    final _cls12 this$1;
-                    private final JTextPane val$t;
-                    private final JPanel val$p;
-                    private final JFrame val$f;
-                    private final Boolean val$shown;
-
-                    
-                    {
-                        this$1 = _cls12.this;
-                        t = jtextpane;
-                        p = jpanel;
-                        f = jframe;
-                        shown = boolean1;
-                        super();
                     }
                 });
                 p.add(Back);
                 p.validate();
                 p.repaint();
             }
-
-            final WorldState this$0;
-            private final JPanel val$p;
-            private final JTextPane val$t;
-            private final JFrame val$f;
-            private final Boolean val$shown;
-
-
-            
-            {
-                this$0 = WorldState.this;
-                p = jpanel;
-                t = jtextpane;
-                f = jframe;
-                shown = boolean1;
-                super();
-            }
         });
         p.add(Back);
         final WorldState w = this;
         JButton Quit = new JButton("Quit");
         Quit.addActionListener(new ActionListener() {
-
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 p.removeAll();
                 append(t, (new StringBuilder("\n\n")).append(separator).append("\n\nReally quit?  All customization of this team will be lost.").toString());
                 JButton ReallyQuit = new JButton("Quit");
                 ReallyQuit.addActionListener(new ActionListener() {
-
+                    @Override
                     public void actionPerformed(ActionEvent e)
                     {
                         append(t, (new StringBuilder("\n\n")).append(separator).append("\n\n").toString());
@@ -29760,71 +29438,20 @@ public class WorldState
                         x.copyToggles(w);
                         Project.IntroOne(t, p, f, x);
                     }
-
-                    final _cls13 this$1;
-                    private final JTextPane val$t;
-                    private final WorldState val$w;
-                    private final JPanel val$p;
-                    private final JFrame val$f;
-
-                    
-                    {
-                        this$1 = _cls13.this;
-                        t = jtextpane;
-                        w = worldstate;
-                        p = jpanel;
-                        f = jframe;
-                        super();
-                    }
                 });
                 p.add(ReallyQuit);
                 JButton Back = new JButton("Cancel");
                 Back.addActionListener(new ActionListener() {
-
+                    @Override
                     public void actionPerformed(ActionEvent e)
                     {
                         append(t, (new StringBuilder("\n\n")).append(separator).append("\n\n").toString());
                         vulnerabilityMenu(t, p, f, shown);
                     }
-
-                    final _cls13 this$1;
-                    private final JTextPane val$t;
-                    private final JPanel val$p;
-                    private final JFrame val$f;
-                    private final Boolean val$shown;
-
-                    
-                    {
-                        this$1 = _cls13.this;
-                        t = jtextpane;
-                        p = jpanel;
-                        f = jframe;
-                        shown = boolean1;
-                        super();
-                    }
                 });
                 p.add(Back);
                 p.validate();
                 p.repaint();
-            }
-
-            final WorldState this$0;
-            private final JPanel val$p;
-            private final JTextPane val$t;
-            private final WorldState val$w;
-            private final JFrame val$f;
-            private final Boolean val$shown;
-
-
-            
-            {
-                this$0 = WorldState.this;
-                p = jpanel;
-                t = jtextpane;
-                w = worldstate1;
-                f = jframe;
-                shown = boolean1;
-                super();
             }
         });
         p.add(Quit);
@@ -29877,7 +29504,7 @@ public class WorldState
                     append(t, (new StringBuilder(", so ")).append(heShe).append(" wouldn't normally engage in 'immoral' activities like violence and sex with other men.  ").toString());
                 else
                     append(t, (new StringBuilder(", so ")).append(heShe).append(" wouldn't normally engage in 'immoral' activities like violence and promiscuity.  ").toString());
-                if(allPurities[id][0].booleanValue())
+                if(allPurities[id][0])
                     append(t, (new StringBuilder("If this Vulnerability is broken, it means ")).append(heShe).append(" has already been raped by the time the game starts.").toString());
                 else
                     append(t, (new StringBuilder("However, ")).append(heShe).append(" is set to have already been raped before the game starts.").toString());
@@ -29886,7 +29513,7 @@ public class WorldState
                 append(t, "Morality is only a ");
                 redAppend(t, "Minor");
                 append(t, (new StringBuilder(" concern for ")).append(customNames[id * 2]).append(", ").toString());
-                if(allPurities[id][0].booleanValue())
+                if(allPurities[id][0])
                 {
                     if(genders[id].equals("male"))
                         append(t, (new StringBuilder("but ")).append(heShe).append(" hasn't gotten curious enough to try having sex with other men yet.  Break this Vulnerability to change that.").toString());
@@ -29916,7 +29543,7 @@ public class WorldState
             if(statSeed[id * 4 + 1] > 33)
             {
                 append(t, (new StringBuilder(", so ")).append(heShe).append(" wouldn't normally have any idea how good it can feel to be forced to cum during battle.  ").toString());
-                if(allPurities[id][1].booleanValue())
+                if(allPurities[id][1])
                     append(t, (new StringBuilder("If this Vulnerability is broken, it means ")).append(heShe).append(" has already become addicted to this feeling.").toString());
                 else
                     append(t, (new StringBuilder("However, ")).append(heShe).append(" is set to have already become addicted to this feeling when the game starts.").toString());
@@ -29925,7 +29552,7 @@ public class WorldState
                 append(t, (new StringBuilder(String.valueOf(customNames[id * 2]))).append(" has retained only a ").toString());
                 redAppend(t, "Minor");
                 append(t, " amount of Innocence");
-                if(allPurities[id][1].booleanValue())
+                if(allPurities[id][1])
                     append(t, (new StringBuilder(", but ")).append(heShe).append("'s still sane enough to hold back from cumming during battle.  Break this Vulnerability to change that.").toString());
                 else
                     append(t, (new StringBuilder(", so ")).append(heShe).append(" happily allows ").append(himHer).append("self to cum during battle.  Restore this Vulnerability to have ").append(himHer).append(" start out with some restraint.").toString());
@@ -29948,7 +29575,7 @@ public class WorldState
             if(statSeed[id * 4 + 2] > 33)
             {
                 append(t, (new StringBuilder(" because of ")).append(hisHer).append(" past victories against the Demons.  ").toString());
-                if(allPurities[id][2].booleanValue())
+                if(allPurities[id][2])
                     append(t, (new StringBuilder("If this Vulnerability is broken, it means ")).append(heShe).append(" has suffered a crushing defeat and been tortured before.").toString());
                 else
                     append(t, (new StringBuilder("However, ")).append(heShe).append(" is set to have already had ").append(hisHer).append(" self-image shaken by being defeated and tortured recently.").toString());
@@ -29957,7 +29584,7 @@ public class WorldState
                 append(t, (new StringBuilder(String.valueOf(customNames[id * 2]))).append(" has only a ").toString());
                 redAppend(t, "Minor");
                 append(t, " amount of Confidence left");
-                if(allPurities[id][2].booleanValue())
+                if(allPurities[id][2])
                     append(t, (new StringBuilder(", but this is due purely to ")).append(hisHer).append(" weak personality.  Break this Vulnerability to have ").append(hisHer).append(" self-esteem damaged by a recent capture and torture.").toString());
                 else
                     append(t, (new StringBuilder(", largely because of ")).append(hisHer).append(" recent defeat and torture at the hands of the Demons.  Restore this Vulnerability to erase this event and let ").append(himHer).append(" start out with at least a little bit of hope.").toString());
@@ -29980,7 +29607,7 @@ public class WorldState
             if(statSeed[id * 4 + 3] > 33)
             {
                 append(t, ", wanting to be viewed as a mighty, unassailable warrior.  ");
-                if(allPurities[id][3].booleanValue())
+                if(allPurities[id][3])
                     append(t, (new StringBuilder("If this Vulnerability is broken, it means ")).append(heShe).append(" has been stripped and had ").append(hisHer).append(" humiliation broadcast to the world.").toString());
                 else
                     append(t, (new StringBuilder("However, ")).append(heShe).append(" is set to have already had ").append(hisHer).append(" public image damaged by being stripped during battle and having the footage broadcast to the world.").toString());
@@ -29989,30 +29616,30 @@ public class WorldState
                 append(t, (new StringBuilder(String.valueOf(customNames[id * 2]))).append(" has only a ").toString());
                 redAppend(t, "Minor");
                 append(t, (new StringBuilder(" interest in retaining ")).append(hisHer).append(" dignity").toString());
-                if(allPurities[id][3].booleanValue())
+                if(allPurities[id][3])
                     append(t, (new StringBuilder(", but ")).append(heShe).append(" has managed to avoid any public humiliation so far, mostly through pure luck.  Break this Vulnerability to have footage of ").append(hisHer).append(" defeat and stripping be broadcast to the world.").toString());
                 else
                     append(t, (new StringBuilder(", and as a result, ")).append(heShe).append(" hasn't managed to stop footage of ").append(hisHer).append(" defeat and stripping from being spread across the world.  Restore this Vulnerability to make it so that ").append(heShe).append(" hasn't yet been captured in such a shameful state.").toString());
             }
         }
         JButton Toggle = new JButton("Break");
-        if(!allPurities[id][progress].booleanValue())
+        if(!allPurities[id][progress])
             Toggle.setText("Restore");
         Toggle.addActionListener(new ActionListener() {
-
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 if(progress == 0)
-                    invertVVirg[id] = Boolean.valueOf(!invertVVirg[id].booleanValue());
+                    invertVVirg[id] = Boolean.valueOf(!invertVVirg[id]);
                 else
                 if(progress == 1)
-                    invertCVirg[id] = Boolean.valueOf(!invertCVirg[id].booleanValue());
+                    invertCVirg[id] = Boolean.valueOf(!invertCVirg[id]);
                 else
                 if(progress == 2)
-                    invertAVirg[id] = Boolean.valueOf(!invertAVirg[id].booleanValue());
+                    invertAVirg[id] = Boolean.valueOf(!invertAVirg[id]);
                 else
                 if(progress == 3)
-                    invertModest[id] = Boolean.valueOf(!invertModest[id].booleanValue());
+                    invertModest[id] = Boolean.valueOf(!invertModest[id]);
                 if(progress < 3)
                 {
                     reviewVulnerabilities(t, p, f, shown, id, progress + 1);
@@ -30021,32 +29648,12 @@ public class WorldState
                     append(t, (new StringBuilder("\n\n")).append(separator).append("\n\n").toString());
                     vulnerabilityMenu(t, p, f, shown);
                 }
-            }
-
-            final WorldState this$0;
-            private final int val$progress;
-            private final int val$id;
-            private final JTextPane val$t;
-            private final JPanel val$p;
-            private final JFrame val$f;
-            private final Boolean val$shown;
-
-            
-            {
-                this$0 = WorldState.this;
-                progress = i;
-                id = j;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                shown = boolean1;
-                super();
             }
         });
         p.add(Toggle);
         JButton Continue = new JButton("Continue");
         Continue.addActionListener(new ActionListener() {
-
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 if(progress < 3)
@@ -30057,26 +29664,6 @@ public class WorldState
                     append(t, (new StringBuilder("\n\n")).append(separator).append("\n\n").toString());
                     vulnerabilityMenu(t, p, f, shown);
                 }
-            }
-
-            final WorldState this$0;
-            private final int val$progress;
-            private final JTextPane val$t;
-            private final JPanel val$p;
-            private final JFrame val$f;
-            private final Boolean val$shown;
-            private final int val$id;
-
-            
-            {
-                this$0 = WorldState.this;
-                progress = i;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                shown = boolean1;
-                id = j;
-                super();
             }
         });
         p.add(Continue);
@@ -30503,118 +30090,59 @@ public class WorldState
             JButton ThisOne = new JButton(customNames[i * 2]);
             final int thisChosen = i;
             ThisOne.addActionListener(new ActionListener() {
-
+                @Override
                 public void actionPerformed(ActionEvent e)
                 {
                     String baseAesthetics[] = pickCosmetics(statSeed[thisChosen * 4], statSeed[thisChosen * 4 + 1], statSeed[thisChosen * 4 + 2], statSeed[thisChosen * 4 + 3]);
                     aliasCustomize(t, p, f, thisChosen, baseAesthetics);
                 }
-
-                final WorldState this$0;
-                private final int val$thisChosen;
-                private final JTextPane val$t;
-                private final JPanel val$p;
-                private final JFrame val$f;
-
-            
-            {
-                this$0 = WorldState.this;
-                thisChosen = i;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                super();
-            }
             });
             p.add(ThisOne);
         }
 
         JButton Back = new JButton("Back");
         Back.addActionListener(new ActionListener() {
-
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 p.removeAll();
                 append(t, (new StringBuilder("\n\n")).append(separator).append("\n\nReally go back to Vulnerability review?  The cosmetic traits set on this screen will be reset.").toString());
                 JButton ReallyQuit = new JButton("Back");
                 ReallyQuit.addActionListener(new ActionListener() {
-
+                    @Override
                     public void actionPerformed(ActionEvent e)
                     {
                         append(t, (new StringBuilder("\n\n")).append(separator).append("\n\n").toString());
                         vulnerabilityMenu(t, p, f, Boolean.valueOf(false));
                     }
-
-                    final _cls17 this$1;
-                    private final JTextPane val$t;
-                    private final JPanel val$p;
-                    private final JFrame val$f;
-
-                    
-                    {
-                        this$1 = _cls17.this;
-                        t = jtextpane;
-                        p = jpanel;
-                        f = jframe;
-                        super();
-                    }
                 });
                 p.add(ReallyQuit);
                 JButton Back = new JButton("Cancel");
                 Back.addActionListener(new ActionListener() {
-
+                    @Override
                     public void actionPerformed(ActionEvent e)
                     {
                         append(t, (new StringBuilder("\n\n")).append(separator).append("\n\n").toString());
                         cosmeticsGen(t, p, f);
-                    }
-
-                    final _cls17 this$1;
-                    private final JTextPane val$t;
-                    private final JPanel val$p;
-                    private final JFrame val$f;
-
-                    
-                    {
-                        this$1 = _cls17.this;
-                        t = jtextpane;
-                        p = jpanel;
-                        f = jframe;
-                        super();
                     }
                 });
                 p.add(Back);
                 p.validate();
                 p.repaint();
             }
-
-            final WorldState this$0;
-            private final JPanel val$p;
-            private final JTextPane val$t;
-            private final JFrame val$f;
-
-
-            
-            {
-                this$0 = WorldState.this;
-                p = jpanel;
-                t = jtextpane;
-                f = jframe;
-                super();
-            }
         });
         p.add(Back);
         final WorldState w = this;
         JButton Quit = new JButton("Quit");
         Quit.addActionListener(new ActionListener() {
-
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 p.removeAll();
                 append(t, (new StringBuilder("\n\n")).append(separator).append("\n\nReally quit?  All customization of this team will be lost.").toString());
                 JButton ReallyQuit = new JButton("Quit");
                 ReallyQuit.addActionListener(new ActionListener() {
-
+                    @Override
                     public void actionPerformed(ActionEvent e)
                     {
                         append(t, (new StringBuilder("\n\n")).append(separator).append("\n\n").toString());
@@ -30623,76 +30151,29 @@ public class WorldState
                         x.copyToggles(w);
                         Project.IntroOne(t, p, f, x);
                     }
-
-                    final _cls18 this$1;
-                    private final JTextPane val$t;
-                    private final WorldState val$w;
-                    private final JPanel val$p;
-                    private final JFrame val$f;
-
-                    
-                    {
-                        this$1 = _cls18.this;
-                        t = jtextpane;
-                        w = worldstate;
-                        p = jpanel;
-                        f = jframe;
-                        super();
-                    }
                 });
                 p.add(ReallyQuit);
                 JButton Back = new JButton("Cancel");
                 Back.addActionListener(new ActionListener() {
-
+                    @Override
                     public void actionPerformed(ActionEvent e)
                     {
                         append(t, (new StringBuilder("\n\n")).append(separator).append("\n\n").toString());
                         cosmeticsGen(t, p, f);
-                    }
-
-                    final _cls18 this$1;
-                    private final JTextPane val$t;
-                    private final JPanel val$p;
-                    private final JFrame val$f;
-
-                    
-                    {
-                        this$1 = _cls18.this;
-                        t = jtextpane;
-                        p = jpanel;
-                        f = jframe;
-                        super();
                     }
                 });
                 p.add(Back);
                 p.validate();
                 p.repaint();
             }
-
-            final WorldState this$0;
-            private final JPanel val$p;
-            private final JTextPane val$t;
-            private final WorldState val$w;
-            private final JFrame val$f;
-
-
-            
-            {
-                this$0 = WorldState.this;
-                p = jpanel;
-                t = jtextpane;
-                w = worldstate1;
-                f = jframe;
-                super();
-            }
         });
         JButton Finish = new JButton("Finish");
         Finish.addActionListener(new ActionListener() {
-
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 p.removeAll();
-                String path = Project.getProtectionDomain().getCodeSource().getLocation().getPath();
+                String path = Project.class.getProtectionDomain().getCodeSource().getLocation().getPath();
                 String fileName = "";
                 for(int i = path.length() - 1; i >= 0; i--)
                     if(path.charAt(i) != '/')
@@ -30737,7 +30218,7 @@ public class WorldState
                 else
                 if(newSaveName.length() == 0)
                     blankName = Boolean.valueOf(true);
-                if(blankName.booleanValue())
+                if(blankName)
                 {
                     DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
                     Date date = new Date();
@@ -30749,7 +30230,7 @@ public class WorldState
                 append(t, (new StringBuilder("\n\n")).append(separator).append("\n\nA new save file has been added in slot ").append(saves.getSaves().length).append(" which allows you to fight this team.  You may also wish to export this team to an external file for easy sharing.").toString());
                 JButton Export = new JButton("Export");
                 Export.addActionListener(new ActionListener() {
-
+                    @Override
                     public void actionPerformed(ActionEvent e)
                     {
                         String newFileName = JOptionPane.showInputDialog((new StringBuilder("What would you like the file to be named?  Leave blank to use '")).append(displayedName).append("'.").toString());
@@ -30759,7 +30240,7 @@ public class WorldState
                         else
                         if(newFileName.length() == 0)
                             noNameProvided = Boolean.valueOf(true);
-                        if(noNameProvided.booleanValue())
+                        if(noNameProvided)
                             newFileName = displayedName;
                         String editedName = "";
                         for(int i = 0; i < newFileName.length(); i++)
@@ -30771,51 +30252,21 @@ public class WorldState
                         wobj.exportFile(w, editedName);
                         w.append(t, (new StringBuilder("\n\n")).append(separator).append("\n\nCustomized team saved to '").append(editedName).append(".par'.").toString());
                     }
-
-                    final _cls19 this$1;
-                    private final String val$displayedName;
-                    private final WriteObject val$wobj;
-                    private final WorldState val$w;
-                    private final JTextPane val$t;
-
-                    
-                    {
-                        this$1 = _cls19.this;
-                        displayedName = s;
-                        wobj = writeobject;
-                        w = worldstate;
-                        t = jtextpane;
-                        super();
-                    }
                 });
                 p.add(Export);
                 JButton Back = new JButton("Back");
                 Back.addActionListener(new ActionListener() {
-
+                    @Override
                     public void actionPerformed(ActionEvent e)
                     {
                         append(t, (new StringBuilder("\n\n")).append(separator).append("\n\n").toString());
                         cosmeticsGen(t, p, f);
                     }
-
-                    final _cls19 this$1;
-                    private final JTextPane val$t;
-                    private final JPanel val$p;
-                    private final JFrame val$f;
-
-                    
-                    {
-                        this$1 = _cls19.this;
-                        t = jtextpane;
-                        p = jpanel;
-                        f = jframe;
-                        super();
-                    }
                 });
                 p.add(Back);
                 JButton Done = new JButton("Done");
                 Done.addActionListener(new ActionListener() {
-
+                    @Override
                     public void actionPerformed(ActionEvent e)
                     {
                         append(t, (new StringBuilder("\n\n")).append(separator).append("\n\n").toString());
@@ -30824,43 +30275,10 @@ public class WorldState
                         x.copyToggles(w);
                         Project.IntroOne(t, p, f, x);
                     }
-
-                    final _cls19 this$1;
-                    private final JTextPane val$t;
-                    private final WorldState val$w;
-                    private final JPanel val$p;
-                    private final JFrame val$f;
-
-                    
-                    {
-                        this$1 = _cls19.this;
-                        t = jtextpane;
-                        w = worldstate;
-                        p = jpanel;
-                        f = jframe;
-                        super();
-                    }
                 });
                 p.add(Done);
                 p.validate();
                 p.repaint();
-            }
-
-            final WorldState this$0;
-            private final JPanel val$p;
-            private final WorldState val$w;
-            private final JTextPane val$t;
-            private final JFrame val$f;
-
-
-            
-            {
-                this$0 = WorldState.this;
-                p = jpanel;
-                w = worldstate1;
-                t = jtextpane;
-                f = jframe;
-                super();
             }
         });
         p.add(Finish);
@@ -30888,59 +30306,21 @@ public class WorldState
         append(t, (new StringBuilder("\n\n")).append(separator).append("\n\nThe first step is to decide what ").append(heShe).append("'ll call ").append(himHer).append("self.  ").append(HeShe).append(" likes the sound of '").append(ownChoice).append("', but the civilian identities of the Chosen are a matter of public record, so it wouldn't be too strange for ").append(himHer).append(" to go by ").append(hisHer).append(" real name.  Which should ").append(heShe).append(" choose?").toString());
         JButton Alias = new JButton(ownChoice);
         Alias.addActionListener(new ActionListener() {
-
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 customAliases[i] = ownChoice;
                 titleCustomize(t, p, f, i, baseAesthetics);
             }
-
-            final WorldState this$0;
-            private final int val$i;
-            private final String val$ownChoice;
-            private final JTextPane val$t;
-            private final JPanel val$p;
-            private final JFrame val$f;
-            private final String val$baseAesthetics[];
-
-            
-            {
-                this$0 = WorldState.this;
-                i = j;
-                ownChoice = s;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                baseAesthetics = as;
-                super();
-            }
         });
         p.add(Alias);
         JButton Given = new JButton(customNames[i * 2]);
         Given.addActionListener(new ActionListener() {
-
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 customAliases[i] = customNames[i * 2];
                 titleCustomize(t, p, f, i, baseAesthetics);
-            }
-
-            final WorldState this$0;
-            private final int val$i;
-            private final JTextPane val$t;
-            private final JPanel val$p;
-            private final JFrame val$f;
-            private final String val$baseAesthetics[];
-
-            
-            {
-                this$0 = WorldState.this;
-                i = j;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                baseAesthetics = as;
-                super();
             }
         });
         p.add(Given);
@@ -30948,36 +30328,18 @@ public class WorldState
         {
             JButton Surname = new JButton(customNames[i * 2 + 1]);
             Surname.addActionListener(new ActionListener() {
-
+                @Override
                 public void actionPerformed(ActionEvent e)
                 {
                     customAliases[i] = customNames[i * 2 + 1];
                     titleCustomize(t, p, f, i, baseAesthetics);
                 }
-
-                final WorldState this$0;
-                private final int val$i;
-                private final JTextPane val$t;
-                private final JPanel val$p;
-                private final JFrame val$f;
-                private final String val$baseAesthetics[];
-
-            
-            {
-                this$0 = WorldState.this;
-                i = j;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                baseAesthetics = as;
-                super();
-            }
             });
             p.add(Surname);
         }
         JButton Custom = new JButton("Something else");
         Custom.addActionListener(new ActionListener() {
-
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 String input = JOptionPane.showInputDialog((new StringBuilder("Type the name to be used here.  Leave blank to use the default, '")).append(ownChoice).append("'.").toString());
@@ -30986,49 +30348,15 @@ public class WorldState
                     customAliases[i] = input;
                 titleCustomize(t, p, f, i, baseAesthetics);
             }
-
-            final WorldState this$0;
-            private final String val$ownChoice;
-            private final int val$i;
-            private final JTextPane val$t;
-            private final JPanel val$p;
-            private final JFrame val$f;
-            private final String val$baseAesthetics[];
-
-            
-            {
-                this$0 = WorldState.this;
-                ownChoice = s;
-                i = j;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                baseAesthetics = as;
-                super();
-            }
         });
         p.add(Custom);
         JButton Back = new JButton("Back");
         Back.addActionListener(new ActionListener() {
-
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 append(t, (new StringBuilder("\n\n")).append(separator).append("\n\n").toString());
                 cosmeticsGen(t, p, f);
-            }
-
-            final WorldState this$0;
-            private final JTextPane val$t;
-            private final JPanel val$p;
-            private final JFrame val$f;
-
-            
-            {
-                this$0 = WorldState.this;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                super();
             }
         });
         p.add(Back);
@@ -31071,34 +30399,16 @@ public class WorldState
         customTitles[i] = ownChoice;
         JButton Default = new JButton(ownChoice);
         Default.addActionListener(new ActionListener() {
-
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 incantationCustomize(t, p, f, i, baseAesthetics);
-            }
-
-            final WorldState this$0;
-            private final JTextPane val$t;
-            private final JPanel val$p;
-            private final JFrame val$f;
-            private final int val$i;
-            private final String val$baseAesthetics[];
-
-            
-            {
-                this$0 = WorldState.this;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                i = j;
-                baseAesthetics = as;
-                super();
             }
         });
         p.add(Default);
         JButton Custom = new JButton("Something else");
         Custom.addActionListener(new ActionListener() {
-
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 String input = JOptionPane.showInputDialog((new StringBuilder("Type the title to be used here.  Leave blank to just go by '")).append(customAliases[i]).append("'.").toString());
@@ -31109,50 +30419,14 @@ public class WorldState
                         customTitles[i] = "none";
                 incantationCustomize(t, p, f, i, baseAesthetics);
             }
-
-            final WorldState this$0;
-            private final int val$i;
-            private final JTextPane val$t;
-            private final JPanel val$p;
-            private final JFrame val$f;
-            private final String val$baseAesthetics[];
-
-            
-            {
-                this$0 = WorldState.this;
-                i = j;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                baseAesthetics = as;
-                super();
-            }
         });
         p.add(Custom);
         JButton Back = new JButton("Back");
         Back.addActionListener(new ActionListener() {
-
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 aliasCustomize(t, p, f, i, baseAesthetics);
-            }
-
-            final WorldState this$0;
-            private final JTextPane val$t;
-            private final JPanel val$p;
-            private final JFrame val$f;
-            private final int val$i;
-            private final String val$baseAesthetics[];
-
-            
-            {
-                this$0 = WorldState.this;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                i = j;
-                baseAesthetics = as;
-                super();
             }
         });
         p.add(Back);
@@ -31194,34 +30468,16 @@ public class WorldState
         customIncantations[i] = ownChoice;
         JButton Keep = new JButton("Keep");
         Keep.addActionListener(new ActionListener() {
-
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 topCustomize(t, p, f, i, baseAesthetics);
-            }
-
-            final WorldState this$0;
-            private final JTextPane val$t;
-            private final JPanel val$p;
-            private final JFrame val$f;
-            private final int val$i;
-            private final String val$baseAesthetics[];
-
-            
-            {
-                this$0 = WorldState.this;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                i = j;
-                baseAesthetics = as;
-                super();
             }
         });
         p.add(Keep);
         JButton Change = new JButton("Change");
         Change.addActionListener(new ActionListener() {
-
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 String input = JOptionPane.showInputDialog("Type the new incantation here.  Leave blank to leave it unchanged.");
@@ -31229,50 +30485,14 @@ public class WorldState
                     customIncantations[i] = input;
                 topCustomize(t, p, f, i, baseAesthetics);
             }
-
-            final WorldState this$0;
-            private final int val$i;
-            private final JTextPane val$t;
-            private final JPanel val$p;
-            private final JFrame val$f;
-            private final String val$baseAesthetics[];
-
-            
-            {
-                this$0 = WorldState.this;
-                i = j;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                baseAesthetics = as;
-                super();
-            }
         });
         p.add(Change);
         JButton Back = new JButton("Back");
         Back.addActionListener(new ActionListener() {
-
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 titleCustomize(t, p, f, i, baseAesthetics);
-            }
-
-            final WorldState this$0;
-            private final JTextPane val$t;
-            private final JPanel val$p;
-            private final JFrame val$f;
-            private final int val$i;
-            private final String val$baseAesthetics[];
-
-            
-            {
-                this$0 = WorldState.this;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                i = j;
-                baseAesthetics = as;
-                super();
             }
         });
         p.add(Back);
@@ -31317,91 +30537,35 @@ public class WorldState
         final String finalCurrent = current;
         JButton Default = new JButton(current);
         Default.addActionListener(new ActionListener() {
-
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 bottomCustomize(t, p, f, i, baseAesthetics);
-            }
-
-            final WorldState this$0;
-            private final JTextPane val$t;
-            private final JPanel val$p;
-            private final JFrame val$f;
-            private final int val$i;
-            private final String val$baseAesthetics[];
-
-            
-            {
-                this$0 = WorldState.this;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                i = j;
-                baseAesthetics = as;
-                super();
             }
         });
         p.add(Default);
         JButton Change = new JButton("Change");
         Change.addActionListener(new ActionListener() {
-
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 String input = JOptionPane.showInputDialog((new StringBuilder("Type the name of the garment here.  Leave blank to use '")).append(finalCurrent).append("'.").toString());
                 Boolean changed = Boolean.valueOf(false);
                 if(input != null && !input.equals(finalCurrent) && input.length() > 0)
                     changed = Boolean.valueOf(true);
-                if(changed.booleanValue())
+                if(changed)
                     topChange(t, p, f, i, baseAesthetics, input);
                 else
                     bottomCustomize(t, p, f, i, baseAesthetics);
-            }
-
-            final WorldState this$0;
-            private final String val$finalCurrent;
-            private final JTextPane val$t;
-            private final JPanel val$p;
-            private final JFrame val$f;
-            private final int val$i;
-            private final String val$baseAesthetics[];
-
-            
-            {
-                this$0 = WorldState.this;
-                finalCurrent = s;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                i = j;
-                baseAesthetics = as;
-                super();
             }
         });
         p.add(Change);
         JButton Back = new JButton("Back");
         Back.addActionListener(new ActionListener() {
-
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 incantationCustomize(t, p, f, i, baseAesthetics);
-            }
-
-            final WorldState this$0;
-            private final JTextPane val$t;
-            private final JPanel val$p;
-            private final JFrame val$f;
-            private final int val$i;
-            private final String val$baseAesthetics[];
-
-            
-            {
-                this$0 = WorldState.this;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                i = j;
-                baseAesthetics = as;
-                super();
             }
         });
         p.add(Back);
@@ -31447,63 +30611,23 @@ public class WorldState
             final String finalMethod = method;
             JButton ThisOne = new JButton(method);
             ThisOne.addActionListener(new ActionListener() {
-
+                @Override
                 public void actionPerformed(ActionEvent e)
                 {
                     baseAesthetics[0] = input;
                     baseAesthetics[1] = finalMethod;
                     bottomCustomize(t, p, f, i, baseAesthetics);
                 }
-
-                final WorldState this$0;
-                private final String val$baseAesthetics[];
-                private final String val$input;
-                private final String val$finalMethod;
-                private final JTextPane val$t;
-                private final JPanel val$p;
-                private final JFrame val$f;
-                private final int val$i;
-
-            
-            {
-                this$0 = WorldState.this;
-                baseAesthetics = as;
-                input = s;
-                finalMethod = s1;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                i = j;
-                super();
-            }
             });
             p.add(ThisOne);
         }
 
         JButton Back = new JButton("Back");
         Back.addActionListener(new ActionListener() {
-
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 topCustomize(t, p, f, i, baseAesthetics);
-            }
-
-            final WorldState this$0;
-            private final JTextPane val$t;
-            private final JPanel val$p;
-            private final JFrame val$f;
-            private final int val$i;
-            private final String val$baseAesthetics[];
-
-            
-            {
-                this$0 = WorldState.this;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                i = j;
-                baseAesthetics = as;
-                super();
             }
         });
         p.add(Back);
@@ -31535,91 +30659,35 @@ public class WorldState
         final String finalCurrent = current;
         JButton Default = new JButton(current);
         Default.addActionListener(new ActionListener() {
-
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 feetCustomize(t, p, f, i, baseAesthetics);
-            }
-
-            final WorldState this$0;
-            private final JTextPane val$t;
-            private final JPanel val$p;
-            private final JFrame val$f;
-            private final int val$i;
-            private final String val$baseAesthetics[];
-
-            
-            {
-                this$0 = WorldState.this;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                i = j;
-                baseAesthetics = as;
-                super();
             }
         });
         p.add(Default);
         JButton Change = new JButton("Change");
         Change.addActionListener(new ActionListener() {
-
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 String input = JOptionPane.showInputDialog((new StringBuilder("Type the name of the garment here.  Leave blank to use '")).append(finalCurrent).append("'.").toString());
                 Boolean changed = Boolean.valueOf(false);
                 if(input != null && !input.equals(finalCurrent) && input.length() > 0)
                     changed = Boolean.valueOf(true);
-                if(changed.booleanValue())
+                if(changed)
                     bottomChange(t, p, f, i, baseAesthetics, input);
                 else
                     feetCustomize(t, p, f, i, baseAesthetics);
-            }
-
-            final WorldState this$0;
-            private final String val$finalCurrent;
-            private final JTextPane val$t;
-            private final JPanel val$p;
-            private final JFrame val$f;
-            private final int val$i;
-            private final String val$baseAesthetics[];
-
-            
-            {
-                this$0 = WorldState.this;
-                finalCurrent = s;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                i = j;
-                baseAesthetics = as;
-                super();
             }
         });
         p.add(Change);
         JButton Back = new JButton("Back");
         Back.addActionListener(new ActionListener() {
-
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 topCustomize(t, p, f, i, baseAesthetics);
-            }
-
-            final WorldState this$0;
-            private final JTextPane val$t;
-            private final JPanel val$p;
-            private final JFrame val$f;
-            private final int val$i;
-            private final String val$baseAesthetics[];
-
-            
-            {
-                this$0 = WorldState.this;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                i = j;
-                baseAesthetics = as;
-                super();
             }
         });
         p.add(Back);
@@ -31664,63 +30732,23 @@ public class WorldState
             final String finalMethod = method;
             JButton ThisOne = new JButton(method);
             ThisOne.addActionListener(new ActionListener() {
-
+                @Override
                 public void actionPerformed(ActionEvent e)
                 {
                     baseAesthetics[2] = input;
                     baseAesthetics[3] = finalMethod;
                     feetCustomize(t, p, f, i, baseAesthetics);
                 }
-
-                final WorldState this$0;
-                private final String val$baseAesthetics[];
-                private final String val$input;
-                private final String val$finalMethod;
-                private final JTextPane val$t;
-                private final JPanel val$p;
-                private final JFrame val$f;
-                private final int val$i;
-
-            
-            {
-                this$0 = WorldState.this;
-                baseAesthetics = as;
-                input = s;
-                finalMethod = s1;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                i = j;
-                super();
-            }
             });
             p.add(ThisOne);
         }
 
         JButton Back = new JButton("Back");
         Back.addActionListener(new ActionListener() {
-
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 bottomCustomize(t, p, f, i, baseAesthetics);
-            }
-
-            final WorldState this$0;
-            private final JTextPane val$t;
-            private final JPanel val$p;
-            private final JFrame val$f;
-            private final int val$i;
-            private final String val$baseAesthetics[];
-
-            
-            {
-                this$0 = WorldState.this;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                i = j;
-                baseAesthetics = as;
-                super();
             }
         });
         p.add(Back);
@@ -31754,34 +30782,16 @@ public class WorldState
         final String current = baseAesthetics[9];
         JButton Default = new JButton(current);
         Default.addActionListener(new ActionListener() {
-
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 colorCustomize(t, p, f, i, baseAesthetics);
-            }
-
-            final WorldState this$0;
-            private final JTextPane val$t;
-            private final JPanel val$p;
-            private final JFrame val$f;
-            private final int val$i;
-            private final String val$baseAesthetics[];
-
-            
-            {
-                this$0 = WorldState.this;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                i = j;
-                baseAesthetics = as;
-                super();
             }
         });
         p.add(Default);
         JButton Change = new JButton("Change");
         Change.addActionListener(new ActionListener() {
-
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 String input = JOptionPane.showInputDialog((new StringBuilder("Type the name of the garment here.  Leave blank to use '")).append(current).append("'.").toString());
@@ -31789,52 +30799,14 @@ public class WorldState
                     baseAesthetics[9] = input;
                 colorCustomize(t, p, f, i, baseAesthetics);
             }
-
-            final WorldState this$0;
-            private final String val$current;
-            private final String val$baseAesthetics[];
-            private final JTextPane val$t;
-            private final JPanel val$p;
-            private final JFrame val$f;
-            private final int val$i;
-
-            
-            {
-                this$0 = WorldState.this;
-                current = s;
-                baseAesthetics = as;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                i = j;
-                super();
-            }
         });
         p.add(Change);
         JButton Back = new JButton("Back");
         Back.addActionListener(new ActionListener() {
-
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 bottomCustomize(t, p, f, i, baseAesthetics);
-            }
-
-            final WorldState this$0;
-            private final JTextPane val$t;
-            private final JPanel val$p;
-            private final JFrame val$f;
-            private final int val$i;
-            private final String val$baseAesthetics[];
-
-            
-            {
-                this$0 = WorldState.this;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                i = j;
-                baseAesthetics = as;
-                super();
             }
         });
         p.add(Back);
@@ -31857,34 +30829,16 @@ public class WorldState
         append(t, (new StringBuilder("\n\n")).append(separator).append("\n\nWhen ").append(heShe).append("'s transformed, ").append(customAliases[i]).append(" is surrounded by '").append(baseAesthetics[5]).append("' light.  Is this alright?").toString());
         JButton Keep = new JButton("Yes");
         Keep.addActionListener(new ActionListener() {
-
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 weaponCustomize(t, p, f, i, baseAesthetics);
-            }
-
-            final WorldState this$0;
-            private final JTextPane val$t;
-            private final JPanel val$p;
-            private final JFrame val$f;
-            private final int val$i;
-            private final String val$baseAesthetics[];
-
-            
-            {
-                this$0 = WorldState.this;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                i = j;
-                baseAesthetics = as;
-                super();
             }
         });
         p.add(Keep);
         JButton Change = new JButton("Change");
         Change.addActionListener(new ActionListener() {
-
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 String input = JOptionPane.showInputDialog((new StringBuilder("Type the color description to be used.  Leave blank to use '")).append(baseAesthetics[5]).append("'.").toString());
@@ -31892,50 +30846,14 @@ public class WorldState
                     baseAesthetics[5] = input;
                 weaponCustomize(t, p, f, i, baseAesthetics);
             }
-
-            final WorldState this$0;
-            private final String val$baseAesthetics[];
-            private final JTextPane val$t;
-            private final JPanel val$p;
-            private final JFrame val$f;
-            private final int val$i;
-
-            
-            {
-                this$0 = WorldState.this;
-                baseAesthetics = as;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                i = j;
-                super();
-            }
         });
         p.add(Change);
         JButton Back = new JButton("Back");
         Back.addActionListener(new ActionListener() {
-
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 bottomCustomize(t, p, f, i, baseAesthetics);
-            }
-
-            final WorldState this$0;
-            private final JTextPane val$t;
-            private final JPanel val$p;
-            private final JFrame val$f;
-            private final int val$i;
-            private final String val$baseAesthetics[];
-
-            
-            {
-                this$0 = WorldState.this;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                i = j;
-                baseAesthetics = as;
-                super();
             }
         });
         p.add(Back);
@@ -31968,89 +30886,35 @@ public class WorldState
         append(t, (new StringBuilder("\n\n")).append(separator).append("\n\nCurrently, ").append(customAliases[i]).append(" is set to fight using ").append(hisHer).append(" ").append(baseAesthetics[7]).append(".  Is this okay?").toString());
         JButton Keep = new JButton("Yes");
         Keep.addActionListener(new ActionListener() {
-
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 underwearCustomize(t, p, f, i, baseAesthetics);
-            }
-
-            final WorldState this$0;
-            private final JTextPane val$t;
-            private final JPanel val$p;
-            private final JFrame val$f;
-            private final int val$i;
-            private final String val$baseAesthetics[];
-
-            
-            {
-                this$0 = WorldState.this;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                i = j;
-                baseAesthetics = as;
-                super();
             }
         });
         p.add(Keep);
         JButton Change = new JButton("Change");
         Change.addActionListener(new ActionListener() {
-
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 String input = JOptionPane.showInputDialog((new StringBuilder("Type the name of the weapon to be used.  Leave blank to use '")).append(baseAesthetics[7]).append("'.").toString());
                 Boolean changed = Boolean.valueOf(false);
                 if(input != null && !input.equals(baseAesthetics[7]) && input.length() > 0)
                     changed = Boolean.valueOf(true);
-                if(changed.booleanValue())
+                if(changed)
                     weaponChange(t, p, f, i, baseAesthetics, input);
                 else
                     underwearCustomize(t, p, f, i, baseAesthetics);
-            }
-
-            final WorldState this$0;
-            private final String val$baseAesthetics[];
-            private final JTextPane val$t;
-            private final JPanel val$p;
-            private final JFrame val$f;
-            private final int val$i;
-
-            
-            {
-                this$0 = WorldState.this;
-                baseAesthetics = as;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                i = j;
-                super();
             }
         });
         p.add(Change);
         JButton Back = new JButton("Back");
         Back.addActionListener(new ActionListener() {
-
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 colorCustomize(t, p, f, i, baseAesthetics);
-            }
-
-            final WorldState this$0;
-            private final JTextPane val$t;
-            private final JPanel val$p;
-            private final JFrame val$f;
-            private final int val$i;
-            private final String val$baseAesthetics[];
-
-            
-            {
-                this$0 = WorldState.this;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                i = j;
-                baseAesthetics = as;
-                super();
             }
         });
         p.add(Back);
@@ -32095,63 +30959,23 @@ public class WorldState
                 method = "part";
             final String finalMethod = method;
             ThisOne.addActionListener(new ActionListener() {
-
+                @Override
                 public void actionPerformed(ActionEvent e)
                 {
                     baseAesthetics[7] = input;
                     baseAesthetics[8] = finalMethod;
                     underwearCustomize(t, p, f, i, baseAesthetics);
                 }
-
-                final WorldState this$0;
-                private final String val$baseAesthetics[];
-                private final String val$input;
-                private final String val$finalMethod;
-                private final JTextPane val$t;
-                private final JPanel val$p;
-                private final JFrame val$f;
-                private final int val$i;
-
-            
-            {
-                this$0 = WorldState.this;
-                baseAesthetics = as;
-                input = s;
-                finalMethod = s1;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                i = j;
-                super();
-            }
             });
             p.add(ThisOne);
         }
 
         JButton Back = new JButton("Back");
         Back.addActionListener(new ActionListener() {
-
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 weaponCustomize(t, p, f, i, baseAesthetics);
-            }
-
-            final WorldState this$0;
-            private final JTextPane val$t;
-            private final JPanel val$p;
-            private final JFrame val$f;
-            private final int val$i;
-            private final String val$baseAesthetics[];
-
-            
-            {
-                this$0 = WorldState.this;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                i = j;
-                baseAesthetics = as;
-                super();
             }
         });
         p.add(Back);
@@ -32185,30 +31009,12 @@ public class WorldState
             append(t, (new StringBuilder(String.valueOf(customAliases[i]))).append("'s outfit doesn't currently include panties.  Should that be changed?").toString());
             JButton Change = new JButton("Wear panties");
             Change.addActionListener(new ActionListener() {
-
+                @Override
                 public void actionPerformed(ActionEvent e)
                 {
                     baseAesthetics[4] = "panties";
                     finalizeCustomization(t, p, f, i, baseAesthetics);
                 }
-
-                final WorldState this$0;
-                private final String val$baseAesthetics[];
-                private final JTextPane val$t;
-                private final JPanel val$p;
-                private final JFrame val$f;
-                private final int val$i;
-
-            
-            {
-                this$0 = WorldState.this;
-                baseAesthetics = as;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                i = j;
-                super();
-            }
             });
             p.add(Change);
         } else
@@ -32216,84 +31022,30 @@ public class WorldState
             append(t, (new StringBuilder("Would you prefer for ")).append(customAliases[i]).append(" to stop wearing anything under ").append(hisHer).append(" ").append(bottomDesc).append("?").toString());
             JButton Change = new JButton("Wear nothing");
             Change.addActionListener(new ActionListener() {
-
+                @Override
                 public void actionPerformed(ActionEvent e)
                 {
                     baseAesthetics[4] = "none";
                     finalizeCustomization(t, p, f, i, baseAesthetics);
                 }
-
-                final WorldState this$0;
-                private final String val$baseAesthetics[];
-                private final JTextPane val$t;
-                private final JPanel val$p;
-                private final JFrame val$f;
-                private final int val$i;
-
-            
-            {
-                this$0 = WorldState.this;
-                baseAesthetics = as;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                i = j;
-                super();
-            }
             });
             p.add(Change);
         }
         JButton Keep = new JButton("Leave it as is");
         Keep.addActionListener(new ActionListener() {
-
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 finalizeCustomization(t, p, f, i, baseAesthetics);
-            }
-
-            final WorldState this$0;
-            private final JTextPane val$t;
-            private final JPanel val$p;
-            private final JFrame val$f;
-            private final int val$i;
-            private final String val$baseAesthetics[];
-
-            
-            {
-                this$0 = WorldState.this;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                i = j;
-                baseAesthetics = as;
-                super();
             }
         });
         p.add(Keep);
         JButton Back = new JButton("Back");
         Back.addActionListener(new ActionListener() {
-
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 weaponCustomize(t, p, f, i, baseAesthetics);
-            }
-
-            final WorldState this$0;
-            private final JTextPane val$t;
-            private final JPanel val$p;
-            private final JFrame val$f;
-            private final int val$i;
-            private final String val$baseAesthetics[];
-
-            
-            {
-                this$0 = WorldState.this;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                i = j;
-                baseAesthetics = as;
-                super();
             }
         });
         p.add(Back);
@@ -32336,20 +31088,20 @@ public class WorldState
         {
             if(i % 4 == 0)
             {
-                if(c.getConfidence() > 66 - 33 * (i / 4) && c.isDrained().booleanValue())
+                if(c.getConfidence() > 66 - 33 * (i / 4) && c.isDrained())
                     type = 3;
             } else
             if(i % 4 == 1)
             {
-                if(c.getInnocence() > 66 - 33 * (i / 4) && c.isHypnotized().booleanValue())
+                if(c.getInnocence() > 66 - 33 * (i / 4) && c.isHypnotized())
                     type = 2;
             } else
             if(i % 4 == 2)
             {
-                if(c.getMorality() > 66 - 33 * (i / 4) && c.isImpregnated().booleanValue())
+                if(c.getMorality() > 66 - 33 * (i / 4) && c.isImpregnated())
                     type = 1;
             } else
-            if(i % 4 == 3 && c.getDignity() > 66 - 33 * (i / 4) && c.isParasitized().booleanValue())
+            if(i % 4 == 3 && c.getDignity() > 66 - 33 * (i / 4) && c.isParasitized())
                 type = 4;
             if(type != 0)
                 i = 12;
@@ -32566,7 +31318,7 @@ public class WorldState
         Boolean loving = Boolean.valueOf(false);
         int resolveLost = 0;
         for(int i = 0; i < 3; i++)
-            if(i != c.getNumber() && w.getCast()[i].isImpregnated().booleanValue() && w.getCast()[i].alive.booleanValue())
+            if(i != c.getNumber() && w.getCast()[i].isImpregnated() && w.getCast()[i].alive)
             {
                 resolveLost += threatenResolve();
                 if(subject == null)
@@ -32575,7 +31327,7 @@ public class WorldState
                     subject = null;
                 if(getRelationship(c.getNumber(), i) >= 0)
                 {
-                    if(hateful.booleanValue())
+                    if(hateful)
                     {
                         hateful = Boolean.valueOf(false);
                         loved = w.getCast()[i];
@@ -32599,16 +31351,16 @@ public class WorldState
                 else
                     w.append(t, (new StringBuilder(String.valueOf(subject.getMainName()))).append(" ").toString());
                 w.append(t, "suffering a fate worse than death at the hands of the human governments, punishment for being impregnated by the Demon Lord.  ");
-                if(c.isImpregnated().booleanValue())
+                if(c.isImpregnated())
                     w.append(t, (new StringBuilder("Even though ")).append(c.getMainName()).append(" ").append(c.himHer()).append("self is in the same position, ").append(c.heShe()).append("'s more prone to worrying about other people than to worrying about ").append(c.himHer()).append("self.  ").toString());
                 else
                     w.append(t, (new StringBuilder("Even though ")).append(c.heShe()).append("'s been told how important it is to stop such a child from being born, it's painful to see.  ").toString());
                 if(subject == null)
                 {
-                    if(loving.booleanValue())
+                    if(loving)
                         w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" cares deeply about them both, perhaps even more than ").append(c.heShe()).append(" cares about right and wrong.").toString());
                     else
-                    if(hateful.booleanValue())
+                    if(hateful)
                         w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" may consider them both to be bad people, but ").append(c.heShe()).append(" doesn't think they deserve what's in store for them.").toString());
                     else
                         w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" cares deeply about ").append(loved.getMainName()).append(", and even though ").append(c.heShe()).append(" thinks far less of ").append(hated.getMainName()).append(", ").append(c.heShe()).append(" doesn't think that ").append(hated.heShe()).append(" deserves what's in store for ").append(hated.himHer()).append(".").toString());
@@ -32626,16 +31378,16 @@ public class WorldState
                 else
                     w.append(t, (new StringBuilder(String.valueOf(subject.getMainName()))).append(" ").toString());
                 w.append(t, (new StringBuilder("being captured and cruelly sealed away are forced into ")).append(c.getMainName()).append("'s mind along with the undeniable fact that this is what will happen even if they're victorious against the Demons, as the human governments will not permit the abominations born from unions between the Chosen and a Demon Lord to exist.  ").toString());
-                if(c.isImpregnated().booleanValue())
+                if(c.isImpregnated())
                     w.append(t, (new StringBuilder("As if the fact that ")).append(c.heShe()).append("'d face the same treatment wasn't bad enough, ").toString());
                 else
                     w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" knows ").append(c.heShe()).append(" could very well be forced to carry such a child ").append(c.himHer()).append("self, and ").toString());
                 if(subject == null)
                 {
-                    if(loving.booleanValue())
+                    if(loving)
                         w.append(t, (new StringBuilder(String.valueOf(c.hisHer()))).append(" concern for ").append(c.hisHer()).append(" friends makes it impossible to remain objective.").toString());
                     else
-                    if(hateful.booleanValue())
+                    if(hateful)
                         w.append(t, (new StringBuilder(String.valueOf(c.heShe()))).append(" finds the visions so awful that ").append(c.heShe()).append(" can't even enjoy seeing those ").append(c.heShe()).append(" hates get their punishment.").toString());
                     else
                         w.append(t, (new StringBuilder(String.valueOf(c.hisHer()))).append(" concern for them (more ").append(loved.getMainName()).append(" than ").append(hated.getMainName()).append(") makes it impossible to remain objective.").toString());
@@ -32654,10 +31406,10 @@ public class WorldState
                 w.append(t, "undergoing the endless, torturous sealing the government performs to stop the Chosen from giving birth to a Demon Lord's child.  ");
                 if(subject == null)
                 {
-                    if(loving.booleanValue())
+                    if(loving)
                         w.append(t, (new StringBuilder("They're possibly the only other people ")).append(c.heShe()).append(" genuinely cares about, and ").toString());
                     else
-                    if(hateful.booleanValue())
+                    if(hateful)
                         w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" doesn't care at all about them for their own sake, but ").toString());
                     else
                         w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" would happily condemn ").append(hated.getMainName()).append(" to that fate, but ").append(loved.getMainName()).append(" is actually someone ").append(c.heShe()).append(" genuinely cares about, and ").toString());
@@ -32666,7 +31418,7 @@ public class WorldState
                     w.append(t, (new StringBuilder(String.valueOf(subject.getMainName()))).append(" is possibly the only other person ").append(c.heShe()).append(" genuinely cares about, and ").toString());
                 else
                     w.append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" doesn't care at all about ").append(subject.getMainName()).append(" ").append(subject.himHer()).append("self, but ").toString());
-                if(c.isImpregnated().booleanValue())
+                if(c.isImpregnated())
                     w.append(t, (new StringBuilder("the reminder that ")).append(c.getMainName()).append(" will suffer the same way fills ").append(c.himHer()).append(" with helpless rage.").toString());
                 else
                     w.append(t, (new StringBuilder("the fact that it can happen to people ")).append(c.heShe()).append(" knows so well makes the risk of being put in the same situation feel very real.").toString());
@@ -33116,13 +31868,13 @@ public class WorldState
     {
         append(t, (new StringBuilder("\n\n")).append(getSeparator()).append("\n\n").toString());
         int resolveLost = 1;
-        if(c.isDrained().booleanValue())
+        if(c.isDrained())
             resolveLost = attackResolve();
         if(c.finalAttacked == 0)
         {
-            if(!tickleOn.booleanValue())
+            if(!tickleOn)
             {
-                if(c.isDrained().booleanValue())
+                if(c.isDrained())
                 {
                     if(c.getConfidence() > 66)
                         w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" has always thrown ").append(c.himHer()).append("self into your Demons' attacks without hesitation, and that still hasn't changed.  But while ").append(c.heShe()).append(" originally did it to scoff at the weakness of your minions, now ").append(c.heShe()).append(" continues out of determination to die.  Your Demons' enhanced claws, more powerful and painful than ever, serve to punish ").append(c.himHer()).append(" for forgetting that it is ultimately the Demon Lord's choice whether ").append(c.heShe()).append(" will be granted death.").toString());
@@ -33140,7 +31892,7 @@ public class WorldState
                 else
                     w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" is trying harder than ever to dodge your Demons' attacks, terrified by the prospect of being killed here.  But ").append(c.heShe()).append(" can't avoid them all, and when one of them cuts into ").append(c.hisHer()).append(" skin, ").append(c.hisHer()).append(" screams come more from fear than from pain.  ").append(c.HeShe()).append(" begins to find the prospect of complete surrender more and more appealing.").toString());
             } else
-            if(c.isDrained().booleanValue())
+            if(c.isDrained())
             {
                 if(c.getConfidence() > 66)
                     w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" has always thrown ").append(c.himHer()).append("self into your Demons' attacks without hesitation, and that still hasn't changed.  But while ").append(c.heShe()).append(" originally did it to scoff at the weakness of your minions, now ").append(c.heShe()).append(" continues out of determination to die.  However, your Demons' claws, now optimized further than ever to inflict unbearable tickling without the slighest bit of actual bodily harm, only serve to punish ").append(c.himHer()).append(" for forgetting that it is ultimately the Demon Lord's choice whether ").append(c.heShe()).append(" will be granted death.").toString());
@@ -33158,9 +31910,9 @@ public class WorldState
             else
                 w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" is trying harder than ever to dodge your Demons' attacks, terrified by the prospect of being killed here.  But ").append(c.heShe()).append(" can't avoid them all, and when one of them pins ").append(c.himHer()).append(" down and starts jabbing ").append(c.hisHer()).append(" armpits, ").append(c.hisHer()).append(" screams come more from fear than from discomfort.  ").append(c.HeShe()).append(" begins to find the prospect of complete surrender more and more appealing.").toString());
         } else
-        if(tickleOn.booleanValue())
+        if(tickleOn)
         {
-            if(c.isDrained().booleanValue())
+            if(c.isDrained())
             {
                 if(c.getConfidence() > 66)
                     w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" grabs your Demons by the claws and forcefully tries to stab ").append(c.himHer()).append("self with them, but all ").append(c.heShe()).append(" gets for ").append(c.hisHer()).append(" trouble is more tickling.  ").append(c.HisHer()).append(" determined expression is marred by the tears flowing down ").append(c.hisHer()).append(" cheeks.").toString());
@@ -33178,7 +31930,7 @@ public class WorldState
             else
                 w.append(t, (new StringBuilder("Your Demons tickle ")).append(c.getMainName()).append(" roughly, their claws stopping just short of actually piercing ").append(c.hisHer()).append(" skin.  ").append(c.HeShe()).append(" can't suppress ").append(c.hisHer()).append(" terror at the thought that they could easily go further.").toString());
         } else
-        if(c.isDrained().booleanValue())
+        if(c.isDrained())
         {
             if(c.getConfidence() > 66)
                 w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" grabs your Demons by the claws and forcefully tries to stab ").append(c.himHer()).append("self with them, but they retract the blades before they can do more than break the skin.  ").append(c.getMainName()).append("'s determined expression is marred by the tears flowing down ").append(c.hisHer()).append(" cheeks.").toString());
@@ -33206,13 +31958,13 @@ public class WorldState
             w.append(t, (new StringBuilder("-")).append(resolveLost).append("% Resolve\n\n").toString());
             w.underlineAppend(t, "Resolve Broken");
             w.append(t, "\n\n");
-            if(c.isDrained().booleanValue())
+            if(c.isDrained())
             {
                 c.defeatType = 3;
                 if(c.getConfidence() > 66)
                 {
                     w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" collapses face-first onto the pavement, exhausted after fighting so hard and enduring ").toString());
-                    if(tickleOn.booleanValue())
+                    if(tickleOn)
                         w.append(t, "so much tickling");
                     else
                         w.append(t, "the sting of so many wounds");
@@ -33221,13 +31973,13 @@ public class WorldState
                 if(c.getConfidence() > 33)
                 {
                     w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" can no longer fight through the tears").toString());
-                    if(tickleOn.booleanValue())
+                    if(tickleOn)
                         w.append(t, " of laughter");
                     w.append(t, (new StringBuilder(", and ")).append(c.heShe()).append(" collapses onto ").append(c.hisHer()).append(" hands and knees in an obvious show of submission.  ").append(c.HeShe()).append(" doesn't even try to protect ").append(c.himHer()).append("self or squirm away from your Demons' claws anymore, accepting that the torture will continue as long as the Demon Lord wants it to.").toString());
                 } else
                 {
                     w.append(t, (new StringBuilder(String.valueOf(c.getMainName()))).append(" finally realizes that ").append(c.heShe()).append("'s being punished for continuing to fight.  ").append(c.HeShe()).append(" stops struggling, even though ").append(c.heShe()).append(" can't suppress ").toString());
-                    if(tickleOn.booleanValue())
+                    if(tickleOn)
                         w.append(t, (new StringBuilder(String.valueOf(c.hisHer()))).append(" screams of laughter as your Demons tickle ").append(c.himHer()).append(".").toString());
                     else
                         w.append(t, "sobs of pain.");
@@ -33256,7 +32008,7 @@ public class WorldState
                 } else
                 if(c.getConfidence() > 33)
                 {
-                    if(tickleOn.booleanValue())
+                    if(tickleOn)
                     {
                         Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(true), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.LEWD);
                         if(c.getInnocence() > 66)
@@ -33298,7 +32050,7 @@ public class WorldState
                         c.say(t, "I give up!  I won't fight you anymore!  Aaagh!");
                     }
                 } else
-                if(tickleOn.booleanValue())
+                if(tickleOn)
                 {
                     Project.changePortrait(c.convertGender(), c.type, Boolean.valueOf(false), Boolean.valueOf(true), this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.LEWD);
                     if(c.getInnocence() > 66)
@@ -33412,9 +32164,9 @@ public class WorldState
         {
             w.append(t, (new StringBuilder("-")).append(resolveLost).append("% Resolve (").append(c.resolve).append("% remaining)\n\n").toString());
             c.say(t, "\"");
-            if(c.isDrained().booleanValue())
+            if(c.isDrained())
             {
-                if(w.tickle().booleanValue())
+                if(w.tickle())
                 {
                     if(c.getConfidence() > 66)
                     {
@@ -33990,7 +32742,7 @@ public class WorldState
     public void finalTempt(JTextPane t, Chosen c)
     {
         append(t, (new StringBuilder("\n\n")).append(getSeparator()).append("\n\n").toString());
-        if(c.hypnotized.booleanValue())
+        if(c.hypnotized)
         {
             if(c.innocence > 66)
                 append(t, (new StringBuilder("As ")).append(c.mainName).append("'s pleasure reaches its peak, you release your hypnotic hold on ").append(c.hisHer()).append(" mind.  But at this point, ").append(c.heShe()).append("'s been trained so well that ").append(c.heShe()).append(" doesn't even need your direct influence.  ").toString());
@@ -34007,7 +32759,7 @@ public class WorldState
             append(t, (new StringBuilder(String.valueOf(c.mainName))).append(" has been both hoping for and dreading this moment, going back and forth in ").append(c.hisHer()).append(" mind as to how ").append(c.heShe()).append("'d respond.  But as ").append(c.hisHer()).append(" feelings overflow with both lust and affection, ").append(c.heShe()).append(" finds ").append(c.hisHer()).append(" answer.  ").toString());
         else
             append(t, (new StringBuilder(String.valueOf(c.mainName))).append(" would have preferred to win this battle, but ").append(c.heShe()).append(" had decided beforehand what ").append(c.heShe()).append(" would do if defeated looked inevitable.  Now, with ").append(c.hisHer()).append(" body being so effortlessly toyed with, ").append(c.heShe()).append(" can see no path to victory.  ").toString());
-        if(c.parasitized.booleanValue())
+        if(c.parasitized)
         {
             if(c.morality > 66)
                 append(t, (new StringBuilder(String.valueOf(c.HeShe()))).append(" thinks about the ungrateful criticisms ").append(c.heShe()).append("'s faced from human society, and when ").append(c.heShe()).append(" compares it to the benevolence of the Thralls asking permission to pleasure ").append(c.himHer()).append(" now, ").append(c.heShe()).append(" knows that ").append(c.heShe()).append(" could never make any other choice.  ").append(c.HeShe()).append(" tells the Thralls to hurry and win the battle so that they can have some fun with ").append(c.himHer()).append(" afterward.").toString());
@@ -34282,7 +33034,7 @@ public class WorldState
                 }
                 Project.clearPortraits();
                 String nameDisplay[] = {
-                    first.mainName, 0, 0, 0, 0
+                    first.mainName, null, null, null, null
                 };
                 Project.changePortrait(first.convertGender(), first.type, Boolean.valueOf(true), Boolean.valueOf(false), this, nameDisplay, 0, Project.Emotion.SWOON, Project.Emotion.SWOON);
                 save.saveScene(4, (new StringBuilder(String.valueOf(first.mainName))).append(" Sealed").toString(), (new StringBuilder("In order to prevent the monstrous child of the Demon Lord and one of the Chosen from being born, ")).append(first.mainName).append(" is locked away in cold storage...").toString());
@@ -34337,7 +33089,7 @@ public class WorldState
                 }
                 Project.clearPortraits();
                 String nameDisplay[] = {
-                    first.mainName, 0, 0, 0, 0
+                    first.mainName, null, null, null, null
                 };
                 Project.changePortrait(first.convertGender(), first.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 0, Project.Emotion.FOCUS, Project.Emotion.FOCUS);
                 if(first.getInnocence() > 66)
@@ -34370,7 +33122,7 @@ public class WorldState
                 int killed = 0;
                 Chosen traitor = null;
                 for(int i = 0; i < 3; i++)
-                    if(!getCast()[i].alive.booleanValue() || getCast()[i].drained.booleanValue())
+                    if(!getCast()[i].alive || getCast()[i].drained)
                         killed++;
                     else
                         traitor = getCast()[i];
@@ -34397,7 +33149,7 @@ public class WorldState
                     orangeAppend(t, (new StringBuilder("\"This outcome is far from ideal, but it is not a complete loss.  When the Chosen martyr themselves, the resulting Holy Energy is considerable.  Go, and tell my lieutenants that ")).append(first.getMainName()).append("'s sacrifice shall drive us onward.\"").toString());
                 }
                 String nameDisplay[] = {
-                    "Crown", 0, 0, 0, 0
+                    "Crown", null, null, null, null
                 };
                 Project.changePortrait(Forsaken.Gender.FEMALE, null, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 0, Project.Emotion.NEUTRAL, Project.Emotion.NEUTRAL);
                 save.saveScene(4, (new StringBuilder("Crown hears of ")).append(first.getMainName()).toString(), (new StringBuilder("Following ")).append(first.getMainName()).append("'s death in battle, the leader of the Council of Ten reflects on the ramifications for the war as a whole.").toString());
@@ -34453,12 +33205,12 @@ public class WorldState
                 append(t, (new StringBuilder("up ")).append(first.hisHer()).append(" ass, ").toString());
             else
                 append(t, (new StringBuilder("into ")).append(first.hisHer()).append(" pussy, ").toString());
-            if(first.vVirg.booleanValue() && !first.gender.equals("male"))
+            if(first.vVirg && !first.gender.equals("male"))
                 append(t, (new StringBuilder("stealing the virginity ")).append(first.heShe()).append(" had worked so hard to protect, and ").toString());
             append(t, "squirting copious amounts of slime inside.  ");
             Project.clearPortraits();
             String nameDisplay[] = {
-                first.mainName, 0, 0, 0, 0
+                first.mainName, null, null, null, null
             };
             Project.changePortrait(first.convertGender(), first.type, Boolean.valueOf(false), Boolean.valueOf(false), this, nameDisplay, 0, Project.Emotion.LEWD, Project.Emotion.LEWD);
             if(first.getConfidence() > 66)

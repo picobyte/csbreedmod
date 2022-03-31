@@ -7,44 +7,11 @@ import javax.swing.*;
 public class Body
     implements Serializable
 {
-    public static final class Appearance extends Enum
-    {
-
-        public static Appearance[] values()
-        {
-            Appearance aappearance[];
-            int i;
-            Appearance aappearance1[];
-            System.arraycopy(aappearance = ENUM$VALUES, 0, aappearance1 = new Appearance[i = aappearance.length], 0, i);
-            return aappearance1;
-        }
-
-        public static Appearance valueOf(String s)
-        {
-            return (Appearance)Enum.valueOf(Body$Appearance, s);
-        }
-
-        public static final Appearance CUTEGIRL;
-        public static final Appearance CUTEBOY;
-        public static final Appearance MONSTER;
-        private static final Appearance ENUM$VALUES[];
-
-        static 
-        {
-            CUTEGIRL = new Appearance("CUTEGIRL", 0);
-            CUTEBOY = new Appearance("CUTEBOY", 1);
-            MONSTER = new Appearance("MONSTER", 2);
-            ENUM$VALUES = (new Appearance[] {
-                CUTEGIRL, CUTEBOY, MONSTER
-            });
-        }
-
-        private Appearance(String s, int i)
-        {
-            super(s, i);
-        }
+    public enum Appearance {
+        CUTEGIRL,
+        CUTEBOY,
+        MONSTER
     }
-
 
     public long[] currentDamage()
     {
@@ -219,7 +186,7 @@ public class Body
                         overflow = Boolean.valueOf(true);
                 }
 
-                if(!isDemonLord().booleanValue())
+                if(!isDemonLord())
                     incoming[i] = (incoming[i] * (long)(50 + getDeviancy())) / 100L;
                 for(long magnitude = currentDISG; magnitude >= 100L;)
                 {
@@ -310,7 +277,7 @@ public class Body
                 }
 
             }
-            if(overflow.booleanValue())
+            if(overflow)
                 incoming[i] = 0L;
         }
 
@@ -340,28 +307,10 @@ public class Body
         p.removeAll();
         JButton Wait = new JButton("Continue");
         Wait.addActionListener(new ActionListener() {
-
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 advanceAction(t, p, f, w, s);
-            }
-
-            final Body this$0;
-            private final JTextPane val$t;
-            private final JPanel val$p;
-            private final JFrame val$f;
-            private final WorldState val$w;
-            private final SaveData val$s;
-
-            
-            {
-                this$0 = Body.this;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                w = worldstate;
-                s = savedata;
-                super();
             }
         });
         if(inProgress.length == 0 && this == w.lordBody)
@@ -504,7 +453,7 @@ public class Body
     public Boolean orgasmPossible()
     {
         for(int i = 0; i < inProgress.length; i++)
-            if(inProgress[i].causesOrgasm.booleanValue())
+            if(inProgress[i].causesOrgasm)
                 return Boolean.valueOf(true);
 
         return Boolean.valueOf(false);
@@ -517,31 +466,11 @@ public class Body
         {
             JButton Previous = new JButton("<");
             Previous.addActionListener(new ActionListener() {
-
+                @Override
                 public void actionPerformed(ActionEvent e)
                 {
                     CancelActivities(t, p, f, w, s, page - 1);
                 }
-
-                final Body this$0;
-                private final JTextPane val$t;
-                private final JPanel val$p;
-                private final JFrame val$f;
-                private final WorldState val$w;
-                private final SaveData val$s;
-                private final int val$page;
-
-            
-            {
-                this$0 = Body.this;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                w = worldstate;
-                s = savedata;
-                page = i;
-                super();
-            }
             });
             p.add(Previous);
         }
@@ -550,7 +479,7 @@ public class Body
             JButton ThisOne = new JButton(w.lordBody.inProgress[i].activityName(w.lordBody.targets[i]));
             final int index = i;
             ThisOne.addActionListener(new ActionListener() {
-
+                @Override
                 public void actionPerformed(ActionEvent e)
                 {
                     w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).toString());
@@ -567,28 +496,6 @@ public class Body
                     else
                         PickActivity(t, p, f, w, s);
                 }
-
-                final Body this$0;
-                private final WorldState val$w;
-                private final JTextPane val$t;
-                private final int val$index;
-                private final JPanel val$p;
-                private final JFrame val$f;
-                private final SaveData val$s;
-                private final int val$page;
-
-            
-            {
-                this$0 = Body.this;
-                w = worldstate;
-                t = jtextpane;
-                index = i;
-                p = jpanel;
-                f = jframe;
-                s = savedata;
-                page = j;
-                super();
-            }
             });
             p.add(ThisOne);
         }
@@ -597,59 +504,21 @@ public class Body
         {
             JButton Next = new JButton(">");
             Next.addActionListener(new ActionListener() {
-
+                @Override
                 public void actionPerformed(ActionEvent e)
                 {
                     CancelActivities(t, p, f, w, s, page + 1);
                 }
-
-                final Body this$0;
-                private final JTextPane val$t;
-                private final JPanel val$p;
-                private final JFrame val$f;
-                private final WorldState val$w;
-                private final SaveData val$s;
-                private final int val$page;
-
-            
-            {
-                this$0 = Body.this;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                w = worldstate;
-                s = savedata;
-                page = i;
-                super();
-            }
             });
             p.add(Next);
         }
         JButton Back = new JButton("Back");
         Back.addActionListener(new ActionListener() {
-
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).toString());
                 PickActivity(t, p, f, w, s);
-            }
-
-            final Body this$0;
-            private final WorldState val$w;
-            private final JTextPane val$t;
-            private final JPanel val$p;
-            private final JFrame val$f;
-            private final SaveData val$s;
-
-            
-            {
-                this$0 = Body.this;
-                w = worldstate;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                s = savedata;
-                super();
             }
         });
         p.add(Back);
@@ -660,127 +529,55 @@ public class Body
     public void TouchMenu(final JTextPane t, final JPanel p, final JFrame f, final WorldState w, final SaveData s)
     {
         p.removeAll();
-        if(Project.TweakClit.valid(this, w.targetBody).booleanValue())
+        if(Project.TweakClit.valid(this, w.targetBody))
         {
             JButton TweakClit = new JButton("Stroke Clit");
             TweakClit.addActionListener(new ActionListener() {
-
+                @Override
                 public void actionPerformed(ActionEvent e)
                 {
                     w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\n").toString());
                     Project.TweakClit.startActivity(t, w, w.lordBody, w.targetBody);
                     Continue(t, p, f, w, s);
                 }
-
-                final Body this$0;
-                private final WorldState val$w;
-                private final JTextPane val$t;
-                private final JPanel val$p;
-                private final JFrame val$f;
-                private final SaveData val$s;
-
-            
-            {
-                this$0 = Body.this;
-                w = worldstate;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                s = savedata;
-                super();
-            }
             });
             p.add(TweakClit);
         }
-        if(Project.StrokeCock.valid(this, w.targetBody).booleanValue())
+        if(Project.StrokeCock.valid(this, w.targetBody))
         {
             JButton StrokeCock = new JButton("Stroke Cock");
             StrokeCock.addActionListener(new ActionListener() {
-
+                @Override
                 public void actionPerformed(ActionEvent e)
                 {
                     w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\n").toString());
                     Project.StrokeCock.startActivity(t, w, w.lordBody, w.targetBody);
                     Continue(t, p, f, w, s);
                 }
-
-                final Body this$0;
-                private final WorldState val$w;
-                private final JTextPane val$t;
-                private final JPanel val$p;
-                private final JFrame val$f;
-                private final SaveData val$s;
-
-            
-            {
-                this$0 = Body.this;
-                w = worldstate;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                s = savedata;
-                super();
-            }
             });
             p.add(StrokeCock);
         }
-        if(Project.StripOther.valid(this, w.targetBody).booleanValue())
+        if(Project.StripOther.valid(this, w.targetBody))
         {
             JButton StripOther = new JButton("Strip");
             StripOther.addActionListener(new ActionListener() {
-
+                @Override
                 public void actionPerformed(ActionEvent e)
                 {
                     w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\n").toString());
                     Project.StripOther.startActivity(t, w, w.lordBody, w.targetBody);
                     Continue(t, p, f, w, s);
                 }
-
-                final Body this$0;
-                private final WorldState val$w;
-                private final JTextPane val$t;
-                private final JPanel val$p;
-                private final JFrame val$f;
-                private final SaveData val$s;
-
-            
-            {
-                this$0 = Body.this;
-                w = worldstate;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                s = savedata;
-                super();
-            }
             });
             p.add(StripOther);
         }
         JButton Back = new JButton("Back");
         Back.addActionListener(new ActionListener() {
-
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).toString());
                 PickActivity(t, p, f, w, s);
-            }
-
-            final Body this$0;
-            private final WorldState val$w;
-            private final JTextPane val$t;
-            private final JPanel val$p;
-            private final JFrame val$f;
-            private final SaveData val$s;
-
-            
-            {
-                this$0 = Body.this;
-                w = worldstate;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                s = savedata;
-                super();
             }
         });
         p.add(Back);
@@ -791,11 +588,11 @@ public class Body
     public void PositionMenu(final JTextPane t, final JPanel p, final JFrame f, final WorldState w, final SaveData s)
     {
         p.removeAll();
-        if(Project.PushDown.valid(this, w.targetBody).booleanValue())
+        if(Project.PushDown.valid(this, w.targetBody))
         {
             JButton PushDown = new JButton("Push Down");
             PushDown.addActionListener(new ActionListener() {
-
+                @Override
                 public void actionPerformed(ActionEvent e)
                 {
                     w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\n").toString());
@@ -804,32 +601,14 @@ public class Body
                     Project.PullDown.activityTalk(t, w, w.targetBody, w.lordBody);
                     Continue(t, p, f, w, s);
                 }
-
-                final Body this$0;
-                private final WorldState val$w;
-                private final JTextPane val$t;
-                private final JPanel val$p;
-                private final JFrame val$f;
-                private final SaveData val$s;
-
-            
-            {
-                this$0 = Body.this;
-                w = worldstate;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                s = savedata;
-                super();
-            }
             });
             p.add(PushDown);
         }
-        if(Project.PullDown.valid(this, w.targetBody).booleanValue())
+        if(Project.PullDown.valid(this, w.targetBody))
         {
             JButton PullDown = new JButton("Pull Down");
             PullDown.addActionListener(new ActionListener() {
-
+                @Override
                 public void actionPerformed(ActionEvent e)
                 {
                     w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\n").toString());
@@ -838,84 +617,30 @@ public class Body
                     Project.PushDown.activityTalk(t, w, w.targetBody, w.lordBody);
                     Continue(t, p, f, w, s);
                 }
-
-                final Body this$0;
-                private final WorldState val$w;
-                private final JTextPane val$t;
-                private final JPanel val$p;
-                private final JFrame val$f;
-                private final SaveData val$s;
-
-            
-            {
-                this$0 = Body.this;
-                w = worldstate;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                s = savedata;
-                super();
-            }
             });
             p.add(PullDown);
         }
-        if(!Project.TieUp.isInProgress(this, w.targetBody).booleanValue())
+        if(!Project.TieUp.isInProgress(this, w.targetBody))
         {
             JButton TieUp = new JButton("Tie Up");
             TieUp.addActionListener(new ActionListener() {
-
+                @Override
                 public void actionPerformed(ActionEvent e)
                 {
                     w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\n").toString());
                     Project.TieUp.startActivity(t, w, w.lordBody, w.targetBody);
                     Continue(t, p, f, w, s);
                 }
-
-                final Body this$0;
-                private final WorldState val$w;
-                private final JTextPane val$t;
-                private final JPanel val$p;
-                private final JFrame val$f;
-                private final SaveData val$s;
-
-            
-            {
-                this$0 = Body.this;
-                w = worldstate;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                s = savedata;
-                super();
-            }
             });
             p.add(TieUp);
         }
         JButton Back = new JButton("Back");
         Back.addActionListener(new ActionListener() {
-
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).toString());
                 PickActivity(t, p, f, w, s);
-            }
-
-            final Body this$0;
-            private final WorldState val$w;
-            private final JTextPane val$t;
-            private final JPanel val$p;
-            private final JFrame val$f;
-            private final SaveData val$s;
-
-            
-            {
-                this$0 = Body.this;
-                w = worldstate;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                s = savedata;
-                super();
             }
         });
         p.add(Back);
@@ -926,12 +651,12 @@ public class Body
     public void SexMenu(final JTextPane t, final JPanel p, final JFrame f, final WorldState w, final SaveData s)
     {
         p.removeAll();
-        if(Project.VaginalPenetrate.valid(w.lordBody, w.targetBody).booleanValue())
+        if(Project.VaginalPenetrate.valid(w.lordBody, w.targetBody))
             if(Project.PenetratedVaginally.weight(w, w.targetBody, w.lordBody) >= 0 || w.targetBody.getHATELevel() >= 3)
             {
                 JButton Missionary = new JButton("Missionary Vaginal");
                 Missionary.addActionListener(new ActionListener() {
-
+                    @Override
                     public void actionPerformed(ActionEvent e)
                     {
                         w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\n").toString());
@@ -940,35 +665,17 @@ public class Body
                         Project.PenetratedVaginally.activityTalk(t, w, w.targetBody, w.lordBody);
                         Continue(t, p, f, w, s);
                     }
-
-                    final Body this$0;
-                    private final WorldState val$w;
-                    private final JTextPane val$t;
-                    private final JPanel val$p;
-                    private final JFrame val$f;
-                    private final SaveData val$s;
-
-            
-            {
-                this$0 = Body.this;
-                w = worldstate;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                s = savedata;
-                super();
-            }
                 });
                 p.add(Missionary);
             } else
             {
                 w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\n").append(w.targetBody.OwnerName()).append("'s Sexual Barrier prevents vaginal penetration.").toString());
             }
-        if(Project.PenetratedVaginally.valid(w.lordBody, w.targetBody).booleanValue())
+        if(Project.PenetratedVaginally.valid(w.lordBody, w.targetBody))
         {
             JButton Cowgirl = new JButton("Cowgirl Vaginal");
             Cowgirl.addActionListener(new ActionListener() {
-
+                @Override
                 public void actionPerformed(ActionEvent e)
                 {
                     w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\n").toString());
@@ -977,35 +684,17 @@ public class Body
                     Project.VaginalPenetrate.activityTalk(t, w, w.targetBody, w.lordBody);
                     Continue(t, p, f, w, s);
                 }
-
-                final Body this$0;
-                private final WorldState val$w;
-                private final JTextPane val$t;
-                private final JPanel val$p;
-                private final JFrame val$f;
-                private final SaveData val$s;
-
-            
-            {
-                this$0 = Body.this;
-                w = worldstate;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                s = savedata;
-                super();
-            }
             });
             p.add(Cowgirl);
         }
-        if(Project.AnalPenetrate.valid(w.lordBody, w.targetBody).booleanValue())
+        if(Project.AnalPenetrate.valid(w.lordBody, w.targetBody))
             if(Project.PenetratedAnally.weight(w, w.targetBody, w.lordBody) >= 0 || w.targetBody.getHATELevel() >= 3 || w.targetBody.parts[PUSSY] > 0)
             {
                 JButton Missionary = new JButton("Missionary Anal");
-                if(!Project.BeLubricated.isInProgress(w.targetBody, null).booleanValue())
+                if(!Project.BeLubricated.isInProgress(w.targetBody, null))
                     Missionary.setText("Unlubricated Missionary Anal");
                 Missionary.addActionListener(new ActionListener() {
-
+                    @Override
                     public void actionPerformed(ActionEvent e)
                     {
                         w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\n").toString());
@@ -1014,37 +703,19 @@ public class Body
                         Project.PenetratedAnally.activityTalk(t, w, w.targetBody, w.lordBody);
                         Continue(t, p, f, w, s);
                     }
-
-                    final Body this$0;
-                    private final WorldState val$w;
-                    private final JTextPane val$t;
-                    private final JPanel val$p;
-                    private final JFrame val$f;
-                    private final SaveData val$s;
-
-            
-            {
-                this$0 = Body.this;
-                w = worldstate;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                s = savedata;
-                super();
-            }
                 });
                 p.add(Missionary);
             } else
             {
                 w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\n").append(w.targetBody.OwnerName()).append("'s Sexual Barrier prevents anal penetration.").toString());
             }
-        if(Project.PenetratedAnally.valid(w.lordBody, w.targetBody).booleanValue())
+        if(Project.PenetratedAnally.valid(w.lordBody, w.targetBody))
         {
             JButton Cowgirl = new JButton("Cowgirl Anal");
             if(appearanceGender(bodyType) == Forsaken.Gender.MALE)
                 Cowgirl.setText("Cowgirl (Male) Anal");
             Cowgirl.addActionListener(new ActionListener() {
-
+                @Override
                 public void actionPerformed(ActionEvent e)
                 {
                     w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\n").toString());
@@ -1053,84 +724,30 @@ public class Body
                     Project.AnalPenetrate.activityTalk(t, w, w.targetBody, w.lordBody);
                     Continue(t, p, f, w, s);
                 }
-
-                final Body this$0;
-                private final WorldState val$w;
-                private final JTextPane val$t;
-                private final JPanel val$p;
-                private final JFrame val$f;
-                private final SaveData val$s;
-
-            
-            {
-                this$0 = Body.this;
-                w = worldstate;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                s = savedata;
-                super();
-            }
             });
             p.add(Cowgirl);
         }
-        if(Project.Lubricate.valid(w.lordBody, w.targetBody).booleanValue())
+        if(Project.Lubricate.valid(w.lordBody, w.targetBody))
         {
             JButton Lubricate = new JButton("Lubricate Anus");
             Lubricate.addActionListener(new ActionListener() {
-
+                @Override
                 public void actionPerformed(ActionEvent e)
                 {
                     w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\n").toString());
                     Project.Lubricate.startActivity(t, w, w.lordBody, w.targetBody);
                     Continue(t, p, f, w, s);
                 }
-
-                final Body this$0;
-                private final WorldState val$w;
-                private final JTextPane val$t;
-                private final JPanel val$p;
-                private final JFrame val$f;
-                private final SaveData val$s;
-
-            
-            {
-                this$0 = Body.this;
-                w = worldstate;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                s = savedata;
-                super();
-            }
             });
             p.add(Lubricate);
         }
         JButton Back = new JButton("Back");
         Back.addActionListener(new ActionListener() {
-
+            @Override
             public void actionPerformed(ActionEvent e)
             {
                 w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).toString());
                 PickActivity(t, p, f, w, s);
-            }
-
-            final Body this$0;
-            private final WorldState val$w;
-            private final JTextPane val$t;
-            private final JPanel val$p;
-            private final JFrame val$f;
-            private final SaveData val$s;
-
-            
-            {
-                this$0 = Body.this;
-                w = worldstate;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                s = savedata;
-                super();
             }
         });
         p.add(Back);
@@ -1141,7 +758,7 @@ public class Body
     public void PickActivity(final JTextPane t, final JPanel p, final JFrame f, final WorldState w, final SaveData s)
     {
         for(int i = 0; i < inProgress.length; i++)
-            if(inProgress[i].endsSelf.booleanValue())
+            if(inProgress[i].endsSelf)
                 removeActivity(inProgress[i], targets[i]);
 
         w.append(t, "\n\n");
@@ -1260,7 +877,7 @@ public class Body
                         w.targetBody.currentFEAR = ((100 - w.targetBody.getConfidence()) * (100 - w.targetBody.getDignity())) / 50;
                         w.targetBody.currentHATE = ((100 - w.targetBody.getObedience()) * (100 - w.targetBody.getDignity())) / 50;
                         w.targetBody.currentPLEA = (w.targetBody.getDeviancy() * (100 - w.targetBody.getDignity())) / 50;
-                        if(!w.targetBody.hasBeenBroadcasted().booleanValue())
+                        if(!w.targetBody.hasBeenBroadcasted())
                         {
                             w.targetBody.currentFEAR = w.targetBody.currentFEAR * 3L;
                             w.append(t, (new StringBuilder(String.valueOf(w.targetBody.HeShe()))).append(" sees filming phones in the crowd, and ").append(w.targetBody.heShe()).append(" knows that what happens here could change how people see ").append(w.targetBody.himHer()).append(" forever.").toString());
@@ -1291,9 +908,9 @@ public class Body
                 for(int i = 0; i < w.sceneParticipants.length; i++)
                 {
                     for(int j = 0; j < w.sceneParticipants[i].inProgress.length; j++)
-                        if(!w.sceneParticipants[i].inProgress[j].endsSelf.booleanValue())
+                        if(!w.sceneParticipants[i].inProgress[j].endsSelf)
                         {
-                            if(!descriptionStarted.booleanValue())
+                            if(!descriptionStarted)
                             {
                                 descriptionStarted = Boolean.valueOf(true);
                                 w.append(t, "In Progress:");
@@ -1303,7 +920,7 @@ public class Body
                                 if(mentioned[k].counterpart == w.sceneParticipants[i].inProgress[j] && targeted[k] == w.sceneParticipants[i])
                                     found = Boolean.valueOf(true);
 
-                            if(!found.booleanValue())
+                            if(!found)
                             {
                                 w.sceneParticipants[i].inProgress[j].shortDescription(t, w, w.sceneParticipants[i], w.sceneParticipants[i].targets[j]);
                                 Activity newMentioned[] = new Activity[mentioned.length + 1];
@@ -1323,94 +940,40 @@ public class Body
 
                 }
 
-                if(descriptionStarted.booleanValue())
+                if(descriptionStarted)
                     w.append(t, "\n\n");
             }
             w.append(t, (new StringBuilder("How will ")).append(ownerName()).append(" act?").toString());
             JButton Touch = new JButton("Touch");
             Touch.addActionListener(new ActionListener() {
-
+                @Override
                 public void actionPerformed(ActionEvent e)
                 {
                     TouchMenu(t, p, f, w, s);
                 }
-
-                final Body this$0;
-                private final JTextPane val$t;
-                private final JPanel val$p;
-                private final JFrame val$f;
-                private final WorldState val$w;
-                private final SaveData val$s;
-
-            
-            {
-                this$0 = Body.this;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                w = worldstate;
-                s = savedata;
-                super();
-            }
             });
             p.add(Touch);
-            if(!Project.PushDown.isInProgress(w.lordBody, w.targetBody).booleanValue() && !Project.PullDown.isInProgress(w.lordBody, w.targetBody).booleanValue())
+            if(!Project.PushDown.isInProgress(w.lordBody, w.targetBody) && !Project.PullDown.isInProgress(w.lordBody, w.targetBody))
             {
                 JButton Position = new JButton("Position");
                 Position.addActionListener(new ActionListener() {
-
+                    @Override
                     public void actionPerformed(ActionEvent e)
                     {
                         PositionMenu(t, p, f, w, s);
                     }
-
-                    final Body this$0;
-                    private final JTextPane val$t;
-                    private final JPanel val$p;
-                    private final JFrame val$f;
-                    private final WorldState val$w;
-                    private final SaveData val$s;
-
-            
-            {
-                this$0 = Body.this;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                w = worldstate;
-                s = savedata;
-                super();
-            }
                 });
                 p.add(Position);
             } else
-            if(Project.PushDown.isInProgress(w.lordBody, w.targetBody).booleanValue())
+            if(Project.PushDown.isInProgress(w.lordBody, w.targetBody))
             {
                 JButton Sex = new JButton("Sex");
                 Sex.addActionListener(new ActionListener() {
-
+                    @Override
                     public void actionPerformed(ActionEvent e)
                     {
                         SexMenu(t, p, f, w, s);
                     }
-
-                    final Body this$0;
-                    private final JTextPane val$t;
-                    private final JPanel val$p;
-                    private final JFrame val$f;
-                    private final WorldState val$w;
-                    private final SaveData val$s;
-
-            
-            {
-                this$0 = Body.this;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                w = worldstate;
-                s = savedata;
-                super();
-            }
                 });
                 p.add(Sex);
             }
@@ -1418,72 +981,36 @@ public class Body
             {
                 JButton Cancel = new JButton("Stop Action");
                 Cancel.addActionListener(new ActionListener() {
-
+                    @Override
                     public void actionPerformed(ActionEvent e)
                     {
                         w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\nWhich action will you cancel?").toString());
                         CancelActivities(t, p, f, w, s, 0);
                     }
-
-                    final Body this$0;
-                    private final WorldState val$w;
-                    private final JTextPane val$t;
-                    private final JPanel val$p;
-                    private final JFrame val$f;
-                    private final SaveData val$s;
-
-            
-            {
-                this$0 = Body.this;
-                w = worldstate;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                s = savedata;
-                super();
-            }
                 });
                 p.add(Cancel);
             }
             JButton Wait = new JButton("Wait");
             Wait.addActionListener(new ActionListener() {
-
+                @Override
                 public void actionPerformed(ActionEvent e)
                 {
                     Boolean summaryNeeded = Boolean.valueOf(false);
-                    if(summaryNeeded.booleanValue())
+                    if(summaryNeeded)
                         Continue(t, p, f, w, s);
                     else
                         advanceAction(t, p, f, w, s);
                 }
-
-                final Body this$0;
-                private final JTextPane val$t;
-                private final JPanel val$p;
-                private final JFrame val$f;
-                private final WorldState val$w;
-                private final SaveData val$s;
-
-            
-            {
-                this$0 = Body.this;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                w = worldstate;
-                s = savedata;
-                super();
-            }
             });
             if(inProgress.length > 0)
                 Wait.setText("Continue");
             p.add(Wait);
             JButton Done = new JButton("End");
             Done.addActionListener(new ActionListener() {
-
+                @Override
                 public void actionPerformed(ActionEvent e)
                 {
-                    if(w.active.booleanValue())
+                    if(w.active)
                     {
                         Project.Shop(t, p, f, w);
                     } else
@@ -1493,24 +1020,6 @@ public class Body
                         Project.IntroOne(t, p, f, w);
                     }
                 }
-
-                final Body this$0;
-                private final WorldState val$w;
-                private final JTextPane val$t;
-                private final JPanel val$p;
-                private final JFrame val$f;
-                private final SaveData val$s;
-
-            
-            {
-                this$0 = Body.this;
-                w = worldstate;
-                t = jtextpane;
-                p = jpanel;
-                f = jframe;
-                s = savedata;
-                super();
-            }
             });
             p.add(Done);
             p.validate();
@@ -1529,7 +1038,7 @@ public class Body
                 int value = inProgress[i].weight(w, this, targets[i]);
                 int validEnderIndex = -1;
                 for(int j = 0; j < inProgress[i].enders.length; j++)
-                    if(inProgress[i].enders[j].valid(this, targets[i]).booleanValue())
+                    if(inProgress[i].enders[j].valid(this, targets[i]))
                     {
                         validEnderIndex = j;
                         j = inProgress[i].enders.length;
@@ -1540,22 +1049,22 @@ public class Body
                     ending = Boolean.valueOf(true);
                     extreme = value;
                     pickedActivity = inProgress[i].enders[validEnderIndex];
-                    if(pickedActivity.targeted.booleanValue())
+                    if(pickedActivity.targeted)
                         target = consideredTarget;
                     else
                         target = null;
                 }
             }
 
-            for(int i = 0; i < activityWeights.length && !ending.booleanValue(); i++)
-                if(Project.allActivities[i].pickable.booleanValue() && Project.allActivities[i].valid(this, w.lordBody).booleanValue())
+            for(int i = 0; i < activityWeights.length && !ending; i++)
+                if(Project.allActivities[i].pickable && Project.allActivities[i].valid(this, w.lordBody))
                 {
                     int value = Project.allActivities[i].weight(w, this, w.lordBody);
                     if(value > extreme)
                     {
                         extreme = value;
                         pickedActivity = Project.allActivities[i];
-                        if(pickedActivity.targeted.booleanValue())
+                        if(pickedActivity.targeted)
                             target = consideredTarget;
                         else
                             target = null;
@@ -1660,10 +1169,10 @@ public class Body
                     else
                         w.tierTwoAppend(t, (new StringBuilder(String.valueOf(fillChar))).toString());
                 } else
-                if(tier == 0 || tier == 1 && mixed.booleanValue())
+                if(tier == 0 || tier == 1 && mixed)
                     w.append(t, (new StringBuilder(String.valueOf(remainChar))).toString());
                 else
-                if(tier == 1 || tier == 2 && mixed.booleanValue())
+                if(tier == 1 || tier == 2 && mixed)
                     w.inverseAppend(t, (new StringBuilder(String.valueOf(remainChar))).toString());
                 else
                     w.tierTwoAppend(t, (new StringBuilder(String.valueOf(remainChar))).toString());
@@ -1832,7 +1341,7 @@ public class Body
                         w.append(t, "body failing under the strain");
                 } else
                 if(i == 7)
-                    if(isParasitized().booleanValue())
+                    if(isParasitized())
                     {
                         if(currentDamage()[i] < 100L)
                             w.append(t, "no more exposed than usual");
@@ -1895,7 +1404,7 @@ public class Body
                         w.append(t, (new StringBuilder("whole body feels sensitive, pleasure pulsing in ")).append(hisHer()).append(" loins as orgasm approaches.").toString());
                 }
             } else
-            if(!orgasmPossible().booleanValue())
+            if(!orgasmPossible())
             {
                 w.purpleAppend(t, (new StringBuilder("\n\nPLEA up!  ")).append(OwnerName()).append(" wildly bucks ").append(hisHer()).append(" hips in search of orgasm, but ").append(heShe()).append(" can't give ").append(himHer()).append("self the necessary stimulation, and ").append(heShe()).append(" comes back from the brink of climax.").toString());
             } else
@@ -2039,10 +1548,10 @@ public class Body
                     else
                         w.tierTwoAppend(t, (new StringBuilder(String.valueOf(fillChar))).toString());
                 } else
-                if(tier == 0 || tier == 1 && mixed.booleanValue())
+                if(tier == 0 || tier == 1 && mixed)
                     w.append(t, (new StringBuilder(String.valueOf(remainChar))).toString());
                 else
-                if(tier == 1 || tier == 2 && mixed.booleanValue())
+                if(tier == 1 || tier == 2 && mixed)
                     w.inverseAppend(t, (new StringBuilder(String.valueOf(remainChar))).toString());
                 else
                     w.tierTwoAppend(t, (new StringBuilder(String.valueOf(remainChar))).toString());
@@ -2211,7 +1720,7 @@ public class Body
                         w.append(t, "body failing under the strain");
                 } else
                 if(i == 7)
-                    if(isParasitized().booleanValue())
+                    if(isParasitized())
                     {
                         if(currentDamage()[i] < 100L)
                             w.append(t, "no more exposed than usual");
@@ -2334,7 +1843,7 @@ public class Body
                         w.append(t, (new StringBuilder("whole body feels sensitive, pleasure pulsing in ")).append(hisHer()).append(" loins as orgasm approaches.").toString());
                 }
             } else
-            if(!orgasmPossible().booleanValue())
+            if(!orgasmPossible())
             {
                 w.purpleAppend(t, (new StringBuilder("\n\nPLEA up!  ")).append(OwnerName()).append(" wildly bucks ").append(hisHer()).append(" hips in search of orgasm, but ").append(heShe()).append(" can't give ").append(himHer()).append("self the necessary stimulation, and ").append(heShe()).append(" comes back from the brink of climax.").toString());
             } else
@@ -2716,13 +2225,13 @@ public class Body
         if(chosenOwner != null)
         {
             int value = (100 - chosenOwner.morality) / 3;
-            if(chosenOwner.impregnated.booleanValue())
+            if(chosenOwner.impregnated)
                 value += 40;
             else
             if(chosenOwner.timesSlaughtered() > 0)
                 value += 30;
             else
-            if(!chosenOwner.vVirg.booleanValue())
+            if(!chosenOwner.vVirg)
                 value += 20;
             else
             if(chosenOwner.ruthless)
@@ -2741,13 +2250,13 @@ public class Body
         if(chosenOwner != null)
         {
             int value = (100 - chosenOwner.innocence) / 3;
-            if(chosenOwner.hypnotized.booleanValue())
+            if(chosenOwner.hypnotized)
                 value += 40;
             else
             if(chosenOwner.timesFantasized() > 0)
                 value += 30;
             else
-            if(!chosenOwner.cVirg.booleanValue())
+            if(!chosenOwner.cVirg)
                 value += 20;
             else
             if(chosenOwner.lustful)
@@ -2766,13 +2275,13 @@ public class Body
         if(chosenOwner != null)
         {
             int value = (100 - chosenOwner.confidence) / 3;
-            if(chosenOwner.drained.booleanValue())
+            if(chosenOwner.drained)
                 value += 40;
             else
             if(chosenOwner.timesDetonated() > 0)
                 value += 30;
             else
-            if(!chosenOwner.aVirg.booleanValue())
+            if(!chosenOwner.aVirg)
                 value += 20;
             else
             if(chosenOwner.meek)
@@ -2791,13 +2300,13 @@ public class Body
         if(chosenOwner != null)
         {
             int value = (100 - chosenOwner.dignity) / 3;
-            if(chosenOwner.parasitized.booleanValue())
+            if(chosenOwner.parasitized)
                 value += 40;
             else
             if(chosenOwner.timesStripped() > 0)
                 value += 30;
             else
-            if(!chosenOwner.modest.booleanValue())
+            if(!chosenOwner.modest)
                 value += 20;
             else
             if(chosenOwner.debased)
@@ -2916,7 +2425,7 @@ public class Body
                 return Boolean.valueOf(false);
         if(chosenOwner != null)
         {
-            if(chosenOwner.modest.booleanValue())
+            if(chosenOwner.modest)
                 return Boolean.valueOf(false);
             else
                 return Boolean.valueOf(true);
@@ -3040,7 +2549,7 @@ public class Body
                         opinionClamp = 500;
                     for(int j = 0; j < w.getHarem().length; j++)
                     {
-                        if(forsakenOwner.others[i].equals(w.getHarem()[j]).booleanValue())
+                        if(forsakenOwner.others[i].equals(w.getHarem()[j]))
                         {
                             found = Boolean.valueOf(true);
                             if(forsakenOwner.others[i].obedience > forsakenOwner.obedience)
@@ -3053,7 +2562,7 @@ public class Body
                                 else
                                     opinionClamp = 0;
                         }
-                        if(!found.booleanValue())
+                        if(!found)
                         {
                             opinionClamp = (-30 * opinionClamp) / 500;
                             if(forsakenOwner.obedience > 80)
