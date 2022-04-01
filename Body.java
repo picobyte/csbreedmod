@@ -158,7 +158,7 @@ public class Body
                 }
 
                 magnitude = getObedience();
-                for(incoming[i] = (incoming[i] * (long)(150 - getMorality()) * (long)(100 + getHostility()) * (long)(100 - getObedience())) / 0xb71b0L; magnitude > 60L; incoming[i] = (incoming[i] * 9L) / 10L)
+                for(incoming[i] = (incoming[i] * (long)(150 - getMorality()) * (long)(100 + getHostility()) * (long)(100 - getObedience())) / 750_000L; magnitude > 60L; incoming[i] = (incoming[i] * 9L) / 10L)
                     magnitude--;
 
                 for(magnitude = currentINJU; magnitude >= 1000L;)
@@ -782,12 +782,12 @@ public class Body
                         if(w.targetBody.getDeviancy() > 66)
                         {
                             w.append(t, (new StringBuilder("already naked and unable to stop ")).append(w.targetBody.himHer()).append("self from masturbating as ").append(w.targetBody.heShe()).append(" anticipates what's to come.  When ").append(w.targetBody.heShe()).append(" sees ").append(w.lordBody.ownerName()).append(", ").append(w.targetBody.heShe()).append(" scrambles to ").append(w.targetBody.hisHer()).append(" feet, panting with unrestrained desire.").toString());
-                            w.targetBody.currentEXPO = 0xf4240L;
+                            w.targetBody.currentEXPO = 1_000_000L;
                         } else
                         if(w.targetBody.getDeviancy() > 33)
                         {
                             w.append(t, (new StringBuilder("wearing nothing but a thin robe which ")).append(w.targetBody.heShe()).append(" quickly drops to the floor as ").append(w.targetBody.heShe()).append(" welcomes ").append(w.lordBody.himHer()).append(".  An eager smile is on ").append(w.targetBody.ownerName()).append("'s face, and ").append(w.targetBody.hisHer()).append(" cheeks are flushed with arousal.").toString());
-                            w.targetBody.currentEXPO = 0xf4240L;
+                            w.targetBody.currentEXPO = 1_000_000L;
                         } else
                         {
                             w.append(t, (new StringBuilder("shifting nervously from foot to foot.  ")).append(w.targetBody.HeShe()).append(" knows roughly what will be expected of ").append(w.targetBody.himHer()).append(", but ").append(w.targetBody.heShe()).append("'s unsure whether ").append(w.targetBody.heShe()).append("'ll be able to perform.").toString());
@@ -800,7 +800,7 @@ public class Body
                         {
                             w.append(t, (new StringBuilder(String.valueOf(w.targetBody.capitalizedOwnerName()))).append(" is masturbating when ").append(w.lordBody.ownerName()).append(" arrives, and ").append(w.targetBody.heShe()).append(" looks almost annoyed at being interrupted.  But as ").append(w.targetBody.heShe()).append(" remembers the possibilities offered by a partner, ").append(w.targetBody.heShe()).append(" cheers up and sheds ").append(w.targetBody.hisHer()).append(" clothes, offering ").append(w.targetBody.himHer()).append("self to ").append(w.lordBody.ownerName()).append(".").toString());
                             w.targetBody.currentPLEA = (w.targetBody.getDeviancy() * w.targetBody.getDeviancy()) / 20;
-                            w.targetBody.currentEXPO = 0xf4240L;
+                            w.targetBody.currentEXPO = 1_000_000L;
                         } else
                         if(w.targetBody.getDeviancy() > 33)
                         {
@@ -893,7 +893,7 @@ public class Body
                     for(int i = 0; i < w.sceneParticipants.length && w.sceneLocation == Activity.Location.STAGE; i++)
                         if(w.sceneParticipants[i].forsakenOwner != null && w.sceneParticipants[i].getEXPOLevel() >= 3)
                         {
-                            int audience = 0x493e0 + (int)(Math.random() * 300000D);
+                            int audience = 300_000 + (int)(Math.random() * 300000D);
                             w.sceneParticipants[i].forsakenOwner.timesExposed += audience;
                             w.sceneParticipants[i].forsakenOwner.timesExposedSelf += audience;
                         }
@@ -1117,7 +1117,7 @@ public class Body
             int tier = 0;
             long totalDamage = currentDamage()[i] + actualDamage[i];
             int increment = 10;
-            for(; totalDamage >= 0x989680L; totalDamage /= 0xf4240L)
+            for(; totalDamage >= 10_000_000L; totalDamage /= 1_000_000L)
                 tier++;
 
             Boolean mixed = false;
@@ -1145,17 +1145,17 @@ public class Body
                 fillChar = '=';
                 increment = 10000;
             }
-            if(totalDamage >= 0x186a0L)
+            if(totalDamage >= 100_000L)
             {
                 remainChar = fillChar;
                 fillChar = 'X';
-                increment = 0x186a0;
+                increment = 100_000;
             }
-            if(totalDamage >= 0xf4240L)
+            if(totalDamage >= 1_000_000L)
             {
                 remainChar = fillChar;
                 fillChar = '#';
-                increment = 0xf4240;
+                increment = 1_000_000;
             }
             long incrementsRemaining = totalDamage / (long)increment;
             for(int j = 0; j < 10; j++)
@@ -1218,10 +1218,10 @@ public class Body
                     if(currentDamage()[i] < 10000L)
                         w.append(t, "terrified");
                     else
-                    if(currentDamage()[i] < 0x186a0L)
+                    if(currentDamage()[i] < 100_000L)
                         w.append(t, "desperate to please");
                     else
-                    if(currentDamage()[i] < 0xf4240L)
+                    if(currentDamage()[i] < 1_000_000L)
                         w.append(t, "blind panic");
                     else
                         w.append(t, "consumed by fear");
@@ -1237,10 +1237,10 @@ public class Body
                     if(currentDamage()[i] < 10000L)
                         w.append(t, "disgusted with self");
                     else
-                    if(currentDamage()[i] < 0x186a0L)
+                    if(currentDamage()[i] < 100_000L)
                         w.append(t, "struggling not to be sick");
                     else
-                    if(currentDamage()[i] < 0xf4240L)
+                    if(currentDamage()[i] < 1_000_000L)
                         w.append(t, "trying to ignore everything");
                     else
                         w.append(t, "overwhelming disgust");
@@ -1256,10 +1256,10 @@ public class Body
                     if(currentDamage()[i] < 10000L)
                         w.append(t, "distracted by pain");
                     else
-                    if(currentDamage()[i] < 0x186a0L)
+                    if(currentDamage()[i] < 100_000L)
                         w.append(t, "reeling from the pain");
                     else
-                    if(currentDamage()[i] < 0xf4240L)
+                    if(currentDamage()[i] < 1_000_000L)
                         w.append(t, "overwhelmed by pain");
                     else
                         w.append(t, "feels nothing but pain");
@@ -1275,10 +1275,10 @@ public class Body
                     if(currentDamage()[i] < 10000L)
                         w.append(t, "feels watching eyes");
                     else
-                    if(currentDamage()[i] < 0x186a0L)
+                    if(currentDamage()[i] < 100_000L)
                         w.append(t, (new StringBuilder("can't stop thinking about how ")).append(heShe()).append(" looks").toString());
                     else
-                    if(currentDamage()[i] < 0xf4240L)
+                    if(currentDamage()[i] < 1_000_000L)
                         w.append(t, "tears of shame");
                     else
                         w.append(t, "mind paralyzed by shame");
@@ -1294,10 +1294,10 @@ public class Body
                     if(currentDamage()[i] < 10000L)
                         w.append(t, "strong anger");
                     else
-                    if(currentDamage()[i] < 0x186a0L)
+                    if(currentDamage()[i] < 100_000L)
                         w.append(t, "too angry to cooperate");
                     else
-                    if(currentDamage()[i] < 0xf4240L)
+                    if(currentDamage()[i] < 1_000_000L)
                         w.append(t, "overpowering hatred");
                     else
                         w.append(t, "all-consuming hatred");
@@ -1313,10 +1313,10 @@ public class Body
                     if(currentDamage()[i] < 10000L)
                         w.append(t, "orgasm approaching");
                     else
-                    if(currentDamage()[i] < 0x186a0L)
+                    if(currentDamage()[i] < 100_000L)
                         w.append(t, "orgasmic pleasure");
                     else
-                    if(currentDamage()[i] < 0xf4240L)
+                    if(currentDamage()[i] < 1_000_000L)
                         w.append(t, "experiencing multiple orgasms");
                     else
                         w.append(t, "cumming nonstop");
@@ -1332,10 +1332,10 @@ public class Body
                     if(currentDamage()[i] < 10000L)
                         w.append(t, "too tired to continue");
                     else
-                    if(currentDamage()[i] < 0x186a0L)
+                    if(currentDamage()[i] < 100_000L)
                         w.append(t, "completely spent");
                     else
-                    if(currentDamage()[i] < 0xf4240L)
+                    if(currentDamage()[i] < 1_000_000L)
                         w.append(t, "unconscious");
                     else
                         w.append(t, "body failing under the strain");
@@ -1357,7 +1357,7 @@ public class Body
                                 w.append(t, "breasts");
                             w.append(t, " on full display");
                         } else
-                        if(currentDamage()[i] < 0x186a0L)
+                        if(currentDamage()[i] < 100_000L)
                         {
                             if(getGender().equals(Forsaken.Gender.MALE))
                                 w.append(t, "asshole");
@@ -1365,7 +1365,7 @@ public class Body
                                 w.append(t, "pussy");
                             w.append(t, " uncovered for easy access");
                         } else
-                        if(currentDamage()[i] < 0xf4240L)
+                        if(currentDamage()[i] < 1_000_000L)
                             w.append(t, "essentially naked");
                         else
                             w.append(t, "worse than naked");
@@ -1379,10 +1379,10 @@ public class Body
                     if(currentDamage()[i] < 10000L)
                         w.append(t, (new StringBuilder("clothes torn across ")).append(hisHer()).append(" hips and chest").toString());
                     else
-                    if(currentDamage()[i] < 0x186a0L)
+                    if(currentDamage()[i] < 100_000L)
                         w.append(t, "shredded clothes sometimes expose everything");
                     else
-                    if(currentDamage()[i] < 0xf4240L)
+                    if(currentDamage()[i] < 1_000_000L)
                         w.append(t, "essentially naked");
                     else
                         w.append(t, "every inch of skin exposed");
@@ -1464,9 +1464,9 @@ public class Body
         long actualDamage[] = InflictDamage(damageTaken);
         for(int i = 0; i < 8; i++)
         {
-            if(i == 7 && currentDamage()[i] + actualDamage[i] > 0xf4240L)
+            if(i == 7 && currentDamage()[i] + actualDamage[i] > 1_000_000L)
             {
-                actualDamage[i] = 0xf4240L - currentDamage()[i];
+                actualDamage[i] = 1_000_000L - currentDamage()[i];
                 removeActivity(Project.Stripped, null);
             }
             if(i == 0)
@@ -1496,7 +1496,7 @@ public class Body
             int tier = 0;
             long totalDamage = currentDamage()[i] + actualDamage[i];
             int increment = 10;
-            for(; totalDamage >= 0x989680L; totalDamage /= 0xf4240L)
+            for(; totalDamage >= 10_000_000L; totalDamage /= 1_000_000L)
                 tier++;
 
             Boolean mixed = false;
@@ -1524,17 +1524,17 @@ public class Body
                 fillChar = '=';
                 increment = 10000;
             }
-            if(totalDamage >= 0x186a0L)
+            if(totalDamage >= 100_000L)
             {
                 remainChar = fillChar;
                 fillChar = 'X';
-                increment = 0x186a0;
+                increment = 100_000;
             }
-            if(totalDamage >= 0xf4240L)
+            if(totalDamage >= 1_000_000L)
             {
                 remainChar = fillChar;
                 fillChar = '#';
-                increment = 0xf4240;
+                increment = 1_000_000;
             }
             long incrementsRemaining = totalDamage / (long)increment;
             for(int j = 0; j < 10; j++)
@@ -1597,10 +1597,10 @@ public class Body
                     if(currentDamage()[i] < 10000L)
                         w.append(t, "terrified");
                     else
-                    if(currentDamage()[i] < 0x186a0L)
+                    if(currentDamage()[i] < 100_000L)
                         w.append(t, "desperate to please");
                     else
-                    if(currentDamage()[i] < 0xf4240L)
+                    if(currentDamage()[i] < 1_000_000L)
                         w.append(t, "blind panic");
                     else
                         w.append(t, "consumed by fear");
@@ -1616,10 +1616,10 @@ public class Body
                     if(currentDamage()[i] < 10000L)
                         w.append(t, "disgusted with self");
                     else
-                    if(currentDamage()[i] < 0x186a0L)
+                    if(currentDamage()[i] < 100_000L)
                         w.append(t, "struggling not to be sick");
                     else
-                    if(currentDamage()[i] < 0xf4240L)
+                    if(currentDamage()[i] < 1_000_000L)
                         w.append(t, "trying to ignore everything");
                     else
                         w.append(t, "overwhelming disgust");
@@ -1635,10 +1635,10 @@ public class Body
                     if(currentDamage()[i] < 10000L)
                         w.append(t, "distracted by pain");
                     else
-                    if(currentDamage()[i] < 0x186a0L)
+                    if(currentDamage()[i] < 100_000L)
                         w.append(t, "reeling from the pain");
                     else
-                    if(currentDamage()[i] < 0xf4240L)
+                    if(currentDamage()[i] < 1_000_000L)
                         w.append(t, "overwhelmed by pain");
                     else
                         w.append(t, "feels nothing but pain");
@@ -1654,10 +1654,10 @@ public class Body
                     if(currentDamage()[i] < 10000L)
                         w.append(t, "feels watching eyes");
                     else
-                    if(currentDamage()[i] < 0x186a0L)
+                    if(currentDamage()[i] < 100_000L)
                         w.append(t, (new StringBuilder("can't stop thinking about how ")).append(heShe()).append(" looks").toString());
                     else
-                    if(currentDamage()[i] < 0xf4240L)
+                    if(currentDamage()[i] < 1_000_000L)
                         w.append(t, "tears of shame");
                     else
                         w.append(t, "mind paralyzed by shame");
@@ -1673,10 +1673,10 @@ public class Body
                     if(currentDamage()[i] < 10000L)
                         w.append(t, "strong anger");
                     else
-                    if(currentDamage()[i] < 0x186a0L)
+                    if(currentDamage()[i] < 100_000L)
                         w.append(t, "too angry to cooperate");
                     else
-                    if(currentDamage()[i] < 0xf4240L)
+                    if(currentDamage()[i] < 1_000_000L)
                         w.append(t, "overpowering hatred");
                     else
                         w.append(t, "all-consuming hatred");
@@ -1692,10 +1692,10 @@ public class Body
                     if(currentDamage()[i] < 10000L)
                         w.append(t, "orgasm approaching");
                     else
-                    if(currentDamage()[i] < 0x186a0L)
+                    if(currentDamage()[i] < 100_000L)
                         w.append(t, "oragsmic pleasure");
                     else
-                    if(currentDamage()[i] < 0xf4240L)
+                    if(currentDamage()[i] < 1_000_000L)
                         w.append(t, "experiencing multiple orgasms");
                     else
                         w.append(t, "cumming nonstop");
@@ -1711,10 +1711,10 @@ public class Body
                     if(currentDamage()[i] < 10000L)
                         w.append(t, "too tired to continue");
                     else
-                    if(currentDamage()[i] < 0x186a0L)
+                    if(currentDamage()[i] < 100_000L)
                         w.append(t, "completely spent");
                     else
-                    if(currentDamage()[i] < 0xf4240L)
+                    if(currentDamage()[i] < 1_000_000L)
                         w.append(t, "consciousness fading");
                     else
                         w.append(t, "body failing under the strain");
@@ -1736,7 +1736,7 @@ public class Body
                                 w.append(t, "breasts");
                             w.append(t, " on full display");
                         } else
-                        if(currentDamage()[i] < 0x186a0L)
+                        if(currentDamage()[i] < 100_000L)
                         {
                             if(getGender().equals(Forsaken.Gender.MALE))
                                 w.append(t, "asshole");
@@ -1744,7 +1744,7 @@ public class Body
                                 w.append(t, "pussy");
                             w.append(t, " uncovered for easy access");
                         } else
-                        if(currentDamage()[i] < 0xf4240L)
+                        if(currentDamage()[i] < 1_000_000L)
                             w.append(t, "essentially naked");
                         else
                             w.append(t, "completely naked");
@@ -1758,10 +1758,10 @@ public class Body
                     if(currentDamage()[i] < 10000L)
                         w.append(t, (new StringBuilder("clothes torn across ")).append(hisHer()).append(" hips and chest").toString());
                     else
-                    if(currentDamage()[i] < 0x186a0L)
+                    if(currentDamage()[i] < 100_000L)
                         w.append(t, "shredded clothes sometimes expose everything");
                     else
-                    if(currentDamage()[i] < 0xf4240L)
+                    if(currentDamage()[i] < 1_000_000L)
                         w.append(t, "essentially naked");
                     else
                         w.append(t, "completely naked");
@@ -1937,8 +1937,8 @@ public class Body
                 w.append(t, (new StringBuilder(String.valueOf(OwnerName()))).append(" is now completely naked.").toString());
             if(w.sceneLocation == Activity.Location.STAGE && currentDamage()[7] - actualDamage[7] < 10000L && currentDamage()[7] >= 10000L && forsakenOwner != null)
             {
-                int added = 0x493e0 + (int)(Math.random() * 300000D);
-                if(forsakenOwner.timesExposed < 0x493e0)
+                int added = 300_000 + (int)(Math.random() * 300000D);
+                if(forsakenOwner.timesExposed < 300_000)
                 {
                     specialLine = 4;
                     w.append(t, "  Flashing cameras from the crowd immortalize the moment forever.");
@@ -1967,16 +1967,16 @@ public class Body
         int previousLevel = 0;
         int currentLevel = 0;
         long previousPLEA = currentValue - change;
-        if(previousPLEA >= 0x186a0L)
-            previousLevel = (int)(previousPLEA / 0x186a0L + 2L);
+        if(previousPLEA >= 100_000L)
+            previousLevel = (int)(previousPLEA / 100_000L + 2L);
         else
         if(previousPLEA >= 30000L)
             previousLevel = 2;
         else
         if(previousPLEA >= 10000L)
             previousLevel = 1;
-        if(currentValue >= 0x186a0L)
-            currentLevel = (int)(currentValue / 0x186a0L + 2L);
+        if(currentValue >= 100_000L)
+            currentLevel = (int)(currentValue / 100_000L + 2L);
         else
         if(currentValue >= 30000L)
             currentLevel = 2;
@@ -2419,7 +2419,7 @@ public class Body
     public Boolean hasBeenBroadcasted()
     {
         if(forsakenOwner != null)
-            if(forsakenOwner.timesExposed >= 0x493e0)
+            if(forsakenOwner.timesExposed >= 300_000)
                 return true;
             else
                 return false;

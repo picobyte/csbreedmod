@@ -215,7 +215,7 @@ public class Activity
         if(this == Project.Stripped)
         {
             input[0] += 3L;
-            if(subject.forsakenOwner != null && subject.forsakenOwner.timesExposed < 0x493e0)
+            if(subject.forsakenOwner != null && subject.forsakenOwner.timesExposed < 300_000)
                 input[0] += subject.getDignity() / 6;
             input[1] += 2L;
             input[3] += 20L;
@@ -2393,7 +2393,7 @@ public class Activity
                 } else
                 if(sender.getObedience() > 33)
                 {
-                    if(sender.forsakenOwner != null && sender.forsakenOwner.timesExposed < 0x493e0)
+                    if(sender.forsakenOwner != null && sender.forsakenOwner.timesExposed < 300_000)
                     {
                         if(sender.getDignity() > 66)
                             w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" is clearly terrified of the prospect of being forced to show everything, but ").append(sender.heShe()).append("'s come too far to back out now.").toString());
@@ -2638,7 +2638,7 @@ public class Activity
                 if(w.sceneLocation == Location.STAGE)
                 {
                     result -= sender.getSHAMLevel() * 10;
-                    if(sender.forsakenOwner != null && sender.forsakenOwner.timesExposed < 0x493e0 || sender.chosenOwner != null && sender.chosenOwner.modest)
+                    if(sender.forsakenOwner != null && sender.forsakenOwner.timesExposed < 300_000 || sender.chosenOwner != null && sender.chosenOwner.modest)
                         result -= 30;
                 }
                 result -= sender.getHATELevel() * 10;

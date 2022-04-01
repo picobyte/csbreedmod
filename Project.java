@@ -18,11 +18,11 @@ import javax.swing.text.Document;
 
 public class Project extends JFrame
 {
-    static final long million = 0xf4240L;
-    static final long billion = 0x3b9aca00L;
-    static final long trillion = 0xe8d4a51000L;
-    static final long quadrillion = 0x38d7ea4c68000L;
-    static final long quintillion = 0xde0b6b3a7640000L;
+    static final long million = 1_000_000L;
+    static final long billion = 1_000_000_000L;
+    static final long trillion = 1_000_000_000_000L;
+    static final long quadrillion = 1_000_000_000_000_000L;
+    static final long quintillion = 1_000_000_000_000_000_000L;
     static final int scenesThisVersion = 49;
     static final int vignettesThisVersion = 16;
     public static JFrame window = new JFrame("Project");
@@ -5108,9 +5108,9 @@ public class Project extends JFrame
                         }
                         if(victim2 != null)
                         {
-                            if(w.getRelationship(killer1.getNumber(), victim1.getNumber()) == -4 || victim1.isImpregnated() || victim1.isHypnotized() || victim1.isDrained() || victim1.isParasitized() || victim1.temptReq < 0x186a0L || victim1.dissociationReq < 10 || victim1.resolve < 50)
+                            if(w.getRelationship(killer1.getNumber(), victim1.getNumber()) == -4 || victim1.isImpregnated() || victim1.isHypnotized() || victim1.isDrained() || victim1.isParasitized() || victim1.temptReq < 100_000L || victim1.dissociationReq < 10 || victim1.resolve < 50)
                             {
-                                if(w.getRelationship(killer1.getNumber(), victim2.getNumber()) == -4 || victim2.isImpregnated() || victim2.isHypnotized() || victim2.isDrained() || victim2.isParasitized() || victim2.temptReq < 0x186a0L || victim2.dissociationReq < 10 || victim2.resolve < 50)
+                                if(w.getRelationship(killer1.getNumber(), victim2.getNumber()) == -4 || victim2.isImpregnated() || victim2.isHypnotized() || victim2.isDrained() || victim2.isParasitized() || victim2.temptReq < 100_000L || victim2.dissociationReq < 10 || victim2.resolve < 50)
                                 {
                                     if(w.getTechs()[40].isOwned() && !killer1.hesitated && (w.getRelationship(killer1.getNumber(), victim1.getNumber()) == 4 || w.getRelationship(killer1.getNumber(), victim2.getNumber()) == 4))
                                     {
@@ -5137,7 +5137,7 @@ public class Project extends JFrame
                                 else
                                     w.append(t, (new StringBuilder(String.valueOf(killer1.getMainName()))).append(" prepares to launch a devastating attack so that the battle can be finished after ").append(victim2.getMainName()).append(" escapes, even though ").append(victim1.getMainName()).append(" is in the way.").toString());
                             } else
-                            if(w.getRelationship(killer1.getNumber(), victim2.getNumber()) == -4 || victim2.isImpregnated() || victim2.isHypnotized() || victim2.isDrained() || victim2.isParasitized() || victim2.temptReq < 0x186a0L || victim2.dissociationReq < 10 || victim2.resolve < 50)
+                            if(w.getRelationship(killer1.getNumber(), victim2.getNumber()) == -4 || victim2.isImpregnated() || victim2.isHypnotized() || victim2.isDrained() || victim2.isParasitized() || victim2.temptReq < 100_000L || victim2.dissociationReq < 10 || victim2.resolve < 50)
                             {
                                 if(duration1 > duration2)
                                     w.append(t, (new StringBuilder(String.valueOf(killer1.getMainName()))).append(" buys time for ").append(victim1.getMainName()).append(" to escape so that the two of them can work together to end this.").toString());
@@ -5153,7 +5153,7 @@ public class Project extends JFrame
                         } else
                         if(killer2 != null)
                         {
-                            if(victim1.isImpregnated() || victim1.isHypnotized() || victim1.isDrained() || victim1.isParasitized() || victim1.temptReq < 0x186a0L || victim1.dissociationReq < 10 || victim1.resolve < 50)
+                            if(victim1.isImpregnated() || victim1.isHypnotized() || victim1.isDrained() || victim1.isParasitized() || victim1.temptReq < 100_000L || victim1.dissociationReq < 10 || victim1.resolve < 50)
                             {
                                 if(w.getTechs()[40].isOwned())
                                 {
@@ -5185,7 +5185,7 @@ public class Project extends JFrame
                             else
                                 w.append(t, (new StringBuilder(String.valueOf(victim1.getMainName()))).append("'s captivity is preventing the other Chosen from ending the battle, but ").append(killer1.getMainName()).append(" and ").append(killer2.getMainName()).append(" aren't willing to sacrifice ").append(victim1.hisHer()).append(" life just to finish things a little bit sooner.").toString());
                         } else
-                        if(w.getRelationship(killer1.getNumber(), victim1.getNumber()) == -4 || victim1.isImpregnated() || victim1.isHypnotized() || victim1.isDrained() || victim1.isParasitized() || victim1.temptReq < 0x186a0L || victim1.dissociationReq < 10 || victim1.resolve < 50)
+                        if(w.getRelationship(killer1.getNumber(), victim1.getNumber()) == -4 || victim1.isImpregnated() || victim1.isHypnotized() || victim1.isDrained() || victim1.isParasitized() || victim1.temptReq < 100_000L || victim1.dissociationReq < 10 || victim1.resolve < 50)
                         {
                             if(w.getTechs()[40].isOwned() && !killer1.hesitated && w.getRelationship(killer1.getNumber(), victim1.getNumber()) == 4)
                                 w.append(t, (new StringBuilder(String.valueOf(killer1.getMainName()))).append(" calls out to ").append(victim1.getMainName()).append(", urging ").append(victim1.himHer()).append(" to escape before ").append(victim1.heShe()).append(" gets caught up in ").append(killer1.getMainName()).append("'s final attack.").toString());
@@ -6375,7 +6375,7 @@ public class Project extends JFrame
                         {
                             Inseminate.setBackground(YELLOWISH);
                         }
-                        if(c.temptReq < 0x186a0L && finalInseminated != 2)
+                        if(c.temptReq < 100_000L && finalInseminated != 2)
                             Inseminate.setBackground(REDDISH);
                         Inseminate.setToolTipText((new StringBuilder("<html><center>Inflicts HATE and PLEA along with<br>FEAR, DISG, ")).append(PAINname).append(", and SHAM<br>Causes tier-2 Morality Break</center></html>").toString());
                         if(finalInseminated == 1)
@@ -6461,7 +6461,7 @@ public class Project extends JFrame
                         {
                             Sodomize.setBackground(YELLOWISH);
                         }
-                        if(c.temptReq < 0x186a0L && finalSodomized != 2)
+                        if(c.temptReq < 100_000L && finalSodomized != 2)
                             Sodomize.setBackground(REDDISH);
                         Sodomize.setToolTipText((new StringBuilder("<html><center>Inflicts ")).append(INJUname).append(" and EXPO along with<br>").append(PAINname).append(", SHAM, FEAR, and DISG<br>Causes tier-2 Confidence Break</center></html>").toString());
                         if(finalSodomized == 1)
@@ -6518,7 +6518,7 @@ public class Project extends JFrame
                     long currentTemptReq = c.temptReq;
                     if(w.finalBattle)
                         currentTemptReq *= 10L;
-                    if(c.getCurrentPLEA() >= currentTemptReq && c.vVirg && c.aVirg && !c.cVirg && !c.modest && !c.ruthless && !c.usingSlaughter && !c.usingDetonate && (c.temptReq < 0x186a0L || !w.finalBattle))
+                    if(c.getCurrentPLEA() >= currentTemptReq && c.vVirg && c.aVirg && !c.cVirg && !c.modest && !c.ruthless && !c.usingSlaughter && !c.usingDetonate && (c.temptReq < 100_000L || !w.finalBattle))
                     {
                         JButton Tempt = new JButton(TemptAction) {
 
@@ -6775,7 +6775,7 @@ public class Project extends JFrame
                         {
                             Inseminate.setBackground(YELLOWISH);
                         }
-                        if(c.temptReq < 0x186a0L && finalInseminated != 2)
+                        if(c.temptReq < 100_000L && finalInseminated != 2)
                             Inseminate.setBackground(REDDISH);
                         Inseminate.setToolTipText((new StringBuilder("<html><center>Inflicts HATE and PLEA along with<br>FEAR, DISG, ")).append(PAINname).append(", and SHAM<br>Causes tier-2 Morality Break</center></html>").toString());
                         if(finalInseminated == 1)
@@ -6861,7 +6861,7 @@ public class Project extends JFrame
                         {
                             Sodomize.setBackground(YELLOWISH);
                         }
-                        if(c.temptReq < 0x186a0L && finalSodomized != 2)
+                        if(c.temptReq < 100_000L && finalSodomized != 2)
                             Sodomize.setBackground(REDDISH);
                         Sodomize.setToolTipText((new StringBuilder("<html><center>Inflicts ")).append(INJUname).append(" and EXPO along with<br>").append(PAINname).append(", SHAM, FEAR, and DISG<br>Causes tier-2 Confidence Break</center></html>").toString());
                         if(finalSodomized == 1)
@@ -7266,7 +7266,7 @@ public class Project extends JFrame
                 {
                     Inseminate.setBackground(YELLOWISH);
                 }
-                if(c.temptReq < 0x186a0L && inseminated != 2)
+                if(c.temptReq < 100_000L && inseminated != 2)
                     Inseminate.setBackground(REDDISH);
                 Inseminate.setToolTipText((new StringBuilder("<html><center>Inflicts HATE and PLEA along with<br>FEAR, DISG, ")).append(PAINname).append(", and SHAM<br>Causes tier-2 Morality Break</center></html>").toString());
                 if(inseminated == 1)
@@ -7354,7 +7354,7 @@ public class Project extends JFrame
                 {
                     Sodomize.setBackground(YELLOWISH);
                 }
-                if(c.temptReq < 0x186a0L && sodomized != 2)
+                if(c.temptReq < 100_000L && sodomized != 2)
                     Sodomize.setBackground(REDDISH);
                 Sodomize.setToolTipText((new StringBuilder("<html><center>Inflicts ")).append(INJUname).append(" and EXPO along with<br>").append(PAINname).append(", SHAM, FEAR, and DISG<br>Causes tier-2 Confidence Break</center></html>").toString());
                 if(sodomized == 1)
@@ -7412,7 +7412,7 @@ public class Project extends JFrame
             long currentTemptReq = c.temptReq;
             if(w.finalBattle)
                 currentTemptReq *= 10L;
-            if(c.getCurrentPLEA() >= currentTemptReq && c.vVirg && c.aVirg && !c.cVirg && !c.modest && !c.ruthless && !c.usingSlaughter && !c.usingDetonate && (c.temptReq < 0x186a0L || !w.finalBattle))
+            if(c.getCurrentPLEA() >= currentTemptReq && c.vVirg && c.aVirg && !c.cVirg && !c.modest && !c.ruthless && !c.usingSlaughter && !c.usingDetonate && (c.temptReq < 100_000L || !w.finalBattle))
             {
                 JButton Tempt = new JButton(TemptAction) {
 
@@ -7584,7 +7584,7 @@ public class Project extends JFrame
                     long currentTemptReq = c.temptReq;
                     if(w.finalBattle)
                         currentTemptReq *= 10L;
-                    if(c.currentPLEA >= currentTemptReq && c.vVirg && c.aVirg && !c.cVirg && !c.modest && !c.ruthless && c.timesSlaughtered() == 0 && c.timesDetonated() == 0 && (c.temptReq < 0x186a0L || !w.finalBattle))
+                    if(c.currentPLEA >= currentTemptReq && c.vVirg && c.aVirg && !c.cVirg && !c.modest && !c.ruthless && c.timesSlaughtered() == 0 && c.timesDetonated() == 0 && (c.temptReq < 100_000L || !w.finalBattle))
                         conditionsMet = true;
                 } else
                 if(w.usedForsaken.defilerType == 6 && (c.currentHATE >= 10000L || c.currentINJU >= 10000L))
@@ -9522,7 +9522,7 @@ public class Project extends JFrame
             if(sceneType == 16)
             {
                 for(int i = 0; i < 3; i++)
-                    if(w.getCast()[i].temptReq < 0x186a0L && !w.getCast()[i].pastTempted && (w.getCast()[i].morality > 66 || w.getCast()[i].confidence > 66))
+                    if(w.getCast()[i].temptReq < 100_000L && !w.getCast()[i].pastTempted && (w.getCast()[i].morality > 66 || w.getCast()[i].confidence > 66))
                         broken = w.getCast()[i];
 
                 if(broken == null)
@@ -9608,7 +9608,7 @@ public class Project extends JFrame
     {
         for(int i = 0; i < 3; i++)
             if(w.getCast()[i] != null)
-                if(w.getCast()[i].temptReq < 0x186a0L)
+                if(w.getCast()[i].temptReq < 100_000L)
                     w.getCast()[i].pastTempted = true;
                 else
                 if(w.getCast()[i].dissociationReq < 10)
@@ -9660,7 +9660,7 @@ public class Project extends JFrame
                 highest = w.getCast()[i].getTotalSHAM();
         }
 
-        while(highest > 0x9184e72a000L) 
+        while(highest > 10_000_000_000_000L) 
         {
             highest /= 10L;
             divisor *= 10L;
@@ -9706,7 +9706,7 @@ public class Project extends JFrame
                 actionWeights[i][8] = Long.valueOf((sham * 200L + disg * 100L + angst * 20L) / (long)(100 + w.getCast()[i].getMorality()) - inhibition);
             else
                 actionWeights[i][8] = Long.valueOf(0L);
-            inhibition = (0x3d0900L * (long)w.downtimeMultiplier) / 100L;
+            inhibition = (4_000_000L * (long)w.downtimeMultiplier) / 100L;
             if(divided)
                 inhibition /= divisor;
             if(!w.getCast()[i].isVVirg())
@@ -9725,7 +9725,7 @@ public class Project extends JFrame
                 actionWeights[i][12] = Long.valueOf((sham * 400L + fear * 200L + angst * 40L) / (long)(100 + w.getCast()[i].getMorality()) - inhibition);
             else
                 actionWeights[i][12] = Long.valueOf(0L);
-            inhibition = (0x2540be400L * (long)w.downtimeMultiplier) / 100L;
+            inhibition = (10_000_000_000L * (long)w.downtimeMultiplier) / 100L;
             if(divided)
                 inhibition /= divisor;
             if(w.getCast()[i].timesSlaughtered() > 0)
@@ -9744,7 +9744,7 @@ public class Project extends JFrame
                 actionWeights[i][16] = Long.valueOf((sham * 1000L + fear * 500L + pain * 250L + angst * 100L) / (long)(100 + w.getCast()[i].getMorality()) - inhibition);
             else
                 actionWeights[i][16] = Long.valueOf(0L);
-            inhibition = (0xb5e620f48000L * (long)w.downtimeMultiplier) / 100L;
+            inhibition = (200_000_000_000_000L * (long)w.downtimeMultiplier) / 100L;
             if(divided)
                 inhibition /= divisor;
             if(w.getCast()[i].isImpregnated())
@@ -9763,7 +9763,7 @@ public class Project extends JFrame
                 actionWeights[i][20] = Long.valueOf((sham * 2000L + disg * 1000L + fear * 500L + angst * 250L) / (long)(100 + w.getCast()[i].getMorality()) - inhibition);
             else
                 actionWeights[i][20] = Long.valueOf(0L);
-            if(w.getCast()[i].betraying && w.getCast()[i].temptReq < 0x186a0L)
+            if(w.getCast()[i].betraying && w.getCast()[i].temptReq < 100_000L)
             {
                 actionWeights[i][21] = Long.valueOf(fear * 5L + disg * 5L + pain * 5L + sham * 5L + angst / 2L);
                 if(divided)
@@ -10096,7 +10096,7 @@ public class Project extends JFrame
         for(int i = 0; i < 3; i++)
             if(w.getCast()[i] != null)
             {
-                if(w.getCast()[i].temptReq < 0x186a0L)
+                if(w.getCast()[i].temptReq < 100_000L)
                     w.getCast()[i].pastTempted = true;
                 if(w.getCast()[i].dissociationReq < 10)
                     w.getCast()[i].pastDissociated = true;
@@ -10746,7 +10746,7 @@ public class Project extends JFrame
                     {
                         w.append(t, "   [");
                     }
-                    if(w.getCast()[i].temptReq == 0x186a0L)
+                    if(w.getCast()[i].temptReq == 100_000L)
                     {
                         if(w.getCast()[i].isRuthless())
                             w.append(t, "X");
@@ -10853,7 +10853,7 @@ public class Project extends JFrame
                     else
                         w.append(t, " ");
                     w.append(t, "][");
-                    if(w.getCast()[i].temptReq == 0x186a0L)
+                    if(w.getCast()[i].temptReq == 100_000L)
                     {
                         if(!w.getCast()[i].isAVirg())
                             w.append(t, "X");
@@ -14459,7 +14459,7 @@ public class Project extends JFrame
                     included[i].timesExposed++;
                     included[i].timesExposedSelf++;
                 } else
-                if(included[i].timesExposed > 0x186a0 && (int)(Math.random() * 2D) == 0 || !included[i].debased)
+                if(included[i].timesExposed > 100_000 && (int)(Math.random() * 2D) == 0 || !included[i].debased)
                 {
                     w.append(t, (new StringBuilder(String.valueOf(included[i].mainName))).append(" goes outside in ").toString());
                     if(included[i].dignity > 66)

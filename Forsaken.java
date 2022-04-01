@@ -427,7 +427,7 @@ public class Forsaken
         }
         if(!c.isModest())
         {
-            int added = 0x493e0 + (int)(Math.random() * 300000D);
+            int added = 300_000 + (int)(Math.random() * 300000D);
             timesExposed += added;
             if(!c.mStart)
                 timesExposedSelf += added;
@@ -441,7 +441,7 @@ public class Forsaken
         {
             if(c.pastTempted)
                 enjoyedAnal = 3 + (int)(Math.random() * 4D);
-            for(; temptTrack < 0x186a0L; temptTrack = (temptTrack * 10L) / 9L)
+            for(; temptTrack < 100_000L; temptTrack = (temptTrack * 10L) / 9L)
                 enjoyedAnal = (enjoyedAnal * 3) / 2 + (int)(Math.random() * 3D);
 
         }
@@ -4084,7 +4084,7 @@ public class Forsaken
                             w.redAppend(t, "vaginal ");
                         w.redAppend(t, "sex");
                     } else
-                    if(trainingType == 14 && timesExposed < 0x493e0)
+                    if(trainingType == 14 && timesExposed < 300_000)
                     {
                         w.append(t, " - ");
                         w.redAppend(t, "first worldwide exposure");
@@ -4442,7 +4442,7 @@ public class Forsaken
         if(nextTraining == 14)
         {
             w.append(t, (new StringBuilder("You will form a supernatural connection with televisions and computers all across the world, then broadcast images of ")).append(mainName).append(" being humiliated to the unsuspecting civilians who happen to be nearby.").toString());
-            if(timesExposed < 0x493e0)
+            if(timesExposed < 300_000)
                 w.redAppend(t, (new StringBuilder("  This will damage ")).append(hisHer()).append(" reputation even among those who don't live in your domain.").toString());
         } else
         if(nextTraining == 15)
@@ -4559,7 +4559,7 @@ public class Forsaken
                 else
                     w.redAppend(t, "vaginal sex)");
             } else
-            if(nextTraining == 14 && timesExposed < 0x493e0)
+            if(nextTraining == 14 && timesExposed < 300_000)
             {
                 breakFactor = -20;
                 w.redAppend(t, "-20 (first worldwide exposure)");
@@ -8695,7 +8695,7 @@ public class Forsaken
             if(nextTraining == 12 && timesHadSex == 0)
                 increases[0] += 10;
             else
-            if(nextTraining == 14 && timesExposed < 0x493e0)
+            if(nextTraining == 14 && timesExposed < 300_000)
                 increases[3] += 10;
             else
             if(nextTraining == 15 && strongestOrgasm < 200)
@@ -8864,7 +8864,7 @@ public class Forsaken
                         {
                             for(int i = 0; i < 3; i++)
                                 if(w.getCast()[i] != null)
-                                    w.getCast()[i].ANGST += (long)increases[0] * 0x3b9aca00L;
+                                    w.getCast()[i].ANGST += (long)increases[0] * 1_000_000_000L;
 
                             w.append(t, (new StringBuilder("\n\n+")).append(increases[0]).append("G ANGST to all Chosen").toString());
                         }
@@ -9278,7 +9278,7 @@ public class Forsaken
                 w.append(t, (new StringBuilder("Many of the viewers aren't convinced that ")).append(mainName).append(" was ever one of the Chosen.").toString());
             else
                 w.append(t, (new StringBuilder("Footage of ")).append(mainName).append(" being humiliated during ").append(hisHer()).append(" time as one of the Chosen is already popular on certain websites, and many of the viewers eagerly save this new video to add it to their existing collection of ").append(mainName).append(" porn.").toString());
-            int views = 0x493e0 + (int)(Math.random() * 300000D);
+            int views = 300_000 + (int)(Math.random() * 300000D);
             timesExposed += views;
             if(consenting)
                 timesExposedSelf += views;
@@ -26857,7 +26857,7 @@ public class Forsaken
             {
                 if(c.morality > 66)
                 {
-                    if(c.temptReq == 0x186a0L)
+                    if(c.temptReq == 100_000L)
                     {
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" decides to try to convince ").append(c.mainName).append(" to abandon the fight for awhile and just enjoy ").append(c.himHer()).append("self.  Even in ").append(c.hisHer()).append(" extremely aroused state, ").append(c.mainName).append(" is resistant at first, but ").toString());
                         if(flavorHostility() > 66)
@@ -26878,7 +26878,7 @@ public class Forsaken
                 } else
                 if(c.morality > 33)
                 {
-                    if(c.temptReq == 0x186a0L)
+                    if(c.temptReq == 100_000L)
                     {
                         if(flavorDeviancy() > 66)
                             w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" humps ").append(himHer()).append("self wildly against ").append(c.mainName).append(", pleasuring ").append(himHer()).append("self as much as ").append(heShe()).append(" is ").append(reference(c)).append(".  ").toString());
@@ -26897,7 +26897,7 @@ public class Forsaken
                     else
                         w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" offers ").append(c.mainName).append(" a temporary truce so that the two of them can spend some time sexually servicing the Thralls.  ").append(c.mainName).append(" is grateful, both for the chance to satiate ").append(c.hisHer()).append(" lust and for the excuse to stop fighting a losing battle.").toString());
                 } else
-                if(c.temptReq == 0x186a0L)
+                if(c.temptReq == 100_000L)
                 {
                     w.append(t, (new StringBuilder("It isn't entirely clear when exactly ")).append(c.mainName).append(" decides to stop fighting.  ").toString());
                     if(disgrace > 66)
@@ -26915,7 +26915,7 @@ public class Forsaken
                     w.append(t, (new StringBuilder("Neither ")).append(mainName).append(" nor ").append(c.mainName).append(" actually care much about stopping the other anymore.  It's ").append(mainName).append(" who makes the proposal that they take a break to play with the Thralls, but ").append(c.mainName).append(" was already indulging in lustful thoughts, and ").append(c.heShe()).append("'s quick to accept.").toString());
                 else
                     w.append(t, (new StringBuilder(String.valueOf(mainName))).append(" offers to service ").append(c.mainName).append(" if ").append(c.heShe()).append("'ll stop resisting it.  As far as ").append(c.mainName).append(" is concerned, this proposal has no drawbacks for ").append(c.himHer()).append(".").toString());
-                if(c.temptReq == 0x186a0L)
+                if(c.temptReq == 100_000L)
                 {
                     w.append(t, "\n\n");
                     w.underlineAppend(t, "Morality/Confidence Distortion");
@@ -30265,7 +30265,7 @@ public class Forsaken
         else
             while(exp > 20000L) 
             {
-                exp = (exp * 0x183faL) / 0x186a0L;
+                exp = (exp * 0x183faL) / 100_000L;
                 value++;
             }
         return value;
