@@ -117,16 +117,16 @@ public class SaveData
 
 	public void saveScene(int type, String button, String summary)
 	{
-		Boolean unique = Boolean.valueOf(true);
+		Boolean unique = true;
 		for(int i = 0; i < sceneText[type].length && unique; i++)
 		{
-			Boolean difference = Boolean.valueOf(false);
+			Boolean difference = false;
 			for(int j = 0; j < sceneText[type][i].length && !difference; j++)
 				if(sceneText[type][i].length != currentText.length)
-					difference = Boolean.valueOf(true);
+					difference = true;
 				else
 				if(!sceneText[type][i][j].contentEquals(currentText[j]))
-					difference = Boolean.valueOf(true);
+					difference = true;
 
 			unique = difference;
 		}
@@ -208,7 +208,7 @@ public class SaveData
 		for(int i = 0; i < saves.length; i++)
 		{
 			if(saves[i].campaign == null)
-				saves[i].campaign = Boolean.valueOf(false);
+				saves[i].campaign = false;
 			if(saves[i].campaign)
 			{
 				for(int j = 0; j < saves[i].conquered.length; j++)

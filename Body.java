@@ -24,7 +24,7 @@ public class Body
     {
         for(int i = 0; i < 8; i++)
         {
-            Boolean overflow = Boolean.valueOf(false);
+            Boolean overflow = false;
             if(i == 0 && incoming[i] > 0L)
             {
                 for(long magnitude = currentFEAR; magnitude >= 100L;)
@@ -32,7 +32,7 @@ public class Body
                     magnitude /= 10L;
                     incoming[i] = incoming[i] * 3L;
                     if(incoming[i] > 0xd6bf94d5e5L)
-                        overflow = Boolean.valueOf(true);
+                        overflow = true;
                 }
 
                 for(long magnitude = currentPAIN; magnitude >= 100L;)
@@ -40,7 +40,7 @@ public class Body
                     magnitude /= 10L;
                     incoming[i] = incoming[i] * 2L;
                     if(incoming[i] > 0xd6bf94d5e5L)
-                        overflow = Boolean.valueOf(true);
+                        overflow = true;
                 }
 
                 incoming[i] = (incoming[i] * (long)(150 - getConfidence()) * (long)(100 + getObedience())) / 15000L;
@@ -58,7 +58,7 @@ public class Body
                     magnitude /= 10L;
                     incoming[i] = incoming[i] * 5L;
                     if(incoming[i] > 0xd6bf94d5e5L)
-                        overflow = Boolean.valueOf(true);
+                        overflow = true;
                 }
 
                 for(long magnitude = currentHATE; magnitude >= 100L;)
@@ -66,7 +66,7 @@ public class Body
                     magnitude /= 10L;
                     incoming[i] = incoming[i] * 2L;
                     if(incoming[i] > 0xd6bf94d5e5L)
-                        overflow = Boolean.valueOf(true);
+                        overflow = true;
                 }
 
                 incoming[i] = (incoming[i] * (long)(200 + getInnocence()) * (long)(100 - getDeviancy())) / 12500L;
@@ -78,7 +78,7 @@ public class Body
                     magnitude /= 10L;
                     incoming[i] = incoming[i] * 4L;
                     if(incoming[i] > 0xd6bf94d5e5L)
-                        overflow = Boolean.valueOf(true);
+                        overflow = true;
                 }
 
                 for(long magnitude = currentINJU; magnitude >= 1000L;)
@@ -95,7 +95,7 @@ public class Body
                     magnitude /= 10L;
                     incoming[i] = incoming[i] * 3L;
                     if(incoming[i] > 0xd6bf94d5e5L)
-                        overflow = Boolean.valueOf(true);
+                        overflow = true;
                 }
 
                 for(long magnitude = currentEXPO; magnitude >= 100L;)
@@ -103,7 +103,7 @@ public class Body
                     magnitude /= 10L;
                     incoming[i] = (incoming[i] * 3L) / 2L;
                     if(incoming[i] > 0xd6bf94d5e5L)
-                        overflow = Boolean.valueOf(true);
+                        overflow = true;
                 }
 
                 incoming[i] = (incoming[i] * (long)(150 - getDignity())) / 100L;
@@ -122,7 +122,7 @@ public class Body
                     magnitude /= 10L;
                     incoming[i] = incoming[i] * 5L;
                     if(incoming[i] > 0xd6bf94d5e5L)
-                        overflow = Boolean.valueOf(true);
+                        overflow = true;
                 }
 
                 for(magnitude = currentDISG; magnitude >= 100L;)
@@ -130,7 +130,7 @@ public class Body
                     magnitude /= 10L;
                     incoming[i] = (incoming[i] * 3L) / 2L;
                     if(incoming[i] > 0xd6bf94d5e5L)
-                        overflow = Boolean.valueOf(true);
+                        overflow = true;
                 }
 
                 for(magnitude = currentPAIN; magnitude >= 100L;)
@@ -138,7 +138,7 @@ public class Body
                     magnitude /= 10L;
                     incoming[i] = (incoming[i] * 3L) / 2L;
                     if(incoming[i] > 0xd6bf94d5e5L)
-                        overflow = Boolean.valueOf(true);
+                        overflow = true;
                 }
 
                 for(magnitude = currentSHAM; magnitude >= 100L;)
@@ -146,7 +146,7 @@ public class Body
                     magnitude /= 10L;
                     incoming[i] = (incoming[i] * 3L) / 2L;
                     if(incoming[i] > 0xd6bf94d5e5L)
-                        overflow = Boolean.valueOf(true);
+                        overflow = true;
                 }
 
                 for(magnitude = currentINJU; magnitude >= 1000L;)
@@ -154,7 +154,7 @@ public class Body
                     magnitude /= 10L;
                     incoming[i] = incoming[i] * 2L;
                     if(incoming[i] > 0xd6bf94d5e5L)
-                        overflow = Boolean.valueOf(true);
+                        overflow = true;
                 }
 
                 magnitude = getObedience();
@@ -175,7 +175,7 @@ public class Body
                     magnitude /= 10L;
                     incoming[i] = incoming[i] * 3L;
                     if(incoming[i] > 0xd6bf94d5e5L)
-                        overflow = Boolean.valueOf(true);
+                        overflow = true;
                 }
 
                 for(long magnitude = currentSHAM; magnitude >= 100L;)
@@ -183,7 +183,7 @@ public class Body
                     magnitude /= 10L;
                     incoming[i] = (incoming[i] * (long)(50 + getDeviancy())) / 50L;
                     if(incoming[i] > 0xd6bf94d5e5L)
-                        overflow = Boolean.valueOf(true);
+                        overflow = true;
                 }
 
                 if(!isDemonLord())
@@ -214,7 +214,7 @@ public class Body
                     magnitude /= 10L;
                     incoming[i] = incoming[i] * 5L;
                     if(incoming[i] > 0xd6bf94d5e5L)
-                        overflow = Boolean.valueOf(true);
+                        overflow = true;
                 }
 
                 for(long magnitude = currentFEAR; magnitude >= 100L;)
@@ -222,7 +222,7 @@ public class Body
                     magnitude /= 10L;
                     incoming[i] = (incoming[i] * 4L) / 3L;
                     if(incoming[i] > 0xd6bf94d5e5L)
-                        overflow = Boolean.valueOf(true);
+                        overflow = true;
                 }
 
                 for(long magnitude = currentDISG; magnitude >= 100L;)
@@ -230,7 +230,7 @@ public class Body
                     magnitude /= 10L;
                     incoming[i] = (incoming[i] * 4L) / 3L;
                     if(incoming[i] > 0xd6bf94d5e5L)
-                        overflow = Boolean.valueOf(true);
+                        overflow = true;
                 }
 
                 for(long magnitude = currentPAIN; magnitude >= 100L;)
@@ -238,7 +238,7 @@ public class Body
                     magnitude /= 10L;
                     incoming[i] = (incoming[i] * 3L) / 2L;
                     if(incoming[i] > 0xd6bf94d5e5L)
-                        overflow = Boolean.valueOf(true);
+                        overflow = true;
                 }
 
                 for(long magnitude = currentSHAM; magnitude >= 100L;)
@@ -246,7 +246,7 @@ public class Body
                     magnitude /= 10L;
                     incoming[i] = (incoming[i] * 4L) / 3L;
                     if(incoming[i] > 0xd6bf94d5e5L)
-                        overflow = Boolean.valueOf(true);
+                        overflow = true;
                 }
 
                 for(long magnitude = currentHATE; magnitude >= 100L;)
@@ -254,7 +254,7 @@ public class Body
                     magnitude /= 10L;
                     incoming[i] = (incoming[i] * 4L) / 3L;
                     if(incoming[i] > 0xd6bf94d5e5L)
-                        overflow = Boolean.valueOf(true);
+                        overflow = true;
                 }
 
                 for(long magnitude = currentPLEA; magnitude >= 100L;)
@@ -262,7 +262,7 @@ public class Body
                     magnitude /= 10L;
                     incoming[i] = (incoming[i] * 3L) / 2L;
                     if(incoming[i] > 0xd6bf94d5e5L)
-                        overflow = Boolean.valueOf(true);
+                        overflow = true;
                 }
 
             } else
@@ -273,7 +273,7 @@ public class Body
                     magnitude /= 10L;
                     incoming[i] = incoming[i] * 10L;
                     if(incoming[i] > 0xd6bf94d5e5L)
-                        overflow = Boolean.valueOf(true);
+                        overflow = true;
                 }
 
             }
@@ -322,19 +322,19 @@ public class Body
 
     public void InitializeActivities()
     {
-        Project.Talk.pickable = Boolean.valueOf(false);
+        Project.Talk.pickable = false;
         Project.Talk.sendReqs[MOUTH] = 1;
         Project.TweakClit.counterpart = Project.ClitTweaked;
         Project.TweakClit.sendReqs[HAND] = 1;
-        Project.TweakClit.targeted = Boolean.valueOf(true);
+        Project.TweakClit.targeted = true;
         Project.TweakClit.enders = (new Activity[] {
             Project.StopActing, Project.Escape
         });
         Project.ClitTweaked.counterpart = Project.TweakClit;
         Project.ClitTweaked.sendReqs[CLIT] = 1;
-        Project.ClitTweaked.causesOrgasm = Boolean.valueOf(true);
-        Project.ClitTweaked.targeted = Boolean.valueOf(true);
-        Project.ClitTweaked.pickable = Boolean.valueOf(false);
+        Project.ClitTweaked.causesOrgasm = true;
+        Project.ClitTweaked.targeted = true;
+        Project.ClitTweaked.pickable = false;
         Project.ClitTweaked.enders = (new Activity[] {
             Project.Escape
         });
@@ -342,121 +342,121 @@ public class Body
         Project.SpreadLegs.enders = (new Activity[] {
             Project.StopActing, Project.Escape
         });
-        Project.SpreadLegs.pickable = Boolean.valueOf(false);
+        Project.SpreadLegs.pickable = false;
         Project.Praise.sendReqs[MOUTH] = 1;
-        Project.Praise.targeted = Boolean.valueOf(true);
-        Project.Praise.endsSelf = Boolean.valueOf(true);
+        Project.Praise.targeted = true;
+        Project.Praise.endsSelf = true;
         Project.Insult.sendReqs[MOUTH] = 1;
-        Project.Insult.targeted = Boolean.valueOf(true);
-        Project.Insult.endsSelf = Boolean.valueOf(true);
-        Project.Insult.hostile = Boolean.valueOf(true);
+        Project.Insult.targeted = true;
+        Project.Insult.endsSelf = true;
+        Project.Insult.hostile = true;
         Project.PushDown.sendReqs[HIPS] = 1;
         Project.PushDown.sendReqs[FOOT] = 2;
-        Project.PushDown.targeted = Boolean.valueOf(true);
+        Project.PushDown.targeted = true;
         Project.PushDown.counterpart = Project.PullDown;
         Project.PushDown.enders = (new Activity[] {
             Project.StopActing, Project.Escape
         });
         Project.PullDown.sendReqs[HIPS] = 1;
-        Project.PullDown.targeted = Boolean.valueOf(true);
+        Project.PullDown.targeted = true;
         Project.PullDown.counterpart = Project.PushDown;
         Project.PullDown.enders = (new Activity[] {
             Project.Escape
         });
         Project.Escape.sendReqs[HAND] = 1;
         Project.Escape.sendReqs[FOOT] = 2;
-        Project.Escape.targeted = Boolean.valueOf(true);
-        Project.Escape.endsSelf = Boolean.valueOf(true);
-        Project.Escape.pickable = Boolean.valueOf(false);
-        Project.Escape.hostile = Boolean.valueOf(true);
-        Project.StopActing.targeted = Boolean.valueOf(true);
-        Project.StopActing.endsSelf = Boolean.valueOf(true);
-        Project.StopActing.pickable = Boolean.valueOf(false);
-        Project.StopActing.hostile = Boolean.valueOf(true);
+        Project.Escape.targeted = true;
+        Project.Escape.endsSelf = true;
+        Project.Escape.pickable = false;
+        Project.Escape.hostile = true;
+        Project.StopActing.targeted = true;
+        Project.StopActing.endsSelf = true;
+        Project.StopActing.pickable = false;
+        Project.StopActing.hostile = true;
         Project.TieUp.sendReqs[HAND] = 1;
-        Project.TieUp.targeted = Boolean.valueOf(true);
-        Project.TieUp.nonBlocking = Boolean.valueOf(true);
+        Project.TieUp.targeted = true;
+        Project.TieUp.nonBlocking = true;
         Project.TieUp.counterpart = Project.BeTied;
-        Project.TieUp.pickable = Boolean.valueOf(false);
+        Project.TieUp.pickable = false;
         Project.BeTied.sendReqs[HAND] = 2;
         Project.BeTied.sendReqs[FOOT] = 2;
-        Project.BeTied.targeted = Boolean.valueOf(true);
+        Project.BeTied.targeted = true;
         Project.BeTied.counterpart = Project.TieUp;
-        Project.BeTied.pickable = Boolean.valueOf(false);
+        Project.BeTied.pickable = false;
         Project.StrokeCock.sendReqs[HAND] = 1;
-        Project.StrokeCock.targeted = Boolean.valueOf(true);
+        Project.StrokeCock.targeted = true;
         Project.StrokeCock.counterpart = Project.CockStroked;
         Project.StrokeCock.enders = (new Activity[] {
             Project.StopActing, Project.Escape
         });
-        Project.StrokeCock.pickable = Boolean.valueOf(true);
+        Project.StrokeCock.pickable = true;
         Project.CockStroked.sendReqs[PENIS] = 1;
-        Project.CockStroked.causesOrgasm = Boolean.valueOf(true);
-        Project.CockStroked.targeted = Boolean.valueOf(true);
+        Project.CockStroked.causesOrgasm = true;
+        Project.CockStroked.targeted = true;
         Project.CockStroked.counterpart = Project.StrokeCock;
         Project.CockStroked.enders = (new Activity[] {
             Project.Escape
         });
-        Project.CockStroked.pickable = Boolean.valueOf(false);
+        Project.CockStroked.pickable = false;
         Project.Lubricate.sendReqs[HAND] = 1;
-        Project.Lubricate.nonBlocking = Boolean.valueOf(true);
-        Project.Lubricate.targeted = Boolean.valueOf(true);
+        Project.Lubricate.nonBlocking = true;
+        Project.Lubricate.targeted = true;
         Project.Lubricate.counterpart = Project.BeLubricated;
-        Project.Lubricate.endsSelf = Boolean.valueOf(true);
-        Project.Lubricate.pickable = Boolean.valueOf(false);
+        Project.Lubricate.endsSelf = true;
+        Project.Lubricate.pickable = false;
         Project.BeLubricated.sendReqs[ASS] = 1;
-        Project.BeLubricated.nonBlocking = Boolean.valueOf(true);
-        Project.BeLubricated.pickable = Boolean.valueOf(false);
+        Project.BeLubricated.nonBlocking = true;
+        Project.BeLubricated.pickable = false;
         Project.VaginalPenetrate.sendReqs[PENIS] = 1;
-        Project.VaginalPenetrate.causesOrgasm = Boolean.valueOf(true);
-        Project.VaginalPenetrate.targeted = Boolean.valueOf(true);
+        Project.VaginalPenetrate.causesOrgasm = true;
+        Project.VaginalPenetrate.targeted = true;
         Project.VaginalPenetrate.counterpart = Project.PenetratedVaginally;
         Project.VaginalPenetrate.enders = (new Activity[] {
             Project.StopActing, Project.Escape
         });
         Project.PenetratedVaginally.sendReqs[PUSSY] = 1;
-        Project.PenetratedVaginally.causesOrgasm = Boolean.valueOf(true);
-        Project.PenetratedVaginally.targeted = Boolean.valueOf(true);
+        Project.PenetratedVaginally.causesOrgasm = true;
+        Project.PenetratedVaginally.targeted = true;
         Project.PenetratedVaginally.counterpart = Project.VaginalPenetrate;
         Project.PenetratedVaginally.enders = (new Activity[] {
             Project.Escape
         });
         Project.AnalPenetrate.sendReqs[PENIS] = 1;
-        Project.AnalPenetrate.causesOrgasm = Boolean.valueOf(true);
-        Project.AnalPenetrate.targeted = Boolean.valueOf(true);
+        Project.AnalPenetrate.causesOrgasm = true;
+        Project.AnalPenetrate.targeted = true;
         Project.AnalPenetrate.counterpart = Project.PenetratedAnally;
         Project.AnalPenetrate.enders = (new Activity[] {
             Project.StopActing, Project.Escape
         });
         Project.PenetratedAnally.sendReqs[ASS] = 1;
-        Project.PenetratedAnally.causesOrgasm = Boolean.valueOf(true);
-        Project.PenetratedAnally.targeted = Boolean.valueOf(true);
+        Project.PenetratedAnally.causesOrgasm = true;
+        Project.PenetratedAnally.targeted = true;
         Project.PenetratedAnally.counterpart = Project.AnalPenetrate;
         Project.PenetratedAnally.enders = (new Activity[] {
             Project.Escape
         });
         Project.StripOther.sendReqs[HAND] = 1;
-        Project.StripOther.targeted = Boolean.valueOf(true);
+        Project.StripOther.targeted = true;
         Project.StripOther.counterpart = Project.Stripped;
         Project.StripOther.enders = (new Activity[] {
             Project.StopActing, Project.Escape
         });
-        Project.StripOther.pickable = Boolean.valueOf(false);
-        Project.Stripped.targeted = Boolean.valueOf(true);
+        Project.StripOther.pickable = false;
+        Project.Stripped.targeted = true;
         Project.Stripped.counterpart = Project.StripOther;
         Project.Stripped.enders = (new Activity[] {
             Project.Escape
         });
-        Project.Stripped.pickable = Boolean.valueOf(false);
+        Project.Stripped.pickable = false;
     }
 
     public Boolean orgasmPossible()
     {
         for(int i = 0; i < inProgress.length; i++)
             if(inProgress[i].causesOrgasm)
-                return Boolean.valueOf(true);
+                return true;
 
-        return Boolean.valueOf(false);
+        return false;
     }
 
     public void CancelActivities(final JTextPane t, final JPanel p, final JFrame f, final WorldState w, final SaveData s, final int page)
@@ -902,7 +902,7 @@ public class Body
                 w.append(t, "\n\n");
             } else
             {
-                Boolean descriptionStarted = Boolean.valueOf(false);
+                Boolean descriptionStarted = false;
                 Activity mentioned[] = new Activity[0];
                 Body targeted[] = new Body[0];
                 for(int i = 0; i < w.sceneParticipants.length; i++)
@@ -912,13 +912,13 @@ public class Body
                         {
                             if(!descriptionStarted)
                             {
-                                descriptionStarted = Boolean.valueOf(true);
+                                descriptionStarted = true;
                                 w.append(t, "In Progress:");
                             }
-                            Boolean found = Boolean.valueOf(false);
+                            Boolean found = false;
                             for(int k = 0; k < mentioned.length; k++)
                                 if(mentioned[k].counterpart == w.sceneParticipants[i].inProgress[j] && targeted[k] == w.sceneParticipants[i])
-                                    found = Boolean.valueOf(true);
+                                    found = true;
 
                             if(!found)
                             {
@@ -995,7 +995,7 @@ public class Body
                 @Override
                 public void actionPerformed(ActionEvent e)
                 {
-                    Boolean summaryNeeded = Boolean.valueOf(false);
+                    Boolean summaryNeeded = false;
                     if(summaryNeeded)
                         Continue(t, p, f, w, s);
                     else
@@ -1032,7 +1032,7 @@ public class Body
             Body consideredTarget = w.lordBody;
             int activityWeights[] = new int[Project.allActivities.length];
             int extreme = 0;
-            Boolean ending = Boolean.valueOf(false);
+            Boolean ending = false;
             for(int i = 0; i < inProgress.length; i++)
             {
                 int value = inProgress[i].weight(w, this, targets[i]);
@@ -1046,7 +1046,7 @@ public class Body
 
                 if(value < extreme && validEnderIndex >= 0)
                 {
-                    ending = Boolean.valueOf(true);
+                    ending = true;
                     extreme = value;
                     pickedActivity = inProgress[i].enders[validEnderIndex];
                     if(pickedActivity.targeted)
@@ -1120,18 +1120,18 @@ public class Body
             for(; totalDamage >= 0x989680L; totalDamage /= 0xf4240L)
                 tier++;
 
-            Boolean mixed = Boolean.valueOf(false);
+            Boolean mixed = false;
             if(tier > 0)
             {
                 remainChar = '#';
-                mixed = Boolean.valueOf(true);
+                mixed = true;
             }
             if(totalDamage >= 100L)
             {
                 remainChar = fillChar;
                 fillChar = '-';
                 increment = 100;
-                mixed = Boolean.valueOf(false);
+                mixed = false;
             }
             if(totalDamage >= 1000L)
             {
@@ -1499,18 +1499,18 @@ public class Body
             for(; totalDamage >= 0x989680L; totalDamage /= 0xf4240L)
                 tier++;
 
-            Boolean mixed = Boolean.valueOf(false);
+            Boolean mixed = false;
             if(tier > 0)
             {
                 remainChar = '#';
-                mixed = Boolean.valueOf(true);
+                mixed = true;
             }
             if(totalDamage >= 100L)
             {
                 remainChar = fillChar;
                 fillChar = '-';
                 increment = 100;
-                mixed = Boolean.valueOf(false);
+                mixed = false;
             }
             if(totalDamage >= 1000L)
             {
@@ -2097,9 +2097,9 @@ public class Body
     public Boolean isForsaken()
     {
         if(forsakenOwner != null)
-            return Boolean.valueOf(true);
+            return true;
         else
-            return Boolean.valueOf(false);
+            return false;
     }
 
     public void addActivity(Activity added, Body partner)
@@ -2413,25 +2413,25 @@ public class Body
         if(chosenOwner != null)
             return chosenOwner.parasitized;
         else
-            return Boolean.valueOf(false);
+            return false;
     }
 
     public Boolean hasBeenBroadcasted()
     {
         if(forsakenOwner != null)
             if(forsakenOwner.timesExposed >= 0x493e0)
-                return Boolean.valueOf(true);
+                return true;
             else
-                return Boolean.valueOf(false);
+                return false;
         if(chosenOwner != null)
         {
             if(chosenOwner.modest)
-                return Boolean.valueOf(false);
+                return false;
             else
-                return Boolean.valueOf(true);
+                return true;
         } else
         {
-            return Boolean.valueOf(false);
+            return false;
         }
     }
 
@@ -2439,21 +2439,21 @@ public class Body
     {
         if(forsakenOwner != null)
             if(forsakenOwner.timesHadSex > 0)
-                return Boolean.valueOf(false);
+                return false;
             else
-                return Boolean.valueOf(true);
+                return true;
         if(chosenOwner != null)
             return chosenOwner.vVirg;
         else
-            return Boolean.valueOf(false);
+            return false;
     }
 
     public Boolean isDemonLord()
     {
         if(chosenOwner == null && forsakenOwner == null)
-            return Boolean.valueOf(true);
+            return true;
         else
-            return Boolean.valueOf(false);
+            return false;
     }
 
     public String ownerName()
@@ -2543,7 +2543,7 @@ public class Body
             for(int i = 0; i < forsakenOwner.others.length; i++)
                 if(forsakenOwner.forsakenRelations[i] == Forsaken.Relationship.PARTNER && forsakenOwner.opinion(forsakenOwner.others[i]) > -100)
                 {
-                    Boolean found = Boolean.valueOf(false);
+                    Boolean found = false;
                     int opinionClamp = forsakenOwner.opinion(forsakenOwner.others[i]) + 100;
                     if(opinionClamp > 500)
                         opinionClamp = 500;
@@ -2551,7 +2551,7 @@ public class Body
                     {
                         if(forsakenOwner.others[i].equals(w.getHarem()[j]))
                         {
-                            found = Boolean.valueOf(true);
+                            found = true;
                             if(forsakenOwner.others[i].obedience > forsakenOwner.obedience)
                                 opinionClamp = (opinionClamp * ((20 + forsakenOwner.obedience / 2) - forsakenOwner.others[i].obedience / 2)) / 500;
                             else

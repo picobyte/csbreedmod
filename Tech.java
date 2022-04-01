@@ -154,7 +154,7 @@ public class Tech implements Serializable {
 
 	public void buy(WorldState w)
 	{
-		owned = Boolean.valueOf(true);
+		owned = true;
 		w.addEnergy(0 - cost);
 	}
 
@@ -678,7 +678,7 @@ public class Tech implements Serializable {
 		description = "";
 		tooltip = "";
 		prereqs = new Tech[0];
-		owned = Boolean.valueOf(false);
+		owned = false;
 	}
 
 }

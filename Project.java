@@ -35,10 +35,10 @@ public class Project extends JFrame
     public static String displayedNames[] = new String[5];
     public static Chosen.Species displayedType[] = new Chosen.Species[5];
     public static Boolean displayedCivilians[] = {
-        Boolean.valueOf(false), Boolean.valueOf(false), Boolean.valueOf(false), Boolean.valueOf(false), Boolean.valueOf(false)
+        false, false, false, false, false
     };
     public static Boolean displayedFallen[] = {
-        Boolean.valueOf(false), Boolean.valueOf(false), Boolean.valueOf(false), Boolean.valueOf(false), Boolean.valueOf(false)
+        false, false, false, false, false
     };
     public static Forsaken.Gender displayedGender[];
     public static Activity Talk;
@@ -205,7 +205,7 @@ public class Project extends JFrame
                 {
                     saves.harem[i].rememberedDemonLordBody = new Body();
                     saves.harem[i].pickEpithet();
-                    saves.harem[i].titled = Boolean.valueOf(false);
+                    saves.harem[i].titled = false;
                 }
 
             }
@@ -273,10 +273,10 @@ public class Project extends JFrame
                     for(int j = 0; j < checkedForsaken.length; j++)
                         if(checkedForsaken[j].equals(saves.harem[i].firstPartner) || checkedForsaken[j].equals(saves.harem[i].secondPartner))
                         {
-                            Boolean alreadyThere = Boolean.valueOf(false);
+                            Boolean alreadyThere = false;
                             for(int k = 0; k < saves.harem[i].others.length; k++)
                                 if(saves.harem[i].others[k].equals(checkedForsaken[j]))
-                                    alreadyThere = Boolean.valueOf(true);
+                                    alreadyThere = true;
 
                             if(!alreadyThere)
                             {
@@ -482,7 +482,7 @@ public class Project extends JFrame
                     }
                     catch(IOException ie)
                     {
-                        w.portraits = Boolean.valueOf(false);
+                        w.portraits = false;
                         clearPortraits();
                     }
                 if(image != null)
@@ -520,7 +520,7 @@ public class Project extends JFrame
             }
             catch(IOException ie)
             {
-                w.portraits = Boolean.valueOf(false);
+                w.portraits = false;
                 clearPortraits();
             }
         }
@@ -555,7 +555,7 @@ public class Project extends JFrame
                     Project.Shop(t, p, f, w);
                 } else
                 {
-                    w.active = Boolean.valueOf(true);
+                    w.active = true;
                     Project.IntroTwo(t, p, f, w);
                 }
             }
@@ -568,7 +568,7 @@ public class Project extends JFrame
             {
                 Boolean enabled[] = new Boolean[w.save.customRoster.length];
                 for(int i = 0; i < enabled.length; i++)
-                    enabled[i] = Boolean.valueOf(true);
+                    enabled[i] = true;
 
                 Project.CampaignMenu(t, p, f, w, enabled);
             }
@@ -579,7 +579,7 @@ public class Project extends JFrame
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                Project.Data(t, p, f, w, "load", 0, Boolean.valueOf(false));
+                Project.Data(t, p, f, w, "load", 0, false);
             }
         });
         p.add(LoadGame);
@@ -588,7 +588,7 @@ public class Project extends JFrame
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                Project.Data(t, p, f, w, "import", 0, Boolean.valueOf(false));
+                Project.Data(t, p, f, w, "import", 0, false);
             }
         });
         p.add(Import);
@@ -627,7 +627,7 @@ public class Project extends JFrame
                 x.copyToggles(w);
                 x.setGenders(w.getGenderBalance());
                 x.save = w.save;
-                x.active = Boolean.valueOf(true);
+                x.active = true;
                 x.freshCustom(t, p, f);
             }
         });
@@ -703,11 +703,11 @@ public class Project extends JFrame
                 x.copyToggles(w);
                 x.save = w.save;
                 x.setGenders(x.getGenderBalance());
-                x.active = Boolean.valueOf(true);
-                x.campaign = Boolean.valueOf(true);
+                x.active = true;
+                x.campaign = true;
                 x.cityName = x.getCityName(0);
                 x.campaignRand = new Random();
-                x.hardMode = Boolean.valueOf(false);
+                x.hardMode = false;
                 x.clampStart = 11;
                 x.clampPercent = 100;
                 x.eventOffset = 0;
@@ -722,7 +722,7 @@ public class Project extends JFrame
                     Project.Shop(t, p, f, x);
                 } else
                 {
-                    w.active = Boolean.valueOf(true);
+                    w.active = true;
                     Project.IntroTwo(t, p, f, x);
                 }
             }
@@ -742,7 +742,7 @@ public class Project extends JFrame
                 @Override
                 public void actionPerformed(ActionEvent e)
                 {
-                    Project.CampaignCustomToggle(t, p, f, w, enabled, 0, Boolean.valueOf(false));
+                    Project.CampaignCustomToggle(t, p, f, w, enabled, 0, false);
                 }
             });
             p.add(Toggle);
@@ -751,7 +751,7 @@ public class Project extends JFrame
                 @Override
                 public void actionPerformed(ActionEvent e)
                 {
-                    Project.CampaignCustomToggle(t, p, f, w, enabled, 0, Boolean.valueOf(true));
+                    Project.CampaignCustomToggle(t, p, f, w, enabled, 0, true);
                 }
             });
             p.add(DeleteChosen);
@@ -763,7 +763,7 @@ public class Project extends JFrame
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                Project.Data(t, p, f, w, "teamload", 0, Boolean.valueOf(false));
+                Project.Data(t, p, f, w, "teamload", 0, false);
             }
         });
         p.add(LoadTeam);
@@ -809,12 +809,12 @@ public class Project extends JFrame
                     }
 
                 String newRosterName = JOptionPane.showInputDialog("What would you like to name the exported roster?");
-                Boolean blankName = Boolean.valueOf(false);
+                Boolean blankName = false;
                 if(newRosterName == null)
-                    blankName = Boolean.valueOf(true);
+                    blankName = true;
                 else
                 if(newRosterName.length() == 0)
-                    blankName = Boolean.valueOf(true);
+                    blankName = true;
                 if(blankName)
                     newRosterName = (new StringBuilder(String.valueOf(exportedRoster[0].mainName))).append("'s Roster").toString();
                 exportedRoster[0].rosterName = newRosterName;
@@ -903,7 +903,7 @@ public class Project extends JFrame
                             {
                                 newRoster[k] = rosterList[rosterSelected][k - w.save.customRoster.length];
                                 newRoster[k].globalID = w.save.assignChosenID();
-                                newEnabled[k] = Boolean.valueOf(true);
+                                newEnabled[k] = true;
                             }
 
                         w.save.customRoster = newRoster;
@@ -1090,30 +1090,30 @@ public class Project extends JFrame
                         if(value >= 0 && value <= 100 && (value >= lowerLimit && value <= upperLimit || upperLimit < lowerLimit && (value > 66 || value < 34)))
                         {
                             c.confidence = value;
-                            Boolean highFound = Boolean.valueOf(false);
-                            Boolean midFound = Boolean.valueOf(false);
-                            Boolean lowFound = Boolean.valueOf(false);
+                            Boolean highFound = false;
+                            Boolean midFound = false;
+                            Boolean lowFound = false;
                             if(c.morality > 66)
-                                highFound = Boolean.valueOf(true);
+                                highFound = true;
                             else
                             if(c.morality > 34)
-                                midFound = Boolean.valueOf(true);
+                                midFound = true;
                             else
-                                lowFound = Boolean.valueOf(true);
+                                lowFound = true;
                             if(c.innocence > 66)
-                                highFound = Boolean.valueOf(true);
+                                highFound = true;
                             else
                             if(c.innocence > 33)
-                                midFound = Boolean.valueOf(true);
+                                midFound = true;
                             else
-                                lowFound = Boolean.valueOf(true);
+                                lowFound = true;
                             if(c.confidence > 66)
-                                highFound = Boolean.valueOf(true);
+                                highFound = true;
                             else
                             if(c.confidence > 33)
-                                midFound = Boolean.valueOf(true);
+                                midFound = true;
                             else
-                                lowFound = Boolean.valueOf(true);
+                                lowFound = true;
                             if(!highFound)
                             {
                                 upperLimit = 100;
@@ -1150,53 +1150,53 @@ public class Project extends JFrame
                                 if(!w.determineVVirg(c.morality, c.innocence, c.confidence, c.dignity))
                                 {
                                     c.ruthless = true;
-                                    c.vVirg = Boolean.valueOf(false);
-                                    c.vStart = Boolean.valueOf(false);
+                                    c.vVirg = false;
+                                    c.vStart = false;
                                     c.vTaker = 0;
                                 } else
                                 {
                                     c.ruthless = false;
-                                    c.vVirg = Boolean.valueOf(true);
-                                    c.vStart = Boolean.valueOf(true);
+                                    c.vVirg = true;
+                                    c.vStart = true;
                                     c.vTaker = -1;
                                 }
                                 if(!w.determineCVirg(c.morality, c.innocence, c.confidence, c.dignity))
                                 {
                                     c.lustful = true;
-                                    c.cVirg = Boolean.valueOf(false);
-                                    c.cStart = Boolean.valueOf(false);
+                                    c.cVirg = false;
+                                    c.cStart = false;
                                     c.cTaker = 0;
                                 } else
                                 {
                                     c.lustful = false;
-                                    c.cVirg = Boolean.valueOf(true);
-                                    c.cStart = Boolean.valueOf(true);
+                                    c.cVirg = true;
+                                    c.cStart = true;
                                     c.cTaker = -1;
                                 }
                                 if(!w.determineAVirg(c.morality, c.innocence, c.confidence, c.dignity))
                                 {
                                     c.meek = true;
-                                    c.aVirg = Boolean.valueOf(false);
-                                    c.aStart = Boolean.valueOf(false);
+                                    c.aVirg = false;
+                                    c.aStart = false;
                                     c.aTaker = 0;
                                 } else
                                 {
                                     c.meek = false;
-                                    c.aVirg = Boolean.valueOf(true);
-                                    c.aStart = Boolean.valueOf(true);
+                                    c.aVirg = true;
+                                    c.aStart = true;
                                     c.aTaker = -1;
                                 }
                                 if(!w.determineModest(c.morality, c.innocence, c.confidence, c.dignity))
                                 {
                                     c.debased = true;
-                                    c.modest = Boolean.valueOf(false);
-                                    c.mStart = Boolean.valueOf(false);
+                                    c.modest = false;
+                                    c.mStart = false;
                                     c.mTaker = 0;
                                 } else
                                 {
                                     c.debased = false;
-                                    c.modest = Boolean.valueOf(true);
-                                    c.mStart = Boolean.valueOf(true);
+                                    c.modest = true;
+                                    c.mStart = true;
                                     c.mTaker = -1;
                                 }
                                 Project.SingleCosmetics(t, p, f, w, c, null);
@@ -1228,7 +1228,7 @@ public class Project extends JFrame
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                Boolean valid = Boolean.valueOf(false);
+                Boolean valid = false;
                 int stats[] = new int[4];
                 int highs = 0;
                 int mids = 0;
@@ -1238,7 +1238,7 @@ public class Project extends JFrame
                     highs = 0;
                     mids = 0;
                     lows = 0;
-                    valid = Boolean.valueOf(true);
+                    valid = true;
                     for(int i = 0; i < 4; i++)
                     {
                         stats[i] = (int)(Math.random() * 101D);
@@ -1252,7 +1252,7 @@ public class Project extends JFrame
                     }
 
                     if(highs == 0 || mids == 0 || lows == 0)
-                        valid = Boolean.valueOf(false);
+                        valid = false;
                 }
                 c.morality = stats[0];
                 c.innocence = stats[1];
@@ -1261,53 +1261,53 @@ public class Project extends JFrame
                 if(!w.determineVVirg(c.morality, c.innocence, c.confidence, c.dignity))
                 {
                     c.ruthless = true;
-                    c.vVirg = Boolean.valueOf(false);
-                    c.vStart = Boolean.valueOf(false);
+                    c.vVirg = false;
+                    c.vStart = false;
                     c.vTaker = 0;
                 } else
                 {
                     c.ruthless = false;
-                    c.vVirg = Boolean.valueOf(true);
-                    c.vStart = Boolean.valueOf(true);
+                    c.vVirg = true;
+                    c.vStart = true;
                     c.vTaker = -1;
                 }
                 if(!w.determineCVirg(c.morality, c.innocence, c.confidence, c.dignity))
                 {
                     c.lustful = true;
-                    c.cVirg = Boolean.valueOf(false);
-                    c.cStart = Boolean.valueOf(false);
+                    c.cVirg = false;
+                    c.cStart = false;
                     c.cTaker = 0;
                 } else
                 {
                     c.lustful = false;
-                    c.cVirg = Boolean.valueOf(true);
-                    c.cStart = Boolean.valueOf(true);
+                    c.cVirg = true;
+                    c.cStart = true;
                     c.cTaker = -1;
                 }
                 if(!w.determineAVirg(c.morality, c.innocence, c.confidence, c.dignity))
                 {
                     c.meek = true;
-                    c.aVirg = Boolean.valueOf(false);
-                    c.aStart = Boolean.valueOf(false);
+                    c.aVirg = false;
+                    c.aStart = false;
                     c.aTaker = 0;
                 } else
                 {
                     c.meek = false;
-                    c.aVirg = Boolean.valueOf(true);
-                    c.aStart = Boolean.valueOf(true);
+                    c.aVirg = true;
+                    c.aStart = true;
                     c.aTaker = -1;
                 }
                 if(!w.determineModest(c.morality, c.innocence, c.confidence, c.dignity))
                 {
                     c.debased = true;
-                    c.modest = Boolean.valueOf(false);
-                    c.mStart = Boolean.valueOf(false);
+                    c.modest = false;
+                    c.mStart = false;
                     c.mTaker = 0;
                 } else
                 {
                     c.debased = false;
-                    c.modest = Boolean.valueOf(true);
-                    c.mStart = Boolean.valueOf(true);
+                    c.modest = true;
+                    c.mStart = true;
                     c.mTaker = -1;
                 }
                 Project.SingleCosmetics(t, p, f, w, c, null);
@@ -1798,53 +1798,53 @@ public class Project extends JFrame
         if(!w.determineVVirg(c.morality, c.innocence, c.confidence, c.dignity))
         {
             c.ruthless = true;
-            c.vVirg = Boolean.valueOf(false);
-            c.vStart = Boolean.valueOf(false);
+            c.vVirg = false;
+            c.vStart = false;
             c.vTaker = 0;
         } else
         {
             c.ruthless = false;
-            c.vVirg = Boolean.valueOf(true);
-            c.vStart = Boolean.valueOf(true);
+            c.vVirg = true;
+            c.vStart = true;
             c.vTaker = -1;
         }
         if(!w.determineCVirg(c.morality, c.innocence, c.confidence, c.dignity))
         {
             c.lustful = true;
-            c.cVirg = Boolean.valueOf(false);
-            c.cStart = Boolean.valueOf(false);
+            c.cVirg = false;
+            c.cStart = false;
             c.cTaker = 0;
         } else
         {
             c.lustful = false;
-            c.cVirg = Boolean.valueOf(true);
-            c.cStart = Boolean.valueOf(true);
+            c.cVirg = true;
+            c.cStart = true;
             c.cTaker = -1;
         }
         if(!w.determineAVirg(c.morality, c.innocence, c.confidence, c.dignity))
         {
             c.meek = true;
-            c.aVirg = Boolean.valueOf(false);
-            c.aStart = Boolean.valueOf(false);
+            c.aVirg = false;
+            c.aStart = false;
             c.aTaker = 0;
         } else
         {
             c.meek = false;
-            c.aVirg = Boolean.valueOf(true);
-            c.aStart = Boolean.valueOf(true);
+            c.aVirg = true;
+            c.aStart = true;
             c.aTaker = -1;
         }
         if(!w.determineModest(c.morality, c.innocence, c.confidence, c.dignity))
         {
             c.debased = true;
-            c.modest = Boolean.valueOf(false);
-            c.mStart = Boolean.valueOf(false);
+            c.modest = false;
+            c.mStart = false;
             c.mTaker = 0;
         } else
         {
             c.debased = false;
-            c.modest = Boolean.valueOf(true);
-            c.mStart = Boolean.valueOf(true);
+            c.modest = true;
+            c.mStart = true;
             c.mTaker = -1;
         }
         SingleCosmetics(t, p, f, w, c, answers);
@@ -1889,21 +1889,21 @@ public class Project extends JFrame
             c.weapon = cosmetics[7];
             c.customWeaponType = cosmetics[8];
             if(c.morality > 66)
-                c.bonusHATE = Boolean.valueOf(true);
+                c.bonusHATE = true;
             else
-                c.bonusHATE = Boolean.valueOf(false);
+                c.bonusHATE = false;
             if(c.innocence > 66)
-                c.bonusPLEA = Boolean.valueOf(true);
+                c.bonusPLEA = true;
             else
-                c.bonusPLEA = Boolean.valueOf(false);
+                c.bonusPLEA = false;
             if(c.confidence > 66)
-                c.bonusINJU = Boolean.valueOf(true);
+                c.bonusINJU = true;
             else
-                c.bonusINJU = Boolean.valueOf(false);
+                c.bonusINJU = false;
             if(c.dignity > 66)
-                c.bonusEXPO = Boolean.valueOf(true);
+                c.bonusEXPO = true;
             else
-                c.bonusEXPO = Boolean.valueOf(false);
+                c.bonusEXPO = false;
         }
         w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\n").append(c.customSummary()).toString());
         int highs = 0;
@@ -1980,78 +1980,78 @@ public class Project extends JFrame
             int foundHighs = 0;
             int foundMids = 0;
             int foundLows = 0;
-            Boolean compatible = Boolean.valueOf(true);
+            Boolean compatible = true;
             Chosen subject = w.save.customRoster[i];
             if(subject.morality > 66)
             {
                 foundHighs++;
                 if(c.morality > 66)
-                    compatible = Boolean.valueOf(false);
+                    compatible = false;
             } else
             if(subject.morality > 33)
             {
                 foundMids++;
                 if(c.morality > 33 && c.morality < 67)
-                    compatible = Boolean.valueOf(false);
+                    compatible = false;
             } else
             {
                 foundLows++;
                 if(c.morality < 34)
-                    compatible = Boolean.valueOf(false);
+                    compatible = false;
             }
             if(subject.innocence > 66)
             {
                 foundHighs++;
                 if(c.innocence > 66)
-                    compatible = Boolean.valueOf(false);
+                    compatible = false;
             } else
             if(subject.innocence > 33)
             {
                 foundMids++;
                 if(c.innocence > 33 && c.innocence < 67)
-                    compatible = Boolean.valueOf(false);
+                    compatible = false;
             } else
             {
                 foundLows++;
                 if(c.innocence < 34)
-                    compatible = Boolean.valueOf(false);
+                    compatible = false;
             }
             if(subject.confidence > 66)
             {
                 foundHighs++;
                 if(c.confidence > 66)
-                    compatible = Boolean.valueOf(false);
+                    compatible = false;
             } else
             if(subject.confidence > 33)
             {
                 foundMids++;
                 if(c.confidence > 33 && c.confidence < 67)
-                    compatible = Boolean.valueOf(false);
+                    compatible = false;
             } else
             {
                 foundLows++;
                 if(c.confidence < 34)
-                    compatible = Boolean.valueOf(false);
+                    compatible = false;
             }
             if(subject.dignity > 66)
             {
                 foundHighs++;
                 if(c.dignity > 66)
-                    compatible = Boolean.valueOf(false);
+                    compatible = false;
             } else
             if(subject.dignity > 33)
             {
                 foundMids++;
                 if(c.dignity > 33 && c.dignity < 67)
-                    compatible = Boolean.valueOf(false);
+                    compatible = false;
             } else
             {
                 foundLows++;
                 if(c.dignity < 34)
-                    compatible = Boolean.valueOf(false);
+                    compatible = false;
             }
             if(highs == 2 && foundHighs == 2 || mids == 2 && foundMids == 2 || lows == 2 && foundLows == 2)
-                compatible = Boolean.valueOf(false);
+                compatible = false;
             if(compatible)
             {
                 found++;
@@ -2124,7 +2124,7 @@ public class Project extends JFrame
                         wobj.serializeSaveData(w.save);
                         Boolean included[] = new Boolean[w.save.customRoster.length];
                         for(int i = 0; i < included.length; i++)
-                            included[i] = Boolean.valueOf(true);
+                            included[i] = true;
 
                         Project.CampaignMenu(t, p, f, w, included);
                     }
@@ -2295,9 +2295,9 @@ public class Project extends JFrame
                 public void actionPerformed(ActionEvent e)
                 {
                     String input = JOptionPane.showInputDialog((new StringBuilder("Type the name of the garment here.  Leave blank to use '")).append(c.topDesc()).append("'.").toString());
-                    Boolean changed = Boolean.valueOf(false);
+                    Boolean changed = false;
                     if(input != null && !input.equals(c.topDesc()) && input.length() > 0)
-                        changed = Boolean.valueOf(true);
+                        changed = true;
                     if(changed)
                     {
                         c.topCover = input;
@@ -2363,9 +2363,9 @@ public class Project extends JFrame
                 public void actionPerformed(ActionEvent e)
                 {
                     String input = JOptionPane.showInputDialog((new StringBuilder("Type the name of the garment here.  Leave blank to use '")).append(c.bottomDesc()).append("'.").toString());
-                    Boolean changed = Boolean.valueOf(false);
+                    Boolean changed = false;
                     if(input != null && !input.equals(c.bottomDesc()) && input.length() > 0)
-                        changed = Boolean.valueOf(true);
+                        changed = true;
                     if(changed)
                     {
                         c.bottomCover = input;
@@ -2490,14 +2490,14 @@ public class Project extends JFrame
                 @Override
                 public void actionPerformed(ActionEvent e)
                 {
-                    Boolean changed = Boolean.valueOf(false);
+                    Boolean changed = false;
                     String input = JOptionPane.showInputDialog((new StringBuilder("Type the name of the weapon to be used.  Leave blank to use '")).append(c.weapon).append("'.").toString());
                     if(input != null && input.length() > 0)
                     {
                         if(!c.weapon.equals(input))
                         {
                             c.accessory = "none";
-                            changed = Boolean.valueOf(true);
+                            changed = true;
                         }
                         c.weapon = input;
                     }
@@ -2755,30 +2755,30 @@ public class Project extends JFrame
                 {
                     if(progress == 0)
                     {
-                        c.vVirg = Boolean.valueOf(false);
+                        c.vVirg = false;
                         c.ruthless = true;
                         c.vTaker = 0;
-                        c.vStart = Boolean.valueOf(false);
+                        c.vStart = false;
                     } else
                     if(progress == 1)
                     {
-                        c.cVirg = Boolean.valueOf(false);
+                        c.cVirg = false;
                         c.lustful = true;
                         c.cTaker = 0;
-                        c.cStart = Boolean.valueOf(false);
+                        c.cStart = false;
                     } else
                     if(progress == 2)
                     {
-                        c.aVirg = Boolean.valueOf(false);
+                        c.aVirg = false;
                         c.meek = true;
                         c.aTaker = 0;
-                        c.aStart = Boolean.valueOf(false);
+                        c.aStart = false;
                     } else
                     {
-                        c.modest = Boolean.valueOf(false);
+                        c.modest = false;
                         c.debased = true;
                         c.mTaker = 0;
-                        c.mStart = Boolean.valueOf(false);
+                        c.mStart = false;
                     }
                     if(progress < 3)
                         Project.SingleVulnerabilities(t, p, f, w, c, answers, progress + 1);
@@ -2796,30 +2796,30 @@ public class Project extends JFrame
                 {
                     if(progress == 0)
                     {
-                        c.vVirg = Boolean.valueOf(true);
+                        c.vVirg = true;
                         c.ruthless = false;
                         c.vTaker = -1;
-                        c.vStart = Boolean.valueOf(true);
+                        c.vStart = true;
                     } else
                     if(progress == 1)
                     {
-                        c.cVirg = Boolean.valueOf(true);
+                        c.cVirg = true;
                         c.lustful = false;
                         c.cTaker = -1;
-                        c.cStart = Boolean.valueOf(true);
+                        c.cStart = true;
                     } else
                     if(progress == 2)
                     {
-                        c.aVirg = Boolean.valueOf(true);
+                        c.aVirg = true;
                         c.meek = false;
                         c.aTaker = -1;
-                        c.aStart = Boolean.valueOf(true);
+                        c.aStart = true;
                     } else
                     {
-                        c.modest = Boolean.valueOf(true);
+                        c.modest = true;
                         c.debased = false;
                         c.mTaker = -1;
-                        c.mStart = Boolean.valueOf(true);
+                        c.mStart = true;
                     }
                     if(progress < 3)
                         Project.SingleVulnerabilities(t, p, f, w, c, answers, progress + 1);
@@ -2883,7 +2883,7 @@ public class Project extends JFrame
             {
                 final int index = i + page * 5;
                 shownNames[i] = w.save.customRoster[index].mainName;
-                changePortrait(w.save.customRoster[index].convertGender(), w.save.customRoster[index].type, Boolean.valueOf(false), Boolean.valueOf(false), w, shownNames, i, Emotion.NEUTRAL, Emotion.NEUTRAL);
+                changePortrait(w.save.customRoster[index].convertGender(), w.save.customRoster[index].type, false, false, w, shownNames, i, Emotion.NEUTRAL, Emotion.NEUTRAL);
                 JButton ThisOne = new JButton(w.save.customRoster[i + page * 5].mainName);
                 ThisOne.addActionListener(new ActionListener() {
                     @Override
@@ -2913,9 +2913,9 @@ public class Project extends JFrame
 
                                     w.save.customRoster = newRoster;
                                     if(index == newEnabled.length && newEnabled.length % 5 == 0 && page != 0)
-                                        Project.CampaignCustomToggle(t, p, f, w, newEnabled, page - 1, Boolean.valueOf(true));
+                                        Project.CampaignCustomToggle(t, p, f, w, newEnabled, page - 1, true);
                                     else
-                                        Project.CampaignCustomToggle(t, p, f, w, newEnabled, page, Boolean.valueOf(true));
+                                        Project.CampaignCustomToggle(t, p, f, w, newEnabled, page, true);
                                     w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).toString());
                                     Project.ReportCustomInclusion(t, w, newEnabled);
                                 }
@@ -2926,7 +2926,7 @@ public class Project extends JFrame
                                 @Override
                                 public void actionPerformed(ActionEvent e)
                                 {
-                                    Project.CampaignCustomToggle(t, p, f, w, enabled, page, Boolean.valueOf(true));
+                                    Project.CampaignCustomToggle(t, p, f, w, enabled, page, true);
                                 }
                             });
                             p.add(Back);
@@ -3005,10 +3005,10 @@ public class Project extends JFrame
         w.append(t, "\n\nEnemy composition: ");
         if(w.getGenderBalance()[0] == 0)
         {
-            Boolean listed = Boolean.valueOf(false);
+            Boolean listed = false;
             if(w.getGenderBalance()[1] > 0)
             {
-                listed = Boolean.valueOf(true);
+                listed = true;
                 w.append(t, (new StringBuilder(String.valueOf(w.getGenderBalance()[1]))).append(" female").toString());
                 if(w.getGenderBalance()[1] > 1)
                     w.append(t, "s");
@@ -3020,20 +3020,20 @@ public class Project extends JFrame
                 w.append(t, (new StringBuilder(String.valueOf(w.getGenderBalance()[2]))).append(" male").toString());
                 if(w.getGenderBalance()[2] > 1)
                     w.append(t, "s");
-                listed = Boolean.valueOf(true);
+                listed = true;
             }
             if(w.getGenderBalance()[3] > 0)
             {
                 if(listed)
                     w.append(t, ", ");
                 w.append(t, (new StringBuilder(String.valueOf(w.getGenderBalance()[3]))).append(" futanari").toString());
-                listed = Boolean.valueOf(true);
+                listed = true;
             }
             if(!listed)
                 w.append(t, "none set");
         } else
         {
-            Boolean listed = Boolean.valueOf(false);
+            Boolean listed = false;
             int divisor = w.getGenderBalance()[1] + w.getGenderBalance()[2] + w.getGenderBalance()[3];
             if(divisor == 0)
                 divisor = 1;
@@ -3045,7 +3045,7 @@ public class Project extends JFrame
             int multiplier = 10000 / divisor;
             if(w.getGenderBalance()[1] > 0)
             {
-                listed = Boolean.valueOf(true);
+                listed = true;
                 if(count > 1)
                     w.append(t, (new StringBuilder(String.valueOf((multiplier * w.getGenderBalance()[1]) / 100))).append("% female").toString());
                 else
@@ -3059,7 +3059,7 @@ public class Project extends JFrame
                     w.append(t, (new StringBuilder(String.valueOf((multiplier * w.getGenderBalance()[2]) / 100))).append("% male").toString());
                 else
                     w.append(t, "100% male");
-                listed = Boolean.valueOf(true);
+                listed = true;
             }
             if(w.getGenderBalance()[3] > 0)
             {
@@ -3149,16 +3149,16 @@ public class Project extends JFrame
             SaveData saveFile = saves;
             for(int i = 0; i < saveFile.getSaves().length; i++)
                 if(saveFile.getSaves()[i].getDay() > 50 - saveFile.getSaves()[i].eventOffset * 3)
-                    earlyCheatVisible = Boolean.valueOf(true);
+                    earlyCheatVisible = true;
 
             if(w.getEarlyCheat())
-                earlyCheatVisible = Boolean.valueOf(true);
+                earlyCheatVisible = true;
             if(w.hardMode)
-                earlyCheatVisible = Boolean.valueOf(true);
+                earlyCheatVisible = true;
             if(saves.harem != null && saves.harem.length > 0)
-                earlyCheatVisible = Boolean.valueOf(true);
+                earlyCheatVisible = true;
             if(earlyCheatVisible == null)
-                earlyCheatVisible = Boolean.valueOf(false);
+                earlyCheatVisible = false;
         }
         final Boolean CheatVisibility = earlyCheatVisible;
         OptionsDisplay(t, p, f, w, earlyCheatVisible);
@@ -3169,21 +3169,21 @@ public class Project extends JFrame
             {
                 if(w.getEarlyCheat())
                 {
-                    w.setEarlyCheat(Boolean.valueOf(false));
-                    w.hardMode = Boolean.valueOf(true);
+                    w.setEarlyCheat(false);
+                    w.hardMode = true;
                     w.clampStart = 1;
                     w.clampPercent = 80;
                     w.eventOffset = 5;
                 } else
                 if(w.hardMode)
                 {
-                    w.hardMode = Boolean.valueOf(false);
+                    w.hardMode = false;
                     w.clampStart = 11;
                     w.clampPercent = 100;
                     w.eventOffset = 0;
                 } else
                 {
-                    w.setEarlyCheat(Boolean.valueOf(true));
+                    w.setEarlyCheat(true);
                 }
                 Project.OptionsMenu(t, p, f, w, null);
             }
@@ -3196,8 +3196,8 @@ public class Project extends JFrame
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                w.setEarlyCheat(Boolean.valueOf(true));
-                Project.OptionsMenu(t, p, f, w, Boolean.valueOf(true));
+                w.setEarlyCheat(true);
+                Project.OptionsMenu(t, p, f, w, true);
             }
         }
 
@@ -3223,20 +3223,20 @@ public class Project extends JFrame
                 {
                     if(w.getCommentaryWrite())
                     {
-                        w.setCommentaryWrite(Boolean.valueOf(false));
+                        w.setCommentaryWrite(false);
                     } else
                     {
-                        w.setCommentaryRead(Boolean.valueOf(false));
-                        w.setCommentaryWrite(Boolean.valueOf(true));
+                        w.setCommentaryRead(false);
+                        w.setCommentaryWrite(true);
                     }
                 } else
                 if(w.getCommentaryWrite())
                 {
-                    w.setCommentaryWrite(Boolean.valueOf(false));
+                    w.setCommentaryWrite(false);
                 } else
                 {
-                    w.setCommentaryRead(Boolean.valueOf(true));
-                    w.setCommentaryWrite(Boolean.valueOf(true));
+                    w.setCommentaryRead(true);
+                    w.setCommentaryWrite(true);
                 }
                 Project.OptionsMenu(t, p, f, w, CheatVisibility);
             }
@@ -3546,18 +3546,18 @@ public class Project extends JFrame
                 p.add(ThisOne);
                 nameDisplay[i] = subject.mainName;
                 if(subject.flavorObedience() < 20)
-                    changePortrait(subject.gender, subject.type, Boolean.valueOf(true), Boolean.valueOf(true), w, nameDisplay, i, Emotion.ANGER, Emotion.NEUTRAL);
+                    changePortrait(subject.gender, subject.type, true, true, w, nameDisplay, i, Emotion.ANGER, Emotion.NEUTRAL);
                 else
                 if(subject.flavorObedience() < 40)
-                    changePortrait(subject.gender, subject.type, Boolean.valueOf(true), Boolean.valueOf(true), w, nameDisplay, i, Emotion.ANGER, Emotion.SHAME);
+                    changePortrait(subject.gender, subject.type, true, true, w, nameDisplay, i, Emotion.ANGER, Emotion.SHAME);
                 else
                 if(subject.flavorObedience() < 61)
-                    changePortrait(subject.gender, subject.type, Boolean.valueOf(true), Boolean.valueOf(true), w, nameDisplay, i, Emotion.FEAR, Emotion.SHAME);
+                    changePortrait(subject.gender, subject.type, true, true, w, nameDisplay, i, Emotion.FEAR, Emotion.SHAME);
                 else
                 if(subject.flavorObedience() < 81)
-                    changePortrait(subject.gender, subject.type, Boolean.valueOf(true), Boolean.valueOf(true), w, nameDisplay, i, Emotion.FOCUS, Emotion.NEUTRAL);
+                    changePortrait(subject.gender, subject.type, true, true, w, nameDisplay, i, Emotion.FOCUS, Emotion.NEUTRAL);
                 else
-                    changePortrait(subject.gender, subject.type, Boolean.valueOf(true), Boolean.valueOf(true), w, nameDisplay, i, Emotion.JOY, Emotion.FOCUS);
+                    changePortrait(subject.gender, subject.type, true, true, w, nameDisplay, i, Emotion.JOY, Emotion.FOCUS);
             }
 
         if(w.getHarem().length > 5 * (page + 1))
@@ -3712,7 +3712,7 @@ public class Project extends JFrame
                 int actualCost = w.getHarem()[i].motivationCost();
                 if(w.getHarem()[i].isFormerFriend(w.getCast()[0]) || w.getHarem()[i].isFormerFriend(w.getCast()[1]) || w.getHarem()[i].isFormerFriend(w.getCast()[2]))
                     actualCost *= 2;
-                w.append(t, (new StringBuilder("\n\n")).append(w.getHarem()[i].mainName).append("\nStamina: ").append(w.getHarem()[i].stamina / 10).append(".").append(w.getHarem()[i].stamina % 10).append("%\nMotivation: ").append(w.getHarem()[i].motivation / 10).append(".").append(w.getHarem()[i].motivation % 10).append("%\nCost: 20% Stamina, ").append(actualCost / 10).append(".").append(actualCost % 10).append("% Motivation, ").append(w.getHarem()[i].EECost()).append(" EE\n").append(w.getHarem()[i].describeCombatStyle(w, Boolean.valueOf(false))).append("\nReputation Strength: ").append(200 - w.getHarem()[i].disgrace * 2).append("%\nTarget Compatibilities:").toString());
+                w.append(t, (new StringBuilder("\n\n")).append(w.getHarem()[i].mainName).append("\nStamina: ").append(w.getHarem()[i].stamina / 10).append(".").append(w.getHarem()[i].stamina % 10).append("%\nMotivation: ").append(w.getHarem()[i].motivation / 10).append(".").append(w.getHarem()[i].motivation % 10).append("%\nCost: 20% Stamina, ").append(actualCost / 10).append(".").append(actualCost % 10).append("% Motivation, ").append(w.getHarem()[i].EECost()).append(" EE\n").append(w.getHarem()[i].describeCombatStyle(w, false)).append("\nReputation Strength: ").append(200 - w.getHarem()[i].disgrace * 2).append("%\nTarget Compatibilities:").toString());
                 if(w.active)
                 {
                     for(int j = 0; j < 3; j++)
@@ -3789,18 +3789,18 @@ public class Project extends JFrame
                     p.add(Choice);
                 nameDisplay[i - page * 5] = Spent.mainName;
                 if(Spent.flavorObedience() < 20)
-                    changePortrait(Spent.gender, Spent.type, Boolean.valueOf(true), Boolean.valueOf(true), w, nameDisplay, i - page * 5, Emotion.ANGER, Emotion.NEUTRAL);
+                    changePortrait(Spent.gender, Spent.type, true, true, w, nameDisplay, i - page * 5, Emotion.ANGER, Emotion.NEUTRAL);
                 else
                 if(Spent.flavorObedience() < 40)
-                    changePortrait(Spent.gender, Spent.type, Boolean.valueOf(true), Boolean.valueOf(true), w, nameDisplay, i - page * 5, Emotion.ANGER, Emotion.SHAME);
+                    changePortrait(Spent.gender, Spent.type, true, true, w, nameDisplay, i - page * 5, Emotion.ANGER, Emotion.SHAME);
                 else
                 if(Spent.flavorObedience() < 61)
-                    changePortrait(Spent.gender, Spent.type, Boolean.valueOf(true), Boolean.valueOf(true), w, nameDisplay, i - page * 5, Emotion.FEAR, Emotion.SHAME);
+                    changePortrait(Spent.gender, Spent.type, true, true, w, nameDisplay, i - page * 5, Emotion.FEAR, Emotion.SHAME);
                 else
                 if(Spent.flavorObedience() < 81)
-                    changePortrait(Spent.gender, Spent.type, Boolean.valueOf(true), Boolean.valueOf(true), w, nameDisplay, i - page * 5, Emotion.FOCUS, Emotion.NEUTRAL);
+                    changePortrait(Spent.gender, Spent.type, true, true, w, nameDisplay, i - page * 5, Emotion.FOCUS, Emotion.NEUTRAL);
                 else
-                    changePortrait(Spent.gender, Spent.type, Boolean.valueOf(true), Boolean.valueOf(true), w, nameDisplay, i - page * 5, Emotion.JOY, Emotion.FOCUS);
+                    changePortrait(Spent.gender, Spent.type, true, true, w, nameDisplay, i - page * 5, Emotion.JOY, Emotion.FOCUS);
             }
 
         if(w.getHarem().length > (page + 1) * 5)
@@ -3858,18 +3858,18 @@ public class Project extends JFrame
         String nameDisplay[] = new String[5];
         nameDisplay[0] = x.mainName;
         if(x.flavorObedience() < 20)
-            changePortrait(x.gender, x.type, Boolean.valueOf(true), Boolean.valueOf(true), w, nameDisplay, 0, Emotion.ANGER, Emotion.NEUTRAL);
+            changePortrait(x.gender, x.type, true, true, w, nameDisplay, 0, Emotion.ANGER, Emotion.NEUTRAL);
         else
         if(x.flavorObedience() < 40)
-            changePortrait(x.gender, x.type, Boolean.valueOf(true), Boolean.valueOf(true), w, nameDisplay, 0, Emotion.ANGER, Emotion.SHAME);
+            changePortrait(x.gender, x.type, true, true, w, nameDisplay, 0, Emotion.ANGER, Emotion.SHAME);
         else
         if(x.flavorObedience() < 61)
-            changePortrait(x.gender, x.type, Boolean.valueOf(true), Boolean.valueOf(true), w, nameDisplay, 0, Emotion.FEAR, Emotion.SHAME);
+            changePortrait(x.gender, x.type, true, true, w, nameDisplay, 0, Emotion.FEAR, Emotion.SHAME);
         else
         if(x.flavorObedience() < 81)
-            changePortrait(x.gender, x.type, Boolean.valueOf(true), Boolean.valueOf(true), w, nameDisplay, 0, Emotion.FOCUS, Emotion.NEUTRAL);
+            changePortrait(x.gender, x.type, true, true, w, nameDisplay, 0, Emotion.FOCUS, Emotion.NEUTRAL);
         else
-            changePortrait(x.gender, x.type, Boolean.valueOf(true), Boolean.valueOf(true), w, nameDisplay, 0, Emotion.JOY, Emotion.FOCUS);
+            changePortrait(x.gender, x.type, true, true, w, nameDisplay, 0, Emotion.JOY, Emotion.FOCUS);
         w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\n").append(x.mainName).toString());
         if(!x.mainName.equals(x.originalName))
         {
@@ -3901,9 +3901,9 @@ public class Project extends JFrame
             w.append(t, "\nANTI: ");
         else
             w.append(t, "\nINJU: ");
-        w.append(t, (new StringBuilder(String.valueOf(x.condensedFormat(x.injuExp)))).append(" (x").append(x.expMultiplierDisplay(x.injuExp)).append(" dmg)\nEXPO: ").append(x.condensedFormat(x.expoExp)).append(" (x").append(x.expMultiplierDisplay(x.expoExp)).append(" dmg)\n").append(x.describeCombatStyle(w, Boolean.valueOf(true))).toString());
+        w.append(t, (new StringBuilder(String.valueOf(x.condensedFormat(x.injuExp)))).append(" (x").append(x.expMultiplierDisplay(x.injuExp)).append(" dmg)\nEXPO: ").append(x.condensedFormat(x.expoExp)).append(" (x").append(x.expMultiplierDisplay(x.expoExp)).append(" dmg)\n").append(x.describeCombatStyle(w, true)).toString());
         if(x.defilerType != 0)
-            w.append(t, (new StringBuilder("\n\n")).append(x.describeDefilerType(w, Boolean.valueOf(false))).toString());
+            w.append(t, (new StringBuilder("\n\n")).append(x.describeDefilerType(w, false)).toString());
         if(x.defeatType == 5 && x.obedience < 40)
             w.append(t, "\n\nTrait: Eager Partner\nWhile Obedience remains below 40%, 1/4 Motivation cost to deploy and +50% PLEA and EXPO damage");
         else
@@ -4105,9 +4105,9 @@ public class Project extends JFrame
             {
                 Boolean newTraining[] = new Boolean[22];
                 for(int i = 0; i < newTraining.length; i++)
-                    newTraining[i] = Boolean.valueOf(false);
+                    newTraining[i] = false;
 
-                x.trainingMenu(t, p, f, w, s, newTraining, 0, Boolean.valueOf(true));
+                x.trainingMenu(t, p, f, w, s, newTraining, 0, true);
             }
         });
         if(w.active)
@@ -4356,7 +4356,7 @@ public class Project extends JFrame
             if(participants[i].forsakenOwner != null)
             {
                 Body.Appearance previous = null;
-                participants[i].forsakenOwner.visited = Boolean.valueOf(true);
+                participants[i].forsakenOwner.visited = true;
                 if(participants[0] == w.lordBody)
                 {
                     if(participants[i].forsakenOwner.rememberedBodies == null || participants[i].forsakenOwner.rememberedBodies.length == 0)
@@ -4405,7 +4405,7 @@ public class Project extends JFrame
             } else
             if(participants[i].chosenOwner != null)
             {
-                participants[i].chosenOwner.visited = Boolean.valueOf(true);
+                participants[i].chosenOwner.visited = true;
                 if(participants[0] == w.lordBody)
                     if(participants[i].chosenOwner.rememberedBodies == null)
                     {
@@ -4974,10 +4974,10 @@ public class Project extends JFrame
         if(w.evacNotice)
         {
             w.append(t, "Evacuation complete!\n");
-            w.evacNotice = Boolean.valueOf(false);
+            w.evacNotice = false;
         } else
         {
-            w.append(t, (new StringBuilder("Evacuation: ")).append(w.getEvacStatus(Boolean.valueOf(true))).append("\n").toString());
+            w.append(t, (new StringBuilder("Evacuation: ")).append(w.getEvacStatus(true)).append("\n").toString());
         }
         Chosen trappedChosen = null;
         for(int i = 0; i < 3; i++)
@@ -4988,14 +4988,14 @@ public class Project extends JFrame
                     trappedChosen = w.getCombatants()[i];
             }
 
-        w.append(t, (new StringBuilder("Extermination: ")).append(w.getExterminationStatus(Boolean.valueOf(true))).append("\n\n").toString());
+        w.append(t, (new StringBuilder("Extermination: ")).append(w.getExterminationStatus(true)).append("\n\n").toString());
         if(w.evacuationProgress < w.evacuationComplete)
         {
             w.append(t, "The desperate battle continues...\n");
         } else
         {
             Chosen c = null;
-            Boolean allGrabbed = Boolean.valueOf(true);
+            Boolean allGrabbed = true;
             if(w.getCombatants()[0] != null)
                 if(w.getCombatants()[0].isSurrounded() || w.getCombatants()[0].isCaptured() || w.finalBattle && (!w.getCombatants()[0].alive || w.getCombatants()[0].resolve <= 0))
                 {
@@ -5003,30 +5003,30 @@ public class Project extends JFrame
                         if(w.getCombatants()[1].isSurrounded() || w.getCombatants()[1].isCaptured() || w.finalBattle && (!w.getCombatants()[1].alive || w.getCombatants()[1].resolve <= 0))
                         {
                             if(w.getCombatants()[2] != null && !w.getCombatants()[2].isSurrounded() && !w.getCombatants()[2].isCaptured() && (!w.finalBattle || w.getCombatants()[2].alive && w.getCombatants()[2].resolve > 0))
-                                allGrabbed = Boolean.valueOf(false);
+                                allGrabbed = false;
                         } else
                         {
-                            allGrabbed = Boolean.valueOf(false);
+                            allGrabbed = false;
                         }
                 } else
                 {
-                    allGrabbed = Boolean.valueOf(false);
+                    allGrabbed = false;
                 }
             if(allGrabbed)
                 w.append(t, "The Demons have the Chosen at their mercy!\n");
             else
             if(w.exterminationProgress >= w.exterminationComplete)
             {
-                Boolean allFree = Boolean.valueOf(true);
+                Boolean allFree = true;
                 if(w.getCombatants()[0].isSurrounded() || w.getCombatants()[0].isCaptured())
-                    allFree = Boolean.valueOf(false);
+                    allFree = false;
                 else
                 if(w.getCombatants()[1] != null)
                     if(w.getCombatants()[1].isSurrounded() || w.getCombatants()[1].isCaptured())
-                        allFree = Boolean.valueOf(false);
+                        allFree = false;
                     else
                     if(w.getCombatants()[2] != null && (w.getCombatants()[2].isSurrounded() || w.getCombatants()[2].isCaptured()))
-                        allFree = Boolean.valueOf(false);
+                        allFree = false;
                 if(allFree)
                 {
                     int defeated = 0;
@@ -5215,9 +5215,9 @@ public class Project extends JFrame
                     if(c != null && (c.isSurrounded() || c.isCaptured()))
                         c = null;
                 }
-                Boolean plural = Boolean.valueOf(false);
+                Boolean plural = false;
                 if(w.getCombatants()[1] != null)
-                    plural = Boolean.valueOf(true);
+                    plural = true;
                 if(w.exterminationMultiplier == 100)
                 {
                     w.append(t, (new StringBuilder("With the civilians evacuated, ")).append(c.getMainName()).toString());
@@ -5350,28 +5350,28 @@ public class Project extends JFrame
             if(w.usedForsaken.injured > 1)
             {
                 w.redAppend(t, (new StringBuilder("Stunned for ")).append(w.usedForsaken.injured).append(" turns").toString());
-                changePortrait(w.usedForsaken.gender, w.usedForsaken.type, displayedCivilians[3], Boolean.valueOf(true), w, w.nameCombatants(), 3, Emotion.SWOON, Emotion.SWOON);
+                changePortrait(w.usedForsaken.gender, w.usedForsaken.type, displayedCivilians[3], true, w, w.nameCombatants(), 3, Emotion.SWOON, Emotion.SWOON);
             } else
             if(w.usedForsaken.injured == 1)
             {
                 w.redAppend(t, "Stunned until next turn");
-                changePortrait(w.usedForsaken.gender, w.usedForsaken.type, displayedCivilians[3], Boolean.valueOf(true), w, w.nameCombatants(), 3, Emotion.SWOON, Emotion.SWOON);
+                changePortrait(w.usedForsaken.gender, w.usedForsaken.type, displayedCivilians[3], true, w, w.nameCombatants(), 3, Emotion.SWOON, Emotion.SWOON);
             } else
             {
                 w.greenAppend(t, "Ready to capture target");
                 if(w.usedForsaken.flavorObedience() < 20)
-                    changePortrait(w.usedForsaken.gender, w.usedForsaken.type, displayedCivilians[3], Boolean.valueOf(true), w, w.nameCombatants(), 3, Emotion.ANGER, Emotion.NEUTRAL);
+                    changePortrait(w.usedForsaken.gender, w.usedForsaken.type, displayedCivilians[3], true, w, w.nameCombatants(), 3, Emotion.ANGER, Emotion.NEUTRAL);
                 else
                 if(w.usedForsaken.flavorObedience() < 40)
-                    changePortrait(w.usedForsaken.gender, w.usedForsaken.type, displayedCivilians[3], Boolean.valueOf(true), w, w.nameCombatants(), 3, Emotion.ANGER, Emotion.SHAME);
+                    changePortrait(w.usedForsaken.gender, w.usedForsaken.type, displayedCivilians[3], true, w, w.nameCombatants(), 3, Emotion.ANGER, Emotion.SHAME);
                 else
                 if(w.usedForsaken.flavorObedience() < 61)
-                    changePortrait(w.usedForsaken.gender, w.usedForsaken.type, displayedCivilians[3], Boolean.valueOf(true), w, w.nameCombatants(), 3, Emotion.SHAME, Emotion.STRUGGLE);
+                    changePortrait(w.usedForsaken.gender, w.usedForsaken.type, displayedCivilians[3], true, w, w.nameCombatants(), 3, Emotion.SHAME, Emotion.STRUGGLE);
                 else
                 if(w.usedForsaken.flavorObedience() < 81)
-                    changePortrait(w.usedForsaken.gender, w.usedForsaken.type, displayedCivilians[3], Boolean.valueOf(true), w, w.nameCombatants(), 3, Emotion.FOCUS, Emotion.ANGER);
+                    changePortrait(w.usedForsaken.gender, w.usedForsaken.type, displayedCivilians[3], true, w, w.nameCombatants(), 3, Emotion.FOCUS, Emotion.ANGER);
                 else
-                    changePortrait(w.usedForsaken.gender, w.usedForsaken.type, displayedCivilians[3], Boolean.valueOf(true), w, w.nameCombatants(), 3, Emotion.FOCUS, Emotion.JOY);
+                    changePortrait(w.usedForsaken.gender, w.usedForsaken.type, displayedCivilians[3], true, w, w.nameCombatants(), 3, Emotion.FOCUS, Emotion.JOY);
             }
         }
         if(w.getRallyBonus() > 0)
@@ -5713,10 +5713,10 @@ public class Project extends JFrame
 
     public static void advanceAction(JPanel p, WorldState w, int action)
     {
-        Boolean actionMatches = Boolean.valueOf(true);
+        Boolean actionMatches = true;
         if(w.getActions().length > w.getCurrentAction() && w.getActions()[w.getCurrentAction()] != action)
         {
-            actionMatches = Boolean.valueOf(false);
+            actionMatches = false;
             w.truncateCommentary(w.getCurrentAction());
         }
         if(w.writePossible())
@@ -5989,10 +5989,10 @@ public class Project extends JFrame
             }
             public void actionPerformed(ActionEvent e)
             {
-                Boolean impregnatedAlly = Boolean.valueOf(false);
+                Boolean impregnatedAlly = false;
                 for(int i = 0; i < 3; i++)
                     if(i != c.getNumber() && w.getCast()[i] != null && w.getCast()[i].isImpregnated() && w.getCast()[i].alive)
-                        impregnatedAlly = Boolean.valueOf(true);
+                        impregnatedAlly = true;
 
                 if(w.finalBattle && w.getTechs()[42].isOwned() && impregnatedAlly)
                     w.finalThreaten(t, w, c);
@@ -6253,7 +6253,7 @@ public class Project extends JFrame
                     p.repaint();
                 } else
                 {
-                    w.usedForsaken.defiling = Boolean.valueOf(true);
+                    w.usedForsaken.defiling = true;
                     Project.EnemyTurn(t, p, f, w, initiative, 0);
                 }
             }
@@ -6276,8 +6276,8 @@ public class Project extends JFrame
                 {
                     p.removeAll();
                     int defilers = 0;
-                    Boolean plusPossible = Boolean.valueOf(false);
-                    Boolean orgyPossible = Boolean.valueOf(false);
+                    Boolean plusPossible = false;
+                    Boolean orgyPossible = false;
                     String PAINname = "PAIN";
                     String INJUname = "INJU";
                     if(w.tickle())
@@ -6365,11 +6365,11 @@ public class Project extends JFrame
                             if(finalInseminated == 1)
                             {
                                 Inseminate.setText("Inseminate+");
-                                plusPossible = Boolean.valueOf(true);
+                                plusPossible = true;
                             } else
                             {
                                 Inseminate.setText("Orgy");
-                                orgyPossible = Boolean.valueOf(true);
+                                orgyPossible = true;
                             }
                         } else
                         {
@@ -6405,11 +6405,11 @@ public class Project extends JFrame
                             if(finalOrgasming == 1)
                             {
                                 ForceOrgasm.setText("Force Orgasm+");
-                                plusPossible = Boolean.valueOf(true);
+                                plusPossible = true;
                             } else
                             {
                                 ForceOrgasm.setText("Orgy");
-                                orgyPossible = Boolean.valueOf(true);
+                                orgyPossible = true;
                             }
                         } else
                         {
@@ -6451,11 +6451,11 @@ public class Project extends JFrame
                                     Sodomize.setText("Torture+");
                                 else
                                     Sodomize.setText("Sodomize+");
-                                plusPossible = Boolean.valueOf(true);
+                                plusPossible = true;
                             } else
                             {
                                 Sodomize.setText("Orgy");
-                                orgyPossible = Boolean.valueOf(true);
+                                orgyPossible = true;
                             }
                         } else
                         {
@@ -6491,11 +6491,11 @@ public class Project extends JFrame
                             if(finalBroadcasted == 1)
                             {
                                 Broadcast.setText("Broadcast+");
-                                plusPossible = Boolean.valueOf(true);
+                                plusPossible = true;
                             } else
                             {
                                 Broadcast.setText("Orgy");
-                                orgyPossible = Boolean.valueOf(true);
+                                orgyPossible = true;
                             }
                         } else
                         {
@@ -6656,7 +6656,7 @@ public class Project extends JFrame
 			}
             public void actionPerformed(ActionEvent e)
             {
-                Boolean directlyAdvance = Boolean.valueOf(true);
+                Boolean directlyAdvance = true;
                 if(w.upgradedCommander())
                 {
                     if(w.usedForsaken != null)
@@ -6666,7 +6666,7 @@ public class Project extends JFrame
                 {
                     w.setSurroundTarget(c);
                     if(w.getTechs()[31].isOwned())
-                        directlyAdvance = Boolean.valueOf(false);
+                        directlyAdvance = false;
                 }
                 if(directlyAdvance)
                 {
@@ -6683,8 +6683,8 @@ public class Project extends JFrame
                         INJUname = "ANTI";
                     }
                     int defilers = 0;
-                    Boolean plusPossible = Boolean.valueOf(false);
-                    Boolean orgyPossible = Boolean.valueOf(false);
+                    Boolean plusPossible = false;
+                    Boolean orgyPossible = false;
                     if(!c.getGrind())
                     {
                         JButton Grind = new JButton(GrindAction) {
@@ -6765,11 +6765,11 @@ public class Project extends JFrame
                             if(finalInseminated == 1)
                             {
                                 Inseminate.setText("Inseminate+");
-                                plusPossible = Boolean.valueOf(true);
+                                plusPossible = true;
                             } else
                             {
                                 Inseminate.setText("Orgy");
-                                orgyPossible = Boolean.valueOf(true);
+                                orgyPossible = true;
                             }
                         } else
                         {
@@ -6805,11 +6805,11 @@ public class Project extends JFrame
                             if(finalOrgasming == 1)
                             {
                                 ForceOrgasm.setText("Force Orgasm+");
-                                plusPossible = Boolean.valueOf(true);
+                                plusPossible = true;
                             } else
                             {
                                 ForceOrgasm.setText("Orgy");
-                                orgyPossible = Boolean.valueOf(true);
+                                orgyPossible = true;
                             }
                         } else
                         {
@@ -6851,11 +6851,11 @@ public class Project extends JFrame
                                     Sodomize.setText("Torture+");
                                 else
                                     Sodomize.setText("Sodomize+");
-                                plusPossible = Boolean.valueOf(true);
+                                plusPossible = true;
                             } else
                             {
                                 Sodomize.setText("Orgy");
-                                orgyPossible = Boolean.valueOf(true);
+                                orgyPossible = true;
                             }
                         } else
                         {
@@ -6891,11 +6891,11 @@ public class Project extends JFrame
                             if(finalBroadcasted == 1)
                             {
                                 Broadcast.setText("Broadcast+");
-                                plusPossible = Boolean.valueOf(true);
+                                plusPossible = true;
                             } else
                             {
                                 Broadcast.setText("Orgy");
-                                orgyPossible = Boolean.valueOf(true);
+                                orgyPossible = true;
                             }
                         } else
                         {
@@ -7169,8 +7169,8 @@ public class Project extends JFrame
                 PAINname = "TICK";
                 INJUname = "ANTI";
             }
-            Boolean plusPossible = Boolean.valueOf(false);
-            Boolean orgyPossible = Boolean.valueOf(false);
+            Boolean plusPossible = false;
+            Boolean orgyPossible = false;
             if(!c.getGrind())
             {
                 JButton Grind = new JButton(GrindAction) {
@@ -7256,11 +7256,11 @@ public class Project extends JFrame
                     if(inseminated == 1)
                     {
                         Inseminate.setText("Inseminate+");
-                        plusPossible = Boolean.valueOf(true);
+                        plusPossible = true;
                     } else
                     {
                         Inseminate.setText("Orgy");
-                        orgyPossible = Boolean.valueOf(true);
+                        orgyPossible = true;
                     }
                 } else
                 {
@@ -7297,11 +7297,11 @@ public class Project extends JFrame
                     if(orgasming == 1)
                     {
                         ForceOrgasm.setText("Force Orgasm+");
-                        plusPossible = Boolean.valueOf(true);
+                        plusPossible = true;
                     } else
                     {
                         ForceOrgasm.setText("Orgy");
-                        orgyPossible = Boolean.valueOf(true);
+                        orgyPossible = true;
                     }
                 } else
                 {
@@ -7344,11 +7344,11 @@ public class Project extends JFrame
                             Sodomize.setText("Torture+");
                         else
                             Sodomize.setText("Sodomize+");
-                        plusPossible = Boolean.valueOf(true);
+                        plusPossible = true;
                     } else
                     {
                         Sodomize.setText("Orgy");
-                        orgyPossible = Boolean.valueOf(true);
+                        orgyPossible = true;
                     }
                 } else
                 {
@@ -7385,11 +7385,11 @@ public class Project extends JFrame
                     if(broadcasted == 1)
                     {
                         Broadcast.setText("Broadcast+");
-                        plusPossible = Boolean.valueOf(true);
+                        plusPossible = true;
                     } else
                     {
                         Broadcast.setText("Orgy");
-                        orgyPossible = Boolean.valueOf(true);
+                        orgyPossible = true;
                     }
                 } else
                 {
@@ -7566,18 +7566,18 @@ public class Project extends JFrame
                 } else
                 if(w.usedForsaken.defilerType == 6)
                     ForsakenDefiler.setToolTipText("<html><center>Adds target to Orgy<br>with duration of current Defiler+ action<br>Can trigger Innocence/Dignity Distortion just like any other Orgy</center></html>");
-                Boolean conditionsMet = Boolean.valueOf(false);
+                Boolean conditionsMet = false;
                 if(w.usedForsaken.defilerType == 1 && c.currentHATE >= 10000L)
-                    conditionsMet = Boolean.valueOf(true);
+                    conditionsMet = true;
                 else
                 if(w.usedForsaken.defilerType == 2 && c.currentPLEA >= 10000L)
-                    conditionsMet = Boolean.valueOf(true);
+                    conditionsMet = true;
                 else
                 if(w.usedForsaken.defilerType == 3 && c.currentINJU >= 10000L)
-                    conditionsMet = Boolean.valueOf(true);
+                    conditionsMet = true;
                 else
                 if(w.usedForsaken.defilerType == 4 && c.currentEXPO >= 10000L)
-                    conditionsMet = Boolean.valueOf(true);
+                    conditionsMet = true;
                 else
                 if(w.usedForsaken.defilerType == 5)
                 {
@@ -7585,7 +7585,7 @@ public class Project extends JFrame
                     if(w.finalBattle)
                         currentTemptReq *= 10L;
                     if(c.currentPLEA >= currentTemptReq && c.vVirg && c.aVirg && !c.cVirg && !c.modest && !c.ruthless && c.timesSlaughtered() == 0 && c.timesDetonated() == 0 && (c.temptReq < 0x186a0L || !w.finalBattle))
-                        conditionsMet = Boolean.valueOf(true);
+                        conditionsMet = true;
                 } else
                 if(w.usedForsaken.defilerType == 6 && (c.currentHATE >= 10000L || c.currentINJU >= 10000L))
                 {
@@ -7599,7 +7599,7 @@ public class Project extends JFrame
                                 secondPartner = w.getCast()[i];
 
                     if(firstPartner != null && secondPartner != null && (firstPartner.inseminated && secondPartner.inseminated || firstPartner.orgasming && secondPartner.orgasming || firstPartner.sodomized && secondPartner.sodomized || firstPartner.broadcasted && secondPartner.broadcasted))
-                        conditionsMet = Boolean.valueOf(true);
+                        conditionsMet = true;
                 }
                 if(conditionsMet)
                 {
@@ -7682,10 +7682,10 @@ public class Project extends JFrame
             if(w.onTrack && w.getActions().length > w.getCurrentAction() && w.getActions()[w.getCurrentAction()] == c.getNumber() * 14 + 3)
                 Threaten.getInputMap(2).put(KeyStroke.getKeyStroke("SPACE"), "pressed");
             Threaten.getActionMap().put("pressed", ThreatenAction);
-            Boolean impregnatedAlly = Boolean.valueOf(false);
+            Boolean impregnatedAlly = false;
             for(int i = 0; i < 3; i++)
                 if(i != c.getNumber() && w.getCast()[i] != null && w.getCast()[i].isImpregnated() && w.getCast()[i].alive)
-                    impregnatedAlly = Boolean.valueOf(true);
+                    impregnatedAlly = true;
 
             if(w.finalBattle && w.getTechs()[42].isOwned() && impregnatedAlly)
                 Threaten.setBackground(YELLOWISH);
@@ -7884,25 +7884,25 @@ public class Project extends JFrame
                     else
                     if(w.getBodyStatus()[10])
                     {
-                        Boolean firstFound = Boolean.valueOf(false);
+                        Boolean firstFound = false;
                         if(w.getBodyStatus()[3])
                         {
                             description = (new StringBuilder(String.valueOf(description))).append("HATE").toString();
-                            firstFound = Boolean.valueOf(true);
+                            firstFound = true;
                         }
                         if(w.getBodyStatus()[4])
                         {
                             if(firstFound)
                                 description = (new StringBuilder(String.valueOf(description))).append(" and ").toString();
                             description = (new StringBuilder(String.valueOf(description))).append("PLEA").toString();
-                            firstFound = Boolean.valueOf(true);
+                            firstFound = true;
                         }
                         if(w.getBodyStatus()[5])
                         {
                             if(firstFound)
                                 description = (new StringBuilder(String.valueOf(description))).append(" and ").toString();
                             description = (new StringBuilder(String.valueOf(description))).append(INJUname).toString();
-                            firstFound = Boolean.valueOf(true);
+                            firstFound = true;
                         }
                         if(w.getBodyStatus()[6])
                             description = " and EXPO";
@@ -7978,7 +7978,7 @@ public class Project extends JFrame
                     if(w.getBodyStatus()[22])
                         description = (new StringBuilder(String.valueOf(description))).append("<br>Above 1000% Parasitism effectiveness, causes Total Dignity Break").toString();
                     if(w.usedForsaken != null)
-                        description = (new StringBuilder("<html><center>Grab with ")).append(w.usedForsaken.mainName).append(" for ").append(w.usedForsaken.compatibility(c)).append(" rounds<br>").append(w.usedForsaken.describeCombatStyle(w, Boolean.valueOf(false))).toString();
+                        description = (new StringBuilder("<html><center>Grab with ")).append(w.usedForsaken.mainName).append(" for ").append(w.usedForsaken.compatibility(c)).append(" rounds<br>").append(w.usedForsaken.describeCombatStyle(w, false)).toString();
                     description = (new StringBuilder(String.valueOf(description))).append("</center></html>").toString();
                     Capture.setToolTipText(description);
                 }
@@ -8206,13 +8206,13 @@ public class Project extends JFrame
     {
         Boolean endgame = w.finalBattle;
         Boolean actorFound;
-        for(actorFound = Boolean.valueOf(false); !actorFound && progress < initiative.length && initiative[progress] != null;)
+        for(actorFound = false; !actorFound && progress < initiative.length && initiative[progress] != null;)
         {
             w.clearBonus(progress);
-            actorFound = Boolean.valueOf(true);
+            actorFound = true;
             if(w.finalBattle && (!initiative[progress].alive || initiative[progress].resolve <= 0))
             {
-                actorFound = Boolean.valueOf(false);
+                actorFound = false;
                 progress++;
             }
         }
@@ -8234,29 +8234,29 @@ public class Project extends JFrame
         }
         p.removeAll();
         final int currentProgress = progress;
-        Boolean moreTurns = Boolean.valueOf(true);
+        Boolean moreTurns = true;
         if(progress > 2)
-            moreTurns = Boolean.valueOf(false);
+            moreTurns = false;
         else
         if(initiative[progress] == null)
-            moreTurns = Boolean.valueOf(false);
+            moreTurns = false;
         else
         if(w.finalBattle && (!initiative[progress].alive || initiative[progress].resolve <= 0))
             if(++progress > 2)
-                moreTurns = Boolean.valueOf(false);
+                moreTurns = false;
             else
             if(initiative[progress] == null)
-                moreTurns = Boolean.valueOf(false);
+                moreTurns = false;
             else
             if(w.finalBattle && (!initiative[progress].alive || initiative[progress].resolve <= 0))
                 if(++progress > 2)
-                    moreTurns = Boolean.valueOf(false);
+                    moreTurns = false;
                 else
                 if(initiative[progress] == null)
-                    moreTurns = Boolean.valueOf(false);
+                    moreTurns = false;
                 else
                 if(w.finalBattle && (!initiative[progress].alive || initiative[progress].resolve <= 0))
-                    moreTurns = Boolean.valueOf(false);
+                    moreTurns = false;
         if(!actorFound)
         {
             int defeated = 0;
@@ -8266,15 +8266,15 @@ public class Project extends JFrame
 
             if(defeated < 3)
             {
-                endgame = Boolean.valueOf(false);
+                endgame = false;
                 w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\nThe Demons swarm across the city unopposed!").toString());
             }
         } else
         {
-            endgame = Boolean.valueOf(false);
+            endgame = false;
         }
         if(w.finalBattle && w.getCast()[2] != null && w.getCast()[0].dissociated && w.getCast()[1].dissociated && w.getCast()[2].dissociated)
-            endgame = Boolean.valueOf(true);
+            endgame = true;
         if(endgame)
         {
             int captured = 0;
@@ -8392,30 +8392,30 @@ public class Project extends JFrame
                 public void actionPerformed(ActionEvent e)
                 {
                     w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\n").toString());
-                    Boolean newChosen = Boolean.valueOf(false);
+                    Boolean newChosen = false;
                     if(w.getCast()[1] == null)
                     {
                         if(w.getTotalRounds() >= (18 * (15 - w.eventOffset)) / 15 || w.day > 20)
-                            newChosen = Boolean.valueOf(true);
+                            newChosen = true;
                     } else
                     if(w.getCast()[2] == null && (w.getTotalRounds() >= (60 * (15 - w.eventOffset)) / 15 || w.day > 30))
-                        newChosen = Boolean.valueOf(true);
+                        newChosen = true;
                     if((w.evacComplete() || w.getBattleRound() < 4) && (w.getCast()[1] != null && w.getTotalRounds() < (80 * (15 - w.eventOffset)) / 15 && w.day <= 30 || w.getCast()[1] == null && w.getTotalRounds() < (28 * (15 - w.eventOffset)) / 15 && w.day <= 20))
-                        newChosen = Boolean.valueOf(false);
+                        newChosen = false;
                     int arrival = -1;
                     int timerStandard = 10000;
                     for(int i = 0; i < 3; i++)
                         if(w.decrementArrival(i))
                         {
                             Chosen thisChosen = w.getCast()[i];
-                            Boolean successfulArrival = Boolean.valueOf(true);
+                            Boolean successfulArrival = true;
                             if(thisChosen == w.getCombatants()[0])
-                                successfulArrival = Boolean.valueOf(false);
+                                successfulArrival = false;
                             else
                             if(w.getCombatants()[1] != null && w.getCombatants()[1] == thisChosen)
-                                successfulArrival = Boolean.valueOf(false);
+                                successfulArrival = false;
                             if(w.getCast()[i] == null)
-                                successfulArrival = Boolean.valueOf(false);
+                                successfulArrival = false;
                             if(successfulArrival && w.getArrivalTimer()[i] < timerStandard)
                             {
                                 arrival = i;
@@ -8497,27 +8497,27 @@ public class Project extends JFrame
                         } else
                         {
                             Chosen responder = null;
-                            for(Boolean response = Boolean.valueOf(false); !response;)
+                            for(Boolean response = false; !response;)
                             {
                                 if(Math.random() < 0.5D)
                                 {
                                     if(!w.getCombatants()[0].isSurrounded() && !w.getCombatants()[0].isCaptured() && w.getRelationship(w.getCombatants()[0].getNumber(), arrivingChosen.getNumber()) != 0)
                                     {
                                         responder = w.getCombatants()[0];
-                                        response = Boolean.valueOf(true);
+                                        response = true;
                                     }
                                 } else
                                 if(w.getCombatants()[1] != null && !w.getCombatants()[1].isSurrounded() && !w.getCombatants()[1].isCaptured() && w.getRelationship(w.getCombatants()[1].getNumber(), arrivingChosen.getNumber()) != 0)
                                 {
                                     responder = w.getCombatants()[1];
-                                    response = Boolean.valueOf(true);
+                                    response = true;
                                 }
                                 if(w.getCombatants()[0].isSurrounded() || w.getCombatants()[0].isCaptured() || w.getRelationship(w.getCombatants()[0].getNumber(), arrivingChosen.getNumber()) == 0)
                                     if(w.getCombatants()[1] == null)
-                                        response = Boolean.valueOf(true);
+                                        response = true;
                                     else
                                     if(w.getCombatants()[1].isSurrounded() || w.getCombatants()[1].isCaptured() || w.getRelationship(w.getCombatants()[1].getNumber(), arrivingChosen.getNumber()) == 0)
-                                        response = Boolean.valueOf(true);
+                                        response = true;
                             }
 
                             w.addToCombat(arrivingChosen);
@@ -8817,8 +8817,8 @@ public class Project extends JFrame
 
     public static void PostBattle(final JTextPane t, final JPanel p, final JFrame f, final WorldState w)
     {
-        Boolean justContinue = Boolean.valueOf(true);
-        Boolean postScene = Boolean.valueOf(false);
+        Boolean justContinue = true;
+        Boolean postScene = false;
         int vignette = -1;
         if(!w.isTutorial() && !w.loopComplete)
             vignette = w.chooseVignette();
@@ -8828,7 +8828,7 @@ public class Project extends JFrame
         for(int i = 0; i < 3; i++)
             if(w.getCast()[i] != null)
             {
-                w.getCast()[i].visited = Boolean.valueOf(false);
+                w.getCast()[i].visited = false;
                 if(w.getCast()[i].morality < 34 && w.getCast()[i].impregnated)
                 {
                     for(int j = 0; j < 3; j++)
@@ -8927,7 +8927,7 @@ public class Project extends JFrame
         } else
         if(!w.getCast()[0].isIntroduced())
         {
-            justContinue = Boolean.valueOf(false);
+            justContinue = false;
             w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\n").toString());
             w.getCast()[0].printIntro(t, w);
         } else
@@ -8935,8 +8935,8 @@ public class Project extends JFrame
         {
             if(!w.getCast()[1].isIntroduced())
             {
-                justContinue = Boolean.valueOf(false);
-                postScene = Boolean.valueOf(true);
+                justContinue = false;
+                postScene = true;
                 w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\n").toString());
                 w.getCast()[0].firstMeeting(t, w, w.getCast()[1]);
                 p.removeAll();
@@ -8969,8 +8969,8 @@ public class Project extends JFrame
             {
                 if(!w.getCast()[2].isIntroduced())
                 {
-                    justContinue = Boolean.valueOf(false);
-                    postScene = Boolean.valueOf(true);
+                    justContinue = false;
+                    postScene = true;
                     w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\n").toString());
                     w.getCast()[2].firstTrio(t, w, w.getCast()[0], w.getCast()[1]);
                     p.removeAll();
@@ -9003,8 +9003,8 @@ public class Project extends JFrame
                     JButton lastContinue = new JButton("Continue");
                     if(w.getDay() == 15 - w.eventOffset && !w.loopComplete)
                     {
-                        justContinue = Boolean.valueOf(false);
-                        postScene = Boolean.valueOf(true);
+                        justContinue = false;
+                        postScene = true;
                         if(w.getBreaks().length == 0)
                             InterviewChain(t, p, f, w);
                         else
@@ -9018,8 +9018,8 @@ public class Project extends JFrame
                     } else
                     if(w.getDay() == 30 - w.eventOffset * 2 && !w.loopComplete)
                     {
-                        justContinue = Boolean.valueOf(false);
-                        postScene = Boolean.valueOf(true);
+                        justContinue = false;
+                        postScene = true;
                         if(w.getBreaks().length == 0)
                             VacationChain(t, p, f, w);
                         else
@@ -9033,8 +9033,8 @@ public class Project extends JFrame
                     } else
                     if(w.getDay() == 45 - w.eventOffset * 3 && !w.loopComplete)
                     {
-                        justContinue = Boolean.valueOf(false);
-                        postScene = Boolean.valueOf(true);
+                        justContinue = false;
+                        postScene = true;
                         if(w.getBreaks().length == 0)
                             DeploymentChain(t, p, f, w);
                         else
@@ -9048,7 +9048,7 @@ public class Project extends JFrame
                     } else
                     if(chosenVignette >= 0 && w.getBreaks().length == 0)
                     {
-                        justContinue = Boolean.valueOf(false);
+                        justContinue = false;
                         if(w.getBreaks().length == 0)
                             w.showVignette(t, chosenVignette);
                         else
@@ -9072,8 +9072,8 @@ public class Project extends JFrame
                     if(w.getBreaks().length > 0)
                     {
                         if(w.getBreaks().length > 1)
-                            postScene = Boolean.valueOf(true);
-                        justContinue = Boolean.valueOf(false);
+                            postScene = true;
+                        justContinue = false;
                         SortBreaks(w);
                         HandleBreaks(t, p, f, w, lastContinue);
                     }
@@ -9081,13 +9081,13 @@ public class Project extends JFrame
             } else
             if(chosenVignette >= 0)
             {
-                justContinue = Boolean.valueOf(false);
+                justContinue = false;
                 w.showVignette(t, chosenVignette);
             }
         } else
         if(chosenVignette >= 0)
         {
-            justContinue = Boolean.valueOf(false);
+            justContinue = false;
             w.showVignette(t, chosenVignette);
         }
         if(w.isTutorial())
@@ -9609,10 +9609,10 @@ public class Project extends JFrame
         for(int i = 0; i < 3; i++)
             if(w.getCast()[i] != null)
                 if(w.getCast()[i].temptReq < 0x186a0L)
-                    w.getCast()[i].pastTempted = Boolean.valueOf(true);
+                    w.getCast()[i].pastTempted = true;
                 else
                 if(w.getCast()[i].dissociationReq < 10)
-                    w.getCast()[i].pastDissociated = Boolean.valueOf(true);
+                    w.getCast()[i].pastDissociated = true;
 
         Forsaken exhaustedTest[] = new Forsaken[0];
         if(w.usedForsaken != null)
@@ -9672,7 +9672,7 @@ public class Project extends JFrame
             long pain = w.getCast()[i].getTotalPAIN() / divisor;
             long sham = w.getCast()[i].getTotalSHAM() / divisor;
             long angst = w.getCast()[i].getANGST() / divisor;
-            Boolean divided = Boolean.valueOf(true);
+            Boolean divided = true;
             if(fear == 0L && disg == 0L && pain == 0L && sham == 0L)
             {
                 fear = w.getCast()[i].getTotalFEAR();
@@ -9680,7 +9680,7 @@ public class Project extends JFrame
                 pain = w.getCast()[i].getTotalPAIN();
                 sham = w.getCast()[i].getTotalSHAM();
                 angst *= divisor;
-                divided = Boolean.valueOf(false);
+                divided = false;
             }
             actionWeights[i][0] = Long.valueOf(150L);
             actionWeights[i][1] = Long.valueOf(50L + (fear * 100L) / (long)(100 + w.getCast()[i].getMorality()));
@@ -9782,8 +9782,8 @@ public class Project extends JFrame
             {
                 actionWeights[i][22] = Long.valueOf(0L);
             }
-            w.getCast()[i].betraying = Boolean.valueOf(false);
-            w.getCast()[i].dissociated = Boolean.valueOf(false);
+            w.getCast()[i].betraying = false;
+            w.getCast()[i].dissociated = false;
             long highestWeight = 0L;
             for(int j = 0; j < actionWeights[i].length; j++)
                 if(actionWeights[i][j].compareTo(Long.valueOf(highestWeight)) > 0)
@@ -9832,9 +9832,9 @@ public class Project extends JFrame
 
         }
 
-        for(Boolean sorted = Boolean.valueOf(false); !sorted;)
+        for(Boolean sorted = false; !sorted;)
         {
-            sorted = Boolean.valueOf(true);
+            sorted = true;
             for(int i = 0; i < totalActions - 1; i++)
                 if(totalWeights[i] < totalWeights[i + 1])
                 {
@@ -9844,32 +9844,32 @@ public class Project extends JFrame
                     int storageTwo = testOrder[i];
                     testOrder[i] = testOrder[i + 1];
                     testOrder[i + 1] = storageTwo;
-                    sorted = Boolean.valueOf(false);
+                    sorted = false;
                 }
 
         }
 
-        Boolean doubleFound = Boolean.valueOf(false);
+        Boolean doubleFound = false;
         for(int i = 0; i < totalActions; i++)
         {
             int matches = 0;
             Boolean matching[] = {
-                Boolean.valueOf(false), Boolean.valueOf(false), Boolean.valueOf(false)
+                false, false, false
             };
             if(w.getCast()[0] != null && combinedWeights[0][testOrder[i]] > actionWeights[0][chosenAction[0]].longValue())
             {
                 matches++;
-                matching[0] = Boolean.valueOf(true);
+                matching[0] = true;
             }
             if(w.getCast()[1] != null && combinedWeights[1][testOrder[i]] > actionWeights[1][chosenAction[1]].longValue())
             {
                 matches++;
-                matching[1] = Boolean.valueOf(true);
+                matching[1] = true;
             }
             if(w.getCast()[2] != null && combinedWeights[2][testOrder[i]] > actionWeights[2][chosenAction[2]].longValue())
             {
                 matches++;
-                matching[2] = Boolean.valueOf(true);
+                matching[2] = true;
             }
             if(matches > 2)
             {
@@ -9884,14 +9884,14 @@ public class Project extends JFrame
                     if(matching[j])
                         chosenAction[j] = testOrder[i];
 
-                doubleFound = Boolean.valueOf(true);
+                doubleFound = true;
             }
         }
 
-        Boolean singleAction = Boolean.valueOf(true);
+        Boolean singleAction = true;
         if(w.loopComplete)
         {
-            singleAction = Boolean.valueOf(false);
+            singleAction = false;
             if(w.getHarem().length > 0)
                 ForsakenDowntime(t, p, f, w, w.save, exhausted);
             else
@@ -9905,7 +9905,7 @@ public class Project extends JFrame
             w.getCast()[0].DoubleDowntime(t, p, f, w, w.getCast()[1], chosenAction[0]);
             if(w.getCast()[2] != null)
             {
-                singleAction = Boolean.valueOf(false);
+                singleAction = false;
                 p.removeAll();
                 JButton Continue = new JButton("Continue");
                 Continue.addActionListener(new ActionListener() {
@@ -9939,7 +9939,7 @@ public class Project extends JFrame
         if(chosenAction[0] == chosenAction[2])
         {
             w.getCast()[0].DoubleDowntime(t, p, f, w, w.getCast()[2], chosenAction[0]);
-            singleAction = Boolean.valueOf(false);
+            singleAction = false;
             p.removeAll();
             JButton Continue = new JButton("Continue");
             Continue.addActionListener(new ActionListener() {
@@ -9972,7 +9972,7 @@ public class Project extends JFrame
         if(chosenAction[1] == chosenAction[2] && chosenAction[1] >= 0)
         {
             w.getCast()[0].SingleDowntime(t, p, f, w, chosenAction[0]);
-            singleAction = Boolean.valueOf(false);
+            singleAction = false;
             p.removeAll();
             JButton Continue = new JButton("Continue");
             Continue.addActionListener(new ActionListener() {
@@ -10006,7 +10006,7 @@ public class Project extends JFrame
             w.getCast()[0].SingleDowntime(t, p, f, w, chosenAction[0]);
             if(w.getCast()[1] != null)
             {
-                singleAction = Boolean.valueOf(false);
+                singleAction = false;
                 p.removeAll();
                 JButton Continue = new JButton("Continue");
                 Continue.addActionListener(new ActionListener() {
@@ -10097,12 +10097,12 @@ public class Project extends JFrame
             if(w.getCast()[i] != null)
             {
                 if(w.getCast()[i].temptReq < 0x186a0L)
-                    w.getCast()[i].pastTempted = Boolean.valueOf(true);
+                    w.getCast()[i].pastTempted = true;
                 if(w.getCast()[i].dissociationReq < 10)
-                    w.getCast()[i].pastDissociated = Boolean.valueOf(true);
+                    w.getCast()[i].pastDissociated = true;
             }
 
-        w.active = Boolean.valueOf(true);
+        w.active = true;
         String path = Project.class.getProtectionDomain().getCodeSource().getLocation().getPath();
         String fileName = "";
         for(int i = path.length() - 1; i >= 0; i--)
@@ -10170,18 +10170,18 @@ public class Project extends JFrame
             String nameDisplay[] = new String[5];
             nameDisplay[3] = w.usedForsaken.mainName;
             if(w.usedForsaken.flavorObedience() < 20)
-                changePortrait(w.usedForsaken.gender, w.usedForsaken.type, Boolean.valueOf(true), Boolean.valueOf(true), w, nameDisplay, 3, Emotion.ANGER, Emotion.NEUTRAL);
+                changePortrait(w.usedForsaken.gender, w.usedForsaken.type, true, true, w, nameDisplay, 3, Emotion.ANGER, Emotion.NEUTRAL);
             else
             if(w.usedForsaken.flavorObedience() < 40)
-                changePortrait(w.usedForsaken.gender, w.usedForsaken.type, Boolean.valueOf(true), Boolean.valueOf(true), w, nameDisplay, 3, Emotion.ANGER, Emotion.SHAME);
+                changePortrait(w.usedForsaken.gender, w.usedForsaken.type, true, true, w, nameDisplay, 3, Emotion.ANGER, Emotion.SHAME);
             else
             if(w.usedForsaken.flavorObedience() < 61)
-                changePortrait(w.usedForsaken.gender, w.usedForsaken.type, Boolean.valueOf(true), Boolean.valueOf(true), w, nameDisplay, 3, Emotion.FEAR, Emotion.SHAME);
+                changePortrait(w.usedForsaken.gender, w.usedForsaken.type, true, true, w, nameDisplay, 3, Emotion.FEAR, Emotion.SHAME);
             else
             if(w.usedForsaken.flavorObedience() < 81)
-                changePortrait(w.usedForsaken.gender, w.usedForsaken.type, Boolean.valueOf(true), Boolean.valueOf(true), w, nameDisplay, 3, Emotion.FOCUS, Emotion.NEUTRAL);
+                changePortrait(w.usedForsaken.gender, w.usedForsaken.type, true, true, w, nameDisplay, 3, Emotion.FOCUS, Emotion.NEUTRAL);
             else
-                changePortrait(w.usedForsaken.gender, w.usedForsaken.type, Boolean.valueOf(true), Boolean.valueOf(true), w, nameDisplay, 3, Emotion.JOY, Emotion.FOCUS);
+                changePortrait(w.usedForsaken.gender, w.usedForsaken.type, true, true, w, nameDisplay, 3, Emotion.JOY, Emotion.FOCUS);
         }
         w.append(t, (new StringBuilder("Day ")).append(w.getDay()).toString());
         if(w.clampPercent != 100)
@@ -10248,13 +10248,13 @@ public class Project extends JFrame
         for(int i = 0; i < w.getTechs().length && !w.loopComplete; i++)
             if(!w.getTechs()[i].isOwned())
             {
-                Boolean shown = Boolean.valueOf(false);
+                Boolean shown = false;
                 for(int j = 0; j < w.getTechs()[i].getPrereqs().length; j++)
                     if(w.getTechs()[i].getPrereqs()[j].isOwned())
-                        shown = Boolean.valueOf(true);
+                        shown = true;
 
                 if(w.getTechs()[i].getPrereqs().length == 0)
-                    shown = Boolean.valueOf(true);
+                    shown = true;
                 if(shown)
                 {
                     w.append(t, "\n\n");
@@ -10388,7 +10388,7 @@ public class Project extends JFrame
                     @Override
                     public void actionPerformed(ActionEvent e)
                     {
-                        Project.Data(t, p, f, w, "newsave", 0, Boolean.valueOf(true));
+                        Project.Data(t, p, f, w, "newsave", 0, true);
                     }
                 });
                 p.add(NewSave);
@@ -10397,7 +10397,7 @@ public class Project extends JFrame
                     @Override
                     public void actionPerformed(ActionEvent e)
                     {
-                        Project.Data(t, p, f, w, "overwrite", 0, Boolean.valueOf(true));
+                        Project.Data(t, p, f, w, "overwrite", 0, true);
                     }
                 });
                 p.add(Overwrite);
@@ -10406,7 +10406,7 @@ public class Project extends JFrame
                     @Override
                     public void actionPerformed(ActionEvent e)
                     {
-                        Project.Data(t, p, f, w, "load", 0, Boolean.valueOf(true));
+                        Project.Data(t, p, f, w, "load", 0, true);
                     }
                 });
                 p.add(Load);
@@ -10415,7 +10415,7 @@ public class Project extends JFrame
                     @Override
                     public void actionPerformed(ActionEvent e)
                     {
-                        Project.Data(t, p, f, w, "delete", 0, Boolean.valueOf(true));
+                        Project.Data(t, p, f, w, "delete", 0, true);
                     }
                 });
                 p.add(Delete);
@@ -10424,7 +10424,7 @@ public class Project extends JFrame
                     @Override
                     public void actionPerformed(ActionEvent e)
                     {
-                        Project.Data(t, p, f, w, "import", 0, Boolean.valueOf(true));
+                        Project.Data(t, p, f, w, "import", 0, true);
                     }
                 });
                 p.add(Import);
@@ -10433,7 +10433,7 @@ public class Project extends JFrame
                     @Override
                     public void actionPerformed(ActionEvent e)
                     {
-                        Project.Data(t, p, f, w, "export", 0, Boolean.valueOf(true));
+                        Project.Data(t, p, f, w, "export", 0, true);
                     }
                 });
                 p.add(Export);
@@ -10534,12 +10534,12 @@ public class Project extends JFrame
                 w.nextCities[i].copySettings(t, w);
                 w.nextCities[i].copyToggles(w);
                 w.nextCities[i].setGenders(w.nextCities[i].getGenderBalance());
-                w.nextCities[i].active = Boolean.valueOf(true);
-                w.nextCities[i].campaign = Boolean.valueOf(true);
+                w.nextCities[i].active = true;
+                w.nextCities[i].campaign = true;
                 w.nextCities[i].loops = w.loops + 1;
                 w.nextCities[i].cityName = w.nextCities[i].getCityName(w.loops * 2 + i + 1);
                 w.nextCities[i].earlyCheat = w.earlyCheat;
-                w.nextCities[i].hardMode = Boolean.valueOf(false);
+                w.nextCities[i].hardMode = false;
                 w.nextCities[i].eventOffset = 0;
                 w.nextCities[i].clampStart = 11;
                 w.nextCities[i].clampPercent = 100;
@@ -10618,17 +10618,17 @@ public class Project extends JFrame
                         higher = (higher * 10) / 11;
                         differences++;
                     }
-                    Boolean sameElites = Boolean.valueOf(true);
-                    Boolean noElites = Boolean.valueOf(true);
+                    Boolean sameElites = true;
+                    Boolean noElites = true;
                     for(int j = 0; j < 3; j++)
                     {
                         if(w.nextCities[0].types[j] != w.nextCities[1].types[j] && (w.nextCities[0].types[j] == null || w.nextCities[1].types[j] == null))
                         {
-                            sameElites = Boolean.valueOf(false);
+                            sameElites = false;
                             differences += 11;
                         }
                         if(w.nextCities[0].types[j] != null || w.nextCities[1].types[j] != null)
-                            noElites = Boolean.valueOf(false);
+                            noElites = false;
                     }
 
                     if(differences < requirement || sameElites && !noElites)
@@ -10952,7 +10952,7 @@ public class Project extends JFrame
                             Project.clearPortraits();
                             String as[] = new String[5];
                             as[0] = w.getCast()[thisChosen].mainName;
-                            Project.changePortrait(w.getCast()[thisChosen].convertGender(), w.getCast()[thisChosen].type, Boolean.valueOf(false), Boolean.valueOf(false), w, as, 0, Emotion.NEUTRAL, Emotion.NEUTRAL);
+                            Project.changePortrait(w.getCast()[thisChosen].convertGender(), w.getCast()[thisChosen].type, false, false, w, as, 0, Emotion.NEUTRAL, Emotion.NEUTRAL);
                             w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\n").toString());
                             w.getCast()[thisChosen].printIntro(t, w);
                             w.getCast()[thisChosen].printProfile(t, p, f, w);
@@ -11412,7 +11412,7 @@ public class Project extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 for(int i = 0; i < w.getTechs().length - 1; i++)
-                    w.getTechs()[i].owned = Boolean.valueOf(true);
+                    w.getTechs()[i].owned = true;
 
                 Project.Cheat(t, p, f, w);
             }
@@ -11469,10 +11469,10 @@ public class Project extends JFrame
         final SaveData saveFile = saves;
         if(function.equals("newsave"))
         {
-            Boolean aborted = Boolean.valueOf(false);
+            Boolean aborted = false;
             String newSaveName = JOptionPane.showInputDialog("What would you like to name this save?");
             if(newSaveName == null)
-                aborted = Boolean.valueOf(true);
+                aborted = true;
             else
             if(newSaveName.length() == 0)
             {
@@ -11547,12 +11547,12 @@ public class Project extends JFrame
                 newChosen.generate(newWorld);
                 newWorld.addChosen(newChosen);
                 String newSaveName = JOptionPane.showInputDialog("What would you like to name the exported file?");
-                Boolean blankName = Boolean.valueOf(false);
+                Boolean blankName = false;
                 if(newSaveName == null)
-                    blankName = Boolean.valueOf(true);
+                    blankName = true;
                 else
                 if(newSaveName.length() == 0)
-                    blankName = Boolean.valueOf(true);
+                    blankName = true;
                 if(blankName)
                 {
                     DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
@@ -11876,14 +11876,14 @@ public class Project extends JFrame
                                         copies[j].lastLoop = 0;
                                         copies[j].originalGender = copies[j].gender;
                                         if(copies[j].morality > 66)
-                                            copies[j].bonusHATE = Boolean.valueOf(true);
+                                            copies[j].bonusHATE = true;
                                         if(copies[j].innocence > 66)
-                                            copies[j].bonusPLEA = Boolean.valueOf(true);
+                                            copies[j].bonusPLEA = true;
                                         if(copies[j].confidence > 66)
-                                            copies[j].bonusINJU = Boolean.valueOf(true);
+                                            copies[j].bonusINJU = true;
                                         if(copies[j].dignity > 66)
-                                            copies[j].bonusEXPO = Boolean.valueOf(true);
-                                        copies[j].introduced = Boolean.valueOf(false);
+                                            copies[j].bonusEXPO = true;
+                                        copies[j].introduced = false;
                                         copies[j].resetDistortions();
                                         copies[j].kills = new Chosen[0];
                                         copies[j].killRelationships = new int[0];
@@ -11974,7 +11974,7 @@ public class Project extends JFrame
                     {
                         Boolean enabled[] = new Boolean[w.save.customRoster.length];
                         for(int i = 0; i < enabled.length; i++)
-                            enabled[i] = Boolean.valueOf(true);
+                            enabled[i] = true;
 
                         Project.CampaignMenu(t, p, f, w, enabled);
                     } else
@@ -12058,14 +12058,14 @@ public class Project extends JFrame
             if(w.getBodyStatus()[6])
                 suppressorsUsed++;
             final Boolean defilerUsed = Boolean.valueOf(w.getBodyStatus()[11] || w.getBodyStatus()[12] || w.getBodyStatus()[13] || w.getBodyStatus()[14]);
-            Boolean defilerKnown = Boolean.valueOf(false);
+            Boolean defilerKnown = false;
             if(w.getTechs()[22].isOwned() || w.getTechs()[23].isOwned() || w.getTechs()[24].isOwned() || w.getTechs()[25].isOwned())
-                defilerKnown = Boolean.valueOf(true);
+                defilerKnown = true;
             final int suppressorsUsedFinal = suppressorsUsed;
             final Boolean punisherUsed = Boolean.valueOf(w.getBodyStatus()[19] || w.getBodyStatus()[20] || w.getBodyStatus()[21] || w.getBodyStatus()[22]);
-            Boolean punisherKnown = Boolean.valueOf(false);
+            Boolean punisherKnown = false;
             if(w.getTechs()[34].isOwned() || w.getTechs()[35].isOwned() || w.getTechs()[36].isOwned() || w.getTechs()[37].isOwned())
-                punisherKnown = Boolean.valueOf(true);
+                punisherKnown = true;
             if((!punisherUsed || w.getTechs()[47].isOwned() && (w.getEvilEnergy() >= 66 || defilerUsed)) && (suppressorsKnown > 0 && suppressorsUsed == 0 && (!defilerUsed || w.getTechs()[33].isOwned() && w.getEvilEnergy() >= 10 || punisherUsed) || suppressorsKnown > 1 && suppressorsUsed == 1 && w.getEvilEnergy() >= 5 && w.getTechs()[21].isOwned() && !defilerUsed && !punisherUsed))
             {
                 JButton Suppressor = new JButton("Suppressor Upgrades");
@@ -12533,10 +12533,10 @@ public class Project extends JFrame
 
     public static void advanceDowntimeAction(JPanel p, WorldState w, int action)
     {
-        Boolean actionMatches = Boolean.valueOf(true);
+        Boolean actionMatches = true;
         if(w.getActions().length > w.getCurrentAction() && w.getActions()[w.getCurrentAction()] != action)
         {
-            actionMatches = Boolean.valueOf(false);
+            actionMatches = false;
             w.truncateCommentary(w.getCurrentAction());
         }
         if(w.writePossible())
@@ -12692,25 +12692,25 @@ public class Project extends JFrame
                         if(w.getBodyStatus()[10])
                         {
                             generated = (new StringBuilder(String.valueOf(generated))).append("Equip it with the Suppressors ").toString();
-                            Boolean first = Boolean.valueOf(false);
+                            Boolean first = false;
                             if(w.getBodyStatus()[3])
                             {
                                 generated = (new StringBuilder(String.valueOf(generated))).append("Hunger").toString();
-                                first = Boolean.valueOf(true);
+                                first = true;
                             }
                             if(w.getBodyStatus()[4])
                             {
                                 if(first)
                                     generated = (new StringBuilder(String.valueOf(generated))).append(" and ").toString();
                                 generated = (new StringBuilder(String.valueOf(generated))).append("Lust").toString();
-                                first = Boolean.valueOf(true);
+                                first = true;
                             }
                             if(w.getBodyStatus()[5])
                             {
                                 if(first)
                                     generated = (new StringBuilder(String.valueOf(generated))).append(" and ").toString();
                                 generated = (new StringBuilder(String.valueOf(generated))).append("Anger").toString();
-                                first = Boolean.valueOf(true);
+                                first = true;
                             }
                             if(w.getBodyStatus()[6])
                                 generated = (new StringBuilder(String.valueOf(generated))).append(" and Mania").toString();
@@ -12807,7 +12807,7 @@ public class Project extends JFrame
     public static void ConfirmBattle(final JTextPane t, final JPanel p, final JFrame f, final WorldState w, final Chosen c)
     {
         p.removeAll();
-        Boolean immediateAction = Boolean.valueOf(false);
+        Boolean immediateAction = false;
         w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\n").toString());
         if(w.getTechs()[0].isOwned())
         {
@@ -12822,14 +12822,14 @@ public class Project extends JFrame
             if(w.upgradedCommander() || !w.getTechs()[31].isOwned() || w.getBodyStatus()[2])
                 w.printCommanderSummary(t, c);
             else
-                immediateAction = Boolean.valueOf(true);
+                immediateAction = true;
         } else
         if(w.usedForsaken != null)
         {
             int actualCost = w.usedForsaken.motivationCost();
             if(w.usedForsaken.isFormerFriend(w.getCast()[0]) || w.usedForsaken.isFormerFriend(w.getCast()[1]) || w.usedForsaken.isFormerFriend(w.getCast()[2]))
                 actualCost *= 2;
-            w.append(t, (new StringBuilder("Commanding Forsaken: ")).append(w.usedForsaken.mainName).append("\nStamina: ").append(w.usedForsaken.stamina / 10).append(".").append(w.usedForsaken.stamina % 10).append("%\nMotivation: ").append(w.usedForsaken.motivation / 10).append(".").append(w.usedForsaken.motivation % 10).append("%\nCost: 20% Stamina, ").append(actualCost / 10).append(".").append(actualCost % 10).append("% Motivation, ").append(w.usedForsaken.EECost()).append(" EE\n").append(w.usedForsaken.describeCombatStyle(w, Boolean.valueOf(false))).append("\nReputation Strength: ").append(200 - w.usedForsaken.disgrace * 2).append("%\nTarget Compatibilities:").toString());
+            w.append(t, (new StringBuilder("Commanding Forsaken: ")).append(w.usedForsaken.mainName).append("\nStamina: ").append(w.usedForsaken.stamina / 10).append(".").append(w.usedForsaken.stamina % 10).append("%\nMotivation: ").append(w.usedForsaken.motivation / 10).append(".").append(w.usedForsaken.motivation % 10).append("%\nCost: 20% Stamina, ").append(actualCost / 10).append(".").append(actualCost % 10).append("% Motivation, ").append(w.usedForsaken.EECost()).append(" EE\n").append(w.usedForsaken.describeCombatStyle(w, false)).append("\nReputation Strength: ").append(200 - w.usedForsaken.disgrace * 2).append("%\nTarget Compatibilities:").toString());
             for(int j = 0; j < 3; j++)
                 if(w.getCast()[j] != null)
                 {
@@ -12901,8 +12901,8 @@ public class Project extends JFrame
                             {
                                 if(w.usedForsaken != null || w.recordedCommanders.length < w.day - 1)
                                 {
-                                    w.commentaryRead = Boolean.valueOf(false);
-                                    w.commentaryWrite = Boolean.valueOf(false);
+                                    w.commentaryRead = false;
+                                    w.commentaryWrite = false;
                                 }
                                 if(w.getDay() > 1 && !w.isCheater() && (w.commentaryWrite || w.commentaryRead))
                                     w.archiveCommander(w.getDay());
@@ -12951,8 +12951,8 @@ public class Project extends JFrame
                 {
                     if(w.usedForsaken != null || w.recordedCommanders.length < w.day - 1)
                     {
-                        w.commentaryRead = Boolean.valueOf(false);
-                        w.commentaryWrite = Boolean.valueOf(false);
+                        w.commentaryRead = false;
+                        w.commentaryWrite = false;
                     }
                     if(w.getDay() > 1 && !w.isCheater() && (w.commentaryRead || w.commentaryWrite))
                         w.archiveCommander(w.getDay());
@@ -13124,17 +13124,17 @@ public class Project extends JFrame
             as[0] = high.mainName;
             as[1] = mid.mainName;
             as[2] = low.mainName;
-            changePortrait(high.convertGender(), high.type, Boolean.valueOf(false), Boolean.valueOf(false), w, as, 0, Emotion.FOCUS, Emotion.FOCUS);
+            changePortrait(high.convertGender(), high.type, false, false, w, as, 0, Emotion.FOCUS, Emotion.FOCUS);
             as1 = new String[5];
             as1[0] = high.mainName;
             as1[1] = mid.mainName;
             as1[2] = low.mainName;
-            changePortrait(mid.convertGender(), mid.type, Boolean.valueOf(false), Boolean.valueOf(false), w, as1, 1, Emotion.FOCUS, Emotion.FOCUS);
+            changePortrait(mid.convertGender(), mid.type, false, false, w, as1, 1, Emotion.FOCUS, Emotion.FOCUS);
             as2 = new String[5];
             as2[0] = high.mainName;
             as2[1] = mid.mainName;
             as2[2] = low.mainName;
-            changePortrait(low.convertGender(), low.type, Boolean.valueOf(false), Boolean.valueOf(false), w, as2, 2, Emotion.FOCUS, Emotion.FOCUS);
+            changePortrait(low.convertGender(), low.type, false, false, w, as2, 2, Emotion.FOCUS, Emotion.FOCUS);
             if(w.getRelationship(high.getNumber(), mid.getNumber()) >= 0)
             {
                 if(w.getRelationship(high.getNumber(), low.getNumber()) >= 0)
@@ -13151,7 +13151,7 @@ public class Project extends JFrame
                         as3[0] = high.mainName;
                         as3[1] = mid.mainName;
                         as3[2] = low.mainName;
-                        changePortrait(mid.convertGender(), mid.type, Boolean.valueOf(false), Boolean.valueOf(false), w, as3, 1, Emotion.ANGER, Emotion.ANGER);
+                        changePortrait(mid.convertGender(), mid.type, false, false, w, as3, 1, Emotion.ANGER, Emotion.ANGER);
                         mid.say(t, (new StringBuilder("I'm ready!  You'd better not screw it up for us, ")).append(low.getMainName()).append("!\"\n\n").toString());
                         low.say(t, (new StringBuilder("\"I-I won't let you down, ")).append(high.getMainName()).append("!").toString());
                     }
@@ -13161,7 +13161,7 @@ public class Project extends JFrame
                     as4[0] = high.mainName;
                     as4[1] = mid.mainName;
                     as4[2] = low.mainName;
-                    changePortrait(high.convertGender(), high.type, Boolean.valueOf(false), Boolean.valueOf(false), w, as4, 0, Emotion.ANGER, Emotion.ANGER);
+                    changePortrait(high.convertGender(), high.type, false, false, w, as4, 0, Emotion.ANGER, Emotion.ANGER);
                     high.say(t, (new StringBuilder("You'd better not screw this up, ")).append(low.getMainName()).append("!\"\n\n").toString());
                     mid.say(t, "\"");
                     if(w.getRelationship(mid.getNumber(), low.getNumber()) >= 0)
@@ -13174,7 +13174,7 @@ public class Project extends JFrame
                         as5[0] = high.mainName;
                         as5[1] = mid.mainName;
                         as5[2] = low.mainName;
-                        changePortrait(low.convertGender(), low.type, Boolean.valueOf(false), Boolean.valueOf(false), w, as5, 2, Emotion.ANGER, Emotion.ANGER);
+                        changePortrait(low.convertGender(), low.type, false, false, w, as5, 2, Emotion.ANGER, Emotion.ANGER);
                         mid.say(t, (new StringBuilder("Don't worry, we can finish this without ")).append(low.himHer()).append(" if we have to!\"\n\n").toString());
                         low.say(t, "\"I-I'm fine, just worry about yourselves!");
                     }
@@ -13185,7 +13185,7 @@ public class Project extends JFrame
                 as6[0] = high.mainName;
                 as6[1] = mid.mainName;
                 as6[2] = low.mainName;
-                changePortrait(high.convertGender(), high.type, Boolean.valueOf(false), Boolean.valueOf(false), w, as6, 0, Emotion.ANGER, Emotion.ANGER);
+                changePortrait(high.convertGender(), high.type, false, false, w, as6, 0, Emotion.ANGER, Emotion.ANGER);
                 if(w.getRelationship(high.getNumber(), low.getNumber()) >= 0)
                 {
                     high.say(t, (new StringBuilder("You'd better not screw this up, ")).append(mid.getMainName()).append("!\"\n\n").toString());
@@ -13193,7 +13193,7 @@ public class Project extends JFrame
                     as7[0] = high.mainName;
                     as7[1] = mid.mainName;
                     as7[2] = low.mainName;
-                    changePortrait(mid.convertGender(), mid.type, Boolean.valueOf(false), Boolean.valueOf(false), w, as7, 1, Emotion.ANGER, Emotion.ANGER);
+                    changePortrait(mid.convertGender(), mid.type, false, false, w, as7, 1, Emotion.ANGER, Emotion.ANGER);
                     mid.say(t, "\"");
                     if(w.getRelationship(mid.getNumber(), low.getNumber()) >= 0)
                     {
@@ -13203,7 +13203,7 @@ public class Project extends JFrame
                         as8[0] = high.mainName;
                         as8[1] = mid.mainName;
                         as8[2] = low.mainName;
-                        changePortrait(low.convertGender(), low.type, Boolean.valueOf(false), Boolean.valueOf(false), w, as8, 2, Emotion.FEAR, Emotion.FEAR);
+                        changePortrait(low.convertGender(), low.type, false, false, w, as8, 2, Emotion.FEAR, Emotion.FEAR);
                     } else
                     {
                         mid.say(t, (new StringBuilder("You know that if anyone's going to screw up here, it's ")).append(low.getMainName()).append("!\"\n\n").toString());
@@ -13243,13 +13243,13 @@ public class Project extends JFrame
             as9 = new String[5];
             as9[0] = first.mainName;
             as9[1] = second.mainName;
-            changePortrait(first.convertGender(), first.type, Boolean.valueOf(false), Boolean.valueOf(false), w, as9, 0, Emotion.FOCUS, Emotion.FOCUS);
+            changePortrait(first.convertGender(), first.type, false, false, w, as9, 0, Emotion.FOCUS, Emotion.FOCUS);
             if(w.getRelationship(first.getNumber(), second.getNumber()) >= 0)
             {
                 as10 = new String[5];
                 as10[0] = first.mainName;
                 as10[1] = second.mainName;
-                changePortrait(second.convertGender(), second.type, Boolean.valueOf(false), Boolean.valueOf(false), w, as10, 1, Emotion.FOCUS, Emotion.FOCUS);
+                changePortrait(second.convertGender(), second.type, false, false, w, as10, 1, Emotion.FOCUS, Emotion.FOCUS);
                 first.say(t, "\n\n\"If we work together, I think we can still stop it!  Back me up!\"\n\n");
                 second.say(t, "\"Got it!  I'm right behind you!\"\n\n");
                 w.append(t, (new StringBuilder(String.valueOf(first.getMainName()))).append(" charges forward, blazing brighter than the sun as ").append(first.heShe()).append(" draws on as much psychic energy as ").append(first.heShe()).append(" can.  ").append(second.getMainName()).append(" has a hand on ").append(first.hisHer()).append(" shoulder, pushing ").append(first.himHer()).append(" forward as they fly together.  The two of them blast through the base of the tower, leaving an enormous hole behind them.  And with its lower structure compromised, the shaft begins to topple to one side.  It lands on the city with a deafening crash, kicking up a huge cloud of debris.  As quickly as that, the Demonic presence over the city lifts.\n\nThe battle is over.  But even though this Demon Lord has been defeated, the scars left on the hearts of the Chosen won't heal so easily.  ").toString());
@@ -13258,7 +13258,7 @@ public class Project extends JFrame
                 as11 = new String[5];
                 as11[0] = first.mainName;
                 as11[1] = second.mainName;
-                changePortrait(second.convertGender(), second.type, Boolean.valueOf(false), Boolean.valueOf(false), w, as11, 1, Emotion.FEAR, Emotion.FEAR);
+                changePortrait(second.convertGender(), second.type, false, false, w, as11, 1, Emotion.FEAR, Emotion.FEAR);
                 first.say(t, "\n\n\"If we're going to take that thing down, we need to go all-out!  Don't hold back, or you'll die!\"\n\n");
                 second.say(t, "\"Huh?  Gaaah!  Ergh... you're... crazy...!\"\n\n");
                 w.append(t, (new StringBuilder(String.valueOf(first.getMainName()))).append(" holds out one palm to shoot a beam of crackling destructive energy directly at ").append(second.getMainName()).append(".  For ").append(second.hisHer()).append(" part, ").append(second.getMainName()).append(" barely reacts in time to intercept the beam with ").append(second.hisHer()).append(" own blast.  The glowing line between ").append(first.getMainName()).append("'s hand and ").append(second.getMainName()).append("'s annihilates everything it touches as the two of them run toward the Demonic spire.  When it cuts into the base of the tower, the opposing energies cause a huge explosion that throws the two Chosen in different directions.  After they've come to their senses, they see the structure beginning to tilt to one side.  It finally topples, throwing up a huge cloud of debris as it lands on the city below.  As quickly as that, the Demonic presence over the city lifts.\n\nThe battle is over.  But even though this Demon Lord has been defeated, the scars left on the hearts of the Chosen won't heal so easily.  ").toString());
@@ -13280,12 +13280,12 @@ public class Project extends JFrame
             escaped[0].say(t, "\n\n\"");
             as12 = new String[5];
             as12[0] = escaped[0].mainName;
-            changePortrait(escaped[0].convertGender(), escaped[0].type, Boolean.valueOf(false), Boolean.valueOf(false), w, as12, 0, Emotion.SHAME, Emotion.SHAME);
+            changePortrait(escaped[0].convertGender(), escaped[0].type, false, false, w, as12, 0, Emotion.SHAME, Emotion.SHAME);
             if(escaped[0].getConfidence() > 66)
             {
                 as13 = new String[5];
                 as13[0] = escaped[0].mainName;
-                changePortrait(escaped[0].convertGender(), escaped[0].type, Boolean.valueOf(false), Boolean.valueOf(false), w, as13, 0, Emotion.STRUGGLE, Emotion.STRUGGLE);
+                changePortrait(escaped[0].convertGender(), escaped[0].type, false, false, w, as13, 0, Emotion.STRUGGLE, Emotion.STRUGGLE);
                 escaped[0].say(t, "No!  I... I should be strong enough...!");
             } else
             if(escaped[0].getConfidence() > 33)
@@ -13408,11 +13408,11 @@ public class Project extends JFrame
 
                 if(!w.isCheater() && w.hardMode)
                     w.scoreSummary(t);
-                w.finalBattle = Boolean.valueOf(false);
-                w.getTechs()[48].owned = Boolean.valueOf(false);
+                w.finalBattle = false;
+                w.getTechs()[48].owned = false;
                 for(int i = 0; i < 3; i++)
                 {
-                    w.getCast()[i].alive = Boolean.valueOf(true);
+                    w.getCast()[i].alive = true;
                     w.getCast()[i].resolve = 100;
                 }
 
@@ -13421,9 +13421,9 @@ public class Project extends JFrame
                 for(int i = 0; i < 3; i++)
                 {
                     w.getCast()[i].addTrauma();
-                    w.getCast()[i].surrounded = Boolean.valueOf(false);
-                    w.getCast()[i].captured = Boolean.valueOf(false);
-                    w.getCast()[i].removeSurround = Boolean.valueOf(false);
+                    w.getCast()[i].surrounded = false;
+                    w.getCast()[i].captured = false;
+                    w.getCast()[i].removeSurround = false;
                 }
 
                 if(forsaken + casualties >= 2 || !w.campaign)
@@ -13450,7 +13450,7 @@ public class Project extends JFrame
                             w.append(t, "Your followers won't be able to establish a foothold in another city right away, so you can take some time to consolidate power here and enjoy your conquest.");
                         else
                             w.append(t, "Now all that remains is to decide where to strike next.");
-                        w.loopComplete = Boolean.valueOf(true);
+                        w.loopComplete = true;
                     } else
                     {
                         w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\nWith your defeat in ").append(w.cityName).append(", the momentum of your advance across the globe has been halted.  However, so long as there is darkness within the human heart, a Demon Lord cannot be truly killed.  Before long, you will rise again.").toString());
@@ -13613,10 +13613,10 @@ public class Project extends JFrame
                             {
                                 for(int k = 0; k < w.getHarem()[j].otherChosen.length; k++)
                                 {
-                                    Boolean alreadyThere = Boolean.valueOf(false);
+                                    Boolean alreadyThere = false;
                                     for(int m = 0; m < w.getHarem()[j].others.length; m++)
                                         if(newForsaken.equals(w.getHarem()[j].others[m]))
-                                            alreadyThere = Boolean.valueOf(true);
+                                            alreadyThere = true;
 
                                     if(!alreadyThere && w.getHarem()[j].otherChosen[k].equals(corrupted[i]))
                                     {
@@ -13778,11 +13778,11 @@ public class Project extends JFrame
         {
             broughtConquered = new Boolean[conquered];
             for(int i = 0; i < conquered; i++)
-                broughtConquered[i] = Boolean.valueOf(true);
+                broughtConquered[i] = true;
 
             broughtSacrificed = new Boolean[sacrificed];
             for(int i = 0; i < sacrificed; i++)
-                broughtSacrificed[i] = Boolean.valueOf(true);
+                broughtSacrificed[i] = true;
 
         } else
         {
@@ -13795,10 +13795,10 @@ public class Project extends JFrame
             w.append(t, "Even though you didn't end the game with any Forsaken, you can still bring with you the ones you disposed of during play.");
         else
             w.append(t, "You can bring your Forsaken with you to use in Single Play mode.");
-        Boolean saveAllConquered = Boolean.valueOf(false);
-        Boolean deleteAllConquered = Boolean.valueOf(false);
-        Boolean saveAllSacrificed = Boolean.valueOf(false);
-        Boolean deleteAllSacrificed = Boolean.valueOf(false);
+        Boolean saveAllConquered = false;
+        Boolean deleteAllConquered = false;
+        Boolean saveAllSacrificed = false;
+        Boolean deleteAllSacrificed = false;
         if(conquered > 0)
         {
             w.append(t, "\n\nCurrent Forsaken\n");
@@ -13808,11 +13808,11 @@ public class Project extends JFrame
                 if(broughtConquered[i])
                 {
                     w.greenAppend(t, "SAVE");
-                    deleteAllConquered = Boolean.valueOf(true);
+                    deleteAllConquered = true;
                 } else
                 {
                     w.redAppend(t, "DELETE");
-                    saveAllConquered = Boolean.valueOf(true);
+                    saveAllConquered = true;
                 }
             }
 
@@ -13826,11 +13826,11 @@ public class Project extends JFrame
                 if(broughtSacrificed[i])
                 {
                     w.greenAppend(t, "SAVE");
-                    deleteAllSacrificed = Boolean.valueOf(true);
+                    deleteAllSacrificed = true;
                 } else
                 {
                     w.redAppend(t, "DELETE");
-                    saveAllSacrificed = Boolean.valueOf(true);
+                    saveAllSacrificed = true;
                 }
             }
 
@@ -13846,7 +13846,7 @@ public class Project extends JFrame
                 {
                     Boolean newSaved[] = new Boolean[conquered];
                     for(int i = 0; i < conquered; i++)
-                        newSaved[i] = Boolean.valueOf(true);
+                        newSaved[i] = true;
 
                     Project.WrapUpCampaign(t, p, f, w, newSaved, sacrificedSetting);
                 }
@@ -13862,7 +13862,7 @@ public class Project extends JFrame
                 {
                     Boolean newSaved[] = new Boolean[conquered];
                     for(int i = 0; i < conquered; i++)
-                        newSaved[i] = Boolean.valueOf(false);
+                        newSaved[i] = false;
 
                     Project.WrapUpCampaign(t, p, f, w, newSaved, sacrificedSetting);
                 }
@@ -13878,7 +13878,7 @@ public class Project extends JFrame
                 {
                     Boolean newSaved[] = new Boolean[sacrificed];
                     for(int i = 0; i < sacrificed; i++)
-                        newSaved[i] = Boolean.valueOf(true);
+                        newSaved[i] = true;
 
                     Project.WrapUpCampaign(t, p, f, w, conqueredSetting, newSaved);
                 }
@@ -13894,7 +13894,7 @@ public class Project extends JFrame
                 {
                     Boolean newSaved[] = new Boolean[sacrificed];
                     for(int i = 0; i < sacrificed; i++)
-                        newSaved[i] = Boolean.valueOf(false);
+                        newSaved[i] = false;
 
                     Project.WrapUpCampaign(t, p, f, w, conqueredSetting, newSaved);
                 }
@@ -14009,7 +14009,7 @@ public class Project extends JFrame
                 @Override
                 public void actionPerformed(ActionEvent e)
                 {
-                    broughtConquered[position] = Boolean.valueOf(true);
+                    broughtConquered[position] = true;
                     Project.DecideKeptForsaken(t, p, f, w, broughtConquered, broughtSacrificed, position + 1);
                 }
             });
@@ -14019,7 +14019,7 @@ public class Project extends JFrame
                 @Override
                 public void actionPerformed(ActionEvent e)
                 {
-                    broughtConquered[position] = Boolean.valueOf(false);
+                    broughtConquered[position] = false;
                     Project.DecideKeptForsaken(t, p, f, w, broughtConquered, broughtSacrificed, position + 1);
                 }
             });
@@ -14033,7 +14033,7 @@ public class Project extends JFrame
                 @Override
                 public void actionPerformed(ActionEvent e)
                 {
-                    broughtSacrificed[position - broughtConquered.length] = Boolean.valueOf(true);
+                    broughtSacrificed[position - broughtConquered.length] = true;
                     Project.DecideKeptForsaken(t, p, f, w, broughtConquered, broughtSacrificed, position + 1);
                 }
             });
@@ -14043,7 +14043,7 @@ public class Project extends JFrame
                 @Override
                 public void actionPerformed(ActionEvent e)
                 {
-                    broughtSacrificed[position - broughtConquered.length] = Boolean.valueOf(false);
+                    broughtSacrificed[position - broughtConquered.length] = false;
                     Project.DecideKeptForsaken(t, p, f, w, broughtConquered, broughtSacrificed, position + 1);
                 }
             });
@@ -14062,15 +14062,15 @@ public class Project extends JFrame
             w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\n").toString());
         for(int i = 0; i < w.getHarem().length; i++)
         {
-            w.getHarem()[i].visited = Boolean.valueOf(false);
+            w.getHarem()[i].visited = false;
             if(w.getHarem()[i].others != null)
             {
                 for(int j = 0; j < w.getHarem()[i].others.length; j++)
                 {
-                    Boolean present = Boolean.valueOf(false);
+                    Boolean present = false;
                     for(int k = 0; k < w.getHarem().length; k++)
                         if(w.getHarem()[k].equals(w.getHarem()[i].others[j]))
-                            present = Boolean.valueOf(true);
+                            present = true;
 
                     if(present)
                         w.getHarem()[i].troublemaker[j] = (w.getHarem()[i].troublemaker[j] * 9) / 10;
@@ -14088,10 +14088,10 @@ public class Project extends JFrame
             int numberFound = 0;
             for(int i = 0; i < w.getHarem().length; i++)
             {
-                Boolean notExhausted = Boolean.valueOf(true);
+                Boolean notExhausted = true;
                 for(int j = 0; j < exhausted.length; j++)
                     if(w.getHarem()[i].equals(exhausted[j]))
-                        notExhausted = Boolean.valueOf(false);
+                        notExhausted = false;
 
                 if(notExhausted)
                 {
@@ -14135,11 +14135,11 @@ public class Project extends JFrame
                         w.getHarem()[i].motivation = 0;
                     if(w.getHarem()[i].others != null)
                     {
-                        Boolean found = Boolean.valueOf(false);
+                        Boolean found = false;
                         for(int j = 0; j < w.getHarem()[i].others.length; j++)
                             if(w.getHarem()[i].others[j].equals(tantruming))
                             {
-                                found = Boolean.valueOf(true);
+                                found = true;
                                 w.getHarem()[i].troublemaker[j] += offense;
                             }
 
