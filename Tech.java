@@ -522,7 +522,7 @@ public class Tech implements Serializable {
 			prereqs = (new Tech[] {
 				w.getTechs()[28], w.getTechs()[33], w.getTechs()[34]
 			});
-			description = (new StringBuilder("Perfects your telepathic abilities, allowing you to influence the Chosen by showing them frightening visions of what could be.  This doubles the damage of the Threaten action.  Additionally, during the final battle, the Threaten action will decrease the target's Resolve by a base value of ")).append(w.threatenResolve()).append("% per ally suffering from Demonic impregnation.  The decrease is multiplied by the target's FEAR level.").toString();
+			description = "Perfects your telepathic abilities, allowing you to influence the Chosen by showing them frightening visions of what could be.  This doubles the damage of the Threaten action.  Additionally, during the final battle, the Threaten action will decrease the target's Resolve by a base value of " + w.threatenResolve() + "% per ally suffering from Demonic impregnation.  The decrease is multiplied by the target's FEAR level.";
 		} else if(index == 43)
 		{
 			name = "Slime+";
@@ -531,18 +531,18 @@ public class Tech implements Serializable {
 			prereqs = (new Tech[] {
 				w.getTechs()[29], w.getTechs()[32], w.getTechs()[35]
 			});
-			description = (new StringBuilder("Perfects the potency of your slime, allowing it to pull the Chosen into the Demonic hivemind.  This doubles the damage of the Slime action.  Additionally, during the final battle, the Slime action will decrease the Resolve of Hypnotized targets by ")).append(w.slimeResolve()).append("%.  The decrease is multiplied by the target's DISG level.").toString();
+			description = "Perfects the potency of your slime, allowing it to pull the Chosen into the Demonic hivemind.  This doubles the damage of the Slime action.  Additionally, during the final battle, the Slime action will decrease the Resolve of Hypnotized targets by " + w.slimeResolve() + "%.  The decrease is multiplied by the target's DISG level.";
 		} else if(index == 44) {
 			String actionName = "Attack";
 			if(w.tickle())
 				actionName = "Poke";
-			name = (new StringBuilder(actionName)).append("+").toString();
+			name = actionName + "+";
 			prereqsRequired = 3;
 			cost = 100;
 			prereqs = (new Tech[] {
 				w.getTechs()[30], w.getTechs()[33], w.getTechs()[36]
 			});
-			description = (new StringBuilder("Perfects the combat ability of your Demons, allowing them to torture the Chosen with extreme precision.  This doubles the damage of the ")).append(actionName).append(" action.  Additionally, during the final battle, the ").append(actionName).append(" action will decrease the Resolve of Drained targets by ").append(w.attackResolve()).append("%, or non-Drained targets by 1%.  This decrease is multiplied by the target's ").toString();
+			description = "Perfects the combat ability of your Demons, allowing them to torture the Chosen with extreme precision.  This doubles the damage of the " + actionName + " action.  Additionally, during the final battle, the " + actionName + " action will decrease the Resolve of Drained targets by " + w.attackResolve() + "%, or non-Drained targets by 1%.  This decrease is multiplied by the target's ";
 			if (w.tickle()) {
 				description = description + "TICK level.";
 			} else {
@@ -555,7 +555,7 @@ public class Tech implements Serializable {
 			prereqs = (new Tech[] {
 				w.getTechs()[31], w.getTechs()[32], w.getTechs()[37]
 			});
-			description = (new StringBuilder("Perfects your connection with the collective consciousness of humanity, allowing you to cut off the flow of psychic energy the Chosen receive from the public.  This doubles the damage of the Taunt action.  Additionally, during the final battle, the Taunt action will decrease the Resolve of Parasitized targets who can be surrounded on that turn by ")).append(w.tauntResolve()).append("%.  This decrease is multiplied by the target's SHAM level.").toString();
+			description = "Perfects your connection with the collective consciousness of humanity, allowing you to cut off the flow of psychic energy the Chosen receive from the public.  This doubles the damage of the Taunt action.  Additionally, during the final battle, the Taunt action will decrease the Resolve of Parasitized targets who can be surrounded on that turn by " + w.tauntResolve() + "%.  This decrease is multiplied by the target's SHAM level.";
 		} else
 		if(index == 46)
 		{

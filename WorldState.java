@@ -9430,12 +9430,12 @@ public class WorldState
             }
             String description = "";
             if(c.morality > 66)
-                description = (new StringBuilder(c.mainName)).append(" enlists a friend in order to practice ").append(c.hisHer()).append(" sexual techniques.").toString();
+                description = c.mainName + " enlists a friend in order to practice " + c.hisHer() + " sexual techniques.";
             else
             if(c.morality > 33)
-                description = (new StringBuilder("In order to satisfy ")).append(c.hisHer()).append(" lewd curiosity, ").append(c.mainName).append(" services one of ").append(c.hisHer()).append(" friends.").toString();
+                description = "In order to satisfy " + c.hisHer() + " lewd curiosity, " + c.mainName + " services one of " + c.hisHer() + " friends.";
             else
-                description = (new StringBuilder(c.mainName)).append(" pressures one of ").append(c.hisHer()).append(" friends into a sexual situation.").toString();
+                description = c.mainName + " pressures one of " + c.hisHer() + " friends into a sexual situation.";
             save.saveScene(34, c.mainName, description);
         } else
         if(id == 2)
@@ -9554,12 +9554,12 @@ public class WorldState
             c.say(t, "\"");
             String description = "";
             if(c.innocence > 66)
-                description = (new StringBuilder("The gullible ")).append(c.mainName).append(" is tricked into doing sexual favors.").toString();
+                description = "The gullible " + c.mainName + " is tricked into doing sexual favors.";
             else
             if(c.innocence > 33)
-                description = (new StringBuilder("Preying on ")).append(c.mainName).append("'s hunger for fame, a malicious fan forces ").append(c.himHer()).append(" to service him in exchange for keeping a video private.").toString();
+                description = "Preying on " + c.mainName + "'s hunger for fame, a malicious fan forces " + c.himHer() + " to service him in exchange for keeping a video private.";
             else
-                description = (new StringBuilder("Now that ")).append(c.mainName).append(" is more comfortable with sexual activities, a fan finds it easy to pressure ").append(c.himHer()).append(" into pleasuring him.").toString();
+                description = "Now that " + c.mainName + " is more comfortable with sexual activities, a fan finds it easy to pressure " + c.himHer() + " into pleasuring him.";
             save.saveScene(35, c.mainName, description);
         } else
         if(id == 3)
@@ -9659,12 +9659,12 @@ public class WorldState
             c.say(t, "\"");
             String description = "";
             if(c.dignity > 66)
-                description = (new StringBuilder(c.mainName)).append(" tries to use bodypaint to protect ").append(c.hisHer()).append(" modesty, only to end up putting on an even bigger show.").toString();
+                description = c.mainName + " tries to use bodypaint to protect " + c.hisHer() + " modesty, only to end up putting on an even bigger show.";
             else
             if(c.dignity > 33)
-                description = (new StringBuilder("Bothered by the embarrassment of being exposed in public, ")).append(c.mainName).append(" assuages ").append(c.hisHer()).append(" feelings with a thin layer of bodypaint.").toString();
+                description = "Bothered by the embarrassment of being exposed in public, " + c.mainName + " assuages " + c.hisHer() + " feelings with a thin layer of bodypaint.";
             else
-                description = (new StringBuilder("Rather than having to worry about keeping ")).append(c.himHer()).append("self covered in front of the cameras, ").append(c.mainName).append(" tries turning to bodypaint instead, with mixed results.").toString();
+                description = "Rather than having to worry about keeping " + c.himHer() + "self covered in front of the cameras, " + c.mainName + " tries turning to bodypaint instead, with mixed results.";
             save.saveScene(36, c.mainName, description);
         } else
         if(id == 4)
@@ -9765,12 +9765,12 @@ public class WorldState
             c.say(t, "\"");
             String description = "";
             if(c.morality > 66)
-                description = (new StringBuilder(c.mainName)).append(" consents to participating in a sexually-charged propaganda photoshoot.").toString();
+                description = c.mainName + " consents to participating in a sexually-charged propaganda photoshoot.";
             else
             if(c.morality > 33)
-                description = (new StringBuilder("Wanting to feel better about the humiliating pictures that have been taken of ")).append(c.himHer()).append(", ").append(c.mainName).append(" allows ").append(c.himHer()).append("self to be photographed in the nude.").toString();
+                description = "Wanting to feel better about the humiliating pictures that have been taken of " + c.himHer() + ", " + c.mainName + " allows " + c.himHer() + "self to be photographed in the nude.";
             else
-                description = (new StringBuilder(c.mainName)).append(" uses ").append(c.hisHer()).append(" sex appeal in an attempt to win over more horny fans.").toString();
+                description = c.mainName + " uses " + c.hisHer() + " sex appeal in an attempt to win over more horny fans.";
             save.saveScene(37, c.mainName, description);
         } else
         if(id == 5)
@@ -9851,12 +9851,12 @@ public class WorldState
             c.say(t, "\"");
             String description = "";
             if(c.confidence > 66)
-                description = (new StringBuilder(c.mainName)).append(" is provoked into a shameful display of emotion upon being criticized for ").append(c.hisHer()).append(" public sexual behavior.").toString();
+                description = c.mainName + " is provoked into a shameful display of emotion upon being criticized for " + c.hisHer() + " public sexual behavior.";
             else
             if(c.confidence > 33)
-                description = (new StringBuilder("While behaving improperly at a public event, ")).append(c.mainName).append(" is stripped in front of everyone.").toString();
+                description = "While behaving improperly at a public event, " + c.mainName + " is stripped in front of everyone.";
             else
-                description = (new StringBuilder("Confronted with ")).append(c.hisHer()).append(" betrayal of ").append(c.hisHer()).append(" once-pure public image, ").append(c.mainName).append(" flees a public event in tears.").toString();
+                description = "Confronted with " + c.hisHer() + " betrayal of " + c.hisHer() + " once-pure public image, " + c.mainName + " flees a public event in tears.";
             save.saveScene(38, c.mainName, description);
         } else
         if(id == 6)
@@ -10166,13 +10166,13 @@ public class WorldState
             Project.changePortrait(d.convertGender(), d.type, true, false, this, nameDisplay, 1, Project.Emotion.JOY, Project.Emotion.JOY);
             String description = "";
             if(c.morality > 66)
-                description = (new StringBuilder(c.givenName)).append(" treats the needy ").append(d.givenName).append(" to a movie date and a night of generous lovemaking.").toString();
+                description = c.givenName + " treats the needy " + d.givenName + " to a movie date and a night of generous lovemaking.";
             else
             if(d.morality > 66)
-                description = (new StringBuilder("After watching a movie together, ")).append(c.givenName).append(" takes ").append(d.givenName).append(" home in order to satisfy ").append(c.hisHer()).append(" lust, and ").append(d.givenName).append(" enjoys ").append(d.himHer()).append("self as well.").toString();
+                description = "After watching a movie together, " + c.givenName + " takes " + d.givenName + " home in order to satisfy " + c.hisHer() + " lust, and " + d.givenName + " enjoys " + d.himHer() + "self as well.";
             else
-                description = (new StringBuilder(c.givenName)).append(" and ").append(d.givenName).append(" soothe their loneliness by going on a romantic date together and then enjoying each other's bodies at home afterward.").toString();
-            save.saveScene(39, (new StringBuilder(c.mainName)).append("/").append(d.mainName).toString(), description);
+                description = c.givenName + " and " + d.givenName + " soothe their loneliness by going on a romantic date together and then enjoying each other's bodies at home afterward.";
+            save.saveScene(39, c.mainName + "/" + d.mainName, description);
         } else
         if(id == 7)
         {
@@ -10380,13 +10380,13 @@ public class WorldState
             d.say(t, "\"");
             String description = "";
             if(c.morality > 66)
-                description = (new StringBuilder(c.mainName)).append(" helps ").append(d.mainName).append(" relax and take ").append(d.hisHer()).append(" mind off the war by putting ").append(d.himHer()).append(" in the role of a beloved pet.").toString();
+                description = c.mainName + " helps " + d.mainName + " relax and take " + d.hisHer() + " mind off the war by putting " + d.himHer() + " in the role of a beloved pet.";
             else
             if(c.morality > 33)
-                description = (new StringBuilder(c.mainName)).append(" and ").append(d.mainName).append(" enjoy some new fetish toys together.").toString();
+                description = c.mainName + " and " + d.mainName + " enjoy some new fetish toys together.";
             else
-                description = (new StringBuilder(c.mainName)).append(" assets ").append(c.hisHer()).append(" ownership over ").append(d.mainName).append(" with some sexual roleplay.").toString();
-            save.saveScene(40, (new StringBuilder(c.mainName)).append("/").append(d.mainName).toString(), description);
+                description = c.mainName + " assets " + c.hisHer() + " ownership over " + d.mainName + " with some sexual roleplay.";
+            save.saveScene(40, c.mainName + "/" + d.mainName, description);
         } else
         if(id == 8)
         {
@@ -10470,12 +10470,12 @@ public class WorldState
             }
             String description = "";
             if(c.confidence > 66)
-                description = (new StringBuilder("In order to avoid needing to involve the police and change ")).append(c.hisHer()).append(" schedule, ").append(c.mainName).append(" chooses not to apprehend or even resist when ").append(c.heShe()).append("'s targeted by a train molestor.").toString();
+                description = "In order to avoid needing to involve the police and change " + c.hisHer() + " schedule, " + c.mainName + " chooses not to apprehend or even resist when " + c.heShe() + "'s targeted by a train molestor.";
             else
             if(c.confidence > 33)
-                description = (new StringBuilder("Upon encountering a train molestor, ")).append(c.mainName).append(" finds that ").append(c.heShe()).append("'s too mentally exhausted by ").append(c.hisHer()).append(" constant battles with the Demons to resist.").toString();
+                description = "Upon encountering a train molestor, " + c.mainName + " finds that " + c.heShe() + "'s too mentally exhausted by " + c.hisHer() + " constant battles with the Demons to resist.";
             else
-                description = (new StringBuilder(c.mainName)).append(" is too timid and too tired of conflict to object as ").append(c.heShe()).append("'s molested on a train.").toString();
+                description = c.mainName + " is too timid and too tired of conflict to object as " + c.heShe() + "'s molested on a train.";
             save.saveScene(41, c.mainName, description);
         } else
         if(id == 9)
@@ -10659,13 +10659,13 @@ public class WorldState
             }
             String description = "";
             if(c.morality > 66)
-                description = (new StringBuilder(c.mainName)).append(" allows one of ").append(c.hisHer()).append(" training sessions with ").append(d.mainName).append(" to take a very sexual turn.").toString();
+                description = c.mainName + " allows one of " + c.hisHer() + " training sessions with " + d.mainName + " to take a very sexual turn.";
             else
             if(c.morality > 33)
-                description = (new StringBuilder("Using a training match as an excuse, ")).append(c.mainName).append(" pins down and 'rapes' ").append(d.mainName).append(", much to the latter's delight.").toString();
+                description = "Using a training match as an excuse, " + c.mainName + " pins down and 'rapes' " + d.mainName + ", much to the latter's delight.";
             else
-                description = (new StringBuilder(c.mainName)).append(" vents ").append(c.hisHer()).append(" sadistic urges by sexually assaulting ").append(d.mainName).append(" during a training match, but ").append(d.mainName).append(" doesn't mind in the slightest.").toString();
-            save.saveScene(42, (new StringBuilder(c.mainName)).append("/").append(d.mainName).toString(), description);
+                description = c.mainName + " vents " + c.hisHer() + " sadistic urges by sexually assaulting " + d.mainName + " during a training match, but " + d.mainName + " doesn't mind in the slightest.";
+            save.saveScene(42, c.mainName + "/" + d.mainName, description);
         } else
         if(id == 10)
         {
@@ -10778,12 +10778,12 @@ public class WorldState
             c.say(t, "\"");
             String description = "";
             if(c.innocence > 66)
-                description = (new StringBuilder(c.mainName)).append(" lets ").append(c.himHer()).append("self get tricked into 'purifying' a lustful former Thrall.").toString();
+                description = c.mainName + " lets " + c.himHer() + "self get tricked into 'purifying' a lustful former Thrall.";
             else
             if(c.innocence > 33)
-                description = (new StringBuilder("Too kind to refuse a person in need, ")).append(c.mainName).append(" chooses to believe the dubious claims of a former Thrall who wants ").append(c.himHer()).append(" to sexually 'purify' him.").toString();
+                description = "Too kind to refuse a person in need, " + c.mainName + " chooses to believe the dubious claims of a former Thrall who wants " + c.himHer() + " to sexually 'purify' him.";
             else
-                description = (new StringBuilder("Even though ")).append(c.heShe()).append(" knows it's nonsense, ").append(c.mainName).append(" goes along with a former Thrall claiming that ").append(c.heShe()).append(" needs to 'purify' his lust.").toString();
+                description = "Even though " + c.heShe() + " knows it's nonsense, " + c.mainName + " goes along with a former Thrall claiming that " + c.heShe() + " needs to 'purify' his lust.";
             save.saveScene(43, c.mainName, description);
         } else
         if(id == 11)
@@ -10856,12 +10856,12 @@ public class WorldState
             }
             String description = "";
             if(c.innocence > 66)
-                description = (new StringBuilder(c.mainName)).append(" wakes from ").append(c.hisHer()).append(" nap bewildered to find ").append(c.himHer()).append("self covered in a horny fan's cum.").toString();
+                description = c.mainName + " wakes from " + c.hisHer() + " nap bewildered to find " + c.himHer() + "self covered in a horny fan's cum.";
             else
             if(c.innocence > 33)
-                description = (new StringBuilder("After falling asleep from exhaustion, ")).append(c.mainName).append(" is molested in ").append(c.hisHer()).append(" sleep and wakes none the wiser.").toString();
+                description = "After falling asleep from exhaustion, " + c.mainName + " is molested in " + c.hisHer() + " sleep and wakes none the wiser.";
             else
-                description = (new StringBuilder("A passing fan molests ")).append(c.mainName).append(" in ").append(c.hisHer()).append(" sleep, but ").append(c.heShe()).append(" wakes too slowly to do anything about it.").toString();
+                description = "A passing fan molests " + c.mainName + " in " + c.hisHer() + " sleep, but " + c.heShe() + " wakes too slowly to do anything about it.";
             save.saveScene(44, c.mainName, description);
         } else
         if(id == 12)
@@ -11053,13 +11053,13 @@ public class WorldState
             }
             String description = "";
             if(d.innocence > 66)
-                description = (new StringBuilder("Acting on a suggestion from the Thralls ")).append(d.heShe()).append(" uses to satisfy ").append(d.hisHer()).append(" sexual needs, ").append(d.mainName).append(" feigns unconsciousness in order to fool ").append(c.mainName).append(" into trying to rescue ").append(c.himHer()).append(".").toString();
+                description = "Acting on a suggestion from the Thralls " + d.heShe() + " uses to satisfy " + d.hisHer() + " sexual needs, " + d.mainName + " feigns unconsciousness in order to fool " + c.mainName + " into trying to rescue " + c.himHer() + ".";
             else
             if(d.innocence > 33)
-                description = (new StringBuilder(d.mainName)).append(" plays a nasty prank on ").append(c.mainName).append(", tricking ").append(c.himHer()).append(" into surrendering to a group of Thralls.").toString();
+                description = d.mainName + " plays a nasty prank on " + c.mainName + ", tricking " + c.himHer() + " into surrendering to a group of Thralls.";
             else
-                description = (new StringBuilder(c.mainName)).append(" tries to save the seemingly helpless ").append(d.mainName).append(", but it turns out to be a plot by ").append(d.mainName).append(" to rape ").append(c.himHer()).append(".").toString();
-            save.saveScene(45, (new StringBuilder(c.mainName)).append("/").append(d.mainName).toString(), description);
+                description = c.mainName + " tries to save the seemingly helpless " + d.mainName + ", but it turns out to be a plot by " + d.mainName + " to rape " + c.himHer() + ".";
+            save.saveScene(45, c.mainName + "/" + d.mainName, description);
         } else
         if(id == 13)
         {
@@ -11282,13 +11282,13 @@ public class WorldState
             }
             String description = "";
             if(d.innocence > 66)
-                description = (new StringBuilder(c.mainName)).append(" and ").append(d.mainName).append(" compete to see who can make their friend cum the most, but ").append(d.mainName).append(" forgets all about it and ends up molesting ").append(c.mainName).append(".").toString();
+                description = c.mainName + " and " + d.mainName + " compete to see who can make their friend cum the most, but " + d.mainName + " forgets all about it and ends up molesting " + c.mainName + ".";
             else
             if(d.innocence > 33)
-                description = (new StringBuilder(c.mainName)).append(" and ").append(d.mainName).append(" try to resolve which of them has better sexual skills, but their partner lacks the stamina to keep up.").toString();
+                description = c.mainName + " and " + d.mainName + " try to resolve which of them has better sexual skills, but their partner lacks the stamina to keep up.";
             else
-                description = (new StringBuilder(d.mainName)).append(" beats ").append(c.mainName).append(" in a game to make their friend cum, and subjects ").append(c.himHer()).append(" to a humiliating punishment game.").toString();
-            save.saveScene(46, (new StringBuilder(c.mainName)).append("/").append(d.mainName).toString(), description);
+                description = d.mainName + " beats " + c.mainName + " in a game to make their friend cum, and subjects " + c.himHer() + " to a humiliating punishment game.";
+            save.saveScene(46, c.mainName + "/" + d.mainName, description);
         } else
         if(id == 14)
         {
@@ -11352,12 +11352,12 @@ public class WorldState
             Project.changePortrait(c.convertGender(), c.type, true, false, this, nameDisplay, 0, Project.Emotion.JOY, Project.Emotion.JOY);
             String description = "";
             if(c.confidence > 66)
-                description = (new StringBuilder(c.mainName)).append(" abuses one of ").append(c.hisHer()).append(" friends in order to make ").append(c.himHer()).append("self feel better.").toString();
+                description = c.mainName + " abuses one of " + c.hisHer() + " friends in order to make " + c.himHer() + "self feel better.";
             else
             if(c.confidence > 33)
-                description = (new StringBuilder("When one of ")).append(c.mainName).append("'s friends inadvertently reminds ").append(c.himHer()).append(" of ").append(c.hisHer()).append(" past abuses, ").append(c.heShe()).append(" takes it out on ").append(c.himHer()).append(".").toString();
+                description = "When one of " + c.mainName + "'s friends inadvertently reminds " + c.himHer() + " of " + c.hisHer() + " past abuses, " + c.heShe() + " takes it out on " + c.himHer() + ".";
             else
-                description = (new StringBuilder(c.mainName)).append(" allows ").append(c.himHer()).append("self to be manipulated into tormenting a less popular member of ").append(c.hisHer()).append(" friend group.").toString();
+                description = c.mainName + " allows " + c.himHer() + "self to be manipulated into tormenting a less popular member of " + c.hisHer() + " friend group.";
             save.saveScene(47, c.mainName, description);
         } else
         if(id == 15)
@@ -11510,7 +11510,7 @@ public class WorldState
                     Project.changePortrait(d.convertGender(), d.type, false, false, this, nameDisplay, 1, Project.Emotion.ANGER, Project.Emotion.ANGER);
                 }
                 d.say(t, "\"");
-                description = (new StringBuilder(c.mainName)).append(" and ").append(d.mainName).append(" have a match to determine who can endure pleasure the longest, but they've both become so lustful that they climax instantly.").toString();
+                description = c.mainName + " and " + d.mainName + " have a match to determine who can endure pleasure the longest, but they've both become so lustful that they climax instantly.";
             } else
             if(c.timesFantasized() > 0 && (c.innocence < 67 || !c.cVirg))
             {
@@ -11535,7 +11535,7 @@ public class WorldState
                 else
                     c.say(t, "Ugh...  Why do you always have to be s-so... smug...?");
                 c.say(t, "\"");
-                description = (new StringBuilder(c.mainName)).append(" and ").append(d.mainName).append(" have a match to determine who can endure pleasure the longest, but the public venue and ").append(c.mainName).append("'s exhibitionist tendencies give ").append(d.mainName).append(" an easy win.").toString();
+                description = c.mainName + " and " + d.mainName + " have a match to determine who can endure pleasure the longest, but the public venue and " + c.mainName + "'s exhibitionist tendencies give " + d.mainName + " an easy win.";
             } else
             if(d.timesFantasized() > 0 && (d.innocence < 67 || !d.cVirg))
             {
@@ -11564,7 +11564,7 @@ public class WorldState
                 else
                     c.say(t, "Y-You went too far...");
                 c.say(t, "\"");
-                description = (new StringBuilder(c.mainName)).append(" and ").append(d.mainName).append(" have a match to determine who can endure pleasure the longest, but ").append(d.mainName).append(" just uses it as an excuse to cum while molesting ").append(c.mainName).append(".").toString();
+                description = c.mainName + " and " + d.mainName + " have a match to determine who can endure pleasure the longest, but " + d.mainName + " just uses it as an excuse to cum while molesting " + c.mainName + ".";
             } else
             if(!d.cVirg)
             {
@@ -11599,7 +11599,7 @@ public class WorldState
                 else
                     d.say(t, "Wanna bet that we can find recordings of our match online tomorrow?");
                 d.say(t, "\"");
-                description = (new StringBuilder(c.mainName)).append(" and ").append(d.mainName).append(" have a match to determine who can endure pleasure the longest, and while ").append(c.mainName).append(" does win, the public nature of the match makes ").append(c.himHer()).append(" regret participating.").toString();
+                description = c.mainName + " and " + d.mainName + " have a match to determine who can endure pleasure the longest, and while " + c.mainName + " does win, the public nature of the match makes " + c.himHer() + " regret participating.";
             } else
             {
                 c.say(t, "\"Ngh!?  Nnn!  Nhooo!\"\n\n");
@@ -11639,9 +11639,9 @@ public class WorldState
                 else
                     c.say(t, "P-Please, stop!  This is bad enough without your g-gloating!");
                 c.say(t, "\"");
-                description = (new StringBuilder(c.mainName)).append(" and ").append(d.mainName).append(" have a match to determine who can endure pleasure the longest, and ").append(c.mainName).append(" is utterly humiliated by ").append(c.hisHer()).append(" defeat.").toString();
+                description = c.mainName + " and " + d.mainName + " have a match to determine who can endure pleasure the longest, and " + c.mainName + " is utterly humiliated by " + c.hisHer() + " defeat.";
             }
-            save.saveScene(48, (new StringBuilder(c.mainName)).append("/").append(d.mainName).toString(), description);
+            save.saveScene(48, c.mainName + "/" + d.mainName, description);
         }
         vignetteSeen[id] = true;
     }
@@ -16560,7 +16560,7 @@ public class WorldState
                         if(gender.equals("male"))
                         {
                             if(w.getBodyStatus()[6])
-                                addition = (new StringBuilder(" so they can get a good look inside")).append(addition).toString();
+                                addition = " so they can get a good look inside" + addition;
                             w.append(t, String.format("spread %s virgin anus as much as possible%s.  %s ", c.hisHer(), addition, c.HeShe()));
                         }
                     }
@@ -19906,10 +19906,10 @@ public class WorldState
             {
                 String summary = "(x";
                 if(w.getRelationship(c.number, high.getNumber()) == -4)
-                    summary = (new StringBuilder(summary)).append("2").toString();
+                    summary = summary + "2";
                 else
-                    summary = (new StringBuilder(summary)).append("1.").append(6 - w.getRelationship(c.number, high.getNumber())).toString();
-                summary = (new StringBuilder(summary)).append(" damage due to relationship with ").append(high.getMainName()).append(")\n\n").toString();
+                    summary = summary + "1." + String.valueOf(6 - w.getRelationship(c.number, high.getNumber()));
+                summary = summary + " damage due to relationship with " + high.getMainName() + ")\n\n";
                 totalDamage = c.multiplyArray(totalDamage, (16 - w.getRelationship(c.number, high.getNumber())) * 10);
                 firstRelation = summary;
             }
@@ -19917,10 +19917,10 @@ public class WorldState
             {
                 String summary = "(x";
                 if(w.getRelationship(c.number, mid.getNumber()) == -4)
-                    summary = (new StringBuilder(summary)).append("2").toString();
+                    summary = summary + "2";
                 else
-                    summary = (new StringBuilder(summary)).append("1.").append(6 - w.getRelationship(c.number, mid.getNumber())).toString();
-                summary = (new StringBuilder(summary)).append(" damage due to relationship with ").append(mid.getMainName()).append(")\n\n").toString();
+                    summary = summary + "1." + String.valueOf(6 - w.getRelationship(c.number, mid.getNumber()));
+                summary = summary + " damage due to relationship with " + mid.getMainName() + ")\n\n";
                 totalDamage = c.multiplyArray(totalDamage, (16 - w.getRelationship(c.number, mid.getNumber())) * 10);
                 if(c != high)
                     secondRelation = summary;
@@ -19931,10 +19931,10 @@ public class WorldState
             {
                 String summary = "(x";
                 if(w.getRelationship(c.number, low.getNumber()) == -4)
-                    summary = (new StringBuilder(summary)).append("2").toString();
+                    summary = summary + "2";
                 else
-                    summary = (new StringBuilder(summary)).append("1.").append(6 - w.getRelationship(c.number, low.getNumber())).toString();
-                summary = (new StringBuilder(summary)).append(" damage due to relationship with ").append(low.getMainName()).append(")\n\n").toString();
+                    summary = summary + "1." + String.valueOf(6 - w.getRelationship(c.number, low.getNumber()));
+                summary = summary + " damage due to relationship with " + low.getMainName() + ")\n\n";
                 totalDamage = c.multiplyArray(totalDamage, (16 - w.getRelationship(c.number, low.getNumber())) * 10);
                 secondRelation = summary;
             }
@@ -23617,7 +23617,7 @@ public class WorldState
             String fileName = "";
             for(int i = path.length() - 1; i >= 0; i--)
                 if(path.charAt(i) != '/')
-                    fileName = (new StringBuilder(String.valueOf(path.charAt(i)))).append(fileName).toString();
+                    fileName = String.valueOf(path.charAt(i)) + fileName;
                 else
                     i = -1;
 
@@ -27961,16 +27961,16 @@ public class WorldState
     public String getEvacStatus(Boolean bar)
     {
         int percentage = (evacuationProgress * 100) / evacuationComplete;
-        String result = (new StringBuilder(String.valueOf(evacuationProgress))).append("/").append(evacuationComplete).append(" (").append(percentage).append("%)").toString();
+        String result = String.valueOf(evacuationProgress) + "/" + evacuationComplete + " (" + percentage + "%)";
         if(bar)
         {
             for(int charCount = result.length(); charCount < 17;)
             {
                 charCount++;
-                result = (new StringBuilder(result)).append(" ").toString();
+                result = result + " ";
             }
 
-            result = (new StringBuilder(result)).append("[").toString();
+            result = result + "[";
             int base = 20;
             int possible = 0;
             for(int i = 0; i < 3; i++)
@@ -27979,17 +27979,17 @@ public class WorldState
 
             for(int i = 1; i < 21; i++)
                 if(evacuationProgress * 20 >= evacuationComplete * i)
-                    result = (new StringBuilder(result)).append("#").toString();
+                    result = result + "#";
                 else
                 if((evacuationProgress + base) * 20 >= evacuationComplete * i)
-                    result = (new StringBuilder(result)).append("=").toString();
+                    result = result + "=";
                 else
                 if((evacuationProgress + base + possible) * 20 >= evacuationComplete * i)
-                    result = (new StringBuilder(result)).append("-").toString();
+                    result = result + "-";
                 else
-                    result = (new StringBuilder(result)).append(" ").toString();
+                    result = result + " ";
 
-            result = (new StringBuilder(result)).append("]").toString();
+            result = result + "]";
         }
         return result;
     }
@@ -27997,16 +27997,16 @@ public class WorldState
     public String getExterminationStatus(Boolean bar)
     {
         int percentage = (exterminationProgress * 100) / exterminationComplete;
-        String result = (new StringBuilder(String.valueOf(exterminationProgress))).append("/").append(exterminationComplete).append(" (").append(percentage).append("%)").toString();
+        String result = String.valueOf(exterminationProgress) + "/" + exterminationComplete + " (" + percentage + "%)";
         if(bar)
         {
             for(int charCount = result.length(); charCount < 14;)
             {
                 charCount++;
-                result = (new StringBuilder(result)).append(" ").toString();
+                result = result + " ";
             }
 
-            result = (new StringBuilder(result)).append("[").toString();
+            result = result + "[";
             int base = 0;
             int possible = 0;
             for(int i = 0; i < 3; i++)
@@ -28027,17 +28027,17 @@ public class WorldState
 
             for(int i = 1; i < 21; i++)
                 if(exterminationProgress * 20 >= exterminationComplete * i)
-                    result = (new StringBuilder(result)).append("#").toString();
+                    result = result + "#";
                 else
                 if((exterminationProgress + base) * 20 >= exterminationComplete * i)
-                    result = (new StringBuilder(result)).append("=").toString();
+                    result = result + "=";
                 else
                 if((exterminationProgress + base + possible) * 20 >= exterminationComplete * i)
-                    result = (new StringBuilder(result)).append("-").toString();
+                    result = result + "-";
                 else
-                    result = (new StringBuilder(result)).append(" ").toString();
+                    result = result + " ";
 
-            result = (new StringBuilder(result)).append("]").toString();
+            result = result + "]";
         }
         return result;
     }
@@ -30218,7 +30218,7 @@ public class WorldState
                 String fileName = "";
                 for(int i = path.length() - 1; i >= 0; i--)
                     if(path.charAt(i) != '/')
-                        fileName = (new StringBuilder(String.valueOf(path.charAt(i)))).append(fileName).toString();
+                        fileName = String.valueOf(path.charAt(i)) + fileName;
                     else
                         i = -1;
 
@@ -30263,7 +30263,7 @@ public class WorldState
                 {
                     DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
                     Date date = new Date();
-                    newSaveName = (new StringBuilder("Team of ")).append(dateFormat.format(date)).toString();
+                    newSaveName = "Team of " + dateFormat.format(date);
                 }
                 saves.endSave(w, newSaveName);
                 wobj.serializeSaveData(saves);
@@ -30286,9 +30286,9 @@ public class WorldState
                         String editedName = "";
                         for(int i = 0; i < newFileName.length(); i++)
                             if(newFileName.charAt(i) == '/' || newFileName.charAt(i) == ':')
-                                editedName = (new StringBuilder(editedName)).append("-").toString();
+                                editedName = editedName + "-";
                             else
-                                editedName = (new StringBuilder(editedName)).append(newFileName.charAt(i)).toString();
+                                editedName = editedName + newFileName.charAt(i);
 
                         wobj.exportFile(w, editedName);
                         w.append(t, String.format("\n\n%s\n\nCustomized team saved to '%s.par'.", separator, editedName));
@@ -30435,7 +30435,7 @@ public class WorldState
         }
         if(genders[i].equals("male"))
             dummy.gender = "male";
-        String ownChoice = (new StringBuilder(String.valueOf(dummy.genAdjectiveName(statSeed[i * 4 + 1], statSeed[i * 4 + 2])))).append(" ").append(dummy.genNounName(statSeed[i * 4], statSeed[i * 4 + 1])).toString();
+        String ownChoice = String.valueOf(dummy.genAdjectiveName(statSeed[i * 4 + 1], statSeed[i * 4 + 2])) + " " + dummy.genNounName(statSeed[i * 4], statSeed[i * 4 + 1]);
         append(t, "\n\n" + separator + "\n\nMost Chosen also use a descriptive title that defines how they see themselves.  " + customAliases[i] + "'s first idea is to use '" + ownChoice + "', so that " + heShe + "'d be '" + ownChoice + " " + customAliases[i] + "'.  Should " + heShe + " use something different?");
         customTitles[i] = ownChoice;
         JButton Default = new JButton(ownChoice);
@@ -30561,10 +30561,10 @@ public class WorldState
         String result = "";
         result = customIncantations[i];
         if(!customTitles[i].equals("none"))
-            result = (new StringBuilder(result)).append("  ").append(customTitles[i]).toString();
+            result = result + "  " + customTitles[i];
         else
-            result = (new StringBuilder(result)).append(" ").toString();
-        result = (new StringBuilder(result)).append(" ").append(customAliases[i]).append(", transform!").toString();
+            result = result + " ";
+        result = result + " " + customAliases[i] + ", transform!";
         append(t, "\n\n" + separator + "\n\n" + customNames[i * 2] + "'s civilian clothes will disintegrate when " + heShe + " says '" + result + "'  In their place, garments and equipment woven of psychic energy representing " + hisHer + " true nature will materialize.  Click 'Change' to give " + himHer + " something different, or click the button for the current item to keep it.\n\nFirst off, what does " + heShe + " wear to cover " + hisHer + " chest?");
         String current = baseAesthetics[0];
         if(current.equals("strips"))
@@ -30994,7 +30994,7 @@ public class WorldState
                 method = "command";
             else
             if(j == 3)
-                method = (new StringBuilder("part of ")).append(himHer).toString();
+                method = "part of " + himHer;
             JButton ThisOne = new JButton(method);
             if(method.contains("part"))
                 method = "part";

@@ -82,7 +82,7 @@ public void exportRoster(Chosen c[], String saveName)
 		String fileName = "";
 		for(int i = path.length() - 1; i >= 0; i--) {
 			if(path.charAt(i) != '/') {
-				fileName = (new StringBuilder(String.valueOf(path.charAt(i)))).append(fileName).toString();
+				fileName = String.valueOf(path.charAt(i)) + fileName;
 			} else {
 				i = -1;
 			}

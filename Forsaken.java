@@ -12428,93 +12428,93 @@ public class Forsaken
         String message = "Combat Style: ";
         if(combatStyle == 0)
         {
-            message = (new StringBuilder(message)).append("Unfocused (3% HATE/PLEA/").append(INJU).append("/EXPO)").toString();
+            message = message + "Unfocused (3% HATE/PLEA/" + INJU + "/EXPO)";
             if(full)
-                message = (new StringBuilder(message)).append("\nAttacks with no singular strategy.  Deals all damage types, but unlikely to make much progress unless the user has an overwhelming advantage over the target.").toString();
+                message = message + "\nAttacks with no singular strategy.  Deals all damage types, but unlikely to make much progress unless the user has an overwhelming advantage over the target.";
         } else
         if(combatStyle == 1)
         {
-            message = (new StringBuilder(message)).append("Mean (1000% HATE)").toString();
+            message = message + "Mean (1000% HATE)";
             if(full)
-                message = (new StringBuilder(message)).append("\nAvoids direct combat, instead taunting and manipulating the target's emotional state.  Can set up for a powerful surround afterward.").toString();
+                message = message + "\nAvoids direct combat, instead taunting and manipulating the target's emotional state.  Can set up for a powerful surround afterward.";
         } else
         if(combatStyle == 2)
         {
-            message = (new StringBuilder(message)).append("Seductive (1000% PLEA)").toString();
+            message = message + "Seductive (1000% PLEA)";
             if(full)
-                message = (new StringBuilder(message)).append("\nFocuses on groping and stimulating the target.  Can leave a lasting impression, but only against a target who has already been weakened and distracted.").toString();
+                message = message + "\nFocuses on groping and stimulating the target.  Can leave a lasting impression, but only against a target who has already been weakened and distracted.";
         } else
         if(combatStyle == 3)
         {
-            message = (new StringBuilder(message)).append("Desperate (1000% ").append(INJU).append(")").toString();
+            message = message + "Desperate (1000% " + INJU + ")";
             if(full)
-                message = (new StringBuilder(message)).append("\nLacking confidence in own abilities, acts with singleminded focus to disable the target.  Useful early in the battle to increase future circumstance damage taken.").toString();
+                message = message + "\nLacking confidence in own abilities, acts with singleminded focus to disable the target.  Useful early in the battle to increase future circumstance damage taken.";
         } else
         if(combatStyle == 4)
         {
-            message = (new StringBuilder(message)).append("Flashy (1000% EXPO)").toString();
+            message = message + "Flashy (1000% EXPO)";
             if(full)
-                message = (new StringBuilder(message)).append("\nFocuses on putting on a show for any onlookers, usually by attacking the target's clothes or by sabotaging a stripped target's attempts at modesty.  Can be used to demoralize an entire team.").toString();
+                message = message + "\nFocuses on putting on a show for any onlookers, usually by attacking the target's clothes or by sabotaging a stripped target's attempts at modesty.  Can be used to demoralize an entire team.";
         } else
         if(combatStyle == 5)
         {
-            message = (new StringBuilder(message)).append("Rapacious (100% HATE/PLEA)").toString();
+            message = message + "Rapacious (100% HATE/PLEA)";
             if(full)
-                message = (new StringBuilder(message)).append("\nPrioritizes own pleasure, making use of the target's body.  Targets who are unable to fight back will find the experience highly traumatizing.").toString();
+                message = message + "\nPrioritizes own pleasure, making use of the target's body.  Targets who are unable to fight back will find the experience highly traumatizing.";
         } else
         if(combatStyle == 6)
         {
-            message = (new StringBuilder(message)).append("Sadistic (100% HATE/").append(INJU).append(")").toString();
+            message = message + "Sadistic (100% HATE/" + INJU + ")";
             if(full)
-                message = (new StringBuilder(message)).append("\nAttacks without mercy, enjoying the target's suffering.  Weakens most targets significantly, making further attacks even easier.").toString();
+                message = message + "\nAttacks without mercy, enjoying the target's suffering.  Weakens most targets significantly, making further attacks even easier.";
         } else
         if(combatStyle == 7)
         {
-            message = (new StringBuilder(message)).append("Playful (100% HATE/EXPO)").toString();
+            message = message + "Playful (100% HATE/EXPO)";
             if(full)
-                message = (new StringBuilder(message)).append("\nShows no respect for the target's abilities, directing all attacks at the target's clothing and obviously making no effort to actually defeat the target.  Highly distracting to both the target and any teammates.").toString();
+                message = message + "\nShows no respect for the target's abilities, directing all attacks at the target's clothing and obviously making no effort to actually defeat the target.  Highly distracting to both the target and any teammates.";
         } else
         if(combatStyle == 8)
         {
-            message = (new StringBuilder(message)).append("Dirty (100% PLEA/").append(INJU).append(")").toString();
+            message = message + "Dirty (100% PLEA/" + INJU + ")";
             if(full)
-                message = (new StringBuilder(message)).append("\nGrapples with a focus on the target's sensitive parts, alternating between different kinds of stimulation in order to throw the target off-guard.  Can cause significant trauma even without support from Thralls.").toString();
+                message = message + "\nGrapples with a focus on the target's sensitive parts, alternating between different kinds of stimulation in order to throw the target off-guard.  Can cause significant trauma even without support from Thralls.";
         } else
         if(combatStyle == 9)
         {
-            message = (new StringBuilder(message)).append("Perverted (100% PLEA/EXPO)").toString();
+            message = message + "Perverted (100% PLEA/EXPO)";
             if(full)
-                message = (new StringBuilder(message)).append("\nStrips and molests the target.  Can be extremely distracting to the entire enemy team, but only if the target is weakened first.").toString();
+                message = message + "\nStrips and molests the target.  Can be extremely distracting to the entire enemy team, but only if the target is weakened first.";
         } else
         if(combatStyle == 10)
         {
-            message = (new StringBuilder(message)).append("Wild (100% ").append(INJU).append("/EXPO)").toString();
+            message = message + "Wild (100% " + INJU + "/EXPO)";
             if(full)
-                message = (new StringBuilder(message)).append("\nAttacks indiscrimiately, dealing as much damage to the target's clothes and surroundings as to the actual target.  Highly effective at distracting an entire team for follow-up attacks.").toString();
+                message = message + "\nAttacks indiscrimiately, dealing as much damage to the target's clothes and surroundings as to the actual target.  Highly effective at distracting an entire team for follow-up attacks.";
         } else
         if(combatStyle == 11)
         {
-            message = (new StringBuilder(message)).append("Decisive (15% HATE/PLEA/").append(INJU).append(")").toString();
+            message = message + "Decisive (15% HATE/PLEA/" + INJU + ")";
             if(full)
-                message = (new StringBuilder(message)).append("\nAttempts to disable and then torture the target, inflicting as much suffering as possible in as little time as possible.  For maximum effectiveness, the user must be able to singlehandedly overpower the target.").toString();
+                message = message + "\nAttempts to disable and then torture the target, inflicting as much suffering as possible in as little time as possible.  For maximum effectiveness, the user must be able to singlehandedly overpower the target.";
         } else
         if(combatStyle == 12)
         {
-            message = (new StringBuilder(message)).append("Careless (15% HATE/PLEA/EXPO)").toString();
+            message = message + "Careless (15% HATE/PLEA/EXPO)";
             if(full)
-                message = (new StringBuilder(message)).append("\nFocuses on groping, stripping, and taunting the target rather than actually fighting.  Unless the user is much stronger than the target, this is only effective if the target has already been weakened.").toString();
+                message = message + "\nFocuses on groping, stripping, and taunting the target rather than actually fighting.  Unless the user is much stronger than the target, this is only effective if the target has already been weakened.";
         } else
         if(combatStyle == 13)
         {
-            message = (new StringBuilder(message)).append("Opportunistic (15% HATE/").append(INJU).append("/EXPO)").toString();
+            message = message + "Opportunistic (15% HATE/" + INJU + "/EXPO)";
             if(full)
-                message = (new StringBuilder(message)).append("\nTries to demoralize the entire enemy team by viciously humiliating one target.  If the user doesn't have a significant advantage over the target, the display might be underwhelming.").toString();
+                message = message + "\nTries to demoralize the entire enemy team by viciously humiliating one target.  If the user doesn't have a significant advantage over the target, the display might be underwhelming.";
         } else
         if(combatStyle == 14)
         {
-            message = (new StringBuilder(message)).append("Practical (15% PLEA/").append(INJU).append("/EXPO)").toString();
+            message = message + "Practical (15% PLEA/" + INJU + "/EXPO)";
             if(full)
-                message = (new StringBuilder(message)).append("\nAttempts to pin the target in a helpless position and then use a combination of pain and pleasure to disrupt any attempts at resistance.  Relatively effective against targets who are too well-composed for emotional manipulation to work.").toString();
+                message = message + "\nAttempts to pin the target in a helpless position and then use a combination of pain and pleasure to disrupt any attempts at resistance.  Relatively effective against targets who are too well-composed for emotional manipulation to work.";
         }
         return message;
     }
@@ -12527,39 +12527,39 @@ public class Forsaken
         String message = "Defiler: ";
         if(defilerType == 1)
         {
-            message = (new StringBuilder(message)).append("Penetration (HATE)").toString();
+            message = message + "Penetration (HATE)";
             if(full)
-                message = (new StringBuilder(message)).append("\nCan rape a target with at least 10k HATE, dealing bonus HATE damage, multiplying all damage with lower Disgrace, and causing tier-2 Morality Break").toString();
+                message = message + "\nCan rape a target with at least 10k HATE, dealing bonus HATE damage, multiplying all damage with lower Disgrace, and causing tier-2 Morality Break";
         } else
         if(defilerType == 2)
         {
-            message = (new StringBuilder(message)).append("Force Orgasm (PLEA)").toString();
+            message = message + "Force Orgasm (PLEA)";
             if(full)
-                message = (new StringBuilder(message)).append("\nCan intensify against a target with at least 10k PLEA, dealing bonus PLEA damage, multiplying all damage with lower Disgrace, and causing tier-2 Innocence Break").toString();
+                message = message + "\nCan intensify against a target with at least 10k PLEA, dealing bonus PLEA damage, multiplying all damage with lower Disgrace, and causing tier-2 Innocence Break";
         } else
         if(defilerType == 3)
         {
-            message = (new StringBuilder(message)).append("Torture (").append(INJU).append(")").toString();
+            message = message + "Torture (" + INJU + ")";
             if(full)
-                message = (new StringBuilder(message)).append("\nCan torment a target with at least 10k ").append(INJU).append(", dealing bonus ").append(INJU).append(" damage, multiplying all damage with lower Disgrace, and causing tier-2 Confidence Break").toString();
+                message = message + "\nCan torment a target with at least 10k " + INJU + ", dealing bonus " + INJU + " damage, multiplying all damage with lower Disgrace, and causing tier-2 Confidence Break";
         } else
         if(defilerType == 4)
         {
-            message = (new StringBuilder(message)).append("Broadcast (EXPO)").toString();
+            message = message + "Broadcast (EXPO)";
             if(full)
-                message = (new StringBuilder(message)).append("\nCan humiliate a target with at least 10k EXPO, dealing bonus EXPO damage, multiplying all damage with lower Disgrace, and causing tier-2 Dignity Break").toString();
+                message = message + "\nCan humiliate a target with at least 10k EXPO, dealing bonus EXPO damage, multiplying all damage with lower Disgrace, and causing tier-2 Dignity Break";
         } else
         if(defilerType == 5)
         {
-            message = (new StringBuilder(message)).append("Tempt (PLEA/EXPO, Distortion only)").toString();
+            message = message + "Tempt (PLEA/EXPO, Distortion only)";
             if(full)
-                message = (new StringBuilder(message)).append("\nCan seduce a target who meets the usual Tempt requirements, dealing bonus PLEA and EXPO but setting HATE and ").append(INJU).append(" to zero, multiplying all damage with lower Disgrace, and causing and intensifying Morality/Confidence Distortion").toString();
+                message = message + "\nCan seduce a target who meets the usual Tempt requirements, dealing bonus PLEA and EXPO but setting HATE and " + INJU + " to zero, multiplying all damage with lower Disgrace, and causing and intensifying Morality/Confidence Distortion";
         } else
         if(defilerType == 6)
         {
-            message = (new StringBuilder(message)).append("Orgy (all)").toString();
+            message = message + "Orgy (all)";
             if(full)
-                message = (new StringBuilder(message)).append("\nCan throw a target into an existing Defiler+ action to create an Orgy, so long as the target has at least 10k HATE or ").append(INJU).toString();
+                message = message + "\nCan throw a target into an existing Defiler+ action to create an Orgy, so long as the target has at least 10k HATE or " + INJU;
         }
         return message;
     }
@@ -30234,13 +30234,13 @@ public class Forsaken
     public String expMultiplierDisplay(long expDisplay)
     {
         expDisplay = expMultiplier(expDisplay);
-        String displayed = (new StringBuilder(String.valueOf(expDisplay / 1000L))).append(".").toString();
+        String displayed = String.valueOf(expDisplay / 1000L) + ".";
         expDisplay %= 1000L;
         if(expDisplay < 100L)
-            displayed = (new StringBuilder(displayed)).append(0).toString();
+            displayed = displayed + 0;
         if(expDisplay < 10L)
-            displayed = (new StringBuilder(displayed)).append(0).toString();
-        displayed = (new StringBuilder(displayed)).append(expDisplay).toString();
+            displayed = displayed + 0;
+        displayed = displayed + expDisplay;
         return displayed;
     }
 
@@ -30248,11 +30248,11 @@ public class Forsaken
     {
         if(knowsPersonally(c))
             if(isFormerFriend(c))
-                return (new StringBuilder(hisHer())).append(" beloved former partner").toString();
+                return hisHer() + " beloved former partner";
             else
-                return (new StringBuilder(hisHer())).append(" old rival").toString();
+                return hisHer() + " old rival";
         if(obsessedWith(c))
-            return (new StringBuilder("the target of ")).append(hisHer()).append(" obsession").toString();
+            return "the target of " + hisHer() + " obsession";
         else
             return "the Chosen";
     }
@@ -30371,42 +30371,42 @@ public class Forsaken
                 power = 2;
         String format = "";
         if(power < 4 || (power - 2) % 3 == 0)
-            format = (new StringBuilder(format)).append(" ").toString();
+            format = format + " ";
         if(power > 2)
-            format = (new StringBuilder(format)).append(amount / 1000L).toString();
+            format = format + amount / 1000L;
         else
-            format = (new StringBuilder(format)).append(" ").toString();
+            format = format + " ";
         if(power % 3 == 0 && power > 3)
-            format = (new StringBuilder(format)).append(".").toString();
+            format = format + ".";
         if(power > 1)
-            format = (new StringBuilder(format)).append((amount % 1000L) / 100L).toString();
+            format = format + (amount % 1000L) / 100L;
         else
-            format = (new StringBuilder(format)).append(" ").toString();
+            format = format + " ";
         if((power - 1) % 3 == 0 && power > 3)
-            format = (new StringBuilder(format)).append(".").toString();
+            format = format + ".";
         if(power > 0)
-            format = (new StringBuilder(format)).append((amount % 100L) / 10L).toString();
+            format = format + (amount % 100L) / 10L;
         else
-            format = (new StringBuilder(format)).append(" ").toString();
+            format = format + " ";
         if(power < 4)
-            format = (new StringBuilder(format)).append(amount % 10L).toString();
+            format = format + amount % 10L;
         if(power > 17)
-            format = (new StringBuilder(format)).append("E").toString();
+            format = format + "E";
         else
         if(power > 14)
-            format = (new StringBuilder(format)).append("P").toString();
+            format = format + "P";
         else
         if(power > 11)
-            format = (new StringBuilder(format)).append("T").toString();
+            format = format + "T";
         else
         if(power > 8)
-            format = (new StringBuilder(format)).append("G").toString();
+            format = format + "G";
         else
         if(power > 5)
-            format = (new StringBuilder(format)).append("M").toString();
+            format = format + "M";
         else
         if(power > 3)
-            format = (new StringBuilder(format)).append("k").toString();
+            format = format + "k";
         return format;
     }
 
@@ -30416,7 +30416,7 @@ public class Forsaken
         if(amount < 0L)
         {
             amount = 0L - amount;
-            format = (new StringBuilder(format)).append("-").toString();
+            format = format + "-";
         }
         int power;
         for(power = 3; amount >= 10000L; power++)
@@ -30432,34 +30432,34 @@ public class Forsaken
             if(amount < 1000L)
                 power = 2;
         if(power > 2)
-            format = (new StringBuilder(format)).append(amount / 1000L).toString();
+            format = format + amount / 1000L;
         if(power % 3 == 0 && power > 3)
-            format = (new StringBuilder(format)).append(".").toString();
+            format = format + ".";
         if(power > 1)
-            format = (new StringBuilder(format)).append((amount % 1000L) / 100L).toString();
+            format = format + (amount % 1000L) / 100L;
         if((power - 1) % 3 == 0 && power > 3)
-            format = (new StringBuilder(format)).append(".").toString();
+            format = format + ".";
         if(power > 0)
-            format = (new StringBuilder(format)).append((amount % 100L) / 10L).toString();
+            format = format + (amount % 100L) / 10L;
         if(power < 4)
-            format = (new StringBuilder(format)).append(amount % 10L).toString();
+            format = format + amount % 10L;
         if(power > 17)
-            format = (new StringBuilder(format)).append("E").toString();
+            format = format + "E";
         else
         if(power > 14)
-            format = (new StringBuilder(format)).append("P").toString();
+            format = format + "P";
         else
         if(power > 11)
-            format = (new StringBuilder(format)).append("T").toString();
+            format = format + "T";
         else
         if(power > 8)
-            format = (new StringBuilder(format)).append("G").toString();
+            format = format + "G";
         else
         if(power > 5)
-            format = (new StringBuilder(format)).append("M").toString();
+            format = format + "M";
         else
         if(power > 3)
-            format = (new StringBuilder(format)).append("k").toString();
+            format = format + "k";
         return format;
     }
 
@@ -30587,7 +30587,7 @@ public class Forsaken
         if(demonLord.equals("Great Demon Lord"))
             return "the Great Demon Lord";
         if(titled)
-            return (new StringBuilder("the ")).append(demonLord).toString();
+            return "the " + demonLord;
         else
             return demonLord;
     }
@@ -30611,7 +30611,7 @@ public class Forsaken
         if(demonLord.equals("Great Demon Lord"))
             return "The Great Demon Lord";
         if(titled)
-            return (new StringBuilder("The ")).append(demonLord).toString();
+            return "The " + demonLord;
         else
             return demonLord;
     }

@@ -35,47 +35,47 @@ public class Activity
     public String activityName(Body partner)
     {
         if(this == Project.TweakClit)
-            return (new StringBuilder("Stroke ")).append(partner.ownerName()).append("'s Clit").toString();
+            return "Stroke " + partner.ownerName() + "'s Clit";
         if(this == Project.ClitTweaked)
-            return (new StringBuilder("Clit Stroked by ")).append(partner.ownerName()).toString();
+            return "Clit Stroked by " + partner.ownerName();
         if(this == Project.SpreadLegs)
             return "Spread Legs";
         if(this == Project.Praise)
-            return (new StringBuilder("Praise ")).append(partner.ownerName()).toString();
+            return "Praise " + partner.ownerName();
         if(this == Project.Insult)
-            return (new StringBuilder("Insult ")).append(partner.ownerName()).toString();
+            return "Insult " + partner.ownerName();
         if(this == Project.PushDown)
-            return (new StringBuilder("Atop ")).append(partner.ownerName()).toString();
+            return "Atop " + partner.ownerName();
         if(this == Project.PullDown)
-            return (new StringBuilder("Beneath ")).append(partner.ownerName()).toString();
+            return "Beneath " + partner.ownerName();
         if(this == Project.Escape)
-            return (new StringBuilder("Escape ")).append(partner.ownerName()).toString();
+            return "Escape " + partner.ownerName();
         if(this == Project.StopActing)
             return "Stop Activities";
         if(this == Project.TieUp)
-            return (new StringBuilder("Tie Up ")).append(partner.ownerName()).toString();
+            return "Tie Up " + partner.ownerName();
         if(this == Project.BeTied)
-            return (new StringBuilder("Tied Up By ")).append(partner.ownerName()).toString();
+            return "Tied Up By " + partner.ownerName();
         if(this == Project.StrokeCock)
-            return (new StringBuilder("Stroke ")).append(partner.ownerName()).append("'s Cock").toString();
+            return "Stroke " + partner.ownerName() + "'s Cock";
         if(this == Project.CockStroked)
-            return (new StringBuilder("Cock Stroked by ")).append(partner.ownerName()).toString();
+            return "Cock Stroked by " + partner.ownerName();
         if(this == Project.Lubricate)
-            return (new StringBuilder("Lubricate ")).append(partner.ownerName()).append("'s Anus").toString();
+            return "Lubricate " + partner.ownerName() + "'s Anus";
         if(this == Project.BeLubricated)
             return "Anus Lubricated";
         if(this == Project.VaginalPenetrate)
-            return (new StringBuilder("Fucking ")).append(partner.ownerName()).append("'s Pussy").toString();
+            return "Fucking " + partner.ownerName() + "'s Pussy";
         if(this == Project.PenetratedVaginally)
-            return (new StringBuilder("Pussy Fucked By ")).append(partner.ownerName()).toString();
+            return "Pussy Fucked By " + partner.ownerName();
         if(this == Project.AnalPenetrate)
-            return (new StringBuilder("Fucking ")).append(partner.ownerName()).append("'s Ass").toString();
+            return "Fucking " + partner.ownerName() + "'s Ass";
         if(this == Project.PenetratedAnally)
-            return (new StringBuilder("Ass Fucked By ")).append(partner.ownerName()).toString();
+            return "Ass Fucked By " + partner.ownerName();
         if(this == Project.StripOther)
-            return (new StringBuilder("Strip ")).append(partner.ownerName()).toString();
+            return "Strip " + partner.ownerName();
         if(this == Project.Stripped)
-            return (new StringBuilder("Stripped by ")).append(partner.ownerName()).toString();
+            return "Stripped by " + partner.ownerName();
         else
             return "";
     }
