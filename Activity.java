@@ -301,7 +301,7 @@ public class Activity
                     if(sender.getConfidence() > 66)
                     {
                         if(sender.getObedience() > 66)
-                            sender.say(t, (new StringBuilder("I'm... guh... f-fine, ")).append(sender.demonLord()).append("!").toString());
+                            sender.say(t, "I'm... guh... f-fine, " + sender.demonLord() + "!");
                         else
                         if(sender.getObedience() > 33)
                             sender.say(t, "Why are you doing this!?  I'm serving you now!  Gaaah, pleeease!");
@@ -371,7 +371,7 @@ public class Activity
             if(sender.getInnocence() > 66)
             {
                 if(sender.getObedience() > 66)
-                    sender.say(t, (new StringBuilder("That was... amazing!  It's like all my love for ")).append(sender.theDemonLord()).append("... came out at once...!").toString());
+                    sender.say(t, "That was... amazing!  It's like all my love for " + sender.theDemonLord() + "... came out at once...!");
                 else
                 if(sender.getObedience() > 33)
                     sender.say(t, "Aaah, what's happening...!?  I feel good!  I feel too good!  I'm going crazy...!");
@@ -381,7 +381,7 @@ public class Activity
             if(sender.getInnocence() > 33)
             {
                 if(sender.getObedience() > 66)
-                    sender.say(t, (new StringBuilder("When ")).append(sender.theDemonLord()).append(" makes me cum... it feels so much better than when I do it myself...!").toString());
+                    sender.say(t, "When " + sender.theDemonLord() + " makes me cum... it feels so much better than when I do it myself...!");
                 else
                 if(sender.getObedience() > 33)
                     sender.say(t, "Wow!  That was... intense!");
@@ -389,7 +389,7 @@ public class Activity
                     sender.say(t, "Ugh, you made me cum... even though I didn't want to...  Not with you...");
             } else
             if(sender.getObedience() > 66)
-                sender.say(t, (new StringBuilder("Such an... overwhelmingly intense orgasm!  Ah, ")).append(sender.demonLord()).append(", my body has come to desire your touch above all else!").toString());
+                sender.say(t, "Such an... overwhelmingly intense orgasm!  Ah, " + sender.demonLord() + ", my body has come to desire your touch above all else!");
             else
             if(sender.getObedience() > 33)
                 sender.say(t, "Your... nn... technique... certainly does not disappoint...");
@@ -435,15 +435,15 @@ public class Activity
             {
                 Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.LEWD);
                 if(sender.getDignity() > 66)
-                    sender.say(t, (new StringBuilder("Such an... incredible feeling of shame...!  Ngh...!  Thank you, ")).append(sender.demonLord()).append(", thank you for letting me feel this...!").toString());
+                    sender.say(t, "Such an... incredible feeling of shame...!  Ngh...!  Thank you, " + sender.demonLord() + ", thank you for letting me feel this...!");
                 else
                 if(sender.getDignity() > 33)
                 {
-                    sender.say(t, (new StringBuilder("Aaah, yes!  Now everyone will know that I belong to ")).append(sender.theDemonLord()).append("!").toString());
+                    sender.say(t, "Aaah, yes!  Now everyone will know that I belong to " + sender.theDemonLord() + "!");
                 } else
                 {
                     Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.FOCUS, Project.Emotion.FOCUS);
-                    sender.say(t, (new StringBuilder("Is there anything else you want me to show them, ")).append(sender.demonLord()).append("?").toString());
+                    sender.say(t, "Is there anything else you want me to show them, " + sender.demonLord() + "?");
                 }
             } else
             if(sender.getObedience() > 33)
@@ -483,15 +483,15 @@ public class Activity
                     if(sender.getInnocence() > 66)
                     {
                         Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.JOY, Project.Emotion.FOCUS);
-                        sender.say(t, (new StringBuilder("I'm so happy I get to make ")).append(sender.theDemonLord()).append(" feel good!").toString());
+                        sender.say(t, "I'm so happy I get to make " + sender.theDemonLord() + " feel good!");
                     } else
                     if(sender.getInnocence() > 33)
                     {
-                        sender.say(t, (new StringBuilder("Does this feel good, ")).append(sender.demonLord()).append("?  I just want to make you happy...").toString());
+                        sender.say(t, "Does this feel good, " + sender.demonLord() + "?  I just want to make you happy...");
                         Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.FOCUS, Project.Emotion.JOY);
                     } else
                     {
-                        sender.say(t, (new StringBuilder("I need to impress ")).append(sender.theDemonLord()).append(" with my technique...!").toString());
+                        sender.say(t, "I need to impress " + sender.theDemonLord() + " with my technique...!");
                         Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.FOCUS, Project.Emotion.NEUTRAL);
                     }
                 } else
@@ -535,12 +535,12 @@ public class Activity
                 {
                     Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.FOCUS, Project.Emotion.JOY);
                     if(sender.getInnocence() > 66)
-                        sender.say(t, (new StringBuilder("I'm so happy that I get to spend time with ")).append(sender.theDemonLord()).append("!").toString());
+                        sender.say(t, "I'm so happy that I get to spend time with " + sender.theDemonLord() + "!");
                     else
                     if(sender.getInnocence() > 33)
-                        sender.say(t, (new StringBuilder("Use me up until nothing is left, ")).append(sender.demonLord()).append(".").toString());
+                        sender.say(t, "Use me up until nothing is left, " + sender.demonLord() + ".");
                     else
-                        sender.say(t, (new StringBuilder("I am unworthy to serve ")).append(sender.theDemonLord()).append("... but I shall try my best!").toString());
+                        sender.say(t, "I am unworthy to serve " + sender.theDemonLord() + "... but I shall try my best!");
                 } else
                 if(sender.getObedience() > 33)
                 {
@@ -549,19 +549,19 @@ public class Activity
                         sender.say(t, "This is weird, but... kinda fun, too.");
                     else
                     if(sender.getInnocence() > 33)
-                        sender.say(t, (new StringBuilder("You're amazing, ")).append(sender.demonLord()).append(".").toString());
+                        sender.say(t, "You're amazing, " + sender.demonLord() + ".");
                     else
                         sender.say(t, "Let me prove my value to you.");
                 } else
                 {
                     Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.ANGER, Project.Emotion.SHAME);
                     if(sender.getInnocence() > 66)
-                        sender.say(t, (new StringBuilder(String.valueOf(sender.TheDemonLord()))).append(" isn't so bad...  Wait, what am I saying!?").toString());
+                        sender.say(t, String.valueOf(sender.TheDemonLord()) + " isn't so bad...  Wait, what am I saying!?");
                     else
                     if(sender.getInnocence() > 33)
                         sender.say(t, "Ugh, I'm completely under your control...");
                     else
-                        sender.say(t, (new StringBuilder("I'm... aware that I stand no chance of defeating you, ")).append(sender.demonLord()).append(".").toString());
+                        sender.say(t, "I'm... aware that I stand no chance of defeating you, " + sender.demonLord() + ".");
                 }
             } else
             if(w.sceneDuration % 3 == 1)
@@ -570,10 +570,10 @@ public class Activity
                 {
                     Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.JOY);
                     if(sender.getDeviancy() > 66)
-                        sender.say(t, (new StringBuilder("I-Increidble...!  Being with ")).append(sender.theDemonLord()).append(" feels even better...!").toString());
+                        sender.say(t, "I-Increidble...!  Being with " + sender.theDemonLord() + " feels even better...!");
                     else
                     if(sender.getDeviancy() > 33)
-                        sender.say(t, (new StringBuilder("I love you, ")).append(sender.demonLord()).append("!").toString());
+                        sender.say(t, "I love you, " + sender.demonLord() + "!");
                     else
                         sender.say(t, "You're remaking me... into your own personal toy...!");
                 } else
@@ -582,22 +582,22 @@ public class Activity
                     if(sender.getDeviancy() > 66)
                     {
                         Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.JOY);
-                        sender.say(t, (new StringBuilder("I want you to make me feel even better, ")).append(sender.demonLord()).append("!").toString());
+                        sender.say(t, "I want you to make me feel even better, " + sender.demonLord() + "!");
                     } else
                     if(sender.getDeviancy() > 33)
                     {
                         Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.NEUTRAL, Project.Emotion.JOY);
-                        sender.say(t, (new StringBuilder("My body is all yours, ")).append(sender.demonLord()).append(".").toString());
+                        sender.say(t, "My body is all yours, " + sender.demonLord() + ".");
                     } else
                     {
                         Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.SHAME, Project.Emotion.ANGER);
-                        sender.say(t, (new StringBuilder("Your touch is... unforgettable, ")).append(sender.demonLord()).append("...").toString());
+                        sender.say(t, "Your touch is... unforgettable, " + sender.demonLord() + "...");
                     }
                 } else
                 {
                     Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.ANGER, Project.Emotion.SHAME);
                     if(sender.getDeviancy() > 66)
-                        sender.say(t, (new StringBuilder("Ugh... I... I can't resist you, ")).append(sender.demonLord()).append("...").toString());
+                        sender.say(t, "Ugh... I... I can't resist you, " + sender.demonLord() + "...");
                     else
                     if(sender.getDeviancy() > 33)
                         sender.say(t, "You're almost making me forget that you're the Demon Lord.");
@@ -616,7 +616,7 @@ public class Activity
                     if(sender.getConfidence() > 33)
                     {
                         Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.FOCUS, Project.Emotion.JOY);
-                        sender.say(t, (new StringBuilder("You're just perfect, ")).append(sender.demonLord()).append("!  I don't know why I ever fought you...").toString());
+                        sender.say(t, "You're just perfect, " + sender.demonLord() + "!  I don't know why I ever fought you...");
                     } else
                     {
                         Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.SHAME, Project.Emotion.NEUTRAL);
@@ -657,12 +657,12 @@ public class Activity
                 {
                     Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.STRUGGLE, Project.Emotion.SHAME);
                     if(sender.getINJULevel() > 3)
-                        sender.say(t, (new StringBuilder("P-Please... ")).append(sender.demonLord()).append("...  I'm passing out...").toString());
+                        sender.say(t, "P-Please... " + sender.demonLord() + "...  I'm passing out...");
                     else
                     if(sender.getINJULevel() == 2)
-                        sender.say(t, (new StringBuilder("I can't keep up with you, ")).append(sender.demonLord()).append("...").toString());
+                        sender.say(t, "I can't keep up with you, " + sender.demonLord() + "...");
                     else
-                        sender.say(t, (new StringBuilder("Are you trying to punish me, ")).append(sender.demonLord()).append("?").toString());
+                        sender.say(t, "Are you trying to punish me, " + sender.demonLord() + "?");
                 } else
                 if(sender.getObedience() > 33)
                 {
@@ -696,12 +696,12 @@ public class Activity
                 {
                     Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
                     if(sender.getHATELevel() > 1)
-                        sender.say(t, (new StringBuilder("I don't want to be angry with ")).append(sender.theDemonLord()).append(", but...!").toString());
+                        sender.say(t, "I don't want to be angry with " + sender.theDemonLord() + ", but...!");
                     else
                     if(sender.getHATELevel() == 1)
                         sender.say(t, "Just... Just give me a moment to calm down...!");
                     else
-                        sender.say(t, (new StringBuilder("I'm sorry, ")).append(sender.demonLord()).append("...").toString());
+                        sender.say(t, "I'm sorry, " + sender.demonLord() + "...");
                 } else
                 if(sender.getObedience() > 33)
                 {
@@ -713,7 +713,7 @@ public class Activity
                     if(sender.getHATELevel() == 1)
                     {
                         Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
-                        sender.say(t, (new StringBuilder("I'm not happy with you right now, ")).append(sender.demonLord()).append(".").toString());
+                        sender.say(t, "I'm not happy with you right now, " + sender.demonLord() + ".");
                     } else
                     {
                         Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.NEUTRAL, Project.Emotion.STRUGGLE);
@@ -739,12 +739,12 @@ public class Activity
             {
                 Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
                 if(sender.getDeviancy() > 66)
-                    sender.say(t, (new StringBuilder("I'll just... dream about a nicer ")).append(sender.demonLord()).append("...").toString());
+                    sender.say(t, "I'll just... dream about a nicer " + sender.demonLord() + "...");
                 else
                 if(sender.getDeviancy() > 33)
-                    sender.say(t, (new StringBuilder("How can I hate this, when it's with ")).append(sender.theDemonLord()).append("...?").toString());
+                    sender.say(t, "How can I hate this, when it's with " + sender.theDemonLord() + "...?");
                 else
-                    sender.say(t, (new StringBuilder("Even if it's with ")).append(sender.theDemonLord()).append(", I... I don't like this...").toString());
+                    sender.say(t, "Even if it's with " + sender.theDemonLord() + ", I... I don't like this...");
             } else
             if(sender.getObedience() > 33)
             {
@@ -770,7 +770,7 @@ public class Activity
         } else
         if(this == Project.SpreadLegs)
         {
-            sender.say(t, (new StringBuilder("Please, touch me more, ")).append(sender.demonLord()).append("!").toString());
+            sender.say(t, "Please, touch me more, " + sender.demonLord() + "!");
             Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.JOY);
         } else
         if(this == Project.PushDown)
@@ -780,7 +780,7 @@ public class Activity
                 if(sender.getConfidence() > 66)
                 {
                     Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.FOCUS);
-                    sender.say(t, (new StringBuilder("Aaah... I wanna rape ")).append(sender.theDemonLord()).append(" a lot...!").toString());
+                    sender.say(t, "Aaah... I wanna rape " + sender.theDemonLord() + " a lot...!");
                 } else
                 if(sender.getConfidence() > 33)
                 {
@@ -806,7 +806,7 @@ public class Activity
             if(sender.getObedience() > 66)
             {
                 Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.SHAME, Project.Emotion.FEAR);
-                sender.say(t, (new StringBuilder("Are you sure you don't want to lead, ")).append(sender.demonLord()).append("?").toString());
+                sender.say(t, "Are you sure you don't want to lead, " + sender.demonLord() + "?");
             } else
             if(sender.getObedience() > 33)
             {
@@ -870,7 +870,7 @@ public class Activity
                 if(sender.getMorality() > 66)
                 {
                     Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
-                    sender.say(t, (new StringBuilder("I-I'm so sorry, ")).append(sender.demonLord()).append("...  I'm worthless...").toString());
+                    sender.say(t, "I-I'm so sorry, " + sender.demonLord() + "...  I'm worthless...");
                 } else
                 if(sender.getMorality() > 33)
                 {
@@ -879,7 +879,7 @@ public class Activity
                 } else
                 {
                     Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.FEAR, Project.Emotion.SHAME);
-                    sender.say(t, (new StringBuilder("I can't!  Even if you are ")).append(sender.theDemonLord()).append("!").toString());
+                    sender.say(t, "I can't!  Even if you are " + sender.theDemonLord() + "!");
                 }
             } else
             if(sender.getObedience() > 33)
@@ -969,15 +969,15 @@ public class Activity
                     if(sender.getInnocence() > 66)
                     {
                         Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.JOY, Project.Emotion.FOCUS);
-                        sender.say(t, (new StringBuilder("I'm so happy I get to make ")).append(sender.theDemonLord()).append(" feel good!").toString());
+                        sender.say(t, "I'm so happy I get to make " + sender.theDemonLord() + " feel good!");
                     } else
                     if(sender.getInnocence() > 33)
                     {
-                        sender.say(t, (new StringBuilder("Does this feel good, ")).append(sender.demonLord()).append("?  I just want to make you happy...").toString());
+                        sender.say(t, "Does this feel good, " + sender.demonLord() + "?  I just want to make you happy...");
                         Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.FOCUS, Project.Emotion.JOY);
                     } else
                     {
-                        sender.say(t, (new StringBuilder("I need to impress ")).append(sender.theDemonLord()).append(" with my technique...!").toString());
+                        sender.say(t, "I need to impress " + sender.theDemonLord() + " with my technique...!");
                         Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.FOCUS, Project.Emotion.NEUTRAL);
                     }
                 } else
@@ -1048,7 +1048,7 @@ public class Activity
                 if(sender.getObedience() > 66)
                 {
                     Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.JOY, Project.Emotion.FOCUS);
-                    sender.say(t, (new StringBuilder("I love you, ")).append(sender.demonLord()).append("!  I love you so much!").toString());
+                    sender.say(t, "I love you, " + sender.demonLord() + "!  I love you so much!");
                 } else
                 if(sender.getObedience() > 33)
                 {
@@ -1111,7 +1111,7 @@ public class Activity
                     if(sender.getObedience() > 33)
                     {
                         Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.JOY);
-                        sender.say(t, (new StringBuilder("Aaah...  Your cock is amazing, ")).append(sender.demonLord()).append("!").toString());
+                        sender.say(t, "Aaah...  Your cock is amazing, " + sender.demonLord() + "!");
                     } else
                     {
                         Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.ANGER);
@@ -1156,7 +1156,7 @@ public class Activity
                 if(sender.getDeviancy() > 33)
                 {
                     Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
-                    sender.say(t, (new StringBuilder("I'm sorry, ")).append(sender.demonLord()).append("!  It feels too good with you inside me!").toString());
+                    sender.say(t, "I'm sorry, " + sender.demonLord() + "!  It feels too good with you inside me!");
                 } else
                 {
                     Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.FOCUS, Project.Emotion.JOY);
@@ -1224,7 +1224,7 @@ public class Activity
                 if(sender.getObedience() > 66)
                 {
                     Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.JOY, Project.Emotion.FOCUS);
-                    sender.say(t, (new StringBuilder("I love you, ")).append(sender.demonLord()).append("!  I love you so much!").toString());
+                    sender.say(t, "I love you, " + sender.demonLord() + "!  I love you so much!");
                 } else
                 if(sender.getObedience() > 33)
                 {
@@ -1286,7 +1286,7 @@ public class Activity
                     if(sender.getObedience() > 33)
                     {
                         Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.JOY);
-                        sender.say(t, (new StringBuilder("Aaah...  Your cock is amazing, ")).append(sender.demonLord()).append("!").toString());
+                        sender.say(t, "Aaah...  Your cock is amazing, " + sender.demonLord() + "!");
                     } else
                     {
                         Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.ANGER);
@@ -1333,7 +1333,7 @@ public class Activity
                     if(sender.getDeviancy() > 33)
                     {
                         Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
-                        sender.say(t, (new StringBuilder("I'm sorry, ")).append(sender.demonLord()).append("!  It feels too good with you inside me!").toString());
+                        sender.say(t, "I'm sorry, " + sender.demonLord() + "!  It feels too good with you inside me!");
                     } else
                     {
                         Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.FOCUS, Project.Emotion.JOY);
@@ -1371,7 +1371,7 @@ public class Activity
                 if(sender.getConfidence() > 66)
                 {
                     if(sender.getObedience() > 66)
-                        sender.say(t, (new StringBuilder("I'm... guh... f-fine, ")).append(sender.demonLord()).append("!").toString());
+                        sender.say(t, "I'm... guh... f-fine, " + sender.demonLord() + "!");
                     else
                     if(sender.getObedience() > 33)
                         sender.say(t, "Why are you doing this!?  I'm serving you now!  Gaaah, pleeease!");
@@ -1403,91 +1403,91 @@ public class Activity
     public void shortDescription(JTextPane t, WorldState w, Body sender, Body receiver)
     {
         if(this == Project.TweakClit)
-            w.append(t, (new StringBuilder("\n")).append(sender.capitalizedOwnerName()).append(" is stroking ").append(receiver.ownerName()).append("'s clit").toString());
+            w.append(t, "\n" + sender.capitalizedOwnerName() + " is stroking " + receiver.ownerName() + "'s clit");
         else
         if(this == Project.ClitTweaked)
-            w.append(t, (new StringBuilder("\n")).append(receiver.capitalizedOwnerName()).append(" is stroking ").append(sender.ownerName()).append("'s clit").toString());
+            w.append(t, "\n" + receiver.capitalizedOwnerName() + " is stroking " + sender.ownerName() + "'s clit");
         else
         if(this == Project.SpreadLegs)
-            w.append(t, (new StringBuilder("\n")).append(sender.capitalizedOwnerName()).append(" is spreading ").append(sender.hisHer()).append(" legs wide apart").toString());
+            w.append(t, "\n" + sender.capitalizedOwnerName() + " is spreading " + sender.hisHer() + " legs wide apart");
         else
         if(this == Project.PushDown)
-            w.append(t, (new StringBuilder("\n")).append(sender.OwnerName()).append(" is atop ").append(receiver.ownerName()).toString());
+            w.append(t, "\n" + sender.OwnerName() + " is atop " + receiver.ownerName());
         else
         if(this == Project.PullDown)
-            w.append(t, (new StringBuilder("\n")).append(receiver.OwnerName()).append(" is atop ").append(sender.ownerName()).toString());
+            w.append(t, "\n" + receiver.OwnerName() + " is atop " + sender.ownerName());
         else
         if(this == Project.TieUp)
-            w.append(t, (new StringBuilder("\n")).append(receiver.OwnerName()).append(" has been tied up by ").append(sender.ownerName()).toString());
+            w.append(t, "\n" + receiver.OwnerName() + " has been tied up by " + sender.ownerName());
         else
         if(this == Project.BeTied)
-            w.append(t, (new StringBuilder("\n")).append(sender.OwnerName()).append(" has been tied up by ").append(receiver.ownerName()).toString());
+            w.append(t, "\n" + sender.OwnerName() + " has been tied up by " + receiver.ownerName());
         else
         if(this == Project.StrokeCock)
-            w.append(t, (new StringBuilder("\n")).append(sender.OwnerName()).append(" strokes ").append(receiver.ownerName()).append("'s cock").toString());
+            w.append(t, "\n" + sender.OwnerName() + " strokes " + receiver.ownerName() + "'s cock");
         else
         if(this == Project.CockStroked)
-            w.append(t, (new StringBuilder("\n")).append(receiver.OwnerName()).append(" strokes ").append(sender.ownerName()).append("'s cock").toString());
+            w.append(t, "\n" + receiver.OwnerName() + " strokes " + sender.ownerName() + "'s cock");
         else
         if(this == Project.BeLubricated)
-            w.append(t, (new StringBuilder("\n")).append(sender.OwnerName()).append("'s anus is coated with slick lubricant").toString());
+            w.append(t, "\n" + sender.OwnerName() + "'s anus is coated with slick lubricant");
         else
         if(this == Project.VaginalPenetrate)
-            w.append(t, (new StringBuilder("\n")).append(sender.OwnerName()).append(" fucks ").append(receiver.ownerName()).append(" vaginally").toString());
+            w.append(t, "\n" + sender.OwnerName() + " fucks " + receiver.ownerName() + " vaginally");
         else
         if(this == Project.PenetratedVaginally)
-            w.append(t, (new StringBuilder("\n")).append(receiver.OwnerName()).append(" fucks ").append(sender.ownerName()).append(" vaginally").toString());
+            w.append(t, "\n" + receiver.OwnerName() + " fucks " + sender.ownerName() + " vaginally");
         else
         if(this == Project.AnalPenetrate)
-            w.append(t, (new StringBuilder("\n")).append(sender.OwnerName()).append(" fucks ").append(receiver.ownerName()).append("'s ass").toString());
+            w.append(t, "\n" + sender.OwnerName() + " fucks " + receiver.ownerName() + "'s ass");
         else
         if(this == Project.PenetratedAnally)
-            w.append(t, (new StringBuilder("\n")).append(receiver.OwnerName()).append(" fucks ").append(sender.ownerName()).append("'s ass").toString());
+            w.append(t, "\n" + receiver.OwnerName() + " fucks " + sender.ownerName() + "'s ass");
         else
         if(this == Project.StripOther)
-            w.append(t, (new StringBuilder("\n")).append(sender.OwnerName()).append(" strips off ").append(receiver.ownerName()).append("'s clothes.").toString());
+            w.append(t, "\n" + sender.OwnerName() + " strips off " + receiver.ownerName() + "'s clothes.");
         else
         if(this == Project.Stripped)
-            w.append(t, (new StringBuilder("\n")).append(receiver.OwnerName()).append(" strips off ").append(sender.ownerName()).append("'s clothes.").toString());
+            w.append(t, "\n" + receiver.OwnerName() + " strips off " + sender.ownerName() + "'s clothes.");
     }
 
     public void endActivityFlavor(JTextPane t, WorldState w, Body sender, Body receiver)
     {
         if(this == Project.TweakClit)
-            w.append(t, (new StringBuilder("\n\n")).append(sender.capitalizedOwnerName()).append(" takes ").append(sender.hisHer()).append(" hand from ").append(receiver.ownerName()).append("'s clit.").toString());
+            w.append(t, "\n\n" + sender.capitalizedOwnerName() + " takes " + sender.hisHer() + " hand from " + receiver.ownerName() + "'s clit.");
         else
         if(this == Project.ClitTweaked)
-            w.append(t, (new StringBuilder("\n\n")).append(sender.capitalizedOwnerName()).append(" moves ").append(sender.hisHer()).append(" hips away from ").append(receiver.ownerName()).append("'s hand.").toString());
+            w.append(t, "\n\n" + sender.capitalizedOwnerName() + " moves " + sender.hisHer() + " hips away from " + receiver.ownerName() + "'s hand.");
         else
         if(this == Project.PushDown)
-            w.append(t, (new StringBuilder("\n\n")).append(sender.capitalizedOwnerName()).append(" stands, letting ").append(receiver.ownerName()).append(" up.").toString());
+            w.append(t, "\n\n" + sender.capitalizedOwnerName() + " stands, letting " + receiver.ownerName() + " up.");
         else
         if(this == Project.PullDown)
-            w.append(t, (new StringBuilder("\n\n")).append(sender.OwnerName()).append(" gets out from under ").append(receiver.ownerName()).append(".").toString());
+            w.append(t, "\n\n" + sender.OwnerName() + " gets out from under " + receiver.ownerName() + ".");
         else
         if(this == Project.TieUp)
-            w.append(t, (new StringBuilder("\n\n")).append(sender.OwnerName()).append(" unties ").append(receiver.ownerName()).append("'s bindings.").toString());
+            w.append(t, "\n\n" + sender.OwnerName() + " unties " + receiver.ownerName() + "'s bindings.");
         else
         if(this == Project.StrokeCock)
-            w.append(t, (new StringBuilder("\n\n")).append(sender.capitalizedOwnerName()).append(" takes ").append(sender.hisHer()).append(" hand from ").append(receiver.ownerName()).append("'s cock.").toString());
+            w.append(t, "\n\n" + sender.capitalizedOwnerName() + " takes " + sender.hisHer() + " hand from " + receiver.ownerName() + "'s cock.");
         else
         if(this == Project.CockStroked)
-            w.append(t, (new StringBuilder("\n\n")).append(sender.capitalizedOwnerName()).append(" moves ").append(sender.hisHer()).append(" hips away from ").append(receiver.ownerName()).append("'s hand.").toString());
+            w.append(t, "\n\n" + sender.capitalizedOwnerName() + " moves " + sender.hisHer() + " hips away from " + receiver.ownerName() + "'s hand.");
         else
         if(this == Project.VaginalPenetrate)
-            w.append(t, (new StringBuilder("\n\n")).append(sender.capitalizedOwnerName()).append(" pulls ").append(sender.himHer()).append("self out of ").append(receiver.ownerName()).append("'s pussy.").toString());
+            w.append(t, "\n\n" + sender.capitalizedOwnerName() + " pulls " + sender.himHer() + "self out of " + receiver.ownerName() + "'s pussy.");
         else
         if(this == Project.PenetratedVaginally)
-            w.append(t, (new StringBuilder("\n\n")).append(sender.capitalizedOwnerName()).append(" lifts ").append(sender.himHer()).append("self until ").append(receiver.ownerName()).append("'s cock slides out of ").append(sender.hisHer()).append(" pussy.").toString());
+            w.append(t, "\n\n" + sender.capitalizedOwnerName() + " lifts " + sender.himHer() + "self until " + receiver.ownerName() + "'s cock slides out of " + sender.hisHer() + " pussy.");
         else
         if(this == Project.AnalPenetrate)
-            w.append(t, (new StringBuilder("\n\n")).append(sender.OwnerName()).append(" pulls ").append(sender.himHer()).append("self out of ").append(receiver.ownerName()).append("'s ass.").toString());
+            w.append(t, "\n\n" + sender.OwnerName() + " pulls " + sender.himHer() + "self out of " + receiver.ownerName() + "'s ass.");
         else
         if(this == Project.PenetratedAnally)
-            w.append(t, (new StringBuilder("\n\n")).append(sender.OwnerName()).append(" lifts ").append(sender.himHer()).append("self until ").append(receiver.ownerName()).append("'s cock slides out of ").append(sender.hisHer()).append(" ass.").toString());
+            w.append(t, "\n\n" + sender.OwnerName() + " lifts " + sender.himHer() + "self until " + receiver.ownerName() + "'s cock slides out of " + sender.hisHer() + " ass.");
         else
         if(this == Project.StripOther)
-            w.append(t, (new StringBuilder("\n\n")).append(sender.OwnerName()).append(" stops removing ").append(receiver.ownerName()).append("'s clothes.").toString());
+            w.append(t, "\n\n" + sender.OwnerName() + " stops removing " + receiver.ownerName() + "'s clothes.");
     }
 
     public void startActivity(JTextPane t, WorldState w, Body sender, Body receiver)
@@ -1512,46 +1512,46 @@ public class Activity
         if(this == Project.TweakClit)
         {
             if(sender == w.lordBody)
-                w.append(t, (new StringBuilder(String.valueOf(sender.capitalizedOwnerName()))).append(" begins to caress ").append(receiver.ownerName()).append("'s clit.").toString());
+                w.append(t, String.valueOf(sender.capitalizedOwnerName()) + " begins to caress " + receiver.ownerName() + "'s clit.");
             else
             if(receiver == w.lordBody)
             {
-                w.append(t, (new StringBuilder(String.valueOf(sender.capitalizedOwnerName()))).append(" ").toString());
+                w.append(t, String.valueOf(sender.capitalizedOwnerName()) + " ");
                 if(sender.getDeviancy() > 66)
                 {
                     if(sender.getInnocence() > 66)
-                        w.append(t, (new StringBuilder("loses ")).append(sender.himHer()).append("self in the act of rubbing ").append(receiver.ownerName()).append("'s clit, eyes glazed over and drooling with desire.").toString());
+                        w.append(t, "loses " + sender.himHer() + "self in the act of rubbing " + receiver.ownerName() + "'s clit, eyes glazed over and drooling with desire.");
                     else
                     if(sender.getInnocence() > 33)
-                        w.append(t, (new StringBuilder("reaches eagerly for ")).append(receiver.ownerName()).append("'s clit, stroking it with an aggressive firmness that comes just short of being painful.").toString());
+                        w.append(t, "reaches eagerly for " + receiver.ownerName() + "'s clit, stroking it with an aggressive firmness that comes just short of being painful.");
                     else
-                        w.append(t, (new StringBuilder("abruptly puts ")).append(sender.hisHer()).append(" hand against ").append(receiver.ownerName()).append("'s clit and starts rubbing up and down, then fondling it with ").append(sender.hisHer()).append(" fingers, then gently tugging on it, using every technique at ").append(sender.hisHer()).append(" disposal.").toString());
+                        w.append(t, "abruptly puts " + sender.hisHer() + " hand against " + receiver.ownerName() + "'s clit and starts rubbing up and down, then fondling it with " + sender.hisHer() + " fingers, then gently tugging on it, using every technique at " + sender.hisHer() + " disposal.");
                 } else
                 if(sender.getDeviancy() > 33)
                 {
                     if(sender.getInnocence() > 66)
-                        w.append(t, (new StringBuilder("pokes and prods ")).append(receiver.ownerName()).append("'s clit, then gradually gets into a rhythm of stroking it as ").append(receiver.heShe()).append(" grows more confident in what ").append(receiver.heShe()).append("'s doing.").toString());
+                        w.append(t, "pokes and prods " + receiver.ownerName() + "'s clit, then gradually gets into a rhythm of stroking it as " + receiver.heShe() + " grows more confident in what " + receiver.heShe() + "'s doing.");
                     else
                     if(sender.getInnocence() > 33)
-                        w.append(t, (new StringBuilder("brushes ")).append(sender.hisHer()).append(" fingers against ").append(receiver.ownerName()).append("'s clit, trailing them up and down, then growing more firm, stroking it in earnest.").toString());
+                        w.append(t, "brushes " + sender.hisHer() + " fingers against " + receiver.ownerName() + "'s clit, trailing them up and down, then growing more firm, stroking it in earnest.");
                     else
-                        w.append(t, (new StringBuilder("carefully starts to stroke ")).append(receiver.ownerName()).append("'s clit, staring into ").append(receiver.hisHer()).append(" eyes to gauge ").append(receiver.hisHer()).append(" reaction.").toString());
+                        w.append(t, "carefully starts to stroke " + receiver.ownerName() + "'s clit, staring into " + receiver.hisHer() + " eyes to gauge " + receiver.hisHer() + " reaction.");
                 } else
                 {
                     if(sender.getInnocence() > 66)
-                        w.append(t, (new StringBuilder("hesitantly touches ")).append(receiver.ownerName()).append("'s clit, then begins to clumsily stroke it, averting ").append(sender.hisHer()).append(" eyes as ").append(sender.heShe()).append(" does so.  ").toString());
+                        w.append(t, "hesitantly touches " + receiver.ownerName() + "'s clit, then begins to clumsily stroke it, averting " + sender.hisHer() + " eyes as " + sender.heShe() + " does so.  ");
                     else
                     if(sender.getInnocence() > 33)
-                        w.append(t, (new StringBuilder("begins to stroke ")).append(receiver.ownerName()).append("'s clit with stiff, mechanical movements.  ").toString());
+                        w.append(t, "begins to stroke " + receiver.ownerName() + "'s clit with stiff, mechanical movements.  ");
                     else
-                        w.append(t, (new StringBuilder("brings ")).append(sender.hisHer()).append(" fingers to ").append(receiver.ownerName()).append("'s clit and begins to stroke it with precise, methodical movements.  ").toString());
+                        w.append(t, "brings " + sender.hisHer() + " fingers to " + receiver.ownerName() + "'s clit and begins to stroke it with precise, methodical movements.  ");
                     if(sender.getObedience() > 66)
-                        w.append(t, (new StringBuilder("It's clear that ")).append(sender.heShe()).append("'s unfamiliar with this sort of thing, but ").append(sender.heShe()).append("'s doing ").append(sender.hisHer()).append(" best for ").append(receiver.ownerName()).append(".").toString());
+                        w.append(t, "It's clear that " + sender.heShe() + "'s unfamiliar with this sort of thing, but " + sender.heShe() + "'s doing " + sender.hisHer() + " best for " + receiver.ownerName() + ".");
                     else
                     if(sender.getObedience() > 33)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.HisHer()))).append(" heart clearly isn't in it.").toString());
+                        w.append(t, String.valueOf(sender.HisHer()) + " heart clearly isn't in it.");
                     else
-                        w.append(t, (new StringBuilder(String.valueOf(sender.HeShe()))).append(" looks sickened by what ").append(sender.heShe()).append("'s doing.").toString());
+                        w.append(t, String.valueOf(sender.HeShe()) + " looks sickened by what " + sender.heShe() + "'s doing.");
                 }
             }
         } else
@@ -1559,39 +1559,39 @@ public class Activity
         {
             if(sender == w.lordBody)
             {
-                w.append(t, (new StringBuilder(String.valueOf(sender.capitalizedOwnerName()))).append("'s clit is caressed by ").append(receiver.ownerName()).append(".").toString());
+                w.append(t, String.valueOf(sender.capitalizedOwnerName()) + "'s clit is caressed by " + receiver.ownerName() + ".");
             } else
             {
                 w.append(t, sender.capitalizedOwnerName());
                 if(sender.getInnocence() > 66)
                 {
-                    w.append(t, (new StringBuilder(" gasps at the sudden intensity of the stimulation to ")).append(sender.hisHer()).append(" most sensitive part, and ").toString());
+                    w.append(t, " gasps at the sudden intensity of the stimulation to " + sender.hisHer() + " most sensitive part, and ");
                     if(sender.getDeviancy() > 66)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.hisHer()))).append(" eyes glaze over as ").append(sender.heShe()).append(" loses the ability to think of anything other than feeling even better.  ").toString());
+                        w.append(t, String.valueOf(sender.hisHer()) + " eyes glaze over as " + sender.heShe() + " loses the ability to think of anything other than feeling even better.  ");
                     else
                     if(sender.getDeviancy() > 33)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.hisHer()))).append(" hips jerk wildly, seemingly caught between jerking away and pushing themselves against ").append(receiver.ownerName()).append("'s fingers.  ").toString());
+                        w.append(t, String.valueOf(sender.hisHer()) + " hips jerk wildly, seemingly caught between jerking away and pushing themselves against " + receiver.ownerName() + "'s fingers.  ");
                     else
-                        w.append(t, (new StringBuilder(String.valueOf(sender.heShe()))).append(" reflexively tries to jerk ").append(sender.hisHer()).append(" hips away.  ").toString());
+                        w.append(t, String.valueOf(sender.heShe()) + " reflexively tries to jerk " + sender.hisHer() + " hips away.  ");
                 } else
                 if(sender.getInnocence() > 33)
                 {
-                    w.append(t, (new StringBuilder(" feels jolts of pleasure shooting into ")).append(sender.hisHer()).append(" lower tummy").toString());
+                    w.append(t, " feels jolts of pleasure shooting into " + sender.hisHer() + " lower tummy");
                     if(sender.getDeviancy() > 66)
-                        w.append(t, (new StringBuilder(", and ")).append(sender.heShe()).append(" moans helplessly, ").append(sender.hisHer()).append(" well-trained body eagerly submitting itself to ").append(receiver.ownerName()).append("'s touch.  ").toString());
+                        w.append(t, ", and " + sender.heShe() + " moans helplessly, " + sender.hisHer() + " well-trained body eagerly submitting itself to " + receiver.ownerName() + "'s touch.  ");
                     else
                     if(sender.getDeviancy() > 33)
-                        w.append(t, (new StringBuilder(", and it's a struggle for ")).append(sender.himHer()).append(" to hold onto ").append(sender.hisHer()).append(" reason.  ").toString());
+                        w.append(t, ", and it's a struggle for " + sender.himHer() + " to hold onto " + sender.hisHer() + " reason.  ");
                     else
-                        w.append(t, (new StringBuilder(", even as ")).append(sender.heShe()).append(" tries to ignore them.  ").toString());
+                        w.append(t, ", even as " + sender.heShe() + " tries to ignore them.  ");
                 } else
                 {
-                    w.append(t, (new StringBuilder(" knew this was coming, but ")).append(sender.heShe()).append(" still ").toString());
+                    w.append(t, " knew this was coming, but " + sender.heShe() + " still ");
                     if(sender.getDeviancy() > 66)
-                        w.append(t, (new StringBuilder("squirms and cries out, unable to maintain any self-control in the face of the pleasure ")).append(sender.heShe()).append("'s come to crave.  ").toString());
+                        w.append(t, "squirms and cries out, unable to maintain any self-control in the face of the pleasure " + sender.heShe() + "'s come to crave.  ");
                     else
                     if(sender.getDeviancy() > 33)
-                        w.append(t, (new StringBuilder("gasps softly at the waves of pleasure that begin to wash over ")).append(sender.hisHer()).append(" lower body.  ").toString());
+                        w.append(t, "gasps softly at the waves of pleasure that begin to wash over " + sender.hisHer() + " lower body.  ");
                     else
                         w.append(t, "flinches and grimaces, uncomfortable with the intensity of the sensations.  ");
                 }
@@ -1599,36 +1599,36 @@ public class Activity
                     if(sender.getDeviancy() > 66)
                     {
                         if(sender.getObedience() > 66)
-                            w.append(t, (new StringBuilder(String.valueOf(sender.HisHer()))).append(" body has grown quite sensitive, but it's even more sensitive than usual when ").append(sender.heShe()).append(" knows ").append(sender.heShe()).append("'s being touched by ").append(receiver.ownerName()).append(".").toString());
+                            w.append(t, String.valueOf(sender.HisHer()) + " body has grown quite sensitive, but it's even more sensitive than usual when " + sender.heShe() + " knows " + sender.heShe() + "'s being touched by " + receiver.ownerName() + ".");
                         else
                         if(sender.getObedience() > 33)
-                            w.append(t, (new StringBuilder("Soon, ")).append(sender.heShe()).append("'s completely consumed in ").append(sender.hisHer()).append(" efforts to hump ").append(receiver.ownerName()).append("'s hand.").toString());
+                            w.append(t, "Soon, " + sender.heShe() + "'s completely consumed in " + sender.hisHer() + " efforts to hump " + receiver.ownerName() + "'s hand.");
                         else
-                            w.append(t, (new StringBuilder(String.valueOf(sender.HeShe()))).append(" tries to resist, but ").append(sender.hisHer()).append(" body has grown so sensitive that the lightest touch to ").append(sender.hisHer()).append(" weak spots is enough to subdue ").append(sender.himHer()).append(".").toString());
+                            w.append(t, String.valueOf(sender.HeShe()) + " tries to resist, but " + sender.hisHer() + " body has grown so sensitive that the lightest touch to " + sender.hisHer() + " weak spots is enough to subdue " + sender.himHer() + ".");
                     } else
                     if(sender.getDeviancy() > 33)
                     {
                         if(sender.getObedience() > 66)
-                            w.append(t, (new StringBuilder("Even more than the physical stimulation itself, ")).append(sender.ownerName()).append(" is ecstatic that ").append(receiver.ownerName()).append(" is pleasuring ").append(sender.himHer()).append(" directly.").toString());
+                            w.append(t, "Even more than the physical stimulation itself, " + sender.ownerName() + " is ecstatic that " + receiver.ownerName() + " is pleasuring " + sender.himHer() + " directly.");
                         else
                         if(sender.getObedience() > 33)
-                            w.append(t, (new StringBuilder(String.valueOf(sender.HeShe()))).append("'s content to let ").append(receiver.ownerName()).append(" pleasure ").append(sender.himHer()).append(".").toString());
+                            w.append(t, String.valueOf(sender.HeShe()) + "'s content to let " + receiver.ownerName() + " pleasure " + sender.himHer() + ".");
                         else
-                            w.append(t, (new StringBuilder(String.valueOf(sender.HeShe()))).append(" has a hard time remembering that ").append(sender.heShe()).append("'s supposed to hate the Demon Lord.").toString());
+                            w.append(t, String.valueOf(sender.HeShe()) + " has a hard time remembering that " + sender.heShe() + "'s supposed to hate the Demon Lord.");
                     } else
                     if(sender.getObedience() > 66)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.HeShe()))).append(" endures this for ").append(receiver.ownerName()).append("'s sake, hoping that ").append(receiver.ownerName()).append(" will enjoy playing with ").append(sender.hisHer()).append(" body.").toString());
+                        w.append(t, String.valueOf(sender.HeShe()) + " endures this for " + receiver.ownerName() + "'s sake, hoping that " + receiver.ownerName() + " will enjoy playing with " + sender.hisHer() + " body.");
                     else
                     if(sender.getObedience() > 33)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.HeShe()))).append(" doesn't make eye contact with ").append(receiver.ownerName()).append(", glancing off to the side.").toString());
+                        w.append(t, String.valueOf(sender.HeShe()) + " doesn't make eye contact with " + receiver.ownerName() + ", glancing off to the side.");
                     else
-                        w.append(t, (new StringBuilder(String.valueOf(sender.HeShe()))).append(" glares at ").append(receiver.ownerName()).append(", not appreciating it in the slightest.").toString());
+                        w.append(t, String.valueOf(sender.HeShe()) + " glares at " + receiver.ownerName() + ", not appreciating it in the slightest.");
             }
         } else
         if(this == Project.SpreadLegs)
         {
             if(sender != w.lordBody)
-                w.append(t, (new StringBuilder(String.valueOf(sender.ownerName()))).append(" spreads ").append(sender.hisHer()).append(" legs wide apart, eager to be pleasured.").toString());
+                w.append(t, String.valueOf(sender.ownerName()) + " spreads " + sender.hisHer() + " legs wide apart, eager to be pleasured.");
         } else
         if(this == Project.Praise)
         {
@@ -1636,30 +1636,30 @@ public class Activity
                 if(sender.getObedience() > 66)
                 {
                     if(sender.getConfidence() > 66)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" repeatedly, insistently offers to do anything at all that ").append(receiver.ownerName()).append(" desires of ").append(sender.himHer()).append(".").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " repeatedly, insistently offers to do anything at all that " + receiver.ownerName() + " desires of " + sender.himHer() + ".");
                     else
                     if(sender.getConfidence() > 33)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" voices ").append(sender.hisHer()).append(" admiration for ").append(receiver.ownerName()).append(", describing all ").append(receiver.hisHer()).append(" great qualities at length.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " voices " + sender.hisHer() + " admiration for " + receiver.ownerName() + ", describing all " + receiver.hisHer() + " great qualities at length.");
                     else
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" viciously insults ").append(sender.himHer()).append("self, offering ").append(sender.hisHer()).append(" body to ").append(receiver.ownerName()).append(" in order to make up for ").append(sender.hisHer()).append(" own failures.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " viciously insults " + sender.himHer() + "self, offering " + sender.hisHer() + " body to " + receiver.ownerName() + " in order to make up for " + sender.hisHer() + " own failures.");
                 } else
                 if(sender.getObedience() > 33)
                 {
                     if(sender.getDeviancy() > 66)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" eagerly lavishes praise and encouragement on ").append(receiver.ownerName()).append(", hoping to be rewarded with pleasure.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " eagerly lavishes praise and encouragement on " + receiver.ownerName() + ", hoping to be rewarded with pleasure.");
                     else
                     if(sender.getDeviancy() > 33)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" encourages ").append(receiver.ownerName()).append(" to do whatever ").append(receiver.heShe()).append("'d like with ").append(sender.himHer()).append(".").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " encourages " + receiver.ownerName() + " to do whatever " + receiver.heShe() + "'d like with " + sender.himHer() + ".");
                     else
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" humbly debases ").append(sender.himHer()).append("self and praises ").append(receiver.ownerName()).append(", but the quaver in ").append(sender.hisHer()).append(" voice betrays the fact that ").append(sender.heShe()).append("'s doing so out of fear rather than because ").append(sender.heShe()).append(" actually believes ").append(sender.hisHer()).append(" own words.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " humbly debases " + sender.himHer() + "self and praises " + receiver.ownerName() + ", but the quaver in " + sender.hisHer() + " voice betrays the fact that " + sender.heShe() + "'s doing so out of fear rather than because " + sender.heShe() + " actually believes " + sender.hisHer() + " own words.");
                 } else
                 if(sender.getInnocence() > 66)
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" starts to praise ").append(receiver.ownerName()).append(" before ").append(sender.heShe()).append(" remembers that they're supposed to be enemies.").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + " starts to praise " + receiver.ownerName() + " before " + sender.heShe() + " remembers that they're supposed to be enemies.");
                 else
                 if(sender.getInnocence() > 33)
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" grudgingly compliments ").append(receiver.ownerName()).append(", though ").append(sender.heShe()).append(" isn't happy about it.").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + " grudgingly compliments " + receiver.ownerName() + ", though " + sender.heShe() + " isn't happy about it.");
                 else
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" acts like ").append(sender.heShe()).append("'s coming around to ").append(receiver.ownerName()).append("'s side, giving voice to some compliments, but ").append(sender.heShe()).append("'s actually just hoping to manipulate ").append(receiver.himHer()).append(".").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + " acts like " + sender.heShe() + "'s coming around to " + receiver.ownerName() + "'s side, giving voice to some compliments, but " + sender.heShe() + "'s actually just hoping to manipulate " + receiver.himHer() + ".");
         } else
         if(this == Project.Insult)
         {
@@ -1667,96 +1667,96 @@ public class Activity
                 if(sender.getObedience() > 66)
                 {
                     if(sender.getINJULevel() >= 2)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" is growing too tired to serve ").append(receiver.ownerName()).append(", and ").append(sender.heShe()).append(" desperately tries to justify ").append(sender.hisHer()).append(" own weakness.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " is growing too tired to serve " + receiver.ownerName() + ", and " + sender.heShe() + " desperately tries to justify " + sender.hisHer() + " own weakness.");
                     else
                     if(sender.getHATELevel() >= 1)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" is becoming agitated, and while ").append(sender.heShe()).append(" adores ").append(receiver.ownerName()).append(" too much to confront ").append(receiver.himHer()).append(" directly, ").append(sender.hisHer()).append(" feelings still come through.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " is becoming agitated, and while " + sender.heShe() + " adores " + receiver.ownerName() + " too much to confront " + receiver.himHer() + " directly, " + sender.hisHer() + " feelings still come through.");
                     else
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append("'s psyche, fragile after being trained so thoroughly by the Demon Lord, begins to crack under the strain.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + "'s psyche, fragile after being trained so thoroughly by the Demon Lord, begins to crack under the strain.");
                 } else
                 if(sender.getObedience() > 33)
                 {
                     if(sender.getINJULevel() >= 2)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" is getting tired, and ").append(sender.heShe()).append(" lets ").append(receiver.ownerName()).append(" knows that ").append(sender.heShe()).append(" wants to stop this.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " is getting tired, and " + sender.heShe() + " lets " + receiver.ownerName() + " knows that " + sender.heShe() + " wants to stop this.");
                     else
                     if(sender.getHATELevel() >= 1)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" is growing annoyed with ").append(receiver.ownerName()).append(", and ").append(sender.heShe()).append(" lets ").append(receiver.himHer()).append(" know it in no uncertain terms.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " is growing annoyed with " + receiver.ownerName() + ", and " + sender.heShe() + " lets " + receiver.himHer() + " know it in no uncertain terms.");
                     else
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" insults ").append(receiver.ownerName()).append(", hoping to get a reaction.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " insults " + receiver.ownerName() + ", hoping to get a reaction.");
                 } else
                 if(sender.getINJULevel() >= 2)
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" is too tired to resist physically, but ").append(sender.heShe()).append(" still verbally attacks ").append(receiver.ownerName()).append(".").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + " is too tired to resist physically, but " + sender.heShe() + " still verbally attacks " + receiver.ownerName() + ".");
                 else
                 if(sender.getHATELevel() >= 1)
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" already hates ").append(receiver.ownerName()).append(", but ").append(sender.heShe()).append("'s even angrier than usual at being forced into this, and ").append(sender.heShe()).append(" vents ").append(sender.hisHer()).append(" frustration with a stream of insults").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + " already hates " + receiver.ownerName() + ", but " + sender.heShe() + "'s even angrier than usual at being forced into this, and " + sender.heShe() + " vents " + sender.hisHer() + " frustration with a stream of insults");
                 else
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" takes the chance to insult ").append(receiver.ownerName()).append(" to ").append(receiver.hisHer()).append(" face.").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + " takes the chance to insult " + receiver.ownerName() + " to " + receiver.hisHer() + " face.");
         } else
         if(this == Project.PushDown)
         {
             if(sender == w.lordBody)
-                w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" looms over ").append(receiver.ownerName()).append(".").toString());
+                w.append(t, String.valueOf(sender.OwnerName()) + " looms over " + receiver.ownerName() + ".");
             else
             if(sender.getDeviancy() > 66)
             {
                 if(sender.getConfidence() > 66)
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" roughly pushes ").append(receiver.ownerName()).append(" down onto ").append(receiver.hisHer()).append(" back, panting with barely-restrained desire as ").append(sender.heShe()).append(" takes ").append(sender.hisHer()).append(" place atop ").append(receiver.himHer()).append(".").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + " roughly pushes " + receiver.ownerName() + " down onto " + receiver.hisHer() + " back, panting with barely-restrained desire as " + sender.heShe() + " takes " + sender.hisHer() + " place atop " + receiver.himHer() + ".");
                 else
                 if(sender.getConfidence() > 33)
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" practically tackles ").append(receiver.ownerName()).append(" down onto the floor, overflowing with lust.").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + " practically tackles " + receiver.ownerName() + " down onto the floor, overflowing with lust.");
                 else
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append("'s lust has made ").append(sender.himHer()).append(" far more bold than usual, and ").append(sender.heShe()).append(" eagerly pushes ").append(receiver.ownerName()).append(" down onto ").append(receiver.hisHer()).append(" back.").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + "'s lust has made " + sender.himHer() + " far more bold than usual, and " + sender.heShe() + " eagerly pushes " + receiver.ownerName() + " down onto " + receiver.hisHer() + " back.");
             } else
             if(sender.getDeviancy() > 33)
             {
                 if(sender.getInnocence() > 66)
-                    w.append(t, (new StringBuilder("Overcome by ")).append(sender.hisHer()).append(" growing lust, ").append(sender.ownerName()).append(" wraps ").append(sender.hisHer()).append(" arms around ").append(receiver.ownerName()).append(" and kisses ").append(receiver.himHer()).append(" repeatedly, then seems surprised to realize that ").append(sender.heShe()).append("'s pushed ").append(receiver.himHer()).append(" down to the floor in the process.").toString());
+                    w.append(t, "Overcome by " + sender.hisHer() + " growing lust, " + sender.ownerName() + " wraps " + sender.hisHer() + " arms around " + receiver.ownerName() + " and kisses " + receiver.himHer() + " repeatedly, then seems surprised to realize that " + sender.heShe() + "'s pushed " + receiver.himHer() + " down to the floor in the process.");
                 else
                 if(sender.getInnocence() > 33)
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" embraces ").append(receiver.ownerName()).append(", guiding ").append(receiver.himHer()).append(" down onto ").append(receiver.hisHer()).append(" back.").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + " embraces " + receiver.ownerName() + ", guiding " + receiver.himHer() + " down onto " + receiver.hisHer() + " back.");
                 else
-                    w.append(t, (new StringBuilder("With ")).append(sender.hisHer()).append(" eyes locked onto ").append(receiver.ownerName()).append("'s ").append(receiver.mainOrgan()).append(", ").append(sender.ownerName()).append(" urges ").append(receiver.himHer()).append(" to lay down on ").append(receiver.hisHer()).append(" back, then climbs atop ").append(receiver.himHer()).append(".").toString());
+                    w.append(t, "With " + sender.hisHer() + " eyes locked onto " + receiver.ownerName() + "'s " + receiver.mainOrgan() + ", " + sender.ownerName() + " urges " + receiver.himHer() + " to lay down on " + receiver.hisHer() + " back, then climbs atop " + receiver.himHer() + ".");
             } else
             if(sender.getObedience() > 66)
-                w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" gently guides ").append(receiver.ownerName()).append(" onto ").append(receiver.hisHer()).append(" back, then lays atop ").append(receiver.himHer()).append(", taking deep breaths and trying to ready ").append(sender.himHer()).append("self to serve ").append(sender.theDemonLord()).append(".").toString());
+                w.append(t, String.valueOf(sender.OwnerName()) + " gently guides " + receiver.ownerName() + " onto " + receiver.hisHer() + " back, then lays atop " + receiver.himHer() + ", taking deep breaths and trying to ready " + sender.himHer() + "self to serve " + sender.theDemonLord() + ".");
             else
             if(sender.getObedience() > 33)
-                w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" pushes ").append(receiver.ownerName()).append(" down onto ").append(receiver.hisHer()).append(" back, but hesitates before going further, uncertain about how to proceed.").toString());
+                w.append(t, String.valueOf(sender.OwnerName()) + " pushes " + receiver.ownerName() + " down onto " + receiver.hisHer() + " back, but hesitates before going further, uncertain about how to proceed.");
             else
-                w.append(t, (new StringBuilder("With an annoyed expression on ")).append(sender.hisHer()).append(" face, ").append(sender.ownerName()).append(" pushes ").append(receiver.ownerName()).append(" down onto ").append(receiver.hisHer()).append(" back without a hint of sensuality.").toString());
+                w.append(t, "With an annoyed expression on " + sender.hisHer() + " face, " + sender.ownerName() + " pushes " + receiver.ownerName() + " down onto " + receiver.hisHer() + " back without a hint of sensuality.");
         } else
         if(this == Project.PullDown)
         {
             if(sender == w.lordBody)
-                w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" is laid down under ").append(receiver.ownerName()).append(".").toString());
+                w.append(t, String.valueOf(sender.OwnerName()) + " is laid down under " + receiver.ownerName() + ".");
             else
             if(sender.getDeviancy() > 66)
             {
                 if(sender.getConfidence() > 66)
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" forcefully pulls ").append(receiver.ownerName()).append(" atop ").append(sender.himHer()).append(", aggressive even in ").append(sender.hisHer()).append(" submission.").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + " forcefully pulls " + receiver.ownerName() + " atop " + sender.himHer() + ", aggressive even in " + sender.hisHer() + " submission.");
                 else
                 if(sender.getConfidence() > 33)
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" tangles ").append(sender.hisHer()).append(" limbs around ").append(receiver.ownerName()).append(", bringing them both down to the floor together with ").append(receiver.ownerName()).append(" atop ").append(sender.himHer()).append(".").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + " tangles " + sender.hisHer() + " limbs around " + receiver.ownerName() + ", bringing them both down to the floor together with " + receiver.ownerName() + " atop " + sender.himHer() + ".");
                 else
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" lays down on ").append(sender.hisHer()).append(" back, weakly trying to pull ").append(receiver.ownerName()).append(" down with ").append(sender.himHer()).append(".  ").append(sender.HeShe()).append(" trembles with desire as ").append(sender.heShe()).append(" looks up at ").append(receiver.ownerName()).append(".").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + " lays down on " + sender.hisHer() + " back, weakly trying to pull " + receiver.ownerName() + " down with " + sender.himHer() + ".  " + sender.HeShe() + " trembles with desire as " + sender.heShe() + " looks up at " + receiver.ownerName() + ".");
             } else
             if(sender.getDeviancy() > 33)
             {
                 if(sender.getDignity() > 66)
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" lays down under ").append(receiver.ownerName()).append(", trying to act as though ").append(sender.heShe()).append("'s doing ").append(receiver.himHer()).append(" a favor, but ").append(sender.ownerName()).append("'s lustful panting betrays how much ").append(sender.heShe()).append(" wants to be taken.").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + " lays down under " + receiver.ownerName() + ", trying to act as though " + sender.heShe() + "'s doing " + receiver.himHer() + " a favor, but " + sender.ownerName() + "'s lustful panting betrays how much " + sender.heShe() + " wants to be taken.");
                 else
                 if(sender.getDignity() > 33)
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" eagerly pulls ").append(receiver.ownerName()).append(" down atop ").append(sender.himHer()).append(", smiling in anticipation of what's to come.").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + " eagerly pulls " + receiver.ownerName() + " down atop " + sender.himHer() + ", smiling in anticipation of what's to come.");
                 else
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" begs ").append(receiver.ownerName()).append(" to take ").append(sender.himHer()).append(", positioning ").append(sender.himHer()).append("self underneath ").append(receiver.himHer()).append(".").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + " begs " + receiver.ownerName() + " to take " + sender.himHer() + ", positioning " + sender.himHer() + "self underneath " + receiver.himHer() + ".");
             } else
             if(sender.getObedience() > 66)
-                w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" submissively presents ").append(sender.himHer()).append("self to ").append(receiver.ownerName()).append(", layin on ").append(sender.hisHer()).append(" back and squirming nervously as ").append(sender.heShe()).append(" anticipates how ").append(sender.heShe()).append("'ll be used.").toString());
+                w.append(t, String.valueOf(sender.OwnerName()) + " submissively presents " + sender.himHer() + "self to " + receiver.ownerName() + ", layin on " + sender.hisHer() + " back and squirming nervously as " + sender.heShe() + " anticipates how " + sender.heShe() + "'ll be used.");
             else
             if(sender.getObedience() > 33)
-                w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" lays down for ").append(receiver.ownerName()).append(", but ").append(sender.heShe()).append(" refuses to meet ").append(receiver.hisHer()).append(" eyes, still uncertain how ").append(sender.heShe()).append(" feels about sex with the Demon Lord.").toString());
+                w.append(t, String.valueOf(sender.OwnerName()) + " lays down for " + receiver.ownerName() + ", but " + sender.heShe() + " refuses to meet " + receiver.hisHer() + " eyes, still uncertain how " + sender.heShe() + " feels about sex with the Demon Lord.");
             else
-                w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" angrily lays down, glaring up at ").append(receiver.ownerName()).append(".").toString());
+                w.append(t, String.valueOf(sender.OwnerName()) + " angrily lays down, glaring up at " + receiver.ownerName() + ".");
         } else
         if(this == Project.Escape)
         {
@@ -1764,30 +1764,30 @@ public class Activity
                 if(sender.getObedience() > 66)
                 {
                     if(sender.getMorality() > 66)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" cries out in despair as ").append(sender.heShe()).append(" turns and crawls away from ").append(receiver.ownerName()).append(", already consumed by self-loathing for ").append(sender.hisHer()).append(" failure to properly serve ").append(sender.theDemonLord()).append(".").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " cries out in despair as " + sender.heShe() + " turns and crawls away from " + receiver.ownerName() + ", already consumed by self-loathing for " + sender.hisHer() + " failure to properly serve " + sender.theDemonLord() + ".");
                     else
                     if(sender.getMorality() > 33)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" abruptly starts struggling to escape ").append(receiver.ownerName()).append(", and it's only after ").append(sender.heShe()).append("'s free that ").append(sender.heShe()).append(" hangs ").append(sender.hisHer()).append(" head in shame for being so disobedient.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " abruptly starts struggling to escape " + receiver.ownerName() + ", and it's only after " + sender.heShe() + "'s free that " + sender.heShe() + " hangs " + sender.hisHer() + " head in shame for being so disobedient.");
                     else
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" shoves ").append(receiver.ownerName()).append(" and scrambles away, briefly forgetting ").append(sender.hisHer()).append(" devotion in the face of ").append(sender.hisHer()).append(" intense emotions.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " shoves " + receiver.ownerName() + " and scrambles away, briefly forgetting " + sender.hisHer() + " devotion in the face of " + sender.hisHer() + " intense emotions.");
                 } else
                 if(sender.getObedience() > 33)
                 {
                     if(sender.getInnocence() > 66)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" cries out in panic and shoves ").append(receiver.ownerName()).append(" away.  Only a moment later does ").append(sender.heShe()).append(" realize what ").append(sender.heShe()).append("'s done, and ").append(sender.heShe()).append(" cowers in fear of punishment.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " cries out in panic and shoves " + receiver.ownerName() + " away.  Only a moment later does " + sender.heShe() + " realize what " + sender.heShe() + "'s done, and " + sender.heShe() + " cowers in fear of punishment.");
                     else
                     if(sender.getInnocence() > 33)
-                        w.append(t, (new StringBuilder("Apologizing profusely, ")).append(sender.ownerName()).append(" disentangles ").append(sender.himHer()).append("self from ").append(receiver.ownerName()).append(" and takes a few steps backward.").toString());
+                        w.append(t, "Apologizing profusely, " + sender.ownerName() + " disentangles " + sender.himHer() + "self from " + receiver.ownerName() + " and takes a few steps backward.");
                     else
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" clearly states that ").append(sender.heShe()).append("'s done with this and moves to free ").append(sender.himHer()).append("self.  The quaver in ").append(sender.hisHer()).append(" voice is the only thing that betrays ").append(sender.hisHer()).append(" worries about the consequences of rejecting ").append(sender.theDemonLord()).append(".").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " clearly states that " + sender.heShe() + "'s done with this and moves to free " + sender.himHer() + "self.  The quaver in " + sender.hisHer() + " voice is the only thing that betrays " + sender.hisHer() + " worries about the consequences of rejecting " + sender.theDemonLord() + ".");
                 } else
                 if(sender.getConfidence() > 66)
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" starts to viciously beat ").append(receiver.ownerName()).append(", remaining hostile even after ").append(sender.heShe()).append(" frees ").append(sender.himHer()).append("self.").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + " starts to viciously beat " + receiver.ownerName() + ", remaining hostile even after " + sender.heShe() + " frees " + sender.himHer() + "self.");
                 else
                 if(sender.getConfidence() > 33)
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(", overwhelmed by ").append(sender.hisHer()).append(" hatred for the Demon Lord, starts struggling to get away before ").append(sender.heShe()).append(" knows what ").append(sender.heShe()).append("'s doing.  However, ").append(sender.heShe()).append(" stands tall afterward, regaining ").append(sender.hisHer()).append(" poise as if daring ").append(receiver.ownerName()).append(" to punish ").append(sender.himHer()).append(".").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + ", overwhelmed by " + sender.hisHer() + " hatred for the Demon Lord, starts struggling to get away before " + sender.heShe() + " knows what " + sender.heShe() + "'s doing.  However, " + sender.heShe() + " stands tall afterward, regaining " + sender.hisHer() + " poise as if daring " + receiver.ownerName() + " to punish " + sender.himHer() + ".");
                 else
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" flails in panic, then makes an effort to run away.").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + " flails in panic, then makes an effort to run away.");
         } else
         if(this == Project.StopActing)
         {
@@ -1795,35 +1795,35 @@ public class Activity
                 if(sender.getObedience() > 66)
                 {
                     if(sender.getMorality() > 66)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" confesses that ").append(sender.heShe()).append("'s grown too tired to keep servicing ").append(receiver.ownerName()).append(", then eagerly proposes that ").append(receiver.ownerName()).append(" punish ").append(sender.himHer()).append(" for ").append(sender.hisHer()).append(" weakness.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " confesses that " + sender.heShe() + "'s grown too tired to keep servicing " + receiver.ownerName() + ", then eagerly proposes that " + receiver.ownerName() + " punish " + sender.himHer() + " for " + sender.hisHer() + " weakness.");
                     else
                     if(sender.getMorality() > 33)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" keeps trying to service ").append(receiver.ownerName()).append(" until ").append(sender.hisHer()).append(" own body starts to grow too exhausted to move.  Eventually, ").append(sender.heShe()).append(" realizes that ").append(sender.heShe()).append("'s too tired to effectively please ").append(receiver.ownerName()).append(" anymore.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " keeps trying to service " + receiver.ownerName() + " until " + sender.hisHer() + " own body starts to grow too exhausted to move.  Eventually, " + sender.heShe() + " realizes that " + sender.heShe() + "'s too tired to effectively please " + receiver.ownerName() + " anymore.");
                     else
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" is sincere about wanting to service ").append(receiver.ownerName()).append(", but ").append(sender.heShe()).append(" begins getting lazier and lazier with ").append(sender.hisHer()).append(" movements until ").append(sender.heShe()).append("'s not actually making ").append(receiver.ownerName()).append(" feel good at all.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " is sincere about wanting to service " + receiver.ownerName() + ", but " + sender.heShe() + " begins getting lazier and lazier with " + sender.hisHer() + " movements until " + sender.heShe() + "'s not actually making " + receiver.ownerName() + " feel good at all.");
                 } else
                 if(sender.getObedience() > 33)
                 {
                     if(sender.getDeviancy() > 66)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" heaves a satisfied sigh, ").append(sender.hisHer()).append(" tremendous lust finally satisfied.  ").append(sender.HeShe()).append(" doesn't seem interested in continuing for now.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " heaves a satisfied sigh, " + sender.hisHer() + " tremendous lust finally satisfied.  " + sender.HeShe() + " doesn't seem interested in continuing for now.");
                     else
                     if(sender.getDeviancy() > 33)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" gradually starts to grow less and less interested in pleasuring ").append(receiver.ownerName()).append(", and finally ").append(sender.heShe()).append(" stops completely.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " gradually starts to grow less and less interested in pleasuring " + receiver.ownerName() + ", and finally " + sender.heShe() + " stops completely.");
                     else
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" starts to get distracted and make excuses for why ").append(sender.heShe()).append(" should be allowed to leave, and ").append(sender.heShe()).append(" stops trying to pleasure ").append(receiver.ownerName()).append(".").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " starts to get distracted and make excuses for why " + sender.heShe() + " should be allowed to leave, and " + sender.heShe() + " stops trying to pleasure " + receiver.ownerName() + ".");
                 } else
                 if(sender.getInnocence() > 66)
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" abruptly seems to remember that ").append(receiver.ownerName()).append(" is the enemy, and ").append(sender.heShe()).append(" refuses to continue this any longer.").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + " abruptly seems to remember that " + receiver.ownerName() + " is the enemy, and " + sender.heShe() + " refuses to continue this any longer.");
                 else
                 if(sender.getInnocence() > 33)
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" gets angry and refuses to cooperate further.  ").append(sender.HeShe()).append(" turns ").append(sender.hisHer()).append(" head away, refusing to even look at ").append(receiver.ownerName()).append(".").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + " gets angry and refuses to cooperate further.  " + sender.HeShe() + " turns " + sender.hisHer() + " head away, refusing to even look at " + receiver.ownerName() + ".");
                 else
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(", deciding that ").append(sender.heShe()).append("'s cooperated long enough, halts ").append(sender.hisHer()).append(" movements and glares at ").append(receiver.ownerName()).append(" as if daring ").append(receiver.himHer()).append(" to punish ").append(sender.himHer()).append(".").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + ", deciding that " + sender.heShe() + "'s cooperated long enough, halts " + sender.hisHer() + " movements and glares at " + receiver.ownerName() + " as if daring " + receiver.himHer() + " to punish " + sender.himHer() + ".");
         } else
         if(this == Project.TieUp)
         {
             if(sender == w.lordBody)
-                w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" ties down ").append(receiver.ownerName()).append("'s arms and legs, leaving ").append(receiver.himHer()).append(" helpless.").toString());
+                w.append(t, String.valueOf(sender.OwnerName()) + " ties down " + receiver.ownerName() + "'s arms and legs, leaving " + receiver.himHer() + " helpless.");
         } else
         if(this == Project.BeTied)
         {
@@ -1831,82 +1831,82 @@ public class Activity
                 if(sender.getObedience() > 66)
                 {
                     if(sender.getInnocence() > 66)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append("'s eyes glaze over with pure bliss as ").append(sender.heShe()).append(" enjoys entrusting ").append(sender.hisHer()).append(" body to ").append(receiver.ownerName()).append(".").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + "'s eyes glaze over with pure bliss as " + sender.heShe() + " enjoys entrusting " + sender.hisHer() + " body to " + receiver.ownerName() + ".");
                     else
                     if(sender.getInnocence() > 33)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" doesn't resist in the slightest, happy to let ").append(receiver.ownerName()).append(" enjoy ").append(sender.hisHer()).append(" body however ").append(receiver.heShe()).append(" wishes.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " doesn't resist in the slightest, happy to let " + receiver.ownerName() + " enjoy " + sender.hisHer() + " body however " + receiver.heShe() + " wishes.");
                     else
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" happily cooperates, holding ").append(sender.hisHer()).append(" limbs as ").append(sender.heShe()).append("'s directed in order to help speed the process.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " happily cooperates, holding " + sender.hisHer() + " limbs as " + sender.heShe() + "'s directed in order to help speed the process.");
                 } else
                 if(sender.getObedience() > 33)
                 {
                     if(sender.getConfidence() > 66)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" holds ").append(sender.hisHer()).append(" head high as ").append(sender.heShe()).append("'s tied up, refusing to let ").append(sender.himHer()).append("self show fear.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " holds " + sender.hisHer() + " head high as " + sender.heShe() + "'s tied up, refusing to let " + sender.himHer() + "self show fear.");
                     else
                     if(sender.getConfidence() > 33)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" flinches in trepidation, imagining what ").append(receiver.ownerName()).append(" will be doing to ").append(sender.himHer()).append(" next.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " flinches in trepidation, imagining what " + receiver.ownerName() + " will be doing to " + sender.himHer() + " next.");
                     else
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" starts to panic, but ").append(sender.heShe()).append("'s too frightened to actively resist.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " starts to panic, but " + sender.heShe() + "'s too frightened to actively resist.");
                 } else
                 if(sender.getDeviancy() > 66)
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" tries to resist, but ").append(sender.hisHer()).append(" lustful body betrays ").append(sender.himHer()).append(", and by the time ").append(sender.heShe()).append("'s stopped daydreaming about what kind of sexual punishment awaits ").append(sender.himHer()).append(", ").append(sender.heShe()).append("'s already been tied up.").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + " tries to resist, but " + sender.hisHer() + " lustful body betrays " + sender.himHer() + ", and by the time " + sender.heShe() + "'s stopped daydreaming about what kind of sexual punishment awaits " + sender.himHer() + ", " + sender.heShe() + "'s already been tied up.");
                 else
                 if(sender.getDeviancy() > 33)
                 {
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" puts up a bit of resistance.  However, ").append(sender.heShe()).append("'s weaker than ").append(sender.heShe()).append(" should be, and ").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + " puts up a bit of resistance.  However, " + sender.heShe() + "'s weaker than " + sender.heShe() + " should be, and ");
                     if(sender.parts[PENIS] > 0)
-                        w.append(t, (new StringBuilder("the stiffness between ")).append(sender.hisHer()).append(" legs").toString());
+                        w.append(t, "the stiffness between " + sender.hisHer() + " legs");
                     else
-                        w.append(t, (new StringBuilder("the wetness on ")).append(sender.hisHer()).append(" thighs").toString());
-                    w.append(t, (new StringBuilder(" shows that a part of ")).append(sender.himHer()).append(" is eager to be punished.").toString());
+                        w.append(t, "the wetness on " + sender.hisHer() + " thighs");
+                    w.append(t, " shows that a part of " + sender.himHer() + " is eager to be punished.");
                 } else
                 {
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" fights back with all ").append(sender.hisHer()).append(" might, but ").append(sender.heShe()).append(" can't win against ").append(receiver.ownerName()).append(".  Soon, there's nothing ").append(sender.heShe()).append(" can do but rock back and forth while growling at ").append(sender.hisHer()).append(" captor.").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + " fights back with all " + sender.hisHer() + " might, but " + sender.heShe() + " can't win against " + receiver.ownerName() + ".  Soon, there's nothing " + sender.heShe() + " can do but rock back and forth while growling at " + sender.hisHer() + " captor.");
                 }
         } else
         if(this == Project.StrokeCock)
         {
             if(sender == w.lordBody)
             {
-                w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" begins to pump ").append(sender.hisHer()).append(" hand up and down ").append(receiver.ownerName()).append("'s cock.").toString());
+                w.append(t, String.valueOf(sender.OwnerName()) + " begins to pump " + sender.hisHer() + " hand up and down " + receiver.ownerName() + "'s cock.");
             } else
             {
-                w.append(t, (new StringBuilder(String.valueOf(sender.capitalizedOwnerName()))).append(" ").toString());
+                w.append(t, String.valueOf(sender.capitalizedOwnerName()) + " ");
                 if(sender.getDeviancy() > 66)
                 {
                     if(sender.getInnocence() > 66)
-                        w.append(t, (new StringBuilder("loses ")).append(sender.himHer()).append("self in the act of running ").append(sender.hisHer()).append(" hand up and down ").append(receiver.ownerName()).append("'s cock, eyes glazed over and drooling with desire.").toString());
+                        w.append(t, "loses " + sender.himHer() + "self in the act of running " + sender.hisHer() + " hand up and down " + receiver.ownerName() + "'s cock, eyes glazed over and drooling with desire.");
                     else
                     if(sender.getInnocence() > 33)
-                        w.append(t, (new StringBuilder("reaches eagerly for ")).append(receiver.ownerName()).append("'s cock, pumping it up and down with an aggressive firmness that comes just short of being painful.").toString());
+                        w.append(t, "reaches eagerly for " + receiver.ownerName() + "'s cock, pumping it up and down with an aggressive firmness that comes just short of being painful.");
                     else
-                        w.append(t, (new StringBuilder("abruptly wraps ")).append(sender.hisHer()).append(" fingers around ").append(receiver.ownerName()).append("'s cock and starts stroking it gently, then fondling the tip, then gently tugging on it, using every technique at ").append(sender.hisHer()).append(" disposal.").toString());
+                        w.append(t, "abruptly wraps " + sender.hisHer() + " fingers around " + receiver.ownerName() + "'s cock and starts stroking it gently, then fondling the tip, then gently tugging on it, using every technique at " + sender.hisHer() + " disposal.");
                 } else
                 if(sender.getDeviancy() > 33)
                 {
                     if(sender.getInnocence() > 66)
-                        w.append(t, (new StringBuilder("tugs and jerks ")).append(receiver.ownerName()).append("'s cock, then gradually gets into a rhythm of stroking it as ").append(receiver.heShe()).append(" grows more confident in what ").append(receiver.heShe()).append("'s doing.").toString());
+                        w.append(t, "tugs and jerks " + receiver.ownerName() + "'s cock, then gradually gets into a rhythm of stroking it as " + receiver.heShe() + " grows more confident in what " + receiver.heShe() + "'s doing.");
                     else
                     if(sender.getInnocence() > 33)
-                        w.append(t, (new StringBuilder("brushes ")).append(sender.hisHer()).append(" fingers against ").append(receiver.ownerName()).append("'s cock, trailing them up and down, then growing more firm, stroking it in earnest.").toString());
+                        w.append(t, "brushes " + sender.hisHer() + " fingers against " + receiver.ownerName() + "'s cock, trailing them up and down, then growing more firm, stroking it in earnest.");
                     else
-                        w.append(t, (new StringBuilder("carefully starts to stroke ")).append(receiver.ownerName()).append("'s cock, staring into ").append(receiver.hisHer()).append(" eyes to gauge ").append(receiver.hisHer()).append(" reaction.").toString());
+                        w.append(t, "carefully starts to stroke " + receiver.ownerName() + "'s cock, staring into " + receiver.hisHer() + " eyes to gauge " + receiver.hisHer() + " reaction.");
                 } else
                 {
                     if(sender.getInnocence() > 66)
-                        w.append(t, (new StringBuilder("hesitantly touches ")).append(receiver.ownerName()).append("'s cock, then begins to clumsily stroke it, averting ").append(sender.hisHer()).append(" eyes as ").append(sender.heShe()).append(" does so.  ").toString());
+                        w.append(t, "hesitantly touches " + receiver.ownerName() + "'s cock, then begins to clumsily stroke it, averting " + sender.hisHer() + " eyes as " + sender.heShe() + " does so.  ");
                     else
                     if(sender.getInnocence() > 33)
-                        w.append(t, (new StringBuilder("begins to stroke ")).append(receiver.ownerName()).append("'s cock with stiff, mechanical movements.  ").toString());
+                        w.append(t, "begins to stroke " + receiver.ownerName() + "'s cock with stiff, mechanical movements.  ");
                     else
-                        w.append(t, (new StringBuilder("brings ")).append(sender.hisHer()).append(" hand to ").append(receiver.ownerName()).append("'s cock and begins to stroke it with precise, methodical movements.  ").toString());
+                        w.append(t, "brings " + sender.hisHer() + " hand to " + receiver.ownerName() + "'s cock and begins to stroke it with precise, methodical movements.  ");
                     if(sender.getObedience() > 66)
-                        w.append(t, (new StringBuilder("It's clear that ")).append(sender.heShe()).append("'s unfamiliar with this sort of thing, but ").append(sender.heShe()).append("'s doing ").append(sender.hisHer()).append(" best for ").append(receiver.ownerName()).append(".").toString());
+                        w.append(t, "It's clear that " + sender.heShe() + "'s unfamiliar with this sort of thing, but " + sender.heShe() + "'s doing " + sender.hisHer() + " best for " + receiver.ownerName() + ".");
                     else
                     if(sender.getObedience() > 33)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.HisHer()))).append(" heart clearly isn't in it.").toString());
+                        w.append(t, String.valueOf(sender.HisHer()) + " heart clearly isn't in it.");
                     else
-                        w.append(t, (new StringBuilder(String.valueOf(sender.HeShe()))).append(" looks sickened by what ").append(sender.heShe()).append("'s doing.").toString());
+                        w.append(t, String.valueOf(sender.HeShe()) + " looks sickened by what " + sender.heShe() + "'s doing.");
                 }
             }
         } else
@@ -1914,39 +1914,39 @@ public class Activity
         {
             if(sender == w.lordBody)
             {
-                w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append("'s cock pulses under ").append(receiver.ownerName()).append("'s fingers.").toString());
+                w.append(t, String.valueOf(sender.OwnerName()) + "'s cock pulses under " + receiver.ownerName() + "'s fingers.");
             } else
             {
                 w.append(t, sender.capitalizedOwnerName());
                 if(sender.getInnocence() > 66)
                 {
-                    w.append(t, (new StringBuilder(" gasps at the sudden intensity of the stimulation to ")).append(sender.hisHer()).append(" most sensitive part, and ").toString());
+                    w.append(t, " gasps at the sudden intensity of the stimulation to " + sender.hisHer() + " most sensitive part, and ");
                     if(sender.getDeviancy() > 66)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.hisHer()))).append(" eyes glaze over as ").append(sender.heShe()).append(" loses the ability to think of anything other than feeling even better.  ").toString());
+                        w.append(t, String.valueOf(sender.hisHer()) + " eyes glaze over as " + sender.heShe() + " loses the ability to think of anything other than feeling even better.  ");
                     else
                     if(sender.getDeviancy() > 33)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.hisHer()))).append(" hips jerk wildly, seemingly caught between jerking away and pushing further into ").append(receiver.ownerName()).append("'s hand.  ").toString());
+                        w.append(t, String.valueOf(sender.hisHer()) + " hips jerk wildly, seemingly caught between jerking away and pushing further into " + receiver.ownerName() + "'s hand.  ");
                     else
-                        w.append(t, (new StringBuilder(String.valueOf(sender.heShe()))).append(" reflexively tries to jerk ").append(sender.hisHer()).append(" hips away.  ").toString());
+                        w.append(t, String.valueOf(sender.heShe()) + " reflexively tries to jerk " + sender.hisHer() + " hips away.  ");
                 } else
                 if(sender.getInnocence() > 33)
                 {
-                    w.append(t, (new StringBuilder(" feels jolts of pleasure shooting through ")).append(sender.hisHer()).append(" shaft").toString());
+                    w.append(t, " feels jolts of pleasure shooting through " + sender.hisHer() + " shaft");
                     if(sender.getDeviancy() > 66)
-                        w.append(t, (new StringBuilder(", and ")).append(sender.heShe()).append(" moans helplessly, ").append(sender.hisHer()).append(" well-trained body eagerly submitting itself to ").append(receiver.ownerName()).append("'s touch.  ").toString());
+                        w.append(t, ", and " + sender.heShe() + " moans helplessly, " + sender.hisHer() + " well-trained body eagerly submitting itself to " + receiver.ownerName() + "'s touch.  ");
                     else
                     if(sender.getDeviancy() > 33)
-                        w.append(t, (new StringBuilder(", and it's a struggle for ")).append(sender.himHer()).append(" to hold onto ").append(sender.hisHer()).append(" reason.  ").toString());
+                        w.append(t, ", and it's a struggle for " + sender.himHer() + " to hold onto " + sender.hisHer() + " reason.  ");
                     else
-                        w.append(t, (new StringBuilder(", even as ")).append(sender.heShe()).append(" tries to ignore them.  ").toString());
+                        w.append(t, ", even as " + sender.heShe() + " tries to ignore them.  ");
                 } else
                 {
-                    w.append(t, (new StringBuilder(" knew this was coming, but ")).append(sender.heShe()).append(" still ").toString());
+                    w.append(t, " knew this was coming, but " + sender.heShe() + " still ");
                     if(sender.getDeviancy() > 66)
-                        w.append(t, (new StringBuilder("squirms and cries out, unable to maintain any self-control in the face of the pleasure ")).append(sender.heShe()).append("'s come to crave.  ").toString());
+                        w.append(t, "squirms and cries out, unable to maintain any self-control in the face of the pleasure " + sender.heShe() + "'s come to crave.  ");
                     else
                     if(sender.getDeviancy() > 33)
-                        w.append(t, (new StringBuilder("gasps softly at the waves of pleasure that begin to wash over ")).append(sender.hisHer()).append(" lower body.  ").toString());
+                        w.append(t, "gasps softly at the waves of pleasure that begin to wash over " + sender.hisHer() + " lower body.  ");
                     else
                         w.append(t, "flinches and grimaces, uncomfortable with the intensity of the sensations.  ");
                 }
@@ -1954,36 +1954,36 @@ public class Activity
                     if(sender.getDeviancy() > 66)
                     {
                         if(sender.getObedience() > 66)
-                            w.append(t, (new StringBuilder(String.valueOf(sender.HisHer()))).append(" body has grown quite sensitive, but it's even more sensitive than usual when ").append(sender.heShe()).append(" knows ").append(sender.heShe()).append("'s being touched by ").append(receiver.ownerName()).append(".").toString());
+                            w.append(t, String.valueOf(sender.HisHer()) + " body has grown quite sensitive, but it's even more sensitive than usual when " + sender.heShe() + " knows " + sender.heShe() + "'s being touched by " + receiver.ownerName() + ".");
                         else
                         if(sender.getObedience() > 33)
-                            w.append(t, (new StringBuilder("Soon, ")).append(sender.heShe()).append("'s completely consumed in ").append(sender.hisHer()).append(" efforts to hump ").append(receiver.ownerName()).append("'s hand.").toString());
+                            w.append(t, "Soon, " + sender.heShe() + "'s completely consumed in " + sender.hisHer() + " efforts to hump " + receiver.ownerName() + "'s hand.");
                         else
-                            w.append(t, (new StringBuilder(String.valueOf(sender.HeShe()))).append(" tries to resist, but ").append(sender.hisHer()).append(" body has grown so sensitive that the lightest touch to ").append(sender.hisHer()).append(" weak spots is enough to subdue ").append(sender.himHer()).append(".").toString());
+                            w.append(t, String.valueOf(sender.HeShe()) + " tries to resist, but " + sender.hisHer() + " body has grown so sensitive that the lightest touch to " + sender.hisHer() + " weak spots is enough to subdue " + sender.himHer() + ".");
                     } else
                     if(sender.getDeviancy() > 33)
                     {
                         if(sender.getObedience() > 66)
-                            w.append(t, (new StringBuilder("Even more than the physical stimulation itself, ")).append(sender.ownerName()).append(" is ecstatic that ").append(receiver.ownerName()).append(" is pleasuring ").append(sender.himHer()).append(" directly.").toString());
+                            w.append(t, "Even more than the physical stimulation itself, " + sender.ownerName() + " is ecstatic that " + receiver.ownerName() + " is pleasuring " + sender.himHer() + " directly.");
                         else
                         if(sender.getObedience() > 33)
-                            w.append(t, (new StringBuilder(String.valueOf(sender.HeShe()))).append("'s content to let ").append(receiver.ownerName()).append(" pleasure ").append(sender.himHer()).append(".").toString());
+                            w.append(t, String.valueOf(sender.HeShe()) + "'s content to let " + receiver.ownerName() + " pleasure " + sender.himHer() + ".");
                         else
-                            w.append(t, (new StringBuilder(String.valueOf(sender.HeShe()))).append(" has a hard time remembering that ").append(sender.heShe()).append("'s supposed to hate the Demon Lord.").toString());
+                            w.append(t, String.valueOf(sender.HeShe()) + " has a hard time remembering that " + sender.heShe() + "'s supposed to hate the Demon Lord.");
                     } else
                     if(sender.getObedience() > 66)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.HeShe()))).append(" endures this for ").append(receiver.ownerName()).append("'s sake, hoping that ").append(receiver.ownerName()).append(" will enjoy playing with ").append(sender.hisHer()).append(" body.").toString());
+                        w.append(t, String.valueOf(sender.HeShe()) + " endures this for " + receiver.ownerName() + "'s sake, hoping that " + receiver.ownerName() + " will enjoy playing with " + sender.hisHer() + " body.");
                     else
                     if(sender.getObedience() > 33)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.HeShe()))).append(" doesn't make eye contact with ").append(receiver.ownerName()).append(", glancing off to the side.").toString());
+                        w.append(t, String.valueOf(sender.HeShe()) + " doesn't make eye contact with " + receiver.ownerName() + ", glancing off to the side.");
                     else
-                        w.append(t, (new StringBuilder(String.valueOf(sender.HeShe()))).append(" glares at ").append(receiver.ownerName()).append(", not appreciating it in the slightest.").toString());
+                        w.append(t, String.valueOf(sender.HeShe()) + " glares at " + receiver.ownerName() + ", not appreciating it in the slightest.");
             }
         } else
         if(this == Project.Lubricate)
         {
             if(sender == w.lordBody)
-                w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" gathers a generous amount of slippery lubricant on one finger, then uses it to coat ").append(receiver.ownerName()).append("'s anus.").toString());
+                w.append(t, String.valueOf(sender.OwnerName()) + " gathers a generous amount of slippery lubricant on one finger, then uses it to coat " + receiver.ownerName() + "'s anus.");
         } else
         if(this == Project.BeLubricated)
         {
@@ -1991,179 +1991,179 @@ public class Activity
                 if(sender.getDeviancy() > 66)
                 {
                     if(sender.getObedience() > 66)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" moans and spreads ").append(sender.hisHer()).append(" legs as wide as ").append(sender.heShe()).append(" can, eager for more than just a finger.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " moans and spreads " + sender.hisHer() + " legs as wide as " + sender.heShe() + " can, eager for more than just a finger.");
                     else
                     if(sender.getObedience() > 33)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" looks nervous, but also eager.  ").append(sender.HeShe()).append(" grins down at ").append(sender.himHer()).append("self, imagining what will be done to ").append(sender.himHer()).append(" next.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " looks nervous, but also eager.  " + sender.HeShe() + " grins down at " + sender.himHer() + "self, imagining what will be done to " + sender.himHer() + " next.");
                     else
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" tries to keep acting tough, but ").append(sender.heShe()).append(" breaks down into a stream of pitiful moans and halfhearted protests as the light stimulation is enough to break ").append(sender.hisHer()).append(" concentration.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " tries to keep acting tough, but " + sender.heShe() + " breaks down into a stream of pitiful moans and halfhearted protests as the light stimulation is enough to break " + sender.hisHer() + " concentration.");
                 } else
                 if(sender.getDeviancy() > 33)
                 {
                     if(sender.getDignity() > 66)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" inhales sharply, but doesn't show any other sign that ").append(sender.heShe()).append("'s feeling anything from this.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " inhales sharply, but doesn't show any other sign that " + sender.heShe() + "'s feeling anything from this.");
                     else
                     if(sender.getDignity() > 33)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" squirms and blushes, clearly a bit ashamed at being excited by the stimulation back there.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " squirms and blushes, clearly a bit ashamed at being excited by the stimulation back there.");
                     else
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" groans and reflexively tries to buck ").append(sender.hisHer()).append(" hips down onto the finger.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " groans and reflexively tries to buck " + sender.hisHer() + " hips down onto the finger.");
                 } else
                 if(sender.getInnocence() > 66)
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" squirms in discomfort at the strange feeling in a place ").append(sender.heShe()).append(" doesn't even mentally associate with sex.").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + " squirms in discomfort at the strange feeling in a place " + sender.heShe() + " doesn't even mentally associate with sex.");
                 else
                 if(sender.getInnocence() > 33)
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append("'s eyes go wide and ").append(sender.heShe()).append(" tries to look down at what's happening down there.").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + "'s eyes go wide and " + sender.heShe() + " tries to look down at what's happening down there.");
                 else
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" shudders at the unpleasant sensation, then tries to relax and accept it.").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + " shudders at the unpleasant sensation, then tries to relax and accept it.");
         } else
         if(this == Project.VaginalPenetrate)
         {
             if(Project.PushDown.isInProgress(sender, receiver))
             {
                 if(sender == w.lordBody)
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" puts the tip of ").append(sender.hisHer()).append(" cock against ").append(receiver.ownerName()).append("'s pussy, then thrusts inside.").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + " puts the tip of " + sender.hisHer() + " cock against " + receiver.ownerName() + "'s pussy, then thrusts inside.");
                 else
                 if(sender.getDeviancy() > 66)
                 {
                     if(sender.getConfidence() > 66)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" eagerly pins ").append(receiver.ownerName()).append(" down and shoves ").append(sender.hisHer()).append(" shaft into ").append(receiver.ownerName()).append("'s pussy, immediately setting a rapid pace of thrusting in and out.  It's a struggle to keep moving steadily with the flashes of ecstasy shooting through ").append(sender.himHer()).append(", but ").append(sender.ownerName()).append(" is determined to keep going.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " eagerly pins " + receiver.ownerName() + " down and shoves " + sender.hisHer() + " shaft into " + receiver.ownerName() + "'s pussy, immediately setting a rapid pace of thrusting in and out.  It's a struggle to keep moving steadily with the flashes of ecstasy shooting through " + sender.himHer() + ", but " + sender.ownerName() + " is determined to keep going.");
                     else
                     if(sender.getConfidence() > 33)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" starts to slowly push ").append(sender.hisHer()).append(" cock into ").append(receiver.ownerName()).append(", but the surge of pleasure from having just the tip inside overwhelms ").append(sender.hisHer()).append(" reason.  ").append(sender.HeShe()).append(" jerks ").append(sender.hisHer()).append(" hips forward, burying ").append(sender.himHer()).append("self inside ").append(receiver.ownerName()).append("'s pussy, then pulls halfway out, then pushes back in, hips jerking wildly as intense pleasure surges through ").append(sender.himHer()).append(" with every movement.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " starts to slowly push " + sender.hisHer() + " cock into " + receiver.ownerName() + ", but the surge of pleasure from having just the tip inside overwhelms " + sender.hisHer() + " reason.  " + sender.HeShe() + " jerks " + sender.hisHer() + " hips forward, burying " + sender.himHer() + "self inside " + receiver.ownerName() + "'s pussy, then pulls halfway out, then pushes back in, hips jerking wildly as intense pleasure surges through " + sender.himHer() + " with every movement.");
                     else
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append("'s timid nature seems to vanish entirely, and ").append(sender.heShe()).append(" starts to ram ").append(sender.hisHer()).append(" hips forward with wild abandon, hammering in and out of ").append(receiver.ownerName()).append("'s pussy.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + "'s timid nature seems to vanish entirely, and " + sender.heShe() + " starts to ram " + sender.hisHer() + " hips forward with wild abandon, hammering in and out of " + receiver.ownerName() + "'s pussy.");
                 } else
                 if(sender.getDeviancy() > 33)
                 {
                     if(sender.getInnocence() > 66)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" pushes ").append(sender.hisHer()).append(" cock into ").append(receiver.ownerName()).append("'s pussy, and the moment ").append(sender.heShe()).append(" feels ").append(receiver.hisHer()).append(" folds squeezing down on ").append(sender.himHer()).append(", ").append(sender.heShe()).append(" loses the ability to think of anything but the pleasure.  Moaning softly, ").append(sender.heShe()).append(" starts thrusting in and out, acting on pure instinct.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " pushes " + sender.hisHer() + " cock into " + receiver.ownerName() + "'s pussy, and the moment " + sender.heShe() + " feels " + receiver.hisHer() + " folds squeezing down on " + sender.himHer() + ", " + sender.heShe() + " loses the ability to think of anything but the pleasure.  Moaning softly, " + sender.heShe() + " starts thrusting in and out, acting on pure instinct.");
                     else
                     if(sender.getInnocence() > 33)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" starts to fuck ").append(receiver.ownerName()).append("'s pussy, but the pleasure of ").append(receiver.hisHer()).append(" folds squeezing down on ").append(sender.himHer()).append(" cock gives ").append(sender.ownerName()).append(" pause.  ").append(sender.HeShe()).append(" gasps, taking a moment to catch ").append(sender.hisHer()).append(" breath, then continues more slowly, enjoying the warm wetness around ").append(sender.hisHer()).append(" shaft.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " starts to fuck " + receiver.ownerName() + "'s pussy, but the pleasure of " + receiver.hisHer() + " folds squeezing down on " + sender.himHer() + " cock gives " + sender.ownerName() + " pause.  " + sender.HeShe() + " gasps, taking a moment to catch " + sender.hisHer() + " breath, then continues more slowly, enjoying the warm wetness around " + sender.hisHer() + " shaft.");
                     else
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" gradually pushes ").append(sender.hisHer()).append(" cock into ").append(receiver.ownerName()).append("'s pussy, inch-by-inch, then withdraws it just as carefully.  ").append(sender.HeShe()).append(" moves slowly, feeling out which spots feel better for ").append(sender.himHer()).append(" and which seem to get more of a reaction from ").append(receiver.ownerName()).append(", and only then starts to move more quickly, getting into a rhythm.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " gradually pushes " + sender.hisHer() + " cock into " + receiver.ownerName() + "'s pussy, inch-by-inch, then withdraws it just as carefully.  " + sender.HeShe() + " moves slowly, feeling out which spots feel better for " + sender.himHer() + " and which seem to get more of a reaction from " + receiver.ownerName() + ", and only then starts to move more quickly, getting into a rhythm.");
                 } else
                 if(sender.getObedience() > 66)
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" eagerly thrusts ").append(sender.hisHer()).append(" cock inside ").append(receiver.ownerName()).append("'s pussy, ecstatic to be joined with ").append(receiver.himHer()).append(".  ").append(sender.HeShe()).append(" moves unselfishly, trying to hit all of ").append(receiver.ownerName()).append("'s sensitive parts without any regard for ").append(sender.hisHer()).append(" own pleasure.").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + " eagerly thrusts " + sender.hisHer() + " cock inside " + receiver.ownerName() + "'s pussy, ecstatic to be joined with " + receiver.himHer() + ".  " + sender.HeShe() + " moves unselfishly, trying to hit all of " + receiver.ownerName() + "'s sensitive parts without any regard for " + sender.hisHer() + " own pleasure.");
                 else
                 if(sender.getObedience() > 33)
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" presses the tip of ").append(sender.hisHer()).append(" cock against ").append(receiver.ownerName()).append("'s pussy, hesitates for a moment, and then finally pushes it inside.  ").append(sender.HeShe()).append(" gasps and shudders at the pleasure, far beyond what ").append(sender.heShe()).append(" was prepared for, and then cautiously starts to move ").append(sender.hisHer()).append(" hips forward and back.").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + " presses the tip of " + sender.hisHer() + " cock against " + receiver.ownerName() + "'s pussy, hesitates for a moment, and then finally pushes it inside.  " + sender.HeShe() + " gasps and shudders at the pleasure, far beyond what " + sender.heShe() + " was prepared for, and then cautiously starts to move " + sender.hisHer() + " hips forward and back.");
                 else
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append("'s angry demeanor fades for just a moment as ").append(sender.heShe()).append(" thrusts into ").append(receiver.ownerName()).append(" and feels the intense pleasure of ").append(receiver.hisHer()).append(" folds squeezing ").append(sender.himHer()).append(".  But then ").append(sender.heShe()).append(" recovers and starts to move violently in and out, as if stabbing ").append(receiver.ownerName()).append(" with a weapon.").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + "'s angry demeanor fades for just a moment as " + sender.heShe() + " thrusts into " + receiver.ownerName() + " and feels the intense pleasure of " + receiver.hisHer() + " folds squeezing " + sender.himHer() + ".  But then " + sender.heShe() + " recovers and starts to move violently in and out, as if stabbing " + receiver.ownerName() + " with a weapon.");
             } else
             if(sender == w.lordBody)
-                w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append("'s cock pushes all the way into ").append(receiver.ownerName()).append("'s depths.").toString());
+                w.append(t, String.valueOf(sender.OwnerName()) + "'s cock pushes all the way into " + receiver.ownerName() + "'s depths.");
             else
             if(sender.getDeviancy() > 66)
             {
                 if(sender.getInnocence() > 66)
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append("'s whole body goes slack except for ").append(sender.hisHer()).append(" hips desperately trying to thrust deeper into ").append(receiver.himHer()).append(".  ").append(sender.HisHer()).append(" eyes roll and ").append(sender.hisHer()).append(" tongue hangs out.").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + "'s whole body goes slack except for " + sender.hisHer() + " hips desperately trying to thrust deeper into " + receiver.himHer() + ".  " + sender.HisHer() + " eyes roll and " + sender.hisHer() + " tongue hangs out.");
                 else
                 if(sender.getInnocence() > 33)
-                    w.append(t, (new StringBuilder("The feeling of ")).append(receiver.ownerName()).append(" sliding down to the base of ").append(sender.hisHer()).append(" shaft is enough to make ").append(sender.ownerName()).append(" cry out and lose ").append(sender.hisHer()).append(" sense of reason.  ").append(sender.HeShe()).append(" desperately clings to ").append(receiver.ownerName()).append(", hips jerking wildly up and down as ").append(sender.heShe()).append(" tries to thrust even deeper into ").append(receiver.himHer()).append(".").toString());
+                    w.append(t, "The feeling of " + receiver.ownerName() + " sliding down to the base of " + sender.hisHer() + " shaft is enough to make " + sender.ownerName() + " cry out and lose " + sender.hisHer() + " sense of reason.  " + sender.HeShe() + " desperately clings to " + receiver.ownerName() + ", hips jerking wildly up and down as " + sender.heShe() + " tries to thrust even deeper into " + receiver.himHer() + ".");
                 else
-                    w.append(t, (new StringBuilder("At first, ")).append(sender.ownerName()).append(" tries to reciprocate with ").append(sender.hisHer()).append(" own thrusts.  But it soon becomes clear that ").append(sender.heShe()).append("'s completely at ").append(receiver.ownerName()).append("'s mercy, and all ").append(sender.heShe()).append(" can do is moan and jerk ").append(sender.hisHer()).append(" hips as ").append(receiver.ownerName()).append(" slides up and down ").append(sender.hisHer()).append(" shaft.").toString());
+                    w.append(t, "At first, " + sender.ownerName() + " tries to reciprocate with " + sender.hisHer() + " own thrusts.  But it soon becomes clear that " + sender.heShe() + "'s completely at " + receiver.ownerName() + "'s mercy, and all " + sender.heShe() + " can do is moan and jerk " + sender.hisHer() + " hips as " + receiver.ownerName() + " slides up and down " + sender.hisHer() + " shaft.");
             } else
             if(sender.getDeviancy() > 33)
             {
                 if(sender.getDignity() > 66)
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" tries to hide just how good it feels, but when ").append(receiver.ownerName()).append(" clenches around ").append(sender.himHer()).append(", ").append(sender.heShe()).append(" gasps and reflexively bucks ").append(sender.hisHer()).append(" hips.  After that, ").append(sender.heShe()).append(" has a harder and harder time suppressing ").append(sender.hisHer()).append(" moans.").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + " tries to hide just how good it feels, but when " + receiver.ownerName() + " clenches around " + sender.himHer() + ", " + sender.heShe() + " gasps and reflexively bucks " + sender.hisHer() + " hips.  After that, " + sender.heShe() + " has a harder and harder time suppressing " + sender.hisHer() + " moans.");
                 else
                 if(sender.getDignity() > 33)
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" lays back and loses ").append(sender.himHer()).append("self in the feeling of ").append(receiver.ownerName()).append(" sliding up and down ").append(sender.hisHer()).append(" length, overwhelmed by the intensity of the sensations.").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + " lays back and loses " + sender.himHer() + "self in the feeling of " + receiver.ownerName() + " sliding up and down " + sender.hisHer() + " length, overwhelmed by the intensity of the sensations.");
                 else
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" gasps with pleasure, reflexively embracing ").append(receiver.ownerName()).append(" and thrusting ").append(sender.hisHer()).append(" own hips in time with ").append(receiver.ownerName()).append("'s movements.").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + " gasps with pleasure, reflexively embracing " + receiver.ownerName() + " and thrusting " + sender.hisHer() + " own hips in time with " + receiver.ownerName() + "'s movements.");
             } else
             if(sender.getObedience() > 66)
-                w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" winces and struggles not to cum right away, wanting to ensure that ").append(sender.heShe()).append(" stays hard for ").append(receiver.ownerName()).append(" as long as possible.").toString());
+                w.append(t, String.valueOf(sender.OwnerName()) + " winces and struggles not to cum right away, wanting to ensure that " + sender.heShe() + " stays hard for " + receiver.ownerName() + " as long as possible.");
             else
             if(sender.getObedience() > 33)
-                w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" tries to relax and enjoy it, but even as ").append(receiver.ownerName()).append(" slides up and down ").append(sender.hisHer()).append(" shaft, ").append(sender.ownerName()).append(" can't quite shake off the fear that this pleasure is just meant to make ").append(sender.himHer()).append(" let ").append(sender.hisHer()).append(" guard down.").toString());
+                w.append(t, String.valueOf(sender.OwnerName()) + " tries to relax and enjoy it, but even as " + receiver.ownerName() + " slides up and down " + sender.hisHer() + " shaft, " + sender.ownerName() + " can't quite shake off the fear that this pleasure is just meant to make " + sender.himHer() + " let " + sender.hisHer() + " guard down.");
             else
-                w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" struggles to keep glaring at ").append(receiver.ownerName()).append(", wincing slightly every time ").append(receiver.ownerName()).append(" squeezes the base of ").append(sender.hisHer()).append(" shaft and breaks ").append(sender.hisHer()).append(" concentration.").toString());
+                w.append(t, String.valueOf(sender.OwnerName()) + " struggles to keep glaring at " + receiver.ownerName() + ", wincing slightly every time " + receiver.ownerName() + " squeezes the base of " + sender.hisHer() + " shaft and breaks " + sender.hisHer() + " concentration.");
         } else
         if(this == Project.PenetratedVaginally)
         {
             if(Project.PushDown.isInProgress(sender, receiver))
             {
                 if(sender == w.lordBody)
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" mounts ").append(receiver.ownerName()).append(" and lowers ").append(sender.himHer()).append("self until ").append(sender.hisHer()).append(" pussy envelops ").append(receiver.ownerName()).append("'s cock.").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + " mounts " + receiver.ownerName() + " and lowers " + sender.himHer() + "self until " + sender.hisHer() + " pussy envelops " + receiver.ownerName() + "'s cock.");
                 else
                 if(sender.getDeviancy() > 66)
                 {
                     if(sender.getObedience() > 66)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" eagerly impales ").append(sender.hisHer()).append(" pussy on ").append(receiver.ownerName()).append("'s upright cock, sliding ").append(sender.himHer()).append("self up and down with manic energy while grinning at ").append(receiver.himHer()).append(".").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " eagerly impales " + sender.hisHer() + " pussy on " + receiver.ownerName() + "'s upright cock, sliding " + sender.himHer() + "self up and down with manic energy while grinning at " + receiver.himHer() + ".");
                     else
                     if(sender.getObedience() > 33)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" quickly lowers ").append(sender.himHer()).append("self onto ").append(receiver.ownerName()).append("'s cock, then immediately begins to bounce on ").append(receiver.hisHer()).append(" lap, searching for the precise angle where it pokes just the right spot inside ").append(sender.hisHer()).append(" pussy.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " quickly lowers " + sender.himHer() + "self onto " + receiver.ownerName() + "'s cock, then immediately begins to bounce on " + receiver.hisHer() + " lap, searching for the precise angle where it pokes just the right spot inside " + sender.hisHer() + " pussy.");
                     else
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" tries to resist ").append(sender.hisHer()).append(" urges, but this close to ").append(receiver.ownerName()).append("'s cock, ").append(sender.heShe()).append(" can't stop ").append(sender.himHer()).append("self from grinding against it.  Then, before ").append(sender.heShe()).append(" realizes it, ").append(sender.heShe()).append("'s taken it into ").append(sender.hisHer()).append(" pussy.  The surge of pleasure destroys the last of ").append(sender.hisHer()).append(" reason, and ").append(sender.heShe()).append(" starts moving in earnest.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " tries to resist " + sender.hisHer() + " urges, but this close to " + receiver.ownerName() + "'s cock, " + sender.heShe() + " can't stop " + sender.himHer() + "self from grinding against it.  Then, before " + sender.heShe() + " realizes it, " + sender.heShe() + "'s taken it into " + sender.hisHer() + " pussy.  The surge of pleasure destroys the last of " + sender.hisHer() + " reason, and " + sender.heShe() + " starts moving in earnest.");
                 } else
                 if(sender.getDeviancy() > 33)
                 {
                     if(sender.getConfidence() > 66)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" pins ").append(receiver.ownerName()).append(" down and takes ").append(receiver.ownerName()).append("'s cock into ").append(sender.hisHer()).append(" pussy.  ").append(sender.HeShe()).append(" grimaces slightly at the sudden insertion, but wastes no time in bucking ").append(sender.hisHer()).append(" hips with savage force, causing the discomfort to melt away into pleasure.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " pins " + receiver.ownerName() + " down and takes " + receiver.ownerName() + "'s cock into " + sender.hisHer() + " pussy.  " + sender.HeShe() + " grimaces slightly at the sudden insertion, but wastes no time in bucking " + sender.hisHer() + " hips with savage force, causing the discomfort to melt away into pleasure.");
                     else
                     if(sender.getConfidence() > 33)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" straddles ").append(receiver.ownerName()).append(", touching ").append(sender.hisHer()).append(" pussy against the tip of ").append(receiver.ownerName()).append("'s cock, then slowly lowering ").append(sender.himHer()).append("self downward onto it, bit by bit.  ").append(sender.HeShe()).append(" gasps and twitches as it bottoms out inside ").append(sender.himHer()).append(".").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " straddles " + receiver.ownerName() + ", touching " + sender.hisHer() + " pussy against the tip of " + receiver.ownerName() + "'s cock, then slowly lowering " + sender.himHer() + "self downward onto it, bit by bit.  " + sender.HeShe() + " gasps and twitches as it bottoms out inside " + sender.himHer() + ".");
                     else
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" is nervous about lowering ").append(sender.himHer()).append("self onto ").append(receiver.ownerName()).append("'s cock, but ").append(sender.heShe()).append(" gasps with pleasure as it goes inside ").append(sender.hisHer()).append(" pussy and immediately hits a sensitive spot.  ").append(sender.HeShe()).append(" moans and begins moving ").append(sender.himHer()).append("self up and down with genuine enthusiasm.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " is nervous about lowering " + sender.himHer() + "self onto " + receiver.ownerName() + "'s cock, but " + sender.heShe() + " gasps with pleasure as it goes inside " + sender.hisHer() + " pussy and immediately hits a sensitive spot.  " + sender.HeShe() + " moans and begins moving " + sender.himHer() + "self up and down with genuine enthusiasm.");
                 } else
                 if(sender.getDignity() > 66)
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" is blushing bright red at having to be the one to lower ").append(sender.himHer()).append("self onto ").append(receiver.ownerName()).append("'s cock, but ").append(sender.heShe()).append(" pretends that it doesn't bother ").append(sender.himHer()).append(".  ").append(sender.HeShe()).append(" just flinches as it spreads ").append(sender.hisHer()).append(" pussy open, then stifles a moan when it goes all the way inside.").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + " is blushing bright red at having to be the one to lower " + sender.himHer() + "self onto " + receiver.ownerName() + "'s cock, but " + sender.heShe() + " pretends that it doesn't bother " + sender.himHer() + ".  " + sender.HeShe() + " just flinches as it spreads " + sender.hisHer() + " pussy open, then stifles a moan when it goes all the way inside.");
                 else
                 if(sender.getDignity() > 33)
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" delays as long as possible before taking ").append(receiver.ownerName()).append("'s cock into ").append(sender.hisHer()).append(" pussy.  ").append(sender.HeShe()).append(" tries various angles, slides ").append(sender.himHer()).append("self against it several times, and only then does ").append(sender.heShe()).append(" finally lower ").append(sender.himHer()).append("self onto it.  When ").append(sender.heShe()).append(" does, ").append(sender.heShe()).append(" lets out a little moan, uncomfortable with just how intense the pleasure is.").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + " delays as long as possible before taking " + receiver.ownerName() + "'s cock into " + sender.hisHer() + " pussy.  " + sender.HeShe() + " tries various angles, slides " + sender.himHer() + "self against it several times, and only then does " + sender.heShe() + " finally lower " + sender.himHer() + "self onto it.  When " + sender.heShe() + " does, " + sender.heShe() + " lets out a little moan, uncomfortable with just how intense the pleasure is.");
                 else
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" doesn't waste any time before slamming ").append(sender.hisHer()).append(" hips down onto ").append(receiver.ownerName()).append("'s cock.  However, ").append(sender.heShe()).append(" groans with discomfort at the sudden insertion, and ").append(sender.heShe()).append(" needs a few moments to recover before ").append(sender.heShe()).append(" can start moving.").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + " doesn't waste any time before slamming " + sender.hisHer() + " hips down onto " + receiver.ownerName() + "'s cock.  However, " + sender.heShe() + " groans with discomfort at the sudden insertion, and " + sender.heShe() + " needs a few moments to recover before " + sender.heShe() + " can start moving.");
                 if(sender.isVVirg())
                     if(sender.getObedience() > 66)
-                        w.append(t, (new StringBuilder("  ")).append(sender.HeShe()).append(" embraces the pain of ").append(sender.hisHer()).append(" first vaginal penetration, ecstatic to have received it from ").append(receiver.ownerName()).append(".").toString());
+                        w.append(t, "  " + sender.HeShe() + " embraces the pain of " + sender.hisHer() + " first vaginal penetration, ecstatic to have received it from " + receiver.ownerName() + ".");
                     else
                     if(sender.getObedience() > 33)
-                        w.append(t, (new StringBuilder("  ")).append(sender.HeShe()).append(" looks down at the trickle of blood on ").append(sender.hisHer()).append(" thigh with an expression of resignation.").toString());
+                        w.append(t, "  " + sender.HeShe() + " looks down at the trickle of blood on " + sender.hisHer() + " thigh with an expression of resignation.");
                     else
-                        w.append(t, (new StringBuilder("  ")).append(sender.HeShe()).append(" lifts ").append(sender.himHer()).append("self up enough to look down and see the blood on ").append(receiver.ownerName()).append("'s cock, then grits ").append(sender.hisHer()).append(" teeth.").toString());
+                        w.append(t, "  " + sender.HeShe() + " lifts " + sender.himHer() + "self up enough to look down and see the blood on " + receiver.ownerName() + "'s cock, then grits " + sender.hisHer() + " teeth.");
             } else
             {
                 if(sender == w.lordBody)
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append("'s pussy tightens around ").append(receiver.ownerName()).append("'s cock as though trying to milk it dry.").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + "'s pussy tightens around " + receiver.ownerName() + "'s cock as though trying to milk it dry.");
                 else
                 if(sender.getObedience() > 66)
                 {
                     if(sender.getDeviancy() > 66)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" goes wild with joyful lust, bucking ").append(sender.hisHer()).append(" hips wildly and enjoying every moment of being taken by ").append(receiver.ownerName()).append(".").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " goes wild with joyful lust, bucking " + sender.hisHer() + " hips wildly and enjoying every moment of being taken by " + receiver.ownerName() + ".");
                     else
                     if(sender.getDeviancy() > 33)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" tries to help ").append(receiver.ownerName()).append(" feel good as well, moving ").append(sender.hisHer()).append(" hips and urging ").append(receiver.himHer()).append(" deeper inside, but soon the pleasure overwhelms ").append(sender.himHer()).append(" and ").append(sender.heShe()).append(" can't think of anything but wanting to cum.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " tries to help " + receiver.ownerName() + " feel good as well, moving " + sender.hisHer() + " hips and urging " + receiver.himHer() + " deeper inside, but soon the pleasure overwhelms " + sender.himHer() + " and " + sender.heShe() + " can't think of anything but wanting to cum.");
                     else
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" bites ").append(sender.hisHer()).append(" lip in concentration, trying to buck ").append(sender.hisHer()).append(" hips in turn and squeeze down with ").append(sender.hisHer()).append(" pussy in order to make it feel as good as possible for ").append(receiver.ownerName()).append(".").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " bites " + sender.hisHer() + " lip in concentration, trying to buck " + sender.hisHer() + " hips in turn and squeeze down with " + sender.hisHer() + " pussy in order to make it feel as good as possible for " + receiver.ownerName() + ".");
                 } else
                 if(sender.getObedience() > 33)
                 {
                     if(sender.getConfidence() > 66)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" doesn't look entirely happy to be on the bottom, but the pleasure of each thrust hitting ").append(sender.hisHer()).append(" deepest places soon makes ").append(sender.himHer()).append(" forget all about that and start crying out in pleasure.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " doesn't look entirely happy to be on the bottom, but the pleasure of each thrust hitting " + sender.hisHer() + " deepest places soon makes " + sender.himHer() + " forget all about that and start crying out in pleasure.");
                     else
                     if(sender.getConfidence() > 33)
-                        w.append(t, (new StringBuilder("At first, ")).append(sender.ownerName()).append(" tolerates it with an expression of resignation.  However, as the pleasure builds, ").append(sender.heShe()).append(" starts to gasp with passion and then actively move ").append(sender.hisHer()).append(" hips.").toString());
+                        w.append(t, "At first, " + sender.ownerName() + " tolerates it with an expression of resignation.  However, as the pleasure builds, " + sender.heShe() + " starts to gasp with passion and then actively move " + sender.hisHer() + " hips.");
                     else
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" is too nervous to move much, worried about doing something to displease ").append(receiver.ownerName()).append(".  Whimpering moans of pleasure begin to leak out of ").append(sender.hisHer()).append(" throat.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " is too nervous to move much, worried about doing something to displease " + receiver.ownerName() + ".  Whimpering moans of pleasure begin to leak out of " + sender.hisHer() + " throat.");
                 } else
                 if(sender.getInnocence() > 66)
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" tries to kick and scream, but ").append(sender.hisHer()).append(" movements only drive ").append(receiver.ownerName()).append(" deeper inside ").append(sender.himHer()).append(", and ").append(sender.hisHer()).append(" voice takes on a passionate quality.").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + " tries to kick and scream, but " + sender.hisHer() + " movements only drive " + receiver.ownerName() + " deeper inside " + sender.himHer() + ", and " + sender.hisHer() + " voice takes on a passionate quality.");
                 else
                 if(sender.getInnocence() > 33)
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" attempts to deny ").append(receiver.ownerName()).append(" the satisfaction of seeing ").append(sender.hisHer()).append(" reactions, but the longer the fucking continues, the more difficult it is.  Soon ").append(sender.heShe()).append("'s reduced to covering ").append(sender.hisHer()).append(" face and biting ").append(sender.hisHer()).append(" lip to stifle ").append(sender.hisHer()).append(" moans.").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + " attempts to deny " + receiver.ownerName() + " the satisfaction of seeing " + sender.hisHer() + " reactions, but the longer the fucking continues, the more difficult it is.  Soon " + sender.heShe() + "'s reduced to covering " + sender.hisHer() + " face and biting " + sender.hisHer() + " lip to stifle " + sender.hisHer() + " moans.");
                 else
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" glares up at ").append(receiver.ownerName()).append(", and ").append(sender.hisHer()).append(" comes through clearly even as ").append(sender.heShe()).append(" winces and groans at the stimulation to ").append(sender.hisHer()).append(" most sensitive inner places.").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + " glares up at " + receiver.ownerName() + ", and " + sender.hisHer() + " comes through clearly even as " + sender.heShe() + " winces and groans at the stimulation to " + sender.hisHer() + " most sensitive inner places.");
                 if(sender.isVVirg())
                     if(sender.getObedience() > 66)
-                        w.append(t, (new StringBuilder("  ")).append(sender.HeShe()).append(" smiles broadly up at ").append(receiver.ownerName()).append(", tears of joy leaking from ").append(sender.hisHer()).append(" eyes at being able to give ").append(sender.hisHer()).append(" first time to the one ").append(sender.heShe()).append(" loves.").toString());
+                        w.append(t, "  " + sender.HeShe() + " smiles broadly up at " + receiver.ownerName() + ", tears of joy leaking from " + sender.hisHer() + " eyes at being able to give " + sender.hisHer() + " first time to the one " + sender.heShe() + " loves.");
                     else
                     if(sender.getObedience() > 33)
-                        w.append(t, (new StringBuilder("  When ")).append(sender.heShe()).append(" sees the blood on ").append(receiver.ownerName()).append("'s cock, ").append(sender.heShe()).append(" flinches away, as if trying to ignore it.").toString());
+                        w.append(t, "  When " + sender.heShe() + " sees the blood on " + receiver.ownerName() + "'s cock, " + sender.heShe() + " flinches away, as if trying to ignore it.");
                     else
-                        w.append(t, (new StringBuilder("  ")).append(sender.HisHer()).append(" anger drowns out the pain of having ").append(sender.hisHer()).append(" hymen torn.").toString());
+                        w.append(t, "  " + sender.HisHer() + " anger drowns out the pain of having " + sender.hisHer() + " hymen torn.");
             }
         } else
         if(this == Project.AnalPenetrate)
@@ -2171,66 +2171,66 @@ public class Activity
             if(Project.PushDown.isInProgress(sender, receiver))
             {
                 if(sender == w.lordBody)
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" puts the tip of ").append(sender.hisHer()).append(" cock against ").append(receiver.ownerName()).append("'s anus, then thrusts inside.").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + " puts the tip of " + sender.hisHer() + " cock against " + receiver.ownerName() + "'s anus, then thrusts inside.");
                 else
                 if(sender.getDeviancy() > 66)
                 {
                     if(sender.getConfidence() > 66)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" eagerly pins ").append(receiver.ownerName()).append(" down and shoves ").append(sender.hisHer()).append(" shaft all the way up ").append(receiver.ownerName()).append("'s ass, immediately setting a rapid pace of thrusting in and out.  It's a struggle to keep moving steadily with the flashes of pleasure shooting through ").append(sender.himHer()).append(", but ").append(sender.ownerName()).append(" is determined to keep going.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " eagerly pins " + receiver.ownerName() + " down and shoves " + sender.hisHer() + " shaft all the way up " + receiver.ownerName() + "'s ass, immediately setting a rapid pace of thrusting in and out.  It's a struggle to keep moving steadily with the flashes of pleasure shooting through " + sender.himHer() + ", but " + sender.ownerName() + " is determined to keep going.");
                     else
                     if(sender.getConfidence() > 33)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" starts to slowly push ").append(sender.hisHer()).append(" cock up ").append(receiver.ownerName()).append("'s ass, but the surge of pleasure from the sphincter squeezing ").append(sender.hisHer()).append(" tip overwhelms ").append(sender.hisHer()).append(" reason.  ").append(sender.HeShe()).append(" jerks ").append(sender.hisHer()).append(" hips forward, burying ").append(sender.himHer()).append("self all the way inside, then pulls halfway out, then pushes back in, hips jerking wildly as intense ecstasy surges through ").append(sender.himHer()).append(" with every movement.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " starts to slowly push " + sender.hisHer() + " cock up " + receiver.ownerName() + "'s ass, but the surge of pleasure from the sphincter squeezing " + sender.hisHer() + " tip overwhelms " + sender.hisHer() + " reason.  " + sender.HeShe() + " jerks " + sender.hisHer() + " hips forward, burying " + sender.himHer() + "self all the way inside, then pulls halfway out, then pushes back in, hips jerking wildly as intense ecstasy surges through " + sender.himHer() + " with every movement.");
                     else
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append("'s timid nature seems to vanish entirely, and ").append(sender.heShe()).append(" starts to ram ").append(sender.hisHer()).append(" hips forward with wild abandon, hammering in and out of ").append(receiver.ownerName()).append("'s asshole.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + "'s timid nature seems to vanish entirely, and " + sender.heShe() + " starts to ram " + sender.hisHer() + " hips forward with wild abandon, hammering in and out of " + receiver.ownerName() + "'s asshole.");
                 } else
                 if(sender.getDeviancy() > 33)
                 {
                     if(sender.getInnocence() > 66)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" pushes ").append(sender.hisHer()).append(" cock up ").append(receiver.ownerName()).append("'s ass, and the moment ").append(sender.heShe()).append(" feels ").append(receiver.hisHer()).append(" rear entrance squeezing down on ").append(sender.himHer()).append(", ").append(sender.heShe()).append(" loses the ability to think of anything but the pleasure.  Moaning softly, ").append(sender.heShe()).append(" starts thrusting in and out, acting on pure instinct.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " pushes " + sender.hisHer() + " cock up " + receiver.ownerName() + "'s ass, and the moment " + sender.heShe() + " feels " + receiver.hisHer() + " rear entrance squeezing down on " + sender.himHer() + ", " + sender.heShe() + " loses the ability to think of anything but the pleasure.  Moaning softly, " + sender.heShe() + " starts thrusting in and out, acting on pure instinct.");
                     else
                     if(sender.getInnocence() > 33)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" starts to fuck ").append(receiver.ownerName()).append("'s asshole, but the pleasure of ").append(receiver.hisHer()).append(" sphincter squeezing down on ").append(sender.himHer()).append(" cock gives ").append(sender.ownerName()).append(" pause.  ").append(sender.HeShe()).append(" gasps, taking a moment to catch ").append(sender.hisHer()).append(" breath, then continues more slowly, enjoying the incredible tightness around ").append(sender.hisHer()).append(" shaft.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " starts to fuck " + receiver.ownerName() + "'s asshole, but the pleasure of " + receiver.hisHer() + " sphincter squeezing down on " + sender.himHer() + " cock gives " + sender.ownerName() + " pause.  " + sender.HeShe() + " gasps, taking a moment to catch " + sender.hisHer() + " breath, then continues more slowly, enjoying the incredible tightness around " + sender.hisHer() + " shaft.");
                     else
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" gradually pushes ").append(sender.hisHer()).append(" cock up ").append(receiver.ownerName()).append("'s ass, inch-by-inch, then withdraws it just as carefully.  ").append(sender.HeShe()).append(" moves slowly, feeling out which spots feel better for ").append(sender.himHer()).append(" and which seem to get more of a reaction from ").append(receiver.ownerName()).append(", and only then starts to move more quickly, getting into a rhythm.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " gradually pushes " + sender.hisHer() + " cock up " + receiver.ownerName() + "'s ass, inch-by-inch, then withdraws it just as carefully.  " + sender.HeShe() + " moves slowly, feeling out which spots feel better for " + sender.himHer() + " and which seem to get more of a reaction from " + receiver.ownerName() + ", and only then starts to move more quickly, getting into a rhythm.");
                 } else
                 if(sender.getObedience() > 66)
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" eagerly thrusts ").append(sender.hisHer()).append(" cock up ").append(receiver.ownerName()).append("'s ass, ecstatic to be joined with ").append(receiver.himHer()).append(".  ").append(sender.HeShe()).append(" moves unselfishly, trying to hit all of ").append(receiver.ownerName()).append("'s sensitive parts without any regard for ").append(sender.hisHer()).append(" own pleasure.").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + " eagerly thrusts " + sender.hisHer() + " cock up " + receiver.ownerName() + "'s ass, ecstatic to be joined with " + receiver.himHer() + ".  " + sender.HeShe() + " moves unselfishly, trying to hit all of " + receiver.ownerName() + "'s sensitive parts without any regard for " + sender.hisHer() + " own pleasure.");
                 else
                 if(sender.getObedience() > 33)
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" presses the tip of ").append(sender.hisHer()).append(" cock against ").append(receiver.ownerName()).append("'s anus, hesitates for a moment, and then finally pushes it inside.  ").append(sender.HeShe()).append(" gasps and shudders at the pleasure, far beyond what ").append(sender.heShe()).append(" was prepared for, and then cautiously starts to move ").append(sender.hisHer()).append(" hips forward and back.").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + " presses the tip of " + sender.hisHer() + " cock against " + receiver.ownerName() + "'s anus, hesitates for a moment, and then finally pushes it inside.  " + sender.HeShe() + " gasps and shudders at the pleasure, far beyond what " + sender.heShe() + " was prepared for, and then cautiously starts to move " + sender.hisHer() + " hips forward and back.");
                 else
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append("'s angry demeanor fades for just a moment as ").append(sender.heShe()).append(" thrusts into ").append(receiver.ownerName()).append(" and feels the intense pleasure of ").append(receiver.hisHer()).append(" asshole squeezing ").append(sender.himHer()).append(".  But then ").append(sender.heShe()).append(" recovers and starts to move violently in and out, as if stabbing ").append(receiver.ownerName()).append(" with a weapon.").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + "'s angry demeanor fades for just a moment as " + sender.heShe() + " thrusts into " + receiver.ownerName() + " and feels the intense pleasure of " + receiver.hisHer() + " asshole squeezing " + sender.himHer() + ".  But then " + sender.heShe() + " recovers and starts to move violently in and out, as if stabbing " + receiver.ownerName() + " with a weapon.");
             } else
             if(sender == w.lordBody)
-                w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append("'s cock pushes all the way into ").append(receiver.ownerName()).append("'s bowels.").toString());
+                w.append(t, String.valueOf(sender.OwnerName()) + "'s cock pushes all the way into " + receiver.ownerName() + "'s bowels.");
             else
             if(sender.getDeviancy() > 66)
             {
                 if(sender.getInnocence() > 66)
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append("'s whole body goes slack except for ").append(sender.hisHer()).append(" hips desperately trying to thrust deeper into ").append(receiver.himHer()).append(".  ").append(sender.HisHer()).append(" eyes roll and ").append(sender.hisHer()).append(" tongue hangs out.").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + "'s whole body goes slack except for " + sender.hisHer() + " hips desperately trying to thrust deeper into " + receiver.himHer() + ".  " + sender.HisHer() + " eyes roll and " + sender.hisHer() + " tongue hangs out.");
                 else
                 if(sender.getInnocence() > 33)
-                    w.append(t, (new StringBuilder("The feeling of ")).append(receiver.ownerName()).append(" sliding down to the base of ").append(sender.hisHer()).append(" shaft is enough to make ").append(sender.ownerName()).append(" cry out and lose ").append(sender.hisHer()).append(" sense of reason.  ").append(sender.HeShe()).append(" desperately clings to ").append(receiver.ownerName()).append(", hips jerking wildly up and down as ").append(sender.heShe()).append(" tries to thrust even deeper into ").append(receiver.himHer()).append(".").toString());
+                    w.append(t, "The feeling of " + receiver.ownerName() + " sliding down to the base of " + sender.hisHer() + " shaft is enough to make " + sender.ownerName() + " cry out and lose " + sender.hisHer() + " sense of reason.  " + sender.HeShe() + " desperately clings to " + receiver.ownerName() + ", hips jerking wildly up and down as " + sender.heShe() + " tries to thrust even deeper into " + receiver.himHer() + ".");
                 else
-                    w.append(t, (new StringBuilder("At first, ")).append(sender.ownerName()).append(" tries to reciprocate with ").append(sender.hisHer()).append(" own thrusts.  But it soon becomes clear that ").append(sender.heShe()).append("'s completely at ").append(receiver.ownerName()).append("'s mercy, and all ").append(sender.heShe()).append(" can do is moan and jerk ").append(sender.hisHer()).append(" hips as ").append(receiver.ownerName()).append(" slides up and down ").append(sender.hisHer()).append(" shaft.").toString());
+                    w.append(t, "At first, " + sender.ownerName() + " tries to reciprocate with " + sender.hisHer() + " own thrusts.  But it soon becomes clear that " + sender.heShe() + "'s completely at " + receiver.ownerName() + "'s mercy, and all " + sender.heShe() + " can do is moan and jerk " + sender.hisHer() + " hips as " + receiver.ownerName() + " slides up and down " + sender.hisHer() + " shaft.");
             } else
             if(sender.getDeviancy() > 33)
             {
                 if(sender.getDignity() > 66)
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" tries to hide just how good it feels, but when ").append(receiver.ownerName()).append(" clenches around ").append(sender.himHer()).append(", ").append(sender.heShe()).append(" gasps and reflexively bucks ").append(sender.hisHer()).append(" hips.  After that, ").append(sender.heShe()).append(" has a harder and harder time suppressing ").append(sender.hisHer()).append(" moans.").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + " tries to hide just how good it feels, but when " + receiver.ownerName() + " clenches around " + sender.himHer() + ", " + sender.heShe() + " gasps and reflexively bucks " + sender.hisHer() + " hips.  After that, " + sender.heShe() + " has a harder and harder time suppressing " + sender.hisHer() + " moans.");
                 else
                 if(sender.getDignity() > 33)
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" lays back and loses ").append(sender.himHer()).append("self in the feeling of ").append(receiver.ownerName()).append(" sliding up and down ").append(sender.hisHer()).append(" length, overwhelmed by the intensity of the sensations.").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + " lays back and loses " + sender.himHer() + "self in the feeling of " + receiver.ownerName() + " sliding up and down " + sender.hisHer() + " length, overwhelmed by the intensity of the sensations.");
                 else
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" gasps with pleasure, reflexively embracing ").append(receiver.ownerName()).append(" and thrusting ").append(sender.hisHer()).append(" own hips in time with ").append(receiver.ownerName()).append("'s movements.").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + " gasps with pleasure, reflexively embracing " + receiver.ownerName() + " and thrusting " + sender.hisHer() + " own hips in time with " + receiver.ownerName() + "'s movements.");
             } else
             if(sender.getObedience() > 66)
-                w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" winces and struggles not to cum right away, wanting to ensure that ").append(sender.heShe()).append(" stays hard for ").append(receiver.ownerName()).append(" as long as possible.").toString());
+                w.append(t, String.valueOf(sender.OwnerName()) + " winces and struggles not to cum right away, wanting to ensure that " + sender.heShe() + " stays hard for " + receiver.ownerName() + " as long as possible.");
             else
             if(sender.getObedience() > 33)
-                w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" tries to relax and enjoy it, but even as ").append(receiver.ownerName()).append(" slides up and down ").append(sender.hisHer()).append(" shaft, ").append(sender.ownerName()).append(" can't quite shake off the fear that this pleasure is just meant to make ").append(sender.himHer()).append(" let ").append(sender.hisHer()).append(" guard down.").toString());
+                w.append(t, String.valueOf(sender.OwnerName()) + " tries to relax and enjoy it, but even as " + receiver.ownerName() + " slides up and down " + sender.hisHer() + " shaft, " + sender.ownerName() + " can't quite shake off the fear that this pleasure is just meant to make " + sender.himHer() + " let " + sender.hisHer() + " guard down.");
             else
-                w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" struggles to keep glaring at ").append(receiver.ownerName()).append(", wincing slightly every time ").append(receiver.ownerName()).append("'s anus squeezes the base of ").append(sender.hisHer()).append(" shaft and breaks ").append(sender.hisHer()).append(" concentration.").toString());
+                w.append(t, String.valueOf(sender.OwnerName()) + " struggles to keep glaring at " + receiver.ownerName() + ", wincing slightly every time " + receiver.ownerName() + "'s anus squeezes the base of " + sender.hisHer() + " shaft and breaks " + sender.hisHer() + " concentration.");
         } else
         if(this == Project.PenetratedAnally)
         {
@@ -2238,142 +2238,142 @@ public class Activity
             {
                 if(sender == w.lordBody)
                 {
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" mounts ").append(receiver.ownerName()).append(" and lowers ").append(sender.himHer()).append("self until ").append(sender.hisHer()).append(" anus envelops ").append(receiver.ownerName()).append("'s cock.").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + " mounts " + receiver.ownerName() + " and lowers " + sender.himHer() + "self until " + sender.hisHer() + " anus envelops " + receiver.ownerName() + "'s cock.");
                 } else
                 {
                     if(!Project.BeLubricated.isInProgress(sender, null))
                     {
                         if(sender.getInnocence() > 66)
-                            w.append(t, (new StringBuilder("Full of eager lust, ")).append(sender.ownerName()).append(" almost forgets to lubricate ").append(sender.himHer()).append("self back there before continuing.").toString());
+                            w.append(t, "Full of eager lust, " + sender.ownerName() + " almost forgets to lubricate " + sender.himHer() + "self back there before continuing.");
                         else
                         if(sender.getInnocence() > 33)
-                            w.append(t, (new StringBuilder("As ")).append(sender.heShe()).append(" lays atop ").append(receiver.ownerName()).append(", ").append(sender.ownerName()).append(" reaches back with one finger covered in lubricant to prepare for what comes next.").toString());
+                            w.append(t, "As " + sender.heShe() + " lays atop " + receiver.ownerName() + ", " + sender.ownerName() + " reaches back with one finger covered in lubricant to prepare for what comes next.");
                         else
-                            w.append(t, (new StringBuilder("Before continuing, ")).append(sender.ownerName()).append(" carefully applies some slippery lubricant to ").append(sender.hisHer()).append(" rear entrance.").toString());
+                            w.append(t, "Before continuing, " + sender.ownerName() + " carefully applies some slippery lubricant to " + sender.hisHer() + " rear entrance.");
                         w.append(t, "\n\n");
                         sender.addActivity(Project.BeLubricated, null);
                     }
                     if(sender.getDeviancy() > 66)
                     {
                         if(sender.getObedience() > 66)
-                            w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" eagerly impales ").append(sender.hisHer()).append(" asshole on ").append(receiver.ownerName()).append("'s upright cock, sliding ").append(sender.himHer()).append("self up and down with manic energy while grinning at ").append(receiver.himHer()).append(".").toString());
+                            w.append(t, String.valueOf(sender.OwnerName()) + " eagerly impales " + sender.hisHer() + " asshole on " + receiver.ownerName() + "'s upright cock, sliding " + sender.himHer() + "self up and down with manic energy while grinning at " + receiver.himHer() + ".");
                         else
                         if(sender.getObedience() > 33)
-                            w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" quickly lowers ").append(sender.himHer()).append("self onto ").append(receiver.ownerName()).append("'s cock, then immediately begins to bounce on ").append(receiver.hisHer()).append(" lap, searching for the precise angle where it pokes just the right spot inside ").append(sender.hisHer()).append(" bowels.").toString());
+                            w.append(t, String.valueOf(sender.OwnerName()) + " quickly lowers " + sender.himHer() + "self onto " + receiver.ownerName() + "'s cock, then immediately begins to bounce on " + receiver.hisHer() + " lap, searching for the precise angle where it pokes just the right spot inside " + sender.hisHer() + " bowels.");
                         else
-                            w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" tries to resist ").append(sender.hisHer()).append(" urges, but this close to ").append(receiver.ownerName()).append("'s cock, ").append(sender.heShe()).append(" can't stop ").append(sender.himHer()).append("self from grinding against it.  Then, before ").append(sender.heShe()).append(" realizes it, ").append(sender.heShe()).append("'s taken it up ").append(sender.hisHer()).append(" ass.  The surge of pleasure destroys the last of ").append(sender.hisHer()).append(" reason, and ").append(sender.heShe()).append(" starts moving in earnest.").toString());
+                            w.append(t, String.valueOf(sender.OwnerName()) + " tries to resist " + sender.hisHer() + " urges, but this close to " + receiver.ownerName() + "'s cock, " + sender.heShe() + " can't stop " + sender.himHer() + "self from grinding against it.  Then, before " + sender.heShe() + " realizes it, " + sender.heShe() + "'s taken it up " + sender.hisHer() + " ass.  The surge of pleasure destroys the last of " + sender.hisHer() + " reason, and " + sender.heShe() + " starts moving in earnest.");
                     } else
                     if(sender.getDeviancy() > 33)
                     {
                         if(sender.getConfidence() > 66)
-                            w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" pins ").append(receiver.ownerName()).append(" down and takes ").append(receiver.ownerName()).append("'s cock up ").append(sender.hisHer()).append(" ass.  ").append(sender.HeShe()).append(" grimaces slightly at the sensation of being spread wide open, but wastes no time in bucking ").append(sender.hisHer()).append(" hips with savage force, causing the discomfort to melt away into pleasure.").toString());
+                            w.append(t, String.valueOf(sender.OwnerName()) + " pins " + receiver.ownerName() + " down and takes " + receiver.ownerName() + "'s cock up " + sender.hisHer() + " ass.  " + sender.HeShe() + " grimaces slightly at the sensation of being spread wide open, but wastes no time in bucking " + sender.hisHer() + " hips with savage force, causing the discomfort to melt away into pleasure.");
                         else
                         if(sender.getConfidence() > 33)
-                            w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" straddles ").append(receiver.ownerName()).append(", touching ").append(sender.hisHer()).append(" anus against the tip of ").append(receiver.ownerName()).append("'s cock, then slowly lowering ").append(sender.himHer()).append("self downward onto it, bit by bit.  ").append(sender.HeShe()).append(" gasps and twitches as it bottoms out inside ").append(sender.himHer()).append(".").toString());
+                            w.append(t, String.valueOf(sender.OwnerName()) + " straddles " + receiver.ownerName() + ", touching " + sender.hisHer() + " anus against the tip of " + receiver.ownerName() + "'s cock, then slowly lowering " + sender.himHer() + "self downward onto it, bit by bit.  " + sender.HeShe() + " gasps and twitches as it bottoms out inside " + sender.himHer() + ".");
                         else
-                            w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" is nervous about lowering ").append(sender.himHer()).append("self onto ").append(receiver.ownerName()).append("'s cock, but ").append(sender.heShe()).append(" gasps with pleasure as it goes up ").append(sender.hisHer()).append(" ass and immediately hits a sensitive spot.  ").append(sender.HeShe()).append(" moans and begins moving ").append(sender.himHer()).append("self up and down with genuine enthusiasm.").toString());
+                            w.append(t, String.valueOf(sender.OwnerName()) + " is nervous about lowering " + sender.himHer() + "self onto " + receiver.ownerName() + "'s cock, but " + sender.heShe() + " gasps with pleasure as it goes up " + sender.hisHer() + " ass and immediately hits a sensitive spot.  " + sender.HeShe() + " moans and begins moving " + sender.himHer() + "self up and down with genuine enthusiasm.");
                     } else
                     if(sender.getDignity() > 66)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" is blushing bright red at having to be the one to lower ").append(sender.himHer()).append("self onto ").append(receiver.ownerName()).append("'s cock, but ").append(sender.heShe()).append(" pretends that it doesn't bother ").append(sender.himHer()).append(".  ").append(sender.HeShe()).append(" just flinches as it spreads ").append(sender.hisHer()).append(" anus open, then stifles a moan when it goes all the way inside.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " is blushing bright red at having to be the one to lower " + sender.himHer() + "self onto " + receiver.ownerName() + "'s cock, but " + sender.heShe() + " pretends that it doesn't bother " + sender.himHer() + ".  " + sender.HeShe() + " just flinches as it spreads " + sender.hisHer() + " anus open, then stifles a moan when it goes all the way inside.");
                     else
                     if(sender.getDignity() > 33)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" delays as long as possible before taking ").append(receiver.ownerName()).append("'s cock up ").append(sender.hisHer()).append(" ass.  ").append(sender.HeShe()).append(" tries various angles, grinds the tip against ").append(sender.hisHer()).append(" anus, and only then does ").append(sender.heShe()).append(" finally lower ").append(sender.himHer()).append("self onto it.  When ").append(sender.heShe()).append(" does, ").append(sender.heShe()).append(" lets out a little moan, uncomfortable with just how intense the pleasure is.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " delays as long as possible before taking " + receiver.ownerName() + "'s cock up " + sender.hisHer() + " ass.  " + sender.HeShe() + " tries various angles, grinds the tip against " + sender.hisHer() + " anus, and only then does " + sender.heShe() + " finally lower " + sender.himHer() + "self onto it.  When " + sender.heShe() + " does, " + sender.heShe() + " lets out a little moan, uncomfortable with just how intense the pleasure is.");
                     else
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" doesn't waste any time before slamming ").append(sender.hisHer()).append(" ass down onto ").append(receiver.ownerName()).append("'s cock.  However, ").append(sender.heShe()).append(" groans with discomfort at the sudden insertion, and ").append(sender.heShe()).append(" needs a few moments to recover before ").append(sender.heShe()).append(" can start moving.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " doesn't waste any time before slamming " + sender.hisHer() + " ass down onto " + receiver.ownerName() + "'s cock.  However, " + sender.heShe() + " groans with discomfort at the sudden insertion, and " + sender.heShe() + " needs a few moments to recover before " + sender.heShe() + " can start moving.");
                 }
                 if(sender.isVVirg())
                     if(sender.getObedience() > 66)
-                        w.append(t, (new StringBuilder("  ")).append(sender.HeShe()).append(" embraces the pain of ").append(sender.hisHer()).append(" first vaginal penetration, ecstatic to have received it from ").append(receiver.ownerName()).append(".").toString());
+                        w.append(t, "  " + sender.HeShe() + " embraces the pain of " + sender.hisHer() + " first vaginal penetration, ecstatic to have received it from " + receiver.ownerName() + ".");
                     else
                     if(sender.getObedience() > 33)
-                        w.append(t, (new StringBuilder("  ")).append(sender.HeShe()).append(" looks down at the trickle of blood on ").append(sender.hisHer()).append(" thigh with an expression of resignation.").toString());
+                        w.append(t, "  " + sender.HeShe() + " looks down at the trickle of blood on " + sender.hisHer() + " thigh with an expression of resignation.");
                     else
-                        w.append(t, (new StringBuilder("  ")).append(sender.HeShe()).append(" lifts ").append(sender.himHer()).append("self up enough to look down and see the blood on ").append(receiver.ownerName()).append("'s cock, then grits ").append(sender.hisHer()).append(" teeth.").toString());
+                        w.append(t, "  " + sender.HeShe() + " lifts " + sender.himHer() + "self up enough to look down and see the blood on " + receiver.ownerName() + "'s cock, then grits " + sender.hisHer() + " teeth.");
             } else
             if(Project.BeLubricated.isInProgress(sender, null) || sender == w.lordBody)
             {
                 if(sender == w.lordBody)
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append("'s asshole tightens around ").append(receiver.ownerName()).append("'s cock as though trying to milk it dry.").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + "'s asshole tightens around " + receiver.ownerName() + "'s cock as though trying to milk it dry.");
                 else
                 if(sender.getObedience() > 66)
                 {
                     if(sender.getDeviancy() > 66)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" goes wild with joyful lust, bucking ").append(sender.hisHer()).append(" hips wildly and enjoying every moment of being taken by ").append(receiver.ownerName()).append(".").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " goes wild with joyful lust, bucking " + sender.hisHer() + " hips wildly and enjoying every moment of being taken by " + receiver.ownerName() + ".");
                     else
                     if(sender.getDeviancy() > 33)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" tries to help ").append(receiver.ownerName()).append(" feel good as well, moving ").append(sender.hisHer()).append(" hips and urging ").append(receiver.himHer()).append(" deeper inside, but soon the pleasure overwhelms ").append(sender.himHer()).append(" and ").append(sender.heShe()).append(" can't think of anything but wanting to cum.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " tries to help " + receiver.ownerName() + " feel good as well, moving " + sender.hisHer() + " hips and urging " + receiver.himHer() + " deeper inside, but soon the pleasure overwhelms " + sender.himHer() + " and " + sender.heShe() + " can't think of anything but wanting to cum.");
                     else
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" bites ").append(sender.hisHer()).append(" lip in concentration, trying to buck ").append(sender.hisHer()).append(" hips in turn and squeeze down with ").append(sender.hisHer()).append(" anus in order to make it feel as good as possible for ").append(receiver.ownerName()).append(".").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " bites " + sender.hisHer() + " lip in concentration, trying to buck " + sender.hisHer() + " hips in turn and squeeze down with " + sender.hisHer() + " anus in order to make it feel as good as possible for " + receiver.ownerName() + ".");
                 } else
                 if(sender.getObedience() > 33)
                 {
                     if(sender.getConfidence() > 66)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" doesn't look entirely happy to be taking it up the ass, but the pleasure of each thrust hitting ").append(sender.hisHer()).append(" deepest places soon makes ").append(sender.himHer()).append(" forget all about that and start crying out in pleasure.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " doesn't look entirely happy to be taking it up the ass, but the pleasure of each thrust hitting " + sender.hisHer() + " deepest places soon makes " + sender.himHer() + " forget all about that and start crying out in pleasure.");
                     else
                     if(sender.getConfidence() > 33)
-                        w.append(t, (new StringBuilder("At first, ")).append(sender.ownerName()).append(" tolerates it with an expression of resignation.  However, as ").append(sender.hisHer()).append(" sensitive places start to get stimulated through ").append(sender.hisHer()).append(" anal walls, ").append(sender.heShe()).append(" starts to gasp with passion and then actively move ").append(sender.hisHer()).append(" hips.").toString());
+                        w.append(t, "At first, " + sender.ownerName() + " tolerates it with an expression of resignation.  However, as " + sender.hisHer() + " sensitive places start to get stimulated through " + sender.hisHer() + " anal walls, " + sender.heShe() + " starts to gasp with passion and then actively move " + sender.hisHer() + " hips.");
                     else
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" is too nervous to move much, worried about doing something to displease ").append(receiver.ownerName()).append(".  Whimpering moans of pleasure begin to leak out of ").append(sender.hisHer()).append(" throat.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " is too nervous to move much, worried about doing something to displease " + receiver.ownerName() + ".  Whimpering moans of pleasure begin to leak out of " + sender.hisHer() + " throat.");
                 } else
                 if(sender.getInnocence() > 66)
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" tries to kick and scream, but ").append(sender.hisHer()).append(" movements only drive ").append(receiver.ownerName()).append(" deeper inside ").append(sender.himHer()).append(", and ").append(sender.hisHer()).append(" voice takes on a passionate quality.").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + " tries to kick and scream, but " + sender.hisHer() + " movements only drive " + receiver.ownerName() + " deeper inside " + sender.himHer() + ", and " + sender.hisHer() + " voice takes on a passionate quality.");
                 else
                 if(sender.getInnocence() > 33)
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" attempts to deny ").append(receiver.ownerName()).append(" the satisfaction of seeing ").append(sender.hisHer()).append(" reactions, but the longer the fucking continues, the more difficult it is.  Soon ").append(sender.heShe()).append("'s reduced to covering ").append(sender.hisHer()).append(" face and biting ").append(sender.hisHer()).append(" lip to stifle ").append(sender.hisHer()).append(" moans.").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + " attempts to deny " + receiver.ownerName() + " the satisfaction of seeing " + sender.hisHer() + " reactions, but the longer the fucking continues, the more difficult it is.  Soon " + sender.heShe() + "'s reduced to covering " + sender.hisHer() + " face and biting " + sender.hisHer() + " lip to stifle " + sender.hisHer() + " moans.");
                 else
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" glares up at ").append(receiver.ownerName()).append(", and ").append(sender.hisHer()).append(" comes through clearly even as ").append(sender.heShe()).append(" winces and groans at the stimulation through ").append(sender.hisHer()).append(" anal walls.").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + " glares up at " + receiver.ownerName() + ", and " + sender.hisHer() + " comes through clearly even as " + sender.heShe() + " winces and groans at the stimulation through " + sender.hisHer() + " anal walls.");
                 if(sender.getGender() == Forsaken.Gender.MALE && sender.isVVirg())
                     if(sender.getObedience() > 66)
-                        w.append(t, (new StringBuilder("  ")).append(sender.HeShe()).append(" smiles broadly up at ").append(receiver.ownerName()).append(", tears of joy leaking from ").append(sender.hisHer()).append(" eyes at receiving ").append(sender.hisHer()).append(" first anal penetration from the one ").append(sender.heShe()).append(" loves.").toString());
+                        w.append(t, "  " + sender.HeShe() + " smiles broadly up at " + receiver.ownerName() + ", tears of joy leaking from " + sender.hisHer() + " eyes at receiving " + sender.hisHer() + " first anal penetration from the one " + sender.heShe() + " loves.");
                     else
                     if(sender.getObedience() > 33)
-                        w.append(t, (new StringBuilder("  To ")).append(sender.hisHer()).append(" horror, the pleasure keeps building further and further, until ").append(sender.heShe()).append(" can't deny that ").append(sender.heShe()).append(" enjoys being fucked like a girl.").toString());
+                        w.append(t, "  To " + sender.hisHer() + " horror, the pleasure keeps building further and further, until " + sender.heShe() + " can't deny that " + sender.heShe() + " enjoys being fucked like a girl.");
                     else
-                        w.append(t, (new StringBuilder("  ")).append(sender.HisHer()).append(" anger drowns out the pain of having ").append(sender.hisHer()).append(" inexperienced asshole stretched so wide for the first time.").toString());
+                        w.append(t, "  " + sender.HisHer() + " anger drowns out the pain of having " + sender.hisHer() + " inexperienced asshole stretched so wide for the first time.");
             } else
             {
                 if(sender.getConfidence() > 66)
                 {
                     if(sender.getObedience() > 66)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" grits ").append(sender.hisHer()).append(" teeth into a forced smile, encouraging ").append(receiver.ownerName()).append(" to keep fucking ").append(sender.himHer()).append(" even though ").append(sender.heShe()).append("'s in agony from having ").append(sender.hisHer()).append(" ass forced open without any lubrication.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " grits " + sender.hisHer() + " teeth into a forced smile, encouraging " + receiver.ownerName() + " to keep fucking " + sender.himHer() + " even though " + sender.heShe() + "'s in agony from having " + sender.hisHer() + " ass forced open without any lubrication.");
                     else
                     if(sender.getObedience() > 33)
-                        w.append(t, (new StringBuilder("The agony of being anally penetrated without any lubrication is almost enough to paralyze ")).append(sender.ownerName()).append("'s thoughts, but ").append(sender.heShe()).append(" has just enough willpower to beg for mercy, offering to do anything in hopes of ending the torture.").toString());
+                        w.append(t, "The agony of being anally penetrated without any lubrication is almost enough to paralyze " + sender.ownerName() + "'s thoughts, but " + sender.heShe() + " has just enough willpower to beg for mercy, offering to do anything in hopes of ending the torture.");
                     else
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append("'s determined resolve lasts only a moment before cracking, and ").append(sender.heShe()).append(" starts begging for mercy in a shrill voice, apologizing for ").append(sender.hisHer()).append(" defiance.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + "'s determined resolve lasts only a moment before cracking, and " + sender.heShe() + " starts begging for mercy in a shrill voice, apologizing for " + sender.hisHer() + " defiance.");
                 } else
                 if(sender.getConfidence() > 33)
                 {
                     if(sender.getDignity() > 66)
-                        w.append(t, (new StringBuilder("At first, ")).append(sender.ownerName()).append(" tries to pretend that ").append(sender.heShe()).append(" can take it.  But the painful friction against ").append(sender.hisHer()).append(" unlubricated anal walls is too much for ").append(sender.himHer()).append(", and soon ").append(sender.heShe()).append("'s crying and begging without restraint.").toString());
+                        w.append(t, "At first, " + sender.ownerName() + " tries to pretend that " + sender.heShe() + " can take it.  But the painful friction against " + sender.hisHer() + " unlubricated anal walls is too much for " + sender.himHer() + ", and soon " + sender.heShe() + "'s crying and begging without restraint.");
                     else
                     if(sender.getDignity() > 33)
-                        w.append(t, (new StringBuilder("Without any lubrication, the insertion is more painful than anything, and ")).append(sender.ownerName()).append(" is ashamed with ").append(sender.himHer()).append("self as ").append(sender.heShe()).append(" starts uncontrollably sobbing.").toString());
+                        w.append(t, "Without any lubrication, the insertion is more painful than anything, and " + sender.ownerName() + " is ashamed with " + sender.himHer() + "self as " + sender.heShe() + " starts uncontrollably sobbing.");
                     else
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" kicks wildly and screams at the top of ").append(sender.hisHer()).append(" lungs, heedless of the fact that ").append(sender.heShe()).append("'s only scraping ").append(sender.himHer()).append("self even more against the cruel invading shaft.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " kicks wildly and screams at the top of " + sender.hisHer() + " lungs, heedless of the fact that " + sender.heShe() + "'s only scraping " + sender.himHer() + "self even more against the cruel invading shaft.");
                 } else
                 if(sender.getDeviancy() > 66)
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append("'s eyes shoot wide open, a scream caught in ").append(sender.hisHer()).append(" throat.  But when it finally comes out, there's a lewd quality to it, a sign of ").append(sender.hisHer()).append(" insatiable masochism.").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + "'s eyes shoot wide open, a scream caught in " + sender.hisHer() + " throat.  But when it finally comes out, there's a lewd quality to it, a sign of " + sender.hisHer() + " insatiable masochism.");
                 else
                 if(sender.getDeviancy() > 33)
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" whimpers, trying to curl up and protect ").append(sender.himHer()).append("self, but ").append(sender.heShe()).append(" can't hide from the painful friction of the shaft invading ").append(sender.hisHer()).append(" unprepared hole.  ").append(sender.HisHer()).append(" moans aren't entirely from pain, as ").append(sender.heShe()).append(" feels a hint of shameful pleasure as well.").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + " whimpers, trying to curl up and protect " + sender.himHer() + "self, but " + sender.heShe() + " can't hide from the painful friction of the shaft invading " + sender.hisHer() + " unprepared hole.  " + sender.HisHer() + " moans aren't entirely from pain, as " + sender.heShe() + " feels a hint of shameful pleasure as well.");
                 else
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" screams, crying and sobbing at the explosion of agony ").append(sender.heShe()).append(" feels from the unlubricated insertion.  The pain far outweighs the pleasure.").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + " screams, crying and sobbing at the explosion of agony " + sender.heShe() + " feels from the unlubricated insertion.  The pain far outweighs the pleasure.");
                 if(sender.getGender() == Forsaken.Gender.MALE && sender.isVVirg())
                     if(sender.getObedience() > 66)
-                        w.append(t, (new StringBuilder("  Afterward, ")).append(sender.heShe()).append("'ll be full of joyful pride that ").append(receiver.ownerName()).append(" saw fit to break ").append(sender.himHer()).append(" in with such a memorable fucking, but for now, ").append(sender.heShe()).append("'s in too much pain to think about it in those terms.").toString());
+                        w.append(t, "  Afterward, " + sender.heShe() + "'ll be full of joyful pride that " + receiver.ownerName() + " saw fit to break " + sender.himHer() + " in with such a memorable fucking, but for now, " + sender.heShe() + "'s in too much pain to think about it in those terms.");
                     else
                     if(sender.getObedience() > 33)
-                        w.append(t, (new StringBuilder("  ")).append(sender.HeShe()).append(" realizes that it was a mistake to ever take pride in managing to protect ").append(sender.hisHer()).append(" anal virginity.").toString());
+                        w.append(t, "  " + sender.HeShe() + " realizes that it was a mistake to ever take pride in managing to protect " + sender.hisHer() + " anal virginity.");
                     else
-                        w.append(t, (new StringBuilder("  A part of ")).append(sender.himHer()).append(" is horrified that ").append(sender.heShe()).append(" was broken so easily, and ").append(sender.hisHer()).append(" confidence in ").append(sender.hisHer()).append(" own masculinity will never recover.").toString());
+                        w.append(t, "  A part of " + sender.himHer() + " is horrified that " + sender.heShe() + " was broken so easily, and " + sender.hisHer() + " confidence in " + sender.hisHer() + " own masculinity will never recover.");
             }
         } else
         if(this == Project.StripOther)
         {
             if(sender == w.lordBody)
             {
-                w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" begins to strip off ").append(receiver.ownerName()).append("'s clothes.").toString());
+                w.append(t, String.valueOf(sender.OwnerName()) + " begins to strip off " + receiver.ownerName() + "'s clothes.");
                 if(w.sceneLocation == Location.STAGE)
                     w.append(t, "  The crowd goes wild, eager to see more skin.");
             }
@@ -2384,68 +2384,68 @@ public class Activity
                 if(sender.getObedience() > 66)
                 {
                     if(sender.getDisgrace() > 66)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" doesn't even seem to notice all the spectators.  ").append(sender.HeShe()).append(" only has eyes for ").append(receiver.ownerName()).append(".").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " doesn't even seem to notice all the spectators.  " + sender.HeShe() + " only has eyes for " + receiver.ownerName() + ".");
                     else
                     if(sender.getDisgrace() > 33)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" smiles, eager to help ").append(receiver.ownerName()).append(" put on a show for everyone.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " smiles, eager to help " + receiver.ownerName() + " put on a show for everyone.");
                     else
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" looks afraid, but also eager, wanting to show everyone that ").append(sender.heShe()).append(" really is nothing more than ").append(receiver.ownerName()).append("'s toy.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " looks afraid, but also eager, wanting to show everyone that " + sender.heShe() + " really is nothing more than " + receiver.ownerName() + "'s toy.");
                 } else
                 if(sender.getObedience() > 33)
                 {
                     if(sender.forsakenOwner != null && sender.forsakenOwner.timesExposed < 300_000)
                     {
                         if(sender.getDignity() > 66)
-                            w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" is clearly terrified of the prospect of being forced to show everything, but ").append(sender.heShe()).append("'s come too far to back out now.").toString());
+                            w.append(t, String.valueOf(sender.OwnerName()) + " is clearly terrified of the prospect of being forced to show everything, but " + sender.heShe() + "'s come too far to back out now.");
                         else
                         if(sender.getDignity() > 33)
-                            w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" looks resigned to the fact that ").append(sender.heShe()).append("'ll shortly be showing off more than ").append(sender.heShe()).append(" ever has before.").toString());
+                            w.append(t, String.valueOf(sender.OwnerName()) + " looks resigned to the fact that " + sender.heShe() + "'ll shortly be showing off more than " + sender.heShe() + " ever has before.");
                         else
-                            w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" just ignores all the shouts and jeers.").toString());
+                            w.append(t, String.valueOf(sender.OwnerName()) + " just ignores all the shouts and jeers.");
                     } else
                     if(sender.getDignity() > 66)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" tries to make it look like it was ").append(sender.hisHer()).append(" idea to undress, moving to help ").append(receiver.ownerName()).append(" strip ").append(sender.himHer()).append(".").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " tries to make it look like it was " + sender.hisHer() + " idea to undress, moving to help " + receiver.ownerName() + " strip " + sender.himHer() + ".");
                     else
                     if(sender.getDignity() > 33)
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" tries to make the best of it, smiling at the crowd.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " tries to make the best of it, smiling at the crowd.");
                     else
-                        w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" just ignores all the shouts and jeers.").toString());
+                        w.append(t, String.valueOf(sender.OwnerName()) + " just ignores all the shouts and jeers.");
                 } else
                 if(sender.getDeviancy() > 66)
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append("'s eyes dart back and forth among all the people watching, and despite ").append(sender.hisHer()).append(" anger, ").append(sender.heShe()).append("'s panting wth barely-restrained desire.").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + "'s eyes dart back and forth among all the people watching, and despite " + sender.hisHer() + " anger, " + sender.heShe() + "'s panting wth barely-restrained desire.");
                 else
                 if(sender.getDeviancy() > 33)
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" huffs angrily, but the heat rising to ").append(sender.hisHer()).append(" cheeks is partly from arousal.").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + " huffs angrily, but the heat rising to " + sender.hisHer() + " cheeks is partly from arousal.");
                 else
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" clutches at ").append(sender.hisHer()).append(" clothes and glares at ").append(receiver.ownerName()).append(".").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + " clutches at " + sender.hisHer() + " clothes and glares at " + receiver.ownerName() + ".");
             } else
             if(sender.getDeviancy() > 66)
             {
                 if(sender.getInnocence() > 66)
-                    w.append(t, (new StringBuilder("The act of being stripped immediately causes ")).append(sender.ownerName()).append("'s mind to wander off into erotic fantasy, and ").append(sender.heShe()).append(" starts to drool with a silly expression on ").append(sender.hisHer()).append(" face.").toString());
+                    w.append(t, "The act of being stripped immediately causes " + sender.ownerName() + "'s mind to wander off into erotic fantasy, and " + sender.heShe() + " starts to drool with a silly expression on " + sender.hisHer() + " face.");
                 else
                 if(sender.getInnocence() > 33)
-                    w.append(t, (new StringBuilder("As ")).append(sender.hisHer()).append(" clothes are taken off, ").append(sender.ownerName()).append(" gets more and more turned on, and soon ").append(sender.heShe()).append(" can't think of anything but sex.").toString());
+                    w.append(t, "As " + sender.hisHer() + " clothes are taken off, " + sender.ownerName() + " gets more and more turned on, and soon " + sender.heShe() + " can't think of anything but sex.");
                 else
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" starts to breathe more quickly, imagining what might come next.").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + " starts to breathe more quickly, imagining what might come next.");
             } else
             if(sender.getDeviancy() > 33)
             {
                 if(sender.getConfidence() > 66)
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" proudly shows off, refusing to be ashamed of ").append(sender.hisHer()).append(" body.").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + " proudly shows off, refusing to be ashamed of " + sender.hisHer() + " body.");
                 else
                 if(sender.getConfidence() > 33)
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" blushes, anticipating what's to come.").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + " blushes, anticipating what's to come.");
                 else
-                    w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" glances off to the side and reflexively tries to cover ").append(sender.himHer()).append("self.").toString());
+                    w.append(t, String.valueOf(sender.OwnerName()) + " glances off to the side and reflexively tries to cover " + sender.himHer() + "self.");
             } else
             if(sender.getObedience() > 66)
-                w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" smiles, happy that ").append(receiver.ownerName()).append(" wants to see ").append(sender.hisHer()).append(" body.").toString());
+                w.append(t, String.valueOf(sender.OwnerName()) + " smiles, happy that " + receiver.ownerName() + " wants to see " + sender.hisHer() + " body.");
             else
             if(sender.getObedience() > 33)
-                w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" sighs, accepting that this was inevitable.").toString());
+                w.append(t, String.valueOf(sender.OwnerName()) + " sighs, accepting that this was inevitable.");
             else
-                w.append(t, (new StringBuilder(String.valueOf(sender.OwnerName()))).append(" clutches at ").append(sender.hisHer()).append(" clothes and glares at ").append(receiver.ownerName()).append(".").toString());
+                w.append(t, String.valueOf(sender.OwnerName()) + " clutches at " + sender.hisHer() + " clothes and glares at " + receiver.ownerName() + ".");
         if(counterpart != null)
         {
             Boolean found = false;

@@ -599,7 +599,7 @@ public class Tech implements Serializable {
 		w.append(t, name);
 		if(owned)
 			w.append(t, " (already owned)");
-		w.append(t, (new StringBuilder("\nCost: ")).append(cost).append(" EE\nPrerequisites: ").toString());
+		w.append(t, "\nCost: " + cost + " EE\nPrerequisites: ");
 		for(int i = 0; i < prereqs.length; i++)
 		{
 			if(i == prereqs.length - 1 && prereqsRequired == 1)
@@ -657,7 +657,7 @@ public class Tech implements Serializable {
 
 		if(leadsCount == 0)
 			w.append(t, "None");
-		w.append(t, (new StringBuilder("\n")).append(description).toString());
+		w.append(t, "\n" + description);
 	}
 
 	public String getName()

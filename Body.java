@@ -293,7 +293,7 @@ public class Body
             if(w.sceneParticipants[i] == this)
                 nextActor = i + 1;
 
-        w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).toString());
+        w.append(t, "\n\n" + w.getSeparator());
         if(w.sceneParticipants[nextActor] == w.lordBody)
         {
             w.append(t, "\n\n");
@@ -482,7 +482,7 @@ public class Body
                 @Override
                 public void actionPerformed(ActionEvent e)
                 {
-                    w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).toString());
+                    w.append(t, "\n\n" + w.getSeparator());
                     w.lordBody.inProgress[index].endActivityFlavor(t, w, w.lordBody, w.lordBody.targets[index]);
                     removeActivity(w.lordBody.inProgress[index], w.lordBody.targets[index]);
                     if(index % 3 != 0)
@@ -517,7 +517,7 @@ public class Body
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).toString());
+                w.append(t, "\n\n" + w.getSeparator());
                 PickActivity(t, p, f, w, s);
             }
         });
@@ -536,7 +536,7 @@ public class Body
                 @Override
                 public void actionPerformed(ActionEvent e)
                 {
-                    w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\n").toString());
+                    w.append(t, "\n\n" + w.getSeparator() + "\n\n");
                     Project.TweakClit.startActivity(t, w, w.lordBody, w.targetBody);
                     Continue(t, p, f, w, s);
                 }
@@ -550,7 +550,7 @@ public class Body
                 @Override
                 public void actionPerformed(ActionEvent e)
                 {
-                    w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\n").toString());
+                    w.append(t, "\n\n" + w.getSeparator() + "\n\n");
                     Project.StrokeCock.startActivity(t, w, w.lordBody, w.targetBody);
                     Continue(t, p, f, w, s);
                 }
@@ -564,7 +564,7 @@ public class Body
                 @Override
                 public void actionPerformed(ActionEvent e)
                 {
-                    w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\n").toString());
+                    w.append(t, "\n\n" + w.getSeparator() + "\n\n");
                     Project.StripOther.startActivity(t, w, w.lordBody, w.targetBody);
                     Continue(t, p, f, w, s);
                 }
@@ -576,7 +576,7 @@ public class Body
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).toString());
+                w.append(t, "\n\n" + w.getSeparator());
                 PickActivity(t, p, f, w, s);
             }
         });
@@ -595,7 +595,7 @@ public class Body
                 @Override
                 public void actionPerformed(ActionEvent e)
                 {
-                    w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\n").toString());
+                    w.append(t, "\n\n" + w.getSeparator() + "\n\n");
                     Project.PushDown.startActivity(t, w, w.lordBody, w.targetBody);
                     w.append(t, "\n\n");
                     Project.PullDown.activityTalk(t, w, w.targetBody, w.lordBody);
@@ -611,7 +611,7 @@ public class Body
                 @Override
                 public void actionPerformed(ActionEvent e)
                 {
-                    w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\n").toString());
+                    w.append(t, "\n\n" + w.getSeparator() + "\n\n");
                     Project.PullDown.startActivity(t, w, w.lordBody, w.targetBody);
                     w.append(t, "\n\n");
                     Project.PushDown.activityTalk(t, w, w.targetBody, w.lordBody);
@@ -627,7 +627,7 @@ public class Body
                 @Override
                 public void actionPerformed(ActionEvent e)
                 {
-                    w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\n").toString());
+                    w.append(t, "\n\n" + w.getSeparator() + "\n\n");
                     Project.TieUp.startActivity(t, w, w.lordBody, w.targetBody);
                     Continue(t, p, f, w, s);
                 }
@@ -639,7 +639,7 @@ public class Body
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).toString());
+                w.append(t, "\n\n" + w.getSeparator());
                 PickActivity(t, p, f, w, s);
             }
         });
@@ -659,7 +659,7 @@ public class Body
                     @Override
                     public void actionPerformed(ActionEvent e)
                     {
-                        w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\n").toString());
+                        w.append(t, "\n\n" + w.getSeparator() + "\n\n");
                         Project.VaginalPenetrate.startActivity(t, w, w.lordBody, w.targetBody);
                         w.append(t, "\n\n");
                         Project.PenetratedVaginally.activityTalk(t, w, w.targetBody, w.lordBody);
@@ -669,7 +669,7 @@ public class Body
                 p.add(Missionary);
             } else
             {
-                w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\n").append(w.targetBody.OwnerName()).append("'s Sexual Barrier prevents vaginal penetration.").toString());
+                w.append(t, "\n\n" + w.getSeparator() + "\n\n" + w.targetBody.OwnerName() + "'s Sexual Barrier prevents vaginal penetration.");
             }
         if(Project.PenetratedVaginally.valid(w.lordBody, w.targetBody))
         {
@@ -678,7 +678,7 @@ public class Body
                 @Override
                 public void actionPerformed(ActionEvent e)
                 {
-                    w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\n").toString());
+                    w.append(t, "\n\n" + w.getSeparator() + "\n\n");
                     Project.PenetratedVaginally.startActivity(t, w, w.lordBody, w.targetBody);
                     w.append(t, "\n\n");
                     Project.VaginalPenetrate.activityTalk(t, w, w.targetBody, w.lordBody);
@@ -697,7 +697,7 @@ public class Body
                     @Override
                     public void actionPerformed(ActionEvent e)
                     {
-                        w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\n").toString());
+                        w.append(t, "\n\n" + w.getSeparator() + "\n\n");
                         Project.AnalPenetrate.startActivity(t, w, w.lordBody, w.targetBody);
                         w.append(t, "\n\n");
                         Project.PenetratedAnally.activityTalk(t, w, w.targetBody, w.lordBody);
@@ -707,7 +707,7 @@ public class Body
                 p.add(Missionary);
             } else
             {
-                w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\n").append(w.targetBody.OwnerName()).append("'s Sexual Barrier prevents anal penetration.").toString());
+                w.append(t, "\n\n" + w.getSeparator() + "\n\n" + w.targetBody.OwnerName() + "'s Sexual Barrier prevents anal penetration.");
             }
         if(Project.PenetratedAnally.valid(w.lordBody, w.targetBody))
         {
@@ -718,7 +718,7 @@ public class Body
                 @Override
                 public void actionPerformed(ActionEvent e)
                 {
-                    w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\n").toString());
+                    w.append(t, "\n\n" + w.getSeparator() + "\n\n");
                     Project.PenetratedAnally.startActivity(t, w, w.lordBody, w.targetBody);
                     w.append(t, "\n\n");
                     Project.AnalPenetrate.activityTalk(t, w, w.targetBody, w.lordBody);
@@ -734,7 +734,7 @@ public class Body
                 @Override
                 public void actionPerformed(ActionEvent e)
                 {
-                    w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\n").toString());
+                    w.append(t, "\n\n" + w.getSeparator() + "\n\n");
                     Project.Lubricate.startActivity(t, w, w.lordBody, w.targetBody);
                     Continue(t, p, f, w, s);
                 }
@@ -746,7 +746,7 @@ public class Body
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).toString());
+                w.append(t, "\n\n" + w.getSeparator());
                 PickActivity(t, p, f, w, s);
             }
         });
@@ -764,7 +764,7 @@ public class Body
         w.append(t, "\n\n");
         if(w.sceneDuration == 0)
         {
-            w.append(t, (new StringBuilder(String.valueOf(w.getSeparator()))).append("\n\n").toString());
+            w.append(t, String.valueOf(w.getSeparator()) + "\n\n");
             InitializeActivities();
         }
         if(this == w.lordBody)
@@ -778,19 +778,19 @@ public class Body
                 {
                     if(w.targetBody.getObedience() > 66)
                     {
-                        w.append(t, (new StringBuilder(String.valueOf(w.targetBody.OwnerName()))).append(" is waiting eagerly in ").append(w.targetBody.hisHer()).append(" room when ").append(w.lordBody.ownerName()).append(" arrives, ").toString());
+                        w.append(t, String.valueOf(w.targetBody.OwnerName()) + " is waiting eagerly in " + w.targetBody.hisHer() + " room when " + w.lordBody.ownerName() + " arrives, ");
                         if(w.targetBody.getDeviancy() > 66)
                         {
-                            w.append(t, (new StringBuilder("already naked and unable to stop ")).append(w.targetBody.himHer()).append("self from masturbating as ").append(w.targetBody.heShe()).append(" anticipates what's to come.  When ").append(w.targetBody.heShe()).append(" sees ").append(w.lordBody.ownerName()).append(", ").append(w.targetBody.heShe()).append(" scrambles to ").append(w.targetBody.hisHer()).append(" feet, panting with unrestrained desire.").toString());
+                            w.append(t, "already naked and unable to stop " + w.targetBody.himHer() + "self from masturbating as " + w.targetBody.heShe() + " anticipates what's to come.  When " + w.targetBody.heShe() + " sees " + w.lordBody.ownerName() + ", " + w.targetBody.heShe() + " scrambles to " + w.targetBody.hisHer() + " feet, panting with unrestrained desire.");
                             w.targetBody.currentEXPO = 1_000_000L;
                         } else
                         if(w.targetBody.getDeviancy() > 33)
                         {
-                            w.append(t, (new StringBuilder("wearing nothing but a thin robe which ")).append(w.targetBody.heShe()).append(" quickly drops to the floor as ").append(w.targetBody.heShe()).append(" welcomes ").append(w.lordBody.himHer()).append(".  An eager smile is on ").append(w.targetBody.ownerName()).append("'s face, and ").append(w.targetBody.hisHer()).append(" cheeks are flushed with arousal.").toString());
+                            w.append(t, "wearing nothing but a thin robe which " + w.targetBody.heShe() + " quickly drops to the floor as " + w.targetBody.heShe() + " welcomes " + w.lordBody.himHer() + ".  An eager smile is on " + w.targetBody.ownerName() + "'s face, and " + w.targetBody.hisHer() + " cheeks are flushed with arousal.");
                             w.targetBody.currentEXPO = 1_000_000L;
                         } else
                         {
-                            w.append(t, (new StringBuilder("shifting nervously from foot to foot.  ")).append(w.targetBody.HeShe()).append(" knows roughly what will be expected of ").append(w.targetBody.himHer()).append(", but ").append(w.targetBody.heShe()).append("'s unsure whether ").append(w.targetBody.heShe()).append("'ll be able to perform.").toString());
+                            w.append(t, "shifting nervously from foot to foot.  " + w.targetBody.HeShe() + " knows roughly what will be expected of " + w.targetBody.himHer() + ", but " + w.targetBody.heShe() + "'s unsure whether " + w.targetBody.heShe() + "'ll be able to perform.");
                         }
                         w.targetBody.currentPLEA = (w.targetBody.getObedience() * w.targetBody.getDeviancy()) / 10;
                     } else
@@ -798,17 +798,17 @@ public class Body
                     {
                         if(w.targetBody.getDeviancy() > 66)
                         {
-                            w.append(t, (new StringBuilder(String.valueOf(w.targetBody.capitalizedOwnerName()))).append(" is masturbating when ").append(w.lordBody.ownerName()).append(" arrives, and ").append(w.targetBody.heShe()).append(" looks almost annoyed at being interrupted.  But as ").append(w.targetBody.heShe()).append(" remembers the possibilities offered by a partner, ").append(w.targetBody.heShe()).append(" cheers up and sheds ").append(w.targetBody.hisHer()).append(" clothes, offering ").append(w.targetBody.himHer()).append("self to ").append(w.lordBody.ownerName()).append(".").toString());
+                            w.append(t, String.valueOf(w.targetBody.capitalizedOwnerName()) + " is masturbating when " + w.lordBody.ownerName() + " arrives, and " + w.targetBody.heShe() + " looks almost annoyed at being interrupted.  But as " + w.targetBody.heShe() + " remembers the possibilities offered by a partner, " + w.targetBody.heShe() + " cheers up and sheds " + w.targetBody.hisHer() + " clothes, offering " + w.targetBody.himHer() + "self to " + w.lordBody.ownerName() + ".");
                             w.targetBody.currentPLEA = (w.targetBody.getDeviancy() * w.targetBody.getDeviancy()) / 20;
                             w.targetBody.currentEXPO = 1_000_000L;
                         } else
                         if(w.targetBody.getDeviancy() > 33)
                         {
-                            w.append(t, (new StringBuilder(String.valueOf(w.targetBody.capitalizedOwnerName()))).append(" welcomes ").append(w.lordBody.ownerName()).append(" into ").append(w.targetBody.hisHer()).append(" room, then stands obediently at attention.  Only the slight flush in ").append(w.targetBody.hisHer()).append(" cheeks betrays the fact that ").append(w.targetBody.heShe()).append(" might be hoping for this encounter to turn intimate.").toString());
+                            w.append(t, String.valueOf(w.targetBody.capitalizedOwnerName()) + " welcomes " + w.lordBody.ownerName() + " into " + w.targetBody.hisHer() + " room, then stands obediently at attention.  Only the slight flush in " + w.targetBody.hisHer() + " cheeks betrays the fact that " + w.targetBody.heShe() + " might be hoping for this encounter to turn intimate.");
                             w.targetBody.currentPLEA = (w.targetBody.getDeviancy() * w.targetBody.getDeviancy()) / 100;
                         } else
                         {
-                            w.append(t, (new StringBuilder(String.valueOf(w.targetBody.OwnerName()))).append(" reluctantly allows ").append(w.lordBody.ownerName()).append(" into ").append(w.targetBody.hisHer()).append(" room.  ").append(w.targetBody.HeShe()).append("'s clearly resigned to what ").append(w.targetBody.heShe()).append("'s going to be forced to do.").toString());
+                            w.append(t, String.valueOf(w.targetBody.OwnerName()) + " reluctantly allows " + w.lordBody.ownerName() + " into " + w.targetBody.hisHer() + " room.  " + w.targetBody.HeShe() + "'s clearly resigned to what " + w.targetBody.heShe() + "'s going to be forced to do.");
                             w.targetBody.currentFEAR = 100 - w.targetBody.getConfidence();
                         }
                         w.targetBody.currentHATE = ((100 - w.targetBody.getDeviancy()) * (100 - w.targetBody.getObedience())) / 100;
@@ -816,16 +816,16 @@ public class Body
                     {
                         if(w.targetBody.getDeviancy() > 66)
                         {
-                            w.append(t, (new StringBuilder(String.valueOf(w.targetBody.OwnerName()))).append(" is trembling with arousal as ").append(w.lordBody.ownerName()).append(" enters ").append(w.targetBody.hisHer()).append(" room, but ").append(w.targetBody.heShe()).append(" still tries to glare at ").append(w.lordBody.himHer()).append(", denying how turned on ").append(w.targetBody.heShe()).append(" is at being at the mercy of ").append(w.targetBody.hisHer()).append(" hated enemy.").toString());
+                            w.append(t, String.valueOf(w.targetBody.OwnerName()) + " is trembling with arousal as " + w.lordBody.ownerName() + " enters " + w.targetBody.hisHer() + " room, but " + w.targetBody.heShe() + " still tries to glare at " + w.lordBody.himHer() + ", denying how turned on " + w.targetBody.heShe() + " is at being at the mercy of " + w.targetBody.hisHer() + " hated enemy.");
                             w.targetBody.currentPLEA = (w.targetBody.getDeviancy() * w.targetBody.getDeviancy()) / 40;
                         } else
                         if(w.targetBody.getDeviancy() > 33)
                         {
-                            w.append(t, (new StringBuilder("When ")).append(w.lordBody.ownerName()).append(" enters ").append(w.targetBody.hisHer()).append(" room, ").append(w.targetBody.ownerName()).append(" dares ").append(w.lordBody.himHer()).append(" to do ").append(w.lordBody.hisHer()).append(" worst.  The growing perverted side of ").append(w.targetBody.ownerName()).append(" is secretly looking forward to it.").toString());
+                            w.append(t, "When " + w.lordBody.ownerName() + " enters " + w.targetBody.hisHer() + " room, " + w.targetBody.ownerName() + " dares " + w.lordBody.himHer() + " to do " + w.lordBody.hisHer() + " worst.  The growing perverted side of " + w.targetBody.ownerName() + " is secretly looking forward to it.");
                             w.targetBody.currentPLEA = (w.targetBody.getDeviancy() * w.targetBody.getObedience()) / 40;
                         } else
                         {
-                            w.append(t, (new StringBuilder(String.valueOf(w.targetBody.OwnerName()))).append(" waits in ").append(w.targetBody.hisHer()).append(" room with ").append(w.targetBody.hisHer()).append(" arms crossed.  ").append(w.targetBody.HeShe()).append(" doesn't even acknowledge ").append(w.lordBody.ownerName()).append(" entering the room.").toString());
+                            w.append(t, String.valueOf(w.targetBody.OwnerName()) + " waits in " + w.targetBody.hisHer() + " room with " + w.targetBody.hisHer() + " arms crossed.  " + w.targetBody.HeShe() + " doesn't even acknowledge " + w.lordBody.ownerName() + " entering the room.");
                         }
                         w.targetBody.currentFEAR = 100 - w.targetBody.getConfidence();
                         w.targetBody.currentHATE = ((100 - w.targetBody.getObedience()) * (100 - w.targetBody.getObedience())) / 50;
@@ -837,29 +837,29 @@ public class Body
                     {
                         if(w.targetBody.getDeviancy() > 66)
                         {
-                            w.append(t, (new StringBuilder(String.valueOf(w.targetBody.OwnerName()))).append(" is already trembling with arousal as ").append(w.targetBody.heShe()).append(" joins ").append(w.lordBody.ownerName()).append(" on stage in front of a cheering crowd of Thralls, ").toString());
+                            w.append(t, String.valueOf(w.targetBody.OwnerName()) + " is already trembling with arousal as " + w.targetBody.heShe() + " joins " + w.lordBody.ownerName() + " on stage in front of a cheering crowd of Thralls, ");
                             if(w.targetBody.parts[PENIS] > 0)
-                                w.append(t, (new StringBuilder("struggling with the urge to undress and start stroking ")).append(w.targetBody.hisHer()).append(" straining penis right there.").toString());
+                                w.append(t, "struggling with the urge to undress and start stroking " + w.targetBody.hisHer() + " straining penis right there.");
                             else
-                                w.append(t, (new StringBuilder(String.valueOf(w.targetBody.hisHer()))).append(" wetness dripping down ").append(w.targetBody.hisHer()).append(" thighs.").toString());
-                            w.append(t, (new StringBuilder("  The prospect of being used right there in public is incredibly arousing to ")).append(w.targetBody.himHer()).append(".").toString());
+                                w.append(t, String.valueOf(w.targetBody.hisHer()) + " wetness dripping down " + w.targetBody.hisHer() + " thighs.");
+                            w.append(t, "  The prospect of being used right there in public is incredibly arousing to " + w.targetBody.himHer() + ".");
                         } else
                         if(w.targetBody.getDeviancy() > 33)
-                            w.append(t, (new StringBuilder(String.valueOf(w.targetBody.OwnerName()))).append(" waves happily to the surrounding Thralls as ").append(w.targetBody.heShe()).append(" joins ").append(w.lordBody.ownerName()).append(" on the stage.  ").append(w.targetBody.HeShe()).append("'s proud to have the chance to show everyone how deeply ").append(w.targetBody.heShe()).append(" belongs to ").append(w.lordBody.ownerName()).append(".").toString());
+                            w.append(t, String.valueOf(w.targetBody.OwnerName()) + " waves happily to the surrounding Thralls as " + w.targetBody.heShe() + " joins " + w.lordBody.ownerName() + " on the stage.  " + w.targetBody.HeShe() + "'s proud to have the chance to show everyone how deeply " + w.targetBody.heShe() + " belongs to " + w.lordBody.ownerName() + ".");
                         else
-                            w.append(t, (new StringBuilder(String.valueOf(w.targetBody.OwnerName()))).append(" looks nervous as ").append(w.targetBody.heShe()).append(" makes ").append(w.targetBody.hisHer()).append(" way through the Thralls in order to take the stage with ").append(w.lordBody.ownerName()).append(".  ").append(w.targetBody.HeShe()).append("'s willing to be humiliated for ").append(w.lordBody.himHer()).append(", but ").append(w.targetBody.heShe()).append("'s ashamed to show ").append(w.targetBody.hisHer()).append(" unfamiliarity with the sexual activities ").append(w.targetBody.heShe()).append("'ll surely be asked to perform.").toString());
+                            w.append(t, String.valueOf(w.targetBody.OwnerName()) + " looks nervous as " + w.targetBody.heShe() + " makes " + w.targetBody.hisHer() + " way through the Thralls in order to take the stage with " + w.lordBody.ownerName() + ".  " + w.targetBody.HeShe() + "'s willing to be humiliated for " + w.lordBody.himHer() + ", but " + w.targetBody.heShe() + "'s ashamed to show " + w.targetBody.hisHer() + " unfamiliarity with the sexual activities " + w.targetBody.heShe() + "'ll surely be asked to perform.");
                         w.targetBody.currentPLEA += (w.targetBody.getObedience() * w.targetBody.getDeviancy() * (100 + w.targetBody.getDignity())) / 1000;
                         w.targetBody.currentSHAM += (w.targetBody.getDignity() * (100 - w.targetBody.getDeviancy())) / 50;
                     } else
                     if(w.targetBody.getObedience() > 33)
                     {
                         if(w.targetBody.getHostility() > 66)
-                            w.append(t, (new StringBuilder(String.valueOf(w.targetBody.OwnerName()))).append(" stands on the stage, glaring angrily at the surrounding Thralls who jeer and takes pictures of ").append(w.targetBody.himHer()).append(", but ").append(w.targetBody.heShe()).append(" still bows ").append(w.targetBody.hisHer()).append(" head respectfully as ").append(w.lordBody.ownerName()).append(" joins ").append(w.targetBody.himHer()).append(".").toString());
+                            w.append(t, String.valueOf(w.targetBody.OwnerName()) + " stands on the stage, glaring angrily at the surrounding Thralls who jeer and takes pictures of " + w.targetBody.himHer() + ", but " + w.targetBody.heShe() + " still bows " + w.targetBody.hisHer() + " head respectfully as " + w.lordBody.ownerName() + " joins " + w.targetBody.himHer() + ".");
                         else
                         if(w.targetBody.getHostility() > 33)
-                            w.append(t, (new StringBuilder(String.valueOf(w.targetBody.OwnerName()))).append(" obediently joins ").append(w.lordBody.ownerName()).append(" on stage, sparing only the occasional annoyed glance at the crowd of Thralls who shout out suggestions for ways ").append(w.targetBody.heShe()).append(" should be humiliated.  ").append(w.targetBody.HeShe()).append(" waits to see what will be done with ").append(w.targetBody.himHer()).append(".").toString());
+                            w.append(t, String.valueOf(w.targetBody.OwnerName()) + " obediently joins " + w.lordBody.ownerName() + " on stage, sparing only the occasional annoyed glance at the crowd of Thralls who shout out suggestions for ways " + w.targetBody.heShe() + " should be humiliated.  " + w.targetBody.HeShe() + " waits to see what will be done with " + w.targetBody.himHer() + ".");
                         else
-                            w.append(t, (new StringBuilder(String.valueOf(w.targetBody.OwnerName()))).append(" seems a bit intimidated by the crowd of Thralls, but ").append(w.targetBody.heShe()).append(" still willingly joins ").append(w.lordBody.ownerName()).append(" on the stage and tells everyone that ").append(w.targetBody.heShe()).append(" hopes they enjoy the show.").toString());
+                            w.append(t, String.valueOf(w.targetBody.OwnerName()) + " seems a bit intimidated by the crowd of Thralls, but " + w.targetBody.heShe() + " still willingly joins " + w.lordBody.ownerName() + " on the stage and tells everyone that " + w.targetBody.heShe() + " hopes they enjoy the show.");
                         w.targetBody.currentHATE += (50 + w.targetBody.getHostility()) - w.targetBody.getObedience();
                         if(w.targetBody.currentHATE < 0L)
                             w.targetBody.currentHATE = 0L;
@@ -868,27 +868,27 @@ public class Body
                     } else
                     {
                         if(w.targetBody.getConfidence() > 66)
-                            w.append(t, (new StringBuilder(String.valueOf(w.targetBody.OwnerName()))).append(" has to be dragged onto the stage by force, kicking and shouting, and when ").append(w.targetBody.heShe()).append("'s finally thrown in front of ").append(w.lordBody.ownerName()).append(", ").append(w.targetBody.heShe()).append(" glares up in angry defiance.  ").toString());
+                            w.append(t, String.valueOf(w.targetBody.OwnerName()) + " has to be dragged onto the stage by force, kicking and shouting, and when " + w.targetBody.heShe() + "'s finally thrown in front of " + w.lordBody.ownerName() + ", " + w.targetBody.heShe() + " glares up in angry defiance.  ");
                         else
                         if(w.targetBody.getConfidence() > 33)
-                            w.append(t, (new StringBuilder("On a stage with ")).append(w.lordBody.ownerName()).append(" in front of a crowd that roars with eagerness to see ").append(w.targetBody.himHer()).append(" raped, ").append(w.targetBody.ownerName()).append(" tries to remain calm, but ").append(w.targetBody.heShe()).append(" feels ").append(w.targetBody.hisHer()).append(" heart pounding in ").append(w.targetBody.hisHer()).append(" chest.  ").toString());
+                            w.append(t, "On a stage with " + w.lordBody.ownerName() + " in front of a crowd that roars with eagerness to see " + w.targetBody.himHer() + " raped, " + w.targetBody.ownerName() + " tries to remain calm, but " + w.targetBody.heShe() + " feels " + w.targetBody.hisHer() + " heart pounding in " + w.targetBody.hisHer() + " chest.  ");
                         else
-                            w.append(t, (new StringBuilder(String.valueOf(w.targetBody.OwnerName()))).append(" is trembling with fear as ").append(w.targetBody.heShe()).append(" allows a pair of Thralls to escort ").append(w.targetBody.himHer()).append(" onto the stage with ").append(w.lordBody.ownerName()).append(", flinching at every crude comment and threat shouted from the crowd.  ").toString());
+                            w.append(t, String.valueOf(w.targetBody.OwnerName()) + " is trembling with fear as " + w.targetBody.heShe() + " allows a pair of Thralls to escort " + w.targetBody.himHer() + " onto the stage with " + w.lordBody.ownerName() + ", flinching at every crude comment and threat shouted from the crowd.  ");
                         w.targetBody.currentFEAR = ((100 - w.targetBody.getConfidence()) * (100 - w.targetBody.getDignity())) / 50;
                         w.targetBody.currentHATE = ((100 - w.targetBody.getObedience()) * (100 - w.targetBody.getDignity())) / 50;
                         w.targetBody.currentPLEA = (w.targetBody.getDeviancy() * (100 - w.targetBody.getDignity())) / 50;
                         if(!w.targetBody.hasBeenBroadcasted())
                         {
                             w.targetBody.currentFEAR = w.targetBody.currentFEAR * 3L;
-                            w.append(t, (new StringBuilder(String.valueOf(w.targetBody.HeShe()))).append(" sees filming phones in the crowd, and ").append(w.targetBody.heShe()).append(" knows that what happens here could change how people see ").append(w.targetBody.himHer()).append(" forever.").toString());
+                            w.append(t, String.valueOf(w.targetBody.HeShe()) + " sees filming phones in the crowd, and " + w.targetBody.heShe() + " knows that what happens here could change how people see " + w.targetBody.himHer() + " forever.");
                         } else
                         if(w.targetBody.getDeviancy() > 66)
-                            w.append(t, (new StringBuilder("And yet, as always, ")).append(w.targetBody.hisHer()).append(" body aches to be savagely fucked right there in front of everyone.").toString());
+                            w.append(t, "And yet, as always, " + w.targetBody.hisHer() + " body aches to be savagely fucked right there in front of everyone.");
                         else
                         if(w.targetBody.getDeviancy() > 33)
-                            w.append(t, (new StringBuilder(String.valueOf(w.targetBody.HeShe()))).append(" tries not to admit to ").append(w.targetBody.himHer()).append("self just how much this is turning ").append(w.targetBody.himHer()).append(" on.").toString());
+                            w.append(t, String.valueOf(w.targetBody.HeShe()) + " tries not to admit to " + w.targetBody.himHer() + "self just how much this is turning " + w.targetBody.himHer() + " on.");
                         else
-                            w.append(t, (new StringBuilder(String.valueOf(w.targetBody.HeShe()))).append(" hates everything about this situation.").toString());
+                            w.append(t, String.valueOf(w.targetBody.HeShe()) + " hates everything about this situation.");
                     }
                     for(int i = 0; i < w.sceneParticipants.length && w.sceneLocation == Activity.Location.STAGE; i++)
                         if(w.sceneParticipants[i].forsakenOwner != null && w.sceneParticipants[i].getEXPOLevel() >= 3)
@@ -943,7 +943,7 @@ public class Body
                 if(descriptionStarted)
                     w.append(t, "\n\n");
             }
-            w.append(t, (new StringBuilder("How will ")).append(ownerName()).append(" act?").toString());
+            w.append(t, "How will " + ownerName() + " act?");
             JButton Touch = new JButton("Touch");
             Touch.addActionListener(new ActionListener() {
                 @Override
@@ -984,7 +984,7 @@ public class Body
                     @Override
                     public void actionPerformed(ActionEvent e)
                     {
-                        w.append(t, (new StringBuilder("\n\n")).append(w.getSeparator()).append("\n\nWhich action will you cancel?").toString());
+                        w.append(t, "\n\n" + w.getSeparator() + "\n\nWhich action will you cancel?");
                         CancelActivities(t, p, f, w, s, 0);
                     }
                 });
@@ -1162,26 +1162,26 @@ public class Body
                 if(incrementsRemaining-- > 0L)
                 {
                     if(tier == 0)
-                        w.append(t, (new StringBuilder(String.valueOf(fillChar))).toString());
+                        w.append(t, String.valueOf(fillChar));
                     else
                     if(tier == 1)
-                        w.inverseAppend(t, (new StringBuilder(String.valueOf(fillChar))).toString());
+                        w.inverseAppend(t, String.valueOf(fillChar));
                     else
-                        w.tierTwoAppend(t, (new StringBuilder(String.valueOf(fillChar))).toString());
+                        w.tierTwoAppend(t, String.valueOf(fillChar));
                 } else
                 if(tier == 0 || tier == 1 && mixed)
-                    w.append(t, (new StringBuilder(String.valueOf(remainChar))).toString());
+                    w.append(t, String.valueOf(remainChar));
                 else
                 if(tier == 1 || tier == 2 && mixed)
-                    w.inverseAppend(t, (new StringBuilder(String.valueOf(remainChar))).toString());
+                    w.inverseAppend(t, String.valueOf(remainChar));
                 else
-                    w.tierTwoAppend(t, (new StringBuilder(String.valueOf(remainChar))).toString());
+                    w.tierTwoAppend(t, String.valueOf(remainChar));
 
-            w.append(t, (new StringBuilder("] (")).append((new Chosen()).fixedFormat(currentDamage()[i])).toString());
+            w.append(t, "] (" + (new Chosen()).fixedFormat(currentDamage()[i]));
             if(actualDamage[i] == 0L)
                 w.append(t, "        ");
             else
-                w.append(t, (new StringBuilder(" + ")).append((new Chosen()).fixedFormat(actualDamage[i])).toString());
+                w.append(t, " + " + (new Chosen()).fixedFormat(actualDamage[i]));
             if(i == 0)
                 currentFEAR += actualDamage[i];
             else
@@ -1205,7 +1205,7 @@ public class Body
             else
             if(i == 7)
                 currentEXPO += actualDamage[i];
-            w.append(t, (new StringBuilder(" = ")).append((new Chosen()).fixedFormat(currentDamage()[i])).append(") ").toString());
+            w.append(t, " = " + (new Chosen()).fixedFormat(currentDamage()[i]) + ") ");
             if(currentDamage()[i] > 0L)
                 if(i == 0)
                 {
@@ -1270,13 +1270,13 @@ public class Body
                         w.append(t, "not self-conscious");
                     else
                     if(currentDamage()[i] < 1000L)
-                        w.append(t, (new StringBuilder("realizes how ")).append(heShe()).append(" must look").toString());
+                        w.append(t, "realizes how " + heShe() + " must look");
                     else
                     if(currentDamage()[i] < 10000L)
                         w.append(t, "feels watching eyes");
                     else
                     if(currentDamage()[i] < 100_000L)
-                        w.append(t, (new StringBuilder("can't stop thinking about how ")).append(heShe()).append(" looks").toString());
+                        w.append(t, "can't stop thinking about how " + heShe() + " looks");
                     else
                     if(currentDamage()[i] < 1_000_000L)
                         w.append(t, "tears of shame");
@@ -1377,7 +1377,7 @@ public class Body
                         w.append(t, "clothes have some small tears");
                     else
                     if(currentDamage()[i] < 10000L)
-                        w.append(t, (new StringBuilder("clothes torn across ")).append(hisHer()).append(" hips and chest").toString());
+                        w.append(t, "clothes torn across " + hisHer() + " hips and chest");
                     else
                     if(currentDamage()[i] < 100_000L)
                         w.append(t, "shredded clothes sometimes expose everything");
@@ -1393,20 +1393,20 @@ public class Body
             {
                 w.purpleAppend(t, "\n\nPLEA up!  ");
                 if(getPLEALevel() == 1)
-                    w.append(t, (new StringBuilder(String.valueOf(OwnerName()))).append("'s body is beginning to experience sexual arousal.").toString());
+                    w.append(t, String.valueOf(OwnerName()) + "'s body is beginning to experience sexual arousal.");
                 else
                 if(getPLEALevel() == 2)
                 {
-                    w.append(t, (new StringBuilder(String.valueOf(OwnerName()))).append("'s ").toString());
+                    w.append(t, String.valueOf(OwnerName()) + "'s ");
                     if(parts[PENIS] > 0)
-                        w.append(t, (new StringBuilder("penis is twitching, straining as ")).append(hisHer()).append(" body approaches orgasm.").toString());
+                        w.append(t, "penis is twitching, straining as " + hisHer() + " body approaches orgasm.");
                     else
-                        w.append(t, (new StringBuilder("whole body feels sensitive, pleasure pulsing in ")).append(hisHer()).append(" loins as orgasm approaches.").toString());
+                        w.append(t, "whole body feels sensitive, pleasure pulsing in " + hisHer() + " loins as orgasm approaches.");
                 }
             } else
             if(!orgasmPossible())
             {
-                w.purpleAppend(t, (new StringBuilder("\n\nPLEA up!  ")).append(OwnerName()).append(" wildly bucks ").append(hisHer()).append(" hips in search of orgasm, but ").append(heShe()).append(" can't give ").append(himHer()).append("self the necessary stimulation, and ").append(heShe()).append(" comes back from the brink of climax.").toString());
+                w.purpleAppend(t, "\n\nPLEA up!  " + OwnerName() + " wildly bucks " + hisHer() + " hips in search of orgasm, but " + heShe() + " can't give " + himHer() + "self the necessary stimulation, and " + heShe() + " comes back from the brink of climax.");
             } else
             {
                 w.purpleAppend(t, "\n\nOrgasm!  ");
@@ -1414,34 +1414,34 @@ public class Body
                 {
                     if(currentDamage()[5] - actualDamage[5] >= 10000L && currentDamage()[5] >= 30000L)
                     {
-                        w.append(t, (new StringBuilder("The pent-up climax comes all at once, and ")).append(ownerName()).toString());
+                        w.append(t, "The pent-up climax comes all at once, and " + ownerName());
                         if(parts[PENIS] > 0)
                             w.append(t, "'s cock spurts a huge load in all directions.");
                         else
-                            w.append(t, (new StringBuilder(" cums so hard that ")).append(heShe()).append(" feels weak and unsteady afterwards.").toString());
+                            w.append(t, " cums so hard that " + heShe() + " feels weak and unsteady afterwards.");
                     } else
                     {
-                        w.append(t, (new StringBuilder(String.valueOf(OwnerName()))).append("'s whole body shudders shudders as ").toString());
+                        w.append(t, String.valueOf(OwnerName()) + "'s whole body shudders shudders as ");
                         if(parts[PENIS] > 0)
-                            w.append(t, (new StringBuilder(String.valueOf(hisHer()))).append(" cock shoots its load.").toString());
+                            w.append(t, String.valueOf(hisHer()) + " cock shoots its load.");
                         else
-                            w.append(t, (new StringBuilder(String.valueOf(heShe()))).append(" climaxes.").toString());
+                            w.append(t, String.valueOf(heShe()) + " climaxes.");
                     }
                 } else
                 if(orgasms == 1)
                 {
-                    w.append(t, (new StringBuilder(String.valueOf(OwnerName()))).append(" cums again, ").toString());
+                    w.append(t, String.valueOf(OwnerName()) + " cums again, ");
                     if(parts[PENIS] > 0)
                         w.append(t, "shooting a smaller load this time, but it feels even better.");
                     else
-                        w.append(t, (new StringBuilder(String.valueOf(hisHer()))).append(" second climax proving even more intense than the first.").toString());
+                        w.append(t, String.valueOf(hisHer()) + " second climax proving even more intense than the first.");
                 } else
                 {
-                    w.append(t, (new StringBuilder(String.valueOf(OwnerName()))).append(" cums yet again, ").toString());
+                    w.append(t, String.valueOf(OwnerName()) + " cums yet again, ");
                     if(parts[PENIS] > 0)
-                        w.append(t, (new StringBuilder(String.valueOf(hisHer()))).append(" exhausted penis managing only a trickle of cum, but even that much feels incredibly good.").toString());
+                        w.append(t, String.valueOf(hisHer()) + " exhausted penis managing only a trickle of cum, but even that much feels incredibly good.");
                     else
-                        w.append(t, (new StringBuilder("body spasming wildly, completely outside ")).append(hisHer()).append(" control.").toString());
+                        w.append(t, "body spasming wildly, completely outside " + hisHer() + " control.");
                 }
                 orgasms++;
             }
@@ -1541,26 +1541,26 @@ public class Body
                 if(incrementsRemaining-- > 0L)
                 {
                     if(tier == 0)
-                        w.append(t, (new StringBuilder(String.valueOf(fillChar))).toString());
+                        w.append(t, String.valueOf(fillChar));
                     else
                     if(tier == 1)
-                        w.inverseAppend(t, (new StringBuilder(String.valueOf(fillChar))).toString());
+                        w.inverseAppend(t, String.valueOf(fillChar));
                     else
-                        w.tierTwoAppend(t, (new StringBuilder(String.valueOf(fillChar))).toString());
+                        w.tierTwoAppend(t, String.valueOf(fillChar));
                 } else
                 if(tier == 0 || tier == 1 && mixed)
-                    w.append(t, (new StringBuilder(String.valueOf(remainChar))).toString());
+                    w.append(t, String.valueOf(remainChar));
                 else
                 if(tier == 1 || tier == 2 && mixed)
-                    w.inverseAppend(t, (new StringBuilder(String.valueOf(remainChar))).toString());
+                    w.inverseAppend(t, String.valueOf(remainChar));
                 else
-                    w.tierTwoAppend(t, (new StringBuilder(String.valueOf(remainChar))).toString());
+                    w.tierTwoAppend(t, String.valueOf(remainChar));
 
-            w.append(t, (new StringBuilder("] (")).append((new Chosen()).fixedFormat(currentDamage()[i])).toString());
+            w.append(t, "] (" + (new Chosen()).fixedFormat(currentDamage()[i]));
             if(actualDamage[i] == 0L)
                 w.append(t, "        ");
             else
-                w.append(t, (new StringBuilder(" + ")).append((new Chosen()).fixedFormat(actualDamage[i])).toString());
+                w.append(t, " + " + (new Chosen()).fixedFormat(actualDamage[i]));
             if(i == 0)
                 currentFEAR += actualDamage[i];
             else
@@ -1584,7 +1584,7 @@ public class Body
             else
             if(i == 7)
                 currentEXPO += actualDamage[i];
-            w.append(t, (new StringBuilder(" = ")).append((new Chosen()).fixedFormat(currentDamage()[i])).append(") ").toString());
+            w.append(t, " = " + (new Chosen()).fixedFormat(currentDamage()[i]) + ") ");
             if(currentDamage()[i] > 0L)
                 if(i == 0)
                 {
@@ -1649,13 +1649,13 @@ public class Body
                         w.append(t, "not self-conscious");
                     else
                     if(currentDamage()[i] < 1000L)
-                        w.append(t, (new StringBuilder("realizes how ")).append(heShe()).append(" must look").toString());
+                        w.append(t, "realizes how " + heShe() + " must look");
                     else
                     if(currentDamage()[i] < 10000L)
                         w.append(t, "feels watching eyes");
                     else
                     if(currentDamage()[i] < 100_000L)
-                        w.append(t, (new StringBuilder("can't stop thinking about how ")).append(heShe()).append(" looks").toString());
+                        w.append(t, "can't stop thinking about how " + heShe() + " looks");
                     else
                     if(currentDamage()[i] < 1_000_000L)
                         w.append(t, "tears of shame");
@@ -1756,7 +1756,7 @@ public class Body
                         w.append(t, "clothes have some small tears");
                     else
                     if(currentDamage()[i] < 10000L)
-                        w.append(t, (new StringBuilder("clothes torn across ")).append(hisHer()).append(" hips and chest").toString());
+                        w.append(t, "clothes torn across " + hisHer() + " hips and chest");
                     else
                     if(currentDamage()[i] < 100_000L)
                         w.append(t, "shredded clothes sometimes expose everything");
@@ -1771,60 +1771,60 @@ public class Body
         {
             w.purpleAppend(t, "\n\nFEAR up!  ");
             if(crossedThreshold(actualDamage[0], currentDamage()[0]) == 1)
-                w.append(t, (new StringBuilder(String.valueOf(OwnerName()))).append(" can't help but think of the consquences of displeasing ").append(w.lordBody.ownerName()).append(".").toString());
+                w.append(t, String.valueOf(OwnerName()) + " can't help but think of the consquences of displeasing " + w.lordBody.ownerName() + ".");
             else
             if(crossedThreshold(actualDamage[0], currentDamage()[0]) == 2)
-                w.append(t, (new StringBuilder(String.valueOf(OwnerName()))).append(" is desperate to please ").append(w.lordBody.ownerName()).append(".").toString());
+                w.append(t, String.valueOf(OwnerName()) + " is desperate to please " + w.lordBody.ownerName() + ".");
             else
-                w.append(t, (new StringBuilder(String.valueOf(OwnerName()))).append(" is overcome by ").append(hisHer()).append(" terror of ").append(w.lordBody.ownerName()).append(".").toString());
+                w.append(t, String.valueOf(OwnerName()) + " is overcome by " + hisHer() + " terror of " + w.lordBody.ownerName() + ".");
         }
         if(crossedThreshold(actualDamage[1], currentDamage()[1]) > 0)
         {
             w.purpleAppend(t, "\n\nDISG up!  ");
             if(crossedThreshold(actualDamage[1], currentDamage()[1]) == 1)
-                w.append(t, (new StringBuilder(String.valueOf(OwnerName()))).append(" has started to feel bad about what ").append(heShe()).append("'s doing.").toString());
+                w.append(t, String.valueOf(OwnerName()) + " has started to feel bad about what " + heShe() + "'s doing.");
             else
             if(crossedThreshold(actualDamage[1], currentDamage()[1]) == 2)
-                w.append(t, (new StringBuilder(String.valueOf(OwnerName()))).append(" has firmly crossed the line into activities ").append(heShe()).append("'s not comfortable with.").toString());
+                w.append(t, String.valueOf(OwnerName()) + " has firmly crossed the line into activities " + heShe() + "'s not comfortable with.");
             else
-                w.append(t, (new StringBuilder("It's a struggle for ")).append(ownerName()).append(" to force ").append(himHer()).append("self to continue.").toString());
+                w.append(t, "It's a struggle for " + ownerName() + " to force " + himHer() + "self to continue.");
         }
         if(crossedThreshold(actualDamage[2], currentDamage()[2]) > 0)
         {
             w.purpleAppend(t, "\n\nPAIN up!  ");
             if(crossedThreshold(actualDamage[2], currentDamage()[2]) == 1)
-                w.append(t, (new StringBuilder(String.valueOf(OwnerName()))).append(" consciously notices that ").append(heShe()).append("'s feeling pain.").toString());
+                w.append(t, String.valueOf(OwnerName()) + " consciously notices that " + heShe() + "'s feeling pain.");
             else
             if(crossedThreshold(actualDamage[2], currentDamage()[2]) == 2)
-                w.append(t, (new StringBuilder(String.valueOf(OwnerName()))).append(" can't stop ").append(himHer()).append("self from flinching away from the pain.").toString());
+                w.append(t, String.valueOf(OwnerName()) + " can't stop " + himHer() + "self from flinching away from the pain.");
             else
-                w.append(t, (new StringBuilder(String.valueOf(OwnerName()))).append(" is in so much pain that ").append(heShe()).append(" can hardly focus.").toString());
+                w.append(t, String.valueOf(OwnerName()) + " is in so much pain that " + heShe() + " can hardly focus.");
         }
         if(crossedThreshold(actualDamage[3], currentDamage()[3]) > 0)
         {
             w.purpleAppend(t, "\n\nSHAM up!  ");
             if(crossedThreshold(actualDamage[3], currentDamage()[3]) == 1)
-                w.append(t, (new StringBuilder(String.valueOf(OwnerName()))).append(" has realized how lascivious ").append(hisHer()).append(" appearance has become.").toString());
+                w.append(t, String.valueOf(OwnerName()) + " has realized how lascivious " + hisHer() + " appearance has become.");
             else
             if(crossedThreshold(actualDamage[3], currentDamage()[3]) == 2)
-                w.append(t, (new StringBuilder(String.valueOf(OwnerName()))).append(" is becoming increasingly self-conscious.").toString());
+                w.append(t, String.valueOf(OwnerName()) + " is becoming increasingly self-conscious.");
             else
-                w.append(t, (new StringBuilder(String.valueOf(OwnerName()))).append(" can't stop thinking about how ").append(heShe()).append(" must look.").toString());
+                w.append(t, String.valueOf(OwnerName()) + " can't stop thinking about how " + heShe() + " must look.");
         }
         if(crossedThreshold(actualDamage[4], currentDamage()[4]) > 0)
         {
             w.purpleAppend(t, "\n\nHATE up!  ");
             if(crossedThreshold(actualDamage[4], currentDamage()[4]) == 1)
-                w.append(t, (new StringBuilder(String.valueOf(OwnerName()))).append(" is growing annoyed with the situation.").toString());
+                w.append(t, String.valueOf(OwnerName()) + " is growing annoyed with the situation.");
             else
             if(crossedThreshold(actualDamage[4], currentDamage()[4]) == 2)
             {
-                w.append(t, (new StringBuilder(String.valueOf(OwnerName()))).append(" is angry at ").append(w.lordBody.ownerName()).append(".").toString());
+                w.append(t, String.valueOf(OwnerName()) + " is angry at " + w.lordBody.ownerName() + ".");
             } else
             {
-                w.append(t, (new StringBuilder(String.valueOf(OwnerName()))).append(" is consumed by hatred.").toString());
+                w.append(t, String.valueOf(OwnerName()) + " is consumed by hatred.");
                 if(currentDamage()[4] - actualDamage[4] < 10000L)
-                    w.append(t, (new StringBuilder("  ")).append(HisHer()).append(" Sexual Barrier fades away.").toString());
+                    w.append(t, "  " + HisHer() + " Sexual Barrier fades away.");
             }
         }
         if(crossedThreshold(actualDamage[5], currentDamage()[5]) > 0 || orgasmLevel(actualDamage[5], currentDamage()[5]) > 0)
@@ -1832,20 +1832,20 @@ public class Body
             {
                 w.purpleAppend(t, "\n\nPLEA up!  ");
                 if(getPLEALevel() == 1)
-                    w.append(t, (new StringBuilder(String.valueOf(OwnerName()))).append(" is starting to get turned on.").toString());
+                    w.append(t, String.valueOf(OwnerName()) + " is starting to get turned on.");
                 else
                 if(getPLEALevel() == 2)
                 {
-                    w.append(t, (new StringBuilder(String.valueOf(OwnerName()))).append("'s ").toString());
+                    w.append(t, String.valueOf(OwnerName()) + "'s ");
                     if(parts[PENIS] > 0)
-                        w.append(t, (new StringBuilder("penis is twitching, straining as ")).append(heShe()).append(" approaches orgasm.").toString());
+                        w.append(t, "penis is twitching, straining as " + heShe() + " approaches orgasm.");
                     else
-                        w.append(t, (new StringBuilder("whole body feels sensitive, pleasure pulsing in ")).append(hisHer()).append(" loins as orgasm approaches.").toString());
+                        w.append(t, "whole body feels sensitive, pleasure pulsing in " + hisHer() + " loins as orgasm approaches.");
                 }
             } else
             if(!orgasmPossible())
             {
-                w.purpleAppend(t, (new StringBuilder("\n\nPLEA up!  ")).append(OwnerName()).append(" wildly bucks ").append(hisHer()).append(" hips in search of orgasm, but ").append(heShe()).append(" can't give ").append(himHer()).append("self the necessary stimulation, and ").append(heShe()).append(" comes back from the brink of climax.").toString());
+                w.purpleAppend(t, "\n\nPLEA up!  " + OwnerName() + " wildly bucks " + hisHer() + " hips in search of orgasm, but " + heShe() + " can't give " + himHer() + "self the necessary stimulation, and " + heShe() + " comes back from the brink of climax.");
             } else
             {
                 w.purpleAppend(t, "\n\nOrgasm!  ");
@@ -1854,37 +1854,37 @@ public class Body
                 {
                     if(currentDamage()[5] - actualDamage[5] >= 10000L && currentDamage()[5] >= 30000L)
                     {
-                        w.append(t, (new StringBuilder("The pent-up climax comes all at once, and ")).append(ownerName()).append(" squeals incoherently as ").toString());
+                        w.append(t, "The pent-up climax comes all at once, and " + ownerName() + " squeals incoherently as ");
                         if(parts[PENIS] > 0)
-                            w.append(t, (new StringBuilder(String.valueOf(hisHer()))).append(" cock spurts a huge load in all directions.").toString());
+                            w.append(t, String.valueOf(hisHer()) + " cock spurts a huge load in all directions.");
                         else
-                            w.append(t, (new StringBuilder(String.valueOf(heShe()))).append(" cums almost hard enough to make ").append(himHer()).append(" pass out.").toString());
+                            w.append(t, String.valueOf(heShe()) + " cums almost hard enough to make " + himHer() + " pass out.");
                     } else
                     {
                         intensity = 450 * (int)(Math.random() * 450D);
-                        w.append(t, (new StringBuilder(String.valueOf(OwnerName()))).append(" shudders as ").toString());
+                        w.append(t, String.valueOf(OwnerName()) + " shudders as ");
                         if(parts[PENIS] > 0)
-                            w.append(t, (new StringBuilder(String.valueOf(hisHer()))).append(" cock shoots its load.").toString());
+                            w.append(t, String.valueOf(hisHer()) + " cock shoots its load.");
                         else
-                            w.append(t, (new StringBuilder(String.valueOf(heShe()))).append(" climaxes.").toString());
+                            w.append(t, String.valueOf(heShe()) + " climaxes.");
                     }
                 } else
                 {
                     intensity = 300 + (int)(Math.random() * 300D);
                     if(orgasms == 1)
                     {
-                        w.append(t, (new StringBuilder(String.valueOf(OwnerName()))).append(" cums again, ").toString());
+                        w.append(t, String.valueOf(OwnerName()) + " cums again, ");
                         if(parts[PENIS] > 0)
                             w.append(t, "shooting a smaller load this time, but it feels even better.");
                         else
                             w.append(t, "moaning and gasping for breath as the second climax proves even more intense than the first.");
                     } else
                     {
-                        w.append(t, (new StringBuilder(String.valueOf(OwnerName()))).append(" cums yet again, ").toString());
+                        w.append(t, String.valueOf(OwnerName()) + " cums yet again, ");
                         if(parts[PENIS] > 0)
-                            w.append(t, (new StringBuilder(String.valueOf(hisHer()))).append(" exhausted penis managing only a trickle of cum, but even that much is enough to make ").append(himHer()).append(" groan with unbearable pleasure.").toString());
+                            w.append(t, String.valueOf(hisHer()) + " exhausted penis managing only a trickle of cum, but even that much is enough to make " + himHer() + " groan with unbearable pleasure.");
                         else
-                            w.append(t, (new StringBuilder("body spasming wildly, ")).append(hisHer()).append(" eyes wide and staring off into the distance as ").append(hisHer()).append(" vision flashes white.").toString());
+                            w.append(t, "body spasming wildly, " + hisHer() + " eyes wide and staring off into the distance as " + hisHer() + " vision flashes white.");
                     }
                 }
                 orgasms++;
@@ -1893,12 +1893,12 @@ public class Body
                     if(forsakenOwner.timesOrgasmed == 0)
                     {
                         specialLine = 2;
-                        w.append(t, (new StringBuilder("  It's ")).append(hisHer()).append(" first time experiencing orgasm.").toString());
+                        w.append(t, "  It's " + hisHer() + " first time experiencing orgasm.");
                     } else
                     if(forsakenOwner.strongestOrgasm < 200)
                     {
                         specialLine = 2;
-                        w.append(t, (new StringBuilder("  It's by far the strongest orgasm ")).append(heShe()).append("'s had in ").append(hisHer()).append(" life.").toString());
+                        w.append(t, "  It's by far the strongest orgasm " + heShe() + "'s had in " + hisHer() + " life.");
                     }
                     forsakenOwner.timesOrgasmed++;
                     if(intensity > forsakenOwner.strongestOrgasm)
@@ -1909,32 +1909,32 @@ public class Body
         {
             w.purpleAppend(t, "\n\nTIRE up!  ");
             if(crossedThreshold(actualDamage[6], currentDamage()[6]) == 1)
-                w.append(t, (new StringBuilder(String.valueOf(OwnerName()))).append(" is starting to get tired, but it's not slowing ").append(himHer()).append(" down yet.").toString());
+                w.append(t, String.valueOf(OwnerName()) + " is starting to get tired, but it's not slowing " + himHer() + " down yet.");
             else
             if(crossedThreshold(actualDamage[6], currentDamage()[6]) == 2)
-                w.append(t, (new StringBuilder(String.valueOf(OwnerName()))).append("'s fatigue is catching up with ").append(himHer()).append(", and ").append(heShe()).append("'s losing focus.").toString());
+                w.append(t, String.valueOf(OwnerName()) + "'s fatigue is catching up with " + himHer() + ", and " + heShe() + "'s losing focus.");
             else
             if(crossedThreshold(actualDamage[6], currentDamage()[6]) == 3)
-                w.append(t, (new StringBuilder(String.valueOf(OwnerName()))).append(" is practically passing out.  ").append(HeShe()).append(" can't do much like this.").toString());
+                w.append(t, String.valueOf(OwnerName()) + " is practically passing out.  " + HeShe() + " can't do much like this.");
             else
-                w.append(t, (new StringBuilder(String.valueOf(OwnerName()))).append(" fades in and out of consciousness.").toString());
+                w.append(t, String.valueOf(OwnerName()) + " fades in and out of consciousness.");
         }
         if(crossedThreshold(actualDamage[7], currentDamage()[7]) > 0)
         {
             w.purpleAppend(t, "\n\nEXPO up!  ");
             if(crossedThreshold(actualDamage[7], currentDamage()[7]) == 1)
-                w.append(t, (new StringBuilder(String.valueOf(OwnerName()))).append("'s clothes are partially undone.").toString());
+                w.append(t, String.valueOf(OwnerName()) + "'s clothes are partially undone.");
             else
             if(crossedThreshold(actualDamage[7], currentDamage()[7]) == 2)
-                w.append(t, (new StringBuilder(String.valueOf(OwnerName()))).append("'s ").append(breasts()).append(" can clearly be seen.").toString());
+                w.append(t, String.valueOf(OwnerName()) + "'s " + breasts() + " can clearly be seen.");
             else
             if(crossedThreshold(actualDamage[7], currentDamage()[7]) == 3)
-                w.append(t, (new StringBuilder(String.valueOf(OwnerName()))).append("'s clothes have been shifted out of the way to show ").append(hisHer()).append(" most private places.").toString());
+                w.append(t, String.valueOf(OwnerName()) + "'s clothes have been shifted out of the way to show " + hisHer() + " most private places.");
             else
             if(crossedThreshold(actualDamage[7], currentDamage()[7]) == 4)
-                w.append(t, (new StringBuilder("Only a few scraps of ")).append(OwnerName()).append("'s clothes remain.").toString());
+                w.append(t, "Only a few scraps of " + OwnerName() + "'s clothes remain.");
             else
-                w.append(t, (new StringBuilder(String.valueOf(OwnerName()))).append(" is now completely naked.").toString());
+                w.append(t, String.valueOf(OwnerName()) + " is now completely naked.");
             if(w.sceneLocation == Activity.Location.STAGE && currentDamage()[7] - actualDamage[7] < 10000L && currentDamage()[7] >= 10000L && forsakenOwner != null)
             {
                 int added = 300_000 + (int)(Math.random() * 300000D);

@@ -91,8 +91,8 @@ public void exportRoster(Chosen c[], String saveName)
 		path = path.substring(0, path.length() - fileName.length() - 1);
 		path = URLDecoder.decode(path, "UTF-8");
 		path = path.replaceAll("file:/", "");
-		path = path.replaceAll((new StringBuilder(String.valueOf(File.separator))).append("u0020").toString(), (new StringBuilder(String.valueOf(File.separator))).append(" ").toString());
-		fout = new FileOutputStream((new StringBuilder(String.valueOf(path))).append(File.separator).append(saveName).append(".ros").toString());
+		path = path.replaceAll(String.valueOf(File.separator) + "u0020", String.valueOf(File.separator) + " ");
+		fout = new FileOutputStream(String.valueOf(path) + File.separator + saveName + ".ros");
 		oos = new ObjectOutputStream(fout);
 		oos.writeObject(c);
 	}
