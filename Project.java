@@ -1353,199 +1353,141 @@ public class Project extends JFrame
     {
         p.removeAll();
         w.append(t, String.format("\n\n%s\n\n", w.getSeparator()));
-        if(progress == 0)
-            w.append(t, String.format("This segment takes the form of a series of questions about how %s thinks and behaves.  Pick the option that comes closest to how %s really is.\n\nQuestion 1: In what way does %1$s try to act?", c.givenName, c.heShe()));
-        else
-        if(progress == 1)
-            w.append(t, String.format("Question 2: Does %s try to earn others' fear, or does %s try to earn their love?", c.givenName, c.heShe()));
-        else
-        if(progress == 2)
-            w.append(t, String.format("Question 3: What does %s do after making a mistake that hurts someone else?", c.givenName));
-        else
-        if(progress == 3)
-            w.append(t, String.format("Question 4: What does %s tend to do when someone disagrees with %s about what they should do?", c.givenName, c.himHer()));
-        else
-        if(progress == 4)
-            w.append(t, String.format("Question 5: Which enemies does %s prefer to target?", c.givenName));
-        else
-        if(progress == 5)
-            w.append(t, String.format("Question 6: How does %s treat people %s dislikes?", c.givenName, c.heShe()));
-        else
-        if(progress == 6)
-            w.append(t, String.format("Question 7: What does %s do when someone hurts %s?", c.givenName, c.himHer()));
-        else
-        if(progress == 7)
-            w.append(t, String.format("Question 8: Which social role describes %s?", c.givenName));
-        else
-        if(progress == 8)
-            w.append(t, String.format("Question 9: How does %s feel after being forced to run from a fight?", c.givenName));
-        else
-        if(progress == 9)
-            w.append(t, String.format("Question 10: When is it possible for %s's friends to convince %s to commit a crime?", c.givenName, c.himHer()));
-        else
-        if(progress == 10)
-            w.append(t, String.format("Question 11: How can one pick a fight with %s?", c.givenName));
-        else
-        if(progress == 11)
-            w.append(t, String.format("Question 12: How does %s fight against a stronger enemy?", c.givenName));
-        else
-        if(progress == 12)
-            w.append(t, String.format("Question 13: How does %s respond when civilians are taken hostage?", c.givenName));
-        else
-        if(progress == 13)
-            w.append(t, String.format("Question 14: Will %s lie to protect someone else?", c.givenName));
-        else
-        if(progress == 14)
-            w.append(t, String.format("Question 15: How does %s react when stripped while protecting civilians?", c.givenName));
-        else
-        if(progress == 15)
-            w.append(t, String.format("Question 16: How does %s respond to being praised?", c.givenName));
-        else
-        if(progress == 16)
-            w.append(t, String.format("Question 17: When does %s put %sself in harm's way?", c.givenName, c.himHer()));
-        else
-        if(progress == 17)
-            w.append(t, String.format("Question 18: What does %s think of %s fanbase?", c.givenName, c.hisHer()));
-        else
-        if(progress == 18)
-            w.append(t, String.format("Question 19: What does %s do when interviewed by reporters after a major defeat?", c.givenName));
-        else
-        if(progress == 19)
-            w.append(t, String.format("Question 20: How does %s fight against a weaker enemy?", c.givenName));
-        else
-        if(progress == 20)
-            w.append(t, String.format("Question 21: How does %s handle it when %s friends get into an argument?", c.givenName, c.hisHer()));
-        else
-        if(progress == 21)
-            w.append(t, String.format("Question 22: What does %s do about %s friends' personality flaws?", c.givenName, c.hisHer()));
-        else
-        if(progress == 22)
-            w.append(t, String.format("Question 23: Does %s claim to be a good person?", c.givenName));
-        else
-        if(progress == 23)
-            w.append(t, String.format("Question 24: Does %s pretend to be stronger than %s actually is?", c.givenName, c.heShe()));
-        else
-        if(progress == 24)
-            w.append(t, String.format("Question 25: When is %s willing to abandon innocent lives?", c.givenName));
-        else
-        if(progress == 25)
-            w.append(t, String.format("Question 26: How does %s handle fans who try to get too close to %s?", c.givenName, c.himHer()));
-        else
-        if(progress == 26)
-            w.append(t, String.format("Question 27: How does %s respond to being given orders?", c.givenName));
-        else
-        if(progress == 27)
-            w.append(t, String.format("Question 28: How does %s prefer to get help from people?", c.givenName));
-        else
-        if(progress == 28)
-            w.append(t, String.format("Question 29: What does %s do with the vast wealth paid to the Chosen?", c.givenName));
-        else
-        if(progress == 29)
-            w.append(t, String.format("Question 30: What does %s tell %s fans to do?", c.givenName, c.hisHer()));
-        else
-        if(progress == 30)
-            w.append(t, String.format("Question 31: Does %s keep %s promises?", c.givenName, c.hisHer()));
-        else
-        if(progress == 31)
-            w.append(t, String.format("Question 32: What does %s do when %s notices %2$s's being filmed by spectators?", c.givenName, c.heShe()));
+        String choices = "";
+        switch (progress) {
+            case 0:
+                w.append(t, String.format("This segment takes the form of a series of questions about how %s thinks and behaves.  Pick the option that comes closest to how %s really is.\n\nQuestion 1: In what way does %1$s try to act?", c.givenName, c.heShe()));
+                choices = String.format("1: A way that makes others happy.\n2: A way that makes everyone happy.\n3: A way that makes %s %sself happy.", c.givenName, c.himHer());
+                break;
+            case 1:
+                w.append(t, String.format("Question 2: Does %s try to earn others' fear, or does %s try to earn their love?", c.givenName, c.heShe()));
+                choices = "1: Love.\n2: Both fear and love.\n3: Fear.";
+                break;
+            case 2:
+                w.append(t, String.format("Question 3: What does %s do after making a mistake that hurts someone else?", c.givenName));
+                choices = String.format("1: Apologize.\n2: Ignore them.\n3: Try to cover up %s involvement.", c.hisHer());
+                break;
+            case 3:
+                w.append(t, String.format("Question 4: What does %s tend to do when someone disagrees with %s about what they should do?", c.givenName, c.himHer()));
+                choices = String.format("1: Give in.\n2: Stubbornly hold %s position.\n3: Try to reason with the other person.", c.hisHer());
+                break;
+            case 4:
+                w.append(t, String.format("Question 5: Which enemies does %s prefer to target?", c.givenName));
+                choices = String.format("1: The ones threatening innocents.\n2: Whichever ones cross %s path.\n3: Whichever ones stand between %s and safety.", c.hisHer(), c.himHer());
+                break;
+            case 5:
+                w.append(t, String.format("Question 6: How does %s treat people %s dislikes?", c.givenName, c.heShe()));
+                choices = "1: Try to find a way to befriend them.\n2: Spread gossip about them.\n3: Constantly bring up their weaknesses and insecurities.";
+                break;
+            case 6:
+                w.append(t, String.format("Question 7: What does %s do when someone hurts %s?", c.givenName, c.himHer()));
+                choices = String.format("1: Hold %s pain inside.\n2: Hurt them back, by any means necessary.\n3: Whine to anyone who will listen.", c.hisHer());
+                break;
+            case 7:
+                w.append(t, String.format("Question 8: Which social role describes %s?", c.givenName));
+                choices = "1: Follower.\n2: Leader.\n3: Outcast.";
+                break;
+            case 8:
+                w.append(t, String.format("Question 9: How does %s feel after being forced to run from a fight?", c.givenName));
+                choices = String.format("1: Angry at %sself for being too weak.\n2: Perfectly content to have safely escaped.\n3: Angry at %s allies for putting %1$s in that position.", c.himHer(), c.hisHer());
+                break;
+            case 9:
+                w.append(t, String.format("Question 10: When is it possible for %s's friends to convince %s to commit a crime?", c.givenName, c.himHer()));
+                choices = String.format("1: When %s thinks it won't hurt anybody.\n2: When %1$s's sure %1$s won't be punished for it.\n3: Pretty much always.", c.heShe());
+                break;
+            case 10:
+                w.append(t, String.format("Question 11: How can one pick a fight with %s?", c.givenName));
+                choices = String.format("1: By hurting others in front of %s.\n2: It isn't possible.\n3: By insulting %s pride.", c.himHer(), c.hisHer());
+                break;
+            case 11:
+                w.append(t, String.format("Question 12: How does %s fight against a stronger enemy?", c.givenName));
+                choices = "1: Charge straight in.\n2: Call for help.\n3: Find a way to even the odds.";
+                break;
+            case 12:
+                w.append(t, String.format("Question 13: How does %s respond when civilians are taken hostage?", c.givenName));
+                choices = String.format("1: %s attacks anyway.\n2: %1$s surrenders immediately.\n3: %1$s cooperates only until %s can find a chance to free them.", c.HeShe(), c.heShe());
+                break;
+            case 13:
+                w.append(t, String.format("Question 14: Will %s lie to protect someone else?", c.givenName));
+                choices = String.format("1: Only if they make it worth %s while.\n2: %s thinks lying is wrong.\n3: %2$s will, if %s thinks they deserve it.", c.hisHer(), c.HeShe(), c.heShe());
+                break;
+            case 14:
+                w.append(t, String.format("Question 15: How does %s react when stripped while protecting civilians?", c.givenName));
+                choices = String.format("1: Flee, leaving the civilians to their fate.\n2: Laugh it off.\n3: Try to pretend it doesn't bother %s.", c.himHer());
+                break;
+            case 15:
+                w.append(t, String.format("Question 16: How does %s respond to being praised?", c.givenName));
+                choices = String.format("1: %s assumes that the other person is trying to get something from %s.\n2: %1$s accepts it as what %s deserves.\n3: %1$s feels surprised and happy.", c.HeShe(), c.himHer(), c.heShe());
+                break;
+            case 16:
+                w.append(t, String.format("Question 17: When does %s put %sself in harm's way?", c.givenName, c.himHer()));
+                choices = "1: Whenever it protects others.\n2: Whenever there's an appropriate reward.\n3: Almost never.";
+                break;
+            case 17:
+                w.append(t, String.format("Question 18: What does %s think of %s fanbase?", c.givenName, c.hisHer()));
+                choices = String.format("1: %s wants to serve them.\n2: %1$s wants them to serve %s.\n3: %1$s doesn't care about them.", c.HeShe(), c.himHer());
+                break;
+            case 18:
+                w.append(t, String.format("Question 19: What does %s do when interviewed by reporters after a major defeat?", c.givenName));
+                choices = "1: Reassure everyone.\n2: Blame someone else.\n3: Ignore them.";
+                break;
+            case 19:
+                w.append(t, String.format("Question 20: How does %s fight against a weaker enemy?", c.givenName));
+                choices = String.format("1: Let %s guard down and show off.\n2: Remain slow, steady, and cautious.\n3: Take them out quickly and move on.", c.hisHer());
+                break;
+            case 20:
+                w.append(t, String.format("Question 21: How does %s handle it when %s friends get into an argument?", c.givenName, c.hisHer()));
+                choices = String.format("1: Take the side of whoever is more useful to %s.\n2: Take the side of whoever %s agrees with.\n3: Try to help them resolve their differences with each other.", c.himHer(), c.heShe());
+                break;
+            case 21:
+                w.append(t, String.format("Question 22: What does %s do about %s friends' personality flaws?", c.givenName, c.hisHer()));
+                choices = String.format("1: Exploit them for %s own benefit.\n2: Tolerate them patiently.\n3: Try to help them overcome their flaws.", c.hisHer());
+                break;
+            case 22:
+                w.append(t, String.format("Question 23: Does %s claim to be a good person?", c.givenName));
+                choices = String.format("1: Yes, but %s knows %1$s's not.\n2: Yes, and %1$s thinks it's true.\n3: No, %1$s doesn't.", c.heShe());
+                break;
+            case 23:
+                w.append(t, String.format("Question 24: Does %s pretend to be stronger than %s actually is?", c.givenName, c.heShe()));
+                choices = "1: Yes, but not by so much that it can be disproven.\n2: Yes, to an impossible degree.\n3: No, never.";
+                break;
+            case 24:
+                w.append(t, String.format("Question 25: When is %s willing to abandon innocent lives?", c.givenName));
+                choices = String.format("1: Whenever %s feels like it would be even slightly dangerous for %s.\n2: Whenever %1$s judges it unlikely that %1$s'd be able to successfully save them.\n3: Never.", c.heShe(), c.himHer());
+                break;
+            case 25:
+                w.append(t, String.format("Question 26: How does %s handle fans who try to get too close to %s?", c.givenName, c.himHer()));
+                choices = String.format("1: Being mean to them.\n2: Firmly but gently turning them away.\n3: Trying to make them happy without going too far beyond %s comfort zone.", c.hisHer());
+                break;
+            case 26:
+                w.append(t, String.format("Question 27: How does %s respond to being given orders?", c.givenName));
+                choices = String.format("1: Spitefully do the opposite.\n2: Obey quickly.\n3: Obey only if %s agrees with them.", c.heShe());
+                break;
+            case 27:
+                w.append(t, String.format("Question 28: How does %s prefer to get help from people?", c.givenName));
+                choices = "1: Bargain for something of equal value.\n2: Whine and beg.\n3: Act cute and sweet-talk them.";
+                break;
+            case 28:
+                w.append(t, String.format("Question 29: What does %s do with the vast wealth paid to the Chosen?", c.givenName));
+                choices = String.format("1: Spend it all on luxuries for %sself.\n2: Personally direct it into projects which benefit society as %s sees it.\n3: Give most of it away to people who know better than %1$s how it should be spent.", c.himHer(), c.heShe());
+                break;
+            case 29:
+                w.append(t, String.format("Question 30: What does %s tell %s fans to do?", c.givenName, c.hisHer()));
+                choices = String.format("1: Worship %s.\n2: Try to make the world a better place.\n3: Do whatever makes them happy.", c.himHer());
+                break;
+            case 30:
+                w.append(t, String.format("Question 31: Does %s keep %s promises?", c.givenName, c.hisHer()));
+                choices = String.format("1: Only when %s feels like it.\n2: %s tries, but often promises more than %1$s can do.\n3: Yes, %1$s's trustworthy.", c.heShe(), c.HeShe());
+                break;
+            case 31:
+                w.append(t, String.format("Question 32: What does %s do when %s notices %2$s's being filmed by spectators?", c.givenName, c.heShe()));
+                choices = "1: Focus even more on not making any mistakes.\n2: Get flustered.\n3: Ignore them.";
+                break;
+        }
         if(answers[progress] != 0)
             w.append(t, String.format("  (Previous answer: %s)", answers[progress]));
         w.append(t, "\n\n");
-        if(progress == 0)
-            w.append(t, String.format("1: A way that makes others happy.\n2: A way that makes everyone happy.\n3: A way that makes %s %sself happy.", c.givenName, c.himHer()));
-        else
-        if(progress == 1)
-            w.append(t, "1: Love.\n2: Both fear and love.\n3: Fear.");
-        else
-        if(progress == 2)
-            w.append(t, String.format("1: Apologize.\n2: Ignore them.\n3: Try to cover up %s involvement.", c.hisHer()));
-        else
-        if(progress == 3)
-            w.append(t, String.format("1: Give in.\n2: Stubbornly hold %s position.\n3: Try to reason with the other person.", c.hisHer()));
-        else
-        if(progress == 4)
-            w.append(t, String.format("1: The ones threatening innocents.\n2: Whichever ones cross %s path.\n3: Whichever ones stand between %s and safety.", c.hisHer(), c.himHer()));
-        else
-        if(progress == 5)
-            w.append(t, "1: Try to find a way to befriend them.\n2: Spread gossip about them.\n3: Constantly bring up their weaknesses and insecurities.");
-        else
-        if(progress == 6)
-            w.append(t, String.format("1: Hold %s pain inside.\n2: Hurt them back, by any means necessary.\n3: Whine to anyone who will listen.", c.hisHer()));
-        else
-        if(progress == 7)
-            w.append(t, "1: Follower.\n2: Leader.\n3: Outcast.");
-        else
-        if(progress == 8)
-            w.append(t, String.format("1: Angry at %sself for being too weak.\n2: Perfectly content to have safely escaped.\n3: Angry at %s allies for putting %1$s in that position.", c.himHer(), c.hisHer()));
-        else
-        if(progress == 9)
-            w.append(t, String.format("1: When %s thinks it won't hurt anybody.\n2: When %1$s's sure %1$s won't be punished for it.\n3: Pretty much always.", c.heShe()));
-        else
-        if(progress == 10)
-            w.append(t, String.format("1: By hurting others in front of %s.\n2: It isn't possible.\n3: By insulting %s pride.", c.himHer(), c.hisHer()));
-        else
-        if(progress == 11)
-            w.append(t, "1: Charge straight in.\n2: Call for help.\n3: Find a way to even the odds.");
-        else
-        if(progress == 12)
-            w.append(t, String.format("1: %s attacks anyway.\n2: %1$s surrenders immediately.\n3: %1$s cooperates only until %s can find a chance to free them.", c.HeShe(), c.heShe()));
-        else
-        if(progress == 13)
-            w.append(t, String.format("1: Only if they make it worth %s while.\n2: %s thinks lying is wrong.\n3: %2$s will, if %s thinks they deserve it.", c.hisHer(), c.HeShe(), c.heShe()));
-        else
-        if(progress == 14)
-            w.append(t, String.format("1: Flee, leaving the civilians to their fate.\n2: Laugh it off.\n3: Try to pretend it doesn't bother %s.", c.himHer()));
-        else
-        if(progress == 15)
-            w.append(t, String.format("1: %s assumes that the other person is trying to get something from %s.\n2: %1$s accepts it as what %s deserves.\n3: %1$s feels surprised and happy.", c.HeShe(), c.himHer(), c.heShe()));
-        else
-        if(progress == 16)
-            w.append(t, "1: Whenever it protects others.\n2: Whenever there's an appropriate reward.\n3: Almost never.");
-        else
-        if(progress == 17)
-            w.append(t, String.format("1: %s wants to serve them.\n2: %1$s wants them to serve %s.\n3: %1$s doesn't care about them.", c.HeShe(), c.himHer()));
-        else
-        if(progress == 18)
-            w.append(t, "1: Reassure everyone.\n2: Blame someone else.\n3: Ignore them.");
-        else
-        if(progress == 19)
-            w.append(t, String.format("1: Let %s guard down and show off.\n2: Remain slow, steady, and cautious.\n3: Take them out quickly and move on.", c.hisHer()));
-        else
-        if(progress == 20)
-            w.append(t, String.format("1: Take the side of whoever is more useful to %s.\n2: Take the side of whoever %s agrees with.\n3: Try to help them resolve their differences with each other.", c.himHer(), c.heShe()));
-        else
-        if(progress == 21)
-            w.append(t, String.format("1: Exploit them for %s own benefit.\n2: Tolerate them patiently.\n3: Try to help them overcome their flaws.", c.hisHer()));
-        else
-        if(progress == 22)
-            w.append(t, String.format("1: Yes, but %s knows %1$s's not.\n2: Yes, and %1$s thinks it's true.\n3: No, %1$s doesn't.", c.heShe()));
-        else
-        if(progress == 23)
-            w.append(t, "1: Yes, but not by so much that it can be disproven.\n2: Yes, to an impossible degree.\n3: No, never.");
-        else
-        if(progress == 24)
-            w.append(t, String.format("1: Whenever %s feels like it would be even slightly dangerous for %s.\n2: Whenever %1$s judges it unlikely that %1$s'd be able to successfully save them.\n3: Never.", c.heShe(), c.himHer()));
-        else
-        if(progress == 25)
-            w.append(t, String.format("1: Being mean to them.\n2: Firmly but gently turning them away.\n3: Trying to make them happy without going too far beyond %s comfort zone.", c.hisHer()));
-        else
-        if(progress == 26)
-            w.append(t, String.format("1: Spitefully do the opposite.\n2: Obey quickly.\n3: Obey only if %s agrees with them.", c.heShe()));
-        else
-        if(progress == 27)
-            w.append(t, "1: Bargain for something of equal value.\n2: Whine and beg.\n3: Act cute and sweet-talk them.");
-        else
-        if(progress == 28)
-            w.append(t, String.format("1: Spend it all on luxuries for %sself.\n2: Personally direct it into projects which benefit society as %s sees it.\n3: Give most of it away to people who know better than %1$s how it should be spent.", c.himHer(), c.heShe()));
-        else
-        if(progress == 29)
-            w.append(t, String.format("1: Worship %s.\n2: Try to make the world a better place.\n3: Do whatever makes them happy.", c.himHer()));
-        else
-        if(progress == 30)
-            w.append(t, String.format("1: Only when %s feels like it.\n2: %s tries, but often promises more than %1$s can do.\n3: Yes, %1$s's trustworthy.", c.heShe(), c.HeShe()));
-        else
-        if(progress == 31)
-            w.append(t, "1: Focus even more on not making any mistakes.\n2: Get flustered.\n3: Ignore them.");
+        w.append(t, choices);
         for(int i = 0; i < 3; i++)
         {
             final int picked = i + 1;
@@ -4510,122 +4452,47 @@ public class Project extends JFrame
                 String sceneName = "";
                 found++;
                 highest = i;
-                if(i == 0)
-                    sceneName = "First Meeting";
-                else
-                if(i == 1)
-                    sceneName = "Interview";
-                else
-                if(i == 2)
-                    sceneName = "Vacation";
-                else
-                if(i == 3)
-                    sceneName = "Final Preparation";
-                else
-                if(i == 4)
-                    sceneName = "Epilogue";
-                else
-                if(i == 5)
-                    sceneName = "First 'Violence'";
-                else
-                if(i == 6)
-                    sceneName = "First 'Service'";
-                else
-                if(i == 7)
-                    sceneName = "First 'Begging'";
-                else
-                if(i == 8)
-                    sceneName = "First 'Covering'";
-                else
-                if(i == 9)
-                    sceneName = "First 'Insemination'";
-                else
-                if(i == 10)
-                    sceneName = "First 'Force Orgasm'";
-                else
-                if(i == 11)
-                    sceneName = "First 'Sodomize/Torture/Force Laughter'";
-                else
-                if(i == 12)
-                    sceneName = "First 'Broadcast'";
-                else
-                if(i == 13)
-                    sceneName = "First 'Slaughter'";
-                else
-                if(i == 14)
-                    sceneName = "First 'Fantasize'";
-                else
-                if(i == 15)
-                    sceneName = "First 'Detonate'";
-                else
-                if(i == 16)
-                    sceneName = "First 'Striptease'";
-                else
-                if(i == 17)
-                    sceneName = "First 'Impregnation'";
-                else
-                if(i == 18)
-                    sceneName = "First 'Hypnotism'";
-                else
-                if(i == 19)
-                    sceneName = "First 'Drain'";
-                else
-                if(i == 20)
-                    sceneName = "First 'Parasitism'";
-                else
-                if(i == 21)
-                    sceneName = "First 'Tempt'";
-                else
-                if(i == 22)
-                    sceneName = "First Catatonia";
-                else
-                if(i == 33)
-                    sceneName = "Perverted Donor";
-                else
-                if(i == 34)
-                    sceneName = "Sexual Technique Training";
-                else
-                if(i == 35)
-                    sceneName = "Blackmailed";
-                else
-                if(i == 36)
-                    sceneName = "Bodypaint Experiment";
-                else
-                if(i == 37)
-                    sceneName = "Photoshoot";
-                else
-                if(i == 38)
-                    sceneName = "Stripped in Public";
-                else
-                if(i == 39)
-                    sceneName = "Movie Date";
-                else
-                if(i == 40)
-                    sceneName = "Petplay";
-                else
-                if(i == 41)
-                    sceneName = "Train Molester";
-                else
-                if(i == 42)
-                    sceneName = "Sexual Combat Training";
-                else
-                if(i == 43)
-                    sceneName = "Guilty Service";
-                else
-                if(i == 44)
-                    sceneName = "Sleep Molester";
-                else
-                if(i == 45)
-                    sceneName = "Saving One's Rival";
-                else
-                if(i == 46)
-                    sceneName = "Service Competition";
-                else
-                if(i == 47)
-                    sceneName = "Relief Through Abuse";
-                else
-                if(i == 48)
-                    sceneName = "Endurance Match";
+                switch (i) {
+                    case 0: sceneName = "First Meeting"; break;
+                    case 1: sceneName = "Interview"; break;
+                    case 2: sceneName = "Vacation"; break;
+                    case 3: sceneName = "Final Preparation"; break;
+                    case 4: sceneName = "Epilogue"; break;
+                    case 5: sceneName = "First 'Violence'"; break;
+                    case 6: sceneName = "First 'Service'"; break;
+                    case 7: sceneName = "First 'Begging'"; break;
+                    case 8: sceneName = "First 'Covering'"; break;
+                    case 9: sceneName = "First 'Insemination'"; break;
+                    case 10: sceneName = "First 'Force Orgasm'"; break;
+                    case 11: sceneName = "First 'Sodomize/Torture/Force Laughter'"; break;
+                    case 12: sceneName = "First 'Broadcast'"; break;
+                    case 13: sceneName = "First 'Slaughter'"; break;
+                    case 14: sceneName = "First 'Fantasize'"; break;
+                    case 15: sceneName = "First 'Detonate'"; break;
+                    case 16: sceneName = "First 'Striptease'"; break;
+                    case 17: sceneName = "First 'Impregnation'"; break;
+                    case 18: sceneName = "First 'Hypnotism'"; break;
+                    case 19: sceneName = "First 'Drain'"; break;
+                    case 20: sceneName = "First 'Parasitism'"; break;
+                    case 21: sceneName = "First 'Tempt'"; break;
+                    case 22: sceneName = "First Catatonia"; break;
+                    case 33: sceneName = "Perverted Donor"; break;
+                    case 34: sceneName = "Sexual Technique Training"; break;
+                    case 35: sceneName = "Blackmailed"; break;
+                    case 36: sceneName = "Bodypaint Experiment"; break;
+                    case 37: sceneName = "Photoshoot"; break;
+                    case 38: sceneName = "Stripped in Public"; break;
+                    case 39: sceneName = "Movie Date"; break;
+                    case 40: sceneName = "Petplay"; break;
+                    case 41: sceneName = "Train Molester"; break;
+                    case 42: sceneName = "Sexual Combat Training"; break;
+                    case 43: sceneName = "Guilty Service"; break;
+                    case 44: sceneName = "Sleep Molester"; break;
+                    case 45: sceneName = "Saving One's Rival"; break;
+                    case 46: sceneName = "Service Competition"; break;
+                    case 47: sceneName = "Relief Through Abuse"; break;
+                    case 48: sceneName = "Endurance Match"; break;
+                }
                 JButton PickScene = new JButton(sceneName);
                 final int sceneType = i;
                 PickScene.addActionListener(new ActionListener() {
