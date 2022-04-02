@@ -2991,7 +2991,7 @@ public class Project extends JFrame
                 if(count > 1)
                     w.append(t, String.valueOf((multiplier * w.getGenderBalance()[1]) / 100) + "% female");
                 else
-                    w.append(t, "100%% female");
+                    w.append(t, "100% female");
             }
             if(w.getGenderBalance()[2] > 0)
             {
@@ -3000,7 +3000,7 @@ public class Project extends JFrame
                 if(count > 1)
                     w.append(t, String.valueOf((multiplier * w.getGenderBalance()[2]) / 100) + "% male");
                 else
-                    w.append(t, "100%% male");
+                    w.append(t, "100% male");
                 listed = true;
             }
             if(w.getGenderBalance()[3] > 0)
@@ -3010,7 +3010,7 @@ public class Project extends JFrame
                 if(count > 1)
                     w.append(t, String.valueOf((multiplier * w.getGenderBalance()[3]) / 100) + "% futanari");
                 else
-                    w.append(t, "100%% futanari");
+                    w.append(t, "100% futanari");
             }
         }
         if(w.getGenderBalance()[2] > 0)
@@ -3663,10 +3663,10 @@ public class Project extends JFrame
                             w.append(t, String.format("\n%s - ", w.getCast()[j].getMainName()));
                             int compatibility = w.getHarem()[i].compatibility(w.getCast()[j]);
                             if(w.getHarem()[i].knowsPersonally(w.getCast()[j]))
-                                w.append(t, "Personal (8 rounds, +25%% damage)");
+                                w.append(t, "Personal (8 rounds, +25% damage)");
                             else
                             if(w.getHarem()[i].obsessedWith(w.getCast()[j]))
-                                w.append(t, "Obsessed (8 rounds, +25%% damage)");
+                                w.append(t, "Obsessed (8 rounds, +25% damage)");
                             else
                             if(compatibility >= 8)
                                 w.append(t, "Excellent (8 rounds)");
@@ -3847,14 +3847,14 @@ public class Project extends JFrame
         if(x.defilerType != 0)
             w.append(t, String.format("\n\n%s", x.describeDefilerType(w, false)));
         if(x.defeatType == 5 && x.obedience < 40)
-            w.append(t, "\n\nTrait: Eager Partner\nWhile Obedience remains below 40%%, 1/4 Motivation cost to deploy and +50%% PLEA and EXPO damage");
+            w.append(t, "\n\nTrait: Eager Partner\nWhile Obedience remains below 40%, 1/4 Motivation cost to deploy and +50% PLEA and EXPO damage");
         else
         if(x.defeatType == 5)
             w.append(t, "\n\nTrait: Broken Traitor\nNo longer receives 'Eager Partner' bonus, but can still be trained to Tempt the Chosen");
         if(x.defeatType == 6)
-            w.append(t, "\n\nTrait: Dissociative Identity\nWhile consenting, training can only increase Disgrace.  +50%% HATE and INJU damage");
+            w.append(t, "\n\nTrait: Dissociative Identity\nWhile consenting, training can only increase Disgrace.  +50% HATE and INJU damage");
         if(x.type == Chosen.Species.SUPERIOR)
-            w.append(t, "\n\nTrait: Superior Forsaken\nx2 Motivation cost to deploy, +50%% damage");
+            w.append(t, "\n\nTrait: Superior Forsaken\nx2 Motivation cost to deploy, +50% damage");
         w.append(t, "\n\nOrgasms given: ");
         if(x.orgasmsGiven == 0)
             w.append(t, "none");
@@ -12703,10 +12703,10 @@ public class Project extends JFrame
                     w.append(t, String.format("\n%s - ", w.getCast()[j].getMainName()));
                     int compatibility = w.usedForsaken.compatibility(w.getCast()[j]);
                     if(w.usedForsaken.knowsPersonally(w.getCast()[j]))
-                        w.append(t, "Personal (8 rounds, +25%% damage)");
+                        w.append(t, "Personal (8 rounds, +25% damage)");
                     else
                     if(w.usedForsaken.obsessedWith(w.getCast()[j]))
-                        w.append(t, "Obsessed (8 rounds, +25%% damage)");
+                        w.append(t, "Obsessed (8 rounds, +25% damage)");
                     else
                     if(compatibility >= 8)
                         w.append(t, "Excellent (8 rounds)");

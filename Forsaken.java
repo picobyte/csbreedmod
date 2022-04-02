@@ -3896,7 +3896,7 @@ public class Forsaken
                 if(currentTraining[20])
                     w.append(t, "\nEvery +1 Obedience grants +1 Evil Energy");
                 if(currentTraining[21])
-                    w.append(t, "\nEvery +1 Disgrace grants +30%% Stamina and Motivation to all other Forsaken");
+                    w.append(t, "\nEvery +1 Disgrace grants +30% Stamina and Motivation to all other Forsaken");
             }
         }
         for(int i = 0; i < trainingExpertises.length; i++)
