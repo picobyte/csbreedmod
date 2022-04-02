@@ -37,17 +37,15 @@ public class WorldState
             {
                 if(w.getBodyStatus()[4])
                 {
+                    greatest = 1;
                     if(c.morality < c.innocence)
                         greatest = 0;
-                    else
-                        greatest = 1;
                 } else
                 if(w.getBodyStatus()[5])
                 {
+                    greatest = 2;
                     if(c.morality < c.confidence)
                         greatest = 0;
-                    else
-                        greatest = 2;
                 } else
                 if(w.getBodyStatus()[6])
                     if(c.morality < c.dignity)
@@ -59,10 +57,9 @@ public class WorldState
             {
                 if(w.getBodyStatus()[5])
                 {
+                    greatest = 2;
                     if(c.innocence < c.confidence)
                         greatest = 1;
-                    else
-                        greatest = 2;
                 } else
                 if(w.getBodyStatus()[6])
                     if(c.innocence < c.dignity)
