@@ -536,7 +536,7 @@ public class Tech implements Serializable {
 			String actionName = "Attack";
 			if(w.tickle())
 				actionName = "Poke";
-			name = (new StringBuilder(String.valueOf(actionName))).append("+").toString();
+			name = (new StringBuilder(actionName)).append("+").toString();
 			prereqsRequired = 3;
 			cost = 100;
 			prereqs = (new Tech[] {
