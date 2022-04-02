@@ -1354,102 +1354,102 @@ public class Project extends JFrame
         p.removeAll();
         w.append(t, "\n\n" + w.getSeparator() + "\n\n");
         if(progress == 0)
-            w.append(t, "This segment takes the form of a series of questions about how " + c.givenName + " thinks and behaves.  Pick the option that comes closest to how " + c.heShe() + " really is.\n\nQuestion 1: In what way does " + c.givenName + " try to act?");
+            w.append(t, String.format("This segment takes the form of a series of questions about how %1$s", c.givenName) + " thinks and behaves.  Pick the option that comes closest to how " + c.heShe() + " really is.\n\nQuestion 1: In what way does " + c.givenName + " try to act?");
         else
         if(progress == 1)
-            w.append(t, "Question 2: Does " + c.givenName + " try to earn others' fear, or does " + c.heShe() + " try to earn their love?");
+            w.append(t, String.format("Question 2: Does %1$s", c.givenName) + " try to earn others' fear, or does " + c.heShe() + " try to earn their love?");
         else
         if(progress == 2)
-            w.append(t, "Question 3: What does " + c.givenName + " do after making a mistake that hurts someone else?");
+            w.append(t, String.format("Question 3: What does %1$s", c.givenName) + " do after making a mistake that hurts someone else?");
         else
         if(progress == 3)
-            w.append(t, "Question 4: What does " + c.givenName + " tend to do when someone disagrees with " + c.himHer() + " about what they should do?");
+            w.append(t, String.format("Question 4: What does %1$s", c.givenName) + " tend to do when someone disagrees with " + c.himHer() + " about what they should do?");
         else
         if(progress == 4)
-            w.append(t, "Question 5: Which enemies does " + c.givenName + " prefer to target?");
+            w.append(t, String.format("Question 5: Which enemies does %1$s", c.givenName) + " prefer to target?");
         else
         if(progress == 5)
-            w.append(t, "Question 6: How does " + c.givenName + " treat people " + c.heShe() + " dislikes?");
+            w.append(t, String.format("Question 6: How does %1$s", c.givenName) + " treat people " + c.heShe() + " dislikes?");
         else
         if(progress == 6)
-            w.append(t, "Question 7: What does " + c.givenName + " do when someone hurts " + c.himHer() + "?");
+            w.append(t, String.format("Question 7: What does %1$s", c.givenName) + " do when someone hurts " + c.himHer() + "?");
         else
         if(progress == 7)
-            w.append(t, "Question 8: Which social role describes " + c.givenName + "?");
+            w.append(t, String.format("Question 8: Which social role describes %1$s", c.givenName) + "?");
         else
         if(progress == 8)
-            w.append(t, "Question 9: How does " + c.givenName + " feel after being forced to run from a fight?");
+            w.append(t, String.format("Question 9: How does %1$s", c.givenName) + " feel after being forced to run from a fight?");
         else
         if(progress == 9)
-            w.append(t, "Question 10: When is it possible for " + c.givenName + "'s friends to convince " + c.himHer() + " to commit a crime?");
+            w.append(t, String.format("Question 10: When is it possible for %1$s", c.givenName) + "'s friends to convince " + c.himHer() + " to commit a crime?");
         else
         if(progress == 10)
-            w.append(t, "Question 11: How can one pick a fight with " + c.givenName + "?");
+            w.append(t, String.format("Question 11: How can one pick a fight with %1$s", c.givenName) + "?");
         else
         if(progress == 11)
-            w.append(t, "Question 12: How does " + c.givenName + " fight against a stronger enemy?");
+            w.append(t, String.format("Question 12: How does %1$s", c.givenName) + " fight against a stronger enemy?");
         else
         if(progress == 12)
-            w.append(t, "Question 13: How does " + c.givenName + " respond when civilians are taken hostage?");
+            w.append(t, String.format("Question 13: How does %1$s", c.givenName) + " respond when civilians are taken hostage?");
         else
         if(progress == 13)
-            w.append(t, "Question 14: Will " + c.givenName + " lie to protect someone else?");
+            w.append(t, String.format("Question 14: Will %1$s", c.givenName) + " lie to protect someone else?");
         else
         if(progress == 14)
-            w.append(t, "Question 15: How does " + c.givenName + " react when stripped while protecting civilians?");
+            w.append(t, String.format("Question 15: How does %1$s", c.givenName) + " react when stripped while protecting civilians?");
         else
         if(progress == 15)
-            w.append(t, "Question 16: How does " + c.givenName + " respond to being praised?");
+            w.append(t, String.format("Question 16: How does %1$s", c.givenName) + " respond to being praised?");
         else
         if(progress == 16)
-            w.append(t, "Question 17: When does " + c.givenName + " put " + c.himHer() + "self in harm's way?");
+            w.append(t, String.format("Question 17: When does %1$s", c.givenName) + " put " + c.himHer() + "self in harm's way?");
         else
         if(progress == 17)
-            w.append(t, "Question 18: What does " + c.givenName + " think of " + c.hisHer() + " fanbase?");
+            w.append(t, String.format("Question 18: What does %1$s", c.givenName) + " think of " + c.hisHer() + " fanbase?");
         else
         if(progress == 18)
-            w.append(t, "Question 19: What does " + c.givenName + " do when interviewed by reporters after a major defeat?");
+            w.append(t, String.format("Question 19: What does %1$s", c.givenName) + " do when interviewed by reporters after a major defeat?");
         else
         if(progress == 19)
-            w.append(t, "Question 20: How does " + c.givenName + " fight against a weaker enemy?");
+            w.append(t, String.format("Question 20: How does %1$s", c.givenName) + " fight against a weaker enemy?");
         else
         if(progress == 20)
-            w.append(t, "Question 21: How does " + c.givenName + " handle it when " + c.hisHer() + " friends get into an argument?");
+            w.append(t, String.format("Question 21: How does %1$s", c.givenName) + " handle it when " + c.hisHer() + " friends get into an argument?");
         else
         if(progress == 21)
-            w.append(t, "Question 22: What does " + c.givenName + " do about " + c.hisHer() + " friends' personality flaws?");
+            w.append(t, String.format("Question 22: What does %1$s", c.givenName) + " do about " + c.hisHer() + " friends' personality flaws?");
         else
         if(progress == 22)
-            w.append(t, "Question 23: Does " + c.givenName + " claim to be a good person?");
+            w.append(t, String.format("Question 23: Does %1$s", c.givenName) + " claim to be a good person?");
         else
         if(progress == 23)
-            w.append(t, "Question 24: Does " + c.givenName + " pretend to be stronger than " + c.heShe() + " actually is?");
+            w.append(t, String.format("Question 24: Does %1$s", c.givenName) + " pretend to be stronger than " + c.heShe() + " actually is?");
         else
         if(progress == 24)
-            w.append(t, "Question 25: When is " + c.givenName + " willing to abandon innocent lives?");
+            w.append(t, String.format("Question 25: When is %1$s", c.givenName) + " willing to abandon innocent lives?");
         else
         if(progress == 25)
-            w.append(t, "Question 26: How does " + c.givenName + " handle fans who try to get too close to " + c.himHer() + "?");
+            w.append(t, String.format("Question 26: How does %1$s", c.givenName) + " handle fans who try to get too close to " + c.himHer() + "?");
         else
         if(progress == 26)
-            w.append(t, "Question 27: How does " + c.givenName + " respond to being given orders?");
+            w.append(t, String.format("Question 27: How does %1$s", c.givenName) + " respond to being given orders?");
         else
         if(progress == 27)
-            w.append(t, "Question 28: How does " + c.givenName + " prefer to get help from people?");
+            w.append(t, String.format("Question 28: How does %1$s", c.givenName) + " prefer to get help from people?");
         else
         if(progress == 28)
-            w.append(t, "Question 29: What does " + c.givenName + " do with the vast wealth paid to the Chosen?");
+            w.append(t, String.format("Question 29: What does %1$s", c.givenName) + " do with the vast wealth paid to the Chosen?");
         else
         if(progress == 29)
-            w.append(t, "Question 30: What does " + c.givenName + " tell " + c.hisHer() + " fans to do?");
+            w.append(t, String.format("Question 30: What does %1$s", c.givenName) + " tell " + c.hisHer() + " fans to do?");
         else
         if(progress == 30)
-            w.append(t, "Question 31: Does " + c.givenName + " keep " + c.hisHer() + " promises?");
+            w.append(t, String.format("Question 31: Does %1$s", c.givenName) + " keep " + c.hisHer() + " promises?");
         else
         if(progress == 31)
-            w.append(t, "Question 32: What does " + c.givenName + " do when " + c.heShe() + " notices " + c.heShe() + "'s being filmed by spectators?");
+            w.append(t, String.format("Question 32: What does %1$s", c.givenName) + " do when " + c.heShe() + " notices " + c.heShe() + "'s being filmed by spectators?");
         if(answers[progress] != 0)
-            w.append(t, "  (Previous answer: " + answers[progress] + ")");
+            w.append(t, String.format("  (Previous answer: %1$s", answers[progress]) + ")");
         w.append(t, "\n\n");
         if(progress == 0)
             w.append(t, "1: A way that makes others happy.\n2: A way that makes everyone happy.\n3: A way that makes " + c.givenName + " " + c.himHer() + "self happy.");
@@ -1470,61 +1470,61 @@ public class Project extends JFrame
             w.append(t, "1: Try to find a way to befriend them.\n2: Spread gossip about them.\n3: Constantly bring up their weaknesses and insecurities.");
         else
         if(progress == 6)
-            w.append(t, "1: Hold " + c.hisHer() + " pain inside.\n2: Hurt them back, by any means necessary.\n3: Whine to anyone who will listen.");
+            w.append(t, String.format("1: Hold %1$s", c.hisHer()) + " pain inside.\n2: Hurt them back, by any means necessary.\n3: Whine to anyone who will listen.");
         else
         if(progress == 7)
             w.append(t, "1: Follower.\n2: Leader.\n3: Outcast.");
         else
         if(progress == 8)
-            w.append(t, "1: Angry at " + c.himHer() + "self for being too weak.\n2: Perfectly content to have safely escaped.\n3: Angry at " + c.hisHer() + " allies for putting " + c.himHer() + " in that position.");
+            w.append(t, String.format("1: Angry at %1$s", c.himHer()) + "self for being too weak.\n2: Perfectly content to have safely escaped.\n3: Angry at " + c.hisHer() + " allies for putting " + c.himHer() + " in that position.");
         else
         if(progress == 9)
-            w.append(t, "1: When " + c.heShe() + " thinks it won't hurt anybody.\n2: When " + c.heShe() + "'s sure " + c.heShe() + " won't be punished for it.\n3: Pretty much always.");
+            w.append(t, String.format("1: When %1$s", c.heShe()) + " thinks it won't hurt anybody.\n2: When " + c.heShe() + "'s sure " + c.heShe() + " won't be punished for it.\n3: Pretty much always.");
         else
         if(progress == 10)
-            w.append(t, "1: By hurting others in front of " + c.himHer() + ".\n2: It isn't possible.\n3: By insulting " + c.hisHer() + " pride.");
+            w.append(t, String.format("1: By hurting others in front of %1$s", c.himHer()) + ".\n2: It isn't possible.\n3: By insulting " + c.hisHer() + " pride.");
         else
         if(progress == 11)
             w.append(t, "1: Charge straight in.\n2: Call for help.\n3: Find a way to even the odds.");
         else
         if(progress == 12)
-            w.append(t, "1: " + c.HeShe() + " attacks anyway.\n2: " + c.HeShe() + " surrenders immediately.\n3: " + c.HeShe() + " cooperates only until " + c.heShe() + " can find a chance to free them.");
+            w.append(t, String.format("1: %1$s", c.HeShe()) + " attacks anyway.\n2: " + c.HeShe() + " surrenders immediately.\n3: " + c.HeShe() + " cooperates only until " + c.heShe() + " can find a chance to free them.");
         else
         if(progress == 13)
-            w.append(t, "1: Only if they make it worth " + c.hisHer() + " while.\n2: " + c.HeShe() + " thinks lying is wrong.\n3: " + c.HeShe() + " will, if " + c.heShe() + " thinks they deserve it.");
+            w.append(t, String.format("1: Only if they make it worth %1$s", c.hisHer()) + " while.\n2: " + c.HeShe() + " thinks lying is wrong.\n3: " + c.HeShe() + " will, if " + c.heShe() + " thinks they deserve it.");
         else
         if(progress == 14)
             w.append(t, "1: Flee, leaving the civilians to their fate.\n2: Laugh it off.\n3: Try to pretend it doesn't bother " + c.himHer() + ".");
         else
         if(progress == 15)
-            w.append(t, "1: " + c.HeShe() + " assumes that the other person is trying to get something from " + c.himHer() + ".\n2: " + c.HeShe() + " accepts it as what " + c.heShe() + " deserves.\n3: " + c.HeShe() + " feels surprised and happy.");
+            w.append(t, String.format("1: %1$s", c.HeShe()) + " assumes that the other person is trying to get something from " + c.himHer() + ".\n2: " + c.HeShe() + " accepts it as what " + c.heShe() + " deserves.\n3: " + c.HeShe() + " feels surprised and happy.");
         else
         if(progress == 16)
             w.append(t, "1: Whenever it protects others.\n2: Whenever there's an appropriate reward.\n3: Almost never.");
         else
         if(progress == 17)
-            w.append(t, "1: " + c.HeShe() + " wants to serve them.\n2: " + c.HeShe() + " wants them to serve " + c.himHer() + ".\n3: " + c.HeShe() + " doesn't care about them.");
+            w.append(t, String.format("1: %1$s", c.HeShe()) + " wants to serve them.\n2: " + c.HeShe() + " wants them to serve " + c.himHer() + ".\n3: " + c.HeShe() + " doesn't care about them.");
         else
         if(progress == 18)
             w.append(t, "1: Reassure everyone.\n2: Blame someone else.\n3: Ignore them.");
         else
         if(progress == 19)
-            w.append(t, "1: Let " + c.hisHer() + " guard down and show off.\n2: Remain slow, steady, and cautious.\n3: Take them out quickly and move on.");
+            w.append(t, String.format("1: Let %1$s", c.hisHer()) + " guard down and show off.\n2: Remain slow, steady, and cautious.\n3: Take them out quickly and move on.");
         else
         if(progress == 20)
-            w.append(t, "1: Take the side of whoever is more useful to " + c.himHer() + ".\n2: Take the side of whoever " + c.heShe() + " agrees with.\n3: Try to help them resolve their differences with each other.");
+            w.append(t, String.format("1: Take the side of whoever is more useful to %1$s", c.himHer()) + ".\n2: Take the side of whoever " + c.heShe() + " agrees with.\n3: Try to help them resolve their differences with each other.");
         else
         if(progress == 21)
-            w.append(t, "1: Exploit them for " + c.hisHer() + " own benefit.\n2: Tolerate them patiently.\n3: Try to help them overcome their flaws.");
+            w.append(t, String.format("1: Exploit them for %1$s", c.hisHer()) + " own benefit.\n2: Tolerate them patiently.\n3: Try to help them overcome their flaws.");
         else
         if(progress == 22)
-            w.append(t, "1: Yes, but " + c.heShe() + " knows " + c.heShe() + "'s not.\n2: Yes, and " + c.heShe() + " thinks it's true.\n3: No, " + c.heShe() + " doesn't.");
+            w.append(t, String.format("1: Yes, but %1$s", c.heShe()) + " knows " + c.heShe() + "'s not.\n2: Yes, and " + c.heShe() + " thinks it's true.\n3: No, " + c.heShe() + " doesn't.");
         else
         if(progress == 23)
             w.append(t, "1: Yes, but not by so much that it can be disproven.\n2: Yes, to an impossible degree.\n3: No, never.");
         else
         if(progress == 24)
-            w.append(t, "1: Whenever " + c.heShe() + " feels like it would be even slightly dangerous for " + c.himHer() + ".\n2: Whenever " + c.heShe() + " judges it unlikely that " + c.heShe() + "'d be able to successfully save them.\n3: Never.");
+            w.append(t, String.format("1: Whenever %1$s", c.heShe()) + " feels like it would be even slightly dangerous for " + c.himHer() + ".\n2: Whenever " + c.heShe() + " judges it unlikely that " + c.heShe() + "'d be able to successfully save them.\n3: Never.");
         else
         if(progress == 25)
             w.append(t, "1: Being mean to them.\n2: Firmly but gently turning them away.\n3: Trying to make them happy without going too far beyond " + c.hisHer() + " comfort zone.");
@@ -1536,13 +1536,13 @@ public class Project extends JFrame
             w.append(t, "1: Bargain for something of equal value.\n2: Whine and beg.\n3: Act cute and sweet-talk them.");
         else
         if(progress == 28)
-            w.append(t, "1: Spend it all on luxuries for " + c.himHer() + "self.\n2: Personally direct it into projects which benefit society as " + c.heShe() + " sees it.\n3: Give most of it away to people who know better than " + c.himHer() + " how it should be spent.");
+            w.append(t, String.format("1: Spend it all on luxuries for %1$s", c.himHer()) + "self.\n2: Personally direct it into projects which benefit society as " + c.heShe() + " sees it.\n3: Give most of it away to people who know better than " + c.himHer() + " how it should be spent.");
         else
         if(progress == 29)
-            w.append(t, "1: Worship " + c.himHer() + ".\n2: Try to make the world a better place.\n3: Do whatever makes them happy.");
+            w.append(t, String.format("1: Worship %1$s", c.himHer()) + ".\n2: Try to make the world a better place.\n3: Do whatever makes them happy.");
         else
         if(progress == 30)
-            w.append(t, "1: Only when " + c.heShe() + " feels like it.\n2: " + c.HeShe() + " tries, but often promises more than " + c.heShe() + " can do.\n3: Yes, " + c.heShe() + "'s trustworthy.");
+            w.append(t, String.format("1: Only when %1$s", c.heShe()) + " feels like it.\n2: " + c.HeShe() + " tries, but often promises more than " + c.heShe() + " can do.\n3: Yes, " + c.heShe() + "'s trustworthy.");
         else
         if(progress == 31)
             w.append(t, "1: Focus even more on not making any mistakes.\n2: Get flustered.\n3: Ignore them.");
@@ -2146,9 +2146,9 @@ public class Project extends JFrame
         if(progress == 0)
         {
             if(c.mainName.equals(c.givenName) || c.mainName.equals(c.familyName))
-                w.append(t, "The first step is to decide what " + c.givenName + " will call " + c.himHer() + "self.  " + c.HeShe() + "'s currently just going by '" + c.mainName + "', but most Chosen pick an alias for themselves.  Which should " + c.heShe() + " choose?");
+                w.append(t, String.format("The first step is to decide what %1$s", c.givenName) + " will call " + c.himHer() + "self.  " + c.HeShe() + "'s currently just going by '" + c.mainName + "', but most Chosen pick an alias for themselves.  Which should " + c.heShe() + " choose?");
             else
-                w.append(t, "The first step is to decide what " + c.givenName + " will call " + c.himHer() + "self.  " + c.HeShe() + " likes the sound of '" + c.mainName + "', but the civilian identities of the Chosen are a matter of public record, so it wouldn't be too strange for " + c.himHer() + " to go by " + c.hisHer() + " real name.  Which should " + c.heShe() + " choose?");
+                w.append(t, String.format("The first step is to decide what %1$s", c.givenName) + " will call " + c.himHer() + "self.  " + c.HeShe() + " likes the sound of '" + c.mainName + "', but the civilian identities of the Chosen are a matter of public record, so it wouldn't be too strange for " + c.himHer() + " to go by " + c.hisHer() + " real name.  Which should " + c.heShe() + " choose?");
             if(!c.mainName.equals(c.givenName))
             {
                 JButton CurrentName = new JButton(c.mainName);
@@ -2200,12 +2200,12 @@ public class Project extends JFrame
         if(progress == 1)
         {
             if(c.nounName.length() > 0)
-                w.append(t, "Most Chosen also use a descriptive title that defines how they see themselves.  " + c.mainName + "'s first idea is to use '" + c.adjectiveName + " " + c.nounName + "', so that " + c.heShe() + "'d be '" + c.adjectiveName + " " + c.nounName + " " + c.mainName + "'.  Should " + c.heShe() + " use something different?");
+                w.append(t, String.format("Most Chosen also use a descriptive title that defines how they see themselves.  %1$s", c.mainName) + "'s first idea is to use '" + c.adjectiveName + " " + c.nounName + "', so that " + c.heShe() + "'d be '" + c.adjectiveName + " " + c.nounName + " " + c.mainName + "'.  Should " + c.heShe() + " use something different?");
             else
             if(c.adjectiveName.equals("none"))
-                w.append(t, "Most Chosen also use a descriptive title that defines how they see themselves.  However, none immediately comes to " + c.mainName + ".  Should " + c.heShe() + " use one at all?");
+                w.append(t, String.format("Most Chosen also use a descriptive title that defines how they see themselves.  However, none immediately comes to %1$s", c.mainName) + ".  Should " + c.heShe() + " use one at all?");
             else
-                w.append(t, "Most Chosen also use a descriptive title that defines how they see themselves.  " + c.mainName + "'s first idea is to use '" + c.adjectiveName + "', so that " + c.heShe() + "'d be '" + c.adjectiveName + " " + c.mainName + "'.  Should " + c.heShe() + " use something different?");
+                w.append(t, String.format("Most Chosen also use a descriptive title that defines how they see themselves.  %1$s", c.mainName) + "'s first idea is to use '" + c.adjectiveName + "', so that " + c.heShe() + "'d be '" + c.adjectiveName + " " + c.mainName + "'.  Should " + c.heShe() + " use something different?");
             JButton CurrentTitle = new JButton(c.adjectiveName);
             if(c.nounName.length() > 0)
                 CurrentTitle.setText(c.adjectiveName + " " + c.nounName);
@@ -2240,15 +2240,15 @@ public class Project extends JFrame
             if(c.adjectiveName.equals("none"))
             {
                 if(c.mainName.equals(c.givenName) || c.mainName.equals(c.familyName))
-                    w.append(t, c.hisHer() + " Chosen form");
+                    w.append(t, String.format("%1$s Chosen form", c.hisHer()));
                 else
                     w.append(t, c.mainName);
             } else
             if(c.nounName.length() > 0)
-                w.append(t, c.adjectiveName + " " + c.nounName + " " + c.mainName);
+                w.append(t, String.format("%1$s ", c.adjectiveName) + c.nounName + " " + c.mainName);
             else
-                w.append(t, c.adjectiveName + " " + c.mainName);
-            w.append(t, ", " + c.givenName + " needs to speak an incantation of " + c.hisHer() + " choice.  The first that comes to " + c.hisHer() + " mind is '" + c.incantation + "'.");
+                w.append(t, String.format("%1$s ", c.adjectiveName) + c.mainName);
+            w.append(t, String.format(", %1$s", c.givenName) + " needs to speak an incantation of " + c.hisHer() + " choice.  The first that comes to " + c.hisHer() + " mind is '" + c.incantation + "'.");
             JButton Keep = new JButton("Keep");
             Keep.addActionListener(new ActionListener() {
                 @Override
@@ -2279,7 +2279,7 @@ public class Project extends JFrame
             if(!c.adjectiveName.equals("none"))
                 result = (new StringBuilder(c.adjectiveName)).append(" ").append(result).toString();
             result = (new StringBuilder(String.valueOf(c.incantation))).append("  ").append(result).append(", transform!").toString();
-            w.append(t, c.givenName + "'s civilian clothes will disintegrate when " + c.heShe() + " says '" + result + "'  In their place, garments and equipment woven of psychic energy representing " + c.hisHer() + " true nature will materialize.  Click 'Change' to give " + c.himHer() + " something different, or click the button for the current item to keep it.\n\nFirst off, what does " + c.heShe() + " wear to cover " + c.hisHer() + " chest?");
+            w.append(t, String.format("%1$s's civilian clothes will disintegrate when ", c.givenName) + c.heShe() + " says '" + result + "'  In their place, garments and equipment woven of psychic energy representing " + c.hisHer() + " true nature will materialize.  Click 'Change' to give " + c.himHer() + " something different, or click the button for the current item to keep it.\n\nFirst off, what does " + c.heShe() + " wear to cover " + c.hisHer() + " chest?");
             JButton Current = new JButton(c.topDesc());
             Current.addActionListener(new ActionListener() {
                 @Override
@@ -2314,9 +2314,9 @@ public class Project extends JFrame
         if(progress == 4)
         {
             if(c.gender.equals("male"))
-                w.append(t, "And in order to get at " + c.hisHer() + " nipples, does one go up " + c.hisHer() + " " + c.topDesc() + ", into " + c.hisHer() + " " + c.topDesc() + ", down " + c.hisHer() + " " + c.topDesc() + ", or around " + c.hisHer() + " " + c.topDesc() + "?");
+                w.append(t, String.format("And in order to get at %1$s", c.hisHer()) + " nipples, does one go up " + c.hisHer() + " " + c.topDesc() + ", into " + c.hisHer() + " " + c.topDesc() + ", down " + c.hisHer() + " " + c.topDesc() + ", or around " + c.hisHer() + " " + c.topDesc() + "?");
             else
-                w.append(t, "And in order to get at " + c.hisHer() + " breasts, does one go up " + c.hisHer() + " " + c.topDesc() + ", into " + c.hisHer() + " " + c.topDesc() + ", down " + c.hisHer() + " " + c.topDesc() + ", or around " + c.hisHer() + " " + c.topDesc() + "?");
+                w.append(t, String.format("And in order to get at %1$s", c.hisHer()) + " breasts, does one go up " + c.hisHer() + " " + c.topDesc() + ", into " + c.hisHer() + " " + c.topDesc() + ", down " + c.hisHer() + " " + c.topDesc() + ", or around " + c.hisHer() + " " + c.topDesc() + "?");
             for(int j = 0; j < 4; j++)
             {
                 String method = "";
@@ -2347,7 +2347,7 @@ public class Project extends JFrame
         } else
         if(progress == 5)
         {
-            w.append(t, "Next, what does " + c.heShe() + " wear to cover " + c.hisHer() + " hips?");
+            w.append(t, String.format("Next, what does %1$s", c.heShe()) + " wear to cover " + c.hisHer() + " hips?");
             JButton Current = new JButton(c.bottomDesc());
             Current.addActionListener(new ActionListener() {
                 @Override
@@ -2384,9 +2384,9 @@ public class Project extends JFrame
         if(progress == 6)
         {
             if(c.gender.equals("female"))
-                w.append(t, "And in order to get at " + c.hisHer() + " pussy, does one go up " + c.hisHer() + " " + c.bottomDesc() + ", into " + c.hisHer() + " " + c.bottomDesc() + ", down " + c.hisHer() + " " + c.bottomDesc() + ", or around " + c.hisHer() + " " + c.bottomDesc() + "?");
+                w.append(t, String.format("And in order to get at %1$s", c.hisHer()) + " pussy, does one go up " + c.hisHer() + " " + c.bottomDesc() + ", into " + c.hisHer() + " " + c.bottomDesc() + ", down " + c.hisHer() + " " + c.bottomDesc() + ", or around " + c.hisHer() + " " + c.bottomDesc() + "?");
             else
-                w.append(t, "And in order to get at " + c.hisHer() + " penis, does one go up " + c.hisHer() + " " + c.bottomDesc() + ", into " + c.hisHer() + " " + c.bottomDesc() + ", down " + c.hisHer() + " " + c.bottomDesc() + ", or around " + c.hisHer() + " " + c.bottomDesc() + "?");
+                w.append(t, String.format("And in order to get at %1$s", c.hisHer()) + " penis, does one go up " + c.hisHer() + " " + c.bottomDesc() + ", into " + c.hisHer() + " " + c.bottomDesc() + ", down " + c.hisHer() + " " + c.bottomDesc() + ", or around " + c.hisHer() + " " + c.bottomDesc() + "?");
             for(int j = 0; j < 4; j++)
             {
                 String method = "";
@@ -2417,7 +2417,7 @@ public class Project extends JFrame
         } else
         if(progress == 7)
         {
-            w.append(t, "What footwear does " + c.mainName + "'s transformation give " + c.himHer() + "?  Enter 'none' (without the quotes) to have " + c.himHer() + " go barefoot.");
+            w.append(t, String.format("What footwear does %1$s", c.mainName) + "'s transformation give " + c.himHer() + "?  Enter 'none' (without the quotes) to have " + c.himHer() + " go barefoot.");
             JButton Current = new JButton(c.feetType);
             Current.addActionListener(new ActionListener() {
                 @Override
@@ -2446,7 +2446,7 @@ public class Project extends JFrame
         } else
         if(progress == 8)
         {
-            w.append(t, "When " + c.heShe() + "'s transformed, " + c.mainName + " is surrounded by '" + c.color + "' light.  Is this alright?");
+            w.append(t, String.format("When %1$s", c.heShe()) + "'s transformed, " + c.mainName + " is surrounded by '" + c.color + "' light.  Is this alright?");
             JButton Keep = new JButton("Yes");
             Keep.addActionListener(new ActionListener() {
                 @Override
@@ -2475,7 +2475,7 @@ public class Project extends JFrame
         } else
         if(progress == 9)
         {
-            w.append(t, "Currently, " + c.mainName + " is set to fight using " + c.hisHer() + " " + c.weapon + ".  Is this okay?");
+            w.append(t, String.format("Currently, %1$s", c.mainName) + " is set to fight using " + c.hisHer() + " " + c.weapon + ".  Is this okay?");
             JButton Keep = new JButton("Yes");
             Keep.addActionListener(new ActionListener() {
                 @Override
@@ -2511,7 +2511,7 @@ public class Project extends JFrame
         } else
         if(progress == 10)
         {
-            w.append(t, "Does " + c.mainName + " swing " + c.hisHer() + " " + c.weapon + ", shoot " + c.hisHer() + " " + c.weapon + ", command " + c.hisHer() + " " + c.weapon + ", or is " + c.hisHer() + " weapon a part of " + c.himHer() + "?");
+            w.append(t, String.format("Does %1$s", c.mainName) + " swing " + c.hisHer() + " " + c.weapon + ", shoot " + c.hisHer() + " " + c.weapon + ", command " + c.hisHer() + " " + c.weapon + ", or is " + c.hisHer() + " weapon a part of " + c.himHer() + "?");
             for(int j = 0; j < 4; j++)
             {
                 String method = "";
@@ -2547,7 +2547,7 @@ public class Project extends JFrame
             w.append(t, "There's one final important question.  ");
             if(c.underType.equals("none"))
             {
-                w.append(t, c.mainName + "'s outfit doesn't currently include panties.  Should that be changed?");
+                w.append(t, String.format("%1$s's outfit doesn't currently include panties.  Should that be changed?", c.mainName));
                 JButton Change = new JButton("Wear panties");
                 Change.addActionListener(new ActionListener() {
                     @Override
@@ -2561,7 +2561,7 @@ public class Project extends JFrame
                 p.add(Change);
             } else
             {
-                w.append(t, "Would you prefer for " + c.mainName + " to stop wearing anything under " + c.hisHer() + " " + c.bottomDesc() + "?");
+                w.append(t, String.format("Would you prefer for %1$s", c.mainName) + " to stop wearing anything under " + c.hisHer() + " " + c.bottomDesc() + "?");
                 JButton Change = new JButton("Wear nothing");
                 Change.addActionListener(new ActionListener() {
                     @Override
@@ -2612,119 +2612,119 @@ public class Project extends JFrame
         {
             if(c.morality > 66)
             {
-                w.append(t, c.givenName + "'s sense of Morality is a ");
+                w.append(t, String.format("%1$s's sense of Morality is a ", c.givenName));
                 w.blueAppend(t, "Core");
-                w.append(t, " part of " + c.hisHer() + " identity");
+                w.append(t, String.format(" part of %1$s", c.hisHer()) + " identity");
             } else
             if(c.morality > 33)
             {
-                w.append(t, c.givenName + "'s Morality is a ");
+                w.append(t, String.format("%1$s's Morality is a ", c.givenName));
                 w.greenAppend(t, "Significant");
-                w.append(t, " component of " + c.hisHer() + " personality");
+                w.append(t, String.format(" component of %1$s", c.hisHer()) + " personality");
             }
             if(c.morality > 33)
             {
                 if(c.gender.equals("male"))
-                    w.append(t, ", so " + c.heShe() + " wouldn't normally engage in 'immoral' activities like violence and sex with other men.  ");
+                    w.append(t, String.format(", so %1$s", c.heShe()) + " wouldn't normally engage in 'immoral' activities like violence and sex with other men.  ");
                 else
-                    w.append(t, ", so " + c.heShe() + " wouldn't normally engage in 'immoral' activities like violence and promiscuity.  ");
+                    w.append(t, String.format(", so %1$s", c.heShe()) + " wouldn't normally engage in 'immoral' activities like violence and promiscuity.  ");
                 if(c.vVirg)
-                    w.append(t, "If this Vulnerability is broken, it means " + c.heShe() + " has already been raped by the time the game starts.");
+                    w.append(t, String.format("If this Vulnerability is broken, it means %1$s", c.heShe()) + " has already been raped by the time the game starts.");
                 else
-                    w.append(t, "However, " + c.heShe() + " is set to have already been raped before the game starts.");
+                    w.append(t, String.format("However, %1$s", c.heShe()) + " is set to have already been raped before the game starts.");
             } else
             {
                 w.append(t, "Morality is only a ");
                 w.redAppend(t, "Minor");
-                w.append(t, " concern for " + c.givenName + ", ");
+                w.append(t, String.format(" concern for %1$s", c.givenName) + ", ");
                 if(c.vVirg)
                 {
                     if(c.gender.equals("male"))
-                        w.append(t, "but " + c.heShe() + " hasn't gotten curious enough to try having sex with other men yet.  Break this Vulnerability to change that.");
+                        w.append(t, String.format("but %1$s", c.heShe()) + " hasn't gotten curious enough to try having sex with other men yet.  Break this Vulnerability to change that.");
                     else
-                        w.append(t, "but " + c.heShe() + " hasn't gotten around to having sex yet.  Break this Vulnerability to change that.");
+                        w.append(t, String.format("but %1$s", c.heShe()) + " hasn't gotten around to having sex yet.  Break this Vulnerability to change that.");
                 } else
                 if(c.gender.equals("male"))
-                    w.append(t, "so " + c.heShe() + " has seen no reason to avoid having sex with other men.  Restore this Vulnerability to have " + c.himHer() + " start as an anal virgin instead.");
+                    w.append(t, String.format("so %1$s", c.heShe()) + " has seen no reason to avoid having sex with other men.  Restore this Vulnerability to have " + c.himHer() + " start as an anal virgin instead.");
                 else
-                    w.append(t, "so " + c.heShe() + " has seen no reason to avoid having sex.  Restore this Vulnerability to have " + c.himHer() + " start as a virgin instead.");
+                    w.append(t, String.format("so %1$s", c.heShe()) + " has seen no reason to avoid having sex.  Restore this Vulnerability to have " + c.himHer() + " start as a virgin instead.");
             }
         } else
         if(progress == 1)
         {
             if(c.innocence > 66)
             {
-                w.append(t, c.givenName + "'s Innocence is a ");
+                w.append(t, String.format("%1$s's Innocence is a ", c.givenName));
                 w.blueAppend(t, "Core");
-                w.append(t, " part of " + c.hisHer() + " identity");
+                w.append(t, String.format(" part of %1$s", c.hisHer()) + " identity");
             } else
             if(c.innocence > 33)
             {
-                w.append(t, c.givenName + " has retained ");
+                w.append(t, String.format("%1$s has retained ", c.givenName));
                 w.greenAppend(t, "Significant");
                 w.append(t, " Innocence regarding sexual matters");
             }
             if(c.innocence > 33)
             {
-                w.append(t, ", so " + c.heShe() + " wouldn't normally have any idea how good it can feel to be forced to cum during battle.  ");
+                w.append(t, String.format(", so %1$s", c.heShe()) + " wouldn't normally have any idea how good it can feel to be forced to cum during battle.  ");
                 if(c.cVirg)
-                    w.append(t, "If this Vulnerability is broken, it means " + c.heShe() + " has already become addicted to this feeling.");
+                    w.append(t, String.format("If this Vulnerability is broken, it means %1$s", c.heShe()) + " has already become addicted to this feeling.");
                 else
-                    w.append(t, "However, " + c.heShe() + " is set to have already become addicted to this feeling when the game starts.");
+                    w.append(t, String.format("However, %1$s", c.heShe()) + " is set to have already become addicted to this feeling when the game starts.");
             } else
             {
-                w.append(t, c.givenName + " has retained only a ");
+                w.append(t, String.format("%1$s has retained only a ", c.givenName));
                 w.redAppend(t, "Minor");
                 w.append(t, " amount of Innocence");
                 if(c.cVirg)
-                    w.append(t, ", but " + c.heShe() + "'s still sane enough to hold back from cumming during battle.  Break this Vulnerability to change that.");
+                    w.append(t, String.format(", but %1$s", c.heShe()) + "'s still sane enough to hold back from cumming during battle.  Break this Vulnerability to change that.");
                 else
-                    w.append(t, ", so " + c.heShe() + " happily allows " + c.himHer() + "self to cum during battle.  Restore this Vulnerability to have " + c.himHer() + " start out with some restraint.");
+                    w.append(t, String.format(", so %1$s", c.heShe()) + " happily allows " + c.himHer() + "self to cum during battle.  Restore this Vulnerability to have " + c.himHer() + " start out with some restraint.");
             }
         } else
         if(progress == 2)
         {
             if(c.confidence > 66)
             {
-                w.append(t, c.givenName + "'s Confidence is a ");
+                w.append(t, String.format("%1$s's Confidence is a ", c.givenName));
                 w.blueAppend(t, "Core");
-                w.append(t, " part of " + c.hisHer() + " identity");
+                w.append(t, String.format(" part of %1$s", c.hisHer()) + " identity");
             } else
             if(c.confidence > 33)
             {
-                w.append(t, c.givenName + " has a ");
+                w.append(t, String.format("%1$s has a ", c.givenName));
                 w.greenAppend(t, "Significant");
                 w.append(t, " amount of Confidence");
             }
             if(c.confidence > 33)
             {
-                w.append(t, " because of " + c.hisHer() + " past victories against the Demons.  ");
+                w.append(t, String.format(" because of %1$s", c.hisHer()) + " past victories against the Demons.  ");
                 if(c.aVirg)
-                    w.append(t, "If this Vulnerability is broken, it means " + c.heShe() + " has suffered a crushing defeat and been tortured before.");
+                    w.append(t, String.format("If this Vulnerability is broken, it means %1$s", c.heShe()) + " has suffered a crushing defeat and been tortured before.");
                 else
-                    w.append(t, "However, " + c.heShe() + " is set to have already had " + c.hisHer() + " self-image shaken by being defeated and tortured recently.");
+                    w.append(t, String.format("However, %1$s", c.heShe()) + " is set to have already had " + c.hisHer() + " self-image shaken by being defeated and tortured recently.");
             } else
             {
-                w.append(t, c.givenName + " has only a ");
+                w.append(t, String.format("%1$s has only a ", c.givenName));
                 w.redAppend(t, "Minor");
                 w.append(t, " amount of Confidence left");
                 if(c.aVirg)
-                    w.append(t, ", but this is due purely to " + c.hisHer() + " weak personality.  Break this Vulnerability to have " + c.hisHer() + " self-esteem damaged by a recent capture and torture.");
+                    w.append(t, String.format(", but this is due purely to %1$s", c.hisHer()) + " weak personality.  Break this Vulnerability to have " + c.hisHer() + " self-esteem damaged by a recent capture and torture.");
                 else
-                    w.append(t, ", largely because of " + c.hisHer() + " recent defeat and torture at the hands of the Demons.  Restore this Vulnerability to erase this event and let " + c.himHer() + " start out with at least a little bit of hope.");
+                    w.append(t, String.format(", largely because of %1$s", c.hisHer()) + " recent defeat and torture at the hands of the Demons.  Restore this Vulnerability to erase this event and let " + c.himHer() + " start out with at least a little bit of hope.");
             }
         } else
         if(progress == 3)
         {
             if(c.dignity > 66)
             {
-                w.append(t, c.givenName + "'s need for Dignity is a ");
+                w.append(t, String.format("%1$s's need for Dignity is a ", c.givenName));
                 w.blueAppend(t, "Core");
-                w.append(t, " part of " + c.hisHer() + " identity");
+                w.append(t, String.format(" part of %1$s", c.hisHer()) + " identity");
             } else
             if(c.dignity > 33)
             {
-                w.append(t, c.givenName + " maintains a ");
+                w.append(t, String.format("%1$s maintains a ", c.givenName));
                 w.greenAppend(t, "Significant");
                 w.append(t, " amount of Dignity");
             }
@@ -2732,18 +2732,18 @@ public class Project extends JFrame
             {
                 w.append(t, ", wanting to be viewed as a mighty, unassailable warrior.  ");
                 if(c.modest)
-                    w.append(t, "If this Vulnerability is broken, it means " + c.heShe() + " has been stripped and had " + c.hisHer() + " humiliation broadcast to the world.");
+                    w.append(t, String.format("If this Vulnerability is broken, it means %1$s", c.heShe()) + " has been stripped and had " + c.hisHer() + " humiliation broadcast to the world.");
                 else
-                    w.append(t, "However, " + c.heShe() + " is set to have already had " + c.hisHer() + " public image damaged by being stripped during battle and having the footage broadcast to the world.");
+                    w.append(t, String.format("However, %1$s", c.heShe()) + " is set to have already had " + c.hisHer() + " public image damaged by being stripped during battle and having the footage broadcast to the world.");
             } else
             {
-                w.append(t, c.givenName + " has only a ");
+                w.append(t, String.format("%1$s has only a ", c.givenName));
                 w.redAppend(t, "Minor");
-                w.append(t, " interest in retaining " + c.hisHer() + " dignity");
+                w.append(t, String.format(" interest in retaining %1$s", c.hisHer()) + " dignity");
                 if(c.modest)
-                    w.append(t, ", but " + c.heShe() + " has managed to avoid any public humiliation so far, mostly through pure luck.  Break this Vulnerability to have footage of " + c.hisHer() + " defeat and stripping be broadcast to the world.");
+                    w.append(t, String.format(", but %1$s", c.heShe()) + " has managed to avoid any public humiliation so far, mostly through pure luck.  Break this Vulnerability to have footage of " + c.hisHer() + " defeat and stripping be broadcast to the world.");
                 else
-                    w.append(t, ", and as a result, " + c.heShe() + " hasn't managed to stop footage of " + c.hisHer() + " defeat and stripping from being spread across the world.  Restore this Vulnerability to make it so that " + c.heShe() + " hasn't yet been captured in such a shameful state.");
+                    w.append(t, String.format(", and as a result, %1$s", c.heShe()) + " hasn't managed to stop footage of " + c.hisHer() + " defeat and stripping from being spread across the world.  Restore this Vulnerability to make it so that " + c.heShe() + " hasn't yet been captured in such a shameful state.");
             }
         }
         if(progress == 0 && c.vVirg || progress == 1 && c.cVirg || progress == 2 && c.aVirg || progress == 3 && c.modest)
@@ -3500,7 +3500,7 @@ public class Project extends JFrame
             {
                 w.append(t, "\n\n" + w.getSeparator() + "\n\n");
                 if(w.usedForsaken != null)
-                    w.append(t, w.usedForsaken.mainName + " is currently prepared to lead your forces into battle.  ");
+                    w.append(t, String.format("%1$s is currently prepared to lead your forces into battle.  ", w.usedForsaken.mainName));
                 if(w.loopComplete)
                 {
                     if(w.day <= 50 - 3 * w.eventOffset)
@@ -3876,11 +3876,11 @@ public class Project extends JFrame
             w.append(t, " (formerly known as");
             if(!x.adjectiveName.equals("none"))
             {
-                w.append(t, " " + x.adjectiveName);
+                w.append(t, String.format(" %1$s", x.adjectiveName));
                 if(x.nounName.length() > 0)
-                    w.append(t, " " + x.nounName);
+                    w.append(t, String.format(" %1$s", x.nounName));
             }
-            w.append(t, " " + x.originalName + ")");
+            w.append(t, String.format(" %1$s", x.originalName) + ")");
         }
         if(x.familyName.length() > 0)
         {
@@ -3889,9 +3889,9 @@ public class Project extends JFrame
             else
                 w.append(t, "\nReal name: ");
             if(x.filthyGaijin)
-                w.append(t, x.givenName + " " + x.familyName);
+                w.append(t, String.format("%1$s ", x.givenName) + x.familyName);
             else
-                w.append(t, String.valueOf(x.familyName) + " " + x.givenName);
+                w.append(t, String.format("%1$s ", String.valueOf(x.familyName)) + x.givenName);
         } else
         if(!x.givenName.equals(x.mainName) && !x.givenName.equals(x.originalName))
             w.append(t, "\nReal name: " + x.givenName);
@@ -3928,12 +3928,12 @@ public class Project extends JFrame
             w.append(t, "N/A");
         else
         if(x.strongestOrgasm < 600)
-            w.append(t, String.valueOf(x.strongestOrgasm / 10) + "." + String.valueOf(x.strongestOrgasm % 10) + " seconds");
+            w.append(t, String.format("%1$s.", String.valueOf(x.strongestOrgasm / 10)) + String.valueOf(x.strongestOrgasm % 10) + " seconds");
         else
         if(x.strongestOrgasm < 36000)
-            w.append(t, String.valueOf(x.strongestOrgasm / 600) + " minutes " + String.valueOf((x.strongestOrgasm % 600) / 10) + " seconds");
+            w.append(t, String.format("%1$s minutes ", String.valueOf(x.strongestOrgasm / 600)) + String.valueOf((x.strongestOrgasm % 600) / 10) + " seconds");
         else
-            w.append(t, String.valueOf(x.strongestOrgasm / 36000) + " hours " + String.valueOf((x.strongestOrgasm % 36000) / 600) + " minutes");
+            w.append(t, String.format("%1$s hours ", String.valueOf(x.strongestOrgasm / 36000)) + String.valueOf((x.strongestOrgasm % 36000) / 600) + " minutes");
         w.append(t, "\nSeen naked by: " + x.timesExposed + " people (" + x.timesExposedSelf + " with permission)");
         if(x.gender != Forsaken.Gender.MALE)
         {
@@ -4024,7 +4024,7 @@ public class Project extends JFrame
             w.append(t, "Considered powerless and worthless");
         w.append(t, (new StringBuilder(")\n\nWhat would you like to speak to ")).append(x.mainName).append(" about?").toString());
         if(w.active && !w.loopComplete)
-            w.append(t, "  Note that training " + x.himHer() + " will take the entire day.");
+            w.append(t, String.format("  Note that training %1$s", x.himHer()) + " will take the entire day.");
         JButton Self = new JButton("Herself");
         if(x.gender == Forsaken.Gender.MALE)
             Self.setText("Himself");
@@ -4124,9 +4124,9 @@ public class Project extends JFrame
                 p.removeAll();
                 w.append(t, "\n\n" + w.getSeparator() + "\n\n");
                 if(x.gender == Forsaken.Gender.MALE)
-                    w.append(t, x.mainName + " will have " + x.hisHer() + " body modified into single-purpose breeding stock for the Demons, and you will never interact directly with " + x.himHer() + " again.  The terror of facing a similar fate will motivate any other Forsaken to obey you much more faithfully in the short-term.  Is this okay?");
+                    w.append(t, String.format("%1$s will have ", x.mainName) + x.hisHer() + " body modified into single-purpose breeding stock for the Demons, and you will never interact directly with " + x.himHer() + " again.  The terror of facing a similar fate will motivate any other Forsaken to obey you much more faithfully in the short-term.  Is this okay?");
                 else
-                    w.append(t, x.mainName + " will spend the rest of " + x.hisHer() + " life as single-purpose breeding stock for the Demons, and you will never interact directly with " + x.himHer() + " again.  The terror of facing a similar fate will motivate any other Forsaken to obey you much more faithfully in the short-term.  Is this okay?");
+                    w.append(t, String.format("%1$s will spend the rest of ", x.mainName) + x.hisHer() + " life as single-purpose breeding stock for the Demons, and you will never interact directly with " + x.himHer() + " again.  The terror of facing a similar fate will motivate any other Forsaken to obey you much more faithfully in the short-term.  Is this okay?");
                 JButton Confirm = new JButton("Confirm");
                 Confirm.addActionListener(new ActionListener() {
                     @Override
@@ -4210,7 +4210,7 @@ public class Project extends JFrame
         if(participants.length != 1)
             w.append(t, "them?");
         else
-            w.append(t, participants[0].himHer() + "?");
+            w.append(t, String.format("%1$s?", participants[0].himHer()));
         final int parts[] = new int[14];
         parts[Body.MOUTH] = 1;
         parts[Body.HAND] = 2;
@@ -4460,7 +4460,7 @@ public class Project extends JFrame
             if(s.sceneText[i].length > 0)
                 types++;
 
-        w.append(t, "Core Vulnerability Break: " + types + "/20\n");
+        w.append(t, String.format("Core Vulnerability Break: %1$s", types) + "/20\n");
         w.append(t, "Core Vulnerability Distortions: ");
         int found = 0;
         if(s.sceneText[21].length > 0)
@@ -4473,7 +4473,7 @@ public class Project extends JFrame
             if(s.sceneText[i].length > 0)
                 types++;
 
-        w.append(t, "Daily Vignettes: " + types + "/" + String.valueOf(16));
+        w.append(t, String.format("Daily Vignettes: %1$s", types) + "/" + String.valueOf(16));
         w.append(t, "\n\nWhich type of scene would you like to view?");
     }
 
@@ -4977,7 +4977,7 @@ public class Project extends JFrame
             w.evacNotice = false;
         } else
         {
-            w.append(t, "Evacuation: " + w.getEvacStatus(true) + "\n");
+            w.append(t, String.format("Evacuation: %1$s", w.getEvacStatus(true)) + "\n");
         }
         Chosen trappedChosen = null;
         for(int i = 0; i < 3; i++)
@@ -4988,7 +4988,7 @@ public class Project extends JFrame
                     trappedChosen = w.getCombatants()[i];
             }
 
-        w.append(t, "Extermination: " + w.getExterminationStatus(true) + "\n\n");
+        w.append(t, String.format("Extermination: %1$s", w.getExterminationStatus(true)) + "\n\n");
         if(w.evacuationProgress < w.evacuationComplete)
         {
             w.append(t, "The desperate battle continues...\n");
@@ -5039,7 +5039,7 @@ public class Project extends JFrame
                                 survivor = w.getCast()[i];
 
                     if(defeated == 2 && w.finalBattle)
-                        w.append(t, "With " + survivor.hisHer() + " allies defeated and no hope of winning on " + survivor.hisHer() + " own, " + survivor.getMainName() + " is preparing to make use of the hole in the Demons' formation to escape!  " + survivor.HeShe() + "'ll get away next turn unless " + survivor.heShe() + "'s surrounded or captured.\n");
+                        w.append(t, String.format("With %1$s", survivor.hisHer()) + " allies defeated and no hope of winning on " + survivor.hisHer() + " own, " + survivor.getMainName() + " is preparing to make use of the hole in the Demons' formation to escape!  " + survivor.HeShe() + "'ll get away next turn unless " + survivor.heShe() + "'s surrounded or captured.\n");
                     else
                         w.append(t, "The reanimated Demons are fighting their last stand!  Combat will end next turn unless one of the Chosen is surrounded or captured.\n");
                 } else
@@ -5089,12 +5089,12 @@ public class Project extends JFrame
                         if(victim2 == null)
                         {
                             if(killer2 == null)
-                                w.append(t, killer1.getMainName() + " waits for " + victim1.getMainName() + "'s imminent escape so that the two of them can work together to end this.\n");
+                                w.append(t, String.format("%1$s waits for ", killer1.getMainName()) + victim1.getMainName() + "'s imminent escape so that the two of them can work together to end this.\n");
                             else
-                                w.append(t, killer1.getMainName() + " and " + killer2.getMainName() + " wait for " + victim1.getMainName() + " to escape and rejoin their formation.\n");
+                                w.append(t, String.format("%1$s and ", killer1.getMainName()) + killer2.getMainName() + " wait for " + victim1.getMainName() + " to escape and rejoin their formation.\n");
                         } else
                         {
-                            w.append(t, killer1.getMainName() + " waits for " + victim1.getMainName() + " and " + victim2.getMainName() + " to escape and form up so they can all work together to end this.\n");
+                            w.append(t, String.format("%1$s waits for ", killer1.getMainName()) + victim1.getMainName() + " and " + victim2.getMainName() + " to escape and form up so they can all work together to end this.\n");
                         }
                     } else
                     {
@@ -5117,38 +5117,38 @@ public class Project extends JFrame
                                         if(w.getRelationship(killer1.getNumber(), victim1.getNumber()) == 4)
                                         {
                                             if(w.getRelationship(killer1.getNumber(), victim2.getNumber()) == 4)
-                                                w.append(t, killer1.getMainName() + " calls out to the other Chosen, urging them to escape before they get caught up in " + killer1.hisHer() + " final attack.");
+                                                w.append(t, String.format("%1$s calls out to the other Chosen, urging them to escape before they get caught up in ", killer1.getMainName()) + killer1.hisHer() + " final attack.");
                                             else
-                                                w.append(t, killer1.getMainName() + " prepares to launch a devastating attack in order to finish the battle, even though " + victim2.getMainName() + " is in the way.");
+                                                w.append(t, String.format("%1$s prepares to launch a devastating attack in order to finish the battle, even though ", killer1.getMainName()) + victim2.getMainName() + " is in the way.");
                                         } else
                                         {
-                                            w.append(t, killer1.getMainName() + " prepares to launch a devastating attack in order to finish the battle, even though " + victim1.getMainName() + " is in the way.");
+                                            w.append(t, String.format("%1$s prepares to launch a devastating attack in order to finish the battle, even though ", killer1.getMainName()) + victim1.getMainName() + " is in the way.");
                                         }
                                     } else
                                     {
-                                        w.append(t, killer1.getMainName() + " prepares to launch a devastating attack in order to finish the battle, even though " + victim1.getMainName() + " and " + victim2.getMainName() + " are in the way.");
+                                        w.append(t, String.format("%1$s prepares to launch a devastating attack in order to finish the battle, even though ", killer1.getMainName()) + victim1.getMainName() + " and " + victim2.getMainName() + " are in the way.");
                                     }
                                 } else
                                 if(duration2 > duration1)
-                                    w.append(t, killer1.getMainName() + " buys time for " + victim2.getMainName() + " to escape so that the two of them can work together to end this.");
+                                    w.append(t, String.format("%1$s buys time for ", killer1.getMainName()) + victim2.getMainName() + " to escape so that the two of them can work together to end this.");
                                 else
                                 if(w.getTechs()[40].isOwned() && !killer1.hesitated && w.getRelationship(killer1.getNumber(), victim1.getNumber()) == 4)
-                                    w.append(t, killer1.getMainName() + " calls out to " + victim1.getMainName() + ", urging " + victim1.himHer() + " to escape before " + victim1.heShe() + " gets caught up in " + killer1.getMainName() + "'s final attack.");
+                                    w.append(t, String.format("%1$s calls out to ", killer1.getMainName()) + victim1.getMainName() + ", urging " + victim1.himHer() + " to escape before " + victim1.heShe() + " gets caught up in " + killer1.getMainName() + "'s final attack.");
                                 else
-                                    w.append(t, killer1.getMainName() + " prepares to launch a devastating attack so that the battle can be finished after " + victim2.getMainName() + " escapes, even though " + victim1.getMainName() + " is in the way.");
+                                    w.append(t, String.format("%1$s prepares to launch a devastating attack so that the battle can be finished after ", killer1.getMainName()) + victim2.getMainName() + " escapes, even though " + victim1.getMainName() + " is in the way.");
                             } else
                             if(w.getRelationship(killer1.getNumber(), victim2.getNumber()) == -4 || victim2.isImpregnated() || victim2.isHypnotized() || victim2.isDrained() || victim2.isParasitized() || victim2.temptReq < 100_000L || victim2.dissociationReq < 10 || victim2.resolve < 50)
                             {
                                 if(duration1 > duration2)
-                                    w.append(t, killer1.getMainName() + " buys time for " + victim1.getMainName() + " to escape so that the two of them can work together to end this.");
+                                    w.append(t, String.format("%1$s buys time for ", killer1.getMainName()) + victim1.getMainName() + " to escape so that the two of them can work together to end this.");
                                 else
                                 if(w.getTechs()[40].isOwned() && !killer1.hesitated && w.getRelationship(killer1.getNumber(), victim2.getNumber()) == 4)
-                                    w.append(t, killer1.getMainName() + " calls out to " + victim2.getMainName() + ", urging " + victim2.himHer() + " to escape before " + victim2.heShe() + " gets caught up in " + killer1.getMainName() + "'s final attack.");
+                                    w.append(t, String.format("%1$s calls out to ", killer1.getMainName()) + victim2.getMainName() + ", urging " + victim2.himHer() + " to escape before " + victim2.heShe() + " gets caught up in " + killer1.getMainName() + "'s final attack.");
                                 else
-                                    w.append(t, killer1.getMainName() + " prepares to launch a devastating attack in order to finish the battle, even though " + victim2.getMainName() + " is in the way.");
+                                    w.append(t, String.format("%1$s prepares to launch a devastating attack in order to finish the battle, even though ", killer1.getMainName()) + victim2.getMainName() + " is in the way.");
                             } else
                             {
-                                w.append(t, killer1.getMainName() + " buys time for the other two Chosen to escape so that they all can work together to end this.");
+                                w.append(t, String.format("%1$s buys time for the other two Chosen to escape so that they all can work together to end this.", killer1.getMainName()));
                             }
                         } else
                         if(killer2 != null)
@@ -5160,40 +5160,40 @@ public class Project extends JFrame
                                     if(w.getRelationship(killer1.getNumber(), victim1.getNumber()) == 4 && !killer1.hesitated)
                                     {
                                         if(w.getRelationship(killer2.getNumber(), victim1.getNumber()) == 4 && !killer2.hesitated)
-                                            w.append(t, killer1.getMainName() + " and " + killer2.getMainName() + " call out to " + victim1.getMainName() + ", urging " + victim1.himHer() + " to escape before " + victim1.heShe() + " gets caught up in their final attack.");
+                                            w.append(t, String.format("%1$s and ", killer1.getMainName()) + killer2.getMainName() + " call out to " + victim1.getMainName() + ", urging " + victim1.himHer() + " to escape before " + victim1.heShe() + " gets caught up in their final attack.");
                                         else
-                                            w.append(t, victim1.getMainName() + "'s captivity is preventing the other Chosen from ending the battle, and while " + killer1.getMainName() + " looks conflicted, " + killer2.getMainName() + " is preparing to attack anyway.");
+                                            w.append(t, String.format("%1$s's captivity is preventing the other Chosen from ending the battle, and while ", victim1.getMainName()) + killer1.getMainName() + " looks conflicted, " + killer2.getMainName() + " is preparing to attack anyway.");
                                     } else
                                     if(w.getRelationship(killer2.getNumber(), victim1.getNumber()) == 4 && !killer2.hesitated)
-                                        w.append(t, victim1.getMainName() + "'s captivity is preventing the other Chosen from ending the battle, and while " + killer2.getMainName() + " looks conflicted, " + killer1.getMainName() + " is preparing to attack anyway.");
+                                        w.append(t, String.format("%1$s's captivity is preventing the other Chosen from ending the battle, and while ", victim1.getMainName()) + killer2.getMainName() + " looks conflicted, " + killer1.getMainName() + " is preparing to attack anyway.");
                                     else
-                                        w.append(t, killer1.getMainName() + " and " + killer2.getMainName() + " prepare to launch their most devastating attacks in order to finish the battle, even though " + victim1.getMainName() + " is in the way.");
+                                        w.append(t, String.format("%1$s and ", killer1.getMainName()) + killer2.getMainName() + " prepare to launch their most devastating attacks in order to finish the battle, even though " + victim1.getMainName() + " is in the way.");
                                 } else
                                 {
-                                    w.append(t, killer1.getMainName() + " and " + killer2.getMainName() + " prepare to launch their most devastating attacks in order to finish the battle, even though " + victim1.getMainName() + " is in the way.");
+                                    w.append(t, String.format("%1$s and ", killer1.getMainName()) + killer2.getMainName() + " prepare to launch their most devastating attacks in order to finish the battle, even though " + victim1.getMainName() + " is in the way.");
                                 }
                             } else
                             if(w.getRelationship(killer1.getNumber(), victim1.getNumber()) == -4)
                             {
                                 if(w.getRelationship(killer2.getNumber(), victim1.getNumber()) == -4)
-                                    w.append(t, killer1.getMainName() + " and " + killer2.getMainName() + " prepare to launch their most devastating attacks in order to finish the battle, even though " + victim1.getMainName() + " is in the way.");
+                                    w.append(t, String.format("%1$s and ", killer1.getMainName()) + killer2.getMainName() + " prepare to launch their most devastating attacks in order to finish the battle, even though " + victim1.getMainName() + " is in the way.");
                                 else
-                                    w.append(t, victim1.getMainName() + "'s captivity is preventing the other Chosen from ending the battle, and while " + killer2.getMainName() + " isn't willing to sacrifice " + victim1.getMainName() + "'s life in order to finish things sooner, " + killer1.getMainName() + " is.");
+                                    w.append(t, String.format("%1$s's captivity is preventing the other Chosen from ending the battle, and while ", victim1.getMainName()) + killer2.getMainName() + " isn't willing to sacrifice " + victim1.getMainName() + "'s life in order to finish things sooner, " + killer1.getMainName() + " is.");
                             } else
                             if(w.getRelationship(killer2.getNumber(), victim1.getNumber()) == -4)
-                                w.append(t, victim1.getMainName() + "'s captivity is preventing the other Chosen from ending the battle, and while " + killer1.getMainName() + " isn't willing to sacrifice " + victim1.getMainName() + "'s life in order to finish things sooner, " + killer2.getMainName() + " is.");
+                                w.append(t, String.format("%1$s's captivity is preventing the other Chosen from ending the battle, and while ", victim1.getMainName()) + killer1.getMainName() + " isn't willing to sacrifice " + victim1.getMainName() + "'s life in order to finish things sooner, " + killer2.getMainName() + " is.");
                             else
-                                w.append(t, victim1.getMainName() + "'s captivity is preventing the other Chosen from ending the battle, but " + killer1.getMainName() + " and " + killer2.getMainName() + " aren't willing to sacrifice " + victim1.hisHer() + " life just to finish things a little bit sooner.");
+                                w.append(t, String.format("%1$s's captivity is preventing the other Chosen from ending the battle, but ", victim1.getMainName()) + killer1.getMainName() + " and " + killer2.getMainName() + " aren't willing to sacrifice " + victim1.hisHer() + " life just to finish things a little bit sooner.");
                         } else
                         if(w.getRelationship(killer1.getNumber(), victim1.getNumber()) == -4 || victim1.isImpregnated() || victim1.isHypnotized() || victim1.isDrained() || victim1.isParasitized() || victim1.temptReq < 100_000L || victim1.dissociationReq < 10 || victim1.resolve < 50)
                         {
                             if(w.getTechs()[40].isOwned() && !killer1.hesitated && w.getRelationship(killer1.getNumber(), victim1.getNumber()) == 4)
-                                w.append(t, killer1.getMainName() + " calls out to " + victim1.getMainName() + ", urging " + victim1.himHer() + " to escape before " + victim1.heShe() + " gets caught up in " + killer1.getMainName() + "'s final attack.");
+                                w.append(t, String.format("%1$s calls out to ", killer1.getMainName()) + victim1.getMainName() + ", urging " + victim1.himHer() + " to escape before " + victim1.heShe() + " gets caught up in " + killer1.getMainName() + "'s final attack.");
                             else
-                                w.append(t, killer1.getMainName() + " prepares to launch a devastating attack in order to finish the battle, even though " + victim1.getMainName() + " is in the way.");
+                                w.append(t, String.format("%1$s prepares to launch a devastating attack in order to finish the battle, even though ", killer1.getMainName()) + victim1.getMainName() + " is in the way.");
                         } else
                         {
-                            w.append(t, killer1.getMainName() + " buys time for " + victim1.getMainName() + " to escape so that the two of them can work together to finish this.");
+                            w.append(t, String.format("%1$s buys time for ", killer1.getMainName()) + victim1.getMainName() + " to escape so that the two of them can work together to finish this.");
                         }
                         w.append(t, "\n");
                     }
@@ -5205,7 +5205,7 @@ public class Project extends JFrame
                         if(c != null && (c.isSurrounded() || c.isCaptured()))
                             c = null;
                     }
-                    w.append(t, c.getMainName() + " can't finish clearing out the Demons due to the risk of hitting the trapped " + trappedChosen.getMainName() + " with friendly fire!\n");
+                    w.append(t, String.format("%1$s can't finish clearing out the Demons due to the risk of hitting the trapped ", c.getMainName()) + trappedChosen.getMainName() + " with friendly fire!\n");
                 }
             } else
             {
@@ -5220,30 +5220,30 @@ public class Project extends JFrame
                     plural = true;
                 if(w.exterminationMultiplier == 100)
                 {
-                    w.append(t, "With the civilians evacuated, " + c.getMainName());
+                    w.append(t, String.format("With the civilians evacuated, %1$s", c.getMainName()));
                     if(plural)
                         w.append(t, " and the other Chosen can start drawing on their full power!");
                     else
-                        w.append(t, " can start drawing on " + c.hisHer() + " full power!");
+                        w.append(t, String.format(" can start drawing on %1$s", c.hisHer()) + " full power!");
                 } else
                 if(w.exterminationMultiplier == 150)
-                    w.append(t, c.getMainName() + "'s attacks grow stronger and stronger, shattering windows and setting off alarms!");
+                    w.append(t, String.format("%1$s's attacks grow stronger and stronger, shattering windows and setting off alarms!", c.getMainName()));
                 else
                 if(w.exterminationMultiplier == 225)
-                    w.append(t, c.getMainName() + " moves like a blur, taking down a wide swath of Demons!");
+                    w.append(t, String.format("%1$s moves like a blur, taking down a wide swath of Demons!", c.getMainName()));
                 else
                 if(w.exterminationMultiplier == 337)
-                    w.append(t, "A blast of energy from " + c.getMainName() + " brings down a small building in a cloud of rubble!");
+                    w.append(t, String.format("A blast of energy from %1$s", c.getMainName()) + " brings down a small building in a cloud of rubble!");
                 else
                 if(w.exterminationMultiplier == 505)
-                    w.append(t, "The area is riddled with craters caused by the power of " + c.getMainName() + "'s attacks!");
+                    w.append(t, String.format("The area is riddled with craters caused by the power of %1$s", c.getMainName()) + "'s attacks!");
                 else
                 if(w.exterminationMultiplier == 757)
-                    w.append(t, "The district is consumed by an enormous explosion as " + c.getMainName() + " blasts away the Demons!");
+                    w.append(t, String.format("The district is consumed by an enormous explosion as %1$s", c.getMainName()) + " blasts away the Demons!");
                 w.append(t, "\n(Extermination power");
                 if(w.cast[1] != null)
                     w.append(t, " per Chosen");
-                w.append(t, ": " + String.valueOf((w.exterminationPerChosen * w.exterminationMultiplier) / 100) + ")");
+                w.append(t, String.format(": %1$s", String.valueOf((w.exterminationPerChosen * w.exterminationMultiplier) / 100)) + ")");
                 w.append(t, "\n");
             }
         }
@@ -5329,11 +5329,11 @@ public class Project extends JFrame
                         w.purpleAppend(t, w.getCombatants()[i].getMainName() + ": Open to Surround");
                 } else
                 if(w.getCombatants()[i].getDefenseLevel() > 9000)
-                    w.append(t, w.getCombatants()[i].getMainName() + ": Flying Above Battlefield");
+                    w.append(t, String.format("%1$s: Flying Above Battlefield", w.getCombatants()[i].getMainName()));
                 else
-                    w.append(t, w.getCombatants()[i].getMainName() + ": Opening Level " + String.valueOf(w.getCombatants()[i].getFEAROpening(w) + w.getCombatants()[i].getPAINOpening() + w.getCombatants()[i].getDISGOpening() + w.getCombatants()[i].getSHAMOpening(w)) + " vs. Defense Level " + w.getCombatants()[i].getDefenseLevel());
+                    w.append(t, String.format("%1$s: Opening Level ", w.getCombatants()[i].getMainName()) + String.valueOf(w.getCombatants()[i].getFEAROpening(w) + w.getCombatants()[i].getPAINOpening() + w.getCombatants()[i].getDISGOpening() + w.getCombatants()[i].getSHAMOpening(w)) + " vs. Defense Level " + w.getCombatants()[i].getDefenseLevel());
                 if(w.finalBattle && w.getCombatants()[i].resolve > 0 && w.getCombatants()[i].alive)
-                    w.append(t, " [Resolve at " + w.getCombatants()[i].resolve + "%]");
+                    w.append(t, String.format(" [Resolve at %1$s", w.getCombatants()[i].resolve) + "%]");
             }
 
         if(w.usedForsaken != null)
@@ -5570,7 +5570,7 @@ public class Project extends JFrame
                     p.removeAll();
                     w.append(t, "\n\n" + w.getSeparator() + "\n\n");
                     if(occupiedBonus > 0)
-                        w.append(t, "Retreat and end the battle immediately for +" + occupiedBonus + " Evil Energy?");
+                        w.append(t, String.format("Retreat and end the battle immediately for +%1$s", occupiedBonus) + " Evil Energy?");
                     else
                         w.append(t, "Really retreat?  You will not gain any bonus Evil Energy!");
                     JButton Confirm = new JButton("Confirm");
@@ -5636,9 +5636,9 @@ public class Project extends JFrame
                             if(w.getCast()[1] == null)
                             {
                                 if(trappedNumber == 0)
-                                    w.append(t, "However, " + free[0] + " is quick to pursue, cutting your forces down from behind and stopping them from taking any significant number of civilians back to the hive.");
+                                    w.append(t, String.format("However, %1$s", free[0]) + " is quick to pursue, cutting your forces down from behind and stopping them from taking any significant number of civilians back to the hive.");
                                 else
-                                    w.append(t, String.valueOf(trapped[0]) + " is unable to follow until plenty of civilians are already on their way to the hive.");
+                                    w.append(t, String.format("%1$s is unable to follow until plenty of civilians are already on their way to the hive.", String.valueOf(trapped[0])));
                             } else
                             if(w.getCast()[2] == null)
                             {
@@ -5646,7 +5646,7 @@ public class Project extends JFrame
                                     w.append(t, "However, the two Chosen cut your forces down from behind, freeing most of the civilians before they can be brought to the hive.");
                                 else
                                 if(trappedNumber == 1)
-                                    w.append(t, "With " + trapped[0] + " unable to give chase, the risk of splitting the team forces " + free[0] + " to give up and let you take the civilians to the hive.");
+                                    w.append(t, String.format("With %1$s", trapped[0]) + " unable to give chase, the risk of splitting the team forces " + free[0] + " to give up and let you take the civilians to the hive.");
                                 else
                                     w.append(t, "The Chosen have to finish dealing with their own problems before they can try to stop you, and by then, plenty of your forces have escaped.");
                             } else
@@ -5654,10 +5654,10 @@ public class Project extends JFrame
                                 w.append(t, "However, the three Chosen cut your forces down from behind, freeing most of the civilians before they can be brought to the hive.");
                             else
                             if(trappedNumber == 1)
-                                w.append(t, free[0] + " and " + free[1] + " try to give chase, but with " + trapped[0] + " unable to follow, they're forced to give up due to the risk of splitting the team.");
+                                w.append(t, String.format("%1$s and ", free[0]) + free[1] + " try to give chase, but with " + trapped[0] + " unable to follow, they're forced to give up due to the risk of splitting the team.");
                             else
                             if(trappedNumber == 2)
-                                w.append(t, free[0] + " tries to stop them, but with " + trapped[0] + " and " + trapped[1] + " unable to help, you're able to get plenty of victims to the hive.");
+                                w.append(t, String.format("%1$s tries to stop them, but with ", free[0]) + trapped[0] + " and " + trapped[1] + " unable to help, you're able to get plenty of victims to the hive.");
                             else
                                 w.append(t, "The Chosen have to finish dealing with their own problems before they can try to stop you, and by then, plenty of your forces have escaped.");
                             if(occupiedBonus > 0)
@@ -6537,7 +6537,7 @@ public class Project extends JFrame
                     }
                     w.append(t, "\n\n" + w.getSeparator() + "\n\nWhat should the Thralls do after surrounding " + c.getMainName() + "?");
                     if(defilers > 1)
-                        w.append(t, "  " + defilers + " defiler actions possible.");
+                        w.append(t, String.format("  %1$s", defilers) + " defiler actions possible.");
                     else
                     if(defilers == 1)
                         w.append(t, "  1 defiler action possible.");
@@ -6559,7 +6559,7 @@ public class Project extends JFrame
                                     secondName = w.getCombatants()[i].getMainName();
                                 }
 
-                        w.append(t, "  Orgy with " + firstName + " and " + secondName);
+                        w.append(t, String.format("  Orgy with %1$s", firstName) + " and " + secondName);
                         if(duration > opening)
                         {
                             difference = duration - opening;
@@ -6568,10 +6568,10 @@ public class Project extends JFrame
                         if(opening > duration)
                         {
                             difference = opening - duration;
-                            w.append(t, " will allow " + c.getMainName());
+                            w.append(t, String.format(" will allow %1$s", c.getMainName()));
                         }
                         if(difference > 1)
-                            w.append(t, " to escape " + difference + " turns early.");
+                            w.append(t, String.format(" to escape %1$s", difference) + " turns early.");
                         else
                         if(difference == 1)
                             w.append(t, " to escape 1 turn early.");
@@ -6605,19 +6605,19 @@ public class Project extends JFrame
                                     defilementType = "Broadcast";
                                 if(defilementType.length() > 0)
                                 {
-                                    w.append(t, "  " + defilementType + " with " + w.getCombatants()[i].getMainName());
+                                    w.append(t, String.format("  %1$s", defilementType) + " with " + w.getCombatants()[i].getMainName());
                                     if(opening > w.getCombatants()[i].getSurroundDuration())
                                     {
-                                        w.append(t, " will allow " + c.getMainName());
+                                        w.append(t, String.format(" will allow %1$s", c.getMainName()));
                                         difference = opening - w.getCombatants()[i].getSurroundDuration();
                                     } else
                                     if(w.getCombatants()[i].getSurroundDuration() > opening)
                                     {
-                                        w.append(t, " will allow " + w.getCombatants()[i].getMainName());
+                                        w.append(t, String.format(" will allow %1$s", w.getCombatants()[i].getMainName()));
                                         difference = w.getCombatants()[i].getSurroundDuration() - opening;
                                     }
                                     if(difference > 1)
-                                        w.append(t, " to escape " + difference + " turns early.");
+                                        w.append(t, String.format(" to escape %1$s", difference) + " turns early.");
                                     else
                                     if(difference == 1)
                                         w.append(t, " to escape 1 turn early.");
@@ -6917,7 +6917,7 @@ public class Project extends JFrame
                     }
                     w.append(t, "\n\n" + w.getSeparator() + "\n\nWhat should the Thralls do after surrounding " + c.getMainName() + "?");
                     if(defilers > 1)
-                        w.append(t, "  " + defilers + " defiler actions possible.");
+                        w.append(t, String.format("  %1$s", defilers) + " defiler actions possible.");
                     else
                     if(defilers == 1)
                         w.append(t, "  1 defiler action possible.");
@@ -6939,7 +6939,7 @@ public class Project extends JFrame
                                     secondName = w.getCombatants()[i].getMainName();
                                 }
 
-                        w.append(t, "  Orgy with " + firstName + " and " + secondName);
+                        w.append(t, String.format("  Orgy with %1$s", firstName) + " and " + secondName);
                         if(duration > opening)
                         {
                             difference = duration - opening;
@@ -6948,10 +6948,10 @@ public class Project extends JFrame
                         if(opening > duration)
                         {
                             difference = opening - duration;
-                            w.append(t, " will allow " + c.getMainName());
+                            w.append(t, String.format(" will allow %1$s", c.getMainName()));
                         }
                         if(difference > 1)
-                            w.append(t, " to escape " + difference + " turns early.");
+                            w.append(t, String.format(" to escape %1$s", difference) + " turns early.");
                         else
                         if(difference == 1)
                             w.append(t, " to escape 1 turn early.");
@@ -6985,19 +6985,19 @@ public class Project extends JFrame
                                     defilementType = "Broadcast";
                                 if(defilementType.length() > 0)
                                 {
-                                    w.append(t, "  " + defilementType + " with " + w.getCombatants()[i].getMainName());
+                                    w.append(t, String.format("  %1$s", defilementType) + " with " + w.getCombatants()[i].getMainName());
                                     if(opening > w.getCombatants()[i].getSurroundDuration())
                                     {
-                                        w.append(t, " will allow " + c.getMainName());
+                                        w.append(t, String.format(" will allow %1$s", c.getMainName()));
                                         difference = opening - w.getCombatants()[i].getSurroundDuration();
                                     } else
                                     if(w.getCombatants()[i].getSurroundDuration() > opening)
                                     {
-                                        w.append(t, " will allow " + w.getCombatants()[i].getMainName());
+                                        w.append(t, String.format(" will allow %1$s", w.getCombatants()[i].getMainName()));
                                         difference = w.getCombatants()[i].getSurroundDuration() - opening;
                                     }
                                     if(difference > 1)
-                                        w.append(t, " to escape " + difference + " turns early.");
+                                        w.append(t, String.format(" to escape %1$s", difference) + " turns early.");
                                     else
                                     if(difference == 1)
                                         w.append(t, " to escape 1 turn early.");
@@ -7047,10 +7047,10 @@ public class Project extends JFrame
             if(w.usedForsaken != null && c.defenseLevel < 9000)
             {
                 if(w.usedForsaken.injured == 0 && w.commanderFree())
-                    w.append(t, "  " + w.usedForsaken.mainName + " can ");
+                    w.append(t, String.format("  %1$s", w.usedForsaken.mainName) + " can ");
                 else
-                    w.append(t, "  Once " + w.usedForsaken.mainName + " is ready, " + w.usedForsaken.heShe() + " will be able to ");
-                w.append(t, "capture " + c.mainName + " for " + w.usedForsaken.compatibility(c) + " rounds.");
+                    w.append(t, String.format("  Once %1$s", w.usedForsaken.mainName) + " is ready, " + w.usedForsaken.heShe() + " will be able to ");
+                w.append(t, String.format("capture %1$s", c.mainName) + " for " + w.usedForsaken.compatibility(c) + " rounds.");
             }
         }
         JButton Examine = new JButton(ExamineAction) {
@@ -7137,26 +7137,26 @@ public class Project extends JFrame
         {
             w.append(t, "\n\nThe Thralls have been driven into a frenzy ");
             if(c.isInseminated())
-                w.append(t, "inseminating " + c.getMainName());
+                w.append(t, String.format("inseminating %1$s", c.getMainName()));
             else
             if(c.isOrgasming())
-                w.append(t, "forcing " + c.getMainName() + " to orgasm");
+                w.append(t, String.format("forcing %1$s", c.getMainName()) + " to orgasm");
             else
             if(c.isSodomized())
             {
                 if(w.tickle())
-                    w.append(t, "forcing " + c.getMainName() + " to laugh");
+                    w.append(t, String.format("forcing %1$s", c.getMainName()) + " to laugh");
                 else
                 if(c.getGender().equals("male"))
-                    w.append(t, "torturing " + c.getMainName());
+                    w.append(t, String.format("torturing %1$s", c.getMainName()));
                 else
-                    w.append(t, "sodomizing " + c.getMainName());
+                    w.append(t, String.format("sodomizing %1$s", c.getMainName()));
             } else
             if(c.isBroadcasted())
-                w.append(t, "broadcasting " + c.getMainName() + "'s humiliation");
+                w.append(t, String.format("broadcasting %1$s", c.getMainName()) + "'s humiliation");
             else
             if(c.tempted)
-                w.append(t, "giving " + c.mainName + " all the pleasure " + c.heShe() + " wants");
+                w.append(t, String.format("giving %1$s", c.mainName) + " all the pleasure " + c.heShe() + " wants");
             w.append(t, ".  Any additional orders would simply confuse them right now.");
         } else
         if(c.isSurrounded())
@@ -7433,7 +7433,7 @@ public class Project extends JFrame
             if(defilers > 0)
             {
                 if(defilers > 1)
-                    w.append(t, "  " + defilers + " defiler actions possible.");
+                    w.append(t, String.format("  %1$s", defilers) + " defiler actions possible.");
                 else
                 if(defilers == 1)
                     w.append(t, "  1 defiler action possible.");
@@ -7455,7 +7455,7 @@ public class Project extends JFrame
                                 secondName = w.getCombatants()[i].getMainName();
                             }
 
-                    w.append(t, "  Orgy with " + firstName + " and " + secondName);
+                    w.append(t, String.format("  Orgy with %1$s", firstName) + " and " + secondName);
                     if(duration > opening)
                     {
                         difference = duration - opening;
@@ -7464,10 +7464,10 @@ public class Project extends JFrame
                     if(opening > duration)
                     {
                         difference = opening - duration;
-                        w.append(t, " will allow " + c.getMainName());
+                        w.append(t, String.format(" will allow %1$s", c.getMainName()));
                     }
                     if(difference > 1)
-                        w.append(t, " to escape " + difference + " turns early.");
+                        w.append(t, String.format(" to escape %1$s", difference) + " turns early.");
                     else
                     if(difference == 1)
                         w.append(t, " to escape 1 turn early.");
@@ -7501,19 +7501,19 @@ public class Project extends JFrame
                                 defilementType = "Broadcast";
                             if(defilementType.length() > 0)
                             {
-                                w.append(t, "  " + defilementType + " with " + w.getCombatants()[i].getMainName());
+                                w.append(t, String.format("  %1$s", defilementType) + " with " + w.getCombatants()[i].getMainName());
                                 if(opening > w.getCombatants()[i].getSurroundDuration())
                                 {
-                                    w.append(t, " will allow " + c.getMainName());
+                                    w.append(t, String.format(" will allow %1$s", c.getMainName()));
                                     difference = opening - w.getCombatants()[i].getSurroundDuration();
                                 } else
                                 if(w.getCombatants()[i].getSurroundDuration() > opening)
                                 {
-                                    w.append(t, " will allow " + w.getCombatants()[i].getMainName());
+                                    w.append(t, String.format(" will allow %1$s", w.getCombatants()[i].getMainName()));
                                     difference = w.getCombatants()[i].getSurroundDuration() - opening;
                                 }
                                 if(difference > 1)
-                                    w.append(t, " to escape " + difference + " turns early.");
+                                    w.append(t, String.format(" to escape %1$s", difference) + " turns early.");
                                 else
                                 if(difference == 1)
                                     w.append(t, " to escape 1 turn early.");
@@ -8062,7 +8062,7 @@ public class Project extends JFrame
                     p.removeAll();
                     w.append(t, "\n\n" + w.getSeparator() + "\n\n");
                     if(occupiedBonus > 0)
-                        w.append(t, "Retreat and end the battle immediately for +" + occupiedBonus + " Evil Energy?");
+                        w.append(t, String.format("Retreat and end the battle immediately for +%1$s", occupiedBonus) + " Evil Energy?");
                     else
                         w.append(t, "Really retreat?  You will not gain any bonus Evil Energy!");
                     JButton Confirm = new JButton("Confirm");
@@ -8128,9 +8128,9 @@ public class Project extends JFrame
                             if(w.getCast()[1] == null)
                             {
                                 if(trappedNumber == 0)
-                                    w.append(t, "However, " + free[0] + " is quick to pursue, cutting your forces down from behind and stopping them from taking any significant number of civilians back to the hive.");
+                                    w.append(t, String.format("However, %1$s", free[0]) + " is quick to pursue, cutting your forces down from behind and stopping them from taking any significant number of civilians back to the hive.");
                                 else
-                                    w.append(t, String.valueOf(trapped[0]) + " is unable to follow until plenty of civilians are already on their way to the hive.");
+                                    w.append(t, String.format("%1$s is unable to follow until plenty of civilians are already on their way to the hive.", String.valueOf(trapped[0])));
                             } else
                             if(w.getCast()[2] == null)
                             {
@@ -8138,7 +8138,7 @@ public class Project extends JFrame
                                     w.append(t, "However, the two Chosen cut your forces down from behind, freeing most of the civilians before they can be brought to the hive.");
                                 else
                                 if(trappedNumber == 1)
-                                    w.append(t, "With " + trapped[0] + " unable to give chase, the risk of splitting the team forces " + free[0] + " to give up and let you take the civilians to the hive.");
+                                    w.append(t, String.format("With %1$s", trapped[0]) + " unable to give chase, the risk of splitting the team forces " + free[0] + " to give up and let you take the civilians to the hive.");
                                 else
                                     w.append(t, "The Chosen have to finish dealing with their own problems before they can try to stop you, and by then, plenty of your forces have escaped.");
                             } else
@@ -8146,10 +8146,10 @@ public class Project extends JFrame
                                 w.append(t, "However, the three Chosen cut your forces down from behind, freeing most of the civilians before they can be brought to the hive.");
                             else
                             if(trappedNumber == 1)
-                                w.append(t, free[0] + " and " + free[1] + " try to give chase, but with " + trapped[0] + " unable to follow, they're forced to give up due to the risk of splitting the team.");
+                                w.append(t, String.format("%1$s and ", free[0]) + free[1] + " try to give chase, but with " + trapped[0] + " unable to follow, they're forced to give up due to the risk of splitting the team.");
                             else
                             if(trappedNumber == 2)
-                                w.append(t, free[0] + " tries to stop them, but with " + trapped[0] + " and " + trapped[1] + " unable to help, you're able to get plenty of victims to the hive.");
+                                w.append(t, String.format("%1$s tries to stop them, but with ", free[0]) + trapped[0] + " and " + trapped[1] + " unable to help, you're able to get plenty of victims to the hive.");
                             else
                                 w.append(t, "The Chosen have to finish dealing with their own problems before they can try to stop you, and by then, plenty of your forces have escaped.");
                             if(occupiedBonus > 0)
@@ -8297,9 +8297,9 @@ public class Project extends JFrame
                 w.append(t, "Finally, all three of the Chosen have surrendered to your forces.  This is a flawless victory - you couldn't have hoped for a better result.  By the time the reinforcements from other cities arrive, your Demonic Barrier has already reached full strength, and no more Chosen can enter without immediately losing their powers and joining the ranks of your captives.\n\nThe Demons escort " + w.getCast()[0].getMainName() + ", " + w.getCast()[1].getMainName() + ", and " + w.getCast()[2].getMainName() + " to your throne room, where you will begin to train them into your own loyal servants...");
             else
             if(captured == 2)
-                w.append(t, "With both " + survivors[0].getMainName() + " and " + survivors[1].getMainName() + " broken, your victory is complete.  By the time the reinforcements from other cities arrive, your Demonic Barrier has already reached full strength, and no more Chosen can enter without immediately losing their powers and joining the ranks of your captives.\n\n" + killed[0].getMainName() + "'s death was unfortunate - " + killed[0].heShe() + " would have made an excellent servant.  But you still have " + survivors[0].getMainName() + " and " + survivors[1].getMainName() + ".  The Demons escort them to your throne room so that their training can begin...");
+                w.append(t, String.format("With both %1$s", survivors[0].getMainName()) + " and " + survivors[1].getMainName() + " broken, your victory is complete.  By the time the reinforcements from other cities arrive, your Demonic Barrier has already reached full strength, and no more Chosen can enter without immediately losing their powers and joining the ranks of your captives.\n\n" + killed[0].getMainName() + "'s death was unfortunate - " + killed[0].heShe() + " would have made an excellent servant.  But you still have " + survivors[0].getMainName() + " and " + survivors[1].getMainName() + ".  The Demons escort them to your throne room so that their training can begin...");
             else
-                w.append(t, "With " + survivors[0].getMainName() + " defeated, your takeover of the city is complete.  By the time the reinforcements from other cities arrive, your Demonic Barrier has already reached full strength, and no more Chosen can enter without immediately losing their powers and joining the ranks of your captives.\n\nThe deaths of " + killed[0].getMainName() + " and " + killed[1].getMainName() + " were very unfortunate - they would have made excellent servants.  But you still managed to hold onto one prize.  The Demons escort " + survivors[0].getMainName() + " into your throne room so that " + survivors[0].hisHer() + " training can begin...");
+                w.append(t, String.format("With %1$s", survivors[0].getMainName()) + " defeated, your takeover of the city is complete.  By the time the reinforcements from other cities arrive, your Demonic Barrier has already reached full strength, and no more Chosen can enter without immediately losing their powers and joining the ranks of your captives.\n\nThe deaths of " + killed[0].getMainName() + " and " + killed[1].getMainName() + " were very unfortunate - they would have made excellent servants.  But you still managed to hold onto one prize.  The Demons escort " + survivors[0].getMainName() + " into your throne room so that " + survivors[0].hisHer() + " training can begin...");
             EndFinalBattle(t, p, f, w);
         } else
         if(moreTurns)
@@ -8439,7 +8439,7 @@ public class Project extends JFrame
                         if(arrivingChosen.type == Chosen.Species.SUPERIOR)
                             w.append(t, "A sudden ripple passes through your army, a psychic shockwave carrying an emotion rarely felt by Demons: fear.  Those with voices let loose roars of dismay, and the rest slither backward to gain some distance from the newcomer on the rooftop on the edge of the battlefield.\n\nRendered indistinct by the sun at its back, the newcomer's silhouette could belong to anyone at all.  But even though there's nothing special about the flash of light and the thunderclap of the Chosen's transformation, the Demons recognize the voice that rings out, and they know that one of their most dangerous foes has arrived.\n\n");
                         else
-                            w.append(t, "As the battle rages below, an unfamiliar figure arrives on the nearby rooftops.  After watching for a moment, " + arrivingChosen.heShe() + " makes a fateful decision.  A loud crack rings through the air, light shining from above!\n\n");
+                            w.append(t, String.format("As the battle rages below, an unfamiliar figure arrives on the nearby rooftops.  After watching for a moment, %1$s", arrivingChosen.heShe()) + " makes a fateful decision.  A loud crack rings through the air, light shining from above!\n\n");
                         arrivingChosen.say(t, "\"" + arrivingChosen.announcement() + "\"\n\n");
                         arrivingChosen.transform(t, w);
                         w.append(t, "\n\n");
@@ -8556,7 +8556,7 @@ public class Project extends JFrame
                                         }
 
                                         if(w.getCombatants()[1] == null)
-                                            w.append(t, c.getMainName() + " returns");
+                                            w.append(t, String.format("%1$s returns", c.getMainName()));
                                         else
                                             w.append(t, "the Chosen return");
                                         w.append(t, " home to prepare for tomorrow's fight.\n\n");
@@ -8625,7 +8625,7 @@ public class Project extends JFrame
                             }
 
                             if(w.getCombatants()[1] == null)
-                                w.append(t, c.getMainName() + " returns");
+                                w.append(t, String.format("%1$s returns", c.getMainName()));
                             else
                                 w.append(t, "the Chosen return");
                             w.append(t, " home to prepare for tomorrow's fight.\n\n");
@@ -8919,11 +8919,11 @@ public class Project extends JFrame
             if(cores == 0 && sigs == 0 && minors == 0)
                 w.append(t, " none");
             if(cores > 0)
-                w.append(t, " " + cores + " Core");
+                w.append(t, String.format(" %1$s", cores) + " Core");
             if(sigs > 0)
-                w.append(t, " " + sigs + " Significant");
+                w.append(t, String.format(" %1$s", sigs) + " Significant");
             if(minors > 0)
-                w.append(t, " " + minors + " Minor");
+                w.append(t, String.format(" %1$s", minors) + " Minor");
         } else
         if(!w.getCast()[0].isIntroduced())
         {
@@ -10163,7 +10163,7 @@ public class Project extends JFrame
             w.usedForsaken = null;
         }
         if(w.campaign)
-            w.append(t, String.valueOf(w.cityName) + " - ");
+            w.append(t, String.format("%1$s - ", String.valueOf(w.cityName)));
         clearPortraits();
         if(w.usedForsaken != null)
         {
@@ -10183,7 +10183,7 @@ public class Project extends JFrame
             else
                 changePortrait(w.usedForsaken.gender, w.usedForsaken.type, true, true, w, nameDisplay, 3, Emotion.JOY, Emotion.FOCUS);
         }
-        w.append(t, "Day " + w.getDay());
+        w.append(t, String.format("Day %1$s", w.getDay()));
         if(w.clampPercent != 100)
             w.append(t, "\nDamage Mitigation: " + String.valueOf(100 - w.clampPercent) + "% per level");
         if(w.eventOffset != 0)
@@ -10782,7 +10782,7 @@ public class Project extends JFrame
                     {
                         if(w.getCast()[i].getImpregnationEffectiveness() < 1000)
                             w.append(t, " ");
-                        w.append(t, " " + w.getCast()[i].getImpregnationEffectiveness() + "%");
+                        w.append(t, String.format(" %1$s", w.getCast()[i].getImpregnationEffectiveness()) + "%");
                     }
                     w.append(t, "\nINN" + gap + " ");
                     if(w.getCast()[i].getInnocence() > 66)
@@ -10833,7 +10833,7 @@ public class Project extends JFrame
                     {
                         if(w.getCast()[i].getHypnosisEffectiveness() < 1000)
                             w.append(t, " ");
-                        w.append(t, " " + w.getCast()[i].getHypnosisEffectiveness() + "%");
+                        w.append(t, String.format(" %1$s", w.getCast()[i].getHypnosisEffectiveness()) + "%");
                     }
                     w.append(t, "\nCON" + gap + " ");
                     if(w.getCast()[i].getConfidence() > 66)
@@ -10884,7 +10884,7 @@ public class Project extends JFrame
                     {
                         if(w.getCast()[i].getDrainEffectiveness() < 1000)
                             w.append(t, " ");
-                        w.append(t, " " + w.getCast()[i].getDrainEffectiveness() + "%");
+                        w.append(t, String.format(" %1$s", w.getCast()[i].getDrainEffectiveness()) + "%");
                     }
                     w.append(t, "\nDIG" + gap + " ");
                     if(w.getCast()[i].getDignity() > 66)
@@ -10935,7 +10935,7 @@ public class Project extends JFrame
                     {
                         if(w.getCast()[i].getParasitismEffectiveness() < 1000)
                             w.append(t, " ");
-                        w.append(t, " " + w.getCast()[i].getParasitismEffectiveness() + "%");
+                        w.append(t, String.format(" %1$s", w.getCast()[i].getParasitismEffectiveness()) + "%");
                     }
                 }
 
@@ -11609,7 +11609,7 @@ public class Project extends JFrame
                 {
                     w.append(t, "\n\nFile " + String.valueOf(i + 1) + ": " + foundWorlds[i].getSaveTitle());
                     if(foundWorlds[i].getParScore() > 0L)
-                        w.append(t, " (Par " + foundWorlds[i].getCast()[0].condensedFormat(foundWorlds[i].getParScore()) + ")");
+                        w.append(t, String.format(" (Par %1$s", foundWorlds[i].getCast()[0].condensedFormat(foundWorlds[i].getParScore())) + ")");
                     final int worldSelected = i;
                     final WorldState worldList[] = foundWorlds;
                     JButton Access = new JButton((new StringBuilder()).append(i + 1).toString());
@@ -11908,12 +11908,12 @@ public class Project extends JFrame
                                     newRoster[j] = copies[j - w.save.customRoster.length];
 
                             w.save.customRoster = newRoster;
-                            w.append(t, "Added " + saveFile.getSaves()[fileSelected].getCast()[0].mainName);
+                            w.append(t, String.format("Added %1$s", saveFile.getSaves()[fileSelected].getCast()[0].mainName));
                             if(found == 3)
-                                w.append(t, ", " + saveFile.getSaves()[fileSelected].getCast()[1].mainName + ", and " + saveFile.getSaves()[fileSelected].getCast()[2].mainName);
+                                w.append(t, String.format(", %1$s", saveFile.getSaves()[fileSelected].getCast()[1].mainName) + ", and " + saveFile.getSaves()[fileSelected].getCast()[2].mainName);
                             else
                             if(found == 2)
-                                w.append(t, " and " + saveFile.getSaves()[fileSelected].getCast()[1].mainName);
+                                w.append(t, String.format(" and %1$s", saveFile.getSaves()[fileSelected].getCast()[1].mainName));
                             w.append(t, " to the custom roster.");
                         } else
                         {
@@ -12811,7 +12811,7 @@ public class Project extends JFrame
         w.append(t, "\n\n" + w.getSeparator() + "\n\n");
         if(w.getTechs()[0].isOwned())
         {
-            w.append(t, c.mainName + "'s ");
+            w.append(t, String.format("%1$s's ", c.mainName));
             c.printVulnerabilities(t, p, f, w);
             w.append(t, "\n\n");
         }
@@ -12829,7 +12829,7 @@ public class Project extends JFrame
             int actualCost = w.usedForsaken.motivationCost();
             if(w.usedForsaken.isFormerFriend(w.getCast()[0]) || w.usedForsaken.isFormerFriend(w.getCast()[1]) || w.usedForsaken.isFormerFriend(w.getCast()[2]))
                 actualCost *= 2;
-            w.append(t, "Commanding Forsaken: " + w.usedForsaken.mainName + "\nStamina: " + String.valueOf(w.usedForsaken.stamina / 10) + "." + String.valueOf(w.usedForsaken.stamina % 10) + "%\nMotivation: " + String.valueOf(w.usedForsaken.motivation / 10) + "." + String.valueOf(w.usedForsaken.motivation % 10) + "%\nCost: 20% Stamina, " + String.valueOf(actualCost / 10) + "." + String.valueOf(actualCost % 10) + "% Motivation, " + w.usedForsaken.EECost() + " EE\n" + w.usedForsaken.describeCombatStyle(w, false) + "\nReputation Strength: " + String.valueOf(200 - w.usedForsaken.disgrace * 2) + "%\nTarget Compatibilities:");
+            w.append(t, String.format("Commanding Forsaken: %1$s", w.usedForsaken.mainName) + "\nStamina: " + String.valueOf(w.usedForsaken.stamina / 10) + "." + String.valueOf(w.usedForsaken.stamina % 10) + "%\nMotivation: " + String.valueOf(w.usedForsaken.motivation / 10) + "." + String.valueOf(w.usedForsaken.motivation % 10) + "%\nCost: 20% Stamina, " + String.valueOf(actualCost / 10) + "." + String.valueOf(actualCost % 10) + "% Motivation, " + w.usedForsaken.EECost() + " EE\n" + w.usedForsaken.describeCombatStyle(w, false) + "\nReputation Strength: " + String.valueOf(200 - w.usedForsaken.disgrace * 2) + "%\nTarget Compatibilities:");
             for(int j = 0; j < 3; j++)
                 if(w.getCast()[j] != null)
                 {
@@ -12859,11 +12859,11 @@ public class Project extends JFrame
             w.append(t, "\n\nYou will invade a neighborhood along " + c.getMainName() + "'s patrol path in order to lure " + c.himHer() + " in an attack " + c.himHer() + ".  " + w.usedForsaken.mainName + " will lie in wait, ready to engage " + c.himHer() + " in battle upon your order.");
         } else
         {
-            w.append(t, "You will invade a neighborhood along " + c.getMainName() + "'s patrol path in order to lure " + c.himHer() + " in and attack " + c.himHer() + ".");
+            w.append(t, String.format("You will invade a neighborhood along %1$s", c.getMainName()) + "'s patrol path in order to lure " + c.himHer() + " in and attack " + c.himHer() + ".");
         }
         if(immediateAction)
         {
-            w.append(t, "Which action do you want the Thralls to perform once they grab " + c.himHer() + "?");
+            w.append(t, String.format("Which action do you want the Thralls to perform once they grab %1$s", c.himHer()) + "?");
             for(int i = 0; i < 4; i++)
             {
                 final int type = i;
@@ -12893,7 +12893,7 @@ public class Project extends JFrame
                         p.removeAll();
                         w.append(t, "\n\n" + w.getSeparator() + "\n\n");
                         w.printCommanderSummary(t, c);
-                        w.append(t, "  The Thralls will begin by using " + finalTorment + " on " + c.himHer() + ".  Is this okay?");
+                        w.append(t, String.format("  The Thralls will begin by using %1$s", finalTorment) + " on " + c.himHer() + ".  Is this okay?");
                         JButton Confirm = new JButton("Confirm");
                         Confirm.addActionListener(new ActionListener() {
                             @Override
@@ -12993,7 +12993,7 @@ public class Project extends JFrame
             } else
             {
                 w.append(t, "\n\n" + w.getSeparator() + "\n\n");
-                w.append(t, "You lure " + c.getMainName() + " into battle with an attack on a neighborhood along " + c.hisHer() + " patrol route.  ");
+                w.append(t, String.format("You lure %1$s", c.getMainName()) + " into battle with an attack on a neighborhood along " + c.hisHer() + " patrol route.  ");
                 if(w.upgradedCommander())
                 {
                     w.append(t, "Then, you spring your ambush.  ");
@@ -13002,9 +13002,9 @@ public class Project extends JFrame
                 {
                     w.append(t, "Then, with your Commander body on the battlefield, you set up an ambush.  ");
                     if(w.getCapturesPossible() > 0)
-                        w.append(t, "In the chaos, your body takes a serious injury, but with " + c.getMainName() + " surrounded, the battle has already progressed in the Demons' favor.");
+                        w.append(t, String.format("In the chaos, your body takes a serious injury, but with %1$s", c.getMainName()) + " surrounded, the battle has already progressed in the Demons' favor.");
                     else
-                        w.append(t, "In the chaos, your body is destroyed, but with " + c.getMainName() + " surrounded, the battle has already progressed in the Demons' favor.");
+                        w.append(t, String.format("In the chaos, your body is destroyed, but with %1$s", c.getMainName()) + " surrounded, the battle has already progressed in the Demons' favor.");
                     c.setSurrounded(w);
                     c.printSurroundedLine(t, w, c.getThisAttack());
                 }
@@ -13051,9 +13051,9 @@ public class Project extends JFrame
                 {
                     w.append(t, "Led by your Commander body, your minions emerge from their hiding places and rush in from all directions.  ");
                     if(w.getCapturesPossible() > 0)
-                        w.append(t, "In the chaos, your body takes a serious injury, but with " + c.getMainName() + " surrounded, the battle has already progressed in the Demons' favor.");
+                        w.append(t, String.format("In the chaos, your body takes a serious injury, but with %1$s", c.getMainName()) + " surrounded, the battle has already progressed in the Demons' favor.");
                     else
-                        w.append(t, "In the chaos, your body is destroyed, but with " + c.getMainName() + " surrounded, the battle has already progressed in the Demons' favor.");
+                        w.append(t, String.format("In the chaos, your body is destroyed, but with %1$s", c.getMainName()) + " surrounded, the battle has already progressed in the Demons' favor.");
                     c.setSurrounded(w);
                     c.printSurroundedLine(t, w, c.getThisAttack());
                 }
@@ -13237,9 +13237,9 @@ public class Project extends JFrame
                 second = escaped[0];
             }
             if(fallen[0] != null)
-                w.append(t, "With " + fallen[0].getMainName() + "'s defeat, a powerful evil energy is gathering on the battlefield.  The tip of the Demonic spire begins to glow, preparing to release one final pulse of corruption that will cement your domination over this region of reality.  However, at the same time, " + escaped[0].getMainName() + " and " + escaped[1].getMainName() + " have cleared out the last of your Demonic forces, and they're ready to launch their counterattack.");
+                w.append(t, String.format("With %1$s", fallen[0].getMainName()) + "'s defeat, a powerful evil energy is gathering on the battlefield.  The tip of the Demonic spire begins to glow, preparing to release one final pulse of corruption that will cement your domination over this region of reality.  However, at the same time, " + escaped[0].getMainName() + " and " + escaped[1].getMainName() + " have cleared out the last of your Demonic forces, and they're ready to launch their counterattack.");
             else
-                w.append(t, "With every moment that passes, the Demonic spire grows upward, gathering power and deepening your domination over this region of reality.  However, by sacrificing " + killed[0].getMainName() + "'s life, " + escaped[0].getMainName() + " and " + escaped[1].getMainName() + " have exterminated all the surrounding Demons, and they're ready to launch their counterattack.");
+                w.append(t, String.format("With every moment that passes, the Demonic spire grows upward, gathering power and deepening your domination over this region of reality.  However, by sacrificing %1$s", killed[0].getMainName()) + "'s life, " + escaped[0].getMainName() + " and " + escaped[1].getMainName() + " have exterminated all the surrounding Demons, and they're ready to launch their counterattack.");
             as9 = new String[5];
             as9[0] = first.mainName;
             as9[1] = second.mainName;
@@ -13252,7 +13252,7 @@ public class Project extends JFrame
                 changePortrait(second.convertGender(), second.type, false, false, w, as10, 1, Emotion.FOCUS, Emotion.FOCUS);
                 first.say(t, "\n\n\"If we work together, I think we can still stop it!  Back me up!\"\n\n");
                 second.say(t, "\"Got it!  I'm right behind you!\"\n\n");
-                w.append(t, first.getMainName() + " charges forward, blazing brighter than the sun as " + first.heShe() + " draws on as much psychic energy as " + first.heShe() + " can.  " + second.getMainName() + " has a hand on " + first.hisHer() + " shoulder, pushing " + first.himHer() + " forward as they fly together.  The two of them blast through the base of the tower, leaving an enormous hole behind them.  And with its lower structure compromised, the shaft begins to topple to one side.  It lands on the city with a deafening crash, kicking up a huge cloud of debris.  As quickly as that, the Demonic presence over the city lifts.\n\nThe battle is over.  But even though this Demon Lord has been defeated, the scars left on the hearts of the Chosen won't heal so easily.  ");
+                w.append(t, String.format("%1$s charges forward, blazing brighter than the sun as ", first.getMainName()) + first.heShe() + " draws on as much psychic energy as " + first.heShe() + " can.  " + second.getMainName() + " has a hand on " + first.hisHer() + " shoulder, pushing " + first.himHer() + " forward as they fly together.  The two of them blast through the base of the tower, leaving an enormous hole behind them.  And with its lower structure compromised, the shaft begins to topple to one side.  It lands on the city with a deafening crash, kicking up a huge cloud of debris.  As quickly as that, the Demonic presence over the city lifts.\n\nThe battle is over.  But even though this Demon Lord has been defeated, the scars left on the hearts of the Chosen won't heal so easily.  ");
             } else
             {
                 as11 = new String[5];
@@ -13261,22 +13261,22 @@ public class Project extends JFrame
                 changePortrait(second.convertGender(), second.type, false, false, w, as11, 1, Emotion.FEAR, Emotion.FEAR);
                 first.say(t, "\n\n\"If we're going to take that thing down, we need to go all-out!  Don't hold back, or you'll die!\"\n\n");
                 second.say(t, "\"Huh?  Gaaah!  Ergh... you're... crazy...!\"\n\n");
-                w.append(t, first.getMainName() + " holds out one palm to shoot a beam of crackling destructive energy directly at " + second.getMainName() + ".  For " + second.hisHer() + " part, " + second.getMainName() + " barely reacts in time to intercept the beam with " + second.hisHer() + " own blast.  The glowing line between " + first.getMainName() + "'s hand and " + second.getMainName() + "'s annihilates everything it touches as the two of them run toward the Demonic spire.  When it cuts into the base of the tower, the opposing energies cause a huge explosion that throws the two Chosen in different directions.  After they've come to their senses, they see the structure beginning to tilt to one side.  It finally topples, throwing up a huge cloud of debris as it lands on the city below.  As quickly as that, the Demonic presence over the city lifts.\n\nThe battle is over.  But even though this Demon Lord has been defeated, the scars left on the hearts of the Chosen won't heal so easily.  ");
+                w.append(t, String.format("%1$s holds out one palm to shoot a beam of crackling destructive energy directly at ", first.getMainName()) + second.getMainName() + ".  For " + second.hisHer() + " part, " + second.getMainName() + " barely reacts in time to intercept the beam with " + second.hisHer() + " own blast.  The glowing line between " + first.getMainName() + "'s hand and " + second.getMainName() + "'s annihilates everything it touches as the two of them run toward the Demonic spire.  When it cuts into the base of the tower, the opposing energies cause a huge explosion that throws the two Chosen in different directions.  After they've come to their senses, they see the structure beginning to tilt to one side.  It finally topples, throwing up a huge cloud of debris as it lands on the city below.  As quickly as that, the Demonic presence over the city lifts.\n\nThe battle is over.  But even though this Demon Lord has been defeated, the scars left on the hearts of the Chosen won't heal so easily.  ");
             }
             if(fallen[0] != null)
-                w.append(t, first.getMainName() + " and " + second.getMainName() + " have their own troubles to deal with, and " + fallen[0].getMainName() + " is nowhere to be found...");
+                w.append(t, String.format("%1$s and ", first.getMainName()) + second.getMainName() + " have their own troubles to deal with, and " + fallen[0].getMainName() + " is nowhere to be found...");
             else
                 w.append(t, "Their troubles may be just beginning...");
         } else
         {
-            w.append(t, "After exterminating the intervening Demons, " + escaped[0].getMainName() + " attacks the Demonic spire, drawing on as much power as " + escaped[0].heShe() + " can in an attempt to destroy it.  ");
+            w.append(t, String.format("After exterminating the intervening Demons, %1$s", escaped[0].getMainName()) + " attacks the Demonic spire, drawing on as much power as " + escaped[0].heShe() + " can in an attempt to destroy it.  ");
             if(fallen[1] != null)
-                w.append(t, "But with the other two Chosen having succumbed to the Demons, " + escaped[0].heShe() + "'s finding that " + escaped[0].heShe() + " isn't able to make a dent in it on " + escaped[0].hisHer() + " own.");
+                w.append(t, String.format("But with the other two Chosen having succumbed to the Demons, %1$s", escaped[0].heShe()) + "'s finding that " + escaped[0].heShe() + " isn't able to make a dent in it on " + escaped[0].hisHer() + " own.");
             else
             if(killed[1] != null)
-                w.append(t, "But as the only survivor among the three Chosen, " + escaped[0].heShe() + "'s finding that " + escaped[0].heShe() + " isn't able to make a dent in it on " + escaped[0].hisHer() + " own.");
+                w.append(t, String.format("But as the only survivor among the three Chosen, %1$s", escaped[0].heShe()) + "'s finding that " + escaped[0].heShe() + " isn't able to make a dent in it on " + escaped[0].hisHer() + " own.");
             else
-                w.append(t, "But with " + killed[0].getMainName() + " dead and " + fallen[0].getMainName() + " having succumbed to the Demons, " + escaped[0].getMainName() + " is finding that " + escaped[0].heShe() + " isn't able to make a dent in it on " + escaped[0].hisHer() + " own.");
+                w.append(t, String.format("But with %1$s", killed[0].getMainName()) + " dead and " + fallen[0].getMainName() + " having succumbed to the Demons, " + escaped[0].getMainName() + " is finding that " + escaped[0].heShe() + " isn't able to make a dent in it on " + escaped[0].hisHer() + " own.");
             escaped[0].say(t, "\n\n\"");
             as12 = new String[5];
             as12[0] = escaped[0].mainName;
@@ -13294,22 +13294,22 @@ public class Project extends JFrame
                 escaped[0].say(t, "I'm... I'm too weak after all...");
             escaped[0].say(t, "\"\n\n");
             if(escaped[0].isDrained())
-                w.append(t, escaped[0].getMainName() + " falls to " + escaped[0].hisHer() + " knees, overwhelmed by despair.  " + escaped[0].HeShe() + " spots a nearby knife discarded by a Thrall and takes it in " + escaped[0].hisHer() + " hands.  Before the fight, " + escaped[0].heShe() + " was worried about hurting " + escaped[0].himHer() + "self too badly to fight, but not badly enough to actually be fatal.  But now, " + escaped[0].heShe() + " has nothing left to lose...");
+                w.append(t, String.format("%1$s falls to ", escaped[0].getMainName()) + escaped[0].hisHer() + " knees, overwhelmed by despair.  " + escaped[0].HeShe() + " spots a nearby knife discarded by a Thrall and takes it in " + escaped[0].hisHer() + " hands.  Before the fight, " + escaped[0].heShe() + " was worried about hurting " + escaped[0].himHer() + "self too badly to fight, but not badly enough to actually be fatal.  But now, " + escaped[0].heShe() + " has nothing left to lose...");
             else
             if(escaped[0].isParasitized())
             {
-                w.append(t, escaped[0].getMainName() + " turns and flies away, fleeing the battle.  However, " + escaped[0].hisHer() + " clothes begin to flicker and fade, and " + escaped[0].heShe() + " has a harder and harder time staying airborne.  Combined with " + escaped[0].hisHer() + " damaged reputation, this last failure has proven fatal for " + escaped[0].hisHer() + " connection to the public's psychic energy.  By the time " + escaped[0].heShe() + " reaches the neighboring city, " + escaped[0].heShe() + "'ll return to being nothing more than ");
+                w.append(t, String.format("%1$s turns and flies away, fleeing the battle.  However, ", escaped[0].getMainName()) + escaped[0].hisHer() + " clothes begin to flicker and fade, and " + escaped[0].heShe() + " has a harder and harder time staying airborne.  Combined with " + escaped[0].hisHer() + " damaged reputation, this last failure has proven fatal for " + escaped[0].hisHer() + " connection to the public's psychic energy.  By the time " + escaped[0].heShe() + " reaches the neighboring city, " + escaped[0].heShe() + "'ll return to being nothing more than ");
                 if(!escaped[0].getMainName().equals(escaped[0].getGivenName()))
-                    w.append(t, escaped[0].getGivenName() + ", ");
+                    w.append(t, String.format("%1$s, ", escaped[0].getGivenName()));
                 w.append(t, "a typical powerless human.");
             } else
             if(escaped[0].isImpregnated())
-                w.append(t, escaped[0].getMainName() + " turns and flies away, fleeing the battle.  " + escaped[0].HeShe() + " has no intention of returning to the military and reporting " + escaped[0].hisHer() + " failure, because " + escaped[0].heShe() + " knows that soon, " + escaped[0].hisHer() + " Demonic pregnancy will begin to show.  " + escaped[0].HisHer() + " life as one of the Chosen is over, and " + escaped[0].hisHer() + " life as a fugitive begins...");
+                w.append(t, String.format("%1$s turns and flies away, fleeing the battle.  ", escaped[0].getMainName()) + escaped[0].HeShe() + " has no intention of returning to the military and reporting " + escaped[0].hisHer() + " failure, because " + escaped[0].heShe() + " knows that soon, " + escaped[0].hisHer() + " Demonic pregnancy will begin to show.  " + escaped[0].HisHer() + " life as one of the Chosen is over, and " + escaped[0].hisHer() + " life as a fugitive begins...");
             else
             if(escaped[0].isHypnotized())
-                w.append(t, "As much as it pains " + escaped[0].himHer() + " to do so, " + escaped[0].getMainName() + " turns and flees.  This battle may be lost, but " + escaped[0].heShe() + "'s determined to escape and survive to fight another day.  However, even after " + escaped[0].heShe() + " escapes the range of your influence, your post-hypnotic commands continue to linger in " + escaped[0].hisHer() + " subconscious.  It remains to be seen what sort of depravity " + escaped[0].heShe() + "'ll get into...");
+                w.append(t, String.format("As much as it pains %1$s", escaped[0].himHer()) + " to do so, " + escaped[0].getMainName() + " turns and flees.  This battle may be lost, but " + escaped[0].heShe() + "'s determined to escape and survive to fight another day.  However, even after " + escaped[0].heShe() + " escapes the range of your influence, your post-hypnotic commands continue to linger in " + escaped[0].hisHer() + " subconscious.  It remains to be seen what sort of depravity " + escaped[0].heShe() + "'ll get into...");
             else
-                w.append(t, "With no other options remaining, " + escaped[0].getMainName() + " turns to flee.");
+                w.append(t, String.format("With no other options remaining, %1$s", escaped[0].getMainName()) + " turns to flee.");
         }
         EndFinalBattle(t, p, f, w);
     }
@@ -13461,12 +13461,12 @@ public class Project extends JFrame
                 {
                     w.append(t, "\n\n");
                     if(forsaken == 1)
-                        w.append(t, corrupted[0].getMainName() + " has ");
+                        w.append(t, String.format("%1$s has ", corrupted[0].getMainName()));
                     else
                     if(forsaken == 2)
-                        w.append(t, corrupted[0].getMainName() + " and " + corrupted[1].getMainName() + " have ");
+                        w.append(t, String.format("%1$s and ", corrupted[0].getMainName()) + corrupted[1].getMainName() + " have ");
                     else
-                        w.append(t, corrupted[0].getMainName() + ", " + corrupted[1].getMainName() + ", and " + corrupted[2].getMainName() + " have ");
+                        w.append(t, String.format("%1$s, ", corrupted[0].getMainName()) + corrupted[1].getMainName() + ", and " + corrupted[2].getMainName() + " have ");
                     if(!w.campaign)
                         w.append(t, "been added to the ranks of the Forsaken!  You can interact with them from the Main Menu, and you may also use them to help corrupt new Chosen in future playthroughs!");
                     else
@@ -13937,7 +13937,7 @@ public class Project extends JFrame
                 if(brought == 0)
                     w.append(t, "All Forsaken from this playthrough will be deleted and can only be recovered by loading an old campaign save.");
                 else
-                    w.append(t, String.valueOf(brought) + " Forsaken from this playthrough will be added to the save file and the other " + deleted + " will be deleted.  Deleted Forsaken can only be recovered by loading an old campaign save.");
+                    w.append(t, String.format("%1$s Forsaken from this playthrough will be added to the save file and the other ", String.valueOf(brought)) + deleted + " will be deleted.  Deleted Forsaken can only be recovered by loading an old campaign save.");
                 final int totalBrought = brought;
                 JButton Confirm = new JButton("Confirm");
                 Confirm.addActionListener(new ActionListener() {
@@ -14176,9 +14176,9 @@ public class Project extends JFrame
             {
                 if(tantruming.hostility < 20 && tantruming.defeatType != 5)
                 {
-                    w.append(t, tantruming.mainName + " tries to organize a resistance against you, ");
+                    w.append(t, String.format("%1$s tries to organize a resistance against you, ", tantruming.mainName));
                     if(tantruming.confidence > 66)
-                        w.append(t, "demanding that your other minions join " + tantruming.himHer() + ".  ");
+                        w.append(t, String.format("demanding that your other minions join %1$s", tantruming.himHer()) + ".  ");
                     else
                     if(tantruming.confidence > 33)
                         w.append(t, "appealing to your other minions' sense of morality.  ");
@@ -14188,55 +14188,55 @@ public class Project extends JFrame
                 } else
                 if(tantruming.hostility < 40)
                 {
-                    w.append(t, tantruming.mainName + " lets out " + tantruming.hisHer() + " frustrations on your other minions, ");
+                    w.append(t, String.format("%1$s lets out ", tantruming.mainName) + tantruming.hisHer() + " frustrations on your other minions, ");
                     if(tantruming.confidence > 66)
-                        w.append(t, "aggressively asserting " + tantruming.hisHer() + " dominance over anyone who can't or won't stand up to " + tantruming.himHer() + ".  ");
+                        w.append(t, String.format("aggressively asserting %1$s", tantruming.hisHer()) + " dominance over anyone who can't or won't stand up to " + tantruming.himHer() + ".  ");
                     else
                     if(tantruming.confidence > 33)
-                        w.append(t, "spitting insults at anyone who so much as looks at " + tantruming.himHer() + " funny.  ");
+                        w.append(t, String.format("spitting insults at anyone who so much as looks at %1$s", tantruming.himHer()) + " funny.  ");
                     else
-                        w.append(t, "passive-aggressively insulting anyone who makes the mistake of spending too much time around " + tantruming.himHer() + ".  ");
-                    w.append(t, "Even for everyone else, " + tantruming.hisHer() + " acting out is a constant annoyance.");
+                        w.append(t, String.format("passive-aggressively insulting anyone who makes the mistake of spending too much time around %1$s", tantruming.himHer()) + ".  ");
+                    w.append(t, String.format("Even for everyone else, %1$s", tantruming.hisHer()) + " acting out is a constant annoyance.");
                 } else
                 if(tantruming.hostility < 61)
                 {
-                    w.append(t, tantruming.mainName + " makes a scene in the middle of your base of operations, ");
+                    w.append(t, String.format("%1$s makes a scene in the middle of your base of operations, ", tantruming.mainName));
                     if(tantruming.confidence > 66)
-                        w.append(t, "ranting, raving, and blaming everyone else for all " + tantruming.hisHer() + " problems.  ");
+                        w.append(t, String.format("ranting, raving, and blaming everyone else for all %1$s", tantruming.hisHer()) + " problems.  ");
                     else
                     if(tantruming.confidence > 33)
-                        w.append(t, "shouting about how " + tantruming.heShe() + " hates being one of the Forsaken.  ");
+                        w.append(t, String.format("shouting about how %1$s", tantruming.heShe()) + " hates being one of the Forsaken.  ");
                     else
                         w.append(t, "wailing in despair and whining about how unfair the world is.  ");
                     w.append(t, "The disruptive behavior is bad for your other minions' morale.");
                 } else
                 if(tantruming.hostility < 81)
                 {
-                    w.append(t, tantruming.mainName + " gets violent with your other minions, ");
+                    w.append(t, String.format("%1$s gets violent with your other minions, ", tantruming.mainName));
                     if(tantruming.confidence > 66)
-                        w.append(t, "challenging them to fight " + tantruming.himHer() + " head-on, and outright attacking those who try to flee.  ");
+                        w.append(t, String.format("challenging them to fight %1$s", tantruming.himHer()) + " head-on, and outright attacking those who try to flee.  ");
                     else
                     if(tantruming.confidence > 33)
                         w.append(t, "picking fights and getting into several scuffles over the course of the night.  ");
                     else
                         w.append(t, "abruptingly attacking them from behind and then fleeing before they can retaliate.  ");
-                    w.append(t, "The anger and resentment directed at " + tantruming.himHer() + " grows.");
+                    w.append(t, String.format("The anger and resentment directed at %1$s", tantruming.himHer()) + " grows.");
                 } else
                 {
-                    w.append(t, tantruming.mainName + " goes on a murderous rampage, ");
+                    w.append(t, String.format("%1$s goes on a murderous rampage, ", tantruming.mainName));
                     if(tantruming.confidence > 66)
                         w.append(t, "carving a wide and indiscriminate swath of destruction through your base of operations.  ");
                     else
                     if(tantruming.confidence > 33)
-                        w.append(t, "hunting down and attacking anyone " + tantruming.heShe() + " feels has wronged " + tantruming.himHer() + ".  ");
+                        w.append(t, String.format("hunting down and attacking anyone %1$s", tantruming.heShe()) + " feels has wronged " + tantruming.himHer() + ".  ");
                     else
-                        w.append(t, "slipping poison into the meals of countless Thralls and others " + tantruming.heShe() + " has a grudge against before " + tantruming.heShe() + "'s caught.  ");
+                        w.append(t, String.format("slipping poison into the meals of countless Thralls and others %1$s", tantruming.heShe()) + " has a grudge against before " + tantruming.heShe() + "'s caught.  ");
                     w.append(t, "The resulting chaos affects your other minions as well.");
                 }
-                w.append(t, "  (+" + String.valueOf(tantruming.staminaRegen() / 10) + "." + String.valueOf(tantruming.staminaRegen() % 10) + "% Stamina, restores own Motivation at expense of everyone else)");
+                w.append(t, String.format("  (+%1$s", String.valueOf(tantruming.staminaRegen() / 10)) + "." + String.valueOf(tantruming.staminaRegen() % 10) + "% Stamina, restores own Motivation at expense of everyone else)");
             } else
             {
-                w.append(t, tantruming.mainName + " is too stressed to relax, but there aren't any other Forsaken around for " + tantruming.himHer() + " to release " + tantruming.hisHer() + " tension on. (+" + tantruming.staminaRegen() + " Stamina)");
+                w.append(t, String.format("%1$s is too stressed to relax, but there aren't any other Forsaken around for ", tantruming.mainName) + tantruming.himHer() + " to release " + tantruming.hisHer() + " tension on. (+" + tantruming.staminaRegen() + " Stamina)");
             }
         }
         for(int i = 0; i < included.length; i++)
@@ -14247,12 +14247,12 @@ public class Project extends JFrame
                 int flavor = (int)(4D * Math.random());
                 if(included[i].demonicBirths < 0)
                 {
-                    w.append(t, "Now that " + included[i].mainName + " is no longer one of the Chosen, the child in " + included[i].hisHer() + " belly is just a regular Demon, and " + included[i].heShe() + " quickly goes into labor.  The resulting abomination ");
+                    w.append(t, String.format("Now that %1$s", included[i].mainName) + " is no longer one of the Chosen, the child in " + included[i].hisHer() + " belly is just a regular Demon, and " + included[i].heShe() + " quickly goes into labor.  The resulting abomination ");
                     if(included[i].gender.equals(Forsaken.Gender.MALE))
-                        w.append(t, "forces its way out of " + included[i].mainName + "'s asshole");
+                        w.append(t, String.format("forces its way out of %1$s", included[i].mainName) + "'s asshole");
                     else
-                        w.append(t, "slides out of " + included[i].mainName + "'s distended vagina");
-                    w.append(t, " while " + included[i].heShe() + " ");
+                        w.append(t, String.format("slides out of %1$s", included[i].mainName) + "'s distended vagina");
+                    w.append(t, String.format(" while %1$s", included[i].heShe()) + " ");
                     if(included[i].confidence > 66)
                         w.append(t, "grunts and strains");
                     else
@@ -14268,26 +14268,26 @@ public class Project extends JFrame
                     if(included[i].demonicBirths > 0 && (int)(Math.random() * 2D) == 0)
                     {
                         included[i].demonicBirths++;
-                        w.append(t, "Due to " + included[i].hisHer() + " nighttime activities, " + included[i].mainName + " has been impregnated with another fast-growing Demonic child.  " + included[i].HeShe() + " gives birth to a small tentacled creature, ");
+                        w.append(t, String.format("Due to %1$s", included[i].hisHer()) + " nighttime activities, " + included[i].mainName + " has been impregnated with another fast-growing Demonic child.  " + included[i].HeShe() + " gives birth to a small tentacled creature, ");
                         if(included[i].innocence > 66)
                             w.append(t, "then happily waves goodbye as it slithers away.");
                         else
                         if(included[i].innocence > 33)
-                            w.append(t, "which leaves " + included[i].himHer() + " gasping for breath.");
+                            w.append(t, String.format("which leaves %1$s", included[i].himHer()) + " gasping for breath.");
                         else
-                            w.append(t, "then mentally collects " + included[i].himHer() + "self and continues about " + included[i].hisHer() + " business.");
+                            w.append(t, String.format("then mentally collects %1$s", included[i].himHer()) + "self and continues about " + included[i].hisHer() + " business.");
                     } else
                     if(included[i].timesKilled > 2 && (int)(Math.random() * 2D) == 0)
                     {
                         included[i].timesKilled++;
-                        w.append(t, "A particularly bold Thrall ambushes " + included[i].mainName + " while " + included[i].heShe() + "'s alone and tries to rape " + included[i].himHer());
+                        w.append(t, String.format("A particularly bold Thrall ambushes %1$s", included[i].mainName) + " while " + included[i].heShe() + "'s alone and tries to rape " + included[i].himHer());
                         if(included[i].morality > 66)
-                            w.append(t, ", and " + included[i].mainName + " is happy afterwards to note that " + included[i].heShe() + " doesn't feel guilty in the slightest about killing him.");
+                            w.append(t, String.format(", and %1$s", included[i].mainName) + " is happy afterwards to note that " + included[i].heShe() + " doesn't feel guilty in the slightest about killing him.");
                         else
                         if(included[i].morality > 33)
-                            w.append(t, ", but the Forsaken has no trouble overpowering and killing " + included[i].hisHer() + " attacker.");
+                            w.append(t, String.format(", but the Forsaken has no trouble overpowering and killing %1$s", included[i].hisHer()) + " attacker.");
                         else
-                            w.append(t, ", and " + included[i].mainName + " enjoys giving him an especially slow and painful death.");
+                            w.append(t, String.format(", and %1$s", included[i].mainName) + " enjoys giving him an especially slow and painful death.");
                     } else
                     if(included[i].timesHadSex > 0 && ((int)(Math.random() * 2D) == 0 || included[i].peopleInjured == 0))
                     {
@@ -14295,90 +14295,90 @@ public class Project extends JFrame
                         included[i].orgasmsGiven += 5 + (int)(Math.random() * 5D);
                         if(included[i].timesOrgasmed > 0)
                             included[i].timesOrgasmed++;
-                        w.append(t, included[i].mainName + " attends a wild party and ends up participating in an orgy, ");
+                        w.append(t, String.format("%1$s attends a wild party and ends up participating in an orgy, ", included[i].mainName));
                         if(included[i].confidence > 66)
                             w.append(t, "gleefully dominating several partners at once.");
                         else
                         if(included[i].confidence > 33)
-                            w.append(t, "enjoying " + included[i].himHer() + "self greatly.");
+                            w.append(t, String.format("enjoying %1$s", included[i].himHer()) + "self greatly.");
                         else
-                            w.append(t, "surrendering " + included[i].himHer() + "self to the lustful crowd.");
+                            w.append(t, String.format("surrendering %1$s", included[i].himHer()) + "self to the lustful crowd.");
                     } else
                     if(included[i].peopleInjured > 0)
                     {
                         included[i].peopleInjured++;
-                        w.append(t, "A particularly bold Thrall ambushes " + included[i].mainName + " while " + included[i].heShe() + "'s alone and tries to rape " + included[i].himHer());
+                        w.append(t, String.format("A particularly bold Thrall ambushes %1$s", included[i].mainName) + " while " + included[i].heShe() + "'s alone and tries to rape " + included[i].himHer());
                         if(included[i].morality > 66)
-                            w.append(t, ", but " + included[i].heShe() + " has no trouble fending him off.");
+                            w.append(t, String.format(", but %1$s", included[i].heShe()) + " has no trouble fending him off.");
                         else
                         if(included[i].morality > 33)
                             w.append(t, ", only to receive a sound beating.");
                         else
-                            w.append(t, ", only to be left with some very painful injuries in " + included[i].hisHer() + " wake.");
+                            w.append(t, String.format(", only to be left with some very painful injuries in %1$s", included[i].hisHer()) + " wake.");
                     } else
                     if(included[i].morality > 66)
-                        w.append(t, included[i].mainName + " spends " + included[i].hisHer() + " time helping out your weaker minions, protecting them from danger and boosting their spirits.");
+                        w.append(t, String.format("%1$s spends ", included[i].mainName) + included[i].hisHer() + " time helping out your weaker minions, protecting them from danger and boosting their spirits.");
                     else
                     if(included[i].morality > 33)
-                        w.append(t, included[i].mainName + " hangs out with some of the friends " + included[i].heShe() + "'s made among your minions.");
+                        w.append(t, String.format("%1$s hangs out with some of the friends ", included[i].mainName) + included[i].heShe() + "'s made among your minions.");
                     else
-                        w.append(t, included[i].mainName + " spends some time trying to bargain with you for better accommomdations, but to no avail.");
+                        w.append(t, String.format("%1$s spends some time trying to bargain with you for better accommomdations, but to no avail.", included[i].mainName));
                 } else
                 if(flavor == 1)
                 {
                     if(included[i].hypnotized && (int)(Math.random() * 2D) == 0)
                     {
-                        w.append(t, included[i].mainName + " sleeps through most of the day, having vivid dreams as you reach directly into " + included[i].hisHer());
+                        w.append(t, String.format("%1$s sleeps through most of the day, having vivid dreams as you reach directly into ", included[i].mainName) + included[i].hisHer());
                         if(included[i].innocence > 66)
-                            w.append(t, " simple mind and rearrange " + included[i].hisHer() + " instinctive impulses to your liking.");
+                            w.append(t, String.format(" simple mind and rearrange %1$s", included[i].hisHer()) + " instinctive impulses to your liking.");
                         else
                         if(included[i].innocence > 33)
-                            w.append(t, " subconscious in order to reinforce " + included[i].hisHer() + " hypnotic conditioning.");
+                            w.append(t, String.format(" subconscious in order to reinforce %1$s", included[i].hisHer()) + " hypnotic conditioning.");
                         else
-                            w.append(t, " mind and carefully influence " + included[i].hisHer() + " thought process in order to prevent " + included[i].himHer() + " from finding a way to break your hypnotism.");
+                            w.append(t, String.format(" mind and carefully influence %1$s", included[i].hisHer()) + " thought process in order to prevent " + included[i].himHer() + " from finding a way to break your hypnotism.");
                     } else
                     if(included[i].strongestOrgasm >= 1000 && (int)(Math.random() * 2D) == 0)
                     {
-                        w.append(t, included[i].mainName + " spends the day enjoying the company of several tentacled Demons");
+                        w.append(t, String.format("%1$s spends the day enjoying the company of several tentacled Demons", included[i].mainName));
                         if(included[i].dignity > 66)
-                            w.append(t, ", but while " + included[i].heShe() + " tries to pretend that " + included[i].heShe() + "'s just inspecting " + included[i].hisHer() + " forces, the truth is that " + included[i].heShe() + "'s having them make " + included[i].himHer() + " cum over and over again.");
+                            w.append(t, String.format(", but while %1$s", included[i].heShe()) + " tries to pretend that " + included[i].heShe() + "'s just inspecting " + included[i].hisHer() + " forces, the truth is that " + included[i].heShe() + "'s having them make " + included[i].himHer() + " cum over and over again.");
                         else
                         if(included[i].dignity > 33)
-                            w.append(t, ", allowing them to ravage " + included[i].himHer() + " with their many appendages.");
+                            w.append(t, String.format(", allowing them to ravage %1$s", included[i].himHer()) + " with their many appendages.");
                         else
-                            w.append(t, ", and soon " + included[i].heShe() + "'s screaming at the top of " + included[i].hisHer() + " lungs as " + included[i].heShe() + "'s gripped by a long, continuous climax.");
+                            w.append(t, String.format(", and soon %1$s", included[i].heShe()) + "'s screaming at the top of " + included[i].hisHer() + " lungs as " + included[i].heShe() + "'s gripped by a long, continuous climax.");
                         included[i].timesOrgasmed += 10 + (int)(Math.random() * 10D);
                     } else
                     if(included[i].strongestOrgasm >= 200 && ((int)(Math.random() * 2D) == 0 || included[i].orgasmsGiven < 1000))
                     {
                         included[i].timesOrgasmed += 4 + (int)(Math.random() * 4D);
                         if(included[i].confidence > 66)
-                            w.append(t, included[i].mainName + " decides that " + included[i].heShe() + " needs a day to relax.  " + included[i].HeShe() + " spends much of it masturbating.");
+                            w.append(t, String.format("%1$s decides that ", included[i].mainName) + included[i].heShe() + " needs a day to relax.  " + included[i].HeShe() + " spends much of it masturbating.");
                         else
                         if(included[i].confidence > 33)
-                            w.append(t, included[i].mainName + " tries to manage " + included[i].hisHer() + " lust by spending some time masturbating.  " + included[i].HeShe() + " ends up doing it for most of the day.");
+                            w.append(t, String.format("%1$s tries to manage ", included[i].mainName) + included[i].hisHer() + " lust by spending some time masturbating.  " + included[i].HeShe() + " ends up doing it for most of the day.");
                         else
-                            w.append(t, "Overcome by the Demonic influence in the air, " + included[i].mainName + " hides in " + included[i].hisHer() + " room and starts to quietly masturbate, jumping in alarm whenever " + included[i].heShe() + " hears movement outside.");
+                            w.append(t, String.format("Overcome by the Demonic influence in the air, %1$s", included[i].mainName) + " hides in " + included[i].hisHer() + " room and starts to quietly masturbate, jumping in alarm whenever " + included[i].heShe() + " hears movement outside.");
                     } else
                     if(included[i].orgasmsGiven >= 1000)
                     {
                         if(included[i].timesOrgasmed > 0)
                             included[i].timesOrgasmed += 2 + (int)(Math.random() * 2D);
                         if(included[i].innocence > 66)
-                            w.append(t, included[i].mainName + " reads pornographic comics all day, marvelling at what " + included[i].heShe() + " sees.");
+                            w.append(t, String.format("%1$s reads pornographic comics all day, marvelling at what ", included[i].mainName) + included[i].heShe() + " sees.");
                         else
                         if(included[i].innocence > 33)
-                            w.append(t, included[i].mainName + " spends the day playing pornographic computer games.");
+                            w.append(t, String.format("%1$s spends the day playing pornographic computer games.", included[i].mainName));
                         else
-                            w.append(t, included[i].mainName + " spends the day studying and theorizing about methods to more efficiently force an unwilling target to orgasm.");
+                            w.append(t, String.format("%1$s spends the day studying and theorizing about methods to more efficiently force an unwilling target to orgasm.", included[i].mainName));
                     } else
                     if(included[i].innocence > 66)
-                        w.append(t, included[i].mainName + " plays video games all day, forgetting for awhile where " + included[i].heShe() + " is.");
+                        w.append(t, String.format("%1$s plays video games all day, forgetting for awhile where ", included[i].mainName) + included[i].heShe() + " is.");
                     else
                     if(included[i].innocence > 33)
-                        w.append(t, included[i].mainName + " relaxes and spends " + included[i].hisHer() + " evening watching DVDs smuggled in from the outside world.");
+                        w.append(t, String.format("%1$s relaxes and spends ", included[i].mainName) + included[i].hisHer() + " evening watching DVDs smuggled in from the outside world.");
                     else
-                        w.append(t, included[i].mainName + " spends most of the day reading scholarly articles on psychography.");
+                        w.append(t, String.format("%1$s spends most of the day reading scholarly articles on psychography.", included[i].mainName));
                 } else
                 if(flavor == 2)
                 {
@@ -14387,73 +14387,73 @@ public class Project extends JFrame
                         if(included[i].confidence > 66)
                         {
                             included[i].timesHarmedSelf++;
-                            w.append(t, included[i].mainName + " whips " + included[i].himHer() + "self until " + included[i].hisHer() + " back begins to show the marks, stubbornly enduring the pain to remind " + included[i].himHer() + "self not to oppose you.");
+                            w.append(t, String.format("%1$s whips ", included[i].mainName) + included[i].himHer() + "self until " + included[i].hisHer() + " back begins to show the marks, stubbornly enduring the pain to remind " + included[i].himHer() + "self not to oppose you.");
                         } else
                         if(included[i].confidence > 33)
-                            w.append(t, included[i].mainName + " asks to be drained of what little residual psychic energy remains inside " + included[i].himHer() + ", submitting " + included[i].himHer() + "self to you completely.");
+                            w.append(t, String.format("%1$s asks to be drained of what little residual psychic energy remains inside ", included[i].mainName) + included[i].himHer() + ", submitting " + included[i].himHer() + "self to you completely.");
                         else
-                            w.append(t, included[i].mainName + " begs you to punish " + included[i].himHer() + " for ever daring to oppose you, and after you use a spare Demonic body to lightly molest " + included[i].himHer() + ", " + included[i].heShe() + " seems grateful and satisfied.");
+                            w.append(t, String.format("%1$s begs you to punish ", included[i].mainName) + included[i].himHer() + " for ever daring to oppose you, and after you use a spare Demonic body to lightly molest " + included[i].himHer() + ", " + included[i].heShe() + " seems grateful and satisfied.");
                     } else
                     if(included[i].timesHarmedSelf > 0 && (int)(Math.random() * 2D) == 0)
                     {
-                        w.append(t, included[i].mainName + " isolates " + included[i].himHer() + "self and spends the day in silent contemplation of your greatness, ");
+                        w.append(t, String.format("%1$s isolates ", included[i].mainName) + included[i].himHer() + "self and spends the day in silent contemplation of your greatness, ");
                         if(included[i].innocence > 66)
                             w.append(t, "though it doesn't amount to much more than mentally repeating 'The Demon Lord is Really Strong' over and over again.");
                         else
                         if(included[i].innocence > 33)
-                            w.append(t, "reminding " + included[i].himHer() + "self that your will is absolute.");
+                            w.append(t, String.format("reminding %1$s", included[i].himHer()) + "self that your will is absolute.");
                         else
                             w.append(t, "attempting to understand the true nature of a Demon Lord.");
                     } else
                     if(included[i].timesTortured > 0 && ((int)(Math.random() * 2D) == 0 || !included[i].meek))
                     {
                         if(included[i].confidence > 66)
-                            w.append(t, included[i].mainName + " humbles " + included[i].himHer() + "self by doing manual labor alongside your lesser minions in an attempt to show you " + included[i].hisHer() + " willingness to serve.");
+                            w.append(t, String.format("%1$s humbles ", included[i].mainName) + included[i].himHer() + "self by doing manual labor alongside your lesser minions in an attempt to show you " + included[i].hisHer() + " willingness to serve.");
                         else
                         if(included[i].confidence > 33)
-                            w.append(t, included[i].mainName + " keeps " + included[i].himHer() + "self busy by doing manual labor with the Thralls at your base of operations, hopeful that you'll notice " + included[i].hisHer() + " efforts.");
+                            w.append(t, String.format("%1$s keeps ", included[i].mainName) + included[i].himHer() + "self busy by doing manual labor with the Thralls at your base of operations, hopeful that you'll notice " + included[i].hisHer() + " efforts.");
                         else
-                            w.append(t, included[i].mainName + " presents " + included[i].himHer() + "self to the Thrall in charge of constructing your base of operations, offering to help out in a show of submission.");
+                            w.append(t, String.format("%1$s presents ", included[i].mainName) + included[i].himHer() + "self to the Thrall in charge of constructing your base of operations, offering to help out in a show of submission.");
                     } else
                     if(included[i].meek)
                     {
                         if(included[i].confidence > 66)
-                            w.append(t, included[i].mainName + " is suffering from flashbacks to " + included[i].hisHer() + " past abuses, but " + included[i].heShe() + " forces " + included[i].himHer() + "self to go outside and do " + included[i].hisHer() + " daily routine anyway, and " + included[i].heShe() + " feels satisfied about it once " + included[i].heShe() + " returns to " + included[i].hisHer() + " room for the night.");
+                            w.append(t, String.format("%1$s is suffering from flashbacks to ", included[i].mainName) + included[i].hisHer() + " past abuses, but " + included[i].heShe() + " forces " + included[i].himHer() + "self to go outside and do " + included[i].hisHer() + " daily routine anyway, and " + included[i].heShe() + " feels satisfied about it once " + included[i].heShe() + " returns to " + included[i].hisHer() + " room for the night.");
                         else
                         if(included[i].confidence > 33)
-                            w.append(t, included[i].mainName + " feels worried about going outside, so " + included[i].heShe() + " just spends the day in " + included[i].hisHer() + " room.");
+                            w.append(t, String.format("%1$s feels worried about going outside, so ", included[i].mainName) + included[i].heShe() + " just spends the day in " + included[i].hisHer() + " room.");
                         else
-                            w.append(t, included[i].mainName + " locks " + included[i].himHer() + "self in " + included[i].hisHer() + " room, resting there until " + included[i].heShe() + " can overcome " + included[i].hisHer() + " old fears of being abused by the Thralls.");
+                            w.append(t, String.format("%1$s locks ", included[i].mainName) + included[i].himHer() + "self in " + included[i].hisHer() + " room, resting there until " + included[i].heShe() + " can overcome " + included[i].hisHer() + " old fears of being abused by the Thralls.");
                     } else
                     if(included[i].confidence > 66)
-                        w.append(t, included[i].mainName + " has a good day, and " + included[i].heShe() + " goes to bed in high spirits.");
+                        w.append(t, String.format("%1$s has a good day, and ", included[i].mainName) + included[i].heShe() + " goes to bed in high spirits.");
                     else
                     if(included[i].confidence > 33)
-                        w.append(t, included[i].mainName + " spends a leisurely day doing nothing in particular.");
+                        w.append(t, String.format("%1$s spends a leisurely day doing nothing in particular.", included[i].mainName));
                     else
-                        w.append(t, included[i].mainName + " lifts weights in " + included[i].hisHer() + " room all day, desperate to become stronger.");
+                        w.append(t, String.format("%1$s lifts weights in ", included[i].mainName) + included[i].hisHer() + " room all day, desperate to become stronger.");
                 } else
                 if(included[i].parasitized && (int)(Math.random() * 2D) == 0)
                 {
-                    w.append(t, included[i].mainName + " spends the day with what's left of " + included[i].hisHer() + " fans, ");
+                    w.append(t, String.format("%1$s spends the day with what's left of ", included[i].mainName) + included[i].hisHer() + " fans, ");
                     if(included[i].innocence > 66)
                         w.append(t, "not really even noticing that there are far fewer than before.");
                     else
                     if(included[i].innocence > 33)
-                        w.append(t, "and even though there clearly aren't as many as before, " + included[i].heShe() + " still enjoys " + included[i].himHer() + "self.");
+                        w.append(t, String.format("and even though there clearly aren't as many as before, %1$s", included[i].heShe()) + " still enjoys " + included[i].himHer() + "self.");
                     else
-                        w.append(t, "but " + included[i].heShe() + " can't help but dwell on the fact that most of them have moved on to newer Chosen and Forsaken.");
+                        w.append(t, String.format("but %1$s", included[i].heShe()) + " can't help but dwell on the fact that most of them have moved on to newer Chosen and Forsaken.");
                     included[i].timesExposed += 10 + (int)(Math.random() * 10D);
                     included[i].timesExposedSelf += 10 + (int)(Math.random() * 10D);
                 } else
                 if(included[i].timesExposedSelf > 100 && (int)(Math.random() * 2D) == 0)
                 {
-                    w.append(t, included[i].mainName + " goes outside in the nude");
+                    w.append(t, String.format("%1$s goes outside in the nude", included[i].mainName));
                     if(included[i].dignity > 66)
-                        w.append(t, ", greatly enjoying the extra attention it gets " + included[i].himHer() + ".");
+                        w.append(t, String.format(", greatly enjoying the extra attention it gets %1$s", included[i].himHer()) + ".");
                     else
                     if(included[i].dignity > 33)
-                        w.append(t, ", letting a few of your minions catch glimpses of " + included[i].himHer() + " before returning home.");
+                        w.append(t, String.format(", letting a few of your minions catch glimpses of %1$s", included[i].himHer()) + " before returning home.");
                     else
                         w.append(t, " as if it isn't any big deal.");
                     included[i].timesExposed++;
@@ -14461,37 +14461,37 @@ public class Project extends JFrame
                 } else
                 if(included[i].timesExposed > 100_000 && (int)(Math.random() * 2D) == 0 || !included[i].debased)
                 {
-                    w.append(t, included[i].mainName + " goes outside in ");
+                    w.append(t, String.format("%1$s goes outside in ", included[i].mainName));
                     if(included[i].dignity > 66)
-                        w.append(t, "a dress that's practically transparent, not quite showing the details of " + included[i].hisHer() + " private parts, but leaving very little to the imagination.");
+                        w.append(t, String.format("a dress that's practically transparent, not quite showing the details of %1$s", included[i].hisHer()) + " private parts, but leaving very little to the imagination.");
                     else
                     if(included[i].dignity > 33)
-                        w.append(t, "a long shirt with nothing underneath, teasing your minions with the promise of catching a glimpse of " + included[i].hisHer() + " most intimate places.");
+                        w.append(t, String.format("a long shirt with nothing underneath, teasing your minions with the promise of catching a glimpse of %1$s", included[i].hisHer()) + " most intimate places.");
                     else
-                        w.append(t, "a tiny miniskirt with no panties, and " + included[i].heShe() + " makes no effort whatsoever to avoid flashing people whenever " + included[i].heShe() + " stretches or bends over.");
+                        w.append(t, String.format("a tiny miniskirt with no panties, and %1$s", included[i].heShe()) + " makes no effort whatsoever to avoid flashing people whenever " + included[i].heShe() + " stretches or bends over.");
                 } else
                 if(included[i].debased)
                 {
-                    w.append(t, "During " + included[i].hisHer() + " daily routine, " + included[i].mainName + " is confronted by a Thrall with a recording of " + included[i].himHer() + " being humiliated, ");
+                    w.append(t, String.format("During %1$s", included[i].hisHer()) + " daily routine, " + included[i].mainName + " is confronted by a Thrall with a recording of " + included[i].himHer() + " being humiliated, ");
                     if(included[i].dignity > 66)
-                        w.append(t, "but " + included[i].mainName + " is pleasantly surprised to see that the Thrall is just an enthusiastic fan.");
+                        w.append(t, String.format("but %1$s", included[i].mainName) + " is pleasantly surprised to see that the Thrall is just an enthusiastic fan.");
                     else
                     if(included[i].dignity > 33)
-                        w.append(t, "but " + included[i].mainName + " doesn't let it get to " + included[i].himHer() + ".");
+                        w.append(t, String.format("but %1$s", included[i].mainName) + " doesn't let it get to " + included[i].himHer() + ".");
                     else
-                        w.append(t, "but " + included[i].mainName + " is past the point of caring, and " + included[i].heShe() + " doesn't let it ruin " + included[i].hisHer() + " day.");
+                        w.append(t, String.format("but %1$s", included[i].mainName) + " is past the point of caring, and " + included[i].heShe() + " doesn't let it ruin " + included[i].hisHer() + " day.");
                 } else
                 {
-                    w.append(t, included[i].mainName + " spends the day talking to a gathering of " + included[i].hisHer() + " fans, ");
+                    w.append(t, String.format("%1$s spends the day talking to a gathering of ", included[i].mainName) + included[i].hisHer() + " fans, ");
                     if(included[i].confidence > 66)
-                        w.append(t, "happily regaling them with stories of " + included[i].hisHer() + " time as one of the Chosen.");
+                        w.append(t, String.format("happily regaling them with stories of %1$s", included[i].hisHer()) + " time as one of the Chosen.");
                     else
                     if(included[i].confidence > 33)
                         w.append(t, "chatting about what life is like under the Demon Lord.");
                     else
-                        w.append(t, "blushing and stammering when " + included[i].heShe() + " hears how much they still love " + included[i].himHer() + ".");
+                        w.append(t, String.format("blushing and stammering when %1$s", included[i].heShe()) + " hears how much they still love " + included[i].himHer() + ".");
                 }
-                w.append(t, "  (+" + String.valueOf(included[i].staminaRegen() / 10) + "." + String.valueOf(included[i].staminaRegen() % 10) + "% Stamina");
+                w.append(t, String.format("  (+%1$s", String.valueOf(included[i].staminaRegen() / 10)) + "." + String.valueOf(included[i].staminaRegen() % 10) + "% Stamina");
                 if(tantruming != null)
                 {
                     int lost = damages[1];
@@ -14504,7 +14504,7 @@ public class Project extends JFrame
                     if(included[i].motivation / 10 < included[i].hostility)
                         w.redAppend(t, "-" + String.valueOf(lost / 10) + "." + String.valueOf(lost % 10) + "% Motivation");
                     else
-                        w.append(t, "-" + String.valueOf(lost / 10) + "." + String.valueOf(lost % 10) + "% Motivation");
+                        w.append(t, String.format("-%1$s", String.valueOf(lost / 10)) + "." + String.valueOf(lost % 10) + "% Motivation");
                 }
                 w.append(t, ")");
             }
@@ -14524,13 +14524,13 @@ public class Project extends JFrame
                     if(exhausted[i].motivation / 10 < exhausted[i].hostility)
                         w.redAppend(t, "-" + String.valueOf(lost / 10) + "." + String.valueOf(lost % 10) + "% Motivation");
                     else
-                        w.append(t, "-" + String.valueOf(lost / 10) + "." + String.valueOf(lost % 10) + "% Motivation");
+                        w.append(t, String.format("-%1$s", String.valueOf(lost / 10)) + "." + String.valueOf(lost % 10) + "% Motivation");
                     w.append(t, ")");
                 } else
                 {
                     if(i != 0)
                         w.append(t, "\n\n");
-                    w.append(t, exhausted[i].mainName + " is tired due to the day's activities.");
+                    w.append(t, String.format("%1$s is tired due to the day's activities.", exhausted[i].mainName));
                 }
 
         }
