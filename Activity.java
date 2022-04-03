@@ -450,19 +450,18 @@ public class Activity
             if(receiver == w.lordBody)
                 if(sender.getObedience() > 66)
                 {
-                    if(sender.getInnocence() > 66)
-                    {
-                        Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.JOY, Project.Emotion.FOCUS);
-                        sender.say(t, "I'm so happy I get to make " + sender.theDemonLord() + " feel good!");
-                    } else
-                    if(sender.getInnocence() > 33)
-                    {
-                        sender.say(t, "Does this feel good, " + sender.demonLord() + "?  I just want to make you happy...");
-                        Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.FOCUS, Project.Emotion.JOY);
-                    } else
-                    {
+                    switch (sender.getInnocence() / 33) {
+                    case 0:
                         sender.say(t, "I need to impress " + sender.theDemonLord() + " with my technique...!");
                         Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.FOCUS, Project.Emotion.NEUTRAL);
+                    break;
+                    case 1:
+                        sender.say(t, "Does this feel good, " + sender.demonLord() + "?  I just want to make you happy...");
+                        Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                    break;
+                    default:
+                        Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.JOY, Project.Emotion.FOCUS);
+                        sender.say(t, "I'm so happy I get to make " + sender.theDemonLord() + " feel good!");
                     }
                 } else
                 if(sender.getObedience() > 33)
@@ -482,19 +481,18 @@ public class Activity
                         sender.say(t, "Is this alright?");
                     }
                 } else
-                if(sender.getDeviancy() > 66)
-                {
-                    Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.ANGER);
-                    sender.say(t, "Ngh...  You knew... I wouldn't be able to resist this beautiful body you made...");
-                } else
-                if(sender.getDeviancy() > 33)
-                {
-                    Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
-                    sender.say(t, "Fine.  I'll make you feel good.  But you'd better return the favor...");
-                } else
-                {
+                switch (sender.getDeviancy() / 33) {
+                case 0:
                     Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                     sender.say(t, "Disgusting... I don't want to touch the Demon Lord...");
+                break;
+                case 1:
+                    Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
+                    sender.say(t, "Fine.  I'll make you feel good.  But you'd better return the favor...");
+                break;
+                default:
+                    Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.ANGER);
+                    sender.say(t, "Ngh...  You knew... I wouldn't be able to resist this beautiful body you made...");
                 }
         } else
         if(this == Project.Praise)
@@ -541,19 +539,18 @@ public class Activity
                 } else
                 if(sender.getObedience() > 33)
                 {
-                    if(sender.getDeviancy() > 66)
-                    {
-                        Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.JOY);
-                        sender.say(t, "I want you to make me feel even better, " + sender.demonLord() + "!");
-                    } else
-                    if(sender.getDeviancy() > 33)
-                    {
-                        Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.NEUTRAL, Project.Emotion.JOY);
-                        sender.say(t, "My body is all yours, " + sender.demonLord() + ".");
-                    } else
-                    {
+                    switch (sender.getDeviancy() / 33) {
+                    case 0:
                         Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.SHAME, Project.Emotion.ANGER);
                         sender.say(t, "Your touch is... unforgettable, " + sender.demonLord() + "...");
+                    break;
+                    case 1:
+                        Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.NEUTRAL, Project.Emotion.JOY);
+                        sender.say(t, "My body is all yours, " + sender.demonLord() + ".");
+                    break;
+                    default:
+                        Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.JOY);
+                        sender.say(t, "I want you to make me feel even better, " + sender.demonLord() + "!");
                     }
                 } else
                 {
@@ -568,19 +565,18 @@ public class Activity
             if(w.sceneDuration % 3 == 2)
                 if(sender.getObedience() > 66)
                 {
-                    if(sender.getConfidence() > 66)
-                    {
-                        Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.FOCUS, Project.Emotion.JOY);
-                        sender.say(t, "I want to make you forget about all your other servants...");
-                    } else
-                    if(sender.getConfidence() > 33)
-                    {
-                        Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.FOCUS, Project.Emotion.JOY);
-                        sender.say(t, "You're just perfect, " + sender.demonLord() + "!  I don't know why I ever fought you...");
-                    } else
-                    {
+                    switch (sender.getConfidence() / 33) {
+                    case 0:
                         Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.SHAME, Project.Emotion.NEUTRAL);
                         sender.say(t, "I know it's wrong to want you to care about me... but...");
+                    break;
+                    case 1:
+                        Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                        sender.say(t, "You're just perfect, " + sender.demonLord() + "!  I don't know why I ever fought you...");
+                    break;
+                    default:
+                        Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                        sender.say(t, "I want to make you forget about all your other servants...");
                     }
                 } else
                 if(sender.getObedience() > 33)
@@ -592,19 +588,18 @@ public class Activity
                         default: sender.say(t, "I've never feared anyone but you...");
                     }
                 } else
-                if(sender.getConfidence() > 66)
-                {
-                    Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.FOCUS, Project.Emotion.NEUTRAL);
-                    sender.say(t, "You're... a worthy opponent.  I wouldn't even feel bad about losing to you.  Not that I'm giving up!");
-                } else
-                if(sender.getConfidence() > 33)
-                {
-                    Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.SHAME, Project.Emotion.ANGER);
-                    sender.say(t, "I... never stood a chance against you.  Ugh, I hate saying that...");
-                } else
-                {
+                switch (sender.getConfidence() / 33) {
+                case 0:
                     Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.SHAME, Project.Emotion.NEUTRAL);
                     sender.say(t, "I, um...  I don't actually think I'm going to be able to resist you for that long.  I just don't want to give up right away...");
+                break;
+                case 1:
+                    Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.SHAME, Project.Emotion.ANGER);
+                    sender.say(t, "I... never stood a chance against you.  Ugh, I hate saying that...");
+                break;
+                default:
+                    Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.FOCUS, Project.Emotion.NEUTRAL);
+                    sender.say(t, "You're... a worthy opponent.  I wouldn't even feel bad about losing to you.  Not that I'm giving up!");
                 }
         } else
         if(this == Project.Insult)
@@ -729,19 +724,18 @@ public class Activity
         {
             if(sender.getDeviancy() > 66)
             {
-                if(sender.getConfidence() > 66)
-                {
-                    Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.FOCUS);
-                    sender.say(t, "Aaah... I wanna rape " + sender.theDemonLord() + " a lot...!");
-                } else
-                if(sender.getConfidence() > 33)
-                {
-                    Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.FOCUS);
-                    sender.say(t, "Hurry, hurry...!");
-                } else
-                {
+                switch (sender.getConfidence() / 33) {
+                case 0:
                     Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
                     sender.say(t, "If we don't do this now... I-I'm gonna go crazy...!");
+                break;
+                case 1:
+                    Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.FOCUS);
+                    sender.say(t, "Hurry, hurry...!");
+                break;
+                default:
+                    Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.FOCUS);
+                    sender.say(t, "Aaah... I wanna rape " + sender.theDemonLord() + " a lot...!");
                 }
             } else
             if(sender.getDeviancy() > 33)
@@ -753,19 +747,18 @@ public class Activity
                     default: sender.say(t, "Mm...!  Mm...");
                 }
             } else
-            if(sender.getObedience() > 66)
-            {
-                Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.SHAME, Project.Emotion.FEAR);
-                sender.say(t, "Are you sure you don't want to lead, " + sender.demonLord() + "?");
-            } else
-            if(sender.getObedience() > 33)
-            {
-                Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.SHAME, Project.Emotion.FEAR);
-                sender.say(t, "I have no idea what I'm doing...");
-            } else
-            {
+            switch (sender.getObedience() / 33) {
+            case 0:
                 Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.ANGER, Project.Emotion.SHAME);
                 sender.say(t, "Let's get this over with.");
+            break;
+            case 1:
+                Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.SHAME, Project.Emotion.FEAR);
+                sender.say(t, "I have no idea what I'm doing...");
+            break;
+            default:
+                Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.SHAME, Project.Emotion.FEAR);
+                sender.say(t, "Are you sure you don't want to lead, " + sender.demonLord() + "?");
             }
         } else
         if(this == Project.PullDown)
@@ -781,121 +774,114 @@ public class Activity
             } else
             if(sender.getDeviancy() > 33)
             {
-                if(sender.getDignity() > 66)
-                {
-                    Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.FOCUS, Project.Emotion.LEWD);
-                    sender.say(t, "I-I guess I'm ready when you are...");
-                } else
-                if(sender.getDignity() > 33)
-                {
-                    Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.JOY, Project.Emotion.LEWD);
-                    sender.say(t, "This is going to feel good...");
-                } else
-                {
+                switch (sender.getDignity() / 33) {
+                case 0:
                     Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
                     sender.say(t, "I can't take it any more...!");
+                break;
+                case 1:
+                    Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.JOY, Project.Emotion.LEWD);
+                    sender.say(t, "This is going to feel good...");
+                break;
+                default:
+                    Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.FOCUS, Project.Emotion.LEWD);
+                    sender.say(t, "I-I guess I'm ready when you are...");
                 }
             } else
-            if(sender.getObedience() > 66)
-            {
-                Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.SHAME, Project.Emotion.FEAR);
-                sender.say(t, "I hope you enjoy my body...");
-            } else
-            if(sender.getObedience() > 33)
-            {
-                Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.SHAME, Project.Emotion.FEAR);
-                sender.say(t, "I never thought I'd be doing this...");
-            } else
-            {
+            switch (sender.getObedience() / 33) {
+            case 0:
                 Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.ANGER, Project.Emotion.SHAME);
                 sender.say(t, "Go on, finish satisfying yourself so I can get out of here!");
+            break;
+            case 1:
+                Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.SHAME, Project.Emotion.FEAR);
+                sender.say(t, "I never thought I'd be doing this...");
+            break;
+            default:
+                Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.SHAME, Project.Emotion.FEAR);
+                sender.say(t, "I hope you enjoy my body...");
             }
         } else
         if(this == Project.Escape)
         {
             if(sender.getObedience() > 66)
             {
-                if(sender.getMorality() > 66)
-                {
-                    Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
-                    sender.say(t, "I-I'm so sorry, " + sender.demonLord() + "...  I'm worthless...");
-                } else
-                if(sender.getMorality() > 33)
-                {
-                    Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.FEAR, Project.Emotion.SHAME);
-                    sender.say(t, "Are you going to punish me...?");
-                } else
-                {
+                switch (sender.getMorality() / 33) {
+                case 0:
                     Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.FEAR, Project.Emotion.SHAME);
                     sender.say(t, "I can't!  Even if you are " + sender.theDemonLord() + "!");
+                break;
+                case 1:
+                    Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.FEAR, Project.Emotion.SHAME);
+                    sender.say(t, "Are you going to punish me...?");
+                break;
+                default:
+                    Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
+                    sender.say(t, "I-I'm so sorry, " + sender.demonLord() + "...  I'm worthless...");
                 }
             } else
             if(sender.getObedience() > 33)
             {
-                if(sender.getInnocence() > 66)
-                {
-                    Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.FEAR, Project.Emotion.SHAME);
-                    sender.say(t, "Oh no!  I- I didn't mean to do that!");
-                } else
-                if(sender.getInnocence() > 33)
-                {
-                    Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
-                    sender.say(t, "I'm sorry, but I really need a break...");
-                } else
-                {
+                switch (sender.getInnocence() / 33) {
+                case 0:
                     Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
                     sender.say(t, "I cannot continue.");
+                break;
+                case 1:
+                    Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
+                    sender.say(t, "I'm sorry, but I really need a break...");
+                break;
+                default:
+                    Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.FEAR, Project.Emotion.SHAME);
+                    sender.say(t, "Oh no!  I- I didn't mean to do that!");
                 }
             } else
-            if(sender.getConfidence() > 66)
-            {
-                Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.ANGER, Project.Emotion.FOCUS);
-                sender.say(t, "Whew...  Heh, I couldn't hold myself back anymore.");
-            } else
-            if(sender.getConfidence() > 33)
-            {
-                Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
-                sender.say(t, "I'm not afraid of you!");
-            } else
-            {
+            switch (sender.getConfidence() / 33) {
+            case 0:
                 Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                 sender.say(t, "I c-can't take this anymore!");
+            break;
+            case 1:
+                Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
+                sender.say(t, "I'm not afraid of you!");
+            break;
+            default:
+                Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.ANGER, Project.Emotion.FOCUS);
+                sender.say(t, "Whew...  Heh, I couldn't hold myself back anymore.");
             }
         } else
         if(this == Project.StopActing)
         {
             if(sender.getObedience() > 66)
             {
-                if(sender.getMorality() > 66)
-                {
-                    Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
-                    sender.say(t, "Maybe... I need more training...");
-                } else
-                if(sender.getMorality() > 33)
-                {
-                    Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.STRUGGLE, Project.Emotion.SHAME);
-                    sender.say(t, "Sorry, I'm... at my limit...");
-                } else
-                {
+                switch (sender.getMorality() / 33) {
+                case 0:
                     Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.NEUTRAL, Project.Emotion.JOY);
                     sender.say(t, "How about I lay here while you rub up against me?  That will feel good too, right?");
+                break;
+                case 1:
+                    Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.STRUGGLE, Project.Emotion.SHAME);
+                    sender.say(t, "Sorry, I'm... at my limit...");
+                break;
+                default:
+                    Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
+                    sender.say(t, "Maybe... I need more training...");
                 }
             } else
             if(sender.getObedience() > 33)
             {
-                if(sender.getDeviancy() > 66)
-                {
-                    Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.JOY, Project.Emotion.FOCUS);
-                    sender.say(t, "Well, I enjoyed that.  Let's do it again sometime.");
-                } else
-                if(sender.getDeviancy() > 33)
-                {
-                    Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.SHAME, Project.Emotion.FEAR);
-                    sender.say(t, "That was good enough, right?");
-                } else
-                {
+                switch (sender.getDeviancy() / 33) {
+                case 0:
                     Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.SHAME, Project.Emotion.NEUTRAL);
                     sender.say(t, "I should go... do some combat training.  I can't stay here doing this all day.");
+                break;
+                case 1:
+                    Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.SHAME, Project.Emotion.FEAR);
+                    sender.say(t, "That was good enough, right?");
+                break;
+                default:
+                    Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.JOY, Project.Emotion.FOCUS);
+                    sender.say(t, "Well, I enjoyed that.  Let's do it again sometime.");
                 }
             } else
             {
@@ -912,19 +898,18 @@ public class Activity
             if(receiver == w.lordBody)
                 if(sender.getObedience() > 66)
                 {
-                    if(sender.getInnocence() > 66)
-                    {
-                        Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.JOY, Project.Emotion.FOCUS);
-                        sender.say(t, "I'm so happy I get to make " + sender.theDemonLord() + " feel good!");
-                    } else
-                    if(sender.getInnocence() > 33)
-                    {
-                        sender.say(t, "Does this feel good, " + sender.demonLord() + "?  I just want to make you happy...");
-                        Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.FOCUS, Project.Emotion.JOY);
-                    } else
-                    {
+                    switch (sender.getInnocence() / 33) {
+                    case 0:
                         sender.say(t, "I need to impress " + sender.theDemonLord() + " with my technique...!");
                         Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.FOCUS, Project.Emotion.NEUTRAL);
+                    break;
+                    case 1:
+                        sender.say(t, "Does this feel good, " + sender.demonLord() + "?  I just want to make you happy...");
+                        Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.FOCUS, Project.Emotion.JOY);
+                    break;
+                    default:
+                        Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.JOY, Project.Emotion.FOCUS);
+                        sender.say(t, "I'm so happy I get to make " + sender.theDemonLord() + " feel good!");
                     }
                 } else
                 if(sender.getObedience() > 33)
@@ -944,19 +929,18 @@ public class Activity
                         sender.say(t, "Is this alright?");
                     }
                 } else
-                if(sender.getDeviancy() > 66)
-                {
-                    Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.ANGER);
-                    sender.say(t, "Ngh...  You knew... I wouldn't be able to resist this beautiful body you made...");
-                } else
-                if(sender.getDeviancy() > 33)
-                {
-                    Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
-                    sender.say(t, "Fine.  I'll make you feel good.  But you'd better return the favor...");
-                } else
-                {
+                switch (sender.getDeviancy() / 33) {
+                case 0:
                     Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                     sender.say(t, "Disgusting... I don't want to touch the Demon Lord...");
+                break;
+                case 1:
+                    Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
+                    sender.say(t, "Fine.  I'll make you feel good.  But you'd better return the favor...");
+                break;
+                default:
+                    Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.ANGER);
+                    sender.say(t, "Ngh...  You knew... I wouldn't be able to resist this beautiful body you made...");
                 }
         } else
         if(this == Project.VaginalPenetrate)
@@ -974,34 +958,32 @@ public class Activity
                 } else
                 if(sender.getDeviancy() > 33)
                 {
-                    if(sender.getInnocence() > 66)
-                    {
-                        Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.JOY);
-                        sender.say(t, "Aaah...!  Wow...!");
-                    } else
-                    if(sender.getInnocence() > 33)
-                    {
-                        Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.FOCUS);
-                        sender.say(t, "That's... tight...!");
-                    } else
-                    {
+                    switch (sender.getInnocence() / 33) {
+                    case 0:
                         Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.FOCUS, Project.Emotion.JOY);
                         sender.say(t, "Ah, yes...  Here we go...");
+                    break;
+                    case 1:
+                        Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.FOCUS);
+                        sender.say(t, "That's... tight...!");
+                    break;
+                    default:
+                        Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.JOY);
+                        sender.say(t, "Aaah...!  Wow...!");
                     }
                 } else
-                if(sender.getObedience() > 66)
-                {
-                    Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.JOY, Project.Emotion.FOCUS);
-                    sender.say(t, "I love you, " + sender.demonLord() + "!  I love you so much!");
-                } else
-                if(sender.getObedience() > 33)
-                {
-                    Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.FEAR);
-                    sender.say(t, "This is... really intense...");
-                } else
-                {
+                switch (sender.getObedience() / 33) {
+                case 0:
                     Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.ANGER, Project.Emotion.FOCUS);
                     sender.say(t, "How dare you... tempt me...!?  Take this!  And this!");
+                break;
+                case 1:
+                    Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.FEAR);
+                    sender.say(t, "This is... really intense...");
+                break;
+                default:
+                    Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.JOY, Project.Emotion.FOCUS);
+                    sender.say(t, "I love you, " + sender.demonLord() + "!  I love you so much!");
                 }
             } else
             if(sender.getDeviancy() > 66)
@@ -1022,19 +1004,18 @@ public class Activity
                     default: sender.say(t, "Ngh!  Ah!  Aaah!");
                 }
             } else
-            if(sender.getObedience() > 66)
-            {
-                Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.FOCUS, Project.Emotion.LEWD);
-                sender.say(t, "I'll hold out... as long as I can...!");
-            } else
-            if(sender.getObedience() > 33)
-            {
-                Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.FEAR, Project.Emotion.LEWD);
-                sender.say(t, "Why... are you making me feel so good...!?");
-            } else
-            {
+            switch (sender.getObedience() / 33) {
+            case 0:
                 Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                 sender.say(t, "J-Just... have to calm down...!");
+            break;
+            case 1:
+                Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.FEAR, Project.Emotion.LEWD);
+                sender.say(t, "Why... are you making me feel so good...!?");
+            break;
+            default:
+                Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.FOCUS, Project.Emotion.LEWD);
+                sender.say(t, "I'll hold out... as long as I can...!");
             }
         } else
         if(this == Project.PenetratedVaginally)
@@ -1043,36 +1024,34 @@ public class Activity
             {
                 if(sender.getDeviancy() > 66)
                 {
-                    if(sender.getObedience() > 66)
-                    {
-                        Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.JOY);
-                        sender.say(t, "Yes!  Yes!  Cum inside me!.");
-                    } else
-                    if(sender.getObedience() > 33)
-                    {
-                        Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.JOY);
-                        sender.say(t, "Aaah...  Your cock is amazing, " + sender.demonLord() + "!");
-                    } else
-                    {
+                    switch (sender.getObedience() / 33) {
+                    case 0:
                         Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.ANGER);
                         sender.say(t, "You... t-tricked me into doing this...!");
+                    break;
+                    case 1:
+                        Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.JOY);
+                        sender.say(t, "Aaah...  Your cock is amazing, " + sender.demonLord() + "!");
+                    break;
+                    default:
+                        Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.JOY);
+                        sender.say(t, "Yes!  Yes!  Cum inside me!.");
                     }
                 } else
                 if(sender.getDeviancy() > 33)
                 {
-                    if(sender.getConfidence() > 66)
-                    {
-                        Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.FOCUS);
-                        sender.say(t, "Ngh...!  I know you like it... rough...!");
-                    } else
-                    if(sender.getConfidence() > 33)
-                    {
-                        Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.FOCUS);
-                        sender.say(t, "It's...  Ah!  Inside!");
-                    } else
-                    {
+                    switch (sender.getConfidence() / 33) {
+                    case 0:
                         Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.JOY);
                         sender.say(t, "Th-This... actually feels really good...!");
+                    break;
+                    case 1:
+                        Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.FOCUS);
+                        sender.say(t, "It's...  Ah!  Inside!");
+                    break;
+                    default:
+                        Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.FOCUS);
+                        sender.say(t, "Ngh...!  I know you like it... rough...!");
                     }
                 } else
                 {
@@ -1086,19 +1065,18 @@ public class Activity
             } else
             if(sender.getObedience() > 66)
             {
-                if(sender.getDeviancy() > 66)
-                {
-                    Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.JOY);
-                    sender.say(t, "Yes!  Yes!  Take me!  Take me!");
-                } else
-                if(sender.getDeviancy() > 33)
-                {
-                    Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
-                    sender.say(t, "I'm sorry, " + sender.demonLord() + "!  It feels too good with you inside me!");
-                } else
-                {
+                switch (sender.getDeviancy() / 33) {
+                case 0:
                     Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.FOCUS, Project.Emotion.JOY);
                     sender.say(t, "Does it feel good when I... ngh... squeeze?  Like this?");
+                break;
+                case 1:
+                    Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
+                    sender.say(t, "I'm sorry, " + sender.demonLord() + "!  It feels too good with you inside me!");
+                break;
+                default:
+                    Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.JOY);
+                    sender.say(t, "Yes!  Yes!  Take me!  Take me!");
                 }
             } else
             if(sender.getObedience() > 33)
@@ -1110,19 +1088,18 @@ public class Activity
                     default: sender.say(t, "Aaagh...!  This shouldn't... feel so good...!");
                 }
             } else
-            if(sender.getInnocence() > 66)
-            {
-                Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.ANGER);
-                sender.say(t, "Aaagh, gaaah!  Stop it, nnnaaah!");
-            } else
-            if(sender.getInnocence() > 33)
-            {
-                Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.STRUGGLE, Project.Emotion.LEWD);
-                sender.say(t, "Mph!  Gh!  Agh!");
-            } else
-            {
+            switch (sender.getInnocence() / 33) {
+            case 0:
                 Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                 sender.say(t, "Just... climax already, you brute...!");
+            break;
+            case 1:
+                Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.STRUGGLE, Project.Emotion.LEWD);
+                sender.say(t, "Mph!  Gh!  Agh!");
+            break;
+            default:
+                Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.ANGER);
+                sender.say(t, "Aaagh, gaaah!  Stop it, nnnaaah!");
             }
         } else
         if(this == Project.AnalPenetrate)
@@ -1140,34 +1117,32 @@ public class Activity
                 } else
                 if(sender.getDeviancy() > 33)
                 {
-                    if(sender.getInnocence() > 66)
-                    {
-                        Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.JOY);
-                        sender.say(t, "Aaah...!  Wow...!");
-                    } else
-                    if(sender.getInnocence() > 33)
-                    {
-                        Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.FOCUS);
-                        sender.say(t, "That's... tight...!");
-                    } else
-                    {
+                    switch (sender.getInnocence() / 33) {
+                    case 0:
                         Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.FOCUS, Project.Emotion.JOY);
                         sender.say(t, "Ah, yes...  Here we go...");
+                    break;
+                    case 1:
+                        Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.FOCUS);
+                        sender.say(t, "That's... tight...!");
+                    break;
+                    default:
+                        Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.JOY);
+                        sender.say(t, "Aaah...!  Wow...!");
                     }
                 } else
-                if(sender.getObedience() > 66)
-                {
-                    Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.JOY, Project.Emotion.FOCUS);
-                    sender.say(t, "I love you, " + sender.demonLord() + "!  I love you so much!");
-                } else
-                if(sender.getObedience() > 33)
-                {
-                    Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.FEAR);
-                    sender.say(t, "This is... really intense...");
-                } else
-                {
+                switch (sender.getObedience() / 33) {
+                case 0:
                     Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.ANGER, Project.Emotion.FOCUS);
                     sender.say(t, "How dare you... tempt me...!?  Take this!  And this!");
+                break;
+                case 1:
+                    Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.FEAR);
+                    sender.say(t, "This is... really intense...");
+                break;
+                default:
+                    Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.JOY, Project.Emotion.FOCUS);
+                    sender.say(t, "I love you, " + sender.demonLord() + "!  I love you so much!");
                 }
             } else
             if(sender.getDeviancy() > 66)
@@ -1188,19 +1163,18 @@ public class Activity
                     default: sender.say(t, "Ngh!  Ah!  Aaah!");
                 }
             } else
-            if(sender.getObedience() > 66)
-            {
-                Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.FOCUS, Project.Emotion.LEWD);
-                sender.say(t, "I'll hold out... as long as I can...!");
-            } else
-            if(sender.getObedience() > 33)
-            {
-                Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.FEAR, Project.Emotion.LEWD);
-                sender.say(t, "Why... are you making me feel so good...!?");
-            } else
-            {
+            switch (sender.getObedience() / 33) {
+            case 0:
                 Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                 sender.say(t, "J-Just... have to calm down...!");
+            break;
+            case 1:
+                Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.FEAR, Project.Emotion.LEWD);
+                sender.say(t, "Why... are you making me feel so good...!?");
+            break;
+            default:
+                Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.FOCUS, Project.Emotion.LEWD);
+                sender.say(t, "I'll hold out... as long as I can...!");
             }
         } else
         if(this == Project.PenetratedAnally)
@@ -1208,36 +1182,34 @@ public class Activity
             {
                 if(sender.getDeviancy() > 66)
                 {
-                    if(sender.getObedience() > 66)
-                    {
-                        Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.JOY);
-                        sender.say(t, "Yes!  Yes!  Cum inside me!.");
-                    } else
-                    if(sender.getObedience() > 33)
-                    {
-                        Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.JOY);
-                        sender.say(t, "Aaah...  Your cock is amazing, " + sender.demonLord() + "!");
-                    } else
-                    {
+                    switch (sender.getObedience() / 33) {
+                    case 0:
                         Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.ANGER);
                         sender.say(t, "You... t-tricked me into doing this...!");
+                    break;
+                    case 1:
+                        Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.JOY);
+                        sender.say(t, "Aaah...  Your cock is amazing, " + sender.demonLord() + "!");
+                    break;
+                    default:
+                        Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.JOY);
+                        sender.say(t, "Yes!  Yes!  Cum inside me!.");
                     }
                 } else
                 if(sender.getDeviancy() > 33)
                 {
-                    if(sender.getConfidence() > 66)
-                    {
-                        Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.FOCUS);
-                        sender.say(t, "Ngh...!  I know you like it... rough...!");
-                    } else
-                    if(sender.getConfidence() > 33)
-                    {
-                        Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.FOCUS);
-                        sender.say(t, "It's...  Ah!  Inside!");
-                    } else
-                    {
+                    switch (sender.getConfidence() / 33) {
+                    case 0:
                         Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.JOY);
                         sender.say(t, "Th-This... actually feels really good...!");
+                    break;
+                    case 1:
+                        Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.FOCUS);
+                        sender.say(t, "It's...  Ah!  Inside!");
+                    break;
+                    default:
+                        Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.FOCUS);
+                        sender.say(t, "Ngh...!  I know you like it... rough...!");
                     }
                 } else
                 {
@@ -1253,19 +1225,18 @@ public class Activity
             {
                 if(sender.getObedience() > 66)
                 {
-                    if(sender.getDeviancy() > 66)
-                    {
-                        Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.JOY);
-                        sender.say(t, "Yes!  Yes!  Take me!  Take me!");
-                    } else
-                    if(sender.getDeviancy() > 33)
-                    {
-                        Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
-                        sender.say(t, "I'm sorry, " + sender.demonLord() + "!  It feels too good with you inside me!");
-                    } else
-                    {
+                    switch (sender.getDeviancy() / 33) {
+                    case 0:
                         Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.FOCUS, Project.Emotion.JOY);
                         sender.say(t, "Does it feel good when I... ngh... squeeze?  Like this?");
+                    break;
+                    case 1:
+                        Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
+                        sender.say(t, "I'm sorry, " + sender.demonLord() + "!  It feels too good with you inside me!");
+                    break;
+                    default:
+                        Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.JOY);
+                        sender.say(t, "Yes!  Yes!  Take me!  Take me!");
                     }
                 } else
                 if(sender.getObedience() > 33)
@@ -1277,19 +1248,18 @@ public class Activity
                         default: sender.say(t, "Aaagh...!  This shouldn't... feel so good...!");
                     }
                 } else
-                if(sender.getInnocence() > 66)
-                {
-                    Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.ANGER);
-                    sender.say(t, "Aaagh, gaaah!  Stop it, nnnaaah!");
-                } else
-                if(sender.getInnocence() > 33)
-                {
-                    Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.STRUGGLE, Project.Emotion.LEWD);
-                    sender.say(t, "Mph!  Gh!  Agh!");
-                } else
-                {
+                switch (sender.getInnocence() / 33) {
+                case 0:
                     Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                     sender.say(t, "Just... climax already, you brute...!");
+                break;
+                case 1:
+                    Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.STRUGGLE, Project.Emotion.LEWD);
+                    sender.say(t, "Mph!  Gh!  Agh!");
+                break;
+                default:
+                    Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.ANGER);
+                    sender.say(t, "Aaagh, gaaah!  Stop it, nnnaaah!");
                 }
             } else
             {

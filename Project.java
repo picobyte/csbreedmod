@@ -220,19 +220,18 @@ public class Project extends JFrame
                     saves.harem[i].chooseCombatStyle();
                     saves.harem[i].motivation = 1000;
                     saves.harem[i].stamina = 1000;
-                    if(saves.harem[i].innocence > 66)
-                    {
-                        saves.harem[i].textColor = new Color(255, 0, 150);
-                        saves.harem[i].darkColor = new Color(255, 0, 150);
-                    } else
-                    if(saves.harem[i].innocence > 33)
-                    {
-                        saves.harem[i].textColor = new Color(120, 50, 180);
-                        saves.harem[i].darkColor = new Color(150, 100, 200);
-                    } else
-                    {
+                    switch (saves.harem[i].innocence / 33) {
+                    case 0:
                         saves.harem[i].textColor = new Color(200, 100, 100);
                         saves.harem[i].darkColor = new Color(255, 130, 220);
+                    break;
+                    case 1:
+                        saves.harem[i].textColor = new Color(120, 50, 180);
+                        saves.harem[i].darkColor = new Color(150, 100, 200);
+                    break;
+                    default:
+                        saves.harem[i].textColor = new Color(255, 0, 150);
+                        saves.harem[i].darkColor = new Color(255, 0, 150);
                     }
                     saves.harem[i].others = null;
                 }
@@ -1789,19 +1788,18 @@ public class Project extends JFrame
             if(c.globalID == 0)
                 c.globalID = w.save.assignChosenID();
             c.textSize = w.textSize;
-            if(c.morality > 66)
-            {
-                c.textColor = new Color(0, 0, 230);
-                c.darkColor = new Color(100, 100, 255);
-            } else
-            if(c.morality > 33)
-            {
-                c.textColor = new Color(0, 110, 0);
-                c.darkColor = new Color(70, 170, 70);
-            } else
-            {
+            switch (c.morality / 33) {
+            case 0:
                 c.textColor = new Color(180, 0, 0);
                 c.darkColor = new Color(220, 90, 90);
+            break;
+            case 1:
+                c.textColor = new Color(0, 110, 0);
+                c.darkColor = new Color(70, 170, 70);
+            break;
+            default:
+                c.textColor = new Color(0, 0, 230);
+                c.darkColor = new Color(100, 100, 255);
             }
             c.incantation = c.genIncantation(c.morality, c.dignity);
             c.adjectiveName = c.genAdjectiveName(c.innocence, c.confidence);
@@ -1839,67 +1837,63 @@ public class Project extends JFrame
         int highs = 0;
         int mids = 0;
         int lows = 0;
-        if(c.morality > 66)
-        {
-            w.blueAppend(t, "\nMorality " + c.morality + ": Core");
-            highs++;
-        } else
-        if(c.morality > 33)
-        {
-            w.greenAppend(t, "\nMorality " + c.morality + ": Significant");
-            mids++;
-        } else
-        {
+        switch (c.morality / 33) {
+        case 0:
             w.redAppend(t, "\nMorality " + c.morality + ": Minor");
             lows++;
+        break;
+        case 1:
+            w.greenAppend(t, "\nMorality " + c.morality + ": Significant");
+            mids++;
+        break;
+        default:
+            w.blueAppend(t, "\nMorality " + c.morality + ": Core");
+            highs++;
         }
         if(!c.vVirg)
             w.redAppend(t, " (BROKEN)");
-        if(c.innocence > 66)
-        {
-            w.blueAppend(t, "\nInnocence " + c.innocence + ": Core");
-            highs++;
-        } else
-        if(c.innocence > 33)
-        {
-            w.greenAppend(t, "\nInnocence " + c.innocence + ": Significant");
-            mids++;
-        } else
-        {
+        switch (c.innocence / 33) {
+        case 0:
             w.redAppend(t, "\nInnocence " + c.innocence + ": Minor");
             lows++;
+        break;
+        case 1:
+            w.greenAppend(t, "\nInnocence " + c.innocence + ": Significant");
+            mids++;
+        break;
+        default:
+            w.blueAppend(t, "\nInnocence " + c.innocence + ": Core");
+            highs++;
         }
         if(!c.cVirg)
             w.redAppend(t, " (BROKEN)");
-        if(c.confidence > 66)
-        {
-            w.blueAppend(t, "\nConfidence " + c.confidence + ": Core");
-            highs++;
-        } else
-        if(c.confidence > 33)
-        {
-            w.greenAppend(t, "\nConfidence " + c.confidence + ": Significant");
-            mids++;
-        } else
-        {
+        switch (c.confidence / 33) {
+        case 0:
             w.redAppend(t, "\nConfidence " + c.confidence + ": Minor");
             lows++;
+        break;
+        case 1:
+            w.greenAppend(t, "\nConfidence " + c.confidence + ": Significant");
+            mids++;
+        break;
+        default:
+            w.blueAppend(t, "\nConfidence " + c.confidence + ": Core");
+            highs++;
         }
         if(!c.aVirg)
             w.redAppend(t, " (BROKEN)");
-        if(c.dignity > 66)
-        {
-            w.blueAppend(t, "\nDignity " + c.dignity + ": Core");
-            highs++;
-        } else
-        if(c.dignity > 33)
-        {
-            w.greenAppend(t, "\nDignity " + c.dignity + ": Significant");
-            mids++;
-        } else
-        {
+        switch (c.dignity / 33) {
+        case 0:
             w.redAppend(t, "\nDignity " + c.dignity + ": Minor");
             lows++;
+        break;
+        case 1:
+            w.greenAppend(t, "\nDignity " + c.dignity + ": Significant");
+            mids++;
+        break;
+        default:
+            w.blueAppend(t, "\nDignity " + c.dignity + ": Core");
+            highs++;
         }
         if(!c.modest)
             w.redAppend(t, " (BROKEN)");
@@ -1912,72 +1906,68 @@ public class Project extends JFrame
             int foundLows = 0;
             Boolean compatible = true;
             Chosen subject = w.save.customRoster[i];
-            if(subject.morality > 66)
-            {
-                foundHighs++;
-                if(c.morality > 66)
-                    compatible = false;
-            } else
-            if(subject.morality > 33)
-            {
-                foundMids++;
-                if(c.morality > 33 && c.morality < 67)
-                    compatible = false;
-            } else
-            {
+            switch (subject.morality / 33) {
+            case 0:
                 foundLows++;
                 if(c.morality < 34)
                     compatible = false;
-            }
-            if(subject.innocence > 66)
-            {
-                foundHighs++;
-                if(c.innocence > 66)
-                    compatible = false;
-            } else
-            if(subject.innocence > 33)
-            {
+            break;
+            case 1:
                 foundMids++;
-                if(c.innocence > 33 && c.innocence < 67)
+                if(c.morality > 33 && c.morality < 67)
                     compatible = false;
-            } else
-            {
+            break;
+            default:
+                foundHighs++;
+                if(c.morality > 66)
+                    compatible = false;
+            }
+            switch (subject.innocence / 33) {
+            case 0:
                 foundLows++;
                 if(c.innocence < 34)
                     compatible = false;
-            }
-            if(subject.confidence > 66)
-            {
-                foundHighs++;
-                if(c.confidence > 66)
-                    compatible = false;
-            } else
-            if(subject.confidence > 33)
-            {
+            break;
+            case 1:
                 foundMids++;
-                if(c.confidence > 33 && c.confidence < 67)
+                if(c.innocence > 33 && c.innocence < 67)
                     compatible = false;
-            } else
-            {
+            break;
+            default:
+                foundHighs++;
+                if(c.innocence > 66)
+                    compatible = false;
+            }
+            switch (subject.confidence / 33) {
+            case 0:
                 foundLows++;
                 if(c.confidence < 34)
                     compatible = false;
-            }
-            if(subject.dignity > 66)
-            {
-                foundHighs++;
-                if(c.dignity > 66)
+            break;
+            case 1:
+                foundMids++;
+                if(c.confidence > 33 && c.confidence < 67)
                     compatible = false;
-            } else
-            if(subject.dignity > 33)
-            {
+            break;
+            default:
+                foundHighs++;
+                if(c.confidence > 66)
+                    compatible = false;
+            }
+            switch (subject.dignity / 33) {
+            case 0:
+                foundLows++;
+                if(c.dignity < 34)
+                    compatible = false;
+            break;
+            case 1:
                 foundMids++;
                 if(c.dignity > 33 && c.dignity < 67)
                     compatible = false;
-            } else
-            {
-                foundLows++;
-                if(c.dignity < 34)
+            break;
+            default:
+                foundHighs++;
+                if(c.dignity > 66)
                     compatible = false;
             }
             if(highs == 2 && foundHighs == 2 || mids == 2 && foundMids == 2 || lows == 2 && foundLows == 2)

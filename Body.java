@@ -779,53 +779,50 @@ public class Body
                     if(w.targetBody.getObedience() > 66)
                     {
                         w.append(t, String.format("%s is waiting eagerly in %s room when %s arrives, ", w.targetBody.OwnerName(), w.targetBody.hisHer(), w.lordBody.ownerName()));
-                        if(w.targetBody.getDeviancy() > 66)
-                        {
+                        switch (w.targetBody.getDeviancy() / 33) {
+                        case 0:
+                           w.append(t, String.format("shifting nervously from foot to foot.  %s knows roughly what will be expected of %s, but %s's unsure whether %3$s'll be able to perform.", w.targetBody.HeShe(), w.targetBody.himHer(), w.targetBody.heShe()));
+                           break;
+                        case 1:
+                           w.append(t, String.format("wearing nothing but a thin robe which %s quickly drops to the floor as %1$s welcomes %s.  An eager smile is on %s's face, and %s cheeks are flushed with arousal.", w.targetBody.heShe(), w.lordBody.himHer(), w.targetBody.ownerName(), w.targetBody.hisHer()));
+                            w.targetBody.currentEXPO = 1_000_000L;
+                           break;
+                        default:
                             w.append(t, String.format("already naked and unable to stop %sself from masturbating as %s anticipates what's to come.  When %2$s sees %s, %2$s scrambles to %s feet, panting with unrestrained desire.", w.targetBody.himHer(), w.targetBody.heShe(), w.lordBody.ownerName(), w.targetBody.hisHer()));
                             w.targetBody.currentEXPO = 1_000_000L;
-                        } else
-                        if(w.targetBody.getDeviancy() > 33)
-                        {
-                            w.append(t, String.format("wearing nothing but a thin robe which %s quickly drops to the floor as %1$s welcomes %s.  An eager smile is on %s's face, and %s cheeks are flushed with arousal.", w.targetBody.heShe(), w.lordBody.himHer(), w.targetBody.ownerName(), w.targetBody.hisHer()));
-                            w.targetBody.currentEXPO = 1_000_000L;
-                        } else
-                        {
-                            w.append(t, String.format("shifting nervously from foot to foot.  %s knows roughly what will be expected of %s, but %s's unsure whether %3$s'll be able to perform.", w.targetBody.HeShe(), w.targetBody.himHer(), w.targetBody.heShe()));
                         }
                         w.targetBody.currentPLEA = (w.targetBody.getObedience() * w.targetBody.getDeviancy()) / 10;
                     } else
                     if(w.targetBody.getObedience() > 33)
                     {
-                        if(w.targetBody.getDeviancy() > 66)
-                        {
-                            w.append(t, String.format("%s is masturbating when %s arrives, and %s looks almost annoyed at being interrupted.  But as %3$s remembers the possibilities offered by a partner, %3$s cheers up and sheds %s clothes, offering %sself to %2$s.", w.targetBody.capitalizedOwnerName(), w.lordBody.ownerName(), w.targetBody.heShe(), w.targetBody.hisHer(), w.targetBody.himHer()));
-                            w.targetBody.currentPLEA = (w.targetBody.getDeviancy() * w.targetBody.getDeviancy()) / 20;
-                            w.targetBody.currentEXPO = 1_000_000L;
-                        } else
-                        if(w.targetBody.getDeviancy() > 33)
-                        {
-                            w.append(t, String.format("%s welcomes %s into %s room, then stands obediently at attention.  Only the slight flush in %3$s cheeks betrays the fact that %s might be hoping for this encounter to turn intimate.", w.targetBody.capitalizedOwnerName(), w.lordBody.ownerName(), w.targetBody.hisHer(), w.targetBody.heShe()));
-                            w.targetBody.currentPLEA = (w.targetBody.getDeviancy() * w.targetBody.getDeviancy()) / 100;
-                        } else
-                        {
-                            w.append(t, String.format("%s reluctantly allows %s into %s room.  %s's clearly resigned to what %s's going to be forced to do.", w.targetBody.OwnerName(), w.lordBody.ownerName(), w.targetBody.hisHer(), w.targetBody.HeShe(), w.targetBody.heShe()));
+                        switch (w.targetBody.getDeviancy() / 33) {
+                        case 0:
+                           w.append(t, String.format("%s reluctantly allows %s into %s room.  %s's clearly resigned to what %s's going to be forced to do.", w.targetBody.OwnerName(), w.lordBody.ownerName(), w.targetBody.hisHer(), w.targetBody.HeShe(), w.targetBody.heShe()));
                             w.targetBody.currentFEAR = 100 - w.targetBody.getConfidence();
+                           break;
+                        case 1:
+                            w.append(t, String.format("%s welcomes %s into %s room, then stands obediently at attention.  Only the slight flush in %3$s cheeks betrays the fact that %s might be hoping for this encounter to turn intimate.", w.targetBody.capitalizedOwnerName(), w.lordBody.ownerName(), w.targetBody.hisHer(), w.targetBody.heShe()));
+                           w.targetBody.currentPLEA = (w.targetBody.getDeviancy() * w.targetBody.getDeviancy()) / 100;
+                           break;
+                        default:
+                           w.append(t, String.format("%s is masturbating when %s arrives, and %s looks almost annoyed at being interrupted.  But as %3$s remembers the possibilities offered by a partner, %3$s cheers up and sheds %s clothes, offering %sself to %2$s.", w.targetBody.capitalizedOwnerName(), w.lordBody.ownerName(), w.targetBody.heShe(), w.targetBody.hisHer(), w.targetBody.himHer()));
+                           w.targetBody.currentPLEA = (w.targetBody.getDeviancy() * w.targetBody.getDeviancy()) / 20;
+                           w.targetBody.currentEXPO = 1_000_000L;
                         }
                         w.targetBody.currentHATE = ((100 - w.targetBody.getDeviancy()) * (100 - w.targetBody.getObedience())) / 100;
                     } else
                     {
-                        if(w.targetBody.getDeviancy() > 66)
-                        {
-                            w.append(t, String.format("%s is trembling with arousal as %s enters %s room, but %s still tries to glare at %s, denying how turned on %s is at being at the mercy of %s hated enemy.", w.targetBody.OwnerName(), w.lordBody.ownerName(), w.targetBody.hisHer(), w.targetBody.heShe(), w.lordBody.himHer(), w.targetBody.heShe(), w.targetBody.hisHer()));
-                            w.targetBody.currentPLEA = (w.targetBody.getDeviancy() * w.targetBody.getDeviancy()) / 40;
-                        } else
-                        if(w.targetBody.getDeviancy() > 33)
-                        {
-                            w.append(t, String.format("When %s enters %s room, %s dares %s to do %s worst.  The growing perverted side of %s is secretly looking forward to it.", w.lordBody.ownerName(), w.targetBody.hisHer(), w.targetBody.ownerName(), w.lordBody.himHer(), w.lordBody.hisHer(), w.targetBody.ownerName()));
-                            w.targetBody.currentPLEA = (w.targetBody.getDeviancy() * w.targetBody.getObedience()) / 40;
-                        } else
-                        {
-                            w.append(t, String.format("%s waits in %s room with %2$s arms crossed.  %s doesn't even acknowledge %s entering the room.", w.targetBody.OwnerName(), w.targetBody.hisHer(), w.targetBody.HeShe(), w.lordBody.ownerName()));
+                        switch (w.targetBody.getDeviancy() / 33) {
+                        case 0:
+                           w.append(t, String.format("%s waits in %s room with %2$s arms crossed.  %s doesn't even acknowledge %s entering the room.", w.targetBody.OwnerName(), w.targetBody.hisHer(), w.targetBody.HeShe(), w.lordBody.ownerName()));
+                           break;
+                        case 1:
+                           w.append(t, String.format("When %s enters %s room, %s dares %s to do %s worst.  The growing perverted side of %s is secretly looking forward to it.", w.lordBody.ownerName(), w.targetBody.hisHer(), w.targetBody.ownerName(), w.lordBody.himHer(), w.lordBody.hisHer(), w.targetBody.ownerName()));
+                           w.targetBody.currentPLEA = (w.targetBody.getDeviancy() * w.targetBody.getObedience()) / 40;
+                           break;
+                        default:
+                           w.append(t, String.format("%s is trembling with arousal as %s enters %s room, but %s still tries to glare at %s, denying how turned on %s is at being at the mercy of %s hated enemy.", w.targetBody.OwnerName(), w.lordBody.ownerName(), w.targetBody.hisHer(), w.targetBody.heShe(), w.lordBody.himHer(), w.targetBody.heShe(), w.targetBody.hisHer()));
+                           w.targetBody.currentPLEA = (w.targetBody.getDeviancy() * w.targetBody.getDeviancy()) / 40;
                         }
                         w.targetBody.currentFEAR = 100 - w.targetBody.getConfidence();
                         w.targetBody.currentHATE = ((100 - w.targetBody.getObedience()) * (100 - w.targetBody.getObedience())) / 50;
