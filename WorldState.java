@@ -12208,13 +12208,11 @@ public class WorldState
                     w.append(t, String.format("Despite %s growing fury, ", c.hisHer()));
                 else
                     w.append(t, String.format("Despite %s growing annoyance, ", c.hisHer()));
-                if(innocence > 66)
-                    w.append(t, String.format("the things %s is doing to %s make %s feel nice enough to start blushing and squirming.  ", c.reference(x), mainName, c.himHer()));
-                else
-                if(innocence > 33)
-                    w.append(t, String.format("%s feels %s face grow warm as %s's stimulation starts to have an effect.  ", mainName, c.hisHer(), c.reference(x)));
-                else
-                    w.append(t, String.format("%s can't deny that %s's sexual stimulation is starting to have an effect on %s.  ", mainName, c.reference(x), c.himHer()));
+                switch (innocence / 33) {
+                    case 0: w.append(t, String.format("%s can't deny that %s's sexual stimulation is starting to have an effect on %s.  ", mainName, c.reference(x), c.himHer())); break;
+                    case 1: w.append(t, String.format("%s feels %s face grow warm as %s's stimulation starts to have an effect.  ", mainName, c.hisHer(), c.reference(x))); break;
+                    default: w.append(t, String.format("the things %s is doing to %s make %s feel nice enough to start blushing and squirming.  ", c.reference(x), mainName, c.himHer()));
+                }
                 if(c.getEXPOLevel() < 1)
                     w.append(t, String.format("%s's fingers are able to easily work their way in under %s clothes, and ", x.mainName, c.hisHer()));
                 else
@@ -12253,13 +12251,11 @@ public class WorldState
                     w.append(t, String.format("%s is barely able to suppress %s moans of pleasure ", mainName, c.hisHer()));
                 else
                     w.append(t, String.format("%s's grunts of pain turn into moans of pleasure ", mainName));
-                if(innocence > 66)
-                    w.append(t, String.format("as %s struggles to understand what's happening to %s.  ", c.heShe(), c.himHer()));
-                else
-                if(innocence > 33)
-                    w.append(t, String.format("as %s starts to give in to the good feelings.  ", c.heShe()));
-                else
-                    w.append(t, String.format("as %s begins to eagerly anticipate %s's fingers despite %sself.  ", c.heShe(), c.reference(x), c.himHer()));
+                switch (innocence / 33) {
+                    case 0: w.append(t, String.format("as %s begins to eagerly anticipate %s's fingers despite %sself.  ", c.heShe(), c.reference(x), c.himHer())); break;
+                    case 1: w.append(t, String.format("as %s starts to give in to the good feelings.  ", c.heShe())); break;
+                    default: w.append(t, String.format("as %s struggles to understand what's happening to %s.  ", c.heShe(), c.himHer()));
+                }
                 if(c.getEXPOLevel() < 2)
                     w.append(t, String.format("%s can only defend %sself as best %s can", c.HeShe(), c.himHer(), c.heShe()));
                 else
@@ -12393,21 +12389,17 @@ public class WorldState
                     w.append(t, String.format("%s has had %s %s torn off %2$s legs and ", mainName, c.hisHer(), bottomDesc));
                 if(w.tickle())
                 {
-                    if(confidence > 66)
-                        w.append(t, String.format("%s's forced to acknowledge that the fight is taking its toll on %s.  ", c.heShe(), c.himHer()));
-                    else
-                    if(confidence > 33)
-                        w.append(t, String.format("%s face wears a strained expression from the rigors of battle.  ", c.hisHer()));
-                    else
-                        w.append(t, String.format("%s's starting to get too tired to fight.  ", c.heShe()));
+                    switch (confidence / 33) {
+                        case 0: w.append(t, String.format("%s's starting to get too tired to fight.  ", c.heShe())); break;
+                        case 1: w.append(t, String.format("%s face wears a strained expression from the rigors of battle.  ", c.hisHer())); break;
+                        default: w.append(t, String.format("%s's forced to acknowledge that the fight is taking its toll on %s.  ", c.heShe(), c.himHer()));
+                    }
                 } else
-                if(confidence > 66)
-                    w.append(t, String.format("the bruises covering %s body force %s to acknowledge that %s's getting hurt.  ", c.hisHer(), c.himHer(), c.heShe()));
-                else
-                if(confidence > 33)
-                    w.append(t, String.format("%s confidence has been shaken by the bruises covering %1$s body.  ", c.hisHer()));
-                else
-                    w.append(t, String.format("%s can't stifle %s whimpers of pain nor cover the bruises across %2$s body.  ", c.heShe(), c.hisHer()));
+                switch (confidence / 33) {
+                    case 0: w.append(t, String.format("%s can't stifle %s whimpers of pain nor cover the bruises across %2$s body.  ", c.heShe(), c.hisHer())); break;
+                    case 1: w.append(t, String.format("%s confidence has been shaken by the bruises covering %1$s body.  ", c.hisHer())); break;
+                    default: w.append(t, String.format("the bruises covering %s body force %s to acknowledge that %s's getting hurt.  ", c.hisHer(), c.himHer(), c.heShe()));
+                }
                 if(c.getHATELevel() < 1)
                     w.append(t, String.format("%s's trying to remain calm and focused, but ", c.HeShe()));
                 else
@@ -12434,13 +12426,11 @@ public class WorldState
                         w.append(t, String.format("%s's near-orgasmic pleasure is interrupted by a sudden impact", mainName));
                     else
                         w.append(t, String.format("%s's gasping breaths of pleasure turn into a stifled squeak", mainName));
-                    if(confidence > 66)
-                        w.append(t, String.format(" as %s overconfidence is punished by an opportunistic counterattack from %s.  ", c.hisHer(), x.mainName));
-                    else
-                    if(confidence > 33)
-                        w.append(t, String.format(" as a blast of energy from %s startles %s and causes %2$s to flinch away.  ", x.mainName, c.himHer()));
-                    else
-                        w.append(t, String.format(" as %s confidence in %1$s ability to win begins to fade, and %s starts flinching away from every attack.  ", c.hisHer(), c.heShe()));
+                    switch (confidence / 33) {
+                        case 0: w.append(t, String.format(" as %s confidence in %1$s ability to win begins to fade, and %s starts flinching away from every attack.  ", c.hisHer(), c.heShe())); break;
+                        case 1: w.append(t, String.format(" as a blast of energy from %s startles %s and causes %2$s to flinch away.  ", x.mainName, c.himHer())); break;
+                        default: w.append(t, String.format(" as %s overconfidence is punished by an opportunistic counterattack from %s.  ", c.hisHer(), x.mainName));
+                    }
                     if(c.getEXPOLevel() < 2)
                         w.append(t, String.format("%s clothes are beginning to grow disheveled in the process", c.HisHer()));
                     else
@@ -12457,13 +12447,11 @@ public class WorldState
                         w.append(t, String.format("%s's oversensitive nerves erupt with pain", mainName));
                     else
                         w.append(t, String.format("%s's gasping breaths of pleasure turn into cries of pain", mainName));
-                    if(confidence > 66)
-                        w.append(t, String.format(" as %s previous overconfidence is punished with attacks that start to draw blood.  ", c.hisHer()));
-                    else
-                    if(confidence > 33)
-                        w.append(t, String.format(" as %s's attacks start to draw blood.  ", x.mainName));
-                    else
-                        w.append(t, String.format(" as %s lack of self-confidence means that %s's attacks are already starting to draw blood.  ", c.hisHer(), x.mainName));
+                    switch (confidence / 33) {
+                        case 0: w.append(t, String.format(" as %s lack of self-confidence means that %s's attacks are already starting to draw blood.  ", c.hisHer(), x.mainName)); break;
+                        case 1: w.append(t, String.format(" as %s's attacks start to draw blood.  ", x.mainName)); break;
+                        default: w.append(t, String.format(" as %s previous overconfidence is punished with attacks that start to draw blood.  ", c.hisHer()));
+                    }
                     if(c.getEXPOLevel() < 2)
                         w.append(t, String.format("Patches of red are beginning to spread across %s clothes", c.hisHer()));
                     else
@@ -12484,21 +12472,17 @@ public class WorldState
             {
                 if(w.tickle())
                 {
-                    if(confidence > 66)
-                        w.append(t, String.format("%s has been stubbornly concealing just how much all the fighting has been affecting %s, but it's obvious that %s's having trouble completely suppressing %s gasps of exhaustion", mainName, c.himHer(), c.heShe(), c.hisHer()));
-                    else
-                    if(confidence > 33)
-                        w.append(t, String.format("%s's self-confidence has been completely destroyed by the way %s has been toying with %s", mainName, c.reference(x), c.himHer()));
-                    else
-                        w.append(t, String.format("%s's voice comes out in small whimpers every time %s clashes with %s.  %s knows deep down inside that %s isn't strong enough to resist whatever %s wants to make %s do", mainName, c.reference(x), c.himHer(), c.HeShe(), c.heShe(), x.heShe(), c.himHer()));
+                    switch (confidence / 33) {
+                        case 0: w.append(t, String.format("%s's voice comes out in small whimpers every time %s clashes with %s.  %s knows deep down inside that %s isn't strong enough to resist whatever %s wants to make %s do", mainName, c.reference(x), c.himHer(), c.HeShe(), c.heShe(), x.heShe(), c.himHer())); break;
+                        case 1: w.append(t, String.format("%s's self-confidence has been completely destroyed by the way %s has been toying with %s", mainName, c.reference(x), c.himHer())); break;
+                        default: w.append(t, String.format("%s has been stubbornly concealing just how much all the fighting has been affecting %s, but it's obvious that %s's having trouble completely suppressing %s gasps of exhaustion", mainName, c.himHer(), c.heShe(), c.hisHer()));
+                    }
                 } else
-                if(confidence > 66)
-                    w.append(t, String.format("%s has been stubbornly concealing just how hurt %s is, but %2$s can't hide the sound of %s bones cracking under the assault", mainName, c.heShe(), c.hisHer()));
-                else
-                if(confidence > 33)
-                    w.append(t, String.format("A loud crack signals one of %s's bones being broken", mainName));
-                else
-                    w.append(t, String.format("%s has been desperately trying to protect %sself from your assault, but the sound of bone breaking indicates that %s's being overwhelmed", mainName, c.himHer(), c.heShe()));
+                switch (confidence / 33) {
+                    case 0: w.append(t, String.format("%s has been desperately trying to protect %sself from your assault, but the sound of bone breaking indicates that %s's being overwhelmed", mainName, c.himHer(), c.heShe())); break;
+                    case 1: w.append(t, String.format("A loud crack signals one of %s's bones being broken", mainName)); break;
+                    default: w.append(t, String.format("%s has been stubbornly concealing just how hurt %s is, but %2$s can't hide the sound of %s bones cracking under the assault", mainName, c.heShe(), c.hisHer()));
+                }
                 if(c.getEXPOLevel() < 3)
                 {
                     if(w.tickle())
@@ -12567,13 +12551,11 @@ public class WorldState
                     w.append(t, String.format("%s shrieks in rage and pain", mainName));
                 if(w.tickle())
                 {
-                    if(confidence > 66)
-                        w.append(t, String.format(", still thrashing wildly as %s tries to fight, but too exhausted for it to do %s any good.  ", c.heShe(), c.himHer()));
-                    else
-                    if(confidence > 33)
-                        w.append(t, String.format(", completely fed up with the fighting but too exhausted to have any chance of finishing %s off.  ", x.mainName));
-                    else
-                        w.append(t, String.format(", flinching weakly as %s's hit by blasts of energy, but too exhausted and demoralized to put any strength in %s limbs.  ", c.heShe(), c.hisHer()));
+                    switch (confidence / 33) {
+                        case 0: w.append(t, String.format(", flinching weakly as %s's hit by blasts of energy, but too exhausted and demoralized to put any strength in %s limbs.  ", c.heShe(), c.hisHer())); break;
+                        case 1: w.append(t, String.format(", completely fed up with the fighting but too exhausted to have any chance of finishing %s off.  ", x.mainName)); break;
+                        default: w.append(t, String.format(", still thrashing wildly as %s tries to fight, but too exhausted for it to do %s any good.  ", c.heShe(), c.himHer()));
+                    }
                     if(c.getPLEALevel() < 4)
                         w.append(t, String.format("%s attempts to curl up and protect %sself are completely useless", c.HisHer(), c.himHer()));
                     else
@@ -12583,13 +12565,11 @@ public class WorldState
                         w.append(t, String.format("Combined with %s sexual overstimulation, the attacks make %1$s movements become completely uncontrolled", c.hisHer()));
                 } else
                 {
-                    if(confidence > 66)
-                        w.append(t, String.format(", struggling as much as %s can as %s keeps landing direct hits.  ", c.heShe(), x.mainName));
-                    else
-                    if(confidence > 33)
-                        w.append(t, String.format(" as %s beats %s down.  ", x.mainName, c.himHer()));
-                    else
-                        w.append(t, String.format(", trying and failing to curl up and protect %sself as %s shatters %s body.  ", c.himHer(), x.mainName, c.hisHer()));
+                    switch (confidence / 33) {
+                        case 0: w.append(t, String.format(", trying and failing to curl up and protect %sself as %s shatters %s body.  ", c.himHer(), x.mainName, c.hisHer())); break;
+                        case 1: w.append(t, String.format(" as %s beats %s down.  ", x.mainName, c.himHer())); break;
+                        default: w.append(t, String.format(", struggling as much as %s can as %s keeps landing direct hits.  ", c.heShe(), x.mainName));
+                    }
                     if(c.getPLEALevel() < 4)
                         w.append(t, String.format("%s attempts to move only hurt %s more", c.HisHer(), c.himHer()));
                     else
@@ -12623,13 +12603,11 @@ public class WorldState
                     w.append(t, String.format("Despite (or perhaps because of) the intense pleasure that's been inflicted on %s, ", c.himHer()));
                 else
                     w.append(t, String.format("%s face turning red with combined arousal and anger, ", c.HisHer()));
-                if(morality > 66)
-                    w.append(t, String.format("some serious annoyance is hidden behind %s's outwardly heroic demeanor.  ", mainName));
-                else
-                if(morality > 33)
-                    w.append(t, String.format("%s is already getting annoyed at the situation. ", mainName));
-                else
-                    w.append(t, String.format("%s's short temper means that %s's quickly getting annoyed at being toyed with.  ", mainName, c.heShe()));
+                switch (morality / 33) {
+                    case 0: w.append(t, String.format("%s's short temper means that %s's quickly getting annoyed at being toyed with.  ", mainName, c.heShe())); break;
+                    case 1: w.append(t, String.format("%s is already getting annoyed at the situation. ", mainName)); break;
+                    default: w.append(t, String.format("some serious annoyance is hidden behind %s's outwardly heroic demeanor.  ", mainName));
+                }
                 if(c.getINJULevel() < 1)
                     w.append(t, String.format("%s realizes that %s is deliberately provoking %s, but %s's still ", c.HeShe(), c.reference(x), c.himHer(), c.heShe()));
                 else
@@ -12661,13 +12639,11 @@ public class WorldState
                     w.append(t, String.format("As %s tries to cover %s stripped body, ", mainName, c.hisHer()));
                 else
                     w.append(t, String.format("As %s struggles to hold %s %s closed, ", mainName, c.hisHer(), topDesc));
-                if(morality > 66)
-                    w.append(t, String.format("%s wears an angry expression, unsuitable for %s normally kind face.  ", c.heShe(), c.hisHer()));
-                else
-                if(morality > 33)
-                    w.append(t, String.format("resentment burns in %s eyes.  ", c.hisHer()));
-                else
-                    w.append(t, String.format("%s teeth are clenched in rage.  ", c.hisHer()));
+                switch (morality / 33) {
+                    case 0: w.append(t, String.format("%s teeth are clenched in rage.  ", c.hisHer())); break;
+                    case 1: w.append(t, String.format("resentment burns in %s eyes.  ", c.hisHer())); break;
+                    default: w.append(t, String.format("%s wears an angry expression, unsuitable for %s normally kind face.  ", c.heShe(), c.hisHer()));
+                }
                 if(c.getINJULevel() < 2)
                     w.append(t, String.format("%s composure completely lost, ", c.HisHer()));
                 else
@@ -12706,13 +12682,11 @@ public class WorldState
                     w.append(t, "Gasping and moaning with exhaustion, ");
                 else
                     w.append(t, String.format("Made desperate by %s serious wounds, ", c.hisHer()));
-                if(morality > 66)
-                    w.append(t, String.format("%s lashes out, paying less mind than %s should to any innocents who might be close enough to get hurt.  ", mainName, c.heShe()));
-                else
-                if(morality > 33)
-                    w.append(t, String.format("%s lashes out indiscrimiately in %s attempts to escape.  ", mainName, c.hisHer()));
-                else
-                    w.append(t, String.format("%s gives in to %s rage and starts trying to lash out.  ", mainName, c.hisHer()));
+                switch (morality / 33) {
+                    case 0: w.append(t, String.format("%s gives in to %s rage and starts trying to lash out.  ", mainName, c.hisHer())); break;
+                    case 1: w.append(t, String.format("%s lashes out indiscrimiately in %s attempts to escape.  ", mainName, c.hisHer())); break;
+                    default: w.append(t, String.format("%s lashes out, paying less mind than %s should to any innocents who might be close enough to get hurt.  ", mainName, c.heShe()));
+                }
                 if(c.getPLEALevel() < 3)
                     w.append(t, String.format("%s just wants this all to be over", c.HeShe()));
                 else
@@ -12730,13 +12704,11 @@ public class WorldState
             } else
             if(c.getHATELevel() == 4)
             {
-                if(morality > 66)
-                    w.append(t, String.format("%s is torn between laughing and sobbing as %s sanity cracks", mainName, c.hisHer()));
-                else
-                if(morality > 33)
-                    w.append(t, String.format("%s giggles madly as %s sanity cracks", mainName, c.hisHer()));
-                else
-                    w.append(t, String.format("%s laughs with despairing abandon as %s sanity cracks", mainName, c.hisHer()));
+                switch (morality / 33) {
+                    case 0: w.append(t, String.format("%s laughs with despairing abandon as %s sanity cracks", mainName, c.hisHer())); break;
+                    case 1: w.append(t, String.format("%s giggles madly as %s sanity cracks", mainName, c.hisHer())); break;
+                    default: w.append(t, String.format("%s is torn between laughing and sobbing as %s sanity cracks", mainName, c.hisHer()));
+                }
                 if(c.getINJULevel() < 4)
                     w.append(t, ".  ");
                 else
@@ -13530,96 +13502,76 @@ public class WorldState
         {
             if(captureProgression % 3 == 1)
             {
-                if(dignity > 66)
-                    w.append(t, String.format("Unable to completely hide %s disgust, %s shudders", c.hisHer(), mainName));
-                else
-                if(dignity > 33)
-                    w.append(t, String.format("%s squirms in obvious disgust", mainName));
-                else
-                    w.append(t, String.format("%s visibly recoils and cries out in disgust", mainName));
+                switch (dignity / 33) {
+                    case 0: w.append(t, String.format("%s visibly recoils and cries out in disgust", mainName)); break;
+                    case 1: w.append(t, String.format("%s squirms in obvious disgust", mainName)); break;
+                    default: w.append(t, String.format("Unable to completely hide %s disgust, %s shudders", c.hisHer(), mainName));
+                }
                 if(c.getImpregnationEffectiveness() >= c.impregnationReq() || c.getHATELevel() >= 3 && !vVirg)
                 {
-                    if(morality > 66)
-                        w.append(t, String.format(", despairing over the fact that %s body is being defiled by the Demon Lord's seed", c.hisHer()));
-                    else
-                    if(morality > 33)
-                        w.append(t, String.format(" as %s feels your warm seed filling %s up", c.heShe(), c.himHer()));
-                    else
-                        w.append(t, String.format(", feeling the Demonic seed in %s belly resonate with %1$s sinful thoughts", c.hisHer()));
-                    if(confidence > 66)
-                        w.append(t, ", teeth clenched and eyes smoldering with rage.  ");
-                    else
-                    if(confidence > 33)
-                        w.append(t, String.format(", gasping with exertion and building anger in %s attempts to escape.  ", c.hisHer()));
-                    else
-                        w.append(t, ", tearful eyes glaring up at you.  ");
+                    switch (morality / 33) {
+                        case 0: w.append(t, String.format(", feeling the Demonic seed in %s belly resonate with %1$s sinful thoughts", c.hisHer())); break;
+                        case 1: w.append(t, String.format(" as %s feels your warm seed filling %s up", c.heShe(), c.himHer())); break;
+                        default: w.append(t, String.format(", despairing over the fact that %s body is being defiled by the Demon Lord's seed", c.hisHer()));
+                    }
+                    switch (confidence / 33) {
+                        case 0: w.append(t, ", tearful eyes glaring up at you.  "); break;
+                        case 1: w.append(t, String.format(", gasping with exertion and building anger in %s attempts to escape.  ", c.hisHer())); break;
+                        default: w.append(t, ", teeth clenched and eyes smoldering with rage.  ");
+                    }
                 } else
                 {
-                    if(morality > 66)
-                        w.append(t, String.format(", losing %s composure ", c.hisHer()));
-                    else
-                    if(morality > 33)
-                        w.append(t, ", caught off guard ");
-                    else
-                        w.append(t, String.format(", %s anger spiking ", c.hisHer()));
-                    if(confidence > 66)
-                        w.append(t, String.format("as %s determined struggles cause %1$s legs and tummy to grind against your enormous cock, unwittingly milking the organ until it cums all over %s.  ", c.hisHer(), c.himHer()));
-                    else
-                    if(confidence > 33)
-                        w.append(t, String.format("as you thrust your gigantic cock between %s tightly-clenched thighs, the pleasant pressure causing you to ejaculate all over %s.  ", c.hisHer(), c.himHer()));
-                    else
-                        w.append(t, String.format("as your huge cock humping against %s belly finally starts spurting copious amounts of seed onto %1$s chest and face.  ", c.hisHer()));
+                    switch (morality / 33) {
+                        case 0: w.append(t, String.format(", %s anger spiking ", c.hisHer())); break;
+                        case 1: w.append(t, ", caught off guard "); break;
+                        default: w.append(t, String.format(", losing %s composure ", c.hisHer()));
+                    }
+                    switch (confidence / 33) {
+                        case 0: w.append(t, String.format("as your huge cock humping against %s belly finally starts spurting copious amounts of seed onto %1$s chest and face.  ", c.hisHer())); break;
+                        case 1: w.append(t, String.format("as you thrust your gigantic cock between %s tightly-clenched thighs, the pleasant pressure causing you to ejaculate all over %s.  ", c.hisHer(), c.himHer())); break;
+                        default: w.append(t, String.format("as %s determined struggles cause %1$s legs and tummy to grind against your enormous cock, unwittingly milking the organ until it cums all over %s.  ", c.hisHer(), c.himHer()));
+                    }
                 }
                 if(c.getImpregnationEffectiveness() >= c.impregnationReq())
                 {
-                    if(innocence > 66)
-                        w.append(t, String.format("%s may already be carrying your progeny inside %s, but the substance also has all the regular effects of Demonic slime, causing %2$s to feel detached and lightheaded.", c.HeShe(), c.himHer()));
-                    else
-                    if(innocence > 33)
-                        w.append(t, String.format("The fact that it's pointless to make %s continue to go through this since %s's already pregnant just makes it worse.", c.himHer(), c.heShe()));
-                    else
-                        w.append(t, String.format("%s tries to convince %sself that it's too early to say for sure whether %s's been impregnated, but it doesn't work.", c.HeShe(), c.himHer(), c.heShe()));
+                    switch (innocence / 33) {
+                        case 0: w.append(t, String.format("%s tries to convince %sself that it's too early to say for sure whether %s's been impregnated, but it doesn't work.", c.HeShe(), c.himHer(), c.heShe())); break;
+                        case 1: w.append(t, String.format("The fact that it's pointless to make %s continue to go through this since %s's already pregnant just makes it worse.", c.himHer(), c.heShe())); break;
+                        default: w.append(t, String.format("%s may already be carrying your progeny inside %s, but the substance also has all the regular effects of Demonic slime, causing %2$s to feel detached and lightheaded.", c.HeShe(), c.himHer()));
+                    }
                 } else
                 if(c.getImpregnationEffectiveness() > 100)
                 {
-                    if(innocence > 66)
-                        w.append(t, String.format("%s feels an instinctive fear as %s senses that %2$s's closer than ever to actually getting pregnant.", c.HeShe(), c.heShe()));
-                    else
-                    if(innocence > 33)
-                        w.append(t, String.format("%s Chosen powers are supposed to protect %s from actually being forced to carry a Demonic child, but doubts creep into the back of %s mind as %s questions how strong those powers really are.", c.HisHer(), c.himHer(), c.hisHer(), c.heShe()));
-                    else
-                        w.append(t, String.format("%s knows that %s sinful behavior has likely decreased %2$s supernatural resistance to impregnation, and that makes this all the more terrifying.", c.HeShe(), c.hisHer()));
+                    switch (innocence / 33) {
+                        case 0: w.append(t, String.format("%s knows that %s sinful behavior has likely decreased %2$s supernatural resistance to impregnation, and that makes this all the more terrifying.", c.HeShe(), c.hisHer())); break;
+                        case 1: w.append(t, String.format("%s Chosen powers are supposed to protect %s from actually being forced to carry a Demonic child, but doubts creep into the back of %s mind as %s questions how strong those powers really are.", c.HisHer(), c.himHer(), c.hisHer(), c.heShe())); break;
+                        default: w.append(t, String.format("%s feels an instinctive fear as %s senses that %2$s's closer than ever to actually getting pregnant.", c.HeShe(), c.heShe()));
+                    }
                 } else
-                if(innocence > 66)
-                    w.append(t, String.format("%s instincts warn %s that you're trying to put a baby in %2$s for real, but %s has faith in %s Chosen powers to prevent that.", c.HisHer(), c.himHer(), c.heShe(), c.hisHer()));
-                else
-                if(innocence > 33)
-                    w.append(t, String.format("It's incredibly unpleasant, even though %s Chosen powers mean that %s's not worried about getting pregnant.", c.hisHer(), c.heShe()));
-                else
-                    w.append(t, String.format("%s's quite certain that %s Chosen powers protect %s from impregnation, but that just makes %3$s even more annoyed that you're putting %3$s through this for your own pleasure.", c.HeShe(), c.hisHer(), c.himHer()));
+                switch (innocence / 33) {
+                    case 0: w.append(t, String.format("%s's quite certain that %s Chosen powers protect %s from impregnation, but that just makes %3$s even more annoyed that you're putting %3$s through this for your own pleasure.", c.HeShe(), c.hisHer(), c.himHer())); break;
+                    case 1: w.append(t, String.format("It's incredibly unpleasant, even though %s Chosen powers mean that %s's not worried about getting pregnant.", c.hisHer(), c.heShe())); break;
+                    default: w.append(t, String.format("%s instincts warn %s that you're trying to put a baby in %2$s for real, but %s has faith in %s Chosen powers to prevent that.", c.HisHer(), c.himHer(), c.heShe(), c.hisHer()));
+                }
             } else
             if(captureProgression % 3 == 2)
             {
-                if(innocence > 66)
-                    w.append(t, String.format("%s is caught by surprise when you start ", mainName));
-                else
-                if(innocence > 33)
-                    w.append(t, String.format("%s is completely helpless to stop you when you begin ", mainName));
-                else
-                    w.append(t, String.format("%s takes a deep breath to brace %sself before you start ", mainName, c.himHer()));
+                switch (innocence / 33) {
+                    case 0: w.append(t, String.format("%s takes a deep breath to brace %sself before you start ", mainName, c.himHer())); break;
+                    case 1: w.append(t, String.format("%s is completely helpless to stop you when you begin ", mainName)); break;
+                    default: w.append(t, String.format("%s is caught by surprise when you start ", mainName));
+                }
                 if(c.getImpregnationEffectiveness() >= c.impregnationReq() || c.getHATELevel() >= 3 && !vVirg)
                 {
                     if(gender.equals("male"))
                         w.append(t, String.format("thrusting so deep into %s ass that it makes a visible bulge in %1$s lower abdomen", c.hisHer()));
                     else
                         w.append(t, String.format("pushing open %s cervix with the tip of your shaft", c.hisHer()));
-                    if(dignity > 66)
-                        w.append(t, String.format(", making %s teeth clench and %1$s eyes roll upward as %s tries in vain to hide %1$s body's reaction.  ", c.hisHer(), c.heShe()));
-                    else
-                    if(dignity > 33)
-                        w.append(t, String.format(", each spurt into %s deepest place causing %s to gasp and shudder.  ", c.hisHer(), c.himHer()));
-                    else
-                        w.append(t, String.format(", each impact deep inside causing %s to cry out in pain.  ", c.himHer()));
+                    switch (dignity / 33) {
+                        case 0: w.append(t, String.format(", each impact deep inside causing %s to cry out in pain.  ", c.himHer())); break;
+                        case 1: w.append(t, String.format(", each spurt into %s deepest place causing %s to gasp and shudder.  ", c.hisHer(), c.himHer())); break;
+                        default: w.append(t, String.format(", making %s teeth clench and %1$s eyes roll upward as %s tries in vain to hide %1$s body's reaction.  ", c.hisHer(), c.heShe()));
+                    }
                 } else
                 {
                     w.append(t, String.format("pulling %s even closer with crushing strength, ", c.himHer()));
@@ -13627,58 +13579,46 @@ public class WorldState
                         w.append(t, String.format("your gigantic cock twitching against %s chest and belly.  ", c.hisHer()));
                     else
                         w.append(t, String.format("your gigantic cock twitching between %s breasts.  ", c.hisHer()));
-                    if(dignity > 66)
-                        w.append(t, String.format("You're practically masturbating with %s body, which %s finds almost as degrading as it is painful.  ", c.hisHer(), c.heShe()));
-                    else
-                    if(dignity > 33)
-                        w.append(t, String.format("%s tries to protest, but the painful pressure squeezes the breath out of %s lungs.  ", c.HeShe(), c.hisHer()));
-                    else
-                        w.append(t, String.format("%s cries of pain and reflexive squirming accomplish nothing beyond getting you off.  ", c.HisHer()));
+                    switch (dignity / 33) {
+                        case 0: w.append(t, String.format("%s cries of pain and reflexive squirming accomplish nothing beyond getting you off.  ", c.HisHer())); break;
+                        case 1: w.append(t, String.format("%s tries to protest, but the painful pressure squeezes the breath out of %s lungs.  ", c.HeShe(), c.hisHer())); break;
+                        default: w.append(t, String.format("You're practically masturbating with %s body, which %s finds almost as degrading as it is painful.  ", c.hisHer(), c.heShe()));
+                    }
                 }
-                if(morality > 66)
-                    w.append(t, String.format("The brutal punishment doesn't give %s any pleasure, ", c.himHer()));
-                else
-                if(morality > 33)
-                    w.append(t, "It doesn't feel good at all, ");
-                else
-                    w.append(t, String.format("Your rough handling combined with %s bitter fury at being treated this way mean that %s doesn't feel any pleasure from this, ", c.hisHer(), c.heShe()));
+                switch (morality / 33) {
+                    case 0: w.append(t, String.format("Your rough handling combined with %s bitter fury at being treated this way mean that %s doesn't feel any pleasure from this, ", c.hisHer(), c.heShe())); break;
+                    case 1: w.append(t, "It doesn't feel good at all, "); break;
+                    default: w.append(t, String.format("The brutal punishment doesn't give %s any pleasure, ", c.himHer()));
+                }
                 if(c.getImpregnationEffectiveness() >= c.impregnationReq())
                 {
-                    if(confidence > 66)
-                        w.append(t, String.format("and the fact that you've made %s body into your tool is making it harder and harder for %s to maintain %1$s defiance.", c.hisHer(), c.himHer()));
-                    else
-                    if(confidence > 33)
-                        w.append(t, String.format("and %s can't help but wonder whether there's any point to resisting anymore.", c.heShe()));
-                    else
-                        w.append(t, String.format("and %s feels more and more like %1$s's already been defeated.", c.heShe()));
+                    switch (confidence / 33) {
+                        case 0: w.append(t, String.format("and %s feels more and more like %1$s's already been defeated.", c.heShe())); break;
+                        case 1: w.append(t, String.format("and %s can't help but wonder whether there's any point to resisting anymore.", c.heShe())); break;
+                        default: w.append(t, String.format("and the fact that you've made %s body into your tool is making it harder and harder for %s to maintain %1$s defiance.", c.hisHer(), c.himHer()));
+                    }
                 } else
                 if(c.getImpregnationEffectiveness() > 100)
                 {
-                    if(confidence > 66)
-                        w.append(t, String.format("and that just drives %s to struggle even harder against your attempt at impregnating %1$s.", c.himHer()));
-                    else
-                    if(confidence > 33)
-                        w.append(t, String.format("but the prospect of forced pregnancy has got so much adrenaline coursing through %s body that it doesn't even register yet how much it hurts.", c.hisHer()));
-                    else
-                        w.append(t, String.format("and %s terror at the prospect of being forced to carry a Demon's child means that %s's in no mental state to enjoy it anyway.", c.hisHer(), c.heShe()));
+                    switch (confidence / 33) {
+                        case 0: w.append(t, String.format("and %s terror at the prospect of being forced to carry a Demon's child means that %s's in no mental state to enjoy it anyway.", c.hisHer(), c.heShe())); break;
+                        case 1: w.append(t, String.format("but the prospect of forced pregnancy has got so much adrenaline coursing through %s body that it doesn't even register yet how much it hurts.", c.hisHer())); break;
+                        default: w.append(t, String.format("and that just drives %s to struggle even harder against your attempt at impregnating %1$s.", c.himHer()));
+                    }
                 } else
-                if(confidence > 66)
-                    w.append(t, String.format("motivating %s to fight back with all %s strength.", c.himHer(), c.hisHer()));
-                else
-                if(confidence > 33)
-                    w.append(t, String.format("but %s reminds %sself that %1$s isn't defeated yet.", c.heShe(), c.himHer()));
-                else
-                    w.append(t, String.format("and %s just tries to fold %s limbs inward and endure it.", c.heShe(), c.hisHer()));
+                switch (confidence / 33) {
+                    case 0: w.append(t, String.format("and %s just tries to fold %s limbs inward and endure it.", c.heShe(), c.hisHer())); break;
+                    case 1: w.append(t, String.format("but %s reminds %sself that %1$s isn't defeated yet.", c.heShe(), c.himHer())); break;
+                    default: w.append(t, String.format("motivating %s to fight back with all %s strength.", c.himHer(), c.hisHer()));
+                }
             } else
             if(captureProgression % 3 == 0)
             {
-                if(morality > 66)
-                    w.append(t, String.format("Psychically taunting %s about being a useful seedbed, ", mainName));
-                else
-                if(morality > 33)
-                    w.append(t, String.format("Telepathically telling %s that %s'll never be able to go back to normal after this, ", mainName, c.heShe()));
-                else
-                    w.append(t, String.format("Aiming to further provoke %s's anger, ", mainName));
+                switch (morality / 33) {
+                    case 0: w.append(t, String.format("Aiming to further provoke %s's anger, ", mainName)); break;
+                    case 1: w.append(t, String.format("Telepathically telling %s that %s'll never be able to go back to normal after this, ", mainName, c.heShe())); break;
+                    default: w.append(t, String.format("Psychically taunting %s about being a useful seedbed, ", mainName));
+                }
                 if(c.getImpregnationEffectiveness() >= c.impregnationReq() || c.getHATELevel() >= 3 && !vVirg)
                 {
                     w.append(t, String.format("you briefly withdraw your shaft from %s ", c.hisHer()));
@@ -13697,64 +13637,50 @@ public class WorldState
                 }
                 if(c.getImpregnationEffectiveness() >= c.impregnationReq())
                 {
-                    if(confidence > 66)
-                        w.append(t, String.format("%s sobs bitterly through tightly-clenched teeth", c.HeShe()));
-                    else
-                    if(confidence > 33)
-                        w.append(t, String.format("%s tries to hold back %s tears", c.HeShe(), c.hisHer()));
-                    else
-                        w.append(t, String.format("Despair overwhelms %s, tears streaming down %s cheeks", c.himHer(), c.hisHer()));
-                    if(innocence > 66)
-                        w.append(t, ", eyes glazed over as you ");
-                    else
-                    if(innocence > 33)
-                        w.append(t, ", unable to focus as you ");
-                    else
-                        w.append(t, String.format(", too caught up in dwelling on %s grim future to even resist as you ", c.hisHer()));
+                    switch (confidence / 33) {
+                        case 0: w.append(t, String.format("Despair overwhelms %s, tears streaming down %s cheeks", c.himHer(), c.hisHer())); break;
+                        case 1: w.append(t, String.format("%s tries to hold back %s tears", c.HeShe(), c.hisHer())); break;
+                        default: w.append(t, String.format("%s sobs bitterly through tightly-clenched teeth", c.HeShe()));
+                    }
+                    switch (innocence / 33) {
+                        case 0: w.append(t, String.format(", too caught up in dwelling on %s grim future to even resist as you ", c.hisHer())); break;
+                        case 1: w.append(t, ", unable to focus as you "); break;
+                        default: w.append(t, ", eyes glazed over as you ");
+                    }
                 } else
                 if(c.getImpregnationEffectiveness() > 100)
                 {
-                    if(confidence > 66)
-                        w.append(t, String.format("%s maintains %s defiant attitude, but there's a glimmer of uncertainty in %2$s eyes", c.HeShe(), c.hisHer()));
-                    else
-                    if(confidence > 33)
-                        w.append(t, String.format("%s feels a flutter of uncertainty", c.HeShe()));
-                    else
-                        w.append(t, String.format("%s trembles with fear", c.HeShe()));
-                    if(innocence > 66)
-                        w.append(t, String.format(", distracting %s enough that you can easily ", c.himHer()));
-                    else
-                    if(innocence > 33)
-                        w.append(t, ", giving you a chance to ");
-                    else
-                        w.append(t, String.format(", breaking %s concentration and leaving %s completely open as you ", c.hisHer(), c.himHer()));
+                    switch (confidence / 33) {
+                        case 0: w.append(t, String.format("%s trembles with fear", c.HeShe())); break;
+                        case 1: w.append(t, String.format("%s feels a flutter of uncertainty", c.HeShe())); break;
+                        default: w.append(t, String.format("%s maintains %s defiant attitude, but there's a glimmer of uncertainty in %2$s eyes", c.HeShe(), c.hisHer()));
+                    }
+                    switch (innocence / 33) {
+                        case 0: w.append(t, String.format(", breaking %s concentration and leaving %s completely open as you ", c.hisHer(), c.himHer())); break;
+                        case 1: w.append(t, ", giving you a chance to "); break;
+                        default: w.append(t, String.format(", distracting %s enough that you can easily ", c.himHer()));
+                    }
                 } else
                 {
-                    if(confidence > 66)
-                        w.append(t, String.format("%s just bares %s teeth at you, angry but unworried about %2$s magical defenses allowing a Demonic impregnation through.  ", mainName, c.hisHer()));
-                    else
-                    if(confidence > 33)
-                        w.append(t, String.format("However, %s still holds %s head high, confident that %2$s powers will protect %s.  ", c.heShe(), c.hisHer(), c.himHer()));
-                    else
-                        w.append(t, String.format("But as intimidated as %s is, there's still a spark of defiance in %s eyes, a product of %2$s certainty that one of the Chosen can't be impregnated so easily.  ", c.heShe(), c.hisHer()));
-                    if(innocence > 66)
-                        w.append(t, String.format("You allow %s to feel some hope before you ", c.himHer()));
-                    else
-                    if(innocence > 33)
-                        w.append(t, String.format("Before %s can try again to escape, you ", c.heShe()));
-                    else
-                        w.append(t, String.format("%s retains the presence of mind to brace %sself before you ", c.HeShe(), c.himHer()));
+                    switch (confidence / 33) {
+                        case 0: w.append(t, String.format("But as intimidated as %s is, there's still a spark of defiance in %s eyes, a product of %2$s certainty that one of the Chosen can't be impregnated so easily.  ", c.heShe(), c.hisHer())); break;
+                        case 1: w.append(t, String.format("However, %s still holds %s head high, confident that %2$s powers will protect %s.  ", c.heShe(), c.hisHer(), c.himHer())); break;
+                        default: w.append(t, String.format("%s just bares %s teeth at you, angry but unworried about %2$s magical defenses allowing a Demonic impregnation through.  ", mainName, c.hisHer()));
+                    }
+                    switch (innocence / 33) {
+                        case 0: w.append(t, String.format("%s retains the presence of mind to brace %sself before you ", c.HeShe(), c.himHer())); break;
+                        case 1: w.append(t, String.format("Before %s can try again to escape, you ", c.heShe())); break;
+                        default: w.append(t, String.format("You allow %s to feel some hope before you ", c.himHer()));
+                    }
                 }
                 if(c.getImpregnationEffectiveness() >= c.impregnationReq() || c.getHATELevel() >= 3 && !vVirg)
                 {
                     w.append(t, String.format("slam %s down onto the pavement, forcing yourself back inside %1$s all at once, enveloping %s body with your own.  ", c.himHer(), c.hisHer()));
-                    if(dignity > 66)
-                        w.append(t, String.format("It hurts, but %s's grateful that at least your bulk shields the spot where %1$s's being penetrated from view.", c.heShe()));
-                    else
-                    if(dignity > 33)
-                        w.append(t, String.format("%s goes limp, stunned by the hit.", c.HeShe()));
-                    else
-                        w.append(t, String.format("%s groans at the pain of the impact combined with the pain of the huge insertion.", c.HeShe()));
+                    switch (dignity / 33) {
+                        case 0: w.append(t, String.format("%s groans at the pain of the impact combined with the pain of the huge insertion.", c.HeShe())); break;
+                        case 1: w.append(t, String.format("%s goes limp, stunned by the hit.", c.HeShe())); break;
+                        default: w.append(t, String.format("It hurts, but %s's grateful that at least your bulk shields the spot where %1$s's being penetrated from view.", c.heShe()));
+                    }
                 } else
                 {
                     w.append(t, String.format("tighten your grip, crushing %s against you with overwhelming strength as you resume trying to force your way into %s ", c.himHer(), c.hisHer()));
@@ -13762,13 +13688,11 @@ public class WorldState
                         w.append(t, "ass.  ");
                     else
                         w.append(t, "slit.  ");
-                    if(dignity > 66)
-                        w.append(t, String.format("%s arms pinned, %s settles for crossing %s legs, less to keep you out and more to retain some shred of dignity.", c.HisHer(), c.heShe(), c.hisHer()));
-                    else
-                    if(dignity > 33)
-                        w.append(t, String.format("%s struggles for breath, trying to gather %s strength.", c.HeShe(), c.hisHer()));
-                    else
-                        w.append(t, String.format("%s squirms and tries to free %s arms, unable to stop you from lowering %s down against your cock.", c.HeShe(), c.hisHer(), c.himHer()));
+                    switch (dignity / 33) {
+                        case 0: w.append(t, String.format("%s squirms and tries to free %s arms, unable to stop you from lowering %s down against your cock.", c.HeShe(), c.hisHer(), c.himHer())); break;
+                        case 1: w.append(t, String.format("%s struggles for breath, trying to gather %s strength.", c.HeShe(), c.hisHer())); break;
+                        default: w.append(t, String.format("%s arms pinned, %s settles for crossing %s legs, less to keep you out and more to retain some shred of dignity.", c.HisHer(), c.heShe(), c.hisHer()));
+                    }
                 }
             }
         } else
@@ -13776,229 +13700,175 @@ public class WorldState
         {
             if(captureProgression % 3 == 1)
             {
-                if(innocence > 66)
-                    w.append(t, String.format("%s is completely stupefied by your Commander's power, ", mainName));
-                else
-                if(innocence > 33)
-                    w.append(t, String.format("With %s senses overwhelmed by the lights and sounds produced by your Commander, %s is helpless to escape, ", c.hisHer(), mainName));
-                else
-                    w.append(t, String.format("%s's intelligence is utterly useless in the face of the sensory overload your Commander is giving %s, ", mainName, c.himHer()));
+                switch (innocence / 33) {
+                    case 0: w.append(t, String.format("%s's intelligence is utterly useless in the face of the sensory overload your Commander is giving %s, ", mainName, c.himHer())); break;
+                    case 1: w.append(t, String.format("With %s senses overwhelmed by the lights and sounds produced by your Commander, %s is helpless to escape, ", c.hisHer(), mainName)); break;
+                    default: w.append(t, String.format("%s is completely stupefied by your Commander's power, ", mainName));
+                }
                 if(c.getHypnosisEffectiveness() >= c.hypnosisReq())
                 {
-                    if(confidence > 66)
-                        w.append(t, String.format("and %s continues to masturbate with singleminded determination even as %s hands cramp up and %2$s thighs ache.  ", c.heShe(), c.hisHer()));
-                    else
-                    if(confidence > 33)
-                        w.append(t, String.format("and %s hips jerk uncontrollably as %s compulsively pleasures %sself.  ", c.hisHer(), c.heShe(), c.himHer()));
-                    else
-                        w.append(t, String.format("and %s whimpers with pleasure as %s hands continue to move between %2$s legs as if possessed.  ", c.heShe(), c.hisHer()));
-                    if(morality > 66)
-                        w.append(t, String.format("%s sense of wrongness almost breaks the illusion, but you continue to adjust what %s perceives, distracting %s with the sight and feeling of %s friends holding %s close, encouraging %5$s to feel good.  ", c.HisHer(), c.heShe(), c.himHer(), c.hisHer(), c.himHer()));
-                    else
-                    if(morality > 33)
-                        w.append(t, String.format("Whenever it seems like %s's about to realize %1$s's being manipulated, a new illusionary scene forms around %s, often involving eager partners whose hands recreate the actions actually performed by %s own.  ", c.heShe(), c.himHer(), c.hisHer()));
-                    else
-                        w.append(t, String.format("In order to keep %s entertained and fully enraptured, %s perception of %2$s surroundings is soon changed to portray bound slaves forced to service %1$s, their hands and tongues travelling all over %2$s body.  ", c.himHer(), c.hisHer()));
-                    if(dignity > 66)
-                        w.append(t, String.format("Even though %s'd normally be embarrassed to be seen like this, %1$s's far too turned on right now to care.", c.heShe()));
-                    else
-                    if(dignity > 33)
-                        w.append(t, "It works perfectly.");
-                    else
-                        w.append(t, String.format("%s enjoys their embrace without holding back at all.", c.HeShe()));
+                    switch (confidence / 33) {
+                        case 0: w.append(t, String.format("and %s whimpers with pleasure as %s hands continue to move between %2$s legs as if possessed.  ", c.heShe(), c.hisHer())); break;
+                        case 1: w.append(t, String.format("and %s hips jerk uncontrollably as %s compulsively pleasures %sself.  ", c.hisHer(), c.heShe(), c.himHer())); break;
+                        default: w.append(t, String.format("and %s continues to masturbate with singleminded determination even as %s hands cramp up and %2$s thighs ache.  ", c.heShe(), c.hisHer()));
+                    }
+                    switch (morality / 33) {
+                        case 0: w.append(t, String.format("In order to keep %s entertained and fully enraptured, %s perception of %2$s surroundings is soon changed to portray bound slaves forced to service %1$s, their hands and tongues travelling all over %2$s body.  ", c.himHer(), c.hisHer())); break;
+                        case 1: w.append(t, String.format("Whenever it seems like %s's about to realize %1$s's being manipulated, a new illusionary scene forms around %s, often involving eager partners whose hands recreate the actions actually performed by %s own.  ", c.heShe(), c.himHer(), c.hisHer())); break;
+                        default: w.append(t, String.format("%s sense of wrongness almost breaks the illusion, but you continue to adjust what %s perceives, distracting %s with the sight and feeling of %s friends holding %s close, encouraging %5$s to feel good.  ", c.HisHer(), c.heShe(), c.himHer(), c.hisHer(), c.himHer()));
+                    }
+                    switch (dignity / 33) {
+                        case 0: w.append(t, String.format("%s enjoys their embrace without holding back at all.", c.HeShe())); break;
+                        case 1: w.append(t, "It works perfectly."); break;
+                        default: w.append(t, String.format("Even though %s'd normally be embarrassed to be seen like this, %1$s's far too turned on right now to care.", c.heShe()));
+                    }
                 } else
                 {
-                    if(confidence > 66)
-                        w.append(t, String.format("but %s harshly pinches %sself in order to keep %s mind from wandering.  %s", c.heShe(), c.himHer(), c.hisHer(), c.HeShe()));
-                    else
-                    if(confidence > 33)
-                        w.append(t, String.format("but %s's still looking for a way out.  %s", c.heShe(), c.HeShe()));
-                    else
-                        w.append(t, String.format("and %s wishes %1$s could just give up and let %s consciousness be washed away.  However, %1$s", c.heShe(), c.hisHer()));
+                    switch (confidence / 33) {
+                        case 0: w.append(t, String.format("and %s wishes %1$s could just give up and let %s consciousness be washed away.  However, %1$s", c.heShe(), c.hisHer())); break;
+                        case 1: w.append(t, String.format("but %s's still looking for a way out.  %s", c.heShe(), c.HeShe())); break;
+                        default: w.append(t, String.format("but %s harshly pinches %sself in order to keep %s mind from wandering.  %s", c.heShe(), c.himHer(), c.hisHer(), c.HeShe()));
+                    }
                     if(c.getHypnosisEffectiveness() > 100)
                     {
-                        if(morality > 66)
-                            w.append(t, String.format(" still cares less about feeling good than %s does about protecting those %1$s cares for", c.heShe()));
-                        else
-                        if(morality > 33)
-                            w.append(t, String.format(" hasn't yet felt enough pleasure to make %s completely lose %s mind", c.himHer(), c.hisHer()));
-                        else
-                            w.append(t, " hasn't quite become depraved enough to surrender to the pleasure");
-                        if(dignity > 66)
-                            w.append(t, String.format(", and %s's embarrassed by the fact that this is giving %s so much trouble.", c.heShe(), c.himHer()));
-                        else
-                        if(dignity > 33)
-                            w.append(t, ".");
-                        else
-                            w.append(t, String.format(", even if %s can't stop %s lewd moans.", c.heShe(), c.hisHer()));
+                        switch (morality / 33) {
+                            case 0: w.append(t, " hasn't quite become depraved enough to surrender to the pleasure"); break;
+                            case 1: w.append(t, String.format(" hasn't yet felt enough pleasure to make %s completely lose %s mind", c.himHer(), c.hisHer())); break;
+                            default: w.append(t, String.format(" still cares less about feeling good than %s does about protecting those %1$s cares for", c.heShe()));
+                        }
+                        switch (dignity / 33) {
+                            case 0: w.append(t, String.format(", even if %s can't stop %s lewd moans.", c.heShe(), c.hisHer())); break;
+                            case 1: w.append(t, "."); break;
+                            default: w.append(t, String.format(", and %s's embarrassed by the fact that this is giving %s so much trouble.", c.heShe(), c.himHer()));
+                        }
                     } else
                     {
-                        if(morality > 66)
-                            w.append(t, String.format("'s determined not to let evil take over %s mind", c.hisHer()));
-                        else
-                        if(morality > 33)
-                            w.append(t, "'s determined to escape");
-                        else
-                            w.append(t, String.format("'s determined to kill you for toying with %s like this", c.himHer()));
-                        if(dignity > 66)
-                            w.append(t, String.format(", though %s is glad that being enclosed by your body prevents anyone from seeing the way %1$s's blushing and trembling with pleasure.", c.heShe()));
-                        else
-                        if(dignity > 33)
-                            w.append(t, String.format(", trying to endure the illusionary pleasure you're forcing into %s brain.", c.hisHer()));
-                        else
-                            w.append(t, String.format(", even as %s gasps and moans with the surges of pleasure running through %s head.", c.heShe(), c.hisHer()));
+                        switch (morality / 33) {
+                            case 0: w.append(t, String.format("'s determined to kill you for toying with %s like this", c.himHer())); break;
+                            case 1: w.append(t, "'s determined to escape"); break;
+                            default: w.append(t, String.format("'s determined not to let evil take over %s mind", c.hisHer()));
+                        }
+                        switch (dignity / 33) {
+                            case 0: w.append(t, String.format(", even as %s gasps and moans with the surges of pleasure running through %s head.", c.heShe(), c.hisHer())); break;
+                            case 1: w.append(t, String.format(", trying to endure the illusionary pleasure you're forcing into %s brain.", c.hisHer())); break;
+                            default: w.append(t, String.format(", though %s is glad that being enclosed by your body prevents anyone from seeing the way %1$s's blushing and trembling with pleasure.", c.heShe()));
+                        }
                     }
                 }
             } else
             if(captureProgression % 3 == 2)
             {
-                if(dignity > 66)
-                    w.append(t, String.format("%s gasps and reflexively covers %sself", mainName, c.himHer()));
-                else
-                if(dignity > 33)
-                    w.append(t, String.format("%s's eyes go wide and %s turns %s head left and right", mainName, c.heShe(), c.hisHer()));
-                else
-                    w.append(t, String.format("%s jumps in surprise", mainName));
+                switch (dignity / 33) {
+                    case 0: w.append(t, String.format("%s jumps in surprise", mainName)); break;
+                    case 1: w.append(t, String.format("%s's eyes go wide and %s turns %s head left and right", mainName, c.heShe(), c.hisHer())); break;
+                    default: w.append(t, String.format("%s gasps and reflexively covers %sself", mainName, c.himHer()));
+                }
                 if(c.getHypnosisEffectiveness() >= c.hypnosisReq())
                 {
-                    if(innocence > 66)
-                        w.append(t, String.format(", shocked to find %sself naked on the stage of %s old school's auditorium while the students point and laugh.  ", c.himHer(), c.hisHer()));
-                    else
-                    if(innocence > 33)
-                        w.append(t, String.format(" at the cheering crowd around %s, as %s's suddenly onstage at a strip club, one of %s wrists handcuffed to the dancing pole.  ", c.himHer(), c.heShe(), c.hisHer()));
-                    else
-                        w.append(t, String.format(" as %s surroundings flicker and transform into some sort of slave auction, but then the chains tied to %1$s limbs are pulled taut and %1$s limbs are forced apart.  ", c.hisHer()));
-                    if(confidence > 66)
-                        w.append(t, String.format("%s tries to use %s Chosen powers to take control of the situation, but nothing happens, leaving %s more powerless than %s's felt in a long time", c.HeShe(), c.hisHer(), c.himHer(), c.heShe()));
-                    else
-                    if(confidence > 33)
-                        w.append(t, String.format("%s tries to tell the spectator that they can't touch %s, that %s's one of the Chosen, but %s voice won't come out", c.HeShe(), c.himHer(), c.heShe(), c.hisHer()));
-                    else
-                        w.append(t, String.format("%s panics, unable to remember that %s's one of the Chosen", c.HeShe(), c.heShe()));
-                    if(morality > 66)
-                        w.append(t, String.format(", but as the illusionary spectators' hands surge forward, %s fear is replaced by a delirious happiness that they're going to enjoy %1$s body.", c.hisHer()));
-                    else
-                    if(morality > 33)
-                        w.append(t, String.format(", but once the illusionary spectators begin having their way with %s body, %s can't even imagine resisting anymore.", c.hisHer(), c.heShe()));
-                    else
-                        w.append(t, String.format(", but when the illusionary spectators advance and begin groping %s body, all %s can think about is how good it feels.", c.hisHer(), c.heShe()));
+                    switch (innocence / 33) {
+                        case 0: w.append(t, String.format(" as %s surroundings flicker and transform into some sort of slave auction, but then the chains tied to %1$s limbs are pulled taut and %1$s limbs are forced apart.  ", c.hisHer())); break;
+                        case 1: w.append(t, String.format(" at the cheering crowd around %s, as %s's suddenly onstage at a strip club, one of %s wrists handcuffed to the dancing pole.  ", c.himHer(), c.heShe(), c.hisHer())); break;
+                        default: w.append(t, String.format(", shocked to find %sself naked on the stage of %s old school's auditorium while the students point and laugh.  ", c.himHer(), c.hisHer()));
+                    }
+                    switch (confidence / 33) {
+                        case 0: w.append(t, String.format("%s panics, unable to remember that %s's one of the Chosen", c.HeShe(), c.heShe())); break;
+                        case 1: w.append(t, String.format("%s tries to tell the spectator that they can't touch %s, that %s's one of the Chosen, but %s voice won't come out", c.HeShe(), c.himHer(), c.heShe(), c.hisHer())); break;
+                        default: w.append(t, String.format("%s tries to use %s Chosen powers to take control of the situation, but nothing happens, leaving %s more powerless than %s's felt in a long time", c.HeShe(), c.hisHer(), c.himHer(), c.heShe()));
+                    }
+                    switch (morality / 33) {
+                        case 0: w.append(t, String.format(", but when the illusionary spectators advance and begin groping %s body, all %s can think about is how good it feels.", c.hisHer(), c.heShe())); break;
+                        case 1: w.append(t, String.format(", but once the illusionary spectators begin having their way with %s body, %s can't even imagine resisting anymore.", c.hisHer(), c.heShe())); break;
+                        default: w.append(t, String.format(", but as the illusionary spectators' hands surge forward, %s fear is replaced by a delirious happiness that they're going to enjoy %1$s body.", c.hisHer()));
+                    }
                 } else
                 {
-                    if(innocence > 66)
-                        w.append(t, String.format(", confused by the way that the blaring tones you're sending into %s ears are starting to resolve into cruel voices.  ", c.hisHer()));
-                    else
-                    if(innocence > 33)
-                        w.append(t, " as the chaotic sounds inside your Commander body start to resemble voices making lewd comments.  ");
-                    else
-                        w.append(t, String.format(" when %s hears jeers and laughter around %s, but %1$s quickly realizes that you're trying to show %2$s an illusion.  ", c.heShe(), c.himHer()));
+                    switch (innocence / 33) {
+                        case 0: w.append(t, String.format(" when %s hears jeers and laughter around %s, but %1$s quickly realizes that you're trying to show %2$s an illusion.  ", c.heShe(), c.himHer())); break;
+                        case 1: w.append(t, " as the chaotic sounds inside your Commander body start to resemble voices making lewd comments.  "); break;
+                        default: w.append(t, String.format(", confused by the way that the blaring tones you're sending into %s ears are starting to resolve into cruel voices.  ", c.hisHer()));
+                    }
                     if(c.getHypnosisEffectiveness() > 100)
                     {
-                        if(confidence > 66)
-                            w.append(t, String.format("%s bites %s lip and tries to shut it all out with willpower alone", c.HeShe(), c.hisHer()));
-                        else
-                        if(confidence > 33)
-                            w.append(t, String.format("%s shakes %s head and attempts to ignore it", c.HeShe(), c.hisHer()));
-                        else
-                            w.append(t, String.format("%s desperately squeezes %s eyes shut and covers %2$s ears", c.HeShe(), c.hisHer()));
-                        if(morality > 66)
-                            w.append(t, String.format(", but %s's disturbed by how persuasive their demands that %1$s give in and start touching %sself are.", c.heShe(), c.himHer()));
-                        else
-                        if(morality > 33)
-                            w.append(t, String.format(", but %s still finds it difficult to stop %s hands from wandering between %2$s legs.", c.heShe(), c.hisHer()));
-                        else
-                            w.append(t, String.format(", even though their suggestion that %s give up on the fight and just play with %sself right here sounds very appealing.", c.heShe(), c.himHer()));
+                        switch (confidence / 33) {
+                            case 0: w.append(t, String.format("%s desperately squeezes %s eyes shut and covers %2$s ears", c.HeShe(), c.hisHer())); break;
+                            case 1: w.append(t, String.format("%s shakes %s head and attempts to ignore it", c.HeShe(), c.hisHer())); break;
+                            default: w.append(t, String.format("%s bites %s lip and tries to shut it all out with willpower alone", c.HeShe(), c.hisHer()));
+                        }
+                        switch (morality / 33) {
+                            case 0: w.append(t, String.format(", even though their suggestion that %s give up on the fight and just play with %sself right here sounds very appealing.", c.heShe(), c.himHer())); break;
+                            case 1: w.append(t, String.format(", but %s still finds it difficult to stop %s hands from wandering between %2$s legs.", c.heShe(), c.hisHer())); break;
+                            default: w.append(t, String.format(", but %s's disturbed by how persuasive their demands that %1$s give in and start touching %sself are.", c.heShe(), c.himHer()));
+                        }
                     } else
                     {
-                        if(confidence > 66)
-                            w.append(t, String.format("%s's angry with %sself for reacting to such an obvious illusion, but ", c.HeShe(), c.himHer()));
-                        else
-                        if(confidence > 33)
-                            w.append(t, String.format("%s can ignore it on a conscious level, but ", c.HeShe()));
-                        else
-                            w.append(t, String.format("Even if it's an illusion, it still makes %s's heart race, and ", mainName));
-                        if(morality > 66)
-                            w.append(t, String.format("no matter how much %s tries to deny it, the subliminal effects are turning %s on more and more.", c.heShe(), c.himHer()));
-                        else
-                        if(morality > 33)
-                            w.append(t, String.format("%s nerves are still reacting like all %1$s erogenous zones are being stroked at once.", c.hisHer()));
-                        else
-                            w.append(t, String.format("the undertones beneath %s hearing are awakening %1$s desire to feel good no matter the consequences.", c.hisHer()));
+                        switch (confidence / 33) {
+                            case 0: w.append(t, String.format("Even if it's an illusion, it still makes %s's heart race, and ", mainName)); break;
+                            case 1: w.append(t, String.format("%s can ignore it on a conscious level, but ", c.HeShe())); break;
+                            default: w.append(t, String.format("%s's angry with %sself for reacting to such an obvious illusion, but ", c.HeShe(), c.himHer()));
+                        }
+                        switch (morality / 33) {
+                            case 0: w.append(t, String.format("the undertones beneath %s hearing are awakening %1$s desire to feel good no matter the consequences.", c.hisHer())); break;
+                            case 1: w.append(t, String.format("%s nerves are still reacting like all %1$s erogenous zones are being stroked at once.", c.hisHer())); break;
+                            default: w.append(t, String.format("no matter how much %s tries to deny it, the subliminal effects are turning %s on more and more.", c.heShe(), c.himHer()));
+                        }
                     }
                 }
             } else
             if(captureProgression % 3 == 0)
             {
-                if(morality > 66)
-                    w.append(t, String.format("%s hears %s friends' voices begging %s to let them in on just what preparations are going on behind the scenes in the war against the Demons", mainName, c.hisHer(), c.himHer()));
-                else
-                if(morality > 33)
-                    w.append(t, String.format("%s sees %sself in a conference room with several of humanity's military leaders.  They ask %2$s to tell them what %s thinks about the logistical situation and recent troop movements", mainName, c.himHer(), c.heShe()));
-                else
-                    w.append(t, String.format("%s is abruptly surrounded by shady figures willing to pay absurd amounts of money for humanity's military secrets", mainName));
+                switch (morality / 33) {
+                    case 0: w.append(t, String.format("%s is abruptly surrounded by shady figures willing to pay absurd amounts of money for humanity's military secrets", mainName)); break;
+                    case 1: w.append(t, String.format("%s sees %sself in a conference room with several of humanity's military leaders.  They ask %2$s to tell them what %s thinks about the logistical situation and recent troop movements", mainName, c.himHer(), c.heShe())); break;
+                    default: w.append(t, String.format("%s hears %s friends' voices begging %s to let them in on just what preparations are going on behind the scenes in the war against the Demons", mainName, c.hisHer(), c.himHer()));
+                }
                 if(c.getHypnosisEffectiveness() >= c.hypnosisReq())
                 {
-                    if(dignity > 66)
-                        w.append(t, String.format(", and %s eagerly tries to shock and awe them with %s response, %2$s voice high and breathy as %1$s masturbates at the same time.  ", c.heShe(), c.hisHer()));
-                    else
-                    if(dignity > 33)
-                        w.append(t, String.format(", and %s is happy to reply, face bright red as %s masturbation increases in intensity.  ", c.heShe(), c.hisHer()));
-                    else
-                        w.append(t, String.format(", and %s goes along with it, casually masturbating at the same time.  ", c.heShe()));
-                    if(innocence > 66)
-                        w.append(t, String.format("%s understanding of the situation, while blatantly incorrect, is amusing nonetheless, and ", c.HisHer()));
-                    else
-                    if(innocence > 33)
-                        w.append(t, "It's nothing you don't know already, but ");
-                    else
-                        w.append(t, String.format("The information itself isn't new to you, but %s analysis is thought-provoking, and ", c.hisHer()));
-                    if(confidence > 66)
-                        w.append(t, String.format("%s greatly enjoys impressing the halluciantions.", c.heShe()));
-                    else
-                    if(confidence > 33)
-                        w.append(t, String.format("%s doesn't realize that %1$s's hallucinating.", c.heShe()));
-                    else
-                        w.append(t, String.format("%s seems very happy when you have the hallucinations express their gratitude.", c.heShe()));
+                    switch (dignity / 33) {
+                        case 0: w.append(t, String.format(", and %s goes along with it, casually masturbating at the same time.  ", c.heShe())); break;
+                        case 1: w.append(t, String.format(", and %s is happy to reply, face bright red as %s masturbation increases in intensity.  ", c.heShe(), c.hisHer())); break;
+                        default: w.append(t, String.format(", and %s eagerly tries to shock and awe them with %s response, %2$s voice high and breathy as %1$s masturbates at the same time.  ", c.heShe(), c.hisHer()));
+                    }
+                    switch (innocence / 33) {
+                        case 0: w.append(t, String.format("The information itself isn't new to you, but %s analysis is thought-provoking, and ", c.hisHer())); break;
+                        case 1: w.append(t, "It's nothing you don't know already, but "); break;
+                        default: w.append(t, String.format("%s understanding of the situation, while blatantly incorrect, is amusing nonetheless, and ", c.HisHer()));
+                    }
+                    switch (confidence / 33) {
+                        case 0: w.append(t, String.format("%s seems very happy when you have the hallucinations express their gratitude.", c.heShe())); break;
+                        case 1: w.append(t, String.format("%s doesn't realize that %1$s's hallucinating.", c.heShe())); break;
+                        default: w.append(t, String.format("%s greatly enjoys impressing the halluciantions.", c.heShe()));
+                    }
                 } else
                 {
-                    if(dignity > 66)
-                        w.append(t, String.format(", but as much as %s enjoys being praised, ", c.heShe()));
-                    else
-                    if(dignity > 33)
-                        w.append(t, ", but ");
-                    else
-                        w.append(t, String.format(", but %s has no trouble turning them down, as ", c.heShe()));
+                    switch (dignity / 33) {
+                        case 0: w.append(t, String.format(", but %s has no trouble turning them down, as ", c.heShe())); break;
+                        case 1: w.append(t, ", but "); break;
+                        default: w.append(t, String.format(", but as much as %s enjoys being praised, ", c.heShe()));
+                    }
                     if(c.getHypnosisEffectiveness() > 100)
                     {
-                        if(innocence > 66)
-                            w.append(t, String.format("%s is still barely resisting your hypnosis attempts enough to recognize that the situation is impossible.  ", c.heShe()));
-                        else
-                        if(innocence > 33)
-                            w.append(t, String.format("the hypnosis isn't strong enough yet to make %s forget that %s's fighting right now.  ", c.himHer(), c.heShe()));
-                        else
-                            w.append(t, String.format("%s recognizes that the hallucinations' apparent reality is just a byproduct of your strengthening hypnotic effect on %s.  ", c.heShe(), c.himHer()));
-                        if(confidence > 66)
-                            w.append(t, String.format("%s satisfaction at overcoming your trap sours somewhat when %s realizes that %2$s let %s guard down and %3$s hands started to inch between %3$s legs.", c.HisHer(), c.heShe(), c.hisHer()));
-                        else
-                        if(confidence > 33)
-                            w.append(t, String.format("Similarly, %s's still holding out against the subliminally-implanted urge to masturbate.", c.heShe()));
-                        else
-                            w.append(t, String.format("Even so, the stress of turning them down is almost enough to make %s forget to resist the growing urge to masturbate.", c.himHer()));
+                        switch (innocence / 33) {
+                            case 0: w.append(t, String.format("%s recognizes that the hallucinations' apparent reality is just a byproduct of your strengthening hypnotic effect on %s.  ", c.heShe(), c.himHer())); break;
+                            case 1: w.append(t, String.format("the hypnosis isn't strong enough yet to make %s forget that %s's fighting right now.  ", c.himHer(), c.heShe())); break;
+                            default: w.append(t, String.format("%s is still barely resisting your hypnosis attempts enough to recognize that the situation is impossible.  ", c.heShe()));
+                        }
+                        switch (confidence / 33) {
+                            case 0: w.append(t, String.format("Even so, the stress of turning them down is almost enough to make %s forget to resist the growing urge to masturbate.", c.himHer())); break;
+                            case 1: w.append(t, String.format("Similarly, %s's still holding out against the subliminally-implanted urge to masturbate.", c.heShe())); break;
+                            default: w.append(t, String.format("%s satisfaction at overcoming your trap sours somewhat when %s realizes that %2$s let %s guard down and %3$s hands started to inch between %3$s legs.", c.HisHer(), c.heShe(), c.hisHer()));
+                        }
                     } else
                     {
-                        if(innocence > 66)
-                            w.append(t, String.format("%s thinks it's super suspicious that they'd appear out of nowhere in the middle of a battle.  ", c.heShe()));
-                        else
-                        if(innocence > 33)
-                            w.append(t, String.format("%s ability to distinguish hallucination from reality is still fully intact.  ", c.hisHer()));
-                        else
-                            w.append(t, String.format("%s mind is as sharp as ever and %s sees them for the hallucinations they are.  ", c.hisHer(), c.heShe()));
-                        if(confidence > 66)
-                            w.append(t, String.format("%s angrily refuses, venting a bit of the frustration %s feels at the incessantly increasing pleasure %s body is being violated with.", c.HeShe(), c.heShe(), c.hisHer()));
-                        else
-                        if(confidence > 33)
-                            w.append(t, String.format("%s flatly refuses, doing %s best to ignore the surge of pleasure you send to try to break %2$s resolve.", c.HeShe(), c.hisHer()));
-                        else
-                            w.append(t, String.format("Even so, turning them down is difficult - more difficult in fact than resisting the pleasure pulsing through %s nerves.", c.hisHer()));
+                        switch (innocence / 33) {
+                            case 0: w.append(t, String.format("%s mind is as sharp as ever and %s sees them for the hallucinations they are.  ", c.hisHer(), c.heShe())); break;
+                            case 1: w.append(t, String.format("%s ability to distinguish hallucination from reality is still fully intact.  ", c.hisHer())); break;
+                            default: w.append(t, String.format("%s thinks it's super suspicious that they'd appear out of nowhere in the middle of a battle.  ", c.heShe()));
+                        }
+                        switch (confidence / 33) {
+                            case 0: w.append(t, String.format("Even so, turning them down is difficult - more difficult in fact than resisting the pleasure pulsing through %s nerves.", c.hisHer())); break;
+                            case 1: w.append(t, String.format("%s flatly refuses, doing %s best to ignore the surge of pleasure you send to try to break %2$s resolve.", c.HeShe(), c.hisHer())); break;
+                            default: w.append(t, String.format("%s angrily refuses, venting a bit of the frustration %s feels at the incessantly increasing pleasure %s body is being violated with.", c.HeShe(), c.heShe(), c.hisHer()));
+                        }
                     }
                 }
             }
@@ -14022,27 +13892,21 @@ public class WorldState
                 }
                 if(c.getDrainEffectiveness() >= c.drainReq())
                 {
-                    if(dignity > 66)
-                        w.append(t, String.format(".  There's one last flicker of embarrassment as %s realizes just how pathetic %1$s must look, and then even that is gone.  ", c.heShe()));
-                    else
-                    if(dignity > 33)
-                        w.append(t, String.format(".  Even %s shame at being seen so utterly defeated is gone - at least for now.  ", c.hisHer()));
-                    else
-                        w.append(t, String.format(", and %s happily gives %sself over to oblivion.  ", c.heShe(), c.himHer()));
-                    if(morality > 66)
-                        w.append(t, String.format("In contrast to how %s tosses and turns all night, kept up by worries of %s own inadequacy, ", c.heShe(), c.hisHer()));
-                    else
-                    if(morality > 33)
-                        w.append(t, String.format("Finally able to rest without the horrifying night terrors that have been plaguing %s recently, ", c.himHer()));
-                    else
-                        w.append(t, String.format("Free of the nightmares that cause %s to act even more abusive during the day, ", c.himHer()));
-                    if(confidence > 66)
-                        w.append(t, String.format("%s usual severe expression is gone in favor of a peaceful sleeping face.", c.hisHer()));
-                    else
-                    if(confidence > 33)
-                        w.append(t, String.format("%s slumbers deeply.", c.heShe()));
-                    else
-                        w.append(t, String.format("%s sleeps without even a trace of fear.", c.heShe()));
+                    switch (dignity / 33) {
+                        case 0: w.append(t, String.format(", and %s happily gives %sself over to oblivion.  ", c.heShe(), c.himHer())); break;
+                        case 1: w.append(t, String.format(".  Even %s shame at being seen so utterly defeated is gone - at least for now.  ", c.hisHer())); break;
+                        default: w.append(t, String.format(".  There's one last flicker of embarrassment as %s realizes just how pathetic %1$s must look, and then even that is gone.  ", c.heShe()));
+                    }
+                    switch (morality / 33) {
+                        case 0: w.append(t, String.format("Free of the nightmares that cause %s to act even more abusive during the day, ", c.himHer())); break;
+                        case 1: w.append(t, String.format("Finally able to rest without the horrifying night terrors that have been plaguing %s recently, ", c.himHer())); break;
+                        default: w.append(t, String.format("In contrast to how %s tosses and turns all night, kept up by worries of %s own inadequacy, ", c.heShe(), c.hisHer()));
+                    }
+                    switch (confidence / 33) {
+                        case 0: w.append(t, String.format("%s sleeps without even a trace of fear.", c.heShe())); break;
+                        case 1: w.append(t, String.format("%s slumbers deeply.", c.heShe())); break;
+                        default: w.append(t, String.format("%s usual severe expression is gone in favor of a peaceful sleeping face.", c.hisHer()));
+                    }
                     if(w.getBodyStatus()[26])
                     {
                         if(c.getEXPOLevel() >= 3 && !modest && (w.getBodyStatus()[13] || w.getBodyStatus()[14] || w.getBodyStatus()[6]))
@@ -14065,45 +13929,35 @@ public class WorldState
                     }
                 } else
                 {
-                    if(dignity > 66)
-                        w.append(t, String.format(", but %s tries to pretend that %1$s's as alert as ever.  ", c.heShe()));
-                    else
-                    if(dignity > 33)
-                        w.append(t, String.format(", but %s refuses to give in.  ", c.heShe()));
-                    else
-                        w.append(t, String.format(", and %s fights it by constantly squirming and raising %s voice as high as %1$s can.  ", c.heShe(), c.hisHer()));
+                    switch (dignity / 33) {
+                        case 0: w.append(t, String.format(", and %s fights it by constantly squirming and raising %s voice as high as %1$s can.  ", c.heShe(), c.hisHer())); break;
+                        case 1: w.append(t, String.format(", but %s refuses to give in.  ", c.heShe())); break;
+                        default: w.append(t, String.format(", but %s tries to pretend that %1$s's as alert as ever.  ", c.heShe()));
+                    }
                     if(c.getDrainEffectiveness() > 100)
                     {
-                        if(morality > 66)
-                            w.append(t, String.format("%s wants to die doing something useful to humanity, not by giving %s life force to the Demons", c.HeShe(), c.hisHer()));
-                        else
-                        if(morality > 33)
-                            w.append(t, String.format("As much as %s yearns for death, %1$s doesn't trust you to give it to %s", c.heShe(), c.himHer()));
-                        else
-                            w.append(t, String.format("%s'd happily kill a thousand innocents for a chance at dying, but %s still spitefully wants to deny you the satisfaction of defeating %s", c.HeShe(), c.heShe(), c.himHer()));
-                        if(confidence > 66)
-                            w.append(t, String.format(", causing %s to pridefully cling on.", c.himHer()));
-                        else
-                        if(confidence > 33)
-                            w.append(t, ".");
-                        else
-                            w.append(t, String.format(".  Combined with the fear of the unknown that suddenly rises to the surface, %s's too panicked to let %s mental defenses down.", c.heShe(), c.hisHer()));
+                        switch (morality / 33) {
+                            case 0: w.append(t, String.format("%s'd happily kill a thousand innocents for a chance at dying, but %s still spitefully wants to deny you the satisfaction of defeating %s", c.HeShe(), c.heShe(), c.himHer())); break;
+                            case 1: w.append(t, String.format("As much as %s yearns for death, %1$s doesn't trust you to give it to %s", c.heShe(), c.himHer())); break;
+                            default: w.append(t, String.format("%s wants to die doing something useful to humanity, not by giving %s life force to the Demons", c.HeShe(), c.hisHer()));
+                        }
+                        switch (confidence / 33) {
+                            case 0: w.append(t, String.format(".  Combined with the fear of the unknown that suddenly rises to the surface, %s's too panicked to let %s mental defenses down.", c.heShe(), c.hisHer())); break;
+                            case 1: w.append(t, "."); break;
+                            default: w.append(t, String.format(", causing %s to pridefully cling on.", c.himHer()));
+                        }
                     } else
                     {
-                        if(morality > 66)
-                            w.append(t, String.format("%s's determined to overcome this for everyone's sake", c.HeShe()));
-                        else
-                        if(morality > 33)
-                            w.append(t, String.format("%s has no intention of dying here", c.HeShe()));
-                        else
-                            w.append(t, String.format("%s relies on %s anger to keep %s awake", c.HeShe(), c.hisHer(), c.himHer()));
-                        if(confidence > 66)
-                            w.append(t, String.format(", overpowering determination in %s gaze.", c.hisHer()));
-                        else
-                        if(confidence > 33)
-                            w.append(t, ".");
-                        else
-                            w.append(t, String.format(", tears of defiance coming to %s eyes.", c.hisHer()));
+                        switch (morality / 33) {
+                            case 0: w.append(t, String.format("%s relies on %s anger to keep %s awake", c.HeShe(), c.hisHer(), c.himHer())); break;
+                            case 1: w.append(t, String.format("%s has no intention of dying here", c.HeShe())); break;
+                            default: w.append(t, String.format("%s's determined to overcome this for everyone's sake", c.HeShe()));
+                        }
+                        switch (confidence / 33) {
+                            case 0: w.append(t, String.format(", tears of defiance coming to %s eyes.", c.hisHer())); break;
+                            case 1: w.append(t, "."); break;
+                            default: w.append(t, String.format(", overpowering determination in %s gaze.", c.hisHer()));
+                        }
                     }
                     if(w.getBodyStatus()[26])
                     {
@@ -14124,55 +13978,43 @@ public class WorldState
             } else
             if(captureProgression % 3 == 2)
             {
-                if(confidence > 66)
-                    w.append(t, String.format("The mighty %s is as close to death as %s's ever been", mainName, c.heShe()));
-                else
-                if(confidence > 33)
-                    w.append(t, String.format("%s's life force is growing dimmer and dimmer as you drain it out of %s", mainName, c.himHer()));
-                else
-                    w.append(t, String.format("%s's timid soul is failing before the might of your draining feelers", mainName));
+                switch (confidence / 33) {
+                    case 0: w.append(t, String.format("%s's timid soul is failing before the might of your draining feelers", mainName)); break;
+                    case 1: w.append(t, String.format("%s's life force is growing dimmer and dimmer as you drain it out of %s", mainName, c.himHer())); break;
+                    default: w.append(t, String.format("The mighty %s is as close to death as %s's ever been", mainName, c.heShe()));
+                }
                 if(c.getDrainEffectiveness() >= c.drainReq())
                 {
                     if(w.tickle())
                     {
-                        if(innocence > 66)
-                            w.append(t, String.format(", but in %s eagerness to have you kill %s, %s neglected to consider that you'd be able to tickle all %1$s most sensitive spots while %3$s's unable to squirm away.  ", c.hisHer(), c.himHer(), c.heShe()));
-                        else
-                        if(innocence > 33)
-                            w.append(t, String.format(", but instead of finishing %s off, you're using your countless tentacles to savagely tickle %1$s.  ", c.himHer()));
-                        else
-                            w.append(t, String.format(", but rather than killing %s as %s had hoped, you're taking the opportunity to tickle %s defenseless body all over.  ", c.himHer(), c.heShe(), c.hisHer()));
-                        if(dignity > 66)
-                            w.append(t, String.format("Once %s wakes up, the accumulated sensations should easily overcome %s composure", c.heShe(), c.hisHer()));
-                        else
-                        if(dignity > 33)
-                            w.append(t, String.format("The sensations will hit %s all at once after %s wakes up", c.himHer(), c.heShe()));
-                        else
-                            w.append(t, "Feeling it all at once upon waking up should make for an especially strong reaction");
+                        switch (innocence / 33) {
+                            case 0: w.append(t, String.format(", but rather than killing %s as %s had hoped, you're taking the opportunity to tickle %s defenseless body all over.  ", c.himHer(), c.heShe(), c.hisHer())); break;
+                            case 1: w.append(t, String.format(", but instead of finishing %s off, you're using your countless tentacles to savagely tickle %1$s.  ", c.himHer())); break;
+                            default: w.append(t, String.format(", but in %s eagerness to have you kill %s, %s neglected to consider that you'd be able to tickle all %1$s most sensitive spots while %3$s's unable to squirm away.  ", c.hisHer(), c.himHer(), c.heShe()));
+                        }
+                        switch (dignity / 33) {
+                            case 0: w.append(t, "Feeling it all at once upon waking up should make for an especially strong reaction"); break;
+                            case 1: w.append(t, String.format("The sensations will hit %s all at once after %s wakes up", c.himHer(), c.heShe())); break;
+                            default: w.append(t, String.format("Once %s wakes up, the accumulated sensations should easily overcome %s composure", c.heShe(), c.hisHer()));
+                        }
                     } else
                     {
-                        if(innocence > 66)
-                            w.append(t, String.format(", but in %s eagerness to have you kill %s, %s neglected to consider how weak and defenseless a partial energy drain would leave %2$s.  ", c.hisHer(), c.himHer(), c.heShe()));
-                        else
-                        if(innocence > 33)
-                            w.append(t, String.format(", but instead of finishing %s off, you're using the opportunity to severely weaken %1$s.  ", c.himHer()));
-                        else
-                            w.append(t, String.format(", but rather than killing %s as %s had hoped, you're taking just enough energy to weaken %s body and dull %3$s consciousness.  ", c.himHer(), c.heShe(), c.hisHer()));
-                        if(dignity > 66)
-                            w.append(t, String.format("%s humiliation is just beginning", c.HisHer()));
-                        else
-                        if(dignity > 33)
-                            w.append(t, String.format("%s torment will only continue", c.HisHer()));
-                        else
-                            w.append(t, String.format("%s won't even be able to kick or scream", c.HeShe()));
+                        switch (innocence / 33) {
+                            case 0: w.append(t, String.format(", but rather than killing %s as %s had hoped, you're taking just enough energy to weaken %s body and dull %3$s consciousness.  ", c.himHer(), c.heShe(), c.hisHer())); break;
+                            case 1: w.append(t, String.format(", but instead of finishing %s off, you're using the opportunity to severely weaken %1$s.  ", c.himHer())); break;
+                            default: w.append(t, String.format(", but in %s eagerness to have you kill %s, %s neglected to consider how weak and defenseless a partial energy drain would leave %2$s.  ", c.hisHer(), c.himHer(), c.heShe()));
+                        }
+                        switch (dignity / 33) {
+                            case 0: w.append(t, String.format("%s won't even be able to kick or scream", c.HeShe())); break;
+                            case 1: w.append(t, String.format("%s torment will only continue", c.HisHer())); break;
+                            default: w.append(t, String.format("%s humiliation is just beginning", c.HisHer()));
+                        }
                     }
-                    if(morality > 66)
-                        w.append(t, String.format(", and %s'll receive the punishment %1$s knows %1$s deserves.", c.heShe()));
-                    else
-                    if(morality > 33)
-                        w.append(t, String.format(", and %s moment of weakness will make things even worse for %s.", c.hisHer(), c.himHer()));
-                    else
-                        w.append(t, String.format(", and %s'll be reminded that the Demons have %s outmatched in cunning and cruelty as well.", c.heShe(), c.himHer()));
+                    switch (morality / 33) {
+                        case 0: w.append(t, String.format(", and %s'll be reminded that the Demons have %s outmatched in cunning and cruelty as well.", c.heShe(), c.himHer())); break;
+                        case 1: w.append(t, String.format(", and %s moment of weakness will make things even worse for %s.", c.hisHer(), c.himHer())); break;
+                        default: w.append(t, String.format(", and %s'll receive the punishment %1$s knows %1$s deserves.", c.heShe()));
+                    }
                     if(w.getBodyStatus()[26])
                     {
                         if(c.getPLEALevel() >= 3 && !cVirg && (w.getBodyStatus()[12] || w.getBodyStatus()[11] || w.getBodyStatus()[4]))
@@ -14192,53 +14034,41 @@ public class WorldState
                 {
                     if(w.tickle())
                     {
-                        if(innocence > 66)
-                            w.append(t, String.format(", and while %s's relieved at the numbness giving %s a break from the tickling, that'll only make %2$s feel it even stronger when it wears off.  ", c.heShe(), c.himHer()));
-                        else
-                        if(innocence > 33)
-                            w.append(t, String.format(", and even though %s can't be tickled while %s body is numbed like this, the respite is only building %2$s anticipation for what will happen after %2$s escape.  ", c.heShe(), c.hisHer()));
-                        else
-                            w.append(t, String.format(", and %s's already horrified by the knowledge that the numbness now will only make %s body even more vulnerable to the subsequent tickling.  ", c.heShe(), c.hisHer()));
+                        switch (innocence / 33) {
+                            case 0: w.append(t, String.format(", and %s's already horrified by the knowledge that the numbness now will only make %s body even more vulnerable to the subsequent tickling.  ", c.heShe(), c.hisHer())); break;
+                            case 1: w.append(t, String.format(", and even though %s can't be tickled while %s body is numbed like this, the respite is only building %2$s anticipation for what will happen after %2$s escape.  ", c.heShe(), c.hisHer())); break;
+                            default: w.append(t, String.format(", and while %s's relieved at the numbness giving %s a break from the tickling, that'll only make %2$s feel it even stronger when it wears off.  ", c.heShe(), c.himHer()));
+                        }
                     } else
-                    if(innocence > 66)
-                        w.append(t, String.format(", and while %s's relieved that it doesn't hurt right now, %s body is actually in a terrible state.  ", c.heShe(), c.hisHer()));
-                    else
-                    if(innocence > 33)
-                        w.append(t, String.format(", and the numbness conceals just how much the drained life force is damaging %s body.  ", c.hisHer()));
-                    else
-                        w.append(t, String.format(", and despite the pleasant numbness filling %s now, %s knows on a rational level that the lost energy will greatly slow %s body's regeneration.  ", c.himHer(), c.heShe(), c.hisHer()));
+                    switch (innocence / 33) {
+                        case 0: w.append(t, String.format(", and despite the pleasant numbness filling %s now, %s knows on a rational level that the lost energy will greatly slow %s body's regeneration.  ", c.himHer(), c.heShe(), c.hisHer())); break;
+                        case 1: w.append(t, String.format(", and the numbness conceals just how much the drained life force is damaging %s body.  ", c.hisHer())); break;
+                        default: w.append(t, String.format(", and while %s's relieved that it doesn't hurt right now, %s body is actually in a terrible state.  ", c.heShe(), c.hisHer()));
+                    }
                     if(c.getDrainEffectiveness() > 100)
                     {
-                        if(dignity > 66)
-                            w.append(t, String.format("%s tries to put on a brave face", c.HeShe()));
-                        else
-                        if(dignity > 33)
-                            w.append(t, String.format("%s puts a token effort into escaping", c.HeShe()));
-                        else
-                            w.append(t, String.format("%s moans that %s just wants to die", c.HeShe(), c.heShe()));
-                        if(morality > 66)
-                            w.append(t, String.format(", but %s knows %1$s deserves this.", c.heShe()));
-                        else
-                        if(morality > 33)
-                            w.append(t, String.format(", %s heart conflicted.", c.hisHer()));
-                        else
-                            w.append(t, ", lacking the power to do anything but glare sullenly at you.");
+                        switch (dignity / 33) {
+                            case 0: w.append(t, String.format("%s moans that %s just wants to die", c.HeShe(), c.heShe())); break;
+                            case 1: w.append(t, String.format("%s puts a token effort into escaping", c.HeShe())); break;
+                            default: w.append(t, String.format("%s tries to put on a brave face", c.HeShe()));
+                        }
+                        switch (morality / 33) {
+                            case 0: w.append(t, ", lacking the power to do anything but glare sullenly at you."); break;
+                            case 1: w.append(t, String.format(", %s heart conflicted.", c.hisHer())); break;
+                            default: w.append(t, String.format(", but %s knows %1$s deserves this.", c.heShe()));
+                        }
                     } else
                     {
-                        if(dignity > 66)
-                            w.append(t, String.format("%s struggles to hold %s head high", c.HeShe(), c.hisHer()));
-                        else
-                        if(dignity > 33)
-                            w.append(t, String.format("%s squeezes %s eyes shut and tries to focus", c.HeShe(), c.hisHer()));
-                        else
-                            w.append(t, String.format("%s gasps for breath", c.HeShe()));
-                        if(morality > 66)
-                            w.append(t, String.format(", thinking of the people who would be sad if %s died.", c.heShe()));
-                        else
-                        if(morality > 33)
-                            w.append(t, String.format(", clinging to life with every scrap of %s willpower.", c.hisHer()));
-                        else
-                            w.append(t, String.format(", reminding %sself that %s can't get revenge on you if %2$s dies here.", c.himHer(), c.heShe()));
+                        switch (dignity / 33) {
+                            case 0: w.append(t, String.format("%s gasps for breath", c.HeShe())); break;
+                            case 1: w.append(t, String.format("%s squeezes %s eyes shut and tries to focus", c.HeShe(), c.hisHer())); break;
+                            default: w.append(t, String.format("%s struggles to hold %s head high", c.HeShe(), c.hisHer()));
+                        }
+                        switch (morality / 33) {
+                            case 0: w.append(t, String.format(", reminding %sself that %s can't get revenge on you if %2$s dies here.", c.himHer(), c.heShe())); break;
+                            case 1: w.append(t, String.format(", clinging to life with every scrap of %s willpower.", c.hisHer())); break;
+                            default: w.append(t, String.format(", thinking of the people who would be sad if %s died.", c.heShe()));
+                        }
                     }
                     if(w.getBodyStatus()[26])
                     {
@@ -14267,77 +14097,59 @@ public class WorldState
             } else
             if(captureProgression % 3 == 0)
             {
-                if(dignity > 66)
-                    w.append(t, String.format("%s's eyes go wide with shock", mainName));
-                else
-                if(dignity > 33)
-                    w.append(t, String.format("%s clutches %s head", mainName, c.hisHer()));
-                else
-                    w.append(t, String.format("%s screams out loud", mainName));
+                switch (dignity / 33) {
+                    case 0: w.append(t, String.format("%s screams out loud", mainName)); break;
+                    case 1: w.append(t, String.format("%s clutches %s head", mainName, c.hisHer())); break;
+                    default: w.append(t, String.format("%s's eyes go wide with shock", mainName));
+                }
                 if(c.getDrainEffectiveness() >= c.drainReq())
                 {
-                    if(morality > 66)
-                        w.append(t, String.format(" as you allow %s to return to consciousness long enough to telepathically taunt %1$s with the thought of all the responsibilities %s's abandoning by allowing you to kill %1$s.  ", c.himHer(), c.heShe()));
-                    else
-                    if(morality > 33)
-                        w.append(t, String.format(" as you force %s back to consciousness, your mental voice invading %s head and asking %1$s whether %s's truly ready to die.  ", c.himHer(), c.hisHer(), c.heShe()));
-                    else
-                        w.append(t, String.format(" as you provoke %s by slowing the energy drain, teasing %1$s with the prospect of unconsciousness before backing off again, keeping %1$s in mortal limbo.  ", c.himHer()));
-                    if(confidence > 66)
-                        w.append(t, String.format("%s tries to demand that you kill %s, but %s's disgusted by how weak and frail %s voice sounds", c.HeShe(), c.himHer(), c.heShe(), c.hisHer()));
-                    else
-                    if(confidence > 33)
-                        w.append(t, String.format("%s's forced to acknowledge %s own helplessness", c.HeShe(), c.hisHer()));
-                    else
-                        w.append(t, String.format("%s sobs openly at how pathetic %s is", c.HeShe(), c.heShe()));
-                    if(innocence > 66)
-                        w.append(t, ", completely falling into your trap.");
-                    else
-                    if(innocence > 33)
-                        w.append(t, ".");
-                    else
-                        w.append(t, String.format(", unable to stop the unpleasant thoughts even though %s knows that you're manipulating %s.", c.heShe(), c.himHer()));
+                    switch (morality / 33) {
+                        case 0: w.append(t, String.format(" as you provoke %s by slowing the energy drain, teasing %1$s with the prospect of unconsciousness before backing off again, keeping %1$s in mortal limbo.  ", c.himHer())); break;
+                        case 1: w.append(t, String.format(" as you force %s back to consciousness, your mental voice invading %s head and asking %1$s whether %s's truly ready to die.  ", c.himHer(), c.hisHer(), c.heShe())); break;
+                        default: w.append(t, String.format(" as you allow %s to return to consciousness long enough to telepathically taunt %1$s with the thought of all the responsibilities %s's abandoning by allowing you to kill %1$s.  ", c.himHer(), c.heShe()));
+                    }
+                    switch (confidence / 33) {
+                        case 0: w.append(t, String.format("%s sobs openly at how pathetic %s is", c.HeShe(), c.heShe())); break;
+                        case 1: w.append(t, String.format("%s's forced to acknowledge %s own helplessness", c.HeShe(), c.hisHer())); break;
+                        default: w.append(t, String.format("%s tries to demand that you kill %s, but %s's disgusted by how weak and frail %s voice sounds", c.HeShe(), c.himHer(), c.heShe(), c.hisHer()));
+                    }
+                    switch (innocence / 33) {
+                        case 0: w.append(t, String.format(", unable to stop the unpleasant thoughts even though %s knows that you're manipulating %s.", c.heShe(), c.himHer())); break;
+                        case 1: w.append(t, "."); break;
+                        default: w.append(t, ", completely falling into your trap.");
+                    }
                 } else
                 {
-                    if(morality > 66)
-                        w.append(t, String.format(" as you telepathically taunt %s, offering %1$s the prospect of a properly heroic death if %s just allows you to steal %s life force.  ", c.himHer(), c.heShe(), c.hisHer()));
-                    else
-                    if(morality > 33)
-                        w.append(t, String.format(" as your mental voice invades %s mind, asking %s why %s doesn't just give up and die.  ", c.hisHer(), c.himHer(), c.heShe()));
-                    else
-                        w.append(t, String.format(" as you form a psychic link with %s and tempt %1$s with the knowledge that all %s suffering can be over if %s simply allows you to kill %1$s.  ", c.himHer(), c.hisHer(), c.heShe()));
+                    switch (morality / 33) {
+                        case 0: w.append(t, String.format(" as you form a psychic link with %s and tempt %1$s with the knowledge that all %s suffering can be over if %s simply allows you to kill %1$s.  ", c.himHer(), c.hisHer(), c.heShe())); break;
+                        case 1: w.append(t, String.format(" as your mental voice invades %s mind, asking %s why %s doesn't just give up and die.  ", c.hisHer(), c.himHer(), c.heShe())); break;
+                        default: w.append(t, String.format(" as you telepathically taunt %s, offering %1$s the prospect of a properly heroic death if %s just allows you to steal %s life force.  ", c.himHer(), c.heShe(), c.hisHer()));
+                    }
                     if(c.getDrainEffectiveness() > 100)
                     {
-                        if(confidence > 66)
-                            w.append(t, String.format("There's no sign of %s usual bravado in %1$s eyes", c.hisHer()));
-                        else
-                        if(confidence > 33)
-                            w.append(t, String.format("%s's unable to outright deny you", c.HeShe()));
-                        else
-                            w.append(t, String.format("%s whimpers at the words tearing at %s psychological weakness", c.HeShe(), c.hisHer()));
-                        if(innocence > 66)
-                            w.append(t, String.format(", and only %s blind instinctive fear of death keeps %s from yielding right then and there.", c.hisHer(), c.himHer()));
-                        else
-                        if(innocence > 33)
-                            w.append(t, String.format(", and you can tell that %s'll be agonizing over this all night.", c.heShe()));
-                        else
-                            w.append(t, String.format(", and %s knows on a rational level that %1$s has no reason to refuse.", c.heShe()));
+                        switch (confidence / 33) {
+                            case 0: w.append(t, String.format("%s whimpers at the words tearing at %s psychological weakness", c.HeShe(), c.hisHer())); break;
+                            case 1: w.append(t, String.format("%s's unable to outright deny you", c.HeShe())); break;
+                            default: w.append(t, String.format("There's no sign of %s usual bravado in %1$s eyes", c.hisHer()));
+                        }
+                        switch (innocence / 33) {
+                            case 0: w.append(t, String.format(", and %s knows on a rational level that %1$s has no reason to refuse.", c.heShe())); break;
+                            case 1: w.append(t, String.format(", and you can tell that %s'll be agonizing over this all night.", c.heShe())); break;
+                            default: w.append(t, String.format(", and only %s blind instinctive fear of death keeps %s from yielding right then and there.", c.hisHer(), c.himHer()));
+                        }
                     } else
                     {
-                        if(confidence > 66)
-                            w.append(t, String.format("However, %s denies you with the strongest voice %1$s can muster", c.heShe()));
-                        else
-                        if(confidence > 33)
-                            w.append(t, String.format("%s gasps out a refusal", c.HeShe()));
-                        else
-                            w.append(t, String.format("As afraid as %s is, %1$s still vigorously shakes %s head", c.heShe(), c.hisHer()));
-                        if(innocence > 66)
-                            w.append(t, ", not even hesitating for a moment.");
-                        else
-                        if(innocence > 33)
-                            w.append(t, String.format(", bolstering %s mental strength.", c.hisHer()));
-                        else
-                            w.append(t, String.format(", reminding %sself that there's no danger as long as %s remains resolute.", c.himHer(), c.heShe()));
+                        switch (confidence / 33) {
+                            case 0: w.append(t, String.format("As afraid as %s is, %1$s still vigorously shakes %s head", c.heShe(), c.hisHer())); break;
+                            case 1: w.append(t, String.format("%s gasps out a refusal", c.HeShe())); break;
+                            default: w.append(t, String.format("However, %s denies you with the strongest voice %1$s can muster", c.heShe()));
+                        }
+                        switch (innocence / 33) {
+                            case 0: w.append(t, String.format(", reminding %sself that there's no danger as long as %s remains resolute.", c.himHer(), c.heShe())); break;
+                            case 1: w.append(t, String.format(", bolstering %s mental strength.", c.hisHer())); break;
+                            default: w.append(t, ", not even hesitating for a moment.");
+                        }
                     }
                 }
                 if(w.getBodyStatus()[26])
@@ -14368,34 +14180,26 @@ public class WorldState
         if(w.getBodyStatus()[22])
             if(captureProgression % 3 == 1)
             {
-                if(confidence > 66)
-                    w.append(t, String.format("%s's first instinct is to pummel and tear at the tentacles erupting from %s clothes like %s would any other Demon, but %2$s efforts just end up stripping %sself", mainName, c.hisHer(), c.heShe(), c.himHer()));
-                else
-                if(confidence > 33)
-                    w.append(t, String.format("%s attempts to fight on regardless of the tentacles within %s clothes tearing them open", mainName, c.hisHer()));
-                else
-                    w.append(t, String.format("%s cowers from the tentacles emerging from %s clothes and stripping %s", mainName, c.hisHer(), c.himHer()));
-                if(dignity > 66)
-                    w.append(t, String.format(" and preventing %s from covering the parts exposed.  ", c.himHer()));
-                else
-                if(dignity > 33)
-                    w.append(t, ", and more and more continue to come out.  ");
-                else
-                    w.append(t, ".  ");
-                if(morality > 66)
-                    w.append(t, String.format("%s tells %sself that something so trivial shouldn't be able to stop %2$s from fighting the Demons", c.HeShe(), c.himHer()));
-                else
-                if(morality > 33)
-                    w.append(t, String.format("%s tells %sself that this really isn't such a big deal", c.HeShe(), c.himHer()));
-                else
-                    w.append(t, String.format("%s tells %sself that seeing %2$s struggle like this shouldn't make people any less afraid of %s power", c.HeShe(), c.himHer(), c.hisHer()));
-                if(innocence > 66)
-                    w.append(t, ", but for some reason, it still feels really awful.");
-                else
-                if(innocence > 33)
-                    w.append(t, String.format(", doing %s best to stay motivated.", c.hisHer()));
-                else
-                    w.append(t, String.format(", but %s knows it's not true.", c.heShe()));
+                switch (confidence / 33) {
+                    case 0: w.append(t, String.format("%s cowers from the tentacles emerging from %s clothes and stripping %s", mainName, c.hisHer(), c.himHer())); break;
+                    case 1: w.append(t, String.format("%s attempts to fight on regardless of the tentacles within %s clothes tearing them open", mainName, c.hisHer())); break;
+                    default: w.append(t, String.format("%s's first instinct is to pummel and tear at the tentacles erupting from %s clothes like %s would any other Demon, but %2$s efforts just end up stripping %sself", mainName, c.hisHer(), c.heShe(), c.himHer()));
+                }
+                switch (dignity / 33) {
+                    case 0: w.append(t, ".  "); break;
+                    case 1: w.append(t, ", and more and more continue to come out.  "); break;
+                    default: w.append(t, String.format(" and preventing %s from covering the parts exposed.  ", c.himHer()));
+                }
+                switch (morality / 33) {
+                    case 0: w.append(t, String.format("%s tells %sself that seeing %2$s struggle like this shouldn't make people any less afraid of %s power", c.HeShe(), c.himHer(), c.hisHer())); break;
+                    case 1: w.append(t, String.format("%s tells %sself that this really isn't such a big deal", c.HeShe(), c.himHer())); break;
+                    default: w.append(t, String.format("%s tells %sself that something so trivial shouldn't be able to stop %2$s from fighting the Demons", c.HeShe(), c.himHer()));
+                }
+                switch (innocence / 33) {
+                    case 0: w.append(t, String.format(", but %s knows it's not true.", c.heShe())); break;
+                    case 1: w.append(t, String.format(", doing %s best to stay motivated.", c.hisHer())); break;
+                    default: w.append(t, ", but for some reason, it still feels really awful.");
+                }
                 if(w.getBodyStatus()[26])
                 {
                     if(c.getHATELevel() >= 3 && !vVirg && (w.getBodyStatus()[11] || w.getBodyStatus()[14] || w.getBodyStatus()[3]))
@@ -14419,34 +14223,26 @@ public class WorldState
             } else
             if(captureProgression % 3 == 2)
             {
-                if(morality > 66)
-                    w.append(t, String.format("%s doesn't look like much of a hero as %s own outfit strips %s and pins %3$s down", mainName, c.hisHer(), c.himHer()));
-                else
-                if(morality > 33)
-                    w.append(t, String.format("%s is obviously helpless to stop %s clothes from tangling %2$s limbs and tearing themselves apart", mainName, c.hisHer()));
-                else
-                    w.append(t, String.format("Angrily struggling with %s own clothes, %s's intimidating demeanor has completely collapsed", c.hisHer(), mainName));
-                if(innocence > 66)
-                    w.append(t, String.format(", and %s doesn't even realize what a show %1$s's putting on.  ", c.heShe()));
-                else
-                if(innocence > 33)
-                    w.append(t, ".  ");
-                else
-                    w.append(t, String.format(", and %s's all too aware of it.  ", c.heShe()));
-                if(confidence > 66)
-                    w.append(t, String.format("%s never imagined that %s could be reduced to such a pathetic state", c.HeShe(), c.heShe()));
-                else
-                if(confidence > 33)
-                    w.append(t, String.format("%s knows %s could have avoided being humiliated like this if %2$s were just a little more careful", c.HeShe(), c.heShe()));
-                else
-                    w.append(t, String.format("%s feels like everyone is finally seeing just how helpless %s's always actually been", c.HeShe(), c.heShe()));
-                if(dignity > 66)
-                    w.append(t, String.format(", and thinking of how far %s's fallen makes %s unexpectedly tear up.", c.heShe(), c.himHer()));
-                else
-                if(dignity > 33)
-                    w.append(t, ".");
-                else
-                    w.append(t, String.format(", and while %s has never paid much mind to what others think of %s, it still hurts.", c.heShe(), c.himHer()));
+                switch (morality / 33) {
+                    case 0: w.append(t, String.format("Angrily struggling with %s own clothes, %s's intimidating demeanor has completely collapsed", c.hisHer(), mainName)); break;
+                    case 1: w.append(t, String.format("%s is obviously helpless to stop %s clothes from tangling %2$s limbs and tearing themselves apart", mainName, c.hisHer())); break;
+                    default: w.append(t, String.format("%s doesn't look like much of a hero as %s own outfit strips %s and pins %3$s down", mainName, c.hisHer(), c.himHer()));
+                }
+                switch (innocence / 33) {
+                    case 0: w.append(t, String.format(", and %s's all too aware of it.  ", c.heShe())); break;
+                    case 1: w.append(t, ".  "); break;
+                    default: w.append(t, String.format(", and %s doesn't even realize what a show %1$s's putting on.  ", c.heShe()));
+                }
+                switch (confidence / 33) {
+                    case 0: w.append(t, String.format("%s feels like everyone is finally seeing just how helpless %s's always actually been", c.HeShe(), c.heShe())); break;
+                    case 1: w.append(t, String.format("%s knows %s could have avoided being humiliated like this if %2$s were just a little more careful", c.HeShe(), c.heShe())); break;
+                    default: w.append(t, String.format("%s never imagined that %s could be reduced to such a pathetic state", c.HeShe(), c.heShe()));
+                }
+                switch (dignity / 33) {
+                    case 0: w.append(t, String.format(", and while %s has never paid much mind to what others think of %s, it still hurts.", c.heShe(), c.himHer())); break;
+                    case 1: w.append(t, "."); break;
+                    default: w.append(t, String.format(", and thinking of how far %s's fallen makes %s unexpectedly tear up.", c.heShe(), c.himHer()));
+                }
                 if(w.getBodyStatus()[26])
                 {
                     if(c.getPLEALevel() >= 3 && !cVirg && (w.getBodyStatus()[12] || w.getBodyStatus()[11] || w.getBodyStatus()[4]))
@@ -14482,13 +14278,11 @@ public class WorldState
             } else
             if(captureProgression % 3 == 0)
             {
-                if(dignity > 66)
-                    w.append(t, String.format("%s's face goes a deeper shade of red when %s spots several distant spectators laughing as they film %s, but %2$s tries to keep up appearances by ", mainName, c.heShe(), c.himHer()));
-                else
-                if(dignity > 33)
-                    w.append(t, String.format("A crowd of civilians films %s's predicament from a nearby rooftop, clearly enjoying the spectacle.  Upon hearing their laughter, %1$s starts ", mainName));
-                else
-                    w.append(t, String.format("When %s hears a chorus of laughter from the spectators watching and filming from a rooftop just outside the battlefield, %s only reacts by ", mainName, c.heShe()));
+                switch (dignity / 33) {
+                    case 0: w.append(t, String.format("When %s hears a chorus of laughter from the spectators watching and filming from a rooftop just outside the battlefield, %s only reacts by ", mainName, c.heShe())); break;
+                    case 1: w.append(t, String.format("A crowd of civilians films %s's predicament from a nearby rooftop, clearly enjoying the spectacle.  Upon hearing their laughter, %1$s starts ", mainName)); break;
+                    default: w.append(t, String.format("%s's face goes a deeper shade of red when %s spots several distant spectators laughing as they film %s, but %2$s tries to keep up appearances by ", mainName, c.heShe(), c.himHer()));
+                }
                 if(morality > 66)
                     w.append(t, "shakily shouting that they're still in danger and should find shelter further away.  ");
                 else
@@ -14496,20 +14290,16 @@ public class WorldState
                     w.append(t, String.format("trying to act like %s has everything under control.  ", c.heShe()));
                 else
                     w.append(t, "shouting ineffectual threats at them, promising retribution if they don't stop.  ");
-                if(innocence > 66)
-                    w.append(t, String.format("%s doesn't have a good grasp on way that being seen as weak will decrease the psychic energy received by the Chosen, and ", c.HeShe()));
-                else
-                if(innocence > 33)
-                    w.append(t, String.format("%s's vaguely aware that the public's perceptions fuel the power of the Chosen, but ", c.HeShe()));
-                else
-                    w.append(t, String.format("%s knows that the flow of psychic energy to the Chosen depends on them being seen as powerful, but ", c.HeShe()));
-                if(confidence > 66)
-                    w.append(t, String.format("even if %s struggles with all %s strength and determination, the fact that %1$s's engaged in a fight with %2$s clothing unavoidably makes %s look ridiculous.", c.heShe(), c.hisHer(), c.himHer()));
-                else
-                if(confidence > 33)
-                    w.append(t, "it's impossible to look dignified when fighting against one's own clothing.");
-                else
-                    w.append(t, String.format("resistance seems so hopeless that %s finds %sself surrendering to the tentacles pouring out of the remaining scraps of %s clothing.", c.heShe(), c.himHer(), c.hisHer()));
+                switch (innocence / 33) {
+                    case 0: w.append(t, String.format("%s knows that the flow of psychic energy to the Chosen depends on them being seen as powerful, but ", c.HeShe())); break;
+                    case 1: w.append(t, String.format("%s's vaguely aware that the public's perceptions fuel the power of the Chosen, but ", c.HeShe())); break;
+                    default: w.append(t, String.format("%s doesn't have a good grasp on way that being seen as weak will decrease the psychic energy received by the Chosen, and ", c.HeShe()));
+                }
+                switch (confidence / 33) {
+                    case 0: w.append(t, String.format("resistance seems so hopeless that %s finds %sself surrendering to the tentacles pouring out of the remaining scraps of %s clothing.", c.heShe(), c.himHer(), c.hisHer())); break;
+                    case 1: w.append(t, "it's impossible to look dignified when fighting against one's own clothing."); break;
+                    default: w.append(t, String.format("even if %s struggles with all %s strength and determination, the fact that %1$s's engaged in a fight with %2$s clothing unavoidably makes %s look ridiculous.", c.heShe(), c.hisHer(), c.himHer()));
+                }
                 if(w.getBodyStatus()[26])
                 {
                     if(c.getINJULevel() >= 3 && !aVirg && (w.getBodyStatus()[13] || w.getBodyStatus()[12] || w.getBodyStatus()[5]))
@@ -14584,13 +14374,11 @@ public class WorldState
             Boolean penetrated = Boolean.valueOf(c.getHATELevel() >= 3 || c.getImpregnationEffectiveness() >= c.impregnationReq() && w.getBodyStatus()[19]);
             if(captureProgression % 3 == 1)
             {
-                if(innocence > 66)
-                    w.append(t, String.format("%s cries out in disgust as %s feels ", mainName, c.heShe()));
-                else
-                if(innocence > 33)
-                    w.append(t, String.format("%s moans helplessly as %s feels ", mainName, c.heShe()));
-                else
-                    w.append(t, String.format("%s's eyes go wide with fear as %s feels ", mainName, c.heShe()));
+                switch (innocence / 33) {
+                    case 0: w.append(t, String.format("%s's eyes go wide with fear as %s feels ", mainName, c.heShe())); break;
+                    case 1: w.append(t, String.format("%s moans helplessly as %s feels ", mainName, c.heShe())); break;
+                    default: w.append(t, String.format("%s cries out in disgust as %s feels ", mainName, c.heShe()));
+                }
                 if(w.getBodyStatus()[3])
                     w.append(t, String.format("you nibble on %s ear while your monstrous cock twitches", c.hisHer()));
                 else
@@ -14601,23 +14389,19 @@ public class WorldState
                 if(!penetrated)
                 {
                     w.append(t, String.format(" against %s belly", c.hisHer()));
-                    if(dignity > 66)
-                        w.append(t, String.format(", only regaining some level of composure by reminding %sself that %s Sexual Barrier remains intact.  ", c.himHer(), c.hisHer()));
-                    else
-                    if(dignity > 33)
-                        w.append(t, ".  ");
-                    else
-                        w.append(t, String.format(", plainly disturbed by what you're threatening to do to %s.  ", c.himHer()));
+                    switch (dignity / 33) {
+                        case 0: w.append(t, String.format(", plainly disturbed by what you're threatening to do to %s.  ", c.himHer())); break;
+                        case 1: w.append(t, ".  "); break;
+                        default: w.append(t, String.format(", only regaining some level of composure by reminding %sself that %s Sexual Barrier remains intact.  ", c.himHer(), c.hisHer()));
+                    }
                 } else
                 {
                     w.append(t, String.format(" inside %s.  ", c.himHer()));
-                    if(dignity > 66)
-                        w.append(t, String.format("%s mask of composure is unable to withstand ", c.HisHer()));
-                    else
-                    if(dignity > 33)
-                        w.append(t, String.format("%s tries and fails to ignore ", c.HeShe()));
-                    else
-                        w.append(t, String.format("%s can't stop %sself from reacting to ", c.HeShe(), c.himHer()));
+                    switch (dignity / 33) {
+                        case 0: w.append(t, String.format("%s can't stop %sself from reacting to ", c.HeShe(), c.himHer())); break;
+                        case 1: w.append(t, String.format("%s tries and fails to ignore ", c.HeShe())); break;
+                        default: w.append(t, String.format("%s mask of composure is unable to withstand ", c.HisHer()));
+                    }
                 }
                 if(c.getPLEALevel() < 3)
                 {
@@ -14868,13 +14652,11 @@ public class WorldState
                     w.append(t, String.format("You tell %s to look down at %s body, and %s", mainName, c.hisHer(), c.heShe()));
                 else
                     w.append(t, mainName);
-                if(dignity > 66)
-                    w.append(t, " suppresses a scream of ");
-                else
-                if(dignity > 33)
-                    w.append(t, " struggles to escape, screaming in ");
-                else
-                    w.append(t, " thrashes wildly and screams in ");
+                switch (dignity / 33) {
+                    case 0: w.append(t, " thrashes wildly and screams in "); break;
+                    case 1: w.append(t, " struggles to escape, screaming in "); break;
+                    default: w.append(t, " suppresses a scream of ");
+                }
                 if(!penetrated)
                 {
                     if(w.getBodyStatus()[5] && w.tickle().equals(false))
@@ -14907,13 +14689,11 @@ public class WorldState
                         w.append(t, "intestine.  ");
                     else
                         w.append(t, "cervix.  ");
-                    if(innocence > 66)
-                        w.append(t, String.format("%s has no idea that you're ", c.HeShe()));
-                    else
-                    if(innocence > 33)
-                        w.append(t, String.format("%s is in no state to consider that you're ", c.HeShe()));
-                    else
-                        w.append(t, String.format("%s can't do anything to stop you from ", c.HeShe()));
+                    switch (innocence / 33) {
+                        case 0: w.append(t, String.format("%s can't do anything to stop you from ", c.HeShe())); break;
+                        case 1: w.append(t, String.format("%s is in no state to consider that you're ", c.HeShe())); break;
+                        default: w.append(t, String.format("%s has no idea that you're ", c.HeShe()));
+                    }
                 }
                 if(c.getPLEALevel() < 3)
                 {
@@ -14946,13 +14726,11 @@ public class WorldState
                         if(w.getBodyStatus()[4])
                             w.append(t, String.format("The tentacles binding and stroking %s whole body make it impossible to resist.  ", c.hisHer()));
                     }
-                    if(confidence > 66)
-                        w.append(t, String.format("%s just grits %s teeth and wills %sself to find the strength to throw off the bulk pinning %3$s down.", c.HeShe(), c.hisHer(), c.himHer()));
-                    else
-                    if(confidence > 33)
-                        w.append(t, String.format("%s continues to struggle weakly.", c.HeShe()));
-                    else
-                        w.append(t, String.format("%s just sobs and doesn't fight it.", c.HeShe()));
+                    switch (confidence / 33) {
+                        case 0: w.append(t, String.format("%s just sobs and doesn't fight it.", c.HeShe())); break;
+                        case 1: w.append(t, String.format("%s continues to struggle weakly.", c.HeShe())); break;
+                        default: w.append(t, String.format("%s just grits %s teeth and wills %sself to find the strength to throw off the bulk pinning %3$s down.", c.HeShe(), c.hisHer(), c.himHer()));
+                    }
                 } else
                 if(cVirg)
                 {
@@ -14983,13 +14761,11 @@ public class WorldState
                     {
                         w.append(t, String.format("trying to make %s cum.  ", c.himHer()));
                     }
-                    if(confidence > 66)
-                        w.append(t, String.format("%s grits %s teeth against the sensations, but %s can't stop %2$s hips from bucking with every thrust.", c.HeShe(), c.hisHer(), c.heShe()));
-                    else
-                    if(confidence > 33)
-                        w.append(t, String.format("%s struggles weakly, softly moaning into the ground with each breath.", c.HeShe()));
-                    else
-                        w.append(t, String.format("%s just goes limp, trying to escape into %s own thoughts.", c.HeShe(), c.hisHer()));
+                    switch (confidence / 33) {
+                        case 0: w.append(t, String.format("%s just goes limp, trying to escape into %s own thoughts.", c.HeShe(), c.hisHer())); break;
+                        case 1: w.append(t, String.format("%s struggles weakly, softly moaning into the ground with each breath.", c.HeShe())); break;
+                        default: w.append(t, String.format("%s grits %s teeth against the sensations, but %s can't stop %2$s hips from bucking with every thrust.", c.HeShe(), c.hisHer(), c.heShe()));
+                    }
                 } else
                 {
                     if(!penetrated)
@@ -15026,13 +14802,11 @@ public class WorldState
                         else
                             w.append(t, String.format("into %s womb.", c.hisHer()));
                     }
-                    if(confidence > 66)
-                        w.append(t, String.format("  %s tries to fight it, but %s can't, and %s cries of helpless pleasure rise above the battlefield.", c.HeShe(), c.heShe(), c.hisHer()));
-                    else
-                    if(confidence > 33)
-                        w.append(t, "");
-                    else
-                        w.append(t, String.format("  %s gives in to the pleasure, moaning and sobbing in defeat.", c.HeShe()));
+                    switch (confidence / 33) {
+                        case 0: w.append(t, String.format("  %s gives in to the pleasure, moaning and sobbing in defeat.", c.HeShe())); break;
+                        case 1: w.append(t, ""); break;
+                        default: w.append(t, String.format("  %s tries to fight it, but %s can't, and %s cries of helpless pleasure rise above the battlefield.", c.HeShe(), c.heShe(), c.hisHer()));
+                    }
                 }
                 if(w.getBodyStatus()[5])
                 {
@@ -15076,13 +14850,11 @@ public class WorldState
             } else
             if(captureProgression % 3 == 0)
             {
-                if(morality > 66)
-                    w.append(t, String.format("Driven by determination to help %s friends, %s lunges out of your grasp and starts to crawl away, but you quickly pounce on %s again", c.hisHer(), mainName, c.himHer()));
-                else
-                if(morality > 33)
-                    w.append(t, String.format("%s manages to escape you for a moment and start to crawl away, but you quickly catch up", mainName));
-                else
-                    w.append(t, String.format("You toy with %s, stoking %s hate by allowing %s to escape and crawl away for a moment before you leap onto %3$s again", mainName, c.hisHer(), c.himHer()));
+                switch (morality / 33) {
+                    case 0: w.append(t, String.format("You toy with %s, stoking %s hate by allowing %s to escape and crawl away for a moment before you leap onto %3$s again", mainName, c.hisHer(), c.himHer())); break;
+                    case 1: w.append(t, String.format("%s manages to escape you for a moment and start to crawl away, but you quickly catch up", mainName)); break;
+                    default: w.append(t, String.format("Driven by determination to help %s friends, %s lunges out of your grasp and starts to crawl away, but you quickly pounce on %s again", c.hisHer(), mainName, c.himHer()));
+                }
                 if(w.getBodyStatus()[3])
                     w.append(t, ", laughing derisively,");
                 if(!penetrated)
@@ -15101,13 +14873,11 @@ public class WorldState
                         w.append(t, String.format(" and slam %s into the pavement.  Your slime quickly resumes pressing against %s slit", c.himHer(), c.hisHer()));
                     else
                         w.append(t, String.format(" and slam %s into the pavement.  Your cock resumes persistently rubbing against %s slit", c.himHer(), c.hisHer()));
-                    if(confidence > 66)
-                        w.append(t, String.format(" as %s kicks and struggles.  ", c.heShe()));
-                    else
-                    if(confidence > 33)
-                        w.append(t, ".  ");
-                    else
-                        w.append(t, String.format(" as %s bitterly hangs %s head, demoralized by %2$s brief glimpse of freedom.  ", c.heShe(), c.hisHer()));
+                    switch (confidence / 33) {
+                        case 0: w.append(t, String.format(" as %s bitterly hangs %s head, demoralized by %2$s brief glimpse of freedom.  ", c.heShe(), c.hisHer())); break;
+                        case 1: w.append(t, ".  "); break;
+                        default: w.append(t, String.format(" as %s kicks and struggles.  ", c.heShe()));
+                    }
                 } else
                 {
                     if(w.getBodyStatus()[6])
@@ -15117,13 +14887,11 @@ public class WorldState
                         w.append(t, String.format(" and slam your first cock into %s pussy with one mighty thrust.  ", c.hisHer()));
                     else
                         w.append(t, String.format(" and slam your cock into %s with one mighty thrust.  ", c.himHer()));
-                    if(confidence > 66)
-                        w.append(t, String.format("%s's not used to feeling so weak, but ", c.HeShe()));
-                    else
-                    if(confidence > 33)
-                        w.append(t, String.format("The moment of false hope crushes %s spirit, but ", c.hisHer()));
-                    else
-                        w.append(t, String.format("Tears stream down %s face, but ", c.hisHer()));
+                    switch (confidence / 33) {
+                        case 0: w.append(t, String.format("Tears stream down %s face, but ", c.hisHer())); break;
+                        case 1: w.append(t, String.format("The moment of false hope crushes %s spirit, but ", c.hisHer())); break;
+                        default: w.append(t, String.format("%s's not used to feeling so weak, but ", c.HeShe()));
+                    }
                 }
                 if(c.getPLEALevel() < 3)
                 {
@@ -15131,13 +14899,11 @@ public class WorldState
                         w.append(t, String.format("Your treatment of %s is far from gentle, but ", c.himHer()));
                     else
                         w.append(t, "");
-                    if(dignity > 66)
-                        w.append(t, String.format("%s refuses to cry out in pain.", c.heShe()));
-                    else
-                    if(dignity > 33)
-                        w.append(t, String.format("the pain %s feels is drowned out by the anger.", c.heShe()));
-                    else
-                        w.append(t, String.format("%s screams of pain are mingled with anger.", c.hisHer()));
+                    switch (dignity / 33) {
+                        case 0: w.append(t, String.format("%s screams of pain are mingled with anger.", c.hisHer())); break;
+                        case 1: w.append(t, String.format("the pain %s feels is drowned out by the anger.", c.heShe())); break;
+                        default: w.append(t, String.format("%s refuses to cry out in pain.", c.heShe()));
+                    }
                 } else
                 if(cVirg)
                 {
@@ -15145,13 +14911,11 @@ public class WorldState
                         w.append(t, String.format("The pleasure almost makes %s want to allow you inside, but ", c.himHer()));
                     else
                         w.append(t, "");
-                    if(dignity > 66)
-                        w.append(t, String.format("%s refuses to show any sign of how good it feels.", c.heShe()));
-                    else
-                    if(dignity > 33)
-                        w.append(t, String.format("%s anger helps %s resist %1$s despair and %1$s lust alike.", c.hisHer(), c.himHer()));
-                    else
-                        w.append(t, String.format("%s tries to manage %s lust by moaning out loud.", c.heShe(), c.hisHer()));
+                    switch (dignity / 33) {
+                        case 0: w.append(t, String.format("%s tries to manage %s lust by moaning out loud.", c.heShe(), c.hisHer())); break;
+                        case 1: w.append(t, String.format("%s anger helps %s resist %1$s despair and %1$s lust alike.", c.hisHer(), c.himHer())); break;
+                        default: w.append(t, String.format("%s refuses to show any sign of how good it feels.", c.heShe()));
+                    }
                 } else
                 {
                     if(!gender.equals("female"))
@@ -15165,13 +14929,11 @@ public class WorldState
                         w.append(t, String.format("%s can't stop %sself from cumming, ", c.HeShe(), c.himHer()));
                     else
                         w.append(t, String.format("%s can't stop %sself from cumming, ", c.heShe(), c.himHer()));
-                    if(dignity > 66)
-                        w.append(t, String.format("and it's all %s can do to avoid moaning out loud.", c.heShe()));
-                    else
-                    if(dignity > 33)
-                        w.append(t, String.format("%s body spasming wildly.", c.hisHer()));
-                    else
-                        w.append(t, "and the moans of pleasure come out freely.");
+                    switch (dignity / 33) {
+                        case 0: w.append(t, "and the moans of pleasure come out freely."); break;
+                        case 1: w.append(t, String.format("%s body spasming wildly.", c.hisHer())); break;
+                        default: w.append(t, String.format("and it's all %s can do to avoid moaning out loud.", c.heShe()));
+                    }
                 }
                 if(w.getBodyStatus()[4])
                 {
@@ -15212,13 +14974,11 @@ public class WorldState
         {
             if(captureProgression % 3 == 1)
             {
-                if(confidence > 66)
-                    w.append(t, String.format("%s struggles with all %s strength, but %s can't stop your tentacles from pulling %s completely into your body", mainName, c.hisHer(), c.heShe(), c.himHer()));
-                else
-                if(confidence > 33)
-                    w.append(t, String.format("You use your tentacles to pull %s all the way into your body", mainName));
-                else
-                    w.append(t, String.format("With a startled scream, %s is pulled all the way into your body", mainName));
+                switch (confidence / 33) {
+                    case 0: w.append(t, String.format("With a startled scream, %s is pulled all the way into your body", mainName)); break;
+                    case 1: w.append(t, String.format("You use your tentacles to pull %s all the way into your body", mainName)); break;
+                    default: w.append(t, String.format("%s struggles with all %s strength, but %s can't stop your tentacles from pulling %s completely into your body", mainName, c.hisHer(), c.heShe(), c.himHer()));
+                }
                 if(c.getPLEALevel() < 3)
                 {
                     if(w.getBodyStatus()[19])
@@ -15228,13 +14988,11 @@ public class WorldState
                         w.append(t, String.format(", where %s's completely submerged in slime.  ", c.heShe()));
                     else
                         w.append(t, String.format(", where %s's completely submerged in aphrodisiac liquid.  ", c.heShe()));
-                    if(morality > 66)
-                        w.append(t, String.format("%s tries to stay calm and focus on %s mission, but the wriggling tendrils covering %2$s body redouble their effort to make %s cum.  ", c.HeShe(), c.hisHer(), c.himHer()));
-                    else
-                    if(morality > 33)
-                        w.append(t, String.format("Your tendrils spread across %s body, tightening around %1$s chest and pinching %1$s nipples.  ", c.hisHer()));
-                    else
-                        w.append(t, String.format("%s tries to fight back, but it's hard to move through the viscous substance, and the tendrils between %s legs continue their assault uninterrupted.  ", c.HeShe(), c.hisHer()));
+                    switch (morality / 33) {
+                        case 0: w.append(t, String.format("%s tries to fight back, but it's hard to move through the viscous substance, and the tendrils between %s legs continue their assault uninterrupted.  ", c.HeShe(), c.hisHer())); break;
+                        case 1: w.append(t, String.format("Your tendrils spread across %s body, tightening around %1$s chest and pinching %1$s nipples.  ", c.hisHer())); break;
+                        default: w.append(t, String.format("%s tries to stay calm and focus on %s mission, but the wriggling tendrils covering %2$s body redouble their effort to make %s cum.  ", c.HeShe(), c.hisHer(), c.himHer()));
+                    }
                 } else
                 {
                     if(w.getBodyStatus()[19])
@@ -15278,13 +15036,11 @@ public class WorldState
                             w.append(t, String.format("When %s manages to hold %s breath too long for your liking, you redouble your tickling, and when %2$s gasp of surprise causes %s to breathe in the aphrodisiac, ", c.heShe(), c.hisHer(), c.himHer()));
                         else
                             w.append(t, String.format("Climaxing and being tickled at the same time, %s's unable to stop %sself from gasping in a lungful of the aphrodisiac, and ", c.heShe(), c.himHer()));
-                        if(innocence > 66)
-                            w.append(t, String.format("the warm, fuzzy feelings filling %s head make it hard to think of anything other than cumming again.", c.hisHer()));
-                        else
-                        if(innocence > 33)
-                            w.append(t, String.format("%s quickly begins to lose %s sanity.", c.heShe(), c.hisHer()));
-                        else
-                            w.append(t, String.format("%s rational mind quickly begins to melt into a haze of animalistic desires.", c.hisHer()));
+                        switch (innocence / 33) {
+                            case 0: w.append(t, String.format("%s rational mind quickly begins to melt into a haze of animalistic desires.", c.hisHer())); break;
+                            case 1: w.append(t, String.format("%s quickly begins to lose %s sanity.", c.heShe(), c.hisHer())); break;
+                            default: w.append(t, String.format("the warm, fuzzy feelings filling %s head make it hard to think of anything other than cumming again.", c.hisHer()));
+                        }
                     } else
                     {
                         if(w.getBodyStatus()[5])
@@ -15298,13 +15054,11 @@ public class WorldState
                             w.append(t, String.format("%s attempts to hold %s breath are futile.  Even though %s isn't cumming yet, your tendrils tickling %s are more than sufficient to make %4$s laugh and breathe the aphrodisiac in", c.HisHer(), c.hisHer(), c.heShe(), c.himHer()));
                         else
                             w.append(t, String.format("With your tendrils forcing %s to cum and laugh at the same time, there's no way %s can stop %1$sself from breathing in the aphrodisiac", c.himHer(), c.heShe()));
-                        if(innocence > 66)
-                            w.append(t, String.format(", melting %s mind into a pleasurable haze.", c.hisHer()));
-                        else
-                        if(innocence > 33)
-                            w.append(t, String.format(", the direct contact with %s lungs multiplying its effect on %s.", c.hisHer(), c.himHer()));
-                        else
-                            w.append(t, String.format(", and while %s knows that the Chosen don't need to breathe, %1$s can't help but worry about how the chemical's influence will deepen %s predicament even further.", c.heShe(), c.hisHer()));
+                        switch (innocence / 33) {
+                            case 0: w.append(t, String.format(", and while %s knows that the Chosen don't need to breathe, %1$s can't help but worry about how the chemical's influence will deepen %s predicament even further.", c.heShe(), c.hisHer())); break;
+                            case 1: w.append(t, String.format(", the direct contact with %s lungs multiplying its effect on %s.", c.hisHer(), c.himHer())); break;
+                            default: w.append(t, String.format(", melting %s mind into a pleasurable haze.", c.hisHer()));
+                        }
                     }
                 } else
                 if(c.getINJULevel() < 3)
@@ -15328,13 +15082,11 @@ public class WorldState
                         w.append(t, String.format("%s gasps of unwilling pleasure draw the aphrosisiac into %s lungs", c.HisHer(), c.hisHer()));
                     else
                         w.append(t, String.format("The climax makes it impossible for %s to hold %s breath, and soon %s's drowning in the aphrosiaic", c.himHer(), c.hisHer(), c.heShe()));
-                    if(innocence > 66)
-                        w.append(t, String.format(", causing %s to thrash in blind panic as %s instinctive fear makes %1$s forget that something like this could never kill one of the Chosen.", c.himHer(), c.hisHer()));
-                    else
-                    if(innocence > 33)
-                        w.append(t, String.format(", the sharp pain inside %s chest doing little to distract from the orgasmic sensations.", c.hisHer()));
-                    else
-                        w.append(t, String.format(".  %s knows that the Chosen can survive without breathing, but the lack of oxygen will still damage and weaken %s body.", c.HeShe(), c.hisHer()));
+                    switch (innocence / 33) {
+                        case 0: w.append(t, String.format(".  %s knows that the Chosen can survive without breathing, but the lack of oxygen will still damage and weaken %s body.", c.HeShe(), c.hisHer())); break;
+                        case 1: w.append(t, String.format(", the sharp pain inside %s chest doing little to distract from the orgasmic sensations.", c.hisHer())); break;
+                        default: w.append(t, String.format(", causing %s to thrash in blind panic as %s instinctive fear makes %1$s forget that something like this could never kill one of the Chosen.", c.himHer(), c.hisHer()));
+                    }
                 } else
                 if(aVirg)
                 {
@@ -15357,13 +15109,11 @@ public class WorldState
                         w.append(t, String.format("%s's too badly-hurt to hold %s breath for long, ", c.HeShe(), c.hisHer()));
                     else
                         w.append(t, String.format("Climaxing and injured, %s has no chance of holding %s breath for long, ", c.heShe(), c.hisHer()));
-                    if(innocence > 66)
-                        w.append(t, String.format("and when the aphrodisiac flows into %s lungs, %s thrashes in instinctive panic, briefly forgetting that the Chosen can survive drowning.", c.hisHer(), c.heShe()));
-                    else
-                    if(innocence > 33)
-                        w.append(t, String.format("but the pain as %s starts to drown is barely noticeable next to %s prior injuries.", c.heShe(), c.hisHer()));
-                    else
-                        w.append(t, String.format("and while %s knows that %s body can survive drowning, the pain as the aphrodisiac flows into %2$s lungs reminds %s that the lack of oxygen will still damage and weaken %3$s.", c.heShe(), c.hisHer(), c.himHer()));
+                    switch (innocence / 33) {
+                        case 0: w.append(t, String.format("and while %s knows that %s body can survive drowning, the pain as the aphrodisiac flows into %2$s lungs reminds %s that the lack of oxygen will still damage and weaken %3$s.", c.heShe(), c.hisHer(), c.himHer())); break;
+                        case 1: w.append(t, String.format("but the pain as %s starts to drown is barely noticeable next to %s prior injuries.", c.heShe(), c.hisHer())); break;
+                        default: w.append(t, String.format("and when the aphrodisiac flows into %s lungs, %s thrashes in instinctive panic, briefly forgetting that the Chosen can survive drowning.", c.hisHer(), c.heShe()));
+                    }
                 } else
                 {
                     if(c.getPLEALevel() < 3)
@@ -15387,13 +15137,11 @@ public class WorldState
                         w.append(t, String.format("Crying out in agonized climax as you use several needle-like tentacles to prick all over %s balls, %s immediately takes in a lungful of aphrodisiac", c.hisHer(), c.heShe()));
                     else
                         w.append(t, String.format("Crying out in agonized climax with every thrust of the tentacle in %s ass, %s immediately takes in a lungful of aphrodisiac", c.hisHer(), c.heShe()));
-                    if(innocence > 66)
-                        w.append(t, String.format(", and %s instinctive fear of drowning only makes it even harder to remain composed in the face of what's being done to %s.", c.hisHer(), c.himHer()));
-                    else
-                    if(innocence > 33)
-                        w.append(t, String.format(", and the stinging from inside %s chest as %s starts to drown only intesifies %1$s sense of helplessness.", c.hisHer(), c.heShe()));
-                    else
-                        w.append(t, String.format(" no matter how much %s tries to stop it.  %s vision darkens as %1$s begins to drown.", c.heShe(), c.HisHer()));
+                    switch (innocence / 33) {
+                        case 0: w.append(t, String.format(" no matter how much %s tries to stop it.  %s vision darkens as %1$s begins to drown.", c.heShe(), c.HisHer())); break;
+                        case 1: w.append(t, String.format(", and the stinging from inside %s chest as %s starts to drown only intesifies %1$s sense of helplessness.", c.hisHer(), c.heShe())); break;
+                        default: w.append(t, String.format(", and %s instinctive fear of drowning only makes it even harder to remain composed in the face of what's being done to %s.", c.hisHer(), c.himHer()));
+                    }
                 }
                 if(w.getBodyStatus()[6])
                 {
@@ -15434,13 +15182,11 @@ public class WorldState
                         else
                             otherTwo = w.getCast()[i].getMainName();
 
-                if(innocence > 66)
-                    w.append(t, String.format("Immersed in the aphrodisiac within your body, %s hallucinates that %s's being molested by %s and %s.  ", mainName, c.heShe(), otherOne, otherTwo));
-                else
-                if(innocence > 33)
-                    w.append(t, String.format("With %s mind addled by the aphrodisiac filling your body, %s finds it difficult to discern whether the image %s sees of %s and %s running their hands over %1$s body is real or not.  ", c.hisHer(), mainName, c.heShe(), otherOne, otherTwo));
-                else
-                    w.append(t, String.format("The liquid inside your body causes %s to hallucinate that %s's being groped by %s and %s, and while %2$s knows that's impossible, it still has a subconscious effect on the way that %2$s thinks.  ", mainName, c.heShe(), otherOne, otherTwo));
+                switch (innocence / 33) {
+                    case 0: w.append(t, String.format("The liquid inside your body causes %s to hallucinate that %s's being groped by %s and %s, and while %2$s knows that's impossible, it still has a subconscious effect on the way that %2$s thinks.  ", mainName, c.heShe(), otherOne, otherTwo)); break;
+                    case 1: w.append(t, String.format("With %s mind addled by the aphrodisiac filling your body, %s finds it difficult to discern whether the image %s sees of %s and %s running their hands over %1$s body is real or not.  ", c.hisHer(), mainName, c.heShe(), otherOne, otherTwo)); break;
+                    default: w.append(t, String.format("Immersed in the aphrodisiac within your body, %s hallucinates that %s's being molested by %s and %s.  ", mainName, c.heShe(), otherOne, otherTwo));
+                }
                 if(w.getBodyStatus()[4])
                     w.append(t, String.format("The warm, fuzzy feelings running through %s head make it hard to remember that %s's supposed to be fighting right now.  ", c.hisHer(), c.heShe()));
                 if(c.getPLEALevel() < 3)
@@ -15505,13 +15251,11 @@ public class WorldState
                                 w.append(t, String.format(" swallows %s's cock and drinks down %s cum", mainName, c.hisHer()));
                             w.append(t, String.format(" while %s tickles %s at the same time, trying to force %2$s to spasm and laugh.  ", otherTwo, c.himHer()));
                         }
-                        if(morality > 66)
-                            w.append(t, String.format("The way they whine and beg for %s to just give in already makes it hard for %s to keep resisting.", mainName, c.himHer()));
-                        else
-                        if(morality > 33)
-                            w.append(t, String.format("When %s whispers in %s's ear that %s should just give up, %2$s almost gives in.", otherTwo, mainName, c.heShe()));
-                        else
-                            w.append(t, String.format("%s tries to rely on %s annoyance at being treated so lightly in order to resist, but %s's already starting to break.", mainName, c.hisHer(), c.heShe()));
+                        switch (morality / 33) {
+                            case 0: w.append(t, String.format("%s tries to rely on %s annoyance at being treated so lightly in order to resist, but %s's already starting to break.", mainName, c.hisHer(), c.heShe())); break;
+                            case 1: w.append(t, String.format("When %s whispers in %s's ear that %s should just give up, %2$s almost gives in.", otherTwo, mainName, c.heShe())); break;
+                            default: w.append(t, String.format("The way they whine and beg for %s to just give in already makes it hard for %s to keep resisting.", mainName, c.himHer()));
+                        }
                     } else
                     {
                         if(w.getBodyStatus()[5])
@@ -15546,13 +15290,11 @@ public class WorldState
                                 w.append(t, String.format(" swallows %s's cock and drinks down %s cum", mainName, c.hisHer()));
                             w.append(t, String.format(" while %s tickles %s at the same time, forcing %2$s to squirm and laugh even as %s climaxes.", otherTwo, c.himHer(), c.heShe()));
                         }
-                        if(morality > 66)
-                            w.append(t, String.format("  %s knows on some level that %s's allowing %sself to be tired out, but it's hard to resist %s fellow Chosen.", mainName, c.heShe(), c.himHer(), c.hisHer()));
-                        else
-                        if(morality > 33)
-                            w.append(t, "");
-                        else
-                            w.append(t, String.format("  The fact that %s's seeing %s fellow Chosen do this, rather than having it done to %s by Demons, makes it hard for %3$s to feel as angry about this treatment as %1$s normally would.", c.heShe(), c.hisHer(), c.himHer()));
+                        switch (morality / 33) {
+                            case 0: w.append(t, String.format("  The fact that %s's seeing %s fellow Chosen do this, rather than having it done to %s by Demons, makes it hard for %3$s to feel as angry about this treatment as %1$s normally would.", c.heShe(), c.hisHer(), c.himHer())); break;
+                            case 1: w.append(t, ""); break;
+                            default: w.append(t, String.format("  %s knows on some level that %s's allowing %sself to be tired out, but it's hard to resist %s fellow Chosen.", mainName, c.heShe(), c.himHer(), c.hisHer()));
+                        }
                     }
                 } else
                 if(c.getINJULevel() < 3)
@@ -15573,13 +15315,11 @@ public class WorldState
                         else
                             w.append(t, String.format(", %s cums into %s's hand, falling victim to ", mainName, otherTwo));
                     }
-                    if(morality > 66)
-                        w.append(t, String.format("%s deep-seated longing to get along with the others.", c.hisHer()));
-                    else
-                    if(morality > 33)
-                        w.append(t, String.format("%s budding feelings for the others.", c.hisHer()));
-                    else
-                        w.append(t, String.format("%s fantasies about having the others serve %s.", c.hisHer(), c.himHer()));
+                    switch (morality / 33) {
+                        case 0: w.append(t, String.format("%s fantasies about having the others serve %s.", c.hisHer(), c.himHer())); break;
+                        case 1: w.append(t, String.format("%s budding feelings for the others.", c.hisHer())); break;
+                        default: w.append(t, String.format("%s deep-seated longing to get along with the others.", c.hisHer()));
+                    }
                 } else
                 if(aVirg)
                 {
@@ -15603,13 +15343,11 @@ public class WorldState
                         else
                             w.append(t, String.format("finally, as %s bites %s nipple and %s squeezes %2$s cock, %s cums into the fluid surrounding %s.  %s craves more", otherOne, c.hisHer(), otherTwo, mainName, c.himHer(), c.HeShe()));
                     }
-                    if(morality > 66)
-                        w.append(t, String.format(", as %s feels that it's %s place in the world to suffer for others' happiness.", c.heShe(), c.hisHer()));
-                    else
-                    if(morality > 33)
-                        w.append(t, String.format(", as %s feels %1$s deserves it for not living up to a higher moral standard.", c.heShe()));
-                    else
-                        w.append(t, String.format(", as %s knows deep down inside that %1$s deserves far worse.", c.heShe()));
+                    switch (morality / 33) {
+                        case 0: w.append(t, String.format(", as %s knows deep down inside that %1$s deserves far worse.", c.heShe())); break;
+                        case 1: w.append(t, String.format(", as %s feels %1$s deserves it for not living up to a higher moral standard.", c.heShe())); break;
+                        default: w.append(t, String.format(", as %s feels that it's %s place in the world to suffer for others' happiness.", c.heShe(), c.hisHer()));
+                    }
                 } else
                 {
                     if(c.getPLEALevel() < 3)
@@ -15638,13 +15376,11 @@ public class WorldState
                             w.append(t, String.format("%s eyes roll into the back of %s head as the conflicting sensations overwhelm %s.  ", c.HisHer(), c.hisHer(), c.himHer()));
                     }
                     w.append(t, String.format("The rough treatment plays into %s psychological weaknesses, as ", c.hisHer()));
-                    if(morality > 66)
-                        w.append(t, String.format("%s feels that it's %s place in the world to suffer for others' happiness.", c.heShe(), c.hisHer()));
-                    else
-                    if(morality > 33)
-                        w.append(t, String.format("%s feels %1$s deserves it for not living up to a higher moral standard.", c.heShe()));
-                    else
-                        w.append(t, String.format("%s knows deep down inside that %1$s deserves far worse.", c.heShe()));
+                    switch (morality / 33) {
+                        case 0: w.append(t, String.format("%s knows deep down inside that %1$s deserves far worse.", c.heShe())); break;
+                        case 1: w.append(t, String.format("%s feels %1$s deserves it for not living up to a higher moral standard.", c.heShe())); break;
+                        default: w.append(t, String.format("%s feels that it's %s place in the world to suffer for others' happiness.", c.heShe(), c.hisHer()));
+                    }
                 }
                 if(w.getBodyStatus()[3] || w.getBodyStatus()[19])
                 {
@@ -15672,13 +15408,11 @@ public class WorldState
             } else
             if(captureProgression % 3 == 0)
             {
-                if(morality > 66)
-                    w.append(t, String.format("%s's concern for %s friends gives %s the strength to struggle %2$s way to the surface of the aphrodisiac fluid and start climbing out of your body", mainName, c.hisHer(), c.himHer()));
-                else
-                if(morality > 33)
-                    w.append(t, String.format("%s manages to struggle to the surface of the aphrodisiac fluid and start climbing out of your body", mainName));
-                else
-                    w.append(t, String.format("%s fights %s way to the surface of the aphrodisiac fluid, aiming to escape and launch a counterattack against your body", mainName, c.hisHer()));
+                switch (morality / 33) {
+                    case 0: w.append(t, String.format("%s fights %s way to the surface of the aphrodisiac fluid, aiming to escape and launch a counterattack against your body", mainName, c.hisHer())); break;
+                    case 1: w.append(t, String.format("%s manages to struggle to the surface of the aphrodisiac fluid and start climbing out of your body", mainName)); break;
+                    default: w.append(t, String.format("%s's concern for %s friends gives %s the strength to struggle %2$s way to the surface of the aphrodisiac fluid and start climbing out of your body", mainName, c.hisHer(), c.himHer()));
+                }
                 if(w.getBodyStatus()[20])
                 {
                     if(hypnotized)
@@ -15703,13 +15437,11 @@ public class WorldState
                     else
                         w.append(t, String.format("%s stops abruptly with a cry of pain", c.heShe()));
                 } else
-                if(confidence > 66)
-                    w.append(t, String.format("%s determined extermination melts with an orgasmic cry", c.hisHer()));
-                else
-                if(confidence > 33)
-                    w.append(t, String.format("then %s abruptly stops, trembling and moaning in orgasm", c.heShe()));
-                else
-                    w.append(t, String.format("%s stops with a pathetic scream, orgasming", c.heShe()));
+                switch (confidence / 33) {
+                    case 0: w.append(t, String.format("%s stops with a pathetic scream, orgasming", c.heShe())); break;
+                    case 1: w.append(t, String.format("then %s abruptly stops, trembling and moaning in orgasm", c.heShe())); break;
+                    default: w.append(t, String.format("%s determined extermination melts with an orgasmic cry", c.hisHer()));
+                }
                 if(w.tickle())
                 {
                     if(c.getINJULevel() < 3 || aVirg)
@@ -15742,13 +15474,11 @@ public class WorldState
                             }
                             w.append(t, String.format(".  %s body has been rendered completely helpless due to its enhanced sensitivity, and ", c.HisHer()));
                         }
-                        if(dignity > 66)
-                            w.append(t, String.format("the realization that everyone can see %s weakness makes %s want to just give up and hide.", c.hisHer(), c.himHer()));
-                        else
-                        if(dignity > 33)
-                            w.append(t, String.format("there's nothing %s can do to stop you from dragging %s back inside.", c.heShe(), c.himHer()));
-                        else
-                            w.append(t, String.format("there's no way %s can fight you off like this, but %1$s keeps trying, making a fool of %sself in the process.", c.heShe(), c.himHer()));
+                        switch (dignity / 33) {
+                            case 0: w.append(t, String.format("there's no way %s can fight you off like this, but %1$s keeps trying, making a fool of %sself in the process.", c.heShe(), c.himHer())); break;
+                            case 1: w.append(t, String.format("there's nothing %s can do to stop you from dragging %s back inside.", c.heShe(), c.himHer())); break;
+                            default: w.append(t, String.format("the realization that everyone can see %s weakness makes %s want to just give up and hide.", c.hisHer(), c.himHer()));
+                        }
                     } else
                     {
                         if(w.getBodyStatus()[5])
@@ -15779,13 +15509,11 @@ public class WorldState
                             }
                             w.append(t, String.format(".  %s squirms and giggles uncontrollably", c.HeShe()));
                         }
-                        if(dignity > 66)
-                            w.append(t, String.format(", so embarrassed by %s body's reaction that %s can't muster the willpower to go back out onto the battlefield.", c.hisHer(), c.heShe()));
-                        else
-                        if(dignity > 33)
-                            w.append(t, String.format(", no matter how %s tries to control %sself.", c.heShe(), c.himHer()));
-                        else
-                            w.append(t, String.format(", too caught up in the sensations to spare a thought for how foolish %s looks.", c.heShe()));
+                        switch (dignity / 33) {
+                            case 0: w.append(t, String.format(", too caught up in the sensations to spare a thought for how foolish %s looks.", c.heShe())); break;
+                            case 1: w.append(t, String.format(", no matter how %s tries to control %sself.", c.heShe(), c.himHer())); break;
+                            default: w.append(t, String.format(", so embarrassed by %s body's reaction that %s can't muster the willpower to go back out onto the battlefield.", c.hisHer(), c.heShe()));
+                        }
                     }
                 } else
                 if(c.getINJULevel() < 3)
@@ -15804,13 +15532,11 @@ public class WorldState
                         w.append(t, String.format(" as the hollow tentacle enveloping %s penis is pulled taut.  ", c.hisHer()));
                     else
                         w.append(t, String.format(" as the hollow tentacle envoloping %s penis is pulled taut, milking out another dribble of cum.  ", c.hisHer()));
-                    if(dignity > 66)
-                        w.append(t, String.format("Distracted by %s attempt to resist the pleasure, %s is powerless to stop you from wrapping more tendrils around %1$s body to keep %s from getting away.", c.hisHer(), c.heShe(), c.himHer()));
-                    else
-                    if(dignity > 33)
-                        w.append(t, String.format("The overwhelming stimulation drains the fight from %s body, making it easy for you to secure %s with more and more tendrils.", c.hisHer(), c.himHer()));
-                    else
-                        w.append(t, String.format("%s tries to fight the pleasure and get away, but %s body won't obey %s, and you have no trouble wrapping more tendrils around %2$s body to recapture %3$s.", c.HeShe(), c.hisHer(), c.himHer()));
+                    switch (dignity / 33) {
+                        case 0: w.append(t, String.format("%s tries to fight the pleasure and get away, but %s body won't obey %s, and you have no trouble wrapping more tendrils around %2$s body to recapture %3$s.", c.HeShe(), c.hisHer(), c.himHer())); break;
+                        case 1: w.append(t, String.format("The overwhelming stimulation drains the fight from %s body, making it easy for you to secure %s with more and more tendrils.", c.hisHer(), c.himHer())); break;
+                        default: w.append(t, String.format("Distracted by %s attempt to resist the pleasure, %s is powerless to stop you from wrapping more tendrils around %1$s body to keep %s from getting away.", c.hisHer(), c.heShe(), c.himHer()));
+                    }
                 } else
                 if(aVirg)
                 {
@@ -15828,13 +15554,11 @@ public class WorldState
                         w.append(t, String.format(" as the hollow tentacle enveloping %s penis is pulled taut.  ", c.hisHer()));
                     else
                         w.append(t, String.format(" as the hollow tentacle envoloping %s penis is pulled taut, milking out another dribble of cum.  ", c.hisHer()));
-                    if(dignity > 66)
-                        w.append(t, String.format("%s knows %s's in no condition to pull away like this, so %2$s opts not to make an even bigger fool of %sself and doesn't resist as you capture %3$s again.", c.HeShe(), c.heShe(), c.himHer()));
-                    else
-                    if(dignity > 33)
-                        w.append(t, String.format("Combined with %s existing injuries, this makes it trivially easy to reel %s back inside.", c.hisHer(), c.himHer()));
-                    else
-                        w.append(t, String.format("%s struggles to pull away, but with %s injuries weakening %s, %s accomplishes little more than stimulating %sself further as you pull %5$s back toward you.", c.HeShe(), c.hisHer(), c.himHer(), c.heShe(), c.himHer()));
+                    switch (dignity / 33) {
+                        case 0: w.append(t, String.format("%s struggles to pull away, but with %s injuries weakening %s, %s accomplishes little more than stimulating %sself further as you pull %5$s back toward you.", c.HeShe(), c.hisHer(), c.himHer(), c.heShe(), c.himHer())); break;
+                        case 1: w.append(t, String.format("Combined with %s existing injuries, this makes it trivially easy to reel %s back inside.", c.hisHer(), c.himHer())); break;
+                        default: w.append(t, String.format("%s knows %s's in no condition to pull away like this, so %2$s opts not to make an even bigger fool of %sself and doesn't resist as you capture %3$s again.", c.HeShe(), c.heShe(), c.himHer()));
+                    }
                 } else
                 {
                     if(w.getBodyStatus()[5])
@@ -16005,21 +15729,17 @@ public class WorldState
                         w.append(t, String.format("You pull %s legs further apart in order to push yourself even deeper", c.hisHer()));
                     if(w.tickle())
                     {
-                        if(innocence > 66)
-                            w.append(t, String.format(", and %s squirms uselessly in an effort to escape the vulnerable position.", c.heShe()));
-                        else
-                        if(innocence > 33)
-                            w.append(t, String.format(", and even though %s knows %s body is practically invincible, %1$s can't shake the instinctive feeling of vulnerability.", c.heShe(), c.hisHer()));
-                        else
-                            w.append(t, String.format(", and it takes considerable effort for %s to remind %1$sself that the vulnerable position ultimately changes nothing.", c.himHer()));
+                        switch (innocence / 33) {
+                            case 0: w.append(t, String.format(", and it takes considerable effort for %s to remind %1$sself that the vulnerable position ultimately changes nothing.", c.himHer())); break;
+                            case 1: w.append(t, String.format(", and even though %s knows %s body is practically invincible, %1$s can't shake the instinctive feeling of vulnerability.", c.heShe(), c.hisHer())); break;
+                            default: w.append(t, String.format(", and %s squirms uselessly in an effort to escape the vulnerable position.", c.heShe()));
+                        }
                     } else
-                    if(innocence > 66)
-                        w.append(t, String.format(", and the intense agony makes %s wonder whether %s'll be split in two.", c.himHer(), c.heShe()));
-                    else
-                    if(innocence > 33)
-                        w.append(t, String.format(", and another wave of agony causes %s to choke and sputter.", c.himHer()));
-                    else
-                        w.append(t, String.format(", and even though %s knows that something like this can't kill one of the Chosen, a part of %s wishes that it would.", c.heShe(), c.himHer()));
+                    switch (innocence / 33) {
+                        case 0: w.append(t, String.format(", and even though %s knows that something like this can't kill one of the Chosen, a part of %s wishes that it would.", c.heShe(), c.himHer())); break;
+                        case 1: w.append(t, String.format(", and another wave of agony causes %s to choke and sputter.", c.himHer())); break;
+                        default: w.append(t, String.format(", and the intense agony makes %s wonder whether %s'll be split in two.", c.himHer(), c.heShe()));
+                    }
                     if(w.getBodyStatus()[6])
                         w.append(t, String.format("  Furthermore, contact with your slimy body is dissolving %s clothes, which has the potential to make the position incredibly embarrassing.", c.hisHer()));
                 } else
@@ -16037,21 +15757,17 @@ public class WorldState
                         w.append(t, String.format("You pull %s legs further apart in order to push yourself even deeper", c.hisHer()));
                     if(w.tickle())
                     {
-                        if(innocence > 66)
-                            w.append(t, String.format(", and %s finds the position so distracting that %1$s doesn't even mentally register that %s shredded %s and lack of panties mean that %1$s's completely exposed to anyone watching below.", c.heShe(), c.hisHer(), bottomDesc));
-                        else
-                        if(innocence > 33)
-                            w.append(t, String.format(", and with %s shredded %s and lack of panties, the position is especially humiliating.", c.hisHer(), bottomDesc));
-                        else
-                            w.append(t, String.format(", and while %s knows that %s shredded %s and lack of panties mean that the spectators below can see everything, %1$s can't actually do anything about it.", c.heShe(), c.hisHer(), bottomDesc));
+                        switch (innocence / 33) {
+                            case 0: w.append(t, String.format(", and while %s knows that %s shredded %s and lack of panties mean that the spectators below can see everything, %1$s can't actually do anything about it.", c.heShe(), c.hisHer(), bottomDesc)); break;
+                            case 1: w.append(t, String.format(", and with %s shredded %s and lack of panties, the position is especially humiliating.", c.hisHer(), bottomDesc)); break;
+                            default: w.append(t, String.format(", and %s finds the position so distracting that %1$s doesn't even mentally register that %s shredded %s and lack of panties mean that %1$s's completely exposed to anyone watching below.", c.heShe(), c.hisHer(), bottomDesc));
+                        }
                     } else
-                    if(innocence > 66)
-                        w.append(t, String.format(", and the agony is so great that %s doesn't even mentally register that %s shredded %s and lack of panties mean that %1$s's completely exposed to anyone watching below.", c.heShe(), c.hisHer(), bottomDesc));
-                    else
-                    if(innocence > 33)
-                        w.append(t, String.format(", and with %s shredded %s and lack of panties, the position is especially humiliating.", c.hisHer(), bottomDesc));
-                    else
-                        w.append(t, String.format(", and while %s knows that %s shredded %s and lack of panties mean that the spectators below can see everything, %1$s's in too much agony to care.", c.heShe(), c.hisHer(), bottomDesc));
+                    switch (innocence / 33) {
+                        case 0: w.append(t, String.format(", and while %s knows that %s shredded %s and lack of panties mean that the spectators below can see everything, %1$s's in too much agony to care.", c.heShe(), c.hisHer(), bottomDesc)); break;
+                        case 1: w.append(t, String.format(", and with %s shredded %s and lack of panties, the position is especially humiliating.", c.hisHer(), bottomDesc)); break;
+                        default: w.append(t, String.format(", and the agony is so great that %s doesn't even mentally register that %s shredded %s and lack of panties mean that %1$s's completely exposed to anyone watching below.", c.heShe(), c.hisHer(), bottomDesc));
+                    }
                     if(w.getBodyStatus()[6])
                         w.append(t, "  Your slime is dissolving what's left by the moment.");
                 } else
@@ -16068,21 +15784,17 @@ public class WorldState
                         w.append(t, String.format("You pull %s legs further apart so that the watching cameras get a good look at how you've pushed yourself inside %s", c.hisHer(), c.himHer()));
                     if(w.getBodyStatus()[6])
                     {
-                        if(innocence > 66)
-                            w.append(t, String.format(", and since your slime has dissolved %s %s, the feeling of so many eyes watching makes it all even worse.", c.hisHer(), bottomDesc));
-                        else
-                        if(innocence > 33)
-                            w.append(t, String.format(", and the fact that your slime has dissolved %s %s only deepens %1$s humiliation.", c.hisHer(), bottomDesc));
-                        else
-                            w.append(t, String.format(", and the realization that %s %s being dissolved has left %s without a scrap of modesty makes %3$s shudder.", c.hisHer(), bottomDesc, c.himHer()));
+                        switch (innocence / 33) {
+                            case 0: w.append(t, String.format(", and the realization that %s %s being dissolved has left %s without a scrap of modesty makes %3$s shudder.", c.hisHer(), bottomDesc, c.himHer())); break;
+                            case 1: w.append(t, String.format(", and the fact that your slime has dissolved %s %s only deepens %1$s humiliation.", c.hisHer(), bottomDesc)); break;
+                            default: w.append(t, String.format(", and since your slime has dissolved %s %s, the feeling of so many eyes watching makes it all even worse.", c.hisHer(), bottomDesc));
+                        }
                     } else
-                    if(innocence > 66)
-                        w.append(t, ", and the feeling of so many eyes watching makes it all even worse.");
-                    else
-                    if(innocence > 33)
-                        w.append(t, String.format(", deepening %s humiliation.", c.hisHer()));
-                    else
-                        w.append(t, String.format(", and the realization of just how pathetic %s must look makes %s shudder.", c.heShe(), c.himHer()));
+                    switch (innocence / 33) {
+                        case 0: w.append(t, String.format(", and the realization of just how pathetic %s must look makes %s shudder.", c.heShe(), c.himHer())); break;
+                        case 1: w.append(t, String.format(", deepening %s humiliation.", c.hisHer())); break;
+                        default: w.append(t, ", and the feeling of so many eyes watching makes it all even worse.");
+                    }
                 }
                 if(w.getBodyStatus()[3] || w.getBodyStatus()[19])
                 {
@@ -16149,34 +15861,28 @@ public class WorldState
             } else
             if(captureProgression % 3 == 2)
             {
-                if(innocence > 66)
-                    w.append(t, String.format("%s is caught by surprise when ", mainName));
-                else
-                if(innocence > 33)
-                    w.append(t, String.format("%s is unable to defend %sself as ", mainName, c.himHer()));
-                else
-                    w.append(t, String.format("%s tries to brace %sself, but there's not much %s can do as ", mainName, c.himHer(), c.heShe()));
+                switch (innocence / 33) {
+                    case 0: w.append(t, String.format("%s tries to brace %sself, but there's not much %s can do as ", mainName, c.himHer(), c.heShe())); break;
+                    case 1: w.append(t, String.format("%s is unable to defend %sself as ", mainName, c.himHer())); break;
+                    default: w.append(t, String.format("%s is caught by surprise when ", mainName));
+                }
                 if(c.getINJULevel() < 3)
                 {
                     w.append(t, String.format("you slam %s into the pavement.  ", c.himHer()));
-                    if(dignity > 66)
-                        w.append(t, String.format("%s tries to stand up, only to collapse onto %s face, utterly failing to ", c.HeShe(), c.hisHer()));
-                    else
-                    if(dignity > 33)
-                        w.append(t, String.format("The sight of %s lying motionless on the ground underlines the futility of %s attempt to ", c.himHer(), c.hisHer()));
-                    else
-                        w.append(t, String.format("%s goes limp, stunned.  %1$s makes no attempt to get up, too desperate for a moment's rest to bother to ", c.HeShe()));
+                    switch (dignity / 33) {
+                        case 0: w.append(t, String.format("%s goes limp, stunned.  %1$s makes no attempt to get up, too desperate for a moment's rest to bother to ", c.HeShe())); break;
+                        case 1: w.append(t, String.format("The sight of %s lying motionless on the ground underlines the futility of %s attempt to ", c.himHer(), c.hisHer())); break;
+                        default: w.append(t, String.format("%s tries to stand up, only to collapse onto %s face, utterly failing to ", c.HeShe(), c.hisHer()));
+                    }
                 } else
                 if(w.tickle())
                 {
                     w.append(t, String.format("you pin %s down against the pavement, holding %1$s firmly enough that %s can't even squirm an inch while you tickle %s armpits and feet.  ", c.himHer(), c.heShe(), c.hisHer()));
-                    if(dignity > 66)
-                        w.append(t, String.format("%s's almost grateful for the opportunity to stifle %s laughter against the ground, too flustered to consider how the show of weakness will sabotage %2$s attempts to ", c.HeShe(), c.hisHer()));
-                    else
-                    if(dignity > 33)
-                        w.append(t, String.format("%s gasps with exhausted laughter, giving up %s efforts to ", c.HeShe(), c.hisHer()));
-                    else
-                        w.append(t, String.format("%s laughs openly, %s helpless thrashing making it even less likely that %s'll be able to ", c.HeShe(), c.hisHer(), c.heShe()));
+                    switch (dignity / 33) {
+                        case 0: w.append(t, String.format("%s laughs openly, %s helpless thrashing making it even less likely that %s'll be able to ", c.HeShe(), c.hisHer(), c.heShe())); break;
+                        case 1: w.append(t, String.format("%s gasps with exhausted laughter, giving up %s efforts to ", c.HeShe(), c.hisHer())); break;
+                        default: w.append(t, String.format("%s's almost grateful for the opportunity to stifle %s laughter against the ground, too flustered to consider how the show of weakness will sabotage %2$s attempts to ", c.HeShe(), c.hisHer()));
+                    }
                 } else
                 {
                     if(gender.equals("male"))
@@ -16189,44 +15895,36 @@ public class WorldState
                     {
                         w.append(t, String.format("you slam %s into the pavement, pushing your %s even deeper inside %1$s to the point that it's hard for %1$s to breathe.  ", c.himHer(), fist));
                     }
-                    if(dignity > 66)
-                        w.append(t, String.format("%s covers %s face, in far too much pain to consider how the show of weakness will sabotage %2$s attempts to ", c.HeShe(), c.hisHer()));
-                    else
-                    if(dignity > 33)
-                        w.append(t, String.format("%s moans and writhes in pain, giving up %s efforts to ", c.HeShe(), c.hisHer()));
-                    else
-                        w.append(t, String.format("%s screams openly, %s helpless thrashing making it even less likely that %s'll be able to ", c.HeShe(), c.hisHer(), c.heShe()));
+                    switch (dignity / 33) {
+                        case 0: w.append(t, String.format("%s screams openly, %s helpless thrashing making it even less likely that %s'll be able to ", c.HeShe(), c.hisHer(), c.heShe())); break;
+                        case 1: w.append(t, String.format("%s moans and writhes in pain, giving up %s efforts to ", c.HeShe(), c.hisHer())); break;
+                        default: w.append(t, String.format("%s covers %s face, in far too much pain to consider how the show of weakness will sabotage %2$s attempts to ", c.HeShe(), c.hisHer()));
+                    }
                 }
                 if(c.getEXPOLevel() < 3)
                 {
-                    if(morality > 66)
-                        w.append(t, "inspire hope by proudly withstanding this torture.");
-                    else
-                    if(morality > 33)
-                        w.append(t, String.format("survive this sort of treatment with %s pride intact.", c.hisHer()));
-                    else
-                        w.append(t, "look strong enough to take this sort of punishment.");
+                    switch (morality / 33) {
+                        case 0: w.append(t, "look strong enough to take this sort of punishment."); break;
+                        case 1: w.append(t, String.format("survive this sort of treatment with %s pride intact.", c.hisHer())); break;
+                        default: w.append(t, "inspire hope by proudly withstanding this torture.");
+                    }
                 } else
                 if(modest)
                 {
                     w.append(t, String.format("counteract the humiliation of %s effective nudity by ", c.hisHer()));
-                    if(morality > 66)
-                        w.append(t, "remaining hopeful and heroic.");
-                    else
-                    if(morality > 33)
-                        w.append(t, "keeping a proud, undaunted demeanor.");
-                    else
-                        w.append(t, "looking strong enough to take this treatment.");
+                    switch (morality / 33) {
+                        case 0: w.append(t, "looking strong enough to take this treatment."); break;
+                        case 1: w.append(t, "keeping a proud, undaunted demeanor."); break;
+                        default: w.append(t, "remaining hopeful and heroic.");
+                    }
                 } else
                 {
                     w.append(t, String.format("make the recordings being taken of %s nudity less humiliating by ", c.hisHer()));
-                    if(morality > 66)
-                        w.append(t, "remaining hopeful and heroic.");
-                    else
-                    if(morality > 33)
-                        w.append(t, "keeping a proud, undaunted demeanor");
-                    else
-                        w.append(t, "looking strong enough to take this treatment.");
+                    switch (morality / 33) {
+                        case 0: w.append(t, "looking strong enough to take this treatment."); break;
+                        case 1: w.append(t, "keeping a proud, undaunted demeanor"); break;
+                        default: w.append(t, "remaining hopeful and heroic.");
+                    }
                 }
                 if(w.getBodyStatus()[3] || w.getBodyStatus()[19])
                 {
@@ -16281,26 +15979,22 @@ public class WorldState
             } else
             if(captureProgression % 3 == 0)
             {
-                if(dignity > 66)
-                    w.append(t, String.format("%s gasps in horror and struggles to cover %sself as you lift %2$s up high, ", mainName, c.himHer()));
-                else
-                if(dignity > 33)
-                    w.append(t, String.format("You lift %s up above your head in order to display %s defeated body, ", mainName, c.hisHer()));
-                else
-                    w.append(t, String.format("%s doesn't outwardly react as you lift %s up above your head, but %s still cries out at the sensation of ", mainName, c.himHer(), c.heShe()));
+                switch (dignity / 33) {
+                    case 0: w.append(t, String.format("%s doesn't outwardly react as you lift %s up above your head, but %s still cries out at the sensation of ", mainName, c.himHer(), c.heShe())); break;
+                    case 1: w.append(t, String.format("You lift %s up above your head in order to display %s defeated body, ", mainName, c.hisHer())); break;
+                    default: w.append(t, String.format("%s gasps in horror and struggles to cover %sself as you lift %2$s up high, ", mainName, c.himHer()));
+                }
                 if(c.getINJULevel() < 3)
                 {
                     if(w.getBodyStatus()[6])
                         w.append(t, String.format("your many hands spreading more slime across %s body in order to dissolve %1$s clothes and give the spectators a better look at %1$s body.  ", c.hisHer()));
                     else
                         w.append(t, String.format("your many %ss roughly tearing the clothes from %s body to give the spectators a better look.  ", hand, c.hisHer()));
-                    if(innocence > 66)
-                        w.append(t, "Their eyes feel disgusting, especially with them openly talking about how ");
-                    else
-                    if(innocence > 33)
-                        w.append(t, "They whisper to each other about how ");
-                    else
-                        w.append(t, String.format("%s knows that they'll be thinking about how ", c.HeShe()));
+                    switch (innocence / 33) {
+                        case 0: w.append(t, String.format("%s knows that they'll be thinking about how ", c.HeShe())); break;
+                        case 1: w.append(t, "They whisper to each other about how "); break;
+                        default: w.append(t, "Their eyes feel disgusting, especially with them openly talking about how ");
+                    }
                 } else
                 {
                     if(w.tickle())
@@ -16381,36 +16075,30 @@ public class WorldState
                             w.append(t, String.format("civilians are witnessing %s failure.  Some of them whisper to each other that ", c.hisHer()));
                         else
                             w.append(t, String.format("civilians are witnessing %s pained reaction.  Some of them whisper to each other that ", c.hisHer()));
-                    if(confidence > 66)
-                        w.append(t, String.format("%s wasn't really so strong after all.", c.heShe()));
-                    else
-                    if(confidence > 33)
-                        w.append(t, String.format("they're sort of hoping %s gets stripped all the way.", c.heShe()));
-                    else
-                        w.append(t, "such a weak-willed person should never have become one of the Chosen.");
+                    switch (confidence / 33) {
+                        case 0: w.append(t, "such a weak-willed person should never have become one of the Chosen."); break;
+                        case 1: w.append(t, String.format("they're sort of hoping %s gets stripped all the way.", c.heShe())); break;
+                        default: w.append(t, String.format("%s wasn't really so strong after all.", c.heShe()));
+                    }
                 } else
                 if(modest)
                 {
                     if(c.getINJULevel() >= 3)
                         w.append(t, String.format("with %s state of undress, the spectators can see exactly what's happening to %s.  Some of them whisper to each other that ", c.hisHer(), c.himHer()));
-                    if(confidence > 66)
-                        w.append(t, String.format("they like seeing such a stuck-up bitch get put in %s place.", c.hisHer()));
-                    else
-                    if(confidence > 33)
-                        w.append(t, String.format("they hope %s'll keep getting beaten so they can enjoy more shows like this.", c.heShe()));
-                    else
-                        w.append(t, String.format("%s's really only good for being stripped and shown off.", c.heShe()));
+                    switch (confidence / 33) {
+                        case 0: w.append(t, String.format("%s's really only good for being stripped and shown off.", c.heShe())); break;
+                        case 1: w.append(t, String.format("they hope %s'll keep getting beaten so they can enjoy more shows like this.", c.heShe())); break;
+                        default: w.append(t, String.format("they like seeing such a stuck-up bitch get put in %s place.", c.hisHer()));
+                    }
                 } else
                 {
                     if(c.getINJULevel() >= 3)
                         w.append(t, String.format("with %s state of undress, the spectators can film every detail of what's happening to %s.  Some of them whisper to each other that ", c.hisHer(), c.himHer()));
-                    if(confidence > 66)
-                        w.append(t, String.format("%s'll have a harder time acting all high and mighty with recordings of this defeat out there.", c.heShe()));
-                    else
-                    if(confidence > 33)
-                        w.append(t, "the recordings they're taking will get millions of views.");
-                    else
-                        w.append(t, String.format("%s's a pathetic failure whose only value is to be recorded for masturbation material.", c.heShe()));
+                    switch (confidence / 33) {
+                        case 0: w.append(t, String.format("%s's a pathetic failure whose only value is to be recorded for masturbation material.", c.heShe())); break;
+                        case 1: w.append(t, "the recordings they're taking will get millions of views."); break;
+                        default: w.append(t, String.format("%s'll have a harder time acting all high and mighty with recordings of this defeat out there.", c.heShe()));
+                    }
                 }
                 if(w.getBodyStatus()[3] || w.getBodyStatus()[19])
                 {
@@ -16466,57 +16154,45 @@ public class WorldState
                 if(w.getBodyStatus()[3])
                 {
                     w.append(t, "You give your viewers free reign to remotely control your tentacles however they please");
-                    if(dignity > 66)
-                        w.append(t, String.format(".  %s tries to convince %sself that %s popularity is great enough that they'll let %2$s go, but %s", mainName, c.himHer(), c.hisHer(), c.heShe()));
-                    else
-                    if(dignity > 33)
-                        w.append(t, String.format(", and while a couple of them try to create an opening for %s to escape, they're far outnumbered.  Even though the civilians aren't under your influence in the same way that Thralls are, %1$s", mainName));
-                    else
-                        w.append(t, String.format(", and %s tries to convince them to release %s, but %s", mainName, c.himHer(), c.heShe()));
+                    switch (dignity / 33) {
+                        case 0: w.append(t, String.format(", and %s tries to convince them to release %s, but %s", mainName, c.himHer(), c.heShe())); break;
+                        case 1: w.append(t, String.format(", and while a couple of them try to create an opening for %s to escape, they're far outnumbered.  Even though the civilians aren't under your influence in the same way that Thralls are, %1$s", mainName)); break;
+                        default: w.append(t, String.format(".  %s tries to convince %sself that %s popularity is great enough that they'll let %2$s go, but %s", mainName, c.himHer(), c.hisHer(), c.heShe()));
+                    }
                     if(c.getEXPOLevel() < 3)
                     {
-                        if(innocence > 66)
-                            w.append(t, String.format("'s surprised when they opt to strip off %s clothing instead.  ", c.hisHer()));
-                        else
-                        if(innocence > 33)
-                            w.append(t, String.format(" can only watch as they grow more and more bold about tearing off %s clothing.", c.hisHer()));
-                        else
-                            w.append(t, String.format(" isn't surprised at all when they instead opt to strip %s naked.  ", c.himHer()));
+                        switch (innocence / 33) {
+                            case 0: w.append(t, String.format(" isn't surprised at all when they instead opt to strip %s naked.  ", c.himHer())); break;
+                            case 1: w.append(t, String.format(" can only watch as they grow more and more bold about tearing off %s clothing.", c.hisHer())); break;
+                            default: w.append(t, String.format("'s surprised when they opt to strip off %s clothing instead.  ", c.hisHer()));
+                        }
                     } else
-                    if(innocence > 66)
-                        w.append(t, "'s surprised when they opt to ");
-                    else
-                    if(innocence > 33)
-                        w.append(t, " can only watch as they quickly grow bold enough to ");
-                    else
-                        w.append(t, " isn't surprised at all when they instead opt to ");
+                    switch (innocence / 33) {
+                        case 0: w.append(t, " isn't surprised at all when they instead opt to "); break;
+                        case 1: w.append(t, " can only watch as they quickly grow bold enough to "); break;
+                        default: w.append(t, "'s surprised when they opt to ");
+                    }
                 } else
                 {
                     w.append(t, String.format("You allow your viewers to vote on how %s will be abused next", mainName));
-                    if(dignity > 66)
-                        w.append(t, String.format(".  %s tries to convince %sself that %s popularity is great enough that they'll vote to let %2$s go, but %s", c.HeShe(), c.himHer(), c.hisHer(), c.heShe()));
-                    else
-                    if(dignity > 33)
-                        w.append(t, String.format(", and one of the options is to simply let %s escape immediately.  Even though the civilians aren't under your influence in the same way that Thralls are, %s", c.himHer(), mainName));
-                    else
-                        w.append(t, String.format(", and %s tries to convince them to vote to release %s, but %1$s", c.heShe(), c.himHer()));
+                    switch (dignity / 33) {
+                        case 0: w.append(t, String.format(", and %s tries to convince them to vote to release %s, but %1$s", c.heShe(), c.himHer())); break;
+                        case 1: w.append(t, String.format(", and one of the options is to simply let %s escape immediately.  Even though the civilians aren't under your influence in the same way that Thralls are, %s", c.himHer(), mainName)); break;
+                        default: w.append(t, String.format(".  %s tries to convince %sself that %s popularity is great enough that they'll vote to let %2$s go, but %s", c.HeShe(), c.himHer(), c.hisHer(), c.heShe()));
+                    }
                     if(c.getEXPOLevel() < 3)
                     {
-                        if(innocence > 66)
-                            w.append(t, String.format("'s surprised when they vote to strip off %s clothing instead.  ", c.hisHer()));
-                        else
-                        if(innocence > 33)
-                            w.append(t, String.format(" can only watch the votes count up and see that they'd much rather see you tear off %s clothing.  ", c.hisHer()));
-                        else
-                            w.append(t, String.format(" isn't surprised at all when they instead vote for you to strip %s naked.  ", c.himHer()));
+                        switch (innocence / 33) {
+                            case 0: w.append(t, String.format(" isn't surprised at all when they instead vote for you to strip %s naked.  ", c.himHer())); break;
+                            case 1: w.append(t, String.format(" can only watch the votes count up and see that they'd much rather see you tear off %s clothing.  ", c.hisHer())); break;
+                            default: w.append(t, String.format("'s surprised when they vote to strip off %s clothing instead.  ", c.hisHer()));
+                        }
                     } else
-                    if(innocence > 66)
-                        w.append(t, "'s surprised when they vote to ");
-                    else
-                    if(innocence > 33)
-                        w.append(t, " can only watch the votes count up and see that they'd much rather see you ");
-                    else
-                        w.append(t, " isn't surprised at all when they instead vote to ");
+                    switch (innocence / 33) {
+                        case 0: w.append(t, " isn't surprised at all when they instead vote to "); break;
+                        case 1: w.append(t, " can only watch the votes count up and see that they'd much rather see you "); break;
+                        default: w.append(t, "'s surprised when they vote to ");
+                    }
                 }
                 if(c.getHATELevel() < 3 && !penetrated)
                 {
@@ -16533,13 +16209,11 @@ public class WorldState
                             cameras = "your high-definition cameras";
                         w.append(t, String.format("electrically shock %s.  Each surge of voltage through your cables causes %s nearly-naked body to squirm, showing off everything to %s as ", c.himHer(), c.hisHer(), cameras));
                     }
-                    if(confidence > 66)
-                        w.append(t, String.format("%s clenches %s teeth and refuses to beg for mercy.", c.heShe(), c.hisHer()));
-                    else
-                    if(confidence > 33)
-                        w.append(t, String.format("%s tries to endure it.", c.heShe()));
-                    else
-                        w.append(t, String.format("%s sobs and begs them to go easy on %s.", c.heShe(), c.himHer()));
+                    switch (confidence / 33) {
+                        case 0: w.append(t, String.format("%s sobs and begs them to go easy on %s.", c.heShe(), c.himHer())); break;
+                        case 1: w.append(t, String.format("%s tries to endure it.", c.heShe())); break;
+                        default: w.append(t, String.format("%s clenches %s teeth and refuses to beg for mercy.", c.heShe(), c.hisHer()));
+                    }
                 } else
                 if(vVirg && !penetrated)
                 {
@@ -16564,13 +16238,11 @@ public class WorldState
                             w.append(t, String.format("spread %s virgin anus as much as possible%s.  %s ", c.hisHer(), addition, c.HeShe()));
                         }
                     }
-                    if(confidence > 66)
-                        w.append(t, String.format(" grinds %s teeth and glares back at the viewers.", c.hisHer()));
-                    else
-                    if(confidence > 33)
-                        w.append(t, String.format(" squeezes %s eyes shut and tries to calm down.", c.hisHer()));
-                    else
-                        w.append(t, " stares resentfully back at the viewers, trembling with anger and embarrassment.");
+                    switch (confidence / 33) {
+                        case 0: w.append(t, " stares resentfully back at the viewers, trembling with anger and embarrassment."); break;
+                        case 1: w.append(t, String.format(" squeezes %s eyes shut and tries to calm down.", c.hisHer())); break;
+                        default: w.append(t, String.format(" grinds %s teeth and glares back at the viewers.", c.hisHer()));
+                    }
                 } else
                 {
                     if(c.getEXPOLevel() < 3)
@@ -16598,13 +16270,11 @@ public class WorldState
                         else
                             w.append(t, String.format(" pin %s penis out of the way and then dig into %1$s pussy, spreading it so wide open that they can see all the way to %1$s cervix%s.  %s ", c.hisHer(), addition, c.HeShe()));
                     }
-                    if(confidence > 66)
-                        w.append(t, String.format("grunts in pain, struggling stubbornly even though it sends jolts of agony through %s lower body.", c.hisHer()));
-                    else
-                    if(confidence > 33)
-                        w.append(t, String.format("struggles briefly, but your hold on %s lower lips is firm enough that it's obviously futile.", c.hisHer()));
-                    else
-                        w.append(t, String.format("winces in pain, but %s's too timid to fight back.", c.heShe()));
+                    switch (confidence / 33) {
+                        case 0: w.append(t, String.format("winces in pain, but %s's too timid to fight back.", c.heShe())); break;
+                        case 1: w.append(t, String.format("struggles briefly, but your hold on %s lower lips is firm enough that it's obviously futile.", c.hisHer())); break;
+                        default: w.append(t, String.format("grunts in pain, struggling stubbornly even though it sends jolts of agony through %s lower body.", c.hisHer()));
+                    }
                 }
                 if(w.getBodyStatus()[5])
                     if(w.tickle())
@@ -16668,23 +16338,19 @@ public class WorldState
             {
                 if(w.getBodyStatus()[3])
                 {
-                    if(confidence > 66)
-                        w.append(t, String.format("%s glares at the viewers tormenting %s", mainName, c.himHer()));
-                    else
-                    if(confidence > 33)
-                        w.append(t, String.format("The viewers continue to torment %s", mainName));
-                    else
-                        w.append(t, String.format("%s winces, unable to make %sself look at the viewers tormenting %2$s", mainName, c.himHer()));
+                    switch (confidence / 33) {
+                        case 0: w.append(t, String.format("%s winces, unable to make %sself look at the viewers tormenting %2$s", mainName, c.himHer())); break;
+                        case 1: w.append(t, String.format("The viewers continue to torment %s", mainName)); break;
+                        default: w.append(t, String.format("%s glares at the viewers tormenting %s", mainName, c.himHer()));
+                    }
                     w.append(t, " as more holographic screens appear, showing the comments left by the members of the audience who weren't lucky enough to get assigned control over any of your cables.  Many of the commenters are talking about how ");
                 } else
                 {
-                    if(confidence > 66)
-                        w.append(t, String.format("%s glares at the cameras you have pointed at %s", mainName, c.himHer()));
-                    else
-                    if(confidence > 33)
-                        w.append(t, String.format("You tighten your grip on %s", mainName));
-                    else
-                        w.append(t, String.format("%s winces, unable to make %sself look at the cameras you have pointed at %2$s", mainName, c.himHer()));
+                    switch (confidence / 33) {
+                        case 0: w.append(t, String.format("%s winces, unable to make %sself look at the cameras you have pointed at %2$s", mainName, c.himHer())); break;
+                        case 1: w.append(t, String.format("You tighten your grip on %s", mainName)); break;
+                        default: w.append(t, String.format("%s glares at the cameras you have pointed at %s", mainName, c.himHer()));
+                    }
                     w.append(t, String.format(" as more holographic screens appear, showing the comments left by %s live audience.  Many of the commenters are talking about how ", c.hisHer()));
                 }
                 if(c.getEXPOLevel() < 3)
@@ -16743,13 +16409,11 @@ public class WorldState
                         w.append(t, String.format(".  As your cameras capture %s exposed body from every angle, the comments become even more sexual", c.hisHer()));
                     else
                         w.append(t, String.format(".  As your cables pull %s legs apart, the comments become even more sexual", c.hisHer()));
-                    if(innocence > 66)
-                        w.append(t, String.format(", to the point that %s can't understand what they're talking about.", c.heShe()));
-                    else
-                    if(innocence > 33)
-                        w.append(t, String.format(", much to %s disgust.", c.hisHer()));
-                    else
-                        w.append(t, String.format(", crude enough to make %s frown in distaste.", c.himHer()));
+                    switch (innocence / 33) {
+                        case 0: w.append(t, String.format(", crude enough to make %s frown in distaste.", c.himHer())); break;
+                        case 1: w.append(t, String.format(", much to %s disgust.", c.hisHer())); break;
+                        default: w.append(t, String.format(", to the point that %s can't understand what they're talking about.", c.heShe()));
+                    }
                 } else
                 if(vVirg && !penetrated)
                 {
@@ -16769,13 +16433,11 @@ public class WorldState
                         else
                             w.append(t, String.format(".  As your cables latch on to %s virgin pussy and spread it open%s, the comments become even more sexual", c.hisHer(), addition));
                     }
-                    if(innocence > 66)
-                        w.append(t, String.format(", and while %s doesn't comprehend all of what they're saying, %1$s understands enough to feel insulted.", c.heShe()));
-                    else
-                    if(innocence > 33)
-                        w.append(t, String.format(", making %s even angrier.", c.himHer()));
-                    else
-                        w.append(t, String.format(", their crudeness and cruelty making it hard for %s to calm down.", c.himHer()));
+                    switch (innocence / 33) {
+                        case 0: w.append(t, String.format(", their crudeness and cruelty making it hard for %s to calm down.", c.himHer())); break;
+                        case 1: w.append(t, String.format(", making %s even angrier.", c.himHer())); break;
+                        default: w.append(t, String.format(", and while %s doesn't comprehend all of what they're saying, %1$s understands enough to feel insulted.", c.heShe()));
+                    }
                 } else
                 {
                     if(c.getEXPOLevel() < 3)
@@ -16797,13 +16459,11 @@ public class WorldState
                         else
                             w.append(t, String.format(".  As your cables spread %s pussy painfully wide%s, the comments become even more sexual", c.hisHer(), addition));
                     }
-                    if(innocence > 66)
-                        w.append(t, String.format(", and while %s doesn't understand all of what they're saying, the fact that they're enjoying %s suffering is obvious enough to make %s even angrier.", c.heShe(), c.hisHer(), c.himHer()));
-                    else
-                    if(innocence > 33)
-                        w.append(t, String.format(", and %s can't help but get angrier at the enjoyment they're taking from %s suffering.", c.heShe(), c.hisHer()));
-                    else
-                        w.append(t, String.format(", and the obvious amusement they show at %s pain makes it impossible for %s to stay calm and rational.", c.hisHer(), c.himHer()));
+                    switch (innocence / 33) {
+                        case 0: w.append(t, String.format(", and the obvious amusement they show at %s pain makes it impossible for %s to stay calm and rational.", c.hisHer(), c.himHer())); break;
+                        case 1: w.append(t, String.format(", and %s can't help but get angrier at the enjoyment they're taking from %s suffering.", c.heShe(), c.hisHer())); break;
+                        default: w.append(t, String.format(", and while %s doesn't understand all of what they're saying, the fact that they're enjoying %s suffering is obvious enough to make %s even angrier.", c.heShe(), c.hisHer(), c.himHer()));
+                    }
                 }
                 if(w.getBodyStatus()[4] || w.getBodyStatus()[20])
                     if(c.getPLEALevel() >= 3 && !cVirg)
@@ -16857,26 +16517,22 @@ public class WorldState
             } else
             if(captureProgression % 3 == 0)
             {
-                if(morality > 66)
-                    w.append(t, String.format("%s looks horrified as a message appears on the screens surrounding %s indicating ", mainName, c.himHer()));
-                else
-                if(morality > 33)
-                    w.append(t, String.format("You display a message to %s and the viewers of %s predicament showing ", mainName, c.hisHer()));
-                else
-                    w.append(t, String.format("%s glares at the people viewing %s through your screens as you display a message telling them ", mainName, c.himHer()));
+                switch (morality / 33) {
+                    case 0: w.append(t, String.format("%s glares at the people viewing %s through your screens as you display a message telling them ", mainName, c.himHer())); break;
+                    case 1: w.append(t, String.format("You display a message to %s and the viewers of %s predicament showing ", mainName, c.hisHer())); break;
+                    default: w.append(t, String.format("%s looks horrified as a message appears on the screens surrounding %s indicating ", mainName, c.himHer()));
+                }
                 if(c.getHATELevel() < 3 && !penetrated)
                 {
                     if(w.getBodyStatus()[3])
                         w.append(t, "the number of orgasms experienced by the people controlling your cables since the start of the broadcast.  ");
                     else
                         w.append(t, "the number of orgasms experienced by the people watching since the start of the broadcast.  ");
-                    if(dignity > 66)
-                        w.append(t, String.format("%s face goes red with anger and embarrassment at ", c.HisHer()));
-                    else
-                    if(dignity > 33)
-                        w.append(t, String.format("%s can't help but gape at ", c.HeShe()));
-                    else
-                        w.append(t, String.format("%s doesn't normally care about what people think of %s, but %s's still stunned to see ", c.HeShe(), c.himHer(), c.heShe()));
+                    switch (dignity / 33) {
+                        case 0: w.append(t, String.format("%s doesn't normally care about what people think of %s, but %s's still stunned to see ", c.HeShe(), c.himHer(), c.heShe())); break;
+                        case 1: w.append(t, String.format("%s can't help but gape at ", c.HeShe())); break;
+                        default: w.append(t, String.format("%s face goes red with anger and embarrassment at ", c.HisHer()));
+                    }
                 } else
                 if(vVirg && !penetrated)
                 {
@@ -16884,13 +16540,11 @@ public class WorldState
                         w.append(t, String.format("that in a few moments, you'll be conjuring spacial portals that they can stick their cocks through in order to ejaculate directly onto %s body.  ", c.hisHer()));
                     else
                         w.append(t, String.format("that in a few moments, your magic will cause their screens to become permeable to their semen, allowing them to ejaculate directly onto %s body.  ", c.hisHer()));
-                    if(dignity > 66)
-                        w.append(t, String.format("%s tries not to show a reaction, but the countdown makes %s tremble with anticipation, and when it hits zero, %s composure breaks.  ", c.HeShe(), c.himHer(), c.hisHer()));
-                    else
-                    if(dignity > 33)
-                        w.append(t, String.format("%s closes %s eyes, turning %2$s face away in preparation for the coming deluge.  ", c.HeShe(), c.hisHer()));
-                    else
-                        w.append(t, String.format("%s shouts in disgust, squirming and struggling up to the very last moment.  ", c.HeShe()));
+                    switch (dignity / 33) {
+                        case 0: w.append(t, String.format("%s shouts in disgust, squirming and struggling up to the very last moment.  ", c.HeShe())); break;
+                        case 1: w.append(t, String.format("%s closes %s eyes, turning %2$s face away in preparation for the coming deluge.  ", c.HeShe(), c.hisHer())); break;
+                        default: w.append(t, String.format("%s tries not to show a reaction, but the countdown makes %s tremble with anticipation, and when it hits zero, %s composure breaks.  ", c.HeShe(), c.himHer(), c.hisHer()));
+                    }
                 } else
                 {
                     if(w.getBodyStatus()[3])
@@ -16903,21 +16557,17 @@ public class WorldState
                         w.append(t, "pussy.  ");
                     if(w.getBodyStatus()[3])
                     {
-                        if(dignity > 66)
-                            w.append(t, String.format("%s tries not to show a reaction, but the countdown makes %s tremble with anticipation, and when it hits zero, %s composure breaks.  ", c.HeShe(), c.himHer(), c.hisHer()));
-                        else
-                        if(dignity > 33)
-                            w.append(t, String.format("%s closes %s eyes, mentally preparing %sself for the coming violation.  ", c.HeShe(), c.hisHer(), c.himHer()));
-                        else
-                            w.append(t, String.format("%s shouts in disgust, squirming and struggling up to the very last moment.  ", c.HeShe()));
+                        switch (dignity / 33) {
+                            case 0: w.append(t, String.format("%s shouts in disgust, squirming and struggling up to the very last moment.  ", c.HeShe())); break;
+                            case 1: w.append(t, String.format("%s closes %s eyes, mentally preparing %sself for the coming violation.  ", c.HeShe(), c.hisHer(), c.himHer())); break;
+                            default: w.append(t, String.format("%s tries not to show a reaction, but the countdown makes %s tremble with anticipation, and when it hits zero, %s composure breaks.  ", c.HeShe(), c.himHer(), c.hisHer()));
+                        }
                     } else
-                    if(dignity > 66)
-                        w.append(t, String.format("%s tries to put on a calm face as %s struggles to remove the mechanical tentacle, but as the timer counts down, %s demeanor becomes increasingly frantic.  ", c.HeShe(), c.heShe(), c.hisHer()));
-                    else
-                    if(dignity > 33)
-                        w.append(t, String.format("%s struggles to remove the mechanical tentacle before the timer counts to zero, but it's futile.  ", c.HeShe()));
-                    else
-                        w.append(t, String.format("%s shouts in protest, squirming and struggling to dislodge the mechanical tentacle, but it's too late.  ", c.HeShe()));
+                    switch (dignity / 33) {
+                        case 0: w.append(t, String.format("%s shouts in protest, squirming and struggling to dislodge the mechanical tentacle, but it's too late.  ", c.HeShe())); break;
+                        case 1: w.append(t, String.format("%s struggles to remove the mechanical tentacle before the timer counts to zero, but it's futile.  ", c.HeShe())); break;
+                        default: w.append(t, String.format("%s tries to put on a calm face as %s struggles to remove the mechanical tentacle, but as the timer counts down, %s demeanor becomes increasingly frantic.  ", c.HeShe(), c.heShe(), c.hisHer()));
+                    }
                 }
                 if(c.getEXPOLevel() < 3)
                 {
@@ -16931,13 +16581,11 @@ public class WorldState
                         w.append(t, String.format("The semen of hundreds of ejaculations is pumped inside %s, swelling %s belly and overflowing to soak %2$s %s.  The sense of violation is enough to make %1$s ", c.himHer(), c.hisHer(), bottomDesc));
                     else
                         w.append(t, String.format("The semen of hundreds of ejaculations is pumped inside %s, swelling %s belly and overflowing to soak %2$s %s.  The pain is enough to make %1$s ", c.himHer(), c.hisHer(), bottomDesc));
-                    if(confidence > 66)
-                        w.append(t, String.format("scream abuse at the viewers, unable to contain %s anger at being degraded like this.", c.hisHer()));
-                    else
-                    if(confidence > 33)
-                        w.append(t, "glare with building hatred as it becomes harder and harder to view these people as worthy of protection.");
-                    else
-                        w.append(t, String.format("cry outright, tears streaming down %s flushed red cheeks.", c.hisHer()));
+                    switch (confidence / 33) {
+                        case 0: w.append(t, String.format("cry outright, tears streaming down %s flushed red cheeks.", c.hisHer())); break;
+                        case 1: w.append(t, "glare with building hatred as it becomes harder and harder to view these people as worthy of protection."); break;
+                        default: w.append(t, String.format("scream abuse at the viewers, unable to contain %s anger at being degraded like this.", c.hisHer()));
+                    }
                 } else
                 {
                     if(c.getHATELevel() < 3 && !penetrated)
@@ -16957,13 +16605,11 @@ public class WorldState
                         w.append(t, String.format("The semen of hundreds of ejaculations is pumped inside %s, swelling %s belly and quickly overflowing in a violent spray that gets spatters on the rest of %2$s exposed body as well.  The pain is enough to make %1$s ", c.himHer(), c.hisHer()));
                     else
                         w.append(t, String.format("The semen of hundreds of ejaculations is pumped inside %s, swelling %s belly and quickly overflowing in a violent spray that gets spatters on %2$s penis and the rest of %2$s exposed body as well.  The pain is enough to make %1$s ", c.himHer(), c.hisHer()));
-                    if(confidence > 66)
-                        w.append(t, String.format("scream abuse at the viewers, unable to contain %s anger at being degraded like this.", c.hisHer()));
-                    else
-                    if(confidence > 33)
-                        w.append(t, "glare with building hatred as it becomes harder and harder to view these people as worthy of protection.");
-                    else
-                        w.append(t, String.format("cry outright, tears streaming down %s flushed red cheeks.", c.hisHer()));
+                    switch (confidence / 33) {
+                        case 0: w.append(t, String.format("cry outright, tears streaming down %s flushed red cheeks.", c.hisHer())); break;
+                        case 1: w.append(t, "glare with building hatred as it becomes harder and harder to view these people as worthy of protection."); break;
+                        default: w.append(t, String.format("scream abuse at the viewers, unable to contain %s anger at being degraded like this.", c.hisHer()));
+                    }
                 }
                 if(w.getBodyStatus()[4] || w.getBodyStatus()[20])
                 {
@@ -18827,58 +18473,46 @@ public class WorldState
             {
                 if(c.getINJULevel() < 3 || aVirg)
                 {
-                    if(morality > 66)
-                        w.append(t, String.format("%s closes %s eyes and tries to focus as the Thralls ", mainName, c.hisHer()));
-                    else
-                    if(morality > 33)
-                        w.append(t, String.format("%s is unable to contain a yelp of surprise as the Thralls ", mainName));
-                    else
-                        w.append(t, String.format("%s glares and desperately clenches %s teeth as the Thralls ", mainName, c.hisHer()));
+                    switch (morality / 33) {
+                        case 0: w.append(t, String.format("%s glares and desperately clenches %s teeth as the Thralls ", mainName, c.hisHer())); break;
+                        case 1: w.append(t, String.format("%s is unable to contain a yelp of surprise as the Thralls ", mainName)); break;
+                        default: w.append(t, String.format("%s closes %s eyes and tries to focus as the Thralls ", mainName, c.hisHer()));
+                    }
                 } else
                 if(w.tickle())
                 {
-                    if(morality > 66)
-                        w.append(t, String.format("Despite %s heroic effort, %s still ends up laughing helplessly as the Thralls tickle %s and ", c.hisHer(), mainName, c.himHer()));
-                    else
-                    if(morality > 33)
-                        w.append(t, String.format("%s has no choice but to laugh openly as the Thralls tickle %s and ", mainName, c.himHer()));
-                    else
-                        w.append(t, String.format("%s completely fails to intimidate the Thralls, laughter leaking out as they tickle %s and ", mainName, c.himHer()));
+                    switch (morality / 33) {
+                        case 0: w.append(t, String.format("%s completely fails to intimidate the Thralls, laughter leaking out as they tickle %s and ", mainName, c.himHer())); break;
+                        case 1: w.append(t, String.format("%s has no choice but to laugh openly as the Thralls tickle %s and ", mainName, c.himHer())); break;
+                        default: w.append(t, String.format("Despite %s heroic effort, %s still ends up laughing helplessly as the Thralls tickle %s and ", c.hisHer(), mainName, c.himHer()));
+                    }
                 } else
                 if(c.getGender().equals("male"))
                 {
-                    if(morality > 66)
-                        w.append(t, String.format("%s's heroic demeanor cracks as the Thralls stomp on %s penis and ", mainName, c.hisHer()));
-                    else
-                    if(morality > 33)
-                        w.append(t, String.format("%s is unable to contain %s cries of pain as the Thralls stomp on %2$s penis and ", mainName, c.hisHer()));
-                    else
-                        w.append(t, String.format("%s's attempt to intimidate the Thralls falls apart with a pathetic cry as they stomp on %s penis and ", mainName, c.hisHer()));
+                    switch (morality / 33) {
+                        case 0: w.append(t, String.format("%s's attempt to intimidate the Thralls falls apart with a pathetic cry as they stomp on %s penis and ", mainName, c.hisHer())); break;
+                        case 1: w.append(t, String.format("%s is unable to contain %s cries of pain as the Thralls stomp on %2$s penis and ", mainName, c.hisHer())); break;
+                        default: w.append(t, String.format("%s's heroic demeanor cracks as the Thralls stomp on %s penis and ", mainName, c.hisHer()));
+                    }
                 } else
-                if(morality > 66)
-                    w.append(t, String.format("%s's heroic demeanor cracks as one Thrall thrusts into %s ass while the others ", mainName, c.hisHer()));
-                else
-                if(morality > 33)
-                    w.append(t, String.format("%s is unable to contain %s cries of pain as one of the Thralls thrusts into %2$s ass.  The others ", mainName, c.hisHer()));
-                else
-                    w.append(t, String.format("%s's attempt to intimidate the Thralls falls apart with a pathetic cry as one of them thrusts into %s ass.  The others ", mainName, c.hisHer()));
+                switch (morality / 33) {
+                    case 0: w.append(t, String.format("%s's attempt to intimidate the Thralls falls apart with a pathetic cry as one of them thrusts into %s ass.  The others ", mainName, c.hisHer())); break;
+                    case 1: w.append(t, String.format("%s is unable to contain %s cries of pain as one of the Thralls thrusts into %2$s ass.  The others ", mainName, c.hisHer())); break;
+                    default: w.append(t, String.format("%s's heroic demeanor cracks as one Thrall thrusts into %s ass while the others ", mainName, c.hisHer()));
+                }
                 if(c.getEXPOLevel() < 3 || modest)
                 {
-                    if(dignity > 66)
-                        w.append(t, String.format("start trying to strip %s, ignoring %s indignant protests.  ", c.himHer(), c.hisHer()));
-                    else
-                    if(dignity > 33)
-                        w.append(t, String.format("force their hands under %s %s and try to strip %s.  ", c.hisHer(), bottomDesc, c.himHer()));
-                    else
-                        w.append(t, String.format("grab %s by the %s, and %s flailing efforts to escape accomplish nothing but tearing %3$s clothes.  ", c.himHer(), bottomDesc, c.hisHer()));
+                    switch (dignity / 33) {
+                        case 0: w.append(t, String.format("grab %s by the %s, and %s flailing efforts to escape accomplish nothing but tearing %3$s clothes.  ", c.himHer(), bottomDesc, c.hisHer())); break;
+                        case 1: w.append(t, String.format("force their hands under %s %s and try to strip %s.  ", c.hisHer(), bottomDesc, c.himHer())); break;
+                        default: w.append(t, String.format("start trying to strip %s, ignoring %s indignant protests.  ", c.himHer(), c.hisHer()));
+                    }
                 } else
-                if(dignity > 66)
-                    w.append(t, String.format("pry apart %s tightly-clenched thighs to more easily film %s down there.  ", c.hisHer(), c.himHer()));
-                else
-                if(dignity > 33)
-                    w.append(t, String.format("force %s bare legs apart and bring their cameras in close.  ", c.hisHer()));
-                else
-                    w.append(t, String.format("grab %s kicking ankles and pull them apart in order to more easily film %s down there.  ", c.hisHer(), c.himHer()));
+                switch (dignity / 33) {
+                    case 0: w.append(t, String.format("grab %s kicking ankles and pull them apart in order to more easily film %s down there.  ", c.hisHer(), c.himHer())); break;
+                    case 1: w.append(t, String.format("force %s bare legs apart and bring their cameras in close.  ", c.hisHer())); break;
+                    default: w.append(t, String.format("pry apart %s tightly-clenched thighs to more easily film %s down there.  ", c.hisHer(), c.himHer()));
+                }
                 if(solo || high.dissociated || low.dissociated)
                     w.append(t, String.format("%s's so distracted that %s can't even defend %sself when one of %s attackers mounts %s and thrusts into %s %s.  Being taken right in front of %s and %s, ", c.HeShe(), c.heShe(), c.himHer(), c.hisHer(), c.himHer(), c.hisHer(), hole, high.getMainName(), low.getMainName()));
                 else
@@ -18910,22 +18544,18 @@ public class WorldState
                 }
                 if(c.getPLEALevel() < 3 || cVirg)
                 {
-                    if(innocence > 66)
-                        w.append(t, String.format("%s squeals in mingled disgust and arousal as %s feels the Thrall cum inside.", mainName, c.heShe()));
-                    else
-                    if(innocence > 33)
-                        w.append(t, String.format("%s tells %sself that %s won't lose to the pleasure.", mainName, c.himHer(), c.heShe()));
-                    else
-                        w.append(t, String.format("%s ignores the building pleasure as best %s can.", mainName, c.heShe()));
+                    switch (innocence / 33) {
+                        case 0: w.append(t, String.format("%s ignores the building pleasure as best %s can.", mainName, c.heShe())); break;
+                        case 1: w.append(t, String.format("%s tells %sself that %s won't lose to the pleasure.", mainName, c.himHer(), c.heShe())); break;
+                        default: w.append(t, String.format("%s squeals in mingled disgust and arousal as %s feels the Thrall cum inside.", mainName, c.heShe()));
+                    }
                 } else
                 {
-                    if(innocence > 66)
-                        w.append(t, String.format("%s is soon moaning openly in orgasm, having forgot completely about escape.  %s whole body spasms", mainName, c.HisHer()));
-                    else
-                    if(innocence > 33)
-                        w.append(t, String.format("%s goes bright red with shame as %s feels %sself start to climax", mainName, c.heShe(), c.himHer()));
-                    else
-                        w.append(t, String.format("%s knows there's no way %s'll be able to stop the coming climax.  %s body soon gives in", mainName, c.heShe(), c.HisHer()));
+                    switch (innocence / 33) {
+                        case 0: w.append(t, String.format("%s knows there's no way %s'll be able to stop the coming climax.  %s body soon gives in", mainName, c.heShe(), c.HisHer())); break;
+                        case 1: w.append(t, String.format("%s goes bright red with shame as %s feels %sself start to climax", mainName, c.heShe(), c.himHer())); break;
+                        default: w.append(t, String.format("%s is soon moaning openly in orgasm, having forgot completely about escape.  %s whole body spasms", mainName, c.HisHer()));
+                    }
                     if(c.getGender().equals("female"))
                         w.append(t, ", squeezing down on the invading cock.");
                     else
@@ -18936,58 +18566,46 @@ public class WorldState
             {
                 if(c.getINJULevel() < 3 || aVirg)
                 {
-                    if(innocence > 66)
-                        w.append(t, String.format("%s is dazed and confused by the pleasure inflicted by the Thralls stroking %s %s", mainName, c.hisHer(), organ));
-                    else
-                    if(innocence > 33)
-                        w.append(t, String.format("The Thralls pin %s down and firmly stroke %s %s", mainName, c.hisHer(), organ));
-                    else
-                        w.append(t, String.format("%s tries to focus, but the pleasure of the Thralls stroking %s %s is too strong", mainName, c.hisHer(), organ));
+                    switch (innocence / 33) {
+                        case 0: w.append(t, String.format("%s tries to focus, but the pleasure of the Thralls stroking %s %s is too strong", mainName, c.hisHer(), organ)); break;
+                        case 1: w.append(t, String.format("The Thralls pin %s down and firmly stroke %s %s", mainName, c.hisHer(), organ)); break;
+                        default: w.append(t, String.format("%s is dazed and confused by the pleasure inflicted by the Thralls stroking %s %s", mainName, c.hisHer(), organ));
+                    }
                 } else
                 if(w.tickle())
                 {
-                    if(innocence > 66)
-                        w.append(t, String.format("The combination of the Thralls tickling %s and stroking %s %s has left %s barely aware of %2$s surroundings", c.himHer(), c.hisHer(), organ, mainName));
-                    else
-                    if(innocence > 33)
-                        w.append(t, String.format("%s is unable resist the Thralls tickling %s and stroking %s %s", mainName, c.himHer(), c.hisHer(), organ));
-                    else
-                        w.append(t, String.format("The laughter brought on by the Thralls' tickling has left %s lightheaded and unable to focus, vulnerable to the hands stroking %s %s", mainName, c.hisHer(), organ));
+                    switch (innocence / 33) {
+                        case 0: w.append(t, String.format("The laughter brought on by the Thralls' tickling has left %s lightheaded and unable to focus, vulnerable to the hands stroking %s %s", mainName, c.hisHer(), organ)); break;
+                        case 1: w.append(t, String.format("%s is unable resist the Thralls tickling %s and stroking %s %s", mainName, c.himHer(), c.hisHer(), organ)); break;
+                        default: w.append(t, String.format("The combination of the Thralls tickling %s and stroking %s %s has left %s barely aware of %2$s surroundings", c.himHer(), c.hisHer(), organ, mainName));
+                    }
                 } else
                 if(c.getGender().equals("male"))
                 {
-                    if(innocence > 66)
-                        w.append(t, String.format("The combination of pain and pleasure inflicted by the Thralls tormenting %s penis has left %s barely aware of %1$s surroundings", c.hisHer(), mainName));
-                    else
-                    if(innocence > 33)
-                        w.append(t, String.format("%s is unable to resist the Thralls alternating between stroking and stomping on %s penis", mainName, c.hisHer()));
-                    else
-                        w.append(t, String.format("The repeated abuse to %s bruised penis has left %s lightheaded and unable to focus, especially as the Thralls' hands shift to inflicting pleasure rather than pain", c.hisHer(), mainName));
+                    switch (innocence / 33) {
+                        case 0: w.append(t, String.format("The repeated abuse to %s bruised penis has left %s lightheaded and unable to focus, especially as the Thralls' hands shift to inflicting pleasure rather than pain", c.hisHer(), mainName)); break;
+                        case 1: w.append(t, String.format("%s is unable to resist the Thralls alternating between stroking and stomping on %s penis", mainName, c.hisHer())); break;
+                        default: w.append(t, String.format("The combination of pain and pleasure inflicted by the Thralls tormenting %s penis has left %s barely aware of %1$s surroundings", c.hisHer(), mainName));
+                    }
                 } else
-                if(innocence > 66)
-                    w.append(t, String.format("The combination of the Thrall's cock up %s ass and the others' hands stroking %1$s %s has left %s barely aware of %1$s surroundings", c.hisHer(), organ, mainName));
-                else
-                if(innocence > 33)
-                    w.append(t, String.format("%s is unable to resist the Thrall's cock thrusting up %s ass as the others stroke %2$s %s", mainName, c.hisHer(), organ));
-                else
-                    w.append(t, String.format("The repeated thrusting of the Thrall's cock up %s ass has left %s lightheaded and unable to focus, vulnerable to the hands stroking %1$s %s", c.hisHer(), mainName, organ));
+                switch (innocence / 33) {
+                    case 0: w.append(t, String.format("The repeated thrusting of the Thrall's cock up %s ass has left %s lightheaded and unable to focus, vulnerable to the hands stroking %1$s %s", c.hisHer(), mainName, organ)); break;
+                    case 1: w.append(t, String.format("%s is unable to resist the Thrall's cock thrusting up %s ass as the others stroke %2$s %s", mainName, c.hisHer(), organ)); break;
+                    default: w.append(t, String.format("The combination of the Thrall's cock up %s ass and the others' hands stroking %1$s %s has left %s barely aware of %1$s surroundings", c.hisHer(), organ, mainName));
+                }
                 if(c.getEXPOLevel() > 3 || modest)
                 {
-                    if(dignity > 66)
-                        w.append(t, String.format(", but %s still reflexively tries to pull %s %s back into place in order to hide %2$s ", c.heShe(), c.hisHer(), bottomDesc));
-                    else
-                    if(dignity > 33)
-                        w.append(t, String.format(", and with %s %s pulled aside, there's no hiding %1$s ", c.hisHer(), bottomDesc));
-                    else
-                        w.append(t, String.format(", and with %s %s pulled aside, %1$s reflexive kicking causes %s to completely expose %1$s ", c.hisHer(), bottomDesc, c.himHer()));
+                    switch (dignity / 33) {
+                        case 0: w.append(t, String.format(", and with %s %s pulled aside, %1$s reflexive kicking causes %s to completely expose %1$s ", c.hisHer(), bottomDesc, c.himHer())); break;
+                        case 1: w.append(t, String.format(", and with %s %s pulled aside, there's no hiding %1$s ", c.hisHer(), bottomDesc)); break;
+                        default: w.append(t, String.format(", but %s still reflexively tries to pull %s %s back into place in order to hide %2$s ", c.heShe(), c.hisHer(), bottomDesc));
+                    }
                 } else
-                if(dignity > 66)
-                    w.append(t, String.format(", especially with the overwhelming embarrassment at the Thralls filming %s ", c.hisHer()));
-                else
-                if(dignity > 33)
-                    w.append(t, String.format(", and in %s stripped state, everyone can see %1$s ", c.hisHer()));
-                else
-                    w.append(t, String.format(", and %s can't even spare a thought to hiding %s ", c.heShe(), c.hisHer()));
+                switch (dignity / 33) {
+                    case 0: w.append(t, String.format(", and %s can't even spare a thought to hiding %s ", c.heShe(), c.hisHer())); break;
+                    case 1: w.append(t, String.format(", and in %s stripped state, everyone can see %1$s ", c.hisHer())); break;
+                    default: w.append(t, String.format(", especially with the overwhelming embarrassment at the Thralls filming %s ", c.hisHer()));
+                }
                 if(c.getGender().equals("female"))
                     w.append(t, "dripping wet slit.  ");
                 else
@@ -19037,23 +18655,19 @@ public class WorldState
                 if(c.getHATELevel() < 3 || vVirg)
                 {
                     w.append(t, String.format("push their cocks into %s's mouth, %s lips stretching to accommodate two at once.  ", mainName, c.hisHer()));
-                    if(morality > 66)
-                        w.append(t, String.format("%s reflexively sucks as %s climaxes, and %s orgasmic moans drive them to cum down %3$s throat.", mainName, c.heShe(), c.hisHer()));
-                    else
-                    if(morality > 33)
-                        w.append(t, String.format("%s reaches %s own orgasm as %s feels their cum shoot down %2$s throat.", mainName, c.hisHer(), c.heShe()));
-                    else
-                        w.append(t, String.format("%s's indignant anger doesn't stop %s from climaxing under the continued stimulation, and %s chokes on the cum being shot down %s throat.", mainName, c.himHer(), c.heShe(), c.hisHer()));
+                    switch (morality / 33) {
+                        case 0: w.append(t, String.format("%s's indignant anger doesn't stop %s from climaxing under the continued stimulation, and %s chokes on the cum being shot down %s throat.", mainName, c.himHer(), c.heShe(), c.hisHer())); break;
+                        case 1: w.append(t, String.format("%s reaches %s own orgasm as %s feels their cum shoot down %2$s throat.", mainName, c.hisHer(), c.heShe())); break;
+                        default: w.append(t, String.format("%s reflexively sucks as %s climaxes, and %s orgasmic moans drive them to cum down %3$s throat.", mainName, c.heShe(), c.hisHer()));
+                    }
                 } else
                 {
                     w.append(t, String.format("fuck %s's %s together, stretching it wide enough to hold two cocks at once.  ", mainName, hole));
-                    if(morality > 66)
-                        w.append(t, String.format("%s's sense of violation doesn't stop %s from climaxing under the stimulation, and the feeling of the cocks shooting their loads inside %2$s only enhances the shameful pleasure.", mainName, c.himHer()));
-                    else
-                    if(morality > 33)
-                        w.append(t, String.format("The feeling of both of them shooting their loads deep inside %s drives %s to cum as well.", c.himHer(), mainName));
-                    else
-                        w.append(t, String.format("The stimulation is too much to bear, and %s wraps %s legs around them as they reach simultaneous orgasm together.", mainName, c.hisHer()));
+                    switch (morality / 33) {
+                        case 0: w.append(t, String.format("The stimulation is too much to bear, and %s wraps %s legs around them as they reach simultaneous orgasm together.", mainName, c.hisHer())); break;
+                        case 1: w.append(t, String.format("The feeling of both of them shooting their loads deep inside %s drives %s to cum as well.", c.himHer(), mainName)); break;
+                        default: w.append(t, String.format("%s's sense of violation doesn't stop %s from climaxing under the stimulation, and the feeling of the cocks shooting their loads inside %2$s only enhances the shameful pleasure.", mainName, c.himHer()));
+                    }
                 }
             } else
             if(variant == 2)
@@ -19067,21 +18681,17 @@ public class WorldState
                     w.append(t, String.format("Only one Thrall at a time can fit himself into %s's asshole, and the others aren't content with just ", mainName));
                 if(c.getEXPOLevel() < 3 || modest)
                 {
-                    if(dignity > 66)
-                        w.append(t, String.format("pulling off %s clothes, even though %1$s clear embarrassment is somewhat satisfying.  ", c.hisHer()));
-                    else
-                    if(dignity > 33)
-                        w.append(t, String.format("tearing %s clothes off.  ", c.hisHer()));
-                    else
-                        w.append(t, String.format("stripping %s, especially with how little embarrassment %s's showing.  ", c.himHer(), c.heShe()));
+                    switch (dignity / 33) {
+                        case 0: w.append(t, String.format("stripping %s, especially with how little embarrassment %s's showing.  ", c.himHer(), c.heShe())); break;
+                        case 1: w.append(t, String.format("tearing %s clothes off.  ", c.hisHer())); break;
+                        default: w.append(t, String.format("pulling off %s clothes, even though %1$s clear embarrassment is somewhat satisfying.  ", c.hisHer()));
+                    }
                 } else
-                if(dignity > 66)
-                    w.append(t, String.format("enjoying %s obvious humiliation at being filmed in such an exposed state.  ", c.hisHer()));
-                else
-                if(dignity > 33)
-                    w.append(t, String.format("filming %s exposed body.  ", c.hisHer()));
-                else
-                    w.append(t, String.format("filming the places exposed by %s torn clothes and splayed out limbs as %s struggles wildly to escape.  ", c.hisHer(), c.heShe()));
+                switch (dignity / 33) {
+                    case 0: w.append(t, String.format("filming the places exposed by %s torn clothes and splayed out limbs as %s struggles wildly to escape.  ", c.hisHer(), c.heShe())); break;
+                    case 1: w.append(t, String.format("filming %s exposed body.  ", c.hisHer())); break;
+                    default: w.append(t, String.format("enjoying %s obvious humiliation at being filmed in such an exposed state.  ", c.hisHer()));
+                }
                 if(high.dissociated || low.dissociated)
                     append(t, "The Thralls close in and ");
                 else
@@ -19141,13 +18751,11 @@ public class WorldState
                 }
                 if(c.getHATELevel() < 3 || vVirg)
                 {
-                    if(morality > 66)
-                        w.append(t, String.format("grind against %s whole body, taunting %s all the while in an effort to awaken %1$s hatred.  ", c.hisHer(), c.himHer()));
-                    else
-                    if(morality > 33)
-                        w.append(t, String.format("grind against %s whole body.  ", c.hisHer()));
-                    else
-                        w.append(t, String.format("grind against %s whole body, careful to avoid %1$s bared teeth.  ", c.hisHer()));
+                    switch (morality / 33) {
+                        case 0: w.append(t, String.format("grind against %s whole body, careful to avoid %1$s bared teeth.  ", c.hisHer())); break;
+                        case 1: w.append(t, String.format("grind against %s whole body.  ", c.hisHer())); break;
+                        default: w.append(t, String.format("grind against %s whole body, taunting %s all the while in an effort to awaken %1$s hatred.  ", c.hisHer(), c.himHer()));
+                    }
                     if(c.getHATELevel() < 3)
                     {
                         w.append(t, String.format("%s Sexual Barrier prevents them from penetrating %s, but the way their shafts rub against ", c.HisHer(), c.himHer()));
@@ -19164,87 +18772,69 @@ public class WorldState
                     else
                         w.append(t, String.format("%s own ", c.hisHer()));
                 } else
-                if(morality > 66)
-                    w.append(t, String.format("take turns penetrating %s %s.  The sense of violation, as terrible as it feels, also ", c.hisHer(), hole));
-                else
-                if(morality > 33)
-                    w.append(t, String.format("take turns fucking %s %s.  The sensation of them cumming inside ", c.hisHer(), hole));
-                else
-                    w.append(t, String.format("take turns riding %s, penetrating %s %s as %s angrily tries to buck them off.  It's infuriating, but it also ", c.himHer(), c.hisHer(), hole, c.heShe()));
+                switch (morality / 33) {
+                    case 0: w.append(t, String.format("take turns riding %s, penetrating %s %s as %s angrily tries to buck them off.  It's infuriating, but it also ", c.himHer(), c.hisHer(), hole, c.heShe())); break;
+                    case 1: w.append(t, String.format("take turns fucking %s %s.  The sensation of them cumming inside ", c.hisHer(), hole)); break;
+                    default: w.append(t, String.format("take turns penetrating %s %s.  The sense of violation, as terrible as it feels, also ", c.hisHer(), hole));
+                }
                 if(c.getPLEALevel() < 3 || cVirg)
                 {
-                    if(innocence > 66)
-                        w.append(t, String.format("gives %s a sense of butterflies in %s belly.", c.himHer(), c.hisHer()));
-                    else
-                    if(innocence > 33)
-                        w.append(t, String.format("starts to turn %s on.", c.himHer()));
-                    else
-                        w.append(t, String.format("causes a degree of sexual arousal %s can't deny.", c.heShe()));
+                    switch (innocence / 33) {
+                        case 0: w.append(t, String.format("causes a degree of sexual arousal %s can't deny.", c.heShe())); break;
+                        case 1: w.append(t, String.format("starts to turn %s on.", c.himHer())); break;
+                        default: w.append(t, String.format("gives %s a sense of butterflies in %s belly.", c.himHer(), c.hisHer()));
+                    }
                 } else
-                if(innocence > 66)
-                    w.append(t, String.format("makes %s mind go pure white with pulses of pleasure.", c.hisHer()));
-                else
-                if(innocence > 33)
-                    w.append(t, String.format("doesn't take long to make %s cum.", c.himHer()));
-                else
-                    w.append(t, "causes pleasure that quickly builds to the point of orgasm.");
+                switch (innocence / 33) {
+                    case 0: w.append(t, "causes pleasure that quickly builds to the point of orgasm."); break;
+                    case 1: w.append(t, String.format("doesn't take long to make %s cum.", c.himHer())); break;
+                    default: w.append(t, String.format("makes %s mind go pure white with pulses of pleasure.", c.hisHer()));
+                }
             } else
             if(variant == 3)
             {
                 if(c.getINJULevel() < 3 || aVirg)
                 {
-                    if(dignity > 66)
-                        w.append(t, String.format("%s struggles not to show any reaction as the Thralls ", mainName));
-                    else
-                    if(dignity > 33)
-                        w.append(t, String.format("%s tells the Thralls to stop, attempting to put authority into %s voice, but they continue to ", mainName, c.hisHer()));
-                    else
-                        w.append(t, String.format("%s shouts for the Thralls to stop as they ", mainName));
+                    switch (dignity / 33) {
+                        case 0: w.append(t, String.format("%s shouts for the Thralls to stop as they ", mainName)); break;
+                        case 1: w.append(t, String.format("%s tells the Thralls to stop, attempting to put authority into %s voice, but they continue to ", mainName, c.hisHer())); break;
+                        default: w.append(t, String.format("%s struggles not to show any reaction as the Thralls ", mainName));
+                    }
                 } else
                 if(w.tickle())
                 {
-                    if(dignity > 66)
-                        w.append(t, String.format("%s struggles vainly to keep a straight face and suppress %s laughter as the Thralls tickle %2$s bare feet and ", mainName, c.hisHer()));
-                    else
-                    if(dignity > 33)
-                        w.append(t, String.format("Even as %s laughs uncontrollably, %s tries to tell the Thralls to leave %s alone, but they continue to tickle %s bare feet and ", c.heShe(), mainName, c.himHer(), c.hisHer()));
-                    else
-                        w.append(t, String.format("Laughing uncontrollably as the Thralls tickle %s bare feet, %s barely manages to tell them to stop, but they only torment %s even more, starting to ", c.hisHer(), mainName, c.himHer()));
+                    switch (dignity / 33) {
+                        case 0: w.append(t, String.format("Laughing uncontrollably as the Thralls tickle %s bare feet, %s barely manages to tell them to stop, but they only torment %s even more, starting to ", c.hisHer(), mainName, c.himHer())); break;
+                        case 1: w.append(t, String.format("Even as %s laughs uncontrollably, %s tries to tell the Thralls to leave %s alone, but they continue to tickle %s bare feet and ", c.heShe(), mainName, c.himHer(), c.hisHer())); break;
+                        default: w.append(t, String.format("%s struggles vainly to keep a straight face and suppress %s laughter as the Thralls tickle %2$s bare feet and ", mainName, c.hisHer()));
+                    }
                 } else
                 if(c.getGender().equals("male"))
                 {
-                    if(dignity > 66)
-                        w.append(t, String.format("%s struggles vainly to suppress %s moans of pain as the Thralls crush %2$s testicles and ", mainName, c.hisHer()));
-                    else
-                    if(dignity > 33)
-                        w.append(t, String.format("Even as %s moans in pain, %s tries to tell the Thralls to leave %s alone, but they continue to crush %s testicles as they ", c.heShe(), mainName, c.himHer(), c.hisHer()));
-                    else
-                        w.append(t, String.format("Squealing in pain as the Thralls crush %s testicles, %s tries to tell them to stop, but they only torment %s even more, starting to ", c.hisHer(), mainName, c.himHer()));
+                    switch (dignity / 33) {
+                        case 0: w.append(t, String.format("Squealing in pain as the Thralls crush %s testicles, %s tries to tell them to stop, but they only torment %s even more, starting to ", c.hisHer(), mainName, c.himHer())); break;
+                        case 1: w.append(t, String.format("Even as %s moans in pain, %s tries to tell the Thralls to leave %s alone, but they continue to crush %s testicles as they ", c.heShe(), mainName, c.himHer(), c.hisHer())); break;
+                        default: w.append(t, String.format("%s struggles vainly to suppress %s moans of pain as the Thralls crush %2$s testicles and ", mainName, c.hisHer()));
+                    }
                 } else
-                if(dignity > 66)
-                    w.append(t, String.format("%s struggles vainly to suppress %s little squeaks and moans as one of the Thralls fucks %s up the ass and the others ", mainName, c.hisHer(), c.himHer()));
-                else
-                if(dignity > 33)
-                    w.append(t, String.format("Even as %s moans in mingled pain and pleasure at being fucked up the ass, %s tries to tell the Thralls to leave %s alone, but they only move on to ", c.heShe(), mainName, c.himHer()));
-                else
-                    w.append(t, String.format("Squealing as the Thralls fuck %s up the ass, %s tries to tell them to stop, but they only torment %1$s even more, starting to ", c.himHer(), mainName));
+                switch (dignity / 33) {
+                    case 0: w.append(t, String.format("Squealing as the Thralls fuck %s up the ass, %s tries to tell them to stop, but they only torment %1$s even more, starting to ", c.himHer(), mainName)); break;
+                    case 1: w.append(t, String.format("Even as %s moans in mingled pain and pleasure at being fucked up the ass, %s tries to tell the Thralls to leave %s alone, but they only move on to ", c.heShe(), mainName, c.himHer())); break;
+                    default: w.append(t, String.format("%s struggles vainly to suppress %s little squeaks and moans as one of the Thralls fucks %s up the ass and the others ", mainName, c.hisHer(), c.himHer()));
+                }
                 if(c.getHATELevel() < 3 || vVirg)
                 {
-                    if(morality > 66)
-                        w.append(t, String.format("force %s to suck their cocks as they tease %s nipples and %s.  ", c.himHer(), c.hisHer(), organ));
-                    else
-                    if(morality > 33)
-                        w.append(t, String.format("push vibrating rotors against %s nipples and %s.  ", c.hisHer(), organ));
-                    else
-                        w.append(t, String.format("tease %s nipples and %s with no regard for %1$s obvious anger.  ", c.hisHer(), organ));
+                    switch (morality / 33) {
+                        case 0: w.append(t, String.format("tease %s nipples and %s with no regard for %1$s obvious anger.  ", c.hisHer(), organ)); break;
+                        case 1: w.append(t, String.format("push vibrating rotors against %s nipples and %s.  ", c.hisHer(), organ)); break;
+                        default: w.append(t, String.format("force %s to suck their cocks as they tease %s nipples and %s.  ", c.himHer(), c.hisHer(), organ));
+                    }
                 } else
-                if(morality > 66)
-                    w.append(t, String.format("force their cocks into %s mouth and %s as well.  ", c.hisHer(), hole));
-                else
-                if(morality > 33)
-                    w.append(t, String.format("penetrate %s %s and push vibrating rotors against %1$s nipples and %s at the same time.  ", c.hisHer(), hole, organ));
-                else
-                    w.append(t, String.format("push their cocks into %s %s, ignoring %1$s demands that they not cum inside.  ", c.hisHer(), hole));
+                switch (morality / 33) {
+                    case 0: w.append(t, String.format("push their cocks into %s %s, ignoring %1$s demands that they not cum inside.  ", c.hisHer(), hole)); break;
+                    case 1: w.append(t, String.format("penetrate %s %s and push vibrating rotors against %1$s nipples and %s at the same time.  ", c.hisHer(), hole, organ)); break;
+                    default: w.append(t, String.format("force their cocks into %s mouth and %s as well.  ", c.hisHer(), hole));
+                }
                 if(high.dissociated || low.dissociated)
                     w.append(t, String.format("The Thralls push their cameras close from all angles, intending to make it so that the public is disappointed in %s weakness when ", c.hisHer()));
                 else
@@ -19287,21 +18877,17 @@ public class WorldState
                 }
                 if(c.getPLEALevel() < 3 || cVirg)
                 {
-                    if(innocence > 66)
-                        w.append(t, String.format("%s gasps and squirms against the warmth building in %s loins.", mainName, c.hisHer()));
-                    else
-                    if(innocence > 33)
-                        w.append(t, String.format("%s is shaking with the urge to cum.", mainName));
-                    else
-                        w.append(t, String.format("%s has to shake %s head and take deep breaths in order to stay sane.", mainName, c.hisHer()));
+                    switch (innocence / 33) {
+                        case 0: w.append(t, String.format("%s has to shake %s head and take deep breaths in order to stay sane.", mainName, c.hisHer())); break;
+                        case 1: w.append(t, String.format("%s is shaking with the urge to cum.", mainName)); break;
+                        default: w.append(t, String.format("%s gasps and squirms against the warmth building in %s loins.", mainName, c.hisHer()));
+                    }
                 } else
-                if(innocence > 66)
-                    w.append(t, String.format("%s throws %s head back and surrenders to the urge to cum, forgetting everything else.", mainName, c.hisHer()));
-                else
-                if(innocence > 33)
-                    w.append(t, String.format("%s starts reflexively bucking %s hips, turning %2$s face downward in shame at cumming like this.", mainName, c.hisHer()));
-                else
-                    w.append(t, String.format("%s gasps and shudders, face bright red with shame at being forced to cum.", mainName));
+                switch (innocence / 33) {
+                    case 0: w.append(t, String.format("%s gasps and shudders, face bright red with shame at being forced to cum.", mainName)); break;
+                    case 1: w.append(t, String.format("%s starts reflexively bucking %s hips, turning %2$s face downward in shame at cumming like this.", mainName, c.hisHer())); break;
+                    default: w.append(t, String.format("%s throws %s head back and surrenders to the urge to cum, forgetting everything else.", mainName, c.hisHer()));
+                }
             }
         } else
         if(variant == 0)
@@ -19357,78 +18943,62 @@ public class WorldState
             }
             if(c.getINJULevel() < 3 || aVirg)
             {
-                if(morality > 66)
-                    w.append(t, String.format("violating %s %s as %s shudders in self-disgust.  ", c.hisHer(), hole, c.heShe()));
-                else
-                if(morality > 33)
-                    w.append(t, String.format("penetrating %s %s as %s sobs and tries to shake %1$s head.  ", c.hisHer(), hole, c.heShe()));
-                else
-                    w.append(t, String.format("thrusting in and out of %s %s as %s sobs in helpless fury.  ", c.hisHer(), hole, c.heShe()));
+                switch (morality / 33) {
+                    case 0: w.append(t, String.format("thrusting in and out of %s %s as %s sobs in helpless fury.  ", c.hisHer(), hole, c.heShe())); break;
+                    case 1: w.append(t, String.format("penetrating %s %s as %s sobs and tries to shake %1$s head.  ", c.hisHer(), hole, c.heShe())); break;
+                    default: w.append(t, String.format("violating %s %s as %s shudders in self-disgust.  ", c.hisHer(), hole, c.heShe()));
+                }
             } else
             if(w.tickle())
             {
-                if(morality > 66)
-                    w.append(t, String.format("tickling %s and violating %s %s at the same time.  The fact that %s can't contain %2$s sobs of laughter makes %1$s feel like an utter failure.  ", c.himHer(), c.hisHer(), hole, c.heShe()));
-                else
-                if(morality > 33)
-                    w.append(t, String.format("forcing %s into helpless laughter so that %s %s tightens up around their cocks.  ", c.himHer(), c.hisHer(), hole));
-                else
-                    w.append(t, String.format("deepening %s humiliation by using incessant tickling to force %s to laugh as they fuck %1$s %s.  ", c.hisHer(), c.himHer(), hole));
+                switch (morality / 33) {
+                    case 0: w.append(t, String.format("deepening %s humiliation by using incessant tickling to force %s to laugh as they fuck %1$s %s.  ", c.hisHer(), c.himHer(), hole)); break;
+                    case 1: w.append(t, String.format("forcing %s into helpless laughter so that %s %s tightens up around their cocks.  ", c.himHer(), c.hisHer(), hole)); break;
+                    default: w.append(t, String.format("tickling %s and violating %s %s at the same time.  The fact that %s can't contain %2$s sobs of laughter makes %1$s feel like an utter failure.  ", c.himHer(), c.hisHer(), hole, c.heShe()));
+                }
             } else
             if(c.getGender().equals("male"))
             {
-                if(morality > 66)
-                    w.append(t, String.format("violating %s asshole and pinching %1$s penis as %s sobs with self-disgust at %1$s own weakness for letting this happen.  ", c.hisHer(), c.heShe()));
-                else
-                if(morality > 33)
-                    w.append(t, String.format("pummeling %s penis so that %1$s anus tightens reflexively around their cocks.  ", c.hisHer()));
-                else
-                    w.append(t, String.format("twisting %s penis and pounding %1$s asshole until %1$s resentful glare melts into pathetic tears.  ", c.hisHer()));
+                switch (morality / 33) {
+                    case 0: w.append(t, String.format("twisting %s penis and pounding %1$s asshole until %1$s resentful glare melts into pathetic tears.  ", c.hisHer())); break;
+                    case 1: w.append(t, String.format("pummeling %s penis so that %1$s anus tightens reflexively around their cocks.  ", c.hisHer())); break;
+                    default: w.append(t, String.format("violating %s asshole and pinching %1$s penis as %s sobs with self-disgust at %1$s own weakness for letting this happen.  ", c.hisHer(), c.heShe()));
+                }
             } else
-            if(morality > 66)
-                w.append(t, String.format("violating %s pussy and asshole in turn as %s shudders in self-disgust.  ", c.hisHer(), c.heShe()));
-            else
-            if(morality > 33)
-                w.append(t, String.format("penetrating %s pussy and asshole in turn as %s sobs and shakes %1$s head.  ", c.hisHer(), c.heShe()));
-            else
-                w.append(t, String.format("thrusting in and out of %s pussy and asshole in turn as %s sobs in helpless fury.  ", c.hisHer(), c.heShe()));
+            switch (morality / 33) {
+                case 0: w.append(t, String.format("thrusting in and out of %s pussy and asshole in turn as %s sobs in helpless fury.  ", c.hisHer(), c.heShe())); break;
+                case 1: w.append(t, String.format("penetrating %s pussy and asshole in turn as %s sobs and shakes %1$s head.  ", c.hisHer(), c.heShe())); break;
+                default: w.append(t, String.format("violating %s pussy and asshole in turn as %s shudders in self-disgust.  ", c.hisHer(), c.heShe()));
+            }
             if(c.getPLEALevel() < 3 || cVirg)
             {
-                if(innocence > 66)
-                    w.append(t, String.format("The feeling of the Thrall cumming inside is so awful that %s barely even notices the Thralls ", mainName));
-                else
-                if(innocence > 33)
-                    w.append(t, String.format("Feeling completely helpless, %s just goes limp in the arms of the Thralls ", mainName));
-                else
-                    w.append(t, String.format("%s knows %s needs to focus on escaping, but %2$s can't even muster the energy to struggle against the Thralls ", mainName, c.heShe()));
+                switch (innocence / 33) {
+                    case 0: w.append(t, String.format("%s knows %s needs to focus on escaping, but %2$s can't even muster the energy to struggle against the Thralls ", mainName, c.heShe())); break;
+                    case 1: w.append(t, String.format("Feeling completely helpless, %s just goes limp in the arms of the Thralls ", mainName)); break;
+                    default: w.append(t, String.format("The feeling of the Thrall cumming inside is so awful that %s barely even notices the Thralls ", mainName));
+                }
             } else
-            if(innocence > 66)
-                w.append(t, String.format("But the negative responses don't last long, as the pleasure soon builds to the point of orgasm, leaving %s moaning helplessly in the arms of the Thralls ", mainName));
-            else
-            if(innocence > 33)
-                w.append(t, String.format("Feeling completely helpless, %s almost welcomes the haze of pleasure that builds to the point of orgasm, preventing %s from even thinking about fighting against the Thralls ", mainName, c.himHer()));
-            else
-                w.append(t, String.format("%s knows that %s needs to focus on escaping, but %s body betrays %s.  %s climaxes, helpless against the Thralls ", mainName, c.heShe(), c.hisHer(), c.himHer(), c.HeShe()));
+            switch (innocence / 33) {
+                case 0: w.append(t, String.format("%s knows that %s needs to focus on escaping, but %s body betrays %s.  %s climaxes, helpless against the Thralls ", mainName, c.heShe(), c.hisHer(), c.himHer(), c.HeShe())); break;
+                case 1: w.append(t, String.format("Feeling completely helpless, %s almost welcomes the haze of pleasure that builds to the point of orgasm, preventing %s from even thinking about fighting against the Thralls ", mainName, c.himHer())); break;
+                default: w.append(t, String.format("But the negative responses don't last long, as the pleasure soon builds to the point of orgasm, leaving %s moaning helplessly in the arms of the Thralls ", mainName));
+            }
             String girl = "girl";
             if(c.getGender().equals("male"))
                 girl = "boy";
             if(c.getEXPOLevel() < 3 || modest)
             {
-                if(dignity > 66)
-                    w.append(t, String.format("tearing at %s %s in order to expose the shy %s's body to the world.", c.hisHer(), bottomDesc, girl));
-                else
-                if(dignity > 33)
-                    w.append(t, String.format("tearing at %s %s in hopes of humiliating %s even further.", c.hisHer(), bottomDesc, c.himHer()));
-                else
-                    w.append(t, String.format("pulling off %s %s.", c.hisHer(), bottomDesc));
+                switch (dignity / 33) {
+                    case 0: w.append(t, String.format("pulling off %s %s.", c.hisHer(), bottomDesc)); break;
+                    case 1: w.append(t, String.format("tearing at %s %s in hopes of humiliating %s even further.", c.hisHer(), bottomDesc, c.himHer())); break;
+                    default: w.append(t, String.format("tearing at %s %s in order to expose the shy %s's body to the world.", c.hisHer(), bottomDesc, girl));
+                }
             } else
-            if(dignity > 66)
-                w.append(t, String.format("filming the shy %s's stripped body.", girl));
-            else
-            if(dignity > 33)
-                w.append(t, String.format("spreading %s legs apart in order to film the spot where %s's being penetrated.", c.hisHer(), c.heShe()));
-            else
-                w.append(t, String.format("filming the spot between %s splayed-out legs.", c.hisHer()));
+            switch (dignity / 33) {
+                case 0: w.append(t, String.format("filming the spot between %s splayed-out legs.", c.hisHer())); break;
+                case 1: w.append(t, String.format("spreading %s legs apart in order to film the spot where %s's being penetrated.", c.hisHer(), c.heShe())); break;
+                default: w.append(t, String.format("filming the shy %s's stripped body.", girl));
+            }
         } else
         if(variant == 1)
         {
@@ -19461,75 +19031,59 @@ public class WorldState
                 w.append(t, String.format("In the press of bodies around the three Chosen, %s's orgasmic spasms cause %s to grind against %s.  Even though %3$s tries to be strong, the stimulation is still too much to bear, and %s ends up ", partner.getMainName(), partner.himHer(), mainName, c.heShe()));
             if(c.getINJULevel() < 3 || aVirg)
             {
-                if(innocence > 66)
-                    w.append(t, String.format("surrendering to the pleasure of the Thralls' hands on %s %s.  ", c.hisHer(), organ));
-                else
-                if(innocence > 33)
-                    w.append(t, String.format("cumming for the Thralls tugging %s %s.  ", c.hisHer(), organ));
-                else
-                    w.append(t, String.format("reaching climax due to the Thralls' stimulation of %s %s.  ", c.hisHer(), organ));
+                switch (innocence / 33) {
+                    case 0: w.append(t, String.format("reaching climax due to the Thralls' stimulation of %s %s.  ", c.hisHer(), organ)); break;
+                    case 1: w.append(t, String.format("cumming for the Thralls tugging %s %s.  ", c.hisHer(), organ)); break;
+                    default: w.append(t, String.format("surrendering to the pleasure of the Thralls' hands on %s %s.  ", c.hisHer(), organ));
+                }
             } else
             if(w.tickle())
             {
-                if(innocence > 66)
-                    w.append(t, String.format("surrendering to the pleasure, whimpering with delirious laughter as the Thralls' tickling hands make their way to %s %s.  ", c.hisHer(), organ));
-                else
-                if(innocence > 33)
-                    w.append(t, String.format("cumming and laughing at the same time, helpless against the Thralls tickling %s and tugging %s %s.  ", c.himHer(), c.hisHer(), organ));
-                else
-                    w.append(t, String.format("reaching climax even as %s shakes with helpless laughter due to the Thralls' tickling and stimulation of %s %s.  ", c.heShe(), c.hisHer(), organ));
+                switch (innocence / 33) {
+                    case 0: w.append(t, String.format("reaching climax even as %s shakes with helpless laughter due to the Thralls' tickling and stimulation of %s %s.  ", c.heShe(), c.hisHer(), organ)); break;
+                    case 1: w.append(t, String.format("cumming and laughing at the same time, helpless against the Thralls tickling %s and tugging %s %s.  ", c.himHer(), c.hisHer(), organ)); break;
+                    default: w.append(t, String.format("surrendering to the pleasure, whimpering with delirious laughter as the Thralls' tickling hands make their way to %s %s.  ", c.hisHer(), organ));
+                }
             } else
             if(c.getGender().equals("male"))
             {
-                if(innocence > 66)
-                    w.append(t, String.format("surrendering to the mingled pleasure and pain of the Thralls' rough hands tormenting %s sensitive penis.  ", c.hisHer()));
-                else
-                if(innocence > 33)
-                    w.append(t, String.format("cumming and whimpering in pain at the same time, helpless against the Thralls manhandling %s sensitive penis.  ", c.hisHer()));
-                else
-                    w.append(t, String.format("reaching climax even as the Thralls pummel %s sensitive testicles.  ", c.hisHer()));
+                switch (innocence / 33) {
+                    case 0: w.append(t, String.format("reaching climax even as the Thralls pummel %s sensitive testicles.  ", c.hisHer())); break;
+                    case 1: w.append(t, String.format("cumming and whimpering in pain at the same time, helpless against the Thralls manhandling %s sensitive penis.  ", c.hisHer())); break;
+                    default: w.append(t, String.format("surrendering to the mingled pleasure and pain of the Thralls' rough hands tormenting %s sensitive penis.  ", c.hisHer()));
+                }
             } else
-            if(innocence > 66)
-                w.append(t, String.format("surrendering to the mingled pleasure and pain as one of the Thralls pinches %s %s while another fists %1$s ass.  ", c.hisHer(), organ));
-            else
-            if(innocence > 33)
-                w.append(t, String.format("cumming and whimpering in pain at the same time, helpless against the rough handling of %s %s from the outside and the fist ravaging %1$s ass from the inside.  ", c.hisHer(), organ));
-            else
-                w.append(t, String.format("reaching climax as the Thralls combine stimulating %s %s with fisting %1$s ass.  ", c.hisHer(), organ));
+            switch (innocence / 33) {
+                case 0: w.append(t, String.format("reaching climax as the Thralls combine stimulating %s %s with fisting %1$s ass.  ", c.hisHer(), organ)); break;
+                case 1: w.append(t, String.format("cumming and whimpering in pain at the same time, helpless against the rough handling of %s %s from the outside and the fist ravaging %1$s ass from the inside.  ", c.hisHer(), organ)); break;
+                default: w.append(t, String.format("surrendering to the mingled pleasure and pain as one of the Thralls pinches %s %s while another fists %1$s ass.  ", c.hisHer(), organ));
+            }
             if(c.getHATELevel() < 3 || vVirg)
             {
-                if(morality > 66)
-                    w.append(t, String.format("%s still has the presence of mind to be disgusted by the Thralls grinding against %s in pursuit of their own orgasms, but %s feels %3$s deserves the degrading treatment for enjoying %2$sself this much", c.HeShe(), c.himHer(), c.heShe()));
-                else
-                if(morality > 33)
-                    w.append(t, String.format("%s limbs feel too weak to push away the Thralls grinding against %s in pursuit of their own orgasms", c.HisHer(), c.himHer()));
-                else
-                    w.append(t, String.format("%s's so delirious with pleasure that %s barely notices the Thralls humping %s in pursuit of their own orgasms", c.HeShe(), c.heShe(), c.himHer()));
+                switch (morality / 33) {
+                    case 0: w.append(t, String.format("%s's so delirious with pleasure that %s barely notices the Thralls humping %s in pursuit of their own orgasms", c.HeShe(), c.heShe(), c.himHer())); break;
+                    case 1: w.append(t, String.format("%s limbs feel too weak to push away the Thralls grinding against %s in pursuit of their own orgasms", c.HisHer(), c.himHer())); break;
+                    default: w.append(t, String.format("%s still has the presence of mind to be disgusted by the Thralls grinding against %s in pursuit of their own orgasms, but %s feels %3$s deserves the degrading treatment for enjoying %2$sself this much", c.HeShe(), c.himHer(), c.heShe()));
+                }
             } else
-            if(morality > 66)
-                w.append(t, String.format("As disgusted as %s is by the Thrall's cock plunging into %s %s and spurting its load inside, %1$s feels %1$s deserves it for enjoying this at all", c.heShe(), c.hisHer(), hole));
-            else
-            if(morality > 33)
-                w.append(t, String.format("%s %s squeezes down on a Thrall's invading cock, and %s realizes with detached disgust that it's cumming inside %s", c.HisHer(), hole, c.heShe(), c.himHer()));
-            else
-                w.append(t, String.format("%s tries to threaten retribution if the Thrall fucking %s %s cums inside, but %s can't form the words.  %1$s groans as %4$s feels the invading cock spurting inside %s", c.HeShe(), c.hisHer(), hole, c.heShe(), c.himHer()));
+            switch (morality / 33) {
+                case 0: w.append(t, String.format("%s tries to threaten retribution if the Thrall fucking %s %s cums inside, but %s can't form the words.  %1$s groans as %4$s feels the invading cock spurting inside %s", c.HeShe(), c.hisHer(), hole, c.heShe(), c.himHer())); break;
+                case 1: w.append(t, String.format("%s %s squeezes down on a Thrall's invading cock, and %s realizes with detached disgust that it's cumming inside %s", c.HisHer(), hole, c.heShe(), c.himHer())); break;
+                default: w.append(t, String.format("As disgusted as %s is by the Thrall's cock plunging into %s %s and spurting its load inside, %1$s feels %1$s deserves it for enjoying this at all", c.heShe(), c.hisHer(), hole));
+            }
             if(c.getEXPOLevel() < 3 || modest)
             {
-                if(dignity > 66)
-                    w.append(t, String.format(".  No matter how embarrassing it is, %s doesn't have the willpower to stop the others from stripping %s.", c.heShe(), c.himHer()));
-                else
-                if(dignity > 33)
-                    w.append(t, String.format(".  With %s mind feeling so empty, %s can't muster the effort to stop the others from stripping %s.", c.hisHer(), c.heShe(), c.himHer()));
-                else
-                    w.append(t, String.format(".  Before %s knows it, the others have made significant progress in stripping %s.", c.heShe(), c.himHer()));
+                switch (dignity / 33) {
+                    case 0: w.append(t, String.format(".  Before %s knows it, the others have made significant progress in stripping %s.", c.heShe(), c.himHer())); break;
+                    case 1: w.append(t, String.format(".  With %s mind feeling so empty, %s can't muster the effort to stop the others from stripping %s.", c.hisHer(), c.heShe(), c.himHer())); break;
+                    default: w.append(t, String.format(".  No matter how embarrassing it is, %s doesn't have the willpower to stop the others from stripping %s.", c.heShe(), c.himHer()));
+                }
             } else
-            if(dignity > 66)
-                w.append(t, String.format(".  No matter how embarrassing it is, %s doesn't have the willpower to hide %s stripped body from all the cameras.", c.heShe(), c.hisHer()));
-            else
-            if(dignity > 33)
-                w.append(t, String.format(".  With %s mind feeling so empty, %s can't muster the effort to stop the others from filming %1$s humiliating state from all angles.", c.hisHer(), c.heShe()));
-            else
-                w.append(t, String.format(".  Before %s knows it, dozens of cameras are being pushed up close to film %s face and stripped body.", c.heShe(), c.hisHer()));
+            switch (dignity / 33) {
+                case 0: w.append(t, String.format(".  Before %s knows it, dozens of cameras are being pushed up close to film %s face and stripped body.", c.heShe(), c.hisHer())); break;
+                case 1: w.append(t, String.format(".  With %s mind feeling so empty, %s can't muster the effort to stop the others from filming %1$s humiliating state from all angles.", c.hisHer(), c.heShe())); break;
+                default: w.append(t, String.format(".  No matter how embarrassing it is, %s doesn't have the willpower to hide %s stripped body from all the cameras.", c.heShe(), c.hisHer()));
+            }
         } else
         if(variant == 2)
         {
@@ -19580,55 +19134,43 @@ public class WorldState
                 w.append(t, String.format("The repeated impacts of the Thrall fucking %s up the ass are driving %1$s crazy, ", c.himHer()));
             if(c.getHATELevel() < 3 || vVirg)
             {
-                if(morality > 66)
-                    w.append(t, String.format("and %s's ashamed of %sself for feeling pleasure from the way they tug %s %s at the same time.  ", c.heShe(), c.himHer(), c.hisHer(), organ));
-                else
-                if(morality > 33)
-                    w.append(t, String.format("and %s's desperately trying to deny the pleasure %1$s feels as they tug %s %s at the same time.  ", c.heShe(), c.hisHer(), organ));
-                else
-                    w.append(t, String.format("and %s's caught between rage, embarrassment, and confused pleasure as they tug %s %s at the same time.  ", c.heShe(), c.hisHer(), organ));
+                switch (morality / 33) {
+                    case 0: w.append(t, String.format("and %s's caught between rage, embarrassment, and confused pleasure as they tug %s %s at the same time.  ", c.heShe(), c.hisHer(), organ)); break;
+                    case 1: w.append(t, String.format("and %s's desperately trying to deny the pleasure %1$s feels as they tug %s %s at the same time.  ", c.heShe(), c.hisHer(), organ)); break;
+                    default: w.append(t, String.format("and %s's ashamed of %sself for feeling pleasure from the way they tug %s %s at the same time.  ", c.heShe(), c.himHer(), c.hisHer(), organ));
+                }
             } else
-            if(morality > 66)
-                w.append(t, String.format("and it's only made worse by %s feelings of violated worthlessness as they take turns cumming inside %1$s %s and stroking %1$s %s at the same time.  ", c.hisHer(), hole, organ));
-            else
-            if(morality > 33)
-                w.append(t, String.format("and %s efforts to deny the pleasure from the Thrall tugging %1$s %s fall to pieces when another penetrates %1$s %s and cums inside.  ", c.hisHer(), organ, hole));
-            else
-                w.append(t, String.format("and even as %s deliriously tries to threaten the Thrall penetrating %s %s, %1$s can't help but buck %2$s hips at the same time.  ", c.heShe(), c.hisHer(), hole));
+            switch (morality / 33) {
+                case 0: w.append(t, String.format("and even as %s deliriously tries to threaten the Thrall penetrating %s %s, %1$s can't help but buck %2$s hips at the same time.  ", c.heShe(), c.hisHer(), hole)); break;
+                case 1: w.append(t, String.format("and %s efforts to deny the pleasure from the Thrall tugging %1$s %s fall to pieces when another penetrates %1$s %s and cums inside.  ", c.hisHer(), organ, hole)); break;
+                default: w.append(t, String.format("and it's only made worse by %s feelings of violated worthlessness as they take turns cumming inside %1$s %s and stroking %1$s %s at the same time.  ", c.hisHer(), hole, organ));
+            }
             if(c.getPLEALevel() < 3 || cVirg)
             {
-                if(innocence > 66)
-                    w.append(t, String.format("%s still manages to not completely give %sself over to the feelings, focusing on ", c.HeShe(), c.himHer()));
-                else
-                if(innocence > 33)
-                    w.append(t, String.format("It's not quite enough to make %s cum yet, mostly because of ", c.himHer()));
-                else
-                    w.append(t, String.format("%s still manages to resist the urge to climax, thanks largely to ", c.HeShe()));
+                switch (innocence / 33) {
+                    case 0: w.append(t, String.format("%s still manages to resist the urge to climax, thanks largely to ", c.HeShe())); break;
+                    case 1: w.append(t, String.format("It's not quite enough to make %s cum yet, mostly because of ", c.himHer())); break;
+                    default: w.append(t, String.format("%s still manages to not completely give %sself over to the feelings, focusing on ", c.HeShe(), c.himHer()));
+                }
             } else
-            if(innocence > 66)
-                w.append(t, String.format("%s feeble willpower is completely outmatched, and %s doesn't even try to fight the waves of pleasure running through %s body despite ", c.HisHer(), c.heShe(), c.hisHer()));
-            else
-            if(innocence > 33)
-                w.append(t, String.format("%s cums quickly despite ", c.HeShe()));
-            else
-                w.append(t, String.format("Tears of humiliation leak out of %s eyes as %s's forced to climax, unable to stop dwelling on ", c.hisHer(), c.heShe()));
+            switch (innocence / 33) {
+                case 0: w.append(t, String.format("Tears of humiliation leak out of %s eyes as %s's forced to climax, unable to stop dwelling on ", c.hisHer(), c.heShe())); break;
+                case 1: w.append(t, String.format("%s cums quickly despite ", c.HeShe())); break;
+                default: w.append(t, String.format("%s feeble willpower is completely outmatched, and %s doesn't even try to fight the waves of pleasure running through %s body despite ", c.HisHer(), c.heShe(), c.hisHer()));
+            }
             if(c.getEXPOLevel() < 3 || modest)
             {
-                if(dignity > 66)
-                    w.append(t, String.format("%s horror at the fact that the Thralls are stripping %s at the same time.", c.hisHer(), c.himHer()));
-                else
-                if(dignity > 33)
-                    w.append(t, String.format("%s embarrassment.", c.hisHer()));
-                else
-                    w.append(t, String.format("%s belief that enjoying this sort of thing is just wrong.", c.hisHer()));
+                switch (dignity / 33) {
+                    case 0: w.append(t, String.format("%s belief that enjoying this sort of thing is just wrong.", c.hisHer())); break;
+                    case 1: w.append(t, String.format("%s embarrassment.", c.hisHer())); break;
+                    default: w.append(t, String.format("%s horror at the fact that the Thralls are stripping %s at the same time.", c.hisHer(), c.himHer()));
+                }
             } else
-            if(dignity > 66)
-                w.append(t, String.format("%s overpowering shame at being stripped and filmed in such a humiliating state.", c.hisHer()));
-            else
-            if(dignity > 33)
-                w.append(t, String.format("the fact that so many cameras are watching %s.", c.himHer()));
-            else
-                w.append(t, String.format("%s belief that a true hero shouldn't be affected by little things like stripping and molestation.", c.hisHer()));
+            switch (dignity / 33) {
+                case 0: w.append(t, String.format("%s belief that a true hero shouldn't be affected by little things like stripping and molestation.", c.hisHer())); break;
+                case 1: w.append(t, String.format("the fact that so many cameras are watching %s.", c.himHer())); break;
+                default: w.append(t, String.format("%s overpowering shame at being stripped and filmed in such a humiliating state.", c.hisHer()));
+            }
         } else
         if(variant == 3)
         {
@@ -19667,41 +19209,33 @@ public class WorldState
             }
             if(c.getINJULevel() < 3 || aVirg)
             {
-                if(dignity > 66)
-                    w.append(t, String.format("%s freezes up, stammering incoherently until the Thralls reach down to do it themselves.  ", c.HeShe()));
-                else
-                if(dignity > 33)
-                    w.append(t, String.format("%s squeezes %s eyes shut as %s complies, face bright red.  ", c.HeShe(), c.hisHer(), c.heShe()));
-                else
-                    w.append(t, String.format("%s hurriedly complies for fear of being punished.  ", c.HeShe()));
+                switch (dignity / 33) {
+                    case 0: w.append(t, String.format("%s hurriedly complies for fear of being punished.  ", c.HeShe())); break;
+                    case 1: w.append(t, String.format("%s squeezes %s eyes shut as %s complies, face bright red.  ", c.HeShe(), c.hisHer(), c.heShe())); break;
+                    default: w.append(t, String.format("%s freezes up, stammering incoherently until the Thralls reach down to do it themselves.  ", c.HeShe()));
+                }
             } else
             if(w.tickle())
             {
-                if(dignity > 66)
-                    w.append(t, String.format("%s's already practically delirious with embarrassment at being filmed while practically naked and flailing in helpless laughter, so %s doesn't even notice the request until the Thralls reach down to do it for %s.  ", c.HeShe(), c.heShe(), c.himHer()));
-                else
-                if(dignity > 33)
-                    w.append(t, String.format("%s complies as best %s can while being tickled at the same time, %s laughter coming out mingled with whimpers of embarrassment.  ", c.HeShe(), c.heShe(), c.hisHer()));
-                else
-                    w.append(t, String.format("%s complies as best %s can while being tickled at the same time, stammering apologies for not being quicker about it.  ", c.HeShe(), c.heShe()));
+                switch (dignity / 33) {
+                    case 0: w.append(t, String.format("%s complies as best %s can while being tickled at the same time, stammering apologies for not being quicker about it.  ", c.HeShe(), c.heShe())); break;
+                    case 1: w.append(t, String.format("%s complies as best %s can while being tickled at the same time, %s laughter coming out mingled with whimpers of embarrassment.  ", c.HeShe(), c.heShe(), c.hisHer())); break;
+                    default: w.append(t, String.format("%s's already practically delirious with embarrassment at being filmed while practically naked and flailing in helpless laughter, so %s doesn't even notice the request until the Thralls reach down to do it for %s.  ", c.HeShe(), c.heShe(), c.himHer()));
+                }
             } else
             if(c.getGender().equals("male"))
             {
-                if(dignity > 66)
-                    w.append(t, String.format("%s tries to comply, but %s hands are shaking so much with sheer embarrassment that the Thralls have to do it for %s, twisting %2$s bruised testicles at the same time as punishment.  ", c.HeShe(), c.hisHer(), c.himHer()));
-                else
-                if(dignity > 33)
-                    w.append(t, String.format("%s slowly complies, %s trembling fingers carefully avoiding %2$s swollen, bruised testicles.  ", c.HeShe(), c.hisHer()));
-                else
-                    w.append(t, String.format("%s complies without hesitation, begging the Thralls to go easier on %s bruised testicles in return.  ", c.HeShe(), c.hisHer()));
+                switch (dignity / 33) {
+                    case 0: w.append(t, String.format("%s complies without hesitation, begging the Thralls to go easier on %s bruised testicles in return.  ", c.HeShe(), c.hisHer())); break;
+                    case 1: w.append(t, String.format("%s slowly complies, %s trembling fingers carefully avoiding %2$s swollen, bruised testicles.  ", c.HeShe(), c.hisHer())); break;
+                    default: w.append(t, String.format("%s tries to comply, but %s hands are shaking so much with sheer embarrassment that the Thralls have to do it for %s, twisting %2$s bruised testicles at the same time as punishment.  ", c.HeShe(), c.hisHer(), c.himHer()));
+                }
             } else
-            if(dignity > 66)
-                w.append(t, String.format("%s tries to comply, but %s hands are shaking so badly with the embarrassment of being filmed while also being anally penetrated that %s can't do it, and the Thralls need to reach down to do it for %s.  ", c.HeShe(), c.hisHer(), c.heShe(), c.himHer()));
-            else
-            if(dignity > 33)
-                w.append(t, String.format("%s complies as best %s can while being fucked up the ass at the same time, practically delirious with shame over having %s privates seen in such a state.  ", c.HeShe(), c.heShe(), c.hisHer()));
-            else
-                w.append(t, String.format("%s complies without hesitation, the cock thrusting in and out of %s asshole making the image even more lewd.  ", c.HeShe(), c.hisHer()));
+            switch (dignity / 33) {
+                case 0: w.append(t, String.format("%s complies without hesitation, the cock thrusting in and out of %s asshole making the image even more lewd.  ", c.HeShe(), c.hisHer())); break;
+                case 1: w.append(t, String.format("%s complies as best %s can while being fucked up the ass at the same time, practically delirious with shame over having %s privates seen in such a state.  ", c.HeShe(), c.heShe(), c.hisHer())); break;
+                default: w.append(t, String.format("%s tries to comply, but %s hands are shaking so badly with the embarrassment of being filmed while also being anally penetrated that %s can't do it, and the Thralls need to reach down to do it for %s.  ", c.HeShe(), c.hisHer(), c.heShe(), c.himHer()));
+            }
             if(c.getHATELevel() < 3 || vVirg)
             {
                 if(c.getHATELevel() < 3)
@@ -19709,41 +19243,33 @@ public class WorldState
                 else
                     w.append(t, String.format("Because %s Sexual Barrier prevents them from going any further down there, ", c.hisHer()));
                 w.append(t, String.format("they force %s to suck their cocks as well.  ", c.himHer()));
-                if(morality > 66)
-                    w.append(t, String.format("They force %s compliance by threatening the others, ", c.hisHer()));
-                else
-                if(morality > 33)
-                    w.append(t, String.format("%s meek nature prevents %s from refusing, ", c.HisHer(), c.himHer()));
-                else
-                    w.append(t, String.format("%s's afraid of what will happen if %s bites down, ", c.HeShe(), c.heShe()));
+                switch (morality / 33) {
+                    case 0: w.append(t, String.format("%s's afraid of what will happen if %s bites down, ", c.HeShe(), c.heShe())); break;
+                    case 1: w.append(t, String.format("%s meek nature prevents %s from refusing, ", c.HisHer(), c.himHer())); break;
+                    default: w.append(t, String.format("They force %s compliance by threatening the others, ", c.hisHer()));
+                }
             } else
             {
                 w.append(t, String.format("Then, they force %s to straddle one of the Thralls and ride his cock.  ", c.himHer()));
-                if(morality > 66)
-                    w.append(t, String.format("%s's ability to pleasure others is normally one of the few things %s prides %sself on, ", mainName, c.heShe(), c.himHer()));
-                else
-                if(morality > 33)
-                    w.append(t, String.format("They order %s to move %s hips, ", mainName, c.hisHer()));
-                else
-                    w.append(t, String.format("%s starts to move %s hips by reflex, ", mainName, c.hisHer()));
+                switch (morality / 33) {
+                    case 0: w.append(t, String.format("%s starts to move %s hips by reflex, ", mainName, c.hisHer())); break;
+                    case 1: w.append(t, String.format("They order %s to move %s hips, ", mainName, c.hisHer())); break;
+                    default: w.append(t, String.format("%s's ability to pleasure others is normally one of the few things %s prides %sself on, ", mainName, c.heShe(), c.himHer()));
+                }
             }
             if(c.getPLEALevel() < 3 || cVirg)
             {
-                if(innocence > 66)
-                    w.append(t, String.format("but %s's too scared to effectively perform.", c.heShe()));
-                else
-                if(innocence > 33)
-                    w.append(t, String.format("and %s does %s best to make them cum.", c.heShe(), c.hisHer()));
-                else
-                    w.append(t, String.format("and %s just focuses on bringing them to orgasm as quickly as possible.", c.heShe()));
+                switch (innocence / 33) {
+                    case 0: w.append(t, String.format("and %s just focuses on bringing them to orgasm as quickly as possible.", c.heShe())); break;
+                    case 1: w.append(t, String.format("and %s does %s best to make them cum.", c.heShe(), c.hisHer())); break;
+                    default: w.append(t, String.format("but %s's too scared to effectively perform.", c.heShe()));
+                }
             } else
-            if(innocence > 66)
-                w.append(t, String.format("but with their fingers coaxing another orgasm from %s %s, %s lacks the willpower to do anything but squirm and moan.", c.hisHer(), organ, c.heShe()));
-            else
-            if(innocence > 33)
-                w.append(t, String.format("but with their fingers coaxing another orgasm from %s %s, %s's almost too distracted to perform.", c.hisHer(), organ, c.heShe()));
-            else
-                w.append(t, String.format("but with their fingers coaxing another orgasm from %s %s, %1$s movements are much less skillful than usual.", c.hisHer(), organ));
+            switch (innocence / 33) {
+                case 0: w.append(t, String.format("but with their fingers coaxing another orgasm from %s %s, %1$s movements are much less skillful than usual.", c.hisHer(), organ)); break;
+                case 1: w.append(t, String.format("but with their fingers coaxing another orgasm from %s %s, %s's almost too distracted to perform.", c.hisHer(), organ, c.heShe())); break;
+                default: w.append(t, String.format("but with their fingers coaxing another orgasm from %s %s, %s lacks the willpower to do anything but squirm and moan.", c.hisHer(), organ, c.heShe()));
+            }
         }
         if(variant == 4)
         {
@@ -20416,13 +19942,11 @@ public class WorldState
                         w.append(t, String.format("Despite %s growing fury, ", c.hisHer()));
                     else
                         w.append(t, String.format("Despite %s growing annoyance, ", c.hisHer()));
-                    if(innocence > 66)
-                        w.append(t, String.format("the things the Thralls are doing to %s make %s feel nice enough to start blushing and squirming.  ", mainName, c.himHer()));
-                    else
-                    if(innocence > 33)
-                        w.append(t, String.format("%s feels %s face grow warm as the Thralls' stimulation starts to have an effect.  ", mainName, c.hisHer()));
-                    else
-                        w.append(t, String.format("%s can't deny that the Thralls' sexual stimulation is starting to have an effect on %s.  ", mainName, c.himHer()));
+                    switch (innocence / 33) {
+                        case 0: w.append(t, String.format("%s can't deny that the Thralls' sexual stimulation is starting to have an effect on %s.  ", mainName, c.himHer())); break;
+                        case 1: w.append(t, String.format("%s feels %s face grow warm as the Thralls' stimulation starts to have an effect.  ", mainName, c.hisHer())); break;
+                        default: w.append(t, String.format("the things the Thralls are doing to %s make %s feel nice enough to start blushing and squirming.  ", mainName, c.himHer()));
+                    }
                     if(c.getEXPOLevel() < 1)
                         w.append(t, String.format("Their fingers are able to work their way in under %s clothes, and ", c.hisHer()));
                     else
@@ -20471,13 +19995,11 @@ public class WorldState
                         w.append(t, String.format("%s is barely able to suppress %s moans of pleasure ", mainName, c.hisHer()));
                     else
                         w.append(t, String.format("%s's grunts of pain turn into moans of pleasure ", mainName));
-                    if(innocence > 66)
-                        w.append(t, String.format("as %s struggles to understand what's happening to %s.  ", c.heShe(), c.himHer()));
-                    else
-                    if(innocence > 33)
-                        w.append(t, String.format("as %s starts to give in to the sensations assaulting %s.  ", c.heShe(), c.himHer()));
-                    else
-                        w.append(t, String.format("as %s begins to eagerly anticipate the stimulation despite %sself.  ", c.heShe(), c.himHer()));
+                    switch (innocence / 33) {
+                        case 0: w.append(t, String.format("as %s begins to eagerly anticipate the stimulation despite %sself.  ", c.heShe(), c.himHer())); break;
+                        case 1: w.append(t, String.format("as %s starts to give in to the sensations assaulting %s.  ", c.heShe(), c.himHer())); break;
+                        default: w.append(t, String.format("as %s struggles to understand what's happening to %s.  ", c.heShe(), c.himHer()));
+                    }
                     if(c.getEXPOLevel() < 2)
                         w.append(t, String.format("%s can only defend %sself as best %s can", c.HeShe(), c.himHer(), c.heShe()));
                     else
@@ -20661,21 +20183,17 @@ public class WorldState
                         w.append(t, String.format("%s has had %s %s torn off %2$s legs, and ", mainName, c.hisHer(), bottomDesc));
                     if(w.tickle())
                     {
-                        if(confidence > 66)
-                            w.append(t, String.format("%s's forced to acknowledge that the tickling is starting to affect %s.  ", c.heShe(), c.himHer()));
-                        else
-                        if(confidence > 33)
-                            w.append(t, String.format("%s face wears a strained expression from being forced to endure the tickling.  ", c.hisHer()));
-                        else
-                            w.append(t, String.format("the tickling has started to affect %s.  %s's afraid of just how much worse it can get.  ", c.himHer(), c.HeShe()));
+                        switch (confidence / 33) {
+                            case 0: w.append(t, String.format("the tickling has started to affect %s.  %s's afraid of just how much worse it can get.  ", c.himHer(), c.HeShe())); break;
+                            case 1: w.append(t, String.format("%s face wears a strained expression from being forced to endure the tickling.  ", c.hisHer())); break;
+                            default: w.append(t, String.format("%s's forced to acknowledge that the tickling is starting to affect %s.  ", c.heShe(), c.himHer()));
+                        }
                     } else
-                    if(confidence > 66)
-                        w.append(t, String.format("the bruises covering %s body force %s to acknowledge that %s's getting hurt.  ", c.hisHer(), c.himHer(), c.heShe()));
-                    else
-                    if(confidence > 33)
-                        w.append(t, String.format("%s confidence has been shaken by the bruises covering %1$s body.  ", c.hisHer()));
-                    else
-                        w.append(t, String.format("%s can't stifle %s whimpers of pain nor cover the bruises across %2$s body.  ", c.heShe(), c.hisHer()));
+                    switch (confidence / 33) {
+                        case 0: w.append(t, String.format("%s can't stifle %s whimpers of pain nor cover the bruises across %2$s body.  ", c.heShe(), c.hisHer())); break;
+                        case 1: w.append(t, String.format("%s confidence has been shaken by the bruises covering %1$s body.  ", c.hisHer())); break;
+                        default: w.append(t, String.format("the bruises covering %s body force %s to acknowledge that %s's getting hurt.  ", c.hisHer(), c.himHer(), c.heShe()));
+                    }
                     if(c.getHATELevel() < 1)
                         w.append(t, String.format("%s's trying to remain calm and focused, but ", c.HeShe()));
                     else
@@ -20708,13 +20226,11 @@ public class WorldState
                         {
                             w.append(t, String.format("%s's gasping breaths of pleasure turn into a stifled squeak", mainName));
                         }
-                        if(confidence > 66)
-                            w.append(t, String.format(" as the tickling overwhelms %s willpower and starts to make %s flinch and twitch.  ", c.hisHer(), c.himHer()));
-                        else
-                        if(confidence > 33)
-                            w.append(t, String.format(" as the tickling starts to make %s blatantly flinch and squirm.  ", c.himHer()));
-                        else
-                            w.append(t, String.format(" as the tickling reaches the point that %s can't help but flinch away from each touch.  ", c.heShe()));
+                        switch (confidence / 33) {
+                            case 0: w.append(t, String.format(" as the tickling reaches the point that %s can't help but flinch away from each touch.  ", c.heShe())); break;
+                            case 1: w.append(t, String.format(" as the tickling starts to make %s blatantly flinch and squirm.  ", c.himHer())); break;
+                            default: w.append(t, String.format(" as the tickling overwhelms %s willpower and starts to make %s flinch and twitch.  ", c.hisHer(), c.himHer()));
+                        }
                         if(c.getEXPOLevel() < 2)
                             w.append(t, String.format("%s clothes are beginning to grow disheveled in the process", c.HisHer()));
                         else
@@ -20742,13 +20258,11 @@ public class WorldState
                         {
                             w.append(t, String.format("%s's gasping breaths of pleasure turn into cries of pain", mainName));
                         }
-                        if(confidence > 66)
-                            w.append(t, String.format(" as %s previous overconfidence is punished with attacks that start to draw blood.  ", c.hisHer()));
-                        else
-                        if(confidence > 33)
-                            w.append(t, " as the Thralls' attacks start to draw blood.  ");
-                        else
-                            w.append(t, String.format(" as %s lack of self-confidence means that the Thralls' attacks are already starting to draw blood.  ", c.hisHer()));
+                        switch (confidence / 33) {
+                            case 0: w.append(t, String.format(" as %s lack of self-confidence means that the Thralls' attacks are already starting to draw blood.  ", c.hisHer())); break;
+                            case 1: w.append(t, " as the Thralls' attacks start to draw blood.  "); break;
+                            default: w.append(t, String.format(" as %s previous overconfidence is punished with attacks that start to draw blood.  ", c.hisHer()));
+                        }
                         if(c.getEXPOLevel() < 2)
                             w.append(t, String.format("Patches of red are beginning to spread across %s clothes", c.hisHer()));
                         else
@@ -20783,49 +20297,39 @@ public class WorldState
                     {
                         if(aVirg)
                         {
-                            if(confidence > 66)
-                                w.append(t, String.format("%s has been stubbornly concealing just how much all the tickling has been affecting %s, but the Thralls are starting to notice %s inability to completely suppress %3$s voice", mainName, c.himHer(), c.hisHer()));
-                            else
-                            if(confidence > 33)
-                                w.append(t, String.format("%s's self-confidence has been completely destroyed by the way the Thralls are toying with %s", mainName, c.himHer()));
-                            else
-                                w.append(t, String.format("%s's voice comes out in small whimpers every time the Thralls tickle %s.  %s knows %s isn't strong enough to resist whatever they want to make %2$s do", mainName, c.himHer(), c.HeShe(), c.heShe()));
+                            switch (confidence / 33) {
+                                case 0: w.append(t, String.format("%s's voice comes out in small whimpers every time the Thralls tickle %s.  %s knows %s isn't strong enough to resist whatever they want to make %2$s do", mainName, c.himHer(), c.HeShe(), c.heShe())); break;
+                                case 1: w.append(t, String.format("%s's self-confidence has been completely destroyed by the way the Thralls are toying with %s", mainName, c.himHer())); break;
+                                default: w.append(t, String.format("%s has been stubbornly concealing just how much all the tickling has been affecting %s, but the Thralls are starting to notice %s inability to completely suppress %3$s voice", mainName, c.himHer(), c.hisHer()));
+                            }
                         } else
-                        if(confidence > 66)
-                            w.append(t, String.format("%s has been stubbornly resisting the tickling so far, but now %s can't help but start laughing again", mainName, c.heShe()));
-                        else
-                        if(confidence > 33)
-                            w.append(t, String.format("%s has been forced to laugh again by the Thralls' tickling", mainName));
-                        else
-                            w.append(t, String.format("%s's voice comes out in whimpering giggles every time the Thralls tickle %s.  %s knows %s never had a chance", mainName, c.himHer(), c.HeShe(), c.heShe()));
+                        switch (confidence / 33) {
+                            case 0: w.append(t, String.format("%s's voice comes out in whimpering giggles every time the Thralls tickle %s.  %s knows %s never had a chance", mainName, c.himHer(), c.HeShe(), c.heShe())); break;
+                            case 1: w.append(t, String.format("%s has been forced to laugh again by the Thralls' tickling", mainName)); break;
+                            default: w.append(t, String.format("%s has been stubbornly resisting the tickling so far, but now %s can't help but start laughing again", mainName, c.heShe()));
+                        }
                     } else
                     if(aVirg)
                     {
-                        if(confidence > 66)
-                            w.append(t, String.format("%s has been stubbornly concealing just how hurt %s is, but the Thralls can feel the way that %s previously unyielding flesh is becoming soft under their fingers", mainName, c.heShe(), c.hisHer()));
-                        else
-                        if(confidence > 33)
-                            w.append(t, String.format("As the injuries accumulate, the Thralls feel %s's body becoming softer and more yielding", mainName));
-                        else
-                            w.append(t, String.format("The accumulating injuries destroy %s's self-confidence, causing %s body to become more and more vulnerable to further abuses.  The Thralls notice how %2$s skin seems to grow softer as %2$s struggles weaken", mainName, c.hisHer()));
+                        switch (confidence / 33) {
+                            case 0: w.append(t, String.format("The accumulating injuries destroy %s's self-confidence, causing %s body to become more and more vulnerable to further abuses.  The Thralls notice how %2$s skin seems to grow softer as %2$s struggles weaken", mainName, c.hisHer())); break;
+                            case 1: w.append(t, String.format("As the injuries accumulate, the Thralls feel %s's body becoming softer and more yielding", mainName)); break;
+                            default: w.append(t, String.format("%s has been stubbornly concealing just how hurt %s is, but the Thralls can feel the way that %s previously unyielding flesh is becoming soft under their fingers", mainName, c.heShe(), c.hisHer()));
+                        }
                     } else
                     if(c.getGender().equals("male"))
                     {
-                        if(confidence > 66)
-                            w.append(t, String.format("%s has been trying to ignore the pain of %s injuries, but the constant pummeling and twisting to %2$s testicles finally causes %s to scream out loud", mainName, c.hisHer(), c.himHer()));
-                        else
-                        if(confidence > 33)
-                            w.append(t, String.format("As the injuries accumulate, the Thralls take advantage of %s's weakening body by pummeling and twisting %s sensitive testicles", mainName, c.hisHer()));
-                        else
-                            w.append(t, String.format("The accumulating injuries destroy %s's self-confidence, causing %s sensitive testicles to become more vulnerable to the Thralls' pinching, twisting hands", mainName, c.hisHer()));
+                        switch (confidence / 33) {
+                            case 0: w.append(t, String.format("The accumulating injuries destroy %s's self-confidence, causing %s sensitive testicles to become more vulnerable to the Thralls' pinching, twisting hands", mainName, c.hisHer())); break;
+                            case 1: w.append(t, String.format("As the injuries accumulate, the Thralls take advantage of %s's weakening body by pummeling and twisting %s sensitive testicles", mainName, c.hisHer())); break;
+                            default: w.append(t, String.format("%s has been trying to ignore the pain of %s injuries, but the constant pummeling and twisting to %2$s testicles finally causes %s to scream out loud", mainName, c.hisHer(), c.himHer()));
+                        }
                     } else
-                    if(confidence > 66)
-                        w.append(t, String.format("%s has been trying to ignore the pain of %s injuries, but %s still screams out loud as one of the Thralls manages to force the tip of his cock past %2$s anus", mainName, c.hisHer(), c.heShe()));
-                    else
-                    if(confidence > 33)
-                        w.append(t, String.format("As the injuries accumulate, the one of the Thralls takes advantage of %s's weakening body by forcing his cock into %s ass", mainName, c.hisHer()));
-                    else
-                        w.append(t, String.format("The accumulating injuries destroy %s's self-confidence, causing %s body to become vulnerable enough that one of the Thralls is able to force his cock into %2$s ass", mainName, c.hisHer()));
+                    switch (confidence / 33) {
+                        case 0: w.append(t, String.format("The accumulating injuries destroy %s's self-confidence, causing %s body to become vulnerable enough that one of the Thralls is able to force his cock into %2$s ass", mainName, c.hisHer())); break;
+                        case 1: w.append(t, String.format("As the injuries accumulate, the one of the Thralls takes advantage of %s's weakening body by forcing his cock into %s ass", mainName, c.hisHer())); break;
+                        default: w.append(t, String.format("%s has been trying to ignore the pain of %s injuries, but %s still screams out loud as one of the Thralls manages to force the tip of his cock past %2$s anus", mainName, c.hisHer(), c.heShe()));
+                    }
                     if(c.getHATELevel() < 3)
                         w.append(t, String.format(", and even though %s Sexual Barrier remains intact, there are other ways for them to enjoy %1$s body.  ", c.hisHer()));
                     else
@@ -20881,13 +20385,11 @@ public class WorldState
                         w.append(t, String.format("%s shrieks in rage and pain", mainName));
                     if(w.tickle())
                     {
-                        if(confidence > 66)
-                            w.append(t, String.format(", still thrashing wildly as %s's tickled, but too exhausted for it to do %s any good.  ", c.heShe(), c.himHer()));
-                        else
-                        if(confidence > 33)
-                            w.append(t, ", completely fed up with the tickling but too exhausted to actually fight it.  ");
-                        else
-                            w.append(t, String.format(", spasming weakly as %s's tickled, but too exhausted and demoralized to put any strength in %s limbs.  ", c.heShe(), c.hisHer()));
+                        switch (confidence / 33) {
+                            case 0: w.append(t, String.format(", spasming weakly as %s's tickled, but too exhausted and demoralized to put any strength in %s limbs.  ", c.heShe(), c.hisHer())); break;
+                            case 1: w.append(t, ", completely fed up with the tickling but too exhausted to actually fight it.  "); break;
+                            default: w.append(t, String.format(", still thrashing wildly as %s's tickled, but too exhausted for it to do %s any good.  ", c.heShe(), c.himHer()));
+                        }
                         if(c.getPLEALevel() < 4)
                             w.append(t, String.format("%s attempts to curl up and protect %sself are completely useless", c.HisHer(), c.himHer()));
                         else
@@ -20897,13 +20399,11 @@ public class WorldState
                             w.append(t, String.format("Combined with %s sexual overstimulation, the attacks make %1$s movements become completely uncontrolled", c.hisHer()));
                     } else
                     {
-                        if(confidence > 66)
-                            w.append(t, String.format(", struggling as much as %s can as the Thralls mangle %s body.  ", c.heShe(), c.hisHer()));
-                        else
-                        if(confidence > 33)
-                            w.append(t, String.format(" as the Thralls crush %s body.  ", c.hisHer()));
-                        else
-                            w.append(t, String.format(", trying and failing to curl up and protect %sself as the Thralls shatter %s body.  ", c.himHer(), c.hisHer()));
+                        switch (confidence / 33) {
+                            case 0: w.append(t, String.format(", trying and failing to curl up and protect %sself as the Thralls shatter %s body.  ", c.himHer(), c.hisHer())); break;
+                            case 1: w.append(t, String.format(" as the Thralls crush %s body.  ", c.hisHer())); break;
+                            default: w.append(t, String.format(", struggling as much as %s can as the Thralls mangle %s body.  ", c.heShe(), c.hisHer()));
+                        }
                         if(c.getPLEALevel() < 4)
                             w.append(t, String.format("%s attempts to move only hurt %s more", c.HisHer(), c.himHer()));
                         else
@@ -20937,13 +20437,11 @@ public class WorldState
                         w.append(t, String.format("Despite (or perhaps because of) the intense pleasure that has been inflicted on %s, ", c.himHer()));
                     else
                         w.append(t, String.format("%s face turning red with combined arousal and anger, ", c.HisHer()));
-                    if(morality > 66)
-                        w.append(t, String.format("some serious annoyance is hidden behind %s's outwardly compassionate demeanor.  ", mainName));
-                    else
-                    if(morality > 33)
-                        w.append(t, String.format("%s is already getting annoyed at the situation. ", mainName));
-                    else
-                        w.append(t, String.format("%s's short temper means that %s's quickly getting annoyed at being toyed with.  ", mainName, c.heShe()));
+                    switch (morality / 33) {
+                        case 0: w.append(t, String.format("%s's short temper means that %s's quickly getting annoyed at being toyed with.  ", mainName, c.heShe())); break;
+                        case 1: w.append(t, String.format("%s is already getting annoyed at the situation. ", mainName)); break;
+                        default: w.append(t, String.format("some serious annoyance is hidden behind %s's outwardly compassionate demeanor.  ", mainName));
+                    }
                     if(c.getINJULevel() < 1)
                         w.append(t, String.format("%s realizes that they're deliberately provoking %s, but %s's still ", c.HeShe(), c.himHer(), c.heShe()));
                     else
@@ -20981,13 +20479,11 @@ public class WorldState
                     {
                         w.append(t, String.format("As %s struggles to hold %s %s closed, ", mainName, c.hisHer(), topDesc));
                     }
-                    if(morality > 66)
-                        w.append(t, String.format("%s wears an angry expression, unsuitable for %s normally kind face.  ", c.heShe(), c.hisHer()));
-                    else
-                    if(morality > 33)
-                        w.append(t, String.format("resentment burns in %s eyes.  ", c.hisHer()));
-                    else
-                        w.append(t, String.format("%s teeth are gritted in rage.  ", c.hisHer()));
+                    switch (morality / 33) {
+                        case 0: w.append(t, String.format("%s teeth are gritted in rage.  ", c.hisHer())); break;
+                        case 1: w.append(t, String.format("resentment burns in %s eyes.  ", c.hisHer())); break;
+                        default: w.append(t, String.format("%s wears an angry expression, unsuitable for %s normally kind face.  ", c.heShe(), c.hisHer()));
+                    }
                     if(c.getINJULevel() < 2)
                         w.append(t, String.format("%s composure completely lost, ", c.HisHer()));
                     else
@@ -21054,22 +20550,18 @@ public class WorldState
                         w.append(t, String.format("Desperately struggling against the Thrall fucking %s up the ass, ", c.himHer()));
                     if(vVirg)
                     {
-                        if(morality > 66)
-                            w.append(t, String.format("%s lashes out, paying less mind than %s should to any innocents who might be close enough to get hurt.  ", mainName, c.heShe()));
-                        else
-                        if(morality > 33)
-                            w.append(t, String.format("%s lashes out indiscrimiately in %s attempts to escape.  ", mainName, c.hisHer()));
-                        else
-                            w.append(t, String.format("%s gives in to %s rage and starts trying to lash out.  ", mainName, c.hisHer()));
+                        switch (morality / 33) {
+                            case 0: w.append(t, String.format("%s gives in to %s rage and starts trying to lash out.  ", mainName, c.hisHer())); break;
+                            case 1: w.append(t, String.format("%s lashes out indiscrimiately in %s attempts to escape.  ", mainName, c.hisHer())); break;
+                            default: w.append(t, String.format("%s lashes out, paying less mind than %s should to any innocents who might be close enough to get hurt.  ", mainName, c.heShe()));
+                        }
                     } else
                     {
-                        if(morality > 66)
-                            w.append(t, String.format("%s shudders in revulsion as one of %s attackers manages to penetrate %2$s %s", mainName, c.hisHer(), hole));
-                        else
-                        if(morality > 33)
-                            w.append(t, String.format("%s goes stiff and freezes up briefly as one of %s attackers manages to penetrate %2$s %s", mainName, c.hisHer(), hole));
-                        else
-                            w.append(t, String.format("%s screams with rage as one of %s attackers manages to penetrate %2$s %s", mainName, c.hisHer(), hole));
+                        switch (morality / 33) {
+                            case 0: w.append(t, String.format("%s screams with rage as one of %s attackers manages to penetrate %2$s %s", mainName, c.hisHer(), hole)); break;
+                            case 1: w.append(t, String.format("%s goes stiff and freezes up briefly as one of %s attackers manages to penetrate %2$s %s", mainName, c.hisHer(), hole)); break;
+                            default: w.append(t, String.format("%s shudders in revulsion as one of %s attackers manages to penetrate %2$s %s", mainName, c.hisHer(), hole));
+                        }
                         w.append(t, ".  ");
                     }
                     if(c.getPLEALevel() < 3)
@@ -21095,13 +20587,11 @@ public class WorldState
                 } else
                 if(c.getHATELevel() == 4)
                 {
-                    if(morality > 66)
-                        w.append(t, String.format("%s is torn between laughing and sobbing as %s sanity cracks", mainName, c.hisHer()));
-                    else
-                    if(morality > 33)
-                        w.append(t, String.format("%s giggles madly as %s sanity cracks", mainName, c.hisHer()));
-                    else
-                        w.append(t, String.format("%s laughs with despairing abandon as %s sanity cracks", mainName, c.hisHer()));
+                    switch (morality / 33) {
+                        case 0: w.append(t, String.format("%s laughs with despairing abandon as %s sanity cracks", mainName, c.hisHer())); break;
+                        case 1: w.append(t, String.format("%s giggles madly as %s sanity cracks", mainName, c.hisHer())); break;
+                        default: w.append(t, String.format("%s is torn between laughing and sobbing as %s sanity cracks", mainName, c.hisHer()));
+                    }
                     if(c.getINJULevel() < 4)
                         w.append(t, ".  ");
                     else
