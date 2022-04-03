@@ -25,7 +25,7 @@ public class Tech implements Serializable {
  			if (w.save != null) {
  				if (w.save.harem != null) {
  					if (w.save.harem.length > 0) {
- 						tooltip = tooltip + " and deploy Forsaken";
+ 						tooltip += " and deploy Forsaken";
  					}
  				}
  			}
@@ -190,7 +190,7 @@ public class Tech implements Serializable {
 			prereqs = new Tech[0];
 			description = "Allows your captive humans to give birth to a body you can directly control in order to bring the fight to the Chosen, albeit only at great cost.  Once this has been purchased, options for 'Commander' bodies are unlocked here in the shop.  Every time you send a Commander into battle, it costs Evil Energy.  However, the effects can be quite strong.  The default Commander captures the target Chosen, causing her to start the battle surrounded for 2 turns.  This increases the opening level required to surround her later as normal.";
 		} else if (w.save != null && w.getHarem() != null && w.getHarem().length > 0) {
-			description = description + "  This upgrade also allows you to manage the Forsaken brought from previous loops.";
+			description += "  This upgrade also allows you to manage the Forsaken brought from previous loops.";
 		} else if(index == 4) {
 			name = "Coordinated Deployment";
 			prereqsRequired = 2;
@@ -446,9 +446,9 @@ public class Tech implements Serializable {
 			});
 			description = "Optimizes your connection with your Commander body, endowing it with the ability to seed your offspring even in one of the Chosen";
 			if(w.getGenderBalance()[2] <= 0) {
-				description = description + ", regardless of whether they're male or female";
+				description += ", regardless of whether they're male or female";
 			}
-			description =  description + ".  The targets' souls must be blackened with the Slaughter of many victims in order to be susceptible to this effect, but the resulting Total Morality Break as they're forced to bear an enemy of humanity will irrevocably sever their connection to society.  This is a Punisher-class upgrade which is not compatible with other Suppressor-, Defiler-, or Punisher-class upgrades, but it has no additional cost to apply and focuses strongly on FEAR and HATE damage.";
+			description += ".  The targets' souls must be blackened with the Slaughter of many victims in order to be susceptible to this effect, but the resulting Total Morality Break as they're forced to bear an enemy of humanity will irrevocably sever their connection to society.  This is a Punisher-class upgrade which is not compatible with other Suppressor-, Defiler-, or Punisher-class upgrades, but it has no additional cost to apply and focuses strongly on FEAR and HATE damage.";
 		} else if(index == 35) {
 			name = "Hypnosis";
 			prereqsRequired = 2;
@@ -466,9 +466,9 @@ public class Tech implements Serializable {
 			});
 			description = "Optimizes your connection with your Commander body, endowing it with the ability to absorb even the righteous energy of the Chosen.  The targets must be desperate enough for death to Detonate themselves over and over again or else they won't have the subconscious willingness that allows you to do this, but the resulting Total Confidence Break as they realize that they can only have peace by giving up their power will completely break their will to actually defeat you.  This is a Punisher-class upgrade which is not compatible with other Suppressor-, Defiler-, or Punisher-class upgrades, but it has no additional cost to apply and focuses strongly on ";
 			if (w.tickle()) {
- 				description = description + "TICK and ANTI damage.";
+ 				description += "TICK and ANTI damage.";
  			} else {
- 				description = description + "PAIN and INJU damage.";
+ 				description += "PAIN and INJU damage.";
  			}
 		} else if(index == 37) {
 			name = "Parasitism";
@@ -544,9 +544,9 @@ public class Tech implements Serializable {
 			});
 			description = "Perfects the combat ability of your Demons, allowing them to torture the Chosen with extreme precision.  This doubles the damage of the " + actionName + " action.  Additionally, during the final battle, the " + actionName + " action will decrease the Resolve of Drained targets by " + w.attackResolve() + "%, or non-Drained targets by 1%.  This decrease is multiplied by the target's ";
 			if (w.tickle()) {
-				description = description + "TICK level.";
+				description += "TICK level.";
 			} else {
-				description = description + "PAIN level.";
+				description += "PAIN level.";
 			}
 		} else if(index == 45) {
 			name = "Taunt+";

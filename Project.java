@@ -439,13 +439,13 @@ public class Project extends JFrame
                 {
                     String nav = "";
                     if(folders[0].length() > 0 && j < 8)
-                        nav = nav + folders[0];
+                        nav += folders[0];
                     if(folders[1].length() > 0 && j % 8 < 4)
-                        nav = nav + folders[1];
+                        nav += folders[1];
                     if(folders[2].length() > 0 && j % 4 < 2)
-                        nav = nav + folders[2];
+                        nav += folders[2];
                     if(folders[3].length() > 0 && j % 2 == 0)
-                        nav = nav + folders[3];
+                        nav += folders[3];
                     try
                     {
                         image = ImageIO.read(new File(path + nav + type + ".png"));
@@ -820,9 +820,9 @@ public class Project extends JFrame
                 String editedName = "";
                 for(int i = 0; i < newRosterName.length(); i++)
                     if(newRosterName.charAt(i) == '/' || newRosterName.charAt(i) == ':')
-                        editedName = editedName + "-";
+                        editedName += "-";
                     else
-                        editedName = editedName + newRosterName.charAt(i);
+                        editedName += newRosterName.charAt(i);
 
                 wobj.exportRoster(exportedRoster, editedName);
                 w.append(t, String.format("\n\n%s\n\nNew roster saved to '%s.ros'.", w.getSeparator(), editedName));
@@ -1623,12 +1623,12 @@ public class Project extends JFrame
                     index++;
                 if(answers[i] - 1 == j)
                 {
-                    totals[index] = totals[index] + 2 * signs[j];
-                    certainties[index] = certainties[index] + 2;
+                    totals[index] += 2 * signs[j];
+                    certainties[index] += 2;
                 } else
                 {
-                    totals[index] = totals[index] - signs[j];
-                    certainties[index] = certainties[index] + 1;
+                    totals[index] -= signs[j];
+                    certainties[index] += 1;
                 }
             }
 
@@ -5588,7 +5588,7 @@ public class Project extends JFrame
                     String targetedChosen = w.getCast()[target].getMainName();
                     if(type == 0)
                         generated = "Tempt ";
-                    generated = generated + targetedChosen + ".";
+                    generated += targetedChosen + ".";
                 } else
                 {
                     int target = (action - 1) / 14;
@@ -5620,45 +5620,45 @@ public class Project extends JFrame
                     {
                         if(w.getTechs()[31].isOwned() && !w.getCast()[target].isSurrounded())
                             if(!w.getCast()[target].surroundPossible(w))
-                                generated = generated + "Capture and then ";
+                                generated += "Capture and then ";
                             else
-                                generated = generated + "Surround and then ";
+                                generated += "Surround and then ";
                         if(type == 7)
-                            generated = generated + "Grind against ";
+                            generated += "Grind against ";
                         else
                         if(type == 8)
-                            generated = generated + "Caress ";
+                            generated += "Caress ";
                         else
                         if(type == 9)
                         {
                             if(w.tickle())
-                                generated = generated + "Tickle ";
+                                generated += "Tickle ";
                             else
-                                generated = generated + "Pummel ";
+                                generated += "Pummel ";
                         } else
                         if(type == 10)
-                            generated = generated + "Humiliate ";
+                            generated += "Humiliate ";
                         else
                         if(type == 11)
-                            generated = generated + "Inseminate ";
+                            generated += "Inseminate ";
                         else
                         if(type == 12)
-                            generated = generated + "Force Orgasm on ";
+                            generated += "Force Orgasm on ";
                         else
                         if(type == 13)
                         {
                             if(w.tickle())
-                                generated = generated + "Force Laughter from ";
+                                generated += "Force Laughter from ";
                             else
                             if(w.getCast()[target].getGender().equals("male"))
-                                generated = generated + "Torture ";
+                                generated += "Torture ";
                             else
-                                generated = generated + "Sodomize ";
+                                generated += "Sodomize ";
                         } else
                         if(type == 14)
-                            generated = generated + "Broadcast ";
+                            generated += "Broadcast ";
                     }
-                    generated = generated + targetedChosen + ".";
+                    generated += targetedChosen + ".";
                 }
                 w.writeCommentary(generated);
             }
@@ -5673,12 +5673,12 @@ public class Project extends JFrame
             {
                 String prompt = "Enter your comment here.  Leave blank to ";
                 if(w.getCurrentComment().length() > 0)
-                    prompt = prompt + "keep the comment you already wrote.";
+                    prompt += "keep the comment you already wrote.";
                 else
                 if(w.getCommentary().length > w.getCurrentAction())
-                    prompt = prompt + "keep the previous playthrough's comment.";
+                    prompt += "keep the previous playthrough's comment.";
                 else
-                    prompt = prompt + "generate a default comment describing your action.";
+                    prompt += "generate a default comment describing your action.";
                 String input = JOptionPane.showInputDialog(prompt);
                 if(input != null && input.length() > 0)
                 {
@@ -7635,42 +7635,42 @@ public class Project extends JFrame
                             types++;
                         if(types == 2)
                         {
-                            description = description + damages[0] + " and ";
+                            description += damages[0] + " and ";
                             if(damages[0].equals(damages[1]))
-                                description = description + damages[2];
+                                description += damages[2];
                             else
-                                description = description + damages[1];
+                                description += damages[1];
                         } else
                         if(types == 3)
                         {
-                            description = description + damages[0] + ", ";
+                            description += damages[0] + ", ";
                             if(damages[0].equals(damages[1]))
-                                description = description + damages[3] + ", and " + damages[2];
+                                description += damages[3] + ", and " + damages[2];
                             else
                             if(damages[0].equals(damages[2]))
-                                description = description + damages[1] + ", and " + damages[3];
+                                description += damages[1] + ", and " + damages[3];
                             else
                             if(damages[0].equals(damages[3]) || damages[1].equals(damages[3]))
-                                description = description + damages[1] + ", and " + damages[2];
+                                description += damages[1] + ", and " + damages[2];
                             else
-                                description = description + damages[2] + ", and " + damages[1];
+                                description += damages[2] + ", and " + damages[1];
                         } else
                         {
-                            description = description + damages[0] + ", " + damages[1] + ", " + damages[3] + ", and " + damages[2];
+                            description += damages[0] + ", " + damages[1] + ", " + damages[3] + ", and " + damages[2];
                         }
-                        description = description + " along with<br>all four traumas";
+                        description += " along with<br>all four traumas";
                     } else
                     if(w.getBodyStatus()[19])
-                        description = description + "HATE along with<br>FEAR, DISG, " + PAINname + ", and SHAM";
+                        description += "HATE along with<br>FEAR, DISG, " + PAINname + ", and SHAM";
                     else
                     if(w.getBodyStatus()[20])
-                        description = description + "PLEA along with<br>DISG, " + PAINname + ", SHAM, and FEAR";
+                        description += "PLEA along with<br>DISG, " + PAINname + ", SHAM, and FEAR";
                     else
                     if(w.getBodyStatus()[21])
-                        description = description + INJUname + " along with<br>" + PAINname + ", SHAM, FEAR, and DISG";
+                        description += INJUname + " along with<br>" + PAINname + ", SHAM, FEAR, and DISG";
                     else
                     if(w.getBodyStatus()[22])
-                        description = description + "EXPO along with<br>SHAM, FEAR, DISG, and " + PAINname;
+                        description += "EXPO along with<br>SHAM, FEAR, DISG, and " + PAINname;
                     else
                     if(w.getBodyStatus()[18])
                     {
@@ -7707,124 +7707,124 @@ public class Project extends JFrame
                             damages[2] = "HATE";
                         }
                         if(damages[0].equals(damages[2]))
-                            description = description + damages[0] + " and " + damages[1];
+                            description += damages[0] + " and " + damages[1];
                         else
                         if(damages[1].equals(damages[2]))
-                            description = description + damages[1] + " and " + damages[0];
+                            description += damages[1] + " and " + damages[0];
                         else
-                            description = description + damages[0] + ", " + damages[1] + ", and " + damages[2];
-                        description = description + " along with<br>all four traumas";
+                            description += damages[0] + ", " + damages[1] + ", and " + damages[2];
+                        description += " along with<br>all four traumas";
                     } else
                     if(w.getBodyStatus()[11])
-                        description = description + "HATE and PLEA along with<br>FEAR, DISG, " + PAINname + ", and SHAM";
+                        description += "HATE and PLEA along with<br>FEAR, DISG, " + PAINname + ", and SHAM";
                     else
                     if(w.getBodyStatus()[12])
-                        description = description + "PLEA and " + INJUname + " along with<br>DISG, " + PAINname + ", SHAM, and FEAR";
+                        description += "PLEA and " + INJUname + " along with<br>DISG, " + PAINname + ", SHAM, and FEAR";
                     else
                     if(w.getBodyStatus()[13])
-                        description = description + INJUname + " and EXPO along with<br>" + PAINname + ", SHAM, FEAR, and DISG";
+                        description += INJUname + " and EXPO along with<br>" + PAINname + ", SHAM, FEAR, and DISG";
                     else
                     if(w.getBodyStatus()[14])
-                        description = description + "EXPO and HATE along with<br>SHAM, FEAR, DISG, and " + PAINname;
+                        description += "EXPO and HATE along with<br>SHAM, FEAR, DISG, and " + PAINname;
                     else
                     if(w.getBodyStatus()[10])
                     {
                         Boolean firstFound = false;
                         if(w.getBodyStatus()[3])
                         {
-                            description = description + "HATE";
+                            description += "HATE";
                             firstFound = true;
                         }
                         if(w.getBodyStatus()[4])
                         {
                             if(firstFound)
-                                description = description + " and ";
-                            description = description + "PLEA";
+                                description += " and ";
+                            description += "PLEA";
                             firstFound = true;
                         }
                         if(w.getBodyStatus()[5])
                         {
                             if(firstFound)
-                                description = description + " and ";
-                            description = description + INJUname;
+                                description += " and ";
+                            description += INJUname;
                             firstFound = true;
                         }
                         if(w.getBodyStatus()[6])
                             description = " and EXPO";
-                        description = description + " along with<br>all four traumas";
+                        description += " along with<br>all four traumas";
                     } else
                     if(w.getBodyStatus()[3])
-                        description = description + "HATE along with<br>FEAR, DISG, " + PAINname + ", and SHAM";
+                        description += "HATE along with<br>FEAR, DISG, " + PAINname + ", and SHAM";
                     else
                     if(w.getBodyStatus()[4])
-                        description = description + "PLEA along with<br>DISG, " + PAINname + ", SHAM, and FEAR";
+                        description += "PLEA along with<br>DISG, " + PAINname + ", SHAM, and FEAR";
                     else
                     if(w.getBodyStatus()[5])
-                        description = description + INJUname + " along with<br>" + PAINname + ", SHAM, FEAR, and DISG";
+                        description += INJUname + " along with<br>" + PAINname + ", SHAM, FEAR, and DISG";
                     else
                     if(w.getBodyStatus()[6])
-                        description = description + "EXPO along with<br>SHAM, FEAR, DISG, and " + PAINname;
+                        description += "EXPO along with<br>SHAM, FEAR, DISG, and " + PAINname;
                     else
                         description = "<html><center>Surrounds the target";
-                    description = description + "<br>for ";
+                    description += "<br>for ";
                     if(w.getBodyStatus()[25])
-                        description = description + "eight";
+                        description += "eight";
                     else
                     if(w.getBodyStatus()[15])
-                        description = description + "six";
+                        description += "six";
                     else
                     if(w.getBodyStatus()[9])
-                        description = description + "five";
+                        description += "five";
                     else
                     if(w.getBodyStatus()[7])
-                        description = description + "four";
+                        description += "four";
                     else
                     if(w.getBodyStatus()[1])
-                        description = description + "three";
+                        description += "three";
                     else
-                        description = description + "two";
-                    description = description + " rounds";
+                        description += "two";
+                    description += " rounds";
                     if(w.getBodyStatus()[8])
                     {
-                        description = description + " (";
+                        description += " (";
                         if(w.getCapturesPossible() == 4)
-                            description = description + "four";
+                            description += "four";
                         else
                         if(w.getCapturesPossible() == 3)
-                            description = description + "three";
+                            description += "three";
                         else
                         if(w.getCapturesPossible() == 2)
-                            description = description + "two";
+                            description += "two";
                         else
                         if(w.getCapturesPossible() == 1)
-                            description = description + "one";
-                        description = description + " left)";
+                            description += "one";
+                        description += " left)";
                     }
                     if(w.getBodyStatus()[11])
-                        description = description + "<br>Above 10k HATE, causes tier-2 Morality Break";
+                        description += "<br>Above 10k HATE, causes tier-2 Morality Break";
                     else
                     if(w.getBodyStatus()[12])
-                        description = description + "<br>Above 10k PLEA, causes tier-2 Innocence Break";
+                        description += "<br>Above 10k PLEA, causes tier-2 Innocence Break";
                     else
                     if(w.getBodyStatus()[13])
-                        description = description + "<br>Above 10k " + INJUname + ", causes tier-2 Confidence Break";
+                        description += "<br>Above 10k " + INJUname + ", causes tier-2 Confidence Break";
                     else
                     if(w.getBodyStatus()[14])
-                        description = description + "<br>Above 10k EXPO, causes tier-2 Dignity Break";
+                        description += "<br>Above 10k EXPO, causes tier-2 Dignity Break";
                     if(w.getBodyStatus()[19])
-                        description = description + "<br>Above 1000% Impregnation effectiveness, causes Total Morality Break";
+                        description += "<br>Above 1000% Impregnation effectiveness, causes Total Morality Break";
                     else
                     if(w.getBodyStatus()[20])
-                        description = description + "<br>Above 1000% Hypnosis effectiveness, causes Total Innocence Break";
+                        description += "<br>Above 1000% Hypnosis effectiveness, causes Total Innocence Break";
                     else
                     if(w.getBodyStatus()[21])
-                        description = description + "<br>Above 1000% Drain effectiveness, causes Total Confidence Break";
+                        description += "<br>Above 1000% Drain effectiveness, causes Total Confidence Break";
                     else
                     if(w.getBodyStatus()[22])
-                        description = description + "<br>Above 1000% Parasitism effectiveness, causes Total Dignity Break";
+                        description += "<br>Above 1000% Parasitism effectiveness, causes Total Dignity Break";
                     if(w.usedForsaken != null)
                         description = "<html><center>Grab with " + w.usedForsaken.mainName + " for " + w.usedForsaken.compatibility(c) + " rounds<br>" + w.usedForsaken.describeCombatStyle(w, false);
-                    description = description + "</center></html>";
+                    description += "</center></html>";
                     Capture.setToolTipText(description);
                 }
                 Capture.getInputMap(2).put(KeyStroke.getKeyStroke(67, 0), "pressed");
@@ -10901,122 +10901,122 @@ public class Project extends JFrame
             if(i == 0)
             {
                 w.underlineAppend(t, "Residual Energy");
-                description = description + "Forsaken Sacrificed: " + w.achievementHeld(0)[1] + "\n";
-                description = description + "Level: " + w.achievementHeld(0)[0];
+                description += "Forsaken Sacrificed: " + w.achievementHeld(0)[1] + "\n";
+                description += "Level: " + w.achievementHeld(0)[0];
                 switch (w.achievementHeld(0)[0]) {
-                    case 0: description = description + " (Next: 1 sacrifice)\nBonus: N/A"; break;
-                    case 1: description = description + " (Next: 3 sacrifices)\nBonus: +1 Starting EE"; break;
-                    case 2: description = description + " (Next: 6 sacrifices)\nBonus: +2 Starting EE"; break;
-                    case 3: description = description + " (Next: 15 sacrifices)\nBonus: +3 Starting EE"; break;
-                    case 4: description = description + " (Next: 60 sacrifices)\nBonus: +4 Starting EE"; break;
-                    default: description = description + "\nBonus: +5 Starting EE";
+                    case 0: description += " (Next: 1 sacrifice)\nBonus: N/A"; break;
+                    case 1: description += " (Next: 3 sacrifices)\nBonus: +1 Starting EE"; break;
+                    case 2: description += " (Next: 6 sacrifices)\nBonus: +2 Starting EE"; break;
+                    case 3: description += " (Next: 15 sacrifices)\nBonus: +3 Starting EE"; break;
+                    case 4: description += " (Next: 60 sacrifices)\nBonus: +4 Starting EE"; break;
+                    default: description += "\nBonus: +5 Starting EE";
                 }
-                description = description + "\nThe supernaturally-enhanced bodies of former Chosen make for excellent breeding stock.  This role prevents them from fighting in battle, but it can give you a head start in establishing new bases of operations.  And they tend to start enjoying it before too long.";
+                description += "\nThe supernaturally-enhanced bodies of former Chosen make for excellent breeding stock.  This role prevents them from fighting in battle, but it can give you a head start in establishing new bases of operations.  And they tend to start enjoying it before too long.";
             } else
             if(i == 1)
             {
                 w.underlineAppend(t, "Impregnation Specialty");
-                description = description + "Chosen Impregnated: " + w.achievementHeld(i)[1] + "\n";
-                description = description + "Level: " + w.achievementHeld(i)[0];
+                description += "Chosen Impregnated: " + w.achievementHeld(i)[1] + "\n";
+                description += "Level: " + w.achievementHeld(i)[0];
                 switch (w.achievementHeld(i)[0]) {
-                    case 0: description = description + " (Next: 4 impregnated)\nBonus: N/A"; break;
-                    case 1: description = description + " (Next: 10 impregnated)\nBonus: -200% Impregnation Threshold"; break;
-                    case 2: description = description + " (Next: 25 impregnated)\nBonus: -400% Impregnation Threshold"; break;
-                    case 3: description = description + " (Next: 60 impregnated)\nBonus: -600% Impregnation Threshold"; break;
-                    case 4: description = description + " (Next: 160 impregnated)\nBonus: -700% Impregnation Threshold"; break;
-                    default: description = description + "\nBonus: -750% Impregnation Threshold";
+                    case 0: description += " (Next: 4 impregnated)\nBonus: N/A"; break;
+                    case 1: description += " (Next: 10 impregnated)\nBonus: -200% Impregnation Threshold"; break;
+                    case 2: description += " (Next: 25 impregnated)\nBonus: -400% Impregnation Threshold"; break;
+                    case 3: description += " (Next: 60 impregnated)\nBonus: -600% Impregnation Threshold"; break;
+                    case 4: description += " (Next: 160 impregnated)\nBonus: -700% Impregnation Threshold"; break;
+                    default: description += "\nBonus: -750% Impregnation Threshold";
                 }
-                description = description + "\nAs the Chosen hear rumors that you're able to impregnate even them, their lack of faith in their own protections will cause it to become even easier to do so.";
+                description += "\nAs the Chosen hear rumors that you're able to impregnate even them, their lack of faith in their own protections will cause it to become even easier to do so.";
             } else
             if(i == 2)
             {
                 w.underlineAppend(t, "Hypnosis Specialty");
-                description = description + "Chosen Hypnotized: " + w.achievementHeld(i)[1] + "\n";
-                description = description + "Level: " + w.achievementHeld(i)[0];
+                description += "Chosen Hypnotized: " + w.achievementHeld(i)[1] + "\n";
+                description += "Level: " + w.achievementHeld(i)[0];
                 switch (w.achievementHeld(i)[0]) {
-                    case 0: description = description + " (Next: 4 hypnotized)\nBonus: N/A"; break;
-                    case 1: description = description + " (Next: 10 hypnotized)\nBonus: -200% Hypnosis Threshold"; break;
-                    case 2: description = description + " (Next: 25 hypnotized)\nBonus: -400% Hypnosis Threshold"; break;
-                    case 3: description = description + " (Next: 60 hypnotized)\nBonus: -600% Hypnosis Threshold"; break;
-                    case 4: description = description + " (Next: 160 hypnotized)\nBonus: -700% Hypnosis Threshold"; break;
-                    default: description = description + "\nBonus: -750% Hypnosis Threshold";
+                    case 0: description += " (Next: 4 hypnotized)\nBonus: N/A"; break;
+                    case 1: description += " (Next: 10 hypnotized)\nBonus: -200% Hypnosis Threshold"; break;
+                    case 2: description += " (Next: 25 hypnotized)\nBonus: -400% Hypnosis Threshold"; break;
+                    case 3: description += " (Next: 60 hypnotized)\nBonus: -600% Hypnosis Threshold"; break;
+                    case 4: description += " (Next: 160 hypnotized)\nBonus: -700% Hypnosis Threshold"; break;
+                    default: description += "\nBonus: -750% Hypnosis Threshold";
                 }
-                description = description + "\nMuch of the difficulty in Demonic Hypnosis comes from finding exploitable weaknesses in the target's thought process.  But all human minds share some similarities, and the more you break, the more tricks you figure out.";
+                description += "\nMuch of the difficulty in Demonic Hypnosis comes from finding exploitable weaknesses in the target's thought process.  But all human minds share some similarities, and the more you break, the more tricks you figure out.";
             } else
             if(i == 3)
             {
                 w.underlineAppend(t, "Drain Specialty");
-                description = description + "Chosen Drained: " + w.achievementHeld(i)[1] + "\n";
-                description = description + "Level: " + w.achievementHeld(i)[0];
+                description += "Chosen Drained: " + w.achievementHeld(i)[1] + "\n";
+                description += "Level: " + w.achievementHeld(i)[0];
                 switch (w.achievementHeld(i)[0]) {
-                    case 0: description = description + " (Next: 4 drained)\nBonus: N/A"; break;
-                    case 1: description = description + " (Next: 10 drained)\nBonus: -200% Drain Threshold"; break;
-                    case 2: description = description + " (Next: 25 drained)\nBonus: -400% Drain Threshold"; break;
-                    case 3: description = description + " (Next: 60 drained)\nBonus: -600% Drain Threshold\n"; break;
-                    case 4: description = description + " (Next: 160 drained)\nBonus: -700% Drain Threshold"; break;
-                    default: description = description + "\nBonus: -750% Drain Threshold";
+                    case 0: description += " (Next: 4 drained)\nBonus: N/A"; break;
+                    case 1: description += " (Next: 10 drained)\nBonus: -200% Drain Threshold"; break;
+                    case 2: description += " (Next: 25 drained)\nBonus: -400% Drain Threshold"; break;
+                    case 3: description += " (Next: 60 drained)\nBonus: -600% Drain Threshold\n"; break;
+                    case 4: description += " (Next: 160 drained)\nBonus: -700% Drain Threshold"; break;
+                    default: description += "\nBonus: -750% Drain Threshold";
                 }
-                description = description + "\nThe Holy Energy which empowers the Chosen is inherently difficult for a Demon to absorb, but whenever you do successfully begin draining energy from one of the Chosen, her aura mingles with your own, and you find it easier to draw more of their energy into yourself.";
+                description += "\nThe Holy Energy which empowers the Chosen is inherently difficult for a Demon to absorb, but whenever you do successfully begin draining energy from one of the Chosen, her aura mingles with your own, and you find it easier to draw more of their energy into yourself.";
             } else
             if(i == 4)
             {
                 w.underlineAppend(t, "Parasitism Specialty");
-                description = description + "Chosen Parasitized: " + w.achievementHeld(i)[1] + "\n";
-                description = description + "Level: " + w.achievementHeld(i)[0];
+                description += "Chosen Parasitized: " + w.achievementHeld(i)[1] + "\n";
+                description += "Level: " + w.achievementHeld(i)[0];
                 switch (w.achievementHeld(i)[0]) {
-                    case 0: description = description + " (Next: 4 parasitized)\nBonus: N/A"; break;
-                    case 1: description = description + " (Next: 10 parasitized)\nBonus: -200% Parasitism Threshold"; break;
-                    case 2: description = description + " (Next: 25 parasitized)\nBonus: -400% Parasitism Threshold"; break;
-                    case 3: description = description + " (Next: 60 parasitized)\nBonus: -600% Parasitism Threshold"; break;
-                    case 4: description = description + " (Next: 160 parasitized)\nBonus: -700% Parasitism Threshold"; break;
-                    default: description = description + "\nBonus: -750% Parasitism Threshold";
+                    case 0: description += " (Next: 4 parasitized)\nBonus: N/A"; break;
+                    case 1: description += " (Next: 10 parasitized)\nBonus: -200% Parasitism Threshold"; break;
+                    case 2: description += " (Next: 25 parasitized)\nBonus: -400% Parasitism Threshold"; break;
+                    case 3: description += " (Next: 60 parasitized)\nBonus: -600% Parasitism Threshold"; break;
+                    case 4: description += " (Next: 160 parasitized)\nBonus: -700% Parasitism Threshold"; break;
+                    default: description += "\nBonus: -750% Parasitism Threshold";
                 }
-                description = description + "\nThe public loves to see the Chosen humiliated, and as it becomes more common for their transformations to become corrupted by you, everyone's anticipation for the next such corruption will do much of the work for you.";
+                description += "\nThe public loves to see the Chosen humiliated, and as it becomes more common for their transformations to become corrupted by you, everyone's anticipation for the next such corruption will do much of the work for you.";
             } else
             if(i == 5)
             {
                 w.underlineAppend(t, "Tempting");
-                description = description + "Chosen Tempted: " + w.achievementHeld(i)[1] + "\n";
-                description = description + "Level: " + w.achievementHeld(i)[0];
+                description += "Chosen Tempted: " + w.achievementHeld(i)[1] + "\n";
+                description += "Level: " + w.achievementHeld(i)[0];
                 switch (w.achievementHeld(i)[0]) {
-                    case 0: description = description + " (Next: 2 Tempted)\nBonus: N/A"; break;
-                    case 1: description = description + " (Next: 5 Tempted)\nBonus: Tempt requirement decreases 15% per use"; break;
-                    case 2: description = description + " (Next: 12 Tempted)\nBonus: Tempt requirement decreases 20% per use"; break;
-                    case 3: description = description + " (Next: 30 Tempted)\nBonus: Tempt requirement decreases 25% per use"; break;
-                    case 4: description = description + " (Next: 80 Tempted)\nBonus: Tempt requirement decreases 30% per use"; break;
-                    default: description = description + "\nBonus: Tempt requirement decreases 35% per use";
+                    case 0: description += " (Next: 2 Tempted)\nBonus: N/A"; break;
+                    case 1: description += " (Next: 5 Tempted)\nBonus: Tempt requirement decreases 15% per use"; break;
+                    case 2: description += " (Next: 12 Tempted)\nBonus: Tempt requirement decreases 20% per use"; break;
+                    case 3: description += " (Next: 30 Tempted)\nBonus: Tempt requirement decreases 25% per use"; break;
+                    case 4: description += " (Next: 80 Tempted)\nBonus: Tempt requirement decreases 30% per use"; break;
+                    default: description += "\nBonus: Tempt requirement decreases 35% per use";
                 }
-                description = description + "\nThe Chosen are carefully guided by their handlers and by society at large so that they don't even consider the possibility of turning to the side of the Demons.  But the more they see other Chosen being treated kindly by the Thralls, the more willing they'll be to think of you as a potential ally.";
+                description += "\nThe Chosen are carefully guided by their handlers and by society at large so that they don't even consider the possibility of turning to the side of the Demons.  But the more they see other Chosen being treated kindly by the Thralls, the more willing they'll be to think of you as a potential ally.";
             } else
             if(i == 6)
             {
                 w.underlineAppend(t, "Mindbreaker");
-                description = description + "Chosen with Aversion: " + w.achievementHeld(i)[1] + "\n";
-                description = description + "Level: " + w.achievementHeld(i)[0];
+                description += "Chosen with Aversion: " + w.achievementHeld(i)[1] + "\n";
+                description += "Level: " + w.achievementHeld(i)[0];
                 switch (w.achievementHeld(i)[0]) {
-                    case 0: description = description + " (Next: 2 with Aversion)\nBonus: N/A"; break;
-                    case 1: description = description + " (Next: 5 with Aversion)\nBonus: Aversion requirement decreases 2 rounds per use"; break;
-                    case 2: description = description + " (Next: 12 with Aversion)\nBonus: Aversion requirement decreases 3 rounds per use"; break;
-                    case 3: description = description + " (Next: 30 with Aversion)\nBonus: Aversion requirement decreases 4 rounds per use"; break;
-                    case 4: description = description + " (Next: 80 with Aversion)\nBonus: Aversion requirement decreases 5 rounds per use"; break;
-                    default: description = description + "\nBonus: Aversion requirement decreases 6 rounds per use";
+                    case 0: description += " (Next: 2 with Aversion)\nBonus: N/A"; break;
+                    case 1: description += " (Next: 5 with Aversion)\nBonus: Aversion requirement decreases 2 rounds per use"; break;
+                    case 2: description += " (Next: 12 with Aversion)\nBonus: Aversion requirement decreases 3 rounds per use"; break;
+                    case 3: description += " (Next: 30 with Aversion)\nBonus: Aversion requirement decreases 4 rounds per use"; break;
+                    case 4: description += " (Next: 80 with Aversion)\nBonus: Aversion requirement decreases 5 rounds per use"; break;
+                    default: description += "\nBonus: Aversion requirement decreases 6 rounds per use";
                 }
-                description = description + "\nThe Thralls you bring with you from city to city will gradually build their skills as they learn how to cause as much suffering as possible to their victims.  Every Chosen mindbroken is a useful example of what techniques work best.";
+                description += "\nThe Thralls you bring with you from city to city will gradually build their skills as they learn how to cause as much suffering as possible to their victims.  Every Chosen mindbroken is a useful example of what techniques work best.";
             } else
             if(i == 7)
             {
                 w.underlineAppend(t, "Heroine Hunter");
-                description = description + "Superior Chosen Broken: " + w.achievementHeld(i)[1] + "\n";
-                description = description + "Level: " + w.achievementHeld(i)[0];
+                description += "Superior Chosen Broken: " + w.achievementHeld(i)[1] + "\n";
+                description += "Level: " + w.achievementHeld(i)[0];
                 switch (w.achievementHeld(i)[0]) {
-                    case 0: description = description + " (Next: 1 Broken)\nBonus: N/A"; break;
-                    case 1: description = description + " (Next: 3 Broken)\nBonus: Slight increase to Resolve damage"; break;
-                    case 2: description = description + " (Next: 6 Broken)\nBonus: Notable increase to Resolve damage"; break;
-                    case 3: description = description + " (Next: 15 Broken)\nBonus: Moderate increase to Resolve damage"; break;
-                    case 4: description = description + " (Next: 40 Broken)\nBonus: Large increase to Resolve damage"; break;
-                    default: description = description + "\nBonus: Extreme increase to Resolve damage";
+                    case 0: description += " (Next: 1 Broken)\nBonus: N/A"; break;
+                    case 1: description += " (Next: 3 Broken)\nBonus: Slight increase to Resolve damage"; break;
+                    case 2: description += " (Next: 6 Broken)\nBonus: Notable increase to Resolve damage"; break;
+                    case 3: description += " (Next: 15 Broken)\nBonus: Moderate increase to Resolve damage"; break;
+                    case 4: description += " (Next: 40 Broken)\nBonus: Large increase to Resolve damage"; break;
+                    default: description += "\nBonus: Extreme increase to Resolve damage";
                 }
-                description = description + "\nThe public may not know the difference, but the Chosen themselves are keenly aware that some of their number are far more competent than others.  As you prove that you can convert even the best of them to the Demonic cause, they'll all lose hope of ever winning against you.";
+                description += "\nThe public may not know the difference, but the Chosen themselves are keenly aware that some of their number are far more competent than others.  As you prove that you can convert even the best of them to the Demonic cause, they'll all lose hope of ever winning against you.";
             }
             if(w.achievementHeld(i)[0] > w.achievementSeen[i])
             {
@@ -11258,12 +11258,12 @@ public class Project extends JFrame
             {
                 String fullSaveName = String.valueOf(saves.getNames()[0]) + " - Day " + saves.getSaves()[0].getDay() + " versus ";
                 if(saves.getSaves()[0].getCast()[1] == null)
-                    fullSaveName = fullSaveName + saves.getSaves()[0].getCast()[0].getMainName();
+                    fullSaveName += saves.getSaves()[0].getCast()[0].getMainName();
                 else
                 if(saves.getSaves()[0].getCast()[2] == null)
-                    fullSaveName = fullSaveName + saves.getSaves()[0].getCast()[0].getMainName() + " and " + saves.getSaves()[0].getCast()[1].getMainName();
+                    fullSaveName += saves.getSaves()[0].getCast()[0].getMainName() + " and " + saves.getSaves()[0].getCast()[1].getMainName();
                 else
-                    fullSaveName = fullSaveName + saves.getSaves()[0].getCast()[0].getMainName() + ", " + saves.getSaves()[0].getCast()[1].getMainName() + ", and " + saves.getSaves()[0].getCast()[2].getMainName();
+                    fullSaveName += saves.getSaves()[0].getCast()[0].getMainName() + ", " + saves.getSaves()[0].getCast()[1].getMainName() + ", and " + saves.getSaves()[0].getCast()[2].getMainName();
                 w.append(t, String.format("\n\n%s\n\nReally overwrite \"%s\"?", w.getSeparator(), fullSaveName));
                 p.removeAll();
                 JButton Confirm = new JButton("Confirm");
@@ -11319,9 +11319,9 @@ public class Project extends JFrame
                 String editedName = "";
                 for(int i = 0; i < newSaveName.length(); i++)
                     if(newSaveName.charAt(i) == '/' || newSaveName.charAt(i) == ':')
-                        editedName = editedName + "-";
+                        editedName += "-";
                     else
-                        editedName = editedName + newSaveName.charAt(i);
+                        editedName += newSaveName.charAt(i);
 
                 if(w.getHighScore() > 0L)
                     newWorld.setParScore(w.getHighScore());
@@ -11477,29 +11477,29 @@ public class Project extends JFrame
             {
                 String fullSaveName = String.valueOf(saves.getNames()[i]) + " - Day " + saves.getSaves()[i].getDay() + " versus ";
                 if(saves.getSaves()[i].getCast()[1] == null)
-                    fullSaveName = fullSaveName + saves.getSaves()[i].getCast()[0].getMainName();
+                    fullSaveName += saves.getSaves()[i].getCast()[0].getMainName();
                 else
                 if(saves.getSaves()[i].getCast()[2] == null)
-                    fullSaveName = fullSaveName + saves.getSaves()[i].getCast()[0].getMainName() + " and " + saves.getSaves()[i].getCast()[1].getMainName();
+                    fullSaveName += saves.getSaves()[i].getCast()[0].getMainName() + " and " + saves.getSaves()[i].getCast()[1].getMainName();
                 else
-                    fullSaveName = fullSaveName + saves.getSaves()[i].getCast()[0].getMainName() + ", " + saves.getSaves()[i].getCast()[1].getMainName() + ", and " + saves.getSaves()[i].getCast()[2].getMainName();
+                    fullSaveName += saves.getSaves()[i].getCast()[0].getMainName() + ", " + saves.getSaves()[i].getCast()[1].getMainName() + ", and " + saves.getSaves()[i].getCast()[2].getMainName();
                 if(saves.getSaves()[i].getHighScore() > 0L)
                 {
-                    fullSaveName = fullSaveName + " (HS " + saves.getSaves()[i].getCast()[0].condensedFormat(saves.getSaves()[i].getHighScore());
+                    fullSaveName += " (HS " + saves.getSaves()[i].getCast()[0].condensedFormat(saves.getSaves()[i].getHighScore());
                     if(saves.getSaves()[i].getParScore() > 0L)
-                        fullSaveName = fullSaveName + " | Par " + saves.getSaves()[i].getCast()[0].condensedFormat(saves.getSaves()[i].getParScore()) + ")";
+                        fullSaveName += " | Par " + saves.getSaves()[i].getCast()[0].condensedFormat(saves.getSaves()[i].getParScore()) + ")";
                     else
-                        fullSaveName = fullSaveName + ")";
+                        fullSaveName += ")";
                 } else
                 if(saves.getSaves()[i].getParScore() > 0L)
-                    fullSaveName = fullSaveName + " (Par " + saves.getSaves()[i].getCast()[0].condensedFormat(saves.getSaves()[i].getParScore()) + ")";
+                    fullSaveName += " (Par " + saves.getSaves()[i].getCast()[0].condensedFormat(saves.getSaves()[i].getParScore()) + ")";
                 String displayedName = "\n\nSlot " + String.valueOf(i + 1);
                 if(i == 0)
-                    displayedName = displayedName + " (most recent)";
+                    displayedName += " (most recent)";
                 else
                 if(i == saves.getSaves().length - 1)
-                    displayedName = displayedName + " (oldest)";
-                displayedName = displayedName + ", " + fullSaveName;
+                    displayedName += " (oldest)";
+                displayedName += ", " + fullSaveName;
                 if(saves.getSaves()[i].campaign)
                 {
                     if(saves.getSaves()[i].earlyCheat)
@@ -12308,7 +12308,7 @@ public class Project extends JFrame
                 else
                 if(w.usedForsaken != null)
                 {
-                    generated = generated + "(This playthrough used one of the Forsaken here, so it may not be possible to reliably follow it.)";
+                    generated += "(This playthrough used one of the Forsaken here, so it may not be possible to reliably follow it.)";
                 } else
                 {
                     int index = action - w.getTechs().length;
@@ -12324,36 +12324,36 @@ public class Project extends JFrame
                                     if(w.getBodyStatus()[15])
                                     {
                                         if(w.getBodyStatus()[25])
-                                            generated = generated + "eight";
+                                            generated += "eight";
                                         else
-                                            generated = generated + "six";
+                                            generated += "six";
                                     } else
                                     {
-                                        generated = generated + "five";
+                                        generated += "five";
                                     }
                                 } else
                                 {
-                                    generated = generated + "four";
+                                    generated += "four";
                                 }
                             } else
                             {
-                                generated = generated + "three";
+                                generated += "three";
                             }
                         } else
                         {
-                            generated = generated + "two";
+                            generated += "two";
                         }
-                        generated = generated + "-turn duration";
+                        generated += "-turn duration";
                         if(w.getBodyStatus()[17])
-                            generated = generated + " and three extra captures.  ";
+                            generated += " and three extra captures.  ";
                         else
                         if(w.getBodyStatus()[16])
-                            generated = generated + " and two extra captures.  ";
+                            generated += " and two extra captures.  ";
                         else
                         if(w.getBodyStatus()[8])
-                            generated = generated + " and an extra capture.  ";
+                            generated += " and an extra capture.  ";
                         else
-                            generated = generated + ".  ";
+                            generated += ".  ";
                         if(w.getBodyStatus()[26])
                         {
                             String suppressor = "";
@@ -12392,136 +12392,136 @@ public class Project extends JFrame
                             else
                             if(w.getBodyStatus()[6])
                                 suppressor = "Mania";
-                            generated = generated + "Equip it with the Suppressor " + suppressor + ", the Defiler " + defiler + ", and the Punisher " + punisher + ".  ";
+                            generated += "Equip it with the Suppressor " + suppressor + ", the Defiler " + defiler + ", and the Punisher " + punisher + ".  ";
                         } else
                         if(w.getBodyStatus()[19])
-                            generated = generated + "Equip it with the Punisher Impregnation.  ";
+                            generated += "Equip it with the Punisher Impregnation.  ";
                         else
                         if(w.getBodyStatus()[20])
-                            generated = generated + "Equip it with the Punisher Hypnosis.  ";
+                            generated += "Equip it with the Punisher Hypnosis.  ";
                         else
                         if(w.getBodyStatus()[21])
-                            generated = generated + "Equip it with the Punisher Drain.  ";
+                            generated += "Equip it with the Punisher Drain.  ";
                         else
                         if(w.getBodyStatus()[22])
-                            generated = generated + "Equip it with the Punisher Parasitism.  ";
+                            generated += "Equip it with the Punisher Parasitism.  ";
                         else
                         if(w.getBodyStatus()[18])
                         {
-                            generated = generated + "Equip it with the Defiler ";
+                            generated += "Equip it with the Defiler ";
                             if(w.getBodyStatus()[11])
-                                generated = generated + "Ambition";
+                                generated += "Ambition";
                             else
                             if(w.getBodyStatus()[12])
-                                generated = generated + "Dominance";
+                                generated += "Dominance";
                             else
                             if(w.getBodyStatus()[13])
-                                generated = generated + "Spite";
+                                generated += "Spite";
                             else
                             if(w.getBodyStatus()[14])
-                                generated = generated + "Vanity";
-                            generated = generated + " and the Suppressor ";
+                                generated += "Vanity";
+                            generated += " and the Suppressor ";
                             if(w.getBodyStatus()[3])
-                                generated = generated + "Hunger";
+                                generated += "Hunger";
                             else
                             if(w.getBodyStatus()[4])
-                                generated = generated + "Lust";
+                                generated += "Lust";
                             else
                             if(w.getBodyStatus()[5])
-                                generated = generated + "Anger";
+                                generated += "Anger";
                             else
                             if(w.getBodyStatus()[6])
-                                generated = generated + "Mania";
-                            generated = generated + ".  ";
+                                generated += "Mania";
+                            generated += ".  ";
                         } else
                         if(w.getBodyStatus()[11])
-                            generated = generated + "Equip it with the Defiler Ambition.  ";
+                            generated += "Equip it with the Defiler Ambition.  ";
                         else
                         if(w.getBodyStatus()[12])
-                            generated = generated + "Equip it with the Defiler Dominance.  ";
+                            generated += "Equip it with the Defiler Dominance.  ";
                         else
                         if(w.getBodyStatus()[13])
-                            generated = generated + "Equip it with the Defiler Spite.  ";
+                            generated += "Equip it with the Defiler Spite.  ";
                         else
                         if(w.getBodyStatus()[14])
-                            generated = generated + "Equip it with the Defiler Vanity.  ";
+                            generated += "Equip it with the Defiler Vanity.  ";
                         else
                         if(w.getBodyStatus()[10])
                         {
-                            generated = generated + "Equip it with the Suppressors ";
+                            generated += "Equip it with the Suppressors ";
                             Boolean first = false;
                             if(w.getBodyStatus()[3])
                             {
-                                generated = generated + "Hunger";
+                                generated += "Hunger";
                                 first = true;
                             }
                             if(w.getBodyStatus()[4])
                             {
                                 if(first)
-                                    generated = generated + " and ";
-                                generated = generated + "Lust";
+                                    generated += " and ";
+                                generated += "Lust";
                                 first = true;
                             }
                             if(w.getBodyStatus()[5])
                             {
                                 if(first)
-                                    generated = generated + " and ";
-                                generated = generated + "Anger";
+                                    generated += " and ";
+                                generated += "Anger";
                                 first = true;
                             }
                             if(w.getBodyStatus()[6])
-                                generated = generated + " and Mania";
-                            generated = generated + ".  ";
+                                generated += " and Mania";
+                            generated += ".  ";
                         } else
                         if(w.getBodyStatus()[3])
-                            generated = generated + "Equip it with the Suppressor Hunger.  ";
+                            generated += "Equip it with the Suppressor Hunger.  ";
                         else
                         if(w.getBodyStatus()[4])
-                            generated = generated + "Equip it with the Suppressor Lust.  ";
+                            generated += "Equip it with the Suppressor Lust.  ";
                         else
                         if(w.getBodyStatus()[5])
-                            generated = generated + "Equip it with the Suppressor Anger.  ";
+                            generated += "Equip it with the Suppressor Anger.  ";
                         else
                         if(w.getBodyStatus()[6])
-                            generated = generated + "Equip it with the Suppressor Mania.  ";
+                            generated += "Equip it with the Suppressor Mania.  ";
                         if(w.getBodyStatus()[2])
-                            generated = generated + "Turn off its ambush and send ";
+                            generated += "Turn off its ambush and send ";
                         else
                         if(w.getTechs()[9].isOwned())
-                            generated = generated + "Leave its ambush on and send ";
+                            generated += "Leave its ambush on and send ";
                         else
-                            generated = generated + "Send ";
+                            generated += "Send ";
                         if(w.getTechs()[31].isOwned() && !w.upgradedCommander())
                         {
                             Chosen target = w.getCast()[(index - 3) / 4];
                             index = (index - 3) % 4;
-                            generated = generated + "it after " + target.getMainName() + ".  Have the Thralls start by using ";
+                            generated += "it after " + target.getMainName() + ".  Have the Thralls start by using ";
                             if(index == 0)
-                                generated = generated + "Grind.";
+                                generated += "Grind.";
                             else
                             if(index == 1)
-                                generated = generated + "Caress.";
+                                generated += "Caress.";
                             else
                             if(index == 2)
                             {
                                 if(w.tickle())
-                                    generated = generated + "Tickle.";
+                                    generated += "Tickle.";
                                 else
-                                    generated = generated + "Pummel.";
+                                    generated += "Pummel.";
                             } else
                             if(index == 3)
-                                generated = generated + "Humiliate.";
+                                generated += "Humiliate.";
                         } else
                         {
-                            generated = generated + "it after " + w.getCast()[index].getMainName() + ".";
+                            generated += "it after " + w.getCast()[index].getMainName() + ".";
                         }
                     } else
                     {
                         generated = "Target " + w.getCast()[index].getMainName();
                         if(w.getTechs()[3].isOwned())
-                            generated = generated + " without bringing along a Commander.";
+                            generated += " without bringing along a Commander.";
                         else
-                            generated = generated + ".";
+                            generated += ".";
                     }
                 }
                 w.writeCommentary(generated);

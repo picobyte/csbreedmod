@@ -57,7 +57,7 @@ public class BreedmodChosenGen {
 
 		//if the parents are superior, give a better roll
 		if (motherIsSuperior == 1){
-			result = result + 7;
+			result += 7;
 		}
 
 		if (result > localMax) {

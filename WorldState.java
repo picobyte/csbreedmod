@@ -5815,7 +5815,7 @@ public class WorldState
                     c.printEscape(t, w, thisAttack);
                 }
             }
-            c.defenseLevel = c.defenseLevel + 2;
+            c.defenseLevel += 2;
             c.captureProgression = 0;
         } else
         {
@@ -8480,12 +8480,12 @@ public class WorldState
         if(c.usingSlaughter)
         {
             c.usingSlaughter = false;
-            c.nextAdaptation = c.nextAdaptation / 10L;
+            c.nextAdaptation /= 10L;
         }
         if(c.usingDetonate)
         {
             c.usingDetonate = false;
-            c.nextAdaptation = c.nextAdaptation / 10L;
+            c.nextAdaptation /= 10L;
         }
     }
 
@@ -16153,12 +16153,12 @@ public class WorldState
             if(c.usingFantasize)
             {
                 c.usingFantasize = false;
-                c.nextAdaptation = c.nextAdaptation / 10L;
+                c.nextAdaptation /= 10L;
             }
             if(c.usingStrip)
             {
                 c.usingStrip = false;
-                c.nextAdaptation = c.nextAdaptation / 10L;
+                c.nextAdaptation /= 10L;
             }
             if(c.innocence > 66)
             {
@@ -16424,7 +16424,7 @@ public class WorldState
                 else
                     w.append(t, String.format("%s mouth, ass, and pussy at once.", c.hisHer()));
             }
-            c.dissociationReq = c.dissociationReq - (1 + achievementHeld(6)[0]);
+            c.dissociationReq -= (1 + achievementHeld(6)[0]);
             if(c.dissociationReq < 1)
                 c.dissociationReq = 1;
             c.dissociationOpening = true;
@@ -18319,10 +18319,10 @@ public class WorldState
             {
                 String summary = "(x";
                 if(w.getRelationship(c.number, high.getNumber()) == -4)
-                    summary = summary + "2";
+                    summary += "2";
                 else
-                    summary = summary + "1." + String.valueOf(6 - w.getRelationship(c.number, high.getNumber()));
-                summary = summary + " damage due to relationship with " + high.getMainName() + ")\n\n";
+                    summary += "1." + String.valueOf(6 - w.getRelationship(c.number, high.getNumber()));
+                summary += " damage due to relationship with " + high.getMainName() + ")\n\n";
                 totalDamage = c.multiplyArray(totalDamage, (16 - w.getRelationship(c.number, high.getNumber())) * 10);
                 firstRelation = summary;
             }
@@ -18330,10 +18330,10 @@ public class WorldState
             {
                 String summary = "(x";
                 if(w.getRelationship(c.number, mid.getNumber()) == -4)
-                    summary = summary + "2";
+                    summary += "2";
                 else
-                    summary = summary + "1." + String.valueOf(6 - w.getRelationship(c.number, mid.getNumber()));
-                summary = summary + " damage due to relationship with " + mid.getMainName() + ")\n\n";
+                    summary += "1." + String.valueOf(6 - w.getRelationship(c.number, mid.getNumber()));
+                summary += " damage due to relationship with " + mid.getMainName() + ")\n\n";
                 totalDamage = c.multiplyArray(totalDamage, (16 - w.getRelationship(c.number, mid.getNumber())) * 10);
                 if(c != high)
                     secondRelation = summary;
@@ -18344,10 +18344,10 @@ public class WorldState
             {
                 String summary = "(x";
                 if(w.getRelationship(c.number, low.getNumber()) == -4)
-                    summary = summary + "2";
+                    summary += "2";
                 else
-                    summary = summary + "1." + String.valueOf(6 - w.getRelationship(c.number, low.getNumber()));
-                summary = summary + " damage due to relationship with " + low.getMainName() + ")\n\n";
+                    summary += "1." + String.valueOf(6 - w.getRelationship(c.number, low.getNumber()));
+                summary += " damage due to relationship with " + low.getMainName() + ")\n\n";
                 totalDamage = c.multiplyArray(totalDamage, (16 - w.getRelationship(c.number, low.getNumber())) * 10);
                 secondRelation = summary;
             }
@@ -21079,12 +21079,12 @@ public class WorldState
             {
                 int test = (int)(Math.random() * (double)total);
                 if(test < maleThreshold)
-                    genderBalance[1] = genderBalance[1] + 1;
+                    genderBalance[1] += 1;
                 else
                 if(test < futaThreshold)
-                    genderBalance[2] = genderBalance[2] + 1;
+                    genderBalance[2] += 1;
                 else
-                    genderBalance[3] = genderBalance[3] + 1;
+                    genderBalance[3] += 1;
             }
 
         }
@@ -21093,14 +21093,14 @@ public class WorldState
 
     public void increaseGender(int index)
     {
-        genderBalance[index] = genderBalance[index] + 1;
+        genderBalance[index] += 1;
         if(genderBalance[1] + genderBalance[2] + genderBalance[3] == 3 || genderBalance[0] == 1)
             setGenders(genderBalance);
     }
 
     public void decreaseGender(int index)
     {
-        genderBalance[index] = genderBalance[index] - 1;
+        genderBalance[index] -= 1;
         if(genderBalance[1] + genderBalance[2] + genderBalance[3] == 3 || genderBalance[0] == 1)
             setGenders(genderBalance);
     }
@@ -21133,16 +21133,16 @@ public class WorldState
                 if(test < maleIndex)
                 {
                     genders[i] = "female";
-                    dupeArray[1] = dupeArray[1] - 1;
+                    dupeArray[1] -= 1;
                 } else
                 if(test < futaIndex)
                 {
                     genders[i] = "male";
-                    dupeArray[2] = dupeArray[2] - 1;
+                    dupeArray[2] -= 1;
                 } else
                 {
                     genders[i] = "futanari";
-                    dupeArray[3] = dupeArray[3] - 1;
+                    dupeArray[3] -= 1;
                 }
             }
 
@@ -26040,10 +26040,10 @@ public class WorldState
             for(int charCount = result.length(); charCount < 17;)
             {
                 charCount++;
-                result = result + " ";
+                result += " ";
             }
 
-            result = result + "[";
+            result += "[";
             int base = 20;
             int possible = 0;
             for(int i = 0; i < 3; i++)
@@ -26052,17 +26052,17 @@ public class WorldState
 
             for(int i = 1; i < 21; i++)
                 if(evacuationProgress * 20 >= evacuationComplete * i)
-                    result = result + "#";
+                    result += "#";
                 else
                 if((evacuationProgress + base) * 20 >= evacuationComplete * i)
-                    result = result + "=";
+                    result += "=";
                 else
                 if((evacuationProgress + base + possible) * 20 >= evacuationComplete * i)
-                    result = result + "-";
+                    result += "-";
                 else
-                    result = result + " ";
+                    result += " ";
 
-            result = result + "]";
+            result += "]";
         }
         return result;
     }
@@ -26076,10 +26076,10 @@ public class WorldState
             for(int charCount = result.length(); charCount < 14;)
             {
                 charCount++;
-                result = result + " ";
+                result += " ";
             }
 
-            result = result + "[";
+            result += "[";
             int base = 0;
             int possible = 0;
             for(int i = 0; i < 3; i++)
@@ -26100,17 +26100,17 @@ public class WorldState
 
             for(int i = 1; i < 21; i++)
                 if(exterminationProgress * 20 >= exterminationComplete * i)
-                    result = result + "#";
+                    result += "#";
                 else
                 if((exterminationProgress + base) * 20 >= exterminationComplete * i)
-                    result = result + "=";
+                    result += "=";
                 else
                 if((exterminationProgress + base + possible) * 20 >= exterminationComplete * i)
-                    result = result + "-";
+                    result += "-";
                 else
-                    result = result + " ";
+                    result += " ";
 
-            result = result + "]";
+            result += "]";
         }
         return result;
     }
@@ -28355,9 +28355,9 @@ public class WorldState
                         String editedName = "";
                         for(int i = 0; i < newFileName.length(); i++)
                             if(newFileName.charAt(i) == '/' || newFileName.charAt(i) == ':')
-                                editedName = editedName + "-";
+                                editedName += "-";
                             else
-                                editedName = editedName + newFileName.charAt(i);
+                                editedName += newFileName.charAt(i);
 
                         wobj.exportFile(w, editedName);
                         w.append(t, String.format("\n\n%s\n\nCustomized team saved to '%s.par'.", separator, editedName));
@@ -28630,10 +28630,10 @@ public class WorldState
         String result = "";
         result = customIncantations[i];
         if(!customTitles[i].equals("none"))
-            result = result + "  " + customTitles[i];
+            result += "  " + customTitles[i];
         else
-            result = result + " ";
-        result = result + " " + customAliases[i] + ", transform!";
+            result += " ";
+        result += " " + customAliases[i] + ", transform!";
         append(t, "\n\n" + separator + "\n\n" + customNames[i * 2] + "'s civilian clothes will disintegrate when " + heShe + " says '" + result + "'  In their place, garments and equipment woven of psychic energy representing " + hisHer + " true nature will materialize.  Click 'Change' to give " + himHer + " something different, or click the button for the current item to keep it.\n\nFirst off, what does " + heShe + " wear to cover " + hisHer + " chest?");
         String current = baseAesthetics[0];
         if(current.equals("strips"))
@@ -29540,7 +29540,7 @@ public class WorldState
         ai[0] = 200;
         c.damage(t, w, ai);
         resolveLost *= c.getFEARLevel();
-        c.resolve = c.resolve - resolveLost;
+        c.resolve -= resolveLost;
         if(c.resolve <= 0)
         {
             c.defeatType = 1;
@@ -29711,7 +29711,7 @@ public class WorldState
             }
         }
         c.say(t, "\"");
-        c.finalThreatened = c.finalThreatened + 1;
+        c.finalThreatened += 1;
     }
 
     public void finalSlime(JTextPane t, WorldState w, Chosen c)
@@ -29735,7 +29735,7 @@ public class WorldState
         ai[1] = 200;
         c.damage(t, w, ai);
         int resolveLost = slimeResolve() * c.getDISGLevel();
-        c.resolve = c.resolve - resolveLost;
+        c.resolve -= resolveLost;
         if(c.resolve <= 0)
         {
             c.defeatType = 2;
@@ -29899,7 +29899,7 @@ public class WorldState
             }
         }
         c.say(t, "\"");
-        c.finalSlimed = c.finalSlimed + 1;
+        c.finalSlimed += 1;
     }
 
     public void finalAttack(JTextPane t, WorldState w, Chosen c)
@@ -29974,7 +29974,7 @@ public class WorldState
         ai[2] = 200;
         c.damage(t, w, ai);
         resolveLost *= c.getPAINLevel();
-        c.resolve = c.resolve - resolveLost;
+        c.resolve -= resolveLost;
         if(c.resolve <= 0)
         {
             w.append(t, String.format("-%s%% Resolve\n\n", resolveLost));
@@ -30435,7 +30435,7 @@ public class WorldState
             }
         }
         c.say(t, "\"");
-        c.finalAttacked = c.finalAttacked + 1;
+        c.finalAttacked += 1;
     }
 
     public void finalTaunt(JTextPane t, WorldState w, Chosen c)
@@ -30459,7 +30459,7 @@ public class WorldState
         ai[3] = 200;
         c.damage(t, w, ai);
         int resolveLost = tauntResolve() * c.getSHAMLevel();
-        c.resolve = c.resolve - resolveLost;
+        c.resolve -= resolveLost;
         if(c.resolve <= 0)
         {
             c.defeatType = 4;
@@ -30674,7 +30674,7 @@ public class WorldState
             }
         }
         c.say(t, "\"");
-        c.finalTaunted = c.finalTaunted + 1;
+        c.finalTaunted += 1;
     }
 
     public void finalTempt(JTextPane t, Chosen c)

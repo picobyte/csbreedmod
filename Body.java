@@ -30,7 +30,7 @@ public class Body
                 for(long magnitude = currentFEAR; magnitude >= 100L;)
                 {
                     magnitude /= 10L;
-                    incoming[i] = incoming[i] * 3L;
+                    incoming[i] *= 3L;
                     if(incoming[i] > 0xd6bf94d5e5L)
                         overflow = true;
                 }
@@ -38,7 +38,7 @@ public class Body
                 for(long magnitude = currentPAIN; magnitude >= 100L;)
                 {
                     magnitude /= 10L;
-                    incoming[i] = incoming[i] * 2L;
+                    incoming[i] *= 2L;
                     if(incoming[i] > 0xd6bf94d5e5L)
                         overflow = true;
                 }
@@ -47,7 +47,7 @@ public class Body
                 for(long magnitude = currentINJU; magnitude >= 1000L;)
                 {
                     magnitude /= 10L;
-                    incoming[i] = incoming[i] / 4L;
+                    incoming[i] /= 4L;
                 }
 
             } else
@@ -56,7 +56,7 @@ public class Body
                 for(long magnitude = currentDISG; magnitude >= 100L;)
                 {
                     magnitude /= 10L;
-                    incoming[i] = incoming[i] * 5L;
+                    incoming[i] *= 5L;
                     if(incoming[i] > 0xd6bf94d5e5L)
                         overflow = true;
                 }
@@ -64,7 +64,7 @@ public class Body
                 for(long magnitude = currentHATE; magnitude >= 100L;)
                 {
                     magnitude /= 10L;
-                    incoming[i] = incoming[i] * 2L;
+                    incoming[i] *= 2L;
                     if(incoming[i] > 0xd6bf94d5e5L)
                         overflow = true;
                 }
@@ -76,7 +76,7 @@ public class Body
                 for(long magnitude = currentPAIN; magnitude >= 100L;)
                 {
                     magnitude /= 10L;
-                    incoming[i] = incoming[i] * 4L;
+                    incoming[i] *= 4L;
                     if(incoming[i] > 0xd6bf94d5e5L)
                         overflow = true;
                 }
@@ -84,7 +84,7 @@ public class Body
                 for(long magnitude = currentINJU; magnitude >= 1000L;)
                 {
                     magnitude /= 10L;
-                    incoming[i] = incoming[i] / 2L;
+                    incoming[i] /= 2L;
                 }
 
             } else
@@ -93,7 +93,7 @@ public class Body
                 for(long magnitude = currentSHAM; magnitude >= 100L;)
                 {
                     magnitude /= 10L;
-                    incoming[i] = incoming[i] * 3L;
+                    incoming[i] *= 3L;
                     if(incoming[i] > 0xd6bf94d5e5L)
                         overflow = true;
                 }
@@ -110,7 +110,7 @@ public class Body
                 for(long magnitude = currentINJU; magnitude >= 1000L;)
                 {
                     magnitude /= 10L;
-                    incoming[i] = incoming[i] / 2L;
+                    incoming[i] /= 2L;
                 }
 
             } else
@@ -120,7 +120,7 @@ public class Body
                 for(magnitude = currentHATE; magnitude >= 100L;)
                 {
                     magnitude /= 10L;
-                    incoming[i] = incoming[i] * 5L;
+                    incoming[i] *= 5L;
                     if(incoming[i] > 0xd6bf94d5e5L)
                         overflow = true;
                 }
@@ -152,7 +152,7 @@ public class Body
                 for(magnitude = currentINJU; magnitude >= 1000L;)
                 {
                     magnitude /= 10L;
-                    incoming[i] = incoming[i] * 2L;
+                    incoming[i] *= 2L;
                     if(incoming[i] > 0xd6bf94d5e5L)
                         overflow = true;
                 }
@@ -164,7 +164,7 @@ public class Body
                 for(magnitude = currentINJU; magnitude >= 1000L;)
                 {
                     magnitude /= 10L;
-                    incoming[i] = incoming[i] / 3L;
+                    incoming[i] /= 3L;
                 }
 
             } else
@@ -173,7 +173,7 @@ public class Body
                 for(long magnitude = currentPLEA; magnitude >= 100L;)
                 {
                     magnitude /= 10L;
-                    incoming[i] = incoming[i] * 3L;
+                    incoming[i] *= 3L;
                     if(incoming[i] > 0xd6bf94d5e5L)
                         overflow = true;
                 }
@@ -203,7 +203,7 @@ public class Body
                 for(long magnitude = currentINJU; magnitude >= 1000L;)
                 {
                     magnitude /= 10L;
-                    incoming[i] = incoming[i] / 4L;
+                    incoming[i] /= 4L;
                 }
 
             } else
@@ -212,7 +212,7 @@ public class Body
                 for(long magnitude = currentINJU; magnitude >= 100L;)
                 {
                     magnitude /= 10L;
-                    incoming[i] = incoming[i] * 5L;
+                    incoming[i] *= 5L;
                     if(incoming[i] > 0xd6bf94d5e5L)
                         overflow = true;
                 }
@@ -271,7 +271,7 @@ public class Body
                 for(long magnitude = currentEXPO; magnitude >= 100L;)
                 {
                     magnitude /= 10L;
-                    incoming[i] = incoming[i] * 10L;
+                    incoming[i] *= 10L;
                     if(incoming[i] > 0xd6bf94d5e5L)
                         overflow = true;
                 }
@@ -872,7 +872,7 @@ public class Body
                         w.targetBody.currentPLEA = (w.targetBody.getDeviancy() * (100 - w.targetBody.getDignity())) / 50;
                         if(!w.targetBody.hasBeenBroadcasted())
                         {
-                            w.targetBody.currentFEAR = w.targetBody.currentFEAR * 3L;
+                            w.targetBody.currentFEAR *= 3L;
                             w.append(t, String.format("%s sees filming phones in the crowd, and %s knows that what happens here could change how people see %s forever.", w.targetBody.HeShe(), w.targetBody.heShe(), w.targetBody.himHer()));
                         } else
                         switch (w.targetBody.getDeviancy() / 33) {
@@ -1451,7 +1451,7 @@ public class Body
             damageTaken = inProgress[i].damageContribution(w, this, damageTaken);
 
         if(w.sceneLocation == Activity.Location.STAGE)
-            damageTaken[3] = damageTaken[3] * 3L;
+            damageTaken[3] *= 3L;
         long actualDamage[] = InflictDamage(damageTaken);
         for(int i = 0; i < 8; i++)
         {
