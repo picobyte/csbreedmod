@@ -3517,13 +3517,15 @@ public class Forsaken
                         case 16: w.grayAppend(t, "Requires Genius"); break;
                         case 17: w.grayAppend(t, "Requires Spite");
                         default:
-                            if(types > 0)
+                            if(types > 0) {
                                 w.grayAppend(t, "Must be first training of the session");
-                            switch (trainingType) {
-                                case 18: w.grayAppend(t, "Requires Impregnation"); break;
-                                case 19: w.grayAppend(t, "Requires Hypnosis"); break;
-                                case 20: w.grayAppend(t, "Requires Drain"); break;
-                                case 21: w.grayAppend(t, "Requires Parasitism");
+                            } else {
+                                switch (trainingType) {
+                                    case 18: w.grayAppend(t, "Requires Impregnation"); break;
+                                    case 19: w.grayAppend(t, "Requires Hypnosis"); break;
+                                    case 20: w.grayAppend(t, "Requires Drain"); break;
+                                    case 21: w.grayAppend(t, "Requires Parasitism");
+                                }
                             }
                     }
                 }
