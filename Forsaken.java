@@ -457,58 +457,34 @@ public class Forsaken
         innocence = c.innocence;
         confidence = c.confidence;
         dignity = c.dignity;
-        if(c.vTaker == 0)
-            takers[0] = Taker.THRALLS;
-        else
-        if(c.vTaker == 1)
-            takers[0] = Taker.COMMANDER;
-        else
-        if(c.vTaker == 2)
-            takers[0] = Taker.SELF;
-        else
-        if(c.vTaker < 6)
-            takers[0] = Taker.TOGETHER;
-        else
-            takers[0] = Taker.CHOSEN;
-        if(c.cTaker == 0)
-            takers[1] = Taker.THRALLS;
-        else
-        if(c.cTaker == 1)
-            takers[1] = Taker.COMMANDER;
-        else
-        if(c.cTaker == 2)
-            takers[1] = Taker.SELF;
-        else
-        if(c.cTaker < 6)
-            takers[1] = Taker.TOGETHER;
-        else
-            takers[1] = Taker.CHOSEN;
-        if(c.aTaker == 0)
-            takers[2] = Taker.THRALLS;
-        else
-        if(c.aTaker == 1)
-            takers[2] = Taker.COMMANDER;
-        else
-        if(c.aTaker == 2)
-            takers[2] = Taker.SELF;
-        else
-        if(c.aTaker < 6)
-            takers[2] = Taker.TOGETHER;
-        else
-            takers[2] = Taker.CHOSEN;
-        if(c.mTaker == 0)
-            takers[3] = Taker.THRALLS;
-        else
-        if(c.mTaker == 1)
-            takers[3] = Taker.COMMANDER;
-        else
-        if(c.mTaker == 2)
-            takers[3] = Taker.SELF;
-        else
-        if(c.mTaker < 6)
-            takers[3] = Taker.TOGETHER;
-        else
-            takers[3] = Taker.CHOSEN;
+        switch (c.vTaker) {
+            case 0: takers[0] = Taker.THRALLS; break;
+            case 1: takers[0] = Taker.COMMANDER; break;
+            case 2: takers[0] = Taker.SELF; break;
+            case 6: takers[0] = Taker.CHOSEN;
+            idefault: takers[0] = Taker.TOGETHER; break;
+        }
+        switch (c.cTaker) {
+            case 0: takers[1] = Taker.THRALLS; break;
+            case 1: takers[1] = Taker.COMMANDER; break;
+            case 2: takers[1] = Taker.SELF; break;
+            case 6: takers[1] = Taker.CHOSEN;
+            idefault: takers[1] = Taker.TOGETHER; break;
+        }
+        switch (c.aTaker) {
+            case 0: takers[2] = Taker.THRALLS; break;
+            case 1: takers[2] = Taker.COMMANDER; break;
+            case 2: takers[2] = Taker.SELF; break;
+            case 6: takers[2] = Taker.CHOSEN;
+            idefault: takers[2] = Taker.TOGETHER; break;
+        }
+        switch (c.mTaker) {
+            case 0: takers[3] = Taker.THRALLS; break;
+            case 1: takers[3] = Taker.COMMANDER; break;
+            case 2: takers[3] = Taker.SELF; break;
+            case 6: takers[3] = Taker.CHOSEN;
+            idefault: takers[3] = Taker.TOGETHER; break;
+        }
         stamina = 1000;
         motivation = 1000;
         if(defeatType == 5)
@@ -3438,16 +3414,12 @@ public class Forsaken
                                 w.append(t, String.format("+%s%% ", String.valueOf(threatenedIntensity[j] - currentIntensity[j])));
                             else
                                 w.append(t, String.format("%s%% ", String.valueOf(threatenedIntensity[j])));
-                            if(j == 0)
-                                w.append(t, "Hostility");
-                            else
-                            if(j == 1)
-                                w.append(t, "Deviancy");
-                            else
-                            if(j == 2)
-                                w.append(t, "Obedience");
-                            else
-                                w.append(t, "Disgrace");
+                            switch (j) {
+                                case 0: w.append(t, "Hostility"); break;
+                                case 1: w.append(t, "Deviancy"); break;
+                                case 2: w.append(t, "Obedience"); break;
+                                default: w.append(t, "Disgrace");
+                            }
                             if(!firstFound && trainingType < 18)
                             {
                                 w.append(t, ", ");
@@ -3520,71 +3492,40 @@ public class Forsaken
                         if(trainingType == 18 && (defilerType != 1 || defeatType == 6) || trainingType == 19 && (defilerType != 2 || defeatType == 5) || trainingType == 20 && (defilerType != 3 || defeatType == 6) || trainingType == 21 && (defilerType != 4 || defeatType == 5))
                             w.append(t, ", Replace Trait");
                         if(w.active && !w.loopComplete)
-                            if(trainingType == 18)
-                                w.append(t, ", Bonus Chosen ANGST");
-                            else
-                            if(trainingType == 19)
-                                w.append(t, ", Gain Obsession");
-                            else
-                            if(trainingType == 20)
-                                w.append(t, ", Bonus Evil Energy");
-                            else
-                            if(trainingType == 21)
-                                w.append(t, ", Bonus Stamina and Motivation for other Forsaken");
+                            switch (trainingType) {
+                                case 18: w.append(t, ", Bonus Chosen ANGST"); break;
+                                case 19: w.append(t, ", Gain Obsession"); break;
+                                case 20: w.append(t, ", Bonus Evil Energy"); break;
+                                default:
+                                    w.append(t, ", Bonus Stamina and Motivation for other Forsaken");
+                            }
                     }
                 } else
                 {
                     w.grayAppend(t, "\n" + trainingName + "\n  ");
-                    if(trainingType == 6)
-                        w.grayAppend(t, "Requires either Hunger or Lust");
-                    else
-                    if(trainingType == 7)
-                        w.grayAppend(t, "Requires either Hunger or Anger");
-                    else
-                    if(trainingType == 8)
-                        w.grayAppend(t, "Requires either Hunger or Mania");
-                    else
-                    if(trainingType == 9)
-                        w.grayAppend(t, "Requires either Lust or Anger");
-                    else
-                    if(trainingType == 10)
-                        w.grayAppend(t, "Requires either Lust or Mania");
-                    else
-                    if(trainingType == 11)
-                        w.grayAppend(t, "Requires either Anger or Mania");
-                    else
-                    if(trainingType == 12)
-                        w.grayAppend(t, "Requires Ambition");
-                    else
-                    if(trainingType == 13)
-                        w.grayAppend(t, "Requires Determination");
-                    else
-                    if(trainingType == 14)
-                        w.grayAppend(t, "Requires Vanity");
-                    else
-                    if(trainingType == 15)
-                        w.grayAppend(t, "Requires Dominance");
-                    else
-                    if(trainingType == 16)
-                        w.grayAppend(t, "Requires Genius");
-                    else
-                    if(trainingType == 17)
-                        w.grayAppend(t, "Requires Spite");
-                    else
-                    if(types > 0)
-                        w.grayAppend(t, "Must be first training of the session");
-                    else
-                    if(trainingType == 18)
-                        w.grayAppend(t, "Requires Impregnation");
-                    else
-                    if(trainingType == 19)
-                        w.grayAppend(t, "Requires Hypnosis");
-                    else
-                    if(trainingType == 20)
-                        w.grayAppend(t, "Requires Drain");
-                    else
-                    if(trainingType == 21)
-                        w.grayAppend(t, "Requires Parasitism");
+                    switch (trainingType) {
+                        case 6: w.grayAppend(t, "Requires either Hunger or Lust"); break;
+                        case 7: w.grayAppend(t, "Requires either Hunger or Anger"); break;
+                        case 8: w.grayAppend(t, "Requires either Hunger or Mania"); break;
+                        case 9: w.grayAppend(t, "Requires either Lust or Anger"); break;
+                        case 10: w.grayAppend(t, "Requires either Lust or Mania"); break;
+                        case 11: w.grayAppend(t, "Requires either Anger or Mania"); break;
+                        case 12: w.grayAppend(t, "Requires Ambition"); break;
+                        case 13: w.grayAppend(t, "Requires Determination"); break;
+                        case 14: w.grayAppend(t, "Requires Vanity"); break;
+                        case 15: w.grayAppend(t, "Requires Dominance"); break;
+                        case 16: w.grayAppend(t, "Requires Genius"); break;
+                        case 17: w.grayAppend(t, "Requires Spite");
+                        default:
+                            if(types > 0)
+                                w.grayAppend(t, "Must be first training of the session");
+                            switch (trainingType) {
+                                case 18: w.grayAppend(t, "Requires Impregnation"); break;
+                                case 19: w.grayAppend(t, "Requires Hypnosis"); break;
+                                case 20: w.grayAppend(t, "Requires Drain"); break;
+                                case 21: w.grayAppend(t, "Requires Parasitism");
+                            }
+                    }
                 }
                 JButton Action = new JButton(trainingName);
                 Action.addActionListener(new ActionListener() {
@@ -7420,16 +7361,12 @@ public class Forsaken
                         else
                             comma = true;
                         w.append(t, String.format(" +%s%% ", increases[i]));
-                        if(i == 0)
-                            w.append(t, "Hostility");
-                        else
-                        if(i == 1)
-                            w.append(t, "Deviancy");
-                        else
-                        if(i == 2)
-                            w.append(t, "Obedience");
-                        else
-                            w.append(t, "Disgrace");
+                        switch (i) {
+                            case 0: w.append(t, "Hostility"); break;
+                            case 1: w.append(t, "Deviancy"); break;
+                            case 3: w.append(t, "Obedience"); break;
+                            default: w.append(t, "Disgrace");
+                        }
                     }
 
             }
