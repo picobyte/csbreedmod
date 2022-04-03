@@ -10903,22 +10903,14 @@ public class Project extends JFrame
                 w.underlineAppend(t, "Residual Energy");
                 description = description + "Forsaken Sacrificed: " + w.achievementHeld(0)[1] + "\n";
                 description = description + "Level: " + w.achievementHeld(0)[0];
-                if(w.achievementHeld(0)[0] == 0)
-                    description = description + " (Next: 1 sacrifice)\nBonus: N/A";
-                else
-                if(w.achievementHeld(0)[0] == 1)
-                    description = description + " (Next: 3 sacrifices)\nBonus: +1 Starting EE";
-                else
-                if(w.achievementHeld(0)[0] == 2)
-                    description = description + " (Next: 6 sacrifices)\nBonus: +2 Starting EE";
-                else
-                if(w.achievementHeld(0)[0] == 3)
-                    description = description + " (Next: 15 sacrifices)\nBonus: +3 Starting EE";
-                else
-                if(w.achievementHeld(0)[0] == 4)
-                    description = description + " (Next: 60 sacrifices)\nBonus: +4 Starting EE";
-                else
-                    description = description + "\nBonus: +5 Starting EE";
+                switch (w.achievementHeld(0)[0]) {
+                    case 0: description = description + " (Next: 1 sacrifice)\nBonus: N/A"; break;
+                    case 1: description = description + " (Next: 3 sacrifices)\nBonus: +1 Starting EE"; break;
+                    case 2: description = description + " (Next: 6 sacrifices)\nBonus: +2 Starting EE"; break;
+                    case 3: description = description + " (Next: 15 sacrifices)\nBonus: +3 Starting EE"; break;
+                    case 4: description = description + " (Next: 60 sacrifices)\nBonus: +4 Starting EE"; break;
+                    default: description = description + "\nBonus: +5 Starting EE";
+                }
                 description = description + "\nThe supernaturally-enhanced bodies of former Chosen make for excellent breeding stock.  This role prevents them from fighting in battle, but it can give you a head start in establishing new bases of operations.  And they tend to start enjoying it before too long.";
             } else
             if(i == 1)
@@ -10926,22 +10918,14 @@ public class Project extends JFrame
                 w.underlineAppend(t, "Impregnation Specialty");
                 description = description + "Chosen Impregnated: " + w.achievementHeld(i)[1] + "\n";
                 description = description + "Level: " + w.achievementHeld(i)[0];
-                if(w.achievementHeld(i)[0] == 0)
-                    description = description + " (Next: 4 impregnated)\nBonus: N/A";
-                else
-                if(w.achievementHeld(i)[0] == 1)
-                    description = description + " (Next: 10 impregnated)\nBonus: -200% Impregnation Threshold";
-                else
-                if(w.achievementHeld(i)[0] == 2)
-                    description = description + " (Next: 25 impregnated)\nBonus: -400% Impregnation Threshold";
-                else
-                if(w.achievementHeld(i)[0] == 3)
-                    description = description + " (Next: 60 impregnated)\nBonus: -600% Impregnation Threshold";
-                else
-                if(w.achievementHeld(i)[0] == 4)
-                    description = description + " (Next: 160 impregnated)\nBonus: -700% Impregnation Threshold";
-                else
-                    description = description + "\nBonus: -750% Impregnation Threshold";
+                switch (w.achievementHeld(i)[0]) {
+                    case 0: description = description + " (Next: 4 impregnated)\nBonus: N/A"; break;
+                    case 1: description = description + " (Next: 10 impregnated)\nBonus: -200% Impregnation Threshold"; break;
+                    case 2: description = description + " (Next: 25 impregnated)\nBonus: -400% Impregnation Threshold"; break;
+                    case 3: description = description + " (Next: 60 impregnated)\nBonus: -600% Impregnation Threshold"; break;
+                    case 4: description = description + " (Next: 160 impregnated)\nBonus: -700% Impregnation Threshold"; break;
+                    default: description = description + "\nBonus: -750% Impregnation Threshold";
+                }
                 description = description + "\nAs the Chosen hear rumors that you're able to impregnate even them, their lack of faith in their own protections will cause it to become even easier to do so.";
             } else
             if(i == 2)
@@ -10949,22 +10933,14 @@ public class Project extends JFrame
                 w.underlineAppend(t, "Hypnosis Specialty");
                 description = description + "Chosen Hypnotized: " + w.achievementHeld(i)[1] + "\n";
                 description = description + "Level: " + w.achievementHeld(i)[0];
-                if(w.achievementHeld(i)[0] == 0)
-                    description = description + " (Next: 4 hypnotized)\nBonus: N/A";
-                else
-                if(w.achievementHeld(i)[0] == 1)
-                    description = description + " (Next: 10 hypnotized)\nBonus: -200% Hypnosis Threshold";
-                else
-                if(w.achievementHeld(i)[0] == 2)
-                    description = description + " (Next: 25 hypnotized)\nBonus: -400% Hypnosis Threshold";
-                else
-                if(w.achievementHeld(i)[0] == 3)
-                    description = description + " (Next: 60 hypnotized)\nBonus: -600% Hypnosis Threshold";
-                else
-                if(w.achievementHeld(i)[0] == 4)
-                    description = description + " (Next: 160 hypnotized)\nBonus: -700% Hypnosis Threshold";
-                else
-                    description = description + "\nBonus: -750% Hypnosis Threshold";
+                switch (w.achievementHeld(i)[0]) {
+                    case 0: description = description + " (Next: 4 hypnotized)\nBonus: N/A"; break;
+                    case 1: description = description + " (Next: 10 hypnotized)\nBonus: -200% Hypnosis Threshold"; break;
+                    case 2: description = description + " (Next: 25 hypnotized)\nBonus: -400% Hypnosis Threshold"; break;
+                    case 3: description = description + " (Next: 60 hypnotized)\nBonus: -600% Hypnosis Threshold"; break;
+                    case 4: description = description + " (Next: 160 hypnotized)\nBonus: -700% Hypnosis Threshold"; break;
+                    default: description = description + "\nBonus: -750% Hypnosis Threshold";
+                }
                 description = description + "\nMuch of the difficulty in Demonic Hypnosis comes from finding exploitable weaknesses in the target's thought process.  But all human minds share some similarities, and the more you break, the more tricks you figure out.";
             } else
             if(i == 3)
@@ -10972,22 +10948,14 @@ public class Project extends JFrame
                 w.underlineAppend(t, "Drain Specialty");
                 description = description + "Chosen Drained: " + w.achievementHeld(i)[1] + "\n";
                 description = description + "Level: " + w.achievementHeld(i)[0];
-                if(w.achievementHeld(i)[0] == 0)
-                    description = description + " (Next: 4 drained)\nBonus: N/A";
-                else
-                if(w.achievementHeld(i)[0] == 1)
-                    description = description + " (Next: 10 drained)\nBonus: -200% Drain Threshold";
-                else
-                if(w.achievementHeld(i)[0] == 2)
-                    description = description + " (Next: 25 drained)\nBonus: -400% Drain Threshold";
-                else
-                if(w.achievementHeld(i)[0] == 3)
-                    description = description + " (Next: 60 drained)\nBonus: -600% Drain Threshold\n";
-                else
-                if(w.achievementHeld(i)[0] == 4)
-                    description = description + " (Next: 160 drained)\nBonus: -700% Drain Threshold";
-                else
-                    description = description + "\nBonus: -750% Drain Threshold";
+                switch (w.achievementHeld(i)[0]) {
+                    case 0: description = description + " (Next: 4 drained)\nBonus: N/A"; break;
+                    case 1: description = description + " (Next: 10 drained)\nBonus: -200% Drain Threshold"; break;
+                    case 2: description = description + " (Next: 25 drained)\nBonus: -400% Drain Threshold"; break;
+                    case 3: description = description + " (Next: 60 drained)\nBonus: -600% Drain Threshold\n"; break;
+                    case 4: description = description + " (Next: 160 drained)\nBonus: -700% Drain Threshold"; break;
+                    default: description = description + "\nBonus: -750% Drain Threshold";
+                }
                 description = description + "\nThe Holy Energy which empowers the Chosen is inherently difficult for a Demon to absorb, but whenever you do successfully begin draining energy from one of the Chosen, her aura mingles with your own, and you find it easier to draw more of their energy into yourself.";
             } else
             if(i == 4)
@@ -10995,22 +10963,14 @@ public class Project extends JFrame
                 w.underlineAppend(t, "Parasitism Specialty");
                 description = description + "Chosen Parasitized: " + w.achievementHeld(i)[1] + "\n";
                 description = description + "Level: " + w.achievementHeld(i)[0];
-                if(w.achievementHeld(i)[0] == 0)
-                    description = description + " (Next: 4 parasitized)\nBonus: N/A";
-                else
-                if(w.achievementHeld(i)[0] == 1)
-                    description = description + " (Next: 10 parasitized)\nBonus: -200% Parasitism Threshold";
-                else
-                if(w.achievementHeld(i)[0] == 2)
-                    description = description + " (Next: 25 parasitized)\nBonus: -400% Parasitism Threshold";
-                else
-                if(w.achievementHeld(i)[0] == 3)
-                    description = description + " (Next: 60 parasitized)\nBonus: -600% Parasitism Threshold";
-                else
-                if(w.achievementHeld(i)[0] == 4)
-                    description = description + " (Next: 160 parasitized)\nBonus: -700% Parasitism Threshold";
-                else
-                    description = description + "\nBonus: -750% Parasitism Threshold";
+                switch (w.achievementHeld(i)[0]) {
+                    case 0: description = description + " (Next: 4 parasitized)\nBonus: N/A"; break;
+                    case 1: description = description + " (Next: 10 parasitized)\nBonus: -200% Parasitism Threshold"; break;
+                    case 2: description = description + " (Next: 25 parasitized)\nBonus: -400% Parasitism Threshold"; break;
+                    case 3: description = description + " (Next: 60 parasitized)\nBonus: -600% Parasitism Threshold"; break;
+                    case 4: description = description + " (Next: 160 parasitized)\nBonus: -700% Parasitism Threshold"; break;
+                    default: description = description + "\nBonus: -750% Parasitism Threshold";
+                }
                 description = description + "\nThe public loves to see the Chosen humiliated, and as it becomes more common for their transformations to become corrupted by you, everyone's anticipation for the next such corruption will do much of the work for you.";
             } else
             if(i == 5)
@@ -11018,22 +10978,14 @@ public class Project extends JFrame
                 w.underlineAppend(t, "Tempting");
                 description = description + "Chosen Tempted: " + w.achievementHeld(i)[1] + "\n";
                 description = description + "Level: " + w.achievementHeld(i)[0];
-                if(w.achievementHeld(i)[0] == 0)
-                    description = description + " (Next: 2 Tempted)\nBonus: N/A";
-                else
-                if(w.achievementHeld(i)[0] == 1)
-                    description = description + " (Next: 5 Tempted)\nBonus: Tempt requirement decreases 15% per use";
-                else
-                if(w.achievementHeld(i)[0] == 2)
-                    description = description + " (Next: 12 Tempted)\nBonus: Tempt requirement decreases 20% per use";
-                else
-                if(w.achievementHeld(i)[0] == 3)
-                    description = description + " (Next: 30 Tempted)\nBonus: Tempt requirement decreases 25% per use";
-                else
-                if(w.achievementHeld(i)[0] == 4)
-                    description = description + " (Next: 80 Tempted)\nBonus: Tempt requirement decreases 30% per use";
-                else
-                    description = description + "\nBonus: Tempt requirement decreases 35% per use";
+                switch (w.achievementHeld(i)[0]) {
+                    case 0: description = description + " (Next: 2 Tempted)\nBonus: N/A"; break;
+                    case 1: description = description + " (Next: 5 Tempted)\nBonus: Tempt requirement decreases 15% per use"; break;
+                    case 2: description = description + " (Next: 12 Tempted)\nBonus: Tempt requirement decreases 20% per use"; break;
+                    case 3: description = description + " (Next: 30 Tempted)\nBonus: Tempt requirement decreases 25% per use"; break;
+                    case 4: description = description + " (Next: 80 Tempted)\nBonus: Tempt requirement decreases 30% per use"; break;
+                    default: description = description + "\nBonus: Tempt requirement decreases 35% per use";
+                }
                 description = description + "\nThe Chosen are carefully guided by their handlers and by society at large so that they don't even consider the possibility of turning to the side of the Demons.  But the more they see other Chosen being treated kindly by the Thralls, the more willing they'll be to think of you as a potential ally.";
             } else
             if(i == 6)
@@ -11041,22 +10993,14 @@ public class Project extends JFrame
                 w.underlineAppend(t, "Mindbreaker");
                 description = description + "Chosen with Aversion: " + w.achievementHeld(i)[1] + "\n";
                 description = description + "Level: " + w.achievementHeld(i)[0];
-                if(w.achievementHeld(i)[0] == 0)
-                    description = description + " (Next: 2 with Aversion)\nBonus: N/A";
-                else
-                if(w.achievementHeld(i)[0] == 1)
-                    description = description + " (Next: 5 with Aversion)\nBonus: Aversion requirement decreases 2 rounds per use";
-                else
-                if(w.achievementHeld(i)[0] == 2)
-                    description = description + " (Next: 12 with Aversion)\nBonus: Aversion requirement decreases 3 rounds per use";
-                else
-                if(w.achievementHeld(i)[0] == 3)
-                    description = description + " (Next: 30 with Aversion)\nBonus: Aversion requirement decreases 4 rounds per use";
-                else
-                if(w.achievementHeld(i)[0] == 4)
-                    description = description + " (Next: 80 with Aversion)\nBonus: Aversion requirement decreases 5 rounds per use";
-                else
-                    description = description + "\nBonus: Aversion requirement decreases 6 rounds per use";
+                switch (w.achievementHeld(i)[0]) {
+                    case 0: description = description + " (Next: 2 with Aversion)\nBonus: N/A"; break;
+                    case 1: description = description + " (Next: 5 with Aversion)\nBonus: Aversion requirement decreases 2 rounds per use"; break;
+                    case 2: description = description + " (Next: 12 with Aversion)\nBonus: Aversion requirement decreases 3 rounds per use"; break;
+                    case 3: description = description + " (Next: 30 with Aversion)\nBonus: Aversion requirement decreases 4 rounds per use"; break;
+                    case 4: description = description + " (Next: 80 with Aversion)\nBonus: Aversion requirement decreases 5 rounds per use"; break;
+                    default: description = description + "\nBonus: Aversion requirement decreases 6 rounds per use";
+                }
                 description = description + "\nThe Thralls you bring with you from city to city will gradually build their skills as they learn how to cause as much suffering as possible to their victims.  Every Chosen mindbroken is a useful example of what techniques work best.";
             } else
             if(i == 7)
@@ -11064,22 +11008,14 @@ public class Project extends JFrame
                 w.underlineAppend(t, "Heroine Hunter");
                 description = description + "Superior Chosen Broken: " + w.achievementHeld(i)[1] + "\n";
                 description = description + "Level: " + w.achievementHeld(i)[0];
-                if(w.achievementHeld(i)[0] == 0)
-                    description = description + " (Next: 1 Broken)\nBonus: N/A";
-                else
-                if(w.achievementHeld(i)[0] == 1)
-                    description = description + " (Next: 3 Broken)\nBonus: Slight increase to Resolve damage";
-                else
-                if(w.achievementHeld(i)[0] == 2)
-                    description = description + " (Next: 6 Broken)\nBonus: Notable increase to Resolve damage";
-                else
-                if(w.achievementHeld(i)[0] == 3)
-                    description = description + " (Next: 15 Broken)\nBonus: Moderate increase to Resolve damage";
-                else
-                if(w.achievementHeld(i)[0] == 4)
-                    description = description + " (Next: 40 Broken)\nBonus: Large increase to Resolve damage";
-                else
-                    description = description + "\nBonus: Extreme increase to Resolve damage";
+                switch (w.achievementHeld(i)[0]) {
+                    case 0: description = description + " (Next: 1 Broken)\nBonus: N/A"; break;
+                    case 1: description = description + " (Next: 3 Broken)\nBonus: Slight increase to Resolve damage"; break;
+                    case 2: description = description + " (Next: 6 Broken)\nBonus: Notable increase to Resolve damage"; break;
+                    case 3: description = description + " (Next: 15 Broken)\nBonus: Moderate increase to Resolve damage"; break;
+                    case 4: description = description + " (Next: 40 Broken)\nBonus: Large increase to Resolve damage"; break;
+                    default: description = description + "\nBonus: Extreme increase to Resolve damage";
+                }
                 description = description + "\nThe public may not know the difference, but the Chosen themselves are keenly aware that some of their number are far more competent than others.  As you prove that you can convert even the best of them to the Demonic cause, they'll all lose hope of ever winning against you.";
             }
             if(w.achievementHeld(i)[0] > w.achievementSeen[i])
