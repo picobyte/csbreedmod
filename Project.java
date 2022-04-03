@@ -1100,20 +1100,16 @@ public class Project extends JFrame
                                 midFound = true;
                             else
                                 lowFound = true;
-                            if(c.innocence > 66)
-                                highFound = true;
-                            else
-                            if(c.innocence > 33)
-                                midFound = true;
-                            else
-                                lowFound = true;
-                            if(c.confidence > 66)
-                                highFound = true;
-                            else
-                            if(c.confidence > 33)
-                                midFound = true;
-                            else
-                                lowFound = true;
+                            switch (c.innocence / 33) {
+                                case 0: lowFound = true; break;
+                                case 1: midFound = true; break;
+                                default: highFound = true;
+                            }
+                            switch (c.confidence / 33) {
+                                case 0: lowFound = true; break;
+                                case 1: midFound = true; break;
+                                default: highFound = true;
+                            }
                             if(!highFound)
                             {
                                 upperLimit = 100;
@@ -1242,13 +1238,11 @@ public class Project extends JFrame
                     for(int i = 0; i < 4; i++)
                     {
                         stats[i] = (int)(Math.random() * 101D);
-                        if(stats[i] > 66)
-                            highs++;
-                        else
-                        if(stats[i] > 33)
-                            mids++;
-                        else
-                            lows++;
+                        switch (stats[i] / 33) {
+                            case 0: lows++; break;
+                            case 1: mids++; break;
+                            default: highs++;
+                        }
                     }
 
                     if(highs == 0 || mids == 0 || lows == 0)
@@ -1659,13 +1653,11 @@ public class Project extends JFrame
                     stats[i] = (stats[i] + 30) - certainties[i];
                 else
                     stats[i] = (stats[i] - 30) + certainties[i];
-            if(stats[i] > 66)
-                highs++;
-            else
-            if(stats[i] > 33)
-                mids++;
-            else
-                lows++;
+            switch (stats[i] / 33) {
+                case 0: lows++; break;
+                case 1: mids++; break;
+                default: highs++;
+            }
         }
 
         while(highs == 0 || mids == 0 || lows == 0) 
@@ -1674,13 +1666,11 @@ public class Project extends JFrame
             mids = 0;
             lows = 0;
             for(int i = 0; i < 4; i++)
-                if(stats[i] > 66)
-                    highs++;
-                else
-                if(stats[i] > 33)
-                    mids++;
-                else
-                    lows++;
+                switch (stats[i] / 33) {
+                    case 0: lows++; break;
+                    case 1: mids++; break;
+                    default: highs++;
+                }
 
             if(highs == 0)
             {
@@ -1724,13 +1714,11 @@ public class Project extends JFrame
                     stats[flexibleStat] = 33 + (36 - certainties[flexibleStat]) / 2;
             }
             for(int i = 0; i < 4; i++)
-                if(stats[i] > 66)
-                    highs++;
-                else
-                if(stats[i] > 33)
-                    mids++;
-                else
-                    lows++;
+                switch (stats[i] / 33) {
+                    case 0: lows++; break;
+                    case 1: mids++; break;
+                    default: highs++;
+                }
 
         }
         c.morality = stats[0];
@@ -8738,37 +8726,29 @@ public class Project extends JFrame
                     if(w.getCast()[i].getMorality() > 33)
                         sigs++;
                 if(w.getCast()[i].isLustful())
-                    if(w.getCast()[i].getInnocence() > 66)
-                        cores++;
-                    else
-                    if(w.getCast()[i].getInnocence() > 33)
-                        sigs++;
-                    else
-                        minors++;
+                    switch (w.getCast()[i].getInnocence() / 33) {
+                        case 0: minors++; break;
+                        case 1: sigs++; break;
+                        default: cores++;
+                    }
                 if(!w.getCast()[i].isCVirg())
-                    if(w.getCast()[i].getInnocence() > 66)
-                        cores++;
-                    else
-                    if(w.getCast()[i].getInnocence() > 33)
-                        sigs++;
-                    else
-                        minors++;
+                    switch (w.getCast()[i].getInnocence() / 33) {
+                        case 0: minors++; break;
+                        case 1: sigs++; break;
+                        default: cores++;
+                    }
                 if(w.getCast()[i].isMeek())
-                    if(w.getCast()[i].getConfidence() > 66)
-                        cores++;
-                    else
-                    if(w.getCast()[i].getConfidence() > 33)
-                        sigs++;
-                    else
-                        minors++;
+                    switch (w.getCast()[i].getConfidence() / 33) {
+                        case 0: minors++; break;
+                        case 1: sigs++; break;
+                        default: cores++;
+                    }
                 if(!w.getCast()[i].isAVirg())
-                    if(w.getCast()[i].getConfidence() > 66)
-                        cores++;
-                    else
-                    if(w.getCast()[i].getConfidence() > 33)
-                        sigs++;
-                    else
-                        minors++;
+                    switch (w.getCast()[i].getConfidence() / 33) {
+                        case 0: minors++; break;
+                        case 1: sigs++; break;
+                        default: cores++;
+                    }
                 if(w.getCast()[i].isDebased())
                     if(w.getCast()[i].getDignity() > 66)
                         cores++;
@@ -9018,34 +8998,26 @@ public class Project extends JFrame
         Chosen undignified = null;
         for(int i = 0; i < 3; i++)
         {
-            if(w.getCast()[i].getMorality() > 66)
-                moral = w.getCast()[i];
-            else
-            if(w.getCast()[i].getMorality() > 33)
-                neitherOne = w.getCast()[i];
-            else
-                immoral = w.getCast()[i];
-            if(w.getCast()[i].getInnocence() > 66)
-                innocent = w.getCast()[i];
-            else
-            if(w.getCast()[i].getInnocence() > 33)
-                neitherTwo = w.getCast()[i];
-            else
-                nocent = w.getCast()[i];
-            if(w.getCast()[i].getConfidence() > 66)
-                confident = w.getCast()[i];
-            else
-            if(w.getCast()[i].getConfidence() > 33)
-                neitherThree = w.getCast()[i];
-            else
-                unconfident = w.getCast()[i];
-            if(w.getCast()[i].getDignity() > 66)
-                dignified = w.getCast()[i];
-            else
-            if(w.getCast()[i].getDignity() > 33)
-                neitherFour = w.getCast()[i];
-            else
-                undignified = w.getCast()[i];
+            switch (w.getCast()[i].getMorality() / 33) {
+                case 0: immoral = w.getCast()[i]; break;
+                case 1: neitherOne = w.getCast()[i]; break;
+                default: moral = w.getCast()[i];
+            }
+            switch (w.getCast()[i].getInnocence() / 33) {
+                case 0: nocent = w.getCast()[i]; break;
+                case 1: neitherTwo = w.getCast()[i]; break;
+                default: innocent = w.getCast()[i];
+            }
+            switch (w.getCast()[i].getConfidence() / 33) {
+                case 0: unconfident = w.getCast()[i]; break;
+                case 1: neitherThree = w.getCast()[i]; break;
+                default: confident = w.getCast()[i];
+            }
+            switch (w.getCast()[i].getDignity() / 33) {
+                case 0: undignified = w.getCast()[i]; break;
+                case 1: neitherFour = w.getCast()[i]; break;
+                default: dignified = w.getCast()[i];
+            }
         }
 
         Chosen first = dignified;
@@ -9142,34 +9114,26 @@ public class Project extends JFrame
         Chosen undignified = null;
         for(int i = 0; i < 3; i++)
         {
-            if(w.getCast()[i].getMorality() > 66)
-                moral = w.getCast()[i];
-            else
-            if(w.getCast()[i].getMorality() > 33)
-                neitherOne = w.getCast()[i];
-            else
-                immoral = w.getCast()[i];
-            if(w.getCast()[i].getInnocence() > 66)
-                innocent = w.getCast()[i];
-            else
-            if(w.getCast()[i].getInnocence() > 33)
-                neitherTwo = w.getCast()[i];
-            else
-                nocent = w.getCast()[i];
-            if(w.getCast()[i].getConfidence() > 66)
-                confident = w.getCast()[i];
-            else
-            if(w.getCast()[i].getConfidence() > 33)
-                neitherThree = w.getCast()[i];
-            else
-                unconfident = w.getCast()[i];
-            if(w.getCast()[i].getDignity() > 66)
-                dignified = w.getCast()[i];
-            else
-            if(w.getCast()[i].getDignity() > 33)
-                neitherFour = w.getCast()[i];
-            else
-                undignified = w.getCast()[i];
+            switch (w.getCast()[i].getMorality() / 33) {
+                case 0: immoral = w.getCast()[i]; break;
+                case 1: neitherOne = w.getCast()[i]; break;
+                default: moral = w.getCast()[i];
+            }
+            switch (w.getCast()[i].getInnocence() / 33) {
+                case 0: nocent = w.getCast()[i]; break;
+                case 1: neitherTwo = w.getCast()[i]; break;
+                default: innocent = w.getCast()[i];
+            }
+            switch (w.getCast()[i].getConfidence() / 33) {
+                case 0: unconfident = w.getCast()[i]; break;
+                case 1: neitherThree = w.getCast()[i]; break;
+                default: confident = w.getCast()[i];
+            }
+            switch (w.getCast()[i].getDignity() / 33) {
+                case 0: undignified = w.getCast()[i]; break;
+                case 1: neitherFour = w.getCast()[i]; break;
+                default: dignified = w.getCast()[i];
+            }
         }
 
         Chosen first = confident;
@@ -12978,13 +12942,11 @@ public class Project extends JFrame
             Chosen mid = null;
             Chosen low = null;
             for(int i = 0; i < 3; i++)
-                if(w.getCast()[i].getConfidence() > 66)
-                    high = w.getCast()[i];
-                else
-                if(w.getCast()[i].getConfidence() > 33)
-                    mid = w.getCast()[i];
-                else
-                    low = w.getCast()[i];
+                switch (w.getCast()[i].getConfidence() / 33) {
+                    case 0: low = w.getCast()[i]; break;
+                    case 1: mid = w.getCast()[i]; break;
+                    default: high = w.getCast()[i];
+                }
 
             high.say(t, "\"");
             as = new String[5];
@@ -14044,60 +14006,50 @@ public class Project extends JFrame
                 if(tantruming.hostility < 20 && tantruming.defeatType != 5)
                 {
                     w.append(t, String.format("%s tries to organize a resistance against you, ", tantruming.mainName));
-                    if(tantruming.confidence > 66)
-                        w.append(t, String.format("demanding that your other minions join %s.  ", tantruming.himHer()));
-                    else
-                    if(tantruming.confidence > 33)
-                        w.append(t, "appealing to your other minions' sense of morality.  ");
-                    else
-                        w.append(t, "begging and pleading for your other minions to find their conscience.  ");
+                    switch (tantruming.confidence / 33) {
+                        case 0: w.append(t, "begging and pleading for your other minions to find their conscience.  "); break;
+                        case 1: w.append(t, "appealing to your other minions' sense of morality.  "); break;
+                        default: w.append(t, String.format("demanding that your other minions join %s.  ", tantruming.himHer()));
+                    }
                     w.append(t, "Even for those who are inclined to listen to such arguments, the effort is more annoying than persuasive.");
                 } else
                 if(tantruming.hostility < 40)
                 {
                     w.append(t, String.format("%s lets out %s frustrations on your other minions, ", tantruming.mainName, tantruming.hisHer()));
-                    if(tantruming.confidence > 66)
-                        w.append(t, String.format("aggressively asserting %s dominance over anyone who can't or won't stand up to %s.  ", tantruming.hisHer(), tantruming.himHer()));
-                    else
-                    if(tantruming.confidence > 33)
-                        w.append(t, String.format("spitting insults at anyone who so much as looks at %s funny.  ", tantruming.himHer()));
-                    else
-                        w.append(t, String.format("passive-aggressively insulting anyone who makes the mistake of spending too much time around %s.  ", tantruming.himHer()));
+                    switch (tantruming.confidence / 33) {
+                        case 0: w.append(t, String.format("passive-aggressively insulting anyone who makes the mistake of spending too much time around %s.  ", tantruming.himHer())); break;
+                        case 1: w.append(t, String.format("spitting insults at anyone who so much as looks at %s funny.  ", tantruming.himHer())); break;
+                        default: w.append(t, String.format("aggressively asserting %s dominance over anyone who can't or won't stand up to %s.  ", tantruming.hisHer(), tantruming.himHer()));
+                    }
                     w.append(t, String.format("Even for everyone else, %s acting out is a constant annoyance.", tantruming.hisHer()));
                 } else
                 if(tantruming.hostility < 61)
                 {
                     w.append(t, String.format("%s makes a scene in the middle of your base of operations, ", tantruming.mainName));
-                    if(tantruming.confidence > 66)
-                        w.append(t, String.format("ranting, raving, and blaming everyone else for all %s problems.  ", tantruming.hisHer()));
-                    else
-                    if(tantruming.confidence > 33)
-                        w.append(t, String.format("shouting about how %s hates being one of the Forsaken.  ", tantruming.heShe()));
-                    else
-                        w.append(t, "wailing in despair and whining about how unfair the world is.  ");
+                    switch (tantruming.confidence / 33) {
+                        case 0: w.append(t, "wailing in despair and whining about how unfair the world is.  "); break;
+                        case 1: w.append(t, String.format("shouting about how %s hates being one of the Forsaken.  ", tantruming.heShe())); break;
+                        default: w.append(t, String.format("ranting, raving, and blaming everyone else for all %s problems.  ", tantruming.hisHer()));
+                    }
                     w.append(t, "The disruptive behavior is bad for your other minions' morale.");
                 } else
                 if(tantruming.hostility < 81)
                 {
                     w.append(t, String.format("%s gets violent with your other minions, ", tantruming.mainName));
-                    if(tantruming.confidence > 66)
-                        w.append(t, String.format("challenging them to fight %s head-on, and outright attacking those who try to flee.  ", tantruming.himHer()));
-                    else
-                    if(tantruming.confidence > 33)
-                        w.append(t, "picking fights and getting into several scuffles over the course of the night.  ");
-                    else
-                        w.append(t, "abruptingly attacking them from behind and then fleeing before they can retaliate.  ");
+                    switch (tantruming.confidence / 33) {
+                        case 0: w.append(t, "abruptingly attacking them from behind and then fleeing before they can retaliate.  "); break;
+                        case 1: w.append(t, "picking fights and getting into several scuffles over the course of the night.  "); break;
+                        default: w.append(t, String.format("challenging them to fight %s head-on, and outright attacking those who try to flee.  ", tantruming.himHer()));
+                    }
                     w.append(t, String.format("The anger and resentment directed at %s grows.", tantruming.himHer()));
                 } else
                 {
                     w.append(t, String.format("%s goes on a murderous rampage, ", tantruming.mainName));
-                    if(tantruming.confidence > 66)
-                        w.append(t, "carving a wide and indiscriminate swath of destruction through your base of operations.  ");
-                    else
-                    if(tantruming.confidence > 33)
-                        w.append(t, String.format("hunting down and attacking anyone %s feels has wronged %s.  ", tantruming.heShe(), tantruming.himHer()));
-                    else
-                        w.append(t, String.format("slipping poison into the meals of countless Thralls and others %s has a grudge against before %1$s's caught.  ", tantruming.heShe()));
+                    switch (tantruming.confidence / 33) {
+                        case 0: w.append(t, String.format("slipping poison into the meals of countless Thralls and others %s has a grudge against before %1$s's caught.  ", tantruming.heShe())); break;
+                        case 1: w.append(t, String.format("hunting down and attacking anyone %s feels has wronged %s.  ", tantruming.heShe(), tantruming.himHer())); break;
+                        default: w.append(t, "carving a wide and indiscriminate swath of destruction through your base of operations.  ");
+                    }
                     w.append(t, "The resulting chaos affects your other minions as well.");
                 }
                 w.append(t, String.format("  (+%s", String.valueOf(tantruming.staminaRegen() / 10)) + "." + String.valueOf(tantruming.staminaRegen() % 10) + "% Stamina, restores own Motivation at expense of everyone else)");
@@ -14120,13 +14072,11 @@ public class Project extends JFrame
                     else
                         w.append(t, String.format("slides out of %s's distended vagina", included[i].mainName));
                     w.append(t, String.format(" while %s ", included[i].heShe()));
-                    if(included[i].confidence > 66)
-                        w.append(t, "grunts and strains");
-                    else
-                    if(included[i].confidence > 33)
-                        w.append(t, "stares down in horror");
-                    else
-                        w.append(t, "whimpers and whines");
+                    switch (included[i].confidence / 33) {
+                        case 0: w.append(t, "whimpers and whines"); break;
+                        case 1: w.append(t, "stares down in horror"); break;
+                        default: w.append(t, "grunts and strains");
+                    }
                     w.append(t, ", then scuttles off immediately in search of its first victim.");
                     included[i].demonicBirths = 1;
                 } else
@@ -14136,25 +14086,21 @@ public class Project extends JFrame
                     {
                         included[i].demonicBirths++;
                         w.append(t, String.format("Due to %s nighttime activities, %s has been impregnated with another fast-growing Demonic child.  %s gives birth to a small tentacled creature, ", included[i].hisHer(), included[i].mainName, included[i].HeShe()));
-                        if(included[i].innocence > 66)
-                            w.append(t, "then happily waves goodbye as it slithers away.");
-                        else
-                        if(included[i].innocence > 33)
-                            w.append(t, String.format("which leaves %s gasping for breath.", included[i].himHer()));
-                        else
-                            w.append(t, String.format("then mentally collects %sself and continues about %s business.", included[i].himHer(), included[i].hisHer()));
+                        switch (included[i].innocence / 33) {
+                            case 0: w.append(t, String.format("then mentally collects %sself and continues about %s business.", included[i].himHer(), included[i].hisHer())); break;
+                            case 1: w.append(t, String.format("which leaves %s gasping for breath.", included[i].himHer())); break;
+                            default: w.append(t, "then happily waves goodbye as it slithers away.");
+                        }
                     } else
                     if(included[i].timesKilled > 2 && (int)(Math.random() * 2D) == 0)
                     {
                         included[i].timesKilled++;
                         w.append(t, String.format("A particularly bold Thrall ambushes %s while %s's alone and tries to rape %s", included[i].mainName, included[i].heShe(), included[i].himHer()));
-                        if(included[i].morality > 66)
-                            w.append(t, String.format(", and %s is happy afterwards to note that %s doesn't feel guilty in the slightest about killing him.", included[i].mainName, included[i].heShe()));
-                        else
-                        if(included[i].morality > 33)
-                            w.append(t, String.format(", but the Forsaken has no trouble overpowering and killing %s attacker.", included[i].hisHer()));
-                        else
-                            w.append(t, String.format(", and %s enjoys giving him an especially slow and painful death.", included[i].mainName));
+                        switch (included[i].morality / 33) {
+                            case 0: w.append(t, String.format(", and %s enjoys giving him an especially slow and painful death.", included[i].mainName)); break;
+                            case 1: w.append(t, String.format(", but the Forsaken has no trouble overpowering and killing %s attacker.", included[i].hisHer())); break;
+                            default: w.append(t, String.format(", and %s is happy afterwards to note that %s doesn't feel guilty in the slightest about killing him.", included[i].mainName, included[i].heShe()));
+                        }
                     } else
                     if(included[i].timesHadSex > 0 && ((int)(Math.random() * 2D) == 0 || included[i].peopleInjured == 0))
                     {
@@ -14163,89 +14109,73 @@ public class Project extends JFrame
                         if(included[i].timesOrgasmed > 0)
                             included[i].timesOrgasmed++;
                         w.append(t, String.format("%s attends a wild party and ends up participating in an orgy, ", included[i].mainName));
-                        if(included[i].confidence > 66)
-                            w.append(t, "gleefully dominating several partners at once.");
-                        else
-                        if(included[i].confidence > 33)
-                            w.append(t, String.format("enjoying %sself greatly.", included[i].himHer()));
-                        else
-                            w.append(t, String.format("surrendering %sself to the lustful crowd.", included[i].himHer()));
+                        switch (included[i].confidence / 33) {
+                            case 0: w.append(t, String.format("surrendering %sself to the lustful crowd.", included[i].himHer())); break;
+                            case 1: w.append(t, String.format("enjoying %sself greatly.", included[i].himHer())); break;
+                            default: w.append(t, "gleefully dominating several partners at once.");
+                        }
                     } else
                     if(included[i].peopleInjured > 0)
                     {
                         included[i].peopleInjured++;
                         w.append(t, String.format("A particularly bold Thrall ambushes %s while %s's alone and tries to rape %s", included[i].mainName, included[i].heShe(), included[i].himHer()));
-                        if(included[i].morality > 66)
-                            w.append(t, String.format(", but %s has no trouble fending him off.", included[i].heShe()));
-                        else
-                        if(included[i].morality > 33)
-                            w.append(t, ", only to receive a sound beating.");
-                        else
-                            w.append(t, String.format(", only to be left with some very painful injuries in %s wake.", included[i].hisHer()));
+                        switch (included[i].morality / 33) {
+                            case 0: w.append(t, String.format(", only to be left with some very painful injuries in %s wake.", included[i].hisHer())); break;
+                            case 1: w.append(t, ", only to receive a sound beating."); break;
+                            default: w.append(t, String.format(", but %s has no trouble fending him off.", included[i].heShe()));
+                        }
                     } else
-                    if(included[i].morality > 66)
-                        w.append(t, String.format("%s spends %s time helping out your weaker minions, protecting them from danger and boosting their spirits.", included[i].mainName, included[i].hisHer()));
-                    else
-                    if(included[i].morality > 33)
-                        w.append(t, String.format("%s hangs out with some of the friends %s's made among your minions.", included[i].mainName, included[i].heShe()));
-                    else
-                        w.append(t, String.format("%s spends some time trying to bargain with you for better accommomdations, but to no avail.", included[i].mainName));
+                    switch (included[i].morality / 33) {
+                        case 0: w.append(t, String.format("%s spends some time trying to bargain with you for better accommomdations, but to no avail.", included[i].mainName)); break;
+                        case 1: w.append(t, String.format("%s hangs out with some of the friends %s's made among your minions.", included[i].mainName, included[i].heShe())); break;
+                        default: w.append(t, String.format("%s spends %s time helping out your weaker minions, protecting them from danger and boosting their spirits.", included[i].mainName, included[i].hisHer()));
+                    }
                 } else
                 if(flavor == 1)
                 {
                     if(included[i].hypnotized && (int)(Math.random() * 2D) == 0)
                     {
                         w.append(t, String.format("%s sleeps through most of the day, having vivid dreams as you reach directly into %s", included[i].mainName, included[i].hisHer()));
-                        if(included[i].innocence > 66)
-                            w.append(t, String.format(" simple mind and rearrange %s instinctive impulses to your liking.", included[i].hisHer()));
-                        else
-                        if(included[i].innocence > 33)
-                            w.append(t, String.format(" subconscious in order to reinforce %s hypnotic conditioning.", included[i].hisHer()));
-                        else
-                            w.append(t, String.format(" mind and carefully influence %s thought process in order to prevent %s from finding a way to break your hypnotism.", included[i].hisHer(), included[i].himHer()));
+                        switch (included[i].innocence / 33) {
+                            case 0: w.append(t, String.format(" mind and carefully influence %s thought process in order to prevent %s from finding a way to break your hypnotism.", included[i].hisHer(), included[i].himHer())); break;
+                            case 1: w.append(t, String.format(" subconscious in order to reinforce %s hypnotic conditioning.", included[i].hisHer())); break;
+                            default: w.append(t, String.format(" simple mind and rearrange %s instinctive impulses to your liking.", included[i].hisHer()));
+                        }
                     } else
                     if(included[i].strongestOrgasm >= 1000 && (int)(Math.random() * 2D) == 0)
                     {
                         w.append(t, String.format("%s spends the day enjoying the company of several tentacled Demons", included[i].mainName));
-                        if(included[i].dignity > 66)
-                            w.append(t, String.format(", but while %s tries to pretend that %1$s's just inspecting %s forces, the truth is that %1$s's having them make %s cum over and over again.", included[i].heShe(), included[i].hisHer(), included[i].himHer()));
-                        else
-                        if(included[i].dignity > 33)
-                            w.append(t, String.format(", allowing them to ravage %s with their many appendages.", included[i].himHer()));
-                        else
-                            w.append(t, String.format(", and soon %s's screaming at the top of %s lungs as %1$s's gripped by a long, continuous climax.", included[i].heShe(), included[i].hisHer()));
+                        switch (included[i].dignity / 33) {
+                            case 0: w.append(t, String.format(", and soon %s's screaming at the top of %s lungs as %1$s's gripped by a long, continuous climax.", included[i].heShe(), included[i].hisHer())); break;
+                            case 1: w.append(t, String.format(", allowing them to ravage %s with their many appendages.", included[i].himHer())); break;
+                            default: w.append(t, String.format(", but while %s tries to pretend that %1$s's just inspecting %s forces, the truth is that %1$s's having them make %s cum over and over again.", included[i].heShe(), included[i].hisHer(), included[i].himHer()));
+                        }
                         included[i].timesOrgasmed += 10 + (int)(Math.random() * 10D);
                     } else
                     if(included[i].strongestOrgasm >= 200 && ((int)(Math.random() * 2D) == 0 || included[i].orgasmsGiven < 1000))
                     {
                         included[i].timesOrgasmed += 4 + (int)(Math.random() * 4D);
-                        if(included[i].confidence > 66)
-                            w.append(t, String.format("%s decides that %s needs a day to relax.  %s spends much of it masturbating.", included[i].mainName, included[i].heShe(), included[i].HeShe()));
-                        else
-                        if(included[i].confidence > 33)
-                            w.append(t, String.format("%s tries to manage %s lust by spending some time masturbating.  %s ends up doing it for most of the day.", included[i].mainName, included[i].hisHer(), included[i].HeShe()));
-                        else
-                            w.append(t, String.format("Overcome by the Demonic influence in the air, %s hides in %s room and starts to quietly masturbate, jumping in alarm whenever %s hears movement outside.", included[i].mainName, included[i].hisHer(), included[i].heShe()));
+                        switch (included[i].confidence / 33) {
+                            case 0: w.append(t, String.format("Overcome by the Demonic influence in the air, %s hides in %s room and starts to quietly masturbate, jumping in alarm whenever %s hears movement outside.", included[i].mainName, included[i].hisHer(), included[i].heShe())); break;
+                            case 1: w.append(t, String.format("%s tries to manage %s lust by spending some time masturbating.  %s ends up doing it for most of the day.", included[i].mainName, included[i].hisHer(), included[i].HeShe())); break;
+                            default: w.append(t, String.format("%s decides that %s needs a day to relax.  %s spends much of it masturbating.", included[i].mainName, included[i].heShe(), included[i].HeShe()));
+                        }
                     } else
                     if(included[i].orgasmsGiven >= 1000)
                     {
                         if(included[i].timesOrgasmed > 0)
                             included[i].timesOrgasmed += 2 + (int)(Math.random() * 2D);
-                        if(included[i].innocence > 66)
-                            w.append(t, String.format("%s reads pornographic comics all day, marvelling at what %s sees.", included[i].mainName, included[i].heShe()));
-                        else
-                        if(included[i].innocence > 33)
-                            w.append(t, String.format("%s spends the day playing pornographic computer games.", included[i].mainName));
-                        else
-                            w.append(t, String.format("%s spends the day studying and theorizing about methods to more efficiently force an unwilling target to orgasm.", included[i].mainName));
+                        switch (included[i].innocence / 33) {
+                            case 0: w.append(t, String.format("%s spends the day studying and theorizing about methods to more efficiently force an unwilling target to orgasm.", included[i].mainName)); break;
+                            case 1: w.append(t, String.format("%s spends the day playing pornographic computer games.", included[i].mainName)); break;
+                            default: w.append(t, String.format("%s reads pornographic comics all day, marvelling at what %s sees.", included[i].mainName, included[i].heShe()));
+                        }
                     } else
-                    if(included[i].innocence > 66)
-                        w.append(t, String.format("%s plays video games all day, forgetting for awhile where %s is.", included[i].mainName, included[i].heShe()));
-                    else
-                    if(included[i].innocence > 33)
-                        w.append(t, String.format("%s relaxes and spends %s evening watching DVDs smuggled in from the outside world.", included[i].mainName, included[i].hisHer()));
-                    else
-                        w.append(t, String.format("%s spends most of the day reading scholarly articles on psychography.", included[i].mainName));
+                    switch (included[i].innocence / 33) {
+                        case 0: w.append(t, String.format("%s spends most of the day reading scholarly articles on psychography.", included[i].mainName)); break;
+                        case 1: w.append(t, String.format("%s relaxes and spends %s evening watching DVDs smuggled in from the outside world.", included[i].mainName, included[i].hisHer())); break;
+                        default: w.append(t, String.format("%s plays video games all day, forgetting for awhile where %s is.", included[i].mainName, included[i].heShe()));
+                    }
                 } else
                 if(flavor == 2)
                 {
@@ -14264,99 +14194,81 @@ public class Project extends JFrame
                     if(included[i].timesHarmedSelf > 0 && (int)(Math.random() * 2D) == 0)
                     {
                         w.append(t, String.format("%s isolates %sself and spends the day in silent contemplation of your greatness, ", included[i].mainName, included[i].himHer()));
-                        if(included[i].innocence > 66)
-                            w.append(t, "though it doesn't amount to much more than mentally repeating 'The Demon Lord is Really Strong' over and over again.");
-                        else
-                        if(included[i].innocence > 33)
-                            w.append(t, String.format("reminding %sself that your will is absolute.", included[i].himHer()));
-                        else
-                            w.append(t, "attempting to understand the true nature of a Demon Lord.");
+                        switch (included[i].innocence / 33) {
+                            case 0: w.append(t, "attempting to understand the true nature of a Demon Lord."); break;
+                            case 1: w.append(t, String.format("reminding %sself that your will is absolute.", included[i].himHer())); break;
+                            default: w.append(t, "though it doesn't amount to much more than mentally repeating 'The Demon Lord is Really Strong' over and over again.");
+                        }
                     } else
                     if(included[i].timesTortured > 0 && ((int)(Math.random() * 2D) == 0 || !included[i].meek))
                     {
-                        if(included[i].confidence > 66)
-                            w.append(t, String.format("%s humbles %sself by doing manual labor alongside your lesser minions in an attempt to show you %s willingness to serve.", included[i].mainName, included[i].himHer(), included[i].hisHer()));
-                        else
-                        if(included[i].confidence > 33)
-                            w.append(t, String.format("%s keeps %sself busy by doing manual labor with the Thralls at your base of operations, hopeful that you'll notice %s efforts.", included[i].mainName, included[i].himHer(), included[i].hisHer()));
-                        else
-                            w.append(t, String.format("%s presents %sself to the Thrall in charge of constructing your base of operations, offering to help out in a show of submission.", included[i].mainName, included[i].himHer()));
+                        switch (included[i].confidence / 33) {
+                            case 0: w.append(t, String.format("%s presents %sself to the Thrall in charge of constructing your base of operations, offering to help out in a show of submission.", included[i].mainName, included[i].himHer())); break;
+                            case 1: w.append(t, String.format("%s keeps %sself busy by doing manual labor with the Thralls at your base of operations, hopeful that you'll notice %s efforts.", included[i].mainName, included[i].himHer(), included[i].hisHer())); break;
+                            default: w.append(t, String.format("%s humbles %sself by doing manual labor alongside your lesser minions in an attempt to show you %s willingness to serve.", included[i].mainName, included[i].himHer(), included[i].hisHer()));
+                        }
                     } else
                     if(included[i].meek)
                     {
-                        if(included[i].confidence > 66)
-                            w.append(t, String.format("%s is suffering from flashbacks to %s past abuses, but %s forces %sself to go outside and do %2$s daily routine anyway, and %s feels satisfied about it once %5$s returns to %2$s room for the night.", included[i].mainName, included[i].hisHer(), included[i].heShe(), included[i].himHer(), included[i].heShe()));
-                        else
-                        if(included[i].confidence > 33)
-                            w.append(t, String.format("%s feels worried about going outside, so %s just spends the day in %s room.", included[i].mainName, included[i].heShe(), included[i].hisHer()));
-                        else
-                            w.append(t, String.format("%s locks %sself in %s room, resting there until %s can overcome %s old fears of being abused by the Thralls.", included[i].mainName, included[i].himHer(), included[i].hisHer(), included[i].heShe(), included[i].hisHer()));
+                        switch (included[i].confidence / 33) {
+                            case 0: w.append(t, String.format("%s locks %sself in %s room, resting there until %s can overcome %s old fears of being abused by the Thralls.", included[i].mainName, included[i].himHer(), included[i].hisHer(), included[i].heShe(), included[i].hisHer())); break;
+                            case 1: w.append(t, String.format("%s feels worried about going outside, so %s just spends the day in %s room.", included[i].mainName, included[i].heShe(), included[i].hisHer())); break;
+                            default: w.append(t, String.format("%s is suffering from flashbacks to %s past abuses, but %s forces %sself to go outside and do %2$s daily routine anyway, and %s feels satisfied about it once %5$s returns to %2$s room for the night.", included[i].mainName, included[i].hisHer(), included[i].heShe(), included[i].himHer(), included[i].heShe()));
+                        }
                     } else
-                    if(included[i].confidence > 66)
-                        w.append(t, String.format("%s has a good day, and %s goes to bed in high spirits.", included[i].mainName, included[i].heShe()));
-                    else
-                    if(included[i].confidence > 33)
-                        w.append(t, String.format("%s spends a leisurely day doing nothing in particular.", included[i].mainName));
-                    else
-                        w.append(t, String.format("%s lifts weights in %s room all day, desperate to become stronger.", included[i].mainName, included[i].hisHer()));
+                    switch (included[i].confidence / 33) {
+                        case 0: w.append(t, String.format("%s lifts weights in %s room all day, desperate to become stronger.", included[i].mainName, included[i].hisHer())); break;
+                        case 1: w.append(t, String.format("%s spends a leisurely day doing nothing in particular.", included[i].mainName)); break;
+                        default: w.append(t, String.format("%s has a good day, and %s goes to bed in high spirits.", included[i].mainName, included[i].heShe()));
+                    }
                 } else
                 if(included[i].parasitized && (int)(Math.random() * 2D) == 0)
                 {
                     w.append(t, String.format("%s spends the day with what's left of %s fans, ", included[i].mainName, included[i].hisHer()));
-                    if(included[i].innocence > 66)
-                        w.append(t, "not really even noticing that there are far fewer than before.");
-                    else
-                    if(included[i].innocence > 33)
-                        w.append(t, String.format("and even though there clearly aren't as many as before, %s still enjoys %sself.", included[i].heShe(), included[i].himHer()));
-                    else
-                        w.append(t, String.format("but %s can't help but dwell on the fact that most of them have moved on to newer Chosen and Forsaken.", included[i].heShe()));
+                    switch (included[i].innocence / 33) {
+                        case 0: w.append(t, String.format("but %s can't help but dwell on the fact that most of them have moved on to newer Chosen and Forsaken.", included[i].heShe())); break;
+                        case 1: w.append(t, String.format("and even though there clearly aren't as many as before, %s still enjoys %sself.", included[i].heShe(), included[i].himHer())); break;
+                        default: w.append(t, "not really even noticing that there are far fewer than before.");
+                    }
                     included[i].timesExposed += 10 + (int)(Math.random() * 10D);
                     included[i].timesExposedSelf += 10 + (int)(Math.random() * 10D);
                 } else
                 if(included[i].timesExposedSelf > 100 && (int)(Math.random() * 2D) == 0)
                 {
                     w.append(t, String.format("%s goes outside in the nude", included[i].mainName));
-                    if(included[i].dignity > 66)
-                        w.append(t, String.format(", greatly enjoying the extra attention it gets %s.", included[i].himHer()));
-                    else
-                    if(included[i].dignity > 33)
-                        w.append(t, String.format(", letting a few of your minions catch glimpses of %s before returning home.", included[i].himHer()));
-                    else
-                        w.append(t, " as if it isn't any big deal.");
+                    switch (included[i].dignity / 33) {
+                        case 0: w.append(t, " as if it isn't any big deal."); break;
+                        case 1: w.append(t, String.format(", letting a few of your minions catch glimpses of %s before returning home.", included[i].himHer())); break;
+                        default: w.append(t, String.format(", greatly enjoying the extra attention it gets %s.", included[i].himHer()));
+                    }
                     included[i].timesExposed++;
                     included[i].timesExposedSelf++;
                 } else
                 if(included[i].timesExposed > 100_000 && (int)(Math.random() * 2D) == 0 || !included[i].debased)
                 {
                     w.append(t, String.format("%s goes outside in ", included[i].mainName));
-                    if(included[i].dignity > 66)
-                        w.append(t, String.format("a dress that's practically transparent, not quite showing the details of %s private parts, but leaving very little to the imagination.", included[i].hisHer()));
-                    else
-                    if(included[i].dignity > 33)
-                        w.append(t, String.format("a long shirt with nothing underneath, teasing your minions with the promise of catching a glimpse of %s most intimate places.", included[i].hisHer()));
-                    else
-                        w.append(t, String.format("a tiny miniskirt with no panties, and %s makes no effort whatsoever to avoid flashing people whenever %1$s stretches or bends over.", included[i].heShe()));
+                    switch (included[i].dignity / 33) {
+                        case 0: w.append(t, String.format("a tiny miniskirt with no panties, and %s makes no effort whatsoever to avoid flashing people whenever %1$s stretches or bends over.", included[i].heShe())); break;
+                        case 1: w.append(t, String.format("a long shirt with nothing underneath, teasing your minions with the promise of catching a glimpse of %s most intimate places.", included[i].hisHer())); break;
+                        default: w.append(t, String.format("a dress that's practically transparent, not quite showing the details of %s private parts, but leaving very little to the imagination.", included[i].hisHer()));
+                    }
                 } else
                 if(included[i].debased)
                 {
                     w.append(t, String.format("During %s daily routine, %s is confronted by a Thrall with a recording of %s being humiliated, ", included[i].hisHer(), included[i].mainName, included[i].himHer()));
-                    if(included[i].dignity > 66)
-                        w.append(t, String.format("but %s is pleasantly surprised to see that the Thrall is just an enthusiastic fan.", included[i].mainName));
-                    else
-                    if(included[i].dignity > 33)
-                        w.append(t, String.format("but %s doesn't let it get to %s.", included[i].mainName, included[i].himHer()));
-                    else
-                        w.append(t, String.format("but %s is past the point of caring, and %s doesn't let it ruin %s day.", included[i].mainName, included[i].heShe(), included[i].hisHer()));
+                    switch (included[i].dignity / 33) {
+                        case 0: w.append(t, String.format("but %s is past the point of caring, and %s doesn't let it ruin %s day.", included[i].mainName, included[i].heShe(), included[i].hisHer())); break;
+                        case 1: w.append(t, String.format("but %s doesn't let it get to %s.", included[i].mainName, included[i].himHer())); break;
+                        default: w.append(t, String.format("but %s is pleasantly surprised to see that the Thrall is just an enthusiastic fan.", included[i].mainName));
+                    }
                 } else
                 {
                     w.append(t, String.format("%s spends the day talking to a gathering of %s fans, ", included[i].mainName, included[i].hisHer()));
-                    if(included[i].confidence > 66)
-                        w.append(t, String.format("happily regaling them with stories of %s time as one of the Chosen.", included[i].hisHer()));
-                    else
-                    if(included[i].confidence > 33)
-                        w.append(t, "chatting about what life is like under the Demon Lord.");
-                    else
-                        w.append(t, String.format("blushing and stammering when %s hears how much they still love %s.", included[i].heShe(), included[i].himHer()));
+                    switch (included[i].confidence / 33) {
+                        case 0: w.append(t, String.format("blushing and stammering when %s hears how much they still love %s.", included[i].heShe(), included[i].himHer())); break;
+                        case 1: w.append(t, "chatting about what life is like under the Demon Lord."); break;
+                        default: w.append(t, String.format("happily regaling them with stories of %s time as one of the Chosen.", included[i].hisHer()));
+                    }
                 }
                 w.append(t, String.format("  (+%s", String.valueOf(included[i].staminaRegen() / 10)) + "." + String.valueOf(included[i].staminaRegen() % 10) + "% Stamina");
                 if(tantruming != null)

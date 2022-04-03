@@ -967,13 +967,11 @@ public class Forsaken
         {
             if(innocence > 66)
             {
-                if(flavorObedience() > 66)
-                    say(t, "I don't really get why you care what I think, since I'm dumb and you're basically the smartest thing in the world... um, n-not that I'm disobeying!  I'll do my best to explain it...  ");
-                else
-                if(flavorObedience() > 33)
-                    say(t, "Are you just gonna ask me hard questions in order to make fun of my answers...?  Well, whatever, I'll answer anyway...  ");
-                else
-                    say(t, "Okay, I'll tell you what I think about everything!  Maybe I can convince you to stop doing all this bad stuff!  ");
+                switch (flavorObedience() / 33) {
+                    case 0: say(t, "Okay, I'll tell you what I think about everything!  Maybe I can convince you to stop doing all this bad stuff!  "); break;
+                    case 1: say(t, "Are you just gonna ask me hard questions in order to make fun of my answers...?  Well, whatever, I'll answer anyway...  "); break;
+                    default: say(t, "I don't really get why you care what I think, since I'm dumb and you're basically the smartest thing in the world... um, n-not that I'm disobeying!  I'll do my best to explain it...  ");
+                }
                 switch (disgrace / 33) {
                     case 0: say(t, "Even now that I'm not one of the Chosen anymore, people still kinda seem to look up to me, and "); break;
                     case 1: say(t, "Back when I was one of the Chosen, people looked up to me, and "); break;
@@ -984,23 +982,19 @@ public class Forsaken
                 else
                 if(morality > 33)
                     say(t, "I don't like to see them get sad.  ");
-                if(flavorDeviancy() > 66)
-                    say(t, "Even after all the weird stuff I've been through, that hasn't changed.");
-                else
-                if(flavorDeviancy() > 33)
-                    say(t, "I guess I could be wrong, but it just feels right to help people.");
-                else
-                    say(t, "I know that there's a lot I don't know... it even feels like I just became one of the Chosen a few days ago... but I think that helping people is a good thing.");
+                switch (flavorDeviancy() / 33) {
+                    case 0: say(t, "I know that there's a lot I don't know... it even feels like I just became one of the Chosen a few days ago... but I think that helping people is a good thing."); break;
+                    case 1: say(t, "I guess I could be wrong, but it just feels right to help people."); break;
+                    default: say(t, "Even after all the weird stuff I've been through, that hasn't changed.");
+                }
             } else
             if(innocence > 33)
             {
-                if(flavorObedience() > 66)
-                    say(t, "Do you... really care what I think...?  Of course, I'll answer regardless!  ");
-                else
-                if(flavorObedience() > 33)
-                    say(t, "Sure.  I guess we can talk about right and wrong, if that's what you want me to do.  ");
-                else
-                    say(t, "This is pointless.  We aren't going to change each other's minds.  But alright, I'll answer.  ");
+                switch (flavorObedience() / 33) {
+                    case 0: say(t, "This is pointless.  We aren't going to change each other's minds.  But alright, I'll answer.  "); break;
+                    case 1: say(t, "Sure.  I guess we can talk about right and wrong, if that's what you want me to do.  "); break;
+                    default: say(t, "Do you... really care what I think...?  Of course, I'll answer regardless!  ");
+                }
                 switch (disgrace / 33) {
                     case 0: say(t, "People are basically good, in my opinion.  "); break;
                     case 1: say(t, "People may do evil things under your influence, but I don't think that means those people are actually evil.  "); break;
@@ -1010,22 +1004,18 @@ public class Forsaken
                     say(t, "And even when they actually do bad things on their own, I think it's important to show them compassion and forgiveness.  ");
                 else
                     say(t, "Sometimes you have to use violence to stop them from doing bad things, but solving things nonviolently is always better whenever you can manage it.  ");
-                if(flavorDeviancy() > 66)
-                    say(t, "Even in all the tortures you've put me through, when I look at the other people involved, I think I can see a core of goodness inside them.");
-                else
-                if(flavorDeviancy() > 33)
-                    say(t, "Some of the things I've seen people do when you use them to torture me have made me question that... but no, it's not enough to convince me otherwise.");
-                else
-                    say(t, "I guess that might be considered a sheltered point of view... but I haven't seen anything to disprove it.");
+                switch (flavorDeviancy() / 33) {
+                    case 0: say(t, "I guess that might be considered a sheltered point of view... but I haven't seen anything to disprove it."); break;
+                    case 1: say(t, "Some of the things I've seen people do when you use them to torture me have made me question that... but no, it's not enough to convince me otherwise."); break;
+                    default: say(t, "Even in all the tortures you've put me through, when I look at the other people involved, I think I can see a core of goodness inside them.");
+                }
             } else
             {
-                if(flavorObedience() > 66)
-                    say(t, "My point of view must be of little value to you, since you are obviously my intellectual superior, but of course I will explain my own thoughts as best I can.  ");
-                else
-                if(flavorObedience() > 33)
-                    say(t, "A philosphical discussion?  I am unsure of your purpose, but... if it is a command, I will obey it.  Very well.  ");
-                else
-                    say(t, "Having a philosophical discussion with what amounts to the physical manifestation of an ideology strikes me as... unproductive.  But nonetheless, I must take the opportunity to convince you to give up your evil ways.  ");
+                switch (flavorObedience() / 33) {
+                    case 0: say(t, "Having a philosophical discussion with what amounts to the physical manifestation of an ideology strikes me as... unproductive.  But nonetheless, I must take the opportunity to convince you to give up your evil ways.  "); break;
+                    case 1: say(t, "A philosphical discussion?  I am unsure of your purpose, but... if it is a command, I will obey it.  Very well.  "); break;
+                    default: say(t, "My point of view must be of little value to you, since you are obviously my intellectual superior, but of course I will explain my own thoughts as best I can.  ");
+                }
                 switch (disgrace / 33) {
                     case 0: say(t, "Aside from those directly under your influence, I have found that humans are generally kind by nature.  "); break;
                     case 1: say(t, "Over the course of my downward arc from respected Chosen to playtoy for the Thralls, I have seen both sides of human nature, but I remain convinced that kindness still reigns over cruelty.  "); break;
@@ -1035,26 +1025,22 @@ public class Forsaken
                     say(t, "I believe that it is important to follow moral principles such as nonviolence in order to respect the rights of others, and that as long as we do so, we can all make the world a much better place.  ");
                 else
                     say(t, "I would not call myself an especially merciful or compassionate person, but I nonetheless believe that it is possible to live in harmony and mutual respect with the rest of society.  ");
-                if(flavorDeviancy() > 66)
-                    say(t, "If it were possible to convince me otherwise, I think it already would have happened in the course of all the various tortures your minions have put me through.");
-                else
-                if(flavorDeviancy() > 33)
-                    say(t, "I think I've had more opportunities than most to see humans at their worst, and none of what I've seen has shaken my convictions.");
-                else
-                    say(t, "I acknowledge that I might be wrong, and I invite you to try to convince me otherwise.");
+                switch (flavorDeviancy() / 33) {
+                    case 0: say(t, "I acknowledge that I might be wrong, and I invite you to try to convince me otherwise."); break;
+                    case 1: say(t, "I think I've had more opportunities than most to see humans at their worst, and none of what I've seen has shaken my convictions."); break;
+                    default: say(t, "If it were possible to convince me otherwise, I think it already would have happened in the course of all the various tortures your minions have put me through.");
+                }
             }
         } else
         if(flavorHostility() < 40)
         {
             if(innocence > 66)
             {
-                if(flavorObedience() > 66)
-                    say(t, "I think it's kind of a waste of time to think much about 'philosophy', since you're so much smarter than I am and it's easier to just follow what you tell me to do.  Um... I guess I can tell you about what I think when I do think of it, though.  ");
-                else
-                if(flavorObedience() > 33)
-                    say(t, "Are you just gonna ask me hard questions in order to make fun of my answers...?  Well, whatever, it's not like I care much about anything anyway...  ");
-                else
-                    say(t, "Okay, I'll tell you what I think about everything!  Though, I'm not exactly sure what to think lately...  ");
+                switch (flavorObedience() / 33) {
+                    case 0: say(t, "Okay, I'll tell you what I think about everything!  Though, I'm not exactly sure what to think lately...  "); break;
+                    case 1: say(t, "Are you just gonna ask me hard questions in order to make fun of my answers...?  Well, whatever, it's not like I care much about anything anyway...  "); break;
+                    default: say(t, "I think it's kind of a waste of time to think much about 'philosophy', since you're so much smarter than I am and it's easier to just follow what you tell me to do.  Um... I guess I can tell you about what I think when I do think of it, though.  ");
+                }
                 switch (disgrace / 33) {
                     case 0: say(t, "Even though people have always considered me some sort of big hero, "); break;
                     case 1: say(t, "After seeing how people are starting to be more mean to me since I started to lose, "); break;
@@ -1065,23 +1051,19 @@ public class Forsaken
                     case 1: say(t, "I've started liking other people less and less.  "); break;
                     default: say(t, "I'm starting to wonder whether it's really worth helping people.  ");
                 }
-                if(flavorDeviancy() > 66)
-                    say(t, "I've pretty much stopped paying attention to them so I can just focus on things that feel good.");
-                else
-                if(flavorDeviancy() > 33)
-                    say(t, "The more I find out about them, the more I realize that we're all really messed up inside..");
-                else
-                    say(t, "It's not like I want to kill them all or anything, but... I dunno, I should probably stop there.");
+                switch (flavorDeviancy() / 33) {
+                    case 0: say(t, "It's not like I want to kill them all or anything, but... I dunno, I should probably stop there."); break;
+                    case 1: say(t, "The more I find out about them, the more I realize that we're all really messed up inside.."); break;
+                    default: say(t, "I've pretty much stopped paying attention to them so I can just focus on things that feel good.");
+                }
             } else
             if(innocence > 33)
             {
-                if(flavorObedience() > 66)
-                    say(t, "Okay.  First of all, though, just to be clear, I'm not going to let any of my own ideas stand in the way of serving you.  ");
-                else
-                if(flavorObedience() > 33)
-                    say(t, "Sure.  I guess I can complain about how the world works, if you really want...  ");
-                else
-                    say(t, "This is pointless.  I'm not going to be able to convince you to do anything.  But alright, I'll answer.  ");
+                switch (flavorObedience() / 33) {
+                    case 0: say(t, "This is pointless.  I'm not going to be able to convince you to do anything.  But alright, I'll answer.  "); break;
+                    case 1: say(t, "Sure.  I guess I can complain about how the world works, if you really want...  "); break;
+                    default: say(t, "Okay.  First of all, though, just to be clear, I'm not going to let any of my own ideas stand in the way of serving you.  ");
+                }
                 switch (disgrace / 33) {
                     case 0: say(t, "Some people still call me a defender of humanity, but I'm not interested in that sort of thing anymore.  "); break;
                     case 1: say(t, "I know better than most how cruel people can be.  "); break;
@@ -1092,22 +1074,18 @@ public class Forsaken
                     case 1: say(t, "I always knew that humanity was a mixed bag, but I think I was probably giving them too much credit.  "); break;
                     default: say(t, "I used to be more idealistic, but now... I'm not sure what to think anymore.  ");
                 }
-                if(flavorDeviancy() > 66)
-                    say(t, "I understand why people act the way they do - after all, I've done some pretty sick stuff for my own pleasure, too.  So, I can't really hate them for it.");
-                else
-                if(flavorDeviancy() > 33)
-                    say(t, "I'm not sure if I'm really any better than them, though.  They just want to feel good, and so do I.");
-                else
-                    say(t, "The worst part is that I don't think I've even seen how dark people's hearts can get...");
+                switch (flavorDeviancy() / 33) {
+                    case 0: say(t, "The worst part is that I don't think I've even seen how dark people's hearts can get..."); break;
+                    case 1: say(t, "I'm not sure if I'm really any better than them, though.  They just want to feel good, and so do I."); break;
+                    default: say(t, "I understand why people act the way they do - after all, I've done some pretty sick stuff for my own pleasure, too.  So, I can't really hate them for it.");
+                }
             } else
             {
-                if(flavorObedience() > 66)
-                    say(t, "Above all else, my purpose is to serve you.  That said, I am beginning to suspect that your actions are not as incompatible with the wellbeing of humanity as I had been led to believe.  ");
-                else
-                if(flavorObedience() > 33)
-                    say(t, "If I weren't at least somewhat of a misanthrope, I wouldn't be cooperating with you as much as I am now.  ");
-                else
-                    say(t, "You want to know why I'm going along with your plans, even though I hate you so much.  Very well.  ");
+                switch (flavorObedience() / 33) {
+                    case 0: say(t, "You want to know why I'm going along with your plans, even though I hate you so much.  Very well.  "); break;
+                    case 1: say(t, "If I weren't at least somewhat of a misanthrope, I wouldn't be cooperating with you as much as I am now.  "); break;
+                    default: say(t, "Above all else, my purpose is to serve you.  That said, I am beginning to suspect that your actions are not as incompatible with the wellbeing of humanity as I had been led to believe.  ");
+                }
                 switch (disgrace / 33) {
                     case 0: say(t, "I've tried not to be swayed by the way people praise and pamper me.  "); break;
                     case 1: say(t, "Now that I'm no longer held in high regard, people are more willing to show me their true nature, including the... darker parts.  "); break;
@@ -1118,26 +1096,22 @@ public class Forsaken
                     case 1: say(t, "My experiences have led me to the view that people act however they must in order to satisfy their own desires, and it's only by coincidence that these desires sometimes result in the appearance of selfless morality.  "); break;
                     default: say(t, "I originally believed that individuals had natural rights, and that morality was an emergent property of consciousness.  I... no longer hold this view.  ");
                 }
-                if(flavorDeviancy() > 66)
-                    say(t, "After cultivating my own deviant impulses, I recognize that other people are essentially the same, myself included.  I feel neither pride nor hatred about that fact.");
-                else
-                if(flavorDeviancy() > 33)
-                    say(t, "Frankly, I'm not sure whether I can even consider myself fundamentally better than any of the most depraved torturers I've faced.");
-                else
-                    say(t, "The more I find out about what people truly desire, the more my feelings turn from apathy toward active disgust.");
+                switch (flavorDeviancy() / 33) {
+                    case 0: say(t, "The more I find out about what people truly desire, the more my feelings turn from apathy toward active disgust."); break;
+                    case 1: say(t, "Frankly, I'm not sure whether I can even consider myself fundamentally better than any of the most depraved torturers I've faced."); break;
+                    default: say(t, "After cultivating my own deviant impulses, I recognize that other people are essentially the same, myself included.  I feel neither pride nor hatred about that fact.");
+                }
             }
         } else
         if(flavorHostility() < 61)
         {
             if(innocence > 66)
             {
-                if(flavorObedience() > 66)
-                    say(t, "You mean like, why I'm serving you?  Well, why wouldn't I?  ");
-                else
-                if(flavorObedience() > 33)
-                    say(t, "Um... I'm not really sure how to explain it, but I think you Demons might actually be right about some things.  ");
-                else
-                    say(t, "Oh, is it weird that I'm fighting on your side even though I kinda hate you?  I guess it doesn't seem so weird to me.  ");
+                switch (flavorObedience() / 33) {
+                    case 0: say(t, "Oh, is it weird that I'm fighting on your side even though I kinda hate you?  I guess it doesn't seem so weird to me.  "); break;
+                    case 1: say(t, "Um... I'm not really sure how to explain it, but I think you Demons might actually be right about some things.  "); break;
+                    default: say(t, "You mean like, why I'm serving you?  Well, why wouldn't I?  ");
+                }
                 switch (disgrace / 33) {
                     case 0: say(t, "People always act like I'm some great hero, but that's just 'cause they want me to do stuff for them.  "); break;
                     case 1: say(t, "Other people used to treat me so nice, but as soon as I started losing to the Demons, it was like they didn't even want to be seen with me anymore.  "); break;
@@ -1148,23 +1122,19 @@ public class Forsaken
                     case 1: say(t, "They tricked me, over and over again.  I'm tired of it.  "); break;
                     default: say(t, "I was... really stupid to think that they actually respected me.  ");
                 }
-                if(flavorDeviancy() > 66)
-                    say(t, "I've decided that I just want to spend my life feeling good, no matter how many people it ends up hurting.");
-                else
-                if(flavorDeviancy() > 33)
-                    say(t, "I'm done with letting them do gross stuff to me.");
-                else
-                    say(t, "And the things they try to do with me whenever I let my guard down...  Ugh, people are just so gross!");
+                switch (flavorDeviancy() / 33) {
+                    case 0: say(t, "And the things they try to do with me whenever I let my guard down...  Ugh, people are just so gross!"); break;
+                    case 1: say(t, "I'm done with letting them do gross stuff to me."); break;
+                    default: say(t, "I've decided that I just want to spend my life feeling good, no matter how many people it ends up hurting.");
+                }
             } else
             if(innocence > 33)
             {
-                if(flavorObedience() > 66)
-                    say(t, "All I care about is serving you.  But even without that, I don't think the Demons are exactly wrong to do what they do.  ");
-                else
-                if(flavorObedience() > 33)
-                    say(t, "I mean, I wouldn't be following your orders unless I thought you Demons were right about some stuff.  ");
-                else
-                    say(t, "I hate to say it, but I think my own views aren't that much different from those of the Demons.  ");
+                switch (flavorObedience() / 33) {
+                    case 0: say(t, "I hate to say it, but I think my own views aren't that much different from those of the Demons.  "); break;
+                    case 1: say(t, "I mean, I wouldn't be following your orders unless I thought you Demons were right about some stuff.  "); break;
+                    default: say(t, "All I care about is serving you.  But even without that, I don't think the Demons are exactly wrong to do what they do.  ");
+                }
                 switch (disgrace / 33) {
                     case 0: say(t, "People have always hailed me as a savior, but there wouldn't be any need for saviors if everyone else would stop taking advantage of each other - even without any encouragement from the Demons.  "); break;
                     case 1: say(t, "I'm not happy about how my fellow humans have treated me, and I know that a lot of people face even worse.  "); break;
@@ -1175,22 +1145,18 @@ public class Forsaken
                     case 1: say(t, "I'm done helping people.  They can get what's coming to them.  "); break;
                     default: say(t, "I never even made a dent in all the evil of the world.  One hero can't reverse human nature.  ");
                 }
-                if(flavorDeviancy() > 66)
-                    say(t, "I'm just going to spend the rest of my days living out my most twisted fantasies.");
-                else
-                if(flavorDeviancy() > 33)
-                    say(t, "The more I see, the less I care.");
-                else
-                    say(t, "Humanity is just... disgusting to the core, every last bit of it.");
+                switch (flavorDeviancy() / 33) {
+                    case 0: say(t, "Humanity is just... disgusting to the core, every last bit of it."); break;
+                    case 1: say(t, "The more I see, the less I care."); break;
+                    default: say(t, "I'm just going to spend the rest of my days living out my most twisted fantasies.");
+                }
             } else
             {
-                if(flavorObedience() > 66)
-                    say(t, "At this point, I'm absolutely certain that the Demons must be victorious in order for humanity to move forward.  ");
-                else
-                if(flavorObedience() > 33)
-                    say(t, "In my time working with you, I've found that your goals are... surprisingly less objectionable than I would have thought.  ");
-                else
-                    say(t, "I'm working with the Demons because your interests and mine happen to coincide.  That is all.  ");
+                switch (flavorObedience() / 33) {
+                    case 0: say(t, "I'm working with the Demons because your interests and mine happen to coincide.  That is all.  "); break;
+                    case 1: say(t, "In my time working with you, I've found that your goals are... surprisingly less objectionable than I would have thought.  "); break;
+                    default: say(t, "At this point, I'm absolutely certain that the Demons must be victorious in order for humanity to move forward.  ");
+                }
                 switch (disgrace / 33) {
                     case 0: say(t, "The fame and fortune I experienced as one of the Chosen were not enough to distract me from noticing the constant abuse to which humans subject their less fortunate kin.  "); break;
                     case 1: say(t, "As my own public standing has fallen, I have had an opportunity to experience more and more of the abuse which is normally reserved for the dregs of society.  "); break;
@@ -1201,25 +1167,21 @@ public class Forsaken
                     case 1: say(t, "Personally, I feel no particular inclination toward cruelty, but I'm in the minority in that regard, and I see nothing wrong with giving people the treatment they secretly wish to visit upon others.  "); break;
                     default: say(t, "I now believe that altruism toward one's peers is not only pointless, but also contrary to human nature, and only results in greater problems in the long term.  ");
                 }
-                if(flavorDeviancy() > 66)
-                    say(t, "I simply wish to be left alone to pursue my own pleasures.");
-                else
-                if(flavorDeviancy() > 33)
-                    say(t, "I'm beginning to grow numb to the perversions in which I see people indulge every day.");
-                else
-                    say(t, "Somehow, I'm still surprised when I see the depths to which some people will sink in pursuit of sadistic pleasure.");
+                switch (flavorDeviancy() / 33) {
+                    case 0: say(t, "Somehow, I'm still surprised when I see the depths to which some people will sink in pursuit of sadistic pleasure."); break;
+                    case 1: say(t, "I'm beginning to grow numb to the perversions in which I see people indulge every day."); break;
+                    default: say(t, "I simply wish to be left alone to pursue my own pleasures.");
+                }
             }
         } else
         if(flavorHostility() < 81)
             if(innocence > 66)
             {
-                if(flavorObedience() > 66)
-                    say(t, "Philosophy?  Um, I don't really think about it.  You just tell me who needs to suffer, and then I make it happen!  ");
-                else
-                if(flavorObedience() > 33)
-                    say(t, "I don't really care about all that philosophy stuff.  All I know is that as long as I follow you, I get to make people cry and scream!  ");
-                else
-                    say(t, "Ugh, I don't wanna talk about boring stuff.  Hurry, send me out to make more people suffer...  ");
+                switch (flavorObedience() / 33) {
+                    case 0: say(t, "Ugh, I don't wanna talk about boring stuff.  Hurry, send me out to make more people suffer...  "); break;
+                    case 1: say(t, "I don't really care about all that philosophy stuff.  All I know is that as long as I follow you, I get to make people cry and scream!  "); break;
+                    default: say(t, "Philosophy?  Um, I don't really think about it.  You just tell me who needs to suffer, and then I make it happen!  ");
+                }
                 switch (disgrace / 33) {
                     case 0: say(t, "The way they scream and run from me is so much fun!  "); break;
                     case 1: say(t, "I'll make them respect me again... make them fear me again...  "); break;
@@ -1233,23 +1195,19 @@ public class Forsaken
                     case 1: say(t, "I always just accepted everything everyone told me about right and wrong.  I'm a little smarter now!  "); break;
                     default: say(t, "I was so stupid, always babbling about love and hope.  Hate and despair are so much cooler!  ");
                 }
-                if(flavorDeviancy() > 66)
-                    say(t, "Nn...  Aaah, now that we've started talking about this, I'm getting all excited.  I wanna tear somebody apart right now!");
-                else
-                if(flavorDeviancy() > 33)
-                    say(t, "I wonder what I could do to have even more fun...");
-                else
-                    say(t, "It seems like no matter how many people I hurt, it's never quite enough to satisfy me...  Maybe there's something else missing...");
+                switch (flavorDeviancy() / 33) {
+                    case 0: say(t, "It seems like no matter how many people I hurt, it's never quite enough to satisfy me...  Maybe there's something else missing..."); break;
+                    case 1: say(t, "I wonder what I could do to have even more fun..."); break;
+                    default: say(t, "Nn...  Aaah, now that we've started talking about this, I'm getting all excited.  I wanna tear somebody apart right now!");
+                }
             } else
             if(innocence > 33)
             {
-                if(flavorObedience() > 66)
-                    say(t, "Well, obviously I hate humanity.  I'd stop hurting people if you told me to... but I'm hoping you don't tell me to do that.  ");
-                else
-                if(flavorObedience() > 33)
-                    say(t, "I think a big part of the reason I'm following you is that it gives me an excuse to hurt people.  ");
-                else
-                    say(t, "Well, basically, my only reason for fighting alongside you is that I hate humanity even more than I hate the Demons.  ");
+                switch (flavorObedience() / 33) {
+                    case 0: say(t, "Well, basically, my only reason for fighting alongside you is that I hate humanity even more than I hate the Demons.  "); break;
+                    case 1: say(t, "I think a big part of the reason I'm following you is that it gives me an excuse to hurt people.  "); break;
+                    default: say(t, "Well, obviously I hate humanity.  I'd stop hurting people if you told me to... but I'm hoping you don't tell me to do that.  ");
+                }
                 switch (disgrace / 33) {
                     case 0: say(t, "Everyone either fears or respects me, sure, but that isn't enough to stop me from hating them.  "); break;
                     case 1: say(t, "Ever since I first started to lose to the Demons, people have started to show me their true faces.  But that's not even the main reason I hate them.  "); break;
@@ -1260,22 +1218,18 @@ public class Forsaken
                     case 1: say(t, "They just do whatever's easiest in the moment, justifying it to themselves after the fact.  They're animals pretending to be conscious beings.  "); break;
                     default: say(t, "They're all just so... selfish.  Even the supposedly selfless ones are just doing what they do for self-gratification.  If justice even means anything, then justice requires them to suffer.  ");
                 }
-                if(flavorDeviancy() > 66)
-                    say(t, "Of course, I know I'm no exception.  I hate myself most of all.");
-                else
-                if(flavorDeviancy() > 33)
-                    say(t, "The only thing they're good for is hurting them to make myself feel better.");
-                else
-                    say(t, "I don't even exactly enjoy hurting them.  It just... makes me feel less empty inside for a little while.");
+                switch (flavorDeviancy() / 33) {
+                    case 0: say(t, "I don't even exactly enjoy hurting them.  It just... makes me feel less empty inside for a little while."); break;
+                    case 1: say(t, "The only thing they're good for is hurting them to make myself feel better."); break;
+                    default: say(t, "Of course, I know I'm no exception.  I hate myself most of all.");
+                }
             } else
             {
-                if(flavorObedience() > 66)
-                    say(t, "I have cast aside philosophy in favor of blind servitude under you.  I don't attach any moral significance to making your enemies suffer.  ");
-                else
-                if(flavorObedience() > 33)
-                    say(t, "I do not have much of a philosophy anymore.  I simply follow you in order to satisfy my sadistic urges.  ");
-                else
-                    say(t, "I've decided to devote my life toward making others suffer.  If it happens to serve your ends... well, I'm not happy about it, but it can't be helped.  ");
+                switch (flavorObedience() / 33) {
+                    case 0: say(t, "I've decided to devote my life toward making others suffer.  If it happens to serve your ends... well, I'm not happy about it, but it can't be helped.  "); break;
+                    case 1: say(t, "I do not have much of a philosophy anymore.  I simply follow you in order to satisfy my sadistic urges.  "); break;
+                    default: say(t, "I have cast aside philosophy in favor of blind servitude under you.  I don't attach any moral significance to making your enemies suffer.  ");
+                }
                 switch (disgrace / 33) {
                     case 0: say(t, "Although some still seem to consider me to be some sort of hero, the nature of my motivation is utterly amoral.  "); break;
                     case 1: say(t, "I do not particularly care who I victimize, whether they're those who have turned their back on me or those who still remain loyal.  "); break;
@@ -1289,13 +1243,11 @@ public class Forsaken
                     case 1: say(t, "My actions have no particular long-term purpose behind them.  "); break;
                     default: say(t, "It took me much too long to realize that restricting myself to arbitrary ethical codes was pointless, and I intend to make up for lost time.  ");
                 }
-                if(flavorDeviancy() > 66)
-                    say(t, "I take a certain degree of sexual pleasure from the knowledge that I'm causing pain to others, and so I do so at every opportunity.  That's all.");
-                else
-                if(flavorDeviancy() > 33)
-                    say(t, "I simply act in whichever manner is necessary to make myself feel better in the moment.  It's perfectly rational.");
-                else
-                    say(t, "This is the only form of entertainment which I still enjoy.");
+                switch (flavorDeviancy() / 33) {
+                    case 0: say(t, "This is the only form of entertainment which I still enjoy."); break;
+                    case 1: say(t, "I simply act in whichever manner is necessary to make myself feel better in the moment.  It's perfectly rational."); break;
+                    default: say(t, "I take a certain degree of sexual pleasure from the knowledge that I'm causing pain to others, and so I do so at every opportunity.  That's all.");
+                }
             }
         say(t, "\"");
     }
@@ -1378,149 +1330,119 @@ public class Forsaken
                     {
                         if(x.flavorHostility() < 20)
                         {
-                            if(x.confidence > 66)
-                                say(t, x.mainName + " is strong, and amazing, and really nice too!  ");
-                            else
-                            if(x.confidence > 33)
-                                say(t, x.mainName + " is a really great, caring friend!  ");
-                            else
-                                say(t, x.mainName + " is shy and sweet.  I like " + x.himHer() + " a lot!  ");
+                            switch (x.confidence / 33) {
+                                case 0: say(t, x.mainName + " is shy and sweet.  I like " + x.himHer() + " a lot!  "); break;
+                                case 1: say(t, x.mainName + " is a really great, caring friend!  "); break;
+                                default: say(t, x.mainName + " is strong, and amazing, and really nice too!  ");
+                            }
                         } else
                         if(x.flavorHostility() < 40)
                         {
-                            if(x.confidence > 66)
-                                say(t, "Even though " + x.mainName + " can seem scary at first, " + x.heShe() + "'s not that bad.  ");
-                            else
-                            if(x.confidence > 33)
-                                say(t, x.mainName + " isn't actually a bad person at all!  ");
-                            else
-                                say(t, x.mainName + " seems a little quiet and weird until you get to know " + x.himHer() + ".  ");
+                            switch (x.confidence / 33) {
+                                case 0: say(t, x.mainName + " seems a little quiet and weird until you get to know " + x.himHer() + ".  "); break;
+                                case 1: say(t, x.mainName + " isn't actually a bad person at all!  "); break;
+                                default: say(t, "Even though " + x.mainName + " can seem scary at first, " + x.heShe() + "'s not that bad.  ");
+                            }
                         } else
                         if(x.flavorHostility() < 61)
                         {
-                            if(x.confidence > 66)
-                                say(t, "As long as you don't make " + x.himHer() + " angry, " + x.mainName + " is really fun!  ");
-                            else
-                            if(x.confidence > 33)
-                                say(t, x.mainName + " can get really, really grumpy sometimes, but that doesn't mean " + x.heShe() + "'s a bad person!  ");
-                            else
-                                say(t, x.mainName + " may be kinda unfriendly, always wanting to be by " + x.himHer() + "self and glaring at people... but I still like " + x.himHer() + "!  ");
+                            switch (x.confidence / 33) {
+                                case 0: say(t, x.mainName + " may be kinda unfriendly, always wanting to be by " + x.himHer() + "self and glaring at people... but I still like " + x.himHer() + "!  "); break;
+                                case 1: say(t, x.mainName + " can get really, really grumpy sometimes, but that doesn't mean " + x.heShe() + "'s a bad person!  "); break;
+                                default: say(t, "As long as you don't make " + x.himHer() + " angry, " + x.mainName + " is really fun!  ");
+                            }
                         } else
                         if(x.flavorHostility() < 81)
                         {
-                            if(x.confidence > 66)
-                                say(t, "Even though " + x.mainName + " seems really angry all the time, I still like " + x.himHer() + "!  ");
-                            else
-                            if(x.confidence > 33)
-                                say(t, "I know " + x.mainName + " basically hates everyone, but that doesn't mean I have to hate " + x.himHer() + "!  ");
-                            else
-                                say(t, x.mainName + " really seems like " + x.heShe() + " hates everyone, even " + x.himHer() + "self.  But I definitely don't hate " + x.himHer() + "!  ");
+                            switch (x.confidence / 33) {
+                                case 0: say(t, x.mainName + " really seems like " + x.heShe() + " hates everyone, even " + x.himHer() + "self.  But I definitely don't hate " + x.himHer() + "!  "); break;
+                                case 1: say(t, "I know " + x.mainName + " basically hates everyone, but that doesn't mean I have to hate " + x.himHer() + "!  "); break;
+                                default: say(t, "Even though " + x.mainName + " seems really angry all the time, I still like " + x.himHer() + "!  ");
+                            }
                         } else
-                        if(x.confidence > 66)
-                            say(t, x.mainName + " kinda seems like " + x.heShe() + " wants to kill everybody, even me... but I don't really hold it against " + x.himHer() + "!  ");
-                        else
-                        if(x.confidence > 33)
-                            say(t, "Is it weird that I like " + x.mainName + " even though " + x.heShe() + " wants everyone, including me and " + x.himHer() + " both, to die?  ");
-                        else
-                            say(t, "I wish that " + x.mainName + " wasn't always so depressed and wanting the world to end and stuff, because I actually really like " + x.himHer() + "!  ");
+                        switch (x.confidence / 33) {
+                            case 0: say(t, "I wish that " + x.mainName + " wasn't always so depressed and wanting the world to end and stuff, because I actually really like " + x.himHer() + "!  "); break;
+                            case 1: say(t, "Is it weird that I like " + x.mainName + " even though " + x.heShe() + " wants everyone, including me and " + x.himHer() + " both, to die?  "); break;
+                            default: say(t, x.mainName + " kinda seems like " + x.heShe() + " wants to kill everybody, even me... but I don't really hold it against " + x.himHer() + "!  ");
+                        }
                     } else
                     if(innocence > 33)
                     {
                         if(x.flavorHostility() < 20)
                         {
-                            if(x.confidence > 66)
-                                say(t, "I appreciate the way that " + x.mainName + " has such a strong sense of right and wrong.  ");
-                            else
-                            if(x.confidence > 33)
-                                say(t, x.mainName + " makes an effort to be kind to everyone " + x.heShe() + " meets.  ");
-                            else
-                                say(t, x.mainName + " is such a cute, shy little thing.  ");
+                            switch (x.confidence / 33) {
+                                case 0: say(t, x.mainName + " is such a cute, shy little thing.  "); break;
+                                case 1: say(t, x.mainName + " makes an effort to be kind to everyone " + x.heShe() + " meets.  "); break;
+                                default: say(t, "I appreciate the way that " + x.mainName + " has such a strong sense of right and wrong.  ");
+                            }
                         } else
                         if(x.flavorHostility() < 40)
                         {
-                            if(x.confidence > 66)
-                                say(t, x.mainName + " is a strong person who doesn't give an inch.  ");
-                            else
-                            if(x.confidence > 33)
-                                say(t, "I like " + x.mainName + ".  " + x.HeShe() + "'s had a rough time of life, but " + x.heShe() + "'s made the best of it.  ");
-                            else
-                                say(t, "I can tell that " + x.mainName + " has been hurt in the past, and it makes me want to protect " + x.himHer() + ".  ");
+                            switch (x.confidence / 33) {
+                                case 0: say(t, "I can tell that " + x.mainName + " has been hurt in the past, and it makes me want to protect " + x.himHer() + ".  "); break;
+                                case 1: say(t, "I like " + x.mainName + ".  " + x.HeShe() + "'s had a rough time of life, but " + x.heShe() + "'s made the best of it.  "); break;
+                                default: say(t, x.mainName + " is a strong person who doesn't give an inch.  ");
+                            }
                         } else
                         if(x.flavorHostility() < 61)
                         {
-                            if(x.confidence > 66)
-                                say(t, x.mainName + " is someone you definitely want to have on your side.  " + x.HeShe() + "'s fierce.  ");
-                            else
-                            if(x.confidence > 33)
-                                say(t, x.mainName + " is a harsh person, but only because " + x.heShe() + " has no choice.  I don't hold it against " + x.himHer() + ".  ");
-                            else
-                                say(t, x.mainName + " is a major pessimist who doesn't have much hope for " + x.himHer() + "self or the world, but I try to show " + x.himHer() + " that it's not all bad.  ");
+                            switch (x.confidence / 33) {
+                                case 0: say(t, x.mainName + " is a major pessimist who doesn't have much hope for " + x.himHer() + "self or the world, but I try to show " + x.himHer() + " that it's not all bad.  "); break;
+                                case 1: say(t, x.mainName + " is a harsh person, but only because " + x.heShe() + " has no choice.  I don't hold it against " + x.himHer() + ".  "); break;
+                                default: say(t, x.mainName + " is someone you definitely want to have on your side.  " + x.HeShe() + "'s fierce.  ");
+                            }
                         } else
                         if(x.flavorHostility() < 81)
                         {
-                            if(x.confidence > 66)
-                                say(t, "I'll be the first to admit that it's dangerous to get too close to " + x.mainName + ", but I think it's worth it.  ");
-                            else
-                            if(x.confidence > 33)
-                                say(t, x.mainName + " hates people in general, but that doesn't mean I have to hate " + x.himHer() + ".  ");
-                            else
-                                say(t, "I hope that as long as I keep showing " + x.mainName + " how much I like " + x.himHer() + ", " + x.heShe() + "'ll stop hating " + x.himHer() + "self so much.  ");
+                            switch (x.confidence / 33) {
+                                case 0: say(t, "I hope that as long as I keep showing " + x.mainName + " how much I like " + x.himHer() + ", " + x.heShe() + "'ll stop hating " + x.himHer() + "self so much.  "); break;
+                                case 1: say(t, x.mainName + " hates people in general, but that doesn't mean I have to hate " + x.himHer() + ".  "); break;
+                                default: say(t, "I'll be the first to admit that it's dangerous to get too close to " + x.mainName + ", but I think it's worth it.  ");
+                            }
                         } else
-                        if(x.confidence > 66)
-                            say(t, x.mainName + " wants to destroy the world, but I don't think " + x.heShe() + " can manage it.  Probably.  ");
-                        else
-                        if(x.confidence > 33)
-                            say(t, "The only thing keeping " + x.mainName + " going is pure spite.  I still like " + x.himHer() + ", though.  ");
-                        else
-                            say(t, x.mainName + " wants to destroy everything and everyone, including " + x.himHer() + "self.  It's hard to cheer " + x.himHer() + " up.  ");
+                        switch (x.confidence / 33) {
+                            case 0: say(t, x.mainName + " wants to destroy everything and everyone, including " + x.himHer() + "self.  It's hard to cheer " + x.himHer() + " up.  "); break;
+                            case 1: say(t, "The only thing keeping " + x.mainName + " going is pure spite.  I still like " + x.himHer() + ", though.  "); break;
+                            default: say(t, x.mainName + " wants to destroy the world, but I don't think " + x.heShe() + " can manage it.  Probably.  ");
+                        }
                     } else
                     if(x.flavorHostility() < 20)
                     {
-                        if(x.confidence > 66)
-                            say(t, x.mainName + " has held onto " + x.hisHer() + " heroic ideals with a stubbornness I can't help but respect.  ");
-                        else
-                        if(x.confidence > 33)
-                            say(t, "Despite becoming one of the Forsaken, " + x.mainName + " still retains the mindset of an upstanding member of society.  I find " + x.himHer() + " refreshing.  ");
-                        else
-                            say(t, x.mainName + " is timid, but I can appreciate " + x.hisHer() + " adherence to " + x.hisHer() + " morality even after being subjected to such extreme circumstances.  ");
+                        switch (x.confidence / 33) {
+                            case 0: say(t, x.mainName + " is timid, but I can appreciate " + x.hisHer() + " adherence to " + x.hisHer() + " morality even after being subjected to such extreme circumstances.  "); break;
+                            case 1: say(t, "Despite becoming one of the Forsaken, " + x.mainName + " still retains the mindset of an upstanding member of society.  I find " + x.himHer() + " refreshing.  "); break;
+                            default: say(t, x.mainName + " has held onto " + x.hisHer() + " heroic ideals with a stubbornness I can't help but respect.  ");
+                        }
                     } else
                     if(x.flavorHostility() < 40)
                     {
-                        if(x.confidence > 66)
-                            say(t, x.mainName + " is quite strong.  Merciless, even.  I hold a great deal of respect for " + x.himHer() + ".  ");
-                        else
-                        if(x.confidence > 33)
-                            say(t, x.mainName + " is a bit jaded, but that doesn't bother me in the slightest.  ");
-                        else
-                            say(t, x.mainName + " can come across as cowardly, but I appreciate " + x.hisHer() + " prudence in recognizing " + x.hisHer() + " own limitations.  ");
+                        switch (x.confidence / 33) {
+                            case 0: say(t, x.mainName + " can come across as cowardly, but I appreciate " + x.hisHer() + " prudence in recognizing " + x.hisHer() + " own limitations.  "); break;
+                            case 1: say(t, x.mainName + " is a bit jaded, but that doesn't bother me in the slightest.  "); break;
+                            default: say(t, x.mainName + " is quite strong.  Merciless, even.  I hold a great deal of respect for " + x.himHer() + ".  ");
+                        }
                     } else
                     if(x.flavorHostility() < 61)
                     {
-                        if(x.confidence > 66)
-                            say(t, x.mainName + " is the type of person I'd much prefer to have on my side - powerful and utterly ruthless.  ");
-                        else
-                        if(x.confidence > 33)
-                            say(t, x.mainName + " can come across as needlessly cruel, but " + x.heShe() + "'s simply doing what " + x.heShe() + " must in order to survive.  ");
-                        else
-                            say(t, x.mainName + " might not believe me when I say it, but I enjoy spending time around " + x.himHer() + ".  ");
+                        switch (x.confidence / 33) {
+                            case 0: say(t, x.mainName + " might not believe me when I say it, but I enjoy spending time around " + x.himHer() + ".  "); break;
+                            case 1: say(t, x.mainName + " can come across as needlessly cruel, but " + x.heShe() + "'s simply doing what " + x.heShe() + " must in order to survive.  "); break;
+                            default: say(t, x.mainName + " is the type of person I'd much prefer to have on my side - powerful and utterly ruthless.  ");
+                        }
                     } else
                     if(x.flavorHostility() < 81)
                     {
-                        if(x.confidence > 66)
-                            say(t, x.mainName + " has developed some severe murderous tendencies, but I don't see this as being an unreasonable reaction to " + x.hisHer() + " circumstances.  ");
-                        else
-                        if(x.confidence > 33)
-                            say(t, "Consumed by hatred as " + x.heShe() + " is, I find " + x.mainName + "'s perspective interesting, and I enjoy talking with " + x.himHer() + ".  ");
-                        else
-                            say(t, x.mainName + " hates all of humanity, and " + x.heShe() + " includes " + x.himHer() + "self in that category, but I believe that " + x.heShe() + " doesn't give " + x.himHer() + "self enough credit.  ");
+                        switch (x.confidence / 33) {
+                            case 0: say(t, x.mainName + " hates all of humanity, and " + x.heShe() + " includes " + x.himHer() + "self in that category, but I believe that " + x.heShe() + " doesn't give " + x.himHer() + "self enough credit.  "); break;
+                            case 1: say(t, "Consumed by hatred as " + x.heShe() + " is, I find " + x.mainName + "'s perspective interesting, and I enjoy talking with " + x.himHer() + ".  "); break;
+                            default: say(t, x.mainName + " has developed some severe murderous tendencies, but I don't see this as being an unreasonable reaction to " + x.hisHer() + " circumstances.  ");
+                        }
                     } else
-                    if(x.confidence > 66)
-                        say(t, x.mainName + " is determined to destroy the world, and I must admit that I sometimes feel compelled to help " + x.himHer() + ".  ");
-                    else
-                    if(x.confidence > 33)
-                        say(t, x.mainName + " is so bent on the destruction of humanity that I suspect " + x.heShe() + "'d be willing to destroy me as well, but I don't hold it against " + x.himHer() + ".  ");
-                    else
-                        say(t, "I believe that the only thing keeping " + x.mainName + " from trying to kill " + x.himHer() + "self is a stubborn desire to see the rest of the species die first.  I don't look down on " + x.himHer() + " at all.  ");
+                    switch (x.confidence / 33) {
+                        case 0: say(t, "I believe that the only thing keeping " + x.mainName + " from trying to kill " + x.himHer() + "self is a stubborn desire to see the rest of the species die first.  I don't look down on " + x.himHer() + " at all.  "); break;
+                        case 1: say(t, x.mainName + " is so bent on the destruction of humanity that I suspect " + x.heShe() + "'d be willing to destroy me as well, but I don't hold it against " + x.himHer() + ".  "); break;
+                        default: say(t, x.mainName + " is determined to destroy the world, and I must admit that I sometimes feel compelled to help " + x.himHer() + ".  ");
+                    }
                     if(killedPartner || otherKilledPartner || oldPartners)
                     {
                         if(otherKilledPartner)
@@ -1531,77 +1453,61 @@ public class Forsaken
                                 {
                                     if(x.opinion(this) > 100)
                                     {
-                                        if(x.morality > 66)
-                                            say(t, "I know that " + x.heShe() + " didn't want to kill " + x.kills[0].mainName + ".  " + x.HeShe() + "'s not the sort of person who does that sort of thing unless there was no choice.  ");
-                                        else
-                                        if(x.morality > 33)
-                                            say(t, "I never thought I'd be friends with " + x.kills[0].mainName + "'s killer...  Still, I can't blame " + x.mainName + " for doing what " + x.heShe() + " thought " + x.heShe() + " had to do.  ");
-                                        else
-                                            say(t, "I feel guilty about not being able to stop " + x.himHer() + " from having to kill " + x.kills[0].mainName + ".  It would have been nice if we all could have survived together...  ");
+                                        switch (x.morality / 33) {
+                                            case 0: say(t, "I feel guilty about not being able to stop " + x.himHer() + " from having to kill " + x.kills[0].mainName + ".  It would have been nice if we all could have survived together...  "); break;
+                                            case 1: say(t, "I never thought I'd be friends with " + x.kills[0].mainName + "'s killer...  Still, I can't blame " + x.mainName + " for doing what " + x.heShe() + " thought " + x.heShe() + " had to do.  "); break;
+                                            default: say(t, "I know that " + x.heShe() + " didn't want to kill " + x.kills[0].mainName + ".  " + x.HeShe() + "'s not the sort of person who does that sort of thing unless there was no choice.  ");
+                                        }
                                     } else
-                                    if(x.morality > 66)
-                                        say(t, "We used to be a lot closer, before " + x.heShe() + " killed " + x.kills[0].mainName + ".  ");
-                                    else
-                                    if(x.morality > 33)
-                                        say(t, "I think " + x.heShe() + " just hates being around me because it reminds " + x.himHer() + " of what " + x.heShe() + " did to " + x.kills[0].mainName + ".  ");
-                                    else
-                                        say(t, "I know that " + x.heShe() + " still blames me for not being able to stop " + x.himHer() + " from killing " + x.kills[0].mainName + "...  Hopefully " + x.heShe() + "'ll let it go eventually.  ");
+                                    switch (x.morality / 33) {
+                                        case 0: say(t, "I know that " + x.heShe() + " still blames me for not being able to stop " + x.himHer() + " from killing " + x.kills[0].mainName + "...  Hopefully " + x.heShe() + "'ll let it go eventually.  "); break;
+                                        case 1: say(t, "I think " + x.heShe() + " just hates being around me because it reminds " + x.himHer() + " of what " + x.heShe() + " did to " + x.kills[0].mainName + ".  "); break;
+                                        default: say(t, "We used to be a lot closer, before " + x.heShe() + " killed " + x.kills[0].mainName + ".  ");
+                                    }
                                 } else
                                 if(x.opinion(this) > 100)
                                 {
-                                    if(x.morality > 66)
-                                        say(t, "Now that " + x.kills[0].mainName + "'s gone, " + x.heShe() + "'s the one who's closest to me.  ");
-                                    else
-                                    if(x.morality > 33)
-                                        say(t, "We need to stick together, even if " + x.heShe() + " is the one who killed " + x.kills[0].mainName + ".  ");
-                                    else
-                                        say(t, "Sometimes I think " + x.heShe() + " killed " + x.kills[0].mainName + " just to get closer to me...  but no, that's ridiculous.  ");
+                                    switch (x.morality / 33) {
+                                        case 0: say(t, "Sometimes I think " + x.heShe() + " killed " + x.kills[0].mainName + " just to get closer to me...  but no, that's ridiculous.  "); break;
+                                        case 1: say(t, "We need to stick together, even if " + x.heShe() + " is the one who killed " + x.kills[0].mainName + ".  "); break;
+                                        default: say(t, "Now that " + x.kills[0].mainName + "'s gone, " + x.heShe() + "'s the one who's closest to me.  ");
+                                    }
                                 } else
-                                if(x.morality > 66)
-                                    say(t, "I think " + x.heShe() + "'s uncomfortable around me because " + x.heShe() + " still feels guilty about how " + x.heShe() + " didn't really have a good reason for killing " + x.kills[0].mainName + "...  Anyway, I don't live in the past.  ");
-                                else
-                                if(x.morality > 33)
-                                    say(t, "It seems like " + x.heShe() + " thinks we have to be enemies because " + x.heShe() + " killed " + x.kills[0].mainName + ", who I cared about a lot...  That's all in the past, though.  ");
-                                else
-                                    say(t, x.HeShe() + "... definitely enjoyed killing " + x.kills[0].mainName + ".  Still, I forgive " + x.himHer() + ", so I wish " + x.heShe() + " wouldn't be so hostile!  ");
+                                switch (x.morality / 33) {
+                                    case 0: say(t, x.HeShe() + "... definitely enjoyed killing " + x.kills[0].mainName + ".  Still, I forgive " + x.himHer() + ", so I wish " + x.heShe() + " wouldn't be so hostile!  "); break;
+                                    case 1: say(t, "It seems like " + x.heShe() + " thinks we have to be enemies because " + x.heShe() + " killed " + x.kills[0].mainName + ", who I cared about a lot...  That's all in the past, though.  "); break;
+                                    default: say(t, "I think " + x.heShe() + "'s uncomfortable around me because " + x.heShe() + " still feels guilty about how " + x.heShe() + " didn't really have a good reason for killing " + x.kills[0].mainName + "...  Anyway, I don't live in the past.  ");
+                                }
                             } else
                             if(otherOpinionOfDead >= 0)
                             {
                                 if(x.opinion(this) >= 0)
                                 {
-                                    if(x.morality > 66)
-                                        say(t, "Killing " + x.kills[0].mainName + " really messed " + x.himHer() + " up inside... and drove " + x.himHer() + " into my arms, heh.  ");
-                                    else
-                                    if(x.morality > 33)
-                                        say(t, "We get along better ever since " + x.heShe() + " killed " + x.kills[0].mainName + ", and now " + x.heShe() + " spends all " + x.hisHer() + " time with me.  ");
-                                    else
-                                        say(t, "It may seem harsh, but I think that being forced to kill " + x.kills[0].mainName + " is the best thing that could have happened to " + x.himHer() + ".  We're closer now.  ");
+                                    switch (x.morality / 33) {
+                                        case 0: say(t, "It may seem harsh, but I think that being forced to kill " + x.kills[0].mainName + " is the best thing that could have happened to " + x.himHer() + ".  We're closer now.  "); break;
+                                        case 1: say(t, "We get along better ever since " + x.heShe() + " killed " + x.kills[0].mainName + ", and now " + x.heShe() + " spends all " + x.hisHer() + " time with me.  "); break;
+                                        default: say(t, "Killing " + x.kills[0].mainName + " really messed " + x.himHer() + " up inside... and drove " + x.himHer() + " into my arms, heh.  ");
+                                    }
                                 } else
-                                if(x.morality > 66)
-                                    say(t, x.HeShe() + " seems really offended that I'm not more sad about what happened to " + x.kills[0].mainName + ".  Guilty conscience, I guess.  ");
-                                else
-                                if(x.morality > 33)
-                                    say(t, x.HeShe() + "'s still obsessed with " + x.kills[0].mainName + ", though, and doesn't have any time for me.  It must be the guilt.  ");
-                                else
-                                    say(t, x.HeShe() + " thinks I set " + x.himHer() + " up to kill " + x.kills[0].mainName + ", though, and " + x.heShe() + " hates me for it.  ");
+                                switch (x.morality / 33) {
+                                    case 0: say(t, x.HeShe() + " thinks I set " + x.himHer() + " up to kill " + x.kills[0].mainName + ", though, and " + x.heShe() + " hates me for it.  "); break;
+                                    case 1: say(t, x.HeShe() + "'s still obsessed with " + x.kills[0].mainName + ", though, and doesn't have any time for me.  It must be the guilt.  "); break;
+                                    default: say(t, x.HeShe() + " seems really offended that I'm not more sad about what happened to " + x.kills[0].mainName + ".  Guilty conscience, I guess.  ");
+                                }
                             } else
                             if(x.opinion(this) >= 0)
                             {
-                                if(x.morality > 66)
-                                    say(t, "I'm really happy " + x.heShe() + " finally worked up the nerve to kill " + x.kills[0].mainName + ", so it can just be the two of us together.  ");
-                                else
-                                if(x.morality > 33)
-                                    say(t, x.HeShe() + " still feels a little bit guilty about killing " + x.kills[0].mainName + ".  Fortunately, I never have any trouble cheering " + x.himHer() + " up.  ");
-                                else
-                                    say(t, x.HeShe() + " probably enjoyed killing " + x.kills[0].mainName + " too much... not that I can complain, since it means the two of us can be together with no distractions.  ");
+                                switch (x.morality / 33) {
+                                    case 0: say(t, x.HeShe() + " probably enjoyed killing " + x.kills[0].mainName + " too much... not that I can complain, since it means the two of us can be together with no distractions.  "); break;
+                                    case 1: say(t, x.HeShe() + " still feels a little bit guilty about killing " + x.kills[0].mainName + ".  Fortunately, I never have any trouble cheering " + x.himHer() + " up.  "); break;
+                                    default: say(t, "I'm really happy " + x.heShe() + " finally worked up the nerve to kill " + x.kills[0].mainName + ", so it can just be the two of us together.  ");
+                                }
                             } else
-                            if(x.morality > 66)
-                                say(t, x.HeShe() + " always gets offended when I try to congratulate " + x.himHer() + " on getting rid of " + x.kills[0].mainName + " for us, though.  I guess we aren't exactly close anymore.  ");
-                            else
-                            if(x.morality > 33)
-                                say(t, x.HeShe() + " doesn't like spending time around me, though.  Maybe being around an old teammate reminds " + x.himHer() + " about how " + x.heShe() + " killed " + x.kills[0].mainName + "...  or about how much " + x.heShe() + " clearly enjoyed it.  ");
-                            else
-                                say(t, "I don't think " + x.heShe() + " really means it when " + x.heShe() + " says " + x.heShe() + " wishes " + x.heShe() + " killed me along with " + x.kills[0].mainName + ".  ");
+                            switch (x.morality / 33) {
+                                case 0: say(t, "I don't think " + x.heShe() + " really means it when " + x.heShe() + " says " + x.heShe() + " wishes " + x.heShe() + " killed me along with " + x.kills[0].mainName + ".  "); break;
+                                case 1: say(t, x.HeShe() + " doesn't like spending time around me, though.  Maybe being around an old teammate reminds " + x.himHer() + " about how " + x.heShe() + " killed " + x.kills[0].mainName + "...  or about how much " + x.heShe() + " clearly enjoyed it.  "); break;
+                                default: say(t, x.HeShe() + " always gets offended when I try to congratulate " + x.himHer() + " on getting rid of " + x.kills[0].mainName + " for us, though.  I guess we aren't exactly close anymore.  ");
+                            }
                         } else
                         if(killedPartner)
                         {
@@ -1611,77 +1517,61 @@ public class Forsaken
                                 {
                                     if(x.opinion(this) > 100)
                                     {
-                                        if(x.morality > 66)
-                                            say(t, x.HeShe() + " doesn't blame me for killing " + kills[0].mainName + ".  " + x.HeShe() + " says that " + x.heShe() + " knows it hurts me more than it hurts " + x.himHer() + ".  ");
-                                        else
-                                        if(x.morality > 33)
-                                            say(t, "It's really surprising that " + x.heShe() + " doesn't hate me after... what I did to " + kills[0].mainName + ".  ");
-                                        else
-                                            say(t, "I know " + x.heShe() + " never forgave me for killing " + kills[0].mainName + "...  Still, we've stayed close.  ");
+                                        switch (x.morality / 33) {
+                                            case 0: say(t, "I know " + x.heShe() + " never forgave me for killing " + kills[0].mainName + "...  Still, we've stayed close.  "); break;
+                                            case 1: say(t, "It's really surprising that " + x.heShe() + " doesn't hate me after... what I did to " + kills[0].mainName + ".  "); break;
+                                            default: say(t, x.HeShe() + " doesn't blame me for killing " + kills[0].mainName + ".  " + x.HeShe() + " says that " + x.heShe() + " knows it hurts me more than it hurts " + x.himHer() + ".  ");
+                                        }
                                     } else
-                                    if(x.morality > 66)
-                                        say(t, x.HeShe() + " says " + x.heShe() + " forgives me for killing " + kills[0].mainName + "... which I'm pretty sure is a lie.  ");
-                                    else
-                                    if(x.morality > 33)
-                                        say(t, "Of course, we're not friends.  How could we be, after I killed " + kills[0].mainName + "?  ");
-                                    else
-                                        say(t, x.HeShe() + " hates me for killing " + kills[0].mainName + ", though...  I can't really blame " + x.himHer() + ".  ");
+                                    switch (x.morality / 33) {
+                                        case 0: say(t, x.HeShe() + " hates me for killing " + kills[0].mainName + ", though...  I can't really blame " + x.himHer() + ".  "); break;
+                                        case 1: say(t, "Of course, we're not friends.  How could we be, after I killed " + kills[0].mainName + "?  "); break;
+                                        default: say(t, x.HeShe() + " says " + x.heShe() + " forgives me for killing " + kills[0].mainName + "... which I'm pretty sure is a lie.  ");
+                                    }
                                 } else
                                 if(x.opinion(this) > 100)
                                 {
-                                    if(x.morality > 66)
-                                        say(t, "It's a little annoying how quick " + x.heShe() + " was to 'forgive' me for killing " + kills[0].mainName + "... not that that really matters.  ");
-                                    else
-                                    if(x.morality > 33)
-                                        say(t, "As much as I miss " + kills[0].mainName + ", at least " + x.mainName + " was there to comfort me.  ");
-                                    else
-                                        say(t, "I have to admit that I'm a little uncomfortable about how little " + x.heShe() + " respects " + kills[0].mainName + "'s memory, though...  Still, I won't let that come between us.  ");
+                                    switch (x.morality / 33) {
+                                        case 0: say(t, "I have to admit that I'm a little uncomfortable about how little " + x.heShe() + " respects " + kills[0].mainName + "'s memory, though...  Still, I won't let that come between us.  "); break;
+                                        case 1: say(t, "As much as I miss " + kills[0].mainName + ", at least " + x.mainName + " was there to comfort me.  "); break;
+                                        default: say(t, "It's a little annoying how quick " + x.heShe() + " was to 'forgive' me for killing " + kills[0].mainName + "... not that that really matters.  ");
+                                    }
                                 } else
-                                if(x.morality > 66)
-                                    say(t, "Maybe I'm just lonely after killing " + kills[0].mainName + ".  If only " + x.mainName + " wanted anything to do with me...  ");
-                                else
-                                if(x.morality > 33)
-                                    say(t, x.HeShe() + " doesn't want anything to do with me, though.  I know " + x.heShe() + " hated " + kills[0].mainName + ", so it's not like " + x.heShe() + " hates me for killing " + kills[0].himHer() + ".  ");
-                                else
-                                    say(t, "I think the only major thing standing between us is that " + x.heShe() + "'s angry at me for killing " + kills[0].mainName + " before " + x.heShe() + " could do it first.  ");
+                                switch (x.morality / 33) {
+                                    case 0: say(t, "I think the only major thing standing between us is that " + x.heShe() + "'s angry at me for killing " + kills[0].mainName + " before " + x.heShe() + " could do it first.  "); break;
+                                    case 1: say(t, x.HeShe() + " doesn't want anything to do with me, though.  I know " + x.heShe() + " hated " + kills[0].mainName + ", so it's not like " + x.heShe() + " hates me for killing " + kills[0].himHer() + ".  "); break;
+                                    default: say(t, "Maybe I'm just lonely after killing " + kills[0].mainName + ".  If only " + x.mainName + " wanted anything to do with me...  ");
+                                }
                             } else
                             if(otherOpinionOfDead >= 0)
                             {
                                 if(x.opinion(this) >= 0)
                                 {
-                                    if(x.morality > 66)
-                                        say(t, "I'm glad I killed " + kills[0].mainName + " so that there wouldn't be anything to come between the two of us.  ");
-                                    else
-                                    if(x.morality > 33)
-                                        say(t, x.HeShe() + " forgave me for killing " + kills[0].mainName + ", fortunately.  ");
-                                    else
-                                        say(t, "By the way, I definitely didn't kill " + kills[0].mainName + " just to get closer to " + x.himHer() + ", alright?  ");
+                                    switch (x.morality / 33) {
+                                        case 0: say(t, "By the way, I definitely didn't kill " + kills[0].mainName + " just to get closer to " + x.himHer() + ", alright?  "); break;
+                                        case 1: say(t, x.HeShe() + " forgave me for killing " + kills[0].mainName + ", fortunately.  "); break;
+                                        default: say(t, "I'm glad I killed " + kills[0].mainName + " so that there wouldn't be anything to come between the two of us.  ");
+                                    }
                                 } else
-                                if(x.morality > 66)
-                                    say(t, "I was really hoping that we'd be able to get closer without " + kills[0].mainName + " in the way...  ");
-                                else
-                                if(x.morality > 33)
-                                    say(t, x.HeShe() + " still hasn't forgiven me for killing " + kills[0].mainName + ", though.  ");
-                                else
-                                    say(t, x.HeShe() + ", on the other hand, has sworn to kill me in order to avenge " + kills[0].mainName + "... which is really sad.  Well, anyway...  ");
+                                switch (x.morality / 33) {
+                                    case 0: say(t, x.HeShe() + ", on the other hand, has sworn to kill me in order to avenge " + kills[0].mainName + "... which is really sad.  Well, anyway...  "); break;
+                                    case 1: say(t, x.HeShe() + " still hasn't forgiven me for killing " + kills[0].mainName + ", though.  "); break;
+                                    default: say(t, "I was really hoping that we'd be able to get closer without " + kills[0].mainName + " in the way...  ");
+                                }
                             } else
                             if(x.opinion(this) >= 0)
                             {
-                                if(x.morality > 66)
-                                    say(t, "I think " + x.heShe() + "'s secretly grateful that I killed " + kills[0].mainName + " so that " + x.heShe() + " wouldn't have to.  ");
-                                else
-                                if(x.morality > 33)
-                                    say(t, "We're both a lot happier without " + kills[0].mainName + " around.  ");
-                                else
-                                    say(t, x.HeShe() + "'s always thanking me for killing " + kills[0].mainName + "... which makes me a little uncomfortable, not that I liked " + kills[0].himHer() + " much either.  ");
+                                switch (x.morality / 33) {
+                                    case 0: say(t, x.HeShe() + "'s always thanking me for killing " + kills[0].mainName + "... which makes me a little uncomfortable, not that I liked " + kills[0].himHer() + " much either.  "); break;
+                                    case 1: say(t, "We're both a lot happier without " + kills[0].mainName + " around.  "); break;
+                                    default: say(t, "I think " + x.heShe() + "'s secretly grateful that I killed " + kills[0].mainName + " so that " + x.heShe() + " wouldn't have to.  ");
+                                }
                             } else
-                            if(x.morality > 66)
-                                say(t, x.HeShe() + " thinks I should be more sorry about killing " + kills[0].mainName + ", though.  Which is ridiculous, since " + x.heShe() + " hated " + kills[0].himHer() + ", too.  ");
-                            else
-                            if(x.morality > 33)
-                                say(t, "Even without " + kills[0].mainName + " in the way, our relationship still hasn't gotten much better, though.  ");
-                            else
-                                say(t, x.HeShe() + " doesn't like me, though, and " + x.heShe() + " says I should have let " + x.himHer() + " be the one to kill " + kills[0].mainName + ".  ");
+                            switch (x.morality / 33) {
+                                case 0: say(t, x.HeShe() + " doesn't like me, though, and " + x.heShe() + " says I should have let " + x.himHer() + " be the one to kill " + kills[0].mainName + ".  "); break;
+                                case 1: say(t, "Even without " + kills[0].mainName + " in the way, our relationship still hasn't gotten much better, though.  "); break;
+                                default: say(t, x.HeShe() + " thinks I should be more sorry about killing " + kills[0].mainName + ", though.  Which is ridiculous, since " + x.heShe() + " hated " + kills[0].himHer() + ", too.  ");
+                            }
                         } else
                         if(formerRelationship >= 0)
                         {
@@ -1689,236 +1579,188 @@ public class Forsaken
                             {
                                 if(confidence > 66)
                                 {
-                                    if(x.morality > 66)
-                                        say(t, x.HeShe() + "'s still my minion, same as ever.  ");
-                                    else
-                                    if(x.morality > 33)
-                                        say(t, "Even though we were defeated together, " + x.heShe() + " still looks up to me.  ");
-                                    else
-                                        say(t, x.HeShe() + " still relies on me to protect " + x.himHer() + ", just like when we were still Chosen.  ");
+                                    switch (x.morality / 33) {
+                                        case 0: say(t, x.HeShe() + " still relies on me to protect " + x.himHer() + ", just like when we were still Chosen.  "); break;
+                                        case 1: say(t, "Even though we were defeated together, " + x.heShe() + " still looks up to me.  "); break;
+                                        default: say(t, x.HeShe() + "'s still my minion, same as ever.  ");
+                                    }
                                 } else
                                 if(confidence > 33)
                                 {
-                                    if(x.morality > 66)
-                                        say(t, x.HeShe() + "'s always been kinder to me than to anyone else, though...  ");
-                                    else
-                                    if(x.morality > 33)
-                                        say(t, "We've always been close.  ");
-                                    else
-                                        say(t, "I think " + x.heShe() + " gets jealous when I spend time with the Forsaken from other teams.  ");
+                                    switch (x.morality / 33) {
+                                        case 0: say(t, "I think " + x.heShe() + " gets jealous when I spend time with the Forsaken from other teams.  "); break;
+                                        case 1: say(t, "We've always been close.  "); break;
+                                        default: say(t, x.HeShe() + "'s always been kinder to me than to anyone else, though...  ");
+                                    }
                                 } else
-                                if(x.morality > 66)
-                                    say(t, x.HeShe() + " still protects me, even now...  ");
-                                else
-                                if(x.morality > 33)
-                                    say(t, "I-I'm so happy " + x.heShe() + " doesn't blame me for being too weak to help " + x.himHer() + " beat you...  ");
-                                else
-                                    say(t, "Even now that I serve you, I still... b-belong to " + x.himHer() + "...  ");
+                                switch (x.morality / 33) {
+                                    case 0: say(t, "Even now that I serve you, I still... b-belong to " + x.himHer() + "...  "); break;
+                                    case 1: say(t, "I-I'm so happy " + x.heShe() + " doesn't blame me for being too weak to help " + x.himHer() + " beat you...  "); break;
+                                    default: say(t, x.HeShe() + " still protects me, even now...  ");
+                                }
                             } else
                             if(confidence > 66)
                             {
-                                if(x.morality > 66)
-                                    say(t, x.HeShe() + "'s defying me for now...  Don't worry, " + x.heShe() + "'ll be mine again soon.  ");
-                                else
-                                if(x.morality > 33)
-                                    say(t, "Ever since we were defeated together, " + x.heShe() + " doesn't look up to me so much.  ");
-                                else
-                                    say(t, x.HeShe() + "... blames me for being unable to protect " + x.himHer() + ".  Maybe I deserve it.  ");
+                                switch (x.morality / 33) {
+                                    case 0: say(t, x.HeShe() + "... blames me for being unable to protect " + x.himHer() + ".  Maybe I deserve it.  "); break;
+                                    case 1: say(t, "Ever since we were defeated together, " + x.heShe() + " doesn't look up to me so much.  "); break;
+                                    default: say(t, x.HeShe() + "'s defying me for now...  Don't worry, " + x.heShe() + "'ll be mine again soon.  ");
+                                }
                             } else
                             if(confidence > 33)
                             {
-                                if(x.morality > 66)
-                                    say(t, x.HeShe() + " gives me the cold shoulder nowadays, though.  ");
-                                else
-                                if(x.morality > 33)
-                                    say(t, "We used to be so close...  ");
-                                else
-                                    say(t, "Now " + x.heShe() + " feels the same way about me as " + x.heShe() + " does about everyone else.  ");
+                                switch (x.morality / 33) {
+                                    case 0: say(t, "Now " + x.heShe() + " feels the same way about me as " + x.heShe() + " does about everyone else.  "); break;
+                                    case 1: say(t, "We used to be so close...  "); break;
+                                    default: say(t, x.HeShe() + " gives me the cold shoulder nowadays, though.  ");
+                                }
                             } else
-                            if(x.morality > 66)
-                                say(t, x.HeShe() + " doesn't seem interested in protecting me anymore, though...  ");
-                            else
-                            if(x.morality > 33)
-                                say(t, "A-Although...  ever since I failed to help " + x.himHer() + " beat you... I think " + x.heShe() + " doesn't have the patience to put up with me anymore...  ");
-                            else
-                                say(t, "I used to belong to " + x.himHer() + ", b-but now " + x.heShe() + " says... th-that I'm not worthy to be with " + x.himHer() + "...  S-Still!  ");
+                            switch (x.morality / 33) {
+                                case 0: say(t, "I used to belong to " + x.himHer() + ", b-but now " + x.heShe() + " says... th-that I'm not worthy to be with " + x.himHer() + "...  S-Still!  "); break;
+                                case 1: say(t, "A-Although...  ever since I failed to help " + x.himHer() + " beat you... I think " + x.heShe() + " doesn't have the patience to put up with me anymore...  "); break;
+                                default: say(t, x.HeShe() + " doesn't seem interested in protecting me anymore, though...  ");
+                            }
                         } else
                         if(x.opinion(this) > 100)
                         {
                             if(confidence > 66)
                             {
-                                if(x.morality > 66)
-                                    say(t, "Ever since you broke " + x.hisHer() + " will, " + x.heShe() + "'s been much more content to follow my orders, too.  ");
-                                else
-                                if(x.morality > 33)
-                                    say(t, x.HeShe() + " started being much nicer to me after we lost our fight against you.  I think " + x.heShe() + " was guilty about not being able to do more to help.  ");
-                                else
-                                    say(t, "Ever since we were both defeated, " + x.heShe() + " doesn't seem to resent me nearly as much.  ");
+                                switch (x.morality / 33) {
+                                    case 0: say(t, "Ever since we were both defeated, " + x.heShe() + " doesn't seem to resent me nearly as much.  "); break;
+                                    case 1: say(t, x.HeShe() + " started being much nicer to me after we lost our fight against you.  I think " + x.heShe() + " was guilty about not being able to do more to help.  "); break;
+                                    default: say(t, "Ever since you broke " + x.hisHer() + " will, " + x.heShe() + "'s been much more content to follow my orders, too.  ");
+                                }
                             } else
                             if(confidence > 33)
                             {
-                                if(x.morality > 66)
-                                    say(t, x.HeShe() + " became a lot less self-righteous after you captured us.  ");
-                                else
-                                if(x.morality > 33)
-                                    say(t, "We get along much better than we used to.  ");
-                                else
-                                    say(t, "Being beaten by you helped me understand " + x.himHer() + " better, and now we actually get along.  ");
+                                switch (x.morality / 33) {
+                                    case 0: say(t, "Being beaten by you helped me understand " + x.himHer() + " better, and now we actually get along.  "); break;
+                                    case 1: say(t, "We get along much better than we used to.  "); break;
+                                    default: say(t, x.HeShe() + " became a lot less self-righteous after you captured us.  ");
+                                }
                             } else
-                            if(x.morality > 66)
-                                say(t, "I'm letting " + x.himHer() + " protect me now, a-and... it's actually not so bad...  ");
-                            else
-                            if(x.morality > 33)
-                                say(t, "I think that... after getting beaten by you... " + x.heShe() + " realized that " + x.heShe() + "'s actually not that much stronger than me...  ");
-                            else
-                                say(t, "A-As long as I do whatever " + x.heShe() + " tells me to, " + x.heShe() + "'s willing to protect me now...  ");
+                            switch (x.morality / 33) {
+                                case 0: say(t, "A-As long as I do whatever " + x.heShe() + " tells me to, " + x.heShe() + "'s willing to protect me now...  "); break;
+                                case 1: say(t, "I think that... after getting beaten by you... " + x.heShe() + " realized that " + x.heShe() + "'s actually not that much stronger than me...  "); break;
+                                default: say(t, "I'm letting " + x.himHer() + " protect me now, a-and... it's actually not so bad...  ");
+                            }
                         } else
                         if(confidence > 66)
                         {
-                            if(x.morality > 66)
-                                say(t, x.HeShe() + " still resists my will, of course.  " + x.HeShe() + "'ll give " + x.himHer() + "self to me eventually.  I can wait.  ");
-                            else
-                            if(x.morality > 33)
-                                say(t, x.HeShe() + " won't be able to hold onto " + x.hisHer() + " old hatred of me for much longer.  ");
-                            else
-                                say(t, "It really doesn't bother me if " + x.heShe() + " still hates me.  ");
+                            switch (x.morality / 33) {
+                                case 0: say(t, "It really doesn't bother me if " + x.heShe() + " still hates me.  "); break;
+                                case 1: say(t, x.HeShe() + " won't be able to hold onto " + x.hisHer() + " old hatred of me for much longer.  "); break;
+                                default: say(t, x.HeShe() + " still resists my will, of course.  " + x.HeShe() + "'ll give " + x.himHer() + "self to me eventually.  I can wait.  ");
+                            }
                         } else
                         if(confidence > 33)
                         {
-                            if(x.morality > 66)
-                                say(t, x.HeShe() + "'s the forgiving type, so I'm sure we'll be able to put our grudges behind us soon.  ");
-                            else
-                            if(x.morality > 33)
-                                say(t, "If only " + x.heShe() + " liked me back...  ");
-                            else
-                                say(t, "It was partly my fault that we never got along, so I don't blame " + x.himHer() + " for still being angry at me.  ");
+                            switch (x.morality / 33) {
+                                case 0: say(t, "It was partly my fault that we never got along, so I don't blame " + x.himHer() + " for still being angry at me.  "); break;
+                                case 1: say(t, "If only " + x.heShe() + " liked me back...  "); break;
+                                default: say(t, x.HeShe() + "'s the forgiving type, so I'm sure we'll be able to put our grudges behind us soon.  ");
+                            }
                         } else
-                        if(x.morality > 66)
-                            say(t, x.HeShe() + " still thinks of me as trash, of course...  A-And it's not like " + x.heShe() + "'s wrong...  ");
-                        else
-                        if(x.morality > 33)
-                            say(t, "I k-keep begging " + x.himHer() + " to forgive me for being ungrateful to " + x.himHer() + " in the past...  ");
-                        else
-                            say(t, "I-I don't really deserve to be liked, so it doesn't bother me that " + x.heShe() + " still hates me... really...  ");
+                        switch (x.morality / 33) {
+                            case 0: say(t, "I-I don't really deserve to be liked, so it doesn't bother me that " + x.heShe() + " still hates me... really...  "); break;
+                            case 1: say(t, "I k-keep begging " + x.himHer() + " to forgive me for being ungrateful to " + x.himHer() + " in the past...  "); break;
+                            default: say(t, x.HeShe() + " still thinks of me as trash, of course...  A-And it's not like " + x.heShe() + "'s wrong...  ");
+                        }
                     } else
                     if(obsessedWith(x))
                     {
                         if(confidence > 66)
                         {
-                            if(x.confidence > 66)
-                                say(t, x.HeShe() + " was a worthy opponent...  Ah, I almost wish " + x.heShe() + "'d rebel so that I could fight " + x.himHer() + " again!  ");
-                            else
-                            if(x.confidence > 33)
-                                say(t, "For some reason, I still want to bully " + x.himHer() + " even though we're on the same side now.  But that doesn't mean I don't love " + x.himHer() + "!  ");
-                            else
-                                say(t, x.HeShe() + " was so cute when " + x.heShe() + " was one of the Chosen... and " + x.heShe() + "'s even cuter now!  I love to mess with " + x.himHer() + "!  ");
+                            switch (x.confidence / 33) {
+                                case 0: say(t, x.HeShe() + " was so cute when " + x.heShe() + " was one of the Chosen... and " + x.heShe() + "'s even cuter now!  I love to mess with " + x.himHer() + "!  "); break;
+                                case 1: say(t, "For some reason, I still want to bully " + x.himHer() + " even though we're on the same side now.  But that doesn't mean I don't love " + x.himHer() + "!  "); break;
+                                default: say(t, x.HeShe() + " was a worthy opponent...  Ah, I almost wish " + x.heShe() + "'d rebel so that I could fight " + x.himHer() + " again!  ");
+                            }
                         } else
                         if(confidence > 33)
                         {
-                            if(x.confidence > 66)
-                                say(t, x.HeShe() + "'s so strong and... amazing.  I'm so happy that we're on the same side now.  Though, fighting " + x.himHer() + " was nice, too...  ");
-                            else
-                            if(x.confidence > 33)
-                                say(t, "Fighting against " + x.himHer() + " was some of the happiest times I've had as one of the Forsaken.  Of course, I'm even happier now that I can spend more time with " + x.himHer() + ".  ");
-                            else
-                                say(t, "I always thought " + x.heShe() + "'d be happier as one of the Forsaken, and I'm glad I was able to make it happen.  I just wish I still had an excuse to play with " + x.hisHer() + " body...  ");
+                            switch (x.confidence / 33) {
+                                case 0: say(t, "I always thought " + x.heShe() + "'d be happier as one of the Forsaken, and I'm glad I was able to make it happen.  I just wish I still had an excuse to play with " + x.hisHer() + " body...  "); break;
+                                case 1: say(t, "Fighting against " + x.himHer() + " was some of the happiest times I've had as one of the Forsaken.  Of course, I'm even happier now that I can spend more time with " + x.himHer() + ".  "); break;
+                                default: say(t, x.HeShe() + "'s so strong and... amazing.  I'm so happy that we're on the same side now.  Though, fighting " + x.himHer() + " was nice, too...  ");
+                            }
                         } else
-                        if(x.confidence > 66)
-                            say(t, "I wish " + x.heShe() + "'s still fight me, though...  hurt me, abuse me...  U-Um, anyway!  ");
-                        else
-                        if(x.confidence > 33)
-                            say(t, "I always looked up to " + x.himHer() + ", even when we fought...  ");
-                        else
-                            say(t, "When I'm with " + x.himHer() + ", I feel a lot more bold than usual...  I can't keep my hands off " + x.himHer() + ", " + x.heShe() + "'s too... c-cute...  ");
+                        switch (x.confidence / 33) {
+                            case 0: say(t, "When I'm with " + x.himHer() + ", I feel a lot more bold than usual...  I can't keep my hands off " + x.himHer() + ", " + x.heShe() + "'s too... c-cute...  "); break;
+                            case 1: say(t, "I always looked up to " + x.himHer() + ", even when we fought...  "); break;
+                            default: say(t, "I wish " + x.heShe() + "'s still fight me, though...  hurt me, abuse me...  U-Um, anyway!  ");
+                        }
                     } else
                     if(x.opinion(this) > 100)
                     {
                         if(confidence > 66)
                         {
-                            if(x.morality > 66)
-                                say(t, x.HeShe() + "'s loyal to me.  ");
-                            else
-                            if(x.morality > 33)
-                                say(t, "I think " + x.heShe() + " looks up to me.  ");
-                            else
-                                say(t, x.HeShe() + " relies on me to protect " + x.himHer() + ".  ");
+                            switch (x.morality / 33) {
+                                case 0: say(t, x.HeShe() + " relies on me to protect " + x.himHer() + ".  "); break;
+                                case 1: say(t, "I think " + x.heShe() + " looks up to me.  "); break;
+                                default: say(t, x.HeShe() + "'s loyal to me.  ");
+                            }
                         } else
                         if(confidence > 33)
                         {
-                            if(x.morality > 66)
-                                say(t, "I think " + x.heShe() + "'s a naturally friendly person, deep down inside.  ");
-                            else
-                            if(x.morality > 33)
-                                say(t, "We've gotten pretty close.  ");
-                            else
-                                say(t, x.HeShe() + " always gets jealous when I spend time with anyone else.  ");
+                            switch (x.morality / 33) {
+                                case 0: say(t, x.HeShe() + " always gets jealous when I spend time with anyone else.  "); break;
+                                case 1: say(t, "We've gotten pretty close.  "); break;
+                                default: say(t, "I think " + x.heShe() + "'s a naturally friendly person, deep down inside.  ");
+                            }
                         } else
-                        if(x.morality > 66)
-                            say(t, x.HeShe() + " goes out of " + x.hisHer() + " way to protect me.  ");
-                        else
-                        if(x.morality > 33)
-                            say(t, "I-I'm really grateful that " + x.heShe() + " doesn't look down on me for being so much weaker than " + x.himHer() + "...  ");
-                        else
-                            say(t, "U-Um, I know I belong to you, but... " + x.heShe() + " also makes sure I understand that I should spend all my free time serving " + x.himHer() + ".  ");
+                        switch (x.morality / 33) {
+                            case 0: say(t, "U-Um, I know I belong to you, but... " + x.heShe() + " also makes sure I understand that I should spend all my free time serving " + x.himHer() + ".  "); break;
+                            case 1: say(t, "I-I'm really grateful that " + x.heShe() + " doesn't look down on me for being so much weaker than " + x.himHer() + "...  "); break;
+                            default: say(t, x.HeShe() + " goes out of " + x.hisHer() + " way to protect me.  ");
+                        }
                     } else
                     if(confidence > 66)
                     {
-                        if(x.morality > 66)
-                            say(t, x.HeShe() + "'s defying me for now...  Don't worry, " + x.heShe() + "'ll figure out that " + x.heShe() + " should be mine soon enough.  ");
-                        else
-                        if(x.morality > 33)
-                            say(t, x.HeShe() + " calls me arrogant, though.  ");
-                        else
-                            say(t, x.HeShe() + "... says that I'm useless if I can't protect " + x.himHer() + ".  " + x.HeShe() + " could at least let me try.  ");
+                        switch (x.morality / 33) {
+                            case 0: say(t, x.HeShe() + "... says that I'm useless if I can't protect " + x.himHer() + ".  " + x.HeShe() + " could at least let me try.  "); break;
+                            case 1: say(t, x.HeShe() + " calls me arrogant, though.  "); break;
+                            default: say(t, x.HeShe() + "'s defying me for now...  Don't worry, " + x.heShe() + "'ll figure out that " + x.heShe() + " should be mine soon enough.  ");
+                        }
                     } else
                     if(confidence > 33)
                     {
-                        if(x.morality > 66)
-                            say(t, x.HeShe() + " isn't interested in spending time around me, though.  ");
-                        else
-                        if(x.morality > 33)
-                            say(t, "I wish " + x.heShe() + "'d let me get closer to " + x.himHer() + ".  ");
-                        else
-                            say(t, x.HeShe() + " doesn't trust anyone, even me.  ");
+                        switch (x.morality / 33) {
+                            case 0: say(t, x.HeShe() + " doesn't trust anyone, even me.  "); break;
+                            case 1: say(t, "I wish " + x.heShe() + "'d let me get closer to " + x.himHer() + ".  "); break;
+                            default: say(t, x.HeShe() + " isn't interested in spending time around me, though.  ");
+                        }
                     } else
-                    if(x.morality > 66)
-                        say(t, "I've been trying to convince " + x.himHer() + " to protect me...  No luck yet.  ");
-                    else
-                    if(x.morality > 33)
-                        say(t, "A-Although... " + x.heShe() + " says I'm not worth " + x.hisHer() + " time.  ");
-                    else
-                        say(t, x.HeShe() + " always just insults me whenever I try to talk to " + x.himHer() + "...  S-Still!  ");
+                    switch (x.morality / 33) {
+                        case 0: say(t, x.HeShe() + " always just insults me whenever I try to talk to " + x.himHer() + "...  S-Still!  "); break;
+                        case 1: say(t, "A-Although... " + x.heShe() + " says I'm not worth " + x.hisHer() + " time.  "); break;
+                        default: say(t, "I've been trying to convince " + x.himHer() + " to protect me...  No luck yet.  ");
+                    }
                     if(x.flavorDeviancy() - flavorDeviancy() <= 5)
                     {
                         if(flavorDeviancy() < 20)
                         {
-                            if(x.innocence > 66)
-                                say(t, "It's nice to have someone else who agrees with me that all the weird sexual stuff Demons do is just completely gross.  ");
-                            else
-                            if(x.innocence > 33)
-                                say(t, x.HeShe() + " hasn't let the Demons turn " + x.himHer() + " into a pervert, which is apparently really rare!  ");
-                            else
-                                say(t, x.HeShe() + " doesn't let any of the weird sexual stuff get to " + x.himHer() + ", and always just stays calm and smart as always.  ");
+                            switch (x.innocence / 33) {
+                                case 0: say(t, x.HeShe() + " doesn't let any of the weird sexual stuff get to " + x.himHer() + ", and always just stays calm and smart as always.  "); break;
+                                case 1: say(t, x.HeShe() + " hasn't let the Demons turn " + x.himHer() + " into a pervert, which is apparently really rare!  "); break;
+                                default: say(t, "It's nice to have someone else who agrees with me that all the weird sexual stuff Demons do is just completely gross.  ");
+                            }
                         } else
                         if(flavorDeviancy() < 40)
                         {
-                            if(x.innocence > 66)
-                                say(t, x.HeShe() + "'s done decently well in coping with all the deviant stuff " + x.heShe() + " never could have imagined back before " + x.heShe() + " became one of the Chosen.  ");
-                            else
-                            if(x.innocence > 33)
-                                say(t, x.HeShe() + " has managed to stay mostly sane even with all the things that have been done to " + x.himHer() + ".  ");
-                            else
-                                say(t, x.HeShe() + "'s very smart, even when it comes to all the sexual stuff we end up having to do.  ");
+                            switch (x.innocence / 33) {
+                                case 0: say(t, x.HeShe() + "'s very smart, even when it comes to all the sexual stuff we end up having to do.  "); break;
+                                case 1: say(t, x.HeShe() + " has managed to stay mostly sane even with all the things that have been done to " + x.himHer() + ".  "); break;
+                                default: say(t, x.HeShe() + "'s done decently well in coping with all the deviant stuff " + x.heShe() + " never could have imagined back before " + x.heShe() + " became one of the Chosen.  ");
+                            }
                         } else
                         if(flavorDeviancy() < 61)
                         {
-                            if(x.innocence > 66)
-                                say(t, x.HeShe() + " is clueless when it comes to our 'carnal duties', but that's alright, since I like helping " + x.himHer() + " out.  ");
-                            else
-                            if(x.innocence > 33)
-                                say(t, "Sometimes I worry about making " + x.himHer() + " uncomfortable with my perversions... but " + x.heShe() + " should understand that I have my needs, too!  ");
-                            else
-                                say(t, x.HeShe() + " can be a bit stiff about the sexual stuff we have to do, but that just makes it more satisfying to show " + x.himHer() + " the ropes on one of the subjects I know more about.  ");
+                            switch (x.innocence / 33) {
+                                case 0: say(t, x.HeShe() + " can be a bit stiff about the sexual stuff we have to do, but that just makes it more satisfying to show " + x.himHer() + " the ropes on one of the subjects I know more about.  "); break;
+                                case 1: say(t, "Sometimes I worry about making " + x.himHer() + " uncomfortable with my perversions... but " + x.heShe() + " should understand that I have my needs, too!  "); break;
+                                default: say(t, x.HeShe() + " is clueless when it comes to our 'carnal duties', but that's alright, since I like helping " + x.himHer() + " out.  ");
+                            }
                         } else
                         if(flavorDeviancy() < 81)
                         {
@@ -1938,13 +1780,11 @@ public class Forsaken
                                 say(t, " in a sea of pleasure...  ");
                             }
                         } else
-                        if(x.innocence > 66)
-                            say(t, "I live for those moments when I can trick " + x.himHer() + " into helping me get off in ways " + x.heShe() + " can't even understand...  ");
-                        else
-                        if(x.innocence > 33)
-                            say(t, "I pretty much can't stop myself from masturbating when " + x.heShe() + "'s around.  ");
-                        else
-                            say(t, "I know " + x.heShe() + "'s uncomfortable with how much I lust after " + x.himHer() + ", but that just turns me on even more...  ");
+                        switch (x.innocence / 33) {
+                            case 0: say(t, "I know " + x.heShe() + "'s uncomfortable with how much I lust after " + x.himHer() + ", but that just turns me on even more...  "); break;
+                            case 1: say(t, "I pretty much can't stop myself from masturbating when " + x.heShe() + "'s around.  "); break;
+                            default: say(t, "I live for those moments when I can trick " + x.himHer() + " into helping me get off in ways " + x.heShe() + " can't even understand...  ");
+                        }
                     } else
                     if(flavorDeviancy() < 20)
                     {
@@ -1964,138 +1804,110 @@ public class Forsaken
                     } else
                     if(flavorDeviancy() < 40)
                     {
-                        if(x.innocence > 66)
-                            say(t, "I suppose it's a bit strange that " + x.heShe() + " doesn't see anything wrong with being completely open about how much sex " + x.heShe() + " wants to have.  ");
-                        else
-                        if(x.innocence > 33)
-                            say(t, x.HeShe() + "'s always doing sexual stuff with different people, but I guess " + x.hisHer() + " constant lust leaves " + x.himHer() + " no choice.  ");
-                        else
-                            say(t, "I do get a little... uncomfortable when " + x.heShe() + " talks about " + x.hisHer() + " sexual fetishes.  Some of them are so weird.  ");
+                        switch (x.innocence / 33) {
+                            case 0: say(t, "I do get a little... uncomfortable when " + x.heShe() + " talks about " + x.hisHer() + " sexual fetishes.  Some of them are so weird.  "); break;
+                            case 1: say(t, x.HeShe() + "'s always doing sexual stuff with different people, but I guess " + x.hisHer() + " constant lust leaves " + x.himHer() + " no choice.  "); break;
+                            default: say(t, "I suppose it's a bit strange that " + x.heShe() + " doesn't see anything wrong with being completely open about how much sex " + x.heShe() + " wants to have.  ");
+                        }
                     } else
                     if(flavorDeviancy() < 61)
                     {
-                        if(x.innocence > 66)
-                            say(t, "It does disturb me when " + x.heShe() + " talks about all the messed up things " + x.heShe() + " wants to do to other people, as if those kinds of desires are completely normal.  ");
-                        else
-                        if(x.innocence > 33)
-                            say(t, "I've heard rumors about what " + x.heShe() + " does with some of " + x.hisHer() + " sexual partners, but I'm pretty sure they're exaggerations.  They have to be.  ");
-                        else
-                            say(t, "I've learned not to talk to " + x.himHer() + " about " + x.hisHer() + " sexual fetishes.  It always made me feel a bit sick, so I just don't do it anymore.  ");
+                        switch (x.innocence / 33) {
+                            case 0: say(t, "I've learned not to talk to " + x.himHer() + " about " + x.hisHer() + " sexual fetishes.  It always made me feel a bit sick, so I just don't do it anymore.  "); break;
+                            case 1: say(t, "I've heard rumors about what " + x.heShe() + " does with some of " + x.hisHer() + " sexual partners, but I'm pretty sure they're exaggerations.  They have to be.  "); break;
+                            default: say(t, "It does disturb me when " + x.heShe() + " talks about all the messed up things " + x.heShe() + " wants to do to other people, as if those kinds of desires are completely normal.  ");
+                        }
                     } else
                     if(flavorDeviancy() < 81)
                     {
-                        if(x.innocence > 66)
-                            say(t, "I wish " + x.heShe() + "'d stop masturbating all the time, but whenever I point it out to " + x.himHer() + ", " + x.heShe() + "'s always surprised, like " + x.heShe() + " was doing it without thinking.  ");
-                        else
-                        if(x.innocence > 33)
-                            say(t, "In any case, " + x.heShe() + "'s completely obsessed with sex, so talking to " + x.himHer() + " about anything else can be difficult.  ");
-                        else
-                            say(t, "It can be a little bit difficult to talk to " + x.himHer() + ", since " + x.hisHer() + " mind is always focused on seeking out " + x.hisHer() + " next orgasm.  ");
+                        switch (x.innocence / 33) {
+                            case 0: say(t, "It can be a little bit difficult to talk to " + x.himHer() + ", since " + x.hisHer() + " mind is always focused on seeking out " + x.hisHer() + " next orgasm.  "); break;
+                            case 1: say(t, "In any case, " + x.heShe() + "'s completely obsessed with sex, so talking to " + x.himHer() + " about anything else can be difficult.  "); break;
+                            default: say(t, "I wish " + x.heShe() + "'d stop masturbating all the time, but whenever I point it out to " + x.himHer() + ", " + x.heShe() + "'s always surprised, like " + x.heShe() + " was doing it without thinking.  ");
+                        }
                     } else
-                    if(x.innocence > 66)
-                        say(t, "It's hard to imagine, but I think " + x.heShe() + " might be an even bigger pervert than me.  ");
-                    else
-                    if(x.innocence > 33)
-                        say(t, "We do agree that sex is the most important thing about being alive.  ");
-                    else
-                        say(t, x.HisHer() + " sexual techniques are amazing.  I have to admire them.  ");
+                    switch (x.innocence / 33) {
+                        case 0: say(t, x.HisHer() + " sexual techniques are amazing.  I have to admire them.  "); break;
+                        case 1: say(t, "We do agree that sex is the most important thing about being alive.  "); break;
+                        default: say(t, "It's hard to imagine, but I think " + x.heShe() + " might be an even bigger pervert than me.  ");
+                    }
                     if(flavorObedience() - x.flavorObedience() <= 5)
                     {
                         if(flavorObedience() < 20)
                         {
-                            if(x.confidence > 66)
-                                say(t, "I'll never forgive you for what you did to such a strong, beautiful person.  ");
-                            else
-                            if(x.confidence > 33)
-                                say(t, "If I can find a way to defeat you, I know " + x.heShe() + "'ll come to " + x.hisHer() + " senses and help me do it.  ");
-                            else
-                                say(t, "More importantly, even if " + x.heShe() + " doesn't have the willpower to resist you, I can resist on " + x.hisHer() + " behalf.  ");
+                            switch (x.confidence / 33) {
+                                case 0: say(t, "More importantly, even if " + x.heShe() + " doesn't have the willpower to resist you, I can resist on " + x.hisHer() + " behalf.  "); break;
+                                case 1: say(t, "If I can find a way to defeat you, I know " + x.heShe() + "'ll come to " + x.hisHer() + " senses and help me do it.  "); break;
+                                default: say(t, "I'll never forgive you for what you did to such a strong, beautiful person.  ");
+                            }
                         } else
                         if(flavorObedience() < 40)
                         {
-                            if(x.confidence > 66)
-                                say(t, "The thing that bothers me most is seeing such a strong-willed person forced to humiliate " + x.himHer() + "self for you.  ");
-                            else
-                            if(x.confidence > 33)
-                                say(t, "You should really go easier on " + x.himHer() + ".  " + x.HeShe() + " doesn't deserve this.  ");
-                            else
-                                say(t, "I just wish " + x.heShe() + " were able to put up a little more resistance against you.  ");
+                            switch (x.confidence / 33) {
+                                case 0: say(t, "I just wish " + x.heShe() + " were able to put up a little more resistance against you.  "); break;
+                                case 1: say(t, "You should really go easier on " + x.himHer() + ".  " + x.HeShe() + " doesn't deserve this.  "); break;
+                                default: say(t, "The thing that bothers me most is seeing such a strong-willed person forced to humiliate " + x.himHer() + "self for you.  ");
+                            }
                         } else
                         if(flavorObedience() < 61)
                         {
-                            if(x.confidence > 66)
-                                say(t, "The fact that you were able to break someone like " + x.himHer() + " makes me feel less bad about being unable to resist.  ");
-                            else
-                            if(x.confidence > 33)
-                                say(t, "We're both going through the same stuff, and that helps me feel closer to " + x.himHer() + ".  ");
-                            else
-                                say(t, "I sort of envy the way that " + x.heShe() + "'s able to handle doing anything for you, no matter how demeaning.  ");
+                            switch (x.confidence / 33) {
+                                case 0: say(t, "I sort of envy the way that " + x.heShe() + "'s able to handle doing anything for you, no matter how demeaning.  "); break;
+                                case 1: say(t, "We're both going through the same stuff, and that helps me feel closer to " + x.himHer() + ".  "); break;
+                                default: say(t, "The fact that you were able to break someone like " + x.himHer() + " makes me feel less bad about being unable to resist.  ");
+                            }
                         } else
                         if(flavorObedience() < 81)
                         {
-                            if(x.confidence > 66)
-                                say(t, "I really admire " + x.hisHer() + " devotion to you.  " + x.HeShe() + "'s amazing...  ");
-                            else
-                            if(x.confidence > 33)
-                                say(t, "I'm really happy that we're able to serve you together.  ");
-                            else
-                                say(t, "If " + x.heShe() + " were actually a weak person, though, " + x.heShe() + " wouldn't be able to devote " + x.himHer() + "self so much to serving you.  ");
+                            switch (x.confidence / 33) {
+                                case 0: say(t, "If " + x.heShe() + " were actually a weak person, though, " + x.heShe() + " wouldn't be able to devote " + x.himHer() + "self so much to serving you.  "); break;
+                                case 1: say(t, "I'm really happy that we're able to serve you together.  "); break;
+                                default: say(t, "I really admire " + x.hisHer() + " devotion to you.  " + x.HeShe() + "'s amazing...  ");
+                            }
                         } else
-                        if(x.confidence > 66)
-                            say(t, "I'm glad that if I ever come up short in serving you, " + x.heShe() + "'ll be quick to strike me down.  ");
-                        else
-                        if(x.confidence > 33)
-                            say(t, x.HeShe() + "'s a great servant.  I'm ashamed to admit it, but " + x.heShe() + " might even be a better servant than I am...  ");
-                        else
-                            say(t, x.HeShe() + " seems so happy to finally be able to surrender " + x.hisHer() + " will completely to a master like you.  ");
+                        switch (x.confidence / 33) {
+                            case 0: say(t, x.HeShe() + " seems so happy to finally be able to surrender " + x.hisHer() + " will completely to a master like you.  "); break;
+                            case 1: say(t, x.HeShe() + "'s a great servant.  I'm ashamed to admit it, but " + x.heShe() + " might even be a better servant than I am...  "); break;
+                            default: say(t, "I'm glad that if I ever come up short in serving you, " + x.heShe() + "'ll be quick to strike me down.  ");
+                        }
                     } else
                     if(flavorObedience() < 20)
                     {
-                        if(x.confidence > 66)
-                            say(t, "Seeing " + x.himHer() + " resist you gives me the strength to do the same.  ");
-                        else
-                        if(x.confidence > 33)
-                            say(t, "In any case, we're united in our resistance against you.  ");
-                        else
-                            say(t, "Still, I think that " + x.heShe() + " hasn't completely given up on resisting you, and I'm definitely not giving up before " + x.himHer() + ".  ");
+                        switch (x.confidence / 33) {
+                            case 0: say(t, "Still, I think that " + x.heShe() + " hasn't completely given up on resisting you, and I'm definitely not giving up before " + x.himHer() + ".  "); break;
+                            case 1: say(t, "In any case, we're united in our resistance against you.  "); break;
+                            default: say(t, "Seeing " + x.himHer() + " resist you gives me the strength to do the same.  ");
+                        }
                     } else
                     if(flavorObedience() < 40)
                     {
-                        if(x.confidence > 66)
-                            say(t, "My only complaint is really shameful...  I'm envious of the way " + x.heShe() + "'s able to keep resisting you so bravely.  ");
-                        else
-                        if(x.confidence > 33)
-                            say(t, "The closest thing to a real complaint I have about " + x.himHer() + " is that the way " + x.heShe() + " resists you makes me look bad.  ");
-                        else
-                            say(t, "I guess I'm just... a little bit annoyed that " + x.heShe() + " of all people has managed to keep resisting you when I've failed.  ");
+                        switch (x.confidence / 33) {
+                            case 0: say(t, "I guess I'm just... a little bit annoyed that " + x.heShe() + " of all people has managed to keep resisting you when I've failed.  "); break;
+                            case 1: say(t, "The closest thing to a real complaint I have about " + x.himHer() + " is that the way " + x.heShe() + " resists you makes me look bad.  "); break;
+                            default: say(t, "My only complaint is really shameful...  I'm envious of the way " + x.heShe() + "'s able to keep resisting you so bravely.  ");
+                        }
                     } else
                     if(flavorObedience() < 61)
                     {
-                        if(x.confidence > 66)
-                            say(t, "I just wish " + x.heShe() + "'d stop fighting you so much.  " + x.HeShe() + "'s going to get us all punished...  ");
-                        else
-                        if(x.confidence > 33)
-                            say(t, "The only real issue I have with " + x.himHer() + " is that it's annoying to see " + x.himHer() + " keep fighting the inevitable.  ");
-                        else
-                            say(t, "I do have a weird feeling about the fact that you haven't broken " + x.himHer() + " as hard as me yet...  Is that on purpose?  ");
+                        switch (x.confidence / 33) {
+                            case 0: say(t, "I do have a weird feeling about the fact that you haven't broken " + x.himHer() + " as hard as me yet...  Is that on purpose?  "); break;
+                            case 1: say(t, "The only real issue I have with " + x.himHer() + " is that it's annoying to see " + x.himHer() + " keep fighting the inevitable.  "); break;
+                            default: say(t, "I just wish " + x.heShe() + "'d stop fighting you so much.  " + x.HeShe() + "'s going to get us all punished...  ");
+                        }
                     } else
                     if(flavorObedience() < 81)
                     {
-                        if(x.confidence > 66)
-                            say(t, "My only worry is that... if " + x.heShe() + " doesn't completely give up on resisting you, it won't turn out well for " + x.himHer() + ".  ");
-                        else
-                        if(x.confidence > 33)
-                            say(t, "I just wish " + x.heShe() + " were more devoted to you.  ");
-                        else
-                            say(t, "If I had to come up with a serious complaint... it'd be that " + x.heShe() + "'s afraid of completely giving " + x.himHer() + "self to you.  ");
+                        switch (x.confidence / 33) {
+                            case 0: say(t, "If I had to come up with a serious complaint... it'd be that " + x.heShe() + "'s afraid of completely giving " + x.himHer() + "self to you.  "); break;
+                            case 1: say(t, "I just wish " + x.heShe() + " were more devoted to you.  "); break;
+                            default: say(t, "My only worry is that... if " + x.heShe() + " doesn't completely give up on resisting you, it won't turn out well for " + x.himHer() + ".  ");
+                        }
                     } else
-                    if(x.confidence > 66)
-                        say(t, "I have to admit that it's a bit funny to see " + x.himHer() + " pretend that " + x.hisHer() + " desires matter at all next to your greatness.  ");
-                    else
-                    if(x.confidence > 33)
-                        say(t, "Of course, my devotion to you is still greater than anything I could possibly feel about anyone else.  But as long as we're talking about mere humans...  ");
-                    else
-                        say(t, "Oh, and this should go without saying, but if you decide to get rid of " + x.himHer() + ", I'll still happily do it for you.  But otherwise...  ");
+                    switch (x.confidence / 33) {
+                        case 0: say(t, "Oh, and this should go without saying, but if you decide to get rid of " + x.himHer() + ", I'll still happily do it for you.  But otherwise...  "); break;
+                        case 1: say(t, "Of course, my devotion to you is still greater than anything I could possibly feel about anyone else.  But as long as we're talking about mere humans...  "); break;
+                        default: say(t, "I have to admit that it's a bit funny to see " + x.himHer() + " pretend that " + x.hisHer() + " desires matter at all next to your greatness.  ");
+                    }
                     if(others != null)
                     {
                         for(int j = 0; j < others.length; j++)
@@ -2104,297 +1916,237 @@ public class Forsaken
                                 {
                                     if(morality > 66)
                                     {
-                                        if(x.dignity > 66)
-                                            say(t, "I think " + x.heShe() + "'s actually sorry about hurting the rest of us in the past.  ");
-                                        else
-                                        if(x.dignity > 33)
-                                            say(t, x.HeShe() + " seems a lot happier, lately.  ");
-                                        else
-                                            say(t, x.HeShe() + " doesn't seem like " + x.heShe() + " wants to cause trouble for the rest of us anymore.  ");
+                                        switch (x.dignity / 33) {
+                                            case 0: say(t, x.HeShe() + " doesn't seem like " + x.heShe() + " wants to cause trouble for the rest of us anymore.  "); break;
+                                            case 1: say(t, x.HeShe() + " seems a lot happier, lately.  "); break;
+                                            default: say(t, "I think " + x.heShe() + "'s actually sorry about hurting the rest of us in the past.  ");
+                                        }
                                     } else
                                     if(morality > 33)
                                     {
-                                        if(x.dignity > 66)
-                                            say(t, x.HeShe() + " says " + x.heShe() + "'ll stop causing trouble for the other Forsaken, too.  ");
-                                        else
-                                        if(x.dignity > 33)
-                                            say(t, x.HeShe() + "'s stopped causing trouble for the rest of us so often.  ");
-                                        else
-                                            say(t, "I'm glad " + x.heShe() + " hasn't been lashing out randomly as often.  ");
+                                        switch (x.dignity / 33) {
+                                            case 0: say(t, "I'm glad " + x.heShe() + " hasn't been lashing out randomly as often.  "); break;
+                                            case 1: say(t, x.HeShe() + "'s stopped causing trouble for the rest of us so often.  "); break;
+                                            default: say(t, x.HeShe() + " says " + x.heShe() + "'ll stop causing trouble for the other Forsaken, too.  ");
+                                        }
                                     } else
-                                    if(x.dignity > 66)
-                                        say(t, x.HeShe() + "'s promised to stop attacking the other Forsaken, so you shouldn't have any problem with " + x.himHer() + ", right?  ");
-                                    else
-                                    if(x.dignity > 33)
-                                        say(t, x.HisHer() + " acting out used to be annoying, but " + x.heShe() + "'s toned it down lately.  ");
-                                    else
-                                        say(t, x.HeShe() + " knows it'd be a bad idea to cause trouble again the way " + x.heShe() + " used to.  ");
+                                    switch (x.dignity / 33) {
+                                        case 0: say(t, x.HeShe() + " knows it'd be a bad idea to cause trouble again the way " + x.heShe() + " used to.  "); break;
+                                        case 1: say(t, x.HisHer() + " acting out used to be annoying, but " + x.heShe() + "'s toned it down lately.  "); break;
+                                        default: say(t, x.HeShe() + "'s promised to stop attacking the other Forsaken, so you shouldn't have any problem with " + x.himHer() + ", right?  ");
+                                    }
                                 } else
                                 if(troublemaker[j] < 200)
                                 {
                                     if(morality > 66)
                                     {
-                                        if(x.dignity > 66)
-                                            say(t, x.HeShe() + " pretends otherwise, but I'm sure " + x.heShe() + " knows that " + x.heShe() + " shouldn't be attacking other Forsaken.  ");
-                                        else
-                                        if(x.dignity > 33)
-                                            say(t, x.HeShe() + " doesn't seem to actually enjoy hurting the rest of us.  ");
-                                        else
-                                            say(t, x.HeShe() + " isn't actually trying to cause trouble for the other Forsaken.  ");
+                                        switch (x.dignity / 33) {
+                                            case 0: say(t, x.HeShe() + " isn't actually trying to cause trouble for the other Forsaken.  "); break;
+                                            case 1: say(t, x.HeShe() + " doesn't seem to actually enjoy hurting the rest of us.  "); break;
+                                            default: say(t, x.HeShe() + " pretends otherwise, but I'm sure " + x.heShe() + " knows that " + x.heShe() + " shouldn't be attacking other Forsaken.  ");
+                                        }
                                     } else
                                     if(morality > 33)
                                     {
-                                        if(x.dignity > 66)
-                                            say(t, "I think " + x.heShe() + "'s only causing trouble because " + x.heShe() + " feels like " + x.heShe() + " needs to put on a tough face.  ");
-                                        else
-                                        if(x.dignity > 33)
-                                            say(t, "I'm trying to convince " + x.himHer() + " to stop attacking the other Forsaken so much, too.  ");
-                                        else
-                                            say(t, x.HisHer() + " random outbursts lately aren't that bad.  ");
+                                        switch (x.dignity / 33) {
+                                            case 0: say(t, x.HisHer() + " random outbursts lately aren't that bad.  "); break;
+                                            case 1: say(t, "I'm trying to convince " + x.himHer() + " to stop attacking the other Forsaken so much, too.  "); break;
+                                            default: say(t, "I think " + x.heShe() + "'s only causing trouble because " + x.heShe() + " feels like " + x.heShe() + " needs to put on a tough face.  ");
+                                        }
                                     } else
-                                    if(x.dignity > 66)
-                                        say(t, "Even if " + x.heShe() + " cares way too much about looking tough by causing trouble for the rest of us, that's just who " + x.heShe() + " is.  ");
-                                    else
-                                    if(x.dignity > 33)
-                                        say(t, "I know that the trouble " + x.heShe() + " causes isn't actually serious enough to affect your plans.  ");
-                                    else
-                                        say(t, "The way " + x.heShe() + " randomly attacks other Forsaken can be annoying, but you find " + x.hisHer() + " fierceness useful, right?  ");
+                                    switch (x.dignity / 33) {
+                                        case 0: say(t, "The way " + x.heShe() + " randomly attacks other Forsaken can be annoying, but you find " + x.hisHer() + " fierceness useful, right?  "); break;
+                                        case 1: say(t, "I know that the trouble " + x.heShe() + " causes isn't actually serious enough to affect your plans.  "); break;
+                                        default: say(t, "Even if " + x.heShe() + " cares way too much about looking tough by causing trouble for the rest of us, that's just who " + x.heShe() + " is.  ");
+                                    }
                                 } else
                                 if(morality > 66)
                                 {
-                                    if(x.dignity > 66)
-                                        say(t, "I'm going to keep trying to convince " + x.himHer() + " to tone down the attacks on the other Forsaken.  ");
-                                    else
-                                    if(x.dignity > 33)
-                                        say(t, "As long as " + x.heShe() + " isn't actually killing the rest of us, I can forgive " + x.himHer() + " for " + x.hisHer() + " violent outbursts.  ");
-                                    else
-                                        say(t, "I know that the way " + x.heShe() + " randomly attacks other Forsaken is bad, and I won't try to defend it.  " + x.HeShe() + "'s just...  ");
+                                    switch (x.dignity / 33) {
+                                        case 0: say(t, "I know that the way " + x.heShe() + " randomly attacks other Forsaken is bad, and I won't try to defend it.  " + x.HeShe() + "'s just...  "); break;
+                                        case 1: say(t, "As long as " + x.heShe() + " isn't actually killing the rest of us, I can forgive " + x.himHer() + " for " + x.hisHer() + " violent outbursts.  "); break;
+                                        default: say(t, "I'm going to keep trying to convince " + x.himHer() + " to tone down the attacks on the other Forsaken.  ");
+                                    }
                                 } else
                                 if(morality > 33)
                                 {
-                                    if(x.dignity > 66)
-                                        say(t, "After " + x.heShe() + "'s made it clear that " + x.heShe() + " has the power to hurt the rest of us, I'm sure " + x.heShe() + "'ll tone down the constant attacks.  ");
-                                    else
-                                    if(x.dignity > 33)
-                                        say(t, "I have to admit that the way " + x.heShe() + " keeps attacking the other Forsaken is annoying, but it doesn't change the rest.  ");
-                                    else
-                                        say(t, "I just wish " + x.heShe() + " wouldn't randomly attack the rest of us so often...  ");
+                                    switch (x.dignity / 33) {
+                                        case 0: say(t, "I just wish " + x.heShe() + " wouldn't randomly attack the rest of us so often...  "); break;
+                                        case 1: say(t, "I have to admit that the way " + x.heShe() + " keeps attacking the other Forsaken is annoying, but it doesn't change the rest.  "); break;
+                                        default: say(t, "After " + x.heShe() + "'s made it clear that " + x.heShe() + " has the power to hurt the rest of us, I'm sure " + x.heShe() + "'ll tone down the constant attacks.  ");
+                                    }
                                 } else
-                                if(x.dignity > 66)
-                                    say(t, "And even if it's annoying in the moment, I have to appreciate the way " + x.heShe() + " always gets away with causing trouble for the rest of us.  ");
-                                else
-                                if(x.dignity > 33)
-                                    say(t, "And if you really wanted to stop " + x.himHer() + " from attacking the rest of us all the time, I'm sure you would've stopped it by now.  ");
-                                else
-                                    say(t, x.HisHer() + " fierceness, the way " + x.heShe() + "'s always attacking other Forsaken whenever " + x.heShe() + "'s not on a mission, is part of what makes " + x.himHer() + " valuable to you, right?  ");
+                                switch (x.dignity / 33) {
+                                    case 0: say(t, x.HisHer() + " fierceness, the way " + x.heShe() + "'s always attacking other Forsaken whenever " + x.heShe() + "'s not on a mission, is part of what makes " + x.himHer() + " valuable to you, right?  "); break;
+                                    case 1: say(t, "And if you really wanted to stop " + x.himHer() + " from attacking the rest of us all the time, I'm sure you would've stopped it by now.  "); break;
+                                    default: say(t, "And even if it's annoying in the moment, I have to appreciate the way " + x.heShe() + " always gets away with causing trouble for the rest of us.  ");
+                                }
 
                     }
                     if(opinion(x) < 401)
                     {
                         if(confidence > 66)
                         {
-                            if(x.morality > 66)
-                                say(t, x.HeShe() + "'s someone I can trust to stand behind me.");
-                            else
-                            if(x.morality > 33)
-                                say(t, "Overall, I enjoy " + x.himHer() + ".");
-                            else
-                                say(t, "I want to protect " + x.himHer() + ".");
+                            switch (x.morality / 33) {
+                                case 0: say(t, "I want to protect " + x.himHer() + "."); break;
+                                case 1: say(t, "Overall, I enjoy " + x.himHer() + "."); break;
+                                default: say(t, x.HeShe() + "'s someone I can trust to stand behind me.");
+                            }
                         } else
                         if(confidence > 33)
                         {
-                            if(x.morality > 66)
-                                say(t, "I just like " + x.himHer() + ".");
-                            else
-                            if(x.morality > 33)
-                                say(t, "It would be nice if we could spend more time together.");
-                            else
-                                say(t, "I want " + x.himHer() + " to be happy.");
+                            switch (x.morality / 33) {
+                                case 0: say(t, "I want " + x.himHer() + " to be happy."); break;
+                                case 1: say(t, "It would be nice if we could spend more time together."); break;
+                                default: say(t, "I just like " + x.himHer() + ".");
+                            }
                         } else
-                        if(x.morality > 66)
-                            say(t, x.HeShe() + " makes me want to live up to " + x.hisHer() + " expectations.");
-                        else
-                        if(x.morality > 33)
-                            say(t, "I admire " + x.himHer() + " a lot.");
-                        else
-                            say(t, "I want to be useful to " + x.himHer() + "...");
+                        switch (x.morality / 33) {
+                            case 0: say(t, "I want to be useful to " + x.himHer() + "..."); break;
+                            case 1: say(t, "I admire " + x.himHer() + " a lot."); break;
+                            default: say(t, x.HeShe() + " makes me want to live up to " + x.hisHer() + " expectations.");
+                        }
                     } else
                     if(confidence > 66)
                     {
-                        if(x.morality > 66)
-                            say(t, "I want " + x.himHer() + " to look at me and no one else!");
-                        else
-                        if(x.morality > 33)
-                            say(t, "It's fair to say that I love " + x.himHer() + ".");
-                        else
-                            say(t, "I want to protect " + x.himHer() + " forever!");
+                        switch (x.morality / 33) {
+                            case 0: say(t, "I want to protect " + x.himHer() + " forever!"); break;
+                            case 1: say(t, "It's fair to say that I love " + x.himHer() + "."); break;
+                            default: say(t, "I want " + x.himHer() + " to look at me and no one else!");
+                        }
                     } else
                     if(confidence > 33)
                     {
-                        if(x.morality > 66)
-                            say(t, "I just... love " + x.himHer() + " with all my heart.");
-                        else
-                        if(x.morality > 33)
-                            say(t, "I live for the times we can spend together.");
-                        else
-                            say(t, "I'd give anything to help " + x.himHer() + " be happy.");
+                        switch (x.morality / 33) {
+                            case 0: say(t, "I'd give anything to help " + x.himHer() + " be happy."); break;
+                            case 1: say(t, "I live for the times we can spend together."); break;
+                            default: say(t, "I just... love " + x.himHer() + " with all my heart.");
+                        }
                     } else
-                    if(x.morality > 66)
-                        say(t, "I'll never be as great as " + x.himHer() + ", but I have to try...");
-                    else
-                    if(x.morality > 33)
-                        say(t, "I can't even think straight when " + x.heShe() + "'s around.");
-                    else
-                        say(t, "I want to belong to " + x.himHer() + " completely...");
+                    switch (x.morality / 33) {
+                        case 0: say(t, "I want to belong to " + x.himHer() + " completely..."); break;
+                        case 1: say(t, "I can't even think straight when " + x.heShe() + "'s around."); break;
+                        default: say(t, "I'll never be as great as " + x.himHer() + ", but I have to try...");
+                    }
                 } else
                 {
                     if(innocence > 66)
                     {
                         if(x.flavorHostility() < 20)
                         {
-                            if(x.confidence > 66)
-                                say(t, x.mainName + " talks big, but " + x.heShe() + " isn't really scary at all.  ");
-                            else
-                            if(x.confidence > 33)
-                                say(t, x.mainName + " isn't nearly as nice as " + x.heShe() + " pretends to be.  ");
-                            else
-                                say(t, x.mainName + " is a total wimp.  ");
+                            switch (x.confidence / 33) {
+                                case 0: say(t, x.mainName + " is a total wimp.  "); break;
+                                case 1: say(t, x.mainName + " isn't nearly as nice as " + x.heShe() + " pretends to be.  "); break;
+                                default: say(t, x.mainName + " talks big, but " + x.heShe() + " isn't really scary at all.  ");
+                            }
                         } else
                         if(x.flavorHostility() < 40)
                         {
-                            if(x.confidence > 66)
-                                say(t, x.mainName + " is nothing but a big bully!  ");
-                            else
-                            if(x.confidence > 33)
-                                say(t, x.mainName + " is really kind of a jerk.  ");
-                            else
-                                say(t, x.mainName + " is just your typical whiner.  ");
+                            switch (x.confidence / 33) {
+                                case 0: say(t, x.mainName + " is just your typical whiner.  "); break;
+                                case 1: say(t, x.mainName + " is really kind of a jerk.  "); break;
+                                default: say(t, x.mainName + " is nothing but a big bully!  ");
+                            }
                         } else
                         if(x.flavorHostility() < 61)
                         {
-                            if(x.confidence > 66)
-                                say(t, x.mainName + " is just pointlessly mean!  ");
-                            else
-                            if(x.confidence > 33)
-                                say(t, x.mainName + " is one hundred percent selfish.  ");
-                            else
-                                say(t, x.mainName + " is someone you can never rely on.  ");
+                            switch (x.confidence / 33) {
+                                case 0: say(t, x.mainName + " is someone you can never rely on.  "); break;
+                                case 1: say(t, x.mainName + " is one hundred percent selfish.  "); break;
+                                default: say(t, x.mainName + " is just pointlessly mean!  ");
+                            }
                         } else
                         if(x.flavorHostility() < 81)
                         {
-                            if(x.confidence > 66)
-                                say(t, x.mainName + " doesn't care about anything but hurting people!  ");
-                            else
-                            if(x.confidence > 33)
-                                say(t, x.mainName + " is too busy hating everyone else to do anything useful.  ");
-                            else
-                                say(t, x.mainName + " pretends to be harmless, but " + x.heShe() + "'s actually really nasty!  ");
+                            switch (x.confidence / 33) {
+                                case 0: say(t, x.mainName + " pretends to be harmless, but " + x.heShe() + "'s actually really nasty!  "); break;
+                                case 1: say(t, x.mainName + " is too busy hating everyone else to do anything useful.  "); break;
+                                default: say(t, x.mainName + " doesn't care about anything but hurting people!  ");
+                            }
                         } else
-                        if(x.confidence > 66)
-                            say(t, x.mainName + " is just a rampaging monster pretending to be a human!  ");
-                        else
-                        if(x.confidence > 33)
-                            say(t, x.mainName + " is crazy, " + x.heShe() + " just wants to fight everyone, no matter who!  ");
-                        else
-                            say(t, x.mainName + " is secretly plotting to kill the rest of us, I know it!  ");
+                        switch (x.confidence / 33) {
+                            case 0: say(t, x.mainName + " is secretly plotting to kill the rest of us, I know it!  "); break;
+                            case 1: say(t, x.mainName + " is crazy, " + x.heShe() + " just wants to fight everyone, no matter who!  "); break;
+                            default: say(t, x.mainName + " is just a rampaging monster pretending to be a human!  ");
+                        }
                     } else
                     if(innocence > 33)
                     {
                         if(x.flavorHostility() < 20)
                         {
-                            if(x.confidence > 66)
-                                say(t, x.mainName + " isn't the hero " + x.heShe() + " pretends to be.  ");
-                            else
-                            if(x.confidence > 33)
-                                say(t, x.mainName + " is 'nice', for what little that's worth.  ");
-                            else
-                                say(t, x.mainName + " is weak.  Just weak in every way.  ");
+                            switch (x.confidence / 33) {
+                                case 0: say(t, x.mainName + " is weak.  Just weak in every way.  "); break;
+                                case 1: say(t, x.mainName + " is 'nice', for what little that's worth.  "); break;
+                                default: say(t, x.mainName + " isn't the hero " + x.heShe() + " pretends to be.  ");
+                            }
                         } else
                         if(x.flavorHostility() < 40)
                         {
-                            if(x.confidence > 66)
-                                say(t, x.mainName + " is an egomaniac.  ");
-                            else
-                            if(x.confidence > 33)
-                                say(t, x.mainName + " is nothing special.  ");
-                            else
-                                say(t, x.mainName + " is a coward.  ");
+                            switch (x.confidence / 33) {
+                                case 0: say(t, x.mainName + " is a coward.  "); break;
+                                case 1: say(t, x.mainName + " is nothing special.  "); break;
+                                default: say(t, x.mainName + " is an egomaniac.  ");
+                            }
                         } else
                         if(x.flavorHostility() < 61)
                         {
-                            if(x.confidence > 66)
-                                say(t, x.mainName + " is a huge asshole.  ");
-                            else
-                            if(x.confidence > 33)
-                                say(t, x.mainName + " doesn't care about anyone or anything but " + x.himHer() + "self.  ");
-                            else
-                                say(t, x.mainName + " is a paranoid nutcase.  ");
+                            switch (x.confidence / 33) {
+                                case 0: say(t, x.mainName + " is a paranoid nutcase.  "); break;
+                                case 1: say(t, x.mainName + " doesn't care about anyone or anything but " + x.himHer() + "self.  "); break;
+                                default: say(t, x.mainName + " is a huge asshole.  ");
+                            }
                         } else
                         if(x.flavorHostility() < 81)
                         {
-                            if(x.confidence > 66)
-                                say(t, x.mainName + " is a complete psychopath.  ");
-                            else
-                            if(x.confidence > 33)
-                                say(t, x.mainName + " is a mean, vicious person.  ");
-                            else
-                                say(t, x.mainName + " is just an impotent ball of pure hatred.  ");
+                            switch (x.confidence / 33) {
+                                case 0: say(t, x.mainName + " is just an impotent ball of pure hatred.  "); break;
+                                case 1: say(t, x.mainName + " is a mean, vicious person.  "); break;
+                                default: say(t, x.mainName + " is a complete psychopath.  ");
+                            }
                         } else
-                        if(x.confidence > 66)
-                            say(t, x.mainName + " has completely gone off the deep end, " + x.heShe() + "'s just a killing machine now.  ");
-                        else
-                        if(x.confidence > 33)
-                            say(t, x.mainName + " isn't good for anything but wanton murder.  ");
-                        else
-                            say(t, x.mainName + " is a disaster waiting to happen.  ");
+                        switch (x.confidence / 33) {
+                            case 0: say(t, x.mainName + " is a disaster waiting to happen.  "); break;
+                            case 1: say(t, x.mainName + " isn't good for anything but wanton murder.  "); break;
+                            default: say(t, x.mainName + " has completely gone off the deep end, " + x.heShe() + "'s just a killing machine now.  ");
+                        }
                     } else
                     if(x.flavorHostility() < 20)
                     {
-                        if(x.confidence > 66)
-                            say(t, x.mainName + " is a fool with pretensions of heroism.  ");
-                        else
-                        if(x.confidence > 33)
-                            say(t, x.mainName + " is addicted to the feeling of righteousness, having spent far too little time thinking about what right and wrong actually are.  ");
-                        else
-                            say(t, x.mainName + " masks " + x.hisHer() + " weakness with a thin veneer of kindness.  ");
+                        switch (x.confidence / 33) {
+                            case 0: say(t, x.mainName + " masks " + x.hisHer() + " weakness with a thin veneer of kindness.  "); break;
+                            case 1: say(t, x.mainName + " is addicted to the feeling of righteousness, having spent far too little time thinking about what right and wrong actually are.  "); break;
+                            default: say(t, x.mainName + " is a fool with pretensions of heroism.  ");
+                        }
                     } else
                     if(x.flavorHostility() < 40)
                     {
-                        if(x.confidence > 66)
-                            say(t, x.mainName + " is reckless and selfish.  ");
-                        else
-                        if(x.confidence > 33)
-                            say(t, x.mainName + " is afraid to care about anything.  ");
-                        else
-                            say(t, x.mainName + " is a coward whose only redeeming feature is " + x.hisHer() + " acknowledgement of " + x.hisHer() + " own cowardice.  ");
+                        switch (x.confidence / 33) {
+                            case 0: say(t, x.mainName + " is a coward whose only redeeming feature is " + x.hisHer() + " acknowledgement of " + x.hisHer() + " own cowardice.  "); break;
+                            case 1: say(t, x.mainName + " is afraid to care about anything.  "); break;
+                            default: say(t, x.mainName + " is reckless and selfish.  ");
+                        }
                     } else
                     if(x.flavorHostility() < 61)
                     {
-                        if(x.confidence > 66)
-                            say(t, x.mainName + " is convinced that " + x.heShe() + "'s different from and better than everyone else.  ");
-                        else
-                        if(x.confidence > 33)
-                            say(t, x.mainName + " lacks the capacity to worry about anything beyond " + x.hisHer() + " base desires.  ");
-                        else
-                            say(t, x.mainName + " is fierce and desperate as a cornered animal.  ");
+                        switch (x.confidence / 33) {
+                            case 0: say(t, x.mainName + " is fierce and desperate as a cornered animal.  "); break;
+                            case 1: say(t, x.mainName + " lacks the capacity to worry about anything beyond " + x.hisHer() + " base desires.  "); break;
+                            default: say(t, x.mainName + " is convinced that " + x.heShe() + "'s different from and better than everyone else.  ");
+                        }
                     } else
                     if(x.flavorHostility() < 81)
                     {
-                        if(x.confidence > 66)
-                            say(t, x.mainName + " attempts to use cruelty to hide " + x.hisHer() + " insecurities, even from " + x.himHer() + "self.  ");
-                        else
-                        if(x.confidence > 33)
-                            say(t, x.mainName + " knows that " + x.heShe() + "'s an awful person on every level, but " + x.heShe() + " protects " + x.hisHer() + " ego by projecting it on everyone else.  ");
-                        else
-                            say(t, x.mainName + " is a spiteful little creature.  ");
+                        switch (x.confidence / 33) {
+                            case 0: say(t, x.mainName + " is a spiteful little creature.  "); break;
+                            case 1: say(t, x.mainName + " knows that " + x.heShe() + "'s an awful person on every level, but " + x.heShe() + " protects " + x.hisHer() + " ego by projecting it on everyone else.  "); break;
+                            default: say(t, x.mainName + " attempts to use cruelty to hide " + x.hisHer() + " insecurities, even from " + x.himHer() + "self.  ");
+                        }
                     } else
-                    if(x.confidence > 66)
-                        say(t, x.mainName + " is uncontrollably violent.  I hope you know what you're doing by keeping " + x.himHer() + " around.  ");
-                    else
-                    if(x.confidence > 33)
-                        say(t, x.mainName + " is completely incapable of having a normal relationship with other humans.  ");
-                    else
-                        say(t, x.mainName + " has done a poor job of concealing " + x.hisHer() + " desire to kill all of us.  Fortunately, " + x.heShe() + "'s incompetent.  ");
+                    switch (x.confidence / 33) {
+                        case 0: say(t, x.mainName + " has done a poor job of concealing " + x.hisHer() + " desire to kill all of us.  Fortunately, " + x.heShe() + "'s incompetent.  "); break;
+                        case 1: say(t, x.mainName + " is completely incapable of having a normal relationship with other humans.  "); break;
+                        default: say(t, x.mainName + " is uncontrollably violent.  I hope you know what you're doing by keeping " + x.himHer() + " around.  ");
+                    }
                     if(history)
                     {
                         if(otherKilledPartner)
@@ -2405,77 +2157,61 @@ public class Forsaken
                                 {
                                     if(x.opinion(this) > 100)
                                     {
-                                        if(x.morality > 66)
-                                            say(t, x.HeShe() + " cared more about trying to be a hero than about saving " + x.kills[0].mainName + "'s life.  ");
-                                        else
-                                        if(x.morality > 33)
-                                            say(t, "I can't forgive " + x.himHer() + " for killing " + x.kills[0].mainName + ".  ");
-                                        else
-                                            say(t, x.HeShe() + " has never properly apologized for killing " + x.kills[0].mainName + ".  ");
+                                        switch (x.morality / 33) {
+                                            case 0: say(t, x.HeShe() + " has never properly apologized for killing " + x.kills[0].mainName + ".  "); break;
+                                            case 1: say(t, "I can't forgive " + x.himHer() + " for killing " + x.kills[0].mainName + ".  "); break;
+                                            default: say(t, x.HeShe() + " cared more about trying to be a hero than about saving " + x.kills[0].mainName + "'s life.  ");
+                                        }
                                     } else
-                                    if(x.morality > 66)
-                                        say(t, x.HeShe() + " probably killed " + x.kills[0].mainName + " because " + x.heShe() + " was jealous about how close the two of us were.  ");
-                                    else
-                                    if(x.morality > 33)
-                                        say(t, x.HeShe() + " fooled " + x.kills[0].mainName + " into thinking " + x.heShe() + " cared about " + x.kills[0].himHer() + " - and then " + x.heShe() + " killed " + x.kills[0].himHer() + ".  ");
-                                    else
-                                        say(t, "I used to think " + x.heShe() + " cared about " + x.kills[0].mainName + ", but then " + x.heShe() + " killed " + x.kills[0].himHer() + ".  ");
+                                    switch (x.morality / 33) {
+                                        case 0: say(t, "I used to think " + x.heShe() + " cared about " + x.kills[0].mainName + ", but then " + x.heShe() + " killed " + x.kills[0].himHer() + ".  "); break;
+                                        case 1: say(t, x.HeShe() + " fooled " + x.kills[0].mainName + " into thinking " + x.heShe() + " cared about " + x.kills[0].himHer() + " - and then " + x.heShe() + " killed " + x.kills[0].himHer() + ".  "); break;
+                                        default: say(t, x.HeShe() + " probably killed " + x.kills[0].mainName + " because " + x.heShe() + " was jealous about how close the two of us were.  ");
+                                    }
                                 } else
                                 if(x.opinion(this) > 100)
                                 {
-                                    if(x.morality > 66)
-                                        say(t, "The way " + x.heShe() + " acts so sweet toward me just makes me sick, especially after " + x.heShe() + " so eagerly killed " + x.kills[0].mainName + ".  ");
-                                    else
-                                    if(x.morality > 33)
-                                        say(t, x.HeShe() + " says " + x.heShe() + " wants to be friends, but I still remember how happy " + x.heShe() + " was to kill " + x.kills[0].mainName + ".  ");
-                                    else
-                                        say(t, x.HeShe() + " killed " + x.kills[0].mainName + ", just because " + x.heShe() + " was jealous of " + x.kills[0].himHer() + " for getting close to me.  ");
+                                    switch (x.morality / 33) {
+                                        case 0: say(t, x.HeShe() + " killed " + x.kills[0].mainName + ", just because " + x.heShe() + " was jealous of " + x.kills[0].himHer() + " for getting close to me.  "); break;
+                                        case 1: say(t, x.HeShe() + " says " + x.heShe() + " wants to be friends, but I still remember how happy " + x.heShe() + " was to kill " + x.kills[0].mainName + ".  "); break;
+                                        default: say(t, "The way " + x.heShe() + " acts so sweet toward me just makes me sick, especially after " + x.heShe() + " so eagerly killed " + x.kills[0].mainName + ".  ");
+                                    }
                                 } else
-                                if(x.morality > 66)
-                                    say(t, x.HeShe() + " claims that " + x.heShe() + "'s sorry about 'needing' to kill " + x.kills[0].mainName + ", but I can tell that " + x.heShe() + "'s lying.  ");
-                                else
-                                if(x.morality > 33)
-                                    say(t, x.HeShe() + " took the first excuse " + x.heShe() + " could find to kill " + x.kills[0].mainName + ".  ");
-                                else
-                                    say(t, x.HeShe() + " killed " + x.kills[0].mainName + ", and I know it's just a matter of time until " + x.heShe() + " comes after me.  ");
+                                switch (x.morality / 33) {
+                                    case 0: say(t, x.HeShe() + " killed " + x.kills[0].mainName + ", and I know it's just a matter of time until " + x.heShe() + " comes after me.  "); break;
+                                    case 1: say(t, x.HeShe() + " took the first excuse " + x.heShe() + " could find to kill " + x.kills[0].mainName + ".  "); break;
+                                    default: say(t, x.HeShe() + " claims that " + x.heShe() + "'s sorry about 'needing' to kill " + x.kills[0].mainName + ", but I can tell that " + x.heShe() + "'s lying.  ");
+                                }
                             } else
                             if(otherOpinionOfDead >= 0)
                             {
                                 if(x.opinion(this) > 100)
                                 {
-                                    if(x.morality > 66)
-                                        say(t, x.HeShe() + " says that " + x.heShe() + " doesn't want to be enemies, but if " + x.heShe() + " does to all " + x.hisHer() + " friends what " + x.heShe() + " did to " + x.kills[0].mainName + ", then I'm not interested.  ");
-                                    else
-                                    if(x.morality > 33)
-                                        say(t, x.HeShe() + "'s obsessed with using me to fill the hole in " + x.hisHer() + " heart after killing " + x.kills[0].mainName + ".  ");
-                                    else
-                                        say(t, x.HeShe() + " got over killing " + x.kills[0].mainName + " much too quickly, and now " + x.heShe() + "'s stalking me.  ");
+                                    switch (x.morality / 33) {
+                                        case 0: say(t, x.HeShe() + " got over killing " + x.kills[0].mainName + " much too quickly, and now " + x.heShe() + "'s stalking me.  "); break;
+                                        case 1: say(t, x.HeShe() + "'s obsessed with using me to fill the hole in " + x.hisHer() + " heart after killing " + x.kills[0].mainName + ".  "); break;
+                                        default: say(t, x.HeShe() + " says that " + x.heShe() + " doesn't want to be enemies, but if " + x.heShe() + " does to all " + x.hisHer() + " friends what " + x.heShe() + " did to " + x.kills[0].mainName + ", then I'm not interested.  ");
+                                    }
                                 } else
-                                if(x.morality > 66)
-                                    say(t, "I never liked " + x.kills[0].mainName + ", but I still can't understand how " + x.mainName + " could throw " + x.hisHer() + " friend's life away so easily.  ");
-                                else
-                                if(x.morality > 33)
-                                    say(t, "Considering how willing " + x.heShe() + " was to kill " + x.kills[0].mainName + ", " + x.hisHer() + " closest friend, I'm glad that there's no connection between us anymore.  ");
-                                else
-                                    say(t, "Something broke inside " + x.himHer() + " after " + x.heShe() + " ended up killing " + x.kills[0].mainName + ", and " + x.heShe() + " hates me for continuing to live on.  ");
+                                switch (x.morality / 33) {
+                                    case 0: say(t, "Something broke inside " + x.himHer() + " after " + x.heShe() + " ended up killing " + x.kills[0].mainName + ", and " + x.heShe() + " hates me for continuing to live on.  "); break;
+                                    case 1: say(t, "Considering how willing " + x.heShe() + " was to kill " + x.kills[0].mainName + ", " + x.hisHer() + " closest friend, I'm glad that there's no connection between us anymore.  "); break;
+                                    default: say(t, "I never liked " + x.kills[0].mainName + ", but I still can't understand how " + x.mainName + " could throw " + x.hisHer() + " friend's life away so easily.  ");
+                                }
                             } else
                             if(x.opinion(this) > 100)
                             {
-                                if(x.morality > 66)
-                                    say(t, "It's probably good that " + x.heShe() + " killed " + x.kills[0].mainName + ", but that doesn't mean I'm interested in being friends with " + x.himHer() + ".  ");
-                                else
-                                if(x.morality > 33)
-                                    say(t, "I don't blame " + x.himHer() + " for killing " + x.kills[0].mainName + ", but now that our time as a team is over, I'm not interested in being friends anymore.  ");
-                                else
-                                    say(t, x.HeShe() + " thought I'd be grateful to " + x.himHer() + " for killing " + x.kills[0].mainName + ".  Unbelievable.  ");
+                                switch (x.morality / 33) {
+                                    case 0: say(t, x.HeShe() + " thought I'd be grateful to " + x.himHer() + " for killing " + x.kills[0].mainName + ".  Unbelievable.  "); break;
+                                    case 1: say(t, "I don't blame " + x.himHer() + " for killing " + x.kills[0].mainName + ", but now that our time as a team is over, I'm not interested in being friends anymore.  "); break;
+                                    default: say(t, "It's probably good that " + x.heShe() + " killed " + x.kills[0].mainName + ", but that doesn't mean I'm interested in being friends with " + x.himHer() + ".  ");
+                                }
                             } else
-                            if(x.morality > 66)
-                                say(t, "The only useful thing " + x.heShe() + "'s ever done was killing " + x.kills[0].mainName + ".  ");
-                            else
-                            if(x.morality > 33)
-                                say(t, "We used to be a team, but ever since " + x.heShe() + " killed " + x.kills[0].mainName + ", there's no connection between us.  ");
-                            else
-                                say(t, "I can't blame " + x.himHer() + " for killing " + x.kills[0].mainName + ", but I can tell you that " + x.heShe() + " did it for the wrong reasons.  ");
+                            switch (x.morality / 33) {
+                                case 0: say(t, "I can't blame " + x.himHer() + " for killing " + x.kills[0].mainName + ", but I can tell you that " + x.heShe() + " did it for the wrong reasons.  "); break;
+                                case 1: say(t, "We used to be a team, but ever since " + x.heShe() + " killed " + x.kills[0].mainName + ", there's no connection between us.  "); break;
+                                default: say(t, "The only useful thing " + x.heShe() + "'s ever done was killing " + x.kills[0].mainName + ".  ");
+                            }
                         } else
                         if(killedPartner)
                         {
@@ -2485,77 +2221,61 @@ public class Forsaken
                                 {
                                     if(x.opinion(this) > 100)
                                     {
-                                        if(x.morality > 66)
-                                            say(t, x.HeShe() + " was way too quick to forgive me for killing " + kills[0].mainName + ".  It makes me sick.  ");
-                                        else
-                                        if(x.morality > 33)
-                                            say(t, x.HeShe() + " doesn't blame me for killing " + kills[0].mainName + "... but I don't want forgiveness from " + x.himHer() + ".  ");
-                                        else
-                                            say(t, x.HeShe() + " just wants to go back to how things were before I killed " + kills[0].mainName + "... but I refuse.  ");
+                                        switch (x.morality / 33) {
+                                            case 0: say(t, x.HeShe() + " just wants to go back to how things were before I killed " + kills[0].mainName + "... but I refuse.  "); break;
+                                            case 1: say(t, x.HeShe() + " doesn't blame me for killing " + kills[0].mainName + "... but I don't want forgiveness from " + x.himHer() + ".  "); break;
+                                            default: say(t, x.HeShe() + " was way too quick to forgive me for killing " + kills[0].mainName + ".  It makes me sick.  ");
+                                        }
                                     } else
-                                    if(x.morality > 66)
-                                        say(t, x.HeShe() + "'s hung up on the fact that I killed " + kills[0].mainName + " - not even considering how much worse it feels for me!  ");
-                                    else
-                                    if(x.morality > 33)
-                                        say(t, x.HeShe() + " hates me for killing " + kills[0].mainName + ", even though I'm sure " + x.heShe() + " would've done the same in my situation.  ");
-                                    else
-                                        say(t, "The only good thing I can say about " + x.himHer() + " is that " + x.heShe() + " properly hates me for murdering " + kills[0].mainName + ".  ");
+                                    switch (x.morality / 33) {
+                                        case 0: say(t, "The only good thing I can say about " + x.himHer() + " is that " + x.heShe() + " properly hates me for murdering " + kills[0].mainName + ".  "); break;
+                                        case 1: say(t, x.HeShe() + " hates me for killing " + kills[0].mainName + ", even though I'm sure " + x.heShe() + " would've done the same in my situation.  "); break;
+                                        default: say(t, x.HeShe() + "'s hung up on the fact that I killed " + kills[0].mainName + " - not even considering how much worse it feels for me!  ");
+                                    }
                                 } else
                                 if(x.opinion(this) > 100)
                                 {
-                                    if(x.morality > 66)
-                                        say(t, "Whenever I see " + x.himHer() + " smiling at me, I get so angry that I had to kill " + kills[0].mainName + " but " + x.heShe() + "'s still around.  ");
-                                    else
-                                    if(x.morality > 33)
-                                        say(t, x.HeShe() + " doesn't mind that I killed " + kills[0].mainName + ", of course, but that just makes me hate " + x.himHer() + " even more.  ");
-                                    else
-                                        say(t, x.HeShe() + "... laughed and thanked me when " + x.heShe() + " heard that I killed " + kills[0].mainName + ".  " + x.HeShe() + "'s awful.  ");
+                                    switch (x.morality / 33) {
+                                        case 0: say(t, x.HeShe() + "... laughed and thanked me when " + x.heShe() + " heard that I killed " + kills[0].mainName + ".  " + x.HeShe() + "'s awful.  "); break;
+                                        case 1: say(t, x.HeShe() + " doesn't mind that I killed " + kills[0].mainName + ", of course, but that just makes me hate " + x.himHer() + " even more.  "); break;
+                                        default: say(t, "Whenever I see " + x.himHer() + " smiling at me, I get so angry that I had to kill " + kills[0].mainName + " but " + x.heShe() + "'s still around.  ");
+                                    }
                                 } else
-                                if(x.morality > 66)
-                                    say(t, "It's " + x.hisHer() + " fault that I was forced to kill " + kills[0].mainName + ".  ");
-                                else
-                                if(x.morality > 33)
-                                    say(t, "For " + kills[0].mainName + "'s sake, I won't let " + x.himHer() + " win.  ");
-                                else
-                                    say(t, x.HeShe() + " says that if I hadn't killed " + kills[0].mainName + ", " + x.heShe() + "'d have done it instead.  ");
+                                switch (x.morality / 33) {
+                                    case 0: say(t, x.HeShe() + " says that if I hadn't killed " + kills[0].mainName + ", " + x.heShe() + "'d have done it instead.  "); break;
+                                    case 1: say(t, "For " + kills[0].mainName + "'s sake, I won't let " + x.himHer() + " win.  "); break;
+                                    default: say(t, "It's " + x.hisHer() + " fault that I was forced to kill " + kills[0].mainName + ".  ");
+                                }
                             } else
                             if(otherOpinionOfDead >= 0)
                             {
                                 if(x.opinion(this) > 100)
                                 {
-                                    if(x.morality > 66)
-                                        say(t, x.HeShe() + " says " + x.heShe() + "'s willing to forgive me for killing " + kills[0].mainName + ", but " + x.heShe() + "'s probably just trying to trick me into letting " + x.himHer() + " get close enough to get revenge.  ");
-                                    else
-                                    if(x.morality > 33)
-                                        say(t, "I killed " + x.hisHer() + " friend, " + kills[0].mainName + ", but " + x.heShe() + " still keeps trying to get close to me for some reason.  ");
-                                    else
-                                        say(t, "For all " + x.heShe() + " supposedly cared about " + kills[0].mainName + ", " + x.heShe() + " doesn't even seem to care that I killed " + kills[0].himHer() + ".  ");
+                                    switch (x.morality / 33) {
+                                        case 0: say(t, "For all " + x.heShe() + " supposedly cared about " + kills[0].mainName + ", " + x.heShe() + " doesn't even seem to care that I killed " + kills[0].himHer() + ".  "); break;
+                                        case 1: say(t, "I killed " + x.hisHer() + " friend, " + kills[0].mainName + ", but " + x.heShe() + " still keeps trying to get close to me for some reason.  "); break;
+                                        default: say(t, x.HeShe() + " says " + x.heShe() + "'s willing to forgive me for killing " + kills[0].mainName + ", but " + x.heShe() + "'s probably just trying to trick me into letting " + x.himHer() + " get close enough to get revenge.  ");
+                                    }
                                 } else
-                                if(x.morality > 66)
-                                    say(t, x.HeShe() + "'s always angry with me, probably because I killed " + kills[0].mainName + ".  ");
-                                else
-                                if(x.morality > 33)
-                                    say(t, x.HeShe() + " never did forgive me for killing " + kills[0].mainName + ".  ");
-                                else
-                                    say(t, "My reasons for killing " + kills[0].mainName + " honestly weren't personal, but it's pointless to tell " + x.himHer() + " that.  ");
+                                switch (x.morality / 33) {
+                                    case 0: say(t, "My reasons for killing " + kills[0].mainName + " honestly weren't personal, but it's pointless to tell " + x.himHer() + " that.  "); break;
+                                    case 1: say(t, x.HeShe() + " never did forgive me for killing " + kills[0].mainName + ".  "); break;
+                                    default: say(t, x.HeShe() + "'s always angry with me, probably because I killed " + kills[0].mainName + ".  ");
+                                }
                             } else
                             if(x.opinion(this) > 100)
                             {
-                                if(x.morality > 66)
-                                    say(t, "I killed " + kills[0].mainName + ", and if " + x.heShe() + " keeps stalking me, " + x.heShe() + "'d better be prepared for me to do the same to " + x.himHer() + ".  ");
-                                else
-                                if(x.morality > 33)
-                                    say(t, x.HeShe() + " seems convinced that I killed " + kills[0].mainName + " for " + x.hisHer() + " sake.  ");
-                                else
-                                    say(t, x.HeShe() + " actually thanked me for getting rid of " + kills[0].mainName + ".  I don't want to be thanked for something like that!  ");
+                                switch (x.morality / 33) {
+                                    case 0: say(t, x.HeShe() + " actually thanked me for getting rid of " + kills[0].mainName + ".  I don't want to be thanked for something like that!  "); break;
+                                    case 1: say(t, x.HeShe() + " seems convinced that I killed " + kills[0].mainName + " for " + x.hisHer() + " sake.  "); break;
+                                    default: say(t, "I killed " + kills[0].mainName + ", and if " + x.heShe() + " keeps stalking me, " + x.heShe() + "'d better be prepared for me to do the same to " + x.himHer() + ".  ");
+                                }
                             } else
-                            if(x.morality > 66)
-                                say(t, "I killed " + kills[0].mainName + " so that " + x.heShe() + " wouldn't whine about having to get " + x.hisHer() + " hands dirty, but " + x.heShe() + " never showed a bit of gratitude for it.  ");
-                            else
-                            if(x.morality > 33)
-                                say(t, x.HeShe() + " doesn't seem to blame me for killing " + kills[0].mainName + ", but we still definitely don't get along.  ");
-                            else
-                                say(t, "I gave " + kills[0].mainName + " a quick death, but " + x.mainName + " definitely would have done worse.  ");
+                            switch (x.morality / 33) {
+                                case 0: say(t, "I gave " + kills[0].mainName + " a quick death, but " + x.mainName + " definitely would have done worse.  "); break;
+                                case 1: say(t, x.HeShe() + " doesn't seem to blame me for killing " + kills[0].mainName + ", but we still definitely don't get along.  "); break;
+                                default: say(t, "I killed " + kills[0].mainName + " so that " + x.heShe() + " wouldn't whine about having to get " + x.hisHer() + " hands dirty, but " + x.heShe() + " never showed a bit of gratitude for it.  ");
+                            }
                         } else
                         if(formerRelationship >= 0)
                         {
@@ -2563,428 +2283,340 @@ public class Forsaken
                             {
                                 if(confidence > 66)
                                 {
-                                    if(x.morality > 66)
-                                        say(t, x.HeShe() + " still trails after me like a lost puppy, sometimes.  Pathetic.  ");
-                                    else
-                                    if(x.morality > 33)
-                                        say(t, x.HeShe() + "'s even weaker than " + x.heShe() + " used to be, and I don't have time for " + x.himHer() + " anymore.  ");
-                                    else
-                                        say(t, x.HeShe() + " claims that " + x.heShe() + " wants to be friends, but " + x.heShe() + "'s just a coward who wants someone to fight for " + x.himHer() + ".  ");
+                                    switch (x.morality / 33) {
+                                        case 0: say(t, x.HeShe() + " claims that " + x.heShe() + " wants to be friends, but " + x.heShe() + "'s just a coward who wants someone to fight for " + x.himHer() + ".  "); break;
+                                        case 1: say(t, x.HeShe() + "'s even weaker than " + x.heShe() + " used to be, and I don't have time for " + x.himHer() + " anymore.  "); break;
+                                        default: say(t, x.HeShe() + " still trails after me like a lost puppy, sometimes.  Pathetic.  ");
+                                    }
                                 } else
                                 if(confidence > 33)
                                 {
-                                    if(x.morality > 66)
-                                        say(t, "It's " + x.hisHer() + " fault that we lost, and I'm not going to make the mistake of relying on " + x.himHer() + " again.  ");
-                                    else
-                                    if(x.morality > 33)
-                                        say(t, "I'm not interested in being " + x.hisHer() + " friend anymore.  ");
-                                    else
-                                        say(t, x.HeShe() + " claims " + x.heShe() + " can make it worth my while to stick with " + x.himHer() + ", but I don't believe " + x.himHer() + ".  ");
+                                    switch (x.morality / 33) {
+                                        case 0: say(t, x.HeShe() + " claims " + x.heShe() + " can make it worth my while to stick with " + x.himHer() + ", but I don't believe " + x.himHer() + ".  "); break;
+                                        case 1: say(t, "I'm not interested in being " + x.hisHer() + " friend anymore.  "); break;
+                                        default: say(t, "It's " + x.hisHer() + " fault that we lost, and I'm not going to make the mistake of relying on " + x.himHer() + " again.  ");
+                                    }
                                 } else
-                                if(x.morality > 66)
-                                    say(t, x.HeShe() + " f-failed to protect me, and I won't forgive " + x.himHer() + "!  ");
-                                else
-                                if(x.morality > 33)
-                                    say(t, "I-I'm done being led around by " + x.himHer() + ", no matter what " + x.heShe() + " says!  ");
-                                else
-                                    say(t, x.HeShe() + " thinks I belong to " + x.himHer() + ", b-but those days are over!  ");
+                                switch (x.morality / 33) {
+                                    case 0: say(t, x.HeShe() + " thinks I belong to " + x.himHer() + ", b-but those days are over!  "); break;
+                                    case 1: say(t, "I-I'm done being led around by " + x.himHer() + ", no matter what " + x.heShe() + " says!  "); break;
+                                    default: say(t, x.HeShe() + " f-failed to protect me, and I won't forgive " + x.himHer() + "!  ");
+                                }
                             } else
                             if(confidence > 66)
                             {
-                                if(x.morality > 66)
-                                    say(t, "I'm better off without " + x.himHer() + " trailing after me like a lost puppy.  ");
-                                else
-                                if(x.morality > 33)
-                                    say(t, x.HeShe() + "'s even weaker than " + x.heShe() + " used to be, and I'm glad not to be stuck on a team with " + x.himHer() + " anymore.  ");
-                                else
-                                    say(t, x.HeShe() + "'s a coward, but knows better than to try to convince me to protect " + x.himHer() + " now.  ");
+                                switch (x.morality / 33) {
+                                    case 0: say(t, x.HeShe() + "'s a coward, but knows better than to try to convince me to protect " + x.himHer() + " now.  "); break;
+                                    case 1: say(t, x.HeShe() + "'s even weaker than " + x.heShe() + " used to be, and I'm glad not to be stuck on a team with " + x.himHer() + " anymore.  "); break;
+                                    default: say(t, "I'm better off without " + x.himHer() + " trailing after me like a lost puppy.  ");
+                                }
                             } else
                             if(confidence > 33)
                             {
-                                if(x.morality > 66)
-                                    say(t, "I still need to give " + x.himHer() + " payback for making us lose against you.  ");
-                                else
-                                if(x.morality > 33)
-                                    say(t, "We aren't friends anymore.  ");
-                                else
-                                    say(t, x.HeShe() + " was never a good friend.  ");
+                                switch (x.morality / 33) {
+                                    case 0: say(t, x.HeShe() + " was never a good friend.  "); break;
+                                    case 1: say(t, "We aren't friends anymore.  "); break;
+                                    default: say(t, "I still need to give " + x.himHer() + " payback for making us lose against you.  ");
+                                }
                             } else
-                            if(x.morality > 66)
-                                say(t, x.HeShe() + " failed to protect me, a-and " + x.heShe() + " won't even try to make it up to me!  ");
-                            else
-                            if(x.morality > 33)
-                                say(t, x.HeShe() + " says I'm not worth " + x.hisHer() + " time anymore, b-but I don't want to follow " + x.himHer() + " anyway!  ");
-                            else
-                                say(t, x.HeShe() + " used to tell me that I belonged to " + x.himHer() + "... b-but those days are over!  ");
+                            switch (x.morality / 33) {
+                                case 0: say(t, x.HeShe() + " used to tell me that I belonged to " + x.himHer() + "... b-but those days are over!  "); break;
+                                case 1: say(t, x.HeShe() + " says I'm not worth " + x.hisHer() + " time anymore, b-but I don't want to follow " + x.himHer() + " anyway!  "); break;
+                                default: say(t, x.HeShe() + " failed to protect me, a-and " + x.heShe() + " won't even try to make it up to me!  ");
+                            }
                         } else
                         if(x.opinion(this) > 100)
                         {
                             if(confidence > 66)
                             {
-                                if(x.morality > 66)
-                                    say(t, x.HeShe() + " says " + x.heShe() + " wants to put our rivalry behind us, but " + x.heShe() + " just knows " + x.heShe() + "'s doomed without my help!  ");
-                                else
-                                if(x.morality > 33)
-                                    say(t, x.HeShe() + "'s even weaker than " + x.heShe() + " used to be, but I'm not going to let " + x.himHer() + " act like we're old friends.  ");
-                                else
-                                    say(t, x.HeShe() + "'s always been a coward, and now that we're in this situation, " + x.heShe() + "'s trying to act like we can be friends.  ");
+                                switch (x.morality / 33) {
+                                    case 0: say(t, x.HeShe() + "'s always been a coward, and now that we're in this situation, " + x.heShe() + "'s trying to act like we can be friends.  "); break;
+                                    case 1: say(t, x.HeShe() + "'s even weaker than " + x.heShe() + " used to be, but I'm not going to let " + x.himHer() + " act like we're old friends.  "); break;
+                                    default: say(t, x.HeShe() + " says " + x.heShe() + " wants to put our rivalry behind us, but " + x.heShe() + " just knows " + x.heShe() + "'s doomed without my help!  ");
+                                }
                             } else
                             if(confidence > 33)
                             {
-                                if(x.morality > 66)
-                                    say(t, "If " + x.heShe() + " had just done what I said, we never would have lost, and I'm not going to forgive " + x.himHer() + " for that.  ");
-                                else
-                                if(x.morality > 33)
-                                    say(t, "I won't forgive " + x.himHer() + " for what " + x.heShe() + " did during our time as Chosen.  ");
-                                else
-                                    say(t, x.HeShe() + " claims that " + x.heShe() + " can make it worth my while to cooperate with " + x.himHer() + ", but " + x.heShe() + "'s always been a liar.  ");
+                                switch (x.morality / 33) {
+                                    case 0: say(t, x.HeShe() + " claims that " + x.heShe() + " can make it worth my while to cooperate with " + x.himHer() + ", but " + x.heShe() + "'s always been a liar.  "); break;
+                                    case 1: say(t, "I won't forgive " + x.himHer() + " for what " + x.heShe() + " did during our time as Chosen.  "); break;
+                                    default: say(t, "If " + x.heShe() + " had just done what I said, we never would have lost, and I'm not going to forgive " + x.himHer() + " for that.  ");
+                                }
                             } else
-                            if(x.morality > 66)
-                                say(t, x.HeShe() + " n-never... never cared about me before.  I don't believe " + x.himHer() + " when " + x.heShe() + " says " + x.heShe() + " does now.  ");
-                            else
-                            if(x.morality > 33)
-                                say(t, "I hated every minute of following " + x.hisHer() + " orders, a-and I'm not about to start again now!  ");
-                            else
-                                say(t, x.HeShe() + " was awful to me back when we were Chosen, a-and now " + x.heShe() + "'s actually trying to make me submit to " + x.himHer() + "!  ");
+                            switch (x.morality / 33) {
+                                case 0: say(t, x.HeShe() + " was awful to me back when we were Chosen, a-and now " + x.heShe() + "'s actually trying to make me submit to " + x.himHer() + "!  "); break;
+                                case 1: say(t, "I hated every minute of following " + x.hisHer() + " orders, a-and I'm not about to start again now!  "); break;
+                                default: say(t, x.HeShe() + " n-never... never cared about me before.  I don't believe " + x.himHer() + " when " + x.heShe() + " says " + x.heShe() + " does now.  ");
+                            }
                         } else
                         if(confidence > 66)
                         {
-                            if(x.morality > 66)
-                                say(t, "I was always better than " + x.himHer() + ".  ");
-                            else
-                            if(x.morality > 33)
-                                say(t, x.HeShe() + " never could pull " + x.hisHer() + " own weight on the team.  ");
-                            else
-                                say(t, x.HeShe() + " was always a coward.  ");
+                            switch (x.morality / 33) {
+                                case 0: say(t, x.HeShe() + " was always a coward.  "); break;
+                                case 1: say(t, x.HeShe() + " never could pull " + x.hisHer() + " own weight on the team.  "); break;
+                                default: say(t, "I was always better than " + x.himHer() + ".  ");
+                            }
                         } else
                         if(confidence > 33)
                         {
-                            if(x.morality > 66)
-                                say(t, "If " + x.heShe() + " had just done what I said, we never would have lost, but " + x.heShe() + " probably won't admit it.  ");
-                            else
-                            if(x.morality > 33)
-                                say(t, "We've always been enemies, even during our time as Chosen.  ");
-                            else
-                                say(t, x.HeShe() + "'s always been a pain to work with.  ");
+                            switch (x.morality / 33) {
+                                case 0: say(t, x.HeShe() + "'s always been a pain to work with.  "); break;
+                                case 1: say(t, "We've always been enemies, even during our time as Chosen.  "); break;
+                                default: say(t, "If " + x.heShe() + " had just done what I said, we never would have lost, but " + x.heShe() + " probably won't admit it.  ");
+                            }
                         } else
-                        if(x.morality > 66)
-                            say(t, x.HeShe() + " always claimed to be a hero... b-but " + x.heShe() + " never cared enough to help me...  ");
-                        else
-                        if(x.morality > 33)
-                            say(t, "I h-hated every minute of following " + x.hisHer() + " orders, and I'm glad I don't have to do it anymore!  ");
-                        else
-                            say(t, x.HeShe() + "'s... obsessed with making me s-suffer...  ");
+                        switch (x.morality / 33) {
+                            case 0: say(t, x.HeShe() + "'s... obsessed with making me s-suffer...  "); break;
+                            case 1: say(t, "I h-hated every minute of following " + x.hisHer() + " orders, and I'm glad I don't have to do it anymore!  "); break;
+                            default: say(t, x.HeShe() + " always claimed to be a hero... b-but " + x.heShe() + " never cared enough to help me...  ");
+                        }
                     } else
                     if(obsessedWith(x))
                     {
                         if(confidence > 66)
                         {
-                            if(x.confidence > 66)
-                                say(t, x.HeShe() + " still needs to be properly broken...  I want to make " + x.hisHer() + " arrogant face twist in despair...!  ");
-                            else
-                            if(x.confidence > 33)
-                                say(t, "I wish we were still enemies... I want to make " + x.himHer() + " suffer...!  Suffer and scream...!  ");
-                            else
-                                say(t, x.HeShe() + "'s so cute it makes me sick...  I want to torment " + x.himHer() + " even more, make " + x.himHer() + " cry and scream and moan!  ");
+                            switch (x.confidence / 33) {
+                                case 0: say(t, x.HeShe() + "'s so cute it makes me sick...  I want to torment " + x.himHer() + " even more, make " + x.himHer() + " cry and scream and moan!  "); break;
+                                case 1: say(t, "I wish we were still enemies... I want to make " + x.himHer() + " suffer...!  Suffer and scream...!  "); break;
+                                default: say(t, x.HeShe() + " still needs to be properly broken...  I want to make " + x.hisHer() + " arrogant face twist in despair...!  ");
+                            }
                         } else
                         if(confidence > 33)
                         {
-                            if(x.confidence > 66)
-                                say(t, x.HeShe() + "'s so full of " + x.himHer() + "self.  I dream of being able to finally break " + x.hisHer() + " pride, more than I ever could when " + x.heShe() + " was still one of the Chosen...  ");
-                            else
-                            if(x.confidence > 33)
-                                say(t, "Even though I hate " + x.himHer() + ", I still love spending time with " + x.himHer() + ".  Yes, being so full of hate feels amazing...  ");
-                            else
-                                say(t, "Instead of being one of the Forsaken, I think " + x.heShe() + "'d be better off as a pet, a slave...  If I were " + x.hisHer() + " owner, I'd hurt " + x.himHer() + " in so many ways...  ");
+                            switch (x.confidence / 33) {
+                                case 0: say(t, "Instead of being one of the Forsaken, I think " + x.heShe() + "'d be better off as a pet, a slave...  If I were " + x.hisHer() + " owner, I'd hurt " + x.himHer() + " in so many ways...  "); break;
+                                case 1: say(t, "Even though I hate " + x.himHer() + ", I still love spending time with " + x.himHer() + ".  Yes, being so full of hate feels amazing...  "); break;
+                                default: say(t, x.HeShe() + "'s so full of " + x.himHer() + "self.  I dream of being able to finally break " + x.hisHer() + " pride, more than I ever could when " + x.heShe() + " was still one of the Chosen...  ");
+                            }
                         } else
-                        if(x.confidence > 66)
-                            say(t, "I always hated how strong " + x.heShe() + " was.  Every time we'd fight, it was like " + x.heShe() + " was looking down on me.  I want to put " + x.himHer() + " in " + x.hisHer() + " place...!  ");
-                        else
-                        if(x.confidence > 33)
-                            say(t, "I follow " + x.himHer() + " around everywhere, without letting " + x.himHer() + " see me...  Even though we're supposed to be on the same side, I can't stop myself...  I hate " + x.himHer() + " so much...!  ");
-                        else
-                            say(t, "I loved fighting " + x.himHer() + ".  I felt... p-powerful...  I want to hurt " + x.himHer() + " even more...  ");
+                        switch (x.confidence / 33) {
+                            case 0: say(t, "I loved fighting " + x.himHer() + ".  I felt... p-powerful...  I want to hurt " + x.himHer() + " even more...  "); break;
+                            case 1: say(t, "I follow " + x.himHer() + " around everywhere, without letting " + x.himHer() + " see me...  Even though we're supposed to be on the same side, I can't stop myself...  I hate " + x.himHer() + " so much...!  "); break;
+                            default: say(t, "I always hated how strong " + x.heShe() + " was.  Every time we'd fight, it was like " + x.heShe() + " was looking down on me.  I want to put " + x.himHer() + " in " + x.hisHer() + " place...!  ");
+                        }
                     } else
                     if(x.opinion(this) > 100)
                     {
                         if(confidence > 66)
                         {
-                            if(x.morality > 66)
-                                say(t, x.HeShe() + "'s much too nice to me - trying to get on my good side, I suppose.  ");
-                            else
-                            if(x.morality > 33)
-                                say(t, x.HeShe() + " seems to want to be friends with me, but I'm not interested.  ");
-                            else
-                                say(t, x.HeShe() + "'s weak, but " + x.heShe() + "'s always trying to get other people to fight " + x.hisHer() + " battles for " + x.himHer() + ".  ");
+                            switch (x.morality / 33) {
+                                case 0: say(t, x.HeShe() + "'s weak, but " + x.heShe() + "'s always trying to get other people to fight " + x.hisHer() + " battles for " + x.himHer() + ".  "); break;
+                                case 1: say(t, x.HeShe() + " seems to want to be friends with me, but I'm not interested.  "); break;
+                                default: say(t, x.HeShe() + "'s much too nice to me - trying to get on my good side, I suppose.  ");
+                            }
                         } else
                         if(confidence > 33)
                         {
-                            if(x.morality > 66)
-                                say(t, x.HeShe() + "'s sometimes so sweet towards me that it's creepy.  ");
-                            else
-                            if(x.morality > 33)
-                                say(t, x.HeShe() + " might like me, but I definitely don't feel the same way in return.  ");
-                            else
-                                say(t, x.HeShe() + " doesn't seem like the sort of person who you want to be friends with.  ");
+                            switch (x.morality / 33) {
+                                case 0: say(t, x.HeShe() + " doesn't seem like the sort of person who you want to be friends with.  "); break;
+                                case 1: say(t, x.HeShe() + " might like me, but I definitely don't feel the same way in return.  "); break;
+                                default: say(t, x.HeShe() + "'s sometimes so sweet towards me that it's creepy.  ");
+                            }
                         } else
-                        if(x.morality > 66)
-                            say(t, x.HeShe() + "'s always trying to figure out what I want and give it to me, I-I really don't like it!  ");
-                        else
-                        if(x.morality > 33)
-                            say(t, x.HeShe() + " says " + x.heShe() + " can protect me... b-but I don't believe " + x.himHer() + "...  ");
-                        else
-                            say(t, x.HeShe() + " keeps talking about how " + x.heShe() + " wants me to belong to " + x.himHer() + "...  I-It's a little bit scary...  ");
+                        switch (x.morality / 33) {
+                            case 0: say(t, x.HeShe() + " keeps talking about how " + x.heShe() + " wants me to belong to " + x.himHer() + "...  I-It's a little bit scary...  "); break;
+                            case 1: say(t, x.HeShe() + " says " + x.heShe() + " can protect me... b-but I don't believe " + x.himHer() + "...  "); break;
+                            default: say(t, x.HeShe() + "'s always trying to figure out what I want and give it to me, I-I really don't like it!  ");
+                        }
                     } else
                     if(confidence > 66)
                     {
-                        if(x.morality > 66)
-                            say(t, x.HeShe() + "' just hates seeing people stronger than " + x.himHer() + " - like me.  ");
-                        else
-                        if(x.morality > 33)
-                            say(t, "I've heard that " + x.heShe() + " doesn't like me, but I don't really care.  ");
-                        else
-                            say(t, x.HeShe() + " seems envious of me, and " + x.heShe() + " has trouble dealing with it.  ");
+                        switch (x.morality / 33) {
+                            case 0: say(t, x.HeShe() + " seems envious of me, and " + x.heShe() + " has trouble dealing with it.  "); break;
+                            case 1: say(t, "I've heard that " + x.heShe() + " doesn't like me, but I don't really care.  "); break;
+                            default: say(t, x.HeShe() + "' just hates seeing people stronger than " + x.himHer() + " - like me.  ");
+                        }
                     } else
                     if(confidence > 33)
                     {
-                        if(x.morality > 66)
-                            say(t, x.HisHer() + " way of thinking doesn't make any sense at all.  ");
-                        else
-                        if(x.morality > 33)
-                            say(t, "We really don't get along.  ");
-                        else
-                            say(t, x.HeShe() + "'s especially nasty toward me.  ");
+                        switch (x.morality / 33) {
+                            case 0: say(t, x.HeShe() + "'s especially nasty toward me.  "); break;
+                            case 1: say(t, "We really don't get along.  "); break;
+                            default: say(t, x.HisHer() + " way of thinking doesn't make any sense at all.  ");
+                        }
                     } else
-                    if(x.morality > 66)
-                        say(t, x.HeShe() + "'s c-completely delusional...  ");
-                    else
-                    if(x.morality > 33)
-                        say(t, "I d-don't like having to work with " + x.himHer() + "...  ");
-                    else
-                        say(t, x.HeShe() + "'s... e-especially bad toward me, because " + x.heShe() + " knows I can't fight back...  ");
+                    switch (x.morality / 33) {
+                        case 0: say(t, x.HeShe() + "'s... e-especially bad toward me, because " + x.heShe() + " knows I can't fight back...  "); break;
+                        case 1: say(t, "I d-don't like having to work with " + x.himHer() + "...  "); break;
+                        default: say(t, x.HeShe() + "'s c-completely delusional...  ");
+                    }
                     if(x.disgrace < 20)
                     {
                         if(morality > 66)
                         {
-                            if(x.confidence > 66)
-                                say(t, x.HeShe() + " thinks " + x.heShe() + "'s the center of the world!  ");
-                            else
-                            if(x.confidence > 33)
-                                say(t, "And " + x.heShe() + " doesn't see anything wrong with presenting " + x.himHer() + "self as some sort of hero.  ");
-                            else
-                                say(t, x.HeShe() + " doesn't deserve the respect that people still somehow have for " + x.himHer() + ".  ");
+                            switch (x.confidence / 33) {
+                                case 0: say(t, x.HeShe() + " doesn't deserve the respect that people still somehow have for " + x.himHer() + ".  "); break;
+                                case 1: say(t, "And " + x.heShe() + " doesn't see anything wrong with presenting " + x.himHer() + "self as some sort of hero.  "); break;
+                                default: say(t, x.HeShe() + " thinks " + x.heShe() + "'s the center of the world!  ");
+                            }
                         } else
                         if(morality > 33)
                         {
-                            if(x.confidence > 66)
-                                say(t, x.HeShe() + " and all " + x.hisHer() + " fans are in denial about " + x.himHer() + " completely failing to put up a fight against you.  ");
-                            else
-                            if(x.confidence > 33)
-                                say(t, x.HeShe() + "'s not nearly as strong as " + x.heShe() + " pretends to be.  ");
-                            else
-                                say(t, "It's ridiculous that anyone still respects " + x.himHer() + ".  ");
+                            switch (x.confidence / 33) {
+                                case 0: say(t, "It's ridiculous that anyone still respects " + x.himHer() + ".  "); break;
+                                case 1: say(t, x.HeShe() + "'s not nearly as strong as " + x.heShe() + " pretends to be.  "); break;
+                                default: say(t, x.HeShe() + " and all " + x.hisHer() + " fans are in denial about " + x.himHer() + " completely failing to put up a fight against you.  ");
+                            }
                         } else
-                        if(x.confidence > 66)
-                            say(t, "You should really knock " + x.himHer() + " down a peg, remind everyone that " + x.heShe() + "'s still weaker than the Demon Lord.  ");
-                        else
-                        if(x.confidence > 33)
-                            say(t, "It wouldn't take much to show everyone that " + x.heShe() + "'s not a hero at all.  ");
-                        else
-                            say(t, "I want to show everyone what a weakling " + x.heShe() + " really is.  ");
+                        switch (x.confidence / 33) {
+                            case 0: say(t, "I want to show everyone what a weakling " + x.heShe() + " really is.  "); break;
+                            case 1: say(t, "It wouldn't take much to show everyone that " + x.heShe() + "'s not a hero at all.  "); break;
+                            default: say(t, "You should really knock " + x.himHer() + " down a peg, remind everyone that " + x.heShe() + "'s still weaker than the Demon Lord.  ");
+                        }
                     } else
                     if(x.disgrace < 40)
                     {
                         if(morality > 66)
                         {
-                            if(x.confidence > 66)
-                                say(t, x.HeShe() + "'s too proud to admit what everyone knows - that " + x.heShe() + " was never a real hero.  ");
-                            else
-                            if(x.confidence > 33)
-                                say(t, "At least the most of your other minions know that there's no need to respect " + x.himHer() + ".  ");
-                            else
-                                say(t, x.HeShe() + " doesn't even take responsibility for " + x.hisHer() + " own weakness.  ");
+                            switch (x.confidence / 33) {
+                                case 0: say(t, x.HeShe() + " doesn't even take responsibility for " + x.hisHer() + " own weakness.  "); break;
+                                case 1: say(t, "At least the most of your other minions know that there's no need to respect " + x.himHer() + ".  "); break;
+                                default: say(t, x.HeShe() + "'s too proud to admit what everyone knows - that " + x.heShe() + " was never a real hero.  ");
+                            }
                         } else
                         if(morality > 33)
                         {
-                            if(x.confidence > 66)
-                                say(t, "You'd think " + x.heShe() + "'d be more humble after getting humiliated by you.  ");
-                            else
-                            if(x.confidence > 33)
-                                say(t, "Everyone knows that " + x.heShe() + "'s no better than any of the rest of us Forsaken.  ");
-                            else
-                                say(t, x.HeShe() + " doesn't have any willpower at all.  ");
+                            switch (x.confidence / 33) {
+                                case 0: say(t, x.HeShe() + " doesn't have any willpower at all.  "); break;
+                                case 1: say(t, "Everyone knows that " + x.heShe() + "'s no better than any of the rest of us Forsaken.  "); break;
+                                default: say(t, "You'd think " + x.heShe() + "'d be more humble after getting humiliated by you.  ");
+                            }
                         } else
-                        if(x.confidence > 66)
-                            say(t, "It's almost funny to see " + x.himHer() + " still pretending to be some sort of hero when " + x.heShe() + "'s just a failure.  ");
-                        else
-                        if(x.confidence > 33)
-                            say(t, "I'm glad you humiliated " + x.himHer() + " and showed everyone how weak " + x.heShe() + " is.  ");
-                        else
-                            say(t, x.HeShe() + " practically exists to be prey for people stronger than " + x.himHer() + ".  ");
+                        switch (x.confidence / 33) {
+                            case 0: say(t, x.HeShe() + " practically exists to be prey for people stronger than " + x.himHer() + ".  "); break;
+                            case 1: say(t, "I'm glad you humiliated " + x.himHer() + " and showed everyone how weak " + x.heShe() + " is.  "); break;
+                            default: say(t, "It's almost funny to see " + x.himHer() + " still pretending to be some sort of hero when " + x.heShe() + "'s just a failure.  ");
+                        }
                     } else
                     if(x.disgrace < 61)
                     {
                         if(morality > 66)
                         {
-                            if(x.confidence > 66)
-                                say(t, "When " + x.heShe() + " can't get what " + x.heShe() + " wants with violence, " + x.heShe() + " sees nothing wrong with using " + x.hisHer() + " sex appeal instead.  ");
-                            else
-                            if(x.confidence > 33)
-                                say(t, "And " + x.hisHer() + " fans are the worst sort of people, just following whatever makes them horny, not even thinking for themselves.  ");
-                            else
-                                say(t, x.HeShe() + "'s a weak-willed slut.  ");
+                            switch (x.confidence / 33) {
+                                case 0: say(t, x.HeShe() + "'s a weak-willed slut.  "); break;
+                                case 1: say(t, "And " + x.hisHer() + " fans are the worst sort of people, just following whatever makes them horny, not even thinking for themselves.  "); break;
+                                default: say(t, "When " + x.heShe() + " can't get what " + x.heShe() + " wants with violence, " + x.heShe() + " sees nothing wrong with using " + x.hisHer() + " sex appeal instead.  ");
+                            }
                         } else
                         if(morality > 33)
                         {
-                            if(x.confidence > 66)
-                                say(t, x.HeShe() + "'s really only dangerous because so many of your minions are willing to do what " + x.heShe() + " says in hopes of having sex with " + x.himHer() + ".  ");
-                            else
-                            if(x.confidence > 33)
-                                say(t, "Everyone knows that the only good thing about " + x.himHer() + " is " + x.hisHer() + " body.  ");
-                            else
-                                say(t, "The only reason anyone even cares about " + x.himHer() + " is that " + x.heShe() + "'s cute.  ");
+                            switch (x.confidence / 33) {
+                                case 0: say(t, "The only reason anyone even cares about " + x.himHer() + " is that " + x.heShe() + "'s cute.  "); break;
+                                case 1: say(t, "Everyone knows that the only good thing about " + x.himHer() + " is " + x.hisHer() + " body.  "); break;
+                                default: say(t, x.HeShe() + "'s really only dangerous because so many of your minions are willing to do what " + x.heShe() + " says in hopes of having sex with " + x.himHer() + ".  ");
+                            }
                         } else
-                        if(x.confidence > 66)
-                            say(t, x.HeShe() + " relies too much on " + x.hisHer() + " pathetic fans.  Most of them don't even want sex, they just dream of having " + x.himHer() + " step on them.  ");
-                        else
-                        if(x.confidence > 33)
-                            say(t, x.HeShe() + " usually surrounds " + x.himHer() + "self with 'fans' who just want to have sex with " + x.himHer() + ", but " + x.heShe() + "'s vulnerable without them...  ");
-                        else
-                            say(t, x.HeShe() + " should just stick with the few fans who have low enough standards to want " + x.hisHer() + " body.  ");
+                        switch (x.confidence / 33) {
+                            case 0: say(t, x.HeShe() + " should just stick with the few fans who have low enough standards to want " + x.hisHer() + " body.  "); break;
+                            case 1: say(t, x.HeShe() + " usually surrounds " + x.himHer() + "self with 'fans' who just want to have sex with " + x.himHer() + ", but " + x.heShe() + "'s vulnerable without them...  "); break;
+                            default: say(t, x.HeShe() + " relies too much on " + x.hisHer() + " pathetic fans.  Most of them don't even want sex, they just dream of having " + x.himHer() + " step on them.  ");
+                        }
                     } else
                     if(x.disgrace < 81)
                     {
                         if(morality > 66)
                         {
-                            if(x.confidence > 66)
-                                say(t, x.HeShe() + "'s always getting booed and jeered on the streets, but that just makes " + x.himHer() + " act out even more to compensate.  ");
-                            else
-                            if(x.confidence > 33)
-                                say(t, x.HisHer() + " behavior has made " + x.himHer() + " plenty of enemies besides me, too.  ");
-                            else
-                                say(t, "From the way that " + x.heShe() + "'s hated by everyone, I would've expected " + x.himHer() + " to learn from " + x.hisHer() + " mistakes, but it hasn't happened yet.  ");
+                            switch (x.confidence / 33) {
+                                case 0: say(t, "From the way that " + x.heShe() + "'s hated by everyone, I would've expected " + x.himHer() + " to learn from " + x.hisHer() + " mistakes, but it hasn't happened yet.  "); break;
+                                case 1: say(t, x.HisHer() + " behavior has made " + x.himHer() + " plenty of enemies besides me, too.  "); break;
+                                default: say(t, x.HeShe() + "'s always getting booed and jeered on the streets, but that just makes " + x.himHer() + " act out even more to compensate.  ");
+                            }
                         } else
                         if(morality > 33)
                         {
-                            if(x.confidence > 66)
-                                say(t, x.HeShe() + " won't stop trying to boss people around, even though we all hate " + x.himHer() + ".  ");
-                            else
-                            if(x.confidence > 33)
-                                say(t, "I know that I'm not the only one who thinks we'd be better off without " + x.himHer() + ".  ");
-                            else
-                                say(t, "The only reason " + x.heShe() + " isn't hated by more people is that it's so easy to forget " + x.heShe() + " exists.  ");
+                            switch (x.confidence / 33) {
+                                case 0: say(t, "The only reason " + x.heShe() + " isn't hated by more people is that it's so easy to forget " + x.heShe() + " exists.  "); break;
+                                case 1: say(t, "I know that I'm not the only one who thinks we'd be better off without " + x.himHer() + ".  "); break;
+                                default: say(t, x.HeShe() + " won't stop trying to boss people around, even though we all hate " + x.himHer() + ".  ");
+                            }
                         } else
-                        if(x.confidence > 66)
-                            say(t, x.HeShe() + "'s too full of " + x.himHer() + "self to get along with the rest of your minions, so you should just put " + x.himHer() + " down already.  ");
-                        else
-                        if(x.confidence > 33)
-                            say(t, "You should just get rid of " + x.himHer() + ".  No one would miss " + x.himHer() + ".  ");
-                        else
-                            say(t, "Don't you agree that " + x.heShe() + "'s too weak to be worth keeping around here?  ");
+                        switch (x.confidence / 33) {
+                            case 0: say(t, "Don't you agree that " + x.heShe() + "'s too weak to be worth keeping around here?  "); break;
+                            case 1: say(t, "You should just get rid of " + x.himHer() + ".  No one would miss " + x.himHer() + ".  "); break;
+                            default: say(t, x.HeShe() + "'s too full of " + x.himHer() + "self to get along with the rest of your minions, so you should just put " + x.himHer() + " down already.  ");
+                        }
                     } else
                     if(morality > 66)
                     {
-                        if(x.confidence > 66)
-                            say(t, x.HeShe() + " knows that " + x.heShe() + "'ll provoke a lustful crowd into attacking " + x.himHer() + " whenever " + x.heShe() + " goes out, but " + x.heShe() + "'s too prideful to hide.  ");
-                        else
-                        if(x.confidence > 33)
-                            say(t, x.HeShe() + " can't even protect " + x.himHer() + "self from the regular humans that lust after " + x.himHer() + ".  ");
-                        else
-                            say(t, x.HeShe() + " regularly tempts crowds into abusing " + x.himHer() + ", then pretends that " + x.heShe() + " doesn't like it.  ");
+                        switch (x.confidence / 33) {
+                            case 0: say(t, x.HeShe() + " regularly tempts crowds into abusing " + x.himHer() + ", then pretends that " + x.heShe() + " doesn't like it.  "); break;
+                            case 1: say(t, x.HeShe() + " can't even protect " + x.himHer() + "self from the regular humans that lust after " + x.himHer() + ".  "); break;
+                            default: say(t, x.HeShe() + " knows that " + x.heShe() + "'ll provoke a lustful crowd into attacking " + x.himHer() + " whenever " + x.heShe() + " goes out, but " + x.heShe() + "'s too prideful to hide.  ");
+                        }
                     } else
                     if(morality > 33)
                     {
-                        if(x.confidence > 66)
-                            say(t, "Because no one's scared of " + x.himHer() + " anymore, there are plenty of times that " + x.heShe() + "'s been attacked by crowds of horny 'fans'.  It's what " + x.heShe() + " deserves.  ");
-                        else
-                        if(x.confidence > 33)
-                            say(t, "Ask any of your other minions, they'll tell you that " + x.hisHer() + " only redeeming quality is that " + x.heShe() + "'s a good sex toy.  ");
-                        else
-                            say(t, x.HeShe() + "'s so pathetic that " + x.heShe() + " has to hide from your other minions, even the regular humans, or else they'll just gangrape " + x.himHer() + ".  ");
+                        switch (x.confidence / 33) {
+                            case 0: say(t, x.HeShe() + "'s so pathetic that " + x.heShe() + " has to hide from your other minions, even the regular humans, or else they'll just gangrape " + x.himHer() + ".  "); break;
+                            case 1: say(t, "Ask any of your other minions, they'll tell you that " + x.hisHer() + " only redeeming quality is that " + x.heShe() + "'s a good sex toy.  "); break;
+                            default: say(t, "Because no one's scared of " + x.himHer() + " anymore, there are plenty of times that " + x.heShe() + "'s been attacked by crowds of horny 'fans'.  It's what " + x.heShe() + " deserves.  ");
+                        }
                     } else
-                    if(x.confidence > 66)
-                        say(t, "I do really enjoy it when " + x.heShe() + " gets attacked by a lustful mob to help put " + x.himHer() + " in " + x.hisHer() + " place.  ");
-                    else
-                    if(x.confidence > 33)
-                        say(t, "I get back at " + x.himHer() + " by letting " + x.hisHer() + " other enemies here know where " + x.heShe() + "'s staying so that they can ambush " + x.himHer() + " while " + x.heShe() + "'s asleep.  ");
-                    else
-                        say(t, "At least it can be fun to blend into the crowds that chase " + x.himHer() + " down to have fun with " + x.himHer() + " whenever " + x.heShe() + " shows " + x.hisHer() + " pathetic face outside.  ");
+                    switch (x.confidence / 33) {
+                        case 0: say(t, "At least it can be fun to blend into the crowds that chase " + x.himHer() + " down to have fun with " + x.himHer() + " whenever " + x.heShe() + " shows " + x.hisHer() + " pathetic face outside.  "); break;
+                        case 1: say(t, "I get back at " + x.himHer() + " by letting " + x.hisHer() + " other enemies here know where " + x.heShe() + "'s staying so that they can ambush " + x.himHer() + " while " + x.heShe() + "'s asleep.  "); break;
+                        default: say(t, "I do really enjoy it when " + x.heShe() + " gets attacked by a lustful mob to help put " + x.himHer() + " in " + x.hisHer() + " place.  ");
+                    }
                     if(x.flavorDeviancy() - flavorDeviancy() >= 15)
                         if(flavorDeviancy() < 20)
                         {
-                            if(x.innocence > 66)
-                                say(t, x.HeShe() + "'s always talking about perverted stuff like it's completely normal.  ");
-                            else
-                            if(x.innocence > 33)
-                                say(t, x.HeShe() + "'s a huge pervert, too.  ");
-                            else
-                                say(t, "I hate the way " + x.heShe() + " looks at me, like " + x.heShe() + "'s thinking about something perverted.  ");
+                            switch (x.innocence / 33) {
+                                case 0: say(t, "I hate the way " + x.heShe() + " looks at me, like " + x.heShe() + "'s thinking about something perverted.  "); break;
+                                case 1: say(t, x.HeShe() + "'s a huge pervert, too.  "); break;
+                                default: say(t, x.HeShe() + "'s always talking about perverted stuff like it's completely normal.  ");
+                            }
                         } else
                         if(flavorDeviancy() < 40)
                         {
-                            if(x.innocence > 66)
-                                say(t, x.HeShe() + " can't stop talking about all the bizarre fetishes " + x.heShe() + " has.  It's not normal.  ");
-                            else
-                            if(x.innocence > 33)
-                                say(t, "And " + x.heShe() + " has a long list of disgusting fetishes, too.  ");
-                            else
-                                say(t, x.HeShe() + "'s not stupid, but that just makes it even worse when you realize that " + x.heShe() + "'s spending all " + x.hisHer() + " time planning out how to satisfy " + x.hisHer() + " twisted sexual desires.  ");
+                            switch (x.innocence / 33) {
+                                case 0: say(t, x.HeShe() + "'s not stupid, but that just makes it even worse when you realize that " + x.heShe() + "'s spending all " + x.hisHer() + " time planning out how to satisfy " + x.hisHer() + " twisted sexual desires.  "); break;
+                                case 1: say(t, "And " + x.heShe() + " has a long list of disgusting fetishes, too.  "); break;
+                                default: say(t, x.HeShe() + " can't stop talking about all the bizarre fetishes " + x.heShe() + " has.  It's not normal.  ");
+                            }
                         } else
                         if(flavorDeviancy() < 61)
                         {
-                            if(x.innocence > 66)
-                                say(t, "It's a good thing " + x.heShe() + "'s so stupid, because it means " + x.heShe() + " has no chance of getting ahold of me in order to do one of the sickening acts " + x.hisHer() + " little mind is obsessed with.  ");
-                            else
-                            if(x.innocence > 33)
-                                say(t, "I think " + x.heShe() + " wants to use me to satisfy some of " + x.hisHer() + " more twisted fantasies.  ");
-                            else
-                                say(t, "If " + x.heShe() + " were to somehow get " + x.hisHer() + " hands on me... I'd rather die than let " + x.himHer() + " put me through the kind of twisted stuff " + x.heShe() + "'s interested in.  ");
+                            switch (x.innocence / 33) {
+                                case 0: say(t, "If " + x.heShe() + " were to somehow get " + x.hisHer() + " hands on me... I'd rather die than let " + x.himHer() + " put me through the kind of twisted stuff " + x.heShe() + "'s interested in.  "); break;
+                                case 1: say(t, "I think " + x.heShe() + " wants to use me to satisfy some of " + x.hisHer() + " more twisted fantasies.  "); break;
+                                default: say(t, "It's a good thing " + x.heShe() + "'s so stupid, because it means " + x.heShe() + " has no chance of getting ahold of me in order to do one of the sickening acts " + x.hisHer() + " little mind is obsessed with.  ");
+                            }
                         } else
-                        if(x.innocence > 66)
-                            say(t, x.HeShe() + " doesn't even have control over " + x.hisHer() + " own body, always masturbating without even realizing it.  ");
-                        else
-                        if(x.innocence > 33)
-                            say(t, "All " + x.heShe() + " cares about is " + x.hisHer() + " own pleasure.  Nothing else matters to " + x.himHer() + ".  ");
-                        else
-                            say(t, "Everything " + x.heShe() + " does - absolutely everything - is all about getting " + x.himHer() + " closer to cumming again.  ");
+                        switch (x.innocence / 33) {
+                            case 0: say(t, "Everything " + x.heShe() + " does - absolutely everything - is all about getting " + x.himHer() + " closer to cumming again.  "); break;
+                            case 1: say(t, "All " + x.heShe() + " cares about is " + x.hisHer() + " own pleasure.  Nothing else matters to " + x.himHer() + ".  "); break;
+                            default: say(t, x.HeShe() + " doesn't even have control over " + x.hisHer() + " own body, always masturbating without even realizing it.  ");
+                        }
                     if(flavorObedience() - x.flavorObedience() >= 15)
                         if(flavorObedience() < 40)
                         {
-                            if(x.confidence > 66)
-                                say(t, x.HeShe() + "'s defiant to the point of stupidity, pointlessly fighting back when it's obvious that " + x.heShe() + "'s only doing it for the sake of " + x.hisHer() + " own pride.  ");
-                            else
-                            if(x.confidence > 33)
-                                say(t, x.HeShe() + "'s still convinced that it's possible to disobey you and survive the consequences.  ");
-                            else
-                                say(t, x.HeShe() + " acts meek, but " + x.heShe() + " actually looks down on everyone else who works for you.  ");
+                            switch (x.confidence / 33) {
+                                case 0: say(t, x.HeShe() + " acts meek, but " + x.heShe() + " actually looks down on everyone else who works for you.  "); break;
+                                case 1: say(t, x.HeShe() + "'s still convinced that it's possible to disobey you and survive the consequences.  "); break;
+                                default: say(t, x.HeShe() + "'s defiant to the point of stupidity, pointlessly fighting back when it's obvious that " + x.heShe() + "'s only doing it for the sake of " + x.hisHer() + " own pride.  ");
+                            }
                         } else
                         if(flavorObedience() < 61)
                         {
-                            if(x.confidence > 66)
-                                say(t, x.HeShe() + " still isn't afraid of you... " + x.heShe() + "'s really an idiot.  ");
-                            else
-                            if(x.confidence > 33)
-                                say(t, x.HeShe() + " still doesn't completely understand how much stronger you are than all of us put together.  ");
-                            else
-                                say(t, x.HeShe() + " pretends to be broken, but " + x.heShe() + "'s just looking for a chance to resist, and we'll all suffer for it eventually.  ");
+                            switch (x.confidence / 33) {
+                                case 0: say(t, x.HeShe() + " pretends to be broken, but " + x.heShe() + "'s just looking for a chance to resist, and we'll all suffer for it eventually.  "); break;
+                                case 1: say(t, x.HeShe() + " still doesn't completely understand how much stronger you are than all of us put together.  "); break;
+                                default: say(t, x.HeShe() + " still isn't afraid of you... " + x.heShe() + "'s really an idiot.  ");
+                            }
                         } else
                         if(flavorObedience() < 81)
                         {
-                            if(x.confidence > 66)
-                                say(t, "And " + x.heShe() + "'s far too full of pride to completely submit " + x.himHer() + "self to you.  ");
-                            else
-                            if(x.confidence > 33)
-                                say(t, x.HeShe() + " doesn't yet realize that it'd be for the best if you defeated the forces of humanity.  ");
-                            else
-                                say(t, x.HeShe() + " doesn't love you - " + x.heShe() + " only obeys out of fear.  ");
+                            switch (x.confidence / 33) {
+                                case 0: say(t, x.HeShe() + " doesn't love you - " + x.heShe() + " only obeys out of fear.  "); break;
+                                case 1: say(t, x.HeShe() + " doesn't yet realize that it'd be for the best if you defeated the forces of humanity.  "); break;
+                                default: say(t, "And " + x.heShe() + "'s far too full of pride to completely submit " + x.himHer() + "self to you.  ");
+                            }
                         } else
-                        if(x.confidence > 66)
-                            say(t, "The way " + x.heShe() + " speaks to you is unforgivably insulting!  ");
-                        else
-                        if(x.confidence > 33)
-                            say(t, x.HeShe() + " still thinks for " + x.himHer() + "self!  Ridiculous!  ");
-                        else
-                            say(t, "If only " + x.heShe() + " were willing to devote " + x.himHer() + "self to you completely, " + x.heShe() + " wouldn't be so pathetic.  ");
+                        switch (x.confidence / 33) {
+                            case 0: say(t, "If only " + x.heShe() + " were willing to devote " + x.himHer() + "self to you completely, " + x.heShe() + " wouldn't be so pathetic.  "); break;
+                            case 1: say(t, x.HeShe() + " still thinks for " + x.himHer() + "self!  Ridiculous!  "); break;
+                            default: say(t, "The way " + x.heShe() + " speaks to you is unforgivably insulting!  ");
+                        }
                     if(others != null)
                     {
                         for(int j = 0; j < others.length; j++)
@@ -2993,178 +2625,142 @@ public class Forsaken
                                 {
                                     if(morality > 66)
                                     {
-                                        if(x.dignity > 66)
-                                            say(t, "If " + x.hisHer() + " past attacks on the rest of us aren't punished, then it's only a matter of time until " + x.heShe() + " attacks us again.  ");
-                                        else
-                                        if(x.dignity > 33)
-                                            say(t, "I still can't forgive " + x.himHer() + " for all the trouble " + x.heShe() + "'s caused in the past.  ");
-                                        else
-                                            say(t, "I don't think " + x.heShe() + "'s even sorry about how " + x.heShe() + " used to abuse your weaker minions.  ");
+                                        switch (x.dignity / 33) {
+                                            case 0: say(t, "I don't think " + x.heShe() + "'s even sorry about how " + x.heShe() + " used to abuse your weaker minions.  "); break;
+                                            case 1: say(t, "I still can't forgive " + x.himHer() + " for all the trouble " + x.heShe() + "'s caused in the past.  "); break;
+                                            default: say(t, "If " + x.hisHer() + " past attacks on the rest of us aren't punished, then it's only a matter of time until " + x.heShe() + " attacks us again.  ");
+                                        }
                                     } else
                                     if(morality > 33)
                                     {
-                                        if(x.dignity > 66)
-                                            say(t, "I don't believe " + x.himHer() + " for a moment when " + x.heShe() + " says " + x.heShe() + "'s done causing trouble for the rest of us.  ");
-                                        else
-                                        if(x.dignity > 33)
-                                            say(t, "I'm sure that " + x.heShe() + "'ll start attacking your other minions again once " + x.heShe() + " thinks " + x.heShe() + " can get away with it.  ");
-                                        else
-                                            say(t, "The only reason " + x.heShe() + "'s behaving better lately is that you've been going easy on " + x.himHer() + ".  ");
+                                        switch (x.dignity / 33) {
+                                            case 0: say(t, "The only reason " + x.heShe() + "'s behaving better lately is that you've been going easy on " + x.himHer() + ".  "); break;
+                                            case 1: say(t, "I'm sure that " + x.heShe() + "'ll start attacking your other minions again once " + x.heShe() + " thinks " + x.heShe() + " can get away with it.  "); break;
+                                            default: say(t, "I don't believe " + x.himHer() + " for a moment when " + x.heShe() + " says " + x.heShe() + "'s done causing trouble for the rest of us.  ");
+                                        }
                                     } else
-                                    if(x.dignity > 66)
-                                        say(t, x.HeShe() + "'s trying to fool you, just pretending that " + x.heShe() + "'s done making trouble.  ");
-                                    else
-                                    if(x.dignity > 33)
-                                        say(t, "I don't know why you let " + x.himHer() + " off so lightly for what " + x.heShe() + "'s done to the rest of us.  ");
-                                    else
-                                        say(t, "If you don't come down on " + x.himHer() + " hard, " + x.heShe() + "'ll be back to causing problems for your other minions soon enough.  ");
+                                    switch (x.dignity / 33) {
+                                        case 0: say(t, "If you don't come down on " + x.himHer() + " hard, " + x.heShe() + "'ll be back to causing problems for your other minions soon enough.  "); break;
+                                        case 1: say(t, "I don't know why you let " + x.himHer() + " off so lightly for what " + x.heShe() + "'s done to the rest of us.  "); break;
+                                        default: say(t, x.HeShe() + "'s trying to fool you, just pretending that " + x.heShe() + "'s done making trouble.  ");
+                                    }
                                 } else
                                 if(troublemaker[j] < 200)
                                 {
                                     if(morality > 66)
                                     {
-                                        if(x.dignity > 66)
-                                            say(t, x.HeShe() + "'s probably going to keep attacking the rest of us until " + x.heShe() + "'s punished.  ");
-                                        else
-                                        if(x.dignity > 33)
-                                            say(t, "I won't forgive " + x.himHer() + " for the things " + x.heShe() + "'s done and the things " + x.heShe() + " keeps doing.  ");
-                                        else
-                                            say(t, x.HeShe() + " doesn't even seem to need a reason to abuse your weaker minions.  ");
+                                        switch (x.dignity / 33) {
+                                            case 0: say(t, x.HeShe() + " doesn't even seem to need a reason to abuse your weaker minions.  "); break;
+                                            case 1: say(t, "I won't forgive " + x.himHer() + " for the things " + x.heShe() + "'s done and the things " + x.heShe() + " keeps doing.  "); break;
+                                            default: say(t, x.HeShe() + "'s probably going to keep attacking the rest of us until " + x.heShe() + "'s punished.  ");
+                                        }
                                     } else
                                     if(morality > 33)
                                     {
-                                        if(x.dignity > 66)
-                                            say(t, "And " + x.heShe() + "'s always saying " + x.heShe() + "'ll stop causing trouble for the rest of us, but " + x.heShe() + " keeps doing it anyway.  ");
-                                        else
-                                        if(x.dignity > 33)
-                                            say(t, "And " + x.heShe() + " thinks " + x.heShe() + " can get away with attacking your other minions.  ");
-                                        else
-                                            say(t, "If you don't stop going so easy on " + x.himHer() + ", " + x.heShe() + "'s going to keep behaving badly.  ");
+                                        switch (x.dignity / 33) {
+                                            case 0: say(t, "If you don't stop going so easy on " + x.himHer() + ", " + x.heShe() + "'s going to keep behaving badly.  "); break;
+                                            case 1: say(t, "And " + x.heShe() + " thinks " + x.heShe() + " can get away with attacking your other minions.  "); break;
+                                            default: say(t, "And " + x.heShe() + "'s always saying " + x.heShe() + "'ll stop causing trouble for the rest of us, but " + x.heShe() + " keeps doing it anyway.  ");
+                                        }
                                     } else
-                                    if(x.dignity > 66)
-                                        say(t, x.HeShe() + "'s trying to hide it from you, but " + x.heShe() + "'s still being a troublemaker.  ");
-                                    else
-                                    if(x.dignity > 33)
-                                        say(t, "I don't know why you let " + x.himHer() + " get away with what " + x.heShe() + "'s doing to the rest of us.  ");
-                                    else
-                                        say(t, x.HeShe() + "'s causing problems for your other minions, and the best way to stop " + x.himHer() + " is to come down on " + x.himHer() + " hard.  ");
+                                    switch (x.dignity / 33) {
+                                        case 0: say(t, x.HeShe() + "'s causing problems for your other minions, and the best way to stop " + x.himHer() + " is to come down on " + x.himHer() + " hard.  "); break;
+                                        case 1: say(t, "I don't know why you let " + x.himHer() + " get away with what " + x.heShe() + "'s doing to the rest of us.  "); break;
+                                        default: say(t, x.HeShe() + "'s trying to hide it from you, but " + x.heShe() + "'s still being a troublemaker.  ");
+                                    }
                                 } else
                                 if(morality > 66)
                                 {
-                                    if(x.dignity > 66)
-                                        say(t, "It's past time that " + x.heShe() + " was punished for constantly attacking the rest of us.  ");
-                                    else
-                                    if(x.dignity > 33)
-                                        say(t, x.HeShe() + "'s always doing terrible things - we never get a break from " + x.himHer() + "!  ");
-                                    else
-                                        say(t, x.HeShe() + " abuses your weaker minions on a daily basis, too!  ");
+                                    switch (x.dignity / 33) {
+                                        case 0: say(t, x.HeShe() + " abuses your weaker minions on a daily basis, too!  "); break;
+                                        case 1: say(t, x.HeShe() + "'s always doing terrible things - we never get a break from " + x.himHer() + "!  "); break;
+                                        default: say(t, "It's past time that " + x.heShe() + " was punished for constantly attacking the rest of us.  ");
+                                    }
                                 } else
                                 if(morality > 33)
                                 {
-                                    if(x.dignity > 66)
-                                        say(t, x.HeShe() + "'s constantly causing trouble, and " + x.heShe() + " barely even tries to hide it!  ");
-                                    else
-                                    if(x.dignity > 33)
-                                        say(t, x.HeShe() + " attacks your other minions on a daily basis, too.  ");
-                                    else
-                                        say(t, "It seems like " + x.heShe() + "'s getting worse and worse, always behaving badly toward everyone else here.  ");
+                                    switch (x.dignity / 33) {
+                                        case 0: say(t, "It seems like " + x.heShe() + "'s getting worse and worse, always behaving badly toward everyone else here.  "); break;
+                                        case 1: say(t, x.HeShe() + " attacks your other minions on a daily basis, too.  "); break;
+                                        default: say(t, x.HeShe() + "'s constantly causing trouble, and " + x.heShe() + " barely even tries to hide it!  ");
+                                    }
                                 } else
-                                if(x.dignity > 66)
-                                    say(t, x.HeShe() + " tries to blame everyone else for the trouble " + x.heShe() + " constantly causes, but I think it's obvious by this point who's really at fault.  ");
-                                else
-                                if(x.dignity > 33)
-                                    say(t, "Are you really going to let " + x.himHer() + " get away with attacking the rest of us so often?  ");
-                                else
-                                    say(t, "It's obvious that " + x.heShe() + "'s going to keep causing problems for your other minions all the time until you really make " + x.himHer() + " regret it.  ");
+                                switch (x.dignity / 33) {
+                                    case 0: say(t, "It's obvious that " + x.heShe() + "'s going to keep causing problems for your other minions all the time until you really make " + x.himHer() + " regret it.  "); break;
+                                    case 1: say(t, "Are you really going to let " + x.himHer() + " get away with attacking the rest of us so often?  "); break;
+                                    default: say(t, x.HeShe() + " tries to blame everyone else for the trouble " + x.heShe() + " constantly causes, but I think it's obvious by this point who's really at fault.  ");
+                                }
 
                     }
                     if(opinion(x) >= -100)
                     {
                         if(confidence > 66)
                         {
-                            if(x.morality > 66)
-                                say(t, "If you're going to have me work with " + x.himHer() + ", at least tell " + x.himHer() + " to shut up first.");
-                            else
-                            if(x.morality > 33)
-                                say(t, "I definitely don't need " + x.hisHer() + " help with any of the work you have me do.");
-                            else
-                                say(t, "I don't want to work with " + x.himHer() + ".  " + x.HeShe() + "'s impossible to control.");
+                            switch (x.morality / 33) {
+                                case 0: say(t, "I don't want to work with " + x.himHer() + ".  " + x.HeShe() + "'s impossible to control."); break;
+                                case 1: say(t, "I definitely don't need " + x.hisHer() + " help with any of the work you have me do."); break;
+                                default: say(t, "If you're going to have me work with " + x.himHer() + ", at least tell " + x.himHer() + " to shut up first.");
+                            }
                         } else
                         if(confidence > 33)
                         {
-                            if(x.morality > 66)
-                                say(t, x.HeShe() + "'s really annoying.  I think that sums " + x.himHer() + " up pretty well.");
-                            else
-                            if(x.morality > 33)
-                                say(t, "I really don't like working with " + x.himHer() + ".");
-                            else
-                                say(t, x.HeShe() + "'s just impossible to work with.");
+                            switch (x.morality / 33) {
+                                case 0: say(t, x.HeShe() + "'s just impossible to work with."); break;
+                                case 1: say(t, "I really don't like working with " + x.himHer() + "."); break;
+                                default: say(t, x.HeShe() + "'s really annoying.  I think that sums " + x.himHer() + " up pretty well.");
+                            }
                         } else
-                        if(x.morality > 66)
-                            say(t, "I don't want to let " + x.himHer() + " t-tell me what to do...");
-                        else
-                        if(x.morality > 33)
-                            say(t, "If you're asking me about " + x.himHer() + ", th-then does that mean I can ask not to be forced to work with " + x.himHer() + "?");
-                        else
-                            say(t, "I-I'm afraid of what " + x.heShe() + " might do to me if you make us work together...");
+                        switch (x.morality / 33) {
+                            case 0: say(t, "I-I'm afraid of what " + x.heShe() + " might do to me if you make us work together..."); break;
+                            case 1: say(t, "If you're asking me about " + x.himHer() + ", th-then does that mean I can ask not to be forced to work with " + x.himHer() + "?"); break;
+                            default: say(t, "I don't want to let " + x.himHer() + " t-tell me what to do...");
+                        }
                     } else
                     if(opinion(x) >= -400)
                     {
                         if(confidence > 66)
                         {
-                            if(x.morality > 66)
-                                say(t, "The only thing stopping me from getting violent with " + x.himHer() + " is the fact that we're pretty much forced to live together.");
-                            else
-                            if(x.morality > 33)
-                                say(t, "Even just looking at " + x.himHer() + " makes me so angry...");
-                            else
-                                say(t, "I'll try to control myself around " + x.himHer() + ", but I can't promise that I'll succeed.");
+                            switch (x.morality / 33) {
+                                case 0: say(t, "I'll try to control myself around " + x.himHer() + ", but I can't promise that I'll succeed."); break;
+                                case 1: say(t, "Even just looking at " + x.himHer() + " makes me so angry..."); break;
+                                default: say(t, "The only thing stopping me from getting violent with " + x.himHer() + " is the fact that we're pretty much forced to live together.");
+                            }
                         } else
                         if(confidence > 33)
                         {
-                            if(x.morality > 66)
-                                say(t, "I hate " + x.himHer() + " more and more every time " + x.heShe() + " opens " + x.hisHer() + " mouth.");
-                            else
-                            if(x.morality > 33)
-                                say(t, "Ugh, I really hate " + x.himHer() + ".");
-                            else
-                                say(t, "I think it's fair to say that I hate " + x.himHer() + " from the bottom of my heart.");
+                            switch (x.morality / 33) {
+                                case 0: say(t, "I think it's fair to say that I hate " + x.himHer() + " from the bottom of my heart."); break;
+                                case 1: say(t, "Ugh, I really hate " + x.himHer() + "."); break;
+                                default: say(t, "I hate " + x.himHer() + " more and more every time " + x.heShe() + " opens " + x.hisHer() + " mouth.");
+                            }
                         } else
-                        if(x.morality > 66)
-                            say(t, "I wish " + x.heShe() + "'d just disappear...");
-                        else
-                        if(x.morality > 33)
-                            say(t, "I hate " + x.himHer() + "...  I-I hate " + x.himHer() + " so much...!");
-                        else
-                            say(t, x.HeShe() + "'s the worst...");
+                        switch (x.morality / 33) {
+                            case 0: say(t, x.HeShe() + "'s the worst..."); break;
+                            case 1: say(t, "I hate " + x.himHer() + "...  I-I hate " + x.himHer() + " so much...!"); break;
+                            default: say(t, "I wish " + x.heShe() + "'d just disappear...");
+                        }
                     } else
                     if(confidence > 66)
                     {
-                        if(x.morality > 66)
-                            say(t, "Sometimes I have dreams about killing " + x.himHer() + ".  They're good dreams.");
-                        else
-                        if(x.morality > 33)
-                            say(t, "Whenever " + x.heShe() + " opens " + x.hisHer() + " worthless mouth, it takes all my self-control to not attack " + x.himHer() + ".");
-                        else
-                            say(t, "I have to tell you, the next time the two of us end up in a room together, I might not be able to hold myself back.");
+                        switch (x.morality / 33) {
+                            case 0: say(t, "I have to tell you, the next time the two of us end up in a room together, I might not be able to hold myself back."); break;
+                            case 1: say(t, "Whenever " + x.heShe() + " opens " + x.hisHer() + " worthless mouth, it takes all my self-control to not attack " + x.himHer() + "."); break;
+                            default: say(t, "Sometimes I have dreams about killing " + x.himHer() + ".  They're good dreams.");
+                        }
                     } else
                     if(confidence > 33)
                     {
-                        if(x.morality > 66)
-                            say(t, "I want to stop " + x.himHer() + " from getting what " + x.heShe() + " wants, no matter what.");
-                        else
-                        if(x.morality > 33)
-                            say(t, "I don't think it's possible to hate someone more than I hate " + x.himHer() + ".");
-                        else
-                            say(t, "There's no chance that we'll ever be friends.");
+                        switch (x.morality / 33) {
+                            case 0: say(t, "There's no chance that we'll ever be friends."); break;
+                            case 1: say(t, "I don't think it's possible to hate someone more than I hate " + x.himHer() + "."); break;
+                            default: say(t, "I want to stop " + x.himHer() + " from getting what " + x.heShe() + " wants, no matter what.");
+                        }
                     } else
-                    if(x.morality > 66)
-                        say(t, "I can't stand being around " + x.himHer() + "!  I-If you make me, I might do something crazy!");
-                    else
-                    if(x.morality > 33)
-                        say(t, "I'll never forgive " + x.himHer() + "...  Never...");
-                    else
-                        say(t, String.valueOf(x.HeShe().substring(0, 1)) + "-" + x.HeShe() + "'s actually a worse person than me!");
+                    switch (x.morality / 33) {
+                        case 0: say(t, String.valueOf(x.HeShe().substring(0, 1)) + "-" + x.HeShe() + "'s actually a worse person than me!"); break;
+                        case 1: say(t, "I'll never forgive " + x.himHer() + "...  Never..."); break;
+                        default: say(t, "I can't stand being around " + x.himHer() + "!  I-If you make me, I might do something crazy!");
+                    }
                 }
             } else
             {
@@ -3220,13 +2816,11 @@ public class Forsaken
                 }
             }
             say(t, "\"\n\n");
-            if(flavorDeviancy() > 66)
-                w.append(t, String.format("%s screams in ecstasy as a tentacle rams into %s %s, climaxing instantly.  %s voice rises in pitch and volume, the orgasm being drawn out by the spurts of slime being shot into %s, only growing more and more intense with time.  ", HeShe(), hisHer(), hole, HisHer(), himHer()));
-            else
-            if(flavorDeviancy() > 33)
-                w.append(t, String.format("%s sighs with satisfaction at the feeling of one of your tentacles entering %s %s, then moans and shudders at the pleasure radiating through %2$s body from the slime being pumped inside.  ", HeShe(), hisHer(), hole));
-            else
-                w.append(t, String.format("When one of your tentacles forces its way into %s %s, %s winces in discomfort at first.  But %3$s concentrates on relaxing and accepting it into %s, and soon %s's rewarded by several spurts of slime into %1$s belly.  %s senses are assaulted by sudden overwhelming pleasure, and all pain is forgotten.  ", hisHer(), hole, heShe(), himHer(), heShe(), HisHer()));
+            switch (flavorDeviancy() / 33) {
+                case 0: w.append(t, String.format("When one of your tentacles forces its way into %s %s, %s winces in discomfort at first.  But %3$s concentrates on relaxing and accepting it into %s, and soon %s's rewarded by several spurts of slime into %1$s belly.  %s senses are assaulted by sudden overwhelming pleasure, and all pain is forgotten.  ", hisHer(), hole, heShe(), himHer(), heShe(), HisHer())); break;
+                case 1: w.append(t, String.format("%s sighs with satisfaction at the feeling of one of your tentacles entering %s %s, then moans and shudders at the pleasure radiating through %2$s body from the slime being pumped inside.  ", HeShe(), hisHer(), hole)); break;
+                default: w.append(t, String.format("%s screams in ecstasy as a tentacle rams into %s %s, climaxing instantly.  %s voice rises in pitch and volume, the orgasm being drawn out by the spurts of slime being shot into %s, only growing more and more intense with time.  ", HeShe(), hisHer(), hole, HisHer(), himHer()));
+            }
         } else
         if(obedience > 33)
         {
@@ -3265,13 +2859,11 @@ public class Forsaken
                 }
             }
             say(t, "\"\n\n");
-            if(flavorDeviancy() > 66)
-                w.append(t, String.format("%s reluctance quickly fades when %s sees the aphrodisiac-laced slime dripping from the surrounding tentacles.  %s eagerly takes one into %s mouth, then moans around it as %2$s feels another slip into %4$s %s.  ", HisHer(), heShe(), HeShe(), hisHer(), hole));
-            else
-            if(flavorDeviancy() > 33)
-                w.append(t, String.format("But %s breathing quickens and %s instinctively spreads %1$s legs wider when %2$s sees a tentacle approaching %1$s %s.  It pushes inside, and %s's last traces of terror fade away as the slime pumped inside %s fills %1$s head with a sexual arousal too thick to think through.  ", hisHer(), heShe(), hole, mainName, himHer()));
-            else
-                w.append(t, String.format("A spike of terror shoots through %s mind when %s feels a tentacle pushing against %1$s %s, and %2$s groans in mingled fear and discomfort when it penetrates %s.  However, %1$s body soon begins to feel hot, a side-effect of the slime being pumped into %4$s, and %1$s reluctance gradually fades until %2$s's openly moaning in pleasure, unable to think of anything other than how good it feels.  ", hisHer(), heShe(), hole, himHer()));
+            switch (flavorDeviancy() / 33) {
+                case 0: w.append(t, String.format("A spike of terror shoots through %s mind when %s feels a tentacle pushing against %1$s %s, and %2$s groans in mingled fear and discomfort when it penetrates %s.  However, %1$s body soon begins to feel hot, a side-effect of the slime being pumped into %4$s, and %1$s reluctance gradually fades until %2$s's openly moaning in pleasure, unable to think of anything other than how good it feels.  ", hisHer(), heShe(), hole, himHer())); break;
+                case 1: w.append(t, String.format("But %s breathing quickens and %s instinctively spreads %1$s legs wider when %2$s sees a tentacle approaching %1$s %s.  It pushes inside, and %s's last traces of terror fade away as the slime pumped inside %s fills %1$s head with a sexual arousal too thick to think through.  ", hisHer(), heShe(), hole, mainName, himHer())); break;
+                default: w.append(t, String.format("%s reluctance quickly fades when %s sees the aphrodisiac-laced slime dripping from the surrounding tentacles.  %s eagerly takes one into %s mouth, then moans around it as %2$s feels another slip into %4$s %s.  ", HisHer(), heShe(), HeShe(), hisHer(), hole));
+            }
         } else
         {
             switch (disgrace / 33) {
@@ -3309,13 +2901,11 @@ public class Forsaken
                 }
             }
             say(t, "\"\n\n");
-            if(flavorDeviancy() > 66)
-                w.append(t, String.format("Despite %s extreme sexual appetites, %s still ends up struggling even harder when %2$s feels a tentacle pushing its way into %1$s %s, because %2$s knows that the pleasure will stop %s from thinking about resisting ever again.  And when the slime starts getting pumped inside %4$s, %2$s's proven completely right.  ", hisHer(), heShe(), hole, himHer()));
-            else
-            if(flavorDeviancy() > 33)
-                w.append(t, String.format("%s eyes go wide with shock as a tentacle abruptly thrusts itself into %s %s, immediately shooting out several spurts of slime.  %s has to admit to %sself that it feels good, and that crack in %2$s willpower soon causes %2$s entire mind to crumble into a sea of warm pleasure.  ", HisHer(), hisHer(), hole, HeShe(), himHer()));
-            else
-                w.append(t, String.format("%s grits %s teeth, tightening the muscles in %2$s lower body and willing %sself to resist the penetration of the tentacle slithering toward %2$s %s.  But it's completely in vain.  The appendage thrusts inside and begins pouring out slime, and although %s steels %2$s willpower as best %s can, it's only a matter of time until %6$s's drooling and moaning, %2$s mind whited out by continuous climax.  ", HeShe(), hisHer(), himHer(), hole, mainName, heShe()));
+            switch (flavorDeviancy() / 33) {
+                case 0: w.append(t, String.format("%s grits %s teeth, tightening the muscles in %2$s lower body and willing %sself to resist the penetration of the tentacle slithering toward %2$s %s.  But it's completely in vain.  The appendage thrusts inside and begins pouring out slime, and although %s steels %2$s willpower as best %s can, it's only a matter of time until %6$s's drooling and moaning, %2$s mind whited out by continuous climax.  ", HeShe(), hisHer(), himHer(), hole, mainName, heShe())); break;
+                case 1: w.append(t, String.format("%s eyes go wide with shock as a tentacle abruptly thrusts itself into %s %s, immediately shooting out several spurts of slime.  %s has to admit to %sself that it feels good, and that crack in %2$s willpower soon causes %2$s entire mind to crumble into a sea of warm pleasure.  ", HisHer(), hisHer(), hole, HeShe(), himHer())); break;
+                default: w.append(t, String.format("Despite %s extreme sexual appetites, %s still ends up struggling even harder when %2$s feels a tentacle pushing its way into %1$s %s, because %2$s knows that the pleasure will stop %s from thinking about resisting ever again.  And when the slime starts getting pumped inside %4$s, %2$s's proven completely right.  ", hisHer(), heShe(), hole, himHer()));
+            }
         }
         if(gender == Gender.MALE)
             w.append(t, String.format("%s midsection is already swelling even before %s body begins to change.  %s'll never eat a solid meal again, and so %2$s intestines can be largely repurposed into a set of parallel wombs for growing more Demons.  Every shift in %2$s flesh causes another orgasm to shudder through %s, overlapping and stacking atop each other as %2$s eyes roll into the back of %2$s head.\n\nIn the end, %s hangs limp, belly heavy below %s.  %1$s penis, a purely vestigial organ now, dribbles a steady stream of cum onto the floor, and occasionally a new Demon will crawl out of %2$s ass, the intense stimulation causing %6$s to shudder silently before %s goes limp once more.", HisHer(), hisHer(), HeShe(), himHer(), heShe(), himHer(), heShe()));
@@ -8918,21 +8508,17 @@ public class Forsaken
             {
                 if(subject.opinion(this) >= 100)
                 {
-                    if(subject.innocence > 66)
-                        w.append(t, String.format("At first, %s is angry that %s is being treated without respect, but soon %s's just as entranced by the show.", subject.mainName, mainName, heShe()));
-                    else
-                    if(subject.innocence > 33)
-                        w.append(t, String.format("%s is annoyed that so many disgusting Thralls are getting to enjoy the sight of %s's body, but oddly, the situation turns %s on as well, and %s starts shifting %s thighs together in aroused confusion.", subject.mainName, mainName, subject.himHer(), subject.heShe(), subject.hisHer()));
-                    else
-                        w.append(t, String.format("%s smirks in satisfaction at how well %s has learned to manipulate the shallow public.", subject.mainName, mainName));
+                    switch (subject.innocence / 33) {
+                        case 0: w.append(t, String.format("%s smirks in satisfaction at how well %s has learned to manipulate the shallow public.", subject.mainName, mainName)); break;
+                        case 1: w.append(t, String.format("%s is annoyed that so many disgusting Thralls are getting to enjoy the sight of %s's body, but oddly, the situation turns %s on as well, and %s starts shifting %s thighs together in aroused confusion.", subject.mainName, mainName, subject.himHer(), subject.heShe(), subject.hisHer())); break;
+                        default: w.append(t, String.format("At first, %s is angry that %s is being treated without respect, but soon %s's just as entranced by the show.", subject.mainName, mainName, heShe()));
+                    }
                 } else
-                if(subject.dignity > 66)
-                    w.append(t, String.format("%s enjoys the show as well, though %s can't help but feel a little bit envious of the attention %s is getting.", subject.mainName, subject.heShe(), mainName));
-                else
-                if(subject.dignity > 33)
-                    w.append(t, String.format("%s tries to disrupt the show, jeering and tossing garbage, but this ends up adding to the entertainment, as many of the Thralls in the front row start laughing and join in.", subject.mainName));
-                else
-                    w.append(t, String.format("Even though they're enemies - or perhaps because of it - %s is enjoying the show as much as anyone.", subject.mainName));
+                switch (subject.dignity / 33) {
+                    case 0: w.append(t, String.format("Even though they're enemies - or perhaps because of it - %s is enjoying the show as much as anyone.", subject.mainName)); break;
+                    case 1: w.append(t, String.format("%s tries to disrupt the show, jeering and tossing garbage, but this ends up adding to the entertainment, as many of the Thralls in the front row start laughing and join in.", subject.mainName)); break;
+                    default: w.append(t, String.format("%s enjoys the show as well, though %s can't help but feel a little bit envious of the attention %s is getting.", subject.mainName, subject.heShe(), mainName));
+                }
             } else
             if(subject.deviancy > subject.obedience)
             {
@@ -8972,21 +8558,17 @@ public class Forsaken
             } else
             if(subject.opinion(this) >= 100 && opinion(subject) >= 100)
             {
-                if(subject.innocence > 66)
-                    w.append(t, String.format("In hopes of helping %s friend and making the show more successful, %s climbs up on the stage as well to dance alongside %s.  In truth, %s mostly just gets in the way, but %s appreciates the thought.", subject.hisHer(), subject.mainName, mainName, subject.heShe(), mainName));
-                else
-                if(subject.innocence > 33)
-                    w.append(t, String.format("%s climbs up onto the stage, starting to dance as well and offering %s a chance to take a break, but %2$s insists on continuing, so the two dance for awhile side-by-side.", subject.mainName, mainName));
-                else
-                    w.append(t, String.format("%s leads the Thralls in a cheer for %s, and while the show is still ultimately about turning %1$s into nothing more than a sex object, %s still enjoys the support.", subject.mainName, mainName, subject.heShe()));
+                switch (subject.innocence / 33) {
+                    case 0: w.append(t, String.format("%s leads the Thralls in a cheer for %s, and while the show is still ultimately about turning %1$s into nothing more than a sex object, %s still enjoys the support.", subject.mainName, mainName, subject.heShe())); break;
+                    case 1: w.append(t, String.format("%s climbs up onto the stage, starting to dance as well and offering %s a chance to take a break, but %2$s insists on continuing, so the two dance for awhile side-by-side.", subject.mainName, mainName)); break;
+                    default: w.append(t, String.format("In hopes of helping %s friend and making the show more successful, %s climbs up on the stage as well to dance alongside %s.  In truth, %s mostly just gets in the way, but %s appreciates the thought.", subject.hisHer(), subject.mainName, mainName, subject.heShe(), mainName));
+                }
             } else
-            if(subject.dignity > 66)
-                w.append(t, String.format("%s isn't willing to tolerate %s getting all the attention, so %s storms the stage and begins to dance as well, trying to take control of the show.  The two Forsaken glare at each other as the Thralls cheer.", subject.mainName, mainName, subject.heShe()));
-            else
-            if(subject.dignity > 33)
-                w.append(t, String.format("%s laughs as %s watches, glad to see %s being put in %s place.", subject.mainName, subject.heShe(), mainName, hisHer()));
-            else
-                w.append(t, String.format("In the break after %s finishes dancing, %s grudgingly applauds along with the Thralls, willing to acknowledge that %1$s has managed to put on a good show.", mainName, subject.mainName));
+            switch (subject.dignity / 33) {
+                case 0: w.append(t, String.format("In the break after %s finishes dancing, %s grudgingly applauds along with the Thralls, willing to acknowledge that %1$s has managed to put on a good show.", mainName, subject.mainName)); break;
+                case 1: w.append(t, String.format("%s laughs as %s watches, glad to see %s being put in %s place.", subject.mainName, subject.heShe(), mainName, hisHer())); break;
+                default: w.append(t, String.format("%s isn't willing to tolerate %s getting all the attention, so %s storms the stage and begins to dance as well, trying to take control of the show.  The two Forsaken glare at each other as the Thralls cheer.", subject.mainName, mainName, subject.heShe()));
+            }
         }
     }
 
@@ -11701,13 +11283,11 @@ public class Forsaken
                 if(defiling && defilerType == 5)
                 {
                     w.append(t, String.format("%s decides that %s's satisfied for now, and %2$s asks %s to back off.  ", c.mainName, c.heShe(), mainName));
-                    if(flavorHostility() > 66)
-                        w.append(t, String.format("%s argues and looks almost ready to fight again, but in the end, %s lets %s go.", mainName, heShe(), c.mainName));
-                    else
-                    if(flavorHostility() > 33)
-                        w.append(t, String.format("%s looks annoyed, but %s doesn't argue.", mainName, heShe()));
-                    else
-                        w.append(t, String.format("%s politely complies.", mainName));
+                    switch (flavorHostility() / 33) {
+                        case 0: w.append(t, String.format("%s politely complies.", mainName)); break;
+                        case 1: w.append(t, String.format("%s looks annoyed, but %s doesn't argue.", mainName, heShe())); break;
+                        default: w.append(t, String.format("%s argues and looks almost ready to fight again, but in the end, %s lets %s go.", mainName, heShe(), c.mainName));
+                    }
                 } else
                 switch (confidence / 33) {
                     case 0: w.append(t, String.format("Finally, %s manages to successfully flee %s and return to the main battlefield.", c.getMainName(), mainName)); break;
@@ -11740,13 +11320,11 @@ public class Forsaken
                         if(confidence > 66)
                         {
                             Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FOCUS, Project.Emotion.FOCUS);
-                            if(c.innocence > 66)
-                                c.say(t, originalName + "!  I-I'm here to take you back!");
-                            else
-                            if(c.innocence > 33)
-                                c.say(t, originalName + "...  If... If you ever really cared about me, then come back now!");
-                            else
-                                c.say(t, originalName + "...  You were always stronger than me, better in every way.  That's exactly why... I need to bring you back!");
+                            switch (c.innocence / 33) {
+                                case 0: c.say(t, originalName + "...  You were always stronger than me, better in every way.  That's exactly why... I need to bring you back!"); break;
+                                case 1: c.say(t, originalName + "...  If... If you ever really cared about me, then come back now!"); break;
+                                default: c.say(t, originalName + "!  I-I'm here to take you back!");
+                            }
                             c.say(t, "\"\n\n");
                             say(t, "\"");
                             if(defeatType == 6)
@@ -11780,13 +11358,11 @@ public class Forsaken
                         if(confidence > 33)
                         {
                             Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.SHAME);
-                            if(c.innocence > 66)
-                                c.say(t, originalName + ", this has to be some sort of trick, right!?  You aren't actually fighting for the Demon Lord, right!?");
-                            else
-                            if(c.innocence > 33)
-                                c.say(t, "I didn't want to believe it...  " + originalName + ", fighting for the Demon Lord...");
-                            else
-                                c.say(t, originalName + "... I don't want to fight you, but...  If you're on the Demon Lord's side now...");
+                            switch (c.innocence / 33) {
+                                case 0: c.say(t, originalName + "... I don't want to fight you, but...  If you're on the Demon Lord's side now..."); break;
+                                case 1: c.say(t, "I didn't want to believe it...  " + originalName + ", fighting for the Demon Lord..."); break;
+                                default: c.say(t, originalName + ", this has to be some sort of trick, right!?  You aren't actually fighting for the Demon Lord, right!?");
+                            }
                             c.say(t, "\"\n\n");
                             say(t, "\"");
                             Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.SHAME, Project.Emotion.SHAME);
@@ -11817,13 +11393,11 @@ public class Forsaken
                         } else
                         {
                             Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.ANGER);
-                            if(c.innocence > 66)
-                                c.say(t, originalName + "!  Stop this right now!  You belong on my team!");
-                            else
-                            if(c.innocence > 33)
-                                c.say(t, originalName + ", I'm here to rescue you!  You don't have to serve the Demon Lord anymore!");
-                            else
-                                c.say(t, "I do not wish to hurt you, " + originalName + ", but I am prepared to do whatever is necessary to free you from the Demon Lord.  Surrender now.");
+                            switch (c.innocence / 33) {
+                                case 0: c.say(t, "I do not wish to hurt you, " + originalName + ", but I am prepared to do whatever is necessary to free you from the Demon Lord.  Surrender now."); break;
+                                case 1: c.say(t, originalName + ", I'm here to rescue you!  You don't have to serve the Demon Lord anymore!"); break;
+                                default: c.say(t, originalName + "!  Stop this right now!  You belong on my team!");
+                            }
                             c.say(t, "\"\n\n");
                             say(t, "\"");
                             Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.SHAME, Project.Emotion.SHAME);
@@ -11854,13 +11428,11 @@ public class Forsaken
                     if(confidence > 66)
                     {
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FOCUS, Project.Emotion.FOCUS);
-                        if(c.morality > 66)
-                            c.say(t, "You were always stronger than me, " + originalName + "... but still, I'm not afraid!");
-                        else
-                        if(c.morality > 33)
-                            c.say(t, "I'm not surprised you went over to the Demons, " + originalName + ".  You were always nothing but a bully.");
-                        else
-                            c.say(t, "You used to be so strong, " + originalName + ", but look at you now.  Pathetic!");
+                        switch (c.morality / 33) {
+                            case 0: c.say(t, "You used to be so strong, " + originalName + ", but look at you now.  Pathetic!"); break;
+                            case 1: c.say(t, "I'm not surprised you went over to the Demons, " + originalName + ".  You were always nothing but a bully."); break;
+                            default: c.say(t, "You were always stronger than me, " + originalName + "... but still, I'm not afraid!");
+                        }
                         c.say(t, "\"\n\n");
                         say(t, "\"");
                         Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.ANGER);
@@ -11929,13 +11501,11 @@ public class Forsaken
                     } else
                     {
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.ANGER);
-                        if(c.morality > 66)
-                            c.say(t, "Don't make me hurt you, " + originalName + "!");
-                        else
-                        if(c.morality > 33)
-                            c.say(t, "You were always weaker than me, " + originalName + ".");
-                        else
-                            c.say(t, "Go on, " + originalName + ".  Give me an excuse to kill you.");
+                        switch (c.morality / 33) {
+                            case 0: c.say(t, "Go on, " + originalName + ".  Give me an excuse to kill you."); break;
+                            case 1: c.say(t, "You were always weaker than me, " + originalName + "."); break;
+                            default: c.say(t, "Don't make me hurt you, " + originalName + "!");
+                        }
                         c.say(t, "\"\n\n");
                         say(t, "\"");
                         Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.ANGER);
@@ -11987,13 +11557,11 @@ public class Forsaken
                         }
                         c.say(t, "\"\n\n");
                         say(t, "\"");
-                        if(flavorObedience() > 66)
-                            say(t, "I'm " + usedName + ".  " + TheDemonLord() + "... is giving me the most amazing pleasure right now... as a reward for fighting you...!");
-                        else
-                        if(flavorObedience() > 33)
-                            say(t, "I can't resist... this pleasure...!  Aaah, " + c.mainName + ", watch out, because " + usedName + " is coming for youuu!");
-                        else
-                            say(t, "Heheheh...  My name is " + usedName + "... and I'm coming after you because I want to.  I want it more than anything else...");
+                        switch (flavorObedience() / 33) {
+                            case 0: say(t, "Heheheh...  My name is " + usedName + "... and I'm coming after you because I want to.  I want it more than anything else..."); break;
+                            case 1: say(t, "I can't resist... this pleasure...!  Aaah, " + c.mainName + ", watch out, because " + usedName + " is coming for youuu!"); break;
+                            default: say(t, "I'm " + usedName + ".  " + TheDemonLord() + "... is giving me the most amazing pleasure right now... as a reward for fighting you...!");
+                        }
                     } else
                     if(c.morality > 33)
                     {
@@ -12005,13 +11573,11 @@ public class Forsaken
                         }
                         c.say(t, "\"\n\n");
                         say(t, "\"");
-                        if(flavorHostility() > 66)
-                            say(t, "Yes...  Make " + c.mainName + " scream...  Make " + c.himHer() + " suffer...!  Suffer, suffer...!");
-                        else
-                        if(flavorHostility() > 33)
-                            say(t, "Ah... " + c.mainName + "...  We're going to have so much fun...  Or at least, I am...");
-                        else
-                            say(t, "Nnngh, " + c.heShe() + " smells just like in my dreams...!  Amazing...!");
+                        switch (flavorHostility() / 33) {
+                            case 0: say(t, "Nnngh, " + c.heShe() + " smells just like in my dreams...!  Amazing...!"); break;
+                            case 1: say(t, "Ah... " + c.mainName + "...  We're going to have so much fun...  Or at least, I am..."); break;
+                            default: say(t, "Yes...  Make " + c.mainName + " scream...  Make " + c.himHer() + " suffer...!  Suffer, suffer...!");
+                        }
                     } else
                     {
                         if(disgrace > 66)
@@ -12030,13 +11596,11 @@ public class Forsaken
                         }
                         c.say(t, "\"\n\n");
                         say(t, "\"");
-                        if(flavorDeviancy() > 66)
-                            say(t, "Come on, hurt me, hurt me!  I need to feel what it's like for " + c.mainName + " to make me bleed!");
-                        else
-                        if(flavorDeviancy() > 33)
-                            say(t, "Fighting against " + c.mainName + " feels... so amazing...!  Nnnaaah, I-I'm gonna...!");
-                        else
-                            say(t, "I can't... stop thinking about... " + c.mainName + "...!");
+                        switch (flavorDeviancy() / 33) {
+                            case 0: say(t, "I can't... stop thinking about... " + c.mainName + "...!"); break;
+                            case 1: say(t, "Fighting against " + c.mainName + " feels... so amazing...!  Nnnaaah, I-I'm gonna...!"); break;
+                            default: say(t, "Come on, hurt me, hurt me!  I need to feel what it's like for " + c.mainName + " to make me bleed!");
+                        }
                     }
                 } else
                 if(disgrace > 66)
@@ -12694,13 +12258,11 @@ public class Forsaken
                         if(c.confidence > 66)
                         {
                             Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                            if(c.morality > 66)
-                                c.say(t, "Th-This is wrong!  Stop at once!");
-                            else
-                            if(c.morality > 33)
-                                c.say(t, "I won't... let you...!");
-                            else
-                                c.say(t, "Stop, or I'll kill you!  Are you even listening!?");
+                            switch (c.morality / 33) {
+                                case 0: c.say(t, "Stop, or I'll kill you!  Are you even listening!?"); break;
+                                case 1: c.say(t, "I won't... let you...!"); break;
+                                default: c.say(t, "Th-This is wrong!  Stop at once!");
+                            }
                             c.say(t, "\"\n\n");
                             say(t, "\"");
                             Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.LEWD);
@@ -12713,13 +12275,11 @@ public class Forsaken
                         if(c.confidence > 33)
                         {
                             Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                            if(c.morality > 66)
-                                c.say(t, "How can you enjoy something like this!?");
-                            else
-                            if(c.morality > 33)
-                                c.say(t, "Are you crazy!?");
-                            else
-                                c.say(t, "You twisted bitch!");
+                            switch (c.morality / 33) {
+                                case 0: c.say(t, "You twisted bitch!"); break;
+                                case 1: c.say(t, "Are you crazy!?"); break;
+                                default: c.say(t, "How can you enjoy something like this!?");
+                            }
                             c.say(t, "\"\n\n");
                             say(t, "\"");
                             Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.LEWD);
@@ -12797,13 +12357,11 @@ public class Forsaken
                         if(c.confidence > 66)
                         {
                             Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                            if(c.morality > 66)
-                                c.say(t, "Disgusting!  Stop at once!");
-                            else
-                            if(c.morality > 33)
-                                c.say(t, "How dare you!?");
-                            else
-                                c.say(t, "I won't let myself... be used for your pleasure...!");
+                            switch (c.morality / 33) {
+                                case 0: c.say(t, "I won't let myself... be used for your pleasure...!"); break;
+                                case 1: c.say(t, "How dare you!?"); break;
+                                default: c.say(t, "Disgusting!  Stop at once!");
+                            }
                             c.say(t, "\"\n\n");
                             say(t, "\"");
                             Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.ANGER);
@@ -12816,13 +12374,11 @@ public class Forsaken
                         if(c.confidence > 33)
                         {
                             Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                            if(c.morality > 66)
-                                c.say(t, "This is... wrong...!");
-                            else
-                            if(c.morality > 33)
-                                c.say(t, "I don't... want this...!");
-                            else
-                                c.say(t, "Get... ugh... your disgusting hands off me...!");
+                            switch (c.morality / 33) {
+                                case 0: c.say(t, "Get... ugh... your disgusting hands off me...!"); break;
+                                case 1: c.say(t, "I don't... want this...!"); break;
+                                default: c.say(t, "This is... wrong...!");
+                            }
                             c.say(t, "\"\n\n");
                             say(t, "\"");
                             Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.LEWD);
@@ -12899,13 +12455,11 @@ public class Forsaken
                         if(c.confidence > 66)
                         {
                             Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.FOCUS);
-                            if(c.morality > 66)
-                                c.say(t, "I have no interest in your perversions!");
-                            else
-                            if(c.morality > 33)
-                                c.say(t, "Do you really think that will work on me!?");
-                            else
-                                c.say(t, "You can't afford to mess around with me!");
+                            switch (c.morality / 33) {
+                                case 0: c.say(t, "You can't afford to mess around with me!"); break;
+                                case 1: c.say(t, "Do you really think that will work on me!?"); break;
+                                default: c.say(t, "I have no interest in your perversions!");
+                            }
                             c.say(t, "\"\n\n");
                             say(t, "\"");
                             if(confidence > 66)
@@ -12926,13 +12480,11 @@ public class Forsaken
                         if(c.confidence > 33)
                         {
                             Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                            if(c.morality > 66)
-                                c.say(t, "Hey!  This isn't a game!");
-                            else
-                            if(c.morality > 33)
-                                c.say(t, "Aren't we supposed to be fighting!?");
-                            else
-                                c.say(t, "This won't stop me from killing you!");
+                            switch (c.morality / 33) {
+                                case 0: c.say(t, "This won't stop me from killing you!"); break;
+                                case 1: c.say(t, "Aren't we supposed to be fighting!?"); break;
+                                default: c.say(t, "Hey!  This isn't a game!");
+                            }
                             c.say(t, "\"\n\n");
                             say(t, "\"");
                             if(confidence > 66)
@@ -13037,13 +12589,11 @@ public class Forsaken
                         say(t, "\"\n\n");
                         c.say(t, "\"");
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                        if(c.morality > 66)
-                            c.say(t, "I won't let you hurt anyone else!");
-                        else
-                        if(c.morality > 33)
-                            c.say(t, "You monster!");
-                        else
-                            c.say(t, "After all the trouble I went through saving them!");
+                        switch (c.morality / 33) {
+                            case 0: c.say(t, "After all the trouble I went through saving them!"); break;
+                            case 1: c.say(t, "You monster!"); break;
+                            default: c.say(t, "I won't let you hurt anyone else!");
+                        }
                     } else
                     if(c.getConfidence() > 33)
                     {
@@ -13160,13 +12710,11 @@ public class Forsaken
                         say(t, "\"\n\n");
                         c.say(t, "\"");
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.FOCUS);
-                        if(c.innocence > 66)
-                            c.say(t, "Now I'm really mad!");
-                        else
-                        if(c.innocence > 33)
-                            c.say(t, "Just fight me, coward!");
-                        else
-                            c.say(t, "I will make you regret this!");
+                        switch (c.innocence / 33) {
+                            case 0: c.say(t, "I will make you regret this!"); break;
+                            case 1: c.say(t, "Just fight me, coward!"); break;
+                            default: c.say(t, "Now I'm really mad!");
+                        }
                     } else
                     if(c.getConfidence() > 33)
                     {
@@ -13381,13 +12929,11 @@ public class Forsaken
                     if(c.confidence > 66)
                     {
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                        if(c.morality > 66)
-                            c.say(t, "Th-This is wrong!  Stop at once!");
-                        else
-                        if(c.morality > 33)
-                            c.say(t, "I won't... let you...!");
-                        else
-                            c.say(t, "Stop, or I'll kill you!  Are you even listening!?");
+                        switch (c.morality / 33) {
+                            case 0: c.say(t, "Stop, or I'll kill you!  Are you even listening!?"); break;
+                            case 1: c.say(t, "I won't... let you...!"); break;
+                            default: c.say(t, "Th-This is wrong!  Stop at once!");
+                        }
                         c.say(t, "\"\n\n");
                         say(t, "\"");
                         Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.LEWD);
@@ -13400,13 +12946,11 @@ public class Forsaken
                     if(c.confidence > 33)
                     {
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                        if(c.morality > 66)
-                            c.say(t, "How can you enjoy something like this!?");
-                        else
-                        if(c.morality > 33)
-                            c.say(t, "Are you crazy!?");
-                        else
-                            c.say(t, "You twisted bitch!");
+                        switch (c.morality / 33) {
+                            case 0: c.say(t, "You twisted bitch!"); break;
+                            case 1: c.say(t, "Are you crazy!?"); break;
+                            default: c.say(t, "How can you enjoy something like this!?");
+                        }
                         c.say(t, "\"\n\n");
                         say(t, "\"");
                         if(innocence > 66)
@@ -13492,13 +13036,11 @@ public class Forsaken
                     if(c.confidence > 66)
                     {
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                        if(c.morality > 66)
-                            c.say(t, "You deviant!  Stop at once!");
-                        else
-                        if(c.morality > 33)
-                            c.say(t, "You perverted freak!");
-                        else
-                            c.say(t, "I won't let myself... be used for your pleasure...!");
+                        switch (c.morality / 33) {
+                            case 0: c.say(t, "I won't let myself... be used for your pleasure...!"); break;
+                            case 1: c.say(t, "You perverted freak!"); break;
+                            default: c.say(t, "You deviant!  Stop at once!");
+                        }
                         c.say(t, "\"\n\n");
                         say(t, "\"");
                         Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.FOCUS);
@@ -13600,13 +13142,11 @@ public class Forsaken
                     if(c.confidence > 66)
                     {
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.FOCUS);
-                        if(c.morality > 66)
-                            c.say(t, "I have no interest in your perversions!");
-                        else
-                        if(c.morality > 33)
-                            c.say(t, "Do you really think that will work on me!?");
-                        else
-                            c.say(t, "You can't afford to mess around with me!");
+                        switch (c.morality / 33) {
+                            case 0: c.say(t, "You can't afford to mess around with me!"); break;
+                            case 1: c.say(t, "Do you really think that will work on me!?"); break;
+                            default: c.say(t, "I have no interest in your perversions!");
+                        }
                         c.say(t, "\"\n\n");
                         say(t, "\"");
                         Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.FOCUS);
@@ -13619,13 +13159,11 @@ public class Forsaken
                     if(c.confidence > 33)
                     {
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                        if(c.morality > 66)
-                            c.say(t, "Hey!  This isn't a game!");
-                        else
-                        if(c.morality > 33)
-                            c.say(t, "Aren't we supposed to be fighting!?");
-                        else
-                            c.say(t, "This won't stop me from killing you!");
+                        switch (c.morality / 33) {
+                            case 0: c.say(t, "This won't stop me from killing you!"); break;
+                            case 1: c.say(t, "Aren't we supposed to be fighting!?"); break;
+                            default: c.say(t, "Hey!  This isn't a game!");
+                        }
                         c.say(t, "\"\n\n");
                         say(t, "\"");
                         if(innocence > 66)
@@ -13789,13 +13327,11 @@ public class Forsaken
                 } else
                 {
                     Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.SHAME);
-                    if(c.getMorality() > 66)
-                        c.say(t, "I d-don't want to fight " + himHer() + "...");
-                    else
-                    if(c.getMorality() > 33)
-                        c.say(t, "Wh-Why am I such a coward...?");
-                    else
-                        c.say(t, "P-Protecting myself comes first!");
+                    switch (c.getMorality() / 33) {
+                        case 0: c.say(t, "P-Protecting myself comes first!"); break;
+                        case 1: c.say(t, "Wh-Why am I such a coward...?"); break;
+                        default: c.say(t, "I d-don't want to fight " + himHer() + "...");
+                    }
                     c.say(t, "\"\n\n");
                     say(t, "\"");
                     Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
@@ -13857,13 +13393,11 @@ public class Forsaken
                 if(c.getConfidence() > 66)
                 {
                     Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FOCUS, Project.Emotion.ANGER);
-                    if(c.getMorality() > 66)
-                        c.say(t, "You cannot stand against the power of my righteousness, Forsaken!");
-                    else
-                    if(c.getMorality() > 33)
-                        c.say(t, "Do you really think you stand a chance against me!?");
-                    else
-                        c.say(t, "You'll regret standing in my way!");
+                    switch (c.getMorality() / 33) {
+                        case 0: c.say(t, "You'll regret standing in my way!"); break;
+                        case 1: c.say(t, "Do you really think you stand a chance against me!?"); break;
+                        default: c.say(t, "You cannot stand against the power of my righteousness, Forsaken!");
+                    }
                     c.say(t, "\"\n\n");
                     say(t, "\"");
                     Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.ANGER);
@@ -13908,13 +13442,11 @@ public class Forsaken
                 } else
                 {
                     Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
-                    if(c.getMorality() > 66)
-                        c.say(t, "I-I'm sorry, but I'm too weak...!");
-                    else
-                    if(c.getMorality() > 33)
-                        c.say(t, "Th-This one's strong!");
-                    else
-                        c.say(t, "Run away!");
+                    switch (c.getMorality() / 33) {
+                        case 0: c.say(t, "Run away!"); break;
+                        case 1: c.say(t, "Th-This one's strong!"); break;
+                        default: c.say(t, "I-I'm sorry, but I'm too weak...!");
+                    }
                     c.say(t, "\"\n\n");
                     say(t, "\"");
                     Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
@@ -13996,13 +13528,11 @@ public class Forsaken
                 if(c.getConfidence() > 33)
                 {
                     Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
-                    if(c.getMorality() > 66)
-                        c.say(t, "I... I won't run-");
-                    else
-                    if(c.getMorality() > 33)
-                        c.say(t, "I might need to run-");
-                    else
-                        c.say(t, "Gah, I need to run-");
+                    switch (c.getMorality() / 33) {
+                        case 0: c.say(t, "Gah, I need to run-"); break;
+                        case 1: c.say(t, "I might need to run-"); break;
+                        default: c.say(t, "I... I won't run-");
+                    }
                     c.say(t, "\"\n\n");
                     say(t, "\"");
                     if(innocence > 66)
@@ -14115,13 +13645,11 @@ public class Forsaken
                             c.say(t, "\"\n\n");
                             say(t, "\"");
                             Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.FOCUS);
-                            if(c.getConfidence() > 66)
-                                say(t, "Nngh, yes, look down on me...!");
-                            else
-                            if(c.getConfidence() > 33)
-                                say(t, "This is the only way I can feel alive...!");
-                            else
-                                say(t, "Heh, are you scared of feeling good...?  You should be.");
+                            switch (c.getConfidence() / 33) {
+                                case 0: say(t, "Heh, are you scared of feeling good...?  You should be."); break;
+                                case 1: say(t, "This is the only way I can feel alive...!"); break;
+                                default: say(t, "Nngh, yes, look down on me...!");
+                            }
                         } else
                         if(flavorDeviancy() > 33)
                         {
@@ -14174,13 +13702,11 @@ public class Forsaken
                             c.say(t, "\"\n\n");
                             say(t, "\"");
                             Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.NEUTRAL);
-                            if(c.getConfidence() > 66)
-                                say(t, "If you want me to stop, then stop me.");
-                            else
-                            if(c.getConfidence() > 33)
-                                say(t, "I actually think you're enjoying this more than I am.");
-                            else
-                                say(t, "Are you too turned on to fight back properly?  That's too bad.");
+                            switch (c.getConfidence() / 33) {
+                                case 0: say(t, "Are you too turned on to fight back properly?  That's too bad."); break;
+                                case 1: say(t, "I actually think you're enjoying this more than I am."); break;
+                                default: say(t, "If you want me to stop, then stop me.");
+                            }
                         }
                         say(t, "\"");
                     } else
@@ -14257,13 +13783,11 @@ public class Forsaken
                         if(c.getDignity() > 33)
                         {
                             Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.SHAME);
-                            if(flavorDeviancy() > 66)
-                                c.say(t, "Y-You're just... satisfying yourself...!");
-                            else
-                            if(flavorDeviancy() > 33)
-                                c.say(t, "Ugh, you look like you're having a good time...");
-                            else
-                                c.say(t, "You don't look like you're enjoying this, so why...?");
+                            switch (flavorDeviancy() / 33) {
+                                case 0: c.say(t, "You don't look like you're enjoying this, so why...?"); break;
+                                case 1: c.say(t, "Ugh, you look like you're having a good time..."); break;
+                                default: c.say(t, "Y-You're just... satisfying yourself...!");
+                            }
                             c.say(t, "\"\n\n");
                             say(t, "\"");
                             if(flavorObedience() > 66)
@@ -14360,13 +13884,11 @@ public class Forsaken
                         if(flavorHostility() > 66)
                         {
                             Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.ANGER);
-                            if(c.getInnocence() > 66)
-                                say(t, "Idiot!  Do you understand now that you never should have got in my way!?");
-                            else
-                            if(c.getInnocence() > 33)
-                                say(t, "Scream for me!");
-                            else
-                                say(t, "Heh, you look like you're regretting your actions.");
+                            switch (c.getInnocence() / 33) {
+                                case 0: say(t, "Heh, you look like you're regretting your actions."); break;
+                                case 1: say(t, "Scream for me!"); break;
+                                default: say(t, "Idiot!  Do you understand now that you never should have got in my way!?");
+                            }
                             say(t, "\"\n\n");
                             c.say(t, "\"");
                             if(c.getConfidence() > 66)
@@ -14403,13 +13925,11 @@ public class Forsaken
                             say(t, "\"\n\n");
                             c.say(t, "\"");
                             Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.FEAR);
-                            if(c.getDignity() > 66)
-                                c.say(t, "I-I'm not- Nn!  Not feeling anything at all!");
-                            else
-                            if(c.getDignity() > 33)
-                                c.say(t, "Stop... this...!");
-                            else
-                                c.say(t, "Aaagh, gaaah!");
+                            switch (c.getDignity() / 33) {
+                                case 0: c.say(t, "Aaagh, gaaah!"); break;
+                                case 1: c.say(t, "Stop... this...!"); break;
+                                default: c.say(t, "I-I'm not- Nn!  Not feeling anything at all!");
+                            }
                         } else
                         {
                             if(c.getInnocence() > 66)
@@ -14492,13 +14012,11 @@ public class Forsaken
                     if(c.getInnocence() > 66)
                     {
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
-                        if(flavorHostility() > 66)
-                            c.say(t, "S-Stop!  You're hurting me!");
-                        else
-                        if(flavorHostility() > 33)
-                            c.say(t, "Th-This is really weird!");
-                        else
-                            c.say(t, "N-No!  I don't wanna feel good!");
+                        switch (flavorHostility() / 33) {
+                            case 0: c.say(t, "N-No!  I don't wanna feel good!"); break;
+                            case 1: c.say(t, "Th-This is really weird!"); break;
+                            default: c.say(t, "S-Stop!  You're hurting me!");
+                        }
                         c.say(t, "\"\n\n");
                         say(t, "\"");
                         Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.FOCUS);
@@ -14650,13 +14168,11 @@ public class Forsaken
                         say(t, "\"\n\n");
                         c.say(t, "\"");
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.LEWD);
-                        if(flavorHostility() > 66)
-                            c.say(t, "Ow...  You're... rough...");
-                        else
-                        if(flavorHostility() > 33)
-                            c.say(t, "I... I need a break...");
-                        else
-                            c.say(t, "I'll admit... that felt good...");
+                        switch (flavorHostility() / 33) {
+                            case 0: c.say(t, "I'll admit... that felt good..."); break;
+                            case 1: c.say(t, "I... I need a break..."); break;
+                            default: c.say(t, "Ow...  You're... rough...");
+                        }
                     }
                     c.say(t, "\"");
                 } else
@@ -14870,13 +14386,11 @@ public class Forsaken
                     } else
                     {
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
-                        if(flavorHostility() > 66)
-                            c.say(t, "I-I'm actually going to die...!");
-                        else
-                        if(flavorHostility() > 33)
-                            c.say(t, "Such... hatred...!");
-                        else
-                            c.say(t, "Even against one of the weaker Forsaken, I-I can't...");
+                        switch (flavorHostility() / 33) {
+                            case 0: c.say(t, "Even against one of the weaker Forsaken, I-I can't..."); break;
+                            case 1: c.say(t, "Such... hatred...!"); break;
+                            default: c.say(t, "I-I'm actually going to die...!");
+                        }
                         c.say(t, "\"\n\n");
                         say(t, "\"");
                         Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.FOCUS);
@@ -14977,23 +14491,19 @@ public class Forsaken
                     } else
                     {
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
-                        if(flavorDeviancy() > 66)
-                            c.say(t, "S-Stop... looking at me like that... please...!");
-                        else
-                        if(flavorDeviancy() > 33)
-                            c.say(t, "I-It's like... " + heShe() + "'s just enjoying it...!");
-                        else
-                            c.say(t, HeShe() + "'s... too strong...!");
+                        switch (flavorDeviancy() / 33) {
+                            case 0: c.say(t, HeShe() + "'s... too strong...!"); break;
+                            case 1: c.say(t, "I-It's like... " + heShe() + "'s just enjoying it...!"); break;
+                            default: c.say(t, "S-Stop... looking at me like that... please...!");
+                        }
                         c.say(t, "\"\n\n");
                         say(t, "\"");
                         Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.FOCUS);
-                        if(flavorHostility() > 66)
-                            say(t, "I'm going to make you beg me to kill you before I'm done!");
-                        else
-                        if(flavorHostility() > 33)
-                            say(t, "Hahah, you're already giving up!");
-                        else
-                            say(t, "You aren't giving up yet, are you?");
+                        switch (flavorHostility() / 33) {
+                            case 0: say(t, "You aren't giving up yet, are you?"); break;
+                            case 1: say(t, "Hahah, you're already giving up!"); break;
+                            default: say(t, "I'm going to make you beg me to kill you before I'm done!");
+                        }
                     }
                     say(t, "\"");
                 } else
@@ -15358,13 +14868,11 @@ public class Forsaken
                 } else
                 {
                     Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                    if(flavorHostility() > 66)
-                        c.say(t, "I won't let you kill me!");
-                    else
-                    if(flavorHostility() > 33)
-                        c.say(t, "I'm not your toy!");
-                    else
-                        c.say(t, "Stop looking down on me!");
+                    switch (flavorHostility() / 33) {
+                        case 0: c.say(t, "Stop looking down on me!"); break;
+                        case 1: c.say(t, "I'm not your toy!"); break;
+                        default: c.say(t, "I won't let you kill me!");
+                    }
                     c.say(t, "\"\n\n");
                     say(t, "\"");
                     Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.JOY);
@@ -15417,13 +14925,11 @@ public class Forsaken
                 if(c.getInnocence() > 66)
                 {
                     Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
-                    if(flavorDeviancy() > 66)
-                        c.say(t, "Stay away from me, weirdo!");
-                    else
-                    if(flavorDeviancy() > 33)
-                        c.say(t, "What are you looking at me like that for!?  Get back!");
-                    else
-                        c.say(t, "Leave me alooone!");
+                    switch (flavorDeviancy() / 33) {
+                        case 0: c.say(t, "Leave me alooone!"); break;
+                        case 1: c.say(t, "What are you looking at me like that for!?  Get back!"); break;
+                        default: c.say(t, "Stay away from me, weirdo!");
+                    }
                     c.say(t, "\"\n\n");
                     say(t, "\"");
                     if(innocence > 66)
@@ -15679,13 +15185,11 @@ public class Forsaken
                         if(c.getConfidence() > 66)
                         {
                             Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FOCUS, Project.Emotion.JOY);
-                            if(flavorHostility() > 66)
-                                c.say(t, "This is finally my chance to go all-out!");
-                            else
-                            if(flavorHostility() > 33)
-                                c.say(t, "Now this is a fight!");
-                            else
-                                c.say(t, "This is a chance to fight a worthy opponent!");
+                            switch (flavorHostility() / 33) {
+                                case 0: c.say(t, "This is a chance to fight a worthy opponent!"); break;
+                                case 1: c.say(t, "Now this is a fight!"); break;
+                                default: c.say(t, "This is finally my chance to go all-out!");
+                            }
                             c.say(t, "\"\n\n");
                             say(t, "\"");
                             if(flavorDeviancy() > 66)
@@ -15706,13 +15210,11 @@ public class Forsaken
                         if(c.getConfidence() > 33)
                         {
                             Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                            if(flavorDeviancy() > 66)
-                                c.say(t, "You complete pervert!");
-                            else
-                            if(flavorDeviancy() > 33)
-                                c.say(t, "Stop messing around!");
-                            else
-                                c.say(t, "I didn't think you were the type to do this.");
+                            switch (flavorDeviancy() / 33) {
+                                case 0: c.say(t, "I didn't think you were the type to do this."); break;
+                                case 1: c.say(t, "Stop messing around!"); break;
+                                default: c.say(t, "You complete pervert!");
+                            }
                             c.say(t, "\"\n\n");
                             say(t, "\"");
                             Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.FOCUS);
@@ -15927,13 +15429,11 @@ public class Forsaken
                     if(c.getConfidence() > 66)
                     {
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
-                        if(flavorDeviancy() > 66)
-                            c.say(t, "Are you actually enjoying this!?");
-                        else
-                        if(flavorDeviancy() > 33)
-                            c.say(t, "You look like you're having a little less fun now!");
-                        else
-                            c.say(t, "You'll stay down, if you know what's good for you.");
+                        switch (flavorDeviancy() / 33) {
+                            case 0: c.say(t, "You'll stay down, if you know what's good for you."); break;
+                            case 1: c.say(t, "You look like you're having a little less fun now!"); break;
+                            default: c.say(t, "Are you actually enjoying this!?");
+                        }
                         c.say(t, "\"\n\n");
                         say(t, "\"");
                         if(flavorHostility() > 66)
@@ -15962,13 +15462,11 @@ public class Forsaken
                         c.say(t, "\"\n\n");
                         say(t, "\"");
                         Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
-                        if(flavorObedience() > 66)
-                            say(t, "I'm no use to " + theDemonLord() + " if I'm dead.");
-                        else
-                        if(flavorObedience() > 33)
-                            say(t, TheDemonLord() + " might not be happy, but I can deal with that later.");
-                        else
-                            say(t, "Guh, why did " + theDemonLord() + " have to make me so weak!?");
+                        switch (flavorObedience() / 33) {
+                            case 0: say(t, "Guh, why did " + theDemonLord() + " have to make me so weak!?"); break;
+                            case 1: say(t, TheDemonLord() + " might not be happy, but I can deal with that later."); break;
+                            default: say(t, "I'm no use to " + theDemonLord() + " if I'm dead.");
+                        }
                     } else
                     {
                         if(flavorHostility() > 66)
@@ -16083,13 +15581,11 @@ public class Forsaken
                         c.say(t, "\"\n\n");
                         say(t, "\"");
                         Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.STRUGGLE, Project.Emotion.SHAME);
-                        if(flavorObedience() > 66)
-                            say(t, "If it's for " + theDemonLord() + ", I'll fight forever.");
-                        else
-                        if(flavorObedience() > 33)
-                            say(t, TheDemonLord() + " has a way of motivating us.");
-                        else
-                            say(t, "I'm not done yet.");
+                        switch (flavorObedience() / 33) {
+                            case 0: say(t, "I'm not done yet."); break;
+                            case 1: say(t, TheDemonLord() + " has a way of motivating us."); break;
+                            default: say(t, "If it's for " + theDemonLord() + ", I'll fight forever.");
+                        }
                     } else
                     {
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.FOCUS);
@@ -16101,13 +15597,11 @@ public class Forsaken
                         c.say(t, "\"\n\n");
                         say(t, "\"");
                         Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
-                        if(flavorHostility() > 66)
-                            say(t, "You think you can stop me from hurting you?");
-                        else
-                        if(flavorHostility() > 33)
-                            say(t, "We'll see about that.");
-                        else
-                            say(t, "Good.");
+                        switch (flavorHostility() / 33) {
+                            case 0: say(t, "Good."); break;
+                            case 1: say(t, "We'll see about that."); break;
+                            default: say(t, "You think you can stop me from hurting you?");
+                        }
                     }
                     say(t, "\"");
                 } else
@@ -16156,13 +15650,11 @@ public class Forsaken
                     if(c.getConfidence() > 66)
                     {
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
-                        if(flavorHostility() > 66)
-                            c.say(t, "You... monster...");
-                        else
-                        if(flavorHostility() > 33)
-                            c.say(t, "I can still... stand up...!");
-                        else
-                            c.say(t, "I don't... understand you...");
+                        switch (flavorHostility() / 33) {
+                            case 0: c.say(t, "I don't... understand you..."); break;
+                            case 1: c.say(t, "I can still... stand up...!"); break;
+                            default: c.say(t, "You... monster...");
+                        }
                         c.say(t, "\"\n\n");
                         say(t, "\"");
                         if(flavorDeviancy() > 66)
@@ -16183,13 +15675,11 @@ public class Forsaken
                     if(c.getConfidence() > 33)
                     {
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
-                        if(flavorDeviancy() > 66)
-                            c.say(t, "I can't let " + himHer() + " find me again, or " + heShe() + "'ll...");
-                        else
-                        if(flavorDeviancy() > 33)
-                            c.say(t, HeShe() + "'s just playing with me...!");
-                        else
-                            c.say(t, HeShe() + "'s too strong...!");
+                        switch (flavorDeviancy() / 33) {
+                            case 0: c.say(t, HeShe() + "'s too strong...!"); break;
+                            case 1: c.say(t, HeShe() + "'s just playing with me...!"); break;
+                            default: c.say(t, "I can't let " + himHer() + " find me again, or " + heShe() + "'ll...");
+                        }
                         c.say(t, "\"\n\n");
                         say(t, "\"");
                         if(innocence > 66)
@@ -16225,13 +15715,11 @@ public class Forsaken
                         c.say(t, "\"\n\n");
                         say(t, "\"");
                         Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
-                        if(flavorHostility() > 66)
-                            say(t, "No, no, you need to suffer much more than this...");
-                        else
-                        if(flavorHostility() > 33)
-                            say(t, "Hm, what to do with you...?");
-                        else
-                            say(t, "You can't give up just yet.  I won't let you.");
+                        switch (flavorHostility() / 33) {
+                            case 0: say(t, "You can't give up just yet.  I won't let you."); break;
+                            case 1: say(t, "Hm, what to do with you...?"); break;
+                            default: say(t, "No, no, you need to suffer much more than this...");
+                        }
                     }
                     say(t, "\"");
                 }
@@ -16392,24 +15880,20 @@ public class Forsaken
                         say(t, "\"\n\n");
                         c.say(t, "\"");
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                        if(flavorHostility() > 66)
-                            c.say(t, "I won't let you tear me down!");
-                        else
-                        if(flavorHostility() > 33)
-                            c.say(t, "Wipe that smirk off your face!");
-                        else
-                            c.say(t, "You're just another pervert after all...!");
+                        switch (flavorHostility() / 33) {
+                            case 0: c.say(t, "You're just another pervert after all...!"); break;
+                            case 1: c.say(t, "Wipe that smirk off your face!"); break;
+                            default: c.say(t, "I won't let you tear me down!");
+                        }
                     } else
                     if(c.getDignity() > 33)
                     {
                         Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
-                        if(flavorObedience() > 66)
-                            say(t, "If you oppose " + theDemonLord() + ", you don't get to wear clothes.");
-                        else
-                        if(flavorObedience() > 33)
-                            say(t, "I don't mind complying with this kind of order.");
-                        else
-                            say(t, "I want to see more of you.");
+                        switch (flavorObedience() / 33) {
+                            case 0: say(t, "I want to see more of you."); break;
+                            case 1: say(t, "I don't mind complying with this kind of order."); break;
+                            default: say(t, "If you oppose " + theDemonLord() + ", you don't get to wear clothes.");
+                        }
                         say(t, "\"\n\n");
                         c.say(t, "\"");
                         if(disgrace > 66)
@@ -16504,23 +15988,19 @@ public class Forsaken
                     if(c.getConfidence() > 66)
                     {
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.FOCUS);
-                        if(flavorHostility() > 66)
-                            c.say(t, "You're doing a pretty bad job at killing me.");
-                        else
-                        if(flavorHostility() > 33)
-                            c.say(t, "You still haven't put a scratch on me.");
-                        else
-                            c.say(t, "You're being careful not to hurt me.  That's annoying.");
+                        switch (flavorHostility() / 33) {
+                            case 0: c.say(t, "You're being careful not to hurt me.  That's annoying."); break;
+                            case 1: c.say(t, "You still haven't put a scratch on me."); break;
+                            default: c.say(t, "You're doing a pretty bad job at killing me.");
+                        }
                         c.say(t, "\"\n\n");
                         say(t, "\"");
                         Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
-                        if(flavorObedience() > 66)
-                            say(t, TheDemonLord() + " is the one who really decides your fate.");
-                        else
-                        if(flavorObedience() > 33)
-                            say(t, "For now, I'm following my orders.");
-                        else
-                            say(t, "I know what I'm doing.");
+                        switch (flavorObedience() / 33) {
+                            case 0: say(t, "I know what I'm doing."); break;
+                            case 1: say(t, "For now, I'm following my orders."); break;
+                            default: say(t, TheDemonLord() + " is the one who really decides your fate.");
+                        }
                     } else
                     if(c.getConfidence() > 33)
                     {
@@ -16549,13 +16029,11 @@ public class Forsaken
                         c.say(t, "\"\n\n");
                         say(t, "\"");
                         Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.FOCUS);
-                        if(flavorHostility() > 66)
-                            say(t, "Give up!  Give in to despair!");
-                        else
-                        if(flavorHostility() > 33)
-                            say(t, "You might have stood a chance if you weren't such a coward!");
-                        else
-                            say(t, "What did you expect to happen when you ran!?");
+                        switch (flavorHostility() / 33) {
+                            case 0: say(t, "What did you expect to happen when you ran!?"); break;
+                            case 1: say(t, "You might have stood a chance if you weren't such a coward!"); break;
+                            default: say(t, "Give up!  Give in to despair!");
+                        }
                     }
                     say(t, "\"");
                 }
@@ -16607,13 +16085,11 @@ public class Forsaken
                 if(c.getConfidence() > 66)
                 {
                     Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.FOCUS);
-                    if(flavorObedience() > 66)
-                        say(t, "I will kill anyone who disrespects " + theDemonLord() + "!");
-                    else
-                    if(flavorObedience() > 33)
-                        say(t, "I'll make you show some respect!");
-                    else
-                        say(t, "You think you can afford to take me lightly!?");
+                    switch (flavorObedience() / 33) {
+                        case 0: say(t, "You think you can afford to take me lightly!?"); break;
+                        case 1: say(t, "I'll make you show some respect!"); break;
+                        default: say(t, "I will kill anyone who disrespects " + theDemonLord() + "!");
+                    }
                     say(t, "\"\n\n");
                     c.say(t, "\"");
                     Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.FOCUS);
@@ -16740,33 +16216,27 @@ public class Forsaken
                     say(t, "\"\n\n");
                     c.say(t, "\"");
                     Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.FOCUS);
-                    if(flavorObedience() > 66)
-                        c.say(t, "You're just the Demon Lord's bitch!");
-                    else
-                    if(flavorObedience() > 33)
-                        c.say(t, "I'm not going to waste time listening to some coward who couldn't even beat the Demon Lord!");
-                    else
-                        c.say(t, "You think this is a game!?");
+                    switch (flavorObedience() / 33) {
+                        case 0: c.say(t, "You think this is a game!?"); break;
+                        case 1: c.say(t, "I'm not going to waste time listening to some coward who couldn't even beat the Demon Lord!"); break;
+                        default: c.say(t, "You're just the Demon Lord's bitch!");
+                    }
                 } else
                 {
                     Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
-                    if(flavorObedience() > 66)
-                        say(t, "I've devoted my life to " + theDemonLord() + "!");
-                    else
-                    if(flavorObedience() > 33)
-                        say(t, "I'm just looking out for myself, because no one else will.");
-                    else
-                        say(t, "I'm having a good time.  How about you?");
+                    switch (flavorObedience() / 33) {
+                        case 0: say(t, "I'm having a good time.  How about you?"); break;
+                        case 1: say(t, "I'm just looking out for myself, because no one else will."); break;
+                        default: say(t, "I've devoted my life to " + theDemonLord() + "!");
+                    }
                     say(t, "\"\n\n");
                     c.say(t, "\"");
                     Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
-                    if(flavorDeviancy() > 66)
-                        c.say(t, "You're completely twisted.");
-                    else
-                    if(flavorDeviancy() > 33)
-                        c.say(t, "You take a degree of sexual enjoyment from it as well.");
-                    else
-                        c.say(t, "You don't even feel guilty!");
+                    switch (flavorDeviancy() / 33) {
+                        case 0: c.say(t, "You don't even feel guilty!"); break;
+                        case 1: c.say(t, "You take a degree of sexual enjoyment from it as well."); break;
+                        default: c.say(t, "You're completely twisted.");
+                    }
                 }
                 c.say(t, "\"");
             } else
@@ -16816,13 +16286,11 @@ public class Forsaken
                 if(c.getMorality() > 66)
                 {
                     Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
-                    if(flavorDeviancy() > 66)
-                        c.say(t, "I know you're in there somewhere, " + originalName + "!  Wake up!");
-                    else
-                    if(flavorDeviancy() > 33)
-                        c.say(t, "There's no way you actually enjoy doing this, " + mainName + "!  You can stop anytime!");
-                    else
-                        c.say(t, "I can tell that it's hurtflavorflavorDeviancy()()to do this, " + mainName + "!  You belong on the side of Good!");
+                    switch (flavorDeviancy() / 33) {
+                        case 0: c.say(t, "I can tell that it's hurtflavorflavorDeviancy()()to do this, " + mainName + "!  You belong on the side of Good!"); break;
+                        case 1: c.say(t, "There's no way you actually enjoy doing this, " + mainName + "!  You can stop anytime!"); break;
+                        default: c.say(t, "I know you're in there somewhere, " + originalName + "!  Wake up!");
+                    }
                     c.say(t, "\"\n\n");
                     say(t, "\"");
                     if(flavorObedience() > 66)
@@ -16973,13 +16441,11 @@ public class Forsaken
                             say(t, "\"\n\n");
                             c.say(t, "\"");
                             Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.ANGER);
-                            if(flavorHostility() > 66)
-                                c.say(t, "Stop!  Please!");
-                            else
-                            if(flavorHostility() > 33)
-                                c.say(t, "L-Liar!  " + HeShe() + "'s lying!");
-                            else
-                                c.say(t, "Why are you doing this!?");
+                            switch (flavorHostility() / 33) {
+                                case 0: c.say(t, "Why are you doing this!?"); break;
+                                case 1: c.say(t, "L-Liar!  " + HeShe() + "'s lying!"); break;
+                                default: c.say(t, "Stop!  Please!");
+                            }
                         } else
                         if(c.getDignity() > 33)
                         {
@@ -17000,23 +16466,19 @@ public class Forsaken
                             say(t, "\"\n\n");
                             c.say(t, "\"");
                             Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.SHAME);
-                            if(flavorDeviancy() > 66)
-                                c.say(t, "I can't fight like this!");
-                            else
-                            if(flavorDeviancy() > 33)
-                                c.say(t, "Ngh... guh...");
-                            else
-                                c.say(t, "You're hard to pin down...");
+                            switch (flavorDeviancy() / 33) {
+                                case 0: c.say(t, "You're hard to pin down..."); break;
+                                case 1: c.say(t, "Ngh... guh..."); break;
+                                default: c.say(t, "I can't fight like this!");
+                            }
                         } else
                         {
                             Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.NEUTRAL);
-                            if(flavorObedience() > 66)
-                                say(t, "I should lead " + c.himHer() + " past as many cameras as possible.");
-                            else
-                            if(flavorObedience() > 33)
-                                say(t, "Let's show this to your teammates.");
-                            else
-                                say(t, "I think I'm doing pretty well for myself.");
+                            switch (flavorObedience() / 33) {
+                                case 0: say(t, "I think I'm doing pretty well for myself."); break;
+                                case 1: say(t, "Let's show this to your teammates."); break;
+                                default: say(t, "I should lead " + c.himHer() + " past as many cameras as possible.");
+                            }
                             say(t, "\"\n\n");
                             c.say(t, "\"");
                             Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
@@ -17131,13 +16593,11 @@ public class Forsaken
                             say(t, "\"\n\n");
                             c.say(t, "\"");
                             Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
-                            if(flavorHostility() > 66)
-                                c.say(t, "I-It mostly just hurt...");
-                            else
-                            if(flavorHostility() > 33)
-                                c.say(t, "Y-You pinched me...");
-                            else
-                                c.say(t, "I-I'm sorry...");
+                            switch (flavorHostility() / 33) {
+                                case 0: c.say(t, "I-I'm sorry..."); break;
+                                case 1: c.say(t, "Y-You pinched me..."); break;
+                                default: c.say(t, "I-It mostly just hurt...");
+                            }
                         }
                         c.say(t, "\"");
                     } else
@@ -17198,13 +16658,11 @@ public class Forsaken
                             say(t, "\"\n\n");
                             c.say(t, "\"");
                             Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
-                            if(flavorHostility() > 66)
-                                c.say(t, "It hurts...  It hurts, but...");
-                            else
-                            if(flavorHostility() > 33)
-                                c.say(t, "Don't wanna feel good anymore...");
-                            else
-                                c.say(t, "I feel... so weird...");
+                            switch (flavorHostility() / 33) {
+                                case 0: c.say(t, "I feel... so weird..."); break;
+                                case 1: c.say(t, "Don't wanna feel good anymore..."); break;
+                                default: c.say(t, "It hurts...  It hurts, but...");
+                            }
                         } else
                         if(c.getInnocence() > 33)
                         {
@@ -17233,23 +16691,19 @@ public class Forsaken
                         } else
                         {
                             Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
-                            if(flavorHostility() > 66)
-                                say(t, "I'm not finished with you yet.");
-                            else
-                            if(flavorHostility() > 33)
-                                say(t, "Ah, I got carried away...");
-                            else
-                                say(t, "I'm glad that you managed to resist.");
+                            switch (flavorHostility() / 33) {
+                                case 0: say(t, "I'm glad that you managed to resist."); break;
+                                case 1: say(t, "Ah, I got carried away..."); break;
+                                default: say(t, "I'm not finished with you yet.");
+                            }
                             say(t, "\"\n\n");
                             c.say(t, "\"");
                             Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                            if(flavorObedience() > 66)
-                                c.say(t, "The Demon Lord wants everyone to see me in this state...");
-                            else
-                            if(flavorObedience() > 33)
-                                c.say(t, "Is this also your orders, or just your hobby?");
-                            else
-                                c.say(t, "Enough... of this...!");
+                            switch (flavorObedience() / 33) {
+                                case 0: c.say(t, "Enough... of this...!"); break;
+                                case 1: c.say(t, "Is this also your orders, or just your hobby?"); break;
+                                default: c.say(t, "The Demon Lord wants everyone to see me in this state...");
+                            }
                         }
                         c.say(t, "\"");
                     }
@@ -17304,13 +16758,11 @@ public class Forsaken
                         say(t, "\"\n\n");
                         c.say(t, "\"");
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                        if(flavorDeviancy() > 66)
-                            c.say(t, "Get your hands off me!");
-                        else
-                        if(flavorDeviancy() > 33)
-                            c.say(t, "Stop that!");
-                        else
-                            c.say(t, "I won't let go...!");
+                        switch (flavorDeviancy() / 33) {
+                            case 0: c.say(t, "I won't let go...!"); break;
+                            case 1: c.say(t, "Stop that!"); break;
+                            default: c.say(t, "Get your hands off me!");
+                        }
                     } else
                     if(c.getConfidence() > 33)
                     {
@@ -17323,23 +16775,19 @@ public class Forsaken
                         say(t, "\"\n\n");
                         c.say(t, "\"");
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
-                        if(flavorHostility() > 66)
-                            c.say(t, "Y-You're hurting me...!");
-                        else
-                        if(flavorHostility() > 33)
-                            c.say(t, "Ngh!  Not so tight...!");
-                        else
-                            c.say(t, "Let... Let go...");
+                        switch (flavorHostility() / 33) {
+                            case 0: c.say(t, "Let... Let go..."); break;
+                            case 1: c.say(t, "Ngh!  Not so tight...!"); break;
+                            default: c.say(t, "Y-You're hurting me...!");
+                        }
                     } else
                     {
                         Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.NEUTRAL);
-                        if(flavorHostility() > 66)
-                            say(t, "You can't pretend you're not afraid.");
-                        else
-                        if(flavorHostility() > 33)
-                            say(t, "Now you've made me angry.");
-                        else
-                            say(t, "Let's see how determined you really are.");
+                        switch (flavorHostility() / 33) {
+                            case 0: say(t, "Let's see how determined you really are."); break;
+                            case 1: say(t, "Now you've made me angry."); break;
+                            default: say(t, "You can't pretend you're not afraid.");
+                        }
                         say(t, "\"\n\n");
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.SHAME);
                         switch (confidence / 33) {
@@ -17400,13 +16848,11 @@ public class Forsaken
                         say(t, "\"\n\n");
                         c.say(t, "\"");
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.FEAR);
-                        if(flavorDeviancy() > 66)
-                            c.say(t, "Huh!?  What are you doing down there!?");
-                        else
-                        if(flavorDeviancy() > 33)
-                            c.say(t, "N-No fair!");
-                        else
-                            c.say(t, "N-Not there!");
+                        switch (flavorDeviancy() / 33) {
+                            case 0: c.say(t, "N-Not there!"); break;
+                            case 1: c.say(t, "N-No fair!"); break;
+                            default: c.say(t, "Huh!?  What are you doing down there!?");
+                        }
                     } else
                     if(c.getInnocence() > 33)
                     {
@@ -17522,13 +16968,11 @@ public class Forsaken
                     if(c.getDignity() > 33)
                     {
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                        if(flavorDeviancy() > 66)
-                            c.say(t, "You- Nnngh!  Freak!");
-                        else
-                        if(flavorDeviancy() > 33)
-                            c.say(t, "You're sick!");
-                        else
-                            c.say(t, "You coward!  Let me up!");
+                        switch (flavorDeviancy() / 33) {
+                            case 0: c.say(t, "You coward!  Let me up!"); break;
+                            case 1: c.say(t, "You're sick!"); break;
+                            default: c.say(t, "You- Nnngh!  Freak!");
+                        }
                         c.say(t, "\"\n\n");
                         say(t, "\"");
                         Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
@@ -17642,23 +17086,19 @@ public class Forsaken
                     if(c.getMorality() > 33)
                     {
                         Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
-                        if(flavorObedience() > 66)
-                            say(t, c.HeShe() + " can't save you from " + theDemonLord() + "!  No one can!");
-                        else
-                        if(flavorObedience() > 33)
-                            say(t, "Go on, give me an excuse to kill them.");
-                        else
-                            say(t, "Ah, look how afraid they all are!");
+                        switch (flavorObedience() / 33) {
+                            case 0: say(t, "Ah, look how afraid they all are!"); break;
+                            case 1: say(t, "Go on, give me an excuse to kill them."); break;
+                            default: say(t, c.HeShe() + " can't save you from " + theDemonLord() + "!  No one can!");
+                        }
                         say(t, "\"\n\n");
                         c.say(t, "\"");
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.SHAME);
-                        if(flavorDeviancy() > 66)
-                            c.say(t, "Hey!  Stay focused on me!  I'm the one whose body you want, right?");
-                        else
-                        if(flavorDeviancy() > 33)
-                            c.say(t, "I can't do anything like this...!");
-                        else
-                            c.say(t, "I'm sorry, everyone...");
+                        switch (flavorDeviancy() / 33) {
+                            case 0: c.say(t, "I'm sorry, everyone..."); break;
+                            case 1: c.say(t, "I can't do anything like this...!"); break;
+                            default: c.say(t, "Hey!  Stay focused on me!  I'm the one whose body you want, right?");
+                        }
                     } else
                     {
                         if(disgrace > 66)
@@ -17728,13 +17168,11 @@ public class Forsaken
                     if(c.getInnocence() > 66)
                     {
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.FOCUS);
-                        if(flavorDeviancy() > 66)
-                            c.say(t, "Hold still, you weirdo!");
-                        else
-                        if(flavorDeviancy() > 33)
-                            c.say(t, "Quit it!");
-                        else
-                            c.say(t, "You jerk!");
+                        switch (flavorDeviancy() / 33) {
+                            case 0: c.say(t, "You jerk!"); break;
+                            case 1: c.say(t, "Quit it!"); break;
+                            default: c.say(t, "Hold still, you weirdo!");
+                        }
                         c.say(t, "\"\n\n");
                         say(t, "\"");
                         Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
@@ -17771,13 +17209,11 @@ public class Forsaken
                     } else
                     {
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FOCUS, Project.Emotion.ANGER);
-                        if(flavorObedience() > 66)
-                            c.say(t, "Wouldn't the Demon Lord be happier if you took me head-on!?");
-                        else
-                        if(flavorObedience() > 33)
-                            c.say(t, "Will the Demon Lord really be satisfied with this performance?");
-                        else
-                            c.say(t, "Come, I know that you'd rather be on the attack!");
+                        switch (flavorObedience() / 33) {
+                            case 0: c.say(t, "Come, I know that you'd rather be on the attack!"); break;
+                            case 1: c.say(t, "Will the Demon Lord really be satisfied with this performance?"); break;
+                            default: c.say(t, "Wouldn't the Demon Lord be happier if you took me head-on!?");
+                        }
                         c.say(t, "\"\n\n");
                         say(t, "\"");
                         Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
@@ -17959,23 +17395,19 @@ public class Forsaken
                 if(c.getMorality() > 66)
                 {
                     Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.FOCUS);
-                    if(flavorObedience() > 66)
-                        c.say(t, "You don't have to keep serving the Demon Lord!");
-                    else
-                    if(flavorObedience() > 33)
-                        c.say(t, "If you come with us, the Demon Lord won't be able to hurt you anymore!");
-                    else
-                        c.say(t, "You can still be forgiven for what you've done!");
+                    switch (flavorObedience() / 33) {
+                        case 0: c.say(t, "You can still be forgiven for what you've done!"); break;
+                        case 1: c.say(t, "If you come with us, the Demon Lord won't be able to hurt you anymore!"); break;
+                        default: c.say(t, "You don't have to keep serving the Demon Lord!");
+                    }
                     c.say(t, "\"\n\n");
                     say(t, "\"");
                     Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.ANGER);
-                    if(flavorHostility() > 66)
-                        say(t, "I do this because I want to!");
-                    else
-                    if(flavorHostility() > 33)
-                        say(t, "I don't need your forgiveness!");
-                    else
-                        say(t, "You haven't beaten me yet!");
+                    switch (flavorHostility() / 33) {
+                        case 0: say(t, "You haven't beaten me yet!"); break;
+                        case 1: say(t, "I don't need your forgiveness!"); break;
+                        default: say(t, "I do this because I want to!");
+                    }
                 }
                 say(t, "\"");
             } else
@@ -18139,13 +17571,11 @@ public class Forsaken
                 if(c.getMorality() > 66)
                 {
                     Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.FOCUS);
-                    if(flavorHostility() > 66)
-                        c.say(t, "I can't let you hurt anyone else.");
-                    else
-                    if(flavorHostility() > 33)
-                        c.say(t, "This is what you wanted, right?");
-                    else
-                        c.say(t, "I won't run anymore.");
+                    switch (flavorHostility() / 33) {
+                        case 0: c.say(t, "I won't run anymore."); break;
+                        case 1: c.say(t, "This is what you wanted, right?"); break;
+                        default: c.say(t, "I can't let you hurt anyone else.");
+                    }
                     c.say(t, "\"\n\n");
                     say(t, "\"");
                     if(flavorDeviancy() > 66)
@@ -18310,13 +17740,11 @@ public class Forsaken
                             say(t, "\"\n\n");
                             c.say(t, "\"");
                             Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                            if(flavorDeviancy() > 66)
-                                c.say(t, "Brainless slut!  Ride this!");
-                            else
-                            if(flavorDeviancy() > 33)
-                                c.say(t, "You smug piece of shit!");
-                            else
-                                c.say(t, "I'm putting you out of your misery right now!");
+                            switch (flavorDeviancy() / 33) {
+                                case 0: c.say(t, "I'm putting you out of your misery right now!"); break;
+                                case 1: c.say(t, "You smug piece of shit!"); break;
+                                default: c.say(t, "Brainless slut!  Ride this!");
+                            }
                         }
                         c.say(t, "\"");
                     } else
@@ -18365,13 +17793,11 @@ public class Forsaken
                         if(c.getInnocence() > 66)
                         {
                             Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.JOY);
-                            if(flavorDeviancy() > 66)
-                                say(t, "By the way, I'm watching you through the cameras while I masturbate.");
-                            else
-                            if(flavorDeviancy() > 33)
-                                say(t, "This camera has a really good view.");
-                            else
-                                say(t, c.HeShe() + "'s too stupid to even keep track of " + c.hisHer() + " enemy!");
+                            switch (flavorDeviancy() / 33) {
+                                case 0: say(t, c.HeShe() + "'s too stupid to even keep track of " + c.hisHer() + " enemy!"); break;
+                                case 1: say(t, "This camera has a really good view."); break;
+                                default: say(t, "By the way, I'm watching you through the cameras while I masturbate.");
+                            }
                             say(t, "\"\n\n");
                             c.say(t, "\"");
                             if(disgrace > 66)
@@ -18400,13 +17826,11 @@ public class Forsaken
                             say(t, "\"\n\n");
                             c.say(t, "\"");
                             Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
-                            if(flavorDeviancy() > 66)
-                                c.say(t, "You're disgusting!");
-                            else
-                            if(flavorDeviancy() > 33)
-                                c.say(t, "Laugh while you can!");
-                            else
-                                c.say(t, "Just shut up!");
+                            switch (flavorDeviancy() / 33) {
+                                case 0: c.say(t, "Just shut up!"); break;
+                                case 1: c.say(t, "Laugh while you can!"); break;
+                                default: c.say(t, "You're disgusting!");
+                            }
                         } else
                         {
                             Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.FOCUS);
@@ -18471,13 +17895,11 @@ public class Forsaken
                         if(c.getDignity() > 66)
                         {
                             Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                            if(flavorDeviancy() > 66)
-                                c.say(t, "Excuse me!");
-                            else
-                            if(flavorDeviancy() > 33)
-                                c.say(t, "I didn't give you permission to look!");
-                            else
-                                c.say(t, "You could have warned me earlier!");
+                            switch (flavorDeviancy() / 33) {
+                                case 0: c.say(t, "You could have warned me earlier!"); break;
+                                case 1: c.say(t, "I didn't give you permission to look!"); break;
+                                default: c.say(t, "Excuse me!");
+                            }
                             c.say(t, "\"\n\n");
                             say(t, "\"");
                             Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.SHAME);
@@ -18490,13 +17912,11 @@ public class Forsaken
                         if(c.getDignity() > 33)
                         {
                             Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                            if(flavorObedience() > 66)
-                                c.say(t, "That must have been what " + heShe() + " was after all along...!");
-                            else
-                            if(flavorObedience() > 33)
-                                c.say(t, "So the Demon Lord ordered you to strip me?");
-                            else
-                                c.say(t, "This is your fault!");
+                            switch (flavorObedience() / 33) {
+                                case 0: c.say(t, "This is your fault!"); break;
+                                case 1: c.say(t, "So the Demon Lord ordered you to strip me?"); break;
+                                default: c.say(t, "That must have been what " + heShe() + " was after all along...!");
+                            }
                             c.say(t, "\"\n\n");
                             say(t, "\"");
                             if(flavorDeviancy() > 66)
@@ -18524,13 +17944,11 @@ public class Forsaken
                             c.say(t, "\"\n\n");
                             say(t, "\"");
                             Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
-                            if(flavorObedience() > 66)
-                                say(t, "Yes, yes, let everyone see...");
-                            else
-                            if(flavorObedience() > 33)
-                                say(t, "Mission accomplished.");
-                            else
-                                say(t, "Hey!  Don't you know what happens when people see you as weak!?");
+                            switch (flavorObedience() / 33) {
+                                case 0: say(t, "Hey!  Don't you know what happens when people see you as weak!?"); break;
+                                case 1: say(t, "Mission accomplished."); break;
+                                default: say(t, "Yes, yes, let everyone see...");
+                            }
                         }
                         say(t, "\"");
                     }
@@ -18583,13 +18001,11 @@ public class Forsaken
                     if(c.getInnocence() > 66)
                     {
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                        if(flavorDeviancy() > 66)
-                            c.say(t, "Stay away from me, you freak!");
-                        else
-                        if(flavorDeviancy() > 33)
-                            c.say(t, "Stop messing with my body!");
-                        else
-                            c.say(t, "S-Stop saying those things!");
+                        switch (flavorDeviancy() / 33) {
+                            case 0: c.say(t, "S-Stop saying those things!"); break;
+                            case 1: c.say(t, "Stop messing with my body!"); break;
+                            default: c.say(t, "Stay away from me, you freak!");
+                        }
                         c.say(t, "\"\n\n");
                         say(t, "\"");
                         Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.FOCUS);
@@ -18602,13 +18018,11 @@ public class Forsaken
                     if(c.getInnocence() > 33)
                     {
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
-                        if(flavorObedience() > 66)
-                            c.say(t, "It's even worse than what I feel from the Demons...");
-                        else
-                        if(flavorObedience() > 33)
-                            c.say(t, "This is what the Demons have done to " + himHer() + "...");
-                        else
-                            c.say(t, "I think... the Demon Lord is actually holding " + himHer() + " back...");
+                        switch (flavorObedience() / 33) {
+                            case 0: c.say(t, "I think... the Demon Lord is actually holding " + himHer() + " back..."); break;
+                            case 1: c.say(t, "This is what the Demons have done to " + himHer() + "..."); break;
+                            default: c.say(t, "It's even worse than what I feel from the Demons...");
+                        }
                         c.say(t, "\"\n\n");
                         say(t, "\"");
                         Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
@@ -18686,13 +18100,11 @@ public class Forsaken
                     if(c.getConfidence() > 66)
                     {
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.FOCUS);
-                        if(flavorDeviancy() > 66)
-                            c.say(t, "Ugh!  I'm shutting that disgusting mouth of yours right now!");
-                        else
-                        if(flavorDeviancy() > 33)
-                            c.say(t, "You don't have time to think about all that!");
-                        else
-                            c.say(t, "We'll see how smug you are after this!");
+                        switch (flavorDeviancy() / 33) {
+                            case 0: c.say(t, "We'll see how smug you are after this!"); break;
+                            case 1: c.say(t, "You don't have time to think about all that!"); break;
+                            default: c.say(t, "Ugh!  I'm shutting that disgusting mouth of yours right now!");
+                        }
                         c.say(t, "\"\n\n");
                         say(t, "\"");
                         Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
@@ -19130,23 +18542,19 @@ public class Forsaken
                     if(c.getInnocence() > 33)
                     {
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
-                        if(flavorHostility() > 66)
-                            c.say(t, "There's no way " + heShe() + " can keep this up forever, right?");
-                        else
-                        if(flavorHostility() > 33)
-                            c.say(t, "Ow!");
-                        else
-                            c.say(t, "Close one...!");
+                        switch (flavorHostility() / 33) {
+                            case 0: c.say(t, "Close one...!"); break;
+                            case 1: c.say(t, "Ow!"); break;
+                            default: c.say(t, "There's no way " + heShe() + " can keep this up forever, right?");
+                        }
                         c.say(t, "\"\n\n");
                         say(t, "\"");
                         Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.ANGER);
-                        if(flavorObedience() > 66)
-                            say(t, "For " + theDemonLord() + "!");
-                        else
-                        if(flavorObedience() > 33)
-                            say(t, "What a pain!");
-                        else
-                            say(t, "I'll take you down with this!");
+                        switch (flavorObedience() / 33) {
+                            case 0: say(t, "I'll take you down with this!"); break;
+                            case 1: say(t, "What a pain!"); break;
+                            default: say(t, "For " + theDemonLord() + "!");
+                        }
                     } else
                     {
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
@@ -19260,13 +18668,11 @@ public class Forsaken
                     say(t, "\"\n\n");
                     c.say(t, "\"");
                     Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                    if(flavorDeviancy() > 66)
-                        c.say(t, "You're completely twisted!");
-                    else
-                    if(flavorDeviancy() > 33)
-                        c.say(t, "Stop moving around so much!");
-                    else
-                        c.say(t, "Guh!");
+                    switch (flavorDeviancy() / 33) {
+                        case 0: c.say(t, "Guh!"); break;
+                        case 1: c.say(t, "Stop moving around so much!"); break;
+                        default: c.say(t, "You're completely twisted!");
+                    }
                 } else
                 {
                     Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
@@ -19344,24 +18750,20 @@ public class Forsaken
                     say(t, "\"\n\n");
                     c.say(t, "\"");
                     Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
-                    if(flavorHostility() > 66)
-                        c.say(t, "Ow!  Stop!");
-                    else
-                    if(flavorHostility() > 33)
-                        c.say(t, "Leave me alone!");
-                    else
-                        c.say(t, "You're crazy!");
+                    switch (flavorHostility() / 33) {
+                        case 0: c.say(t, "You're crazy!"); break;
+                        case 1: c.say(t, "Leave me alone!"); break;
+                        default: c.say(t, "Ow!  Stop!");
+                    }
                 } else
                 if(c.getInnocence() > 33)
                 {
                     Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.STRUGGLE);
-                    if(flavorObedience() > 66)
-                        say(t, "Watch me...!");
-                    else
-                    if(flavorObedience() > 33)
-                        say(t, "I have no choice...!");
-                    else
-                        say(t, "I've got you!");
+                    switch (flavorObedience() / 33) {
+                        case 0: say(t, "I've got you!"); break;
+                        case 1: say(t, "I have no choice...!"); break;
+                        default: say(t, "Watch me...!");
+                    }
                     say(t, "\"\n\n");
                     c.say(t, "\"");
                     Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.ANGER);
@@ -19484,13 +18886,11 @@ public class Forsaken
                     c.say(t, "\"\n\n");
                     say(t, "\"");
                     Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
-                    if(flavorDeviancy() > 66)
-                        say(t, "It's like you're on display for me...");
-                    else
-                    if(flavorDeviancy() > 33)
-                        say(t, "Should we spread your legs, too?");
-                    else
-                        say(t, "You can't move, can you?");
+                    switch (flavorDeviancy() / 33) {
+                        case 0: say(t, "You can't move, can you?"); break;
+                        case 1: say(t, "Should we spread your legs, too?"); break;
+                        default: say(t, "It's like you're on display for me...");
+                    }
                 } else
                 {
                     if(confidence > 66)
@@ -19510,13 +18910,11 @@ public class Forsaken
                     c.say(t, "\"\n\n");
                     say(t, "\"");
                     Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.FOCUS);
-                    if(flavorObedience() > 66)
-                        say(t, "If you just insulted me, I might have forgiven you.  But now... I think you need to learn some respect.");
-                    else
-                    if(flavorObedience() > 33)
-                        say(t, "We'll see who the coward is.  How long until you start begging for mercy?");
-                    else
-                        say(t, "I don't take that sort of thing from the Demon Lord, and I'm definitely not taking it from you.");
+                    switch (flavorObedience() / 33) {
+                        case 0: say(t, "I don't take that sort of thing from the Demon Lord, and I'm definitely not taking it from you."); break;
+                        case 1: say(t, "We'll see who the coward is.  How long until you start begging for mercy?"); break;
+                        default: say(t, "If you just insulted me, I might have forgiven you.  But now... I think you need to learn some respect.");
+                    }
                 }
                 say(t, "\"");
             }
@@ -19690,13 +19088,11 @@ public class Forsaken
                         if(c.getConfidence() > 66)
                         {
                             Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.FOCUS);
-                            if(flavorObedience() > 66)
-                                c.say(t, "Did you go running back to your precious Demon Lord!");
-                            else
-                            if(flavorObedience() > 33)
-                                c.say(t, "Don't tell me you're finally getting out of the way so I can kill the Demon Lord!");
-                            else
-                                c.say(t, "Come on, your enemy is right here!");
+                            switch (flavorObedience() / 33) {
+                                case 0: c.say(t, "Come on, your enemy is right here!"); break;
+                                case 1: c.say(t, "Don't tell me you're finally getting out of the way so I can kill the Demon Lord!"); break;
+                                default: c.say(t, "Did you go running back to your precious Demon Lord!");
+                            }
                             c.say(t, "\"\n\n");
                             say(t, "\"");
                             Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
@@ -19798,13 +19194,11 @@ public class Forsaken
                         if(c.getInnocence() > 66)
                         {
                             Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                            if(flavorDeviancy() > 66)
-                                c.say(t, "You're looking at me all pervy again!");
-                            else
-                            if(flavorDeviancy() > 33)
-                                c.say(t, "You're smirking!  You're definitely smirking!");
-                            else
-                                c.say(t, "That was your fault!");
+                            switch (flavorDeviancy() / 33) {
+                                case 0: c.say(t, "That was your fault!"); break;
+                                case 1: c.say(t, "You're smirking!  You're definitely smirking!"); break;
+                                default: c.say(t, "You're looking at me all pervy again!");
+                            }
                             c.say(t, "\"\n\n");
                             say(t, "\"");
                             Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
@@ -19817,13 +19211,11 @@ public class Forsaken
                         if(c.getInnocence() > 33)
                         {
                             Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                            if(flavorObedience() > 66)
-                                c.say(t, "Ow!  Are you that eager for round 2?");
-                            else
-                            if(flavorObedience() > 33)
-                                c.say(t, "Gah!  What was that for!?");
-                            else
-                                c.say(t, "Hey!  I thought you didn't want to do this!");
+                            switch (flavorObedience() / 33) {
+                                case 0: c.say(t, "Hey!  I thought you didn't want to do this!"); break;
+                                case 1: c.say(t, "Gah!  What was that for!?"); break;
+                                default: c.say(t, "Ow!  Are you that eager for round 2?");
+                            }
                             c.say(t, "\"\n\n");
                             say(t, "\"");
                             if(flavorDeviancy() > 66)
@@ -19851,13 +19243,11 @@ public class Forsaken
                             c.say(t, "\"\n\n");
                             say(t, "\"");
                             Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.STRUGGLE);
-                            if(flavorObedience() > 66)
-                                say(t, "I will recruit you for " + theDemonLord() + "!");
-                            else
-                            if(flavorObedience() > 33)
-                                say(t, "Sorry, but I can't afford to hold back...!");
-                            else
-                                say(t, "This might hurt, but you need to get stronger somehow...!");
+                            switch (flavorObedience() / 33) {
+                                case 0: say(t, "This might hurt, but you need to get stronger somehow...!"); break;
+                                case 1: say(t, "Sorry, but I can't afford to hold back...!"); break;
+                                default: say(t, "I will recruit you for " + theDemonLord() + "!");
+                            }
                         }
                         say(t, "\"");
                     }
@@ -19955,22 +19345,18 @@ public class Forsaken
                     } else
                     {
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.NEUTRAL, Project.Emotion.FOCUS);
-                        if(flavorDeviancy() > 66)
-                            c.say(t, "Either this is some sort of bizarre fetish play, or you're not permitted to kill me.");
-                        else
-                        if(flavorDeviancy() > 33)
-                            c.say(t, "You're enjoying this, but you'd be enjoying it even more if you had permission to kill me, right?");
-                        else
-                            c.say(t, "The thing that enrages you most is that you aren't allowed to kill me.  Am I correct?");
+                        switch (flavorDeviancy() / 33) {
+                            case 0: c.say(t, "The thing that enrages you most is that you aren't allowed to kill me.  Am I correct?"); break;
+                            case 1: c.say(t, "You're enjoying this, but you'd be enjoying it even more if you had permission to kill me, right?"); break;
+                            default: c.say(t, "Either this is some sort of bizarre fetish play, or you're not permitted to kill me.");
+                        }
                         c.say(t, "\"\n\n");
                         Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
-                        if(flavorObedience() > 66)
-                            say(t, "I can only hope that " + theDemonLord() + " will change " + rememberedDemonLordBody.himHer() + " mind...");
-                        else
-                        if(flavorObedience() > 33)
-                            say(t, "Don't push me, or I might decide that the punishment is worth it.");
-                        else
-                            say(t, "Those are the Demon Lord's orders, but I don't really care.  I just want to make you suffer more first.");
+                        switch (flavorObedience() / 33) {
+                            case 0: say(t, "Those are the Demon Lord's orders, but I don't really care.  I just want to make you suffer more first."); break;
+                            case 1: say(t, "Don't push me, or I might decide that the punishment is worth it."); break;
+                            default: say(t, "I can only hope that " + theDemonLord() + " will change " + rememberedDemonLordBody.himHer() + " mind...");
+                        }
                     }
                     say(t, "\"");
                 } else
@@ -20029,13 +19415,11 @@ public class Forsaken
                         say(t, "\"\n\n");
                         c.say(t, "\"");
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FOCUS, Project.Emotion.ANGER);
-                        if(flavorDeviancy() > 66)
-                            c.say(t, "You'd like that, wouldn't you?");
-                        else
-                        if(flavorDeviancy() > 33)
-                            c.say(t, "You won't be able to keep enjoying this for long!");
-                        else
-                            c.say(t, "I will defeat you!");
+                        switch (flavorDeviancy() / 33) {
+                            case 0: c.say(t, "I will defeat you!"); break;
+                            case 1: c.say(t, "You won't be able to keep enjoying this for long!"); break;
+                            default: c.say(t, "You'd like that, wouldn't you?");
+                        }
                     } else
                     if(c.getConfidence() > 33)
                     {
@@ -20121,13 +19505,11 @@ public class Forsaken
                     if(c.getMorality() > 66)
                     {
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                        if(flavorObedience() > 66)
-                            c.say(t, "How could you do that to them!?");
-                        else
-                        if(flavorObedience() > 33)
-                            c.say(t, "You're exchanging your safety for their lives!");
-                        else
-                            c.say(t, "You're in no position to talk about that!");
+                        switch (flavorObedience() / 33) {
+                            case 0: c.say(t, "You're in no position to talk about that!"); break;
+                            case 1: c.say(t, "You're exchanging your safety for their lives!"); break;
+                            default: c.say(t, "How could you do that to them!?");
+                        }
                         c.say(t, "\"\n\n");
                         say(t, "\"");
                         Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
@@ -20140,13 +19522,11 @@ public class Forsaken
                     if(c.getMorality() > 33)
                     {
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                        if(flavorDeviancy() > 66)
-                            c.say(t, "That's disgusting!");
-                        else
-                        if(flavorDeviancy() > 33)
-                            c.say(t, "Stop talking about my body!");
-                        else
-                            c.say(t, "Keep your comments to yourself!");
+                        switch (flavorDeviancy() / 33) {
+                            case 0: c.say(t, "Keep your comments to yourself!"); break;
+                            case 1: c.say(t, "Stop talking about my body!"); break;
+                            default: c.say(t, "That's disgusting!");
+                        }
                         c.say(t, "\"\n\n");
                         say(t, "\"");
                         Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.SHAME);
@@ -20284,13 +19664,11 @@ public class Forsaken
                     } else
                     {
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
-                        if(flavorHostility() > 66)
-                            c.say(t, "Surprised " + heShe() + " isn't killing any of them.");
-                        else
-                        if(flavorHostility() > 33)
-                            c.say(t, HeShe() + " seems to be enjoying this.");
-                        else
-                            c.say(t, "Not my problem.");
+                        switch (flavorHostility() / 33) {
+                            case 0: c.say(t, "Not my problem."); break;
+                            case 1: c.say(t, HeShe() + " seems to be enjoying this."); break;
+                            default: c.say(t, "Surprised " + heShe() + " isn't killing any of them.");
+                        }
                         c.say(t, "\"\n\n");
                         say(t, "\"");
                         Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.NEUTRAL);
@@ -20395,13 +19773,11 @@ public class Forsaken
                     } else
                     {
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
-                        if(flavorHostility() > 66)
-                            c.say(t, "Why do you keep hurting me!?");
-                        else
-                        if(flavorHostility() > 33)
-                            c.say(t, "Ah!  Stop!");
-                        else
-                            c.say(t, "Please, tell them to let me go!");
+                        switch (flavorHostility() / 33) {
+                            case 0: c.say(t, "Please, tell them to let me go!"); break;
+                            case 1: c.say(t, "Ah!  Stop!"); break;
+                            default: c.say(t, "Why do you keep hurting me!?");
+                        }
                         c.say(t, "\"\n\n");
                         say(t, "\"");
                         if(flavorDeviancy() > 66)
@@ -20474,44 +19850,36 @@ public class Forsaken
                         c.say(t, "\"\n\n");
                         say(t, "\"");
                         Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                        if(flavorDeviancy() > 66)
-                            say(t, "I had the PERFECT scene set up!  And that Demon RUINED it!");
-                        else
-                        if(flavorDeviancy() > 33)
-                            say(t, "I just want to keep you all to myself!");
-                        else
-                            say(t, "I hate the Demons most of all.");
+                        switch (flavorDeviancy() / 33) {
+                            case 0: say(t, "I hate the Demons most of all."); break;
+                            case 1: say(t, "I just want to keep you all to myself!"); break;
+                            default: say(t, "I had the PERFECT scene set up!  And that Demon RUINED it!");
+                        }
                     } else
                     if(c.getInnocence() > 33)
                     {
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
-                        if(flavorDeviancy() > 66)
-                            c.say(t, "You really are obsessed with me, aren't you?");
-                        else
-                        if(flavorDeviancy() > 33)
-                            c.say(t, "So, I guess you've really fallen for me.");
-                        else
-                            c.say(t, "You hate the Demons that much?");
+                        switch (flavorDeviancy() / 33) {
+                            case 0: c.say(t, "You hate the Demons that much?"); break;
+                            case 1: c.say(t, "So, I guess you've really fallen for me."); break;
+                            default: c.say(t, "You really are obsessed with me, aren't you?");
+                        }
                         c.say(t, "\"\n\n");
                         say(t, "\"");
                         Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
-                        if(flavorHostility() > 66)
-                            say(t, "I'm going to be the one who kills you, " + c.getMainName() + ".  No one else.");
-                        else
-                        if(flavorHostility() > 33)
-                            say(t, "That's right.");
-                        else
-                            say(t, "I'm not on the Demons' side in the first place.");
+                        switch (flavorHostility() / 33) {
+                            case 0: say(t, "I'm not on the Demons' side in the first place."); break;
+                            case 1: say(t, "That's right."); break;
+                            default: say(t, "I'm going to be the one who kills you, " + c.getMainName() + ".  No one else.");
+                        }
                     } else
                     {
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
-                        if(flavorHostility() > 66)
-                            c.say(t, "You even refuse their help.");
-                        else
-                        if(flavorHostility() > 33)
-                            c.say(t, "You're sabotaging your supposed allies.");
-                        else
-                            c.say(t, "I see.  You want to deny the Demon Lord the additional resources.");
+                        switch (flavorHostility() / 33) {
+                            case 0: c.say(t, "I see.  You want to deny the Demon Lord the additional resources."); break;
+                            case 1: c.say(t, "You're sabotaging your supposed allies."); break;
+                            default: c.say(t, "You even refuse their help.");
+                        }
                         c.say(t, "\"\n\n");
                         say(t, "\"");
                         Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.NEUTRAL);
@@ -20709,13 +20077,11 @@ public class Forsaken
                     say(t, "\"\n\n");
                     c.say(t, "\"");
                     Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FOCUS, Project.Emotion.JOY);
-                    if(flavorObedience() > 66)
-                        c.say(t, "Heh.  Trying to get me to join you?");
-                    else
-                    if(flavorObedience() > 33)
-                        c.say(t, "Don't worry.  I'll save you, too, when I kill the Demon Lord.");
-                    else
-                        c.say(t, "Then you know I have what it takes to beat the Demon Lord.");
+                    switch (flavorObedience() / 33) {
+                        case 0: c.say(t, "Then you know I have what it takes to beat the Demon Lord."); break;
+                        case 1: c.say(t, "Don't worry.  I'll save you, too, when I kill the Demon Lord."); break;
+                        default: c.say(t, "Heh.  Trying to get me to join you?");
+                    }
                 } else
                 if(c.getConfidence() > 33)
                 {
@@ -20752,13 +20118,11 @@ public class Forsaken
                     say(t, "\"\n\n");
                     c.say(t, "\"");
                     Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
-                    if(flavorHostility() > 66)
-                        c.say(t, "Even though I know you want to kill me...");
-                    else
-                    if(flavorHostility() > 33)
-                        c.say(t, "You're holding back...");
-                    else
-                        c.say(t, "You don't hate me at all...");
+                    switch (flavorHostility() / 33) {
+                        case 0: c.say(t, "You don't hate me at all..."); break;
+                        case 1: c.say(t, "You're holding back..."); break;
+                        default: c.say(t, "Even though I know you want to kill me...");
+                    }
                 }
                 c.say(t, "\"");
             } else
@@ -20818,13 +20182,11 @@ public class Forsaken
                     say(t, "\"\n\n");
                     c.say(t, "\"");
                     Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.NEUTRAL, Project.Emotion.SHAME);
-                    if(flavorHostility() > 66)
-                        c.say(t, "Aren't you supposed to be super evil or something?");
-                    else
-                    if(flavorHostility() > 33)
-                        c.say(t, "Are you really having fun?");
-                    else
-                        c.say(t, "You don't really seem like a bad guy...");
+                    switch (flavorHostility() / 33) {
+                        case 0: c.say(t, "You don't really seem like a bad guy..."); break;
+                        case 1: c.say(t, "Are you really having fun?"); break;
+                        default: c.say(t, "Aren't you supposed to be super evil or something?");
+                    }
                 } else
                 if(c.getInnocence() > 33)
                 {
@@ -20845,23 +20207,19 @@ public class Forsaken
                     say(t, "\"\n\n");
                     c.say(t, "\"");
                     Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.NEUTRAL, Project.Emotion.SHAME);
-                    if(flavorObedience() > 66)
-                        c.say(t, "For the Demon Lord's sake, you mean?");
-                    else
-                    if(flavorObedience() > 33)
-                        c.say(t, "The Demon Lord isn't giving you any choice...");
-                    else
-                        c.say(t, "Why?");
+                    switch (flavorObedience() / 33) {
+                        case 0: c.say(t, "Why?"); break;
+                        case 1: c.say(t, "The Demon Lord isn't giving you any choice..."); break;
+                        default: c.say(t, "For the Demon Lord's sake, you mean?");
+                    }
                 } else
                 {
                     Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.SHAME);
-                    if(flavorObedience() > 66)
-                        say(t, "The things I do for " + theDemonLord() + "...");
-                    else
-                    if(flavorObedience() > 33)
-                        say(t, "If I don't do this...");
-                    else
-                        say(t, "You understand, right?");
+                    switch (flavorObedience() / 33) {
+                        case 0: say(t, "You understand, right?"); break;
+                        case 1: say(t, "If I don't do this..."); break;
+                        default: say(t, "The things I do for " + theDemonLord() + "...");
+                    }
                     say(t, "\"\n\n");
                     c.say(t, "\"");
                     Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.NEUTRAL, Project.Emotion.SHAME);
@@ -21303,13 +20661,11 @@ public class Forsaken
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                         say(t, "\"\n\n");
                         c.say(t, "\"");
-                        if(c.innocence > 66)
-                            c.say(t, "No... fair...!");
-                        else
-                        if(c.innocence > 33)
-                            c.say(t, "Wait!  Aaah!");
-                        else
-                            c.say(t, "Gah!  How could let " + himHer() + " trick me...?");
+                        switch (c.innocence / 33) {
+                            case 0: c.say(t, "Gah!  How could let " + himHer() + " trick me...?"); break;
+                            case 1: c.say(t, "Wait!  Aaah!"); break;
+                            default: c.say(t, "No... fair...!");
+                        }
                         c.say(t, "\"");
                     } else
                     if(disgrace > 33)
@@ -21422,13 +20778,11 @@ public class Forsaken
                 if(deviancy > 66)
                 {
                     c.say(t, "\"");
-                    if(c.innocence > 66)
-                        c.say(t, "Wh-What!?");
-                    else
-                    if(c.innocence > 33)
-                        c.say(t, HeShe() + "'s not stopping!?");
-                    else
-                        c.say(t, "I need to-");
+                    switch (c.innocence / 33) {
+                        case 0: c.say(t, "I need to-"); break;
+                        case 1: c.say(t, HeShe() + "'s not stopping!?"); break;
+                        default: c.say(t, "Wh-What!?");
+                    }
                     Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                     c.say(t, "\"\n\n");
                     say(t, "\"");
@@ -21577,13 +20931,11 @@ public class Forsaken
                     if(c.dignity > 66)
                     {
                         say(t, "\"");
-                        if(flavorHostility() > 66)
-                            say(t, "Everyone can watch me rape you!");
-                        else
-                        if(flavorHostility() > 33)
-                            say(t, "You tighten up when you're embarrassed, I can tell.");
-                        else
-                            say(t, "Everyone should enjoy seeing this.");
+                        switch (flavorHostility() / 33) {
+                            case 0: say(t, "Everyone should enjoy seeing this."); break;
+                            case 1: say(t, "You tighten up when you're embarrassed, I can tell."); break;
+                            default: say(t, "Everyone can watch me rape you!");
+                        }
                         Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
                         say(t, "\"\n\n");
                         c.say(t, "\"");
@@ -21606,13 +20958,11 @@ public class Forsaken
                     if(c.dignity > 33)
                     {
                         c.say(t, "\"");
-                        if(c.innocence > 66)
-                            c.say(t, "No!  Stop it, stop it, stop it!");
-                        else
-                        if(c.innocence > 33)
-                            c.say(t, "Stop being so... smug...!");
-                        else
-                            c.say(t, "Ngh!  This is... unncessary...!");
+                        switch (c.innocence / 33) {
+                            case 0: c.say(t, "Ngh!  This is... unncessary...!"); break;
+                            case 1: c.say(t, "Stop being so... smug...!"); break;
+                            default: c.say(t, "No!  Stop it, stop it, stop it!");
+                        }
                         c.say(t, "\"\n\n");
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                         say(t, "\"");
@@ -21647,13 +20997,11 @@ public class Forsaken
                         Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                         say(t, "\"\n\n");
                         c.say(t, "\"");
-                        if(c.innocence > 66)
-                            c.say(t, "Just shut up!");
-                        else
-                        if(c.innocence > 33)
-                            c.say(t, "I only care about getting you out of me!");
-                        else
-                            c.say(t, "Of course I'm aware of the tactical considerations and the effects on the psychic energy I receive, but that's no reason to become flustered!");
+                        switch (c.innocence / 33) {
+                            case 0: c.say(t, "Of course I'm aware of the tactical considerations and the effects on the psychic energy I receive, but that's no reason to become flustered!"); break;
+                            case 1: c.say(t, "I only care about getting you out of me!"); break;
+                            default: c.say(t, "Just shut up!");
+                        }
                         c.say(t, "\"");
                     }
                 } else
@@ -21669,47 +21017,39 @@ public class Forsaken
                     Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.ANGER);
                     Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
                     say(t, "\"");
-                    if(flavorDeviancy() > 66)
-                        say(t, "I'm not letting you go... until I cum a few more times...");
-                    else
-                    if(flavorDeviancy() > 33)
-                        say(t, "It's hard to stay focused while I'm inside someone so sexy...");
-                    else
-                        say(t, "I can't get distracted...");
+                    switch (flavorDeviancy() / 33) {
+                        case 0: say(t, "I can't get distracted..."); break;
+                        case 1: say(t, "It's hard to stay focused while I'm inside someone so sexy..."); break;
+                        default: say(t, "I'm not letting you go... until I cum a few more times...");
+                    }
                     say(t, "\"");
                 } else
                 if(c.confidence > 33)
                 {
                     say(t, "\"");
-                    if(flavorDeviancy() > 66)
-                        say(t, "Aaah!  " + c.mainName + "!  I'm cumming agaiiin!");
-                    else
-                    if(flavorDeviancy() > 33)
-                        say(t, "I could really get... nnnh... used to this...");
-                    else
-                        say(t, "I won't!  Ngh!  Let you escape!  Ngh!");
+                    switch (flavorDeviancy() / 33) {
+                        case 0: say(t, "I won't!  Ngh!  Let you escape!  Ngh!"); break;
+                        case 1: say(t, "I could really get... nnnh... used to this..."); break;
+                        default: say(t, "Aaah!  " + c.mainName + "!  I'm cumming agaiiin!");
+                    }
                     say(t, "\"\n\n");
                     Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.LEWD);
                     Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
                     c.say(t, "\"");
-                    if(c.innocence > 66)
-                        c.say(t, "Pull out!  Pull ooout!");
-                    else
-                    if(c.innocence > 33)
-                        c.say(t, HeShe() + "'s crazy...!");
-                    else
-                        c.say(t, "Need to... conserve my strength...");
+                    switch (c.innocence / 33) {
+                        case 0: c.say(t, "Need to... conserve my strength..."); break;
+                        case 1: c.say(t, HeShe() + "'s crazy...!"); break;
+                        default: c.say(t, "Pull out!  Pull ooout!");
+                    }
                     c.say(t, "\"");
                 } else
                 {
                     c.say(t, "\"");
-                    if(c.dignity > 66)
-                        c.say(t, "I-I'm... f-fine... waaah!");
-                    else
-                    if(c.dignity > 33)
-                        c.say(t, "Aah!  Ngh!  Naaah!  D-Don't!");
-                    else
-                        c.say(t, "Please!  P-Please, stooop!");
+                    switch (c.dignity / 33) {
+                        case 0: c.say(t, "Please!  P-Please, stooop!"); break;
+                        case 1: c.say(t, "Aah!  Ngh!  Naaah!  D-Don't!"); break;
+                        default: c.say(t, "I-I'm... f-fine... waaah!");
+                    }
                     c.say(t, "\"\n\n");
                     Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
                     say(t, "\"");
@@ -21736,13 +21076,11 @@ public class Forsaken
                     if(c.dignity > 66)
                     {
                         c.say(t, "\"");
-                        if(c.confidence > 66)
-                            c.say(t, "A-As if... this would be enough to break me...!");
-                        else
-                        if(c.confidence > 33)
-                            c.say(t, "I won't... scream...!");
-                        else
-                            c.say(t, "N-Need to... act strong...");
+                        switch (c.confidence / 33) {
+                            case 0: c.say(t, "N-Need to... act strong..."); break;
+                            case 1: c.say(t, "I won't... scream...!"); break;
+                            default: c.say(t, "A-As if... this would be enough to break me...!");
+                        }
                         c.say(t, "\"\n\n");
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.FEAR);
                         say(t, "\"");
@@ -21782,35 +21120,29 @@ public class Forsaken
                         say(t, "\"\n\n");
                         c.say(t, "\"");
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.FEAR);
-                        if(c.confidence > 66)
-                            c.say(t, "I won't... break... nn!");
-                        else
-                        if(c.confidence > 33)
-                            c.say(t, "Have to... hold on...!");
-                        else
-                            c.say(t, "Aaah!  I can't... I can't... n-nooo!");
+                        switch (c.confidence / 33) {
+                            case 0: c.say(t, "Aaah!  I can't... I can't... n-nooo!"); break;
+                            case 1: c.say(t, "Have to... hold on...!"); break;
+                            default: c.say(t, "I won't... break... nn!");
+                        }
                         c.say(t, "\"");
                     } else
                     {
                         say(t, "\"");
-                        if(flavorDeviancy() > 66)
-                            say(t, c.mainName + "...!  T-Together...!");
-                        else
-                        if(flavorDeviancy() > 33)
-                            say(t, "You're... too... sexy...!");
-                        else
-                            say(t, "Is " + c.heShe() + "... corrupting me instead...?");
+                        switch (flavorDeviancy() / 33) {
+                            case 0: say(t, "Is " + c.heShe() + "... corrupting me instead...?"); break;
+                            case 1: say(t, "You're... too... sexy...!"); break;
+                            default: say(t, c.mainName + "...!  T-Together...!");
+                        }
                         say(t, "\"\n\n");
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
                         Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.FOCUS);
                         c.say(t, "\"");
-                        if(c.confidence > 66)
-                            c.say(t, "Harder!  If you're going to do this, then do it harder!");
-                        else
-                        if(c.confidence > 33)
-                            c.say(t, "Aaah!  Nnnaaah!  Wooow!");
-                        else
-                            c.say(t, "Ah!  Ah!  Ah!  S-Something's comiiing!");
+                        switch (c.confidence / 33) {
+                            case 0: c.say(t, "Ah!  Ah!  Ah!  S-Something's comiiing!"); break;
+                            case 1: c.say(t, "Aaah!  Nnnaaah!  Wooow!"); break;
+                            default: c.say(t, "Harder!  If you're going to do this, then do it harder!");
+                        }
                         c.say(t, "\"");
                     }
                 } else
@@ -21834,25 +21166,21 @@ public class Forsaken
                     say(t, "\"\n\n");
                     c.say(t, "\"");
                     Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.SHAME);
-                    if(c.dignity > 66)
-                        c.say(t, "I-It's not like I hate you!  I don't... I don't hate anyone!  I just... ngh... hate doing it like this...");
-                    else
-                    if(c.dignity > 33)
-                        c.say(t, "Do I want revenge?  I... I don't know...");
-                    else
-                        c.say(t, "Maybe... people really are all evil deep down inside...");
+                    switch (c.dignity / 33) {
+                        case 0: c.say(t, "Maybe... people really are all evil deep down inside..."); break;
+                        case 1: c.say(t, "Do I want revenge?  I... I don't know..."); break;
+                        default: c.say(t, "I-It's not like I hate you!  I don't... I don't hate anyone!  I just... ngh... hate doing it like this...");
+                    }
                     c.say(t, "\"");
                 } else
                 if(c.morality > 33)
                 {
                     c.say(t, "\"");
-                    if(c.dignity > 66)
-                        c.say(t, "Ngh!  I... I can take this...!");
-                    else
-                    if(c.dignity > 33)
-                        c.say(t, "Guh!  Ugh...");
-                    else
-                        c.say(t, "Ow!  It hurts!");
+                    switch (c.dignity / 33) {
+                        case 0: c.say(t, "Ow!  It hurts!"); break;
+                        case 1: c.say(t, "Guh!  Ugh..."); break;
+                        default: c.say(t, "Ngh!  I... I can take this...!");
+                    }
                     c.say(t, "\"\n\n");
                     Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.FEAR);
                     say(t, "\"");
@@ -21874,13 +21202,11 @@ public class Forsaken
                 } else
                 {
                     c.say(t, "\"");
-                    if(flavorObedience() > 66)
-                        c.say(t, "The Demon Lord is worthless if he has to rely on trash like you!");
-                    else
-                    if(flavorObedience() > 33)
-                        c.say(t, "You're only obeying the Demon Lord because you're afraid!  You can't even fight for yourself!");
-                    else
-                        c.say(t, "You secretly love the Demon Lord, don't you?  You're just pretending to hate him because you're embarrassed!");
+                    switch (flavorObedience() / 33) {
+                        case 0: c.say(t, "You secretly love the Demon Lord, don't you?  You're just pretending to hate him because you're embarrassed!"); break;
+                        case 1: c.say(t, "You're only obeying the Demon Lord because you're afraid!  You can't even fight for yourself!"); break;
+                        default: c.say(t, "The Demon Lord is worthless if he has to rely on trash like you!");
+                    }
                     c.say(t, "\"\n\n");
                     Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.FOCUS);
                     Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
@@ -22013,32 +21339,26 @@ public class Forsaken
                 c.say(t, "\"");
                 if(c.innocence > 66)
                 {
-                    if(c.confidence > 66)
-                        c.say(t, "Ah, aaah, I'm feeling good agaiiin!");
-                    else
-                    if(c.confidence > 33)
-                        c.say(t, "No!  No!  I don't wanna feel goood, nnnaaah!");
-                    else
-                        c.say(t, "P-Please, dooon't!  I'm feeling weeeird!");
+                    switch (c.confidence / 33) {
+                        case 0: c.say(t, "P-Please, dooon't!  I'm feeling weeeird!"); break;
+                        case 1: c.say(t, "No!  No!  I don't wanna feel goood, nnnaaah!"); break;
+                        default: c.say(t, "Ah, aaah, I'm feeling good agaiiin!");
+                    }
                     c.say(t, "\"\n\n");
                     say(t, "\"");
-                    if(flavorDeviancy() > 66)
-                        say(t, "Mm, I'm going to make you go crazy, too...");
-                    else
-                    if(flavorDeviancy() > 33)
-                        say(t, "You're just too cuuute!");
-                    else
-                        say(t, "Looks like you can't resist anymore.");
+                    switch (flavorDeviancy() / 33) {
+                        case 0: say(t, "Looks like you can't resist anymore."); break;
+                        case 1: say(t, "You're just too cuuute!"); break;
+                        default: say(t, "Mm, I'm going to make you go crazy, too...");
+                    }
                 } else
                 if(c.innocence > 33)
                 {
-                    if(c.confidence > 66)
-                        c.say(t, "Graaah!  I won't...  cuuum...!");
-                    else
-                    if(c.confidence > 33)
-                        c.say(t, "H-Hold on, no, no, nooo!");
-                    else
-                        c.say(t, "N-No!  I can't cum now!  I need to- Mm!  Aaa... Ah!");
+                    switch (c.confidence / 33) {
+                        case 0: c.say(t, "N-No!  I can't cum now!  I need to- Mm!  Aaa... Ah!"); break;
+                        case 1: c.say(t, "H-Hold on, no, no, nooo!"); break;
+                        default: c.say(t, "Graaah!  I won't...  cuuum...!");
+                    }
                     c.say(t, "\"\n\n");
                     say(t, "\"");
                     if(flavorDeviancy() > 66)
@@ -22053,22 +21373,18 @@ public class Forsaken
                         say(t, "Hm, you're pretty perverted.");
                 } else
                 {
-                    if(c.confidence > 66)
-                        c.say(t, "Even if I'm climaxing... ngh...!  I can still resist...!");
-                    else
-                    if(c.confidence > 33)
-                        c.say(t, "Aaah, th-this is, nn, p-pointless!");
-                    else
-                        c.say(t, "Th-This is purely- aah!  Purely a physiological reaction...!");
+                    switch (c.confidence / 33) {
+                        case 0: c.say(t, "Th-This is purely- aah!  Purely a physiological reaction...!"); break;
+                        case 1: c.say(t, "Aaah, th-this is, nn, p-pointless!"); break;
+                        default: c.say(t, "Even if I'm climaxing... ngh...!  I can still resist...!");
+                    }
                     c.say(t, "\"\n\n");
                     say(t, "\"");
-                    if(flavorDeviancy() > 66)
-                        say(t, "The important part is that I love it.");
-                    else
-                    if(flavorDeviancy() > 33)
-                        say(t, "But your body is still being trained to surrender to the pleasure.");
-                    else
-                        say(t, "Well, you a seem a lot weaker now.");
+                    switch (flavorDeviancy() / 33) {
+                        case 0: say(t, "Well, you a seem a lot weaker now."); break;
+                        case 1: say(t, "But your body is still being trained to surrender to the pleasure."); break;
+                        default: say(t, "The important part is that I love it.");
+                    }
                 }
                 say(t, "\"");
             } else
@@ -22080,13 +21396,11 @@ public class Forsaken
                     if(c.dignity > 66)
                     {
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.SHAME);
-                        if(c.innocence > 66)
-                            c.say(t, "Nooo, don't loook!");
-                        else
-                        if(c.innocence > 33)
-                            c.say(t, "Stop, stop!  Anything but that!");
-                        else
-                            c.say(t, "I-Impossible...  Everyone can see my...");
+                        switch (c.innocence / 33) {
+                            case 0: c.say(t, "I-Impossible...  Everyone can see my..."); break;
+                            case 1: c.say(t, "Stop, stop!  Anything but that!"); break;
+                            default: c.say(t, "Nooo, don't loook!");
+                        }
                         c.say(t, "\"\n\n");
                         say(t, "\"");
                         if(flavorHostility() > 66)
@@ -22184,23 +21498,19 @@ public class Forsaken
                         say(t, "\"");
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
                         Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
-                        if(flavorDeviancy() > 66)
-                            say(t, "Ahahah, I want to touch you eeeverywhere~!");
-                        else
-                        if(flavorDeviancy() > 33)
-                            say(t, "I bet you had no idea this could feel so good!");
-                        else
-                            say(t, "I'm learning a lot from playing with your body.");
+                        switch (flavorDeviancy() / 33) {
+                            case 0: say(t, "I'm learning a lot from playing with your body."); break;
+                            case 1: say(t, "I bet you had no idea this could feel so good!"); break;
+                            default: say(t, "Ahahah, I want to touch you eeeverywhere~!");
+                        }
                     } else
                     if(c.innocence > 33)
                     {
-                        if(c.morality > 66)
-                            c.say(t, "Now, before I start feeling good again, I need to...!");
-                        else
-                        if(c.morality > 33)
-                            c.say(t, "Feels... too good...");
-                        else
-                            c.say(t, "Nnnngh...  I just... want to rest...");
+                        switch (c.morality / 33) {
+                            case 0: c.say(t, "Nnnngh...  I just... want to rest..."); break;
+                            case 1: c.say(t, "Feels... too good..."); break;
+                            default: c.say(t, "Now, before I start feeling good again, I need to...!");
+                        }
                         c.say(t, "\"\n\n");
                         say(t, "\"");
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
@@ -22212,24 +21522,20 @@ public class Forsaken
                         }
                     } else
                     {
-                        if(flavorObedience() > 66)
-                            c.say(t, "The Demon Lord is a product of mass delusion.  Such a being could never be worth serving.");
-                        else
-                        if(flavorObedience() > 33)
-                            c.say(t, "Do you truly expect the Demon Lord to protect you after you've outlived your usefulness?");
-                        else
-                            c.say(t, "You've become nothing but a tool.  You see that, don't you?");
+                        switch (flavorObedience() / 33) {
+                            case 0: c.say(t, "You've become nothing but a tool.  You see that, don't you?"); break;
+                            case 1: c.say(t, "Do you truly expect the Demon Lord to protect you after you've outlived your usefulness?"); break;
+                            default: c.say(t, "The Demon Lord is a product of mass delusion.  Such a being could never be worth serving.");
+                        }
                         c.say(t, "\"\n\n");
                         say(t, "\"");
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                         Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.ANGER, Project.Emotion.FOCUS);
-                        if(flavorHostility() > 66)
-                            say(t, "I wonder, if you die from cumming too much, will " + theDemonLord() + " blame me?");
-                        else
-                        if(flavorHostility() > 33)
-                            say(t, "You know, there are more painful ways to make you cum.");
-                        else
-                            say(t, "If you can talk, then it means I need to work harder on making you cum.");
+                        switch (flavorHostility() / 33) {
+                            case 0: say(t, "If you can talk, then it means I need to work harder on making you cum."); break;
+                            case 1: say(t, "You know, there are more painful ways to make you cum."); break;
+                            default: say(t, "I wonder, if you die from cumming too much, will " + theDemonLord() + " blame me?");
+                        }
                     }
                     say(t, "\"");
                 }
@@ -22256,13 +21562,11 @@ public class Forsaken
                             default: c.say(t, "AaaAAAH!  Let go!  Let go!");
                         }
                     } else
-                    if(flavorHostility() > 66)
-                        c.say(t, "AAACK!");
-                    else
-                    if(flavorHostility() > 33)
-                        c.say(t, "Y-You're... hurting... me...!");
-                    else
-                        c.say(t, "P-Please!  At least go back... to the way you were doing it before...!");
+                    switch (flavorHostility() / 33) {
+                        case 0: c.say(t, "P-Please!  At least go back... to the way you were doing it before...!"); break;
+                        case 1: c.say(t, "Y-You're... hurting... me...!"); break;
+                        default: c.say(t, "AAACK!");
+                    }
                 } else
                 if(c.confidence > 66)
                 {
@@ -22300,13 +21604,11 @@ public class Forsaken
                 } else
                 {
                     Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.FEAR);
-                    if(flavorHostility() > 66)
-                        c.say(t, "I-It's not like I can control it...!");
-                    else
-                    if(flavorHostility() > 33)
-                        c.say(t, "Ghk!  Ugh, st- Mmf!");
-                    else
-                        c.say(t, "Aaah, nnnah, wooow!");
+                    switch (flavorHostility() / 33) {
+                        case 0: c.say(t, "Aaah, nnnah, wooow!"); break;
+                        case 1: c.say(t, "Ghk!  Ugh, st- Mmf!"); break;
+                        default: c.say(t, "I-It's not like I can control it...!");
+                    }
                 }
                 c.say(t, "\"\\n\n");
                 say(t, "\"");
@@ -22431,55 +21733,45 @@ public class Forsaken
                     } else
                     {
                         Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.FOCUS);
-                        if(c.confidence > 66)
-                            say(t, "\"Hah!  Looks like you're not so strong after all!\"");
-                        else
-                        if(c.confidence > 33)
-                            say(t, "\"How pathetic!\"");
-                        else
-                            say(t, "\"This is what you get, weakling!\"");
+                        switch (c.confidence / 33) {
+                            case 0: say(t, "\"This is what you get, weakling!\""); break;
+                            case 1: say(t, "\"How pathetic!\""); break;
+                            default: say(t, "\"Hah!  Looks like you're not so strong after all!\"");
+                        }
                     }
                 } else
                 if(obsessedWith(c))
                 {
                     Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.LEWD);
-                    if(c.confidence > 66)
-                        say(t, "\"Aaah, I knew it, seeing " + c.himHer() + " all vulnerable like this is even better...!\"");
-                    else
-                    if(c.confidence > 33)
-                        say(t, "\"Yes, yes, break for me!  Break and become mine!\"");
-                    else
-                        say(t, "\"You're even cuter when you're suffering!\"");
+                    switch (c.confidence / 33) {
+                        case 0: say(t, "\"You're even cuter when you're suffering!\""); break;
+                        case 1: say(t, "\"Yes, yes, break for me!  Break and become mine!\""); break;
+                        default: say(t, "\"Aaah, I knew it, seeing " + c.himHer() + " all vulnerable like this is even better...!\"");
+                    }
                 } else
                 if(flavorHostility() > 66)
                 {
-                    if(c.confidence > 66)
-                        say(t, "\"You thought you were strong, didn't you!?  Time to learn differently!\"");
-                    else
-                    if(c.confidence > 33)
-                        say(t, "\"Yes!  Suffer!  Suffer more than you ever have before!\"");
-                    else
-                        say(t, "\"Pathetic!  Weakling!  All you can do is scream!\"");
+                    switch (c.confidence / 33) {
+                        case 0: say(t, "\"Pathetic!  Weakling!  All you can do is scream!\""); break;
+                        case 1: say(t, "\"Yes!  Suffer!  Suffer more than you ever have before!\""); break;
+                        default: say(t, "\"You thought you were strong, didn't you!?  Time to learn differently!\"");
+                    }
                 } else
                 if(flavorHostility() > 33)
                 {
-                    if(c.confidence > 66)
-                        say(t, "\"Let's put you in your place...\"");
-                    else
-                    if(c.confidence > 33)
-                        say(t, "\"Worse than anything you've ever been through, isn't it?\"");
-                    else
-                        say(t, "\"It's almost too easy to break you.\"");
+                    switch (c.confidence / 33) {
+                        case 0: say(t, "\"It's almost too easy to break you.\""); break;
+                        case 1: say(t, "\"Worse than anything you've ever been through, isn't it?\""); break;
+                        default: say(t, "\"Let's put you in your place...\"");
+                    }
                 } else
                 {
                     Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.SHAME, Project.Emotion.SHAME);
-                    if(c.confidence > 66)
-                        say(t, "\"You need to learn that you aren't invincible.\"");
-                    else
-                    if(c.confidence > 33)
-                        say(t, "\"I don't like making you suffer, but...\"");
-                    else
-                        say(t, "\"Maybe you never should have come here...\"");
+                    switch (c.confidence / 33) {
+                        case 0: say(t, "\"Maybe you never should have come here...\""); break;
+                        case 1: say(t, "\"I don't like making you suffer, but...\""); break;
+                        default: say(t, "\"You need to learn that you aren't invincible.\"");
+                    }
                 }
             } else
             if(defilerStage == 0)
@@ -22504,55 +21796,45 @@ public class Forsaken
                     if(w.tickleOn)
                     {
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
-                        if(c.innocence > 66)
-                            c.say(t, "Ahah, ahahah!  Ugh, whatever, do whatever you- NAHAHAH!");
-                        else
-                        if(c.innocence > 33)
-                            c.say(t, "HAHAHAH, AHAHAHAH, AAAHAHAHAHAH!");
-                        else
-                            c.say(t, "HAHAHAHAH, HAH!  Egh, you see, even if you make me- GAH!  HAHAHAHAH!");
+                        switch (c.innocence / 33) {
+                            case 0: c.say(t, "HAHAHAHAH, HAH!  Egh, you see, even if you make me- GAH!  HAHAHAHAH!"); break;
+                            case 1: c.say(t, "HAHAHAH, AHAHAHAH, AAAHAHAHAHAH!"); break;
+                            default: c.say(t, "Ahah, ahahah!  Ugh, whatever, do whatever you- NAHAHAH!");
+                        }
                     } else
                     {
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
-                        if(c.innocence > 66)
-                            c.say(t, "Ow, ow!  Ugh, whatever, do whatever you- NGH!");
-                        else
-                        if(c.innocence > 33)
-                            c.say(t, "GRAAAH!  GAAAH!  AUUUGH, GAH!");
-                        else
-                            c.say(t, "AAAGH, ERAAAGH!  Egh, you see, even if you- GAH!  AAAH!");
+                        switch (c.innocence / 33) {
+                            case 0: c.say(t, "AAAGH, ERAAAGH!  Egh, you see, even if you- GAH!  AAAH!"); break;
+                            case 1: c.say(t, "GRAAAH!  GAAAH!  AUUUGH, GAH!"); break;
+                            default: c.say(t, "Ow, ow!  Ugh, whatever, do whatever you- NGH!");
+                        }
                     }
                 } else
                 if(c.confidence > 33)
                 {
-                    if(flavorDeviancy() > 66)
-                        say(t, "I've got you!  And now I'm going to have some fun with your body...");
-                    else
-                    if(flavorDeviancy() > 33)
-                        say(t, "You made me work to take you down.");
-                    else
-                        say(t, "There, " + c.heShe() + "'s down.  Let's start.");
+                    switch (flavorDeviancy() / 33) {
+                        case 0: say(t, "There, " + c.heShe() + "'s down.  Let's start."); break;
+                        case 1: say(t, "You made me work to take you down."); break;
+                        default: say(t, "I've got you!  And now I'm going to have some fun with your body...");
+                    }
                     Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.FOCUS);
                     if(w.tickleOn)
                     {
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
-                        if(c.innocence > 66)
-                            c.say(t, "Hn!  Nnnaaahahah!  Ahah, hahah, ahahah...!");
-                        else
-                        if(c.innocence > 33)
-                            c.say(t, "Hahahahah!  Ahahahah!  HAHAHAHAH!");
-                        else
-                            c.say(t, "Ahah!  Ergh, hmph...  Hahahah!  Agh, stop...");
+                        switch (c.innocence / 33) {
+                            case 0: c.say(t, "Ahah!  Ergh, hmph...  Hahahah!  Agh, stop..."); break;
+                            case 1: c.say(t, "Hahahahah!  Ahahahah!  HAHAHAHAH!"); break;
+                            default: c.say(t, "Hn!  Nnnaaahahah!  Ahah, hahah, ahahah...!");
+                        }
                     } else
                     {
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
-                        if(c.innocence > 66)
-                            c.say(t, "HnaaaAAAH!  Agh, ow, ah....");
-                        else
-                        if(c.innocence > 33)
-                            c.say(t, "AGH!  OOOW, GAAAH!");
-                        else
-                            c.say(t, "GAH!  Ergh, mph...  NNNAH!  Agh, stop...");
+                        switch (c.innocence / 33) {
+                            case 0: c.say(t, "GAH!  Ergh, mph...  NNNAH!  Agh, stop..."); break;
+                            case 1: c.say(t, "AGH!  OOOW, GAAAH!"); break;
+                            default: c.say(t, "HnaaaAAAH!  Agh, ow, ah....");
+                        }
                     }
                 } else
                 {
@@ -22575,23 +21857,19 @@ public class Forsaken
                     if(w.tickleOn)
                     {
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
-                        if(c.innocence > 66)
-                            c.say(t, "Ahahah... ahah, hahahah....");
-                        else
-                        if(c.innocence > 33)
-                            c.say(t, "D-Don't- Aaahahah!  Ngh, hahahahah!");
-                        else
-                            c.say(t, "Ahahah, e-even if I can't resist, I-  Hahahah...!");
+                        switch (c.innocence / 33) {
+                            case 0: c.say(t, "Ahahah, e-even if I can't resist, I-  Hahahah...!"); break;
+                            case 1: c.say(t, "D-Don't- Aaahahah!  Ngh, hahahahah!"); break;
+                            default: c.say(t, "Ahahah... ahah, hahahah....");
+                        }
                     } else
                     {
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
-                        if(c.innocence > 66)
-                            c.say(t, "Aaagh, aaah...!");
-                        else
-                        if(c.innocence > 33)
-                            c.say(t, "D-Don't- AAAGH!  Ngh, ow!");
-                        else
-                            c.say(t, "Ergh, e-even if I can't resist, I- OW!");
+                        switch (c.innocence / 33) {
+                            case 0: c.say(t, "Ergh, e-even if I can't resist, I- OW!"); break;
+                            case 1: c.say(t, "D-Don't- AAAGH!  Ngh, ow!"); break;
+                            default: c.say(t, "Aaagh, aaah...!");
+                        }
                     }
                 }
                 c.say(t, "\"");
@@ -22614,41 +21892,33 @@ public class Forsaken
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
                         if(styleDamage[0] > 0)
                         {
-                            if(flavorHostility() > 66)
-                                c.say(t, "Hahah, agh!  I'll- s-stop youuuaaahahahah!");
-                            else
-                            if(flavorHostility() > 33)
-                                c.say(t, "I'm doing the best I- GAHAHAHAH, nooo!");
-                            else
-                                c.say(t, "I... I... NGH! Ahahahahah!");
+                            switch (flavorHostility() / 33) {
+                                case 0: c.say(t, "I... I... NGH! Ahahahahah!"); break;
+                                case 1: c.say(t, "I'm doing the best I- GAHAHAHAH, nooo!"); break;
+                                default: c.say(t, "Hahah, agh!  I'll- s-stop youuuaaahahahah!");
+                            }
                         } else
-                        if(flavorHostility() > 66)
-                            c.say(t, "Ahahahah, hahahah, no, too much- HAHAHAHAH!");
-                        else
-                        if(flavorHostility() > 33)
-                            c.say(t, "Hahahah, gah!  Ahahahah!");
-                        else
-                            c.say(t, "Ahahah, I know you- Hahahah!  You don't want- GAHAHAHAHAH!");
+                        switch (flavorHostility() / 33) {
+                            case 0: c.say(t, "Ahahah, I know you- Hahahah!  You don't want- GAHAHAHAHAH!"); break;
+                            case 1: c.say(t, "Hahahah, gah!  Ahahahah!"); break;
+                            default: c.say(t, "Ahahahah, hahahah, no, too much- HAHAHAHAH!");
+                        }
                     } else
                     {
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                         if(styleDamage[0] > 0)
                         {
-                            if(flavorHostility() > 66)
-                                c.say(t, "AGH! I'll- s-stop yAAAH!");
-                            else
-                            if(flavorHostility() > 33)
-                                c.say(t, "I'm doing the best I- GAAAH, nooo!");
-                            else
-                                c.say(t, "I... I... NGH!  AAAH!");
+                            switch (flavorHostility() / 33) {
+                                case 0: c.say(t, "I... I... NGH!  AAAH!"); break;
+                                case 1: c.say(t, "I'm doing the best I- GAAAH, nooo!"); break;
+                                default: c.say(t, "AGH! I'll- s-stop yAAAH!");
+                            }
                         } else
-                        if(flavorHostility() > 66)
-                            c.say(t, "AGH, NHOOOH, no, too much- OUUUGH!");
-                        else
-                        if(flavorHostility() > 33)
-                            c.say(t, "Aaaah, gaaah, OW!");
-                        else
-                            c.say(t, "Ugh, I know you- GH! You don't want- AAAH!");
+                        switch (flavorHostility() / 33) {
+                            case 0: c.say(t, "Ugh, I know you- GH! You don't want- AAAH!"); break;
+                            case 1: c.say(t, "Aaaah, gaaah, OW!"); break;
+                            default: c.say(t, "AGH, NHOOOH, no, too much- OUUUGH!");
+                        }
                     }
                     c.say(t, "\"");
                 } else
@@ -22691,23 +21961,19 @@ public class Forsaken
                     if(w.tickleOn)
                     {
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
-                        if(c.innocence > 66)
-                            c.say(t, "Nahahahah, stahahah, stahp iiit!");
-                        else
-                        if(c.innocence > 33)
-                            c.say(t, "Ahahahah, hahahahah!");
-                        else
-                            c.say(t, "Ngh!  Nghahahah!  Agh, whew...");
+                        switch (c.innocence / 33) {
+                            case 0: c.say(t, "Ngh!  Nghahahah!  Agh, whew..."); break;
+                            case 1: c.say(t, "Ahahahah, hahahahah!"); break;
+                            default: c.say(t, "Nahahahah, stahahah, stahp iiit!");
+                        }
                     } else
                     {
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
-                        if(c.innocence > 66)
-                            c.say(t, "AAAH, STAAAH, STAHP IIIT!");
-                        else
-                        if(c.innocence > 33)
-                            c.say(t, "Agh, ow!  Ow!");
-                        else
-                            c.say(t, "Ngh!  AGH!  Ah, whew...");
+                        switch (c.innocence / 33) {
+                            case 0: c.say(t, "Ngh!  AGH!  Ah, whew..."); break;
+                            case 1: c.say(t, "Agh, ow!  Ow!"); break;
+                            default: c.say(t, "AAAH, STAAAH, STAHP IIIT!");
+                        }
                     }
                     c.say(t, "\"");
                 } else
@@ -22718,41 +21984,33 @@ public class Forsaken
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
                         if(styleDamage[0] > 0)
                         {
-                            if(flavorObedience() > 66)
-                                c.say(t, "Ahah, hah... s-stop... trying to break me...!");
-                            else
-                            if(flavorObedience() > 33)
-                                c.say(t, "You think... ahah, ahahahah!  S-Someone like you...!");
-                            else
-                                c.say(t, "Shut, ahahahah, shut uuup!");
+                            switch (flavorObedience() / 33) {
+                                case 0: c.say(t, "Shut, ahahahah, shut uuup!"); break;
+                                case 1: c.say(t, "You think... ahah, ahahahah!  S-Someone like you...!"); break;
+                                default: c.say(t, "Ahah, hah... s-stop... trying to break me...!");
+                            }
                         } else
-                        if(flavorObedience() > 66)
-                            c.say(t, "Ahahah, f-fuck, hahah, fuck the Demon Lord!");
-                        else
-                        if(flavorObedience() > 33)
-                            c.say(t, "Hah, I'm not, hahah, not laughing because of your tickling!  I'm laughing at youuu, ahahahah!");
-                        else
-                            c.say(t, "Why, ahahahah, why are you even doing thiiis!?");
+                        switch (flavorObedience() / 33) {
+                            case 0: c.say(t, "Why, ahahahah, why are you even doing thiiis!?"); break;
+                            case 1: c.say(t, "Hah, I'm not, hahah, not laughing because of your tickling!  I'm laughing at youuu, ahahahah!"); break;
+                            default: c.say(t, "Ahahah, f-fuck, hahah, fuck the Demon Lord!");
+                        }
                     } else
                     {
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                         if(styleDamage[0] > 0)
                         {
-                            if(flavorObedience() > 66)
-                                c.say(t, "Agh, guh... s-stop... trying to break me...!");
-                            else
-                            if(flavorObedience() > 33)
-                                c.say(t, "You think- gah!  Agh, agh...  S-Someone like you...!");
-                            else
-                                c.say(t, "Shut, ACK, shut uuup!");
+                            switch (flavorObedience() / 33) {
+                                case 0: c.say(t, "Shut, ACK, shut uuup!"); break;
+                                case 1: c.say(t, "You think- gah!  Agh, agh...  S-Someone like you...!"); break;
+                                default: c.say(t, "Agh, guh... s-stop... trying to break me...!");
+                            }
                         } else
-                        if(flavorObedience() > 66)
-                            c.say(t, "Ugh, f-fuck- Ow!  Fuck the Demon Lord!");
-                        else
-                        if(flavorObedience() > 33)
-                            c.say(t, "Agh, heheh...  How many times has this been done to you!?");
-                        else
-                            c.say(t, "Why- AH!  Why are you even doing thiiis!?");
+                        switch (flavorObedience() / 33) {
+                            case 0: c.say(t, "Why- AH!  Why are you even doing thiiis!?"); break;
+                            case 1: c.say(t, "Agh, heheh...  How many times has this been done to you!?"); break;
+                            default: c.say(t, "Ugh, f-fuck- Ow!  Fuck the Demon Lord!");
+                        }
                     }
                     c.say(t, "\"\n\n");
                     say(t, "\"");
@@ -22887,23 +22145,19 @@ public class Forsaken
                 if(w.tickleOn)
                 {
                     Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
-                    if(c.morality > 66)
-                        c.say(t, "Ugh, how could I let myself- GAHAHAHAH!");
-                    else
-                    if(c.morality > 33)
-                        c.say(t, "Hahahah, gaah, ahahahah...!");
-                    else
-                        c.say(t, "Ahahah, you'll pay for- AHAHAHAH!");
+                    switch (c.morality / 33) {
+                        case 0: c.say(t, "Ahahah, you'll pay for- AHAHAHAH!"); break;
+                        case 1: c.say(t, "Hahahah, gaah, ahahahah...!"); break;
+                        default: c.say(t, "Ugh, how could I let myself- GAHAHAHAH!");
+                    }
                 } else
                 {
                     Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
-                    if(c.morality > 66)
-                        c.say(t, "Ugh, how could I let myself- GAAAH!");
-                    else
-                    if(c.morality > 33)
-                        c.say(t, "Agh, nghaaah!  Ugh, phew...");
-                    else
-                        c.say(t, "Graaagh!  You'll pay for AAAUUUGH!");
+                    switch (c.morality / 33) {
+                        case 0: c.say(t, "Graaagh!  You'll pay for AAAUUUGH!"); break;
+                        case 1: c.say(t, "Agh, nghaaah!  Ugh, phew..."); break;
+                        default: c.say(t, "Ugh, how could I let myself- GAAAH!");
+                    }
                 }
                 c.say(t, "\"");
             }
@@ -22935,13 +22189,11 @@ public class Forsaken
                     if(isFormerFriend(c))
                     {
                         Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.JOY, Project.Emotion.JOY);
-                        if(c.dignity > 66)
-                            say(t, "It's okay, " + c.mainName + ".  Someday, you'll be happy that people see you this way!");
-                        else
-                        if(c.dignity > 33)
-                            say(t, "They're going to start turning against you now.  But if you join me, I promise I'll never leave you ever again.");
-                        else
-                            say(t, "You really don't care what anyone thinks.  I always admired that about you...");
+                        switch (c.dignity / 33) {
+                            case 0: say(t, "You really don't care what anyone thinks.  I always admired that about you..."); break;
+                            case 1: say(t, "They're going to start turning against you now.  But if you join me, I promise I'll never leave you ever again."); break;
+                            default: say(t, "It's okay, " + c.mainName + ".  Someday, you'll be happy that people see you this way!");
+                        }
                     } else
                     if(c.dignity > 66)
                     {
@@ -22960,13 +22212,11 @@ public class Forsaken
                 } else
                 if(obsessedWith(c))
                 {
-                    if(c.dignity > 66)
-                        say(t, "How could I not look?  You're... nngh... perfect...!");
-                    else
-                    if(c.dignity > 33)
-                        say(t, "Mm, don't mind if I do...");
-                    else
-                        say(t, "Yes, yes, show everything to me!");
+                    switch (c.dignity / 33) {
+                        case 0: say(t, "Yes, yes, show everything to me!"); break;
+                        case 1: say(t, "Mm, don't mind if I do..."); break;
+                        default: say(t, "How could I not look?  You're... nngh... perfect...!");
+                    }
                     Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.LEWD);
                 } else
                 if(flavorHostility() > 66)
@@ -22989,23 +22239,19 @@ public class Forsaken
                 if(flavorHostility() > 33)
                 {
                     Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.NEUTRAL);
-                    if(c.dignity > 66)
-                        say(t, "They'll never look at you the same way again.");
-                    else
-                    if(c.dignity > 33)
-                        say(t, "So you're going to pretend that it doesn't bother you?  Well, it doesn't matter to me either way.");
-                    else
-                        say(t, "It changes everything.  You'll see.");
+                    switch (c.dignity / 33) {
+                        case 0: say(t, "It changes everything.  You'll see."); break;
+                        case 1: say(t, "So you're going to pretend that it doesn't bother you?  Well, it doesn't matter to me either way."); break;
+                        default: say(t, "They'll never look at you the same way again.");
+                    }
                 } else
                 {
                     Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.NEUTRAL, Project.Emotion.NEUTRAL);
-                    if(c.dignity > 66)
-                        say(t, "This will be easier for you if you stop caring so much.");
-                    else
-                    if(c.dignity > 33)
-                        say(t, "You really are nice to look at.");
-                    else
-                        say(t, "You're taking this well.  I'm impressed.");
+                    switch (c.dignity / 33) {
+                        case 0: say(t, "You're taking this well.  I'm impressed."); break;
+                        case 1: say(t, "You really are nice to look at."); break;
+                        default: say(t, "This will be easier for you if you stop caring so much.");
+                    }
                 }
                 say(t, "\"");
             } else
@@ -23025,13 +22271,11 @@ public class Forsaken
                         }
                         say(t, "\"\n\n");
                         c.say(t, "\"");
-                        if(c.innocence > 66)
-                            c.say(t, "I'm gonna kill all of you!  Seriously!");
-                        else
-                        if(c.innocence > 33)
-                            c.say(t, "Get your- agh- hands off me!");
-                        else
-                            c.say(t, "Hmph!  This will not... stop me...!");
+                        switch (c.innocence / 33) {
+                            case 0: c.say(t, "Hmph!  This will not... stop me...!"); break;
+                            case 1: c.say(t, "Get your- agh- hands off me!"); break;
+                            default: c.say(t, "I'm gonna kill all of you!  Seriously!");
+                        }
                     } else
                     if(c.confidence > 33)
                     {
@@ -23044,13 +22288,11 @@ public class Forsaken
                         }
                         say(t, "\"\n\n");
                         c.say(t, "\"");
-                        if(c.innocence > 66)
-                            c.say(t, "H-Hey!  Don't touch me theeere!");
-                        else
-                        if(c.innocence > 33)
-                            c.say(t, "A-As if I'd- nnnah!  Care!");
-                        else
-                            c.say(t, "Guh!  I can't... stop " + himHer() + "...!");
+                        switch (c.innocence / 33) {
+                            case 0: c.say(t, "Guh!  I can't... stop " + himHer() + "...!"); break;
+                            case 1: c.say(t, "A-As if I'd- nnnah!  Care!"); break;
+                            default: c.say(t, "H-Hey!  Don't touch me theeere!");
+                        }
                     } else
                     {
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.SHAME);
@@ -23062,76 +22304,62 @@ public class Forsaken
                         }
                         say(t, "\"\n\n");
                         c.say(t, "\"");
-                        if(c.innocence > 66)
-                            c.say(t, "E-Everyone is looking at me... with such dirty eyes...");
-                        else
-                        if(c.innocence > 33)
-                            c.say(t, "Ah, n-no!");
-                        else
-                            c.say(t, "I... I am sorry, everyone...");
+                        switch (c.innocence / 33) {
+                            case 0: c.say(t, "I... I am sorry, everyone..."); break;
+                            case 1: c.say(t, "Ah, n-no!"); break;
+                            default: c.say(t, "E-Everyone is looking at me... with such dirty eyes...");
+                        }
                     }
                 } else
                 if(c.confidence > 66)
                 {
                     Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                     Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
-                    if(flavorObedience() > 66)
-                        say(t, "Everyone!  Now's your chance!");
-                    else
-                    if(flavorObedience() > 33)
-                        say(t, "Have you realized that you're putting on a show?");
-                    else
-                        say(t, "Looks like " + theDemonLord() + "'s minions are happy to see you like this.");
+                    switch (flavorObedience() / 33) {
+                        case 0: say(t, "Looks like " + theDemonLord() + "'s minions are happy to see you like this."); break;
+                        case 1: say(t, "Have you realized that you're putting on a show?"); break;
+                        default: say(t, "Everyone!  Now's your chance!");
+                    }
                     say(t, "\"\n\n");
                     c.say(t, "\"");
-                    if(c.dignity > 66)
-                        c.say(t, "Graaah!  I'll kill you for this!");
-                    else
-                    if(c.dignity > 33)
-                        c.say(t, "I'm warning you!  You'd better stop this!");
-                    else
-                        c.say(t, "As if I'd care!");
+                    switch (c.dignity / 33) {
+                        case 0: c.say(t, "As if I'd care!"); break;
+                        case 1: c.say(t, "I'm warning you!  You'd better stop this!"); break;
+                        default: c.say(t, "Graaah!  I'll kill you for this!");
+                    }
                 } else
                 if(c.confidence > 33)
                 {
                     Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                     Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
-                    if(flavorObedience() > 66)
-                        say(t, "I'll grab " + c.himHer() + "!");
-                    else
-                    if(flavorObedience() > 33)
-                        say(t, "That was a nice high kick.  Don't you think so, Thralls?");
-                    else
-                        say(t, "Let's take some more pictures.");
+                    switch (flavorObedience() / 33) {
+                        case 0: say(t, "Let's take some more pictures."); break;
+                        case 1: say(t, "That was a nice high kick.  Don't you think so, Thralls?"); break;
+                        default: say(t, "I'll grab " + c.himHer() + "!");
+                    }
                     say(t, "\"\n\n");
                     c.say(t, "\"");
-                    if(c.dignity > 66)
-                        c.say(t, "Hmph!  I... I don't even care anymore!");
-                    else
-                    if(c.dignity > 33)
-                        c.say(t, "I-It doesn't matter, I can still fight!");
-                    else
-                        c.say(t, "Stop wasting time!");
+                    switch (c.dignity / 33) {
+                        case 0: c.say(t, "Stop wasting time!"); break;
+                        case 1: c.say(t, "I-It doesn't matter, I can still fight!"); break;
+                        default: c.say(t, "Hmph!  I... I don't even care anymore!");
+                    }
                 } else
                 {
                     Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.FEAR);
                     Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
-                    if(flavorObedience() > 66)
-                        say(t, "Smile for the cameras.");
-                    else
-                    if(flavorObedience() > 33)
-                        say(t, "Let's have you hold this pose for awhile.");
-                    else
-                        say(t, "You just want to snap some pictures?  Fine.");
+                    switch (flavorObedience() / 33) {
+                        case 0: say(t, "You just want to snap some pictures?  Fine."); break;
+                        case 1: say(t, "Let's have you hold this pose for awhile."); break;
+                        default: say(t, "Smile for the cameras.");
+                    }
                     say(t, "\"\n\n");
                     c.say(t, "\"");
-                    if(c.dignity > 66)
-                        c.say(t, "Nooo, stop, please stop!");
-                    else
-                    if(c.dignity > 33)
-                        c.say(t, "W-Wait, I don't want this!");
-                    else
-                        c.say(t, "Ugh, why do they even want to see my body...?");
+                    switch (c.dignity / 33) {
+                        case 0: c.say(t, "Ugh, why do they even want to see my body...?"); break;
+                        case 1: c.say(t, "W-Wait, I don't want this!"); break;
+                        default: c.say(t, "Nooo, stop, please stop!");
+                    }
                 }
                 c.say(t, "\"");
             } else
@@ -23265,32 +22493,26 @@ public class Forsaken
                 say(t, "\"");
                 if(styleDamage[2] > 0)
                 {
-                    if(flavorObedience() > 66)
-                        say(t, "If you want to fight a follower of the Demon Lord... then I should come first...!");
-                    else
-                    if(flavorObedience() > 33)
-                        say(t, "Everyone, get back!  You don't have to be close to us to film!");
-                    else
-                        say(t, "You can't afford to focus on them!");
+                    switch (flavorObedience() / 33) {
+                        case 0: say(t, "You can't afford to focus on them!"); break;
+                        case 1: say(t, "Everyone, get back!  You don't have to be close to us to film!"); break;
+                        default: say(t, "If you want to fight a follower of the Demon Lord... then I should come first...!");
+                    }
                 } else
-                if(flavorObedience() > 66)
-                    say(t, "Those people belong to " + theDemonLord() + "!");
-                else
-                if(flavorObedience() > 33)
-                    say(t, "Everyone, stick together!");
-                else
-                    say(t, "Worthless Thralls.  I'll do it myself.");
+                switch (flavorObedience() / 33) {
+                    case 0: say(t, "Worthless Thralls.  I'll do it myself."); break;
+                    case 1: say(t, "Everyone, stick together!"); break;
+                    default: say(t, "Those people belong to " + theDemonLord() + "!");
+                }
                 say(t, "\"\n\n");
                 Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FOCUS, Project.Emotion.ANGER);
                 Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.STRUGGLE);
                 c.say(t, "\"");
-                if(c.dignity > 66)
-                    c.say(t, "Stop filming or I'll kill you all!");
-                else
-                if(c.dignity > 33)
-                    c.say(t, "If I take you down, they'll run away!");
-                else
-                    c.say(t, "Now it's just the two of us!");
+                switch (c.dignity / 33) {
+                    case 0: c.say(t, "Now it's just the two of us!"); break;
+                    case 1: c.say(t, "If I take you down, they'll run away!"); break;
+                    default: c.say(t, "Stop filming or I'll kill you all!");
+                }
                 c.say(t, "\"");
             } else
             if(c.confidence > 33)
@@ -23307,21 +22529,17 @@ public class Forsaken
                 c.say(t, "\"");
                 if(styleDamage[2] > 0)
                 {
-                    if(c.innocence > 66)
-                        c.say(t, "Ow!  That hurts!");
-                    else
-                    if(c.innocence > 33)
-                        c.say(t, "I'm... losing...!");
-                    else
-                        c.say(t, "I can't avoid... taking damage...!");
+                    switch (c.innocence / 33) {
+                        case 0: c.say(t, "I can't avoid... taking damage...!"); break;
+                        case 1: c.say(t, "I'm... losing...!"); break;
+                        default: c.say(t, "Ow!  That hurts!");
+                    }
                 } else
-                if(c.innocence > 66)
-                    c.say(t, "They can see everything...");
-                else
-                if(c.innocence > 33)
-                    c.say(t, HeShe() + "'s toying with me...");
-                else
-                    c.say(t, "I can no longer try to avoid humiliation...");
+                switch (c.innocence / 33) {
+                    case 0: c.say(t, "I can no longer try to avoid humiliation..."); break;
+                    case 1: c.say(t, HeShe() + "'s toying with me..."); break;
+                    default: c.say(t, "They can see everything...");
+                }
                 c.say(t, "\"");
             } else
             {
@@ -23360,13 +22578,11 @@ public class Forsaken
                 say(t, "\"\n\n");
                 c.say(t, "\"");
                 Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.SHAME);
-                if(c.morality > 66)
-                    c.say(t, "Nn...  I have to... be strong...");
-                else
-                if(c.morality > 33)
-                    c.say(t, "I... I can't...");
-                else
-                    c.say(t, "S-Stop it!  What do you even want from me!?");
+                switch (c.morality / 33) {
+                    case 0: c.say(t, "S-Stop it!  What do you even want from me!?"); break;
+                    case 1: c.say(t, "I... I can't..."); break;
+                    default: c.say(t, "Nn...  I have to... be strong...");
+                }
                 c.say(t, "\"");
             }
             c.modest = false;
@@ -23436,13 +22652,11 @@ public class Forsaken
                 {
                     say(t, "Heheh, are you beginning to see the glories of the Demon Lord?\"\n\n");
                     Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.NEUTRAL, Project.Emotion.NEUTRAL);
-                    if(c.morality > 66)
-                        c.say(t, "\"I'm glad he's made you happy, but I still oppose him.");
-                    else
-                    if(c.morality > 33)
-                        c.say(t, "\"Uh, sure.  Anyway...");
-                    else
-                        c.say(t, "\"I don't care about the Demon Lord.  I just want to cum.");
+                    switch (c.morality / 33) {
+                        case 0: c.say(t, "\"I don't care about the Demon Lord.  I just want to cum."); break;
+                        case 1: c.say(t, "\"Uh, sure.  Anyway..."); break;
+                        default: c.say(t, "\"I'm glad he's made you happy, but I still oppose him.");
+                    }
                 } else
                 {
                     say(t, "You can see that being one of the Forsaken comes with perks.\"\n\n");
@@ -23534,13 +22748,11 @@ public class Forsaken
                     Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
                     c.say(t, "\"Go on!  Cum for me!\"\n\n");
                     say(t, "\"");
-                    if(flavorDeviancy() > 66)
-                        say(t, "Aaah!  Aaah!  Cummiiing!");
-                    else
-                    if(flavorDeviancy() > 33)
-                        say(t, "Yes!  Yes!  I'm going to cum for you!");
-                    else
-                        say(t, "You're- nn!  P-Pretty good at this...!");
+                    switch (flavorDeviancy() / 33) {
+                        case 0: say(t, "You're- nn!  P-Pretty good at this...!"); break;
+                        case 1: say(t, "Yes!  Yes!  I'm going to cum for you!"); break;
+                        default: say(t, "Aaah!  Aaah!  Cummiiing!");
+                    }
                     say(t, "\"");
                 } else
                 if(c.confidence > 33)
@@ -23673,58 +22885,46 @@ public class Forsaken
             {
                 if(disgrace > 66)
                 {
-                    if(c.innocence > 66)
-                        w.append(t, String.format("%s pretends to trip and fall, and just as %s predicted, %s jumps atop %s, straddling %4$s to hold %4$s down.  However, %s stiffens up as soon as %s lands, feeling %s's %s painfully poking into %s %s.  It takes %s a moment to realize what it is, but when %s does, %s ", mainName, heShe(), c.mainName, himHer(), c.mainName, c.heShe(), c.reference(this), penetrator, c.hisHer(), entrance, c.himHer(), c.heShe(), c.heShe()));
-                    else
-                    if(c.innocence > 33)
-                        w.append(t, String.format("Eager to press the advantage against the weaker %s, %s tackles %s, to the ground.  But as they scuffle, %2$s only realizes too late that this puts %s's %s against %s %s.  %s ", mainName, c.mainName, himHer(), c.reference(this), penetrator, c.hisHer(), entrance, c.HeShe()));
-                    else
-                        w.append(t, String.format("%s knows that %s's stronger than %s, and %2$s fights with exceptional aggressiveness.  %s pins %s's back against a wall, unafraid of getting within arm's reach, but when %5$s starts to grapple %s in return, %2$s's just a moment too late in realizing that the position lines up %s's %s with %s %s.  %s instantly ", c.mainName, c.heShe(), mainName, c.HeShe(), mainName, c.himHer(), c.reference(this), penetrator, c.hisHer(), entrance, c.HeShe()));
+                    switch (c.innocence / 33) {
+                        case 0: w.append(t, String.format("%s knows that %s's stronger than %s, and %2$s fights with exceptional aggressiveness.  %s pins %s's back against a wall, unafraid of getting within arm's reach, but when %5$s starts to grapple %s in return, %2$s's just a moment too late in realizing that the position lines up %s's %s with %s %s.  %s instantly ", c.mainName, c.heShe(), mainName, c.HeShe(), mainName, c.himHer(), c.reference(this), penetrator, c.hisHer(), entrance, c.HeShe())); break;
+                        case 1: w.append(t, String.format("Eager to press the advantage against the weaker %s, %s tackles %s, to the ground.  But as they scuffle, %2$s only realizes too late that this puts %s's %s against %s %s.  %s ", mainName, c.mainName, himHer(), c.reference(this), penetrator, c.hisHer(), entrance, c.HeShe())); break;
+                        default: w.append(t, String.format("%s pretends to trip and fall, and just as %s predicted, %s jumps atop %s, straddling %4$s to hold %4$s down.  However, %s stiffens up as soon as %s lands, feeling %s's %s painfully poking into %s %s.  It takes %s a moment to realize what it is, but when %s does, %s ", mainName, heShe(), c.mainName, himHer(), c.mainName, c.heShe(), c.reference(this), penetrator, c.hisHer(), entrance, c.himHer(), c.heShe(), c.heShe()));
+                    }
                 } else
                 if(disgrace > 33)
                 {
-                    if(c.innocence > 66)
-                        w.append(t, String.format("As they fight, %s is slowly overpowering %s, but unbeknownst to %s, %2$s is lulling %3$s into a false sense of security.  After pretending to stumble, %2$s suddenly rushes at %3$s, flipping %3$s onto %s back with %4$s legs in the air, and %1$s feels %s's %s suddenly digging into %s entrance.  %1$s, unable to process what's happening, ", c.mainName, mainName, c.himHer(), c.hisHer(), c.reference(this), penetrator, c.hisHer()));
-                    else
-                    if(c.innocence > 33)
-                        w.append(t, String.format("%s and %s are fighting evenly, clashing with their weapons, then smoothly moving to hand-to-hand combat as %1$s grows more and more aggressive.  %2$s sees an opening, and %s leg flashes up to hit %1$s with a devastating kick to the side of the head.  %1$s is stunned, but %s manages to recover just quickly enough to grab %2$s's ankle and pin it there, then thrust %s hips forward.  %1$s takes a moment to recognize the pressure against %5$s %s as coming from %s's %s.  %s ", mainName, c.mainName, c.hisHer(), heShe(), hisHer(), entrance, c.reference(this), penetrator, c.HeShe()));
-                    else
-                        w.append(t, String.format("%s abruptly lowers %s defenses and sprints straight at %s.  The illogical, self-destructive move comes as a surprise, but %3$s still capitalizes on it, landing a direct hit with %s %s.  %1$s grunts in pain, and %s knows %6$s'll need to recover before %6$s can fight again, but %6$s's managed to secure %2$s objective.  %s's eyes widen in horror as %s sees %s lunging at %s with %2$s %s out, and %s ", mainName, hisHer(), c.mainName, c.hisHer(), c.weapon, heShe(), c.mainName, c.heShe(), c.reference(this), c.himHer(), penetrator, c.heShe()));
+                    switch (c.innocence / 33) {
+                        case 0: w.append(t, String.format("%s abruptly lowers %s defenses and sprints straight at %s.  The illogical, self-destructive move comes as a surprise, but %3$s still capitalizes on it, landing a direct hit with %s %s.  %1$s grunts in pain, and %s knows %6$s'll need to recover before %6$s can fight again, but %6$s's managed to secure %2$s objective.  %s's eyes widen in horror as %s sees %s lunging at %s with %2$s %s out, and %s ", mainName, hisHer(), c.mainName, c.hisHer(), c.weapon, heShe(), c.mainName, c.heShe(), c.reference(this), c.himHer(), penetrator, c.heShe())); break;
+                        case 1: w.append(t, String.format("%s and %s are fighting evenly, clashing with their weapons, then smoothly moving to hand-to-hand combat as %1$s grows more and more aggressive.  %2$s sees an opening, and %s leg flashes up to hit %1$s with a devastating kick to the side of the head.  %1$s is stunned, but %s manages to recover just quickly enough to grab %2$s's ankle and pin it there, then thrust %s hips forward.  %1$s takes a moment to recognize the pressure against %5$s %s as coming from %s's %s.  %s ", mainName, c.mainName, c.hisHer(), heShe(), hisHer(), entrance, c.reference(this), penetrator, c.HeShe())); break;
+                        default: w.append(t, String.format("As they fight, %s is slowly overpowering %s, but unbeknownst to %s, %2$s is lulling %3$s into a false sense of security.  After pretending to stumble, %2$s suddenly rushes at %3$s, flipping %3$s onto %s back with %4$s legs in the air, and %1$s feels %s's %s suddenly digging into %s entrance.  %1$s, unable to process what's happening, ", c.mainName, mainName, c.himHer(), c.hisHer(), c.reference(this), penetrator, c.hisHer()));
+                    }
                 } else
-                if(c.innocence > 66)
-                    w.append(t, String.format("Full of desperation against %s stronger foe, %s rushes forward, trying to overwhelm %s with an all-out attack.  %s effortlessly catches %1$s arm, turning %s around and bending %5$s over.  %2$s stiffens up at the sensation of something poking %1$s %s, and when %s realizes that it's %s's %s, %s ", c.hisHer(), c.mainName, himHer(), mainName, c.himHer(), entrance, c.heShe(), c.reference(this), penetrator, c.heShe()));
-                else
-                if(c.innocence > 33)
-                    w.append(t, String.format("The moment %s gets %s hands on %s, %s fate is sealed.  %1$s handles %s like a doll, pinning both %s arms with one hand and using the other to bring %2$s %s to %s's %s.  %s ", mainName, hisHer(), c.mainName, c.hisHer(), c.himHer(), c.hisHer(), penetrator, reference(c), entrance, c.mainName));
-                else
-                    w.append(t, String.format("%s sees how %s has uncovered %s %s, and %s knows what %2$s is planning to do with it.  When %2$s recklessly advances to close the distance, %1$s fights hard, landing several hits with %s %s, almost enough to bring %2$s down.  But it's not quite enough, and %2$s reaches %s, slams %8$s to the ground, and forces %s legs apart.  %1$s ", c.mainName, mainName, hisHer(), penetrator, c.heShe(), c.hisHer(), c.weapon, c.himHer(), c.hisHer()));
+                switch (c.innocence / 33) {
+                    case 0: w.append(t, String.format("%s sees how %s has uncovered %s %s, and %s knows what %2$s is planning to do with it.  When %2$s recklessly advances to close the distance, %1$s fights hard, landing several hits with %s %s, almost enough to bring %2$s down.  But it's not quite enough, and %2$s reaches %s, slams %8$s to the ground, and forces %s legs apart.  %1$s ", c.mainName, mainName, hisHer(), penetrator, c.heShe(), c.hisHer(), c.weapon, c.himHer(), c.hisHer())); break;
+                    case 1: w.append(t, String.format("The moment %s gets %s hands on %s, %s fate is sealed.  %1$s handles %s like a doll, pinning both %s arms with one hand and using the other to bring %2$s %s to %s's %s.  %s ", mainName, hisHer(), c.mainName, c.hisHer(), c.himHer(), c.hisHer(), penetrator, reference(c), entrance, c.mainName)); break;
+                    default: w.append(t, String.format("Full of desperation against %s stronger foe, %s rushes forward, trying to overwhelm %s with an all-out attack.  %s effortlessly catches %1$s arm, turning %s around and bending %5$s over.  %2$s stiffens up at the sensation of something poking %1$s %s, and when %s realizes that it's %s's %s, %s ", c.hisHer(), c.mainName, himHer(), mainName, c.himHer(), entrance, c.heShe(), c.reference(this), penetrator, c.heShe()));
+                }
                 if(c.confidence > 66)
                 {
-                    if(flavorDeviancy() > 66)
-                        w.append(t, String.format("feels suddenly small and helpless before the insane desire burning in %s's eyes.", mainName));
-                    else
-                    if(flavorDeviancy() > 33)
-                        w.append(t, "barely has time to shout an angry threat before it's all over.");
-                    else
-                        w.append(t, String.format("kicks and yells at the top of %s lungs, fighting with everything %s has, but %2$s doesn't have any leverage in this position.", c.hisHer(), heShe()));
+                    switch (flavorDeviancy() / 33) {
+                        case 0: w.append(t, String.format("kicks and yells at the top of %s lungs, fighting with everything %s has, but %2$s doesn't have any leverage in this position.", c.hisHer(), heShe())); break;
+                        case 1: w.append(t, "barely has time to shout an angry threat before it's all over."); break;
+                        default: w.append(t, String.format("feels suddenly small and helpless before the insane desire burning in %s's eyes.", mainName));
+                    }
                 } else
                 if(c.confidence > 33)
                 {
-                    if(flavorDeviancy() > 66)
-                        w.append(t, String.format("cries out in protest, but %s is too caught up in %s eagerness to hear %s voice.", mainName, hisHer(), c.hisHer()));
-                    else
-                    if(flavorDeviancy() > 33)
-                        w.append(t, String.format("squirms and struggles, but that just turns %s on even more.", mainName));
-                    else
-                        w.append(t, String.format("bucks %s hips wildly, succeeding only at driving %sself onto the shaft.", c.hisHer(), c.himHer()));
+                    switch (flavorDeviancy() / 33) {
+                        case 0: w.append(t, String.format("bucks %s hips wildly, succeeding only at driving %sself onto the shaft.", c.hisHer(), c.himHer())); break;
+                        case 1: w.append(t, String.format("squirms and struggles, but that just turns %s on even more.", mainName)); break;
+                        default: w.append(t, String.format("cries out in protest, but %s is too caught up in %s eagerness to hear %s voice.", mainName, hisHer(), c.hisHer()));
+                    }
                 } else
-                if(flavorDeviancy() > 66)
-                    w.append(t, String.format("whimpers in fear, which only further inflames %s's lust.", mainName));
-                else
-                if(flavorDeviancy() > 33)
-                    w.append(t, String.format("pleads for %s to stop, but %s ignores %s, intent on getting inside.", mainName, heShe(), c.himHer()));
-                else
-                    w.append(t, String.format("freezes up, watching helplessly as %s's tip inches forward.", mainName));
+                switch (flavorDeviancy() / 33) {
+                    case 0: w.append(t, String.format("freezes up, watching helplessly as %s's tip inches forward.", mainName)); break;
+                    case 1: w.append(t, String.format("pleads for %s to stop, but %s ignores %s, intent on getting inside.", mainName, heShe(), c.himHer())); break;
+                    default: w.append(t, String.format("whimpers in fear, which only further inflames %s's lust.", mainName));
+                }
                 w.append(t, "\n\n");
                 c.MoralityBreakTwo(t, w);
                 c.vTaker = 0;
@@ -23785,34 +22985,28 @@ public class Forsaken
                 if(c.morality > 66)
                 {
                     w.append(t, "eyes are wide with disbelief and full of tears");
-                    if(flavorHostility() > 66)
-                        w.append(t, String.format(", and %s leans down to lick them from %s cheeks, grinning with sadistic glee.", mainName, c.hisHer()));
-                    else
-                    if(flavorHostility() > 33)
-                        w.append(t, String.format(", but %s just smirks down at %s.", mainName, c.himHer()));
-                    else
-                        w.append(t, String.format(", and %s looks almost apologetic.", mainName));
+                    switch (flavorHostility() / 33) {
+                        case 0: w.append(t, String.format(", and %s looks almost apologetic.", mainName)); break;
+                        case 1: w.append(t, String.format(", but %s just smirks down at %s.", mainName, c.himHer())); break;
+                        default: w.append(t, String.format(", and %s leans down to lick them from %s cheeks, grinning with sadistic glee.", mainName, c.hisHer()));
+                    }
                 } else
                 if(c.morality > 33)
                 {
                     w.append(t, String.format("heart is broken over being defiled, and the fight starts to go out of %s.  %s ", c.himHer(), mainName));
-                    if(flavorHostility() > 66)
-                        w.append(t, String.format("fucks %s even harder, whispering cruel insults into %s ears in hopes of making %1$s suffer even more.", c.himHer(), c.hisHer()));
-                    else
-                    if(flavorHostility() > 33)
-                        w.append(t, String.format("doesn't seem to care, continuing to move %s hips in a steady rhythm.", hisHer()));
-                    else
-                        w.append(t, String.format("tries to encourage %s not to give up hope.", c.himHer()));
+                    switch (flavorHostility() / 33) {
+                        case 0: w.append(t, String.format("tries to encourage %s not to give up hope.", c.himHer())); break;
+                        case 1: w.append(t, String.format("doesn't seem to care, continuing to move %s hips in a steady rhythm.", hisHer())); break;
+                        default: w.append(t, String.format("fucks %s even harder, whispering cruel insults into %s ears in hopes of making %1$s suffer even more.", c.himHer(), c.hisHer()));
+                    }
                 } else
                 {
                     w.append(t, String.format("voice is broken and choked with tears, but %s still tries to insult and threaten %s", c.heShe(), mainName));
-                    if(flavorHostility() > 66)
-                        w.append(t, String.format(".  A dark expression appears on %s's face, promising even greater torture to come.", mainName));
-                    else
-                    if(flavorHostility() > 33)
-                        w.append(t, String.format(", but %s just laughs it off, much to %s's fury.", mainName, c.mainName));
-                    else
-                        w.append(t, String.format(", prompting a pitying look from %s - which, of course, only angers %s further.", c.reference(this), c.himHer()));
+                    switch (flavorHostility() / 33) {
+                        case 0: w.append(t, String.format(", prompting a pitying look from %s - which, of course, only angers %s further.", c.reference(this), c.himHer())); break;
+                        case 1: w.append(t, String.format(", but %s just laughs it off, much to %s's fury.", mainName, c.mainName)); break;
+                        default: w.append(t, String.format(".  A dark expression appears on %s's face, promising even greater torture to come.", mainName));
+                    }
                 }
                 if(c.gender.equals("male") && w.getMaleShift() > 0 && c.vVirg && (w.getGenders()[c.number].equals(c.gender) || w.getRepeatShift()))
                     c.InseminateChange(t, w, mainName + "'s " + penetrator);
@@ -23823,59 +23017,47 @@ public class Forsaken
                 {
                     if(disgrace > 66)
                     {
-                        if(c.confidence > 66)
-                            w.append(t, String.format("%s is on the losing end of %s fight with %s, %2$s head ringing from countless blows, but in exchange, %s's managed to get %sself between %s's legs, where %s can ", mainName, hisHer(), c.mainName, heShe(), himHer(), c.mainName, heShe()));
-                        else
-                        if(c.confidence > 33)
-                            w.append(t, String.format("As they scuffle together on the ground, %s reaches out in desperation and finds a concrete brick, which %s smashes into the side of %s's head.  %3$s is briefly stunned, allowing %1$s to ", mainName, heShe(), c.mainName));
-                        else
-                            w.append(t, String.format("%s has been fighting with %s %s on full display, and %s is intimidated by the sight, causing %s reactions to be sluggish and %5$s judgment poor.  %1$s is able to trip %s up, then pin %s down.  Then, before %s can squirm free, %1$s is quick to ", mainName, hisHer(), penetrator, c.mainName, c.hisHer(), c.himHer(), c.hisHer(), c.mainName));
+                        switch (c.confidence / 33) {
+                            case 0: w.append(t, String.format("%s has been fighting with %s %s on full display, and %s is intimidated by the sight, causing %s reactions to be sluggish and %5$s judgment poor.  %1$s is able to trip %s up, then pin %s down.  Then, before %s can squirm free, %1$s is quick to ", mainName, hisHer(), penetrator, c.mainName, c.hisHer(), c.himHer(), c.hisHer(), c.mainName)); break;
+                            case 1: w.append(t, String.format("As they scuffle together on the ground, %s reaches out in desperation and finds a concrete brick, which %s smashes into the side of %s's head.  %3$s is briefly stunned, allowing %1$s to ", mainName, heShe(), c.mainName)); break;
+                            default: w.append(t, String.format("%s is on the losing end of %s fight with %s, %2$s head ringing from countless blows, but in exchange, %s's managed to get %sself between %s's legs, where %s can ", mainName, hisHer(), c.mainName, heShe(), himHer(), c.mainName, heShe()));
+                        }
                     } else
                     if(disgrace > 33)
                     {
-                        if(c.confidence > 66)
-                            w.append(t, String.format("As they fight, %s starts to taunt %s about whether %s's eager to get raped again.  This is a sore spot for %2$s, and the distraction is enough to let %1$s seize the upper hand, flipping %2$s onto %s back and then pinning %s down to ", mainName, c.mainName, c.heShe(), c.hisHer(), c.himHer()));
-                        else
-                        if(c.confidence > 33)
-                            w.append(t, String.format("%s and %s are evenly matched, but %2$s knows that %s can conserve %s energy, because the worst that will happen is that %1$s will rape %s.  That willingness to lose gives %1$s the upper hand, and before long, %s has %2$s on %s back where %s can ", mainName, c.mainName, c.heShe(), c.hisHer(), c.himHer(), heShe(), c.hisHer(), heShe()));
-                        else
-                            w.append(t, String.format("%s and %s grapple together on the ground, struggling for supremacy, but when %2$s feels %1$s's penetrator poking between %s thighs, memories of past trauma cause %s to freeze up.  %1$s takes the opportunity to ", mainName, c.mainName, c.hisHer(), c.himHer()));
+                        switch (c.confidence / 33) {
+                            case 0: w.append(t, String.format("%s and %s grapple together on the ground, struggling for supremacy, but when %2$s feels %1$s's penetrator poking between %s thighs, memories of past trauma cause %s to freeze up.  %1$s takes the opportunity to ", mainName, c.mainName, c.hisHer(), c.himHer())); break;
+                            case 1: w.append(t, String.format("%s and %s are evenly matched, but %2$s knows that %s can conserve %s energy, because the worst that will happen is that %1$s will rape %s.  That willingness to lose gives %1$s the upper hand, and before long, %s has %2$s on %s back where %s can ", mainName, c.mainName, c.heShe(), c.hisHer(), c.himHer(), heShe(), c.hisHer(), heShe())); break;
+                            default: w.append(t, String.format("As they fight, %s starts to taunt %s about whether %s's eager to get raped again.  This is a sore spot for %2$s, and the distraction is enough to let %1$s seize the upper hand, flipping %2$s onto %s back and then pinning %s down to ", mainName, c.mainName, c.heShe(), c.hisHer(), c.himHer()));
+                        }
                     } else
-                    if(c.confidence > 66)
-                        w.append(t, String.format("%s fought hard, but %s beat %s down with countless blows from %s %s, and now %1$s can barely move a muscle.  %2$s steps forward to ", c.mainName, mainName, c.himHer(), hisHer(), weapon));
-                    else
-                    if(c.confidence > 33)
-                        w.append(t, String.format("%s strides toward %s, shrugging off %s's increasingly desperate attacks.  %2$s tries to fight while retreating, but %s back hits a wall, and then %1$s picks %s up by the throat, using %s other hand to ", mainName, c.mainName, reference(c), c.hisHer(), c.himHer(), hisHer()));
-                    else
-                        w.append(t, String.format("%s gives up on defeating %s stronger foe.  With tears of despair in %2$s eyes, %s lays back and allows %s to ", c.mainName, c.hisHer(), c.heShe(), mainName));
+                    switch (c.confidence / 33) {
+                        case 0: w.append(t, String.format("%s gives up on defeating %s stronger foe.  With tears of despair in %2$s eyes, %s lays back and allows %s to ", c.mainName, c.hisHer(), c.heShe(), mainName)); break;
+                        case 1: w.append(t, String.format("%s strides toward %s, shrugging off %s's increasingly desperate attacks.  %2$s tries to fight while retreating, but %s back hits a wall, and then %1$s picks %s up by the throat, using %s other hand to ", mainName, c.mainName, reference(c), c.hisHer(), c.himHer(), hisHer())); break;
+                        default: w.append(t, String.format("%s fought hard, but %s beat %s down with countless blows from %s %s, and now %1$s can barely move a muscle.  %2$s steps forward to ", c.mainName, mainName, c.himHer(), hisHer(), weapon));
+                    }
                 } else
                 if(deviancy > 66)
                 {
-                    if(c.innocence > 66)
-                        w.append(t, String.format("%s makes no effort to physically hurt %s, but %s psychological attack is merciless.  %s talks constantly as they circle each other, giving voice to %s deepest perversions.  When %2$s flinches at one of the items on the long list of things %s wants to stuff inside %s, %1$s leaps into motion, tripping %2$s to the ground and positioning %sself between %2$s's legs so that %s can ", mainName, c.mainName, hisHer(), HeShe(), hisHer(), c.reference(this), c.himHer(), himHer(), heShe()));
-                    else
-                    if(c.innocence > 33)
-                        w.append(t, String.format("%s charges at %s with hands outstretched, heedless of the wounds left by %s's %s and making no effort to dodge or fight back.  Laughing madly with desire, %s jumps onto %2$s, entangling %s arms and legs around %s.  While %2$s struggles to free %7$sself, %1$s is able to ", mainName, c.mainName, reference(c), c.weapon, heShe(), hisHer(), c.himHer()));
-                    else
-                        w.append(t, String.format("%s is very good at maneuvering %sself out of tight situations, so %s just doesn't give %2$s time to react.  %s abruptly charges at %s, leaping into the air and tackling %2$s, then wildly humping %2$s even before %1$s's %s can be shifted out of the way.  Then, %s can ", c.mainName, c.himHer(), mainName, HeShe(), reference(c), c.bottomDesc(), heShe()));
+                    switch (c.innocence / 33) {
+                        case 0: w.append(t, String.format("%s is very good at maneuvering %sself out of tight situations, so %s just doesn't give %2$s time to react.  %s abruptly charges at %s, leaping into the air and tackling %2$s, then wildly humping %2$s even before %1$s's %s can be shifted out of the way.  Then, %s can ", c.mainName, c.himHer(), mainName, HeShe(), reference(c), c.bottomDesc(), heShe())); break;
+                        case 1: w.append(t, String.format("%s charges at %s with hands outstretched, heedless of the wounds left by %s's %s and making no effort to dodge or fight back.  Laughing madly with desire, %s jumps onto %2$s, entangling %s arms and legs around %s.  While %2$s struggles to free %7$sself, %1$s is able to ", mainName, c.mainName, reference(c), c.weapon, heShe(), hisHer(), c.himHer())); break;
+                        default: w.append(t, String.format("%s makes no effort to physically hurt %s, but %s psychological attack is merciless.  %s talks constantly as they circle each other, giving voice to %s deepest perversions.  When %2$s flinches at one of the items on the long list of things %s wants to stuff inside %s, %1$s leaps into motion, tripping %2$s to the ground and positioning %sself between %2$s's legs so that %s can ", mainName, c.mainName, hisHer(), HeShe(), hisHer(), c.reference(this), c.himHer(), himHer(), heShe()));
+                    }
                 } else
                 if(deviancy > 33)
                 {
-                    if(c.innocence > 66)
-                        w.append(t, String.format("As %s tries to fight %s, %2$s shows no interest whatsoever in attacking, instead constantly groping and fondling %1$s at every opportunity.  %1$s finds it harder and harder to maintain %s composure, until finally %s takes a wild swing at %2$s and ends up tripping and falling with %s bottom in the air.  %2$s pounces onto %s so that %s can ", c.mainName, mainName, c.hisHer(), c.heShe(), c.hisHer(), reference(c), heShe()));
-                    else
-                    if(c.innocence > 33)
-                        w.append(t, String.format("%s fights defensively, %s only priority being to find a way into %s's %s.  Comparatively, %s is exhausting %sself with the constant attempts to bring %1$s down, and it's only a matter of time until %s spots a weakness in %s stance.  In a sudden blur of movement, %1$s is holding %s from behind, and %s's able to ", mainName, hisHer(), c.mainName, c.bottomDesc(), c.mainName, c.himHer(), c.reference(this), c.hisHer(), c.mainName, heShe()));
-                    else
-                        w.append(t, String.format("%s knows that %s is going to try to rape %s, and normally, %s'd always be able to find a way to defend %sself.  But with %s emotional state disturbed, %1$s finds %sself overextending %7$sself just a little too much, and the lustful %2$s exploits that mistake to the fullest.  %2$s pulls %1$s down to the ground with %s, which lets %8$s ", c.mainName, mainName, c.himHer(), c.heShe(), c.himHer(), c.hisHer(), c.himHer(), himHer()));
+                    switch (c.innocence / 33) {
+                        case 0: w.append(t, String.format("%s knows that %s is going to try to rape %s, and normally, %s'd always be able to find a way to defend %sself.  But with %s emotional state disturbed, %1$s finds %sself overextending %7$sself just a little too much, and the lustful %2$s exploits that mistake to the fullest.  %2$s pulls %1$s down to the ground with %s, which lets %8$s ", c.mainName, mainName, c.himHer(), c.heShe(), c.himHer(), c.hisHer(), c.himHer(), himHer())); break;
+                        case 1: w.append(t, String.format("%s fights defensively, %s only priority being to find a way into %s's %s.  Comparatively, %s is exhausting %sself with the constant attempts to bring %1$s down, and it's only a matter of time until %s spots a weakness in %s stance.  In a sudden blur of movement, %1$s is holding %s from behind, and %s's able to ", mainName, hisHer(), c.mainName, c.bottomDesc(), c.mainName, c.himHer(), c.reference(this), c.hisHer(), c.mainName, heShe())); break;
+                        default: w.append(t, String.format("As %s tries to fight %s, %2$s shows no interest whatsoever in attacking, instead constantly groping and fondling %1$s at every opportunity.  %1$s finds it harder and harder to maintain %s composure, until finally %s takes a wild swing at %2$s and ends up tripping and falling with %s bottom in the air.  %2$s pounces onto %s so that %s can ", c.mainName, mainName, c.hisHer(), c.heShe(), c.hisHer(), reference(c), heShe()));
+                    }
                 } else
-                if(c.innocence > 66)
-                    w.append(t, String.format("%s abruptly reaches %s %s %s and pulls out %s %s.  %s's eyes go wide as %s looks down at it, and in that moment of shock, %1$s is able to shove %s down and ", mainName, bottomAccess, hisHer(), bottomDesc(), hisHer(), penetrator, c.mainName, c.heShe(), c.himHer()));
-                else
-                if(c.innocence > 33)
-                    w.append(t, String.format("%s allows %s to tackle %s to the ground, and instead of defending %3$sself, %s focuses on positioning %s %s so that %s can ", mainName, c.mainName, himHer(), heShe(), hisHer(), penetrator, heShe()));
-                else
-                    w.append(t, String.format("%s spots the crowd of Thralls rushing at %s as %s fights %s, but as %s's surrounded on all sides, there's nothing %5$s can to do stop %2$sself from being overrun and held in place so that %s can ", c.mainName, c.himHer(), c.heShe(), mainName, c.heShe(), mainName));
+                switch (c.innocence / 33) {
+                    case 0: w.append(t, String.format("%s spots the crowd of Thralls rushing at %s as %s fights %s, but as %s's surrounded on all sides, there's nothing %5$s can to do stop %2$sself from being overrun and held in place so that %s can ", c.mainName, c.himHer(), c.heShe(), mainName, c.heShe(), mainName)); break;
+                    case 1: w.append(t, String.format("%s allows %s to tackle %s to the ground, and instead of defending %3$sself, %s focuses on positioning %s %s so that %s can ", mainName, c.mainName, himHer(), heShe(), hisHer(), penetrator, heShe())); break;
+                    default: w.append(t, String.format("%s abruptly reaches %s %s %s and pulls out %s %s.  %s's eyes go wide as %s looks down at it, and in that moment of shock, %1$s is able to shove %s down and ", mainName, bottomAccess, hisHer(), bottomDesc(), hisHer(), penetrator, c.mainName, c.heShe(), c.himHer()));
+                }
                 if(c.getEXPOLevel() < 3 && !c.bottomAccess.equals("up") && !c.bottomAccess.equals("around") && !c.bottomAccess.contains("skirt"))
                 {
                     switch (dignity / 33) {
@@ -23902,23 +23084,19 @@ public class Forsaken
                             default: w.append(t, String.format("%s has been told that it'll be extra effective to fuck %s in front of a crowd, and so %s does so, ", mainName, c.mainName, heShe()));
                         }
                         w.append(t, String.format("lifting %s's legs high in the air, standing and penetrating %s from behind so that the nearby spectators can see the place where they're joined.  ", reference(c), c.himHer()));
-                        if(flavorHostility() > 66)
-                            w.append(t, String.format("%s's wail of shame and embarrassment is almost enough to make %s cum by itself.", c.mainName, mainName));
-                        else
-                        if(flavorHostility() > 33)
-                            w.append(t, String.format("While %s flinches and does %s best to cover %sself, %s calls out to the crowd and invites them to watch more.", c.mainName, c.hisHer(), c.himHer(), mainName));
-                        else
-                            w.append(t, String.format("%s doesn't have any particular desire to see %s suffer, but the way that %s stops trying to escape and just focuses on covering %sself is useful.", HeShe(), c.mainName, c.heShe(), c.himHer()));
+                        switch (flavorHostility() / 33) {
+                            case 0: w.append(t, String.format("%s doesn't have any particular desire to see %s suffer, but the way that %s stops trying to escape and just focuses on covering %sself is useful.", HeShe(), c.mainName, c.heShe(), c.himHer())); break;
+                            case 1: w.append(t, String.format("While %s flinches and does %s best to cover %sself, %s calls out to the crowd and invites them to watch more.", c.mainName, c.hisHer(), c.himHer(), mainName)); break;
+                            default: w.append(t, String.format("%s's wail of shame and embarrassment is almost enough to make %s cum by itself.", c.mainName, mainName));
+                        }
                     } else
                     if(c.dignity > 33)
                     {
-                        if(flavorDeviancy() > 66)
-                            w.append(t, String.format("%s is completely absorbed in fucking %s, pinning %s to the ground and hammering into %3$s over and over again with wild abandon.  ", mainName, c.mainName, c.himHer()));
-                        else
-                        if(flavorDeviancy() > 33)
-                            w.append(t, String.format("%s fucks %s with slow, steady thrusts, enjoying every moment of it.  ", mainName, c.mainName));
-                        else
-                            w.append(t, String.format("%s's enjoyment of fucking %s has less to do with the physical sensations involved than it does with the circumstances and surroundings.  ", mainName, c.mainName));
+                        switch (flavorDeviancy() / 33) {
+                            case 0: w.append(t, String.format("%s's enjoyment of fucking %s has less to do with the physical sensations involved than it does with the circumstances and surroundings.  ", mainName, c.mainName)); break;
+                            case 1: w.append(t, String.format("%s fucks %s with slow, steady thrusts, enjoying every moment of it.  ", mainName, c.mainName)); break;
+                            default: w.append(t, String.format("%s is completely absorbed in fucking %s, pinning %s to the ground and hammering into %3$s over and over again with wild abandon.  ", mainName, c.mainName, c.himHer()));
+                        }
                         switch (confidence / 33) {
                             case 0: w.append(t, String.format("For so long, %s was nothing but a victim, but now %1$s's showing all the gasping, leering bystanders that %1$s's strong enough to do this to one of the Chosen.", heShe())); break;
                             case 1: w.append(t, String.format("There are bystanders who might be close enough to help %s, but they're afraid to approach, and that sense of being seen as powerful is intoxicating.", reference(c))); break;
@@ -23931,13 +23109,11 @@ public class Forsaken
                             case 1: w.append(t, String.format("%s makes no effort to cover %sself even as %s penetrates %2$s in full view of the public.  %3$s ", c.mainName, c.himHer(), mainName)); break;
                             default: w.append(t, String.format("%s no longer feels embarrassed to be seen having sex in public (especially not when %s's the one on top), but %2$s still feels a thrill about it, and %2$s's surprised at how %s is able to ignore the watching bystanders.  %s ", mainName, heShe(), c.mainName, HeShe()));
                         }
-                        if(flavorObedience() > 66)
-                            w.append(t, String.format("is happy about %s's lack of modesty.  After all, it's the Demon Lord's desire that %s's public image becomes more sexual.", reference(c), c.mainName));
-                        else
-                        if(flavorObedience() > 33)
-                            w.append(t, "intends to take advantage of the chance to distract the other Chosen.");
-                        else
-                            w.append(t, String.format("has to respect the way that %s refuses to be distracted by embarrassment.", reference(c)));
+                        switch (flavorObedience() / 33) {
+                            case 0: w.append(t, String.format("has to respect the way that %s refuses to be distracted by embarrassment.", reference(c))); break;
+                            case 1: w.append(t, "intends to take advantage of the chance to distract the other Chosen."); break;
+                            default: w.append(t, String.format("is happy about %s's lack of modesty.  After all, it's the Demon Lord's desire that %s's public image becomes more sexual.", reference(c), c.mainName));
+                        }
                     }
                 } else
                 if(c.confidence > 66)
@@ -23955,13 +23131,11 @@ public class Forsaken
                 } else
                 if(c.confidence > 33)
                 {
-                    if(flavorDeviancy() > 66)
-                        w.append(t, String.format("%s holds the exhausted %s face-down against the ground as %s wildly thrusts into %s from behind, ", mainName, c.mainName, heShe(), c.himHer()));
-                    else
-                    if(flavorDeviancy() > 33)
-                        w.append(t, String.format("%s sighs with pleasure as %s slides %s %s in and out of %s with slow, steady thrusts, ", mainName, heShe(), hisHer(), penetrator, c.mainName));
-                    else
-                        w.append(t, String.format("%s keeps %s's arms firmly pinned behind %s back, putting less effort into actually thrusting into %s than %s does into remaining in control, ", mainName, c.mainName, c.hisHer(), c.himHer(), heShe()));
+                    switch (flavorDeviancy() / 33) {
+                        case 0: w.append(t, String.format("%s keeps %s's arms firmly pinned behind %s back, putting less effort into actually thrusting into %s than %s does into remaining in control, ", mainName, c.mainName, c.hisHer(), c.himHer(), heShe())); break;
+                        case 1: w.append(t, String.format("%s sighs with pleasure as %s slides %s %s in and out of %s with slow, steady thrusts, ", mainName, heShe(), hisHer(), penetrator, c.mainName)); break;
+                        default: w.append(t, String.format("%s holds the exhausted %s face-down against the ground as %s wildly thrusts into %s from behind, ", mainName, c.mainName, heShe(), c.himHer()));
+                    }
                     switch (confidence / 33) {
                         case 0: w.append(t, "enjoying being on top for once."); break;
                         case 1: w.append(t, String.format("ignoring %s's angry glare.", reference(c))); break;
@@ -23974,13 +23148,11 @@ public class Forsaken
                         case 1: w.append(t, String.format("%s doesn't put up much of a fight now that %s is inside %s.  %s only form of resistance is %s pleas for %s to pull out, which ", c.mainName, mainName, c.himHer(), c.HisHer(), c.hisHer(), c.reference(this))); break;
                         default: w.append(t, String.format("%s is too caught up in the sensations of fucking %s to notice %s cries and whimpers, but if %s could, they'd ", mainName, c.mainName, c.hisHer(), c.heShe()));
                     }
-                    if(flavorHostility() > 66)
-                        w.append(t, String.format("fill %s with sadistic glee.", mainName));
-                    else
-                    if(flavorHostility() > 33)
-                        w.append(t, String.format("have no effect on %s at all.", mainName));
-                    else
-                        w.append(t, String.format("fill %s with guilt.", mainName));
+                    switch (flavorHostility() / 33) {
+                        case 0: w.append(t, String.format("fill %s with guilt.", mainName)); break;
+                        case 1: w.append(t, String.format("have no effect on %s at all.", mainName)); break;
+                        default: w.append(t, String.format("fill %s with sadistic glee.", mainName));
+                    }
                 }
             } else
             if(defilerStage % 2 == 0)
@@ -23993,13 +23165,11 @@ public class Forsaken
                             case 1: w.append(t, String.format("%s has plenty of experience fucking Thralls and captive civilians, and %s skillful thrusts are making %s's eyes roll into the back of %s head with unwilling pleasure.  ", mainName, hisHer(), c.mainName, c.hisHer())); break;
                             default: w.append(t, String.format("%s is diligent about giving %s at least as much pleasure as %s %sself is receiving, thrusting in and out in a steadily intensifying rhythm.  ", mainName, c.mainName, heShe(), himHer()));
                         }
-                        if(flavorHostility() > 66)
-                            w.append(t, String.format("%s lips twist in annoyance, and %s pinches %s's %s hard, then smirks to %sself at the way %s screams and flails.", HisHer(), heShe(), c.mainName, organ, himHer(), c.mainName));
-                        else
-                        if(flavorHostility() > 33)
-                            w.append(t, String.format("%s grins mischievously and seizes %s's %s, forcing out a surprised squeal of pleasure as %s starts to firmly tug it.", HeShe(), c.mainName, organ, heShe()));
-                        else
-                            w.append(t, String.format("%s notices that %s is trying to hide it, stifling %s moans and turning %3$s face away, so %s decides to help out by turning %s face toward %s and kissing %s deeply on the lips.", HeShe(), c.mainName, c.hisHer(), mainName, c.hisHer(), himHer(), c.himHer()));
+                        switch (flavorHostility() / 33) {
+                            case 0: w.append(t, String.format("%s notices that %s is trying to hide it, stifling %s moans and turning %3$s face away, so %s decides to help out by turning %s face toward %s and kissing %s deeply on the lips.", HeShe(), c.mainName, c.hisHer(), mainName, c.hisHer(), himHer(), c.himHer())); break;
+                            case 1: w.append(t, String.format("%s grins mischievously and seizes %s's %s, forcing out a surprised squeal of pleasure as %s starts to firmly tug it.", HeShe(), c.mainName, organ, heShe())); break;
+                            default: w.append(t, String.format("%s lips twist in annoyance, and %s pinches %s's %s hard, then smirks to %sself at the way %s screams and flails.", HisHer(), heShe(), c.mainName, organ, himHer(), c.mainName));
+                        }
                     } else
                     if(c.dignity > 33)
                     {
@@ -24015,13 +23185,11 @@ public class Forsaken
                         }
                     } else
                     {
-                        if(flavorDeviancy() > 66)
-                            w.append(t, String.format("%s and %s feed each other's lust, %2$s's wild moans driving %s crazy as %s fucks %s.  ", mainName, c.mainName, c.reference(this), heShe(), c.himHer()));
-                        else
-                        if(flavorDeviancy() > 33)
-                            w.append(t, String.format("%s's body is learning to enjoy being raped by %s's %s, and %s helpless cries of pleasure only turn %s on even more.  ", c.mainName, mainName, penetrator, c.hisHer(), c.reference(this)));
-                        else
-                            w.append(t, String.format("%s worries that %s might be developing a strange fetish, watching the way that %s squirms and moans as %s's impaled by %s's %s.  ", mainName, heShe(), c.mainName, c.heShe(), c.reference(this), penetrator));
+                        switch (flavorDeviancy() / 33) {
+                            case 0: w.append(t, String.format("%s worries that %s might be developing a strange fetish, watching the way that %s squirms and moans as %s's impaled by %s's %s.  ", mainName, heShe(), c.mainName, c.heShe(), c.reference(this), penetrator)); break;
+                            case 1: w.append(t, String.format("%s's body is learning to enjoy being raped by %s's %s, and %s helpless cries of pleasure only turn %s on even more.  ", c.mainName, mainName, penetrator, c.hisHer(), c.reference(this))); break;
+                            default: w.append(t, String.format("%s and %s feed each other's lust, %2$s's wild moans driving %s crazy as %s fucks %s.  ", mainName, c.mainName, c.reference(this), heShe(), c.himHer()));
+                        }
                         switch (confidence / 33) {
                             case 0: w.append(t, String.format("Moaning just as loudly, %s drives %sself even deeper into %s, losing %2$sself in the act.", mainName, himHer(), c.mainName)); break;
                             case 1: w.append(t, "The two of them continue to buck their hips against each other, looking almost like a pair of lovers."); break;
@@ -24031,13 +23199,11 @@ public class Forsaken
                 } else
                 if(c.morality > 66)
                 {
-                    if(flavorHostility() > 66)
-                        w.append(t, String.format("%s's %s bottoms out inside %s, and %s leans in close to whisper into %s's ear that %s's nothing but a used-up slut now, a wet hole for people like %1$s to use for their own pleasure.  ", mainName, penetrator, c.mainName, c.heShe(), reference(c), c.heShe()));
-                    else
-                    if(flavorHostility() > 33)
-                        w.append(t, String.format("%s laughs in %s's face as %s fucks %s, telling %4$s that everyone %s meets is probably waiting for their chance to rape %s too.  ", mainName, c.mainName, heShe(), c.himHer(), c.heShe(), c.himHer()));
-                    else
-                        w.append(t, String.format("While %s fucks %s, %s gasps with pleasure and comments on how good it feels, telling %s how sexy %s is.  ", heShe(), c.mainName, mainName, reference(c), c.heShe()));
+                    switch (flavorHostility() / 33) {
+                        case 0: w.append(t, String.format("While %s fucks %s, %s gasps with pleasure and comments on how good it feels, telling %s how sexy %s is.  ", heShe(), c.mainName, mainName, reference(c), c.heShe())); break;
+                        case 1: w.append(t, String.format("%s laughs in %s's face as %s fucks %s, telling %4$s that everyone %s meets is probably waiting for their chance to rape %s too.  ", mainName, c.mainName, heShe(), c.himHer(), c.heShe(), c.himHer())); break;
+                        default: w.append(t, String.format("%s's %s bottoms out inside %s, and %s leans in close to whisper into %s's ear that %s's nothing but a used-up slut now, a wet hole for people like %1$s to use for their own pleasure.  ", mainName, penetrator, c.mainName, c.heShe(), reference(c), c.heShe()));
+                    }
                     switch (dignity / 33) {
                         case 0: w.append(t, String.format("As far as %s's concerned, it's the simple truth, and %1$s isn't bothered by the way %s glares back at %s.", heShe(), c.mainName, c.himHer())); break;
                         case 1: w.append(t, String.format("%s glares back at %s, but %s doesn't even notice, too caught up in enjoying what %s's doing to %2$s.", c.mainName, c.himHer(), mainName, heShe())); break;
@@ -24058,13 +23224,11 @@ public class Forsaken
                     }
                 } else
                 {
-                    if(flavorObedience() > 66)
-                        w.append(t, String.format("Having noticed %s's devotion to the Demon Lord, %s starts to insult you, shouting at the top of %s lungs that you're nothing special and that only an idiot would follow you.  ", mainName, c.mainName, c.hisHer()));
-                    else
-                    if(flavorObedience() > 33)
-                        w.append(t, String.format("Even as %s thrusts inside %s, %s spitefully tries to anger %s with petty insults, calling %4$s a coward and an idiot.  ", mainName, c.himHer(), c.mainName, himHer()));
-                    else
-                        w.append(t, String.format("%s continues to struggle hard, shouting insults at %s at the same time, calling %s a tool of the Demon Lord.  ", c.mainName, mainName, himHer()));
+                    switch (flavorObedience() / 33) {
+                        case 0: w.append(t, String.format("%s continues to struggle hard, shouting insults at %s at the same time, calling %s a tool of the Demon Lord.  ", c.mainName, mainName, himHer())); break;
+                        case 1: w.append(t, String.format("Even as %s thrusts inside %s, %s spitefully tries to anger %s with petty insults, calling %4$s a coward and an idiot.  ", mainName, c.himHer(), c.mainName, himHer())); break;
+                        default: w.append(t, String.format("Having noticed %s's devotion to the Demon Lord, %s starts to insult you, shouting at the top of %s lungs that you're nothing special and that only an idiot would follow you.  ", mainName, c.mainName, c.hisHer()));
+                    }
                     switch (confidence / 33) {
                         case 0: w.append(t, String.format("Tears come to %s's eyes, but then %s stubbornly sets %s jaw and starts ramming inside %s harder than ever, too distracted to make any attempt at all to make %s feel good.", mainName, heShe(), hisHer(), reference(c), c.himHer())); break;
                         case 1: w.append(t, String.format("It bothers %s enough that %s can't enjoy this either, and %s %s falters inside %s.", mainName, heShe(), hisHer(), penetrator, reference(c))); break;
@@ -24078,13 +23242,11 @@ public class Forsaken
             {
                 if(disgrace > 66)
                 {
-                    if(c.dignity > 66)
-                        w.append(t, String.format("%s is stronger than the fallen %s, but %s has one critical weakness: %s sense of shame.  %s flinches and pulls back every time %2$s gropes %s, but the building pleasure makes %s reactions slower and slower until %s reaches the tipping point.  ", c.mainName, mainName, c.heShe(), c.hisHer(), c.HeShe(), c.himHer(), c.hisHer(), c.heShe()));
-                    else
-                    if(c.dignity > 33)
-                        w.append(t, String.format("The battle against %s has left %s bruised and bleeding, but %s still has the advantage, as %s injuries slow %s less than %1$s's building sexual arousal.  ", c.mainName, mainName, heShe(), hisHer(), himHer()));
-                    else
-                        w.append(t, String.format("%s doesn't let %s modesty get in the way of %2$s fighting, and while that means %s isn't embarrassed by sexual attacks, it also means that %3$s's ended up letting %s touch %s too much.  ", c.mainName, c.hisHer(), c.heShe(), mainName, c.himHer()));
+                    switch (c.dignity / 33) {
+                        case 0: w.append(t, String.format("%s doesn't let %s modesty get in the way of %2$s fighting, and while that means %s isn't embarrassed by sexual attacks, it also means that %3$s's ended up letting %s touch %s too much.  ", c.mainName, c.hisHer(), c.heShe(), mainName, c.himHer())); break;
+                        case 1: w.append(t, String.format("The battle against %s has left %s bruised and bleeding, but %s still has the advantage, as %s injuries slow %s less than %1$s's building sexual arousal.  ", c.mainName, mainName, heShe(), hisHer(), himHer())); break;
+                        default: w.append(t, String.format("%s is stronger than the fallen %s, but %s has one critical weakness: %s sense of shame.  %s flinches and pulls back every time %2$s gropes %s, but the building pleasure makes %s reactions slower and slower until %s reaches the tipping point.  ", c.mainName, mainName, c.heShe(), c.hisHer(), c.HeShe(), c.himHer(), c.hisHer(), c.heShe()));
+                    }
                 } else
                 if(disgrace > 33)
                 {
@@ -24102,42 +23264,34 @@ public class Forsaken
                     else
                         w.append(t, String.format("%s is openly gasping and moaning with arousal, but %s keeps trying to fight %s anyway.  A part of %s is eager when %s takes advantage of %s distraction to trip %s and climb atop %7$s on the ground.  ", c.mainName, c.heShe(), mainName, c.himHer(), mainName, c.hisHer(), c.himHer()));
                 } else
-                if(c.dignity > 66)
-                    w.append(t, String.format("%s knows %s doesn't have much of a chance against %s, especially not in %s turned on, distracted state.  But %2$s doesn't want to be seen running away, and %2$s's punished for %4$s vanity when %s grabs %s and easily holds %6$s against a wall.  ", c.mainName, c.heShe(), mainName, c.hisHer(), mainName, c.himHer()));
-                else
-                if(c.dignity > 33)
-                    w.append(t, String.format("In a sudden burst of movement, %s rushes forward and knocks %s to the ground, then climbs atop %s prone form.  %2$s struggles, but %s's helpless to stop what comes next.  ", mainName, c.mainName, c.hisHer(), c.heShe()));
-                else
-                    w.append(t, String.format("As %s grapples against the stronger Forsaken, %s feels %s's hand abruptly grab %s crotch, and %1$s cries out in shocked pleasure.  ", c.heShe(), c.mainName, mainName, c.hisHer()));
+                switch (c.dignity / 33) {
+                    case 0: w.append(t, String.format("As %s grapples against the stronger Forsaken, %s feels %s's hand abruptly grab %s crotch, and %1$s cries out in shocked pleasure.  ", c.heShe(), c.mainName, mainName, c.hisHer())); break;
+                    case 1: w.append(t, String.format("In a sudden burst of movement, %s rushes forward and knocks %s to the ground, then climbs atop %s prone form.  %2$s struggles, but %s's helpless to stop what comes next.  ", mainName, c.mainName, c.hisHer(), c.heShe())); break;
+                    default: w.append(t, String.format("%s knows %s doesn't have much of a chance against %s, especially not in %s turned on, distracted state.  But %2$s doesn't want to be seen running away, and %2$s's punished for %4$s vanity when %s grabs %s and easily holds %6$s against a wall.  ", c.mainName, c.heShe(), mainName, c.hisHer(), mainName, c.himHer()));
+                }
                 if(c.cVirg)
                 {
                     if(c.innocence > 66)
                     {
-                        if(flavorDeviancy() > 66)
-                            w.append(t, String.format("%s practically trembles with eagerness to defile %s's purity, and %s hands begin to wildly ravage %s most sensitive places.", mainName, reference(c), hisHer(), c.hisHer()));
-                        else
-                        if(flavorDeviancy() > 33)
-                            w.append(t, String.format("%s smirks at the way %s's eyes widen in panic, unable to comprehend the level of pleasure coming from the movements of %s's hands.", mainName, c.mainName, c.reference(this)));
-                        else
-                            w.append(t, String.format("%s is utterly unprepared for %s's precise, skillful movements, and %s eyes go wide as %3$s pleasure reaches a level %s's never felt before.", c.mainName, c.reference(this), c.hisHer(), c.heShe()));
+                        switch (flavorDeviancy() / 33) {
+                            case 0: w.append(t, String.format("%s is utterly unprepared for %s's precise, skillful movements, and %s eyes go wide as %3$s pleasure reaches a level %s's never felt before.", c.mainName, c.reference(this), c.hisHer(), c.heShe())); break;
+                            case 1: w.append(t, String.format("%s smirks at the way %s's eyes widen in panic, unable to comprehend the level of pleasure coming from the movements of %s's hands.", mainName, c.mainName, c.reference(this))); break;
+                            default: w.append(t, String.format("%s practically trembles with eagerness to defile %s's purity, and %s hands begin to wildly ravage %s most sensitive places.", mainName, reference(c), hisHer(), c.hisHer()));
+                        }
                     } else
                     if(c.innocence > 33)
                     {
-                        if(flavorDeviancy() > 66)
-                            w.append(t, String.format("%s is briefly confused by %s's manic grasping at %s crotch, but the resulting surges of pleasure seem to paralyze %3$s legs.  That's what makes %1$s realize with astonished disbelief that %s %sself might be no better at controlling %s lust than %s is.", c.mainName, c.reference(this), c.hisHer(), c.heShe(), c.himHer(), c.hisHer(), heShe()));
-                        else
-                        if(flavorDeviancy() > 33)
-                            w.append(t, String.format("%s notices the way that %s body has stopped obeying %2$s commands, %2$s hands seeming feeble and useless as they try to pull %s's wrists away.  At first, %s thinks that's all %s's after, but the pleasure keeps building and building, and suddenly %s's fighting to contain %2$s orgasm.", c.mainName, c.hisHer(), c.reference(this), c.heShe(), mainName, c.heShe()));
-                        else
-                            w.append(t, String.format("%s has never been forced to cum against %s will before.  %s had thought it impossible.  But the sudden jolts of pleasure shooting through %s down there tell %4$s that %s is going to be the first to make it happen.", c.mainName, c.hisHer(), c.HeShe(), c.himHer(), c.reference(this)));
+                        switch (flavorDeviancy() / 33) {
+                            case 0: w.append(t, String.format("%s has never been forced to cum against %s will before.  %s had thought it impossible.  But the sudden jolts of pleasure shooting through %s down there tell %4$s that %s is going to be the first to make it happen.", c.mainName, c.hisHer(), c.HeShe(), c.himHer(), c.reference(this))); break;
+                            case 1: w.append(t, String.format("%s notices the way that %s body has stopped obeying %2$s commands, %2$s hands seeming feeble and useless as they try to pull %s's wrists away.  At first, %s thinks that's all %s's after, but the pleasure keeps building and building, and suddenly %s's fighting to contain %2$s orgasm.", c.mainName, c.hisHer(), c.reference(this), c.heShe(), mainName, c.heShe())); break;
+                            default: w.append(t, String.format("%s is briefly confused by %s's manic grasping at %s crotch, but the resulting surges of pleasure seem to paralyze %3$s legs.  That's what makes %1$s realize with astonished disbelief that %s %sself might be no better at controlling %s lust than %s is.", c.mainName, c.reference(this), c.hisHer(), c.heShe(), c.himHer(), c.hisHer(), heShe()));
+                        }
                     } else
-                    if(flavorDeviancy() > 66)
-                        w.append(t, String.format("%s realizes that someone like %s could only be after one thing, and %s hurriedly tries to compose %s mind and shut out the sensations.  But %s continues to stroke %s under %s %s, and the stimulation is too much to withstand.", c.mainName, mainName, c.heShe(), c.hisHer(), c.reference(this), c.himHer(), c.hisHer(), c.bottomDesc()));
-                    else
-                    if(flavorDeviancy() > 33)
-                        w.append(t, String.format("%s starts to lose control, and %s usual precise words take on a fuzzy, distracted quality as %s tries to convince %s to let %s go.  That only turns %s on even more.", c.mainName, c.hisHer(), c.heShe(), c.reference(this), c.himHer(), mainName));
-                    else
-                        w.append(t, String.format("At first, %s is contemptful of %s's efforts to push %s over the edge, but %s expression quickly turns into alarm and then panic as the warm feelings begin shooting through %4$s loins.  Too late, %s tries to shift %s focus from fighting to covering %sself.", c.mainName, c.reference(this), c.himHer(), c.hisHer(), c.heShe(), c.hisHer(), c.himHer()));
+                    switch (flavorDeviancy() / 33) {
+                        case 0: w.append(t, String.format("At first, %s is contemptful of %s's efforts to push %s over the edge, but %s expression quickly turns into alarm and then panic as the warm feelings begin shooting through %4$s loins.  Too late, %s tries to shift %s focus from fighting to covering %sself.", c.mainName, c.reference(this), c.himHer(), c.hisHer(), c.heShe(), c.hisHer(), c.himHer())); break;
+                        case 1: w.append(t, String.format("%s starts to lose control, and %s usual precise words take on a fuzzy, distracted quality as %s tries to convince %s to let %s go.  That only turns %s on even more.", c.mainName, c.hisHer(), c.heShe(), c.reference(this), c.himHer(), mainName)); break;
+                        default: w.append(t, String.format("%s realizes that someone like %s could only be after one thing, and %s hurriedly tries to compose %s mind and shut out the sensations.  But %s continues to stroke %s under %s %s, and the stimulation is too much to withstand.", c.mainName, mainName, c.heShe(), c.hisHer(), c.reference(this), c.himHer(), c.hisHer(), c.bottomDesc()));
+                    }
                     w.append(t, "\n\n");
                     c.InnocenceBreakTwo(t, w);
                     c.cTaker = 0;
@@ -24145,31 +23299,25 @@ public class Forsaken
                 {
                     if(c.morality > 66)
                     {
-                        if(flavorDeviancy() > 66)
-                            w.append(t, String.format("%s's sense of restraint is no match for %s's manic desire to make %s cum.", c.mainName, c.reference(this), c.himHer()));
-                        else
-                        if(flavorDeviancy() > 33)
-                            w.append(t, String.format("%s's eyes light up as the movements of %s hands grow more intense.  Forcing restrained people like %s to cum against their will has become one of %2$s favorite pleasures.", mainName, hisHer(), reference(c)));
-                        else
-                            w.append(t, String.format("%s tries to keep fighting, but %s recognizes the pleasure building in %s, and %2$s groans in disappointment at %3$sself for letting %s make %s cum.", c.mainName, c.heShe(), c.himHer(), c.reference(this), c.himHer()));
+                        switch (flavorDeviancy() / 33) {
+                            case 0: w.append(t, String.format("%s tries to keep fighting, but %s recognizes the pleasure building in %s, and %2$s groans in disappointment at %3$sself for letting %s make %s cum.", c.mainName, c.heShe(), c.himHer(), c.reference(this), c.himHer())); break;
+                            case 1: w.append(t, String.format("%s's eyes light up as the movements of %s hands grow more intense.  Forcing restrained people like %s to cum against their will has become one of %2$s favorite pleasures.", mainName, hisHer(), reference(c))); break;
+                            default: w.append(t, String.format("%s's sense of restraint is no match for %s's manic desire to make %s cum.", c.mainName, c.reference(this), c.himHer()));
+                        }
                     } else
                     if(c.morality > 33)
                     {
-                        if(flavorDeviancy() > 66)
-                            w.append(t, String.format("%s can't hide the signs of %s approaching orgasm, %2$s hips bucking and %2$s eyes going unfocused.  The sight of %s losing control drives %s even more wild.", c.mainName, c.hisHer(), reference(c), mainName));
-                        else
-                        if(flavorDeviancy() > 33)
-                            w.append(t, String.format("%s has gotten very good at forcing orgasms out of struggling opponents.  %s starts trying to escape, but it's already too late, and %s kisses %s deeply as the movements of %s hands speed up.", mainName, c.mainName, c.reference(this), c.himHer(), hisHer()));
-                        else
-                            w.append(t, String.format("%s's main concern is paralyzing %s with pleasure.  As soon as %2$s's limbs go weak, %s has no chance of escaping until %s is done making %s cum.", mainName, c.mainName, c.heShe(), c.reference(this), c.himHer()));
+                        switch (flavorDeviancy() / 33) {
+                            case 0: w.append(t, String.format("%s's main concern is paralyzing %s with pleasure.  As soon as %2$s's limbs go weak, %s has no chance of escaping until %s is done making %s cum.", mainName, c.mainName, c.heShe(), c.reference(this), c.himHer())); break;
+                            case 1: w.append(t, String.format("%s has gotten very good at forcing orgasms out of struggling opponents.  %s starts trying to escape, but it's already too late, and %s kisses %s deeply as the movements of %s hands speed up.", mainName, c.mainName, c.reference(this), c.himHer(), hisHer())); break;
+                            default: w.append(t, String.format("%s can't hide the signs of %s approaching orgasm, %2$s hips bucking and %2$s eyes going unfocused.  The sight of %s losing control drives %s even more wild.", c.mainName, c.hisHer(), reference(c), mainName));
+                        }
                     } else
-                    if(flavorDeviancy() > 66)
-                        w.append(t, String.format("%s forces a hungry kiss on %s, but even when %2$s bites %s's tongue, it only seems to turn %s on even more.  Soon, %2$s is kissing %1$s back, losing %s mind to the pleasure.", mainName, c.mainName, c.reference(this), himHer(), c.hisHer()));
-                    else
-                    if(flavorDeviancy() > 33)
-                        w.append(t, String.format("%s angrily tries to fight %s off, but a sudden spasm of pleasure causes %s to lose %s grip on %s, who grins and begins to rub more firmly.", c.mainName, c.reference(this), c.himHer(), c.hisHer(), mainName));
-                    else
-                        w.append(t, String.format("%s struggles to escape before %s can be forced to cum again, but it's halfhearted.  %s body has come to crave this pleasure, even though %s is the one giving it to %s.", c.mainName, c.heShe(), c.HisHer(), c.reference(this), c.himHer()));
+                    switch (flavorDeviancy() / 33) {
+                        case 0: w.append(t, String.format("%s struggles to escape before %s can be forced to cum again, but it's halfhearted.  %s body has come to crave this pleasure, even though %s is the one giving it to %s.", c.mainName, c.heShe(), c.HisHer(), c.reference(this), c.himHer())); break;
+                        case 1: w.append(t, String.format("%s angrily tries to fight %s off, but a sudden spasm of pleasure causes %s to lose %s grip on %s, who grins and begins to rub more firmly.", c.mainName, c.reference(this), c.himHer(), c.hisHer(), mainName)); break;
+                        default: w.append(t, String.format("%s forces a hungry kiss on %s, but even when %2$s bites %s's tongue, it only seems to turn %s on even more.  Soon, %2$s is kissing %1$s back, losing %s mind to the pleasure.", mainName, c.mainName, c.reference(this), himHer(), c.hisHer()));
+                    }
                     w.append(t, "\n\n");
                 }
                 if(c.confidence > 66)
@@ -24179,36 +23327,30 @@ public class Forsaken
                         w.append(t, String.format("%s pussy spasming and sending trickles of fluid down %1$s tightly-clenched thighs.  ", c.hisHer()));
                     else
                         w.append(t, String.format("%s cock sending mind-numbing ecstasy through %s with every spurt that comes out.  ", c.hisHer(), c.himHer()));
-                    if(flavorHostility() > 66)
-                        w.append(t, String.format("%s finishes %s off by driving the heel of %s hand directly between %s legs, and the white-hot pain that replaces the pleasure in %s's head almost makes %2$s pass out.", mainName, c.himHer(), hisHer(), c.hisHer(), c.mainName));
-                    else
-                    if(flavorHostility() > 33)
-                        w.append(t, String.format("%s whispers into %s ear, taunting %s about becoming so weak as soon as %s starts feeling good.", mainName, c.hisHer(), c.himHer(), c.heShe()));
-                    else
-                        w.append(t, String.format("%s uses the opportunity to pin %s's arms behind %s back so that %s can keep stroking %s more easily.", mainName, c.mainName, c.hisHer(), heShe(), c.himHer()));
+                    switch (flavorHostility() / 33) {
+                        case 0: w.append(t, String.format("%s uses the opportunity to pin %s's arms behind %s back so that %s can keep stroking %s more easily.", mainName, c.mainName, c.hisHer(), heShe(), c.himHer())); break;
+                        case 1: w.append(t, String.format("%s whispers into %s ear, taunting %s about becoming so weak as soon as %s starts feeling good.", mainName, c.hisHer(), c.himHer(), c.heShe())); break;
+                        default: w.append(t, String.format("%s finishes %s off by driving the heel of %s hand directly between %s legs, and the white-hot pain that replaces the pleasure in %s's head almost makes %2$s pass out.", mainName, c.himHer(), hisHer(), c.hisHer(), c.mainName));
+                    }
                 } else
                 if(c.confidence > 33)
                 {
-                    if(flavorHostility() > 66)
-                        w.append(t, String.format("%s's grip is so firm as to be outright painful, but %s still manages to ", mainName, heShe()));
-                    else
-                    if(flavorHostility() > 33)
-                        w.append(t, String.format("%s doesn't let up even when the fight goes out of %s.  %s laughs and taunts %2$s as %s starts to ", mainName, c.mainName, HeShe(), heShe()));
-                    else
-                        w.append(t, String.format("Once it's clear that %s won't be able to escape, %s's hands become more gentle, but %s still doesn't stop until %3$s's begun to ", c.mainName, mainName, c.heShe()));
+                    switch (flavorHostility() / 33) {
+                        case 0: w.append(t, String.format("Once it's clear that %s won't be able to escape, %s's hands become more gentle, but %s still doesn't stop until %3$s's begun to ", c.mainName, mainName, c.heShe())); break;
+                        case 1: w.append(t, String.format("%s doesn't let up even when the fight goes out of %s.  %s laughs and taunts %2$s as %s starts to ", mainName, c.mainName, HeShe(), heShe())); break;
+                        default: w.append(t, String.format("%s's grip is so firm as to be outright painful, but %s still manages to ", mainName, heShe()));
+                    }
                     if(c.gender.equals("female"))
                         w.append(t, String.format("make %s's folds squeeze down in several orgasmic spasms, sweet moans leaking out with every surge of pleasure.", c.mainName));
                     else
                         w.append(t, String.format("milk spurt after spurt of cum out of %s's penis.", c.mainName));
                 } else
                 {
-                    if(flavorHostility() > 66)
-                        w.append(t, String.format("When %s bites hard on %s ear and gives a cruel twist to %2$s ", mainName, c.hisHer()));
-                    else
-                    if(flavorHostility() > 33)
-                        w.append(t, String.format("%s completely loses the ability to fight long before %s actually cums, and %s takes advantage, holding %s in place with a foot between %s legs.  Then, when %s abruptly starts moving %s foot back and forth against %1$s's ", c.mainName, c.heShe(), mainName, c.himHer(), c.hisHer(), mainName, hisHer()));
-                    else
-                        w.append(t, String.format("%s whispers in %s's ear, commanding %s to cum, and as %s strokes %2$s faster and faster down there, %s ", mainName, c.mainName, c.himHer(), heShe(), c.hisHer()));
+                    switch (flavorHostility() / 33) {
+                        case 0: w.append(t, String.format("%s whispers in %s's ear, commanding %s to cum, and as %s strokes %2$s faster and faster down there, %s ", mainName, c.mainName, c.himHer(), heShe(), c.hisHer())); break;
+                        case 1: w.append(t, String.format("%s completely loses the ability to fight long before %s actually cums, and %s takes advantage, holding %s in place with a foot between %s legs.  Then, when %s abruptly starts moving %s foot back and forth against %1$s's ", c.mainName, c.heShe(), mainName, c.himHer(), c.hisHer(), mainName, hisHer())); break;
+                        default: w.append(t, String.format("When %s bites hard on %s ear and gives a cruel twist to %2$s ", mainName, c.hisHer()));
+                    }
                     if(c.gender.equals("female"))
                         w.append(t, String.format("clit, %s squeals with pleasure and starts bucking %s hips, %2$s pussy clenching down and aching to be filled.", c.heShe(), c.hisHer()));
                     else
@@ -24230,23 +23372,19 @@ public class Forsaken
                             w.append(t, String.format("lifts %s by the ankles, %s legs spread wide so that everyone can see how wet %s is and how %3$s trembles with the aftershocks of %2$s orgasm.  ", reference(c), c.hisHer(), c.heShe()));
                         else
                             w.append(t, String.format("lifts %s upright mid-orgasm, so that everyone can see the way %s penis weakly spurts its load onto the pavement.  ", reference(c), c.hisHer()));
-                        if(flavorHostility() > 66)
-                            w.append(t, String.format("The way that %s cries out in despair and tries to cover %s face is immensely satisfying for %s.", c.mainName, c.hisHer(), mainName));
-                        else
-                        if(flavorHostility() > 33)
-                            w.append(t, String.format("As %s calls out for everyone to watch %s cum, %s has to raise %s voice in order to be heard over %2$s's frantic demands that they look away.", mainName, c.mainName, heShe(), hisHer()));
-                        else
-                            w.append(t, String.format("%s does %s best to hide how much this is bothering %s, but there are still tears in %2$s eyes, and %s feels guilty.", c.mainName, c.hisHer(), c.himHer(), mainName));
+                        switch (flavorHostility() / 33) {
+                            case 0: w.append(t, String.format("%s does %s best to hide how much this is bothering %s, but there are still tears in %2$s eyes, and %s feels guilty.", c.mainName, c.hisHer(), c.himHer(), mainName)); break;
+                            case 1: w.append(t, String.format("As %s calls out for everyone to watch %s cum, %s has to raise %s voice in order to be heard over %2$s's frantic demands that they look away.", mainName, c.mainName, heShe(), hisHer())); break;
+                            default: w.append(t, String.format("The way that %s cries out in despair and tries to cover %s face is immensely satisfying for %s.", c.mainName, c.hisHer(), mainName));
+                        }
                     } else
                     if(c.dignity > 33)
                     {
-                        if(flavorDeviancy() > 66)
-                            w.append(t, String.format("%s attacks %s's %s with wild abandon, literally drooling with the desire to see %s's next orgasm up-close.  ", mainName, c.mainName, c.bottomDesc(), reference(c)));
-                        else
-                        if(flavorDeviancy() > 33)
-                            w.append(t, String.format("%s eagerly works on peeling off what's left of %s's %s, licking %s lips as %s looks down at what's beneath.  ", mainName, c.mainName, c.bottomDesc(), hisHer(), heShe()));
-                        else
-                            w.append(t, String.format("%s isn't focused on stripping %s anymore, but as %s sits on %s and tries to work %s toward another orgasm, %2$s's %s naturally gets shifted and torn.  ", mainName, c.mainName, heShe(), reference(c), c.himHer(), c.bottomDesc()));
+                        switch (flavorDeviancy() / 33) {
+                            case 0: w.append(t, String.format("%s isn't focused on stripping %s anymore, but as %s sits on %s and tries to work %s toward another orgasm, %2$s's %s naturally gets shifted and torn.  ", mainName, c.mainName, heShe(), reference(c), c.himHer(), c.bottomDesc())); break;
+                            case 1: w.append(t, String.format("%s eagerly works on peeling off what's left of %s's %s, licking %s lips as %s looks down at what's beneath.  ", mainName, c.mainName, c.bottomDesc(), hisHer(), heShe())); break;
+                            default: w.append(t, String.format("%s attacks %s's %s with wild abandon, literally drooling with the desire to see %s's next orgasm up-close.  ", mainName, c.mainName, c.bottomDesc(), reference(c)));
+                        }
                         switch (confidence / 33) {
                             case 0: w.append(t, String.format("%s tries to fend %s off, but now that %s has the upper hand, %s shows no signs of %s former timidness", c.mainName, himHer(), mainName, heShe(), hisHer())); break;
                             case 1: w.append(t, String.format("It's hard for %s resist, distracted as %s is by the surges of pleasure shooting through %s lower body", c.mainName, c.heShe(), c.hisHer())); break;
@@ -24276,13 +23414,11 @@ public class Forsaken
                 } else
                 if(c.innocence > 66)
                 {
-                    if(flavorDeviancy() > 66)
-                        w.append(t, String.format("%s is at a complete loss for how to deal with %s's groping, stroking hands that seem to be everywhere on %s body at once.  ", c.mainName, mainName, c.hisHer()));
-                    else
-                    if(flavorDeviancy() > 33)
-                        w.append(t, String.format("%s is having great fun toying with %s, whose experiences with sexual pleasure are all so recent.  ", mainName, c.mainName));
-                    else
-                        w.append(t, String.format("Neither %s nor %s have much experience with sexual service, but %1$s is on the offensive, and that's enough to render %2$s flustered and confused.  ", mainName, c.mainName));
+                    switch (flavorDeviancy() / 33) {
+                        case 0: w.append(t, String.format("Neither %s nor %s have much experience with sexual service, but %1$s is on the offensive, and that's enough to render %2$s flustered and confused.  ", mainName, c.mainName)); break;
+                        case 1: w.append(t, String.format("%s is having great fun toying with %s, whose experiences with sexual pleasure are all so recent.  ", mainName, c.mainName)); break;
+                        default: w.append(t, String.format("%s is at a complete loss for how to deal with %s's groping, stroking hands that seem to be everywhere on %s body at once.  ", c.mainName, mainName, c.hisHer()));
+                    }
                     if(c.gender.equals("female"))
                         w.append(t, String.format("As %s babbles and gibbers incomprehensibly, thrashing in the throes of orgasm, %s ", c.mainName, c.reference(this)));
                     else
@@ -24295,13 +23431,11 @@ public class Forsaken
                 } else
                 if(c.innocence > 33)
                 {
-                    if(flavorHostility() > 66)
-                        w.append(t, String.format("%s takes a twisted enjoyment out of stroking and tweaking %s's %s firmly while it's still overly sensitive following %s orgasm.  Soon ", mainName, c.mainName, organ, c.hisHer()));
-                    else
-                    if(flavorHostility() > 33)
-                        w.append(t, String.format("While %s's %s is oversensitive enough following %s orgasm that further stimulation there would just be painful, %s still manages to stimulate %s by kissing and nibbling %s nipples, gently cupping %6$s %s and moving %s hand back and forth, and even teasing %s anus with a fingertip.  Inevitably, ", c.mainName, organ, c.hisHer(), mainName, c.himHer(), c.hisHer(), lowerOrgan, hisHer(), c.hisHer()));
-                    else
-                        w.append(t, String.format("In the afterglow of %s orgasm, %s finds that %s's fingertips gently trailing over %1$s %s feel good enough that %s wants to just lay there forever.  But ", c.hisHer(), c.mainName, mainName, lowerOrgan, c.heShe()));
+                    switch (flavorHostility() / 33) {
+                        case 0: w.append(t, String.format("In the afterglow of %s orgasm, %s finds that %s's fingertips gently trailing over %1$s %s feel good enough that %s wants to just lay there forever.  But ", c.hisHer(), c.mainName, mainName, lowerOrgan, c.heShe())); break;
+                        case 1: w.append(t, String.format("While %s's %s is oversensitive enough following %s orgasm that further stimulation there would just be painful, %s still manages to stimulate %s by kissing and nibbling %s nipples, gently cupping %6$s %s and moving %s hand back and forth, and even teasing %s anus with a fingertip.  Inevitably, ", c.mainName, organ, c.hisHer(), mainName, c.himHer(), c.hisHer(), lowerOrgan, hisHer(), c.hisHer())); break;
+                        default: w.append(t, String.format("%s takes a twisted enjoyment out of stroking and tweaking %s's %s firmly while it's still overly sensitive following %s orgasm.  Soon ", mainName, c.mainName, organ, c.hisHer()));
+                    }
                     if(c.gender.equals("female"))
                         w.append(t, String.format("%s body begins to crave another climax, pleasure building in %1$s lower belly", c.hisHer()));
                     else
@@ -24317,13 +23451,11 @@ public class Forsaken
                         w.append(t, String.format("Gasping for breath after cumming hard, %s realizes that %s'll only grow weaker and weaker if %2$s allows %s to continue.  ", c.mainName, c.heShe(), c.reference(this)));
                     else
                         w.append(t, String.format("In the mental clarity that comes after shooting %s load all over %s's hand, %s realizes that %s needs to put a stop to this before %4$s gets hard again.  ", c.hisHer(), c.reference(this), c.mainName, c.heShe()));
-                    if(flavorObedience() > 66)
-                        w.append(t, String.format("%s spouts a series of cutting insults to the Demon Lord, knowing that %s cares more about you than about %sself, but ", c.HeShe(), mainName, himHer()));
-                    else
-                    if(flavorObedience() > 33)
-                        w.append(t, String.format("%s calls %s a shortsighted coward for submitting %sself to something as evil as a Demon Lord, but ", c.HeShe(), mainName, himHer()));
-                    else
-                        w.append(t, String.format("%s tries to appeal to %s's independence, asking %s why %s's doing the Demon Lord's bidding, but ", c.HeShe(), mainName, himHer(), heShe()));
+                    switch (flavorObedience() / 33) {
+                        case 0: w.append(t, String.format("%s tries to appeal to %s's independence, asking %s why %s's doing the Demon Lord's bidding, but ", c.HeShe(), mainName, himHer(), heShe())); break;
+                        case 1: w.append(t, String.format("%s calls %s a shortsighted coward for submitting %sself to something as evil as a Demon Lord, but ", c.HeShe(), mainName, himHer())); break;
+                        default: w.append(t, String.format("%s spouts a series of cutting insults to the Demon Lord, knowing that %s cares more about you than about %sself, but ", c.HeShe(), mainName, himHer()));
+                    }
                     switch (dignity / 33) {
                         case 0: w.append(t, String.format("%s vents %s anger by getting even rougher with %s's %s, increasing the pain and the pleasure both.", mainName, hisHer(), c.mainName, organ)); break;
                         case 1: w.append(t, String.format("%s proves that %s has no trouble arguing with %s while playing with %s %s and %s at the same time.", mainName, heShe(), c.mainName, c.hisHer(), organ, lowerOrgan)); break;
@@ -24388,21 +23520,17 @@ public class Forsaken
                         w.append(t, String.format("shoot %s load all over %s's face and chest.  ", c.hisHer(), mainName));
                     if(styleDamage[0] > 0)
                     {
-                        if(flavorDeviancy() > 66)
-                            w.append(t, String.format("%s laughs as %s scoops up the fluid with %s fingers and puts it in %3$s mouth, then starts detailing all the more extreme ways %2$s plans to make %s cum once they get back to the hive.", mainName, heShe(), hisHer(), c.mainName));
-                        else
-                        if(flavorDeviancy() > 33)
-                            w.append(t, String.format("%s taunts %s for cumming so easily.", mainName, c.mainName));
-                        else
-                            w.append(t, String.format("%s recoils, angrily calling %s a disgusting pervert.", mainName, c.mainName));
+                        switch (flavorDeviancy() / 33) {
+                            case 0: w.append(t, String.format("%s recoils, angrily calling %s a disgusting pervert.", mainName, c.mainName)); break;
+                            case 1: w.append(t, String.format("%s taunts %s for cumming so easily.", mainName, c.mainName)); break;
+                            default: w.append(t, String.format("%s laughs as %s scoops up the fluid with %s fingers and puts it in %3$s mouth, then starts detailing all the more extreme ways %2$s plans to make %s cum once they get back to the hive.", mainName, heShe(), hisHer(), c.mainName));
+                        }
                     } else
-                    if(flavorDeviancy() > 66)
-                        w.append(t, String.format("%s laughs as %s scoops up the fluid with %s fingers and puts it in %3$s mouth, telling %s that %s tastes wonderful.", mainName, heShe(), hisHer(), c.mainName, c.heShe()));
-                    else
-                    if(flavorDeviancy() > 33)
-                        w.append(t, String.format("%s doesn't even give %s a break before %s starts trying to make %2$s cum again.", mainName, c.himHer(), heShe()));
-                    else
-                        w.append(t, String.format("%s recoils, then gives %s a dark look as if it's %s fault.", mainName, c.mainName, c.hisHer()));
+                    switch (flavorDeviancy() / 33) {
+                        case 0: w.append(t, String.format("%s recoils, then gives %s a dark look as if it's %s fault.", mainName, c.mainName, c.hisHer())); break;
+                        case 1: w.append(t, String.format("%s doesn't even give %s a break before %s starts trying to make %2$s cum again.", mainName, c.himHer(), heShe())); break;
+                        default: w.append(t, String.format("%s laughs as %s scoops up the fluid with %s fingers and puts it in %3$s mouth, telling %s that %s tastes wonderful.", mainName, heShe(), hisHer(), c.mainName, c.heShe()));
+                    }
                 } else
                 {
                     w.append(t, String.format("%s lies on %s back, %2$s ankles held by the standing %s, who ", c.mainName, c.hisHer(), mainName));
@@ -24436,21 +23564,17 @@ public class Forsaken
                     }
                     if(styleDamage[2] > 0)
                     {
-                        if(flavorHostility() > 66)
-                            w.append(t, String.format("then follows it up with a full-force kick to the %s.  %s cackles at the way that %s sobs and clutches %sself.", lowerOrgan, mainName, c.mainName, c.himHer()));
-                        else
-                        if(flavorHostility() > 33)
-                            w.append(t, String.format("then stomps on %s %s hard to delay %1$s orgasm, leaning foward and putting all %s weight on that foot.", c.hisHer(), lowerOrgan, hisHer()));
-                        else
-                            w.append(t, String.format("then grows rougher, stepping firmly on %s %s.  %s frowns, uncomfortable with the way %s moans and cries out in %1$s efforts to escape the painful stimulation.", c.hisHer(), lowerOrgan, mainName, c.mainName));
+                        switch (flavorHostility() / 33) {
+                            case 0: w.append(t, String.format("then grows rougher, stepping firmly on %s %s.  %s frowns, uncomfortable with the way %s moans and cries out in %1$s efforts to escape the painful stimulation.", c.hisHer(), lowerOrgan, mainName, c.mainName)); break;
+                            case 1: w.append(t, String.format("then stomps on %s %s hard to delay %1$s orgasm, leaning foward and putting all %s weight on that foot.", c.hisHer(), lowerOrgan, hisHer())); break;
+                            default: w.append(t, String.format("then follows it up with a full-force kick to the %s.  %s cackles at the way that %s sobs and clutches %sself.", lowerOrgan, mainName, c.mainName, c.himHer()));
+                        }
                     } else
-                    if(flavorHostility() > 66)
-                        w.append(t, String.format("then toys with %s, telling %1$s that %s'll be killing a civilian for every time %s cums today.", c.himHer(), heShe(), c.mainName));
-                    else
-                    if(flavorHostility() > 33)
-                        w.append(t, String.format("then makes %s cum and forces %1$s to lick %s own juices off %s feet.", c.himHer(), c.hisHer(), hisHer()));
-                    else
-                        w.append(t, String.format("then finally gives %s an amazing orgasm that leaves %s gasping and shuddering.", c.himHer(), c.mainName));
+                    switch (flavorHostility() / 33) {
+                        case 0: w.append(t, String.format("then finally gives %s an amazing orgasm that leaves %s gasping and shuddering.", c.himHer(), c.mainName)); break;
+                        case 1: w.append(t, String.format("then makes %s cum and forces %1$s to lick %s own juices off %s feet.", c.himHer(), c.hisHer(), hisHer())); break;
+                        default: w.append(t, String.format("then toys with %s, telling %1$s that %s'll be killing a civilian for every time %s cums today.", c.himHer(), heShe(), c.mainName));
+                    }
                 }
         } else
         if(defilerType == 3)
@@ -24467,143 +23591,113 @@ public class Forsaken
                 {
                     if(c.confidence > 66)
                     {
-                        if(flavorDeviancy() > 66)
-                            w.append(t, String.format("%s is getting more and more turned on by the way %s continues to fight desperately despite being weakened and stripped.  As %2$s stumbles and finds %s lacks the energy to rise from %s knees, %1$s eagerly ", mainName, c.mainName, c.heShe(), c.hisHer()));
-                        else
-                        if(flavorDeviancy() > 33)
-                            w.append(t, String.format("%s has continued to fight hard, especially as %s's noticed %s leering at %s body through the remaining scraps of %4$s clothing.  Once %2$s finally collapses, %s ", c.mainName, c.heShe(), mainName, c.hisHer(), mainName));
-                        else
-                            w.append(t, String.format("%s has collapsed to all fours following the hits %s's taken, but %2$s still crawls determinedly toward %s.  %s's no longer protected by %s %s, so %s walks behind %s and ", c.mainName, c.heShe(), mainName, c.HeShe(), c.hisHer(), c.bottomDesc(), mainName, c.himHer()));
+                        switch (flavorDeviancy() / 33) {
+                            case 0: w.append(t, String.format("%s has collapsed to all fours following the hits %s's taken, but %2$s still crawls determinedly toward %s.  %s's no longer protected by %s %s, so %s walks behind %s and ", c.mainName, c.heShe(), mainName, c.HeShe(), c.hisHer(), c.bottomDesc(), mainName, c.himHer())); break;
+                            case 1: w.append(t, String.format("%s has continued to fight hard, especially as %s's noticed %s leering at %s body through the remaining scraps of %4$s clothing.  Once %2$s finally collapses, %s ", c.mainName, c.heShe(), mainName, c.hisHer(), mainName)); break;
+                            default: w.append(t, String.format("%s is getting more and more turned on by the way %s continues to fight desperately despite being weakened and stripped.  As %2$s stumbles and finds %s lacks the energy to rise from %s knees, %1$s eagerly ", mainName, c.mainName, c.heShe(), c.hisHer()));
+                        }
                     } else
                     if(c.confidence > 33)
                     {
-                        if(flavorDeviancy() > 66)
-                            w.append(t, String.format("%s's exhaustion has caused %s to become weaker and weaker even as the sight of %2$s being stripped has motivated %s to fight harder and harder.  %3$s hungrily ", c.mainName, c.himHer(), mainName));
-                        else
-                        if(flavorDeviancy() > 33)
-                            w.append(t, String.format("%s sees the hungry way %s is looking at %s body as %s's stripped, and %4$s has a rough idea of what awaits if %4$s fails, but %4$s's taken too many attacks to stay on %s feet.  The moment %s collapses to %s knees, %2$s gets behind %s and ", c.mainName, mainName, c.hisHer(), c.heShe(), c.hisHer(), c.heShe(), c.hisHer(), c.himHer()));
-                        else
-                            w.append(t, String.format("%s collapses and briefly passes out, only to wake up to the feeling of %s shifting what's left of %s %s out of the way.  %2$s ", c.mainName, mainName, c.hisHer(), c.bottomDesc()));
+                        switch (flavorDeviancy() / 33) {
+                            case 0: w.append(t, String.format("%s collapses and briefly passes out, only to wake up to the feeling of %s shifting what's left of %s %s out of the way.  %2$s ", c.mainName, mainName, c.hisHer(), c.bottomDesc())); break;
+                            case 1: w.append(t, String.format("%s sees the hungry way %s is looking at %s body as %s's stripped, and %4$s has a rough idea of what awaits if %4$s fails, but %4$s's taken too many attacks to stay on %s feet.  The moment %s collapses to %s knees, %2$s gets behind %s and ", c.mainName, mainName, c.hisHer(), c.heShe(), c.hisHer(), c.heShe(), c.hisHer(), c.himHer())); break;
+                            default: w.append(t, String.format("%s's exhaustion has caused %s to become weaker and weaker even as the sight of %2$s being stripped has motivated %s to fight harder and harder.  %3$s hungrily ", c.mainName, c.himHer(), mainName));
+                        }
                     } else
-                    if(flavorDeviancy() > 66)
-                        w.append(t, String.format("The loss of %s's %s has driven %s wild with lust, and %s has begun to tell %1$s what %4$s's going to do to %s.  As much as %1$s is terrified of the prospect, %s doesn't have the strength to fight anymore.  %s eyes wide in panic as %s advances and ", c.mainName, c.bottomDesc(), mainName, heShe(), c.himHer(), c.heShe(), c.HisHer(), mainName));
-                    else
-                    if(flavorDeviancy() > 33)
-                        w.append(t, String.format("%s pulls the exhausted %s into %s lap, tearing apart %2$s's %s in the process.  Then, %s ", mainName, c.mainName, hisHer(), c.bottomDesc(), heShe()));
-                    else
-                        w.append(t, String.format("%s collapses to the ground with a sob, too hurt and tired to keep fighting, %s clothes in scraps.  %s ", c.mainName, c.hisHer(), mainName));
+                    switch (flavorDeviancy() / 33) {
+                        case 0: w.append(t, String.format("%s collapses to the ground with a sob, too hurt and tired to keep fighting, %s clothes in scraps.  %s ", c.mainName, c.hisHer(), mainName)); break;
+                        case 1: w.append(t, String.format("%s pulls the exhausted %s into %s lap, tearing apart %2$s's %s in the process.  Then, %s ", mainName, c.mainName, hisHer(), c.bottomDesc(), heShe())); break;
+                        default: w.append(t, String.format("The loss of %s's %s has driven %s wild with lust, and %s has begun to tell %1$s what %4$s's going to do to %s.  As much as %1$s is terrified of the prospect, %s doesn't have the strength to fight anymore.  %s eyes wide in panic as %s advances and ", c.mainName, c.bottomDesc(), mainName, heShe(), c.himHer(), c.heShe(), c.HisHer(), mainName));
+                    }
                 } else
                 if(c.confidence > 66)
                 {
-                    if(flavorDeviancy() > 66)
-                        w.append(t, String.format("%s is getting more and more turned on by the way %s continues to fight desperately even as %s grows weaker and weaker.  When %2$s stumbles and finds %3$s lacks the energy to rise from %s knees, %1$s eagerly ", mainName, c.mainName, c.heShe(), c.hisHer()));
-                    else
-                    if(flavorDeviancy() > 33)
-                        w.append(t, String.format("%s has continued to fight hard, but it's a losing battle, and exhaustion has begun to set in.  Once %s finally collapses, %s ", c.mainName, c.heShe(), mainName));
-                    else
-                        w.append(t, String.format("%s has collapsed to all fours following the hits %s's taken, but %2$s still crawls determinedly toward %s.  %3$s walks behind %s and ", c.mainName, c.heShe(), mainName, c.himHer()));
+                    switch (flavorDeviancy() / 33) {
+                        case 0: w.append(t, String.format("%s has collapsed to all fours following the hits %s's taken, but %2$s still crawls determinedly toward %s.  %3$s walks behind %s and ", c.mainName, c.heShe(), mainName, c.himHer())); break;
+                        case 1: w.append(t, String.format("%s has continued to fight hard, but it's a losing battle, and exhaustion has begun to set in.  Once %s finally collapses, %s ", c.mainName, c.heShe(), mainName)); break;
+                        default: w.append(t, String.format("%s is getting more and more turned on by the way %s continues to fight desperately even as %s grows weaker and weaker.  When %2$s stumbles and finds %3$s lacks the energy to rise from %s knees, %1$s eagerly ", mainName, c.mainName, c.heShe(), c.hisHer()));
+                    }
                 } else
                 if(c.confidence > 33)
                 {
-                    if(flavorDeviancy() > 66)
-                        w.append(t, String.format("%s's exhaustion has caused %s to become weaker and weaker even as the desire to violate %2$s has motivated %s to fight harder and harder.  %3$s hungrily ", c.mainName, c.himHer(), mainName));
-                    else
-                    if(flavorDeviancy() > 33)
-                        w.append(t, String.format("%s sees the hungry way %s is looking at %s, and %s has a rough idea of what awaits if %4$s fails, but %4$s's taken too many attacks to stay on %s feet.  The moment %s collapses to %s knees, %2$s gets behind %s and ", c.mainName, mainName, c.himHer(), c.heShe(), c.hisHer(), c.heShe(), c.hisHer(), c.himHer()));
-                    else
-                        w.append(t, String.format("%s collapses and briefly passes out, only to wake up to the feeling of %s partially undressing %s.  %2$s ", c.mainName, mainName, c.himHer()));
+                    switch (flavorDeviancy() / 33) {
+                        case 0: w.append(t, String.format("%s collapses and briefly passes out, only to wake up to the feeling of %s partially undressing %s.  %2$s ", c.mainName, mainName, c.himHer())); break;
+                        case 1: w.append(t, String.format("%s sees the hungry way %s is looking at %s, and %s has a rough idea of what awaits if %4$s fails, but %4$s's taken too many attacks to stay on %s feet.  The moment %s collapses to %s knees, %2$s gets behind %s and ", c.mainName, mainName, c.himHer(), c.heShe(), c.hisHer(), c.heShe(), c.hisHer(), c.himHer())); break;
+                        default: w.append(t, String.format("%s's exhaustion has caused %s to become weaker and weaker even as the desire to violate %2$s has motivated %s to fight harder and harder.  %3$s hungrily ", c.mainName, c.himHer(), mainName));
+                    }
                 } else
-                if(flavorDeviancy() > 66)
-                    w.append(t, String.format("%s's desperate cries and moans during their fight have driven %s wild with lust, and %s has begun to tell %1$s what %3$s's going to do to %s.  As much as %1$s is terrified of the prospect, %s doesn't have the strength to fight anymore.  %s eyes wide in panic as %2$s advances and ", c.mainName, mainName, heShe(), c.himHer(), c.heShe(), c.HisHer()));
-                else
-                if(flavorDeviancy() > 33)
-                    w.append(t, String.format("%s pulls the exhausted %s into %s lap, undoing %s %s.  Then, %s ", mainName, c.mainName, hisHer(), c.hisHer(), c.bottomDesc(), heShe()));
-                else
-                    w.append(t, String.format("%s collapses to the ground with a sob, too hurt and tired to keep fighting.  %s ", c.mainName, mainName));
+                switch (flavorDeviancy() / 33) {
+                    case 0: w.append(t, String.format("%s collapses to the ground with a sob, too hurt and tired to keep fighting.  %s ", c.mainName, mainName)); break;
+                    case 1: w.append(t, String.format("%s pulls the exhausted %s into %s lap, undoing %s %s.  Then, %s ", mainName, c.mainName, hisHer(), c.hisHer(), c.bottomDesc(), heShe())); break;
+                    default: w.append(t, String.format("%s's desperate cries and moans during their fight have driven %s wild with lust, and %s has begun to tell %1$s what %3$s's going to do to %s.  As much as %1$s is terrified of the prospect, %s doesn't have the strength to fight anymore.  %s eyes wide in panic as %2$s advances and ", c.mainName, mainName, heShe(), c.himHer(), c.heShe(), c.HisHer()));
+                }
                 if(w.tickleOn)
                 {
-                    if(c.confidence > 66)
-                        w.append(t, String.format("starts to aggressively tickle every exposed spot of skin on %s body.  %s holds out as long as %s can, but soon, %3$s's howling with helpless laughter", c.hisHer(), c.mainName, c.heShe()));
-                    else
-                    if(c.confidence > 33)
-                        w.append(t, String.format("begins tickling %s body all over, from %1$s feet and armpits to %1$s thighs and even %1$s belly.  Laughter forces its way out of %s", c.hisHer(), c.mainName));
-                    else
-                        w.append(t, String.format("tickles %s exposed thighs.  The intimate contact, so close to %1$s most private place, has a psychological effect even stronger than when %s's tickled in more sensitive places like %1$s feet or armpits.  %s bursts out in nervous laughter and realizes %2$s can't stop", c.hisHer(), c.heShe(), c.HeShe()));
+                    switch (c.confidence / 33) {
+                        case 0: w.append(t, String.format("tickles %s exposed thighs.  The intimate contact, so close to %1$s most private place, has a psychological effect even stronger than when %s's tickled in more sensitive places like %1$s feet or armpits.  %s bursts out in nervous laughter and realizes %2$s can't stop", c.hisHer(), c.heShe(), c.HeShe())); break;
+                        case 1: w.append(t, String.format("begins tickling %s body all over, from %1$s feet and armpits to %1$s thighs and even %1$s belly.  Laughter forces its way out of %s", c.hisHer(), c.mainName)); break;
+                        default: w.append(t, String.format("starts to aggressively tickle every exposed spot of skin on %s body.  %s holds out as long as %s can, but soon, %3$s's howling with helpless laughter", c.hisHer(), c.mainName, c.heShe()));
+                    }
                 } else
                 if(c.gender.equals("male"))
                 {
-                    if(c.confidence > 66)
-                        w.append(t, String.format("kicks %s directly in the balls, causing %s vision to white out in pain and driving a pitiful squeal from %2$s throat.  Contrary to %2$s strong-willed demeanor, the torture is intense enough to break %s immediately", c.himHer(), c.hisHer(), c.mainName));
-                    else
-                    if(c.confidence > 33)
-                        w.append(t, String.format("grabs %s balls and squeezes until %s is certain that they'll be crushed.  %s's paralyzed by agony, twitching and spasming without any coordination, unable to even grab %s's hands and try to pry them away.  %2$s's efforts only prompt %4$s to squeeze harder, bringing higher and higher screams of pain from %2$s", c.hisHer(), c.mainName, c.HeShe(), mainName));
-                    else
-                        w.append(t, String.format("seizes %s by the penis, pinching and twisting it while asking %1$s if %s'll resist.  The intensely painful stimulation, and the knowledge that %s could make it far worst with a flick of %s wrist, cause %s to break down crying", c.himHer(), c.heShe(), mainName, hisHer(), c.mainName));
+                    switch (c.confidence / 33) {
+                        case 0: w.append(t, String.format("seizes %s by the penis, pinching and twisting it while asking %1$s if %s'll resist.  The intensely painful stimulation, and the knowledge that %s could make it far worst with a flick of %s wrist, cause %s to break down crying", c.himHer(), c.heShe(), mainName, hisHer(), c.mainName)); break;
+                        case 1: w.append(t, String.format("grabs %s balls and squeezes until %s is certain that they'll be crushed.  %s's paralyzed by agony, twitching and spasming without any coordination, unable to even grab %s's hands and try to pry them away.  %2$s's efforts only prompt %4$s to squeeze harder, bringing higher and higher screams of pain from %2$s", c.hisHer(), c.mainName, c.HeShe(), mainName)); break;
+                        default: w.append(t, String.format("kicks %s directly in the balls, causing %s vision to white out in pain and driving a pitiful squeal from %2$s throat.  Contrary to %2$s strong-willed demeanor, the torture is intense enough to break %s immediately", c.himHer(), c.hisHer(), c.mainName));
+                    }
                 } else
-                if(c.confidence > 66)
-                    w.append(t, String.format("rams %s %s all the way inside %s's ass in one savage thrust, causing %s vision to white out in pain and driving a pitiful squeal from %4$s throat.  Contrary to %4$s strong-willed demeanor, the penetration is intense enough to break %s immediately", hisHer(), penetrator, c.mainName, c.hisHer(), c.mainName));
-                else
-                if(c.confidence > 33)
-                    w.append(t, String.format("pushes %s %s into %s's ass and inches it further and further inside until %3$s is certain that %s'll be ripped open back there.  %s's paralyzed by agony, and it only gets worse when %s tries to twist around or pull %sself off the rod impaling %7$s.  %s can only scream", c.hisHer(), penetrator, c.mainName, c.heShe(), c.HeShe(), c.heShe(), c.himHer(), c.HeShe()));
-                else
-                    w.append(t, String.format("touches the tip of %s %s against %s's anus, teasing it and spreading %s open while asking %4$s if %s'll resist.  The pain of the unlubricated insertion, and the knowledge that %s could make it far worse with a simple jerk of %s hips, cause %s to break down crying", c.hisHer(), penetrator, c.mainName, c.himHer(), c.heShe(), mainName, hisHer(), c.mainName));
+                switch (c.confidence / 33) {
+                    case 0: w.append(t, String.format("touches the tip of %s %s against %s's anus, teasing it and spreading %s open while asking %4$s if %s'll resist.  The pain of the unlubricated insertion, and the knowledge that %s could make it far worse with a simple jerk of %s hips, cause %s to break down crying", c.hisHer(), penetrator, c.mainName, c.himHer(), c.heShe(), mainName, hisHer(), c.mainName)); break;
+                    case 1: w.append(t, String.format("pushes %s %s into %s's ass and inches it further and further inside until %3$s is certain that %s'll be ripped open back there.  %s's paralyzed by agony, and it only gets worse when %s tries to twist around or pull %sself off the rod impaling %7$s.  %s can only scream", c.hisHer(), penetrator, c.mainName, c.heShe(), c.HeShe(), c.heShe(), c.himHer(), c.HeShe())); break;
+                    default: w.append(t, String.format("rams %s %s all the way inside %s's ass in one savage thrust, causing %s vision to white out in pain and driving a pitiful squeal from %4$s throat.  Contrary to %4$s strong-willed demeanor, the penetration is intense enough to break %s immediately", hisHer(), penetrator, c.mainName, c.hisHer(), c.mainName));
+                }
                 if(c.aVirg)
                 {
                     if(c.innocence > 66)
                     {
-                        if(flavorHostility() > 66)
-                            w.append(t, String.format(".  The more %s begs %s to stop, the more %s exults in making %s suffer.", c.heShe(), c.reference(this), mainName, c.himHer()));
-                        else
-                        if(flavorHostility() > 33)
-                            w.append(t, String.format(", %s mind utterly failing to comprehend how anyone could be so cruel.", c.hisHer()));
-                        else
-                            w.append(t, String.format(", and the confusion and despair in %s voice fills %s with guilt.", c.hisHer(), c.reference(this)));
+                        switch (flavorHostility() / 33) {
+                            case 0: w.append(t, String.format(", and the confusion and despair in %s voice fills %s with guilt.", c.hisHer(), c.reference(this))); break;
+                            case 1: w.append(t, String.format(", %s mind utterly failing to comprehend how anyone could be so cruel.", c.hisHer())); break;
+                            default: w.append(t, String.format(".  The more %s begs %s to stop, the more %s exults in making %s suffer.", c.heShe(), c.reference(this), mainName, c.himHer()));
+                        }
                     } else
                     if(c.innocence > 33)
                     {
-                        if(flavorHostility() > 66)
-                            w.append(t, String.format(".  Watching %s suffer, %s laughs madly, joyous at being the first to be able to show %1$s this level of torture.", c.himHer(), c.reference(this)));
-                        else
-                        if(flavorHostility() > 33)
-                            w.append(t, String.format(".  Even as %s thrashes, %s just seems mildly interested to see how %1$s reacts to being abused like this.", c.heShe(), c.reference(this)));
-                        else
-                            w.append(t, String.format(", deeply ashamed and questioning %s own strength.  Noticing this, %s tells %s that anyone would react the same way.", c.hisHer(), c.reference(this), c.himHer()));
+                        switch (flavorHostility() / 33) {
+                            case 0: w.append(t, String.format(", deeply ashamed and questioning %s own strength.  Noticing this, %s tells %s that anyone would react the same way.", c.hisHer(), c.reference(this), c.himHer())); break;
+                            case 1: w.append(t, String.format(".  Even as %s thrashes, %s just seems mildly interested to see how %1$s reacts to being abused like this.", c.heShe(), c.reference(this))); break;
+                            default: w.append(t, String.format(".  Watching %s suffer, %s laughs madly, joyous at being the first to be able to show %1$s this level of torture.", c.himHer(), c.reference(this)));
+                        }
                     } else
-                    if(flavorHostility() > 66)
-                        w.append(t, String.format(".  When %s starts visibly trying to calm %sself down, %s intensifies the torture, unsatisfied with %s screams so far.", c.heShe(), c.himHer(), c.reference(this), c.hisHer()));
-                    else
-                    if(flavorHostility() > 33)
-                        w.append(t, String.format(", and although %s tries to meet %s's eyes and show that %1$s won't panic, it's clear that %1$s's struggling to withstand this new torture.", c.heShe(), c.reference(this)));
-                    else
-                        w.append(t, String.format(".  Even though %s's clearly never experienced anything like this before, %s has to respect how quickly %1$s starts trying to calm %sself down and welcome the pain.", c.heShe(), c.reference(this), c.himHer()));
+                    switch (flavorHostility() / 33) {
+                        case 0: w.append(t, String.format(".  Even though %s's clearly never experienced anything like this before, %s has to respect how quickly %1$s starts trying to calm %sself down and welcome the pain.", c.heShe(), c.reference(this), c.himHer())); break;
+                        case 1: w.append(t, String.format(", and although %s tries to meet %s's eyes and show that %1$s won't panic, it's clear that %1$s's struggling to withstand this new torture.", c.heShe(), c.reference(this))); break;
+                        default: w.append(t, String.format(".  When %s starts visibly trying to calm %sself down, %s intensifies the torture, unsatisfied with %s screams so far.", c.heShe(), c.himHer(), c.reference(this), c.hisHer()));
+                    }
                 } else
                 if(c.innocence > 66)
                 {
-                    if(flavorHostility() > 66)
-                        w.append(t, String.format(".  %s mind starts to shut down, but %s slaps %s awake, wanting to see %3$s suffer even more.", c.HisHer(), c.reference(this), c.himHer()));
-                    else
-                    if(flavorHostility() > 33)
-                        w.append(t, String.format(", %s still struggling even now to understand how people could be so cruel.", c.hisHer()));
-                    else
-                        w.append(t, String.format(", and %s is somewhat relieved to see the glazed look in %s eyes that says %s's imagining a happy place somewhere far from here.", c.reference(this), c.hisHer(), c.heShe()));
+                    switch (flavorHostility() / 33) {
+                        case 0: w.append(t, String.format(", and %s is somewhat relieved to see the glazed look in %s eyes that says %s's imagining a happy place somewhere far from here.", c.reference(this), c.hisHer(), c.heShe())); break;
+                        case 1: w.append(t, String.format(", %s still struggling even now to understand how people could be so cruel.", c.hisHer())); break;
+                        default: w.append(t, String.format(".  %s mind starts to shut down, but %s slaps %s awake, wanting to see %3$s suffer even more.", c.HisHer(), c.reference(this), c.himHer()));
+                    }
                 } else
                 if(c.innocence > 33)
                 {
-                    if(flavorHostility() > 66)
-                        w.append(t, String.format(".  Watching %s suffer, %s laughs madly, enjoying this all the way to the depths of %s heart.", c.himHer(), c.reference(this), hisHer()));
-                    else
-                    if(flavorHostility() > 33)
-                        w.append(t, String.format(".  Even as %s thrashes, %s looks down at %s without a trace of pity.", c.heShe(), c.reference(this), c.himHer()));
-                    else
-                        w.append(t, String.format(".  However, there's no shame or denial in %s eyes, as %s's come to peace with %1$s weakness, and %s seems satisfied.", c.hisHer(), c.heShe(), c.reference(this)));
+                    switch (flavorHostility() / 33) {
+                        case 0: w.append(t, String.format(".  However, there's no shame or denial in %s eyes, as %s's come to peace with %1$s weakness, and %s seems satisfied.", c.hisHer(), c.heShe(), c.reference(this))); break;
+                        case 1: w.append(t, String.format(".  Even as %s thrashes, %s looks down at %s without a trace of pity.", c.heShe(), c.reference(this), c.himHer())); break;
+                        default: w.append(t, String.format(".  Watching %s suffer, %s laughs madly, enjoying this all the way to the depths of %s heart.", c.himHer(), c.reference(this), hisHer()));
+                    }
                 } else
-                if(flavorHostility() > 66)
-                    w.append(t, String.format(".  When %s starts going through the breathing exercises %1$s had been practicing in order to withstand this kind of torture, %s grows even more rabid, trying in vain to reach a new level of suffering that will break %s on the spot.", c.heShe(), c.reference(this), c.mainName));
-                else
-                if(flavorHostility() > 33)
-                    w.append(t, String.format(", and although %s tries to meet %s's eyes and show that %1$s won't panic, %s doesn't seem impressed.", c.heShe(), c.reference(this), mainName));
-                else
-                    w.append(t, String.format(".  Remembering the even more extreme things that have been done to %s, %s closes %s eyes and tries to distance %1$sself from %3$s body, and even %s is impressed with %s technique.", c.himHer(), c.mainName, c.hisHer(), c.reference(this), c.hisHer()));
+                switch (flavorHostility() / 33) {
+                    case 0: w.append(t, String.format(".  Remembering the even more extreme things that have been done to %s, %s closes %s eyes and tries to distance %1$sself from %3$s body, and even %s is impressed with %s technique.", c.himHer(), c.mainName, c.hisHer(), c.reference(this), c.hisHer())); break;
+                    case 1: w.append(t, String.format(", and although %s tries to meet %s's eyes and show that %1$s won't panic, %s doesn't seem impressed.", c.heShe(), c.reference(this), mainName)); break;
+                    default: w.append(t, String.format(".  When %s starts going through the breathing exercises %1$s had been practicing in order to withstand this kind of torture, %s grows even more rabid, trying in vain to reach a new level of suffering that will break %s on the spot.", c.heShe(), c.reference(this), c.mainName));
+                }
             } else
             if(defilerStage % 2 == 1)
             {
@@ -24611,21 +23705,17 @@ public class Forsaken
                 {
                     if(styleDamage[0] > 0)
                     {
-                        if(flavorHostility() > 66)
-                            w.append(t, String.format("Wanting to torture %s's mind as much as %s body, %s tells %s about all the people %s's going to kill after this even as %5$s ", c.mainName, c.hisHer(), mainName, c.himHer(), heShe()));
-                        else
-                        if(flavorHostility() > 33)
-                            w.append(t, String.format("%s taunts %s about %s unworthiness as one of the Chosen.  And before %2$s can defend %3$s actions, %1$s ", mainName, c.mainName, c.hisHer()));
-                        else
-                            w.append(t, String.format("%s blames %s for being weak enough to let this happen to %s, and the words are made all the more painful by the fact that %2$s agrees with them.  To punctuate the lesson, %1$s ", mainName, c.mainName, c.himHer()));
+                        switch (flavorHostility() / 33) {
+                            case 0: w.append(t, String.format("%s blames %s for being weak enough to let this happen to %s, and the words are made all the more painful by the fact that %2$s agrees with them.  To punctuate the lesson, %1$s ", mainName, c.mainName, c.himHer())); break;
+                            case 1: w.append(t, String.format("%s taunts %s about %s unworthiness as one of the Chosen.  And before %2$s can defend %3$s actions, %1$s ", mainName, c.mainName, c.hisHer())); break;
+                            default: w.append(t, String.format("Wanting to torture %s's mind as much as %s body, %s tells %s about all the people %s's going to kill after this even as %5$s ", c.mainName, c.hisHer(), mainName, c.himHer(), heShe()));
+                        }
                     } else
-                    if(flavorHostility() > 66)
-                        w.append(t, String.format("%s is taking a deep, almost sexual gratification from the way %s screams as %s ", mainName, c.mainName, heShe()));
-                    else
-                    if(flavorHostility() > 33)
-                        w.append(t, String.format("%s is utterly merciless in %s torment of %s's body, not hesitating in the slightest.  %s ", mainName, hisHer(), c.mainName, HeShe()));
-                    else
-                        w.append(t, String.format("%s looks like %s sympathizes with %s's suffering, but that isn't enough to make %s hold back.  %s ", mainName, heShe(), c.mainName, himHer(), HeShe()));
+                    switch (flavorHostility() / 33) {
+                        case 0: w.append(t, String.format("%s looks like %s sympathizes with %s's suffering, but that isn't enough to make %s hold back.  %s ", mainName, heShe(), c.mainName, himHer(), HeShe())); break;
+                        case 1: w.append(t, String.format("%s is utterly merciless in %s torment of %s's body, not hesitating in the slightest.  %s ", mainName, hisHer(), c.mainName, HeShe())); break;
+                        default: w.append(t, String.format("%s is taking a deep, almost sexual gratification from the way %s screams as %s ", mainName, c.mainName, heShe()));
+                    }
                     if(w.tickle())
                         w.append(t, String.format("tickles %s ruthlessly, ", reference(c)));
                     else
@@ -24655,21 +23745,17 @@ public class Forsaken
                         w.append(t, String.format("how to make anal sex as painful and humiliating as possible.  %s slams %s hips forward into %s, seeming to gouge out %s insides, then moves rapidly to scrape %2$s unlubricated rod against %s's tender insides.  ", HeShe(), hisHer(), reference(c), c.hisHer(), c.mainName));
                     if(styleDamage[0] > 0)
                     {
-                        if(flavorDeviancy() > 66)
-                            w.append(t, String.format("%s's cleary enjoying %sself, and every gasp and exclamation of pleasure makes %s even angrier that %s body is being used this way.", HeShe(), himHer(), c.mainName, c.hisHer()));
-                        else
-                        if(flavorDeviancy() > 33)
-                            w.append(t, String.format("%s promises to keep doing this until %s submits, and a part of %s seems to hope that day won't come too soon.", HeShe(), c.mainName, himHer()));
-                        else
-                            w.append(t, String.format("%s keeps up a steady stream of taunting and insults as %s does so, almost as if hoping that they'll give %s the motivation to resist harder.", HeShe(), heShe(), c.mainName));
+                        switch (flavorDeviancy() / 33) {
+                            case 0: w.append(t, String.format("%s keeps up a steady stream of taunting and insults as %s does so, almost as if hoping that they'll give %s the motivation to resist harder.", HeShe(), heShe(), c.mainName)); break;
+                            case 1: w.append(t, String.format("%s promises to keep doing this until %s submits, and a part of %s seems to hope that day won't come too soon.", HeShe(), c.mainName, himHer())); break;
+                            default: w.append(t, String.format("%s's cleary enjoying %sself, and every gasp and exclamation of pleasure makes %s even angrier that %s body is being used this way.", HeShe(), himHer(), c.mainName, c.hisHer()));
+                        }
                     } else
-                    if(flavorDeviancy() > 66)
-                        w.append(t, String.format("%s seems convinced that %s can train %s's body to take a masochistic enjoyment from it.", HeShe(), heShe(), c.mainName));
-                    else
-                    if(flavorDeviancy() > 33)
-                        w.append(t, String.format("%s clearly wants to go further, but %s restrains %sself, focusing on disabling and demoralizing %s.", HeShe(), heShe(), himHer(), c.mainName));
-                    else
-                        w.append(t, String.format("%s continues with almost businesslike precision, calmly focused on bringing %s as much suffering as possible.", HeShe(), c.mainName));
+                    switch (flavorDeviancy() / 33) {
+                        case 0: w.append(t, String.format("%s continues with almost businesslike precision, calmly focused on bringing %s as much suffering as possible.", HeShe(), c.mainName)); break;
+                        case 1: w.append(t, String.format("%s clearly wants to go further, but %s restrains %sself, focusing on disabling and demoralizing %s.", HeShe(), heShe(), himHer(), c.mainName)); break;
+                        default: w.append(t, String.format("%s seems convinced that %s can train %s's body to take a masochistic enjoyment from it.", HeShe(), heShe(), c.mainName));
+                    }
                 } else
                 {
                     if(w.tickleOn)
@@ -24681,21 +23767,17 @@ public class Forsaken
                         w.append(t, String.format("Even as %s's writhing in agony with %s's %s impaling %s ass, %s ", c.heShe(), mainName, penetrator, c.hisHer(), c.mainName));
                     if(styleDamage[0] > 0)
                     {
-                        if(flavorObedience() > 66)
-                            w.append(t, String.format("is even more angered by the way that %s keeps demanding that %s submit to the Demon Lord if %2$s wants this to end.  %s isn't willing to lower %sself that far, at least not yet", c.reference(this), c.heShe(), c.mainName, c.himHer()));
-                        else
-                        if(flavorObedience() > 33)
-                            w.append(t, String.format("mainly hates the fact that %s was defeated by someone who's too weak to defy that Demon Lord.  %s tells %s as much, which sparks a shouting match", c.heShe(), c.HeShe(), c.reference(this)));
-                        else
-                            w.append(t, String.format("feels insulted by %s's calm admonitions that %s should try harder next time if %2$s doesn't want to get tortured again.  %s starts shouting out insults just because %2$s wants to get under %s's skin", c.reference(this), c.heShe(), c.HeShe(), mainName));
+                        switch (flavorObedience() / 33) {
+                            case 0: w.append(t, String.format("feels insulted by %s's calm admonitions that %s should try harder next time if %2$s doesn't want to get tortured again.  %s starts shouting out insults just because %2$s wants to get under %s's skin", c.reference(this), c.heShe(), c.HeShe(), mainName)); break;
+                            case 1: w.append(t, String.format("mainly hates the fact that %s was defeated by someone who's too weak to defy that Demon Lord.  %s tells %s as much, which sparks a shouting match", c.heShe(), c.HeShe(), c.reference(this))); break;
+                            default: w.append(t, String.format("is even more angered by the way that %s keeps demanding that %s submit to the Demon Lord if %2$s wants this to end.  %s isn't willing to lower %sself that far, at least not yet", c.reference(this), c.heShe(), c.mainName, c.himHer()));
+                        }
                     } else
-                    if(flavorObedience() > 66)
-                        w.append(t, String.format("shouts out a few choice insults aimed at the Demon Lord in between %s screams", c.hisHer()));
-                    else
-                    if(flavorObedience() > 33)
-                        w.append(t, String.format("tries to master %s voice well enough to insult %s for losing to the Demon Lord", c.hisHer(), c.reference(this)));
-                    else
-                        w.append(t, String.format("angrily demands to know why %s is serving the Demon Lord", c.reference(this)));
+                    switch (flavorObedience() / 33) {
+                        case 0: w.append(t, String.format("angrily demands to know why %s is serving the Demon Lord", c.reference(this))); break;
+                        case 1: w.append(t, String.format("tries to master %s voice well enough to insult %s for losing to the Demon Lord", c.hisHer(), c.reference(this))); break;
+                        default: w.append(t, String.format("shouts out a few choice insults aimed at the Demon Lord in between %s screams", c.hisHer()));
+                    }
                     switch (confidence / 33) {
                         case 0: w.append(t, String.format(", and %s is intimidated despite %s dominant position.", mainName, hisHer())); break;
                         case 1: w.append(t, String.format(", and %s begins to intensify %s movements even further.", mainName, hisHer())); break;
@@ -24731,23 +23813,19 @@ public class Forsaken
                         w.append(t, String.format("%s gives it a sharp pull as if trying to tear it off.  %s's eyes roll into the back of %s head.  ", mainName, c.mainName, c.hisHer()));
                     else
                         w.append(t, String.format("%s starts to cruelly pinch it even as %s resumes hammering into %s's ass.  ", mainName, heShe(), c.mainName));
-                    if(flavorHostility() > 66)
-                        w.append(t, String.format("The way %s screams is music to %s's ears.", reference(c), mainName));
-                    else
-                    if(flavorHostility() > 33)
-                        w.append(t, String.format("%s smirks at %s's inability to deal with the mixed stimuli.", mainName, reference(c)));
-                    else
-                        w.append(t, String.format("%s feels guilty about taking advantage of %s's vulnerability, but %s doesn't stop.", mainName, c.mainName, heShe()));
+                    switch (flavorHostility() / 33) {
+                        case 0: w.append(t, String.format("%s feels guilty about taking advantage of %s's vulnerability, but %s doesn't stop.", mainName, c.mainName, heShe())); break;
+                        case 1: w.append(t, String.format("%s smirks at %s's inability to deal with the mixed stimuli.", mainName, reference(c))); break;
+                        default: w.append(t, String.format("The way %s screams is music to %s's ears.", reference(c), mainName));
+                    }
                 } else
                 if(c.innocence > 33)
                 {
-                    if(flavorDeviancy() > 66)
-                        w.append(t, String.format("Even though %s is panting with lust at the intimate contact with %s's body, ", mainName, reference(c)));
-                    else
-                    if(flavorDeviancy() > 33)
-                        w.append(t, String.format("Even though %s is clearly taking sexual enjoyment from what %s's doing to %s, ", mainName, heShe(), reference(c)));
-                    else
-                        w.append(t, String.format("%s clearly isn't taking any sort of sexual satisfaction from torturing %s like this, and ", mainName, reference(c)));
+                    switch (flavorDeviancy() / 33) {
+                        case 0: w.append(t, String.format("%s clearly isn't taking any sort of sexual satisfaction from torturing %s like this, and ", mainName, reference(c))); break;
+                        case 1: w.append(t, String.format("Even though %s is clearly taking sexual enjoyment from what %s's doing to %s, ", mainName, heShe(), reference(c))); break;
+                        default: w.append(t, String.format("Even though %s is panting with lust at the intimate contact with %s's body, ", mainName, reference(c)));
+                    }
                     if(w.tickleOn)
                         w.append(t, String.format("%s tickling hands always stop just short of %s's %s.  ", hisHer(), c.mainName, organ));
                     else
@@ -24830,13 +23908,11 @@ public class Forsaken
                 } else
                 if(c.confidence > 66)
                 {
-                    if(flavorObedience() > 66)
-                        w.append(t, String.format("When %s falls back, %s assumes that %s's retreating, but in fact %1$s is simply sending a signal to the Thralls under %s that %s has been stripped enough to make for some good photographs.", mainName, c.mainName, heShe(), himHer(), reference(c)));
-                    else
-                    if(flavorObedience() > 33)
-                        w.append(t, String.format("%s has noticed that Thralls are gathering behind %s to take pictures, encouraged by %s damage clothes.  Dancing backward and letting %s try to attack %s, %1$s gives them plenty of opportunity to get some good shots before %2$s notices them.", mainName, c.mainName, c.hisHer(), reference(c), himHer()));
-                    else
-                        w.append(t, String.format("The Thralls have to be careful about getting too close to the fight between %s and %s, as neither combatant cares whether they get caught in the crossfire.  But the sight of %2$s's stripped body still tempts them to approach and start taking pictures.", mainName, c.mainName));
+                    switch (flavorObedience() / 33) {
+                        case 0: w.append(t, String.format("The Thralls have to be careful about getting too close to the fight between %s and %s, as neither combatant cares whether they get caught in the crossfire.  But the sight of %2$s's stripped body still tempts them to approach and start taking pictures.", mainName, c.mainName)); break;
+                        case 1: w.append(t, String.format("%s has noticed that Thralls are gathering behind %s to take pictures, encouraged by %s damage clothes.  Dancing backward and letting %s try to attack %s, %1$s gives them plenty of opportunity to get some good shots before %2$s notices them.", mainName, c.mainName, c.hisHer(), reference(c), himHer())); break;
+                        default: w.append(t, String.format("When %s falls back, %s assumes that %s's retreating, but in fact %1$s is simply sending a signal to the Thralls under %s that %s has been stripped enough to make for some good photographs.", mainName, c.mainName, heShe(), himHer(), reference(c)));
+                    }
                 } else
                 if(c.confidence > 33)
                 {
@@ -24856,13 +23932,11 @@ public class Forsaken
                     else
                         w.append(t, String.format("An eager Thrall gets too close to %s, and %s snatches the camera right out of his hands in order to take some footage of %s.  After looking down at %sself, %s realizes that %s is able to see absolutely everything.", mainName, heShe(), c.mainName, c.himHer(), c.mainName, c.reference(this)));
                 } else
-                if(flavorObedience() > 66)
-                    w.append(t, String.format("%s calls out to %s friends among the Thralls, telling them to start taking pictures of the stripped %s.  The flashing cameras in all directions startle and disorient %s.", mainName, hisHer(), c.mainName, c.himHer()));
-                else
-                if(flavorObedience() > 33)
-                    w.append(t, String.format("Knowing that the filming Thralls will be grateful for some eyecandy, %s catches one of %s's kicks with both hands, keeping %s leg held up in the air so that %s isn't covered at all by %s shredded %s.", mainName, c.mainName, c.hisHer(), c.heShe(), c.hisHer(), c.bottomDesc()));
-                else
-                    w.append(t, String.format("Some Thralls jump out from behind %s, and %s starts to shoo them away, not welcoming their interference in %s fight with %s.  But it turns out that they only want to take pictures of the stripped %1$s as %s fights, and %2$s doesn't stop them.", c.mainName, mainName, hisHer(), reference(c), c.heShe()));
+                switch (flavorObedience() / 33) {
+                    case 0: w.append(t, String.format("Some Thralls jump out from behind %s, and %s starts to shoo them away, not welcoming their interference in %s fight with %s.  But it turns out that they only want to take pictures of the stripped %1$s as %s fights, and %2$s doesn't stop them.", c.mainName, mainName, hisHer(), reference(c), c.heShe())); break;
+                    case 1: w.append(t, String.format("Knowing that the filming Thralls will be grateful for some eyecandy, %s catches one of %s's kicks with both hands, keeping %s leg held up in the air so that %s isn't covered at all by %s shredded %s.", mainName, c.mainName, c.hisHer(), c.heShe(), c.hisHer(), c.bottomDesc())); break;
+                    default: w.append(t, String.format("%s calls out to %s friends among the Thralls, telling them to start taking pictures of the stripped %s.  The flashing cameras in all directions startle and disorient %s.", mainName, hisHer(), c.mainName, c.himHer()));
+                }
                 if(c.modest)
                 {
                     w.append(t, "\n\n");
@@ -24878,13 +23952,11 @@ public class Forsaken
                         w.append(t, String.format("%s is horrified at the realization that within a matter of moments, the entire world will be seeing %s most intimate places.  %s screams for them to stop", c.mainName, c.hisHer(), c.HeShe()));
                     else
                         w.append(t, String.format("%s's face is bright red with humiliation at being caught out like this again", c.mainName));
-                    if(flavorHostility() > 66)
-                        w.append(t, String.format(", and %s laughs with glee at seeing %s suffering.", mainName, c.hisHer()));
-                    else
-                    if(flavorHostility() > 33)
-                        w.append(t, String.format(", but %s shows %s no mercy.", mainName, c.himHer()));
-                    else
-                        w.append(t, String.format(", and %s looks at least a little bit sympathetic.", mainName));
+                    switch (flavorHostility() / 33) {
+                        case 0: w.append(t, String.format(", and %s looks at least a little bit sympathetic.", mainName)); break;
+                        case 1: w.append(t, String.format(", but %s shows %s no mercy.", mainName, c.himHer())); break;
+                        default: w.append(t, String.format(", and %s laughs with glee at seeing %s suffering.", mainName, c.hisHer()));
+                    }
                 } else
                 if(c.dignity > 33)
                 {
@@ -24892,26 +23964,22 @@ public class Forsaken
                         w.append(t, String.format("%s falters, realizing that no one has ever gotten such clear pictures of %s down there before.  %s tells %2$sself that there's nothing %s can do about it now and that %4$s should just keep fighting normally", c.mainName, c.himHer(), c.HeShe(), c.heShe()));
                     else
                         w.append(t, String.format("%s tries to pretend that it doesn't bother %s", c.mainName, c.himHer()));
-                    if(flavorHostility() > 66)
-                        w.append(t, String.format(", but %s's cruel taunts about how far %s's fallen make it difficult.", mainName, c.heShe()));
-                    else
-                    if(flavorHostility() > 33)
-                        w.append(t, String.format(", but %s's smirk shows that %s knows %s's true feelings.", mainName, heShe(), c.mainName));
-                    else
-                        w.append(t, String.format(", and %s doesn't rub it in.", mainName));
+                    switch (flavorHostility() / 33) {
+                        case 0: w.append(t, String.format(", and %s doesn't rub it in.", mainName)); break;
+                        case 1: w.append(t, String.format(", but %s's smirk shows that %s knows %s's true feelings.", mainName, heShe(), c.mainName)); break;
+                        default: w.append(t, String.format(", but %s's cruel taunts about how far %s's fallen make it difficult.", mainName, c.heShe()));
+                    }
                 } else
                 {
                     if(c.modest)
                         w.append(t, String.format("%s has always figured that this day would always come eventually for someone fighting foes as perverted as the Demons and their minions.  %s barely reacts", c.mainName, c.HeShe()));
                     else
                         w.append(t, String.format("%s barely even notices that %s's being filmed practically naked again", c.mainName, c.heShe()));
-                    if(flavorDeviancy() > 66)
-                        w.append(t, String.format(".  On the other hand, %s shouts that %s'll personally give a blowjob to any Thrall who gives %s a high-quality picture.", mainName, heShe(), himHer()));
-                    else
-                    if(flavorDeviancy() > 33)
-                        w.append(t, String.format(", but %s certainly seems to be enjoying the sight.", mainName));
-                    else
-                        w.append(t, String.format(", and %s doesn't seem to care very much either.", mainName));
+                    switch (flavorDeviancy() / 33) {
+                        case 0: w.append(t, String.format(", and %s doesn't seem to care very much either.", mainName)); break;
+                        case 1: w.append(t, String.format(", but %s certainly seems to be enjoying the sight.", mainName)); break;
+                        default: w.append(t, String.format(".  On the other hand, %s shouts that %s'll personally give a blowjob to any Thrall who gives %s a high-quality picture.", mainName, heShe(), himHer()));
+                    }
                 }
             } else
             if(defilerStage % 2 == 1)
@@ -24925,21 +23993,17 @@ public class Forsaken
                     }
                     if(styleDamage[0] > 0)
                     {
-                        if(flavorHostility() > 66)
-                            w.append(t, String.format(", eagerly speculating about the despair that must be crushing the hearts of everyone who ever believed in %s.", c.himHer()));
-                        else
-                        if(flavorHostility() > 33)
-                            w.append(t, String.format(", questioning whether %s is living up to all the hope placed in %s.", reference(c), c.himHer()));
-                        else
-                            w.append(t, String.format(", and although there's no malice in %s words, %s is still angered by the constant reminders of how the people %s's protecting are losing respect for %s.", hisHer(), reference(c), c.heShe(), c.himHer()));
+                        switch (flavorHostility() / 33) {
+                            case 0: w.append(t, String.format(", and although there's no malice in %s words, %s is still angered by the constant reminders of how the people %s's protecting are losing respect for %s.", hisHer(), reference(c), c.heShe(), c.himHer())); break;
+                            case 1: w.append(t, String.format(", questioning whether %s is living up to all the hope placed in %s.", reference(c), c.himHer())); break;
+                            default: w.append(t, String.format(", eagerly speculating about the despair that must be crushing the hearts of everyone who ever believed in %s.", c.himHer()));
+                        }
                     } else
-                    if(flavorDeviancy() > 66)
-                        w.append(t, String.format(", and %s can't help but masturbate to the sight of %s's body as well whenever the flow of their battle gives %s a chance.", heShe(), reference(c), himHer()));
-                    else
-                    if(flavorDeviancy() > 33)
-                        w.append(t, String.format(", and %s own leering eyes seem to dig into %s as well.", hisHer(), reference(c)));
-                    else
-                        w.append(t, String.format(", perhaps in an effort to distract %sself from %s own complicated feelings about being seen as a sex object.", himHer(), hisHer()));
+                    switch (flavorDeviancy() / 33) {
+                        case 0: w.append(t, String.format(", perhaps in an effort to distract %sself from %s own complicated feelings about being seen as a sex object.", himHer(), hisHer())); break;
+                        case 1: w.append(t, String.format(", and %s own leering eyes seem to dig into %s as well.", hisHer(), reference(c))); break;
+                        default: w.append(t, String.format(", and %s can't help but masturbate to the sight of %s's body as well whenever the flow of their battle gives %s a chance.", heShe(), reference(c), himHer()));
+                    }
                 } else
                 if(c.morality > 33)
                 {
@@ -24977,13 +24041,11 @@ public class Forsaken
                         case 1: w.append(t, String.format("%s tries attacking %s's clothes in turn, hoping that %s's the type to get ashamed and retreat or at least move the fight away from the surrounding Thralls.  ", c.mainName, mainName, heShe())); break;
                         default: w.append(t, String.format("%s clashes with %s, meeting %s challenge and hoping to go back to a more normal kind of fight.  ", c.mainName, mainName, hisHer()));
                     }
-                    if(flavorObedience() > 66)
-                        w.append(t, String.format("But %s is willing to endure anything for the master %s adores, and %2$s just laughs and tells the Thralls to keep filming.", mainName, heShe()));
-                    else
-                    if(flavorObedience() > 33)
-                        w.append(t, String.format("But %s has %s orders, and %s isn't willing to act on %2$s own, so %3$s keeps trying to strip %s and force %s into embarrassing positions for the cameras.", mainName, hisHer(), heShe(), c.mainName, c.himHer()));
-                    else
-                        w.append(t, String.format("Even though %s does clench %s teeth in irritation, it ultimately does nothing to spare %s the humiliation of being filmed.", mainName, hisHer(), c.mainName));
+                    switch (flavorObedience() / 33) {
+                        case 0: w.append(t, String.format("Even though %s does clench %s teeth in irritation, it ultimately does nothing to spare %s the humiliation of being filmed.", mainName, hisHer(), c.mainName)); break;
+                        case 1: w.append(t, String.format("But %s has %s orders, and %s isn't willing to act on %2$s own, so %3$s keeps trying to strip %s and force %s into embarrassing positions for the cameras.", mainName, hisHer(), heShe(), c.mainName, c.himHer())); break;
+                        default: w.append(t, String.format("But %s is willing to endure anything for the master %s adores, and %2$s just laughs and tells the Thralls to keep filming.", mainName, heShe()));
+                    }
                 }
             } else
             if(defilerStage % 2 == 0)
@@ -24996,21 +24058,17 @@ public class Forsaken
                         w.append(t, String.format("smashing phones, scattering crowds, and presenting an intimidating image despite %s near-nudity.  ", c.hisHer()));
                     if(styleDamage[2] > 0)
                     {
-                        if(flavorObedience() > 66)
-                            w.append(t, String.format("%s stops %s rampage by engaging %s in combat again out of desperation to protect the Demon Lord's valuable minions, ", mainName, c.hisHer(), c.himHer()));
-                        else
-                        if(flavorObedience() > 33)
-                            w.append(t, String.format("%s commands the Thrall to fall back for a moment so that %s can fight %s without distractions.  %1$s doesn't let %3$s protect %s modesty as they do battle, ", mainName, heShe(), c.mainName, c.hisHer()));
-                        else
-                            w.append(t, String.format("%s allows %s to rampage for awhile before abruptly attacking %2$s in the back, ", mainName, c.himHer()));
+                        switch (flavorObedience() / 33) {
+                            case 0: w.append(t, String.format("%s allows %s to rampage for awhile before abruptly attacking %2$s in the back, ", mainName, c.himHer())); break;
+                            case 1: w.append(t, String.format("%s commands the Thrall to fall back for a moment so that %s can fight %s without distractions.  %1$s doesn't let %3$s protect %s modesty as they do battle, ", mainName, heShe(), c.mainName, c.hisHer())); break;
+                            default: w.append(t, String.format("%s stops %s rampage by engaging %s in combat again out of desperation to protect the Demon Lord's valuable minions, ", mainName, c.hisHer(), c.himHer()));
+                        }
                     } else
-                    if(flavorObedience() > 66)
-                        w.append(t, String.format("%s chases after %s, shouting and trying to redirect %s attention onto %sself, ", mainName, c.mainName, c.hisHer(), himHer()));
-                    else
-                    if(flavorObedience() > 33)
-                        w.append(t, String.format("%s rallies the Thralls, giving them the encouragement to hold firm and keep filming %s, ", mainName, c.mainName));
-                    else
-                        w.append(t, String.format("%s just picks up a dropped camera and starts filming %s %sself.  By dodging and fighting defensively, %s proves much harder for %2$s to stop, ", mainName, c.mainName, himHer(), heShe()));
+                    switch (flavorObedience() / 33) {
+                        case 0: w.append(t, String.format("%s just picks up a dropped camera and starts filming %s %sself.  By dodging and fighting defensively, %s proves much harder for %2$s to stop, ", mainName, c.mainName, himHer(), heShe())); break;
+                        case 1: w.append(t, String.format("%s rallies the Thralls, giving them the encouragement to hold firm and keep filming %s, ", mainName, c.mainName)); break;
+                        default: w.append(t, String.format("%s chases after %s, shouting and trying to redirect %s attention onto %sself, ", mainName, c.mainName, c.hisHer(), himHer()));
+                    }
                     switch (confidence / 33) {
                         case 0: w.append(t, String.format("although a part of %s wishes %s didn't have to fight %s.", c.himHer(), c.heShe(), reference(c))); break;
                         case 1: w.append(t, String.format("refusing to let %s escape before more footage has been captured of %s private places.", c.mainName, c.hisHer())); break;
@@ -25041,32 +24099,26 @@ public class Forsaken
                         case 1: w.append(t, String.format("With feints and dodges, %s leads %s right through the middle of a crowd of Thralls.  Camera flashes and phones held high to get a good filming angle mark their passing.  ", mainName, c.mainName)); break;
                         default: w.append(t, String.format("Encouraged by the cheers of the crowd, %s intensifies %s attack, wide-ranging blasts of energy that are too broad to be dodged and too weak to actually hurt, but plenty strong to shred %s's clothes even further.  ", mainName, hisHer(), c.mainName));
                     }
-                    if(flavorDeviancy() > 66)
-                        w.append(t, String.format("%s's tongue hangs out of %s mouth as %s pants with desire at %s's increasingly lewd appearance.", mainName, hisHer(), heShe(), reference(c)));
-                    else
-                    if(flavorDeviancy() > 33)
-                        w.append(t, String.format("There are lewd calls from the crowd, and the lustful glint in %s's eyes shows that %s's lusting after %s as well.", mainName, heShe(), reference(c)));
-                    else
-                        w.append(t, String.format("Although %s %sself shows no signs of being turned on, %s's focused on stimulating the crowd's lust for %s.", mainName, himHer(), heShe(), reference(c)));
+                    switch (flavorDeviancy() / 33) {
+                        case 0: w.append(t, String.format("Although %s %sself shows no signs of being turned on, %s's focused on stimulating the crowd's lust for %s.", mainName, himHer(), heShe(), reference(c))); break;
+                        case 1: w.append(t, String.format("There are lewd calls from the crowd, and the lustful glint in %s's eyes shows that %s's lusting after %s as well.", mainName, heShe(), reference(c))); break;
+                        default: w.append(t, String.format("%s's tongue hangs out of %s mouth as %s pants with desire at %s's increasingly lewd appearance.", mainName, hisHer(), heShe(), reference(c)));
+                    }
                 } else
                 {
                     if(styleDamage[2] > 0)
                     {
-                        if(flavorHostility() > 66)
-                            w.append(t, String.format("%s's sadistic enthusiasm ramps up further and further, striking at %s's clothes so that %s reflexively covers %sself, then striking at %s vitals.  ", mainName, c.mainName, c.heShe(), c.himHer(), c.hisHer()));
-                        else
-                        if(flavorHostility() > 33)
-                            w.append(t, String.format("%s can only stumble backward, reflexively trying to hide from the flashing cameras while %s beats %s down, landing several solid hits on %s clothes and body.  ", c.mainName, mainName, c.himHer(), c.hisHer()));
-                        else
-                            w.append(t, String.format("%s has gone back to fighting more or less conventionally, clashing hand-to-hand with %s, but %2$s can't focus and keeps making mistakes, distracted by the laughter and the flashing cameras in the surrounding crowd.  ", mainName, c.mainName));
+                        switch (flavorHostility() / 33) {
+                            case 0: w.append(t, String.format("%s has gone back to fighting more or less conventionally, clashing hand-to-hand with %s, but %2$s can't focus and keeps making mistakes, distracted by the laughter and the flashing cameras in the surrounding crowd.  ", mainName, c.mainName)); break;
+                            case 1: w.append(t, String.format("%s can only stumble backward, reflexively trying to hide from the flashing cameras while %s beats %s down, landing several solid hits on %s clothes and body.  ", c.mainName, mainName, c.himHer(), c.hisHer())); break;
+                            default: w.append(t, String.format("%s's sadistic enthusiasm ramps up further and further, striking at %s's clothes so that %s reflexively covers %sself, then striking at %s vitals.  ", mainName, c.mainName, c.heShe(), c.himHer(), c.hisHer()));
+                        }
                     } else
-                    if(flavorHostility() > 66)
-                        w.append(t, String.format("%s isn't directly trying to injure %s, but %s still fights sadistically, shredding only %s clothes with an eager savagery.  ", mainName, c.mainName, heShe(), c.hisHer()));
-                    else
-                    if(flavorHostility() > 33)
-                        w.append(t, String.format("%s is happily exploiting %s's timid nature, making %s flinch with attacks that look dangerous, only to redirect them at the last moment toward %s clothes.  ", mainName, c.mainName, c.himHer(), c.hisHer()));
-                    else
-                        w.append(t, String.format("%s shows no hostility toward %s %sself, but %s's utterly merciless in attacking %2$s's clothes.  ", mainName, c.mainName, c.himHer(), heShe()));
+                    switch (flavorHostility() / 33) {
+                        case 0: w.append(t, String.format("%s shows no hostility toward %s %sself, but %s's utterly merciless in attacking %2$s's clothes.  ", mainName, c.mainName, c.himHer(), heShe())); break;
+                        case 1: w.append(t, String.format("%s is happily exploiting %s's timid nature, making %s flinch with attacks that look dangerous, only to redirect them at the last moment toward %s clothes.  ", mainName, c.mainName, c.himHer(), c.hisHer())); break;
+                        default: w.append(t, String.format("%s isn't directly trying to injure %s, but %s still fights sadistically, shredding only %s clothes with an eager savagery.  ", mainName, c.mainName, heShe(), c.hisHer()));
+                    }
                     switch (dignity / 33) {
                         case 0: w.append(t, String.format("Even though %s is practically naked as well, it clearly doesn't bother %s as much anymore, and there's no doubt in the minds of the spectators as to who's in control of the situation.", mainName, himHer())); break;
                         case 1: w.append(t, String.format("Tears sting %s's eyes, blurring %s vision and making it even harder to fight effectively.", c.mainName, c.hisHer())); break;
@@ -25082,33 +24134,27 @@ public class Forsaken
                     if(c.temptReq == 100_000L)
                     {
                         w.append(t, String.format("%s decides to try to convince %s to abandon the fight for awhile and just enjoy %sself.  Even in %s extremely aroused state, %2$s is resistant at first, but ", mainName, c.mainName, c.himHer(), c.hisHer()));
-                        if(flavorHostility() > 66)
-                            w.append(t, String.format("when %s points out that the public has turned against %s and no longer deserves to have %2$s fighting for them, %s realizes that %s agrees.", c.reference(this), c.himHer(), c.mainName, c.heShe()));
-                        else
-                        if(flavorHostility() > 33)
-                            w.append(t, String.format("%s has some hope of redeeming %s, and %1$s figures that %1$s might have to compromise in order to do so.", c.heShe(), c.reference(this)));
-                        else
-                            w.append(t, String.format("when %s reminds %s how happy the Thralls will be, %s can't turn %s down.", c.reference(this), c.himHer(), c.mainName, himHer()));
+                        switch (flavorHostility() / 33) {
+                            case 0: w.append(t, String.format("when %s reminds %s how happy the Thralls will be, %s can't turn %s down.", c.reference(this), c.himHer(), c.mainName, himHer())); break;
+                            case 1: w.append(t, String.format("%s has some hope of redeeming %s, and %1$s figures that %1$s might have to compromise in order to do so.", c.heShe(), c.reference(this))); break;
+                            default: w.append(t, String.format("when %s points out that the public has turned against %s and no longer deserves to have %2$s fighting for them, %s realizes that %s agrees.", c.reference(this), c.himHer(), c.mainName, c.heShe()));
+                        }
                     } else
-                    if(flavorDeviancy() > 66)
-                        w.append(t, String.format("%s starts begging %s to do some sexual stuff together, and in %s aroused state, %2$s actually finds the idea appealing.", mainName, c.mainName, c.hisHer()));
-                    else
-                    if(flavorDeviancy() > 33)
-                        w.append(t, String.format("%s decides to respectfully ask for sexual favors from %s, and %2$s is aroused enough to decide that it's only fair to reward that politeness by complying.", mainName, c.mainName));
-                    else
-                        w.append(t, String.format("When %s asks for %s's help to sexually service the Thralls, %2$s is aroused enough to find the idea appealing.", mainName, c.mainName));
+                    switch (flavorDeviancy() / 33) {
+                        case 0: w.append(t, String.format("When %s asks for %s's help to sexually service the Thralls, %2$s is aroused enough to find the idea appealing.", mainName, c.mainName)); break;
+                        case 1: w.append(t, String.format("%s decides to respectfully ask for sexual favors from %s, and %2$s is aroused enough to decide that it's only fair to reward that politeness by complying.", mainName, c.mainName)); break;
+                        default: w.append(t, String.format("%s starts begging %s to do some sexual stuff together, and in %s aroused state, %2$s actually finds the idea appealing.", mainName, c.mainName, c.hisHer()));
+                    }
                 } else
                 if(c.morality > 33)
                 {
                     if(c.temptReq == 100_000L)
                     {
-                        if(flavorDeviancy() > 66)
-                            w.append(t, String.format("%s humps %sself wildly against %s, pleasuring %2$sself as much as %s is %s.  ", mainName, himHer(), c.mainName, heShe(), reference(c)));
-                        else
-                        if(flavorDeviancy() > 33)
-                            w.append(t, String.format("%s has developed a fetishistic desire to see %s fall, and %s tries every trick %3$s knows on %s, stroking %s %s, fondling %s %s, playing with %s nipples and everywhere else.", mainName, c.mainName, heShe(), reference(c), c.hisHer(), organ, c.hisHer(), lowerOrgan, c.hisHer()));
-                        else
-                            w.append(t, String.format("%s sweet-talks %s while stroking %s %s, telling %s how much better it will feel if %s stops resisting.", mainName, c.mainName, c.hisHer(), organ, reference(c), c.heShe()));
+                        switch (flavorDeviancy() / 33) {
+                            case 0: w.append(t, String.format("%s sweet-talks %s while stroking %s %s, telling %s how much better it will feel if %s stops resisting.", mainName, c.mainName, c.hisHer(), organ, reference(c), c.heShe())); break;
+                            case 1: w.append(t, String.format("%s has developed a fetishistic desire to see %s fall, and %s tries every trick %3$s knows on %s, stroking %s %s, fondling %s %s, playing with %s nipples and everywhere else.", mainName, c.mainName, heShe(), reference(c), c.hisHer(), organ, c.hisHer(), lowerOrgan, c.hisHer())); break;
+                            default: w.append(t, String.format("%s humps %sself wildly against %s, pleasuring %2$sself as much as %s is %s.  ", mainName, himHer(), c.mainName, heShe(), reference(c)));
+                        }
                         w.append(t, String.format("Finally, %s gives in, kissing %s on the lips as %s cums and using %s hands to return the favor.", c.mainName, mainName, c.heShe(), c.hisHer()));
                     } else
                     switch (disgrace / 33) {
@@ -25126,13 +24172,11 @@ public class Forsaken
                         default: w.append(t, String.format("%s should be strong enough to push %s away from %s %s, but %s struggles grow more and more halfhearted.  Finally, when %s tries to straighten up, %s pulls %s head back down.  Neither of them care when the Thralls approach to join in.", c.HeShe(), mainName, c.hisHer(), organ, c.hisHer(), c.reference(this), c.mainName, hisHer()));
                     }
                 } else
-                if(flavorHostility() > 66)
-                    w.append(t, String.format("%s grows annoyed with the Thralls leering at %s and %s, so %s offers %s the opportunity to punish them together.  %s eagerly accepts, wanting to dominate a foe who can't fight back.", mainName, himHer(), c.mainName, heShe(), reference(c), c.mainName));
-                else
-                if(flavorHostility() > 33)
-                    w.append(t, String.format("Neither %s nor %s actually care much about stopping the other anymore.  It's %1$s who makes the proposal that they take a break to play with the Thralls, but %2$s was already indulging in lustful thoughts, and %s's quick to accept.", mainName, c.mainName, c.heShe()));
-                else
-                    w.append(t, String.format("%s offers to service %s if %s'll stop resisting it.  As far as %2$s is concerned, this proposal has no drawbacks for %s.", mainName, c.mainName, c.heShe(), c.himHer()));
+                switch (flavorHostility() / 33) {
+                    case 0: w.append(t, String.format("%s offers to service %s if %s'll stop resisting it.  As far as %2$s is concerned, this proposal has no drawbacks for %s.", mainName, c.mainName, c.heShe(), c.himHer())); break;
+                    case 1: w.append(t, String.format("Neither %s nor %s actually care much about stopping the other anymore.  It's %1$s who makes the proposal that they take a break to play with the Thralls, but %2$s was already indulging in lustful thoughts, and %s's quick to accept.", mainName, c.mainName, c.heShe())); break;
+                    default: w.append(t, String.format("%s grows annoyed with the Thralls leering at %s and %s, so %s offers %s the opportunity to punish them together.  %s eagerly accepts, wanting to dominate a foe who can't fight back.", mainName, himHer(), c.mainName, heShe(), reference(c), c.mainName));
+                }
                 if(c.temptReq == 100_000L)
                 {
                     w.append(t, "\n\n");
@@ -25142,48 +24186,38 @@ public class Forsaken
                         w.addBreak(16);
                     if(c.dignity > 66)
                     {
-                        if(c.morality > 66)
-                            w.append(t, String.format("Although %s has always remained fixated on the goal of becoming a worthy hero, the truth is that %s self-image was more dependent on reactions from the public than %s cared to admit.  ", c.mainName, c.hisHer(), c.heShe()));
-                        else
-                        if(c.morality > 33)
-                            w.append(t, String.format("%s's heroic actions have always been motivated less by %s own personal beliefs and more by %2$s desire for public praise and approval.  ", c.mainName, c.hisHer()));
-                        else
-                            w.append(t, String.format("%s has never cared about fighting the Demons except insofar as it provided %s a path to fame and fortune.  ", c.mainName, c.himHer()));
-                        if(c.confidence > 66)
-                            w.append(t, String.format("With %s rage at the constant disrespect from the populace %s endures on a daily basis now, ", c.hisHer(), c.heShe()));
-                        else
-                        if(c.confidence > 33)
-                            w.append(t, String.format("%s's already spent sleepless nights dwelling on how wrong it is for those ungrateful people to benefit from %s suffering, and the tension inside %s has built to the point that ", c.HeShe(), c.hisHer(), c.himHer()));
-                        else
-                            w.append(t, String.format("Faced with rejection from those whose acceptance %s desperately craved, %1$s's been put in a fragile mental state, and ", c.heShe()));
-                        if(c.innocence > 66)
-                            w.append(t, String.format("%s's eager for any excuse to stop worrying about the fight and just let %sself feel good.", c.heShe(), c.himHer()));
-                        else
-                        if(c.innocence > 33)
-                            w.append(t, String.format("%s's able to make the conscious, free decision to stop fighting back.", c.heShe()));
-                        else
-                            w.append(t, String.format("%s's able to come up with plenty of reasons to just enjoy %sself, and none at all to keep fighting.", c.heShe(), c.himHer()));
+                        switch (c.morality / 33) {
+                            case 0: w.append(t, String.format("%s has never cared about fighting the Demons except insofar as it provided %s a path to fame and fortune.  ", c.mainName, c.himHer())); break;
+                            case 1: w.append(t, String.format("%s's heroic actions have always been motivated less by %s own personal beliefs and more by %2$s desire for public praise and approval.  ", c.mainName, c.hisHer())); break;
+                            default: w.append(t, String.format("Although %s has always remained fixated on the goal of becoming a worthy hero, the truth is that %s self-image was more dependent on reactions from the public than %s cared to admit.  ", c.mainName, c.hisHer(), c.heShe()));
+                        }
+                        switch (c.confidence / 33) {
+                            case 0: w.append(t, String.format("Faced with rejection from those whose acceptance %s desperately craved, %1$s's been put in a fragile mental state, and ", c.heShe())); break;
+                            case 1: w.append(t, String.format("%s's already spent sleepless nights dwelling on how wrong it is for those ungrateful people to benefit from %s suffering, and the tension inside %s has built to the point that ", c.HeShe(), c.hisHer(), c.himHer())); break;
+                            default: w.append(t, String.format("With %s rage at the constant disrespect from the populace %s endures on a daily basis now, ", c.hisHer(), c.heShe()));
+                        }
+                        switch (c.innocence / 33) {
+                            case 0: w.append(t, String.format("%s's able to come up with plenty of reasons to just enjoy %sself, and none at all to keep fighting.", c.heShe(), c.himHer())); break;
+                            case 1: w.append(t, String.format("%s's able to make the conscious, free decision to stop fighting back.", c.heShe())); break;
+                            default: w.append(t, String.format("%s's eager for any excuse to stop worrying about the fight and just let %sself feel good.", c.heShe(), c.himHer()));
+                        }
                     } else
                     if(c.innocence > 66)
                     {
-                        if(c.confidence > 66)
-                            w.append(t, String.format("%s has always been headstrong, but that doesn't translate to having much willpower, and ", c.mainName));
-                        else
-                        if(c.confidence > 33)
-                            w.append(t, String.format("%s is a very impressionable person, prone to getting swept up in what those around %s are doing, but ", c.mainName, c.himHer()));
-                        else
-                            w.append(t, String.format("%s is still embarrassed and uncertain about how good %s sometimes feels when the Thralls get their hands on %s, but ", c.mainName, c.heShe(), c.himHer()));
+                        switch (c.confidence / 33) {
+                            case 0: w.append(t, String.format("%s is still embarrassed and uncertain about how good %s sometimes feels when the Thralls get their hands on %s, but ", c.mainName, c.heShe(), c.himHer())); break;
+                            case 1: w.append(t, String.format("%s is a very impressionable person, prone to getting swept up in what those around %s are doing, but ", c.mainName, c.himHer())); break;
+                            default: w.append(t, String.format("%s has always been headstrong, but that doesn't translate to having much willpower, and ", c.mainName));
+                        }
                         if(c.dignity > 33)
                             w.append(t, String.format("%s's started to grow numb to the constant ridicule %1$s receives for being a pervert.  If that's what %1$s is, then %1$s's decided to embrace it.  ", c.heShe()));
                         else
                             w.append(t, String.format("%s's never been one to hide or deny %s own feelings.  When the public tells %s that only a bad person would enjoy doing sexual things in public, %1$s simply thinks that maybe it's not so wrong to be a bad person.  ", c.heShe(), c.hisHer(), c.himHer()));
-                        if(c.morality > 66)
-                            w.append(t, "After all, if it makes other people feel good too, then it can't be that bad.");
-                        else
-                        if(c.morality > 33)
-                            w.append(t, String.format("%s just doesn't care that much about the war anymore.", c.HeShe()));
-                        else
-                            w.append(t, String.format("%s likes sexual pleasure, and more than that, %s likes messing with all the stuffy authority figures who are always scolding %s.", c.HeShe(), c.heShe(), c.himHer()));
+                        switch (c.morality / 33) {
+                            case 0: w.append(t, String.format("%s likes sexual pleasure, and more than that, %s likes messing with all the stuffy authority figures who are always scolding %s.", c.HeShe(), c.heShe(), c.himHer())); break;
+                            case 1: w.append(t, String.format("%s just doesn't care that much about the war anymore.", c.HeShe())); break;
+                            default: w.append(t, "After all, if it makes other people feel good too, then it can't be that bad.");
+                        }
                     } else
                     if(c.confidence > 66)
                     {
@@ -25195,13 +24229,11 @@ public class Forsaken
                             w.append(t, String.format("%s has no idea how severely %s judgment is being affected by the instinctive desire to seek out the pleasure you're regularly inflicting on %s.  ", c.HeShe(), c.hisHer(), c.himHer()));
                         else
                             w.append(t, String.format("%s's confident in %s ability to think clearly through pleasure, and while that would ordinarily be enough to resist your manipulation, the knowledge that the rest of humanity is rejecting %s has a profound impact on %2$s thought process.  ", c.HeShe(), c.hisHer(), c.himHer()));
-                        if(c.morality > 66)
-                            w.append(t, String.format("%s remains committed to following a strict moral code with people in %s personal life, but %s's less and less convinced that there's any point to suffering in battle against the Demons.", c.HeShe(), c.hisHer(), c.heShe()));
-                        else
-                        if(c.morality > 33)
-                            w.append(t, String.format("%s's started to consider the Thralls to be no better nor worse than the rest of humanity, and at least the former are willing to sexually service %s.", c.HeShe(), c.himHer()));
-                        else
-                            w.append(t, String.format("Out of spite for the rest of humanity, %s's even willing to act a bit submissively as long as %1$s can get some sexual pleasure in the process.", c.heShe()));
+                        switch (c.morality / 33) {
+                            case 0: w.append(t, String.format("Out of spite for the rest of humanity, %s's even willing to act a bit submissively as long as %1$s can get some sexual pleasure in the process.", c.heShe())); break;
+                            case 1: w.append(t, String.format("%s's started to consider the Thralls to be no better nor worse than the rest of humanity, and at least the former are willing to sexually service %s.", c.HeShe(), c.himHer())); break;
+                            default: w.append(t, String.format("%s remains committed to following a strict moral code with people in %s personal life, but %s's less and less convinced that there's any point to suffering in battle against the Demons.", c.HeShe(), c.hisHer(), c.heShe()));
+                        }
                     } else
                     {
                         if(c.confidence > 33)
@@ -25226,24 +24258,20 @@ public class Forsaken
                 if(c.morality > 66)
                 {
                     w.append(t, String.format("Soon, %s is happily on %s knees, practicing %2$s oral skills on a line of Thralls who all praise %s for being so digiligent.  ", c.mainName, c.hisHer(), c.himHer()));
-                    if(flavorDeviancy() > 66)
-                        w.append(t, String.format("%s sits and plays with %sself as %s watches, unable to wait for %s turn.", mainName, himHer(), heShe(), hisHer()));
-                    else
-                    if(flavorDeviancy() > 33)
-                        w.append(t, String.format("%s joins the line, and when it's %s turn, %s smirks up at %s, taking a bit of satisfaction out of being the one in control of their encounter this time.", mainName, hisHer(), c.mainName, himHer()));
-                    else
-                        w.append(t, String.format("%s offers advice, beaming happily at how quickly %s catches on.", mainName, c.mainName));
+                    switch (flavorDeviancy() / 33) {
+                        case 0: w.append(t, String.format("%s offers advice, beaming happily at how quickly %s catches on.", mainName, c.mainName)); break;
+                        case 1: w.append(t, String.format("%s joins the line, and when it's %s turn, %s smirks up at %s, taking a bit of satisfaction out of being the one in control of their encounter this time.", mainName, hisHer(), c.mainName, himHer())); break;
+                        default: w.append(t, String.format("%s sits and plays with %sself as %s watches, unable to wait for %s turn.", mainName, himHer(), heShe(), hisHer()));
+                    }
                 } else
                 if(c.morality > 33)
                 {
                     w.append(t, "Hands reach from all directions, and the two of them end up moaning in pure bliss together, bodies pressed up against each other while the Thralls stroke and rub and lightly pinch every part of them.  ");
-                    if(flavorHostility() > 66)
-                        w.append(t, String.format("In the midst of %s orgasm, %s no longer looks angry or hateful at all.", hisHer(), mainName));
-                    else
-                    if(flavorHostility() > 33)
-                        w.append(t, String.format("There's a glint of mischief in %s's eyes even as %s cums, enjoying the sight of %s surrendering to the pleasure.", mainName, heShe(), c.mainName));
-                    else
-                        w.append(t, String.format("%s struggles to try to pleasure %s as well, but %s's cumming too hard, and all %3$s can manage to do is moan around %2$s's %s.", mainName, c.mainName, heShe(), lowerOrgan));
+                    switch (flavorHostility() / 33) {
+                        case 0: w.append(t, String.format("%s struggles to try to pleasure %s as well, but %s's cumming too hard, and all %3$s can manage to do is moan around %2$s's %s.", mainName, c.mainName, heShe(), lowerOrgan)); break;
+                        case 1: w.append(t, String.format("There's a glint of mischief in %s's eyes even as %s cums, enjoying the sight of %s surrendering to the pleasure.", mainName, heShe(), c.mainName)); break;
+                        default: w.append(t, String.format("In the midst of %s orgasm, %s no longer looks angry or hateful at all.", hisHer(), mainName));
+                    }
                 } else
                 {
                     w.append(t, String.format("A short while later, one of the Thralls is made to get on all fours while %s lounges on his back, commanding several others to pleasure %s.  ", c.mainName, c.himHer()));
@@ -25272,13 +24300,11 @@ public class Forsaken
                         w.append(t, String.format("forcing %s's thighs apart with %s knee and grinding it against %s clit while staring into %3$s eyes.  ", reference(c), c.hisHer(), hisHer()));
                     else
                         w.append(t, String.format("thighs clenched around %s's penis, shifting them back and forth to stimulate it.  ", reference(c)));
-                    if(flavorDeviancy() > 66)
-                        w.append(t, String.format("%s cums over and over again, wailing and thrashing, and %s savors the feeling of being the one in control.", mainName, c.mainName));
-                    else
-                    if(flavorDeviancy() > 33)
-                        w.append(t, String.format("%s gasps and moans, enjoying being dominated by %s as much as %s ever enjoyed dominating %s in turn.", mainName, c.mainName, c.heShe(), c.himHer()));
-                    else
-                        w.append(t, String.format("%s tries to stop %sself from cumming, but %s can't, and %3$s gapes open-mouthed at %s as the waves of pleasure crash through %2$s.", mainName, himHer(), heShe(), c.mainName));
+                    switch (flavorDeviancy() / 33) {
+                        case 0: w.append(t, String.format("%s tries to stop %sself from cumming, but %s can't, and %3$s gapes open-mouthed at %s as the waves of pleasure crash through %2$s.", mainName, himHer(), heShe(), c.mainName)); break;
+                        case 1: w.append(t, String.format("%s gasps and moans, enjoying being dominated by %s as much as %s ever enjoyed dominating %s in turn.", mainName, c.mainName, c.heShe(), c.himHer())); break;
+                        default: w.append(t, String.format("%s cums over and over again, wailing and thrashing, and %s savors the feeling of being the one in control.", mainName, c.mainName));
+                    }
                 } else
                 if(c.confidence > 33)
                 {
@@ -25328,13 +24354,11 @@ public class Forsaken
                     } else
                     {
                         w.append(t, String.format("At %s's urging, %s straddles one of the Thralls, gently lowering %sself until his well-lubricated cock starts to penetrate %s anus.  ", mainName, c.mainName, c.himHer(), c.hisHer()));
-                        if(flavorHostility() > 66)
-                            w.append(t, String.format("It goes too slowly for %s's taste, and %s roughly pushes down on %s's shoulders, forcing %s completely onto the shaft, then lifts %4$s up and pushes %4$s down again while tugging on %s %s.  %s cums hard, squealing and kicking %s feet, and %s realizes %9$s's begging to be taken even harder.", mainName, heShe(), reference(c), c.himHer(), c.hisHer(), organ, c.mainName, c.hisHer(), c.heShe()));
-                        else
-                        if(flavorHostility() > 33)
-                            w.append(t, String.format("%s gradually finds %s rhythm, sliding %sself up and down the shaft, and %s pinches the base of the Thrall's cock to prevent him from finishing too soon.  Just as %1$s starts to cum, %4$s takes %2$s %s into %s mouth and releases the Thrall, and %1$s experiences an intense orgasm while feeling a load of cum shooting up %2$s ass.", c.mainName, c.hisHer(), c.himHer(), mainName, organ, hisHer()));
-                        else
-                            w.append(t, String.format("%s continues to encourage %s gently, murmuring reassurances in between licking %s's %s.  %s's moans gradually turn from discomfort into pleasure, and when %s finally cums, %6$s looks down at %1$s's fluid-spattered face and asks for more.", mainName, c.himHer(), reference(c), organ, c.mainName, c.heShe()));
+                        switch (flavorHostility() / 33) {
+                            case 0: w.append(t, String.format("%s continues to encourage %s gently, murmuring reassurances in between licking %s's %s.  %s's moans gradually turn from discomfort into pleasure, and when %s finally cums, %6$s looks down at %1$s's fluid-spattered face and asks for more.", mainName, c.himHer(), reference(c), organ, c.mainName, c.heShe())); break;
+                            case 1: w.append(t, String.format("%s gradually finds %s rhythm, sliding %sself up and down the shaft, and %s pinches the base of the Thrall's cock to prevent him from finishing too soon.  Just as %1$s starts to cum, %4$s takes %2$s %s into %s mouth and releases the Thrall, and %1$s experiences an intense orgasm while feeling a load of cum shooting up %2$s ass.", c.mainName, c.hisHer(), c.himHer(), mainName, organ, hisHer())); break;
+                            default: w.append(t, String.format("It goes too slowly for %s's taste, and %s roughly pushes down on %s's shoulders, forcing %s completely onto the shaft, then lifts %4$s up and pushes %4$s down again while tugging on %s %s.  %s cums hard, squealing and kicking %s feet, and %s realizes %9$s's begging to be taken even harder.", mainName, heShe(), reference(c), c.himHer(), c.hisHer(), organ, c.mainName, c.hisHer(), c.heShe()));
+                        }
                     }
                 } else
                 if(c.innocence > 33)
@@ -25346,13 +24370,11 @@ public class Forsaken
                             w.append(t, " sitting on her face.  ");
                         else
                             w.append(t, " down her throat.  ");
-                        if(flavorDeviancy() > 66)
-                            w.append(t, String.format("The Thrall's tongue drives %s wild, and %s hungrily kisses %s as they all cum together.", mainName, heShe(), reference(c)));
-                        else
-                        if(flavorDeviancy() > 33)
-                            w.append(t, String.format("The two of them make out as they buck their hips, %s's tongue exploring %s's mouth.", mainName, reference(c)));
-                        else
-                            w.append(t, String.format("%s smirks at %s reaching over to tweak %s nipple and squeeze %3$s butt as %s cums inside.", mainName, c.mainName, c.hisHer(), c.heShe()));
+                        switch (flavorDeviancy() / 33) {
+                            case 0: w.append(t, String.format("%s smirks at %s reaching over to tweak %s nipple and squeeze %3$s butt as %s cums inside.", mainName, c.mainName, c.hisHer(), c.heShe())); break;
+                            case 1: w.append(t, String.format("The two of them make out as they buck their hips, %s's tongue exploring %s's mouth.", mainName, reference(c))); break;
+                            default: w.append(t, String.format("The Thrall's tongue drives %s wild, and %s hungrily kisses %s as they all cum together.", mainName, heShe(), reference(c)));
+                        }
                     } else
                     {
                         w.append(t, String.format("%s rubs copious amounts of lubricant on %s %s, then presses it against %s's anus.  ", mainName, hisHer(), penetrator, c.mainName));
@@ -25770,13 +24792,11 @@ public class Forsaken
                         if(c.getConfidence() > 33)
                         {
                             w.append(t, String.format("%s pushes %s away over and over again, but ", c.getMainName(), mainName));
-                            if(flavorDeviancy() > 66)
-                                w.append(t, String.format("%s can't think about anything but %s's %s", mainName, c.getMainName(), lowerOrgan));
-                            else
-                            if(flavorDeviancy() > 33)
-                                w.append(t, String.format("%s is kinky enough that it just turns %s on even more", mainName, himHer()));
-                            else
-                                w.append(t, String.format("%s won't be dissuaded", mainName));
+                            switch (flavorDeviancy() / 33) {
+                                case 0: w.append(t, String.format("%s won't be dissuaded", mainName)); break;
+                                case 1: w.append(t, String.format("%s is kinky enough that it just turns %s on even more", mainName, himHer())); break;
+                                default: w.append(t, String.format("%s can't think about anything but %s's %s", mainName, c.getMainName(), lowerOrgan));
+                            }
                             w.append(t, String.format(", and soon %s is blushing and gasping from the repeated groping.", c.getMainName()));
                         } else
                         {
@@ -25802,22 +24822,18 @@ public class Forsaken
                         if(c.getConfidence() > 33)
                         {
                             w.append(t, String.format("%s and %s grapple desperately, ", mainName, c.getMainName()));
-                            if(flavorHostility() > 66)
-                                w.append(t, String.format("with %s crying out and giving up the advantage when %s manages to seize and twist %s %s.", c.getMainName(), mainName, c.hisHer(), organ));
-                            else
-                            if(flavorHostility() > 33)
-                                w.append(t, String.format("but while %s only knows how to fight conventionally, %s is ruthless about kneeing and grinding against %1$s's sensitive %s.", c.getMainName(), mainName, organ));
-                            else
-                                w.append(t, String.format("but %s's surprisingly gentle hands on %s's %s and %s make it hard to focus on the fight.", mainName, reference(c), organ, lowerOrgan));
+                            switch (flavorHostility() / 33) {
+                                case 0: w.append(t, String.format("but %s's surprisingly gentle hands on %s's %s and %s make it hard to focus on the fight.", mainName, reference(c), organ, lowerOrgan)); break;
+                                case 1: w.append(t, String.format("but while %s only knows how to fight conventionally, %s is ruthless about kneeing and grinding against %1$s's sensitive %s.", c.getMainName(), mainName, organ)); break;
+                                default: w.append(t, String.format("with %s crying out and giving up the advantage when %s manages to seize and twist %s %s.", c.getMainName(), mainName, c.hisHer(), organ));
+                            }
                         } else
                         {
-                            if(flavorDeviancy() > 66)
-                                w.append(t, String.format("Driven wild by %s's meek, vulnerable manner, ", reference(c)));
-                            else
-                            if(flavorDeviancy() > 33)
-                                w.append(t, String.format("Taking some satisfaction from %s's shrill pleas, ", reference(c)));
-                            else
-                                w.append(t, String.format("Taking advantage of %s's insecurities, ", reference(c)));
+                            switch (flavorDeviancy() / 33) {
+                                case 0: w.append(t, String.format("Taking advantage of %s's insecurities, ", reference(c))); break;
+                                case 1: w.append(t, String.format("Taking some satisfaction from %s's shrill pleas, ", reference(c))); break;
+                                default: w.append(t, String.format("Driven wild by %s's meek, vulnerable manner, ", reference(c)));
+                            }
                             w.append(t, String.format("%s roughly %s down and presses the advantage, firmly rubbing %s %s until %s squeals for mercy.", mainName, c.getMainName(), c.hisHer(), organ, c.heShe()));
                         }
                     } else
@@ -25842,23 +24858,19 @@ public class Forsaken
                     if(c.getConfidence() > 33)
                     {
                         w.append(t, String.format("%s slams %s halfway through a concrete wall so that %s butt is hanging out, then rips open %2$s's %s", mainName, c.getMainName(), c.hisHer(), bottomDesc));
-                        if(flavorDeviancy() > 66)
-                            w.append(t, String.format(" and starts eagerly licking %s %s.", c.hisHer(), organ));
-                        else
-                        if(flavorDeviancy() > 33)
-                            w.append(t, String.format(", plants a foot on %s organ, and starts moving it back and forth.", c.hisHer()));
-                        else
-                            w.append(t, String.format(" and uses one hand to firmly stimulate %s %s.", c.hisHer(), organ));
+                        switch (flavorDeviancy() / 33) {
+                            case 0: w.append(t, String.format(" and uses one hand to firmly stimulate %s %s.", c.hisHer(), organ)); break;
+                            case 1: w.append(t, String.format(", plants a foot on %s organ, and starts moving it back and forth.", c.hisHer())); break;
+                            default: w.append(t, String.format(" and starts eagerly licking %s %s.", c.hisHer(), organ));
+                        }
                     } else
                     {
                         w.append(t, String.format("%s gives %s's %s a slight tweak, ", mainName, c.getMainName(), organ));
-                        if(flavorHostility() > 66)
-                            w.append(t, "grinning with sadistic glee");
-                        else
-                        if(flavorHostility() > 33)
-                            w.append(t, String.format("looking down on %s contemptfully", c.himHer()));
-                        else
-                            w.append(t, String.format("shaking %s head with disappointment", hisHer()));
+                        switch (flavorHostility() / 33) {
+                            case 0: w.append(t, String.format("shaking %s head with disappointment", hisHer())); break;
+                            case 1: w.append(t, String.format("looking down on %s contemptfully", c.himHer())); break;
+                            default: w.append(t, "grinning with sadistic glee");
+                        }
                         w.append(t, String.format(" when %s can only squirm and whine in response.", c.getMainName()));
                     }
                 } else
@@ -25867,13 +24879,11 @@ public class Forsaken
                     if(c.getConfidence() > 66)
                     {
                         w.append(t, String.format("Overwhelmed by the sensation of %s's hands all over %s body, %s finally manages to deliver a mighty wallop to %s's head.  %s manages to escape and get some distance, ", mainName, c.hisHer(), c.getMainName(), c.reference(this), c.getMainName()));
-                        if(flavorHostility() > 66)
-                            w.append(t, String.format("but the murderous sadism in %s's eyes as %s recovers promises even worse torment to come.", mainName, heShe()));
-                        else
-                        if(flavorHostility() > 33)
-                            w.append(t, String.format("but %s wastes no time in immediately starting to pursue %s again.", mainName, c.himHer()));
-                        else
-                            w.append(t, String.format("and %s even briefly looks apologetic as %s recovers, but then %s expression again melts into mindless lust.", mainName, heShe(), hisHer()));
+                        switch (flavorHostility() / 33) {
+                            case 0: w.append(t, String.format("and %s even briefly looks apologetic as %s recovers, but then %s expression again melts into mindless lust.", mainName, heShe(), hisHer())); break;
+                            case 1: w.append(t, String.format("but %s wastes no time in immediately starting to pursue %s again.", mainName, c.himHer())); break;
+                            default: w.append(t, String.format("but the murderous sadism in %s's eyes as %s recovers promises even worse torment to come.", mainName, heShe()));
+                        }
                     } else
                     if(c.getConfidence() > 33)
                     {
@@ -26004,13 +25014,11 @@ public class Forsaken
                     if(c.getMorality() > 66)
                     {
                         w.append(t, String.format("%s tries to draw %s away to an area further from any civilians, ", c.getMainName(), mainName));
-                        if(flavorHostility() > 66)
-                            w.append(t, String.format("but %s just grins and starts heading straight for the evacuation route, forcing %s to tackle %s and open %3$sself up to a punishing counterattack.", mainName, c.getMainName(), himHer()));
-                        else
-                        if(flavorHostility() > 33)
-                            w.append(t, String.format("and %s takes advantage by attacking %s from behind with %s %s.", mainName, reference(c), hisHer(), weapon));
-                        else
-                            w.append(t, String.format("and %s is content to oblige, soon catching up to %s and engaging %2$s in a close-range grapple.", mainName, c.himHer()));
+                        switch (flavorHostility() / 33) {
+                            case 0: w.append(t, String.format("and %s is content to oblige, soon catching up to %s and engaging %2$s in a close-range grapple.", mainName, c.himHer())); break;
+                            case 1: w.append(t, String.format("and %s takes advantage by attacking %s from behind with %s %s.", mainName, reference(c), hisHer(), weapon)); break;
+                            default: w.append(t, String.format("but %s just grins and starts heading straight for the evacuation route, forcing %s to tackle %s and open %3$sself up to a punishing counterattack.", mainName, c.getMainName(), himHer()));
+                        }
                     } else
                     if(c.getMorality() > 33)
                     {
@@ -26062,13 +25070,11 @@ public class Forsaken
                     w.append(t, String.format(", %s turns to flee, but %s is fast enough to immediately catch up and slam %s down into the concrete so hard that it leaves a crater.", c.getMainName(), mainName, c.himHer()));
                 } else
                 {
-                    if(flavorHostility() > 66)
-                        w.append(t, String.format("%s fires an overwhelming blast of energy at a building with some civilians still inside", mainName));
-                    else
-                    if(flavorHostility() > 33)
-                        w.append(t, String.format("%s fires indiscriminate blasts of energy at the surrounding buildings", mainName));
-                    else
-                        w.append(t, String.format("%s fires a few blasts of energy at nearby abandoned buildings", mainName));
+                    switch (flavorHostility() / 33) {
+                        case 0: w.append(t, String.format("%s fires a few blasts of energy at nearby abandoned buildings", mainName)); break;
+                        case 1: w.append(t, String.format("%s fires indiscriminate blasts of energy at the surrounding buildings", mainName)); break;
+                        default: w.append(t, String.format("%s fires an overwhelming blast of energy at a building with some civilians still inside", mainName));
+                    }
                     w.append(t, String.format(" in order to block %s's only possible escape routes.  %1$s tries to think of another way out, but before %s can do anything, %s corners %s ", c.getMainName(), c.heShe(), mainName, c.himHer()));
                     if(w.tickle())
                         w.append(t, String.format("and begins to tickle %s with overwhelming strength.", c.himHer()));
@@ -26090,13 +25096,11 @@ public class Forsaken
                 if(c.getConfidence() > 33)
                 {
                     w.append(t, String.format("%s fights defensively, not even using %s %s", mainName, hisHer(), weapon));
-                    if(flavorHostility() > 66)
-                        w.append(t, String.format(", laughing and cruelly taunting %s in lieu of actually trying to attack.", c.getMainName()));
-                    else
-                    if(flavorHostility() > 33)
-                        w.append(t, String.format(", smirking with satisfaction at being able to hold %s ground against the more powerful %s.", hisHer(), c.getMainName()));
-                    else
-                        w.append(t, String.format(", knowing that %s powers have become weak enough that %s wouldn't even be able to leave a scratch on %s.", hisHer(), heShe(), c.getMainName()));
+                    switch (flavorHostility() / 33) {
+                        case 0: w.append(t, String.format(", knowing that %s powers have become weak enough that %s wouldn't even be able to leave a scratch on %s.", hisHer(), heShe(), c.getMainName())); break;
+                        case 1: w.append(t, String.format(", smirking with satisfaction at being able to hold %s ground against the more powerful %s.", hisHer(), c.getMainName())); break;
+                        default: w.append(t, String.format(", laughing and cruelly taunting %s in lieu of actually trying to attack.", c.getMainName()));
+                    }
                 } else
                 {
                     w.append(t, String.format("%s and %s have a tense standoff.  %2$s lacks the confidence to actively attack one of the Forsaken, while %1$s", mainName, c.getMainName()));
@@ -26111,13 +25115,11 @@ public class Forsaken
             {
                 if(c.getMorality() > 66)
                 {
-                    if(flavorHostility() > 66)
-                        w.append(t, "Eager for any excuse to cause some bloodshed, ");
-                    else
-                    if(flavorHostility() > 33)
-                        w.append(t, "Threatening to put innocents in harm's way, ");
-                    else
-                        w.append(t, String.format("Even though %s has no intention of actually targeting innocents, ", heShe()));
+                    switch (flavorHostility() / 33) {
+                        case 0: w.append(t, String.format("Even though %s has no intention of actually targeting innocents, ", heShe())); break;
+                        case 1: w.append(t, "Threatening to put innocents in harm's way, "); break;
+                        default: w.append(t, "Eager for any excuse to cause some bloodshed, ");
+                    }
                     w.append(t, String.format("%s starts to advance toward the nearest group of civilians, then easily dodges the predictable attacks %s is forced to throw %s way in order to stop %s.", mainName, c.getMainName(), hisHer(), himHer()));
                 } else
                 if(c.getMorality() > 33)
@@ -26158,13 +25160,11 @@ public class Forsaken
             } else
             {
                 w.append(t, String.format("After a few attacks, %s recognizes the futility of trying to fight %s", c.getMainName(), mainName));
-                if(flavorHostility() > 66)
-                    w.append(t, String.format(", and %s blood runs cold as %s realizes that %2$s's completely at %s's mercy.", c.hisHer(), c.heShe(), c.reference(this)));
-                else
-                if(flavorHostility() > 33)
-                    w.append(t, String.format(", and %s can only back off warily, alarmed at the palpable hatred pouring off %s.", c.heShe(), c.reference(this)));
-                else
-                    w.append(t, String.format(", but %s's grateful for the fact that %s doesn't seem to intend to hurt %s.", c.heShe(), c.reference(this), c.himHer()));
+                switch (flavorHostility() / 33) {
+                    case 0: w.append(t, String.format(", but %s's grateful for the fact that %s doesn't seem to intend to hurt %s.", c.heShe(), c.reference(this), c.himHer())); break;
+                    case 1: w.append(t, String.format(", and %s can only back off warily, alarmed at the palpable hatred pouring off %s.", c.heShe(), c.reference(this))); break;
+                    default: w.append(t, String.format(", and %s blood runs cold as %s realizes that %2$s's completely at %s's mercy.", c.hisHer(), c.heShe(), c.reference(this)));
+                }
             }
         } else
         if(c.captureProgression % 6 == 2)
@@ -26199,13 +25199,11 @@ public class Forsaken
                         } else
                         {
                             w.append(t, String.format("%s and %s roll around on the ground together, wrestling in a very undignified manner.  %2$s's clothes are too fragile to handle this kind of fight, ", mainName, c.getMainName()));
-                            if(flavorDeviancy() > 66)
-                                w.append(t, String.format("and the distraction of seeing more and more of %s's skin slowly exposed makes %s perform even more poorly.", reference(c), mainName));
-                            else
-                            if(flavorDeviancy() > 33)
-                                w.append(t, String.format("and %s enjoys the view.", c.reference(this)));
-                            else
-                                w.append(t, String.format("but when %s points it out, %s just makes an apathetic noise.", c.reference(this), mainName));
+                            switch (flavorDeviancy() / 33) {
+                                case 0: w.append(t, String.format("but when %s points it out, %s just makes an apathetic noise.", c.reference(this), mainName)); break;
+                                case 1: w.append(t, String.format("and %s enjoys the view.", c.reference(this))); break;
+                                default: w.append(t, String.format("and the distraction of seeing more and more of %s's skin slowly exposed makes %s perform even more poorly.", reference(c), mainName));
+                            }
                         }
                     } else
                     if(disgrace > 33)
@@ -26213,13 +25211,11 @@ public class Forsaken
                         if(c.getConfidence() > 66)
                         {
                             w.append(t, String.format("The flurry of blows exchanged between %s and %s is so intense that it sends scraps of their clothes flying", mainName, c.getMainName()));
-                            if(flavorDeviancy() > 66)
-                                w.append(t, String.format(" - and %s's increasing distraction as %s sees more and more of %s's bare skin eventually causes %s to take a punch right in the jaw.", mainName, heShe(), reference(c), himHer()));
-                            else
-                            if(flavorDeviancy() > 33)
-                                w.append(t, String.format(", much to %s's amusement.", mainName));
-                            else
-                                w.append(t, ", but both combatants are so caught up in the rush of combat that they don't even notice.");
+                            switch (flavorDeviancy() / 33) {
+                                case 0: w.append(t, ", but both combatants are so caught up in the rush of combat that they don't even notice."); break;
+                                case 1: w.append(t, String.format(", much to %s's amusement.", mainName)); break;
+                                default: w.append(t, String.format(" - and %s's increasing distraction as %s sees more and more of %s's bare skin eventually causes %s to take a punch right in the jaw.", mainName, heShe(), reference(c), himHer()));
+                            }
                         } else
                         if(c.getConfidence() > 33)
                         {
@@ -26264,13 +25260,11 @@ public class Forsaken
                             w.append(t, String.format("%s holds %s down and deliberately tears apart %s clothes in order to expose %3$s sensitive spots for a brutal tickling", mainName, c.getMainName(), c.hisHer()));
                         else
                             w.append(t, String.format("%s holds %s down and repeatedly punches %s so hard that it blasts %s clothes off %4$s body", mainName, c.getMainName(), c.himHer(), c.hisHer()));
-                        if(flavorHostility() > 66)
-                            w.append(t, ", grinning with sadistic glee.");
-                        else
-                        if(flavorHostility() > 33)
-                            w.append(t, ", completely without mercy.");
-                        else
-                            w.append(t, String.format(", though %s doesn't seem to actually enjoy tormenting %s.", heShe(), reference(c)));
+                        switch (flavorHostility() / 33) {
+                            case 0: w.append(t, String.format(", though %s doesn't seem to actually enjoy tormenting %s.", heShe(), reference(c))); break;
+                            case 1: w.append(t, ", completely without mercy."); break;
+                            default: w.append(t, ", grinning with sadistic glee.");
+                        }
                     } else
                     {
                         w.append(t, String.format("In order to escape %s's ", mainName));
@@ -26279,13 +25273,11 @@ public class Forsaken
                         else
                             w.append(t, "pummeling");
                         w.append(t, String.format(", %s ", c.getMainName()));
-                        if(flavorDeviancy() > 66)
-                            w.append(t, String.format("abruptly kisses %s on the lips, and then when %s starts to instinctively respond, %s ", c.reference(this), mainName, c.getMainName()));
-                        else
-                        if(flavorDeviancy() > 33)
-                            w.append(t, String.format("starts to spread %s legs, and when %s lustfully looks downward, %s ", c.hisHer(), c.reference(this), c.getMainName()));
-                        else
-                            w.append(t, String.format("waits for %s to let %s guard down, then ", c.reference(this), hisHer()));
+                        switch (flavorDeviancy() / 33) {
+                            case 0: w.append(t, String.format("waits for %s to let %s guard down, then ", c.reference(this), hisHer())); break;
+                            case 1: w.append(t, String.format("starts to spread %s legs, and when %s lustfully looks downward, %s ", c.hisHer(), c.reference(this), c.getMainName())); break;
+                            default: w.append(t, String.format("abruptly kisses %s on the lips, and then when %s starts to instinctively respond, %s ", c.reference(this), mainName, c.getMainName()));
+                        }
                         w.append(t, String.format("starts fighting with all %s might.  %s's close to escaping, although the frantic struggle is enough to tear %1$s clothes apart.", c.hisHer(), c.HeShe()));
                     }
                 } else
@@ -26328,13 +25320,11 @@ public class Forsaken
                     if(c.getInnocence() > 66)
                     {
                         w.append(t, String.format("Between %s's singlemindedness and ", c.getMainName()));
-                        if(flavorDeviancy() > 66)
-                            w.append(t, String.format("%s's overwhelming lust for %s", mainName, reference(c)));
-                        else
-                        if(flavorDeviancy() > 33)
-                            w.append(t, String.format("%s's anger", mainName));
-                        else
-                            w.append(t, String.format("%s's focused determination", mainName));
+                        switch (flavorDeviancy() / 33) {
+                            case 0: w.append(t, String.format("%s's focused determination", mainName)); break;
+                            case 1: w.append(t, String.format("%s's anger", mainName)); break;
+                            default: w.append(t, String.format("%s's overwhelming lust for %s", mainName, reference(c)));
+                        }
                         w.append(t, ", the two of them ");
                         if(w.tickle())
                             w.append(t, "tickle each other");
@@ -26363,13 +25353,11 @@ public class Forsaken
                 if(c.getConfidence() > 66)
                 {
                     w.append(t, String.format("A powerful blast of energy knocks %s straight through several buildings.  ", c.getMainName()));
-                    if(flavorHostility() > 66)
-                        w.append(t, String.format("%s passes out for a fraction of a second, only to wake up to the screams of injured civilians and the silhouette of %s slowly approaching %s through the flames.", c.HeShe(), mainName, c.himHer()));
-                    else
-                    if(flavorHostility() > 33)
-                        w.append(t, String.format("%s ends up at the center of a large crater, %s hovering up above and looking down on %s.", c.HeShe(), mainName, c.himHer()));
-                    else
-                        w.append(t, String.format("%s was careful to aim %s at an area without any remaining civilians, but the devastation is still immense.", mainName, c.himHer()));
+                    switch (flavorHostility() / 33) {
+                        case 0: w.append(t, String.format("%s was careful to aim %s at an area without any remaining civilians, but the devastation is still immense.", mainName, c.himHer())); break;
+                        case 1: w.append(t, String.format("%s ends up at the center of a large crater, %s hovering up above and looking down on %s.", c.HeShe(), mainName, c.himHer())); break;
+                        default: w.append(t, String.format("%s passes out for a fraction of a second, only to wake up to the screams of injured civilians and the silhouette of %s slowly approaching %s through the flames.", c.HeShe(), mainName, c.himHer()));
+                    }
                 } else
                 if(c.getConfidence() > 33)
                 {
@@ -26378,23 +25366,19 @@ public class Forsaken
                         w.append(t, String.format("gasping for breath in the wake of %s tickling", c.hisHer()));
                     else
                         w.append(t, "bleeding from several new wounds");
-                    if(flavorHostility() > 66)
-                        w.append(t, String.format(" while %s gleefully follows, shouting promises of more suffering to come.", mainName));
-                    else
-                    if(flavorHostility() > 33)
-                        w.append(t, String.format(" while %s launches random blasts of energy until one of them destroys %s's cover.", mainName, c.getMainName()));
-                    else
-                        w.append(t, String.format(" while %s grimly tracks %s down.", mainName, c.himHer()));
+                    switch (flavorHostility() / 33) {
+                        case 0: w.append(t, String.format(" while %s grimly tracks %s down.", mainName, c.himHer())); break;
+                        case 1: w.append(t, String.format(" while %s launches random blasts of energy until one of them destroys %s's cover.", mainName, c.getMainName())); break;
+                        default: w.append(t, String.format(" while %s gleefully follows, shouting promises of more suffering to come.", mainName));
+                    }
                 } else
                 {
                     w.append(t, String.format("%s lies motionless on the pavement, overwhelmed by %s's superior power.  ", c.getMainName(), mainName));
-                    if(flavorHostility() > 66)
-                        w.append(t, String.format("%s licks %s lips, savoring the building dread within %s.", mainName, hisHer(), reference(c)));
-                    else
-                    if(flavorHostility() > 33)
-                        w.append(t, String.format("%s stands nearby and looks down on %s, taking %s time as %s decides what to do next.", mainName, c.himHer(), hisHer(), heShe()));
-                    else
-                        w.append(t, String.format("%s sighs, clearly disappointed.", mainName));
+                    switch (flavorHostility() / 33) {
+                        case 0: w.append(t, String.format("%s sighs, clearly disappointed.", mainName)); break;
+                        case 1: w.append(t, String.format("%s stands nearby and looks down on %s, taking %s time as %s decides what to do next.", mainName, c.himHer(), hisHer(), heShe())); break;
+                        default: w.append(t, String.format("%s licks %s lips, savoring the building dread within %s.", mainName, hisHer(), reference(c)));
+                    }
                 }
             } else
             if(styleDamage[3] > 0)
@@ -26451,13 +25435,11 @@ public class Forsaken
                     } else
                     {
                         w.append(t, String.format("%s notices that %s pays practically no mind at all to protecting %s own clothes, and ", mainName, c.getMainName(), c.hisHer()));
-                        if(flavorObedience() > 66)
-                            w.append(t, "in hopes of demoralizing all those who would resist the Demon Lord");
-                        else
-                        if(flavorObedience() > 33)
-                            w.append(t, String.format("in accordance with %s orders", hisHer()));
-                        else
-                            w.append(t, String.format("in order to satisfy %s perversions", hisHer()));
+                        switch (flavorObedience() / 33) {
+                            case 0: w.append(t, String.format("in order to satisfy %s perversions", hisHer())); break;
+                            case 1: w.append(t, String.format("in accordance with %s orders", hisHer())); break;
+                            default: w.append(t, "in hopes of demoralizing all those who would resist the Demon Lord");
+                        }
                         w.append(t, String.format(", %s gets in close, grabs %s, and starts trying to tear off as much of %s %s as possible before %1$s's stopped.", heShe(), reference(c), c.hisHer(), bottomDesc));
                     }
                 } else
@@ -26473,37 +25455,31 @@ public class Forsaken
                 if(c.getConfidence() > 33)
                 {
                     w.append(t, String.format("The fighting so far has kicked up a cloud of smoke, and %s finds %sself directly behind %s, in the perfect position for a sneak attack.  ", mainName, himHer(), c.getMainName()));
-                    if(flavorHostility() > 66)
-                        w.append(t, String.format("Knowing that %s'll suffer more if %s public image is destroyed, ", c.heShe(), c.hisHer()));
-                    else
-                    if(flavorHostility() > 33)
-                        w.append(t, String.format("More interested in humiliating %s than in actually wounding %1$s, ", c.himHer()));
-                    else
-                        w.append(t, String.format("Wanting to hinder %s without wounding %1$s, ", c.himHer()));
+                    switch (flavorHostility() / 33) {
+                        case 0: w.append(t, String.format("Wanting to hinder %s without wounding %1$s, ", c.himHer())); break;
+                        case 1: w.append(t, String.format("More interested in humiliating %s than in actually wounding %1$s, ", c.himHer())); break;
+                        default: w.append(t, String.format("Knowing that %s'll suffer more if %s public image is destroyed, ", c.heShe(), c.hisHer()));
+                    }
                     w.append(t, String.format("%s starts tearing at %s's clothes with %s bare hands.", mainName, reference(c), hisHer()));
                 } else
                 {
                     w.append(t, String.format("%s falters and starts to flee, questioning whether %s can really fight one of the Forsaken.  ", c.getMainName(), c.heShe()));
-                    if(flavorHostility() > 66)
-                        w.append(t, String.format("%s allows %s to think %s's escaped before abruptly dropping down from a rooftop, pinning %2$s to the ground and tearing at %s clothes in hopes of adding to the humiliation.", mainName, c.himHer(), c.heShe(), c.hisHer()));
-                    else
-                    if(flavorHostility() > 33)
-                        w.append(t, String.format("%s enjoys running %s down, chasing %2$s with blasts of energy which fry %s clothes before finally tackling %2$s to the ground.", mainName, c.himHer(), c.hisHer()));
-                    else
-                        w.append(t, String.format("%s tries to provoke %s into fighting back by firing several warning blasts of energy at %s clothes, then finally sighs and starts chasing %2$s, eventually managing to grab %2$s by the wrist.", mainName, c.himHer(), c.hisHer()));
+                    switch (flavorHostility() / 33) {
+                        case 0: w.append(t, String.format("%s tries to provoke %s into fighting back by firing several warning blasts of energy at %s clothes, then finally sighs and starts chasing %2$s, eventually managing to grab %2$s by the wrist.", mainName, c.himHer(), c.hisHer())); break;
+                        case 1: w.append(t, String.format("%s enjoys running %s down, chasing %2$s with blasts of energy which fry %s clothes before finally tackling %2$s to the ground.", mainName, c.himHer(), c.hisHer())); break;
+                        default: w.append(t, String.format("%s allows %s to think %s's escaped before abruptly dropping down from a rooftop, pinning %2$s to the ground and tearing at %s clothes in hopes of adding to the humiliation.", mainName, c.himHer(), c.heShe(), c.hisHer()));
+                    }
                 }
             } else
             if(flavorHostility() > 66)
             {
                 if(c.getConfidence() > 66)
                 {
-                    if(flavorObedience() > 66)
-                        w.append(t, String.format("Furious over %s's continued defiance against the Demon Lord, ", c.getMainName()));
-                    else
-                    if(flavorObedience() > 33)
-                        w.append(t, "Full of directionless bloodlust, ");
-                    else
-                        w.append(t, String.format("Annoyed about the fact that %s is still standing up against %s, ", c.getMainName(), himHer()));
+                    switch (flavorObedience() / 33) {
+                        case 0: w.append(t, String.format("Annoyed about the fact that %s is still standing up against %s, ", c.getMainName(), himHer())); break;
+                        case 1: w.append(t, "Full of directionless bloodlust, "); break;
+                        default: w.append(t, String.format("Furious over %s's continued defiance against the Demon Lord, ", c.getMainName()));
+                    }
                     w.append(t, String.format("%s shouts insults at %s from afar.  %s can't think about anything other than venting %s anger.", mainName, reference(c), HeShe(), hisHer()));
                 } else
                 if(c.getConfidence() > 33)
@@ -26517,13 +25493,11 @@ public class Forsaken
                 } else
                 {
                     w.append(t, String.format("%s backs away warily from %s, who stalks after %s and ", c.getMainName(), mainName, c.himHer()));
-                    if(flavorDeviancy() > 66)
-                        w.append(t, String.format("gibbers madly about all the sexual things %s wants to do with %s.", heShe(), reference(c)));
-                    else
-                    if(flavorDeviancy() > 33)
-                        w.append(t, String.format("licks %s lips as %s fantasizes about making %s suffer.", hisHer(), heShe(), reference(c)));
-                    else
-                        w.append(t, String.format("grimly promises to kill %s along with everyone %s cares about.", c.himHer(), c.heShe()));
+                    switch (flavorDeviancy() / 33) {
+                        case 0: w.append(t, String.format("grimly promises to kill %s along with everyone %s cares about.", c.himHer(), c.heShe())); break;
+                        case 1: w.append(t, String.format("licks %s lips as %s fantasizes about making %s suffer.", hisHer(), heShe(), reference(c))); break;
+                        default: w.append(t, String.format("gibbers madly about all the sexual things %s wants to do with %s.", heShe(), reference(c)));
+                    }
                 }
             } else
             if(flavorHostility() > 33)
@@ -26548,25 +25522,21 @@ public class Forsaken
                 } else
                 {
                     w.append(t, String.format("During a pause in the combat, %s tries to get %s to explain more about why %s's fighting, but ", c.getMainName(), mainName, heShe()));
-                    if(flavorObedience() > 66)
-                        w.append(t, String.format("%s's disgusted to hear %s reverently praising the Demon Lord.", c.heShe(), c.reference(this)));
-                    else
-                    if(flavorObedience() > 33)
-                        w.append(t, String.format("%s's annoyed by %s's insistence that %s has no choice but to follow the Demon Lord's orders.", c.heShe(), c.reference(this), heShe()));
-                    else
-                        w.append(t, String.format("it quickly becomes clear that %s is just looking for an excuse to satisfy %s sadism.", c.reference(this), hisHer()));
+                    switch (flavorObedience() / 33) {
+                        case 0: w.append(t, String.format("it quickly becomes clear that %s is just looking for an excuse to satisfy %s sadism.", c.reference(this), hisHer())); break;
+                        case 1: w.append(t, String.format("%s's annoyed by %s's insistence that %s has no choice but to follow the Demon Lord's orders.", c.heShe(), c.reference(this), heShe())); break;
+                        default: w.append(t, String.format("%s's disgusted to hear %s reverently praising the Demon Lord.", c.heShe(), c.reference(this)));
+                    }
                 }
             } else
             if(c.getMorality() > 66)
             {
                 w.append(t, String.format("%s calls out after %s, trying to convince %s to stop fighting for the Demons", c.getMainName(), mainName, himHer()));
-                if(flavorObedience() > 66)
-                    w.append(t, String.format(", but %s's zealous reply leaves no doubt as to %s loyalty.", mainName, hisHer()));
-                else
-                if(flavorObedience() > 33)
-                    w.append(t, String.format(".  It's enough to make %s hesitate, but %s still shakes %s head.", mainName, heShe(), hisHer()));
-                else
-                    w.append(t, String.format(", but %s can only reply with a sad, slightly twisted smile.", mainName));
+                switch (flavorObedience() / 33) {
+                    case 0: w.append(t, String.format(", but %s can only reply with a sad, slightly twisted smile.", mainName)); break;
+                    case 1: w.append(t, String.format(".  It's enough to make %s hesitate, but %s still shakes %s head.", mainName, heShe(), hisHer())); break;
+                    default: w.append(t, String.format(", but %s's zealous reply leaves no doubt as to %s loyalty.", mainName, hisHer()));
+                }
             } else
             if(c.getMorality() > 33)
             {
@@ -26596,25 +25566,21 @@ public class Forsaken
                     {
                         if(c.getDignity() > 66)
                         {
-                            if(flavorHostility() > 66)
-                                w.append(t, String.format("Eager to humiliate %s, ", c.getMainName()));
-                            else
-                            if(flavorHostility() > 33)
-                                w.append(t, String.format("Exploiting %s's reliance on %s public image, ", c.getMainName(), c.hisHer()));
-                            else
-                                w.append(t, String.format("Wanting to ensure that %s will follow %s, ", c.getMainName(), himHer()));
+                            switch (flavorHostility() / 33) {
+                                case 0: w.append(t, String.format("Wanting to ensure that %s will follow %s, ", c.getMainName(), himHer())); break;
+                                case 1: w.append(t, String.format("Exploiting %s's reliance on %s public image, ", c.getMainName(), c.hisHer())); break;
+                                default: w.append(t, String.format("Eager to humiliate %s, ", c.getMainName()));
+                            }
                             w.append(t, String.format("%s disengages from their scuffle and starts running past spectators, shouting about how %s's body was reacting during its molestation.  %s desperately gives chase, trying to stop %s.", mainName, reference(c), c.getMainName(), himHer()));
                         } else
                         if(c.getDignity() > 33)
                         {
                             w.append(t, String.format("%s has %s pinned and almost helpless, ", c.getMainName(), mainName));
-                            if(flavorDeviancy() > 66)
-                                w.append(t, String.format("but the way %s eagerly bucks %s hips and coaxes %s to take %s ", mainName, hisHer(), reference(c), himHer()));
-                            else
-                            if(flavorDeviancy() > 33)
-                                w.append(t, String.format("but %s's lewd squirming against %s body ", mainName, c.hisHer()));
-                            else
-                                w.append(t, String.format("but %s's deliberate squirming to repeatedly put pressure against %s's %s ", mainName, reference(c), organ));
+                            switch (flavorDeviancy() / 33) {
+                                case 0: w.append(t, String.format("but %s's deliberate squirming to repeatedly put pressure against %s's %s ", mainName, reference(c), organ)); break;
+                                case 1: w.append(t, String.format("but %s's lewd squirming against %s body ", mainName, c.hisHer())); break;
+                                default: w.append(t, String.format("but the way %s eagerly bucks %s hips and coaxes %s to take %s ", mainName, hisHer(), reference(c), himHer()));
+                            }
                             w.append(t, String.format("causes %s to gasp with pleasure and let %s go, much to the confusion and suspicion of the spectators.", c.getMainName(), c.himHer()));
                         } else
                         {
@@ -26636,13 +25602,11 @@ public class Forsaken
                         if(c.getConfidence() > 66)
                         {
                             w.append(t, String.format("%s slams %s hard enough to send %s tumbling down the street, but ", c.getMainName(), mainName, himHer()));
-                            if(flavorDeviancy() > 66)
-                                w.append(t, String.format("%s very obviously considered it more than worthwhile for the chance to feel up %s.", mainName, reference(c)));
-                            else
-                            if(flavorDeviancy() > 33)
-                                w.append(t, String.format("%s still got the chance to grope %s - and to announce it to the spectators.", mainName, c.himHer()));
-                            else
-                                w.append(t, String.format("as far as %s is concerned, the important thing is that the spectators know that %s got a chance to observe %s's body's reactions up close.", mainName, heShe(), reference(c)));
+                            switch (flavorDeviancy() / 33) {
+                                case 0: w.append(t, String.format("as far as %s is concerned, the important thing is that the spectators know that %s got a chance to observe %s's body's reactions up close.", mainName, heShe(), reference(c))); break;
+                                case 1: w.append(t, String.format("%s still got the chance to grope %s - and to announce it to the spectators.", mainName, c.himHer())); break;
+                                default: w.append(t, String.format("%s very obviously considered it more than worthwhile for the chance to feel up %s.", mainName, reference(c)));
+                            }
                         } else
                         if(c.getConfidence() > 33)
                         {
@@ -26656,25 +25620,21 @@ public class Forsaken
                         } else
                         {
                             w.append(t, String.format("%s squeezes %s's %s, causing %2$s to squeak and push %s away with surprising force.  As %1$s recovers, ", mainName, c.getMainName(), lowerOrgan, himHer()));
-                            if(flavorHostility() > 66)
-                                w.append(t, String.format("%s wears a cruel grin as %1$s speaks.", heShe()));
-                            else
-                            if(flavorHostility() > 33)
-                                w.append(t, String.format("%s masks %s annoyance and raises %2$s voice.", heShe(), hisHer()));
-                            else
-                                w.append(t, String.format("%s looks disappointed with %s's reaction.", heShe(), reference(c)));
+                            switch (flavorHostility() / 33) {
+                                case 0: w.append(t, String.format("%s looks disappointed with %s's reaction.", heShe(), reference(c))); break;
+                                case 1: w.append(t, String.format("%s masks %s annoyance and raises %2$s voice.", heShe(), hisHer())); break;
+                                default: w.append(t, String.format("%s wears a cruel grin as %1$s speaks.", heShe()));
+                            }
                         }
                     } else
                     if(c.getInnocence() > 66)
                     {
                         w.append(t, String.format("%s holds %s from behind, rubbing %s's %s while %s kicks and squeals for the watching cameras, ", mainName, c.getMainName(), reference(c), organ, c.heShe()));
-                        if(flavorDeviancy() > 66)
-                            w.append(t, String.format("then slowly licks the side of %s face before pushing %s to the ground.", c.hisHer(), c.himHer()));
-                        else
-                        if(flavorDeviancy() > 33)
-                            w.append(t, String.format("then pushes %s away and leers at %1$s on the ground.", c.himHer()));
-                        else
-                            w.append(t, String.format("then shoves %s away with a huff of disgust.", c.himHer()));
+                        switch (flavorDeviancy() / 33) {
+                            case 0: w.append(t, String.format("then shoves %s away with a huff of disgust.", c.himHer())); break;
+                            case 1: w.append(t, String.format("then pushes %s away and leers at %1$s on the ground.", c.himHer())); break;
+                            default: w.append(t, String.format("then slowly licks the side of %s face before pushing %s to the ground.", c.hisHer(), c.himHer()));
+                        }
                     } else
                     if(c.getInnocence() > 33)
                     {
@@ -26688,13 +25648,11 @@ public class Forsaken
                     } else
                     {
                         w.append(t, String.format("%s pins %s down, ", mainName, c.getMainName()));
-                        if(flavorHostility() > 66)
-                            w.append(t, String.format("repeatedly stomping on %s %s, but the sadistic pleasure causes %s to let %s guard down, and %s sees an opportunity to ", c.hisHer(), lowerOrgan, himHer(), hisHer(), c.getMainName()));
-                        else
-                        if(flavorHostility() > 33)
-                            w.append(t, String.format("cruelly pinching and twisting %s %s, but the fact that %s only has one free hand to hold %s in place means that %s can ", c.hisHer(), organ, heShe(), reference(c), c.getMainName()));
-                        else
-                            w.append(t, String.format("gently stroking %s %s and %s.  %s grip on %s is light enough that eventually %s is able to ", c.hisHer(), organ, lowerOrgan, HisHer(), reference(c), c.getMainName()));
+                        switch (flavorHostility() / 33) {
+                            case 0: w.append(t, String.format("gently stroking %s %s and %s.  %s grip on %s is light enough that eventually %s is able to ", c.hisHer(), organ, lowerOrgan, HisHer(), reference(c), c.getMainName())); break;
+                            case 1: w.append(t, String.format("cruelly pinching and twisting %s %s, but the fact that %s only has one free hand to hold %s in place means that %s can ", c.hisHer(), organ, heShe(), reference(c), c.getMainName())); break;
+                            default: w.append(t, String.format("repeatedly stomping on %s %s, but the sadistic pleasure causes %s to let %s guard down, and %s sees an opportunity to ", c.hisHer(), lowerOrgan, himHer(), hisHer(), c.getMainName()));
+                        }
                         w.append(t, String.format("abruptly pull away - but only at the cost of leaving much of %s %s in %s's hands.", c.hisHer(), bottomDesc, mainName));
                     }
                 } else
@@ -26703,13 +25661,11 @@ public class Forsaken
                     if(c.getConfidence() > 66)
                     {
                         w.append(t, String.format("%s chases down %s and grabs %s by the arm in order to stop %3$s from escaping again, ", c.getMainName(), mainName, himHer()));
-                        if(flavorDeviancy() > 66)
-                            w.append(t, String.format("but %s doesn't even try to get free, instead embracing %s and eagerly running %s hands all over %s body.", mainName, reference(c), hisHer(), c.hisHer()));
-                        else
-                        if(flavorDeviancy() > 33)
-                            w.append(t, String.format("and %s retaliates by turning around and immediately trying to make out with %s, using %s preoccupation with holding %s in order to easily grope %s %s.", mainName, reference(c), c.getMainName(), himHer(), c.hisHer(), lowerOrgan));
-                        else
-                            w.append(t, String.format("leaving %s no choice but to try to distract %s by acting in an overtly sexual manner again, reaching down and rubbing %s %s.", mainName, reference(c), c.hisHer(), organ));
+                        switch (flavorDeviancy() / 33) {
+                            case 0: w.append(t, String.format("leaving %s no choice but to try to distract %s by acting in an overtly sexual manner again, reaching down and rubbing %s %s.", mainName, reference(c), c.hisHer(), organ)); break;
+                            case 1: w.append(t, String.format("and %s retaliates by turning around and immediately trying to make out with %s, using %s preoccupation with holding %s in order to easily grope %s %s.", mainName, reference(c), c.getMainName(), himHer(), c.hisHer(), lowerOrgan)); break;
+                            default: w.append(t, String.format("but %s doesn't even try to get free, instead embracing %s and eagerly running %s hands all over %s body.", mainName, reference(c), hisHer(), c.hisHer()));
+                        }
                     } else
                     if(c.getConfidence() > 33)
                     {
@@ -26722,13 +25678,11 @@ public class Forsaken
                     } else
                     {
                         w.append(t, String.format("%s had been chasing %s, but when %2$s turns around ", c.getMainName(), mainName));
-                        if(flavorHostility() > 66)
-                            w.append(t, String.format("and fixes %s with a murderous glare", c.himHer()));
-                        else
-                        if(flavorHostility() > 33)
-                            w.append(t, String.format("and suddenly starts approaching %s", c.himHer()));
-                        else
-                            w.append(t, String.format("and starts striding toward %s with a sense of purpose", c.himHer()));
+                        switch (flavorHostility() / 33) {
+                            case 0: w.append(t, String.format("and starts striding toward %s with a sense of purpose", c.himHer())); break;
+                            case 1: w.append(t, String.format("and suddenly starts approaching %s", c.himHer())); break;
+                            default: w.append(t, String.format("and fixes %s with a murderous glare", c.himHer()));
+                        }
                         w.append(t, String.format(", %s falters.  %s pushes %s up against the nearest wall and immediately starts grinding their bodies together.", c.heShe(), mainName, c.himHer()));
                     }
                 } else
@@ -26737,13 +25691,11 @@ public class Forsaken
                     if(c.getInnocence() > 66)
                     {
                         w.append(t, String.format("When %s rushes forward to launch some close-range attacks, %s takes a defensive stance to protect %sself, but %s's surprised and paralyzed by pleasurable sensations when ", mainName, c.getMainName(), c.himHer(), c.heShe()));
-                        if(flavorDeviancy() > 66)
-                            w.append(t, String.format("%s drops to %s knees and starts pawing at %s crotch, drooling over the thought of licking %s down there.", mainName, hisHer(), c.hisHer(), c.himHer()));
-                        else
-                        if(flavorDeviancy() > 33)
-                            w.append(t, String.format("%s practically pounces on %s, forcing %s legs apart and grinding their hips together.", mainName, c.himHer(), c.hisHer()));
-                        else
-                            w.append(t, String.format("%s grapples %s instead, distracting %2$s with a hand rubbing between %s legs.", mainName, c.himHer(), c.hisHer()));
+                        switch (flavorDeviancy() / 33) {
+                            case 0: w.append(t, String.format("%s grapples %s instead, distracting %2$s with a hand rubbing between %s legs.", mainName, c.himHer(), c.hisHer())); break;
+                            case 1: w.append(t, String.format("%s practically pounces on %s, forcing %s legs apart and grinding their hips together.", mainName, c.himHer(), c.hisHer())); break;
+                            default: w.append(t, String.format("%s drops to %s knees and starts pawing at %s crotch, drooling over the thought of licking %s down there.", mainName, hisHer(), c.hisHer(), c.himHer()));
+                        }
                     } else
                     if(c.getInnocence() > 33)
                     {
@@ -26766,23 +25718,19 @@ public class Forsaken
                 if(c.getDignity() > 66)
                 {
                     w.append(t, String.format("Caught in front of the spectators' cameras, %s refuses to flee from the approaching %s, ", c.getMainName(), mainName));
-                    if(flavorHostility() > 66)
-                        w.append(t, String.format("but %s still doesn't show any mercy whatsoever as %s throws %s down to the pavement and starts stomping on %s %s.", mainName, heShe(), reference(c), c.hisHer(), lowerOrgan));
-                    else
-                    if(flavorHostility() > 33)
-                        w.append(t, String.format("but %s still manages to humiliate %s by grabbing %s from behind and rubbing a palm against %s %s in front of everyone.", mainName, reference(c), c.himHer(), c.hisHer(), organ));
-                    else
-                        w.append(t, String.format("and %s responds by being almost gentle as %s pushes %s onto %s back and starts stroking %4$s %s.", mainName, heShe(), reference(c), c.hisHer(), organ));
+                    switch (flavorHostility() / 33) {
+                        case 0: w.append(t, String.format("and %s responds by being almost gentle as %s pushes %s onto %s back and starts stroking %4$s %s.", mainName, heShe(), reference(c), c.hisHer(), organ)); break;
+                        case 1: w.append(t, String.format("but %s still manages to humiliate %s by grabbing %s from behind and rubbing a palm against %s %s in front of everyone.", mainName, reference(c), c.himHer(), c.hisHer(), organ)); break;
+                        default: w.append(t, String.format("but %s still doesn't show any mercy whatsoever as %s throws %s down to the pavement and starts stomping on %s %s.", mainName, heShe(), reference(c), c.hisHer(), lowerOrgan));
+                    }
                 } else
                 if(c.getDignity() > 33)
                 {
-                    if(flavorDeviancy() > 66)
-                        w.append(t, String.format("Eagerly using %s overwhelming power to satisfy %sself, ", hisHer(), himHer()));
-                    else
-                    if(flavorDeviancy() > 33)
-                        w.append(t, String.format("Toying with %s weaker opponent, ", hisHer()));
-                    else
-                        w.append(t, String.format("Though %s doesn't exactly look like %1$s's enjoying what %1$s's doing, ", heShe()));
+                    switch (flavorDeviancy() / 33) {
+                        case 0: w.append(t, String.format("Though %s doesn't exactly look like %1$s's enjoying what %1$s's doing, ", heShe())); break;
+                        case 1: w.append(t, String.format("Toying with %s weaker opponent, ", hisHer())); break;
+                        default: w.append(t, String.format("Eagerly using %s overwhelming power to satisfy %sself, ", hisHer(), himHer()));
+                    }
                     w.append(t, String.format("%s quickly closes the distance with %s, pins %s hands down, and starts mercilessly rubbing %3$s %s.", mainName, c.getMainName(), c.hisHer(), organ));
                 } else
                 {
@@ -26866,23 +25814,19 @@ public class Forsaken
                 if(c.getConfidence() > 33)
                 {
                     w.append(t, String.format("%s spends some time focusing on talking rather than fighting, constantly dodging backward ", mainName));
-                    if(flavorObedience() > 66)
-                        w.append(t, String.format("as %s tries to convince %s to switch sides.", heShe(), c.getMainName()));
-                    else
-                    if(flavorObedience() > 33)
-                        w.append(t, String.format("and warning %s that %s strength still isn't enough to stand up to the Demon Lord.", c.getMainName(), c.hisHer()));
-                    else
-                        w.append(t, String.format("and giving %s tips on how to fight more effectively.", c.getMainName()));
+                    switch (flavorObedience() / 33) {
+                        case 0: w.append(t, String.format("and giving %s tips on how to fight more effectively.", c.getMainName())); break;
+                        case 1: w.append(t, String.format("and warning %s that %s strength still isn't enough to stand up to the Demon Lord.", c.getMainName(), c.hisHer())); break;
+                        default: w.append(t, String.format("as %s tries to convince %s to switch sides.", heShe(), c.getMainName()));
+                    }
                 } else
                 {
                     w.append(t, String.format("%s hesitates, unable to approach %s while ", c.getMainName(), mainName));
-                    if(flavorDeviancy() > 66)
-                        w.append(t, String.format("%s leers at %s and voices %s perverted desires.", heShe(), c.getMainName(), hisHer()));
-                    else
-                    if(flavorDeviancy() > 33)
-                        w.append(t, String.format("%s belittles %s and points out the futility of %s actions.", heShe(), c.getMainName(), hisHer()));
-                    else
-                        w.append(t, String.format("%s calmly explains %s's failings.", heShe(), c.getMainName()));
+                    switch (flavorDeviancy() / 33) {
+                        case 0: w.append(t, String.format("%s calmly explains %s's failings.", heShe(), c.getMainName())); break;
+                        case 1: w.append(t, String.format("%s belittles %s and points out the futility of %s actions.", heShe(), c.getMainName(), hisHer())); break;
+                        default: w.append(t, String.format("%s leers at %s and voices %s perverted desires.", heShe(), c.getMainName(), hisHer()));
+                    }
                 }
             } else
             if(disgrace > 66)
@@ -26890,13 +25834,11 @@ public class Forsaken
                 if(c.getMorality() > 66)
                 {
                     w.append(t, String.format("%s's attempts to offer %s a chance to surrender peacefully are interrupted when %2$s abruptly charges at %s, ", c.getMainName(), mainName, c.himHer()));
-                    if(flavorHostility() > 66)
-                        w.append(t, String.format("too enraged to even consider %s's words.", reference(c)));
-                    else
-                    if(flavorHostility() > 33)
-                        w.append(t, String.format("unwilling to accept %s's pity.", reference(c)));
-                    else
-                        w.append(t, String.format("knowing that %s has to take any opening %1$s can.", heShe()));
+                    switch (flavorHostility() / 33) {
+                        case 0: w.append(t, String.format("knowing that %s has to take any opening %1$s can.", heShe())); break;
+                        case 1: w.append(t, String.format("unwilling to accept %s's pity.", reference(c))); break;
+                        default: w.append(t, String.format("too enraged to even consider %s's words.", reference(c)));
+                    }
                 } else
                 if(c.getMorality() > 33)
                 {
@@ -26938,37 +25880,31 @@ public class Forsaken
                     }
                 } else
                 {
-                    if(flavorDeviancy() > 66)
-                        w.append(t, String.format("Intimidated by %s obvious desire to violate %s, ", mainName, c.himHer()));
-                    else
-                    if(flavorDeviancy() > 33)
-                        w.append(t, String.format("Uneasy over the way %s leers at %s, ", mainName, c.himHer()));
-                    else
-                        w.append(t, String.format("Insecure about %s own strength, ", c.hisHer()));
+                    switch (flavorDeviancy() / 33) {
+                        case 0: w.append(t, String.format("Insecure about %s own strength, ", c.hisHer())); break;
+                        case 1: w.append(t, String.format("Uneasy over the way %s leers at %s, ", mainName, c.himHer())); break;
+                        default: w.append(t, String.format("Intimidated by %s obvious desire to violate %s, ", mainName, c.himHer()));
+                    }
                     w.append(t, String.format("%s starts looking around for a way to escape %s confrontation with %s, but that moment of hesitation is all the excuse %3$s needs to pounce forward and press the attack against %s.", c.getMainName(), c.hisHer(), mainName, c.himHer()));
                 }
             } else
             if(c.getMorality() > 66)
             {
                 w.append(t, String.format("%s has briefly managed to escape %s opponent, but when %s realizes that there's no one else nearby to stop %s from leading the Demons and breaching the evacuation perimeter, %s reluctantly turns around and willingly faces %s, ", c.getMainName(), c.hisHer(), c.heShe(), mainName, c.heShe(), c.reference(this)));
-                if(flavorHostility() > 66)
-                    w.append(t, String.format("mentally bracing %sself for the torture that %s no doubt has in store.", c.himHer(), mainName));
-                else
-                if(flavorHostility() > 33)
-                    w.append(t, String.format("much to %s's amusement.", mainName));
-                else
-                    w.append(t, String.format("calling out %s name and jumping directly at %s.", hisHer(), himHer()));
+                switch (flavorHostility() / 33) {
+                    case 0: w.append(t, String.format("calling out %s name and jumping directly at %s.", hisHer(), himHer())); break;
+                    case 1: w.append(t, String.format("much to %s's amusement.", mainName)); break;
+                    default: w.append(t, String.format("mentally bracing %sself for the torture that %s no doubt has in store.", c.himHer(), mainName));
+                }
             } else
             if(c.getMorality() > 33)
             {
                 w.append(t, String.format("%s follows the fleeing %s, ", mainName, c.getMainName()));
-                if(flavorDeviancy() > 66)
-                    w.append(t, "calling out lewd suggestions");
-                else
-                if(flavorDeviancy() > 33)
-                    w.append(t, String.format("enjoying the view of %s behind", c.hisHer()));
-                else
-                    w.append(t, String.format("allowing %s to exhaust %1$sself", c.himHer()));
+                switch (flavorDeviancy() / 33) {
+                    case 0: w.append(t, String.format("allowing %s to exhaust %1$sself", c.himHer())); break;
+                    case 1: w.append(t, String.format("enjoying the view of %s behind", c.hisHer())); break;
+                    default: w.append(t, "calling out lewd suggestions");
+                }
                 w.append(t, String.format(", then abruptly picks up speed, grabbing %s and pulling %s down to the ground.", reference(c), c.himHer()));
             } else
             {
@@ -27029,13 +25965,11 @@ public class Forsaken
                         if(c.getInnocence() > 33)
                         {
                             w.append(t, String.format("%s and %s stare each other down, %1$s ", mainName, c.getMainName()));
-                            if(flavorDeviancy() > 66)
-                                w.append(t, "taking the opportunity to make several obscene taunts.  ");
-                            else
-                            if(flavorDeviancy() > 33)
-                                w.append(t, String.format("happily taking the opportunity to insult %s and try to provoke %s.  ", c.getMainName(), c.himHer()));
-                            else
-                                w.append(t, String.format("venting %s irritation by harshly insulting %s.  ", hisHer(), reference(c)));
+                            switch (flavorDeviancy() / 33) {
+                                case 0: w.append(t, String.format("venting %s irritation by harshly insulting %s.  ", hisHer(), reference(c))); break;
+                                case 1: w.append(t, String.format("happily taking the opportunity to insult %s and try to provoke %s.  ", c.getMainName(), c.himHer())); break;
+                                default: w.append(t, "taking the opportunity to make several obscene taunts.  ");
+                            }
                             w.append(t, "The moment is uploaded by some civilians who are within filming range, instantly getting countless views from watchers across the world.");
                         } else
                         {
@@ -27050,13 +25984,11 @@ public class Forsaken
                     if(c.getDignity() > 66)
                     {
                         w.append(t, String.format("A sudden flurry of camera flashes reminds %s of how much damage %s clothes have taken over the course of the fight.  %s blushes and hurriedly rearranges them, then frowns at %s, ", c.getMainName(), c.hisHer(), c.HeShe(), mainName));
-                        if(flavorDeviancy() > 66)
-                            w.append(t, String.format("whose lustful urges have overflowed and caused %s to make lewd comments.", c.himHer()));
-                        else
-                        if(flavorDeviancy() > 33)
-                            w.append(t, String.format("who is very obviously leering at %s.", c.himHer()));
-                        else
-                            w.append(t, "who flatly comments on how much was showing.");
+                        switch (flavorDeviancy() / 33) {
+                            case 0: w.append(t, "who flatly comments on how much was showing."); break;
+                            case 1: w.append(t, String.format("who is very obviously leering at %s.", c.himHer())); break;
+                            default: w.append(t, String.format("whose lustful urges have overflowed and caused %s to make lewd comments.", c.himHer()));
+                        }
                     } else
                     if(c.getDignity() > 33)
                     {
@@ -27069,13 +26001,11 @@ public class Forsaken
                     } else
                     {
                         w.append(t, String.format("%s leads the half-clothed %s through a crowd of flashing cameras, ", mainName, c.getMainName()));
-                        if(flavorObedience() > 66)
-                            w.append(t, String.format("happy to have done %s part in the continued effort to make sure that Chosen are seen as nothing but sex objects.", hisHer()));
-                        else
-                        if(flavorObedience() > 33)
-                            w.append(t, String.format("following your orders to humiliate %s as much as possible.", reference(c)));
-                        else
-                            w.append(t, String.format("then turns around and angrily admonishes %s for not covering %sself up better.", c.getMainName(), c.himHer()));
+                        switch (flavorObedience() / 33) {
+                            case 0: w.append(t, String.format("then turns around and angrily admonishes %s for not covering %sself up better.", c.getMainName(), c.himHer())); break;
+                            case 1: w.append(t, String.format("following your orders to humiliate %s as much as possible.", reference(c))); break;
+                            default: w.append(t, String.format("happy to have done %s part in the continued effort to make sure that Chosen are seen as nothing but sex objects.", hisHer()));
+                        }
                     }
                 } else
                 if(flavorHostility() > 66)
@@ -27083,13 +26013,11 @@ public class Forsaken
                     if(c.getInnocence() > 66)
                     {
                         w.append(t, String.format("%s and %s roll around on the ground together, wrestling for control, ", mainName, c.getMainName()));
-                        if(flavorDeviancy() > 66)
-                            w.append(t, String.format("but the sexual moans %s releases as they do so are so disturbing to %s that %s reflexively lets go and backs off, shivering with revulsion.", mainName, c.getMainName(), c.heShe()));
-                        else
-                        if(flavorDeviancy() > 33)
-                            w.append(t, String.format("but %s is disgusted by the way that %s is clearly enjoing the contact with %s body.  %1$s shifts %3$s efforts into getting away, opening up some distance between %sself and %s, then looks back at %s with revulsion.", c.getMainName(), mainName, c.hisHer(), c.himHer(), c.reference(this), himHer()));
-                        else
-                            w.append(t, String.format("but the cold threats %s whispers into %s's ear soon become too much to bear, and %2$s recoils backward, trying to collect %sself.", mainName, c.getMainName(), c.himHer()));
+                        switch (flavorDeviancy() / 33) {
+                            case 0: w.append(t, String.format("but the cold threats %s whispers into %s's ear soon become too much to bear, and %2$s recoils backward, trying to collect %sself.", mainName, c.getMainName(), c.himHer())); break;
+                            case 1: w.append(t, String.format("but %s is disgusted by the way that %s is clearly enjoing the contact with %s body.  %1$s shifts %3$s efforts into getting away, opening up some distance between %sself and %s, then looks back at %s with revulsion.", c.getMainName(), mainName, c.hisHer(), c.himHer(), c.reference(this), himHer())); break;
+                            default: w.append(t, String.format("but the sexual moans %s releases as they do so are so disturbing to %s that %s reflexively lets go and backs off, shivering with revulsion.", mainName, c.getMainName(), c.heShe()));
+                        }
                     } else
                     if(c.getInnocence() > 33)
                     {
@@ -27111,13 +26039,11 @@ public class Forsaken
                     if(c.getConfidence() > 66)
                     {
                         w.append(t, String.format("Wearing an infuriating smirk, %s ", mainName));
-                        if(flavorDeviancy() > 66)
-                            w.append(t, String.format("allows %s to graze %s with several attacks, moaning in sexual pleasure every time.  The sight unnverves %1$s enough to slow %s movements, and %s backs off to focus on taunting %s even more.", c.getMainName(), himHer(), c.hisHer(), mainName, c.himHer()));
-                        else
-                        if(flavorDeviancy() > 33)
-                            w.append(t, String.format("deliberately makes %s uncomfortable with constant sexual talk as they fight, using %s disgust to make %s grow increasingly careless and allow %s to easily evade %2$s attacks and get to a high ground position above %s.", c.getMainName(), c.hisHer(), c.himHer(), mainName, c.himHer()));
-                        else
-                            w.append(t, String.format("keeps making derogatory remarks about %s, calling %s weak and stupid, and claiming that %s's nowhere near strong enough to beat the Demon Lord.  %1$s's determination to prove %s wrong causes %2$s to become reckless, and %4$s emphasizes the point by dodging around %2$s and leading %2$s on a chase.", c.getMainName(), c.himHer(), c.heShe(), mainName));
+                        switch (flavorDeviancy() / 33) {
+                            case 0: w.append(t, String.format("keeps making derogatory remarks about %s, calling %s weak and stupid, and claiming that %s's nowhere near strong enough to beat the Demon Lord.  %1$s's determination to prove %s wrong causes %2$s to become reckless, and %4$s emphasizes the point by dodging around %2$s and leading %2$s on a chase.", c.getMainName(), c.himHer(), c.heShe(), mainName)); break;
+                            case 1: w.append(t, String.format("deliberately makes %s uncomfortable with constant sexual talk as they fight, using %s disgust to make %s grow increasingly careless and allow %s to easily evade %2$s attacks and get to a high ground position above %s.", c.getMainName(), c.hisHer(), c.himHer(), mainName, c.himHer())); break;
+                            default: w.append(t, String.format("allows %s to graze %s with several attacks, moaning in sexual pleasure every time.  The sight unnverves %1$s enough to slow %s movements, and %s backs off to focus on taunting %s even more.", c.getMainName(), himHer(), c.hisHer(), mainName, c.himHer()));
+                        }
                     } else
                     if(c.getConfidence() > 33)
                     {
@@ -27141,24 +26067,20 @@ public class Forsaken
                 if(c.getMorality() > 66)
                 {
                     w.append(t, String.format("The fight between %s and %s gets dangerously close to a group of evacuated civilians on the edge of the battlefield, and they combatants are forced to call a ceasefire until they can relocate.  In the meantime, ", mainName, c.getMainName()));
-                    if(flavorObedience() > 66)
-                        w.append(t, String.format("%s tries to persuade %s to join the Demon Lord, much to the latter's annoyance.", mainName, c.getMainName()));
-                    else
-                    if(flavorObedience() > 33)
-                        w.append(t, String.format("they talk, and %s is annoyed by the way that %s refuses to take responsibility for %s actions.", c.getMainName(), mainName, hisHer()));
-                    else
-                        w.append(t, String.format("%s harshly criticizes what %s sees as %s's failings.", mainName, heShe(), c.getMainName()));
+                    switch (flavorObedience() / 33) {
+                        case 0: w.append(t, String.format("%s harshly criticizes what %s sees as %s's failings.", mainName, heShe(), c.getMainName())); break;
+                        case 1: w.append(t, String.format("they talk, and %s is annoyed by the way that %s refuses to take responsibility for %s actions.", c.getMainName(), mainName, hisHer())); break;
+                        default: w.append(t, String.format("%s tries to persuade %s to join the Demon Lord, much to the latter's annoyance.", mainName, c.getMainName()));
+                    }
                 } else
                 if(c.getMorality() > 33)
                 {
                     w.append(t, String.format("A clash of energy between %s and %s starts to collapse the building whose rooftop they're fighting on.  ", mainName, c.getMainName()));
-                    if(flavorDeviancy() > 66)
-                        w.append(t, String.format("As they both clamber to safety, %s can't resist groping %s, causing them both to fall and land some distance apart.", mainName, c.getMainName()));
-                    else
-                    if(flavorDeviancy() > 33)
-                        w.append(t, String.format("%s reaches the ground first, and %s can't resist making lewd comments as %2$s looks up at where %s is climbing down.", mainName, heShe(), c.getMainName()));
-                    else
-                        w.append(t, String.format("%s berates %s for not checking to make sure that the location was clear of civilians first, although %s also feels guilty for letting it happen.", mainName, c.getMainName(), heShe()));
+                    switch (flavorDeviancy() / 33) {
+                        case 0: w.append(t, String.format("%s berates %s for not checking to make sure that the location was clear of civilians first, although %s also feels guilty for letting it happen.", mainName, c.getMainName(), heShe())); break;
+                        case 1: w.append(t, String.format("%s reaches the ground first, and %s can't resist making lewd comments as %2$s looks up at where %s is climbing down.", mainName, heShe(), c.getMainName())); break;
+                        default: w.append(t, String.format("As they both clamber to safety, %s can't resist groping %s, causing them both to fall and land some distance apart.", mainName, c.getMainName()));
+                    }
                 } else
                 {
                     switch (disgrace / 33) {
@@ -27193,13 +26115,11 @@ public class Forsaken
                         w.append(t, String.format("starts tearing at %s's clothes, as turned on by the fact that they're being watched as %s is by %s's increasingly exposed skin.", reference(c), heShe(), c.getMainName()));
                     } else
                     {
-                        if(flavorHostility() > 66)
-                            w.append(t, String.format("Determined to make the shy %s suffer, %s tackles %s and ", c.getMainName(), mainName, c.himHer()));
-                        else
-                        if(flavorHostility() > 33)
-                            w.append(t, String.format("Becoming fixated on the thought of making %s squeal and cover %sself, %s tackles %2$s and ", c.getMainName(), c.himHer(), mainName));
-                        else
-                            w.append(t, String.format("Unable to resist %s perverted desires, %s tackles %s and ", hisHer(), mainName, c.getMainName()));
+                        switch (flavorHostility() / 33) {
+                            case 0: w.append(t, String.format("Unable to resist %s perverted desires, %s tackles %s and ", hisHer(), mainName, c.getMainName())); break;
+                            case 1: w.append(t, String.format("Becoming fixated on the thought of making %s squeal and cover %sself, %s tackles %2$s and ", c.getMainName(), c.himHer(), mainName)); break;
+                            default: w.append(t, String.format("Determined to make the shy %s suffer, %s tackles %s and ", c.getMainName(), mainName, c.himHer()));
+                        }
                         w.append(t, String.format("starts pulling %s torn clothes out of the way for the benefit of the countless cameras watching the battle.", c.hisHer()));
                     }
                 } else
@@ -27225,13 +26145,11 @@ public class Forsaken
                     } else
                     {
                         w.append(t, String.format("No matter how much %s clothes get torn, %s hardly seems to care.  %s gets in close to help tear them off further, ", c.hisHer(), c.getMainName(), mainName));
-                        if(flavorObedience() > 66)
-                            w.append(t, String.format("happy that %s's found an opponent who doesn't realize how valuable it is for the Demons when the Chosen are made to look vulnerable to the public.", heShe()));
-                        else
-                        if(flavorObedience() > 33)
-                            w.append(t, String.format("relieved that %s orders to humiliate %s will be relatively easy to execute.", hisHer(), c.getMainName()));
-                        else
-                            w.append(t, String.format("enjoying feeling like %s's playing a prank on %s.", heShe(), c.himHer()));
+                        switch (flavorObedience() / 33) {
+                            case 0: w.append(t, String.format("enjoying feeling like %s's playing a prank on %s.", heShe(), c.himHer())); break;
+                            case 1: w.append(t, String.format("relieved that %s orders to humiliate %s will be relatively easy to execute.", hisHer(), c.getMainName())); break;
+                            default: w.append(t, String.format("happy that %s's found an opponent who doesn't realize how valuable it is for the Demons when the Chosen are made to look vulnerable to the public.", heShe()));
+                        }
                     }
                 } else
                 if(c.getInnocence() > 66)
@@ -27245,23 +26163,19 @@ public class Forsaken
                 } else
                 if(c.getInnocence() > 33)
                 {
-                    if(flavorHostility() > 66)
-                        w.append(t, String.format("%s closes in on %s, attacking with a wild ferocity that shreds apart everything that's not protected by a Chosen's supernatural durability.  This applies not only to buildings, but to %s's clothes as well.", mainName, c.getMainName(), reference(c)));
-                    else
-                    if(flavorHostility() > 33)
-                        w.append(t, String.format("%s closes in and grapples for control with %s, snarling in %s face.  Both combatants try to seize control by grabbing and pulling on each other's clothes, but their garments aren't resilient enough to stand up to their supernatural strength for long.", mainName, c.getMainName(), c.hisHer()));
-                    else
-                        w.append(t, String.format("There's no anger behind %s's attacks, but %s still intends to debilitate %s.  %s strikes are precise, and even when %s dodges, %s clothes are usually caught and partially torn away.", mainName, heShe(), c.getMainName(), HisHer(), c.getMainName(), c.hisHer()));
+                    switch (flavorHostility() / 33) {
+                        case 0: w.append(t, String.format("There's no anger behind %s's attacks, but %s still intends to debilitate %s.  %s strikes are precise, and even when %s dodges, %s clothes are usually caught and partially torn away.", mainName, heShe(), c.getMainName(), HisHer(), c.getMainName(), c.hisHer())); break;
+                        case 1: w.append(t, String.format("%s closes in and grapples for control with %s, snarling in %s face.  Both combatants try to seize control by grabbing and pulling on each other's clothes, but their garments aren't resilient enough to stand up to their supernatural strength for long.", mainName, c.getMainName(), c.hisHer())); break;
+                        default: w.append(t, String.format("%s closes in on %s, attacking with a wild ferocity that shreds apart everything that's not protected by a Chosen's supernatural durability.  This applies not only to buildings, but to %s's clothes as well.", mainName, c.getMainName(), reference(c)));
+                    }
                 } else
                 {
                     w.append(t, String.format("%s's clothes have taken significant damage, and while %s isn't interested in ogling %s, ", c.getMainName(), mainName, c.himHer()));
-                    if(flavorObedience() > 66)
-                        w.append(t, String.format("%s's eager to please the Demon Lord.  ", heShe()));
-                    else
-                    if(flavorObedience() > 33)
-                        w.append(t, String.format("%s knows that the fight will become easier as the Chosen begin to look more exposed and vulnerable to the public and each other.  ", heShe()));
-                    else
-                        w.append(t, String.format("%s knows that %s doesn't want to be exposed.  ", heShe(), c.getMainName()));
+                    switch (flavorObedience() / 33) {
+                        case 0: w.append(t, String.format("%s knows that %s doesn't want to be exposed.  ", heShe(), c.getMainName())); break;
+                        case 1: w.append(t, String.format("%s knows that the fight will become easier as the Chosen begin to look more exposed and vulnerable to the public and each other.  ", heShe())); break;
+                        default: w.append(t, String.format("%s's eager to please the Demon Lord.  ", heShe()));
+                    }
                     w.append(t, String.format("%s charges forward, forcing %s to choose between fighting effectively and keeping %s movements minimal in order to protect %3$s modesty in front of the watching cameras.", HeShe(), c.getMainName(), c.hisHer()));
                 }
             } else
@@ -27279,13 +26193,11 @@ public class Forsaken
                 if(c.getConfidence() > 33)
                 {
                     w.append(t, String.format("%s is weak enough that %s is able to pin %s down, but ", mainName, c.getMainName(), himHer()));
-                    if(flavorDeviancy() > 66)
-                        w.append(t, String.format("the way that %s treats it as a kinky game and keeps trying to grope %s at the same time makes it hard to focus on keeping %s under control.", mainName, reference(c), himHer()));
-                    else
-                    if(flavorDeviancy() > 33)
-                        w.append(t, String.format("%s constantly squirms and contorts %s body, even enjoying the way it causes %s to rub up against %s, and %s can't completely keep %2$s hands off %s.", mainName, hisHer(), himHer(), reference(c), c.getMainName(), c.himHer()));
-                    else
-                        w.append(t, String.format("%s is content to bide %s time and look for an opening to kick %2$s way free - which %s eventually finds.", mainName, hisHer(), heShe()));
+                    switch (flavorDeviancy() / 33) {
+                        case 0: w.append(t, String.format("%s is content to bide %s time and look for an opening to kick %2$s way free - which %s eventually finds.", mainName, hisHer(), heShe())); break;
+                        case 1: w.append(t, String.format("%s constantly squirms and contorts %s body, even enjoying the way it causes %s to rub up against %s, and %s can't completely keep %2$s hands off %s.", mainName, hisHer(), himHer(), reference(c), c.getMainName(), c.himHer())); break;
+                        default: w.append(t, String.format("the way that %s treats it as a kinky game and keeps trying to grope %s at the same time makes it hard to focus on keeping %s under control.", mainName, reference(c), himHer()));
+                    }
                 } else
                 {
                     w.append(t, String.format("%s has tackled %s to the ground, and by all rights, %1$s should be able to neutralize %s weakened opponent right then and there.  ", c.getMainName(), mainName, c.hisHer()));
@@ -27311,57 +26223,47 @@ public class Forsaken
                 if(c.getInnocence() > 33)
                 {
                     w.append(t, String.format("%s and %s grip each other's wrists, struggling back and forth for control as %1$s ", mainName, c.getMainName()));
-                    if(flavorObedience() > 66)
-                        w.append(t, String.format("calls out to the Demon Lord to give %s strength.", himHer()));
-                    else
-                    if(flavorObedience() > 33)
-                        w.append(t, String.format("grits %s teeth and reminds %sself that %s can't lose.", hisHer(), himHer(), heShe()));
-                    else
-                        w.append(t, "refuses to give up.");
+                    switch (flavorObedience() / 33) {
+                        case 0: w.append(t, "refuses to give up."); break;
+                        case 1: w.append(t, String.format("grits %s teeth and reminds %sself that %s can't lose.", hisHer(), himHer(), heShe())); break;
+                        default: w.append(t, String.format("calls out to the Demon Lord to give %s strength.", himHer()));
+                    }
                 } else
                 {
-                    if(flavorHostility() > 66)
-                        w.append(t, String.format("%s claws at %s with singleminded fury, ", mainName, c.getMainName()));
-                    else
-                    if(flavorHostility() > 33)
-                        w.append(t, String.format("%s is taking great satisfaction in the opportunity to fight %s hand-to-hand, ", mainName, c.getMainName()));
-                    else
-                        w.append(t, String.format("%s fights with firm determination against %s, ", mainName, c.getMainName()));
+                    switch (flavorHostility() / 33) {
+                        case 0: w.append(t, String.format("%s fights with firm determination against %s, ", mainName, c.getMainName())); break;
+                        case 1: w.append(t, String.format("%s is taking great satisfaction in the opportunity to fight %s hand-to-hand, ", mainName, c.getMainName())); break;
+                        default: w.append(t, String.format("%s claws at %s with singleminded fury, ", mainName, c.getMainName()));
+                    }
                     w.append(t, String.format("and %s is also completely focused on their battle.  As they wrestle each other for control, their surroundings are almost silent except for their grunts of effort and the clatter of rubble sent bouncing across the ground.", c.getMainName()));
                 }
             } else
             if(c.getMorality() > 66)
             {
                 w.append(t, String.format("%s knows that %s's no match for %s, but ", c.getMainName(), c.heShe(), mainName));
-                if(flavorHostility() > 66)
-                    w.append(t, String.format("%s also knows that many civilian lives depend on keeping %s occupied, ", c.heShe(), c.reference(this)));
-                else
-                if(flavorHostility() > 33)
-                    w.append(t, String.format("%s's willing to bear the brunt of %s's assault %sself, ", c.heShe(), c.reference(this), c.himHer()));
-                else
-                    w.append(t, String.format("%s isn't ready to give up on %s yet, ", c.heShe(), c.reference(this)));
+                switch (flavorHostility() / 33) {
+                    case 0: w.append(t, String.format("%s isn't ready to give up on %s yet, ", c.heShe(), c.reference(this))); break;
+                    case 1: w.append(t, String.format("%s's willing to bear the brunt of %s's assault %sself, ", c.heShe(), c.reference(this), c.himHer())); break;
+                    default: w.append(t, String.format("%s also knows that many civilian lives depend on keeping %s occupied, ", c.heShe(), c.reference(this)));
+                }
                 w.append(t, String.format("so %s clings to %s with all %s strength, forcing %s to deal with %s %sself before leaving.", c.heShe(), mainName, c.hisHer(), himHer(), c.getMainName(), c.himHer()));
             } else
             if(c.getMorality() > 33)
             {
                 w.append(t, String.format("%s easily seizes control in %s grapple with %s, putting %s on %s back and pinning %5$s hands over %5$s head", mainName, hisHer(), c.getMainName(), c.himHer(), c.hisHer()));
-                if(flavorDeviancy() > 66)
-                    w.append(t, String.format(" while practically drooling over the sight of %s body.", c.hisHer()));
-                else
-                if(flavorDeviancy() > 33)
-                    w.append(t, String.format(", unable to resist the urge to make some sexual comments while %s does so.", c.heShe()));
-                else
-                    w.append(t, String.format(" in order to make sure %s understands how helpless %1$s is.", c.heShe()));
+                switch (flavorDeviancy() / 33) {
+                    case 0: w.append(t, String.format(" in order to make sure %s understands how helpless %1$s is.", c.heShe())); break;
+                    case 1: w.append(t, String.format(", unable to resist the urge to make some sexual comments while %s does so.", c.heShe())); break;
+                    default: w.append(t, String.format(" while practically drooling over the sight of %s body.", c.hisHer()));
+                }
             } else
             {
                 w.append(t, String.format("Frustrated with %s inability to make a dent in %s's body, %s gives in to %1$s anger, ", c.hisHer(), mainName, c.getMainName()));
-                if(flavorObedience() > 66)
-                    w.append(t, "insulting the Demon Lord");
-                else
-                if(flavorObedience() > 33)
-                    w.append(t, String.format("calling %s a coward", mainName));
-                else
-                    w.append(t, String.format("calling %s every name %s can think of", mainName, c.heShe()));
+                switch (flavorObedience() / 33) {
+                    case 0: w.append(t, String.format("calling %s every name %s can think of", mainName, c.heShe())); break;
+                    case 1: w.append(t, String.format("calling %s a coward", mainName)); break;
+                    default: w.append(t, "insulting the Demon Lord");
+                }
                 w.append(t, String.format(" in hopes of at least inflicting some emotional damage.  Considering that %s's currently locked in a grapple with %s, this proves to be a poor decision.", c.heShe(), mainName));
             }
         } else
@@ -27384,13 +26286,11 @@ public class Forsaken
                         if(c.getMorality() > 33)
                         {
                             w.append(t, String.format("%s begins drawing on as much Demonic energy as %s can, and before %s can stop %s, an enormous blast consumes their side of the district, slaughtering Thralls along with any nearby civilians who couldn't evaucate.  As the light fades, ", mainName, heShe(), c.getMainName(), himHer()));
-                            if(flavorDeviancy() > 66)
-                                w.append(t, String.format("%s stands in the middle of the destruction, an expression of sexual ecstasy on %s face.", mainName, hisHer()));
-                            else
-                            if(flavorDeviancy() > 33)
-                                w.append(t, String.format("%s grins at %s before backing away into the cloud of dust.", mainName, c.getMainName()));
-                            else
-                                w.append(t, String.format("%s is already gone, coldly using %s's stunned horror as an opportunity to maneuver around behind %s.", mainName, c.getMainName(), c.himHer()));
+                            switch (flavorDeviancy() / 33) {
+                                case 0: w.append(t, String.format("%s is already gone, coldly using %s's stunned horror as an opportunity to maneuver around behind %s.", mainName, c.getMainName(), c.himHer())); break;
+                                case 1: w.append(t, String.format("%s grins at %s before backing away into the cloud of dust.", mainName, c.getMainName())); break;
+                                default: w.append(t, String.format("%s stands in the middle of the destruction, an expression of sexual ecstasy on %s face.", mainName, hisHer()));
+                            }
                         } else
                         {
                             w.append(t, String.format("A tall building collapses nearby, showering %s and %s both with painful rubble.  A large pile of debris separates the two of them, ", mainName, c.getMainName()));
@@ -27424,13 +26324,11 @@ public class Forsaken
                         } else
                         {
                             w.append(t, String.format("A horde of Demons suddenly attacks %s, and %s has trouble fending them off.  ", c.getMainName(), c.heShe()));
-                            if(flavorDeviancy() > 66)
-                                w.append(t, String.format("%s takes a seat on a nearby rooftop and starts masturbating as %s watches, moaning loudly to make sure %s notices %s.", mainName, heShe(), c.getMainName(), himHer()));
-                            else
-                            if(flavorDeviancy() > 33)
-                                w.append(t, String.format("%s laughs and steps back, calling out unhelpful advice as %s struggles.", mainName, c.getMainName()));
-                            else
-                                w.append(t, String.format("%s decides to take the opportunity to catch %s breath and prepare for %2$s next attack.", mainName, hisHer()));
+                            switch (flavorDeviancy() / 33) {
+                                case 0: w.append(t, String.format("%s decides to take the opportunity to catch %s breath and prepare for %2$s next attack.", mainName, hisHer())); break;
+                                case 1: w.append(t, String.format("%s laughs and steps back, calling out unhelpful advice as %s struggles.", mainName, c.getMainName())); break;
+                                default: w.append(t, String.format("%s takes a seat on a nearby rooftop and starts masturbating as %s watches, moaning loudly to make sure %s notices %s.", mainName, heShe(), c.getMainName(), himHer()));
+                            }
                         }
                     } else
                     if(c.getInnocence() > 66)
@@ -27445,23 +26343,19 @@ public class Forsaken
                     if(c.getInnocence() > 33)
                     {
                         w.append(t, String.format("The flow of the battle has put some distance between %s and %s, but when %1$s tries to turn away and put %s focus back on fighting the Demons, %2$s hits %s in the back with a long-range blast of energy", c.getMainName(), mainName, c.hisHer(), c.himHer()));
-                        if(flavorDeviancy() > 66)
-                            w.append(t, String.format(", suddenly overcome by an irresistable urge to make %s scream.", reference(c)));
-                        else
-                        if(flavorDeviancy() > 33)
-                            w.append(t, String.format(", smirking at the way %s squeaks in indignation.", c.heShe()));
-                        else
-                            w.append(t, String.format(", reminding %s not to let %s guard down around an opponent.", c.himHer(), c.hisHer()));
+                        switch (flavorDeviancy() / 33) {
+                            case 0: w.append(t, String.format(", reminding %s not to let %s guard down around an opponent.", c.himHer(), c.hisHer())); break;
+                            case 1: w.append(t, String.format(", smirking at the way %s squeaks in indignation.", c.heShe())); break;
+                            default: w.append(t, String.format(", suddenly overcome by an irresistable urge to make %s scream.", reference(c)));
+                        }
                     } else
                     {
                         w.append(t, String.format("%s fights off some straggler Demons, keeping a wary eye on %s at the same time.  They're too far from each other to fight now, but ", c.getMainName(), mainName));
-                        if(flavorObedience() > 66)
-                            w.append(t, String.format("%s is determined to bring %s down for the Demon Lord, ", mainName, c.himHer()));
-                        else
-                        if(flavorObedience() > 33)
-                            w.append(t, String.format("%s knows that the Demon Lord won't be satisfied with this performance, ", mainName));
-                        else
-                            w.append(t, String.format("%s shows no signs of stopping, ", mainName));
+                        switch (flavorObedience() / 33) {
+                            case 0: w.append(t, String.format("%s shows no signs of stopping, ", mainName)); break;
+                            case 1: w.append(t, String.format("%s knows that the Demon Lord won't be satisfied with this performance, ", mainName)); break;
+                            default: w.append(t, String.format("%s is determined to bring %s down for the Demon Lord, ", mainName, c.himHer()));
+                        }
                         w.append(t, String.format("and soon enough %s starts to move toward %s again.", heShe(), c.getMainName()));
                     }
                 } else
@@ -27469,13 +26363,11 @@ public class Forsaken
                 {
                     if(c.getInnocence() > 66)
                     {
-                        if(flavorObedience() > 66)
-                            w.append(t, String.format("%s is willing to put %s murderous desires aside for the Demon Lord's sake, ", mainName, hisHer()));
-                        else
-                        if(flavorObedience() > 33)
-                            w.append(t, String.format("%s's fear of the Demon Lord's wrath is greater than %s desire to kill, ", mainName, hisHer()));
-                        else
-                            w.append(t, String.format("%s's hatred wouldn't be satisfied by giving %s opponent a quick death, ", mainName, hisHer()));
+                        switch (flavorObedience() / 33) {
+                            case 0: w.append(t, String.format("%s's hatred wouldn't be satisfied by giving %s opponent a quick death, ", mainName, hisHer())); break;
+                            case 1: w.append(t, String.format("%s's fear of the Demon Lord's wrath is greater than %s desire to kill, ", mainName, hisHer())); break;
+                            default: w.append(t, String.format("%s is willing to put %s murderous desires aside for the Demon Lord's sake, ", mainName, hisHer()));
+                        }
                         w.append(t, String.format("but %s would still prefer to be directly attacking %s.  However, %s worries that %2$s's oblivious nature would lead %s to get %4$sself killed even by an attack that's not intended to be fatal, and so %s contents %sself with causing emotional pain.", heShe(), c.getMainName(), mainName, c.himHer(), mainName, himHer()));
                     } else
                     if(c.getInnocence() > 33)
@@ -27518,37 +26410,31 @@ public class Forsaken
                     } else
                     {
                         w.append(t, String.format("%s finds %sself briefly too intimidated to approach %s, ", c.getMainName(), c.himHer(), mainName));
-                        if(flavorDeviancy() > 66)
-                            w.append(t, String.format("deeply disturbed by the way that %s stares hungrily at %s like %s's a delicious piece of meat.", c.reference(this), c.himHer(), c.heShe()));
-                        else
-                        if(flavorDeviancy() > 33)
-                            w.append(t, String.format("and the cruel taunts and laughter coming %s way from %s don't help matters.", c.hisHer(), c.reference(this)));
-                        else
-                            w.append(t, String.format("sensing %s's sadistic nature.", c.reference(this)));
+                        switch (flavorDeviancy() / 33) {
+                            case 0: w.append(t, String.format("sensing %s's sadistic nature.", c.reference(this))); break;
+                            case 1: w.append(t, String.format("and the cruel taunts and laughter coming %s way from %s don't help matters.", c.hisHer(), c.reference(this))); break;
+                            default: w.append(t, String.format("deeply disturbed by the way that %s stares hungrily at %s like %s's a delicious piece of meat.", c.reference(this), c.himHer(), c.heShe()));
+                        }
                     }
                 } else
                 if(c.getMorality() > 66)
                 {
                     w.append(t, "While they're too far apart to fight, ");
-                    if(flavorObedience() > 66)
-                        w.append(t, String.format("%s sees %s eagerly stunning the civilians who were too slow to evacuate and handing them over to the Demons, ", c.getMainName(), mainName));
-                    else
-                    if(flavorObedience() > 33)
-                        w.append(t, String.format("%s sees %s refusing to help a group of civilians who are asking %s for help with their evacuation, ", c.getMainName(), mainName, himHer()));
-                    else
-                        w.append(t, String.format("%s harshly criticizes %s for failing to live up to %s own supposed ideals, ", mainName, c.getMainName(), c.hisHer()));
+                    switch (flavorObedience() / 33) {
+                        case 0: w.append(t, String.format("%s harshly criticizes %s for failing to live up to %s own supposed ideals, ", mainName, c.getMainName(), c.hisHer())); break;
+                        case 1: w.append(t, String.format("%s sees %s refusing to help a group of civilians who are asking %s for help with their evacuation, ", c.getMainName(), mainName, himHer())); break;
+                        default: w.append(t, String.format("%s sees %s eagerly stunning the civilians who were too slow to evacuate and handing them over to the Demons, ", c.getMainName(), mainName));
+                    }
                     w.append(t, String.format("causing %s's eyes to burn with anger.", c.getMainName()));
                 } else
                 if(c.getMorality() > 33)
                 {
                     w.append(t, String.format("%s has ended up some distance from %s opponent, ", mainName, hisHer()));
-                    if(flavorDeviancy() > 66)
-                        w.append(t, String.format("masturbating and moaning %s's name out loud.  ", c.getMainName()));
-                    else
-                    if(flavorDeviancy() > 33)
-                        w.append(t, String.format("calling out lewd backhanded compliments at %s.  ", c.getMainName()));
-                    else
-                        w.append(t, String.format("coldly insulting %s's abilities.  ", c.getMainName()));
+                    switch (flavorDeviancy() / 33) {
+                        case 0: w.append(t, String.format("coldly insulting %s's abilities.  ", c.getMainName())); break;
+                        case 1: w.append(t, String.format("calling out lewd backhanded compliments at %s.  ", c.getMainName())); break;
+                        default: w.append(t, String.format("masturbating and moaning %s's name out loud.  ", c.getMainName()));
+                    }
                     w.append(t, String.format("%s is angry, but there's not much %s can do about it from down below.", c.getMainName(), c.heShe()));
                 } else
                 {
@@ -27614,26 +26500,22 @@ public class Forsaken
                         }
                     } else
                     {
-                        if(flavorDeviancy() > 66)
-                            w.append(t, String.format("%s takes a voyeuristic thrill in watching %s struggle against the Demons, ", mainName, c.getMainName()));
-                        else
-                        if(flavorDeviancy() > 33)
-                            w.append(t, String.format("%s decides that it's easier to appreciate %s's crying face from a slight distance, ", mainName, c.getMainName()));
-                        else
-                            w.append(t, String.format("%s knows that %s often has trouble fighting against Demons, ", mainName, c.getMainName()));
+                        switch (flavorDeviancy() / 33) {
+                            case 0: w.append(t, String.format("%s knows that %s often has trouble fighting against Demons, ", mainName, c.getMainName())); break;
+                            case 1: w.append(t, String.format("%s decides that it's easier to appreciate %s's crying face from a slight distance, ", mainName, c.getMainName())); break;
+                            default: w.append(t, String.format("%s takes a voyeuristic thrill in watching %s struggle against the Demons, ", mainName, c.getMainName()));
+                        }
                         w.append(t, String.format("and %s commands any Demons within range to charge at %s all at once.", heShe(), c.getMainName()));
                     }
                 } else
                 if(c.getInnocence() > 66)
                 {
                     w.append(t, String.format("A Demon attacks %s from behind, knocking %s down, but when it tries to hit %2$s again, ", c.getMainName(), c.himHer()));
-                    if(flavorDeviancy() > 66)
-                        w.append(t, String.format("%s flies into a rage, tearing it apart in an instant.", mainName));
-                    else
-                    if(flavorDeviancy() > 33)
-                        w.append(t, String.format("%s runs by, killing the Demon with a smirk.", mainName));
-                    else
-                        w.append(t, String.format("%s coldly kills the Demon with a blast of energy.", mainName));
+                    switch (flavorDeviancy() / 33) {
+                        case 0: w.append(t, String.format("%s coldly kills the Demon with a blast of energy.", mainName)); break;
+                        case 1: w.append(t, String.format("%s runs by, killing the Demon with a smirk.", mainName)); break;
+                        default: w.append(t, String.format("%s flies into a rage, tearing it apart in an instant.", mainName));
+                    }
                 } else
                 if(c.getInnocence() > 33)
                 {
@@ -27646,13 +26528,11 @@ public class Forsaken
                 } else
                 {
                     w.append(t, String.format("As %s and %s fight, ", mainName, c.getMainName()));
-                    if(flavorHostility() > 66)
-                        w.append(t, String.format("some Demons try to swarm at %s, only to be immediately struck down by %s before they can lay a finger on %s.", c.getMainName(), mainName, reference(c)));
-                    else
-                    if(flavorHostility() > 33)
-                        w.append(t, String.format("some Demons come within view, but %s instantly incinerates them before returning %s attention to %s.", mainName, hisHer(), reference(c)));
-                    else
-                        w.append(t, String.format("some Demons with captive civilians march by, but %s attacks in order to free the humans, and soon both %s and %s are fighting the Demons off together.", mainName, heShe(), reference(c)));
+                    switch (flavorHostility() / 33) {
+                        case 0: w.append(t, String.format("some Demons with captive civilians march by, but %s attacks in order to free the humans, and soon both %s and %s are fighting the Demons off together.", mainName, heShe(), reference(c))); break;
+                        case 1: w.append(t, String.format("some Demons come within view, but %s instantly incinerates them before returning %s attention to %s.", mainName, hisHer(), reference(c))); break;
+                        default: w.append(t, String.format("some Demons try to swarm at %s, only to be immediately struck down by %s before they can lay a finger on %s.", c.getMainName(), mainName, reference(c)));
+                    }
                 }
             } else
             if(flavorDeviancy() > 66)
@@ -27675,25 +26555,21 @@ public class Forsaken
                         default: w.append(t, String.format(", and while it's obvious to %s that %s is attempting to masturbate under %s clothes in the middle of their fight, %s does %s best not to dwell on it.", c.getMainName(), c.reference(this), hisHer(), c.heShe(), c.hisHer()));
                     }
                 } else
-                if(flavorHostility() > 66)
-                    w.append(t, String.format("%s has been trying to anger %s with %s constant sexual behavior, but the more %s sees that %s is able to mostly keep %s composure, the more enraged %1$s %sself gets.", mainName, c.getMainName(), hisHer(), heShe(), reference(c), c.hisHer(), himHer()));
-                else
-                if(flavorHostility() > 33)
-                    w.append(t, String.format("%s is getting so turned on that %s's having a hard time doing much to %s even when %2$s manages to get %s hands on %s.  %s's forced to duck away behind a wall of Demons in order to calm down so %2$s can fight again.", mainName, heShe(), c.getMainName(), hisHer(), reference(c), HeShe()));
-                else
-                    w.append(t, String.format("%s comments with complete honesty about how pleased %s is that %s doesn't seem to be bothered by %1$s's sexual playfulness.  %3$s just shrugs %s words off.", mainName, heShe(), c.getMainName(), hisHer()));
+                switch (flavorHostility() / 33) {
+                    case 0: w.append(t, String.format("%s comments with complete honesty about how pleased %s is that %s doesn't seem to be bothered by %1$s's sexual playfulness.  %3$s just shrugs %s words off.", mainName, heShe(), c.getMainName(), hisHer())); break;
+                    case 1: w.append(t, String.format("%s is getting so turned on that %s's having a hard time doing much to %s even when %2$s manages to get %s hands on %s.  %s's forced to duck away behind a wall of Demons in order to calm down so %2$s can fight again.", mainName, heShe(), c.getMainName(), hisHer(), reference(c), HeShe())); break;
+                    default: w.append(t, String.format("%s has been trying to anger %s with %s constant sexual behavior, but the more %s sees that %s is able to mostly keep %s composure, the more enraged %1$s %sself gets.", mainName, c.getMainName(), hisHer(), heShe(), reference(c), c.hisHer(), himHer()));
+                }
             } else
             if(flavorDeviancy() > 33)
             {
                 if(c.getConfidence() > 66)
                 {
-                    if(flavorHostility() > 66)
-                        w.append(t, String.format("%s rants angrily at %s, but the thing that's angering %s is %s admiration of %s, and ", mainName, c.getMainName(), himHer(), hisHer(), reference(c)));
-                    else
-                    if(flavorHostility() > 33)
-                        w.append(t, String.format("%s grudgingly compliments %s, acknowledging %s as a worthy (and especially attractive) opponent.  ", mainName, c.getMainName(), c.himHer()));
-                    else
-                        w.append(t, String.format("During a standoff between %sself and %s, %s takes the opportunity to describe in detail which of %s's traits %s approves of.  ", himHer(), c.getMainName(), mainName, reference(c), heShe()));
+                    switch (flavorHostility() / 33) {
+                        case 0: w.append(t, String.format("During a standoff between %sself and %s, %s takes the opportunity to describe in detail which of %s's traits %s approves of.  ", himHer(), c.getMainName(), mainName, reference(c), heShe())); break;
+                        case 1: w.append(t, String.format("%s grudgingly compliments %s, acknowledging %s as a worthy (and especially attractive) opponent.  ", mainName, c.getMainName(), c.himHer())); break;
+                        default: w.append(t, String.format("%s rants angrily at %s, but the thing that's angering %s is %s admiration of %s, and ", mainName, c.getMainName(), himHer(), hisHer(), reference(c)));
+                    }
                     w.append(t, String.format("%s preens as %s's praised.", c.getMainName(), c.heShe()));
                 } else
                 if(c.getConfidence() > 33)
@@ -27727,24 +26603,20 @@ public class Forsaken
             } else
             if(c.getInnocence() > 33)
             {
-                if(flavorHostility() > 66)
-                    w.append(t, String.format("Given %s's obvious murderous desires, %s's showing a surprising amount of restraint against %s.  ", mainName, heShe(), c.getMainName()));
-                else
-                if(flavorHostility() > 33)
-                    w.append(t, String.format("Although %s clearly takes a sort of mischievous pleasure out of tormenting %s, there's no actual malice behind it.  ", mainName, c.getMainName()));
-                else
-                    w.append(t, String.format("%s seems to be doing the things %s's doing out of a sense of obligation, rather than for %s own personal pleasure.  ", mainName, heShe(), hisHer()));
+                switch (flavorHostility() / 33) {
+                    case 0: w.append(t, String.format("%s seems to be doing the things %s's doing out of a sense of obligation, rather than for %s own personal pleasure.  ", mainName, heShe(), hisHer())); break;
+                    case 1: w.append(t, String.format("Although %s clearly takes a sort of mischievous pleasure out of tormenting %s, there's no actual malice behind it.  ", mainName, c.getMainName())); break;
+                    default: w.append(t, String.format("Given %s's obvious murderous desires, %s's showing a surprising amount of restraint against %s.  ", mainName, heShe(), c.getMainName()));
+                }
                 w.append(t, String.format("%s takes notice, hesitating as %s decides how to proceed.", c.getMainName(), c.heShe()));
             } else
             {
                 w.append(t, String.format("%s is annoyed by the way that %s is trying to molest %s, but it's obvious that %2$s isn't enjoying it ", c.getMainName(), mainName, c.himHer()));
-                if(flavorObedience() > 66)
-                    w.append(t, " and is only doing it out of devotion to the Demon Lord, ");
-                else
-                if(flavorObedience() > 33)
-                    w.append(t, String.format(" and is only following %s orders, ", hisHer()));
-                else
-                    w.append(t, " and is only using whichever tactic seems most effective, ");
+                switch (flavorObedience() / 33) {
+                    case 0: w.append(t, " and is only using whichever tactic seems most effective, "); break;
+                    case 1: w.append(t, String.format(" and is only following %s orders, ", hisHer())); break;
+                    default: w.append(t, " and is only doing it out of devotion to the Demon Lord, ");
+                }
                 w.append(t, String.format("so %s finds it impossible to actually hold it against %s.", c.getMainName(), himHer()));
             }
     }
@@ -27754,38 +26626,30 @@ public class Forsaken
         w.append(t, String.format("\n\n%s\n\n", w.getSeparator()));
         if(c.hypnotized)
         {
-            if(c.innocence > 66)
-                w.append(t, String.format("As %s's pleasure reaches its peak, you release your hypnotic hold on %s mind.  But at this point, %s's been trained so well that %3$s doesn't even need your direct influence.  ", c.mainName, c.hisHer(), c.heShe()));
-            else
-            if(c.innocence > 33)
-                w.append(t, String.format("Sudden clarity returns to %s's mind as you allow %s to remember the situation %s's in and everything %3$s's done.  However, it actually doesn't bother %2$s much.  ", c.mainName, c.himHer(), c.heShe()));
-            else
-                w.append(t, String.format("Knowing that %s has learned to recognize the signs of your hypnotic influence, you release all your control over %s mind so that %s knows that the coming decision is %2$s and %2$s alone.  ", c.mainName, c.hisHer(), c.heShe()));
+            switch (c.innocence / 33) {
+                case 0: w.append(t, String.format("Knowing that %s has learned to recognize the signs of your hypnotic influence, you release all your control over %s mind so that %s knows that the coming decision is %2$s and %2$s alone.  ", c.mainName, c.hisHer(), c.heShe())); break;
+                case 1: w.append(t, String.format("Sudden clarity returns to %s's mind as you allow %s to remember the situation %s's in and everything %3$s's done.  However, it actually doesn't bother %2$s much.  ", c.mainName, c.himHer(), c.heShe())); break;
+                default: w.append(t, String.format("As %s's pleasure reaches its peak, you release your hypnotic hold on %s mind.  But at this point, %s's been trained so well that %3$s doesn't even need your direct influence.  ", c.mainName, c.hisHer(), c.heShe()));
+            }
         } else
-        if(c.innocence > 66)
-            w.append(t, String.format("%s giggles and closes %s eyes as %s prepares for %s to make %s cum like always, only to open them back up and blink in confusion when %s stops.  ", c.mainName, c.hisHer(), c.heShe(), mainName, c.himHer(), heShe()));
-        else
-        if(c.innocence > 33)
-            w.append(t, String.format("%s has been both hoping for and dreading this moment, going back and forth in %s mind as to how %s'd respond.  But as %2$s feelings overflow with both lust and affection, %3$s finds %2$s answer.  ", c.mainName, c.hisHer(), c.heShe()));
-        else
-            w.append(t, String.format("%s would have preferred to win this battle, but %s had decided beforehand what %2$s would do if defeated looked inevitable.  Now, with %s toying with %s body so effortlessly, %2$s can see no path to victory.  ", c.mainName, c.heShe(), mainName, c.hisHer()));
+        switch (c.innocence / 33) {
+            case 0: w.append(t, String.format("%s would have preferred to win this battle, but %s had decided beforehand what %2$s would do if defeated looked inevitable.  Now, with %s toying with %s body so effortlessly, %2$s can see no path to victory.  ", c.mainName, c.heShe(), mainName, c.hisHer())); break;
+            case 1: w.append(t, String.format("%s has been both hoping for and dreading this moment, going back and forth in %s mind as to how %s'd respond.  But as %2$s feelings overflow with both lust and affection, %3$s finds %2$s answer.  ", c.mainName, c.hisHer(), c.heShe())); break;
+            default: w.append(t, String.format("%s giggles and closes %s eyes as %s prepares for %s to make %s cum like always, only to open them back up and blink in confusion when %s stops.  ", c.mainName, c.hisHer(), c.heShe(), mainName, c.himHer(), heShe()));
+        }
         if(c.parasitized)
         {
-            if(c.morality > 66)
-                w.append(t, String.format("%s reminds %s about the ungrateful criticisms %s's faced from human society, and when %3$s compares it to the respectful way that %s asks permission to pleasure %2$s now, %s knows that %5$s could never make any other choice.  %s tells %1$s to hurry and win the battle so that they can have some fun together afterward.", mainName, c.himHer(), c.heShe(), c.reference(this), c.heShe(), c.HeShe()));
-            else
-            if(c.morality > 33)
-                w.append(t, String.format("When %s reminds %s of all the fun times %s's had with the Thralls, the last bit of %s resistance melts away, and %s pledges to join %s against the ungrateful society that they once fought for.", mainName, c.himHer(), c.heShe(), c.hisHer(), c.heShe(), c.reference(this)));
-            else
-                w.append(t, String.format("The instant %s asks %s to join the side of the Demons, %s eagerly agrees.  Part of it is the desire for pleasure, but most of it is spite for the human society that rejected %2$s.", mainName, c.himHer(), c.heShe()));
+            switch (c.morality / 33) {
+                case 0: w.append(t, String.format("The instant %s asks %s to join the side of the Demons, %s eagerly agrees.  Part of it is the desire for pleasure, but most of it is spite for the human society that rejected %2$s.", mainName, c.himHer(), c.heShe())); break;
+                case 1: w.append(t, String.format("When %s reminds %s of all the fun times %s's had with the Thralls, the last bit of %s resistance melts away, and %s pledges to join %s against the ungrateful society that they once fought for.", mainName, c.himHer(), c.heShe(), c.hisHer(), c.heShe(), c.reference(this))); break;
+                default: w.append(t, String.format("%s reminds %s about the ungrateful criticisms %s's faced from human society, and when %3$s compares it to the respectful way that %s asks permission to pleasure %2$s now, %s knows that %5$s could never make any other choice.  %s tells %1$s to hurry and win the battle so that they can have some fun together afterward.", mainName, c.himHer(), c.heShe(), c.reference(this), c.heShe(), c.HeShe()));
+            }
         } else
-        if(c.morality > 66)
-            w.append(t, String.format("%s begs %s to join %s and the Thralls and keep making them feel good in the same way that they've made %2$s feel good.  %s can't make %2$sself refuse %s.", mainName, c.himHer(), himHer(), c.HeShe(), c.reference(this)));
-        else
-        if(c.morality > 33)
-            w.append(t, String.format("%s asks %s whether %s'd really be happy never feeling the Thralls' caresses again, and %3$s has to confess that %3$s wouldn't.", mainName, c.himHer(), c.heShe()));
-        else
-            w.append(t, String.format("%s offers %s even greater heights of pleasure if %s returns to the hive with %s, and %s embraces the realization that %s cares less about fame and fortune in the human world than %6$s does about just feeling good.", mainName, c.himHer(), c.heShe(), himHer(), c.mainName, c.heShe()));
+        switch (c.morality / 33) {
+            case 0: w.append(t, String.format("%s offers %s even greater heights of pleasure if %s returns to the hive with %s, and %s embraces the realization that %s cares less about fame and fortune in the human world than %6$s does about just feeling good.", mainName, c.himHer(), c.heShe(), himHer(), c.mainName, c.heShe())); break;
+            case 1: w.append(t, String.format("%s asks %s whether %s'd really be happy never feeling the Thralls' caresses again, and %3$s has to confess that %3$s wouldn't.", mainName, c.himHer(), c.heShe())); break;
+            default: w.append(t, String.format("%s begs %s to join %s and the Thralls and keep making them feel good in the same way that they've made %2$s feel good.  %s can't make %2$sself refuse %s.", mainName, c.himHer(), himHer(), c.HeShe(), c.reference(this)));
+        }
         w.append(t, "\n\n");
         c.resolve = 0;
         c.defeatType = 5;

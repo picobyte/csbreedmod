@@ -853,13 +853,11 @@ public class Body
                     } else
                     if(w.targetBody.getObedience() > 33)
                     {
-                        if(w.targetBody.getHostility() > 66)
-                            w.append(t, String.format("%s stands on the stage, glaring angrily at the surrounding Thralls who jeer and takes pictures of %s, but %s still bows %s head respectfully as %s joins %2$s.", w.targetBody.OwnerName(), w.targetBody.himHer(), w.targetBody.heShe(), w.targetBody.hisHer(), w.lordBody.ownerName()));
-                        else
-                        if(w.targetBody.getHostility() > 33)
-                            w.append(t, String.format("%s obediently joins %s on stage, sparing only the occasional annoyed glance at the crowd of Thralls who shout out suggestions for ways %s should be humiliated.  %s waits to see what will be done with %s.", w.targetBody.OwnerName(), w.lordBody.ownerName(), w.targetBody.heShe(), w.targetBody.HeShe(), w.targetBody.himHer()));
-                        else
-                            w.append(t, String.format("%s seems a bit intimidated by the crowd of Thralls, but %s still willingly joins %s on the stage and tells everyone that %2$s hopes they enjoy the show.", w.targetBody.OwnerName(), w.targetBody.heShe(), w.lordBody.ownerName()));
+                        switch (w.targetBody.getHostility() / 33) {
+                            case 0: w.append(t, String.format("%s seems a bit intimidated by the crowd of Thralls, but %s still willingly joins %s on the stage and tells everyone that %2$s hopes they enjoy the show.", w.targetBody.OwnerName(), w.targetBody.heShe(), w.lordBody.ownerName())); break;
+                            case 1: w.append(t, String.format("%s obediently joins %s on stage, sparing only the occasional annoyed glance at the crowd of Thralls who shout out suggestions for ways %s should be humiliated.  %s waits to see what will be done with %s.", w.targetBody.OwnerName(), w.lordBody.ownerName(), w.targetBody.heShe(), w.targetBody.HeShe(), w.targetBody.himHer())); break;
+                            default: w.append(t, String.format("%s stands on the stage, glaring angrily at the surrounding Thralls who jeer and takes pictures of %s, but %s still bows %s head respectfully as %s joins %2$s.", w.targetBody.OwnerName(), w.targetBody.himHer(), w.targetBody.heShe(), w.targetBody.hisHer(), w.lordBody.ownerName()));
+                        }
                         w.targetBody.currentHATE += (50 + w.targetBody.getHostility()) - w.targetBody.getObedience();
                         if(w.targetBody.currentHATE < 0L)
                             w.targetBody.currentHATE = 0L;
@@ -867,13 +865,11 @@ public class Body
                         w.targetBody.currentPLEA += (w.targetBody.getDeviancy() * w.targetBody.getDeviancy()) / 100;
                     } else
                     {
-                        if(w.targetBody.getConfidence() > 66)
-                            w.append(t, String.format("%s has to be dragged onto the stage by force, kicking and shouting, and when %s's finally thrown in front of %s, %2$s glares up in angry defiance.  ", w.targetBody.OwnerName(), w.targetBody.heShe(), w.lordBody.ownerName()));
-                        else
-                        if(w.targetBody.getConfidence() > 33)
-                            w.append(t, String.format("On a stage with %s in front of a crowd that roars with eagerness to see %s raped, %s tries to remain calm, but %s feels %s heart pounding in %5$s chest.  ", w.lordBody.ownerName(), w.targetBody.himHer(), w.targetBody.ownerName(), w.targetBody.heShe(), w.targetBody.hisHer()));
-                        else
-                            w.append(t, String.format("%s is trembling with fear as %s allows a pair of Thralls to escort %s onto the stage with %s, flinching at every crude comment and threat shouted from the crowd.  ", w.targetBody.OwnerName(), w.targetBody.heShe(), w.targetBody.himHer(), w.lordBody.ownerName()));
+                        switch (w.targetBody.getConfidence() / 33) {
+                            case 0: w.append(t, String.format("%s is trembling with fear as %s allows a pair of Thralls to escort %s onto the stage with %s, flinching at every crude comment and threat shouted from the crowd.  ", w.targetBody.OwnerName(), w.targetBody.heShe(), w.targetBody.himHer(), w.lordBody.ownerName())); break;
+                            case 1: w.append(t, String.format("On a stage with %s in front of a crowd that roars with eagerness to see %s raped, %s tries to remain calm, but %s feels %s heart pounding in %5$s chest.  ", w.lordBody.ownerName(), w.targetBody.himHer(), w.targetBody.ownerName(), w.targetBody.heShe(), w.targetBody.hisHer())); break;
+                            default: w.append(t, String.format("%s has to be dragged onto the stage by force, kicking and shouting, and when %s's finally thrown in front of %s, %2$s glares up in angry defiance.  ", w.targetBody.OwnerName(), w.targetBody.heShe(), w.lordBody.ownerName()));
+                        }
                         w.targetBody.currentFEAR = ((100 - w.targetBody.getConfidence()) * (100 - w.targetBody.getDignity())) / 50;
                         w.targetBody.currentHATE = ((100 - w.targetBody.getObedience()) * (100 - w.targetBody.getDignity())) / 50;
                         w.targetBody.currentPLEA = (w.targetBody.getDeviancy() * (100 - w.targetBody.getDignity())) / 50;
@@ -882,13 +878,11 @@ public class Body
                             w.targetBody.currentFEAR = w.targetBody.currentFEAR * 3L;
                             w.append(t, String.format("%s sees filming phones in the crowd, and %s knows that what happens here could change how people see %s forever.", w.targetBody.HeShe(), w.targetBody.heShe(), w.targetBody.himHer()));
                         } else
-                        if(w.targetBody.getDeviancy() > 66)
-                            w.append(t, String.format("And yet, as always, %s body aches to be savagely fucked right there in front of everyone.", w.targetBody.hisHer()));
-                        else
-                        if(w.targetBody.getDeviancy() > 33)
-                            w.append(t, String.format("%s tries not to admit to %sself just how much this is turning %2$s on.", w.targetBody.HeShe(), w.targetBody.himHer()));
-                        else
-                            w.append(t, String.format("%s hates everything about this situation.", w.targetBody.HeShe()));
+                        switch (w.targetBody.getDeviancy() / 33) {
+                            case 0: w.append(t, String.format("%s hates everything about this situation.", w.targetBody.HeShe())); break;
+                            case 1: w.append(t, String.format("%s tries not to admit to %sself just how much this is turning %2$s on.", w.targetBody.HeShe(), w.targetBody.himHer())); break;
+                            default: w.append(t, String.format("And yet, as always, %s body aches to be savagely fucked right there in front of everyone.", w.targetBody.hisHer()));
+                        }
                     }
                     for(int i = 0; i < w.sceneParticipants.length && w.sceneLocation == Activity.Location.STAGE; i++)
                         if(w.sceneParticipants[i].forsakenOwner != null && w.sceneParticipants[i].getEXPOLevel() >= 3)

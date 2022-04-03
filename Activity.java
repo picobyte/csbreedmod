@@ -266,98 +266,80 @@ public class Activity
                     if(sender.getObedience() > 66)
                     {
                         Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.JOY, Project.Emotion.JOY);
-                        if(sender.getMorality() > 66)
-                            sender.say(t, "With this...  Even though I'm a boy, I feel like I'm... your wife...  Is that okay?");
-                        else
-                        if(sender.getMorality() > 33)
-                            sender.say(t, "I'm so happy that I was able to save myself for you!");
-                        else
-                            sender.say(t, "I always felt like sex was just about feeling good, but... I managed to give you my first time.  That makes me really happy.");
+                        switch (sender.getMorality() / 33) {
+                            case 0: sender.say(t, "I always felt like sex was just about feeling good, but... I managed to give you my first time.  That makes me really happy."); break;
+                            case 1: sender.say(t, "I'm so happy that I was able to save myself for you!"); break;
+                            default: sender.say(t, "With this...  Even though I'm a boy, I feel like I'm... your wife...  Is that okay?");
+                        }
                     } else
                     if(sender.getObedience() > 33)
                     {
                         Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.SHAME, Project.Emotion.SHAME);
-                        if(sender.getInnocence() > 66)
-                            sender.say(t, "It kinda hurts...");
-                        else
-                        if(sender.getInnocence() > 33)
-                            sender.say(t, "I'm surprised you took so long to do this...");
-                        else
-                            sender.say(t, "I suppose... I had already come to accept that you'd eventually use me back there as well...");
+                        switch (sender.getInnocence() / 33) {
+                            case 0: sender.say(t, "I suppose... I had already come to accept that you'd eventually use me back there as well..."); break;
+                            case 1: sender.say(t, "I'm surprised you took so long to do this..."); break;
+                            default: sender.say(t, "It kinda hurts...");
+                        }
                     } else
                     {
                         Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.ANGER, Project.Emotion.ANGER);
-                        if(sender.getInnocence() > 66)
-                            sender.say(t, "I'll never forgive you for this!  Never!  Never!");
-                        else
-                        if(sender.getInnocence() > 33)
-                            sender.say(t, "Even if you defile my body, I'll never give you my heart!");
-                        else
-                            sender.say(t, "All that effort to keep the Thralls from raping me, only to do it yourself?  How... ngh... pointless...");
+                        switch (sender.getInnocence() / 33) {
+                            case 0: sender.say(t, "All that effort to keep the Thralls from raping me, only to do it yourself?  How... ngh... pointless..."); break;
+                            case 1: sender.say(t, "Even if you defile my body, I'll never give you my heart!"); break;
+                            default: sender.say(t, "I'll never forgive you for this!  Never!  Never!");
+                        }
                     }
                 } else
                 {
                     Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.STRUGGLE, Project.Emotion.FEAR);
                     if(sender.getConfidence() > 66)
                     {
-                        if(sender.getObedience() > 66)
-                            sender.say(t, "I'm... guh... f-fine, " + sender.demonLord() + "!");
-                        else
-                        if(sender.getObedience() > 33)
-                            sender.say(t, "Why are you doing this!?  I'm serving you now!  Gaaah, pleeease!");
-                        else
-                            sender.say(t, "I'll stop fighting, I'll stop talking back, I'll do anything!");
+                        switch (sender.getObedience() / 33) {
+                            case 0: sender.say(t, "I'll stop fighting, I'll stop talking back, I'll do anything!"); break;
+                            case 1: sender.say(t, "Why are you doing this!?  I'm serving you now!  Gaaah, pleeease!"); break;
+                            default: sender.say(t, "I'm... guh... f-fine, " + sender.demonLord() + "!");
+                        }
                     } else
                     if(sender.getConfidence() > 33)
                     {
-                        if(sender.getDignity() > 66)
-                            sender.say(t, "Please, please!  Stooop!");
-                        else
-                        if(sender.getDignity() > 33)
-                            sender.say(t, "Mgh...  guh... I-I can't...");
-                        else
-                            sender.say(t, "AAAGH, NOOO!");
+                        switch (sender.getDignity() / 33) {
+                            case 0: sender.say(t, "AAAGH, NOOO!"); break;
+                            case 1: sender.say(t, "Mgh...  guh... I-I can't..."); break;
+                            default: sender.say(t, "Please, please!  Stooop!");
+                        }
                     } else
-                    if(sender.getDeviancy() > 66)
-                        sender.say(t, "Nnnaaah~!");
-                    else
-                    if(sender.getDeviancy() > 33)
-                        sender.say(t, "Aah, nnooo, oooh!");
-                    else
-                        sender.say(t, "Agh!  Mph, guh, n-no...!");
+                    switch (sender.getDeviancy() / 33) {
+                        case 0: sender.say(t, "Agh!  Mph, guh, n-no...!"); break;
+                        case 1: sender.say(t, "Aah, nnooo, oooh!"); break;
+                        default: sender.say(t, "Nnnaaah~!");
+                    }
                 }
             } else
             if(sender.getObedience() > 66)
             {
                 Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.JOY, Project.Emotion.JOY);
-                if(sender.getMorality() > 66)
-                    sender.say(t, "With this...  It's like I'm your wife now, isn't it...?  Ah, wonderful...");
-                else
-                if(sender.getMorality() > 33)
-                    sender.say(t, "I'm so happy that I was able to save myself for you!");
-                else
-                    sender.say(t, "I never cared much about who my first would be... but now, I'm really glad that it's you...");
+                switch (sender.getMorality() / 33) {
+                    case 0: sender.say(t, "I never cared much about who my first would be... but now, I'm really glad that it's you..."); break;
+                    case 1: sender.say(t, "I'm so happy that I was able to save myself for you!"); break;
+                    default: sender.say(t, "With this...  It's like I'm your wife now, isn't it...?  Ah, wonderful...");
+                }
             } else
             if(sender.getObedience() > 33)
             {
                 Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.SHAME, Project.Emotion.SHAME);
-                if(sender.getInnocence() > 66)
-                    sender.say(t, "It kinda hurts...");
-                else
-                if(sender.getInnocence() > 33)
-                    sender.say(t, "I'm surprised you took so long to do this...");
-                else
-                    sender.say(t, "I suppose... I had already come to accept that you'd be my first...");
+                switch (sender.getInnocence() / 33) {
+                    case 0: sender.say(t, "I suppose... I had already come to accept that you'd be my first..."); break;
+                    case 1: sender.say(t, "I'm surprised you took so long to do this..."); break;
+                    default: sender.say(t, "It kinda hurts...");
+                }
             } else
             {
                 Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.ANGER, Project.Emotion.ANGER);
-                if(sender.getInnocence() > 66)
-                    sender.say(t, "I'll never forgive you for this!  Never!  Never!");
-                else
-                if(sender.getInnocence() > 33)
-                    sender.say(t, "Even if you defile my body, I'll never give you my heart!");
-                else
-                    sender.say(t, "All that effort to preserve my virginity, only to take it now?  How... ngh... pointless...");
+                switch (sender.getInnocence() / 33) {
+                    case 0: sender.say(t, "All that effort to preserve my virginity, only to take it now?  How... ngh... pointless..."); break;
+                    case 1: sender.say(t, "Even if you defile my body, I'll never give you my heart!"); break;
+                    default: sender.say(t, "I'll never forgive you for this!  Never!  Never!");
+                }
             }
             if(sender.forsakenOwner != null)
                 sender.forsakenOwner.timesHadSex++;
@@ -370,31 +352,25 @@ public class Activity
             Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.LEWD);
             if(sender.getInnocence() > 66)
             {
-                if(sender.getObedience() > 66)
-                    sender.say(t, "That was... amazing!  It's like all my love for " + sender.theDemonLord() + "... came out at once...!");
-                else
-                if(sender.getObedience() > 33)
-                    sender.say(t, "Aaah, what's happening...!?  I feel good!  I feel too good!  I'm going crazy...!");
-                else
-                    sender.say(t, "Whuh?  What was... that feeling...?  What did you do to me...?");
+                switch (sender.getObedience() / 33) {
+                    case 0: sender.say(t, "Whuh?  What was... that feeling...?  What did you do to me...?"); break;
+                    case 1: sender.say(t, "Aaah, what's happening...!?  I feel good!  I feel too good!  I'm going crazy...!"); break;
+                    default: sender.say(t, "That was... amazing!  It's like all my love for " + sender.theDemonLord() + "... came out at once...!");
+                }
             } else
             if(sender.getInnocence() > 33)
             {
-                if(sender.getObedience() > 66)
-                    sender.say(t, "When " + sender.theDemonLord() + " makes me cum... it feels so much better than when I do it myself...!");
-                else
-                if(sender.getObedience() > 33)
-                    sender.say(t, "Wow!  That was... intense!");
-                else
-                    sender.say(t, "Ugh, you made me cum... even though I didn't want to...  Not with you...");
+                switch (sender.getObedience() / 33) {
+                    case 0: sender.say(t, "Ugh, you made me cum... even though I didn't want to...  Not with you..."); break;
+                    case 1: sender.say(t, "Wow!  That was... intense!"); break;
+                    default: sender.say(t, "When " + sender.theDemonLord() + " makes me cum... it feels so much better than when I do it myself...!");
+                }
             } else
-            if(sender.getObedience() > 66)
-                sender.say(t, "Such an... overwhelmingly intense orgasm!  Ah, " + sender.demonLord() + ", my body has come to desire your touch above all else!");
-            else
-            if(sender.getObedience() > 33)
-                sender.say(t, "Your... nn... technique... certainly does not disappoint...");
-            else
-                sender.say(t, "Nnngh...  Pathetic... to feel such pleasure from the Demon Lord...");
+            switch (sender.getObedience() / 33) {
+                case 0: sender.say(t, "Nnngh...  Pathetic... to feel such pleasure from the Demon Lord..."); break;
+                case 1: sender.say(t, "Your... nn... technique... certainly does not disappoint..."); break;
+                default: sender.say(t, "Such an... overwhelmingly intense orgasm!  Ah, " + sender.demonLord() + ", my body has come to desire your touch above all else!");
+            }
         } else
         if(sender.specialLine == 3)
         {
@@ -413,21 +389,17 @@ public class Activity
             } else
             if(sender.getObedience() > 33)
             {
-                if(sender.getConfidence() > 66)
-                    sender.say(t, "I'M SORRY!  I'M SORRY FOR DEFYING YOU!  AAARGH!");
-                else
-                if(sender.getConfidence() > 33)
-                    sender.say(t, "I'm breaking!  You're breaking me!");
-                else
-                    sender.say(t, "P-Please...!  No more!  NoooOOOGH!");
+                switch (sender.getConfidence() / 33) {
+                    case 0: sender.say(t, "P-Please...!  No more!  NoooOOOGH!"); break;
+                    case 1: sender.say(t, "I'm breaking!  You're breaking me!"); break;
+                    default: sender.say(t, "I'M SORRY!  I'M SORRY FOR DEFYING YOU!  AAARGH!");
+                }
             } else
-            if(sender.getConfidence() > 66)
-                sender.say(t, "NO! NOOO!  AAAGH!");
-            else
-            if(sender.getConfidence() > 33)
-                sender.say(t, "You win!  You win!  You don't have to- GRAAAH!");
-            else
-                sender.say(t, "I-I give up!  I'm sorry, I'm sorryyy!");
+            switch (sender.getConfidence() / 33) {
+                case 0: sender.say(t, "I-I give up!  I'm sorry, I'm sorryyy!"); break;
+                case 1: sender.say(t, "You win!  You win!  You don't have to- GRAAAH!"); break;
+                default: sender.say(t, "NO! NOOO!  AAAGH!");
+            }
         } else
         if(sender.specialLine == 4)
         {
@@ -449,13 +421,11 @@ public class Activity
             if(sender.getObedience() > 33)
             {
                 Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.SHAME, Project.Emotion.SHAME);
-                if(sender.getDignity() > 66)
-                    sender.say(t, "You've taken... everything... from me...  Ngh...");
-                else
-                if(sender.getDignity() > 33)
-                    sender.say(t, "Maybe... if I look like I'm enjoying it... they won't think I'm weak...");
-                else
-                    sender.say(t, "I never cared how much they saw, so... it's fine.");
+                switch (sender.getDignity() / 33) {
+                    case 0: sender.say(t, "I never cared how much they saw, so... it's fine."); break;
+                    case 1: sender.say(t, "Maybe... if I look like I'm enjoying it... they won't think I'm weak..."); break;
+                    default: sender.say(t, "You've taken... everything... from me...  Ngh...");
+                }
             } else
             {
                 Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.ANGER, Project.Emotion.ANGER);
@@ -534,34 +504,28 @@ public class Activity
                 if(sender.getObedience() > 66)
                 {
                     Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.FOCUS, Project.Emotion.JOY);
-                    if(sender.getInnocence() > 66)
-                        sender.say(t, "I'm so happy that I get to spend time with " + sender.theDemonLord() + "!");
-                    else
-                    if(sender.getInnocence() > 33)
-                        sender.say(t, "Use me up until nothing is left, " + sender.demonLord() + ".");
-                    else
-                        sender.say(t, "I am unworthy to serve " + sender.theDemonLord() + "... but I shall try my best!");
+                    switch (sender.getInnocence() / 33) {
+                        case 0: sender.say(t, "I am unworthy to serve " + sender.theDemonLord() + "... but I shall try my best!"); break;
+                        case 1: sender.say(t, "Use me up until nothing is left, " + sender.demonLord() + "."); break;
+                        default: sender.say(t, "I'm so happy that I get to spend time with " + sender.theDemonLord() + "!");
+                    }
                 } else
                 if(sender.getObedience() > 33)
                 {
                     Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.NEUTRAL, Project.Emotion.JOY);
-                    if(sender.getInnocence() > 66)
-                        sender.say(t, "This is weird, but... kinda fun, too.");
-                    else
-                    if(sender.getInnocence() > 33)
-                        sender.say(t, "You're amazing, " + sender.demonLord() + ".");
-                    else
-                        sender.say(t, "Let me prove my value to you.");
+                    switch (sender.getInnocence() / 33) {
+                        case 0: sender.say(t, "Let me prove my value to you."); break;
+                        case 1: sender.say(t, "You're amazing, " + sender.demonLord() + "."); break;
+                        default: sender.say(t, "This is weird, but... kinda fun, too.");
+                    }
                 } else
                 {
                     Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.ANGER, Project.Emotion.SHAME);
-                    if(sender.getInnocence() > 66)
-                        sender.say(t, String.valueOf(sender.TheDemonLord()) + " isn't so bad...  Wait, what am I saying!?");
-                    else
-                    if(sender.getInnocence() > 33)
-                        sender.say(t, "Ugh, I'm completely under your control...");
-                    else
-                        sender.say(t, "I'm... aware that I stand no chance of defeating you, " + sender.demonLord() + ".");
+                    switch (sender.getInnocence() / 33) {
+                        case 0: sender.say(t, "I'm... aware that I stand no chance of defeating you, " + sender.demonLord() + "."); break;
+                        case 1: sender.say(t, "Ugh, I'm completely under your control..."); break;
+                        default: sender.say(t, String.valueOf(sender.TheDemonLord()) + " isn't so bad...  Wait, what am I saying!?");
+                    }
                 }
             } else
             if(w.sceneDuration % 3 == 1)
@@ -569,13 +533,11 @@ public class Activity
                 if(sender.getObedience() > 66)
                 {
                     Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.JOY);
-                    if(sender.getDeviancy() > 66)
-                        sender.say(t, "I-Increidble...!  Being with " + sender.theDemonLord() + " feels even better...!");
-                    else
-                    if(sender.getDeviancy() > 33)
-                        sender.say(t, "I love you, " + sender.demonLord() + "!");
-                    else
-                        sender.say(t, "You're remaking me... into your own personal toy...!");
+                    switch (sender.getDeviancy() / 33) {
+                        case 0: sender.say(t, "You're remaking me... into your own personal toy...!"); break;
+                        case 1: sender.say(t, "I love you, " + sender.demonLord() + "!"); break;
+                        default: sender.say(t, "I-Increidble...!  Being with " + sender.theDemonLord() + " feels even better...!");
+                    }
                 } else
                 if(sender.getObedience() > 33)
                 {
@@ -596,13 +558,11 @@ public class Activity
                 } else
                 {
                     Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.ANGER, Project.Emotion.SHAME);
-                    if(sender.getDeviancy() > 66)
-                        sender.say(t, "Ugh... I... I can't resist you, " + sender.demonLord() + "...");
-                    else
-                    if(sender.getDeviancy() > 33)
-                        sender.say(t, "You're almost making me forget that you're the Demon Lord.");
-                    else
-                        sender.say(t, "If you can even make someone like me feel like this...");
+                    switch (sender.getDeviancy() / 33) {
+                        case 0: sender.say(t, "If you can even make someone like me feel like this..."); break;
+                        case 1: sender.say(t, "You're almost making me forget that you're the Demon Lord."); break;
+                        default: sender.say(t, "Ugh... I... I can't resist you, " + sender.demonLord() + "...");
+                    }
                 }
             } else
             if(w.sceneDuration % 3 == 2)
@@ -626,13 +586,11 @@ public class Activity
                 if(sender.getObedience() > 33)
                 {
                     Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.SHAME, Project.Emotion.NEUTRAL);
-                    if(sender.getConfidence() > 66)
-                        sender.say(t, "I've never feared anyone but you...");
-                    else
-                    if(sender.getConfidence() > 33)
-                        sender.say(t, "I'll never oppose you again.  I understand that now.");
-                    else
-                        sender.say(t, "I can't even think about fighting you anymore...");
+                    switch (sender.getConfidence() / 33) {
+                        case 0: sender.say(t, "I can't even think about fighting you anymore..."); break;
+                        case 1: sender.say(t, "I'll never oppose you again.  I understand that now."); break;
+                        default: sender.say(t, "I've never feared anyone but you...");
+                    }
                 } else
                 if(sender.getConfidence() > 66)
                 {
@@ -738,34 +696,28 @@ public class Activity
             if(sender.getObedience() > 66)
             {
                 Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
-                if(sender.getDeviancy() > 66)
-                    sender.say(t, "I'll just... dream about a nicer " + sender.demonLord() + "...");
-                else
-                if(sender.getDeviancy() > 33)
-                    sender.say(t, "How can I hate this, when it's with " + sender.theDemonLord() + "...?");
-                else
-                    sender.say(t, "Even if it's with " + sender.theDemonLord() + ", I... I don't like this...");
+                switch (sender.getDeviancy() / 33) {
+                    case 0: sender.say(t, "Even if it's with " + sender.theDemonLord() + ", I... I don't like this..."); break;
+                    case 1: sender.say(t, "How can I hate this, when it's with " + sender.theDemonLord() + "...?"); break;
+                    default: sender.say(t, "I'll just... dream about a nicer " + sender.demonLord() + "...");
+                }
             } else
             if(sender.getObedience() > 33)
             {
                 Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.STRUGGLE, Project.Emotion.ANGER);
-                if(sender.getDeviancy() > 66)
-                    sender.say(t, "This is too much, even for me!");
-                else
-                if(sender.getDeviancy() > 33)
-                    sender.say(t, "This is too much for me!");
-                else
-                    sender.say(t, "You know I don't like this sort of thing...");
+                switch (sender.getDeviancy() / 33) {
+                    case 0: sender.say(t, "You know I don't like this sort of thing..."); break;
+                    case 1: sender.say(t, "This is too much for me!"); break;
+                    default: sender.say(t, "This is too much, even for me!");
+                }
             } else
             {
                 Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                if(sender.getDeviancy() > 66)
-                    sender.say(t, "Just go away and let me play with myself!");
-                else
-                if(sender.getDeviancy() > 33)
-                    sender.say(t, "I don't want to do this!  At least not with you!");
-                else
-                    sender.say(t, "You're... disgusting...");
+                switch (sender.getDeviancy() / 33) {
+                    case 0: sender.say(t, "You're... disgusting..."); break;
+                    case 1: sender.say(t, "I don't want to do this!  At least not with you!"); break;
+                    default: sender.say(t, "Just go away and let me play with myself!");
+                }
             }
         } else
         if(this == Project.SpreadLegs)
@@ -795,13 +747,11 @@ public class Activity
             if(sender.getDeviancy() > 33)
             {
                 Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.JOY);
-                if(sender.getInnocence() > 66)
-                    sender.say(t, "Mm...!  Mm...");
-                else
-                if(sender.getInnocence() > 33)
-                    sender.say(t, "Let's just do it.");
-                else
-                    sender.say(t, "Such an... impressive specimen...");
+                switch (sender.getInnocence() / 33) {
+                    case 0: sender.say(t, "Such an... impressive specimen..."); break;
+                    case 1: sender.say(t, "Let's just do it."); break;
+                    default: sender.say(t, "Mm...!  Mm...");
+                }
             } else
             if(sender.getObedience() > 66)
             {
@@ -823,13 +773,11 @@ public class Activity
             if(sender.getDeviancy() > 66)
             {
                 Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.FOCUS);
-                if(sender.getConfidence() > 66)
-                    sender.say(t, "Hurry up and take me!");
-                else
-                if(sender.getConfidence() > 33)
-                    sender.say(t, "I'm ready for you...!");
-                else
-                    sender.say(t, "P-Please... do whatever you want with me...!");
+                switch (sender.getConfidence() / 33) {
+                    case 0: sender.say(t, "P-Please... do whatever you want with me...!"); break;
+                    case 1: sender.say(t, "I'm ready for you...!"); break;
+                    default: sender.say(t, "Hurry up and take me!");
+                }
             } else
             if(sender.getDeviancy() > 33)
             {
@@ -952,13 +900,11 @@ public class Activity
             } else
             {
                 Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.ANGER, Project.Emotion.FOCUS);
-                if(sender.getInnocence() > 66)
-                    sender.say(t, "I'm not gonna make you feel good anymore!");
-                else
-                if(sender.getInnocence() > 33)
-                    sender.say(t, "This is over.");
-                else
-                    sender.say(t, "Continuing to service you is worse than any punishment you can inflict on me.");
+                switch (sender.getInnocence() / 33) {
+                    case 0: sender.say(t, "Continuing to service you is worse than any punishment you can inflict on me."); break;
+                    case 1: sender.say(t, "This is over."); break;
+                    default: sender.say(t, "I'm not gonna make you feel good anymore!");
+                }
             }
         } else
         if(this == Project.StrokeCock)
@@ -1020,13 +966,11 @@ public class Activity
                 if(sender.getDeviancy() > 66)
                 {
                     Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.FOCUS);
-                    if(sender.getConfidence() > 66)
-                        sender.say(t, "Ngh...!  Fuck...!  Yes...!");
-                    else
-                    if(sender.getConfidence() > 33)
-                        sender.say(t, "Your... pussy... feels... too... good...!");
-                    else
-                        sender.say(t, "I-I'm gonna... fill you up...!");
+                    switch (sender.getConfidence() / 33) {
+                        case 0: sender.say(t, "I-I'm gonna... fill you up...!"); break;
+                        case 1: sender.say(t, "Your... pussy... feels... too... good...!"); break;
+                        default: sender.say(t, "Ngh...!  Fuck...!  Yes...!");
+                    }
                 } else
                 if(sender.getDeviancy() > 33)
                 {
@@ -1063,24 +1007,20 @@ public class Activity
             if(sender.getDeviancy() > 66)
             {
                 Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.JOY);
-                if(sender.getInnocence() > 66)
-                    sender.say(t, "Aaah...  Wooow...");
-                else
-                if(sender.getInnocence() > 33)
-                    sender.say(t, "Yes!  Yes!  More!");
-                else
-                    sender.say(t, "I-I'm- Ah!  Going to climax alreadyyy!");
+                switch (sender.getInnocence() / 33) {
+                    case 0: sender.say(t, "I-I'm- Ah!  Going to climax alreadyyy!"); break;
+                    case 1: sender.say(t, "Yes!  Yes!  More!"); break;
+                    default: sender.say(t, "Aaah...  Wooow...");
+                }
             } else
             if(sender.getDeviancy() > 33)
             {
                 Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.JOY);
-                if(sender.getDignity() > 66)
-                    sender.say(t, "Ngh!  Ah!  Aaah!");
-                else
-                if(sender.getDignity() > 33)
-                    sender.say(t, "This is... amazing...!");
-                else
-                    sender.say(t, "Ooogh!  It's squeezing meee!");
+                switch (sender.getDignity() / 33) {
+                    case 0: sender.say(t, "Ooogh!  It's squeezing meee!"); break;
+                    case 1: sender.say(t, "This is... amazing...!"); break;
+                    default: sender.say(t, "Ngh!  Ah!  Aaah!");
+                }
             } else
             if(sender.getObedience() > 66)
             {
@@ -1137,13 +1077,11 @@ public class Activity
                 } else
                 {
                     Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.STRUGGLE, Project.Emotion.LEWD);
-                    if(sender.getDignity() > 66)
-                        sender.say(t, "I can't believe... I'm doing this...!");
-                    else
-                    if(sender.getDignity() > 33)
-                        sender.say(t, "Let me... catch my breath...");
-                    else
-                        sender.say(t, "Ow...");
+                    switch (sender.getDignity() / 33) {
+                        case 0: sender.say(t, "Ow..."); break;
+                        case 1: sender.say(t, "Let me... catch my breath..."); break;
+                        default: sender.say(t, "I can't believe... I'm doing this...!");
+                    }
                 }
             } else
             if(sender.getObedience() > 66)
@@ -1166,13 +1104,11 @@ public class Activity
             if(sender.getObedience() > 33)
             {
                 Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
-                if(sender.getConfidence() > 66)
-                    sender.say(t, "Aaagh...!  This shouldn't... feel so good...!");
-                else
-                if(sender.getConfidence() > 33)
-                    sender.say(t, "Ah!  Ah, wow...");
-                else
-                    sender.say(t, "Mm!  Nn...!  Ah, I-I'm...!");
+                switch (sender.getConfidence() / 33) {
+                    case 0: sender.say(t, "Mm!  Nn...!  Ah, I-I'm...!"); break;
+                    case 1: sender.say(t, "Ah!  Ah, wow..."); break;
+                    default: sender.say(t, "Aaagh...!  This shouldn't... feel so good...!");
+                }
             } else
             if(sender.getInnocence() > 66)
             {
@@ -1196,13 +1132,11 @@ public class Activity
                 if(sender.getDeviancy() > 66)
                 {
                     Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.FOCUS);
-                    if(sender.getConfidence() > 66)
-                        sender.say(t, "Ngh...!  Fuck...!  Yes...!");
-                    else
-                    if(sender.getConfidence() > 33)
-                        sender.say(t, "Your... ass... feels... too... good...!");
-                    else
-                        sender.say(t, "I-I'm gonna... fill you up...!");
+                    switch (sender.getConfidence() / 33) {
+                        case 0: sender.say(t, "I-I'm gonna... fill you up...!"); break;
+                        case 1: sender.say(t, "Your... ass... feels... too... good...!"); break;
+                        default: sender.say(t, "Ngh...!  Fuck...!  Yes...!");
+                    }
                 } else
                 if(sender.getDeviancy() > 33)
                 {
@@ -1239,24 +1173,20 @@ public class Activity
             if(sender.getDeviancy() > 66)
             {
                 Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.JOY);
-                if(sender.getInnocence() > 66)
-                    sender.say(t, "Aaah...  Wooow...");
-                else
-                if(sender.getInnocence() > 33)
-                    sender.say(t, "Yes!  Yes!  More!");
-                else
-                    sender.say(t, "I-I'm- Ah!  Going to climax alreadyyy!");
+                switch (sender.getInnocence() / 33) {
+                    case 0: sender.say(t, "I-I'm- Ah!  Going to climax alreadyyy!"); break;
+                    case 1: sender.say(t, "Yes!  Yes!  More!"); break;
+                    default: sender.say(t, "Aaah...  Wooow...");
+                }
             } else
             if(sender.getDeviancy() > 33)
             {
                 Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.JOY);
-                if(sender.getDignity() > 66)
-                    sender.say(t, "Ngh!  Ah!  Aaah!");
-                else
-                if(sender.getDignity() > 33)
-                    sender.say(t, "This is... amazing...!");
-                else
-                    sender.say(t, "Ooogh!  It's squeezing meee!");
+                switch (sender.getDignity() / 33) {
+                    case 0: sender.say(t, "Ooogh!  It's squeezing meee!"); break;
+                    case 1: sender.say(t, "This is... amazing...!"); break;
+                    default: sender.say(t, "Ngh!  Ah!  Aaah!");
+                }
             } else
             if(sender.getObedience() > 66)
             {
@@ -1312,13 +1242,11 @@ public class Activity
                 } else
                 {
                     Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.STRUGGLE, Project.Emotion.LEWD);
-                    if(sender.getDignity() > 66)
-                        sender.say(t, "I can't believe... I'm doing this...!");
-                    else
-                    if(sender.getDignity() > 33)
-                        sender.say(t, "Let me... catch my breath...");
-                    else
-                        sender.say(t, "Ow...");
+                    switch (sender.getDignity() / 33) {
+                        case 0: sender.say(t, "Ow..."); break;
+                        case 1: sender.say(t, "Let me... catch my breath..."); break;
+                        default: sender.say(t, "I can't believe... I'm doing this...!");
+                    }
                 }
             } else
             if(Project.BeLubricated.isInProgress(sender, null))
@@ -1343,13 +1271,11 @@ public class Activity
                 if(sender.getObedience() > 33)
                 {
                     Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
-                    if(sender.getConfidence() > 66)
-                        sender.say(t, "Aaagh...!  This shouldn't... feel so good...!");
-                    else
-                    if(sender.getConfidence() > 33)
-                        sender.say(t, "Ah!  Ah, wow...");
-                    else
-                        sender.say(t, "Mm!  Nn...!  Ah, I-I'm...!");
+                    switch (sender.getConfidence() / 33) {
+                        case 0: sender.say(t, "Mm!  Nn...!  Ah, I-I'm...!"); break;
+                        case 1: sender.say(t, "Ah!  Ah, wow..."); break;
+                        default: sender.say(t, "Aaagh...!  This shouldn't... feel so good...!");
+                    }
                 } else
                 if(sender.getInnocence() > 66)
                 {
@@ -1370,31 +1296,25 @@ public class Activity
                 Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.STRUGGLE, Project.Emotion.FEAR);
                 if(sender.getConfidence() > 66)
                 {
-                    if(sender.getObedience() > 66)
-                        sender.say(t, "I'm... guh... f-fine, " + sender.demonLord() + "!");
-                    else
-                    if(sender.getObedience() > 33)
-                        sender.say(t, "Why are you doing this!?  I'm serving you now!  Gaaah, pleeease!");
-                    else
-                        sender.say(t, "I'll stop fighting, I'll stop talking back, I'll do anything!");
+                    switch (sender.getObedience() / 33) {
+                        case 0: sender.say(t, "I'll stop fighting, I'll stop talking back, I'll do anything!"); break;
+                        case 1: sender.say(t, "Why are you doing this!?  I'm serving you now!  Gaaah, pleeease!"); break;
+                        default: sender.say(t, "I'm... guh... f-fine, " + sender.demonLord() + "!");
+                    }
                 } else
                 if(sender.getConfidence() > 33)
                 {
-                    if(sender.getDignity() > 66)
-                        sender.say(t, "Please, please!  Stooop!");
-                    else
-                    if(sender.getDignity() > 33)
-                        sender.say(t, "Mgh...  guh... I-I can't...");
-                    else
-                        sender.say(t, "AAAGH, NOOO!");
+                    switch (sender.getDignity() / 33) {
+                        case 0: sender.say(t, "AAAGH, NOOO!"); break;
+                        case 1: sender.say(t, "Mgh...  guh... I-I can't..."); break;
+                        default: sender.say(t, "Please, please!  Stooop!");
+                    }
                 } else
-                if(sender.getDeviancy() > 66)
-                    sender.say(t, "Nnnaaah~!");
-                else
-                if(sender.getDeviancy() > 33)
-                    sender.say(t, "Aah, nnooo, oooh!");
-                else
-                    sender.say(t, "Agh!  Mph, guh, n-no...!");
+                switch (sender.getDeviancy() / 33) {
+                    case 0: sender.say(t, "Agh!  Mph, guh, n-no...!"); break;
+                    case 1: sender.say(t, "Aah, nnooo, oooh!"); break;
+                    default: sender.say(t, "Nnnaaah~!");
+                }
             }
         sender.say(t, "\"");
         sender.specialLine = 0;
@@ -1519,39 +1439,31 @@ public class Activity
                 w.append(t, String.format("%s ", sender.capitalizedOwnerName()));
                 if(sender.getDeviancy() > 66)
                 {
-                    if(sender.getInnocence() > 66)
-                        w.append(t, String.format("loses %sself in the act of rubbing %s's clit, eyes glazed over and drooling with desire.", sender.himHer(), receiver.ownerName()));
-                    else
-                    if(sender.getInnocence() > 33)
-                        w.append(t, String.format("reaches eagerly for %s's clit, stroking it with an aggressive firmness that comes just short of being painful.", receiver.ownerName()));
-                    else
-                        w.append(t, String.format("abruptly puts %s hand against %s's clit and starts rubbing up and down, then fondling it with %1$s fingers, then gently tugging on it, using every technique at %1$s disposal.", sender.hisHer(), receiver.ownerName()));
+                    switch (sender.getInnocence() / 33) {
+                        case 0: w.append(t, String.format("abruptly puts %s hand against %s's clit and starts rubbing up and down, then fondling it with %1$s fingers, then gently tugging on it, using every technique at %1$s disposal.", sender.hisHer(), receiver.ownerName())); break;
+                        case 1: w.append(t, String.format("reaches eagerly for %s's clit, stroking it with an aggressive firmness that comes just short of being painful.", receiver.ownerName())); break;
+                        default: w.append(t, String.format("loses %sself in the act of rubbing %s's clit, eyes glazed over and drooling with desire.", sender.himHer(), receiver.ownerName()));
+                    }
                 } else
                 if(sender.getDeviancy() > 33)
                 {
-                    if(sender.getInnocence() > 66)
-                        w.append(t, String.format("pokes and prods %s's clit, then gradually gets into a rhythm of stroking it as %s grows more confident in what %2$s's doing.", receiver.ownerName(), receiver.heShe()));
-                    else
-                    if(sender.getInnocence() > 33)
-                        w.append(t, String.format("brushes %s fingers against %s's clit, trailing them up and down, then growing more firm, stroking it in earnest.", sender.hisHer(), receiver.ownerName()));
-                    else
-                        w.append(t, String.format("carefully starts to stroke %s's clit, staring into %s eyes to gauge %2$s reaction.", receiver.ownerName(), receiver.hisHer()));
+                    switch (sender.getInnocence() / 33) {
+                        case 0: w.append(t, String.format("carefully starts to stroke %s's clit, staring into %s eyes to gauge %2$s reaction.", receiver.ownerName(), receiver.hisHer())); break;
+                        case 1: w.append(t, String.format("brushes %s fingers against %s's clit, trailing them up and down, then growing more firm, stroking it in earnest.", sender.hisHer(), receiver.ownerName())); break;
+                        default: w.append(t, String.format("pokes and prods %s's clit, then gradually gets into a rhythm of stroking it as %s grows more confident in what %2$s's doing.", receiver.ownerName(), receiver.heShe()));
+                    }
                 } else
                 {
-                    if(sender.getInnocence() > 66)
-                        w.append(t, String.format("hesitantly touches %1$s's clit, then begins to clumsily stroke it, averting %s eyes as %s does so.  ", receiver.ownerName(), sender.hisHer(), sender.heShe()));
-                    else
-                    if(sender.getInnocence() > 33)
-                        w.append(t, String.format("begins to stroke %s's clit with stiff, mechanical movements.  ", receiver.ownerName()));
-                    else
-                        w.append(t, String.format("brings %s fingers to %s's clit and begins to stroke it with precise, methodical movements.  ", sender.hisHer(), receiver.ownerName()));
-                    if(sender.getObedience() > 66)
-                        w.append(t, String.format("It's clear that %1$s's unfamiliar with this sort of thing, but %1$s's doing %s best for %s.", sender.heShe(), sender.hisHer(), receiver.ownerName()));
-                    else
-                    if(sender.getObedience() > 33)
-                        w.append(t, String.format("%s heart clearly isn't in it.", sender.HisHer()));
-                    else
-                        w.append(t, String.format("%s looks sickened by what %s's doing.", sender.HeShe(), sender.heShe()));
+                    switch (sender.getInnocence() / 33) {
+                        case 0: w.append(t, String.format("brings %s fingers to %s's clit and begins to stroke it with precise, methodical movements.  ", sender.hisHer(), receiver.ownerName())); break;
+                        case 1: w.append(t, String.format("begins to stroke %s's clit with stiff, mechanical movements.  ", receiver.ownerName())); break;
+                        default: w.append(t, String.format("hesitantly touches %1$s's clit, then begins to clumsily stroke it, averting %s eyes as %s does so.  ", receiver.ownerName(), sender.hisHer(), sender.heShe()));
+                    }
+                    switch (sender.getObedience() / 33) {
+                        case 0: w.append(t, String.format("%s looks sickened by what %s's doing.", sender.HeShe(), sender.heShe())); break;
+                        case 1: w.append(t, String.format("%s heart clearly isn't in it.", sender.HisHer())); break;
+                        default: w.append(t, String.format("It's clear that %1$s's unfamiliar with this sort of thing, but %1$s's doing %s best for %s.", sender.heShe(), sender.hisHer(), receiver.ownerName()));
+                    }
                 }
             }
         } else
@@ -1566,63 +1478,51 @@ public class Activity
                 if(sender.getInnocence() > 66)
                 {
                     w.append(t, String.format(" gasps at the sudden intensity of the stimulation to %s most sensitive part, and ", sender.hisHer()));
-                    if(sender.getDeviancy() > 66)
-                        w.append(t, String.format("%s eyes glaze over as %s loses the ability to think of anything other than feeling even better.  ", sender.hisHer(), sender.heShe()));
-                    else
-                    if(sender.getDeviancy() > 33)
-                        w.append(t, String.format("%s hips jerk wildly, seemingly caught between jerking away and pushing themselves against %s's fingers.  ", sender.hisHer(), receiver.ownerName()));
-                    else
-                        w.append(t, String.format("%s reflexively tries to jerk %s hips away.  ", sender.heShe(), sender.hisHer()));
+                    switch (sender.getDeviancy() / 33) {
+                        case 0: w.append(t, String.format("%s reflexively tries to jerk %s hips away.  ", sender.heShe(), sender.hisHer())); break;
+                        case 1: w.append(t, String.format("%s hips jerk wildly, seemingly caught between jerking away and pushing themselves against %s's fingers.  ", sender.hisHer(), receiver.ownerName())); break;
+                        default: w.append(t, String.format("%s eyes glaze over as %s loses the ability to think of anything other than feeling even better.  ", sender.hisHer(), sender.heShe()));
+                    }
                 } else
                 if(sender.getInnocence() > 33)
                 {
                     w.append(t, String.format(" feels jolts of pleasure shooting into %s lower tummy", sender.hisHer()));
-                    if(sender.getDeviancy() > 66)
-                        w.append(t, String.format(", and %1$s moans helplessly, %s well-trained body eagerly submitting itself to %s's touch.  ", sender.heShe(), sender.hisHer(), receiver.ownerName()));
-                    else
-                    if(sender.getDeviancy() > 33)
-                        w.append(t, String.format(", and it's a struggle for %s to hold onto %s reason.  ", sender.himHer(), sender.hisHer()));
-                    else
-                        w.append(t, String.format(", even as %s tries to ignore them.  ", sender.heShe()));
+                    switch (sender.getDeviancy() / 33) {
+                        case 0: w.append(t, String.format(", even as %s tries to ignore them.  ", sender.heShe())); break;
+                        case 1: w.append(t, String.format(", and it's a struggle for %s to hold onto %s reason.  ", sender.himHer(), sender.hisHer())); break;
+                        default: w.append(t, String.format(", and %1$s moans helplessly, %s well-trained body eagerly submitting itself to %s's touch.  ", sender.heShe(), sender.hisHer(), receiver.ownerName()));
+                    }
                 } else
                 {
                     w.append(t, String.format(" knew this was coming, but %s still ", sender.heShe()));
-                    if(sender.getDeviancy() > 66)
-                        w.append(t, String.format("squirms and cries out, unable to maintain any self-control in the face of the pleasure %s's come to crave.  ", sender.heShe()));
-                    else
-                    if(sender.getDeviancy() > 33)
-                        w.append(t, String.format("gasps softly at the waves of pleasure that begin to wash over %s lower body.  ", sender.hisHer()));
-                    else
-                        w.append(t, "flinches and grimaces, uncomfortable with the intensity of the sensations.  ");
+                    switch (sender.getDeviancy() / 33) {
+                        case 0: w.append(t, "flinches and grimaces, uncomfortable with the intensity of the sensations.  "); break;
+                        case 1: w.append(t, String.format("gasps softly at the waves of pleasure that begin to wash over %s lower body.  ", sender.hisHer())); break;
+                        default: w.append(t, String.format("squirms and cries out, unable to maintain any self-control in the face of the pleasure %s's come to crave.  ", sender.heShe()));
+                    }
                 }
                 if(receiver == w.lordBody)
                     if(sender.getDeviancy() > 66)
                     {
-                        if(sender.getObedience() > 66)
-                            w.append(t, String.format("%s body has grown quite sensitive, but it's even more sensitive than usual when %s knows %2$s's being touched by %s.", sender.HisHer(), sender.heShe(), receiver.ownerName()));
-                        else
-                        if(sender.getObedience() > 33)
-                            w.append(t, String.format("Soon, %1$s's completely consumed in %s efforts to hump %s's hand.", sender.heShe(), sender.hisHer(), receiver.ownerName()));
-                        else
-                            w.append(t, String.format("%s tries to resist, but %s body has grown so sensitive that the lightest touch to %2$s weak spots is enough to subdue %s.", sender.HeShe(), sender.hisHer(), sender.himHer()));
+                        switch (sender.getObedience() / 33) {
+                            case 0: w.append(t, String.format("%s tries to resist, but %s body has grown so sensitive that the lightest touch to %2$s weak spots is enough to subdue %s.", sender.HeShe(), sender.hisHer(), sender.himHer())); break;
+                            case 1: w.append(t, String.format("Soon, %1$s's completely consumed in %s efforts to hump %s's hand.", sender.heShe(), sender.hisHer(), receiver.ownerName())); break;
+                            default: w.append(t, String.format("%s body has grown quite sensitive, but it's even more sensitive than usual when %s knows %2$s's being touched by %s.", sender.HisHer(), sender.heShe(), receiver.ownerName()));
+                        }
                     } else
                     if(sender.getDeviancy() > 33)
                     {
-                        if(sender.getObedience() > 66)
-                            w.append(t, String.format("Even more than the physical stimulation itself, %1$s is ecstatic that %s is pleasuring %s directly.", sender.ownerName(), receiver.ownerName(), sender.himHer()));
-                        else
-                        if(sender.getObedience() > 33)
-                            w.append(t, String.format("%s's content to let %s pleasure %s.", sender.HeShe(), receiver.ownerName(), sender.himHer()));
-                        else
-                            w.append(t, String.format("%s has a hard time remembering that %s's supposed to hate the Demon Lord.", sender.HeShe(), sender.heShe()));
+                        switch (sender.getObedience() / 33) {
+                            case 0: w.append(t, String.format("%s has a hard time remembering that %s's supposed to hate the Demon Lord.", sender.HeShe(), sender.heShe())); break;
+                            case 1: w.append(t, String.format("%s's content to let %s pleasure %s.", sender.HeShe(), receiver.ownerName(), sender.himHer())); break;
+                            default: w.append(t, String.format("Even more than the physical stimulation itself, %1$s is ecstatic that %s is pleasuring %s directly.", sender.ownerName(), receiver.ownerName(), sender.himHer()));
+                        }
                     } else
-                    if(sender.getObedience() > 66)
-                        w.append(t, String.format("%s endures this for %s's sake, hoping that %2$s will enjoy playing with %s body.", sender.HeShe(), receiver.ownerName(), sender.hisHer()));
-                    else
-                    if(sender.getObedience() > 33)
-                        w.append(t, String.format("%s doesn't make eye contact with %s, glancing off to the side.", sender.HeShe(), receiver.ownerName()));
-                    else
-                        w.append(t, String.format("%s glares at %s, not appreciating it in the slightest.", sender.HeShe(), receiver.ownerName()));
+                    switch (sender.getObedience() / 33) {
+                        case 0: w.append(t, String.format("%s glares at %s, not appreciating it in the slightest.", sender.HeShe(), receiver.ownerName())); break;
+                        case 1: w.append(t, String.format("%s doesn't make eye contact with %s, glancing off to the side.", sender.HeShe(), receiver.ownerName())); break;
+                        default: w.append(t, String.format("%s endures this for %s's sake, hoping that %2$s will enjoy playing with %s body.", sender.HeShe(), receiver.ownerName(), sender.hisHer()));
+                    }
             }
         } else
         if(this == Project.SpreadLegs)
@@ -1635,31 +1535,25 @@ public class Activity
             if(sender != w.lordBody && receiver == w.lordBody)
                 if(sender.getObedience() > 66)
                 {
-                    if(sender.getConfidence() > 66)
-                        w.append(t, String.format("%s repeatedly, insistently offers to do anything at all that %s desires of %s.", sender.OwnerName(), receiver.ownerName(), sender.himHer()));
-                    else
-                    if(sender.getConfidence() > 33)
-                        w.append(t, String.format("%s voices %s admiration for %s, describing all %s great qualities at length.", sender.OwnerName(), sender.hisHer(), receiver.ownerName(), receiver.hisHer()));
-                    else
-                        w.append(t, String.format("%s viciously insults %sself, offering %s body to %s in order to make up for %s own failures.", sender.OwnerName(), sender.himHer(), sender.hisHer(), receiver.ownerName(), sender.hisHer()));
+                    switch (sender.getConfidence() / 33) {
+                        case 0: w.append(t, String.format("%s viciously insults %sself, offering %s body to %s in order to make up for %s own failures.", sender.OwnerName(), sender.himHer(), sender.hisHer(), receiver.ownerName(), sender.hisHer())); break;
+                        case 1: w.append(t, String.format("%s voices %s admiration for %s, describing all %s great qualities at length.", sender.OwnerName(), sender.hisHer(), receiver.ownerName(), receiver.hisHer())); break;
+                        default: w.append(t, String.format("%s repeatedly, insistently offers to do anything at all that %s desires of %s.", sender.OwnerName(), receiver.ownerName(), sender.himHer()));
+                    }
                 } else
                 if(sender.getObedience() > 33)
                 {
-                    if(sender.getDeviancy() > 66)
-                        w.append(t, String.format("%s eagerly lavishes praise and encouragement on %s, hoping to be rewarded with pleasure.", sender.OwnerName(), receiver.ownerName()));
-                    else
-                    if(sender.getDeviancy() > 33)
-                        w.append(t, String.format("%s encourages %s to do whatever %s'd like with %s.", sender.OwnerName(), receiver.ownerName(), receiver.heShe(), sender.himHer()));
-                    else
-                        w.append(t, String.format("%s humbly debases %sself and praises %s, but the quaver in %s voice betrays the fact that %s's doing so out of fear rather than because %5$s actually believes %s own words.", sender.OwnerName(), sender.himHer(), receiver.ownerName(), sender.hisHer(), sender.heShe(), sender.hisHer()));
+                    switch (sender.getDeviancy() / 33) {
+                        case 0: w.append(t, String.format("%s humbly debases %sself and praises %s, but the quaver in %s voice betrays the fact that %s's doing so out of fear rather than because %5$s actually believes %s own words.", sender.OwnerName(), sender.himHer(), receiver.ownerName(), sender.hisHer(), sender.heShe(), sender.hisHer())); break;
+                        case 1: w.append(t, String.format("%s encourages %s to do whatever %s'd like with %s.", sender.OwnerName(), receiver.ownerName(), receiver.heShe(), sender.himHer())); break;
+                        default: w.append(t, String.format("%s eagerly lavishes praise and encouragement on %s, hoping to be rewarded with pleasure.", sender.OwnerName(), receiver.ownerName()));
+                    }
                 } else
-                if(sender.getInnocence() > 66)
-                    w.append(t, String.format("%s starts to praise %s before %s remembers that they're supposed to be enemies.", sender.OwnerName(), receiver.ownerName(), sender.heShe()));
-                else
-                if(sender.getInnocence() > 33)
-                    w.append(t, String.format("%s grudgingly compliments %s, though %s isn't happy about it.", sender.OwnerName(), receiver.ownerName(), sender.heShe()));
-                else
-                    w.append(t, String.format("%s acts like %s's coming around to %s's side, giving voice to some compliments, but %2$s's actually just hoping to manipulate %s.", sender.OwnerName(), sender.heShe(), receiver.ownerName(), receiver.himHer()));
+                switch (sender.getInnocence() / 33) {
+                    case 0: w.append(t, String.format("%s acts like %s's coming around to %s's side, giving voice to some compliments, but %2$s's actually just hoping to manipulate %s.", sender.OwnerName(), sender.heShe(), receiver.ownerName(), receiver.himHer())); break;
+                    case 1: w.append(t, String.format("%s grudgingly compliments %s, though %s isn't happy about it.", sender.OwnerName(), receiver.ownerName(), sender.heShe())); break;
+                    default: w.append(t, String.format("%s starts to praise %s before %s remembers that they're supposed to be enemies.", sender.OwnerName(), receiver.ownerName(), sender.heShe()));
+                }
         } else
         if(this == Project.Insult)
         {
@@ -1699,31 +1593,25 @@ public class Activity
             else
             if(sender.getDeviancy() > 66)
             {
-                if(sender.getConfidence() > 66)
-                    w.append(t, String.format("%s roughly pushes %s down onto %s back, panting with barely-restrained desire as %s takes %s place atop %s.", sender.OwnerName(), receiver.ownerName(), receiver.hisHer(), sender.heShe(), sender.hisHer(), receiver.himHer()));
-                else
-                if(sender.getConfidence() > 33)
-                    w.append(t, String.format("%s practically tackles %s down onto the floor, overflowing with lust.", sender.OwnerName(), receiver.ownerName()));
-                else
-                    w.append(t, String.format("%s's lust has made %s far more bold than usual, and %s eagerly pushes %s down onto %s back.", sender.OwnerName(), sender.himHer(), sender.heShe(), receiver.ownerName(), receiver.hisHer()));
+                switch (sender.getConfidence() / 33) {
+                    case 0: w.append(t, String.format("%s's lust has made %s far more bold than usual, and %s eagerly pushes %s down onto %s back.", sender.OwnerName(), sender.himHer(), sender.heShe(), receiver.ownerName(), receiver.hisHer())); break;
+                    case 1: w.append(t, String.format("%s practically tackles %s down onto the floor, overflowing with lust.", sender.OwnerName(), receiver.ownerName())); break;
+                    default: w.append(t, String.format("%s roughly pushes %s down onto %s back, panting with barely-restrained desire as %s takes %s place atop %s.", sender.OwnerName(), receiver.ownerName(), receiver.hisHer(), sender.heShe(), sender.hisHer(), receiver.himHer()));
+                }
             } else
             if(sender.getDeviancy() > 33)
             {
-                if(sender.getInnocence() > 66)
-                    w.append(t, String.format("Overcome by %s growing lust, %s wraps %1$s arms around %s and kisses %s repeatedly, then seems surprised to realize that %s's pushed %s down to the floor in the process.", sender.hisHer(), sender.ownerName(), receiver.ownerName(), receiver.himHer(), sender.heShe(), receiver.himHer()));
-                else
-                if(sender.getInnocence() > 33)
-                    w.append(t, String.format("%s embraces %s, guiding %s down onto %s back.", sender.OwnerName(), receiver.ownerName(), receiver.himHer(), receiver.hisHer()));
-                else
-                    w.append(t, String.format("With %s eyes locked onto %s's %s, %s urges %s to lay down on %s back, then climbs atop %s.", sender.hisHer(), receiver.ownerName(), receiver.mainOrgan(), sender.ownerName(), receiver.himHer(), receiver.hisHer(), receiver.himHer()));
+                switch (sender.getInnocence() / 33) {
+                    case 0: w.append(t, String.format("With %s eyes locked onto %s's %s, %s urges %s to lay down on %s back, then climbs atop %s.", sender.hisHer(), receiver.ownerName(), receiver.mainOrgan(), sender.ownerName(), receiver.himHer(), receiver.hisHer(), receiver.himHer())); break;
+                    case 1: w.append(t, String.format("%s embraces %s, guiding %s down onto %s back.", sender.OwnerName(), receiver.ownerName(), receiver.himHer(), receiver.hisHer())); break;
+                    default: w.append(t, String.format("Overcome by %s growing lust, %s wraps %1$s arms around %s and kisses %s repeatedly, then seems surprised to realize that %s's pushed %s down to the floor in the process.", sender.hisHer(), sender.ownerName(), receiver.ownerName(), receiver.himHer(), sender.heShe(), receiver.himHer()));
+                }
             } else
-            if(sender.getObedience() > 66)
-                w.append(t, String.format("%s gently guides %s onto %s back, then lays atop %s, taking deep breaths and trying to ready %sself to serve %s.", sender.OwnerName(), receiver.ownerName(), receiver.hisHer(), receiver.himHer(), sender.himHer(), sender.theDemonLord()));
-            else
-            if(sender.getObedience() > 33)
-                w.append(t, String.format("%s pushes %s down onto %s back, but hesitates before going further, uncertain about how to proceed.", sender.OwnerName(), receiver.ownerName(), receiver.hisHer()));
-            else
-                w.append(t, String.format("With an annoyed expression on %s face, %s pushes %s down onto %s back without a hint of sensuality.", sender.hisHer(), sender.ownerName(), receiver.ownerName(), receiver.hisHer()));
+            switch (sender.getObedience() / 33) {
+                case 0: w.append(t, String.format("With an annoyed expression on %s face, %s pushes %s down onto %s back without a hint of sensuality.", sender.hisHer(), sender.ownerName(), receiver.ownerName(), receiver.hisHer())); break;
+                case 1: w.append(t, String.format("%s pushes %s down onto %s back, but hesitates before going further, uncertain about how to proceed.", sender.OwnerName(), receiver.ownerName(), receiver.hisHer())); break;
+                default: w.append(t, String.format("%s gently guides %s onto %s back, then lays atop %s, taking deep breaths and trying to ready %sself to serve %s.", sender.OwnerName(), receiver.ownerName(), receiver.hisHer(), receiver.himHer(), sender.himHer(), sender.theDemonLord()));
+            }
         } else
         if(this == Project.PullDown)
         {
@@ -1732,93 +1620,75 @@ public class Activity
             else
             if(sender.getDeviancy() > 66)
             {
-                if(sender.getConfidence() > 66)
-                    w.append(t, String.format("%s forcefully pulls %s atop %s, aggressive even in %s submission.", sender.OwnerName(), receiver.ownerName(), sender.himHer(), sender.hisHer()));
-                else
-                if(sender.getConfidence() > 33)
-                    w.append(t, String.format("%s tangles %s limbs around %s, bringing them both down to the floor together with %3$s atop %s.", sender.OwnerName(), sender.hisHer(), receiver.ownerName(), sender.himHer()));
-                else
-                    w.append(t, String.format("%s lays down on %s back, weakly trying to pull %s down with %s.  %s trembles with desire as %s looks up at %s.", sender.OwnerName(), sender.hisHer(), receiver.ownerName(), sender.himHer(), sender.HeShe(), sender.heShe(), receiver.ownerName()));
+                switch (sender.getConfidence() / 33) {
+                    case 0: w.append(t, String.format("%s lays down on %s back, weakly trying to pull %s down with %s.  %s trembles with desire as %s looks up at %s.", sender.OwnerName(), sender.hisHer(), receiver.ownerName(), sender.himHer(), sender.HeShe(), sender.heShe(), receiver.ownerName())); break;
+                    case 1: w.append(t, String.format("%s tangles %s limbs around %s, bringing them both down to the floor together with %3$s atop %s.", sender.OwnerName(), sender.hisHer(), receiver.ownerName(), sender.himHer())); break;
+                    default: w.append(t, String.format("%s forcefully pulls %s atop %s, aggressive even in %s submission.", sender.OwnerName(), receiver.ownerName(), sender.himHer(), sender.hisHer()));
+                }
             } else
             if(sender.getDeviancy() > 33)
             {
-                if(sender.getDignity() > 66)
-                    w.append(t, String.format("%s lays down under %s, trying to act as though %s's doing %s a favor, but %s's lustful panting betrays how much %s wants to be taken.", sender.OwnerName(), receiver.ownerName(), sender.heShe(), receiver.himHer(), sender.ownerName(), sender.heShe()));
-                else
-                if(sender.getDignity() > 33)
-                    w.append(t, String.format("%s eagerly pulls %s down atop %s, smiling in anticipation of what's to come.", sender.OwnerName(), receiver.ownerName(), sender.himHer()));
-                else
-                    w.append(t, String.format("%s begs %s to take %s, positioning %3$sself underneath %s.", sender.OwnerName(), receiver.ownerName(), sender.himHer(), receiver.himHer()));
+                switch (sender.getDignity() / 33) {
+                    case 0: w.append(t, String.format("%s begs %s to take %s, positioning %3$sself underneath %s.", sender.OwnerName(), receiver.ownerName(), sender.himHer(), receiver.himHer())); break;
+                    case 1: w.append(t, String.format("%s eagerly pulls %s down atop %s, smiling in anticipation of what's to come.", sender.OwnerName(), receiver.ownerName(), sender.himHer())); break;
+                    default: w.append(t, String.format("%s lays down under %s, trying to act as though %s's doing %s a favor, but %s's lustful panting betrays how much %s wants to be taken.", sender.OwnerName(), receiver.ownerName(), sender.heShe(), receiver.himHer(), sender.ownerName(), sender.heShe()));
+                }
             } else
-            if(sender.getObedience() > 66)
-                w.append(t, String.format("%s submissively presents %sself to %s, layin on %s back and squirming nervously as %s anticipates how %5$s'll be used.", sender.OwnerName(), sender.himHer(), receiver.ownerName(), sender.hisHer(), sender.heShe()));
-            else
-            if(sender.getObedience() > 33)
-                w.append(t, String.format("%s lays down for %s, but %s refuses to meet %s eyes, still uncertain how %s feels about sex with the Demon Lord.", sender.OwnerName(), receiver.ownerName(), sender.heShe(), receiver.hisHer(), sender.heShe()));
-            else
-                w.append(t, String.format("%s angrily lays down, glaring up at %s.", sender.OwnerName(), receiver.ownerName()));
+            switch (sender.getObedience() / 33) {
+                case 0: w.append(t, String.format("%s angrily lays down, glaring up at %s.", sender.OwnerName(), receiver.ownerName())); break;
+                case 1: w.append(t, String.format("%s lays down for %s, but %s refuses to meet %s eyes, still uncertain how %s feels about sex with the Demon Lord.", sender.OwnerName(), receiver.ownerName(), sender.heShe(), receiver.hisHer(), sender.heShe())); break;
+                default: w.append(t, String.format("%s submissively presents %sself to %s, layin on %s back and squirming nervously as %s anticipates how %5$s'll be used.", sender.OwnerName(), sender.himHer(), receiver.ownerName(), sender.hisHer(), sender.heShe()));
+            }
         } else
         if(this == Project.Escape)
         {
             if(sender != w.lordBody)
                 if(sender.getObedience() > 66)
                 {
-                    if(sender.getMorality() > 66)
-                        w.append(t, String.format("%s cries out in despair as %s turns and crawls away from %s, already consumed by self-loathing for %s failure to properly serve %s.", sender.OwnerName(), sender.heShe(), receiver.ownerName(), sender.hisHer(), sender.theDemonLord()));
-                    else
-                    if(sender.getMorality() > 33)
-                        w.append(t, String.format("%s abruptly starts struggling to escape %s, and it's only after %s's free that %3$s hangs %s head in shame for being so disobedient.", sender.OwnerName(), receiver.ownerName(), sender.heShe(), sender.hisHer()));
-                    else
-                        w.append(t, String.format("%s shoves %s and scrambles away, briefly forgetting %s devotion in the face of %3$s intense emotions.", sender.OwnerName(), receiver.ownerName(), sender.hisHer()));
+                    switch (sender.getMorality() / 33) {
+                        case 0: w.append(t, String.format("%s shoves %s and scrambles away, briefly forgetting %s devotion in the face of %3$s intense emotions.", sender.OwnerName(), receiver.ownerName(), sender.hisHer())); break;
+                        case 1: w.append(t, String.format("%s abruptly starts struggling to escape %s, and it's only after %s's free that %3$s hangs %s head in shame for being so disobedient.", sender.OwnerName(), receiver.ownerName(), sender.heShe(), sender.hisHer())); break;
+                        default: w.append(t, String.format("%s cries out in despair as %s turns and crawls away from %s, already consumed by self-loathing for %s failure to properly serve %s.", sender.OwnerName(), sender.heShe(), receiver.ownerName(), sender.hisHer(), sender.theDemonLord()));
+                    }
                 } else
                 if(sender.getObedience() > 33)
                 {
-                    if(sender.getInnocence() > 66)
-                        w.append(t, String.format("%s cries out in panic and shoves %s away.  Only a moment later does %s realize what %3$s's done, and %3$s cowers in fear of punishment.", sender.OwnerName(), receiver.ownerName(), sender.heShe()));
-                    else
-                    if(sender.getInnocence() > 33)
-                        w.append(t, String.format("Apologizing profusely, %s disentangles %sself from %s and takes a few steps backward.", sender.ownerName(), sender.himHer(), receiver.ownerName()));
-                    else
-                        w.append(t, String.format("%s clearly states that %s's done with this and moves to free %sself.  The quaver in %s voice is the only thing that betrays %4$s worries about the consequences of rejecting %s.", sender.OwnerName(), sender.heShe(), sender.himHer(), sender.hisHer(), sender.theDemonLord()));
+                    switch (sender.getInnocence() / 33) {
+                        case 0: w.append(t, String.format("%s clearly states that %s's done with this and moves to free %sself.  The quaver in %s voice is the only thing that betrays %4$s worries about the consequences of rejecting %s.", sender.OwnerName(), sender.heShe(), sender.himHer(), sender.hisHer(), sender.theDemonLord())); break;
+                        case 1: w.append(t, String.format("Apologizing profusely, %s disentangles %sself from %s and takes a few steps backward.", sender.ownerName(), sender.himHer(), receiver.ownerName())); break;
+                        default: w.append(t, String.format("%s cries out in panic and shoves %s away.  Only a moment later does %s realize what %3$s's done, and %3$s cowers in fear of punishment.", sender.OwnerName(), receiver.ownerName(), sender.heShe()));
+                    }
                 } else
-                if(sender.getConfidence() > 66)
-                    w.append(t, String.format("%s starts to viciously beat %s, remaining hostile even after %s frees %sself.", sender.OwnerName(), receiver.ownerName(), sender.heShe(), sender.himHer()));
-                else
-                if(sender.getConfidence() > 33)
-                    w.append(t, String.format("%s, overwhelmed by %s hatred for the Demon Lord, starts struggling to get away before %s knows what %3$s's doing.  However, %3$s stands tall afterward, regaining %2$s poise as if daring %s to punish %s.", sender.OwnerName(), sender.hisHer(), sender.heShe(), receiver.ownerName(), sender.himHer()));
-                else
-                    w.append(t, String.format("%s flails in panic, then makes an effort to run away.", sender.OwnerName()));
+                switch (sender.getConfidence() / 33) {
+                    case 0: w.append(t, String.format("%s flails in panic, then makes an effort to run away.", sender.OwnerName())); break;
+                    case 1: w.append(t, String.format("%s, overwhelmed by %s hatred for the Demon Lord, starts struggling to get away before %s knows what %3$s's doing.  However, %3$s stands tall afterward, regaining %2$s poise as if daring %s to punish %s.", sender.OwnerName(), sender.hisHer(), sender.heShe(), receiver.ownerName(), sender.himHer())); break;
+                    default: w.append(t, String.format("%s starts to viciously beat %s, remaining hostile even after %s frees %sself.", sender.OwnerName(), receiver.ownerName(), sender.heShe(), sender.himHer()));
+                }
         } else
         if(this == Project.StopActing)
         {
             if(sender != w.lordBody)
                 if(sender.getObedience() > 66)
                 {
-                    if(sender.getMorality() > 66)
-                        w.append(t, String.format("%s confesses that %s's grown too tired to keep servicing %s, then eagerly proposes that %3$s punish %s for %s weakness.", sender.OwnerName(), sender.heShe(), receiver.ownerName(), sender.himHer(), sender.hisHer()));
-                    else
-                    if(sender.getMorality() > 33)
-                        w.append(t, String.format("%s keeps trying to service %s until %s own body starts to grow too exhausted to move.  Eventually, %s realizes that %4$s's too tired to effectively please %2$s anymore.", sender.OwnerName(), receiver.ownerName(), sender.hisHer(), sender.heShe()));
-                    else
-                        w.append(t, String.format("%s is sincere about wanting to service %s, but %s begins getting lazier and lazier with %s movements until %s's not actually making %2$s feel good at all.", sender.OwnerName(), receiver.ownerName(), sender.heShe(), sender.hisHer(), sender.heShe()));
+                    switch (sender.getMorality() / 33) {
+                        case 0: w.append(t, String.format("%s is sincere about wanting to service %s, but %s begins getting lazier and lazier with %s movements until %s's not actually making %2$s feel good at all.", sender.OwnerName(), receiver.ownerName(), sender.heShe(), sender.hisHer(), sender.heShe())); break;
+                        case 1: w.append(t, String.format("%s keeps trying to service %s until %s own body starts to grow too exhausted to move.  Eventually, %s realizes that %4$s's too tired to effectively please %2$s anymore.", sender.OwnerName(), receiver.ownerName(), sender.hisHer(), sender.heShe())); break;
+                        default: w.append(t, String.format("%s confesses that %s's grown too tired to keep servicing %s, then eagerly proposes that %3$s punish %s for %s weakness.", sender.OwnerName(), sender.heShe(), receiver.ownerName(), sender.himHer(), sender.hisHer()));
+                    }
                 } else
                 if(sender.getObedience() > 33)
                 {
-                    if(sender.getDeviancy() > 66)
-                        w.append(t, String.format("%s heaves a satisfied sigh, %s tremendous lust finally satisfied.  %s doesn't seem interested in continuing for now.", sender.OwnerName(), sender.hisHer(), sender.HeShe()));
-                    else
-                    if(sender.getDeviancy() > 33)
-                        w.append(t, String.format("%s gradually starts to grow less and less interested in pleasuring %s, and finally %s stops completely.", sender.OwnerName(), receiver.ownerName(), sender.heShe()));
-                    else
-                        w.append(t, String.format("%s starts to get distracted and make excuses for why %s should be allowed to leave, and %2$s stops trying to pleasure %s.", sender.OwnerName(), sender.heShe(), receiver.ownerName()));
+                    switch (sender.getDeviancy() / 33) {
+                        case 0: w.append(t, String.format("%s starts to get distracted and make excuses for why %s should be allowed to leave, and %2$s stops trying to pleasure %s.", sender.OwnerName(), sender.heShe(), receiver.ownerName())); break;
+                        case 1: w.append(t, String.format("%s gradually starts to grow less and less interested in pleasuring %s, and finally %s stops completely.", sender.OwnerName(), receiver.ownerName(), sender.heShe())); break;
+                        default: w.append(t, String.format("%s heaves a satisfied sigh, %s tremendous lust finally satisfied.  %s doesn't seem interested in continuing for now.", sender.OwnerName(), sender.hisHer(), sender.HeShe()));
+                    }
                 } else
-                if(sender.getInnocence() > 66)
-                    w.append(t, String.format("%s abruptly seems to remember that %s is the enemy, and %s refuses to continue this any longer.", sender.OwnerName(), receiver.ownerName(), sender.heShe()));
-                else
-                if(sender.getInnocence() > 33)
-                    w.append(t, String.format("%s gets angry and refuses to cooperate further.  %s turns %s head away, refusing to even look at %s.", sender.OwnerName(), sender.HeShe(), sender.hisHer(), receiver.ownerName()));
-                else
-                    w.append(t, String.format("%s, deciding that %s's cooperated long enough, halts %s movements and glares at %s as if daring %s to punish %s.", sender.OwnerName(), sender.heShe(), sender.hisHer(), receiver.ownerName(), receiver.himHer(), sender.himHer()));
+                switch (sender.getInnocence() / 33) {
+                    case 0: w.append(t, String.format("%s, deciding that %s's cooperated long enough, halts %s movements and glares at %s as if daring %s to punish %s.", sender.OwnerName(), sender.heShe(), sender.hisHer(), receiver.ownerName(), receiver.himHer(), sender.himHer())); break;
+                    case 1: w.append(t, String.format("%s gets angry and refuses to cooperate further.  %s turns %s head away, refusing to even look at %s.", sender.OwnerName(), sender.HeShe(), sender.hisHer(), receiver.ownerName())); break;
+                    default: w.append(t, String.format("%s abruptly seems to remember that %s is the enemy, and %s refuses to continue this any longer.", sender.OwnerName(), receiver.ownerName(), sender.heShe()));
+                }
         } else
         if(this == Project.TieUp)
         {
@@ -1830,23 +1700,19 @@ public class Activity
             if(sender != w.lordBody)
                 if(sender.getObedience() > 66)
                 {
-                    if(sender.getInnocence() > 66)
-                        w.append(t, String.format("%s's eyes glaze over with pure bliss as %s enjoys entrusting %s body to %s.", sender.OwnerName(), sender.heShe(), sender.hisHer(), receiver.ownerName()));
-                    else
-                    if(sender.getInnocence() > 33)
-                        w.append(t, String.format("%s doesn't resist in the slightest, happy to let %s enjoy %s body however %s wishes.", sender.OwnerName(), receiver.ownerName(), sender.hisHer(), receiver.heShe()));
-                    else
-                        w.append(t, String.format("%s happily cooperates, holding %s limbs as %s's directed in order to help speed the process.", sender.OwnerName(), sender.hisHer(), sender.heShe()));
+                    switch (sender.getInnocence() / 33) {
+                        case 0: w.append(t, String.format("%s happily cooperates, holding %s limbs as %s's directed in order to help speed the process.", sender.OwnerName(), sender.hisHer(), sender.heShe())); break;
+                        case 1: w.append(t, String.format("%s doesn't resist in the slightest, happy to let %s enjoy %s body however %s wishes.", sender.OwnerName(), receiver.ownerName(), sender.hisHer(), receiver.heShe())); break;
+                        default: w.append(t, String.format("%s's eyes glaze over with pure bliss as %s enjoys entrusting %s body to %s.", sender.OwnerName(), sender.heShe(), sender.hisHer(), receiver.ownerName()));
+                    }
                 } else
                 if(sender.getObedience() > 33)
                 {
-                    if(sender.getConfidence() > 66)
-                        w.append(t, String.format("%s holds %s head high as %s's tied up, refusing to let %sself show fear.", sender.OwnerName(), sender.hisHer(), sender.heShe(), sender.himHer()));
-                    else
-                    if(sender.getConfidence() > 33)
-                        w.append(t, String.format("%s flinches in trepidation, imagining what %s will be doing to %s next.", sender.OwnerName(), receiver.ownerName(), sender.himHer()));
-                    else
-                        w.append(t, String.format("%s starts to panic, but %s's too frightened to actively resist.", sender.OwnerName(), sender.heShe()));
+                    switch (sender.getConfidence() / 33) {
+                        case 0: w.append(t, String.format("%s starts to panic, but %s's too frightened to actively resist.", sender.OwnerName(), sender.heShe())); break;
+                        case 1: w.append(t, String.format("%s flinches in trepidation, imagining what %s will be doing to %s next.", sender.OwnerName(), receiver.ownerName(), sender.himHer())); break;
+                        default: w.append(t, String.format("%s holds %s head high as %s's tied up, refusing to let %sself show fear.", sender.OwnerName(), sender.hisHer(), sender.heShe(), sender.himHer()));
+                    }
                 } else
                 if(sender.getDeviancy() > 66)
                     w.append(t, String.format("%s tries to resist, but %s lustful body betrays %s, and by the time %s's stopped daydreaming about what kind of sexual punishment awaits %s, %s's already been tied up.", sender.OwnerName(), sender.hisHer(), sender.himHer(), sender.heShe(), sender.himHer(), sender.heShe()));
@@ -1874,39 +1740,31 @@ public class Activity
                 w.append(t, String.format("%s ", sender.capitalizedOwnerName()));
                 if(sender.getDeviancy() > 66)
                 {
-                    if(sender.getInnocence() > 66)
-                        w.append(t, String.format("loses %sself in the act of running %s hand up and down %s's cock, eyes glazed over and drooling with desire.", sender.himHer(), sender.hisHer(), receiver.ownerName()));
-                    else
-                    if(sender.getInnocence() > 33)
-                        w.append(t, String.format("reaches eagerly for %s's cock, pumping it up and down with an aggressive firmness that comes just short of being painful.", receiver.ownerName()));
-                    else
-                        w.append(t, String.format("abruptly wraps %s fingers around %s's cock and starts stroking it gently, then fondling the tip, then gently tugging on it, using every technique at %1$s disposal.", sender.hisHer(), receiver.ownerName()));
+                    switch (sender.getInnocence() / 33) {
+                        case 0: w.append(t, String.format("abruptly wraps %s fingers around %s's cock and starts stroking it gently, then fondling the tip, then gently tugging on it, using every technique at %1$s disposal.", sender.hisHer(), receiver.ownerName())); break;
+                        case 1: w.append(t, String.format("reaches eagerly for %s's cock, pumping it up and down with an aggressive firmness that comes just short of being painful.", receiver.ownerName())); break;
+                        default: w.append(t, String.format("loses %sself in the act of running %s hand up and down %s's cock, eyes glazed over and drooling with desire.", sender.himHer(), sender.hisHer(), receiver.ownerName()));
+                    }
                 } else
                 if(sender.getDeviancy() > 33)
                 {
-                    if(sender.getInnocence() > 66)
-                        w.append(t, String.format("tugs and jerks %s's cock, then gradually gets into a rhythm of stroking it as %s grows more confident in what %2$s's doing.", receiver.ownerName(), receiver.heShe()));
-                    else
-                    if(sender.getInnocence() > 33)
-                        w.append(t, String.format("brushes %s fingers against %s's cock, trailing them up and down, then growing more firm, stroking it in earnest.", sender.hisHer(), receiver.ownerName()));
-                    else
-                        w.append(t, String.format("carefully starts to stroke %s's cock, staring into %s eyes to gauge %2$s reaction.", receiver.ownerName(), receiver.hisHer()));
+                    switch (sender.getInnocence() / 33) {
+                        case 0: w.append(t, String.format("carefully starts to stroke %s's cock, staring into %s eyes to gauge %2$s reaction.", receiver.ownerName(), receiver.hisHer())); break;
+                        case 1: w.append(t, String.format("brushes %s fingers against %s's cock, trailing them up and down, then growing more firm, stroking it in earnest.", sender.hisHer(), receiver.ownerName())); break;
+                        default: w.append(t, String.format("tugs and jerks %s's cock, then gradually gets into a rhythm of stroking it as %s grows more confident in what %2$s's doing.", receiver.ownerName(), receiver.heShe()));
+                    }
                 } else
                 {
-                    if(sender.getInnocence() > 66)
-                        w.append(t, String.format("hesitantly touches %s's cock, then begins to clumsily stroke it, averting %s eyes as %s does so.  ", receiver.ownerName(), sender.hisHer(), sender.heShe()));
-                    else
-                    if(sender.getInnocence() > 33)
-                        w.append(t, String.format("begins to stroke %s's cock with stiff, mechanical movements.  ", receiver.ownerName()));
-                    else
-                        w.append(t, String.format("brings %s hand to %s's cock and begins to stroke it with precise, methodical movements.  ", sender.hisHer(), receiver.ownerName()));
-                    if(sender.getObedience() > 66)
-                        w.append(t, String.format("It's clear that %s's unfamiliar with this sort of thing, but %1$s's doing %s best for %s.", sender.heShe(), sender.hisHer(), receiver.ownerName()));
-                    else
-                    if(sender.getObedience() > 33)
-                        w.append(t, String.format("%s heart clearly isn't in it.", sender.HisHer()));
-                    else
-                        w.append(t, String.format("%s looks sickened by what %s's doing.", sender.HeShe(), sender.heShe()));
+                    switch (sender.getInnocence() / 33) {
+                        case 0: w.append(t, String.format("brings %s hand to %s's cock and begins to stroke it with precise, methodical movements.  ", sender.hisHer(), receiver.ownerName())); break;
+                        case 1: w.append(t, String.format("begins to stroke %s's cock with stiff, mechanical movements.  ", receiver.ownerName())); break;
+                        default: w.append(t, String.format("hesitantly touches %s's cock, then begins to clumsily stroke it, averting %s eyes as %s does so.  ", receiver.ownerName(), sender.hisHer(), sender.heShe()));
+                    }
+                    switch (sender.getObedience() / 33) {
+                        case 0: w.append(t, String.format("%s looks sickened by what %s's doing.", sender.HeShe(), sender.heShe())); break;
+                        case 1: w.append(t, String.format("%s heart clearly isn't in it.", sender.HisHer())); break;
+                        default: w.append(t, String.format("It's clear that %s's unfamiliar with this sort of thing, but %1$s's doing %s best for %s.", sender.heShe(), sender.hisHer(), receiver.ownerName()));
+                    }
                 }
             }
         } else
@@ -1921,63 +1779,51 @@ public class Activity
                 if(sender.getInnocence() > 66)
                 {
                     w.append(t, String.format(" gasps at the sudden intensity of the stimulation to %s most sensitive part, and ", sender.hisHer()));
-                    if(sender.getDeviancy() > 66)
-                        w.append(t, String.format("%s eyes glaze over as %s loses the ability to think of anything other than feeling even better.  ", sender.hisHer(), sender.heShe()));
-                    else
-                    if(sender.getDeviancy() > 33)
-                        w.append(t, String.format("%s hips jerk wildly, seemingly caught between jerking away and pushing further into %s's hand.  ", sender.hisHer(), receiver.ownerName()));
-                    else
-                        w.append(t, String.format("%s reflexively tries to jerk %s hips away.  ", sender.heShe(), sender.hisHer()));
+                    switch (sender.getDeviancy() / 33) {
+                        case 0: w.append(t, String.format("%s reflexively tries to jerk %s hips away.  ", sender.heShe(), sender.hisHer())); break;
+                        case 1: w.append(t, String.format("%s hips jerk wildly, seemingly caught between jerking away and pushing further into %s's hand.  ", sender.hisHer(), receiver.ownerName())); break;
+                        default: w.append(t, String.format("%s eyes glaze over as %s loses the ability to think of anything other than feeling even better.  ", sender.hisHer(), sender.heShe()));
+                    }
                 } else
                 if(sender.getInnocence() > 33)
                 {
                     w.append(t, String.format(" feels jolts of pleasure shooting through %s shaft", sender.hisHer()));
-                    if(sender.getDeviancy() > 66)
-                        w.append(t, String.format(", and %s moans helplessly, %s well-trained body eagerly submitting itself to %s's touch.  ", sender.heShe(), sender.hisHer(), receiver.ownerName()));
-                    else
-                    if(sender.getDeviancy() > 33)
-                        w.append(t, String.format(", and it's a struggle for %s to hold onto %s reason.  ", sender.himHer(), sender.hisHer()));
-                    else
-                        w.append(t, String.format(", even as %s tries to ignore them.  ", sender.heShe()));
+                    switch (sender.getDeviancy() / 33) {
+                        case 0: w.append(t, String.format(", even as %s tries to ignore them.  ", sender.heShe())); break;
+                        case 1: w.append(t, String.format(", and it's a struggle for %s to hold onto %s reason.  ", sender.himHer(), sender.hisHer())); break;
+                        default: w.append(t, String.format(", and %s moans helplessly, %s well-trained body eagerly submitting itself to %s's touch.  ", sender.heShe(), sender.hisHer(), receiver.ownerName()));
+                    }
                 } else
                 {
                     w.append(t, String.format(" knew this was coming, but %s still ", sender.heShe()));
-                    if(sender.getDeviancy() > 66)
-                        w.append(t, String.format("squirms and cries out, unable to maintain any self-control in the face of the pleasure %s's come to crave.  ", sender.heShe()));
-                    else
-                    if(sender.getDeviancy() > 33)
-                        w.append(t, String.format("gasps softly at the waves of pleasure that begin to wash over %s lower body.  ", sender.hisHer()));
-                    else
-                        w.append(t, "flinches and grimaces, uncomfortable with the intensity of the sensations.  ");
+                    switch (sender.getDeviancy() / 33) {
+                        case 0: w.append(t, "flinches and grimaces, uncomfortable with the intensity of the sensations.  "); break;
+                        case 1: w.append(t, String.format("gasps softly at the waves of pleasure that begin to wash over %s lower body.  ", sender.hisHer())); break;
+                        default: w.append(t, String.format("squirms and cries out, unable to maintain any self-control in the face of the pleasure %s's come to crave.  ", sender.heShe()));
+                    }
                 }
                 if(receiver == w.lordBody)
                     if(sender.getDeviancy() > 66)
                     {
-                        if(sender.getObedience() > 66)
-                            w.append(t, String.format("%s body has grown quite sensitive, but it's even more sensitive than usual when %s knows %2$s's being touched by %s.", sender.HisHer(), sender.heShe(), receiver.ownerName()));
-                        else
-                        if(sender.getObedience() > 33)
-                            w.append(t, String.format("Soon, %s's completely consumed in %s efforts to hump %s's hand.", sender.heShe(), sender.hisHer(), receiver.ownerName()));
-                        else
-                            w.append(t, String.format("%s tries to resist, but %s body has grown so sensitive that the lightest touch to %2$s weak spots is enough to subdue %s.", sender.HeShe(), sender.hisHer(), sender.himHer()));
+                        switch (sender.getObedience() / 33) {
+                            case 0: w.append(t, String.format("%s tries to resist, but %s body has grown so sensitive that the lightest touch to %2$s weak spots is enough to subdue %s.", sender.HeShe(), sender.hisHer(), sender.himHer())); break;
+                            case 1: w.append(t, String.format("Soon, %s's completely consumed in %s efforts to hump %s's hand.", sender.heShe(), sender.hisHer(), receiver.ownerName())); break;
+                            default: w.append(t, String.format("%s body has grown quite sensitive, but it's even more sensitive than usual when %s knows %2$s's being touched by %s.", sender.HisHer(), sender.heShe(), receiver.ownerName()));
+                        }
                     } else
                     if(sender.getDeviancy() > 33)
                     {
-                        if(sender.getObedience() > 66)
-                            w.append(t, String.format("Even more than the physical stimulation itself, %s is ecstatic that %s is pleasuring %s directly.", sender.ownerName(), receiver.ownerName(), sender.himHer()));
-                        else
-                        if(sender.getObedience() > 33)
-                            w.append(t, String.format("%s's content to let %s pleasure %s.", sender.HeShe(), receiver.ownerName(), sender.himHer()));
-                        else
-                            w.append(t, String.format("%s has a hard time remembering that %s's supposed to hate the Demon Lord.", sender.HeShe(), sender.heShe()));
+                        switch (sender.getObedience() / 33) {
+                            case 0: w.append(t, String.format("%s has a hard time remembering that %s's supposed to hate the Demon Lord.", sender.HeShe(), sender.heShe())); break;
+                            case 1: w.append(t, String.format("%s's content to let %s pleasure %s.", sender.HeShe(), receiver.ownerName(), sender.himHer())); break;
+                            default: w.append(t, String.format("Even more than the physical stimulation itself, %s is ecstatic that %s is pleasuring %s directly.", sender.ownerName(), receiver.ownerName(), sender.himHer()));
+                        }
                     } else
-                    if(sender.getObedience() > 66)
-                        w.append(t, String.format("%s endures this for %s's sake, hoping that %2$s will enjoy playing with %s body.", sender.HeShe(), receiver.ownerName(), sender.hisHer()));
-                    else
-                    if(sender.getObedience() > 33)
-                        w.append(t, String.format("%s doesn't make eye contact with %s, glancing off to the side.", sender.HeShe(), receiver.ownerName()));
-                    else
-                        w.append(t, String.format("%s glares at %s, not appreciating it in the slightest.", sender.HeShe(), receiver.ownerName()));
+                    switch (sender.getObedience() / 33) {
+                        case 0: w.append(t, String.format("%s glares at %s, not appreciating it in the slightest.", sender.HeShe(), receiver.ownerName())); break;
+                        case 1: w.append(t, String.format("%s doesn't make eye contact with %s, glancing off to the side.", sender.HeShe(), receiver.ownerName())); break;
+                        default: w.append(t, String.format("%s endures this for %s's sake, hoping that %2$s will enjoy playing with %s body.", sender.HeShe(), receiver.ownerName(), sender.hisHer()));
+                    }
             }
         } else
         if(this == Project.Lubricate)
@@ -1990,31 +1836,25 @@ public class Activity
             if(sender != w.lordBody)
                 if(sender.getDeviancy() > 66)
                 {
-                    if(sender.getObedience() > 66)
-                        w.append(t, String.format("%s moans and spreads %s legs as wide as %s can, eager for more than just a finger.", sender.OwnerName(), sender.hisHer(), sender.heShe()));
-                    else
-                    if(sender.getObedience() > 33)
-                        w.append(t, String.format("%s looks nervous, but also eager.  %s grins down at %sself, imagining what will be done to %3$s next.", sender.OwnerName(), sender.HeShe(), sender.himHer()));
-                    else
-                        w.append(t, String.format("%s tries to keep acting tough, but %s breaks down into a stream of pitiful moans and halfhearted protests as the light stimulation is enough to break %s concentration.", sender.OwnerName(), sender.heShe(), sender.hisHer()));
+                    switch (sender.getObedience() / 33) {
+                        case 0: w.append(t, String.format("%s tries to keep acting tough, but %s breaks down into a stream of pitiful moans and halfhearted protests as the light stimulation is enough to break %s concentration.", sender.OwnerName(), sender.heShe(), sender.hisHer())); break;
+                        case 1: w.append(t, String.format("%s looks nervous, but also eager.  %s grins down at %sself, imagining what will be done to %3$s next.", sender.OwnerName(), sender.HeShe(), sender.himHer())); break;
+                        default: w.append(t, String.format("%s moans and spreads %s legs as wide as %s can, eager for more than just a finger.", sender.OwnerName(), sender.hisHer(), sender.heShe()));
+                    }
                 } else
                 if(sender.getDeviancy() > 33)
                 {
-                    if(sender.getDignity() > 66)
-                        w.append(t, String.format("%s inhales sharply, but doesn't show any other sign that %s's feeling anything from this.", sender.OwnerName(), sender.heShe()));
-                    else
-                    if(sender.getDignity() > 33)
-                        w.append(t, String.format("%s squirms and blushes, clearly a bit ashamed at being excited by the stimulation back there.", sender.OwnerName()));
-                    else
-                        w.append(t, String.format("%s groans and reflexively tries to buck %s hips down onto the finger.", sender.OwnerName(), sender.hisHer()));
+                    switch (sender.getDignity() / 33) {
+                        case 0: w.append(t, String.format("%s groans and reflexively tries to buck %s hips down onto the finger.", sender.OwnerName(), sender.hisHer())); break;
+                        case 1: w.append(t, String.format("%s squirms and blushes, clearly a bit ashamed at being excited by the stimulation back there.", sender.OwnerName())); break;
+                        default: w.append(t, String.format("%s inhales sharply, but doesn't show any other sign that %s's feeling anything from this.", sender.OwnerName(), sender.heShe()));
+                    }
                 } else
-                if(sender.getInnocence() > 66)
-                    w.append(t, String.format("%s squirms in discomfort at the strange feeling in a place %s doesn't even mentally associate with sex.", sender.OwnerName(), sender.heShe()));
-                else
-                if(sender.getInnocence() > 33)
-                    w.append(t, String.format("%s's eyes go wide and %s tries to look down at what's happening down there.", sender.OwnerName(), sender.heShe()));
-                else
-                    w.append(t, String.format("%s shudders at the unpleasant sensation, then tries to relax and accept it.", sender.OwnerName()));
+                switch (sender.getInnocence() / 33) {
+                    case 0: w.append(t, String.format("%s shudders at the unpleasant sensation, then tries to relax and accept it.", sender.OwnerName())); break;
+                    case 1: w.append(t, String.format("%s's eyes go wide and %s tries to look down at what's happening down there.", sender.OwnerName(), sender.heShe())); break;
+                    default: w.append(t, String.format("%s squirms in discomfort at the strange feeling in a place %s doesn't even mentally associate with sex.", sender.OwnerName(), sender.heShe()));
+                }
         } else
         if(this == Project.VaginalPenetrate)
         {
@@ -2025,62 +1865,50 @@ public class Activity
                 else
                 if(sender.getDeviancy() > 66)
                 {
-                    if(sender.getConfidence() > 66)
-                        w.append(t, String.format("%s eagerly pins %s down and shoves %s shaft into %2$s's pussy, immediately setting a rapid pace of thrusting in and out.  It's a struggle to keep moving steadily with the flashes of ecstasy shooting through %s, but %s is determined to keep going.", sender.OwnerName(), receiver.ownerName(), sender.hisHer(), sender.himHer(), sender.ownerName()));
-                    else
-                    if(sender.getConfidence() > 33)
-                        w.append(t, String.format("%s starts to slowly push %s cock into %s, but the surge of pleasure from having just the tip inside overwhelms %2$s reason.  %s jerks %2$s hips forward, burying %sself inside %s's pussy, then pulls halfway out, then pushes back in, hips jerking wildly as intense pleasure surges through %s with every movement.", sender.OwnerName(), sender.hisHer(), receiver.ownerName(), sender.HeShe(), sender.himHer(), receiver.ownerName(), sender.himHer()));
-                    else
-                        w.append(t, String.format("%s's timid nature seems to vanish entirely, and %s starts to ram %s hips forward with wild abandon, hammering in and out of %s's pussy.", sender.OwnerName(), sender.heShe(), sender.hisHer(), receiver.ownerName()));
+                    switch (sender.getConfidence() / 33) {
+                        case 0: w.append(t, String.format("%s's timid nature seems to vanish entirely, and %s starts to ram %s hips forward with wild abandon, hammering in and out of %s's pussy.", sender.OwnerName(), sender.heShe(), sender.hisHer(), receiver.ownerName())); break;
+                        case 1: w.append(t, String.format("%s starts to slowly push %s cock into %s, but the surge of pleasure from having just the tip inside overwhelms %2$s reason.  %s jerks %2$s hips forward, burying %sself inside %s's pussy, then pulls halfway out, then pushes back in, hips jerking wildly as intense pleasure surges through %s with every movement.", sender.OwnerName(), sender.hisHer(), receiver.ownerName(), sender.HeShe(), sender.himHer(), receiver.ownerName(), sender.himHer())); break;
+                        default: w.append(t, String.format("%s eagerly pins %s down and shoves %s shaft into %2$s's pussy, immediately setting a rapid pace of thrusting in and out.  It's a struggle to keep moving steadily with the flashes of ecstasy shooting through %s, but %s is determined to keep going.", sender.OwnerName(), receiver.ownerName(), sender.hisHer(), sender.himHer(), sender.ownerName()));
+                    }
                 } else
                 if(sender.getDeviancy() > 33)
                 {
-                    if(sender.getInnocence() > 66)
-                        w.append(t, String.format("%s pushes %s cock into %s's pussy, and the moment %s feels %s folds squeezing down on %s, %s loses the ability to think of anything but the pleasure.  Moaning softly, %7$s starts thrusting in and out, acting on pure instinct.", sender.OwnerName(), sender.hisHer(), receiver.ownerName(), sender.heShe(), receiver.hisHer(), sender.himHer(), sender.heShe()));
-                    else
-                    if(sender.getInnocence() > 33)
-                        w.append(t, String.format("%s starts to fuck %s's pussy, but the pleasure of %s folds squeezing down on %s cock gives %s pause.  %s gasps, taking a moment to catch %s breath, then continues more slowly, enjoying the warm wetness around %7$s shaft.", sender.OwnerName(), receiver.ownerName(), receiver.hisHer(), sender.himHer(), sender.ownerName(), sender.HeShe(), sender.hisHer()));
-                    else
-                        w.append(t, String.format("%s gradually pushes %s cock into %s's pussy, inch-by-inch, then withdraws it just as carefully.  %s moves slowly, feeling out which spots feel better for %s and which seem to get more of a reaction from %s, and only then starts to move more quickly, getting into a rhythm.", sender.OwnerName(), sender.hisHer(), receiver.ownerName(), sender.HeShe(), sender.himHer(), receiver.ownerName()));
+                    switch (sender.getInnocence() / 33) {
+                        case 0: w.append(t, String.format("%s gradually pushes %s cock into %s's pussy, inch-by-inch, then withdraws it just as carefully.  %s moves slowly, feeling out which spots feel better for %s and which seem to get more of a reaction from %s, and only then starts to move more quickly, getting into a rhythm.", sender.OwnerName(), sender.hisHer(), receiver.ownerName(), sender.HeShe(), sender.himHer(), receiver.ownerName())); break;
+                        case 1: w.append(t, String.format("%s starts to fuck %s's pussy, but the pleasure of %s folds squeezing down on %s cock gives %s pause.  %s gasps, taking a moment to catch %s breath, then continues more slowly, enjoying the warm wetness around %7$s shaft.", sender.OwnerName(), receiver.ownerName(), receiver.hisHer(), sender.himHer(), sender.ownerName(), sender.HeShe(), sender.hisHer())); break;
+                        default: w.append(t, String.format("%s pushes %s cock into %s's pussy, and the moment %s feels %s folds squeezing down on %s, %s loses the ability to think of anything but the pleasure.  Moaning softly, %7$s starts thrusting in and out, acting on pure instinct.", sender.OwnerName(), sender.hisHer(), receiver.ownerName(), sender.heShe(), receiver.hisHer(), sender.himHer(), sender.heShe()));
+                    }
                 } else
-                if(sender.getObedience() > 66)
-                    w.append(t, String.format("%s eagerly thrusts %s cock inside %s's pussy, ecstatic to be joined with %s.  %s moves unselfishly, trying to hit all of %s's sensitive parts without any regard for %2$s own pleasure.", sender.OwnerName(), sender.hisHer(), receiver.ownerName(), receiver.himHer(), sender.HeShe(), receiver.ownerName()));
-                else
-                if(sender.getObedience() > 33)
-                    w.append(t, String.format("%s presses the tip of %s cock against %s's pussy, hesitates for a moment, and then finally pushes it inside.  %s gasps and shudders at the pleasure, far beyond what %s was prepared for, and then cautiously starts to move %2$s hips forward and back.", sender.OwnerName(), sender.hisHer(), receiver.ownerName(), sender.HeShe(), sender.heShe()));
-                else
-                    w.append(t, String.format("%s's angry demeanor fades for just a moment as %s thrusts into %s and feels the intense pleasure of %s folds squeezing %s.  But then %2$s recovers and starts to move violently in and out, as if stabbing %s with a weapon.", sender.OwnerName(), sender.heShe(), receiver.ownerName(), receiver.hisHer(), sender.himHer(), receiver.ownerName()));
+                switch (sender.getObedience() / 33) {
+                    case 0: w.append(t, String.format("%s's angry demeanor fades for just a moment as %s thrusts into %s and feels the intense pleasure of %s folds squeezing %s.  But then %2$s recovers and starts to move violently in and out, as if stabbing %s with a weapon.", sender.OwnerName(), sender.heShe(), receiver.ownerName(), receiver.hisHer(), sender.himHer(), receiver.ownerName())); break;
+                    case 1: w.append(t, String.format("%s presses the tip of %s cock against %s's pussy, hesitates for a moment, and then finally pushes it inside.  %s gasps and shudders at the pleasure, far beyond what %s was prepared for, and then cautiously starts to move %2$s hips forward and back.", sender.OwnerName(), sender.hisHer(), receiver.ownerName(), sender.HeShe(), sender.heShe())); break;
+                    default: w.append(t, String.format("%s eagerly thrusts %s cock inside %s's pussy, ecstatic to be joined with %s.  %s moves unselfishly, trying to hit all of %s's sensitive parts without any regard for %2$s own pleasure.", sender.OwnerName(), sender.hisHer(), receiver.ownerName(), receiver.himHer(), sender.HeShe(), receiver.ownerName()));
+                }
             } else
             if(sender == w.lordBody)
                 w.append(t, String.format("%s's cock pushes all the way into %s's depths.", sender.OwnerName(), receiver.ownerName()));
             else
             if(sender.getDeviancy() > 66)
             {
-                if(sender.getInnocence() > 66)
-                    w.append(t, String.format("%s's whole body goes slack except for %s hips desperately trying to thrust deeper into %s.  %s eyes roll and %2$s tongue hangs out.", sender.OwnerName(), sender.hisHer(), receiver.himHer(), sender.HisHer()));
-                else
-                if(sender.getInnocence() > 33)
-                    w.append(t, String.format("The feeling of %s sliding down to the base of %s shaft is enough to make %s cry out and lose %2$s sense of reason.  %s desperately clings to %1$s, hips jerking wildly up and down as %s tries to thrust even deeper into %s.", receiver.ownerName(), sender.hisHer(), sender.ownerName(), sender.HeShe(), sender.heShe(), receiver.himHer()));
-                else
-                    w.append(t, String.format("At first, %s tries to reciprocate with %s own thrusts.  But it soon becomes clear that %s's completely at %s's mercy, and all %s can do is moan and jerk %2$s hips as %s slides up and down %2$s shaft.", sender.ownerName(), sender.hisHer(), sender.heShe(), receiver.ownerName(), sender.heShe(), receiver.ownerName()));
+                switch (sender.getInnocence() / 33) {
+                    case 0: w.append(t, String.format("At first, %s tries to reciprocate with %s own thrusts.  But it soon becomes clear that %s's completely at %s's mercy, and all %s can do is moan and jerk %2$s hips as %s slides up and down %2$s shaft.", sender.ownerName(), sender.hisHer(), sender.heShe(), receiver.ownerName(), sender.heShe(), receiver.ownerName())); break;
+                    case 1: w.append(t, String.format("The feeling of %s sliding down to the base of %s shaft is enough to make %s cry out and lose %2$s sense of reason.  %s desperately clings to %1$s, hips jerking wildly up and down as %s tries to thrust even deeper into %s.", receiver.ownerName(), sender.hisHer(), sender.ownerName(), sender.HeShe(), sender.heShe(), receiver.himHer())); break;
+                    default: w.append(t, String.format("%s's whole body goes slack except for %s hips desperately trying to thrust deeper into %s.  %s eyes roll and %2$s tongue hangs out.", sender.OwnerName(), sender.hisHer(), receiver.himHer(), sender.HisHer()));
+                }
             } else
             if(sender.getDeviancy() > 33)
             {
-                if(sender.getDignity() > 66)
-                    w.append(t, String.format("%s tries to hide just how good it feels, but when %s clenches around %s, %s gasps and reflexively bucks %s hips.  After that, %s has a harder and harder time suppressing %s moans.", sender.OwnerName(), receiver.ownerName(), sender.himHer(), sender.heShe(), sender.hisHer(), sender.heShe(), sender.hisHer()));
-                else
-                if(sender.getDignity() > 33)
-                    w.append(t, String.format("%s lays back and loses %sself in the feeling of %s sliding up and down %s length, overwhelmed by the intensity of the sensations.", sender.OwnerName(), sender.himHer(), receiver.ownerName(), sender.hisHer()));
-                else
-                    w.append(t, String.format("%s gasps with pleasure, reflexively embracing %s and thrusting %s own hips in time with %2$s's movements.", sender.OwnerName(), receiver.ownerName(), sender.hisHer()));
+                switch (sender.getDignity() / 33) {
+                    case 0: w.append(t, String.format("%s gasps with pleasure, reflexively embracing %s and thrusting %s own hips in time with %2$s's movements.", sender.OwnerName(), receiver.ownerName(), sender.hisHer())); break;
+                    case 1: w.append(t, String.format("%s lays back and loses %sself in the feeling of %s sliding up and down %s length, overwhelmed by the intensity of the sensations.", sender.OwnerName(), sender.himHer(), receiver.ownerName(), sender.hisHer())); break;
+                    default: w.append(t, String.format("%s tries to hide just how good it feels, but when %s clenches around %s, %s gasps and reflexively bucks %s hips.  After that, %s has a harder and harder time suppressing %s moans.", sender.OwnerName(), receiver.ownerName(), sender.himHer(), sender.heShe(), sender.hisHer(), sender.heShe(), sender.hisHer()));
+                }
             } else
-            if(sender.getObedience() > 66)
-                w.append(t, String.format("%s winces and struggles not to cum right away, wanting to ensure that %s stays hard for %s as long as possible.", sender.OwnerName(), sender.heShe(), receiver.ownerName()));
-            else
-            if(sender.getObedience() > 33)
-                w.append(t, String.format("%s tries to relax and enjoy it, but even as %s slides up and down %s shaft, %s can't quite shake off the fear that this pleasure is just meant to make %s let %s guard down.", sender.OwnerName(), receiver.ownerName(), sender.hisHer(), sender.ownerName(), sender.himHer(), sender.hisHer()));
-            else
-                w.append(t, String.format("%s struggles to keep glaring at %s, wincing slightly every time %2$s squeezes the base of %s shaft and breaks %3$s concentration.", sender.OwnerName(), receiver.ownerName(), sender.hisHer()));
+            switch (sender.getObedience() / 33) {
+                case 0: w.append(t, String.format("%s struggles to keep glaring at %s, wincing slightly every time %2$s squeezes the base of %s shaft and breaks %3$s concentration.", sender.OwnerName(), receiver.ownerName(), sender.hisHer())); break;
+                case 1: w.append(t, String.format("%s tries to relax and enjoy it, but even as %s slides up and down %s shaft, %s can't quite shake off the fear that this pleasure is just meant to make %s let %s guard down.", sender.OwnerName(), receiver.ownerName(), sender.hisHer(), sender.ownerName(), sender.himHer(), sender.hisHer())); break;
+                default: w.append(t, String.format("%s winces and struggles not to cum right away, wanting to ensure that %s stays hard for %s as long as possible.", sender.OwnerName(), sender.heShe(), receiver.ownerName()));
+            }
         } else
         if(this == Project.PenetratedVaginally)
         {
@@ -2091,39 +1919,31 @@ public class Activity
                 else
                 if(sender.getDeviancy() > 66)
                 {
-                    if(sender.getObedience() > 66)
-                        w.append(t, String.format("%s eagerly impales %s pussy on %s's upright cock, sliding %sself up and down with manic energy while grinning at %s.", sender.OwnerName(), sender.hisHer(), receiver.ownerName(), sender.himHer(), receiver.himHer()));
-                    else
-                    if(sender.getObedience() > 33)
-                        w.append(t, String.format("%s quickly lowers %sself onto %s's cock, then immediately begins to bounce on %s lap, searching for the precise angle where it pokes just the right spot inside %s pussy.", sender.OwnerName(), sender.himHer(), receiver.ownerName(), receiver.hisHer(), sender.hisHer()));
-                    else
-                        w.append(t, String.format("%s tries to resist %s urges, but this close to %s's cock, %s can't stop %sself from grinding against it.  Then, before %s realizes it, %6$s's taken it into %2$s pussy.  The surge of pleasure destroys the last of %2$s reason, and %6$s starts moving in earnest.", sender.OwnerName(), sender.hisHer(), receiver.ownerName(), sender.heShe(), sender.himHer(), sender.heShe()));
+                    switch (sender.getObedience() / 33) {
+                        case 0: w.append(t, String.format("%s tries to resist %s urges, but this close to %s's cock, %s can't stop %sself from grinding against it.  Then, before %s realizes it, %6$s's taken it into %2$s pussy.  The surge of pleasure destroys the last of %2$s reason, and %6$s starts moving in earnest.", sender.OwnerName(), sender.hisHer(), receiver.ownerName(), sender.heShe(), sender.himHer(), sender.heShe())); break;
+                        case 1: w.append(t, String.format("%s quickly lowers %sself onto %s's cock, then immediately begins to bounce on %s lap, searching for the precise angle where it pokes just the right spot inside %s pussy.", sender.OwnerName(), sender.himHer(), receiver.ownerName(), receiver.hisHer(), sender.hisHer())); break;
+                        default: w.append(t, String.format("%s eagerly impales %s pussy on %s's upright cock, sliding %sself up and down with manic energy while grinning at %s.", sender.OwnerName(), sender.hisHer(), receiver.ownerName(), sender.himHer(), receiver.himHer()));
+                    }
                 } else
                 if(sender.getDeviancy() > 33)
                 {
-                    if(sender.getConfidence() > 66)
-                        w.append(t, String.format("%s pins %s down and takes %2$s's cock into %s pussy.  %s grimaces slightly at the sudden insertion, but wastes no time in bucking %s hips with savage force, causing the discomfort to melt away into pleasure.", sender.OwnerName(), receiver.ownerName(), sender.hisHer(), sender.HeShe(), sender.hisHer()));
-                    else
-                    if(sender.getConfidence() > 33)
-                        w.append(t, String.format("%s straddles %s, touching %s pussy against the tip of %2$s's cock, then slowly lowering %sself downward onto it, bit by bit.  %s gasps and twitches as it bottoms out inside %s.", sender.OwnerName(), receiver.ownerName(), sender.hisHer(), sender.himHer(), sender.HeShe(), sender.himHer()));
-                    else
-                        w.append(t, String.format("%s is nervous about lowering %sself onto %s's cock, but %s gasps with pleasure as it goes inside %s pussy and immediately hits a sensitive spot.  %s moans and begins moving %2$sself up and down with genuine enthusiasm.", sender.OwnerName(), sender.himHer(), receiver.ownerName(), sender.heShe(), sender.hisHer(), sender.HeShe()));
+                    switch (sender.getConfidence() / 33) {
+                        case 0: w.append(t, String.format("%s is nervous about lowering %sself onto %s's cock, but %s gasps with pleasure as it goes inside %s pussy and immediately hits a sensitive spot.  %s moans and begins moving %2$sself up and down with genuine enthusiasm.", sender.OwnerName(), sender.himHer(), receiver.ownerName(), sender.heShe(), sender.hisHer(), sender.HeShe())); break;
+                        case 1: w.append(t, String.format("%s straddles %s, touching %s pussy against the tip of %2$s's cock, then slowly lowering %sself downward onto it, bit by bit.  %s gasps and twitches as it bottoms out inside %s.", sender.OwnerName(), receiver.ownerName(), sender.hisHer(), sender.himHer(), sender.HeShe(), sender.himHer())); break;
+                        default: w.append(t, String.format("%s pins %s down and takes %2$s's cock into %s pussy.  %s grimaces slightly at the sudden insertion, but wastes no time in bucking %s hips with savage force, causing the discomfort to melt away into pleasure.", sender.OwnerName(), receiver.ownerName(), sender.hisHer(), sender.HeShe(), sender.hisHer()));
+                    }
                 } else
-                if(sender.getDignity() > 66)
-                    w.append(t, String.format("%s is blushing bright red at having to be the one to lower %sself onto %s's cock, but %s pretends that it doesn't bother %2$s.  %s just flinches as it spreads %s pussy open, then stifles a moan when it goes all the way inside.", sender.OwnerName(), sender.himHer(), receiver.ownerName(), sender.heShe(), sender.HeShe(), sender.hisHer()));
-                else
-                if(sender.getDignity() > 33)
-                    w.append(t, String.format("%s delays as long as possible before taking %s's cock into %s pussy.  %s tries various angles, slides %sself against it several times, and only then does %s finally lower %sself onto it.  When %s does, %8$s lets out a little moan, uncomfortable with just how intense the pleasure is.", sender.OwnerName(), receiver.ownerName(), sender.hisHer(), sender.HeShe(), sender.himHer(), sender.heShe(), sender.himHer(), sender.heShe()));
-                else
-                    w.append(t, String.format("%s doesn't waste any time before slamming %s hips down onto %s's cock.  However, %s groans with discomfort at the sudden insertion, and %4$s needs a few moments to recover before %4$s can start moving.", sender.OwnerName(), sender.hisHer(), receiver.ownerName(), sender.heShe()));
+                switch (sender.getDignity() / 33) {
+                    case 0: w.append(t, String.format("%s doesn't waste any time before slamming %s hips down onto %s's cock.  However, %s groans with discomfort at the sudden insertion, and %4$s needs a few moments to recover before %4$s can start moving.", sender.OwnerName(), sender.hisHer(), receiver.ownerName(), sender.heShe())); break;
+                    case 1: w.append(t, String.format("%s delays as long as possible before taking %s's cock into %s pussy.  %s tries various angles, slides %sself against it several times, and only then does %s finally lower %sself onto it.  When %s does, %8$s lets out a little moan, uncomfortable with just how intense the pleasure is.", sender.OwnerName(), receiver.ownerName(), sender.hisHer(), sender.HeShe(), sender.himHer(), sender.heShe(), sender.himHer(), sender.heShe())); break;
+                    default: w.append(t, String.format("%s is blushing bright red at having to be the one to lower %sself onto %s's cock, but %s pretends that it doesn't bother %2$s.  %s just flinches as it spreads %s pussy open, then stifles a moan when it goes all the way inside.", sender.OwnerName(), sender.himHer(), receiver.ownerName(), sender.heShe(), sender.HeShe(), sender.hisHer()));
+                }
                 if(sender.isVVirg())
-                    if(sender.getObedience() > 66)
-                        w.append(t, String.format("  %s embraces the pain of %s first vaginal penetration, ecstatic to have received it from %s.", sender.HeShe(), sender.hisHer(), receiver.ownerName()));
-                    else
-                    if(sender.getObedience() > 33)
-                        w.append(t, String.format("  %s looks down at the trickle of blood on %s thigh with an expression of resignation.", sender.HeShe(), sender.hisHer()));
-                    else
-                        w.append(t, String.format("  %s lifts %sself up enough to look down and see the blood on %s's cock, then grits %s teeth.", sender.HeShe(), sender.himHer(), receiver.ownerName(), sender.hisHer()));
+                    switch (sender.getObedience() / 33) {
+                        case 0: w.append(t, String.format("  %s lifts %sself up enough to look down and see the blood on %s's cock, then grits %s teeth.", sender.HeShe(), sender.himHer(), receiver.ownerName(), sender.hisHer())); break;
+                        case 1: w.append(t, String.format("  %s looks down at the trickle of blood on %s thigh with an expression of resignation.", sender.HeShe(), sender.hisHer())); break;
+                        default: w.append(t, String.format("  %s embraces the pain of %s first vaginal penetration, ecstatic to have received it from %s.", sender.HeShe(), sender.hisHer(), receiver.ownerName()));
+                    }
             } else
             {
                 if(sender == w.lordBody)
@@ -2131,39 +1951,31 @@ public class Activity
                 else
                 if(sender.getObedience() > 66)
                 {
-                    if(sender.getDeviancy() > 66)
-                        w.append(t, String.format("%s goes wild with joyful lust, bucking %s hips wildly and enjoying every moment of being taken by %s.", sender.OwnerName(), sender.hisHer(), receiver.ownerName()));
-                    else
-                    if(sender.getDeviancy() > 33)
-                        w.append(t, String.format("%s tries to help %s feel good as well, moving %s hips and urging %s deeper inside, but soon the pleasure overwhelms %s and %s can't think of anything but wanting to cum.", sender.OwnerName(), receiver.ownerName(), sender.hisHer(), receiver.himHer(), sender.himHer(), sender.heShe()));
-                    else
-                        w.append(t, String.format("%s bites %s lip in concentration, trying to buck %2$s hips in turn and squeeze down with %2$s pussy in order to make it feel as good as possible for %s.", sender.OwnerName(), sender.hisHer(), receiver.ownerName()));
+                    switch (sender.getDeviancy() / 33) {
+                        case 0: w.append(t, String.format("%s bites %s lip in concentration, trying to buck %2$s hips in turn and squeeze down with %2$s pussy in order to make it feel as good as possible for %s.", sender.OwnerName(), sender.hisHer(), receiver.ownerName())); break;
+                        case 1: w.append(t, String.format("%s tries to help %s feel good as well, moving %s hips and urging %s deeper inside, but soon the pleasure overwhelms %s and %s can't think of anything but wanting to cum.", sender.OwnerName(), receiver.ownerName(), sender.hisHer(), receiver.himHer(), sender.himHer(), sender.heShe())); break;
+                        default: w.append(t, String.format("%s goes wild with joyful lust, bucking %s hips wildly and enjoying every moment of being taken by %s.", sender.OwnerName(), sender.hisHer(), receiver.ownerName()));
+                    }
                 } else
                 if(sender.getObedience() > 33)
                 {
-                    if(sender.getConfidence() > 66)
-                        w.append(t, String.format("%s doesn't look entirely happy to be on the bottom, but the pleasure of each thrust hitting %s deepest places soon makes %s forget all about that and start crying out in pleasure.", sender.OwnerName(), sender.hisHer(), sender.himHer()));
-                    else
-                    if(sender.getConfidence() > 33)
-                        w.append(t, String.format("At first, %s tolerates it with an expression of resignation.  However, as the pleasure builds, %s starts to gasp with passion and then actively move %s hips.", sender.ownerName(), sender.heShe(), sender.hisHer()));
-                    else
-                        w.append(t, String.format("%s is too nervous to move much, worried about doing something to displease %s.  Whimpering moans of pleasure begin to leak out of %s throat.", sender.OwnerName(), receiver.ownerName(), sender.hisHer()));
+                    switch (sender.getConfidence() / 33) {
+                        case 0: w.append(t, String.format("%s is too nervous to move much, worried about doing something to displease %s.  Whimpering moans of pleasure begin to leak out of %s throat.", sender.OwnerName(), receiver.ownerName(), sender.hisHer())); break;
+                        case 1: w.append(t, String.format("At first, %s tolerates it with an expression of resignation.  However, as the pleasure builds, %s starts to gasp with passion and then actively move %s hips.", sender.ownerName(), sender.heShe(), sender.hisHer())); break;
+                        default: w.append(t, String.format("%s doesn't look entirely happy to be on the bottom, but the pleasure of each thrust hitting %s deepest places soon makes %s forget all about that and start crying out in pleasure.", sender.OwnerName(), sender.hisHer(), sender.himHer()));
+                    }
                 } else
-                if(sender.getInnocence() > 66)
-                    w.append(t, String.format("%s tries to kick and scream, but %s movements only drive %s deeper inside %s, and %2$s voice takes on a passionate quality.", sender.OwnerName(), sender.hisHer(), receiver.ownerName(), sender.himHer()));
-                else
-                if(sender.getInnocence() > 33)
-                    w.append(t, String.format("%s attempts to deny %s the satisfaction of seeing %s reactions, but the longer the fucking continues, the more difficult it is.  Soon %s's reduced to covering %s face and biting %5$s lip to stifle %5$s moans.", sender.OwnerName(), receiver.ownerName(), sender.hisHer(), sender.heShe(), sender.hisHer()));
-                else
-                    w.append(t, String.format("%s glares up at %s, and %s comes through clearly even as %s winces and groans at the stimulation to %s most sensitive inner places.", sender.OwnerName(), receiver.ownerName(), sender.hisHer(), sender.heShe(), sender.hisHer()));
+                switch (sender.getInnocence() / 33) {
+                    case 0: w.append(t, String.format("%s glares up at %s, and %s comes through clearly even as %s winces and groans at the stimulation to %s most sensitive inner places.", sender.OwnerName(), receiver.ownerName(), sender.hisHer(), sender.heShe(), sender.hisHer())); break;
+                    case 1: w.append(t, String.format("%s attempts to deny %s the satisfaction of seeing %s reactions, but the longer the fucking continues, the more difficult it is.  Soon %s's reduced to covering %s face and biting %5$s lip to stifle %5$s moans.", sender.OwnerName(), receiver.ownerName(), sender.hisHer(), sender.heShe(), sender.hisHer())); break;
+                    default: w.append(t, String.format("%s tries to kick and scream, but %s movements only drive %s deeper inside %s, and %2$s voice takes on a passionate quality.", sender.OwnerName(), sender.hisHer(), receiver.ownerName(), sender.himHer()));
+                }
                 if(sender.isVVirg())
-                    if(sender.getObedience() > 66)
-                        w.append(t, String.format("  %s smiles broadly up at %s, tears of joy leaking from %s eyes at being able to give %3$s first time to the one %s loves.", sender.HeShe(), receiver.ownerName(), sender.hisHer(), sender.heShe()));
-                    else
-                    if(sender.getObedience() > 33)
-                        w.append(t, String.format("  When %s sees the blood on %s's cock, %1$s flinches away, as if trying to ignore it.", sender.heShe(), receiver.ownerName()));
-                    else
-                        w.append(t, String.format("  %s anger drowns out the pain of having %s hymen torn.", sender.HisHer(), sender.hisHer()));
+                    switch (sender.getObedience() / 33) {
+                        case 0: w.append(t, String.format("  %s anger drowns out the pain of having %s hymen torn.", sender.HisHer(), sender.hisHer())); break;
+                        case 1: w.append(t, String.format("  When %s sees the blood on %s's cock, %1$s flinches away, as if trying to ignore it.", sender.heShe(), receiver.ownerName())); break;
+                        default: w.append(t, String.format("  %s smiles broadly up at %s, tears of joy leaking from %s eyes at being able to give %3$s first time to the one %s loves.", sender.HeShe(), receiver.ownerName(), sender.hisHer(), sender.heShe()));
+                    }
             }
         } else
         if(this == Project.AnalPenetrate)
@@ -2175,62 +1987,50 @@ public class Activity
                 else
                 if(sender.getDeviancy() > 66)
                 {
-                    if(sender.getConfidence() > 66)
-                        w.append(t, String.format("%s eagerly pins %s down and shoves %s shaft all the way up %2$s's ass, immediately setting a rapid pace of thrusting in and out.  It's a struggle to keep moving steadily with the flashes of pleasure shooting through %s, but %s is determined to keep going.", sender.OwnerName(), receiver.ownerName(), sender.hisHer(), sender.himHer(), sender.ownerName()));
-                    else
-                    if(sender.getConfidence() > 33)
-                        w.append(t, String.format("%s starts to slowly push %s cock up %s's ass, but the surge of pleasure from the sphincter squeezing %2$s tip overwhelms %2$s reason.  %s jerks %2$s hips forward, burying %sself all the way inside, then pulls halfway out, then pushes back in, hips jerking wildly as intense ecstasy surges through %5$s with every movement.", sender.OwnerName(), sender.hisHer(), receiver.ownerName(), sender.HeShe(), sender.himHer()));
-                    else
-                        w.append(t, String.format("%s's timid nature seems to vanish entirely, and %s starts to ram %s hips forward with wild abandon, hammering in and out of %s's asshole.", sender.OwnerName(), sender.heShe(), sender.hisHer(), receiver.ownerName()));
+                    switch (sender.getConfidence() / 33) {
+                        case 0: w.append(t, String.format("%s's timid nature seems to vanish entirely, and %s starts to ram %s hips forward with wild abandon, hammering in and out of %s's asshole.", sender.OwnerName(), sender.heShe(), sender.hisHer(), receiver.ownerName())); break;
+                        case 1: w.append(t, String.format("%s starts to slowly push %s cock up %s's ass, but the surge of pleasure from the sphincter squeezing %2$s tip overwhelms %2$s reason.  %s jerks %2$s hips forward, burying %sself all the way inside, then pulls halfway out, then pushes back in, hips jerking wildly as intense ecstasy surges through %5$s with every movement.", sender.OwnerName(), sender.hisHer(), receiver.ownerName(), sender.HeShe(), sender.himHer())); break;
+                        default: w.append(t, String.format("%s eagerly pins %s down and shoves %s shaft all the way up %2$s's ass, immediately setting a rapid pace of thrusting in and out.  It's a struggle to keep moving steadily with the flashes of pleasure shooting through %s, but %s is determined to keep going.", sender.OwnerName(), receiver.ownerName(), sender.hisHer(), sender.himHer(), sender.ownerName()));
+                    }
                 } else
                 if(sender.getDeviancy() > 33)
                 {
-                    if(sender.getInnocence() > 66)
-                        w.append(t, String.format("%s pushes %s cock up %s's ass, and the moment %s feels %s rear entrance squeezing down on %s, %s loses the ability to think of anything but the pleasure.  Moaning softly, %7$s starts thrusting in and out, acting on pure instinct.", sender.OwnerName(), sender.hisHer(), receiver.ownerName(), sender.heShe(), receiver.hisHer(), sender.himHer(), sender.heShe()));
-                    else
-                    if(sender.getInnocence() > 33)
-                        w.append(t, String.format("%s starts to fuck %s's asshole, but the pleasure of %s sphincter squeezing down on %s cock gives %s pause.  %s gasps, taking a moment to catch %s breath, then continues more slowly, enjoying the incredible tightness around %7$s shaft.", sender.OwnerName(), receiver.ownerName(), receiver.hisHer(), sender.himHer(), sender.ownerName(), sender.HeShe(), sender.hisHer()));
-                    else
-                        w.append(t, String.format("%s gradually pushes %s cock up %s's ass, inch-by-inch, then withdraws it just as carefully.  %s moves slowly, feeling out which spots feel better for %s and which seem to get more of a reaction from %s, and only then starts to move more quickly, getting into a rhythm.", sender.OwnerName(), sender.hisHer(), receiver.ownerName(), sender.HeShe(), sender.himHer(), receiver.ownerName()));
+                    switch (sender.getInnocence() / 33) {
+                        case 0: w.append(t, String.format("%s gradually pushes %s cock up %s's ass, inch-by-inch, then withdraws it just as carefully.  %s moves slowly, feeling out which spots feel better for %s and which seem to get more of a reaction from %s, and only then starts to move more quickly, getting into a rhythm.", sender.OwnerName(), sender.hisHer(), receiver.ownerName(), sender.HeShe(), sender.himHer(), receiver.ownerName())); break;
+                        case 1: w.append(t, String.format("%s starts to fuck %s's asshole, but the pleasure of %s sphincter squeezing down on %s cock gives %s pause.  %s gasps, taking a moment to catch %s breath, then continues more slowly, enjoying the incredible tightness around %7$s shaft.", sender.OwnerName(), receiver.ownerName(), receiver.hisHer(), sender.himHer(), sender.ownerName(), sender.HeShe(), sender.hisHer())); break;
+                        default: w.append(t, String.format("%s pushes %s cock up %s's ass, and the moment %s feels %s rear entrance squeezing down on %s, %s loses the ability to think of anything but the pleasure.  Moaning softly, %7$s starts thrusting in and out, acting on pure instinct.", sender.OwnerName(), sender.hisHer(), receiver.ownerName(), sender.heShe(), receiver.hisHer(), sender.himHer(), sender.heShe()));
+                    }
                 } else
-                if(sender.getObedience() > 66)
-                    w.append(t, String.format("%s eagerly thrusts %s cock up %s's ass, ecstatic to be joined with %s.  %s moves unselfishly, trying to hit all of %s's sensitive parts without any regard for %2$s own pleasure.", sender.OwnerName(), sender.hisHer(), receiver.ownerName(), receiver.himHer(), sender.HeShe(), receiver.ownerName()));
-                else
-                if(sender.getObedience() > 33)
-                    w.append(t, String.format("%s presses the tip of %s cock against %s's anus, hesitates for a moment, and then finally pushes it inside.  %s gasps and shudders at the pleasure, far beyond what %s was prepared for, and then cautiously starts to move %2$s hips forward and back.", sender.OwnerName(), sender.hisHer(), receiver.ownerName(), sender.HeShe(), sender.heShe()));
-                else
-                    w.append(t, String.format("%s's angry demeanor fades for just a moment as %s thrusts into %s and feels the intense pleasure of %s asshole squeezing %s.  But then %2$s recovers and starts to move violently in and out, as if stabbing %s with a weapon.", sender.OwnerName(), sender.heShe(), receiver.ownerName(), receiver.hisHer(), sender.himHer(), receiver.ownerName()));
+                switch (sender.getObedience() / 33) {
+                    case 0: w.append(t, String.format("%s's angry demeanor fades for just a moment as %s thrusts into %s and feels the intense pleasure of %s asshole squeezing %s.  But then %2$s recovers and starts to move violently in and out, as if stabbing %s with a weapon.", sender.OwnerName(), sender.heShe(), receiver.ownerName(), receiver.hisHer(), sender.himHer(), receiver.ownerName())); break;
+                    case 1: w.append(t, String.format("%s presses the tip of %s cock against %s's anus, hesitates for a moment, and then finally pushes it inside.  %s gasps and shudders at the pleasure, far beyond what %s was prepared for, and then cautiously starts to move %2$s hips forward and back.", sender.OwnerName(), sender.hisHer(), receiver.ownerName(), sender.HeShe(), sender.heShe())); break;
+                    default: w.append(t, String.format("%s eagerly thrusts %s cock up %s's ass, ecstatic to be joined with %s.  %s moves unselfishly, trying to hit all of %s's sensitive parts without any regard for %2$s own pleasure.", sender.OwnerName(), sender.hisHer(), receiver.ownerName(), receiver.himHer(), sender.HeShe(), receiver.ownerName()));
+                }
             } else
             if(sender == w.lordBody)
                 w.append(t, String.format("%s's cock pushes all the way into %s's bowels.", sender.OwnerName(), receiver.ownerName()));
             else
             if(sender.getDeviancy() > 66)
             {
-                if(sender.getInnocence() > 66)
-                    w.append(t, String.format("%s's whole body goes slack except for %s hips desperately trying to thrust deeper into %s.  %s eyes roll and %2$s tongue hangs out.", sender.OwnerName(), sender.hisHer(), receiver.himHer(), sender.HisHer()));
-                else
-                if(sender.getInnocence() > 33)
-                    w.append(t, String.format("The feeling of %s sliding down to the base of %s shaft is enough to make %s cry out and lose %2$s sense of reason.  %s desperately clings to %1$s, hips jerking wildly up and down as %s tries to thrust even deeper into %s.", receiver.ownerName(), sender.hisHer(), sender.ownerName(), sender.HeShe(), sender.heShe(), receiver.himHer()));
-                else
-                    w.append(t, String.format("At first, %s tries to reciprocate with %s own thrusts.  But it soon becomes clear that %s's completely at %s's mercy, and all %s can do is moan and jerk %2$s hips as %s slides up and down %2$s shaft.", sender.ownerName(), sender.hisHer(), sender.heShe(), receiver.ownerName(), sender.heShe(), receiver.ownerName()));
+                switch (sender.getInnocence() / 33) {
+                    case 0: w.append(t, String.format("At first, %s tries to reciprocate with %s own thrusts.  But it soon becomes clear that %s's completely at %s's mercy, and all %s can do is moan and jerk %2$s hips as %s slides up and down %2$s shaft.", sender.ownerName(), sender.hisHer(), sender.heShe(), receiver.ownerName(), sender.heShe(), receiver.ownerName())); break;
+                    case 1: w.append(t, String.format("The feeling of %s sliding down to the base of %s shaft is enough to make %s cry out and lose %2$s sense of reason.  %s desperately clings to %1$s, hips jerking wildly up and down as %s tries to thrust even deeper into %s.", receiver.ownerName(), sender.hisHer(), sender.ownerName(), sender.HeShe(), sender.heShe(), receiver.himHer())); break;
+                    default: w.append(t, String.format("%s's whole body goes slack except for %s hips desperately trying to thrust deeper into %s.  %s eyes roll and %2$s tongue hangs out.", sender.OwnerName(), sender.hisHer(), receiver.himHer(), sender.HisHer()));
+                }
             } else
             if(sender.getDeviancy() > 33)
             {
-                if(sender.getDignity() > 66)
-                    w.append(t, String.format("%s tries to hide just how good it feels, but when %s clenches around %s, %s gasps and reflexively bucks %s hips.  After that, %s has a harder and harder time suppressing %s moans.", sender.OwnerName(), receiver.ownerName(), sender.himHer(), sender.heShe(), sender.hisHer(), sender.heShe(), sender.hisHer()));
-                else
-                if(sender.getDignity() > 33)
-                    w.append(t, String.format("%s lays back and loses %sself in the feeling of %s sliding up and down %s length, overwhelmed by the intensity of the sensations.", sender.OwnerName(), sender.himHer(), receiver.ownerName(), sender.hisHer()));
-                else
-                    w.append(t, String.format("%s gasps with pleasure, reflexively embracing %s and thrusting %s own hips in time with %2$s's movements.", sender.OwnerName(), receiver.ownerName(), sender.hisHer()));
+                switch (sender.getDignity() / 33) {
+                    case 0: w.append(t, String.format("%s gasps with pleasure, reflexively embracing %s and thrusting %s own hips in time with %2$s's movements.", sender.OwnerName(), receiver.ownerName(), sender.hisHer())); break;
+                    case 1: w.append(t, String.format("%s lays back and loses %sself in the feeling of %s sliding up and down %s length, overwhelmed by the intensity of the sensations.", sender.OwnerName(), sender.himHer(), receiver.ownerName(), sender.hisHer())); break;
+                    default: w.append(t, String.format("%s tries to hide just how good it feels, but when %s clenches around %s, %s gasps and reflexively bucks %s hips.  After that, %s has a harder and harder time suppressing %s moans.", sender.OwnerName(), receiver.ownerName(), sender.himHer(), sender.heShe(), sender.hisHer(), sender.heShe(), sender.hisHer()));
+                }
             } else
-            if(sender.getObedience() > 66)
-                w.append(t, String.format("%s winces and struggles not to cum right away, wanting to ensure that %s stays hard for %s as long as possible.", sender.OwnerName(), sender.heShe(), receiver.ownerName()));
-            else
-            if(sender.getObedience() > 33)
-                w.append(t, String.format("%s tries to relax and enjoy it, but even as %s slides up and down %s shaft, %s can't quite shake off the fear that this pleasure is just meant to make %s let %s guard down.", sender.OwnerName(), receiver.ownerName(), sender.hisHer(), sender.ownerName(), sender.himHer(), sender.hisHer()));
-            else
-                w.append(t, String.format("%s struggles to keep glaring at %s, wincing slightly every time %2$s's anus squeezes the base of %s shaft and breaks %3$s concentration.", sender.OwnerName(), receiver.ownerName(), sender.hisHer()));
+            switch (sender.getObedience() / 33) {
+                case 0: w.append(t, String.format("%s struggles to keep glaring at %s, wincing slightly every time %2$s's anus squeezes the base of %s shaft and breaks %3$s concentration.", sender.OwnerName(), receiver.ownerName(), sender.hisHer())); break;
+                case 1: w.append(t, String.format("%s tries to relax and enjoy it, but even as %s slides up and down %s shaft, %s can't quite shake off the fear that this pleasure is just meant to make %s let %s guard down.", sender.OwnerName(), receiver.ownerName(), sender.hisHer(), sender.ownerName(), sender.himHer(), sender.hisHer())); break;
+                default: w.append(t, String.format("%s winces and struggles not to cum right away, wanting to ensure that %s stays hard for %s as long as possible.", sender.OwnerName(), sender.heShe(), receiver.ownerName()));
+            }
         } else
         if(this == Project.PenetratedAnally)
         {
@@ -2243,52 +2043,42 @@ public class Activity
                 {
                     if(!Project.BeLubricated.isInProgress(sender, null))
                     {
-                        if(sender.getInnocence() > 66)
-                            w.append(t, String.format("Full of eager lust, %s almost forgets to lubricate %sself back there before continuing.", sender.ownerName(), sender.himHer()));
-                        else
-                        if(sender.getInnocence() > 33)
-                            w.append(t, String.format("As %s lays atop %s, %s reaches back with one finger covered in lubricant to prepare for what comes next.", sender.heShe(), receiver.ownerName(), sender.ownerName()));
-                        else
-                            w.append(t, String.format("Before continuing, %s carefully applies some slippery lubricant to %s rear entrance.", sender.ownerName(), sender.hisHer()));
+                        switch (sender.getInnocence() / 33) {
+                            case 0: w.append(t, String.format("Before continuing, %s carefully applies some slippery lubricant to %s rear entrance.", sender.ownerName(), sender.hisHer())); break;
+                            case 1: w.append(t, String.format("As %s lays atop %s, %s reaches back with one finger covered in lubricant to prepare for what comes next.", sender.heShe(), receiver.ownerName(), sender.ownerName())); break;
+                            default: w.append(t, String.format("Full of eager lust, %s almost forgets to lubricate %sself back there before continuing.", sender.ownerName(), sender.himHer()));
+                        }
                         w.append(t, "\n\n");
                         sender.addActivity(Project.BeLubricated, null);
                     }
                     if(sender.getDeviancy() > 66)
                     {
-                        if(sender.getObedience() > 66)
-                            w.append(t, String.format("%s eagerly impales %s asshole on %s's upright cock, sliding %sself up and down with manic energy while grinning at %s.", sender.OwnerName(), sender.hisHer(), receiver.ownerName(), sender.himHer(), receiver.himHer()));
-                        else
-                        if(sender.getObedience() > 33)
-                            w.append(t, String.format("%s quickly lowers %sself onto %s's cock, then immediately begins to bounce on %s lap, searching for the precise angle where it pokes just the right spot inside %s bowels.", sender.OwnerName(), sender.himHer(), receiver.ownerName(), receiver.hisHer(), sender.hisHer()));
-                        else
-                            w.append(t, String.format("%s tries to resist %s urges, but this close to %s's cock, %s can't stop %sself from grinding against it.  Then, before %s realizes it, %6$s's taken it up %2$s ass.  The surge of pleasure destroys the last of %2$s reason, and %6$s starts moving in earnest.", sender.OwnerName(), sender.hisHer(), receiver.ownerName(), sender.heShe(), sender.himHer(), sender.heShe()));
+                        switch (sender.getObedience() / 33) {
+                            case 0: w.append(t, String.format("%s tries to resist %s urges, but this close to %s's cock, %s can't stop %sself from grinding against it.  Then, before %s realizes it, %6$s's taken it up %2$s ass.  The surge of pleasure destroys the last of %2$s reason, and %6$s starts moving in earnest.", sender.OwnerName(), sender.hisHer(), receiver.ownerName(), sender.heShe(), sender.himHer(), sender.heShe())); break;
+                            case 1: w.append(t, String.format("%s quickly lowers %sself onto %s's cock, then immediately begins to bounce on %s lap, searching for the precise angle where it pokes just the right spot inside %s bowels.", sender.OwnerName(), sender.himHer(), receiver.ownerName(), receiver.hisHer(), sender.hisHer())); break;
+                            default: w.append(t, String.format("%s eagerly impales %s asshole on %s's upright cock, sliding %sself up and down with manic energy while grinning at %s.", sender.OwnerName(), sender.hisHer(), receiver.ownerName(), sender.himHer(), receiver.himHer()));
+                        }
                     } else
                     if(sender.getDeviancy() > 33)
                     {
-                        if(sender.getConfidence() > 66)
-                            w.append(t, String.format("%s pins %s down and takes %2$s's cock up %s ass.  %s grimaces slightly at the sensation of being spread wide open, but wastes no time in bucking %s hips with savage force, causing the discomfort to melt away into pleasure.", sender.OwnerName(), receiver.ownerName(), sender.hisHer(), sender.HeShe(), sender.hisHer()));
-                        else
-                        if(sender.getConfidence() > 33)
-                            w.append(t, String.format("%s straddles %s, touching %s anus against the tip of %2$s's cock, then slowly lowering %sself downward onto it, bit by bit.  %s gasps and twitches as it bottoms out inside %s.", sender.OwnerName(), receiver.ownerName(), sender.hisHer(), sender.himHer(), sender.HeShe(), sender.himHer()));
-                        else
-                            w.append(t, String.format("%s is nervous about lowering %sself onto %s's cock, but %s gasps with pleasure as it goes up %s ass and immediately hits a sensitive spot.  %s moans and begins moving %2$sself up and down with genuine enthusiasm.", sender.OwnerName(), sender.himHer(), receiver.ownerName(), sender.heShe(), sender.hisHer(), sender.HeShe()));
+                        switch (sender.getConfidence() / 33) {
+                            case 0: w.append(t, String.format("%s is nervous about lowering %sself onto %s's cock, but %s gasps with pleasure as it goes up %s ass and immediately hits a sensitive spot.  %s moans and begins moving %2$sself up and down with genuine enthusiasm.", sender.OwnerName(), sender.himHer(), receiver.ownerName(), sender.heShe(), sender.hisHer(), sender.HeShe())); break;
+                            case 1: w.append(t, String.format("%s straddles %s, touching %s anus against the tip of %2$s's cock, then slowly lowering %sself downward onto it, bit by bit.  %s gasps and twitches as it bottoms out inside %s.", sender.OwnerName(), receiver.ownerName(), sender.hisHer(), sender.himHer(), sender.HeShe(), sender.himHer())); break;
+                            default: w.append(t, String.format("%s pins %s down and takes %2$s's cock up %s ass.  %s grimaces slightly at the sensation of being spread wide open, but wastes no time in bucking %s hips with savage force, causing the discomfort to melt away into pleasure.", sender.OwnerName(), receiver.ownerName(), sender.hisHer(), sender.HeShe(), sender.hisHer()));
+                        }
                     } else
-                    if(sender.getDignity() > 66)
-                        w.append(t, String.format("%s is blushing bright red at having to be the one to lower %sself onto %s's cock, but %s pretends that it doesn't bother %2$s.  %s just flinches as it spreads %s anus open, then stifles a moan when it goes all the way inside.", sender.OwnerName(), sender.himHer(), receiver.ownerName(), sender.heShe(), sender.HeShe(), sender.hisHer()));
-                    else
-                    if(sender.getDignity() > 33)
-                        w.append(t, String.format("%s delays as long as possible before taking %s's cock up %s ass.  %s tries various angles, grinds the tip against %s anus, and only then does %s finally lower %sself onto it.  When %s does, %8$s lets out a little moan, uncomfortable with just how intense the pleasure is.", sender.OwnerName(), receiver.ownerName(), sender.hisHer(), sender.HeShe(), sender.hisHer(), sender.heShe(), sender.himHer(), sender.heShe()));
-                    else
-                        w.append(t, String.format("%s doesn't waste any time before slamming %s ass down onto %s's cock.  However, %s groans with discomfort at the sudden insertion, and %4$s needs a few moments to recover before %4$s can start moving.", sender.OwnerName(), sender.hisHer(), receiver.ownerName(), sender.heShe()));
+                    switch (sender.getDignity() / 33) {
+                        case 0: w.append(t, String.format("%s doesn't waste any time before slamming %s ass down onto %s's cock.  However, %s groans with discomfort at the sudden insertion, and %4$s needs a few moments to recover before %4$s can start moving.", sender.OwnerName(), sender.hisHer(), receiver.ownerName(), sender.heShe())); break;
+                        case 1: w.append(t, String.format("%s delays as long as possible before taking %s's cock up %s ass.  %s tries various angles, grinds the tip against %s anus, and only then does %s finally lower %sself onto it.  When %s does, %8$s lets out a little moan, uncomfortable with just how intense the pleasure is.", sender.OwnerName(), receiver.ownerName(), sender.hisHer(), sender.HeShe(), sender.hisHer(), sender.heShe(), sender.himHer(), sender.heShe())); break;
+                        default: w.append(t, String.format("%s is blushing bright red at having to be the one to lower %sself onto %s's cock, but %s pretends that it doesn't bother %2$s.  %s just flinches as it spreads %s anus open, then stifles a moan when it goes all the way inside.", sender.OwnerName(), sender.himHer(), receiver.ownerName(), sender.heShe(), sender.HeShe(), sender.hisHer()));
+                    }
                 }
                 if(sender.isVVirg())
-                    if(sender.getObedience() > 66)
-                        w.append(t, String.format("  %s embraces the pain of %s first vaginal penetration, ecstatic to have received it from %s.", sender.HeShe(), sender.hisHer(), receiver.ownerName()));
-                    else
-                    if(sender.getObedience() > 33)
-                        w.append(t, String.format("  %s looks down at the trickle of blood on %s thigh with an expression of resignation.", sender.HeShe(), sender.hisHer()));
-                    else
-                        w.append(t, String.format("  %s lifts %sself up enough to look down and see the blood on %s's cock, then grits %s teeth.", sender.HeShe(), sender.himHer(), receiver.ownerName(), sender.hisHer()));
+                    switch (sender.getObedience() / 33) {
+                        case 0: w.append(t, String.format("  %s lifts %sself up enough to look down and see the blood on %s's cock, then grits %s teeth.", sender.HeShe(), sender.himHer(), receiver.ownerName(), sender.hisHer())); break;
+                        case 1: w.append(t, String.format("  %s looks down at the trickle of blood on %s thigh with an expression of resignation.", sender.HeShe(), sender.hisHer())); break;
+                        default: w.append(t, String.format("  %s embraces the pain of %s first vaginal penetration, ecstatic to have received it from %s.", sender.HeShe(), sender.hisHer(), receiver.ownerName()));
+                    }
             } else
             if(Project.BeLubricated.isInProgress(sender, null) || sender == w.lordBody)
             {
@@ -2297,76 +2087,60 @@ public class Activity
                 else
                 if(sender.getObedience() > 66)
                 {
-                    if(sender.getDeviancy() > 66)
-                        w.append(t, String.format("%s goes wild with joyful lust, bucking %s hips wildly and enjoying every moment of being taken by %s.", sender.OwnerName(), sender.hisHer(), receiver.ownerName()));
-                    else
-                    if(sender.getDeviancy() > 33)
-                        w.append(t, String.format("%s tries to help %s feel good as well, moving %s hips and urging %s deeper inside, but soon the pleasure overwhelms %s and %s can't think of anything but wanting to cum.", sender.OwnerName(), receiver.ownerName(), sender.hisHer(), receiver.himHer(), sender.himHer(), sender.heShe()));
-                    else
-                        w.append(t, String.format("%s bites %s lip in concentration, trying to buck %2$s hips in turn and squeeze down with %2$s anus in order to make it feel as good as possible for %s.", sender.OwnerName(), sender.hisHer(), receiver.ownerName()));
+                    switch (sender.getDeviancy() / 33) {
+                        case 0: w.append(t, String.format("%s bites %s lip in concentration, trying to buck %2$s hips in turn and squeeze down with %2$s anus in order to make it feel as good as possible for %s.", sender.OwnerName(), sender.hisHer(), receiver.ownerName())); break;
+                        case 1: w.append(t, String.format("%s tries to help %s feel good as well, moving %s hips and urging %s deeper inside, but soon the pleasure overwhelms %s and %s can't think of anything but wanting to cum.", sender.OwnerName(), receiver.ownerName(), sender.hisHer(), receiver.himHer(), sender.himHer(), sender.heShe())); break;
+                        default: w.append(t, String.format("%s goes wild with joyful lust, bucking %s hips wildly and enjoying every moment of being taken by %s.", sender.OwnerName(), sender.hisHer(), receiver.ownerName()));
+                    }
                 } else
                 if(sender.getObedience() > 33)
                 {
-                    if(sender.getConfidence() > 66)
-                        w.append(t, String.format("%s doesn't look entirely happy to be taking it up the ass, but the pleasure of each thrust hitting %s deepest places soon makes %s forget all about that and start crying out in pleasure.", sender.OwnerName(), sender.hisHer(), sender.himHer()));
-                    else
-                    if(sender.getConfidence() > 33)
-                        w.append(t, String.format("At first, %s tolerates it with an expression of resignation.  However, as %s sensitive places start to get stimulated through %2$s anal walls, %s starts to gasp with passion and then actively move %2$s hips.", sender.ownerName(), sender.hisHer(), sender.heShe()));
-                    else
-                        w.append(t, String.format("%s is too nervous to move much, worried about doing something to displease %s.  Whimpering moans of pleasure begin to leak out of %s throat.", sender.OwnerName(), receiver.ownerName(), sender.hisHer()));
+                    switch (sender.getConfidence() / 33) {
+                        case 0: w.append(t, String.format("%s is too nervous to move much, worried about doing something to displease %s.  Whimpering moans of pleasure begin to leak out of %s throat.", sender.OwnerName(), receiver.ownerName(), sender.hisHer())); break;
+                        case 1: w.append(t, String.format("At first, %s tolerates it with an expression of resignation.  However, as %s sensitive places start to get stimulated through %2$s anal walls, %s starts to gasp with passion and then actively move %2$s hips.", sender.ownerName(), sender.hisHer(), sender.heShe())); break;
+                        default: w.append(t, String.format("%s doesn't look entirely happy to be taking it up the ass, but the pleasure of each thrust hitting %s deepest places soon makes %s forget all about that and start crying out in pleasure.", sender.OwnerName(), sender.hisHer(), sender.himHer()));
+                    }
                 } else
-                if(sender.getInnocence() > 66)
-                    w.append(t, String.format("%s tries to kick and scream, but %s movements only drive %s deeper inside %s, and %2$s voice takes on a passionate quality.", sender.OwnerName(), sender.hisHer(), receiver.ownerName(), sender.himHer()));
-                else
-                if(sender.getInnocence() > 33)
-                    w.append(t, String.format("%s attempts to deny %s the satisfaction of seeing %s reactions, but the longer the fucking continues, the more difficult it is.  Soon %s's reduced to covering %s face and biting %5$s lip to stifle %5$s moans.", sender.OwnerName(), receiver.ownerName(), sender.hisHer(), sender.heShe(), sender.hisHer()));
-                else
-                    w.append(t, String.format("%s glares up at %s, and %s comes through clearly even as %s winces and groans at the stimulation through %s anal walls.", sender.OwnerName(), receiver.ownerName(), sender.hisHer(), sender.heShe(), sender.hisHer()));
+                switch (sender.getInnocence() / 33) {
+                    case 0: w.append(t, String.format("%s glares up at %s, and %s comes through clearly even as %s winces and groans at the stimulation through %s anal walls.", sender.OwnerName(), receiver.ownerName(), sender.hisHer(), sender.heShe(), sender.hisHer())); break;
+                    case 1: w.append(t, String.format("%s attempts to deny %s the satisfaction of seeing %s reactions, but the longer the fucking continues, the more difficult it is.  Soon %s's reduced to covering %s face and biting %5$s lip to stifle %5$s moans.", sender.OwnerName(), receiver.ownerName(), sender.hisHer(), sender.heShe(), sender.hisHer())); break;
+                    default: w.append(t, String.format("%s tries to kick and scream, but %s movements only drive %s deeper inside %s, and %2$s voice takes on a passionate quality.", sender.OwnerName(), sender.hisHer(), receiver.ownerName(), sender.himHer()));
+                }
                 if(sender.getGender() == Forsaken.Gender.MALE && sender.isVVirg())
-                    if(sender.getObedience() > 66)
-                        w.append(t, String.format("  %s smiles broadly up at %s, tears of joy leaking from %s eyes at receiving %3$s first anal penetration from the one %s loves.", sender.HeShe(), receiver.ownerName(), sender.hisHer(), sender.heShe()));
-                    else
-                    if(sender.getObedience() > 33)
-                        w.append(t, String.format("  To %s horror, the pleasure keeps building further and further, until %s can't deny that %2$s enjoys being fucked like a girl.", sender.hisHer(), sender.heShe()));
-                    else
-                        w.append(t, String.format("  %s anger drowns out the pain of having %s inexperienced asshole stretched so wide for the first time.", sender.HisHer(), sender.hisHer()));
+                    switch (sender.getObedience() / 33) {
+                        case 0: w.append(t, String.format("  %s anger drowns out the pain of having %s inexperienced asshole stretched so wide for the first time.", sender.HisHer(), sender.hisHer())); break;
+                        case 1: w.append(t, String.format("  To %s horror, the pleasure keeps building further and further, until %s can't deny that %2$s enjoys being fucked like a girl.", sender.hisHer(), sender.heShe())); break;
+                        default: w.append(t, String.format("  %s smiles broadly up at %s, tears of joy leaking from %s eyes at receiving %3$s first anal penetration from the one %s loves.", sender.HeShe(), receiver.ownerName(), sender.hisHer(), sender.heShe()));
+                    }
             } else
             {
                 if(sender.getConfidence() > 66)
                 {
-                    if(sender.getObedience() > 66)
-                        w.append(t, String.format("%s grits %s teeth into a forced smile, encouraging %s to keep fucking %s even though %s's in agony from having %2$s ass forced open without any lubrication.", sender.OwnerName(), sender.hisHer(), receiver.ownerName(), sender.himHer(), sender.heShe()));
-                    else
-                    if(sender.getObedience() > 33)
-                        w.append(t, String.format("The agony of being anally penetrated without any lubrication is almost enough to paralyze %s's thoughts, but %s has just enough willpower to beg for mercy, offering to do anything in hopes of ending the torture.", sender.ownerName(), sender.heShe()));
-                    else
-                        w.append(t, String.format("%s's determined resolve lasts only a moment before cracking, and %s starts begging for mercy in a shrill voice, apologizing for %s defiance.", sender.OwnerName(), sender.heShe(), sender.hisHer()));
+                    switch (sender.getObedience() / 33) {
+                        case 0: w.append(t, String.format("%s's determined resolve lasts only a moment before cracking, and %s starts begging for mercy in a shrill voice, apologizing for %s defiance.", sender.OwnerName(), sender.heShe(), sender.hisHer())); break;
+                        case 1: w.append(t, String.format("The agony of being anally penetrated without any lubrication is almost enough to paralyze %s's thoughts, but %s has just enough willpower to beg for mercy, offering to do anything in hopes of ending the torture.", sender.ownerName(), sender.heShe())); break;
+                        default: w.append(t, String.format("%s grits %s teeth into a forced smile, encouraging %s to keep fucking %s even though %s's in agony from having %2$s ass forced open without any lubrication.", sender.OwnerName(), sender.hisHer(), receiver.ownerName(), sender.himHer(), sender.heShe()));
+                    }
                 } else
                 if(sender.getConfidence() > 33)
                 {
-                    if(sender.getDignity() > 66)
-                        w.append(t, String.format("At first, %s tries to pretend that %s can take it.  But the painful friction against %s unlubricated anal walls is too much for %s, and soon %2$s's crying and begging without restraint.", sender.ownerName(), sender.heShe(), sender.hisHer(), sender.himHer()));
-                    else
-                    if(sender.getDignity() > 33)
-                        w.append(t, String.format("Without any lubrication, the insertion is more painful than anything, and %s is ashamed with %sself as %s starts uncontrollably sobbing.", sender.ownerName(), sender.himHer(), sender.heShe()));
-                    else
-                        w.append(t, String.format("%s kicks wildly and screams at the top of %s lungs, heedless of the fact that %s's only scraping %sself even more against the cruel invading shaft.", sender.OwnerName(), sender.hisHer(), sender.heShe(), sender.himHer()));
+                    switch (sender.getDignity() / 33) {
+                        case 0: w.append(t, String.format("%s kicks wildly and screams at the top of %s lungs, heedless of the fact that %s's only scraping %sself even more against the cruel invading shaft.", sender.OwnerName(), sender.hisHer(), sender.heShe(), sender.himHer())); break;
+                        case 1: w.append(t, String.format("Without any lubrication, the insertion is more painful than anything, and %s is ashamed with %sself as %s starts uncontrollably sobbing.", sender.ownerName(), sender.himHer(), sender.heShe())); break;
+                        default: w.append(t, String.format("At first, %s tries to pretend that %s can take it.  But the painful friction against %s unlubricated anal walls is too much for %s, and soon %2$s's crying and begging without restraint.", sender.ownerName(), sender.heShe(), sender.hisHer(), sender.himHer()));
+                    }
                 } else
-                if(sender.getDeviancy() > 66)
-                    w.append(t, String.format("%s's eyes shoot wide open, a scream caught in %s throat.  But when it finally comes out, there's a lewd quality to it, a sign of %2$s insatiable masochism.", sender.OwnerName(), sender.hisHer()));
-                else
-                if(sender.getDeviancy() > 33)
-                    w.append(t, String.format("%s whimpers, trying to curl up and protect %sself, but %s can't hide from the painful friction of the shaft invading %s unprepared hole.  %s moans aren't entirely from pain, as %s feels a hint of shameful pleasure as well.", sender.OwnerName(), sender.himHer(), sender.heShe(), sender.hisHer(), sender.HisHer(), sender.heShe()));
-                else
-                    w.append(t, String.format("%s screams, crying and sobbing at the explosion of agony %s feels from the unlubricated insertion.  The pain far outweighs the pleasure.", sender.OwnerName(), sender.heShe()));
+                switch (sender.getDeviancy() / 33) {
+                    case 0: w.append(t, String.format("%s screams, crying and sobbing at the explosion of agony %s feels from the unlubricated insertion.  The pain far outweighs the pleasure.", sender.OwnerName(), sender.heShe())); break;
+                    case 1: w.append(t, String.format("%s whimpers, trying to curl up and protect %sself, but %s can't hide from the painful friction of the shaft invading %s unprepared hole.  %s moans aren't entirely from pain, as %s feels a hint of shameful pleasure as well.", sender.OwnerName(), sender.himHer(), sender.heShe(), sender.hisHer(), sender.HisHer(), sender.heShe())); break;
+                    default: w.append(t, String.format("%s's eyes shoot wide open, a scream caught in %s throat.  But when it finally comes out, there's a lewd quality to it, a sign of %2$s insatiable masochism.", sender.OwnerName(), sender.hisHer()));
+                }
                 if(sender.getGender() == Forsaken.Gender.MALE && sender.isVVirg())
-                    if(sender.getObedience() > 66)
-                        w.append(t, String.format("  Afterward, %s'll be full of joyful pride that %s saw fit to break %s in with such a memorable fucking, but for now, %1$s's in too much pain to think about it in those terms.", sender.heShe(), receiver.ownerName(), sender.himHer()));
-                    else
-                    if(sender.getObedience() > 33)
-                        w.append(t, String.format("  %s realizes that it was a mistake to ever take pride in managing to protect %s anal virginity.", sender.HeShe(), sender.hisHer()));
-                    else
-                        w.append(t, String.format("  A part of %s is horrified that %s was broken so easily, and %s confidence in %3$s own masculinity will never recover.", sender.himHer(), sender.heShe(), sender.hisHer()));
+                    switch (sender.getObedience() / 33) {
+                        case 0: w.append(t, String.format("  A part of %s is horrified that %s was broken so easily, and %s confidence in %3$s own masculinity will never recover.", sender.himHer(), sender.heShe(), sender.hisHer())); break;
+                        case 1: w.append(t, String.format("  %s realizes that it was a mistake to ever take pride in managing to protect %s anal virginity.", sender.HeShe(), sender.hisHer())); break;
+                        default: w.append(t, String.format("  Afterward, %s'll be full of joyful pride that %s saw fit to break %s in with such a memorable fucking, but for now, %1$s's in too much pain to think about it in those terms.", sender.heShe(), receiver.ownerName(), sender.himHer()));
+                    }
             }
         } else
         if(this == Project.StripOther)
@@ -2383,69 +2157,55 @@ public class Activity
             {
                 if(sender.getObedience() > 66)
                 {
-                    if(sender.getDisgrace() > 66)
-                        w.append(t, String.format("%s doesn't even seem to notice all the spectators.  %s only has eyes for %s.", sender.OwnerName(), sender.HeShe(), receiver.ownerName()));
-                    else
-                    if(sender.getDisgrace() > 33)
-                        w.append(t, String.format("%s smiles, eager to help %s put on a show for everyone.", sender.OwnerName(), receiver.ownerName()));
-                    else
-                        w.append(t, String.format("%s looks afraid, but also eager, wanting to show everyone that %s really is nothing more than %s's toy.", sender.OwnerName(), sender.heShe(), receiver.ownerName()));
+                    switch (sender.getDisgrace() / 33) {
+                        case 0: w.append(t, String.format("%s looks afraid, but also eager, wanting to show everyone that %s really is nothing more than %s's toy.", sender.OwnerName(), sender.heShe(), receiver.ownerName())); break;
+                        case 1: w.append(t, String.format("%s smiles, eager to help %s put on a show for everyone.", sender.OwnerName(), receiver.ownerName())); break;
+                        default: w.append(t, String.format("%s doesn't even seem to notice all the spectators.  %s only has eyes for %s.", sender.OwnerName(), sender.HeShe(), receiver.ownerName()));
+                    }
                 } else
                 if(sender.getObedience() > 33)
                 {
                     if(sender.forsakenOwner != null && sender.forsakenOwner.timesExposed < 300_000)
                     {
-                        if(sender.getDignity() > 66)
-                            w.append(t, String.format("%s is clearly terrified of the prospect of being forced to show everything, but %s's come too far to back out now.", sender.OwnerName(), sender.heShe()));
-                        else
-                        if(sender.getDignity() > 33)
-                            w.append(t, String.format("%s looks resigned to the fact that %s'll shortly be showing off more than %2$s ever has before.", sender.OwnerName(), sender.heShe()));
-                        else
-                            w.append(t, String.format("%s just ignores all the shouts and jeers.", sender.OwnerName()));
+                        switch (sender.getDignity() / 33) {
+                            case 0: w.append(t, String.format("%s just ignores all the shouts and jeers.", sender.OwnerName())); break;
+                            case 1: w.append(t, String.format("%s looks resigned to the fact that %s'll shortly be showing off more than %2$s ever has before.", sender.OwnerName(), sender.heShe())); break;
+                            default: w.append(t, String.format("%s is clearly terrified of the prospect of being forced to show everything, but %s's come too far to back out now.", sender.OwnerName(), sender.heShe()));
+                        }
                     } else
-                    if(sender.getDignity() > 66)
-                        w.append(t, String.format("%s tries to make it look like it was %s idea to undress, moving to help %s strip %s.", sender.OwnerName(), sender.hisHer(), receiver.ownerName(), sender.himHer()));
-                    else
-                    if(sender.getDignity() > 33)
-                        w.append(t, String.format("%s tries to make the best of it, smiling at the crowd.", sender.OwnerName()));
-                    else
-                        w.append(t, String.format("%s just ignores all the shouts and jeers.", sender.OwnerName()));
+                    switch (sender.getDignity() / 33) {
+                        case 0: w.append(t, String.format("%s just ignores all the shouts and jeers.", sender.OwnerName())); break;
+                        case 1: w.append(t, String.format("%s tries to make the best of it, smiling at the crowd.", sender.OwnerName())); break;
+                        default: w.append(t, String.format("%s tries to make it look like it was %s idea to undress, moving to help %s strip %s.", sender.OwnerName(), sender.hisHer(), receiver.ownerName(), sender.himHer()));
+                    }
                 } else
-                if(sender.getDeviancy() > 66)
-                    w.append(t, String.format("%s's eyes dart back and forth among all the people watching, and despite %s anger, %s's panting wth barely-restrained desire.", sender.OwnerName(), sender.hisHer(), sender.heShe()));
-                else
-                if(sender.getDeviancy() > 33)
-                    w.append(t, String.format("%s huffs angrily, but the heat rising to %s cheeks is partly from arousal.", sender.OwnerName(), sender.hisHer()));
-                else
-                    w.append(t, String.format("%s clutches at %s clothes and glares at %s.", sender.OwnerName(), sender.hisHer(), receiver.ownerName()));
+                switch (sender.getDeviancy() / 33) {
+                    case 0: w.append(t, String.format("%s clutches at %s clothes and glares at %s.", sender.OwnerName(), sender.hisHer(), receiver.ownerName())); break;
+                    case 1: w.append(t, String.format("%s huffs angrily, but the heat rising to %s cheeks is partly from arousal.", sender.OwnerName(), sender.hisHer())); break;
+                    default: w.append(t, String.format("%s's eyes dart back and forth among all the people watching, and despite %s anger, %s's panting wth barely-restrained desire.", sender.OwnerName(), sender.hisHer(), sender.heShe()));
+                }
             } else
             if(sender.getDeviancy() > 66)
             {
-                if(sender.getInnocence() > 66)
-                    w.append(t, String.format("The act of being stripped immediately causes %s's mind to wander off into erotic fantasy, and %s starts to drool with a silly expression on %s face.", sender.ownerName(), sender.heShe(), sender.hisHer()));
-                else
-                if(sender.getInnocence() > 33)
-                    w.append(t, String.format("As %s clothes are taken off, %s gets more and more turned on, and soon %s can't think of anything but sex.", sender.hisHer(), sender.ownerName(), sender.heShe()));
-                else
-                    w.append(t, String.format("%s starts to breathe more quickly, imagining what might come next.", sender.OwnerName()));
+                switch (sender.getInnocence() / 33) {
+                    case 0: w.append(t, String.format("%s starts to breathe more quickly, imagining what might come next.", sender.OwnerName())); break;
+                    case 1: w.append(t, String.format("As %s clothes are taken off, %s gets more and more turned on, and soon %s can't think of anything but sex.", sender.hisHer(), sender.ownerName(), sender.heShe())); break;
+                    default: w.append(t, String.format("The act of being stripped immediately causes %s's mind to wander off into erotic fantasy, and %s starts to drool with a silly expression on %s face.", sender.ownerName(), sender.heShe(), sender.hisHer()));
+                }
             } else
             if(sender.getDeviancy() > 33)
             {
-                if(sender.getConfidence() > 66)
-                    w.append(t, String.format("%s proudly shows off, refusing to be ashamed of %s body.", sender.OwnerName(), sender.hisHer()));
-                else
-                if(sender.getConfidence() > 33)
-                    w.append(t, String.format("%s blushes, anticipating what's to come.", sender.OwnerName()));
-                else
-                    w.append(t, String.format("%s glances off to the side and reflexively tries to cover %sself.", sender.OwnerName(), sender.himHer()));
+                switch (sender.getConfidence() / 33) {
+                    case 0: w.append(t, String.format("%s glances off to the side and reflexively tries to cover %sself.", sender.OwnerName(), sender.himHer())); break;
+                    case 1: w.append(t, String.format("%s blushes, anticipating what's to come.", sender.OwnerName())); break;
+                    default: w.append(t, String.format("%s proudly shows off, refusing to be ashamed of %s body.", sender.OwnerName(), sender.hisHer()));
+                }
             } else
-            if(sender.getObedience() > 66)
-                w.append(t, String.format("%s smiles, happy that %s wants to see %s body.", sender.OwnerName(), receiver.ownerName(), sender.hisHer()));
-            else
-            if(sender.getObedience() > 33)
-                w.append(t, String.format("%s sighs, accepting that this was inevitable.", sender.OwnerName()));
-            else
-                w.append(t, String.format("%s clutches at %s clothes and glares at %s.", sender.OwnerName(), sender.hisHer(), receiver.ownerName()));
+            switch (sender.getObedience() / 33) {
+                case 0: w.append(t, String.format("%s clutches at %s clothes and glares at %s.", sender.OwnerName(), sender.hisHer(), receiver.ownerName())); break;
+                case 1: w.append(t, String.format("%s sighs, accepting that this was inevitable.", sender.OwnerName())); break;
+                default: w.append(t, String.format("%s smiles, happy that %s wants to see %s body.", sender.OwnerName(), receiver.ownerName(), sender.hisHer()));
+            }
         if(counterpart != null)
         {
             Boolean found = false;

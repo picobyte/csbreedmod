@@ -122,13 +122,11 @@ public class WorldState
                         else
                             c.say(t, "What's going to happen to me now...?");
                     } else
-                    if(c.innocence > 66)
-                        c.say(t, "It feels like... there's something really bad inside me...");
-                    else
-                    if(c.innocence > 33)
-                        c.say(t, "If they find out, they'll all turn against me...");
-                    else
-                        c.say(t, "I... I must not let anyone know what's happened to me...");
+                    switch (c.innocence / 33) {
+                        case 0: c.say(t, "I... I must not let anyone know what's happened to me..."); break;
+                        case 1: c.say(t, "If they find out, they'll all turn against me..."); break;
+                        default: c.say(t, "It feels like... there's something really bad inside me...");
+                    }
                 } else
                 if(thisAttack == 1)
                 {
@@ -307,43 +305,35 @@ public class WorldState
                     } else
                     if(c.innocence > 33)
                     {
-                        if(c.dignity > 66)
-                            c.say(t, "I want to... dream some more...");
-                        else
-                        if(c.dignity > 33)
-                            c.say(t, "Huh...  Why am I... touching myself...?  Well, whatever...");
-                        else
-                            c.say(t, "Cum, cum, cum...!");
+                        switch (c.dignity / 33) {
+                            case 0: c.say(t, "Cum, cum, cum...!"); break;
+                            case 1: c.say(t, "Huh...  Why am I... touching myself...?  Well, whatever..."); break;
+                            default: c.say(t, "I want to... dream some more...");
+                        }
                     } else
-                    if(c.dignity > 66)
-                        c.say(t, "I wouldn't mind... continuing to dream...");
-                    else
-                    if(c.dignity > 33)
-                        c.say(t, "Instead of thinking... let us just feel good...");
-                    else
-                        c.say(t, "I'm tired... of resisting...");
+                    switch (c.dignity / 33) {
+                        case 0: c.say(t, "I'm tired... of resisting..."); break;
+                        case 1: c.say(t, "Instead of thinking... let us just feel good..."); break;
+                        default: c.say(t, "I wouldn't mind... continuing to dream...");
+                    }
                 } else
                 if(thisAttack == 1)
                 {
                     Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.JOY);
-                    if(c.dignity > 66)
-                        c.say(t, "Aaah...  Everyone's watching...");
-                    else
-                    if(c.dignity > 33)
-                        c.say(t, "So... good...!");
-                    else
-                        c.say(t, "Yes... together...!");
+                    switch (c.dignity / 33) {
+                        case 0: c.say(t, "Yes... together...!"); break;
+                        case 1: c.say(t, "So... good...!"); break;
+                        default: c.say(t, "Aaah...  Everyone's watching...");
+                    }
                 } else
                 if(thisAttack == 2)
                 {
                     Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
-                    if(c.innocence > 66)
-                        c.say(t, "Wh-What's happening!?");
-                    else
-                    if(c.innocence > 33)
-                        c.say(t, "I... I can't...");
-                    else
-                        c.say(t, "Can't... move...!");
+                    switch (c.innocence / 33) {
+                        case 0: c.say(t, "Can't... move...!"); break;
+                        case 1: c.say(t, "I... I can't..."); break;
+                        default: c.say(t, "Wh-What's happening!?");
+                    }
                 } else
                 if(thisAttack == 0)
                     if(c.confidence > 66)
@@ -433,13 +423,11 @@ public class WorldState
             if(thisAttack == 2)
             {
                 Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                if(c.innocence > 66)
-                    c.say(t, "Gaaah, shut up already!");
-                else
-                if(c.innocence > 33)
-                    c.say(t, "Disgusting...");
-                else
-                    c.say(t, "Nothing but a cheap trick...");
+                switch (c.innocence / 33) {
+                    case 0: c.say(t, "Nothing but a cheap trick..."); break;
+                    case 1: c.say(t, "Disgusting..."); break;
+                    default: c.say(t, "Gaaah, shut up already!");
+                }
             } else
             if(thisAttack == 0)
                 if(c.confidence > 66)
@@ -467,53 +455,43 @@ public class WorldState
                     Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.SHAME);
                     if(c.confidence > 66)
                     {
-                        if(c.morality > 66)
-                            c.say(t, "To think I was such a selfish person after all...");
-                        else
-                        if(c.morality > 33)
-                            c.say(t, "I was never strong after all...");
-                        else
-                            c.say(t, "Fine, take my soul... I hope you choke on it...");
+                        switch (c.morality / 33) {
+                            case 0: c.say(t, "Fine, take my soul... I hope you choke on it..."); break;
+                            case 1: c.say(t, "I was never strong after all..."); break;
+                            default: c.say(t, "To think I was such a selfish person after all...");
+                        }
                     } else
                     if(c.confidence > 33)
                     {
-                        if(c.morality > 66)
-                            c.say(t, "Even though I know that this energy will be used to hurt people... I can't help it...");
-                        else
-                        if(c.morality > 33)
-                            c.say(t, "I'm... done...");
-                        else
-                            c.say(t, "I hate giving them what they want, but if it lets me die...");
+                        switch (c.morality / 33) {
+                            case 0: c.say(t, "I hate giving them what they want, but if it lets me die..."); break;
+                            case 1: c.say(t, "I'm... done..."); break;
+                            default: c.say(t, "Even though I know that this energy will be used to hurt people... I can't help it...");
+                        }
                     } else
-                    if(c.morality > 66)
-                        c.say(t, "I'm sorry, everyone... but I can't fight anymore...");
-                    else
-                    if(c.morality > 33)
-                        c.say(t, "I'm so tired... of fighting...");
-                    else
-                        c.say(t, "I don't care about anyone else, just let me die...");
+                    switch (c.morality / 33) {
+                        case 0: c.say(t, "I don't care about anyone else, just let me die..."); break;
+                        case 1: c.say(t, "I'm so tired... of fighting..."); break;
+                        default: c.say(t, "I'm sorry, everyone... but I can't fight anymore...");
+                    }
                 } else
                 if(thisAttack == 1)
                 {
                     Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SWOON, Project.Emotion.SWOON);
-                    if(c.morality > 66)
-                        c.say(t, "Everything is... alright...");
-                    else
-                    if(c.morality > 33)
-                        c.say(t, "So warm...");
-                    else
-                        c.say(t, "This is... nice...");
+                    switch (c.morality / 33) {
+                        case 0: c.say(t, "This is... nice..."); break;
+                        case 1: c.say(t, "So warm..."); break;
+                        default: c.say(t, "Everything is... alright...");
+                    }
                 } else
                 if(thisAttack == 2)
                 {
                     Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SWOON, Project.Emotion.SWOON);
-                    if(c.dignity > 66)
-                        c.say(t, "...");
-                    else
-                    if(c.dignity > 33)
-                        c.say(t, "...");
-                    else
-                        c.say(t, "...");
+                    switch (c.dignity / 33) {
+                        case 0: c.say(t, "..."); break;
+                        case 1: c.say(t, "..."); break;
+                        default: c.say(t, "...");
+                    }
                 } else
                 if(thisAttack == 0)
                     if(c.confidence > 66)
@@ -874,13 +852,11 @@ public class WorldState
                             if(thisAttack == 1)
                             {
                                 Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                                if(c.dignity > 66)
-                                    c.say(t, "You'll never be able to get it inside, dummy!");
-                                else
-                                if(c.dignity > 33)
-                                    c.say(t, "You monster...");
-                                else
-                                    c.say(t, "Get that gross thing away from me!");
+                                switch (c.dignity / 33) {
+                                    case 0: c.say(t, "Get that gross thing away from me!"); break;
+                                    case 1: c.say(t, "You monster..."); break;
+                                    default: c.say(t, "You'll never be able to get it inside, dummy!");
+                                }
                             } else
                             if(thisAttack == 2)
                                 if(c.confidence > 66)
@@ -976,13 +952,11 @@ public class WorldState
                         if(thisAttack == 1)
                         {
                             Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
-                            if(c.dignity > 66)
-                                c.say(t, "You will not break my Sexual Barrier, Demon Lord!");
-                            else
-                            if(c.dignity > 33)
-                                c.say(t, "This is a pathetic showing, Demon Lord.");
-                            else
-                                c.say(t, "Your disgusting fluids have no effect on me, Demon Lord.");
+                            switch (c.dignity / 33) {
+                                case 0: c.say(t, "Your disgusting fluids have no effect on me, Demon Lord."); break;
+                                case 1: c.say(t, "This is a pathetic showing, Demon Lord."); break;
+                                default: c.say(t, "You will not break my Sexual Barrier, Demon Lord!");
+                            }
                         } else
                         if(thisAttack == 2)
                             if(c.confidence > 66)
@@ -1025,24 +999,20 @@ public class WorldState
                         if(thisAttack == 1)
                         {
                             Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
-                            if(c.dignity > 66)
-                                c.say(t, "S-Something weird is coming out...!");
-                            else
-                            if(c.dignity > 33)
-                                c.say(t, "D-Don't rub iiit...!");
-                            else
-                                c.say(t, "M-My hips are moving on their own...!");
+                            switch (c.dignity / 33) {
+                                case 0: c.say(t, "M-My hips are moving on their own...!"); break;
+                                case 1: c.say(t, "D-Don't rub iiit...!"); break;
+                                default: c.say(t, "S-Something weird is coming out...!");
+                            }
                         } else
                         if(thisAttack == 2)
                         {
                             Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
-                            if(c.confidence > 66)
-                                c.say(t, "It feels too goood!");
-                            else
-                            if(c.confidence > 33)
-                                c.say(t, "Haaah, wow...!");
-                            else
-                                c.say(t, "Aaah, pleaaase...");
+                            switch (c.confidence / 33) {
+                                case 0: c.say(t, "Aaah, pleaaase..."); break;
+                                case 1: c.say(t, "Haaah, wow...!"); break;
+                                default: c.say(t, "It feels too goood!");
+                            }
                         }
                     } else
                     if(c.innocence > 33)
@@ -1114,13 +1084,11 @@ public class WorldState
                     if(thisAttack == 1)
                     {
                         Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
-                        if(c.dignity > 66)
-                            c.say(t, "M-Making me climax is m-meaningless...!");
-                        else
-                        if(c.dignity > 33)
-                            c.say(t, "You're... wasting... your...  nnn...!");
-                        else
-                            c.say(t, "Can't... focus... through... orgasm...");
+                        switch (c.dignity / 33) {
+                            case 0: c.say(t, "Can't... focus... through... orgasm..."); break;
+                            case 1: c.say(t, "You're... wasting... your...  nnn...!"); break;
+                            default: c.say(t, "M-Making me climax is m-meaningless...!");
+                        }
                     } else
                     if(thisAttack == 2)
                         if(c.confidence > 66)
@@ -1327,13 +1295,11 @@ public class WorldState
                     if(thisAttack == 1)
                     {
                         Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
-                        if(c.dignity > 66)
-                            c.say(t, "Do as you like, Demon Lord!");
-                        else
-                        if(c.dignity > 33)
-                            c.say(t, "This is a pathetic showing, Demon Lord.");
-                        else
-                            c.say(t, "Your disgusting fluids have no effect on me, Demon Lord.");
+                        switch (c.dignity / 33) {
+                            case 0: c.say(t, "Your disgusting fluids have no effect on me, Demon Lord."); break;
+                            case 1: c.say(t, "This is a pathetic showing, Demon Lord."); break;
+                            default: c.say(t, "Do as you like, Demon Lord!");
+                        }
                     } else
                     if(thisAttack == 2)
                         if(c.confidence > 66)
@@ -1373,24 +1339,20 @@ public class WorldState
                     if(thisAttack == 1)
                     {
                         Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.FEAR);
-                        if(c.dignity > 66)
-                            c.say(t, "S-Something weird is coming out...!");
-                        else
-                        if(c.dignity > 33)
-                            c.say(t, "D-Don't rub iiit...!");
-                        else
-                            c.say(t, "M-My hips are moving on their own...!");
+                        switch (c.dignity / 33) {
+                            case 0: c.say(t, "M-My hips are moving on their own...!"); break;
+                            case 1: c.say(t, "D-Don't rub iiit...!"); break;
+                            default: c.say(t, "S-Something weird is coming out...!");
+                        }
                     } else
                     if(thisAttack == 2)
                     {
                         Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.FEAR);
-                        if(c.confidence > 66)
-                            c.say(t, "It feels too goood!");
-                        else
-                        if(c.confidence > 33)
-                            c.say(t, "Haaah, wow...!");
-                        else
-                            c.say(t, "Aaah, pleaaase...");
+                        switch (c.confidence / 33) {
+                            case 0: c.say(t, "Aaah, pleaaase..."); break;
+                            case 1: c.say(t, "Haaah, wow...!"); break;
+                            default: c.say(t, "It feels too goood!");
+                        }
                     }
                 } else
                 if(c.innocence > 33)
@@ -1415,13 +1377,11 @@ public class WorldState
                     if(thisAttack == 1)
                     {
                         Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.FEAR);
-                        if(c.dignity > 66)
-                            c.say(t, "Nooo, don't look!");
-                        else
-                        if(c.dignity > 33)
-                            c.say(t, "I can't... nnn... can't let this break me...!");
-                        else
-                            c.say(t, "I'm gonna cum from getting raped!");
+                        switch (c.dignity / 33) {
+                            case 0: c.say(t, "I'm gonna cum from getting raped!"); break;
+                            case 1: c.say(t, "I can't... nnn... can't let this break me...!"); break;
+                            default: c.say(t, "Nooo, don't look!");
+                        }
                     } else
                     if(thisAttack == 2)
                         if(c.confidence > 66)
@@ -1459,13 +1419,11 @@ public class WorldState
                 if(thisAttack == 1)
                 {
                     Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
-                    if(c.dignity > 66)
-                        c.say(t, "M-Making me climax is m-meaningless...!");
-                    else
-                    if(c.dignity > 33)
-                        c.say(t, "You're... wasting... your...  nnn...!");
-                    else
-                        c.say(t, "Can't... focus... through... orgasm...");
+                    switch (c.dignity / 33) {
+                        case 0: c.say(t, "Can't... focus... through... orgasm..."); break;
+                        case 1: c.say(t, "You're... wasting... your...  nnn...!"); break;
+                        default: c.say(t, "M-Making me climax is m-meaningless...!");
+                    }
                 } else
                 if(thisAttack == 2)
                     if(c.confidence > 66)
@@ -1507,13 +1465,11 @@ public class WorldState
                     if(thisAttack == 1)
                     {
                         Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
-                        if(c.dignity > 66)
-                            c.say(t, "No, no, no!");
-                        else
-                        if(c.dignity > 33)
-                            c.say(t, "No, don't squirt it inside!");
-                        else
-                            c.say(t, "Ew, no, it's filling me with something!");
+                        switch (c.dignity / 33) {
+                            case 0: c.say(t, "Ew, no, it's filling me with something!"); break;
+                            case 1: c.say(t, "No, don't squirt it inside!"); break;
+                            default: c.say(t, "No, no, no!");
+                        }
                     } else
                     if(thisAttack == 2)
                         if(c.confidence > 66)
@@ -1641,13 +1597,11 @@ public class WorldState
                 if(thisAttack == 0)
                 {
                     Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.FEAR);
-                    if(c.morality > 66)
-                        c.say(t, "Nooo!  This isn't supposed to feel goood!");
-                    else
-                    if(c.morality > 33)
-                        c.say(t, "Aaah, it went insiiide!");
-                    else
-                        c.say(t, "Aaah, it feels goood!");
+                    switch (c.morality / 33) {
+                        case 0: c.say(t, "Aaah, it feels goood!"); break;
+                        case 1: c.say(t, "Aaah, it went insiiide!"); break;
+                        default: c.say(t, "Nooo!  This isn't supposed to feel goood!");
+                    }
                 } else
                 if(thisAttack == 1)
                 {
@@ -1687,35 +1641,29 @@ public class WorldState
                 if(thisAttack == 0)
                 {
                     Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.ANGER);
-                    if(c.morality > 66)
-                        c.say(t, "Don't... Don't make me enjoy this...!");
-                    else
-                    if(c.morality > 33)
-                        c.say(t, "Don't put it-  Aaah, nooo!");
-                    else
-                        c.say(t, "Disgusting... nn... beast...!");
+                    switch (c.morality / 33) {
+                        case 0: c.say(t, "Disgusting... nn... beast...!"); break;
+                        case 1: c.say(t, "Don't put it-  Aaah, nooo!"); break;
+                        default: c.say(t, "Don't... Don't make me enjoy this...!");
+                    }
                 } else
                 if(thisAttack == 1)
                 {
                     Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.FEAR);
-                    if(c.dignity > 66)
-                        c.say(t, "I'm not... I'm not... c-cummiiing...!");
-                    else
-                    if(c.dignity > 33)
-                        c.say(t, "Cumming...!");
-                    else
-                        c.say(t, "I'm cumming, I'm cumming from getting creampied!");
+                    switch (c.dignity / 33) {
+                        case 0: c.say(t, "I'm cumming, I'm cumming from getting creampied!"); break;
+                        case 1: c.say(t, "Cumming...!"); break;
+                        default: c.say(t, "I'm not... I'm not... c-cummiiing...!");
+                    }
                 } else
                 if(thisAttack == 2)
                 {
                     Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
-                    if(c.confidence > 66)
-                        c.say(t, "Nnn!  Guh!");
-                    else
-                    if(c.confidence > 33)
-                        c.say(t, "Urgh, it's going deeper...!");
-                    else
-                        c.say(t, "F-Fine... hurt me more...");
+                    switch (c.confidence / 33) {
+                        case 0: c.say(t, "F-Fine... hurt me more..."); break;
+                        case 1: c.say(t, "Urgh, it's going deeper...!"); break;
+                        default: c.say(t, "Nnn!  Guh!");
+                    }
                 }
             } else
             if(thisAttack == 0)
@@ -1738,13 +1686,11 @@ public class WorldState
             if(thisAttack == 1)
             {
                 Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.FEAR);
-                if(c.dignity > 66)
-                    c.say(t, "A-As if I'd climax from... nn!?  Oooh!");
-                else
-                if(c.dignity > 33)
-                    c.say(t, "Fluids... inducing climax...!");
-                else
-                    c.say(t, "C-Can't stop climaxing...!");
+                switch (c.dignity / 33) {
+                    case 0: c.say(t, "C-Can't stop climaxing...!"); break;
+                    case 1: c.say(t, "Fluids... inducing climax...!"); break;
+                    default: c.say(t, "A-As if I'd climax from... nn!?  Oooh!");
+                }
             } else
             if(thisAttack == 2)
                 if(c.confidence > 66)
@@ -1851,24 +1797,20 @@ public class WorldState
                             if(thisAttack == 1)
                             {
                                 Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
-                                if(c.morality > 66)
-                                    c.say(t, "I'm going to lose my mind!");
-                                else
-                                if(c.morality > 33)
-                                    c.say(t, "I can't breathe!");
-                                else
-                                    c.say(t, "I can't fight like this!");
+                                switch (c.morality / 33) {
+                                    case 0: c.say(t, "I can't fight like this!"); break;
+                                    case 1: c.say(t, "I can't breathe!"); break;
+                                    default: c.say(t, "I'm going to lose my mind!");
+                                }
                             } else
                             if(thisAttack == 2)
                             {
                                 Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
-                                if(c.dignity > 66)
-                                    c.say(t, "No, let go of me...");
-                                else
-                                if(c.dignity > 33)
-                                    c.say(t, "This is... wrong...");
-                                else
-                                    c.say(t, "Got to... fight back...");
+                                switch (c.dignity / 33) {
+                                    case 0: c.say(t, "Got to... fight back..."); break;
+                                    case 1: c.say(t, "This is... wrong..."); break;
+                                    default: c.say(t, "No, let go of me...");
+                                }
                             }
                         } else
                         if(thisAttack == 0)
@@ -1928,24 +1870,20 @@ public class WorldState
                             if(thisAttack == 0)
                             {
                                 Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
-                                if(c.innocence > 66)
-                                    c.say(t, "Stop- Ahahah, s-stop doing weird stuff to my body!");
-                                else
-                                if(c.innocence > 33)
-                                    c.say(t, "Don't- Ahahah, don't mess with me!  Hahahahah!");
-                                else
-                                    c.say(t, "Ahah!?  Wh-What do you think you're- Hahahah, ahahahah!");
+                                switch (c.innocence / 33) {
+                                    case 0: c.say(t, "Ahah!?  Wh-What do you think you're- Hahahah, ahahahah!"); break;
+                                    case 1: c.say(t, "Don't- Ahahah, don't mess with me!  Hahahahah!"); break;
+                                    default: c.say(t, "Stop- Ahahah, s-stop doing weird stuff to my body!");
+                                }
                             } else
                             if(thisAttack == 1)
                             {
                                 Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.FEAR);
-                                if(c.morality > 66)
-                                    c.say(t, "It's... corrupting my body...!");
-                                else
-                                if(c.morality > 33)
-                                    c.say(t, "Holding my breath should be easy, but...");
-                                else
-                                    c.say(t, "Damn it, my body won't listen!");
+                                switch (c.morality / 33) {
+                                    case 0: c.say(t, "Damn it, my body won't listen!"); break;
+                                    case 1: c.say(t, "Holding my breath should be easy, but..."); break;
+                                    default: c.say(t, "It's... corrupting my body...!");
+                                }
                             } else
                             if(thisAttack == 2)
                                 if(c.dignity > 66)
@@ -1968,47 +1906,39 @@ public class WorldState
                             if(thisAttack == 0)
                             {
                                 Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
-                                if(c.innocence > 66)
-                                    c.say(t, "Hahah, ahahah, no faaair!");
-                                else
-                                if(c.innocence > 33)
-                                    c.say(t, "Hahahah, I won't let you break meee!");
-                                else
-                                    c.say(t, "Th-This is- Hahahah!  Underhanded!  Ahahahah!");
+                                switch (c.innocence / 33) {
+                                    case 0: c.say(t, "Th-This is- Hahahah!  Underhanded!  Ahahahah!"); break;
+                                    case 1: c.say(t, "Hahahah, I won't let you break meee!"); break;
+                                    default: c.say(t, "Hahah, ahahah, no faaair!");
+                                }
                             } else
                             if(thisAttack == 1)
                             {
                                 Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
-                                if(c.morality > 66)
-                                    c.say(t, "I can't let myself laugh!  I can't...!");
-                                else
-                                if(c.morality > 33)
-                                    c.say(t, "No!  If I laugh now...!");
-                                else
-                                    c.say(t, "I'll... I'll just fight my way out!  As soon as I stop laughing...");
+                                switch (c.morality / 33) {
+                                    case 0: c.say(t, "I'll... I'll just fight my way out!  As soon as I stop laughing..."); break;
+                                    case 1: c.say(t, "No!  If I laugh now...!"); break;
+                                    default: c.say(t, "I can't let myself laugh!  I can't...!");
+                                }
                             } else
                             if(thisAttack == 2)
                             {
                                 Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.SHAME);
-                                if(c.dignity > 66)
-                                    c.say(t, "What would they say if they saw this...?");
-                                else
-                                if(c.dignity > 33)
-                                    c.say(t, "This is seriously messed up...");
-                                else
-                                    c.say(t, "I shouldn't be enjoying this, but...");
+                                switch (c.dignity / 33) {
+                                    case 0: c.say(t, "I shouldn't be enjoying this, but..."); break;
+                                    case 1: c.say(t, "This is seriously messed up..."); break;
+                                    default: c.say(t, "What would they say if they saw this...?");
+                                }
                             }
                         } else
                         if(thisAttack == 0)
                         {
                             Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.FEAR);
-                            if(c.innocence > 66)
-                                c.say(t, "Hahah, p-please, don't- Ahahahah!");
-                            else
-                            if(c.innocence > 33)
-                                c.say(t, "Ahahahah, nooo!");
-                            else
-                                c.say(t, "Th-The combined stimulation is- Ngh!  Hahahahahah!");
+                            switch (c.innocence / 33) {
+                                case 0: c.say(t, "Th-The combined stimulation is- Ngh!  Hahahahahah!"); break;
+                                case 1: c.say(t, "Ahahahah, nooo!"); break;
+                                default: c.say(t, "Hahah, p-please, don't- Ahahahah!");
+                            }
                         } else
                         if(thisAttack == 1)
                         {
@@ -2086,13 +2016,11 @@ public class WorldState
                         if(thisAttack == 2)
                         {
                             Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.FEAR);
-                            if(c.dignity > 66)
-                                c.say(t, "No, this should be beneath me!");
-                            else
-                            if(c.dignity > 33)
-                                c.say(t, "My body is betraying me!");
-                            else
-                                c.say(t, "I should be able to fight back, so why...?");
+                            switch (c.dignity / 33) {
+                                case 0: c.say(t, "I should be able to fight back, so why...?"); break;
+                                case 1: c.say(t, "My body is betraying me!"); break;
+                                default: c.say(t, "No, this should be beneath me!");
+                            }
                         }
                     } else
                     if(c.confidence > 33)
@@ -2122,24 +2050,20 @@ public class WorldState
                         if(thisAttack == 1)
                         {
                             Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.FEAR);
-                            if(c.morality > 66)
-                                c.say(t, "I'm... going insane...");
-                            else
-                            if(c.morality > 33)
-                                c.say(t, "It got me...");
-                            else
-                                c.say(t, "Am I really so helpless...?");
+                            switch (c.morality / 33) {
+                                case 0: c.say(t, "Am I really so helpless...?"); break;
+                                case 1: c.say(t, "It got me..."); break;
+                                default: c.say(t, "I'm... going insane...");
+                            }
                         } else
                         if(thisAttack == 2)
                         {
                             Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.FEAR);
-                            if(c.dignity > 66)
-                                c.say(t, "Stop... messing with me...!");
-                            else
-                            if(c.dignity > 33)
-                                c.say(t, "They're finding all my weak spots!");
-                            else
-                                c.say(t, "Come on, move...!");
+                            switch (c.dignity / 33) {
+                                case 0: c.say(t, "Come on, move...!"); break;
+                                case 1: c.say(t, "They're finding all my weak spots!"); break;
+                                default: c.say(t, "Stop... messing with me...!");
+                            }
                         }
                     } else
                     if(thisAttack == 0)
@@ -2163,13 +2087,11 @@ public class WorldState
                     if(thisAttack == 1)
                     {
                         Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.FEAR);
-                        if(c.morality > 66)
-                            c.say(t, "What's wrong with me?");
-                        else
-                        if(c.morality > 33)
-                            c.say(t, "I failed...");
-                        else
-                            c.say(t, "I give up...");
+                        switch (c.morality / 33) {
+                            case 0: c.say(t, "I give up..."); break;
+                            case 1: c.say(t, "I failed..."); break;
+                            default: c.say(t, "What's wrong with me?");
+                        }
                     } else
                     if(thisAttack == 2)
                         if(c.dignity > 66)
@@ -2192,31 +2114,25 @@ public class WorldState
                     Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.LEWD);
                     if(c.confidence > 66)
                     {
-                        if(c.innocence > 66)
-                            c.say(t, "C-Can't... fight this... Nnn...!?");
-                        else
-                        if(c.innocence > 33)
-                            c.say(t, "I won't cum!  I won't- Oh, fuck!");
-                        else
-                            c.say(t, "R-Ridiculous, I'd never c-climax from the Demon Lord's...  Ngh!  F-fuck, nooo!");
+                        switch (c.innocence / 33) {
+                            case 0: c.say(t, "R-Ridiculous, I'd never c-climax from the Demon Lord's...  Ngh!  F-fuck, nooo!"); break;
+                            case 1: c.say(t, "I won't cum!  I won't- Oh, fuck!"); break;
+                            default: c.say(t, "C-Can't... fight this... Nnn...!?");
+                        }
                     } else
                     if(c.confidence > 33)
                     {
-                        if(c.innocence > 66)
-                            c.say(t, "Aah, I feel like I'm flyiiing...");
-                        else
-                        if(c.innocence > 33)
-                            c.say(t, "Guh...  I can't believe... I just came... in public...");
-                        else
-                            c.say(t, "N-No!  The Demon Lord's making me climaaax!");
+                        switch (c.innocence / 33) {
+                            case 0: c.say(t, "N-No!  The Demon Lord's making me climaaax!"); break;
+                            case 1: c.say(t, "Guh...  I can't believe... I just came... in public..."); break;
+                            default: c.say(t, "Aah, I feel like I'm flyiiing...");
+                        }
                     } else
-                    if(c.innocence > 66)
-                        c.say(t, "Unh...  S-Something... feels good...");
-                    else
-                    if(c.innocence > 33)
-                        c.say(t, "N-No!  D-Don't make me...  cuuuum!");
-                    else
-                        c.say(t, "The Demon Lord is making me climax like a perveeert!");
+                    switch (c.innocence / 33) {
+                        case 0: c.say(t, "The Demon Lord is making me climax like a perveeert!"); break;
+                        case 1: c.say(t, "N-No!  D-Don't make me...  cuuuum!"); break;
+                        default: c.say(t, "Unh...  S-Something... feels good...");
+                    }
                 }
             } else
             if(c.getPLEALevel() < 3)
@@ -2304,24 +2220,20 @@ public class WorldState
                         if(thisAttack == 1)
                         {
                             Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
-                            if(c.morality > 66)
-                                c.say(t, "I'm going to lose my mind!");
-                            else
-                            if(c.morality > 33)
-                                c.say(t, "I can't breathe!");
-                            else
-                                c.say(t, "I can't fight like this!");
+                            switch (c.morality / 33) {
+                                case 0: c.say(t, "I can't fight like this!"); break;
+                                case 1: c.say(t, "I can't breathe!"); break;
+                                default: c.say(t, "I'm going to lose my mind!");
+                            }
                         } else
                         if(thisAttack == 2)
                         {
                             Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
-                            if(c.dignity > 66)
-                                c.say(t, "No, let go of me...");
-                            else
-                            if(c.dignity > 33)
-                                c.say(t, "This is... wrong...");
-                            else
-                                c.say(t, "Got to... fight back...");
+                            switch (c.dignity / 33) {
+                                case 0: c.say(t, "Got to... fight back..."); break;
+                                case 1: c.say(t, "This is... wrong..."); break;
+                                default: c.say(t, "No, let go of me...");
+                            }
                         }
                     } else
                     if(thisAttack == 0)
@@ -2381,24 +2293,20 @@ public class WorldState
                         if(thisAttack == 0)
                         {
                             Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
-                            if(c.innocence > 66)
-                                c.say(t, "Stop- Ahahah, s-stop doing weird stuff to my body!");
-                            else
-                            if(c.innocence > 33)
-                                c.say(t, "Don't- Ahahah, don't mess with me!  Hahahahah!");
-                            else
-                                c.say(t, "Ahah!?  Wh-What do you think you're- Hahahah, ahahahah!");
+                            switch (c.innocence / 33) {
+                                case 0: c.say(t, "Ahah!?  Wh-What do you think you're- Hahahah, ahahahah!"); break;
+                                case 1: c.say(t, "Don't- Ahahah, don't mess with me!  Hahahahah!"); break;
+                                default: c.say(t, "Stop- Ahahah, s-stop doing weird stuff to my body!");
+                            }
                         } else
                         if(thisAttack == 1)
                         {
                             Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.FEAR);
-                            if(c.morality > 66)
-                                c.say(t, "It's... corrupting my body...!");
-                            else
-                            if(c.morality > 33)
-                                c.say(t, "Holding my breath should be easy, but...");
-                            else
-                                c.say(t, "Damn it, my body won't listen!");
+                            switch (c.morality / 33) {
+                                case 0: c.say(t, "Damn it, my body won't listen!"); break;
+                                case 1: c.say(t, "Holding my breath should be easy, but..."); break;
+                                default: c.say(t, "It's... corrupting my body...!");
+                            }
                         } else
                         if(thisAttack == 2)
                             if(c.dignity > 66)
@@ -2421,47 +2329,39 @@ public class WorldState
                         if(thisAttack == 0)
                         {
                             Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
-                            if(c.innocence > 66)
-                                c.say(t, "Hahah, ahahah, no faaair!");
-                            else
-                            if(c.innocence > 33)
-                                c.say(t, "Hahahah, I won't let you break meee!");
-                            else
-                                c.say(t, "Th-This is- Hahahah!  Underhanded!  Ahahahah!");
+                            switch (c.innocence / 33) {
+                                case 0: c.say(t, "Th-This is- Hahahah!  Underhanded!  Ahahahah!"); break;
+                                case 1: c.say(t, "Hahahah, I won't let you break meee!"); break;
+                                default: c.say(t, "Hahah, ahahah, no faaair!");
+                            }
                         } else
                         if(thisAttack == 1)
                         {
                             Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
-                            if(c.morality > 66)
-                                c.say(t, "I can't let myself laugh!  I can't...!");
-                            else
-                            if(c.morality > 33)
-                                c.say(t, "No!  If I laugh now...!");
-                            else
-                                c.say(t, "I'll... I'll just fight my way out!  As soon as I stop laughing...");
+                            switch (c.morality / 33) {
+                                case 0: c.say(t, "I'll... I'll just fight my way out!  As soon as I stop laughing..."); break;
+                                case 1: c.say(t, "No!  If I laugh now...!"); break;
+                                default: c.say(t, "I can't let myself laugh!  I can't...!");
+                            }
                         } else
                         if(thisAttack == 2)
                         {
                             Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.SHAME);
-                            if(c.dignity > 66)
-                                c.say(t, "What would they say if they saw this...?");
-                            else
-                            if(c.dignity > 33)
-                                c.say(t, "This is seriously messed up...");
-                            else
-                                c.say(t, "I shouldn't be enjoying this, but...");
+                            switch (c.dignity / 33) {
+                                case 0: c.say(t, "I shouldn't be enjoying this, but..."); break;
+                                case 1: c.say(t, "This is seriously messed up..."); break;
+                                default: c.say(t, "What would they say if they saw this...?");
+                            }
                         }
                     } else
                     if(thisAttack == 0)
                     {
                         Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.FEAR);
-                        if(c.innocence > 66)
-                            c.say(t, "Hahah, p-please, don't- Ahahahah!");
-                        else
-                        if(c.innocence > 33)
-                            c.say(t, "Ahahahah, nooo!");
-                        else
-                            c.say(t, "Th-The combined stimulation is- Ngh!  Hahahahahah!");
+                        switch (c.innocence / 33) {
+                            case 0: c.say(t, "Th-The combined stimulation is- Ngh!  Hahahahahah!"); break;
+                            case 1: c.say(t, "Ahahahah, nooo!"); break;
+                            default: c.say(t, "Hahah, p-please, don't- Ahahahah!");
+                        }
                     } else
                     if(thisAttack == 1)
                     {
@@ -2539,13 +2439,11 @@ public class WorldState
                     if(thisAttack == 2)
                     {
                         Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.FEAR);
-                        if(c.dignity > 66)
-                            c.say(t, "No, this should be beneath me!");
-                        else
-                        if(c.dignity > 33)
-                            c.say(t, "My body is betraying me!");
-                        else
-                            c.say(t, "I should be able to fight back, so why...?");
+                        switch (c.dignity / 33) {
+                            case 0: c.say(t, "I should be able to fight back, so why...?"); break;
+                            case 1: c.say(t, "My body is betraying me!"); break;
+                            default: c.say(t, "No, this should be beneath me!");
+                        }
                     }
                 } else
                 if(c.confidence > 33)
@@ -2575,24 +2473,20 @@ public class WorldState
                     if(thisAttack == 1)
                     {
                         Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.FEAR);
-                        if(c.morality > 66)
-                            c.say(t, "I'm... going insane...");
-                        else
-                        if(c.morality > 33)
-                            c.say(t, "It got me...");
-                        else
-                            c.say(t, "Am I really so helpless...?");
+                        switch (c.morality / 33) {
+                            case 0: c.say(t, "Am I really so helpless...?"); break;
+                            case 1: c.say(t, "It got me..."); break;
+                            default: c.say(t, "I'm... going insane...");
+                        }
                     } else
                     if(thisAttack == 2)
                     {
                         Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.FEAR);
-                        if(c.dignity > 66)
-                            c.say(t, "Stop... messing with me...!");
-                        else
-                        if(c.dignity > 33)
-                            c.say(t, "They're finding all my weak spots!");
-                        else
-                            c.say(t, "Come on, move...!");
+                        switch (c.dignity / 33) {
+                            case 0: c.say(t, "Come on, move...!"); break;
+                            case 1: c.say(t, "They're finding all my weak spots!"); break;
+                            default: c.say(t, "Stop... messing with me...!");
+                        }
                     }
                 } else
                 if(thisAttack == 0)
@@ -2616,13 +2510,11 @@ public class WorldState
                 if(thisAttack == 1)
                 {
                     Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.FEAR);
-                    if(c.morality > 66)
-                        c.say(t, "What's wrong with me?");
-                    else
-                    if(c.morality > 33)
-                        c.say(t, "I failed...");
-                    else
-                        c.say(t, "I give up...");
+                    switch (c.morality / 33) {
+                        case 0: c.say(t, "I give up..."); break;
+                        case 1: c.say(t, "I failed..."); break;
+                        default: c.say(t, "What's wrong with me?");
+                    }
                 } else
                 if(thisAttack == 2)
                     if(c.dignity > 66)
@@ -2647,35 +2539,29 @@ public class WorldState
                     if(thisAttack == 0)
                     {
                         Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
-                        if(c.innocence > 66)
-                            c.say(t, "No!  No, stop making me feel goood!");
-                        else
-                        if(c.innocence > 33)
-                            c.say(t, "D-Damn it, I'm already...!");
-                        else
-                            c.say(t, "I can fight back... even during orgasm...!");
+                        switch (c.innocence / 33) {
+                            case 0: c.say(t, "I can fight back... even during orgasm...!"); break;
+                            case 1: c.say(t, "D-Damn it, I'm already...!"); break;
+                            default: c.say(t, "No!  No, stop making me feel goood!");
+                        }
                     } else
                     if(thisAttack == 1)
                     {
                         Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.FEAR);
-                        if(c.morality > 66)
-                            c.say(t, "No!  I can't fight this!");
-                        else
-                        if(c.morality > 33)
-                            c.say(t, "Impossible!");
-                        else
-                            c.say(t, "Shit!  I'm enjoying this too much!");
+                        switch (c.morality / 33) {
+                            case 0: c.say(t, "Shit!  I'm enjoying this too much!"); break;
+                            case 1: c.say(t, "Impossible!"); break;
+                            default: c.say(t, "No!  I can't fight this!");
+                        }
                     } else
                     if(thisAttack == 2)
                     {
                         Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.JOY);
-                        if(c.dignity > 66)
-                            c.say(t, "I might as well enjoy myself...");
-                        else
-                        if(c.dignity > 33)
-                            c.say(t, "Yes!  Service me!");
-                        else
-                            c.say(t, "Again...!");
+                        switch (c.dignity / 33) {
+                            case 0: c.say(t, "Again...!"); break;
+                            case 1: c.say(t, "Yes!  Service me!"); break;
+                            default: c.say(t, "I might as well enjoy myself...");
+                        }
                     }
                 } else
                 if(c.confidence > 33)
@@ -2683,13 +2569,11 @@ public class WorldState
                     if(thisAttack == 0)
                     {
                         Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.FEAR);
-                        if(c.innocence > 66)
-                            c.say(t, "Aaah, it's making me feel too goood!");
-                        else
-                        if(c.innocence > 33)
-                            c.say(t, "Guh!  I'm cumming!");
-                        else
-                            c.say(t, "F-Forcing me to climax...!");
+                        switch (c.innocence / 33) {
+                            case 0: c.say(t, "F-Forcing me to climax...!"); break;
+                            case 1: c.say(t, "Guh!  I'm cumming!"); break;
+                            default: c.say(t, "Aaah, it's making me feel too goood!");
+                        }
                     } else
                     if(thisAttack == 1)
                     {
@@ -2711,13 +2595,11 @@ public class WorldState
                     if(thisAttack == 2)
                     {
                         Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.JOY);
-                        if(c.dignity > 66)
-                            c.say(t, "No reason not to give in...");
-                        else
-                        if(c.dignity > 33)
-                            c.say(t, "Ah, I spread them...");
-                        else
-                            c.say(t, "I don't care whether it's real or not!");
+                        switch (c.dignity / 33) {
+                            case 0: c.say(t, "I don't care whether it's real or not!"); break;
+                            case 1: c.say(t, "Ah, I spread them..."); break;
+                            default: c.say(t, "No reason not to give in...");
+                        }
                     }
                 } else
                 if(thisAttack == 0)
@@ -2740,24 +2622,20 @@ public class WorldState
                 if(thisAttack == 1)
                 {
                     Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.SHAME);
-                    if(c.morality > 66)
-                        c.say(t, "Everyone, I'm so sorry!");
-                    else
-                    if(c.morality > 33)
-                        c.say(t, "It's just toying with me...");
-                    else
-                        c.say(t, "It's not like anyone will see if I give up...");
+                    switch (c.morality / 33) {
+                        case 0: c.say(t, "It's not like anyone will see if I give up..."); break;
+                        case 1: c.say(t, "It's just toying with me..."); break;
+                        default: c.say(t, "Everyone, I'm so sorry!");
+                    }
                 } else
                 if(thisAttack == 2)
                 {
                     Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.SHAME);
-                    if(c.dignity > 66)
-                        c.say(t, "I'm tired of pretending to be strong...");
-                    else
-                    if(c.dignity > 33)
-                        c.say(t, "I'm completely giving myself to them...");
-                    else
-                        c.say(t, "I'm so pathetic...");
+                    switch (c.dignity / 33) {
+                        case 0: c.say(t, "I'm so pathetic..."); break;
+                        case 1: c.say(t, "I'm completely giving myself to them..."); break;
+                        default: c.say(t, "I'm tired of pretending to be strong...");
+                    }
                 }
             } else
             if(w.tickle())
@@ -2767,13 +2645,11 @@ public class WorldState
                     if(thisAttack == 0)
                     {
                         Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
-                        if(c.innocence > 66)
-                            c.say(t, "Stop- Ahahah, s-stop making me feel goood!");
-                        else
-                        if(c.innocence > 33)
-                            c.say(t, "I don't- Ahahah, I don't want to fucking cum anymore!  Hahahahah!");
-                        else
-                            c.say(t, "Ahah!?  Wh-What do you think you're- Hahahah, nnaaah!");
+                        switch (c.innocence / 33) {
+                            case 0: c.say(t, "Ahah!?  Wh-What do you think you're- Hahahah, nnaaah!"); break;
+                            case 1: c.say(t, "I don't- Ahahah, I don't want to fucking cum anymore!  Hahahahah!"); break;
+                            default: c.say(t, "Stop- Ahahah, s-stop making me feel goood!");
+                        }
                     } else
                     if(thisAttack == 1)
                     {
@@ -2795,13 +2671,11 @@ public class WorldState
                     if(thisAttack == 2)
                     {
                         Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.FEAR);
-                        if(c.dignity > 66)
-                            c.say(t, "Too much... stimulation...");
-                        else
-                        if(c.dignity > 33)
-                            c.say(t, "Ugh, even while being tickled...!");
-                        else
-                            c.say(t, "This might actualy break me...!");
+                        switch (c.dignity / 33) {
+                            case 0: c.say(t, "This might actualy break me...!"); break;
+                            case 1: c.say(t, "Ugh, even while being tickled...!"); break;
+                            default: c.say(t, "Too much... stimulation...");
+                        }
                     }
                 } else
                 if(c.confidence > 33)
@@ -2809,47 +2683,39 @@ public class WorldState
                     if(thisAttack == 0)
                     {
                         Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
-                        if(c.innocence > 66)
-                            c.say(t, "Hahah, ahahah, I'm going to turn weeeird...!");
-                        else
-                        if(c.innocence > 33)
-                            c.say(t, "Hahahah, c-cummiiing!");
-                        else
-                            c.say(t, "Th-This is- Hahahah!  Ngh, n-nooo!");
+                        switch (c.innocence / 33) {
+                            case 0: c.say(t, "Th-This is- Hahahah!  Ngh, n-nooo!"); break;
+                            case 1: c.say(t, "Hahahah, c-cummiiing!"); break;
+                            default: c.say(t, "Hahah, ahahah, I'm going to turn weeeird...!");
+                        }
                     } else
                     if(thisAttack == 1)
                     {
                         Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.FEAR);
-                        if(c.morality > 66)
-                            c.say(t, "Oh no, it's starting to feel even better...!");
-                        else
-                        if(c.morality > 33)
-                            c.say(t, "This isn't good...!");
-                        else
-                            c.say(t, "I can't fight this at all...!");
+                        switch (c.morality / 33) {
+                            case 0: c.say(t, "I can't fight this at all...!"); break;
+                            case 1: c.say(t, "This isn't good...!"); break;
+                            default: c.say(t, "Oh no, it's starting to feel even better...!");
+                        }
                     } else
                     if(thisAttack == 2)
                     {
                         Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.SHAME);
-                        if(c.dignity > 66)
-                            c.say(t, "What would they say if they saw me enjoying this...?");
-                        else
-                        if(c.dignity > 33)
-                            c.say(t, "Can't even... think...");
-                        else
-                            c.say(t, "I'm so messed up...");
+                        switch (c.dignity / 33) {
+                            case 0: c.say(t, "I'm so messed up..."); break;
+                            case 1: c.say(t, "Can't even... think..."); break;
+                            default: c.say(t, "What would they say if they saw me enjoying this...?");
+                        }
                     }
                 } else
                 if(thisAttack == 0)
                 {
                     Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.FEAR);
-                    if(c.innocence > 66)
-                        c.say(t, "Hahah, p-please, don't- Aaahn, nooo!");
-                    else
-                    if(c.innocence > 33)
-                        c.say(t, "Ahahahah, no, please don't make me- c-cuuum!");
-                    else
-                        c.say(t, "Hah, ahahah, p-please, I'm going to c-climax...!");
+                    switch (c.innocence / 33) {
+                        case 0: c.say(t, "Hah, ahahah, p-please, I'm going to c-climax...!"); break;
+                        case 1: c.say(t, "Ahahahah, no, please don't make me- c-cuuum!"); break;
+                        default: c.say(t, "Hahah, p-please, don't- Aaahn, nooo!");
+                    }
                 } else
                 if(thisAttack == 1)
                 {
@@ -2871,13 +2737,11 @@ public class WorldState
                 if(thisAttack == 2)
                 {
                     Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.SHAME);
-                    if(c.dignity > 66)
-                        c.say(t, "At least this way I can't actually make any embarrassing noises...");
-                    else
-                    if(c.dignity > 33)
-                        c.say(t, "Can't... ignore it anymore...");
-                    else
-                        c.say(t, "I'm so perverted...");
+                    switch (c.dignity / 33) {
+                        case 0: c.say(t, "I'm so perverted..."); break;
+                        case 1: c.say(t, "Can't... ignore it anymore..."); break;
+                        default: c.say(t, "At least this way I can't actually make any embarrassing noises...");
+                    }
                 }
             } else
             if(c.confidence > 66)
@@ -2911,13 +2775,11 @@ public class WorldState
                 if(thisAttack == 1)
                 {
                     Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.SHAME);
-                    if(c.morality > 66)
-                        c.say(t, "I'm cumming in such a pathetic way...");
-                    else
-                    if(c.morality > 33)
-                        c.say(t, "Why does my body have to be like this!?");
-                    else
-                        c.say(t, "How could I be so weak!?");
+                    switch (c.morality / 33) {
+                        case 0: c.say(t, "How could I be so weak!?"); break;
+                        case 1: c.say(t, "Why does my body have to be like this!?"); break;
+                        default: c.say(t, "I'm cumming in such a pathetic way...");
+                    }
                 } else
                 if(thisAttack == 2)
                     if(c.dignity > 66)
@@ -3119,13 +2981,11 @@ public class WorldState
                             if(thisAttack == 0)
                             {
                                 Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                                if(c.confidence > 66)
-                                    c.say(t, "Gh!  Hardly even feeling it!");
-                                else
-                                if(c.confidence > 33)
-                                    c.say(t, "I can take your tickling all day, but hands off my clothes!");
-                                else
-                                    c.say(t, "I-I'll definitely escape before you can strip me!");
+                                switch (c.confidence / 33) {
+                                    case 0: c.say(t, "I-I'll definitely escape before you can strip me!"); break;
+                                    case 1: c.say(t, "I can take your tickling all day, but hands off my clothes!"); break;
+                                    default: c.say(t, "Gh!  Hardly even feeling it!");
+                                }
                             } else
                             if(thisAttack == 1)
                             {
@@ -3147,13 +3007,11 @@ public class WorldState
                             if(thisAttack == 2)
                             {
                                 Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
-                                if(c.morality > 66)
-                                    c.say(t, "I must... be their shield...");
-                                else
-                                if(c.morality > 33)
-                                    c.say(t, "I can handle... this much...");
-                                else
-                                    c.say(t, "I'm just... conserving my energy...");
+                                switch (c.morality / 33) {
+                                    case 0: c.say(t, "I'm just... conserving my energy..."); break;
+                                    case 1: c.say(t, "I can handle... this much..."); break;
+                                    default: c.say(t, "I must... be their shield...");
+                                }
                             }
                         } else
                         if(c.dignity > 33)
@@ -3195,13 +3053,11 @@ public class WorldState
                             if(thisAttack == 2)
                             {
                                 Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.ANGER);
-                                if(c.morality > 66)
-                                    c.say(t, "Come on...  Overcome it...!");
-                                else
-                                if(c.morality > 33)
-                                    c.say(t, "Come on...  Get up...!");
-                                else
-                                    c.say(t, "Can't... let this beat me...!");
+                                switch (c.morality / 33) {
+                                    case 0: c.say(t, "Can't... let this beat me...!"); break;
+                                    case 1: c.say(t, "Come on...  Get up...!"); break;
+                                    default: c.say(t, "Come on...  Overcome it...!");
+                                }
                             }
                         } else
                         if(thisAttack == 0)
@@ -3224,13 +3080,11 @@ public class WorldState
                         if(thisAttack == 1)
                         {
                             Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.ANGER);
-                            if(c.innocence > 66)
-                                c.say(t, "What are you trying to do!?");
-                            else
-                            if(c.innocence > 33)
-                                c.say(t, "Ugh!  Damn it!");
-                            else
-                                c.say(t, "Ugh!  It'll take more than this to stop me, Demon Lord!");
+                            switch (c.innocence / 33) {
+                                case 0: c.say(t, "Ugh!  It'll take more than this to stop me, Demon Lord!"); break;
+                                case 1: c.say(t, "Ugh!  Damn it!"); break;
+                                default: c.say(t, "What are you trying to do!?");
+                            }
                         } else
                         if(thisAttack == 2)
                             if(c.morality > 66)
@@ -3270,24 +3124,20 @@ public class WorldState
                         if(thisAttack == 1)
                         {
                             Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.SHAME);
-                            if(c.innocence > 66)
-                                c.say(t, "Wait!  Please, not in front of the cameras!");
-                            else
-                            if(c.innocence > 33)
-                                c.say(t, "No!  No!");
-                            else
-                                c.say(t, "D-Damn it...!");
+                            switch (c.innocence / 33) {
+                                case 0: c.say(t, "D-Damn it...!"); break;
+                                case 1: c.say(t, "No!  No!"); break;
+                                default: c.say(t, "Wait!  Please, not in front of the cameras!");
+                            }
                         } else
                         if(thisAttack == 2)
                         {
                             Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
-                            if(c.morality > 66)
-                                c.say(t, "I... I need to get up...!");
-                            else
-                            if(c.morality > 33)
-                                c.say(t, "It's... It's not over...!");
-                            else
-                                c.say(t, "Don't... laugh at me...");
+                            switch (c.morality / 33) {
+                                case 0: c.say(t, "Don't... laugh at me..."); break;
+                                case 1: c.say(t, "It's... It's not over...!"); break;
+                                default: c.say(t, "I... I need to get up...!");
+                            }
                         }
                     } else
                     if(c.dignity > 33)
@@ -3295,35 +3145,29 @@ public class WorldState
                         if(thisAttack == 0)
                         {
                             Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
-                            if(c.confidence > 66)
-                                c.say(t, "Damn it all...");
-                            else
-                            if(c.confidence > 33)
-                                c.say(t, "How could this happen...?");
-                            else
-                                c.say(t, "Th-They can see everything...");
+                            switch (c.confidence / 33) {
+                                case 0: c.say(t, "Th-They can see everything..."); break;
+                                case 1: c.say(t, "How could this happen...?"); break;
+                                default: c.say(t, "Damn it all...");
+                            }
                         } else
                         if(thisAttack == 1)
                         {
                             Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
-                            if(c.innocence > 66)
-                                c.say(t, "This feels so gross...");
-                            else
-                            if(c.innocence > 33)
-                                c.say(t, "Ugh...");
-                            else
-                                c.say(t, "This will... impact my reputation...");
+                            switch (c.innocence / 33) {
+                                case 0: c.say(t, "This will... impact my reputation..."); break;
+                                case 1: c.say(t, "Ugh..."); break;
+                                default: c.say(t, "This feels so gross...");
+                            }
                         } else
                         if(thisAttack == 2)
                         {
                             Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
-                            if(c.morality > 66)
-                                c.say(t, "I've failed...");
-                            else
-                            if(c.morality > 33)
-                                c.say(t, "I look pathetic...");
-                            else
-                                c.say(t, "They've seen... my weakness...");
+                            switch (c.morality / 33) {
+                                case 0: c.say(t, "They've seen... my weakness..."); break;
+                                case 1: c.say(t, "I look pathetic..."); break;
+                                default: c.say(t, "I've failed...");
+                            }
                         }
                     } else
                     if(thisAttack == 0)
@@ -3346,13 +3190,11 @@ public class WorldState
                     if(thisAttack == 1)
                     {
                         Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.ANGER);
-                        if(c.innocence > 66)
-                            c.say(t, "What are you trying to do!?");
-                        else
-                        if(c.innocence > 33)
-                            c.say(t, "Ugh!  Damn it!");
-                        else
-                            c.say(t, "Ugh!  It'll take more than this to stop me, Demon Lord!");
+                        switch (c.innocence / 33) {
+                            case 0: c.say(t, "Ugh!  It'll take more than this to stop me, Demon Lord!"); break;
+                            case 1: c.say(t, "Ugh!  Damn it!"); break;
+                            default: c.say(t, "What are you trying to do!?");
+                        }
                     } else
                     if(thisAttack == 2)
                         if(c.morality > 66)
@@ -3376,31 +3218,25 @@ public class WorldState
                     Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.LEWD);
                     if(c.dignity > 66)
                     {
-                        if(c.confidence > 66)
-                            c.say(t, "I won't...  I won't- Gaaah, ahahah, hahahahah!");
-                        else
-                        if(c.confidence > 33)
-                            c.say(t, "You can't!  No!  Ahahahahah!");
-                        else
-                            c.say(t, "No...!  I-I don't want to...!  Hah!  Ahahahah!");
+                        switch (c.confidence / 33) {
+                            case 0: c.say(t, "No...!  I-I don't want to...!  Hah!  Ahahahah!"); break;
+                            case 1: c.say(t, "You can't!  No!  Ahahahahah!"); break;
+                            default: c.say(t, "I won't...  I won't- Gaaah, ahahah, hahahahah!");
+                        }
                     } else
                     if(c.dignity > 33)
                     {
-                        if(c.confidence > 66)
-                            c.say(t, "Ngh!  No!  Nghahahahah!");
-                        else
-                        if(c.confidence > 33)
-                            c.say(t, "What do you think you're-  Nghah!?  Ahahahahah!");
-                        else
-                            c.say(t, "Th-This is too- Ngh!?  Hahahahahah!");
+                        switch (c.confidence / 33) {
+                            case 0: c.say(t, "Th-This is too- Ngh!?  Hahahahahah!"); break;
+                            case 1: c.say(t, "What do you think you're-  Nghah!?  Ahahahahah!"); break;
+                            default: c.say(t, "Ngh!  No!  Nghahahahah!");
+                        }
                     } else
-                    if(c.confidence > 66)
-                        c.say(t, "Pfffftahahahahah!");
-                    else
-                    if(c.confidence > 33)
-                        c.say(t, "I don't want to... laugh...!  Gh!  Nahahah!");
-                    else
-                        c.say(t, "Ah, pleeease!  I'm gonna- Pfftahahahah, aaah!");
+                    switch (c.confidence / 33) {
+                        case 0: c.say(t, "Ah, pleeease!  I'm gonna- Pfftahahahah, aaah!"); break;
+                        case 1: c.say(t, "I don't want to... laugh...!  Gh!  Nahahah!"); break;
+                        default: c.say(t, "Pfffftahahahahah!");
+                    }
                 } else
                 if(c.getEXPOLevel() < 3 || c.modest)
                 {
@@ -3443,13 +3279,11 @@ public class WorldState
                         if(thisAttack == 2)
                         {
                             Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.FEAR);
-                            if(c.morality > 66)
-                                c.say(t, "P-Please, you'll ruin my- Ahahah, my- AHAHAHAH!");
-                            else
-                            if(c.morality > 33)
-                                c.say(t, "I'm... ahahahah... ruined...!  Ahahahah!");
-                            else
-                                c.say(t, "I'm warning you, don't- Nghahahahah!");
+                            switch (c.morality / 33) {
+                                case 0: c.say(t, "I'm warning you, don't- Nghahahahah!"); break;
+                                case 1: c.say(t, "I'm... ahahahah... ruined...!  Ahahahah!"); break;
+                                default: c.say(t, "P-Please, you'll ruin my- Ahahah, my- AHAHAHAH!");
+                            }
                         }
                     } else
                     if(c.dignity > 33)
@@ -3457,35 +3291,29 @@ public class WorldState
                         if(thisAttack == 0)
                         {
                             Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.FEAR);
-                            if(c.confidence > 66)
-                                c.say(t, "Ahahahah!  Stop already!  Hahahahah!");
-                            else
-                            if(c.confidence > 33)
-                                c.say(t, "You're making me look like some kind of- Nghahahah, nooo!");
-                            else
-                                c.say(t, "L-Leave me alooone, ahahahahah!");
+                            switch (c.confidence / 33) {
+                                case 0: c.say(t, "L-Leave me alooone, ahahahahah!"); break;
+                                case 1: c.say(t, "You're making me look like some kind of- Nghahahah, nooo!"); break;
+                                default: c.say(t, "Ahahahah!  Stop already!  Hahahahah!");
+                            }
                         } else
                         if(thisAttack == 1)
                         {
                             Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.FEAR);
-                            if(c.innocence > 66)
-                                c.say(t, "Nooo, don't hold me like- Ahahahahah!");
-                            else
-                            if(c.innocence > 33)
-                                c.say(t, "Y-You're seriously going to- Nghahahah, nooo!");
-                            else
-                                c.say(t, "Th-This is... completely unnecess- Gh!?  Ahahahah!");
+                            switch (c.innocence / 33) {
+                                case 0: c.say(t, "Th-This is... completely unnecess- Gh!?  Ahahahah!"); break;
+                                case 1: c.say(t, "Y-You're seriously going to- Nghahahah, nooo!"); break;
+                                default: c.say(t, "Nooo, don't hold me like- Ahahahahah!");
+                            }
                         } else
                         if(thisAttack == 2)
                         {
                             Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
-                            if(c.morality > 66)
-                                c.say(t, "I... I have to... ahahahahah, aaagh!");
-                            else
-                            if(c.morality > 33)
-                                c.say(t, "No... ahah... no more... ahahahah...!");
-                            else
-                                c.say(t, "Ahah... I'll... ahahah... k-kill... ahahahah!");
+                            switch (c.morality / 33) {
+                                case 0: c.say(t, "Ahah... I'll... ahahah... k-kill... ahahahah!"); break;
+                                case 1: c.say(t, "No... ahah... no more... ahahahah...!"); break;
+                                default: c.say(t, "I... I have to... ahahahahah, aaagh!");
+                            }
                         }
                     } else
                     if(thisAttack == 0)
@@ -3508,24 +3336,20 @@ public class WorldState
                     if(thisAttack == 1)
                     {
                         Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.FEAR);
-                        if(c.innocence > 66)
-                            c.say(t, "Ahahah, I'm going crazy!  Ahahahahah!");
-                        else
-                        if(c.innocence > 33)
-                            c.say(t, "I can't- I can't stop laughing!  Ahahahahah!");
-                        else
-                            c.say(t, "I am supposed to be... stronger than... Gh!  Ghahahah!");
+                        switch (c.innocence / 33) {
+                            case 0: c.say(t, "I am supposed to be... stronger than... Gh!  Ghahahah!"); break;
+                            case 1: c.say(t, "I can't- I can't stop laughing!  Ahahahahah!"); break;
+                            default: c.say(t, "Ahahah, I'm going crazy!  Ahahahahah!");
+                        }
                     } else
                     if(thisAttack == 2)
                     {
                         Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
-                        if(c.morality > 66)
-                            c.say(t, "Ahahah, I'm so sorry!  I can't- ahahahahah!");
-                        else
-                        if(c.morality > 33)
-                            c.say(t, "Nhooo, ahahahahah!");
-                        else
-                            c.say(t, "Gahahahah, aghahahah, hahahahah!");
+                        switch (c.morality / 33) {
+                            case 0: c.say(t, "Gahahahah, aghahahah, hahahahah!"); break;
+                            case 1: c.say(t, "Nhooo, ahahahahah!"); break;
+                            default: c.say(t, "Ahahah, I'm so sorry!  I can't- ahahahahah!");
+                        }
                     }
                 } else
                 if(c.dignity > 66)
@@ -3533,35 +3357,29 @@ public class WorldState
                     if(thisAttack == 0)
                     {
                         Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.FEAR);
-                        if(c.confidence > 66)
-                            c.say(t, "Hahah, don't you dare film- Hahahahah!");
-                        else
-                        if(c.confidence > 33)
-                            c.say(t, "N-No more!  I don't want people to- Hahahahah!");
-                        else
-                            c.say(t, "P-Please, no, everyone is- Hahahahah!");
+                        switch (c.confidence / 33) {
+                            case 0: c.say(t, "P-Please, no, everyone is- Hahahahah!"); break;
+                            case 1: c.say(t, "N-No more!  I don't want people to- Hahahahah!"); break;
+                            default: c.say(t, "Hahah, don't you dare film- Hahahahah!");
+                        }
                     } else
                     if(thisAttack == 1)
                     {
                         Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.FEAR);
-                        if(c.innocence > 66)
-                            c.say(t, "Ahahah, l-letting people see down there is too pervert-ahahahah!");
-                        else
-                        if(c.innocence > 33)
-                            c.say(t, "W-Wait, if you hold me like this, then everyone can- Aaah!  Ahahahah!");
-                        else
-                            c.say(t, "This is... h-humil-ahahahahah!");
+                        switch (c.innocence / 33) {
+                            case 0: c.say(t, "This is... h-humil-ahahahahah!"); break;
+                            case 1: c.say(t, "W-Wait, if you hold me like this, then everyone can- Aaah!  Ahahahah!"); break;
+                            default: c.say(t, "Ahahah, l-letting people see down there is too pervert-ahahahah!");
+                        }
                     } else
                     if(thisAttack == 2)
                     {
                         Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.FEAR);
-                        if(c.morality > 66)
-                            c.say(t, "P-Please, you're ruining my- Ahahah, my- AHAHAHAH!");
-                        else
-                        if(c.morality > 33)
-                            c.say(t, "I'm... ahahahah... completely ruined...!  Ahahahah!");
-                        else
-                            c.say(t, "I'm warning you, don't even look at- Nghahahahah!");
+                        switch (c.morality / 33) {
+                            case 0: c.say(t, "I'm warning you, don't even look at- Nghahahahah!"); break;
+                            case 1: c.say(t, "I'm... ahahahah... completely ruined...!  Ahahahah!"); break;
+                            default: c.say(t, "P-Please, you're ruining my- Ahahah, my- AHAHAHAH!");
+                        }
                     }
                 } else
                 if(c.dignity > 33)
@@ -3569,35 +3387,29 @@ public class WorldState
                     if(thisAttack == 0)
                     {
                         Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
-                        if(c.confidence > 66)
-                            c.say(t, "Ahahahah!  Stop staring already!  Hahahahah!");
-                        else
-                        if(c.confidence > 33)
-                            c.say(t, "You're showing me off like some kind of- Nghahahah, nooo!");
-                        else
-                            c.say(t, "D-Don't look at meee, ahahahahah!");
+                        switch (c.confidence / 33) {
+                            case 0: c.say(t, "D-Don't look at meee, ahahahahah!"); break;
+                            case 1: c.say(t, "You're showing me off like some kind of- Nghahahah, nooo!"); break;
+                            default: c.say(t, "Ahahahah!  Stop staring already!  Hahahahah!");
+                        }
                     } else
                     if(thisAttack == 1)
                     {
                         Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.FEAR);
-                        if(c.innocence > 66)
-                            c.say(t, "Nooo, don't show them- Ahahahahah!");
-                        else
-                        if(c.innocence > 33)
-                            c.say(t, "Y-You're seriously going to show them- Nghahahah, nooo!");
-                        else
-                            c.say(t, "Th-This is... completely depr- Gh!?  Ahahahah!");
+                        switch (c.innocence / 33) {
+                            case 0: c.say(t, "Th-This is... completely depr- Gh!?  Ahahahah!"); break;
+                            case 1: c.say(t, "Y-You're seriously going to show them- Nghahahah, nooo!"); break;
+                            default: c.say(t, "Nooo, don't show them- Ahahahahah!");
+                        }
                     } else
                     if(thisAttack == 2)
                     {
                         Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.FEAR);
-                        if(c.morality > 66)
-                            c.say(t, "I... I have to... ahahahahah, aaagh!");
-                        else
-                        if(c.morality > 33)
-                            c.say(t, "No... ahah... no more... ahahahah...!");
-                        else
-                            c.say(t, "Ahah... I'll... ahahah... k-kill... ahahahah!");
+                        switch (c.morality / 33) {
+                            case 0: c.say(t, "Ahah... I'll... ahahah... k-kill... ahahahah!"); break;
+                            case 1: c.say(t, "No... ahah... no more... ahahahah...!"); break;
+                            default: c.say(t, "I... I have to... ahahahahah, aaagh!");
+                        }
                     }
                 } else
                 if(thisAttack == 0)
@@ -3620,24 +3432,20 @@ public class WorldState
                 if(thisAttack == 1)
                 {
                     Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.FEAR);
-                    if(c.innocence > 66)
-                        c.say(t, "Ahahah, I'm going crazy!  Ahahahahah!");
-                    else
-                    if(c.innocence > 33)
-                        c.say(t, "I can't- I can't stop laughing!  Ahahahahah!");
-                    else
-                        c.say(t, "I am supposed to be... stronger than... Gh!  Ghahahah!");
+                    switch (c.innocence / 33) {
+                        case 0: c.say(t, "I am supposed to be... stronger than... Gh!  Ghahahah!"); break;
+                        case 1: c.say(t, "I can't- I can't stop laughing!  Ahahahahah!"); break;
+                        default: c.say(t, "Ahahah, I'm going crazy!  Ahahahahah!");
+                    }
                 } else
                 if(thisAttack == 2)
                 {
                     Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.FEAR);
-                    if(c.morality > 66)
-                        c.say(t, "Ahahah, I'm so sorry!  I can't- ahahahahah!");
-                    else
-                    if(c.morality > 33)
-                        c.say(t, "Nhooo, ahahahahah!");
-                    else
-                        c.say(t, "Gahahahah, aghahahah, hahahahah!");
+                    switch (c.morality / 33) {
+                        case 0: c.say(t, "Gahahahah, aghahahah, hahahahah!"); break;
+                        case 1: c.say(t, "Nhooo, ahahahahah!"); break;
+                        default: c.say(t, "Ahahah, I'm so sorry!  I can't- ahahahahah!");
+                    }
                 }
             } else
             if(c.aVirg)
@@ -3651,13 +3459,11 @@ public class WorldState
                             if(thisAttack == 0)
                             {
                                 Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                                if(c.confidence > 66)
-                                    c.say(t, "Guh!  Hardly felt a thing!");
-                                else
-                                if(c.confidence > 33)
-                                    c.say(t, "I can take your punches all day, but hands off my clothes!");
-                                else
-                                    c.say(t, "H-Hah!  I-I'll definitely escape before you can strip me!");
+                                switch (c.confidence / 33) {
+                                    case 0: c.say(t, "H-Hah!  I-I'll definitely escape before you can strip me!"); break;
+                                    case 1: c.say(t, "I can take your punches all day, but hands off my clothes!"); break;
+                                    default: c.say(t, "Guh!  Hardly felt a thing!");
+                                }
                             } else
                             if(thisAttack == 1)
                             {
@@ -3679,13 +3485,11 @@ public class WorldState
                             if(thisAttack == 2)
                             {
                                 Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
-                                if(c.morality > 66)
-                                    c.say(t, "I must... be their shield...");
-                                else
-                                if(c.morality > 33)
-                                    c.say(t, "Haaah... I can handle... this much...");
-                                else
-                                    c.say(t, "Heh...  I'm just... conserving my energy...");
+                                switch (c.morality / 33) {
+                                    case 0: c.say(t, "Heh...  I'm just... conserving my energy..."); break;
+                                    case 1: c.say(t, "Haaah... I can handle... this much..."); break;
+                                    default: c.say(t, "I must... be their shield...");
+                                }
                             }
                         } else
                         if(c.dignity > 33)
@@ -3710,24 +3514,20 @@ public class WorldState
                             if(thisAttack == 1)
                             {
                                 Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.FEAR);
-                                if(c.innocence > 66)
-                                    c.say(t, "Stop... pulling...!");
-                                else
-                                if(c.innocence > 33)
-                                    c.say(t, "Urgh!  No more!");
-                                else
-                                    c.say(t, "The Demon Lord's body this time is... strong...!");
+                                switch (c.innocence / 33) {
+                                    case 0: c.say(t, "The Demon Lord's body this time is... strong...!"); break;
+                                    case 1: c.say(t, "Urgh!  No more!"); break;
+                                    default: c.say(t, "Stop... pulling...!");
+                                }
                             } else
                             if(thisAttack == 2)
                             {
                                 Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.ANGER);
-                                if(c.morality > 66)
-                                    c.say(t, "Come on...  Overcome it...!");
-                                else
-                                if(c.morality > 33)
-                                    c.say(t, "Come on...  Get up...!");
-                                else
-                                    c.say(t, "Can't... let this beat me...!");
+                                switch (c.morality / 33) {
+                                    case 0: c.say(t, "Can't... let this beat me...!"); break;
+                                    case 1: c.say(t, "Come on...  Get up...!"); break;
+                                    default: c.say(t, "Come on...  Overcome it...!");
+                                }
                             }
                         } else
                         if(thisAttack == 0)
@@ -3802,24 +3602,20 @@ public class WorldState
                         if(thisAttack == 1)
                         {
                             Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.SHAME);
-                            if(c.innocence > 66)
-                                c.say(t, "Wait!  Please, not in front of the cameras!");
-                            else
-                            if(c.innocence > 33)
-                                c.say(t, "No!  No!");
-                            else
-                                c.say(t, "D-Damn it...!");
+                            switch (c.innocence / 33) {
+                                case 0: c.say(t, "D-Damn it...!"); break;
+                                case 1: c.say(t, "No!  No!"); break;
+                                default: c.say(t, "Wait!  Please, not in front of the cameras!");
+                            }
                         } else
                         if(thisAttack == 2)
                         {
                             Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
-                            if(c.morality > 66)
-                                c.say(t, "I... I need to get up...!");
-                            else
-                            if(c.morality > 33)
-                                c.say(t, "It's... It's not over...!");
-                            else
-                                c.say(t, "Don't... laugh at me...");
+                            switch (c.morality / 33) {
+                                case 0: c.say(t, "Don't... laugh at me..."); break;
+                                case 1: c.say(t, "It's... It's not over...!"); break;
+                                default: c.say(t, "I... I need to get up...!");
+                            }
                         }
                     } else
                     if(c.dignity > 33)
@@ -3827,32 +3623,26 @@ public class WorldState
                         Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
                         if(thisAttack == 0)
                         {
-                            if(c.confidence > 66)
-                                c.say(t, "Damn it all...");
-                            else
-                            if(c.confidence > 33)
-                                c.say(t, "How could this happen...?");
-                            else
-                                c.say(t, "Th-They can see everything...");
+                            switch (c.confidence / 33) {
+                                case 0: c.say(t, "Th-They can see everything..."); break;
+                                case 1: c.say(t, "How could this happen...?"); break;
+                                default: c.say(t, "Damn it all...");
+                            }
                         } else
                         if(thisAttack == 1)
                         {
-                            if(c.innocence > 66)
-                                c.say(t, "This feels so gross...");
-                            else
-                            if(c.innocence > 33)
-                                c.say(t, "Ugh...");
-                            else
-                                c.say(t, "This will... impact my reputation...");
+                            switch (c.innocence / 33) {
+                                case 0: c.say(t, "This will... impact my reputation..."); break;
+                                case 1: c.say(t, "Ugh..."); break;
+                                default: c.say(t, "This feels so gross...");
+                            }
                         } else
                         if(thisAttack == 2)
-                            if(c.morality > 66)
-                                c.say(t, "I've failed...");
-                            else
-                            if(c.morality > 33)
-                                c.say(t, "I look pathetic...");
-                            else
-                                c.say(t, "They've seen... my weakness...");
+                            switch (c.morality / 33) {
+                                case 0: c.say(t, "They've seen... my weakness..."); break;
+                                case 1: c.say(t, "I look pathetic..."); break;
+                                default: c.say(t, "I've failed...");
+                            }
                     } else
                     if(thisAttack == 0)
                     {
@@ -3909,13 +3699,11 @@ public class WorldState
                     Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.FEAR);
                     if(c.dignity > 66)
                     {
-                        if(c.confidence > 66)
-                            c.say(t, "I won't...  I won't let you- Gaaah, no!  No!");
-                        else
-                        if(c.confidence > 33)
-                            c.say(t, "You can't!  No!  Aaah!");
-                        else
-                            c.say(t, "You... You wouldn't-  No!  Aaah!");
+                        switch (c.confidence / 33) {
+                            case 0: c.say(t, "You... You wouldn't-  No!  Aaah!"); break;
+                            case 1: c.say(t, "You can't!  No!  Aaah!"); break;
+                            default: c.say(t, "I won't...  I won't let you- Gaaah, no!  No!");
+                        }
                     } else
                     if(c.dignity > 33)
                     {
@@ -3989,13 +3777,11 @@ public class WorldState
                         if(thisAttack == 2)
                         {
                             Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
-                            if(c.morality > 66)
-                                c.say(t, "I must... be their shield...");
-                            else
-                            if(c.morality > 33)
-                                c.say(t, "Haaah... I can handle... this much...");
-                            else
-                                c.say(t, "Heh...  I'm just... conserving my energy...");
+                            switch (c.morality / 33) {
+                                case 0: c.say(t, "Heh...  I'm just... conserving my energy..."); break;
+                                case 1: c.say(t, "Haaah... I can handle... this much..."); break;
+                                default: c.say(t, "I must... be their shield...");
+                            }
                         }
                     } else
                     if(c.dignity > 33)
@@ -4020,24 +3806,20 @@ public class WorldState
                         if(thisAttack == 1)
                         {
                             Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
-                            if(c.innocence > 66)
-                                c.say(t, "Stop... pulling...!");
-                            else
-                            if(c.innocence > 33)
-                                c.say(t, "Urgh!  No more!");
-                            else
-                                c.say(t, "The Demon Lord's body this time is... strong...!");
+                            switch (c.innocence / 33) {
+                                case 0: c.say(t, "The Demon Lord's body this time is... strong...!"); break;
+                                case 1: c.say(t, "Urgh!  No more!"); break;
+                                default: c.say(t, "Stop... pulling...!");
+                            }
                         } else
                         if(thisAttack == 2)
                         {
                             Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.ANGER);
-                            if(c.morality > 66)
-                                c.say(t, "Come on...  Overcome it...!");
-                            else
-                            if(c.morality > 33)
-                                c.say(t, "Come on...  Get up...!");
-                            else
-                                c.say(t, "Can't... let this beat me...!");
+                            switch (c.morality / 33) {
+                                case 0: c.say(t, "Can't... let this beat me...!"); break;
+                                case 1: c.say(t, "Come on...  Get up...!"); break;
+                                default: c.say(t, "Come on...  Overcome it...!");
+                            }
                         }
                     } else
                     if(thisAttack == 0)
@@ -4112,24 +3894,20 @@ public class WorldState
                     if(thisAttack == 1)
                     {
                         Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.SHAME);
-                        if(c.innocence > 66)
-                            c.say(t, "Wait!  Please, not in front of the cameras!");
-                        else
-                        if(c.innocence > 33)
-                            c.say(t, "No!  No!");
-                        else
-                            c.say(t, "D-Damn it...!");
+                        switch (c.innocence / 33) {
+                            case 0: c.say(t, "D-Damn it...!"); break;
+                            case 1: c.say(t, "No!  No!"); break;
+                            default: c.say(t, "Wait!  Please, not in front of the cameras!");
+                        }
                     } else
                     if(thisAttack == 2)
                     {
                         Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
-                        if(c.morality > 66)
-                            c.say(t, "I... I need to get up...!");
-                        else
-                        if(c.morality > 33)
-                            c.say(t, "It's... It's not over...!");
-                        else
-                            c.say(t, "Don't... laugh at me...");
+                        switch (c.morality / 33) {
+                            case 0: c.say(t, "Don't... laugh at me..."); break;
+                            case 1: c.say(t, "It's... It's not over...!"); break;
+                            default: c.say(t, "I... I need to get up...!");
+                        }
                     }
                 } else
                 if(c.dignity > 33)
@@ -4137,35 +3915,29 @@ public class WorldState
                     if(thisAttack == 0)
                     {
                         Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
-                        if(c.confidence > 66)
-                            c.say(t, "Damn it all...");
-                        else
-                        if(c.confidence > 33)
-                            c.say(t, "How could this happen...?");
-                        else
-                            c.say(t, "Th-They can see everything...");
+                        switch (c.confidence / 33) {
+                            case 0: c.say(t, "Th-They can see everything..."); break;
+                            case 1: c.say(t, "How could this happen...?"); break;
+                            default: c.say(t, "Damn it all...");
+                        }
                     } else
                     if(thisAttack == 1)
                     {
                         Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
-                        if(c.innocence > 66)
-                            c.say(t, "This feels so gross...");
-                        else
-                        if(c.innocence > 33)
-                            c.say(t, "Ugh...");
-                        else
-                            c.say(t, "This will... impact my reputation...");
+                        switch (c.innocence / 33) {
+                            case 0: c.say(t, "This will... impact my reputation..."); break;
+                            case 1: c.say(t, "Ugh..."); break;
+                            default: c.say(t, "This feels so gross...");
+                        }
                     } else
                     if(thisAttack == 2)
                     {
                         Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
-                        if(c.morality > 66)
-                            c.say(t, "I've failed...");
-                        else
-                        if(c.morality > 33)
-                            c.say(t, "I look pathetic...");
-                        else
-                            c.say(t, "They've seen... my weakness...");
+                        switch (c.morality / 33) {
+                            case 0: c.say(t, "They've seen... my weakness..."); break;
+                            case 1: c.say(t, "I look pathetic..."); break;
+                            default: c.say(t, "I've failed...");
+                        }
                     }
                 } else
                 if(thisAttack == 0)
@@ -4188,13 +3960,11 @@ public class WorldState
                 if(thisAttack == 1)
                 {
                     Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.ANGER);
-                    if(c.innocence > 66)
-                        c.say(t, "What are you trying to do!?");
-                    else
-                    if(c.innocence > 33)
-                        c.say(t, "Ugh!  Damn it!");
-                    else
-                        c.say(t, "Ugh!  It'll take more than this to stop me, Demon Lord!");
+                    switch (c.innocence / 33) {
+                        case 0: c.say(t, "Ugh!  It'll take more than this to stop me, Demon Lord!"); break;
+                        case 1: c.say(t, "Ugh!  Damn it!"); break;
+                        default: c.say(t, "What are you trying to do!?");
+                    }
                 } else
                 if(thisAttack == 2)
                     if(c.morality > 66)
@@ -4219,13 +3989,11 @@ public class WorldState
                     if(thisAttack == 0)
                     {
                         Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
-                        if(c.confidence > 66)
-                            c.say(t, "D-Damn you, I- Aaagh!");
-                        else
-                        if(c.confidence > 33)
-                            c.say(t, "No!  Stop!  Uuurgh!");
-                        else
-                            c.say(t, "Hurts...!");
+                        switch (c.confidence / 33) {
+                            case 0: c.say(t, "Hurts...!"); break;
+                            case 1: c.say(t, "No!  Stop!  Uuurgh!"); break;
+                            default: c.say(t, "D-Damn you, I- Aaagh!");
+                        }
                     } else
                     if(thisAttack == 1)
                     {
@@ -4245,13 +4013,11 @@ public class WorldState
                     if(thisAttack == 2)
                     {
                         Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.SHAME);
-                        if(c.morality > 66)
-                            c.say(t, "I'm... failing... everyone...");
-                        else
-                        if(c.morality > 33)
-                            c.say(t, "Can't do anything...");
-                        else
-                            c.say(t, "Don't even... care... anymore...");
+                        switch (c.morality / 33) {
+                            case 0: c.say(t, "Don't even... care... anymore..."); break;
+                            case 1: c.say(t, "Can't do anything..."); break;
+                            default: c.say(t, "I'm... failing... everyone...");
+                        }
                     }
                 } else
                 if(c.dignity > 33)
@@ -4350,13 +4116,11 @@ public class WorldState
                 if(thisAttack == 2)
                 {
                     Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
-                    if(c.morality > 66)
-                        c.say(t, "I know I've lost, stop- Aaagh, no!");
-                    else
-                    if(c.morality > 33)
-                        c.say(t, "Aaagh, no, let me go!");
-                    else
-                        c.say(t, "Stop!  I give up!  You win!  Please!");
+                    switch (c.morality / 33) {
+                        case 0: c.say(t, "Stop!  I give up!  You win!  Please!"); break;
+                        case 1: c.say(t, "Aaagh, no, let me go!"); break;
+                        default: c.say(t, "I know I've lost, stop- Aaagh, no!");
+                    }
                 }
             } else
             if(c.dignity > 66)
@@ -4398,13 +4162,11 @@ public class WorldState
                 if(thisAttack == 2)
                 {
                     Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
-                    if(c.morality > 66)
-                        c.say(t, "They're... seeing... my failure...");
-                    else
-                    if(c.morality > 33)
-                        c.say(t, "Can't... call myself strong anymore...");
-                    else
-                        c.say(t, "Fine...  See what a weakling I actually am...");
+                    switch (c.morality / 33) {
+                        case 0: c.say(t, "Fine...  See what a weakling I actually am..."); break;
+                        case 1: c.say(t, "Can't... call myself strong anymore..."); break;
+                        default: c.say(t, "They're... seeing... my failure...");
+                    }
                 }
             } else
             if(c.dignity > 33)
@@ -4432,13 +4194,11 @@ public class WorldState
                 if(thisAttack == 1)
                 {
                     Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
-                    if(c.innocence > 66)
-                        c.say(t, "It's too embarrassing!  I'll dieee!");
-                    else
-                    if(c.innocence > 33)
-                        c.say(t, "This is... humiliating...  Ugh!");
-                    else
-                        c.say(t, "My mind is... breaking...!");
+                    switch (c.innocence / 33) {
+                        case 0: c.say(t, "My mind is... breaking...!"); break;
+                        case 1: c.say(t, "This is... humiliating...  Ugh!"); break;
+                        default: c.say(t, "It's too embarrassing!  I'll dieee!");
+                    }
                 } else
                 if(thisAttack == 2)
                 {
@@ -4499,13 +4259,11 @@ public class WorldState
             if(thisAttack == 2)
             {
                 Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
-                if(c.morality > 66)
-                    c.say(t, "I know I've lost, stop- Aaagh, no!");
-                else
-                if(c.morality > 33)
-                    c.say(t, "Aaagh, no, let me go!");
-                else
-                    c.say(t, "Stop!  I give up!  You win!  Please!");
+                switch (c.morality / 33) {
+                    case 0: c.say(t, "Stop!  I give up!  You win!  Please!"); break;
+                    case 1: c.say(t, "Aaagh, no, let me go!"); break;
+                    default: c.say(t, "I know I've lost, stop- Aaagh, no!");
+                }
             }
         } else
         if(w.getBodyStatus()[14])
@@ -4607,25 +4365,21 @@ public class WorldState
                             if(thisAttack == 2)
                             {
                                 Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
-                                if(c.innocence > 66)
-                                    c.say(t, "Huh?  Why are you all talking about giving me pies?");
-                                else
-                                if(c.innocence > 33)
-                                    c.say(t, "Disgusting...");
-                                else
-                                    c.say(t, "Is sexual intercourse all that you ever think about?");
+                                switch (c.innocence / 33) {
+                                    case 0: c.say(t, "Is sexual intercourse all that you ever think about?"); break;
+                                    case 1: c.say(t, "Disgusting..."); break;
+                                    default: c.say(t, "Huh?  Why are you all talking about giving me pies?");
+                                }
                             }
                         } else
                         if(thisAttack == 0)
                         {
                             Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                            if(c.dignity > 66)
-                                c.say(t, "Don't you dare look at me!");
-                            else
-                            if(c.dignity > 33)
-                                c.say(t, "You aren't allowed to look at me!");
-                            else
-                                c.say(t, "Disgusting perverts!");
+                            switch (c.dignity / 33) {
+                                case 0: c.say(t, "Disgusting perverts!"); break;
+                                case 1: c.say(t, "You aren't allowed to look at me!"); break;
+                                default: c.say(t, "Don't you dare look at me!");
+                            }
                         } else
                         if(thisAttack == 1)
                         {
@@ -4647,13 +4401,11 @@ public class WorldState
                         if(thisAttack == 2)
                         {
                             Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
-                            if(c.innocence > 66)
-                                c.say(t, "I don't really get what you're saying, but it still makes me want to beat you up!");
-                            else
-                            if(c.innocence > 33)
-                                c.say(t, "Humanity deserves the Demons.");
-                            else
-                                c.say(t, "After we exterminate the Demons, you degenerates are next in line.");
+                            switch (c.innocence / 33) {
+                                case 0: c.say(t, "After we exterminate the Demons, you degenerates are next in line."); break;
+                                case 1: c.say(t, "Humanity deserves the Demons."); break;
+                                default: c.say(t, "I don't really get what you're saying, but it still makes me want to beat you up!");
+                            }
                         }
                     } else
                     if(c.morality > 66)
@@ -4693,13 +4445,11 @@ public class WorldState
                         if(thisAttack == 2)
                         {
                             Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                            if(c.innocence > 66)
-                                c.say(t, "Why are you enjoying this so much!?  You can't even tell whether that camera is actually showing my privates!");
-                            else
-                            if(c.innocence > 33)
-                                c.say(t, "Don't you people have any morals at all?");
-                            else
-                                c.say(t, "I don't care about the happiness of animals like you!");
+                            switch (c.innocence / 33) {
+                                case 0: c.say(t, "I don't care about the happiness of animals like you!"); break;
+                                case 1: c.say(t, "Don't you people have any morals at all?"); break;
+                                default: c.say(t, "Why are you enjoying this so much!?  You can't even tell whether that camera is actually showing my privates!");
+                            }
                         }
                     } else
                     if(c.morality > 33)
@@ -4707,47 +4457,39 @@ public class WorldState
                         if(thisAttack == 0)
                         {
                             Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                            if(c.dignity > 66)
-                                c.say(t, "I-I'm not bothered at all that you're seeing this!");
-                            else
-                            if(c.dignity > 33)
-                                c.say(t, "Th-The close-up shot isn't actually coming from under my clothes, you're being fooled!");
-                            else
-                                c.say(t, "Why am I even bothering to save you people?");
+                            switch (c.dignity / 33) {
+                                case 0: c.say(t, "Why am I even bothering to save you people?"); break;
+                                case 1: c.say(t, "Th-The close-up shot isn't actually coming from under my clothes, you're being fooled!"); break;
+                                default: c.say(t, "I-I'm not bothered at all that you're seeing this!");
+                            }
                         } else
                         if(thisAttack == 1)
                         {
                             Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.ANGER);
-                            if(c.confidence > 66)
-                                c.say(t, "Guh, it's anchored inside...!");
-                            else
-                            if(c.confidence > 33)
-                                c.say(t, "There's no way that my insides look like that, this is fake!");
-                            else
-                                c.say(t, "P-Please, this is too disgusting...!");
+                            switch (c.confidence / 33) {
+                                case 0: c.say(t, "P-Please, this is too disgusting...!"); break;
+                                case 1: c.say(t, "There's no way that my insides look like that, this is fake!"); break;
+                                default: c.say(t, "Guh, it's anchored inside...!");
+                            }
                         } else
                         if(thisAttack == 2)
                         {
                             Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                            if(c.innocence > 66)
-                                c.say(t, "Stop laughing at me...!");
-                            else
-                            if(c.innocence > 33)
-                                c.say(t, "Are you really jacking off to a close-up shot of my insides?  Disgusting!");
-                            else
-                                c.say(t, "I have no intention of giving you what you want!");
+                            switch (c.innocence / 33) {
+                                case 0: c.say(t, "I have no intention of giving you what you want!"); break;
+                                case 1: c.say(t, "Are you really jacking off to a close-up shot of my insides?  Disgusting!"); break;
+                                default: c.say(t, "Stop laughing at me...!");
+                            }
                         }
                     } else
                     if(thisAttack == 0)
                     {
                         Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                        if(c.dignity > 66)
-                            c.say(t, "Stop watching now, or I'll make you regret it!");
-                        else
-                        if(c.dignity > 33)
-                            c.say(t, "I'll definitely find a way to punish you for watching this!");
-                        else
-                            c.say(t, "Are you seriously desperate enough to be getting excited over a blurry close-up shot of my privates?");
+                        switch (c.dignity / 33) {
+                            case 0: c.say(t, "Are you seriously desperate enough to be getting excited over a blurry close-up shot of my privates?"); break;
+                            case 1: c.say(t, "I'll definitely find a way to punish you for watching this!"); break;
+                            default: c.say(t, "Stop watching now, or I'll make you regret it!");
+                        }
                     } else
                     if(thisAttack == 1)
                     {
@@ -4769,13 +4511,11 @@ public class WorldState
                     if(thisAttack == 2)
                     {
                         Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                        if(c.innocence > 66)
-                            c.say(t, "I'm not an evil bitch!  You're an evil bitch!");
-                        else
-                        if(c.innocence > 33)
-                            c.say(t, "Self-righteous bastards!");
-                        else
-                            c.say(t, "This is absurd!  Do you masturbate to medical textbooks as well?");
+                        switch (c.innocence / 33) {
+                            case 0: c.say(t, "This is absurd!  Do you masturbate to medical textbooks as well?"); break;
+                            case 1: c.say(t, "Self-righteous bastards!"); break;
+                            default: c.say(t, "I'm not an evil bitch!  You're an evil bitch!");
+                        }
                     }
                 } else
                 if(c.morality > 66)
@@ -4922,25 +4662,21 @@ public class WorldState
                         if(thisAttack == 2)
                         {
                             Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
-                            if(c.innocence > 66)
-                                c.say(t, "Huh?  Why are you all talking about giving me pies?");
-                            else
-                            if(c.innocence > 33)
-                                c.say(t, "Disgusting...");
-                            else
-                                c.say(t, "Is sexual intercourse all that you ever think about?");
+                            switch (c.innocence / 33) {
+                                case 0: c.say(t, "Is sexual intercourse all that you ever think about?"); break;
+                                case 1: c.say(t, "Disgusting..."); break;
+                                default: c.say(t, "Huh?  Why are you all talking about giving me pies?");
+                            }
                         }
                     } else
                     if(thisAttack == 0)
                     {
                         Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                        if(c.dignity > 66)
-                            c.say(t, "Don't you dare look at me!");
-                        else
-                        if(c.dignity > 33)
-                            c.say(t, "You aren't allowed to look at me!");
-                        else
-                            c.say(t, "Disgusting perverts!");
+                        switch (c.dignity / 33) {
+                            case 0: c.say(t, "Disgusting perverts!"); break;
+                            case 1: c.say(t, "You aren't allowed to look at me!"); break;
+                            default: c.say(t, "Don't you dare look at me!");
+                        }
                     } else
                     if(thisAttack == 1)
                     {
@@ -4962,13 +4698,11 @@ public class WorldState
                     if(thisAttack == 2)
                     {
                         Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
-                        if(c.innocence > 66)
-                            c.say(t, "I don't really get what you're saying, but it still makes me want to beat you up!");
-                        else
-                        if(c.innocence > 33)
-                            c.say(t, "Humanity deserves the Demons.");
-                        else
-                            c.say(t, "After we exterminate the Demons, you degenerates are next in line.");
+                        switch (c.innocence / 33) {
+                            case 0: c.say(t, "After we exterminate the Demons, you degenerates are next in line."); break;
+                            case 1: c.say(t, "Humanity deserves the Demons."); break;
+                            default: c.say(t, "I don't really get what you're saying, but it still makes me want to beat you up!");
+                        }
                     }
                 } else
                 if(c.morality > 66)
@@ -4976,13 +4710,11 @@ public class WorldState
                     if(thisAttack == 0)
                     {
                         Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.ANGER);
-                        if(c.dignity > 66)
-                            c.say(t, "Enduring this humiliation is part of my duty...");
-                        else
-                        if(c.dignity > 33)
-                            c.say(t, "I... I must find the strength to forgive them...!");
-                        else
-                            c.say(t, "You're actually making me angry...");
+                        switch (c.dignity / 33) {
+                            case 0: c.say(t, "You're actually making me angry..."); break;
+                            case 1: c.say(t, "I... I must find the strength to forgive them...!"); break;
+                            default: c.say(t, "Enduring this humiliation is part of my duty...");
+                        }
                     } else
                     if(thisAttack == 1)
                     {
@@ -5004,13 +4736,11 @@ public class WorldState
                     if(thisAttack == 2)
                     {
                         Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                        if(c.innocence > 66)
-                            c.say(t, "How can you enjoy this so much!?  Don't you feel guilty?");
-                        else
-                        if(c.innocence > 33)
-                            c.say(t, "Don't you people have any morals at all?");
-                        else
-                            c.say(t, "I don't care about the happiness of animals like you!");
+                        switch (c.innocence / 33) {
+                            case 0: c.say(t, "I don't care about the happiness of animals like you!"); break;
+                            case 1: c.say(t, "Don't you people have any morals at all?"); break;
+                            default: c.say(t, "How can you enjoy this so much!?  Don't you feel guilty?");
+                        }
                     }
                 } else
                 if(c.morality > 33)
@@ -5052,45 +4782,37 @@ public class WorldState
                     if(thisAttack == 2)
                     {
                         Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                        if(c.innocence > 66)
-                            c.say(t, "Stop laughing at me...!");
-                        else
-                        if(c.innocence > 33)
-                            c.say(t, "I'm gonna escape before you can strip me this time!");
-                        else
-                            c.say(t, "I have no intention of giving you what you want!");
+                        switch (c.innocence / 33) {
+                            case 0: c.say(t, "I have no intention of giving you what you want!"); break;
+                            case 1: c.say(t, "I'm gonna escape before you can strip me this time!"); break;
+                            default: c.say(t, "Stop laughing at me...!");
+                        }
                     }
                 } else
                 {
                     Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                     if(thisAttack == 0)
                     {
-                        if(c.dignity > 66)
-                            c.say(t, "Stop watching now, or I'll make you regret it!");
-                        else
-                        if(c.dignity > 33)
-                            c.say(t, "I'll definitely find a way to punish you for watching this!");
-                        else
-                            c.say(t, "Disgusting!  You all should just die!");
+                        switch (c.dignity / 33) {
+                            case 0: c.say(t, "Disgusting!  You all should just die!"); break;
+                            case 1: c.say(t, "I'll definitely find a way to punish you for watching this!"); break;
+                            default: c.say(t, "Stop watching now, or I'll make you regret it!");
+                        }
                     } else
                     if(thisAttack == 1)
                     {
-                        if(c.confidence > 66)
-                            c.say(t, "Fuck... all of you...!");
-                        else
-                        if(c.confidence > 33)
-                            c.say(t, "Damn... it... hurts...!");
-                        else
-                            c.say(t, "I hate this...!");
+                        switch (c.confidence / 33) {
+                            case 0: c.say(t, "I hate this...!"); break;
+                            case 1: c.say(t, "Damn... it... hurts...!"); break;
+                            default: c.say(t, "Fuck... all of you...!");
+                        }
                     } else
                     if(thisAttack == 2)
-                        if(c.innocence > 66)
-                            c.say(t, "I'm not an evil bitch!  You're an evil bitch!");
-                        else
-                        if(c.innocence > 33)
-                            c.say(t, "Self-righteous bastards!");
-                        else
-                            c.say(t, "I will make it my mission to track all of you down and punish you for this...");
+                        switch (c.innocence / 33) {
+                            case 0: c.say(t, "I will make it my mission to track all of you down and punish you for this..."); break;
+                            case 1: c.say(t, "Self-righteous bastards!"); break;
+                            default: c.say(t, "I'm not an evil bitch!  You're an evil bitch!");
+                        }
                 }
             } else
             if(c.getHATELevel() < 3 || c.vVirg)
@@ -5100,13 +4822,11 @@ public class WorldState
                     if(thisAttack == 0)
                     {
                         Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
-                        if(c.dignity > 66)
-                            c.say(t, "I've been unintentionally tempting them...  It's only natural...");
-                        else
-                        if(c.dignity > 33)
-                            c.say(t, "I'm showing them something shameful again...");
-                        else
-                            c.say(t, "I'm ending this show as quickly as possible.");
+                        switch (c.dignity / 33) {
+                            case 0: c.say(t, "I'm ending this show as quickly as possible."); break;
+                            case 1: c.say(t, "I'm showing them something shameful again..."); break;
+                            default: c.say(t, "I've been unintentionally tempting them...  It's only natural...");
+                        }
                     } else
                     if(thisAttack == 1)
                     {
@@ -5233,23 +4953,19 @@ public class WorldState
                     Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                     if(thisAttack == 0)
                     {
-                        if(c.dignity > 66)
-                            c.say(t, "F-Fine, it's not like I care...!");
-                        else
-                        if(c.dignity > 33)
-                            c.say(t, "You think you'll get away with this!?");
-                        else
-                            c.say(t, "Disgusting perverts!");
+                        switch (c.dignity / 33) {
+                            case 0: c.say(t, "Disgusting perverts!"); break;
+                            case 1: c.say(t, "You think you'll get away with this!?"); break;
+                            default: c.say(t, "F-Fine, it's not like I care...!");
+                        }
                     } else
                     if(thisAttack == 1)
                     {
-                        if(c.confidence > 66)
-                            c.say(t, "Graaagh!  I'll fucking kill all of you!");
-                        else
-                        if(c.confidence > 33)
-                            c.say(t, "I won't... let you break me...!");
-                        else
-                            c.say(t, "I'll do whatever you want, just s-stop torturing me!");
+                        switch (c.confidence / 33) {
+                            case 0: c.say(t, "I'll do whatever you want, just s-stop torturing me!"); break;
+                            case 1: c.say(t, "I won't... let you break me...!"); break;
+                            default: c.say(t, "Graaagh!  I'll fucking kill all of you!");
+                        }
                     } else
                     if(thisAttack == 2)
                         if(c.innocence > 66)
@@ -5286,13 +5002,11 @@ public class WorldState
                 if(thisAttack == 0)
                 {
                     Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                    if(c.dignity > 66)
-                        c.say(t, "They're beyond saving...!");
-                    else
-                    if(c.dignity > 33)
-                        c.say(t, "I... I can't forgive them...!");
-                    else
-                        c.say(t, "You're actually making me angry...");
+                    switch (c.dignity / 33) {
+                        case 0: c.say(t, "You're actually making me angry..."); break;
+                        case 1: c.say(t, "I... I can't forgive them...!"); break;
+                        default: c.say(t, "They're beyond saving...!");
+                    }
                 } else
                 if(thisAttack == 1)
                 {
@@ -5314,13 +5028,11 @@ public class WorldState
                 if(thisAttack == 2)
                 {
                     Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                    if(c.innocence > 66)
-                        c.say(t, "You know this is wrong, but you're enjoying it anyway!  You're bad people!");
-                    else
-                    if(c.innocence > 33)
-                        c.say(t, "How can you be so callous!?");
-                    else
-                        c.say(t, "You animals!");
+                    switch (c.innocence / 33) {
+                        case 0: c.say(t, "You animals!"); break;
+                        case 1: c.say(t, "How can you be so callous!?"); break;
+                        default: c.say(t, "You know this is wrong, but you're enjoying it anyway!  You're bad people!");
+                    }
                 }
             } else
             if(c.morality > 33)
@@ -5328,13 +5040,11 @@ public class WorldState
                 if(thisAttack == 0)
                 {
                     Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                    if(c.dignity > 66)
-                        c.say(t, "I-I'm not bothered at all that you're seeing this!");
-                    else
-                    if(c.dignity > 33)
-                        c.say(t, "Don't- Don't unzip your pants!");
-                    else
-                        c.say(t, "Why am I even bothering to save you people?");
+                    switch (c.dignity / 33) {
+                        case 0: c.say(t, "Why am I even bothering to save you people?"); break;
+                        case 1: c.say(t, "Don't- Don't unzip your pants!"); break;
+                        default: c.say(t, "I-I'm not bothered at all that you're seeing this!");
+                    }
                 } else
                 if(thisAttack == 1)
                 {
@@ -5356,36 +5066,30 @@ public class WorldState
                 if(thisAttack == 2)
                 {
                     Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                    if(c.innocence > 66)
-                        c.say(t, "Stop laughing at me...!");
-                    else
-                    if(c.innocence > 33)
-                        c.say(t, "No!  I refuse to be your masturbation material!");
-                    else
-                        c.say(t, "You don't deserve to be saved!");
+                    switch (c.innocence / 33) {
+                        case 0: c.say(t, "You don't deserve to be saved!"); break;
+                        case 1: c.say(t, "No!  I refuse to be your masturbation material!"); break;
+                        default: c.say(t, "Stop laughing at me...!");
+                    }
                 }
             } else
             {
                 Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                 if(thisAttack == 0)
                 {
-                    if(c.dignity > 66)
-                        c.say(t, "Stop watching now, or I'll make you regret it!");
-                    else
-                    if(c.dignity > 33)
-                        c.say(t, "I'll definitely find a way to punish you for watching this!");
-                    else
-                        c.say(t, "Disgusting!  You all should just die!");
+                    switch (c.dignity / 33) {
+                        case 0: c.say(t, "Disgusting!  You all should just die!"); break;
+                        case 1: c.say(t, "I'll definitely find a way to punish you for watching this!"); break;
+                        default: c.say(t, "Stop watching now, or I'll make you regret it!");
+                    }
                 } else
                 if(thisAttack == 1)
                 {
-                    if(c.confidence > 66)
-                        c.say(t, "Fuck... all of you...!");
-                    else
-                    if(c.confidence > 33)
-                        c.say(t, "Damn... it... hurts...!");
-                    else
-                        c.say(t, "I hate this...!");
+                    switch (c.confidence / 33) {
+                        case 0: c.say(t, "I hate this...!"); break;
+                        case 1: c.say(t, "Damn... it... hurts...!"); break;
+                        default: c.say(t, "Fuck... all of you...!");
+                    }
                 } else
                 if(thisAttack == 2)
                     if(c.innocence > 66)
@@ -5442,13 +5146,11 @@ public class WorldState
                 if(thisAttack == 2)
                 {
                     Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.SHAME);
-                    if(c.dignity > 66)
-                        c.say(t, "I trust them not to give in!  I do!");
-                    else
-                    if(c.dignity > 33)
-                        c.say(t, "This isn't good...");
-                    else
-                        c.say(t, "No!  If you're going to hurt someone, hurt me!");
+                    switch (c.dignity / 33) {
+                        case 0: c.say(t, "No!  If you're going to hurt someone, hurt me!"); break;
+                        case 1: c.say(t, "This isn't good..."); break;
+                        default: c.say(t, "I trust them not to give in!  I do!");
+                    }
                 }
             } else
             if(c.morality > 33)
@@ -5456,13 +5158,11 @@ public class WorldState
                 if(thisAttack == 0)
                 {
                     Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.ANGER);
-                    if(c.innocence > 66)
-                        c.say(t, "You big jerk!");
-                    else
-                    if(c.innocence > 33)
-                        c.say(t, "I'm not scared!");
-                    else
-                        c.say(t, "I know that you're trying to unnerve me, Demon Lord.");
+                    switch (c.innocence / 33) {
+                        case 0: c.say(t, "I know that you're trying to unnerve me, Demon Lord."); break;
+                        case 1: c.say(t, "I'm not scared!"); break;
+                        default: c.say(t, "You big jerk!");
+                    }
                 } else
                 if(thisAttack == 1)
                 {
@@ -5500,35 +5200,29 @@ public class WorldState
             if(thisAttack == 0)
             {
                 Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                if(c.innocence > 66)
-                    c.say(t, "I'm getting really mad...!");
-                else
-                if(c.innocence > 33)
-                    c.say(t, "This is getting on my nerves...");
-                else
-                    c.say(t, "I will absolutely find a way to make you suffer, Demon Lord.");
+                switch (c.innocence / 33) {
+                    case 0: c.say(t, "I will absolutely find a way to make you suffer, Demon Lord."); break;
+                    case 1: c.say(t, "This is getting on my nerves..."); break;
+                    default: c.say(t, "I'm getting really mad...!");
+                }
             } else
             if(thisAttack == 1)
             {
                 Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                if(c.confidence > 66)
-                    c.say(t, "You dare provoke me!?");
-                else
-                if(c.confidence > 33)
-                    c.say(t, "You think you can get away with this!?");
-                else
-                    c.say(t, "I... hate you so much...");
+                switch (c.confidence / 33) {
+                    case 0: c.say(t, "I... hate you so much..."); break;
+                    case 1: c.say(t, "You think you can get away with this!?"); break;
+                    default: c.say(t, "You dare provoke me!?");
+                }
             } else
             if(thisAttack == 2)
             {
                 Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                if(c.dignity > 66)
-                    c.say(t, "A-As if I really care...");
-                else
-                if(c.dignity > 33)
-                    c.say(t, "Just die already!");
-                else
-                    c.say(t, "I'm gonna enjoy killing you!");
+                switch (c.dignity / 33) {
+                    case 0: c.say(t, "I'm gonna enjoy killing you!"); break;
+                    case 1: c.say(t, "Just die already!"); break;
+                    default: c.say(t, "A-As if I really care...");
+                }
             }
         } else
         if(greatest == 1)
@@ -5555,24 +5249,20 @@ public class WorldState
                 if(thisAttack == 1)
                 {
                     Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
-                    if(c.confidence > 66)
-                        c.say(t, "Wh-Why can't Demons just fight me normally!?");
-                    else
-                    if(c.confidence > 33)
-                        c.say(t, "S-Stop it already!");
-                    else
-                        c.say(t, "S-Stop, I don't like this...!");
+                    switch (c.confidence / 33) {
+                        case 0: c.say(t, "S-Stop, I don't like this...!"); break;
+                        case 1: c.say(t, "S-Stop it already!"); break;
+                        default: c.say(t, "Wh-Why can't Demons just fight me normally!?");
+                    }
                 } else
                 if(thisAttack == 2)
                 {
                     Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
-                    if(c.dignity > 66)
-                        c.say(t, "I-I'll never give in!");
-                    else
-                    if(c.dignity > 33)
-                        c.say(t, "Just go away!");
-                    else
-                        c.say(t, "It's all slimy and gross!");
+                    switch (c.dignity / 33) {
+                        case 0: c.say(t, "It's all slimy and gross!"); break;
+                        case 1: c.say(t, "Just go away!"); break;
+                        default: c.say(t, "I-I'll never give in!");
+                    }
                 }
             } else
             if(c.innocence > 33)
@@ -5580,13 +5270,11 @@ public class WorldState
                 if(thisAttack == 0)
                 {
                     Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                    if(c.morality > 66)
-                        c.say(t, "No!  This is wrong!");
-                    else
-                    if(c.morality > 33)
-                        c.say(t, "Th-This doesn't bother me at all!");
-                    else
-                        c.say(t, "Get your disgusting tentacles off me!");
+                    switch (c.morality / 33) {
+                        case 0: c.say(t, "Get your disgusting tentacles off me!"); break;
+                        case 1: c.say(t, "Th-This doesn't bother me at all!"); break;
+                        default: c.say(t, "No!  This is wrong!");
+                    }
                 } else
                 if(thisAttack == 1)
                 {
@@ -5658,13 +5346,11 @@ public class WorldState
             if(thisAttack == 2)
             {
                 Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
-                if(c.dignity > 66)
-                    c.say(t, "P-Purely a physiological reaction...");
-                else
-                if(c.dignity > 33)
-                    c.say(t, "Nn...!  Need to stay focused...!");
-                else
-                    c.say(t, "F-Fuck...  Not now...!");
+                switch (c.dignity / 33) {
+                    case 0: c.say(t, "F-Fuck...  Not now...!"); break;
+                    case 1: c.say(t, "Nn...!  Need to stay focused...!"); break;
+                    default: c.say(t, "P-Purely a physiological reaction...");
+                }
             }
         } else
         if(greatest == 2)
@@ -5805,24 +5491,20 @@ public class WorldState
             if(thisAttack == 1)
             {
                 Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
-                if(c.innocence > 66)
-                    c.say(t, "J-Just go away!");
-                else
-                if(c.innocence > 33)
-                    c.say(t, "Aah!  S-Stop!");
-                else
-                    c.say(t, "I c-can't beat the Demon Lord...!");
+                switch (c.innocence / 33) {
+                    case 0: c.say(t, "I c-can't beat the Demon Lord...!"); break;
+                    case 1: c.say(t, "Aah!  S-Stop!"); break;
+                    default: c.say(t, "J-Just go away!");
+                }
             } else
             if(thisAttack == 2)
             {
                 Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
-                if(c.dignity > 66)
-                    c.say(t, "No!  Please!");
-                else
-                if(c.dignity > 33)
-                    c.say(t, "Eek!");
-                else
-                    c.say(t, "W-We're doomed!");
+                switch (c.dignity / 33) {
+                    case 0: c.say(t, "W-We're doomed!"); break;
+                    case 1: c.say(t, "Eek!"); break;
+                    default: c.say(t, "No!  Please!");
+                }
             }
         } else
         if(greatest == 3)
@@ -5831,13 +5513,11 @@ public class WorldState
                 if(thisAttack == 0)
                 {
                     Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.FEAR);
-                    if(c.morality > 66)
-                        c.say(t, "My only concern is to avoid becoming a distraction to the others!");
-                    else
-                    if(c.morality > 33)
-                        c.say(t, "Just stay calm...");
-                    else
-                        c.say(t, "Hmph, a-as if I care whether I'm exposed...");
+                    switch (c.morality / 33) {
+                        case 0: c.say(t, "Hmph, a-as if I care whether I'm exposed..."); break;
+                        case 1: c.say(t, "Just stay calm..."); break;
+                        default: c.say(t, "My only concern is to avoid becoming a distraction to the others!");
+                    }
                 } else
                 if(thisAttack == 1)
                 {
@@ -5944,13 +5624,11 @@ public class WorldState
             if(thisAttack == 1)
             {
                 Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                if(c.innocence > 66)
-                    c.say(t, "No fair!");
-                else
-                if(c.innocence > 33)
-                    c.say(t, "Come on, stop it!");
-                else
-                    c.say(t, "You're wasting your time, Demon Lord!");
+                switch (c.innocence / 33) {
+                    case 0: c.say(t, "You're wasting your time, Demon Lord!"); break;
+                    case 1: c.say(t, "Come on, stop it!"); break;
+                    default: c.say(t, "No fair!");
+                }
             } else
             if(thisAttack == 2)
                 if(c.confidence > 66)
@@ -6924,21 +6602,17 @@ public class WorldState
             append(t, "\n\n");
             if(leader.cVirg)
             {
-                if(leader.confidence > 66)
-                    append(t, "For a moment, " + leader.mainName + " is tempted to join them.  But " + leader.heShe() + " wants to finish up and go home, so " + leader.heShe() + " steps forward.  However, " + leader.heShe() + "'s surprised when " + subject.mainName + " abruptly stands up, putting " + subject.hisHer() + " sexual pleasure aside for the moment in order to stand in " + leader.mainName + "'s path, blocking " + leader.hisHer() + " way and protesting in an unusually determined voice.");
-                else
-                if(leader.confidence > 33)
-                    append(t, "The sight of " + subject.mainName + "'s defenseless form makes " + leader.mainName + " want to jump in and start messing with " + subject.himHer() + " from behind.  " + leader.HeShe() + " hesitates, trying to decide how much " + leader.heShe() + " cares about apprehending the Thralls, and that gives " + subject.mainName + " time to notice " + leader.himHer() + " and hold out a protective hand.");
-                else
-                    append(t, leader.mainName + "'s eyes go wide, and " + leader.heShe() + " gulps nervously, too turned on by the sight to interfere.  The next thing " + leader.heShe() + " knows, " + subject.mainName + " has already finished and is casually walking toward " + leader.himHer() + ".");
+                switch (leader.confidence / 33) {
+                    case 0: append(t, leader.mainName + "'s eyes go wide, and " + leader.heShe() + " gulps nervously, too turned on by the sight to interfere.  The next thing " + leader.heShe() + " knows, " + subject.mainName + " has already finished and is casually walking toward " + leader.himHer() + "."); break;
+                    case 1: append(t, "The sight of " + subject.mainName + "'s defenseless form makes " + leader.mainName + " want to jump in and start messing with " + subject.himHer() + " from behind.  " + leader.HeShe() + " hesitates, trying to decide how much " + leader.heShe() + " cares about apprehending the Thralls, and that gives " + subject.mainName + " time to notice " + leader.himHer() + " and hold out a protective hand."); break;
+                    default: append(t, "For a moment, " + leader.mainName + " is tempted to join them.  But " + leader.heShe() + " wants to finish up and go home, so " + leader.heShe() + " steps forward.  However, " + leader.heShe() + "'s surprised when " + subject.mainName + " abruptly stands up, putting " + subject.hisHer() + " sexual pleasure aside for the moment in order to stand in " + leader.mainName + "'s path, blocking " + leader.hisHer() + " way and protesting in an unusually determined voice.");
+                }
             } else
-            if(leader.confidence > 66)
-                append(t, "Muttering with annoyance at " + subject.mainName + "'s lewd ways, " + leader.mainName + " strides forward to put a stop to it, but " + leader.heShe() + "'s startled by how quickly " + subject.mainName + " notices " + leader.himHer() + " and protests in a surprisingly stern voice.");
-            else
-            if(leader.confidence > 33)
-                append(t, leader.mainName + " clenches " + leader.hisHer() + " fist in annoyance at how " + subject.mainName + " is wasting " + leader.hisHer() + " time, but as soon as " + leader.heShe() + " raises that fist, " + subject.mainName + " notices " + leader.himHer() + " and moves to block the blow with " + subject.hisHer() + " body.");
-            else
-                append(t, leader.mainName + " is nervous about interfering, and " + leader.heShe() + " ends up standing by and fidgeting until " + subject.mainName + " is finished.  Then, " + subject.mainName + " glances in " + leader.mainName + "'s direction, stands up straight, and starts walking toward " + leader.himHer() + ".");
+            switch (leader.confidence / 33) {
+                case 0: append(t, leader.mainName + " is nervous about interfering, and " + leader.heShe() + " ends up standing by and fidgeting until " + subject.mainName + " is finished.  Then, " + subject.mainName + " glances in " + leader.mainName + "'s direction, stands up straight, and starts walking toward " + leader.himHer() + "."); break;
+                case 1: append(t, leader.mainName + " clenches " + leader.hisHer() + " fist in annoyance at how " + subject.mainName + " is wasting " + leader.hisHer() + " time, but as soon as " + leader.heShe() + " raises that fist, " + subject.mainName + " notices " + leader.himHer() + " and moves to block the blow with " + subject.hisHer() + " body."); break;
+                default: append(t, "Muttering with annoyance at " + subject.mainName + "'s lewd ways, " + leader.mainName + " strides forward to put a stop to it, but " + leader.heShe() + "'s startled by how quickly " + subject.mainName + " notices " + leader.himHer() + " and protests in a surprisingly stern voice.");
+            }
             subject.say(t, "\n\n\"");
             if(subject.morality > 66)
             {
@@ -6992,44 +6666,36 @@ public class WorldState
                     subject.say(t, "\"");
                     if(startOne)
                     {
-                        if(subject.confidence > 66)
-                            subject.say(t, "Sometimes I'm a little too eager to fight.  You were right all along about how nice it can be to make peace, " + leader.mainName + ".");
-                        else
-                        if(subject.confidence > 33)
-                            subject.say(t, "I never knew how nice this could be.  Thanks for showing it to me, " + leader.mainName + ".");
-                        else
-                            subject.say(t, "I should have realized from the start that it was better to make friends with the Thralls.  Th-Thanks for putting up with me, " + leader.mainName + "...");
+                        switch (subject.confidence / 33) {
+                            case 0: subject.say(t, "I should have realized from the start that it was better to make friends with the Thralls.  Th-Thanks for putting up with me, " + leader.mainName + "..."); break;
+                            case 1: subject.say(t, "I never knew how nice this could be.  Thanks for showing it to me, " + leader.mainName + "."); break;
+                            default: subject.say(t, "Sometimes I'm a little too eager to fight.  You were right all along about how nice it can be to make peace, " + leader.mainName + ".");
+                        }
                         subject.say(t, "\"\n\n");
                         append(t, leader.mainName + " smiles brightly at " + subject.mainName + " and leans over in " + leader.hisHer() + " seat to give " + subject.himHer() + " a one-armed hug.\n\n");
                         leader.say(t, "\"");
-                        if(leader.morality > 66)
-                            leader.say(t, "I-I'm just glad we didn't let it come between us...");
-                        else
-                        if(leader.morality > 33)
-                            leader.say(t, "I-It's fine, really...  As long as we're both happy.");
-                        else
-                            leader.say(t, "Heh, you owe me one.");
+                        switch (leader.morality / 33) {
+                            case 0: leader.say(t, "Heh, you owe me one."); break;
+                            case 1: leader.say(t, "I-It's fine, really...  As long as we're both happy."); break;
+                            default: leader.say(t, "I-I'm just glad we didn't let it come between us...");
+                        }
                         leader.say(t, "\"\n\n");
                         Project.changePortrait(subject.convertGender(), subject.type, false, false, this, nameDisplay, 0, Project.Emotion.JOY, Project.Emotion.JOY);
                     } else
                     {
-                        if(subject.confidence > 66)
-                            subject.say(t, "Listen closely, because I'm only going to say this once.  You were right, " + leader.mainName + ".");
-                        else
-                        if(subject.confidence > 33)
-                            subject.say(t, "I never thought I'd be learning about making friends from you, " + leader.mainName + "...");
-                        else
-                            subject.say(t, "I-I'm sorry for how I acted toward you before, " + leader.mainName + "...");
+                        switch (subject.confidence / 33) {
+                            case 0: subject.say(t, "I-I'm sorry for how I acted toward you before, " + leader.mainName + "..."); break;
+                            case 1: subject.say(t, "I never thought I'd be learning about making friends from you, " + leader.mainName + "..."); break;
+                            default: subject.say(t, "Listen closely, because I'm only going to say this once.  You were right, " + leader.mainName + ".");
+                        }
                         subject.say(t, "\"\n\n");
                         append(t, leader.mainName + " shoots an annoyed glance at " + subject.mainName + ", but after a moment, " + subject.heShe() + " nods.\n\n");
                         leader.say(t, "\"");
-                        if(leader.morality > 66)
-                            leader.say(t, "Well...  It's a start.");
-                        else
-                        if(leader.morality > 33)
-                            leader.say(t, "I guess I can forgive you.  Maybe.");
-                        else
-                            leader.say(t, "You'll definitely be making it up to me.");
+                        switch (leader.morality / 33) {
+                            case 0: leader.say(t, "You'll definitely be making it up to me."); break;
+                            case 1: leader.say(t, "I guess I can forgive you.  Maybe."); break;
+                            default: leader.say(t, "Well...  It's a start.");
+                        }
                         leader.say(t, "\"\n\n");
                     }
                     Project.changePortrait(leader.convertGender(), leader.type, false, false, this, nameDisplay, 1, Project.Emotion.JOY, Project.Emotion.JOY);
@@ -7127,37 +6793,31 @@ public class WorldState
                 leader.say(t, "What's wrong with you!?\"\n\n");
                 append(t, subject.mainName + " pauses, glancing behind " + subject.himHer() + "self.\n\n");
                 subject.say(t, "\"");
-                if(subject.confidence > 66)
-                    subject.say(t, "I'm just tired of fighting for people who don't deserve it.  Now, you're going to stay here with me until all the Thralls have safely escaped.");
-                else
-                if(subject.confidence > 33)
-                    subject.say(t, "I don't want to fight you, " + leader.mainName + ", but if you try to hurt them, I absolutely will.");
-                else
-                    subject.say(t, "You can take me down if you want, " + leader.mainName + ".  But... I-I'll still stall you long enough for the Thralls here to escape!");
+                switch (subject.confidence / 33) {
+                    case 0: subject.say(t, "You can take me down if you want, " + leader.mainName + ".  But... I-I'll still stall you long enough for the Thralls here to escape!"); break;
+                    case 1: subject.say(t, "I don't want to fight you, " + leader.mainName + ", but if you try to hurt them, I absolutely will."); break;
+                    default: subject.say(t, "I'm just tired of fighting for people who don't deserve it.  Now, you're going to stay here with me until all the Thralls have safely escaped.");
+                }
                 subject.say(t, "\"\n\n");
                 if(startOne)
                 {
                     append(t, leader.mainName + " tenses up, gritting " + leader.hisHer() + " teeth, but then " + leader.heShe() + " lets it out with a sigh, hanging " + leader.hisHer() + " head.\n\n");
                     leader.say(t, "\"");
-                    if(leader.morality > 66)
-                        leader.say(t, "I know I can't beat you, " + subject.mainName + ".  I'm just... r-really sad that it turned out like this...");
-                    else
-                    if(leader.morality > 33)
-                        leader.say(t, "I trusted you, " + subject.mainName + "...");
-                    else
-                        leader.say(t, "You're choosing them over me?  You'll pay for this, " + subject.mainName + "...!");
+                    switch (leader.morality / 33) {
+                        case 0: leader.say(t, "You're choosing them over me?  You'll pay for this, " + subject.mainName + "...!"); break;
+                        case 1: leader.say(t, "I trusted you, " + subject.mainName + "..."); break;
+                        default: leader.say(t, "I know I can't beat you, " + subject.mainName + ".  I'm just... r-really sad that it turned out like this...");
+                    }
                     leader.say(t, "\"\n\n");
                 } else
                 {
                     append(t, "With tears of frustration in " + leader.hisHer() + " eyes, " + leader.mainName + " tackles " + subject.mainName + " to the ground.  They scuffle briefly before the authorities arrive to pry them apart, but in that time, the Thralls have all gone.\n\n");
                     leader.say(t, "\"");
-                    if(leader.morality > 66)
-                        leader.say(t, "I... I actually attacked " + subject.himHer() + "...");
-                    else
-                    if(leader.morality > 33)
-                        leader.say(t, "Traitor!  Y-You traitor!");
-                    else
-                        leader.say(t, "Let me go!  I'll kill " + subject.himHer() + "!");
+                    switch (leader.morality / 33) {
+                        case 0: leader.say(t, "Let me go!  I'll kill " + subject.himHer() + "!"); break;
+                        case 1: leader.say(t, "Traitor!  Y-You traitor!"); break;
+                        default: leader.say(t, "I... I actually attacked " + subject.himHer() + "...");
+                    }
                     leader.say(t, "\"\n\n");
                 }
                 if(getRelationship(subject.number, leader.number) == -4)
@@ -7338,13 +6998,11 @@ public class WorldState
             {
                 nameDisplay[1] = c.mainName;
             }
-            if(subject.innocence > 66)
-                append(t, subject.mainName + "'s mind reacts violently to being exposed to so many intense sexual stimuli beyond anything " + subject.heShe() + " could have been prepared for.  After waking up, " + c.heShe() + " fled in a straight line all the way out of the city before smashing into a hillside and losing consciousness once again.  ");
-            else
-            if(subject.innocence > 33)
-                append(t, "After passing out during the battle, " + subject.mainName + " was able to regain consciousness for long enough to flee, but it's not long before " + subject.heShe() + " lapses once again into " + subject.hisHer() + " comatose state, landing in a back alleyway some distance from the battlefield.  ");
-            else
-                append(t, subject.mainName + " kept " + subject.hisHer() + " wits about " + subject.himHer() + " for as long as " + subject.heShe() + " could, but when " + subject.heShe() + " broke, " + c.heShe() + " broke hard.  " + subject.HeShe() + " woke from " + subject.hisHer() + " comatose state only long enough to fly away at high speed and crash into an evacuated building, where " + subject.heShe() + " continued to lay until found by " + subject.hisHer() + " allies.  ");
+            switch (subject.innocence / 33) {
+                case 0: append(t, subject.mainName + " kept " + subject.hisHer() + " wits about " + subject.himHer() + " for as long as " + subject.heShe() + " could, but when " + subject.heShe() + " broke, " + c.heShe() + " broke hard.  " + subject.HeShe() + " woke from " + subject.hisHer() + " comatose state only long enough to fly away at high speed and crash into an evacuated building, where " + subject.heShe() + " continued to lay until found by " + subject.hisHer() + " allies.  "); break;
+                case 1: append(t, "After passing out during the battle, " + subject.mainName + " was able to regain consciousness for long enough to flee, but it's not long before " + subject.heShe() + " lapses once again into " + subject.hisHer() + " comatose state, landing in a back alleyway some distance from the battlefield.  "); break;
+                default: append(t, subject.mainName + "'s mind reacts violently to being exposed to so many intense sexual stimuli beyond anything " + subject.heShe() + " could have been prepared for.  After waking up, " + c.heShe() + " fled in a straight line all the way out of the city before smashing into a hillside and losing consciousness once again.  ");
+            }
             subject.say(t, "\n\n\"...\"\n\n");
             Project.clearPortraits();
             Project.changePortrait(subject.convertGender(), subject.type, false, false, this, nameDisplay, 0, Project.Emotion.ANGER, Project.Emotion.ANGER);
@@ -7358,24 +7016,20 @@ public class WorldState
                 {
                     append(t, leader.HeShe() + " kneels down and gently cradles " + subject.mainName + "'s head.\n\n");
                     leader.say(t, "\"");
-                    if(leader.innocence > 66)
-                        leader.say(t, "You're smart, so I bet you'll get over this in no time.  But until then...");
-                    else
-                    if(leader.innocence > 33)
-                        leader.say(t, "I hoped... that you, at least, wouldn't have to go through this...");
-                    else
-                        leader.say(t, "For a mind such as yours... I fear that this might be even more painful...");
+                    switch (leader.innocence / 33) {
+                        case 0: leader.say(t, "For a mind such as yours... I fear that this might be even more painful..."); break;
+                        case 1: leader.say(t, "I hoped... that you, at least, wouldn't have to go through this..."); break;
+                        default: leader.say(t, "You're smart, so I bet you'll get over this in no time.  But until then...");
+                    }
                 } else
                 {
                     append(t, "Despite their rivalry, there's only sympathy on " + leader.hisHer() + " face as " + leader.heShe() + " looks down at " + subject.mainName + ".\n\n");
                     leader.say(t, "\"");
-                    if(leader.morality > 66)
-                        leader.say(t, "You've given up as much as I have...  I have to respect that.");
-                    else
-                    if(leader.morality > 33)
-                        leader.say(t, "No one deserves to have this happen to them... not even you.");
-                    else
-                        leader.say(t, "I think... you've been hurt enough.");
+                    switch (leader.morality / 33) {
+                        case 0: leader.say(t, "I think... you've been hurt enough."); break;
+                        case 1: leader.say(t, "No one deserves to have this happen to them... not even you."); break;
+                        default: leader.say(t, "You've given up as much as I have...  I have to respect that.");
+                    }
                 }
                 leader.say(t, "\"\n\n");
                 if(d != null)
@@ -7389,21 +7043,17 @@ public class WorldState
                         follower.say(t, "\"");
                         if(getRelationship(leader.number, follower.number) >= 0)
                         {
-                            if(follower.innocence > 66)
-                                follower.say(t, "Is " + subject.heShe() + " gonna be alright, " + leader.mainName + "?");
-                            else
-                            if(follower.innocence > 33)
-                                follower.say(t, "Sorry for being late...  What do we do now, " + leader.mainName + "?");
-                            else
-                                follower.say(t, "I should have known that you'd have the situation well in-hand.  But if there's any way I can assist...");
+                            switch (follower.innocence / 33) {
+                                case 0: follower.say(t, "I should have known that you'd have the situation well in-hand.  But if there's any way I can assist..."); break;
+                                case 1: follower.say(t, "Sorry for being late...  What do we do now, " + leader.mainName + "?"); break;
+                                default: follower.say(t, "Is " + subject.heShe() + " gonna be alright, " + leader.mainName + "?");
+                            }
                         } else
-                        if(follower.morality > 66)
-                            follower.say(t, "I suppose that not even you would be low enough to do anything to " + subject.himHer() + " while " + subject.heShe() + "'s like this...");
-                        else
-                        if(follower.morality > 33)
-                            follower.say(t, "Can we have a truce until " + subject.heShe() + " wakes up?");
-                        else
-                            follower.say(t, "Give " + subject.himHer() + " some space, " + leader.mainName + ".  No one would want to wake up and see your face.");
+                        switch (follower.morality / 33) {
+                            case 0: follower.say(t, "Give " + subject.himHer() + " some space, " + leader.mainName + ".  No one would want to wake up and see your face."); break;
+                            case 1: follower.say(t, "Can we have a truce until " + subject.heShe() + " wakes up?"); break;
+                            default: follower.say(t, "I suppose that not even you would be low enough to do anything to " + subject.himHer() + " while " + subject.heShe() + "'s like this...");
+                        }
                         follower.say(t, "\"\n\n");
                         append(t, "Before " + leader.mainName + " can reply, " + subject.mainName + " begins to stir.  " + subject.HisHer() + " eyelids flutter, ");
                         if(subject.dignity > 66)
@@ -7425,24 +7075,20 @@ public class WorldState
                         {
                             append(t, leader.mainName + " calms " + subject.himHer() + " down with a gentle voice and a hand running through " + subject.hisHer() + " hair.\n\n");
                             leader.say(t, "\"");
-                            if(leader.morality > 66)
-                                leader.say(t, "It's alright, " + subject.mainName + ".  I'll protect you... as well as I can.");
-                            else
-                            if(leader.morality > 33)
-                                leader.say(t, "It's me, " + subject.mainName + ".  It's just me.  You don't need to be afraid...");
-                            else
-                                leader.say(t, "Don't worry.  I won't let anyone touch you ever again.  Or at least I'll make them pay for it...");
+                            switch (leader.morality / 33) {
+                                case 0: leader.say(t, "Don't worry.  I won't let anyone touch you ever again.  Or at least I'll make them pay for it..."); break;
+                                case 1: leader.say(t, "It's me, " + subject.mainName + ".  It's just me.  You don't need to be afraid..."); break;
+                                default: leader.say(t, "It's alright, " + subject.mainName + ".  I'll protect you... as well as I can.");
+                            }
                         } else
                         {
                             append(t, leader.mainName + " does " + leader.hisHer() + " best to calm " + subject.himHer() + " down, using a surprisingly gentle voice.\n\n");
                             leader.say(t, "\"");
-                            if(leader.innocence > 66)
-                                leader.say(t, "It's weird, " + subject.mainName + ", but... I don't think I hate you anymore.  You're just like me...");
-                            else
-                            if(leader.innocence > 33)
-                                leader.say(t, "We need to stick together, " + subject.mainName + ".  I know you can't really say one way or the other, right now, but... I'd like to try to be friends.");
-                            else
-                                leader.say(t, "I would like to... leave our differences behind us.  We cannot afford to divide ourselves against a foe that can do... this.");
+                            switch (leader.innocence / 33) {
+                                case 0: leader.say(t, "I would like to... leave our differences behind us.  We cannot afford to divide ourselves against a foe that can do... this."); break;
+                                case 1: leader.say(t, "We need to stick together, " + subject.mainName + ".  I know you can't really say one way or the other, right now, but... I'd like to try to be friends."); break;
+                                default: leader.say(t, "It's weird, " + subject.mainName + ", but... I don't think I hate you anymore.  You're just like me...");
+                            }
                         }
                         leader.say(t, "\"\n\n");
                         if(getRelationship(subject.number, leader.number) == 4)
@@ -7475,33 +7121,27 @@ public class WorldState
                         Project.changePortrait(leader.convertGender(), leader.type, false, false, this, nameDisplay, 1, Project.Emotion.SHAME, Project.Emotion.SHAME);
                         append(t, "Before " + subject.mainName + " wakes, " + follower.mainName + " arrives as well.  However, " + c.heShe() + " is less willing to tolerate " + subject.mainName + "'s failure.\n\n");
                         follower.say(t, "\"");
-                        if(follower.morality > 66)
-                            follower.say(t, subject.HeShe() + "'s taking this even worse than you did.  If " + subject.heShe() + " can't handle it, then " + subject.heShe() + " shouldn't be one of the Chosen.  " + subject.HeShe() + "'s putting us and everyone else in danger.");
-                        else
-                        if(follower.morality > 33)
-                            follower.say(t, "If " + subject.heShe() + "'s going to start passing out, too...  I can't rely on " + subject.himHer() + ".");
-                        else
-                            follower.say(t, "I thought " + subject.heShe() + " was stronger than this!  It's " + subject.hisHer() + " fault that the Thralls were able to hold onto me for so long!");
+                        switch (follower.morality / 33) {
+                            case 0: follower.say(t, "I thought " + subject.heShe() + " was stronger than this!  It's " + subject.hisHer() + " fault that the Thralls were able to hold onto me for so long!"); break;
+                            case 1: follower.say(t, "If " + subject.heShe() + "'s going to start passing out, too...  I can't rely on " + subject.himHer() + "."); break;
+                            default: follower.say(t, subject.HeShe() + "'s taking this even worse than you did.  If " + subject.heShe() + " can't handle it, then " + subject.heShe() + " shouldn't be one of the Chosen.  " + subject.HeShe() + "'s putting us and everyone else in danger.");
+                        }
                         follower.say(t, "\"\n\n");
                         append(t, "Those are the words that " + subject.mainName + " wakes to hear.  In " + subject.hisHer() + " emotionally vulnerable state, the offhand comment comes across as something far more serious, and " + subject.mainName + " feels a spike of rage toward " + follower.mainName + ".  " + subject.HeShe() + " embraces that anger, subconsciously using it to distract " + subject.himHer() + "self from the trauma.  The other two Chosen are surprised when " + subject.mainName + " abruptly struggles to " + subject.hisHer() + " feet, glaring at " + follower.mainName + "\n\n");
                         subject.say(t, "\"");
-                        if(subject.confidence > 66)
-                            subject.say(t, "I put myself on the front line to protect you, and this is the thanks I get!?  Fine!  I'm done!  You can take care of yourself from now on!");
-                        else
-                        if(subject.confidence > 33)
-                            subject.say(t, "Y-You have no idea what I'm going through!  Maybe you enjoy what they're doing to us, but I don't!  You're filthy!  I don't want anything to do with you!");
-                        else
-                            subject.say(t, "I-It's because you weren't protecting me!  It's your fault!  Y-Your fault!");
+                        switch (subject.confidence / 33) {
+                            case 0: subject.say(t, "I-It's because you weren't protecting me!  It's your fault!  Y-Your fault!"); break;
+                            case 1: subject.say(t, "Y-You have no idea what I'm going through!  Maybe you enjoy what they're doing to us, but I don't!  You're filthy!  I don't want anything to do with you!"); break;
+                            default: subject.say(t, "I put myself on the front line to protect you, and this is the thanks I get!?  Fine!  I'm done!  You can take care of yourself from now on!");
+                        }
                         subject.say(t, "\"\n\n");
                         append(t, subject.HeShe() + " tries to lunge at " + follower.mainName + ", but " + leader.mainName + " catches " + subject.himHer() + " and guides " + subject.himHer() + " away, trying to calm " + subject.himHer() + " down.\n\n");
                         leader.say(t, "\"");
-                        if(leader.morality > 66)
-                            leader.say(t, follower.HeShe() + " doesn't understand how lucky " + follower.heShe() + " is.  Maybe it's better that " + follower.heShe() + " doesn't...");
-                        else
-                        if(leader.morality > 33)
-                            leader.say(t, follower.HeShe() + " has no idea what it's like for us.  Let's just... leave it at that.");
-                        else
-                            leader.say(t, "Don't waste your time on " + follower.himHer() + ".  All that matters... is that we get revenge on our real enemies.");
+                        switch (leader.morality / 33) {
+                            case 0: leader.say(t, "Don't waste your time on " + follower.himHer() + ".  All that matters... is that we get revenge on our real enemies."); break;
+                            case 1: leader.say(t, follower.HeShe() + " has no idea what it's like for us.  Let's just... leave it at that."); break;
+                            default: leader.say(t, follower.HeShe() + " doesn't understand how lucky " + follower.heShe() + " is.  Maybe it's better that " + follower.heShe() + " doesn't...");
+                        }
                         leader.say(t, "\"\n\n");
                         if(getRelationship(subject.number, leader.number) == 4)
                         {
@@ -7555,31 +7195,25 @@ public class WorldState
                     leader.say(t, "\"");
                     if(startOne && leader == c || startTwo && leader == d)
                     {
-                        if(leader.morality > 66)
-                            leader.say(t, "I'm sorry that I couldn't stop them from doing that to us.  Just... let me know if I can do anything to help.");
-                        else
-                        if(leader.morality > 33)
-                            leader.say(t, "I'm here if you need me, " + subject.mainName + ".  I... understand what you're going through...");
-                        else
-                            leader.say(t, "Don't worry, I was here to make sure that no one could do anything to you while you slept.  We'll make those Thralls pay...");
+                        switch (leader.morality / 33) {
+                            case 0: leader.say(t, "Don't worry, I was here to make sure that no one could do anything to you while you slept.  We'll make those Thralls pay..."); break;
+                            case 1: leader.say(t, "I'm here if you need me, " + subject.mainName + ".  I... understand what you're going through..."); break;
+                            default: leader.say(t, "I'm sorry that I couldn't stop them from doing that to us.  Just... let me know if I can do anything to help.");
+                        }
                     } else
-                    if(leader.innocence > 66)
-                        leader.say(t, "Hey, um...  I don't really hate you, you know?  If you don't hate me either, then maybe we can watch each other's backs to make sure that... this sort of thing doesn't happen again.");
-                    else
-                    if(leader.innocence > 33)
-                        leader.say(t, "We might be rivals, but the Thralls are putting the two of us through all the same tortures.  I think we should try to help each other from here on.");
-                    else
-                        leader.say(t, "I understand if you would prefer not to see my face right now.  But... I am here to offer help, if you'll accept it.  I've been through the same thing, after all.");
+                    switch (leader.innocence / 33) {
+                        case 0: leader.say(t, "I understand if you would prefer not to see my face right now.  But... I am here to offer help, if you'll accept it.  I've been through the same thing, after all."); break;
+                        case 1: leader.say(t, "We might be rivals, but the Thralls are putting the two of us through all the same tortures.  I think we should try to help each other from here on."); break;
+                        default: leader.say(t, "Hey, um...  I don't really hate you, you know?  If you don't hate me either, then maybe we can watch each other's backs to make sure that... this sort of thing doesn't happen again.");
+                    }
                     leader.say(t, "\"\n\n");
                     append(t, leader.mainName + "'s kind words help to push back the despair gripping " + subject.mainName + "'s heart.  " + subject.HeShe() + " takes a deep breath, then gives " + leader.mainName + " a grateful nod, putting a weak smile back on " + subject.hisHer() + " face.\n\n");
                     subject.say(t, "\"");
-                    if(subject.innocence > 66)
-                        subject.say(t, "Thanks, " + leader.mainName + "...  You're really... nice...");
-                    else
-                    if(subject.innocence > 33)
-                        subject.say(t, "Thank you, " + leader.mainName + ".  For now, I... I think I just need some rest.");
-                    else
-                        subject.say(t, "I... appreciate it.  And I must apologize for showing you such a shameful side of myself...");
+                    switch (subject.innocence / 33) {
+                        case 0: subject.say(t, "I... appreciate it.  And I must apologize for showing you such a shameful side of myself..."); break;
+                        case 1: subject.say(t, "Thank you, " + leader.mainName + ".  For now, I... I think I just need some rest."); break;
+                        default: subject.say(t, "Thanks, " + leader.mainName + "...  You're really... nice...");
+                    }
                     subject.say(t, "\"\n\n");
                     if(getRelationship(subject.number, leader.number) == 4)
                     {
@@ -7600,25 +7234,21 @@ public class WorldState
                 {
                     append(t, ".  " + leader.HeShe() + "'s concerned for " + leader.hisHer() + " friend, but " + leader.hisHer() + " frustration and confusion as to what's happened to " + subject.himHer() + " causes " + leader.himHer() + " to get rough.\n\n");
                     leader.say(t, "\"");
-                    if(leader.innocence > 66)
-                        leader.say(t, "Wake up, " + subject.mainName + "!  Come on, wake up!");
-                    else
-                    if(leader.innocence > 33)
-                        leader.say(t, "Ugh, why isn't this working?  What else can I try?");
-                    else
-                        leader.say(t, "It should not even be possible to knock one of the Chosen unconscious for such a long period.  What could possibly be happening in that head of yours?");
+                    switch (leader.innocence / 33) {
+                        case 0: leader.say(t, "It should not even be possible to knock one of the Chosen unconscious for such a long period.  What could possibly be happening in that head of yours?"); break;
+                        case 1: leader.say(t, "Ugh, why isn't this working?  What else can I try?"); break;
+                        default: leader.say(t, "Wake up, " + subject.mainName + "!  Come on, wake up!");
+                    }
                     leader.say(t, "\"\n\n");
                 } else
                 {
                     append(t, ", putting more and more forced into it as " + leader.heShe() + " grows more annoyed.\n\n");
                     leader.say(t, "\"");
-                    if(leader.innocence > 66)
-                        leader.say(t, "Come on!  Stop slacking off!  Get up already!");
-                    else
-                    if(leader.innocence > 33)
-                        leader.say(t, "Stop pretending to be asleep!  We need to get moving!");
-                    else
-                        leader.say(t, "This is ridiculous.");
+                    switch (leader.innocence / 33) {
+                        case 0: leader.say(t, "This is ridiculous."); break;
+                        case 1: leader.say(t, "Stop pretending to be asleep!  We need to get moving!"); break;
+                        default: leader.say(t, "Come on!  Stop slacking off!  Get up already!");
+                    }
                     leader.say(t, "\"\n\n");
                 }
                 if(d != null)
@@ -7630,41 +7260,33 @@ public class WorldState
                         follower.say(t, "\"");
                         if(startOne && follower == c || startTwo && follower == d)
                         {
-                            if(follower.morality > 66)
-                                follower.say(t, "No!  Y-you can't do that!");
-                            else
-                            if(follower.morality > 33)
-                                follower.say(t, "You're going to hurt " + subject.himHer() + "!");
-                            else
-                                follower.say(t, "Get your hands off my " + subject.mainName + "!");
+                            switch (follower.morality / 33) {
+                                case 0: follower.say(t, "Get your hands off my " + subject.mainName + "!"); break;
+                                case 1: follower.say(t, "You're going to hurt " + subject.himHer() + "!"); break;
+                                default: follower.say(t, "No!  Y-you can't do that!");
+                            }
                         } else
-                        if(follower.morality > 66)
-                            follower.say(t, "No!  Y-You can't do that!  Not even to " + subject.mainName + "!");
-                        else
-                        if(follower.morality > 33)
-                            follower.say(t, "Wait!  I know what " + subject.heShe() + "'s going through, and you're just going to make things worse for all of us!");
-                        else
-                            follower.say(t, "You don't treat me that way when I pass out, do you!?");
+                        switch (follower.morality / 33) {
+                            case 0: follower.say(t, "You don't treat me that way when I pass out, do you!?"); break;
+                            case 1: follower.say(t, "Wait!  I know what " + subject.heShe() + "'s going through, and you're just going to make things worse for all of us!"); break;
+                            default: follower.say(t, "No!  Y-You can't do that!  Not even to " + subject.mainName + "!");
+                        }
                         follower.say(t, "\"\n\n");
                         append(t, leader.mainName + " does stop, but as " + leader.heShe() + " turns toward " + follower.mainName + ", " + leader.hisHer() + " voice is full of scorn.\n\n");
                         leader.say(t, "\"");
-                        if(leader.morality > 66)
-                            follower.say(t, subject.HeShe() + "'s taking this even worse than you did.  If " + subject.heShe() + " can't handle it, then " + subject.heShe() + " shouldn't be one of the Chosen.  " + subject.HeShe() + "'s going to make it harder to save everyone.");
-                        else
-                        if(leader.morality > 33)
-                            follower.say(t, "If " + subject.heShe() + "'s going to start passing out, too...  Why does " + subject.heShe() + " have to be so weak?");
-                        else
-                            follower.say(t, "I never thought " + subject.heShe() + " was this weak!  Why do I have to be on a team with someone so useless?");
+                        switch (leader.morality / 33) {
+                            case 0: follower.say(t, "I never thought " + subject.heShe() + " was this weak!  Why do I have to be on a team with someone so useless?"); break;
+                            case 1: follower.say(t, "If " + subject.heShe() + "'s going to start passing out, too...  Why does " + subject.heShe() + " have to be so weak?"); break;
+                            default: follower.say(t, subject.HeShe() + "'s taking this even worse than you did.  If " + subject.heShe() + " can't handle it, then " + subject.heShe() + " shouldn't be one of the Chosen.  " + subject.HeShe() + "'s going to make it harder to save everyone.");
+                        }
                         leader.say(t, "\"\n\n");
                         append(t, "Unbeknownst to either of them, " + subject.mainName + " has woken up during their exchange.  They're both startled when " + subject.heShe() + " suddenly sits up.  " + subject.HeShe() + " directs a grateful glance at " + follower.mainName + ", but " + subject.hisHer() + " attention is directed at " + leader.mainName + ", and there's a bitter anger burning in " + subject.hisHer() + " eyes.  The more " + subject.heShe() + " talks, the angrier " + subject.heShe() + " gets, as " + subject.heShe() + " subconsciously uses the emotion to distract " + subject.himHer() + "self from " + subject.hisHer() + " trauma.\n\n");
                         subject.say(t, "\"");
-                        if(subject.confidence > 66)
-                            subject.say(t, "I put myself on the front line to protect you, and this is the thanks I get!?  Fine!  I'm done!  You can take care of yourself from now on!");
-                        else
-                        if(subject.confidence > 33)
-                            subject.say(t, "Y-You have no idea what I'm going through!  Maybe you enjoy what they're doing to us, but I don't!  You're filthy!  I don't want anything to do with you!");
-                        else
-                            subject.say(t, "I-It's because you weren't protecting me!  It's your fault!  Y-Your fault!");
+                        switch (subject.confidence / 33) {
+                            case 0: subject.say(t, "I-It's because you weren't protecting me!  It's your fault!  Y-Your fault!"); break;
+                            case 1: subject.say(t, "Y-You have no idea what I'm going through!  Maybe you enjoy what they're doing to us, but I don't!  You're filthy!  I don't want anything to do with you!"); break;
+                            default: subject.say(t, "I put myself on the front line to protect you, and this is the thanks I get!?  Fine!  I'm done!  You can take care of yourself from now on!");
+                        }
                         subject.say(t, "\"\n\n");
                         if(getRelationship(subject.number, leader.number) == -4)
                         {
@@ -7697,13 +7319,11 @@ public class WorldState
                     {
                         append(t, "When " + follower.mainName + " arrives, " + follower.heShe() + " does the same.  Their feelings of annoyance feed on each other, and by the time " + subject.mainName + " wakes up, they're both openly complaining about " + subject.himHer() + ".\n\n");
                         follower.say(t, "\"");
-                        if(follower.morality > 66)
-                            follower.say(t, subject.HeShe() + "'s completely falling apart.  If " + subject.heShe() + " can't handle it, then " + subject.heShe() + " shouldn't be one of the Chosen.  " + subject.HeShe() + "'s putting us and everyone else in danger.");
-                        else
-                        if(follower.morality > 33)
-                            follower.say(t, "If " + subject.heShe() + "'s going to start passing out for something like this...  I can't rely on " + subject.himHer() + ".");
-                        else
-                            follower.say(t, "I thought " + subject.heShe() + " was stronger than this!  It's " + subject.hisHer() + " fault that the Thralls were able to hold onto me for so long!");
+                        switch (follower.morality / 33) {
+                            case 0: follower.say(t, "I thought " + subject.heShe() + " was stronger than this!  It's " + subject.hisHer() + " fault that the Thralls were able to hold onto me for so long!"); break;
+                            case 1: follower.say(t, "If " + subject.heShe() + "'s going to start passing out for something like this...  I can't rely on " + subject.himHer() + "."); break;
+                            default: follower.say(t, subject.HeShe() + "'s completely falling apart.  If " + subject.heShe() + " can't handle it, then " + subject.heShe() + " shouldn't be one of the Chosen.  " + subject.HeShe() + "'s putting us and everyone else in danger.");
+                        }
                         follower.say(t, "\"\n\n");
                         append(t, "As " + subject.mainName + " gradually becomes aware of the hands touching and grasping " + subject.himHer() + ", shaking " + subject.himHer() + " and handling " + subject.himHer() + " roughly, " + subject.heShe() + " panics.  It feels like " + subject.heShe() + "'s still caught in the orgy.  ");
                         if(subject.innocence > 66)
@@ -7723,13 +7343,11 @@ public class WorldState
                         subject.say(t, "\"\n\n");
                         append(t, subject.HeShe() + " turns and flees, leaving " + leader.mainName + " and " + follower.mainName + " confused and angry behind " + subject.himHer() + ".\n\n");
                         leader.say(t, "\"");
-                        if(leader.morality > 66)
-                            leader.say(t, "I hope " + subject.heShe() + " comes to " + subject.hisHer() + " senses, but if " + subject.heShe() + " doesn't...  Well, we'll have to manage without " + subject.himHer() + ".");
-                        else
-                        if(leader.morality > 33)
-                            leader.say(t, "Is this who " + subject.heShe() + " really was all along?  Ugh...");
-                        else
-                            leader.say(t, "How dare " + subject.heShe() + " talk to me that way!?  I'll make " + subject.himHer() + " regret it...");
+                        switch (leader.morality / 33) {
+                            case 0: leader.say(t, "How dare " + subject.heShe() + " talk to me that way!?  I'll make " + subject.himHer() + " regret it..."); break;
+                            case 1: leader.say(t, "Is this who " + subject.heShe() + " really was all along?  Ugh..."); break;
+                            default: leader.say(t, "I hope " + subject.heShe() + " comes to " + subject.hisHer() + " senses, but if " + subject.heShe() + " doesn't...  Well, we'll have to manage without " + subject.himHer() + ".");
+                        }
                         leader.say(t, "\"\n\n");
                         if(getRelationship(subject.number, leader.number) == -4)
                         {
@@ -7842,48 +7460,38 @@ public class WorldState
                     addBreak(16);
                 if(c.dignity > 66)
                 {
-                    if(c.morality > 66)
-                        append(t, "Although " + c.mainName + " has always remained fixated on the goal of becoming a worthy hero, the truth is that " + c.hisHer() + " self-image was more dependent on reactions from the public than " + c.heShe() + " cared to admit.  ");
-                    else
-                    if(c.morality > 33)
-                        append(t, c.mainName + "'s heroic actions have always been motivated less by " + c.hisHer() + " own personal beliefs and more by " + c.hisHer() + " desire for public praise and approval.  ");
-                    else
-                        append(t, c.mainName + " has never cared about fighting the Demons except insofar as it provided " + c.himHer() + " a path to fame and fortune.  ");
-                    if(c.confidence > 66)
-                        append(t, "With " + c.hisHer() + " rage at the constant disrespect from the populace " + c.heShe() + " endures on a daily basis now, ");
-                    else
-                    if(c.confidence > 33)
-                        append(t, c.HeShe() + "'s already spent sleepless nights dwelling on how wrong it is for those ungrateful people to benefit from " + c.hisHer() + " suffering, and the tension inside " + c.himHer() + " has built to the point that ");
-                    else
-                        append(t, "Faced with rejection from those whose acceptance " + c.heShe() + " desperately craved, " + c.heShe() + "'s been put in a fragile mental state, and ");
-                    if(c.innocence > 66)
-                        append(t, c.heShe() + "'s eager for any excuse to stop worrying about the fight and just let " + c.himHer() + "self feel good.");
-                    else
-                    if(c.innocence > 33)
-                        append(t, c.heShe() + "'s able to make the conscious, free decision to stop fighting back.");
-                    else
-                        append(t, c.heShe() + "'s able to come up with plenty of reasons to just enjoy " + c.himHer() + "self, and none at all to keep fighting.");
+                    switch (c.morality / 33) {
+                        case 0: append(t, c.mainName + " has never cared about fighting the Demons except insofar as it provided " + c.himHer() + " a path to fame and fortune.  "); break;
+                        case 1: append(t, c.mainName + "'s heroic actions have always been motivated less by " + c.hisHer() + " own personal beliefs and more by " + c.hisHer() + " desire for public praise and approval.  "); break;
+                        default: append(t, "Although " + c.mainName + " has always remained fixated on the goal of becoming a worthy hero, the truth is that " + c.hisHer() + " self-image was more dependent on reactions from the public than " + c.heShe() + " cared to admit.  ");
+                    }
+                    switch (c.confidence / 33) {
+                        case 0: append(t, "Faced with rejection from those whose acceptance " + c.heShe() + " desperately craved, " + c.heShe() + "'s been put in a fragile mental state, and "); break;
+                        case 1: append(t, c.HeShe() + "'s already spent sleepless nights dwelling on how wrong it is for those ungrateful people to benefit from " + c.hisHer() + " suffering, and the tension inside " + c.himHer() + " has built to the point that "); break;
+                        default: append(t, "With " + c.hisHer() + " rage at the constant disrespect from the populace " + c.heShe() + " endures on a daily basis now, ");
+                    }
+                    switch (c.innocence / 33) {
+                        case 0: append(t, c.heShe() + "'s able to come up with plenty of reasons to just enjoy " + c.himHer() + "self, and none at all to keep fighting."); break;
+                        case 1: append(t, c.heShe() + "'s able to make the conscious, free decision to stop fighting back."); break;
+                        default: append(t, c.heShe() + "'s eager for any excuse to stop worrying about the fight and just let " + c.himHer() + "self feel good.");
+                    }
                 } else
                 if(c.innocence > 66)
                 {
-                    if(c.confidence > 66)
-                        append(t, c.mainName + " has always been headstrong, but that doesn't translate to having much willpower, and ");
-                    else
-                    if(c.confidence > 33)
-                        append(t, c.mainName + " is a very impressionable person, prone to getting swept up in what those around " + c.himHer() + " are doing, but ");
-                    else
-                        append(t, c.mainName + " is still embarrassed and uncertain about how good " + c.heShe() + " sometimes feels when the Thralls get their hands on " + c.himHer() + ", but ");
+                    switch (c.confidence / 33) {
+                        case 0: append(t, c.mainName + " is still embarrassed and uncertain about how good " + c.heShe() + " sometimes feels when the Thralls get their hands on " + c.himHer() + ", but "); break;
+                        case 1: append(t, c.mainName + " is a very impressionable person, prone to getting swept up in what those around " + c.himHer() + " are doing, but "); break;
+                        default: append(t, c.mainName + " has always been headstrong, but that doesn't translate to having much willpower, and ");
+                    }
                     if(c.dignity > 33)
                         append(t, c.heShe() + "'s started to grow numb to the constant ridicule " + c.heShe() + " receives for being a pervert.  If that's what " + c.heShe() + " is, then " + c.heShe() + "'s decided to embrace it.  ");
                     else
                         append(t, c.heShe() + "'s never been one to hide or deny " + c.hisHer() + " own feelings.  When the public tells " + c.himHer() + " that only a bad person would enjoy doing sexual things in public, " + c.heShe() + " simply thinks that maybe it's not so wrong to be a bad person.  ");
-                    if(c.morality > 66)
-                        append(t, "After all, if it makes other people feel good too, then it can't be that bad.");
-                    else
-                    if(c.morality > 33)
-                        append(t, c.HeShe() + " just doesn't care that much about the war anymore.");
-                    else
-                        append(t, c.HeShe() + " likes sexual pleasure, and more than that, " + c.heShe() + " likes messing with all the stuffy authority figures who are always scolding " + c.himHer() + ".");
+                    switch (c.morality / 33) {
+                        case 0: append(t, c.HeShe() + " likes sexual pleasure, and more than that, " + c.heShe() + " likes messing with all the stuffy authority figures who are always scolding " + c.himHer() + "."); break;
+                        case 1: append(t, c.HeShe() + " just doesn't care that much about the war anymore."); break;
+                        default: append(t, "After all, if it makes other people feel good too, then it can't be that bad.");
+                    }
                 } else
                 if(c.confidence > 66)
                 {
@@ -7895,13 +7503,11 @@ public class WorldState
                         append(t, c.HeShe() + " has no idea how severely " + c.hisHer() + " judgment is being affected by the instinctive desire to seek out the pleasure you're regularly inflicting on " + c.himHer() + ".  ");
                     else
                         append(t, c.HeShe() + "'s confident in " + c.hisHer() + " ability to think clearly through pleasure, and while that would ordinarily be enough to resist your manipulation, the knowledge that the rest of humanity is rejecting " + c.himHer() + " has a profound impact on " + c.hisHer() + " thought process.  ");
-                    if(c.morality > 66)
-                        append(t, c.HeShe() + " remains committed to following a strict moral code with people in " + c.hisHer() + " personal life, but " + c.heShe() + "'s less and less convinced that there's any point to suffering in battle against the Demons.");
-                    else
-                    if(c.morality > 33)
-                        append(t, c.HeShe() + "'s started to consider the Thralls to be no better nor worse than the rest of humanity, and at least the former are willing to sexually service " + c.himHer() + ".");
-                    else
-                        append(t, "Out of spite for the rest of humanity, " + c.heShe() + "'s even willing to act a bit submissively as long as " + c.heShe() + " can get some sexual pleasure in the process.");
+                    switch (c.morality / 33) {
+                        case 0: append(t, "Out of spite for the rest of humanity, " + c.heShe() + "'s even willing to act a bit submissively as long as " + c.heShe() + " can get some sexual pleasure in the process."); break;
+                        case 1: append(t, c.HeShe() + "'s started to consider the Thralls to be no better nor worse than the rest of humanity, and at least the former are willing to sexually service " + c.himHer() + "."); break;
+                        default: append(t, c.HeShe() + " remains committed to following a strict moral code with people in " + c.hisHer() + " personal life, but " + c.heShe() + "'s less and less convinced that there's any point to suffering in battle against the Demons.");
+                    }
                 } else
                 {
                     if(c.confidence > 33)
@@ -7935,106 +7541,82 @@ public class WorldState
             append(t, "The Thralls offer to be gentler with " + c.mainName + " if " + c.heShe() + " stops resisting");
             if(c.temptReq >= 80_000L)
             {
-                if(c.confidence > 66)
-                    append(t, ".  " + c.HeShe() + " accepts, though " + c.heShe() + " warns them that " + c.heShe() + "'ll punish them harshly if they're trying to trick " + c.himHer() + ".  ");
-                else
-                if(c.confidence > 33)
-                    append(t, ".  " + c.HeShe() + " hesitantly accepts, though " + c.heShe() + "'s still suspicious of a trap.  ");
-                else
-                    append(t, ".  " + c.HeShe() + "'s afraid that they're only setting " + c.himHer() + " up for even more torture, but " + c.hisHer() + " growing masochistic side wouldn't be entirely disappointed by that outcome.  ");
+                switch (c.confidence / 33) {
+                    case 0: append(t, ".  " + c.HeShe() + "'s afraid that they're only setting " + c.himHer() + " up for even more torture, but " + c.hisHer() + " growing masochistic side wouldn't be entirely disappointed by that outcome.  "); break;
+                    case 1: append(t, ".  " + c.HeShe() + " hesitantly accepts, though " + c.heShe() + "'s still suspicious of a trap.  "); break;
+                    default: append(t, ".  " + c.HeShe() + " accepts, though " + c.heShe() + " warns them that " + c.heShe() + "'ll punish them harshly if they're trying to trick " + c.himHer() + ".  ");
+                }
                 if(c.getINJULevel() > 2)
                 {
                     if(tickle())
                     {
-                        if(c.morality > 66)
-                            append(t, c.HeShe() + " tells " + c.himHer() + "self that there's nothing wrong with doing this in order to have a chance to calm down and gather " + c.hisHer() + " power.  ");
-                        else
-                        if(c.morality > 33)
-                            append(t, "In any case, " + c.heShe() + "'s not sure " + c.heShe() + "'d be able to put up much effective resistance until " + c.hisHer() + " stamina recovers.  ");
-                        else
-                            append(t, c.HeShe() + " figures that " + c.heShe() + " can betray them once " + c.heShe() + "'s gotten a chance to catch " + c.hisHer() + " breath anyway.  ");
+                        switch (c.morality / 33) {
+                            case 0: append(t, c.HeShe() + " figures that " + c.heShe() + " can betray them once " + c.heShe() + "'s gotten a chance to catch " + c.hisHer() + " breath anyway.  "); break;
+                            case 1: append(t, "In any case, " + c.heShe() + "'s not sure " + c.heShe() + "'d be able to put up much effective resistance until " + c.hisHer() + " stamina recovers.  "); break;
+                            default: append(t, c.HeShe() + " tells " + c.himHer() + "self that there's nothing wrong with doing this in order to have a chance to calm down and gather " + c.hisHer() + " power.  ");
+                        }
                     } else
-                    if(c.morality > 66)
-                        append(t, c.HeShe() + " tells " + c.himHer() + "self that there's nothing wrong with doing this in order to have a chance to heal " + c.himHer() + "self.  ");
-                    else
-                    if(c.morality > 33)
-                        append(t, "In any case, " + c.heShe() + "'s not sure " + c.heShe() + "'d be able to put up much effective resistance until " + c.hisHer() + " body regenerates from its injuries.  ");
-                    else
-                        append(t, c.HeShe() + " figures that " + c.heShe() + " can betray them once " + c.hisHer() + " injuries heal anyway.  ");
+                    switch (c.morality / 33) {
+                        case 0: append(t, c.HeShe() + " figures that " + c.heShe() + " can betray them once " + c.hisHer() + " injuries heal anyway.  "); break;
+                        case 1: append(t, "In any case, " + c.heShe() + "'s not sure " + c.heShe() + "'d be able to put up much effective resistance until " + c.hisHer() + " body regenerates from its injuries.  "); break;
+                        default: append(t, c.HeShe() + " tells " + c.himHer() + "self that there's nothing wrong with doing this in order to have a chance to heal " + c.himHer() + "self.  ");
+                    }
                 } else
-                if(c.morality > 66)
-                    append(t, "The Thralls have clearly been holding back in order to avoid hurting " + c.himHer() + " too badly, so it seems only fair.  ");
-                else
-                if(c.morality > 33)
-                    append(t, c.HeShe() + "'s just tired of fighting.  ");
-                else
-                    append(t, "At first, " + c.heShe() + " plans to go back to fighting as soon as they let their guard down.  ");
-                if(c.dignity > 66)
-                    append(t, "Rather than letting the Thralls bring " + c.himHer() + " to orgasm, " + c.heShe() + " insists on touching " + c.himHer() + "self, but the feeling of so many eyes patiently watching " + c.himHer() + " fondle " + c.hisHer() + " " + organ + " - and from so close - is more stimulating than " + c.heShe() + " expected.  " + c.HeShe() + " cums hard, and when the Thralls' groping hands return to " + c.hisHer() + " chest and crotch, " + c.heShe() + " doesn't object.  ");
-                else
-                if(c.dignity > 33)
-                    append(t, "Now that they don't need to worry about " + c.hisHer() + " squirming around, the Thralls are able to tweak " + c.hisHer() + " nipples and rub " + c.hisHer() + " clit with far greater precision.  " + c.HeShe() + "'s unable to stifle " + c.hisHer() + " moans as " + c.heShe() + " cums, shuddering and spasming in the midst of the grinning Thralls.  ");
-                else
-                    append(t, "After all the cruel squeezing and pinching before, the gentle touch of the Thrall reaching around from behind " + c.himHer() + " to stroke " + c.hisHer() + " " + organ + " is enough to make " + c.himHer() + " sigh as much with relief as with pleasure.  " + c.HeShe() + " cums almost instantly, legs wobbling as " + c.heShe() + " collapses into the arms of the Thralls holding " + c.himHer() + " upright.  ");
+                switch (c.morality / 33) {
+                    case 0: append(t, "At first, " + c.heShe() + " plans to go back to fighting as soon as they let their guard down.  "); break;
+                    case 1: append(t, c.HeShe() + "'s just tired of fighting.  "); break;
+                    default: append(t, "The Thralls have clearly been holding back in order to avoid hurting " + c.himHer() + " too badly, so it seems only fair.  ");
+                }
+                switch (c.dignity / 33) {
+                    case 0: append(t, "After all the cruel squeezing and pinching before, the gentle touch of the Thrall reaching around from behind " + c.himHer() + " to stroke " + c.hisHer() + " " + organ + " is enough to make " + c.himHer() + " sigh as much with relief as with pleasure.  " + c.HeShe() + " cums almost instantly, legs wobbling as " + c.heShe() + " collapses into the arms of the Thralls holding " + c.himHer() + " upright.  "); break;
+                    case 1: append(t, "Now that they don't need to worry about " + c.hisHer() + " squirming around, the Thralls are able to tweak " + c.hisHer() + " nipples and rub " + c.hisHer() + " clit with far greater precision.  " + c.HeShe() + "'s unable to stifle " + c.hisHer() + " moans as " + c.heShe() + " cums, shuddering and spasming in the midst of the grinning Thralls.  "); break;
+                    default: append(t, "Rather than letting the Thralls bring " + c.himHer() + " to orgasm, " + c.heShe() + " insists on touching " + c.himHer() + "self, but the feeling of so many eyes patiently watching " + c.himHer() + " fondle " + c.hisHer() + " " + organ + " - and from so close - is more stimulating than " + c.heShe() + " expected.  " + c.HeShe() + " cums hard, and when the Thralls' groping hands return to " + c.hisHer() + " chest and crotch, " + c.heShe() + " doesn't object.  ");
+                }
                 if(c.getHATELevel() > 2)
                 {
-                    if(c.innocence > 66)
-                        append(t, "In the deepening mental haze of pleasure, " + c.heShe() + " forgets all " + c.hisHer() + " anger and frustration, and when the Thralls instruct " + c.himHer() + " to get undressed, " + c.heShe() + " doesn't even think about disobeying.");
-                    else
-                    if(c.innocence > 33)
-                        append(t, "One of the Thralls tries to pull " + c.hisHer() + " " + c.bottomDesc() + " all the way off, and " + c.heShe() + " comes to " + c.hisHer() + " senses enough to shout a few angry words at him.  However, " + c.heShe() + "'s so turned on that " + c.heShe() + " doesn't actually want to be dressed, and soon " + c.heShe() + "'s absentmindedly pulling " + c.hisHer() + " own clothes off, quickly forgetting " + c.hisHer() + " anger.");
-                    else
-                        append(t, c.HeShe() + " still remembers " + c.hisHer() + " anger at " + c.hisHer() + " earlier treatment, and when the Thralls try to undress " + c.himHer() + ", " + c.heShe() + " grabs " + c.hisHer() + " clothes back and stares at them sharply.  But when they apologize and beg for " + c.himHer() + " to take " + c.hisHer() + " own clothes off, " + c.heShe() + " sighs with good-natured resignation and complies.");
+                    switch (c.innocence / 33) {
+                        case 0: append(t, c.HeShe() + " still remembers " + c.hisHer() + " anger at " + c.hisHer() + " earlier treatment, and when the Thralls try to undress " + c.himHer() + ", " + c.heShe() + " grabs " + c.hisHer() + " clothes back and stares at them sharply.  But when they apologize and beg for " + c.himHer() + " to take " + c.hisHer() + " own clothes off, " + c.heShe() + " sighs with good-natured resignation and complies."); break;
+                        case 1: append(t, "One of the Thralls tries to pull " + c.hisHer() + " " + c.bottomDesc() + " all the way off, and " + c.heShe() + " comes to " + c.hisHer() + " senses enough to shout a few angry words at him.  However, " + c.heShe() + "'s so turned on that " + c.heShe() + " doesn't actually want to be dressed, and soon " + c.heShe() + "'s absentmindedly pulling " + c.hisHer() + " own clothes off, quickly forgetting " + c.hisHer() + " anger."); break;
+                        default: append(t, "In the deepening mental haze of pleasure, " + c.heShe() + " forgets all " + c.hisHer() + " anger and frustration, and when the Thralls instruct " + c.himHer() + " to get undressed, " + c.heShe() + " doesn't even think about disobeying.");
+                    }
                 } else
-                if(c.innocence > 66)
-                    append(t, "When they ask " + c.himHer() + " to get undressed so that they can make " + c.himHer() + " feel even better, " + c.heShe() + " happily obeys, a dreamy smile on " + c.hisHer() + " face.");
-                else
-                if(c.innocence > 33)
-                    append(t, c.HeShe() + " realizes that " + c.hisHer() + " clothes are just in the way, and " + c.heShe() + " quickly starts to get undressed.");
-                else
-                    append(t, c.HeShe() + " still has the presence of mind to hesitate when the Thralls ask " + c.himHer() + " to get undressed, but when " + c.heShe() + " realizes that removing the intervening clothes will probably make this all easier, " + c.heShe() + " decides to go along with it.");
+                switch (c.innocence / 33) {
+                    case 0: append(t, c.HeShe() + " still has the presence of mind to hesitate when the Thralls ask " + c.himHer() + " to get undressed, but when " + c.heShe() + " realizes that removing the intervening clothes will probably make this all easier, " + c.heShe() + " decides to go along with it."); break;
+                    case 1: append(t, c.HeShe() + " realizes that " + c.hisHer() + " clothes are just in the way, and " + c.heShe() + " quickly starts to get undressed."); break;
+                    default: append(t, "When they ask " + c.himHer() + " to get undressed so that they can make " + c.himHer() + " feel even better, " + c.heShe() + " happily obeys, a dreamy smile on " + c.hisHer() + " face.");
+                }
             } else
             {
                 if(c.getINJULevel() > 2)
                 {
-                    if(c.morality > 66)
-                        append(t, ", and " + c.heShe() + " eagerly complies, telling " + c.himHer() + "self that " + c.heShe() + "'s surely fought back hard enough that there's no need to feel guilty.  ");
-                    else
-                    if(c.morality > 33)
-                        append(t, ", and " + c.heShe() + "'s happy to relax " + c.hisHer() + " tired limbs and let them do as they please.  ");
-                    else
-                        append(t, ".  " + c.HeShe() + " has been taking a perverse enjoyment out of making them wait, but " + c.heShe() + "'s turned on enough by now that " + c.heShe() + "'s content to let them have their fun.  ");
+                    switch (c.morality / 33) {
+                        case 0: append(t, ".  " + c.HeShe() + " has been taking a perverse enjoyment out of making them wait, but " + c.heShe() + "'s turned on enough by now that " + c.heShe() + "'s content to let them have their fun.  "); break;
+                        case 1: append(t, ", and " + c.heShe() + "'s happy to relax " + c.hisHer() + " tired limbs and let them do as they please.  "); break;
+                        default: append(t, ", and " + c.heShe() + " eagerly complies, telling " + c.himHer() + "self that " + c.heShe() + "'s surely fought back hard enough that there's no need to feel guilty.  ");
+                    }
                 } else
-                if(c.morality > 66)
-                    append(t, ", and even though " + c.heShe() + " feels like " + c.heShe() + " should probably be fighting back a little more, " + c.heShe() + " still immediately complies.  ");
-                else
-                if(c.morality > 33)
-                    append(t, ", but by this point they know " + c.himHer() + " well enough that they don't even need to wait for a reply before they release " + c.hisHer() + " limbs and start to focus their attention on " + c.hisHer() + " " + organ + ".  ");
-                else
-                    append(t, ", and " + c.heShe() + " laughs out loud as " + c.heShe() + " encourages them to try making " + c.himHer() + " cum.  ");
-                if(c.innocence > 66)
-                    append(t, c.HeShe() + "'s grateful for the excuse to stop thinking about difficult things and just feel good.  ");
-                else
-                if(c.innocence > 33)
-                    append(t, c.HeShe() + " can never decide whether " + c.heShe() + " wants this to happen or not.  ");
-                else
-                    append(t, c.HeShe() + "'s decided that " + c.heShe() + "'d like to win against the Demons, but if " + c.heShe() + " can't, then this is fine too.  ");
-                if(c.confidence > 66)
-                    append(t, "Soon, " + c.heShe() + "'s commanding the Thralls to pleasure " + c.himHer() + " even as " + c.heShe() + " undresses " + c.himHer() + "self to give them easier access.  ");
-                else
-                if(c.confidence > 33)
-                    append(t, "The only bit of pride " + c.heShe() + " retains is that " + c.heShe() + " makes the Thralls ask nicely before " + c.heShe() + " agrees to undress for them.  ");
-                else
-                    append(t, c.HeShe() + " doesn't even need to be asked to undress " + c.himHer() + "self now, and " + c.hisHer() + " cheeks are bright red with embarrassment and anticipation as " + c.heShe() + " peels " + c.hisHer() + " clothes off.  ");
+                switch (c.morality / 33) {
+                    case 0: append(t, ", and " + c.heShe() + " laughs out loud as " + c.heShe() + " encourages them to try making " + c.himHer() + " cum.  "); break;
+                    case 1: append(t, ", but by this point they know " + c.himHer() + " well enough that they don't even need to wait for a reply before they release " + c.hisHer() + " limbs and start to focus their attention on " + c.hisHer() + " " + organ + ".  "); break;
+                    default: append(t, ", and even though " + c.heShe() + " feels like " + c.heShe() + " should probably be fighting back a little more, " + c.heShe() + " still immediately complies.  ");
+                }
+                switch (c.innocence / 33) {
+                    case 0: append(t, c.HeShe() + "'s decided that " + c.heShe() + "'d like to win against the Demons, but if " + c.heShe() + " can't, then this is fine too.  "); break;
+                    case 1: append(t, c.HeShe() + " can never decide whether " + c.heShe() + " wants this to happen or not.  "); break;
+                    default: append(t, c.HeShe() + "'s grateful for the excuse to stop thinking about difficult things and just feel good.  ");
+                }
+                switch (c.confidence / 33) {
+                    case 0: append(t, c.HeShe() + " doesn't even need to be asked to undress " + c.himHer() + "self now, and " + c.hisHer() + " cheeks are bright red with embarrassment and anticipation as " + c.heShe() + " peels " + c.hisHer() + " clothes off.  "); break;
+                    case 1: append(t, "The only bit of pride " + c.heShe() + " retains is that " + c.heShe() + " makes the Thralls ask nicely before " + c.heShe() + " agrees to undress for them.  "); break;
+                    default: append(t, "Soon, " + c.heShe() + "'s commanding the Thralls to pleasure " + c.himHer() + " even as " + c.heShe() + " undresses " + c.himHer() + "self to give them easier access.  ");
+                }
                 if(c.getHATELevel() > 2)
                 {
-                    if(c.dignity > 66)
-                        append(t, "As one of the Thralls persistently rubs " + c.hisHer() + " " + organ + ", " + c.heShe() + " hides " + c.hisHer() + " first orgasm as best " + c.heShe() + " can, claiming that the Thrall must have just gotten some slime on his fingers, but then the second orgasm makes " + c.himHer() + " cry out loud, and " + c.heShe() + " can't even pretend to be angry anymore.");
-                    else
-                    if(c.dignity > 33)
-                        append(t, "A trace of lingering annoyance causes " + c.himHer() + " to twist away from their grasping hands, denying them access to " + c.hisHer() + " " + organ + " for only a few moments longer, but after the first orgasm, all is forgiven.");
-                    else
-                        append(t, "Once they get started, " + c.heShe() + "'s all too happy to forgive them for their previous abuses, screaming in shameless climax under their fingers.");
+                    switch (c.dignity / 33) {
+                        case 0: append(t, "Once they get started, " + c.heShe() + "'s all too happy to forgive them for their previous abuses, screaming in shameless climax under their fingers."); break;
+                        case 1: append(t, "A trace of lingering annoyance causes " + c.himHer() + " to twist away from their grasping hands, denying them access to " + c.hisHer() + " " + organ + " for only a few moments longer, but after the first orgasm, all is forgiven."); break;
+                        default: append(t, "As one of the Thralls persistently rubs " + c.hisHer() + " " + organ + ", " + c.heShe() + " hides " + c.hisHer() + " first orgasm as best " + c.heShe() + " can, claiming that the Thrall must have just gotten some slime on his fingers, but then the second orgasm makes " + c.himHer() + " cry out loud, and " + c.heShe() + " can't even pretend to be angry anymore.");
+                    }
                 } else
                 if(c.dignity > 66)
                 {
@@ -8060,238 +7642,178 @@ public class WorldState
                 {
                     if(c.parasitized)
                     {
-                        if(c.innocence > 66)
-                            append(t, "When the Thralls ask " + c.mainName + " to spread " + c.hisHer() + " hole so they can take some close-up pictures, " + c.heShe() + " almost complies without thinking, but then it occurs to " + c.himHer() + " that " + c.heShe() + " can make use of their request.  ");
-                        else
-                        if(c.innocence > 33)
-                            append(t, c.mainName + " has come to enjoy showing off " + c.hisHer() + " body in the most degrading, most extreme ways possible.  But " + c.heShe() + " cares about other things, too, and as the Thralls pull out their cameras, " + c.heShe() + " tells them that " + c.heShe() + "'ll only spread " + c.hisHer() + " " + hole + " for them on one condition.  ");
-                        else
-                            append(t, c.mainName + " already knew that it was practically certain that the Thralls would ask to take pictures of " + c.hisHer() + " spread " + hole + ", and when they voice their request, " + c.heShe() + "'s already decided " + c.hisHer() + " price.  ");
-                        if(c.morality > 66)
-                            append(t, c.HeShe() + " asks that they only cum by masturbating to " + c.hisHer() + " photographs from now on and stop raping anyone but " + c.himHer() + ".  ");
-                        else
-                        if(c.morality > 33)
-                            append(t, c.HeShe() + " wants them to promise that they'll go easier on " + c.himHer() + " in the future, even when " + c.heShe() + " doesn't feel like being molested by them.  ");
-                        else
-                            append(t, "All " + c.heShe() + " wants is for them to switch sides and join " + c.himHer() + " when it's finally time for " + c.himHer() + " to kill the Demon Lord.  ");
-                        if(c.confidence > 66)
-                            append(t, c.HisHer() + " voice is imperious, as if the Thralls' obedience is a foregone conclusion, and they agree without thinking, giving meaningless oaths that will be forgotten by tomorrow.  ");
-                        else
-                        if(c.confidence > 33)
-                            append(t, "The Thralls are quick to agree, although their suppressed inhibitions cause them to view promises as meaningless.  ");
-                        else
-                            append(t, "Even though " + c.mainName + " is normally timid, " + c.heShe() + " cares a lot about this, and " + c.hisHer() + " voice has a surprising firmness to it.  Not that it matters, as the Thralls would promise anything at all to get a closer look at " + c.hisHer() + " private places.  ");
-                        if(c.dignity > 66)
-                            append(t, c.mainName + " is thrilled at the way that " + c.heShe() + " can use " + c.hisHer() + " body to command this kind of respect, and " + c.heShe() + " almost cums again just from the act of spreading " + c.himHer() + "self.  As a virgin, " + c.heShe() + "'s very sensitive down there.");
-                        else
-                        if(c.dignity > 33)
-                            append(t, c.mainName + " pauses only a moment longer before spreading " + c.hisHer() + " virgin " + hole + " for all to see, releasing a soft moan as " + c.heShe() + " does so.");
-                        else
-                            append(t, c.mainName + " has long since lost " + c.hisHer() + " last scrap of modesty, so all " + c.heShe() + " feels as " + c.heShe() + " spreads " + c.himHer() + "self is cool air on " + c.hisHer() + " virgin opening - and perhaps a bit of elation at the sense of power.");
+                        switch (c.innocence / 33) {
+                            case 0: append(t, c.mainName + " already knew that it was practically certain that the Thralls would ask to take pictures of " + c.hisHer() + " spread " + hole + ", and when they voice their request, " + c.heShe() + "'s already decided " + c.hisHer() + " price.  "); break;
+                            case 1: append(t, c.mainName + " has come to enjoy showing off " + c.hisHer() + " body in the most degrading, most extreme ways possible.  But " + c.heShe() + " cares about other things, too, and as the Thralls pull out their cameras, " + c.heShe() + " tells them that " + c.heShe() + "'ll only spread " + c.hisHer() + " " + hole + " for them on one condition.  "); break;
+                            default: append(t, "When the Thralls ask " + c.mainName + " to spread " + c.hisHer() + " hole so they can take some close-up pictures, " + c.heShe() + " almost complies without thinking, but then it occurs to " + c.himHer() + " that " + c.heShe() + " can make use of their request.  ");
+                        }
+                        switch (c.morality / 33) {
+                            case 0: append(t, "All " + c.heShe() + " wants is for them to switch sides and join " + c.himHer() + " when it's finally time for " + c.himHer() + " to kill the Demon Lord.  "); break;
+                            case 1: append(t, c.HeShe() + " wants them to promise that they'll go easier on " + c.himHer() + " in the future, even when " + c.heShe() + " doesn't feel like being molested by them.  "); break;
+                            default: append(t, c.HeShe() + " asks that they only cum by masturbating to " + c.hisHer() + " photographs from now on and stop raping anyone but " + c.himHer() + ".  ");
+                        }
+                        switch (c.confidence / 33) {
+                            case 0: append(t, "Even though " + c.mainName + " is normally timid, " + c.heShe() + " cares a lot about this, and " + c.hisHer() + " voice has a surprising firmness to it.  Not that it matters, as the Thralls would promise anything at all to get a closer look at " + c.hisHer() + " private places.  "); break;
+                            case 1: append(t, "The Thralls are quick to agree, although their suppressed inhibitions cause them to view promises as meaningless.  "); break;
+                            default: append(t, c.HisHer() + " voice is imperious, as if the Thralls' obedience is a foregone conclusion, and they agree without thinking, giving meaningless oaths that will be forgotten by tomorrow.  ");
+                        }
+                        switch (c.dignity / 33) {
+                            case 0: append(t, c.mainName + " has long since lost " + c.hisHer() + " last scrap of modesty, so all " + c.heShe() + " feels as " + c.heShe() + " spreads " + c.himHer() + "self is cool air on " + c.hisHer() + " virgin opening - and perhaps a bit of elation at the sense of power."); break;
+                            case 1: append(t, c.mainName + " pauses only a moment longer before spreading " + c.hisHer() + " virgin " + hole + " for all to see, releasing a soft moan as " + c.heShe() + " does so."); break;
+                            default: append(t, c.mainName + " is thrilled at the way that " + c.heShe() + " can use " + c.hisHer() + " body to command this kind of respect, and " + c.heShe() + " almost cums again just from the act of spreading " + c.himHer() + "self.  As a virgin, " + c.heShe() + "'s very sensitive down there.");
+                        }
                     } else
                     {
-                        if(c.innocence > 66)
-                            append(t, c.mainName + " doesn't even notice the Thralls pulling out their cameras again, and when they ask " + c.himHer() + " to spread " + c.hisHer() + " " + hole + " so they can take some pictures, " + c.heShe() + " stumbles over " + c.hisHer() + " own words as " + c.heShe() + " refuses.  ");
-                        else
-                        if(c.innocence > 33)
-                            append(t, "The Thralls ask " + c.mainName + " for permission to spread " + c.hisHer() + " " + hole + " so that they can take some close-up pictures, but " + c.heShe() + " refuses.  ");
-                        else
-                            append(t, "Even as " + c.heShe() + " recovers from " + c.hisHer() + " last orgasm, " + c.mainName + " is still sharp enough to notice the Thralls getting their cameras out again, and even before they can finish asking " + c.himHer() + " to spread " + c.hisHer() + " " + hole + " for their benefit, " + c.heShe() + "'s already voicing " + c.hisHer() + " refusal.  ");
-                        if(c.dignity > 66)
-                            append(t, c.HeShe() + " might have given up most of " + c.hisHer() + " modesty, but the tiny scrap that remains is enough to color " + c.hisHer() + " face bright red.  ");
-                        else
-                        if(c.dignity > 33)
-                            append(t, c.HisHer() + " virginity down there is practically the last pure part of " + c.himHer() + ", and even having it looked at makes " + c.himHer() + " feel dirty in a way " + c.heShe() + " still hasn't quite learned to enjoy.  ");
-                        else
-                            append(t, c.HeShe() + " is no longer even slightly embarrassed about showing off, but " + c.heShe() + "'s worried that they might not be able to stand the temptation to violate " + c.hisHer() + " virgin hole if " + c.heShe() + " flaunts it that much.  ");
-                        if(c.confidence > 66)
-                            append(t, "Even though the Thralls are asking nicely and being careful to avoid arousing " + c.hisHer() + " anger, there's still steel in " + c.hisHer() + " voice as " + c.heShe() + " responds.  ");
-                        else
-                        if(c.confidence > 33)
-                            append(t, "It's only after " + c.heShe() + " sees all the cameras put away that " + c.heShe() + " nods firmly and lets " + c.hisHer() + " guard down again.  ");
-                        else
-                            append(t, "Voice quavering, " + c.heShe() + " clenches both hands between " + c.hisHer() + " legs, only relaxing after they reassure " + c.himHer() + " that they won't force it.  ");
-                        if(c.morality > 66)
-                            append(t, "But then, " + c.heShe() + " apologizes for disappointing them and promises to make it up to them however " + c.heShe() + " can.");
-                        else
-                        if(c.morality > 33)
-                            append(t, "Soon, " + c.heShe() + "'s cumming again under their hands, as carefree as " + c.heShe() + "'s ever been.");
-                        else
-                            append(t, "But " + c.heShe() + " does dangle the promise of playing along later if they make " + c.himHer() + " happy enough.");
+                        switch (c.innocence / 33) {
+                            case 0: append(t, "Even as " + c.heShe() + " recovers from " + c.hisHer() + " last orgasm, " + c.mainName + " is still sharp enough to notice the Thralls getting their cameras out again, and even before they can finish asking " + c.himHer() + " to spread " + c.hisHer() + " " + hole + " for their benefit, " + c.heShe() + "'s already voicing " + c.hisHer() + " refusal.  "); break;
+                            case 1: append(t, "The Thralls ask " + c.mainName + " for permission to spread " + c.hisHer() + " " + hole + " so that they can take some close-up pictures, but " + c.heShe() + " refuses.  "); break;
+                            default: append(t, c.mainName + " doesn't even notice the Thralls pulling out their cameras again, and when they ask " + c.himHer() + " to spread " + c.hisHer() + " " + hole + " so they can take some pictures, " + c.heShe() + " stumbles over " + c.hisHer() + " own words as " + c.heShe() + " refuses.  ");
+                        }
+                        switch (c.dignity / 33) {
+                            case 0: append(t, c.HeShe() + " is no longer even slightly embarrassed about showing off, but " + c.heShe() + "'s worried that they might not be able to stand the temptation to violate " + c.hisHer() + " virgin hole if " + c.heShe() + " flaunts it that much.  "); break;
+                            case 1: append(t, c.HisHer() + " virginity down there is practically the last pure part of " + c.himHer() + ", and even having it looked at makes " + c.himHer() + " feel dirty in a way " + c.heShe() + " still hasn't quite learned to enjoy.  "); break;
+                            default: append(t, c.HeShe() + " might have given up most of " + c.hisHer() + " modesty, but the tiny scrap that remains is enough to color " + c.hisHer() + " face bright red.  ");
+                        }
+                        switch (c.confidence / 33) {
+                            case 0: append(t, "Voice quavering, " + c.heShe() + " clenches both hands between " + c.hisHer() + " legs, only relaxing after they reassure " + c.himHer() + " that they won't force it.  "); break;
+                            case 1: append(t, "It's only after " + c.heShe() + " sees all the cameras put away that " + c.heShe() + " nods firmly and lets " + c.hisHer() + " guard down again.  "); break;
+                            default: append(t, "Even though the Thralls are asking nicely and being careful to avoid arousing " + c.hisHer() + " anger, there's still steel in " + c.hisHer() + " voice as " + c.heShe() + " responds.  ");
+                        }
+                        switch (c.morality / 33) {
+                            case 0: append(t, "But " + c.heShe() + " does dangle the promise of playing along later if they make " + c.himHer() + " happy enough."); break;
+                            case 1: append(t, "Soon, " + c.heShe() + "'s cumming again under their hands, as carefree as " + c.heShe() + "'s ever been."); break;
+                            default: append(t, "But then, " + c.heShe() + " apologizes for disappointing them and promises to make it up to them however " + c.heShe() + " can.");
+                        }
                     }
                 } else
                 if(c.parasitized)
                 {
-                    if(c.innocence > 66)
-                        append(t, "As " + c.heShe() + " gets more and more turned on, " + c.mainName + " loses the concentration necessary to form coherent words for the filming cameras.  ");
-                    else
-                    if(c.innocence > 33)
-                        append(t, "Even as " + c.heShe() + " talks to the cameras filming " + c.himHer() + " from every angle, " + c.mainName + "'s hands dip down between " + c.hisHer() + " widely parted legs.  ");
-                    else
-                        append(t, c.mainName + " has been enjoying being able to say whatever " + c.heShe() + " wants to the filming cameras, but " + c.heShe() + " also knows that if " + c.heShe() + " wants anyone to watch the videos, " + c.heShe() + " needs to put on more of a show.  ");
-                    if(c.dignity > 66)
-                        append(t, c.HeShe() + " digs " + c.hisHer() + " fingers into " + c.hisHer() + " " + hole + ", spreading it so wide that it must be painful, but all " + c.mainName + " cares about is inviting the crowd to take a look at the pretty pink color, untouched by any cock.  ");
-                    else
-                    if(c.dignity > 33)
-                        append(t, c.HeShe() + " takes the phone from one of the Thralls and holds it close between " + c.hisHer() + " own thighs, using " + c.hisHer() + " other hand to spread " + c.hisHer() + " " + hole + " and happily narrating that the viewers should be able to tell from the appearance that " + c.heShe() + "'s never taken a cock down there before.  ");
-                    else
-                        append(t, c.HeShe() + " begins to masturbate, quickly losing interest in the crowd.  As " + c.heShe() + " does so, the fingers of " + c.hisHer() + " other hand spread open " + c.hisHer() + " " + hole + ", and the assembled Thralls drool over the thought of being the first to penetrate the tight pink opening.  ");
-                    if(c.confidence > 66)
-                        append(t, "Even when the watching Thralls, stroking their own members, begin to reach orgasm and begin painting " + c.hisHer() + " body with trails of ejaculate, " + c.hisHer() + " prideful bearing doesn't diminish in the slighest.  " + c.HeShe() + " even smiles back at them.  ");
-                    else
-                    if(c.confidence > 33)
-                        append(t, "The feeling of being looked at so closely in such a private place is incredibly stimulating, and soon " + c.hisHer() + " fingers go from simply spreading to actively thrusting in and out.  " + c.HeShe() + " cums, thighs clenching together, and that ends the show.  ");
-                    else
-                        append(t, "Just a few weeks before, being seen like this would fill " + c.himHer() + " with the fear of being raped, but now " + c.heShe() + " feels perfectly safe and content, smiling up at all the erect penises pointed in " + c.hisHer() + " direction.  ");
-                    if(c.morality > 66)
-                        append(t, "After making sure that they're all satisfied with what they've seen, " + c.heShe() + " asks the Thralls what they'd like to do with " + c.himHer() + " next.");
-                    else
-                    if(c.morality > 33)
-                        append(t, "The display has gotten the Thralls even more aroused, and they begin to crowd around " + c.himHer() + " again.  " + c.HeShe() + " laughs as " + c.heShe() + " surrenders " + c.himHer() + "self to their groping hands.");
-                    else
-                        append(t, "Then, smiling sweetly at the Thralls, " + c.heShe() + " tells them that it's time to reward " + c.himHer() + " for cooperating.  They surge forward as one, their hands reaching for " + c.hisHer() + " chest and crotch in order to do just that.");
+                    switch (c.innocence / 33) {
+                        case 0: append(t, c.mainName + " has been enjoying being able to say whatever " + c.heShe() + " wants to the filming cameras, but " + c.heShe() + " also knows that if " + c.heShe() + " wants anyone to watch the videos, " + c.heShe() + " needs to put on more of a show.  "); break;
+                        case 1: append(t, "Even as " + c.heShe() + " talks to the cameras filming " + c.himHer() + " from every angle, " + c.mainName + "'s hands dip down between " + c.hisHer() + " widely parted legs.  "); break;
+                        default: append(t, "As " + c.heShe() + " gets more and more turned on, " + c.mainName + " loses the concentration necessary to form coherent words for the filming cameras.  ");
+                    }
+                    switch (c.dignity / 33) {
+                        case 0: append(t, c.HeShe() + " begins to masturbate, quickly losing interest in the crowd.  As " + c.heShe() + " does so, the fingers of " + c.hisHer() + " other hand spread open " + c.hisHer() + " " + hole + ", and the assembled Thralls drool over the thought of being the first to penetrate the tight pink opening.  "); break;
+                        case 1: append(t, c.HeShe() + " takes the phone from one of the Thralls and holds it close between " + c.hisHer() + " own thighs, using " + c.hisHer() + " other hand to spread " + c.hisHer() + " " + hole + " and happily narrating that the viewers should be able to tell from the appearance that " + c.heShe() + "'s never taken a cock down there before.  "); break;
+                        default: append(t, c.HeShe() + " digs " + c.hisHer() + " fingers into " + c.hisHer() + " " + hole + ", spreading it so wide that it must be painful, but all " + c.mainName + " cares about is inviting the crowd to take a look at the pretty pink color, untouched by any cock.  ");
+                    }
+                    switch (c.confidence / 33) {
+                        case 0: append(t, "Just a few weeks before, being seen like this would fill " + c.himHer() + " with the fear of being raped, but now " + c.heShe() + " feels perfectly safe and content, smiling up at all the erect penises pointed in " + c.hisHer() + " direction.  "); break;
+                        case 1: append(t, "The feeling of being looked at so closely in such a private place is incredibly stimulating, and soon " + c.hisHer() + " fingers go from simply spreading to actively thrusting in and out.  " + c.HeShe() + " cums, thighs clenching together, and that ends the show.  "); break;
+                        default: append(t, "Even when the watching Thralls, stroking their own members, begin to reach orgasm and begin painting " + c.hisHer() + " body with trails of ejaculate, " + c.hisHer() + " prideful bearing doesn't diminish in the slighest.  " + c.HeShe() + " even smiles back at them.  ");
+                    }
+                    switch (c.morality / 33) {
+                        case 0: append(t, "Then, smiling sweetly at the Thralls, " + c.heShe() + " tells them that it's time to reward " + c.himHer() + " for cooperating.  They surge forward as one, their hands reaching for " + c.hisHer() + " chest and crotch in order to do just that."); break;
+                        case 1: append(t, "The display has gotten the Thralls even more aroused, and they begin to crowd around " + c.himHer() + " again.  " + c.HeShe() + " laughs as " + c.heShe() + " surrenders " + c.himHer() + "self to their groping hands."); break;
+                        default: append(t, "After making sure that they're all satisfied with what they've seen, " + c.heShe() + " asks the Thralls what they'd like to do with " + c.himHer() + " next.");
+                    }
                 } else
                 {
-                    if(c.confidence > 66)
-                        append(t, c.mainName + " tells the Thralls that they're allowed to take some close-up pictures of " + c.hisHer() + " " + hole + ", then hesitates for only a moment before taking a deep breath and spreading it open with " + c.hisHer() + " fingers.  ");
-                    else
-                    if(c.confidence > 33)
-                        append(t, "The Thralls ask " + c.mainName + " for permission to take some close-up pictures of " + c.hisHer() + " spread " + hole + ".  " + c.HeShe() + " needs to take a moment to gather " + c.hisHer() + " willpower before agreeing, and " + c.heShe() + " pauses again when it becomes clear that they expect " + c.himHer() + " to use " + c.hisHer() + " own fingers to present " + c.himHer() + "self, but " + c.heShe() + " eventually complies, releasing a breathy moan as " + c.heShe() + " does so.  ");
-                    else
-                        append(t, c.mainName + "'s heart leaps with fear when the Thralls ask " + c.himHer() + " to spread " + c.hisHer() + " " + hole + ", but " + c.heShe() + " doesn't refuse.  With a soft whimper, " + c.heShe() + " places " + c.hisHer() + " fingers around the outside and lightly pulls it open.  ");
-                    if(c.dignity > 66)
-                        append(t, c.HeShe() + " trembles with embarrassment, and " + c.heShe() + "'s even offended when the Thralls discuss how the virgin opening is in 'good condition', as if " + c.heShe() + " were a piece of meat.  But the comments also send jolts of shameful pleasure through " + c.hisHer() + " spine.  ");
-                    else
-                    if(c.dignity > 33)
-                        append(t, c.HeShe() + "'s gotten used to being seen naked, but this kind of scrutiny is far more extreme than that, and " + c.heShe() + " can feel the gaze of everyone watching now, the gaze of everyone who will look at the pictures in the future, as an almost-palpable pressure down there.  ");
-                    else
-                        append(t, c.HeShe() + " doesn't feel embarrassed much anymore, but the vulnerable position still fills " + c.himHer() + " with uncomfortable fantasies of the Thralls losing control and deciding to rape " + c.himHer() + " after all.  ");
-                    if(c.morality > 66)
-                        append(t, c.HeShe() + " puts up with it because " + c.heShe() + " desperately wants to make them all happy.  ");
-                    else
-                    if(c.morality > 33)
-                        append(t, c.HeShe() + "'d never go this far if " + c.heShe() + " didn't feel like " + c.heShe() + " owed it to the Thralls for all the times they've made " + c.himHer() + " cum.  ");
-                    else
-                        append(t, c.HeShe() + " isn't actually afraid of the Thralls betraying " + c.himHer() + " anymore, but " + c.heShe() + " is afraid that they'll grow bored of " + c.himHer() + ", and " + c.heShe() + "'s willing to go even this far in order to keep them entertained.  ");
-                    if(c.innocence > 66)
-                        append(t, c.HisHer() + " eyes glaze over as " + c.heShe() + " loses " + c.himHer() + "self in the complicated feelings, and it's only after a Thrall rouses " + c.himHer() + " with a hand on " + c.hisHer() + " shoulder that " + c.heShe() + " realizes that they're done taking pictures and they're ready to move on to other things.");
-                    else
-                    if(c.innocence > 33)
-                        append(t, "As soon as the Thralls pull back to admire the photos they've taken, " + c.heShe() + " slumps onto " + c.hisHer() + " back and closes " + c.hisHer() + " eyes, relieved that it's over.");
-                    else
-                        append(t, "The moment " + c.heShe() + " judges that the Thralls are satisfied, " + c.heShe() + " slams " + c.hisHer() + " thighs shut with a loud slap and tries to steer them into doing something else with " + c.himHer() + ".");
+                    switch (c.confidence / 33) {
+                        case 0: append(t, c.mainName + "'s heart leaps with fear when the Thralls ask " + c.himHer() + " to spread " + c.hisHer() + " " + hole + ", but " + c.heShe() + " doesn't refuse.  With a soft whimper, " + c.heShe() + " places " + c.hisHer() + " fingers around the outside and lightly pulls it open.  "); break;
+                        case 1: append(t, "The Thralls ask " + c.mainName + " for permission to take some close-up pictures of " + c.hisHer() + " spread " + hole + ".  " + c.HeShe() + " needs to take a moment to gather " + c.hisHer() + " willpower before agreeing, and " + c.heShe() + " pauses again when it becomes clear that they expect " + c.himHer() + " to use " + c.hisHer() + " own fingers to present " + c.himHer() + "self, but " + c.heShe() + " eventually complies, releasing a breathy moan as " + c.heShe() + " does so.  "); break;
+                        default: append(t, c.mainName + " tells the Thralls that they're allowed to take some close-up pictures of " + c.hisHer() + " " + hole + ", then hesitates for only a moment before taking a deep breath and spreading it open with " + c.hisHer() + " fingers.  ");
+                    }
+                    switch (c.dignity / 33) {
+                        case 0: append(t, c.HeShe() + " doesn't feel embarrassed much anymore, but the vulnerable position still fills " + c.himHer() + " with uncomfortable fantasies of the Thralls losing control and deciding to rape " + c.himHer() + " after all.  "); break;
+                        case 1: append(t, c.HeShe() + "'s gotten used to being seen naked, but this kind of scrutiny is far more extreme than that, and " + c.heShe() + " can feel the gaze of everyone watching now, the gaze of everyone who will look at the pictures in the future, as an almost-palpable pressure down there.  "); break;
+                        default: append(t, c.HeShe() + " trembles with embarrassment, and " + c.heShe() + "'s even offended when the Thralls discuss how the virgin opening is in 'good condition', as if " + c.heShe() + " were a piece of meat.  But the comments also send jolts of shameful pleasure through " + c.hisHer() + " spine.  ");
+                    }
+                    switch (c.morality / 33) {
+                        case 0: append(t, c.HeShe() + " isn't actually afraid of the Thralls betraying " + c.himHer() + " anymore, but " + c.heShe() + " is afraid that they'll grow bored of " + c.himHer() + ", and " + c.heShe() + "'s willing to go even this far in order to keep them entertained.  "); break;
+                        case 1: append(t, c.HeShe() + "'d never go this far if " + c.heShe() + " didn't feel like " + c.heShe() + " owed it to the Thralls for all the times they've made " + c.himHer() + " cum.  "); break;
+                        default: append(t, c.HeShe() + " puts up with it because " + c.heShe() + " desperately wants to make them all happy.  ");
+                    }
+                    switch (c.innocence / 33) {
+                        case 0: append(t, "The moment " + c.heShe() + " judges that the Thralls are satisfied, " + c.heShe() + " slams " + c.hisHer() + " thighs shut with a loud slap and tries to steer them into doing something else with " + c.himHer() + "."); break;
+                        case 1: append(t, "As soon as the Thralls pull back to admire the photos they've taken, " + c.heShe() + " slumps onto " + c.hisHer() + " back and closes " + c.hisHer() + " eyes, relieved that it's over."); break;
+                        default: append(t, c.HisHer() + " eyes glaze over as " + c.heShe() + " loses " + c.himHer() + "self in the complicated feelings, and it's only after a Thrall rouses " + c.himHer() + " with a hand on " + c.hisHer() + " shoulder that " + c.heShe() + " realizes that they're done taking pictures and they're ready to move on to other things.");
+                    }
                 }
             } else
             if(c.temptReq >= 60000L)
             {
                 if(c.timesFantasized() > 0)
                 {
-                    if(c.morality > 66)
-                        append(t, c.mainName + "'s conscious mind can't quite banish the last twinge of guilt " + c.heShe() + " feels for giving up the fight against the Thralls.  ");
-                    else
-                    if(c.morality > 33)
-                        append(t, c.mainName + " is having trouble letting go of " + c.hisHer() + " suspicions and entrusting " + c.hisHer() + " body to the Thralls.  ");
-                    else
-                        append(t, c.mainName + "'s subconscious mind is divided between " + c.hisHer() + " desire to feel pleasure and " + c.hisHer() + " remembered hatred of everyone on the Demons' side.  ");
-                    if(c.innocence > 66)
-                        append(t, "Without completely understanding what " + c.heShe() + "'s doing, " + c.heShe() + " starts trying to remember how good " + c.heShe() + " feels when " + c.heShe() + " embraces " + c.hisHer() + " fantasies, and by doing so, " + c.heShe() + " ends up putting " + c.himHer() + "self in a dissociative state.  ");
-                    else
-                    if(c.innocence > 33)
-                        append(t, "The stress is too much to handle, and " + c.heShe() + " eagerly retreats into a world of delusion.  ");
-                    else
-                        append(t, "But by closing " + c.hisHer() + " eyes and going through practiced breathing exercises, " + c.heShe() + "'s able to deliberately hypnotize " + c.himHer() + "self.  ");
-                    if(c.dignity > 66)
-                        append(t, c.HeShe() + " sees the Thralls not as lustful men intent on " + c.hisHer() + " body, but as truly worshipful fans, the kind of fans " + c.heShe() + " had before " + c.hisHer() + " humiliation.  But unlike what actually happened, these fans are perfectly understanding - even encouraging - of " + c.hisHer() + " new lustful appetites, happy to use their hands to satisfy " + c.himHer() + ".  ");
-                    else
-                    if(c.dignity > 33)
-                        append(t, "As the Thralls ask " + c.himHer() + " to stick " + c.hisHer() + " butt out or to show them how " + c.heShe() + " masturbates, their voices stop sounding harsh and lustful, instead taking on a soothing, peaceful tone in " + c.hisHer() + " ears.  Even as they lustfully grope " + c.himHer() + ", it feels more like avid worship of " + c.hisHer() + " body.  ");
-                    else
-                        append(t, "The Thralls seem to wear the faces of " + c.hisHer() + " close friends, even the ones who were repulsed or intimidated and left " + c.himHer() + " when " + c.heShe() + " started to tell them about " + c.hisHer() + " increasingly deviant sexual desires.  " + c.HeShe() + " calls them by name, asking them to touch " + c.himHer() + ", and they're happy to comply.  ");
-                    if(c.confidence > 66)
-                        append(t, c.HeShe() + " can tell them outright to make " + c.himHer() + " cum, and none of them find it strange at all.");
-                    else
-                    if(c.confidence > 33)
-                        append(t, "As if a barrier inside " + c.hisHer() + " mind has come down, " + c.heShe() + "'s able to start responding with unrestrained enthusiasm, bucking " + c.hisHer() + " hips against the Thralls' hands and crying out as they make " + c.himHer() + " cum.");
-                    else
-                        append(t, c.HeShe() + " finally relaxes, happy that " + c.heShe() + " can just lay back and let them make " + c.himHer() + " cum.");
+                    switch (c.morality / 33) {
+                        case 0: append(t, c.mainName + "'s subconscious mind is divided between " + c.hisHer() + " desire to feel pleasure and " + c.hisHer() + " remembered hatred of everyone on the Demons' side.  "); break;
+                        case 1: append(t, c.mainName + " is having trouble letting go of " + c.hisHer() + " suspicions and entrusting " + c.hisHer() + " body to the Thralls.  "); break;
+                        default: append(t, c.mainName + "'s conscious mind can't quite banish the last twinge of guilt " + c.heShe() + " feels for giving up the fight against the Thralls.  ");
+                    }
+                    switch (c.innocence / 33) {
+                        case 0: append(t, "But by closing " + c.hisHer() + " eyes and going through practiced breathing exercises, " + c.heShe() + "'s able to deliberately hypnotize " + c.himHer() + "self.  "); break;
+                        case 1: append(t, "The stress is too much to handle, and " + c.heShe() + " eagerly retreats into a world of delusion.  "); break;
+                        default: append(t, "Without completely understanding what " + c.heShe() + "'s doing, " + c.heShe() + " starts trying to remember how good " + c.heShe() + " feels when " + c.heShe() + " embraces " + c.hisHer() + " fantasies, and by doing so, " + c.heShe() + " ends up putting " + c.himHer() + "self in a dissociative state.  ");
+                    }
+                    switch (c.dignity / 33) {
+                        case 0: append(t, "The Thralls seem to wear the faces of " + c.hisHer() + " close friends, even the ones who were repulsed or intimidated and left " + c.himHer() + " when " + c.heShe() + " started to tell them about " + c.hisHer() + " increasingly deviant sexual desires.  " + c.HeShe() + " calls them by name, asking them to touch " + c.himHer() + ", and they're happy to comply.  "); break;
+                        case 1: append(t, "As the Thralls ask " + c.himHer() + " to stick " + c.hisHer() + " butt out or to show them how " + c.heShe() + " masturbates, their voices stop sounding harsh and lustful, instead taking on a soothing, peaceful tone in " + c.hisHer() + " ears.  Even as they lustfully grope " + c.himHer() + ", it feels more like avid worship of " + c.hisHer() + " body.  "); break;
+                        default: append(t, c.HeShe() + " sees the Thralls not as lustful men intent on " + c.hisHer() + " body, but as truly worshipful fans, the kind of fans " + c.heShe() + " had before " + c.hisHer() + " humiliation.  But unlike what actually happened, these fans are perfectly understanding - even encouraging - of " + c.hisHer() + " new lustful appetites, happy to use their hands to satisfy " + c.himHer() + ".  ");
+                    }
+                    switch (c.confidence / 33) {
+                        case 0: append(t, c.HeShe() + " finally relaxes, happy that " + c.heShe() + " can just lay back and let them make " + c.himHer() + " cum."); break;
+                        case 1: append(t, "As if a barrier inside " + c.hisHer() + " mind has come down, " + c.heShe() + "'s able to start responding with unrestrained enthusiasm, bucking " + c.hisHer() + " hips against the Thralls' hands and crying out as they make " + c.himHer() + " cum."); break;
+                        default: append(t, c.HeShe() + " can tell them outright to make " + c.himHer() + " cum, and none of them find it strange at all.");
+                    }
                 } else
                 {
-                    if(c.innocence > 66)
-                        append(t, "Surrendering to the Thralls seemed like a good idea a few moments ago, but in the clarity following an orgasm, " + c.mainName + " suddenly remembers " + c.hisHer() + " doubts.  ");
-                    else
-                    if(c.innocence > 33)
-                        append(t, "The more the Thralls rub " + c.mainName + "'s " + organ + ", the better " + c.hisHer() + " body feels, but having " + c.hisHer() + " lust satisfied also allows doubts to creep back into " + c.hisHer() + " mind.  ");
-                    else
-                        append(t, "Even as " + c.hisHer() + " body is wracked by orgasm after orgasm, " + c.mainName + "'s mind remains clear enough to question what " + c.heShe() + "'s doing here.  ");
-                    if(c.morality > 66)
-                        append(t, c.HeShe() + "'s still committed to doing what's right for as many people as possible, right now, and " + c.heShe() + " has to wonder whether " + c.heShe() + "'s being selfish by enjoying " + c.himHer() + "self like this.  ");
-                    else
-                    if(c.morality > 33)
-                        append(t, "Although " + c.heShe() + " has no desire to hurt the Thralls, " + c.heShe() + "'s worried about switching sides like this.  ");
-                    else
-                        append(t, c.HeShe() + " knows that people seeing this will have no doubt at all that " + c.heShe() + "'s no longer fighting for humanity, and " + c.heShe() + "'s worried about being caught on the losing side of the war.  ");
-                    if(c.dignity > 66)
-                        append(t, "But when " + c.heShe() + " looks into the Thralls' eyes and sees the way they're so happy to be around " + c.himHer() + " and so eager to please " + c.himHer() + ", " + c.heShe() + " realizes that " + c.heShe() + " doesn't care that much about anything else.  ");
-                    else
-                    if(c.dignity > 33)
-                        append(t, "What ultimately decides " + c.himHer() + " is the memory of " + c.hisHer() + " anger at the public for turning against " + c.himHer() + ".  ");
-                    else
-                        append(t, "In the end, " + c.heShe() + " decides that since " + c.heShe() + "'s come this far already, there's probably no going back.  ");
-                    if(c.confidence > 66)
-                        append(t, "Frowning with anger at " + c.himHer() + "self for having a moment of indecisiveness, " + c.heShe() + " starts to tear " + c.hisHer() + " clothes off with even more force, knocking several Thralls back in the process.");
-                    else
-                    if(c.confidence > 33)
-                        append(t, "The Thralls notice " + c.hisHer() + " hesitation, but when they ask, " + c.heShe() + " reassures them that everything's fine and resumes undressing " + c.himHer() + "self.");
-                    else
-                        append(t, c.HeShe() + " lowers " + c.hisHer() + " head and starts undressing with even more speed, wanting to distract " + c.himHer() + "self from all other thoughts.");
+                    switch (c.innocence / 33) {
+                        case 0: append(t, "Even as " + c.hisHer() + " body is wracked by orgasm after orgasm, " + c.mainName + "'s mind remains clear enough to question what " + c.heShe() + "'s doing here.  "); break;
+                        case 1: append(t, "The more the Thralls rub " + c.mainName + "'s " + organ + ", the better " + c.hisHer() + " body feels, but having " + c.hisHer() + " lust satisfied also allows doubts to creep back into " + c.hisHer() + " mind.  "); break;
+                        default: append(t, "Surrendering to the Thralls seemed like a good idea a few moments ago, but in the clarity following an orgasm, " + c.mainName + " suddenly remembers " + c.hisHer() + " doubts.  ");
+                    }
+                    switch (c.morality / 33) {
+                        case 0: append(t, c.HeShe() + " knows that people seeing this will have no doubt at all that " + c.heShe() + "'s no longer fighting for humanity, and " + c.heShe() + "'s worried about being caught on the losing side of the war.  "); break;
+                        case 1: append(t, "Although " + c.heShe() + " has no desire to hurt the Thralls, " + c.heShe() + "'s worried about switching sides like this.  "); break;
+                        default: append(t, c.HeShe() + "'s still committed to doing what's right for as many people as possible, right now, and " + c.heShe() + " has to wonder whether " + c.heShe() + "'s being selfish by enjoying " + c.himHer() + "self like this.  ");
+                    }
+                    switch (c.dignity / 33) {
+                        case 0: append(t, "In the end, " + c.heShe() + " decides that since " + c.heShe() + "'s come this far already, there's probably no going back.  "); break;
+                        case 1: append(t, "What ultimately decides " + c.himHer() + " is the memory of " + c.hisHer() + " anger at the public for turning against " + c.himHer() + ".  "); break;
+                        default: append(t, "But when " + c.heShe() + " looks into the Thralls' eyes and sees the way they're so happy to be around " + c.himHer() + " and so eager to please " + c.himHer() + ", " + c.heShe() + " realizes that " + c.heShe() + " doesn't care that much about anything else.  ");
+                    }
+                    switch (c.confidence / 33) {
+                        case 0: append(t, c.HeShe() + " lowers " + c.hisHer() + " head and starts undressing with even more speed, wanting to distract " + c.himHer() + "self from all other thoughts."); break;
+                        case 1: append(t, "The Thralls notice " + c.hisHer() + " hesitation, but when they ask, " + c.heShe() + " reassures them that everything's fine and resumes undressing " + c.himHer() + "self."); break;
+                        default: append(t, "Frowning with anger at " + c.himHer() + "self for having a moment of indecisiveness, " + c.heShe() + " starts to tear " + c.hisHer() + " clothes off with even more force, knocking several Thralls back in the process.");
+                    }
                 }
             } else
             if(c.timesFantasized() > 0)
             {
-                if(c.morality > 66)
-                    append(t, "Even in " + c.hisHer() + " most lucid moments, " + c.mainName + " no longer feels guilty about taking a break from the fighting every once in awhile in order to satisfy " + c.hisHer() + " lust with " + c.hisHer() + " supposed enemies.  ");
-                else
-                if(c.morality > 33)
-                    append(t, c.mainName + " has begun to completely let " + c.hisHer() + " guard down around the Thralls, not even making any attempt to struggle when delusional sexual fantasies start to sweep " + c.himHer() + " away.  ");
-                else
-                    append(t, "Now bearing little trace of the antisocial, misanthropic attitude " + c.heShe() + " used to hold, " + c.mainName + " happily indulges in lighthearted fantasies of peace and free love with the Thralls.  ");
-                if(c.dignity > 66)
-                    append(t, c.HeShe() + "'s completely abandoned the pretense of being a dignified warrior, shouting that " + c.heShe() + "'s cumming as ");
-                else
-                if(c.dignity > 33)
-                    append(t, c.HeShe() + " sloppily kisses each of the Thralls in turn, eyes fluttering as ");
-                else
-                    append(t, c.HisHer() + " tongue lolls out of " + c.hisHer() + " mouth and " + c.hisHer() + " eyes roll upward as ");
-                if(c.confidence > 66)
-                    append(t, c.heShe() + " buries " + c.hisHer() + " hands in the hair of the Thrall whose face " + c.heShe() + "'s riding, enjoying the feeling of his tongue on " + c.hisHer() + " " + organ + ".  ");
-                else
-                if(c.confidence > 33)
-                    append(t, c.heShe() + " aggressively humps the hand working between " + c.hisHer() + " thighs.  ");
-                else
-                    append(t, "one of the Thralls gently spanks " + c.himHer() + " and another tugs " + c.hisHer() + " " + organ + ".  ");
-                if(c.innocence > 66)
-                    append(t, c.HeShe() + " can't even remember what it was like to have a problem with this sort of thing.");
-                else
-                if(c.innocence > 33)
-                    append(t, c.HisHer() + " body moves purely on instinct.");
-                else
-                    append(t, c.HeShe() + "'s been spending every night doing self-hypnosis in order to ensure that " + c.hisHer() + " doubts won't come back.");
+                switch (c.morality / 33) {
+                    case 0: append(t, "Now bearing little trace of the antisocial, misanthropic attitude " + c.heShe() + " used to hold, " + c.mainName + " happily indulges in lighthearted fantasies of peace and free love with the Thralls.  "); break;
+                    case 1: append(t, c.mainName + " has begun to completely let " + c.hisHer() + " guard down around the Thralls, not even making any attempt to struggle when delusional sexual fantasies start to sweep " + c.himHer() + " away.  "); break;
+                    default: append(t, "Even in " + c.hisHer() + " most lucid moments, " + c.mainName + " no longer feels guilty about taking a break from the fighting every once in awhile in order to satisfy " + c.hisHer() + " lust with " + c.hisHer() + " supposed enemies.  ");
+                }
+                switch (c.dignity / 33) {
+                    case 0: append(t, c.HisHer() + " tongue lolls out of " + c.hisHer() + " mouth and " + c.hisHer() + " eyes roll upward as "); break;
+                    case 1: append(t, c.HeShe() + " sloppily kisses each of the Thralls in turn, eyes fluttering as "); break;
+                    default: append(t, c.HeShe() + "'s completely abandoned the pretense of being a dignified warrior, shouting that " + c.heShe() + "'s cumming as ");
+                }
+                switch (c.confidence / 33) {
+                    case 0: append(t, "one of the Thralls gently spanks " + c.himHer() + " and another tugs " + c.hisHer() + " " + organ + ".  "); break;
+                    case 1: append(t, c.heShe() + " aggressively humps the hand working between " + c.hisHer() + " thighs.  "); break;
+                    default: append(t, c.heShe() + " buries " + c.hisHer() + " hands in the hair of the Thrall whose face " + c.heShe() + "'s riding, enjoying the feeling of his tongue on " + c.hisHer() + " " + organ + ".  ");
+                }
+                switch (c.innocence / 33) {
+                    case 0: append(t, c.HeShe() + "'s been spending every night doing self-hypnosis in order to ensure that " + c.hisHer() + " doubts won't come back."); break;
+                    case 1: append(t, c.HisHer() + " body moves purely on instinct."); break;
+                    default: append(t, c.HeShe() + " can't even remember what it was like to have a problem with this sort of thing.");
+                }
             } else
             {
-                if(c.innocence > 66)
-                    append(t, c.mainName + " happily cooperates with the Thralls as they show " + c.himHer() + " new and exciting ways to make " + c.hisHer() + " body feel good.  ");
-                else
-                if(c.innocence > 33)
-                    append(t, c.mainName + " is no longer cooperating with the Thralls out of fear or desire for advantage.  " + c.HeShe() + "'s happily doing it for its own sake.  ");
-                else
-                    append(t, "The pleasure " + c.heShe() + "'s feeling helps to convince " + c.mainName + " that " + c.heShe() + " was a fool for resisting " + c.hisHer() + " sexual instincts for so long.  ");
-                if(c.morality > 66)
-                    append(t, "Being surrounded by smiling faces like this is what " + c.heShe() + "'s always wanted out of life, and " + c.heShe() + " feels no guilt whatsoever about it.  ");
-                else
-                if(c.morality > 33)
-                    append(t, "Seeing the Thralls repeatedly refuse to take advantage of " + c.hisHer() + " vulnerability has finally convinced " + c.himHer() + " that " + c.heShe() + " can trust them.  ");
-                else
-                    append(t, "After a lifetime of giving and receiving acts of cruelty, " + c.heShe() + "'s now seeing what it's like to be with people who just want to make " + c.himHer() + " happy, and who " + c.heShe() + " just wants to make happy in turn.  ");
+                switch (c.innocence / 33) {
+                    case 0: append(t, "The pleasure " + c.heShe() + "'s feeling helps to convince " + c.mainName + " that " + c.heShe() + " was a fool for resisting " + c.hisHer() + " sexual instincts for so long.  "); break;
+                    case 1: append(t, c.mainName + " is no longer cooperating with the Thralls out of fear or desire for advantage.  " + c.HeShe() + "'s happily doing it for its own sake.  "); break;
+                    default: append(t, c.mainName + " happily cooperates with the Thralls as they show " + c.himHer() + " new and exciting ways to make " + c.hisHer() + " body feel good.  ");
+                }
+                switch (c.morality / 33) {
+                    case 0: append(t, "After a lifetime of giving and receiving acts of cruelty, " + c.heShe() + "'s now seeing what it's like to be with people who just want to make " + c.himHer() + " happy, and who " + c.heShe() + " just wants to make happy in turn.  "); break;
+                    case 1: append(t, "Seeing the Thralls repeatedly refuse to take advantage of " + c.hisHer() + " vulnerability has finally convinced " + c.himHer() + " that " + c.heShe() + " can trust them.  "); break;
+                    default: append(t, "Being surrounded by smiling faces like this is what " + c.heShe() + "'s always wanted out of life, and " + c.heShe() + " feels no guilt whatsoever about it.  ");
+                }
                 if(c.confidence > 66)
                     append(t, c.HeShe() + " doesn't even mind letting the Thralls have control of the encounter, letting them grind their cocks against " + c.hisHer() + " hair and " + c.hisHer() + " body");
                 else
@@ -8306,13 +7828,11 @@ public class WorldState
                     else
                         append(t, "pussy");
                 }
-                if(c.dignity > 66)
-                    append(t, ", and " + c.heShe() + "'s finally able to scream with shameless orgasmic pleasure no matter what the rest of the world thinks.");
-                else
-                if(c.dignity > 33)
-                    append(t, ".");
-                else
-                    append(t, ", made all the better by the fact that " + c.heShe() + "'s finally surrounded by people who don't want " + c.himHer() + " to pretend to be someone " + c.heShe() + "'s not.");
+                switch (c.dignity / 33) {
+                    case 0: append(t, ", made all the better by the fact that " + c.heShe() + "'s finally surrounded by people who don't want " + c.himHer() + " to pretend to be someone " + c.heShe() + "'s not."); break;
+                    case 1: append(t, "."); break;
+                    default: append(t, ", and " + c.heShe() + "'s finally able to scream with shameless orgasmic pleasure no matter what the rest of the world thinks.");
+                }
             }
         } else
         if(c.defilementStage % 3 == 2)
@@ -8321,82 +7841,62 @@ public class WorldState
             {
                 if(c.gender.equals("male") || c.gender.equals("futanari") && (c.temptReq / 10000L) % 2L == 0L)
                 {
-                    if(c.confidence > 66)
-                        append(t, c.mainName + " grins, laying down and crossing " + c.hisHer() + " arms behind " + c.hisHer() + " head ");
-                    else
-                    if(c.confidence > 33)
-                        append(t, c.mainName + "'s heart jumps and " + c.hisHer() + " eyes go wide ");
-                    else
-                        append(t, c.mainName + " whimpers with arousal, tired penis still twitching upright ");
-                    if(c.innocence > 66)
-                        append(t, "when a voluptuous female Thrall walks over to " + c.himHer() + ", hips swaying, and asks whether " + c.heShe() + "'d like to learn how to please a woman.  ");
-                    else
-                    if(c.innocence > 33)
-                        append(t, "when a stunningly beautiful female Thrall gently pushes " + c.himHer() + " down onto " + c.hisHer() + " back and straddles " + c.himHer() + ", then starts to guide " + c.himHer() + " inside.  ");
-                    else
-                        append(t, "when a sweet, impossibly innocent-looking female Thrall steps right up to " + c.himHer() + " and asks whether " + c.heShe() + "'d like to cum inside her.  ");
-                    if(c.dignity > 66)
-                        append(t, "Despite having cum so much already, " + c.heShe() + " still almost shoots " + c.hisHer() + " load inside the Thrall the moment " + c.heShe() + " enters.  " + c.HeShe() + " grits " + c.hisHer() + " teeth and tries to hold out as long as possible, not wanting to disappoint with an early finish.  ");
-                    else
-                    if(c.dignity > 33)
-                        append(t, c.HeShe() + " gasps at the intense sensation of being enveloped, reflexively bucking " + c.hisHer() + " hips in response to the Thrall's every moment atop " + c.himHer() + ".  ");
-                    else
-                        append(t, c.HeShe() + " should be too tired to move, but the moment " + c.heShe() + " slips inside her, " + c.hisHer() + " instincts take over and " + c.heShe() + " starts savagely thrusting into the Thrall, eager to fill " + c.himHer() + " up.  ");
-                    if(c.morality > 66)
-                        append(t, c.mainName + " tries to be a generous lover, matching " + c.hisHer() + " pace and thumbing the Thrall's clit, but when " + c.heShe() + " finally climaxes, " + c.hisHer() + " movements become spastic and " + c.heShe() + " finds " + c.himHer() + "self embracing and kissing the Thrall, simply enjoying her warmth.");
-                    else
-                    if(c.morality > 33)
-                        append(t, c.mainName + " climaxes with a loud moan, overwhelmed with pleasure as each spurt comes out inside " + c.hisHer() + " partner.  When " + c.heShe() + " helps the Thrall to her feet, there's applause and cheering from the other spectating Thralls.");
-                    else
-                        append(t, "The moment " + c.heShe() + " climaxes, " + c.mainName + " lets " + c.himHer() + "self lay back with a sigh, enjoying the sight of " + c.hisHer() + " seed trickling down from the Thrall's slit.");
+                    switch (c.confidence / 33) {
+                        case 0: append(t, c.mainName + " whimpers with arousal, tired penis still twitching upright "); break;
+                        case 1: append(t, c.mainName + "'s heart jumps and " + c.hisHer() + " eyes go wide "); break;
+                        default: append(t, c.mainName + " grins, laying down and crossing " + c.hisHer() + " arms behind " + c.hisHer() + " head ");
+                    }
+                    switch (c.innocence / 33) {
+                        case 0: append(t, "when a sweet, impossibly innocent-looking female Thrall steps right up to " + c.himHer() + " and asks whether " + c.heShe() + "'d like to cum inside her.  "); break;
+                        case 1: append(t, "when a stunningly beautiful female Thrall gently pushes " + c.himHer() + " down onto " + c.hisHer() + " back and straddles " + c.himHer() + ", then starts to guide " + c.himHer() + " inside.  "); break;
+                        default: append(t, "when a voluptuous female Thrall walks over to " + c.himHer() + ", hips swaying, and asks whether " + c.heShe() + "'d like to learn how to please a woman.  ");
+                    }
+                    switch (c.dignity / 33) {
+                        case 0: append(t, c.HeShe() + " should be too tired to move, but the moment " + c.heShe() + " slips inside her, " + c.hisHer() + " instincts take over and " + c.heShe() + " starts savagely thrusting into the Thrall, eager to fill " + c.himHer() + " up.  "); break;
+                        case 1: append(t, c.HeShe() + " gasps at the intense sensation of being enveloped, reflexively bucking " + c.hisHer() + " hips in response to the Thrall's every moment atop " + c.himHer() + ".  "); break;
+                        default: append(t, "Despite having cum so much already, " + c.heShe() + " still almost shoots " + c.hisHer() + " load inside the Thrall the moment " + c.heShe() + " enters.  " + c.HeShe() + " grits " + c.hisHer() + " teeth and tries to hold out as long as possible, not wanting to disappoint with an early finish.  ");
+                    }
+                    switch (c.morality / 33) {
+                        case 0: append(t, "The moment " + c.heShe() + " climaxes, " + c.mainName + " lets " + c.himHer() + "self lay back with a sigh, enjoying the sight of " + c.hisHer() + " seed trickling down from the Thrall's slit."); break;
+                        case 1: append(t, c.mainName + " climaxes with a loud moan, overwhelmed with pleasure as each spurt comes out inside " + c.hisHer() + " partner.  When " + c.heShe() + " helps the Thrall to her feet, there's applause and cheering from the other spectating Thralls."); break;
+                        default: append(t, c.mainName + " tries to be a generous lover, matching " + c.hisHer() + " pace and thumbing the Thrall's clit, but when " + c.heShe() + " finally climaxes, " + c.hisHer() + " movements become spastic and " + c.heShe() + " finds " + c.himHer() + "self embracing and kissing the Thrall, simply enjoying her warmth.");
+                    }
                 } else
                 {
-                    if(c.morality > 66)
-                        append(t, c.mainName + " feels guilty about all the Thralls giving " + c.himHer() + " pleasure without getting much in return.  While " + c.heShe() + " still feels it would be wrong to give up " + c.hisHer() + " virginity, " + c.heShe() + " offers them " + c.hisHer() + " rear hole instead.  ");
-                    else
-                    if(c.morality > 33)
-                        append(t, "After much sweet-talking and many promises that it will feel better and better the more " + c.heShe() + " does it, the Thralls are able to convince " + c.mainName + " to have some anal sex.  ");
-                    else
-                        append(t, c.mainName + " enjoys the respect " + c.heShe() + " can command from some people and the lust " + c.heShe() + " can provoke from others by retaining " + c.hisHer() + " virginity, but " + c.heShe() + " still longs for the pleasures that can only be felt during penetration, so " + c.heShe() + " decides to allow the Thralls to use " + c.hisHer() + " asshole instead.  ");
-                    if(c.dignity > 66)
-                        append(t, c.HeShe() + " claims that they don't need to use any lube, but " + c.heShe() + "'s privately relieved when they insist on applying plenty of it anyway.  ");
-                    else
-                    if(c.dignity > 33)
-                        append(t, c.HeShe() + " gets on " + c.hisHer() + " hands and knees, spreading " + c.hisHer() + " thighs wide apart and looking over " + c.hisHer() + " shoulder at the Thrall whose lubed-up cock presses against " + c.hisHer() + " anus.  ");
-                    else
-                        append(t, c.HeShe() + " asks that the Thrall with the smallest cock come forward, and after a wave of laughter from the crowd, one of them finally swallows his pride and approaches " + c.himHer() + ", lubing up his shaft.  ");
-                    if(c.confidence > 66)
-                        append(t, c.mainName + " grits " + c.hisHer() + " teeth at first, enduring the penetration for the sake of " + c.hisHer() + " pride but not enjoying it at all.  That changes quickly, however.  ");
-                    else
-                    if(c.confidence > 33)
-                        append(t, c.mainName + " asks the Thrall to go slowly, and he complies, starting out with slow, steady thrusts that make " + c.himHer() + " shudder every time he bottoms out in " + c.hisHer() + " bowels.  It's not long before he can start going faster.  ");
-                    else
-                        append(t, c.mainName + " whimpers at the uncomfortable insertion and almost asks to stop, but " + c.heShe() + " bites " + c.hisHer() + " lip and manages to hold out until " + c.hisHer() + " moans start to take on a more throaty, passionate quality.  ");
-                    if(c.innocence > 66)
-                        append(t, "The strange sensations turn into a sudden surge of pleasure as the tip begins to put pressure on " + c.hisHer() + " g-spot, and when the Thrall starts fondling " + c.hisHer() + " " + organ + " at the same time, " + c.heShe() + " cries out wordlessly with an abrupt orgasm, squeezing down hard on the cock inside " + c.himHer() + ".");
-                    else
-                    if(c.innocence > 33)
-                        append(t, "As the thrusts grow deeper and deeper, the repeated impacts against " + c.hisHer() + " deepest place start to feel incredibly good.  " + c.HeShe() + " starts masturbating at the same time, desperately rubbing " + c.hisHer() + " " + organ + ", until the sensation of the Thrall's cum shooting inside " + c.hisHer() + " bowels finally pushes " + c.himHer() + " over the edge and " + c.heShe() + " climaxes as well.");
-                    else
-                        append(t, c.HeShe() + " angles " + c.hisHer() + " hips carefully, searching until " + c.heShe() + " feels a pleasurable pressure against " + c.hisHer() + " g-spot.  Then, " + c.heShe() + " starts rocking " + c.hisHer() + " body back and forth, encouraging the Thrall to thrust all the way inside " + c.himHer() + " until they're both gasping and moaning in mutual climax.");
+                    switch (c.morality / 33) {
+                        case 0: append(t, c.mainName + " enjoys the respect " + c.heShe() + " can command from some people and the lust " + c.heShe() + " can provoke from others by retaining " + c.hisHer() + " virginity, but " + c.heShe() + " still longs for the pleasures that can only be felt during penetration, so " + c.heShe() + " decides to allow the Thralls to use " + c.hisHer() + " asshole instead.  "); break;
+                        case 1: append(t, "After much sweet-talking and many promises that it will feel better and better the more " + c.heShe() + " does it, the Thralls are able to convince " + c.mainName + " to have some anal sex.  "); break;
+                        default: append(t, c.mainName + " feels guilty about all the Thralls giving " + c.himHer() + " pleasure without getting much in return.  While " + c.heShe() + " still feels it would be wrong to give up " + c.hisHer() + " virginity, " + c.heShe() + " offers them " + c.hisHer() + " rear hole instead.  ");
+                    }
+                    switch (c.dignity / 33) {
+                        case 0: append(t, c.HeShe() + " asks that the Thrall with the smallest cock come forward, and after a wave of laughter from the crowd, one of them finally swallows his pride and approaches " + c.himHer() + ", lubing up his shaft.  "); break;
+                        case 1: append(t, c.HeShe() + " gets on " + c.hisHer() + " hands and knees, spreading " + c.hisHer() + " thighs wide apart and looking over " + c.hisHer() + " shoulder at the Thrall whose lubed-up cock presses against " + c.hisHer() + " anus.  "); break;
+                        default: append(t, c.HeShe() + " claims that they don't need to use any lube, but " + c.heShe() + "'s privately relieved when they insist on applying plenty of it anyway.  ");
+                    }
+                    switch (c.confidence / 33) {
+                        case 0: append(t, c.mainName + " whimpers at the uncomfortable insertion and almost asks to stop, but " + c.heShe() + " bites " + c.hisHer() + " lip and manages to hold out until " + c.hisHer() + " moans start to take on a more throaty, passionate quality.  "); break;
+                        case 1: append(t, c.mainName + " asks the Thrall to go slowly, and he complies, starting out with slow, steady thrusts that make " + c.himHer() + " shudder every time he bottoms out in " + c.hisHer() + " bowels.  It's not long before he can start going faster.  "); break;
+                        default: append(t, c.mainName + " grits " + c.hisHer() + " teeth at first, enduring the penetration for the sake of " + c.hisHer() + " pride but not enjoying it at all.  That changes quickly, however.  ");
+                    }
+                    switch (c.innocence / 33) {
+                        case 0: append(t, c.HeShe() + " angles " + c.hisHer() + " hips carefully, searching until " + c.heShe() + " feels a pleasurable pressure against " + c.hisHer() + " g-spot.  Then, " + c.heShe() + " starts rocking " + c.hisHer() + " body back and forth, encouraging the Thrall to thrust all the way inside " + c.himHer() + " until they're both gasping and moaning in mutual climax."); break;
+                        case 1: append(t, "As the thrusts grow deeper and deeper, the repeated impacts against " + c.hisHer() + " deepest place start to feel incredibly good.  " + c.HeShe() + " starts masturbating at the same time, desperately rubbing " + c.hisHer() + " " + organ + ", until the sensation of the Thrall's cum shooting inside " + c.hisHer() + " bowels finally pushes " + c.himHer() + " over the edge and " + c.heShe() + " climaxes as well."); break;
+                        default: append(t, "The strange sensations turn into a sudden surge of pleasure as the tip begins to put pressure on " + c.hisHer() + " g-spot, and when the Thrall starts fondling " + c.hisHer() + " " + organ + " at the same time, " + c.heShe() + " cries out wordlessly with an abrupt orgasm, squeezing down hard on the cock inside " + c.himHer() + ".");
+                    }
                 }
             } else
             if(c.gender.equals("male") || c.gender.equals("futanari") && (c.temptReq / 10000L) % 2L == 0L)
             {
-                if(c.confidence > 66)
-                    append(t, "When " + c.mainName + " sees two of the female Thralls " + c.heShe() + "'s fucked before, " + c.heShe() + " grins and gestures them both over.  ");
-                else
-                if(c.confidence > 33)
-                    append(t, "In the press of lustful bodies, " + c.mainName + " finds " + c.himHer() + "self between two of the female Thralls who have pleasured " + c.himHer() + " before.  ");
-                else
-                    append(t, c.mainName + " smiles timidly and averts " + c.hisHer() + " eyes as two of the female Thralls " + c.heShe() + "'s been with before make their way over to " + c.himHer() + ".  ");
-                if(c.dignity > 66)
-                    append(t, "They've both become very enamored with " + c.himHer() + ", even to the point of refusing advances from male Thralls, but " + c.heShe() + "'s happy to give them some sexual release.  ");
-                else
-                if(c.dignity > 33)
-                    append(t, "They briefly talk, catching up on what the other has been doing since their last meeting, but it's not long before they're doing what they came here to do in the first place.  ");
-                else
-                    append(t, "Without even exchanging any words, " + c.heShe() + " pulls them both close.  ");
+                switch (c.confidence / 33) {
+                    case 0: append(t, c.mainName + " smiles timidly and averts " + c.hisHer() + " eyes as two of the female Thralls " + c.heShe() + "'s been with before make their way over to " + c.himHer() + ".  "); break;
+                    case 1: append(t, "In the press of lustful bodies, " + c.mainName + " finds " + c.himHer() + "self between two of the female Thralls who have pleasured " + c.himHer() + " before.  "); break;
+                    default: append(t, "When " + c.mainName + " sees two of the female Thralls " + c.heShe() + "'s fucked before, " + c.heShe() + " grins and gestures them both over.  ");
+                }
+                switch (c.dignity / 33) {
+                    case 0: append(t, "Without even exchanging any words, " + c.heShe() + " pulls them both close.  "); break;
+                    case 1: append(t, "They briefly talk, catching up on what the other has been doing since their last meeting, but it's not long before they're doing what they came here to do in the first place.  "); break;
+                    default: append(t, "They've both become very enamored with " + c.himHer() + ", even to the point of refusing advances from male Thralls, but " + c.heShe() + "'s happy to give them some sexual release.  ");
+                }
                 if(c.morality > 66)
                     append(t, c.mainName + " works hard to satisfy both of them, having them lay face-to-face while " + c.heShe() + " alternates between thrusting into each of them.  ");
                 else
@@ -8411,43 +7911,33 @@ public class WorldState
                     else
                         append(t, "tongues " + c.hisHer() + " anus.  ");
                 }
-                if(c.innocence > 66)
-                    append(t, "For a moment, " + c.mainName + " loves them both with all " + c.hisHer() + " heart, even though " + c.heShe() + "'s having trouble remembering their names.");
-                else
-                if(c.innocence > 33)
-                    append(t, "They have a three-way embrace in the afterglow, but it doesn't last long, as all of them are eager to go back to more debauchery.");
-                else
-                    append(t, c.mainName + " is a bit reluctant to let the male Thralls have their turn playing with " + c.himHer() + " again, but " + c.heShe() + " knows that it'll only be a matter of time until they can do this again.");
+                switch (c.innocence / 33) {
+                    case 0: append(t, c.mainName + " is a bit reluctant to let the male Thralls have their turn playing with " + c.himHer() + " again, but " + c.heShe() + " knows that it'll only be a matter of time until they can do this again."); break;
+                    case 1: append(t, "They have a three-way embrace in the afterglow, but it doesn't last long, as all of them are eager to go back to more debauchery."); break;
+                    default: append(t, "For a moment, " + c.mainName + " loves them both with all " + c.hisHer() + " heart, even though " + c.heShe() + "'s having trouble remembering their names.");
+                }
             } else
             {
-                if(c.confidence > 66)
-                    append(t, "Acting on " + c.hisHer() + " own initiative, " + c.mainName + " pushes one of the Thralls down onto his back and then straddles him, lining his cock up with " + c.hisHer() + " anus.  ");
-                else
-                if(c.confidence > 33)
-                    append(t, "Flushed and breathless as " + c.heShe() + " recovers from " + c.hisHer() + " last orgasm, " + c.mainName + " tells the Thralls that they can fuck " + c.hisHer() + " ass if they want.  ");
-                else
-                    append(t, c.mainName + " has been too timid to outright ask for it, but when one of the Thralls suggests doing anal again, " + c.heShe() + " squeaks " + c.hisHer() + " approval and trembles with anticipation.  ");
-                if(c.innocence > 66)
-                    append(t, "The flash of pain when the first cock penetrates " + c.himHer() + " reminds " + c.mainName + " that " + c.heShe() + " forgot to lube up.  But fortunately, " + c.hisHer() + " experienced hole no longer really requires it.  ");
-                else
-                if(c.innocence > 33)
-                    append(t, "Pausing only briefly to borrow some lube from one of the Thralls and hurriedly finger it into " + c.hisHer() + " hole, " + c.mainName + " spreads " + c.hisHer() + " lower cheeks and welcomes the first cock inside.  ");
-                else
-                    append(t, "The first cock slides smoothly in, much to " + c.hisHer() + " satisfaction.  " + c.HeShe() + " was careful to lube up in advance before the battle, after all.  ");
-                if(c.morality > 66)
-                    append(t, c.HeShe() + " rides " + c.hisHer() + " partner with practiced skill, smiling down at him and studying his reaction in order to milk his cock as pleasurably as possible.  ");
-                else
-                if(c.morality > 33)
-                    append(t, c.HeShe() + " moans out loud with every thrust, complimenting " + c.hisHer() + " partner on his technique and his wonderfully thick member.  ");
-                else
-                    append(t, c.HeShe() + " slams " + c.hisHer() + " hips forward and back with savage passion, using " + c.hisHer() + " Chosen strength to its fullest, even when the Thrall grunts in discomfort at the force of it.  " + c.HeShe() + " just smirks at " + c.himHer() + ", enjoying the fact that " + c.heShe() + " can be in control even when being taken like this.  ");
-                if(c.dignity > 66)
-                    append(t, "For the benefit of the watching spectators, " + c.heShe() + " uses both hands to spread " + c.hisHer() + " pussy, smirking as " + c.heShe() + " reminds everyone of " + c.hisHer() + " intact virginity.");
-                else
-                if(c.dignity > 33)
-                    append(t, c.HeShe() + " teases the Thrall in between gasps of pleasure, asking him whether he'd rather be deflowering " + c.himHer() + " right now.");
-                else
-                    append(t, "Then, as " + c.heShe() + " feverishly rubs " + c.hisHer() + " " + organ + " and " + c.hisHer() + " virgin pussy, " + c.heShe() + " cums hard, " + c.hisHer() + " sphincter squeezing every spurt of cum out of the Thrall and ushering it into " + c.hisHer() + " bowels.");
+                switch (c.confidence / 33) {
+                    case 0: append(t, c.mainName + " has been too timid to outright ask for it, but when one of the Thralls suggests doing anal again, " + c.heShe() + " squeaks " + c.hisHer() + " approval and trembles with anticipation.  "); break;
+                    case 1: append(t, "Flushed and breathless as " + c.heShe() + " recovers from " + c.hisHer() + " last orgasm, " + c.mainName + " tells the Thralls that they can fuck " + c.hisHer() + " ass if they want.  "); break;
+                    default: append(t, "Acting on " + c.hisHer() + " own initiative, " + c.mainName + " pushes one of the Thralls down onto his back and then straddles him, lining his cock up with " + c.hisHer() + " anus.  ");
+                }
+                switch (c.innocence / 33) {
+                    case 0: append(t, "The first cock slides smoothly in, much to " + c.hisHer() + " satisfaction.  " + c.HeShe() + " was careful to lube up in advance before the battle, after all.  "); break;
+                    case 1: append(t, "Pausing only briefly to borrow some lube from one of the Thralls and hurriedly finger it into " + c.hisHer() + " hole, " + c.mainName + " spreads " + c.hisHer() + " lower cheeks and welcomes the first cock inside.  "); break;
+                    default: append(t, "The flash of pain when the first cock penetrates " + c.himHer() + " reminds " + c.mainName + " that " + c.heShe() + " forgot to lube up.  But fortunately, " + c.hisHer() + " experienced hole no longer really requires it.  ");
+                }
+                switch (c.morality / 33) {
+                    case 0: append(t, c.HeShe() + " slams " + c.hisHer() + " hips forward and back with savage passion, using " + c.hisHer() + " Chosen strength to its fullest, even when the Thrall grunts in discomfort at the force of it.  " + c.HeShe() + " just smirks at " + c.himHer() + ", enjoying the fact that " + c.heShe() + " can be in control even when being taken like this.  "); break;
+                    case 1: append(t, c.HeShe() + " moans out loud with every thrust, complimenting " + c.hisHer() + " partner on his technique and his wonderfully thick member.  "); break;
+                    default: append(t, c.HeShe() + " rides " + c.hisHer() + " partner with practiced skill, smiling down at him and studying his reaction in order to milk his cock as pleasurably as possible.  ");
+                }
+                switch (c.dignity / 33) {
+                    case 0: append(t, "Then, as " + c.heShe() + " feverishly rubs " + c.hisHer() + " " + organ + " and " + c.hisHer() + " virgin pussy, " + c.heShe() + " cums hard, " + c.hisHer() + " sphincter squeezing every spurt of cum out of the Thrall and ushering it into " + c.hisHer() + " bowels."); break;
+                    case 1: append(t, c.HeShe() + " teases the Thrall in between gasps of pleasure, asking him whether he'd rather be deflowering " + c.himHer() + " right now."); break;
+                    default: append(t, "For the benefit of the watching spectators, " + c.heShe() + " uses both hands to spread " + c.hisHer() + " pussy, smirking as " + c.heShe() + " reminds everyone of " + c.hisHer() + " intact virginity.");
+                }
             }
         } else
         if(c.defilementStage % 3 == 0)
@@ -8455,126 +7945,94 @@ public class WorldState
             {
                 if(c.timesStripped() > 0)
                 {
-                    if(c.dignity > 66)
-                        append(t, c.mainName + " is happy with the attention when the Thralls start filming " + c.himHer() + " having sex, but " + c.heShe() + " enjoys it less when they start asking " + c.himHer() + " to denounce " + c.hisHer() + " supposed human allies on-camera.  ");
-                    else
-                    if(c.dignity > 33)
-                        append(t, "The Thralls teasing " + c.mainName + "'s " + organ + " try to get " + c.himHer() + " to say some nasty stuff about the Chosen leadership on-camera, but " + c.heShe() + " isn't having any of it.  ");
-                    else
-                        append(t, "Shouting to be heard over " + c.mainName + "'s cries of pleasure, the Thralls tell " + c.himHer() + " to say what " + c.heShe() + " really thinks about the forces of humanity, but " + c.heShe() + " barely acknowledges them.  ");
-                    if(c.morality > 66)
-                        append(t, c.HeShe() + "'s come to believe that the Thralls are good people who deserve to be happy, but " + c.heShe() + " doesn't think that the human leadership are bad people, either.  ");
-                    else
-                    if(c.morality > 33)
-                        append(t, c.HeShe() + " doesn't care as much about the war anymore, but this would be tantamount to switching sides, which is another matter entirely.  ");
-                    else
-                        append(t, "As much as " + c.heShe() + " enjoys causing scandals, " + c.heShe() + " doesn't see any benefit to burning what's left of " + c.hisHer() + " bridges with the human governments.  ");
-                    if(c.innocence > 66)
-                        append(t, c.HeShe() + " just mumbles something about how " + c.heShe() + " feels way happier now that " + c.heShe() + "'s friends with the Thralls too.  It isn't what they want to hear, but ");
-                    else
-                    if(c.innocence > 33)
-                        append(t, c.HeShe() + " spreads " + c.hisHer() + " legs wider, asking whether the Thralls would really rather talk than play with " + c.hisHer() + " body.  For many of them, seeing " + c.hisHer() + " morals corrupted actually is more satisfying than sex itself, but ");
-                    else
-                        append(t, c.HeShe() + " chooses " + c.hisHer() + " very words carefully, even as " + c.hisHer() + " voice wavers from the Thrall's tongue down below making " + c.himHer() + " cum mid-sentence.  In the end, " + c.heShe() + " doesn't end up saying anything against the human cause at all, but ");
-                    if(c.confidence > 66)
-                        append(t, "they know better than to push " + c.mainName + " when " + c.heShe() + " doesn't want to budge.");
-                    else
-                    if(c.confidence > 33)
-                        append(t, "it's clear that they'll have to try again later.");
-                    else
-                        append(t, "from the way " + c.heShe() + " starts to tremble and tears fill " + c.hisHer() + " eyes, they know that being more forceful about it would just cause " + c.himHer() + " to panic.");
+                    switch (c.dignity / 33) {
+                        case 0: append(t, "Shouting to be heard over " + c.mainName + "'s cries of pleasure, the Thralls tell " + c.himHer() + " to say what " + c.heShe() + " really thinks about the forces of humanity, but " + c.heShe() + " barely acknowledges them.  "); break;
+                        case 1: append(t, "The Thralls teasing " + c.mainName + "'s " + organ + " try to get " + c.himHer() + " to say some nasty stuff about the Chosen leadership on-camera, but " + c.heShe() + " isn't having any of it.  "); break;
+                        default: append(t, c.mainName + " is happy with the attention when the Thralls start filming " + c.himHer() + " having sex, but " + c.heShe() + " enjoys it less when they start asking " + c.himHer() + " to denounce " + c.hisHer() + " supposed human allies on-camera.  ");
+                    }
+                    switch (c.morality / 33) {
+                        case 0: append(t, "As much as " + c.heShe() + " enjoys causing scandals, " + c.heShe() + " doesn't see any benefit to burning what's left of " + c.hisHer() + " bridges with the human governments.  "); break;
+                        case 1: append(t, c.HeShe() + " doesn't care as much about the war anymore, but this would be tantamount to switching sides, which is another matter entirely.  "); break;
+                        default: append(t, c.HeShe() + "'s come to believe that the Thralls are good people who deserve to be happy, but " + c.heShe() + " doesn't think that the human leadership are bad people, either.  ");
+                    }
+                    switch (c.innocence / 33) {
+                        case 0: append(t, c.HeShe() + " chooses " + c.hisHer() + " very words carefully, even as " + c.hisHer() + " voice wavers from the Thrall's tongue down below making " + c.himHer() + " cum mid-sentence.  In the end, " + c.heShe() + " doesn't end up saying anything against the human cause at all, but "); break;
+                        case 1: append(t, c.HeShe() + " spreads " + c.hisHer() + " legs wider, asking whether the Thralls would really rather talk than play with " + c.hisHer() + " body.  For many of them, seeing " + c.hisHer() + " morals corrupted actually is more satisfying than sex itself, but "); break;
+                        default: append(t, c.HeShe() + " just mumbles something about how " + c.heShe() + " feels way happier now that " + c.heShe() + "'s friends with the Thralls too.  It isn't what they want to hear, but ");
+                    }
+                    switch (c.confidence / 33) {
+                        case 0: append(t, "from the way " + c.heShe() + " starts to tremble and tears fill " + c.hisHer() + " eyes, they know that being more forceful about it would just cause " + c.himHer() + " to panic."); break;
+                        case 1: append(t, "it's clear that they'll have to try again later."); break;
+                        default: append(t, "they know better than to push " + c.mainName + " when " + c.heShe() + " doesn't want to budge.");
+                    }
                 } else
                 {
-                    if(c.dignity > 66)
-                        append(t, "When " + c.mainName + " notices that some of the Thralls are filming their sexual encounters with " + c.himHer() + ", " + c.hisHer() + " face goes bright red and " + c.heShe() + " reflexively raises " + c.hisHer() + " hands to block the shot.  ");
-                    else
-                    if(c.dignity > 33)
-                        append(t, c.mainName + " blinks and shields " + c.hisHer() + " eyes against a flurry of flashing cameras, and when " + c.heShe() + " lowers " + c.hisHer() + " arm, there's a frown on " + c.hisHer() + " face.  ");
-                    else
-                        append(t, c.mainName + "'s face flushes with annoyance when " + c.heShe() + " sees that some of the Thralls at the edge of the crowd are filming " + c.himHer() + ".  " + c.HeShe() + " wanted to stop being a propaganda tool, not to just end up as propaganda for the other side.  ");
-                    if(c.innocence > 66)
-                        append(t, c.HeShe() + " protests that even if doing this sort of thing is fun, showing it to other people is way too naughty.  ");
-                    else
-                    if(c.innocence > 33)
-                        append(t, c.HeShe() + " shouts at them for taking footage of " + c.himHer() + " without asking first.  ");
-                    else
-                        append(t, c.HeShe() + " knows it's too late to ask them to stop, but " + c.heShe() + " does ask that they keep the videos as nothing more than their own private masturbation material.  ");
-                    if(c.confidence > 66)
-                        append(t, "At first, they try to keep pleasuring " + c.himHer() + ", but " + c.heShe() + " swats their hands away until " + c.heShe() + "'s sure they've all gotten the message.  ");
-                    else
-                    if(c.confidence > 33)
-                        append(t, c.HeShe() + " even threatens to go back to fighting them.  ");
-                    else
-                        append(t, "The quaver in " + c.hisHer() + " voice and the tears in " + c.hisHer() + " eyes are enough to make even a Thrall feel guilty.  ");
-                    if(c.morality > 66)
-                        append(t, "However, " + c.heShe() + "'s quick to forgive, and soon " + c.heShe() + "'s happily moaning with pleasure in their hands like nothing happened.");
-                    else
-                    if(c.morality > 33)
-                        append(t, "It's only after the Thralls' phones are all put away that " + c.heShe() + " starts going back to normal.");
-                    else
-                        append(t, c.HeShe() + " continues to glare at them for awhile after that, but after enough promises not to share what they filmed (and after making " + c.himHer() + " cum several more times), all is forgiven.");
+                    switch (c.dignity / 33) {
+                        case 0: append(t, c.mainName + "'s face flushes with annoyance when " + c.heShe() + " sees that some of the Thralls at the edge of the crowd are filming " + c.himHer() + ".  " + c.HeShe() + " wanted to stop being a propaganda tool, not to just end up as propaganda for the other side.  "); break;
+                        case 1: append(t, c.mainName + " blinks and shields " + c.hisHer() + " eyes against a flurry of flashing cameras, and when " + c.heShe() + " lowers " + c.hisHer() + " arm, there's a frown on " + c.hisHer() + " face.  "); break;
+                        default: append(t, "When " + c.mainName + " notices that some of the Thralls are filming their sexual encounters with " + c.himHer() + ", " + c.hisHer() + " face goes bright red and " + c.heShe() + " reflexively raises " + c.hisHer() + " hands to block the shot.  ");
+                    }
+                    switch (c.innocence / 33) {
+                        case 0: append(t, c.HeShe() + " knows it's too late to ask them to stop, but " + c.heShe() + " does ask that they keep the videos as nothing more than their own private masturbation material.  "); break;
+                        case 1: append(t, c.HeShe() + " shouts at them for taking footage of " + c.himHer() + " without asking first.  "); break;
+                        default: append(t, c.HeShe() + " protests that even if doing this sort of thing is fun, showing it to other people is way too naughty.  ");
+                    }
+                    switch (c.confidence / 33) {
+                        case 0: append(t, "The quaver in " + c.hisHer() + " voice and the tears in " + c.hisHer() + " eyes are enough to make even a Thrall feel guilty.  "); break;
+                        case 1: append(t, c.HeShe() + " even threatens to go back to fighting them.  "); break;
+                        default: append(t, "At first, they try to keep pleasuring " + c.himHer() + ", but " + c.heShe() + " swats their hands away until " + c.heShe() + "'s sure they've all gotten the message.  ");
+                    }
+                    switch (c.morality / 33) {
+                        case 0: append(t, c.HeShe() + " continues to glare at them for awhile after that, but after enough promises not to share what they filmed (and after making " + c.himHer() + " cum several more times), all is forgiven."); break;
+                        case 1: append(t, "It's only after the Thralls' phones are all put away that " + c.heShe() + " starts going back to normal."); break;
+                        default: append(t, "However, " + c.heShe() + "'s quick to forgive, and soon " + c.heShe() + "'s happily moaning with pleasure in their hands like nothing happened.");
+                    }
                 }
             } else
             if(c.timesStripped() > 0)
             {
-                if(c.dignity > 66)
-                    append(t, c.mainName + "'s face lights up when " + c.heShe() + " sees several of the surrounding Thralls pulling out their cameras.  ");
-                else
-                if(c.dignity > 33)
-                    append(t, "Even as " + c.mainName + " writhes under the hands of the Thralls all around " + c.himHer() + ", the more distant ones filming with their phones start to chant, calling for " + c.himHer() + " to make a speech.  " + c.HeShe() + " struggles to find the mental clarity to respond.  ");
-                else
-                    append(t, "More and more of the Thralls start pulling out their phones to film " + c.mainName + ", and although " + c.heShe() + "'d prefer to keep focusing on sex, " + c.heShe() + "'s grateful enough toward the Thralls to help them make some propaganda.  ");
-                if(c.morality > 66)
-                    append(t, c.HeShe() + "'s become convinced that the Thralls are the only truly good people involved in the war, and only " + c.hisHer() + " doubts about the Demon Lord himself prevent " + c.himHer() + " from switching sides on the spot.  ");
-                else
-                if(c.morality > 33)
-                    append(t, c.HeShe() + " knows exactly what the Thralls want from " + c.himHer() + ", and " + c.heShe() + "'s happy to provide it.  ");
-                else
-                    append(t, c.HeShe() + "'s eager to strike more fear and outrage into the general public that rejected " + c.himHer() + ".  ");
-                if(c.confidence > 66)
-                    append(t, c.HeShe() + " launches into a grand speech about ");
-                else
-                if(c.confidence > 33)
-                    append(t, c.HeShe() + " looks directly into the cameras and talks about ");
-                else
-                    append(t, c.HeShe() + " takes a deep breath to calm " + c.hisHer() + " nerves before speaking about ");
-                if(c.innocence > 66)
-                    append(t, "how everyone should just stop fighting the Demons and let naughty stuff be done to them until they start to enjoy it like " + c.heShe() + " did.  Perhaps fortunately for " + c.mainName + ", the pleasure from the Thralls kneeling in front of " + c.himHer() + " and behind " + c.himHer() + ", licking " + c.hisHer() + " " + organ + " and anus, causes " + c.hisHer() + " words to be more or less unintelligible.");
-                else
-                if(c.innocence > 33)
-                    append(t, "the superiority of the Demons, but " + c.heShe() + " doesn't get too far before the Thralls' hands crawling all over " + c.hisHer() + " body cause " + c.himHer() + " to cry out with another orgasm and collapse to " + c.hisHer() + " knees.  The footage of the Thralls swarming over " + c.hisHer() + " helpless body as " + c.heShe() + " screams in joyous ecstasy makes for effective propaganda as well.");
-                else
-                    append(t, "the subject of the war as a whole and how the humans' resistance is futile.  " + c.HeShe() + " manages to speak quite eloquently, which is made all the more impressive and surreal by the fact that the Thrall standing behind " + c.himHer() + " continues to tweak " + c.hisHer() + " nipple and fondle " + c.hisHer() + " " + organ + " the whole time.");
+                switch (c.dignity / 33) {
+                    case 0: append(t, "More and more of the Thralls start pulling out their phones to film " + c.mainName + ", and although " + c.heShe() + "'d prefer to keep focusing on sex, " + c.heShe() + "'s grateful enough toward the Thralls to help them make some propaganda.  "); break;
+                    case 1: append(t, "Even as " + c.mainName + " writhes under the hands of the Thralls all around " + c.himHer() + ", the more distant ones filming with their phones start to chant, calling for " + c.himHer() + " to make a speech.  " + c.HeShe() + " struggles to find the mental clarity to respond.  "); break;
+                    default: append(t, c.mainName + "'s face lights up when " + c.heShe() + " sees several of the surrounding Thralls pulling out their cameras.  ");
+                }
+                switch (c.morality / 33) {
+                    case 0: append(t, c.HeShe() + "'s eager to strike more fear and outrage into the general public that rejected " + c.himHer() + ".  "); break;
+                    case 1: append(t, c.HeShe() + " knows exactly what the Thralls want from " + c.himHer() + ", and " + c.heShe() + "'s happy to provide it.  "); break;
+                    default: append(t, c.HeShe() + "'s become convinced that the Thralls are the only truly good people involved in the war, and only " + c.hisHer() + " doubts about the Demon Lord himself prevent " + c.himHer() + " from switching sides on the spot.  ");
+                }
+                switch (c.confidence / 33) {
+                    case 0: append(t, c.HeShe() + " takes a deep breath to calm " + c.hisHer() + " nerves before speaking about "); break;
+                    case 1: append(t, c.HeShe() + " looks directly into the cameras and talks about "); break;
+                    default: append(t, c.HeShe() + " launches into a grand speech about ");
+                }
+                switch (c.innocence / 33) {
+                    case 0: append(t, "the subject of the war as a whole and how the humans' resistance is futile.  " + c.HeShe() + " manages to speak quite eloquently, which is made all the more impressive and surreal by the fact that the Thrall standing behind " + c.himHer() + " continues to tweak " + c.hisHer() + " nipple and fondle " + c.hisHer() + " " + organ + " the whole time."); break;
+                    case 1: append(t, "the superiority of the Demons, but " + c.heShe() + " doesn't get too far before the Thralls' hands crawling all over " + c.hisHer() + " body cause " + c.himHer() + " to cry out with another orgasm and collapse to " + c.hisHer() + " knees.  The footage of the Thralls swarming over " + c.hisHer() + " helpless body as " + c.heShe() + " screams in joyous ecstasy makes for effective propaganda as well."); break;
+                    default: append(t, "how everyone should just stop fighting the Demons and let naughty stuff be done to them until they start to enjoy it like " + c.heShe() + " did.  Perhaps fortunately for " + c.mainName + ", the pleasure from the Thralls kneeling in front of " + c.himHer() + " and behind " + c.himHer() + ", licking " + c.hisHer() + " " + organ + " and anus, causes " + c.hisHer() + " words to be more or less unintelligible.");
+                }
             } else
             {
-                if(c.innocence > 66)
-                    append(t, "When the Thralls ask " + c.mainName + " what " + c.heShe() + " thinks of the human governments and military, " + c.heShe() + " starts to laugh and talk about how they're all lame and " + c.heShe() + "'d rather just fight alongside the Thralls, but " + c.heShe() + " comes up short and " + c.hisHer() + " eyes go wide when " + c.heShe() + " sees that they're filming " + c.himHer() + ".  ");
-                else
-                if(c.innocence > 33)
-                    append(t, "The Thralls pull out their cameras and ask for " + c.mainName + " to denounce the human side of the war once and for all.  " + c.HeShe() + " thinks about it, but " + c.heShe() + " ultimately refuses, carefully explaining " + c.hisHer() + " reasoning to them.  ");
-                else
-                    append(t, "After making sure that none of the Thralls are filming, " + c.mainName + " uses a lull in the sexual activities to talk to them about what " + c.heShe() + " really thinks of the war.  ");
-                if(c.dignity > 66)
-                    append(t, c.HeShe() + " just enjoys what's left of " + c.hisHer() + " celebrity status too much to go against society in such a visible way, and " + c.heShe() + " knows that the Thralls want " + c.himHer() + " to be happy too.  ");
-                else
-                if(c.dignity > 33)
-                    append(t, "It's not that " + c.heShe() + " cares so much about what the general public thinks of " + c.himHer() + " anymore, but " + c.heShe() + " knows that retaining what's left of " + c.hisHer() + " reputation will have some perks.  ");
-                else
-                    append(t, c.HeShe() + " wants to help the Thralls however " + c.heShe() + " can, but " + c.heShe() + " also wants to put " + c.hisHer() + " days as a tool of propaganda behind " + c.himHer() + ".  ");
-                if(c.morality > 66)
-                    append(t, "With as much solemnity as " + c.heShe() + " can manage in the afterglow of so many consecutive orgasms, " + c.heShe() + " assures the Thralls that if the human governments ever attempt any kind of large-scale violent purge of the Thralls, then " + c.heShe() + "'ll defend them no matter what.  ");
-                else
-                if(c.morality > 33)
-                    append(t, c.HeShe() + "'d much rather do whatever feels good for all of them right now, rather than putting effort into long-term strategic matters.  ");
-                else
-                    append(t, c.HeShe() + " just doesn't really care that much about the war itself.  ");
-                if(c.confidence > 66)
-                    append(t, "Then, to signal that the talking is done, " + c.heShe() + " grabs the two nearest Thralls, kissing one hungrily on the lips and pushing the other's head down to " + c.hisHer() + " " + organ + ".");
-                else
-                if(c.confidence > 33)
-                    append(t, "The Thralls accept " + c.hisHer() + " decision without complaint, and soon " + c.heShe() + "'s back to crying out in orgasmic pleasure as the Thralls kiss and lick all over " + c.hisHer() + " body.");
-                else
-                    append(t, "When it becomes clear that the Thralls don't really mind, " + c.mainName + " sighs with deep relief, and " + c.heShe() + " practically melts into the arms of the next Thrall to embrace " + c.himHer() + ", lips trembling as " + c.heShe() + " kisses him.");
+                switch (c.innocence / 33) {
+                    case 0: append(t, "After making sure that none of the Thralls are filming, " + c.mainName + " uses a lull in the sexual activities to talk to them about what " + c.heShe() + " really thinks of the war.  "); break;
+                    case 1: append(t, "The Thralls pull out their cameras and ask for " + c.mainName + " to denounce the human side of the war once and for all.  " + c.HeShe() + " thinks about it, but " + c.heShe() + " ultimately refuses, carefully explaining " + c.hisHer() + " reasoning to them.  "); break;
+                    default: append(t, "When the Thralls ask " + c.mainName + " what " + c.heShe() + " thinks of the human governments and military, " + c.heShe() + " starts to laugh and talk about how they're all lame and " + c.heShe() + "'d rather just fight alongside the Thralls, but " + c.heShe() + " comes up short and " + c.hisHer() + " eyes go wide when " + c.heShe() + " sees that they're filming " + c.himHer() + ".  ");
+                }
+                switch (c.dignity / 33) {
+                    case 0: append(t, c.HeShe() + " wants to help the Thralls however " + c.heShe() + " can, but " + c.heShe() + " also wants to put " + c.hisHer() + " days as a tool of propaganda behind " + c.himHer() + ".  "); break;
+                    case 1: append(t, "It's not that " + c.heShe() + " cares so much about what the general public thinks of " + c.himHer() + " anymore, but " + c.heShe() + " knows that retaining what's left of " + c.hisHer() + " reputation will have some perks.  "); break;
+                    default: append(t, c.HeShe() + " just enjoys what's left of " + c.hisHer() + " celebrity status too much to go against society in such a visible way, and " + c.heShe() + " knows that the Thralls want " + c.himHer() + " to be happy too.  ");
+                }
+                switch (c.morality / 33) {
+                    case 0: append(t, c.HeShe() + " just doesn't really care that much about the war itself.  "); break;
+                    case 1: append(t, c.HeShe() + "'d much rather do whatever feels good for all of them right now, rather than putting effort into long-term strategic matters.  "); break;
+                    default: append(t, "With as much solemnity as " + c.heShe() + " can manage in the afterglow of so many consecutive orgasms, " + c.heShe() + " assures the Thralls that if the human governments ever attempt any kind of large-scale violent purge of the Thralls, then " + c.heShe() + "'ll defend them no matter what.  ");
+                }
+                switch (c.confidence / 33) {
+                    case 0: append(t, "When it becomes clear that the Thralls don't really mind, " + c.mainName + " sighs with deep relief, and " + c.heShe() + " practically melts into the arms of the next Thrall to embrace " + c.himHer() + ", lips trembling as " + c.heShe() + " kisses him."); break;
+                    case 1: append(t, "The Thralls accept " + c.hisHer() + " decision without complaint, and soon " + c.heShe() + "'s back to crying out in orgasmic pleasure as the Thralls kiss and lick all over " + c.hisHer() + " body."); break;
+                    default: append(t, "Then, to signal that the talking is done, " + c.heShe() + " grabs the two nearest Thralls, kissing one hungrily on the lips and pushing the other's head down to " + c.hisHer() + " " + organ + ".");
+                }
             }
         append(t, "\n\n");
         int previousPLEA = c.getPLEALevel();
@@ -8596,13 +8054,11 @@ public class WorldState
                 purpleAppend(t, "EXPO up!  ");
             if(c.getPLEALevel() < 5)
             {
-                if(c.innocence > 66)
-                    append(t, "The waves of intense pleasure are coming one after another, leaving " + c.mainName + "'s mind completely blank.  ");
-                else
-                if(c.innocence > 33)
-                    append(t, c.mainName + " is cumming constantly now, without even having time to catch " + c.hisHer() + " breath in between orgasms.  ");
-                else
-                    append(t, c.mainName + " is in a state of constant climax, " + c.hisHer() + " usual rationality drowning beneath an unstoppable torrent of pleasure.  ");
+                switch (c.innocence / 33) {
+                    case 0: append(t, c.mainName + " is in a state of constant climax, " + c.hisHer() + " usual rationality drowning beneath an unstoppable torrent of pleasure.  "); break;
+                    case 1: append(t, c.mainName + " is cumming constantly now, without even having time to catch " + c.hisHer() + " breath in between orgasms.  "); break;
+                    default: append(t, "The waves of intense pleasure are coming one after another, leaving " + c.mainName + "'s mind completely blank.  ");
+                }
                 if(c.gender.equals("female"))
                     append(t, c.HisHer() + " body spasms uncontrollably, fluids streaming down " + c.hisHer() + " thighs.");
                 else
@@ -9110,13 +8566,11 @@ public class WorldState
                 } else
                 {
                     Project.changePortrait(c.convertGender(), c.type, false, false, this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.JOY);
-                    if(c.innocence > 66)
-                        c.say(t, "Aaah...  Being looked at feels crazy...!");
-                    else
-                    if(c.innocence > 33)
-                        c.say(t, "Phew...  Everyone could see...");
-                    else
-                        c.say(t, "N-Now, let's do something completely different!");
+                    switch (c.innocence / 33) {
+                        case 0: c.say(t, "N-Now, let's do something completely different!"); break;
+                        case 1: c.say(t, "Phew...  Everyone could see..."); break;
+                        default: c.say(t, "Aaah...  Being looked at feels crazy...!");
+                    }
                 }
             } else
             if(c.temptReq >= 60000L)
@@ -9124,13 +8578,11 @@ public class WorldState
                 if(c.timesFantasized() > 0)
                 {
                     Project.changePortrait(c.convertGender(), c.type, false, false, this, nameCombatants(), c.combatantNumber(this), Project.Emotion.JOY, Project.Emotion.LEWD);
-                    if(c.dignity > 66)
-                        c.say(t, "They love me, they all love me...!");
-                    else
-                    if(c.dignity > 33)
-                        c.say(t, "Hahah, there's plenty of me to go around...");
-                    else
-                        c.say(t, "Ah, I love you all...!");
+                    switch (c.dignity / 33) {
+                        case 0: c.say(t, "Ah, I love you all...!"); break;
+                        case 1: c.say(t, "Hahah, there's plenty of me to go around..."); break;
+                        default: c.say(t, "They love me, they all love me...!");
+                    }
                 } else
                 if(c.confidence > 66)
                 {
@@ -9233,13 +8685,11 @@ public class WorldState
             } else
             {
                 Project.changePortrait(c.convertGender(), c.type, false, false, this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.JOY);
-                if(c.innocence > 66)
-                    c.say(t, "I'm so happy that you all taught me how good butt stuff feels!");
-                else
-                if(c.innocence > 33)
-                    c.say(t, "Yes!  Yes!  I love anal sex!");
-                else
-                    c.say(t, "Incredible...!  To stimulate the Graefenberg spot through the colon...!  Oooh!");
+                switch (c.innocence / 33) {
+                    case 0: c.say(t, "Incredible...!  To stimulate the Graefenberg spot through the colon...!  Oooh!"); break;
+                    case 1: c.say(t, "Yes!  Yes!  I love anal sex!"); break;
+                    default: c.say(t, "I'm so happy that you all taught me how good butt stuff feels!");
+                }
             }
         c.say(t, "\"");
         c.cKnown = true;
@@ -9287,13 +8737,11 @@ public class WorldState
             else
                 append(t, c.HeShe() + "'s become comfortable by now with showing off " + c.hisHer() + " body, but this doesn't seem like the time or place.");
             append(t, "  Once " + c.mainName + " arrives at the event, " + c.heShe() + " can't help but notice the way that everyone stares at " + c.hisHer() + " chest.  " + c.HisHer() + " nipples feel like they're about to slip out into the open air at any moment, and even if they don't, the bumps they make in the fabric of " + c.hisHer() + " dress are so obvious that " + c.heShe() + " might as well be topless.  " + c.HeShe() + "'s annoyed by how no one seems to be paying attention to a word " + c.heShe() + " says, and " + c.heShe() + "'s grateful when the chairman of the organization beckons " + c.himHer() + " over and gives " + c.himHer() + " an excuse to leave the crowd behind.\n\n");
-            if(c.confidence > 66)
-                c.say(t, "(They're utterly shallow.  How disappointing.)");
-            else
-            if(c.confidence > 33)
-                c.say(t, "(If they'd listen, I think I could give them some useful advice about how to help the war effort.)");
-            else
-                c.say(t, "(I can't blame them for thinking I'm only good for my body.  But still...)");
+            switch (c.confidence / 33) {
+                case 0: c.say(t, "(I can't blame them for thinking I'm only good for my body.  But still...)"); break;
+                case 1: c.say(t, "(If they'd listen, I think I could give them some useful advice about how to help the war effort.)"); break;
+                default: c.say(t, "(They're utterly shallow.  How disappointing.)");
+            }
             append(t, "\n\nThe elderly chairman offers " + c.mainName + " a seat at a small, two-person table at the edge of the room, and a few of the guests look envious at the attention " + c.heShe() + "'s getting.  When the chairman speaks, he's full of praise and flattery, taking " + c.mainName + " by the hand as his voice grows passionate.\n\n");
             append(t, "\"It's such a delight to finally meet a member of the Chosen who actually cares about the problems facing society.  Our organization may have plenty of wealthy contributors, but we lack the prestige to influence public policy and cut through the red tape to get our funds where they're needed most.  With your support, I'm sure we can do far more good than we could do alone.\"\n\n");
             append(t, c.mainName + " is so pleased to finally be taken seriously that " + c.heShe() + " lets " + c.hisHer() + " guard down.  Still holding " + c.hisHer() + " hand, the chairman slowly guides it under the table until " + c.mainName + " abruptly feels a hard, warm shaft of flesh under " + c.hisHer() + " fingertips.  ");
@@ -9324,13 +8772,11 @@ public class WorldState
             append(t, "There's a gasp of surprise from the chairman as " + c.mainName + " ducks down under the table without even being asked.  Then, he moans softly in pleasure as " + c.mainName + " closes " + c.hisHer() + " other hand, lubricated with " + c.hisHer() + " own spit, around the base of the chairman's penis.  " + c.mainName + " pumps " + c.hisHer() + " wet fist up and down, making the chairman feel like he's fucking someone under the table, and it takes all his self-control not to cum immediately.\n\n");
             append(t, "The tablecloth hanging down all around " + c.himHer() + " hides " + c.mainName + " from view.  In the darkness under the table, it feels like all " + c.hisHer() + " other senses are sharper.  The chairman's cock smells different from those of the Thralls, and " + c.mainName + " realizes that it must be because he had sex just before the dinner.\n\n");
             c.say(t, "(");
-            if(c.innocence > 66)
-                c.say(t, "I wonder if it tastes different, too...");
-            else
-            if(c.innocence > 33)
-                c.say(t, "Ah, I spaced out and took too long.  Now I have to lubricate it again...");
-            else
-                c.say(t, "I see.  If he's already sated, then I must use more effective techniques in order to bring him to climax again.");
+            switch (c.innocence / 33) {
+                case 0: c.say(t, "I see.  If he's already sated, then I must use more effective techniques in order to bring him to climax again."); break;
+                case 1: c.say(t, "Ah, I spaced out and took too long.  Now I have to lubricate it again..."); break;
+                default: c.say(t, "I wonder if it tastes different, too...");
+            }
             c.say(t, ")\n\n");
             append(t, c.mainName + "'s lips touch the tip of the cock, and " + c.heShe() + " pokes " + c.hisHer() + " tongue out, then starts licking it outright.  " + c.HeShe() + " works " + c.hisHer() + " way from the root to tip and then back again, slathering it in " + c.hisHer() + " spit, then lowers " + c.himHer() + "self further and takes the testicles into " + c.hisHer() + " mouth, " + c.hisHer() + " hand making wet sounds as it slides up and down the shaft.  The longer " + c.heShe() + " continues, the more the world seems to shrink down to " + c.himHer() + "self and the penis " + c.heShe() + "'s servicing.  " + c.HeShe() + " stops dwelling on the fact that " + c.heShe() + " doesn't really want to be there, and instead takes satisfaction and pride in the chairman's inability to hide his pleasured reactions.\n\n");
             append(t, "By the time " + c.mainName + " is done, " + c.heShe() + " isn't even trying to finish quickly.  Every time the chairman's member starts twitching and his hips start jerking forward, " + c.mainName + " slows down a bit, gently kissing the underside of the shaft and trailing " + c.hisHer() + " fingers across the scrotum.  When " + c.heShe() + " finally decides to take it into " + c.hisHer() + " mouth completely, the chairman loses control and grabs " + c.himHer() + " by the hair, ramming his cock all the way down " + c.mainName + "'s throat as he cums.  ");
@@ -9407,35 +8853,29 @@ public class WorldState
                     append(t, "start pumping " + c.hisHer() + " own cock - but with much more purposeful, steady motions than the one " + c.heShe() + " had been using on the one now in " + c.hisHer() + " mouth.  ");
                 append(t, "The two of them cum together, " + c.givenName + "'s eyes rolling upward with ecstasy as " + c.heShe() + " swallows every last drop.\n\n");
                 Project.changePortrait(c.convertGender(), c.type, true, false, this, nameDisplay, 0, Project.Emotion.LEWD, Project.Emotion.LEWD);
-                if(c.morality > 66)
-                    c.say(t, "(I love... making people happy...)");
-                else
-                if(c.morality > 33)
-                    c.say(t, "(I should do this more often...)");
-                else
-                    c.say(t, "(Amazing... I want to rape him even more...!)");
+                switch (c.morality / 33) {
+                    case 0: c.say(t, "(Amazing... I want to rape him even more...!)"); break;
+                    case 1: c.say(t, "(I should do this more often...)"); break;
+                    default: c.say(t, "(I love... making people happy...)");
+                }
             } else
             {
                 append(t, "\n\nWhen " + c.givenName + " curls " + c.hisHer() + " finger, " + c.hisHer() + " partner gives one last helpless cry, then cums all over himself, gasping and shuddering in the afterglow.  " + c.givenName + " looks down at him with a faintly dissatisfied expression.\n\n");
                 c.say(t, "\"");
                 Project.changePortrait(c.convertGender(), c.type, true, false, this, nameDisplay, 0, Project.Emotion.ANGER, Project.Emotion.ANGER);
-                if(c.morality > 66)
-                    c.say(t, "Tell me the truth.  Is this what you wanted from me all along?");
-                else
-                if(c.morality > 33)
-                    c.say(t, "That was too easy.");
-                else
-                    c.say(t, "I didn't give you permission to finish.  Looks like I need to punish you.");
+                switch (c.morality / 33) {
+                    case 0: c.say(t, "I didn't give you permission to finish.  Looks like I need to punish you."); break;
+                    case 1: c.say(t, "That was too easy."); break;
+                    default: c.say(t, "Tell me the truth.  Is this what you wanted from me all along?");
+                }
                 c.say(t, "\"");
             }
             String description = "";
-            if(c.morality > 66)
-                description = c.mainName + " enlists a friend in order to practice " + c.hisHer() + " sexual techniques.";
-            else
-            if(c.morality > 33)
-                description = "In order to satisfy " + c.hisHer() + " lewd curiosity, " + c.mainName + " services one of " + c.hisHer() + " friends.";
-            else
-                description = c.mainName + " pressures one of " + c.hisHer() + " friends into a sexual situation.";
+            switch (c.morality / 33) {
+                case 0: description = c.mainName + " pressures one of " + c.hisHer() + " friends into a sexual situation."; break;
+                case 1: description = "In order to satisfy " + c.hisHer() + " lewd curiosity, " + c.mainName + " services one of " + c.hisHer() + " friends."; break;
+                default: description = c.mainName + " enlists a friend in order to practice " + c.hisHer() + " sexual techniques.";
+            }
             save.saveScene(34, c.mainName, description);
         } else
         if(id == 2)
@@ -9503,13 +8943,11 @@ public class WorldState
             else
                 append(t, ", squeezing " + c.hisHer() + " breasts under " + c.hisHer() + " " + c.topDesc() + " and then pinching " + c.hisHer() + " nipples between thumb and forefinger.\n\n");
             c.say(t, "\"");
-            if(c.morality > 66)
-                c.say(t, "It hurts... please, sto-oooh!");
-            else
-            if(c.morality > 33)
-                c.say(t, "Not so... rough...!  Nnah!");
-            else
-                c.say(t, "Gh...  You dirty... piece of... gaaah!");
+            switch (c.morality / 33) {
+                case 0: c.say(t, "Gh...  You dirty... piece of... gaaah!"); break;
+                case 1: c.say(t, "Not so... rough...!  Nnah!"); break;
+                default: c.say(t, "It hurts... please, sto-oooh!");
+            }
             c.say(t, "\"\n\n");
             append(t, "The fan shuts " + c.himHer() + " up with a sharp slap on " + c.hisHer() + " bottom.  The impact is painful, but more shamefully, it also feels somehow good.  Between the direct stimulation down below, the jolts that run through " + c.hisHer() + " whole body with every tug on " + c.hisHer() + " nipples, and the occasional shocking spank, " + c.heShe() + "'s getting more and more turned on.  " + c.HeShe() + " can't stop thinking about whether " + c.hisHer() + " resentment toward this man might cause " + c.hisHer() + " Sexual Barrier to fail - and a part of " + c.himHer() + " even wishes it would.\n\n");
             append(t, "As the thrusts get harder and faster, the man's pelvis slamming against " + c.hisHer() + " butt again and again, " + c.mainName + " reaches back and ");
@@ -9519,13 +8957,11 @@ public class WorldState
                 append(t, "covers " + c.hisHer() + " crotch with one hand.  The touch makes " + c.himHer() + " shiver with pleasure, and " + c.heShe() + " can feel " + c.hisHer() + " wetness dripping between " + c.hisHer() + " fingers");
             append(t, ", but " + c.heShe() + " won't admit to him (or to " + c.himHer() + "self) that " + c.heShe() + "'s feeling good.  " + c.HeShe() + " glares back at him, clenching " + c.hisHer() + " teeth.\n\n");
             c.say(t, "\"");
-            if(c.confidence > 66)
-                c.say(t, "If you put it inside... I swear I'll... kill...!");
-            else
-            if(c.confidence > 33)
-                c.say(t, "Stop trying to make me... enjoy it...!  I-It isn't working...!");
-            else
-                c.say(t, "If you didn't have that video... I-I'd...!");
+            switch (c.confidence / 33) {
+                case 0: c.say(t, "If you didn't have that video... I-I'd...!"); break;
+                case 1: c.say(t, "Stop trying to make me... enjoy it...!  I-It isn't working...!"); break;
+                default: c.say(t, "If you put it inside... I swear I'll... kill...!");
+            }
             c.say(t, "\"\n\n");
             append(t, "One last spank causes " + c.mainName + " to whine and shudder, limbs seizing up.  ");
             if(!c.vVirg && !c.gender.equals("male"))
@@ -9553,13 +8989,11 @@ public class WorldState
             }
             c.say(t, "\"");
             String description = "";
-            if(c.innocence > 66)
-                description = "The gullible " + c.mainName + " is tricked into doing sexual favors.";
-            else
-            if(c.innocence > 33)
-                description = "Preying on " + c.mainName + "'s hunger for fame, a malicious fan forces " + c.himHer() + " to service him in exchange for keeping a video private.";
-            else
-                description = "Now that " + c.mainName + " is more comfortable with sexual activities, a fan finds it easy to pressure " + c.himHer() + " into pleasuring him.";
+            switch (c.innocence / 33) {
+                case 0: description = "Now that " + c.mainName + " is more comfortable with sexual activities, a fan finds it easy to pressure " + c.himHer() + " into pleasuring him."; break;
+                case 1: description = "Preying on " + c.mainName + "'s hunger for fame, a malicious fan forces " + c.himHer() + " to service him in exchange for keeping a video private."; break;
+                default: description = "The gullible " + c.mainName + " is tricked into doing sexual favors.";
+            }
             save.saveScene(35, c.mainName, description);
         } else
         if(id == 3)
@@ -9658,13 +9092,11 @@ public class WorldState
             }
             c.say(t, "\"");
             String description = "";
-            if(c.dignity > 66)
-                description = c.mainName + " tries to use bodypaint to protect " + c.hisHer() + " modesty, only to end up putting on an even bigger show.";
-            else
-            if(c.dignity > 33)
-                description = "Bothered by the embarrassment of being exposed in public, " + c.mainName + " assuages " + c.hisHer() + " feelings with a thin layer of bodypaint.";
-            else
-                description = "Rather than having to worry about keeping " + c.himHer() + "self covered in front of the cameras, " + c.mainName + " tries turning to bodypaint instead, with mixed results.";
+            switch (c.dignity / 33) {
+                case 0: description = "Rather than having to worry about keeping " + c.himHer() + "self covered in front of the cameras, " + c.mainName + " tries turning to bodypaint instead, with mixed results."; break;
+                case 1: description = "Bothered by the embarrassment of being exposed in public, " + c.mainName + " assuages " + c.hisHer() + " feelings with a thin layer of bodypaint."; break;
+                default: description = c.mainName + " tries to use bodypaint to protect " + c.hisHer() + " modesty, only to end up putting on an even bigger show.";
+            }
             save.saveScene(36, c.mainName, description);
         } else
         if(id == 4)
@@ -9742,35 +9174,29 @@ public class WorldState
                 Project.changePortrait(c.convertGender(), c.type, false, false, this, nameDisplay, 0, Project.Emotion.FOCUS, Project.Emotion.FOCUS);
                 append(t, c.mainName + " licks " + c.hisHer() + " lips.\n\n");
                 c.say(t, "\"");
-                if(c.innocence > 66)
-                    c.say(t, "That sounds... really fun.");
-                else
-                if(c.innocence > 33)
-                    c.say(t, "Of course I'm taking you all with me.  And I'm not letting you go home until I'm satisfied.");
-                else
-                    c.say(t, "This experience was quite... stimulating, wasn't it?  Yes, let us continue elsewhere.");
+                switch (c.innocence / 33) {
+                    case 0: c.say(t, "This experience was quite... stimulating, wasn't it?  Yes, let us continue elsewhere."); break;
+                    case 1: c.say(t, "Of course I'm taking you all with me.  And I'm not letting you go home until I'm satisfied."); break;
+                    default: c.say(t, "That sounds... really fun.");
+                }
             } else
             {
                 Project.changePortrait(c.convertGender(), c.type, false, false, this, nameDisplay, 0, Project.Emotion.JOY, Project.Emotion.JOY);
                 append(t, c.mainName + " is delighted by the attention, but " + c.heShe() + " has no interest in letting things progress any further than that.  " + c.HeShe() + " smirk over " + c.hisHer() + " shoulder as " + c.heShe() + " walks past them and leaves.\n\n");
                 c.say(t, "\"\"");
-                if(c.innocence > 66)
-                    c.say(t, "Sorry, but I'm totally out of your league!");
-                else
-                if(c.innocence > 33)
-                    c.say(t, "Hah, don't get greedy!  Maybe we can do this again sometime!");
-                else
-                    c.say(t, "You'll have to satisfy yourselves, I'm afraid.");
+                switch (c.innocence / 33) {
+                    case 0: c.say(t, "You'll have to satisfy yourselves, I'm afraid."); break;
+                    case 1: c.say(t, "Hah, don't get greedy!  Maybe we can do this again sometime!"); break;
+                    default: c.say(t, "Sorry, but I'm totally out of your league!");
+                }
             }
             c.say(t, "\"");
             String description = "";
-            if(c.morality > 66)
-                description = c.mainName + " consents to participating in a sexually-charged propaganda photoshoot.";
-            else
-            if(c.morality > 33)
-                description = "Wanting to feel better about the humiliating pictures that have been taken of " + c.himHer() + ", " + c.mainName + " allows " + c.himHer() + "self to be photographed in the nude.";
-            else
-                description = c.mainName + " uses " + c.hisHer() + " sex appeal in an attempt to win over more horny fans.";
+            switch (c.morality / 33) {
+                case 0: description = c.mainName + " uses " + c.hisHer() + " sex appeal in an attempt to win over more horny fans."; break;
+                case 1: description = "Wanting to feel better about the humiliating pictures that have been taken of " + c.himHer() + ", " + c.mainName + " allows " + c.himHer() + "self to be photographed in the nude."; break;
+                default: description = c.mainName + " consents to participating in a sexually-charged propaganda photoshoot.";
+            }
             save.saveScene(37, c.mainName, description);
         } else
         if(id == 5)
@@ -9850,13 +9276,11 @@ public class WorldState
             }
             c.say(t, "\"");
             String description = "";
-            if(c.confidence > 66)
-                description = c.mainName + " is provoked into a shameful display of emotion upon being criticized for " + c.hisHer() + " public sexual behavior.";
-            else
-            if(c.confidence > 33)
-                description = "While behaving improperly at a public event, " + c.mainName + " is stripped in front of everyone.";
-            else
-                description = "Confronted with " + c.hisHer() + " betrayal of " + c.hisHer() + " once-pure public image, " + c.mainName + " flees a public event in tears.";
+            switch (c.confidence / 33) {
+                case 0: description = "Confronted with " + c.hisHer() + " betrayal of " + c.hisHer() + " once-pure public image, " + c.mainName + " flees a public event in tears."; break;
+                case 1: description = "While behaving improperly at a public event, " + c.mainName + " is stripped in front of everyone."; break;
+                default: description = c.mainName + " is provoked into a shameful display of emotion upon being criticized for " + c.hisHer() + " public sexual behavior.";
+            }
             save.saveScene(38, c.mainName, description);
         } else
         if(id == 6)
@@ -9882,13 +9306,11 @@ public class WorldState
                 append(t, c.givenName + " has picked out the most popular recent superhero flick for them to watch, and " + c.heShe() + " quickly gets caught up in it, frequently jumping out of " + c.hisHer() + " seat in enthusiasm, much to " + d.givenName + "'s amusement.\n\n");
                 c.say(t, "\"Yeah!  Pow!  Punch him right into the center of the Earth!\"\n\n");
                 d.say(t, "\"");
-                if(d.dignity > 66)
-                    d.say(t, "Um, " + c.givenName + ", you're bothering the other...  Ah, never mind, as long as you're happy...");
-                else
-                if(d.dignity > 33)
-                    d.say(t, "I wish I could be as carefree as " + c.givenName + "...");
-                else
-                    d.say(t, "Y-Yeah, get him!");
+                switch (d.dignity / 33) {
+                    case 0: d.say(t, "Y-Yeah, get him!"); break;
+                    case 1: d.say(t, "I wish I could be as carefree as " + c.givenName + "..."); break;
+                    default: d.say(t, "Um, " + c.givenName + ", you're bothering the other...  Ah, never mind, as long as you're happy...");
+                }
                 d.say(t, "\"\n\n");
                 append(t, "However, by the second half of the movie, the action has died down and there are several dialogue scenes in a row which make no sense to anyone who hasn't read the comic books.  " + c.givenName + " leans back, yawning with boredom, and carelessly throws an arm around " + d.givenName + "'s shoulders.  " + c.HeShe() + " doesn't put any thought into the gesture, and " + c.heShe() + " doesn't even notice the effect it has on " + d.givenName + ".  ");
             } else
@@ -9896,13 +9318,11 @@ public class WorldState
             {
                 append(t, c.givenName + " picked out the steamiest romance movie " + c.heShe() + " could find, purely to see the effect it would have on " + d.givenName + ".  " + c.HeShe() + " isn't disappointed, as " + d.givenName + " is soon blushing, fidgeting, and trying to hide sidelong glances in " + c.givenName + "'s direction.  " + c.givenName + " pulls " + d.givenName + " to " + c.himHer() + " with an arm around " + d.hisHer() + " shoulders, leaning in with a slightly mischievous smirk.\n\n");
                 c.say(t, "\"What's wrong, " + d.givenName + "?  Do we need to leave early?\"\n\n");
-                if(d.dignity > 66)
-                    d.say(t, "N-N-Nothing's wrong!  I-I'm perfectly fine!");
-                else
-                if(d.dignity > 33)
-                    d.say(t, "Y-You're making fun of me, aren't you...?");
-                else
-                    d.say(t, "Um, seeing this is just making me think about doing some really naughty things... with you...");
+                switch (d.dignity / 33) {
+                    case 0: d.say(t, "Um, seeing this is just making me think about doing some really naughty things... with you..."); break;
+                    case 1: d.say(t, "Y-You're making fun of me, aren't you...?"); break;
+                    default: d.say(t, "N-N-Nothing's wrong!  I-I'm perfectly fine!");
+                }
                 d.say(t, "\"");
                 append(t, c.givenName + " laughs and hugs " + d.himHer() + " closer.  ");
             } else
@@ -9910,13 +9330,11 @@ public class WorldState
                 append(t, c.givenName + " has decided to take " + d.givenName + " to see a historical drama by a critically-acclaimed director.  It's only after they're both seated that " + c.givenName + " realizes that " + c.hisHer() + " choice of movie might not suit " + d.givenName + ".\n\n");
                 c.say(t, "\"Hm.  I hope this does not bore you.\"\n\n");
                 d.say(t, "\"");
-                if(d.morality > 66)
-                    d.say(t, "It's fine, really!  I want to understand the stuff you're always talking about, so... I'm happy with this.");
-                else
-                if(d.morality > 33)
-                    d.say(t, "I'll still be happy, a-as long as you're here...");
-                else
-                    d.say(t, "W-Well... if it does... you'll make it up to me, right...?");
+                switch (d.morality / 33) {
+                    case 0: d.say(t, "W-Well... if it does... you'll make it up to me, right...?"); break;
+                    case 1: d.say(t, "I'll still be happy, a-as long as you're here..."); break;
+                    default: d.say(t, "It's fine, really!  I want to understand the stuff you're always talking about, so... I'm happy with this.");
+                }
                 d.say(t, "\"\n\n");
                 append(t, c.givenName + ", pleased with " + d.givenName + "'s answer, smiles and throws an arm around " + d.hisHer() + " shoulders as the movie starts.  It's meant to be a purely platonic, friendly gesture, but it feels very different to " + d.givenName + ".  ");
             }
@@ -9933,13 +9351,11 @@ public class WorldState
                 else
                     append(t, "their dampness and the stiff bulge within.\n\n");
                 c.say(t, "\"");
-                if(c.innocence > 66)
-                    c.say(t, "If you wanna do naughty stuff, you should just say so!  Come on, try it!");
-                else
-                if(c.innocence > 33)
-                    c.say(t, "If you want something, you know you just have to ask for it~");
-                else
-                    c.say(t, "If I'm to proceed further than this, I will need your consent.  Make sure to say it properly.");
+                switch (c.innocence / 33) {
+                    case 0: c.say(t, "If I'm to proceed further than this, I will need your consent.  Make sure to say it properly."); break;
+                    case 1: c.say(t, "If you want something, you know you just have to ask for it~"); break;
+                    default: c.say(t, "If you wanna do naughty stuff, you should just say so!  Come on, try it!");
+                }
                 c.say(t, "\"\n\n");
                 d.say(t, "\"I... I want to have s-sex with you... please...!\"\n\n");
             } else
@@ -9955,13 +9371,11 @@ public class WorldState
                     append(t, d.HisHer() + " eager cock stands upright, and " + d.hisHer() + " thighs glisten with " + d.hisHer() + " arousal.\n\n");
                 d.say(t, "\"Please, " + c.givenName + ", I... I need you...\"\n\n");
                 c.say(t, "\"");
-                if(c.innocence > 66)
-                    c.say(t, "Wow, that was fast!  Let me get ready too!");
-                else
-                if(c.innocence > 33)
-                    c.say(t, "You're so cute, " + d.givenName + ".");
-                else
-                    c.say(t, "Then let's not waste any time.");
+                switch (c.innocence / 33) {
+                    case 0: c.say(t, "Then let's not waste any time."); break;
+                    case 1: c.say(t, "You're so cute, " + d.givenName + "."); break;
+                    default: c.say(t, "Wow, that was fast!  Let me get ready too!");
+                }
                 c.say(t, "\"\n\n");
             } else
             {
@@ -9976,13 +9390,11 @@ public class WorldState
                 append(t, " as " + d.heShe() + " stares up at " + c.himHer() + " with teary-eyed desire.\n\n");
                 d.say(t, "\"I'm ready for you...\"\n\n");
                 c.say(t, "\"");
-                if(c.morality > 66)
-                    c.say(t, "Oh, my.  I'm impressed that you were able to contain yourself.");
-                else
-                if(c.morality > 33)
-                    c.say(t, "I'm ready, too.");
-                else
-                    c.say(t, "You'd better be.");
+                switch (c.morality / 33) {
+                    case 0: c.say(t, "You'd better be."); break;
+                    case 1: c.say(t, "I'm ready, too."); break;
+                    default: c.say(t, "Oh, my.  I'm impressed that you were able to contain yourself.");
+                }
                 c.say(t, "\"\n\n");
             }
             if(c.gender.equals("female") && !d.gender.equals("female") && (!c.vVirg || !c.aVirg || c.pastTempted) || d.vVirg && (d.gender.equals("male") || d.aVirg && d.pastTempted))
@@ -10047,25 +9459,21 @@ public class WorldState
                 else
                     append(t, "own penis");
                 append(t, " in order to stimulate " + c.himHer() + "self from the inside and the outside at once.\n\n");
-                if(c.innocence > 66)
-                    c.say(t, "\"" + d.givenName + "!  " + d.givenName + "!  " + d.givenName + "~!\"\n\n");
-                else
-                if(c.innocence > 33)
-                    c.say(t, "\"Nng!  There...!\"\n\n");
-                else
-                    c.say(t, "\"Let us climax... together...!\"\n\n");
+                switch (c.innocence / 33) {
+                    case 0: c.say(t, "\"Let us climax... together...!\"\n\n"); break;
+                    case 1: c.say(t, "\"Nng!  There...!\"\n\n"); break;
+                    default: c.say(t, "\"" + d.givenName + "!  " + d.givenName + "!  " + d.givenName + "~!\"\n\n");
+                }
                 append(t, c.HeShe() + " tightens further, gripping " + d.givenName + " as " + c.heShe() + " pumps up and down.  " + d.givenName + " throws " + d.hisHer() + " head back as " + d.heShe() + " feels " + d.hisHer() + " pleasure pass the point of no return, and then, in a rare show of lust-induced assertiveness, wraps " + d.hisHer() + " arms around " + c.givenName + ", pulling " + c.himHer() + " into a deep embrace.  They kiss as they both cum, " + c.givenName + "'s inner walls spasming and ");
                 if(d.gender.equals("female"))
                     append(t, "transmitting the feeling through the belt to " + d.givenName + "'s most sensitive place as well.\n\n");
                 else
                     append(t, "ushering each spurt of " + d.givenName + "'s cum deep into " + c.hisHer() + " womb.\n\n");
-                if(d.innocence > 66)
-                    d.say(t, "\"Ah... wow...\"");
-                else
-                if(d.innocence > 33)
-                    d.say(t, "\"I love you... I love you so much...\"");
-                else
-                    d.say(t, "\"D-Did you enjoy that as well...?  I'm glad...\"");
+                switch (d.innocence / 33) {
+                    case 0: d.say(t, "\"D-Did you enjoy that as well...?  I'm glad...\""); break;
+                    case 1: d.say(t, "\"I love you... I love you so much...\""); break;
+                    default: d.say(t, "\"Ah... wow...\"");
+                }
             } else
             {
                 if(c.gender.equals("female"))
@@ -10095,37 +9503,31 @@ public class WorldState
                 {
                     c.say(t, "\"Are you alright?\"\n\n");
                     d.say(t, "\"");
-                    if(d.dignity > 66)
-                        d.say(t, "I-I'm fine, just worry about making yourself feel good!");
-                    else
-                    if(d.dignity > 33)
-                        d.say(t, "Y-Yes!  Please, faster, harder...!");
-                    else
-                        d.say(t, "Ooh...  Y-Yeah, this feels good...");
+                    switch (d.dignity / 33) {
+                        case 0: d.say(t, "Ooh...  Y-Yeah, this feels good..."); break;
+                        case 1: d.say(t, "Y-Yes!  Please, faster, harder...!"); break;
+                        default: d.say(t, "I-I'm fine, just worry about making yourself feel good!");
+                    }
                     d.say(t, "\"\n\n");
                 } else
                 if(c.morality > 33)
                 {
                     d.say(t, "\"");
-                    if(d.dignity > 66)
-                        d.say(t, "Mmf!  Ah, haaah...");
-                    else
-                    if(d.dignity > 33)
-                        d.say(t, "Oh!  Wow!");
-                    else
-                        d.say(t, "Aaah!  I'm already...!");
+                    switch (d.dignity / 33) {
+                        case 0: d.say(t, "Aaah!  I'm already...!"); break;
+                        case 1: d.say(t, "Oh!  Wow!"); break;
+                        default: d.say(t, "Mmf!  Ah, haaah...");
+                    }
                     d.say(t, "\"\n\n");
                     c.say(t, "\"I'm going to start moving.\"\n\n");
                 } else
                 {
                     d.say(t, "\"");
-                    if(d.dignity > 66)
-                        d.say(t, "Nn!  P-Please, a little slower...!");
-                    else
-                    if(d.dignity > 33)
-                        d.say(t, "Y-You're being... a little rough...!");
-                    else
-                        d.say(t, "Aaagh!  Y-You're gonna split me in haaalf!");
+                    switch (d.dignity / 33) {
+                        case 0: d.say(t, "Aaagh!  Y-You're gonna split me in haaalf!"); break;
+                        case 1: d.say(t, "Y-You're being... a little rough...!"); break;
+                        default: d.say(t, "Nn!  P-Please, a little slower...!");
+                    }
                     d.say(t, "\"\n\n");
                     c.say(t, "\"Don't try to pretend you don't love it!\"\n\n");
                 }
@@ -10136,13 +9538,11 @@ public class WorldState
                     append(t, "The pleasurable friction of thrusting in and out of " + d.givenName + "'s inner walls is enough to quickly push " + c.givenName + " over the edge into orgasm, but " + c.heShe() + " doesn't let " + c.himHer() + "self slow down, repeatedly ramming " + d.givenName + "'s deepest spot in time with the spurts of cum " + c.heShe() + "'s shooting into " + d.himHer() + ".  Even when " + d.givenName + " starts to cum as well, " + c.givenName + " only intensifies " + c.hisHer() + " movements, ");
                 append(t, "causing " + d.himHer() + " to cry out incoherently at the overwhelming stimulation.\n\n");
                 d.say(t, "\"");
-                if(d.innocence > 66)
-                    d.say(t, "Ah!  Ah!  Aghaghah, nhoooh!");
-                else
-                if(d.innocence > 33)
-                    d.say(t, c.givenName + ", ah, ah, aaahl, I love you, love you, love youuu!");
-                else
-                    d.say(t, "Nhaaah, t-too muuuch!  I'm going insaaane!");
+                switch (d.innocence / 33) {
+                    case 0: d.say(t, "Nhaaah, t-too muuuch!  I'm going insaaane!"); break;
+                    case 1: d.say(t, c.givenName + ", ah, ah, aaahl, I love you, love you, love youuu!"); break;
+                    default: d.say(t, "Ah!  Ah!  Aghaghah, nhoooh!");
+                }
                 d.say(t, "\"\n\n");
                 if(c.gender.equals("female") && d.gender.equals("female"))
                     append(t, "With their clits rubbing together, it's not too long before " + c.givenName + " cums as well.  " + c.HisHer() + " legs start to wobble and spasm, and " + c.heShe() + " has no choice but to show mercy on " + d.givenName + ".  They slump to the floor together.  ");
@@ -10153,13 +9553,11 @@ public class WorldState
                     append(t, "It's only after they're both completely spent, " + d.givenName + "'s penis flopping limply after shooting its entire load all over " + d.himHer() + ", that " + c.givenName + " finally allows " + c.himHer() + "self to slump to the floor, carrying " + d.givenName + " with " + c.himHer() + ".  ");
                 append(t, "Without pulling out, " + c.givenName + " rolls so that the two of them are side-by-side facing each other.  " + d.givenName + "'s eyes are still fluttering, body trembling with the aftershocks of " + d.hisHer() + " intense orgasm.  " + c.givenName + " kisses " + d.himHer() + " deeply, running a hand through " + d.hisHer() + " hair.\n\n");
                 c.say(t, "\"");
-                if(c.innocence > 66)
-                    c.say(t, "Ah, " + d.givenName + "...!  I'm gonna love you lots and lots more!");
-                else
-                if(c.innocence > 33)
-                    c.say(t, "Was it too much for you?  Well, I suppose we can take a little break.");
-                else
-                    c.say(t, "I've been looking forward to showing you that technique.  It seems it was more than satisfactory.");
+                switch (c.innocence / 33) {
+                    case 0: c.say(t, "I've been looking forward to showing you that technique.  It seems it was more than satisfactory."); break;
+                    case 1: c.say(t, "Was it too much for you?  Well, I suppose we can take a little break."); break;
+                    default: c.say(t, "Ah, " + d.givenName + "...!  I'm gonna love you lots and lots more!");
+                }
                 c.say(t, "\"");
             }
             Project.changePortrait(c.convertGender(), c.type, true, false, this, nameDisplay, 0, Project.Emotion.JOY, Project.Emotion.JOY);
@@ -10195,13 +9593,11 @@ public class WorldState
                 append(t, c.givenName + " hands " + d.givenName + " a finely-wrapped giftbox, then takes a seat and watches with a small smirk as " + d.heShe() + " opens it.\n\n");
                 c.say(t, "\"Go on.  I believe you'll find that they all suit you perfectly.\"\n\n");
                 d.say(t, "\"");
-                if(d.innocence > 66)
-                    d.say(t, "Th-This is really fancy...  Um, could you help me with the ribbon...?");
-                else
-                if(d.innocence > 33)
-                    d.say(t, "You're so generous, " + c.givenName + "!  Let me just open it and take a-  Ah?  Um...  Wow.");
-                else
-                    d.say(t, "Y-You didn't need to give me anything, I don't really deserve-  W-Wait, what is this!?");
+                switch (d.innocence / 33) {
+                    case 0: d.say(t, "Y-You didn't need to give me anything, I don't really deserve-  W-Wait, what is this!?"); break;
+                    case 1: d.say(t, "You're so generous, " + c.givenName + "!  Let me just open it and take a-  Ah?  Um...  Wow."); break;
+                    default: d.say(t, "Th-This is really fancy...  Um, could you help me with the ribbon...?");
+                }
                 d.say(t, "\"\n\n");
                 append(t, "Inside the box are some very expensive-looking, very adult toys.  ");
             } else
@@ -10209,13 +9605,11 @@ public class WorldState
             {
                 append(t, c.givenName + " takes a newly-arrived package from next to the door.  " + c.HeShe() + " hands it to " + d.givenName + ", then chuckles at the way " + d.hisHer() + " eyebrows raise when " + d.heShe() + " reads the label.\n\n");
                 d.say(t, "\"");
-                if(d.innocence > 66)
-                    d.say(t, "Adult... Implements...  Oh!  Th-This is something naughty, isn't it...?");
-                else
-                if(d.innocence > 33)
-                    d.say(t, "S-Sex toys?  You got me sex toys?");
-                else
-                    d.say(t, "Oh!  I recognize this vendor!  Ah, n-not from personal use or anything...!");
+                switch (d.innocence / 33) {
+                    case 0: d.say(t, "Oh!  I recognize this vendor!  Ah, n-not from personal use or anything...!"); break;
+                    case 1: d.say(t, "S-Sex toys?  You got me sex toys?"); break;
+                    default: d.say(t, "Adult... Implements...  Oh!  Th-This is something naughty, isn't it...?");
+                }
                 d.say(t, "\"\n\n");
                 c.say(t, "\"Go on, open it already!\"\n\n");
                 append(t, "At " + c.givenName + "'s instruction, " + d.givenName + " opens the box, and the contents spill onto " + d.hisHer() + " lap.  ");
@@ -10224,13 +9618,11 @@ public class WorldState
                 append(t, c.givenName + " grabs some items off " + c.hisHer() + " nightstand and shoves them into " + d.givenName + "'s arms, grinning at " + d.hisHer() + " startled reaction.\n\n");
                 c.say(t, "\"We're going to be trying these out tonight!\"\n\n");
                 d.say(t, "\"");
-                if(d.innocence > 66)
-                    d.say(t, "Huh?  Oh, wow, these are super cute!  But wait, where does this part go?");
-                else
-                if(d.innocence > 33)
-                    d.say(t, "This is...  Oh!  Um, really, t-tonight...?");
-                else
-                    d.say(t, "Ah, y-yes.  Please give me a moment to, um... get undressed...");
+                switch (d.innocence / 33) {
+                    case 0: d.say(t, "Ah, y-yes.  Please give me a moment to, um... get undressed..."); break;
+                    case 1: d.say(t, "This is...  Oh!  Um, really, t-tonight...?"); break;
+                    default: d.say(t, "Huh?  Oh, wow, these are super cute!  But wait, where does this part go?");
+                }
                 d.say(t, "\"\n\n");
                 append(t, d.mainName + " turns the items over in " + d.hisHer() + " hands.  ");
             }
@@ -10245,38 +9637,32 @@ public class WorldState
             {
                 d.say(t, "\"Everyone... can see...!  Nnn!\"\n\n");
                 c.say(t, "\"");
-                if(c.morality > 66)
-                    c.say(t, "A housepet like you doesn't need to worry about being seen naked.");
-                else
-                if(c.morality > 33)
-                    c.say(t, "Then you'd better hurry.");
-                else
-                    c.say(t, "Not from this far away.  Let's get closer.");
+                switch (c.morality / 33) {
+                    case 0: c.say(t, "Not from this far away.  Let's get closer."); break;
+                    case 1: c.say(t, "Then you'd better hurry."); break;
+                    default: c.say(t, "A housepet like you doesn't need to worry about being seen naked.");
+                }
                 c.say(t, "\"\n\n");
             } else
             if(d.dignity > 33)
             {
                 c.say(t, "\"");
-                if(c.morality > 66)
-                    c.say(t, "If you can think clearly enough to worry, then I suppose I need to turn the vibration up.");
-                else
-                if(c.morality > 33)
-                    c.say(t, "The longer you take, the more I'm going to turn the vibration up.");
-                else
-                    c.say(t, "Let's see how loud you can squeal.  I'm turning the vibration up to max.");
+                switch (c.morality / 33) {
+                    case 0: c.say(t, "Let's see how loud you can squeal.  I'm turning the vibration up to max."); break;
+                    case 1: c.say(t, "The longer you take, the more I'm going to turn the vibration up."); break;
+                    default: c.say(t, "If you can think clearly enough to worry, then I suppose I need to turn the vibration up.");
+                }
                 c.say(t, "\"\n\n");
                 d.say(t, "\"Ah!  Nnnaaah!\"\n\n");
             } else
             {
                 d.say(t, "\"I feel like I'm gonna get raped...!\"\n\n");
                 c.say(t, "\"");
-                if(c.morality > 66)
-                    c.say(t, "I'll protect you.");
-                else
-                if(c.morality > 33)
-                    c.say(t, "That's turning you on, isn't it?");
-                else
-                    c.say(t, "I might rape you right here.");
+                switch (c.morality / 33) {
+                    case 0: c.say(t, "I might rape you right here."); break;
+                    case 1: c.say(t, "That's turning you on, isn't it?"); break;
+                    default: c.say(t, "I'll protect you.");
+                }
                 c.say(t, "\"\n\n");
             }
             append(t, "It's past curfew, so they don't end up encountering anyone on the street, but the late afternoon light still makes " + d.givenName + " feel incredibly exposed.  ");
@@ -10344,48 +9730,40 @@ public class WorldState
             {
                 c.say(t, "\"You were so, so super cute!  I wanna do this every day!\"\n\n");
                 d.say(t, "\"");
-                if(d.morality > 66)
-                    d.say(t, "You... enjoyed it too...?  Ah... I'm glad...");
-                else
-                if(d.morality > 33)
-                    d.say(t, "Yes...  I'd, um... like that too...");
-                else
-                    d.say(t, "The world is so much brighter when you're here, " + c.givenName + "...");
+                switch (d.morality / 33) {
+                    case 0: d.say(t, "The world is so much brighter when you're here, " + c.givenName + "..."); break;
+                    case 1: d.say(t, "Yes...  I'd, um... like that too..."); break;
+                    default: d.say(t, "You... enjoyed it too...?  Ah... I'm glad...");
+                }
             } else
             if(c.innocence > 33)
             {
                 c.say(t, "\"You're all mine...  My wonderful little pet...\"\n\n");
                 d.say(t, "\"");
-                if(d.morality > 66)
-                    d.say(t, "Yes...  I belong to you...");
-                else
-                if(d.morality > 33)
-                    d.say(t, "Mm...");
-                else
-                    d.say(t, "A-And you're mine, too, right?  I want to be all you need...");
+                switch (d.morality / 33) {
+                    case 0: d.say(t, "A-And you're mine, too, right?  I want to be all you need..."); break;
+                    case 1: d.say(t, "Mm..."); break;
+                    default: d.say(t, "Yes...  I belong to you...");
+                }
             } else
             {
                 c.say(t, "\"You seemed as though you needed to release some pressure.\"\n\n");
                 d.say(t, "\"");
-                if(d.morality > 66)
-                    d.say(t, "You always know what I need, " + c.givenName + "...  I really don't deserve you...");
-                else
-                if(d.morality > 33)
-                    d.say(t, "Yeah...  Thanks...");
-                else
-                    d.say(t, c.givenName + "...  You really do just want to make me happy...  I don't get it...");
+                switch (d.morality / 33) {
+                    case 0: d.say(t, c.givenName + "...  You really do just want to make me happy...  I don't get it..."); break;
+                    case 1: d.say(t, "Yeah...  Thanks..."); break;
+                    default: d.say(t, "You always know what I need, " + c.givenName + "...  I really don't deserve you...");
+                }
             }
             Project.changePortrait(c.convertGender(), c.type, true, false, this, nameDisplay, 0, Project.Emotion.JOY, Project.Emotion.JOY);
             Project.changePortrait(d.convertGender(), d.type, true, false, this, nameDisplay, 1, Project.Emotion.JOY, Project.Emotion.JOY);
             d.say(t, "\"");
             String description = "";
-            if(c.morality > 66)
-                description = c.mainName + " helps " + d.mainName + " relax and take " + d.hisHer() + " mind off the war by putting " + d.himHer() + " in the role of a beloved pet.";
-            else
-            if(c.morality > 33)
-                description = c.mainName + " and " + d.mainName + " enjoy some new fetish toys together.";
-            else
-                description = c.mainName + " assets " + c.hisHer() + " ownership over " + d.mainName + " with some sexual roleplay.";
+            switch (c.morality / 33) {
+                case 0: description = c.mainName + " assets " + c.hisHer() + " ownership over " + d.mainName + " with some sexual roleplay."; break;
+                case 1: description = c.mainName + " and " + d.mainName + " enjoy some new fetish toys together."; break;
+                default: description = c.mainName + " helps " + d.mainName + " relax and take " + d.hisHer() + " mind off the war by putting " + d.himHer() + " in the role of a beloved pet.";
+            }
             save.saveScene(40, c.mainName + "/" + d.mainName, description);
         } else
         if(id == 8)
@@ -10469,13 +9847,11 @@ public class WorldState
                 c.say(t, "\"Wow...  That was... starting to feel good...\"");
             }
             String description = "";
-            if(c.confidence > 66)
-                description = "In order to avoid needing to involve the police and change " + c.hisHer() + " schedule, " + c.mainName + " chooses not to apprehend or even resist when " + c.heShe() + "'s targeted by a train molestor.";
-            else
-            if(c.confidence > 33)
-                description = "Upon encountering a train molestor, " + c.mainName + " finds that " + c.heShe() + "'s too mentally exhausted by " + c.hisHer() + " constant battles with the Demons to resist.";
-            else
-                description = c.mainName + " is too timid and too tired of conflict to object as " + c.heShe() + "'s molested on a train.";
+            switch (c.confidence / 33) {
+                case 0: description = c.mainName + " is too timid and too tired of conflict to object as " + c.heShe() + "'s molested on a train."; break;
+                case 1: description = "Upon encountering a train molestor, " + c.mainName + " finds that " + c.heShe() + "'s too mentally exhausted by " + c.hisHer() + " constant battles with the Demons to resist."; break;
+                default: description = "In order to avoid needing to involve the police and change " + c.hisHer() + " schedule, " + c.mainName + " chooses not to apprehend or even resist when " + c.heShe() + "'s targeted by a train molestor.";
+            }
             save.saveScene(41, c.mainName, description);
         } else
         if(id == 9)
@@ -10497,38 +9873,32 @@ public class WorldState
                 append(t, "but " + c.mainName + " has a lot of aggression and frustration " + c.heShe() + " wants to work off, so " + c.heShe() + " challenges " + d.mainName + " to a practice match.\n\n");
                 c.say(t, "\"Fight me, " + d.mainName + "!\"\n\n");
                 d.say(t, "\"");
-                if(d.dignity > 66)
-                    d.say(t, "This might not go well for me... but I will not back down!");
-                else
-                if(d.dignity > 33)
-                    d.say(t, "I understand.  I'll give you a chance to reclaim your pride and honor.");
-                else
-                    d.say(t, "I know I'm no match for you, " + c.mainName + ".  But it's true that I could use the practice...");
+                switch (d.dignity / 33) {
+                    case 0: d.say(t, "I know I'm no match for you, " + c.mainName + ".  But it's true that I could use the practice..."); break;
+                    case 1: d.say(t, "I understand.  I'll give you a chance to reclaim your pride and honor."); break;
+                    default: d.say(t, "This might not go well for me... but I will not back down!");
+                }
             } else
             if(c.innocence > 33)
             {
                 append(t, "so " + c.mainName + " tells " + d.mainName + " that they'll pass the time with some friendly combat practice.\n\n");
                 c.say(t, "\"It's better than just sitting around and being bored, right?\"\n\n");
                 d.say(t, "\"");
-                if(d.dignity > 66)
-                    d.say(t, "I'm not sure about that...");
-                else
-                if(d.dignity > 33)
-                    d.say(t, "If practicing is what you want to do, then we'll practice!");
-                else
-                    d.say(t, "You're right!  Let's do it!");
+                switch (d.dignity / 33) {
+                    case 0: d.say(t, "You're right!  Let's do it!"); break;
+                    case 1: d.say(t, "If practicing is what you want to do, then we'll practice!"); break;
+                    default: d.say(t, "I'm not sure about that...");
+                }
             } else
             {
                 append(t, "but " + c.mainName + " hates wasting time that could be spent productively, so " + c.heShe() + " challenges " + d.mainName + " to a sparring match.\n\n");
                 c.say(t, "\"We must become stronger if we are to prevail.\"\n\n");
                 d.say(t, "\"");
-                if(d.dignity > 66)
-                    d.say(t, "Hmph, I'm strong enough.  But if you're going to get even stronger, I won't let you leave me behind!");
-                else
-                if(d.dignity > 33)
-                    d.say(t, "Uh, I guess so...  W-Wait, are you saying we should fight!?");
-                else
-                    d.say(t, "Ah, crap.  This is gonna hurt, isn't it?");
+                switch (d.dignity / 33) {
+                    case 0: d.say(t, "Ah, crap.  This is gonna hurt, isn't it?"); break;
+                    case 1: d.say(t, "Uh, I guess so...  W-Wait, are you saying we should fight!?"); break;
+                    default: d.say(t, "Hmph, I'm strong enough.  But if you're going to get even stronger, I won't let you leave me behind!");
+                }
             }
             d.say(t, "\"\n\n");
             append(t, "They decide to practice their unarmed combat techniques, hand-to-hand wrestling with the intent to subdue and avoid being pinned, each treating the other the way they'd treat a hostile Thrall.  After flying together to an abandoned lot near the city limits, where no one will see or disturb them, they rush directly at each other, and their mock-battle is joined.  ");
@@ -10542,13 +9912,11 @@ public class WorldState
                 append(t, "against " + d.hisHer() + " thigh.\n\n");
                 d.say(t, "\"" + c.mainName + "!?  S-Slow down, we didn't talk about doing this!\"");
                 c.say(t, "\"");
-                if(c.innocence > 66)
-                    c.say(t, "Don't wanna slow down!  Being this close has got me super turned on!");
-                else
-                if(c.innocence > 33)
-                    c.say(t, "Sure we did.  What did you expect to happen when you lost against a 'Thrall'?");
-                else
-                    c.say(t, "Didn't we?  Right now, I'm playing the part of a Thrall for you.  And I have been looking forward to doing what Thralls do when they win...");
+                switch (c.innocence / 33) {
+                    case 0: c.say(t, "Didn't we?  Right now, I'm playing the part of a Thrall for you.  And I have been looking forward to doing what Thralls do when they win..."); break;
+                    case 1: c.say(t, "Sure we did.  What did you expect to happen when you lost against a 'Thrall'?"); break;
+                    default: c.say(t, "Don't wanna slow down!  Being this close has got me super turned on!");
+                }
             } else
             if(d.morality > 33)
             {
@@ -10560,13 +9928,11 @@ public class WorldState
                 append(t, d.mainName + "'s eyes widen.\n\n");
                 d.say(t, "\"How exactly are you going to fight me with... that...?\"\n\n");
                 c.say(t, "\"");
-                if(c.innocence > 66)
-                    c.say(t, "Um, I haven't really thought that far ahead, but...  I wanna try anyway!");
-                else
-                if(c.innocence > 33)
-                    c.say(t, "The same way Thralls do, of course!  Don't tell me you've already forgotten the rules for this match.");
-                else
-                    c.say(t, "It isn't a matter of fighting you.  I'm simply making the scenario - Chosen versus Thrall - more realistic for you.  You should thank me.");
+                switch (c.innocence / 33) {
+                    case 0: c.say(t, "It isn't a matter of fighting you.  I'm simply making the scenario - Chosen versus Thrall - more realistic for you.  You should thank me."); break;
+                    case 1: c.say(t, "The same way Thralls do, of course!  Don't tell me you've already forgotten the rules for this match."); break;
+                    default: c.say(t, "Um, I haven't really thought that far ahead, but...  I wanna try anyway!");
+                }
             } else
             {
                 append(t, d.mainName + " knows " + d.heShe() + "'s outmatched, and so despite their friendship, " + d.heShe() + " fights dirty, spitting in " + c.mainName + "'s eye, delivering painful jabs to " + c.hisHer() + " vitals, and kneeing " + c.himHer() + " in the crotch.  ");
@@ -10612,13 +9978,11 @@ public class WorldState
                 append(t, ".  As " + c.mainName + " finally goes limp atop " + d.himHer() + ", " + d.mainName + "'s bleary eyes carry a hint of smugness despite " + d.hisHer() + " cuts and bruises.\n\n");
                 d.say(t, "\"Heh.  I made you cum first.\"\n\n");
                 c.say(t, "\"");
-                if(c.morality > 66)
-                    c.say(t, "You did.  I'm really impressed.  You're strong too, in your own way.");
-                else
-                if(c.morality > 33)
-                    c.say(t, "I guess... we can call this... a draw.  Phew...");
-                else
-                    c.say(t, "You're still acting like there's anything shameful about cumming?  I swear I'll make a proper slut out of you one of these days...");
+                switch (c.morality / 33) {
+                    case 0: c.say(t, "You're still acting like there's anything shameful about cumming?  I swear I'll make a proper slut out of you one of these days..."); break;
+                    case 1: c.say(t, "I guess... we can call this... a draw.  Phew..."); break;
+                    default: c.say(t, "You did.  I'm really impressed.  You're strong too, in your own way.");
+                }
                 c.say(t, "\"");
             } else
             if(d.dignity > 33)
@@ -10648,23 +10012,19 @@ public class WorldState
                     append(t, ", filling " + d.mainName + "'s desperately spasming depths with " + c.hisHer() + " cum");
                 append(t, ".\n\n");
                 c.say(t, "\"");
-                if(c.morality > 66)
-                    c.say(t, "I could watch you climax all day, " + d.mainName + ".  Hm...  In fact, maybe I should make you climax all day...");
-                else
-                if(c.morality > 33)
-                    c.say(t, "I win, " + d.mainName + ".  But I'll always be up for a rematch.");
-                else
-                    c.say(t, "I'll always be stronger, " + d.mainName + ".  I can do this to you whenever I want.  But that just turns you on even more, doesn't it?");
+                switch (c.morality / 33) {
+                    case 0: c.say(t, "I'll always be stronger, " + d.mainName + ".  I can do this to you whenever I want.  But that just turns you on even more, doesn't it?"); break;
+                    case 1: c.say(t, "I win, " + d.mainName + ".  But I'll always be up for a rematch."); break;
+                    default: c.say(t, "I could watch you climax all day, " + d.mainName + ".  Hm...  In fact, maybe I should make you climax all day...");
+                }
                 c.say(t, "\"");
             }
             String description = "";
-            if(c.morality > 66)
-                description = c.mainName + " allows one of " + c.hisHer() + " training sessions with " + d.mainName + " to take a very sexual turn.";
-            else
-            if(c.morality > 33)
-                description = "Using a training match as an excuse, " + c.mainName + " pins down and 'rapes' " + d.mainName + ", much to the latter's delight.";
-            else
-                description = c.mainName + " vents " + c.hisHer() + " sadistic urges by sexually assaulting " + d.mainName + " during a training match, but " + d.mainName + " doesn't mind in the slightest.";
+            switch (c.morality / 33) {
+                case 0: description = c.mainName + " vents " + c.hisHer() + " sadistic urges by sexually assaulting " + d.mainName + " during a training match, but " + d.mainName + " doesn't mind in the slightest."; break;
+                case 1: description = "Using a training match as an excuse, " + c.mainName + " pins down and 'rapes' " + d.mainName + ", much to the latter's delight."; break;
+                default: description = c.mainName + " allows one of " + c.hisHer() + " training sessions with " + d.mainName + " to take a very sexual turn.";
+            }
             save.saveScene(42, c.mainName + "/" + d.mainName, description);
         } else
         if(id == 10)
@@ -10777,13 +10137,11 @@ public class WorldState
             }
             c.say(t, "\"");
             String description = "";
-            if(c.innocence > 66)
-                description = c.mainName + " lets " + c.himHer() + "self get tricked into 'purifying' a lustful former Thrall.";
-            else
-            if(c.innocence > 33)
-                description = "Too kind to refuse a person in need, " + c.mainName + " chooses to believe the dubious claims of a former Thrall who wants " + c.himHer() + " to sexually 'purify' him.";
-            else
-                description = "Even though " + c.heShe() + " knows it's nonsense, " + c.mainName + " goes along with a former Thrall claiming that " + c.heShe() + " needs to 'purify' his lust.";
+            switch (c.innocence / 33) {
+                case 0: description = "Even though " + c.heShe() + " knows it's nonsense, " + c.mainName + " goes along with a former Thrall claiming that " + c.heShe() + " needs to 'purify' his lust."; break;
+                case 1: description = "Too kind to refuse a person in need, " + c.mainName + " chooses to believe the dubious claims of a former Thrall who wants " + c.himHer() + " to sexually 'purify' him."; break;
+                default: description = c.mainName + " lets " + c.himHer() + "self get tricked into 'purifying' a lustful former Thrall.";
+            }
             save.saveScene(43, c.mainName, description);
         } else
         if(id == 11)
@@ -10855,13 +10213,11 @@ public class WorldState
                 }
             }
             String description = "";
-            if(c.innocence > 66)
-                description = c.mainName + " wakes from " + c.hisHer() + " nap bewildered to find " + c.himHer() + "self covered in a horny fan's cum.";
-            else
-            if(c.innocence > 33)
-                description = "After falling asleep from exhaustion, " + c.mainName + " is molested in " + c.hisHer() + " sleep and wakes none the wiser.";
-            else
-                description = "A passing fan molests " + c.mainName + " in " + c.hisHer() + " sleep, but " + c.heShe() + " wakes too slowly to do anything about it.";
+            switch (c.innocence / 33) {
+                case 0: description = "A passing fan molests " + c.mainName + " in " + c.hisHer() + " sleep, but " + c.heShe() + " wakes too slowly to do anything about it."; break;
+                case 1: description = "After falling asleep from exhaustion, " + c.mainName + " is molested in " + c.hisHer() + " sleep and wakes none the wiser."; break;
+                default: description = c.mainName + " wakes from " + c.hisHer() + " nap bewildered to find " + c.himHer() + "self covered in a horny fan's cum.";
+            }
             save.saveScene(44, c.mainName, description);
         } else
         if(id == 12)
@@ -10954,13 +10310,11 @@ public class WorldState
                 append(t, "A flash of true anger sparks in " + c.mainName + "'s eyes, more anger than " + c.heShe() + " once would have thought " + c.heShe() + " could ever feel.  A wave of pressure erupts outward as " + c.heShe() + " stands up, knocking the Thralls back, and " + c.heShe() + " lifts " + d.mainName + " up by the throat.\n\n");
                 c.say(t, "\"Why, " + d.mainName + "!?  Why would you punish me for wanting to help you!?\"\n\n");
                 d.say(t, "\"");
-                if(d.innocence > 66)
-                    d.say(t, "Ack!  It was... gh... the Thralls'... idea...!");
-                else
-                if(d.innocence > 33)
-                    d.say(t, "Because I... fucking hate you...!  Don't you get it, dumbass!?");
-                else
-                    d.say(t, "Because... that's the part of you... which I hate the most!");
+                switch (d.innocence / 33) {
+                    case 0: d.say(t, "Because... that's the part of you... which I hate the most!"); break;
+                    case 1: d.say(t, "Because I... fucking hate you...!  Don't you get it, dumbass!?"); break;
+                    default: d.say(t, "Ack!  It was... gh... the Thralls'... idea...!");
+                }
                 d.say(t, "\"\n\n");
                 append(t, "Just then, while " + c.mainName + " is distracted, a Thrall runs up behind " + c.himHer() + " and whacks " + c.himHer() + " in the head with a metal pipe.  " + c.HeShe() + " falters, dropping " + d.mainName + ", who collapses to the ground as well, clearly weakened and vulnerable.  ");
             } else
@@ -10968,13 +10322,11 @@ public class WorldState
             {
                 append(t, c.mainName + " cries out in frustrated anger, pushing " + d.mainName + " away.  " + d.mainName + ", for " + d.hisHer() + " part, breaks out in laughter, almost doubling over as " + d.heShe() + " taunts " + c.mainName + ".\n\n");
                 d.say(t, "\"");
-                if(d.innocence > 66)
-                    d.say(t, "You really are such a dummy!  Stupid, stupid, hahahah!");
-                else
-                if(d.innocence > 33)
-                    d.say(t, "Even if they did drug me, why would I want your help?  Hah, get over yourself!");
-                else
-                    d.say(t, "A sudden failure of my regenerative powers?  Heh.  Who would believe something so ridiculous?");
+                switch (d.innocence / 33) {
+                    case 0: d.say(t, "A sudden failure of my regenerative powers?  Heh.  Who would believe something so ridiculous?"); break;
+                    case 1: d.say(t, "Even if they did drug me, why would I want your help?  Hah, get over yourself!"); break;
+                    default: d.say(t, "You really are such a dummy!  Stupid, stupid, hahahah!");
+                }
                 d.say(t, "\"\n\n");
                 c.say(t, "\"That's- Wait, look out behind you!\"\n\n");
                 append(t, "A Thrall tackles " + d.mainName + " from behind, and two more do the same to " + c.mainName + ".  During their moment of distraction, the Thralls have decided that this is their chance to enjoy them both.  ");
@@ -10987,13 +10339,11 @@ public class WorldState
                     append(t, d.hisHer() + " shaft bottoming out inside " + c.mainName + ".\n\n");
                 c.say(t, "\"P-Please... I just wanted to help you...!\"\n\n");
                 d.say(t, "\"");
-                if(d.innocence > 66)
-                    d.say(t, "The Thralls said this would put you right where I want you.  And now I'm gonna rape you all n-nnnaaah!?");
-                else
-                if(d.innocence > 33)
-                    d.say(t, "What's the problem?  You were willing to get raped for my sake, so you might as well-  Gaaah!?");
-                else
-                    d.say(t, "Such a gullible fool.  People like you exist to be prey for people like m-myaaah!?");
+                switch (d.innocence / 33) {
+                    case 0: d.say(t, "Such a gullible fool.  People like you exist to be prey for people like m-myaaah!?"); break;
+                    case 1: d.say(t, "What's the problem?  You were willing to get raped for my sake, so you might as well-  Gaaah!?"); break;
+                    default: d.say(t, "The Thralls said this would put you right where I want you.  And now I'm gonna rape you all n-nnnaaah!?");
+                }
                 d.say(t, "\"\n\n");
                 append(t, d.mainName + " is cut off by a Thrall rushing forward to pinch " + d.hisHer() + " butt.  Now that the Chosen are occupied with each other, the Thralls feel like they have a chance to take them both.  ");
             }
@@ -11004,13 +10354,11 @@ public class WorldState
             if(c.innocence > 66)
             {
                 d.say(t, "\"");
-                if(d.dignity > 66)
-                    d.say(t, "Oh, " + c.mainName + ", I'm so sorry for taking advantage of your stupidly kindhearted nature.  I won't do it again, I promise!  So make sure to 'rescue' me again next time!  Hahahah!");
-                else
-                if(d.dignity > 33)
-                    d.say(t, "Oh, stop glaring at me like that.  It's not cute at all.");
-                else
-                    d.say(t, "It must be hard to be so weak and stupid.  You should thank me for teaching you a lesson.");
+                switch (d.dignity / 33) {
+                    case 0: d.say(t, "It must be hard to be so weak and stupid.  You should thank me for teaching you a lesson."); break;
+                    case 1: d.say(t, "Oh, stop glaring at me like that.  It's not cute at all."); break;
+                    default: d.say(t, "Oh, " + c.mainName + ", I'm so sorry for taking advantage of your stupidly kindhearted nature.  I won't do it again, I promise!  So make sure to 'rescue' me again next time!  Hahahah!");
+                }
                 d.say(t, "\"\n\n");
                 c.say(t, "\"Ugh, you're... you're really, really, really, really.... really mean!  Really!\"");
             } else
@@ -11052,13 +10400,11 @@ public class WorldState
                 d.say(t, "\"");
             }
             String description = "";
-            if(d.innocence > 66)
-                description = "Acting on a suggestion from the Thralls " + d.heShe() + " uses to satisfy " + d.hisHer() + " sexual needs, " + d.mainName + " feigns unconsciousness in order to fool " + c.mainName + " into trying to rescue " + c.himHer() + ".";
-            else
-            if(d.innocence > 33)
-                description = d.mainName + " plays a nasty prank on " + c.mainName + ", tricking " + c.himHer() + " into surrendering to a group of Thralls.";
-            else
-                description = c.mainName + " tries to save the seemingly helpless " + d.mainName + ", but it turns out to be a plot by " + d.mainName + " to rape " + c.himHer() + ".";
+            switch (d.innocence / 33) {
+                case 0: description = c.mainName + " tries to save the seemingly helpless " + d.mainName + ", but it turns out to be a plot by " + d.mainName + " to rape " + c.himHer() + "."; break;
+                case 1: description = d.mainName + " plays a nasty prank on " + c.mainName + ", tricking " + c.himHer() + " into surrendering to a group of Thralls."; break;
+                default: description = "Acting on a suggestion from the Thralls " + d.heShe() + " uses to satisfy " + d.hisHer() + " sexual needs, " + d.mainName + " feigns unconsciousness in order to fool " + c.mainName + " into trying to rescue " + c.himHer() + ".";
+            }
             save.saveScene(45, c.mainName + "/" + d.mainName, description);
         } else
         if(id == 13)
@@ -11078,13 +10424,11 @@ public class WorldState
             {
                 append(t, d.givenName + " immediately shoves " + c.givenName + " aside and grabs the friend's cock, eager to prove " + d.hisHer() + " superiority.\n\n");
                 c.say(t, "\"");
-                if(c.dignity > 66)
-                    c.say(t, "I think that going first will provide you an unfair advantage...");
-                else
-                if(c.dignity > 33)
-                    c.say(t, "Ugh, you bully.");
-                else
-                    c.say(t, "Hey!  You said I could go first!");
+                switch (c.dignity / 33) {
+                    case 0: c.say(t, "Hey!  You said I could go first!"); break;
+                    case 1: c.say(t, "Ugh, you bully."); break;
+                    default: c.say(t, "I think that going first will provide you an unfair advantage...");
+                }
                 c.say(t, "\"\n\n");
                 d.say(t, "\"It's your fault for being too slow!\"\n\n");
                 append(t, d.givenName + " jerks the cock with powerful strokes, manipulating the testicles between " + d.hisHer() + " fingers as " + d.heShe() + " smirks down at " + d.hisHer() + " partner, who quickly starts gasping and bucking his hips at the almost uncomfortably intense stimulation.  Then, " + d.givenName + " bends over, abruptly swallowing the cock down " + d.hisHer() + " throat all the way to the base.  ");
@@ -11094,26 +10438,22 @@ public class WorldState
                 append(t, c.givenName + " offers to let " + d.givenName + " go first, and " + d.givenName + " doesn't let the chance go to waste.  " + d.HeShe() + " immediately takes their friend's tip into " + d.hisHer() + " mouth, drooling all over it and using the saliva as lubricant for " + d.hisHer() + " hand.\n\n");
                 d.say(t, "(I'll make you regret going easy on me...)\n\n");
                 c.say(t, "\"");
-                if(c.dignity > 66)
-                    c.say(t, "Why do you look so angry?  I was even being nice...");
-                else
-                if(c.dignity > 33)
-                    c.say(t, "I know I can do even better...");
-                else
-                    c.say(t, "Stop looking at me like that and just focus on sucking it.");
+                switch (c.dignity / 33) {
+                    case 0: c.say(t, "Stop looking at me like that and just focus on sucking it."); break;
+                    case 1: c.say(t, "I know I can do even better..."); break;
+                    default: c.say(t, "Why do you look so angry?  I was even being nice...");
+                }
                 c.say(t, "\"\n\n");
                 append(t, "With every stroke, " + d.givenName + " slides " + d.hisHer() + " lips further and further down the cock, and when there's no more room for " + d.hisHer() + " fingers to stroke the shaft, " + d.heShe() + " moves on to fondling the balls, gazing up at " + d.hisHer() + " partner.  ");
             } else
             {
                 append(t, d.givenName + ", who lacks confidence in " + d.hisHer() + " chances of winning fairly, lunges forward to swallow up his cock first, wrapping " + d.hisHer() + " lips around it and sliding them all the way to the base.\n\n");
                 c.say(t, "\"");
-                if(c.dignity > 66)
-                    c.say(t, "Hmph.  Do you think that will be enough to beat me?");
-                else
-                if(c.dignity > 33)
-                    c.say(t, "That's not fair!");
-                else
-                    c.say(t, "This is actually nice to watch...");
+                switch (c.dignity / 33) {
+                    case 0: c.say(t, "This is actually nice to watch..."); break;
+                    case 1: c.say(t, "That's not fair!"); break;
+                    default: c.say(t, "Hmph.  Do you think that will be enough to beat me?");
+                }
                 c.say(t, "\"\n\n");
                 d.say(t, "\"Mmf!\"\n\n");
                 append(t, "Face blushing bright red, " + d.givenName + " hurriedly bobs " + d.hisHer() + " head up and down in order to drive " + d.hisHer() + " partner over the edge as soon as possible.  ");
@@ -11124,13 +10464,11 @@ public class WorldState
                 append(t, c.givenName + " takes " + c.hisHer() + " place nervously, doubting " + c.hisHer() + " ability to match that performance.  " + c.HisHer() + " partner's cock is flaccid now, and while " + c.mainName + " has no trouble taking it into " + c.hisHer() + " mouth, it doesn't seem to respond.  Even when " + c.heShe() + " licks it all over, sucking the last drops of cum out of the tip, it's still too exhausted from the last orgasm to respond.\n\n");
                 c.say(t, "\"Um, it doesn't want to get hard again...\"\n\n");
                 d.say(t, "\"");
-                if(d.confidence > 66)
-                    d.say(t, "Idiot, step aside!");
-                else
-                if(d.confidence > 33)
-                    d.say(t, "You're pathetic as always.");
-                else
-                    d.say(t, "Heheh, looks like you need my help after all...");
+                switch (d.confidence / 33) {
+                    case 0: d.say(t, "Heheh, looks like you need my help after all..."); break;
+                    case 1: d.say(t, "You're pathetic as always."); break;
+                    default: d.say(t, "Idiot, step aside!");
+                }
                 d.say(t, "\"\n\n");
                 append(t, "When " + c.givenName + " pulls back for a moment, " + d.givenName + " steals " + c.hisHer() + " spot, taking the cock back into " + d.hisHer() + " mouth.  " + c.givenName + " has to settle for the testicles, sullenly licking and sucking them while " + c.heShe() + " glares at " + c.hisHer() + " rival.  The sight of the two Chosen servicing him together causes their friend's cock to begin growing hard again, and ");
             } else
@@ -11138,13 +10476,11 @@ public class WorldState
             {
                 append(t, "The cock starts to go soft, but " + c.givenName + " begins servicing it with determination, furiously swirling " + c.hisHer() + " tongue around the tip while " + c.heShe() + " pumps " + c.hisHer() + " hand up and down the base and stares into its owner's eyes.  With a shudder and a groan, he bucks his hips into " + c.givenName + "'s face, trembling with the almost painful pleasure of cumming again in so short a timespan.\n\n");
                 d.say(t, "\"");
-                if(d.confidence > 66)
-                    d.say(t, "That was barely an orgasm!  Let me show you how it's done!");
-                else
-                if(d.confidence > 33)
-                    d.say(t, "If you're done already, then that means it's my turn!");
-                else
-                    d.say(t, "I-I'll show you I can do even better than that!");
+                switch (d.confidence / 33) {
+                    case 0: d.say(t, "I-I'll show you I can do even better than that!"); break;
+                    case 1: d.say(t, "If you're done already, then that means it's my turn!"); break;
+                    default: d.say(t, "That was barely an orgasm!  Let me show you how it's done!");
+                }
                 d.say(t, "\"\n\n");
                 c.say(t, "\"You took way longer than that, which means it's still my turn!\"\n\n");
                 append(t, "When " + c.givenName + " pulls back for a moment, " + d.givenName + " tries to take the cock into " + d.hisHer() + " mouth again, but " + c.givenName + " grabs it in " + c.hisHer() + " fist, pulling it away.  " + d.givenName + " grabs it in " + d.hisHer() + " hand as well, fingers overlapping " + c.givenName + "'s, and lowers " + c.hisHer() + " head to start licking and sucking the testicles.  The two Chosen struggle over their friend's cock, each taking a testicle into their mouth, and ");
@@ -11153,13 +10489,11 @@ public class WorldState
                 append(t, c.givenName + " knows that it's difficult to make a man cum twice in a row, so " + c.heShe() + " tries a completely different approach.  " + c.HeShe() + " handles the softening cock with care, gently trailing " + c.hisHer() + " fingers up and down its length, kissing " + c.hisHer() + " way from the base to the tip and back again, stimulating it gently with " + c.hisHer() + " breath in the process of asking " + c.hisHer() + " partner how it all feels.  Then, as it stiffens again, " + c.heShe() + " escalates the stimulation slowly, using " + c.hisHer() + " saliva as lubricant to stroke it while " + c.heShe() + " firmly massages the root under the balls with " + c.hisHer() + " tongue.  If " + c.heShe() + " can't get the quickest orgasm out of " + c.himHer() + ", " + c.heShe() + "'s determined to get the strongest one.\n\n");
                 c.say(t, "\"Does it feel good?  Are you prepared for it to feel even better?\"\n\n");
                 d.say(t, "\"");
-                if(d.confidence > 66)
-                    d.say(t, "Time's up!  It's my turn again!");
-                else
-                if(d.confidence > 33)
-                    d.say(t, "No fair!  You're taking way longer than I did!");
-                else
-                    d.say(t, "I... I can't let " + c.himHer() + " continue...!");
+                switch (d.confidence / 33) {
+                    case 0: d.say(t, "I... I can't let " + c.himHer() + " continue...!"); break;
+                    case 1: d.say(t, "No fair!  You're taking way longer than I did!"); break;
+                    default: d.say(t, "Time's up!  It's my turn again!");
+                }
                 d.say(t, "\"\n\n");
                 append(t, "Right before he cums, " + d.givenName + " pushes " + d.hisHer() + " face in, trying to take control back from " + c.givenName + ".  " + d.givenName + " tries to copy " + c.givenName + "'s movements, placing " + d.hisHer() + " fingers opposite " + c.givenName + "'s and licking along the same path " + c.givenName + " does as if trying to erase the trail of " + c.givenName + "'s saliva.  " + c.givenName + " tries to push " + d.givenName + " back, and at first, the interference decreases the stimulation their friend feels.  But then, as they both get serious, ");
             }
@@ -11202,13 +10536,11 @@ public class WorldState
                 append(t, "When the first spurt of cum starts to come out, " + c.givenName + " and " + d.givenName + " both swiftly move up and start sucking on the tip of his cock, practically kissing as they fight to steal every drop from their opponent.  They aren't happy about it, but neither wants to give the other a chance to claim to have been the one responsible for the orgasm.\n\nIn the end, there's no clear victor, and they keep going for round after round after round.  Finally, their friend lays exhausted, his aching cock hanging limp no matter how the two Chosen kiss and lick every inch of it, fondling his nipples and whispering sweet promises if he can get it up again.  When he begs them to stop, they glare at him as if it's his fault.");
                 d.say(t, "\"You're useless!  Don't you have any pride as a man!?\"\n\n");
                 c.say(t, "\"");
-                if(c.dignity > 66)
-                    c.say(t, "You must take responsibility!");
-                else
-                if(c.dignity > 33)
-                    c.say(t, "We'll have to use a vibrator on him.  It'll feel good, so he can't complain.");
-                else
-                    c.say(t, "It's because you were too rough with him, " + d.givenName + "!");
+                switch (c.dignity / 33) {
+                    case 0: c.say(t, "It's because you were too rough with him, " + d.givenName + "!"); break;
+                    case 1: c.say(t, "We'll have to use a vibrator on him.  It'll feel good, so he can't complain."); break;
+                    default: c.say(t, "You must take responsibility!");
+                }
                 c.say(t, "\"");
                 Project.changePortrait(c.convertGender(), c.type, true, false, this, nameDisplay, 0, Project.Emotion.ANGER, Project.Emotion.ANGER);
                 Project.changePortrait(d.convertGender(), d.type, true, false, this, nameDisplay, 1, Project.Emotion.ANGER, Project.Emotion.ANGER);
@@ -11281,13 +10613,11 @@ public class WorldState
                 Project.changePortrait(d.convertGender(), d.type, true, false, this, nameDisplay, 1, Project.Emotion.JOY, Project.Emotion.JOY);
             }
             String description = "";
-            if(d.innocence > 66)
-                description = c.mainName + " and " + d.mainName + " compete to see who can make their friend cum the most, but " + d.mainName + " forgets all about it and ends up molesting " + c.mainName + ".";
-            else
-            if(d.innocence > 33)
-                description = c.mainName + " and " + d.mainName + " try to resolve which of them has better sexual skills, but their partner lacks the stamina to keep up.";
-            else
-                description = d.mainName + " beats " + c.mainName + " in a game to make their friend cum, and subjects " + c.himHer() + " to a humiliating punishment game.";
+            switch (d.innocence / 33) {
+                case 0: description = d.mainName + " beats " + c.mainName + " in a game to make their friend cum, and subjects " + c.himHer() + " to a humiliating punishment game."; break;
+                case 1: description = c.mainName + " and " + d.mainName + " try to resolve which of them has better sexual skills, but their partner lacks the stamina to keep up."; break;
+                default: description = c.mainName + " and " + d.mainName + " compete to see who can make their friend cum the most, but " + d.mainName + " forgets all about it and ends up molesting " + c.mainName + ".";
+            }
             save.saveScene(46, c.mainName + "/" + d.mainName, description);
         } else
         if(id == 14)
@@ -11351,13 +10681,11 @@ public class WorldState
             }
             Project.changePortrait(c.convertGender(), c.type, true, false, this, nameDisplay, 0, Project.Emotion.JOY, Project.Emotion.JOY);
             String description = "";
-            if(c.confidence > 66)
-                description = c.mainName + " abuses one of " + c.hisHer() + " friends in order to make " + c.himHer() + "self feel better.";
-            else
-            if(c.confidence > 33)
-                description = "When one of " + c.mainName + "'s friends inadvertently reminds " + c.himHer() + " of " + c.hisHer() + " past abuses, " + c.heShe() + " takes it out on " + c.himHer() + ".";
-            else
-                description = c.mainName + " allows " + c.himHer() + "self to be manipulated into tormenting a less popular member of " + c.hisHer() + " friend group.";
+            switch (c.confidence / 33) {
+                case 0: description = c.mainName + " allows " + c.himHer() + "self to be manipulated into tormenting a less popular member of " + c.hisHer() + " friend group."; break;
+                case 1: description = "When one of " + c.mainName + "'s friends inadvertently reminds " + c.himHer() + " of " + c.hisHer() + " past abuses, " + c.heShe() + " takes it out on " + c.himHer() + "."; break;
+                default: description = c.mainName + " abuses one of " + c.hisHer() + " friends in order to make " + c.himHer() + "self feel better.";
+            }
             save.saveScene(47, c.mainName, description);
         } else
         if(id == 15)
@@ -11378,42 +10706,34 @@ public class WorldState
                 append(t, " as " + c.mainName);
             append(t, ", putting on an especially pathetic display of squirming and crying out under the fingers of the Thralls, and the attached message had contained a strong suggestion that " + c.heShe() + " come here tonight.  The implicit threat was clear, and when " + c.heShe() + " sees " + d.givenName + " emerging from the darkness in the other direction, " + c.heShe() + " assumes that " + c.heShe() + "'s found the sender.\n\n");
             c.say(t, "\"");
-            if(c.morality > 66)
-                c.say(t, d.givenName + "!  Blackmail is a new low, even for you!");
-            else
-            if(c.morality > 33)
-                c.say(t, "I should have known that you were the one blackmailing me, " + d.givenName + ".");
-            else
-                c.say(t, d.givenName + "!?  So you're the one blackmailing me!  I knew that your kind behavior was all an act!");
+            switch (c.morality / 33) {
+                case 0: c.say(t, d.givenName + "!?  So you're the one blackmailing me!  I knew that your kind behavior was all an act!"); break;
+                case 1: c.say(t, "I should have known that you were the one blackmailing me, " + d.givenName + "."); break;
+                default: c.say(t, d.givenName + "!  Blackmail is a new low, even for you!");
+            }
             c.say(t, "\"\n\n");
             d.say(t, "\"");
-            if(d.innocence > 66)
-                d.say(t, "Huh?  I'm not blackmailing you!  You're blackmailing me!");
-            else
-            if(d.innocence > 33)
-                d.say(t, "Wait.  Are you trying to say that you got a threatening message too?");
-            else
-                d.say(t, "Blackmailing... you?  Hm.  I suspect that some third party is responsible for both our circumstances.");
+            switch (d.innocence / 33) {
+                case 0: d.say(t, "Blackmailing... you?  Hm.  I suspect that some third party is responsible for both our circumstances."); break;
+                case 1: d.say(t, "Wait.  Are you trying to say that you got a threatening message too?"); break;
+                default: d.say(t, "Huh?  I'm not blackmailing you!  You're blackmailing me!");
+            }
             d.say(t, "\"\n\n");
             append(t, "Before they can share the details, the true culprit emerges from inside the BDSM club.  It's a crowd of people, mostly men, split into a larger group and a smaller group.  The leader of the larger group addresses himself to " + c.givenName + ".\n\n");
             append(t, "\"" + c.mainName + ", it's such an honor to meet you!  I'm glad you responded to our invitation.  You see, we were just talking with a group of " + d.mainName + "'s fans, and they said you weren't as tough as " + d.himHer() + ", using that video as proof.  We were hoping you'd help us prove them wrong!\"\n\n");
             c.say(t, "\"");
-            if(c.innocence > 66)
-                c.say(t, "Then... you didn't mean anything bad after all?  Well, I can't turn down my fans...  Yeah, if you're all cheering for me, I know I can win!");
-            else
-            if(c.innocence > 33)
-                c.say(t, "Normally, I'd turn you down, and maybe report you to the police, too.  But if it's against " + d.mainName + "...");
-            else
-                c.say(t, "I don't believe for a moment that you failed to realize that it looked like a blackmail note.  But even so... depending on your definition of 'tough', I believe I may indeed have the advantage.");
+            switch (c.innocence / 33) {
+                case 0: c.say(t, "I don't believe for a moment that you failed to realize that it looked like a blackmail note.  But even so... depending on your definition of 'tough', I believe I may indeed have the advantage."); break;
+                case 1: c.say(t, "Normally, I'd turn you down, and maybe report you to the police, too.  But if it's against " + d.mainName + "..."); break;
+                default: c.say(t, "Then... you didn't mean anything bad after all?  Well, I can't turn down my fans...  Yeah, if you're all cheering for me, I know I can win!");
+            }
             c.say(t, "\"\n\n");
             d.say(t, "\"");
-            if(d.confidence > 66)
-                d.say(t, "Hah, you think you have a chance against me?  I'll have to put you in your place!");
-            else
-            if(d.confidence > 33)
-                d.say(t, "This isn't worth my time, but I'm not going to let you call me a coward, " + c.givenName + ".  Count me in.");
-            else
-                d.say(t, "Always so full of yourself...  Ugh, fine!  I don't care if I lose, I have to try!");
+            switch (d.confidence / 33) {
+                case 0: d.say(t, "Always so full of yourself...  Ugh, fine!  I don't care if I lose, I have to try!"); break;
+                case 1: d.say(t, "This isn't worth my time, but I'm not going to let you call me a coward, " + c.givenName + ".  Count me in."); break;
+                default: d.say(t, "Hah, you think you have a chance against me?  I'll have to put you in your place!");
+            }
             d.say(t, "\"\n\n");
             append(t, "The two Chosen grow increasingly angry as they bicker, and one of the fans suggests that the loser's video should be posted to the front page of one of the most prominent Chosen fan webpages.  " + d.mainName + " doesn't mind agreeing to the condition at all, and " + c.mainName + " can't back down without losing face.\n\n");
             append(t, "The true nature of the competition turns out to be quite different from what they were expecting.  They transform and head into the club, claiming to be mere Chosen cosplayers, although some of the patrons suspect the truth.  Then, they both straddle the device positioned in the central open area, a mechanism resembling a mechanical bull.  However, the device's movements are less extreme than those of a bucking bronco, and its true threat comes from the wedge-shaped vibrators installed in the seats.\n\n");
@@ -11487,13 +10807,11 @@ public class WorldState
                 append(t, "Both of them have been trained thoroughly in their battles against you, and they break too quickly to name a winner.  They cum at the same time, crying out as their hips buck wildly against the machine, but a single orgasm isn't enough to satisfy either of them.  Despite how much they hate each other, they're turned on by the sight of their rival cumming, and they eagerly lock their lips together in a hungry kiss.  Clinging to each other as well as their bound limbs will allow, they grind their bodies together, cumming over and over again in front of the cheering crowd.\n\n");
                 append(t, "The show will be enjoyed by many more people than they expected when they agreed to it.  After all, even though it's true that recording devices are forbidden inside the BDSM club, the club's owner is actually one of your Thralls, and there are plenty of cameras installed in the walls and ceiling.  Still ignorant of this fact, the two Chosen limp out from the doors of the club, back to glaring at each other now that they're past the afterglow of their many orgasms.\n\n");
                 c.say(t, "\"");
-                if(c.confidence > 66)
-                    c.say(t, "You definitely came first, even if it was only by a fraction of a second!");
-                else
-                if(c.confidence > 33)
-                    c.say(t, "We might have came at the same time, but you definitely came harder, so it's my win.");
-                else
-                    c.say(t, "We tied... th-that means you have to admit you're not any better than me!");
+                switch (c.confidence / 33) {
+                    case 0: c.say(t, "We tied... th-that means you have to admit you're not any better than me!"); break;
+                    case 1: c.say(t, "We might have came at the same time, but you definitely came harder, so it's my win."); break;
+                    default: c.say(t, "You definitely came first, even if it was only by a fraction of a second!");
+                }
                 c.say(t, "\"\n\n");
                 d.say(t, "\"");
                 if(d.morality > 66)
@@ -11518,22 +10836,18 @@ public class WorldState
                 append(t, "For " + c.mainName + ", whose body and mind have been trained thoroughly during " + c.hisHer() + " battles against you, the embarrassment only turns " + c.himHer() + " on even more.  " + c.HeShe() + " cums quickly, legs spasming and head thrown back, and the paralyzing pleasure combined with the awkwardness of " + c.hisHer() + " seat on the machine means that " + c.heShe() + " isn't able to dismount before the next orgasm hits, and the one after as well.  Much to " + c.hisHer() + " humiliation, " + c.heShe() + "'s still stuck cumming on the machine even after " + d.mainName + " dismounts, and " + d.mainName + "'s taunting voice joins the cheering crowd as everyone stops what they're doing to watch " + c.hisHer() + " unwilling show.\n\n");
                 append(t, "Furthermore, the show will be enjoyed by far more people in the coming days.  After all, even though it's true that recording devices are forbidden inside the BDSM club, the club's owner is actually one of your Thralls, and there are plenty of cameras installed in the walls and ceiling.  Still ignorant of this fact, " + c.mainName + " limps out of the club.  The humiliation is still sending shocks of pleasurable shame through " + c.hisHer() + " body, but " + c.heShe() + " manages to shoot a glare back at the following " + d.mainName + ", who's still smirking at " + c.himHer() + ".\n\n");
                 d.say(t, "\"");
-                if(d.morality > 66)
-                    d.say(t, "I hope you've learned your lesson about starting fights you can't win.");
-                else
-                if(d.morality > 33)
-                    d.say(t, "That was satisfying in more ways than one.");
-                else
-                    d.say(t, "You were actually pretty cute there.  I'll forgive you for everything if you agree to become my pet.");
+                switch (d.morality / 33) {
+                    case 0: d.say(t, "You were actually pretty cute there.  I'll forgive you for everything if you agree to become my pet."); break;
+                    case 1: d.say(t, "That was satisfying in more ways than one."); break;
+                    default: d.say(t, "I hope you've learned your lesson about starting fights you can't win.");
+                }
                 d.say(t, "\"\n\n");
                 c.say(t, "\"");
-                if(c.confidence > 66)
-                    c.say(t, "This match was rigged!  My body has borne the brunt of the Demon Lord's attention!");
-                else
-                if(c.confidence > 33)
-                    c.say(t, "Shut up, shut up, shut up!");
-                else
-                    c.say(t, "Ugh...  Why do you always have to be s-so... smug...?");
+                switch (c.confidence / 33) {
+                    case 0: c.say(t, "Ugh...  Why do you always have to be s-so... smug...?"); break;
+                    case 1: c.say(t, "Shut up, shut up, shut up!"); break;
+                    default: c.say(t, "This match was rigged!  My body has borne the brunt of the Demon Lord's attention!");
+                }
                 c.say(t, "\"");
                 description = c.mainName + " and " + d.mainName + " have a match to determine who can endure pleasure the longest, but the public venue and " + c.mainName + "'s exhibitionist tendencies give " + d.mainName + " an easy win.";
             } else
@@ -11547,22 +10861,18 @@ public class WorldState
                     append(t, "The added stimulation is enough to push " + c.mainName + " over the edge as well, but " + c.heShe() + " retains enough sanity to be angry about it, crying out " + c.hisHer() + " muffled protests into " + c.mainName + "'s mouth even as " + c.hisHer() + " body jerks in its climax.\n\n");
                 append(t, "It may have been " + c.mainName + "'s victory, but " + c.heShe() + " hates the fact that it ended in such a humiliating way for " + c.himHer() + ", and the show will be enjoyed by yet more people in the coming days.  After all, even though it's true that recording devices are forbidden inside the BDSM club, the club's owner is actually one of your Thralls, and there are plenty of cameras installed in the walls and ceiling.  Still ignorant of this fact, " + c.mainName + " limps out of the club, shooting a glare back at the following " + d.mainName + ", who wears a smile of contentment on " + d.hisHer() + " face.\n\n");
                 d.say(t, "\"");
-                if(d.morality > 66)
-                    d.say(t, "Congratulations!  That was a good match!");
-                else
-                if(d.morality > 33)
-                    d.say(t, "I'm glad we did this.");
-                else
-                    d.say(t, "I basically tricked you into letting me rape you, didn't I?");
+                switch (d.morality / 33) {
+                    case 0: d.say(t, "I basically tricked you into letting me rape you, didn't I?"); break;
+                    case 1: d.say(t, "I'm glad we did this."); break;
+                    default: d.say(t, "Congratulations!  That was a good match!");
+                }
                 d.say(t, "\"\n\n");
                 c.say(t, "\"");
-                if(c.confidence > 66)
-                    c.say(t, "I'll make you pay for assaulting me!");
-                else
-                if(c.confidence > 33)
-                    c.say(t, "I should have made sure there was a more serious penalty for losing...");
-                else
-                    c.say(t, "Y-You went too far...");
+                switch (c.confidence / 33) {
+                    case 0: c.say(t, "Y-You went too far..."); break;
+                    case 1: c.say(t, "I should have made sure there was a more serious penalty for losing..."); break;
+                    default: c.say(t, "I'll make you pay for assaulting me!");
+                }
                 c.say(t, "\"");
                 description = c.mainName + " and " + d.mainName + " have a match to determine who can endure pleasure the longest, but " + d.mainName + " just uses it as an excuse to cum while molesting " + c.mainName + ".";
             } else
@@ -11591,13 +10901,11 @@ public class WorldState
                 }
                 c.say(t, "\"\n\n");
                 d.say(t, "\"");
-                if(d.morality > 66)
-                    d.say(t, "This tells me that I need to work on my self-control.");
-                else
-                if(d.morality > 33)
-                    d.say(t, "You're never happy, are you?");
-                else
-                    d.say(t, "Wanna bet that we can find recordings of our match online tomorrow?");
+                switch (d.morality / 33) {
+                    case 0: d.say(t, "Wanna bet that we can find recordings of our match online tomorrow?"); break;
+                    case 1: d.say(t, "You're never happy, are you?"); break;
+                    default: d.say(t, "This tells me that I need to work on my self-control.");
+                }
                 d.say(t, "\"");
                 description = c.mainName + " and " + d.mainName + " have a match to determine who can endure pleasure the longest, and while " + c.mainName + " does win, the public nature of the match makes " + c.himHer() + " regret participating.";
             } else
@@ -11622,22 +10930,18 @@ public class WorldState
                 append(t, "As the crowd cheers for " + d.mainName + "'s victory, " + c.mainName + " wishes " + c.heShe() + " could just disappear.\n\n");
                 append(t, "And it's even worse than " + c.heShe() + " knows, as the show " + c.heShe() + " just put on will be enjoyed by far more people in the coming days.  After all, even though it's true that recording devices are forbidden inside the BDSM club, the club's owner is actually one of your Thralls, and there are plenty of cameras installed in the walls and ceiling.  Still ignorant of this fact, " + c.mainName + " limps out of the club, hanging " + c.hisHer() + " head in dejection.  " + d.mainName + " follows with a triumphant smile despite the clear flush of arousal in " + d.hisHer() + " cheeks.\n\n");
                 d.say(t, "\"");
-                if(d.morality > 66)
-                    d.say(t, "You were really beautiful, " + c.mainName + ".  Maybe you'd be happier if you cut loose like this more often.");
-                else
-                if(d.morality > 33)
-                    d.say(t, "You know, that was really sexy.");
-                else
-                    d.say(t, "You were so cute!  I need to think of more ways to see your embarrassed face!");
+                switch (d.morality / 33) {
+                    case 0: d.say(t, "You were so cute!  I need to think of more ways to see your embarrassed face!"); break;
+                    case 1: d.say(t, "You know, that was really sexy."); break;
+                    default: d.say(t, "You were really beautiful, " + c.mainName + ".  Maybe you'd be happier if you cut loose like this more often.");
+                }
                 d.say(t, "\"\n\n");
                 c.say(t, "\"");
-                if(c.confidence > 66)
-                    c.say(t, "I'll make you pay for daring to laugh at me...");
-                else
-                if(c.confidence > 33)
-                    c.say(t, "No!  You aren't allowed to remember this!");
-                else
-                    c.say(t, "P-Please, stop!  This is bad enough without your g-gloating!");
+                switch (c.confidence / 33) {
+                    case 0: c.say(t, "P-Please, stop!  This is bad enough without your g-gloating!"); break;
+                    case 1: c.say(t, "No!  You aren't allowed to remember this!"); break;
+                    default: c.say(t, "I'll make you pay for daring to laugh at me...");
+                }
                 c.say(t, "\"");
                 description = c.mainName + " and " + d.mainName + " have a match to determine who can endure pleasure the longest, and " + c.mainName + " is utterly humiliated by " + c.hisHer() + " defeat.";
             }
@@ -12763,13 +12067,11 @@ public class WorldState
                 else
                     w.append(t, String.format("%s's life away.", victim1.getMainName()));
                 killer.say(t, "\n\n\"");
-                if(killer.getInnocence() > 66)
-                    killer.say(t, "Um, " + victim1.getMainName() + " is really strong, so maybe " + victim1.heShe() + " will survive...  Y-Yeah, I need to have faith in " + victim1.himHer() + " and just go all-out!");
-                else
-                if(killer.getInnocence() > 33)
-                    killer.say(t, "I didn't think I'd have to worry about " + victim1.getMainName() + "...");
-                else
-                    killer.say(t, "This is my fault... but " + victim1.heShe() + "'s the one who's going to pay for it...");
+                switch (killer.getInnocence() / 33) {
+                    case 0: killer.say(t, "This is my fault... but " + victim1.heShe() + "'s the one who's going to pay for it..."); break;
+                    case 1: killer.say(t, "I didn't think I'd have to worry about " + victim1.getMainName() + "..."); break;
+                    default: killer.say(t, "Um, " + victim1.getMainName() + " is really strong, so maybe " + victim1.heShe() + " will survive...  Y-Yeah, I need to have faith in " + victim1.himHer() + " and just go all-out!");
+                }
             } else
             {
                 if(killer.getConfidence() > 33)
@@ -12777,13 +12079,11 @@ public class WorldState
                 else
                     w.append(t, String.format("%s's and %s's lives away.", victim1.getMainName(), victim2.getMainName()));
                 killer.say(t, "\n\n\"");
-                if(killer.getInnocence() > 66)
-                    killer.say(t, "Um, " + victim1.getMainName() + " is really strong, so maybe " + victim1.heShe() + "'ll be able to protect " + victim1.himHer() + "self safe, and " + victim2.getMainName() + " too...  Y-Yeah, I need to have faith in " + victim1.himHer() + " and just go all-out!");
-                else
-                if(killer.getInnocence() > 33)
-                    killer.say(t, "I was worried about " + victim2.getMainName() + ", but " + victim1.getMainName() + " got caught too...!?");
-                else
-                    killer.say(t, "This is my fault... but they're the ones who are going to pay for it...");
+                switch (killer.getInnocence() / 33) {
+                    case 0: killer.say(t, "This is my fault... but they're the ones who are going to pay for it..."); break;
+                    case 1: killer.say(t, "I was worried about " + victim2.getMainName() + ", but " + victim1.getMainName() + " got caught too...!?"); break;
+                    default: killer.say(t, "Um, " + victim1.getMainName() + " is really strong, so maybe " + victim1.heShe() + "'ll be able to protect " + victim1.himHer() + "self safe, and " + victim2.getMainName() + " too...  Y-Yeah, I need to have faith in " + victim1.himHer() + " and just go all-out!");
+                }
             }
         } else
         if(victim1.getConfidence() > 33)
@@ -12804,13 +12104,11 @@ public class WorldState
             else
                 w.append(t, String.format("%s and %s to escape before %s launches %s final attack.", victim1.getMainName(), victim2.getMainName(), killer.heShe(), killer.hisHer()));
             killer.say(t, "\n\n\"");
-            if(killer.getInnocence() > 66)
-                killer.say(t, "This... This has to be a nightmare...  I wanna wake up!");
-            else
-            if(killer.getInnocence() > 33)
-                killer.say(t, "I don't have any choice...");
-            else
-                killer.say(t, "Do it quickly, before I lose my nerve...!");
+            switch (killer.getInnocence() / 33) {
+                case 0: killer.say(t, "Do it quickly, before I lose my nerve...!"); break;
+                case 1: killer.say(t, "I don't have any choice..."); break;
+                default: killer.say(t, "This... This has to be a nightmare...  I wanna wake up!");
+            }
         } else
         {
             if(killer.getConfidence() > 66)
@@ -12831,13 +12129,11 @@ public class WorldState
                     w.append(t, String.format("by the time %s manages to escape, it might be too late to stop the Demons' victory.", victim1.getMainName()));
                 }
                 killer.say(t, "\n\n\"");
-                if(killer.getMorality() > 66)
-                    killer.say(t, "I was prepare to make sacrifices, but...  To lose " + victim1.getMainName() + "...  Still, I can't back down now!");
-                else
-                if(killer.getMorality() > 33)
-                    killer.say(t, "Being forced to kill the one I care about most...  Hmph!  Fine!  I'll make it quick!");
-                else
-                    killer.say(t, "Ugh.  I really don't want to kill " + victim1.himHer() + ".  But " + victim1.heShe() + " told me that if it came to this, I shouldn't hold back...");
+                switch (killer.getMorality() / 33) {
+                    case 0: killer.say(t, "Ugh.  I really don't want to kill " + victim1.himHer() + ".  But " + victim1.heShe() + " told me that if it came to this, I shouldn't hold back..."); break;
+                    case 1: killer.say(t, "Being forced to kill the one I care about most...  Hmph!  Fine!  I'll make it quick!"); break;
+                    default: killer.say(t, "I was prepare to make sacrifices, but...  To lose " + victim1.getMainName() + "...  Still, I can't back down now!");
+                }
             } else
             {
                 if(killer.getConfidence() > 66)
@@ -12845,13 +12141,11 @@ public class WorldState
                 else
                     w.append(t, String.format("by the time %s and %s manage to escape, it might be too late to stop the Demons' victory.", victim1.getMainName(), victim2.getMainName()));
                 killer.say(t, "\n\n\"");
-                if(killer.getMorality() > 66)
-                    killer.say(t, "I was prepare to make sacrifices, but...  To lose both of them...  Still, I can't back down now!");
-                else
-                if(killer.getMorality() > 33)
-                    killer.say(t, "Being forced to kill those I care about most...  Hmph!  Fine!  I'll make it quick!");
-                else
-                    killer.say(t, "Ugh.  I really don't want to kill them.  But they both told me that if it came to this, I shouldn't hold back...");
+                switch (killer.getMorality() / 33) {
+                    case 0: killer.say(t, "Ugh.  I really don't want to kill them.  But they both told me that if it came to this, I shouldn't hold back..."); break;
+                    case 1: killer.say(t, "Being forced to kill those I care about most...  Hmph!  Fine!  I'll make it quick!"); break;
+                    default: killer.say(t, "I was prepare to make sacrifices, but...  To lose both of them...  Still, I can't back down now!");
+                }
             }
         }
         killer.say(t, "\"");
@@ -12934,21 +12228,17 @@ public class WorldState
                 victim.say(t, "\"");
                 if(victim.isDrained())
                 {
-                    if(victim.getMorality() > 66)
-                        victim.say(t, "It may be... cowardly... but I'm happy... that you freed me... from all this...");
-                    else
-                    if(victim.getMorality() > 33)
-                        victim.say(t, killer.getMainName() + "...  This is... what I wanted... after all...");
-                    else
-                        victim.say(t, "Heh... I got you... to kill me... after all...");
+                    switch (victim.getMorality() / 33) {
+                        case 0: victim.say(t, "Heh... I got you... to kill me... after all..."); break;
+                        case 1: victim.say(t, killer.getMainName() + "...  This is... what I wanted... after all..."); break;
+                        default: victim.say(t, "It may be... cowardly... but I'm happy... that you freed me... from all this...");
+                    }
                 } else
-                if(victim.getMorality() > 66)
-                    victim.say(t, killer.getMainName() + "... I'm entrusting... my mission... to you...");
-                else
-                if(victim.getMorality() > 33)
-                    victim.say(t, "It's okay... " + killer.getMainName() + "... you did good...");
-                else
-                    victim.say(t, "Guess this is goodbye...  If there's a life after this one... then I think you'll end up... in a better place than the one I'm heading for...");
+                switch (victim.getMorality() / 33) {
+                    case 0: victim.say(t, "Guess this is goodbye...  If there's a life after this one... then I think you'll end up... in a better place than the one I'm heading for..."); break;
+                    case 1: victim.say(t, "It's okay... " + killer.getMainName() + "... you did good..."); break;
+                    default: victim.say(t, killer.getMainName() + "... I'm entrusting... my mission... to you...");
+                }
             } else
             if(killer.getInnocence() > 33)
             {
@@ -13004,21 +12294,17 @@ public class WorldState
                 victim.say(t, "\"");
                 if(victim.isDrained())
                 {
-                    if(victim.getMorality() > 66)
-                        victim.say(t, killer.getMainName() + "...  Thank... you...");
-                    else
-                    if(victim.getMorality() > 33)
-                        victim.say(t, "I'm glad... you're with me... " + killer.getMainName() + "...");
-                    else
-                        victim.say(t, "Finally... I can die...");
+                    switch (victim.getMorality() / 33) {
+                        case 0: victim.say(t, "Finally... I can die..."); break;
+                        case 1: victim.say(t, "I'm glad... you're with me... " + killer.getMainName() + "..."); break;
+                        default: victim.say(t, killer.getMainName() + "...  Thank... you...");
+                    }
                 } else
-                if(victim.getMorality() > 66)
-                    victim.say(t, "I did everything I could, but... I still... ended up...");
-                else
-                if(victim.getMorality() > 33)
-                    victim.say(t, "Did... Did I really do anything that mattered...?");
-                else
-                    victim.say(t, "I was... such an idiot...");
+                switch (victim.getMorality() / 33) {
+                    case 0: victim.say(t, "I was... such an idiot..."); break;
+                    case 1: victim.say(t, "Did... Did I really do anything that mattered...?"); break;
+                    default: victim.say(t, "I did everything I could, but... I still... ended up...");
+                }
             } else
             {
                 if(victim.getConfidence() > 66)
@@ -13074,21 +12360,17 @@ public class WorldState
                 victim.say(t, "\"");
                 if(victim.isDrained())
                 {
-                    if(victim.getMorality() > 66)
-                        victim.say(t, "Ah... I thought dying... would hurt more...");
-                    else
-                    if(victim.getMorality() > 33)
-                        victim.say(t, "Heheh...  Thanks... " + killer.getMainName() + "...");
-                    else
-                        victim.say(t, killer.getMainName() + "...  You'd better make it out okay... or I'm gonna beat you up in the afterlife...");
+                    switch (victim.getMorality() / 33) {
+                        case 0: victim.say(t, killer.getMainName() + "...  You'd better make it out okay... or I'm gonna beat you up in the afterlife..."); break;
+                        case 1: victim.say(t, "Heheh...  Thanks... " + killer.getMainName() + "..."); break;
+                        default: victim.say(t, "Ah... I thought dying... would hurt more...");
+                    }
                 } else
-                if(victim.getMorality() > 66)
-                    victim.say(t, "Did I do good...?  Please, " + killer.getMainName() + ", tell me I did good...");
-                else
-                if(victim.getMorality() > 33)
-                    victim.say(t, "Huh?  What happened...?  I'm... getting really sleepy...  ...");
-                else
-                    victim.say(t, "What's going to happen now?  I'm scared...!  I'm...  ...");
+                switch (victim.getMorality() / 33) {
+                    case 0: victim.say(t, "What's going to happen now?  I'm scared...!  I'm...  ..."); break;
+                    case 1: victim.say(t, "Huh?  What happened...?  I'm... getting really sleepy...  ..."); break;
+                    default: victim.say(t, "Did I do good...?  Please, " + killer.getMainName() + ", tell me I did good...");
+                }
             }
         } else
         {
@@ -13380,31 +12662,25 @@ public class WorldState
             {
                 if(killer.getMorality() > 66)
                 {
-                    if(victim.getInnocence() > 66)
-                        victim.say(t, "Heheh...  I actually wanted to die... so I guess... I win...");
-                    else
-                    if(victim.getInnocence() > 33)
-                        victim.say(t, "Go on...  Keep suffering for people who will never appreciate you...  Idiot...");
-                    else
-                        victim.say(t, "You... sanctimonious...  Ugh, but this is what I wanted... so I guess... it's fine...");
+                    switch (victim.getInnocence() / 33) {
+                        case 0: victim.say(t, "You... sanctimonious...  Ugh, but this is what I wanted... so I guess... it's fine..."); break;
+                        case 1: victim.say(t, "Go on...  Keep suffering for people who will never appreciate you...  Idiot..."); break;
+                        default: victim.say(t, "Heheh...  I actually wanted to die... so I guess... I win...");
+                    }
                 } else
                 if(killer.getMorality() > 33)
                 {
-                    if(victim.getInnocence() > 66)
-                        victim.say(t, "You're... as mean as you always are... but I guess this is okay too...");
-                    else
-                    if(victim.getInnocence() > 33)
-                        victim.say(t, "You could at least... finish me off... more quickly...");
-                    else
-                        victim.say(t, "Good...  The pain... is already... fading... away...");
+                    switch (victim.getInnocence() / 33) {
+                        case 0: victim.say(t, "Good...  The pain... is already... fading... away..."); break;
+                        case 1: victim.say(t, "You could at least... finish me off... more quickly..."); break;
+                        default: victim.say(t, "You're... as mean as you always are... but I guess this is okay too...");
+                    }
                 } else
-                if(victim.getInnocence() > 66)
-                    victim.say(t, "You're actually helping me die, so... I think I don't hate you... after all...");
-                else
-                if(victim.getInnocence() > 33)
-                    victim.say(t, "I always figured... you'd be the one to kill me...");
-                else
-                    victim.say(t, "My suffering... is at an end...  But yours...");
+                switch (victim.getInnocence() / 33) {
+                    case 0: victim.say(t, "My suffering... is at an end...  But yours..."); break;
+                    case 1: victim.say(t, "I always figured... you'd be the one to kill me..."); break;
+                    default: victim.say(t, "You're actually helping me die, so... I think I don't hate you... after all...");
+                }
             } else
             if(killer.getMorality() > 66)
             {
@@ -13424,21 +12700,17 @@ public class WorldState
             } else
             if(killer.getMorality() > 33)
             {
-                if(victim.getInnocence() > 66)
-                    victim.say(t, "No... save me... someone...");
-                else
-                if(victim.getInnocence() > 33)
-                    victim.say(t, "Ugh...  Damn you...");
-                else
-                    victim.say(t, "I suppose... I couldn't beat you... after all...");
+                switch (victim.getInnocence() / 33) {
+                    case 0: victim.say(t, "I suppose... I couldn't beat you... after all..."); break;
+                    case 1: victim.say(t, "Ugh...  Damn you..."); break;
+                    default: victim.say(t, "No... save me... someone...");
+                }
             } else
-            if(victim.getInnocence() > 66)
-                victim.say(t, "I failed...  I'm sorry... everyone...");
-            else
-            if(victim.getInnocence() > 33)
-                victim.say(t, "Why...?");
-            else
-                victim.say(t, "I did... everything... I could...");
+            switch (victim.getInnocence() / 33) {
+                case 0: victim.say(t, "I did... everything... I could..."); break;
+                case 1: victim.say(t, "Why...?"); break;
+                default: victim.say(t, "I failed...  I'm sorry... everyone...");
+            }
         }
         victim.say(t, "\"");
         victim.endSurround();
@@ -16801,13 +16073,11 @@ public class WorldState
                 w.append(t, String.format("Moral wounds cover %s body, which only remains alive due to the magical power flowing through %s.  ", c.hisHer(), c.himHer()));
             if(c.getPLEALevel() == 0)
             {
-                if(c.innocence > 66)
-                    w.append(t, String.format("%s uses whatever tactics feel right, not thinking too hard about what %s's doing", c.HeShe(), c.heShe()));
-                else
-                if(c.innocence > 33)
-                    w.append(t, String.format("%s acts to finish the battle as quickly as possible", c.HeShe()));
-                else
-                    w.append(t, String.format("%s acts with measured precision, choosing %s tactics for maximum effectiveness", c.HeShe(), c.hisHer()));
+                switch (c.innocence / 33) {
+                    case 0: w.append(t, String.format("%s acts with measured precision, choosing %s tactics for maximum effectiveness", c.HeShe(), c.hisHer())); break;
+                    case 1: w.append(t, String.format("%s acts to finish the battle as quickly as possible", c.HeShe())); break;
+                    default: w.append(t, String.format("%s uses whatever tactics feel right, not thinking too hard about what %s's doing", c.HeShe(), c.heShe()));
+                }
                 if(c.getEXPOLevel() == 1)
                 {
                     w.append(t, " and trying not to think about how ");
@@ -17127,13 +16397,11 @@ public class WorldState
         Chosen mid = null;
         Chosen low = null;
         for(int i = 0; i < 3; i++)
-            if(getCast()[i].confidence > 66)
-                high = getCast()[i];
-            else
-            if(getCast()[i].confidence > 33)
-                mid = getCast()[i];
-            else
-                low = getCast()[i];
+            switch (getCast()[i].confidence / 33) {
+                case 0: low = getCast()[i]; break;
+                case 1: mid = getCast()[i]; break;
+                default: high = getCast()[i];
+            }
 
         if(c.dissociationReq == 10)
         {
@@ -17153,44 +16421,34 @@ public class WorldState
             }
             if(c.innocence > 66)
             {
-                if(c.confidence > 66)
-                    w.append(t, String.format("One of the things %s has come to enjoy most is the feeling of power %s gains by offering sex to those who lust after %s, but when %2$s's taken against %s will, those feelings are flipped around to become what %2$s dreads most.  ", c.mainName, c.heShe(), c.himHer(), c.hisHer()));
-                else
-                if(c.confidence > 33)
-                    w.append(t, String.format("%s has always found sex to be strange and a little disgusting, and during %s time as one of the Chosen, %s's gradually started to associate it with nothing but pain and fear.  ", c.mainName, c.hisHer(), c.heShe()));
-                else
-                    w.append(t, String.format("Even though %s doesn't have the willpower to refuse anyone who wants to use %s body, %s still finds sex to be terrifying and mostly unpleasant.  ", c.mainName, c.hisHer(), c.heShe()));
-                if(c.morality > 66)
-                    w.append(t, String.format("%s fixation on the 'wrongness' of sex has developed into an aversion that grows stronger every time it's forced upon %s, so strong that it even prevents %2$s from reaching orgasm.  ", c.HisHer(), c.himHer()));
-                else
-                if(c.morality > 33)
-                    w.append(t, String.format("%s's extremely uncomfortable with the idea of feeling sexual pleasure, and while %s body is physiologically capable of orgasm, %2$s mind can't process it as pleasure.  ", c.HeShe(), c.hisHer()));
-                else
-                    w.append(t, String.format("It would be different if %s had ever been taught how good it could feel, but %1$s's never even experienced orgasm, and %s growing aversion means that %1$s quite possibly never will.  ", c.heShe(), c.hisHer()));
-                if(c.dignity > 66)
-                    w.append(t, String.format("The little pleasure %s does feel causes %s to feel a shame that's too great to bear, and %s mind collapses inward...", c.heShe(), c.himHer(), c.hisHer()));
-                else
-                if(c.dignity > 33)
-                    w.append(t, String.format("%s can't even muster the energy to keep trying to look like a hero.", c.HeShe()));
-                else
-                    w.append(t, String.format("%s hates %sself, and in order to cope with that hate, %s pushes %s conscious mind away.", c.HeShe(), c.himHer(), c.heShe(), c.hisHer()));
+                switch (c.confidence / 33) {
+                    case 0: w.append(t, String.format("Even though %s doesn't have the willpower to refuse anyone who wants to use %s body, %s still finds sex to be terrifying and mostly unpleasant.  ", c.mainName, c.hisHer(), c.heShe())); break;
+                    case 1: w.append(t, String.format("%s has always found sex to be strange and a little disgusting, and during %s time as one of the Chosen, %s's gradually started to associate it with nothing but pain and fear.  ", c.mainName, c.hisHer(), c.heShe())); break;
+                    default: w.append(t, String.format("One of the things %s has come to enjoy most is the feeling of power %s gains by offering sex to those who lust after %s, but when %2$s's taken against %s will, those feelings are flipped around to become what %2$s dreads most.  ", c.mainName, c.heShe(), c.himHer(), c.hisHer()));
+                }
+                switch (c.morality / 33) {
+                    case 0: w.append(t, String.format("It would be different if %s had ever been taught how good it could feel, but %1$s's never even experienced orgasm, and %s growing aversion means that %1$s quite possibly never will.  ", c.heShe(), c.hisHer())); break;
+                    case 1: w.append(t, String.format("%s's extremely uncomfortable with the idea of feeling sexual pleasure, and while %s body is physiologically capable of orgasm, %2$s mind can't process it as pleasure.  ", c.HeShe(), c.hisHer())); break;
+                    default: w.append(t, String.format("%s fixation on the 'wrongness' of sex has developed into an aversion that grows stronger every time it's forced upon %s, so strong that it even prevents %2$s from reaching orgasm.  ", c.HisHer(), c.himHer()));
+                }
+                switch (c.dignity / 33) {
+                    case 0: w.append(t, String.format("%s hates %sself, and in order to cope with that hate, %s pushes %s conscious mind away.", c.HeShe(), c.himHer(), c.heShe(), c.hisHer())); break;
+                    case 1: w.append(t, String.format("%s can't even muster the energy to keep trying to look like a hero.", c.HeShe())); break;
+                    default: w.append(t, String.format("The little pleasure %s does feel causes %s to feel a shame that's too great to bear, and %s mind collapses inward...", c.heShe(), c.himHer(), c.hisHer()));
+                }
             } else
             if(c.dignity > 66)
             {
-                if(c.confidence > 66)
-                    w.append(t, String.format("%s is far too prideful to admit to anyone - or even to %sself - that unwanted sexual contact could ever be pleasurable.  ", c.mainName, c.himHer()));
-                else
-                if(c.confidence > 33)
-                    w.append(t, String.format("%s has rejected any notion of embracing %s sexuality so far, unable to bring %sself to face the ridicule the public would surely heap upon %3$s.  ", c.mainName, c.hisHer(), c.himHer()));
-                else
-                    w.append(t, String.format("%s is so terrified of being thought of as a pervert that %s subconsciously blocks out the stimulation %s body feels when molested in combat.  ", c.mainName, c.heShe(), c.hisHer()));
-                if(c.morality > 66)
-                    w.append(t, String.format("Every time %s does feel some pleasure, %s self-loathing only grows, making %s even more dependent on the public's approval.  ", c.heShe(), c.hisHer(), c.himHer()));
-                else
-                if(c.morality > 33)
-                    w.append(t, String.format("However, %s success at preserving %1$s reputation this far has only put %s in the mental trap of being unwilling to throw it away and accept the pleasure.  ", c.hisHer(), c.himHer()));
-                else
-                    w.append(t, String.format("%s's never felt enough pleasure to eclipse %s rage at the Thralls for abusing %s, and combined with the stress of pursuing %2$s celebrity ambitions, %s has no emotional outlet.  ", c.HeShe(), c.hisHer(), c.himHer(), c.heShe()));
+                switch (c.confidence / 33) {
+                    case 0: w.append(t, String.format("%s is so terrified of being thought of as a pervert that %s subconsciously blocks out the stimulation %s body feels when molested in combat.  ", c.mainName, c.heShe(), c.hisHer())); break;
+                    case 1: w.append(t, String.format("%s has rejected any notion of embracing %s sexuality so far, unable to bring %sself to face the ridicule the public would surely heap upon %3$s.  ", c.mainName, c.hisHer(), c.himHer())); break;
+                    default: w.append(t, String.format("%s is far too prideful to admit to anyone - or even to %sself - that unwanted sexual contact could ever be pleasurable.  ", c.mainName, c.himHer()));
+                }
+                switch (c.morality / 33) {
+                    case 0: w.append(t, String.format("%s's never felt enough pleasure to eclipse %s rage at the Thralls for abusing %s, and combined with the stress of pursuing %2$s celebrity ambitions, %s has no emotional outlet.  ", c.HeShe(), c.hisHer(), c.himHer(), c.heShe())); break;
+                    case 1: w.append(t, String.format("However, %s success at preserving %1$s reputation this far has only put %s in the mental trap of being unwilling to throw it away and accept the pleasure.  ", c.hisHer(), c.himHer())); break;
+                    default: w.append(t, String.format("Every time %s does feel some pleasure, %s self-loathing only grows, making %s even more dependent on the public's approval.  ", c.heShe(), c.hisHer(), c.himHer()));
+                }
                 if(c.innocence > 33)
                     w.append(t, String.format("Without any way to come to terms with what's happening to %s, %s mind starts to shut down.", c.himHer(), c.hisHer()));
                 else
@@ -17206,13 +16464,11 @@ public class WorldState
                     w.append(t, String.format("%s refuses to bend in the slightest to the sexual advances being constantly forced upon %s.  What can't bend can only break.  ", c.heShe(), c.himHer()));
                 else
                     w.append(t, String.format("for the first time in %s life, %s feels truly powerless against the way that %2$s keeps being sexualized despite rejecting every hint of sexuality.  ", c.hisHer(), c.heShe()));
-                if(c.morality > 66)
-                    w.append(t, String.format("Even a strong-willed hero like %s has %s limits.", c.himHer(), c.hisHer()));
-                else
-                if(c.morality > 33)
-                    w.append(t, String.format("Unsure how to handle the unfamiliar sense of defeat, %s feels like there's nothing left but to surrender.", c.heShe()));
-                else
-                    w.append(t, String.format("%s rage has burnt itself out, and all that remains is despair.", c.HisHer()));
+                switch (c.morality / 33) {
+                    case 0: w.append(t, String.format("%s rage has burnt itself out, and all that remains is despair.", c.HisHer())); break;
+                    case 1: w.append(t, String.format("Unsure how to handle the unfamiliar sense of defeat, %s feels like there's nothing left but to surrender.", c.heShe())); break;
+                    default: w.append(t, String.format("Even a strong-willed hero like %s has %s limits.", c.himHer(), c.hisHer()));
+                }
             } else
             {
                 if(c.confidence > 33)
@@ -17237,41 +16493,33 @@ public class WorldState
             c.defeatType = 6;
             if(c.drained)
             {
-                if(c.innocence > 66)
-                    append(t, c.mainName + " had a plan to try to get the Demon Lord to kill " + c.himHer() + ", but with the familiar terror gripping " + c.hisHer() + " heart as the Thralls close in, " + c.heShe() + " can't remember it.  " + c.HeShe() + " can't remember much of anything, and " + c.heShe() + " can only think of how nice it would be if " + c.heShe() + " were someone else, someone who isn't bothered by this sort of thing.  Then, " + c.heShe() + " begins to delusionally believe that those wishes are reality.");
-                else
-                if(c.innocence > 33)
-                    append(t, "Unable to imagine any escape from " + c.hisHer() + " own torture other than " + c.hisHer() + " own death, and with the cruel laughter of the Thralls ringing in " + c.hisHer() + " ears as their hands reach toward " + c.himHer() + ", " + c.mainName + "'s mind shuts down once again.  But then, something seems to occur to " + c.himHer() + ", and a new light begins to shine within " + c.hisHer() + " eyes.");
-                else
-                    append(t, c.mainName + " was never truly content with the prospect of escaping " + c.hisHer() + " torture through " + c.hisHer() + " own death.  " + c.HeShe() + " could never forget that a happy life would still await " + c.himHer() + " if " + c.heShe() + " submitted to the Demon Lord, but such an action would be inconsistent with " + c.hisHer() + " self-image.  That contradiction gnawing at " + c.himHer() + " from within, combined with the horrifying prospect of being utterly defeated and abused without end, finally causes " + c.himHer() + " to snap.");
+                switch (c.innocence / 33) {
+                    case 0: append(t, c.mainName + " was never truly content with the prospect of escaping " + c.hisHer() + " torture through " + c.hisHer() + " own death.  " + c.HeShe() + " could never forget that a happy life would still await " + c.himHer() + " if " + c.heShe() + " submitted to the Demon Lord, but such an action would be inconsistent with " + c.hisHer() + " self-image.  That contradiction gnawing at " + c.himHer() + " from within, combined with the horrifying prospect of being utterly defeated and abused without end, finally causes " + c.himHer() + " to snap."); break;
+                    case 1: append(t, "Unable to imagine any escape from " + c.hisHer() + " own torture other than " + c.hisHer() + " own death, and with the cruel laughter of the Thralls ringing in " + c.hisHer() + " ears as their hands reach toward " + c.himHer() + ", " + c.mainName + "'s mind shuts down once again.  But then, something seems to occur to " + c.himHer() + ", and a new light begins to shine within " + c.hisHer() + " eyes."); break;
+                    default: append(t, c.mainName + " had a plan to try to get the Demon Lord to kill " + c.himHer() + ", but with the familiar terror gripping " + c.hisHer() + " heart as the Thralls close in, " + c.heShe() + " can't remember it.  " + c.HeShe() + " can't remember much of anything, and " + c.heShe() + " can only think of how nice it would be if " + c.heShe() + " were someone else, someone who isn't bothered by this sort of thing.  Then, " + c.heShe() + " begins to delusionally believe that those wishes are reality.");
+                }
             } else
-            if(c.morality > 66)
-                append(t, "Even though " + c.mainName + " has gradually begun to compromise " + c.hisHer() + " moral code more and more since joining the war, the idea of actually joining the side of the Demons is outside what " + c.heShe() + " would ever consider.  Faced with the choice between that and being sexually tormented yet again, " + c.hisHer() + " sense of self is what gives way first.  The kindhearted, heroic " + c.mainName + " finally disappears.");
-            else
-            if(c.morality > 33)
-                append(t, "Ever since " + c.heShe() + " first fell comatose during combat, " + c.mainName + "'s mind has been in a constant war against itself over whether " + c.heShe() + " could be forgiven for giving in to the Demons.  The strain is too much for " + c.hisHer() + " mind to bear, and as the Thralls close in for what promises to be the most horrifying torture session yet, " + c.hisHer() + " sanity abruptly shatters.");
-            else
-                append(t, c.mainName + " has been entertaining the idea of joining the Demons for some time, but every time " + c.heShe() + " does so, " + c.hisHer() + " anger at the Thralls for what they've done to " + c.himHer() + " drives the thought from " + c.hisHer() + " head.  The firmness of " + c.hisHer() + " own identity, connecting " + c.hisHer() + " memories of the Thralls' abuses to the " + c.himHer() + " of the present, is the only thing keeping " + c.himHer() + " on the human side.  And now, with the promise of event greater torments to come, even that part of " + c.hisHer() + " mind falls apart.");
+            switch (c.morality / 33) {
+                case 0: append(t, c.mainName + " has been entertaining the idea of joining the Demons for some time, but every time " + c.heShe() + " does so, " + c.hisHer() + " anger at the Thralls for what they've done to " + c.himHer() + " drives the thought from " + c.hisHer() + " head.  The firmness of " + c.hisHer() + " own identity, connecting " + c.hisHer() + " memories of the Thralls' abuses to the " + c.himHer() + " of the present, is the only thing keeping " + c.himHer() + " on the human side.  And now, with the promise of event greater torments to come, even that part of " + c.hisHer() + " mind falls apart."); break;
+                case 1: append(t, "Ever since " + c.heShe() + " first fell comatose during combat, " + c.mainName + "'s mind has been in a constant war against itself over whether " + c.heShe() + " could be forgiven for giving in to the Demons.  The strain is too much for " + c.hisHer() + " mind to bear, and as the Thralls close in for what promises to be the most horrifying torture session yet, " + c.hisHer() + " sanity abruptly shatters."); break;
+                default: append(t, "Even though " + c.mainName + " has gradually begun to compromise " + c.hisHer() + " moral code more and more since joining the war, the idea of actually joining the side of the Demons is outside what " + c.heShe() + " would ever consider.  Faced with the choice between that and being sexually tormented yet again, " + c.hisHer() + " sense of self is what gives way first.  The kindhearted, heroic " + c.mainName + " finally disappears.");
+            }
             w.append(t, "\n\n");
             w.underlineAppend(t, "Resolve Broken");
             w.append(t, "\n\n");
             if(c.impregnated)
             {
-                if(c.confidence > 66)
-                    append(t, c.HisHer() + " self-confidence surges, even stronger than it was at " + c.hisHer() + " peak, and " + c.heShe() + " goes on a rampage with " + c.hisHer() + " " + c.weapon + ", slaughtering the Thralls in every direction.  But rather than acting to rescue " + c.hisHer() + " allies, " + c.heShe() + " only kills enough to satisfy " + c.hisHer() + " sudden sadistic urges before beginning to purposefully stride toward the Demonic spire in order to offer " + c.hisHer() + " services to the Demon Lord.  ");
-                else
-                if(c.confidence > 33)
-                    append(t, "A blast of Demonic energy surges outward, killing the Thralls who were trying to grab " + c.himHer() + ", and when the black haze clears, " + c.mainName + " is cackling alone in a sea of carnage.  It takes " + c.himHer() + " some time to calm down, but when " + c.heShe() + " does, " + c.heShe() + " immediately sets out to find the Demon Lord, not seeming to care in the slightest about the course of the battle.  ");
-                else
-                    append(t, c.HeShe() + " makes no effort to flee, rushing toward the Thralls and killing several with " + c.hisHer() + " " + c.weapon + ", moving with a self-assured grace that " + c.heShe() + " never could have managed before.  Then, once " + c.heShe() + "'s sure that no one else will try to stop " + c.himHer() + ", " + c.heShe() + " demands that the nearest Demon point " + c.himHer() + " toward the Demon Lord so that " + c.heShe() + " can pay " + c.hisHer() + " respects.  ");
+                switch (c.confidence / 33) {
+                    case 0: append(t, c.HeShe() + " makes no effort to flee, rushing toward the Thralls and killing several with " + c.hisHer() + " " + c.weapon + ", moving with a self-assured grace that " + c.heShe() + " never could have managed before.  Then, once " + c.heShe() + "'s sure that no one else will try to stop " + c.himHer() + ", " + c.heShe() + " demands that the nearest Demon point " + c.himHer() + " toward the Demon Lord so that " + c.heShe() + " can pay " + c.hisHer() + " respects.  "); break;
+                    case 1: append(t, "A blast of Demonic energy surges outward, killing the Thralls who were trying to grab " + c.himHer() + ", and when the black haze clears, " + c.mainName + " is cackling alone in a sea of carnage.  It takes " + c.himHer() + " some time to calm down, but when " + c.heShe() + " does, " + c.heShe() + " immediately sets out to find the Demon Lord, not seeming to care in the slightest about the course of the battle.  "); break;
+                    default: append(t, c.HisHer() + " self-confidence surges, even stronger than it was at " + c.hisHer() + " peak, and " + c.heShe() + " goes on a rampage with " + c.hisHer() + " " + c.weapon + ", slaughtering the Thralls in every direction.  But rather than acting to rescue " + c.hisHer() + " allies, " + c.heShe() + " only kills enough to satisfy " + c.hisHer() + " sudden sadistic urges before beginning to purposefully stride toward the Demonic spire in order to offer " + c.hisHer() + " services to the Demon Lord.  ");
+                }
             } else
-            if(c.confidence > 66)
-                append(t, "Much to the Thralls' surprise, " + c.heShe() + " keeps fighting back long past the point where " + c.heShe() + "'d normally have gone comatose.  They're thrown into disarray, clearing a wide circle around " + c.himHer() + ", but " + c.heShe() + " makes no move to help " + c.hisHer() + " allies.  Instead, " + c.heShe() + " begins to push " + c.hisHer() + " way through to the Demonic spire, intending to offer " + c.hisHer() + " services to the Demon Lord directly.  ");
-            else
-            if(c.confidence > 33)
-                append(t, c.HeShe() + " flees the Thralls, but not in the panic they had expected, and with " + c.hisHer() + " wits about " + c.himHer() + ", " + c.heShe() + "'s able to escape them and circle around from a new angle.  " + c.HeShe() + " has a new objective now, and it doesn't involve killing the Demons.  ");
-            else
-                append(t, "The crowd surges forward, expecting " + c.mainName + " to meekly collapse like always, but " + c.heShe() + " stops them with a surprisingly strong-willed glare.  They falter, and " + c.mainName + " walks between them, seemingly without a care in the world, to seek and offer " + c.hisHer() + " respects to the Demon Lord.  ");
+            switch (c.confidence / 33) {
+                case 0: append(t, "The crowd surges forward, expecting " + c.mainName + " to meekly collapse like always, but " + c.heShe() + " stops them with a surprisingly strong-willed glare.  They falter, and " + c.mainName + " walks between them, seemingly without a care in the world, to seek and offer " + c.hisHer() + " respects to the Demon Lord.  "); break;
+                case 1: append(t, c.HeShe() + " flees the Thralls, but not in the panic they had expected, and with " + c.hisHer() + " wits about " + c.himHer() + ", " + c.heShe() + "'s able to escape them and circle around from a new angle.  " + c.HeShe() + " has a new objective now, and it doesn't involve killing the Demons.  "); break;
+                default: append(t, "Much to the Thralls' surprise, " + c.heShe() + " keeps fighting back long past the point where " + c.heShe() + "'d normally have gone comatose.  They're thrown into disarray, clearing a wide circle around " + c.himHer() + ", but " + c.heShe() + " makes no move to help " + c.hisHer() + " allies.  Instead, " + c.heShe() + " begins to push " + c.hisHer() + " way through to the Demonic spire, intending to offer " + c.hisHer() + " services to the Demon Lord directly.  ");
+            }
             if(c.innocence > 66)
             {
                 append(t, c.HeShe() + "'s managed to convince " + c.himHer() + "self that " + c.heShe() + "'s not " + c.mainName + " anymore.");
@@ -17346,13 +16594,11 @@ public class WorldState
             {
                 if(c.confidence > 66)
                 {
-                    if(c.innocence > 66)
-                        w.append(t, String.format("Seeing the other two Chosen disarmed and subdued as well, even %s has to admit that %s won't be escaping anytime soon.  ", c.mainName, c.heShe()));
-                    else
-                    if(c.innocence > 33)
-                        w.append(t, String.format("Even %s's overwhelming confidence falters upon realizing how hopeless the situation is.  ", c.mainName));
-                    else
-                        w.append(t, String.format("Upon counting the Thralls surrounding %s and the other Chosen, %s's look of confident determination fades and then completely slips away.  ", c.himHer(), c.mainName));
+                    switch (c.innocence / 33) {
+                        case 0: w.append(t, String.format("Upon counting the Thralls surrounding %s and the other Chosen, %s's look of confident determination fades and then completely slips away.  ", c.himHer(), c.mainName)); break;
+                        case 1: w.append(t, String.format("Even %s's overwhelming confidence falters upon realizing how hopeless the situation is.  ", c.mainName)); break;
+                        default: w.append(t, String.format("Seeing the other two Chosen disarmed and subdued as well, even %s has to admit that %s won't be escaping anytime soon.  ", c.mainName, c.heShe()));
+                    }
                     w.append(t, String.format("%s struggles finally cease, %s eyes glazed and empty.  At first, the Thralls suspect that %s's only feigning weakness in order to make them let their guard down.  However, when %3$s doesn't even react to the cruel taunting from the Thrall penetrating %2$s ", c.HisHer(), c.hisHer(), c.heShe()));
                     if(c.gender.equals("male"))
                         w.append(t, "asshole");
@@ -17366,13 +16612,11 @@ public class WorldState
                         w.append(t, String.format("Seeing %s's defeat, the last bit of hope drains out of %s.  ", high.mainName, c.mainName));
                     else
                         w.append(t, String.format("While %s tries to escape, %s is losing %s will to fight.  ", high.mainName, c.mainName, c.hisHer()));
-                    if(c.innocence > 66)
-                        w.append(t, String.format("%s goes to a happy place inside %s mind, abandoning %2$s body.  ", c.HeShe(), c.hisHer()));
-                    else
-                    if(c.innocence > 33)
-                        w.append(t, String.format("%s knows that %s won't be rescued, and the prospect of being tortured for so long is too much for %s.  ", c.HeShe(), c.heShe(), c.himHer()));
-                    else
-                        w.append(t, String.format("If there were some prospect of rescue, %s might be able to find some reserves of willpower, but %1$s knows better than anyone that this torment will continue for some time.  ", c.heShe()));
+                    switch (c.innocence / 33) {
+                        case 0: w.append(t, String.format("If there were some prospect of rescue, %s might be able to find some reserves of willpower, but %1$s knows better than anyone that this torment will continue for some time.  ", c.heShe())); break;
+                        case 1: w.append(t, String.format("%s knows that %s won't be rescued, and the prospect of being tortured for so long is too much for %s.  ", c.HeShe(), c.heShe(), c.himHer())); break;
+                        default: w.append(t, String.format("%s goes to a happy place inside %s mind, abandoning %2$s body.  ", c.HeShe(), c.hisHer()));
+                    }
                     w.append(t, String.format("%s goes completely limp, and the Thralls are quick to seize the opportunity to use %s body even more thoroughly.", c.HeShe(), c.hisHer()));
                 } else
                 {
@@ -17386,25 +16630,21 @@ public class WorldState
                         w.append(t, String.format("Even before %s's struggles cease, %s has already completely surrendered.  ", mid.mainName, c.mainName));
                     else
                         w.append(t, String.format("Even as the other two Chosen try to escape, %s has already completely surrendered.  ", c.mainName));
-                    if(c.innocence > 66)
-                        w.append(t, String.format("%s's still technically conscious, but %s mind has stopped working, paralyzed by the trauma inflicted upon %s.  ", c.HeShe(), c.hisHer(), c.himHer()));
-                    else
-                    if(c.innocence > 33)
-                        w.append(t, String.format("%s isn't even sobbing or whimpering for mercy anymore.  ", c.HeShe()));
-                    else
-                        w.append(t, String.format("%s's managed to put %sself into a dissociated mental state, and while %s hates doing something so cowardly, that feeling melts away with all the others.  ", c.HeShe(), c.himHer(), c.heShe()));
+                    switch (c.innocence / 33) {
+                        case 0: w.append(t, String.format("%s's managed to put %sself into a dissociated mental state, and while %s hates doing something so cowardly, that feeling melts away with all the others.  ", c.HeShe(), c.himHer(), c.heShe())); break;
+                        case 1: w.append(t, String.format("%s isn't even sobbing or whimpering for mercy anymore.  ", c.HeShe())); break;
+                        default: w.append(t, String.format("%s's still technically conscious, but %s mind has stopped working, paralyzed by the trauma inflicted upon %s.  ", c.HeShe(), c.hisHer(), c.himHer()));
+                    }
                     w.append(t, String.format("The Thralls pound %s from both sides, and %s's silent except for the occasional involuntary grunt when %2$s's pierced by a particularly strong thrust.", c.himHer(), c.heShe()));
                 }
             } else
             if(c.confidence > 66)
             {
-                if(c.innocence > 66)
-                    w.append(t, String.format("%s panics as the Thralls close in, squealing and thrashing madly, but by now they know how long they have to wait until %s exhausts %sself and goes limp.  ", c.mainName, c.heShe(), c.himHer()));
-                else
-                if(c.innocence > 33)
-                    w.append(t, String.format("The Thralls make a game of trying to keep %s conscious as long as possible with cruel taunts and slaps to %s sensitive parts, and they seem almost disappointed when %s finally goes limp.  ", c.mainName, c.hisHer(), c.heShe()));
-                else
-                    w.append(t, String.format("As the Thralls close in, a part of %s's mind tries to remain conscious, but %s rejects it and willingly surrenders, knowing that %2$s'll suffer more if %2$s fights it.  ", c.mainName, c.heShe()));
+                switch (c.innocence / 33) {
+                    case 0: w.append(t, String.format("As the Thralls close in, a part of %s's mind tries to remain conscious, but %s rejects it and willingly surrenders, knowing that %2$s'll suffer more if %2$s fights it.  ", c.mainName, c.heShe())); break;
+                    case 1: w.append(t, String.format("The Thralls make a game of trying to keep %s conscious as long as possible with cruel taunts and slaps to %s sensitive parts, and they seem almost disappointed when %s finally goes limp.  ", c.mainName, c.hisHer(), c.heShe())); break;
+                    default: w.append(t, String.format("%s panics as the Thralls close in, squealing and thrashing madly, but by now they know how long they have to wait until %s exhausts %sself and goes limp.  ", c.mainName, c.heShe(), c.himHer()));
+                }
                 w.append(t, String.format("After %s eyes glaze over, the Thralls no longer have any fear that %s'll bite them, and the line waiting to fuck %1$s throat is even longer than the ", c.hisHer(), c.heShe()));
                 if(c.gender.equals("male"))
                     w.append(t, String.format("one for %s ass.", c.hisHer()));
@@ -17417,13 +16657,11 @@ public class WorldState
                     w.append(t, String.format("With %s having been broken so thoroughly, the Thralls aren't concerned in the slightest about %s's resistance.  ", high.mainName, c.mainName));
                 else
                     w.append(t, String.format("While %s continues to fight as hard as %s can, there's not even a scrap of resistance left in %s.  ", high.mainName, c.heShe(), c.mainName));
-                if(c.innocence > 66)
-                    w.append(t, String.format("%s's been conditioned to enter a dissociative state practically as soon as the Thralls get their hands on %s.  ", c.HeShe(), c.himHer()));
-                else
-                if(c.innocence > 33)
-                    w.append(t, String.format("%s doesn't even struggle anymore against the darkness that sweeps over %s consciousness.  ", c.HeShe(), c.hisHer()));
-                else
-                    w.append(t, String.format("%s hurriedly wills %s consciousness to fade away, entering a dissociated state with practiced ease.  ", c.HeShe(), c.hisHer()));
+                switch (c.innocence / 33) {
+                    case 0: w.append(t, String.format("%s hurriedly wills %s consciousness to fade away, entering a dissociated state with practiced ease.  ", c.HeShe(), c.hisHer())); break;
+                    case 1: w.append(t, String.format("%s doesn't even struggle anymore against the darkness that sweeps over %s consciousness.  ", c.HeShe(), c.hisHer())); break;
+                    default: w.append(t, String.format("%s's been conditioned to enter a dissociative state practically as soon as the Thralls get their hands on %s.  ", c.HeShe(), c.himHer()));
+                }
                 w.append(t, String.format("The Thralls jostle for position, eager to be the first one to break %s in today.", c.himHer()));
             } else
             {
@@ -17437,13 +16675,11 @@ public class WorldState
                     w.append(t, String.format("%s, even moreso than %s, seems like nothing more than a doll with %s strings cut.  ", c.mainName, mid.mainName, c.hisHer()));
                 else
                     w.append(t, String.format("While %s and %s continue to fight, %s seems like nothing more than a doll with %s string cut.  ", high.mainName, mid.mainName, c.mainName, c.hisHer()));
-                if(c.innocence > 66)
-                    w.append(t, String.format("%s looks somehow peaceful even in the middle of the orgy, having given up on understanding why %s has to suffer.  ", c.HeShe(), c.heShe()));
-                else
-                if(c.innocence > 33)
-                    w.append(t, String.format("No trace of fear or any other emotion remains on %s face.  ", c.hisHer()));
-                else
-                    w.append(t, String.format("No trace of %s usual caution or concern remains on %1$s face.  ", c.hisHer()));
+                switch (c.innocence / 33) {
+                    case 0: w.append(t, String.format("No trace of %s usual caution or concern remains on %1$s face.  ", c.hisHer())); break;
+                    case 1: w.append(t, String.format("No trace of fear or any other emotion remains on %s face.  ", c.hisHer())); break;
+                    default: w.append(t, String.format("%s looks somehow peaceful even in the middle of the orgy, having given up on understanding why %s has to suffer.  ", c.HeShe(), c.heShe()));
+                }
                 w.append(t, String.format("%s only moves when the Thralls move %s in the process of vigorously fucking ", c.HeShe(), c.himHer()));
                 if(c.gender.equals("male"))
                     w.append(t, String.format("%s from the front and back.", c.himHer()));
@@ -17761,13 +16997,11 @@ public class WorldState
         {
             underlineAppend(t, "Catatonic");
             append(t, "\n\n");
-            if(c.confidence > 66)
-                append(t, c.mainName + " is too traumatized to provide any sort of leadership, now.  " + c.HeShe() + " just huddles in on " + c.himHer() + "self, whimpering.");
-            else
-            if(c.confidence > 33)
-                append(t, c.mainName + " covers " + c.hisHer() + " face, sobbing incoherently.  " + c.HeShe() + " makes no effort to fight or even defend " + c.himHer() + "self anymore.");
-            else
-                append(t, c.mainName + " lays motionless, staring at the sky.  Only the trickle of tears down " + c.hisHer() + " face provides any sign that " + c.heShe() + "'s still alive.");
+            switch (c.confidence / 33) {
+                case 0: append(t, c.mainName + " lays motionless, staring at the sky.  Only the trickle of tears down " + c.hisHer() + " face provides any sign that " + c.heShe() + "'s still alive."); break;
+                case 1: append(t, c.mainName + " covers " + c.hisHer() + " face, sobbing incoherently.  " + c.HeShe() + " makes no effort to fight or even defend " + c.himHer() + "self anymore."); break;
+                default: append(t, c.mainName + " is too traumatized to provide any sort of leadership, now.  " + c.HeShe() + " just huddles in on " + c.himHer() + "self, whimpering.");
+            }
             c.say(t, "\n\n\"...\"");
             Project.changePortrait(c.convertGender(), c.type, false, false, this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
         } else
@@ -17781,31 +17015,25 @@ public class WorldState
                 c.say(t, "\"");
                 if(thisAttack == 0)
                 {
-                    if(c.morality > 66)
-                        c.say(t, "I'm... sorry... but I...!");
-                    else
-                    if(c.morality > 33)
-                        c.say(t, "Just gotta... run...!");
-                    else
-                        c.say(t, "I don't... wanna fight... anymore...!");
+                    switch (c.morality / 33) {
+                        case 0: c.say(t, "I don't... wanna fight... anymore...!"); break;
+                        case 1: c.say(t, "Just gotta... run...!"); break;
+                        default: c.say(t, "I'm... sorry... but I...!");
+                    }
                 } else
                 if(thisAttack == 1)
                 {
-                    if(c.confidence > 66)
-                        c.say(t, "This is a dream... a bad dream... it has to be...!");
-                    else
-                    if(c.confidence > 33)
-                        c.say(t, "No more, no more!");
-                    else
-                        c.say(t, "I can't...  I can't...");
+                    switch (c.confidence / 33) {
+                        case 0: c.say(t, "I can't...  I can't..."); break;
+                        case 1: c.say(t, "No more, no more!"); break;
+                        default: c.say(t, "This is a dream... a bad dream... it has to be...!");
+                    }
                 } else
-                if(c.dignity > 66)
-                    c.say(t, "I don't even care if I look like a weakling...!");
-                else
-                if(c.dignity > 33)
-                    c.say(t, "No!  No!  No!");
-                else
-                    c.say(t, "Aaah!");
+                switch (c.dignity / 33) {
+                    case 0: c.say(t, "Aaah!"); break;
+                    case 1: c.say(t, "No!  No!  No!"); break;
+                    default: c.say(t, "I don't even care if I look like a weakling...!");
+                }
             } else
             if(c.innocence > 33)
             {
@@ -17813,62 +17041,50 @@ public class WorldState
                 c.say(t, "\"");
                 if(thisAttack == 0)
                 {
-                    if(c.morality > 66)
-                        c.say(t, "I... I can't do anything here...!");
-                    else
-                    if(c.morality > 33)
-                        c.say(t, "I need... I need to calm down...!");
-                    else
-                        c.say(t, "Fuck it!  Fuck all of this!");
+                    switch (c.morality / 33) {
+                        case 0: c.say(t, "Fuck it!  Fuck all of this!"); break;
+                        case 1: c.say(t, "I need... I need to calm down...!"); break;
+                        default: c.say(t, "I... I can't do anything here...!");
+                    }
                 } else
                 if(thisAttack == 1)
                 {
-                    if(c.confidence > 66)
-                        c.say(t, "I-Impossible...!");
-                    else
-                    if(c.confidence > 33)
-                        c.say(t, "I th-thought I was stronger...!");
-                    else
-                        c.say(t, "I'm... completely powerless...!");
+                    switch (c.confidence / 33) {
+                        case 0: c.say(t, "I'm... completely powerless...!"); break;
+                        case 1: c.say(t, "I th-thought I was stronger...!"); break;
+                        default: c.say(t, "I-Impossible...!");
+                    }
                 } else
-                if(c.dignity > 66)
-                    c.say(t, "I'm... a disgrace...!");
-                else
-                if(c.dignity > 33)
-                    c.say(t, "Why...?  Why...?");
-                else
-                    c.say(t, "Gaaah!");
+                switch (c.dignity / 33) {
+                    case 0: c.say(t, "Gaaah!"); break;
+                    case 1: c.say(t, "Why...?  Why...?"); break;
+                    default: c.say(t, "I'm... a disgrace...!");
+                }
             } else
             {
                 append(t, c.mainName + "'s mind has been irrevocably damaged by the torture, but " + c.heShe() + " manages to push it aside for the moment and focus on flying away from the battlefield.  It will all hit " + c.himHer() + " at once in a few hours.\n\n");
                 c.say(t, "\"");
                 if(thisAttack == 0)
                 {
-                    if(c.morality > 66)
-                        c.say(t, "As I am now, I am... a liability...");
-                    else
-                    if(c.morality > 33)
-                        c.say(t, "I must... protect myself... or all is lost...");
-                    else
-                        c.say(t, "There is nothing to gain by continuing to endure... th-that...");
+                    switch (c.morality / 33) {
+                        case 0: c.say(t, "There is nothing to gain by continuing to endure... th-that..."); break;
+                        case 1: c.say(t, "I must... protect myself... or all is lost..."); break;
+                        default: c.say(t, "As I am now, I am... a liability...");
+                    }
                 } else
                 if(thisAttack == 1)
                 {
-                    if(c.confidence > 66)
-                        c.say(t, "I-I can still... still think of a counter-strategy...");
-                    else
-                    if(c.confidence > 33)
-                        c.say(t, "If I lose my mind on the battlefield... n-no, I must escape...!");
-                    else
-                        c.say(t, "My mind is... weak...");
+                    switch (c.confidence / 33) {
+                        case 0: c.say(t, "My mind is... weak..."); break;
+                        case 1: c.say(t, "If I lose my mind on the battlefield... n-no, I must escape...!"); break;
+                        default: c.say(t, "I-I can still... still think of a counter-strategy...");
+                    }
                 } else
-                if(c.dignity > 66)
-                    c.say(t, "A-Anyone would b-break under... such pressure...");
-                else
-                if(c.dignity > 33)
-                    c.say(t, "I... c-cannot... keep doing this...!");
-                else
-                    c.say(t, "I regret... e-ever pretending to be strong...");
+                switch (c.dignity / 33) {
+                    case 0: c.say(t, "I regret... e-ever pretending to be strong..."); break;
+                    case 1: c.say(t, "I... c-cannot... keep doing this...!"); break;
+                    default: c.say(t, "A-Anyone would b-break under... such pressure...");
+                }
             }
             c.say(t, "\"");
         }
@@ -17907,93 +17123,75 @@ public class WorldState
         Chosen mid = null;
         Chosen low = null;
         for(int i = 0; i < 3; i++)
-            if(w.getCast()[i].getConfidence() > 66)
-                high = w.getCast()[i];
-            else
-            if(w.getCast()[i].getConfidence() > 33)
-                mid = w.getCast()[i];
-            else
-                low = w.getCast()[i];
+            switch (w.getCast()[i].getConfidence() / 33) {
+                case 0: low = w.getCast()[i]; break;
+                case 1: mid = w.getCast()[i]; break;
+                default: high = w.getCast()[i];
+            }
         if(variant == 0)
         {
             if(c.getEXPOLevel() < 3 || c.modest)
             {
-                if(c.dignity > 66)
-                    w.append(t, String.format("%s glares indignantly at the Thralls pulling aside %s %s", mainName, c.hisHer(), bottomDesc));
-                else
-                if(c.dignity > 33)
-                    w.append(t, String.format("%s struggles with all %s strength, giving pause to the Thralls pulling aside %2$s %s", mainName, c.hisHer(), bottomDesc));
-                else
-                    w.append(t, String.format("%s kicks and screams at the Thralls pulling aside %s %s", mainName, c.hisHer(), bottomDesc));
+                switch (c.dignity / 33) {
+                    case 0: w.append(t, String.format("%s kicks and screams at the Thralls pulling aside %s %s", mainName, c.hisHer(), bottomDesc)); break;
+                    case 1: w.append(t, String.format("%s struggles with all %s strength, giving pause to the Thralls pulling aside %2$s %s", mainName, c.hisHer(), bottomDesc)); break;
+                    default: w.append(t, String.format("%s glares indignantly at the Thralls pulling aside %s %s", mainName, c.hisHer(), bottomDesc));
+                }
             } else
-            if(c.dignity > 66)
-                w.append(t, String.format("%s blushes bright red from anger and indignation as the Thralls bring their cameras close to %s crotch", mainName, c.hisHer()));
-            else
-            if(c.dignity > 33)
-                w.append(t, String.format("%s struggles with all %s strength, giving pause to the Thralls spreading %2$s legs in order to film %2$s crotch", mainName, c.hisHer()));
-            else
-                w.append(t, String.format("%s kicks and screams at the Thralls bringing their cameras close to %s crotch", mainName, c.hisHer()));
+            switch (c.dignity / 33) {
+                case 0: w.append(t, String.format("%s kicks and screams at the Thralls bringing their cameras close to %s crotch", mainName, c.hisHer())); break;
+                case 1: w.append(t, String.format("%s struggles with all %s strength, giving pause to the Thralls spreading %2$s legs in order to film %2$s crotch", mainName, c.hisHer())); break;
+                default: w.append(t, String.format("%s blushes bright red from anger and indignation as the Thralls bring their cameras close to %s crotch", mainName, c.hisHer()));
+            }
             String another = "one of the Thralls ";
             if(c.getINJULevel() < 3 || aVirg)
             {
-                if(c.morality > 66)
-                    w.append(t, String.format(", eyes focused and determined.  However, %s ", c.heShe()));
-                else
-                if(c.morality > 33)
-                    w.append(t, String.format(", not even close to giving up.  However, %s ", c.heShe()));
-                else
-                    w.append(t, String.format(", eyes full of rage and hatred.  However, %s ", c.heShe()));
+                switch (c.morality / 33) {
+                    case 0: w.append(t, String.format(", eyes full of rage and hatred.  However, %s ", c.heShe())); break;
+                    case 1: w.append(t, String.format(", not even close to giving up.  However, %s ", c.heShe())); break;
+                    default: w.append(t, String.format(", eyes focused and determined.  However, %s ", c.heShe()));
+                }
             } else
             if(w.tickle())
             {
-                if(c.morality > 66)
-                    w.append(t, String.format(", but %s heroic demeanor is shattered when the Thralls start tickling %s, drawing out shrieks of laughter.  ", c.hisHer(), c.himHer()));
-                else
-                if(c.morality > 33)
-                    w.append(t, String.format(", but then the Thralls start tickling %s, causing %1$s to burst into helpless laughter that's very unlike %s normal severe expression.  ", c.himHer(), c.hisHer()));
-                else
-                    w.append(t, String.format(", but then the Thralls start tickling %s, and %s bloodthirsty expression melts into helpless laughter.  ", c.himHer(), c.hisHer()));
+                switch (c.morality / 33) {
+                    case 0: w.append(t, String.format(", but then the Thralls start tickling %s, and %s bloodthirsty expression melts into helpless laughter.  ", c.himHer(), c.hisHer())); break;
+                    case 1: w.append(t, String.format(", but then the Thralls start tickling %s, causing %1$s to burst into helpless laughter that's very unlike %s normal severe expression.  ", c.himHer(), c.hisHer())); break;
+                    default: w.append(t, String.format(", but %s heroic demeanor is shattered when the Thralls start tickling %s, drawing out shrieks of laughter.  ", c.hisHer(), c.himHer()));
+                }
                 w.append(t, String.format("%s ", c.HeShe()));
             } else
             if(c.getGender().equals("male"))
             {
-                if(c.morality > 66)
-                    w.append(t, String.format(", only to start cursing and screaming openly when the Thralls start stomping on %s penis.  ", c.hisHer()));
-                else
-                if(c.morality > 33)
-                    w.append(t, String.format(", grunting in pain and struggling to keep %s cool as the Thralls viciously stomp on %1$s penis.  ", c.hisHer()));
-                else
-                    w.append(t, String.format(", shouting threats that devolve into cries of pain as the Thralls stomp on %s penis.  ", c.hisHer()));
+                switch (c.morality / 33) {
+                    case 0: w.append(t, String.format(", shouting threats that devolve into cries of pain as the Thralls stomp on %s penis.  ", c.hisHer())); break;
+                    case 1: w.append(t, String.format(", grunting in pain and struggling to keep %s cool as the Thralls viciously stomp on %1$s penis.  ", c.hisHer())); break;
+                    default: w.append(t, String.format(", only to start cursing and screaming openly when the Thralls start stomping on %s penis.  ", c.hisHer()));
+                }
                 w.append(t, String.format("%s ", c.HeShe()));
             } else
             {
-                if(c.morality > 66)
-                    w.append(t, String.format(", only to start wailing openly when one of the Thralls pushes his cock into %s ass.  ", c.hisHer()));
-                else
-                if(c.morality > 33)
-                    w.append(t, String.format(", grunting in pain and struggling to keep %s cool as %s feels one of the Thralls' cocks begin forcing its way up %1$s ass.  ", c.hisHer(), c.heShe()));
-                else
-                    w.append(t, String.format(", shouting threats that devolve into pitiful squeals as one of the Thralls forces himself further and further up %s ass.  ", c.hisHer()));
+                switch (c.morality / 33) {
+                    case 0: w.append(t, String.format(", shouting threats that devolve into pitiful squeals as one of the Thralls forces himself further and further up %s ass.  ", c.hisHer())); break;
+                    case 1: w.append(t, String.format(", grunting in pain and struggling to keep %s cool as %s feels one of the Thralls' cocks begin forcing its way up %1$s ass.  ", c.hisHer(), c.heShe())); break;
+                    default: w.append(t, String.format(", only to start wailing openly when one of the Thralls pushes his cock into %s ass.  ", c.hisHer()));
+                }
                 w.append(t, String.format("%s ", c.HeShe()));
                 another = "another Thrall ";
             }
             if(c.getPLEALevel() < 3 || cVirg)
             {
-                if(c.innocence > 66)
-                    w.append(t, String.format("screams as %spenetrates %s %s, vainly calling him names and trying to push him away.  ", another, c.hisHer(), hole));
-                else
-                if(c.innocence > 33)
-                    w.append(t, String.format("grits %s teeth as %s endures %sfucking %1$s %s.  ", c.hisHer(), c.heShe(), another, hole));
-                else
-                    w.append(t, String.format("huffs in indignation when %sbegins to slowly penetrate %s %s, doing %2$s best to ignore the unwelcome violation and search for a way to escape.  ", another, c.hisHer(), hole));
+                switch (c.innocence / 33) {
+                    case 0: w.append(t, String.format("huffs in indignation when %sbegins to slowly penetrate %s %s, doing %2$s best to ignore the unwelcome violation and search for a way to escape.  ", another, c.hisHer(), hole)); break;
+                    case 1: w.append(t, String.format("grits %s teeth as %s endures %sfucking %1$s %s.  ", c.hisHer(), c.heShe(), another, hole)); break;
+                    default: w.append(t, String.format("screams as %spenetrates %s %s, vainly calling him names and trying to push him away.  ", another, c.hisHer(), hole));
+                }
             } else
-            if(c.innocence > 66)
-                w.append(t, String.format("cums instantly when %sstarts fucking %s %s, too caught up in the pleasure to care about resisting anymore.  ", another, c.hisHer(), hole));
-            else
-            if(c.innocence > 33)
-                w.append(t, String.format("can only grit %s teeth against the pleasure when %sstarts fucking %1$s %s, and it's not long before %s's moaning in an unwilling climax.  ", c.hisHer(), another, hole, c.heShe()));
-            else
-                w.append(t, String.format("stifles a desperate moan when %spenetrates %s %s, clinging to %2$s sanity for only a few moments before the overwhelming pleasure forces %s to cum.  ", another, c.hisHer(), hole, c.himHer()));
+            switch (c.innocence / 33) {
+                case 0: w.append(t, String.format("stifles a desperate moan when %spenetrates %s %s, clinging to %2$s sanity for only a few moments before the overwhelming pleasure forces %s to cum.  ", another, c.hisHer(), hole, c.himHer())); break;
+                case 1: w.append(t, String.format("can only grit %s teeth against the pleasure when %sstarts fucking %1$s %s, and it's not long before %s's moaning in an unwilling climax.  ", c.hisHer(), another, hole, c.heShe())); break;
+                default: w.append(t, String.format("cums instantly when %sstarts fucking %s %s, too caught up in the pleasure to care about resisting anymore.  ", another, c.hisHer(), hole));
+            }
             if(mid.dissociated || low.dissociated)
                 w.append(t, String.format("The Thralls eagerly gather around to put %s in %s place.", c.mainName, c.hisHer()));
             else
@@ -18030,79 +17228,63 @@ public class WorldState
         {
             if(c.getEXPOLevel() < 3 || c.modest)
             {
-                if(c.dignity > 66)
-                    w.append(t, String.format("Full of indignant fury, %s tries to fend off the Thralls in the process of stripping %s, but ", mainName, c.himHer()));
-                else
-                if(c.dignity > 33)
-                    w.append(t, String.format("A stubborn set in %s jaw, %s firmly grasps %1$s %s and refuses to let the Thralls strip %s, but ", c.hisHer(), mainName, bottomDesc, c.himHer()));
-                else
-                    w.append(t, String.format("%s is struggling with all %s might, not even caring how much %s's tearing %2$s own %s in the process, but ", mainName, c.hisHer(), c.heShe(), bottomDesc));
+                switch (c.dignity / 33) {
+                    case 0: w.append(t, String.format("%s is struggling with all %s might, not even caring how much %s's tearing %2$s own %s in the process, but ", mainName, c.hisHer(), c.heShe(), bottomDesc)); break;
+                    case 1: w.append(t, String.format("A stubborn set in %s jaw, %s firmly grasps %1$s %s and refuses to let the Thralls strip %s, but ", c.hisHer(), mainName, bottomDesc, c.himHer())); break;
+                    default: w.append(t, String.format("Full of indignant fury, %s tries to fend off the Thralls in the process of stripping %s, but ", mainName, c.himHer()));
+                }
                 w.append(t, String.format("%s can't stop one of them from slipping under %s clothes and ", c.heShe(), c.hisHer()));
             } else
             {
-                if(c.dignity > 66)
-                    w.append(t, String.format("Boiling over with rage, %s furiously glares and kicks at any Thralls who dare film %s exposed body, but ", mainName, c.hisHer()));
-                else
-                if(c.dignity > 33)
-                    w.append(t, String.format("%s grits %s teeth and squeezes %2$s thighs together, but ", mainName, c.hisHer()));
-                else
-                    w.append(t, String.format("%s's bare legs kick wildly as %s tries to escape, flashing the Thralls and their cameras, but ", mainName, c.heShe()));
+                switch (c.dignity / 33) {
+                    case 0: w.append(t, String.format("%s's bare legs kick wildly as %s tries to escape, flashing the Thralls and their cameras, but ", mainName, c.heShe())); break;
+                    case 1: w.append(t, String.format("%s grits %s teeth and squeezes %2$s thighs together, but ", mainName, c.hisHer())); break;
+                    default: w.append(t, String.format("Boiling over with rage, %s furiously glares and kicks at any Thralls who dare film %s exposed body, but ", mainName, c.hisHer()));
+                }
                 w.append(t, String.format("%s has no protection whatsoever from the Thrall ", c.heShe()));
             }
             if(c.getINJULevel() < 3 || aVirg)
             {
-                if(c.innocence > 66)
-                    w.append(t, String.format("fondling %s %s until the pleasure makes it hard for %s to remember that %s's supposed to resist.  ", c.hisHer(), organ, c.himHer(), c.heShe()));
-                else
-                if(c.innocence > 33)
-                    w.append(t, String.format("fondling %s %s until %1$s resistance begins to weaken under the growing pleasure.  ", c.hisHer(), organ));
-                else
-                    w.append(t, String.format("fondling %s %s until it becomes difficult for %s to maintain %1$s rationality.  ", c.hisHer(), organ, c.himHer()));
+                switch (c.innocence / 33) {
+                    case 0: w.append(t, String.format("fondling %s %s until it becomes difficult for %s to maintain %1$s rationality.  ", c.hisHer(), organ, c.himHer())); break;
+                    case 1: w.append(t, String.format("fondling %s %s until %1$s resistance begins to weaken under the growing pleasure.  ", c.hisHer(), organ)); break;
+                    default: w.append(t, String.format("fondling %s %s until the pleasure makes it hard for %s to remember that %s's supposed to resist.  ", c.hisHer(), organ, c.himHer(), c.heShe()));
+                }
             } else
             if(w.tickle())
             {
-                if(c.innocence > 66)
-                    w.append(t, String.format("tickling %s until %s squirming laughter leaves %2$s %s wide open to the others' fondling.  ", c.himHer(), c.hisHer(), organ));
-                else
-                if(c.innocence > 33)
-                    w.append(t, String.format("tickling %s to force %1$s to laugh and let %s guard down, then pulling %2$s legs apart so the others can fondle %2$s %s.  ", c.himHer(), c.hisHer(), organ));
-                else
-                    w.append(t, String.format("tickling %s until %s willpower finally breaks and %s starts thrashing with unwilling laughter, letting %2$s guard down enough that the others can concentrate their attention on %2$s %s.  ", c.himHer(), c.hisHer(), c.heShe(), organ));
+                switch (c.innocence / 33) {
+                    case 0: w.append(t, String.format("tickling %s until %s willpower finally breaks and %s starts thrashing with unwilling laughter, letting %2$s guard down enough that the others can concentrate their attention on %2$s %s.  ", c.himHer(), c.hisHer(), c.heShe(), organ)); break;
+                    case 1: w.append(t, String.format("tickling %s to force %1$s to laugh and let %s guard down, then pulling %2$s legs apart so the others can fondle %2$s %s.  ", c.himHer(), c.hisHer(), organ)); break;
+                    default: w.append(t, String.format("tickling %s until %s squirming laughter leaves %2$s %s wide open to the others' fondling.  ", c.himHer(), c.hisHer(), organ));
+                }
             } else
             if(c.getGender().equals("male"))
             {
-                if(c.innocence > 66)
-                    w.append(t, String.format("cruelly pinching and twisting %s penis in a way that leaves %s too dazed and confused with combined pleasure and pain to continue fighting.  ", c.hisHer(), c.himHer()));
-                else
-                if(c.innocence > 33)
-                    w.append(t, String.format("manhandling %s penis, breaking %1$s will to fight with combined pleasure and pain.  ", c.hisHer()));
-                else
-                    w.append(t, String.format("alternating between stroking %s penis and harshly pinching it, using the unexpected sensations to wear down %1$s willpower.  ", c.hisHer()));
+                switch (c.innocence / 33) {
+                    case 0: w.append(t, String.format("alternating between stroking %s penis and harshly pinching it, using the unexpected sensations to wear down %1$s willpower.  ", c.hisHer())); break;
+                    case 1: w.append(t, String.format("manhandling %s penis, breaking %1$s will to fight with combined pleasure and pain.  ", c.hisHer())); break;
+                    default: w.append(t, String.format("cruelly pinching and twisting %s penis in a way that leaves %s too dazed and confused with combined pleasure and pain to continue fighting.  ", c.hisHer(), c.himHer()));
+                }
             } else
-            if(c.innocence > 66)
-                w.append(t, String.format("penetrating %s ass, the painful thrusts eventually building into a strange pleasure deep inside %s.  ", c.hisHer(), c.himHer()));
-            else
-            if(c.innocence > 33)
-                w.append(t, String.format("ramming up %s ass, breaking %1$s will to fight with the combination of pain and pleasure deep inside.  ", c.hisHer()));
-            else
-                w.append(t, String.format("repeatedly sliding his cock in and out of %s asshole until %1$s willpower finally breaks and %s starts groaning at the intense stimulation.  ", c.hisHer(), c.heShe()));
+            switch (c.innocence / 33) {
+                case 0: w.append(t, String.format("repeatedly sliding his cock in and out of %s asshole until %1$s willpower finally breaks and %s starts groaning at the intense stimulation.  ", c.hisHer(), c.heShe())); break;
+                case 1: w.append(t, String.format("ramming up %s ass, breaking %1$s will to fight with the combination of pain and pleasure deep inside.  ", c.hisHer())); break;
+                default: w.append(t, String.format("penetrating %s ass, the painful thrusts eventually building into a strange pleasure deep inside %s.  ", c.hisHer(), c.himHer()));
+            }
             if(c.getHATELevel() < 3 || vVirg)
             {
-                if(c.morality > 66)
-                    w.append(t, String.format("%s heroic effort to hold back only delays the inevitable for a few moments before %s cums, ", c.HisHer(), c.heShe()));
-                else
-                if(c.morality > 33)
-                    w.append(t, String.format("%s limbs lose all their strength as %s cums, ", c.HisHer(), c.heShe()));
-                else
-                    w.append(t, String.format("%s enraged kicking weakens as %s cums, ", c.HisHer(), c.heShe()));
+                switch (c.morality / 33) {
+                    case 0: w.append(t, String.format("%s enraged kicking weakens as %s cums, ", c.HisHer(), c.heShe())); break;
+                    case 1: w.append(t, String.format("%s limbs lose all their strength as %s cums, ", c.HisHer(), c.heShe())); break;
+                    default: w.append(t, String.format("%s heroic effort to hold back only delays the inevitable for a few moments before %s cums, ", c.HisHer(), c.heShe()));
+                }
             } else
-            if(c.morality > 66)
-                w.append(t, String.format("%s tries to calm down and remain focused, but then another Thrall's cock pushes into %s %s, forcing %s to cum again, ", c.HeShe(), c.hisHer(), hole, c.himHer()));
-            else
-            if(c.morality > 33)
-                w.append(t, String.format("When another Thrall's cock pushes into %s %s, %s cums hard, ", c.hisHer(), hole, c.heShe()));
-            else
-                w.append(t, String.format("%s bloodthirsty rage has left %s Sexual Barrier completely broken, allowing another Thrall's cock to plunge into %2$s %s.  The penetration makes %s cum instantly, ", c.HisHer(), c.hisHer(), hole, c.himHer()));
+            switch (c.morality / 33) {
+                case 0: w.append(t, String.format("%s bloodthirsty rage has left %s Sexual Barrier completely broken, allowing another Thrall's cock to plunge into %2$s %s.  The penetration makes %s cum instantly, ", c.HisHer(), c.hisHer(), hole, c.himHer())); break;
+                case 1: w.append(t, String.format("When another Thrall's cock pushes into %s %s, %s cums hard, ", c.hisHer(), hole, c.heShe())); break;
+                default: w.append(t, String.format("%s tries to calm down and remain focused, but then another Thrall's cock pushes into %s %s, forcing %s to cum again, ", c.HeShe(), c.hisHer(), hole, c.himHer()));
+            }
             if(solo || mid.dissociated || low.dissociated)
             {
                 if(mid.dissociated || low.dissociated)
@@ -18135,21 +17317,17 @@ public class WorldState
         {
             if(c.getEXPOLevel() < 3 || c.modest)
             {
-                if(c.dignity > 66)
-                    w.append(t, String.format("%s's expression of cold rage breaks with a ", mainName));
-                else
-                if(c.dignity > 33)
-                    w.append(t, String.format("%s's determined struggles abruptly falter, and %s lets out a ", mainName, c.heShe()));
-                else
-                    w.append(t, String.format("%s struggles without regard for the Thralls grabbing %s by %s %s, letting out a ", mainName, c.himHer(), c.hisHer(), bottomDesc));
+                switch (c.dignity / 33) {
+                    case 0: w.append(t, String.format("%s struggles without regard for the Thralls grabbing %s by %s %s, letting out a ", mainName, c.himHer(), c.hisHer(), bottomDesc)); break;
+                    case 1: w.append(t, String.format("%s's determined struggles abruptly falter, and %s lets out a ", mainName, c.heShe())); break;
+                    default: w.append(t, String.format("%s's expression of cold rage breaks with a ", mainName));
+                }
             } else
-            if(c.dignity > 66)
-                w.append(t, String.format("Being seen in such a humiliating state has wounded %s's pride, and it gets even worse when %s's forced to let out a ", mainName, c.heShe()));
-            else
-            if(c.dignity > 33)
-                w.append(t, String.format("%s tries to ignore the cameras filming %s in %s near-nude state, but the distraction weakens %3$s usual strong will, and %s finds %2$sself unable to keep in %s ", mainName, c.himHer(), c.hisHer(), c.heShe(), c.hisHer()));
-            else
-                w.append(t, String.format("%s struggles without regard for how %s near-nudity is resulting in an erotic show for the cameras, letting out a ", mainName, c.hisHer()));
+            switch (c.dignity / 33) {
+                case 0: w.append(t, String.format("%s struggles without regard for how %s near-nudity is resulting in an erotic show for the cameras, letting out a ", mainName, c.hisHer())); break;
+                case 1: w.append(t, String.format("%s tries to ignore the cameras filming %s in %s near-nude state, but the distraction weakens %3$s usual strong will, and %s finds %2$sself unable to keep in %s ", mainName, c.himHer(), c.hisHer(), c.heShe(), c.hisHer())); break;
+                default: w.append(t, String.format("Being seen in such a humiliating state has wounded %s's pride, and it gets even worse when %s's forced to let out a ", mainName, c.heShe()));
+            }
             if(w.tickle())
                 w.append(t, String.format("cry of high-pitched laughter as the Thralls tickle %s.  ", c.himHer()));
             else
@@ -18159,38 +17337,30 @@ public class WorldState
                 w.append(t, String.format("breathless groan as the Thrall behind %s thrusts in and out of %s ass.  ", c.himHer(), c.hisHer()));
             if(c.getPLEALevel() < 3 || cVirg)
             {
-                if(c.innocence > 66)
-                    w.append(t, String.format("%s's confused about how %s can be so weak to something so simple, ", c.HeShe(), c.heShe()));
-                else
-                if(c.innocence > 33)
-                    w.append(t, String.format("%s body won't obey %s wishes, ", c.HisHer(), c.hisHer()));
-                else
-                    w.append(t, String.format("%s feels like %s should have acclimated to this torture by now, but it's still as effective as ever, ", c.HeShe(), c.heShe()));
+                switch (c.innocence / 33) {
+                    case 0: w.append(t, String.format("%s feels like %s should have acclimated to this torture by now, but it's still as effective as ever, ", c.HeShe(), c.heShe())); break;
+                    case 1: w.append(t, String.format("%s body won't obey %s wishes, ", c.HisHer(), c.hisHer())); break;
+                    default: w.append(t, String.format("%s's confused about how %s can be so weak to something so simple, ", c.HeShe(), c.heShe()));
+                }
             } else
-            if(c.innocence > 66)
-                w.append(t, String.format("The strange stimulation is impossible to fight, causing %s to cum again, ", c.himHer()));
-            else
-            if(c.innocence > 33)
-                w.append(t, String.format("Confused by the overwhelming sensations, %s body orgasms against %1$s will, ", c.hisHer()));
-            else
-                w.append(t, String.format("%s has been trying to mentally train %sself to endure this sort of thing, but %s still reaches climax as quickly as ever, ", c.HeShe(), c.himHer(), c.heShe()));
+            switch (c.innocence / 33) {
+                case 0: w.append(t, String.format("%s has been trying to mentally train %sself to endure this sort of thing, but %s still reaches climax as quickly as ever, ", c.HeShe(), c.himHer(), c.heShe())); break;
+                case 1: w.append(t, String.format("Confused by the overwhelming sensations, %s body orgasms against %1$s will, ", c.hisHer())); break;
+                default: w.append(t, String.format("The strange stimulation is impossible to fight, causing %s to cum again, ", c.himHer()));
+            }
             if(c.getHATELevel() < 3 || vVirg)
             {
-                if(c.morality > 66)
-                    w.append(t, String.format("and %s can't help but wonder whether %1$s was ever truly strong at all.  ", c.heShe()));
-                else
-                if(c.morality > 33)
-                    w.append(t, String.format("leaving %s unusually helpless.  ", c.himHer()));
-                else
-                    w.append(t, String.format("leaving %s unable to even coherently word %s threats at the surrounding Thralls.  ", c.himHer(), c.hisHer()));
+                switch (c.morality / 33) {
+                    case 0: w.append(t, String.format("leaving %s unable to even coherently word %s threats at the surrounding Thralls.  ", c.himHer(), c.hisHer())); break;
+                    case 1: w.append(t, String.format("leaving %s unusually helpless.  ", c.himHer())); break;
+                    default: w.append(t, String.format("and %s can't help but wonder whether %1$s was ever truly strong at all.  ", c.heShe()));
+                }
             } else
-            if(c.morality > 66)
-                w.append(t, String.format("and %s sense of pride and heroism is further broken down as the other Thralls take turns violating %1$s %s.  ", c.hisHer(), hole));
-            else
-            if(c.morality > 33)
-                w.append(t, String.format("leaving %s completely helpless as the other Thralls take turns fucking %s %s.  ", c.himHer(), c.hisHer(), hole));
-            else
-                w.append(t, String.format("leaving %s helpless to do anything but scream in rage as another Thrall penetrates %s %s.  ", c.himHer(), c.hisHer(), hole));
+            switch (c.morality / 33) {
+                case 0: w.append(t, String.format("leaving %s helpless to do anything but scream in rage as another Thrall penetrates %s %s.  ", c.himHer(), c.hisHer(), hole)); break;
+                case 1: w.append(t, String.format("leaving %s completely helpless as the other Thralls take turns fucking %s %s.  ", c.himHer(), c.hisHer(), hole)); break;
+                default: w.append(t, String.format("and %s sense of pride and heroism is further broken down as the other Thralls take turns violating %1$s %s.  ", c.hisHer(), hole));
+            }
             if(mid.dissociated || low.dissociated)
                 w.append(t, String.format("%s voice rises above the chatter and cruel laughter of the crowd.", c.HisHer()));
             else
@@ -18232,78 +17402,62 @@ public class WorldState
         {
             if(c.getINJULevel() < 3 || aVirg)
             {
-                if(c.dignity > 66)
-                    w.append(t, String.format("Bringing their cameras close, the Thralls demand that %s apologize for being such a bitch", mainName));
-                else
-                if(c.dignity > 33)
-                    w.append(t, String.format("The Thralls demand that %s proclaim %sself a complete weakling in front of the cameras", mainName, c.himHer()));
-                else
-                    w.append(t, String.format("The Thralls demand that %s suck their cocks in order to provide a sexy show for the cameras", mainName));
+                switch (c.dignity / 33) {
+                    case 0: w.append(t, String.format("The Thralls demand that %s suck their cocks in order to provide a sexy show for the cameras", mainName)); break;
+                    case 1: w.append(t, String.format("The Thralls demand that %s proclaim %sself a complete weakling in front of the cameras", mainName, c.himHer())); break;
+                    default: w.append(t, String.format("Bringing their cameras close, the Thralls demand that %s apologize for being such a bitch", mainName));
+                }
             } else
             if(w.tickle())
             {
-                if(c.dignity > 66)
-                    w.append(t, String.format("The filming Thralls capture a close-up of %s's laughing, tear-streaked face.  They tell %s that they won't let up on the tickling unless %s apologizes for being such a bitch", mainName, c.himHer(), c.heShe()));
-                else
-                if(c.dignity > 33)
-                    w.append(t, String.format("The Thralls demand that %s acknowledge in front of the cameras that %s must be a true weakling to be so easily defeated by tickling", mainName, c.heShe()));
-                else
-                    w.append(t, String.format("Bringing their cameras close, the Thralls try to get %s to suck their cocks while %s mouth is forced open with laughter by the tickling", mainName, c.hisHer()));
+                switch (c.dignity / 33) {
+                    case 0: w.append(t, String.format("Bringing their cameras close, the Thralls try to get %s to suck their cocks while %s mouth is forced open with laughter by the tickling", mainName, c.hisHer())); break;
+                    case 1: w.append(t, String.format("The Thralls demand that %s acknowledge in front of the cameras that %s must be a true weakling to be so easily defeated by tickling", mainName, c.heShe())); break;
+                    default: w.append(t, String.format("The filming Thralls capture a close-up of %s's laughing, tear-streaked face.  They tell %s that they won't let up on the tickling unless %s apologizes for being such a bitch", mainName, c.himHer(), c.heShe()));
+                }
             } else
             if(c.getGender().equals("male"))
             {
-                if(c.dignity > 66)
-                    w.append(t, String.format("The filming Thralls capture a close-up of %s's grimacing, tear-streaked face.  They tell %s that they won't let up on %s balls unless %s apologizes for tempting other guys with %s body", mainName, c.himHer(), c.hisHer(), c.heShe(), c.hisHer()));
-                else
-                if(c.dignity > 33)
-                    w.append(t, String.format("The Thralls demand that %s acknowledge in front of the cameras that %s must be a true weakling to submit so easily to a little bit of ballbusting", mainName, c.heShe()));
-                else
-                    w.append(t, String.format("Bringing their cameras close, the Thralls try to get %s to suck their cocks while %s's distracted by the pain of %s bruised testicles", mainName, c.heShe(), c.hisHer()));
+                switch (c.dignity / 33) {
+                    case 0: w.append(t, String.format("Bringing their cameras close, the Thralls try to get %s to suck their cocks while %s's distracted by the pain of %s bruised testicles", mainName, c.heShe(), c.hisHer())); break;
+                    case 1: w.append(t, String.format("The Thralls demand that %s acknowledge in front of the cameras that %s must be a true weakling to submit so easily to a little bit of ballbusting", mainName, c.heShe())); break;
+                    default: w.append(t, String.format("The filming Thralls capture a close-up of %s's grimacing, tear-streaked face.  They tell %s that they won't let up on %s balls unless %s apologizes for tempting other guys with %s body", mainName, c.himHer(), c.hisHer(), c.heShe(), c.hisHer()));
+                }
             } else
-            if(c.dignity > 66)
-                w.append(t, String.format("The filming Thralls capture a close-up of %s's cross-eyed expression as %s's fucked up the ass.  They tell %s that they won't let up on %3$s unless %2$s apologizes for being such a bitch", mainName, c.heShe(), c.himHer()));
-            else
-            if(c.dignity > 33)
-                w.append(t, String.format("The Thralls demand that %s acknowledge in front of the cameras that %s's a pervert who's enjoying being fucked up the ass", mainName, c.heShe()));
-            else
-                w.append(t, String.format("Bringing their cameras close, the Thralls try to get %s to suck their cocks while %s's distracted by the cock up %s ass", mainName, c.heShe(), c.hisHer()));
+            switch (c.dignity / 33) {
+                case 0: w.append(t, String.format("Bringing their cameras close, the Thralls try to get %s to suck their cocks while %s's distracted by the cock up %s ass", mainName, c.heShe(), c.hisHer())); break;
+                case 1: w.append(t, String.format("The Thralls demand that %s acknowledge in front of the cameras that %s's a pervert who's enjoying being fucked up the ass", mainName, c.heShe())); break;
+                default: w.append(t, String.format("The filming Thralls capture a close-up of %s's cross-eyed expression as %s's fucked up the ass.  They tell %s that they won't let up on %3$s unless %2$s apologizes for being such a bitch", mainName, c.heShe(), c.himHer()));
+            }
             if(c.getPLEALevel() < 3 || cVirg)
             {
-                if(c.innocence > 66)
-                    w.append(t, String.format(", but when %s doesn't stop %s wild attempts to punch and bite them, they ", c.heShe(), c.hisHer()));
-                else
-                if(c.innocence > 33)
-                    w.append(t, String.format(", but when %s just clenches %s teeth and glares at them, they ", c.heShe(), c.hisHer()));
-                else
-                    w.append(t, String.format(", but when %s coldly refuses, they ", c.heShe()));
+                switch (c.innocence / 33) {
+                    case 0: w.append(t, String.format(", but when %s coldly refuses, they ", c.heShe())); break;
+                    case 1: w.append(t, String.format(", but when %s just clenches %s teeth and glares at them, they ", c.heShe(), c.hisHer())); break;
+                    default: w.append(t, String.format(", but when %s doesn't stop %s wild attempts to punch and bite them, they ", c.heShe(), c.hisHer()));
+                }
             } else
             {
-                if(c.innocence > 66)
-                    w.append(t, String.format(", but %s's too busy cumming from their fingers on %s %s to cooperate.  ", c.heShe(), c.hisHer(), organ));
-                else
-                if(c.innocence > 33)
-                    w.append(t, String.format(", but %s refuses to respond, even as their fingers tease an orgasm from %s %s.  ", c.heShe(), c.hisHer(), organ));
-                else
-                    w.append(t, String.format(", but even though %s's constantly cumming from their fingers on %s %s, %1$s still manages to stammer out a flat refusal.  ", c.heShe(), c.hisHer(), organ));
+                switch (c.innocence / 33) {
+                    case 0: w.append(t, String.format(", but even though %s's constantly cumming from their fingers on %s %s, %1$s still manages to stammer out a flat refusal.  ", c.heShe(), c.hisHer(), organ)); break;
+                    case 1: w.append(t, String.format(", but %s refuses to respond, even as their fingers tease an orgasm from %s %s.  ", c.heShe(), c.hisHer(), organ)); break;
+                    default: w.append(t, String.format(", but %s's too busy cumming from their fingers on %s %s to cooperate.  ", c.heShe(), c.hisHer(), organ));
+                }
                 w.append(t, "They ");
             }
             if(c.getHATELevel() < 3 || vVirg)
             {
-                if(c.morality > 66)
-                    w.append(t, String.format("force %s to comply by threatening the others.  ", c.himHer()));
-                else
-                if(c.morality > 33)
-                    w.append(t, "escalate the punishment even further.  ");
-                else
-                    w.append(t, String.format("punish %s by ejaculating all over %s face and chest - from a safe distance, of course.  ", c.himHer(), c.hisHer()));
+                switch (c.morality / 33) {
+                    case 0: w.append(t, String.format("punish %s by ejaculating all over %s face and chest - from a safe distance, of course.  ", c.himHer(), c.hisHer())); break;
+                    case 1: w.append(t, "escalate the punishment even further.  "); break;
+                    default: w.append(t, String.format("force %s to comply by threatening the others.  ", c.himHer()));
+                }
             } else
-            if(c.morality > 66)
-                w.append(t, String.format("punish %s by violating %s %s, telling %1$s to move %2$s hips for them unless %s wants the others to suffer even worse treatment.  ", c.himHer(), c.hisHer(), hole, c.heShe()));
-            else
-            if(c.morality > 33)
-                w.append(t, String.format("punish %s by fucking %s %s at the same time.  ", c.himHer(), c.hisHer(), hole));
-            else
-                w.append(t, String.format("punish %s by violating %s %s at the same time, pinning %1$s down so %s can't fight back.  ", c.himHer(), c.hisHer(), hole, c.heShe()));
+            switch (c.morality / 33) {
+                case 0: w.append(t, String.format("punish %s by violating %s %s at the same time, pinning %1$s down so %s can't fight back.  ", c.himHer(), c.hisHer(), hole, c.heShe())); break;
+                case 1: w.append(t, String.format("punish %s by fucking %s %s at the same time.  ", c.himHer(), c.hisHer(), hole)); break;
+                default: w.append(t, String.format("punish %s by violating %s %s, telling %1$s to move %2$s hips for them unless %s wants the others to suffer even worse treatment.  ", c.himHer(), c.hisHer(), hole, c.heShe()));
+            }
             if(mid.dissociated || low.dissociated)
                 w.append(t, String.format("The broadcasted display of weakness is a shock to %s fans.", c.hisHer()));
             else
@@ -18382,24 +17536,20 @@ public class WorldState
         Chosen mid = null;
         Chosen low = null;
         for(int i = 0; i < 3; i++)
-            if(w.getCast()[i].getConfidence() > 66)
-                high = w.getCast()[i];
-            else
-            if(w.getCast()[i].getConfidence() > 33)
-                mid = w.getCast()[i];
-            else
-                low = w.getCast()[i];
+            switch (w.getCast()[i].getConfidence() / 33) {
+                case 0: low = w.getCast()[i]; break;
+                case 1: mid = w.getCast()[i]; break;
+                default: high = w.getCast()[i];
+            }
 
         int variant = w.getOrgyStage();
         int valueCheck = 0;
         int order = 0;
-        if(c.confidence > 66)
-            order = 0;
-        else
-        if(c.confidence > 33)
-            order = 1;
-        else
-            order = 2;
+        switch (c.confidence / 33) {
+            case 0: order = 2; break;
+            case 1: order = 1; break;
+            default: order = 0;
+        }
         valueCheck = w.getLastOrgyStage()[order];
         if(valueCheck == variant)
         {
@@ -23611,92 +22761,74 @@ public class WorldState
                         Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.FOCUS, Project.Emotion.ANGER);
                         if(nextSpeaker.getMorality() > 66)
                         {
-                            if(nextSpeaker.getInnocence() > 66)
-                                nextSpeaker.say(t, "They're bad guys, so you can go all out, " + target.getMainName() + "!");
-                            else
-                            if(nextSpeaker.getInnocence() > 33)
-                                nextSpeaker.say(t, "Punish them, " + target.getMainName() + "!");
-                            else
-                                nextSpeaker.say(t, "You're completely justified, " + target.getMainName() + ".");
+                            switch (nextSpeaker.getInnocence() / 33) {
+                                case 0: nextSpeaker.say(t, "You're completely justified, " + target.getMainName() + "."); break;
+                                case 1: nextSpeaker.say(t, "Punish them, " + target.getMainName() + "!"); break;
+                                default: nextSpeaker.say(t, "They're bad guys, so you can go all out, " + target.getMainName() + "!");
+                            }
                         } else
                         if(nextSpeaker.getMorality() > 33)
                         {
-                            if(nextSpeaker.getInnocence() > 66)
-                                nextSpeaker.say(t, "Hooray!  Good job, " + target.getMainName() + "!");
-                            else
-                            if(nextSpeaker.getInnocence() > 33)
-                                nextSpeaker.say(t, "The Thralls aren't innocent either, " + target.getMainName() + "!");
-                            else
-                                nextSpeaker.say(t, "Best not to hold back, " + target.getMainName() + ".");
+                            switch (nextSpeaker.getInnocence() / 33) {
+                                case 0: nextSpeaker.say(t, "Best not to hold back, " + target.getMainName() + "."); break;
+                                case 1: nextSpeaker.say(t, "The Thralls aren't innocent either, " + target.getMainName() + "!"); break;
+                                default: nextSpeaker.say(t, "Hooray!  Good job, " + target.getMainName() + "!");
+                            }
                         } else
-                        if(nextSpeaker.getInnocence() > 66)
-                            nextSpeaker.say(t, "Yes!  Hurt them more, " + target.getMainName() + "!");
-                        else
-                        if(nextSpeaker.getInnocence() > 33)
-                            nextSpeaker.say(t, "Yes, " + target.getMainName() + "...  Make them suffer.");
-                        else
-                            nextSpeaker.say(t, "Good, " + target.getMainName() + "!  The more they suffer now, the less they'll bother us later!");
+                        switch (nextSpeaker.getInnocence() / 33) {
+                            case 0: nextSpeaker.say(t, "Good, " + target.getMainName() + "!  The more they suffer now, the less they'll bother us later!"); break;
+                            case 1: nextSpeaker.say(t, "Yes, " + target.getMainName() + "...  Make them suffer."); break;
+                            default: nextSpeaker.say(t, "Yes!  Hurt them more, " + target.getMainName() + "!");
+                        }
                     } else
                     if(target.getMoralityBreakage() == 1)
                     {
                         Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.FOCUS, Project.Emotion.NEUTRAL);
                         if(nextSpeaker.getMorality() > 66)
                         {
-                            if(nextSpeaker.getInnocence() > 66)
-                                nextSpeaker.say(t, "It's their fault for messing with you, " + target.getMainName() + "!");
-                            else
-                            if(nextSpeaker.getInnocence() > 33)
-                                nextSpeaker.say(t, "Better in the long run to finish this quickly, " + target.getMainName() + ".  Even if it means being a little rough with them.");
-                            else
-                                nextSpeaker.say(t, "You're well within acceptable limits of force, " + target.getMainName() + ".");
+                            switch (nextSpeaker.getInnocence() / 33) {
+                                case 0: nextSpeaker.say(t, "You're well within acceptable limits of force, " + target.getMainName() + "."); break;
+                                case 1: nextSpeaker.say(t, "Better in the long run to finish this quickly, " + target.getMainName() + ".  Even if it means being a little rough with them."); break;
+                                default: nextSpeaker.say(t, "It's their fault for messing with you, " + target.getMainName() + "!");
+                            }
                         } else
                         if(nextSpeaker.getMorality() > 33)
                         {
-                            if(nextSpeaker.getInnocence() > 66)
-                                nextSpeaker.say(t, "Your fighting style is reall cool, " + target.getMainName() + "!");
-                            else
-                            if(nextSpeaker.getInnocence() > 33)
-                                nextSpeaker.say(t, "Just take care of them, " + target.getMainName() + "!");
-                            else
-                                nextSpeaker.say(t, "Very efficient, " + target.getMainName() + "!");
+                            switch (nextSpeaker.getInnocence() / 33) {
+                                case 0: nextSpeaker.say(t, "Very efficient, " + target.getMainName() + "!"); break;
+                                case 1: nextSpeaker.say(t, "Just take care of them, " + target.getMainName() + "!"); break;
+                                default: nextSpeaker.say(t, "Your fighting style is reall cool, " + target.getMainName() + "!");
+                            }
                         } else
-                        if(nextSpeaker.getInnocence() > 66)
-                            nextSpeaker.say(t, "Nothing wrong with having some fun with them, " + target.getMainName() + "!");
-                        else
-                        if(nextSpeaker.getInnocence() > 33)
-                            nextSpeaker.say(t, "You're so gentle with them, " + target.getMainName() + ".");
-                        else
-                            nextSpeaker.say(t, "Eliminate them as quickly as possible, " + target.getMainName() + ".");
+                        switch (nextSpeaker.getInnocence() / 33) {
+                            case 0: nextSpeaker.say(t, "Eliminate them as quickly as possible, " + target.getMainName() + "."); break;
+                            case 1: nextSpeaker.say(t, "You're so gentle with them, " + target.getMainName() + "."); break;
+                            default: nextSpeaker.say(t, "Nothing wrong with having some fun with them, " + target.getMainName() + "!");
+                        }
                     } else
                     {
                         Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.JOY, Project.Emotion.FOCUS);
                         if(nextSpeaker.getMorality() > 66)
                         {
-                            if(nextSpeaker.getConfidence() > 66)
-                                nextSpeaker.say(t, "Well done, " + target.getMainName() + "!");
-                            else
-                            if(nextSpeaker.getConfidence() > 33)
-                                nextSpeaker.say(t, "You're actually pretty strong, " + target.getMainName() + "!");
-                            else
-                                nextSpeaker.say(t, "I'm so glad you're fighting with us, " + target.getMainName() + "...");
+                            switch (nextSpeaker.getConfidence() / 33) {
+                                case 0: nextSpeaker.say(t, "I'm so glad you're fighting with us, " + target.getMainName() + "..."); break;
+                                case 1: nextSpeaker.say(t, "You're actually pretty strong, " + target.getMainName() + "!"); break;
+                                default: nextSpeaker.say(t, "Well done, " + target.getMainName() + "!");
+                            }
                         } else
                         if(nextSpeaker.getMorality() > 33)
                         {
-                            if(nextSpeaker.getConfidence() > 66)
-                                nextSpeaker.say(t, "You're almost as strong as me, " + target.getMainName() + "!");
-                            else
-                            if(nextSpeaker.getConfidence() > 33)
-                                nextSpeaker.say(t, "Great job, " + target.getMainName() + "!");
-                            else
-                                nextSpeaker.say(t, "I wish I were as strong as you, " + target.getMainName() + "...");
+                            switch (nextSpeaker.getConfidence() / 33) {
+                                case 0: nextSpeaker.say(t, "I wish I were as strong as you, " + target.getMainName() + "..."); break;
+                                case 1: nextSpeaker.say(t, "Great job, " + target.getMainName() + "!"); break;
+                                default: nextSpeaker.say(t, "You're almost as strong as me, " + target.getMainName() + "!");
+                            }
                         } else
-                        if(nextSpeaker.getConfidence() > 66)
-                            nextSpeaker.say(t, "Good, " + target.getMainName() + "!  You handle the small fry!");
-                        else
-                        if(nextSpeaker.getConfidence() > 33)
-                            nextSpeaker.say(t, "Not bad, " + target.getMainName() + ".");
-                        else
-                            nextSpeaker.say(t, "How are you so good at this, " + target.getMainName() + "?");
+                        switch (nextSpeaker.getConfidence() / 33) {
+                            case 0: nextSpeaker.say(t, "How are you so good at this, " + target.getMainName() + "?"); break;
+                            case 1: nextSpeaker.say(t, "Not bad, " + target.getMainName() + "."); break;
+                            default: nextSpeaker.say(t, "Good, " + target.getMainName() + "!  You handle the small fry!");
+                        }
                     }
                 } else
                 if(nextLine == 2)
@@ -23706,92 +22838,74 @@ public class WorldState
                         Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.JOY);
                         if(nextSpeaker.getInnocence() > 66)
                         {
-                            if(nextSpeaker.getDignity() > 66)
-                                nextSpeaker.say(t, "What's making you feel so good, " + target.getMainName() + "?");
-                            else
-                            if(nextSpeaker.getDignity() > 33)
-                                nextSpeaker.say(t, "You look like you're feeling really good, " + target.getMainName() + "!");
-                            else
-                                nextSpeaker.say(t, "Ah, " + target.getMainName() + "...  I wanna feel good too!");
+                            switch (nextSpeaker.getDignity() / 33) {
+                                case 0: nextSpeaker.say(t, "Ah, " + target.getMainName() + "...  I wanna feel good too!"); break;
+                                case 1: nextSpeaker.say(t, "You look like you're feeling really good, " + target.getMainName() + "!"); break;
+                                default: nextSpeaker.say(t, "What's making you feel so good, " + target.getMainName() + "?");
+                            }
                         } else
                         if(nextSpeaker.getInnocence() > 33)
                         {
-                            if(nextSpeaker.getDignity() > 66)
-                                nextSpeaker.say(t, "You do whatever you need to in order to get by, " + target.getMainName() + ".");
-                            else
-                            if(nextSpeaker.getDignity() > 33)
-                                nextSpeaker.say(t, "You're really enjoying yourself, " + target.getMainName() + "...");
-                            else
-                                nextSpeaker.say(t, "I'm a little envious, " + target.getMainName() + "...");
+                            switch (nextSpeaker.getDignity() / 33) {
+                                case 0: nextSpeaker.say(t, "I'm a little envious, " + target.getMainName() + "..."); break;
+                                case 1: nextSpeaker.say(t, "You're really enjoying yourself, " + target.getMainName() + "..."); break;
+                                default: nextSpeaker.say(t, "You do whatever you need to in order to get by, " + target.getMainName() + ".");
+                            }
                         } else
-                        if(nextSpeaker.getDignity() > 66)
-                            nextSpeaker.say(t, "There's no reason not to enjoy the way it feels, " + target.getMainName() + ".");
-                        else
-                        if(nextSpeaker.getDignity() > 33)
-                            nextSpeaker.say(t, "Take this chance to enjoy yourself, " + target.getMainName() + "!");
-                        else
-                            nextSpeaker.say(t, "The energy " + target.getMainName() + " is drawing is making me feel a bit amorous as well...");
+                        switch (nextSpeaker.getDignity() / 33) {
+                            case 0: nextSpeaker.say(t, "The energy " + target.getMainName() + " is drawing is making me feel a bit amorous as well..."); break;
+                            case 1: nextSpeaker.say(t, "Take this chance to enjoy yourself, " + target.getMainName() + "!"); break;
+                            default: nextSpeaker.say(t, "There's no reason not to enjoy the way it feels, " + target.getMainName() + ".");
+                        }
                     } else
                     if(target.getInnocenceBreakage() == 1)
                     {
                         Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.JOY);
                         if(nextSpeaker.getInnocence() > 66)
                         {
-                            if(nextSpeaker.getDignity() > 66)
-                                nextSpeaker.say(t, "What's making you look so happy, " + target.getMainName() + "!");
-                            else
-                            if(nextSpeaker.getDignity() > 33)
-                                nextSpeaker.say(t, "You look really happy for some reason, " + target.getMainName() + "!");
-                            else
-                                nextSpeaker.say(t, "I wish I was as happy as " + target.getMainName() + "...");
+                            switch (nextSpeaker.getDignity() / 33) {
+                                case 0: nextSpeaker.say(t, "I wish I was as happy as " + target.getMainName() + "..."); break;
+                                case 1: nextSpeaker.say(t, "You look really happy for some reason, " + target.getMainName() + "!"); break;
+                                default: nextSpeaker.say(t, "What's making you look so happy, " + target.getMainName() + "!");
+                            }
                         } else
                         if(nextSpeaker.getInnocence() > 33)
                         {
-                            if(nextSpeaker.getDignity() > 66)
-                                nextSpeaker.say(t, "You're looking better, " + target.getMainName() + ".  Happier, too.");
-                            else
-                            if(nextSpeaker.getDignity() > 33)
-                                nextSpeaker.say(t, "It does feel good, doesn't it, " + target.getMainName() + "?");
-                            else
-                                nextSpeaker.say(t, "I'm a little bit addicted to that feeling, too, " + target.getMainName() + ".");
+                            switch (nextSpeaker.getDignity() / 33) {
+                                case 0: nextSpeaker.say(t, "I'm a little bit addicted to that feeling, too, " + target.getMainName() + "."); break;
+                                case 1: nextSpeaker.say(t, "It does feel good, doesn't it, " + target.getMainName() + "?"); break;
+                                default: nextSpeaker.say(t, "You're looking better, " + target.getMainName() + ".  Happier, too.");
+                            }
                         } else
-                        if(nextSpeaker.getDignity() > 66)
-                            nextSpeaker.say(t, "Just be happy, " + target.getMainName() + "!");
-                        else
-                        if(nextSpeaker.getDignity() > 33)
-                            nextSpeaker.say(t, "Might as well enjoy the feeling, " + target.getMainName() + ".");
-                        else
-                            nextSpeaker.say(t, "It's an interesting side-effect, isn't it, " + target.getMainName() + "?");
+                        switch (nextSpeaker.getDignity() / 33) {
+                            case 0: nextSpeaker.say(t, "It's an interesting side-effect, isn't it, " + target.getMainName() + "?"); break;
+                            case 1: nextSpeaker.say(t, "Might as well enjoy the feeling, " + target.getMainName() + "."); break;
+                            default: nextSpeaker.say(t, "Just be happy, " + target.getMainName() + "!");
+                        }
                     } else
                     {
                         Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.FOCUS, Project.Emotion.JOY);
                         if(nextSpeaker.getInnocence() > 66)
                         {
-                            if(nextSpeaker.getDignity() > 66)
-                                nextSpeaker.say(t, "We'll hold them off, " + target.getMainName() + "!");
-                            else
-                            if(nextSpeaker.getDignity() > 33)
-                                nextSpeaker.say(t, "Are you feeling better, " + target.getMainName() + "?");
-                            else
-                                nextSpeaker.say(t, "Hooray!  " + target.getMainName() + " is looking better!");
+                            switch (nextSpeaker.getDignity() / 33) {
+                                case 0: nextSpeaker.say(t, "Hooray!  " + target.getMainName() + " is looking better!"); break;
+                                case 1: nextSpeaker.say(t, "Are you feeling better, " + target.getMainName() + "?"); break;
+                                default: nextSpeaker.say(t, "We'll hold them off, " + target.getMainName() + "!");
+                            }
                         } else
                         if(nextSpeaker.getInnocence() > 33)
                         {
-                            if(nextSpeaker.getDignity() > 66)
-                                nextSpeaker.say(t, "Take your time, " + target.getMainName() + ".");
-                            else
-                            if(nextSpeaker.getDignity() > 33)
-                                nextSpeaker.say(t, "How are you holding up, " + target.getMainName() + "?");
-                            else
-                                nextSpeaker.say(t, "Alright, " + target.getMainName() + " is back in action!");
+                            switch (nextSpeaker.getDignity() / 33) {
+                                case 0: nextSpeaker.say(t, "Alright, " + target.getMainName() + " is back in action!"); break;
+                                case 1: nextSpeaker.say(t, "How are you holding up, " + target.getMainName() + "?"); break;
+                                default: nextSpeaker.say(t, "Take your time, " + target.getMainName() + ".");
+                            }
                         } else
-                        if(nextSpeaker.getDignity() > 66)
-                            nextSpeaker.say(t, "It would be unwise to rush, " + target.getMainName() + ".");
-                        else
-                        if(nextSpeaker.getDignity() > 33)
-                            nextSpeaker.say(t, target.getMainName() + "'s recovery will enhance our combat prowess significantly.");
-                        else
-                            nextSpeaker.say(t, "Is your recovery going smoothly, " + target.getMainName() + "?");
+                        switch (nextSpeaker.getDignity() / 33) {
+                            case 0: nextSpeaker.say(t, "Is your recovery going smoothly, " + target.getMainName() + "?"); break;
+                            case 1: nextSpeaker.say(t, target.getMainName() + "'s recovery will enhance our combat prowess significantly."); break;
+                            default: nextSpeaker.say(t, "It would be unwise to rush, " + target.getMainName() + ".");
+                        }
                     }
                 } else
                 if(nextLine == 3)
@@ -23801,92 +22915,74 @@ public class WorldState
                         Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.SHAME);
                         if(nextSpeaker.getConfidence() > 66)
                         {
-                            if(nextSpeaker.getDignity() > 66)
-                                nextSpeaker.say(t, "I won't waste this chance, " + target.getMainName() + ".");
-                            else
-                            if(nextSpeaker.getDignity() > 33)
-                                nextSpeaker.say(t, target.getMainName() + "!?  What do you think you're doing!?");
-                            else
-                                nextSpeaker.say(t, "No!  " + target.getMainName() + "!  Come back right now!");
+                            switch (nextSpeaker.getDignity() / 33) {
+                                case 0: nextSpeaker.say(t, "No!  " + target.getMainName() + "!  Come back right now!"); break;
+                                case 1: nextSpeaker.say(t, target.getMainName() + "!?  What do you think you're doing!?"); break;
+                                default: nextSpeaker.say(t, "I won't waste this chance, " + target.getMainName() + ".");
+                            }
                         } else
                         if(nextSpeaker.getConfidence() > 33)
                         {
-                            if(nextSpeaker.getDignity() > 66)
-                                nextSpeaker.say(t, target.getMainName() + "...  Understood!");
-                            else
-                            if(nextSpeaker.getDignity() > 33)
-                                nextSpeaker.say(t, target.getMainName() + "!?  What are you doing!?");
-                            else
-                                nextSpeaker.say(t, target.getMainName() + "!  Stop!  Come back!");
+                            switch (nextSpeaker.getDignity() / 33) {
+                                case 0: nextSpeaker.say(t, target.getMainName() + "!  Stop!  Come back!"); break;
+                                case 1: nextSpeaker.say(t, target.getMainName() + "!?  What are you doing!?"); break;
+                                default: nextSpeaker.say(t, target.getMainName() + "...  Understood!");
+                            }
                         } else
-                        if(nextSpeaker.getDignity() > 66)
-                            nextSpeaker.say(t, String.valueOf(target.getMainName().substring(0, 1)) + "-" + target.getMainName() + "...  I won't cry!");
-                        else
-                        if(nextSpeaker.getDignity() > 33)
-                            nextSpeaker.say(t, target.getMainName() + ", you're going to get yourself killed!");
-                        else
-                            nextSpeaker.say(t, target.getMainName() + "!  N-No!");
+                        switch (nextSpeaker.getDignity() / 33) {
+                            case 0: nextSpeaker.say(t, target.getMainName() + "!  N-No!"); break;
+                            case 1: nextSpeaker.say(t, target.getMainName() + ", you're going to get yourself killed!"); break;
+                            default: nextSpeaker.say(t, String.valueOf(target.getMainName().substring(0, 1)) + "-" + target.getMainName() + "...  I won't cry!");
+                        }
                     } else
                     if(target.getConfidenceBreakage() == 1)
                     {
                         Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.FOCUS, Project.Emotion.NEUTRAL);
                         if(nextSpeaker.getConfidence() > 66)
                         {
-                            if(nextSpeaker.getDignity() > 66)
-                                nextSpeaker.say(t, "You've made a fine opening, " + target.getMainName() + "!");
-                            else
-                            if(nextSpeaker.getDignity() > 33)
-                                nextSpeaker.say(t, "You're pretty bold, " + target.getMainName() + "!");
-                            else
-                                nextSpeaker.say(t, "Be less reckless, " + target.getMainName() + "!");
+                            switch (nextSpeaker.getDignity() / 33) {
+                                case 0: nextSpeaker.say(t, "Be less reckless, " + target.getMainName() + "!"); break;
+                                case 1: nextSpeaker.say(t, "You're pretty bold, " + target.getMainName() + "!"); break;
+                                default: nextSpeaker.say(t, "You've made a fine opening, " + target.getMainName() + "!");
+                            }
                         } else
                         if(nextSpeaker.getConfidence() > 33)
                         {
-                            if(nextSpeaker.getDignity() > 66)
-                                nextSpeaker.say(t, "Thanks, " + target.getMainName() + "!");
-                            else
-                            if(nextSpeaker.getDignity() > 33)
-                                nextSpeaker.say(t, "It'll be hard to follow that up, " + target.getMainName() + "...");
-                            else
-                                nextSpeaker.say(t, "Careful, " + target.getMainName() + "!");
+                            switch (nextSpeaker.getDignity() / 33) {
+                                case 0: nextSpeaker.say(t, "Careful, " + target.getMainName() + "!"); break;
+                                case 1: nextSpeaker.say(t, "It'll be hard to follow that up, " + target.getMainName() + "..."); break;
+                                default: nextSpeaker.say(t, "Thanks, " + target.getMainName() + "!");
+                            }
                         } else
-                        if(nextSpeaker.getDignity() > 66)
-                            nextSpeaker.say(t, "Y-You're so brave, " + target.getMainName() + "...");
-                        else
-                        if(nextSpeaker.getDignity() > 33)
-                            nextSpeaker.say(t, "W-Wow, " + target.getMainName() + "!");
-                        else
-                            nextSpeaker.say(t, target.getMainName() + "!  A-Are you alright?");
+                        switch (nextSpeaker.getDignity() / 33) {
+                            case 0: nextSpeaker.say(t, target.getMainName() + "!  A-Are you alright?"); break;
+                            case 1: nextSpeaker.say(t, "W-Wow, " + target.getMainName() + "!"); break;
+                            default: nextSpeaker.say(t, "Y-You're so brave, " + target.getMainName() + "...");
+                        }
                     } else
                     {
                         Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.FOCUS, Project.Emotion.JOY);
                         if(nextSpeaker.getConfidence() > 66)
                         {
-                            if(nextSpeaker.getDignity() > 66)
-                                nextSpeaker.say(t, "Impressive, " + target.getMainName() + ".");
-                            else
-                            if(nextSpeaker.getDignity() > 33)
-                                nextSpeaker.say(t, "Keep it up, " + target.getMainName() + "!");
-                            else
-                                nextSpeaker.say(t, "Looking good, " + target.getMainName() + "!");
+                            switch (nextSpeaker.getDignity() / 33) {
+                                case 0: nextSpeaker.say(t, "Looking good, " + target.getMainName() + "!"); break;
+                                case 1: nextSpeaker.say(t, "Keep it up, " + target.getMainName() + "!"); break;
+                                default: nextSpeaker.say(t, "Impressive, " + target.getMainName() + ".");
+                            }
                         } else
                         if(nextSpeaker.getConfidence() > 33)
                         {
-                            if(nextSpeaker.getDignity() > 66)
-                                nextSpeaker.say(t, "I'll follow you anywhere, " + target.getMainName() + ".");
-                            else
-                            if(nextSpeaker.getDignity() > 33)
-                                nextSpeaker.say(t, "I'm right behind you, " + target.getMainName() + "!");
-                            else
-                                nextSpeaker.say(t, "Lead the way, " + target.getMainName() + "!");
+                            switch (nextSpeaker.getDignity() / 33) {
+                                case 0: nextSpeaker.say(t, "Lead the way, " + target.getMainName() + "!"); break;
+                                case 1: nextSpeaker.say(t, "I'm right behind you, " + target.getMainName() + "!"); break;
+                                default: nextSpeaker.say(t, "I'll follow you anywhere, " + target.getMainName() + ".");
+                            }
                         } else
-                        if(nextSpeaker.getDignity() > 66)
-                            nextSpeaker.say(t, "Th-Thanks, " + target.getMainName() + ", I feel much better now.");
-                        else
-                        if(nextSpeaker.getDignity() > 33)
-                            nextSpeaker.say(t, target.getMainName() + "!  I-I'm right behind you!");
-                        else
-                            nextSpeaker.say(t, "D-Don't worry, " + target.getMainName() + ", I'm done panicking...");
+                        switch (nextSpeaker.getDignity() / 33) {
+                            case 0: nextSpeaker.say(t, "D-Don't worry, " + target.getMainName() + ", I'm done panicking..."); break;
+                            case 1: nextSpeaker.say(t, target.getMainName() + "!  I-I'm right behind you!"); break;
+                            default: nextSpeaker.say(t, "Th-Thanks, " + target.getMainName() + ", I feel much better now.");
+                        }
                     }
                 } else
                 if(nextLine == 4)
@@ -23896,92 +22992,74 @@ public class WorldState
                         Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.JOY);
                         if(nextSpeaker.getDignity() > 66)
                         {
-                            if(nextSpeaker.getInnocence() > 66)
-                                nextSpeaker.say(t, "You're so pretty, " + target.getMainName() + "...");
-                            else
-                            if(nextSpeaker.getInnocence() > 33)
-                                nextSpeaker.say(t, "The Thralls are entranced by you, " + target.getMainName() + "!");
-                            else
-                                nextSpeaker.say(t, "Excellent tactic, " + target.getMainName() + ".");
+                            switch (nextSpeaker.getInnocence() / 33) {
+                                case 0: nextSpeaker.say(t, "Excellent tactic, " + target.getMainName() + "."); break;
+                                case 1: nextSpeaker.say(t, "The Thralls are entranced by you, " + target.getMainName() + "!"); break;
+                                default: nextSpeaker.say(t, "You're so pretty, " + target.getMainName() + "...");
+                            }
                         } else
                         if(nextSpeaker.getDignity() > 33)
                         {
-                            if(nextSpeaker.getInnocence() > 66)
-                                nextSpeaker.say(t, target.getMainName() + " is... really sexy...");
-                            else
-                            if(nextSpeaker.getInnocence() > 33)
-                                nextSpeaker.say(t, "I can see why the Thralls are so distracted, " + target.getMainName() + "...");
-                            else
-                                nextSpeaker.say(t, "Clever, " + target.getMainName() + "...");
+                            switch (nextSpeaker.getInnocence() / 33) {
+                                case 0: nextSpeaker.say(t, "Clever, " + target.getMainName() + "..."); break;
+                                case 1: nextSpeaker.say(t, "I can see why the Thralls are so distracted, " + target.getMainName() + "..."); break;
+                                default: nextSpeaker.say(t, target.getMainName() + " is... really sexy...");
+                            }
                         } else
-                        if(nextSpeaker.getInnocence() > 66)
-                            nextSpeaker.say(t, target.getMainName() + "!  I wanna see more!");
-                        else
-                        if(nextSpeaker.getInnocence() > 33)
-                            nextSpeaker.say(t, "Those Thralls really want to fuck you, " + target.getMainName() + ".");
-                        else
-                            nextSpeaker.say(t, target.getMainName() + "...  I believe your tactic is working on me as well.");
+                        switch (nextSpeaker.getInnocence() / 33) {
+                            case 0: nextSpeaker.say(t, target.getMainName() + "...  I believe your tactic is working on me as well."); break;
+                            case 1: nextSpeaker.say(t, "Those Thralls really want to fuck you, " + target.getMainName() + "."); break;
+                            default: nextSpeaker.say(t, target.getMainName() + "!  I wanna see more!");
+                        }
                     } else
                     if(target.getDignityBreakage() == 1)
                     {
                         Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.FOCUS, Project.Emotion.JOY);
                         if(nextSpeaker.getDignity() > 66)
                         {
-                            if(nextSpeaker.getInnocence() > 66)
-                                nextSpeaker.say(t, "You look wonderful, " + target.getMainName() + "!");
-                            else
-                            if(nextSpeaker.getInnocence() > 33)
-                                nextSpeaker.say(t, "The Thralls are completely captivated, " + target.getMainName() + ".");
-                            else
-                                nextSpeaker.say(t, "Very effective, " + target.getMainName() + ".");
+                            switch (nextSpeaker.getInnocence() / 33) {
+                                case 0: nextSpeaker.say(t, "Very effective, " + target.getMainName() + "."); break;
+                                case 1: nextSpeaker.say(t, "The Thralls are completely captivated, " + target.getMainName() + "."); break;
+                                default: nextSpeaker.say(t, "You look wonderful, " + target.getMainName() + "!");
+                            }
                         } else
                         if(nextSpeaker.getDignity() > 33)
                         {
-                            if(nextSpeaker.getInnocence() > 66)
-                                nextSpeaker.say(t, target.getMainName() + " is really amazing...");
-                            else
-                            if(nextSpeaker.getInnocence() > 33)
-                                nextSpeaker.say(t, "I need to be careful that I don't get distracted by " + target.getMainName() + " too...");
-                            else
-                                nextSpeaker.say(t, "Good idea, " + target.getMainName() + ".");
+                            switch (nextSpeaker.getInnocence() / 33) {
+                                case 0: nextSpeaker.say(t, "Good idea, " + target.getMainName() + "."); break;
+                                case 1: nextSpeaker.say(t, "I need to be careful that I don't get distracted by " + target.getMainName() + " too..."); break;
+                                default: nextSpeaker.say(t, target.getMainName() + " is really amazing...");
+                            }
                         } else
-                        if(nextSpeaker.getInnocence() > 66)
-                            nextSpeaker.say(t, "I could watch " + target.getMainName() + " all day...");
-                        else
-                        if(nextSpeaker.getInnocence() > 33)
-                            nextSpeaker.say(t, "The Thralls look like they'd rather go after " + target.getMainName() + ".");
-                        else
-                            nextSpeaker.say(t, "You're far too good at that, " + target.getMainName() + "...");
+                        switch (nextSpeaker.getInnocence() / 33) {
+                            case 0: nextSpeaker.say(t, "You're far too good at that, " + target.getMainName() + "..."); break;
+                            case 1: nextSpeaker.say(t, "The Thralls look like they'd rather go after " + target.getMainName() + "."); break;
+                            default: nextSpeaker.say(t, "I could watch " + target.getMainName() + " all day...");
+                        }
                     } else
                     {
                         Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.FOCUS, Project.Emotion.JOY);
                         if(nextSpeaker.getDignity() > 66)
                         {
-                            if(nextSpeaker.getInnocence() > 66)
-                                nextSpeaker.say(t, "You're amazing, " + target.getMainName() + "...");
-                            else
-                            if(nextSpeaker.getInnocence() > 33)
-                                nextSpeaker.say(t, target.getMainName() + " looks magnificent...");
-                            else
-                                nextSpeaker.say(t, "Very heroic of you, " + target.getMainName() + ".");
+                            switch (nextSpeaker.getInnocence() / 33) {
+                                case 0: nextSpeaker.say(t, "Very heroic of you, " + target.getMainName() + "."); break;
+                                case 1: nextSpeaker.say(t, target.getMainName() + " looks magnificent..."); break;
+                                default: nextSpeaker.say(t, "You're amazing, " + target.getMainName() + "...");
+                            }
                         } else
                         if(nextSpeaker.getDignity() > 33)
                         {
-                            if(nextSpeaker.getInnocence() > 66)
-                                nextSpeaker.say(t, "You're so cool, " + target.getMainName() + ".");
-                            else
-                            if(nextSpeaker.getInnocence() > 33)
-                                nextSpeaker.say(t, "Stylish, " + target.getMainName() + ".");
-                            else
-                                nextSpeaker.say(t, "You cut an impressive figure, " + target.getMainName() + ".");
+                            switch (nextSpeaker.getInnocence() / 33) {
+                                case 0: nextSpeaker.say(t, "You cut an impressive figure, " + target.getMainName() + "."); break;
+                                case 1: nextSpeaker.say(t, "Stylish, " + target.getMainName() + "."); break;
+                                default: nextSpeaker.say(t, "You're so cool, " + target.getMainName() + ".");
+                            }
                         } else
-                        if(nextSpeaker.getInnocence() > 66)
-                            nextSpeaker.say(t, target.getMainName() + "!  Awesome!");
-                        else
-                        if(nextSpeaker.getInnocence() > 33)
-                            nextSpeaker.say(t, "Looking good, " + target.getMainName() + "!");
-                        else
-                            nextSpeaker.say(t, "Well done, " + target.getMainName() + ".  The Thralls are completely distracted.");
+                        switch (nextSpeaker.getInnocence() / 33) {
+                            case 0: nextSpeaker.say(t, "Well done, " + target.getMainName() + ".  The Thralls are completely distracted."); break;
+                            case 1: nextSpeaker.say(t, "Looking good, " + target.getMainName() + "!"); break;
+                            default: nextSpeaker.say(t, target.getMainName() + "!  Awesome!");
+                        }
                     }
                 } else
                 if(nextLine == 5)
@@ -23989,127 +23067,103 @@ public class WorldState
                     Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                     if(nextSpeaker.getConfidence() > 66)
                     {
-                        if(nextSpeaker.getInnocence() > 66)
-                            nextSpeaker.say(t, "I'll save you, " + target.getMainName() + "!");
-                        else
-                        if(nextSpeaker.getInnocence() > 33)
-                            nextSpeaker.say(t, "Hold on, " + target.getMainName() + "!");
-                        else
-                            nextSpeaker.say(t, "You must not give in, " + target.getMainName() + "!");
+                        switch (nextSpeaker.getInnocence() / 33) {
+                            case 0: nextSpeaker.say(t, "You must not give in, " + target.getMainName() + "!"); break;
+                            case 1: nextSpeaker.say(t, "Hold on, " + target.getMainName() + "!"); break;
+                            default: nextSpeaker.say(t, "I'll save you, " + target.getMainName() + "!");
+                        }
                     } else
                     if(nextSpeaker.getConfidence() > 33)
                     {
-                        if(nextSpeaker.getInnocence() > 66)
-                            nextSpeaker.say(t, "It'll be alright, " + target.getMainName() + "!");
-                        else
-                        if(nextSpeaker.getInnocence() > 33)
-                            nextSpeaker.say(t, "Don't give up, " + target.getMainName() + "...!");
-                        else
-                            nextSpeaker.say(t, "This may be painful, " + target.getMainName() + "...!");
+                        switch (nextSpeaker.getInnocence() / 33) {
+                            case 0: nextSpeaker.say(t, "This may be painful, " + target.getMainName() + "...!"); break;
+                            case 1: nextSpeaker.say(t, "Don't give up, " + target.getMainName() + "...!"); break;
+                            default: nextSpeaker.say(t, "It'll be alright, " + target.getMainName() + "!");
+                        }
                     } else
-                    if(nextSpeaker.getInnocence() > 66)
-                        nextSpeaker.say(t, "S-Someone help " + target.getMainName() + "!");
-                    else
-                    if(nextSpeaker.getInnocence() > 33)
-                        nextSpeaker.say(t, "H-How could I let them get " + target.getMainName() + "?");
-                    else
-                        nextSpeaker.say(t, target.getMainName() + "...  This isn't good...");
+                    switch (nextSpeaker.getInnocence() / 33) {
+                        case 0: nextSpeaker.say(t, target.getMainName() + "...  This isn't good..."); break;
+                        case 1: nextSpeaker.say(t, "H-How could I let them get " + target.getMainName() + "?"); break;
+                        default: nextSpeaker.say(t, "S-Someone help " + target.getMainName() + "!");
+                    }
                 } else
                 if(nextLine == 6)
                 {
                     Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.FOCUS, Project.Emotion.ANGER);
                     if(nextSpeaker.getMorality() > 66)
                     {
-                        if(nextSpeaker.getInnocence() > 66)
-                            nextSpeaker.say(t, "Fight back, " + target.getMainName() + "!  For justice!");
-                        else
-                        if(nextSpeaker.getInnocence() > 33)
-                            nextSpeaker.say(t, "Just get out of there, " + target.getMainName() + "!  I won't blame you for anything!");
-                        else
-                            nextSpeaker.say(t, target.getMainName() + "!  Even if you have to break some bones, it's worth it if you can help us end this sooner!");
+                        switch (nextSpeaker.getInnocence() / 33) {
+                            case 0: nextSpeaker.say(t, target.getMainName() + "!  Even if you have to break some bones, it's worth it if you can help us end this sooner!"); break;
+                            case 1: nextSpeaker.say(t, "Just get out of there, " + target.getMainName() + "!  I won't blame you for anything!"); break;
+                            default: nextSpeaker.say(t, "Fight back, " + target.getMainName() + "!  For justice!");
+                        }
                     } else
                     if(nextSpeaker.getMorality() > 33)
                     {
-                        if(nextSpeaker.getInnocence() > 66)
-                            nextSpeaker.say(t, "Fight back, " + target.getMainName() + "!  I don't care what you have to do!");
-                        else
-                        if(nextSpeaker.getInnocence() > 33)
-                            nextSpeaker.say(t, "Just get out of there, " + target.getMainName() + "!  At any cost!");
-                        else
-                            nextSpeaker.say(t, "There's no reason to show them any sympathy, " + target.getMainName() + ".");
+                        switch (nextSpeaker.getInnocence() / 33) {
+                            case 0: nextSpeaker.say(t, "There's no reason to show them any sympathy, " + target.getMainName() + "."); break;
+                            case 1: nextSpeaker.say(t, "Just get out of there, " + target.getMainName() + "!  At any cost!"); break;
+                            default: nextSpeaker.say(t, "Fight back, " + target.getMainName() + "!  I don't care what you have to do!");
+                        }
                     } else
-                    if(nextSpeaker.getInnocence() > 66)
-                        nextSpeaker.say(t, "Fight back, " + target.getMainName() + "!  Beat 'em up!");
-                    else
-                    if(nextSpeaker.getInnocence() > 33)
-                        nextSpeaker.say(t, "Hurt them as much as you have to, " + target.getMainName() + "!");
-                    else
-                        nextSpeaker.say(t, "Don't hold back, " + target.getMainName() + ".");
+                    switch (nextSpeaker.getInnocence() / 33) {
+                        case 0: nextSpeaker.say(t, "Don't hold back, " + target.getMainName() + "."); break;
+                        case 1: nextSpeaker.say(t, "Hurt them as much as you have to, " + target.getMainName() + "!"); break;
+                        default: nextSpeaker.say(t, "Fight back, " + target.getMainName() + "!  Beat 'em up!");
+                    }
                 } else
                 if(nextLine == 7)
                 {
                     Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.FOCUS, Project.Emotion.JOY);
                     if(nextSpeaker.getInnocence() > 66)
                     {
-                        if(nextSpeaker.getDignity() > 66)
-                            nextSpeaker.say(t, "You're getting really good at that, " + target.getMainName() + "!");
-                        else
-                        if(nextSpeaker.getDignity() > 33)
-                            nextSpeaker.say(t, "The Thralls really love you, " + target.getMainName() + "!");
-                        else
-                            nextSpeaker.say(t, "You're so lewd, " + target.getMainName() + "!");
+                        switch (nextSpeaker.getDignity() / 33) {
+                            case 0: nextSpeaker.say(t, "You're so lewd, " + target.getMainName() + "!"); break;
+                            case 1: nextSpeaker.say(t, "The Thralls really love you, " + target.getMainName() + "!"); break;
+                            default: nextSpeaker.say(t, "You're getting really good at that, " + target.getMainName() + "!");
+                        }
                     } else
                     if(nextSpeaker.getInnocence() > 33)
                     {
-                        if(nextSpeaker.getDignity() > 66)
-                            nextSpeaker.say(t, "There's nothing to be ashamed of, " + target.getMainName() + ".");
-                        else
-                        if(nextSpeaker.getDignity() > 33)
-                            nextSpeaker.say(t, "Just finish them off as quickly as you can, " + target.getMainName() + "!");
-                        else
-                            nextSpeaker.say(t, "Good!  Fuck their brains out, " + target.getMainName() + "!");
+                        switch (nextSpeaker.getDignity() / 33) {
+                            case 0: nextSpeaker.say(t, "Good!  Fuck their brains out, " + target.getMainName() + "!"); break;
+                            case 1: nextSpeaker.say(t, "Just finish them off as quickly as you can, " + target.getMainName() + "!"); break;
+                            default: nextSpeaker.say(t, "There's nothing to be ashamed of, " + target.getMainName() + ".");
+                        }
                     } else
-                    if(nextSpeaker.getDignity() > 66)
-                        nextSpeaker.say(t, "You're simply defeating them using unconventional means, " + target.getMainName() + ".");
-                    else
-                    if(nextSpeaker.getDignity() > 33)
-                        nextSpeaker.say(t, "It should be much easier to manage them after they ejaculate, " + target.getMainName() + ".");
-                    else
-                        nextSpeaker.say(t, "Your technique is proving highly effective, " + target.getMainName() + ".");
+                    switch (nextSpeaker.getDignity() / 33) {
+                        case 0: nextSpeaker.say(t, "Your technique is proving highly effective, " + target.getMainName() + "."); break;
+                        case 1: nextSpeaker.say(t, "It should be much easier to manage them after they ejaculate, " + target.getMainName() + "."); break;
+                        default: nextSpeaker.say(t, "You're simply defeating them using unconventional means, " + target.getMainName() + ".");
+                    }
                 } else
                 if(nextLine == 8)
                 {
                     if(nextSpeaker.getConfidence() > 66)
                     {
                         Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.FOCUS, Project.Emotion.NEUTRAL);
-                        if(nextSpeaker.getDignity() > 66)
-                            nextSpeaker.say(t, "Yes, " + target.getMainName() + ", appeal to their conscience!");
-                        else
-                        if(nextSpeaker.getDignity() > 33)
-                            nextSpeaker.say(t, "Just tell them what they want to hear, " + target.getMainName() + ".");
-                        else
-                            nextSpeaker.say(t, "Your pride is less important than your safety, " + target.getMainName() + ".");
+                        switch (nextSpeaker.getDignity() / 33) {
+                            case 0: nextSpeaker.say(t, "Your pride is less important than your safety, " + target.getMainName() + "."); break;
+                            case 1: nextSpeaker.say(t, "Just tell them what they want to hear, " + target.getMainName() + "."); break;
+                            default: nextSpeaker.say(t, "Yes, " + target.getMainName() + ", appeal to their conscience!");
+                        }
                     } else
                     if(nextSpeaker.getConfidence() > 33)
                     {
                         Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.ANGER);
-                        if(nextSpeaker.getDignity() > 66)
-                            nextSpeaker.say(t, "I hope this isn't too painful for you, " + target.getMainName() + "...");
-                        else
-                        if(nextSpeaker.getDignity() > 33)
-                            nextSpeaker.say(t, target.getMainName() + " is having a hard time...");
-                        else
-                            nextSpeaker.say(t, "Just say whatever you have to in order to get them to back off, " + target.getMainName() + ".");
+                        switch (nextSpeaker.getDignity() / 33) {
+                            case 0: nextSpeaker.say(t, "Just say whatever you have to in order to get them to back off, " + target.getMainName() + "."); break;
+                            case 1: nextSpeaker.say(t, target.getMainName() + " is having a hard time..."); break;
+                            default: nextSpeaker.say(t, "I hope this isn't too painful for you, " + target.getMainName() + "...");
+                        }
                     } else
                     {
                         Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
-                        if(nextSpeaker.getDignity() > 66)
-                            nextSpeaker.say(t, "I'm glad that " + target.getMainName() + " isn't clinging to " + target.hisHer() + " pride...");
-                        else
-                        if(nextSpeaker.getDignity() > 33)
-                            nextSpeaker.say(t, "It's hard, isn't it, " + target.getMainName() + "...?");
-                        else
-                            nextSpeaker.say(t, "Just throw your pride away, " + target.getMainName() + "...");
+                        switch (nextSpeaker.getDignity() / 33) {
+                            case 0: nextSpeaker.say(t, "Just throw your pride away, " + target.getMainName() + "..."); break;
+                            case 1: nextSpeaker.say(t, "It's hard, isn't it, " + target.getMainName() + "...?"); break;
+                            default: nextSpeaker.say(t, "I'm glad that " + target.getMainName() + " isn't clinging to " + target.hisHer() + " pride...");
+                        }
                     }
                 } else
                 if(nextLine == 9)
@@ -24117,65 +23171,53 @@ public class WorldState
                     Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.ANGER);
                     if(nextSpeaker.getDignity() > 66)
                     {
-                        if(nextSpeaker.getMorality() > 66)
-                            nextSpeaker.say(t, target.getMainName() + " is trying so hard...");
-                        else
-                        if(nextSpeaker.getMorality() > 33)
-                            nextSpeaker.say(t, "The things they're doing to " + target.getMainName() + "...");
-                        else
-                            nextSpeaker.say(t, "They'll pay for doing this to " + target.getMainName() + ".");
+                        switch (nextSpeaker.getMorality() / 33) {
+                            case 0: nextSpeaker.say(t, "They'll pay for doing this to " + target.getMainName() + "."); break;
+                            case 1: nextSpeaker.say(t, "The things they're doing to " + target.getMainName() + "..."); break;
+                            default: nextSpeaker.say(t, target.getMainName() + " is trying so hard...");
+                        }
                     } else
                     if(nextSpeaker.getDignity() > 33)
                     {
-                        if(nextSpeaker.getMorality() > 66)
-                            nextSpeaker.say(t, "Be strong, " + target.getMainName() + "...!");
-                        else
-                        if(nextSpeaker.getMorality() > 33)
-                            nextSpeaker.say(t, target.getMainName() + " is having a hard time...");
-                        else
-                            nextSpeaker.say(t, "We'll get our revenge, " + target.getMainName() + "!");
+                        switch (nextSpeaker.getMorality() / 33) {
+                            case 0: nextSpeaker.say(t, "We'll get our revenge, " + target.getMainName() + "!"); break;
+                            case 1: nextSpeaker.say(t, target.getMainName() + " is having a hard time..."); break;
+                            default: nextSpeaker.say(t, "Be strong, " + target.getMainName() + "...!");
+                        }
                     } else
-                    if(nextSpeaker.getMorality() > 66)
-                        nextSpeaker.say(t, "Stop staring at " + target.getMainName() + "!");
-                    else
-                    if(nextSpeaker.getMorality() > 33)
-                        nextSpeaker.say(t, "How can I help " + target.getMainName() + "!?");
-                    else
-                        nextSpeaker.say(t, "I'll kill anyone that makes fun of " + target.getMainName() + "!");
+                    switch (nextSpeaker.getMorality() / 33) {
+                        case 0: nextSpeaker.say(t, "I'll kill anyone that makes fun of " + target.getMainName() + "!"); break;
+                        case 1: nextSpeaker.say(t, "How can I help " + target.getMainName() + "!?"); break;
+                        default: nextSpeaker.say(t, "Stop staring at " + target.getMainName() + "!");
+                    }
                 } else
                 if(nextLine == 10)
                 {
                     if(nextSpeaker.getMorality() > 66)
                     {
                         Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.SHAME);
-                        if(nextSpeaker.getInnocence() > 66)
-                            nextSpeaker.say(t, "I don't like it when you look so mad, " + target.getMainName() + "...");
-                        else
-                        if(nextSpeaker.getInnocence() > 33)
-                            nextSpeaker.say(t, "Don't give in to the hatred, " + target.getMainName() + "!");
-                        else
-                            nextSpeaker.say(t, "Not good.  If " + target.getMainName() + " lets " + target.himHer() + "self become consumed by hatred...");
+                        switch (nextSpeaker.getInnocence() / 33) {
+                            case 0: nextSpeaker.say(t, "Not good.  If " + target.getMainName() + " lets " + target.himHer() + "self become consumed by hatred..."); break;
+                            case 1: nextSpeaker.say(t, "Don't give in to the hatred, " + target.getMainName() + "!"); break;
+                            default: nextSpeaker.say(t, "I don't like it when you look so mad, " + target.getMainName() + "...");
+                        }
                     } else
                     if(nextSpeaker.getMorality() > 33)
                     {
                         Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.NEUTRAL);
-                        if(nextSpeaker.getInnocence() > 66)
-                            nextSpeaker.say(t, "You're looking scary, " + target.getMainName() + "...");
-                        else
-                        if(nextSpeaker.getInnocence() > 33)
-                            nextSpeaker.say(t, "You have to stay sane, " + target.getMainName() + "...!");
-                        else
-                            nextSpeaker.say(t, "Careful, " + target.getMainName() + ".  It will cause problems if you give in to your emotions.");
+                        switch (nextSpeaker.getInnocence() / 33) {
+                            case 0: nextSpeaker.say(t, "Careful, " + target.getMainName() + ".  It will cause problems if you give in to your emotions."); break;
+                            case 1: nextSpeaker.say(t, "You have to stay sane, " + target.getMainName() + "...!"); break;
+                            default: nextSpeaker.say(t, "You're looking scary, " + target.getMainName() + "...");
+                        }
                     } else
                     {
                         Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
-                        if(nextSpeaker.getInnocence() > 66)
-                            nextSpeaker.say(t, "Ooh, the Demons made " + target.getMainName() + " mad...");
-                        else
-                        if(nextSpeaker.getInnocence() > 33)
-                            nextSpeaker.say(t, "You look like you're going crazy, " + target.getMainName() + ".");
-                        else
-                            nextSpeaker.say(t, "I think you're understanding how I feel about the Demons now, " + target.getMainName() + ".");
+                        switch (nextSpeaker.getInnocence() / 33) {
+                            case 0: nextSpeaker.say(t, "I think you're understanding how I feel about the Demons now, " + target.getMainName() + "."); break;
+                            case 1: nextSpeaker.say(t, "You look like you're going crazy, " + target.getMainName() + "."); break;
+                            default: nextSpeaker.say(t, "Ooh, the Demons made " + target.getMainName() + " mad...");
+                        }
                     }
                 } else
                 if(nextLine == 11)
@@ -24183,34 +23225,28 @@ public class WorldState
                     if(nextSpeaker.getInnocence() > 66)
                     {
                         Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.FOCUS);
-                        if(nextSpeaker.getDignity() > 66)
-                            nextSpeaker.say(t, "Are you feeling sick, " + target.getMainName() + "?  Your face is red...");
-                        else
-                        if(nextSpeaker.getDignity() > 33)
-                            nextSpeaker.say(t, target.getMainName() + " is looking weird...");
-                        else
-                            nextSpeaker.say(t, "You look really naughty, " + target.getMainName() + "!");
+                        switch (nextSpeaker.getDignity() / 33) {
+                            case 0: nextSpeaker.say(t, "You look really naughty, " + target.getMainName() + "!"); break;
+                            case 1: nextSpeaker.say(t, target.getMainName() + " is looking weird..."); break;
+                            default: nextSpeaker.say(t, "Are you feeling sick, " + target.getMainName() + "?  Your face is red...");
+                        }
                     } else
                     if(nextSpeaker.getInnocence() > 33)
                     {
                         Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.SHAME);
-                        if(nextSpeaker.getDignity() > 66)
-                            nextSpeaker.say(t, "Hold it together, " + target.getMainName() + "...");
-                        else
-                        if(nextSpeaker.getDignity() > 33)
-                            nextSpeaker.say(t, target.getMainName() + " is having trouble keeping " + target.hisHer() + " composure...");
-                        else
-                            nextSpeaker.say(t, "You look like you're really turned on, " + target.getMainName() + ".");
+                        switch (nextSpeaker.getDignity() / 33) {
+                            case 0: nextSpeaker.say(t, "You look like you're really turned on, " + target.getMainName() + "."); break;
+                            case 1: nextSpeaker.say(t, target.getMainName() + " is having trouble keeping " + target.hisHer() + " composure..."); break;
+                            default: nextSpeaker.say(t, "Hold it together, " + target.getMainName() + "...");
+                        }
                     } else
                     {
                         Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.SHAME);
-                        if(nextSpeaker.getDignity() > 66)
-                            nextSpeaker.say(t, "You must resist the pleasure, " + target.getMainName() + "...");
-                        else
-                        if(nextSpeaker.getDignity() > 33)
-                            nextSpeaker.say(t, target.getMainName() + " is being overcome by lustful feelings...");
-                        else
-                            nextSpeaker.say(t, "You're experiencing severe sexual arousal, " + target.getMainName() + ".");
+                        switch (nextSpeaker.getDignity() / 33) {
+                            case 0: nextSpeaker.say(t, "You're experiencing severe sexual arousal, " + target.getMainName() + "."); break;
+                            case 1: nextSpeaker.say(t, target.getMainName() + " is being overcome by lustful feelings..."); break;
+                            default: nextSpeaker.say(t, "You must resist the pleasure, " + target.getMainName() + "...");
+                        }
                     }
                 } else
                 if(nextLine == 12)
@@ -24218,13 +23254,11 @@ public class WorldState
                     Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                     if(nextSpeaker.getConfidence() > 66)
                     {
-                        if(nextSpeaker.getMorality() > 66)
-                            nextSpeaker.say(t, "Be careful, " + target.getMainName() + "!");
-                        else
-                        if(nextSpeaker.getMorality() > 33)
-                            nextSpeaker.say(t, "You're hurt, " + target.getMainName() + "!");
-                        else
-                            nextSpeaker.say(t, "I'll kill them for hurting you like this, " + target.getMainName() + "!");
+                        switch (nextSpeaker.getMorality() / 33) {
+                            case 0: nextSpeaker.say(t, "I'll kill them for hurting you like this, " + target.getMainName() + "!"); break;
+                            case 1: nextSpeaker.say(t, "You're hurt, " + target.getMainName() + "!"); break;
+                            default: nextSpeaker.say(t, "Be careful, " + target.getMainName() + "!");
+                        }
                     } else
                     if(nextSpeaker.getConfidence() > 33)
                     {
@@ -24259,248 +23293,200 @@ public class WorldState
                     Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.FOCUS);
                     if(nextSpeaker.getDignity() > 66)
                     {
-                        if(nextSpeaker.getInnocence() > 66)
-                            nextSpeaker.say(t, target.getMainName() + " is... a bit exposed...");
-                        else
-                        if(nextSpeaker.getInnocence() > 33)
-                            nextSpeaker.say(t, "I should try to distract people from looking at " + target.getMainName() + "...");
-                        else
-                            nextSpeaker.say(t, "You look fine, " + target.getMainName() + "!");
+                        switch (nextSpeaker.getInnocence() / 33) {
+                            case 0: nextSpeaker.say(t, "You look fine, " + target.getMainName() + "!"); break;
+                            case 1: nextSpeaker.say(t, "I should try to distract people from looking at " + target.getMainName() + "..."); break;
+                            default: nextSpeaker.say(t, target.getMainName() + " is... a bit exposed...");
+                        }
                     } else
                     if(nextSpeaker.getDignity() > 33)
                     {
-                        if(nextSpeaker.getInnocence() > 66)
-                            nextSpeaker.say(t, "Wow, look at " + target.getMainName() + "...");
-                        else
-                        if(nextSpeaker.getInnocence() > 33)
-                            nextSpeaker.say(t, "I wish I could do something for " + target.getMainName() + "...");
-                        else
-                            nextSpeaker.say(t, "Don't worry about your appearance, " + target.getMainName() + ".");
+                        switch (nextSpeaker.getInnocence() / 33) {
+                            case 0: nextSpeaker.say(t, "Don't worry about your appearance, " + target.getMainName() + "."); break;
+                            case 1: nextSpeaker.say(t, "I wish I could do something for " + target.getMainName() + "..."); break;
+                            default: nextSpeaker.say(t, "Wow, look at " + target.getMainName() + "...");
+                        }
                     } else
-                    if(nextSpeaker.getInnocence() > 66)
-                        nextSpeaker.say(t, target.getMainName() + " looks weird!");
-                    else
-                    if(nextSpeaker.getInnocence() > 33)
-                        nextSpeaker.say(t, "They're really having fun with " + target.getMainName() + "...");
-                    else
-                        nextSpeaker.say(t, "Just try to focus on fighting, " + target.getMainName() + ".");
+                    switch (nextSpeaker.getInnocence() / 33) {
+                        case 0: nextSpeaker.say(t, "Just try to focus on fighting, " + target.getMainName() + "."); break;
+                        case 1: nextSpeaker.say(t, "They're really having fun with " + target.getMainName() + "..."); break;
+                        default: nextSpeaker.say(t, target.getMainName() + " looks weird!");
+                    }
                 } else
                 if(nextLine == 14)
                 {
                     Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                     if(nextSpeaker.getMorality() > 66)
                     {
-                        if(nextSpeaker.getConfidence() > 66)
-                            nextSpeaker.say(t, target.getMainName() + ", let me protect you!");
-                        else
-                        if(nextSpeaker.getConfidence() > 33)
-                            nextSpeaker.say(t, target.getMainName() + ", are you alright?");
-                        else
-                            nextSpeaker.say(t, target.getMainName() + ", p-please be safe...!");
+                        switch (nextSpeaker.getConfidence() / 33) {
+                            case 0: nextSpeaker.say(t, target.getMainName() + ", p-please be safe...!"); break;
+                            case 1: nextSpeaker.say(t, target.getMainName() + ", are you alright?"); break;
+                            default: nextSpeaker.say(t, target.getMainName() + ", let me protect you!");
+                        }
                     } else
                     if(nextSpeaker.getMorality() > 33)
                     {
-                        if(nextSpeaker.getConfidence() > 66)
-                            nextSpeaker.say(t, target.getMainName() + ", I won't the Demons hurt you!");
-                        else
-                        if(nextSpeaker.getConfidence() > 33)
-                            nextSpeaker.say(t, "I have to help " + target.getMainName() + "...");
-                        else
-                            nextSpeaker.say(t, "Th-They're going to hurt " + target.getMainName() + "!");
+                        switch (nextSpeaker.getConfidence() / 33) {
+                            case 0: nextSpeaker.say(t, "Th-They're going to hurt " + target.getMainName() + "!"); break;
+                            case 1: nextSpeaker.say(t, "I have to help " + target.getMainName() + "..."); break;
+                            default: nextSpeaker.say(t, target.getMainName() + ", I won't the Demons hurt you!");
+                        }
                     } else
-                    if(nextSpeaker.getConfidence() > 66)
-                        nextSpeaker.say(t, "You'd better not hurt " + target.getMainName() + "!");
-                    else
-                    if(nextSpeaker.getConfidence() > 33)
-                        nextSpeaker.say(t, "I'll stop them from hurting " + target.getMainName() + "... at any cost.");
-                    else
-                        nextSpeaker.say(t, target.getMainName() + "...  I'll punish them for threatening you...!");
+                    switch (nextSpeaker.getConfidence() / 33) {
+                        case 0: nextSpeaker.say(t, target.getMainName() + "...  I'll punish them for threatening you...!"); break;
+                        case 1: nextSpeaker.say(t, "I'll stop them from hurting " + target.getMainName() + "... at any cost."); break;
+                        default: nextSpeaker.say(t, "You'd better not hurt " + target.getMainName() + "!");
+                    }
                 } else
                 if(nextLine == 15)
                 {
                     Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.STRUGGLE, Project.Emotion.SHAME);
                     if(nextSpeaker.getInnocence() > 66)
                     {
-                        if(nextSpeaker.getConfidence() > 66)
-                            nextSpeaker.say(t, "I...  I can take anything they throw at me, " + target.getMainName() + "!");
-                        else
-                        if(nextSpeaker.getConfidence() > 33)
-                            nextSpeaker.say(t, "Got to be strong for " + target.getMainName() + "...!");
-                        else
-                            nextSpeaker.say(t, "Make it stop, " + target.getMainName() + "!");
+                        switch (nextSpeaker.getConfidence() / 33) {
+                            case 0: nextSpeaker.say(t, "Make it stop, " + target.getMainName() + "!"); break;
+                            case 1: nextSpeaker.say(t, "Got to be strong for " + target.getMainName() + "...!"); break;
+                            default: nextSpeaker.say(t, "I...  I can take anything they throw at me, " + target.getMainName() + "!");
+                        }
                     } else
                     if(nextSpeaker.getInnocence() > 33)
                     {
-                        if(nextSpeaker.getConfidence() > 66)
-                            nextSpeaker.say(t, "I can deal with this much, " + target.getMainName() + "!");
-                        else
-                        if(nextSpeaker.getConfidence() > 33)
-                            nextSpeaker.say(t, target.getMainName() + "...  I'm not doing so good...");
-                        else
-                            nextSpeaker.say(t, "H-Help me, " + target.getMainName() + "!");
+                        switch (nextSpeaker.getConfidence() / 33) {
+                            case 0: nextSpeaker.say(t, "H-Help me, " + target.getMainName() + "!"); break;
+                            case 1: nextSpeaker.say(t, target.getMainName() + "...  I'm not doing so good..."); break;
+                            default: nextSpeaker.say(t, "I can deal with this much, " + target.getMainName() + "!");
+                        }
                     } else
-                    if(nextSpeaker.getConfidence() > 66)
-                        nextSpeaker.say(t, "I am... capable of enduring this much abuse, " + target.getMainName() + ".");
-                    else
-                    if(nextSpeaker.getConfidence() > 33)
-                        nextSpeaker.say(t, "I am... nearing my limit, " + target.getMainName() + "...");
-                    else
-                        nextSpeaker.say(t, "A-Assistance would be appreciated, " + target.getMainName() + "!");
+                    switch (nextSpeaker.getConfidence() / 33) {
+                        case 0: nextSpeaker.say(t, "A-Assistance would be appreciated, " + target.getMainName() + "!"); break;
+                        case 1: nextSpeaker.say(t, "I am... nearing my limit, " + target.getMainName() + "..."); break;
+                        default: nextSpeaker.say(t, "I am... capable of enduring this much abuse, " + target.getMainName() + ".");
+                    }
                 } else
                 if(nextLine == 17)
                 {
                     Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                     if(nextSpeaker.getDignity() > 66)
                     {
-                        if(nextSpeaker.getConfidence() > 66)
-                            nextSpeaker.say(t, "T-Trust me, " + target.getMainName() + ", I'm doing fine!");
-                        else
-                        if(nextSpeaker.getConfidence() > 33)
-                            nextSpeaker.say(t, "I must look terrible, " + target.getMainName() + "...");
-                        else
-                            nextSpeaker.say(t, target.getMainName() + "!  Don't look!");
+                        switch (nextSpeaker.getConfidence() / 33) {
+                            case 0: nextSpeaker.say(t, target.getMainName() + "!  Don't look!"); break;
+                            case 1: nextSpeaker.say(t, "I must look terrible, " + target.getMainName() + "..."); break;
+                            default: nextSpeaker.say(t, "T-Trust me, " + target.getMainName() + ", I'm doing fine!");
+                        }
                     } else
                     if(nextSpeaker.getDignity() > 33)
                     {
-                        if(nextSpeaker.getConfidence() > 66)
-                            nextSpeaker.say(t, "You're embarrassing me in front of " + target.getMainName() + "!");
-                        else
-                        if(nextSpeaker.getConfidence() > 33)
-                            nextSpeaker.say(t, "I... I have to put on a strong face!  For " + target.getMainName() + "!");
-                        else
-                            nextSpeaker.say(t, "I'm messing up in front of " + target.getMainName() + "...");
+                        switch (nextSpeaker.getConfidence() / 33) {
+                            case 0: nextSpeaker.say(t, "I'm messing up in front of " + target.getMainName() + "..."); break;
+                            case 1: nextSpeaker.say(t, "I... I have to put on a strong face!  For " + target.getMainName() + "!"); break;
+                            default: nextSpeaker.say(t, "You're embarrassing me in front of " + target.getMainName() + "!");
+                        }
                     } else
-                    if(nextSpeaker.getConfidence() > 66)
-                        nextSpeaker.say(t, "I don't have anything to hide from " + target.getMainName() + ".");
-                    else
-                    if(nextSpeaker.getConfidence() > 33)
-                        nextSpeaker.say(t, "I need to shake this off for " + target.getMainName() + "'s sake!");
-                    else
-                        nextSpeaker.say(t, "I-I'm so pathetic, " + target.getMainName() + "...!");
+                    switch (nextSpeaker.getConfidence() / 33) {
+                        case 0: nextSpeaker.say(t, "I-I'm so pathetic, " + target.getMainName() + "...!"); break;
+                        case 1: nextSpeaker.say(t, "I need to shake this off for " + target.getMainName() + "'s sake!"); break;
+                        default: nextSpeaker.say(t, "I don't have anything to hide from " + target.getMainName() + ".");
+                    }
                 } else
                 if(nextLine == 18)
                 {
                     Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.NEUTRAL);
                     if(nextSpeaker.getMorality() > 66)
                     {
-                        if(nextSpeaker.getInnocence() > 66)
-                            nextSpeaker.say(t, "It's alright, " + target.getMainName() + ", getting raped doesn't make you a bad person!");
-                        else
-                        if(nextSpeaker.getInnocence() > 33)
-                            nextSpeaker.say(t, "You resisted as best you could, " + target.getMainName() + "...");
-                        else
-                            nextSpeaker.say(t, "I hope you don't blame yourself for this, " + target.getMainName() + "...");
+                        switch (nextSpeaker.getInnocence() / 33) {
+                            case 0: nextSpeaker.say(t, "I hope you don't blame yourself for this, " + target.getMainName() + "..."); break;
+                            case 1: nextSpeaker.say(t, "You resisted as best you could, " + target.getMainName() + "..."); break;
+                            default: nextSpeaker.say(t, "It's alright, " + target.getMainName() + ", getting raped doesn't make you a bad person!");
+                        }
                     } else
                     if(nextSpeaker.getMorality() > 33)
                     {
-                        if(nextSpeaker.getInnocence() > 66)
-                            nextSpeaker.say(t, "Oh no, they're doing gross stuff to " + target.getMainName() + " now...");
-                        else
-                        if(nextSpeaker.getInnocence() > 33)
-                            nextSpeaker.say(t, "Damn, I couldn't stop them from raping " + target.getMainName() + "...");
-                        else
-                            nextSpeaker.say(t, "Don't worry, " + target.getMainName() + ", you won't get pregnant.  Probably.");
+                        switch (nextSpeaker.getInnocence() / 33) {
+                            case 0: nextSpeaker.say(t, "Don't worry, " + target.getMainName() + ", you won't get pregnant.  Probably."); break;
+                            case 1: nextSpeaker.say(t, "Damn, I couldn't stop them from raping " + target.getMainName() + "..."); break;
+                            default: nextSpeaker.say(t, "Oh no, they're doing gross stuff to " + target.getMainName() + " now...");
+                        }
                     } else
-                    if(nextSpeaker.getInnocence() > 66)
-                        nextSpeaker.say(t, "It can actually feel kinda nice if you don't resist, " + target.getMainName() + "...");
-                    else
-                    if(nextSpeaker.getInnocence() > 33)
-                        nextSpeaker.say(t, "Just let it happen, " + target.getMainName() + ".");
-                    else
-                        nextSpeaker.say(t, "I'd recommend that you stop trying to fight back, " + target.getMainName() + ".");
+                    switch (nextSpeaker.getInnocence() / 33) {
+                        case 0: nextSpeaker.say(t, "I'd recommend that you stop trying to fight back, " + target.getMainName() + "."); break;
+                        case 1: nextSpeaker.say(t, "Just let it happen, " + target.getMainName() + "."); break;
+                        default: nextSpeaker.say(t, "It can actually feel kinda nice if you don't resist, " + target.getMainName() + "...");
+                    }
                 } else
                 if(nextLine == 19)
                 {
                     Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.FOCUS);
                     if(nextSpeaker.getInnocence() > 66)
                     {
-                        if(nextSpeaker.getDignity() > 66)
-                            nextSpeaker.say(t, "Don't be embarrassed about feeling good, " + target.getMainName() + "!");
-                        else
-                        if(nextSpeaker.getDignity() > 33)
-                            nextSpeaker.say(t, "Ah, they're forcing " + target.getMainName() + " to feel good...");
-                        else
-                            nextSpeaker.say(t, "Why not just let yourself feel good, " + target.getMainName() + "?");
+                        switch (nextSpeaker.getDignity() / 33) {
+                            case 0: nextSpeaker.say(t, "Why not just let yourself feel good, " + target.getMainName() + "?"); break;
+                            case 1: nextSpeaker.say(t, "Ah, they're forcing " + target.getMainName() + " to feel good..."); break;
+                            default: nextSpeaker.say(t, "Don't be embarrassed about feeling good, " + target.getMainName() + "!");
+                        }
                     } else
                     if(nextSpeaker.getInnocence() > 33)
                     {
-                        if(nextSpeaker.getDignity() > 66)
-                            nextSpeaker.say(t, "You don't have to force yourself not to cum, " + target.getMainName() + ".");
-                        else
-                        if(nextSpeaker.getDignity() > 33)
-                            nextSpeaker.say(t, "Looks like they're forcing " + target.getMainName() + " to cum...");
-                        else
-                            nextSpeaker.say(t, "You should stop trying not to cum, " + target.getMainName() + ".");
+                        switch (nextSpeaker.getDignity() / 33) {
+                            case 0: nextSpeaker.say(t, "You should stop trying not to cum, " + target.getMainName() + "."); break;
+                            case 1: nextSpeaker.say(t, "Looks like they're forcing " + target.getMainName() + " to cum..."); break;
+                            default: nextSpeaker.say(t, "You don't have to force yourself not to cum, " + target.getMainName() + ".");
+                        }
                     } else
-                    if(nextSpeaker.getDignity() > 66)
-                        nextSpeaker.say(t, "There's no shame in feeling the physiological orgasm response, " + target.getMainName() + ".");
-                    else
-                    if(nextSpeaker.getDignity() > 33)
-                        nextSpeaker.say(t, "It seems that " + target.getMainName() + " is being forced to orgasm.");
-                    else
-                        nextSpeaker.say(t, "It is less painful when you cooperate, " + target.getMainName() + ".");
+                    switch (nextSpeaker.getDignity() / 33) {
+                        case 0: nextSpeaker.say(t, "It is less painful when you cooperate, " + target.getMainName() + "."); break;
+                        case 1: nextSpeaker.say(t, "It seems that " + target.getMainName() + " is being forced to orgasm."); break;
+                        default: nextSpeaker.say(t, "There's no shame in feeling the physiological orgasm response, " + target.getMainName() + ".");
+                    }
                 } else
                 if(nextLine == 20)
                 {
                     Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
                     if(nextSpeaker.getConfidence() > 66)
                     {
-                        if(nextSpeaker.getDignity() > 66)
-                            nextSpeaker.say(t, "Endure it, " + target.getMainName() + ".");
-                        else
-                        if(nextSpeaker.getDignity() > 33)
-                            nextSpeaker.say(t, "Hold on, " + target.getMainName() + "!");
-                        else
-                            nextSpeaker.say(t, "I can't help you this time, " + target.getMainName() + ".");
+                        switch (nextSpeaker.getDignity() / 33) {
+                            case 0: nextSpeaker.say(t, "I can't help you this time, " + target.getMainName() + "."); break;
+                            case 1: nextSpeaker.say(t, "Hold on, " + target.getMainName() + "!"); break;
+                            default: nextSpeaker.say(t, "Endure it, " + target.getMainName() + ".");
+                        }
                     } else
                     if(nextSpeaker.getInnocence() > 33)
                     {
-                        if(nextSpeaker.getDignity() > 66)
-                            nextSpeaker.say(t, "You'll be alright, " + target.getMainName() + ".");
-                        else
-                        if(nextSpeaker.getDignity() > 33)
-                            nextSpeaker.say(t, "I'm on my way, " + target.getMainName() + "!");
-                        else
-                            nextSpeaker.say(t, "I know what you're going through, " + target.getMainName() + "...");
+                        switch (nextSpeaker.getDignity() / 33) {
+                            case 0: nextSpeaker.say(t, "I know what you're going through, " + target.getMainName() + "..."); break;
+                            case 1: nextSpeaker.say(t, "I'm on my way, " + target.getMainName() + "!"); break;
+                            default: nextSpeaker.say(t, "You'll be alright, " + target.getMainName() + ".");
+                        }
                     } else
-                    if(nextSpeaker.getDignity() > 66)
-                        nextSpeaker.say(t, "I know this isn't enough to break you, " + target.getMainName() + "...");
-                    else
-                    if(nextSpeaker.getDignity() > 33)
-                        nextSpeaker.say(t, "I-I'll try to help, " + target.getMainName() + "!");
-                    else
-                        nextSpeaker.say(t, "I'm sorry I'm not strong enough to help, " + target.getMainName() + "...");
+                    switch (nextSpeaker.getDignity() / 33) {
+                        case 0: nextSpeaker.say(t, "I'm sorry I'm not strong enough to help, " + target.getMainName() + "..."); break;
+                        case 1: nextSpeaker.say(t, "I-I'll try to help, " + target.getMainName() + "!"); break;
+                        default: nextSpeaker.say(t, "I know this isn't enough to break you, " + target.getMainName() + "...");
+                    }
                 } else
                 if(nextLine == 21)
                 {
                     Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.NEUTRAL);
                     if(nextSpeaker.getDignity() > 66)
                     {
-                        if(nextSpeaker.getInnocence() > 66)
-                            nextSpeaker.say(t, "I know it's embarrassing, " + target.getMainName() + ", but you'll be fine!");
-                        else
-                        if(nextSpeaker.getInnocence() > 33)
-                            nextSpeaker.say(t, target.getMainName() + "...  I wish we could stop everyone from seeing us like this...");
-                        else
-                            nextSpeaker.say(t, "It's alright, " + target.getMainName() + ", people should be less interested in watching videos of your humiliation now that videos of mine are already out there.");
+                        switch (nextSpeaker.getInnocence() / 33) {
+                            case 0: nextSpeaker.say(t, "It's alright, " + target.getMainName() + ", people should be less interested in watching videos of your humiliation now that videos of mine are already out there."); break;
+                            case 1: nextSpeaker.say(t, target.getMainName() + "...  I wish we could stop everyone from seeing us like this..."); break;
+                            default: nextSpeaker.say(t, "I know it's embarrassing, " + target.getMainName() + ", but you'll be fine!");
+                        }
                     } else
                     if(nextSpeaker.getDignity() > 33)
                     {
-                        if(nextSpeaker.getInnocence() > 66)
-                            nextSpeaker.say(t, "It's really embarrassing, isn't it, " + target.getMainName() + "?");
-                        else
-                        if(nextSpeaker.getInnocence() > 33)
-                            nextSpeaker.say(t, "The public may mock us now, " + target.getMainName() + ", but they'll be thanking us in the end.");
-                        else
-                            nextSpeaker.say(t, "I'll find a way to cheer " + target.getMainName() + " up after we're done here...");
+                        switch (nextSpeaker.getInnocence() / 33) {
+                            case 0: nextSpeaker.say(t, "I'll find a way to cheer " + target.getMainName() + " up after we're done here..."); break;
+                            case 1: nextSpeaker.say(t, "The public may mock us now, " + target.getMainName() + ", but they'll be thanking us in the end."); break;
+                            default: nextSpeaker.say(t, "It's really embarrassing, isn't it, " + target.getMainName() + "?");
+                        }
                     } else
-                    if(nextSpeaker.getInnocence() > 66)
-                        nextSpeaker.say(t, "There's no reason to be embarrassed, " + target.getMainName() + "!");
-                    else
-                    if(nextSpeaker.getInnocence() > 33)
-                        nextSpeaker.say(t, "The public may mock us, " + target.getMainName() + ", but it changes nothing.");
-                    else
-                        nextSpeaker.say(t, "Perhaps I should let them film me some more in order to draw attention from " + target.getMainName() + "'s humiliation.");
+                    switch (nextSpeaker.getInnocence() / 33) {
+                        case 0: nextSpeaker.say(t, "Perhaps I should let them film me some more in order to draw attention from " + target.getMainName() + "'s humiliation."); break;
+                        case 1: nextSpeaker.say(t, "The public may mock us, " + target.getMainName() + ", but it changes nothing."); break;
+                        default: nextSpeaker.say(t, "There's no reason to be embarrassed, " + target.getMainName() + "!");
+                    }
                 }
             } else
             if(nextLine == 1 || nextLine == 6)
@@ -24508,158 +23494,128 @@ public class WorldState
                 Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
                 if(nextSpeaker.getMorality() > 66)
                 {
-                    if(nextSpeaker.getInnocence() > 66)
-                        nextSpeaker.say(t, target.getMainName() + ", you're hurting too many people!");
-                    else
-                    if(nextSpeaker.getInnocence() > 33)
-                        nextSpeaker.say(t, "Stop, " + target.getMainName() + ", you're killing them!");
-                    else
-                        nextSpeaker.say(t, target.getMainName() + ", they're not respnosible for their own actions!");
+                    switch (nextSpeaker.getInnocence() / 33) {
+                        case 0: nextSpeaker.say(t, target.getMainName() + ", they're not respnosible for their own actions!"); break;
+                        case 1: nextSpeaker.say(t, "Stop, " + target.getMainName() + ", you're killing them!"); break;
+                        default: nextSpeaker.say(t, target.getMainName() + ", you're hurting too many people!");
+                    }
                 } else
                 if(nextSpeaker.getMorality() > 33)
                 {
-                    if(nextSpeaker.getInnocence() > 66)
-                        nextSpeaker.say(t, target.getMainName() + ", you're acting like a bad guy!");
-                    else
-                    if(nextSpeaker.getInnocence() > 33)
-                        nextSpeaker.say(t, "You need to hold back, " + target.getMainName() + "!");
-                    else
-                        nextSpeaker.say(t, "You're hurting more people than you're saving, " + target.getMainName() + ".");
+                    switch (nextSpeaker.getInnocence() / 33) {
+                        case 0: nextSpeaker.say(t, "You're hurting more people than you're saving, " + target.getMainName() + "."); break;
+                        case 1: nextSpeaker.say(t, "You need to hold back, " + target.getMainName() + "!"); break;
+                        default: nextSpeaker.say(t, target.getMainName() + ", you're acting like a bad guy!");
+                    }
                 } else
-                if(nextSpeaker.getInnocence() > 66)
-                    nextSpeaker.say(t, "You're way meaner than me, " + target.getMainName() + "!");
-                else
-                if(nextSpeaker.getInnocence() > 33)
-                    nextSpeaker.say(t, "You were the evil one all along, " + target.getMainName() + ".");
-                else
-                    nextSpeaker.say(t, target.getMainName() + "...  You compensate for your cruelty by pretending to be righteous.");
+                switch (nextSpeaker.getInnocence() / 33) {
+                    case 0: nextSpeaker.say(t, target.getMainName() + "...  You compensate for your cruelty by pretending to be righteous."); break;
+                    case 1: nextSpeaker.say(t, "You were the evil one all along, " + target.getMainName() + "."); break;
+                    default: nextSpeaker.say(t, "You're way meaner than me, " + target.getMainName() + "!");
+                }
             } else
             if(nextLine == 2)
             {
                 Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
                 if(nextSpeaker.getInnocence() > 66)
                 {
-                    if(nextSpeaker.getConfidence() > 66)
-                        nextSpeaker.say(t, "You're eating too much Demonic power, " + target.getMainName() + "!");
-                    else
-                    if(nextSpeaker.getConfidence() > 33)
-                        nextSpeaker.say(t, "You should be careful with Demonic power, " + target.getMainName() + "...");
-                    else
-                        nextSpeaker.say(t, target.getMainName() + ", you shouldn't do that...");
+                    switch (nextSpeaker.getConfidence() / 33) {
+                        case 0: nextSpeaker.say(t, target.getMainName() + ", you shouldn't do that..."); break;
+                        case 1: nextSpeaker.say(t, "You should be careful with Demonic power, " + target.getMainName() + "..."); break;
+                        default: nextSpeaker.say(t, "You're eating too much Demonic power, " + target.getMainName() + "!");
+                    }
                 } else
                 if(nextSpeaker.getInnocence() > 33)
                 {
-                    if(nextSpeaker.getConfidence() > 66)
-                        nextSpeaker.say(t, target.getMainName() + ", stop!  Are you trying to brainwash yourself!?");
-                    else
-                    if(nextSpeaker.getConfidence() > 33)
-                        nextSpeaker.say(t, target.getMainName() + ", you'll get brainwashed if you keep doing that!");
-                    else
-                        nextSpeaker.say(t, "You're going to get brainwashed, " + target.getMainName() + "...");
+                    switch (nextSpeaker.getConfidence() / 33) {
+                        case 0: nextSpeaker.say(t, "You're going to get brainwashed, " + target.getMainName() + "..."); break;
+                        case 1: nextSpeaker.say(t, target.getMainName() + ", you'll get brainwashed if you keep doing that!"); break;
+                        default: nextSpeaker.say(t, target.getMainName() + ", stop!  Are you trying to brainwash yourself!?");
+                    }
                 } else
-                if(nextSpeaker.getConfidence() > 66)
-                    nextSpeaker.say(t, target.getMainName() + "!  Show some willpower for once and stop taking in the Demonic energy!");
-                else
-                if(nextSpeaker.getConfidence() > 33)
-                    nextSpeaker.say(t, "You're getting addicted to the pleasure, " + target.getMainName() + ".");
-                else
-                    nextSpeaker.say(t, target.getMainName() + ", you fool...  Don't treat Demonic energy so lightly...");
+                switch (nextSpeaker.getConfidence() / 33) {
+                    case 0: nextSpeaker.say(t, target.getMainName() + ", you fool...  Don't treat Demonic energy so lightly..."); break;
+                    case 1: nextSpeaker.say(t, "You're getting addicted to the pleasure, " + target.getMainName() + "."); break;
+                    default: nextSpeaker.say(t, target.getMainName() + "!  Show some willpower for once and stop taking in the Demonic energy!");
+                }
             } else
             if(nextLine == 3)
             {
                 Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
                 if(nextSpeaker.getConfidence() > 66)
                 {
-                    if(nextSpeaker.getDignity() > 66)
-                        nextSpeaker.say(t, target.getMainName() + ", stop and think for a moment!");
-                    else
-                    if(nextSpeaker.getDignity() > 33)
-                        nextSpeaker.say(t, target.getMainName() + ", this is pointless!");
-                    else
-                        nextSpeaker.say(t, target.getMainName() + ", have you gone insane!?");
+                    switch (nextSpeaker.getDignity() / 33) {
+                        case 0: nextSpeaker.say(t, target.getMainName() + ", have you gone insane!?"); break;
+                        case 1: nextSpeaker.say(t, target.getMainName() + ", this is pointless!"); break;
+                        default: nextSpeaker.say(t, target.getMainName() + ", stop and think for a moment!");
+                    }
                 } else
                 if(nextSpeaker.getConfidence() > 33)
                 {
-                    if(nextSpeaker.getDignity() > 66)
-                        nextSpeaker.say(t, "Calm down, " + target.getMainName() + "!");
-                    else
-                    if(nextSpeaker.getDignity() > 33)
-                        nextSpeaker.say(t, "What are you hoping to accomplish, " + target.getMainName() + "?");
-                    else
-                        nextSpeaker.say(t, target.getMainName() + ", you masochist.");
+                    switch (nextSpeaker.getDignity() / 33) {
+                        case 0: nextSpeaker.say(t, target.getMainName() + ", you masochist."); break;
+                        case 1: nextSpeaker.say(t, "What are you hoping to accomplish, " + target.getMainName() + "?"); break;
+                        default: nextSpeaker.say(t, "Calm down, " + target.getMainName() + "!");
+                    }
                 } else
-                if(nextSpeaker.getDignity() > 66)
-                    nextSpeaker.say(t, "You're just acting on your emotions, " + target.getMainName() + "...");
-                else
-                if(nextSpeaker.getDignity() > 33)
-                    nextSpeaker.say(t, target.getMainName() + ", you're beyond help...");
-                else
-                    nextSpeaker.say(t, target.getMainName() + ", you hotblooded idiot...");
+                switch (nextSpeaker.getDignity() / 33) {
+                    case 0: nextSpeaker.say(t, target.getMainName() + ", you hotblooded idiot..."); break;
+                    case 1: nextSpeaker.say(t, target.getMainName() + ", you're beyond help..."); break;
+                    default: nextSpeaker.say(t, "You're just acting on your emotions, " + target.getMainName() + "...");
+                }
             } else
             if(nextLine == 4)
             {
                 Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
                 if(nextSpeaker.getDignity() > 66)
                 {
-                    if(nextSpeaker.getMorality() > 66)
-                        nextSpeaker.say(t, "Show some modesty, " + target.getMainName() + "...");
-                    else
-                    if(nextSpeaker.getMorality() > 33)
-                        nextSpeaker.say(t, "You're making us look ridiculous, " + target.getMainName() + "...");
-                    else
-                        nextSpeaker.say(t, "Think of my reputation as your associate, " + target.getMainName() + "!");
+                    switch (nextSpeaker.getMorality() / 33) {
+                        case 0: nextSpeaker.say(t, "Think of my reputation as your associate, " + target.getMainName() + "!"); break;
+                        case 1: nextSpeaker.say(t, "You're making us look ridiculous, " + target.getMainName() + "..."); break;
+                        default: nextSpeaker.say(t, "Show some modesty, " + target.getMainName() + "...");
+                    }
                 } else
                 if(nextSpeaker.getDignity() > 33)
                 {
-                    if(nextSpeaker.getMorality() > 66)
-                        nextSpeaker.say(t, "That's just immoral, " + target.getMainName() + ".");
-                    else
-                    if(nextSpeaker.getMorality() > 33)
-                        nextSpeaker.say(t, target.getMainName() + "...  Making this about you...");
-                    else
-                        nextSpeaker.say(t, "You look ridiculous, " + target.getMainName() + ".");
+                    switch (nextSpeaker.getMorality() / 33) {
+                        case 0: nextSpeaker.say(t, "You look ridiculous, " + target.getMainName() + "."); break;
+                        case 1: nextSpeaker.say(t, target.getMainName() + "...  Making this about you..."); break;
+                        default: nextSpeaker.say(t, "That's just immoral, " + target.getMainName() + ".");
+                    }
                 } else
-                if(nextSpeaker.getMorality() > 66)
-                    nextSpeaker.say(t, "Stop posing and fight, " + target.getMainName() + "!");
-                else
-                if(nextSpeaker.getMorality() > 33)
-                    nextSpeaker.say(t, "What are you even trying to do, " + target.getMainName() + "?");
-                else
-                    nextSpeaker.say(t, "Stop pretending to be a hero, " + target.getMainName() + "!");
+                switch (nextSpeaker.getMorality() / 33) {
+                    case 0: nextSpeaker.say(t, "Stop pretending to be a hero, " + target.getMainName() + "!"); break;
+                    case 1: nextSpeaker.say(t, "What are you even trying to do, " + target.getMainName() + "?"); break;
+                    default: nextSpeaker.say(t, "Stop posing and fight, " + target.getMainName() + "!");
+                }
             } else
             if(nextLine == 5)
             {
                 if(nextSpeaker.getMorality() > 66)
                 {
                     Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.FEAR);
-                    if(nextSpeaker.getConfidence() > 66)
-                        nextSpeaker.say(t, "Don't you dare give in, " + target.getMainName() + "!");
-                    else
-                    if(nextSpeaker.getConfidence() > 33)
-                        nextSpeaker.say(t, "Even if it's you, " + target.getMainName() + ", I'll try to help.");
-                    else
-                        nextSpeaker.say(t, "I-I don't really want to see bad things happen to " + target.getMainName() + "...");
+                    switch (nextSpeaker.getConfidence() / 33) {
+                        case 0: nextSpeaker.say(t, "I-I don't really want to see bad things happen to " + target.getMainName() + "..."); break;
+                        case 1: nextSpeaker.say(t, "Even if it's you, " + target.getMainName() + ", I'll try to help."); break;
+                        default: nextSpeaker.say(t, "Don't you dare give in, " + target.getMainName() + "!");
+                    }
                 } else
                 if(nextSpeaker.getMorality() > 33)
                 {
                     Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
-                    if(nextSpeaker.getConfidence() > 66)
-                        nextSpeaker.say(t, "You're lucky that I'm here to save you, " + target.getMainName() + "!");
-                    else
-                    if(nextSpeaker.getConfidence() > 33)
-                        nextSpeaker.say(t, "Can't you look after yourself, " + target.getMainName() + "?");
-                    else
-                        nextSpeaker.say(t, "Don't think that you can rely on me to save you, " + target.getMainName() + "...");
+                    switch (nextSpeaker.getConfidence() / 33) {
+                        case 0: nextSpeaker.say(t, "Don't think that you can rely on me to save you, " + target.getMainName() + "..."); break;
+                        case 1: nextSpeaker.say(t, "Can't you look after yourself, " + target.getMainName() + "?"); break;
+                        default: nextSpeaker.say(t, "You're lucky that I'm here to save you, " + target.getMainName() + "!");
+                    }
                 } else
                 {
                     Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
-                    if(nextSpeaker.getConfidence() > 66)
-                        nextSpeaker.say(t, "You're holding me back, " + target.getMainName() + "!");
-                    else
-                    if(nextSpeaker.getConfidence() > 33)
-                        nextSpeaker.say(t, "I'm not saving you, " + target.getMainName() + "!");
-                    else
-                        nextSpeaker.say(t, "You're useless, " + target.getMainName() + "...");
+                    switch (nextSpeaker.getConfidence() / 33) {
+                        case 0: nextSpeaker.say(t, "You're useless, " + target.getMainName() + "..."); break;
+                        case 1: nextSpeaker.say(t, "I'm not saving you, " + target.getMainName() + "!"); break;
+                        default: nextSpeaker.say(t, "You're holding me back, " + target.getMainName() + "!");
+                    }
                 }
             } else
             if(nextLine == 7)
@@ -24667,34 +23623,28 @@ public class WorldState
                 if(nextSpeaker.getInnocence() > 66)
                 {
                     Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.JOY, Project.Emotion.FOCUS);
-                    if(nextSpeaker.getDignity() > 66)
-                        nextSpeaker.say(t, "You're such a pervert, " + target.getMainName() + ".");
-                    else
-                    if(nextSpeaker.getDignity() > 33)
-                        nextSpeaker.say(t, "You're just letting them do lewd things to you, " + target.getMainName() + "!");
-                    else
-                        nextSpeaker.say(t, "You look really funny, " + target.getMainName() + "!");
+                    switch (nextSpeaker.getDignity() / 33) {
+                        case 0: nextSpeaker.say(t, "You look really funny, " + target.getMainName() + "!"); break;
+                        case 1: nextSpeaker.say(t, "You're just letting them do lewd things to you, " + target.getMainName() + "!"); break;
+                        default: nextSpeaker.say(t, "You're such a pervert, " + target.getMainName() + ".");
+                    }
                 } else
                 if(nextSpeaker.getInnocence() > 33)
                 {
                     Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.JOY);
-                    if(nextSpeaker.getDignity() > 66)
-                        nextSpeaker.say(t, "You're such a slut, " + target.getMainName() + ".");
-                    else
-                    if(nextSpeaker.getDignity() > 33)
-                        nextSpeaker.say(t, "Looks like you've given up, " + target.getMainName() + ".");
-                    else
-                        nextSpeaker.say(t, "I kinda like seeing " + target.getMainName() + " humbled like this.");
+                    switch (nextSpeaker.getDignity() / 33) {
+                        case 0: nextSpeaker.say(t, "I kinda like seeing " + target.getMainName() + " humbled like this."); break;
+                        case 1: nextSpeaker.say(t, "Looks like you've given up, " + target.getMainName() + "."); break;
+                        default: nextSpeaker.say(t, "You're such a slut, " + target.getMainName() + ".");
+                    }
                 } else
                 {
                     Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
-                    if(nextSpeaker.getDignity() > 66)
-                        nextSpeaker.say(t, "It appears that you've given into your lusts, " + target.getMainName() + ".");
-                    else
-                    if(nextSpeaker.getDignity() > 33)
-                        nextSpeaker.say(t, "You're just encouraging them, " + target.getMainName() + ".");
-                    else
-                        nextSpeaker.say(t, "That position suits you perfectly, " + target.getMainName() + ".");
+                    switch (nextSpeaker.getDignity() / 33) {
+                        case 0: nextSpeaker.say(t, "That position suits you perfectly, " + target.getMainName() + "."); break;
+                        case 1: nextSpeaker.say(t, "You're just encouraging them, " + target.getMainName() + "."); break;
+                        default: nextSpeaker.say(t, "It appears that you've given into your lusts, " + target.getMainName() + ".");
+                    }
                 }
             } else
             if(nextLine == 8)
@@ -24702,220 +23652,178 @@ public class WorldState
                 Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
                 if(nextSpeaker.getConfidence() > 66)
                 {
-                    if(nextSpeaker.getDignity() > 66)
-                        nextSpeaker.say(t, "You've completely given up your pride, " + target.getMainName() + ".");
-                    else
-                    if(nextSpeaker.getDignity() > 33)
-                        nextSpeaker.say(t, "Pathetic, " + target.getMainName() + "!");
-                    else
-                        nextSpeaker.say(t, "You weren't fighting hard enough, " + target.getMainName() + "!");
+                    switch (nextSpeaker.getDignity() / 33) {
+                        case 0: nextSpeaker.say(t, "You weren't fighting hard enough, " + target.getMainName() + "!"); break;
+                        case 1: nextSpeaker.say(t, "Pathetic, " + target.getMainName() + "!"); break;
+                        default: nextSpeaker.say(t, "You've completely given up your pride, " + target.getMainName() + ".");
+                    }
                 } else
                 if(nextSpeaker.getConfidence() > 33)
                 {
-                    if(nextSpeaker.getDignity() > 66)
-                        nextSpeaker.say(t, "You look ridiculous, " + target.getMainName() + ".");
-                    else
-                    if(nextSpeaker.getDignity() > 33)
-                        nextSpeaker.say(t, "Show some spine, " + target.getMainName() + ".");
-                    else
-                        nextSpeaker.say(t, "You should take this to heart, " + target.getMainName() + "!");
+                    switch (nextSpeaker.getDignity() / 33) {
+                        case 0: nextSpeaker.say(t, "You should take this to heart, " + target.getMainName() + "!"); break;
+                        case 1: nextSpeaker.say(t, "Show some spine, " + target.getMainName() + "."); break;
+                        default: nextSpeaker.say(t, "You look ridiculous, " + target.getMainName() + ".");
+                    }
                 } else
-                if(nextSpeaker.getDignity() > 66)
-                    nextSpeaker.say(t, "You were the weak one all along, " + target.getMainName() + "...!");
-                else
-                if(nextSpeaker.getDignity() > 33)
-                    nextSpeaker.say(t, "I can't believe " + target.getMainName() + " ended up being so pathetic...");
-                else
-                    nextSpeaker.say(t, "I shouldn't be enjoying seeing " + target.getMainName() + " in this state so much...");
+                switch (nextSpeaker.getDignity() / 33) {
+                    case 0: nextSpeaker.say(t, "I shouldn't be enjoying seeing " + target.getMainName() + " in this state so much..."); break;
+                    case 1: nextSpeaker.say(t, "I can't believe " + target.getMainName() + " ended up being so pathetic..."); break;
+                    default: nextSpeaker.say(t, "You were the weak one all along, " + target.getMainName() + "...!");
+                }
             } else
             if(nextLine == 9)
             {
                 Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
                 if(nextSpeaker.getDignity() > 66)
                 {
-                    if(nextSpeaker.getMorality() > 66)
-                        nextSpeaker.say(t, target.getMainName() + ", just stop fighting if you can't handle it...");
-                    else
-                    if(nextSpeaker.getMorality() > 33)
-                        nextSpeaker.say(t, target.getMainName() + ", you aren't cut out for this.");
-                    else
-                        nextSpeaker.say(t, "Aw, is it too much for " + target.getMainName() + "?");
+                    switch (nextSpeaker.getMorality() / 33) {
+                        case 0: nextSpeaker.say(t, "Aw, is it too much for " + target.getMainName() + "?"); break;
+                        case 1: nextSpeaker.say(t, target.getMainName() + ", you aren't cut out for this."); break;
+                        default: nextSpeaker.say(t, target.getMainName() + ", just stop fighting if you can't handle it...");
+                    }
                 } else
                 if(nextSpeaker.getDignity() > 33)
                 {
-                    if(nextSpeaker.getMorality() > 66)
-                        nextSpeaker.say(t, "You can't just hide from it all, " + target.getMainName() + ".");
-                    else
-                    if(nextSpeaker.getMorality() > 33)
-                        nextSpeaker.say(t, target.getMainName() + " is practically just giving up...");
-                    else
-                        nextSpeaker.say(t, "You look so pathetic, " + target.getMainName() + ".");
+                    switch (nextSpeaker.getMorality() / 33) {
+                        case 0: nextSpeaker.say(t, "You look so pathetic, " + target.getMainName() + "."); break;
+                        case 1: nextSpeaker.say(t, target.getMainName() + " is practically just giving up..."); break;
+                        default: nextSpeaker.say(t, "You can't just hide from it all, " + target.getMainName() + ".");
+                    }
                 } else
-                if(nextSpeaker.getMorality() > 66)
-                    nextSpeaker.say(t, "This is what you get, " + target.getMainName() + ".");
-                else
-                if(nextSpeaker.getMorality() > 33)
-                    nextSpeaker.say(t, "What did you think would happen, " + target.getMainName() + "?");
-                else
-                    nextSpeaker.say(t, "I like seeing you like this, " + target.getMainName() + ".");
+                switch (nextSpeaker.getMorality() / 33) {
+                    case 0: nextSpeaker.say(t, "I like seeing you like this, " + target.getMainName() + "."); break;
+                    case 1: nextSpeaker.say(t, "What did you think would happen, " + target.getMainName() + "?"); break;
+                    default: nextSpeaker.say(t, "This is what you get, " + target.getMainName() + ".");
+                }
             } else
             if(nextLine == 10)
             {
                 Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
                 if(nextSpeaker.getMorality() > 66)
                 {
-                    if(nextSpeaker.getConfidence() > 66)
-                        nextSpeaker.say(t, "You'd better not give in to hatred, " + target.getMainName() + "!");
-                    else
-                    if(nextSpeaker.getConfidence() > 33)
-                        nextSpeaker.say(t, target.getMainName() + " really lets " + target.hisHer() + " hatred get the better of " + target.himHer() + ".");
-                    else
-                        nextSpeaker.say(t, target.getMainName() + " is so full of hate...");
+                    switch (nextSpeaker.getConfidence() / 33) {
+                        case 0: nextSpeaker.say(t, target.getMainName() + " is so full of hate..."); break;
+                        case 1: nextSpeaker.say(t, target.getMainName() + " really lets " + target.hisHer() + " hatred get the better of " + target.himHer() + "."); break;
+                        default: nextSpeaker.say(t, "You'd better not give in to hatred, " + target.getMainName() + "!");
+                    }
                 } else
                 if(nextSpeaker.getMorality() > 33)
                 {
-                    if(nextSpeaker.getConfidence() > 66)
-                        nextSpeaker.say(t, "Come to your senses, " + target.getMainName() + "!");
-                    else
-                    if(nextSpeaker.getConfidence() > 33)
-                        nextSpeaker.say(t, "You're losing it, " + target.getMainName() + "...");
-                    else
-                        nextSpeaker.say(t, target.getMainName() + " is going crazy...");
+                    switch (nextSpeaker.getConfidence() / 33) {
+                        case 0: nextSpeaker.say(t, target.getMainName() + " is going crazy..."); break;
+                        case 1: nextSpeaker.say(t, "You're losing it, " + target.getMainName() + "..."); break;
+                        default: nextSpeaker.say(t, "Come to your senses, " + target.getMainName() + "!");
+                    }
                 } else
-                if(nextSpeaker.getConfidence() > 66)
-                    nextSpeaker.say(t, "Your mind is weak, " + target.getMainName() + "!");
-                else
-                if(nextSpeaker.getConfidence() > 33)
-                    nextSpeaker.say(t, "You're going to lose your power like that, " + target.getMainName() + ".");
-                else
-                    nextSpeaker.say(t, target.getMainName() + "...  You weak-willed fool...");
+                switch (nextSpeaker.getConfidence() / 33) {
+                    case 0: nextSpeaker.say(t, target.getMainName() + "...  You weak-willed fool..."); break;
+                    case 1: nextSpeaker.say(t, "You're going to lose your power like that, " + target.getMainName() + "."); break;
+                    default: nextSpeaker.say(t, "Your mind is weak, " + target.getMainName() + "!");
+                }
             } else
             if(nextLine == 11)
             {
                 Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
                 if(nextSpeaker.getInnocence() > 66)
                 {
-                    if(nextSpeaker.getConfidence() > 66)
-                        nextSpeaker.say(t, target.getMainName() + ", what's wrong with you!?");
-                    else
-                    if(nextSpeaker.getConfidence() > 33)
-                        nextSpeaker.say(t, "Stop looking so distracted, " + target.getMainName() + "!");
-                    else
-                        nextSpeaker.say(t, target.getMainName() + " has " + target.hisHer() + " head in the clouds...");
+                    switch (nextSpeaker.getConfidence() / 33) {
+                        case 0: nextSpeaker.say(t, target.getMainName() + " has " + target.hisHer() + " head in the clouds..."); break;
+                        case 1: nextSpeaker.say(t, "Stop looking so distracted, " + target.getMainName() + "!"); break;
+                        default: nextSpeaker.say(t, target.getMainName() + ", what's wrong with you!?");
+                    }
                 } else
                 if(nextSpeaker.getInnocence() > 33)
                 {
-                    if(nextSpeaker.getConfidence() > 66)
-                        nextSpeaker.say(t, "Stop getting turned on and just focus, " + target.getMainName() + "!");
-                    else
-                    if(nextSpeaker.getConfidence() > 33)
-                        nextSpeaker.say(t, "I can't believe you're actually getting off on this, " + target.getMainName() + "!");
-                    else
-                        nextSpeaker.say(t, target.getMainName() + " is such a deviant...");
+                    switch (nextSpeaker.getConfidence() / 33) {
+                        case 0: nextSpeaker.say(t, target.getMainName() + " is such a deviant..."); break;
+                        case 1: nextSpeaker.say(t, "I can't believe you're actually getting off on this, " + target.getMainName() + "!"); break;
+                        default: nextSpeaker.say(t, "Stop getting turned on and just focus, " + target.getMainName() + "!");
+                    }
                 } else
-                if(nextSpeaker.getConfidence() > 66)
-                    nextSpeaker.say(t, "Even someone like you should be able to resist sexual temptation in the middle of battle, " + target.getMainName() + "!");
-                else
-                if(nextSpeaker.getConfidence() > 33)
-                    nextSpeaker.say(t, "You must be very sexually repressed, " + target.getMainName() + ".");
-                else
-                    nextSpeaker.say(t, "How am I supposed to fight alongside sexual deviants like " + target.getMainName() + "?");
+                switch (nextSpeaker.getConfidence() / 33) {
+                    case 0: nextSpeaker.say(t, "How am I supposed to fight alongside sexual deviants like " + target.getMainName() + "?"); break;
+                    case 1: nextSpeaker.say(t, "You must be very sexually repressed, " + target.getMainName() + "."); break;
+                    default: nextSpeaker.say(t, "Even someone like you should be able to resist sexual temptation in the middle of battle, " + target.getMainName() + "!");
+                }
             } else
             if(nextLine == 12)
             {
                 Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
                 if(nextSpeaker.getConfidence() > 66)
                 {
-                    if(nextSpeaker.getDignity() > 66)
-                        nextSpeaker.say(t, "How did you even get yourself hurt so quickly, " + target.getMainName() + "?");
-                    else
-                    if(nextSpeaker.getDignity() > 33)
-                        nextSpeaker.say(t, "Your wounds aren't that bad, " + target.getMainName() + ".");
-                    else
-                        nextSpeaker.say(t, "Just shake it off, " + target.getMainName() + "!");
+                    switch (nextSpeaker.getDignity() / 33) {
+                        case 0: nextSpeaker.say(t, "Just shake it off, " + target.getMainName() + "!"); break;
+                        case 1: nextSpeaker.say(t, "Your wounds aren't that bad, " + target.getMainName() + "."); break;
+                        default: nextSpeaker.say(t, "How did you even get yourself hurt so quickly, " + target.getMainName() + "?");
+                    }
                 } else
                 if(nextSpeaker.getConfidence() > 33)
                 {
-                    if(nextSpeaker.getDignity() > 66)
-                        nextSpeaker.say(t, "You got hurt really quickly, " + target.getMainName() + "...");
-                    else
-                    if(nextSpeaker.getDignity() > 33)
-                        nextSpeaker.say(t, "You're no help at all, " + target.getMainName() + ".");
-                    else
-                        nextSpeaker.say(t, "Stop screwing up and getting hurt, " + target.getMainName() + "!");
+                    switch (nextSpeaker.getDignity() / 33) {
+                        case 0: nextSpeaker.say(t, "Stop screwing up and getting hurt, " + target.getMainName() + "!"); break;
+                        case 1: nextSpeaker.say(t, "You're no help at all, " + target.getMainName() + "."); break;
+                        default: nextSpeaker.say(t, "You got hurt really quickly, " + target.getMainName() + "...");
+                    }
                 } else
-                if(nextSpeaker.getDignity() > 66)
-                    nextSpeaker.say(t, "If you're going to get hurt so quickly, " + target.getMainName() + ", you should just stay home next time...");
-                else
-                if(nextSpeaker.getDignity() > 33)
-                    nextSpeaker.say(t, target.getMainName() + " is even weaker than I am...");
-                else
-                    nextSpeaker.say(t, "I'm so sick of " + target.getMainName() + "'s incompetence...!");
+                switch (nextSpeaker.getDignity() / 33) {
+                    case 0: nextSpeaker.say(t, "I'm so sick of " + target.getMainName() + "'s incompetence...!"); break;
+                    case 1: nextSpeaker.say(t, target.getMainName() + " is even weaker than I am..."); break;
+                    default: nextSpeaker.say(t, "If you're going to get hurt so quickly, " + target.getMainName() + ", you should just stay home next time...");
+                }
             } else
             if(nextLine == 13)
             {
                 Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
                 if(nextSpeaker.getDignity() > 66)
                 {
-                    if(nextSpeaker.getConfidence() > 66)
-                        nextSpeaker.say(t, "Stop making a scene, " + target.getMainName() + "!");
-                    else
-                    if(nextSpeaker.getConfidence() > 33)
-                        nextSpeaker.say(t, "You look awful, " + target.getMainName() + ".");
-                    else
-                        nextSpeaker.say(t, "I can concentrate with " + target.getMainName() + "'s foolishness...");
+                    switch (nextSpeaker.getConfidence() / 33) {
+                        case 0: nextSpeaker.say(t, "I can concentrate with " + target.getMainName() + "'s foolishness..."); break;
+                        case 1: nextSpeaker.say(t, "You look awful, " + target.getMainName() + "."); break;
+                        default: nextSpeaker.say(t, "Stop making a scene, " + target.getMainName() + "!");
+                    }
                 } else
                 if(nextSpeaker.getDignity() > 33)
                 {
-                    if(nextSpeaker.getConfidence() > 66)
-                        nextSpeaker.say(t, "You're making us look foolish, " + target.getMainName() + "!");
-                    else
-                    if(nextSpeaker.getConfidence() > 33)
-                        nextSpeaker.say(t, "How did you manage to get your clothes torn off so quickly, " + target.getMainName() + "?");
-                    else
-                        nextSpeaker.say(t, target.getMainName() + " is so careless...");
+                    switch (nextSpeaker.getConfidence() / 33) {
+                        case 0: nextSpeaker.say(t, target.getMainName() + " is so careless..."); break;
+                        case 1: nextSpeaker.say(t, "How did you manage to get your clothes torn off so quickly, " + target.getMainName() + "?"); break;
+                        default: nextSpeaker.say(t, "You're making us look foolish, " + target.getMainName() + "!");
+                    }
                 } else
-                if(nextSpeaker.getConfidence() > 66)
-                    nextSpeaker.say(t, "What the hell happened to " + target.getMainName() + "!?");
-                else
-                if(nextSpeaker.getConfidence() > 33)
-                    nextSpeaker.say(t, target.getMainName() + " screwed up again.");
-                else
-                    nextSpeaker.say(t, "Y-You're distracting me, " + target.getMainName() + "...!");
+                switch (nextSpeaker.getConfidence() / 33) {
+                    case 0: nextSpeaker.say(t, "Y-You're distracting me, " + target.getMainName() + "...!"); break;
+                    case 1: nextSpeaker.say(t, target.getMainName() + " screwed up again."); break;
+                    default: nextSpeaker.say(t, "What the hell happened to " + target.getMainName() + "!?");
+                }
             } else
             if(nextLine == 14)
             {
                 if(nextSpeaker.getMorality() > 66)
                 {
                     Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.FEAR);
-                    if(nextSpeaker.getConfidence() > 66)
-                        nextSpeaker.say(t, "I won't let you get hurt, " + target.getMainName() + ", no matter how much you screw up!");
-                    else
-                    if(nextSpeaker.getConfidence() > 33)
-                        nextSpeaker.say(t, "I still worry about " + target.getMainName() + ", despite everything...");
-                    else
-                        nextSpeaker.say(t, "I can't stop myself from caring about " + target.getMainName() + "...");
+                    switch (nextSpeaker.getConfidence() / 33) {
+                        case 0: nextSpeaker.say(t, "I can't stop myself from caring about " + target.getMainName() + "..."); break;
+                        case 1: nextSpeaker.say(t, "I still worry about " + target.getMainName() + ", despite everything..."); break;
+                        default: nextSpeaker.say(t, "I won't let you get hurt, " + target.getMainName() + ", no matter how much you screw up!");
+                    }
                 } else
                 if(nextSpeaker.getMorality() > 33)
                 {
                     Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
-                    if(nextSpeaker.getConfidence() > 66)
-                        nextSpeaker.say(t, "You'd better not make me rescue you, " + target.getMainName() + "!");
-                    else
-                    if(nextSpeaker.getConfidence() > 33)
-                        nextSpeaker.say(t, "I still worry about " + target.getMainName() + "... a little.");
-                    else
-                        nextSpeaker.say(t, "I don't want " + target.getMainName() + " to get hurt... much...");
+                    switch (nextSpeaker.getConfidence() / 33) {
+                        case 0: nextSpeaker.say(t, "I don't want " + target.getMainName() + " to get hurt... much..."); break;
+                        case 1: nextSpeaker.say(t, "I still worry about " + target.getMainName() + "... a little."); break;
+                        default: nextSpeaker.say(t, "You'd better not make me rescue you, " + target.getMainName() + "!");
+                    }
                 } else
                 {
                     Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
-                    if(nextSpeaker.getConfidence() > 66)
-                        nextSpeaker.say(t, "Damn that " + target.getMainName() + ", making me worry about " + target.himHer() + "...!");
-                    else
-                    if(nextSpeaker.getConfidence() > 33)
-                        nextSpeaker.say(t, "I guess it would be nice to have " + target.getMainName() + " in my debt...");
-                    else
-                        nextSpeaker.say(t, "I guess I'll be in trouble if something happens to " + target.getMainName() + "...");
+                    switch (nextSpeaker.getConfidence() / 33) {
+                        case 0: nextSpeaker.say(t, "I guess I'll be in trouble if something happens to " + target.getMainName() + "..."); break;
+                        case 1: nextSpeaker.say(t, "I guess it would be nice to have " + target.getMainName() + " in my debt..."); break;
+                        default: nextSpeaker.say(t, "Damn that " + target.getMainName() + ", making me worry about " + target.himHer() + "...!");
+                    }
                 }
             } else
             if(nextLine == 15)
@@ -24923,75 +23831,61 @@ public class WorldState
                 Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                 if(nextSpeaker.getInnocence() > 66)
                 {
-                    if(nextSpeaker.getConfidence() > 66)
-                        nextSpeaker.say(t, target.getMainName() + ", I order you to help me!");
-                    else
-                    if(nextSpeaker.getConfidence() > 33)
-                        nextSpeaker.say(t, target.getMainName() + ", you're supposed to help me!");
-                    else
-                        nextSpeaker.say(t, target.getMainName() + " wouldn't abandon me, r-right...?");
+                    switch (nextSpeaker.getConfidence() / 33) {
+                        case 0: nextSpeaker.say(t, target.getMainName() + " wouldn't abandon me, r-right...?"); break;
+                        case 1: nextSpeaker.say(t, target.getMainName() + ", you're supposed to help me!"); break;
+                        default: nextSpeaker.say(t, target.getMainName() + ", I order you to help me!");
+                    }
                 } else
                 if(nextSpeaker.getInnocence() > 33)
                 {
-                    if(nextSpeaker.getConfidence() > 66)
-                        nextSpeaker.say(t, "I-I can handle this on my own, " + target.getMainName() + "!");
-                    else
-                    if(nextSpeaker.getConfidence() > 33)
-                        nextSpeaker.say(t, target.getMainName() + ", do something!");
-                    else
-                        nextSpeaker.say(t, "I don't want to rely on " + target.getMainName() + ", but...");
+                    switch (nextSpeaker.getConfidence() / 33) {
+                        case 0: nextSpeaker.say(t, "I don't want to rely on " + target.getMainName() + ", but..."); break;
+                        case 1: nextSpeaker.say(t, target.getMainName() + ", do something!"); break;
+                        default: nextSpeaker.say(t, "I-I can handle this on my own, " + target.getMainName() + "!");
+                    }
                 } else
-                if(nextSpeaker.getConfidence() > 66)
-                    nextSpeaker.say(t, "I... must learn to take care of myself... without " + target.getMainName() + "!");
-                else
-                if(nextSpeaker.getConfidence() > 33)
-                    nextSpeaker.say(t, "There must be a way to deal with this without relying on " + target.getMainName() + "...");
-                else
-                    nextSpeaker.say(t, "I really can't rely on " + target.getMainName() + "...");
+                switch (nextSpeaker.getConfidence() / 33) {
+                    case 0: nextSpeaker.say(t, "I really can't rely on " + target.getMainName() + "..."); break;
+                    case 1: nextSpeaker.say(t, "There must be a way to deal with this without relying on " + target.getMainName() + "..."); break;
+                    default: nextSpeaker.say(t, "I... must learn to take care of myself... without " + target.getMainName() + "!");
+                }
             } else
             if(nextLine == 17)
             {
                 Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                 if(nextSpeaker.getDignity() > 66)
                 {
-                    if(nextSpeaker.getConfidence() > 66)
-                        nextSpeaker.say(t, "I'm doing perfectly fine, " + target.getMainName() + "!");
-                    else
-                    if(nextSpeaker.getConfidence() > 33)
-                        nextSpeaker.say(t, "I can deal with this myself, " + target.getMainName() + ".");
-                    else
-                        nextSpeaker.say(t, "I-I'm not embarrassed at all, " + target.getMainName() + "!");
+                    switch (nextSpeaker.getConfidence() / 33) {
+                        case 0: nextSpeaker.say(t, "I-I'm not embarrassed at all, " + target.getMainName() + "!"); break;
+                        case 1: nextSpeaker.say(t, "I can deal with this myself, " + target.getMainName() + "."); break;
+                        default: nextSpeaker.say(t, "I'm doing perfectly fine, " + target.getMainName() + "!");
+                    }
                 } else
                 if(nextSpeaker.getDignity() > 33)
                 {
-                    if(nextSpeaker.getConfidence() > 66)
-                        nextSpeaker.say(t, "What are you looking at, " + target.getMainName() + "?");
-                    else
-                    if(nextSpeaker.getConfidence() > 33)
-                        nextSpeaker.say(t, "Just focus on the fight, " + target.getMainName() + "!");
-                    else
-                        nextSpeaker.say(t, "D-Don't look at me, " + target.getMainName() + "!");
+                    switch (nextSpeaker.getConfidence() / 33) {
+                        case 0: nextSpeaker.say(t, "D-Don't look at me, " + target.getMainName() + "!"); break;
+                        case 1: nextSpeaker.say(t, "Just focus on the fight, " + target.getMainName() + "!"); break;
+                        default: nextSpeaker.say(t, "What are you looking at, " + target.getMainName() + "?");
+                    }
                 } else
-                if(nextSpeaker.getConfidence() > 66)
-                    nextSpeaker.say(t, "What are you laughing at, " + target.getMainName() + "!?");
-                else
-                if(nextSpeaker.getConfidence() > 33)
-                    nextSpeaker.say(t, "Are you smirking at me, " + target.getMainName() + "?");
-                else
-                    nextSpeaker.say(t, "I bet you're enjoying seeing me like this, " + target.getMainName() + "...");
+                switch (nextSpeaker.getConfidence() / 33) {
+                    case 0: nextSpeaker.say(t, "I bet you're enjoying seeing me like this, " + target.getMainName() + "..."); break;
+                    case 1: nextSpeaker.say(t, "Are you smirking at me, " + target.getMainName() + "?"); break;
+                    default: nextSpeaker.say(t, "What are you laughing at, " + target.getMainName() + "!?");
+                }
             } else
             if(nextLine == 18)
             {
                 if(nextSpeaker.getMorality() > 66)
                 {
                     Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
-                    if(nextSpeaker.getInnocence() > 66)
-                        nextSpeaker.say(t, "Why'd you let them rape you, " + target.getMainName() + "?");
-                    else
-                    if(nextSpeaker.getInnocence() > 33)
-                        nextSpeaker.say(t, "How can you let them defile you so easily, " + target.getMainName() + "?");
-                    else
-                        nextSpeaker.say(t, "This is what you get for giving in to hatred, " + target.getMainName() + ".");
+                    switch (nextSpeaker.getInnocence() / 33) {
+                        case 0: nextSpeaker.say(t, "This is what you get for giving in to hatred, " + target.getMainName() + "."); break;
+                        case 1: nextSpeaker.say(t, "How can you let them defile you so easily, " + target.getMainName() + "?"); break;
+                        default: nextSpeaker.say(t, "Why'd you let them rape you, " + target.getMainName() + "?");
+                    }
                 } else
                 if(nextSpeaker.getMorality() > 33)
                 {
@@ -25013,13 +23907,11 @@ public class WorldState
                 } else
                 {
                     Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.JOY, Project.Emotion.FOCUS);
-                    if(nextSpeaker.getInnocence() > 66)
-                        nextSpeaker.say(t, "Hahah, they're doing naughty stuff with " + target.getMainName() + ".");
-                    else
-                    if(nextSpeaker.getInnocence() > 33)
-                        nextSpeaker.say(t, "You make a good fleshlight, " + target.getMainName() + ".");
-                    else
-                        nextSpeaker.say(t, "This is what you get for being so weak, " + target.getMainName() + ".");
+                    switch (nextSpeaker.getInnocence() / 33) {
+                        case 0: nextSpeaker.say(t, "This is what you get for being so weak, " + target.getMainName() + "."); break;
+                        case 1: nextSpeaker.say(t, "You make a good fleshlight, " + target.getMainName() + "."); break;
+                        default: nextSpeaker.say(t, "Hahah, they're doing naughty stuff with " + target.getMainName() + ".");
+                    }
                 }
             } else
             if(nextLine == 19)
@@ -25027,31 +23919,25 @@ public class WorldState
                 Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.NEUTRAL, Project.Emotion.ANGER);
                 if(nextSpeaker.getInnocence() > 66)
                 {
-                    if(nextSpeaker.getMorality() > 66)
-                        nextSpeaker.say(t, target.getMainName() + ", it's wrong to feel good from something like that!");
-                    else
-                    if(nextSpeaker.getMorality() > 33)
-                        nextSpeaker.say(t, target.getMainName() + " must be a huge pervert to feel good from something like that.");
-                    else
-                        nextSpeaker.say(t, "Hahah, " + target.getMainName() + ", you pervert, are you actually feeling good?");
+                    switch (nextSpeaker.getMorality() / 33) {
+                        case 0: nextSpeaker.say(t, "Hahah, " + target.getMainName() + ", you pervert, are you actually feeling good?"); break;
+                        case 1: nextSpeaker.say(t, target.getMainName() + " must be a huge pervert to feel good from something like that."); break;
+                        default: nextSpeaker.say(t, target.getMainName() + ", it's wrong to feel good from something like that!");
+                    }
                 } else
                 if(nextSpeaker.getInnocence() > 33)
                 {
-                    if(nextSpeaker.getMorality() > 66)
-                        nextSpeaker.say(t, "You're cumming, " + target.getMainName() + "?  How can you live with the shame?");
-                    else
-                    if(nextSpeaker.getMorality() > 33)
-                        nextSpeaker.say(t, "I can't believe " + target.getMainName() + " is actually cumming.");
-                    else
-                        nextSpeaker.say(t, target.getMainName() + ", you slut, are you actually cumming?");
+                    switch (nextSpeaker.getMorality() / 33) {
+                        case 0: nextSpeaker.say(t, target.getMainName() + ", you slut, are you actually cumming?"); break;
+                        case 1: nextSpeaker.say(t, "I can't believe " + target.getMainName() + " is actually cumming."); break;
+                        default: nextSpeaker.say(t, "You're cumming, " + target.getMainName() + "?  How can you live with the shame?");
+                    }
                 } else
-                if(nextSpeaker.getMorality() > 66)
-                    nextSpeaker.say(t, target.getMainName() + ", do you really lack the willpower to contain your lust?");
-                else
-                if(nextSpeaker.getMorality() > 33)
-                    nextSpeaker.say(t, target.getMainName() + " must be very weak-willed to allow " + target.himHer() + "self to orgasm here.");
-                else
-                    nextSpeaker.say(t, "Oh?  Wasn't enjoying that sort of thing supposed to be 'wrong', " + target.getMainName() + "?");
+                switch (nextSpeaker.getMorality() / 33) {
+                    case 0: nextSpeaker.say(t, "Oh?  Wasn't enjoying that sort of thing supposed to be 'wrong', " + target.getMainName() + "?"); break;
+                    case 1: nextSpeaker.say(t, target.getMainName() + " must be very weak-willed to allow " + target.himHer() + "self to orgasm here."); break;
+                    default: nextSpeaker.say(t, target.getMainName() + ", do you really lack the willpower to contain your lust?");
+                }
             } else
             if(nextLine == 20)
             {
@@ -25087,44 +23973,36 @@ public class WorldState
                     else
                         nextSpeaker.say(t, "Heh, I might take a break from the fight to watch " + target.getMainName() + " get what's coming to " + target.himHer() + ".");
                 } else
-                if(nextSpeaker.getMorality() > 66)
-                    nextSpeaker.say(t, "Come on, " + target.getMainName() + ", there are people who are suffering a lot more than you...");
-                else
-                if(nextSpeaker.getMorality() > 33)
-                    nextSpeaker.say(t, "Guess " + target.getMainName() + " wasn't so strong after all...");
-                else
-                    nextSpeaker.say(t, "Maybe now " + target.getMainName() + " will stop thinking " + target.heShe() + "'s so much better than everyone else...");
+                switch (nextSpeaker.getMorality() / 33) {
+                    case 0: nextSpeaker.say(t, "Maybe now " + target.getMainName() + " will stop thinking " + target.heShe() + "'s so much better than everyone else..."); break;
+                    case 1: nextSpeaker.say(t, "Guess " + target.getMainName() + " wasn't so strong after all..."); break;
+                    default: nextSpeaker.say(t, "Come on, " + target.getMainName() + ", there are people who are suffering a lot more than you...");
+                }
             } else
             if(nextLine == 21)
             {
                 Project.changePortrait(nextSpeaker.convertGender(), nextSpeaker.type, false, false, this, nameCombatants(), nextSpeaker.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.NEUTRAL);
                 if(nextSpeaker.getDignity() > 66)
                 {
-                    if(nextSpeaker.getMorality() > 66)
-                        nextSpeaker.say(t, "This is what you get for not paying attention to the state of your clothes, " + target.getMainName() + "...");
-                    else
-                    if(nextSpeaker.getMorality() > 33)
-                        nextSpeaker.say(t, "You're going to make the rest of us look bad by association, " + target.getMainName() + ".");
-                    else
-                        nextSpeaker.say(t, "Your pathetic state only makes me look that much better, " + target.getMainName() + ".");
+                    switch (nextSpeaker.getMorality() / 33) {
+                        case 0: nextSpeaker.say(t, "Your pathetic state only makes me look that much better, " + target.getMainName() + "."); break;
+                        case 1: nextSpeaker.say(t, "You're going to make the rest of us look bad by association, " + target.getMainName() + "."); break;
+                        default: nextSpeaker.say(t, "This is what you get for not paying attention to the state of your clothes, " + target.getMainName() + "...");
+                    }
                 } else
                 if(nextSpeaker.getDignity() > 33)
                 {
-                    if(nextSpeaker.getMorality() > 66)
-                        nextSpeaker.say(t, target.getMainName() + " is going to make the people lose hope in us...");
-                    else
-                    if(nextSpeaker.getMorality() > 33)
-                        nextSpeaker.say(t, "You're distracting me, " + target.getMainName() + ".");
-                    else
-                        nextSpeaker.say(t, "Now everyone will see you for the failure you are, " + target.getMainName() + "!");
+                    switch (nextSpeaker.getMorality() / 33) {
+                        case 0: nextSpeaker.say(t, "Now everyone will see you for the failure you are, " + target.getMainName() + "!"); break;
+                        case 1: nextSpeaker.say(t, "You're distracting me, " + target.getMainName() + "."); break;
+                        default: nextSpeaker.say(t, target.getMainName() + " is going to make the people lose hope in us...");
+                    }
                 } else
-                if(nextSpeaker.getMorality() > 66)
-                    nextSpeaker.say(t, "This is what you get for caring so much about your public image, " + target.getMainName() + ".");
-                else
-                if(nextSpeaker.getMorality() > 33)
-                    nextSpeaker.say(t, "I thought you were the type to try harder to keep your dignity, " + target.getMainName() + ".");
-                else
-                    nextSpeaker.say(t, "Hahahah, you look so pathetic, " + target.getMainName() + "!");
+                switch (nextSpeaker.getMorality() / 33) {
+                    case 0: nextSpeaker.say(t, "Hahahah, you look so pathetic, " + target.getMainName() + "!"); break;
+                    case 1: nextSpeaker.say(t, "I thought you were the type to try harder to keep your dignity, " + target.getMainName() + "."); break;
+                    default: nextSpeaker.say(t, "This is what you get for caring so much about your public image, " + target.getMainName() + ".");
+                }
             }
             nextSpeaker.say(t, "\"");
         }
@@ -26975,13 +25853,11 @@ public class WorldState
                         for(int j = 0; j < 4; j++)
                         {
                             stats[j] = (int)(campaignRand.nextDouble() * 101D);
-                            if(stats[j] > 66)
-                                highCount++;
-                            else
-                            if(stats[j] > 33)
-                                midCount++;
-                            else
-                                lowCount++;
+                            switch (stats[j] / 33) {
+                                case 0: lowCount++; break;
+                                case 1: midCount++; break;
+                                default: highCount++;
+                            }
                         }
 
                         if(highCount == 0 || midCount == 0 || lowCount == 0)
@@ -27180,13 +26056,11 @@ public class WorldState
                     }
 
                 }
-                if(loopChosen[i].morality > 66)
-                    morHigh = true;
-                else
-                if(loopChosen[i].morality > 33)
-                    morMid = true;
-                else
-                    morLow = true;
+                switch (loopChosen[i].morality / 33) {
+                    case 0: morLow = true; break;
+                    case 1: morMid = true; break;
+                    default: morHigh = true;
+                }
                 if(loopChosen[i].innocence > 66)
                 {
                     innHigh = true;
@@ -28600,13 +27474,11 @@ public class WorldState
             for(int i = 0; i < 3; i++)
             {
                 for(int j = 0; j < 4; j++)
-                    if(statSeed[i * 4 + j] > 66)
-                        counts[i][0]++;
-                    else
-                    if(statSeed[i * 4 + j] > 33)
-                        counts[i][1]++;
-                    else
-                        counts[i][2]++;
+                    switch (statSeed[i * 4 + j] / 33) {
+                        case 0: counts[i][2]++; break;
+                        case 1: counts[i][1]++; break;
+                        default: counts[i][0]++;
+                    }
 
                 for(int j = 0; j < 4; j++)
                     if(flexibilities[i][j] == 0)
@@ -28856,13 +27728,11 @@ public class WorldState
                     else
                     if(j == 3)
                         type = "Dignity";
-                    if(statSeed[i * 4 + j] > 66)
-                        blueAppend(t, "\n" + type + ": Core");
-                    else
-                    if(statSeed[i * 4 + j] > 33)
-                        greenAppend(t, "\n" + type + ": Significant");
-                    else
-                        redAppend(t, "\n" + type + ": Minor");
+                    switch (statSeed[i * 4 + j] / 33) {
+                        case 0: redAppend(t, "\n" + type + ": Minor"); break;
+                        case 1: greenAppend(t, "\n" + type + ": Significant"); break;
+                        default: blueAppend(t, "\n" + type + ": Core");
+                    }
                     if(!allPurities[i][j])
                         redAppend(t, " (BROKEN)");
                 }
@@ -30643,24 +29513,20 @@ public class WorldState
             if(c.getConfidence() > 66)
             {
                 Project.changePortrait(c.convertGender(), c.type, false, false, this, nameCombatants(), c.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.ANGER);
-                if(c.getInnocence() > 66)
-                    c.say(t, "Demon Lord!  Hey, Demon Lord!  Come here and kill me already!");
-                else
-                if(c.getInnocence() > 33)
-                    c.say(t, "Demon Lord!  You'd better kill me now, 'cause this is your last chance!");
-                else
-                    c.say(t, "This is it.  I will absolutely force the Demon Lord to kill me.");
+                switch (c.getInnocence() / 33) {
+                    case 0: c.say(t, "This is it.  I will absolutely force the Demon Lord to kill me."); break;
+                    case 1: c.say(t, "Demon Lord!  You'd better kill me now, 'cause this is your last chance!"); break;
+                    default: c.say(t, "Demon Lord!  Hey, Demon Lord!  Come here and kill me already!");
+                }
             } else
             if(c.getConfidence() > 33)
             {
                 Project.changePortrait(c.convertGender(), c.type, false, false, this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.FEAR);
-                if(c.getInnocence() > 66)
-                    c.say(t, "So, this is my chance to die, right?");
-                else
-                if(c.getInnocence() > 33)
-                    c.say(t, "I need to die right here.  I might not get another chance...");
-                else
-                    c.say(t, "This is my best - and perhaps only - opportunity to die.");
+                switch (c.getInnocence() / 33) {
+                    case 0: c.say(t, "This is my best - and perhaps only - opportunity to die."); break;
+                    case 1: c.say(t, "I need to die right here.  I might not get another chance..."); break;
+                    default: c.say(t, "So, this is my chance to die, right?");
+                }
             } else
             if(c.getInnocence() > 66)
             {
@@ -30682,24 +29548,20 @@ public class WorldState
             if(c.getInnocence() > 66)
             {
                 Project.changePortrait(c.convertGender(), c.type, false, false, this, nameCombatants(), c.combatantNumber(this), Project.Emotion.JOY, Project.Emotion.JOY);
-                if(c.getConfidence() > 66)
-                    c.say(t, "Ah...  This is gonna be so much fun...");
-                else
-                if(c.getConfidence() > 33)
-                    c.say(t, "That big thing is so... pretty...");
-                else
-                    c.say(t, "For some reason... I feel like I should let this happen...");
+                switch (c.getConfidence() / 33) {
+                    case 0: c.say(t, "For some reason... I feel like I should let this happen..."); break;
+                    case 1: c.say(t, "That big thing is so... pretty..."); break;
+                    default: c.say(t, "Ah...  This is gonna be so much fun...");
+                }
             } else
             if(c.getInnocence() > 33)
             {
                 Project.changePortrait(c.convertGender(), c.type, false, false, this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.FEAR);
-                if(c.getConfidence() > 66)
-                    c.say(t, "Ugh, damn...  It's doing something to my head...!");
-                else
-                if(c.getConfidence() > 33)
-                    c.say(t, "My head feels...  No, no!  I can deal with this!");
-                else
-                    c.say(t, "No!  P-Please...!  Get out... of my head...!");
+                switch (c.getConfidence() / 33) {
+                    case 0: c.say(t, "No!  P-Please...!  Get out... of my head...!"); break;
+                    case 1: c.say(t, "My head feels...  No, no!  I can deal with this!"); break;
+                    default: c.say(t, "Ugh, damn...  It's doing something to my head...!");
+                }
             } else
             if(c.getConfidence() > 66)
             {
@@ -30721,24 +29583,20 @@ public class WorldState
             if(c.getMorality() > 66)
             {
                 Project.changePortrait(c.convertGender(), c.type, false, false, this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.SHAME);
-                if(c.getConfidence() > 66)
-                    c.say(t, "Though humanity will come to consider me an enemy soon, I will fight for them one last time!");
-                else
-                if(c.getConfidence() > 33)
-                    c.say(t, "One way or another, this will be my last fight on the side of humanity...");
-                else
-                    c.say(t, "I've become a terrible person, but...  At least I can fight to save people one last time...");
+                switch (c.getConfidence() / 33) {
+                    case 0: c.say(t, "I've become a terrible person, but...  At least I can fight to save people one last time..."); break;
+                    case 1: c.say(t, "One way or another, this will be my last fight on the side of humanity..."); break;
+                    default: c.say(t, "Though humanity will come to consider me an enemy soon, I will fight for them one last time!");
+                }
             } else
             if(c.getMorality() > 33)
             {
                 Project.changePortrait(c.convertGender(), c.type, false, false, this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FOCUS, Project.Emotion.FOCUS);
-                if(c.getConfidence() > 66)
-                    c.say(t, "I don't know why I'm still bothering to save this city...  But it's too late to back down now!");
-                else
-                if(c.getConfidence() > 33)
-                    c.say(t, "After this, things are going to get complicated.  But at least for now, I'm still one of the Chosen!");
-                else
-                    c.say(t, "I've killed so many people...  But maybe I can make up for it now...");
+                switch (c.getConfidence() / 33) {
+                    case 0: c.say(t, "I've killed so many people...  But maybe I can make up for it now..."); break;
+                    case 1: c.say(t, "After this, things are going to get complicated.  But at least for now, I'm still one of the Chosen!"); break;
+                    default: c.say(t, "I don't know why I'm still bothering to save this city...  But it's too late to back down now!");
+                }
             } else
             if(c.getConfidence() > 66)
             {
@@ -30810,31 +29668,25 @@ public class WorldState
             Project.changePortrait(c.convertGender(), c.type, false, false, this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FOCUS, Project.Emotion.FOCUS);
             if(c.getMorality() > 66)
             {
-                if(c.getConfidence() > 66)
-                    c.say(t, "This is it.  I will save as many people as possible.");
-                else
-                if(c.getConfidence() > 33)
-                    c.say(t, "I'm going to do my best to save everyone!");
-                else
-                    c.say(t, "I-I'm ready!  Everyone's counting on us!");
+                switch (c.getConfidence() / 33) {
+                    case 0: c.say(t, "I-I'm ready!  Everyone's counting on us!"); break;
+                    case 1: c.say(t, "I'm going to do my best to save everyone!"); break;
+                    default: c.say(t, "This is it.  I will save as many people as possible.");
+                }
             } else
             if(c.getMorality() > 33)
             {
-                if(c.getConfidence() > 66)
-                    c.say(t, "Alright, let's do this!  I won't lose!");
-                else
-                if(c.getConfidence() > 33)
-                    c.say(t, "I think we can get through this.");
-                else
-                    c.say(t, "A-Alright, I'm here!");
+                switch (c.getConfidence() / 33) {
+                    case 0: c.say(t, "A-Alright, I'm here!"); break;
+                    case 1: c.say(t, "I think we can get through this."); break;
+                    default: c.say(t, "Alright, let's do this!  I won't lose!");
+                }
             } else
-            if(c.getConfidence() > 66)
-                c.say(t, "Hah!  No more holding back!");
-            else
-            if(c.getConfidence() > 33)
-                c.say(t, "Everyone will know that I'm the one who saved them!");
-            else
-                c.say(t, "Let's just get this over with.");
+            switch (c.getConfidence() / 33) {
+                case 0: c.say(t, "Let's just get this over with."); break;
+                case 1: c.say(t, "Everyone will know that I'm the one who saved them!"); break;
+                default: c.say(t, "Hah!  No more holding back!");
+            }
         }
         c.say(t, "\"");
     }
@@ -30993,13 +29845,11 @@ public class WorldState
             w.append(t, String.format("-%s%% Resolve\n\n", resolveLost));
             w.underlineAppend(t, "Resolve Broken");
             w.append(t, "\n\n");
-            if(c.getMorality() > 66)
-                w.append(t, String.format("%s falls to %s knees, overwhelmed by emotion.  %s comes to the realization that %s can't support the side of humanity anymore.", c.getMainName(), c.hisHer(), c.HeShe(), c.heShe()));
-            else
-            if(c.getMorality() > 33)
-                w.append(t, String.format("%s abruptly stops fighting your forces.  Something inside %s has snapped.  Instead, %s turns %s back on the battlefield.", c.getMainName(), c.himHer(), c.heShe(), c.hisHer()));
-            else
-                w.append(t, String.format("Grinding %s teeth, %s abruptly breaks off %1$s attack, leaving the cluster of Demons %s was targeting unscathed.  As much as it angers %s, %s's realized that this isn't %1$s fight.", c.hisHer(), c.getMainName(), c.heShe(), c.himHer(), c.heShe()));
+            switch (c.getMorality() / 33) {
+                case 0: w.append(t, String.format("Grinding %s teeth, %s abruptly breaks off %1$s attack, leaving the cluster of Demons %s was targeting unscathed.  As much as it angers %s, %s's realized that this isn't %1$s fight.", c.hisHer(), c.getMainName(), c.heShe(), c.himHer(), c.heShe())); break;
+                case 1: w.append(t, String.format("%s abruptly stops fighting your forces.  Something inside %s has snapped.  Instead, %s turns %s back on the battlefield.", c.getMainName(), c.himHer(), c.heShe(), c.hisHer())); break;
+                default: w.append(t, String.format("%s falls to %s knees, overwhelmed by emotion.  %s comes to the realization that %s can't support the side of humanity anymore.", c.getMainName(), c.hisHer(), c.HeShe(), c.heShe()));
+            }
             c.say(t, "\n\n\"");
             if(c.getMorality() > 66)
             {
@@ -31074,13 +29924,11 @@ public class WorldState
                 if(c.finalThreatened % 3 == 0)
                 {
                     Project.changePortrait(c.convertGender(), c.type, false, false, this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
-                    if(c.getInnocence() > 66)
-                        c.say(t, "This...  This is too cruel...");
-                    else
-                    if(c.getInnocence() > 33)
-                        c.say(t, "It doesn't seem right...");
-                    else
-                        c.say(t, "Is...  Is this truly justifiable...?");
+                    switch (c.getInnocence() / 33) {
+                        case 0: c.say(t, "Is...  Is this truly justifiable...?"); break;
+                        case 1: c.say(t, "It doesn't seem right..."); break;
+                        default: c.say(t, "This...  This is too cruel...");
+                    }
                 } else
                 if(c.finalThreatened % 3 == 1)
                 {
@@ -31101,13 +29949,11 @@ public class WorldState
                 } else
                 {
                     Project.changePortrait(c.convertGender(), c.type, false, false, this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.ANGER);
-                    if(c.getDignity() > 66)
-                        c.say(t, "There's nothing I can do...  Or is there?");
-                    else
-                    if(c.getDignity() > 33)
-                        c.say(t, "Could it be better for the Demons to win after all...?");
-                    else
-                        c.say(t, "This is actually making me a little angry...");
+                    switch (c.getDignity() / 33) {
+                        case 0: c.say(t, "This is actually making me a little angry..."); break;
+                        case 1: c.say(t, "Could it be better for the Demons to win after all...?"); break;
+                        default: c.say(t, "There's nothing I can do...  Or is there?");
+                    }
                 }
             } else
             if(c.getMorality() > 33)
@@ -31115,67 +29961,55 @@ public class WorldState
                 if(c.finalThreatened % 3 == 0)
                 {
                     Project.changePortrait(c.convertGender(), c.type, false, false, this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
-                    if(c.getInnocence() > 66)
-                        c.say(t, "Who... Who are the real bad guys...?");
-                    else
-                    if(c.getInnocence() > 33)
-                        c.say(t, "This is... just wrong...");
-                    else
-                        c.say(t, "Which outcome is better...?");
+                    switch (c.getInnocence() / 33) {
+                        case 0: c.say(t, "Which outcome is better...?"); break;
+                        case 1: c.say(t, "This is... just wrong..."); break;
+                        default: c.say(t, "Who... Who are the real bad guys...?");
+                    }
                 } else
                 if(c.finalThreatened % 3 == 1)
                 {
                     Project.changePortrait(c.convertGender(), c.type, false, false, this, nameCombatants(), c.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                    if(c.getConfidence() > 66)
-                        c.say(t, "I should be strong enough to stop this...!");
-                    else
-                    if(c.getConfidence() > 33)
-                        c.say(t, "I don't want this...");
-                    else
-                        c.say(t, "I... I don't want to think about this anymore...!");
+                    switch (c.getConfidence() / 33) {
+                        case 0: c.say(t, "I... I don't want to think about this anymore...!"); break;
+                        case 1: c.say(t, "I don't want this..."); break;
+                        default: c.say(t, "I should be strong enough to stop this...!");
+                    }
                 } else
                 {
                     Project.changePortrait(c.convertGender(), c.type, false, false, this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.FEAR);
-                    if(c.getDignity() > 66)
-                        c.say(t, "I could just lose on purpose...");
-                    else
-                    if(c.getDignity() > 33)
-                        c.say(t, "Huh?  You...  You don't want this to happen either...?");
-                    else
-                        c.say(t, "I can't allow this, no matter what I have to do...");
+                    switch (c.getDignity() / 33) {
+                        case 0: c.say(t, "I can't allow this, no matter what I have to do..."); break;
+                        case 1: c.say(t, "Huh?  You...  You don't want this to happen either...?"); break;
+                        default: c.say(t, "I could just lose on purpose...");
+                    }
                 }
             } else
             if(c.finalThreatened % 3 == 0)
             {
                 Project.changePortrait(c.convertGender(), c.type, false, false, this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.SHAME);
-                if(c.getInnocence() > 66)
-                    c.say(t, "No way, I don't wanna let that happen to me!");
-                else
-                if(c.getInnocence() > 33)
-                    c.say(t, "Even if I win here, I'm still...");
-                else
-                    c.say(t, "I must admit that the same could happen to me...");
+                switch (c.getInnocence() / 33) {
+                    case 0: c.say(t, "I must admit that the same could happen to me..."); break;
+                    case 1: c.say(t, "Even if I win here, I'm still..."); break;
+                    default: c.say(t, "No way, I don't wanna let that happen to me!");
+                }
             } else
             if(c.finalThreatened % 3 == 1)
             {
                 Project.changePortrait(c.convertGender(), c.type, false, false, this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.ANGER);
-                if(c.getConfidence() > 66)
-                    c.say(t, "But at least the government could never catch me, right?  R-Right, definitely not!");
-                else
-                if(c.getConfidence() > 33)
-                    c.say(t, "I want to fight it...!");
-                else
-                    c.say(t, "It's only a matter of time until I end up like that too...");
+                switch (c.getConfidence() / 33) {
+                    case 0: c.say(t, "It's only a matter of time until I end up like that too..."); break;
+                    case 1: c.say(t, "I want to fight it...!"); break;
+                    default: c.say(t, "But at least the government could never catch me, right?  R-Right, definitely not!");
+                }
             } else
             {
                 Project.changePortrait(c.convertGender(), c.type, false, false, this, nameCombatants(), c.combatantNumber(this), Project.Emotion.ANGER, Project.Emotion.SHAME);
-                if(c.getDignity() > 66)
-                    c.say(t, "I liked being called a hero, but...");
-                else
-                if(c.getDignity() > 33)
-                    c.say(t, "I hate the Demons... but I think I hate this more...");
-                else
-                    c.say(t, "Hahah...  I could actually... help the Demons win instead...");
+                switch (c.getDignity() / 33) {
+                    case 0: c.say(t, "Hahah...  I could actually... help the Demons win instead..."); break;
+                    case 1: c.say(t, "I hate the Demons... but I think I hate this more..."); break;
+                    default: c.say(t, "I liked being called a hero, but...");
+                }
             }
         }
         c.say(t, "\"");
@@ -31187,21 +30021,17 @@ public class WorldState
         append(t, "\n\n" + getSeparator() + "\n\n");
         if(c.finalSlimed == 0)
         {
-            if(c.getInnocence() > 66)
-                w.append(t, String.format("%s's face and body are smeared by the white, sticky goop launched by your Demons.  But rather than recoiling from it as %s originally did, %2$s unthinkingly spreads %s arms and allows it to fall upon %s.  The feelings of dissociation with %s own body, stronger than ever, are almost comforting now.", c.getMainName(), c.heShe(), c.hisHer(), c.himHer(), c.hisHer()));
-            else
-            if(c.getInnocence() > 33)
-                w.append(t, String.format("With your deeper incursion into material reality, your slime is more potent than ever, and against those like %s whose minds have already been weakened, the effects are immediate.  As the substance splatters against %s skin, %s briefly feels like %2$s body isn't %2$s body briefly feels like it isn't %2$s own - and if this continues, it truly won't be.", c.getMainName(), c.hisHer(), c.heShe()));
-            else
-                w.append(t, String.format("%s scrambles to dodge the globs of slime spurted out by your Demons, fully aware that contact with the substance will be too intense for %s sanity to survive, but plenty still hit %s.  %s groans, %2$s rationality fading away in favor of the animalistic desires that dominate the Demonic hivemind.", c.getMainName(), c.hisHer(), c.himHer(), c.HeShe()));
+            switch (c.getInnocence() / 33) {
+                case 0: w.append(t, String.format("%s scrambles to dodge the globs of slime spurted out by your Demons, fully aware that contact with the substance will be too intense for %s sanity to survive, but plenty still hit %s.  %s groans, %2$s rationality fading away in favor of the animalistic desires that dominate the Demonic hivemind.", c.getMainName(), c.hisHer(), c.himHer(), c.HeShe())); break;
+                case 1: w.append(t, String.format("With your deeper incursion into material reality, your slime is more potent than ever, and against those like %s whose minds have already been weakened, the effects are immediate.  As the substance splatters against %s skin, %s briefly feels like %2$s body isn't %2$s body briefly feels like it isn't %2$s own - and if this continues, it truly won't be.", c.getMainName(), c.hisHer(), c.heShe())); break;
+                default: w.append(t, String.format("%s's face and body are smeared by the white, sticky goop launched by your Demons.  But rather than recoiling from it as %s originally did, %2$s unthinkingly spreads %s arms and allows it to fall upon %s.  The feelings of dissociation with %s own body, stronger than ever, are almost comforting now.", c.getMainName(), c.heShe(), c.hisHer(), c.himHer(), c.hisHer()));
+            }
         } else
-        if(c.getInnocence() > 66)
-            w.append(t, String.format("With every spatter of slime against %s skin, %s's eyes glaze over further and %1$s expression becomes more detached and dreamy.  At this rate, %1$s mind will soon be completely yours.", c.hisHer(), c.getMainName()));
-        else
-        if(c.getInnocence() > 33)
-            w.append(t, String.format("%s falters under the weight of the slime covering %s, %s mind and %3$s body both feeling the effects strongly.  %s shakes %s head, but the haze only grows deeper and deeper.", c.getMainName(), c.himHer(), c.hisHer(), c.HeShe(), c.hisHer()));
-        else
-            w.append(t, String.format("%s's shouts of protest are meant to help %s focus and keep %s sanity, but they just let more of the white fluid trickle into %3$s mouth.  %s's powerless to stop the process of %s brainwashing now that it's begun in earnest.", c.getMainName(), c.himHer(), c.hisHer(), c.HeShe(), c.hisHer()));
+        switch (c.getInnocence() / 33) {
+            case 0: w.append(t, String.format("%s's shouts of protest are meant to help %s focus and keep %s sanity, but they just let more of the white fluid trickle into %3$s mouth.  %s's powerless to stop the process of %s brainwashing now that it's begun in earnest.", c.getMainName(), c.himHer(), c.hisHer(), c.HeShe(), c.hisHer())); break;
+            case 1: w.append(t, String.format("%s falters under the weight of the slime covering %s, %s mind and %3$s body both feeling the effects strongly.  %s shakes %s head, but the haze only grows deeper and deeper.", c.getMainName(), c.himHer(), c.hisHer(), c.HeShe(), c.hisHer())); break;
+            default: w.append(t, String.format("With every spatter of slime against %s skin, %s's eyes glaze over further and %1$s expression becomes more detached and dreamy.  At this rate, %1$s mind will soon be completely yours.", c.hisHer(), c.getMainName()));
+        }
         w.append(t, "\n\n");
         int ai[] = new int[8];
         ai[1] = 200;
@@ -31301,94 +30131,76 @@ public class WorldState
                 Project.changePortrait(c.convertGender(), c.type, false, false, this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.JOY);
                 if(c.finalSlimed % 3 == 0)
                 {
-                    if(c.getConfidence() > 66)
-                        c.say(t, "Huh...  I feel like I should be kinda mad?  I dunno why...");
-                    else
-                    if(c.getConfidence() > 33)
-                        c.say(t, "Feels so weeeird...");
-                    else
-                        c.say(t, "Yes... mess me up...");
+                    switch (c.getConfidence() / 33) {
+                        case 0: c.say(t, "Yes... mess me up..."); break;
+                        case 1: c.say(t, "Feels so weeeird..."); break;
+                        default: c.say(t, "Huh...  I feel like I should be kinda mad?  I dunno why...");
+                    }
                 } else
                 if(c.finalSlimed % 3 == 1)
                 {
-                    if(c.getDignity() > 66)
-                        c.say(t, "That's right, give me all your white stuff!");
-                    else
-                    if(c.getDignity() > 33)
-                        c.say(t, "This is nice...");
-                    else
-                        c.say(t, "Heheh, I'm all sticky...");
+                    switch (c.getDignity() / 33) {
+                        case 0: c.say(t, "Heheh, I'm all sticky..."); break;
+                        case 1: c.say(t, "This is nice..."); break;
+                        default: c.say(t, "That's right, give me all your white stuff!");
+                    }
                 } else
-                if(c.getMorality() > 66)
-                    c.say(t, "Join you?  That would be... a bad thing, right...?  But I don't remember why...");
-                else
-                if(c.getMorality() > 33)
-                    c.say(t, "It would be nice... not to have to think anymore... yeah...");
-                else
-                    c.say(t, "I... hate the Demons, right...?  But joining them actually sounds kinda fun...");
+                switch (c.getMorality() / 33) {
+                    case 0: c.say(t, "I... hate the Demons, right...?  But joining them actually sounds kinda fun..."); break;
+                    case 1: c.say(t, "It would be nice... not to have to think anymore... yeah..."); break;
+                    default: c.say(t, "Join you?  That would be... a bad thing, right...?  But I don't remember why...");
+                }
             } else
             if(c.getInnocence() > 33)
             {
                 Project.changePortrait(c.convertGender(), c.type, false, false, this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                 if(c.finalSlimed % 3 == 0)
                 {
-                    if(c.getConfidence() > 66)
-                        c.say(t, "Damn it!  Damn it, no...!");
-                    else
-                    if(c.getConfidence() > 33)
-                        c.say(t, "Need to... get away...!");
-                    else
-                        c.say(t, "I can't... I can't do anything...!");
+                    switch (c.getConfidence() / 33) {
+                        case 0: c.say(t, "I can't... I can't do anything...!"); break;
+                        case 1: c.say(t, "Need to... get away...!"); break;
+                        default: c.say(t, "Damn it!  Damn it, no...!");
+                    }
                 } else
                 if(c.finalSlimed % 3 == 1)
                 {
-                    if(c.getDignity() > 66)
-                        c.say(t, "Everyone's... voices...");
-                    else
-                    if(c.getDignity() > 33)
-                        c.say(t, "Ah...!  Agh...");
-                    else
-                        c.say(t, "I won't... lose to this...!");
+                    switch (c.getDignity() / 33) {
+                        case 0: c.say(t, "I won't... lose to this...!"); break;
+                        case 1: c.say(t, "Ah...!  Agh..."); break;
+                        default: c.say(t, "Everyone's... voices...");
+                    }
                 } else
-                if(c.getMorality() > 66)
-                    c.say(t, "I don't want to... let everyone down...");
-                else
-                if(c.getMorality() > 33)
-                    c.say(t, "I-I can... take it...!");
-                else
-                    c.say(t, "Don't... mess with me...!");
+                switch (c.getMorality() / 33) {
+                    case 0: c.say(t, "Don't... mess with me...!"); break;
+                    case 1: c.say(t, "I-I can... take it...!"); break;
+                    default: c.say(t, "I don't want to... let everyone down...");
+                }
             } else
             if(c.finalSlimed % 3 == 0)
             {
                 Project.changePortrait(c.convertGender(), c.type, false, false, this, nameCombatants(), c.combatantNumber(this), Project.Emotion.STRUGGLE, Project.Emotion.ANGER);
-                if(c.getConfidence() > 66)
-                    c.say(t, "I will not allow you to take my mind!");
-                else
-                if(c.getConfidence() > 33)
-                    c.say(t, "Focus!  Focus!");
-                else
-                    c.say(t, "If this keeps up...!");
+                switch (c.getConfidence() / 33) {
+                    case 0: c.say(t, "If this keeps up...!"); break;
+                    case 1: c.say(t, "Focus!  Focus!"); break;
+                    default: c.say(t, "I will not allow you to take my mind!");
+                }
             } else
             if(c.finalSlimed % 3 == 1)
             {
                 Project.changePortrait(c.convertGender(), c.type, false, false, this, nameCombatants(), c.combatantNumber(this), Project.Emotion.STRUGGLE, Project.Emotion.FEAR);
-                if(c.getDignity() > 66)
-                    c.say(t, "I will not face such a shameful end...!");
-                else
-                if(c.getDignity() > 33)
-                    c.say(t, "Must... think through this...!");
-                else
-                    c.say(t, "Aaagh!  No!  I will absolutely not give in!  Gaah!");
+                switch (c.getDignity() / 33) {
+                    case 0: c.say(t, "Aaagh!  No!  I will absolutely not give in!  Gaah!"); break;
+                    case 1: c.say(t, "Must... think through this...!"); break;
+                    default: c.say(t, "I will not face such a shameful end...!");
+                }
             } else
             {
                 Project.changePortrait(c.convertGender(), c.type, false, false, this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
-                if(c.getMorality() > 66)
-                    c.say(t, "Everyone, please forgive me...");
-                else
-                if(c.getMorality() > 33)
-                    c.say(t, "I'm... slipping away...!");
-                else
-                    c.say(t, "I will never bow... to another...!");
+                switch (c.getMorality() / 33) {
+                    case 0: c.say(t, "I will never bow... to another...!"); break;
+                    case 1: c.say(t, "I'm... slipping away...!"); break;
+                    default: c.say(t, "Everyone, please forgive me...");
+                }
             }
         }
         c.say(t, "\"");
@@ -31407,77 +30219,61 @@ public class WorldState
             {
                 if(c.isDrained())
                 {
-                    if(c.getConfidence() > 66)
-                        w.append(t, String.format("%s has always thrown %sself into your Demons' attacks without hesitation, and that still hasn't changed.  But while %s originally did it to scoff at the weakness of your minions, now %3$s continues out of determination to die.  Your Demons' enhanced claws, more powerful and painful than ever, serve to punish %2$s for forgetting that it is ultimately the Demon Lord's choice whether %3$s will be granted death.", c.getMainName(), c.himHer(), c.heShe()));
-                    else
-                    if(c.getConfidence() > 33)
-                        w.append(t, String.format("%s had hoped to force you to kill %s in this battle by fighting to stop you, but %s resolve falters when %s feels how much more painful your Demons' enhanced attacks are.  The fear that %4$s's just extending %s torment even longer causes %2$s to seriously consider throwing %2$sself completely on your mercy.", c.getMainName(), c.himHer(), c.hisHer(), c.heShe(), c.hisHer()));
-                    else
-                        w.append(t, String.format("%s had already accepted that %s could only be granted death on the Demon Lord's whim, but upon feeling the bite of the Demon's claws into %s flesh, %2$s desperately throws %3$s body onto them, greedily seeking to end it all %sself.  %s needs to be shown that this is completely futile before %2$s finally submits.", c.getMainName(), c.heShe(), c.hisHer(), c.himHer(), c.HeShe()));
+                    switch (c.getConfidence() / 33) {
+                        case 0: w.append(t, String.format("%s had already accepted that %s could only be granted death on the Demon Lord's whim, but upon feeling the bite of the Demon's claws into %s flesh, %2$s desperately throws %3$s body onto them, greedily seeking to end it all %sself.  %s needs to be shown that this is completely futile before %2$s finally submits.", c.getMainName(), c.heShe(), c.hisHer(), c.himHer(), c.HeShe())); break;
+                        case 1: w.append(t, String.format("%s had hoped to force you to kill %s in this battle by fighting to stop you, but %s resolve falters when %s feels how much more painful your Demons' enhanced attacks are.  The fear that %4$s's just extending %s torment even longer causes %2$s to seriously consider throwing %2$sself completely on your mercy.", c.getMainName(), c.himHer(), c.hisHer(), c.heShe(), c.hisHer())); break;
+                        default: w.append(t, String.format("%s has always thrown %sself into your Demons' attacks without hesitation, and that still hasn't changed.  But while %s originally did it to scoff at the weakness of your minions, now %3$s continues out of determination to die.  Your Demons' enhanced claws, more powerful and painful than ever, serve to punish %2$s for forgetting that it is ultimately the Demon Lord's choice whether %3$s will be granted death.", c.getMainName(), c.himHer(), c.heShe()));
+                    }
                 } else
-                if(c.getConfidence() > 66)
-                    w.append(t, String.format("At first glance, %s is still throwing %sself into your Demons' attacks without hesitation, the same way as %s always has, but there's a slight defensiveness in %s movements that wasn't there before.  Your Demons' claws are sharper than ever, and while %s isn't afraid of the pain, %5$s knows %5$s could actually die here.  The question of whether %5$s's willing to do so keeps returning to %s mind.", c.getMainName(), c.himHer(), c.heShe(), c.hisHer(), c.heShe(), c.hisHer()));
-                else
-                if(c.getConfidence() > 33)
-                    w.append(t, String.format("Your Demons advance on %s, and %s backs up warily.  The pain of their enhanced claws is distracting and debilitating, but %s true concern is the possibility that %2$s could die.  %s thought %2$s was prepared for it, but now %2$s realizes that %2$s was deluding %sself.", c.getMainName(), c.heShe(), c.hisHer(), c.HeShe(), c.himHer()));
-                else
-                    w.append(t, String.format("%s is trying harder than ever to dodge your Demons' attacks, terrified by the prospect of being killed here.  But %s can't avoid them all, and when one of them cuts into %s skin, %3$s screams come more from fear than from pain.  %s begins to find the prospect of complete surrender more and more appealing.", c.getMainName(), c.heShe(), c.hisHer(), c.HeShe()));
+                switch (c.getConfidence() / 33) {
+                    case 0: w.append(t, String.format("%s is trying harder than ever to dodge your Demons' attacks, terrified by the prospect of being killed here.  But %s can't avoid them all, and when one of them cuts into %s skin, %3$s screams come more from fear than from pain.  %s begins to find the prospect of complete surrender more and more appealing.", c.getMainName(), c.heShe(), c.hisHer(), c.HeShe())); break;
+                    case 1: w.append(t, String.format("Your Demons advance on %s, and %s backs up warily.  The pain of their enhanced claws is distracting and debilitating, but %s true concern is the possibility that %2$s could die.  %s thought %2$s was prepared for it, but now %2$s realizes that %2$s was deluding %sself.", c.getMainName(), c.heShe(), c.hisHer(), c.HeShe(), c.himHer())); break;
+                    default: w.append(t, String.format("At first glance, %s is still throwing %sself into your Demons' attacks without hesitation, the same way as %s always has, but there's a slight defensiveness in %s movements that wasn't there before.  Your Demons' claws are sharper than ever, and while %s isn't afraid of the pain, %5$s knows %5$s could actually die here.  The question of whether %5$s's willing to do so keeps returning to %s mind.", c.getMainName(), c.himHer(), c.heShe(), c.hisHer(), c.heShe(), c.hisHer()));
+                }
             } else
             if(c.isDrained())
             {
-                if(c.getConfidence() > 66)
-                    w.append(t, String.format("%s has always thrown %sself into your Demons' attacks without hesitation, and that still hasn't changed.  But while %s originally did it to scoff at the weakness of your minions, now %3$s continues out of determination to die.  However, your Demons' claws, now optimized further than ever to inflict unbearable tickling without the slighest bit of actual bodily harm, only serve to punish %2$s for forgetting that it is ultimately the Demon Lord's choice whether %3$s will be granted death.", c.getMainName(), c.himHer(), c.heShe()));
-                else
-                if(c.getConfidence() > 33)
-                    w.append(t, String.format("%s had hoped to force you to kill %s in this battle by fighting to stop you, but %s resolve falters when %s feels how much worse your Demons' tickling has become under the influence of your incursion into reality.  The fear that %4$s's just extending %s torment even longer causes %2$s to seriously consider throwing %2$sself completely on your mercy.", c.getMainName(), c.himHer(), c.hisHer(), c.heShe(), c.hisHer()));
-                else
-                    w.append(t, String.format("%s had already accepted that %s could only be granted death on the Demon Lord's whim, but upon feeling your Demon's claws beginning to tickle %s, %2$s desperately throws %s body onto them, greedily attempting to impale %sself on them and end it all.  Of course, they bend harmlessly, having been specially designed with the Chosen's temporarily lower durability in mind.  %1$s needs to be shown that this is completely futile before %2$s finally submits.", c.getMainName(), c.heShe(), c.himHer(), c.hisHer(), c.himHer()));
+                switch (c.getConfidence() / 33) {
+                    case 0: w.append(t, String.format("%s had already accepted that %s could only be granted death on the Demon Lord's whim, but upon feeling your Demon's claws beginning to tickle %s, %2$s desperately throws %s body onto them, greedily attempting to impale %sself on them and end it all.  Of course, they bend harmlessly, having been specially designed with the Chosen's temporarily lower durability in mind.  %1$s needs to be shown that this is completely futile before %2$s finally submits.", c.getMainName(), c.heShe(), c.himHer(), c.hisHer(), c.himHer())); break;
+                    case 1: w.append(t, String.format("%s had hoped to force you to kill %s in this battle by fighting to stop you, but %s resolve falters when %s feels how much worse your Demons' tickling has become under the influence of your incursion into reality.  The fear that %4$s's just extending %s torment even longer causes %2$s to seriously consider throwing %2$sself completely on your mercy.", c.getMainName(), c.himHer(), c.hisHer(), c.heShe(), c.hisHer())); break;
+                    default: w.append(t, String.format("%s has always thrown %sself into your Demons' attacks without hesitation, and that still hasn't changed.  But while %s originally did it to scoff at the weakness of your minions, now %3$s continues out of determination to die.  However, your Demons' claws, now optimized further than ever to inflict unbearable tickling without the slighest bit of actual bodily harm, only serve to punish %2$s for forgetting that it is ultimately the Demon Lord's choice whether %3$s will be granted death.", c.getMainName(), c.himHer(), c.heShe()));
+                }
             } else
-            if(c.getConfidence() > 66)
-                w.append(t, String.format("At first glance, %s is still throwing %sself into your Demons' attacks without hesitation, the same way as %s always has, but there's a slight defensiveness in %s movements that wasn't there before.  Your Demons' appendages are capable of tickling more brutally than ever, and while %s doesn't want to acknowledge the discomfort, %5$s knows that if %5$s gets tickled into submission, it would be easy to kill %2$s while %s guard is down.  The question of whether %s's willing to accept that risk keeps returning to %s mind.", c.getMainName(), c.himHer(), c.heShe(), c.hisHer(), c.heShe(), c.hisHer(), c.heShe(), c.hisHer()));
-            else
-            if(c.getConfidence() > 33)
-                w.append(t, String.format("Your Demons advance on %s, and %s backs up warily.  The tickling inflicted by their enhanced claws is distracting and debilitating, but %s true concern is the possibility that they could go further and actually kill %s.  %s thought %2$s was prepared for it, but now %2$s realizes that %2$s was deluding %sself.", c.getMainName(), c.heShe(), c.hisHer(), c.himHer(), c.HeShe(), c.himHer()));
-            else
-                w.append(t, String.format("%s is trying harder than ever to dodge your Demons' attacks, terrified by the prospect of being killed here.  But %s can't avoid them all, and when one of them pins %s down and starts jabbing %s armpits, %4$s screams come more from fear than from discomfort.  %s begins to find the prospect of complete surrender more and more appealing.", c.getMainName(), c.heShe(), c.himHer(), c.hisHer(), c.HeShe()));
+            switch (c.getConfidence() / 33) {
+                case 0: w.append(t, String.format("%s is trying harder than ever to dodge your Demons' attacks, terrified by the prospect of being killed here.  But %s can't avoid them all, and when one of them pins %s down and starts jabbing %s armpits, %4$s screams come more from fear than from discomfort.  %s begins to find the prospect of complete surrender more and more appealing.", c.getMainName(), c.heShe(), c.himHer(), c.hisHer(), c.HeShe())); break;
+                case 1: w.append(t, String.format("Your Demons advance on %s, and %s backs up warily.  The tickling inflicted by their enhanced claws is distracting and debilitating, but %s true concern is the possibility that they could go further and actually kill %s.  %s thought %2$s was prepared for it, but now %2$s realizes that %2$s was deluding %sself.", c.getMainName(), c.heShe(), c.hisHer(), c.himHer(), c.HeShe(), c.himHer())); break;
+                default: w.append(t, String.format("At first glance, %s is still throwing %sself into your Demons' attacks without hesitation, the same way as %s always has, but there's a slight defensiveness in %s movements that wasn't there before.  Your Demons' appendages are capable of tickling more brutally than ever, and while %s doesn't want to acknowledge the discomfort, %5$s knows that if %5$s gets tickled into submission, it would be easy to kill %2$s while %s guard is down.  The question of whether %s's willing to accept that risk keeps returning to %s mind.", c.getMainName(), c.himHer(), c.heShe(), c.hisHer(), c.heShe(), c.hisHer(), c.heShe(), c.hisHer()));
+            }
         } else
         if(tickleOn)
         {
             if(c.isDrained())
             {
-                if(c.getConfidence() > 66)
-                    w.append(t, String.format("%s grabs your Demons by the claws and forcefully tries to stab %sself with them, but all %s gets for %s trouble is more tickling.  %s determined expression is marred by the tears flowing down %s cheeks.", c.getMainName(), c.himHer(), c.heShe(), c.hisHer(), c.HisHer(), c.hisHer()));
-                else
-                if(c.getConfidence() > 33)
-                    w.append(t, String.format("Staggering with pain, %s keeps fighting in hopes that one of your Demons will deal %s a fatal blow, but they continue to restrain themselves to tickling as they strike back.  It's becoming harder and harder for %2$s to convince %2$sself that this will work.", c.getMainName(), c.himHer()));
-                else
-                    w.append(t, String.format("Your Demons continue to tickle %s as punishment for trying to fight back.  %s struggles slow as %s comes to realize that nothing short of complete submission will save %s.", c.getMainName(), c.HisHer(), c.heShe(), c.himHer()));
+                switch (c.getConfidence() / 33) {
+                    case 0: w.append(t, String.format("Your Demons continue to tickle %s as punishment for trying to fight back.  %s struggles slow as %s comes to realize that nothing short of complete submission will save %s.", c.getMainName(), c.HisHer(), c.heShe(), c.himHer())); break;
+                    case 1: w.append(t, String.format("Staggering with pain, %s keeps fighting in hopes that one of your Demons will deal %s a fatal blow, but they continue to restrain themselves to tickling as they strike back.  It's becoming harder and harder for %2$s to convince %2$sself that this will work.", c.getMainName(), c.himHer())); break;
+                    default: w.append(t, String.format("%s grabs your Demons by the claws and forcefully tries to stab %sself with them, but all %s gets for %s trouble is more tickling.  %s determined expression is marred by the tears flowing down %s cheeks.", c.getMainName(), c.himHer(), c.heShe(), c.hisHer(), c.HisHer(), c.hisHer()));
+                }
             } else
-            if(c.getConfidence() > 66)
-                w.append(t, String.format("As prideful as %s is, %s has to admit that your tickling Demons could have inflicted some grievous wounds on %s by now if they really wanted to.  It makes %3$s question whether %1$s can really afford to push you any further.", c.heShe(), c.getMainName(), c.himHer()));
-            else
-            if(c.getConfidence() > 33)
-                w.append(t, String.format("%s tries to defend %sself against your Demons' continued tickling, but they still manage to jab %s sensitive spots and make %2$s gasp and squirm.  It's becoming more and more clear that %s's only surviving because you're letting %2$s.", c.getMainName(), c.himHer(), c.hisHer(), c.heShe()));
-            else
-                w.append(t, String.format("Your Demons tickle %s roughly, their claws stopping just short of actually piercing %s skin.  %s can't suppress %2$s terror at the thought that they could easily go further.", c.getMainName(), c.hisHer(), c.HeShe()));
+            switch (c.getConfidence() / 33) {
+                case 0: w.append(t, String.format("Your Demons tickle %s roughly, their claws stopping just short of actually piercing %s skin.  %s can't suppress %2$s terror at the thought that they could easily go further.", c.getMainName(), c.hisHer(), c.HeShe())); break;
+                case 1: w.append(t, String.format("%s tries to defend %sself against your Demons' continued tickling, but they still manage to jab %s sensitive spots and make %2$s gasp and squirm.  It's becoming more and more clear that %s's only surviving because you're letting %2$s.", c.getMainName(), c.himHer(), c.hisHer(), c.heShe())); break;
+                default: w.append(t, String.format("As prideful as %s is, %s has to admit that your tickling Demons could have inflicted some grievous wounds on %s by now if they really wanted to.  It makes %3$s question whether %1$s can really afford to push you any further.", c.heShe(), c.getMainName(), c.himHer()));
+            }
         } else
         if(c.isDrained())
         {
-            if(c.getConfidence() > 66)
-                w.append(t, String.format("%s grabs your Demons by the claws and forcefully tries to stab %sself with them, but they retract the blades before they can do more than break the skin.  %1$s's determined expression is marred by the tears flowing down %s cheeks.", c.getMainName(), c.himHer(), c.hisHer()));
-            else
-            if(c.getConfidence() > 33)
-                w.append(t, String.format("Staggering with pain, %s keeps fighting in hopes that one of your Demons will deal %s a fatal blow, but they continue to avoid %s vitals as they strike back.  It's becoming harder and harder for %2$s to convince %2$sself that this will work.", c.getMainName(), c.himHer(), c.hisHer()));
-            else
-                w.append(t, String.format("Your Demons continue to torture %s as punishment for trying to fight back.  %s struggles slow as %s comes to realize that nothing short of complete submission will save %s.", c.getMainName(), c.HisHer(), c.heShe(), c.himHer()));
+            switch (c.getConfidence() / 33) {
+                case 0: w.append(t, String.format("Your Demons continue to torture %s as punishment for trying to fight back.  %s struggles slow as %s comes to realize that nothing short of complete submission will save %s.", c.getMainName(), c.HisHer(), c.heShe(), c.himHer())); break;
+                case 1: w.append(t, String.format("Staggering with pain, %s keeps fighting in hopes that one of your Demons will deal %s a fatal blow, but they continue to avoid %s vitals as they strike back.  It's becoming harder and harder for %2$s to convince %2$sself that this will work.", c.getMainName(), c.himHer(), c.hisHer())); break;
+                default: w.append(t, String.format("%s grabs your Demons by the claws and forcefully tries to stab %sself with them, but they retract the blades before they can do more than break the skin.  %1$s's determined expression is marred by the tears flowing down %s cheeks.", c.getMainName(), c.himHer(), c.hisHer()));
+            }
         } else
-        if(c.getConfidence() > 66)
-            w.append(t, String.format("As prideful as %s is, %s has to admit that your attacking Demons could have inflicted more than mere flesh wounds on %s by now if they really wanted to.  It makes %3$s question whether %1$s can really afford to push you any further.", c.heShe(), c.getMainName(), c.himHer()));
-        else
-        if(c.getConfidence() > 33)
-            w.append(t, String.format("%s tries to defend %sself against your Demons' continued attacks, but they still manage to give %2$s several painful shallow cuts.  It's becoming more and more clear that %s's only surviving because you're letting %2$s.", c.getMainName(), c.himHer(), c.heShe()));
-        else
-            w.append(t, String.format("Your Demons savagely attack %s, their claws stopping just short of actually piercing %s vitals.  %s can't suppress %2$s terror at the thought that they could easily go for the kill.", c.getMainName(), c.hisHer(), c.HeShe()));
+        switch (c.getConfidence() / 33) {
+            case 0: w.append(t, String.format("Your Demons savagely attack %s, their claws stopping just short of actually piercing %s vitals.  %s can't suppress %2$s terror at the thought that they could easily go for the kill.", c.getMainName(), c.hisHer(), c.HeShe())); break;
+            case 1: w.append(t, String.format("%s tries to defend %sself against your Demons' continued attacks, but they still manage to give %2$s several painful shallow cuts.  It's becoming more and more clear that %s's only surviving because you're letting %2$s.", c.getMainName(), c.himHer(), c.heShe())); break;
+            default: w.append(t, String.format("As prideful as %s is, %s has to admit that your attacking Demons could have inflicted more than mere flesh wounds on %s by now if they really wanted to.  It makes %3$s question whether %1$s can really afford to push you any further.", c.heShe(), c.getMainName(), c.himHer()));
+        }
         w.append(t, "\n\n");
         int ai[] = new int[8];
         ai[2] = 200;
@@ -31624,13 +30420,11 @@ public class WorldState
                 }
             } else
             {
-                if(c.getConfidence() > 66)
-                    w.append(t, String.format("With every attack that comes a fraction of an inch from killing %s, %s comes up with more justifications for why it wouldn't be shameful to surrender here.  Before your Demons can get their claws on %1$s again, %s abruptly declares that %3$s's done fighting.", c.himHer(), c.getMainName(), c.heShe()));
-                else
-                if(c.getConfidence() > 33)
-                    w.append(t, String.format("%s had hoped that %s'd be able to defeat the Demons, but as they continue to toy with %s and just barely avoid inflicting fatal wounds, %2$s begins to think that %2$s has no realistic chance of victory.  Faced with the likelihood of being defeated either way, %2$s opts to at least save %s own life by surrendering.", c.getMainName(), c.heShe(), c.himHer(), c.hisHer()));
-                else
-                    w.append(t, String.format("The Demons charge at %s, causing %s to flinch away, closing %s eyes and raising %3$s hands.  Before %s knows it, %4$s's started to blurt out apologies and offers of surrender - and %4$s realizes that %4$s's actually willing to follow through with them.", c.getMainName(), c.himHer(), c.hisHer(), c.heShe()));
+                switch (c.getConfidence() / 33) {
+                    case 0: w.append(t, String.format("The Demons charge at %s, causing %s to flinch away, closing %s eyes and raising %3$s hands.  Before %s knows it, %4$s's started to blurt out apologies and offers of surrender - and %4$s realizes that %4$s's actually willing to follow through with them.", c.getMainName(), c.himHer(), c.hisHer(), c.heShe())); break;
+                    case 1: w.append(t, String.format("%s had hoped that %s'd be able to defeat the Demons, but as they continue to toy with %s and just barely avoid inflicting fatal wounds, %2$s begins to think that %2$s has no realistic chance of victory.  Faced with the likelihood of being defeated either way, %2$s opts to at least save %s own life by surrendering.", c.getMainName(), c.heShe(), c.himHer(), c.hisHer())); break;
+                    default: w.append(t, String.format("With every attack that comes a fraction of an inch from killing %s, %s comes up with more justifications for why it wouldn't be shameful to surrender here.  Before your Demons can get their claws on %1$s again, %s abruptly declares that %3$s's done fighting.", c.himHer(), c.getMainName(), c.heShe()));
+                }
                 c.say(t, "\n\n\"");
                 Project.changePortrait(c.convertGender(), c.type, false, true, this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.FEAR);
                 if(c.getConfidence() > 66)
@@ -31704,96 +30498,78 @@ public class WorldState
                         Project.changePortrait(c.convertGender(), c.type, false, false, this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.STRUGGLE);
                         if(c.finalAttacked % 3 == 0)
                         {
-                            if(c.getInnocence() > 66)
-                                c.say(t, "Ahah!?  Ahahah, no, no, you have to kill meee!");
-                            else
-                            if(c.getInnocence() > 33)
-                                c.say(t, "Ngah!  Stop toying with me, damn- Nahahahah!");
-                            else
-                                c.say(t, "Ghah!  Need to... push harder... gahahahah!");
+                            switch (c.getInnocence() / 33) {
+                                case 0: c.say(t, "Ghah!  Need to... push harder... gahahahah!"); break;
+                                case 1: c.say(t, "Ngah!  Stop toying with me, damn- Nahahahah!"); break;
+                                default: c.say(t, "Ahah!?  Ahahah, no, no, you have to kill meee!");
+                            }
                         } else
                         if(c.finalAttacked % 3 == 1)
                         {
-                            if(c.getDignity() > 66)
-                                c.say(t, "Ahahah, stop!  You'll kill me this instant if you know what's good for- Hahahahah!");
-                            else
-                            if(c.getDignity() > 33)
-                                c.say(t, "Hahahah!  Gaah, stop!  St-ahahahah!");
-                            else
-                                c.say(t, "Hng...!  Gah!  Hahahah!  Ergh, no, again...!");
+                            switch (c.getDignity() / 33) {
+                                case 0: c.say(t, "Hng...!  Gah!  Hahahah!  Ergh, no, again...!"); break;
+                                case 1: c.say(t, "Hahahah!  Gaah, stop!  St-ahahahah!"); break;
+                                default: c.say(t, "Ahahah, stop!  You'll kill me this instant if you know what's good for- Hahahahah!");
+                            }
                         } else
-                        if(c.getMorality() > 66)
-                            c.say(t, "Hah... agh!  What am I even doing...?");
-                        else
-                        if(c.getMorality() > 33)
-                            c.say(t, "If I had fought this hard from the start, I...  Ah!  Ahahah, no!");
-                        else
-                            c.say(t, "Hahah, agh, no!  You won't take this from me!");
+                        switch (c.getMorality() / 33) {
+                            case 0: c.say(t, "Hahah, agh, no!  You won't take this from me!"); break;
+                            case 1: c.say(t, "If I had fought this hard from the start, I...  Ah!  Ahahah, no!"); break;
+                            default: c.say(t, "Hah... agh!  What am I even doing...?");
+                        }
                     } else
                     if(c.getConfidence() > 33)
                     {
                         if(c.finalAttacked % 3 == 0)
                         {
                             Project.changePortrait(c.convertGender(), c.type, false, false, this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.FEAR);
-                            if(c.getInnocence() > 66)
-                                c.say(t, "Ahah...  Why...?  Ahahah!  Why isn't it working!?");
-                            else
-                            if(c.getInnocence() > 33)
-                                c.say(t, "Just... ahahah... have to fight harder... ah!");
-                            else
-                                c.say(t, "Is this... pointless...?  Ahahah, no, stop!");
+                            switch (c.getInnocence() / 33) {
+                                case 0: c.say(t, "Is this... pointless...?  Ahahah, no, stop!"); break;
+                                case 1: c.say(t, "Just... ahahah... have to fight harder... ah!"); break;
+                                default: c.say(t, "Ahah...  Why...?  Ahahah!  Why isn't it working!?");
+                            }
                         } else
                         if(c.finalAttacked % 3 == 1)
                         {
                             Project.changePortrait(c.convertGender(), c.type, false, false, this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.SHAME);
-                            if(c.getDignity() > 66)
-                                c.say(t, "Ahah... hahah... ah...");
-                            else
-                            if(c.getDignity() > 33)
-                                c.say(t, "Can't... hah... can't give up yet...");
-                            else
-                                c.say(t, "Ahah, hah... I can't do this anymore...");
+                            switch (c.getDignity() / 33) {
+                                case 0: c.say(t, "Ahah, hah... I can't do this anymore..."); break;
+                                case 1: c.say(t, "Can't... hah... can't give up yet..."); break;
+                                default: c.say(t, "Ahah... hahah... ah...");
+                            }
                         } else
                         {
                             Project.changePortrait(c.convertGender(), c.type, false, false, this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
-                            if(c.getMorality() > 66)
-                                c.say(t, "I wanted... to go out fighting like a hero...");
-                            else
-                            if(c.getMorality() > 33)
-                                c.say(t, "I guess... I might not have any choice...");
-                            else
-                                c.say(t, "Ugh...  What else can I do to make them kill me...?");
+                            switch (c.getMorality() / 33) {
+                                case 0: c.say(t, "Ugh...  What else can I do to make them kill me...?"); break;
+                                case 1: c.say(t, "I guess... I might not have any choice..."); break;
+                                default: c.say(t, "I wanted... to go out fighting like a hero...");
+                            }
                         }
                     } else
                     {
                         Project.changePortrait(c.convertGender(), c.type, false, false, this, nameCombatants(), c.combatantNumber(this), Project.Emotion.LEWD, Project.Emotion.FEAR);
                         if(c.finalAttacked % 3 == 0)
                         {
-                            if(c.getInnocence() > 66)
-                                c.say(t, "I'm sorry!  I'm sorry!  Please just kill meee!");
-                            else
-                            if(c.getInnocence() > 33)
-                                c.say(t, "Gah!  Ahahah, p-please, nooo!");
-                            else
-                                c.say(t, "Ahah!  N-No!  This is e-excessive!");
+                            switch (c.getInnocence() / 33) {
+                                case 0: c.say(t, "Ahah!  N-No!  This is e-excessive!"); break;
+                                case 1: c.say(t, "Gah!  Ahahah, p-please, nooo!"); break;
+                                default: c.say(t, "I'm sorry!  I'm sorry!  Please just kill meee!");
+                            }
                         } else
                         if(c.finalAttacked % 3 == 1)
                         {
-                            if(c.getDignity() > 66)
-                                c.say(t, "Ahah, s-stop, I'm- hahahahah!");
-                            else
-                            if(c.getDignity() > 33)
-                                c.say(t, "Ah, ahahah, n-no more...!");
-                            else
-                                c.say(t, "Ahahah, aaagh!");
+                            switch (c.getDignity() / 33) {
+                                case 0: c.say(t, "Ahahah, aaagh!"); break;
+                                case 1: c.say(t, "Ah, ahahah, n-no more...!"); break;
+                                default: c.say(t, "Ahah, s-stop, I'm- hahahahah!");
+                            }
                         } else
-                        if(c.getMorality() > 66)
-                            c.say(t, "Hah... I d-deserve this...");
-                        else
-                        if(c.getMorality() > 33)
-                            c.say(t, "Hahahah, I can't, I can't...");
-                        else
-                            c.say(t, "I-I'll do anything, just stooop!");
+                        switch (c.getMorality() / 33) {
+                            case 0: c.say(t, "I-I'll do anything, just stooop!"); break;
+                            case 1: c.say(t, "Hahahah, I can't, I can't..."); break;
+                            default: c.say(t, "Hah... I d-deserve this...");
+                        }
                     }
                 } else
                 if(c.getConfidence() > 66)
@@ -31801,34 +30577,28 @@ public class WorldState
                     if(c.finalAttacked % 3 == 0)
                     {
                         Project.changePortrait(c.convertGender(), c.type, false, false, this, nameCombatants(), c.combatantNumber(this), Project.Emotion.STRUGGLE, Project.Emotion.ANGER);
-                        if(c.getInnocence() > 66)
-                            c.say(t, "Gah!?  Ow, no, no, you have to kill meee!");
-                        else
-                        if(c.getInnocence() > 33)
-                            c.say(t, "Ngah!  Stop toying with me, damn it...!");
-                        else
-                            c.say(t, "Gh!  Need to... push harder...!");
+                        switch (c.getInnocence() / 33) {
+                            case 0: c.say(t, "Gh!  Need to... push harder...!"); break;
+                            case 1: c.say(t, "Ngah!  Stop toying with me, damn it...!"); break;
+                            default: c.say(t, "Gah!?  Ow, no, no, you have to kill meee!");
+                        }
                     } else
                     if(c.finalAttacked % 3 == 1)
                     {
                         Project.changePortrait(c.convertGender(), c.type, false, false, this, nameCombatants(), c.combatantNumber(this), Project.Emotion.STRUGGLE, Project.Emotion.ANGER);
-                        if(c.getDignity() > 66)
-                            c.say(t, "Enough!  You'll kill me this instant if you know what's good for- Gaah!");
-                        else
-                        if(c.getDignity() > 33)
-                            c.say(t, "Gaah, stop!");
-                        else
-                            c.say(t, "Hng...!  Gah!  Ergh, no, again...!");
+                        switch (c.getDignity() / 33) {
+                            case 0: c.say(t, "Hng...!  Gah!  Ergh, no, again...!"); break;
+                            case 1: c.say(t, "Gaah, stop!"); break;
+                            default: c.say(t, "Enough!  You'll kill me this instant if you know what's good for- Gaah!");
+                        }
                     } else
                     {
                         Project.changePortrait(c.convertGender(), c.type, false, false, this, nameCombatants(), c.combatantNumber(this), Project.Emotion.STRUGGLE, Project.Emotion.FEAR);
-                        if(c.getMorality() > 66)
-                            c.say(t, "Agh!  What am I even doing...!?");
-                        else
-                        if(c.getMorality() > 33)
-                            c.say(t, "If I had fought this hard from the start, I...");
-                        else
-                            c.say(t, "No!  You won't take this from me!");
+                        switch (c.getMorality() / 33) {
+                            case 0: c.say(t, "No!  You won't take this from me!"); break;
+                            case 1: c.say(t, "If I had fought this hard from the start, I..."); break;
+                            default: c.say(t, "Agh!  What am I even doing...!?");
+                        }
                     }
                 } else
                 if(c.getConfidence() > 33)
@@ -31836,65 +30606,53 @@ public class WorldState
                     if(c.finalAttacked % 3 == 0)
                     {
                         Project.changePortrait(c.convertGender(), c.type, false, false, this, nameCombatants(), c.combatantNumber(this), Project.Emotion.STRUGGLE, Project.Emotion.FEAR);
-                        if(c.getInnocence() > 66)
-                            c.say(t, "Ow!  Why!?  Why isn't it working!?");
-                        else
-                        if(c.getInnocence() > 33)
-                            c.say(t, "Just... have to fight harder... ergh!");
-                        else
-                            c.say(t, "Is this... pointless...?");
+                        switch (c.getInnocence() / 33) {
+                            case 0: c.say(t, "Is this... pointless...?"); break;
+                            case 1: c.say(t, "Just... have to fight harder... ergh!"); break;
+                            default: c.say(t, "Ow!  Why!?  Why isn't it working!?");
+                        }
                     } else
                     if(c.finalAttacked % 3 == 1)
                     {
                         Project.changePortrait(c.convertGender(), c.type, false, false, this, nameCombatants(), c.combatantNumber(this), Project.Emotion.STRUGGLE, Project.Emotion.SHAME);
-                        if(c.getDignity() > 66)
-                            c.say(t, "Gah!  Agh...");
-                        else
-                        if(c.getDignity() > 33)
-                            c.say(t, "Can't... hah... can't give up yet...");
-                        else
-                            c.say(t, "I can't do this anymore...");
+                        switch (c.getDignity() / 33) {
+                            case 0: c.say(t, "I can't do this anymore..."); break;
+                            case 1: c.say(t, "Can't... hah... can't give up yet..."); break;
+                            default: c.say(t, "Gah!  Agh...");
+                        }
                     } else
                     {
                         Project.changePortrait(c.convertGender(), c.type, false, false, this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
-                        if(c.getMorality() > 66)
-                            c.say(t, "I wanted... to go out fighting like a hero...");
-                        else
-                        if(c.getMorality() > 33)
-                            c.say(t, "I guess... I might not have any choice...");
-                        else
-                            c.say(t, "Ugh...  What else can I do to make them kill me...?");
+                        switch (c.getMorality() / 33) {
+                            case 0: c.say(t, "Ugh...  What else can I do to make them kill me...?"); break;
+                            case 1: c.say(t, "I guess... I might not have any choice..."); break;
+                            default: c.say(t, "I wanted... to go out fighting like a hero...");
+                        }
                     }
                 } else
                 {
                     Project.changePortrait(c.convertGender(), c.type, false, false, this, nameCombatants(), c.combatantNumber(this), Project.Emotion.STRUGGLE, Project.Emotion.FEAR);
                     if(c.finalAttacked % 3 == 0)
                     {
-                        if(c.getInnocence() > 66)
-                            c.say(t, "I'm sorry!  I'm sorry!  Please just kill meee!");
-                        else
-                        if(c.getInnocence() > 33)
-                            c.say(t, "Gah!  P-Please, nooo!");
-                        else
-                            c.say(t, "N-No!  This is e-excessive!");
+                        switch (c.getInnocence() / 33) {
+                            case 0: c.say(t, "N-No!  This is e-excessive!"); break;
+                            case 1: c.say(t, "Gah!  P-Please, nooo!"); break;
+                            default: c.say(t, "I'm sorry!  I'm sorry!  Please just kill meee!");
+                        }
                     } else
                     if(c.finalAttacked % 3 == 1)
                     {
-                        if(c.getDignity() > 66)
-                            c.say(t, "S-Stop, I'm... already...");
-                        else
-                        if(c.getDignity() > 33)
-                            c.say(t, "N-No more...!");
-                        else
-                            c.say(t, "Ow...");
+                        switch (c.getDignity() / 33) {
+                            case 0: c.say(t, "Ow..."); break;
+                            case 1: c.say(t, "N-No more...!"); break;
+                            default: c.say(t, "S-Stop, I'm... already...");
+                        }
                     } else
-                    if(c.getMorality() > 66)
-                        c.say(t, "I d-deserve this...");
-                    else
-                    if(c.getMorality() > 33)
-                        c.say(t, "I can't, I can't...");
-                    else
-                        c.say(t, "I-I'll do anything, just stop!");
+                    switch (c.getMorality() / 33) {
+                        case 0: c.say(t, "I-I'll do anything, just stop!"); break;
+                        case 1: c.say(t, "I can't, I can't..."); break;
+                        default: c.say(t, "I d-deserve this...");
+                    }
                 }
             } else
             if(c.getConfidence() > 66)
@@ -31902,24 +30660,20 @@ public class WorldState
                 if(c.finalAttacked % 3 == 0)
                 {
                     Project.changePortrait(c.convertGender(), c.type, false, false, this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
-                    if(c.getInnocence() > 66)
-                        c.say(t, "I'm supposed to be the strongest!  So why...?");
-                    else
-                    if(c.getInnocence() > 33)
-                        c.say(t, "I have to fight even harder...!");
-                    else
-                        c.say(t, "I was absolutely certain that I could win...");
+                    switch (c.getInnocence() / 33) {
+                        case 0: c.say(t, "I was absolutely certain that I could win..."); break;
+                        case 1: c.say(t, "I have to fight even harder...!"); break;
+                        default: c.say(t, "I'm supposed to be the strongest!  So why...?");
+                    }
                 } else
                 if(c.finalAttacked % 3 == 1)
                 {
                     Project.changePortrait(c.convertGender(), c.type, false, false, this, nameCombatants(), c.combatantNumber(this), Project.Emotion.STRUGGLE, Project.Emotion.ANGER);
-                    if(c.getDignity() > 66)
-                        c.say(t, "R-Ridiculous!");
-                    else
-                    if(c.getDignity() > 33)
-                        c.say(t, "I won't let you kill me!");
-                    else
-                        c.say(t, "Ergh!");
+                    switch (c.getDignity() / 33) {
+                        case 0: c.say(t, "Ergh!"); break;
+                        case 1: c.say(t, "I won't let you kill me!"); break;
+                        default: c.say(t, "R-Ridiculous!");
+                    }
                 } else
                 if(c.getMorality() > 66)
                 {
@@ -31941,24 +30695,20 @@ public class WorldState
                 if(c.finalAttacked % 3 == 0)
                 {
                     Project.changePortrait(c.convertGender(), c.type, false, false, this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
-                    if(c.getInnocence() > 66)
-                        c.say(t, "N-No fair!  You got way too strong!");
-                    else
-                    if(c.getInnocence() > 33)
-                        c.say(t, "Ugh, they're fast!");
-                    else
-                        c.say(t, "I have grown overly reliant upon my immortality...");
+                    switch (c.getInnocence() / 33) {
+                        case 0: c.say(t, "I have grown overly reliant upon my immortality..."); break;
+                        case 1: c.say(t, "Ugh, they're fast!"); break;
+                        default: c.say(t, "N-No fair!  You got way too strong!");
+                    }
                 } else
                 if(c.finalAttacked % 3 == 1)
                 {
                     Project.changePortrait(c.convertGender(), c.type, false, false, this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
-                    if(c.getDignity() > 66)
-                        c.say(t, "I won't let something like this kill me!");
-                    else
-                    if(c.getDignity() > 33)
-                        c.say(t, "Not yet...!");
-                    else
-                        c.say(t, "I could die here...");
+                    switch (c.getDignity() / 33) {
+                        case 0: c.say(t, "I could die here..."); break;
+                        case 1: c.say(t, "Not yet...!"); break;
+                        default: c.say(t, "I won't let something like this kill me!");
+                    }
                 } else
                 if(c.getMorality() > 66)
                 {
@@ -31979,31 +30729,25 @@ public class WorldState
                 Project.changePortrait(c.convertGender(), c.type, false, false, this, nameCombatants(), c.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.STRUGGLE);
                 if(c.finalAttacked % 3 == 0)
                 {
-                    if(c.getInnocence() > 66)
-                        c.say(t, "I'm scared!  I'm really scared!");
-                    else
-                    if(c.getInnocence() > 33)
-                        c.say(t, "Aaah, no!");
-                    else
-                        c.say(t, "My odds of survival... a-are dropping quickly...");
+                    switch (c.getInnocence() / 33) {
+                        case 0: c.say(t, "My odds of survival... a-are dropping quickly..."); break;
+                        case 1: c.say(t, "Aaah, no!"); break;
+                        default: c.say(t, "I'm scared!  I'm really scared!");
+                    }
                 } else
                 if(c.finalAttacked % 3 == 1)
                 {
-                    if(c.getDignity() > 66)
-                        c.say(t, "I need to stop pretending I can take this...!");
-                    else
-                    if(c.getDignity() > 33)
-                        c.say(t, "I need to call for help!");
-                    else
-                        c.say(t, "Help!  Someone, save me!");
+                    switch (c.getDignity() / 33) {
+                        case 0: c.say(t, "Help!  Someone, save me!"); break;
+                        case 1: c.say(t, "I need to call for help!"); break;
+                        default: c.say(t, "I need to stop pretending I can take this...!");
+                    }
                 } else
-                if(c.getMorality() > 66)
-                    c.say(t, "I said I was willing to sacrifice my life... I really thought I was...");
-                else
-                if(c.getMorality() > 33)
-                    c.say(t, "This is too much for me after all...");
-                else
-                    c.say(t, "This is crazy!  I-I'm not gonna die here!");
+                switch (c.getMorality() / 33) {
+                    case 0: c.say(t, "This is crazy!  I-I'm not gonna die here!"); break;
+                    case 1: c.say(t, "This is too much for me after all..."); break;
+                    default: c.say(t, "I said I was willing to sacrifice my life... I really thought I was...");
+                }
             }
         }
         c.say(t, "\"");
@@ -32015,21 +30759,17 @@ public class WorldState
         append(t, "\n\n" + getSeparator() + "\n\n");
         if(c.finalTaunted == 0)
         {
-            if(c.getDignity() > 66)
-                w.append(t, String.format("The once-respected %s is driven back by a wave of Thralls advancing on %s.  They spit on %2$s and throw balls of trash, shouting lewd threats and raunchy jokes after %2$s.  Although it wouldn't be hard for them to catch up and grab %2$s, they know that this treatment stings %s pride worse than any tortures they could inflict, and the damage to both %3$s self-image and %3$s first impression on the high number of viewers watching the final battle will greatly impact %3$s ability to draw on the psychic energy that fuels %3$s powers.", c.getMainName(), c.himHer(), c.hisHer()));
-            else
-            if(c.getDignity() > 33)
-                w.append(t, String.format("The Thralls close in on %s from all directions, but rather than grabbing %s like they usually do, they just trip %2$s up, shove %2$s around, and grope %2$s a little before letting %2$s go.  The fact that they clearly aren't taking %2$s seriously, combined with the humiliation of being forced into an outfit %s didn't choose, makes %s confidence in %2$sself (and the confidence of those watching illicit broadcasts of the fight) grow dangerously low, to the point that it threatens %4$s supply of psychic energy.", c.getMainName(), c.himHer(), c.heShe(), c.hisHer()));
-            else
-                w.append(t, String.format("Even before %s became a complete laughingstock, %s didn't show much concern for the opinions of the public.  However, the Chosen are dependent on psychic energy received from the rest of humanity to maintain their transformation.  More people than ever are watching broadcasts of the climactic final battle, and the first thing they see is %1$s dressed in Demonically-influenced clothing and being taunted by Thralls who clearly don't even care enough to take the opportunity to immobilize %s.", c.getMainName(), c.heShe(), c.himHer()));
+            switch (c.getDignity() / 33) {
+                case 0: w.append(t, String.format("Even before %s became a complete laughingstock, %s didn't show much concern for the opinions of the public.  However, the Chosen are dependent on psychic energy received from the rest of humanity to maintain their transformation.  More people than ever are watching broadcasts of the climactic final battle, and the first thing they see is %1$s dressed in Demonically-influenced clothing and being taunted by Thralls who clearly don't even care enough to take the opportunity to immobilize %s.", c.getMainName(), c.heShe(), c.himHer())); break;
+                case 1: w.append(t, String.format("The Thralls close in on %s from all directions, but rather than grabbing %s like they usually do, they just trip %2$s up, shove %2$s around, and grope %2$s a little before letting %2$s go.  The fact that they clearly aren't taking %2$s seriously, combined with the humiliation of being forced into an outfit %s didn't choose, makes %s confidence in %2$sself (and the confidence of those watching illicit broadcasts of the fight) grow dangerously low, to the point that it threatens %4$s supply of psychic energy.", c.getMainName(), c.himHer(), c.heShe(), c.hisHer())); break;
+                default: w.append(t, String.format("The once-respected %s is driven back by a wave of Thralls advancing on %s.  They spit on %2$s and throw balls of trash, shouting lewd threats and raunchy jokes after %2$s.  Although it wouldn't be hard for them to catch up and grab %2$s, they know that this treatment stings %s pride worse than any tortures they could inflict, and the damage to both %3$s self-image and %3$s first impression on the high number of viewers watching the final battle will greatly impact %3$s ability to draw on the psychic energy that fuels %3$s powers.", c.getMainName(), c.himHer(), c.hisHer()));
+            }
         } else
-        if(c.getDignity() > 66)
-            w.append(t, String.format("The Thralls continue to tear apart the last shreds of %s's credibility, herding %s this way and that without actually bothering to grab %2$s.  Tears of shame sting %s eyes.", c.getMainName(), c.himHer(), c.hisHer()));
-        else
-        if(c.getDignity() > 33)
-            w.append(t, String.format("%s stumbles out of the crowd of Thralls, only for them to catch up and harass %s some more.  In the eyes of the people watching the battle from afar, %s looks like nothing more than another victim.", c.getMainName(), c.himHer(), c.heShe()));
-        else
-            w.append(t, String.format("As the Thralls make light of %s, %s feels %s transformation waver.  %s can't maintain %s power unless %2$s continues to be viewed as powerful.", c.getMainName(), c.heShe(), c.hisHer(), c.HeShe(), c.hisHer()));
+        switch (c.getDignity() / 33) {
+            case 0: w.append(t, String.format("As the Thralls make light of %s, %s feels %s transformation waver.  %s can't maintain %s power unless %2$s continues to be viewed as powerful.", c.getMainName(), c.heShe(), c.hisHer(), c.HeShe(), c.hisHer())); break;
+            case 1: w.append(t, String.format("%s stumbles out of the crowd of Thralls, only for them to catch up and harass %s some more.  In the eyes of the people watching the battle from afar, %s looks like nothing more than another victim.", c.getMainName(), c.himHer(), c.heShe())); break;
+            default: w.append(t, String.format("The Thralls continue to tear apart the last shreds of %s's credibility, herding %s this way and that without actually bothering to grab %2$s.  Tears of shame sting %s eyes.", c.getMainName(), c.himHer(), c.hisHer()));
+        }
         w.append(t, "\n\n");
         int ai[] = new int[8];
         ai[3] = 200;
@@ -32152,24 +30892,20 @@ public class WorldState
                 if(c.finalTaunted % 3 == 1)
                 {
                     Project.changePortrait(c.convertGender(), c.type, false, false, this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
-                    if(c.getMorality() > 66)
-                        c.say(t, "Everyone... thought they could count on me...");
-                    else
-                    if(c.getMorality() > 33)
-                        c.say(t, "No one respects me anymore...");
-                    else
-                        c.say(t, "They used to be afraid of me.  But now...");
+                    switch (c.getMorality() / 33) {
+                        case 0: c.say(t, "They used to be afraid of me.  But now..."); break;
+                        case 1: c.say(t, "No one respects me anymore..."); break;
+                        default: c.say(t, "Everyone... thought they could count on me...");
+                    }
                 } else
                 if(c.finalTaunted % 3 == 2)
                 {
                     Project.changePortrait(c.convertGender(), c.type, false, false, this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
-                    if(c.getConfidence() > 66)
-                        c.say(t, "I'm... supposed to be strong...!");
-                    else
-                    if(c.getConfidence() > 33)
-                        c.say(t, "I wasn't as strong as they thought I was...");
-                    else
-                        c.say(t, "I was never actually strong in the first place...");
+                    switch (c.getConfidence() / 33) {
+                        case 0: c.say(t, "I was never actually strong in the first place..."); break;
+                        case 1: c.say(t, "I wasn't as strong as they thought I was..."); break;
+                        default: c.say(t, "I'm... supposed to be strong...!");
+                    }
                 }
             } else
             if(c.getDignity() > 33)
@@ -32211,13 +30947,11 @@ public class WorldState
                 if(c.finalTaunted % 3 == 2)
                 {
                     Project.changePortrait(c.convertGender(), c.type, false, false, this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
-                    if(c.getConfidence() > 66)
-                        c.say(t, "I just need to... believe in myself...!");
-                    else
-                    if(c.getConfidence() > 33)
-                        c.say(t, "I can't let them get to me...");
-                    else
-                        c.say(t, "I know I'm weak, stop rubbing it in my face!");
+                    switch (c.getConfidence() / 33) {
+                        case 0: c.say(t, "I know I'm weak, stop rubbing it in my face!"); break;
+                        case 1: c.say(t, "I can't let them get to me..."); break;
+                        default: c.say(t, "I just need to... believe in myself...!");
+                    }
                 }
             } else
             if(c.finalTaunted % 3 == 0)
@@ -32257,13 +30991,11 @@ public class WorldState
             if(c.finalTaunted % 3 == 2)
             {
                 Project.changePortrait(c.convertGender(), c.type, false, false, this, nameCombatants(), c.combatantNumber(this), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
-                if(c.getConfidence() > 66)
-                    c.say(t, "Hah, I think I've become the biggest laughingstock in the city...");
-                else
-                if(c.getConfidence() > 33)
-                    c.say(t, "Are my powers getting weaker...?");
-                else
-                    c.say(t, "I guess they're not wrong about me...");
+                switch (c.getConfidence() / 33) {
+                    case 0: c.say(t, "I guess they're not wrong about me..."); break;
+                    case 1: c.say(t, "Are my powers getting weaker...?"); break;
+                    default: c.say(t, "Hah, I think I've become the biggest laughingstock in the city...");
+                }
             }
         }
         c.say(t, "\"");
@@ -32275,38 +31007,30 @@ public class WorldState
         append(t, "\n\n" + getSeparator() + "\n\n");
         if(c.hypnotized)
         {
-            if(c.innocence > 66)
-                append(t, "As " + c.mainName + "'s pleasure reaches its peak, you release your hypnotic hold on " + c.hisHer() + " mind.  But at this point, " + c.heShe() + "'s been trained so well that " + c.heShe() + " doesn't even need your direct influence.  ");
-            else
-            if(c.innocence > 33)
-                append(t, "Sudden clarity returns to " + c.mainName + "'s mind as you allow " + c.himHer() + " to remember the situation " + c.heShe() + "'s in and everything " + c.heShe() + "'s done.  However, it actually doesn't bother " + c.himHer() + " much.  ");
-            else
-                append(t, "Knowing that " + c.mainName + " has learned to recognize the signs of your hypnotic influence, you release all your control over " + c.hisHer() + " mind so that " + c.heShe() + " knows that the coming decision is " + c.hisHer() + " and " + c.hisHer() + " alone.  ");
+            switch (c.innocence / 33) {
+                case 0: append(t, "Knowing that " + c.mainName + " has learned to recognize the signs of your hypnotic influence, you release all your control over " + c.hisHer() + " mind so that " + c.heShe() + " knows that the coming decision is " + c.hisHer() + " and " + c.hisHer() + " alone.  "); break;
+                case 1: append(t, "Sudden clarity returns to " + c.mainName + "'s mind as you allow " + c.himHer() + " to remember the situation " + c.heShe() + "'s in and everything " + c.heShe() + "'s done.  However, it actually doesn't bother " + c.himHer() + " much.  "); break;
+                default: append(t, "As " + c.mainName + "'s pleasure reaches its peak, you release your hypnotic hold on " + c.hisHer() + " mind.  But at this point, " + c.heShe() + "'s been trained so well that " + c.heShe() + " doesn't even need your direct influence.  ");
+            }
         } else
-        if(c.innocence > 66)
-            append(t, c.mainName + " giggles and closes " + c.hisHer() + " eyes as " + c.heShe() + " prepares for the Thralls to make " + c.himHer() + " cum like always, only to open them back up and blink in confusion when they stop.  ");
-        else
-        if(c.innocence > 33)
-            append(t, c.mainName + " has been both hoping for and dreading this moment, going back and forth in " + c.hisHer() + " mind as to how " + c.heShe() + "'d respond.  But as " + c.hisHer() + " feelings overflow with both lust and affection, " + c.heShe() + " finds " + c.hisHer() + " answer.  ");
-        else
-            append(t, c.mainName + " would have preferred to win this battle, but " + c.heShe() + " had decided beforehand what " + c.heShe() + " would do if defeated looked inevitable.  Now, with " + c.hisHer() + " body being so effortlessly toyed with, " + c.heShe() + " can see no path to victory.  ");
+        switch (c.innocence / 33) {
+            case 0: append(t, c.mainName + " would have preferred to win this battle, but " + c.heShe() + " had decided beforehand what " + c.heShe() + " would do if defeated looked inevitable.  Now, with " + c.hisHer() + " body being so effortlessly toyed with, " + c.heShe() + " can see no path to victory.  "); break;
+            case 1: append(t, c.mainName + " has been both hoping for and dreading this moment, going back and forth in " + c.hisHer() + " mind as to how " + c.heShe() + "'d respond.  But as " + c.hisHer() + " feelings overflow with both lust and affection, " + c.heShe() + " finds " + c.hisHer() + " answer.  "); break;
+            default: append(t, c.mainName + " giggles and closes " + c.hisHer() + " eyes as " + c.heShe() + " prepares for the Thralls to make " + c.himHer() + " cum like always, only to open them back up and blink in confusion when they stop.  ");
+        }
         if(c.parasitized)
         {
-            if(c.morality > 66)
-                append(t, c.HeShe() + " thinks about the ungrateful criticisms " + c.heShe() + "'s faced from human society, and when " + c.heShe() + " compares it to the benevolence of the Thralls asking permission to pleasure " + c.himHer() + " now, " + c.heShe() + " knows that " + c.heShe() + " could never make any other choice.  " + c.HeShe() + " tells the Thralls to hurry and win the battle so that they can have some fun with " + c.himHer() + " afterward.");
-            else
-            if(c.morality > 33)
-                append(t, "When the Thralls remind " + c.himHer() + " of all the fun times they've had together, the last bit of " + c.hisHer() + " resistance melts away, and " + c.heShe() + " pledges to join them against the ungrateful society that " + c.heShe() + " once fought for.");
-            else
-                append(t, "The instant the Thralls ask " + c.himHer() + " to join them, " + c.heShe() + "'s eagerly agreeing.  Part of it is the desire for pleasure, but most of it is spite for the human society that rejected " + c.himHer() + ".");
+            switch (c.morality / 33) {
+                case 0: append(t, "The instant the Thralls ask " + c.himHer() + " to join them, " + c.heShe() + "'s eagerly agreeing.  Part of it is the desire for pleasure, but most of it is spite for the human society that rejected " + c.himHer() + "."); break;
+                case 1: append(t, "When the Thralls remind " + c.himHer() + " of all the fun times they've had together, the last bit of " + c.hisHer() + " resistance melts away, and " + c.heShe() + " pledges to join them against the ungrateful society that " + c.heShe() + " once fought for."); break;
+                default: append(t, c.HeShe() + " thinks about the ungrateful criticisms " + c.heShe() + "'s faced from human society, and when " + c.heShe() + " compares it to the benevolence of the Thralls asking permission to pleasure " + c.himHer() + " now, " + c.heShe() + " knows that " + c.heShe() + " could never make any other choice.  " + c.HeShe() + " tells the Thralls to hurry and win the battle so that they can have some fun with " + c.himHer() + " afterward.");
+            }
         } else
-        if(c.morality > 66)
-            append(t, "The Thralls beg " + c.himHer() + " to join them and keep making them feel good in the same way that they've made " + c.himHer() + " feel good, and " + c.heShe() + " can't make " + c.himHer() + "self refuse them.");
-        else
-        if(c.morality > 33)
-            append(t, "The Thralls ask " + c.himHer() + " whether " + c.heShe() + "'d really be happy never feeling their caresses again, and " + c.heShe() + " has to confess that " + c.heShe() + " wouldn't.");
-        else
-            append(t, "The Thralls offer " + c.himHer() + " even greater heights of pleasure if " + c.heShe() + " returns to the hive with them, and " + c.heShe() + " embraces the realization that " + c.heShe() + " cares less about fame and fortune in the human world than " + c.heShe() + " does about just feeling good.");
+        switch (c.morality / 33) {
+            case 0: append(t, "The Thralls offer " + c.himHer() + " even greater heights of pleasure if " + c.heShe() + " returns to the hive with them, and " + c.heShe() + " embraces the realization that " + c.heShe() + " cares less about fame and fortune in the human world than " + c.heShe() + " does about just feeling good."); break;
+            case 1: append(t, "The Thralls ask " + c.himHer() + " whether " + c.heShe() + "'d really be happy never feeling their caresses again, and " + c.heShe() + " has to confess that " + c.heShe() + " wouldn't."); break;
+            default: append(t, "The Thralls beg " + c.himHer() + " to join them and keep making them feel good in the same way that they've made " + c.himHer() + " feel good, and " + c.heShe() + " can't make " + c.himHer() + "self refuse them.");
+        }
         append(t, "\n\n");
         c.resolve = 0;
         c.defeatType = 5;
