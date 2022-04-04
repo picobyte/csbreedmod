@@ -461,29 +461,29 @@ public class Forsaken
             case 0: takers[0] = Taker.THRALLS; break;
             case 1: takers[0] = Taker.COMMANDER; break;
             case 2: takers[0] = Taker.SELF; break;
-            case 6: takers[0] = Taker.CHOSEN;
-            idefault: takers[0] = Taker.TOGETHER; break;
+            case 6: takers[0] = Taker.CHOSEN; break;
+            default: takers[0] = Taker.TOGETHER;
         }
         switch (c.cTaker) {
             case 0: takers[1] = Taker.THRALLS; break;
             case 1: takers[1] = Taker.COMMANDER; break;
             case 2: takers[1] = Taker.SELF; break;
-            case 6: takers[1] = Taker.CHOSEN;
-            idefault: takers[1] = Taker.TOGETHER; break;
+            case 6: takers[1] = Taker.CHOSEN; break;
+            default: takers[1] = Taker.TOGETHER;
         }
         switch (c.aTaker) {
             case 0: takers[2] = Taker.THRALLS; break;
             case 1: takers[2] = Taker.COMMANDER; break;
             case 2: takers[2] = Taker.SELF; break;
-            case 6: takers[2] = Taker.CHOSEN;
-            idefault: takers[2] = Taker.TOGETHER; break;
+            case 6: takers[2] = Taker.CHOSEN; break;
+            default: takers[2] = Taker.TOGETHER;
         }
         switch (c.mTaker) {
             case 0: takers[3] = Taker.THRALLS; break;
             case 1: takers[3] = Taker.COMMANDER; break;
             case 2: takers[3] = Taker.SELF; break;
-            case 6: takers[3] = Taker.CHOSEN;
-            idefault: takers[3] = Taker.TOGETHER; break;
+            case 6: takers[3] = Taker.CHOSEN; break;
+            default: takers[3] = Taker.TOGETHER;
         }
         stamina = 1000;
         motivation = 1000;
