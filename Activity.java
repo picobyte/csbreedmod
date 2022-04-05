@@ -382,10 +382,7 @@ public class Activity
                     Project.changePortrait(sender.getGender(), sender.getType(), true, sender.isForsaken(), w, shownNames, 0, Project.Emotion.LEWD, Project.Emotion.LEWD);
                     sender.say(t, "AAAGH!  YES!  YES!  PUNISH ME HARDER!");
                 } else
-                if(sender.getDeviancy() > 33)
-                    sender.say(t, "Too much!  It's too much!  Aaagh!");
-                else
-                    sender.say(t, "NNNOOOGH!  S-Stop, please!  I'm serving you, so why...!?");
+                sender.say(t, sender.getDeviancy() > 33 ? "Too much!  It's too much!  Aaagh!" : "NNNOOOGH!  S-Stop, please!  I'm serving you, so why...!?");
             } else
             if(sender.getObedience() > 33)
             {
@@ -623,10 +620,7 @@ public class Activity
                     if(sender.getINJULevel() > 3)
                         sender.say(t, "Let... Let me go...!");
                     else
-                    if(sender.getINJULevel() == 2)
-                        sender.say(t, "Can't you tell I'm getting tired?  Let's just stop here.");
-                    else
-                        sender.say(t, "I can't take this anymore...!");
+                    sender.say(t, sender.getINJULevel() == 2 ? "Can't you tell I'm getting tired?  Let's just stop here." : "I can't take this anymore...!");
                 } else
                 if(sender.getINJULevel() > 3)
                 {
@@ -1690,10 +1684,7 @@ public class Activity
                 if(sender.getDeviancy() > 33)
                 {
                     w.append(t, String.format("%s puts up a bit of resistance.  However, %s's weaker than %2$s should be, and ", sender.OwnerName(), sender.heShe()));
-                    if(sender.parts[PENIS] > 0)
-                        w.append(t, String.format("the stiffness between %s legs", sender.hisHer()));
-                    else
-                        w.append(t, String.format("the wetness on %s thighs", sender.hisHer()));
+                    w.append(t, String.format(sender.parts[PENIS] > 0 ? "the stiffness between %s legs" : "the wetness on %s thighs", sender.hisHer()));
                     w.append(t, String.format(" shows that a part of %s is eager to be punished.", sender.himHer()));
                 } else
                 {

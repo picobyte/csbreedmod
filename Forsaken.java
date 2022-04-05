@@ -1749,10 +1749,7 @@ public class Forsaken
                             } else
                             {
                                 say(t, "I always dream of melting that firm, rational mind of ");
-                                if(x.gender.equals(Gender.MALE))
-                                    say(t, "his");
-                                else
-                                    say(t, "hers");
+                                say(t, x.gender.equals(Gender.MALE) ? "his" : "hers");
                                 say(t, " in a sea of pleasure...  ");
                             }
                         } else
@@ -1767,10 +1764,7 @@ public class Forsaken
                         if(x.innocence > 66)
                         {
                             say(t, "I have to admit that it bothers me to see such an innocent ");
-                            if(x.gender.equals(Gender.MALE))
-                                say(t, "boy");
-                            else
-                                say(t, "girl");
+                            say(t, x.gender.equals(Gender.MALE) ? "boy" : "girl");
                             say(t, " being so sexually forward, but I know it's not " + x.hisHer() + " fault.  ");
                         } else
                         if(x.innocence > 33)
@@ -3232,10 +3226,7 @@ public class Forsaken
         w.append(t, String.format("\n\n%s\n\n%s\n", w.getSeparator(), mainName));
         w.append(t, String.format("Stamina: %.1f%%\nMotivation: %.1f%%", stamina / 10.0f, motivation / 10.0f));
         w.append(t, String.format("\nExpertise\nHATE: %s\nPLEA: %s", condensedFormat(hateExp), condensedFormat(pleaExp)));
-        if(w.tickleOn)
-            w.append(t, "\nANTI: ");
-        else
-            w.append(t, "\nINJU: ");
+        w.append(t, w.tickleOn ? "\nANTI: " : "\nINJU: ");
         w.append(t, String.format("%s\nEXPO: %s\n%s\n\n", condensedFormat(injuExp), condensedFormat(expoExp), describeCombatStyle(w, false)));
         w.underlineAppend(t, "Current Training Intensity / Current Corruption:");
         w.append(t, String.format("\nHostility %s%% / %s%%\nDeviancy %s%% / %s%%\nObedience %s%% / %s%%\nDisgrace %s%% / %s%%\n\n", currentHostility, hostility, currentDeviancy, deviancy, currentObedience, obedience, currentDisgrace, disgrace));
@@ -3455,10 +3446,7 @@ public class Forsaken
                     {
                         w.append(t, " - ");
                         w.redAppend(t, "first ");
-                        if(gender == Gender.MALE)
-                            w.redAppend(t, "anal ");
-                        else
-                            w.redAppend(t, "vaginal ");
+                        w.redAppend(t, gender == Gender.MALE ? "anal " : "vaginal ");
                         w.redAppend(t, "sex");
                     } else
                     if(trainingType == 14 && timesExposed < 300_000)
@@ -3780,10 +3768,7 @@ public class Forsaken
         break;
         case 16:
             w.append(t, String.format("You will have %s demonstrate sexual techniques, whether willingly or unwillingly, on a tentacled body made for this purpose.  ", mainName));
-            if(inPublic)
-                w.append(t, "The assembled crowd will be encouraged to watch and learn.");
-            else
-                w.append(t, "A crowd will be assembled to observe.");
+            w.append(t, inPublic ? "The assembled crowd will be encouraged to watch and learn." : "A crowd will be assembled to observe.");
         break;
         case 17:
             if(w.tickle())
@@ -3880,10 +3865,7 @@ public class Forsaken
             {
                 breakFactor = -20;
                 w.redAppend(t, "-20 (first ");
-                if(gender == Gender.MALE)
-                    w.redAppend(t, "anal sex)");
-                else
-                    w.redAppend(t, "vaginal sex)");
+                w.redAppend(t, gender == Gender.MALE ? "anal sex)" : "vaginal sex)");
             } else
             if(nextTraining == 14 && timesExposed < 300_000)
             {
@@ -5026,10 +5008,7 @@ public class Forsaken
                     if(dignity > 33)
                         say(t, "I need to be strong...");
                     else
-                    if(w.tickle())
-                        say(t, "This... is going to be pretty bad.");
-                    else
-                        say(t, "This... is going to hurt.");
+                    say(t, w.tickle() ? "This... is going to be pretty bad." : "This... is going to hurt.");
                 } else
                 if(obedience < 61)
                 {
@@ -6677,10 +6656,7 @@ public class Forsaken
                     } else
                     {
                         say(t, "To be honest, I'm annoyed at how many people still see me as some sort of untouchable ");
-                        if(gender == Gender.MALE)
-                            say(t, "god.");
-                        else
-                            say(t, "goddess.");
+                        say(t, gender == Gender.MALE ? "god." : "goddess.");
                     }
                 } else
                 switch (dignity / 33) {
@@ -7901,10 +7877,7 @@ public class Forsaken
                 }
             }
             w.append(t, String.format("\n\nThe tentacles smear aphrodisiac fluid all over %s body, twining around %1$s nipples, ", hisHer()));
-            if(gender == Gender.MALE)
-                w.append(t, String.format("caressing %s balls", hisHer()));
-            else
-                w.append(t, String.format("squeezing %s breasts", hisHer()));
+            w.append(t, String.format(gender == Gender.MALE ? "caressing %s balls" : "squeezing %s breasts", hisHer()));
             if(timesTortured > 0 || enjoyedAnal > 0)
             {
                 if(w.tickle())
@@ -8277,10 +8250,7 @@ public class Forsaken
             } else
             {
                 w.append(t, String.format("Afterward, %s has to restrain %sself from rushing off to find %s right away.  %s longs to hear %s's screams and cries, and even imagining them is enough to make %2$s ", heShe(), himHer(), subject.mainName, HeShe(), subject.mainName));
-                if(gender == Gender.FEMALE)
-                    w.append(t, "wet.");
-                else
-                    w.append(t, "hard.");
+                w.append(t, gender == Gender.FEMALE ? "wet." : "hard.");
             }
         } else
         if(nextTraining == 20)
@@ -8393,10 +8363,7 @@ public class Forsaken
             } else
             {
                 w.append(t, String.format("%s quickly sheds %s clothes, but that's only the beginning.  %1$s spreads ", HeShe(), hisHer()));
-                if(gender == Gender.MALE)
-                    w.append(t, "anus");
-                else
-                    w.append(t, "pussy and anus both");
+                w.append(t, gender == Gender.MALE ? "anus" : "pussy and anus both");
                 w.append(t, String.format(" as wide as %s can for the watching crowd, then begins to masturbate right there on stage.  ", heShe()));
             }
             Forsaken subject = null;
@@ -8459,10 +8426,7 @@ public class Forsaken
                 } else
                 {
                     w.append(t, String.format("%s abruptly climbs onto the stage and demands that %s ", subject.mainName, mainName));
-                    if(subject.gender == Gender.FEMALE)
-                        w.append(t, String.format("lick %s pussy", subject.hisHer()));
-                    else
-                        w.append(t, String.format("suck %s cock", subject.hisHer()));
+                    w.append(t, String.format(subject.gender == Gender.FEMALE ? "lick %s pussy" : "suck %s cock", subject.hisHer()));
                     w.append(t, String.format(".  %s feels that %s has no choice but to comply, glaring up at %s rival as %2$s submits to %s in front of everyone.", mainName, heShe(), hisHer(), subject.himHer()));
                 }
             } else
@@ -8573,10 +8537,7 @@ public class Forsaken
                 } else
                 {
                     w.append(t, String.format("%s eyes go wide with anticipation as the man fucking %s abruptly seizes %s hips, and then %s's crying out with every thrust into %s ", HisHer(), himHer(), hisHer(), heShe(), hisHer()));
-                    if(vaginal)
-                        w.append(t, "pussy.  ");
-                    else
-                        w.append(t, "ass.  ");
+                    w.append(t, vaginal ? "pussy.  " : "ass.  ");
                 }
             } else
             {
@@ -8711,22 +8672,13 @@ public class Forsaken
                             w.append(t, String.format("%s starts to ", mainName));
                         else
                             w.append(t, String.format("%s tries to pull the cock out of %s mouth for a moment to ", mainName, hisHer()));
-                        if(consenting && currentTraining[6])
-                            w.append(t, "ask whether the Thralls are doing alright, ");
-                        else
-                            w.append(t, "ask for a quick break, ");
+                        w.append(t, consenting && currentTraining[6] ? "ask whether the Thralls are doing alright, " : "ask for a quick break, ");
                         w.append(t, String.format("but before %s has a chance, ", heShe()));
-                        if(vaginal && anal)
-                            w.append(t, "another pair of cocks has been thrusted ");
-                        else
-                            w.append(t, "another cock is thrust ");
+                        w.append(t, vaginal && anal ? "another pair of cocks has been thrusted " : "another cock is thrust ");
                         w.append(t, String.format("inside %s with complete disregard for %s comfort.", himHer(), hisHer()));
                     } else
                     {
-                        if(vaginal && anal)
-                            w.append(t, "When they pull ");
-                        else
-                            w.append(t, "When the man pulls ");
+                        w.append(t, vaginal && anal ? "When they pull " : "When the man pulls ");
                         w.append(t, String.format("out, %s is ready to heave a sigh of relief, but %s's horrified to be abruptly penetrated again, %s aching body being given no chance to enjoy the afterglow.", mainName, heShe(), hisHer()));
                     }
                 } else
@@ -9662,10 +9614,7 @@ public class Forsaken
                     if(currentTraining[3])
                     {
                         w.append(t, String.format("The crowd surges forward, pulling the tail back out of %s ass in order to ", hisHer()));
-                        if(vaginal)
-                            w.append(t, String.format("pound both %s lower holes at once.  ", hisHer()));
-                        else
-                            w.append(t, String.format("pound %s ass.  ", hisHer()));
+                        w.append(t, String.format(vaginal ? "pound both %s lower holes at once.  " : "pound %s ass.  ", hisHer()));
                     } else
                     if(vaginal)
                         w.append(t, String.format("With its lust stoked even further, the crowd rushes in again, pounding both %s lower holes at once.  ", hisHer()));
@@ -9772,10 +9721,7 @@ public class Forsaken
                     } else
                     {
                         w.append(t, String.format("person who steps forward to line his cock up with %s's ", mainName));
-                        if(anal)
-                            w.append(t, "anus");
-                        else
-                            w.append(t, "lower lips");
+                        w.append(t, anal ? "anus" : "lower lips");
                         w.append(t, " and thrust his way inside.  ");
                     }
                     if(oral)
@@ -9917,10 +9863,7 @@ public class Forsaken
                     w.append(t, String.format(", eagerly pulling %s legs apart and shoving each other aside as they compete to see who gets to violate %s.  However, %s's still able to fight back, ", hisHer(), himHer(), heShe()));
                 } else
                 {
-                    if(inPublic)
-                        w.append(t, String.format("The surrounding Thralls mob %s", mainName));
-                    else
-                        w.append(t, String.format("A mob of Thralls ambushes %s", mainName));
+                    w.append(t, String.format(inPublic ? "The surrounding Thralls mob %s" : "A mob of Thralls ambushes %s", mainName));
                     w.append(t, String.format(", and while %s's able to hold them off at first, their sheer numbers are too much for %s to handle.  Soon, %1$s's reduced to ", heShe(), himHer()));
                 }
                 w.append(t, String.format("kicking and punching with all %s strength, but that isn't enough to stop them for long.", hisHer()));
@@ -14832,10 +14775,7 @@ public class Forsaken
                             if(flavorDeviancy() > 66)
                                 c.say(t, "H-Hey, where are you touching!?");
                             else
-                            if(deviancy > 33)
-                                c.say(t, "You don't have to look so pleased with yourself!");
-                            else
-                                c.say(t, "Hey, stop that!");
+                            c.say(t, deviancy > 33 ? "You don't have to look so pleased with yourself!" : "Hey, stop that!");
                             c.say(t, "\"\n\n");
                             say(t, "\"");
                             switch (innocence / 33) {
@@ -15861,10 +15801,7 @@ public class Forsaken
                     if(flavorDeviancy() > 66)
                         say(t, "And wait until you hear what I'm gonna do with your warm corpse!");
                     else
-                    if(disgrace > 33)
-                        say(t, "I'm going to make you scream in all sorts of ways...");
-                    else
-                        say(t, "Are you ready to die?");
+                    say(t, disgrace > 33 ? "I'm going to make you scream in all sorts of ways..." : "Are you ready to die?");
                     say(t, "\"\n\n");
                     c.say(t, "\"");
                     Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.SHAME);
@@ -16151,10 +16088,7 @@ public class Forsaken
                             else
                             if(innocence > 33)
                             {
-                                if(c.gender.equals("female"))
-                                    say(t, c.HeShe() + "'s sopping wet!  ");
-                                else
-                                    say(t, c.HeShe() + "'s rock hard!  ");
+                                say(t, c.HeShe() + (c.gender.equals("female") ? "'s sopping wet!  " : "'s rock hard!  "));
                                 say(t, "Take a good look with your cameras when " + c.heShe() + " comes around!");
                             } else
                             {
@@ -16258,10 +16192,7 @@ public class Forsaken
                             case 1:
                                 Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
                                 say(t, "The slut");
-                                if(c.gender.equals("female"))
-                                    say(t, "'s sopping wet down there!");
-                                else
-                                    say(t, "'s getting rock hard from this!");
+                                say(t, c.gender.equals("female") ? "'s sopping wet down there!" : "'s getting rock hard from this!");
                             break;
                             default:
                                 Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
@@ -20218,10 +20149,7 @@ public class Forsaken
                                 say(t, c.mainName + " is staring at my ");
                             else
                                 say(t, "You don't have time to stare at my ");
-                            if(gender == Gender.FEMALE)
-                                say(t, "dildo!");
-                            else
-                                say(t, "cock!");
+                            say(t, gender == Gender.FEMALE ? "dildo!" : "cock!");
                         break;
                         case 1:
                             if(obsessedWith(c))
@@ -20264,10 +20192,7 @@ public class Forsaken
                             if(obsessedWith(c))
                             {
                                 say(t, "Aaah, I'm going to corrupt " + c.mainName + " with my ");
-                                if(gender == Gender.FEMALE)
-                                    say(t, "toy!");
-                                else
-                                    say(t, "cock!");
+                                say(t, gender == Gender.FEMALE ? "toy!" : "cock!");
                             } else
                             {
                                 say(t, "Are you even smart enough to realize what's about to happen?");
@@ -20275,15 +20200,9 @@ public class Forsaken
                         } else
                         if(c.innocence > 33)
                         {
-                            if(obsessedWith(c))
-                                say(t, "You want this inside you, too!  I know you do!");
-                            else
-                                say(t, "Are you even trying to stop me?");
+                            say(t, obsessedWith(c) ? "You want this inside you, too!  I know you do!" : "Are you even trying to stop me?");
                         } else
-                        if(obsessedWith(c))
-                            say(t, "Those cold eyes... I want to melt them with pleasure...!");
-                        else
-                            say(t, "You should know how this is going to end.");
+                        say(t, obsessedWith(c) ? "Those cold eyes... I want to melt them with pleasure...!" : "You should know how this is going to end.");
                         if(obsessedWith(c))
                             Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.FOCUS);
                         else
@@ -20309,10 +20228,7 @@ public class Forsaken
                         say(t, "\"");
                         if(knowsPersonally(c))
                         {
-                            if(isFormerFriend(c))
-                                say(t, "I didn't want to get this rough with you...");
-                            else
-                                say(t, "Ah, I love being so much more powerful than you!");
+                            say(t, isFormerFriend(c) ? "I didn't want to get this rough with you..." : "Ah, I love being so much more powerful than you!");
                         } else
                         if(c.confidence > 66)
                         {
@@ -20323,10 +20239,7 @@ public class Forsaken
                         } else
                         if(c.confidence > 33)
                         {
-                            if(obsessedWith(c))
-                                say(t, "Finally... have my hands on you...!");
-                            else
-                                say(t, "I've got you.");
+                            say(t, obsessedWith(c) ? "Finally... have my hands on you...!" : "I've got you.");
                         } else
                         if(obsessedWith(c))
                             say(t, "Yes...  Submit to me, " + c.mainName + "...!");
@@ -20381,10 +20294,7 @@ public class Forsaken
                     } else
                     if(c.confidence > 33)
                     {
-                        if(obsessedWith(c))
-                            say(t, "I've waited too long for this!");
-                        else
-                            say(t, "Got you!");
+                        say(t, obsessedWith(c) ? "I've waited too long for this!" : "Got you!");
                     } else
                     if(obsessedWith(c))
                         say(t, c.mainName + ", " + c.mainName + ", so cuuute!");
@@ -20408,10 +20318,7 @@ public class Forsaken
                     } else
                     if(c.innocence > 66)
                     {
-                        if(obsessedWith(c))
-                            say(t, "Come on, come on, try to hit me!");
-                        else
-                            say(t, "Your clumsiness is so cute!");
+                        say(t, obsessedWith(c) ? "Come on, come on, try to hit me!" : "Your clumsiness is so cute!");
                     } else
                     if(c.innocence > 33)
                     {
@@ -20431,12 +20338,10 @@ public class Forsaken
                     say(t, "\"\n\n");
                     c.say(t, "\"");
                     switch (c.morality / 33) {
-                    case 0:
-                        c.say(t, "Nnnah!  You dirty little...!");
+                    case 0: c.say(t, "Nnnah!  You dirty little...!");
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
                     break;
-                    case 1:
-                        c.say(t, "Pull... out...!");
+                    case 1: c.say(t, "Pull... out...!");
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.STRUGGLE, Project.Emotion.ANGER);
                     break;
                     default:
@@ -20462,10 +20367,7 @@ public class Forsaken
                         } else
                         {
                             say(t, "Hey, look at my ");
-                            if(gender == Gender.FEMALE)
-                                say(t, "dildo!");
-                            else
-                                say(t, "cock!");
+                            say(t, gender == Gender.FEMALE ? "dildo!" : "cock!");
                         }
                     } else
                     if(c.innocence > 33)
@@ -20517,12 +20419,10 @@ public class Forsaken
                         say(t, "\"\n\n");
                         c.say(t, "\"");
                         switch (c.confidence / 33) {
-                        case 0:
-                            c.say(t, "Nooo!");
+                        case 0: c.say(t, "Nooo!");
                             Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.SHAME);
                         break;
-                        case 1:
-                            c.say(t, "Don't- Don't look!");
+                        case 1: c.say(t, "Don't- Don't look!");
                             Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.SHAME);
                         break;
                         default:
@@ -20546,10 +20446,7 @@ public class Forsaken
                         case 0:
                             Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.NEUTRAL, Project.Emotion.FOCUS);
                             say(t, "If you don't like it, then try getting off my ");
-                            if(gender == Gender.FEMALE)
-                                say(t, "dildo.");
-                            else
-                                say(t, "cock.");
+                            say(t, gender == Gender.FEMALE ? "dildo." : "cock.");
                         break;
                         case 1:
                             Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.FOCUS, Project.Emotion.JOY);
@@ -20931,10 +20828,7 @@ public class Forsaken
                         if(timesOrgasmed > 0)
                             timesOrgasmed++;
                     } else
-                    if(flavorDeviancy() > 33)
-                        say(t, "Seeing you resist makes it so much sexier...!");
-                    else
-                        say(t, "Hm, you're pretty perverted.");
+                    say(t, flavorDeviancy() > 33 ? "Seeing you resist makes it so much sexier...!" : "Hm, you're pretty perverted.");
                 } else
                 {
                     switch (c.confidence / 33) {
@@ -21253,22 +21147,13 @@ public class Forsaken
                 c.say(t, "\"");
                 if(c.confidence > 66)
                 {
-                    if(w.tickleOn)
-                        c.say(t, "Ngh!  Mrgh!  Gah!  Gahahah, hahah, hahahahah!");
-                    else
-                        c.say(t, "Ngh!  Mrgh!  Gah!?  Nnnoooh!");
+                    c.say(t, w.tickleOn ? "Ngh!  Mrgh!  Gah!  Gahahah, hahah, hahahahah!" : "Ngh!  Mrgh!  Gah!?  Nnnoooh!");
                 } else
                 if(c.confidence > 33)
                 {
-                    if(w.tickleOn)
-                        c.say(t, "Ahah!?  Ahahahah!  W-Wait, st-ahahahahah!");
-                    else
-                        c.say(t, "Agh!?  W-Wait, st-AAAGH!  No, no!  AAAH!");
+                    c.say(t, w.tickleOn ? "Ahah!?  Ahahahah!  W-Wait, st-ahahahahah!" : "Agh!?  W-Wait, st-AAAGH!  No, no!  AAAH!");
                 } else
-                if(w.tickleOn)
-                    c.say(t, "N-No!  Please!  Nnnnaaahahahah, ahahahah!");
-                else
-                    c.say(t, "N-No!  Please!  AaaaAAAAGH!");
+                c.say(t, w.tickleOn ? "N-No!  Please!  Nnnnaaahahahah, ahahahah!" : "N-No!  Please!  AaaaAAAAGH!");
                 c.say(t, "\"\n\n");
                 if(knowsPersonally(c))
                 {
@@ -22312,10 +22197,7 @@ public class Forsaken
                     break;
                     case 1:
                         c.say(t, "You, and you!  Play with " + hisHer() + " nipples!  And you, lick " + hisHer() + " c-");
-                        if(gender == Gender.FEMALE)
-                            c.say(t, "clit.\"\n\n");
-                        else
-                            c.say(t, "cock.\"\n\n");
+                        c.say(t, gender == Gender.FEMALE ? "clit.\"\n\n" : "cock.\"\n\n");
                         say(t, "\"Mm...  You'll make... glck... a wonderful Forsaken...");
                         Project.changePortrait(c.convertGender(), c.type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FOCUS, Project.Emotion.JOY);
                         Project.changePortrait(gender, type, false, true, w, w.nameCombatants(), 3, Project.Emotion.LEWD, Project.Emotion.JOY);
@@ -23449,10 +23331,7 @@ public class Forsaken
                         if(c.gender.equals("male"))
                             w.append(t, "exposed bottom.");
                         else
-                        if(c.gender.equals("female"))
-                            w.append(t, "bare pussy.");
-                        else
-                            w.append(t, "hermaphroditic genitals.");
+                        w.append(t, c.gender.equals("female") ? "bare pussy." : "hermaphroditic genitals.");
                     } else
                     if(flavorObedience() > 33)
                         w.append(t, String.format("As they fight, flashing cameras surround %s and %s.  %1$s has taken notice, and %s baits plenty of high kicks, flips, and other moves that emphasize how %s is no longer covered in the slighteset by what's left of %s %s.", mainName, c.mainName, heShe(), reference(c), c.hisHer(), c.bottomDesc()));
@@ -23612,10 +23491,7 @@ public class Forsaken
                         if(innocence > 33)
                         {
                             w.append(t, String.format("With %s on the back foot, %s is able to keep %s off-balance by repeatedly switching targets, %s %s hitting %1$s's %s, then %s head, then %7$s %s", c.mainName, mainName, c.himHer(), hisHer(), weapon, c.topDesc(), c.hisHer(), c.bottomDesc()));
-                            if(c.topDesc().equals(c.bottomDesc()))
-                                w.append(t, " again.  ");
-                            else
-                                w.append(t, ".  ");
+                            w.append(t, c.topDesc().equals(c.bottomDesc()) ? " again.  " : ".  ");
                         } else
                         {
                             w.append(t, String.format("%s's strikes with %s %s are precise but unpredictable.  When %s is guarding %s vitals, %1$s hits %5$s clothes.  When %s is protecting %s clothes, %1$s hits %s where it hurts.  ", mainName, hisHer(), weapon, c.mainName, c.hisHer(), c.mainName, c.hisHer(), c.himHer()));
@@ -23853,10 +23729,7 @@ public class Forsaken
                     } else
                     {
                         w.append(t, String.format("Naturally, the first thing that comes to %s's mind is to make %s cum as well.  %s sighs with pleasure, both the physical pleasure of %1$s's ", c.mainName, c.reference(this), mainName));
-                        if(gender == Gender.FEMALE)
-                            w.append(t, String.format("fingers in %s pussy", hisHer()));
-                        else
-                            w.append(t, String.format("hands and mouth on %s cock", hisHer()));
+                        w.append(t, String.format(gender == Gender.FEMALE ? "fingers in %s pussy" : "hands and mouth on %s cock", hisHer()));
                         w.append(t, String.format(" and the mental pleasure of seeing how much %s enjoys being in control for once.", c.mainName));
                     }
                 }
@@ -23893,10 +23766,7 @@ public class Forsaken
                     if(c.gender.equals("male") || c.gender.equals("futanari") && Math.random() > 0.5D)
                     {
                         w.append(t, String.format("%s and %s spitroast a female Thrall together, %2$s in her pussy and %1$s", mainName, c.mainName));
-                        if(gender == Gender.FEMALE)
-                            w.append(t, " sitting on her face.  ");
-                        else
-                            w.append(t, " down her throat.  ");
+                        w.append(t, gender == Gender.FEMALE ? " sitting on her face.  " : " down her throat.  ");
                         switch (flavorDeviancy() / 33) {
                             case 0: w.append(t, String.format("%s smirks at %s reaching over to tweak %s nipple and squeeze %3$s butt as %s cums inside.", mainName, c.mainName, c.hisHer(), c.heShe())); break;
                             case 1: w.append(t, String.format("The two of them make out as they buck their hips, %s's tongue exploring %s's mouth.", mainName, reference(c))); break;
@@ -23911,18 +23781,12 @@ public class Forsaken
                         if(innocence > 33)
                         {
                             w.append(t, String.format("At first, %s looks uncomfortable, but %s has grown skilled at this, and once %s finds %s's ", c.mainName, mainName, heShe(), reference(c)));
-                            if(c.gender.equals("male"))
-                                w.append(t, "prostate");
-                            else
-                                w.append(t, "g-spot");
+                            w.append(t, c.gender.equals("male") ? "prostate" : "g-spot");
                             w.append(t, String.format(", %s's moans and cries are all pleasure.", c.mainName));
                         } else
                         {
                             w.append(t, String.format("Explaining how %s's looking for %s's ", heShe(), reference(c)));
-                            if(c.gender.equals("male"))
-                                w.append(t, "prostate");
-                            else
-                                w.append(t, "g-spot");
+                            w.append(t, c.gender.equals("male") ? "prostate" : "g-spot");
                             w.append(t, String.format(", %s methodically changes the angle of %s penetration bit-by-bit.  When %s finally squeals and scrunches up %s toes, a smile of satisfaction comes to %1$s's face.", mainName, hisHer(), c.mainName, c.hisHer()));
                         }
                     }
@@ -24276,10 +24140,7 @@ public class Forsaken
                     default: w.append(t, "Roaring out a challenge, ");
                 }
                 w.append(t, String.format("%s hurls an enormous blast of dark energy at %s, who is shocked to find %sself laying on the ground afterward, trails of smoke rising from ", mainName, c.getMainName(), c.himHer()));
-                if(c.getEXPOLevel() < 2)
-                    w.append(t, String.format("%s clothes.", c.hisHer()));
-                else
-                    w.append(t, String.format("the remains of %s clothes.", c.hisHer()));
+                w.append(t, String.format(c.getEXPOLevel() < 2 ? "%s clothes." : "the remains of %s clothes.", c.hisHer()));
             } else
             if(c.getConfidence() > 33)
             {
@@ -24567,10 +24428,7 @@ public class Forsaken
                         } else
                         {
                             w.append(t, String.format("and while %s initially flees, %s fights ferociously once cornered, rounding on %s to ", mainName, heShe(), c.getMainName()));
-                            if(w.tickle())
-                                w.append(t, String.format("desperately try to tickle %s.", c.himHer()));
-                            else
-                                w.append(t, String.format("kick, punch, and bite %s.", c.himHer()));
+                            w.append(t, String.format(w.tickle() ? "desperately try to tickle %s." : "kick, punch, and bite %s.", c.himHer()));
                         }
                     }
                 } else
@@ -24582,10 +24440,7 @@ public class Forsaken
                         case 1: w.append(t, String.format("but it isn't enough to stop %s from charging forward to grab %s", himHer(), c.getMainName())); break;
                         default: w.append(t, String.format("but %s is able to pretend that it didn't hurt at all, walking calmly up to %s to grab %s by the throat", mainName, reference(c), c.himHer()));
                     }
-                    if(w.tickle())
-                        w.append(t, String.format(" and start mercilessly tickling %s.", c.himHer()));
-                    else
-                        w.append(t, String.format(" and begin crushing the life out of %s.", c.himHer()));
+                    w.append(t, String.format(w.tickle() ? " and start mercilessly tickling %s." : " and begin crushing the life out of %s.", c.himHer()));
                 } else
                 if(c.getInnocence() > 33)
                 {
@@ -24756,10 +24611,7 @@ public class Forsaken
                         } else
                         {
                             w.append(t, String.format("%s tries to pull away from %s's ", c.getMainName(), mainName));
-                            if(w.tickle())
-                                w.append(t, "tickling, ");
-                            else
-                                w.append(t, "brutal pummeling, ");
+                            w.append(t, w.tickle() ? "tickling, " : "brutal pummeling, ");
                             switch (innocence / 33) {
                                 case 0: w.append(t, String.format("but %s grabs %s by the %s, using %s's struggling to help tear through the durable material.", mainName, c.himHer(), bottomDesc, reference(c))); break;
                                 case 1: w.append(t, String.format("but only succeeds in tearing apart %s own clothes as %s clings to every dangling scrap in order to keep %s there.", c.hisHer(), c.reference(this), c.himHer())); break;
@@ -24775,10 +24627,7 @@ public class Forsaken
                             default: w.append(t, String.format("Completely helpless with %s brutally holding %s down, ", mainName, c.himHer()));
                         }
                         w.append(t, String.format("%s panics and thrashes wildly, ", c.getMainName()));
-                        if(w.tickle())
-                            w.append(t, "hurting");
-                        else
-                            w.append(t, "exhausting");
+                        w.append(t, w.tickle() ? "hurting" : "exhausting");
                         w.append(t, String.format(" %sself and tearing %s own clothes apart with %2$s frantic motions.", c.himHer(), c.hisHer()));
                     } else
                     if(c.getInnocence() > 33)
@@ -24795,10 +24644,7 @@ public class Forsaken
                     } else
                     {
                         w.append(t, String.format("In order to escape %s's ", mainName));
-                        if(w.tickle())
-                            w.append(t, "tickling");
-                        else
-                            w.append(t, "pummeling");
+                        w.append(t, w.tickle() ? "tickling" : "pummeling");
                         w.append(t, String.format(", %s ", c.getMainName()));
                         switch (flavorDeviancy() / 33) {
                             case 0: w.append(t, String.format("waits for %s to let %s guard down, then ", c.reference(this), hisHer())); break;
@@ -24836,10 +24682,7 @@ public class Forsaken
                             default: w.append(t, String.format("%s sees a chance to get some distance between %sself and %s opponent, and with a carefully-placed kick, %s ", c.getMainName(), c.himHer(), c.hisHer(), heShe()));
                         }
                         w.append(t, String.format("pushes %s away.  The impact is surprisingly strong, and %1$s takes long enough to recover that %s is able to earn a significant respite from %s ", mainName, reference(c), hisHer()));
-                        if(w.tickle())
-                            w.append(t, "tickling.");
-                        else
-                            w.append(t, "pummeling.");
+                        w.append(t, w.tickle() ? "tickling." : "pummeling.");
                     }
                 } else
                 if(disgrace > 33)
@@ -24853,10 +24696,7 @@ public class Forsaken
                             default: w.append(t, String.format("%s's overwhelming lust for %s", mainName, reference(c)));
                         }
                         w.append(t, ", the two of them ");
-                        if(w.tickle())
-                            w.append(t, "tickle each other");
-                        else
-                            w.append(t, "exchange punches");
+                        w.append(t, w.tickle() ? "tickle each other" : "exchange punches");
                         w.append(t, " until they're both exhausted and can only stagger apart, catching their breath.");
                     } else
                     if(c.getInnocence() > 33)
@@ -26562,15 +26402,13 @@ public class Forsaken
 
     public long expMultiplier(long exp)
     {
-        long value = 1000L;
         if(exp < 20000L)
-            value = exp / 20L;
-        else
-            while(exp > 20000L) 
-            {
-                exp = (exp * 0x183faL) / 100_000L;
-                value++;
-            }
+            return exp / 20L;
+        long value = 1_000L;
+        while(exp > 20_000L) {
+            exp = (exp * 99_322L) / 100_000L;
+            value++;
+        }
         return value;
     }
 
@@ -26590,14 +26428,8 @@ public class Forsaken
     public String reference(Chosen c)
     {
         if(knowsPersonally(c))
-            if(isFormerFriend(c))
-                return hisHer() + " beloved former partner";
-            else
-                return hisHer() + " old rival";
-        if(obsessedWith(c))
-            return "the target of " + hisHer() + " obsession";
-        else
-            return "the Chosen";
+            return hisHer() + (isFormerFriend(c) ? " beloved former partner" : " old rival");
+        return obsessedWith(c) ? "the target of " + hisHer() + " obsession" : "the Chosen";
     }
 
     public int flavorHostility()
@@ -26628,50 +26460,32 @@ public class Forsaken
 
     public String himHer()
     {
-        if(gender == Gender.MALE)
-            return "him";
-        else
-            return "her";
+        return gender == Gender.MALE ? "him" : "her";
     }
 
     public String hisHer()
     {
-        if(gender == Gender.MALE)
-            return "his";
-        else
-            return "her";
+        return gender == Gender.MALE ? "his" : "her";
     }
 
     public String heShe()
     {
-        if(gender == Gender.MALE)
-            return "he";
-        else
-            return "she";
+        return gender == Gender.MALE ? "he" : "she";
     }
 
     public String HimHer()
     {
-        if(gender == Gender.MALE)
-            return "Him";
-        else
-            return "Her";
+        return gender == Gender.MALE ? "Him" : "Her";
     }
 
     public String HisHer()
     {
-        if(gender == Gender.MALE)
-            return "His";
-        else
-            return "Her";
+        return gender == Gender.MALE ? "His" : "Her";
     }
 
     public String HeShe()
     {
-        if(gender == Gender.MALE)
-            return "He";
-        else
-            return "She";
+        return gender == Gender.MALE ? "He" : "She";
     }
 
     public void say(JTextPane t, String s)
@@ -26808,80 +26622,58 @@ public class Forsaken
 
     public Boolean equals(Forsaken x)
     {
-        if(this == null || x == null)
-            return false;
-        if(forsakenID == x.forsakenID)
-            return true;
-        else
-            return false;
+        return this != null && x != null && forsakenID == x.forsakenID;
     }
 
     public Boolean knowsPersonally(Forsaken x)
     {
-        Boolean result = false;
-        if(x == null)
-            return false;
-        for(int i = 0; i < others.length; i++)
-            if(x.equals(others[i]) && forsakenRelations[i] == Relationship.PARTNER)
-                result = true;
-
-        return result;
+        if(x != null)
+            for(int i = 0; i < others.length; i++)
+                if(x.equals(others[i]) && forsakenRelations[i] == Relationship.PARTNER)
+                    return true;
+        return false;
     }
 
     public Boolean knowsPersonally(Chosen c)
     {
-        Boolean result = false;
-        if(c == null)
-            return false;
-        for(int i = 0; i < otherChosen.length; i++)
-            if(c.equals(otherChosen[i]) && chosenRelations[i] == Relationship.PARTNER)
-                result = true;
-
-        return result;
+        if(c != null)
+            for(int i = 0; i < otherChosen.length; i++)
+                if(c.equals(otherChosen[i]) && chosenRelations[i] == Relationship.PARTNER)
+                    return true;
+        return false;
     }
 
     public Boolean isFormerFriend(Chosen c)
     {
-        Boolean result = false;
-        if(c == null)
-            return false;
-        for(int i = 0; i < formerPartners.length; i++)
-            if(c.equals(formerPartners[i]) && formerFriendships[i] >= 0)
-                result = true;
+        if(c != null)
+            for(int i = 0; i < formerPartners.length; i++)
+                if(c.equals(formerPartners[i]) && formerFriendships[i] >= 0)
+                    return true;
 
-        return result;
+        return false;
     }
 
     public Boolean obsessedWith(Chosen c)
     {
-        Boolean result = false;
-        if(c == null)
-            return false;
-        for(int i = 0; i < otherChosen.length; i++)
-            if(c.equals(otherChosen[i]) && chosenRelations[i] == Relationship.OBSESSION)
-                result = true;
-
-        return result;
+        if(c != null)
+            for(int i = 0; i < otherChosen.length; i++)
+                if(c.equals(otherChosen[i]) && chosenRelations[i] == Relationship.OBSESSION)
+                    return true;
+        return false;
     }
 
     public Boolean obsessedWith(Forsaken x)
     {
-        Boolean result = false;
-        if(x == null)
-            return false;
-        for(int i = 0; i < others.length; i++)
-            if(x.equals(others[i]) && forsakenRelations[i] == Relationship.OBSESSION)
-                result = true;
-
-        return result;
+        if(x != null)
+            for(int i = 0; i < others.length; i++)
+                if(x.equals(others[i]) && forsakenRelations[i] == Relationship.OBSESSION)
+                    return true;
+        return false;
     }
 
     public String bottomDesc()
     {
-        if(bottomCover.equals("strips"))
-            return "strips of cloth";
-        else
-            return bottomCover;
+        return bottomCover.equals("strips") ? "strips of cloth" : bottomCover;
     }
 
     public void pickEpithet()
