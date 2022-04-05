@@ -889,26 +889,28 @@ public class Forsaken
                 case 1: say(t, "I used to be called... " + mainName + ".  "); break;
                 default: say(t, "I'm just " + theDemonLord() + "'s tool.  I don't really want a name anymore, but people still call me '" + mainName + "'.  ");
             }
-            if(defeatType == 0)
+            switch (defeatType) {
+            case 0:
                 say(t, "I used to be so attached to my life.  But you showed me that it's worthless on its own.  I can't thank you enough.  ");
-            else
-            if(defeatType == 1)
+            break;
+            case 1:
                 say(t, "I joined you at first because I thought the human side was doing bad things.  But now I realize that the only bad thing is to oppose you, and the only good thing is to serve you.  Nothing else matters.  ");
-            else
-            if(defeatType == 2)
+            break;
+            case 2:
                 say(t, "I don't really remember who I was before.  But that doesn't really matter, right?  It helps me focus on serving you.  ");
-            else
-            if(defeatType == 3)
+            break;
+            case 3:
                 say(t, "I wanted to die, once, but then you gave my life purpose.  It belongs to you, now.  ");
-            else
-            if(defeatType == 4)
+            break;
+            case 4:
                 say(t, "I'm just another part of the masses that serve you.  It feels really nice, not having to be alone...  ");
-            else
-            if(defeatType == 5)
+            break;
+            case 5:
                 say(t, "I joined you because you made me feel good, but you don't have to worry about doing that anymore.  I'm all yours regardless.  ");
-            else
-            if(defeatType == 6)
+            break;
+            case 6:
                 say(t, "I think... you created me.  As your tool.  To hurt people.  ");
+            }
             if(flavorHostility() > 66)
             {
                 switch (morality / 33) {
@@ -3332,9 +3334,7 @@ public class Forsaken
         trainingNames[14] = "Broadcast";
         trainingNames[15] = "Force Orgasm";
         trainingNames[16] = "Tentacle Show";
-        trainingNames[17] = "Mangle";
-        if(w.tickleOn)
-            trainingNames[17] = "Force Laughter";
+        trainingNames[17] = w.tickleOn ? "Force Laughter" : "Mangle";
         trainingNames[18] = "Assist Raid";
         trainingNames[19] = "Instill Fixation";
         trainingNames[20] = "Drain Soul";
@@ -3624,16 +3624,15 @@ public class Forsaken
 
         Boolean inPublic = Boolean.valueOf(currentTraining[0] || currentTraining[2] || currentTraining[4] || currentTraining[5] || currentTraining[6] || currentTraining[7] || currentTraining[8] || currentTraining[10] || currentTraining[11]);
         Boolean tiedUp = Boolean.valueOf(currentTraining[3] && !consenting || currentTraining[5]);
-        if(nextTraining == 0)
-        {
+        switch (nextTraining) {
+        case 0:
             w.append(t, String.format("%s will be placed under a curse which renders %s sexually irresistible to everyone else in your domain.  ", mainName, himHer()));
             if(inPublic)
                 w.append(t, String.format("The attention %s's getting from the public will become even more intense, more depraved, and less concerned with %s own comfort.", heShe(), hisHer()));
             else
                 w.append(t, String.format("Every time %s goes out in public, %1$s'll be the subject of constant sexual advances - and %s suitors won't take 'no' for an answer.", heShe(), hisHer()));
-        } else
-        if(nextTraining == 1)
-        {
+        break;
+        case 1:
             w.append(t, String.format("%s will be given unfiltered access to the Demonic hivemind, whether %s wants it or not.  ", mainName, heShe()));
             if(inPublic)
                 w.append(t, String.format("Being able to experience the thoughts and emotions of all the people around %s will give %1$s a deeper appreciation of humanity's innate sadism.", himHer()));
@@ -3642,18 +3641,16 @@ public class Forsaken
                 w.append(t, String.format("The overwhelming flood of thoughts, emotions, and sensations that aren't %s own will render %s even more helpless.", hisHer(), himHer()));
             else
                 w.append(t, String.format("The overwhelming flood of thoughts, emotions, and sensations that aren't %s own will render %s completely helpless to resist your will.", hisHer(), himHer()));
-        } else
-        if(nextTraining == 2)
-        {
+        break;
+        case 2:
             w.append(t, String.format("%s will ", mainName));
             if(inPublic)
                 w.append(t, String.format("submit %sself to the people around %1$s, inviting them to ridicule and abuse %1$s.  ", himHer()));
             else
                 w.append(t, String.format("go out in public and then submit %sself to everyone's ridicule and abuse.  ", himHer()));
             w.append(t, String.format("Even the people that don't have any reason to hate %s will be tempted to join in on the fun.", himHer()));
-        } else
-        if(nextTraining == 3)
-        {
+        break;
+        case 3:
             w.append(t, String.format("Various telekinetically-manipulated sex toys will attach themselves to %s's body and begin tormenting %s with pleasure.  ", mainName, himHer()));
             if(consenting)
                 w.append(t, String.format("If %s tries to take them off, then restraints and bindings will arrive to prevent %s from doing so.", heShe(), himHer()));
@@ -3662,9 +3659,8 @@ public class Forsaken
                 w.append(t, String.format("%s's in no position to refuse.", HeShe()));
             else
                 w.append(t, String.format("Ropes and cuffs will immobilize %s limbs so that %s can't take them off.", hisHer(), heShe()));
-        } else
-        if(nextTraining == 4)
-        {
+        break;
+        case 4:
             w.append(t, String.format("%s will be granted the psychic energy to transform and call on %s Forsaken powers, but the clothes that come with %2$s transformation will be modified to humiliate %s.  ", mainName, hisHer(), himHer()));
             if(timesExposedSelf == 0)
             {
@@ -3683,9 +3679,8 @@ public class Forsaken
                 else
                     w.append(t, String.format("the fact that it's being forced upon %s will take %1$s out of %s comfort zone.", himHer(), hisHer()));
             }
-        } else
-        if(nextTraining == 5)
-        {
+        break;
+        case 5:
             if(inPublic)
             {
                 if(tiedUp)
@@ -3698,9 +3693,8 @@ public class Forsaken
             else
                 w.append(t, String.format("%s will be locked in outdoors stationary restraints so that a large number of people can see how helpless %s is.  ", mainName, heShe()));
             w.append(t, String.format("The fact that %s can't do anything to resist will be obvious to everyone, including %s.", heShe(), himHer()));
-        } else
-        if(nextTraining == 6)
-        {
+        break;
+        case 6:
             if(tiedUp)
                 w.append(t, String.format("%s's restraints will be loosened up just enough to let %s fight a little.  Then, %s ", mainName, himHer(), heShe()));
             else
@@ -3721,17 +3715,15 @@ public class Forsaken
             w.append(t, String.format(", and %s'll be forced to get violent in order to defend %sself.", heShe(), himHer()));
             if(!ruthless)
                 w.redAppend(t, "  Afterward, " + heShe() + " won't be able to deny " + hisHer() + " capacity to cause suffering.");
-        } else
-        if(nextTraining == 7)
-        {
+        break;
+        case 7:
             w.append(t, String.format("The Thralls will be allowed to abuse %s however they want.  ", mainName));
             if(tiedUp)
                 w.append(t, String.format("Considering %s helplessness, this should be especially painful for %s.", hisHer(), himHer()));
             else
                 w.append(t, String.format("%s in turn will be allowed to flee or fight back if %s can, but the experience of being hunted should prove educational either way.", HeShe(), heShe()));
-        } else
-        if(nextTraining == 8)
-        {
+        break;
+        case 8:
             w.append(t, String.format("%s will begin to unwillingly broadcast %s surface thoughts in a large area around %s.  ", mainName, hisHer(), himHer()));
             if(inPublic)
                 w.append(t, String.format("%s won't be able to hide %s reactions and feelings from the gathered crowd.", HeShe(), hisHer()));
@@ -3739,25 +3731,22 @@ public class Forsaken
                 w.append(t, String.format("Many of those who hear %s will take the opportunity to come find %1$s in hopes of having a chance to participate in %s training.", himHer(), hisHer()));
             if(!debased)
                 w.redAppend(t, "  Once " + hisHer() + " fears and insecurities about being defeated are exposed, " + heShe() + " should quickly lose what remains of " + hisHer() + " heroic reputation.");
-        } else
-        if(nextTraining == 9)
-        {
+        break;
+        case 9:
             if(consenting)
                 w.append(t, String.format("%s will be instructed to consume an extra-potent version of the aphrodisiac slime you pump into your human breeding stock.  If %s refuses, then you'll have your Thralls ensure that %2$s gets dosed.  ", mainName, heShe()));
             else
                 w.append(t, String.format("You will have your Thralls dose %s with an extra-potent version of the aphrodisiac slime you pump into your human breeding stock.  ", mainName));
             w.append(t, String.format("%s'll soon be helpless with lust.", HeShe()));
-        } else
-        if(nextTraining == 10)
-        {
+        break;
+        case 10:
             if(!consenting)
                 w.append(t, "The helpless ");
             w.append(t, String.format("%s will be used as an outlet for the Thralls' lust, and you'll place notices throughout your domain that anyone who's interested can come and join in on the fun.", mainName));
             if(!lustful)
                 w.redAppend(t, "  The experience of being nothing more than a masturbation aid for so many people at once will stay with " + himHer() + " forever.");
-        } else
-        if(nextTraining == 11)
-        {
+        break;
+        case 11:
             w.append(t, String.format("%s will be attacked by several Demons in a makeshift gladiatorial match for the public's enjoyment.  ", mainName));
             if(tiedUp)
                 w.append(t, String.format("Obviously, in %s current state, it will be nothing close to a fair fight, and it will only stop once %s admits defeat.", hisHer(), heShe()));
@@ -3765,9 +3754,8 @@ public class Forsaken
                 w.append(t, String.format("More Demons will continue to arrive until %s recognizes the futility of fighting and admits defeat.", mainName));
             if(!meek)
                 w.redAppend(t, "  Being forced to explicitly give up will help to break what's left of " + hisHer() + " pride.");
-        } else
-        if(nextTraining == 12)
-        {
+        break;
+        case 12:
             w.append(t, String.format("You will create a short-term Commander body equipped with a penis-like organ which will penetrate %s and infuse %s body with potent slime, tying %s more closely to the Demonic hivemind.", mainName, hisHer(), himHer()));
             if(timesHadSex == 0)
             {
@@ -3777,32 +3765,27 @@ public class Forsaken
                     w.redAppend(t, "  This will be " + hisHer() + " first vaginal penetration, ");
                 w.redAppend(t, "and the shock of losing " + hisHer() + " sexual purity will further affect " + hisHer() + " mind.");
             }
-        } else
-        if(nextTraining == 13)
+        break;
+        case 13:
             w.append(t, String.format("You will infuse a large group of Thrall volunteers with pure Demonic energy, temporarily turning them into lesser versions of your Demon Commanders.  They will then hunt down %s and abuse %s in ways more extreme than a regular human could ever imagine.", mainName, himHer()));
-        else
-        if(nextTraining == 14)
-        {
+        case 14:
             w.append(t, String.format("You will form a supernatural connection with televisions and computers all across the world, then broadcast images of %s being humiliated to the unsuspecting civilians who happen to be nearby.", mainName));
             if(timesExposed < 300_000)
                 w.redAppend(t, "  This will damage " + hisHer() + " reputation even among those who don't live in your domain.");
-        } else
-        if(nextTraining == 15)
-        {
+        break;
+        case 15:
             w.append(t, String.format("You will subject %s to a mass of tentacles specialized for the purpose of putting the human body in a state of continuous orgasm, far beyond what's normally possible for human hands and tools alone.", mainName));
             if(strongestOrgasm < 200)
                 w.redAppend(t, "  This will be " + hisHer() + " first time feeling such intense sexual pleasure.");
-        } else
-        if(nextTraining == 16)
-        {
+        break;
+        case 16:
             w.append(t, String.format("You will have %s demonstrate sexual techniques, whether willingly or unwillingly, on a tentacled body made for this purpose.  ", mainName));
             if(inPublic)
                 w.append(t, "The assembled crowd will be encouraged to watch and learn.");
             else
                 w.append(t, "A crowd will be assembled to observe.");
-        } else
-        if(nextTraining == 17)
-        {
+        break;
+        case 17:
             if(w.tickle())
                 w.append(t, "You will create a short-term Commander body equipped with tentacles specialized for tickling");
             else
@@ -3820,18 +3803,19 @@ public class Forsaken
             }
             if(timesTortured == 0)
                 w.redAppend(t, "  Due to " + hisHer() + " lack of experience with such treatment, " + heShe() + " will be especially vulnerable to being broken like this.");
-        } else
-        if(nextTraining == 18)
+        break;
+        case 18:
             w.append(t, String.format("%s will be sent with a small contingent of Demons to attack a supposedly safe location far from the hive.  The Thralls %s converts there might be used for further training.  The Chosen will surely be demoralized when they arrive too late to stop it.", mainName, heShe()));
-        else
-        if(nextTraining == 19)
+        break;
+        case 19:
             w.append(t, String.format("%s will open %s mind to your most intense hypnotic conditioning, allowing you to give %s intense sexual hallucinations featuring this city's team of Chosen.  %s will simulate fighting and subduing them countless hundreds of times, preparing %s for the real thing.", mainName, hisHer(), himHer(), HeShe(), himHer()));
-        else
-        if(nextTraining == 20)
+        break;
+        case 20:
             w.append(t, String.format("%s will be entangled in tentacles capable of draining %s supernaturally-potent life force.  The stronger %2$s remaining willpower, the greater the energy you'll be able to drain from %s, especially if you continue to train %3$s in other ways as %s's drained.", mainName, hisHer(), himHer(), heShe()));
-        else
-        if(nextTraining == 21)
+        break;
+        case 21:
             w.append(t, String.format("%s will be the star of an especially degrading show put on in the middle of the Demonic hive.  In addition to providing useful training to %1$s %sself, it will be especially entertaining to your other minions if %s dignity is trampled to new lows.", mainName, himHer(), hisHer()));
+        }
         int corruptionComparison[] = {
             hostility, deviancy, obedience, disgrace
         };
@@ -10644,9 +10628,7 @@ public class Forsaken
                 moved += difference / 3L;
             }
 
-        String INJU = "INJU";
-        if(w.tickleOn)
-            INJU = "ANTI";
+        String INJU = w.tickleOn ? "ANTI" : "INJU";
         if(pattern == 0)
         {
             hateExp += originalAmount;
@@ -11132,20 +11114,13 @@ public class Forsaken
             if(defiling)
             {
                 w.append(t, String.format("x%.2f damage due to ", (300.0f - disgrace * 2.0f) / 100.0f));
-                if(defilerType == 1)
-                    w.append(t, "penetration)\n\n");
-                else
-                if(defilerType == 2)
-                    w.append(t, "orgasm)\n\n");
-                else
-                if(defilerType == 3)
-                    w.append(t, "torture)\n\n");
-                else
-                if(defilerType == 4)
-                    w.append(t, "filmed humiliation)\n\n");
-                else
-                if(defilerType == 5)
-                    w.append(t, "temptation)\n\n");
+                switch (defilerType) {
+                    case 1: w.append(t, "penetration)\n\n"); break;
+                    case 2: w.append(t, "orgasm)\n\n"); break;
+                    case 3: w.append(t, "torture)\n\n"); break;
+                    case 4: w.append(t, "filmed humiliation)\n\n"); break;
+                    case 5: w.append(t, "temptation)\n\n");
+                }
             }
             if(c.bonusHATE && c.getHATELevel() == 2)
             {
@@ -11172,20 +11147,12 @@ public class Forsaken
         if(c.captureProgression >= w.getCaptureDuration() || breakCapture)
         {
             if(defiling && !breakCapture)
-                if(defilerType == 1)
-                    c.vVirg = false;
-                else
-                if(defilerType == 2)
-                    c.cVirg = false;
-                else
-                if(defilerType == 3)
-                    c.aVirg = false;
-                else
-                if(defilerType == 4)
-                    c.modest = false;
-                else
-                if(defilerType == 5)
-                {
+                switch (defilerType) {
+                case 1: c.vVirg = false; break;
+                case 2: c.cVirg = false; break;
+                case 3: c.aVirg = false; break;
+                case 4: c.modest = false; break;
+                case 5:
                     c.cKnown = true;
                     c.mKnown = true;
                     c.betraying = true;
@@ -26513,35 +26480,18 @@ public class Forsaken
         int value = 1000;
         int magnitude = disgrace / 10;
         int remainder = disgrace % 10;
-        if(remainder == 0)
-            value = 1000;
-        else
-        if(remainder == 1)
-            value = 933;
-        else
-        if(remainder == 2)
-            value = 871;
-        else
-        if(remainder == 3)
-            value = 812;
-        else
-        if(remainder == 4)
-            value = 758;
-        else
-        if(remainder == 5)
-            value = 707;
-        else
-        if(remainder == 6)
-            value = 660;
-        else
-        if(remainder == 7)
-            value = 616;
-        else
-        if(remainder == 8)
-            value = 574;
-        else
-        if(remainder == 9)
-            value = 536;
+        switch (remainder) {
+            case 0: value = 1000; break;
+            case 1: value = 933; break;
+            case 2: value = 871; break;
+            case 3: value = 812; break;
+            case 4: value = 758; break;
+            case 5: value = 707; break;
+            case 6: value = 660; break;
+            case 7: value = 616; break;
+            case 8: value = 574; break;
+            case 9: value = 536;
+        }
         for(; magnitude > 0; magnitude--)
             if(value % 2 == 0)
                 value /= 2;
