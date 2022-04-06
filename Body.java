@@ -1081,28 +1081,16 @@ public class Body
         long actualDamage[] = InflictDamage(damageTaken);
         for(int i = 5; i < 6; i++)
         {
-            if(i == 0)
-                w.append(t, "\nFEAR [");
-            else
-            if(i == 1)
-                w.append(t, "\nDISG [");
-            else
-            if(i == 2)
-                w.append(t, "\nPAIN [");
-            else
-            if(i == 3)
-                w.append(t, "\nSHAM [");
-            else
-            if(i == 4)
-                w.append(t, "\n\nHATE [");
-            else
-            if(i == 5)
-                w.append(t, "\nPLEA [");
-            else
-            if(i == 6)
-                w.append(t, "\nTIRE [");
-            else
-                w.append(t, "\nEXPO [");
+            switch (i) {
+            case 0: w.append(t, "\nFEAR ["); break;
+            case 1: w.append(t, "\nDISG ["); break;
+            case 2: w.append(t, "\nPAIN ["); break;
+            case 3: w.append(t, "\nSHAM ["); break;
+            case 4: w.append(t, "\n\nHATE ["); break;
+            case 5: w.append(t, "\nPLEA ["); break;
+            case 6: w.append(t, "\nTIRE ["); break;
+            default: w.append(t, "\nEXPO [");
+            }
             char fillChar = '\'';
             char remainChar = ' ';
             int tier = 0;
@@ -1152,13 +1140,11 @@ public class Body
             for(int j = 0; j < 10; j++)
                 if(incrementsRemaining-- > 0L)
                 {
-                    if(tier == 0)
-                        w.append(t, String.valueOf(fillChar));
-                    else
-                    if(tier == 1)
-                        w.inverseAppend(t, String.valueOf(fillChar));
-                    else
-                        w.tierTwoAppend(t, String.valueOf(fillChar));
+                    switch (tier) {
+                    case 0: w.append(t, String.valueOf(fillChar)); break;
+                    case 1: w.inverseAppend(t, String.valueOf(fillChar)); break;
+                    default: w.tierTwoAppend(t, String.valueOf(fillChar));
+                    }
                 } else
                 if(tier == 0 || tier == 1 && mixed)
                     w.append(t, String.valueOf(remainChar));
@@ -1173,29 +1159,16 @@ public class Body
                 w.append(t, "        ");
             else
                 w.append(t, " + " + (new Chosen()).fixedFormat(actualDamage[i]));
-            if(i == 0)
-                currentFEAR += actualDamage[i];
-            else
-            if(i == 1)
-                currentDISG += actualDamage[i];
-            else
-            if(i == 2)
-                currentPAIN += actualDamage[i];
-            else
-            if(i == 3)
-                currentSHAM += actualDamage[i];
-            else
-            if(i == 4)
-                currentHATE += actualDamage[i];
-            else
-            if(i == 5)
-                currentPLEA += actualDamage[i];
-            else
-            if(i == 6)
-                currentINJU += actualDamage[i];
-            else
-            if(i == 7)
-                currentEXPO += actualDamage[i];
+            switch (i) {
+            case 0: currentFEAR += actualDamage[i]; break;
+            case 1: currentDISG += actualDamage[i]; break;
+            case 2: currentPAIN += actualDamage[i]; break;
+            case 3: currentSHAM += actualDamage[i]; break;
+            case 4: currentHATE += actualDamage[i]; break;
+            case 5: currentPLEA += actualDamage[i]; break;
+            case 6: currentINJU += actualDamage[i]; break;
+            case 7: currentEXPO += actualDamage[i];
+            }
             w.append(t, " = " + (new Chosen()).fixedFormat(currentDamage()[i]) + ") ");
             if(currentDamage()[i] > 0L)
                 if(i == 0)
@@ -1460,28 +1433,16 @@ public class Body
                 actualDamage[i] = 1_000_000L - currentDamage()[i];
                 removeActivity(Project.Stripped, null);
             }
-            if(i == 0)
-                w.append(t, "\nFEAR [");
-            else
-            if(i == 1)
-                w.append(t, "\nDISG [");
-            else
-            if(i == 2)
-                w.append(t, "\nPAIN [");
-            else
-            if(i == 3)
-                w.append(t, "\nSHAM [");
-            else
-            if(i == 4)
-                w.append(t, "\n\nHATE [");
-            else
-            if(i == 5)
-                w.append(t, "\nPLEA [");
-            else
-            if(i == 6)
-                w.append(t, "\nTIRE [");
-            else
-                w.append(t, "\nEXPO [");
+            switch (i) {
+            case 0: w.append(t, "\nFEAR ["); break;
+            case 1: w.append(t, "\nDISG ["); break;
+            case 2: w.append(t, "\nPAIN ["); break;
+            case 3: w.append(t, "\nSHAM ["); break;
+            case 4: w.append(t, "\n\nHATE ["); break;
+            case 5: w.append(t, "\nPLEA ["); break;
+            case 6: w.append(t, "\nTIRE ["); break;
+            default: w.append(t, "\nEXPO [");
+            }
             char fillChar = '\'';
             char remainChar = ' ';
             int tier = 0;
@@ -1531,13 +1492,11 @@ public class Body
             for(int j = 0; j < 10; j++)
                 if(incrementsRemaining-- > 0L)
                 {
-                    if(tier == 0)
-                        w.append(t, String.valueOf(fillChar));
-                    else
-                    if(tier == 1)
-                        w.inverseAppend(t, String.valueOf(fillChar));
-                    else
-                        w.tierTwoAppend(t, String.valueOf(fillChar));
+                    switch (tier) {
+                    case 0: w.append(t, String.valueOf(fillChar)); break;
+                    case 1: w.inverseAppend(t, String.valueOf(fillChar)); break;
+                    default: w.tierTwoAppend(t, String.valueOf(fillChar));
+                    }
                 } else
                 if(tier == 0 || tier == 1 && mixed)
                     w.append(t, String.valueOf(remainChar));
@@ -1552,29 +1511,16 @@ public class Body
                 w.append(t, "        ");
             else
                 w.append(t, " + " + (new Chosen()).fixedFormat(actualDamage[i]));
-            if(i == 0)
-                currentFEAR += actualDamage[i];
-            else
-            if(i == 1)
-                currentDISG += actualDamage[i];
-            else
-            if(i == 2)
-                currentPAIN += actualDamage[i];
-            else
-            if(i == 3)
-                currentSHAM += actualDamage[i];
-            else
-            if(i == 4)
-                currentHATE += actualDamage[i];
-            else
-            if(i == 5)
-                currentPLEA += actualDamage[i];
-            else
-            if(i == 6)
-                currentINJU += actualDamage[i];
-            else
-            if(i == 7)
-                currentEXPO += actualDamage[i];
+            switch (i) {
+            case 0: currentFEAR += actualDamage[i]; break;
+            case 1: currentDISG += actualDamage[i]; break;
+            case 2: currentPAIN += actualDamage[i]; break;
+            case 3: currentSHAM += actualDamage[i]; break;
+            case 4: currentHATE += actualDamage[i]; break;
+            case 5: currentPLEA += actualDamage[i]; break;
+            case 6: currentINJU += actualDamage[i]; break;
+            case 7: currentEXPO += actualDamage[i];
+            }
             w.append(t, " = " + (new Chosen()).fixedFormat(currentDamage()[i]) + ") ");
             if(currentDamage()[i] > 0L)
                 if(i == 0)
@@ -1761,46 +1707,58 @@ public class Body
         if(crossedThreshold(actualDamage[0], currentDamage()[0]) > 0)
         {
             w.purpleAppend(t, "\n\nFEAR up!  ");
-            if(crossedThreshold(actualDamage[0], currentDamage()[0]) == 1)
+            switch (crossedThreshold(actualDamage[0], currentDamage()[0])) {
+            case 1:
                 w.append(t, String.format("%s can't help but think of the consquences of displeasing %s.", OwnerName(), w.lordBody.ownerName()));
-            else
-            if(crossedThreshold(actualDamage[0], currentDamage()[0]) == 2)
+            break;
+            case 2:
                 w.append(t, String.format("%s is desperate to please %s.", OwnerName(), w.lordBody.ownerName()));
-            else
+            break;
+            default:
                 w.append(t, String.format("%s is overcome by %s terror of %s.", OwnerName(), hisHer(), w.lordBody.ownerName()));
+            }
         }
         if(crossedThreshold(actualDamage[1], currentDamage()[1]) > 0)
         {
             w.purpleAppend(t, "\n\nDISG up!  ");
-            if(crossedThreshold(actualDamage[1], currentDamage()[1]) == 1)
+            switch (crossedThreshold(actualDamage[1], currentDamage()[1])) {
+            case 1:
                 w.append(t, String.format("%s has started to feel bad about what %s's doing.", OwnerName(), heShe()));
-            else
-            if(crossedThreshold(actualDamage[1], currentDamage()[1]) == 2)
+            break;
+            case 2:
                 w.append(t, String.format("%s has firmly crossed the line into activities %s's not comfortable with.", OwnerName(), heShe()));
-            else
+            break;
+            default:
                 w.append(t, String.format("It's a struggle for %s to force %sself to continue.", ownerName(), himHer()));
+            }
         }
         if(crossedThreshold(actualDamage[2], currentDamage()[2]) > 0)
         {
             w.purpleAppend(t, "\n\nPAIN up!  ");
-            if(crossedThreshold(actualDamage[2], currentDamage()[2]) == 1)
+            switch (crossedThreshold(actualDamage[2], currentDamage()[2])) {
+            case 1:
                 w.append(t, String.format("%s consciously notices that %s's feeling pain.", OwnerName(), heShe()));
-            else
-            if(crossedThreshold(actualDamage[2], currentDamage()[2]) == 2)
+            break;
+            case 2:
                 w.append(t, String.format("%s can't stop %sself from flinching away from the pain.", OwnerName(), himHer()));
-            else
+            break;
+            default:
                 w.append(t, String.format("%s is in so much pain that %s can hardly focus.", OwnerName(), heShe()));
+            }
         }
         if(crossedThreshold(actualDamage[3], currentDamage()[3]) > 0)
         {
             w.purpleAppend(t, "\n\nSHAM up!  ");
-            if(crossedThreshold(actualDamage[3], currentDamage()[3]) == 1)
+            switch (crossedThreshold(actualDamage[3], currentDamage()[3])) {
+            case 1:
                 w.append(t, String.format("%s has realized how lascivious %s appearance has become.", OwnerName(), hisHer()));
-            else
-            if(crossedThreshold(actualDamage[3], currentDamage()[3]) == 2)
+            break;
+            case 2:
                 w.append(t, String.format("%s is becoming increasingly self-conscious.", OwnerName()));
-            else
+            break;
+            default:
                 w.append(t, String.format("%s can't stop thinking about how %s must look.", OwnerName(), heShe()));
+            }
         }
         if(crossedThreshold(actualDamage[4], currentDamage()[4]) > 0)
         {
@@ -1899,33 +1857,32 @@ public class Body
         if(crossedThreshold(actualDamage[6], currentDamage()[6]) > 0)
         {
             w.purpleAppend(t, "\n\nTIRE up!  ");
-            if(crossedThreshold(actualDamage[6], currentDamage()[6]) == 1)
+            switch (crossedThreshold(actualDamage[6], currentDamage()[6])) {
+            case 1:
                 w.append(t, String.format("%s is starting to get tired, but it's not slowing %s down yet.", OwnerName(), himHer()));
-            else
-            if(crossedThreshold(actualDamage[6], currentDamage()[6]) == 2)
+            break;
+            case 2:
                 w.append(t, String.format("%s's fatigue is catching up with %s, and %s's losing focus.", OwnerName(), himHer(), heShe()));
-            else
-            if(crossedThreshold(actualDamage[6], currentDamage()[6]) == 3)
+            break;
+            case 2:
                 w.append(t, String.format("%s is practically passing out.  %s can't do much like this.", OwnerName(), HeShe()));
-            else
+            break;
+            default:
                 w.append(t, String.format("%s fades in and out of consciousness.", OwnerName()));
+            }
         }
         if(crossedThreshold(actualDamage[7], currentDamage()[7]) > 0)
         {
             w.purpleAppend(t, "\n\nEXPO up!  ");
-            if(crossedThreshold(actualDamage[7], currentDamage()[7]) == 1)
-                w.append(t, String.format("%s's clothes are partially undone.", OwnerName()));
-            else
-            if(crossedThreshold(actualDamage[7], currentDamage()[7]) == 2)
-                w.append(t, String.format("%s's %s can clearly be seen.", OwnerName(), breasts()));
-            else
-            if(crossedThreshold(actualDamage[7], currentDamage()[7]) == 3)
+            switch (crossedThreshold(actualDamage[7], currentDamage()[7])) {
+            case 1: w.append(t, String.format("%s's clothes are partially undone.", OwnerName())); break;
+            case 2: w.append(t, String.format("%s's %s can clearly be seen.", OwnerName(), breasts())); break;
+            case 3:
                 w.append(t, String.format("%s's clothes have been shifted out of the way to show %s most private places.", OwnerName(), hisHer()));
-            else
-            if(crossedThreshold(actualDamage[7], currentDamage()[7]) == 4)
-                w.append(t, String.format("Only a few scraps of %s's clothes remain.", OwnerName()));
-            else
-                w.append(t, String.format("%s is now completely naked.", OwnerName()));
+                break;
+            case 4: w.append(t, String.format("Only a few scraps of %s's clothes remain.", OwnerName())); break;
+            default: w.append(t, String.format("%s is now completely naked.", OwnerName()));
+            }
             if(w.sceneLocation == Activity.Location.STAGE && currentDamage()[7] - actualDamage[7] < 10000L && currentDamage()[7] >= 10000L && forsakenOwner != null)
             {
                 int added = 300_000 + (int)(Math.random() * 300000D);
@@ -1974,80 +1931,56 @@ public class Body
         else
         if(currentValue >= 10000L)
             currentLevel = 1;
-        if(currentLevel > previousLevel)
-            return currentLevel;
-        else
-            return 0;
+        return currentLevel > previousLevel ? currentLevel : 0;
     }
 
     public Forsaken.Gender appearanceGender(Appearance seen)
     {
         if(seen == Appearance.CUTEGIRL)
             return Forsaken.Gender.FEMALE;
-        if(seen == Appearance.CUTEBOY)
-            return Forsaken.Gender.MALE;
-        else
-            return null;
+        return seen == Appearance.CUTEBOY ? Forsaken.Gender.MALE : null;
     }
 
     public String heShe()
     {
         if(appearanceGender(bodyType) == Forsaken.Gender.FEMALE)
             return "she";
-        if(appearanceGender(bodyType) == Forsaken.Gender.MALE)
-            return "he";
-        else
-            return "it";
+        return appearanceGender(bodyType) == Forsaken.Gender.MALE ? "he" : "it";
     }
 
     public String hisHer()
     {
         if(appearanceGender(bodyType) == Forsaken.Gender.FEMALE)
             return "her";
-        if(appearanceGender(bodyType) == Forsaken.Gender.MALE)
-            return "his";
-        else
-            return "its";
+        return appearanceGender(bodyType) == Forsaken.Gender.MALE ? "his" : "its";
     }
 
     public String himHer()
     {
         if(appearanceGender(bodyType) == Forsaken.Gender.FEMALE)
             return "her";
-        if(appearanceGender(bodyType) == Forsaken.Gender.MALE)
-            return "him";
-        else
-            return "it";
+        return appearanceGender(bodyType) == Forsaken.Gender.MALE ? "him" : "it";
     }
 
     public String HeShe()
     {
         if(appearanceGender(bodyType) == Forsaken.Gender.FEMALE)
             return "She";
-        if(appearanceGender(bodyType) == Forsaken.Gender.MALE)
-            return "He";
-        else
-            return "It";
+        return appearanceGender(bodyType) == Forsaken.Gender.MALE ? "He" : "It";
     }
 
     public String HisHer()
     {
         if(appearanceGender(bodyType) == Forsaken.Gender.FEMALE)
             return "Her";
-        if(appearanceGender(bodyType) == Forsaken.Gender.MALE)
-            return "His";
-        else
-            return "Its";
+        return appearanceGender(bodyType) == Forsaken.Gender.MALE ? "His" : "Its";
     }
 
     public String HimHer()
     {
         if(appearanceGender(bodyType) == Forsaken.Gender.FEMALE)
             return "Her";
-        if(appearanceGender(bodyType) == Forsaken.Gender.MALE)
-            return "Him";
-        else
-            return "It";
+        return appearanceGender(bodyType) == Forsaken.Gender.MALE ? "Him" : "It";
     }
 
     public Forsaken.Gender getGender()
@@ -2058,17 +1991,11 @@ public class Body
         {
             if(chosenOwner.gender.equals("male"))
                 return Forsaken.Gender.MALE;
-            if(chosenOwner.gender.equals("female"))
-                return Forsaken.Gender.FEMALE;
-            else
-                return Forsaken.Gender.FUTANARI;
+            return chosenOwner.gender.equals("female") ? Forsaken.Gender.FEMALE : Forsaken.Gender.FUTANARI;
         }
         if(appearanceGender(bodyType) == Forsaken.Gender.FEMALE)
         {
-            if(parts[PENIS] > 0)
-                return Forsaken.Gender.FUTANARI;
-            else
-                return Forsaken.Gender.FEMALE;
+            return parts[PENIS] > 0 ? Forsaken.Gender.FUTANARI : Forsaken.Gender.FEMALE;
         } else
         {
             return Forsaken.Gender.MALE;
@@ -2079,18 +2006,12 @@ public class Body
     {
         if(forsakenOwner != null)
             return forsakenOwner.type;
-        if(chosenOwner != null)
-            return chosenOwner.type;
-        else
-            return null;
+        return chosenOwner != null ? chosenOwner.type : null;
     }
 
     public Boolean isForsaken()
     {
-        if(forsakenOwner != null)
-            return true;
-        else
-            return false;
+        return forsakenOwner != null;
     }
 
     public void addActivity(Activity added, Body partner)
@@ -2173,40 +2094,28 @@ public class Body
     {
         if(forsakenOwner != null)
             return forsakenOwner.morality;
-        if(chosenOwner != null)
-            return chosenOwner.morality;
-        else
-            return 50;
+        return chosenOwner != null ? chosenOwner.morality : 50;
     }
 
     public int getInnocence()
     {
         if(forsakenOwner != null)
             return forsakenOwner.innocence;
-        if(chosenOwner != null)
-            return chosenOwner.innocence;
-        else
-            return 50;
+        return chosenOwner != null ? chosenOwner.innocence : 50;
     }
 
     public int getConfidence()
     {
         if(forsakenOwner != null)
             return forsakenOwner.confidence;
-        if(forsakenOwner != null)
-            return chosenOwner.confidence;
-        else
-            return 50;
+        return forsakenOwner != null ? chosenOwner.confidence : 50;
     }
 
     public int getDignity()
     {
         if(forsakenOwner != null)
             return forsakenOwner.dignity;
-        if(chosenOwner != null)
-            return chosenOwner.dignity;
-        else
-            return 50;
+        return chosenOwner != null ? chosenOwner.dignity : 50;
     }
 
     public int getHostility()
@@ -2314,10 +2223,7 @@ public class Body
         int value = 0;
         if(currentFEAR > 0L)
             value = (int)Math.log10(currentFEAR) - 1;
-        if(value > 0)
-            return value;
-        else
-            return 0;
+        return value > 0 ? value : 0;
     }
 
     public int getDISGLevel()
@@ -2325,10 +2231,7 @@ public class Body
         int value = 0;
         if(currentDISG > 0L)
             value = (int)Math.log10(currentDISG) - 1;
-        if(value > 0)
-            return value;
-        else
-            return 0;
+        return value > 0 ? value : 0;
     }
 
     public int getPAINLevel()
@@ -2336,10 +2239,7 @@ public class Body
         int value = 0;
         if(currentPAIN > 0L)
             value = (int)Math.log10(currentPAIN) - 1;
-        if(value > 0)
-            return value;
-        else
-            return 0;
+        return value > 0 ? value : 0;
     }
 
     public int getSHAMLevel()
@@ -2347,10 +2247,7 @@ public class Body
         int value = 0;
         if(currentSHAM > 0L)
             value = (int)Math.log10(currentSHAM) - 1;
-        if(value > 0)
-            return value;
-        else
-            return 0;
+        return value > 0 ? value : 0;
     }
 
     public int getHATELevel()
@@ -2358,10 +2255,7 @@ public class Body
         int value = 0;
         if(currentHATE > 0L)
             value = (int)Math.log10(currentHATE) - 1;
-        if(value > 0)
-            return value;
-        else
-            return 0;
+        return value > 0 ? value : 0;
     }
 
     public int getPLEALevel()
@@ -2369,10 +2263,7 @@ public class Body
         int value = 0;
         if(currentPLEA > 0L)
             value = (int)Math.log10(currentPLEA) - 1;
-        if(value > 0)
-            return value;
-        else
-            return 0;
+        return value > 0 ? value : 0;
     }
 
     public int getINJULevel()
@@ -2380,10 +2271,7 @@ public class Body
         int value = 0;
         if(currentINJU > 0L)
             value = (int)Math.log10(currentINJU) - 1;
-        if(value > 0)
-            return value;
-        else
-            return 0;
+        return value > 0 ? value : 0;
     }
 
     public int getEXPOLevel()
@@ -2391,70 +2279,40 @@ public class Body
         int value = 0;
         if(currentEXPO > 0L)
             value = (int)Math.log10(currentEXPO) - 1;
-        if(value > 0)
-            return value;
-        else
-            return 0;
+        return value > 0 ? value : 0;
     }
 
     public Boolean isParasitized()
     {
         if(forsakenOwner != null)
             return forsakenOwner.parasitized;
-        if(chosenOwner != null)
-            return chosenOwner.parasitized;
-        else
-            return false;
+        return chosenOwner != null ? chosenOwner.parasitized : false;
     }
 
     public Boolean hasBeenBroadcasted()
     {
         if(forsakenOwner != null)
-            if(forsakenOwner.timesExposed >= 300_000)
-                return true;
-            else
-                return false;
-        if(chosenOwner != null)
-        {
-            if(chosenOwner.modest)
-                return false;
-            else
-                return true;
-        } else
-        {
-            return false;
-        }
+            return forsakenOwner.timesExposed >= 300_000;
+        return chosenOwner != null ? !chosenOwner.modest : false;
     }
 
     public Boolean isVVirg()
     {
         if(forsakenOwner != null)
-            if(forsakenOwner.timesHadSex > 0)
-                return false;
-            else
-                return true;
-        if(chosenOwner != null)
-            return chosenOwner.vVirg;
-        else
-            return false;
+            return forsakenOwner.timesHadSex <= 0;
+        return chosenOwner != null ? chosenOwner.vVirg : false;
     }
 
     public Boolean isDemonLord()
     {
-        if(chosenOwner == null && forsakenOwner == null)
-            return true;
-        else
-            return false;
+        return chosenOwner == null && forsakenOwner == null;
     }
 
     public String ownerName()
     {
         if(forsakenOwner != null)
             return forsakenOwner.mainName;
-        if(chosenOwner != null)
-            return chosenOwner.mainName;
-        else
-            return "the Demon Lord";
+        return chosenOwner != null ? chosenOwner.mainName : "the Demon Lord";
     }
 
     public String OwnerName()
@@ -2464,18 +2322,12 @@ public class Body
 
     public String capitalizedOwnerName()
     {
-        if(forsakenOwner != null || chosenOwner != null)
-            return ownerName();
-        else
-            return "The Demon Lord";
+        return forsakenOwner != null || chosenOwner != null ? ownerName() : "The Demon Lord";
     }
 
     public String breasts()
     {
-        if(parts[CLEAVAGE] > 0)
-            return "breasts";
-        else
-            return "chest";
+        return parts[CLEAVAGE] > 0 ? "breasts" : "chest";
     }
 
     public void say(JTextPane t, String s)
@@ -2504,26 +2356,17 @@ public class Body
 
     public String theDemonLord()
     {
-        if(forsakenOwner != null)
-            return forsakenOwner.theDemonLord();
-        else
-            return "the Demon Lord";
+        return forsakenOwner != null ? forsakenOwner.theDemonLord() : "the Demon Lord";
     }
 
     public String TheDemonLord()
     {
-        if(forsakenOwner != null)
-            return forsakenOwner.TheDemonLord();
-        else
-            return "The Demon Lord";
+        return forsakenOwner != null ? forsakenOwner.TheDemonLord() : "The Demon Lord";
     }
 
     public String demonLord()
     {
-        if(forsakenOwner != null)
-            return forsakenOwner.demonLord;
-        else
-            return "Demon Lord";
+        return forsakenOwner != null ? forsakenOwner.demonLord : "Demon Lord";
     }
 
     public int friendsMod(WorldState w, Body subject)
@@ -2574,10 +2417,7 @@ public class Body
     {
         if(parts[PENIS] > 0)
             return "cock";
-        if(parts[PUSSY] > 0)
-            return "pussy";
-        else
-            return "crotch";
+        return parts[PUSSY] > 0 ? "pussy" : "crotch";
     }
 
     public Body(Chosen c)

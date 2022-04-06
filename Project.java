@@ -2240,17 +2240,12 @@ public class Project extends JFrame
             for(int j = 0; j < 4; j++)
             {
                 String method = "";
-                if(j == 0)
-                    method = "up";
-                else
-                if(j == 1)
-                    method = "into";
-                else
-                if(j == 2)
-                    method = "down";
-                else
-                if(j == 3)
-                    method = "around";
+                switch (j) {
+                case 0: method = "up"; break;
+                case 1: method = "into"; break;
+                case 2: method = "down"; break;
+                case 3: method = "around";
+                }
                 final String finalMethod = method;
                 JButton ThisOne = new JButton(method);
                 ThisOne.addActionListener(new ActionListener() {
@@ -2310,17 +2305,12 @@ public class Project extends JFrame
             for(int j = 0; j < 4; j++)
             {
                 String method = "";
-                if(j == 0)
-                    method = "up";
-                else
-                if(j == 1)
-                    method = "into";
-                else
-                if(j == 2)
-                    method = "down";
-                else
-                if(j == 3)
-                    method = "around";
+                switch (j) {
+                case 0: method = "up"; break;
+                case 1: method = "into"; break;
+                case 2: method = "down"; break;
+                case 3: method = "around";
+                }
                 final String finalMethod = method;
                 JButton ThisOne = new JButton(method);
                 ThisOne.addActionListener(new ActionListener() {
@@ -2435,17 +2425,12 @@ public class Project extends JFrame
             for(int j = 0; j < 4; j++)
             {
                 String method = "";
-                if(j == 0)
-                    method = "swing";
-                else
-                if(j == 1)
-                    method = "shoot";
-                else
-                if(j == 2)
-                    method = "command";
-                else
-                if(j == 3)
-                    method = "part of " + c.himHer();
+                switch (j) {
+                case 0: method = "swing"; break;
+                case 1: method = "shoot"; break;
+                case 2: method = "command"; break;
+                case 3: method = "part of " + c.himHer();
+                }
                 JButton ThisOne = new JButton(method);
                 if(method.contains("part"))
                     method = "part";
@@ -2994,14 +2979,11 @@ public class Project extends JFrame
         if(w.getGenderBalance()[2] > 0)
         {
             w.append(t, "\n\nMales shift: ");
-            if(w.getMaleShift() == 0)
-                w.append(t, "never");
-            else
-            if(w.getMaleShift() == 1)
-                w.append(t, "to female when first inseminated");
-            else
-            if(w.getMaleShift() == 2)
-                w.append(t, "to futanari when first inseminated");
+            switch (w.getMaleShift()) {
+            case 0: w.append(t, "never"); break;
+            case 1: w.append(t, "to female when first inseminated"); break;
+            case 2: w.append(t, "to futanari when first inseminated");
+            }
         }
         if(w.getGenderBalance()[1] > 0 || w.getGenderBalance()[2] > 0 && w.getMaleShift() == 1)
         {
@@ -5063,28 +5045,29 @@ public class Project extends JFrame
                 Boolean plural = false;
                 if(w.getCombatants()[1] != null)
                     plural = true;
-                if(w.exterminationMultiplier == 100)
-                {
+                switch (w.exterminationMultiplier) {
+                case 100:
                     w.append(t, String.format("With the civilians evacuated, %s", c.getMainName()));
                     if(plural)
                         w.append(t, " and the other Chosen can start drawing on their full power!");
                     else
                         w.append(t, String.format(" can start drawing on %s full power!", c.hisHer()));
-                } else
-                if(w.exterminationMultiplier == 150)
+                    break;
+                case 150:
                     w.append(t, String.format("%s's attacks grow stronger and stronger, shattering windows and setting off alarms!", c.getMainName()));
-                else
-                if(w.exterminationMultiplier == 225)
+                break;
+                case 225:
                     w.append(t, String.format("%s moves like a blur, taking down a wide swath of Demons!", c.getMainName()));
-                else
-                if(w.exterminationMultiplier == 337)
+                break;
+                case 337:
                     w.append(t, String.format("A blast of energy from %s brings down a small building in a cloud of rubble!", c.getMainName()));
-                else
-                if(w.exterminationMultiplier == 505)
+                break;
+                case 505:
                     w.append(t, String.format("The area is riddled with craters caused by the power of %s's attacks!", c.getMainName()));
-                else
-                if(w.exterminationMultiplier == 757)
+                break;
+                case 757:
                     w.append(t, String.format("The district is consumed by an enormous explosion as %s blasts away the Demons!", c.getMainName()));
+                }
                 w.append(t, "\n(Extermination power");
                 if(w.cast[1] != null)
                     w.append(t, " per Chosen");
@@ -5594,59 +5577,27 @@ public class Project extends JFrame
                     int target = (action - 1) / 14;
                     int type = (action - 1) % 14 + 1;
                     String targetedChosen = w.getCast()[target].getMainName();
-                    if(type == 1)
-                        generated = "Surround ";
-                    else
-                    if(type == 2)
-                        generated = "Capture ";
-                    else
-                    if(type == 3)
-                        generated = "Threaten ";
-                    else
-                    if(type == 4)
-                        generated = "Slime ";
-                    else
-                    if(type == 5)
-                    {
-                        if(w.tickle())
-                            generated = "Poke ";
-                        else
-                            generated = "Attack ";
-                    } else
-                    if(type == 6)
-                    {
-                        generated = "Taunt ";
-                    } else
-                    {
+                    switch (type) {
+                    case 1: generated = "Surround "; break;
+                    case 2: generated = "Capture "; break;
+                    case 3: generated = "Threaten "; break;
+                    case 4: generated = "Slime ";
+                    case 5: generated = w.tickle() ? "Poke " : "Attack "; break;
+                    case 6: generated = "Taunt "; break;
+                    default:
                         if(w.getTechs()[31].isOwned() && !w.getCast()[target].isSurrounded())
                             if(!w.getCast()[target].surroundPossible(w))
                                 generated += "Capture and then ";
                             else
                                 generated += "Surround and then ";
-                        if(type == 7)
-                            generated += "Grind against ";
-                        else
-                        if(type == 8)
-                            generated += "Caress ";
-                        else
-                        if(type == 9)
-                        {
-                            if(w.tickle())
-                                generated += "Tickle ";
-                            else
-                                generated += "Pummel ";
-                        } else
-                        if(type == 10)
-                            generated += "Humiliate ";
-                        else
-                        if(type == 11)
-                            generated += "Inseminate ";
-                        else
-                        if(type == 12)
-                            generated += "Force Orgasm on ";
-                        else
-                        if(type == 13)
-                        {
+                        switch (type) {
+                        case 7: generated += "Grind against "; break;
+                        case 8: generated += "Caress "; break;
+                        case 9: generated += w.tickle() ? "Tickle " : "Pummel "; break;
+                        case 10: generated += "Humiliate "; break;
+                        case 11: generated += "Inseminate "; break;
+                        case 12: generated += "Force Orgasm on "; break;
+                        case 13:
                             if(w.tickle())
                                 generated += "Force Laughter from ";
                             else
@@ -5654,9 +5605,10 @@ public class Project extends JFrame
                                 generated += "Torture ";
                             else
                                 generated += "Sodomize ";
-                        } else
-                        if(type == 14)
+                            break;
+                        case 14:
                             generated += "Broadcast ";
+                        }
                     }
                     generated += targetedChosen + ".";
                 }
@@ -6037,23 +5989,14 @@ public class Project extends JFrame
         final Action TemptAction = new TemptButton("Tempt", "Use Tempt");
         String ForsakenDefilerName = "";
         if(w.usedForsaken != null && w.usedForsaken.defilerType > 0)
-            if(w.usedForsaken.defilerType == 1)
-                ForsakenDefilerName = "Penetrate";
-            else
-            if(w.usedForsaken.defilerType == 2)
-                ForsakenDefilerName = "Force Orgasm";
-            else
-            if(w.usedForsaken.defilerType == 3)
-                ForsakenDefilerName = "Torture";
-            else
-            if(w.usedForsaken.defilerType == 4)
-                ForsakenDefilerName = "Broadcast";
-            else
-            if(w.usedForsaken.defilerType == 5)
-                ForsakenDefilerName = "Tempt";
-            else
-            if(w.usedForsaken.defilerType == 6)
-                ForsakenDefilerName = "Orgy";
+            switch (w.usedForsaken.defilerType) {
+            case 1: ForsakenDefilerName = "Penetrate"; break;
+            case 2: ForsakenDefilerName = "Force Orgasm"; break;
+            case 3: ForsakenDefilerName = "Torture"; break;
+            case 4: ForsakenDefilerName = "Broadcast"; break;
+            case 5: ForsakenDefilerName = "Tempt"; break;
+            case 6: ForsakenDefilerName = "Orgy";
+            }
         class ForsakenDefilerButton extends AbstractAction
         {
             public ForsakenDefilerButton(String text, String desc) {
@@ -7787,17 +7730,12 @@ public class Project extends JFrame
                     if(w.getBodyStatus()[8])
                     {
                         description += " (";
-                        if(w.getCapturesPossible() == 4)
-                            description += "four";
-                        else
-                        if(w.getCapturesPossible() == 3)
-                            description += "three";
-                        else
-                        if(w.getCapturesPossible() == 2)
-                            description += "two";
-                        else
-                        if(w.getCapturesPossible() == 1)
-                            description += "one";
+                        switch (w.getCapturesPossible()) {
+                        case 4: description += "four"; break;
+                        case 3: description += "three"; break;
+                        case 2: description += "two"; break;
+                        case 1: description += "one";
+                        }
                         description += " left)";
                     }
                     if(w.getBodyStatus()[11])
@@ -12496,21 +12434,12 @@ public class Project extends JFrame
                             Chosen target = w.getCast()[(index - 3) / 4];
                             index = (index - 3) % 4;
                             generated += "it after " + target.getMainName() + ".  Have the Thralls start by using ";
-                            if(index == 0)
-                                generated += "Grind.";
-                            else
-                            if(index == 1)
-                                generated += "Caress.";
-                            else
-                            if(index == 2)
-                            {
-                                if(w.tickle())
-                                    generated += "Tickle.";
-                                else
-                                    generated += "Pummel.";
-                            } else
-                            if(index == 3)
-                                generated += "Humiliate.";
+                            switch (index) {
+                            case 0: generated += "Grind."; break;
+                            case 1: generated += "Caress."; break;
+                            case 2: generated += w.tickle() ? "Tickle." : "Pummel."; break;
+                            case 3: generated += "Humiliate.";
+                            }
                         } else
                         {
                             generated += "it after " + w.getCast()[index].getMainName() + ".";
@@ -12625,21 +12554,11 @@ public class Project extends JFrame
             {
                 final int type = i;
                 String torment = "ERROR";
-                if(i == 0)
-                    torment = "Grind";
-                else
-                if(i == 1)
-                    torment = "Caress";
-                else
-                if(i == 2)
-                {
-                    if(w.tickle())
-                        torment = "Tickle";
-                    else
-                        torment = "Pummel";
-                } else
-                {
-                    torment = "Humiliate";
+                switch (i) {
+                case 0: torment = "Grind"; break;
+                case 1: torment = "Caress"; break;
+                case 1: torment = w.tickle() ? "Tickle" : "Pummel"; break;
+                default: torment = "Humiliate";
                 }
                 final String finalTorment = torment;
                 JButton Action = new JButton(torment);
@@ -12664,17 +12583,12 @@ public class Project extends JFrame
                                 if(w.getDay() > 1 && !w.isCheater() && (w.commentaryWrite || w.commentaryRead))
                                     w.archiveCommander(w.getDay());
                                 Project.advanceDowntimeAction(p, w, w.getTechs().length + w.getCast().length + c.getNumber() * 4 + type);
-                                if(type == 0)
-                                    c.beginGrind();
-                                else
-                                if(type == 1)
-                                    c.beginCaress();
-                                else
-                                if(type == 2)
-                                    c.beginPummel();
-                                else
-                                if(type == 3)
-                                    c.beginHumiliate();
+                                switch (type) {
+                                case 0: c.beginGrind(); break;
+                                case 1: c.beginCaress(); break;
+                                case 2: c.beginPummel(); break;
+                                case 3: c.beginHumiliate();
+                                }
                                 if(w.getDay() == 50 - w.eventOffset * 3 || w.getTechs()[48].isOwned())
                                     Project.BeginFinalBattle(t, p, f, w, c);
                                 else
@@ -13215,13 +13129,12 @@ public class Project extends JFrame
                 if(forsaken > 0)
                 {
                     w.append(t, "\n\n");
-                    if(forsaken == 1)
-                        w.append(t, String.format("%s has ", corrupted[0].getMainName()));
-                    else
-                    if(forsaken == 2)
-                        w.append(t, String.format("%s and %s have ", corrupted[0].getMainName(), corrupted[1].getMainName()));
-                    else
+                    switch (forsaken) {
+                    case 1: w.append(t, String.format("%s has ", corrupted[0].getMainName())); break;
+                    case 2: w.append(t, String.format("%s and %s have ", corrupted[0].getMainName(), corrupted[1].getMainName())); break;
+                    default:
                         w.append(t, String.format("%s, %s, and %s have ", corrupted[0].getMainName(), corrupted[1].getMainName(), corrupted[2].getMainName()));
+                    }
                     if(!w.campaign)
                         w.append(t, "been added to the ranks of the Forsaken!  You can interact with them from the Main Menu, and you may also use them to help corrupt new Chosen in future playthroughs!");
                     else

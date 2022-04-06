@@ -26434,28 +26434,19 @@ public class Forsaken
 
     public int flavorHostility()
     {
-        if(defeatType == 6 && hostility < 75)
-            return 75;
-        else
-            return hostility;
+        return defeatType == 6 && hostility < 75 ? 75 : hostility;
     }
 
     public int flavorDeviancy()
     {
-        if(defeatType == 6 && deviancy < 75)
-            return 75;
-        else
-            return deviancy;
+        return defeatType == 6 && deviancy < 75 ? 75 : deviancy;
     }
 
     public int flavorObedience()
     {
         if(defeatType == 5 && obedience < 40)
             return 65;
-        if(defeatType == 6 && obedience < 75)
-            return 75;
-        else
-            return obedience;
+        return defeatType == 6 && obedience < 75 ? 75 : obedience;
     }
 
     public String himHer()
@@ -26649,7 +26640,6 @@ public class Forsaken
             for(int i = 0; i < formerPartners.length; i++)
                 if(c.equals(formerPartners[i]) && formerFriendships[i] >= 0)
                     return true;
-
         return false;
     }
 

@@ -6127,146 +6127,55 @@ public class WorldState
     {
         index %= 47;
         String result = "";
-        if(index == 0)
-            result = "Nagano";
-        else
-        if(index == 1)
-            result = "Toyonaka";
-        else
-        if(index == 2)
-            result = "Kashiwa";
-        else
-        if(index == 3)
-            result = "Fujisawa";
-        else
-        if(index == 4)
-            result = "Hirakata";
-        else
-        if(index == 5)
-            result = "Gifu";
-        else
-        if(index == 6)
-            result = "Takamatsu";
-        else
-        if(index == 7)
-            result = "Toyota";
-        else
-        if(index == 8)
-            result = "Toyama";
-        else
-        if(index == 9)
-            result = "Yokosuka";
-        else
-        if(index == 10)
-            result = "Nagasaki";
-        else
-        if(index == 11)
-            result = "Kanazawa";
-        else
-        if(index == 12)
-            result = "Amagasaki";
-        else
-        if(index == 13)
-            result = "Fukuyama";
-        else
-        if(index == 14)
-            result = "Ooita";
-        else
-        if(index == 15)
-            result = "Ichikawa";
-        else
-        if(index == 16)
-            result = "Kurashiki";
-        else
-        if(index == 17)
-            result = "Nishinomiya";
-        else
-        if(index == 18)
-            result = "Matsudo";
-        else
-        if(index == 19)
-            result = "Utsunomiya";
-        else
-        if(index == 20)
-            result = "Higashioosaka";
-        else
-        if(index == 21)
-            result = "Matsuyama";
-        else
-        if(index == 22)
-            result = "Himeji";
-        else
-        if(index == 23)
-            result = "Kawaguchi";
-        else
-        if(index == 24)
-            result = "Funabashi";
-        else
-        if(index == 25)
-            result = "Kagoshima";
-        else
-        if(index == 26)
-            result = "Hamamatsu";
-        else
-        if(index == 27)
-            result = "Shizuoka";
-        else
-        if(index == 28)
-            result = "Okayama";
-        else
-        if(index == 29)
-            result = "Sagamihara";
-        else
-        if(index == 30)
-            result = "Kumamoto";
-        else
-        if(index == 31)
-            result = "Niigata";
-        else
-        if(index == 32)
-            result = "Sakai";
-        else
-        if(index == 33)
-            result = "Kitakyushu";
-        else
-        if(index == 34)
-            result = "Chiba";
-        else
-        if(index == 35)
-            result = "Sendai";
-        else
-        if(index == 36)
-            result = "Hiroshima";
-        else
-        if(index == 37)
-            result = "Saitama";
-        else
-        if(index == 38)
-            result = "Kyoto";
-        else
-        if(index == 39)
-            result = "Kobe";
-        else
-        if(index == 40)
-            result = "Kawasaki";
-        else
-        if(index == 41)
-            result = "Fukuoka";
-        else
-        if(index == 42)
-            result = "Sapporo";
-        else
-        if(index == 43)
-            result = "Nagoya";
-        else
-        if(index == 44)
-            result = "Osaka";
-        else
-        if(index == 45)
-            result = "Yokohama";
-        else
-        if(index == 46)
-            result = "Tokyo";
+        switch (index) {
+        case 0: result = "Nagano"; break;
+        case 1: result = "Toyonaka"; break;
+        case 2: result = "Kashiwa"; break;
+        case 3: result = "Fujisawa"; break;
+        case 4: result = "Hirakata"; break;
+        case 5: result = "Gifu"; break;
+        case 6: result = "Takamatsu"; break;
+        case 7: result = "Toyota"; break;
+        case 8: result = "Toyama"; break;
+        case 9: result = "Yokosuka"; break;
+        case 10: result = "Nagasaki"; break;
+        case 11: result = "Kanazawa"; break;
+        case 12: result = "Amagasaki"; break;
+        case 13: result = "Fukuyama"; break;
+        case 14: result = "Ooita"; break;
+        case 15: result = "Ichikawa"; break;
+        case 16: result = "Kurashiki"; break;
+        case 17: result = "Nishinomiya"; break;
+        case 18: result = "Matsudo"; break;
+        case 19: result = "Utsunomiya"; break;
+        case 20: result = "Higashioosaka"; break;
+        case 21: result = "Matsuyama"; break;
+        case 22: result = "Himeji"; break;
+        case 23: result = "Kawaguchi"; break;
+        case 24: result = "Funabashi"; break;
+        case 25: result = "Kagoshima"; break;
+        case 26: result = "Hamamatsu"; break;
+        case 27: result = "Shizuoka"; break;
+        case 28: result = "Okayama"; break;
+        case 29: result = "Sagamihara"; break;
+        case 30: result = "Kumamoto"; break;
+        case 31: result = "Niigata"; break;
+        case 32: result = "Sakai"; break;
+        case 33: result = "Kitakyushu"; break;
+        case 34: result = "Chiba"; break;
+        case 35: result = "Sendai"; break;
+        case 36: result = "Hiroshima"; break;
+        case 37: result = "Saitama"; break;
+        case 38: result = "Kyoto"; break;
+        case 39: result = "Kobe"; break;
+        case 40: result = "Kawasaki"; break;
+        case 41: result = "Fukuoka"; break;
+        case 42: result = "Sapporo"; break;
+        case 43: result = "Nagoya"; break;
+        case 44: result = "Osaka"; break;
+        case 45: result = "Yokohama"; break;
+        case 46: result = "Tokyo"; break;
+        }
         return result;
     }
 
@@ -6274,10 +6183,7 @@ public class WorldState
     {
         if(campaign)
             return conquered;
-        if(save != null)
-            return save.harem;
-        else
-            return new Forsaken[0];
+        return save != null ? save.harem : new Forsaken[0];
     }
 
     public void distortionScene(JTextPane t, Chosen subject, Chosen c, Chosen d, int sceneType)
@@ -15710,58 +15616,57 @@ public class WorldState
         w.append(t, c.mainName);
         if(c.captured)
         {
-            if(c.getHATELevel() == 0)
+            switch (c.getHATELevel()) {
+            case 0:
                 w.append(t, " is struggling to escape the clutches of your Commander body.  ");
-            else
-            if(c.getHATELevel() == 1)
+            break;
+            case 1:
                 w.append(t, String.format("'s eyes are narrowed with annoyance as %s struggles to escape your Commander body.  ", c.heShe()));
-            else
-            if(c.getHATELevel() == 2)
+            break;
+            case 2:
                 w.append(t, String.format(" is fuming with anger as %s struggles to escape your Commander body.  ", c.heShe()));
-            else
-            if(c.getHATELevel() == 3)
+            break;
+            case 3:
                 w.append(t, String.format(" is violently lashing out at anyone who strays too close to %s struggle with your Commander body.  ", c.hisHer()));
-            else
-            if(c.getHATELevel() == 4)
+            break;
+            case 4:
                 w.append(t, String.format(" is screaming madly, overwhelmed by emotion, as %s struggles to escape your Commander body.  ", c.heShe()));
-            else
+            break;
+            default:
                 w.append(t, String.format("'s body is erupting with Demonic energy, a sign of %s hateful state of mind, as %s struggles to escape your Commander.  ", c.hisHer(), c.heShe()));
+            }
         } else
         if(c.surrounded)
         {
-            if(c.getHATELevel() == 0)
+            switch (c.getHATELevel()) {
+            case 0:
                 w.append(t, String.format(" is struggling to escape the Thralls surrounding %s.  ", c.himHer()));
-            else
-            if(c.getHATELevel() == 1)
+            break;
+            case 1:
                 w.append(t, String.format("'s eyes are narrowed with annoyance as %s struggles to escape the Thralls surrounding %s.  ", c.heShe(), c.himHer()));
-            else
-            if(c.getHATELevel() == 2)
+            break;
+            case 2:
                 w.append(t, String.format(" is fuming with anger as %s struggles to escape the Thralls surrounding %s.  ", c.heShe(), c.himHer()));
-            else
-            if(c.getHATELevel() == 3)
+            break;
+            case 3:
                 w.append(t, String.format(" is violently lashing out at anyone who strays too close to %s struggle with the Thralls surrounding %s.  ", c.hisHer(), c.himHer()));
-            else
-            if(c.getHATELevel() == 4)
+            break;
+            case 4:
                 w.append(t, String.format(" is screaming madly, overwhelmed by emotion, as %s struggles to escape the Thralls surrounding %s.  ", c.heShe(), c.himHer()));
-            else
+            break;
+            default:
                 w.append(t, String.format("'s body is erupting with Demonic energy, a sign of %s hateful state of mind, as %s struggles to escape the Thralls surrounding %s.  ", c.hisHer(), c.heShe(), c.himHer()));
-        } else
-        if(c.getHATELevel() == 0)
-            w.append(t, String.format(" is doing %s best to stay focused.  ", c.hisHer()));
-        else
-        if(c.getHATELevel() == 1)
-            w.append(t, "'s eyes are narrowed with annoyance.  ");
-        else
-        if(c.getHATELevel() == 2)
-            w.append(t, "'s teeth are clenched with hatred.  ");
-        else
-        if(c.getHATELevel() == 3)
-            w.append(t, " is violently lashing out.  ");
-        else
-        if(c.getHATELevel() == 4)
-            w.append(t, String.format(" is screaming madly as %s emotions overwhelm %s.  ", c.hisHer(), c.himHer()));
-        else
-            w.append(t, String.format("'s body is erupting with Demonic energy due to %s hateful state of mind.  ", c.hisHer()));
+            }
+        } else {
+            switch (c.getHATELevel()) {
+            case 0: w.append(t, String.format(" is doing %s best to stay focused.  ", c.hisHer())); break;
+            case 1: w.append(t, "'s eyes are narrowed with annoyance.  "); break;
+            case 2: w.append(t, "'s teeth are clenched with hatred.  "); break;
+            case 3: w.append(t, " is violently lashing out.  "); break;
+            case 4: w.append(t, String.format(" is screaming madly as %s emotions overwhelm %s.  ", c.hisHer(), c.himHer())); break;
+            default: w.append(t, String.format("'s body is erupting with Demonic energy due to %s hateful state of mind.  ", c.hisHer()));
+            }
+        }
         if(c.getEXPOLevel() == 0 || c.getEXPOLevel() == 1)
         {
             if(c.getINJULevel() == 0)
@@ -16072,23 +15977,23 @@ public class WorldState
                 w.append(t, String.format("The scraps that remain are far too short to conceal %s lack of panties", c.hisHer()));
             else
                 w.append(t, String.format("Parts of %s %s remain, but not nearly enough to hide %1$s lack of panties", c.hisHer(), c.bottomDesc()));
-            if(c.getPLEALevel() == 0)
+            switch (c.getPLEALevel()) {
+            case 0:
                 w.append(t, ".");
-            else
-            if(c.getPLEALevel() == 1)
+            break;
+            case 1:
                 w.append(t, String.format(", and the feeling of so many eyes watching %s brings a blush to %s cheeks.", c.himHer(), c.hisHer()));
-            else
-            if(c.getPLEALevel() == 2)
+            break;
+            case 2:
                 w.append(t, String.format(", and the feeling of so many eyes watching %s causes %1$s to pant and moan with arousal.", c.himHer()));
-            else
-            if(c.getPLEALevel() == 3)
-            {
+            break;
+            case 3:
                 if(c.gender.equals("female"))
                     w.append(t, String.format(", making the trails of wetness running down %s thighs humiliatingly obvious.", c.hisHer()));
                 else
                     w.append(t, String.format(", making %s straining erection humiliatingly obvious.", c.hisHer()));
-            } else
-            {
+            break;
+            default:
                 w.append(t, String.format(", and %s orgasmic spasms only make %1$s humiliation more complete.", c.hisHer()));
             }
         }
@@ -20416,34 +20321,37 @@ public class WorldState
         for(previousBarriers = 0; comparison < barrierMulti; previousBarriers++)
             comparison = (comparison * 105L) / 100L;
 
-        if(previousBarriers == 0)
+        switch (previousBarriers) {
+        case 0:
             append(t, "A faint haze, invisible to the naked eye, appears across the battlefield as you begin to exert control over reality.");
-        else
-        if(previousBarriers == 1)
+        break;
+        case 1:
             append(t, "The haze of your influence thickens enough to become visible, lending a faint red tint to the battlefield.");
-        else
-        if(previousBarriers == 2)
+        break;
+        case 2:
             append(t, "The red haze grows to the point that it's impossible not to notice, lending an unearthly quality to the scene.");
-        else
-        if(previousBarriers == 3)
+        break;
+        case 3:
             append(t, "From elsewhere in the city, your region of influence is visible as a transparent red dome which pulsates with every surge of power, signaling your increasing control over the space within.");
-        else
-        if(previousBarriers == 4)
+        break;
+        case 4:
             append(t, "The battlefield is completely sealed off from the rest of the city by the red fog, preparing it to be twisted even further by your will.");
-        else
-        if(previousBarriers == 5)
+        break;
+        case 5:
             append(t, "A high-pitched ringing sound begins to echo across the blood-red battlefield, affecting the minds of all within and influencing their emotions.");
-        else
-        if(previousBarriers == 6)
+        break;
+        case 6:
             append(t, "The ringing of your power grows louder, causing windows to shake and pebbles to vibrate and jump along the ground.");
-        else
-        if(previousBarriers == 7)
+        break;
+        case 7:
             append(t, "The red air grows thick and stifling, clinging to the Chosen and slowing their movements even as it protects and supports your servants.");
-        else
-        if(previousBarriers == 8)
+        break;
+        case 8:
             append(t, "Space begins to ripple and distort, as if flowing around unseen obstructions that exist parallel to the mundane architecture of the city.");
-        else
+        break;
+        default:
             append(t, "The mind-numbing ringing digs deeper and deeper into the minds within your barrier.  For those trapped within, it feels as though countless eyes are watching from the edge of their peripheral vision.");
+        }
         append(t, "\n\n+5% damage taken for the remainder of the battle.  (+" + String.valueOf(barrierMulti / 100L - 100L) + "% total)");
     }
 
@@ -21185,16 +21093,12 @@ public class WorldState
 
     public void switchTextSize()
     {
-        if(textSize == 16)
-            textSize = 20;
-        else
-        if(textSize == 20)
-            textSize = 24;
-        else
-        if(textSize == 24)
-            textSize = 12;
-        else
-            textSize = 16;
+        switch (textSize) {
+            case 16: textSize = 20; break;
+            case 20: textSize = 24; break;
+            case 24: textSize = 12; break;
+            default: textSize = 16;
+        }
         for(int i = 0; i < 3; i++)
             if(cast[i] != null)
                 cast[i].setTextSize(textSize);
@@ -21315,10 +21219,7 @@ public class WorldState
 
     public Boolean writePossible()
     {
-        if(currentAction <= commentary.length && commentaryWrite)
-            return true;
-        else
-            return false;
+        return currentAction <= commentary.length && commentaryWrite;
     }
 
     public void readCommentary(JTextPane t)
@@ -22247,10 +22148,7 @@ public class WorldState
     public Boolean spendCapture()
     {
         capturesPossible--;
-        if(capturesPossible > 0)
-            return true;
-        else
-            return false;
+        return capturesPossible > 0;
     }
 
     public int getCapturesPossible()
@@ -22263,10 +22161,7 @@ public class WorldState
 
     public Boolean validLine(int test)
     {
-        if(test != lastLine && test != lastLastLine && test > 0)
-            return true;
-        else
-            return false;
+        return test != lastLine && test != lastLastLine && test > 0;
     }
 
     public void chatter(JTextPane t)
@@ -24512,23 +24407,25 @@ public class WorldState
         else
         if(bodyStatus[1])
             reportedDuration++;
-        if(reportedDuration == 2)
+        switch (reportedDuration) {
+        case 2:
             append(t, " for two rounds");
-        else
-        if(reportedDuration == 3)
+        break;
+        case 3:
             append(t, " for three rounds");
-        else
-        if(reportedDuration == 4)
+        break;
+        case 4:
             append(t, " for four rounds");
-        else
-        if(reportedDuration == 5)
+        break;
+        case 5:
             append(t, " for five rounds");
-        else
-        if(reportedDuration == 6)
+        break;
+        case 6:
             append(t, " for six rounds");
-        else
-        if(reportedDuration == 8)
+        break;
+        case 8:
             append(t, " for eight rounds");
+        }
         if(bodyStatus[2])
         {
             append(t, " once you give the order");
@@ -24889,10 +24786,10 @@ public class WorldState
 
     public Boolean upgradedCommander()
     {
-        if(!bodyStatus[3] && !bodyStatus[4] && !bodyStatus[5] && !bodyStatus[6] && !bodyStatus[11] && !bodyStatus[12] && !bodyStatus[13] && !bodyStatus[14] && !bodyStatus[19] && !bodyStatus[20] && !bodyStatus[21] && !bodyStatus[22] && usedForsaken == null)
-            return false;
-        else
-            return true;
+        for (int i = 3; i < 7; ++i)
+            if (bodyStatus[i] || bodyStatus[i+8] || bodyStatus[i+16])
+                return true;
+        return usedForsaken != null;
     }
 
     public void newCombat(WorldState w, Chosen c[])
@@ -24988,20 +24885,22 @@ public class WorldState
         int time = 600 - target.dignity * 2;
         time = (time * (250 - other.confidence)) / 200;
         int analysis = getRelationship(target.number, other.number);
-        if(analysis == 1)
+        switch (analysis) {
+        case 1:
             time = (time * 9) / 10;
-        else
-        if(analysis == 2)
+        break;
+        case 2:
             time = (time * 6) / 7;
-        else
-        if(analysis == 4)
+        break;
+        case 4:
             time = (time * 4) / 5;
-        else
-        if(analysis == -2)
+        break;
+        case -2:
             time = (time * 7) / 6;
-        else
-        if(analysis == -4)
+        break;
+        case -4:
             time = (time * 5) / 4;
+        }
         return time;
     }
 
@@ -25953,42 +25852,27 @@ public class WorldState
 
     public Boolean determineVVirg(int morality, int innocence, int confidence, int dignity)
     {
-        if((morality + confidence) - innocence - 20 < 0 && morality < 34)
-            return false;
-        else
-            return true;
+        return (morality + confidence) - innocence - 20 < 0 && morality < 34 ? false : true;
     }
 
     public Boolean determineCVirg(int morality, int innocence, int confidence, int dignity)
     {
-        if((innocence + dignity) - morality - 20 < 0 && innocence < 34)
-            return false;
-        else
-            return true;
+        return (innocence + dignity) - morality - 20 < 0 && innocence < 34 ? false : true;
     }
 
     public Boolean determineAVirg(int morality, int innocence, int confidence, int dignity)
     {
-        if((confidence + innocence) - dignity - 20 < 0 && confidence < 34)
-            return false;
-        else
-            return true;
+        return (confidence + innocence) - dignity - 20 < 0 && confidence < 34 ? false : true;
     }
 
     public Boolean determineModest(int morality, int innocence, int confidence, int dignity)
     {
-        if((morality + dignity) - confidence - 20 < 0 && dignity < 34)
-            return false;
-        else
-            return true;
+        return (morality + dignity) - confidence - 20 < 0 && dignity < 34 ? false : true;
     }
 
     public Boolean determinePurity(int morality, int innocence, int confidence, int dignity)
     {
-        if(determineVVirg(morality, innocence, confidence, dignity) && determineCVirg(morality, innocence, confidence, dignity) && determineAVirg(morality, innocence, confidence, dignity) && determineModest(morality, innocence, confidence, dignity))
-            return true;
-        else
-            return false;
+        return determineVVirg(morality, innocence, confidence, dignity) && determineCVirg(morality, innocence, confidence, dignity) && determineAVirg(morality, innocence, confidence, dignity) && determineModest(morality, innocence, confidence, dignity);
     }
 
     public int[] getNameSeed()
@@ -26473,10 +26357,7 @@ public class WorldState
 
     public Boolean tutorialResponse()
     {
-        if(onTrack)
-            return tutorial;
-        else
-            return false;
+        return onTrack ? tutorial : false;
     }
 
     public Boolean isTutorial()
@@ -27048,16 +26929,12 @@ public class WorldState
                     int sign = 1;
                     if(ranges[mostCertain[j]][j] < 0)
                         sign = -1;
-                    if(certainties[mostCertain[j]][j] == 8)
-                        margin = 40;
-                    if(certainties[mostCertain[j]][j] == 7)
-                        margin = 49;
-                    else
-                    if(certainties[mostCertain[j]][j] == 6)
-                        margin = 43;
-                    else
-                    if(certainties[mostCertain[j]][j] == 5)
-                        margin = 45;
+                    switch (certainties[mostCertain[j]][j]) {
+                        case 8: margin = 40; break;
+                        case 7: margin = 49; break;
+                        case 6: margin = 43; break;
+                        case 5: margin = 45;
+                    }
                     margin *= sign;
                 } else
                 {
@@ -27068,25 +26945,15 @@ public class WorldState
                 int multiplier = 1;
                 if(ranges[mostCertain[j]][j] < 0)
                     multiplier = -1;
-                if(certainties[mostCertain[j]][j] == 6)
-                    margin = 50;
-                else
-                if(certainties[mostCertain[j]][j] == 5)
-                    margin = 48;
-                else
-                if(certainties[mostCertain[j]][j] == 4)
-                    margin = 47;
-                else
-                if(certainties[mostCertain[j]][j] == 3)
-                    margin = 35;
-                else
-                if(certainties[mostCertain[j]][j] == 2)
-                    margin = 28;
-                else
-                if(certainties[mostCertain[j]][j] == 1)
-                    margin = 13;
-                else
-                    margin = 0;
+                switch (certainties[mostCertain[j]][j]) {
+                    case 6: margin = 50; break;
+                    case 5: margin = 48; break;
+                    case 4: margin = 47; break;
+                    case 3: margin = 35; break;
+                    case 2: margin = 28; break;
+                    case 1: margin = 13; break;
+                    default: margin = 0;
+                }
                 margin *= multiplier;
             }
             int baseValue = 50 + margin;
@@ -27429,14 +27296,11 @@ public class WorldState
                 for(int j = 0; j < 4; j++)
                 {
                     String type = "Morality";
-                    if(j == 1)
-                        type = "Innocence";
-                    else
-                    if(j == 2)
-                        type = "Confidence";
-                    else
-                    if(j == 3)
-                        type = "Dignity";
+                    switch (j) {
+                        case 1: type = "Innocence"; break;
+                        case 2: type = "Confidence"; break;
+                        case 3: type = "Dignity";
+                    }
                     switch (statSeed[i * 4 + j] / 33) {
                         case 0: redAppend(t, "\n" + type + ": Minor"); break;
                         case 1: greenAppend(t, "\n" + type + ": Significant"); break;
@@ -27739,17 +27603,12 @@ public class WorldState
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                if(progress == 0)
-                    invertVVirg[id] = Boolean.valueOf(!invertVVirg[id]);
-                else
-                if(progress == 1)
-                    invertCVirg[id] = Boolean.valueOf(!invertCVirg[id]);
-                else
-                if(progress == 2)
-                    invertAVirg[id] = Boolean.valueOf(!invertAVirg[id]);
-                else
-                if(progress == 3)
-                    invertModest[id] = Boolean.valueOf(!invertModest[id]);
+                switch (progress) {
+                    case 0: invertVVirg[id] = Boolean.valueOf(!invertVVirg[id]); break;
+                    case 1: invertCVirg[id] = Boolean.valueOf(!invertCVirg[id]); break;
+                    case 2: invertAVirg[id] = Boolean.valueOf(!invertAVirg[id]); break;
+                    case 3: invertModest[id] = Boolean.valueOf(!invertModest[id]);
+                }
                 if(progress < 3)
                 {
                     reviewVulnerabilities(t, p, f, shown, id, progress + 1);
@@ -28707,17 +28566,12 @@ public class WorldState
         for(int j = 0; j < 4; j++)
         {
             String method = "";
-            if(j == 0)
-                method = "up";
-            else
-            if(j == 1)
-                method = "into";
-            else
-            if(j == 2)
-                method = "down";
-            else
-            if(j == 3)
-                method = "around";
+            switch (j) {
+                case 0: method = "up"; break;
+                case 1: method = "into"; break;
+                case 2: method = "down"; break;
+                case 3: method = "around";
+            }
             final String finalMethod = method;
             JButton ThisOne = new JButton(method);
             ThisOne.addActionListener(new ActionListener() {
@@ -28828,17 +28682,12 @@ public class WorldState
         for(int j = 0; j < 4; j++)
         {
             String method = "";
-            if(j == 0)
-                method = "up";
-            else
-            if(j == 1)
-                method = "into";
-            else
-            if(j == 2)
-                method = "down";
-            else
-            if(j == 3)
-                method = "around";
+            switch (j) {
+                case 0: method = "up"; break;
+                case 1: method = "into"; break;
+                case 2: method = "down"; break;
+                case 3: method = "around";
+            }
             final String finalMethod = method;
             JButton ThisOne = new JButton(method);
             ThisOne.addActionListener(new ActionListener() {
@@ -29053,17 +28902,12 @@ public class WorldState
         for(int j = 0; j < 4; j++)
         {
             String method = "";
-            if(j == 0)
-                method = "swing";
-            else
-            if(j == 1)
-                method = "shoot";
-            else
-            if(j == 2)
-                method = "command";
-            else
-            if(j == 3)
-                method = "part of " + himHer;
+            switch (j) {
+                case 0: method = "swing"; break;
+                case 1: method = "shoot"; break;
+                case 2: method = "command"; break;
+                case 3: method = "part of " + himHer;
+            }
             JButton ThisOne = new JButton(method);
             if(method.contains("part"))
                 method = "part";

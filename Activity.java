@@ -2247,14 +2247,12 @@ public class Activity
             result -= sender.getPLEALevel() * 5;
             result -= (sender.getObedience() - 65) / 2;
             result += (sender.getConfidence() - 50) / 3;
-            if(sender.getINJULevel() == 2)
-                result += 20;
-            else
-            if(sender.getINJULevel() == 3)
-                result += 40;
-            else
-            if(sender.getINJULevel() == 4)
-                result += 100;
+
+            switch (sender.getINJULevel()) {
+                case 2: result += 20; break;
+                case 3: result += 40; break;
+                case 4: result += 100;
+            }
             result++;
         } else
         if(this == Project.PushDown)
