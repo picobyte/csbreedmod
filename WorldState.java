@@ -4686,33 +4686,27 @@ public class WorldState
                         switch (c.innocence / 33) {
                         case 0:
                             Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.SHAME);
-                            if(c.gender.equals("female"))
-                                c.say(t, "You have no right to talk like that!");
-                            else
-                            if(c.gender.equals("male"))
-                                c.say(t, "It is most certainly not fuckable by the likes of you.");
-                            else
-                                c.say(t, "I-It's simply an anatomical trait like any other...");
+                            switch (c.gender) {
+                                case "female": c.say(t, "You have no right to talk like that!"); break;
+                                case "male": c.say(t, "It is most certainly not fuckable by the likes of you."); break;
+                                default: c.say(t, "I-It's simply an anatomical trait like any other...");
+                            }
                         break;
                         case 1:
                             Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.SHAME);
-                            if(c.gender.equals("female"))
-                                c.say(t, "Is that all I am in your eyes?");
-                            else
-                            if(c.gender.equals("male"))
-                                c.say(t, "That's disgusting!");
-                            else
-                                c.say(t, "There's nothing dirty about it!");
+                            switch (c.gender) {
+                                case "female": c.say(t, "Is that all I am in your eyes?"); break;
+                                case "male": c.say(t, "That's disgusting!"); break;
+                                default: c.say(t, "There's nothing dirty about it!");
+                                }
                         break;
                         default:
                             Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.STRUGGLE);
-                            if(c.gender.equals("female"))
-                                c.say(t, "Is my body really... 'slutty'?");
-                            else
-                            if(c.gender.equals("male"))
-                                c.say(t, "Huh?  What does that mean?");
-                            else
-                                c.say(t, "It's not dirty...");
+                            switch (c.gender) {
+                                case "female": c.say(t, "Is my body really... 'slutty'?"); break;
+                                case "male": c.say(t, "Huh?  What does that mean?"); break;
+                                default: c.say(t, "It's not dirty...");
+                            }
                         }
                 } else
                 if(c.morality > 33)
@@ -4751,83 +4745,67 @@ public class WorldState
                     } else
                     if(thisAttack == 2)
                         switch (c.innocence / 33) {
-                        case 0:
-                            Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.SHAME);
-                            if(c.gender.equals("female"))
-                                c.say(t, "Stop telling me about your masturbation habits.");
-                            else
-                            if(c.gender.equals("male"))
-                                c.say(t, "Your insecurity would be amusing were it not so pathetic.");
-                            else
-                                c.say(t, "Do as you like...");
-                        break;
-                        case 1:
-                            Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                            if(c.gender.equals("female"))
-                                c.say(t, "Pathetic.  Is that the only way you can get off?");
-                            else
-                            if(c.gender.equals("male"))
-                                c.say(t, "It's still gay, idiot...");
-                            else
-                                c.say(t, "Why are you acting like you're obligated to jack off?");
-                        break;
-                        default:
-                            Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.ANGER);
-                            if(c.gender.equals("female"))
-                                c.say(t, "Stop using me for weird things!");
-                            else
-                            if(c.gender.equals("male"))
-                                c.say(t, "D-Don't call me cute!");
-                            else
-                                c.say(t, "If it's weird, then don't do it!");
+                            case 0:
+                                Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.SHAME);
+                                switch (c.gender) {
+                                    case "female": c.say(t, "Stop telling me about your masturbation habits."); break;
+                                    case "male": c.say(t, "Your insecurity would be amusing were it not so pathetic."); break;
+                                    default: c.say(t, "Do as you like...");
+                                }
+                            break;
+                            case 1:
+                                Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
+                                switch (c.gender) {
+                                    case "female": c.say(t, "Pathetic.  Is that the only way you can get off?"); break;
+                                    case "male": c.say(t, "It's still gay, idiot..."); break;
+                                    default: c.say(t, "Why are you acting like you're obligated to jack off?");
+                                }
+                            break;
+                            default:
+                                Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.ANGER);
+                                switch (c.gender) {
+                                    case "female": c.say(t, "Stop using me for weird things!"); break;
+                                    case "male": c.say(t, "D-Don't call me cute!"); break;
+                                    default: c.say(t, "If it's weird, then don't do it!");
+                                }
                         }
                 } else
                 {
                     Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.ANGER, Project.Emotion.STRUGGLE);
-                    if(thisAttack == 0)
-                    {
+                    if(thisAttack == 0) {
                         switch (c.dignity / 33) {
                             case 0: c.say(t, "Disgusting perverts!"); break;
                             case 1: c.say(t, "You think you'll get away with this!?"); break;
                             default: c.say(t, "F-Fine, it's not like I care...!");
                         }
-                    } else
-                    if(thisAttack == 1)
-                    {
+                    } else if(thisAttack == 1) {
                         switch (c.confidence / 33) {
                             case 0: c.say(t, "I'll do whatever you want, just s-stop torturing me!"); break;
                             case 1: c.say(t, "I won't... let you break me...!"); break;
                             default: c.say(t, "Graaagh!  I'll fucking kill all of you!");
                         }
-                    } else
-                    if(thisAttack == 2)
-                        if(c.innocence > 66)
-                        {
-                            if(c.gender.equals("female"))
-                                c.say(t, "You're way more evil than me for liking this sort of thing!");
-                            else
-                            if(c.gender.equals("male"))
-                                c.say(t, "But I'm a guy!");
-                            else
-                                c.say(t, "Huh?  Why wouldn't I like my dick?");
+                    } else if(thisAttack == 2) {
+                        if(c.innocence > 66) {
+                            switch (c.gender) {
+                                case "female": c.say(t, "You're way more evil than me for liking this sort of thing!"); break;
+                                case "male": c.say(t, "But I'm a guy!"); break;
+                                default: c.say(t, "Huh?  Why wouldn't I like my dick?");
+                            }
                         } else
-                        if(c.innocence > 33)
-                        {
-                            if(c.gender.equals("female"))
-                                c.say(t, "You all should just kill yourselves.");
-                            else
-                            if(c.gender.equals("male"))
-                                c.say(t, "Th-That'll never happen!");
-                            else
-                                c.say(t, "I'm not insecure at all!");
-                        } else
-                        if(c.gender.equals("female"))
-                            c.say(t, "Do you really think it's a good idea to antagonize an 'evil bitch' like me?");
-                        else
-                        if(c.gender.equals("male"))
-                            c.say(t, "What a pathetic fantasy.");
-                        else
-                            c.say(t, "Do not presume to psychoanalyze me.");
+                        if(c.innocence > 33) {
+                            switch (c.gender) {
+                                case "female": c.say(t, "You all should just kill yourselves."); break;
+                                case "male": c.say(t, "Th-That'll never happen!"); break;
+                                default: c.say(t, "I'm not insecure at all!");
+                            }
+                        } else {
+                            switch (c.gender) {
+                                case "female": c.say(t, "Do you really think it's a good idea to antagonize an 'evil bitch' like me?"); break;
+                                case "male": c.say(t, "What a pathetic fantasy."); break;
+                                default: c.say(t, "Do not presume to psychoanalyze me.");
+                            }
+                        }
+                    }
                 }
             } else
             if(c.morality > 66)
@@ -5743,19 +5721,23 @@ public class WorldState
                 if(w.getBodyStatus()[3])
                 {
                     w.append(t, String.format("Finally, %s", c.mainName));
-                    if(c.weapon.equals("revolver") || c.weapon.equals("pistols") || c.weapon.equals("rifle") || c.weapon.equals("shurikens") || c.weapon.equals("bow") || c.weapon.equals("staff") || c.customWeaponType.equals("shoot"))
+                    if(c.weapon.equals("revolver") || c.weapon.equals("pistols") || c.weapon.equals("rifle") || c.weapon.equals("shurikens") || c.weapon.equals("bow") || c.weapon.equals("staff") || c.customWeaponType.equals("shoot")) {
                         w.append(t, String.format(" manages to angle %s arms so that %s can land several shots with %1$s %s directly in the largest mouth on your chest.", c.hisHer(), c.heShe(), c.weapon));
-                    else
-                    if(c.weapon.equals("spirits"))
-                        w.append(t, String.format("'s %s catch up to where your tongues have dragged %s and begin draining the life from your body.", c.weapon, c.himHer()));
-                    else
-                    if(c.weapon.equals("monster"))
-                        w.append(t, String.format(" manages to pull far enough away from your body that %s %s can land a clawed swipe between the two of you, severing the tongues you've wrapped around %s.", c.hisHer(), c.weapon, c.himHer()));
-                    else
-                    if(c.customWeaponType.equals("command"))
-                        w.append(t, String.format("'s predicament is solved when your body abruptly comes under attack from %s %s.", c.hisHer(), c.weapon));
-                    else
-                        w.append(t, String.format(" lands a solid blow with %s %s into the largest mouth on your chest.", c.hisHer(), c.weapon));
+                    } else {
+                        switch (c.weapon) {
+                            case "spirits":
+                                w.append(t, String.format("'s %s catch up to where your tongues have dragged %s and begin draining the life from your body.", c.weapon, c.himHer()));
+                                break;
+                            case "monster":
+                                w.append(t, String.format(" manages to pull far enough away from your body that %s %s can land a clawed swipe between the two of you, severing the tongues you've wrapped around %s.", c.hisHer(), c.weapon, c.himHer()));
+                                break;
+                            case "command":
+                                w.append(t, String.format("'s predicament is solved when your body abruptly comes under attack from %s %s.", c.hisHer(), c.weapon));
+                                break;
+                            default:
+                                w.append(t, String.format(" lands a solid blow with %s %s into the largest mouth on your chest.", c.hisHer(), c.weapon));
+                        }
+                    }
                 } else
                 if(w.getBodyStatus()[4])
                 {
@@ -7907,13 +7889,16 @@ public class WorldState
             {
                 if(c.underType.equals("none"))
                 {
-                    if(c.gender.equals("female"))
+                    switch (c.gender) {
+                    case "female":
                         append(t, c.mainName + " tears away the front of " + c.hisHer() + " " + c.bottomDesc() + " so that " + c.hisHer() + " bare pussy is blatantly exposed.  " + c.HeShe() + " teasingly covers " + c.himHer() + "self with one hand between " + c.hisHer() + " ");
-                    else
-                    if(c.gender.equals("male"))
+                    break;
+                    case "male":
                         append(t, c.mainName + " tears away the front of " + c.hisHer() + " " + c.bottomDesc() + " so that " + c.hisHer() + " bare penis is blatantly exposed.  " + c.HeShe() + " teasingly covers " + c.himHer() + "self with one hand between " + c.hisHer() + " ");
-                    else
+                    break;
+                    default:
                         append(t, c.mainName + " tears away the front of " + c.hisHer() + " " + c.bottomDesc() + " so that " + c.hisHer() + " penis and pussy are both blatantly exposed.  " + c.HeShe() + " teasingly covers " + c.himHer() + "self with one hand between " + c.hisHer() + " ");
+                    }
                 } else
                 {
                     if(c.underType.equals("panties") || c.underType.equals("wrap"))
@@ -9035,13 +9020,16 @@ public class WorldState
             if(d.dignity > 33)
             {
                 append(t, "As soon as the door is latched shut, " + d.givenName + " starts hurriedly stripping " + d.hisHer() + " clothes off.  " + c.givenName + " turns around to see " + d.himHer() + " completely naked, shifting nervously from foot to foot.  ");
-                if(d.gender.equals("male"))
+                switch (d.gender) {
+                case "male":
                     append(t, d.HisHer() + " stiff penis points straight at the ceiling.\n\n");
-                else
-                if(d.gender.equals("female"))
+                break;
+                case "female":
                     append(t, d.HisHer() + " thighs glisten with obvious wetness.\n\n");
-                else
+                break;
+                default:
                     append(t, d.HisHer() + " eager cock stands upright, and " + d.hisHer() + " thighs glisten with " + d.hisHer() + " arousal.\n\n");
+                }
                 d.say(t, "\"Please, " + c.givenName + ", I... I need you...\"\n\n");
                 c.say(t, "\"");
                 switch (c.innocence / 33) {
@@ -9053,13 +9041,16 @@ public class WorldState
             } else
             {
                 append(t, "Before the door is even closed, " + d.heShe() + "'s grabbing " + c.givenName + "'s hand and guiding it under " + d.hisHer() + " skirt.  " + d.HeShe() + " didn't bother wearing panties, and " + c.givenName + " can directly feel " + d.hisHer() + " ");
-                if(d.gender.equals("male"))
+                switch (d.gender) {
+                case "male":
                     append(t, "stiff penis");
-                else
-                if(d.gender.equals("female"))
+                break;
+                case "female":
                     append(t, "dripping wet slit");
-                else
+                break;
+                default:
                     append(t, "erect cock and wet slit");
+                }
                 append(t, " as " + d.heShe() + " stares up at " + c.himHer() + " with teary-eyed desire.\n\n");
                 d.say(t, "\"I'm ready for you...\"\n\n");
                 c.say(t, "\"");
@@ -11486,13 +11477,13 @@ public class WorldState
                 if(c.getPLEALevel() > 3)
                     w.append(t, String.format("However, despite %s attempted defiance, %1$s eyes are still unfocused and %1$s body continues to shake with orgasmic spasms.", c.hisHer()));
                 else
-                if(c.gender.equals("female"))
+                switch (c.gender) {
+                case "female":
                     w.append(t, String.format("However, the love juices running down %s thighs makes it hard to believe %s's really capable of focusing on the battle right now.", c.hisHer(), c.heShe()));
-                else
-                if(c.gender.equals("male"))
-                    w.append(t, String.format("However, %s obvious erection makes it hard to believe %s's really capable of focusing on the battle right now.", c.hisHer(), c.heShe()));
-                else
-                    w.append(t, String.format("However, %s obvious erection and the love juices running down %1$s thighs make it hard to believe %s's really capable of focusing on the battle right now.", c.hisHer(), c.heShe()));
+                break;
+case "male": w.append(t, String.format("However, %s obvious erection makes it hard to believe %s's really capable of focusing on the battle right now.", c.hisHer(), c.heShe()));
+                default: w.append(t, String.format("However, %s obvious erection and the love juices running down %1$s thighs make it hard to believe %s's really capable of focusing on the battle right now.", c.hisHer(), c.heShe()));
+                }
             } else
             if(c.getINJULevel() == 4)
             {
@@ -12407,14 +12398,16 @@ public class WorldState
         Boolean parasitized = c.isParasitized();
         String feetType = c.feetType;
         String topDesc = c.topCover;
-        if(topDesc.equals("crop"))
+        switch (topDesc) {
+        case "crop":
             topDesc = "crop top";
-        else
-        if(topDesc.equals("strips"))
+        break;
+        case "strips":
             topDesc = "strips of cloth";
-        else
-        if(topDesc.equals("bindings"))
+        break;
+        case "bindings":
             topDesc = "chest bindings";
+        }
         String bottomDesc = c.bottomCover;
         if(bottomDesc.equals("strips"))
             bottomDesc = "strips of cloth";
@@ -13278,14 +13271,16 @@ public class WorldState
         Boolean parasitized = c.isParasitized();
         String feetType = c.feetType;
         String topDesc = c.topCover;
-        if(topDesc.equals("crop"))
+        switch (topDesc) {
+        case "crop":
             topDesc = "crop top";
-        else
-        if(topDesc.equals("strips"))
+        break;
+        case "strips":
             topDesc = "strips of cloth";
-        else
-        if(topDesc.equals("bindings"))
+        break;
+        case "bindings":
             topDesc = "chest bindings";
+        }
         String bottomDesc = c.bottomCover;
         if(bottomDesc.equals("strips"))
             bottomDesc = "strips of cloth";
@@ -13477,13 +13472,16 @@ public class WorldState
                             w.append(t, String.format("the sensation of your pseudopod plumbing %s depths.  ", c.hisHer()));
                         else
                             w.append(t, String.format("the sensation of you cumming inside %s.  ", c.himHer()));
-                        if(gender.equals("male"))
+                        switch (gender) {
+                        case "male":
                             w.append(t, String.format("%s spurts %s own cum onto the ground, %2$s ass ", c.HeShe(), c.hisHer()));
-                        else
-                        if(gender.equals("female"))
+                        break;
+                        case "female":
                             w.append(t, String.format("%s involuntarily bucks %s hips, %2$s folds ", c.HeShe(), c.hisHer()));
-                        else
+                        break;
+                        default:
                             w.append(t, String.format("%s spurts %s own cum onto the ground, %2$s folds ", c.HeShe(), c.hisHer()));
+                        }
                         if(w.getBodyStatus()[4])
                         {
                             w.append(t, String.format("squeezing down every time your sucker tentacle pulls on %s ", c.hisHer()));
@@ -14284,13 +14282,16 @@ public class WorldState
                             w.append(t, String.format("When %s feels %s's tongue invade %s anus, %1$s moans into %s's mouth.  ", c.heShe(), otherOne, c.hisHer(), otherTwo));
                     } else
                     {
-                        if(gender.equals("female"))
+                        switch (gender) {
+                        case "female":
                             w.append(t, String.format("The feeling of %s's fingers invading %s anus forces out another orgasm, and %s pinches and twists %2$s clit to draw it out for several agonizing seconds.  ", otherOne, c.hisHer(), otherTwo));
-                        else
-                        if(gender.equals("male"))
+                        break;
+                        case "male":
                             w.append(t, String.format("The feeling of %s deepthroating %s cock makes %s start to cum, but then %s cruelly pinches the base of %2$s cock, giggling and nibbling %2$s ear as the release %s craves remains out of reach.  ", otherOne, c.hisHer(), mainName, otherTwo, c.heShe()));
-                        else
+                        break;
+                        default:
                             w.append(t, String.format("The feeling of %s's fingers invading %s anus forces out another orgasm, and %s deepthroats %2$s cock to suck out every last drop of cum.  ", otherOne, c.hisHer(), otherTwo));
+                        }
                         if(w.getBodyStatus()[5])
                             w.append(t, String.format("%s eyes roll into the back of %s head as the conflicting sensations overwhelm %s.  ", c.HisHer(), c.hisHer(), c.himHer()));
                     }
@@ -15181,13 +15182,16 @@ public class WorldState
                         if(w.getBodyStatus()[19])
                             w.append(t, String.format(" pump even more Demonic cum inside %s.  %s ", c.himHer(), c.HeShe()));
                         else
-                        if(gender.equals("female"))
+                        switch (gender) {
+                        case "female":
                             w.append(t, String.format(" dig into %s pussy, spreading it so wide open that they can see all the way to %1$s cervix%s.  %s ", c.hisHer(), addition, c.HeShe()));
-                        else
-                        if(gender.equals("male"))
+                        break;
+                        case "male":
                             w.append(t, String.format(" penetrate %s asshole, spreading it so wide open that they can see all the way inside%s.  %s ", c.hisHer(), addition, c.HeShe()));
-                        else
+                        break;
+                        default:
                             w.append(t, String.format(" pin %s penis out of the way and then dig into %1$s pussy, spreading it so wide open that they can see all the way to %1$s cervix%s.  %s ", c.hisHer(), addition, c.HeShe()));
+                        }
                     }
                     switch (confidence / 33) {
                         case 0: w.append(t, String.format("winces in pain, but %s's too timid to fight back.", c.heShe())); break;
@@ -15873,39 +15877,51 @@ public class WorldState
                 {
                     if(c.topDesc().equals(c.bottomDesc()))
                     {
-                        if(c.gender.equals("female"))
+                        switch (c.gender) {
+                        case "female":
                             w.append(t, String.format(", and the damaged garment also reveals %s thighs, glistening with %1$s juices.", c.hisHer()));
-                        else
-                        if(c.gender.equals("male"))
+                        break;
+                        case "male":
                             w.append(t, String.format(", and the damaged garment is tented up by %s erection to reveal %1$s thighs.", c.hisHer()));
-                        else
+                        break;
+                        default:
                             w.append(t, String.format(", and the damaged garment is tented up by %s erection to reveal %1$s thighs, glistening with %1$s juices.", c.hisHer()));
+                        }
                     } else
-                    if(c.gender.equals("female"))
+                    switch (c.gender) {
+                    case "female":
                         w.append(t, String.format(", while the damage to %s %s also reveals %1$s thighs, glistening with %1$s juices.", c.hisHer(), c.bottomDesc()));
-                    else
-                    if(c.gender.equals("male"))
+                    break;
+                    case "male":
                         w.append(t, String.format(", while %s straining erection tents %1$s torn %s upward to reveal %1$s thighs.", c.hisHer(), c.bottomDesc()));
-                    else
+                    break;
+                    default:
                         w.append(t, String.format(", while %s straining erection tents %1$s torn %s upward to reveal %1$s thighs, glistening with %1$s juices.", c.hisHer(), c.bottomDesc()));
+                    }
                 } else
                 if(c.topDesc().equals(c.bottomDesc()))
                 {
-                    if(c.gender.equals("female"))
+                    switch (c.gender) {
+                    case "female":
                         w.append(t, String.format(", and the damaged garment also threatens to reveal %s lack of panties and the fact that %1$s juices drip down %1$s thighs.", c.hisHer()));
-                    else
-                    if(c.gender.equals("male"))
+                    break;
+                    case "male":
                         w.append(t, String.format(", %s straining erection lifts the damaged garment almost enough to reveal %1$s lack of panties.", c.hisHer()));
-                    else
+                    break;
+                    default:
                         w.append(t, String.format(", %s straining erection lifts the damaged garment almost enough to reveal %1$s lack of panties and the fact that %1$s juices drip down %1$s thighs.", c.hisHer()));
+                    }
                 } else
-                if(c.gender.equals("female"))
+                switch (c.gender) {
+                case "female":
                     w.append(t, String.format(", while the damage to %s %s threatens to reveal %1$s lack of panties and the fact that %1$s juices drip down %1$s thighs.", c.hisHer(), c.bottomDesc()));
-                else
-                if(c.gender.equals("male"))
+                break;
+                case "male":
                     w.append(t, String.format(", while %s straining erection lifts %1$s damaged %s almost enough to reveal %1$s lack of panties.", c.hisHer(), c.bottomDesc()));
-                else
+                break;
+                default:
                     w.append(t, String.format(", while %s straining erection lifts %1$s damaged %s almost enough to reveal %1$s lack of panties and the fact that %1$s juices drip down %1$s thighs.", c.hisHer(), c.bottomDesc()));
+                }
             } else
             if(c.getEXPOLevel() == 2)
             {
@@ -16744,11 +16760,13 @@ public class WorldState
         String topDesc = c.topCover;
         String mainName = c.getMainName();
         String bottomCover = c.bottomCover;
-        if(topDesc.equals("crop"))
+        switch (topDesc) {
+        case "crop":
             topDesc = "crop top";
-        else
-        if(topDesc.equals("strips"))
+        break;
+        case "strips":
             topDesc = "strips of cloth";
+        }
         String bottomDesc = c.bottomCover;
         String topCover = c.topCover;
         String feetType = c.feetType;
@@ -17153,11 +17171,13 @@ public class WorldState
         Boolean modest = c.modest;
         String mainName = c.getMainName();
         String bottomCover = c.bottomCover;
-        if(topDesc.equals("crop"))
+        switch (topDesc) {
+        case "crop":
             topDesc = "crop top";
-        else
-        if(topDesc.equals("strips"))
+        break;
+        case "strips":
             topDesc = "strips of cloth";
+        }
         String bottomDesc = c.bottomCover;
         String topCover = c.topCover;
         String feetType = c.feetType;
@@ -18641,60 +18661,63 @@ public class WorldState
                         w.append(t, String.format("%s's orgasmic spasms emphasize %s bare breasts and fully erect nipples, ", mainName, c.hisHer()));
                     if(bottomCover.equals("skirt"))
                     {
-                        if(c.getGender().equals("female"))
+                        switch (c.getGender()) {
+                        case "female":
                             w.append(t, String.format("while the remains of the skirt flapping around %s hips are too short to conceal %1$s pussy.  ", c.hisHer()));
-                        else
-                        if(c.getGender().equals("male"))
+                        break;
+                        case "male":
                             w.append(t, String.format("while the remains of the skirt flapping around %s hips are too short to conceal %1$s penis.  ", c.hisHer()));
-                        else
+                        break;
+                        default:
                             w.append(t, String.format("while the remains of the skirt flapping around %s hips are too short to conceal %1$s penis and pussy.  ", c.hisHer()));
+                        }
                     } else
-                    if(bottomCover.equals("miniskirt"))
-                        w.append(t, String.format("while %s miniskirt has been reduced to nothing more than a belt of material around %1$s waist.  ", c.hisHer()));
-                    else
-                    if(bottomCover.equals("robe"))
-                        w.append(t, String.format("while %s robe has been torn to the point that it doesn't even reach past %1$s waist.  ", c.hisHer()));
-                    else
-                    if(bottomCover.equals("cloak"))
-                        w.append(t, String.format("while %s cloak has been torn to the point that it doesn't even reach past %1$s waist.  ", c.hisHer()));
-                    else
-                    if(bottomCover.equals("trousers"))
-                        w.append(t, String.format("while %s trousers have been shredded to the point that only a few scraps around %1$s legs remain.  ", c.hisHer()));
-                    else
-                    if(bottomCover.equals("leotard"))
-                    {
-                        if(c.getGender().equals("female"))
-                            w.append(t, String.format("while the remaining scraps of %s leotard clinging to %1$s body provide no coverage whatsoever for %1$s hips and pussy.  ", c.hisHer()));
-                        else
-                        if(c.getGender().equals("male"))
-                            w.append(t, String.format("while the remaining scraps of %s leotard clinging to %1$s body provide no coverage whatsoever for %1$s hips and penis.  ", c.hisHer()));
-                        else
-                            w.append(t, String.format("while the remaining scraps of %s leotard clinging to %1$s body provide no coverage whatsoever for %1$s penis and pussy.  ", c.hisHer()));
-                    } else
-                    if(bottomCover.equals("bodysuit"))
-                        w.append(t, String.format("while the torso and crotch of %s bodysuit have been completely torn away.  ", c.hisHer()));
-                    else
-                    if(bottomCover.equals("armor"))
-                        w.append(t, String.format("while the armor plates that would normally cover %s hips and crotch have been lost.  ", c.hisHer()));
-                    else
-                    if(bottomCover.equals("strips"))
-                        w.append(t, String.format("while the strips of cloth that had been covering %s body have been completely removed save for a few dangling ends around %1$s waist.  ", c.hisHer()));
-                    else
-                    if(bottomCover.equals("belts"))
-                        w.append(t, String.format("while the belts that had been covering %s lower half have also been snapped and pulled away.  ", c.hisHer()));
-                    else
-                    if(bottomCover.equals("shorts"))
-                    {
-                        if(c.getGender().equals("female"))
-                            w.append(t, String.format("while %s shorts have been torn open over %1$s pussy and ass.  ", c.hisHer()));
-                        else
-                        if(c.getGender().equals("male"))
-                            w.append(t, String.format("while %s shorts have been torn open over %1$s penis and ass.  ", c.hisHer()));
-                        else
-                            w.append(t, String.format("while %s shorts have been torn open over %1$s pussy and penis.  ", c.hisHer()));
-                    } else
-                    {
-                        w.append(t, String.format("while only a few useless scraps remain of %s %s.  ", c.hisHer(), bottomDesc));
+                    switch (bottomCover) {
+                        case "miniskirt":
+                            w.append(t, String.format("while %s miniskirt has been reduced to nothing more than a belt of material around %1$s waist.  ", c.hisHer()));
+                            break;
+                        case "robe":
+                            w.append(t, String.format("while %s robe has been torn to the point that it doesn't even reach past %1$s waist.  ", c.hisHer()));
+                            break;
+                        case "cloak":
+                            w.append(t, String.format("while %s cloak has been torn to the point that it doesn't even reach past %1$s waist.  ", c.hisHer()));
+                            break;
+                        case "trousers":
+                            w.append(t, String.format("while %s trousers have been shredded to the point that only a few scraps around %1$s legs remain.  ", c.hisHer()));
+                            break;
+                        case "leotard":
+                            switch (c.getGender()) {
+                                case "female":
+                                    w.append(t, String.format("while the remaining scraps of %s leotard clinging to %1$s body provide no coverage whatsoever for %1$s hips and pussy.  ", c.hisHer()));
+                                    break;
+                                case "male":
+                                    w.append(t, String.format("while the remaining scraps of %s leotard clinging to %1$s body provide no coverage whatsoever for %1$s hips and penis.  ", c.hisHer()));
+                                    break;
+                                default:
+                                    w.append(t, String.format("while the remaining scraps of %s leotard clinging to %1$s body provide no coverage whatsoever for %1$s penis and pussy.  ", c.hisHer()));
+                            }
+                            break;
+                        case "bodysuit":
+                            w.append(t, String.format("while the torso and crotch of %s bodysuit have been completely torn away.  ", c.hisHer()));
+                            break;
+                        case "armor":
+                            w.append(t, String.format("while the armor plates that would normally cover %s hips and crotch have been lost.  ", c.hisHer()));
+                            break;
+                        case "strips":
+                            w.append(t, String.format("while the strips of cloth that had been covering %s body have been completely removed save for a few dangling ends around %1$s waist.  ", c.hisHer()));
+                            break;
+                        case "belts":
+                            w.append(t, String.format("while the belts that had been covering %s lower half have also been snapped and pulled away.  ", c.hisHer()));
+                            break;
+                        case "shorts":
+                            switch (c.getGender()) {
+                                case "female": w.append(t, String.format("while %s shorts have been torn open over %1$s pussy and ass.  ", c.hisHer())); break;
+                                case "male": w.append(t, String.format("while %s shorts have been torn open over %1$s penis and ass.  ", c.hisHer())); break;
+                                default: w.append(t, String.format("while %s shorts have been torn open over %1$s pussy and penis.  ", c.hisHer()));
+                            }
+                            break;
+                        default:
+                            w.append(t, String.format("while only a few useless scraps remain of %s %s.  ", c.hisHer(), bottomDesc));
                     }
                     if(c.getINJULevel() < 4)
                         w.append(t, String.format("With %s limbs splayed out, there's nothing %s can do to cover %sself, ", c.hisHer(), c.heShe(), c.himHer()));
@@ -28495,14 +28518,16 @@ public class WorldState
         result += " " + customAliases[i] + ", transform!";
         append(t, "\n\n" + separator + "\n\n" + customNames[i * 2] + "'s civilian clothes will disintegrate when " + heShe + " says '" + result + "'  In their place, garments and equipment woven of psychic energy representing " + hisHer + " true nature will materialize.  Click 'Change' to give " + himHer + " something different, or click the button for the current item to keep it.\n\nFirst off, what does " + heShe + " wear to cover " + hisHer + " chest?");
         String current = baseAesthetics[0];
-        if(current.equals("strips"))
+        switch (current) {
+        case "strips":
             current = "strips of cloth";
-        else
-        if(current.equals("bindings"))
+        break;
+        case "bindings":
             current = "wrapped chest bindings";
-        else
-        if(current.equals("crop"))
+        break;
+        case "crop":
             current = "crop top";
+        }
         final String finalCurrent = current;
         JButton Default = new JButton(current);
         Default.addActionListener(new ActionListener() {

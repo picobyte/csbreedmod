@@ -426,20 +426,16 @@ public class Forsaken
         filthyGaijin = c.filthyGaijin;
         textColor = c.textColor;
         darkColor = c.darkColor;
-        if(w.getGenders()[c.getNumber()].equals("male"))
-            originalGender = Gender.MALE;
-        else
-        if(w.getGenders()[c.getNumber()].equals("female"))
-            originalGender = Gender.FEMALE;
-        else
-            originalGender = Gender.FUTANARI;
-        if(c.gender.equals("male"))
-            gender = Gender.MALE;
-        else
-        if(c.gender.equals("female"))
-            gender = Gender.FEMALE;
-        else
-            gender = Gender.FUTANARI;
+        switch (w.getGenders()[c.getNumber()]) {
+            case "male": originalGender = Gender.MALE; break;
+            case "female": originalGender = Gender.FEMALE; break;
+            default: originalGender = Gender.FUTANARI;
+        }
+        switch (c.gender) {
+            case "male": gender = Gender.MALE; break;
+            case "female": gender = Gender.FEMALE; break;
+            default: gender = Gender.FUTANARI;
+        }
         incantation = c.incantation;
         adjectiveName = c.adjectiveName;
         nounName = c.nounName;
@@ -10871,14 +10867,11 @@ public class Forsaken
         c.captured = true;
         w.append(t, String.format("\n\n%s\n\n", w.getSeparator()));
         String topDesc = c.topCover;
-        if(topDesc.equals("crop"))
-            topDesc = "crop top";
-        else
-        if(topDesc.equals("strips"))
-            topDesc = "strips of cloth";
-        else
-        if(topDesc.equals("bindings"))
-            topDesc = "chest bindings";
+        switch (topDesc) {
+            case "crop": topDesc = "crop top"; break;
+            case "strips": topDesc = "strips of cloth"; break;
+            case "bindings": topDesc = "chest bindings";
+        }
         String bottomDesc = c.bottomCover;
         if(bottomDesc.equals("strips"))
             bottomDesc = "strips of cloth";

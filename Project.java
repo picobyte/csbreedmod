@@ -988,13 +988,11 @@ public class Project extends JFrame
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                if(c.gender.equals("female"))
-                    c.gender = "male";
-                else
-                if(c.gender.equals("male"))
-                    c.gender = "futanari";
-                else
-                    c.gender = "female";
+                switch (c.gender) {
+                    case "female": c.gender = "male"; break;
+                    case "male": c.gender = "futanari"; break;
+                    default: c.gender = "female";
+                }
                 Project.SingleCustom(t, p, f, w, c, answers);
             }
         });
@@ -11391,13 +11389,11 @@ public class Project extends JFrame
             int i = page * 4;
             int j = 0;
             w.append(t, String.format("\n\n%s\n\n", w.getSeparator()));
-            if(function.equals("load"))
-                w.append(t, "Load which slot?");
-            else
-            if(function.equals("teamload"))
-                w.append(t, "Load which team?");
-            else
-                w.append(t, "Delete which slot?");
+            switch (function) {
+                case "load": w.append(t, "Load which slot?"); break;
+                case "teamload": w.append(t, "Load which team?"); break;
+                default: w.append(t, "Delete which slot?");
+            }
             p.removeAll();
             if(page > 0)
             {
