@@ -1864,7 +1864,7 @@ public class Body
             case 2:
                 w.append(t, String.format("%s's fatigue is catching up with %s, and %s's losing focus.", OwnerName(), himHer(), heShe()));
             break;
-            case 2:
+            case 3:
                 w.append(t, String.format("%s is practically passing out.  %s can't do much like this.", OwnerName(), HeShe()));
             break;
             default:

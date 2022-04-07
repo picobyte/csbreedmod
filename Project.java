@@ -12557,7 +12557,7 @@ public class Project extends JFrame
                 switch (i) {
                 case 0: torment = "Grind"; break;
                 case 1: torment = "Caress"; break;
-                case 1: torment = w.tickle() ? "Tickle" : "Pummel"; break;
+                case 2: torment = w.tickle() ? "Tickle" : "Pummel"; break;
                 default: torment = "Humiliate";
                 }
                 final String finalTorment = torment;
