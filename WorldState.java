@@ -13,11 +13,15 @@ import java.util.Date;
 import java.util.Random;
 import javax.swing.*;
 import javax.swing.text.*;
+import com.moandjiezana.toml.Toml;
 
 public class WorldState
     implements Serializable
 {
-
+    private static Toml toml;
+    static {
+        toml = new Toml().read(WorldState.class.getResourceAsStream("WorldState.toml"));
+    }
     public void printCapturedLine(JTextPane t, WorldState w, int thisAttack, Chosen c)
     {
         Chosen.Species type = c.type;
@@ -90,6 +94,7 @@ public class WorldState
             {
                 if(!c.impregnated)
                 {
+                    Toml branch = toml.getTable("printCapturedLine").getTable("Impregnation");
                     c.impregnated = true;
                     Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.FEAR);
                     if(c.morality > 66)
@@ -120,11 +125,8 @@ public class WorldState
                             c.say(t, "This... This can't be happening...");
                         else
                             c.say(t, "What's going to happen to me now...?");
-                    } else
-                    switch (c.innocence / 33) {
-                        case 0: c.say(t, "I... I must not let anyone know what's happened to me..."); break;
-                        case 1: c.say(t, "If they find out, they'll all turn against me..."); break;
-                        default: c.say(t, "It feels like... there's something really bad inside me...");
+                    } else {
+                        c.say(t, branch.getList("NoMoralityInnocence").get(c.innocence / 33).toString());
                     }
                 } else
                 if(thisAttack == 1)
@@ -276,6 +278,7 @@ public class WorldState
             {
                 if(!c.hypnotized)
                 {
+                    Toml branch = toml.getTable("printCapturedLine").getTable("Hypnotized");
                     c.hypnotized = true;
                     Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.LEWD);
                     if(c.innocence > 66)
@@ -294,18 +297,9 @@ public class WorldState
                             c.say(t, "Nn... I wanna feel good...!");
                     } else
                     if(c.innocence > 33)
-                    {
-                        switch (c.dignity / 33) {
-                            case 0: c.say(t, "Cum, cum, cum...!"); break;
-                            case 1: c.say(t, "Huh...  Why am I... touching myself...?  Well, whatever..."); break;
-                            default: c.say(t, "I want to... dream some more...");
-                        }
-                    } else
-                    switch (c.dignity / 33) {
-                        case 0: c.say(t, "I'm tired... of resisting..."); break;
-                        case 1: c.say(t, "Instead of thinking... let us just feel good..."); break;
-                        default: c.say(t, "I wouldn't mind... continuing to dream...");
-                    }
+                        c.say(t, branch.getList("LowInnocenceDignity").get(c.dignity / 33).toString());
+                    else
+                        c.say(t, branch.getList("NoInnocenceDignity").get(c.dignity / 33).toString());
                 } else
                 if(thisAttack == 1)
                 {
@@ -435,29 +429,10 @@ public class WorldState
             {
                 if(!c.drained)
                 {
+                    Toml branch = toml.getTable("printCapturedLine").getTable("Drained");
                     c.drained = true;
                     Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.SHAME);
-                    if(c.confidence > 66)
-                    {
-                        switch (c.morality / 33) {
-                            case 0: c.say(t, "Fine, take my soul... I hope you choke on it..."); break;
-                            case 1: c.say(t, "I was never strong after all..."); break;
-                            default: c.say(t, "To think I was such a selfish person after all...");
-                        }
-                    } else
-                    if(c.confidence > 33)
-                    {
-                        switch (c.morality / 33) {
-                            case 0: c.say(t, "I hate giving them what they want, but if it lets me die..."); break;
-                            case 1: c.say(t, "I'm... done..."); break;
-                            default: c.say(t, "Even though I know that this energy will be used to hurt people... I can't help it...");
-                        }
-                    } else
-                    switch (c.morality / 33) {
-                        case 0: c.say(t, "I don't care about anyone else, just let me die..."); break;
-                        case 1: c.say(t, "I'm so tired... of fighting..."); break;
-                        default: c.say(t, "I'm sorry, everyone... but I can't fight anymore...");
-                    }
+                    c.say(t, branch.getList("ConfidenceMorality").get((c.morality / 33) + (c.confidence / 33) * 3).toString());
                 } else
                 if(thisAttack == 1)
                 {
