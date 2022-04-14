@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.InputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLDecoder;
@@ -15,6 +16,7 @@ import java.util.Random;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.text.Document;
+import com.moandjiezana.toml.Toml;
 
 public class Project extends JFrame
 {
@@ -65,8 +67,11 @@ public class Project extends JFrame
     public static Activity Stripped;
     public static Activity allActivities[];
 
+    private static Toml toml;
+
     static 
     {
+        toml = new Toml().read(Project.class.getResourceAsStream("Project.toml"));
         portraits = new Container();
         textPane = new JTextPane();
         scrollPane = new JScrollPane(textPane);
@@ -104,6 +109,11 @@ public class Project extends JFrame
     }
     public enum Emotion {
         ANGER, FEAR, FOCUS, JOY, LEWD, NEUTRAL, SHAME, STRUGGLE, SWOON
+    }
+
+    public static void append(final WorldState w, final JTextPane t, String s) {
+        s = s.replace("[separator]", w.getSeparator());
+        w.append(t, s);
     }
 
     public Project()
@@ -525,7 +535,7 @@ public class Project extends JFrame
         }
         if(!t.getBackground().equals(w.BACKGROUND))
             w.toggleColors(t);
-        w.append(t, String.format("Corrupted Saviors, Release 28: \"Encounter\"\n\nThis game contains content of an adult nature and should not be played by the underaged or by those unable to distinguish fantasy from reality.\n\n%s\n\nJapan, mid-21st century.  The psychic energies of humanity have finally begun to coalesce into physical form.  The resulting beings are known as Demons.  Born from the base desires suppressed deep within the human mind, these creatures spread across the planet, leaving chaos and depravity in their wake.\n\nBut Demons do not represent the entirety of the human condition.  The hopes and determination of humanity have also risen up, gathering in the bodies of a few Chosen warriors in order to grant them the power to fight the Demons.  Although each of them was once an ordinary person, their new abilities place them at the center of the struggle for the soul of humanity.\n\nYou are a Demon Lord, the highest form of Demon, with your own mind and will, focused on the corruption of all that is good in the world.  The Chosen are the keystone of humanity's resistance to your goal, but to simply kill them would be meaningless.  Instead, shatter their notions of right and wrong, showing them the true darkness that hides within!", w.getSeparator()));
+        append(w, t, toml.getTable("IntroOne").getString("Header"));
         if(w.getCast()[0] == null)
         {
             Chosen newChosen = new Chosen();
@@ -602,7 +612,7 @@ public class Project extends JFrame
                 x.tutorialInit();
                 x.save = w.save;
                 Project.BeginBattle(t, p, f, x, x.getCast()[0]);
-                x.grayAppend(t, "\n\n(Welcome to the tutorial!  This feature is intended to demonstrate some useful techniques for corrupting the Chosen.  It uses a mid-game save file with several upgrades already purchased.  When playing from the start, it makes more sense to use the first several days experimenting to find the strengths and weaknesses of the Chosen and accumulating Evil Energy before aiming to break a vulnerability.  Read the guide.txt file included with the game for a more basic overview of the mechanics.\n\nFor now, let's start by using Examine to figure out how best to deal with Miracle.)");
+                x.grayAppend(t, toml.getTable("IntroOne").getString("Tutorial"));
             }
         });
         p.add(Tutorial);
@@ -669,7 +679,7 @@ public class Project extends JFrame
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                w.append(t, String.format("\n\n%s\n\nCopyright 2019-2022 by CSdev. Corrupted Saviors is licensed under the Creative Commons Attribution-ShareAlike 4.0 International License. To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/4.0/.\n\nDefault portrait set created by CSdev with the assistance of Artbreeder and dedicated to the public domain (CC0).  For more information, see https://creativecommons.org/publicdomain/zero/1.0/.\n\nIf you like this game, please share it and discuss it so that it can be further enjoyed and improved!  There is a good chance that the developer reads whatever forum you found it on.  Direct feedback can also be sent to corruptedsaviors@gmail.com\n\nNew versions are first posted to corruptedsaviors.blogspot.com\nThe developer's tip jar can be found at subscribestar.adult/csdev", w.getSeparator()));
+                append(w, t, toml.getTable("IntroOne").getString("Copyright"));
             }
         });
         p.add(About);
@@ -732,7 +742,7 @@ public class Project extends JFrame
             w.save.customRoster = new Chosen[0];
         if(w.save.customRoster.length == 0)
         {
-            w.append(t, "\n\nBefore you start, you can generate custom Chosen who will eventually appear to face you.  You can also import a full team of Chosen from a save, in which case they'll face you in their Day 1 (i.e. uncorrupted) state.");
+            w.append(t, toml.getTable("CampaignMenu").getString("CustomChosen"));
         } else
         {
             ReportCustomInclusion(t, w, enabled);
@@ -756,9 +766,9 @@ public class Project extends JFrame
             p.add(DeleteChosen);
         }
         if(w.earlyCheat)
-            w.append(t, "\n\nEasy Mode is turned on.  It will be possible to use cheats.  Aside from the presence of Elite Chosen, there will be no increases in the difficulty of later loops.");
-        JButton LoadTeam = new JButton("Load Team");
-        LoadTeam.addActionListener(new ActionListener() {
+            w.append(t, toml.getTable("CampaignMenu").getString("EasyMode"));
+            JButton LoadTeam = new JButton("Load Team");
+            LoadTeam.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e)
             {
@@ -864,10 +874,10 @@ public class Project extends JFrame
         foundRosters = robj.importRoster();
         if(foundRosters.length == 0)
         {
-            w.append(t, String.format("\n\n%s\n\nNo importable rosters found in directory.", w.getSeparator()));
+            append(w, t, toml.getTable("ImportMenu").getString("NoRosters"));
         } else
         {
-            w.append(t, String.format("\n\n%s\n\nFound the following importable rosters in directory.  Which would you like to import?", w.getSeparator()));
+            append(w, t, toml.getTable("ImportMenu").getString("GotRosters"));
             if(page > 0)
             {
                 JButton LastPage = new JButton("<");
