@@ -94,7 +94,6 @@ public class WorldState
             {
                 if(!c.impregnated)
                 {
-                    Toml branch = toml.getTable("printCapturedLine").getTable("Impregnation");
                     c.impregnated = true;
                     Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.FEAR, Project.Emotion.FEAR);
                     if(c.morality > 66)
@@ -126,7 +125,7 @@ public class WorldState
                         else
                             c.say(t, "What's going to happen to me now...?");
                     } else {
-                        c.say(t, branch.getList("NoMoralityInnocence").get(c.innocence / 33).toString());
+                        c.say(t, toml.getString(String.format("printCapturedLine.Impregnation.NoMoralityInnocence[%d]", c.innocence / 33)));
                     }
                 } else
                 if(thisAttack == 1)
@@ -278,7 +277,6 @@ public class WorldState
             {
                 if(!c.hypnotized)
                 {
-                    Toml branch = toml.getTable("printCapturedLine").getTable("Hypnotized");
                     c.hypnotized = true;
                     Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.LEWD, Project.Emotion.LEWD);
                     if(c.innocence > 66)
@@ -297,9 +295,9 @@ public class WorldState
                             c.say(t, "Nn... I wanna feel good...!");
                     } else
                     if(c.innocence > 33)
-                        c.say(t, branch.getList("LowInnocenceDignity").get(c.dignity / 33).toString());
+                        c.say(t, toml.getString(String.format("printCapturedLine.Hypnotized.LowInnocenceDignity[%d]", c.dignity / 33)));
                     else
-                        c.say(t, branch.getList("NoInnocenceDignity").get(c.dignity / 33).toString());
+                        c.say(t, toml.getString(String.format("printCapturedLine.Hypnotized.NoInnocenceDignity[%d]", c.dignity / 33)));
                 } else
                 if(thisAttack == 1)
                 {
@@ -429,10 +427,10 @@ public class WorldState
             {
                 if(!c.drained)
                 {
-                    Toml branch = toml.getTable("printCapturedLine").getTable("Drained");
                     c.drained = true;
                     Project.changePortrait(c.convertGender(), type, false, false, w, w.nameCombatants(), c.combatantNumber(w), Project.Emotion.SHAME, Project.Emotion.SHAME);
-                    c.say(t, branch.getList("ConfidenceMorality").get((c.morality / 33) + (c.confidence / 33) * 3).toString());
+                    c.say(t, toml.getString(String.format("printCapturedLine.Drained.ConfidenceMorality[%d]",
+                            (c.morality / 33) + (c.confidence / 33) * 3)));
                 } else
                 if(thisAttack == 1)
                 {
