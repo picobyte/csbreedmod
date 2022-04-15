@@ -137,14 +137,14 @@ public class Forsaken
 	}
 	public String replaceTags(String s, String pre) {
 		if (gender.equals("male")) {
-			s = s.replaceAll("\\{" + pre + "(?:([Hh]i[ms])Hers?|([hH]e)She)\\}", "$1$2");
+			s = s.replaceAll("\\[" + pre + "(?:([Hh]i[ms])Hers?|([hH]e)She)\\]", "$1$2");
 		} else {
-			s = s.replaceAll("\\{" + pre + "([Hh])i[ms]H(ers?)\\}", "$1$2");
-			s = s.replace("{" + pre +"heShe}", "she");
-			s = s.replace("{" + pre + "HeShe}", "She");
+			s = s.replaceAll("\\[" + pre + "([Hh])i[ms]H(ers?)\\]", "$1$2");
+			s = s.replace("[" + pre +"heShe]", "she");
+			s = s.replace("[" + pre + "HeShe]", "She");
 		}
-		s = s.replace("{" + pre + "givenName}", givenName);
-		return s.replace("{" + pre + "mainName}", mainName);
+		s = s.replace("[" + pre + "givenName]", givenName);
+		return s.replace("[" + pre + "mainName]", mainName);
 	}
 	public void append(WorldState w, JTextPane t, String s) {
 		w.append(t, replaceTags(s, ""));
@@ -152,9 +152,9 @@ public class Forsaken
 	private void append(WorldState w, JTextPane t, Chosen c, String s) {
 		Boolean friendly = w.getRelationship(number, c.getNumber()) >= 0;
 		if (friendly) {
-			s = s.replace("{friendRival}", "friend");
+			s = s.replace("[friendRival]", "friend");
 		} else {
-			s = s.replace("{friendRival}", "rival");
+			s = s.replace("[friendRival]", "rival");
 		}
 		append(w, t, c.replaceTags(s, "c:"));
 	}
