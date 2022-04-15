@@ -535,7 +535,7 @@ public class Project extends JFrame
         }
         if(!t.getBackground().equals(w.BACKGROUND))
             w.toggleColors(t);
-        append(w, t, toml.getTable("IntroOne").getString("Header"));
+        append(w, t, toml.getString("IntroOne.Header"));
         if(w.getCast()[0] == null)
         {
             Chosen newChosen = new Chosen();
@@ -612,7 +612,7 @@ public class Project extends JFrame
                 x.tutorialInit();
                 x.save = w.save;
                 Project.BeginBattle(t, p, f, x, x.getCast()[0]);
-                x.grayAppend(t, toml.getTable("IntroOne").getString("Tutorial"));
+                x.grayAppend(t, toml.getString("IntroOne.Tutorial"));
             }
         });
         p.add(Tutorial);
@@ -679,7 +679,7 @@ public class Project extends JFrame
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                append(w, t, toml.getTable("IntroOne").getString("Copyright"));
+                append(w, t, toml.getString("IntroOne.Copyright"));
             }
         });
         p.add(About);
@@ -742,7 +742,7 @@ public class Project extends JFrame
             w.save.customRoster = new Chosen[0];
         if(w.save.customRoster.length == 0)
         {
-            w.append(t, toml.getTable("CampaignMenu").getString("CustomChosen"));
+            w.append(t, toml.getString("CampaignMenu.CustomChosen"));
         } else
         {
             ReportCustomInclusion(t, w, enabled);
@@ -766,7 +766,7 @@ public class Project extends JFrame
             p.add(DeleteChosen);
         }
         if(w.earlyCheat)
-            w.append(t, toml.getTable("CampaignMenu").getString("EasyMode"));
+            w.append(t, toml.getString("CampaignMenu.EasyMode"));
             JButton LoadTeam = new JButton("Load Team");
             LoadTeam.addActionListener(new ActionListener() {
             @Override
@@ -874,10 +874,10 @@ public class Project extends JFrame
         foundRosters = robj.importRoster();
         if(foundRosters.length == 0)
         {
-            append(w, t, toml.getTable("ImportMenu").getString("NoRosters"));
+            append(w, t, toml.getString("ImportMenu.NoRosters"));
         } else
         {
-            append(w, t, toml.getTable("ImportMenu").getString("GotRosters"));
+            append(w, t, toml.getString("ImportMenu.GotRosters"));
             if(page > 0)
             {
                 JButton LastPage = new JButton("<");
