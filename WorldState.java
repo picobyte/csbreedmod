@@ -206,7 +206,7 @@ public class WorldState implements Serializable {
 		return false;
 	}
 	
-	public void printCapturedLine(JTextPane t, WorldState w, int thisAttack, Chosen c) {
+	public void printCapturedLine(JTextPane t, WorldState w, int thisAttack, final Chosen c) {
 		Chosen.Species type = c.type;
 		Boolean paren = false;
 		if ((w.getBodyStatus()[12] && thisAttack != 0) || (w.getBodyStatus()[21] && ((c.getDrainEffectiveness() >= c.drainReq() && c.drained == false) || (c.drained && thisAttack != 0)))) {
@@ -4783,7 +4783,7 @@ public class WorldState implements Serializable {
 		}
 	}
 	
-	public void BeCaptured(JTextPane t, JPanel p, JFrame f, WorldState w, Chosen c) {
+	public void BeCaptured(final JTextPane t, final JPanel p, final JFrame f, final WorldState w, final Chosen c) {
 		c.lastAction = 0;
 		c.captured = true;
 		w.append(t, "\n\n" + w.getSeparator() + "\n\n");
@@ -5490,7 +5490,7 @@ public class WorldState implements Serializable {
 		}
 	}
 	
-	public void distortionScene(JTextPane t, Chosen subject, Chosen c, Chosen d, int sceneType) {
+	public void distortionScene(JTextPane t, final Chosen subject, final Chosen c, final Chosen d, int sceneType) {
 		save.newScene();
 		int EEGained = 0;
 		if (sceneType == 16) {
@@ -7196,7 +7196,7 @@ public class WorldState implements Serializable {
 		resolveBreak();
 	}
 	
-	public void beTempted(JTextPane t, JPanel p, JFrame f, Chosen c) {
+	public void beTempted(final JTextPane t, final JPanel p, final JFrame f, final Chosen c) {
 		c.battleSeriousness = 0;
 		if (c.betraying == false) {
 			if (c.temptReq == 100000) {
@@ -10825,7 +10825,7 @@ public class WorldState implements Serializable {
 		return choice;
 	}
 	
-	public void forsakenDamage(JTextPane t, WorldState w, Chosen c, Forsaken x, int previousHATE, int previousPLEA, int previousINJU, int previousEXPO, String topDesc, String bottomDesc) {
+	public void forsakenDamage(JTextPane t, WorldState w, final Chosen c, Forsaken x, int previousHATE, int previousPLEA, int previousINJU, int previousEXPO, String topDesc, String bottomDesc) {
 		if (c.getHATELevel() > previousHATE) {
 			w.purpleAppend(t, "HATE up!  ");
 		}
@@ -11713,7 +11713,7 @@ public class WorldState implements Serializable {
 		}
 	}
 	
-	public void hesitate(JTextPane t, WorldState w, Chosen killer, Chosen victim1, Chosen victim2) {
+	public void hesitate(JTextPane t, WorldState w, final Chosen killer, final Chosen victim1, final Chosen victim2) {
 		Project.changePortrait(killer.convertGender(), killer.type, false, false, this, nameCombatants(), killer.combatantNumber(this), Project.Emotion.FEAR, Project.Emotion.FEAR);
 		killer.lastAction = 0;
 		append(t, "\n\n" + getSeparator() + "\n\n");
@@ -11824,7 +11824,7 @@ public class WorldState implements Serializable {
 		killer.hesitated = true;
 	}
 	
-	public void murder(JTextPane t, WorldState w, Chosen killer, Chosen victim) {
+	public void murder(JTextPane t, WorldState w, final Chosen killer, final Chosen victim) {
 		Project.changePortrait(victim.convertGender(), victim.type, false, false, this, nameCombatants(), victim.combatantNumber(this), Project.Emotion.SWOON, Project.Emotion.SWOON);
 		killer.lastAction = 0;
 		w.append(t, "\n\n" + getSeparator() + "\n\n");
@@ -12367,7 +12367,7 @@ public class WorldState implements Serializable {
 		return disableAdaptations;
 	}
 	
-	public void punisherFlavor(JTextPane t, WorldState w, int thisAttack, Chosen c) {
+	public void punisherFlavor(JTextPane t, WorldState w, int thisAttack, final Chosen c) {
 		int captureProgression = c.captureProgression;
 		int morality = c.getMorality();
 		int innocence = c.getInnocence();
@@ -13355,7 +13355,7 @@ public class WorldState implements Serializable {
 		}
 	}
 	
-	public void defilerFlavor(JTextPane t, WorldState w, int thisAttack, Chosen c) {
+	public void defilerFlavor(JTextPane t, WorldState w, int thisAttack, final Chosen c) {
 		int captureProgression = c.captureProgression;
 		int morality = c.getMorality();
 		int innocence = c.getInnocence();
@@ -15753,8 +15753,8 @@ public class WorldState implements Serializable {
 		}
 	}
 	
-	public void Examine(JTextPane t, JPanel p, JFrame f, Chosen c) {
-		WorldState w = this;
+	public void Examine(final JTextPane t, final JPanel p, final JFrame f, final Chosen c) {
+		final WorldState w = this;
 		String breasts = "breasts";
 		if (c.gender.equals("male")) {
 			breasts = "nipples";
@@ -16192,8 +16192,8 @@ public class WorldState implements Serializable {
 		}
 	}
 	
-	public void Dissociate(JTextPane t, JPanel p, JFrame f, Chosen c, int variant, Boolean solo, Boolean trio, Boolean loved, Chosen partner, Chosen lover) {
-		WorldState w = this;
+	public void Dissociate(final JTextPane t, final JPanel p, final JFrame f, final Chosen c, int variant, Boolean solo, Boolean trio, Boolean loved, final Chosen partner, final Chosen lover) {
+		final WorldState w = this;
 		Chosen high = null;
 		Chosen mid = null;
 		Chosen low = null;
@@ -16787,7 +16787,7 @@ public class WorldState implements Serializable {
 		c.dissociated = true;
 	}
 	
-	public void BeCatatonic(JTextPane t, Chosen c) {
+	public void BeCatatonic(JTextPane t, final Chosen c) {
 		int thisAttack = c.nextAttack[0];
 		c.nextAttack[0] = c.nextAttack[1];
 		c.nextAttack[1] = c.nextAttack[2];
@@ -16899,8 +16899,8 @@ public class WorldState implements Serializable {
 		}
 	}
 	
-	public void Orgy(JTextPane t, JPanel p, JFrame f, Chosen c) {
-		WorldState w = this;
+	public void Orgy(final JTextPane t, final JPanel p, final JFrame f, final Chosen c) {
+		final WorldState w = this;
 		String topDesc = c.topCover;
 		int morality = c.morality;
 		int innocence = c.innocence;
@@ -21255,11 +21255,11 @@ public class WorldState implements Serializable {
 				
 				"During downtime, the Chosen prefer not to perform more sinful activities unless their trauma and angst are high enough to require it.", //21
 				
-				"During downtime, Chosen who care more about right and wrong are less likely to perform more sinful activities.", //22
+				"During downtime, final Chosen who care more about right and wrong are less likely to perform more sinful activities.", //22
 				
-				"During downtime, Chosen who like each other more are more likely to perform the same activity together.", //23
+				"During downtime, final Chosen who like each other more are more likely to perform the same activity together.", //23
 				
-				"During downtime, Chosen who like each other more benefit more from doing the same activity together.", //24
+				"During downtime, final Chosen who like each other more benefit more from doing the same activity together.", //24
 				
 				"When two Chosen perform the same downtime activity, they resolve more trauma by doing so, even if they dislike each other.  When all three Chosen perform the same downtime activity, this effect becomes very strong.", //25
 				
@@ -21305,7 +21305,7 @@ public class WorldState implements Serializable {
 				
 				"There are two types of damage: trauma and circumstance.", //46
 				
-				"Trauma inflicted during battle creates openings for the Chosen to be surrounded, but when one trauma is higher than the others, Chosen take less damage from the associated circumstance.", //47
+				"Trauma inflicted during battle creates openings for the Chosen to be surrounded, but when one trauma is higher than the others, final Chosen take less damage from the associated circumstance.", //47
 				
 				"Circumstances multiply the damage received by the Chosen (especially in the associated trauma), but they do not directly contribute to unresolved trauma.", //48
 				
@@ -23684,7 +23684,7 @@ public class WorldState implements Serializable {
 		return value;
 	}
 	
-	public void printCommanderSummary(JTextPane t, Chosen c) {
+	public void printCommanderSummary(JTextPane t, final Chosen c) {
 		int suppressors = 0;
 		if (bodyStatus[3]) {
 			suppressors++;
@@ -24691,7 +24691,7 @@ public class WorldState implements Serializable {
 		}
 	}
 	
-	public int getArrivalTime(Chosen target, Chosen other) {
+	public int getArrivalTime(Chosen target, final Chosen other) {
 		int time = 600 - target.dignity*2;
 		time = time*(250-other.confidence)/200;
 		int analysis = getRelationship(target.number, other.number);
@@ -26184,7 +26184,7 @@ public class WorldState implements Serializable {
 		onTrack = false;
 	}
 	
-	public void freshCustom(JTextPane t, JPanel p, JFrame f) {
+	public void freshCustom(final JTextPane t, final JPanel p, final JFrame f) {
 		initializeTips();
 		for (int i = 0; i < 6; i++) {
 			Boolean proceed = false;
@@ -26221,7 +26221,7 @@ public class WorldState implements Serializable {
 		nameGen(t, p, f);
 	}
 	
-	public void nameGen(JTextPane t, JPanel p, JFrame f) {
+	public void nameGen(final JTextPane t, final JPanel p, final JFrame f) {
 		p.removeAll();
 		Chosen dummy = new Chosen();
 		dummy.setNumber(0);
@@ -26377,7 +26377,7 @@ public class WorldState implements Serializable {
 			}
 		});
 		p.add(Randomize);
-		WorldState w = this;
+		final WorldState w = this;
 		JButton Quit = new JButton("Quit");
 		Quit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -26410,7 +26410,7 @@ public class WorldState implements Serializable {
 		p.repaint();
 	}
 	
-	public void personalityGen(JTextPane t, JPanel p, JFrame f, int progress) {
+	public void personalityGen(final JTextPane t, final JPanel p, final JFrame f, final int progress) {
 		p.removeAll();
 		append(t, "\n\n" + separator + "\n\n");
 		for (int i = 0; i < 3; i++) {
@@ -26536,7 +26536,7 @@ public class WorldState implements Serializable {
 		});
 		p.add(Back);
 		JButton Quit = new JButton("Quit");
-		WorldState w = this;
+		final WorldState w = this;
 		Quit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				p.removeAll();
@@ -26568,7 +26568,7 @@ public class WorldState implements Serializable {
 		p.repaint();
 	}
 	
-	public void determineStats(JTextPane t, JPanel p, JFrame f) {
+	public void determineStats(final JTextPane t, final JPanel p, final JFrame f) {
 		int[][] certainties = new int[3][4];
 		int[][] ranges = new int[3][4];
 		int[][] flexibilities = new int[3][4];
@@ -26984,7 +26984,7 @@ public class WorldState implements Serializable {
 		}*/
 	}
 	
-	public void newVulnerabilities(JTextPane t, JPanel p, JFrame f) {
+	public void newVulnerabilities(final JTextPane t, final JPanel p, final JFrame f) {
 		p.removeAll();
 		invertVVirg = new Boolean[]{false, false, false};
 		invertCVirg = new Boolean[]{false, false, false};
@@ -26994,7 +26994,7 @@ public class WorldState implements Serializable {
 		vulnerabilityMenu(t, p, f, false);
 	}
 	
-	public void vulnerabilityMenu(JTextPane t, JPanel p, JFrame f, Boolean shown) {
+	public void vulnerabilityMenu(final JTextPane t, final JPanel p, final JFrame f, final Boolean shown) {
 		p.removeAll();
 		Boolean[][] allPurities = new Boolean[3][4];
 		for (int i = 0; i < 3; i++) {
@@ -27035,7 +27035,7 @@ public class WorldState implements Serializable {
 			append(t, "  Click 'Continue' once you're done.");
 		}
 		for (int i = 0; i < 3; i++) {
-			int thisChosen = i;
+			final int thisChosen = i;
 			JButton ThisOne = new JButton(customNames[thisChosen*2]);
 			ThisOne.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -27099,7 +27099,7 @@ public class WorldState implements Serializable {
 			}
 		});
 		p.add(Back);
-		WorldState w = this;
+		final WorldState w = this;
 		JButton Quit = new JButton("Quit");
 		Quit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -27133,7 +27133,7 @@ public class WorldState implements Serializable {
 		p.repaint();
 	}
 	
-	public void reviewVulnerabilities(JTextPane t, JPanel p, JFrame f, Boolean shown, int id, int progress) {
+	public void reviewVulnerabilities(final JTextPane t, final JPanel p, final JFrame f, final Boolean shown, final int id, final int progress) {
 		String hisHer = "her";
 		String himHer = "her";
 		String heShe = "she";
@@ -27313,7 +27313,7 @@ public class WorldState implements Serializable {
 		p.repaint();
 	}
 	
-	public void newCosmetics(JTextPane t, JPanel p, JFrame f) {
+	public void newCosmetics(final JTextPane t, final JPanel p, final JFrame f) {
 		customTop = new String[]{"", "", ""};
 		customTopAccess = new String[]{"", "", ""};
 		customBottom = new String[]{"", "", ""};
@@ -27643,7 +27643,7 @@ public class WorldState implements Serializable {
 		return cosmetics;
 	}
 	
-	public void cosmeticsGen(JTextPane t, JPanel p, JFrame f) {
+	public void cosmeticsGen(final JTextPane t, final JPanel p, final JFrame f) {
 		p.removeAll();
 		append(t, "The final step is to customize the appearances of the team.  None of the questions in this section will affect their combat performance.  Because the default appearances are connected to their personalities, players who wish to avoid spoiling themselves may prefer to skip this step.  Otherwise, click on the team member to be customized.  Clicking on a team member you've already customized will completely reset that member's customization process.");
 		for (int i = 0; i < 3; i++) {
@@ -27683,7 +27683,7 @@ public class WorldState implements Serializable {
 			}
 		});
 		p.add(Back);
-		WorldState w = this;
+		final WorldState w = this;
 		JButton Quit = new JButton("Quit");
 		Quit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -27741,7 +27741,7 @@ public class WorldState implements Serializable {
 				} else {
 					saves = new SaveData();
 				}
-				WriteObject wobj = new WriteObject();
+				final WriteObject wobj = new WriteObject();
 				final SaveData saveFile = saves;
 				if (w.getCast()[0] == null) {
 					Chosen newChosen = new Chosen();
@@ -27820,7 +27820,7 @@ public class WorldState implements Serializable {
 		p.repaint();
 	}
 	
-	public void aliasCustomize(JTextPane t, JPanel p, JFrame f, int i, String[] baseAesthetics) {
+	public void aliasCustomize(final JTextPane t, final JPanel p, final JFrame f, final int i, final String[] baseAesthetics) {
 		p.removeAll();
 		Chosen dummy = new Chosen();
 		String HeShe = "She";
@@ -27833,7 +27833,7 @@ public class WorldState implements Serializable {
 			himHer = "him";
 			heShe = "he";
 		}
-		String ownChoice = dummy.genMainName(statSeed[i*4], statSeed[i*4+1], statSeed[i*4+2], statSeed[i*4+3]);
+		final String ownChoice = dummy.genMainName(statSeed[i*4], statSeed[i*4+1], statSeed[i*4+2], statSeed[i*4+3]);
 		append(t, "\n\n" + separator + "\n\nThe first step is to decide what " + heShe + "'ll call " + himHer + "self.  " + HeShe + " likes the sound of '" + ownChoice + "', but the civilian identities of the Chosen are a matter of public record, so it wouldn't be too strange for " + himHer + " to go by " + hisHer + " real name.  Which should " + heShe + " choose?");
 		JButton Alias = new JButton(ownChoice);
 		Alias.addActionListener(new ActionListener() {
@@ -27899,7 +27899,7 @@ public class WorldState implements Serializable {
 		return gaijinStatus;
 	}
 	
-	public void titleCustomize(JTextPane t, JPanel p, JFrame f, int i, String[] baseAesthetics) {
+	public void titleCustomize(final JTextPane t, final JPanel p, final JFrame f, final int i, final String[] baseAesthetics) {
 		p.removeAll();
 		Chosen dummy = new Chosen();
 		String hisHer = "her";
@@ -27953,7 +27953,7 @@ public class WorldState implements Serializable {
 		return customTitles;
 	}
 	
-	public void incantationCustomize(JTextPane t, JPanel p, JFrame f, int i, String[] baseAesthetics) {
+	public void incantationCustomize(final JTextPane t, final JPanel p, final JFrame f, final int i, final String[] baseAesthetics) {
 		p.removeAll();
 		Chosen dummy = new Chosen();
 		String hisHer = "her";
@@ -28012,7 +28012,7 @@ public class WorldState implements Serializable {
 		return customIncantations;
 	}
 	
-	public void topCustomize(JTextPane t, JPanel p, JFrame f, int i, String[] baseAesthetics) {
+	public void topCustomize(final JTextPane t, final JPanel p, final JFrame f, final int i, final String[] baseAesthetics) {
 		p.removeAll();
 		String hisHer = "her";
 		String himHer = "her";
@@ -28080,7 +28080,7 @@ public class WorldState implements Serializable {
 		return customTop;
 	}
 	
-	public void topChange(JTextPane t, JPanel p, JFrame f, int i, String[] baseAesthetics, String input) {
+	public void topChange(final JTextPane t, final JPanel p, final JFrame f, final int i, final String[] baseAesthetics, final String input) {
 		p.removeAll();
 		String hisHer = "her";
 		String himHer = "her";
@@ -28132,7 +28132,7 @@ public class WorldState implements Serializable {
 		return customTopAccess;
 	}
 	
-	public void bottomCustomize(JTextPane t, JPanel p, JFrame f, int i, String[] baseAesthetics) {
+	public void bottomCustomize(final JTextPane t, final JPanel p, final JFrame f, final int i, final String[] baseAesthetics) {
 		p.removeAll();
 		String hisHer = "her";
 		String himHer = "her";
@@ -28188,7 +28188,7 @@ public class WorldState implements Serializable {
 		return customBottom;
 	}
 	
-	public void bottomChange(JTextPane t, JPanel p, JFrame f, int i, String[] baseAesthetics, String input) {
+	public void bottomChange(final JTextPane t, final JPanel p, final JFrame f, final int i, final String[] baseAesthetics, final String input) {
 		p.removeAll();
 		String hisHer = "her";
 		String himHer = "her";
@@ -28242,7 +28242,7 @@ public class WorldState implements Serializable {
 		return customFeet;
 	}
 	
-	public void feetCustomize(JTextPane t, JPanel p, JFrame f, int i, String[] baseAesthetics) {
+	public void feetCustomize(final JTextPane t, final JPanel p, final JFrame f, final int i, final String[] baseAesthetics) {
 		p.removeAll();
 		String hisHer = "her";
 		String himHer = "her";
@@ -28285,7 +28285,7 @@ public class WorldState implements Serializable {
 		p.repaint();
 	}
 	
-	public void colorCustomize(JTextPane t, JPanel p, JFrame f, int i, String[] baseAesthetics) {
+	public void colorCustomize(final JTextPane t, final JPanel p, final JFrame f, final int i, final String[] baseAesthetics) {
 		p.removeAll();
 		String hisHer = "her";
 		String himHer = "her";
@@ -28335,7 +28335,7 @@ public class WorldState implements Serializable {
 		return customAccessory;
 	}
 	
-	public void weaponCustomize(JTextPane t, JPanel p, JFrame f, int i, String[] baseAesthetics) {
+	public void weaponCustomize(final JTextPane t, final JPanel p, final JFrame f, final int i, final String[] baseAesthetics) {
 		p.removeAll();
 		String hisHer = "her";
 		String himHer = "her";
@@ -28386,7 +28386,7 @@ public class WorldState implements Serializable {
 		return customWeapons;
 	}
 	
-	public void weaponChange(JTextPane t, JPanel p, JFrame f, int i, String[] baseAesthetics, String input) {
+	public void weaponChange(final JTextPane t, final JPanel p, final JFrame f, final int i, final String[] baseAesthetics, final String input) {
 		p.removeAll();
 		String hisHer = "her";
 		String himHer = "her";
@@ -28437,7 +28437,7 @@ public class WorldState implements Serializable {
 		return customWeaponTypes;
 	}
 	
-	public void underwearCustomize(JTextPane t, JPanel p, JFrame f, int i, String[] baseAesthetics) {
+	public void underwearCustomize(final JTextPane t, final JPanel p, final JFrame f, final int i, final String[] baseAesthetics) {
 		p.removeAll();
 		String hisHer = "her";
 		String himHer = "her";
@@ -28496,7 +28496,7 @@ public class WorldState implements Serializable {
 		return customUnder;
 	}
 	
-	public void finalizeCustomization(JTextPane t, JPanel p, JFrame f, int i, String[] baseAesthetics) {
+	public void finalizeCustomization(final JTextPane t, final JPanel p, final JFrame f, final int i, final String[] baseAesthetics) {
 		p.removeAll();
 		String[] comparison = pickCosmetics(statSeed[i*4], statSeed[i*4+1], statSeed[i*4+2], statSeed[i*4+3]);
 		for (int j = 0; j < comparison.length; j++) {
@@ -28518,7 +28518,7 @@ public class WorldState implements Serializable {
 		cosmeticsGen(t, p, f);
 	}
 	
-	public void finalBattleIntro(JTextPane t, Chosen c) {
+	public void finalBattleIntro(JTextPane t, final Chosen c) {
 		c.say(t, "\"");
 		int type = 0;
 		for (int i = 0; i < 12; i++) {
@@ -28805,7 +28805,7 @@ public class WorldState implements Serializable {
 		c.say(t, "\"");
 	}
 	
-	public void finalAppeal(JTextPane t, WorldState w, Chosen c) {
+	public void finalAppeal(JTextPane t, WorldState w, final Chosen c) {
 		append(t, "\n\n" + getSeparator() + "\n\n");
 		if (c.finalAppealed == 0) {
 			if (c.morality > 66) {
@@ -28986,7 +28986,7 @@ public class WorldState implements Serializable {
 		c.finalAppealed++;
 	}
 	
-	public void finalThreaten(JTextPane t, WorldState w, Chosen c) {
+	public void finalThreaten(JTextPane t, WorldState w, final Chosen c) {
 		append(t, "\n\n" + getSeparator() + "\n\n");
 		Chosen subject = null;
 		Chosen loved = null;
@@ -29290,7 +29290,7 @@ public class WorldState implements Serializable {
 		c.finalThreatened = c.finalThreatened + 1;
 	}
 	
-	public void finalSlime(JTextPane t, WorldState w, Chosen c) {
+	public void finalSlime(JTextPane t, WorldState w, final Chosen c) {
 		append(t, "\n\n" + getSeparator() + "\n\n");
 		if (c.finalSlimed == 0) {
 			if (c.getInnocence() > 66) {
@@ -29470,7 +29470,7 @@ public class WorldState implements Serializable {
 		c.finalSlimed = c.finalSlimed + 1;
 	}
 	
-	public void finalAttack(JTextPane t, WorldState w, Chosen c) {
+	public void finalAttack(JTextPane t, WorldState w, final Chosen c) {
 		append(t, "\n\n" + getSeparator() + "\n\n");
 		int resolveLost = 1;
 		if (c.isDrained()) {
@@ -29996,7 +29996,7 @@ public class WorldState implements Serializable {
 		c.finalAttacked = c.finalAttacked + 1;
 	}
 	
-	public void finalTaunt(JTextPane t, WorldState w, Chosen c) {
+	public void finalTaunt(JTextPane t, WorldState w, final Chosen c) {
 		append(t, "\n\n" + getSeparator() + "\n\n");
 		if (c.finalTaunted == 0) {
 			if (c.getDignity() > 66) {
@@ -30196,7 +30196,7 @@ public class WorldState implements Serializable {
 		c.finalTaunted = c.finalTaunted + 1;
 	}
 	
-	public void finalTempt(JTextPane t, Chosen c) {
+	public void finalTempt(JTextPane t, final Chosen c) {
 		append(t, "\n\n" + getSeparator() + "\n\n");
 		if (c.hypnotized) {
 			if (c.innocence > 66) {
@@ -30295,7 +30295,7 @@ public class WorldState implements Serializable {
 		c.endSurround();
 	}
 	
-	public void ending (JTextPane t, int type, Chosen first, Chosen second, Chosen third) {
+	public void ending (JTextPane t, int type, final Chosen first, final Chosen second, final Chosen third) {
 		save.newScene();
 		if (type == 0) {
 			if (second == null) {

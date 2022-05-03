@@ -139,9 +139,9 @@ public class Forsaken implements Serializable {
 		FUTANARI;
 	}
 	
-	public void CustomizeMenu(JTextPane t, JPanel p, JFrame f, WorldState w, SaveData s) {
+	public void CustomizeMenu(final JTextPane t, final JPanel p, final JFrame f, final WorldState w, final SaveData s) {
 		p.removeAll();
-		Forsaken x = this;
+		final Forsaken x = this;
 		w.append(t, "\n\n" + w.getSeparator() + "\n\nWhich of " + mainName + "'s features would you like to customize?");
 		JButton Name = new JButton("Name");
 		Name.addActionListener(new ActionListener() {
@@ -210,8 +210,8 @@ public class Forsaken implements Serializable {
 				thirdColor = Integer.parseInt(JOptionPane.showInputDialog("Enter a value for blue (0-255)."));
 				if (firstColor >= 0 && firstColor <= 255 && secondColor >= 0 && secondColor <= 255 && thirdColor >= 0 && thirdColor <= 255) {
 					p.removeAll();
-					Color firstStorage = x.textColor;
-					Color secondStorage = x.darkColor;
+					final Color firstStorage = x.textColor;
+					final Color secondStorage = x.darkColor;
 					x.textColor = new Color(firstColor, secondColor, thirdColor);
 					x.darkColor = new Color(firstColor, secondColor, thirdColor);
 					w.append(t, "\n\n" + w.getSeparator() + "\n\n");
@@ -3394,7 +3394,7 @@ public class Forsaken implements Serializable {
 		}
 	}
 	
-	public void trainingMenu(JTextPane t, JPanel p, JFrame f, WorldState w, SaveData s, Boolean[] currentTraining, int page, Boolean consenting) {
+	public void trainingMenu(final JTextPane t, final JPanel p, final JFrame f, final WorldState w, final SaveData s, final Boolean[] currentTraining, final int page, final Boolean consenting) {
 		p.removeAll();
 		int currentHostility = 0;
 		int currentDeviancy = 0;
@@ -3406,9 +3406,9 @@ public class Forsaken implements Serializable {
 		int obedienceCount = 0;
 		int disgraceCount = 0;
 		int[][] trainingIntensities = new int[currentTraining.length][4];
-		int[] trainingStaminas = new int[currentTraining.length];
-		int[] trainingMotivations = new int[currentTraining.length];
-		long[] trainingExpertises = new long[currentTraining.length];
+		final int[] trainingStaminas = new int[currentTraining.length];
+		final int[] trainingMotivations = new int[currentTraining.length];
+		final long[] trainingExpertises = new long[currentTraining.length];
 		Boolean[] bonus = new Boolean[currentTraining.length];
 		Boolean[] penalty = new Boolean[currentTraining.length];
 		for (int i = 0; i < currentTraining.length; i++) {
@@ -3821,8 +3821,8 @@ public class Forsaken implements Serializable {
 			p.add(Previous);
 		}
 		for (int i = 0; i < 6 && page*6+i < 22; i++) {
-			int trainingType = page*6 + i;
-			int[] threatenedIntensity = new int[4];
+			final int trainingType = page*6 + i;
+			final int[] threatenedIntensity = new int[4];
 			if (currentTraining[trainingType] == false) {
 				Boolean reqsMet = trainingType < 6 || (w.active == false && trainingType < 18);
 				if ((trainingType == 6 || trainingType == 7 || trainingType == 8) && w.getTechs()[10].isOwned()) {
@@ -4031,7 +4031,7 @@ public class Forsaken implements Serializable {
 		}
 		if (types == 0) {
 			JButton Back = new JButton("Back");
-			Forsaken x = this;
+			final Forsaken x = this;
 			Back.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					WriteObject wobj = new WriteObject();
@@ -4074,7 +4074,7 @@ public class Forsaken implements Serializable {
 		p.repaint();
 	}
 	
-	public void trainingDescription(JTextPane t, JPanel p, JFrame f, WorldState w, SaveData s, Boolean[] currentTraining, int nextTraining, int[] threatenedIntensity, Boolean consenting, int lostStamina, int gainedMotivation, long gainedExpertise) {
+	public void trainingDescription(final JTextPane t, final JPanel p, final JFrame f, final WorldState w, final SaveData s, final Boolean[] currentTraining, final int nextTraining, final int[] threatenedIntensity, final Boolean consenting, final int lostStamina, final int gainedMotivation, final long gainedExpertise) {
 		p.removeAll();
 		w.append(t, "\n\n" + w.getSeparator() + "\n\n");
 		Boolean firstTraining = true;
@@ -7954,7 +7954,7 @@ public class Forsaken implements Serializable {
 			}
 		}
 		say(t, "\"");
-		int[] increases = new int[]{0, 0, 0, 0};
+		final int[] increases = new int[]{0, 0, 0, 0};
 		Chosen[] newObsessions = new Chosen[0];
 		if (consenting == false || lacksConsent == false || consentBlock == false) {
 			w.append(t, "\n\nCorruption Increase:");
@@ -8090,8 +8090,8 @@ public class Forsaken implements Serializable {
 		}
 		if (consenting == false || consentBlock == false || lacksConsent == false) {
 			JButton Proceed = new JButton("Proceed");
-			Chosen[] addedObsessions = newObsessions;
-			Boolean nowConsenting = consenting && lacksConsent == false;
+			final Chosen[] addedObsessions = newObsessions;
+			final Boolean nowConsenting = consenting && lacksConsent == false;
 			Proceed.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					if (obedience <= 33 && obedience + increases[2] > 33) {
@@ -9252,7 +9252,7 @@ public class Forsaken implements Serializable {
 		}
 	}
 	
-	public void executeTraining(JTextPane t, JPanel p, JFrame f, WorldState w, SaveData s, Boolean[] currentTraining, int nextTraining, Boolean consenting, long gainedExpertise) {
+	public void executeTraining(final JTextPane t, final JPanel p, final JFrame f, final WorldState w, final SaveData s, final Boolean[] currentTraining, final int nextTraining, final Boolean consenting, final long gainedExpertise) {
 		p.removeAll();
 		w.append(t, "\n\n" + w.getSeparator() + "\n\n");
 		Boolean tied = currentTraining[5];
@@ -11763,7 +11763,7 @@ public class Forsaken implements Serializable {
 		return message;
 	}
 	
-	public void captureChosen(JTextPane t, JPanel p, JFrame f, WorldState w, Chosen c) {
+	public void captureChosen(final JTextPane t, final JPanel p, final JFrame f, final WorldState w, Chosen c) {
 		w.captureDuration = compatibility(c);
 		c.lastAction = 0;
 		c.captured = true;

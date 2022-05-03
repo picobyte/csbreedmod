@@ -330,7 +330,7 @@ public class Body implements Serializable {
 		}
 		return incoming;
 	}
-	public void advanceAction(JTextPane t, JPanel p, JFrame f, WorldState w, SaveData s) {
+	public void advanceAction(final JTextPane t, final JPanel p, final JFrame f, final WorldState w, final SaveData s) {
 		if (this == w.sceneParticipants[0]) {
 			w.sceneDuration++;
 		}
@@ -416,7 +416,7 @@ public class Body implements Serializable {
 		}
 	}
 	
-	public void Continue(JTextPane t, JPanel p, JFrame f, WorldState w, SaveData s) {
+	public void Continue(final JTextPane t, final JPanel p, final JFrame f, final WorldState w, final SaveData s) {
 		p.removeAll();
 		JButton Wait = new JButton("Continue");
 		Wait.addActionListener(new ActionListener() {
@@ -612,7 +612,7 @@ public class Body implements Serializable {
 		return false;
 	}
 	
-	public void CancelActivities(JTextPane t, JPanel p, JFrame f, WorldState w, SaveData s, int page) {
+	public void CancelActivities(final JTextPane t, final JPanel p, final JFrame f, final WorldState w, final SaveData s, final int page) {
 		p.removeAll();
 		if (page > 0) {
 			JButton Previous = new JButton("<");
@@ -625,7 +625,7 @@ public class Body implements Serializable {
 		}
 		for (int i = page*3; i < page*3 + 3 && i < w.lordBody.inProgress.length; i++) {
 			JButton ThisOne = new JButton(w.lordBody.inProgress[i].activityName(w.lordBody.targets[i]));
-			int index = i;
+			final int index = i;
 			ThisOne.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					w.append(t, "\n\n" + w.getSeparator());
@@ -665,7 +665,7 @@ public class Body implements Serializable {
 		p.repaint();
 	}
 	
-	public void TouchMenu(JTextPane t, JPanel p, JFrame f, WorldState w, SaveData s) {
+	public void TouchMenu(final JTextPane t, final JPanel p, final JFrame f, final WorldState w, final SaveData s) {
 		p.removeAll();
 		if (Project.TweakClit.valid(this, w.targetBody)) {
 			JButton TweakClit = new JButton("Stroke Clit");
@@ -745,7 +745,7 @@ public class Body implements Serializable {
 		p.repaint();
 	}
 	
-	public void PositionMenu(JTextPane t, JPanel p, JFrame f, WorldState w, SaveData s) {
+	public void PositionMenu(final JTextPane t, final JPanel p, final JFrame f, final WorldState w, final SaveData s) {
 		p.removeAll();
 		if (Project.PushDown.valid(this, w.targetBody)) {
 			JButton PushDown = new JButton("Push Down");
@@ -833,7 +833,7 @@ public class Body implements Serializable {
 		p.repaint();
 	}
 	
-	public void SexMenu(JTextPane t, JPanel p, JFrame f, WorldState w, SaveData s) {
+	public void SexMenu(final JTextPane t, final JPanel p, final JFrame f, final WorldState w, final SaveData s) {
 		p.removeAll();
 		if (Project.VaginalPenetrate.valid(w.lordBody, w.targetBody)) {
 			if (Project.PenetratedVaginally.weight(w, w.targetBody, w.lordBody) >= 0 || w.targetBody.getHATELevel() >= 3) {
@@ -924,7 +924,7 @@ public class Body implements Serializable {
 		p.repaint();
 	}
 	
-	public void PickActivity(JTextPane t, JPanel p, JFrame f, WorldState w, SaveData s) {
+	public void PickActivity(final JTextPane t, final JPanel p, final JFrame f, final WorldState w, final SaveData s) {
 		w.actingBody = this;
 		for (int i = 0; i < inProgress.length; i++) {
 			if (inProgress[i].endsSelf) {
@@ -938,7 +938,7 @@ public class Body implements Serializable {
 		}
 		if (this == w.lordBody) {
 			w.targetBody = w.sceneParticipants[1];
-			String[] shownNames = new String[]{w.targetBody.portraitName(), null, null, null, null};
+			final String[] shownNames = new String[]{w.targetBody.portraitName(), null, null, null, null};
 			p.removeAll();
 			if (w.sceneDuration == 0) {
 				w.sceneDuration++;
