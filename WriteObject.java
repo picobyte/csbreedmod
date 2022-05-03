@@ -1,282 +1,170 @@
-
 import java.io.*;
-import java.net.URL;
 import java.net.URLDecoder;
-import java.security.CodeSource;
-import java.security.ProtectionDomain;
 
-public class WriteObject
-{
+public class WriteObject {
+	
+public void exportRoster(Chosen[] c, String saveName) {
+	FileOutputStream fout = null;
+	ObjectOutputStream oos = null;
+	
+	try {
+		String path = Project.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+		String fileName = "";
+		for (int i = path.length()-1; i >= 0; i--) {
+			if (path.charAt(i) != '/') {
+				fileName = path.charAt(i) + fileName;
+			} else {
+				i = -1;
+			}
+		}
+		path = path.substring(0, path.length() - fileName.length() - 1);
+		path = URLDecoder.decode(path,"UTF-8");
+		path = path.replaceAll("file:/", "");
+		path = path.replaceAll(java.io.File.separator + "u0020", java.io.File.separator + " ");
+		fout = new FileOutputStream(path + java.io.File.separator + saveName + ".ros");
+		oos = new ObjectOutputStream(fout);
+		oos.writeObject(c);
+	} catch (Exception ex) {
+		ex.printStackTrace();
+	} finally {
+		if (fout != null) {
+			try {
+				fout.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		if (oos != null) {
+			try {
+				oos.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+}
+	
+public void exportFile(WorldState w, String saveName) {
+	FileOutputStream fout = null;
+	ObjectOutputStream oos = null;
+	
+	try {
+		/*String path = Project.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+		String fileName = "";
+		for (int i = path.length()-1; i >= 0; i--) {
+			if (path.charAt(i) != java.io.File.separatorChar) {
+				fileName = path.charAt(i) + fileName;
+			} else {
+				i = -1;
+			}
+		}
+		path = path.substring(0, path.length() - fileName.length() - 1);
+		path = URLDecoder.decode(path,"UTF-8");
+		path = path.replaceAll("file:" + java.io.File.separator, "");
+		path = path.replaceAll("\\u0020", java.io.File.separator + " ");
+		
+		w.setSaveTitle(saveName);
+		
+		fout = new FileOutputStream(path + java.io.File.separator + saveName + ".par");
+		oos = new ObjectOutputStream(fout);
+		oos.writeObject(w);*/
+		String path = Project.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+		String fileName = "";
+		for (int i = path.length()-1; i >= 0; i--) {
+			if (path.charAt(i) != '/') {
+				fileName = path.charAt(i) + fileName;
+			} else {
+				i = -1;
+			}
+		}
+		path = path.substring(0, path.length() - fileName.length() - 1);
+		path = URLDecoder.decode(path,"UTF-8");
+		path = path.replaceAll("file:/", "");
+		path = path.replaceAll(java.io.File.separator + "u0020", java.io.File.separator + " ");
+		
+		w.setSaveTitle(saveName);
+		
+		fout = new FileOutputStream(path + java.io.File.separator + saveName + ".par");
+		oos = new ObjectOutputStream(fout);
+		oos.writeObject(w);
+	} catch (Exception ex) {
+		
+		
 
-    public WriteObject()
-    {
-    }
+		ex.printStackTrace();
 
-    public void exportRoster(Chosen c[], String saveName)
-    {
-        FileOutputStream fout;
-        ObjectOutputStream oos;
-        fout = null;
-        oos = null;
-        try
-        {
-            String path = Project.getProtectionDomain().getCodeSource().getLocation().getPath();
-            String fileName = "";
-            for(int i = path.length() - 1; i >= 0; i--)
-                if(path.charAt(i) != '/')
-                    fileName = (new StringBuilder(String.valueOf(path.charAt(i)))).append(fileName).toString();
-                else
-                    i = -1;
+	} finally {
 
-            path = path.substring(0, path.length() - fileName.length() - 1);
-            path = URLDecoder.decode(path, "UTF-8");
-            path = path.replaceAll("file:/", "");
-            path = path.replaceAll((new StringBuilder(String.valueOf(File.separator))).append("u0020").toString(), (new StringBuilder(String.valueOf(File.separator))).append(" ").toString());
-            fout = new FileOutputStream((new StringBuilder(String.valueOf(path))).append(File.separator).append(saveName).append(".ros").toString());
-            oos = new ObjectOutputStream(fout);
-            oos.writeObject(c);
-            break MISSING_BLOCK_LABEL_328;
-        }
-        catch(Exception ex)
-        {
-            ex.printStackTrace();
-        }
-        if(fout != null)
-            try
-            {
-                fout.close();
-            }
-            catch(IOException e)
-            {
-                e.printStackTrace();
-            }
-        if(oos != null)
-            try
-            {
-                oos.close();
-            }
-            catch(IOException e)
-            {
-                e.printStackTrace();
-            }
-        break MISSING_BLOCK_LABEL_366;
-        Exception exception;
-        exception;
-        if(fout != null)
-            try
-            {
-                fout.close();
-            }
-            catch(IOException e)
-            {
-                e.printStackTrace();
-            }
-        if(oos != null)
-            try
-            {
-                oos.close();
-            }
-            catch(IOException e)
-            {
-                e.printStackTrace();
-            }
-        throw exception;
-        if(fout != null)
-            try
-            {
-                fout.close();
-            }
-            catch(IOException e)
-            {
-                e.printStackTrace();
-            }
-        if(oos != null)
-            try
-            {
-                oos.close();
-            }
-            catch(IOException e)
-            {
-                e.printStackTrace();
-            }
-    }
+		if (fout != null) {
+			try {
+				fout.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 
-    public void exportFile(WorldState w, String saveName)
-    {
-        FileOutputStream fout;
-        ObjectOutputStream oos;
-        fout = null;
-        oos = null;
-        try
-        {
-            String path = Project.getProtectionDomain().getCodeSource().getLocation().getPath();
-            String fileName = "";
-            for(int i = path.length() - 1; i >= 0; i--)
-                if(path.charAt(i) != '/')
-                    fileName = (new StringBuilder(String.valueOf(path.charAt(i)))).append(fileName).toString();
-                else
-                    i = -1;
+		if (oos != null) {
+			try {
+				oos.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 
-            path = path.substring(0, path.length() - fileName.length() - 1);
-            path = URLDecoder.decode(path, "UTF-8");
-            path = path.replaceAll("file:/", "");
-            path = path.replaceAll((new StringBuilder(String.valueOf(File.separator))).append("u0020").toString(), (new StringBuilder(String.valueOf(File.separator))).append(" ").toString());
-            w.setSaveTitle(saveName);
-            fout = new FileOutputStream((new StringBuilder(String.valueOf(path))).append(File.separator).append(saveName).append(".par").toString());
-            oos = new ObjectOutputStream(fout);
-            oos.writeObject(w);
-            break MISSING_BLOCK_LABEL_333;
-        }
-        catch(Exception ex)
-        {
-            ex.printStackTrace();
-        }
-        if(fout != null)
-            try
-            {
-                fout.close();
-            }
-            catch(IOException e)
-            {
-                e.printStackTrace();
-            }
-        if(oos != null)
-            try
-            {
-                oos.close();
-            }
-            catch(IOException e)
-            {
-                e.printStackTrace();
-            }
-        break MISSING_BLOCK_LABEL_371;
-        Exception exception;
-        exception;
-        if(fout != null)
-            try
-            {
-                fout.close();
-            }
-            catch(IOException e)
-            {
-                e.printStackTrace();
-            }
-        if(oos != null)
-            try
-            {
-                oos.close();
-            }
-            catch(IOException e)
-            {
-                e.printStackTrace();
-            }
-        throw exception;
-        if(fout != null)
-            try
-            {
-                fout.close();
-            }
-            catch(IOException e)
-            {
-                e.printStackTrace();
-            }
-        if(oos != null)
-            try
-            {
-                oos.close();
-            }
-            catch(IOException e)
-            {
-                e.printStackTrace();
-            }
-    }
+	}
+}
 
-    public void serializeSaveData(SaveData s)
-    {
-        FileOutputStream fout;
-        ObjectOutputStream oos;
-        fout = null;
-        oos = null;
-        try
-        {
-            String path = Project.getProtectionDomain().getCodeSource().getLocation().getPath();
-            String fileName = "";
-            for(int i = path.length() - 1; i >= 0; i--)
-                if(path.charAt(i) != '/')
-                    fileName = (new StringBuilder(String.valueOf(path.charAt(i)))).append(fileName).toString();
-                else
-                    i = -1;
+public void serializeSaveData(SaveData s) {
+		
+		FileOutputStream fout = null;
+		ObjectOutputStream oos = null;
+		
+		try {
+			
+			String path = Project.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+			String fileName = "";
+			for (int i = path.length()-1; i >= 0; i--) {
+				if (path.charAt(i) != '/') {
+					fileName = path.charAt(i) + fileName;
+				} else {
+					i = -1;
+				}
+			}
+			path = path.substring(0, path.length() - fileName.length() - 1);
+			path = URLDecoder.decode(path,"UTF-8");
+			path = path.replaceAll("file:/", "");
+			path = path.replaceAll(java.io.File.separator + "u0020", java.io.File.separator + " ");
+			
+			fout = new FileOutputStream(path + java.io.File.separator + "saves.sav");
+			oos = new ObjectOutputStream(fout);
+			oos.writeObject(s);
+			
+		} catch (Exception ex) {
+			
+			
 
-            path = path.substring(0, path.length() - fileName.length() - 1);
-            path = URLDecoder.decode(path, "UTF-8");
-            path = path.replaceAll("file:/", "");
-            path = path.replaceAll((new StringBuilder(String.valueOf(File.separator))).append("u0020").toString(), (new StringBuilder(String.valueOf(File.separator))).append(" ").toString());
-            fout = new FileOutputStream((new StringBuilder(String.valueOf(path))).append(File.separator).append("saves.sav").toString());
-            oos = new ObjectOutputStream(fout);
-            oos.writeObject(s);
-            break MISSING_BLOCK_LABEL_317;
-        }
-        catch(Exception ex)
-        {
-            ex.printStackTrace();
-        }
-        if(fout != null)
-            try
-            {
-                fout.close();
-            }
-            catch(IOException e)
-            {
-                e.printStackTrace();
-            }
-        if(oos != null)
-            try
-            {
-                oos.close();
-            }
-            catch(IOException e)
-            {
-                e.printStackTrace();
-            }
-        break MISSING_BLOCK_LABEL_353;
-        Exception exception;
-        exception;
-        if(fout != null)
-            try
-            {
-                fout.close();
-            }
-            catch(IOException e)
-            {
-                e.printStackTrace();
-            }
-        if(oos != null)
-            try
-            {
-                oos.close();
-            }
-            catch(IOException e)
-            {
-                e.printStackTrace();
-            }
-        throw exception;
-        if(fout != null)
-            try
-            {
-                fout.close();
-            }
-            catch(IOException e)
-            {
-                e.printStackTrace();
-            }
-        if(oos != null)
-            try
-            {
-                oos.close();
-            }
-            catch(IOException e)
-            {
-                e.printStackTrace();
-            }
-    }
+			ex.printStackTrace();
+
+		} finally {
+
+			if (fout != null) {
+				try {
+					fout.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+
+			if (oos != null) {
+				try {
+					oos.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+
+		}
+		
+	}
+
 }
