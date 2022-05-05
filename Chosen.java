@@ -6,10 +6,12 @@ import javax.swing.JTextPane;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
+import com.moandjiezana.toml.Toml;
 
 public class Chosen implements Serializable {
 	
 	private static final long serialVersionUID = 4L;
+	private static Toml toml;
 	
 	int textSize = 16;
 	
@@ -209,6 +211,10 @@ public class Chosen implements Serializable {
 	Body[] rememberedBodies = new Body[0];
 	Body rememberedDemonLordBody = new Body();
 	Boolean visited = false;
+
+	static {
+		toml = new Toml().read(Project.class.getResourceAsStream("Chosen.toml"));
+	}
 	
 	public enum Species {
 		SUPERIOR
