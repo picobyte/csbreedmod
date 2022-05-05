@@ -11,7 +11,12 @@ import com.moandjiezana.toml.Toml;
 public class Chosen implements Serializable {
 	
 	private static final long serialVersionUID = 4L;
-	private static Toml toml;
+
+	// Each chosen has some of the available static mindFrames.
+	private static Toml mindFrame;
+
+	// dependent on parameters each chosen has one mindset.
+	protected Toml mindset;
 	
 	int textSize = 16;
 	
@@ -213,7 +218,7 @@ public class Chosen implements Serializable {
 	Boolean visited = false;
 
 	static {
-		toml = new Toml().read(Project.class.getResourceAsStream("Chosen.toml"));
+		mindFrame = new Toml().read(Chosen.class.getResourceAsStream("MindFrame.toml"));
 	}
 	
 	public enum Species {
@@ -66451,6 +66456,10 @@ public class Chosen implements Serializable {
 		negotiations = 0;
 		pastNegotiated = false;
 	}
+	private void generateMindset() {
+		mindset = new Toml(mindFrame.getTable("default"))
+			.read(mindFrame.getTable(gender));
+	}
 	
 	public void generate(WorldState w) {
 		if (w.campaign && w.loopChosen != null) {
@@ -66644,6 +66653,7 @@ public class Chosen implements Serializable {
 				bonusEXPO = true;
 			}
 		}
+		generateMindset();
 	}
 	
 	public String[] genName(WorldState w, int[] seed) {

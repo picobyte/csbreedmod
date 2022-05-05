@@ -8,10 +8,17 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
+import com.moandjiezana.toml.Toml;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
+import java.lang.reflect.*;
 
 public class WorldState implements Serializable {
 	
 	private static final long serialVersionUID = 4L;
+	private static Toml toml = null;
+	private Pattern tagRe = Pattern.compile("(?=\\[)|(?<=\\])");
+	private Pattern individualRe = Pattern.compile("^\\[(?:(\\d+):)?(\\w+)\\]");
 	
 	int textSize = 16;
 	String version = "17";
@@ -194,6 +201,10 @@ public class WorldState implements Serializable {
 	public Body[] sceneParticipants = new Body[0];
 	int sceneDuration = 0;
 	Activity.Location sceneLocation;
+
+	static {
+		toml = new Toml().read(WorldState.class.getResourceAsStream("WorldState.toml"));
+	}
 	
 	public Boolean truceEnforced() {
 		for (int i = 0; i < 3; i++) {
@@ -24730,7 +24741,73 @@ public class WorldState implements Serializable {
 		}
 	}
 
-	public void append(JTextPane t, String s) {
+	public String replaceOneTag(String tag, int... individualNr) {
+		Matcher m = individualRe.matcher(tag);
+		if (!m.find()) {
+			return tag;
+		}
+		String key = m.group(2);
+		Toml lookupTable = toml;
+		Object obj = this;
+		int nr = -1;
+		if (m.group(1) != null) {
+			try {
+				nr = individualNr[Integer.parseInt(m.group(1))];
+				lookupTable = cast[nr].mindset;
+				obj = cast[nr];
+			} catch (Exception e) {
+				System.err.println(String.format("%s > %d or out of bounds for getCast()", m.group(1), individualNr.length));
+				Thread.dumpStack();
+				return null;
+			}
+		}
+		String lookup = lookupTable.getString(key);
+		if (lookup != null) {
+			return nr == -1 ? replaceTags(lookup) : replaceTags(lookup, nr);
+		}
+		// XXX for now method & field lookup as well, but better to fase out..
+		Field field = null;
+		try {
+			field = obj.getClass().getDeclaredField(key);
+		} catch (Exception e) {
+		}
+		if (field != null) {
+			try {
+				return "" + field.getType().cast(field.get(obj));
+			} catch (Exception e) {
+				System.err.println("cannot cast field " + key + " to String");
+				Thread.dumpStack();
+				return null;
+			}
+		}
+		try {
+			// Intentionally, for funcs with no args and only returning string or int
+			Method method = obj.getClass().getMethod(key);
+			return "" + method.invoke(obj);
+		} catch (Exception e) {
+			System.err.println(String.format("Unrecognized tag: %s (key: %s, nr: %d)", tag, key, nr)); // could be false-positive
+			Thread.dumpStack();
+		}
+		return null;
+	}
+
+	public String replaceTags(String s, int... individualNr) {
+		String out = "";
+		for (String part: tagRe.split(s)) {
+			if (part.startsWith("[")) {
+				// '[[' prints '[',  ']]' is not required.
+				String replacement = part.equals("[[") ? "[" : replaceOneTag(part, individualNr);
+				if (replacement != null) {
+					part = replacement;
+				}
+			}
+			out += part;
+		}
+		return out;
+	}
+
+
+	public void append(JTextPane t, String s, int... individualNr) {
 		StyledDocument doc = t.getStyledDocument();
 		SimpleAttributeSet keyWord = new SimpleAttributeSet();
 		StyleConstants.setFontSize(keyWord, textSize);
@@ -24738,16 +24815,17 @@ public class WorldState implements Serializable {
 		StyleConstants.setFontFamily(keyWord, "DialogInput");
 		//StyleConstants.setBackground(keyWord, Color.YELLOW);
 		StyleConstants.setBold(keyWord, true);
+		s = replaceTags(s, individualNr);
 		try
 		{
-		    doc.insertString(doc.getLength(), s, keyWord );
+			doc.insertString(doc.getLength(), s, keyWord );
 		}
 		catch(Exception e) { System.out.println(e); }
 		t.setCaretPosition(t.getDocument().getLength());
 		save.addLine(s, FOREGROUND, false);
 	}
 	
-	public void purpleAppend(JTextPane t, String s) {
+	public void purpleAppend(JTextPane t, String s, int... individualNr) {
 		StyledDocument doc = t.getStyledDocument();
 		SimpleAttributeSet keyWord = new SimpleAttributeSet();
 		StyleConstants.setFontSize(keyWord, textSize);
@@ -24755,16 +24833,17 @@ public class WorldState implements Serializable {
 		StyleConstants.setFontFamily(keyWord, "DialogInput");
 		//StyleConstants.setBackground(keyWord, Color.YELLOW);
 		StyleConstants.setBold(keyWord, true);
+		s = replaceTags(s, individualNr);
 		try
 		{
-		    doc.insertString(doc.getLength(), s, keyWord );
+			doc.insertString(doc.getLength(), s, keyWord );
 		}
 		catch(Exception e) { System.out.println(e); }
 		t.setCaretPosition(t.getDocument().getLength());
 		save.addLine(s, PURPLE, false);
 	}
 	
-	public void orangeAppend(JTextPane t, String s) {
+	public void orangeAppend(JTextPane t, String s, int... individualNr) {
 		StyledDocument doc = t.getStyledDocument();
 		SimpleAttributeSet keyWord = new SimpleAttributeSet();
 		StyleConstants.setFontSize(keyWord, textSize);
@@ -24772,16 +24851,17 @@ public class WorldState implements Serializable {
 		StyleConstants.setFontFamily(keyWord, "DialogInput");
 		//StyleConstants.setBackground(keyWord, Color.YELLOW);
 		StyleConstants.setBold(keyWord, true);
+		s = replaceTags(s, individualNr);
 		try
 		{
-		    doc.insertString(doc.getLength(), s, keyWord );
+			doc.insertString(doc.getLength(), s, keyWord );
 		}
 		catch(Exception e) { System.out.println(e); }
 		t.setCaretPosition(t.getDocument().getLength());
 		save.addLine(s, ORANGE, false);
 	}
 	
-	public void grayAppend(JTextPane t, String s) {
+	public void grayAppend(JTextPane t, String s, int... individualNr) {
 		StyledDocument doc = t.getStyledDocument();
 		SimpleAttributeSet keyWord = new SimpleAttributeSet();
 		StyleConstants.setFontSize(keyWord, textSize);
@@ -24789,16 +24869,17 @@ public class WorldState implements Serializable {
 		StyleConstants.setFontFamily(keyWord, "DialogInput");
 		//StyleConstants.setBackground(keyWord, Color.YELLOW);
 		StyleConstants.setBold(keyWord, true);
+		s = replaceTags(s, individualNr);
 		try
 		{
-		    doc.insertString(doc.getLength(), s, keyWord );
+			doc.insertString(doc.getLength(), s, keyWord );
 		}
 		catch(Exception e) { System.out.println(e); }
 		t.setCaretPosition(t.getDocument().getLength());
 		save.addLine(s, Color.GRAY, false);
 	}
 	
-	public void underlineAppend(JTextPane t, String s) {
+	public void underlineAppend(JTextPane t, String s, int... individualNr) {
 		StyledDocument doc = t.getStyledDocument();
 		SimpleAttributeSet keyWord = new SimpleAttributeSet();
 		StyleConstants.setFontSize(keyWord, textSize);
@@ -24807,16 +24888,17 @@ public class WorldState implements Serializable {
 		//StyleConstants.setBackground(keyWord, Color.YELLOW);
 		StyleConstants.setBold(keyWord, true);
 		StyleConstants.setUnderline(keyWord, true);
+		s = replaceTags(s, individualNr);
 		try
 		{
-		    doc.insertString(doc.getLength(), s, keyWord );
+			doc.insertString(doc.getLength(), s, keyWord );
 		}
 		catch(Exception e) { System.out.println(e); }
 		t.setCaretPosition(t.getDocument().getLength());
 		save.addLine(s, FOREGROUND, true);
 	}
 	
-	public void redAppend(JTextPane t, String s) {
+	public void redAppend(JTextPane t, String s, int... individualNr) {
 		StyledDocument doc = t.getStyledDocument();
 		SimpleAttributeSet keyWord = new SimpleAttributeSet();
 		StyleConstants.setFontSize(keyWord, textSize);
@@ -24824,16 +24906,17 @@ public class WorldState implements Serializable {
 		StyleConstants.setFontFamily(keyWord, "DialogInput");
 		//StyleConstants.setBackground(keyWord, Color.YELLOW);
 		StyleConstants.setBold(keyWord, true);
+		s = replaceTags(s, individualNr);
 		try
 		{
-		    doc.insertString(doc.getLength(), s, keyWord );
+			doc.insertString(doc.getLength(), s, keyWord );
 		}
 		catch(Exception e) { System.out.println(e); }
 		t.setCaretPosition(t.getDocument().getLength());
 		save.addLine(s, RED, false);
 	}
 	
-	public void greenAppend(JTextPane t, String s) {
+	public void greenAppend(JTextPane t, String s, int... individualNr) {
 		StyledDocument doc = t.getStyledDocument();
 		SimpleAttributeSet keyWord = new SimpleAttributeSet();
 		StyleConstants.setFontSize(keyWord, textSize);
@@ -24841,16 +24924,17 @@ public class WorldState implements Serializable {
 		StyleConstants.setFontFamily(keyWord, "DialogInput");
 		//StyleConstants.setBackground(keyWord, Color.YELLOW);
 		StyleConstants.setBold(keyWord, true);
+		s = replaceTags(s, individualNr);
 		try
 		{
-		    doc.insertString(doc.getLength(), s, keyWord );
+			doc.insertString(doc.getLength(), s, keyWord );
 		}
 		catch(Exception e) { System.out.println(e); }
 		t.setCaretPosition(t.getDocument().getLength());
 		save.addLine(s, GREEN, false);
 	}
 	
-	public void blueAppend(JTextPane t, String s) {
+	public void blueAppend(JTextPane t, String s, int... individualNr) {
 		StyledDocument doc = t.getStyledDocument();
 		SimpleAttributeSet keyWord = new SimpleAttributeSet();
 		StyleConstants.setFontSize(keyWord, textSize);
@@ -24858,16 +24942,17 @@ public class WorldState implements Serializable {
 		StyleConstants.setFontFamily(keyWord, "DialogInput");
 		//StyleConstants.setBackground(keyWord, Color.YELLOW);
 		StyleConstants.setBold(keyWord, true);
+		s = replaceTags(s, individualNr);
 		try
 		{
-		    doc.insertString(doc.getLength(), s, keyWord );
+			doc.insertString(doc.getLength(), s, keyWord );
 		}
 		catch(Exception e) { System.out.println(e); }
 		t.setCaretPosition(t.getDocument().getLength());
 		save.addLine(s, BLUE, false);
 	}
 	
-	public void inverseAppend(JTextPane t, String s) {
+	public void inverseAppend(JTextPane t, String s, int... individualNr) {
 		StyledDocument doc = t.getStyledDocument();
 		SimpleAttributeSet keyWord = new SimpleAttributeSet();
 		StyleConstants.setFontSize(keyWord, textSize);
@@ -24875,16 +24960,17 @@ public class WorldState implements Serializable {
 		StyleConstants.setFontFamily(keyWord, "DialogInput");
 		StyleConstants.setBackground(keyWord, FOREGROUND);
 		StyleConstants.setBold(keyWord, true);
+		s = replaceTags(s, individualNr);
 		try
 		{
-		    doc.insertString(doc.getLength(), s, keyWord );
+			doc.insertString(doc.getLength(), s, keyWord );
 		}
 		catch(Exception e) { System.out.println(e); }
 		t.setCaretPosition(t.getDocument().getLength());
 		save.addLine(s, FOREGROUND, false);
 	}
 	
-	public void tierTwoAppend(JTextPane t, String s) {
+	public void tierTwoAppend(JTextPane t, String s, int... individualNr) {
 		StyledDocument doc = t.getStyledDocument();
 		SimpleAttributeSet keyWord = new SimpleAttributeSet();
 		StyleConstants.setFontSize(keyWord, textSize);
@@ -24892,16 +24978,17 @@ public class WorldState implements Serializable {
 		StyleConstants.setFontFamily(keyWord, "DialogInput");
 		StyleConstants.setBackground(keyWord, RED);
 		StyleConstants.setBold(keyWord, true);
+		s = replaceTags(s, individualNr);
 		try
 		{
-		    doc.insertString(doc.getLength(), s, keyWord );
+			doc.insertString(doc.getLength(), s, keyWord );
 		}
 		catch(Exception e) { System.out.println(e); }
 		t.setCaretPosition(t.getDocument().getLength());
 		save.addLine(s, FOREGROUND, false);
 	}
 	
-	public void flexibleAppend(JTextPane t, String s, Color usedColor, Boolean underline) {
+	public void flexibleAppend(JTextPane t, String s, Color usedColor, Boolean underline, int... individualNr) {
 		StyledDocument doc = t.getStyledDocument();
 		SimpleAttributeSet keyWord = new SimpleAttributeSet();
 		StyleConstants.setFontSize(keyWord, textSize);
@@ -24910,9 +24997,10 @@ public class WorldState implements Serializable {
 		//StyleConstants.setBackground(keyWord, Color.YELLOW);
 		StyleConstants.setBold(keyWord, true);
 		StyleConstants.setUnderline(keyWord, underline);
+		s = replaceTags(s, individualNr);
 		try
 		{
-		    doc.insertString(doc.getLength(), s, keyWord );
+			doc.insertString(doc.getLength(), s, keyWord );
 		}
 		catch(Exception e) { System.out.println(e); }
 		t.setCaretPosition(t.getDocument().getLength());
