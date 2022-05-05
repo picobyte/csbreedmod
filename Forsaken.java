@@ -5,10 +5,13 @@ import javax.swing.*;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
+import com.moandjiezana.toml.Toml;
 
 public class Forsaken implements Serializable {
 	
 	private static final long serialVersionUID = 4L;
+
+	protected Toml mindset;
 	
 	int textSize = 16;
 	
@@ -117,7 +120,7 @@ public class Forsaken implements Serializable {
 	
 	String demonLord;
 	Boolean titled = false;
-	
+
 	public enum Relationship {
 		PARTNER,
 		OBSESSION;
@@ -252,9 +255,13 @@ public class Forsaken implements Serializable {
 		p.validate();
 		p.repaint();
 	}
+	private void corruptMindset() {
+		mindset = new Toml(formerSelf.mindset);
+	}
 	
 	public void initialize(WorldState w, Chosen c) {
 		formerSelf = c;
+		number = w.getCast().length + w.getHarem().length;
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 3; j++) {
 				formerRelationships[i][j] = w.getRelationship(i, j);
@@ -503,6 +510,7 @@ public class Forsaken implements Serializable {
 			rememberedDemonLordBody = c.rememberedDemonLordBody;
 		}
 		pickEpithet();
+		corruptMindset();
 	}
 	
 	public void selfTalk(JTextPane t) {

@@ -24753,8 +24753,16 @@ public class WorldState implements Serializable {
 		if (m.group(1) != null) {
 			try {
 				nr = individualNr[Integer.parseInt(m.group(1))];
-				lookupTable = cast[nr].mindset;
-				obj = cast[nr];
+				int nrOfChosen = getCast().length;
+				if (nr < nrOfChosen) { // Chosen
+					lookupTable = cast[nr].mindset;
+					obj = cast[nr];
+				} else { //Forsaken
+					nr -= nrOfChosen;
+					Forsaken foo = getHarem()[nr];
+					obj = foo;
+					lookupTable = foo.mindset;
+				}
 			} catch (Exception e) {
 				System.err.println(String.format("%s > %d or out of bounds for getCast()", m.group(1), individualNr.length));
 				Thread.dumpStack();
