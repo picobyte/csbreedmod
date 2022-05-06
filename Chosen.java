@@ -589,14 +589,14 @@ public class Chosen implements Serializable {
 					}
 				} else {
 					if (innocence > 66) {
-						w.append(t, "[0:mainName] has no idea, too caught up in the pleasure as the Thralls fondle [0:hisHer] [0:organ].  ", number);
+						w.append(t, "[0:mainName] has no idea, too caught up in the pleasure as the Thralls fondle [0:hisHer] [0:erectileOrgan].  ", number);
 						if (gender.equals("female")) {
 							w.append(t, "[0:HeShe] shudders and moans in an obvious orgasm while [1:getMainName] tries and fails to ignore [0:himHer], ", number, c.number);
 						} else {
 							w.append(t, "[0:HisHer] cock starts spurting in orgasm, while [1:getMainName] tries to ignore it, ", number, c.number);
 						}
 					} else if (innocence > 33) {
-						w.append(t, "[0:mainName] tries to object, but [0:hisHer] voice comes out as a moan as the Thralls begin to stroke [0:hisHer] [0:organ]", number);
+						w.append(t, "[0:mainName] tries to object, but [0:hisHer] voice comes out as a moan as the Thralls begin to stroke [0:hisHer] [0:erectileOrgan]", number);
 						if (gender.equals("female")) {
 							w.append(t, ", turning increasily desperate as [0:heShe]'s forced to cum.  [1:getMainName] hears, ", number, c.number);
 						} else {
@@ -6553,18 +6553,12 @@ public class Chosen implements Serializable {
 						w.append(t, "[0:mainName] is so caught up in trying to escape that [0:heShe] barely notices how torn [0:hisHer] clothes are, but the Thralls bring it to [0:hisHer] immediate attention when they attack [0:hisHer] exposed armpits, jabbing their fingers in and tickling until [0:heShe] cracks up in laughter", number);
 					}
 				} else {
-					String organ = "pussy";
-					if (gender.equals("male")) {
-						organ = "penis";
-					} else if (gender.equals("futanari")) {
-						organ = "pussy and penis";
-					}
 					if (dignity > 66) {
 						w.append(t, "[0:mainName]'s face is already red with embarrassment at the Thralls filming [0:hisHer] pantiless state, but then they pile on even more humiliation by tickling [0:hisHer] exposed armpits.  Tears stream down [0:hisHer] face as [0:hisHer] laughter forces its way out", number);
 					} else if (dignity > 33) {
-						w.append(t, "The Thralls grab [0:mainName]'s limbs and pull in all directions.  In [0:hisHer] exposed state, this lets them record good footage of [0:hisHer] naked " + organ + ", but it also leaves [0:hisHer] armpits completely defenseless against their sudden focused tickling.  [0:HeShe]'s unable to stop [0:himHer]self from bursting into open laughter", number);
+						w.append(t, "The Thralls grab [0:mainName]'s limbs and pull in all directions.  In [0:hisHer] exposed state, this lets them record good footage of [0:hisHer] naked [0:organ], but it also leaves [0:hisHer] armpits completely defenseless against their sudden focused tickling.  [0:HeShe]'s unable to stop [0:himHer]self from bursting into open laughter", number);
 					} else {
-						w.append(t, "[0:mainName] is so caught up in trying to escape that [0:heShe] barely notices the Thralls filming [0:hisHer] blatantly exposed " + organ + ", but [0:heShe] can't ignore them attacking [0:hisHer] exposed armpits, jabbing their fingers in and tickling until [0:heShe] cracks up in laughter", number);
+						w.append(t, "[0:mainName] is so caught up in trying to escape that [0:heShe] barely notices the Thralls filming [0:hisHer] blatantly exposed [0:organ], but [0:heShe] can't ignore them attacking [0:hisHer] exposed armpits, jabbing their fingers in and tickling until [0:heShe] cracks up in laughter", number);
 					}
 				}
 				if (aVirg) {
@@ -7271,19 +7265,13 @@ public class Chosen implements Serializable {
 							w.append(t, "[0:HeShe] can't stop dwelling on the fact that [0:hisHer] indomitable reputation could collapse at any moment.", number);
 						}
 					} else {
-						String organ = "pussy";
-						if (gender.equals("male")) {
-							organ = "penis";
-						} else if (gender.equals("futanari")) {
-							organ = "penis and pussy";
-						}
 						w.append(t, "[0:hisHer] attackers' fingers on [0:hisHer] bare thighs quickly break [0:hisHer] resistance.  ", number);
 						if (innocence > 66) {
-							w.append(t, "[0:HeShe] had almost forgotten that spectators were filming [0:hisHer] exposed " + organ + ", and the reminder causes the embarrassment to come back and hit [0:himHer] full force.", number);
+							w.append(t, "[0:HeShe] had almost forgotten that spectators were filming [0:hisHer] exposed [0:organ], and the reminder causes the embarrassment to come back and hit [0:himHer] full force.", number);
 						} else if (innocence > 33) {
-							w.append(t, "The reminder that the damage to [0:hisHer] [0:bottomDesc] is letting the Thralls film [0:hisHer] exposed " + " " + organ + " leaves [0:himHer] feeling helpless and vulnerable.", number);
+							w.append(t, "The reminder that the damage to [0:hisHer] [0:bottomDesc] is letting the Thralls film [0:hisHer] exposed " + " [0:organ] leaves [0:himHer] feeling helpless and vulnerable.", number);
 						} else {
-							w.append(t, "[0:HeShe] can't stop dwelling on the fact that [0:hisHer] humiliation is being filmed, [0:hisHer] " + organ + " on full display, and the way [0:hisHer] attention keeps being directed down there makes [0:himHer] feel like [0:heShe]'s been completely ruined.", number);
+							w.append(t, "[0:HeShe] can't stop dwelling on the fact that [0:hisHer] humiliation is being filmed, [0:hisHer] [0:organ] on full display, and the way [0:hisHer] attention keeps being directed down there makes [0:himHer] feel like [0:heShe]'s been completely ruined.", number);
 						}
 					}
 				} else if (dignity > 33) {
@@ -7318,18 +7306,12 @@ public class Chosen implements Serializable {
 							w.append(t, "At the same time, they tease [0:hisHer] bare thighs and pubic region, and [0:heShe] still has the presence of mind to recognize it as a threat to go beyond mere tickling.", number);
 						}
 					} else {
-						String organ = "pussy";
-						if (gender.equals("male")) {
-							organ = "penis";
-						} else if (gender.equals("futanari")) {
-							organ = "penis and pussy";
-						}
 						if (innocence > 66) {
-							w.append(t, "Then, [0:heShe]'s caught completely off guard when they start tickling [0:hisHer] bare thighs as well, drawing [0:hisHer] attention to the way that they're recording [0:hisHer] exposed " + organ + " at the same time.", number);
+							w.append(t, "Then, [0:heShe]'s caught completely off guard when they start tickling [0:hisHer] bare thighs as well, drawing [0:hisHer] attention to the way that they're recording [0:hisHer] exposed [0:organ] at the same time.", number);
 						} else if (innocence > 33) {
-							w.append(t, "They quickly realize that they can make [0:himHer] blush and squirm on demand by tickling [0:hisHer] bare thighs, reminding [0:himHer] that they're recording every movement of [0:hisHer] exposed " + organ + " even as they torment [0:himHer].", number);
+							w.append(t, "They quickly realize that they can make [0:himHer] blush and squirm on demand by tickling [0:hisHer] bare thighs, reminding [0:himHer] that they're recording every movement of [0:hisHer] exposed [0:organ] even as they torment [0:himHer].", number);
 						} else {
-							w.append(t, "At the same time, they tease [0:hisHer] bare thighs and pubic region, and [0:heShe] still has the presence of mind to recognize the way that they're framing [0:hisHer] exposed " + organ + " for the watching cameras.", number);
+							w.append(t, "At the same time, they tease [0:hisHer] bare thighs and pubic region, and [0:heShe] still has the presence of mind to recognize the way that they're framing [0:hisHer] exposed [0:organ] for the watching cameras.", number);
 						}
 					}
 				} else {
@@ -7358,34 +7340,22 @@ public class Chosen implements Serializable {
 							w.append(t, ", much to [0:hisHer] frustration.", number);
 						}
 					} else if (modest) {
-						String organ = "pussy";
-						if (gender.equals("male")) {
-							organ = "penis";
-						} else if (gender.equals("futanari")) {
-							organ = "penis and pussy";
-						}
 						w.append(t, " as the Thralls take advantage of [0:hisHer] shredded [0:bottomDesc] to tickle [0:hisHer] bare thighs", number);
 						if (innocence > 66) {
-							w.append(t, ", and [0:heShe] doesn't even realize what a show [0:heShe]'s putting on as [0:hisHer] bucking hips put [0:hisHer] " + organ + " on full display.", number);
+							w.append(t, ", and [0:heShe] doesn't even realize what a show [0:heShe]'s putting on as [0:hisHer] bucking hips put [0:hisHer] [0:organ] on full display.", number);
 						} else if (innocence > 33) {
-							w.append(t, ".  [0:HeShe] bucks [0:hisHer] hips wildly, putting [0:hisHer] exposed " + organ + " on full display.", number);
+							w.append(t, ".  [0:HeShe] bucks [0:hisHer] hips wildly, putting [0:hisHer] exposed [0:organ] on full display.", number);
 						} else {
-							w.append(t, ", and while [0:heShe] knows that [0:hisHer] squirming is putting [0:hisHer] " + organ + " on full display, [0:heShe] finds it hard to care.", number);
+							w.append(t, ", and while [0:heShe] knows that [0:hisHer] squirming is putting [0:hisHer] [0:organ] on full display, [0:heShe] finds it hard to care.", number);
 						}
 					} else {
-						String organ = "pussy";
-						if (gender.equals("male")) {
-							organ = "penis";
-						} else if (gender.equals("futanari")) {
-							organ = "penis and pussy";
-						}
 						w.append(t, " as the Thralls take advantage of [0:hisHer] shredded [0:bottomDesc] to tickle [0:hisHer] bare thighs", number);
 						if (innocence > 66) {
-							w.append(t, ", and [0:heShe] doesn't even realize what a show [0:heShe]'s putting on for the recording cameras as [0:hisHer] bucking hips put [0:hisHer] " + organ + " on full display.", number);
+							w.append(t, ", and [0:heShe] doesn't even realize what a show [0:heShe]'s putting on for the recording cameras as [0:hisHer] bucking hips put [0:hisHer] [0:organ] on full display.", number);
 						} else if (innocence > 33) {
-							w.append(t, ".  [0:HeShe] bucks [0:hisHer] hips wildly, putting [0:hisHer] exposed " + organ + " on full display for the recording cameras.", number);
+							w.append(t, ".  [0:HeShe] bucks [0:hisHer] hips wildly, putting [0:hisHer] exposed [0:organ] on full display for the recording cameras.", number);
 						} else {
-							w.append(t, ", and while [0:heShe] knows that [0:hisHer] squirming is putting [0:hisHer] " + organ + " on full display for the recording cameras, [0:heShe] finds it hard to care.", number);
+							w.append(t, ", and while [0:heShe] knows that [0:hisHer] squirming is putting [0:hisHer] [0:organ] on full display for the recording cameras, [0:heShe] finds it hard to care.", number);
 						}
 					}
 				}
@@ -7675,32 +7645,20 @@ public class Chosen implements Serializable {
 							w.append(t, "[0:HeShe] tries to verbally abuse and threaten [0:hisHer] attackers, but [0:heShe] can barely string two words together.", number);
 						}
 					} else if (modest) {
-						String organ = "pussy";
-						if (gender.equals("female")) {
-							organ = "penis";
-						} else if (gender.equals("futanari")) {
-							organ = "penis and pussy";
-						}
 						if (morality > 66) {
-							w.append(t, "[0:HeShe] squeals in protest despite [0:himHer]self when the Thralls start tickling [0:hisHer] kneepits, causing [0:hisHer] legs to thrash in a way that blatantly exposes [0:hisHer] " + organ + ", but there's nothing [0:heShe] can do to stop it.", number);
+							w.append(t, "[0:HeShe] squeals in protest despite [0:himHer]self when the Thralls start tickling [0:hisHer] kneepits, causing [0:hisHer] legs to thrash in a way that blatantly exposes [0:hisHer] [0:organ], but there's nothing [0:heShe] can do to stop it.", number);
 						} else if (morality > 33) {
-							w.append(t, "[0:HeShe]'s horrified when the Thralls start tickling [0:hisHer] kneepits, causing [0:hisHer] legs to thrash in a way that blatantly exposes [0:hisHer] " + organ + ", but there's nothing [0:heShe] can do to stop it.", number);
+							w.append(t, "[0:HeShe]'s horrified when the Thralls start tickling [0:hisHer] kneepits, causing [0:hisHer] legs to thrash in a way that blatantly exposes [0:hisHer] [0:organ], but there's nothing [0:heShe] can do to stop it.", number);
 						} else {
-							w.append(t, "[0:HeShe]'s briefly empowered again by [0:hisHer] rage when the Thralls start tickling [0:hisHer] kneepits, causing [0:hisHer] legs to thrash in a way that blatantly exposes [0:hisHer] " + organ + ", but [0:heShe] quickly tires again.", number);
+							w.append(t, "[0:HeShe]'s briefly empowered again by [0:hisHer] rage when the Thralls start tickling [0:hisHer] kneepits, causing [0:hisHer] legs to thrash in a way that blatantly exposes [0:hisHer] [0:organ], but [0:heShe] quickly tires again.", number);
 						}
 					} else {
-						String organ = "pussy";
-						if (gender.equals("female")) {
-							organ = "penis";
-						} else if (gender.equals("futanari")) {
-							organ = "penis and pussy";
-						}
 						if (morality > 66) {
-							w.append(t, "[0:HeShe] squeals in protest despite [0:himHer]self when the Thralls start tickling [0:hisHer] kneepits, causing [0:hisHer] legs to thrash in a way that blatantly exposes [0:hisHer] " + organ + " to the watching cameras, but there's nothing [0:heShe] can do to stop it.", number);
+							w.append(t, "[0:HeShe] squeals in protest despite [0:himHer]self when the Thralls start tickling [0:hisHer] kneepits, causing [0:hisHer] legs to thrash in a way that blatantly exposes [0:hisHer] [0:organ] to the watching cameras, but there's nothing [0:heShe] can do to stop it.", number);
 						} else if (morality > 33) {
-							w.append(t, "[0:HeShe]'s horrified when the Thralls start tickling [0:hisHer] kneepits, causing [0:hisHer] legs to thrash in a way that blatantly exposes [0:hisHer] " + organ + " to the watching cameras, but there's nothing [0:heShe] can do to stop it.", number);
+							w.append(t, "[0:HeShe]'s horrified when the Thralls start tickling [0:hisHer] kneepits, causing [0:hisHer] legs to thrash in a way that blatantly exposes [0:hisHer] [0:organ] to the watching cameras, but there's nothing [0:heShe] can do to stop it.", number);
 						} else {
-							w.append(t, "[0:HeShe]'s briefly motivated again by [0:hisHer] rage when the Thralls start tickling [0:hisHer] kneepits, causing [0:hisHer] legs to thrash in a way that blatantly exposes [0:hisHer] " + organ + " to the watching cameras, but [0:heShe] quickly tires again.", number);
+							w.append(t, "[0:HeShe]'s briefly motivated again by [0:hisHer] rage when the Thralls start tickling [0:hisHer] kneepits, causing [0:hisHer] legs to thrash in a way that blatantly exposes [0:hisHer] [0:organ] to the watching cameras, but [0:heShe] quickly tires again.", number);
 						}
 					}
 				} else if (dignity > 33) {
@@ -7770,34 +7728,22 @@ public class Chosen implements Serializable {
 						}
 						w.append(t, "cut [0:himHer] off by tickling [0:hisHer] belly even harder.", number);
 					} else if (modest) {
-						String organ = "pussy";
-						if (gender.equals("male")) {
-							organ = "penis";
-						} else if (gender.equals("futanari")) {
-							organ = "penis and pussy";
-						}
 						w.append(t, "[0:HeShe] kicks [0:hisHer] legs wildly as the Thralls tickle [0:hisHer] kneepits", number);
 						if (morality > 66) {
-							w.append(t, ", too caught up in the moment to spare a thought for how [0:heShe]'s flashing [0:hisHer] " + organ + " at everyone.", number);
+							w.append(t, ", too caught up in the moment to spare a thought for how [0:heShe]'s flashing [0:hisHer] [0:organ] at everyone.", number);
 						} else if (morality > 33) {
-							w.append(t, ", not even caring that [0:heShe]'s flashing [0:hisHer] " + organ + " at everyone.", number);
+							w.append(t, ", not even caring that [0:heShe]'s flashing [0:hisHer] [0:organ] at everyone.", number);
 						} else {
-							w.append(t, ", too busy trying to land a hit on one of their jaws to notice that [0:heShe]'s flashing [0:hisHer] " + organ + " at everyone in the process.", number);
+							w.append(t, ", too busy trying to land a hit on one of their jaws to notice that [0:heShe]'s flashing [0:hisHer] [0:organ] at everyone in the process.", number);
 						}
 					} else {
-						String organ = "pussy";
-						if (gender.equals("male")) {
-							organ = "penis";
-						} else if (gender.equals("futanari")) {
-							organ = "penis and pussy";
-						}
 						w.append(t, "[0:HeShe] kicks [0:hisHer] legs wildly as the Thralls tickle [0:hisHer] kneepits", number);
 						if (morality > 66) {
-							w.append(t, ", too caught up in the moment to spare a thought for how [0:heShe]'s flashing [0:hisHer] " + organ + " at the cameras.", number);
+							w.append(t, ", too caught up in the moment to spare a thought for how [0:heShe]'s flashing [0:hisHer] [0:organ] at the cameras.", number);
 						} else if (morality > 33) {
-							w.append(t, ", not even caring that [0:heShe]'s flashing [0:hisHer] " + organ + " at the cameras.", number);
+							w.append(t, ", not even caring that [0:heShe]'s flashing [0:hisHer] [0:organ] at the cameras.", number);
 						} else {
-							w.append(t, ", too busy trying to land a hit on one of their jaws to notice that [0:heShe]'s flashing [0:hisHer] " + organ + " at the cameras in the process.", number);
+							w.append(t, ", too busy trying to land a hit on one of their jaws to notice that [0:heShe]'s flashing [0:hisHer] [0:organ] at the cameras in the process.", number);
 						}
 					}
 				}
@@ -9091,10 +9037,6 @@ public class Chosen implements Serializable {
 		}
 		if (confidence > c.getConfidence()) {
 			if (defilementStage == 0 || c.getDefilementStage() == 0) {
-				String organ = "penis";
-				if (gender.equals("female")) {
-					organ = "clit";
-				}
 				if (getINJULevel() < 3 || aVirg) {
 					if (defilementStage == 0) {
 						if (innocence > 66) {
@@ -9116,9 +9058,9 @@ public class Chosen implements Serializable {
 				} else if (w.tickle()) {
 					if (defilementStage == 0) {
 						if (innocence > 66) {
-							w.append(t, "[0:mainName] eyes are glazed over as [0:heShe] moans with laughter and squirms against the Thralls tickling [0:himHer] , instinctively wanting to cum, but they're carefully avoiding touching [0:hisHer] " + organ + ".  ", number);
+							w.append(t, "[0:mainName] eyes are glazed over as [0:heShe] moans with laughter and squirms against the Thralls tickling [0:himHer] , instinctively wanting to cum, but they're carefully avoiding touching [0:hisHer] [0:erectileOrgan].  ", number);
 						} else if (innocence > 33) {
-							w.append(t, "[0:mainName] squirms wildly against the Thralls, squeezing [0:hisHer] thighs together in an attempt to prevent them from giving [0:hisHer] " + organ + " the last little touch it needs to drive [0:himHer] to orgasm, but for the time being, they're content to just tickle [0:himHer] and make [0:himHer] laugh.  ", number);
+							w.append(t, "[0:mainName] squirms wildly against the Thralls, squeezing [0:hisHer] thighs together in an attempt to prevent them from giving [0:hisHer] [0:erectileOrgan] the last little touch it needs to drive [0:himHer] to orgasm, but for the time being, they're content to just tickle [0:himHer] and make [0:himHer] laugh.  ", number);
 						} else {
 							w.append(t, "[0:mainName] tries to maintain a defiant expression aimed at the Thralls tickling [0:himHer], but it's difficult to hold while [0:heShe]'s being forced to laugh and perched on the edge of orgasm.  ", number);
 						}
@@ -9274,7 +9216,7 @@ public class Chosen implements Serializable {
 					} else if (getEXPOLevel() < 3) {
 						w.append(t, "causes [0:hisHer] bare bottom to bounce left and right", c.number);
 					} else if (c.getEXPOLevel() < 3) {
-						w.append(t, "causes [1:himHer] to grind against [0:mainName]'s exposed [0:organ]", number, c.number);
+						w.append(t, "causes [1:himHer] to grind against [0:mainName]'s exposed [0:erectileOrgan]", number, c.number);
 					} else {
 						w.append(t, "causes their bare bodies to gind against each other");
 					}
@@ -9289,7 +9231,7 @@ public class Chosen implements Serializable {
 					}
 					w.append(t, ", and their pulling, groping, rubbing hands ");
 				} else {
-					w.append(t, ".  The Thralls resume their stimulation full-force, some focusing on [0:mainName]'s exposed " + organ + " while others pinch [0:hisHer] bottom, lick [0:hisHer] ears, and fondle [0:hisHer] nipples.  ", number);
+					w.append(t, ".  The Thralls resume their stimulation full-force, some focusing on [0:mainName]'s exposed [0:erectileOrgan] while others pinch [0:hisHer] bottom, lick [0:hisHer] ears, and fondle [0:hisHer] nipples.  ", number);
 					if (modest) {
 						if (dignity > 66) {
 							w.append(t, "More than anything, the embarrassment of being seen in such a helpless position amplifies the other factors to ");
@@ -9340,17 +9282,13 @@ public class Chosen implements Serializable {
 				defilementStage = 0;
 				c.resetDefilementStage();
 			} else if (defilementStage % 3 == 1) {
-				String organ = "penis";
-				if (gender.equals("female")) {
-					organ = "clit";
-				}
 				//other's spasming
 				if (dignity > 66) {
 					if (c.getInnocence() > 66) {
 						if (getINJULevel() < 3 || aVirg) {
-							w.append(t, "[0:mainName] is stubbornly enduring the Thralls fondling [0:hisHer] [0:organ]", number);
+							w.append(t, "[0:mainName] is stubbornly enduring the Thralls fondling [0:hisHer] [0:erectileOrgan]", number);
 						} else if (w.tickle()) {
-							w.append(t, "[0:mainName] is stubbornly enduring the Thralls tickling [0:himHer] and fondling [0:hisHer] [0:organ]", number);
+							w.append(t, "[0:mainName] is stubbornly enduring the Thralls tickling [0:himHer] and fondling [0:hisHer] [0:erectileOrgan]", number);
 						} else if (gender.equals("male")) {
 							w.append(t, "[0:mainName] is stubbornly enduring the mingled pain and pleasure of [0:hisHer] penis straining against its bindings with every pulse of the vibrator", number);
 						} else {
@@ -9381,13 +9319,13 @@ public class Chosen implements Serializable {
 							w.append(t, "Without warning, [0:getMainName] starts spasming in climax", c.number);
 						}
 						if (getINJULevel() < 3 || aVirg) {
-							w.append(t, ", and with the cables binding them together, [0:mainName] feels every little movement against [0:hisHer] " + organ + ".  ", number);
+							w.append(t, ", and with the cables binding them together, [0:mainName] feels every little movement against [0:hisHer] [0:erectileOrgan].  ", number);
 						} else if (w.tickle()) {
-							w.append(t, ", and with the Thralls holding them against each other as they're tickled, [0:mainName] feels every little movement against [0:hisHer] " + organ + ".  ", number);
+							w.append(t, ", and with the Thralls holding them against each other as they're tickled, [0:mainName] feels every little movement against [0:hisHer] [0:erectileOrgan].  ", number);
 						} else if (gender.equals("male")) {
 							w.append(t, ", and with the greater sensitivity of [0:hisHer] abused penis, [0:mainName] feels every movement as a spike of mingled pain and pleasure into [0:hisHer] abdomen.  ", number);
 						} else {
-							w.append(t, ", and with the cables binding them together, [0:mainName]'s " + organ + " is stimulated by the movements even as the plug in [0:hisHer] ass continues to vibrate.  ", number);
+							w.append(t, ", and with the cables binding them together, [0:mainName]'s [0:erectileOrgan] is stimulated by the movements even as the plug in [0:hisHer] ass continues to vibrate.  ", number);
 						}
 						if (getEXPOLevel() < 3) {
 							w.append(t, "[0:HeShe] can only clench [0:hisHer] teeth and hope that [0:hisHer] orgasm remains hidden by [0:hisHer] [0:bottomDesc].", number);
@@ -9409,14 +9347,14 @@ public class Chosen implements Serializable {
 						if (getEXPOLevel() < 3) {
 							w.append(t, "[0:hisHer] movements are still stimulating even through [1:mainName]'s [1:bottomDesc].  ", c.number, number);
 						} else {
-							w.append(t, "every little shiver stimulates [0:mainName]'s " + organ + ".  ", number);
+							w.append(t, "every little shiver stimulates [0:mainName]'s [0:erectileOrgan].  ", number);
 						}
 						if (getINJULevel() < 3 || aVirg) {
 							w.append(t, "[0:mainName]'s composure cracks, and a breathy whine escapes [0:hisHer] throat as [0:heShe] cums.", number);
 						} else if (w.tickle()) {
 							w.append(t, "[0:mainName], who had been trembling with the effort of containing [0:hisHer] climax and [0:hisHer] laughter both, finally bursts out into desperate moans, cumming even harder for it.", number);
 						} else if (gender.equals("male")) {
-							w.append(t, "The combination of pain and pleasure running through the abused organ breaks [0:mainName]'s composure, and [0:heShe] struggles to choke back [0:hisHer] sobs as [0:heShe] releases a dribble of cum.", number);
+							w.append(t, "The combination of pain and pleasure running through the abused erectileOrgan breaks [0:mainName]'s composure, and [0:heShe] struggles to choke back [0:hisHer] sobs as [0:heShe] releases a dribble of cum.", number);
 						} else {
 							w.append(t, "The vibration from [0:hisHer] buttplug had already been wearing down [0:hisHer] composure, and [0:heShe] finally breaks into gasping moans as [0:heShe] cums.", number);
 						}
@@ -9429,7 +9367,7 @@ public class Chosen implements Serializable {
 							w.append(t, "[0:getMainName] carelessly bucks [0:hisHer] hips against [1:mainName] as [0:heShe] cums, too overwhelmed by the pleasure to heed [1:mainName]'s demands that [0:heShe] stop.  ", c.number, number);
 						}
 						if (getINJULevel() < 3 || aVirg) {
-							w.append(t, "The pressure against [0:hisHer] " + organ + " makes [0:himHer] climax as well", number);
+							w.append(t, "The pressure against [0:hisHer] [0:erectileOrgan] makes [0:himHer] climax as well", number);
 						} else if (w.tickle()) {
 							w.append(t, "With [0:hisHer] own spasms of laughter causing [0:himHer] to grind against [1:getMainName] as well, it isn't long before [0:heShe] also climaxes", number, c.number);
 						} else if (gender.equals("male")) {
@@ -9451,9 +9389,9 @@ public class Chosen implements Serializable {
 					} else if (c.getInnocence() > 33) {
 						w.append(t, "[0:getMainName]'s orgasmic spasms cause [0:hisHer] thigh to grind against [1:mainName]'s ", c.number, number);
 						if (getEXPOLevel() < 3) {
-							w.append(t, organ + " through [0:hisHer] [0:bottomDesc]", number);
+							w.append(t, "[0:erectileOrgan] through [0:hisHer] [0:bottomDesc]", number);
 						} else {
-							w.append(t, "exposed " + organ);
+							w.append(t, "exposed [0:erectileOrgan]", number);
 						}
 						if (friendly) {
 							w.append(t, ", [0:hisHer] voice slurring as [0:heShe] tries to apologize.  ", c.number);
@@ -9476,7 +9414,7 @@ public class Chosen implements Serializable {
 							w.append(t, "The sight of [0:getMainName], normally so cold and unfriendly, moaning in passionate pleasure ", c.number);
 						}
 						if (getINJULevel() < 3 || aVirg) {
-							w.append(t, "is turning [0:mainName] on even more than the vibrating wand pressed against [0:hisHer] " + organ + ".  ", number);
+							w.append(t, "is turning [0:mainName] on even more than the vibrating wand pressed against [0:hisHer] [0:erectileOrgan].  ", number);
 						} else if (w.tickle()) {
 							w.append(t, "is turning [0:mainName] on even more than the incessant tickling and groping by the Thralls.  ", number);
 						} else if (gender.equals("male")) {
@@ -9500,9 +9438,9 @@ public class Chosen implements Serializable {
 						}
 						w.append(t, "[0:mainName] is too stubborn to endure being tied up for even a moment longer than [0:heShe] has to, and [1:getMainName] lacks the willpower to contain [1:hisHer] orgasmic spasms.  The way they buck their hips against each other ", number, c.number);
 						if (getEXPOLevel() < 3) {
-							w.append(t, "stimulates [0:mainName]'s " + organ + " even through [0:hisHer] [0:bottomDesc]", number);
+							w.append(t, "stimulates [0:mainName]'s [0:erectileOrgan] even through [0:hisHer] [0:bottomDesc]", number);
 						} else {
-							w.append(t, "constantly stimulates [0:mainName]'s exposed " + organ + ".  ", number);
+							w.append(t, "constantly stimulates [0:mainName]'s exposed [0:erectileOrgan].  ", number);
 						}
 						if (getINJULevel() < 3 || aVirg) {
 							w.append(t, "[0:HeShe] cries out openly as [0:heShe] climaxes, and even then, [0:heShe] doesn't stop struggling.", number);
@@ -9529,9 +9467,9 @@ public class Chosen implements Serializable {
 							w.append(t, "[0:mainName], whose attention was directed behind [0:himHer] by [0:hisHer] buttplug's vibrations", number);
 						}
 						if (getEXPOLevel() < 3) {
-							w.append(t, ", is caught by surprise as [1:getMainName]'s sudden gyrations stimulate [0:hisHer] " + organ + " through [0:hisHer] [0:bottomDesc] and quickly make [0:himHer] cum hard.", number, c.number);
+							w.append(t, ", is caught by surprise as [1:getMainName]'s sudden gyrations stimulate [0:hisHer] [0:erectileOrgan] through [0:hisHer] [0:bottomDesc] and quickly make [0:himHer] cum hard.", number, c.number);
 						} else {
-							w.append(t, ", is caught by surprise by [1:getMainName]'s sudden gyrations against [0:hisHer] exposed " + organ + ", and [0:heShe] cums hard.", number, c.number);
+							w.append(t, ", is caught by surprise by [1:getMainName]'s sudden gyrations against [0:hisHer] exposed [0:erectileOrgan], and [0:heShe] cums hard.", number, c.number);
 						}
 					} else {
 						if (friendly) {
@@ -9542,24 +9480,20 @@ public class Chosen implements Serializable {
 						if (getEXPOLevel() < 3) {
 							w.append(t, ", and [0:mainName] cries out in surprise as [0:heShe] feels [1:getMainName] abruptly bucking against [0:himHer] through [0:hisHer] [0:bottomDesc].  ", number, c.number);
 						} else {
-							w.append(t, ", and [0:mainName] cries out in sudden pleasure as [0:heShe] feels [1:getMainName]'s body gyrating against [0:hisHer] bare " + organ + ".  ", number, c.number);
+							w.append(t, ", and [0:mainName] cries out in sudden pleasure as [0:heShe] feels [1:getMainName]'s body gyrating against [0:hisHer] bare [0:erectileOrgan].  ", number, c.number);
 						}
 						if (getINJULevel() < 3 || aVirg) {
 							w.append(t, "The stimulation soon drives [0:himHer] to [0:hisHer] own screaming orgasm.", number);
 						} else if (w.tickle()) {
 							w.append(t, "As the tickling continues unabated, [0:hisHer] laughter soon devolves into a screaming orgasm.", number);
 						} else if (gender.equals("male")) {
-							w.append(t, "The rough stimulation is too much for [0:hisHer] tied penis to handle, and [0:heShe] finds [0:himHer]self moaning in climax as the organ twitches and struggles to produce a trickle of cum.", number);
+							w.append(t, "The rough stimulation is too much for [0:hisHer] tied penis to handle, and [0:heShe] finds [0:himHer]self moaning in climax as the [0:erectileOrgan] twitches and struggles to produce a trickle of cum.", number);
 						} else {
 							w.append(t, "The sensations combine with the intense stimulation from [0:hisHer] vibrating buttplug to drive [0:himHer] to [0:hisHer] own screaming orgasm.", number);
 						}
 					}
 				}
 			} else if (defilementStage % 3 == 2) {
-				String organ = "penis";
-				if (gender.equals("female")) {
-					organ = "clit";
-				}
 				if (morality > 66) {
 					if (c.getMorality() > 33) {
 						if (getEXPOLevel() < 3) {
@@ -9574,7 +9508,7 @@ public class Chosen implements Serializable {
 						}
 						w.append(t, "The Thralls take advantage of [0:mainName]'s distraction to ", number);
 						if (getINJULevel() < 3 || aVirg) {
-							w.append(t, "push [0:himHer] down and tie [0:himHer] up even more tightly, wedging in another vibrator in the cables against [0:hisHer] " + organ + ".", number);
+							w.append(t, "push [0:himHer] down and tie [0:himHer] up even more tightly, wedging in another vibrator in the cables against [0:hisHer] [0:organ].", number);
 						} else if (w.tickle()) {
 							w.append(t, "push [0:himHer] down and tie [0:himHer] up again, tickling [0:himHer] even harder to punish [0:hisHer] defiance.", number);
 						} else if (gender.equals("male")) {
@@ -9596,7 +9530,7 @@ public class Chosen implements Serializable {
 							w.append(t, "spank [0:hisHer] bare bottom.  ", number);
 						}
 						if (getINJULevel() < 3 || aVirg) {
-							w.append(t, "[0:HeShe] involuntarily bucks [0:hisHer] hips with each impact, pushing [0:hisHer] " + organ + " against the vibrator held against it until [0:heShe] cums yet again.", number);
+							w.append(t, "[0:HeShe] involuntarily bucks [0:hisHer] hips with each impact, pushing [0:hisHer] [0:erectileOrgan] against the vibrator held against it until [0:heShe] cums yet again.", number);
 						} else if (w.tickle()) {
 							w.append(t, "The impacts leave [0:hisHer] skin red and tender enough that when they resume their tickling, [0:heShe]'s forced to laugh even harder than before.", number);
 						} else if (gender.equals("male")) {
@@ -9643,9 +9577,9 @@ public class Chosen implements Serializable {
 							w.append(t, "As one of the Thralls adjusts [0:mainName]'s vibrating buttplug", number);
 						}
 						if (getEXPOLevel() < 3) {
-							w.append(t, "[0:getMainName] can clearly see the vibrator against [1:hisHer] " + organ + " around [1:hisHer] shifted-aside [1:bottomDesc].", c.number, number);
+							w.append(t, "[0:getMainName] can clearly see the vibrator against [1:hisHer] [1:erectileOrgan] around [1:hisHer] shifted-aside [1:bottomDesc].", c.number, number);
 						} else {
-							w.append(t, "[0:getMainName]'s eyes go wide at the close-up view of the vibrator against [1:hisHer] " + organ + ".", c.number, number);
+							w.append(t, "[0:getMainName]'s eyes go wide at the close-up view of the vibrator against [1:hisHer] [1:erectileOrgan].", c.number, number);
 						}
 					}
 				} else {
@@ -9688,7 +9622,7 @@ public class Chosen implements Serializable {
 						}
 						w.append(t, "[0:mainName] is held in a similar position, but ", number);
 						if (getEXPOLevel() >= 3) {
-							w.append(t, "even with the distraction of [0:hisHer] bare " + organ + " against [1:getMainName]'s face, ", number, c.number);
+							w.append(t, "even with the distraction of [0:hisHer] bare [0:erectileOrgan] against [1:getMainName]'s face, ", number, c.number);
 						}
 						w.append(t, "[0:heShe] retains the ferocity to bite any Thralls who try to reach between [1:getMainName]'s legs.", number, c.number);
 					}
@@ -9698,10 +9632,6 @@ public class Chosen implements Serializable {
 				String target = "cock";
 				if (c.getGender().equals("female")) {
 					target = "slit";
-				}
-				String organ = "penis";
-				if (gender.equals("female")) {
-					organ = "clit";
 				}
 				if (innocence > 66) {
 					if (c.getMorality() > 66) {
@@ -9726,9 +9656,9 @@ public class Chosen implements Serializable {
 						}
 					} else if (c.getMorality() > 33) {
 						if (getEXPOLevel() < 3) {
-							w.append(t, "The Thralls shift [0:mainName]'s [0:bottomDesc] aside to toy with [0:hisHer] " + organ + ", ", number);
+							w.append(t, "The Thralls shift [0:mainName]'s [0:bottomDesc] aside to toy with [0:hisHer] [0:erectileOrgan], ", number);
 						} else {
-							w.append(t, "The Thralls enjoy toying with [0:mainName]'s exposed " + organ + ", ", number);
+							w.append(t, "The Thralls enjoy toying with [0:mainName]'s exposed [0:erectileOrgan], ", number);
 						}
 						if (getINJULevel() < 3 || aVirg) {
 							w.append(t, "constantly stimulating [0:himHer] even after [0:heShe] cums until [0:hisHer] head goes blank.  ", number);
@@ -9749,7 +9679,7 @@ public class Chosen implements Serializable {
 						if (friendly) {
 							w.append(t, "[0:getMainName] begs for [1:mainName] to hurry up and get them free, and the power of friendship motivates [1:himHer] to ", c.number, number);
 						} else {
-							w.append(t, "[0:getMainName] bites [1:mainName]'s " + organ + ", and the jolt of pain causes [1:himHer] to ", c.number, number);
+							w.append(t, "[0:getMainName] bites [1:mainName]'s [1:erectileOrgan], and the jolt of pain causes [1:himHer] to ", c.number, number);
 						}
 						if (getINJULevel() < 3 || aVirg) {
 							w.append(t, "overcome [0:hisHer] orgasmic spasms and snap several of the cables holding them together.  ", number);
@@ -9764,7 +9694,7 @@ public class Chosen implements Serializable {
 						if (getEXPOLevel() < 3) {
 							w.append(t, "are quick to grab [0:himHer] by [0:hisHer] [0:bottomDesc] and bind [0:himHer] more tightly to [1:getMainName] this time, so that they can't even pull their faces away from each other.", number, c.number);
 						} else {
-							w.append(t, "are quick to grab [0:himHer] and bind [0:himHer] more tightly to [1:getMainName] this time, [0:hisHer] bare " + organ + " rubbing directly between [1:getMainName]'s legs.", number, c.number);
+							w.append(t, "are quick to grab [0:himHer] and bind [0:himHer] more tightly to [1:getMainName] this time, [0:hisHer] bare [0:erectileOrgan] rubbing directly between [1:getMainName]'s legs.", number, c.number);
 						}
 					}
 				} else if (innocence > 33) {
@@ -9817,11 +9747,11 @@ public class Chosen implements Serializable {
 						if (getEXPOLevel() < 3) {
 							w.append(t, "with [1:getMainName] still strapped upside-down to [0:hisHer] front.  ", number, c.number);
 						} else {
-							w.append(t, "with [0:hisHer] head still between [1:getMainName]'s thighs and [1:getMainName]'s face against [0:hisHer] " + organ + ".  ", number, c.number);
+							w.append(t, "with [0:hisHer] head still between [1:getMainName]'s thighs and [1:getMainName]'s face against [0:hisHer] [0:erectileOrgan].  ", number, c.number);
 						}
 						w.append(t, "The Thralls quickly catch up and push [0:himHer] back down, ", number);
 						if (getINJULevel() < 3 || aVirg) {
-							w.append(t, "punishing [0:himHer] with a powerful vibrator shoved directly against [0:hisHer] " + organ + " for [0:hisHer] defiance.  ", number);
+							w.append(t, "punishing [0:himHer] with a powerful vibrator shoved directly against [0:hisHer] [0:erectileOrgan] for [0:hisHer] defiance.  ", number);
 						} else if (w.tickle()) {
 							w.append(t, "tickling [0:himHer] extra hard as punishment for [0:hisHer] defiance.  ", number);
 						} else if (gender.equals("male")) {
@@ -9839,7 +9769,7 @@ public class Chosen implements Serializable {
 				} else {
 					if (c.getMorality() > 66) {
 						if (friendly) {
-							w.append(t, "Embarrassed at being so turned on by the close-up sight of [0:mainName]'s [0:organ]", number);
+							w.append(t, "Embarrassed at being so turned on by the close-up sight of [0:mainName]'s [0:erectileOrgan]", number);
 						} else {
 							w.append(t, "Afraid of having [0:mainName]'s teeth so close to [1:hisHer] " + target, number, c.number);
 						}
@@ -9857,7 +9787,7 @@ public class Chosen implements Serializable {
 						if (getEXPOLevel() < 3) {
 							w.append(t, "causes [0:himHer] to grind against [0:mainName].", number);
 						} else {
-							w.append(t, "causes [0:himHer] to grind against [0:mainName]'s bare " + organ + ".", number);
+							w.append(t, "causes [0:himHer] to grind against [0:mainName]'s bare [0:erectileOrgan].", number);
 						}
 					} else if (c.getMorality() > 33) {
 						w.append(t, "The Thralls briefly loosen the bindings around [0:mainName] and [1:getMainName], but ", number, c.number);
@@ -9879,7 +9809,7 @@ public class Chosen implements Serializable {
 						if (getEXPOLevel() < 3) {
 							w.append(t, "and when the Thralls pull [0:mainName]'s [0:bottomDesc] aside again, [0:heShe]'s ready for it.", number);
 						} else {
-							w.append(t, "and when the Thralls return their attention to [0:mainName]'s vulnerable " + organ + ", [0:heShe]'s a little more prepared for it.", number);
+							w.append(t, "and when the Thralls return their attention to [0:mainName]'s vulnerable [0:erectileOrgan], [0:heShe]'s a little more prepared for it.", number);
 						}
 					} else {
 						if (friendly) {
@@ -9894,7 +9824,7 @@ public class Chosen implements Serializable {
 							w.append(t, "spreads [0:hisHer] bare legs, completely exposing [0:himHer]self, and ", number);
 						}
 						if (getINJULevel() < 3 || aVirg) {
-							w.append(t, "allows the Thralls to press their vibrators and other toys directly against [0:hisHer] " + organ + ".", number);
+							w.append(t, "allows the Thralls to press their vibrators and other toys directly against [0:hisHer] [0:erectileOrgan].", number);
 						} else if (w.tickle()) {
 							w.append(t, "tries to hold them straight out for the Thralls to tickle.");
 						} else if (gender.equals("male")) {
@@ -9908,10 +9838,6 @@ public class Chosen implements Serializable {
 		} else {
 			if (defilementStage % 3 == 0) {
 				//clothes tearing
-				String organ = "penis";
-				if (gender.equals("female")) {
-					organ = "clit";
-				}
 				if (dignity > 66) {
 					if (c.getDignity() > 33) {
 						w.append(t, "When [1:getMainName] starts straining against their bindings in an attempt to escape, [0:mainName] quickly notices ", number, c.number);
@@ -9926,9 +9852,9 @@ public class Chosen implements Serializable {
 							w.append(t, ", and [0:heShe] brings it to [1:getMainName]'s attention.  [1:getMainName] doesn't care about [0:mainName]'s embarrassment, but [1:heShe] doesn't want to get exposed either, so [1:heShe] slows down for the moment.  ", number, c.number);
 						}
 						if (getINJULevel() < 3 || aVirg) {
-							w.append(t, "[0:mainName] doesn't fight against the Thralls fondling [0:hisHer] " + organ + ", and they quickly make [0:himHer] cum", number);
+							w.append(t, "[0:mainName] doesn't fight against the Thralls fondling [0:hisHer] [0:erectileOrgan], and they quickly make [0:himHer] cum", number);
 						} else if (w.tickle()) {
-							w.append(t, "[0:mainName] doesn't fight against the Thralls tickling [0:himHer] and fondling [0:hisHer] " + organ + ", and they quickly make [0:himHer] cum", number);
+							w.append(t, "[0:mainName] doesn't fight against the Thralls tickling [0:himHer] and fondling [0:hisHer] [0:erectileOrgan], and they quickly make [0:himHer] cum", number);
 						} else if (gender.equals("male")) {
 							w.append(t, "[0:mainName] just bites [0:hisHer] lip to avoid moaning when the vibration against [0:hisHer] tied penis finally makes [0:himHer] cum", number);
 						} else {
@@ -9957,9 +9883,9 @@ public class Chosen implements Serializable {
 							w.append(t, ", but when [0:heShe] begs for help, [1:getMainName] just rolls [1:hisHer] eyes.  [0:HisHer] movements become even more wild when [0:heShe] cums from ", number, c.number);
 						}
 						if (getINJULevel() < 3 || aVirg) {
-							w.append(t, "one of the Thralls pressing a vibrating wand against [0:hisHer] " + organ + ".", number);
+							w.append(t, "one of the Thralls pressing a vibrating wand against [0:hisHer] [0:erectileOrgan].", number);
 						} else if (w.tickle()) {
-							w.append(t, "the Thralls' tickling hands finding their way to [0:hisHer] " + organ + ".", number);
+							w.append(t, "the Thralls' tickling hands finding their way to [0:hisHer] [0:erectileOrgan].", number);
 						} else if (gender.equals("male")) {
 							w.append(t, "the persistent vibration against [0:hisHer] tied penis.", number);
 						} else {
@@ -9978,9 +9904,9 @@ public class Chosen implements Serializable {
 				} else if (dignity > 33) {
 					if (c.getDignity() > 66) {
 						if (getINJULevel() < 3 || aVirg) {
-							w.append(t, "One of the Thralls pushes a vibrating wand against [0:mainName]'s " + organ + ", forcing [0:himHer] to spasm in climax", number);
+							w.append(t, "One of the Thralls pushes a vibrating wand against [0:mainName]'s [0:erectileOrgan], forcing [0:himHer] to spasm in climax", number);
 						} else if (w.tickle()) {
-							w.append(t, "The Thralls' tickling hands work their way toward [0:mainName]'s " + organ + ", then begin stroking it outright, forcing [0:himHer] to spasm in climax", number);
+							w.append(t, "The Thralls' tickling hands work their way toward [0:mainName]'s [0:erectileOrgan], then begin stroking it outright, forcing [0:himHer] to spasm in climax", number);
 						} else if (gender.equals("male")) {
 							w.append(t, "Even though [0:mainName]'s tied penis can't ejaculate, the constant vibration against it forces [0:himHer] to spasm in climax", number);
 						} else {
@@ -10009,9 +9935,9 @@ public class Chosen implements Serializable {
 						}
 					} else {
 						if (getINJULevel() < 3 || aVirg) {
-							w.append(t, "The Thralls push a vibrating wand against [0:mainName]'s [0:organ]", number);
+							w.append(t, "The Thralls push a vibrating wand against [0:mainName]'s [0:erectileOrgan]", number);
 						} else if (w.tickle()) {
-							w.append(t, "While some Thralls just tickle [0:mainName], others focus on [0:hisHer] [0:organ]", number);
+							w.append(t, "While some Thralls just tickle [0:mainName], others focus on [0:hisHer] [0:erectileOrgan]", number);
 						} else if (gender.equals("male")) {
 							w.append(t, "The vibrator tied to [0:mainName]'s penis pulses over and over again", number);
 						} else {
@@ -10053,13 +9979,13 @@ public class Chosen implements Serializable {
 							w.append(t, "[0:getMainName] angrily pins [1:himHer] down to stop [1:himHer] from making things worse", c.number, number);
 						}
 						if (getINJULevel() < 3 || aVirg) {
-							w.append(t, ", but that just makes it easier for the Thralls to push a vibrating wand against [0:hisHer] [0:organ]", number);
+							w.append(t, ", but that just makes it easier for the Thralls to push a vibrating wand against [0:hisHer] [0:erectileOrgan]", number);
 						} else if (w.tickle()) {
-							w.append(t, ", but that just makes it easy for the Thralls tickling [0:hisHer] thighs to move on to [0:hisHer] [0:organ]", number);
+							w.append(t, ", but that just makes it easy for the Thralls tickling [0:hisHer] thighs to move on to [0:hisHer] [0:erectileOrgan]", number);
 						} else if (gender.equals("male")) {
 							w.append(t, ", but that just makes it easy for the Thralls to run their hands over [0:hisHer] tied, vibrator-tormented penis", number);
 						} else {
-							w.append(t, ", but that just makes it easy for the Thralls to fondle [0:hisHer] " + organ + " and push the vibrating buttplug deeper inside", number);
+							w.append(t, ", but that just makes it easy for the Thralls to fondle [0:hisHer] [0:erectileOrgan] and push the vibrating buttplug deeper inside", number);
 						}
 						if (cVirg) {
 							if (innocence > 66) {
@@ -10085,9 +10011,9 @@ public class Chosen implements Serializable {
 							w.append(t, "As [0:mainName] cums", number);
 						}
 						if (getINJULevel() < 3 || aVirg) {
-							w.append(t, " at the hands of the Thralls fondling [0:hisHer] [0:organ]", number);
+							w.append(t, " at the hands of the Thralls fondling [0:hisHer] [0:erectileOrgan]", number);
 						} else if (w.tickle()) {
-							w.append(t, " at the tickling hands of the Thralls giving more and more attention to [0:hisHer] [0:organ]", number);
+							w.append(t, " at the tickling hands of the Thralls giving more and more attention to [0:hisHer] [0:erectileOrgan]", number);
 						} else if (gender.equals("male")) {
 							w.append(t, " from the vibration against [0:hisHer] tied penis", number);
 						} else {
@@ -10107,17 +10033,13 @@ public class Chosen implements Serializable {
 				}
 			} else if (defilementStage % 3 == 1) {
 				//other's struggling
-				String organ = "penis";
-				if (gender.equals("female")) {
-					organ = "clit";
-				}
 				if (dignity > 66) {
 					if (c.getInnocence() > 66) {
 						w.append(t, "In the brief moments of clarity between orgasms, [0:getMainName] struggles with all [0:hisHer] might to escape", c.number);
 						if (friendly) {
 							w.append(t, ", and even though [0:mainName] knows [1:heShe]'d be willing to slow down if [1:heShe] knew how much [1:hisHer] movements were stimulation [0:himHer], [1:heShe]'s too embarrassed to ask.  ", number, c.number);
 						} else {
-							w.append(t, ", and even though [0:mainName] is having a hard time dealing with the stimulation of [1:hisHer] movements against [0:hisHer] " + organ + ", [0:heShe] is embarrassed to admit it to [0:hisHer] rival.  ", number, c.number);
+							w.append(t, ", and even though [0:mainName] is having a hard time dealing with the stimulation of [1:hisHer] movements against [0:hisHer] [0:erectileOrgan], [0:heShe] is embarrassed to admit it to [0:hisHer] rival.  ", number, c.number);
 						}
 						if (getINJULevel() < 3 || aVirg) {
 							w.append(t, "[0:HeShe] buries [0:hisHer] face in [1:getMainName]'s chest as [0:heShe] cums", number, c.number);
@@ -10145,7 +10067,7 @@ public class Chosen implements Serializable {
 							w.append(t, "Voice thick with annoyance, [1:getMainName] tells [0:mainName] to try not to cum so that they can work together to escape", number, c.number);
 						}
 						if (getINJULevel() < 3 || aVirg) {
-							w.append(t, ", and [0:mainName] lies through [0:hisHer] teeth that the vibrator being pressed against [0:hisHer] " + organ + " isn't bothering [0:himHer] at all.  ", number);
+							w.append(t, ", and [0:mainName] lies through [0:hisHer] teeth that the vibrator being pressed against [0:hisHer] [0:erectileOrgan] isn't bothering [0:himHer] at all.  ", number);
 						} else if (w.tickle()) {
 							w.append(t, ", and [0:mainName] is grateful that the laughter being forced on [0:himHer] by the Thralls means [0:heShe] isn't expected to answer.  ", number);
 						} else if (gender.equals("male")) {
@@ -10155,9 +10077,9 @@ public class Chosen implements Serializable {
 						}
 						w.append(t, "When [0:getMainName] resumes struggling to escape, the movements against ", c.number);
 						if (getEXPOLevel() < 3) {
-							w.append(t, "[0:mainName]'s " + organ + " through [0:hisHer] [0:bottomDesc] make [0:hisHer] limbs seize up in undeniable climax.", number);
+							w.append(t, "[0:mainName]'s [0:erectileOrgan] through [0:hisHer] [0:bottomDesc] make [0:hisHer] limbs seize up in undeniable climax.", number);
 						} else {
-							w.append(t, "[0:mainName]'s bare " + organ + " make [0:hisHer] whole body spasm in a humiliatingly obvious climax.", number);
+							w.append(t, "[0:mainName]'s bare [0:erectileOrgan] make [0:hisHer] whole body spasm in a humiliatingly obvious climax.", number);
 						}
 					} else {
 						if (getINJULevel() < 3 || aVirg) {
@@ -10200,22 +10122,22 @@ public class Chosen implements Serializable {
 						if (getEXPOLevel() < 3) {
 							w.append(t, "the repeated movements against [0:mainName]'s crotch through [0:hisHer] [0:bottomDesc]", number);
 						} else {
-							w.append(t, "the repeated movements of [1:hisHer] thigh against [0:mainName]'s bare [0:organ]", number, c.number);
+							w.append(t, "the repeated movements of [1:hisHer] thigh against [0:mainName]'s bare [0:erectileOrgan]", number, c.number);
 						}
 						if (getINJULevel() < 3 || aVirg) {
 							w.append(t, " make [0:himHer] cry out in helpless orgasm.", number);
 						} else if (w.tickle()) {
 							w.append(t, " make [0:hisHer] squeals of laughter turn into moans of orgasm.", number);
 						} else if (gender.equals("male")) {
-							w.append(t, " prove to be too much for [0:hisHer] bruised organ to handle, and [0:heShe] whimpers in a painful orgasm.", number);
+							w.append(t, " prove to be too much for [0:hisHer] bruised erectileOrgan to handle, and [0:heShe] whimpers in a painful orgasm.", number);
 						} else {
 							w.append(t, " make [0:himHer] cry out in helpless orgasm, [0:hisHer] hips bucking with each pulse of vibration from [0:hisHer] buttplug.", number);
 						}
 					} else if (c.getInnocence() > 33) {
 						if (getINJULevel() < 3 || aVirg) {
-							w.append(t, "When the vibrator against [0:hisHer] [0:organ]", number);
+							w.append(t, "When the vibrator against [0:hisHer] [0:erectileOrgan]", number);
 						} else if (w.tickle()) {
-							w.append(t, "When the Thralls direct tickling of [0:hisHer] [0:organ]", number);
+							w.append(t, "When the Thralls direct tickling of [0:hisHer] [0:erectileOrgan]", number);
 						} else if (gender.equals("male")) {
 							w.append(t, "When the intense vibration against [0:hisHer] bruised penis", number);
 						} else {
@@ -10243,7 +10165,7 @@ public class Chosen implements Serializable {
 						if (getEXPOLevel() < 3) {
 							w.append(t, "Even as [0:heShe] reflexively humps [1:getMainName] through [0:hisHer] [0:bottomDesc]", number, c.number);
 						} else {
-							w.append(t, "Even as [0:heShe] reflexively grinds [0:hisHer] bare " + organ + " against [1:getMainName]'s thigh", number, c.number);
+							w.append(t, "Even as [0:heShe] reflexively grinds [0:hisHer] bare [0:erectileOrgan] against [1:getMainName]'s thigh", number, c.number);
 						}
 						w.append(t, ", [0:mainName] begs [1:himHer] to stop the Thralls from making [0:himHer] cum again.  ", number, c.number);
 						if (friendly) {
@@ -10252,7 +10174,7 @@ public class Chosen implements Serializable {
 							w.append(t, "[0:getMainName] grudgingly lends [0:hisHer] help and tries to fend them off, but ", c.number);
 						}
 						if (getINJULevel() < 3 || aVirg) {
-							w.append(t, "it only takes a few moments of one of the Thralls getting a vibrating wand in contact with [0:hisHer] " + organ + " to push [0:himHer] over the edge.", number);
+							w.append(t, "it only takes a few moments of one of the Thralls getting a vibrating wand in contact with [0:hisHer] [0:erectileOrgan] to push [0:himHer] over the edge.", number);
 						} else if (w.tickle()) {
 							w.append(t, "[0:mainName]'s spasms from being tickled make it harder for [1:himHer] to help, and [0:mainName]'s laughter once again turns to orgasmic cries.", number, c.number);
 						} else if (gender.equals("male")) {
@@ -10264,7 +10186,7 @@ public class Chosen implements Serializable {
 				} else {
 					if (c.getInnocence() > 66) {
 						if (getINJULevel() < 3 || aVirg) {
-							w.append(t, "The vibrator pressed against [0:hisHer] " + organ + " makes [0:mainName] cum again", number);
+							w.append(t, "The vibrator pressed against [0:hisHer] [0:erectileOrgan] makes [0:mainName] cum again", number);
 						} else if (w.tickle()) {
 							w.append(t, "The Thralls' hands all over [0:hisHer] body drive [0:mainName] to another uncontrollably laughing orgasm", number);
 						} else if (gender.equals("male")) {
@@ -10292,7 +10214,7 @@ public class Chosen implements Serializable {
 						if (getEXPOLevel() < 3) {
 							w.append(t, "dry humping [0:himHer].  ", c.number);
 						} else {
-							w.append(t, "grinding [0:hisHer] bare " + organ + " against [1:himHer].  ", number, c.number);
+							w.append(t, "grinding [0:hisHer] bare [0:erectileOrgan] against [1:himHer].  ", number, c.number);
 						}
 						if (getINJULevel() < 3 || aVirg) {
 							w.append(t, "When the vibrator pressed between [0:mainName]'s legs makes [0:himHer] cum, [0:heShe] screams out loud, locking [0:hisHer] legs around [1:getMainName].", number, c.number);
@@ -10315,7 +10237,7 @@ public class Chosen implements Serializable {
 							w.append(t, " and grind directly against [0:getMainName], much to [0:hisHer] embarrassed annoyance.  ", c.number);
 						}
 						if (getINJULevel() < 3 || aVirg) {
-							w.append(t, "[0:HisHer] mind doesn't have room for anything other than the pleasure inflicted by the vibrator against [0:hisHer] " + organ + ".", number);
+							w.append(t, "[0:HisHer] mind doesn't have room for anything other than the pleasure inflicted by the vibrator against [0:hisHer] [0:erectileOrgan].", number);
 						} else if (w.tickle()) {
 							w.append(t, "[0:HeShe]'s completely given up on fighting against the Thralls tickling [0:himHer].", number);
 						} else if (gender.equals("male")) {
@@ -10327,10 +10249,6 @@ public class Chosen implements Serializable {
 				}
 			} else if (defilementStage % 3 == 2) {
 				//temptation to service
-				String organ = "penis";
-				if (gender.equals("female")) {
-					organ = "clit";
-				}
 				String target = "cock";
 				if (c.getGender().equals("female")) {
 					target = "slit";
@@ -10354,13 +10272,13 @@ public class Chosen implements Serializable {
 						if (getEXPOLevel() < 3) {
 							w.append(t, "However, [0:mainName] is too far gone to hear [1:himHer].", number, c.number);
 						} else {
-							w.append(t, "However, with the way they're tied up, this just causes [1:hisHer] lips to brush against [0:mainName]'s " + organ + " and turn [0:himHer] on even more.", number, c.number);
+							w.append(t, "However, with the way they're tied up, this just causes [1:hisHer] lips to brush against [0:mainName]'s [0:erectileOrgan] and turn [0:himHer] on even more.", number, c.number);
 						}
 					} else if (c.getMorality() > 33) {
 						if (getEXPOLevel() < 3) {
 							w.append(t, "Tied up with [0:hisHer] head between [1:getMainName]'s legs", number, c.number);
 						} else {
-							w.append(t, "Feeling [1:getMainName]'s breath tickling [0:hisHer] [0:organ]", number, c.number);
+							w.append(t, "Feeling [1:getMainName]'s breath tickling [0:hisHer] [0:erectileOrgan]", number, c.number);
 						}
 						if (getINJULevel() < 3 || aVirg) {
 							w.append(t, ", [0:mainName]'s self-control has been worn away by the repeated orgasms.  ", number);
@@ -10419,7 +10337,7 @@ public class Chosen implements Serializable {
 						if (getEXPOLevel() < 3) {
 							w.append(t, "The sudden change prompts [1:getMainName] to ask whether [0:heShe]'s alright, though [1:heShe] struggles to be heard with [1:hisHer] face pressed into [0:mainName]'s [0:bottomDesc].", number, c.number);
 						} else {
-							w.append(t, "The sudden change prompts [1:getMainName] to ask whether [0:heShe]'s alright, [1:hisHer] cheek pressed against [0:mainName]'s " + organ + ".", number, c.number);
+							w.append(t, "The sudden change prompts [1:getMainName] to ask whether [0:heShe]'s alright, [1:hisHer] cheek pressed against [0:mainName]'s [0:erectileOrgan].", number, c.number);
 						}
 					} else if (c.getMorality() > 33) {
 						w.append(t, "[0:getMainName] tries to form another escape plan with [1:mainName], [0:hisHer] voice muffled by [1:mainName]'s ", c.number, number);
@@ -10493,7 +10411,7 @@ public class Chosen implements Serializable {
 						if (getEXPOLevel() < 3) {
 							w.append(t, "having [1:hisHer] head tied stuck between [0:mainName]'s legs either.", number, c.number);
 						} else {
-							w.append(t, "having [1:hisHer] faced tied against [0:mainName]'s " + organ + " either.", number, c.number);
+							w.append(t, "having [1:hisHer] faced tied against [0:mainName]'s [0:erectileOrgan] either.", number, c.number);
 						}
 					} else if (c.getMorality() > 33) {
 						if (friendly) {
@@ -10512,7 +10430,7 @@ public class Chosen implements Serializable {
 							}
 						}
 						if (getINJULevel() < 3 || aVirg) {
-							w.append(t, "Then, the vibrator pressed against [0:hisHer] " + organ + " makes [0:himHer] cum again, driving out all thought.", number);
+							w.append(t, "Then, the vibrator pressed against [0:hisHer] [0:erectileOrgan] makes [0:himHer] cum again, driving out all thought.", number);
 						} else if (w.tickle()) {
 							w.append(t, "Then, [0:hisHer] mind goes blank as the Thralls tickle [0:himHer] some more, forcing [0:himHer] to cum again.", number);
 						} else if (gender.equals("male")) {
@@ -10841,14 +10759,7 @@ public class Chosen implements Serializable {
 				}
 				if (getINJULevel() >= 3 && aVirg == false) {
 					if (w.tickle()) {
-						w.append(t, "The Thralls move their focus toward tickling [0:hisHer] sensitive thighs, framing [0:hisHer] exposed ", number);
-						if (gender.equals("female")) {
-							w.append(t, "pussy");
-						} else if (gender.equals("male")) {
-							w.append(t, "penis");
-						} else {
-							w.append(t, "penis and pussy");
-						}
+						w.append(t, "The Thralls move their focus toward tickling [0:hisHer] sensitive thighs, framing [0:hisHer] exposed [0:organ]", number);
 						w.append(t, " for the benefit of the watching cameras.");
 					} else {
 						w.append(t, "The display entices more Thralls to crowd around [0:himHer], taking out their phones and filming [0:hisHer] humiliation now that they have a good view", number);
@@ -10860,14 +10771,7 @@ public class Chosen implements Serializable {
 					}
 				} else {
 					if (w.tickle()) {
-						w.append(t, "[0:HisHer] frantic movements show off [0:hisHer] ", number);
-						if (gender.equals("female")) {
-							w.append(t, "pussy");
-						} else if (gender.equals("male")) {
-							w.append(t, "penis");
-						} else {
-							w.append(t, "penis and pussy");
-						}
+						w.append(t, "[0:HisHer] frantic movements show off [0:hisHer] [0:organ]", number);
 						w.append(t, " to the watching cameras, especially when the Thralls focus their tickling on [0:hisHer] now-exposed thighs.", number);
 					} else {
 						w.append(t, "[0:HeShe]'s too caught up in the pleasure to even cover [0:himHer]self as several Thralls break off the assault to take out their phones and eagerly film the display.", number);
@@ -13742,11 +13646,11 @@ public class Chosen implements Serializable {
 						}
 						if (c.isAVirg() || c.getINJULevel() < 3 || w.tickle()) {
 							if (c.getDignity() > 66) {
-								w.append(t, "[0:getMainName] is already blushing bright red in embarrassment at the way that seeing [1:mainName]'s predicament has caused [0:hisHer] penis to stand erect, and [0:hisHer] embarrassment turns to panic when the Thralls guide the tip to [1:mainName]'s " + hole + " and force [0:himHer] inside", c.number, number);
+								w.append(t, "[0:getMainName] is already blushing bright red in embarrassment at the way that seeing [1:mainName]'s predicament has caused [0:hisHer] penis to stand erect, and [0:hisHer] embarrassment turns to panic when the Thralls guide the tip to [1:mainName]'s [1:hole] and force [0:himHer] inside", c.number, number);
 							} else if (c.getDignity() > 33) {
 								w.append(t, "[0:getMainName] squirms, arms pinned behind [0:hisHer] back, trying in vain to use [0:hisHer] thighs to hide [0:hisHer] erection.  The Thralls push [0:himHer] atop [1:mainName], face-to-face, and [0:hisHer] penis slips into [1:mainName]'s used " + hole, c.number, number);
 							} else {
-								w.append(t, "[0:getMainName] kicks and struggles, tears in [0:hisHer] eyes, as [0:heShe]'s pressed face-to-face with [1:mainName].  But when [0:heShe] feels [1:mainName]'s warm " + hole + " against [0:hisHer] penis, [0:heShe] freezes up for just long enough that the Thralls can push [0:himHer] forward, forcing [0:himHer] to penetrate [1:mainName]", c.number, number);
+								w.append(t, "[0:getMainName] kicks and struggles, tears in [0:hisHer] eyes, as [0:heShe]'s pressed face-to-face with [1:mainName].  But when [0:heShe] feels [1:mainName]'s warm [1:hole] against [0:hisHer] penis, [0:heShe] freezes up for just long enough that the Thralls can push [0:himHer] forward, forcing [0:himHer] to penetrate [1:mainName]", c.number, number);
 							}
 						} else {
 							if (c.getGender().equals("male")) {
@@ -13755,7 +13659,7 @@ public class Chosen implements Serializable {
 								} else if (c.getDignity() > 33) {
 									w.append(t, "[0:getMainName] squirms in intense discomfort at the way [0:hisHer] cock has had a cord tight tightly around it.  It restricts the bloodflow enough to prevent [0:himHer] from cumming, but not enough to suppress its shamefully semi-erect state.  The Thralls push [0:himHer] atop [1:mainName], face-to-face, and [0:hisHer] member slips into [1:mainName]'s used " + hole, c.number, number);
 								} else {
-									w.append(t, "[0:getMainName] kicks and struggles deliriously, crying with the pain of the tight leash wrapped around [0:hisHer] cock.  However, when [0:heShe] feels [1:mainName]'s warm " + hole + " against the tip, [0:heShe] instinctively thrusts [0:hisHer] hips forward, pushing [0:himHer]self inside without thinking", c.number, number);
+									w.append(t, "[0:getMainName] kicks and struggles deliriously, crying with the pain of the tight leash wrapped around [0:hisHer] cock.  However, when [0:heShe] feels [1:mainName]'s warm [1:hole] against the tip, [0:heShe] instinctively thrusts [0:hisHer] hips forward, pushing [0:himHer]self inside without thinking", c.number, number);
 								}
 							} else {
 								if (c.getDignity() > 66) {
@@ -13763,7 +13667,7 @@ public class Chosen implements Serializable {
 								} else if (c.getDignity() > 33) {
 									w.append(t, "[0:getMainName] squirms with intense discomfort as the Thrall behind [0:himHer] thrusts into [0:hisHer] ass.  It feels far better than [0:heShe]'d like to admit, and [0:hisHer] cock is fully erect, bobbing from side to side.  The Thralls push [0:himHer] atop [1:mainName], face-to-face, and [0:hisHer] member slips into [1:mainName]'s used " + hole, c.number, number);
 								} else {
-									w.append(t, "[0:getMainName] kicks and struggles deliriously, crying with the pain of the Thrall fucking [0:himHer] up [0:hisHer] ass.  However, when [0:heShe] feels [1:mainName]'s warm " + hole + " pressed against the tip of [0:hisHer] penis, [0:heShe] instinctively thrusts [0:hisHer] hips forward, pushing [0:himHer]self inside without thinking", c.number, number);
+									w.append(t, "[0:getMainName] kicks and struggles deliriously, crying with the pain of the Thrall fucking [0:himHer] up [0:hisHer] ass.  However, when [0:heShe] feels [1:mainName]'s warm [1:hole] pressed against the tip of [0:hisHer] penis, [0:heShe] instinctively thrusts [0:hisHer] hips forward, pushing [0:himHer]self inside without thinking", c.number, number);
 								}
 							}
 						}
@@ -14859,14 +14763,14 @@ public class Chosen implements Serializable {
 							hole = "ass";
 						}
 						if (c.getGender().equals("female")) {
-							w.append(t, " for the Thrall thrusting into [0:hisHer] " + hole + ".  ", number);
+							w.append(t, " for the Thrall thrusting into [0:hisHer] [0:hole].  ", number);
 							if (getPLEALevel() < 3 || cVirg) {
 								w.append(t, "[0:mainName] grunts at the insertion, barely managing to hold back [0:hisHer] orgasm.", number);
 							} else {
 								w.append(t, "[0:getMainName] watches [1:mainName]'s expression as [1:heShe] orgasms with a mixture of horror and fascination.", c.number, number);
 							}
 						} else {
-							w.append(t, " and push [1:hisHer] cock back into [0:mainName]'s " + hole + ".  ", number, c.number);
+							w.append(t, " and push [1:hisHer] cock back into [0:mainName]'s [0:hole].  ", number, c.number);
 							if (getPLEALevel() < 3 || cVirg) {
 								w.append(t, "[0:mainName] manages not to cum right away, but [0:heShe] still squeezes down rhythmically around [1:getMainName].", number, c.number);
 							} else {
@@ -14893,7 +14797,7 @@ public class Chosen implements Serializable {
 							} else {
 								w.append(t, ", [1:hisHer] slit rubbing up and down [0:mainName]'s shaft", number, c.number);
 							}
-							w.append(t, " as another Thrall pumps himself in and out of [0:mainName]'s " + hole + ".  ", number);
+							w.append(t, " as another Thrall pumps himself in and out of [0:mainName]'s [0:hole].  ", number);
 							if (friendly) {
 								w.append(t, "The intimate contact with [0:hisHer] friend", number);
 							} else {
@@ -14905,7 +14809,7 @@ public class Chosen implements Serializable {
 								w.append(t, " is too much to bear, and [0:mainName] can't hold [0:himHer]self back from cumming again.", number);
 							}
 						} else {
-							w.append(t, ", and [1:getMainName]'s penis slips back into [0:mainName]'s " + hole + ".  ", number, c.number);
+							w.append(t, ", and [1:getMainName]'s penis slips back into [0:mainName]'s [0:hole].  ", number, c.number);
 							if (friendly) {
 								w.append(t, "[0:getMainName] gasps with pleasure, ", c.number);
 							} else {
@@ -14947,7 +14851,7 @@ public class Chosen implements Serializable {
 								w.append(t, ", forcing [0:mainName]'s exhausted body to cum yet again.", number);
 							}
 						} else {
-							w.append(t, ", and the other Thralls laugh derisively as they easily pin [1:hisHer] arms behind [1:hisHer] back and force [1:hisHer] penis into [0:mainName]'s " + hole + " once again.  ", number, c.number);
+							w.append(t, ", and the other Thralls laugh derisively as they easily pin [1:hisHer] arms behind [1:hisHer] back and force [1:hisHer] penis into [0:mainName]'s [0:hole] once again.  ", number, c.number);
 							if (getPLEALevel() < 3 || cVirg) {
 								w.append(t, "[0:mainName] grits [0:hisHer] teeth at the insertion, clearly unimpressed by the display.", number);
 							} else {
@@ -15636,16 +15540,12 @@ public class Chosen implements Serializable {
 						} else {
 							w.append(t, "[0:HisHer] train of thought is interrupted by a blinding orgasm when ", number);
 						}
-						String organ = "pussy";
-						if (gender.equals("male")) {
-							organ = "anus";
-						}
 						if (getINJULevel() < 3 || aVirg) {
-							w.append(t, "the Thrall fucking [0:himHer] slams his hips all the way forward as he finishes.  He pulls out afterward, leaving [0:mainName]'s " + organ  + " hanging open and dripping with cum.", number);
+							w.append(t, "the Thrall fucking [0:himHer] slams his hips all the way forward as he finishes.  He pulls out afterward, leaving [0:mainName]'s [0:hole] hanging open and dripping with cum.", number);
 						} else if (w.tickle()) {
-							w.append(t, "the Thrall fucking [0:himHer] slams his hips all the way forward as he finishes, tickling [0:mainName]'s sides so that [0:hisHer] spasms of laughter milk every drop of semen out of the Thrall's cock.  When the Thrall pulls out, [0:mainName]'s " + organ + " is overflowing with cum.", number);
+							w.append(t, "the Thrall fucking [0:himHer] slams his hips all the way forward as he finishes, tickling [0:mainName]'s sides so that [0:hisHer] spasms of laughter milk every drop of semen out of the Thrall's cock.  When the Thrall pulls out, [0:mainName]'s [0:hole] is overflowing with cum.", number);
 						} else if (gender.equals("male")) {
-							w.append(t, "the Thrall fucking [0:himHer] slams his hips all the way forward as he finishes, twisting [0:mainName]'s penis so that [0:hisHer] spasms of pain milk every drop of semen out of the Thrall's cock.  When the Thrall pulls out, [0:mainName]'s " + organ + " is overflowing with cum.", number);
+							w.append(t, "the Thrall fucking [0:himHer] slams his hips all the way forward as he finishes, twisting [0:mainName]'s penis so that [0:hisHer] spasms of pain milk every drop of semen out of the Thrall's cock.  When the Thrall pulls out, [0:mainName]'s [0:hole] is overflowing with cum.", number);
 						} else {
 							w.append(t, "the Thralls fucking [0:himHer] slam their hips all the way forward at the same time as they finish.  When they pull out, [0:mainName]'s pussy and anus are both overflowing with cum.", number);
 						}
@@ -15659,9 +15559,9 @@ public class Chosen implements Serializable {
 						} else {
 							w.append(t, "[0:mainName] might be humiliated to be " + action + ", but [0:heShe]'s also grateful that it gives [0:himHer] an easy way to stifle ", number);
 						}
-						String organ = "lower lips";
+						String orifice = "lower lips";
 						if (gender.equals("male")) {
-							organ = "asshole";
+							orifice = "asshole";
 						}
 						if (getPLEALevel() < 3 || cVirg) {
 							w.append(t, "[0:hisHer] moans of discomfort from being fucked from behind.  [0:HisHer] eyes go wide as [0:heShe] feels cum streaming inside", number);
@@ -15669,9 +15569,9 @@ public class Chosen implements Serializable {
 							w.append(t, "[0:hisHer] cries as [0:heShe] cums over and over again.  As [0:heShe] unwillingly squeezes down, [0:heShe] feels cum streaming inside", number);
 						}
 						if (getINJULevel() < 3 || aVirg) {
-							w.append(t, ", and the Thrall that was raping [0:himHer] pulls out, leaving [0:hisHer] " + organ + " ruined and overflowing with seed.", number);
+							w.append(t, ", and the Thrall that was raping [0:himHer] pulls out, leaving [0:hisHer] " + orifice + " ruined and overflowing with seed.", number);
 						} else if (w.tickle()) {
-							w.append(t, ", and the Thrall that was raping [0:himHer] pulls out.  The tickling doesn't stop, though, and every spasm of laughter causes [0:mainName]'s ruined " + organ + " to squirt out a little spurt of the seed left inside.", number);
+							w.append(t, ", and the Thrall that was raping [0:himHer] pulls out.  The tickling doesn't stop, though, and every spasm of laughter causes [0:mainName]'s ruined " + orifice + " to squirt out a little spurt of the seed left inside.", number);
 						} else if (gender.equals("male")) {
 							w.append(t, ", and the Thrall that was raping [0:himHer] pulls out.  The abuse to [0:hisHer] own penis doesn't stop, however, and [0:heShe] convulses with every twist and flick, a trickle of fluid spilling out of [0:hisHer] ruined anus.", number);
 						} else {
@@ -15698,9 +15598,9 @@ public class Chosen implements Serializable {
 							hole = "asshole";
 						}
 						if (getINJULevel() < 3 || aVirg) {
-							w.append(t, "[0:HisHer] gaping " + hole + " drips a steady stream of cum onto the pavement.", number);
+							w.append(t, "[0:HisHer] gaping [0:hole] drips a steady stream of cum onto the pavement.", number);
 						} else if (w.tickle()) {
-							w.append(t, "[0:HisHer] eyes are glazed over with the exhaustion of being tickled so much, and [0:hisHer] gaping " + hole + " drips a steady stream of cum onto the pavement.", number);
+							w.append(t, "[0:HisHer] eyes are glazed over with the exhaustion of being tickled so much, and [0:hisHer] gaping [0:hole] drips a steady stream of cum onto the pavement.", number);
 						} else if (gender.equals("male")) {
 							w.append(t, "[0:HisHer] penis strains against its bindings, and [0:hisHer] gaping asshole drips a steady stream of cum onto the pavement.", number);
 						} else {
@@ -15780,11 +15680,11 @@ public class Chosen implements Serializable {
 							hole = "anus";
 						}
 						if (getINJULevel() < 3 || aVirg) {
-							w.append(t, " now that the Thralls are taking a break from fucking [0:hisHer] " + hole + ".", number);
+							w.append(t, " now that the Thralls are taking a break from fucking [0:hisHer] [0:hole].", number);
 						} else if (w.tickle()) {
-							w.append(t, " now that the Thralls are taking a brief break from tickling [0:himHer] and penetrating [0:hisHer] " + hole + ".", number);
+							w.append(t, " now that the Thralls are taking a brief break from tickling [0:himHer] and penetrating [0:hisHer] [0:hole].", number);
 						} else if (gender.equals("male")) {
-							w.append(t, " now that the Thralls are taking a brief break from tormenting [0:hisHer] penis and penetrating [0:hisHer] " + hole + ".", number);
+							w.append(t, " now that the Thralls are taking a brief break from tormenting [0:hisHer] penis and penetrating [0:hisHer] [0:hole].", number);
 						} else {
 							w.append(t, " now that the Thralls are taking a brief break from fucking [0:hisHer] lower holes.", number);
 						}
@@ -15816,11 +15716,11 @@ public class Chosen implements Serializable {
 						}
 						w.append(t, "[0:HeShe] arches [0:hisHer] back as [0:heShe] works, [0:hisHer] butt up in the air, ", number);
 						if (getINJULevel() < 3 || aVirg) {
-							w.append(t, " cum dripping down out of [0:hisHer] gaping " + hole + ", thighs trembling with ", number);
+							w.append(t, " cum dripping down out of [0:hisHer] gaping [0:hole], thighs trembling with ", number);
 						} else if (w.tickle()) {
-							w.append(t, " cum dripping down out of [0:hisHer] gaping " + hole + ", thighs trembling from the tickling and the overwhelming ", number);
+							w.append(t, " cum dripping down out of [0:hisHer] gaping [0:hole], thighs trembling from the tickling and the overwhelming ", number);
 						} else if (gender.equals("male")) {
-							w.append(t, " tied penis hanging down, cum dripping out of [0:hisHer] gaping " + hole + ", thighs trembling with ", number);
+							w.append(t, " tied penis hanging down, cum dripping out of [0:hisHer] gaping [0:hole], thighs trembling with ", number);
 						} else {
 							w.append(t, " cum dripping down out of [0:hisHer] gaping pussy and asshole, thighs trembling with ", number);
 						}
@@ -15877,11 +15777,11 @@ public class Chosen implements Serializable {
 							hole = "asshole";
 						}
 						if (getINJULevel() < 3 || aVirg) {
-							w.append(t, "absentmindedly fingers [0:hisHer] own otherwise empty " + hole + ", lubricated by the semen left by so many Thralls.", number);
+							w.append(t, "absentmindedly fingers [0:hisHer] own otherwise empty [0:hole], lubricated by the semen left by so many Thralls.", number);
 						} else if (w.tickle()) {
-							w.append(t, "absentmindedly fingers [0:hisHer] own otherwise empty " + hole + ", lubricated by the semen left by so many Thralls and still twitching with the aftershocks of being tickled so much.", number);
+							w.append(t, "absentmindedly fingers [0:hisHer] own otherwise empty [0:hole], lubricated by the semen left by so many Thralls and still twitching with the aftershocks of being tickled so much.", number);
 						} else if (gender.equals("male")) {
-							w.append(t, "absentmindedly fingers [0:hisHer] own otherwise empty " + hole + ", lubricated by the semen left by so many Thralls.  [0:HisHer] tied penis twitches with need.", number);
+							w.append(t, "absentmindedly fingers [0:hisHer] own otherwise empty [0:hole], lubricated by the semen left by so many Thralls.  [0:HisHer] tied penis twitches with need.", number);
 						} else {
 							w.append(t, "reaches down with both hands to absentmindedly play with [0:hisHer] pussy and asshole, the cum inside overflowing past [0:hisHer] fingers.", number);
 						}
